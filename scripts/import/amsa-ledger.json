@@ -15,17 +15,13 @@
    "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
   },
   "188": {
-   "status": "requeued",
-   "at": "2026-10-23T05:51:33Z",
+   "status": "failed",
+   "at": "2026-10-23T10:22:35Z",
    "title": "Cardiovascular Examination 1",
-   "station": "amsa-188",
-   "rounds": 2,
-   "models": {
-    "writer": "claude-opus-5-5",
-    "examiner": "claude-opus-5-5"
-   },
-   "imaging": 1,
-   "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
+   "gates": [],
+   "blockers": [
+    "Part 2 ask[2] / expect[2] with checklist items 27–40, part2.patient and guide: The management answer (about 90 seconds) has to carry 8 management steps plus Phillip's four interjected questions, the plain-language explanation (item 36) and all three safety-netting items (38–40): 14 checklist items in one slot. Most candidates cannot earn them all. The tasks also promise 'safety netting', but no ask covers it; it is reachable only through interruptions during management."
+   ]
   },
   "196": {
    "status": "shipped",
@@ -96,14 +92,11 @@
    "imaging": 1
   },
   "310": {
-   "status": "requeued",
-   "at": "2026-10-23T06:15:45Z",
+   "status": "shipped",
+   "at": "2026-10-23T10:38:03Z",
    "title": "Calf Pain History 1",
-   "gates": [],
-   "blockers": [
-    "part2.handover[1] (Venous duplex ultrasound) result, Clinical details: The report states 'Wells score 3'. The candidate sees it before answering the ISBAR question that asks for the Wells score, which gives away critical item 22 (and 22.3, the total and probability category)."
-   ],
-   "why": "brief tightened (Part 2 timing)"
+   "station": "amsa-310",
+   "by": "publish-amsa-draft.mjs"
   },
   "323": {
    "status": "shipped",
@@ -188,6 +181,13 @@
    "station": "amsa-578",
    "by": "publish-amsa-draft.mjs",
    "note": "converter blockers fixed by hand, then passed a fresh examiner review; minor notes applied"
+  },
+  "625": {
+   "status": "shipped",
+   "at": "2026-10-23T10:37:22Z",
+   "title": "Calf Pain History 2",
+   "station": "amsa-625",
+   "by": "publish-amsa-draft.mjs"
   },
   "626": {
    "status": "requeued",
