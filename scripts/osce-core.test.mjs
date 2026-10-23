@@ -75,7 +75,8 @@ test('sources: AI generated or written by you, one tag each', () => {
 test('the shipped bank: every index row has its body, every body passes the station gate, the rubric is intact', () => {
   const index = JSON.parse(fs.readFileSync(path.join(PUB, 'osce', 'index.json'), 'utf8'));
   const rows = osceStations(osceIndexRows(index), null);
-  assert.equal(rows.length, 26);
+  assert.equal(rows.length, fs.readdirSync(path.join(PUB, 'osce')).filter(f => f.endsWith('.json') && f !== 'index.json').length, 'one index row per station body');
+  assert.ok(rows.length >= 26);
   for (const r of rows) {
     const body = JSON.parse(fs.readFileSync(path.join(PUB, 'osce', `${r.id}.json`), 'utf8'));
     const full = osceBody(r, body);

@@ -2,6 +2,7 @@
    shared record and keeps the running session on the device, figures escape what they print */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validate } from './validate.mjs';
@@ -14,7 +15,9 @@ const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'publi
 test('the bank validates with no errors', () => {
   const { errors, count } = validate(PUB);
   assert.deepEqual(errors, []);
-  assert.equal(count, 26);
+  const files = fs.readdirSync(path.join(PUB, 'osce')).filter(f => f.endsWith('.json') && f !== 'index.json');
+  assert.equal(count, files.length, 'every station body is validated');
+  assert.ok(count >= 26, 'the bank never shrinks below the 26 stations it started with');
 });
 
 test('the index: the same bodies always write the same bytes, rows sorted by title, light rows only', () => {
