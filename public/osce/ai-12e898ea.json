@@ -520,10 +520,16 @@
    }
   ],
   "ask": [
-   "What do her observations, ECG, bloods and chest X-ray show? What is her CURB-65 score?",
-   "What is your working diagnosis and what else would you consider? Can you use PERC to rule out pulmonary embolism here, and where does Takotsubo cardiomyopathy fit?",
-   "What is your immediate management? Her blood pressure is 86/52: what concerns you about fluids and inotropes?",
-   "What will you tell Dorothy and her daughter, what will you watch for, and what follow-up does she need?"
+   "You are now calling the medical registrar. Please give an ISBAR handover of Dorothy Whitfield, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Dorothy now, here in the emergency department.",
+   "Dorothy asks you, \"Is this a broken heart?\" Please answer her and her daughter Karen, then tell me what follow-up Dorothy will need."
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self and role; Dorothy Whitfield, 71, in ED resus.</li><li><strong>Situation:</strong> anterior STEMI with severe pneumonia and septic shock; red zone: RR 32, SpO2 89% on room air (93% on 4 L), BP 86/52, HR 112, T 38.9, CRT 4 s.</li><li><strong>Background:</strong> 6 h central pressure to left shoulder and jaw; 3 days fever and rusty sputum; hypertension on perindopril, ex-smoker; husband died 4 days ago; no bleeding risk, no anticoagulants.</li><li><strong>Assessment:</strong> ECG 2 mm ST elevation V2 to V5 = anterior STEMI; troponin 210 to 480 = acute myocardial injury; WCC 19, CRP 240, lactate 3.4, pH 7.30 = sepsis with hypoperfusion; creatinine 118 (baseline 76) = AKI; CXR right lower lobe consolidation, small effusion; CURB-65 4.</li><li><strong>Recommendation:</strong> STEMI pathway activated; please review now and involve ICU.</li></ul>",
+   "<p><strong>Anterior STEMI until proven otherwise</strong>: ischaemic pain with radiation, sweating, 2 mm ST elevation V2 to V5, rising troponin. <strong>With severe CAP and sepsis</strong>: fever, rusty sputum, right basal signs, consolidation, lactate 3.4, CURB-65 4.</p><ul><li><strong>Takotsubo</strong>: for: postmenopausal woman, bereavement and sepsis as triggers, no reciprocal change; against: accepted only after angiography shows no culprit lesion (InterTAK); echo cannot exclude ACS.</li><li><strong>Type 2 MI in sepsis</strong>: for: shock, hypoxia; against: territorial ST elevation.</li><li><strong>PE</strong>: for: pleuritic pain, hypoxia; PERC cannot be used (age 71, HR 112, SpO2 89%, not low probability); Wells and CTPA after the STEMI decision; D-dimer non-specific here.</li><li><strong>Myocarditis or pericarditis</strong>: for: fever; against: non-positional pain, no pericardial rub.</li></ul>",
+   "<ol><li>Stay in resus, continuous monitoring, second large-bore cannula, oxygen to SpO2 92 to 96%, senior ED doctor to bedside now.</li><li><strong>Activate STEMI pathway</strong>, phone interventional cardiologist: emergency angiography, reperfusion within 90 minutes; no delay for echo, CT or pneumonia work-up.</li><li><strong>Aspirin 300 mg</strong> chewed; sepsis and hypotension are not contraindications. Second antiplatelet and anticoagulant agreed with cardiologist.</li><li>Titrated IV opioid plus antiemetic; <strong>no GTN</strong> (systolic below 90).</li><li>Blood cultures, then IV ceftriaxone 1 g plus azithromycin 500 mg <strong>within 1 hour</strong>; fluid in small aliquots with reassessment; ICU or HDU review.</li><li>Urgent bedside echo (LV, RV, LVOT gradient) without delaying angiography; avoid inotropes if LVOT obstruction.</li><li>Repeat ECG, troponin, lactate; coagulation, group and hold; withhold perindopril; defer VTE prophylaxis.</li><li>Consent; call Karen.</li></ol>",
+   "<ul><li>Plain words: this looks like a <strong>heart attack plus a serious chest infection</strong>. Severe stress can affect the heart, but the heart arteries must be checked first with an urgent angiogram; checks understanding and consent.</li><li>Tell a nurse <strong>straight away</strong> about worse chest pain, more breathlessness, feeling faint, palpitations or any bleeding.</li><li>Explains what happens after the angiogram (coronary care or ICU); staff escalate for falling BP, worsening oxygen, rising lactate or new confusion.</li><li><strong>Follow-up:</strong> grief support and social work; influenza and pneumococcal vaccination; cardiac rehabilitation and GP review once the diagnosis is settled; repeat echo to confirm recovery if Takotsubo is confirmed.</li></ul>"
   ]
  },
  "imaging": [
@@ -562,7 +568,7 @@
   }
  ],
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:48:27Z",
+  "by": "rewrite-part2-asks.mjs"
  }
 }
