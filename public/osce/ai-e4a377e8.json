@@ -94,7 +94,8 @@
   {
    "id": 14,
    "t": "checkbox",
-   "x": "Asks about support, mood, sleep and coping given his bereavement, including thoughts of self-harm if he is low."
+   "x": "Asks about support, mood, sleep and coping given his bereavement, including thoughts of self-harm if he is low.",
+   "crit": true
   },
   {
    "id": 15,
@@ -140,7 +141,6 @@
    "id": 23,
    "t": "checkbox",
    "x": "Explains what PSA is and why a raised level was not specific for cancer:",
-   "crit": true,
    "kids": [
     {
      "id": 1,
@@ -163,7 +163,6 @@
    "id": 24,
    "t": "checkbox",
    "x": "Explains that a normal digital rectal examination does not exclude cancer:",
-   "crit": true,
    "kids": [
     {
      "id": 1,
@@ -186,7 +185,6 @@
    "id": 26,
    "t": "checkbox",
    "x": "Explains why the transperineal route was used:",
-   "crit": true,
    "kids": [
     {
      "id": 1,
@@ -204,7 +202,6 @@
    "id": 27,
    "t": "checkbox",
    "x": "Explains the Gleason score in understandable terms:",
-   "crit": true,
    "kids": [
     {
      "id": 1,
@@ -214,12 +211,13 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "On needle biopsy, the score is the most common pattern plus the highest-grade pattern present, whatever its extent (here 4+3=7)."
+     "x": "On needle biopsy, the first number is the most common pattern and the second is the next most common, unless a higher-grade pattern is present, which is counted however small; his is mostly pattern 4 with some pattern 3 (4+3=7)."
     },
     {
      "id": 3,
      "t": "checkbox",
-     "x": "The lowest score now assigned is 3+3=6, so 7 is not \"7 out of 10\" or a 70% chance of dying."
+     "x": "The lowest score now assigned is 3+3=6, so 7 is not \"7 out of 10\" or a 70% chance of dying.",
+     "crit": true
     }
    ]
   },
@@ -245,7 +243,6 @@
    "id": 29,
    "t": "checkbox",
    "x": "Explains the ISUP Grade Group and places his result on the scale:",
-   "crit": true,
    "kids": [
     {
      "id": 1,
@@ -255,7 +252,7 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "His result is Grade Group 3, in the middle of a scale of 1 to 5. It is intermediate-to-higher risk, not the highest."
+     "x": "His result is Grade Group 3, in the middle of a scale of 1 to 5: with a PSA under 10 and no spread seen on MRI, this is intermediate risk (the less favourable kind), not high risk."
     }
    ]
   },
@@ -273,7 +270,6 @@
    "id": 32,
    "t": "checkbox",
    "x": "Explains the PSMA PET/CT scan:",
-   "crit": true,
    "kids": [
     {
      "id": 1,
@@ -283,7 +279,7 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "The scan stages higher-risk prostate cancer before definitive treatment, by looking for spread to lymph nodes or bone. It is also used to restage recurrence."
+     "x": "The scan stages intermediate- and high-risk prostate cancer before curative treatment, by looking for spread to lymph nodes or bone (Medicare funds it for this). It is also used to restage recurrence."
     },
     {
      "id": 3,
@@ -305,7 +301,7 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Treatment options (surgery, radiotherapy with or without hormone therapy) will be discussed with the urologist and a radiation oncologist, with shared decision-making."
+     "x": "Treatment options (surgery, or radiotherapy, which for this grade is usually combined with a short course of hormone therapy) will be discussed with the urologist and a radiation oncologist, with shared decision-making."
     },
     {
      "id": 3,
@@ -358,9 +354,9 @@
  "diagnosis": [
   "Prostate cancer"
  ],
- "explain": "<h3>Why this station matters</h3><p>Mr Kostas has a confirmed diagnosis, but the tests that led to it and the numbers in his letter are easily misunderstood. Counselling is about translating the PSA, the DRE, the biopsy route, the Gleason score, the Grade Group and the PSMA scan into one coherent story, without false reassurance or false alarm.</p><h3>History and examination</h3><p>Start with what he has been told and what he believes. Then screen for symptoms of spread (bone or back pain, weight loss, and leg weakness, numbness or a change in bladder or bowel control, which suggest spinal cord compression), urinary symptoms, problems after the biopsy, current erectile and continence function (which shape the treatment discussion), fitness and family history of prostate, breast or ovarian cancer. His bereavement makes mood and support part of the history. Examination looks for nodes, bony tenderness, neurological signs in the legs and a palpable bladder; the urologist's documented DRE need not be repeated.</p><h3>PSA and DRE</h3><p>PSA (prostate-specific antigen) is a protein made by the prostate. It is organ-specific, not cancer-specific. Levels rise with age, benign prostatic enlargement, prostatitis or urinary infection, and ejaculation, so a raised value needs interpretation in context and cannot diagnose cancer. His PSA was about twice the age-specific limit on two tests with no infection, which is why he was referred. Digital rectal examination (DRE) has low sensitivity because small early tumours are impalpable, so a normal DRE does not exclude cancer. It is not recommended as a screening test in asymptomatic men. The urologist's normal DRE therefore says nothing reassuring about this cancer.</p><h3>Where cancer arises, MRI and biopsy route</h3><p>Most prostate cancers arise in the peripheral zone, commonly posteriorly, whereas benign prostatic hyperplasia arises centrally in the transition zone. This explains why BPH causes urinary symptoms and early cancer is often silent. A PI-RADS 4 lesion on MRI means clinically significant cancer is likely and guides targeted biopsy. Both transperineal and transrectal biopsy can sample the peripheral zone, but the transperineal route is preferred because of its lower risk of infection and sepsis. Current Australian PSA testing guidance supports MRI before biopsy and favours the transperineal approach.</p><h3>Gleason score and ISUP Grade Group</h3><p>The Gleason system grades glandular architecture only. It does not measure tumour volume. On prostatectomy, the score is the most common pattern plus the second most common. On needle biopsy it is the most common pattern plus the highest-grade pattern present, whatever its extent. Patterns 1 and 2 are no longer assigned, so the lowest score is 3+3=6, which is why \"7 out of 10\" is a misconception. The ISUP Grade Groups were introduced because Gleason 7 hides two different prognoses.</p><table><tr><td><p><strong>Grade Group</strong></p></td><td><p><strong>Gleason score</strong></p></td></tr><tr><td><p>1</p></td><td><p>6 (3+3)</p></td></tr><tr><td><p>2</p></td><td><p>7 (3+4)</p></td></tr><tr><td><p>3</p></td><td><p>7 (4+3)</p></td></tr><tr><td><p>4</p></td><td><p>8</p></td></tr><tr><td><p>5</p></td><td><p>9-10 (4+5, 5+4, 5+5)</p></td></tr></table><p>Mr Kostas has 4+3=7, Grade Group 3. Pattern 4 predominates, so the prognosis is worse than for his friend's 3+4 (Grade Group 2), even though both sum to 7.</p><h3>Staging, PSMA PET/CT and treatment</h3><p>Risk stratification combines PSA, Grade Group, extent of biopsy involvement and clinical or imaging stage. PSMA (prostate-specific membrane antigen) PET/CT is more accurate than conventional CT and bone scan for detecting nodal and bone metastases. It is used to stage higher-risk disease before definitive treatment and to restage biochemical recurrence. It is not a screening or diagnostic test. The results go to the multidisciplinary meeting; for localised disease of this grade the options are usually surgery or radiotherapy (often with a course of hormone therapy), and the choice and its likely effects on erections and bladder control are made with him through shared decision-making.</p><h3>Communication and safety netting</h3><ul><li><p>Check understanding first and correct catastrophic misconceptions.</p></li><li><p>Use the Grade Group scale to show where he sits, without minimising or catastrophising.</p></li><li><p>Do not offer a prognosis until staging is complete.</p></li><li><p>Offer support, including involving his daughter, and screen for distress given his recent bereavement.</p></li><li><p>Red flags: new back pain with leg weakness, numbness or loss of bladder or bowel control (possible spinal cord compression), or being unable to pass urine, need the emergency department straight away. Arrange an early GP review after the scan and the multidisciplinary meeting.</p></li></ul>",
+ "explain": "<h3>Why this station matters</h3><p>Mr Kostas has a confirmed diagnosis, but the tests that led to it and the numbers in his letter are easily misunderstood. Counselling is about translating the PSA, the DRE, the biopsy route, the Gleason score, the Grade Group and the PSMA scan into one coherent story, without false reassurance or false alarm.</p><h3>History and examination</h3><p>Start with what he has been told and what he believes. Then screen for symptoms of spread (bone or back pain, weight loss, and leg weakness, numbness or a change in bladder or bowel control, which suggest spinal cord compression), urinary symptoms, problems after the biopsy, current erectile and continence function (which shape the treatment discussion), fitness and family history of prostate, breast or ovarian cancer. His bereavement makes mood and support part of the history. Examination looks for nodes, bony tenderness, neurological signs in the legs and a palpable bladder; the urologist's documented DRE need not be repeated.</p><h3>PSA and DRE</h3><p>PSA (prostate-specific antigen) is a protein made by the prostate. It is organ-specific, not cancer-specific. Levels rise with age, benign prostatic enlargement, prostatitis or urinary infection, and ejaculation, so a raised value needs interpretation in context and cannot diagnose cancer. His PSA was about twice the age-specific limit on two tests with no infection, which is why he was referred. Digital rectal examination (DRE) has low sensitivity because small early tumours are impalpable, so a normal DRE does not exclude cancer. It is not recommended as a screening test in asymptomatic men. The urologist's normal DRE therefore says nothing reassuring about this cancer.</p><h3>Where cancer arises, MRI and biopsy route</h3><p>Most prostate cancers arise in the peripheral zone, commonly posteriorly, whereas benign prostatic hyperplasia arises centrally in the transition zone. This explains why BPH causes urinary symptoms and early cancer is often silent. A PI-RADS 4 lesion on MRI means clinically significant cancer is likely and guides targeted biopsy. Both transperineal and transrectal biopsy can sample the peripheral zone, but the transperineal route is preferred because of its lower risk of infection and sepsis. Current Australian PSA testing guidance supports MRI before biopsy and favours the transperineal approach.</p><h3>Gleason score and ISUP Grade Group</h3><p>The Gleason system grades glandular architecture only. It does not measure tumour volume. On prostatectomy, the score is the most common pattern plus the second most common. On needle biopsy it is the most common pattern plus the next most common, unless a higher-grade pattern is present, which is counted however small. Patterns 1 and 2 are no longer assigned, so the lowest score is 3+3=6, which is why \"7 out of 10\" is a misconception. The ISUP Grade Groups were introduced because Gleason 7 hides two different prognoses.</p><table><tr><td><p><strong>Grade Group</strong></p></td><td><p><strong>Gleason score</strong></p></td></tr><tr><td><p>1</p></td><td><p>6 (3+3)</p></td></tr><tr><td><p>2</p></td><td><p>7 (3+4)</p></td></tr><tr><td><p>3</p></td><td><p>7 (4+3)</p></td></tr><tr><td><p>4</p></td><td><p>8</p></td></tr><tr><td><p>5</p></td><td><p>9-10 (4+5, 5+4, 5+5)</p></td></tr></table><p>Mr Kostas has 4+3=7, Grade Group 3. Pattern 4 predominates, so the prognosis is worse than for his friend's 3+4 (Grade Group 2), even though both sum to 7.</p><h3>Staging, PSMA PET/CT and treatment</h3><p>Risk stratification combines PSA, Grade Group, extent of biopsy involvement and clinical or imaging stage. PSMA (prostate-specific membrane antigen) PET/CT is more accurate than conventional CT and bone scan for detecting nodal and bone metastases. It is used to stage intermediate- and high-risk disease before curative treatment, and Medicare funds it for that purpose, so it is appropriate for his Grade Group 3 cancer; it is also used to restage biochemical recurrence. It is not a screening or diagnostic test. The results go to the multidisciplinary meeting. With a PSA under 10, Grade Group 3 and no spread on MRI, he has localised unfavourable intermediate-risk disease. For a fit man the usual options are radical prostatectomy or radiotherapy; with radiotherapy a short course (about 4 to 6 months) of hormone therapy is usually added, while hormone therapy is not given before surgery. Active surveillance suits low-risk (Grade Group 1) and selected low-volume Grade Group 2 disease and is not usually advised for Grade Group 3. The choice and its likely effects on erections and bladder control are made with him through shared decision-making.</p><h3>Communication and safety netting</h3><ul><li><p>Check understanding first and correct catastrophic misconceptions.</p></li><li><p>Use the Grade Group scale to show where he sits, without minimising or catastrophising.</p></li><li><p>Do not offer a prognosis until staging is complete.</p></li><li><p>Offer support, including involving his daughter, and screen for distress given his recent bereavement.</p></li><li><p>Red flags: new back pain with leg weakness, numbness or loss of bladder or bowel control (possible spinal cord compression), or being unable to pass urine, need the emergency department straight away. Arrange an early GP review after the scan and the multidisciplinary meeting.</p></li></ul>",
  "focus": "Counselling a man with a raised PSA: biopsy, Gleason/ISUP grading and staging",
- "guide": "<p>In Part 1, the examiner gives findings from the Exam findings only when the candidate says what they would examine. In Part 2, hand over the four results together; the candidate may explain them to Mr Kostas directly, and he asks the questions in his script that the candidate has not covered. Ask the examiner questions in order if time allows.</p><p>A <strong>high-performing candidate</strong> first checks what Mr Kostas understands, screens for symptoms of spread, asks about his urinary and erectile function and his mood, and examines for nodes, bony tenderness and neurological signs. In Part 2 they break the result into small pieces: PSA is organ-specific but not cancer-specific, a normal DRE does not rule out cancer, the transperineal route was chosen to lower the infection risk, a Gleason score grades architecture and is not a percentage, 4+3 is more aggressive than 3+4, and his result is ISUP Grade Group 3. They explain that a PSMA PET/CT stages higher-risk disease and is not a diagnostic or screening test, avoid false reassurance or a firm prognosis before staging, and finish with a clear plan, support, specific red flags and follow-up.</p><p>A <strong>borderline candidate</strong> gives accurate information but uses jargon, reads out the numbers without explaining them, or treats 3+4 and 4+3 as equivalent. They may say the PSMA scan is a \"cancer test\" or that a normal rectal exam is reassuring, miss the \"7 out of 10\" misconception, skip the screen for spread, or offer premature reassurance and end without a clear plan.</p>",
+ "guide": "<p>In Part 1, the examiner gives findings from the Exam findings only when the candidate says what they would examine. In Part 2, hand over the four results together; the candidate may explain them to Mr Kostas directly, and he asks the questions in his script that the candidate has not covered. Ask the examiner questions in order if time allows. He has the letter from the start, so credit an explanation whenever it is given, including in Part 1.</p><p>A <strong>high-performing candidate</strong> first checks what Mr Kostas understands, screens for symptoms of spread, asks about his urinary and erectile function and his mood, and examines for nodes, bony tenderness and neurological signs. In Part 2 they break the result into small pieces: PSA is organ-specific but not cancer-specific, a normal DRE does not rule out cancer, the transperineal route was chosen to lower the infection risk, a Gleason score grades architecture and is not a percentage, 4+3 is more aggressive than 3+4, and his result is ISUP Grade Group 3. They explain that a PSMA PET/CT stages intermediate- and high-risk disease and is not a diagnostic or screening test, avoid false reassurance or a firm prognosis before staging, and finish with a clear plan, support, specific red flags and follow-up.</p><p>A <strong>borderline candidate</strong> gives accurate information but uses jargon, reads out the numbers without explaining them, or treats 3+4 and 4+3 as equivalent. They may say the PSMA scan is a \"cancer test\" or that a normal rectal exam is reassuring, miss the \"7 out of 10\" misconception, skip the screen for spread, or offer premature reassurance and end without a clear plan.</p>",
  "id": "ai-e4a377e8",
  "media": {},
  "origin": "ai",
@@ -369,21 +365,21 @@
   "PSA is organ-specific, not cancer-specific. It rises with age, BPH, prostatitis or infection and ejaculation.",
   "A normal DRE does not exclude prostate cancer. DRE has low sensitivity and is not a screening test.",
   "Prostate cancer mostly arises in the peripheral zone (BPH centrally). Transperineal biopsy is preferred because of its lower infection and sepsis risk.",
-  "Gleason grades architecture only. Biopsy score = most common pattern + highest-grade pattern. The lowest score is 3+3=6, and 4+3 is worse than 3+4.",
+  "Gleason grades architecture only. On biopsy the score is the most common pattern plus the next most common, or any higher-grade pattern however small. The lowest score is 3+3=6, and 4+3 is worse than 3+4.",
   "ISUP Grade Groups: GG1 = 6, GG2 = 3+4, GG3 = 4+3, GG4 = 8, GG5 = 9-10.",
-  "PSMA = prostate-specific membrane antigen. PSMA PET/CT stages higher-risk disease before treatment and restages recurrence. It is not a screening or diagnostic test."
+  "PSMA = prostate-specific membrane antigen. PSMA PET/CT stages intermediate- and high-risk disease before curative treatment (Medicare-funded) and restages recurrence. It is not a screening or diagnostic test."
  ],
  "presentation": [
   "Raised PSA",
   "Abnormal biopsy result"
  ],
  "refs": [
-  "Cancer Council Australia and Prostate Cancer Foundation of Australia. Clinical practice guidelines for PSA testing and early management of test-detected prostate cancer (including the updated Australian PSA testing guidelines)",
-  "RACGP. Guidelines for preventive activities in general practice (Red Book): prostate cancer",
-  "Epstein JI et al. The 2014 ISUP consensus conference on Gleason grading of prostatic carcinoma and the 2016 WHO/ISUP grade group system",
-  "Hofman MS et al. Prostate-specific membrane antigen PET-CT in patients with high-risk prostate cancer before curative-intent surgery or radiotherapy (proPSMA). Lancet 2020",
-  "Cancer Australia. Prostate cancer: information for health professionals",
-  "European Association of Urology. Guidelines on Prostate Cancer (biopsy route and staging)"
+  "Prostate Cancer Foundation of Australia and Cancer Council Australia. Clinical practice guidelines for PSA testing and early management of test-detected prostate cancer (2016).",
+  "RACGP. Guidelines for preventive activities in general practice (Red Book): prostate cancer.",
+  "Epstein JI, Egevad L, Amin MB, et al. The 2014 International Society of Urological Pathology (ISUP) consensus conference on Gleason grading of prostatic carcinoma: definition of grading patterns and proposal for a new grading system. Am J Surg Pathol 2016;40(2):244-52.",
+  "Hofman MS, Lawrentschuk N, Francis RJ, et al. Prostate-specific membrane antigen PET-CT in patients with high-risk prostate cancer before curative-intent surgery or radiotherapy (proPSMA): a prospective, randomised, multicentre study. Lancet 2020;395:1208-16.",
+  "Cancer Council Victoria and Department of Health Victoria. Optimal care pathway for people with prostate cancer, 2nd edition (2021).",
+  "European Association of Urology. EAU-EANM-ESTRO-ESUR-ISUP-SIOG Guidelines on Prostate Cancer (risk groups, staging and treatment of localised disease)."
  ],
  "specialty": [
   "General Practice",
