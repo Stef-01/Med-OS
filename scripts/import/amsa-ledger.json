@@ -117,14 +117,23 @@
    "imaging": 2
   },
   "307": {
-   "status": "failed",
-   "at": "2026-10-23T11:09:34Z",
+   "status": "shipped",
+   "at": "2026-10-23T11:39:16Z",
    "title": "Chest Pain History 6",
-   "gates": [],
-   "blockers": [
-    "Checklist item 22 (critical) and patient script 'The nurse and how Giuseppe changes': At BP 150/88, before any tamponade is known, it is reasonable to order an IV beta blocker or GTN for suspected dissection. The nurse only says 'I'll draw it up', and the script never says what happens to that drug after the BP falls. The critical criterion 'gives no BP-lowering drugs' is therefore undefined for a candidate who ordered one earlier and does not cancel it. Examiners will mark this inconsistently, and the station never teaches that a pending antihypertensive must be cancelled when the patient becomes hypotensive.",
-    "Part 2 Q4 expected answer, Q3 expected answer point 7, checklist items 40-42 (item 41 critical): The guide lets Q4 run shorter than 90 seconds, yet it carries three checklist items. One of them is critical item 41, which has six-plus parts and no stated minimum. Item 41 repeats the ISBAR to CTS/ICU already given in Q1. Q3 point 7 (explain, surgeon consents, call Maria) repeats Q4. 'Rapid response call' makes little sense for a patient already in resus with the ED consultant at the bedside, and an hourly urine-output trigger is not relevant minutes before theatre. As written, Q4 cannot be earned in the time left."
-   ]
+   "station": "amsa-307",
+   "by": "publish-amsa-draft.mjs"
+  },
+  "308": {
+   "status": "shipped",
+   "at": "2026-10-23T11:19:35Z",
+   "title": "Chest Pain History 7",
+   "station": "amsa-308",
+   "rounds": 4,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 2
   },
   "310": {
    "status": "shipped",
@@ -146,6 +155,15 @@
    "title": "Altered Conscious State History 1",
    "station": "amsa-355",
    "by": "publish-amsa-draft.mjs"
+  },
+  "374": {
+   "status": "failed",
+   "at": "2026-10-23T11:23:20Z",
+   "title": "Chest Pain History 8",
+   "gates": [],
+   "blockers": [
+    "Part 2 > Observations: result text ('again at 10:45 after aspirin and GTN'), 10:45 obs row (pain 2, distress mild, note 'After aspirin/GTN; pain easing') and guide paragraph 'The 10:45 observations assume aspirin and GTN were given in Part 1': The printed result and row assume aspirin and GTN were given. The guide only tells the examiner to say 'pain still 5/10' when no analgesia was ordered and says nothing about aspirin. A candidate who never ordered aspirin is shown a chart saying it was given, which contradicts Part 1 and hands them critical item 35 ('continue the aspirin already given'). If no GTN was given, the printed row (pain 2, distress mild, RR 24, HR 88, BP 136/80) also contradicts what the examiner says out loud."
+   ]
   },
   "377": {
    "status": "shipped",
