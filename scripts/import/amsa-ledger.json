@@ -168,6 +168,18 @@
    },
    "imaging": 1
   },
+  "218": {
+   "status": "shipped",
+   "at": "2026-10-23T15:23:10Z",
+   "title": "Fatigue History 1",
+   "station": "amsa-218",
+   "rounds": 3,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 0
+  },
   "222": {
    "status": "shipped",
    "at": "2026-10-23T11:24:03Z",
@@ -333,13 +345,18 @@
    "imaging": 2
   },
   "413": {
-   "status": "failed",
-   "at": "2026-10-23T15:05:25Z",
+   "status": "shipped",
+   "at": "2026-10-23T15:34:46Z",
    "title": "Dyspnoea History 8",
-   "gates": [],
-   "blockers": [
-    "check item 24 (critical) vs part2.expect[1] (Q2 model answer) and part2.ask: Critical item 24 requires the candidate to grade the attack as severe by AAH criteria AND state why it is not life-threatening (alert, not cyanosed, SpO2 not below 90%, wheeze audible, pCO2 low). No Part 2 question asks for a severity grade, and no expected answer models this: Q1 says only 'severe acute asthma' and Q2 justifies the diagnosis but not the grade. The item has no 'd' credit rule, so the full statement is required. The examiner has no model to mark against, and candidates are not prompted, so a critical item is unfairly hard to earn."
-   ]
+   "station": "amsa-413",
+   "by": "publish-amsa-draft.mjs"
+  },
+  "414": {
+   "status": "shipped",
+   "at": "2026-10-23T15:35:07Z",
+   "title": "Dyspnoea History 9",
+   "station": "amsa-414",
+   "by": "publish-amsa-draft.mjs"
   },
   "415": {
    "status": "shipped",
