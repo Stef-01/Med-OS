@@ -140,3 +140,21 @@ test('Part 2: results with a label and a result, questions in order, anything ma
   assert.ok(hasPart2({ part2: oscePart2(null), media: { part2: [{}] } }));
   assert.ok(!hasPart2({ part2: oscePart2(null) }));
 });
+
+import { qaSlides, qaHtml } from '../public/js/osce/session.mjs';
+
+test('Part 2 slides: each result, then each image labelled by its alt text; the examiner\'s caption never reaches the candidate', () => {
+  const st = { id: 's1', part2: oscePart2({ lead: 'Say this', handover: [{ label: 'Bloods', result: '<p>Hb 92</p>' }], ask: ['What do they show?', 'Management?'] }),
+    media: { part2: [{ src: 'media/s1/cxr-1.png', alt: 'Frontal chest radiograph', caption: 'Chest X-ray: show when asked', credit: { author: 'A', license: 'CC BY 4.0', page: 'https://commons.wikimedia.org/x' } }] } };
+  const slides = qaSlides(st);
+  assert.deepEqual(slides.map(x => x.label), ['Bloods', 'Frontal chest radiograph']);
+  assert.match(slides[0].html, /Hb 92/);
+  assert.match(slides[1].html, /<img src=".\/media\/s1\/cxr-1.png"/);
+  assert.doesNotMatch(slides[1].html, /show when asked/);
+  assert.match(slides[1].html, /CC BY 4.0/, 'the licence credit stays with the image');
+  const html = qaHtml(st);
+  assert.match(html, /data-os="present" data-sid="s1" data-i="0"/);
+  assert.equal((html.match(/data-os="present"/g) || []).length, 3, 'Show results plus one pop-out per result');
+  assert.match(html, /<ol><li>What do they show\?<\/li><li>Management\?<\/li><\/ol>/);
+  assert.equal(qaHtml({ id: 'x', part2: oscePart2(null) }), '');
+});

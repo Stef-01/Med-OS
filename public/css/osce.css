@@ -889,3 +889,35 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-tnote { flex-basis:100%; color:var(--mute); font-size:12.5px; line-height:1.45; }
 .os-timing { flex-wrap:wrap; }
 .os-tform > div { flex-basis:90px; }
+
+/* ---------- Part 2 at the bottom of the marking sheet: what to say, Show results, the questions, each result ---------- */
+.os-qa { margin-top:8px; padding:18px; border-radius:16px; background:var(--card2); border:1.5px solid var(--pri); display:flex; flex-direction:column; gap:14px; scroll-margin-top:12px; }
+.os-qahead { display:flex; align-items:center; gap:12px; }
+.os-qahead .os-bigic svg { width:28px; height:28px; }
+.os-qahead strong { font-size:16px; font-weight:700; }
+.os-qashow { width:100%; }
+.os-qaask h4, .os-qares h4 { font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--mute); margin:0 0 8px; }
+.os-qaask ol { margin:0; padding-left:22px; display:flex; flex-direction:column; gap:8px; font-size:15.5px; line-height:1.5; font-weight:500; }
+.os-qacard .os-qatop { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.os-qacard .os-qatop .os-ic { color:var(--pri); margin:-6px -6px -6px 0; }
+.os-qacard .os-fig { margin:2px 0 0; }
+
+/* the presenter: opaque, full screen, above everything in OSCE, nothing of the marking sheet showing */
+.os-present { position:fixed; inset:0; z-index:var(--z-lightbox); display:flex; background:var(--bg); color:var(--ink); opacity:0; transition:opacity .2s ease; }
+.os-prs { flex:1; min-width:0; display:flex; flex-direction:column; padding:calc(8px + var(--em-st)) var(--sr) calc(12px + var(--sb)) var(--sl); }
+.os-present.in { opacity:1; }
+.os-present.out { opacity:0; pointer-events:none; }
+.os-prs-top { flex:none; display:flex; align-items:center; justify-content:space-between; min-height:48px; }
+.os-prs-n { font-size:14px; font-weight:600; color:var(--mute); }
+.os-prs-x { width:48px; height:48px; border-radius:999px; background:var(--fill); color:var(--ink); }
+.os-prs-stage { flex:1; min-height:0; overflow:auto; display:flex; touch-action:pan-y; }
+.os-prs-slide { margin:auto; width:100%; max-width:900px; display:flex; flex-direction:column; gap:16px; padding:8px 0 16px; animation:os-drop .22s var(--ease); }
+.os-prs-slide h2 { font-size:clamp(22px, 5vw, 34px); font-weight:700; color:var(--pri); }
+.os-prs-slide .os-html { font-size:clamp(19px, 4.4vw, 28px); line-height:1.5; }
+.os-prs-slide .os-html p + p { margin-top:10px; }
+.os-prs-slide table { border-collapse:collapse; }
+.os-prs-slide td, .os-prs-slide th { padding:6px 18px 6px 0; text-align:left; vertical-align:top; border-bottom:1px solid var(--stroke); }
+.os-prs-slide .os-fig img { max-height:calc(100vh - 220px); width:auto; max-width:100%; align-self:center; }
+.os-prs-nav { flex:none; display:flex; justify-content:space-between; gap:10px; padding-top:8px; }
+.os-prs-nav .os-btn { flex:1; max-width:220px; }
+.os-prs-nav .os-btn:last-child { margin-left:auto; }

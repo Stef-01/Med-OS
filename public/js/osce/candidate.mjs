@@ -59,7 +59,7 @@ export async function renderCandidate(root, p) {
     ${st.tasks.length ? `<h3>Tasks</h3><ol class="os-tasks" role="list">${st.tasks.map((x, i) => `<li><span class="os-tn">${i + 1}</span><div class="os-html">${safeHtml(x)}</div></li>`).join('')}</ol>` : ''}</div>`;
   /* Part 2: the results arrive on this screen when the examiner's clock reaches it */
   const part2 = root.querySelector('.os-cpart2');
-  const showPart2 = () => { if (part2.childElementCount || !hasPart2(st)) return; part2.innerHTML = part2Html(st, { candidate: true }); part2.scrollIntoView({ block: 'start' }); };
+  const showPart2 = () => { if (part2.childElementCount || !hasPart2(st)) return; part2.innerHTML = part2Html(st); part2.scrollIntoView({ block: 'start' }); };
   let timer = p.timer;
   const bar = root.querySelector('.os-sbar');
   const paint = () => {

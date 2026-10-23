@@ -27,7 +27,7 @@ export const I = {   /* tabler icons, as eMedici uses: the kit's table under thi
   reload: icon('refresh'), play: icon('playFilled'), pause: icon('pauseFilled'), next: icon('nextFilled'), stop: icon('stopFilled'), dots: icon('circleDots'),
   exit: icon('exit'), done: icon('circleCheck'), arrowR: icon('circleArrowRight'), info: icon('infoCircle'), chevR: icon('chevronRight'), chevD: icon('chevronDown'),
   bolt: icon('bolt'), newS: icon('circlePlus'), resume: icon('circlePlay'), marker: icon('marker'), note: icon('pencil'),
-  gear: icon('settings'), users: icon('users'),
+  gear: icon('settings'), users: icon('users'), max: icon('maximize'), prev: icon('chevronLeft'),
 };   /* bolt, arrowR, chevR, newS, resume once asked for 1.3-1.4 in a second stroke-width attribute the parser ignored: they always drew at 2 */
 
 /* ---------------------------------------------------------------- the shared state */
@@ -175,6 +175,9 @@ export function openDialog({ kind, title = '', action = '', body = '', cls = '',
   return kitDialog({ kind, title, action, body, extra: cls, noHead, cls: DLG, root: ctx.ov, label: title || kind, onClose });
 }
 export const closeDialog = instant => closeTop(ctx.ov, instant);
+/* the presenter: a full-screen, opaque layer over everything in OSCE (the marking sheet included) for showing the
+   candidate a result; the kit's dialog in its bare form, so Escape, the close button and focus return work as elsewhere */
+export const openPresenter = (body, onClose) => kitDialog({ kind: 'present', bare: true, body, root: ctx.ov, label: 'Results for the candidate', cls: { wrap: 'os-present', in: 'in', out: 'out' }, onClose });
 export const topDialog = () => topDlg(ctx.ov);
 export const confirmDlg = o => kitConfirm({ ...o, cls: CONFIRM, root: ctx.ov, extra: 'os-dlg--small' });
 

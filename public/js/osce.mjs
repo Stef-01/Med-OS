@@ -28,7 +28,7 @@ import { attach as syncAttach, pull as syncPull, configureSync, wire as syncWire
 import { renderStart, toggleRot, runAll, runPop, runClear, runGo, onPerson, pickCand, toggleAlt } from './osce/run.mjs';
 import { renderGroup, browseReset, browseDlg, browseSheetOpen, paintQueue, clearQueue, removeQueued, queueFromButton, addRandom, toggleDetails, afterBookmark, discPick, filterPop, toggleSaved, resetFilters, timingDlg, saveTiming, previewDlg, previewTab, onSearch, onPointerDown } from './osce/browse.mjs';
 import { renderMarked, markedReset } from './osce/marked.mjs';
-import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, candSend, swapCand, onHand } from './osce/session.mjs';
+import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, candSend, swapCand, onHand, present, presentStep, presenting } from './osce/session.mjs';
 import { settingsDlg, saveSettings, clearKey, exportFile } from './osce/settings.mjs';
 
 export * from './osce/core.mjs';   /* the pure laws, under the names learn.mjs and scripts/osce.test.js import */
@@ -200,6 +200,9 @@ async function onClick(e) {
     case 'end': return endSession();
     case 'aisend': return aiSend(b.dataset.aid);
     case 'aicopy': return aiCopy(b.dataset.aid);
+    case 'present': return present(b.dataset.sid, +b.dataset.i || 0);
+    case 'pprev': return presentStep(-1);
+    case 'pnext': return presentStep(1);
     case 'aipaste': return aiPaste(b.dataset.aid);
     case 'cand': return pickCand(+b.dataset.i);
     case 'alt': return toggleAlt(b);
@@ -241,6 +244,7 @@ function onKey(e) {
     return back();
   }
   if (e.key === 'Enter' && e.target.matches?.('.os-q')) { e.target.blur(); }
+  if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && presenting()) { e.preventDefault(); return presentStep(e.key === 'ArrowRight' ? 1 : -1); }   /* the results full screen */
   /* Space toggles the clock when focus is not in a control (the media-control convention); the arrow keys on a tab move
      to the neighbour tab (WAI-ARIA APG tabs). P2 polish 2026-10-19 */
   if (e.key === ' ' && ctx.view === 'session' && !osceFinished(sess().timer) && !e.target.closest?.('input, textarea, button, select, a, [contenteditable]')) { e.preventDefault(); return togglePause(); }

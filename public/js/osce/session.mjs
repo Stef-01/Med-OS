@@ -10,7 +10,7 @@ import { safeHtml } from '../study-kit/safe.mjs';
 import { figureHtml } from '../study-kit/media.mjs';
 import { mnemonicsFor } from './mnemonics.mjs';
 import { HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
-import { ctx, I, GI, GI_C, save, sess, curAttempt, findAttempt, now, body, NOLOAD, bell, notify, confirmDlg, openDialog, closeDialog, openPop, closePop, tagHtml, srcTag, ago, aiEnabled, markerCfg, examOf, nameOf, whoBadge, roleLine } from './state.mjs';
+import { ctx, I, GI, GI_C, save, sess, curAttempt, findAttempt, now, body, NOLOAD, bell, notify, confirmDlg, openDialog, closeDialog, openPop, closePop, tagHtml, srcTag, ago, aiEnabled, markerCfg, examOf, nameOf, whoBadge, roleLine, openPresenter, topDialog } from './state.mjs';
 import { markDirect, markPromptText, parseReply } from './marker.mjs';
 import { candidateLink } from './candidate.mjs';
 
@@ -32,7 +32,7 @@ export function renderSession(main) {
   if (!fin) startTick();
 }
 /* the tabs a station's content fills: the examiner's Part 2 sheet only when the station has one */
-export const contentTabs = st => ['Instructions', ...(st.patient || st.media?.patientScript?.length ? ['Patient Script'] : []), ...(examOf(st) ? ['Exam'] : []), ...(hasPart2(st) ? ['Part 2'] : [])];
+export const contentTabs = st => ['Instructions', ...(st.patient || st.media?.patientScript?.length ? ['Patient Script'] : []), ...(examOf(st) ? ['Exam'] : [])];   /* Part 2 lives at the bottom of the marking sheet */
 /* what the bell means, said once as the clock moves on */
 const phaseNotice = (c, timing) => (c === 'station' ? `Part 1: history and examination · ${timing.station} minutes` : c === 'mx' ? `Part 2: hand over the results · ${timing.mx} minutes` : '');
 function timerBar() {
@@ -91,11 +91,13 @@ export function skip() {
   if (!s.timer.at) return finishStation();
   onPhase(s.timer.c); paintBar();
 }
-/* a new phase: say so; at Part 2 the examiner's sheet comes up (unless they are marking) */
+/* a new phase: say so; at Part 2 the marking sheet opens at its questions and results */
 function onPhase(c) {
   notify(phaseNotice(c, ctx.mem.timing));
   const st = ctx.byId.get(sess().queue[sess().idx]);
-  if (c === 'mx' && hasPart2(st) && ctx.tab !== 'Marking' && ctx.ov.querySelector('[data-os="tab"][data-tab="Part 2"]')) switchTab('Part 2');
+  if (c !== 'mx' || !hasPart2(st)) return;
+  if (ctx.tab !== 'Marking' && ctx.ov.querySelector('[data-os="tab"][data-tab="Marking"]')) switchTab('Marking');
+  requestAnimationFrame(() => ctx.ov.querySelector('.os-pl .os-qa, .os-pr .os-qa')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
 }
 function finishStation() {
   const a = curAttempt();
@@ -167,7 +169,6 @@ export function tabBody(st, a, t, o = {}) {
       ${st.tasks.length ? `<h3>Tasks</h3><ol class="os-tasks" role="list">${st.tasks.map((x, i) => `<li><span class="os-tn">${i + 1}</span><div class="os-html">${safeHtml(x)}</div></li>`).join('')}</ol>` : ''}
       </div>${a && o.editable ? toolbar() : ''}`;
   }
-  if (t === 'Part 2') return part2Html(st);
   if (t === 'Patient Script') return `<div class="os-sheet" data-hl="Patient Script"><h2>Patient Script</h2><div class="os-html">${safeHtml(st.patient)}</div>${imgs(st.media?.patientScript)}</div>${a && o.editable ? toolbar() : ''}`;
   if (t === 'Marking') return `<div class="os-sheet">${markingHtml(st, a, !!o.editable)}</div>`;
   if (t === 'Exam') return `<div class="os-sheet">${examHtml(examOf(st))}</div>`;
@@ -177,16 +178,58 @@ export function tabBody(st, a, t, o = {}) {
 export function formatHtml(timing = ctx.mem.timing) {
   return `<ol class="os-format" role="list" aria-label="Station format">${phasesOf(timing).map(k => `<li><small>${phaseName(k)}</small><b>${timing[k]} min</b><span>${phaseWhat(k)}</span></li>`).join('')}</ol>`;
 }
-/* Part 2 for the examiner: the opening line, the results to hand over (and their images), the questions in order */
-export function part2Html(st, { candidate = false } = {}) {
-  const p = st.part2 || { handover: [], ask: [] }, m = ctx.mem?.timing?.mx;
-  return `<div class="os-sheet os-p2"><h2>${candidate ? 'Results from the examiner' : 'Part 2'}</h2>
-    <p class="os-p2sub">Interpretation, management and safety netting${m ? ` · ${m} minutes` : ''}</p>
-    ${!candidate && p.lead ? `<div class="os-p2lead"><small>Examiner says</small><p>“${esc(p.lead)}”</p></div>` : ''}
-    ${p.handover.length ? `${candidate ? '' : '<h3>Hand over</h3>'}<ul class="os-p2list" role="list">${p.handover.map(h => `<li><strong>${esc(h.label)}</strong><div class="os-html">${safeHtml(h.result)}</div></li>`).join('')}</ul>` : ''}
-    ${imgs(st.media?.part2)}
-    ${!candidate && p.ask.length ? `<h3>Ask</h3><ol class="os-p2ask">${p.ask.map(q => `<li>${esc(q)}</li>`).join('')}</ol>` : ''}
-  </div>`;
+/* Part 2's results as slides: each handover result, then each Part 2 image (labelled by its alt text, which never names
+   the diagnosis; the caption is the examiner's note and stays off the candidate's view) */
+export function qaSlides(st) {
+  const p = st.part2 || { handover: [] };
+  return [...p.handover.map(h => ({ label: h.label, html: `<div class="os-html">${safeHtml(h.result)}</div>` })),
+    ...(st.media?.part2 || []).map(m => ({ label: m.alt || 'Image', html: figureHtml({ ...m, caption: '' }) }))];
+}
+/* the candidate's phone in Part 2: the results, nothing of the examiner's */
+export function part2Html(st) {
+  const slides = qaSlides(st);
+  return `<div class="os-sheet os-p2"><h2>Results from the examiner</h2><ul class="os-p2list" role="list">${slides.map(x => `<li><strong>${esc(x.label)}</strong>${x.html}</li>`).join('')}</ul></div>`;
+}
+/* Part 2 at the bottom of the marking sheet: what to say, Show results (full screen, so the candidate never sees the
+   rubric), the questions to ask, then each result with its own pop-out */
+export function qaHtml(st) {
+  if (!hasPart2(st)) return '';
+  const p = st.part2, slides = qaSlides(st), m = ctx.mem?.timing?.mx, sid = esc(st.id);
+  return `<section class="os-qa" aria-labelledby="os-qa-h">
+    <header class="os-qahead"><span class="os-bigic">${I.max}</span><span class="os-handt"><strong id="os-qa-h">Part 2 · questions and results</strong>
+      <small>Interpretation, management and safety netting${m ? ` · ${m} minutes` : ''}</small></span></header>
+    ${p.lead ? `<div class="os-p2lead"><small>Say</small><p>“${esc(p.lead)}”</p></div>` : ''}
+    ${slides.length ? `<button class="os-btn os-btn--lg os-primary os-qashow" data-os="present" data-sid="${sid}" data-i="0">${I.max}<span>Show results to the candidate</span></button>` : ''}
+    ${p.ask.length ? `<div class="os-qaask"><h4>Ask</h4><ol>${p.ask.map(q => `<li>${esc(q)}</li>`).join('')}</ol></div>` : ''}
+    ${slides.length ? `<div class="os-qares"><h4>Results</h4><ul class="os-p2list" role="list">${slides.map((x, i) => `<li class="os-qacard">
+      <div class="os-qatop"><strong>${esc(x.label)}</strong><button class="os-ic os-ic--sm" data-os="present" data-sid="${sid}" data-i="${i}" aria-label="Show ${esc(x.label)} full screen" title="Show full screen">${I.max}</button></div>${x.html}</li>`).join('')}</ul></div>` : ''}
+  </section>`;
+}
+/* the presenter: one result at a time, full screen; Previous / Next, the arrow keys or a swipe move through them */
+let pres = null;   /* { slides, i } while open */
+export function present(sid, i = 0) {
+  const st = ctx.byId.get(sid); if (!st) return;
+  const slides = qaSlides(st); if (!slides.length) return;
+  pres = { slides, i: Math.max(0, Math.min(slides.length - 1, i)) };
+  const d = openPresenter(`<div class="os-prs"><div class="os-prs-top"><span class="os-prs-n" aria-live="polite"></span><button class="os-ic os-prs-x" data-ui="close" aria-label="Close and go back to the marking sheet">${I.x}</button></div>
+    <div class="os-prs-stage"></div>
+    <div class="os-prs-nav"><button class="os-btn os-btn--lg" data-os="pprev">${I.prev}<span>Previous</span></button><button class="os-btn os-btn--lg" data-os="pnext"><span>Next</span>${I.chevR}</button></div></div>`, () => { pres = null; });   /* the inner box fills the layer, so a tap never lands on the layer itself (which would close it) */
+  let x0 = null;
+  const stage = d.el.querySelector('.os-prs-stage');
+  stage.addEventListener('pointerdown', e => { x0 = e.clientX; });
+  stage.addEventListener('pointerup', e => { if (x0 != null && Math.abs(e.clientX - x0) > 60) presentStep(e.clientX < x0 ? 1 : -1); x0 = null; });
+  paintPresenter();
+}
+export function presentStep(dir) { if (!pres) return; const n = pres.i + dir; if (n < 0 || n >= pres.slides.length) return; pres.i = n; paintPresenter(); }
+export const presenting = () => !!pres && topDialog()?.kind === 'present';
+function paintPresenter() {
+  const d = topDialog(); if (!pres || !d || d.kind !== 'present') return;
+  const { slides, i } = pres, x = slides[i];
+  d.el.querySelector('.os-prs-n').textContent = slides.length > 1 ? `${i + 1} of ${slides.length}` : '';
+  d.el.querySelector('.os-prs-stage').innerHTML = `<div class="os-prs-slide"><h2>${esc(x.label)}</h2>${x.html}</div>`;
+  d.el.querySelector('[data-os="pprev"]').disabled = i === 0;
+  d.el.querySelector('[data-os="pnext"]').disabled = i === slides.length - 1;
+  d.el.querySelector('.os-prs-nav').hidden = slides.length < 2;
 }
 /* Exam mode (2026-10-22, founder: "a clear separate section, as this has been invented from the original eMedici content"):
    the AI-written findings in their own box, labelled as such; each step is closed until tapped, so the candidate says what
@@ -241,6 +284,7 @@ export function markingHtml(st, a, editable) {
     </div>
     ${editable && a ? notepad('fb', a.fb, 'Written feedback for the candidate') : (a?.fb ? `<div class="os-fb">${esc(a.fb)}</div>` : '')}
     ${st.guide ? `<div class="os-html os-guide">${safeHtml(st.guide)}</div>` : ''}
+    ${qaHtml(st)}
     ${showFb ? feedbackHtml(st) : ''}
     ${memHtml(st)}
   </div>`;
