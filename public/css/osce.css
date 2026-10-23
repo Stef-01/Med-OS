@@ -787,6 +787,8 @@ details.os-opening[open] > :not(summary) { animation:os-reveal .22s var(--ease) 
 .os-exkey > p { padding-left:14px; }
 .os-exstep > summary { align-items:flex-start; }
 .os-exstep > summary > .os-exn, .os-exstep > summary > svg { margin-top:1px; }
+.os-exkey > summary { align-items:center; }   /* one line: centred in its row, where the two-line steps sit from the top */
+.os-exkey > summary > svg { margin-top:0; }
 @media (max-width:420px) { .os-exam { padding:12px 8px; gap:12px; border-width:1px; } .os-exbox { padding:10px 12px; } .os-exstep > summary { gap:10px; padding:10px 10px; } .os-exstep > p { padding:0 12px 12px; } }
 
 
@@ -988,12 +990,14 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-prs-slide .os-obs-page { flex:1 1 360px; max-width:560px; }   /* the two pages side by side when the screen allows, like the chart opened out */
 .os-prs-slide .os-obs-cap { font-size:clamp(14px, 3.4vw, 18px); }
 /* result tables keep whole words (a proper hyphen at most) and scroll sideways inside their card rather than squeeze;
-   the Part 2 card gives its padding back on a phone, where it sits inside the marking sheet */
+   the exam and Part 2 cards follow the patient's history in the Patient Script tab, each as wide as the history's sheet */
+.os-pbody > :is(.os-exam, .os-part2) { margin-top:14px; }
+@media (min-width:900px) { .os-pbody > :is(.os-exam, .os-part2) { padding:28px 32px; border-radius:20px; } }
 .os-p2list .os-html :is(td, th), .os-obs-table :is(td, th) { overflow-wrap:normal; -webkit-hyphens:auto; hyphens:auto; }
 .os-p2list .os-html table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
 .os-p2list .os-html td:first-child, .os-p2list .os-html th:first-child { min-width:7.5em; }
 @media (max-width:480px) {
-  .os-part2 { padding:14px 12px; margin-inline:-8px; border-radius:14px; gap:12px; }
+  .os-part2 { padding:14px 12px; border-radius:14px; gap:12px; }
   .os-part2 .os-qacard { padding:12px; }
   .os-qahead .os-bigic { display:none; }
 }
@@ -1021,6 +1025,6 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-prs-slide .os-lab { max-width:820px; }
 .os-prs-slide .os-lab-t { font-size:clamp(15px, 3.6vw, 22px); }
 .os-prs-slide .os-lab-t .os-lab-n small { font-size:.8em; }
-.os-lab-t thead tr:last-child th.os-lab-r { white-space:normal; }   /* outranks the header row's nowrap: "Ref. Range (Units)" may take two lines on a phone */
+.os-lab-t thead tr:last-child :is(th.os-lab-r, th.os-lab-v) { white-space:normal; }   /* outranks the header row's nowrap: "Ref. Range (Units)" or a dated column ("Day 2 08:40") may take two lines on a phone */
 @media (max-width:480px) { .os-lab-t th, .os-lab-t td { padding:4px 6px; } .os-lab-t tbody .os-lab-n { min-width:5.5em; } .os-lab-t .os-lab-r { min-width:5em; } .os-lab-t .os-lab-v.os-lab-tx { min-width:5em; } }
 @media (max-width:360px) { .os-prs-slide .os-lab-t { font-size:14px; } .os-lab-t .os-lab-r { overflow-wrap:anywhere; } }   /* a long unit (mL/min/1.73 m^2) breaks rather than push the table wide */

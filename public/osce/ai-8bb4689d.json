@@ -434,8 +434,8 @@
        {
         "t": "CD4 count",
         "v": "410",
-        "u": "cells/microlitre",
-        "r": "500 to 1,500",
+        "u": "cells/µL",
+        "r": "500-1500",
         "f": "L"
        },
        {
@@ -455,7 +455,7 @@
         "t": "HIV-1 viral load (RNA)",
         "v": "86,000",
         "u": "copies/mL",
-        "r": "Not detected (lower limit of quantification 20 copies/mL)",
+        "r": "Not detected",
         "f": "H",
         "n": "log10 4.93"
        }
@@ -492,7 +492,7 @@
     "label": "Hepatitis and STI screen",
     "kind": "micro",
     "result": "",
-    "model": "<ul><li><strong>Read:</strong> hepatitis B surface antigen, core antibody and surface antibody all negative: never infected and not immune. Hepatitis A not immune. Hepatitis C, syphilis, chlamydia and gonorrhoea (throat, anorectal and urine) negative.</li><li><strong>For Daniel:</strong> no co-infection, so the choice of ART is not constrained by hepatitis B. He is unprotected against hepatitis A and B, both relevant to men who have sex with men.</li><li><strong>What it changes:</strong> hepatitis A and B vaccination (people with HIV may need extra or higher doses and a post-vaccination anti-HBs check), with the other vaccines recommended for people living with HIV. Some tests may still be in their window period after the condomless sex 3 months ago, so the STI screen is repeated in 3 months and regularly after that.</li></ul>",
+    "model": "<ul><li><strong>Read:</strong> hepatitis B surface antigen and core antibody negative, surface antibody below 10 mIU/mL (immunity needs 10 or more): never infected and not immune. Hepatitis A not immune. Hepatitis C, syphilis, chlamydia and gonorrhoea (throat, anorectal and urine) negative.</li><li><strong>For Daniel:</strong> no co-infection, so the choice of ART is not constrained by hepatitis B. He is unprotected against hepatitis A and B, both relevant to men who have sex with men.</li><li><strong>What it changes:</strong> hepatitis A and B vaccination (people with HIV may need extra or higher doses and a post-vaccination anti-HBs check), with the other vaccines recommended for people living with HIV. Some tests may still be in their window period after the condomless sex 3 months ago, so the STI screen is repeated in 3 months and regularly after that.</li></ul>",
     "labs": [
      {
       "rows": [
@@ -510,13 +510,12 @@
         "t": "Hepatitis B surface antibody (anti-HBs)",
         "v": "<10",
         "u": "mIU/mL",
-        "r": "≥10 indicates immunity",
+        "r": "≥10",
         "f": "L"
        },
        {
         "t": "Hepatitis A IgG",
-        "v": "Not detected",
-        "r": "Detected indicates immunity"
+        "v": "Not detected"
        },
        {
         "t": "Hepatitis C antibody",

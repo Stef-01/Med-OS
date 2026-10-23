@@ -1,6 +1,6 @@
 /* osce/session.mjs — a station on the clock and its review (plan unit F3, 2026-10-19; from osce.mjs): OscesSession
    (progress ring, Reading then Station countdowns, restart / pause / skip, the tick), StationTabs / Panes (Instructions,
-   Patient Script, Marking), StationMarking + StationMarkingSheet (checklist with kids and Critical, global impression,
+   Patient Script with the exam findings and Part 2 under it, Marking), StationMarking + StationMarkingSheet (checklist with kids and Critical, global impression,
    feedback, guide, explanation), StationAttempts, OscesAttempt (an attempt reviewed), the Next Station and Session
    Complete dialogs, the More menu, and the Highlight tool. The clock's laws (osceStart/Pause/Resume/Next/Tick/Left/
    Finished) and the score are core.mjs; this module owns the attempt records in mem.hist and the session queue index. */
@@ -34,8 +34,9 @@ export function renderSession(main) {
   placePill(main); syncIndeterminate();
   if (!fin) startTick();
 }
-/* the tabs a station's content fills: the examiner's Part 2 sheet only when the station has one */
-export const contentTabs = st => ['Instructions', ...(st.patient || st.media?.patientScript?.length ? ['Patient Script'] : []), ...(examOf(st) ? ['Exam'] : [])];   /* Part 2 lives at the bottom of the marking sheet */
+/* the tabs a station's content fills: the candidate's instructions, then the examiner's script, which runs in the order of
+   the clock (the patient's history, the exam findings, then Part 2's results and questions) */
+export const contentTabs = st => ['Instructions', ...(st.patient || st.media?.patientScript?.length || examOf(st) || hasPart2(st) ? ['Patient Script'] : [])];
 /* what the bell means, said once as the clock moves on */
 const phaseNotice = (c, timing) => (c === 'station' ? `Part 1: history and examination · ${timing.station} minutes` : c === 'mx' ? `Part 2: hand over the results · ${timing.mx} minutes` : '');
 function timerBar() {
@@ -94,13 +95,13 @@ export function skip() {
   if (!s.timer.at) return finishStation();
   onPhase(s.timer.c); paintBar();
 }
-/* a new phase: say so; at Part 2 the marking sheet opens at its questions and results */
+/* a new phase: say so; at Part 2 the patient script opens at its questions and results, just below the exam findings */
 function onPhase(c) {
   notify(phaseNotice(c, ctx.mem.timing));
   const st = ctx.byId.get(sess().queue[sess().idx]);
   if (c !== 'mx' || !hasPart2(st)) return;
-  if (ctx.tab !== 'Marking' && ctx.ov.querySelector('[data-os="tab"][data-tab="Marking"]')) switchTab('Marking');
-  requestAnimationFrame(() => ctx.ov.querySelector('.os-pl .os-part2, .os-pr .os-part2')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
+  if (ctx.tab !== 'Patient Script') switchTab('Patient Script');
+  requestAnimationFrame(() => ctx.ov.querySelector('.os-pl .os-part2')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
 }
 function finishStation() {
   const a = curAttempt();
@@ -165,17 +166,23 @@ export function placePill(root, animate) {
 }
 const imgs = list => (list || []).map(figureHtml).join('');   /* each image with its caption and credit (study-kit/media.mjs) */
 export function tabBody(st, a, t, o = {}) {
-  if (a && a.hl?.[t] && (t === 'Instructions' || t === 'Patient Script')) return `<div class="os-sheet" data-hl="${t}">${a.hl[t]}</div>${o.editable ? toolbar() : ''}`;
+  if (t === 'Patient Script') return scriptHtml(st, a, o);
+  if (a && a.hl?.[t] && t === 'Instructions') return `<div class="os-sheet" data-hl="${t}">${a.hl[t]}</div>${o.editable ? toolbar() : ''}`;
   if (t === 'Instructions') {
     return `<div class="os-sheet" data-hl="Instructions"><h2>Instructions to Candidate</h2><div class="os-html">${safeHtml(st.stem)}</div>${imgs(st.media?.stem)}
       ${formatHtml()}
       ${st.tasks.length ? `<h3>Tasks</h3><ol class="os-tasks" role="list">${st.tasks.map((x, i) => `<li><span class="os-tn">${i + 1}</span><div class="os-html">${safeHtml(x)}</div></li>`).join('')}</ol>` : ''}
       </div>${a && o.editable ? toolbar() : ''}`;
   }
-  if (t === 'Patient Script') return `<div class="os-sheet" data-hl="Patient Script"><h2>Patient Script</h2><div class="os-html">${safeHtml(st.patient)}</div>${imgs(st.media?.patientScript)}</div>${a && o.editable ? toolbar() : ''}`;
   if (t === 'Marking') return `<div class="os-sheet">${markingHtml(st, a, !!o.editable)}</div>`;
-  if (t === 'Exam') return `<div class="os-sheet">${examHtml(examOf(st))}</div>`;
   return attemptsHtml(st);
+}
+/* the examiner's script in the order of the clock: the patient's history, then the exam findings (Part 1), then Part 2's
+   line to say, results to show and questions to ask, each its own card. Only the history is highlightable, so a
+   highlight never stores the findings or the results */
+function scriptHtml(st, a, o) {
+  const t = 'Patient Script', script = a?.hl?.[t] || (st.patient || st.media?.patientScript?.length ? `<h2>Patient Script</h2><div class="os-html">${safeHtml(st.patient)}</div>${imgs(st.media?.patientScript)}` : '');
+  return `${script ? `<div class="os-sheet" data-hl="${t}">${script}</div>` : ''}${examHtml(examOf(st))}${qaHtml(st)}${a && o.editable ? toolbar() : ''}`;
 }
 /* the station's shape, from the timing in use: Reading 5 · Part 1 10 · Part 2 5 */
 export function formatHtml(timing = ctx.mem.timing) {
@@ -222,8 +229,8 @@ export function part2Html(st) {
   const slides = qaSlides(st);
   return `<div class="os-sheet os-p2"><h2>Results from the examiner</h2><ul class="os-p2list" role="list">${slides.map(x => `<li><strong>${esc(x.label)}</strong>${x.html}</li>`).join('')}</ul></div>`;
 }
-/* Part 2 at the bottom of the marking sheet: what to say, Show results (full screen, so the candidate never sees the
-   rubric), the questions to ask, then each result with its own pop-out */
+/* Part 2 under the patient script: what to say, Show results (full screen, so the candidate never sees the script or
+   the rubric), the questions to ask, then each result with its own pop-out and its model answer */
 export function qaHtml(st) {
   if (!hasPart2(st)) return '';
   const p = st.part2, slides = qaSlides(st), m = ctx.mem?.timing?.mx, sid = esc(st.id);
@@ -243,7 +250,7 @@ export function present(sid, i = 0) {
   const st = ctx.byId.get(sid); if (!st) return;
   const slides = qaSlides(st); if (!slides.length) return;
   pres = { slides, i: Math.max(0, Math.min(slides.length - 1, i)) };
-  const d = openPresenter(`<div class="os-prs"><div class="os-prs-top"><span class="os-prs-n" aria-live="polite"></span><button class="os-ic os-prs-x" data-ui="close" aria-label="Close and go back to the marking sheet">${I.x}</button></div>
+  const d = openPresenter(`<div class="os-prs"><div class="os-prs-top"><span class="os-prs-n" aria-live="polite"></span><button class="os-ic os-prs-x" data-ui="close" aria-label="Close and go back to the questions">${I.x}</button></div>
     <div class="os-prs-stage"></div>
     <div class="os-prs-nav"><button class="os-btn os-btn--lg" data-os="pprev">${I.prev}<span>Previous</span></button><button class="os-btn os-btn--lg" data-os="pnext"><span>Next</span>${I.chevR}</button></div></div>`, () => { pres = null; });   /* the inner box fills the layer, so a tap never lands on the layer itself (which would close it) */
   let x0 = null;
@@ -264,7 +271,7 @@ function paintPresenter() {
   d.el.querySelector('.os-prs-nav').hidden = slides.length < 2;
 }
 /* Exam mode (2026-10-22, founder: "a clear separate section, as this has been invented from the original eMedici content"):
-   the AI-written findings in their own box, labelled as such; each step is closed until tapped, so the candidate says what
+   the AI-written findings in their own box under the patient's history, labelled as such; each step is closed until tapped, so the candidate says what
    they would do before seeing what they find */
 function examHtml(x) {
   if (!x) return '';
@@ -316,7 +323,6 @@ export function markingHtml(st, a, editable) {
     </div>
     ${editable && a ? notepad('fb', a.fb, 'Written feedback for the candidate') : (a?.fb ? `<div class="os-fb">${esc(a.fb)}</div>` : '')}
     ${st.guide ? `<div class="os-html os-guide">${safeHtml(st.guide)}</div>` : ''}
-    ${qaHtml(st)}
     ${showFb ? feedbackHtml(st) : ''}
     ${memHtml(st)}
   </div>`;

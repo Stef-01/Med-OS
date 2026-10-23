@@ -8,7 +8,7 @@ Every station runs the same way:
 | Part 1 | 10 min | A focused history from the patient (or parent) and a focused examination. The examiner gives examination findings from the Exam findings as the candidate says what they would examine |
 | Part 2 | 5 min | The examiner hands over observations, investigation results or scans. The candidate interprets them, gives a management approach and safety-nets |
 
-The app's clock runs these three phases with a bell at each change (Change Timing can alter them; Part 2 at 0 runs without it). When Part 2 starts, the examiner's view opens the marking sheet at the Part 2 questions and results (each result can be shown to the candidate full screen, without the checklist), and the candidate screen shows the results.
+The app's clock runs these three phases with a bell at each change (Change Timing can alter them; Part 2 at 0 runs without it). The examiner's Patient Script follows the same order: the history, the exam findings, then the Part 2 questions and results. When Part 2 starts, the examiner's view opens the script at Part 2 (each result can be shown to the candidate full screen, with nothing of the script or the checklist on it), and the candidate screen shows the results.
 
 `scripts/check-station.mjs <id>` checks a station against every rule below. `scripts/lib/station-gates.mjs` holds the rules; `scripts/lib/generate.mjs` tells the generator the same thing.
 

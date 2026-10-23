@@ -398,7 +398,7 @@
     "label": "Hepatitis B serology",
     "kind": "micro",
     "result": "",
-    "model": "<ul><li><strong>Read, marker by marker:</strong> HBsAg positive means hepatitis B virus is present now. Total anti-HBc positive means he has been infected; IgM negative means it is not a recent, acute infection. Anti-HBs negative means he has not cleared the virus. HBeAg negative with anti-HBe positive and an HBV DNA of 850 IU/mL (below 2,000) means low-level replication.</li><li><strong>For Mr Nguyen:</strong> chronic hepatitis B, almost certainly acquired from his mother at birth or in early childhood, now in the HBeAg-negative phase with a low viral load. One sample cannot fix the phase: on the GESA definitions, HBeAg-negative chronic infection (the old inactive carrier state) needs an HBV DNA below 2,000 IU/mL with a normal ALT (30 U/L or less in men), and his ALT is 52, so serial ALT and HBV DNA, the fibrosis assessment and the other causes of a raised ALT decide between chronic infection and chronic hepatitis. This is not past cleared infection (HBsAg negative, anti-HBc positive) and not vaccine immunity (anti-HBs positive alone).</li><li><strong>What it changes:</strong> an HBsAg-positive person on immunosuppression, including the azathioprine and prednisolone he takes now and any anti-TNF agent, can reactivate the virus and have a severe hepatitis flare or liver failure, and a low viral load does not remove that risk. He needs antiviral prophylaxis (tenofovir or entecavir) started before the biologic and continued during and after it, urgent hepatology or gastroenterology input, repeat liver tests and a fibrosis assessment, and testing and vaccination of his partner and household.</li></ul>",
+    "model": "<ul><li><strong>Read, marker by marker:</strong> HBsAg positive means hepatitis B virus is present now. Total anti-HBc positive means he has been infected; IgM negative means it is not a recent, acute infection. Anti-HBs 3 mIU/mL (immunity needs 10 or more) means he has not cleared the virus. HBeAg negative with anti-HBe positive and an HBV DNA of 850 IU/mL (below 2,000) means low-level replication.</li><li><strong>For Mr Nguyen:</strong> chronic hepatitis B, almost certainly acquired from his mother at birth or in early childhood, now in the HBeAg-negative phase with a low viral load. One sample cannot fix the phase: on the GESA definitions, HBeAg-negative chronic infection (the old inactive carrier state) needs an HBV DNA below 2,000 IU/mL with a normal ALT (30 U/L or less in men), and his ALT is 52, so serial ALT and HBV DNA, the fibrosis assessment and the other causes of a raised ALT decide between chronic infection and chronic hepatitis. This is not past cleared infection (HBsAg negative, anti-HBc positive) and not vaccine immunity (anti-HBs positive alone).</li><li><strong>What it changes:</strong> an HBsAg-positive person on immunosuppression, including the azathioprine and prednisolone he takes now and any anti-TNF agent, can reactivate the virus and have a severe hepatitis flare or liver failure, and a low viral load does not remove that risk. He needs antiviral prophylaxis (tenofovir or entecavir) started before the biologic and continued during and after it, urgent hepatology or gastroenterology input, repeat liver tests and a fibrosis assessment, and testing and vaccination of his partner and household.</li></ul>",
     "labs": [
      {
       "rows": [
@@ -413,7 +413,7 @@
         "t": "Anti-HBs (surface antibody)",
         "v": "3",
         "u": "mIU/mL",
-        "r": "≥10 indicates immunity",
+        "r": "≥10",
         "n": "Negative",
         "f": "L"
        },
@@ -443,7 +443,7 @@
         "t": "HBV DNA (viral load)",
         "v": "850",
         "u": "IU/mL",
-        "r": "Not detected (lower limit of quantification 10 IU/mL)",
+        "r": "Not detected",
         "f": "H",
         "n": "log10 2.93"
        }
@@ -481,7 +481,7 @@
         "t": "QuantiFERON: mitogen minus nil (positive control)",
         "v": ">10",
         "u": "IU/mL",
-        "r": "≥0.5 (valid)"
+        "r": "≥0.5"
        },
        {
         "t": "QuantiFERON interpretation",
@@ -500,13 +500,11 @@
        },
        {
         "t": "Varicella zoster IgG",
-        "v": "Detected",
-        "r": "Detected indicates immunity"
+        "v": "Detected"
        },
        {
         "t": "Hepatitis A IgG",
-        "v": "Detected",
-        "r": "Detected indicates immunity"
+        "v": "Detected"
        }
       ]
      }

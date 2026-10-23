@@ -71,7 +71,7 @@ import { pulse } from '../study-kit/util.mjs'; export { pulse };   /* eMedici's 
    max-age=0, must-revalidate), so an unchanged body costs a 304 */
 const getJson = (url, must) => fetch(url, { cache: 'default' }).then(r => (r.ok ? r.json() : must ? Promise.reject(new Error(`${url} ${r.status}`)) : null));
 /* the bank: osce/index.json (one light row per station, scripts/build-index.mjs) and the AI-written exam findings
-   (exam.json; optional: a missing file leaves every station without the Exam tab) */
+   (exam.json; optional: a missing file leaves every patient script without exam findings) */
 export const loadStations = () => ctx.dataP || (ctx.dataP = Promise.all([
   getJson('./osce/index.json', true).then(osceIndexRows),
   getJson('./exam.json').catch(() => null)])

@@ -2,7 +2,7 @@
 /* smoke.mjs - the whole two-person flow in Chromium, at 393 px (a phone), 320 px and 1280 px:
    names → first candidate → New Study Session → Add Random ×2 → Start Practice → skip reading → finish → tick items +
    global impression → AI marking (chat path: paste a reply) → Next Station shows the other partner → swap → End Session
-   → results → Marked → a preview with the Exam tab → Settings → the candidate screen link opens and counts down.
+   → results → Marked → a preview (the patient script runs history, exam findings, Part 2) → Settings → the candidate screen link opens and counts down.
    No network beyond the local server; the Anthropic API is never called. Screenshots go to the folder given as the
    first argument (default: a temp folder). Exit 1 on any failure or page error.
    Run: npm run e2e   (serves public/ itself on a free port) */
@@ -110,10 +110,11 @@ async function runIn(width, height, label) {
   await click('[data-os="skip"]');   /* Part 1 → Part 2 */
   await pg.waitForTimeout(300);
   const qa = pg.locator('.os-part2').first();
-  ok(await qa.isVisible() && (width >= 900 || await pg.locator('[data-os="tab"][data-tab="Marking"][aria-selected="true"]').count() === 1), `${label}: Part 2 opens the marking sheet at its questions and results`);
+  ok(await qa.isVisible() && await pg.locator('[data-os="tab"][data-tab="Patient Script"][aria-selected="true"]').count() === 1, `${label}: Part 2 opens the patient script at its questions and results`);
+  ok(await pg.evaluate(() => { const [h, e, q] = ['.os-pl .os-sheet[data-hl]', '.os-pl .os-exam', '.os-pl .os-part2'].map(s => document.querySelector(s)); return !!(h && e && q) && !!(h.compareDocumentPosition(e) & 4) && !!(e.compareDocumentPosition(q) & 4); }), `${label}: the script runs the history, the exam findings, then Part 2`);
   ok(await qa.locator('.os-qaask li').count() >= 2 && await qa.locator('.os-qacard').count() >= 2, `${label}: Part 2 lists the questions and the results`);
   await pg.waitForTimeout(900);   /* the smooth scroll settles */
-  ok(await qa.evaluate(e => { const t = e.getBoundingClientRect().top; return t >= 0 && t < innerHeight / 2; }), `${label}: the marking sheet scrolls to the Part 2 questions`);
+  ok(await qa.evaluate(e => { const t = e.getBoundingClientRect().top; return t >= 0 && t < innerHeight / 2; }), `${label}: the patient script scrolls to the Part 2 questions`);
   await shot('part2');
   const firstResult = (await qa.locator('.os-qacard strong').first().textContent()).trim();
   await qa.locator('.os-qashow').click();
@@ -209,16 +210,18 @@ async function runIn(width, height, label) {
   ok(await pg.locator('.os-mcard').count() === 1, `${label}: Marked lists the AI-marked attempt`);
   await click('[data-os="back"]');
 
-  /* a preview with the Exam tab */
+  /* a preview: the exam findings and Part 2 sit in the patient script, after the history; the marking sheet is the rubric */
   await click('[data-os="new"]');
   if (width < 900) { await click('[data-os="browse"]'); }
   await pg.waitForSelector('.os-scard [data-os="preview"]');
   await click('.os-scard [data-os="preview"]');
   await pg.waitForSelector('.os-pv');
   const tabs = await pg.locator('.os-pv [data-os="pvtab"]').allTextContents();
-  ok(tabs.includes('Exam') && tabs.includes('Marking') && tabs.includes('Patient Script'), `${label}: preview has Patient Script, Exam and Marking tabs`);
+  ok(!tabs.includes('Exam') && tabs.includes('Marking') && tabs.includes('Patient Script'), `${label}: preview has Patient Script and Marking tabs, no separate Exam tab`);
+  await click('.os-pv [data-tab="Patient Script"]');
+  ok(await pg.locator('.os-pv .os-exam .os-exstep').count() > 0 && await pg.locator('.os-pv .os-exam ~ .os-part2').count() === 1, `${label}: the patient script carries the exam findings, then Part 2`);
   await click('.os-pv [data-tab="Marking"]');
-  ok(await pg.locator('.os-pv .os-check input[data-tick]').count() > 10, `${label}: the full marking rubric renders`);
+  ok(await pg.locator('.os-pv .os-check input[data-tick]').count() > 10 && await pg.locator('.os-pv .os-part2, .os-pv .os-exam').count() === 0, `${label}: the full marking rubric renders, and only the rubric`);
   await shot('preview');
   await pg.keyboard.press('Escape');
 
@@ -227,7 +230,7 @@ async function runIn(width, height, label) {
   await pg.fill('.os-q', 'stridor'); await pg.waitForTimeout(300);
   await click('.os-scard[data-id="ai-e8892591"] [data-os="preview"]');
   await pg.waitForSelector('.os-pv');
-  await click('.os-pv [data-tab="Marking"]');
+  await click('.os-pv [data-tab="Patient Script"]');
   const card = pg.locator('.os-pv .os-qacard').first();
   ok(await card.locator('.os-obs-table').count() === 1 && await card.locator('details.os-model:not([open]) .os-obs-zones').count() === 1, `${label}: the examiner's card has the observations, and the zones and model answer one tap away`);
   await click('.os-pv .os-qashow');
@@ -245,7 +248,7 @@ async function runIn(width, height, label) {
   await pg.fill('.os-q', 'postpartum haemorrhage on delivery'); await pg.waitForTimeout(300);
   await click('.os-scard[data-id="ai-a98052d6"] [data-os="preview"]');
   await pg.waitForSelector('.os-pv');
-  await click('.os-pv [data-tab="Marking"]');
+  await click('.os-pv [data-tab="Patient Script"]');
   const labCard = pg.locator('.os-pv .os-qacard').filter({ has: pg.locator('.os-lab') }).first();
   ok(/Ref. Range \(Units\)/.test(await labCard.locator('.os-lab-t thead').first().textContent()) && await labCard.locator('.os-lab-ab').count() >= 2, `${label}: lab results print as Test | Result | Ref. Range (Units), abnormal ones flagged`);
   await labCard.locator('[data-os="present"]').click();

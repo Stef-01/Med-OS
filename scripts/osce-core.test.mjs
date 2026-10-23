@@ -158,3 +158,22 @@ test('Part 2 slides: each result, then each image labelled by its alt text; the 
   assert.match(html, /<ol><li>What do they show\?<\/li><li>Management\?<\/li><\/ol>/);
   assert.equal(qaHtml({ id: 'x', part2: oscePart2(null) }), '');
 });
+
+import { contentTabs, tabBody, markingHtml } from '../public/js/osce/session.mjs';
+import { ctx } from '../public/js/osce/state.mjs';
+test('the Patient Script tab runs in the order of the clock: the history, the exam findings, then Part 2; the marking sheet keeps to the marking', () => {
+  ctx.exam = { s3: { vitals: 'HR 118', steps: [{ area: 'Abdomen', find: 'Guarding' }] } };
+  const st = { id: 's3', patient: '<p>HISTORY</p>', tasks: [], points: [], refs: [], check: [{ id: 1, x: 'Takes a history' }], part2: oscePart2({ lead: 'Say this', handover: [{ label: 'Bloods', result: '<p>Hb 92</p>' }], ask: ['What do they show?'] }) };
+  assert.deepEqual(contentTabs(st), ['Instructions', 'Patient Script'], 'no separate Exam tab');
+  const order = h => ['HISTORY', 'class="os-exam"', 'class="os-part2"'].map(x => h.indexOf(x));
+  const [hx, ex, p2] = order(tabBody(st, null, 'Patient Script'));
+  assert.ok(hx >= 0 && hx < ex && ex < p2, 'history, then exam findings, then Part 2');
+  const kept = tabBody(st, { hl: { 'Patient Script': '<h2>Patient Script</h2><div class="os-html"><p><mark>HISTORY</mark></p></div>' } }, 'Patient Script');
+  assert.match(kept, /^<div class="os-sheet" data-hl="Patient Script"><h2>Patient Script<\/h2><div class="os-html"><p><mark>HISTORY<\/mark><\/p><\/div><\/div><section class="os-exam"/, 'a highlight keeps the history only; the findings and results render fresh after it');
+  assert.match(kept, /class="os-part2"/);
+  const marking = markingHtml(st, null, false);
+  assert.match(marking, /Takes a history/);
+  assert.doesNotMatch(marking, /os-part2|os-exam/);
+  ctx.exam = {};
+  assert.deepEqual(contentTabs({ id: 'x', patient: '', part2: oscePart2(null) }), ['Instructions'], 'nothing for the examiner, no tab');
+});

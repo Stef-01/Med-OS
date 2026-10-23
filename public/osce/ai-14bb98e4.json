@@ -346,7 +346,7 @@
     "label": "Bloods (today)",
     "kind": "bloods",
     "result": "",
-    "model": "<ul><li><strong>Read:</strong> neutrophilia (white cells 13.6, neutrophils 10.8) and a CRP of 58, with normal haemoglobin and platelets. HbA1c 5.3% is normal.</li><li><strong>For Mrs Marchetti:</strong> a bacterial infection with a systemic response, in keeping with the abscess and her low-grade fever. With a normal blood pressure, an alert patient and only a mild fever she is not septic. The normal HbA1c rules out undiagnosed diabetes as a contributor.</li><li><strong>What it changes:</strong> she can be treated as an outpatient with drainage, antibiotics and close review, and these values are the baseline for that review. Inflammatory markers cannot tell infection from cancer: a raised CRP does not explain away the mass.</li></ul>",
+    "model": "<ul><li><strong>Read:</strong> neutrophilia (white cells 13.6, neutrophils 10.8) and a CRP of 58, with normal haemoglobin and platelets. HbA1c 5.3% (34 mmol/mol) is normal; 6.5% (48 mmol/mol) or more would diagnose diabetes.</li><li><strong>For Mrs Marchetti:</strong> a bacterial infection with a systemic response, in keeping with the abscess and her low-grade fever. With a normal blood pressure, an alert patient and only a mild fever she is not septic. The normal HbA1c rules out undiagnosed diabetes as a contributor.</li><li><strong>What it changes:</strong> she can be treated as an outpatient with drainage, antibiotics and close review, and these values are the baseline for that review. Inflammatory markers cannot tell infection from cancer: a raised CRP does not explain away the mass.</li></ul>",
     "labs": [
      {
       "rows": [
@@ -405,8 +405,13 @@
         "t": "HbA1c",
         "v": "5.3",
         "u": "%",
-        "r": "below 6.0 (42 mmol/mol); 6.5% (48 mmol/mol) or more is diagnostic of diabetes",
-        "n": "34 mmol/mol"
+        "r": "<6.0"
+       },
+       {
+        "t": "",
+        "v": "34",
+        "u": "mmol/mol",
+        "r": "<42"
        }
       ]
      }
