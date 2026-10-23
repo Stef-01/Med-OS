@@ -46,6 +46,18 @@
    },
    "imaging": 1
   },
+  "195": {
+   "status": "failed",
+   "at": "2026-10-23T20:24:10Z",
+   "title": "Thyroid Examination 1",
+   "gates": [
+    "check 22: a stray \"<\" in text"
+   ],
+   "blockers": [
+    "Part 2 Question 4 (ask[3], expect[3]) with checklist items 37, 38, 39, 40 (and 32, 35 when deferred to Q4): Question 4 is too big for its 90 seconds. In that time the candidate must explain the diagnosis and treatment, answer three of Eliza's questions (tablets forever, eyes, pregnancy), give three groups of red flags (three critical items: agranulocytosis, cardiac/thyroid storm with 000, vision) and arrange follow-up. The model answer has seven bullets. A competent candidate will run out of time and lose critical safety-netting marks. The question 'Will my eyes go back to normal?' earns no checklist item, so it only uses up time.",
+    "Checklist item 24 (crit) and item 23 (crit) vs Part 2 expect[0] (ISBAR Assessment): Item 24 requires the candidate to state a narrow QRS, normal axis and normal QTc. Item 23 requires them to say anti-TPO is positive but not specific. The model ISBAR answer, which is the 90-second answer these items are marked in, gives only 'ECG: AF about 110/min, no ischaemia' and 'TRAb positive = Graves''. An examiner following the model answer would mark down a candidate who said exactly what the model says, on two critical items. These details also don't change management and can't reasonably fit into a 90-second handover."
+   ]
+  },
   "196": {
    "status": "shipped",
    "at": "2026-10-23T07:38:55Z",
@@ -319,13 +331,11 @@
    "imaging": 1
   },
   "257": {
-   "status": "failed",
-   "at": "2026-10-23T20:11:41Z",
+   "status": "shipped",
+   "at": "2026-10-23T20:35:37Z",
    "title": "Respiratory Examination 1",
-   "gates": [],
-   "blockers": [
-    "ddx → 'Exercise-induced laryngeal obstruction' → against: Lists 'it settled with rest' as a feature against ELO. ELO typically resolves within minutes of stopping exercise, which the explanation itself states ('settles soon after exercise stops'). This is wrong teaching and contradicts the explanation."
-   ]
+   "station": "amsa-257",
+   "by": "publish-amsa-draft.mjs"
   },
   "263": {
    "status": "shipped",
@@ -442,13 +452,11 @@
    "by": "publish-amsa-draft.mjs"
   },
   "328": {
-   "status": "failed",
-   "at": "2026-10-23T20:00:33Z",
+   "status": "shipped",
+   "at": "2026-10-23T20:38:15Z",
    "title": "PR Examination 1",
-   "gates": [],
-   "blockers": [
-    "check id 33 (Management, crit): Critical item bundles about eight separate elements (ABCDE, two large-bore cannulae, bloods, group and hold, conditional 2-unit crossmatch, hourly obs, stool chart, fluid balance) with no scoring rule ('d'). It must be earned inside a 90-second management answer that also has to cover items 34–37. Read strictly, a candidate can fail a critical item for leaving out 'stool chart' or 'fluid balance'. Every other multi-part critical item in Part 2 (26–31, 34, 36, 37) has a scoring rule."
-   ]
+   "station": "amsa-328",
+   "by": "publish-amsa-draft.mjs"
   },
   "338": {
    "status": "shipped",
