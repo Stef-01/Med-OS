@@ -61,13 +61,10 @@ test('the save migration gives partner mode its defaults and keeps a broken stor
   assert.equal(osceMigrate({ v: 2, alt: false }, 1).alt, false);
 });
 
-test('sources: AI generated, AMSA MedEd or written by you, one tag each', () => {
+test('sources: AI generated or written by you, one tag each', () => {
   assert.equal(osceOrigin({ origin: 'ai' }), 'ai');
-  assert.equal(osceOrigin({ origin: 'amsa' }), 'amsa');
-  assert.equal(osceOrigin({ origin: 'eMedici' }), 'own', 'an unknown origin is shown as the students\' own');
   assert.equal(osceOrigin({}), 'own');
-  assert.deepEqual(ORIGINS.map(o => o[0]), ['ai', 'amsa', 'own']);
-  assert.match(sourceTag('amsa', 'AMSA MedEd OSCE case "Chest Pain History 1", converted by AI'), /kit-src--amsa[^>]*title="AMSA MedEd OSCE case &quot;Chest Pain History 1&quot;, converted by AI">AMSA</);
+  assert.deepEqual(ORIGINS.map(o => o[0]), ['ai', 'own']);
   assert.match(sourceTag('ai', 'AI generated: croup'), /kit-src--ai[^>]*title="AI generated: croup">AI</);
   assert.match(sourceTag('own'), /kit-src--own[^>]*>Own</);
   assert.equal(specialtyEmoji('Paediatrics'), '👶');

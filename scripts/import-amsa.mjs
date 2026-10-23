@@ -12,8 +12,9 @@
      node scripts/import-amsa.mjs --pause 60      seconds between cases (default 30: the machine and the CLI are shared)
      node scripts/import-amsa.mjs --dry-run       print, write nothing
 
-   Provenance: id amsa-<resource id>, origin "amsa", source {label, url, file, course, section}, licence "amsa-meded",
-   generator "import-amsa.mjs"; the AI tag is not used, the AMSA tag is (vocab.mjs SOURCES). Claude is reached through
+   The result is an ordinary bank station (Stefan 2026-10-23: the case content feeds the existing OSCE UI, AI writes what
+   the case lacks, none of AMSA's tiles or categories come over). Provenance: id amsa-<resource id>, origin "ai" with
+   source {label: "AMSA MedEd OSCEs", url, file, ...}, so the AI tag reads "AI generated from AMSA MedEd OSCEs". Claude is reached through
    lib/claude.mjs when ANTHROPIC_API_KEY is set, else through the Claude Code CLI on the signed-in subscription
    (lib/claude-cli.mjs). Imaging requests are kept on the station but not resolved here (the image check needs the API);
    run `node scripts/fetch-imaging.mjs <id>` later. Progress is in scripts/import/amsa-ledger.json; a case that fails the
@@ -55,7 +56,9 @@ export const SECTION_SPECIALTY = {
 export function brief(raw) {
   const { meta, body } = raw, t = meta.title || '';
   const types = /examination/i.test(t) ? ['Examination'] : /counsel|explain|educat/i.test(t) ? ['Counselling'] : /management|emergency|acute/i.test(t) ? ['Management'] : ['History'];
-  const acute = /emergency|acute|collapse|deteriorat|resus|meksi/i.test(`${t} ${meta.section}`);
+  /* acute when the case opens in the ED, on the ward or by ambulance, or its title says so */
+  const opening = body.split(/---page---/)[0] || '';
+  const acute = /emergency|acute|collapse|deteriorat|resus|meksi|overdose|post-op/i.test(`${t} ${meta.section}`) || /emergency department|\bED\b|ambulance|ward call|on the ward|intensive care/i.test(opening);
   const specialty = SECTION_SPECIALTY[meta.section] || [];
   const topic = `${t} (AMSA MedEd ${meta.section} OSCE), converted to the 5 / 10 / 5 format`;
   const source = `Source case, from AMSA MedEd's OSCE course (section "${meta.section}", "${t}"), written for an 8-minute format (a short history, then examiner questions). Convert it faithfully: keep this patient (name, age, their story and every fact the script gives), the diagnosis, the differentials, the marking points and the teaching notes; reshape it to Part 1 (focused history and examination) and Part 2 (results handed over, interpretation, management, safety netting). Where the case describes an image or result in words, hand it over as a formal report in Part 2. Add only the Part 2 results the case needs, consistent with everything the case says. Text extracted from the PDF (page breaks marked ---page---):\n<source_case>\n${body}\n</source_case>`;
@@ -67,7 +70,7 @@ export function envelope(st, raw, now) {
   const { meta } = raw;
   const { origin: _o, ...body } = st;
   return { schemaVersion: 1, generatedAt: now, generator: 'import-amsa.mjs', source: { label: 'AMSA MedEd OSCEs', url: meta.url, file: meta.file, course: 115, section: meta.section, title: meta.title },
-    licence: 'amsa-meded', ...body, origin: 'amsa', media: {} };
+    licence: 'own', ...body, origin: 'ai', media: {} };
 }
 
 const readLedger = () => (fs.existsSync(LEDGER) ? JSON.parse(fs.readFileSync(LEDGER, 'utf8')) : { note: 'import-amsa.mjs progress: one entry per AMSA resource id', cases: {} });

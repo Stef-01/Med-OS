@@ -1,14 +1,13 @@
 /* vocab.mjs - the words the study overlay shares (study kit): where a station came from, the specialty emoji and the
    discipline row.
 
-   SOURCES: 'ai' is a station written by the generator (scripts/generate-station.mjs), 'amsa' one converted from an AMSA
-   MedEd OSCE case (scripts/import-amsa.mjs; the source URL is on the station), 'own' one the two of you wrote by hand.
-   Every station carries its origin, and every surface that shows a station shows its tag.
+   SOURCES: 'ai' is a station written by the generator (scripts/generate-station.mjs), 'own' one the two of you wrote by
+   hand. Every station carries its origin, and every surface that shows a station shows its tag.
 
    specialtyEmoji(name): one emoji per specialty name, from the table below. Unknown specialty → '' (no emoji, never
    "undefined"). */
 
-export const SOURCES = Object.freeze([['ai', 'AI generated'], ['amsa', 'AMSA MedEd'], ['own', 'Written by you']]);
+export const SOURCES = Object.freeze([['ai', 'AI generated'], ['own', 'Written by you']]);
 export const sourceLabel = k => (SOURCES.find(([v]) => v === k) || [])[1] || '';
 
 const EMOJI = new Map(Object.entries({
@@ -28,7 +27,7 @@ export const emojiCount = () => EMOJI.size;
 /* ---------------------------------------------------------------- source tags: one tag on every surface a station shows,
    two words at most, a token colour per source (study-kit.css .kit-src--ai | --own), the full name for a screen reader.
    `title` adds the hover reason (an AI station's focus). */
-const TAG = { ai: ['AI', 'AI generated'], amsa: ['AMSA', 'AMSA MedEd case, converted by AI'], own: ['Own', 'Written by you'] };
+const TAG = { ai: ['AI', 'AI generated'], own: ['Own', 'Written by you'] };
 const attr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 export const sourceKey = k => (TAG[k] ? k : 'own');
 export function sourceTag(origin, title = '') {

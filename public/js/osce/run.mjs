@@ -3,7 +3,7 @@
    (Stefan 2026-10-19). The selection lives in mem.run {specs, origin, type, open}; the laws it draws on (ROTATIONS,
    osceRunPool, osceShuffle) are in core.mjs. */
 import { esc } from '../core.mjs';
-import { discRowHtml, sourceLabel } from '../study-kit/vocab.mjs';
+import { discRowHtml } from '../study-kit/vocab.mjs';
 import { ROTATIONS, ORIGINS, osceOrigin, osceRunPool, osceShuffle, oscePeople, osceCounts, NAME_MAX } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, attempted, curAttempt, confirmDlg, openPop, ago, nameOf, initialOf, whoBadge } from './state.mjs';
 import { startAttempt } from './session.mjs';
@@ -125,7 +125,7 @@ export function runPaint() {
   box.querySelector('.os-rots').innerHTML = discRowHtml('run', ids.map(id => [id, rotCount(id)]), rotState,
     { on: every, n: osceRunPool(stations, { ...r, specs: ids.flatMap(specsIn) }).length });
   const lab = { specs: r.specs.length ? `${r.specs.length} of ${nSpec} specialties` : 'Specialties',
-    origin: r.origin.length === 1 ? sourceLabel(r.origin[0]) : r.origin.length ? `${r.origin.length} sources` : 'All sources',
+    origin: r.origin.length === 1 ? (r.origin[0] === 'ai' ? 'AI generated' : 'Written by you') : 'All sources',
     type: r.type.length ? (r.type.length === 1 ? r.type[0] : `${r.type[0]} +${r.type.length - 1}`) : 'All station types' };
   const oneSource = new Set(stations.map(osceOrigin)).size < 2;   /* a one-option filter is a dead control */
   box.querySelectorAll('[data-os="runpop"]').forEach(b => {
