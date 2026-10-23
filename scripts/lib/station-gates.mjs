@@ -94,7 +94,7 @@ export function shapeProblems(st) {
 
 /* the bar a NEW station clears on top of its shape: benchmarks, timing, structure, guidelines, imaging requests */
 export function qualityProblems(st, stats) {
-  const p = [];   /* `stats` (bankStats) is kept in the signature for callers; the size band is LEAVES */
+  const p = [...ddxProblems(st.ddx)];   /* `stats` (bankStats) is kept in the signature for callers; the size band is LEAVES */
   for (const s of st.specialty || []) if (!KNOWN_SPECIALTIES.has(s) && !specialtyEmoji(s)) p.push(`specialty "${s}" is not a known specialty name`);
   for (const t of st.type || []) if (!TYPES.includes(t)) p.push(`station type "${t}" is not one of ${TYPES.join(', ')}`);
   if (!CX.includes(st.complexity)) p.push('complexity must be Low, Moderate or High');
@@ -243,4 +243,19 @@ export function reviewNotes(st) {
       n.push(`the observations reach the ${worst} zone on the chart but no checklist item asks the candidate to escalate (${worst === 'red' ? 'rapid response' : 'clinical review'})`);
   }
   return n;
+}
+
+/* the reasonable differentials: 3 to 6, exactly one leading diagnosis, each named, tiers from the three */
+export function ddxProblems(ddx) {
+  if (ddx == null) return [];
+  if (!Array.isArray(ddx)) return ['ddx is not a list'];
+  const p = [];
+  if (ddx.length < 3 || ddx.length > 6) p.push(`ddx lists 3 to 6 reasonable differentials (has ${ddx.length})`);
+  if (ddx.filter(d => d?.tier === 'likely').length !== 1) p.push('ddx has exactly one tier likely: the leading diagnosis');
+  ddx.forEach((d, i) => {
+    if (!String(d?.dx || '').trim()) p.push(`ddx ${i + 1} has no diagnosis`);
+    if (!['likely', 'reasonable', 'dangerous'].includes(d?.tier)) p.push(`ddx ${i + 1} tier is likely, reasonable or dangerous`);
+    for (const k of ['dx', 'for', 'against']) if (/[<>]/.test(String(d?.[k] || ''))) p.push(`ddx ${i + 1} ${k} is plain text`);
+  });
+  return p;
 }

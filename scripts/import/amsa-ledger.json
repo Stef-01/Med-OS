@@ -28,15 +28,12 @@
    "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
   },
   "196": {
-   "status": "requeued",
-   "at": "2026-10-23T06:15:05Z",
+   "status": "shipped",
+   "at": "2026-10-23T07:38:55Z",
    "title": "Abdominal Pain History 1",
-   "gates": [
-    "the second examiner question asks for the most likely diagnosis and the differentials",
-    "the third examiner question asks how the candidate would manage the patient"
-   ],
-   "blockers": [],
-   "why": "brief tightened (Part 2 timing)"
+   "station": "amsa-196",
+   "by": "publish-amsa-draft.mjs",
+   "note": "converter blockers fixed by hand, then passed a fresh examiner review; minor notes applied"
   },
   "197": {
    "status": "requeued",
@@ -59,6 +56,26 @@
    ],
    "why": "brief tightened (Part 2 timing)"
   },
+  "476": {
+   "status": "failed",
+   "at": "2026-10-23T07:13:42Z",
+   "title": "Abdominal Pain History 11",
+   "gates": [],
+   "blockers": [
+    "Checklist item 38 (critical, safety netting) vs expect[3] 'Nurses to report at once': The critical item lists eight red flags and has no threshold, so it is unclear whether all eight are needed. It also does not match the model answer. Item 38 includes sweats and worsening tummy pain or swelling, which the expected answer leaves out, and the expected answer includes 'falling BP', which item 38 does not have. Q4 asks what the candidate would ask the nurses to watch for, but item 38 says 'Tells James and the nurses'. Examiners will mark this critical item differently from each other.",
+    "Checklist item 30 (critical, vasoactive drug): The ECG before terlipressin is written into the critical item. A candidate who correctly chooses octreotide has no reason to mention an ECG, and one who gives terlipressin at the right dose but forgets the ECG would fail a critical item over a secondary step. There is no 'd' to say what is essential.",
+    "Checklist item 33 (critical, thiamine and withdrawal) and expect[2] point 5: The critical item packs in the thiamine dose, Wernicke dosing, a withdrawal scale, the choice of benzodiazepine, oral versus parenteral route and senior advice, with no 'd' saying which parts are essential. Management (Q3) has about 90 seconds for six items, five of them critical, so this level of detail cannot fairly be required. As written, a candidate who says 'IV thiamine 300 mg before any glucose, CIWA monitoring, symptom-triggered oxazepam with senior advice' could still be marked down for not giving the Wernicke dose or the NBM route.",
+    "expect[2] (Q3 management) and checklist items 29 and 34, sizing for about 90 seconds: The management model answer is too long to say in about 90 seconds. Point 1 alone restates restrictive transfusion, haemodynamic transfusion, the MTP and intubation. Item 34 has six separate elements with no threshold. With five critical items in one answer, candidates will run out of time and miss marks they would otherwise earn."
+   ]
+  },
+  "578": {
+   "status": "shipped",
+   "at": "2026-10-23T07:45:23Z",
+   "title": "Abdominal Pain History 10",
+   "station": "amsa-578",
+   "by": "publish-amsa-draft.mjs",
+   "note": "converter blockers fixed by hand, then passed a fresh examiner review; minor notes applied"
+  },
   "626": {
    "status": "requeued",
    "at": "2026-10-23T05:51:13Z",
@@ -71,6 +88,18 @@
    },
    "imaging": 2,
    "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
+  },
+  "633": {
+   "status": "failed",
+   "at": "2026-10-23T07:31:12Z",
+   "title": "Abdominal Pain History 12",
+   "gates": [
+    "1 safety-netting item; give at least 2 (the red flags in plain words, when and where to come back, follow-up)"
+   ],
+   "blockers": [
+    "part2.handover[Blood results].labs, Liver function tests: ALP and GGT rows (field \"n\"): Each row prints the note \"more than 4 times upper limit\". This is the calculation that critical item 22.1 rewards (\"ALP 465 and GGT 205, more than 4 times the upper limit\") and that the model interpretation expects the candidate to work out. With the answer printed on the report, the critical item can't tell candidates apart. The same applies to a lesser degree to the \"not pregnant\" note on the beta-hCG row (item 23).",
+    "part2.ask[2] / expect[2]; checklist items 28, 29, 32, 34: The management answer is too big for about 90 seconds. It asks for analgesia with paracetamol timed from 16:00, nil by mouth, fluids and cultures; amoxicillin and gentamicin with dose, adjusted body weight and interval; surgical referral; duct assessment; a plain-language explanation to Sally; and a two-part critical safety-net item (3 red flags for Sally plus hourly observations and escalation criteria for the nurse). Sally also interrupts with her camping question and jargon prompts during this answer. The risk-factor question takes the fourth slot, so safety netting has no slot of its own. A candidate who gives correct management will often run out of time before item 34, which is critical."
+   ]
   }
  }
 }

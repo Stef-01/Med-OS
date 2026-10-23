@@ -211,3 +211,13 @@ test('Part 2 questions run the way an examiner asks them: ISBAR with the results
   assert.match(askProblems({ ...good, expect: ['<p>he is unwell</p>', '<p>d</p>', '<p>m</p>'] }).join(), /Situation, Background, Assessment and Recommendation/);
   assert.match(askProblems({ ask: good.ask.slice(0, 2), expect: good.expect.slice(0, 2) }).join(), /3 or 4/);
 });
+
+import { ddxProblems } from './lib/station-gates.mjs';
+test('ddxProblems: 3 to 6 differentials, exactly one most likely, known tiers, plain text', () => {
+  const d = (dx, tier) => ({ dx, tier, for: 'a', against: 'b' });
+  assert.deepEqual(ddxProblems([d('A', 'likely'), d('B', 'reasonable'), d('C', 'dangerous')]), []);
+  assert.deepEqual(ddxProblems(undefined), [], 'a station without a list is not held back');
+  assert.match(ddxProblems([d('A', 'likely'), d('B', 'reasonable')]).join(' '), /3 to 6/);
+  assert.match(ddxProblems([d('A', 'reasonable'), d('B', 'reasonable'), d('C', 'dangerous')]).join(' '), /exactly one tier likely/);
+  assert.match(ddxProblems([d('A', 'likely'), d('B', 'maybe'), d('<b>C</b>', 'dangerous')]).join(' '), /tier is likely.*plain text/);
+});

@@ -91,7 +91,8 @@ async function runIn(width, height, label) {
   await pg.goto(BASE, { waitUntil: 'networkidle' });
   await pg.waitForSelector('.os[data-ready]');
   ok(await pg.locator('[data-os="back"]').isHidden(), `${label}: the first screen has no back button`);
-  ok(/26 stations/.test(await pg.textContent('.os-kicker')), `${label}: 26 stations listed`);
+  const nBank = fs.readdirSync('public/osce').filter(f => f.endsWith('.json') && f !== 'index.json').length;
+  ok((await pg.textContent('.os-kicker')).split(/\D+/).includes(String(nBank)), `${label}: every station in the bank is listed (${nBank})`);
   const wideScroll = await pg.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1 || [...document.querySelectorAll('.os-main *')].some(e => e.getBoundingClientRect().right > innerWidth + 1 && getComputedStyle(e).position !== 'fixed'));
   ok(!wideScroll, `${label}: nothing runs off the right edge`);
 
@@ -177,6 +178,7 @@ async function runIn(width, height, label) {
   await pg.waitForSelector('.os-present', { state: 'detached' });
   ok(await pg.locator('.os-pl .os-p2chip.seen').count() >= 2, `${label}: each result the candidate has seen carries a tick`);
   await pg.locator('.os-pl .os-p2foot .os-primary').click();   /* Next question */
+  ok(await pg.locator('.os-pl .os-ddx:not(.os-ddx--compact) .os-dd--likely').count() === 1 && await pg.locator('.os-pl .os-p2q .os-ddx--compact .os-dd').count() >= 3, `${label}: the script lists the reasonable differentials, and the differentials question carries them`);
   ok(/^Question 2 of/.test((await pg.locator('.os-pl .os-p2eye').textContent()).trim()) && await pg.locator('.os-pl .os-p2steps button.done').count() === 2, `${label}: Next question moves on and ticks off the steps behind it`);
   ok(await pg.locator('.os-pl [data-os="jump"][data-to="p2"][aria-current="true"]').count() === 1, `${label}: the jump bar lights Part 2`);
   await click('[data-os="tab"][data-tab="Marking"]');

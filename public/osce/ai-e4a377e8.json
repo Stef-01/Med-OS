@@ -483,5 +483,37 @@
  "revised": {
   "at": "2026-10-23T06:54:27Z",
   "by": "rewrite-part2-asks.mjs"
- }
+ },
+ "ddx": [
+  {
+   "dx": "Localised unfavourable intermediate-risk prostate adenocarcinoma, ISUP Grade Group 3 (Gleason 4+3=7), cT1c",
+   "tier": "likely",
+   "for": "Biopsy shows Gleason 4+3=7 in 4 of 14 left cores, with PSA 9.4, a PI-RADS 4 lesion and no spread on MRI.",
+   "against": ""
+  },
+  {
+   "dx": "Metastatic or locally advanced prostate cancer",
+   "tier": "dangerous",
+   "for": "Grade Group 3 disease cannot be called localised until PSMA PET/CT staging is done.",
+   "against": "He has no bone pain, weight loss or neurological symptoms, and MRI shows no extraprostatic extension, seminal vesicle invasion, nodal disease or bone lesions."
+  },
+  {
+   "dx": "High-risk localised prostate cancer",
+   "tier": "reasonable",
+   "for": "Pattern 4 makes up about 70% of the tumour, and PSA density is raised at 0.24.",
+   "against": "PSA is under 10, the grade is Group 3 rather than 4 or 5, and there is no extraprostatic extension or palpable disease."
+  },
+  {
+   "dx": "Favourable intermediate-risk prostate cancer (Gleason 3+4=7, Grade Group 2)",
+   "tier": "reasonable",
+   "for": "His Gleason score adds up to 7, the same total as his friend's.",
+   "against": "Pattern 4 predominates (about 70%), so this is 4+3 (Grade Group 3), not 3+4."
+  },
+  {
+   "dx": "Benign prostatic hyperplasia or prostatitis as the cause of the raised PSA",
+   "tier": "reasonable",
+   "for": "MRI shows mild benign prostatic hyperplasia (BPH) nodules in the transition zone.",
+   "against": "Biopsy confirms cancer, and the urine is sterile with no leucocytes, which argues against infection."
+  }
+ ]
 }

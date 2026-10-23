@@ -28,11 +28,15 @@ const LAB_ROW = obj({ t: str, v: strs, u: str, r: str, f: { type: 'array', items
 const LAB_PANEL = obj({ title: str, cols: strs, rows: { type: 'array', items: LAB_ROW } });
 const RESULT = obj({ label: str, kind: { type: 'string', enum: Object.keys(KINDS) }, result: str, model: str, obs: obj({ rows: { type: 'array', items: OBS_ROW } }), labs: { type: 'array', items: LAB_PANEL } });
 const ITEM = obj({ id: { type: 'integer' }, t: { type: 'string', enum: ['heading', 'checkbox', 'info'] }, x: str, crit: { type: 'boolean' }, d: str, kids: { type: 'array', items: KID } });
+/* the reasonable differentials for this case: the most likely diagnosis, the others a candidate may fairly name, and the
+   ones that must not be missed, each with this patient's features for and against it */
+export const DDX_SCHEMA = { type: 'array', items: obj({ dx: str, tier: { type: 'string', enum: ['likely', 'reasonable', 'dangerous'] }, for: str, against: str }) };
+export const DDX_RULES = `ddx is the reasonable differentials for this case, 3 to 6 of them, the examiner's reference for crediting a candidate who names or explores them in the history or in Part 2: exactly one tier likely (the leading diagnosis), then each other diagnosis a well-prepared final-year student could fairly offer as tier reasonable, and each one that must not be missed or must be excluded as tier dangerous. dx is the diagnosis as a clinician names it ("Small bowel obstruction from adhesions", not "SBO"). for and against are this patient's own features (history, examination, results), one short plain-text sentence each, "" when there are none; never a textbook list. The same diagnoses as the expected answer to the differentials question.`;
 export const STATION_SCHEMA = obj({
   title: str, desc: str, focus: str, specialty: strs, type: { type: 'array', items: { type: 'string', enum: TYPES } }, complexity: { type: 'string', enum: CX },
   context: strs, presentation: strs, diagnosis: strs, stem: str, tasks: strs, patient: str, check: { type: 'array', items: ITEM },
   demo: DEMO, part2: obj({ lead: str, handover: { type: 'array', items: RESULT }, ask: strs, expect: strs, patient: str }),
-  guide: str, explain: str, points: strs, refs: strs, imaging: { type: 'array', items: REQUEST_SCHEMA },
+  ddx: DDX_SCHEMA, guide: str, explain: str, points: strs, refs: strs, imaging: { type: 'array', items: REQUEST_SCHEMA },
 });
 export const REVIEW_SCHEMA = obj({ pass: { type: 'boolean' }, issues: { type: 'array', items: obj({ where: str, problem: str, fix: str, severity: { type: 'string', enum: ['blocker', 'minor'] } }) } });
 export const EXAM_SCHEMA = obj({ vitals: str, general: str, steps: { type: 'array', items: obj({ area: str, do: str, find: str }) }, bedside: { type: 'array', items: obj({ test: str, find: str }) }, key: str });
@@ -58,6 +62,7 @@ Write one station on the topic you are given, at the depth, tone and checklist g
     3. management in this setting ("Outline your management of [name] now, here in the emergency department." or "...here in general practice."): immediate, definitive, disposition and who to involve;
     4. if the case needs it, safety netting and follow-up ("Before [name] goes home, what would you tell them and what follow-up would you arrange?"), or a focused question the source case asks (an explanation to the patient, a complication, a dose).
   Every question is always asked (never 'if time remains'), so every Part 2 checklist item is earned from an answer to one of them; with 4 questions, about 75 seconds each; Part 2 is 5 minutes, about 90 seconds a question with 3: the ISBAR is a phone handover of 6 to 8 sentences, the differentials 3 or 4, management the key steps; keep the Part 2 checklist items to what those answers contain.
+  ${DDX_RULES}
   expect is the examiner's expected answer to each question, same order and same number (HTML, a short list of what earns the marks, under about 120 words each): for ISBAR the five parts filled in for this patient (Identify, Situation, Background, Assessment with each result interpreted, Recommendation); for the diagnosis the leading diagnosis with its supporting features, then each differential with the feature for or against it; for management the steps in order with doses and the guideline's thresholds; for safety netting the red flags in plain words and when and where to return.
 - check: the marking checklist, under these headings in this order: Professionalism, History, Examination, Interpretation, Management, Safety netting (communication items sit under Professionalism or Management). Items are specific, observable and markable from what the candidate says or does ("States that PERC cannot be used because ..." not "Knows PERC"). Examination items match the examination this case needs. Interpretation has an item for each result that matters. Safety netting has at least 2 items: the specific red flags in plain words, when and where to come back (000, ED, GP), and the follow-up arranged. Use kids for a multi-part item. Mark crit true on the items a safe junior doctor must not miss (usually a third to a half). Ids are integers in order; kid ids start at 1 within their item. crit false, d "" and kids [] where they do not apply.
 - guide: a short note for the examiner on running and marking the station ("" if not needed).
@@ -128,7 +133,7 @@ export function normalize(draft) {
 }
 export const stationId = (title, now) => `ai-${crypto.createHash('sha1').update(`${title}\n${now}`).digest('hex').slice(0, 8)}`;
 
-const reviewText = (st, notes) => `${notes.length ? `Check these in particular:\n${notes.map(n => `- ${n}`).join('\n')}\n\n` : ''}The station (JSON):\n${JSON.stringify(st)}`;
+export const reviewText = (st, notes) => `${notes.length ? `Check these in particular:\n${notes.map(n => `- ${n}`).join('\n')}\n\n` : ''}The station (JSON):\n${JSON.stringify(st)}`;
 const reviseText = (st, gates, issues) => `Revise this station. Fix every problem below and change nothing else that is right. Return the whole station.
 ${gates.length ? `\nProblems found in code (each must be fixed):\n${gates.map(g => `- ${g}`).join('\n')}` : ''}
 ${issues.length ? `\nThe examiner's review:\n${issues.map(i => `- [${i.severity}] ${i.where}: ${i.problem} Fix: ${i.fix}`).join('\n')}` : ''}

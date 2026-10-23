@@ -9,7 +9,7 @@ import { wide, fmtDate } from '../study-kit/util.mjs';
 import { safeHtml } from '../study-kit/safe.mjs';
 import { figureHtml } from '../study-kit/media.mjs';
 import { mnemonicsFor } from './mnemonics.mjs';
-import { KINDS, HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceP2Start, osceP2Steps, osceAskLabel, osceVitals, osceFrom, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
+import { KINDS, HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceP2Start, osceP2Steps, DDX_TIERS, osceAskLabel, osceVitals, osceFrom, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, curAttempt, findAttempt, now, body, NOLOAD, bell, notify, confirmDlg, openDialog, closeDialog, openPop, closePop, tagHtml, srcTag, ago, aiEnabled, markerCfg, examOf, nameOf, whoBadge, roleLine, openPresenter, topDialog } from './state.mjs';
 import { markDirect, markPromptText, parseReply } from './marker.mjs';
 import { candidateLink } from './candidate.mjs';
@@ -190,15 +190,25 @@ export function tabBody(st, a, t, o = {}) {
    highlight never stores the findings or the results */
 function scriptHtml(st, a, o) {
   const t = 'Patient Script', script = a?.hl?.[t] || (st.patient || st.media?.patientScript?.length ? `<h2>Patient Script</h2><div class="os-html">${safeHtml(st.patient)}</div>${imgs(st.media?.patientScript)}` : '');
-  const parts = [script && ['hx', 'History'], examOf(st) && ['ex', 'Exam'], hasPart2(st) && ['p2', 'Part 2']].filter(Boolean);
-  return `${parts.length > 1 ? `<nav class="os-jump" aria-label="Jump to">${parts.map(([k, l], i) => `<button data-os="jump" data-to="${k}"${i ? '' : ' aria-current="true"'}>${l}</button>`).join('')}</nav>` : ''}${script ? `<div class="os-sheet" data-hl="${t}">${script}</div>` : ''}${examHtml(examOf(st), st.id)}${qaHtml(st)}${a && o.editable ? toolbar() : ''}`;
+  const parts = [script && ['hx', 'History'], examOf(st) && ['ex', 'Exam'], st.ddx?.length && ['dd', 'Differentials'], hasPart2(st) && ['p2', 'Part 2']].filter(Boolean);
+  return `${parts.length > 1 ? `<nav class="os-jump" aria-label="Jump to">${parts.map(([k, l], i) => `<button data-os="jump" data-to="${k}"${i ? '' : ' aria-current="true"'}>${l}</button>`).join('')}</nav>` : ''}${script ? `<div class="os-sheet" data-hl="${t}">${script}</div>` : ''}${examHtml(examOf(st), st.id)}${ddxHtml(st)}${qaHtml(st)}${a && o.editable ? toolbar() : ''}`;
+}
+/* the reasonable differentials, in the script where the examiner needs them: in the history (credit the questions that
+   rule each one in or out) and at the differentials question (credit each one named with a reason). The leading diagnosis
+   first, then the others a candidate may fairly offer, then the must-not-miss ones, each with this patient's features */
+export function ddxHtml(st, o = {}) {
+  const dd = st.ddx || []; if (!dd.length) return '';
+  const row = d => `<li class="os-dd os-dd--${d.tier}"><div class="os-ddtop"><small class="os-ddtier">${DDX_TIERS[d.tier]}</small><strong>${esc(d.dx)}</strong></div>${o.compact ? '' : `${d.for ? `<p><b>For</b> ${esc(d.for)}</p>` : ''}${d.against ? `<p><b>Against</b> ${esc(d.against)}</p>` : ''}`}</li>`;
+  return o.compact
+    ? `<div class="os-ddx os-ddx--compact"><small>Reasonable differentials: credit any named with a reason</small><ul role="list">${dd.map(row).join('')}</ul></div>`
+    : `<section class="os-ddx" aria-labelledby="os-ddx-h"><header class="os-ddhead"><strong id="os-ddx-h">Reasonable differentials</strong><small>Credit the candidate for exploring these in the history and for naming them, with a reason, in Part 2</small></header><ul role="list">${dd.map(row).join('')}</ul></section>`;
 }
 /* the jump bar: a tap scrolls to its part; scrolling lights the part in view */
-const PARTS = { hx: '.os-sheet[data-hl]', ex: '.os-exam', p2: '.os-part2' };
+const PARTS = { hx: '.os-sheet[data-hl]', ex: '.os-exam', dd: '.os-ddx', p2: '.os-part2' };
 export function jumpTo(b) { b.closest('.os-pbody')?.querySelector(PARTS[b.dataset.to])?.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
 export function syncJump(sc) {
   const nav = sc?.querySelector?.('.os-jump'); if (!nav) return;
-  const line = nav.getBoundingClientRect().bottom + 24, btns = [...nav.querySelectorAll('[data-os="jump"]')];
+  const line = nav.getBoundingClientRect().bottom + 40, btns = [...nav.querySelectorAll('[data-os="jump"]')];
   const on = btns.filter(x => { const e = sc.querySelector(PARTS[x.dataset.to]); return e && e.getBoundingClientRect().top <= line; }).pop() || btns[0];
   btns.forEach(x => (x === on ? x.setAttribute('aria-current', 'true') : x.removeAttribute('aria-current')));
 }
@@ -275,7 +285,7 @@ export function qaHtml(st) {
     ${markBtn('os-p2mark')}${results}`;
   const exp = i => (p.expect?.[i] ? `<div class="os-qaexp"><small>Expected answer</small><div class="os-html">${safeHtml(p.expect[i])}</div></div>` : '');
   const chips = i => (slides.length ? `<div class="os-p2show"><small>Turn the screen to a result when the candidate asks for it</small><div class="os-p2chips">${slides.map((x, j) => `<button class="os-p2chip${s.seen.has(j) ? ' seen' : ''}" data-os="present" data-sid="${sid}" data-i="${j}" data-q="${i}">${s.seen.has(j) ? I.check : I.max}<span>${esc(x.label)}</span></button>`).join('')}</div></div>` : '');
-  const qStep = i => `<div class="os-p2q"><small class="os-p2eye">Question ${i + 1} of ${p.ask.length} · ${esc(osceAskLabel(p.ask[i], i))}</small><p class="os-qaq">“${esc(p.ask[i])}”</p>${exp(i)}${chips(i)}</div>`;
+  const qStep = i => `<div class="os-p2q"><small class="os-p2eye">Question ${i + 1} of ${p.ask.length} · ${esc(osceAskLabel(p.ask[i], i))}</small><p class="os-qaq">“${esc(p.ask[i])}”</p>${osceAskLabel(p.ask[i], i) === 'Differentials' ? ddxHtml(st, { compact: true }) : ''}${exp(i)}${chips(i)}</div>`;
   const go = (j, label, cls = '', ic = '') => `<button class="os-btn ${cls}" data-os="p2step" data-sid="${sid}" data-n="${j}">${ic}<span>${label}</span>${cls ? I.chevR : ''}</button>`;
   const foot = `<div class="os-p2foot">${n ? go(n - 1, 'Back', '', I.prev) : '<span></span>'}${n < steps.length - 1 ? go(n + 1, n ? 'Next question' : 'Ask the first question', 'os-primary') : markBtn('os-primary')}</div>`;
   const body = flat

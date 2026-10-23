@@ -411,5 +411,37 @@
   "setting": "clinic",
   "weight": 64,
   "pregnant": true
- }
+ },
+ "ddx": [
+  {
+   "dx": "Confined placental mosaicism for trisomy 16 (high-chance NIPT that is a false positive for the fetus)",
+   "tier": "likely",
+   "for": "The NIPT was valid with a 9% fetal fraction and showed high chance for trisomy 16 only, while the pregnancy is ongoing and the 12-week scan was normal (NT 1.6 mm, no structural abnormality).",
+   "against": "There is no diagnostic test yet, and a normal 12-week scan cannot rule out trisomic cells in the fetus."
+  },
+  {
+   "dx": "True fetal mosaic trisomy 16",
+   "tier": "dangerous",
+   "for": "She has a valid high-chance trisomy 16 result, and mosaic trisomy 16 can still look normal on a 12-week scan.",
+   "against": "The 12-week scan was structurally normal with a normal nuchal translucency and nasal bone present."
+  },
+  {
+   "dx": "Full (non-mosaic) fetal trisomy 16",
+   "tier": "reasonable",
+   "for": "Her NIPT showed a high chance of trisomy 16 with an adequate fetal fraction.",
+   "against": "The fetus is alive and structurally normal at 12 weeks 1 day, with a heart rate of 158 bpm and no bleeding or pain, whereas full trisomy 16 almost always ends in early miscarriage."
+  },
+  {
+   "dx": "Vanishing twin as the source of the trisomic cell-free DNA",
+   "tier": "reasonable",
+   "for": "An early twin loss can leave no trace on a scan and still contribute cell-free DNA to her blood.",
+   "against": "The scan showed a single gestational sac with no second sac, she conceived naturally, and she has had no bleeding in this pregnancy."
+  },
+  {
+   "dx": "Maternal chromosomal change (maternal mosaicism or copy number change involving chromosome 16)",
+   "tier": "reasonable",
+   "for": "NIPT analyses maternal plasma, which includes the mother's own cell-free DNA, so a change in Hannah herself could give this result.",
+   "against": "Neither family has a known chromosomal or genetic condition, she has no medical history, and her previous pregnancy was uncomplicated with a healthy child."
+  }
+ ]
 }

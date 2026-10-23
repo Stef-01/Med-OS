@@ -280,7 +280,16 @@ export function osceCleanStation(s) {
   return { ...s, id: String(s.id), title: String(s.title), desc: str(s.desc), specialty: arr(s.specialty), type: arr(s.type),
     complexity: CX.includes(s.complexity) ? s.complexity : '', context: arr(s.context), presentation: arr(s.presentation), diagnosis: arr(s.diagnosis),
     stem: str(s.stem), tasks: arr(s.tasks), patient: str(s.patient), check: arr(s.check), guide: str(s.guide), explain: str(s.explain),
-    points: arr(s.points), refs: arr(s.refs), media: s.media && typeof s.media === 'object' && !Array.isArray(s.media) ? s.media : {}, part2: oscePart2(s.part2), demo: cleanDemo(s.demo) };
+    points: arr(s.points), refs: arr(s.refs), media: s.media && typeof s.media === 'object' && !Array.isArray(s.media) ? s.media : {}, part2: oscePart2(s.part2), demo: cleanDemo(s.demo), ddx: osceDdx(s.ddx) };
+}
+/* the reasonable differentials (scripts/lib/generate.mjs DDX_RULES): the leading diagnosis first, then the others a candidate
+   may fairly offer, then the must-not-miss ones, each with this patient's features for and against; anything malformed is dropped */
+export const DDX_TIERS = Object.freeze({ likely: 'Most likely', reasonable: 'Reasonable', dangerous: 'Must not miss' });
+export function osceDdx(v) {
+  const str = x => (typeof x === 'string' ? x.trim() : ''), order = Object.keys(DDX_TIERS);
+  return (Array.isArray(v) ? v : []).filter(d => d && str(d.dx) && DDX_TIERS[d.tier])
+    .map(d => ({ dx: str(d.dx), tier: d.tier, for: str(d.for), against: str(d.against) }))
+    .sort((a, b) => order.indexOf(a.tier) - order.indexOf(b.tier));
 }
 /* Part 2: what the examiner says to open it, what they hand over (observations, investigations, scans: label + result,
    HTML allowlist), and the questions they ask in order. Each result may say what kind it is (KINDS), carry the examiner's

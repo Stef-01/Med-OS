@@ -103,7 +103,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     say(`${raw.meta.title} · ${raw.meta.section} · ${opts.types.join(', ')}${opts.acute ? ' · acute' : ''}`);
     let res;
     try { res = await writeStation(topic, opts, { bank: bank(), ask, now, log: m => say(`  ${m}`) }); }
-    catch (e) { say(`  error: ${e.message}`); ledger.cases[raw.meta.id] = { status: 'error', at: now, title: raw.meta.title, why: e.message.slice(0, 300) }; if (!flag('--dry-run')) writeLedger(ledger); return; }
+    catch (e) { say(`  error: ${e.message}`); const v = { status: 'error', at: now, title: raw.meta.title, why: e.message.slice(0, 300) }; if (flag('--dry-run')) ledger.cases[raw.meta.id] = v; else setCase(ledger, raw.meta.id, v); return; }
     if (!res.ok) {
       const last = res.rounds[res.rounds.length - 1], blockers = (last.review.issues || []).filter(i => i.severity === 'blocker');
       say(`  not shipped: ${last.gates.length} gate problem(s), ${blockers.length} examiner blocker(s)`);
@@ -113,8 +113,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
         const out = path.join(ROOT, 'drafts', `${res.station.id}.json`);
         fs.mkdirSync(path.dirname(out), { recursive: true });
         fs.writeFileSync(out, `${JSON.stringify({ station: envelope(res.station, raw, now), rounds: res.rounds }, null, 1)}\n`);
-        ledger.cases[raw.meta.id] = { status: 'failed', at: now, title: raw.meta.title, gates: last.gates, blockers: blockers.map(b => `${b.where}: ${b.problem}`) };
-        writeLedger(ledger);
+        setCase(ledger, raw.meta.id, { status: 'failed', at: now, title: raw.meta.title, gates: last.gates, blockers: blockers.map(b => `${b.where}: ${b.problem}`) });
       }
       return;
     }
@@ -125,8 +124,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const examFile = path.join(PUB, 'exam.json'), exam = JSON.parse(fs.readFileSync(examFile, 'utf8'));
     exam.stations = Object.fromEntries(Object.entries({ ...exam.stations, [st.id]: res.exam }).sort(([a], [b]) => a.localeCompare(b)));
     fs.writeFileSync(examFile, `${JSON.stringify(exam, null, 1)}\n`);
-    ledger.cases[raw.meta.id] = { status: 'shipped', at: now, title: raw.meta.title, station: st.id, rounds: res.rounds.length, models: res.models, imaging: (st.imaging || []).length };
-    writeLedger(ledger);
+    setCase(ledger, raw.meta.id, { status: 'shipped', at: now, title: raw.meta.title, station: st.id, rounds: res.rounds.length, models: res.models, imaging: (st.imaging || []).length });
     const { rows, problems } = writeIndex(PUB);
     shipped++;
     say(`  written · osce/${st.id}.json · ${st.title} · index ${rows} stations${problems.length ? ` · ${problems.join('; ')}` : ''}`);

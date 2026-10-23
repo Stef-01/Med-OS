@@ -253,3 +253,29 @@ test('the Patient Script tab runs in the order of the clock: the history, the ex
   assert.doesNotMatch(tabBody({ ...st, part2: oscePart2(null) }, null, 'Patient Script'), /os-jump/, 'one part: no jump bar');
   assert.deepEqual(contentTabs({ id: 'x', patient: '', part2: oscePart2(null) }), ['Instructions'], 'nothing for the examiner, no tab');
 });
+
+import { ddxHtml } from '../public/js/osce/session.mjs';
+import { osceDdx, DDX_TIERS } from '../public/js/osce/core.mjs';
+test('reasonable differentials: the leading diagnosis first, malformed rows dropped, shown in the script and at the differentials question', () => {
+  const raw = [{ dx: 'Mesenteric ischaemia', tier: 'dangerous', for: 'Ex-smoker', against: 'Normal lactate' }, { dx: '', tier: 'reasonable' }, { dx: 'Toxic megacolon', tier: 'weird' },
+    { dx: 'Adhesive small bowel obstruction', tier: 'likely', for: 'CT transition point', against: '' }, { dx: 'Large bowel obstruction', tier: 'reasonable', for: '', against: 'Collapsed colon' }];
+  const dd = osceDdx(raw);
+  assert.deepEqual(dd.map(d => d.tier), ['likely', 'reasonable', 'dangerous']);
+  assert.deepEqual(osceDdx('x'), []);
+  assert.equal(DDX_TIERS.dangerous, 'Must not miss');
+  const st = { id: 's9', ddx: dd, patient: '<p>HISTORY</p>', tasks: [], check: [], part2: oscePart2({ handover: [{ label: 'CT', result: '<p>SBO</p>' }], ask: ['Give an ISBAR handover.', 'What is your most likely diagnosis, and what else would you consider?', 'How would you manage her?'] }) };
+  const card = ddxHtml(st);
+  assert.match(card, /<strong id="os-ddx-h">Reasonable differentials<\/strong>/);
+  assert.match(card, /os-dd--likely"><div class="os-ddtop"><small class="os-ddtier">Most likely<\/small><strong>Adhesive small bowel obstruction<\/strong><\/div><p><b>For<\/b> CT transition point<\/p><\/li>/, 'an empty against line is left out');
+  assert.match(card, /Must not miss<\/small><strong>Mesenteric ischaemia/);
+  assert.equal(ddxHtml({ id: 'x' }), '');
+  const h = tabBody(st, null, 'Patient Script');
+  assert.match(h, /data-to="dd">Differentials<\/button>/, 'the jump bar has the differentials');
+  assert.ok(h.indexOf('class="os-ddx"') > h.indexOf('HISTORY') && h.indexOf('class="os-ddx"') < h.indexOf('class="os-part2"'), 'after the history and exam, before Part 2');
+  p2State('s9').n = 2;
+  const q = qaHtml(st);
+  assert.match(q, /Question 2 of 3 · Differentials<\/small><p class="os-qaq">[^<]*<\/p><div class="os-ddx os-ddx--compact">/, 'the differentials question carries the list');
+  assert.doesNotMatch(q, /<b>For<\/b>/, 'compact: names and tiers only');
+  p2State('s9').n = 3;
+  assert.doesNotMatch(qaHtml(st), /os-ddx/, 'not on the management question');
+});

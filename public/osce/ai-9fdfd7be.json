@@ -533,5 +533,37 @@
  "revised": {
   "at": "2026-10-23T06:52:42Z",
   "by": "rewrite-part2-asks.mjs"
- }
+ },
+ "ddx": [
+  {
+   "dx": "Uterine perforation with intra-abdominal bleeding",
+   "tier": "likely",
+   "for": "Fat-like tissue in the curettings, a retroverted bulky uterus in an obese patient, shock that barely responded to 1 L, haemoglobin down from 126 to 98 g/L, peritonism and right shoulder-tip pain.",
+   "against": "The operation record lists the procedure as uneventful, with an estimated blood loss of 50 mL."
+  },
+  {
+   "dx": "Bowel, bladder or pelvic vessel injury from the perforation",
+   "tier": "dangerous",
+   "for": "Fat in the curettings means the curette went into omentum, mesentery or bowel fat, and she has guarding, rebound tenderness, reduced bowel sounds and no urine output.",
+   "against": "She is afebrile, has not vomited and the catheter bag is empty rather than bloodstained, though a bowel injury may only show itself days later."
+  },
+  {
+   "dx": "Cervical or vaginal haemorrhage from the procedure",
+   "tier": "reasonable",
+   "for": "The cervix was dilated to Hegar 8 and she is in haemorrhagic shock.",
+   "against": "There is only a small amount of blood on the pad and no clots, and the peritonism and shoulder-tip pain point to bleeding inside the abdomen."
+  },
+  {
+   "dx": "Acute coronary syndrome or pulmonary embolism",
+   "tier": "dangerous",
+   "for": "She has diabetes, so silent ischaemia is a risk, and she has tachycardia, hypotension and an SpO2 of 94% on air after a general anaesthetic.",
+   "against": "The ECG shows sinus tachycardia only, with no ischaemia or right heart strain, SpO2 is 97% on oxygen, and she has a falling haemoglobin with peritonism."
+  },
+  {
+   "dx": "Sepsis",
+   "tier": "dangerous",
+   "for": "She has a raised lactate, hypotension, tachycardia and drowsiness after an instrumented procedure.",
+   "against": "She is afebrile at 36.8 to 36.9 only 3 hours after surgery, and the lactate fits the blood loss shown by the fall in haemoglobin."
+  }
+ ]
 }
