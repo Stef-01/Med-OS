@@ -77,6 +77,8 @@ export function envelope(st, raw, now) {
 
 const readLedger = () => (fs.existsSync(LEDGER) ? JSON.parse(fs.readFileSync(LEDGER, 'utf8')) : { note: 'import-amsa.mjs progress: one entry per AMSA resource id', cases: {} });
 const writeLedger = l => fs.writeFileSync(LEDGER, `${JSON.stringify(l, null, 1)}\n`);
+/* one case into the ledger on disk, never the whole of an old copy: another script (publish-amsa-draft.mjs) may have written since */
+const setCase = (ledger, id, v) => { const d = readLedger(); d.cases[id] = v; writeLedger(d); ledger.cases = d.cases; };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const ask = process.env.ANTHROPIC_API_KEY ? (await import('./lib/claude.mjs')).claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
