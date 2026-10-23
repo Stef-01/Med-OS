@@ -2,14 +2,11 @@
  "note": "import-amsa.mjs progress: one entry per AMSA resource id",
  "cases": {
   "187": {
-   "status": "failed",
-   "at": "2026-10-23T10:33:41Z",
+   "status": "shipped",
+   "at": "2026-10-23T11:01:47Z",
    "title": "Chest Pain History 1",
-   "gates": [],
-   "blockers": [
-    "Part 2 checklist (items 23–39) and part2.expect, sized against the 5-minute Part 2: Part 2 carries 15 scored checkbox items plus James's interjections, inside a 5-minute block that runs four questions at about 90 s each (about 6 min). Several items overlap the ISBAR and the diagnosis answer: item 24 (systematic ECG read) and item 25 (inferior STEMI); item 28 (other bloods) and items 23/27. Item 36 (explain to James, consent, offer to call his wife) has no question of its own and has to be squeezed in while the candidate is answering the registrar or examiner. As written, a competent candidate cannot reliably earn every Part 2 item in time.",
-    "Checklist item 33 (critical): The critical item bundles withholding GTN, which is safety-critical in hypotension or suspected RV infarction, with requesting V4R, which is good practice but not safety-critical. A candidate who safely withholds GTN but forgets right-sided leads would fail a critical item."
-   ]
+   "station": "amsa-187",
+   "by": "publish-amsa-draft.mjs"
   },
   "188": {
    "status": "shipped",
@@ -37,6 +34,13 @@
     "examiner": "claude-opus-5-5"
    },
    "imaging": 2
+  },
+  "199": {
+   "status": "shipped",
+   "at": "2026-10-23T11:05:06Z",
+   "title": "Chest Pain History 2",
+   "station": "amsa-199",
+   "by": "publish-amsa-draft.mjs"
   },
   "212": {
    "status": "shipped",
@@ -85,6 +89,18 @@
     "examiner": "claude-opus-5-5"
    },
    "imaging": 1
+  },
+  "223": {
+   "status": "shipped",
+   "at": "2026-10-23T10:55:37Z",
+   "title": "Chest Pain History 3",
+   "station": "amsa-223",
+   "rounds": 2,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 2
   },
   "310": {
    "status": "shipped",
@@ -185,17 +201,11 @@
    "by": "publish-amsa-draft.mjs"
   },
   "626": {
-   "status": "requeued",
-   "at": "2026-10-23T05:51:13Z",
+   "status": "shipped",
+   "at": "2026-10-23T11:02:29Z",
    "title": "Chest Pain History 10",
    "station": "amsa-626",
-   "rounds": 3,
-   "models": {
-    "writer": "claude-opus-5-5",
-    "examiner": "claude-opus-5-5"
-   },
-   "imaging": 2,
-   "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
+   "by": "publish-amsa-draft.mjs"
   },
   "633": {
    "status": "shipped",
