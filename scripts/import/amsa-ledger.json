@@ -154,6 +154,15 @@
    },
    "imaging": 0
   },
+  "301": {
+   "status": "failed",
+   "at": "2026-10-23T12:35:06Z",
+   "title": "Diabetes Exam 1",
+   "gates": [],
+   "blockers": [
+    "Part 2 overall: expect[2] (management), expect[3] (explanation and safety netting), checklist items 28-32 and 34-37, part2.patient: In the house format, four questions in 5 minutes leaves about 75 s each. Part 2 carries 15 checklist items, 9 of them critical. The management answer has six areas: glucose with three sub-items, eyes with the follow-up interval, BP and kidneys, lipids and adherence, feet with risk class, and smoking and alcohol. Question 4 asks the candidate to explain all the complications, cover foot, eye and hypo/driving red flags (two of them critical), and answer three questions from Jack, all in about 75 s. A competent candidate cannot reach every expected point, so the critical items in Questions 3 and 4 become a test of speed. Jack's 'Not more needles, is it?' also reopens management in Question 4, when Question 3 has already covered it."
+   ]
+  },
   "307": {
    "status": "shipped",
    "at": "2026-10-23T11:39:16Z",
@@ -193,6 +202,18 @@
    "title": "Altered Conscious State History 1",
    "station": "amsa-355",
    "by": "publish-amsa-draft.mjs"
+  },
+  "357": {
+   "status": "shipped",
+   "at": "2026-10-23T12:30:55Z",
+   "title": "Cranial Nerve Examination 1",
+   "station": "amsa-357",
+   "rounds": 4,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 2
   },
   "374": {
    "status": "shipped",
@@ -245,13 +266,11 @@
    "imaging": 0
   },
   "418": {
-   "status": "failed",
-   "at": "2026-10-23T12:24:43Z",
+   "status": "shipped",
+   "at": "2026-10-23T12:50:47Z",
    "title": "Cough History 4",
-   "gates": [],
-   "blockers": [
-    "Checklist item 35 (with item 29, the diagnosis tiers and the explanation's 'Diagnosis' paragraph): Symptoms began about 48 hours after discharge, so by strict definition (onset 48 hours or more after admission, while in hospital) this is community-acquired pneumonia, and the station admits as much. Item 29 accepts CAP as the leading diagnosis. Item 35, though, only credits amoxicillin+clavulanate (or piperacillin+tazobactam with a reason). A candidate who calls it moderate-severity CAP (CURB-65 2, SMART-COP 3) and gives the eTG moderate CAP regimen is following the guideline, yet fails the item. The explanation also states as fact that 'pneumonia starting within a few days of discharge is managed as hospital-acquired for antibiotic choice' without saying where that comes from. That is a judgement call, not a definition eTG sets."
-   ]
+   "station": "amsa-418",
+   "by": "publish-amsa-draft.mjs"
   },
   "420": {
    "status": "shipped",
