@@ -27,6 +27,13 @@
    },
    "imaging": 1
   },
+  "190": {
+   "status": "shipped",
+   "at": "2026-10-23T13:53:10Z",
+   "title": "Dizziness History 1",
+   "station": "amsa-190",
+   "by": "publish-amsa-draft.mjs"
+  },
   "196": {
    "status": "shipped",
    "at": "2026-10-23T07:38:55Z",
@@ -53,6 +60,18 @@
    "title": "Chest Pain History 2",
    "station": "amsa-199",
    "by": "publish-amsa-draft.mjs"
+  },
+  "200": {
+   "status": "failed",
+   "at": "2026-10-23T13:33:11Z",
+   "title": "Dyspnoea History 1",
+   "gates": [],
+   "blockers": [
+    "part2.expect[0] (ISBAR model answer), Assessment line, against checklist items 24.2, 25 and 26: The model ISBAR would not earn the items it is meant to show. It says only 'X-ray: cardiomegaly, pulmonary oedema, bilateral effusions', but critical item 24.2 needs upper lobe diversion and alveolar (batwing) oedema named. expect[1] only says 'X-ray findings', so the diagnosis answer does not earn 24.2 either. The ECG line ('old LVH with strain, no acute change') leaves out sinus tachycardia and no AF, which item 25 asks for. The bloods line ('BNP 1,280, creatinine 104 (baseline 88)') leaves out eGFR, hyponatraemia, Hb, TSH and LFTs, which item 26 asks for. As a result, a candidate who copies the model answer fails a critical item.",
+    "Checklist items 25 and 26 (sizing for a 90-second ISBAR): The ISBAR has about 90 seconds to cover observations, a systematic X-ray read, the ECG and bloods. Item 26 also asks for the sodium, LFTs and eGFR, and item 25 asks for 'no flutter or heart block' plus a troponin justification. Troponin is already scored in 33.3. Together this is too much to fit in a handover.",
+    "part2.ask[2] vs checklist items 33.1, 33.2 (critical), 33.3 and 34: The question asks the candidate to 'Outline your management of Kathy now, here in general practice'. Critical items 33.1 (IV furosemide) and 33.2 (echo), plus the troponin and longer-term items, are about care in hospital and after discharge. A candidate who answers the question as written loses two critical items.",
+    "part2.ask[3] vs checklist item 38 (critical): The question asks only for 'warning signs to watch for while she waits'. Critical item 38 also needs 'after discharge, call 000', and the descriptor says both parts are required. The cue does not invite the second part, so this is unfair."
+   ]
   },
   "203": {
    "status": "shipped",
@@ -353,13 +372,11 @@
    "note": "converter blockers fixed by hand, then passed a fresh examiner review; minor notes applied"
   },
   "599": {
-   "status": "failed",
-   "at": "2026-10-23T13:32:51Z",
+   "status": "shipped",
+   "at": "2026-10-23T13:50:56Z",
    "title": "Dysphagia 1",
-   "gates": [],
-   "blockers": [
-    "Checklist item 37 (critical), Part 2 expect[3] safety-netting bullet, and explain 'Safety netting' section: Chest pain is grouped with fever and coughing with eating as needing 'urgent review'. Chest pain is a 000/ED symptom for a 65-year-old 40 pack-year smoker with an ulcerated oesophageal tumour 9 days after endoscopic biopsy, whether the cause is perforation, a fistula or a cardiac event. A critical safety-netting item that under-triages chest pain teaches unsafe practice."
-   ]
+   "station": "amsa-599",
+   "by": "publish-amsa-draft.mjs"
   },
   "625": {
    "status": "shipped",
