@@ -114,10 +114,12 @@ ${ex.map((s, i) => `<example_${i + 1}>\n${JSON.stringify(s)}\n</example_${i + 1}
 const SPECIALTY_ALIASES = { Otolaryngology: 'Otorhinolaryngology', ENT: 'Otorhinolaryngology', 'Ear, Nose and Throat': 'Otorhinolaryngology', 'Ear, Nose and Throat Surgery': 'Otorhinolaryngology' };
 export function normalize(draft) {
   if (Array.isArray(draft.specialty)) draft = { ...draft, specialty: [...new Set(draft.specialty.map(s => SPECIALTY_ALIASES[s] || s))] };
+  /* a bare < or > before a number ("SpO2 <92%") is not HTML: say it in words */
+  const words = t => (typeof t === 'string' ? t.replace(/<\s*(?=[\d.])/g, 'below ').replace(/>\s*(?=[\d.])/g, 'above ') : t);
   const item = i => {
-    if (i.t === 'heading' || i.t === 'info') return { id: i.id, t: i.t, x: i.x };
-    const kids = (i.kids || []).filter(k => String(k.x || '').trim()).map(k => ({ id: k.id, t: 'checkbox', x: k.x, ...(k.crit ? { crit: true } : {}), ...(k.d ? { d: k.d } : {}) }));
-    return { id: i.id, t: 'checkbox', x: i.x, ...(i.crit ? { crit: true } : {}), ...(i.d ? { d: i.d } : {}), ...(kids.length ? { kids } : {}) };
+    if (i.t === 'heading' || i.t === 'info') return { id: i.id, t: i.t, x: words(i.x) };
+    const kids = (i.kids || []).filter(k => String(k.x || '').trim()).map(k => ({ id: k.id, t: 'checkbox', x: words(k.x), ...(k.crit ? { crit: true } : {}), ...(k.d ? { d: words(k.d) } : {}) }));
+    return { id: i.id, t: 'checkbox', x: words(i.x), ...(i.crit ? { crit: true } : {}), ...(i.d ? { d: words(i.d) } : {}), ...(kids.length ? { kids } : {}) };
   };
   const out = { ...draft, check: (draft.check || []).map(item) };
   if (draft.demo) { const d = { ...draft.demo }; if (!(d.weight > 0)) delete d.weight; if (!d.pregnant) delete d.pregnant; if (!d.postpartum) delete d.postpartum; out.demo = d; }
