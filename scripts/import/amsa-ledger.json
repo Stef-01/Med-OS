@@ -1,0 +1,28 @@
+{
+ "note": "import-amsa.mjs progress: one entry per AMSA resource id",
+ "cases": {
+  "187": {
+   "status": "failed",
+   "at": "2026-10-23T05:38:36Z",
+   "title": "Chest Pain History 1",
+   "gates": [],
+   "blockers": [
+    "part2.handover[Observations].obs.rows (13:25 and 13:40 notes), the model interpretation and checklist item 20: The Part 2 observation chart says aspirin, GTN, IV morphine with an antiemetic, a second cannula and 'STEMI pathway activated, cath lab ready' were all given or done, and shows the pain falling to 3/10. This happens whatever the candidate did in Part 1. It contradicts the patient script, where the pain stays at 7/10, sweaty and restless, if nothing is done. It also undermines the marking of items 25, 26, 27 and 29, and the words 'STEMI pathway activated' give away the diagnosis before the candidate reads the ECG. The model read ('after aspirin and GTN 6/10, after IV morphine 3/10') and item 20 ('pain improving with treatment') assume treatment the candidate may not have given.",
+    "Item 25, item 29 and the guide ('Credit for Part 1 actions'): The ECG is held back until Part 2, but the guide credits STEMI pathway and cath lab activation (item 25) in Part 1. Activating the cath lab on the history alone, with no ECG showing STEMI, is the wrong practice to reward. Item 29 also requires 'no RV infarction' before GTN, which the candidate cannot check in Part 1 because the V4R result is only given in Part 2. Examiners will mark Part 1 GTN inconsistently.",
+    "Part 2 overall (items 20–35 and the five 'ask' questions plus James's two questions): Part 2 is not achievable in 5 minutes. It has 16 scored items: obs, a 5-part ECG read, diagnosis and three differentials, bloods, ABCDE, antiplatelets and anticoagulation, analgesia, reperfusion including the rural scenario, 4-part secondary prevention, explanation and consent, ED escalation and discharge warning signs. On top of that come five examiner questions and two patient questions. Candidates will fail on time, not on knowledge."
+   ]
+  },
+  "188": {
+   "status": "shipped",
+   "at": "2026-10-23T05:51:33Z",
+   "title": "Cardiovascular Examination 1",
+   "station": "amsa-188",
+   "rounds": 2,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 1
+  }
+ }
+}
