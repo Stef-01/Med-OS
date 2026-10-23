@@ -62,14 +62,11 @@
    "by": "publish-amsa-draft.mjs"
   },
   "204": {
-   "status": "failed",
-   "at": "2026-10-23T12:10:37Z",
+   "status": "shipped",
+   "at": "2026-10-23T12:34:11Z",
    "title": "Cough History 3",
-   "gates": [],
-   "blockers": [
-    "check (Interpretation section, after item 28) vs part2.ask[1] / part2.expect[1]: Part 2 question 2 asks for the most likely diagnosis AND differentials with justification, but no checklist item rewards differentials. Items 27–28 credit only the TB call. A candidate who weighs pneumonia, lung cancer, PE and melioidosis well earns nothing for it, and one who gives no differentials loses nothing. The task is not marked.",
-    "guide (paragraphs 1 and 2) vs check item 32 (crit): The rules for crediting critical item 32 contradict each other. Paragraph 1 credits it if the candidate offers a mask OR moves her to a separate room at any point, including Part 1. Paragraph 2 requires a mask AND a separate room in Part 2. The item text also requires P2/N95 respirators for staff, which a candidate masking her in Part 1 would rarely say. Examiners will mark a critical item inconsistently."
-   ]
+   "station": "amsa-204",
+   "by": "publish-amsa-draft.mjs"
   },
   "212": {
    "status": "shipped",
@@ -291,6 +288,18 @@
    "title": "Altered Sensations History 1",
    "station": "amsa-477",
    "rounds": 4,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 0
+  },
+  "576": {
+   "status": "shipped",
+   "at": "2026-10-23T12:25:27Z",
+   "title": "Cough History 5",
+   "station": "amsa-576",
+   "rounds": 2,
    "models": {
     "writer": "claude-opus-5-5",
     "examiner": "claude-opus-5-5"
