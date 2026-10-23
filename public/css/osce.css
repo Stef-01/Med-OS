@@ -1008,9 +1008,10 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-lab-t th, .os-lab-t td { padding:4px 10px; border-bottom:1px solid #ececec; text-align:left; vertical-align:top; font-weight:400; }
 .os-lab-t thead tr:last-child th { color:#7a7a7a; border-top:1px solid #d6d6d6; border-bottom:1px solid #d6d6d6; white-space:nowrap; }
 .os-lab-t thead .os-lab-v { text-align:right; }
-.os-lab-t tbody .os-lab-n { font-weight:700; color:#1f1f1f; min-width:8.5em; }
+.os-lab-t tbody .os-lab-n { font-weight:700; color:#1f1f1f; min-width:6.5em; }
 .os-lab-t .os-lab-v { text-align:right; white-space:nowrap; color:#1f1f1f; }
-.os-lab-t .os-lab-r { color:#6b6b6b; min-width:7.5em; }
+.os-lab-t .os-lab-r { color:#6b6b6b; min-width:6em; }
+.os-lab-t .os-lab-v.os-lab-tx { white-space:normal; text-align:left; min-width:7em; }   /* a worded result wraps, as a lab prints it */
 .os-lab-t tbody tr:last-child > * { border-bottom:0; }
 .os-lab-t .os-lab-ab { color:#c8102e; font-weight:700; }
 .os-lab-t .os-lab-ab i { font-style:normal; font-weight:700; margin-right:4px; font-size:.82em; vertical-align:2px; }
@@ -1020,5 +1021,6 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-prs-slide .os-lab { max-width:820px; }
 .os-prs-slide .os-lab-t { font-size:clamp(15px, 3.6vw, 22px); }
 .os-prs-slide .os-lab-t .os-lab-n small { font-size:.8em; }
-.os-lab-t thead .os-lab-r { white-space:normal; }
-@media (max-width:360px) { .os-lab-t th, .os-lab-t td { padding:4px 7px; } .os-lab-t tbody .os-lab-n { min-width:6.5em; } .os-lab-t .os-lab-r { min-width:6em; } }
+.os-lab-t thead tr:last-child th.os-lab-r { white-space:normal; }   /* outranks the header row's nowrap: "Ref. Range (Units)" may take two lines on a phone */
+@media (max-width:480px) { .os-lab-t th, .os-lab-t td { padding:4px 6px; } .os-lab-t tbody .os-lab-n { min-width:5.5em; } .os-lab-t .os-lab-r { min-width:5em; } .os-lab-t .os-lab-v.os-lab-tx { min-width:5em; } }
+@media (max-width:360px) { .os-prs-slide .os-lab-t { font-size:14px; } .os-lab-t .os-lab-r { overflow-wrap:anywhere; } }   /* a long unit (mL/min/1.73 m^2) breaks rather than push the table wide */

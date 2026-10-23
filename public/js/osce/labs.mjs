@@ -29,20 +29,25 @@ export function cleanLabs(labs) {
   return out.length ? out : null;
 }
 
-/* a printed range as bounds: "115-165", "115 to 165", "-2 to +2", "<5", "below 5", ">60", "above 60", "≤ 30" */
+/* a printed range as bounds: "115-165", "115 to 165", "-2 to +2", "<5", "below 5", ">60", "above 60", "≤ 30"; words after
+   the numbers ("≥10 indicates immunity", "3.0 to 7.7 (random)") are the lab's and do not change the bounds */
+const RANGE = /^([+-]?\d+(?:\.\d+)?)\s*(?:-|to)\s*([+-]?\d+(?:\.\d+)?)(?=\s|$)/i, UPPER = /^(<=|<|≤|below|under|less than)\s*([+-]?\d+(?:\.\d+)?)(?=\s|$)/i, LOWER = /^(>=|>|≥|above|over|more than|greater than)\s*([+-]?\d+(?:\.\d+)?)(?=\s|$)/i;
 export function refBounds(r) {
-  const s = String(r || '').replace(/−|–/g, '-').trim(), n = '([+-]?\\d+(?:\\.\\d+)?)';
+  const s = String(r || '').replace(/−|–/g, '-').trim();
   let m;
-  if ((m = s.match(new RegExp(`^${n}\\s*(?:-|to)\\s*${n}$`, 'i')))) return { lo: +m[1], hi: +m[2] };
-  if ((m = s.match(new RegExp(`^(?:<|≤|<=|below|under|less than)\\s*${n}$`, 'i')))) return { lo: null, hi: +m[1], strict: !/≤|<=/.test(s) };
-  if ((m = s.match(new RegExp(`^(?:>|≥|>=|above|over|more than|greater than)\\s*${n}$`, 'i')))) return { lo: +m[1], hi: null, strict: !/≥|>=/.test(s) };
+  if ((m = s.match(RANGE))) return { lo: +m[1], hi: +m[2], rest: s.slice(m[0].length).trim() };
+  if ((m = s.match(UPPER))) return { lo: null, hi: +m[2], strict: !/≤|<=/.test(m[1]), rest: s.slice(m[0].length).trim() };
+  if ((m = s.match(LOWER))) return { lo: +m[2], hi: null, strict: !/≥|>=/.test(m[1]), rest: s.slice(m[0].length).trim() };
   return null;
 }
-/* the flag a numeric result should carry against its range ('' inside it); null when either is not a number */
+/* the flag a numeric result should carry against its range ('' inside it); null when either is not a number, or when a
+   censored result ("<40", ">90") could fall either side */
 export function expectedFlag(v, r) {
   const m = String(v || '').replace(/,/g, '').match(/^([<>]?)\s*([+-]?\d+(?:\.\d+)?)$/), b = refBounds(r);
-  if (!m || m[1] || !b) return null;
+  if (!m || !b) return null;
   const x = +m[2];
+  if (m[1] === '<') return b.lo != null ? (x <= b.lo ? 'L' : null) : x <= b.hi ? '' : null;
+  if (m[1] === '>') return b.hi != null ? (x >= b.hi ? 'H' : null) : x >= b.lo ? '' : null;
   if (b.lo != null && (b.strict && b.hi == null ? x <= b.lo : x < b.lo)) return 'L';
   if (b.hi != null && (b.strict && b.lo == null ? x >= b.hi : x > b.hi)) return 'H';
   return '';
@@ -60,11 +65,11 @@ export function labFlagProblems(labs) {
 
 /* "115 to 165" prints as a lab prints it, "115-165"; a range with a sign keeps its words ("-2 to +2") */
 export function refText(r) {
-  const b = refBounds(r), s = String(r || '');
-  if (b && b.lo != null && b.hi != null && b.lo >= 0 && !/[+-]/.test(s.replace(/^\s*\d/, ''))) return `${s.match(/[\d.]+/g)[0]}-${s.match(/[\d.]+/g)[1]}`;
-  if (b && b.lo == null) return `${/≤|<=/.test(s) ? '≤' : '<'}${b.hi}`;
-  if (b && b.hi == null) return `${/≥|>=/.test(s) ? '≥' : '>'}${b.lo}`;
-  return s;
+  const s = String(r || '').replace(/−|–/g, '-').trim(), b = refBounds(s);
+  if (!b) return s;
+  const m = s.match(RANGE) || s.match(UPPER) || s.match(LOWER), tail = b.rest ? ` ${b.rest}` : '';
+  if (b.lo != null && b.hi != null) return /^[+-]|\s[+-]/.test(m[0]) || /[+]/.test(m[0]) || b.lo < 0 ? `${m[1]} to ${m[2]}${tail}` : `${m[1]}-${m[2]}${tail}`;
+  return b.lo == null ? `${b.strict ? '<' : '≤'}${m[2]}${tail}` : `${b.strict ? '>' : '≥'}${m[2]}${tail}`;
 }
 const refCell = r => [r.r ? esc(refText(r.r)) : '', r.u ? `(${esc(r.u)})` : ''].filter(Boolean).join(' ');
 
@@ -73,7 +78,7 @@ export function labsHtml(labs, { label = '' } = {}) {
   return `<div class="os-lab" role="group"${label ? ` aria-label="${esc(label)}"` : ''}>${panels.map(p => {
     const cols = p.cols || ['Result'];
     return `<table class="os-lab-t"><thead>${p.title ? `<tr class="os-lab-p"><th colspan="${cols.length + 2}">${esc(p.title)}</th></tr>` : ''}<tr><th class="os-lab-n">Test</th>${cols.map(c => `<th class="os-lab-v">${esc(c)}</th>`).join('')}<th class="os-lab-r">Ref. Range (Units)</th></tr></thead><tbody>${p.rows.map(r =>
-      `<tr${r.t ? '' : ' class="os-lab-c"'}><th class="os-lab-n" scope="row">${esc(r.t)}${r.n ? `<small>${esc(r.n)}</small>` : ''}</th>${r.v.map((v, i) => `<td class="os-lab-v${r.f[i] ? ' os-lab-ab' : ''}">${r.f[i] ? '<i aria-hidden="true">*</i>' : ''}${esc(v)}${r.f[i] ? `<span class="kit-sr"> (${r.f[i] === 'A' ? 'abnormal' : /H/.test(r.f[i]) ? 'high' : 'low'})</span>` : ''}</td>`).join('')}<td class="os-lab-r">${refCell(r)}</td></tr>`).join('')}</tbody></table>`;
+      `<tr${r.t ? '' : ' class="os-lab-c"'}><th class="os-lab-n" scope="row">${esc(r.t)}${r.n ? `<small>${esc(r.n)}</small>` : ''}</th>${r.v.map((v, i) => `<td class="os-lab-v${/^[<>≤≥]?\s*[+-]?\d/.test(v) ? '' : ' os-lab-tx'}${r.f[i] ? ' os-lab-ab' : ''}">${r.f[i] ? '<i aria-hidden="true">*</i>' : ''}${esc(v)}${r.f[i] ? `<span class="kit-sr"> (${r.f[i] === 'A' ? 'abnormal' : /H/.test(r.f[i]) ? 'high' : 'low'})</span>` : ''}</td>`).join('')}<td class="os-lab-r">${refCell(r)}</td></tr>`).join('')}</tbody></table>`;
   }).join('')}</div>`;
 }
 

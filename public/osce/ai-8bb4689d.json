@@ -388,32 +388,249 @@
    {
     "label": "HIV testing",
     "kind": "micro",
-    "result": "<table><tbody><tr><th>Test</th><th>Sample</th><th>Result</th></tr><tr><td>HIV-1/2 antigen and antibody immunoassay (fourth generation, screening)</td><td>First visit</td><td>Reactive (repeat reactive)</td></tr><tr><td>HIV-1 Western blot (supplementary)</td><td>First visit</td><td>Positive: antibodies to envelope (gp160, gp120, gp41), core (p24) and polymerase (p66, p51) proteins</td></tr><tr><td>HIV-2 antibody</td><td>First visit</td><td>Not detected</td></tr><tr><td>HIV-1/2 antigen and antibody immunoassay</td><td>Second visit (taken when the result was given)</td><td>Reactive</td></tr></tbody></table><p>Laboratory comment: second sample tested to confirm the patient's identity, as the National HIV Testing Policy recommends.</p>",
-    "model": "<ul><li><strong>Read:</strong> a reactive fourth-generation screen confirmed by a positive HIV-1 Western blot, HIV-2 negative, and reactive again on a second, separately collected sample.</li><li><strong>For Daniel:</strong> confirmed HIV-1 infection, with no doubt about a false positive or a labelling error. With a negative test 14 months ago and a seroconversion-like illness (fever, sore throat, rash) 2 months ago, this is recent infection.</li><li><strong>What it changes:</strong> the diagnosis can be discussed with certainty; he needs ART, and partner notification covers his partners since the last negative test.</li></ul>"
+    "result": "<p>Laboratory comment: second sample tested to confirm the patient's identity, as the National HIV Testing Policy recommends.</p>",
+    "model": "<ul><li><strong>Read:</strong> a reactive fourth-generation screen confirmed by a positive HIV-1 Western blot, HIV-2 negative, and reactive again on a second, separately collected sample.</li><li><strong>For Daniel:</strong> confirmed HIV-1 infection, with no doubt about a false positive or a labelling error. With a negative test 14 months ago and a seroconversion-like illness (fever, sore throat, rash) 2 months ago, this is recent infection.</li><li><strong>What it changes:</strong> the diagnosis can be discussed with certainty; he needs ART, and partner notification covers his partners since the last negative test.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "HIV-1/2 antigen and antibody immunoassay (fourth generation, screening)",
+        "v": "Reactive",
+        "n": "repeat reactive; First visit"
+       },
+       {
+        "t": "HIV-1 Western blot (supplementary)",
+        "v": "Positive: antibodies to envelope (gp160, gp120, gp41), core (p24) and polymerase (p66, p51) proteins",
+        "n": "First visit"
+       },
+       {
+        "t": "HIV-2 antibody",
+        "v": "Not detected",
+        "n": "First visit"
+       },
+       {
+        "t": "HIV-1/2 antigen and antibody immunoassay",
+        "v": "Reactive",
+        "n": "Second visit (taken when the result was given)"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "CD4 count and viral load",
     "kind": "bloods",
-    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Lymphocytes</td><td>1.9 ×10<sup>9</sup>/L</td><td>1.0 to 4.0</td></tr><tr><td>CD4 count</td><td>410 cells/microlitre L</td><td>500 to 1,500</td></tr><tr><td>CD4 percentage</td><td>22% L</td><td>30 to 60</td></tr><tr><td>CD4:CD8 ratio</td><td>0.43 L</td><td>above 1.0</td></tr><tr><td>HIV-1 viral load (RNA)</td><td>86,000 copies/mL (log<sub>10</sub> 4.93) H</td><td>Not detected (lower limit of quantification 20 copies/mL)</td></tr></tbody></table>",
-    "model": "<ul><li><strong>Read:</strong> CD4 410 cells/microlitre (22%), below the usual range but well above 200 (and above 14%), with an inverted CD4:CD8 ratio, typical of HIV. Viral load 86,000 copies/mL (log 4.9) is high.</li><li><strong>For Daniel:</strong> his immune system is largely intact: this is not AIDS, and he does not need Pneumocystis prophylaxis (below 200 or below 14%). The high viral load, usual in recent infection, means he is very infectious now; the flu-like illness 2 months ago and the negative test 14 months ago fit recent infection.</li><li><strong>What it changes:</strong> start ART soon, whatever the CD4 count; condoms with Sam, testing and PrEP for Sam, and PEP after any exposure until he has been undetectable for 6 months. Viral load is the main marker of treatment response (expect undetectable within 3 to 6 months), and the CD4 count shows immune recovery.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> CD4 410 cells/microlitre (22%), below the usual range but well above 200 (and above 14%), with an inverted CD4:CD8 ratio, typical of HIV. Viral load 86,000 copies/mL (log 4.9) is high.</li><li><strong>For Daniel:</strong> his immune system is largely intact: this is not AIDS, and he does not need Pneumocystis prophylaxis (below 200 or below 14%). The high viral load, usual in recent infection, means he is very infectious now; the flu-like illness 2 months ago and the negative test 14 months ago fit recent infection.</li><li><strong>What it changes:</strong> start ART soon, whatever the CD4 count; condoms with Sam, testing and PrEP for Sam, and PEP after any exposure until he has been undetectable for 6 months. Viral load is the main marker of treatment response (expect undetectable within 3 to 6 months), and the CD4 count shows immune recovery.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "Lymphocytes",
+        "v": "1.9",
+        "u": "10^9/L",
+        "r": "1.0 to 4.0"
+       },
+       {
+        "t": "CD4 count",
+        "v": "410",
+        "u": "cells/microlitre",
+        "r": "500 to 1,500",
+        "f": "L"
+       },
+       {
+        "t": "CD4 percentage",
+        "v": "22",
+        "u": "%",
+        "r": "30 to 60",
+        "f": "L"
+       },
+       {
+        "t": "CD4:CD8 ratio",
+        "v": "0.43",
+        "r": "above 1.0",
+        "f": "L"
+       },
+       {
+        "t": "HIV-1 viral load (RNA)",
+        "v": "86,000",
+        "u": "copies/mL",
+        "r": "Not detected (lower limit of quantification 20 copies/mL)",
+        "f": "H",
+        "n": "log10 4.93"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "HIV genotype and HLA-B*5701",
     "kind": "other",
-    "result": "<table><tbody><tr><th>Test</th><th>Result</th></tr><tr><td>HIV-1 genotypic resistance test (reverse transcriptase and protease)</td><td>HIV-1 subtype B. No resistance-associated mutations detected. Predicted susceptible to all nucleoside and non-nucleoside reverse transcriptase inhibitors and protease inhibitors.</td></tr><tr><td>Integrase genotype</td><td>Not tested (not routine at baseline; request if integrase inhibitor resistance is suspected)</td></tr><tr><td>HLA-B*5701</td><td>Not detected</td></tr></tbody></table>",
-    "model": "<ul><li><strong>Read:</strong> subtype B virus with no transmitted resistance in reverse transcriptase or protease. Integrase was not tested, which is standard when there has been no integrase inhibitor exposure (he has never taken PrEP). HLA-B*5701 negative.</li><li><strong>For Daniel:</strong> any recommended first-line regimen (an integrase inhibitor plus two nucleoside reverse transcriptase inhibitors, often one tablet a day) should work. HLA-B*5701 negative means abacavir can be used if it is chosen; a positive result would rule it out because of the risk of a severe hypersensitivity reaction.</li><li><strong>What it changes:</strong> nothing needs to wait: the s100 prescriber can start ART at the next visit. ART generally need not wait for the genotype, but here it is already back.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> subtype B virus with no transmitted resistance in reverse transcriptase or protease. Integrase was not tested, which is standard when there has been no integrase inhibitor exposure (he has never taken PrEP). HLA-B*5701 negative.</li><li><strong>For Daniel:</strong> any recommended first-line regimen (an integrase inhibitor plus two nucleoside reverse transcriptase inhibitors, often one tablet a day) should work. HLA-B*5701 negative means abacavir can be used if it is chosen; a positive result would rule it out because of the risk of a severe hypersensitivity reaction.</li><li><strong>What it changes:</strong> nothing needs to wait: the s100 prescriber can start ART at the next visit. ART generally need not wait for the genotype, but here it is already back.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "HIV-1 genotypic resistance test (reverse transcriptase and protease)",
+        "v": "HIV-1 subtype B. No resistance-associated mutations detected. Predicted susceptible to all nucleoside and non-nucleoside reverse transcriptase inhibitors and protease inhibitors."
+       },
+       {
+        "t": "Integrase genotype",
+        "v": "Not tested",
+        "n": "not routine at baseline; request if integrase inhibitor resistance is suspected"
+       },
+       {
+        "t": "HLA-B*5701",
+        "v": "Not detected"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "Hepatitis and STI screen",
     "kind": "micro",
-    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>Hepatitis B surface antigen (HBsAg)</td><td>Negative</td><td>Negative</td></tr><tr><td>Hepatitis B core antibody (anti-HBc), total</td><td>Negative</td><td>Negative</td></tr><tr><td>Hepatitis B surface antibody (anti-HBs)</td><td>below 10 mIU/mL</td><td>10 mIU/mL or more indicates immunity</td></tr><tr><td>Hepatitis A IgG</td><td>Not detected</td><td>Detected indicates immunity</td></tr><tr><td>Hepatitis C antibody</td><td>Not detected</td><td>Not detected</td></tr><tr><td>Syphilis treponemal antibody (EIA)</td><td>Non-reactive</td><td>Non-reactive</td></tr><tr><td>Chlamydia trachomatis NAAT: throat swab, anorectal swab, first-pass urine</td><td>Not detected at all three sites</td><td>Not detected</td></tr><tr><td>Neisseria gonorrhoeae NAAT: throat swab, anorectal swab, first-pass urine</td><td>Not detected at all three sites</td><td>Not detected</td></tr></tbody></table>",
-    "model": "<ul><li><strong>Read:</strong> hepatitis B surface antigen, core antibody and surface antibody all negative: never infected and not immune. Hepatitis A not immune. Hepatitis C, syphilis, chlamydia and gonorrhoea (throat, anorectal and urine) negative.</li><li><strong>For Daniel:</strong> no co-infection, so the choice of ART is not constrained by hepatitis B. He is unprotected against hepatitis A and B, both relevant to men who have sex with men.</li><li><strong>What it changes:</strong> hepatitis A and B vaccination (people with HIV may need extra or higher doses and a post-vaccination anti-HBs check), with the other vaccines recommended for people living with HIV. Some tests may still be in their window period after the condomless sex 3 months ago, so the STI screen is repeated in 3 months and regularly after that.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> hepatitis B surface antigen, core antibody and surface antibody all negative: never infected and not immune. Hepatitis A not immune. Hepatitis C, syphilis, chlamydia and gonorrhoea (throat, anorectal and urine) negative.</li><li><strong>For Daniel:</strong> no co-infection, so the choice of ART is not constrained by hepatitis B. He is unprotected against hepatitis A and B, both relevant to men who have sex with men.</li><li><strong>What it changes:</strong> hepatitis A and B vaccination (people with HIV may need extra or higher doses and a post-vaccination anti-HBs check), with the other vaccines recommended for people living with HIV. Some tests may still be in their window period after the condomless sex 3 months ago, so the STI screen is repeated in 3 months and regularly after that.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "Hepatitis B surface antigen (HBsAg)",
+        "v": "Negative",
+        "r": "Negative"
+       },
+       {
+        "t": "Hepatitis B core antibody (anti-HBc), total",
+        "v": "Negative",
+        "r": "Negative"
+       },
+       {
+        "t": "Hepatitis B surface antibody (anti-HBs)",
+        "v": "<10",
+        "u": "mIU/mL",
+        "r": "≥10 indicates immunity",
+        "f": "L"
+       },
+       {
+        "t": "Hepatitis A IgG",
+        "v": "Not detected",
+        "r": "Detected indicates immunity"
+       },
+       {
+        "t": "Hepatitis C antibody",
+        "v": "Not detected",
+        "r": "Not detected"
+       },
+       {
+        "t": "Syphilis treponemal antibody (EIA)",
+        "v": "Non-reactive",
+        "r": "Non-reactive"
+       },
+       {
+        "t": "Chlamydia trachomatis NAAT: throat swab, anorectal swab, first-pass urine",
+        "v": "Not detected at all three sites",
+        "r": "Not detected"
+       },
+       {
+        "t": "Neisseria gonorrhoeae NAAT: throat swab, anorectal swab, first-pass urine",
+        "v": "Not detected at all three sites",
+        "r": "Not detected"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "Baseline blood tests",
     "kind": "bloods",
-    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin</td><td>148 g/L</td><td>135 to 175</td></tr><tr><td>White cell count</td><td>5.2 ×10<sup>9</sup>/L</td><td>4.0 to 11.0</td></tr><tr><td>Neutrophils</td><td>2.8 ×10<sup>9</sup>/L</td><td>2.0 to 7.5</td></tr><tr><td>Platelets</td><td>214 ×10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>Sodium</td><td>140 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>4.1 mmol/L</td><td>3.5 to 5.2</td></tr><tr><td>Creatinine</td><td>84 µmol/L</td><td>60 to 110</td></tr><tr><td>eGFR</td><td>above 90 mL/min/1.73 m<sup>2</sup></td><td>above 60</td></tr><tr><td>ALT</td><td>24 U/L</td><td>below 40</td></tr><tr><td>Bilirubin</td><td>9 µmol/L</td><td>below 20</td></tr><tr><td>Albumin</td><td>44 g/L</td><td>35 to 50</td></tr><tr><td>Total cholesterol</td><td>4.6 mmol/L</td><td>below 5.5</td></tr><tr><td>Glucose (random)</td><td>5.2 mmol/L</td><td>3.0 to 7.7</td></tr></tbody></table><p>Urinalysis (today): no protein, blood or glucose.</p>",
-    "model": "<ul><li><strong>Read:</strong> normal blood count, kidney function (creatinine 84, eGFR above 90), liver tests, cholesterol and glucose, and a normal urinalysis.</li><li><strong>For Daniel:</strong> no organ problem that limits the choice of ART.</li><li><strong>What it changes:</strong> these are the baselines for monitoring on ART (kidney function and urine on tenofovir-containing regimens, liver tests, lipids and glucose); none of them delays starting treatment.</li></ul>"
+    "result": "<p>Urinalysis (today): no protein, blood or glucose.</p>",
+    "model": "<ul><li><strong>Read:</strong> normal blood count, kidney function (creatinine 84, eGFR above 90), liver tests, cholesterol and glucose, and a normal urinalysis.</li><li><strong>For Daniel:</strong> no organ problem that limits the choice of ART.</li><li><strong>What it changes:</strong> these are the baselines for monitoring on ART (kidney function and urine on tenofovir-containing regimens, liver tests, lipids and glucose); none of them delays starting treatment.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "Haemoglobin",
+        "v": "148",
+        "u": "g/L",
+        "r": "135 to 175"
+       },
+       {
+        "t": "White cell count",
+        "v": "5.2",
+        "u": "10^9/L",
+        "r": "4.0 to 11.0"
+       },
+       {
+        "t": "Neutrophils",
+        "v": "2.8",
+        "u": "10^9/L",
+        "r": "2.0 to 7.5"
+       },
+       {
+        "t": "Platelets",
+        "v": "214",
+        "u": "10^9/L",
+        "r": "150 to 400"
+       },
+       {
+        "t": "Sodium",
+        "v": "140",
+        "u": "mmol/L",
+        "r": "135 to 145"
+       },
+       {
+        "t": "Potassium",
+        "v": "4.1",
+        "u": "mmol/L",
+        "r": "3.5 to 5.2"
+       },
+       {
+        "t": "Creatinine",
+        "v": "84",
+        "u": "µmol/L",
+        "r": "60 to 110"
+       },
+       {
+        "t": "eGFR",
+        "v": ">90",
+        "u": "mL/min/1.73 m^2",
+        "r": "above 60"
+       },
+       {
+        "t": "ALT",
+        "v": "24",
+        "u": "U/L",
+        "r": "below 40"
+       },
+       {
+        "t": "Bilirubin",
+        "v": "9",
+        "u": "µmol/L",
+        "r": "below 20"
+       },
+       {
+        "t": "Albumin",
+        "v": "44",
+        "u": "g/L",
+        "r": "35 to 50"
+       },
+       {
+        "t": "Total cholesterol",
+        "v": "4.6",
+        "u": "mmol/L",
+        "r": "below 5.5"
+       },
+       {
+        "t": "Glucose (random)",
+        "v": "5.2",
+        "u": "mmol/L",
+        "r": "3.0 to 7.7"
+       }
+      ]
+     }
+    ]
    }
   ],
   "ask": [

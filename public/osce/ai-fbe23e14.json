@@ -282,14 +282,95 @@
    {
     "label": "Cord blood gas, paired artery and vein",
     "kind": "gas",
-    "result": "<p>Paired samples from a double-clamped segment of cord, analysed at 14:20.</p><table><tr><th>Test</th><th>Result: artery</th><th>Vein</th><th>Reference range (cord artery, term)</th></tr><tr><td>pH</td><td>7.18 L</td><td>7.25</td><td>7.20 to 7.35</td></tr><tr><td>pCO2</td><td>54 mmHg</td><td>46 mmHg</td><td>35 to 70</td></tr><tr><td>pO2</td><td>15 mmHg</td><td>24 mmHg</td><td>10 to 30</td></tr><tr><td>Bicarbonate</td><td>20 mmol/L</td><td>20 mmol/L</td><td>17 to 27</td></tr><tr><td>Base excess</td><td>-8 mmol/L</td><td>-7 mmol/L</td><td>-8 to +2</td></tr><tr><td>Lactate</td><td>5.4 mmol/L</td><td>4.7 mmol/L</td><td>below 6.0</td></tr></table>",
-    "model": "<p>A valid paired sample: the artery has the lower pH (7.18 against 7.25), the higher pCO2 (54 against 46) and the lower pO2, so both vessels were sampled and labelled correctly. The arterial pH of 7.18 is a mild acidaemia; a base excess of -8 at the lower limit with a lactate of 5.4 shows a mild metabolic component, and the pCO2 of 54 is within the cord range. This is the picture of a short hypoxic insult, which fits the 8 minutes of fetal bradycardia before birth.</p><p>It does not meet the gas criteria for therapeutic hypothermia (pH 7.0 or below, or a base deficit of 12 mmol/L or more, in the first hour), and with an Apgar of 7 at 5 minutes and the quick recovery it is reassuring. It does not end the assessment: a baby who needed resuscitation has neurological observations for encephalopathy over the first hours, because cooling must start within 6 hours of birth if signs appear.</p>"
+    "result": "<p>Paired samples from a double-clamped segment of cord, analysed at 14:20.</p>",
+    "model": "<p>A valid paired sample: the artery has the lower pH (7.18 against 7.25), the higher pCO2 (54 against 46) and the lower pO2, so both vessels were sampled and labelled correctly. The arterial pH of 7.18 is a mild acidaemia; a base excess of -8 at the lower limit with a lactate of 5.4 shows a mild metabolic component, and the pCO2 of 54 is within the cord range. This is the picture of a short hypoxic insult, which fits the 8 minutes of fetal bradycardia before birth.</p><p>It does not meet the gas criteria for therapeutic hypothermia (pH 7.0 or below, or a base deficit of 12 mmol/L or more, in the first hour), and with an Apgar of 7 at 5 minutes and the quick recovery it is reassuring. It does not end the assessment: a baby who needed resuscitation has neurological observations for encephalopathy over the first hours, because cooling must start within 6 hours of birth if signs appear.</p>",
+    "labs": [
+     {
+      "title": "Reference ranges: cord artery, term",
+      "cols": [
+       "Artery",
+       "Vein"
+      ],
+      "rows": [
+       {
+        "t": "pH",
+        "v": [
+         "7.18",
+         "7.25"
+        ],
+        "r": "7.20 to 7.35",
+        "f": [
+         "L",
+         ""
+        ]
+       },
+       {
+        "t": "pCO2",
+        "v": [
+         "54",
+         "46"
+        ],
+        "u": "mmHg",
+        "r": "35 to 70"
+       },
+       {
+        "t": "pO2",
+        "v": [
+         "15",
+         "24"
+        ],
+        "u": "mmHg",
+        "r": "10 to 30"
+       },
+       {
+        "t": "Bicarbonate",
+        "v": [
+         "20",
+         "20"
+        ],
+        "u": "mmol/L",
+        "r": "17 to 27"
+       },
+       {
+        "t": "Base excess",
+        "v": [
+         "-8",
+         "-7"
+        ],
+        "u": "mmol/L",
+        "r": "-8 to +2"
+       },
+       {
+        "t": "Lactate",
+        "v": [
+         "5.4",
+         "4.7"
+        ],
+        "u": "mmol/L",
+        "r": "below 6.0"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "Blood glucose at 30 minutes of age",
     "kind": "bloods",
-    "result": "<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>Blood glucose, point-of-care (heel prick), 14:42</td><td>2.2 mmol/L L</td><td>2.6 mmol/L or above (treatment threshold)</td></tr></table><p>The baby has not fed yet.</p>",
-    "model": "<p>2.2 mmol/L is hypoglycaemia: below the 2.6 mmol/L threshold the Safer Care Victoria guidance treats, and common after resuscitation in a baby who has not yet fed, because the hypoxic stress uses up glucose. A meter is less accurate at low values, so send a laboratory glucose, but do not wait for it.</p><p>Give 40% glucose gel 0.5 mL/kg (1.7 mL for 3.4 kg) into the cheek, then a breastfeed or expressed colostrum, and recheck the BGL 30 to 60 minutes later. If it stays below 2.6 mmol/L despite gel and a feed, or the baby is unwell, start IV 10% glucose (2 mL/kg = 6.8 mL, then an infusion). Hypoglycaemia after a hypoxic birth adds to the risk of brain injury, so it is one more reason for special care nursery admission.</p>"
+    "result": "<p>The baby has not fed yet.</p>",
+    "model": "<p>2.2 mmol/L is hypoglycaemia: below the 2.6 mmol/L threshold the Safer Care Victoria guidance treats, and common after resuscitation in a baby who has not yet fed, because the hypoxic stress uses up glucose. A meter is less accurate at low values, so send a laboratory glucose, but do not wait for it.</p><p>Give 40% glucose gel 0.5 mL/kg (1.7 mL for 3.4 kg) into the cheek, then a breastfeed or expressed colostrum, and recheck the BGL 30 to 60 minutes later. If it stays below 2.6 mmol/L despite gel and a feed, or the baby is unwell, start IV 10% glucose (2 mL/kg = 6.8 mL, then an infusion). Hypoglycaemia after a hypoxic birth adds to the risk of brain injury, so it is one more reason for special care nursery admission.</p>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "Blood glucose, point-of-care (heel prick), 14:42",
+        "v": "2.2",
+        "u": "mmol/L",
+        "r": "≥2.6 (treatment threshold)",
+        "f": "L"
+       }
+      ]
+     }
+    ]
    }
   ],
   "ask": [

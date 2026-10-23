@@ -345,8 +345,72 @@
    {
     "label": "Bloods (today)",
     "kind": "bloods",
-    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin</td><td>128 g/L</td><td>115 to 165</td></tr><tr><td>White cell count</td><td>13.6 ×10<sup>9</sup>/L H</td><td>4.0 to 11.0</td></tr><tr><td>Neutrophils</td><td>10.8 ×10<sup>9</sup>/L H</td><td>2.0 to 7.5</td></tr><tr><td>Lymphocytes</td><td>1.9 ×10<sup>9</sup>/L</td><td>1.0 to 4.0</td></tr><tr><td>Monocytes</td><td>0.8 ×10<sup>9</sup>/L</td><td>0.2 to 1.0</td></tr><tr><td>Eosinophils</td><td>0.1 ×10<sup>9</sup>/L</td><td>0.0 to 0.5</td></tr><tr><td>Platelets</td><td>362 ×10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>CRP</td><td>58 mg/L H</td><td>below 5</td></tr><tr><td>HbA1c</td><td>5.3% (34 mmol/mol)</td><td>below 6.0% (42 mmol/mol); 6.5% (48 mmol/mol) or more is diagnostic of diabetes</td></tr></tbody></table>",
-    "model": "<ul><li><strong>Read:</strong> neutrophilia (white cells 13.6, neutrophils 10.8) and a CRP of 58, with normal haemoglobin and platelets. HbA1c 5.3% is normal.</li><li><strong>For Mrs Marchetti:</strong> a bacterial infection with a systemic response, in keeping with the abscess and her low-grade fever. With a normal blood pressure, an alert patient and only a mild fever she is not septic. The normal HbA1c rules out undiagnosed diabetes as a contributor.</li><li><strong>What it changes:</strong> she can be treated as an outpatient with drainage, antibiotics and close review, and these values are the baseline for that review. Inflammatory markers cannot tell infection from cancer: a raised CRP does not explain away the mass.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> neutrophilia (white cells 13.6, neutrophils 10.8) and a CRP of 58, with normal haemoglobin and platelets. HbA1c 5.3% is normal.</li><li><strong>For Mrs Marchetti:</strong> a bacterial infection with a systemic response, in keeping with the abscess and her low-grade fever. With a normal blood pressure, an alert patient and only a mild fever she is not septic. The normal HbA1c rules out undiagnosed diabetes as a contributor.</li><li><strong>What it changes:</strong> she can be treated as an outpatient with drainage, antibiotics and close review, and these values are the baseline for that review. Inflammatory markers cannot tell infection from cancer: a raised CRP does not explain away the mass.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "Haemoglobin",
+        "v": "128",
+        "u": "g/L",
+        "r": "115 to 165"
+       },
+       {
+        "t": "White cell count",
+        "v": "13.6",
+        "u": "10^9/L",
+        "r": "4.0 to 11.0",
+        "f": "H"
+       },
+       {
+        "t": "Neutrophils",
+        "v": "10.8",
+        "u": "10^9/L",
+        "r": "2.0 to 7.5",
+        "f": "H"
+       },
+       {
+        "t": "Lymphocytes",
+        "v": "1.9",
+        "u": "10^9/L",
+        "r": "1.0 to 4.0"
+       },
+       {
+        "t": "Monocytes",
+        "v": "0.8",
+        "u": "10^9/L",
+        "r": "0.2 to 1.0"
+       },
+       {
+        "t": "Eosinophils",
+        "v": "0.1",
+        "u": "10^9/L",
+        "r": "0.0 to 0.5"
+       },
+       {
+        "t": "Platelets",
+        "v": "362",
+        "u": "10^9/L",
+        "r": "150 to 400"
+       },
+       {
+        "t": "CRP",
+        "v": "58",
+        "u": "mg/L",
+        "r": "below 5",
+        "f": "H"
+       },
+       {
+        "t": "HbA1c",
+        "v": "5.3",
+        "u": "%",
+        "r": "below 6.0 (42 mmol/mol); 6.5% (48 mmol/mol) or more is diagnostic of diabetes",
+        "n": "34 mmol/mol"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "Ultrasound of the left breast and axilla",

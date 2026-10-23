@@ -397,14 +397,120 @@
    {
     "label": "Hepatitis B serology",
     "kind": "micro",
-    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>HBsAg (surface antigen)</td><td>Positive (confirmed by neutralisation)</td><td>Negative</td></tr><tr><td>Anti-HBs (surface antibody)</td><td>Negative (3 mIU/mL)</td><td>10 mIU/mL or more indicates immunity</td></tr><tr><td>Anti-HBc (core antibody), total</td><td>Positive</td><td>Negative</td></tr><tr><td>Anti-HBc IgM</td><td>Negative</td><td>Negative</td></tr><tr><td>HBeAg (e antigen)</td><td>Negative</td><td>Negative</td></tr><tr><td>Anti-HBe (e antibody)</td><td>Positive</td><td>Negative</td></tr><tr><td>HBV DNA (viral load)</td><td>850 IU/mL (log<sub>10</sub> 2.93) H</td><td>Not detected (lower limit of quantification 10 IU/mL)</td></tr></tbody></table>",
-    "model": "<ul><li><strong>Read, marker by marker:</strong> HBsAg positive means hepatitis B virus is present now. Total anti-HBc positive means he has been infected; IgM negative means it is not a recent, acute infection. Anti-HBs negative means he has not cleared the virus. HBeAg negative with anti-HBe positive and an HBV DNA of 850 IU/mL (below 2,000) means low-level replication.</li><li><strong>For Mr Nguyen:</strong> chronic hepatitis B, almost certainly acquired from his mother at birth or in early childhood, now in the HBeAg-negative phase with a low viral load. One sample cannot fix the phase: on the GESA definitions, HBeAg-negative chronic infection (the old inactive carrier state) needs an HBV DNA below 2,000 IU/mL with a normal ALT (30 U/L or less in men), and his ALT is 52, so serial ALT and HBV DNA, the fibrosis assessment and the other causes of a raised ALT decide between chronic infection and chronic hepatitis. This is not past cleared infection (HBsAg negative, anti-HBc positive) and not vaccine immunity (anti-HBs positive alone).</li><li><strong>What it changes:</strong> an HBsAg-positive person on immunosuppression, including the azathioprine and prednisolone he takes now and any anti-TNF agent, can reactivate the virus and have a severe hepatitis flare or liver failure, and a low viral load does not remove that risk. He needs antiviral prophylaxis (tenofovir or entecavir) started before the biologic and continued during and after it, urgent hepatology or gastroenterology input, repeat liver tests and a fibrosis assessment, and testing and vaccination of his partner and household.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read, marker by marker:</strong> HBsAg positive means hepatitis B virus is present now. Total anti-HBc positive means he has been infected; IgM negative means it is not a recent, acute infection. Anti-HBs negative means he has not cleared the virus. HBeAg negative with anti-HBe positive and an HBV DNA of 850 IU/mL (below 2,000) means low-level replication.</li><li><strong>For Mr Nguyen:</strong> chronic hepatitis B, almost certainly acquired from his mother at birth or in early childhood, now in the HBeAg-negative phase with a low viral load. One sample cannot fix the phase: on the GESA definitions, HBeAg-negative chronic infection (the old inactive carrier state) needs an HBV DNA below 2,000 IU/mL with a normal ALT (30 U/L or less in men), and his ALT is 52, so serial ALT and HBV DNA, the fibrosis assessment and the other causes of a raised ALT decide between chronic infection and chronic hepatitis. This is not past cleared infection (HBsAg negative, anti-HBc positive) and not vaccine immunity (anti-HBs positive alone).</li><li><strong>What it changes:</strong> an HBsAg-positive person on immunosuppression, including the azathioprine and prednisolone he takes now and any anti-TNF agent, can reactivate the virus and have a severe hepatitis flare or liver failure, and a low viral load does not remove that risk. He needs antiviral prophylaxis (tenofovir or entecavir) started before the biologic and continued during and after it, urgent hepatology or gastroenterology input, repeat liver tests and a fibrosis assessment, and testing and vaccination of his partner and household.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "HBsAg (surface antigen)",
+        "v": "Positive",
+        "r": "Negative",
+        "n": "confirmed by neutralisation",
+        "f": "A"
+       },
+       {
+        "t": "Anti-HBs (surface antibody)",
+        "v": "3",
+        "u": "mIU/mL",
+        "r": "≥10 indicates immunity",
+        "n": "Negative",
+        "f": "L"
+       },
+       {
+        "t": "Anti-HBc (core antibody), total",
+        "v": "Positive",
+        "r": "Negative",
+        "f": "A"
+       },
+       {
+        "t": "Anti-HBc IgM",
+        "v": "Negative",
+        "r": "Negative"
+       },
+       {
+        "t": "HBeAg (e antigen)",
+        "v": "Negative",
+        "r": "Negative"
+       },
+       {
+        "t": "Anti-HBe (e antibody)",
+        "v": "Positive",
+        "r": "Negative",
+        "f": "A"
+       },
+       {
+        "t": "HBV DNA (viral load)",
+        "v": "850",
+        "u": "IU/mL",
+        "r": "Not detected (lower limit of quantification 10 IU/mL)",
+        "f": "H",
+        "n": "log10 2.93"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "Other pre-treatment screening",
     "kind": "micro",
-    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>QuantiFERON-TB Gold Plus: nil tube</td><td>0.05 IU/mL</td><td>8.0 or less</td></tr><tr><td>QuantiFERON: TB1 antigen minus nil</td><td>0.02 IU/mL</td><td>below 0.35</td></tr><tr><td>QuantiFERON: TB2 antigen minus nil</td><td>0.04 IU/mL</td><td>below 0.35</td></tr><tr><td>QuantiFERON: mitogen minus nil (positive control)</td><td>above 10 IU/mL</td><td>0.5 or more (valid)</td></tr><tr><td>QuantiFERON interpretation</td><td>Negative</td><td>Negative</td></tr><tr><td>Hepatitis C antibody</td><td>Not detected</td><td>Not detected</td></tr><tr><td>HIV antigen and antibody</td><td>Not detected</td><td>Not detected</td></tr><tr><td>Varicella zoster IgG</td><td>Detected</td><td>Detected indicates immunity</td></tr><tr><td>Hepatitis A IgG</td><td>Detected</td><td>Detected indicates immunity</td></tr></tbody></table>",
-    "model": "<ul><li><strong>Read:</strong> the TB antigen responses (0.02 and 0.04 IU/mL) are well below the 0.35 cut-off and the mitogen control is strongly positive, so this is a valid negative IGRA, not an indeterminate one. Hepatitis C and HIV negative. Immune to varicella and hepatitis A.</li><li><strong>For Mr Nguyen:</strong> no evidence of latent TB. A negative IGRA does not completely exclude it in someone born in a high-incidence country who is on steroids and azathioprine, which can blunt the response; the strong mitogen response is reassuring. His BCG does not affect an IGRA.</li><li><strong>What it changes:</strong> no latent TB treatment is needed before anti-TNF therapy, but he should report cough, fever, night sweats or weight loss on treatment, and any new TB exposure. He needs no varicella or hepatitis A vaccine; live vaccines are avoided on immunosuppression in any case.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> the TB antigen responses (0.02 and 0.04 IU/mL) are well below the 0.35 cut-off and the mitogen control is strongly positive, so this is a valid negative IGRA, not an indeterminate one. Hepatitis C and HIV negative. Immune to varicella and hepatitis A.</li><li><strong>For Mr Nguyen:</strong> no evidence of latent TB. A negative IGRA does not completely exclude it in someone born in a high-incidence country who is on steroids and azathioprine, which can blunt the response; the strong mitogen response is reassuring. His BCG does not affect an IGRA.</li><li><strong>What it changes:</strong> no latent TB treatment is needed before anti-TNF therapy, but he should report cough, fever, night sweats or weight loss on treatment, and any new TB exposure. He needs no varicella or hepatitis A vaccine; live vaccines are avoided on immunosuppression in any case.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "QuantiFERON-TB Gold Plus: nil tube",
+        "v": "0.05",
+        "u": "IU/mL",
+        "r": "≤8.0"
+       },
+       {
+        "t": "QuantiFERON: TB1 antigen minus nil",
+        "v": "0.02",
+        "u": "IU/mL",
+        "r": "below 0.35"
+       },
+       {
+        "t": "QuantiFERON: TB2 antigen minus nil",
+        "v": "0.04",
+        "u": "IU/mL",
+        "r": "below 0.35"
+       },
+       {
+        "t": "QuantiFERON: mitogen minus nil (positive control)",
+        "v": ">10",
+        "u": "IU/mL",
+        "r": "≥0.5 (valid)"
+       },
+       {
+        "t": "QuantiFERON interpretation",
+        "v": "Negative",
+        "r": "Negative"
+       },
+       {
+        "t": "Hepatitis C antibody",
+        "v": "Not detected",
+        "r": "Not detected"
+       },
+       {
+        "t": "HIV antigen and antibody",
+        "v": "Not detected",
+        "r": "Not detected"
+       },
+       {
+        "t": "Varicella zoster IgG",
+        "v": "Detected",
+        "r": "Detected indicates immunity"
+       },
+       {
+        "t": "Hepatitis A IgG",
+        "v": "Detected",
+        "r": "Detected indicates immunity"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "Chest X-ray",
@@ -415,14 +521,144 @@
    {
     "label": "Blood tests",
     "kind": "bloods",
-    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin</td><td>121 g/L L</td><td>135 to 175</td></tr><tr><td>MCV</td><td>84 fL</td><td>80 to 100</td></tr><tr><td>White cell count</td><td>7.2 ×10<sup>9</sup>/L</td><td>4.0 to 11.0</td></tr><tr><td>Neutrophils</td><td>5.1 ×10<sup>9</sup>/L</td><td>2.0 to 7.5</td></tr><tr><td>Lymphocytes</td><td>1.3 ×10<sup>9</sup>/L</td><td>1.0 to 4.0</td></tr><tr><td>Platelets</td><td>385 ×10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>CRP</td><td>34 mg/L H</td><td>below 5</td></tr><tr><td>Sodium</td><td>138 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>4.0 mmol/L</td><td>3.5 to 5.2</td></tr><tr><td>Creatinine</td><td>78 µmol/L</td><td>60 to 110</td></tr><tr><td>eGFR</td><td>above 90 mL/min/1.73 m<sup>2</sup></td><td>above 60</td></tr><tr><td>Bilirubin</td><td>11 µmol/L</td><td>below 20</td></tr><tr><td>ALT</td><td>52 U/L H</td><td>below 40</td></tr><tr><td>AST</td><td>38 U/L</td><td>below 40</td></tr><tr><td>GGT</td><td>42 U/L</td><td>below 60</td></tr><tr><td>ALP</td><td>86 U/L</td><td>30 to 110</td></tr><tr><td>Albumin</td><td>33 g/L L</td><td>35 to 50</td></tr><tr><td>INR</td><td>1.0</td><td>0.9 to 1.2</td></tr></tbody></table>",
-    "model": "<ul><li><strong>Read:</strong> mild normocytic anaemia (121), CRP 34, low albumin (33) and a high-normal platelet count: an inflammatory picture. ALT 52 is mildly raised (above the laboratory limit of 40, and above 30, the upper limit Australian hepatitis B guidance uses for men), with normal AST, GGT, ALP and bilirubin. INR, platelets and creatinine are normal.</li><li><strong>For Mr Nguyen:</strong> the anaemia, CRP and low albumin fit active Crohn's disease (iron studies are worth checking). The ALT rise may be hepatitis B activity, azathioprine or the Crohn's disease itself. Normal bilirubin, INR and platelets show no liver failure, and the low albumin with a normal INR reflects inflammation rather than poor liver function, but fibrosis still needs assessing.</li><li><strong>What it changes:</strong> repeat the liver tests and arrange a fibrosis assessment (for example elastography) with the specialist. Normal kidney function matters because tenofovir needs renal monitoring. A normal white cell and lymphocyte count means no azathioprine marrow toxicity.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> mild normocytic anaemia (121), CRP 34, low albumin (33) and a high-normal platelet count: an inflammatory picture. ALT 52 is mildly raised (above the laboratory limit of 40, and above 30, the upper limit Australian hepatitis B guidance uses for men), with normal AST, GGT, ALP and bilirubin. INR, platelets and creatinine are normal.</li><li><strong>For Mr Nguyen:</strong> the anaemia, CRP and low albumin fit active Crohn's disease (iron studies are worth checking). The ALT rise may be hepatitis B activity, azathioprine or the Crohn's disease itself. Normal bilirubin, INR and platelets show no liver failure, and the low albumin with a normal INR reflects inflammation rather than poor liver function, but fibrosis still needs assessing.</li><li><strong>What it changes:</strong> repeat the liver tests and arrange a fibrosis assessment (for example elastography) with the specialist. Normal kidney function matters because tenofovir needs renal monitoring. A normal white cell and lymphocyte count means no azathioprine marrow toxicity.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "Haemoglobin",
+        "v": "121",
+        "u": "g/L",
+        "r": "135 to 175",
+        "f": "L"
+       },
+       {
+        "t": "MCV",
+        "v": "84",
+        "u": "fL",
+        "r": "80 to 100"
+       },
+       {
+        "t": "White cell count",
+        "v": "7.2",
+        "u": "10^9/L",
+        "r": "4.0 to 11.0"
+       },
+       {
+        "t": "Neutrophils",
+        "v": "5.1",
+        "u": "10^9/L",
+        "r": "2.0 to 7.5"
+       },
+       {
+        "t": "Lymphocytes",
+        "v": "1.3",
+        "u": "10^9/L",
+        "r": "1.0 to 4.0"
+       },
+       {
+        "t": "Platelets",
+        "v": "385",
+        "u": "10^9/L",
+        "r": "150 to 400"
+       },
+       {
+        "t": "CRP",
+        "v": "34",
+        "u": "mg/L",
+        "r": "below 5",
+        "f": "H"
+       },
+       {
+        "t": "Sodium",
+        "v": "138",
+        "u": "mmol/L",
+        "r": "135 to 145"
+       },
+       {
+        "t": "Potassium",
+        "v": "4.0",
+        "u": "mmol/L",
+        "r": "3.5 to 5.2"
+       },
+       {
+        "t": "Creatinine",
+        "v": "78",
+        "u": "µmol/L",
+        "r": "60 to 110"
+       },
+       {
+        "t": "eGFR",
+        "v": ">90",
+        "u": "mL/min/1.73 m^2",
+        "r": "above 60"
+       },
+       {
+        "t": "Bilirubin",
+        "v": "11",
+        "u": "µmol/L",
+        "r": "below 20"
+       },
+       {
+        "t": "ALT",
+        "v": "52",
+        "u": "U/L",
+        "r": "below 40",
+        "f": "H"
+       },
+       {
+        "t": "AST",
+        "v": "38",
+        "u": "U/L",
+        "r": "below 40"
+       },
+       {
+        "t": "GGT",
+        "v": "42",
+        "u": "U/L",
+        "r": "below 60"
+       },
+       {
+        "t": "ALP",
+        "v": "86",
+        "u": "U/L",
+        "r": "30 to 110"
+       },
+       {
+        "t": "Albumin",
+        "v": "33",
+        "u": "g/L",
+        "r": "35 to 50",
+        "f": "L"
+       },
+       {
+        "t": "INR",
+        "v": "1.0",
+        "r": "0.9 to 1.2"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "Faecal calprotectin (taken at the start of the flare)",
     "kind": "other",
-    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>Faecal calprotectin (collected 6 weeks ago)</td><td>640 µg/g H</td><td>below 50</td></tr></tbody></table>",
-    "model": "<ul><li><strong>Read:</strong> 640 µg/g, more than ten times the upper limit of 50.</li><li><strong>For Mr Nguyen:</strong> active intestinal inflammation at the start of the flare, matching his symptoms, CRP and albumin. It is a marker of inflammation, not a diagnosis: infection, NSAIDs and cancer can raise it too, and his Crohn's disease was diagnosed by colonoscopy and biopsy.</li><li><strong>What it changes:</strong> it supports escalating to advanced therapy, and repeat results will track his response to treatment between colonoscopies. In someone without a diagnosis, a low result makes IBD unlikely and a raised one prompts referral or colonoscopy.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> 640 µg/g, more than ten times the upper limit of 50.</li><li><strong>For Mr Nguyen:</strong> active intestinal inflammation at the start of the flare, matching his symptoms, CRP and albumin. It is a marker of inflammation, not a diagnosis: infection, NSAIDs and cancer can raise it too, and his Crohn's disease was diagnosed by colonoscopy and biopsy.</li><li><strong>What it changes:</strong> it supports escalating to advanced therapy, and repeat results will track his response to treatment between colonoscopies. In someone without a diagnosis, a low result makes IBD unlikely and a raised one prompts referral or colonoscopy.</li></ul>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "Faecal calprotectin (collected 6 weeks ago)",
+        "v": "640",
+        "u": "µg/g",
+        "r": "below 50",
+        "f": "H"
+       }
+      ]
+     }
+    ]
    }
   ],
   "ask": [

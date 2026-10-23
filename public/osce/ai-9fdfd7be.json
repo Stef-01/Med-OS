@@ -422,8 +422,81 @@
    {
     "label": "Venous blood gas (at your arrival)",
     "kind": "gas",
-    "result": "<p><strong>Venous blood gas</strong> (13:52, on room air)</p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>pH</td><td>7.31 L</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>40 mmHg</td><td>37 to 50</td></tr><tr><td>Bicarbonate</td><td>20 mmol/L L</td><td>22 to 28</td></tr><tr><td>Base excess</td><td>-5 mmol/L L</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>3.8 mmol/L H</td><td>below 2.0</td></tr><tr><td>Haemoglobin</td><td>98 g/L L (pre-operative 126)</td><td>115 to 165</td></tr><tr><td>Sodium</td><td>138 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>4.2 mmol/L</td><td>3.5 to 5.2</td></tr><tr><td>Ionised calcium</td><td>1.14 mmol/L</td><td>1.12 to 1.32</td></tr><tr><td>Glucose</td><td>9.8 mmol/L H</td><td>3.0 to 7.7</td></tr></table>",
-    "model": "<ul><li><strong>Read:</strong> venous pH 7.31, bicarbonate 20, base excess -5 and lactate 3.8: a lactic metabolic acidosis with a normal venous pCO2. Haemoglobin 98 g/L against 126 before surgery, a fall of 28 g/L. Glucose 9.8 in a woman with diabetes; potassium and ionised calcium normal.</li><li><strong>Meaning:</strong> hypoperfusion from haemorrhagic shock. A fall of 28 g/L within hours is substantial blood loss, and an early haemoglobin underestimates it because haemodilution has not caught up; the 1 L of crystalloid since will dilute it further.</li><li><strong>Changes:</strong> transfuse red cells now (emergency O negative or group-specific if crossmatched blood is not ready), activate the massive transfusion protocol if bleeding is major, send coagulation and fibrinogen, and repeat the gas and haemoglobin. Withhold metformin and monitor BGL while nil by mouth.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> venous pH 7.31, bicarbonate 20, base excess -5 and lactate 3.8: a lactic metabolic acidosis with a normal venous pCO2. Haemoglobin 98 g/L against 126 before surgery, a fall of 28 g/L. Glucose 9.8 in a woman with diabetes; potassium and ionised calcium normal.</li><li><strong>Meaning:</strong> hypoperfusion from haemorrhagic shock. A fall of 28 g/L within hours is substantial blood loss, and an early haemoglobin underestimates it because haemodilution has not caught up; the 1 L of crystalloid since will dilute it further.</li><li><strong>Changes:</strong> transfuse red cells now (emergency O negative or group-specific if crossmatched blood is not ready), activate the massive transfusion protocol if bleeding is major, send coagulation and fibrinogen, and repeat the gas and haemoglobin. Withhold metformin and monitor BGL while nil by mouth.</li></ul>",
+    "labs": [
+     {
+      "title": "Venous blood gas (13:52, on room air)",
+      "rows": [
+       {
+        "t": "pH",
+        "v": "7.31",
+        "r": "7.32 to 7.42",
+        "f": "L"
+       },
+       {
+        "t": "pCO2",
+        "v": "40",
+        "u": "mmHg",
+        "r": "37 to 50"
+       },
+       {
+        "t": "Bicarbonate",
+        "v": "20",
+        "u": "mmol/L",
+        "r": "22 to 28",
+        "f": "L"
+       },
+       {
+        "t": "Base excess",
+        "v": "-5",
+        "u": "mmol/L",
+        "r": "-2 to +2",
+        "f": "L"
+       },
+       {
+        "t": "Lactate",
+        "v": "3.8",
+        "u": "mmol/L",
+        "r": "below 2.0",
+        "f": "H"
+       },
+       {
+        "t": "Haemoglobin",
+        "v": "98",
+        "u": "g/L",
+        "r": "115 to 165",
+        "f": "L",
+        "n": "pre-operative 126"
+       },
+       {
+        "t": "Sodium",
+        "v": "138",
+        "u": "mmol/L",
+        "r": "135 to 145"
+       },
+       {
+        "t": "Potassium",
+        "v": "4.2",
+        "u": "mmol/L",
+        "r": "3.5 to 5.2"
+       },
+       {
+        "t": "Ionised calcium",
+        "v": "1.14",
+        "u": "mmol/L",
+        "r": "1.12 to 1.32"
+       },
+       {
+        "t": "Glucose",
+        "v": "9.8",
+        "u": "mmol/L",
+        "r": "3.0 to 7.7",
+        "f": "H"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "ECG",

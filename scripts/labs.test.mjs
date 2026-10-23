@@ -34,13 +34,17 @@ test('a gas from two vessels, or a result beside an earlier one: a column each, 
 });
 
 test('ranges as a lab prints them, and the flag each value should carry', () => {
-  assert.deepEqual(refBounds('115 to 160'), { lo: 115, hi: 160 });
   assert.equal(refText('115 to 160'), '115-160');
   assert.equal(refText('3.50-11.00'), '3.50-11.00');
   assert.equal(refText('-2 to +2'), '-2 to +2');
   assert.equal(refText('below 5'), '<5');
   assert.equal(refText('≥ 30'), '≥30');
   assert.equal(refText('Not detected'), 'Not detected');
+  assert.equal(refText('≥10 indicates immunity'), '≥10 indicates immunity');
+  assert.equal(refText('3.0 to 7.7 (random)'), '3.0-7.7 (random)');
+  assert.equal(expectedFlag('3', '≥10 indicates immunity'), 'L');
+  assert.equal(expectedFlag('10', '≥10'), '');
+  assert.deepEqual(refBounds('115 to 160'), { lo: 115, hi: 160, rest: '' });
   assert.equal(expectedFlag('65', '115-165'), 'L');
   assert.equal(expectedFlag('100.5', '80-100'), 'H');
   assert.equal(expectedFlag('100', '80-100'), '');
@@ -48,7 +52,11 @@ test('ranges as a lab prints them, and the flag each value should carry', () => 
   assert.equal(expectedFlag('2.0', '<2.0'), 'H', 'a "<2.0" limit excludes 2.0');
   assert.equal(expectedFlag('1,250', '150-450'), 'H');
   assert.equal(expectedFlag('-9', '-2 to +2'), 'L');
-  assert.equal(expectedFlag('<5', '<5'), null, 'a censored result is not compared');
+  assert.equal(expectedFlag('<5', '<5'), '', 'a censored result inside its range');
+  assert.equal(expectedFlag('<40', '55 to 310'), 'L');
+  assert.equal(expectedFlag('>90', 'above 60'), '');
+  assert.equal(expectedFlag('<10', '≥10 indicates immunity'), 'L');
+  assert.equal(expectedFlag('<60', '55 to 310'), null, 'could be either side');
   assert.equal(expectedFlag('Positive', 'Negative'), null);
 });
 

@@ -318,8 +318,72 @@
    {
     "label": "Booking blood tests",
     "kind": "bloods",
-    "result": "<p>Taken at the booking visit, 9 weeks.</p><table><tbody><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin (g/L)</td><td>128</td><td>110 or above in the first trimester (non-pregnant 115 to 160)</td></tr><tr><td>MCV (fL)</td><td>89</td><td>80 to 100</td></tr><tr><td>White cell count (x10<sup>9</sup>/L)</td><td>8.9</td><td>4.0 to 11.0</td></tr><tr><td>Platelets (x10<sup>9</sup>/L)</td><td>246</td><td>150 to 400</td></tr><tr><td>Blood group</td><td>A RhD positive</td><td></td></tr><tr><td>Red cell antibody screen</td><td>Negative</td><td>Negative</td></tr><tr><td>Rubella IgG</td><td>Immune</td><td>Immune</td></tr><tr><td>Syphilis serology</td><td>Not detected</td><td>Not detected</td></tr><tr><td>Hepatitis B surface antigen</td><td>Not detected</td><td>Not detected</td></tr><tr><td>Hepatitis C antibody</td><td>Not detected</td><td>Not detected</td></tr><tr><td>HIV antigen and antibody</td><td>Not detected</td><td>Not detected</td></tr></tbody></table>",
-    "model": "<p><strong>Read:</strong> haemoglobin 128 g/L, normal for the first trimester, with normal indices and platelets; blood group A RhD positive with no red cell antibodies; rubella immune; syphilis, hepatitis B, hepatitis C and HIV not detected.</p><p><strong>Meaning:</strong> nothing here bears on the NIPT result. RhD positive means anti-D is not needed after amniocentesis or CVS, and the negative blood-borne virus results mean no added risk of passing an infection to the baby during a needle procedure.</p><p><strong>What it changes:</strong> amniocentesis can be offered without anti-D or extra precautions; routine antenatal care continues.</p>"
+    "result": "<p>Taken at the booking visit, 9 weeks.</p>",
+    "model": "<p><strong>Read:</strong> haemoglobin 128 g/L, normal for the first trimester, with normal indices and platelets; blood group A RhD positive with no red cell antibodies; rubella immune; syphilis, hepatitis B, hepatitis C and HIV not detected.</p><p><strong>Meaning:</strong> nothing here bears on the NIPT result. RhD positive means anti-D is not needed after amniocentesis or CVS, and the negative blood-borne virus results mean no added risk of passing an infection to the baby during a needle procedure.</p><p><strong>What it changes:</strong> amniocentesis can be offered without anti-D or extra precautions; routine antenatal care continues.</p>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "Haemoglobin",
+        "v": "128",
+        "u": "g/L",
+        "r": "≥110 in the first trimester (non-pregnant 115 to 160)"
+       },
+       {
+        "t": "MCV",
+        "v": "89",
+        "u": "fL",
+        "r": "80 to 100"
+       },
+       {
+        "t": "White cell count",
+        "v": "8.9",
+        "u": "10^9/L",
+        "r": "4.0 to 11.0"
+       },
+       {
+        "t": "Platelets",
+        "v": "246",
+        "u": "10^9/L",
+        "r": "150 to 400"
+       },
+       {
+        "t": "Blood group",
+        "v": "A RhD positive"
+       },
+       {
+        "t": "Red cell antibody screen",
+        "v": "Negative",
+        "r": "Negative"
+       },
+       {
+        "t": "Rubella IgG",
+        "v": "Immune",
+        "r": "Immune"
+       },
+       {
+        "t": "Syphilis serology",
+        "v": "Not detected",
+        "r": "Not detected"
+       },
+       {
+        "t": "Hepatitis B surface antigen",
+        "v": "Not detected",
+        "r": "Not detected"
+       },
+       {
+        "t": "Hepatitis C antibody",
+        "v": "Not detected",
+        "r": "Not detected"
+       },
+       {
+        "t": "HIV antigen and antibody",
+        "v": "Not detected",
+        "r": "Not detected"
+       }
+      ]
+     }
+    ]
    }
   ],
   "ask": [

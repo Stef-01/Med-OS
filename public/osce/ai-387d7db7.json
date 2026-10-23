@@ -422,8 +422,116 @@
    {
     "label": "Venous blood gas and bloods (on arrival)",
     "kind": "bloods",
-    "result": "<p><strong>Venous blood gas</strong> (23:25, on arrival)</p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>pH</td><td>7.31 L</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>45 mmHg</td><td>37 to 50</td></tr><tr><td>Bicarbonate</td><td>22.5 mmol/L</td><td>22 to 28</td></tr><tr><td>Base excess</td><td>-3 mmol/L L</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>2.4 mmol/L H</td><td>below 2.0</td></tr><tr><td>Sodium</td><td>139 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>3.6 mmol/L</td><td>3.5 to 5.2</td></tr><tr><td>Ionised calcium</td><td>1.16 mmol/L</td><td>1.12 to 1.32</td></tr><tr><td>Glucose</td><td>5.8 mmol/L</td><td>3.0 to 7.7</td></tr></table><p><strong>Bloods</strong> (on arrival)</p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin</td><td>131 g/L</td><td>130 to 180</td></tr><tr><td>White cell count</td><td>13.6 x 10<sup>9</sup>/L H</td><td>4.0 to 11.0</td></tr><tr><td>Platelets</td><td>245 x 10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>INR</td><td>1.1</td><td>0.9 to 1.2</td></tr><tr><td>APTT</td><td>31 seconds</td><td>25 to 38</td></tr><tr><td>Fibrinogen</td><td>2.8 g/L</td><td>2.0 to 4.0</td></tr><tr><td>Group and crossmatch</td><td>O positive, antibody screen negative, 2 units crossmatched</td><td></td></tr></table>",
-    "model": "<ul><li><strong>Read:</strong> venous pH 7.31 with base excess -3 and lactate 2.4 is a mild lactic acidosis; a venous pCO2 of 45 is normal. Hb 131 g/L is at the lower limit; platelets, INR, APTT, fibrinogen and ionised calcium are normal; WCC 13.6 is a stress response. Blood is crossmatched (O positive).</li><li><strong>Meaning:</strong> two parts of the deadly triad are present, hypothermia on arrival and acidosis from hypoperfusion, and coagulopathy is not, yet. An early normal Hb does not exclude significant blood loss, because it falls only as fluid shifts or is given.</li><li><strong>Changes:</strong> keep warming, avoid large volumes of crystalloid, and repeat the gas, Hb and coagulation. If bleeding recurs, give blood early through the massive transfusion protocol and consider tranexamic acid within 3 hours of injury.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> venous pH 7.31 with base excess -3 and lactate 2.4 is a mild lactic acidosis; a venous pCO2 of 45 is normal. Hb 131 g/L is at the lower limit; platelets, INR, APTT, fibrinogen and ionised calcium are normal; WCC 13.6 is a stress response. Blood is crossmatched (O positive).</li><li><strong>Meaning:</strong> two parts of the deadly triad are present, hypothermia on arrival and acidosis from hypoperfusion, and coagulopathy is not, yet. An early normal Hb does not exclude significant blood loss, because it falls only as fluid shifts or is given.</li><li><strong>Changes:</strong> keep warming, avoid large volumes of crystalloid, and repeat the gas, Hb and coagulation. If bleeding recurs, give blood early through the massive transfusion protocol and consider tranexamic acid within 3 hours of injury.</li></ul>",
+    "labs": [
+     {
+      "title": "Venous blood gas (23:25, on arrival)",
+      "rows": [
+       {
+        "t": "pH",
+        "v": "7.31",
+        "r": "7.32 to 7.42",
+        "f": "L"
+       },
+       {
+        "t": "pCO2",
+        "v": "45",
+        "u": "mmHg",
+        "r": "37 to 50"
+       },
+       {
+        "t": "Bicarbonate",
+        "v": "22.5",
+        "u": "mmol/L",
+        "r": "22 to 28"
+       },
+       {
+        "t": "Base excess",
+        "v": "-3",
+        "u": "mmol/L",
+        "r": "-2 to +2",
+        "f": "L"
+       },
+       {
+        "t": "Lactate",
+        "v": "2.4",
+        "u": "mmol/L",
+        "r": "below 2.0",
+        "f": "H"
+       },
+       {
+        "t": "Sodium",
+        "v": "139",
+        "u": "mmol/L",
+        "r": "135 to 145"
+       },
+       {
+        "t": "Potassium",
+        "v": "3.6",
+        "u": "mmol/L",
+        "r": "3.5 to 5.2"
+       },
+       {
+        "t": "Ionised calcium",
+        "v": "1.16",
+        "u": "mmol/L",
+        "r": "1.12 to 1.32"
+       },
+       {
+        "t": "Glucose",
+        "v": "5.8",
+        "u": "mmol/L",
+        "r": "3.0 to 7.7"
+       }
+      ]
+     },
+     {
+      "title": "Bloods (on arrival)",
+      "rows": [
+       {
+        "t": "Haemoglobin",
+        "v": "131",
+        "u": "g/L",
+        "r": "130 to 180"
+       },
+       {
+        "t": "White cell count",
+        "v": "13.6",
+        "u": "10^9/L",
+        "r": "4.0 to 11.0",
+        "f": "H"
+       },
+       {
+        "t": "Platelets",
+        "v": "245",
+        "u": "10^9/L",
+        "r": "150 to 400"
+       },
+       {
+        "t": "INR",
+        "v": "1.1",
+        "r": "0.9 to 1.2"
+       },
+       {
+        "t": "APTT",
+        "v": "31",
+        "u": "seconds",
+        "r": "25 to 38"
+       },
+       {
+        "t": "Fibrinogen",
+        "v": "2.8",
+        "u": "g/L",
+        "r": "2.0 to 4.0"
+       },
+       {
+        "t": "Group and crossmatch",
+        "v": "O positive, antibody screen negative, 2 units crossmatched"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "CT report",

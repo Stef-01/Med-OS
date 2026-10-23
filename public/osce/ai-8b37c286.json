@@ -380,8 +380,177 @@
    {
     "label": "Bloods and venous gas",
     "kind": "bloods",
-    "result": "<p><strong>Bloods</strong></p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin</td><td>141 g/L</td><td>115 to 165</td></tr><tr><td>White cell count</td><td>11.4 x 10<sup>9</sup>/L H</td><td>4.0 to 11.0</td></tr><tr><td>Neutrophils</td><td>9.1 x 10<sup>9</sup>/L H</td><td>2.0 to 7.5</td></tr><tr><td>Platelets</td><td>302 x 10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>CRP</td><td>38 mg/L H</td><td>below 5</td></tr><tr><td>Sodium</td><td>136 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>2.8 mmol/L L</td><td>3.5 to 5.2</td></tr><tr><td>Chloride</td><td>93 mmol/L L</td><td>95 to 110</td></tr><tr><td>Urea</td><td>11.6 mmol/L H</td><td>4.0 to 9.0</td></tr><tr><td>Creatinine</td><td>128 micromol/L H (baseline 78)</td><td>45 to 90</td></tr><tr><td>eGFR</td><td>38 mL/min/1.73 m<sup>2</sup> L (baseline 69)</td><td>above 90</td></tr><tr><td>Magnesium</td><td>0.74 mmol/L</td><td>0.70 to 1.10</td></tr><tr><td>Glucose</td><td>9.6 mmol/L H</td><td>3.0 to 7.7</td></tr><tr><td>Bilirubin</td><td>12 micromol/L</td><td>below 20</td></tr><tr><td>ALP</td><td>88 U/L</td><td>30 to 110</td></tr><tr><td>GGT</td><td>31 U/L</td><td>below 35</td></tr><tr><td>ALT</td><td>24 U/L</td><td>below 30</td></tr><tr><td>Albumin</td><td>36 g/L</td><td>35 to 50</td></tr><tr><td>Lipase</td><td>40 U/L</td><td>below 60</td></tr></table><p><strong>Venous blood gas</strong></p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>pH</td><td>7.43 H</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>46 mmHg</td><td>37 to 50</td></tr><tr><td>Bicarbonate</td><td>30 mmol/L H</td><td>22 to 28</td></tr><tr><td>Base excess</td><td>+6 mmol/L H</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>1.8 mmol/L</td><td>below 2.0</td></tr></table>",
-    "model": "<ul><li><strong>Read:</strong> creatinine 128 against a baseline of 78 (1.6 times) with urea 11.6: acute kidney injury, KDIGO stage 1, prerenal in pattern. Potassium 2.8 (moderate hypokalaemia) and chloride 93 low with bicarbonate 30, base excess +6 and venous pH 7.43: a hypokalaemic, hypochloraemic metabolic alkalosis. Bilirubin, ALP, GGT, ALT and lipase normal; WCC 11.4 with neutrophilia and CRP 38 mildly raised; lactate 1.8 normal; magnesium normal.</li><li><strong>Meaning:</strong> dehydration from vomiting and poor intake, with the kidney injury made worse by perindopril and ibuprofen. Normal liver tests and lipase argue against cholangitis, a stone in the bile duct and pancreatitis. A normal lactate is reassuring but does not exclude ischaemic bowel.</li><li><strong>Changes:</strong> IV crystalloid with IV potassium replacement and an hourly urine output; withhold perindopril, ibuprofen and metformin; BGL monitoring while nil by mouth; repeat UEC and gas after resuscitation.</li></ul>"
+    "result": "",
+    "model": "<ul><li><strong>Read:</strong> creatinine 128 against a baseline of 78 (1.6 times) with urea 11.6: acute kidney injury, KDIGO stage 1, prerenal in pattern. Potassium 2.8 (moderate hypokalaemia) and chloride 93 low with bicarbonate 30, base excess +6 and venous pH 7.43: a hypokalaemic, hypochloraemic metabolic alkalosis. Bilirubin, ALP, GGT, ALT and lipase normal; WCC 11.4 with neutrophilia and CRP 38 mildly raised; lactate 1.8 normal; magnesium normal.</li><li><strong>Meaning:</strong> dehydration from vomiting and poor intake, with the kidney injury made worse by perindopril and ibuprofen. Normal liver tests and lipase argue against cholangitis, a stone in the bile duct and pancreatitis. A normal lactate is reassuring but does not exclude ischaemic bowel.</li><li><strong>Changes:</strong> IV crystalloid with IV potassium replacement and an hourly urine output; withhold perindopril, ibuprofen and metformin; BGL monitoring while nil by mouth; repeat UEC and gas after resuscitation.</li></ul>",
+    "labs": [
+     {
+      "title": "Bloods",
+      "rows": [
+       {
+        "t": "Haemoglobin",
+        "v": "141",
+        "u": "g/L",
+        "r": "115 to 165"
+       },
+       {
+        "t": "White cell count",
+        "v": "11.4",
+        "u": "10^9/L",
+        "r": "4.0 to 11.0",
+        "f": "H"
+       },
+       {
+        "t": "Neutrophils",
+        "v": "9.1",
+        "u": "10^9/L",
+        "r": "2.0 to 7.5",
+        "f": "H"
+       },
+       {
+        "t": "Platelets",
+        "v": "302",
+        "u": "10^9/L",
+        "r": "150 to 400"
+       },
+       {
+        "t": "CRP",
+        "v": "38",
+        "u": "mg/L",
+        "r": "below 5",
+        "f": "H"
+       },
+       {
+        "t": "Sodium",
+        "v": "136",
+        "u": "mmol/L",
+        "r": "135 to 145"
+       },
+       {
+        "t": "Potassium",
+        "v": "2.8",
+        "u": "mmol/L",
+        "r": "3.5 to 5.2",
+        "f": "L"
+       },
+       {
+        "t": "Chloride",
+        "v": "93",
+        "u": "mmol/L",
+        "r": "95 to 110",
+        "f": "L"
+       },
+       {
+        "t": "Urea",
+        "v": "11.6",
+        "u": "mmol/L",
+        "r": "4.0 to 9.0",
+        "f": "H"
+       },
+       {
+        "t": "Creatinine",
+        "v": "128",
+        "u": "µmol/L",
+        "r": "45 to 90",
+        "f": "H",
+        "n": "baseline 78"
+       },
+       {
+        "t": "eGFR",
+        "v": "38",
+        "u": "mL/min/1.73 m^2",
+        "r": "above 90",
+        "f": "L",
+        "n": "baseline 69"
+       },
+       {
+        "t": "Magnesium",
+        "v": "0.74",
+        "u": "mmol/L",
+        "r": "0.70 to 1.10"
+       },
+       {
+        "t": "Glucose",
+        "v": "9.6",
+        "u": "mmol/L",
+        "r": "3.0 to 7.7",
+        "f": "H"
+       },
+       {
+        "t": "Bilirubin",
+        "v": "12",
+        "u": "µmol/L",
+        "r": "below 20"
+       },
+       {
+        "t": "ALP",
+        "v": "88",
+        "u": "U/L",
+        "r": "30 to 110"
+       },
+       {
+        "t": "GGT",
+        "v": "31",
+        "u": "U/L",
+        "r": "below 35"
+       },
+       {
+        "t": "ALT",
+        "v": "24",
+        "u": "U/L",
+        "r": "below 30"
+       },
+       {
+        "t": "Albumin",
+        "v": "36",
+        "u": "g/L",
+        "r": "35 to 50"
+       },
+       {
+        "t": "Lipase",
+        "v": "40",
+        "u": "U/L",
+        "r": "below 60"
+       }
+      ]
+     },
+     {
+      "title": "Venous blood gas",
+      "rows": [
+       {
+        "t": "pH",
+        "v": "7.43",
+        "r": "7.32 to 7.42",
+        "f": "H"
+       },
+       {
+        "t": "pCO2",
+        "v": "46",
+        "u": "mmHg",
+        "r": "37 to 50"
+       },
+       {
+        "t": "Bicarbonate",
+        "v": "30",
+        "u": "mmol/L",
+        "r": "22 to 28",
+        "f": "H"
+       },
+       {
+        "t": "Base excess",
+        "v": "+6",
+        "u": "mmol/L",
+        "r": "-2 to +2",
+        "f": "H"
+       },
+       {
+        "t": "Lactate",
+        "v": "1.8",
+        "u": "mmol/L",
+        "r": "below 2.0"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "ECG",

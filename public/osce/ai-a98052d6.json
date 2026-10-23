@@ -353,14 +353,120 @@
    {
     "label": "Blood results",
     "kind": "bloods",
-    "result": "<p>First bloods, taken when the first cannula was sited.</p><table><tbody><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin (g/L)</td><td>96 L (booking 124)</td><td>100 or above after birth; 105 or above in late pregnancy (non-pregnant 115 to 160)</td></tr><tr><td>White cell count (x10<sup>9</sup>/L)</td><td>15.8</td><td>6 to 17 in late pregnancy, often higher in labour and just after birth (non-pregnant 4.0 to 11.0)</td></tr><tr><td>Platelets (x10<sup>9</sup>/L)</td><td>168</td><td>150 to 400</td></tr><tr><td>INR</td><td>1.1</td><td>0.9 to 1.2</td></tr><tr><td>APTT (seconds)</td><td>27</td><td>25 to 37</td></tr><tr><td>Fibrinogen (g/L)</td><td>2.3 L</td><td>about 4 to 6 at term (non-pregnant 2.0 to 4.0)</td></tr><tr><td>Group and screen</td><td>A RhD positive, antibody screen negative; crossmatch in progress</td><td></td></tr></tbody></table>",
-    "model": "<p><strong>Read:</strong> Hb 96 g/L against a booking 124; white cells normal for just after labour; platelets 168, INR 1.1 and APTT 27 normal; fibrinogen 2.3 g/L, inside the non-pregnant range but low for term, when it is usually 4 to 6; group A positive with a negative antibody screen.</p><p><strong>Meaning:</strong> haemoglobin falls late, so this early Hb badly underestimates a 1,000 to 1,500 mL loss. Fibrinogen is the earliest marker of severity: a level near or below 2 g/L predicts progression to severe PPH. The normal INR, APTT and platelets show no established coagulopathy yet, but it will come with ongoing loss and dilution.</p><p><strong>What it changes:</strong> transfuse on the clinical picture and the ongoing loss, not on this Hb, through the massive transfusion protocol (group-specific blood is quick as her group is known); give cryoprecipitate or fibrinogen concentrate to keep fibrinogen above 2 g/L and platelets above 50; limit crystalloid; repeat FBC, coagulation and fibrinogen (or viscoelastic testing) while she bleeds.</p>"
+    "result": "<p>First bloods, taken when the first cannula was sited.</p>",
+    "model": "<p><strong>Read:</strong> Hb 96 g/L against a booking 124; white cells normal for just after labour; platelets 168, INR 1.1 and APTT 27 normal; fibrinogen 2.3 g/L, inside the non-pregnant range but low for term, when it is usually 4 to 6; group A positive with a negative antibody screen.</p><p><strong>Meaning:</strong> haemoglobin falls late, so this early Hb badly underestimates a 1,000 to 1,500 mL loss. Fibrinogen is the earliest marker of severity: a level near or below 2 g/L predicts progression to severe PPH. The normal INR, APTT and platelets show no established coagulopathy yet, but it will come with ongoing loss and dilution.</p><p><strong>What it changes:</strong> transfuse on the clinical picture and the ongoing loss, not on this Hb, through the massive transfusion protocol (group-specific blood is quick as her group is known); give cryoprecipitate or fibrinogen concentrate to keep fibrinogen above 2 g/L and platelets above 50; limit crystalloid; repeat FBC, coagulation and fibrinogen (or viscoelastic testing) while she bleeds.</p>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "Haemoglobin",
+        "v": "96",
+        "u": "g/L",
+        "r": "≥100 after birth; 105 or above in late pregnancy (non-pregnant 115 to 160)",
+        "f": "L",
+        "n": "booking 124"
+       },
+       {
+        "t": "White cell count",
+        "v": "15.8",
+        "u": "10^9/L",
+        "r": "6 to 17 in late pregnancy, often higher in labour and just after birth (non-pregnant 4.0 to 11.0)"
+       },
+       {
+        "t": "Platelets",
+        "v": "168",
+        "u": "10^9/L",
+        "r": "150 to 400"
+       },
+       {
+        "t": "INR",
+        "v": "1.1",
+        "r": "0.9 to 1.2"
+       },
+       {
+        "t": "APTT",
+        "v": "27",
+        "u": "seconds",
+        "r": "25 to 37"
+       },
+       {
+        "t": "Fibrinogen",
+        "v": "2.3",
+        "u": "g/L",
+        "r": "about 4 to 6 at term (non-pregnant 2.0 to 4.0)",
+        "f": "L"
+       },
+       {
+        "t": "Group and screen",
+        "v": "A RhD positive, antibody screen negative; crossmatch in progress"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "Venous blood gas",
     "kind": "gas",
-    "result": "<p>Venous sample, taken with the first bloods. Ranges are for non-pregnant adults; in late pregnancy and the first days after birth the pCO2 and bicarbonate run lower (a compensated respiratory alkalosis).</p><table><tbody><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>pH</td><td>7.30 L</td><td>7.32 to 7.42</td></tr><tr><td>pCO2 (mmHg)</td><td>34 L</td><td>40 to 50</td></tr><tr><td>Bicarbonate (mmol/L)</td><td>16 L</td><td>22 to 28</td></tr><tr><td>Base excess (mmol/L)</td><td>-9 L</td><td>-2 to +2</td></tr><tr><td>Lactate (mmol/L)</td><td>5.2 H</td><td>below 2.0</td></tr><tr><td>Glucose (mmol/L)</td><td>5.6</td><td>3.5 to 7.8</td></tr><tr><td>Potassium (mmol/L)</td><td>4.1</td><td>3.5 to 5.2</td></tr><tr><td>Ionised calcium (mmol/L)</td><td>1.14</td><td>1.12 to 1.32</td></tr></tbody></table>",
-    "model": "<p><strong>Read:</strong> venous pH 7.30 (acidaemia) with bicarbonate 16 and base excess -9 (a metabolic acidosis) and lactate 5.2 mmol/L (high): a lactic acidosis. The low pCO2 of 34 is partial respiratory compensation on top of the lower pCO2 of pregnancy. Glucose, potassium and ionised calcium are normal.</p><p><strong>Meaning:</strong> tissue hypoperfusion from haemorrhagic shock, confirming what the observations show; acidosis also worsens bleeding (with hypothermia and coagulopathy, the lethal triad).</p><p><strong>What it changes:</strong> stop the bleeding and restore perfusion with blood products rather than more crystalloid; keep her warm (36 °C or above) and the ionised calcium above 1.1 mmol/L as blood is given; repeat the gas and lactate to judge whether resuscitation is working.</p>"
+    "result": "<p>Venous sample, taken with the first bloods. Ranges are for non-pregnant adults; in late pregnancy and the first days after birth the pCO2 and bicarbonate run lower (a compensated respiratory alkalosis).</p>",
+    "model": "<p><strong>Read:</strong> venous pH 7.30 (acidaemia) with bicarbonate 16 and base excess -9 (a metabolic acidosis) and lactate 5.2 mmol/L (high): a lactic acidosis. The low pCO2 of 34 is partial respiratory compensation on top of the lower pCO2 of pregnancy. Glucose, potassium and ionised calcium are normal.</p><p><strong>Meaning:</strong> tissue hypoperfusion from haemorrhagic shock, confirming what the observations show; acidosis also worsens bleeding (with hypothermia and coagulopathy, the lethal triad).</p><p><strong>What it changes:</strong> stop the bleeding and restore perfusion with blood products rather than more crystalloid; keep her warm (36 °C or above) and the ionised calcium above 1.1 mmol/L as blood is given; repeat the gas and lactate to judge whether resuscitation is working.</p>",
+    "labs": [
+     {
+      "rows": [
+       {
+        "t": "pH",
+        "v": "7.30",
+        "r": "7.32 to 7.42",
+        "f": "L"
+       },
+       {
+        "t": "pCO2",
+        "v": "34",
+        "u": "mmHg",
+        "r": "40 to 50",
+        "f": "L"
+       },
+       {
+        "t": "Bicarbonate",
+        "v": "16",
+        "u": "mmol/L",
+        "r": "22 to 28",
+        "f": "L"
+       },
+       {
+        "t": "Base excess",
+        "v": "-9",
+        "u": "mmol/L",
+        "r": "-2 to +2",
+        "f": "L"
+       },
+       {
+        "t": "Lactate",
+        "v": "5.2",
+        "u": "mmol/L",
+        "r": "below 2.0",
+        "f": "H"
+       },
+       {
+        "t": "Glucose",
+        "v": "5.6",
+        "u": "mmol/L",
+        "r": "3.5 to 7.8"
+       },
+       {
+        "t": "Potassium",
+        "v": "4.1",
+        "u": "mmol/L",
+        "r": "3.5 to 5.2"
+       },
+       {
+        "t": "Ionised calcium",
+        "v": "1.14",
+        "u": "mmol/L",
+        "r": "1.12 to 1.32"
+       }
+      ]
+     }
+    ]
    }
   ],
   "ask": [

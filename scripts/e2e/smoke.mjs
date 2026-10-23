@@ -240,6 +240,23 @@ async function runIn(width, height, label) {
   await pg.keyboard.press('Escape');
   await pg.waitForSelector('.os-present', { state: 'detached' });
   await pg.keyboard.press('Escape');
+
+  /* lab results printed the way a pathology system prints them: the PPH bloods, an abnormal value red with an asterisk */
+  await pg.fill('.os-q', 'postpartum haemorrhage on delivery'); await pg.waitForTimeout(300);
+  await click('.os-scard[data-id="ai-a98052d6"] [data-os="preview"]');
+  await pg.waitForSelector('.os-pv');
+  await click('.os-pv [data-tab="Marking"]');
+  const labCard = pg.locator('.os-pv .os-qacard').filter({ has: pg.locator('.os-lab') }).first();
+  ok(/Ref. Range \(Units\)/.test(await labCard.locator('.os-lab-t thead').first().textContent()) && await labCard.locator('.os-lab-ab').count() >= 2, `${label}: lab results print as Test | Result | Ref. Range (Units), abnormal ones flagged`);
+  await labCard.locator('[data-os="present"]').click();
+  await pg.waitForSelector('.os-present.in');
+  await pg.waitForFunction(() => getComputedStyle(document.querySelector('.os-present')).opacity === '1', null, { timeout: 2000 }).catch(() => {});
+  ok(await pg.locator('.os-present .os-lab-ab i').first().textContent() === '*' && await pg.locator('.os-present .os-model').count() === 0, `${label}: the candidate sees the lab table with its asterisks, not the model answer`);
+  ok(await pg.evaluate(() => { const t = document.querySelector('.os-present .os-lab'); return t && t.scrollWidth <= t.clientWidth + 1; }), `${label}: the lab table fits the screen`);
+  await shot('labs');
+  await pg.keyboard.press('Escape');
+  await pg.waitForSelector('.os-present', { state: 'detached' });
+  await pg.keyboard.press('Escape');
   if (width < 900) await pg.keyboard.press('Escape');
   await pg.keyboard.press('Escape');
 

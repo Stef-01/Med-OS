@@ -347,8 +347,73 @@
    {
     "label": "Venous blood gas with electrolytes",
     "kind": "gas",
-    "result": "<p>Venous sample, 08:45, at cannulation, before IV fluids.</p><table><tr><th>Test</th><th>Result</th><th>Reference range (infant)</th></tr><tr><td>pH</td><td>7.52 H</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>46 mmHg</td><td>38 to 50</td></tr><tr><td>Bicarbonate</td><td>36 mmol/L H</td><td>20 to 28</td></tr><tr><td>Base excess</td><td>+12.4 mmol/L H</td><td>-4 to +2</td></tr><tr><td>Lactate</td><td>1.2 mmol/L</td><td>0.5 to 2.0</td></tr><tr><td>Sodium</td><td>134 mmol/L</td><td>133 to 144</td></tr><tr><td>Potassium</td><td>3.0 mmol/L L</td><td>3.8 to 6.4</td></tr><tr><td>Chloride</td><td>88 mmol/L L</td><td>97 to 110</td></tr><tr><td>Glucose</td><td>4.1 mmol/L</td><td>3.0 to 7.8</td></tr></table>",
-    "model": "<p>pH 7.52 is an alkalaemia; bicarbonate 36 and base excess +12.4 make it a metabolic alkalosis, and pCO2 46, in the upper half of the venous range, is the expected partial respiratory compensation (hypoventilation). Chloride 88 and potassium 3.0 are low, sodium 134 is low-normal and lactate 1.2 is normal: a hypochloraemic, hypokalaemic metabolic alkalosis. It comes from losing acid and chloride in the vomit, then the volume-depleted kidney holding sodium (aldosterone) at the cost of potassium and hydrogen, and it is the opposite of salt-wasting congenital adrenal hyperplasia (low sodium, high potassium, acidosis).</p><p>It changes the plan: he must not go to theatre yet, because the compensating hypoventilation risks apnoea after anaesthesia. Resuscitate with 0.9% sodium chloride, then give 0.9% sodium chloride with 5% glucose, add potassium once he passes urine, and repeat the gas until the bicarbonate is normal and the chloride corrected.</p>"
+    "result": "<p>Venous sample, 08:45, at cannulation, before IV fluids.</p>",
+    "model": "<p>pH 7.52 is an alkalaemia; bicarbonate 36 and base excess +12.4 make it a metabolic alkalosis, and pCO2 46, in the upper half of the venous range, is the expected partial respiratory compensation (hypoventilation). Chloride 88 and potassium 3.0 are low, sodium 134 is low-normal and lactate 1.2 is normal: a hypochloraemic, hypokalaemic metabolic alkalosis. It comes from losing acid and chloride in the vomit, then the volume-depleted kidney holding sodium (aldosterone) at the cost of potassium and hydrogen, and it is the opposite of salt-wasting congenital adrenal hyperplasia (low sodium, high potassium, acidosis).</p><p>It changes the plan: he must not go to theatre yet, because the compensating hypoventilation risks apnoea after anaesthesia. Resuscitate with 0.9% sodium chloride, then give 0.9% sodium chloride with 5% glucose, add potassium once he passes urine, and repeat the gas until the bicarbonate is normal and the chloride corrected.</p>",
+    "labs": [
+     {
+      "title": "Reference ranges: infant",
+      "rows": [
+       {
+        "t": "pH",
+        "v": "7.52",
+        "r": "7.32 to 7.42",
+        "f": "H"
+       },
+       {
+        "t": "pCO2",
+        "v": "46",
+        "u": "mmHg",
+        "r": "38 to 50"
+       },
+       {
+        "t": "Bicarbonate",
+        "v": "36",
+        "u": "mmol/L",
+        "r": "20 to 28",
+        "f": "H"
+       },
+       {
+        "t": "Base excess",
+        "v": "+12.4",
+        "u": "mmol/L",
+        "r": "-4 to +2",
+        "f": "H"
+       },
+       {
+        "t": "Lactate",
+        "v": "1.2",
+        "u": "mmol/L",
+        "r": "0.5 to 2.0"
+       },
+       {
+        "t": "Sodium",
+        "v": "134",
+        "u": "mmol/L",
+        "r": "133 to 144"
+       },
+       {
+        "t": "Potassium",
+        "v": "3.0",
+        "u": "mmol/L",
+        "r": "3.8 to 6.4",
+        "f": "L"
+       },
+       {
+        "t": "Chloride",
+        "v": "88",
+        "u": "mmol/L",
+        "r": "97 to 110",
+        "f": "L"
+       },
+       {
+        "t": "Glucose",
+        "v": "4.1",
+        "u": "mmol/L",
+        "r": "3.0 to 7.8"
+       }
+      ]
+     }
+    ]
    },
    {
     "label": "Abdominal ultrasound",
@@ -359,8 +424,119 @@
    {
     "label": "Repeat venous gas the next morning",
     "kind": "gas",
-    "result": "<p>Venous sample, 08:40 the next morning, after the first fluid bolus and 24 hours of IV fluids.</p><table><tr><th>Test</th><th>Result</th><th>On arrival</th><th>Reference range (infant)</th></tr><tr><td>pH</td><td>7.41</td><td>7.52</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>42 mmHg</td><td>46 mmHg</td><td>38 to 50</td></tr><tr><td>Bicarbonate</td><td>26 mmol/L</td><td>36 mmol/L</td><td>20 to 28</td></tr><tr><td>Base excess</td><td>+1.6 mmol/L</td><td>+12.4 mmol/L</td><td>-4 to +2</td></tr><tr><td>Lactate</td><td>0.9 mmol/L</td><td>1.2 mmol/L</td><td>0.5 to 2.0</td></tr><tr><td>Sodium</td><td>138 mmol/L</td><td>134 mmol/L</td><td>133 to 144</td></tr><tr><td>Potassium</td><td>3.9 mmol/L</td><td>3.0 mmol/L</td><td>3.8 to 6.4</td></tr><tr><td>Chloride</td><td>103 mmol/L</td><td>88 mmol/L</td><td>97 to 110</td></tr><tr><td>Glucose</td><td>5.0 mmol/L</td><td>4.1 mmol/L</td><td>3.0 to 7.8</td></tr></table>",
-    "model": "<p>Against the arrival gas: pH 7.41, bicarbonate 26 and base excess +1.6 are now normal, chloride has risen from 88 to 103 and potassium from 3.0 to 3.9, and sodium, lactate and glucose are normal. With the morning observations (HR 135, CRT under 2 seconds, 5 wet nappies overnight, BGL 5.0), he is rehydrated and the alkalosis is corrected: a bicarbonate below 28 and a chloride above 100 meet the usual pre-operative targets.</p><p>He is ready for pyloromyotomy today. Keep him nil by mouth on IV maintenance with potassium until theatre, keep checking the BGL, and tell his mother the operation can go ahead.</p>"
+    "result": "<p>Venous sample, 08:40 the next morning, after the first fluid bolus and 24 hours of IV fluids.</p>",
+    "model": "<p>Against the arrival gas: pH 7.41, bicarbonate 26 and base excess +1.6 are now normal, chloride has risen from 88 to 103 and potassium from 3.0 to 3.9, and sodium, lactate and glucose are normal. With the morning observations (HR 135, CRT under 2 seconds, 5 wet nappies overnight, BGL 5.0), he is rehydrated and the alkalosis is corrected: a bicarbonate below 28 and a chloride above 100 meet the usual pre-operative targets.</p><p>He is ready for pyloromyotomy today. Keep him nil by mouth on IV maintenance with potassium until theatre, keep checking the BGL, and tell his mother the operation can go ahead.</p>",
+    "labs": [
+     {
+      "title": "Reference ranges: infant",
+      "cols": [
+       "Result",
+       "On arrival"
+      ],
+      "rows": [
+       {
+        "t": "pH",
+        "v": [
+         "7.41",
+         "7.52"
+        ],
+        "r": "7.32 to 7.42",
+        "f": [
+         "",
+         "H"
+        ]
+       },
+       {
+        "t": "pCO2",
+        "v": [
+         "42",
+         "46"
+        ],
+        "u": "mmHg",
+        "r": "38 to 50"
+       },
+       {
+        "t": "Bicarbonate",
+        "v": [
+         "26",
+         "36"
+        ],
+        "u": "mmol/L",
+        "r": "20 to 28",
+        "f": [
+         "",
+         "H"
+        ]
+       },
+       {
+        "t": "Base excess",
+        "v": [
+         "+1.6",
+         "+12.4"
+        ],
+        "u": "mmol/L",
+        "r": "-4 to +2",
+        "f": [
+         "",
+         "H"
+        ]
+       },
+       {
+        "t": "Lactate",
+        "v": [
+         "0.9",
+         "1.2"
+        ],
+        "u": "mmol/L",
+        "r": "0.5 to 2.0"
+       },
+       {
+        "t": "Sodium",
+        "v": [
+         "138",
+         "134"
+        ],
+        "u": "mmol/L",
+        "r": "133 to 144"
+       },
+       {
+        "t": "Potassium",
+        "v": [
+         "3.9",
+         "3.0"
+        ],
+        "u": "mmol/L",
+        "r": "3.8 to 6.4",
+        "f": [
+         "",
+         "L"
+        ]
+       },
+       {
+        "t": "Chloride",
+        "v": [
+         "103",
+         "88"
+        ],
+        "u": "mmol/L",
+        "r": "97 to 110",
+        "f": [
+         "",
+         "L"
+        ]
+       },
+       {
+        "t": "Glucose",
+        "v": [
+         "5.0",
+         "4.1"
+        ],
+        "u": "mmol/L",
+        "r": "3.0 to 7.8"
+       }
+      ]
+     }
+    ]
    }
   ],
   "ask": [
