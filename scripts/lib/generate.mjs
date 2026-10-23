@@ -110,7 +110,10 @@ ${ex.map((s, i) => `<example_${i + 1}>\n${JSON.stringify(s)}\n</example_${i + 1}
 }
 
 /* the model's checklist into the bank's shape: headings carry only id/t/x, false crit and empty d/kids are dropped */
+/* specialty names the model reaches for that the bank spells another way */
+const SPECIALTY_ALIASES = { Otolaryngology: 'Otorhinolaryngology', ENT: 'Otorhinolaryngology', 'Ear, Nose and Throat': 'Otorhinolaryngology', 'Ear, Nose and Throat Surgery': 'Otorhinolaryngology' };
 export function normalize(draft) {
+  if (Array.isArray(draft.specialty)) draft = { ...draft, specialty: [...new Set(draft.specialty.map(s => SPECIALTY_ALIASES[s] || s))] };
   const item = i => {
     if (i.t === 'heading' || i.t === 'info') return { id: i.id, t: i.t, x: i.x };
     const kids = (i.kids || []).filter(k => String(k.x || '').trim()).map(k => ({ id: k.id, t: 'checkbox', x: k.x, ...(k.crit ? { crit: true } : {}), ...(k.d ? { d: k.d } : {}) }));
