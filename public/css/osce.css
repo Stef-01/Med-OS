@@ -410,12 +410,14 @@ b.c-danger, b.c-warning, b.c-success, .os-rgi { color:var(--c); }
 .os-menu-id { display:block; padding:4px 10px 6px; color:var(--mute); font-size:12px; }
 
 /* alerts */
-/* toasts sit at the foot, clear of the clock, the tabs and the header; one line each, newest nearest the thumb */
-.os-alerts { position:fixed; z-index:var(--z-toast); left:50%; bottom:calc(96px + env(safe-area-inset-bottom)); transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; pointer-events:none; width:max-content; max-width:min(520px, calc(100vw - 32px)); }
+/* toasts sit over the header bar (clear of the clock, the tabs and any bottom sheet), one line each; taps pass through;
+   on a phone only the newest shows, so a run of them never covers the clock */
+.os-alerts { position:fixed; z-index:var(--z-toast); left:50%; top:calc(8px + env(safe-area-inset-top)); transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; pointer-events:none; width:max-content; max-width:min(520px, calc(100vw - 32px)); }
 .os-alert { max-width:100%; padding:9px 14px; border-radius:999px; background:var(--card2); border:1px solid var(--stroke); box-shadow:var(--em-shadow-lg); font-size:13.5px; font-weight:500; text-align:center;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; opacity:0; transform:translateY(10px) scale(.97); transition:opacity .22s ease, transform .3s var(--spring); }
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; opacity:0; transform:translateY(-10px) scale(.97); transition:opacity .22s ease, transform .3s var(--spring); }
 .os-alert.in { opacity:1; transform:none; }
-.os-alert.out { opacity:0; transform:translateY(6px); }
+.os-alert.out { opacity:0; transform:translateY(-6px); }
+@media (max-width:600px) { .os-alert:not(:last-child) { display:none; } }
 .os-alert.danger { background:var(--em-danger-deep); border-color:color-mix(in srgb, var(--em-danger) 50%, transparent); color:var(--em-danger-pale); }
 .os-alert.success { background:var(--em-ok-deep); border-color:color-mix(in srgb, var(--em-ok) 50%, transparent); color:var(--em-ok-bright); }
 

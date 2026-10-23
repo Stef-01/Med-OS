@@ -113,7 +113,7 @@ function page(chart, rows, secs, cols) {
 export function obsChartHtml(chartId, obs, { label = '' } = {}) {
   const chart = chartById(chartId), rows = obs?.rows || [];
   if (!chart || !rows.length) return '';
-  const cols = Math.min(10, Math.max(5, rows.length + 2));
+  const cols = Math.min(10, Math.max(4, rows.length + 1));   /* one empty column for the next set: wider marks on a phone */
   const words = rows.map(obsText).join('. ');
   const pages = layout(chart).map((secs, n) => {
     const p = page(chart, rows, secs, cols);
