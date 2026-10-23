@@ -371,16 +371,21 @@
    }
   ],
   "ask": [
-   "What do the observations and the chest X-ray show?",
-   "What is your leading diagnosis, what supports it, and what else would you consider?",
-   "What is the definitive investigation and treatment, where should it happen, and what do you do now?",
-   "What do you tell Linh to watch for, and what advice do you give about choking and prevention?",
-   "A different toddler has fever, a sore throat, refusal to swallow, drooling and a stiff, tilted neck after a recent cold. You suspect a retropharyngeal abscess. Why is infection in this space dangerous, and how would you manage it?"
+   "You are now calling the paediatric registrar at the children's hospital. Please give an ISBAR handover of Jasper, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Jasper now, here in general practice.",
+   "A different toddler has had a cold and now has a fever, a sore throat, refuses to swallow, is drooling and has a stiff, tilted neck. What are you worried about, why is it dangerous, and how would you manage it?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, GP at the practice; Jasper Nguyen, 2 years 4 months, 13 kg.</li><li><strong>Situation:</strong> 5-week daily cough; suspected inhaled foreign body with right lower lobe collapse.</li><li><strong>Background:</strong> choked on mixed nuts at a party 5 weeks ago, and the cough began that evening; no response to amoxicillin, prednisolone or salbutamol; previously well, no atopy.</li><li><strong>Assessment:</strong> right side: reduced expansion, dull base, reduced air entry, monophonic wheeze, trachea shifted right. Obs: afebrile, HR normal, RR 42 to 44 (mildly fast), SpO2 96% RA (low-normal), growth normal, so stable now. CXR: RLL collapse with volume loss and mediastinal shift right, not pneumonia; no visible object does not exclude it (nuts are radiolucent).</li><li><strong>Recommendation:</strong> accept today for rigid bronchoscopy under GA; nil by mouth now; agree how he gets there.</li></ul>",
+   "<p><strong>Most likely: inhaled foreign body (nut) blocking the right lower lobe bronchus.</strong> Peak age; sudden onset after a witnessed choking episode on nuts; no response to three treatments; one-sided signs with tracheal shift; RLL collapse with volume loss. Nuts are radiolucent.</p><ul><li><strong>Pneumonia:</strong> against: afebrile and well, volume loss, no air bronchograms, no response to amoxicillin.</li><li><strong>Asthma:</strong> against: no atopy or family history, wheeze is one-sided and monophonic, no response to salbutamol or prednisolone.</li><li><strong>Protracted bacterial bronchitis:</strong> wet cough over 4 weeks fits; against: no response to antibiotics, focal collapse.</li><li><strong>TB or bronchial compression by nodes:</strong> against: no contact or travel, weight steady, no night sweats.</li></ul>",
+   "<ol><li>Recognise urgency: stable now, but the object can move and block a larger airway.</li><li>Phone the paediatric respiratory or ENT team at a paediatric centre: same-day <strong>rigid bronchoscopy under general anaesthesia</strong> to confirm and remove it; send a letter, the X-ray and the obs.</li><li><strong>Nil by mouth</strong> from now.</li><li>Transfer as the receiving team agrees; <strong>ambulance (000)</strong> if stridor, distress, falling SpO2 or complete choking.</li><li>Stop antibiotics, steroids and inhalers, and explain why they failed.</li><li>Explain honestly to Linh without blame: missed choking events are common; bronchoscopy is effective.</li><li>Safety net: call 000 for noisy or hard, fast breathing, blue colour or choking; first aid is back blows then chest thrusts, no finger sweeps; no whole nuts under 5, keep the Lego and beads away.</li><li>GP review after bronchoscopy: cough settled, lung re-expanded.</li></ol>",
+   "<p><strong>Retropharyngeal abscess</strong>: most common in young children after a pharyngeal, tonsillar or upper respiratory infection.</p><ul><li><strong>Why dangerous:</strong> the retropharyngeal space runs from the skull base to about T1 to T2 and opens into the superior mediastinum, so infection can spread to cause <strong>mediastinitis</strong>; swelling of the posterior pharynx can cause <strong>airway obstruction</strong>. Other risks: jugular vein thrombosis, carotid involvement, aspiration of pus.</li><li><strong>Management:</strong> airway first. Keep the child calm with the parent, in the position they choose; no tongue depressor or distressing examination; call 000 from general practice.</li><li>Get senior, anaesthetic and ENT help early to secure the airway.</li><li>CT neck with contrast only once safe.</li><li>IV antibiotics, admit, and ENT for possible drainage.</li></ul>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:51:07Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 28,

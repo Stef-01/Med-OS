@@ -470,16 +470,22 @@
    }
   ],
   "ask": [
-   "What do the observations and blood results show?",
-   "What is the most likely cause of the bleeding, and what else must you exclude?",
-   "As team leader, what do you do first, and what now that she has lost 1,500 mL? Include the calls you would make and what you would say.",
-   "The bleeding is now slowing: total loss 1,800 mL, HR 110, BP 100/62, alert. She asks: \"Am I going to die? Will I need my womb taken out? Am I still going home today?\" What do you tell her about the plan, the warning signs and follow-up?"
+   "You are now calling the obstetric registrar. Please give an ISBAR handover of this patient, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of this patient now, here on the birth suite.",
+   "The bleeding is now slowing: total loss 1,800 mL, HR 110, BP 100/62, and she is alert. She asks you: \"Am I going to die? Will I need my womb taken out? Am I still going home today?\" What would you tell her, and what follow-up would you arrange?"
   ],
-  "patient": "<p><strong>In Part 2,</strong> once the candidate is told the bleeding is slowing, the patient asks: \"Am I going to die?\" \"Will I need my womb taken out?\" \"Am I still going home today?\" \"Can I still hold my baby?\" \"What should I look out for later?\"</p>"
+  "patient": "<p><strong>In Part 2,</strong> once the candidate is told the bleeding is slowing, the patient asks: \"Am I going to die?\" \"Will I need my womb taken out?\" \"Am I still going home today?\" \"Can I still hold my baby?\" \"What should I look out for later?\"</p>",
+  "expect": [
+   "<ul><li><strong>Identify:</strong> junior doctor, birth suite room 1. Patient is a 24-year-old G2P2, 40 minutes after a vaginal birth at 39 weeks.</li><li><strong>Situation:</strong> major primary PPH, 1,500 mL lost and still bleeding, with worsening shock. I need you now.</li><li><strong>Background:</strong> 2-hour precipitate labour; oxytocin 10 units IM given; placenta and membranes complete; graze only; full bladder; formula feeding; no hypertension or asthma; booking Hb 124; A-positive, antibody screen negative.</li><li><strong>Assessment:</strong> shock index has gone from 1.35 to 1.56 (HR 140, BP 90/50, SpO2 91%); fundus is soft, so this is atony. Hb 96 underestimates the loss. Fibrinogen 2.3 is low for term. INR and platelets are normal. Lactate 5.2 and BE -9 show hypoperfusion.</li><li><strong>Recommendation:</strong> please attend now. The anaesthetist has been called and the MTP is activated. Theatre has been called and tranexamic acid and uterotonics are under way.</li></ul>",
+   "<p><strong>Most likely:</strong> major primary PPH from <strong>uterine atony (Tone)</strong>, with haemorrhagic shock.</p><ul><li>For it: the fundus is soft, boggy and above the umbilicus. Risk factors are the precipitate labour, a full bladder and no breastfeeding. Bleeding became heavy after the placenta was delivered.</li></ul><p><strong>Differentials (4 Ts):</strong></p><ul><li><strong>Trauma</strong> (cervical or vaginal tear, haematoma, rupture, inversion): against it, inspection shows only a graze and the fundus is palpable.</li><li><strong>Tissue</strong> (retained placenta or membranes): against it, both were checked complete.</li><li><strong>Thrombin</strong> (coagulopathy): INR, APTT and platelets are normal, but fibrinogen 2.3 is low for term. Coagulopathy can develop with ongoing loss and dilution.</li></ul>",
+   "<ol><li><strong>Help and roles:</strong> obstetric registrar or consultant, anaesthetist and senior midwife; a scribe keeps a T-sheet.</li><li><strong>Resuscitation:</strong> oxygen by face mask at 15 L/min; lie her flat and keep her warm. Two large-bore cannulae; send crossmatch, FBC, coagulation with fibrinogen and a venous gas. Give limited warmed crystalloid.</li><li><strong>Tone:</strong> fundal massage, expel clots and insert an indwelling catheter.</li><li><strong>Uterotonics (local protocol):</strong> oxytocin 5 units slow IV, then an infusion. Ergometrine 250 micrograms IM (no hypertension). Carboprost 250 micrograms IM every 15 minutes, maximum 8 doses (no asthma), or misoprostol 800 micrograms sublingual.</li><li><strong>Tranexamic acid</strong> 1 g IV over 10 minutes, within 3 hours of birth. Repeat 1 g if still bleeding after 30 minutes.</li><li><strong>Bimanual compression.</strong></li><li><strong>MTP and theatre now</strong> (1,500 mL reached). Brief calls: blood bank (\"Primary PPH, A-positive, MTP, delivery suite room 1\") and the theatre manager.</li><li>Keep fibrinogen above 2 g/L, platelets above 50 and temperature at 36 °C or above. Repeat the gas and fibrinogen.</li></ol>",
+   "<ul><li><strong>Honest answers:</strong> the bleeding is slowing and the team is in control. Removing the womb is a last resort, only if other measures fail. She can hold her baby once she is stable.</li><li><strong>Discharge is cancelled:</strong> she stays on monitored observations. She gets a repeat Hb with an iron plan, a clot-risk (VTE) review and a debrief.</li><li><strong>She can go home when:</strong> bleeding has settled, the uterus is firm, pulse is under 100, systolic BP is above 100 with no dizziness on standing, and she is passing urine.</li><li><strong>Call 000 or come straight back for:</strong> soaking more than one pad an hour, clots bigger than a golf ball, fever of 38 °C or above, smelly discharge, dizziness or fainting, palpitations or breathlessness, or calf pain or swelling.</li><li><strong>Follow-up:</strong> FBC and ferritin, GP and midwife review. In any future pregnancy she should give birth in a hospital with blood transfusion available.</li></ul>"
+  ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:52:44Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 24,

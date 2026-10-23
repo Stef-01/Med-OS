@@ -479,16 +479,21 @@
    }
   ],
   "ask": [
-   "What do the reassessment and the results show?",
-   "What is the most likely diagnosis, and what else would you consider?",
-   "What is your management now? Give drugs and fluids with doses for this baby.",
-   "Where will the baby be cared for, and what will you tell the mother?",
-   "What would make you escalate further, and what follow-up and advice will the family need?"
+   "You are now calling the neonatal registrar. Please give an ISBAR handover of this baby, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of this baby now, here on the postnatal ward.",
+   "Before this baby goes home, what would you tell the parents and what follow-up would you arrange?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, postnatal ward; 14-hour-old term baby, 3.2 kg.</li><li><strong>Situation:</strong> suspected early-onset sepsis with shock and respiratory distress; I need you here now.</li><li><strong>Background:</strong> 38+5, normal vaginal birth, Apgars 9 and 9. Mother GBS positive, membranes ruptured 20 h, one dose of benzylpenicillin 2 h before birth, maternal fever 38.2 °C. Poor feeding from 10 h, grunting for 2 h.</li><li><strong>Assessment:</strong> at 22:40 HR 188, RR 74, SpO2 91% in air, CRT 4 s, BP 58/30, 38.1 °C, responds to voice, BGL 4.1. After oxygen and a 32 mL bolus, improved but still unwell. VBG: metabolic lactic acidosis, compensated for now. Neutropenia, I:T ratio 0.29, toxic film: worrying. CRP 6: too early to exclude sepsis. CXR: pneumonia. Blood culture taken.</li><li><strong>Recommendation:</strong> come now and arrange a NICU bed; advise on antibiotics, a second bolus and CPAP.</li></ul>",
+   "<p><strong>Most likely:</strong> early-onset neonatal sepsis, probably GBS, with pneumonia and septic shock. Supported by maternal GBS carriage, inadequate intrapartum antibiotics, membranes ruptured 20 h, maternal fever; fever, grunting, HR 188, CRT 4 s, lactate 4.2, neutropenia with toxic changes, bilateral hazy CXR.</p><ul><li><strong>Transient tachypnoea:</strong> against: fever, shock, onset after 10 h.</li><li><strong>Surfactant deficiency:</strong> CXR can look the same, but uncommon at term and does not explain fever or neutropenia.</li><li><strong>Duct-dependent congenital heart disease:</strong> heart size normal and fluid helped, but a normal film does not exclude it; check pre- and post-ductal SpO2.</li><li><strong>Inborn error of metabolism:</strong> glucose normal and perfusion explains the lactate; check ammonia if not improving.</li></ul><p>None of these should delay antibiotics.</p>",
+   "<ol><li>Neonatal team at the cot side; continuous monitoring.</li><li>Oxygen titrated to the term target range; CPAP if tiring, apnoea, rising oxygen need or rising pCO2.</li><li>IV or IO access; reassess HR and CRT; repeat 0.9% sodium chloride 10 mL/kg = <strong>32 mL</strong> if shock returns.</li><li>Blood culture taken, then straight away IV <strong>benzylpenicillin 60 mg/kg = 192 mg 12-hourly</strong> and <strong>gentamicin 5 mg/kg = 16 mg 24-hourly</strong>.</li><li>10% glucose at 60 mL/kg/day = <strong>8 mL/h</strong>; repeat BGLs, keep 2.6 mmol/L or above.</li><li>Admit to NICU. Repeat the gas and the CRP in 12 to 24 h; lumbar puncture once stable (switch to benzylpenicillin plus a third-generation cephalosporin if meningitis is suspected); review antibiotics at 36 h.</li><li>Urgent senior review for apnoea, a rising oxygen need, shock after two boluses (consider inotropes), a low BGL or seizures.</li><li>Tell the mother plainly: blood and lung infection; GBS carriage is common and not her fault; she can stay close and express breast milk.</li></ol>",
+   "<p><strong>Call 000</strong> if the baby is floppy, blue or not breathing normally.</p><p><strong>Come straight to the ED</strong> for:</p><ul><li>poor feeding or being unusually sleepy;</li><li>a temperature of 38 °C or more, or a low temperature;</li><li>fast or noisy breathing;</li><li>fewer wet nappies.</li></ul><p>Explain why: late-onset GBS infection can happen in the first 3 months.</p><p><strong>Follow-up:</strong></p><ul><li>GP and maternal and child health nurse review soon after discharge, with a discharge summary.</li><li>If GBS infection is confirmed, the mother should be offered antibiotics in labour in any future pregnancy. She should tell her next maternity team.</li></ul>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:55:11Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 0.6,

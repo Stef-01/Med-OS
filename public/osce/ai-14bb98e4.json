@@ -431,14 +431,20 @@
    }
   ],
   "ask": [
-   "What do these results show?",
-   "What is the most likely diagnosis, and what must you exclude? Why does it matter that she is not breastfeeding?",
-   "What is your management approach, including drainage, tissue diagnosis, antibiotics and referral? How would you explain this to Mrs Marchetti?",
-   "What safety netting and follow-up will you arrange?"
+   "You are now calling the breast surgical registrar at the local hospital. Please give an ISBAR handover of Mrs Marchetti, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Mrs Marchetti now, here in general practice.",
+   "Before Mrs Marchetti goes home, what would you tell her and what follow-up would you arrange?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, final-year student at the GP clinic; Helen Marchetti, 46.</li><li><strong>Situation:</strong> left breast abscess not settling after 5 days of flucloxacillin, with a separate suspicious mass. She is not septic.</li><li><strong>Background:</strong> not breastfeeding. Lump for 10 days, nipple retraction for 1 month, same site 18 months ago. Smokes 15 a day. Mother had breast cancer at 58. No allergies.</li><li><strong>Assessment:</strong> WCC 13.6, neutrophils 10.8, CRP 58: bacterial infection. HbA1c 5.3%: no diabetes. Ultrasound: abscess of about 5 mL, can be aspirated. Separate irregular vascular solid mass (category 4), skin 6 mm thick, axillary node with a 5 mm cortex (indeterminate). Mammogram: left mass category 4, right normal. Possible underlying carcinoma, including inflammatory.</li><li><strong>Recommendation:</strong> urgent breast clinic within days for aspiration with culture, core biopsy of the mass, node sampling and skin punch biopsy.</li></ul>",
+   "<p><strong>Most likely:</strong> non-lactational left breast abscess. For it: fever, tender red lump, WCC and CRP raised, thick-walled collection with debris. <strong>Carcinoma must be excluded.</strong></p><ul><li><strong>Underlying carcinoma or inflammatory breast cancer:</strong> for it: no response to antibiotics, a separate irregular vascular solid mass (category 4), peau d'orange, skin thickening, new nipple retraction, indeterminate node, recurrence at the same site, age 46, mother affected. No tissue diagnosis yet.</li><li><strong>Periductal mastitis:</strong> for it: heavy smoker, retroareolar site, recurrence. Against it: does not explain the separate solid mass.</li><li><strong>Lactational mastitis or abscess:</strong> excluded. She last breastfed 11 years ago and is not pregnant. That makes this non-lactational, which is a red flag for cancer.</li></ul>",
+   "<ol><li><strong>Disposition:</strong> not septic, so treat as an outpatient. Refer to hospital if signs of sepsis, rapidly spreading cellulitis or no improvement.</li><li><strong>Urgent referral:</strong> phone a breast surgeon or breast clinic today.</li><li><strong>Drainage:</strong> ultrasound-guided needle aspiration rather than incision. Send the pus for culture.</li><li><strong>Tissue diagnosis now, not after the infection settles:</strong> core biopsy (not FNA alone) of the mass and abscess wall, sampling of the axillary node, and skin punch biopsy for possible inflammatory cancer.</li><li><strong>Triple test:</strong> clinical, imaging and biopsy must all agree before calling it benign. A benign biopsy here would be discordant and needs repeat or larger biopsy, or excision.</li><li><strong>Antibiotics (eTG):</strong> change to amoxicillin with clavulanate 875/125 mg orally 12-hourly for anaerobic cover. Adjust to the culture. Paracetamol or an NSAID for pain.</li><li>Smoking cessation support (Quitline, NRT).</li></ol>",
+   "<ul><li><strong>Honest explanation:</strong> acknowledge her fear and her friend's experience. There is an infection, but the scans show a separate lump that must be tested. A biopsy is the only way to be sure. Avoid false reassurance and avoid saying it is cancer.</li><li><strong>The tests:</strong> needle drainage and core biopsy under ultrasound with local anaesthetic, usually in one visit.</li><li><strong>Red flags (same day to GP or go to ED):</strong> spreading redness, worsening pain, high fever or shaking chills, vomiting, feeling faint or very unwell.</li><li><strong>Follow-up:</strong> GP review 48 to 72 hours after drainage, with the culture result. Biopsy results given in person with the breast team, and she can bring a support person. Follow her until the mass has fully gone, with repeat imaging or biopsy if any mass remains.</li></ul>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:49:09Z",
+  "by": "rewrite-part2-asks.mjs"
  }
 }

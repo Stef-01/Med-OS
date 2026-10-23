@@ -337,15 +337,21 @@
    }
   ],
   "ask": [
-   "How would you classify this child's croup on arrival, and on reassessment?",
-   "What else would you consider, and what would point to it?",
-   "What is your management now? Give drugs with doses for this child, and the steroid dose that would have been right had the croup stayed as it was on arrival.",
-   "When could this child go home, and what would you tell the mother to watch for?"
+   "You are now calling the paediatric registrar. Please give an ISBAR handover of this child, including your interpretation of these observations.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of this child now, here in the emergency department, with doses for this child.",
+   "Before this child goes home, what would you tell the mother and what follow-up would you arrange?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> ED junior doctor; 2-year-old, 12 kg, here with mother.</li><li><strong>Situation:</strong> severe croup, now in the red zone with SpO2 91%. I need you to review now.</li><li><strong>Background:</strong> 2 days of coryza and fever to 38 °C, then barking cough and stridor from 8 pm; fully immunised including Hib; no drooling, choking or allergic features; no medicines given yet.</li><li><strong>Assessment:</strong> 22:40 moderate croup (stridor at rest, mild to moderate recession, consolable, SpO2 96%): yellow zone. 23:00 severe croup (agitated, loud stridor, marked recession, tracheal tug, RR 52, HR 168, SpO2 91%): red zone; hypoxaemia is a late sign that the airway is close to failing. No tests needed.</li><li><strong>Recommendation:</strong> giving nebulised adrenaline 5 mL, oxygen and dexamethasone 7.2 mg; moving to resus; please come now; involve ICU and anaesthetics early.</li></ul>",
+   "<p><strong>Croup (laryngotracheobronchitis), severe on reassessment:</strong> age 2, coryzal start, barking cough, hoarse cry, inspiratory stridor worse at night, low-grade fever. It is a clinical diagnosis, so no bloods or X-rays.</p><ul><li><strong>Epiglottitis:</strong> against: immunised against Hib, no drooling, swallowing normally, not toxic, began with coryza.</li><li><strong>Bacterial tracheitis:</strong> against: only low-grade fever, not toxic. Consider it if the child responds poorly to adrenaline.</li><li><strong>Inhaled foreign body:</strong> against: no choking episode, nothing put in the mouth, gradual onset after coryza.</li><li><strong>Anaphylaxis:</strong> against: no rash, no lip or facial swelling, no new food or medicine.</li></ul>",
+   "<ol><li>Keep the child calm and upright on the mother's lap; do not examine the throat or lie the child flat.</li><li>Red zone: call a rapid response (senior doctor to the bedside) and move to resus.</li><li><strong>Nebulised adrenaline 1:1000, 5 mL undiluted</strong> (0.5 mL/kg capped at 5 mL); repeat if needed with senior involvement.</li><li><strong>Oxygen for SpO2 below 92%</strong>, aiming for 92% or above, through the nebuliser or a mask held near the face.</li><li><strong>Dexamethasone 0.6 mg/kg = 7.2 mg</strong> (maximum 12 mg), orally, otherwise IM or IV. Had it stayed moderate: oral dexamethasone 0.15 mg/kg = 1.8 mg, or prednisolone 1 mg/kg = 12 mg.</li><li>Involve ICU and anaesthetics early because of the low SpO2, any repeat adrenaline or a tiring child.</li><li>Reassess, use continuous SpO2 and observe for at least 3 hours after the last adrenaline; admit tonight.</li><li>Explain to the mother: viral airway swelling, not asthma.</li></ol>",
+   "<ul><li><strong>Discharge only when:</strong> it is at least 3 hours since the last adrenaline, there is no stridor at rest and no recession, the child is drinking well and the mother feels confident. Tonight the child stays in hospital.</li><li><strong>Call 000 if:</strong> your child is struggling to breathe, has blue lips, is pale or drowsy, or is drooling or cannot swallow.</li><li><strong>Come straight back to ED for:</strong> noisy breathing at rest, or the chest sucking in.</li><li><strong>Course:</strong> it usually settles over 3 to 4 days and is often worse at night.</li><li><strong>Follow-up:</strong> see the GP if it is not settling by then or keeps coming back. Give the RCH Kids Health Info croup fact sheet.</li></ul>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:54:53Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 2,

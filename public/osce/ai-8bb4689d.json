@@ -633,15 +633,20 @@
    }
   ],
   "ask": [
-   "What do these results show?",
-   "Daniel asks what HIV does to his body, whether it will turn into AIDS, and how the virus gets into cells, because a friend said some people cannot get HIV because of a gene. How would you explain this?",
-   "What is your management approach? He asks what the medication does, whether it is a cure, and whether he can stop when his blood tests look good.",
-   "He asks: \"Can I still pass it to Sam?\" What do you advise about Sam and his other partners?",
-   "What safety netting and follow-up will you arrange?"
+   "You are now calling the sexual health physician. Please give an ISBAR handover of Daniel Reyes, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Daniel now, here in the sexual health clinic.",
+   "Before Daniel leaves today, what would you tell him and what follow-up would you arrange?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> GP at the sexual health clinic, calling about Daniel Reyes, 27.</li><li><strong>Situation:</strong> newly confirmed HIV-1 infection; needs ART started.</li><li><strong>Background:</strong> negative HIV test 14 months ago, flu-like illness with rash 2 months ago; condomless sex with partner Sam 5 days ago (beyond 72 hours for PEP), two other partners; well, no symptoms of immune compromise; low mood, no thoughts of self-harm.</li><li><strong>Assessment:</strong> HIV-1 confirmed on Western blot and a second sample, HIV-2 negative: recent infection. CD4 410 (22%): largely intact, not AIDS, no Pneumocystis prophylaxis. Viral load 86,000: high, very infectious. No resistance, HLA-B*5701 negative: any first-line regimen. Not immune to hepatitis A or B; other STIs negative; kidney and other baseline tests normal.</li><li><strong>Recommendation:</strong> s100 prescriber review in 1 to 2 weeks to start ART; hepatitis A and B vaccination; testing and PrEP for Sam.</li></ul>",
+   "<p><strong>Most likely:</strong> recent HIV-1 infection with a largely intact immune system: reactive screen confirmed on Western blot and a second sample; negative test 14 months ago; seroconversion-type illness 2 months ago; high viral load.</p><ul><li><strong>False-positive screen or labelling error:</strong> against: positive supplementary assay and a reactive second, separately collected sample.</li><li><strong>HIV-2 or dual infection:</strong> against: HIV-2 antibody not detected.</li><li><strong>Advanced HIV (AIDS):</strong> against: CD4 410 and 22% (above 200 and 14%), no AIDS-defining illness, recent negative test.</li><li><strong>Another cause of the fever, sore throat and rash</strong> (secondary syphilis, acute hepatitis, glandular fever): against: syphilis non-reactive, hepatitis B and C negative, normal liver tests.</li></ul>",
+   "<ol><li><strong>Explain plainly, checking understanding:</strong> HIV infects CD4 helper T cells, entering through CD4 plus a co-receptor (usually CCR5). CCR5 delta 32 homozygotes (about 1% of Northern Europeans) are resistant, but his infection shows he is not protected. AIDS is late untreated HIV and is preventable.</li><li><strong>ART soon, whatever the CD4:</strong> s100 prescriber; combination therapy, often one tablet daily; undetectable in 3 to 6 months; near-normal life expectancy.</li><li><strong>Not a cure, lifelong:</strong> virus stays in reservoirs and rebounds within weeks if stopped; adherence prevents resistance.</li><li><strong>U=U:</strong> no sexual transmission once below 200 copies/mL for 6 months. Until then condoms; test Sam now and 6 weeks after last sex; PrEP if negative.</li><li>Anonymous partner notification for other partners.</li><li>Hepatitis A and B and other recommended vaccines.</li><li>Counselling, peer and community HIV support; confidentiality and disclosure, including at work.</li></ol>",
+   "<ul><li><strong>Go to the Emergency Department or call 000</strong> for: fever with cough or shortness of breath, severe headache or confusion, a new rash with fever after starting the tablets, or diarrhoea that will not settle.</li><li><strong>Mood:</strong> if he has any thoughts of harming himself, call Lifeline (13 11 14) or come in.</li><li><strong>PEP:</strong> if Sam or another partner has condomless sex with him (for example a condom breaks) before he has been undetectable for 6 months, they should get PEP from a sexual health clinic or Emergency Department within 72 hours, the sooner the better.</li><li><strong>Follow-up:</strong> review in 1 to 2 weeks to start ART and begin vaccinations; then regular viral load checks; repeat STI screen in 3 months.</li><li>Clinic contact details, written information and reliable resources.</li></ul>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:51:57Z",
+  "by": "rewrite-part2-asks.mjs"
  }
 }
