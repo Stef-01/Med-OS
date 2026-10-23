@@ -174,7 +174,7 @@ async function onClick(e) {
     case 'rungo': return runGo();
     case 'timing': return timingDlg();
     case 'tsave': return saveTiming();
-    case 'startp': if (sess().queue.length) { sess().done = []; startAttempt(0); } return;
+    case 'startp': if (sess().queue.length) { sess().done = []; ctx.ov.querySelector('.os-alerts')?.replaceChildren(); startAttempt(0); } return;   /* the "Added" toasts end with the queue */
     case 'qclear': return clearQueue();
     case 'qrm': return removeQueued(b, id);
     case 'queue': case 'pvqueue': return queueFromButton(b, id, a === 'queue');

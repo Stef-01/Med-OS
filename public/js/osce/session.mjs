@@ -9,10 +9,12 @@ import { wide, fmtDate } from '../study-kit/util.mjs';
 import { safeHtml } from '../study-kit/safe.mjs';
 import { figureHtml } from '../study-kit/media.mjs';
 import { mnemonicsFor } from './mnemonics.mjs';
-import { HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
+import { KINDS, HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, curAttempt, findAttempt, now, body, NOLOAD, bell, notify, confirmDlg, openDialog, closeDialog, openPop, closePop, tagHtml, srcTag, ago, aiEnabled, markerCfg, examOf, nameOf, whoBadge, roleLine, openPresenter, topDialog } from './state.mjs';
 import { markDirect, markPromptText, parseReply } from './marker.mjs';
 import { candidateLink } from './candidate.mjs';
+import { chartFor } from './obs.mjs';
+import { obsChartHtml, obsTableHtml, obsZonesHtml } from './obs-chart.mjs';
 
 let tickT = 0, hlOn = false, hlT = 0, lastScroll = {};   /* StationTabs.vue: each tab keeps its scroll position */
 
@@ -176,14 +178,43 @@ export function tabBody(st, a, t, o = {}) {
 }
 /* the station's shape, from the timing in use: Reading 5 · Part 1 10 · Part 2 5 */
 export function formatHtml(timing = ctx.mem.timing) {
-  return `<ol class="os-format" role="list" aria-label="Station format">${phasesOf(timing).map(k => `<li><small>${phaseName(k)}</small><b>${timing[k]} min</b><span>${phaseWhat(k)}</span></li>`).join('')}</ol>`;
+  const ks = phasesOf(timing);   /* a timeline: each phase as wide as its minutes, then what each is for */
+  return `<div class="os-fmt" role="group" aria-label="Station format"><ol class="os-format" role="list" style="grid-template-columns:${ks.map(k => `${Math.max(1, timing[k])}fr`).join(' ')}">${ks.map(k => `<li class="os-f-${k}"><small>${phaseName(k)}</small><b>${timing[k]} min</b></li>`).join('')}</ol>
+    <ul class="os-format-what" role="list">${ks.map(k => `<li><b>${phaseName(k)}</b><span>${phaseWhat(k)}</span></li>`).join('')}</ul></div>`;
 }
 /* Part 2's results as slides: each handover result, then each Part 2 image (labelled by its alt text, which never names
    the diagnosis; the caption is the examiner's note and stays off the candidate's view) */
+/* each Part 2 result as the candidate sees it: observations drawn on the patient's chart (or written out when there is
+   no chart for them), everything else as handed over; `h` keeps the source for the examiner's card */
+/* a lab table's abnormal rows, as a pathology report prints them: a cell that is only a flag (H, L, HH, LL, ↑, ↓) or ends in
+   one after a number marks its row high or low and the flag becomes a badge. On sanitised HTML, whose cells carry no
+   attributes; anything that is not a plain flag is left as it is */
+const FLAG = /^(?:(.*\d.*?)\s+)?\(?(HH|LL|H|L|↑|↓)\)?$/;
+export function flagHtml(html) {
+  return String(html).replace(/<tr>([\s\S]*?)<\/tr>/g, (row, inner) => {
+    let dir = '';
+    const cells = inner.replace(/<td>([^<]*)<\/td>/g, (cell, txt) => {
+      const m = txt.trim().match(FLAG); if (!m || (!m[1] && txt.trim().length > 4)) return cell;
+      const f = m[2], hi = /H|↑/.test(f); dir ||= hi ? 'hi' : 'lo';
+      return `<td>${m[1] ? `${m[1]} ` : ''}<b class="os-flag os-flag-${hi ? 'h' : 'l'}">${f}</b></td>`;
+    });
+    return dir ? `<tr class="os-${dir}">${cells}</tr>` : row;
+  });
+}
 export function qaSlides(st) {
-  const p = st.part2 || { handover: [] };
-  return [...p.handover.map(h => ({ label: h.label, html: `<div class="os-html">${safeHtml(h.result)}</div>` })),
+  const p = st.part2 || { handover: [] }, chart = chartFor(st.demo).id;
+  const note = h => (h.result ? `<div class="os-html${h.obs ? ' os-obs-note' : ''}">${flagHtml(safeHtml(h.result))}</div>` : '');
+  return [...p.handover.map(h => ({ label: h.label, h, html: h.obs ? `${(chart && obsChartHtml(chart, h.obs, { label: h.label })) || obsTableHtml(h.obs)}${note(h)}` : note(h) })),
     ...(st.media?.part2 || []).map(m => ({ label: m.alt || 'Image', html: figureHtml({ ...m, caption: '' }) }))];
+}
+/* the examiner's card for one result: observations compact (the table, then what the zones call for at each time), any
+   other result as handed over; then the model interpretation, one tap away and never on the candidate's screen */
+function qaCardBody(st, x) {
+  const h = x.h; if (!h) return x.html;
+  const ch = chartFor(st.demo);
+  const shown = h.obs ? `${obsTableHtml(h.obs)}${h.result ? `<div class="os-html os-obs-note">${safeHtml(h.result)}</div>` : ''}<p class="os-obs-on">${ch.id ? `The candidate sees this on the ${esc(ch.why)}.` : esc(ch.why)}</p>` : x.html;
+  const zones = h.obs && ch.id ? obsZonesHtml(ch.id, h.obs) : '';
+  return `${shown}${zones || h.model ? `<details class="os-model"><summary>${I.check}<span>Model interpretation</span></summary>${zones ? `<div class="os-model-z"><small>The chart calls for</small>${zones}</div>` : ''}${h.model ? `<div class="os-html">${safeHtml(h.model)}</div>` : ''}</details>` : ''}`;
 }
 /* the candidate's phone in Part 2: the results, nothing of the examiner's */
 export function part2Html(st) {
@@ -202,7 +233,7 @@ export function qaHtml(st) {
     ${slides.length ? `<button class="os-btn os-btn--lg os-primary os-qashow" data-os="present" data-sid="${sid}" data-i="0">${I.max}<span>Show results to the candidate</span></button>` : ''}
     ${p.ask.length ? `<div class="os-qaask"><h4>Ask</h4><ol>${p.ask.map(q => `<li>${esc(q)}</li>`).join('')}</ol></div>` : ''}
     ${slides.length ? `<div class="os-qares"><h4>Results</h4><ul class="os-p2list" role="list">${slides.map((x, i) => `<li class="os-qacard">
-      <div class="os-qatop"><strong>${esc(x.label)}</strong><button class="os-ic os-ic--sm" data-os="present" data-sid="${sid}" data-i="${i}" aria-label="Show ${esc(x.label)} full screen" title="Show full screen">${I.max}</button></div>${x.html}</li>`).join('')}</ul></div>` : ''}
+      <div class="os-qatop"><span class="os-qalab">${x.h?.kind && KINDS[x.h.kind] ? `<small class="os-kind os-kind--${esc(x.h.kind)}">${esc(KINDS[x.h.kind])}</small>` : ''}<strong>${esc(x.label)}</strong></span><button class="os-ic os-ic--sm" data-os="present" data-sid="${sid}" data-i="${i}" aria-label="Show ${esc(x.label)} full screen" title="Show full screen">${I.max}</button></div>${qaCardBody(st, x)}</li>`).join('')}</ul></div>` : ''}
   </section>`;
 }
 /* the presenter: one result at a time, full screen; Previous / Next, the arrow keys or a swipe move through them */

@@ -79,10 +79,10 @@ if __name__ == '__main__' and sys.argv[1] != '--spec':
 CHARTS = [
     # id, file stem passed on the command line, title, ages (months, inclusive lo, exclusive hi), scales in page order, row steps
     ('sago', 'adult', 'Standard Adult General Observation Chart', 'Adults', (192, None), ['rr', 'spo2', 'sbp', 'hr', 'temp'], {'rr': 5, 'spo2': 5, 'sbp': 10, 'hr': 10, 'temp': 0.5}),
-    ('spoc-12', 'p12plus', 'Standard Paediatric Observation Chart', '12 years and over', (144, 192), ['rr', 'spo2', 'hr', 'sbp', 'temp'], {'rr': 5, 'spo2': 5, 'hr': 5, 'sbp': 5, 'temp': 0.5}),
-    ('spoc-5-11', 'p5to11', 'Standard Paediatric Observation Chart', '5 to 11 years', (60, 144), ['rr', 'spo2', 'hr', 'sbp', 'temp'], {'rr': 5, 'spo2': 5, 'hr': 5, 'sbp': 5, 'temp': 0.5}),
-    ('spoc-1-4', 'p1to4', 'Standard Paediatric Observation Chart', '1 to 4 years', (12, 60), ['rr', 'spo2', 'hr', 'sbp', 'temp'], {'rr': 5, 'spo2': 5, 'hr': 5, 'sbp': 5, 'temp': 0.5}),
-    ('spoc-3-12m', 'p3to12m', 'Standard Paediatric Observation Chart', '3 to 12 months', (3, 12), ['rr', 'spo2', 'hr', 'sbp', 'temp'], {'rr': 5, 'spo2': 5, 'hr': 5, 'sbp': 5, 'temp': 0.5}),
+    ('spoc-12', 'p12plus', 'Standard Paediatric Observation Chart', '12 years and over', (144, 192), ['rr', 'spo2', 'hr', 'sbp', 'temp'], {'rr': 5, 'spo2': 5, 'hr': 10, 'sbp': 10, 'temp': 0.5}),
+    ('spoc-5-11', 'p5to11', 'Standard Paediatric Observation Chart', '5 to 11 years', (60, 144), ['rr', 'spo2', 'hr', 'sbp', 'temp'], {'rr': 5, 'spo2': 5, 'hr': 10, 'sbp': 10, 'temp': 0.5}),
+    ('spoc-1-4', 'p1to4', 'Standard Paediatric Observation Chart', '1 to 4 years', (12, 60), ['rr', 'spo2', 'hr', 'sbp', 'temp'], {'rr': 5, 'spo2': 5, 'hr': 10, 'sbp': 10, 'temp': 0.5}),
+    ('spoc-3-12m', 'p3to12m', 'Standard Paediatric Observation Chart', '3 to 12 months', (3, 12), ['rr', 'spo2', 'hr', 'sbp', 'temp'], {'rr': 5, 'spo2': 5, 'hr': 10, 'sbp': 10, 'temp': 0.5}),
 ]
 
 # category rows: (page half, the heading word the rows sit beside, then each row's own label word); the fill behind each
