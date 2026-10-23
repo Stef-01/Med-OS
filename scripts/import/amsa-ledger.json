@@ -47,16 +47,11 @@
    "imaging": 1
   },
   "195": {
-   "status": "failed",
-   "at": "2026-10-23T20:24:10Z",
+   "status": "shipped",
+   "at": "2026-10-23T20:43:13Z",
    "title": "Thyroid Examination 1",
-   "gates": [
-    "check 22: a stray \"<\" in text"
-   ],
-   "blockers": [
-    "Part 2 Question 4 (ask[3], expect[3]) with checklist items 37, 38, 39, 40 (and 32, 35 when deferred to Q4): Question 4 is too big for its 90 seconds. In that time the candidate must explain the diagnosis and treatment, answer three of Eliza's questions (tablets forever, eyes, pregnancy), give three groups of red flags (three critical items: agranulocytosis, cardiac/thyroid storm with 000, vision) and arrange follow-up. The model answer has seven bullets. A competent candidate will run out of time and lose critical safety-netting marks. The question 'Will my eyes go back to normal?' earns no checklist item, so it only uses up time.",
-    "Checklist item 24 (crit) and item 23 (crit) vs Part 2 expect[0] (ISBAR Assessment): Item 24 requires the candidate to state a narrow QRS, normal axis and normal QTc. Item 23 requires them to say anti-TPO is positive but not specific. The model ISBAR answer, which is the 90-second answer these items are marked in, gives only 'ECG: AF about 110/min, no ischaemia' and 'TRAb positive = Graves''. An examiner following the model answer would mark down a candidate who said exactly what the model says, on two critical items. These details also don't change management and can't reasonably fit into a 90-second handover."
-   ]
+   "station": "amsa-195",
+   "by": "publish-amsa-draft.mjs"
   },
   "196": {
    "status": "shipped",
@@ -337,12 +332,34 @@
    "station": "amsa-257",
    "by": "publish-amsa-draft.mjs"
   },
+  "258": {
+   "status": "shipped",
+   "at": "2026-10-23T20:22:43Z",
+   "title": "Rheumatological Hand Examination 1",
+   "station": "amsa-258",
+   "rounds": 4,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 1
+  },
   "263": {
    "status": "shipped",
    "at": "2026-10-23T16:19:57Z",
    "title": "Gastrointestinal Exam 1",
    "station": "amsa-263",
    "by": "publish-amsa-draft.mjs"
+  },
+  "264": {
+   "status": "failed",
+   "at": "2026-10-23T20:30:43Z",
+   "title": "Upper Limb Neurological Exam 1",
+   "gates": [],
+   "blockers": [
+    "part2.expect[1] (diagnosis and differentials), bullet 'Rotator cuff pathology or brachial neuritis': Brachial neuritis is grouped with rotator cuff pathology and argued against using full passive shoulder movement, pain below the elbow and reduced reflexes. None of these exclude brachial neuritis: it can cause a reduced biceps reflex, sensory change and normal passive shoulder range. This teaches wrong discriminating features, and item 30 is scored against this model answer. The ddx section has the right reasons.",
+    "Checklist item 23 (sensation) together with the patient script exam findings 'Sensation' and the guide bullet on sensation: To earn the item the candidate must state pinprick, light touch, temperature, vibration and proprioception. But the examiner is told to stop the candidate as soon as they say they would examine sensation. A candidate who says 'I would now examine sensation' is cut off before naming the types and loses the item unfairly. The item also only says 'accepts' the finding; it never asks the candidate to identify it as C6, which is the point of the step."
+   ]
   },
   "265": {
    "status": "shipped",
