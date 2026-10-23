@@ -71,7 +71,11 @@ ${tasks ? `Tasks:\n${tasks}` : ''}
 ${plain(st.patient).slice(0, SCRIPT_MAX)}
 </examiner_and_patient_script>
 
-<checklist>
+${(st.part2?.handover || []).length ? `<part_2_results_handed_to_the_candidate>
+${st.part2.handover.map(h => `${h.label}: ${plain(h.result)}`).join('\n')}${st.part2.ask?.length ? `\nExaminer's questions: ${st.part2.ask.join(' | ')}` : ''}
+</part_2_results_handed_to_the_candidate>
+
+` : ''}<checklist>
 ${checklistLines(st.check)}
 </checklist>
 

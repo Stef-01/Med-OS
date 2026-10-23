@@ -8,9 +8,9 @@ import { esc } from '../core.mjs';
 import { wide, reduced } from '../study-kit/util.mjs';
 import { dialogOf } from '../study-kit/ui.mjs';
 import { discRowHtml, discCounts, discToggle } from '../study-kit/vocab.mjs';
-import { osceFilter, osceRandom, osceOrigin, osceAttBy, clampMin, ROTATIONS, ORIGINS, CX } from './core.mjs';
+import { osceFilter, osceRandom, osceOrigin, osceAttBy, clampMin, ROTATIONS, ORIGINS, CX, PHASES, DEFAULT_TIMING } from './core.mjs';
 import { ctx, I, PAGE, save, sess, attempted, body, NOLOAD, notify, openDialog, closeDialog, topDialog, openPop, closePop, bmButton, tagHtml, srcTag, pulse, examOf, nameOf, initialOf } from './state.mjs';
-import { tabsNav, tabBody, placePill, syncIndeterminate } from './session.mjs';
+import { tabsNav, tabBody, placePill, syncIndeterminate, contentTabs } from './session.mjs';
 
 let q = '', filt = { status: null, cx: [], type: [], rot: [], origin: [], saved: false }, shown = PAGE, io = null, qT = 0;
 let browseEl = null, browseScroll = null;
@@ -28,8 +28,7 @@ export function renderGroup(main) {
         ${wide() ? '' : `<button class="os-btn os-btn--lg os-addst" data-os="browse">${I.plusC}Add Stations</button>`}</div>
       <div class="os-side-foot">
         <div class="os-timing">${I.clock}
-          <div><span>${timing.reading} min</span><small>Reading</small></div>
-          <div><span>${timing.station} min</span><small>Station</small></div>
+          ${PHASES.map(([k, l]) => `<div data-tk-show="${k}"><span>${timing[k]} min</span><small>${l}</small></div>`).join('')}
           <button class="os-link" data-os="timing">Change</button></div>
         <button class="os-btn os-btn--lg os-primary" data-os="startp"${sess().queue.length ? '' : ' disabled'}>Start Practice</button>
       </div>
@@ -213,20 +212,21 @@ export function filterPop(b) {
 }
 
 /* ---------------------------------------------------------------- dialogs: timing, preview, the Add Stations sheet */
-export function timingDlg() {   /* OscesTimingDialog.vue */
+export function timingDlg() {   /* OscesTimingDialog.vue: one field per phase; Part 2 may be 0 (no Part 2) */
   const { timing } = ctx.mem;
   const d = openDialog({ kind: 'timing', title: 'Change Timing', cls: 'os-dlg--small', action: '<button class="os-btn os-primary" data-os="tsave">Save</button>',
-    body: `<form class="os-tform">${['reading', 'station'].map(k => `<div><label for="os-t-${k}">${k === 'reading' ? 'Reading' : 'Station'}</label>
-      <span><input id="os-t-${k}" type="number" inputmode="numeric" min="1" max="99" step="1" value="${timing[k]}" data-tk="${k}"> min</span></div>`).join('')}</form>` });
+    body: `<form class="os-tform">${PHASES.map(([k, l, long]) => `<div><label for="os-t-${k}" title="${long}">${l}</label>
+      <span><input id="os-t-${k}" type="number" inputmode="numeric" min="${k === 'mx' ? 0 : 1}" max="99" step="1" value="${timing[k]}" data-tk="${k}"> min</span></div>`).join('')}
+      <p class="os-tnote">Default ${DEFAULT_TIMING.reading} · ${DEFAULT_TIMING.station} · ${DEFAULT_TIMING.mx}: reading, then history and examination, then interpretation, management and safety netting. Part 2 at 0 runs without it.</p></form>` });
   const form = d.el.querySelector('form');
   form.addEventListener('submit', e => { e.preventDefault(); d.el.querySelector('[data-os="tsave"]').click(); });
 }
 export function saveTiming() {
   const d = topDialog(), { timing } = ctx.mem;
-  d.el.querySelectorAll('[data-tk]').forEach(i => { timing[i.dataset.tk] = clampMin(i.value, timing[i.dataset.tk]); });
+  d.el.querySelectorAll('[data-tk]').forEach(i => { timing[i.dataset.tk] = clampMin(i.value, timing[i.dataset.tk], i.dataset.tk === 'mx' ? 0 : 1); });
   save(); closeDialog();
   const t = ctx.ov.querySelector('.os-timing');
-  if (t) { t.children[1].firstElementChild.textContent = `${timing.reading} min`; t.children[2].firstElementChild.textContent = `${timing.station} min`; t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash'); }
+  if (t) { t.querySelectorAll('[data-tk-show]').forEach(x => { x.firstElementChild.textContent = `${timing[x.dataset.tkShow]} min`; }); t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash'); }
 }
 
 export async function previewDlg(id, initial) {   /* OscesPreviewDialog.vue; the body loads first (osce/<id>.json, once) */
@@ -235,7 +235,7 @@ export async function previewDlg(id, initial) {   /* OscesPreviewDialog.vue; the
   try { st = await body(id); } catch { return notify(NOLOAD, 'danger'); }
   if (!ctx.isOpen || dialogOf(ctx.ov, 'preview')) return;
   pvId = id;
-  const tabs = ['Instructions', ...(st.patient ? ['Patient Script'] : []), ...(examOf(st) ? ['Exam'] : []), 'Marking', 'Attempts'];
+  const tabs = [...contentTabs(st), 'Marking', 'Attempts'];
   pvTab = tabs.includes(initial) ? initial : 'Instructions';
   const inQ = sess().queue.includes(id), live = sess().idx != null;
   const d = openDialog({ kind: 'preview', title: st.title, cls: 'os-dlg--large',

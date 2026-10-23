@@ -3,7 +3,7 @@
 
    A request (written by the generator, or planned for an existing station) is
      { id, modality: xray|ct|ultrasound|mri|ecg|photo, region, view?, finding, laterality?: left|right|bilateral|none,
-       age?: adult|child|infant|neonate, place: stem|patientScript|explanation, caption, alt, terms?: [] }
+       age?: adult|child|infant|neonate, place: part2|stem|patientScript|explanation, caption, alt, terms?: [] }
    Metadata only shortlists: a candidate is accepted only after verify.mjs has looked at the pixels. */
 
 export const MODALITIES = {
@@ -14,7 +14,7 @@ export const MODALITIES = {
   ecg: { words: ['ecg', 'ekg', 'electrocardiogram', '12-lead', '12 lead'], search: 'ECG electrocardiogram', openi: '' },
   photo: { words: ['photo', 'photograph', 'clinical image'], search: 'clinical photograph', openi: 'ph' },
 };
-export const PLACES = ['stem', 'patientScript', 'explanation'];
+export const PLACES = ['part2', 'stem', 'patientScript', 'explanation'];   /* part2: handed over in Part 2 (the usual place for a scan) */
 
 /* licences a study page may show with a credit line: public domain, CC0 and the CC BY family (SA, NC, ND: the image is
    shown unchanged, for study, with its credit). Unknown, "all rights reserved", "fair use" and "non-free" never pass. */

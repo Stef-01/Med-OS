@@ -12,6 +12,10 @@ npm run validate            # validator + the quality gates as notes
 npx serve public            # local dev
 ```
 
+## Station format
+
+5 min reading, Part 1 (10 min) history and examination, Part 2 (5 min) results handed over, interpretation, management and safety netting. `docs/station-format.md` is the spec; `scripts/lib/station-gates.mjs` enforces it; `node scripts/check-station.mjs <id>` checks one station.
+
 ## Rules
 
 1. **Data is written by scripts.** Stations (`public/osce/<id>.json`), `index.json`, `exam.json` and `public/media/` come from `generate-station.mjs`, `fetch-imaging.mjs` and `build-index.mjs`. Fix the writer, not the output; rebuild the index after any station change; `npm test` fails on a stale index.

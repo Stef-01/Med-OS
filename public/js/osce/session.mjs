@@ -9,7 +9,7 @@ import { wide, fmtDate } from '../study-kit/util.mjs';
 import { safeHtml } from '../study-kit/safe.mjs';
 import { figureHtml } from '../study-kit/media.mjs';
 import { mnemonicsFor } from './mnemonics.mjs';
-import { HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
+import { HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, curAttempt, findAttempt, now, body, NOLOAD, bell, notify, confirmDlg, openDialog, closeDialog, openPop, closePop, tagHtml, srcTag, ago, aiEnabled, markerCfg, examOf, nameOf, whoBadge, roleLine } from './state.mjs';
 import { markDirect, markPromptText, parseReply } from './marker.mjs';
 import { candidateLink } from './candidate.mjs';
@@ -20,7 +20,7 @@ let tickT = 0, hlOn = false, hlT = 0, lastScroll = {};   /* StationTabs.vue: eac
 export function renderSession(main) {
   const s = sess(), st = ctx.byId.get(s.queue[s.idx]), a = curAttempt(), fin = osceFinished(s.timer);
   const pane = fin && wide();
-  const tabs = ['Instructions', ...(st.patient || st.media?.patientScript?.length ? ['Patient Script'] : []), ...(examOf(st) ? ['Exam'] : []), ...(pane ? [] : ['Marking'])];
+  const tabs = [...contentTabs(st), ...(pane ? [] : ['Marking'])];
   if (!tabs.includes(ctx.tab)) ctx.tab = tabs[0];
   main.innerHTML = `<div class="os-sess${fin ? ' fin' : ''}${pane ? ' panes' : ''}">
     <div class="os-sbar">${fin ? finishedBar() : timerBar()}</div>
@@ -31,15 +31,19 @@ export function renderSession(main) {
   placePill(main); syncIndeterminate();
   if (!fin) startTick();
 }
+/* the tabs a station's content fills: the examiner's Part 2 sheet only when the station has one */
+export const contentTabs = st => ['Instructions', ...(st.patient || st.media?.patientScript?.length ? ['Patient Script'] : []), ...(examOf(st) ? ['Exam'] : []), ...(hasPart2(st) ? ['Part 2'] : [])];
+/* what the bell means, said once as the clock moves on */
+const phaseNotice = (c, timing) => (c === 'station' ? `Part 1: history and examination · ${timing.station} minutes` : c === 'mx' ? `Part 2: hand over the results · ${timing.mx} minutes` : '');
 function timerBar() {
-  const t = sess().timer, c = t?.c || 'reading', { timing } = ctx.mem;
+  const t = sess().timer, c = t?.c || 'reading', { timing } = ctx.mem, ps = phasesOf(timing), nx = nextPhase(c, timing);
   return `<div class="os-timer">
     <span class="os-ring${t?.at ? '' : ' paused'}" role="progressbar" aria-valuemin="0" aria-valuemax="100"><svg viewBox="0 0 100 100"><circle class="os-ring-t" r="43" cx="50" cy="50"/><circle class="os-ring-s" r="43" cx="50" cy="50" transform="rotate(-90 50 50)" stroke-linecap="round"/></svg></span>
-    <div class="os-tcomps">${['reading', 'station'].map(k => `<div class="os-tc${k === c && t?.at ? '' : ' off'}${k === c ? ' cur' : ''}" data-c="${k}"><small>${k === 'reading' ? 'Reading' : 'Station'}</small><b>${k === c ? mmss(osceLeft(t, now())) : `${k === 'reading' && c === 'station' ? 0 : timing[k]}:00`}</b></div>`).join('')}</div>
+    <div class="os-tcomps">${ps.map(k => `<div class="os-tc${k === c && t?.at ? '' : ' off'}${k === c ? ' cur' : ''}" data-c="${k}" title="${phaseName(k, true)}"><small>${phaseName(k)}</small><b>${k === c ? mmss(osceLeft(t, now())) : `${ps.indexOf(k) < ps.indexOf(c) ? 0 : timing[k]}:00`}</b></div>`).join('')}</div>
     <div class="os-tctl">
       <button class="os-ic" data-os="restart" aria-label="Restart Station" title="Restart Station">${I.reload}</button>
       <button class="os-ic os-ic--fill" data-os="pp" aria-label="${t?.at ? 'Pause Timer' : 'Start Timer'}" title="${t?.at ? 'Pause Timer' : 'Start Timer'}">${t?.at ? I.pause : I.play}</button>
-      <button class="os-ic os-ic--fill" data-os="skip" aria-label="${c === 'reading' ? 'Skip to Station Time' : 'Finish Station'}" title="${c === 'reading' ? 'Skip to Station Time' : 'Finish Station'}">${c === 'reading' ? I.next : I.stop}</button>
+      <button class="os-ic os-ic--fill" data-os="skip" aria-label="${nx ? `Skip to ${phaseName(nx)}` : 'Finish Station'}" title="${nx ? `Skip to ${phaseName(nx)}` : 'Finish Station'}">${nx ? I.next : I.stop}</button>
     </div></div>`;
 }
 function finishedBar() {
@@ -57,7 +61,7 @@ function paintTimer() {
   bar.querySelector('.os-ring').setAttribute('aria-valuenow', Math.round(p * 100));
   const b = bar.querySelector(`.os-tc[data-c="${t.c}"] b`);
   if (b) b.textContent = mmss(left);
-  bar.querySelector('.os-ring').classList.toggle('low', t.c === 'station' && left <= 60);
+  bar.querySelector('.os-ring').classList.toggle('low', t.c !== 'reading' && !nextPhase(t.c, ctx.mem.timing) && left <= 60);
 }
 function startTick() {
   stopTick();
@@ -72,7 +76,7 @@ function tick() {
   if (nx !== s.timer) {
     const was = s.timer.c;
     s.timer = nx; save(); bell();
-    if (!nx.at) finishStation(); else { if (was !== nx.c) notify(nx.c === 'station' ? `Station time: ${timing.station} minutes` : ''); paintBar(); }
+    if (!nx.at) finishStation(); else { if (was !== nx.c) onPhase(nx.c); paintBar(); }
     return;
   }
   paintTimer();
@@ -81,11 +85,17 @@ export function stopTick() { clearInterval(tickT); tickT = 0; document.removeEve
 function paintBar() { const bar = ctx.ov.querySelector('.os-sbar'); if (bar) { bar.innerHTML = timerBar(); paintTimer(); } }
 /* the pause / play button */
 export function togglePause() { const s = sess(); s.timer = s.timer?.at ? oscePause(s.timer, now()) : osceResume(s.timer, now()); save(); paintBar(); }
-/* skip: reading → station, station → finished */
+/* skip: on to the next phase, or from the last one to finished */
 export function skip() {
   const s = sess(); s.timer = osceNext(s.timer, ctx.mem.timing, now()); save(); bell();
   if (!s.timer.at) return finishStation();
-  notify(`Station time: ${ctx.mem.timing.station} minutes`); paintBar();
+  onPhase(s.timer.c); paintBar();
+}
+/* a new phase: say so; at Part 2 the examiner's sheet comes up (unless they are marking) */
+function onPhase(c) {
+  notify(phaseNotice(c, ctx.mem.timing));
+  const st = ctx.byId.get(sess().queue[sess().idx]);
+  if (c === 'mx' && hasPart2(st) && ctx.tab !== 'Marking' && ctx.ov.querySelector('[data-os="tab"][data-tab="Part 2"]')) switchTab('Part 2');
 }
 function finishStation() {
   const a = curAttempt();
@@ -153,13 +163,30 @@ export function tabBody(st, a, t, o = {}) {
   if (a && a.hl?.[t] && (t === 'Instructions' || t === 'Patient Script')) return `<div class="os-sheet" data-hl="${t}">${a.hl[t]}</div>${o.editable ? toolbar() : ''}`;
   if (t === 'Instructions') {
     return `<div class="os-sheet" data-hl="Instructions"><h2>Instructions to Candidate</h2><div class="os-html">${safeHtml(st.stem)}</div>${imgs(st.media?.stem)}
+      ${formatHtml()}
       ${st.tasks.length ? `<h3>Tasks</h3><ol class="os-tasks" role="list">${st.tasks.map((x, i) => `<li><span class="os-tn">${i + 1}</span><div class="os-html">${safeHtml(x)}</div></li>`).join('')}</ol>` : ''}
       </div>${a && o.editable ? toolbar() : ''}`;
   }
+  if (t === 'Part 2') return part2Html(st);
   if (t === 'Patient Script') return `<div class="os-sheet" data-hl="Patient Script"><h2>Patient Script</h2><div class="os-html">${safeHtml(st.patient)}</div>${imgs(st.media?.patientScript)}</div>${a && o.editable ? toolbar() : ''}`;
   if (t === 'Marking') return `<div class="os-sheet">${markingHtml(st, a, !!o.editable)}</div>`;
   if (t === 'Exam') return `<div class="os-sheet">${examHtml(examOf(st))}</div>`;
   return attemptsHtml(st);
+}
+/* the station's shape, from the timing in use: Reading 5 · Part 1 10 · Part 2 5 */
+export function formatHtml(timing = ctx.mem.timing) {
+  return `<ol class="os-format" role="list" aria-label="Station format">${phasesOf(timing).map(k => `<li><small>${phaseName(k)}</small><b>${timing[k]} min</b><span>${phaseWhat(k)}</span></li>`).join('')}</ol>`;
+}
+/* Part 2 for the examiner: the opening line, the results to hand over (and their images), the questions in order */
+export function part2Html(st, { candidate = false } = {}) {
+  const p = st.part2 || { handover: [], ask: [] }, m = ctx.mem?.timing?.mx;
+  return `<div class="os-sheet os-p2"><h2>${candidate ? 'Results from the examiner' : 'Part 2'}</h2>
+    <p class="os-p2sub">Interpretation, management and safety netting${m ? ` · ${m} minutes` : ''}</p>
+    ${!candidate && p.lead ? `<div class="os-p2lead"><small>Examiner says</small><p>“${esc(p.lead)}”</p></div>` : ''}
+    ${p.handover.length ? `${candidate ? '' : '<h3>Hand over</h3>'}<ul class="os-p2list" role="list">${p.handover.map(h => `<li><strong>${esc(h.label)}</strong><div class="os-html">${safeHtml(h.result)}</div></li>`).join('')}</ul>` : ''}
+    ${imgs(st.media?.part2)}
+    ${!candidate && p.ask.length ? `<h3>Ask</h3><ol class="os-p2ask">${p.ask.map(q => `<li>${esc(q)}</li>`).join('')}</ol>` : ''}
+  </div>`;
 }
 /* Exam mode (2026-10-22, founder: "a clear separate section, as this has been invented from the original eMedici content"):
    the AI-written findings in their own box, labelled as such; each step is closed until tapped, so the candidate says what
@@ -472,7 +499,7 @@ export function renderAttempt(main) {
   const a = findAttempt(ctx.reviewId), st = a && ctx.byId.get(a.sid);
   if (!st) { ctx.view = ctx.back2; return ctx.render(); }
   const pane = wide();
-  const tabs = ['Instructions', ...(st.patient ? ['Patient Script'] : []), ...(examOf(st) ? ['Exam'] : []), ...(pane ? [] : ['Marking'])];
+  const tabs = [...contentTabs(st), ...(pane ? [] : ['Marking'])];
   if (!tabs.includes(ctx.tab)) ctx.tab = pane ? 'Instructions' : 'Marking';
   main.innerHTML = `<div class="os-sess fin${pane ? ' panes' : ''}"><div class="os-panes">
     <div class="os-pl">${tabsNav(tabs)}<div class="os-pscroll"><div class="os-pbody">${tabBody(st, a, ctx.tab, { editable: false })}</div></div></div>

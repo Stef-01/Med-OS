@@ -4,7 +4,7 @@ A study app for two medical students to practise OSCE stations together. One of 
 
 What's in it:
 
-- **26 stations**, each with instructions to the candidate, timed tasks, a full patient and examiner script, the marking checklist (Critical items flagged, global impression), an explanation, learning points and references, plus an Exam mode with examination findings. Every station is AI-generated and tagged **AI** wherever it shows. Check anything you rely on against the current guideline it cites.
+- **26 stations in one format**: 5 minutes reading, then **Part 1** (10 minutes) a focused history and examination, then **Part 2** (5 minutes) where the examiner hands over observations, investigations or scans and the candidate interprets them, gives a management approach and safety-nets. Each station has the instructions, the patient script, examination findings, the Part 2 results and questions, the full marking checklist (History, Examination, Interpretation, Management, Safety netting; Critical items flagged; global impression), an explanation, learning points and references. Every station is AI-generated and tagged **AI** wherever it shows. Check anything you rely on against the current guideline it cites.
 - **Partner mode**: your two names, who sits first, an automatic swap after each station, and every attempt saved under the candidate's name.
 - **A candidate screen**: a link the candidate opens on their own phone that shows the instructions and the same countdown, so the examiner keeps the main device.
 - **AI marking**: paste a transcript of the attempt and Claude marks it item by item against that station's checklist, with quotes as evidence, what was missed, phrasing that would score, and a model handover.
@@ -22,8 +22,8 @@ To put it online, import the repo into Vercel (it reads `vercel.json`, output di
 
 1. On the start screen, type both names and pick who sits first. "Swap each station" alternates the candidate.
 2. **New Study Session**: add stations (search, filter by discipline, type, complexity, or Add Random), then Start Practice. **Fast Run** picks whole rotations and runs every station in them in random order.
-3. Each station runs 2 minutes reading, then 8 minutes. Change the times under the station queue. The header always says who is the candidate and who examines.
-4. The examiner uses **Patient Script**, **Exam** and **Marking**. To give the candidate their own screen, open the menu (•••) and choose **Candidate screen**, then send the link to their phone.
+3. The clock runs **Reading 5 · Part 1 10 · Part 2 5**, with a bell at each change. Change the times under the station queue (Part 2 at 0 runs without it). The header always says who is the candidate and who examines.
+4. In Part 1 the examiner plays the patient from **Patient Script** and gives findings from **Exam** as the candidate says what they would examine. When Part 2 starts, the **Part 2** tab opens: the examiner reads the opening line, hands over the results and asks the questions in order. To give the candidate their own screen, open the menu (•••) and choose **Candidate screen**, then send the link to their phone: it shows the instructions and the countdown, and the Part 2 results appear on it when Part 2 starts.
 5. When the bell goes, the examiner ticks the checklist and the global impression, and can write feedback. The **Handover add-on** and **Memory aids** sit at the bottom of the marking sheet.
 6. **Next Station** shows who sits next (Swap to change it). **End Session** lists every station with whose attempt it was.
 7. **Marked** (top right of the start screen) collects every AI-marked attempt.
@@ -57,10 +57,10 @@ npm run generate -- --revise ai-1337df24     # an existing station through the s
 Each station goes through:
 
 1. **Draft** (Claude Opus 5.5) against three stations of the same kind from the bank, so new stations match the existing depth and checklist style.
-2. **Gates in code** (`scripts/lib/station-gates.mjs`): checklist size within the range the bank covers for that kind of station, at least two Critical items and no more than 60%, the right section headings for the station type, 2 to 4 tasks whose times add to 8 minutes, a full patient script, named Australian guidelines (RCH Clinical Practice Guidelines for paediatrics, RANZCOG and a state guideline for O&G), the HTML allowlist, and valid imaging requests.
+2. **Gates in code** (`scripts/lib/station-gates.mjs`, the format in `docs/station-format.md`): two tasks timed 10 and 5 minutes and no times in the stem; a Part 2 with an opening line, at least two results and at least two questions; the checklist under Professionalism, History, Examination, Interpretation, Management and Safety netting, with at least two safety-netting items; 20 to about 48 items, at least two Critical and no more than 60%; a full patient script; named Australian guidelines (RCH Clinical Practice Guidelines for paediatrics, RANZCOG and a state guideline for O&G); the HTML allowlist; valid imaging requests.
 3. **An independent examiner pass** that checks every checklist item against the cited guideline and the station against itself (same patient, same side, same numbers), with paediatric doses checked per kg.
 4. **One revision** on everything found, then the gates and the examiner again. A station ships only when both pass; otherwise it goes to `drafts/` with the problems listed.
-5. **Exam findings** for the Exam tab, consistent with the script.
+5. **Exam findings** for the Exam tab (Part 1), consistent with the script.
 6. **Imaging** (next section).
 
 The index, the exam findings and the validator are updated for you.
@@ -88,7 +88,8 @@ This needs network access to `commons.wikimedia.org`, `upload.wikimedia.org` and
 ```
 npm test          # unit tests (no install needed) and the bank validator
 npm run e2e       # the whole two-person flow in Chromium at 393, 320 and 1280 px
-npm run validate  # the validator plus each existing station's gaps against the generator's bar
+npm run validate  # the validator plus each station's gaps against the generator's bar
+node scripts/check-station.mjs <id>   # one station against every gate
 ```
 
 ## Layout

@@ -89,3 +89,54 @@ test('the shipped bank: every index row has its body, every body passes the stat
     assert.ok(full.patient.length > 1000, `${r.id} has a patient script`);
   }
 });
+
+import { osceStart, osceTick, osceNext, osceLeft, osceFinished, osceResume, oscePause, phasesOf, nextPhase, DEFAULT_TIMING, oscePart2, hasPart2 } from '../public/js/osce/core.mjs';
+
+test('the clock: 5 minutes reading, 10 of history and examination, 5 of interpretation and management', () => {
+  const T = DEFAULT_TIMING;
+  assert.deepEqual(T, { reading: 5, station: 10, mx: 5 });
+  assert.deepEqual(phasesOf(T), ['reading', 'station', 'mx']);
+  let t = osceStart(T, 0);
+  assert.deepEqual(t, { c: 'reading', left: 300, at: 0 });
+  t = osceTick(t, T, 300_000);
+  assert.deepEqual(t, { c: 'station', left: 600, at: 300_000 });
+  t = osceTick(t, T, 905_000);   /* Part 1 ran out 5 s ago while the tab was hidden: Part 2 started then */
+  assert.deepEqual([t.c, osceLeft(t, 905_000)], ['mx', 295]);
+  t = osceTick(t, T, 1_200_000);
+  assert.ok(osceFinished(t));
+  assert.equal(osceResume(t, 1), t, 'a finished clock cannot be resumed');
+});
+
+test('skip moves one phase at a time; Part 2 at 0 runs without it; a paused clock stays paused', () => {
+  const T = DEFAULT_TIMING;
+  let t = osceNext(osceStart(T, 0), T, 10);
+  assert.deepEqual(t, { c: 'station', left: 600, at: 10 });
+  t = osceNext(t, T, 20);
+  assert.deepEqual(t, { c: 'mx', left: 300, at: 20 });
+  assert.ok(osceFinished(osceNext(t, T, 30)));
+  const two = { ...T, mx: 0 };
+  assert.deepEqual(phasesOf(two), ['reading', 'station']);
+  assert.equal(nextPhase('station', two), null);
+  assert.ok(osceFinished(osceNext({ c: 'station', left: 100, at: 0 }, two, 5)));
+  const p = oscePause({ c: 'station', left: 600, at: 0 }, 60_000);
+  assert.deepEqual(p, { c: 'station', left: 540, at: null });
+  assert.ok(!osceFinished(p));
+  assert.equal(osceTick(p, T, 10_000_000), p, 'paused time does not run');
+});
+
+test('timing: the old 2 + 8 default moves to 5 / 10 / 5; chosen times stay; a station finished under the old clock stays finished', () => {
+  assert.deepEqual(osceMigrate({ v: 2, timing: { reading: 2, station: 8 } }, 1).timing, DEFAULT_TIMING);
+  assert.deepEqual(osceMigrate({ v: 2, timing: { reading: 3, station: 9 } }, 1).timing, { reading: 3, station: 9, mx: 5 });
+  assert.deepEqual(osceMigrate({ v: 2, tv: 3, timing: { reading: 5, station: 10, mx: 0 } }, 1).timing, { reading: 5, station: 10, mx: 0 });
+  const m = osceMigrate({ v: 2, sess: { queue: ['a'], idx: 0, timer: { c: 'station', left: 0, at: null } } }, 1);
+  assert.ok(osceFinished(m.sess.timer));
+});
+
+test('Part 2: results with a label and a result, questions in order, anything malformed dropped', () => {
+  const p = oscePart2({ lead: ' Here are the bloods. ', handover: [{ label: 'FBC', result: '<p>Hb 92</p>' }, { label: '', result: 'x' }, 'junk'], ask: ['What do they show?', '', 7] });
+  assert.deepEqual(p, { lead: 'Here are the bloods.', handover: [{ label: 'FBC', result: '<p>Hb 92</p>' }], ask: ['What do they show?'] });
+  assert.deepEqual(oscePart2(null), { lead: '', handover: [], ask: [] });
+  assert.ok(hasPart2({ part2: p }));
+  assert.ok(hasPart2({ part2: oscePart2(null), media: { part2: [{}] } }));
+  assert.ok(!hasPart2({ part2: oscePart2(null) }));
+});

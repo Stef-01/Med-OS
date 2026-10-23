@@ -1,14 +1,16 @@
 /* osce/candidate.mjs - the candidate screen: a read-only page for the candidate's own phone while the examiner keeps the
    main device (patient script, marking sheet). The examiner's More menu makes a link that carries the station id and the
-   clock as it stands (component, seconds left, the moment it was read, the reading and station minutes); this page shows
-   the Instructions to Candidate, any images in them, and the same countdown, ringing the bell at each change. Nothing
-   here writes to storage. Pure parts: candidateLink, parseCandidate. */
+   clock as it stands (phase, seconds left, the moment it was read, the minutes of each phase); this page shows the
+   Instructions to Candidate, any images in them, and the same countdown, ringing the bell at each change. When Part 2
+   starts, the results the examiner hands over (and their scans) appear under the instructions. Nothing here writes to
+   storage. Pure parts: candidateLink, parseCandidate. */
 import { esc } from '../core.mjs';
 import { safeHtml } from '../study-kit/safe.mjs';
 import { figureHtml } from '../study-kit/media.mjs';
 import { loadCss } from '../study-kit/css.mjs';
-import { osceLeft, osceTick, osceCleanStation, mmss, clampMin } from './core.mjs';
+import { osceLeft, osceTick, osceCleanStation, mmss, clampMin, phasesOf, phaseName, hasPart2, DEFAULT_TIMING } from './core.mjs';
 import { I, bell, audio } from './state.mjs';
+import { formatHtml, part2Html } from './session.mjs';
 
 /* the link: the page's own address with the station and the clock in the query (no hash, no other params) */
 export function candidateLink(href, sid, timer, timing, now) {
@@ -16,11 +18,12 @@ export function candidateLink(href, sid, timer, timing, now) {
   u.search = ''; u.hash = '';
   const left = Math.max(0, osceLeft(timer, now));
   u.searchParams.set('cand', sid);
-  u.searchParams.set('c', timer && timer.c === 'station' ? 's' : 'r');
+  u.searchParams.set('c', timer && timer.c === 'mx' ? 'm' : timer && timer.c === 'station' ? 's' : 'r');
   u.searchParams.set('left', String(left));
   u.searchParams.set('t', String(now));
   u.searchParams.set('r', String(timing.reading));
   u.searchParams.set('s', String(timing.station));
+  u.searchParams.set('m', String(timing.mx ?? 0));
   return u.toString();
 }
 
@@ -31,8 +34,10 @@ export function parseCandidate(search) {
   if (!sid || !/^[\w-]{1,64}$/.test(sid)) return null;
   const t = Number(q.get('t')), left = Number(q.get('left'));
   if (!Number.isFinite(t) || !Number.isFinite(left) || left < 0 || left > 99 * 60) return null;
-  const timing = { reading: clampMin(q.get('r'), 2), station: clampMin(q.get('s'), 8) };
-  return { sid, timing, timer: { c: q.get('c') === 's' ? 'station' : 'reading', left: Math.round(left), at: t } };
+  const timing = { reading: clampMin(q.get('r'), DEFAULT_TIMING.reading), station: clampMin(q.get('s'), DEFAULT_TIMING.station), mx: clampMin(q.get('m'), q.has('m') ? 0 : DEFAULT_TIMING.mx, 0) };
+  const c = { s: 'station', m: 'mx' }[q.get('c')] || 'reading';
+  if (c === 'mx' && !timing.mx) return null;
+  return { sid, timing, timer: { c, left: Math.round(left), at: t } };
 }
 
 /* the page: header, the clock, the instructions */
@@ -49,19 +54,24 @@ export async function renderCandidate(root, p) {
   const pane = root.querySelector('.os-pbody');
   if (!st) { pane.innerHTML = '<p class="os-kicker">That station did not load. Check the link and the connection.</p>'; return; }
   root.querySelector('.os-title').textContent = st.title;
-  pane.innerHTML = `<div class="os-sheet"><h2>Instructions to Candidate</h2><div class="os-html">${safeHtml(st.stem)}</div>${(st.media?.stem || []).map(figureHtml).join('')}
+  pane.innerHTML = `<div class="os-cpart2"></div><div class="os-sheet"><h2>Instructions to Candidate</h2><div class="os-html">${safeHtml(st.stem)}</div>${(st.media?.stem || []).map(figureHtml).join('')}
+    ${formatHtml(p.timing)}
     ${st.tasks.length ? `<h3>Tasks</h3><ol class="os-tasks" role="list">${st.tasks.map((x, i) => `<li><span class="os-tn">${i + 1}</span><div class="os-html">${safeHtml(x)}</div></li>`).join('')}</ol>` : ''}</div>`;
+  /* Part 2: the results arrive on this screen when the examiner's clock reaches it */
+  const part2 = root.querySelector('.os-cpart2');
+  const showPart2 = () => { if (part2.childElementCount || !hasPart2(st)) return; part2.innerHTML = part2Html(st, { candidate: true }); part2.scrollIntoView({ block: 'start' }); };
   let timer = p.timer;
   const bar = root.querySelector('.os-sbar');
   const paint = () => {
     const next = osceTick(timer, p.timing, Date.now());
     if (next !== timer) { timer = next; bell(); }
+    if (timer.c === 'mx') showPart2();
     const fin = !timer.at;
     const left = fin ? 0 : osceLeft(timer, Date.now()), total = p.timing[timer.c] * 60, pr = Math.min(1, Math.max(0, 1 - left / total)), C = 43 * 2 * Math.PI;
     bar.innerHTML = fin ? `<div class="os-finished"><span class="os-fh">${I.done}<h5>Station Finished</h5></span></div>`
-      : `<div class="os-timer"><span class="os-ring${left <= 60 && timer.c === 'station' ? ' low' : ''}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pr * 100)}"><svg viewBox="0 0 100 100"><circle class="os-ring-t" r="43" cx="50" cy="50"/><circle class="os-ring-s" r="43" cx="50" cy="50" transform="rotate(-90 50 50)" stroke-linecap="round" stroke-dasharray="${C * pr} ${C}" style="opacity:${pr ? 1 : 0}"/></svg></span>
-        <div class="os-tcomps">${['reading', 'station'].map(k => `<div class="os-tc${k === timer.c ? ' cur' : ' off'}"><small>${k === 'reading' ? 'Reading' : 'Station'}</small><b>${k === timer.c ? mmss(left) : `${k === 'reading' ? 0 : p.timing.station}:00`}</b></div>`).join('')}</div></div>`;
-    root.querySelector('.os-sub').innerHTML = esc(fin ? 'Time is up' : timer.c === 'reading' ? 'Reading time' : 'Station time');
+      : `<div class="os-timer"><span class="os-ring${left <= 60 && timer.c !== 'reading' ? ' low' : ''}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pr * 100)}"><svg viewBox="0 0 100 100"><circle class="os-ring-t" r="43" cx="50" cy="50"/><circle class="os-ring-s" r="43" cx="50" cy="50" transform="rotate(-90 50 50)" stroke-linecap="round" stroke-dasharray="${C * pr} ${C}" style="opacity:${pr ? 1 : 0}"/></svg></span>
+        <div class="os-tcomps">${phasesOf(p.timing).map((k, i, ps) => `<div class="os-tc${k === timer.c ? ' cur' : ' off'}" title="${phaseName(k, true)}"><small>${phaseName(k)}</small><b>${k === timer.c ? mmss(left) : `${i < ps.indexOf(timer.c) ? 0 : p.timing[k]}:00`}</b></div>`).join('')}</div></div>`;
+    root.querySelector('.os-sub').innerHTML = esc(fin ? 'Time is up' : phaseName(timer.c, true));
     if (fin) clearInterval(iv);
   };
   const iv = setInterval(paint, 250);

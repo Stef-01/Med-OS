@@ -12,21 +12,26 @@ const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'publi
 const bank = fs.readdirSync(path.join(PUB, 'osce')).filter(f => f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(PUB, 'osce', f), 'utf8')));
 const stats = bankStats(bank);
 
-/* a well-formed acute paediatric station, as the model would return it */
+/* a well-formed acute paediatric station in the 5 / 10 / 5 format, as the model would return it */
 const leaf = (id, x, crit = false) => ({ id, t: 'checkbox', x, crit, d: '', kids: [] });
+const H = (id, x) => ({ id, t: 'heading', x, crit: false, d: '', kids: [] });
 const DRAFT = {
   title: 'Wheezy toddler in the emergency department', desc: 'Acute asthma in a 4-year-old.', focus: 'Acute asthma: severity and stepwise treatment',
-  specialty: ['Paediatrics', 'Emergency Medicine'], type: ['Emergency', 'Management', 'Counselling'], complexity: 'Moderate',
+  specialty: ['Paediatrics', 'Emergency Medicine'], type: ['Emergency', 'History', 'Examination', 'Management'], complexity: 'Moderate',
   context: ['Emergency department'], presentation: ['Wheeze'], diagnosis: ['Acute asthma'],
-  stem: '<p>You are the junior doctor in a paediatric ED. Mia, 4, is wheezy. This station is 8 minutes.</p>',
-  tasks: ['<p>Assess Mia (3 minutes).</p>', '<p>Manage her (3 minutes).</p>', '<p>Explain the plan to her father (2 minutes).</p>'],
+  stem: '<p>You are the junior doctor in a paediatric ED. Mia, 4, is wheezy and her father is with her.</p>',
+  tasks: ['<p>Take a focused history from her father and examine Mia (10 minutes).</p>', '<p>The examiner will give you her observations. Interpret them, then outline your management approach and safety netting (5 minutes).</p>'],
   patient: `<p>${'Mia has been wheezy since last night after a cold. '.repeat(40)}</p>`,
-  check: [{ id: 1, t: 'heading', x: 'Professionalism', crit: false, d: '', kids: [] }, leaf(2, 'Introduces self'),
-    { id: 3, t: 'heading', x: 'Assessment', crit: false, d: '', kids: [] }, ...Array.from({ length: 6 }, (_, i) => leaf(4 + i, `Assesses item ${i + 1}`, i < 2)),
-    { id: 10, t: 'heading', x: 'Management', crit: false, d: '', kids: [] },
-    { id: 11, t: 'checkbox', x: 'Gives salbutamol by spacer:', crit: true, d: '', kids: [{ id: 1, x: '6 puffs (age under 6)', crit: false, d: '' }, { id: 2, x: 'Reassesses at 20 minutes', crit: false, d: '' }] },
-    ...Array.from({ length: 4 }, (_, i) => leaf(12 + i, `Management item ${i + 1}`, i === 0)),
-    { id: 16, t: 'heading', x: 'Communication', crit: false, d: '', kids: [] }, ...Array.from({ length: 4 }, (_, i) => leaf(17 + i, `Explains item ${i + 1}`))],
+  part2: { lead: 'Here are her observations on arrival and after treatment.', handover: [{ label: 'Observations', result: '<p>RR 40, HR 150, SpO2 93% on room air</p>' }, { label: 'After 3 doses of salbutamol', result: '<p>RR 30, SpO2 96%</p>' }],
+    ask: ['How severe is her asthma?', 'What is your management?', 'What would you tell her father before she goes home?'] },
+  check: [H(1, 'Professionalism'), leaf(2, 'Introduces self'), leaf(3, 'Plain language'),
+    H(4, 'History'), ...Array.from({ length: 5 }, (_, i) => leaf(5 + i, `History item ${i + 1}`)),
+    H(10, 'Examination'), ...Array.from({ length: 4 }, (_, i) => leaf(11 + i, `Examines item ${i + 1}`, i === 0)),
+    H(15, 'Interpretation'), leaf(16, 'Classifies moderate asthma', true), leaf(17, 'Recognises the response to treatment'),
+    H(18, 'Management'),
+    { id: 19, t: 'checkbox', x: 'Gives salbutamol by spacer:', crit: true, d: '', kids: [{ id: 1, x: '6 puffs (age under 6)', crit: false, d: '' }, { id: 2, x: 'Reassesses at 20 minutes', crit: false, d: '' }] },
+    ...Array.from({ length: 3 }, (_, i) => leaf(20 + i, `Management item ${i + 1}`, i === 0)),
+    H(23, 'Safety netting'), leaf(24, 'Red flags: hard breathing, can\'t talk, blue lips: call 000', true), leaf(25, 'GP review in 1 to 2 days with a written asthma action plan')],
   guide: '', explain: '<p>Asthma severity guides treatment.</p>', points: ['<p>One</p>', '<p>Two</p>', '<p>Three</p>', '<p>Four</p>'],
   refs: ['RCH Clinical Practice Guideline: Asthma acute', 'National Asthma Council Australia: Australian Asthma Handbook'],
   imaging: [],
@@ -46,14 +51,19 @@ test('the quality gates pass a sound draft and name each thing wrong with a brok
   assert.deepEqual(shapeProblems(ok), []);
   assert.deepEqual(qualityProblems(ok, stats), []);
   const bad = normalize({ ...DRAFT, tasks: ['<p>Assess (5 minutes)</p>', '<p>Manage (5 minutes)</p>'], refs: ['Some textbook'], specialty: ['Paediatrics', 'Made Up Specialty'],
-    check: DRAFT.check.filter(i => i.x !== 'Communication' && i.x !== 'Professionalism'), imaging: [{ id: 'X', modality: 'scan', place: 'stem', region: '', finding: '', caption: '', alt: '' }],
-    stem: '<p onclick="x()">hi</p>' });
+    check: DRAFT.check.filter(i => i.x !== 'Safety netting' && i.x !== 'Professionalism'), imaging: [{ id: 'X', modality: 'scan', place: 'stem', region: '', finding: '', caption: '', alt: '' }],
+    stem: '<p onclick="x()">hi, you have 8 minutes</p>', part2: { lead: '', handover: [{ label: 'Obs', result: 'x' }], ask: [] } });
   const p = qualityProblems({ id: 'ai-test', ...bad }, stats).join('\n') + shapeProblems({ id: 'ai-test', ...bad }).join('\n');
-  for (const want of [/task times add to 10/, /at least 2 references/, /RCH/, /Australian guideline/, /Made Up Specialty/, /Professionalism heading/, /Communication or Counselling heading/, /imaging X/, /stem: .*onclick/]) assert.match(p, want);
+  for (const want of [/task times add to 10/, /at least 2 references/, /RCH/, /Australian guideline/, /Made Up Specialty/, /Professionalism heading/, /Safety netting heading/, /imaging X/, /stem: .*onclick/,
+    /leave times out of the stem/, /Part 2 hands over at least 2 results/, /at least 2 examiner questions/, /opening line/]) assert.match(p, want);
+  const oneSafety = normalize({ ...DRAFT, check: DRAFT.check.filter(i => i.id !== 25) });
+  assert.match(qualityProblems({ id: 'ai-test', ...oneSafety }, stats).join(), /1 safety-netting item/);
+  const lastNotPart2 = normalize({ ...DRAFT, tasks: ['<p>Part 2 first (5 minutes)</p>', '<p>Then history (10 minutes)</p>'] });
+  assert.match(qualityProblems({ id: 'ai-test', ...lastNotPart2 }, stats).join(), /the last task is Part 2/);
 });
 
 test('a paediatric fixed dose with no per-kg dose beside it goes to the examiner, not the hard gate', () => {
-  const st = normalize({ ...DRAFT, check: [...DRAFT.check, leaf(30, 'Gives prednisolone 20 mg orally'), leaf(31, 'Gives ondansetron 0.15 mg/kg (2.4 mg)')] });
+  const st = normalize({ ...DRAFT, check: [...DRAFT.check, leaf(40, 'Gives prednisolone 20 mg orally'), leaf(41, 'Gives ondansetron 0.15 mg/kg (2.4 mg)')] });
   assert.match(reviewNotes(st).join(), /20 mg/);
   assert.doesNotMatch(reviewNotes(st).join(), /2\.4 mg/);
 });
@@ -62,8 +72,8 @@ test('normalize: the model\'s strict shape back to the bank\'s compact one', () 
   const n = normalize(DRAFT);
   assert.deepEqual(n.check[0], { id: 1, t: 'heading', x: 'Professionalism' });
   assert.deepEqual(n.check[1], { id: 2, t: 'checkbox', x: 'Introduces self' });
-  assert.deepEqual(n.check.find(i => i.id === 11).kids[0], { id: 1, t: 'checkbox', x: '6 puffs (age under 6)' });
-  assert.equal(n.check.find(i => i.id === 11).crit, true);
+  assert.deepEqual(n.check.find(i => i.id === 19).kids[0], { id: 1, t: 'checkbox', x: '6 puffs (age under 6)' });
+  assert.equal(n.check.find(i => i.id === 19).crit, true);
 });
 
 test('the benchmark: same kind, shared specialty first, no ids, media or provenance fields', () => {
@@ -103,8 +113,8 @@ test('flow: gate problems and examiner blockers go back for one revision', async
   const broken = { ...DRAFT, refs: ['A textbook'] };
   const { calls, ask } = stub((a, c) => {
     if (a.label === 'draft') return broken;
-    if (a.label === 'review 1') return { pass: false, issues: [{ where: 'check 11', problem: 'wrong puffs', fix: 'use 6 puffs', severity: 'blocker' }] };
-    if (a.label === 'revise') { assert.match(a.content, /at least 2 references/); assert.match(a.content, /\[blocker\] check 11: wrong puffs/); return DRAFT; }
+    if (a.label === 'review 1') return { pass: false, issues: [{ where: 'check 19', problem: 'wrong puffs', fix: 'use 6 puffs', severity: 'blocker' }] };
+    if (a.label === 'revise') { assert.match(a.content, /at least 2 references/); assert.match(a.content, /\[blocker\] check 19: wrong puffs/); return DRAFT; }
     if (a.label === 'review 2') return { pass: true, issues: [{ where: 'stem', problem: 'comma', fix: 'add one', severity: 'minor' }] };
     return EXAM;
   });

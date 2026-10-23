@@ -44,23 +44,38 @@ export function osceScore(check, ticks) {
   const leaves = osceLeaves(check), on = new Set((ticks || []).map(String));
   return { got: leaves.filter(l => on.has(l.key)).length, of: leaves.length, critMissed: leaves.filter(l => l.crit && !on.has(l.key)).length };
 }
-/* the timer (osceTimer.ts): { c: 'reading'|'station', left: seconds at the last resume/pause, at: resumedAt ms | null } */
+/* the clock: reading, then Part 1 (history and examination), then Part 2 (the examiner hands over observations,
+   investigations or scans; the candidate interprets them, gives a management approach and safety-nets). The timing keys
+   are the phases: { reading, station (Part 1), mx (Part 2) } in minutes; mx 0 runs a station with no Part 2.
+   A timer is { c: phase, left: seconds at the last resume/pause, at: resumedAt ms | null, done?: true when the last
+   phase has run out }. */
+export const PHASES = [['reading', 'Reading', 'Reading time', 'Read the instructions'], ['station', 'Part 1', 'Part 1: history and examination', 'History and examination'],
+  ['mx', 'Part 2', 'Part 2: interpretation, management and safety netting', 'Interpretation, management and safety netting']];
+export const phaseWhat = k => (PHASES.find(p => p[0] === k) || [])[3] || '';
+export const DEFAULT_TIMING = Object.freeze({ reading: 5, station: 10, mx: 5 });
+export const phasesOf = timing => PHASES.map(p => p[0]).filter(k => k === 'reading' || k === 'station' || (timing && timing[k] > 0));
+export const phaseName = (k, long) => (PHASES.find(p => p[0] === k) || [k, k, k])[long ? 2 : 1];
+export const nextPhase = (c, timing) => { const ps = phasesOf(timing), i = ps.indexOf(c); return i >= 0 && i < ps.length - 1 ? ps[i + 1] : null; };
 export function osceLeft(t, now) {
   if (!t) return 0;
   return t.at != null ? t.left - Math.floor((now - t.at) / 1000) : t.left;
 }
-export const osceFinished = t => !!t && t.c === 'station' && t.at == null && t.left <= 0;
+export const osceFinished = t => !!t && t.done === true;
 export const osceStart = (timing, now) => ({ c: 'reading', left: timing.reading * 60, at: now });
 export const oscePause = (t, now) => (t && t.at != null ? { ...t, left: osceLeft(t, now), at: null } : t);
-export const osceResume = (t, now) => (t && t.at == null && !(t.c === 'station' && t.left <= 0) ? { ...t, at: now } : t);
-/* skip on: reading → station (full station time), station → finished */
-export const osceNext = (t, timing, now) => (t && t.c === 'reading' ? { c: 'station', left: timing.station * 60, at: now } : { c: 'station', left: 0, at: null });
-/* advance a running timer whose component has run out (a reading phase that ran out while away rolls into station) */
+export const osceResume = (t, now) => (t && t.at == null && !t.done ? { ...t, at: now } : t);
+/* skip on: to the next phase at its full time, or from the last phase to finished */
+export function osceNext(t, timing, now) {
+  const nx = t && nextPhase(t.c, timing);
+  return nx ? { c: nx, left: timing[nx] * 60, at: now } : { c: t?.c || 'station', left: 0, at: null, done: true };
+}
+/* advance a running timer whose phase has run out (a phase that ran out while away rolls into the next, from the moment
+   it ended) */
 export function osceTick(t, timing, now) {
   let x = t;
   while (x && x.at != null && osceLeft(x, now) <= 0) {
-    if (x.c === 'reading') { const endAt = x.at + x.left * 1000; x = { c: 'station', left: timing.station * 60, at: Math.min(endAt, now) }; }
-    else x = { c: 'station', left: 0, at: null };
+    const nx = nextPhase(x.c, timing), endAt = x.at + x.left * 1000;
+    x = nx ? { c: nx, left: timing[nx] * 60, at: Math.min(endAt, now) } : { c: x.c, left: 0, at: null, done: true };
   }
   return x;
 }
@@ -88,11 +103,17 @@ export function osceMigrate(old, now) {
     if (ok.length) m.hist[id] = ok; else delete m.hist[id];
   }
   if (Array.isArray(m.run?.origin)) m.run.origin = m.run.origin.filter(v => SOURCES.some(([k]) => k === v));   /* the kit's ai | own */
-  const tm = m.timing || {};
-  m.timing = { reading: clampMin(tm.reading, 2), station: clampMin(tm.station, 8) };
+  /* timing: the 5 / 10 / 5 format. A save from before it (2 + 8, no Part 2) moves to the new default; times someone
+     chose themselves stay */
+  const tm = m.timing || {}, before = m.tv !== 3;
+  m.timing = before && (tm.mx == null) && (tm.reading == null || (+tm.reading === 2 && +tm.station === 8)) ? { ...DEFAULT_TIMING }
+    : { reading: clampMin(tm.reading, DEFAULT_TIMING.reading), station: clampMin(tm.station, DEFAULT_TIMING.station), mx: clampMin(tm.mx, DEFAULT_TIMING.mx, 0) };
+  m.tv = 3;
   if (typeof m.details !== 'boolean') m.details = true;
   if (!m.sess || !Array.isArray(m.sess.queue)) m.sess = { queue: [], idx: null, aid: null, timer: null, done: [] };
   m.sess.done ||= [];
+  const tmr = m.sess.timer;   /* a station finished under the old clock (no done flag) stays finished */
+  if (tmr && typeof tmr === 'object' && tmr.c === 'station' && tmr.at == null && tmr.left <= 0 && tmr.done == null && before) tmr.done = true;
   m.people = oscePeople(m.people);
   if (m.sess.cand !== 1) m.sess.cand = 0;
   if (typeof m.alt !== 'boolean') m.alt = true;
@@ -147,7 +168,7 @@ export function osceCounts(hist) {
   for (const list of Object.values(hist || {})) for (const a of Array.isArray(list) ? list : []) if (a && a.fin) { const w = osceWho(a); n[w == null ? 2 : w]++; }
   return n;
 }
-export const clampMin = (v, d) => { const n = Math.round(+v); return n >= 1 && n <= 99 ? n : d; };
+export const clampMin = (v, d, min = 1) => { const n = Math.round(+v); return v !== '' && v != null && n >= min && n <= 99 ? n : d; };
 /* a random station from the filtered list that is not queued yet (OscesBrowse "Add Random"), or null */
 export function osceRandom(list, queue, rnd = Math.random) {
   const q = new Set(queue), pool = list.filter(s => !q.has(s.id));
@@ -244,8 +265,17 @@ export function osceCleanStation(s) {
   return { ...s, id: String(s.id), title: String(s.title), desc: str(s.desc), specialty: arr(s.specialty), type: arr(s.type),
     complexity: CX.includes(s.complexity) ? s.complexity : '', context: arr(s.context), presentation: arr(s.presentation), diagnosis: arr(s.diagnosis),
     stem: str(s.stem), tasks: arr(s.tasks), patient: str(s.patient), check: arr(s.check), guide: str(s.guide), explain: str(s.explain),
-    points: arr(s.points), refs: arr(s.refs), media: s.media && typeof s.media === 'object' && !Array.isArray(s.media) ? s.media : {} };
+    points: arr(s.points), refs: arr(s.refs), media: s.media && typeof s.media === 'object' && !Array.isArray(s.media) ? s.media : {}, part2: oscePart2(s.part2) };
 }
+/* Part 2: what the examiner says to open it, what they hand over (observations, investigations, scans: label + result,
+   HTML allowlist), and the questions they ask in order. Anything malformed is dropped; no Part 2 is an empty one. */
+export function oscePart2(p) {
+  const o = p && typeof p === 'object' && !Array.isArray(p) ? p : {}, str = v => (typeof v === 'string' ? v.trim() : '');
+  return { lead: str(o.lead),
+    handover: (Array.isArray(o.handover) ? o.handover : []).filter(h => h && str(h.label) && str(h.result)).map(h => ({ label: str(h.label), result: str(h.result) })),
+    ask: (Array.isArray(o.ask) ? o.ask : []).map(str).filter(Boolean) };
+}
+export const hasPart2 = st => !!st && ((st.part2?.handover || []).length > 0 || (st.media?.part2 || []).length > 0);
 /* the bank, then the AI stations, each through the gate; one station per id, the first (eMedici's) wins */
 export function osceStations(bank, ai) {
   const seen = new Set(), keep = s => s && !seen.has(s.id) && !!seen.add(s.id);

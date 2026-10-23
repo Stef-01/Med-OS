@@ -76,6 +76,7 @@ async function runIn(width, height, label) {
   pg.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
   const shot = n => pg.screenshot({ path: path.join(SHOTS, `${label}-${n}.png`) });
   const click = sel => pg.locator(sel).first().click();
+  const finish = async (page = pg) => { for (let i = 0; i < 4 && !(await page.locator('.os-finished').count()); i++) await page.locator('[data-os="skip"]').first().click(); await page.waitForSelector('.os-finished'); };
 
   await pg.goto(BASE, { waitUntil: 'networkidle' });
   await pg.waitForSelector('.os[data-ready]');
@@ -102,8 +103,16 @@ async function runIn(width, height, label) {
   await pg.waitForSelector('.os-timer');
   ok(/Candidate Alex · examiner Sam/.test(await pg.textContent('.os-sub')), `${label}: the header names the candidate and the examiner`);
   await shot('clock');
-  await click('[data-os="skip"]');   /* reading → station */
-  await click('[data-os="skip"]');   /* station → finished */
+  ok(/Reading.*Part 1.*Part 2/.test((await pg.locator('.os-tc').allTextContents()).join('|')), `${label}: the clock runs Reading, Part 1 and Part 2`);
+  ok(/5:00/.test(await pg.textContent('.os-tc.cur')), `${label}: reading time is 5 minutes`);
+  await click('[data-os="skip"]');   /* reading → Part 1 */
+  ok(/10:00|9:5\d/.test(await pg.textContent('.os-tc.cur')), `${label}: Part 1 is 10 minutes`);
+  await click('[data-os="skip"]');   /* Part 1 → Part 2 */
+  await pg.waitForTimeout(300);
+  ok(await pg.locator('[data-os="tab"][data-tab="Part 2"][aria-selected="true"]').count() === 1, `${label}: Part 2 opens the examiner's Part 2 sheet`);
+  ok(await pg.locator('.os-p2 .os-p2list li').count() >= 2 && await pg.locator('.os-p2 .os-p2ask li').count() >= 2, `${label}: Part 2 lists the results to hand over and the questions`);
+  await shot('part2');
+  await click('[data-os="skip"]');   /* Part 2 → finished */
   await pg.waitForSelector('.os-finished');
   if (width < 900) await click('[data-os="tab"][data-tab="Marking"]');
   const first = pg.locator('.os-check input[data-tick]').first();
@@ -153,10 +162,18 @@ async function runIn(width, height, label) {
   ok(!(await cp.locator('text=Patient Script').count()), `${label}: the candidate screen hides the patient script`);
   await cp.screenshot({ path: path.join(SHOTS, `${label}-candidate.png`) });
   await cp.close();
+  /* the same link once Part 2 has started: the results the examiner hands over appear on the candidate's phone */
+  const p2 = new URL(link); p2.searchParams.set('c', 'm'); p2.searchParams.set('left', '200'); p2.searchParams.set('t', String(Date.now()));
+  const cp2 = await ctx.newPage();
+  cp2.on('pageerror', e => errs.push(`candidate: ${e.message}`));
+  await cp2.goto(p2.toString(), { waitUntil: 'networkidle' });
+  await cp2.waitForSelector('.os-cpart2 .os-p2', { timeout: 5000 }).catch(() => {});
+  ok(await cp2.locator('.os-cpart2 .os-p2list li').count() >= 2 && !(await cp2.locator('.os-cpart2 .os-p2ask').count()), `${label}: in Part 2 the candidate's screen shows the results, not the examiner's questions`);
+  await cp2.screenshot({ path: path.join(SHOTS, `${label}-candidate-part2.png`) });
+  await cp2.close();
 
   /* end the session: results list both, with their initials */
-  await click('[data-os="skip"]'); await click('[data-os="skip"]');
-  await pg.waitForSelector('.os-finished');
+  await finish();
   await click('.os-finished [data-os="end"]');
   await pg.waitForSelector('.os-results');
   ok(await pg.locator('.os-results .os-who').count() === 2, `${label}: results show whose attempt each was`);
@@ -245,7 +262,7 @@ async function runIn(width, height, label) {
     await click('[data-os="browse"]'); await pg.waitForSelector('.os-dlg .os-grid .os-scard');
     await click('[data-os="random"]'); await click('.os-dlg [data-os="dclose"]'); await pg.waitForTimeout(300);
     await click('[data-os="startp"]'); await pg.waitForSelector('.os-timer');
-    await click('[data-os="skip"]'); await click('[data-os="skip"]'); await pg.waitForSelector('.os-finished');
+    await finish();
     await click('[data-os="tab"][data-tab="Marking"]');
     await click('[data-ai-fold] > summary');
     await pg.fill('[data-ai="tx"]', 'Candidate: Hello, I am Alex. I am washing my hands.');
@@ -279,7 +296,8 @@ async function sync() {
   await a.click('[data-os="new"]'); await a.click('[data-os="browse"]'); await a.waitForSelector('.os-dlg .os-grid .os-scard');
   await a.click('[data-os="random"]'); await a.click('.os-dlg [data-os="dclose"]'); await a.waitForTimeout(300);
   await a.click('[data-os="startp"]'); await a.waitForSelector('.os-timer');
-  await a.click('[data-os="skip"]'); await a.click('[data-os="skip"]'); await a.waitForSelector('.os-finished');
+  for (let i = 0; i < 4 && !(await a.locator('.os-finished').count()); i++) await a.click('[data-os="skip"]');
+  await a.waitForSelector('.os-finished');
   await a.click('[data-os="tab"][data-tab="Marking"]'); await a.locator('.os-check input[data-tick]').first().check();
   await a.click('.os-finished [data-os="end"]'); await a.waitForSelector('.os-results');
   await a.waitForTimeout(900);   /* one upload per 400 ms */

@@ -10,7 +10,22 @@ import { requestProblems } from '../imaging/rank.mjs';
 export const TYPES = ['History', 'Examination', 'Management', 'Counselling', 'Emergency', 'Ward Call', 'Interpretation', 'Prescribing', 'Procedure'];
 export const KNOWN_SPECIALTIES = new Set(DISCIPLINES.flatMap(d => d[3]));
 export const isAcute = st => (st.type || []).some(t => t === 'Emergency' || t === 'Ward Call');
-export const STATION_MIN = 8, READING_MIN = 2;
+/* the format: 5 minutes reading, Part 1 history and examination 10, Part 2 interpretation, management and safety netting 5 */
+export const READING_MIN = 5, PART1_MIN = 10, PART2_MIN = 5, STATION_MIN = PART1_MIN + PART2_MIN;
+/* the checklist sections every station is marked under, in order */
+export const SECTIONS = [['Professionalism', /professional/i], ['History', /history/i], ['Examination', /examin|primary survey|a to e|abcde/i],
+  ['Interpretation', /interpret/i], ['Management', /manage/i], ['Safety netting', /safety[- ]?net/i]];
+/* the leaves under each heading: { heading text: [leaf keys] } */
+export function sectionLeaves(check) {
+  const out = {}; let head = '';
+  for (const i of check || []) {
+    if (i.t === 'heading') { head = String(i.x || '').replace(/<[^>]*>/g, '').trim(); out[head] ||= []; continue; }
+    if (i.t !== 'checkbox') continue;
+    const kids = (i.kids || []).filter(k => k.t === 'checkbox' || !k.t);
+    (out[head] ||= []).push(...(kids.length ? kids.map(k => `${i.id}.${k.id}`) : [String(i.id)]));
+  }
+  return out;
+}
 
 /* checklist size per kind, from the bank: the 10th to 90th centile of leaves, widened a little; Critical share 10-80% */
 export function bankStats(stations) {
@@ -45,6 +60,8 @@ export function shapeProblems(st) {
   }
   for (const k of HTML_FIELDS) for (const prob of allowlistCheck(st[k] || '', { attrs: false })) p.push(`${k}: ${prob}`);
   for (const [k, list] of [['tasks', st.tasks], ['points', st.points], ['refs', st.refs]]) (list || []).forEach((h, n) => allowlistCheck(h, { attrs: false }).forEach(x => p.push(`${k}[${n}]: ${x}`)));
+  ((st.part2 && st.part2.handover) || []).forEach((h, n) => allowlistCheck(h && h.result, { attrs: false }).forEach(x => p.push(`part2.handover[${n}]: ${x}`)));
+  if (st.part2 != null && (typeof st.part2 !== 'object' || Array.isArray(st.part2))) p.push('part2 is not an object');
   for (const i of st.check || []) for (const h of [i.x, i.d, ...(i.kids || []).flatMap(k => [k.x, k.d])]) allowlistCheck(h || '', { attrs: false }).forEach(x => p.push(`check ${i.id}: ${x}`));
   return p;
 }
@@ -56,21 +73,27 @@ export function qualityProblems(st, stats) {
   for (const t of st.type || []) if (!TYPES.includes(t)) p.push(`station type "${t}" is not one of ${TYPES.join(', ')}`);
   if (!CX.includes(st.complexity)) p.push('complexity must be Low, Moderate or High');
   const leaves = osceLeaves(st.check), crit = leaves.filter(l => l.crit).length;
-  if (leaves.length < b.min || leaves.length > b.max) p.push(`${leaves.length} checklist items; ${kind} stations in the bank have ${b.min} to ${b.max}`);
+  const lo = Math.max(20, b.min), hi = Math.min(55, Math.max(b.max, lo + 10));
+  if (leaves.length < lo || leaves.length > hi) p.push(`${leaves.length} checklist items; a 5 / 10 / 5 ${kind} station has ${lo} to ${hi}`);
   if (crit < 2) p.push(`${crit} Critical items; mark at least 2 (the ones a safe junior doctor must not miss)`);
   if (crit > Math.ceil(leaves.length * 0.6)) p.push(`${crit} of ${leaves.length} items are Critical; keep Critical for the safety-critical ones (60% at most)`);
-  const heads = (st.check || []).filter(i => i.t === 'heading').map(i => plain(i.x));
-  /* the headings a station of these types is marked under (a counselling-only station has no History section) */
-  const ty = new Set(st.type || []), any = (...t) => t.some(x => ty.has(x));
-  const need = [['Professionalism', /professional/i, true],
-    ['History, Assessment or Examination', /history|assess|examin|primary survey|recogni|resuscitat/i, any('History', 'Examination', 'Emergency', 'Ward Call')],
-    ['Management, Interpretation or Diagnosis', /manage|interpret|diagnos|investigat|plan|treatment|prescri/i, any('Management', 'Interpretation', 'Prescribing', 'Emergency', 'Ward Call')],
-    ['Communication or Counselling', /communicat|counsel|explain|question|closing/i, any('Counselling', 'History')]];
-  for (const [name, re, wanted] of need) if (wanted && !heads.some(h => re.test(h))) p.push(`no ${name} heading in the checklist`);
-  if (st.tasks.length < 2 || st.tasks.length > 4) p.push(`${st.tasks.length} tasks; stations have 2 to 4`);
+  /* the sections, the timing, Part 2 */
+  const secs = sectionLeaves(st.check), heads = Object.keys(secs);
+  for (const [name, re] of SECTIONS) if (!heads.some(h => re.test(h))) p.push(`no ${name} heading in the checklist`);
+  const safety = heads.filter(h => /safety[- ]?net/i.test(h)).flatMap(h => secs[h]);
+  if (heads.some(h => /safety[- ]?net/i.test(h)) && safety.length < 2) p.push(`${safety.length} safety-netting item; give at least 2 (the red flags in plain words, when and where to come back, follow-up)`);
+  if (st.tasks.length < 2 || st.tasks.length > 3) p.push(`${st.tasks.length} tasks; a station has 2 (or 3): Part 1 history and examination, Part 2 interpretation, management and safety netting`);
   const mins = st.tasks.map(t => Number((plain(t).match(/\((\d+)\s*min/i) || [])[1] || 0));
-  if (mins.some(Boolean) && mins.reduce((a, c) => a + c, 0) !== STATION_MIN) p.push(`task times add to ${mins.reduce((a, c) => a + c, 0)} minutes; the station is ${STATION_MIN}`);
-  if (!new RegExp(`\\b${STATION_MIN}\\s*min`, 'i').test(plain(st.stem) + plain(st.tasks.join(' '))) && !mins.some(Boolean)) p.push(`say the station is ${STATION_MIN} minutes (in the stem or as task times)`);
+  if (mins.some(m => !m)) p.push('every task ends with its time in brackets, for example "(10 minutes)"');
+  else {
+    if (mins.reduce((a, c) => a + c, 0) !== STATION_MIN) p.push(`task times add to ${mins.reduce((a, c) => a + c, 0)} minutes; Part 1 and Part 2 are ${PART1_MIN} + ${PART2_MIN}`);
+    if (mins[mins.length - 1] !== PART2_MIN) p.push(`the last task is Part 2 (${PART2_MIN} minutes): interpretation, management and safety netting`);
+  }
+  if (/\b\d+\s*min(ute)?s?\b/i.test(plain(st.stem))) p.push('leave times out of the stem: the tasks carry them and the page shows the format');
+  const p2 = st.part2 || {};
+  if (!Array.isArray(p2.handover) || p2.handover.filter(h => h && plain(h.label) && plain(h.result)).length < 2) p.push('Part 2 hands over at least 2 results (observations, investigations or imaging reports), each with its numbers');
+  if (!Array.isArray(p2.ask) || p2.ask.filter(q => plain(q)).length < 2) p.push('Part 2 has at least 2 examiner questions (interpretation, then management and safety netting)');
+  if (!plain(p2.lead)) p.push('Part 2 needs the examiner\'s opening line (lead)');
   const pat = plain(st.patient).length;
   if (pat < 1200 || pat > 9000) p.push(`patient and examiner script is ${pat} characters; the bank's run 1,600 to 6,600`);
   if ((st.points || []).length < 3) p.push('at least 3 learning points');

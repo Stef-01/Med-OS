@@ -47,3 +47,10 @@ test('a pasted reply: fenced or with words around it parses; junk and empty resu
   assert.equal(parseReply('{broken'), null);
   assert.equal(parseReply(JSON.stringify({ ...json, global: 9 })).global, null, 'an out-of-range global impression is dropped');
 });
+
+test('the Part 2 results go to the marker with the examiner\'s questions', () => {
+  const withP2 = { ...st, part2: { lead: 'x', handover: [{ label: 'Observations', result: '<p>SpO2 <b>91%</b></p>' }], ask: ['What do they show?'] } };
+  const p = markPrompt(withP2, 'tx');
+  assert.match(p, /<part_2_results_handed_to_the_candidate>\nObservations: SpO2 91%\nExaminer's questions: What do they show\?\n<\/part_2_results_handed_to_the_candidate>/);
+  assert.doesNotMatch(markPrompt({ ...st, part2: { lead: '', handover: [], ask: [] } }, 'tx'), /part_2_results/);
+});
