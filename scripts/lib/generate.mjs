@@ -90,7 +90,7 @@ export function exemplars(bank, { acute, specialty = [] }, n = 3) {
 export function writerPrompt(topic, opts, ex, stats) {
   const kind = opts.acute ? 'acute' : 'clinic', b = stats[kind];
   return `Topic: ${topic}
-Kind: ${opts.acute ? 'an acute station (simulated ward or ED, a nurse assistant, observations that change with management)' : 'a clinic or ward station (history, explanation, counselling, management planning)'}${opts.specialty?.length ? `\nSpecialty: ${opts.specialty.join(', ')}` : ''}${opts.types?.length ? `\nStation types: ${opts.types.join(', ')}` : ''}${opts.notes ? `\nAlso cover: ${opts.notes}` : ''}
+Kind: ${opts.acute ? 'an acute station (simulated ward or ED, a nurse assistant, observations that change with management)' : 'a clinic or ward station (history, explanation, counselling, management planning)'}${opts.specialty?.length ? `\nSpecialty: ${opts.specialty.join(', ')}` : ''}${opts.types?.length ? `\nStation types: ${opts.types.join(', ')}` : ''}${opts.notes ? `\nAlso cover: ${opts.notes}` : ''}${opts.source ? `\n\n${opts.source}\n` : ''}
 Checklist size: ${LEAVES.min} to ${LEAVES.max} markable items counting kids, across the six sections (the bank's median for this kind is ${b.median}); every item earns its place, none is filler.
 
 Example stations from the bank (JSON), for depth and house style only; do not copy their cases:

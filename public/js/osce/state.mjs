@@ -166,7 +166,8 @@ export function tagHtml(s, maxSpec = 2) {
 /* the station's source tag (the kit's, on every surface a station shows): AI with the class or weak concept it came from, else eMedici */
 /* the AI-written examination findings for a station (osce_exam_findings.py), or null: never eMedici content */
 export const examOf = st => (st && ctx.exam?.[String(st.id)]) || null;
-export const srcTag = s => sourceTag(osceOrigin(s), osceOrigin(s) === 'ai' ? `${s.source?.label ? `AI generated from ${s.source.label}` : s.basis?.length ? 'AI generated from weak concepts' : 'AI generated'}${s.focus ? `: ${s.focus}` : ''}` : 'Written by you');
+export const srcTag = s => sourceTag(osceOrigin(s), osceOrigin(s) === 'ai' ? `${s.source?.label ? `AI generated from ${s.source.label}` : s.basis?.length ? 'AI generated from weak concepts' : 'AI generated'}${s.focus ? `: ${s.focus}` : ''}`
+  : osceOrigin(s) === 'amsa' ? `AMSA MedEd OSCE case${s.source?.title ? ` "${s.source.title}"` : ''}, converted by AI${s.focus ? `: ${s.focus}` : ''}` : 'Written by you');
 
 /* ---------------------------------------------------------------- dialogs (Dialog.vue in ui-modal), popovers, alerts */
 const DLG = { wrap: 'os-modal', box: 'os-dlg', head: 'os-dlg-head', close: 'os-ic os-dlg-x', title: 'os-dlg-title', titleTag: 'h1', act: 'os-dlg-act', body: 'os-dlg-body', in: 'in', out: 'out' };

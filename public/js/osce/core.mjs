@@ -180,10 +180,10 @@ export function osceRandom(list, queue, rnd = Math.random) {
    stations in random order, for example paeds and all of OBSgyn"). eMedici tags 36 fine specialties; a rotation groups
    them the way a medical school rotation does, and a station belongs to every rotation one of its specialties is in. */
 export const ROTATIONS = DISCIPLINES;   /* the kit's disciplines (vocab.mjs, 2026-10-19): every Learn page filters by the same seven */
-export const ORIGINS = SOURCES;   /* the kit's vocabulary: AI generated | Written by you */
+export const ORIGINS = SOURCES;   /* the kit's vocabulary: AI generated | AMSA MedEd | Written by you */
 /* a specialty the table does not know still lands somewhere: Medicine */
 export const osceRotation = disciplineOf;
-export const osceOrigin = s => (s && s.origin === 'ai' ? 'ai' : 'own');
+export const osceOrigin = s => (s && (s.origin === 'ai' || s.origin === 'amsa') ? s.origin : 'own');
 /* the stations a fast run covers: any picked specialty (none picked = none), the picked sources and types (none = all) */
 export function osceRunPool(list, sel = {}) {
   const specs = new Set(sel.specs || []), origins = new Set(sel.origin || []), types = new Set(sel.type || []);
