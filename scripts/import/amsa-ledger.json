@@ -200,14 +200,35 @@
    "imaging": 2
   },
   "245": {
-   "status": "failed",
-   "at": "2026-10-23T16:19:13Z",
+   "status": "shipped",
+   "at": "2026-10-23T16:46:09Z",
    "title": "Headache History 1",
-   "gates": [],
-   "blockers": [
-    "part2.handover[2] (headache record) model 'For Sara'; explain 'The results' paragraph; item 32 ('side varies'); patient script 'Previous attacks': The station says the aura 'does not always arise from the same side' and uses that as reassurance against a fixed structural lesion. Nothing supports this. The right-sided attack 6 weeks ago had zigzag lights with no side recorded. Both sensory auras were in the right hand, which means the same (left) hemisphere both times, and 4 of 5 headaches were left-sided. Only the headache side is shown to vary. An aura that always comes from the same side is itself a reason to image, so this teaches wrong reasoning on the imaging decision.",
-    "Item 35.2 vs part2.expect[2] (management answer): Item 35.2 requires triptan timing, a repeat dose after 2 hours if the headache returns, and switching to the other option if the first fails. The model management answer only gives the timing ('once the headache has started, not during the aura'). The management question already has to cover explain, treat, contraception with its reason, triggers, smoking and prevention in about 90 seconds, so this item is too big and does not match the model answer."
-   ]
+   "station": "amsa-245",
+   "by": "publish-amsa-draft.mjs"
+  },
+  "246": {
+   "status": "shipped",
+   "at": "2026-10-23T16:39:16Z",
+   "title": "Headache History 2",
+   "station": "amsa-246",
+   "rounds": 2,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 0
+  },
+  "247": {
+   "status": "shipped",
+   "at": "2026-10-23T16:41:07Z",
+   "title": "Headache History 3",
+   "station": "amsa-247",
+   "rounds": 1,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 0
   },
   "263": {
    "status": "shipped",
@@ -673,13 +694,11 @@
    "imaging": 1
   },
   "647": {
-   "status": "failed",
-   "at": "2026-10-23T16:19:59Z",
+   "status": "shipped",
+   "at": "2026-10-23T16:41:20Z",
    "title": "Headache History 10",
-   "gates": [],
-   "blockers": [
-    "check item 12; guide paragraph 1; stem: The stem tells the candidate that diet and lifestyle are already covered ('eats a healthy diet… You do not need to ask about these again'). The guide says 'Her smoking, alcohol, drug use, family history and lifestyle are in the stem, so do not penalise a candidate who does not ask about them again.' Yet item 12 is titled 'Asks about lifestyle and triggers', rewards asking about meals and has no award threshold, so it reads as needing all four of stress, sleep, meals and caffeine. A candidate who followed the stem would not ask about meals, and examiners will mark the item differently. This is unfair and the instructions contradict each other."
-   ]
+   "station": "amsa-647",
+   "by": "publish-amsa-draft.mjs"
   },
   "663": {
    "status": "shipped",
