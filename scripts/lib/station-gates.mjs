@@ -114,7 +114,8 @@ export function qualityProblems(st, stats) {
     if (mins.reduce((a, c) => a + c, 0) !== STATION_MIN) p.push(`task times add to ${mins.reduce((a, c) => a + c, 0)} minutes; Part 1 and Part 2 are ${PART1_MIN} + ${PART2_MIN}`);
     if (mins[mins.length - 1] !== PART2_MIN) p.push(`the last task is Part 2 (${PART2_MIN} minutes): interpretation, management and safety netting`);
   }
-  if (/\b\d+\s*min(ute)?s?\b/i.test(plain(st.stem))) p.push('leave times out of the stem: the tasks carry them and the page shows the format');
+  /* station timing ("(5 minutes)", "you have 8 minutes", "10 minutes to take a history"), not a clinical duration ("40 minutes of chest flutters") */
+  if (/\(\s*\d+\s*min(?:ute)?s?\s*\)|\byou (?:will )?have\s+\d+\s*min|\b\d+\s*min(?:ute)?s?\s+(?:to|for)\s+(?:take|perform|examine|explain|complete|discuss|this station|the station|each task)/i.test(plain(st.stem))) p.push('leave times out of the stem: the tasks carry them and the page shows the format');
   const p2 = st.part2 || {};
   if (!cleanDemo(st.demo)) p.push('demo: the patient (age with its unit, sex, setting) so the station shows the right observation chart');
   for (const [n, h] of (p2.handover || []).entries()) {
