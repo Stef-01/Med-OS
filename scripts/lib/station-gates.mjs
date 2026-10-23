@@ -135,6 +135,32 @@ export function qualityProblems(st, stats) {
   return p;
 }
 
+/* a lab table's flags against its own numbers: in a table whose header names a Result and a Reference column, a value
+   outside its printed range should carry H or L and one inside should not (a review note: a reference written in words,
+   or a measure such as BMI that is not flagged, is for the reader to judge) */
+export function flagIssues(html) {
+  const out = [], txt = s => s.replace(/<[^>]+>/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+  for (const tbl of String(html).match(/<table>[\s\S]*?<\/table>/g) || []) {
+    const rows = (tbl.match(/<tr>[\s\S]*?<\/tr>/g) || []).map(r => (r.match(/<t[dh]>[\s\S]*?<\/t[dh]>/g) || []).map(txt));
+    const head = rows[0] || [], ri = head.findIndex(h => /^result|^value|^today/i.test(h)), fi = head.findIndex(h => /^ref|^normal|^range/i.test(h));
+    if (ri < 0 || fi < 0) continue;
+    for (const r of rows.slice(1)) {
+      const res = r[ri] || '', ref = r[fi] || '';
+      const m = res.match(/^([<>]?)\s*(-?\d+(?:\.\d+)?)/); if (!m || m[1]) continue;
+      const v = +m[2], flag = (r.join(' ').match(/(?:^|\s)\(?(HH|LL|H|L)\)?(?:\s|$)/) || [])[1] || '';
+      let lo = null, hi = null, mm;
+      if ((mm = ref.match(/(-?\d+(?:\.\d+)?)\s*(?:to|-|–)\s*(-?\d+(?:\.\d+)?)/))) { lo = +mm[1]; hi = +mm[2]; }
+      else if ((mm = ref.match(/(?:below|under|less than|<|≤)\s*(-?\d+(?:\.\d+)?)/i))) hi = +mm[1];
+      else if ((mm = ref.match(/(?:above|over|more than|greater than|>|≥)\s*(-?\d+(?:\.\d+)?)/i))) lo = +mm[1];
+      else continue;
+      const want = lo != null && v < lo ? 'L' : hi != null && v > hi ? 'H' : '';
+      const got = flag.replace(/HH/, 'H').replace(/LL/, 'L');
+      if (want !== got) out.push(`${r[0]}: ${res} vs ${ref} → ${want || 'no flag'}, has ${got || 'no flag'}`);
+    }
+  }
+  return out;
+}
+
 /* things the examiner pass must look at but that do not block on their own: a fixed amount in a paediatric checklist
    item with no per-kg dose beside it (right for a few fixed-dose drugs such as vitamin K, wrong for most) */
 export function reviewNotes(st) {
@@ -144,6 +170,7 @@ export function reviewNotes(st) {
       .filter(t => !/\/\s*kg|per\s+kg/i.test(t)).flatMap(t => t.match(/\b\d+(?:\.\d+)?\s*(?:mg|mcg|microgram|g|mL|units?)\b/gi) || []);
     if (fixed.length) n.push(`paediatric checklist doses with no per-kg dose beside them (${[...new Set(fixed)].slice(0, 6).join(', ')}): each must be a fixed-dose drug in the cited guideline, else give it per kg`);
   }
+  for (const h of st.part2?.handover || []) for (const i of flagIssues(h?.result || '')) n.push(`lab flag in "${plain(h.label)}": ${i}`);
   /* observations on the chart: a value exactly on a zone line reads two ways (pick one clearly inside a zone), and a red
      or yellow zone the checklist never asks the candidate to act on */
   const chart = chartById(chartFor(st.demo).id);

@@ -221,6 +221,25 @@ async function runIn(width, height, label) {
   ok(await pg.locator('.os-pv .os-check input[data-tick]').count() > 10, `${label}: the full marking rubric renders`);
   await shot('preview');
   await pg.keyboard.press('Escape');
+
+  /* observations on the patient's chart: the croup toddler is on the 1 to 4 years chart; the candidate gets the chart and
+     nothing of the examiner's, the examiner's card has the zones and the model answer closed */
+  await pg.fill('.os-q', 'stridor'); await pg.waitForTimeout(300);
+  await click('.os-scard[data-id="ai-e8892591"] [data-os="preview"]');
+  await pg.waitForSelector('.os-pv');
+  await click('.os-pv [data-tab="Marking"]');
+  const card = pg.locator('.os-pv .os-qacard').first();
+  ok(await card.locator('.os-obs-table').count() === 1 && await card.locator('details.os-model:not([open]) .os-obs-zones').count() === 1, `${label}: the examiner's card has the observations, and the zones and model answer one tap away`);
+  await click('.os-pv .os-qashow');
+  await pg.waitForSelector('.os-present.in');
+  ok(await pg.locator('.os-present svg.os-obs-page').count() === 2 && /1 to 4 years/.test(await pg.textContent('.os-present .os-obs-cap')), `${label}: the results show the observations on the 1 to 4 years chart, both pages`);
+  ok(await pg.locator('.os-present .os-obs-zones, .os-present .os-model').count() === 0, `${label}: the chart's zones and the model answer never reach the candidate`);
+  ok(await pg.evaluate(() => [...document.querySelectorAll('.os-present svg.os-obs-page')].every(s => s.getBoundingClientRect().right <= innerWidth + 1)), `${label}: the chart fits the screen`);
+  await pg.waitForTimeout(250);
+  await shot('chart');
+  await pg.keyboard.press('Escape');
+  await pg.waitForSelector('.os-present', { state: 'detached' });
+  await pg.keyboard.press('Escape');
   if (width < 900) await pg.keyboard.press('Escape');
   await pg.keyboard.press('Escape');
 

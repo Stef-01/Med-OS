@@ -166,3 +166,10 @@ test('flow: a station that still fails after its revision is kept back', async (
   assert.equal(r.exam, null);
   assert.deepEqual(calls, ['draft', 'review 1', 'revise', 'review 2']);
 });
+
+import { flagIssues } from './lib/station-gates.mjs';
+test('lab flags: a value outside its printed range needs H or L, one inside needs none', () => {
+  const t = '<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>Hb</td><td>96 g/L L</td><td>115 to 160</td></tr><tr><td>WCC</td><td>15.8</td><td>4 to 11</td></tr><tr><td>Na</td><td>139 H</td><td>135 to 145</td></tr><tr><td>CRP</td><td>38 H</td><td>below 5</td></tr></table>';
+  assert.deepEqual(flagIssues(t), ['WCC: 15.8 vs 4 to 11 → H, has no flag', 'Na: 139 H vs 135 to 145 → no flag, has H']);
+  assert.deepEqual(flagIssues('<table><tr><td>a</td><td>b</td></tr></table>'), [], 'a table with no Result and Reference header is not checked');
+});

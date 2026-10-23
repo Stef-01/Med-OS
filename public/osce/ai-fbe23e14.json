@@ -274,20 +274,22 @@
   "lead": "Here is the midwife's resuscitation record, the cord arterial gas and the blood glucose at 30 minutes of age.",
   "handover": [
    {
-    "label": "Resuscitation record, 0 to 3 minutes",
-    "result": "<table><thead><tr><th>Time</th><th>Action</th><th>HR</th><th>SpO2 (right wrist)</th><th>Breathing</th></tr></thead><tbody><tr><td>Birth</td><td>Dried, wet towel removed, wrapped, hat on, head in neutral position. Temperature 36.2 °C</td><td>70</td><td>Probe going on</td><td>Apnoeic, floppy</td></tr><tr><td>1 min</td><td>Mask ventilation in air (21% oxygen) started at 40 seconds; chest rise after repositioning, better mask seal and jaw support</td><td>70</td><td>62%</td><td>Apnoeic</td></tr><tr><td>2 min</td><td>Ventilation in air with chest rise</td><td>120</td><td>66%</td><td>Apnoeic</td></tr><tr><td>3 min</td><td>Ventilation in air with chest rise</td><td>140</td><td>68%</td><td>Gasping</td></tr></tbody></table>"
-   },
-   {
-    "label": "3 to 5 minutes",
-    "result": "<p>Oxygen increased to 30% at 3 minutes. At 4 minutes SpO2 78%. At 5 minutes: HR 150, breathing on own with RR 50, crying, SpO2 85% in 30% oxygen, responds to voice, temperature 36.6 °C.</p>"
+    "label": "Resuscitation record, birth to 5 minutes",
+    "kind": "report",
+    "result": "<p>Born 14:12 at 39+2 weeks, 3.4 kg, clear liquor. SpO2 preductal (right wrist); the target is the ANZCOR target for that minute.</p><table><tr><th>Time</th><th>Heart rate</th><th>Breathing</th><th>SpO2 (target)</th><th>Oxygen</th><th>Actions</th></tr><tr><td>Birth</td><td>70 (stethoscope)</td><td>Apnoeic, floppy</td><td>Probe going on</td><td>Not started</td><td>Dried, wet towel removed, wrapped, hat on, head in neutral position. Temperature 36.2 °C</td></tr><tr><td>1 min</td><td>70</td><td>Apnoeic</td><td>62% (60 to 70%)</td><td>Air (21%)</td><td>Mask ventilation started at 40 seconds. No chest rise until the head was repositioned, the mask seal improved and jaw support given; then chest rise</td></tr><tr><td>2 min</td><td>120</td><td>Apnoeic</td><td>66% (65 to 85%)</td><td>Air (21%)</td><td>Ventilation with chest rise</td></tr><tr><td>3 min</td><td>140</td><td>Gasping</td><td>68% (70 to 90%)</td><td>Air, then 30%</td><td>Ventilation with chest rise. Oxygen increased to 30%</td></tr><tr><td>4 min</td><td>145</td><td>Gasping</td><td>78% (75 to 90%)</td><td>30%</td><td>Ventilation with chest rise</td></tr><tr><td>5 min</td><td>150</td><td>Breathing on own, RR 50, crying</td><td>85% (80 to 90%)</td><td>30%</td><td>Mask ventilation stopped. Responds to voice. Temperature 36.6 °C</td></tr></table><p>Apgar scores: 1 at 1 minute, 7 at 5 minutes.</p>",
+    "model": "<p><strong>Heart rate:</strong> 70 at birth and at 1 minute (below 100), then 120 at 2 minutes and 140 to 150 from 3 minutes once the chest was rising: the ventilation was effective, so compressions (only for a heart rate below 60 after 30 seconds of effective ventilation) were never indicated.</p><p><strong>SpO2 against the ANZCOR targets:</strong> 62% at 1 minute (60 to 70%) and 66% at 2 minutes (65 to 85%) are in range in air. 68% at 3 minutes is below 70 to 90% despite effective ventilation, so increasing to 30% oxygen was right. 78% at 4 minutes (75 to 90%) and 85% at 5 minutes (80 to 90%) are in range, so the next step is to wean towards air, keeping SpO2 no higher than 90% (85 to 90% by 10 minutes).</p><p><strong>Breathing and temperature:</strong> apnoea, then gasping, then crying with RR 50 at 5 minutes; 36.2 °C at birth rising to 36.6 °C (normal 36.5 to 37.5 °C). Apgar 1 and 7: a baby who responded quickly to ventilation alone, and who still needs special care nursery observation after needing resuscitation.</p>"
    },
    {
     "label": "Cord arterial blood gas",
-    "result": "<p>pH 7.18, base excess -8 mmol/L.</p>"
+    "kind": "gas",
+    "result": "<p>Paired samples from a double-clamped segment of cord, analysed at 14:20.</p><table><tr><th>Test</th><th>Result: artery</th><th>Vein</th><th>Reference range (cord artery, term)</th></tr><tr><td>pH</td><td>7.18 L</td><td>7.25</td><td>7.20 to 7.35</td></tr><tr><td>pCO2</td><td>54 mmHg</td><td>46 mmHg</td><td>35 to 70</td></tr><tr><td>pO2</td><td>15 mmHg</td><td>24 mmHg</td><td>10 to 30</td></tr><tr><td>Bicarbonate</td><td>19 mmol/L</td><td>19 mmol/L</td><td>17 to 27</td></tr><tr><td>Base excess</td><td>-8 mmol/L</td><td>-7 mmol/L</td><td>-8 to +2</td></tr><tr><td>Lactate</td><td>5.4 mmol/L</td><td>4.7 mmol/L</td><td>below 6.0</td></tr></table><p>The artery has the lower pH and the higher pCO2, so both vessels were sampled.</p>",
+    "model": "<p>A valid paired sample. The arterial pH of 7.18 is a mild acidaemia; a base excess of -8 at the lower limit with a lactate of 5.4 shows a mild metabolic component, and the pCO2 of 54 is within the cord range. This is the picture of a short hypoxic insult, which fits the 8 minutes of fetal bradycardia before birth.</p><p>It does not meet the gas criteria for therapeutic hypothermia (pH 7.0 or below, or a base deficit of 12 mmol/L or more, in the first hour), and with an Apgar of 7 at 5 minutes and the quick recovery it is reassuring. It does not end the assessment: a baby who needed resuscitation has neurological observations for encephalopathy over the first hours, because cooling must start within 6 hours of birth if signs appear.</p>"
    },
    {
     "label": "Blood glucose at 30 minutes of age",
-    "result": "<p>2.2 mmol/L. The baby has not fed yet.</p>"
+    "kind": "bloods",
+    "result": "<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>Blood glucose, point-of-care (heel prick), 14:42</td><td>2.2 mmol/L L</td><td>2.6 mmol/L or above (treatment threshold)</td></tr></table><p>The baby has not fed yet.</p>",
+    "model": "<p>2.2 mmol/L is hypoglycaemia: below the 2.6 mmol/L threshold the Safer Care Victoria guidance treats, and common after resuscitation in a baby who has not yet fed, because the hypoxic stress uses up glucose. A meter is less accurate at low values, so send a laboratory glucose, but do not wait for it.</p><p>Give 40% glucose gel 0.5 mL/kg (1.7 mL for 3.4 kg) into the cheek, then a breastfeed or expressed colostrum, and recheck the BGL 30 to 60 minutes later. If it stays below 2.6 mmol/L despite gel and a feed, or the baby is unwell, start IV 10% glucose (2 mL/kg = 6.8 mL, then an infusion). Hypoglycaemia after a hypoxic birth adds to the risk of brain injury, so it is one more reason for special care nursery admission.</p>"
    }
   ],
   "ask": [
@@ -301,5 +303,12 @@
  "revised": {
   "at": "2026-10-23",
   "by": "format 5/10/5"
+ },
+ "demo": {
+  "age": 0,
+  "unit": "days",
+  "sex": "X",
+  "setting": "birth suite",
+  "weight": 3.4
  }
 }

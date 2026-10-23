@@ -983,7 +983,7 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-obs-zones .os-z-red .os-zc { background:#f9b29b; }
 .os-obs-zones .os-z-yellow .os-zc { background:#ffe02e; }
 .os-obs-zones .os-z-blue .os-zc { background:#d6edf2; }
-.os-prs-slide .os-obs-page { max-width:520px; }
+.os-prs-slide .os-obs-page { flex:1 1 360px; max-width:560px; }   /* the two pages side by side when the screen allows, like the chart opened out */
 .os-prs-slide .os-obs-cap { font-size:clamp(14px, 3.4vw, 18px); }
 /* result tables keep whole words (a proper hyphen at most) and scroll sideways inside their card rather than squeeze;
    the Part 2 card gives its padding back on a phone, where it sits inside the marking sheet */

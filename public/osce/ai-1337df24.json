@@ -409,19 +409,59 @@
   "handover": [
    {
     "label": "Observations",
-    "result": "<p>HR 140, RR 40, temperature 36.8 °C, SpO2 98% on room air, CRT under 2 seconds, BGL 4.3 mmol/L. Weight 3.7 kg (birth weight 3.4 kg), gaining appropriately.</p>"
+    "kind": "obs",
+    "result": "<p>Weight 3.7 kg today (birth weight 3.4 kg), gaining appropriately.</p>",
+    "obs": {
+     "rows": [
+      {
+       "t": "10:05",
+       "rr": 40,
+       "spo2": 98,
+       "dev": "RA",
+       "hr": 140,
+       "temp": 36.8,
+       "crt": 1,
+       "distress": "normal",
+       "avpu": "A",
+       "bgl": 4.3,
+       "weight": 3.7,
+       "init": "JT",
+       "note": "Practice nurse on arrival: alert, good cry"
+      },
+      {
+       "t": "10:35",
+       "rr": 38,
+       "spo2": 99,
+       "dev": "RA",
+       "hr": 136,
+       "temp": 36.9,
+       "crt": 1,
+       "distress": "normal",
+       "avpu": "A",
+       "init": "JT",
+       "note": "After a 15-minute breastfeed in the clinic"
+      }
+     ]
+    },
+    "model": "<p>Both sets are normal for an 18-day-old against the RCH acceptable ranges (HR 120 to 170, RR 25 to 60), with a normal temperature, SpO2 98 to 99% in air, CRT under 2 seconds and a baby who is alert and feeds well. The BGL of 4.3 mmol/L is normal, and a gain from 3.4 kg at birth to 3.7 kg is appropriate growth.</p><p>This is a well, thriving baby, and that is the trap: biliary atresia typically presents in a baby who looks well and is gaining weight, and late vitamin K deficiency bleeding can strike a baby with normal observations. Normal observations mean he is stable to travel to hospital today with Alex; they do not lower the urgency.</p>"
    },
    {
     "label": "Stool colour chart",
-    "result": "<p>Today's nappy and the photo on Alex's phone both match the palest cards on the infant stool colour chart (pale grey-white, the abnormal range). Urine in the nappy dark yellow-brown and staining.</p>"
+    "kind": "other",
+    "result": "<p>An infant stool colour chart, compared by the practice nurse in daylight. The pale colours at one end of the chart are the abnormal range; the yellow and green colours are normal.</p><table><tr><th>Sample</th><th>Closest match on the chart</th><th>Range</th></tr><tr><td>Stool in today's nappy</td><td>Palest colour: grey-white, putty-like</td><td>Abnormal</td></tr><tr><td>Photo on Alex's phone (this week)</td><td>Pale colours: grey-white</td><td>Abnormal</td></tr><tr><td>Urine in today's nappy</td><td>Dark yellow-brown, staining the nappy (a newborn's urine is pale and does not stain)</td><td>Abnormal</td></tr></table>",
+    "model": "<p>Today's stool and the photo both match the palest colours on the chart, the abnormal range: these are acholic stools, so bile is not reaching the gut, and the dark, staining urine is conjugated bilirubin passing into the urine. With jaundice beyond 14 days and a firm liver this is cholestasis until proven otherwise, and biliary atresia must be excluded urgently. Breastmilk jaundice is unconjugated, with yellow stools and pale urine, so it cannot explain this.</p><p>The next test is a split (total and conjugated) bilirubin: a conjugated bilirubin of 34 micromol/L or more, or 20% or more of the total, confirms cholestasis (Queensland Clinical Guidelines), but pale stools alone already call for urgent referral. So it is done in hospital today, with liver function tests, a full blood count, glucose and PT/INR, not ordered from the practice and waited for.</p>"
    },
    {
     "label": "20-week morphology ultrasound report",
-    "result": "<p>Single umbilical artery (two-vessel cord). Fetal kidneys and bladder normal. Four-chamber view and outflow tracts of the heart normal. Growth on the 50th centile. No other structural anomaly seen.</p>"
+    "kind": "us",
+    "result": "<p><strong>Obstetric ultrasound: fetal morphology</strong>, transabdominal, at 20+1 weeks.</p><p><strong>Clinical details:</strong> routine morphology scan. Uncomplicated pregnancy.</p><p><strong>Findings:</strong></p><ul><li>Single live fetus, fetal heart rate 148/min.</li><li>Biometry: BPD 47 mm, HC 175 mm, AC 152 mm, FL 32 mm; estimated fetal weight 340 g, 50th centile, consistent with dates.</li><li>Placenta: anterior, upper segment, clear of the cervix. Amniotic fluid normal.</li><li>Umbilical cord: two vessels. Colour Doppler shows a single umbilical artery beside the fetal bladder. Normal cord insertions into the placenta and the fetal abdomen.</li><li>Head and brain, face and lips, spine: normal.</li><li>Heart: normal situs, four-chamber view, outflow tracts and three-vessel view.</li><li>Abdomen: stomach normal, abdominal wall intact. Both kidneys present and normal, renal pelvis 3 mm each side. Bladder normal.</li><li>Limbs: four limbs with normal long bones, hands and feet.</li></ul><p><strong>Conclusion:</strong> single umbilical artery (two-vessel cord), isolated. Fetal anatomy otherwise normal, including the kidneys, bladder and heart; growth on the 50th centile.</p>",
+    "model": "<p>A single fetus growing on the 50th centile with a single umbilical artery confirmed on colour Doppler, and the kidneys, bladder, heart and the rest of the anatomy normal: an isolated two-vessel cord. It is often a normal variant but carries a slightly higher chance of an undetected kidney or heart anomaly.</p><p>With a normal scan and a normal newborn heart examination, Noah needs a renal tract ultrasound, with cardiac assessment only if the heart examination is abnormal or an anomaly is suspected, not an echocardiogram for every isolated two-vessel cord. It does not explain the jaundice or the bleed and must not distract from today's urgent referral.</p>"
    },
    {
     "label": "Hospital discharge summary (day 2)",
-    "result": "<p>Term (39+3 weeks) spontaneous vaginal birth, cephalic. Birth weight 3.4 kg. Two-vessel umbilical cord noted at birth. Newborn examination normal, including hips (Barlow and Ortolani negative) and heart sounds. Newborn bloodspot screening collected. Vitamin K: not recorded.</p>"
+    "kind": "report",
+    "result": "<p><strong>Maternity unit discharge summary: newborn.</strong> Noah Nguyen, male. Discharged home on day 2.</p><ul><li><strong>Birth:</strong> term (39+3 weeks), spontaneous vaginal birth, cephalic. Apgar scores 9 and 9. No resuscitation.</li><li><strong>Measurements:</strong> birth weight 3.4 kg (50th centile), length 51 cm, head circumference 35 cm.</li><li><strong>Antenatal:</strong> blood group A positive, antibody screen negative, serology normal, GBS negative. Single umbilical artery on the 20-week scan.</li><li><strong>Cord:</strong> two-vessel umbilical cord noted at birth.</li><li><strong>Newborn examination (day 1):</strong> normal, including heart sounds, femoral pulses, red reflexes, palate, spine, genitalia (testes descended) and hips (Barlow and Ortolani negative).</li><li><strong>Feeding:</strong> breastfeeding, good latch. Discharge weight 3.3 kg (3% below birth weight).</li><li><strong>Jaundice:</strong> none noted before discharge; no bilirubin measured.</li><li><strong>Screening:</strong> newborn bloodspot screening collected. Hearing screen passed in both ears.</li><li><strong>Vitamin K:</strong> not recorded.</li><li><strong>Follow-up:</strong> midwife home visits, maternal and child health nurse, GP.</li></ul>",
+    "model": "<p>The summary confirms an uncomplicated term birth with a normal newborn examination, including the hips (Barlow and Ortolani negative), heart sounds, femoral pulses and red reflexes, and the two-vessel cord; there was no jaundice before discharge, so it began afterwards. A normal blood group with a negative antibody screen makes isoimmune haemolysis unlikely, and haemolysis would give unconjugated jaundice with yellow stools anyway.</p><p>Vitamin K is \"not recorded\": the record neither confirms nor excludes it, so the history (declined, and no oral doses) is what establishes that Noah is unprotected, and the gap should be documented. The documented normal hip examination, with hip dysplasia only in a cousin, supports hip checks at routine visits rather than an ultrasound.</p>"
    }
   ],
   "ask": [
@@ -435,5 +475,12 @@
  "revised": {
   "at": "2026-10-23",
   "by": "format 5/10/5"
+ },
+ "demo": {
+  "age": 18,
+  "unit": "days",
+  "sex": "M",
+  "setting": "gp",
+  "weight": 3.7
  }
 }

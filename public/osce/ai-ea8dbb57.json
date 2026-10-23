@@ -45,7 +45,7 @@
  "explain": "<h3>Early-onset neonatal sepsis</h3><p>Early-onset sepsis (in the first 48 hours in the RCH guideline; some definitions use 72 hours) is usually from maternal flora, most commonly Group B streptococcus and E. coli. Risk factors include maternal GBS carriage, inadequate intrapartum antibiotics (less than 4 hours before birth), prolonged rupture of membranes (18 hours or more), maternal fever and prematurity. This baby has four of them.</p><h3>Recognition and stabilisation</h3><p>Signs include grunting, tachypnoea, tachycardia, poor perfusion (CRT 3 seconds or more), temperature instability, lethargy and poor feeding. Call the neonatal team early. Give oxygen for the low saturations (91% here), titrated to the target range the neonatal team uses for a term baby, obtain IV or IO access, give a 10 mL/kg 0.9% sodium chloride bolus (32 mL for 3.2 kg) and reassess, check the BGL, take a blood culture and give antibiotics without delay. The RCH Neonatal antimicrobial guidelines use benzylpenicillin and gentamicin for early-onset sepsis; the Australasian Neonatal Medicines Formulary doses for a term baby in the first week are benzylpenicillin 60 mg/kg 12-hourly (192 mg) and gentamicin 5 mg/kg 24-hourly (16 mg). If meningitis is suspected or the CSF is abnormal, the RCH guideline uses benzylpenicillin with a third-generation cephalosporin instead. Maintenance fluid in the first day is 10% glucose (RCH Neonatal intravenous fluids), 60 mL/kg/day for a term baby (8 mL/h).</p><h3>Interpreting the results</h3><p>The reassessment shows a response to oxygen and fluid, but the baby is still unwell. The metabolic acidosis (pH 7.24, bicarbonate 17 mmol/L, base excess -9) with a lactate of 4.2 mmol/L reflects poor perfusion; a pCO2 of 40 mmHg despite fast breathing means the lungs are not compensating, so watch for tiring. Neutropenia in a septic newborn is a worrying sign. CRP rises over 12 to 24 hours, so a low early value does not exclude sepsis. The chest X-ray fits pneumonia; GBS pneumonia can look like surfactant deficiency. Blood culture is the key test, and a lumbar puncture is done once the baby is stable.</p><h3>Disposition and safety netting</h3><p>The baby needs neonatal unit care. Escalate apnoea, a rising oxygen need, recurrent shock after two boluses, hypoglycaemia or seizures. Antibiotics are reviewed at 36 hours with the culture result: the RCH guideline stops them then only if the cultures are negative and the baby is well, which is unlikely for a baby with shock, neutropenia and pneumonia. The mother is supported to stay close and provide breast milk. Before discharge, parents are told the signs of late-onset infection, which can occur in the first 3 months, and, if GBS infection is confirmed, the mother is offered antibiotics in labour in any future pregnancy.</p>",
  "points": [
   "Treat suspected early-onset sepsis urgently: blood culture, then benzylpenicillin and gentamicin (RCH Neonatal antimicrobial guidelines, doses from the Australasian Neonatal Medicines Formulary), without delaying treatment.",
-  "Compensated shock in a neonate (HR above 160, CRT 3 s or more, raised lactate) needs a 10 mL/kg 0.9% sodium chloride bolus with reassessment and a BGL check.",
+  "Shock in a neonate (HR above 160, CRT 3 s or more, raised lactate; a low BP is a late sign) needs a 10 mL/kg 0.9% sodium chloride bolus with reassessment and a BGL check.",
   "A normal early CRP does not exclude sepsis; repeat it, and review antibiotics at 36 hours with the cultures and the baby's condition.",
   "Communicate honestly with the mother, reassure that GBS carriage is common, and support breast milk expression and bonding."
  ],
@@ -282,24 +282,72 @@
   "lead": "Here is the reassessment 20 minutes later, on oxygen and after one 10 mL/kg bolus of 0.9% sodium chloride, and the first results. The blood culture was taken before antibiotics.",
   "handover": [
    {
-    "label": "Reassessment 20 minutes later",
-    "result": "<p>On low-flow oxygen by nasal prongs, after one 10 mL/kg bolus of 0.9% sodium chloride (32 mL): SpO2 95%, RR 66 with less grunting, HR 164, CRT 2 seconds, BP 62/36, temperature 38.0 °C, still responds to voice only. Repeat BGL 3.9 mmol/L.</p>"
+    "label": "Observations and reassessment 20 minutes later",
+    "kind": "obs",
+    "result": "<p>Since 22:45: low-flow oxygen by nasal prongs and one 10 mL/kg bolus of 0.9% sodium chloride (32 mL).</p>",
+    "obs": {
+     "rows": [
+      {
+       "t": "22:40",
+       "rr": 74,
+       "spo2": 91,
+       "dev": "RA",
+       "sbp": 58,
+       "dbp": 30,
+       "hr": 188,
+       "temp": 38.1,
+       "crt": 4,
+       "distress": "moderate",
+       "avpu": "V",
+       "bgl": 4.1,
+       "weight": 3.2,
+       "init": "MW",
+       "note": "Grunting, mottled and floppy; not feeding"
+      },
+      {
+       "t": "23:00",
+       "rr": 66,
+       "spo2": 95,
+       "o2": 0.5,
+       "dev": "NP",
+       "sbp": 62,
+       "dbp": 36,
+       "hr": 164,
+       "temp": 38,
+       "crt": 2,
+       "distress": "mild",
+       "avpu": "V",
+       "bgl": 3.9,
+       "init": "MW",
+       "note": "After the bolus: less grunting; blood culture taken"
+      }
+     ]
+    },
+    "model": "<p><strong>At 22:40</strong> nearly every value is abnormal for a term newborn: HR 188 and RR 74 are above the RCH acceptable ranges (HR 120 to 170, RR 25 to 60), SpO2 91% in air is low, CRT is 4 seconds with mottling, the temperature is 38.1 °C and the baby responds to voice only. Systolic 58 is just under the acceptable range (60 to 95); BP falls late in a newborn, so with the tachycardia and poor perfusion this is shock needing fluid now. With grunting and moderate distress, this is sepsis with shock and respiratory distress; the BGL of 4.1 is normal.</p><p><strong>At 23:00</strong>, on 0.5 L/min oxygen and after one 10 mL/kg bolus, SpO2 95%, HR 164, CRT 2 seconds and BP 62/36 show a response, but RR 66, the fever and a baby still responding only to voice mean the baby remains unwell. Keep reassessing HR and CRT (a second 10 mL/kg if shock signs return), keep the BGL at 2.6 mmol/L or above (3.9 now), and the neonatal team stays at the cot side: apnoea, a rising oxygen need or shock after two boluses needs urgent senior review.</p>"
    },
    {
     "label": "Venous blood gas",
-    "result": "<table><thead><tr><th>Test</th><th>Result</th><th>Reference</th></tr></thead><tbody><tr><td>pH</td><td>7.24</td><td>7.30 to 7.40</td></tr><tr><td>pCO2</td><td>40 mmHg</td><td>40 to 50</td></tr><tr><td>Bicarbonate</td><td>17 mmol/L</td><td>20 to 26</td></tr><tr><td>Base excess</td><td>-9 mmol/L</td><td>-4 to +2</td></tr><tr><td>Lactate</td><td>4.2 mmol/L</td><td>below 2.0</td></tr></tbody></table>"
+    "kind": "gas",
+    "result": "<p>Venous sample, 22:50, at cannulation with the blood culture, before the bolus.</p><table><tr><th>Test</th><th>Result</th><th>Reference range (term baby, day 1)</th></tr><tr><td>pH</td><td>7.24 L</td><td>7.30 to 7.40</td></tr><tr><td>pCO2</td><td>40 mmHg</td><td>40 to 50</td></tr><tr><td>Bicarbonate</td><td>17 mmol/L L</td><td>20 to 26</td></tr><tr><td>Base excess</td><td>-9 mmol/L L</td><td>-4 to +2</td></tr><tr><td>Lactate</td><td>4.2 mmol/L H</td><td>0.5 to 2.0</td></tr><tr><td>Sodium</td><td>137 mmol/L</td><td>132 to 147</td></tr><tr><td>Potassium</td><td>4.6 mmol/L</td><td>3.5 to 6.0</td></tr><tr><td>Chloride</td><td>104 mmol/L</td><td>98 to 115</td></tr><tr><td>Glucose</td><td>4.0 mmol/L</td><td>2.6 or above</td></tr></table>",
+    "model": "<p>pH 7.24 is an acidaemia; bicarbonate 17 and base excess -9 make it metabolic, and the lactate of 4.2 mmol/L shows it is a lactic acidosis from poor tissue perfusion in septic shock. pCO2 40 is normal, but a baby breathing at 74 a minute should be blowing it lower: there is no respiratory compensation, so the baby may be tiring. Sodium, potassium, chloride and glucose are normal.</p><p>It changes the urgency, not the treatment: fluid, oxygen and antibiotics now, then a repeat gas to see the lactate fall and the pCO2 stay down. A rising pCO2 or apnoea means the neonatal team starts respiratory support (CPAP).</p>"
    },
    {
     "label": "Full blood examination and CRP",
-    "result": "<table><thead><tr><th>Test</th><th>Result</th><th>Reference (term baby, day 1)</th></tr></thead><tbody><tr><td>Haemoglobin</td><td>165 g/L</td><td>145 to 225</td></tr><tr><td>White cell count</td><td>3.1 x10<sup>9</sup>/L</td><td>9 to 30</td></tr><tr><td>Neutrophils</td><td>1.0 x10<sup>9</sup>/L</td><td>6 to 26</td></tr><tr><td>Platelets</td><td>140 x10<sup>9</sup>/L</td><td>150 to 450</td></tr><tr><td>CRP</td><td>6 mg/L</td><td>below 5</td></tr></tbody></table>"
+    "kind": "bloods",
+    "result": "<p>Taken at 22:50 with the blood culture, about 14 hours of age.</p><table><tr><th>Test</th><th>Result</th><th>Reference range (term baby, day 1)</th></tr><tr><td>Haemoglobin</td><td>165 g/L</td><td>145 to 225</td></tr><tr><td>White cell count</td><td>3.1 x10<sup>9</sup>/L L</td><td>9.0 to 30.0</td></tr><tr><td>Neutrophils</td><td>1.0 x10<sup>9</sup>/L L</td><td>6.0 to 26.0</td></tr><tr><td>Band forms (immature neutrophils)</td><td>0.4 x10<sup>9</sup>/L</td><td></td></tr><tr><td>Immature to total neutrophil ratio</td><td>0.29 H</td><td>below 0.20</td></tr><tr><td>Lymphocytes</td><td>1.4 x10<sup>9</sup>/L L</td><td>2.0 to 11.0</td></tr><tr><td>Monocytes</td><td>0.3 x10<sup>9</sup>/L</td><td>0.2 to 3.0</td></tr><tr><td>Platelets</td><td>140 x10<sup>9</sup>/L L</td><td>150 to 450</td></tr><tr><td>CRP</td><td>6 mg/L H</td><td>below 5</td></tr></table><p><strong>Film:</strong> toxic granulation and vacuolation of the neutrophils. No blasts. Platelets slightly reduced, no clumping.</p>",
+    "model": "<p>The white cell count is low (3.1) with neutropenia (1.0), an immature to total neutrophil ratio of 0.29 (above 0.20) and toxic changes on the film: in a newborn with shock this is the marrow's neutrophil reserve being used up by overwhelming infection, a worrying sign and not a reassuring one. Platelets of 140 are slightly low (consumption in sepsis); the haemoglobin is normal.</p><p>A CRP of 6 mg/L is barely raised, but CRP takes 12 to 24 hours to rise, so an early value does not exclude sepsis: repeat it in 12 to 24 hours and treat now on the clinical picture. Together they support early-onset sepsis and add to the case for neonatal unit care.</p>"
    },
    {
     "label": "Chest X-ray",
-    "result": "<p>Bilateral hazy lung fields with air bronchograms. Normal heart size. No pneumothorax or effusion.</p>"
+    "kind": "xray",
+    "result": "<p><strong>Chest X-ray, AP supine, single view</strong>, 23:10.</p><p><strong>Clinical details:</strong> 14-hour-old term baby with grunting, tachypnoea, fever and an oxygen requirement. Sepsis? Pneumonia?</p><p><strong>Findings:</strong></p><ul><li>Lines and tubes: none.</li><li>Lungs: bilateral diffuse hazy (ground-glass) opacification with air bronchograms. No focal collapse. No fluid in the fissures.</li><li>Pleura: no pneumothorax or pleural effusion.</li><li>Heart and mediastinum: normal heart size and shape. Normal thymic shadow.</li><li>Bones and upper abdomen: normal. Stomach bubble on the left, normal bowel gas pattern.</li></ul><p><strong>Conclusion:</strong> bilateral hazy opacification with air bronchograms, consistent with pneumonia in this clinical setting; surfactant deficiency can look the same but is uncommon at term. No pneumothorax.</p>",
+    "model": "<p>An adequate AP supine film with no lines: bilateral diffuse hazy opacification with air bronchograms, a normal heart size and no pneumothorax or effusion. In a febrile term baby with maternal GBS carriage, membranes ruptured 20 hours and a maternal fever, this is pneumonia from early-onset sepsis, most likely GBS, until proven otherwise; GBS pneumonia can look identical to surfactant deficiency, and transient tachypnoea would not explain the fever and shock.</p><p>No pneumothorax and a normal heart size are reassuring, though a normal film does not exclude duct-dependent heart disease. It confirms the need for oxygen and a close watch for tiring (CPAP if needed) and does not change the antibiotics.</p>"
    },
    {
     "label": "Blood culture and lumbar puncture",
-    "result": "<p>Blood culture taken before antibiotics: no growth reported yet. Lumbar puncture deferred while the baby is unstable.</p>"
+    "kind": "micro",
+    "result": "<table><tr><th>Specimen</th><th>Collected</th><th>Report</th></tr><tr><td>Blood culture, aerobic paediatric bottle, 1 mL</td><td>22:50, before antibiotics</td><td>Incubating: no growth to date. Positive results are phoned through; final report at 5 days.</td></tr><tr><td>Cerebrospinal fluid (lumbar puncture)</td><td>Not collected</td><td>Deferred while the baby is unstable (oxygen requirement, shock).</td></tr></table>",
+    "model": "<p>No growth yet means nothing: the culture was taken minutes ago, and most bacteraemia in newborns is detected within 36 hours, which is why the RCH guideline reviews antibiotics at 36 hours with the culture result and the baby's condition. Taking 1 mL before antibiotics was right, and the antibiotics must not wait for it.</p><p>Deferring the lumbar puncture while the baby is unstable is right; do it once stable (CSF cell count, protein, glucose, Gram stain, culture and PCR). If meningitis is suspected or the CSF is abnormal, the RCH guideline changes to benzylpenicillin with a third-generation cephalosporin. With shock, neutropenia and pneumonia, antibiotics are unlikely to stop at 36 hours even if the culture stays negative.</p>"
    }
   ],
   "ask": [
@@ -313,5 +361,12 @@
  "revised": {
   "at": "2026-10-23",
   "by": "format 5/10/5"
+ },
+ "demo": {
+  "age": 0.6,
+  "unit": "days",
+  "sex": "X",
+  "setting": "ward",
+  "weight": 3.2
  }
 }

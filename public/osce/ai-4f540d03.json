@@ -268,23 +268,99 @@
   "Management"
  ],
  "part2": {
-  "lead": "Here are his observations on arrival, a venous blood gas and the ultrasound report. The last result is a repeat gas the next morning, after 24 hours of IV fluids.",
+  "lead": "Here are his observations from arrival to the next morning, a venous blood gas and the ultrasound report. The last result is a repeat gas the next morning, after 24 hours of IV fluids.",
   "handover": [
    {
-    "label": "Observations on arrival",
-    "result": "<p>HR 170, RR 40, BP 85/50, SpO2 98% on room air, CRT 3 seconds with cool hands and feet, temperature 36.9 °C, sleepy but rousable. BGL 4.1 mmol/L. Weight 4.0 kg today; 4.4 kg at the 2-week check.</p>"
+    "label": "Observations from arrival to the next morning",
+    "kind": "obs",
+    "result": "<p>Weight 4.0 kg on arrival (4.4 kg at the 2-week check).</p>",
+    "obs": {
+     "rows": [
+      {
+       "t": "08:30",
+       "rr": 40,
+       "spo2": 98,
+       "dev": "RA",
+       "sbp": 85,
+       "dbp": 50,
+       "hr": 170,
+       "temp": 36.9,
+       "crt": 3,
+       "distress": "normal",
+       "avpu": "V",
+       "bgl": 4.1,
+       "weight": 4,
+       "init": "KL",
+       "note": "On arrival: cool hands and feet, sleepy but rousable"
+      },
+      {
+       "t": "09:05",
+       "rr": 38,
+       "spo2": 98,
+       "dev": "RA",
+       "sbp": 88,
+       "dbp": 52,
+       "hr": 152,
+       "temp": 36.9,
+       "crt": 2,
+       "distress": "normal",
+       "avpu": "A",
+       "init": "KL",
+       "note": "After the first fluid bolus"
+      },
+      {
+       "t": "13:30",
+       "rr": 36,
+       "spo2": 99,
+       "dev": "RA",
+       "sbp": 86,
+       "dbp": 50,
+       "hr": 144,
+       "temp": 37,
+       "crt": 2,
+       "distress": "normal",
+       "avpu": "A",
+       "bgl": 4.6,
+       "init": "SN",
+       "note": "First wet nappy since arrival"
+      },
+      {
+       "t": "08:40",
+       "rr": 36,
+       "spo2": 99,
+       "dev": "RA",
+       "sbp": 90,
+       "dbp": 54,
+       "hr": 135,
+       "temp": 36.8,
+       "crt": 1,
+       "distress": "normal",
+       "avpu": "A",
+       "bgl": 5,
+       "init": "RT",
+       "note": "Next morning: 5 wet nappies overnight; repeat gas taken"
+      }
+     ]
+    },
+    "model": "<p><strong>On arrival (08:30):</strong> HR 170 is at the top of the RCH acceptable range for a young infant (about 115 to 170), and with a CRT of 3 seconds, cool hands and feet and a sleepy baby who rouses to voice, while BP 85/50 is still normal for his age, this is compensated shock. RR 40 and SpO2 98% in air are normal, he is afebrile, and the BGL of 4.1 mmol/L is normal. With a 0.4 kg (about 9%) weight loss, this is significant dehydration with shock.</p><p><strong>Response:</strong> after the first bolus HR falls to 152 and CRT to 2 seconds and he is alert, so a second bolus is not needed; he passes urine by 13:30, so potassium can go into the fluids; and by the next morning HR 135, CRT under 2 seconds, 5 wet nappies and a BGL of 5.0 show he is rehydrated. No chart in the set covers a baby under 3 months, so these are read against the RCH ranges; while he waits, a rising HR, a longer CRT, drowsiness or a low BGL means calling the doctor straight away.</p>"
    },
    {
     "label": "Venous blood gas with electrolytes",
-    "result": "<table><thead><tr><th>Test</th><th>Result</th><th>Reference</th></tr></thead><tbody><tr><td>pH</td><td>7.52</td><td>7.35 to 7.45</td></tr><tr><td>Bicarbonate</td><td>36 mmol/L</td><td>20 to 28</td></tr><tr><td>Chloride</td><td>88 mmol/L</td><td>95 to 110</td></tr><tr><td>Sodium</td><td>134 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>3.0 mmol/L</td><td>3.5 to 5.5</td></tr><tr><td>Lactate</td><td>1.2 mmol/L</td><td>below 2.0</td></tr></tbody></table>"
+    "kind": "gas",
+    "result": "<p>Venous sample, 08:45, at cannulation, before IV fluids.</p><table><tr><th>Test</th><th>Result</th><th>Reference range (infant)</th></tr><tr><td>pH</td><td>7.52 H</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>46 mmHg</td><td>38 to 50</td></tr><tr><td>Bicarbonate</td><td>36 mmol/L H</td><td>20 to 28</td></tr><tr><td>Base excess</td><td>+12.4 mmol/L H</td><td>-4 to +2</td></tr><tr><td>Lactate</td><td>1.2 mmol/L</td><td>0.5 to 2.0</td></tr><tr><td>Sodium</td><td>134 mmol/L</td><td>133 to 144</td></tr><tr><td>Potassium</td><td>3.0 mmol/L L</td><td>3.8 to 6.4</td></tr><tr><td>Chloride</td><td>88 mmol/L L</td><td>97 to 110</td></tr><tr><td>Glucose</td><td>4.1 mmol/L</td><td>3.0 to 7.8</td></tr></table>",
+    "model": "<p>pH 7.52 is an alkalaemia; bicarbonate 36 and base excess +12.4 make it a metabolic alkalosis, and pCO2 46 at the top of the venous range is the expected partial respiratory compensation (hypoventilation). Chloride 88 and potassium 3.0 are low, sodium 134 is low-normal and lactate 1.2 is normal: a hypochloraemic, hypokalaemic metabolic alkalosis. It comes from losing acid and chloride in the vomit, then the volume-depleted kidney holding sodium (aldosterone) at the cost of potassium and hydrogen, and it is the opposite of salt-wasting congenital adrenal hyperplasia (low sodium, high potassium, acidosis).</p><p>It changes the plan: he must not go to theatre yet, because the compensating hypoventilation risks apnoea after anaesthesia. Resuscitate with 0.9% sodium chloride, then give 0.9% sodium chloride with 5% glucose, add potassium once he passes urine, and repeat the gas until the bicarbonate is normal and the chloride corrected.</p>"
    },
    {
     "label": "Abdominal ultrasound",
-    "result": "<p>The pyloric muscle is thickened: wall thickness 5 mm, pyloric channel length 19 mm. The channel stays closed through the scan and little fluid passes from a full stomach. Impression: hypertrophic pyloric stenosis.</p>"
+    "kind": "us",
+    "result": "<p><strong>Ultrasound abdomen (pylorus)</strong>, 10:40.</p><p><strong>Clinical details:</strong> 5-week-old boy, 5 days of worsening non-bilious projectile vomiting, dehydrated. Pyloric stenosis?</p><p><strong>Findings:</strong></p><ul><li>Stomach: distended with fluid and milk, with vigorous peristalsis.</li><li>Pylorus: muscle wall thickness 5 mm (abnormal 3 mm or more) and pyloric channel length 19 mm (abnormal 15 mm or more). The channel stays closed throughout 10 minutes of scanning and little fluid passes from the full stomach into the duodenum.</li><li>Mesenteric vessels: the superior mesenteric vein lies to the right of the superior mesenteric artery (normal relationship).</li><li>Liver, gallbladder and kidneys: normal. No free fluid.</li></ul><p><strong>Conclusion:</strong> hypertrophic pyloric stenosis.</p>",
+    "model": "<p>The scan confirms hypertrophic pyloric stenosis: a wall thickness of 5 mm and a channel length of 19 mm are both above the diagnostic thresholds (3 mm and 15 mm), and the channel stays closed with little gastric emptying. The normal superior mesenteric vessel relationship is reassuring against malrotation, which fits the non-bilious vomiting, though it does not exclude it: green vomiting would still need an urgent contrast study.</p><p>The diagnosis is now certain, so he is referred to the paediatric surgeons for pyloromyotomy, but the scan does not make it an emergency operation: surgery waits until the dehydration and the alkalosis are corrected.</p>"
    },
    {
     "label": "Repeat venous gas the next morning",
-    "result": "<p>After the first fluid bolus and 24 hours of IV fluids: pH 7.43, bicarbonate 26 mmol/L, chloride 103 mmol/L, sodium 138 mmol/L, potassium 3.9 mmol/L. BGL 5.0 mmol/L. HR 135, CRT under 2 seconds, 5 wet nappies overnight.</p>"
+    "kind": "gas",
+    "result": "<p>Venous sample, 08:40 the next morning, after the first fluid bolus and 24 hours of IV fluids.</p><table><tr><th>Test</th><th>Result</th><th>On arrival</th><th>Reference range (infant)</th></tr><tr><td>pH</td><td>7.41</td><td>7.52</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>42 mmHg</td><td>46 mmHg</td><td>38 to 50</td></tr><tr><td>Bicarbonate</td><td>26 mmol/L</td><td>36 mmol/L</td><td>20 to 28</td></tr><tr><td>Base excess</td><td>+1.6 mmol/L</td><td>+12.4 mmol/L</td><td>-4 to +2</td></tr><tr><td>Lactate</td><td>0.9 mmol/L</td><td>1.2 mmol/L</td><td>0.5 to 2.0</td></tr><tr><td>Sodium</td><td>138 mmol/L</td><td>134 mmol/L</td><td>133 to 144</td></tr><tr><td>Potassium</td><td>3.9 mmol/L</td><td>3.0 mmol/L</td><td>3.8 to 6.4</td></tr><tr><td>Chloride</td><td>103 mmol/L</td><td>88 mmol/L</td><td>97 to 110</td></tr><tr><td>Glucose</td><td>5.0 mmol/L</td><td>4.1 mmol/L</td><td>3.0 to 7.8</td></tr></table>",
+    "model": "<p>Against the arrival gas: pH 7.41, bicarbonate 26 and base excess +1.6 are now normal, chloride has risen from 88 to 103 and potassium from 3.0 to 3.9, and sodium, lactate and glucose are normal. With the morning observations (HR 135, CRT under 2 seconds, 5 wet nappies overnight, BGL 5.0), he is rehydrated and the alkalosis is corrected: a bicarbonate below 28 and a chloride above 100 meet the usual pre-operative targets.</p><p>He is ready for pyloromyotomy today. Keep him nil by mouth on IV maintenance with potassium until theatre, keep checking the BGL, and tell his mother the operation can go ahead.</p>"
    }
   ],
   "ask": [
@@ -298,5 +374,12 @@
  "revised": {
   "at": "2026-10-23",
   "by": "format 5/10/5"
+ },
+ "demo": {
+  "age": 5,
+  "unit": "weeks",
+  "sex": "M",
+  "setting": "ed",
+  "weight": 4
  }
 }
