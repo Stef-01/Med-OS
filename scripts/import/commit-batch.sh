@@ -15,6 +15,5 @@ total=$(ls public/osce/amsa-*.json | wc -l | tr -d ' ')
 git commit -q -m "AMSA import: ${n} more station(s), ${total} so far
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
-git pull --rebase -q origin main
-git push -q origin main
+git push -q origin main || { git pull --rebase --autostash -q origin main && git push -q origin main; }
 git log --oneline -1
