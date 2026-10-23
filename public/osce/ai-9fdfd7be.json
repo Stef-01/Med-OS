@@ -136,7 +136,7 @@
   {
    "id": 14,
    "t": "checkbox",
-   "x": "Interprets the reassessment: persisting shock despite 1 L of crystalloid (HR 114, BP 96/60, no urine), which means ongoing bleeding."
+   "x": "Interprets the observations: red zone systolic BP of 88 at arrival called for a rapid response (MET) call, and after 1 L of crystalloid she is still shocked in the yellow zone (HR 114, BP 96/60, drowsy, no urine), which means ongoing bleeding and that the rapid response team and the senior stay involved."
   },
   {
    "id": 15,
@@ -350,28 +350,98 @@
   "Examination",
   "Management"
  ],
+ "demo": {
+  "age": 51,
+  "unit": "years",
+  "sex": "F",
+  "setting": "recovery",
+  "weight": 108
+ },
  "part2": {
   "lead": "Here is her reassessment, her blood gas and ECG, the operation record the nurse has found, and the pre-operative ultrasound report.",
   "handover": [
    {
     "label": "Reassessment after 1 L of crystalloid and oxygen",
-    "result": "<p>HR 114, BP 96/60, RR 22, SpO2 97% on 4 L/min oxygen via nasal prongs, CRT 3 seconds, GCS 14. Pain still 8/10 with lower abdominal guarding. No urine in the catheter bag.</p>"
+    "kind": "obs",
+    "result": "<p>Two large-bore cannulas; 1 L of crystalloid given since 13:50; oxygen 4 L/min by nasal prongs. GCS 14 (E3 V5 M6). Pain still 8/10 with lower abdominal guarding. CRT 3 seconds (4 seconds at 13:50). Urinary catheter in: no urine in the bag. Pre-operative BP 125/75.</p>",
+    "model": "<ul><li><strong>Read:</strong> at 13:50 systolic BP 88 is in the red zone; SpO2 94% on air, responding only to voice (GCS 14), severe pain (8/10) and lactate 3.8 are yellow; HR 118 is white, just below the yellow zone, and RR 22 is white. After 500 mL and then 1 L with oxygen, systolic rises only to 92 and then 96 (yellow), HR is 116 then 114 (white), SpO2 97%, and she still responds only to voice, with severe pain and no urine.</li><li><strong>Meaning:</strong> red zone shock against a baseline of 125/75 at 13:50, which called for a rapid response (MET) call. After 1 L she has moved to the yellow zone but is still shocked (shock index 1.2, drowsy, no urine): a minimal response to fluid, so she is still bleeding. Moving from red to yellow does not make her safe.</li><li><strong>Changes:</strong> the rapid response team and the senior gynaecologist stay with her; she needs blood rather than more crystalloid, continuous or 15-minute observations, and theatre. A return to the red zone, or no improvement, is escalated again at once.</li></ul>",
+    "obs": {
+     "rows": [
+      {
+       "t": "13:50",
+       "rr": 22,
+       "spo2": 94,
+       "dev": "RA",
+       "sbp": 88,
+       "dbp": 56,
+       "hr": 118,
+       "rhythm": "Reg",
+       "temp": 36.9,
+       "avpu": "V",
+       "pain": 8,
+       "bgl": 9.8,
+       "lactate": 3.8,
+       "init": "AP",
+       "note": "Resident at bedside; IV access, bloods and venous gas"
+      },
+      {
+       "t": "14:05",
+       "rr": 24,
+       "spo2": 97,
+       "o2": 4,
+       "dev": "NP",
+       "sbp": 92,
+       "dbp": 58,
+       "hr": 116,
+       "rhythm": "Reg",
+       "temp": 36.8,
+       "avpu": "V",
+       "pain": 8,
+       "init": "AP",
+       "note": "500 mL crystalloid in; urinary catheter in, no urine"
+      },
+      {
+       "t": "14:20",
+       "rr": 22,
+       "spo2": 97,
+       "o2": 4,
+       "dev": "NP",
+       "sbp": 96,
+       "dbp": 60,
+       "hr": 114,
+       "rhythm": "Reg",
+       "temp": 36.8,
+       "avpu": "V",
+       "pain": 8,
+       "init": "AP",
+       "note": "1 L crystalloid in; still no urine"
+      }
+     ]
+    }
    },
    {
     "label": "Venous blood gas (at your arrival)",
-    "result": "<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>pH</td><td>7.31</td><td>7.32 to 7.42</td></tr><tr><td>Base excess</td><td>-5 mmol/L</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>3.8 mmol/L</td><td>below 2</td></tr><tr><td>Haemoglobin</td><td>98 g/L (pre-operative 126)</td><td>115 to 165</td></tr><tr><td>Glucose</td><td>9.8 mmol/L</td><td></td></tr></table>"
+    "kind": "gas",
+    "result": "<p><strong>Venous blood gas</strong> (13:52, on room air)</p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>pH</td><td>7.31 L</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>40 mmHg</td><td>37 to 50</td></tr><tr><td>Bicarbonate</td><td>20 mmol/L L</td><td>22 to 28</td></tr><tr><td>Base excess</td><td>-5 mmol/L L</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>3.8 mmol/L H</td><td>below 2.0</td></tr><tr><td>Haemoglobin</td><td>98 g/L L (pre-operative 126)</td><td>115 to 165</td></tr><tr><td>Sodium</td><td>138 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>4.2 mmol/L</td><td>3.5 to 5.2</td></tr><tr><td>Ionised calcium</td><td>1.14 mmol/L</td><td>1.12 to 1.32</td></tr><tr><td>Glucose</td><td>9.8 mmol/L H</td><td>3.0 to 7.7</td></tr></table>",
+    "model": "<ul><li><strong>Read:</strong> venous pH 7.31, bicarbonate 20, base excess -5 and lactate 3.8: a lactic metabolic acidosis with a normal venous pCO2. Haemoglobin 98 g/L against 126 before surgery, a fall of 28 g/L. Glucose 9.8 in a woman with diabetes; potassium and ionised calcium normal.</li><li><strong>Meaning:</strong> hypoperfusion from haemorrhagic shock. A fall of 28 g/L within hours is substantial blood loss, and an early haemoglobin underestimates it because haemodilution has not caught up; the 1 L of crystalloid since will dilute it further.</li><li><strong>Changes:</strong> transfuse red cells now (emergency O negative or group-specific if crossmatched blood is not ready), activate the massive transfusion protocol if bleeding is major, send coagulation and fibrinogen, and repeat the gas and haemoglobin. Withhold metformin and monitor BGL while nil by mouth.</li></ul>"
    },
    {
     "label": "ECG",
-    "result": "<p>Sinus tachycardia at 118/min. No ischaemic changes.</p>"
+    "kind": "ecg",
+    "result": "<p><strong>12-lead ECG at 13:55</strong> (25 mm/s, 10 mm/mV)</p><ul><li><strong>Rate:</strong> 118/min.</li><li><strong>Rhythm:</strong> sinus tachycardia.</li><li><strong>Axis:</strong> normal, about +10°.</li><li><strong>PR interval:</strong> 150 ms.</li><li><strong>QRS duration:</strong> 84 ms.</li><li><strong>QTc:</strong> 440 ms (Bazett).</li><li><strong>ST segments and T waves:</strong> no ST elevation or depression in the inferior, anterior or lateral leads. T waves normal.</li><li><strong>Other:</strong> no Q waves, no bundle branch block. No right heart strain pattern (no right axis deviation, no right bundle branch block, no S1 Q3 T3).</li><li><strong>Comparison:</strong> pre-operative ECG this morning: sinus rhythm 76/min. No change apart from the rate.</li></ul>",
+    "model": "<ul><li><strong>Read:</strong> sinus tachycardia 118/min with a normal axis and intervals, no ST or T wave changes of ischaemia and no right heart strain pattern; the only change from this morning's pre-operative ECG is the rate.</li><li><strong>Meaning:</strong> a compensatory tachycardia from hypovolaemia, with nothing to suggest a cardiac cause (silent ischaemia is a risk with diabetes) or a pulmonary embolism.</li><li><strong>Changes:</strong> it does not change the plan, which is to stop the bleeding; keep her on a monitor and repeat the ECG if she develops chest pain or an arrhythmia.</li></ul>"
    },
    {
     "label": "Operation record",
-    "result": "<p>Hysteroscopy and D&amp;C under general anaesthetic, recorded as uneventful. Scrub nurse's note: yellow, fat-like tissue seen in the curettings container. Specimen sent for histology; result pending.</p>"
+    "kind": "report",
+    "result": "<p><strong>Operation record</strong></p><ul><li><strong>Procedure:</strong> hysteroscopy and dilatation and curettage under general anaesthetic (laryngeal mask), day surgery list, 10:20 to 10:45.</li><li><strong>Indication:</strong> abnormal uterine bleeding at 51, endometrial thickness 14 mm on ultrasound.</li><li><strong>Findings:</strong> retroverted, bulky uterus; examination under anaesthesia limited by body habitus. Cervix dilated to Hegar 8. Uterine cavity sounded to 9 cm. Hysteroscopy: thickened, irregular endometrium throughout, no discrete polyp or fibroid, view partly obscured by blood. Moderate curettings obtained.</li><li><strong>Estimated blood loss:</strong> 50 mL.</li><li><strong>Complications:</strong> none recorded. The procedure is recorded as uneventful.</li><li><strong>Plan:</strong> home the same day when well; histology to the gynaecology clinic and the GP.</li><li><strong>Scrub nurse's note (10:50):</strong> yellow, fat-like tissue seen floating in the curettings container. Specimen sent for histology; result pending.</li></ul>",
+    "model": "<ul><li><strong>Read:</strong> a hysteroscopy and D&amp;C recorded as uneventful, with risk factors for perforation (a retroverted, bulky uterus, obesity, a view obscured by blood), and the scrub nurse's note of yellow fat-like tissue in the curettings.</li><li><strong>Meaning:</strong> there is no fat in the uterus, so the curette has passed through the uterine wall into omentum, mesentery or bowel fat: uterine perforation until proven otherwise, despite \"uneventful\". With her shock, peritonism and shoulder-tip pain there is bleeding inside the abdomen, and bowel, bladder or pelvic vessels may be injured.</li><li><strong>Changes:</strong> call the senior gynaecologist urgently and tell the anaesthetist and theatre: she needs laparoscopy or laparotomy to find and repair the injury and inspect the bowel, and she is not for discharge. Plan open disclosure and an incident report.</li></ul>"
    },
    {
     "label": "Pre-operative transvaginal ultrasound",
-    "result": "<p>Endometrial thickness 14 mm. No discrete polyp or fibroid seen.</p>"
+    "kind": "us",
+    "result": "<p><strong>Examination:</strong> pelvic ultrasound, transabdominal and transvaginal, 4 weeks before surgery.</p><p><strong>Clinical details:</strong> 51-year-old woman, never pregnant, with irregular cycles for 2 years and heavy, unpredictable bleeding for 8 months. Obesity and type 2 diabetes. Cycle day unknown.</p><p><strong>Findings:</strong></p><ul><li><strong>Uterus:</strong> retroverted and bulky, 9.2 x 5.8 x 5.4 cm. Myometrium homogeneous, with no fibroid and no features of adenomyosis.</li><li><strong>Endometrium:</strong> 14 mm (double layer), homogeneous and echogenic. No discrete polyp. No fluid in the cavity.</li><li><strong>Ovaries:</strong> right ovary normal in size with no mass. Left ovary not seen because of body habitus. No adnexal mass.</li><li><strong>Pouch of Douglas:</strong> no free fluid.</li><li><strong>Limitations:</strong> views limited by body habitus.</li></ul><p><strong>Conclusion:</strong> thickened endometrium (14 mm) in a 51-year-old with abnormal uterine bleeding; no polyp, fibroid or adenomyosis seen. Endometrial sampling is recommended.</p>",
+    "model": "<ul><li><strong>Read:</strong> a thickened, homogeneous endometrium of 14 mm with no polyp, fibroid or adenomyosis seen and no adnexal mass, in a study limited by body habitus with the cycle day unknown.</li><li><strong>Meaning:</strong> before the menopause there is no single safe thickness, but at 51 with irregular heavy bleeding, obesity, diabetes, nulliparity and likely anovulation, a 14 mm endometrium means hyperplasia or cancer must be excluded on histology. With no structural cause seen, ovulatory dysfunction is the most likely PALM-COEIN category, with malignancy and hyperplasia still to exclude.</li><li><strong>Changes:</strong> it explains why she had the D&amp;C, and it does not change the immediate plan; the histology is followed up with a gynaecologist whatever happens today.</li></ul>"
    }
   ],
   "ask": [

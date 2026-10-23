@@ -396,15 +396,48 @@
   "handover": [
    {
     "label": "Observations and growth",
-    "result": "<p>HR 92, BP 102/64, RR 20, SpO2 99% on room air, temperature 36.7 °C, CRT under 2 seconds. Weight 31 kg and height 138 cm, both around the 50th centile.</p>"
+    "kind": "obs",
+    "result": "<p>Weight 31 kg and height 138 cm, both around the 50th centile.</p>",
+    "obs": {
+     "rows": [
+      {
+       "t": "10:10",
+       "rr": 20,
+       "spo2": 99,
+       "dev": "RA",
+       "sbp": 102,
+       "dbp": 64,
+       "hr": 92,
+       "temp": 36.7,
+       "crt": 1,
+       "avpu": "A",
+       "weight": 31,
+       "init": "AH",
+       "note": "Sitting with his tablet, restless in the chair."
+      },
+      {
+       "t": "10:30",
+       "hr": 104,
+       "spo2": 99,
+       "dev": "RA",
+       "init": "AH",
+       "note": "Pulse oximeter reading during the abdominal examination: grimacing and pulling away when the left lower abdomen is pressed."
+      }
+     ]
+    },
+    "model": "<p>Written out, not charted: a GP visit has no observation chart. HR 92, BP 102/64, RR 20, SpO2 99% in room air, temperature 36.7 °C and a brisk capillary refill are all normal for a 10-year-old, and weight and height are both on the 50th centile. The heart rate rose to 104 with grimacing during the abdominal examination: still normal, but in keeping with pain.</p><p>No fever or systemic upset, so no sign of a spreading dental infection, a UTI or another acute illness, and he can be managed in the community. Normal observations do not exclude pain in a child who cannot report it: the abdomen and the tooth are the clues.</p>"
    },
    {
     "label": "Bedside tests",
-    "result": "<p>Urine dipstick (clean catch): specific gravity 1.025; nil leucocytes, nitrites, blood, protein, glucose and ketones. BGL 5.2 mmol/L.</p>"
+    "kind": "urine",
+    "result": "<p>Urine dipstick, clean catch, and capillary blood glucose, taken in the clinic today.</p><table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>Specific gravity</td><td>1.025</td><td>1.005 to 1.030</td></tr><tr><td>pH</td><td>6.0</td><td>5.0 to 8.0</td></tr><tr><td>Leucocytes</td><td>Nil</td><td>Nil</td></tr><tr><td>Nitrites</td><td>Negative</td><td>Negative</td></tr><tr><td>Blood</td><td>Nil</td><td>Nil</td></tr><tr><td>Protein</td><td>Nil</td><td>Nil</td></tr><tr><td>Glucose</td><td>Nil</td><td>Nil</td></tr><tr><td>Ketones</td><td>Nil</td><td>Nil</td></tr><tr><td>Capillary blood glucose (non-fasting)</td><td>5.2 mmol/L</td><td>3.5 to 7.8 mmol/L</td></tr></table>",
+    "model": "<p>The urine is concentrated (specific gravity 1.025, at the top of the normal range), which fits his low fluid intake. Leucocytes, nitrites and blood are negative, so a UTI is unlikely and no antibiotics are needed; the extra wetting fits a loaded rectum pressing on the bladder. No glycosuria or ketonuria and a normal BGL of 5.2 mmol/L make diabetes very unlikely and exclude hypoglycaemia. It adds to the plan: more fluids as part of treating the constipation, and a urine culture only if urinary symptoms persist once he is disimpacted.</p>"
    },
    {
     "label": "Strengths and Difficulties Questionnaire (teacher version)",
-    "result": "<table><tbody><tr><th>Scale</th><th>Score</th></tr><tr><td>Emotional symptoms</td><td>4 / 10</td></tr><tr><td>Conduct problems</td><td>7 / 10</td></tr><tr><td>Hyperactivity and inattention</td><td>9 / 10</td></tr><tr><td>Peer problems</td><td>4 / 10</td></tr><tr><td>Total difficulties</td><td>24 / 40 (abnormal range)</td></tr><tr><td>Prosocial behaviour</td><td>3 / 10 (low)</td></tr></tbody></table><p>Teacher's comment: \"A big change over the last month. He was settled and happy with his previous aide.\"</p>"
+    "kind": "report",
+    "result": "<p>Completed by his class teacher last week (teacher version, ages 4 to 17).</p><table><tr><th>Scale</th><th>Score</th><th>Band (teacher cut-offs)</th></tr><tr><td>Emotional symptoms</td><td>4 / 10</td><td>Normal (0 to 4)</td></tr><tr><td>Conduct problems</td><td>7 / 10</td><td>Abnormal (4 to 10)</td></tr><tr><td>Hyperactivity and inattention</td><td>9 / 10</td><td>Abnormal (7 to 10)</td></tr><tr><td>Peer problems</td><td>4 / 10</td><td>Borderline (4)</td></tr><tr><td>Total difficulties (the four scales above)</td><td>24 / 40</td><td>Abnormal (16 to 40)</td></tr><tr><td>Prosocial behaviour</td><td>3 / 10</td><td>Abnormal, low (0 to 4)</td></tr></table><p>Higher scores mean more difficulties, except prosocial behaviour, where a low score is the concern.</p><p>Teacher's comment: \"A big change over the last month. He was settled and happy with his previous aide.\"</p>",
+    "model": "<ul><li>The SDQ is a brief behavioural screening questionnaire for children and adolescents, with parent and teacher versions, covering emotional symptoms, conduct problems, hyperactivity and inattention, peer problems and prosocial behaviour.</li><li>The teacher total of 24 is in the abnormal range, driven by conduct (7) and hyperactivity (9), with low prosocial behaviour (3); emotional symptoms are normal and peer problems borderline. It shows how marked his difficulties are now, and the teacher's comment says they are new.</li><li>It cannot say why: it is a screening and monitoring tool, not a diagnosis, and it does not exclude a physical cause. It was not designed for children with intellectual disability (the Developmental Behaviour Checklist was), and the high hyperactivity score may partly be akathisia from the risperidone increase.</li><li>So it does not justify a behaviour plan or more antipsychotic now: treat the constipation, the dental pain and the medication effects first, then repeat the SDQ to monitor change.</li></ul>"
    }
   ],
   "ask": [
@@ -417,5 +450,12 @@
  "revised": {
   "at": "2026-10-23",
   "by": "format 5/10/5"
+ },
+ "demo": {
+  "age": 10,
+  "unit": "years",
+  "sex": "M",
+  "setting": "gp",
+  "weight": 31
  }
 }
