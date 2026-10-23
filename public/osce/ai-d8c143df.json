@@ -242,7 +242,7 @@
  ],
  "explain": "<h3>Abnormal CTG: the first steps</h3><p>An abnormal CTG in labour is a trigger for early help, together with a short set of simple measures: change the woman's position, check and correct maternal hypotension, stop oxytocin or other uterotonics if hyperstimulation is suspected (and consider tocolysis), check temperature (sepsis screen if 38 °C or above), check the signal (reposition the transducer or apply a fetal scalp electrode), and perform a vaginal examination to exclude cord prolapse. If the trace remains abnormal, fetal scalp stimulation or fetal blood sampling can be considered, or birth expedited; a prolonged deceleration that does not recover needs birth expedited, not fetal blood sampling.</p><h3>Interpreting the results</h3><p>The trace had a normal baseline of 140 bpm with normal variability, then a prolonged deceleration to 70 bpm for 3 minutes with only a slow partial recovery to 100 bpm. There are 6 contractions in 10 minutes (tachysystole is more than 5 in 10) on an oxytocin infusion that was recently increased, and her BP has fallen to 84/50 after an epidural top-up. Tachysystole and hypotension both reduce placental blood flow, but the pulsating cord below a high presenting part soon after artificial rupture of the membranes is the cause that matters most: the cord is being compressed, and birth must be expedited.</p><h3>Umbilical cord prolapse</h3><p>Cord prolapse is an obstetric emergency, with risk factors including a high or unengaged presenting part, malpresentation, polyhydramnios, prematurity and recent artificial rupture of membranes. The cord is compressed between the presenting part and the pelvis, and may also go into vasospasm if handled. Management is:</p><ul><li>Call for help immediately and assess the fetal heart rate.</li><li>Relieve cord compression by elevating the presenting part with gloved fingers. If birth will be delayed (for example during transfer), fill the bladder.</li><li>Position the woman knee-chest or left lateral head-down.</li><li>Handle the cord as little as possible.</li><li>Consider acute tocolysis only as an adjunct, for example while contracting or if birth will be delayed.</li><li>Prepare for birth. None of these steps may delay it. Before full dilatation it is by category 1 caesarean, aiming for birth as fast as is safely possible (generally within 30 minutes); a vaginal or assisted birth is an option only if she is fully dilated and birth can be quick and safe.</li></ul><h3>After the birth</h3><p>The neonatal team attends the birth, paired cord blood gases are taken, and the woman and her partner are offered a debrief. Before discharge she is told the warning signs after a caesarean (heavy bleeding, fever, a red or leaking wound, worsening abdominal pain, calf pain or breathlessness) and where to go, with GP follow-up and a discussion of options for her next birth.</p><h3>Fetal position and station</h3><p>Position is the relationship of the denominator (the occiput in a vertex presentation) to the maternal pelvis. LOA means the occiput lies towards the left and front of the maternal pelvis, the most common and favourable position for birth. Station is the level of the presenting part relative to the ischial spines, so station -2 is 2 cm above them. A head 3/5 palpable at station -2 is not engaged, which is why artificial rupture of the membranes carried a risk of cord prolapse.</p>",
  "focus": "Intrapartum obstetric emergency: abnormal CTG and cord prolapse in labour",
- "guide": "<p>In Part 1, the examiner (as Sam) gives findings from the Exam findings only when the student says what they would examine. Part 1 is a rapid history and examination; if the student starts management, Sam acknowledges it, and it counts when the management is marked in Part 2. If the student has not examined vaginally by the end of Part 1, the vaginal examination items are not ticked, and the reassessment in Part 2 tells them the cord is felt. A <strong>high-performing candidate</strong> gets the key history quickly (oxytocin recently increased, recent artificial rupture with a high head, epidural top-up, no pain or bleeding, no uterine scar), checks the signal, maternal observations and contractions, and asks for a vaginal examination to exclude cord prolapse, finding the pulsating cord. In Part 2 they describe the CTG accurately, identify tachysystole and hypotension, diagnose cord prolapse, and give their management in order: call for help, stop oxytocin, elevate the presenting part and keep it elevated, position head-down, avoid handling the cord, correct hypotension, and category 1 caesarean with no delay, while talking to Mrs Costa. They explain LOA and station accurately.</p><p>A <strong>borderline candidate</strong> finds the abnormal CTG but misses one of the first measures (usually stopping oxytocin or the vaginal examination), or does not call for help early. They may identify the cord prolapse but not keep the presenting part elevated, forget the head-down position, delay the caesarean behind other steps, or not explain what is happening to the woman.</p>",
+ "guide": "<p>In Part 1, the examiner (as Sam) gives findings from the Exam findings only when the student says what they would examine. Part 1 is a rapid history and examination; if the student starts management, Sam acknowledges it, and it counts when the management is marked in Part 2. If the student has not examined vaginally by the end of Part 1, the vaginal examination items are not ticked, and the reassessment in Part 2 tells them the cord is felt. The maternal observations and the reassessment are snapshots and are the same whatever was started in Part 1. A <strong>high-performing candidate</strong> gets the key history quickly (oxytocin recently increased, recent artificial rupture with a high head, epidural top-up, no pain or bleeding, no uterine scar), checks the signal, maternal observations and contractions, and asks for a vaginal examination to exclude cord prolapse, finding the pulsating cord. In Part 2 they describe the CTG accurately, identify tachysystole and hypotension, diagnose cord prolapse, and give their management in order: call for help, stop oxytocin, elevate the presenting part and keep it elevated, position head-down, avoid handling the cord, correct hypotension, and category 1 caesarean with no delay, while talking to Mrs Costa. They explain LOA and station accurately.</p><p>A <strong>borderline candidate</strong> finds the abnormal CTG but misses one of the first measures (usually stopping oxytocin or the vaginal examination), or does not call for help early. They may identify the cord prolapse but not keep the presenting part elevated, forget the head-down position, delay the caesarean behind other steps, or not explain what is happening to the woman.</p>",
  "id": "ai-d8c143df",
  "media": {},
  "origin": "ai",
@@ -288,15 +288,52 @@
   "handover": [
    {
     "label": "CTG",
-    "result": "<p>Baseline 140 bpm with normal variability until about 10 minutes ago. Now a prolonged deceleration to 70 bpm that has lasted 3 minutes. Contractions 6 in 10 minutes, each lasting about 90 seconds, with little rest between them. Good signal, no loss of contact.</p>"
+    "kind": "ctg",
+    "result": "<p><strong>Intrapartum CTG</strong> (external ultrasound transducer and tocodynamometer) at 39 weeks 4 days, oxytocin infusion running, epidural in place. Paper speed 1 cm/min. The last 30 minutes reviewed at 11:45.</p><table><tbody><tr><th>Feature</th><th>Finding</th></tr><tr><td>Signal</td><td>Good, no loss of contact; fetal heart distinct from the maternal pulse (105/min)</td></tr><tr><td>Baseline rate</td><td>140 bpm until 11:42</td></tr><tr><td>Baseline variability</td><td>Normal, about 10 bpm, until 11:42</td></tr><tr><td>Accelerations</td><td>Present until 11:30; none since</td></tr><tr><td>Decelerations</td><td>None until 11:42. From 11:42, a prolonged deceleration starting with a contraction, down to 70 bpm and lasting 3 minutes so far, not recovering</td></tr><tr><td>Uterine activity</td><td>From about 11:35, 6 contractions in 10 minutes, each lasting about 90 seconds, with little rest between them</td></tr></tbody></table>",
+    "model": "<p><strong>Read (RANZCOG features):</strong> a good signal. Until 11:42 the baseline was 140 bpm with variability of about 10 bpm, both normal. Two abnormal features: excessive uterine activity, with 6 contractions in 10 minutes (tachysystole is more than 5) lasting about 90 seconds with little relaxation, on an oxytocin infusion; and a prolonged deceleration (more than 90 seconds) to 70 bpm, now 3 minutes long and not recovering.</p><p><strong>Meaning:</strong> an abnormal CTG with a feature likely to be associated with fetal compromise. A deep prolonged deceleration of 3 minutes needs urgent obstetric review and preparation to expedite birth, and a sudden deceleration soon after artificial rupture of the membranes with a high head is cord prolapse until a vaginal examination shows otherwise. The tachysystole and the maternal hypotension both reduce placental blood flow and add to it.</p><p><strong>What it changes:</strong> call for help now (registrar, obstetric emergency call), stop the oxytocin, move her off her back, correct the hypotension and examine vaginally for the cord; consider terbutaline if contractions continue. Fetal blood sampling has no place in a prolonged deceleration that does not recover: birth is expedited.</p>"
    },
    {
     "label": "Maternal observations",
-    "result": "<p>HR 105, BP 84/50 (15 minutes after an epidural top-up; 110/65 before it), RR 18, SpO2 98% on room air, temperature 37.1 °C.</p>"
+    "kind": "obs",
+    "result": "<p>BP 110/65 at 11:28, before the epidural top-up at 11:30.</p>",
+    "model": "<p><strong>Read:</strong> BP 84/50 at 11:45 and 86/50 at 11:48, against 110/65 before the epidural top-up 15 minutes earlier, with a maternal tachycardia of 105 to 108 (above the 10 to 20 beat rise of pregnancy). RR, SpO2 and temperature (37.1 °C) are normal and she is alert.</p><p><strong>Meaning:</strong> hypotension from the epidural top-up (sympathetic block, worse lying semi-supine), which lowers uterine and placental blood flow and adds to the fall in the fetal heart rate, but the cord prolapse is the main cause. No fever, so no sign of chorioamnionitis or sepsis; a temperature of 38 °C or above would need a sepsis screen.</p><p><strong>What it changes:</strong> an IV fluid bolus, keeping her off her back (the knee-chest or left lateral head-down position helps), and anaesthetic review for a vasopressor if the BP does not respond. The anaesthetist needs this before the category 1 caesarean.</p>",
+    "obs": {
+     "rows": [
+      {
+       "t": "11:45",
+       "rr": 18,
+       "spo2": 98,
+       "dev": "RA",
+       "sbp": 84,
+       "dbp": 50,
+       "hr": 105,
+       "rhythm": "Reg",
+       "temp": 37.1,
+       "avpu": "A",
+       "init": "SM",
+       "note": "15 minutes after the epidural top-up"
+      },
+      {
+       "t": "11:48",
+       "rr": 20,
+       "spo2": 98,
+       "dev": "RA",
+       "sbp": 86,
+       "dbp": 50,
+       "hr": 108,
+       "rhythm": "Reg",
+       "avpu": "A",
+       "init": "SM",
+       "note": "Registrar still a few minutes away"
+      }
+     ]
+    }
    },
    {
     "label": "Reassessment 3 minutes later",
-    "result": "<p>The fetal heart rate has recovered only slowly to about 100 bpm and has not returned to the baseline of 140 bpm. The cord is still felt pulsating below the presenting part. The registrar is still a few minutes away.</p>"
+    "kind": "other",
+    "result": "<p><strong>CTG at 11:48:</strong> the fetal heart rate has recovered only slowly, to about 100 bpm, and has not returned to the baseline of 140 bpm. Variability reduced, 3 to 5 bpm. No accelerations. Contractions continue.</p><p><strong>Vaginal examination:</strong> the cord is still felt pulsating below the presenting part. Cervix 5 cm, vertex at station -2.</p><p>The registrar is still a few minutes away.</p>",
+    "model": "<p><strong>Read:</strong> 6 minutes after the deceleration began, the fetal heart has recovered only to about 100 bpm, still 40 bpm below its baseline, with reduced variability (3 to 5 bpm, an abnormal feature) and no accelerations. The cord is still pulsating below a high presenting part, with the cervix 5 cm.</p><p><strong>Meaning:</strong> umbilical cord prolapse with continuing cord compression and fetal compromise. The first measures have not restored the trace, and at 5 cm a vaginal birth is not close.</p><p><strong>What it changes:</strong> a category 1 caesarean, aiming for birth as fast as is safely possible: keep the fingers elevating the presenting part and keep her knee-chest or head-down until the baby is born, handle the cord as little as possible, fill the bladder only if transfer or delay is expected, and make sure the emergency call brings the anaesthetist, theatre and the neonatal team. Nothing waits for the registrar to arrive.</p>"
    }
   ],
   "ask": [
@@ -309,5 +346,12 @@
  "revised": {
   "at": "2026-10-23",
   "by": "format 5/10/5"
+ },
+ "demo": {
+  "age": 29,
+  "unit": "years",
+  "sex": "F",
+  "setting": "birth suite",
+  "pregnant": true
  }
 }

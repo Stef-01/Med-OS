@@ -329,11 +329,45 @@
   "handover": [
    {
     "label": "Observations today",
-    "result": "<p>Temperature 37.4 °C, HR 124, RR 32, SpO2 96% on room air, CRT under 2 seconds. Weight 13 kg (about the 50th centile). Alert and playful.</p>"
+    "kind": "obs",
+    "result": "<p>Height not measured today; weight 13 kg, about the 50th centile.</p>",
+    "obs": {
+     "rows": [
+      {
+       "t": "10:20",
+       "rr": 32,
+       "spo2": 96,
+       "dev": "RA",
+       "hr": 124,
+       "temp": 37.4,
+       "crt": 1,
+       "avpu": "A",
+       "distress": "normal",
+       "weight": 13,
+       "init": "RP",
+       "note": "Alert and playful on the floor. Intermittent cough. No recession, no stridor."
+      },
+      {
+       "t": "10:40",
+       "rr": 30,
+       "spo2": 96,
+       "dev": "RA",
+       "hr": 118,
+       "crt": 1,
+       "avpu": "A",
+       "distress": "normal",
+       "init": "RP",
+       "note": "Repeated at rest on Linh's lap at the end of the consultation."
+      }
+     ]
+    },
+    "model": "<p>Written out, not charted: a GP visit has no observation chart. Afebrile (37.4 °C), HR 124 and then 118, normal for age, and CRT under 2 s. RR 32 is mildly fast for a 2-year-old at rest (about 25 to 30 is usual) with no recession or stridor, and SpO2 96% in room air is low-normal; the repeat at rest is much the same. Weight 13 kg on the 50th centile: growth is unaffected.</p><p>A well, afebrile child with mild tachypnoea and borderline saturation fits one collapsed lobe, not sepsis or an acute pneumonia. He is stable now, so an urgent same-day transfer can be arranged by phone with the receiving team, but a foreign body can move and block a larger airway: stridor, distress, a falling SpO2 or complete choking means 000 and an ambulance.</p>"
    },
    {
     "label": "Chest X-ray report",
-    "result": "<p>Right lower lobe collapse with volume loss and slight shift of the mediastinum to the right. No pleural effusion. No focal consolidation. No radio-opaque foreign body seen.</p>"
+    "kind": "xray",
+    "result": "<p><strong>Examination:</strong> Chest X-ray, single frontal (AP) view.</p><p><strong>Clinical details:</strong> 2-year-old with a daily cough for 4 weeks, not improved with amoxicillin, oral prednisolone or salbutamol. ?Pneumonia ?other cause.</p><p><strong>Comparison:</strong> None.</p><p><strong>Findings:</strong></p><ul><li>Technique: adequate inspiration, not rotated.</li><li>Trachea and mediastinum: shifted slightly to the right.</li><li>Right lung: triangular opacity at the right base medially, behind the heart, with loss of the outline of the medial right hemidiaphragm. The right heart border is preserved. The right hilum is lowered. No air bronchograms. The rest of the right lung is clear.</li><li>Left lung: clear and well expanded. No hyperinflation.</li><li>Pleura: no pleural effusion, no pneumothorax.</li><li>Heart: normal size.</li><li>No radio-opaque foreign body in the neck, airways or chest.</li><li>Bones and soft tissues: normal.</li></ul><p><strong>Conclusion:</strong> Right lower lobe collapse with volume loss and shift of the mediastinum to the right. No pleural effusion, no focal consolidation elsewhere and no radio-opaque foreign body. Lobar collapse in a toddler with a persistent cough raises the possibility of an obstructed bronchus; please correlate clinically.</p>",
+    "model": "<p>A systematic read: an adequate frontal film; trachea and mediastinum shifted to the right; a triangular opacity at the right base behind the heart, with the medial right hemidiaphragm lost, the right heart border preserved and the right hilum lowered: right lower lobe collapse with volume loss. The left lung is clear, there is no effusion and no radio-opaque foreign body.</p><p>It matches the right-sided signs (reduced expansion, dullness, reduced air entry, a monophonic wheeze and tracheal shift to the right), and with the choking episode on nuts and five weeks of cough that did not respond to antibiotics, steroids or salbutamol it points to an inhaled foreign body blocking the right lower lobe bronchus. Nuts are radiolucent, so a film with no visible object does not exclude it. It is not simple pneumonia: the lobe has lost volume, there are no air bronchograms, and antibiotics did not help.</p><p>It changes the plan: urgent referral for rigid bronchoscopy under general anaesthesia, nil by mouth, and no more antibiotics, steroids or inhalers.</p>"
    }
   ],
   "ask": [
@@ -347,5 +381,12 @@
  "revised": {
   "at": "2026-10-23",
   "by": "format 5/10/5"
+ },
+ "demo": {
+  "age": 28,
+  "unit": "months",
+  "sex": "X",
+  "setting": "gp",
+  "weight": 13
  }
 }

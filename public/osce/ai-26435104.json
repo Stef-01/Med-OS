@@ -337,11 +337,42 @@
   "handover": [
    {
     "label": "Maternal observations and urinalysis",
-    "result": "<p>BP 116/72 mmHg on two readings 10 minutes apart, HR 84, RR 16, temperature 36.8 °C, SpO2 99% on room air. Urine dipstick: protein nil, glucose nil. Capillary glucose 5.1 mmol/L.</p>"
+    "kind": "obs",
+    "result": "<p>Urine dipstick at 12:15: protein nil, glucose nil, blood nil, leucocytes nil, nitrites nil.</p>",
+    "model": "<p><strong>Read:</strong> every observation is normal for 36 weeks. BP 116/72 mmHg on two readings 10 minutes apart (well below 140/90), HR 84 (normal; the resting heart rate runs 10 to 20 beats higher in late pregnancy), RR 16, SpO2 99% on room air, afebrile at 36.8 °C and capillary glucose 5.1 mmol/L. The dipstick shows no protein, glucose, leucocytes or nitrites.</p><p><strong>Meaning:</strong> no sign of pre-eclampsia despite her history, no sign of infection (listeriosis usually brings a fever or flu-like illness) and no sign of poor control of her gestational diabetes. Nothing here explains the reduced movements, and Rachel's observations say nothing about the baby.</p><p><strong>What it changes:</strong> nothing urgent for Rachel herself. The baby is assessed by the CTG and an ultrasound today, and her blood pressure and urine are checked again at every visit because of her previous pre-eclampsia.</p>",
+    "obs": {
+     "rows": [
+      {
+       "t": "12:10",
+       "rr": 16,
+       "spo2": 99,
+       "dev": "RA",
+       "sbp": 116,
+       "dbp": 72,
+       "hr": 84,
+       "temp": 36.8,
+       "avpu": "A",
+       "pain": 0,
+       "bgl": 5.1,
+       "init": "KM",
+       "note": "CTG started"
+      },
+      {
+       "t": "12:20",
+       "sbp": 116,
+       "dbp": 72,
+       "hr": 82,
+       "init": "KM",
+       "note": "BP repeated after 10 minutes; urine dipstick done"
+      }
+     ]
+    }
    },
    {
     "label": "CTG (40 minutes)",
-    "result": "<p>Baseline fetal heart rate 140 bpm. Variability 10 bpm. Accelerations: four in 40 minutes, each rising at least 15 bpm above the baseline for at least 15 seconds. No decelerations. No contractions. Rachel felt the baby move a little during the trace.</p>"
+    "kind": "ctg",
+    "result": "<p><strong>Antenatal CTG</strong> at 36 weeks 2 days, 12:10 to 12:50 (40 minutes), paper speed 1 cm/min. Indication: reduced fetal movements; previous stillbirth. Rachel semi-recumbent with a left tilt.</p><table><tbody><tr><th>Feature</th><th>Finding</th></tr><tr><td>Signal</td><td>Good throughout, no loss of contact; fetal heart clearly separate from the maternal pulse (84/min)</td></tr><tr><td>Baseline rate</td><td>140 bpm</td></tr><tr><td>Baseline variability</td><td>10 bpm</td></tr><tr><td>Accelerations</td><td>Four in 40 minutes, each rising at least 15 bpm above the baseline for at least 15 seconds</td></tr><tr><td>Decelerations</td><td>None</td></tr><tr><td>Uterine activity</td><td>No contractions</td></tr><tr><td>Fetal movements</td><td>Rachel pressed the event marker 3 times for small movements, 2 of them with an acceleration</td></tr></tbody></table>",
+    "model": "<p><strong>Read:</strong> a 40-minute antenatal CTG with a good signal: baseline 140 bpm (normal 110 to 160), variability 10 bpm (normal 6 to 25), four accelerations of at least 15 bpm for 15 seconds (at least two in each 20 minutes), no decelerations and no contractions. Every feature is normal, so by the RANZCOG criteria this is a normal antenatal CTG.</p><p><strong>Meaning:</strong> a normal CTG means a low probability of fetal compromise at the time of the trace. It is a snapshot: it does not measure growth or how well the placenta works, so it cannot exclude growth restriction or placental insufficiency in a woman with a previous stillbirth with a small placenta, previous pre-eclampsia and gestational diabetes, who also sometimes goes to sleep on her back and waited 18 hours to come in.</p><p><strong>What it changes:</strong> no need to expedite birth today, but she does not simply go home: an ultrasound today for fetal growth, liquor volume and umbilical artery Doppler, and review by the registrar before she leaves, with a plan for surveillance and the timing of birth. Rachel is told honestly that the trace is reassuring now but is not a guarantee.</p>"
    }
   ],
   "ask": [
@@ -354,5 +385,12 @@
  "revised": {
   "at": "2026-10-23",
   "by": "format 5/10/5"
+ },
+ "demo": {
+  "age": 34,
+  "unit": "years",
+  "sex": "F",
+  "setting": "ward",
+  "pregnant": true
  }
 }

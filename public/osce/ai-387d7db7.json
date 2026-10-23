@@ -201,7 +201,7 @@
   {
    "id": 19,
    "t": "checkbox",
-   "x": "Interprets the reassessment: haemodynamically stable after occlusion, positioning and oxygen, with no further bleeding or air entrainment, but still hypothermic at 35.6 °C, so active warming continues."
+   "x": "Interprets the observations: the yellow zone temperature on arrival (35.2 °C) calls for a clinical review, here the senior-led trauma assessment; after occlusion, positioning and oxygen he is haemodynamically stable (HR 108 to 96, BP 122/76) with no further bleeding or air entrainment, but still hypothermic at 35.6 °C, so active warming continues."
   },
   {
    "id": 20,
@@ -355,20 +355,81 @@
   "Examination",
   "Management"
  ],
+ "demo": {
+  "age": 32,
+  "unit": "years",
+  "sex": "M",
+  "setting": "ed"
+ },
  "part2": {
   "lead": "Here is his reassessment after your initial management, his blood gas and blood results, and the CT report.",
   "handover": [
    {
     "label": "Reassessment 20 minutes later",
-    "result": "<p>Lying flat with in-line stabilisation, occlusive dressing on the neck wound, high-flow oxygen and forced-air warming. The dressing is dry with no further bleeding or sucking noise. HR 96, BP 122/76, RR 18, SpO2 99% on oxygen, CRT 2 seconds, temperature 35.6 °C, GCS 15. Heart sounds normal with no murmur.</p>"
+    "kind": "obs",
+    "result": "<p>Lying flat with in-line stabilisation, occlusive dressing on the neck wound, oxygen 15 L/min by non-rebreather mask and forced-air warming. The dressing is dry with no further bleeding or sucking noise. CRT 2 seconds (3 seconds and cool peripheries on arrival). GCS 15. Heart sounds normal with no murmur.</p>",
+    "model": "<ul><li><strong>Read:</strong> on arrival HR 108, BP 114/72, RR 20 and SpO2 96% on air are in the white zone, but the temperature of 35.2 °C is in the yellow zone, with cool peripheries and a CRT of 3 seconds. After occlusion, lying flat, oxygen and warming, HR falls to 96, BP rises to 122/76 and SpO2 is 99%; the temperature is still yellow at 35.4 °C at 23:30 and reaches 35.6 °C at 23:40, just inside the white zone.</li><li><strong>Meaning:</strong> on arrival he was compensating for blood loss (tachycardia and cool peripheries with a normal BP; a white zone HR does not exclude it) and he has responded to haemorrhage control. The yellow zone temperature called for a clinical review, which the senior-led trauma assessment provides, and he is still hypothermic below 36 °C although the chart is now white.</li><li><strong>Changes:</strong> keep warming actively and keep him flat with the wound occluded, observations every 15 minutes, and escalate to the trauma team again for a rising HR, falling BP, fresh bleeding or sudden breathlessness.</li></ul>",
+    "obs": {
+     "rows": [
+      {
+       "t": "23:20",
+       "rr": 20,
+       "spo2": 96,
+       "dev": "RA",
+       "sbp": 114,
+       "dbp": 72,
+       "hr": 108,
+       "rhythm": "Reg",
+       "temp": 35.2,
+       "avpu": "A",
+       "bgl": 5.6,
+       "init": "JS",
+       "note": "Arrival in resus: sitting upright, neck wound oozing"
+      },
+      {
+       "t": "23:30",
+       "rr": 18,
+       "spo2": 99,
+       "o2": 15,
+       "dev": "NRB",
+       "sbp": 118,
+       "dbp": 74,
+       "hr": 102,
+       "rhythm": "Reg",
+       "temp": 35.4,
+       "avpu": "A",
+       "init": "JS",
+       "note": "Wound occluded; lying flat with in-line stabilisation; forced-air warmer on"
+      },
+      {
+       "t": "23:40",
+       "rr": 18,
+       "spo2": 99,
+       "o2": 15,
+       "dev": "NRB",
+       "sbp": 122,
+       "dbp": 76,
+       "hr": 96,
+       "rhythm": "Reg",
+       "temp": 35.6,
+       "avpu": "A",
+       "init": "JS",
+       "note": "Reassessment: dressing dry, no sucking noise"
+      }
+     ]
+    }
    },
    {
     "label": "Venous blood gas and bloods (on arrival)",
-    "result": "<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>pH</td><td>7.31</td><td>7.32 to 7.42</td></tr><tr><td>Base excess</td><td>-3 mmol/L</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>2.4 mmol/L</td><td>below 2</td></tr><tr><td>Haemoglobin</td><td>131 g/L</td><td>130 to 180</td></tr><tr><td>Platelets</td><td>245 x 10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>INR</td><td>1.1</td><td>0.9 to 1.2</td></tr><tr><td>APTT</td><td>31 seconds</td><td>25 to 38</td></tr><tr><td>Fibrinogen</td><td>2.8 g/L</td><td>2 to 4</td></tr><tr><td>Group and crossmatch</td><td>O positive, antibody screen negative, 2 units crossmatched</td><td></td></tr></table>"
+    "kind": "bloods",
+    "result": "<p><strong>Venous blood gas</strong> (23:25, on arrival)</p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>pH</td><td>7.31 L</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>45 mmHg</td><td>37 to 50</td></tr><tr><td>Bicarbonate</td><td>22.5 mmol/L</td><td>22 to 28</td></tr><tr><td>Base excess</td><td>-3 mmol/L L</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>2.4 mmol/L H</td><td>below 2.0</td></tr><tr><td>Sodium</td><td>139 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>3.6 mmol/L</td><td>3.5 to 5.2</td></tr><tr><td>Ionised calcium</td><td>1.16 mmol/L</td><td>1.12 to 1.32</td></tr><tr><td>Glucose</td><td>5.8 mmol/L</td><td>3.0 to 7.7</td></tr></table><p><strong>Bloods</strong> (on arrival)</p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin</td><td>131 g/L</td><td>130 to 180</td></tr><tr><td>White cell count</td><td>13.6 x 10<sup>9</sup>/L H</td><td>4.0 to 11.0</td></tr><tr><td>Platelets</td><td>245 x 10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>INR</td><td>1.1</td><td>0.9 to 1.2</td></tr><tr><td>APTT</td><td>31 seconds</td><td>25 to 38</td></tr><tr><td>Fibrinogen</td><td>2.8 g/L</td><td>2.0 to 4.0</td></tr><tr><td>Group and crossmatch</td><td>O positive, antibody screen negative, 2 units crossmatched</td><td></td></tr></table>",
+    "model": "<ul><li><strong>Read:</strong> venous pH 7.31 with base excess -3 and lactate 2.4 is a mild lactic acidosis; a venous pCO2 of 45 is normal. Hb 131 g/L is at the lower limit; platelets, INR, APTT, fibrinogen and ionised calcium are normal; WCC 13.6 is a stress response. Blood is crossmatched (O positive).</li><li><strong>Meaning:</strong> two parts of the deadly triad are present, hypothermia on arrival and acidosis from hypoperfusion, and coagulopathy is not, yet. An early normal Hb does not exclude significant blood loss, because it falls only as fluid shifts or is given.</li><li><strong>Changes:</strong> keep warming, avoid large volumes of crystalloid, and repeat the gas, Hb and coagulation. If bleeding recurs, give blood early through the massive transfusion protocol and consider tranexamic acid within 3 hours of injury.</li></ul>"
    },
    {
     "label": "CT report",
-    "result": "<p><strong>CT angiogram of the neck:</strong> laceration of the right external jugular vein beneath the wound with a small surrounding haematoma. No injury to the carotid or vertebral arteries, internal jugular vein, larynx, trachea or oesophagus. <strong>CT cervical spine:</strong> no fracture or malalignment. <strong>CT facial bones:</strong> displaced nasal bone fractures with deviation to the left, and bilateral soft tissue thickening of the nasal septum in keeping with a septal haematoma. No other facial fracture.</p>"
+    "kind": "ct",
+    "result": "<p><strong>Examination:</strong> CT angiogram of the neck (arterial phase, after IV contrast), with reformats of the cervical spine and facial bones.</p><p><strong>Clinical details:</strong> 32-year-old man. Glass laceration to the right side of the neck breaching platysma, with venous bleeding and a sucking noise on inspiration before it was occluded. Punched in the face: nasal deformity and bilateral septal swelling. Intoxicated.</p><p><strong>Findings:</strong></p><ul><li><strong>Neck soft tissues:</strong> 5 cm laceration over the right sternocleidomastoid with gas in the wound track, and a small (2 cm) haematoma deep to platysma around the right external jugular vein, which is discontinuous at the wound, in keeping with a laceration. No active contrast extravasation. No gas in the internal jugular or subclavian veins or the imaged superior vena cava.</li><li><strong>Arteries:</strong> common, internal and external carotid and vertebral arteries opacify normally, with no dissection, intimal flap, pseudoaneurysm, occlusion or extravasation.</li><li><strong>Internal jugular veins:</strong> intact and patent.</li><li><strong>Aerodigestive tract:</strong> larynx, trachea and oesophagus intact. No gas in the deep neck spaces, retropharyngeal space or mediastinum.</li><li><strong>Cervical spine:</strong> normal alignment. No fracture. Prevertebral soft tissues normal.</li><li><strong>Facial bones:</strong> displaced fractures of both nasal bones with deviation of the nasal pyramid to the left. Smooth soft tissue thickening on both sides of the anterior nasal septum, in keeping with a septal haematoma. No naso-orbito-ethmoid, orbital, maxillary, zygomatic or mandibular fracture.</li><li><strong>Lung apices:</strong> clear. No pneumothorax.</li></ul><p><strong>Conclusion:</strong> right external jugular vein laceration with a small haematoma; no arterial, airway, oesophageal or cervical spine injury. Displaced nasal bone fractures with a bilateral nasal septal haematoma.</p>",
+    "model": "<ul><li><strong>Read:</strong> the right external jugular vein is cut beneath the wound with a small haematoma; the carotid and vertebral arteries, internal jugular vein, larynx, trachea and oesophagus are intact and there is no gas in the deep veins. The cervical spine is normal. Both nasal bones are fractured and displaced, with soft tissue thickening on both sides of the septum.</li><li><strong>Meaning:</strong> the neck injury is confined to the external jugular vein, which explains the venous bleeding and the risk of air entrainment; the septal thickening confirms the bilateral septal haematoma found on examination.</li><li><strong>Changes:</strong> the trauma or surgical team explores and repairs or ligates the vein, with air embolism precautions until then; ENT drains the septal haematoma today. The cervical collar can come off under the local trauma protocol with senior review, and the nasal fractures are reviewed for reduction at about 1 week.</li></ul>"
    }
   ],
   "ask": [

@@ -133,7 +133,7 @@
   {
    "id": 21,
    "t": "checkbox",
-   "x": "Interprets the bloods: rising hs-troponin (210 to 480 ng/L) shows acute myocardial injury; WCC 19, CRP 240 and lactate 3.4 with a mild metabolic acidosis show sepsis with hypoperfusion; urea and creatinine are raised."
+   "x": "Interprets the bloods: rising hs-troponin (210 to 480 ng/L, above the women's 99th percentile of 16) shows acute myocardial injury; WCC 19, CRP 240 and lactate 3.4 with a mild metabolic acidosis show sepsis with hypoperfusion; urea and creatinine are raised, an acute kidney injury against her baseline creatinine of 76."
   },
   {
    "id": 22,
@@ -187,7 +187,7 @@
   {
    "id": 31,
    "t": "checkbox",
-   "x": "Starts resuscitation: stays in resus with continuous monitoring, a second large-bore cannula, oxygen titrated to SpO2 92 to 96%, and an early senior call."
+   "x": "Starts resuscitation and escalates her red zone observations at once: stays in resus with continuous monitoring, a second large-bore cannula, oxygen titrated to SpO2 92 to 96%, and the senior ED doctor to the bedside now (the rapid response her chart calls for)."
   },
   {
    "id": 32,
@@ -315,24 +315,75 @@
   "Interpretation",
   "Management"
  ],
+ "demo": {
+  "age": 71,
+  "unit": "years",
+  "sex": "F",
+  "setting": "ed"
+ },
  "part2": {
   "lead": "Here are her observations, the ECG the nurse recorded, her blood results and the portable chest X-ray report.",
   "handover": [
    {
     "label": "Observations",
-    "result": "<p>Temperature 38.9 °C, HR 112/min regular, RR 32/min, BP 86/52 mmHg, SpO2 89% on room air at triage and 93% now on 4 L/min oxygen by nasal prongs, CRT 4 seconds, GCS 15 with no new confusion, BGL 7.8 mmol/L.</p>"
+    "kind": "obs",
+    "result": "<p>On 4 L/min oxygen by nasal prongs since 07:00. CRT 4 seconds. GCS 15 with no new confusion.</p>",
+    "model": "<ul><li><strong>Read:</strong> at triage on room air RR 32, SpO2 89% and systolic BP 86 are all in the red zone, with temperature 38.9 °C and severe pain (7/10) in the yellow zone; HR 112 is white. On 4 L/min oxygen SpO2 rises only to 93% (yellow) while RR 32 and systolic 86 stay red, and the lactate of 3.4 is yellow.</li><li><strong>Meaning:</strong> red zone at both time points: fever, hypotension, tachypnoea and hypoxia with a CRT of 4 seconds is septic shock, with a cardiogenic component possible. A white zone heart rate does not make her safe (shock index 1.3).</li><li><strong>Changes:</strong> the red zone calls for a rapid response, which in the ED means the senior ED doctor at the bedside now, continuous monitoring in resus and early ICU involvement. RR 30 or more and systolic below 90 also score on CURB-65 and CORB.</li></ul>",
+    "obs": {
+     "rows": [
+      {
+       "t": "06:50",
+       "rr": 32,
+       "spo2": 89,
+       "dev": "RA",
+       "sbp": 86,
+       "dbp": 52,
+       "hr": 112,
+       "rhythm": "Reg",
+       "temp": 38.9,
+       "avpu": "A",
+       "pain": 7,
+       "bgl": 7.8,
+       "init": "KM",
+       "note": "Triage ATS 2: to resus, ECG done"
+      },
+      {
+       "t": "07:05",
+       "rr": 32,
+       "spo2": 93,
+       "o2": 4,
+       "dev": "NP",
+       "sbp": 86,
+       "dbp": 52,
+       "hr": 112,
+       "rhythm": "Reg",
+       "temp": 38.9,
+       "avpu": "A",
+       "pain": 7,
+       "lactate": 3.4,
+       "init": "KM",
+       "note": "Oxygen 4 L/min NP; IV cannula, bloods and venous gas sent; portable CXR"
+      }
+     ]
+    }
    },
    {
     "label": "12-lead ECG",
-    "result": "<p>Sinus tachycardia at about 112/min. ST elevation of about 2 mm in V2 to V5. No reciprocal ST depression in the inferior leads. No pathological Q waves.</p>"
+    "kind": "ecg",
+    "result": "<p><strong>12-lead ECG at 06:52</strong> (25 mm/s, 10 mm/mV)</p><ul><li><strong>Rate:</strong> 112/min.</li><li><strong>Rhythm:</strong> sinus tachycardia; regular, a P wave before every QRS.</li><li><strong>Axis:</strong> normal, about +30°.</li><li><strong>PR interval:</strong> 160 ms.</li><li><strong>QRS duration:</strong> 92 ms.</li><li><strong>QTc:</strong> 450 ms (Bazett).</li><li><strong>ST segments and T waves:</strong> anterior (V2 to V4) and V5: ST elevation of about 2 mm with upright T waves. V1: no significant ST elevation. Inferior (II, III, aVF): isoelectric ST segments, no reciprocal ST depression. High lateral (I, aVL) and V6: no significant ST change. aVR: no ST elevation.</li><li><strong>Other:</strong> no pathological Q waves, R wave progression preserved, no bundle branch block, no LVH by voltage criteria.</li><li><strong>Comparison:</strong> no previous ECG on file.</li></ul>",
+    "model": "<ul><li><strong>Read:</strong> sinus tachycardia 112/min with a normal axis, PR, QRS and QTc. ST elevation of about 2 mm in four contiguous chest leads, V2 to V5 (LAD territory), above the threshold for a woman (1.5 mm in V2 to V3, 1 mm in other leads). No reciprocal inferior depression, no Q waves, no bundle branch block and no old ECG to compare.</li><li><strong>Meaning:</strong> with 6 hours of ischaemic-type pain this is an anterior STEMI until proven otherwise. The absence of reciprocal change does not exclude it, and Takotsubo can look identical on the ECG, so only angiography separates them.</li><li><strong>Changes:</strong> activate the STEMI pathway and give aspirin now, without waiting for the troponin, an echo or the pneumonia work-up; repeat the ECG with any change in pain.</li></ul>"
    },
    {
     "label": "Bloods and venous gas",
-    "result": "<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>WCC</td><td>19 x 10<sup>9</sup>/L</td><td>4 to 11</td></tr><tr><td>CRP</td><td>240 mg/L</td><td>below 5</td></tr><tr><td>Urea</td><td>9.2 mmol/L</td><td>3 to 8</td></tr><tr><td>Creatinine</td><td>118 micromol/L</td><td>45 to 90</td></tr><tr><td>Venous pH</td><td>7.30</td><td>7.32 to 7.42</td></tr><tr><td>Bicarbonate</td><td>18 mmol/L</td><td>22 to 28</td></tr><tr><td>Lactate</td><td>3.4 mmol/L</td><td>below 2</td></tr><tr><td>hs-troponin I on arrival</td><td>210 ng/L</td><td>99th percentile 16 for women on this assay</td></tr><tr><td>hs-troponin I at 1 hour</td><td>480 ng/L</td><td>rising</td></tr></table>"
+    "kind": "bloods",
+    "result": "<p><strong>Bloods</strong> (on arrival unless stated)</p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin</td><td>128 g/L</td><td>115 to 165</td></tr><tr><td>White cell count</td><td>19.0 x 10<sup>9</sup>/L H</td><td>4.0 to 11.0</td></tr><tr><td>Neutrophils</td><td>16.9 x 10<sup>9</sup>/L H</td><td>2.0 to 7.5</td></tr><tr><td>Platelets</td><td>214 x 10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>CRP</td><td>240 mg/L H</td><td>below 5</td></tr><tr><td>Sodium</td><td>134 mmol/L L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>4.4 mmol/L</td><td>3.5 to 5.2</td></tr><tr><td>Chloride</td><td>101 mmol/L</td><td>95 to 110</td></tr><tr><td>Urea</td><td>9.2 mmol/L H</td><td>4.0 to 9.0</td></tr><tr><td>Creatinine</td><td>118 micromol/L H (baseline 76, GP bloods 2025)</td><td>45 to 90</td></tr><tr><td>eGFR</td><td>43 mL/min/1.73 m<sup>2</sup> L</td><td>above 90</td></tr><tr><td>hs-troponin I on arrival</td><td>210 ng/L H</td><td>below 16 for women (sex-specific 99th percentile on this assay; 34 for men)</td></tr><tr><td>hs-troponin I at 1 hour</td><td>480 ng/L H (rise of 270)</td><td>below 16 for women</td></tr></table><p><strong>Venous blood gas</strong> (on arrival, on 4 L/min oxygen)</p><table><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>pH</td><td>7.30 L</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>37 mmHg</td><td>37 to 50</td></tr><tr><td>Bicarbonate</td><td>18 mmol/L L</td><td>22 to 28</td></tr><tr><td>Base excess</td><td>-7 mmol/L L</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>3.4 mmol/L H</td><td>below 2.0</td></tr></table>",
+    "model": "<ul><li><strong>Read:</strong> hs-troponin I 210 ng/L, about 13 times the women's 99th percentile of 16, rising to 480 ng/L at 1 hour: acute myocardial injury. WCC 19.0 with neutrophilia and CRP 240: severe bacterial infection. Venous pH 7.30, bicarbonate 18, base excess -7 and lactate 3.4 with a low-normal pCO2: a lactic metabolic acidosis with respiratory compensation. Urea 9.2 and creatinine 118 against a baseline of 76: acute kidney injury (KDIGO stage 1). Hb and platelets normal.</li><li><strong>Meaning:</strong> sepsis with hypoperfusion from the pneumonia, alongside myocardial injury that fits the STEMI; the troponin also rises in Takotsubo and in a type 2 MI from sepsis, so it does not separate them. Urea above 7 scores on CURB-65.</li><li><strong>Changes:</strong> the STEMI decision rests on the ECG, not the troponin. Antibiotics within the hour, cautious fluid and a repeat lactate; the kidney injury does not delay angiography but means perindopril is withheld and renal function rechecked.</li></ul>"
    },
    {
     "label": "Portable chest X-ray",
-    "result": "<p>Right lower zone consolidation with a small right parapneumonic effusion. Normal heart size and mediastinal width. No pneumothorax.</p>"
+    "kind": "xray",
+    "result": "<p><strong>Examination:</strong> chest X-ray, portable AP semi-erect, 07:10.</p><p><strong>Clinical details:</strong> 71-year-old woman with chest pain, fever, productive cough and hypoxia. ?Pneumonia.</p><p><strong>Findings:</strong></p><ul><li><strong>Lines and devices:</strong> ECG electrodes over the chest. No lines or tubes.</li><li><strong>Lungs:</strong> dense airspace opacification in the right lower zone with air bronchograms, obscuring the right hemidiaphragm; the right heart border is preserved, placing it in the right lower lobe. Left lung clear. No pulmonary oedema.</li><li><strong>Pleura:</strong> small right pleural effusion blunting the right costophrenic angle. No pneumothorax.</li><li><strong>Heart and mediastinum:</strong> heart size within normal limits for an AP film. Mediastinum not widened, trachea central, hila normal.</li><li><strong>Bones and soft tissues:</strong> no acute bony abnormality. Mild degenerative change in the thoracic spine.</li></ul><p><strong>Conclusion:</strong> right lower lobe consolidation with a small right parapneumonic effusion, in keeping with pneumonia. Normal heart size and mediastinal width; no pneumothorax.</p>",
+    "model": "<ul><li><strong>Read:</strong> an AP portable film showing right lower lobe consolidation with air bronchograms (right hemidiaphragm lost, right heart border kept) and a small right effusion. Left lung clear, no oedema, heart size normal for an AP film, mediastinum not widened, no pneumothorax.</li><li><strong>Meaning:</strong> right lower lobe pneumonia with a small parapneumonic effusion, matching the right basal bronchial breathing, dullness and pleural rub. A normal mediastinum makes aortic dissection less likely before antithrombotics, and a normal-looking film does not exclude PE.</li><li><strong>Changes:</strong> with CURB-65 of 4 (and high SMART-COP and CORB) this is severe CAP: IV ceftriaxone plus azithromycin per eTG within the hour, and ICU or HDU review. The effusion is small, so no tap now; it is reimaged if fever persists.</li></ul>"
    }
   ],
   "ask": [
