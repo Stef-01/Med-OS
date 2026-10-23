@@ -914,9 +914,12 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-prs-slide { margin:auto; width:100%; max-width:900px; display:flex; flex-direction:column; gap:16px; padding:8px 0 16px; animation:os-drop .22s var(--ease); }
 .os-prs-slide h2 { font-size:clamp(22px, 5vw, 34px); font-weight:700; color:var(--pri); }
 .os-prs-slide .os-html { font-size:clamp(19px, 4.4vw, 28px); line-height:1.5; }
-.os-prs-slide .os-html p + p { margin-top:10px; }
+.os-prs-slide .os-html > * + * { margin-top:12px; }
 .os-prs-slide table { border-collapse:collapse; }
-.os-prs-slide td, .os-prs-slide th { padding:6px 18px 6px 0; text-align:left; vertical-align:top; border-bottom:1px solid var(--stroke); }
+.os-prs-slide .os-html table { font-size:clamp(16px, 4.2vw, 26px); width:auto; max-width:100%; }
+.os-prs-slide .os-html :is(td, th) { overflow-wrap:normal; -webkit-hyphens:auto; hyphens:auto; }   /* whole words, or a proper hyphen, never "Hae/mogl/obin" */
+.os-prs-slide td, .os-prs-slide th { padding:6px 10px; text-align:left; vertical-align:top; }
+@media (max-width:360px) { .os-prs-slide .os-html table { font-size:15px; } .os-prs-slide td, .os-prs-slide th { padding:6px 7px; } }
 .os-prs-slide .os-fig img { max-height:calc(100vh - 220px); width:auto; max-width:100%; align-self:center; }
 .os-prs-nav { flex:none; display:flex; justify-content:space-between; gap:10px; padding-top:8px; }
 .os-prs-nav .os-btn { flex:1; max-width:220px; }

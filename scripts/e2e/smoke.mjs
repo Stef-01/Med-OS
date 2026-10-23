@@ -112,6 +112,8 @@ async function runIn(width, height, label) {
   const qa = pg.locator('.os-qa').first();
   ok(await qa.isVisible() && (width >= 900 || await pg.locator('[data-os="tab"][data-tab="Marking"][aria-selected="true"]').count() === 1), `${label}: Part 2 opens the marking sheet at its questions and results`);
   ok(await qa.locator('.os-qaask li').count() >= 2 && await qa.locator('.os-qacard').count() >= 2, `${label}: Part 2 lists the questions and the results`);
+  await pg.waitForTimeout(900);   /* the smooth scroll settles */
+  ok(await qa.evaluate(e => { const t = e.getBoundingClientRect().top; return t >= 0 && t < innerHeight / 2; }), `${label}: the marking sheet scrolls to the Part 2 questions`);
   await shot('part2');
   const firstResult = (await qa.locator('.os-qacard strong').first().textContent()).trim();
   await qa.locator('.os-qashow').click();
@@ -119,6 +121,7 @@ async function runIn(width, height, label) {
   const covered = await pg.evaluate(() => { const r = [[0.5, 0.5], [0.1, 0.9], [0.9, 0.1]].map(([x, y]) => document.elementFromPoint(innerWidth * x, innerHeight * y)); return r.every(e => e && e.closest('.os-present')); });
   ok(covered && !(await pg.locator('.os-present .os-check, .os-present .os-qaask').count()), `${label}: the results fill the screen and nothing of the rubric or the questions shows`);
   ok((await pg.textContent('.os-prs-slide h2')).trim() === firstResult, `${label}: the presenter starts at the first result`);
+  ok(await pg.waitForFunction(() => getComputedStyle(document.querySelector('.os-present')).opacity === '1', null, { timeout: 2000 }).then(() => true, () => false), `${label}: the results layer fades in fully opaque`);
   await shot('presenter');
   const n = await qa.locator('.os-qacard').count();
   await click('[data-os="pnext"]');
