@@ -277,6 +277,25 @@
    },
    "imaging": 1
   },
+  "415": {
+   "status": "shipped",
+   "at": "2026-10-23T13:50:56Z",
+   "title": "Dyspnoea History 10",
+   "station": "amsa-415",
+   "rounds": 4,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 1
+  },
+  "416": {
+   "status": "shipped",
+   "at": "2026-10-23T14:15:17Z",
+   "title": "Dyspnoea History 11",
+   "station": "amsa-416",
+   "by": "publish-amsa-draft.mjs"
+  },
   "417": {
    "status": "shipped",
    "at": "2026-10-23T09:37:20Z",
@@ -326,6 +345,15 @@
    "title": "Colonoscopy Consent Station 1",
    "station": "amsa-438",
    "by": "publish-amsa-draft.mjs"
+  },
+  "475": {
+   "status": "failed",
+   "at": "2026-10-23T13:58:22Z",
+   "title": "Dyspnoea History 12",
+   "gates": [],
+   "blockers": [
+    "part2.expect[0] (ISBAR model answer), Assessment line, against checklist items 26–31: The handover is where the results get interpreted, but the model answer reads most results without interpreting them, so it would not earn several items scored from it. Item 28 (critical) needs bilateral effusions and no consolidation; the answer only says 'CXR cardiomegaly and oedema'. Item 30 (critical) needs the flat troponin called chronic myocardial injury rather than an acute MI; the answer only gives '24→25 flat'. Item 27 (critical) needs sinus tachycardia, which isn't named. Item 29 needs the NT-proBNP stated as strongly supporting HF; only the number is given. Item 31 needs 2 of 3 (low sodium, creatinine above baseline, normal Hb/TSH); only creatinine is given. Item 26 needs 'not shocked / perfused', which isn't said."
+   ]
   },
   "476": {
    "status": "shipped",
