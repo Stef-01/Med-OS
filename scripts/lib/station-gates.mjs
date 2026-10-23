@@ -202,7 +202,7 @@ export function gasIssues(html) {
    interpretation of the results, then the diagnosis and differentials, then management; each with its expected answer */
 export function askProblems(p2) {
   const ask = (p2?.ask || []).map(plain), exp = (p2?.expect || []).map(plain), p = [];
-  if (ask.length < 3 || ask.length > 5) p.push(`${ask.length} examiner questions; Part 2 asks 3 or 4 (ISBAR handover, differentials, management, then safety netting or a focused question)`);
+  if (ask.length < 3 || ask.length > 4) p.push(`${ask.length} examiner questions; Part 2 asks 3 or 4 (ISBAR handover, differentials, management, then safety netting or a focused question)`);
   if (ask.length && !/\bISBAR\b/i.test(ask[0])) p.push('the first examiner question asks for an ISBAR handover that includes the interpretation of the results');
   if (ask.length > 1 && !/differential|diagnos|else would you consider/i.test(ask[1])) p.push('the second examiner question asks for the most likely diagnosis and the differentials');
   if (ask.length > 2 && !/manag/i.test(ask[2])) p.push('the third examiner question asks how the candidate would manage the patient');

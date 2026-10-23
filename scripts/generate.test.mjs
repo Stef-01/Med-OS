@@ -209,5 +209,5 @@ test('Part 2 questions run the way an examiner asks them: ISBAR with the results
   assert.match(askProblems({ ...good, ask: [good.ask[0], 'Outline your management.', 'And then?'] }).join(), /diagnosis and the differentials/);
   assert.match(askProblems({ ...good, expect: good.expect.slice(0, 2) }).join(), /expected answer/);
   assert.match(askProblems({ ...good, expect: ['<p>he is unwell</p>', '<p>d</p>', '<p>m</p>'] }).join(), /Situation, Background, Assessment and Recommendation/);
-  assert.match(askProblems({ ask: good.ask.slice(0, 2), expect: good.expect.slice(0, 2) }).join(), /3 to 5/);
+  assert.match(askProblems({ ask: good.ask.slice(0, 2), expect: good.expect.slice(0, 2) }).join(), /3 or 4/);
 });
