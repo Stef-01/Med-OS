@@ -3231,6 +3231,85 @@
    ],
    "key": "Sarah has a sustained, regular tachycardia at 150/min with mild breathlessness and light-headedness. Her BP is maintained, she is warm with a CRT under 2 seconds, GCS is 15, and she has no chest pain or signs of heart failure. So she is haemodynamically stable and needs a monitored bed, pads, IV access and a senior review now, not DC cardioversion. The fine tremor, warm palms, brisk reflexes and a diffuse, smooth, non-tender goitre without eye signs point to thyrotoxicosis, probably Graves' disease, as the trigger. The normal heart sounds, normal JVP, clear lungs and no oedema argue against structural heart disease or heart failure."
   },
+  "amsa-221": {
+   "vitals": "13:50: HR 132 beats/min irregular (apical count; pulse oximeter reading a fluctuating 110 to 125 beats/min; not yet on a cardiac monitor), BP 128/80 mmHg, RR 18/min, SpO2 97% on room air, temperature 36.8 °C, BGL 6.0 mmol/L, weight 88 kg",
+   "general": "Alert, mildly anxious 69-year-old man sitting up on the ED bed. He sometimes puts a hand on his chest and talks in full sentences. Not pale, sweaty or cyanosed. No respiratory distress. A cannula is in place. He feels more light-headed if asked to stand.",
+   "steps": [
+    {
+     "area": "Hands and peripheral perfusion",
+     "do": "Inspect and feel the hands, check capillary refill, look for a tremor with the arms held out, and look for clubbing and peripheral stigmata of endocarditis.",
+     "find": "Warm hands. Capillary refill under 2 seconds. No fine tremor. Not hot or sweaty. No clubbing, splinter haemorrhages or other stigmata of endocarditis."
+    },
+    {
+     "area": "Radial pulse",
+     "do": "Palpate the right radial pulse for 30 to 60 seconds for rate, rhythm and volume. Compare both radials for radio-radial delay.",
+     "find": "Rate about 118/min, irregularly irregular, with volume varying from beat to beat. No radio-radial delay."
+    },
+    {
+     "area": "Apex and radial rate together (pulse deficit)",
+     "do": "Auscultate the apex rate for a full minute while a colleague counts the radial pulse at the same time.",
+     "find": "Apex rate 132/min against a radial rate of about 118/min, giving a pulse deficit of about 14."
+    },
+    {
+     "area": "Face and eyes",
+     "do": "Inspect for pallor and central cyanosis, and look for thyroid eye signs (lid retraction, lid lag, exophthalmos).",
+     "find": "No pallor or cyanosis. No lid retraction, lid lag or exophthalmos."
+    },
+    {
+     "area": "Neck: thyroid, carotids and JVP",
+     "do": "Inspect and palpate the thyroid from behind. Palpate and auscultate the carotids. Measure the JVP with him at 45 degrees.",
+     "find": "No goitre or thyroid nodules. Carotid pulses normal in character with no bruits. JVP 2 cm above the sternal angle (normal)."
+    },
+    {
+     "area": "Praecordium",
+     "do": "Inspect for scars. Palpate the apex beat, then feel for heaves and thrills. Auscultate all four areas, then auscultate with him in the left lateral position.",
+     "find": "No scars. Apex beat in the 5th intercostal space, midclavicular line, not displaced. No heaves or thrills. S1 varies in intensity and S2 is normal. No murmurs, added sounds or pericardial rub, including in the left lateral position."
+    },
+    {
+     "area": "Lungs",
+     "do": "Percuss and auscultate the chest front and back, including the lung bases.",
+     "find": "Resonant throughout. Vesicular breath sounds. No crackles, wheeze or bronchial breathing."
+    },
+    {
+     "area": "Abdomen",
+     "do": "Inspect and palpate the abdomen.",
+     "find": "Soft and non-tender. Healed appendicectomy scar in the right iliac fossa. No organomegaly."
+    },
+    {
+     "area": "Legs",
+     "do": "Check for pitting oedema at the ankles and shins. Feel the calves for tenderness or swelling.",
+     "find": "No pitting oedema. Calves soft and non-tender."
+    },
+    {
+     "area": "Neurological screen",
+     "do": "Brief screen for stroke: face, arm drift and limb power, and speech.",
+     "find": "No facial droop, no limb weakness and normal speech."
+    }
+   ],
+   "bedside": [
+    {
+     "test": "Bedside blood glucose",
+     "find": "6.0 mmol/L (normal)."
+    },
+    {
+     "test": "Continuous cardiac monitoring (if requested)",
+     "find": "The nurse attaches the monitor, which shows a fast, irregular rhythm at about 130 beats/min."
+    },
+    {
+     "test": "12-lead ECG (if requested)",
+     "find": "Not yet done. The nurse says \"I'll do it now\" and records it at 13:52. The examiner hands it over in Part 2."
+    },
+    {
+     "test": "Pulse oximetry",
+     "find": "SpO2 97% on room air. The pulse rate reading fluctuates between 110 and 125 because the rhythm is irregular and some beats are not felt at the periphery."
+    },
+    {
+     "test": "Bloods",
+     "find": "Already collected by the triage nurse at 13:45 through the cannula. Results are given in Part 2."
+    }
+   ],
+   "key": "He has a fast, irregularly irregular pulse with variable volume, a varying S1 and a pulse deficit (apex 132 against radial about 118). In a man with 40 minutes of sudden palpitations, this strongly suggests new-onset atrial fibrillation with a rapid ventricular response. He is haemodynamically stable: BP is normal, he is well perfused and alert, and there are no signs of heart failure, hypoxia or fever, so emergency DC cardioversion is not needed. There is no murmur, thyroid sign or chest finding to suggest valve disease, thyrotoxicosis or infection as a cause. An early 12-lead ECG and cardiac monitoring are still essential to confirm the rhythm and look for ischaemia."
+  },
   "amsa-222": {
    "vitals": "HR 76 beats/min regular, BP 134/82 mmHg right arm (132/80 mmHg left arm), RR 14 breaths/min, SpO2 98% on room air, temperature 36.7°C",
    "general": "Comfortable, well-looking man sitting in a chair, pain-free and in no distress. Overweight with central weight. No pallor, jaundice or cachexia.",
@@ -5421,6 +5500,67 @@
     }
    ],
    "key": "Brad is pale, cool and clammy with ischaemic-sounding pain that is coming back, and new ectopic beats. This is an evolving acute coronary syndrome with a risk of arrhythmia (VF), so he needs a senior, defibrillator pads, a repeat ECG, GTN or titrated analgesia, and aspirin (none given so far). His BP and pulses are equal in both arms and there is no back pain, which argues against aortic dissection. His chest is clear, his JVP is not raised, he has no new murmur and his SpO2 is 96%, so there is no heart failure or mechanical complication (Killip I) and no oxygen is needed. His BP is under 180/110, so it allows both GTN and fibrinolysis."
+  },
+  "amsa-411": {
+   "vitals": "09:20: HR 108 beats/min radial, irregularly irregular (apical 116/min, pulse deficit 8), BP 148/88 mmHg, RR 16/min, SpO2 97% on room air, temperature 36.8 °C, weight 112 kg, height 176 cm, BMI 36.2 kg/m²",
+   "general": "Obese man sitting comfortably in the chair, alert and chatty but a little anxious. Talking in full sentences and not distressed. Not pale and not sweaty. Smells of cigarette smoke. No oxygen or other equipment needed.",
+   "steps": [
+    {
+     "area": "Radial pulse and apical rate",
+     "do": "Palpate the radial pulse for a full minute for rate, rhythm and volume, then auscultate the apex for one minute at the same time to look for an apex-radial deficit",
+     "find": "Radial pulse 108 beats/min, irregularly irregular, varying in volume. Apical rate 116 beats/min, so a pulse deficit of 8. Radial pulses equal on both sides, no radio-femoral delay."
+    },
+    {
+     "area": "Hands",
+     "do": "Inspect and palpate the hands for tar staining, tremor (arms outstretched), clubbing, palmar erythema, Dupuytren's contracture, temperature and capillary refill",
+     "find": "Tar staining of the right index and middle fingers. No fine tremor, no clubbing, no palmar erythema, no Dupuytren's contracture. Hands warm, capillary refill 2 seconds."
+    },
+    {
+     "area": "Face and eyes",
+     "do": "Inspect for exophthalmos, lid retraction and lid lag (thyroid), conjunctival pallor (anaemia) and spider naevi (chronic alcohol use)",
+     "find": "No exophthalmos, lid retraction or lid lag. No conjunctival pallor. No spider naevi."
+    },
+    {
+     "area": "Neck",
+     "do": "Inspect and palpate the thyroid from behind (with swallowing), assess the JVP at 45 degrees, and palpate and auscultate the carotids",
+     "find": "No goitre or thyroid nodules. JVP not raised. Carotid pulses normal, no bruits."
+    },
+    {
+     "area": "Praecordium",
+     "do": "Inspect, palpate the apex beat and feel for heaves and thrills, then auscultate all areas, including the mitral area with the bell in the left lateral position",
+     "find": "Apex beat hard to feel because of body habitus, not obviously displaced. No heave or thrill. S1 varies in intensity, S2 normal. No murmurs, including none at the mitral area in the left lateral position. No added sounds."
+    },
+    {
+     "area": "Chest",
+     "do": "Auscultate the lung fields, especially the bases, for crackles (heart failure) and signs of effusion or infection",
+     "find": "Good air entry on both sides. Chest clear, with no crackles, wheeze or signs of effusion."
+    },
+    {
+     "area": "Abdomen",
+     "do": "Inspect and palpate for tenderness, hepatomegaly and ascites (alcohol-related liver disease, right heart failure)",
+     "find": "Obese, soft and non-tender. Liver edge not palpable. No ascites. Appendicectomy scar in the right iliac fossa."
+    },
+    {
+     "area": "Legs",
+     "do": "Check for pitting oedema at the ankles and shins, and check the calves",
+     "find": "No pitting oedema. Calves soft and non-tender."
+    }
+   ],
+   "bedside": [
+    {
+     "test": "12-lead ECG",
+     "find": "Requested now while Frank has symptoms. The practice nurse records it at 09:35 and the tracing is given in Part 2."
+    },
+    {
+     "test": "Capillary blood glucose",
+     "find": "6.2 mmol/L (random, non-fasting)."
+    },
+    {
+     "test": "Urinalysis",
+     "find": "Normal: no blood, protein, glucose, leucocytes or nitrites."
+    }
+   ],
+   "key": "The important findings are an irregularly irregular pulse at 108 with variable volume, a pulse deficit and an S1 of varying intensity, while Frank feels the palpitations. Together these strongly suggest atrial fibrillation, and a 12-lead ECG should be recorded now to confirm it. He is haemodynamically stable: his BP is not low, his saturation is normal and he has no chest pain or heart failure signs (JVP not raised, clear chest, no oedema), so he can be managed in general practice. There are no signs of thyrotoxicosis, mitral valve disease or liver disease, but his obesity (BMI 36.2), tar staining and raised BP are AF risk factors that can be changed."
   },
   "amsa-412": {
    "vitals": "RR 26/min, SpO2 91% on room air, HR 108/min irregular, BP 144/86 mmHg, Temp 36.8 °C, CRT 2 s, alert (AVPU A), weight 92 kg (usual about 88 kg)",
