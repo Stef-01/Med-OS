@@ -120,8 +120,10 @@ async function runIn(width, height, label) {
   ok(/10:00|9:5\d/.test(await pg.textContent('.os-tc.cur')), `${label}: Part 1 is 10 minutes`);
   await click('[data-os="tab"][data-tab="Patient Script"]');
   await click('.os-pl [data-os="jump"][data-to="ex"]');
-  await pg.waitForTimeout(900);   /* the smooth scroll settles */
-  ok(await pg.evaluate(() => { const nav = document.querySelector('.os-pl .os-jump').getBoundingClientRect(), e = document.querySelector('.os-pl .os-exam').getBoundingClientRect(); return e.top >= nav.bottom - 1 && e.top - nav.bottom < 30; })
+  /* the smooth scroll settles: a long history (the AMSA cases) takes longer than a short one */
+  const landed = await pg.waitForFunction(() => { const nav = document.querySelector('.os-pl .os-jump').getBoundingClientRect(), e = document.querySelector('.os-pl .os-exam').getBoundingClientRect(); return e.top >= nav.bottom - 1 && e.top - nav.bottom < 30; }, null, { timeout: 3000 }).then(() => true, () => false);
+  await pg.waitForTimeout(200);   /* the jump bar lights on the last scroll event */
+  ok(landed
     && await pg.locator('.os-pl [data-os="jump"][data-to="ex"][aria-current="true"]').count() === 1, `${label}: the jump bar takes the examiner to the exam findings and lights Exam`);
   await shot('jump');
   if (await pg.locator('.os-pl .os-exshow').count()) {   /* the candidate asks for the vitals: the examiner turns the screen */
@@ -224,7 +226,7 @@ async function runIn(width, height, label) {
   await click('.os-pop [data-v="cand"]');
   await pg.waitForSelector('.os-candurl');
   const link = await pg.inputValue('.os-candurl');
-  ok(/\?cand=ai-/.test(link), `${label}: the candidate link names the station`);
+  ok(/\?cand=(ai|amsa)-[\w-]+/.test(link), `${label}: the candidate link names the station`);
   await click('.os-dlg [data-os="dclose"], .os-dlg .os-dlg-x');
   const cp = await ctx.newPage();
   cp.on('pageerror', e => errs.push(`candidate: ${e.message}`));
