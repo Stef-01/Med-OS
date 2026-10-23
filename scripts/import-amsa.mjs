@@ -105,7 +105,15 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     say(`${raw.meta.title} · ${raw.meta.section} · ${opts.types.join(', ')}${opts.acute ? ' · acute' : ''}`);
     let res;
     try { res = await writeStation(topic, opts, { bank: bank(), ask, now, log: m => say(`  ${m}`) }); }
-    catch (e) { say(`  error: ${e.message}`); const v = { status: 'error', at: now, title: raw.meta.title, why: e.message.slice(0, 300) }; if (flag('--dry-run')) ledger.cases[raw.meta.id] = v; else setCase(ledger, raw.meta.id, v); return; }
+    catch (e) {
+      /* the subscription's usage limit is not the case's fault: give the case back and wait for the reset */
+      if (/hit your (session|usage|weekly) limit|rate.?limit|overloaded/i.test(e.message)) {
+        say(`  usage limit: ${e.message.slice(0, 120)} · case returned to the queue, waiting 15 minutes`);
+        claimed.delete(raw.meta.id); started--;
+        await sleep(15 * 60000);
+        return;
+      }
+      say(`  error: ${e.message}`); const v = { status: 'error', at: now, title: raw.meta.title, why: e.message.slice(0, 300) }; if (flag('--dry-run')) ledger.cases[raw.meta.id] = v; else setCase(ledger, raw.meta.id, v); return; }
     if (!res.ok) {
       const last = res.rounds[res.rounds.length - 1], blockers = (last.review.issues || []).filter(i => i.severity === 'blocker');
       say(`  not shipped: ${last.gates.length} gate problem(s), ${blockers.length} examiner blocker(s)`);
