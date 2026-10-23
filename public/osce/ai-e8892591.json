@@ -17,7 +17,7 @@
   {
    "id": 2,
    "t": "checkbox",
-   "x": "Washes hands, introduces self to the mother, confirms the child's name and age, and keeps the child calm on the mother's lap with minimal handling."
+   "x": "Washes hands, introduces self to the mother and confirms the child's name and age."
   },
   {
    "id": 3,
@@ -37,7 +37,7 @@
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Coryza for 2 days, then barking cough and noisy breathing from this evening"
+     "x": "Coryza for 2 days, then a barking cough and noisy breathing from about 8 pm, getting worse"
     },
     {
      "id": 2,
@@ -102,7 +102,7 @@
   {
    "id": 12,
    "t": "checkbox",
-   "x": "Observes from a distance without upsetting the child:",
+   "x": "Keeps the child upright on the mother's lap and observes from a distance first:",
    "kids": [
     {
      "id": 1,
@@ -134,7 +134,7 @@
   {
    "id": 15,
    "t": "checkbox",
-   "x": "Does not examine the throat or lie the child flat, and says why (it can precipitate complete obstruction).",
+   "x": "Does not look in the throat or lie the child flat, and says why: upsetting the child worsens the obstruction, and a tongue depressor can cause complete obstruction if this is epiglottitis.",
    "crit": true
   },
   {
@@ -150,24 +150,24 @@
   {
    "id": 18,
    "t": "checkbox",
-   "x": "Classifies the croup on arrival as moderate: stridor at rest, mild to moderate recession, not agitated, SpO2 95%.",
+   "x": "Classifies the croup on arrival as moderate: stridor at rest with mild to moderate recession in a quiet, consolable child.",
    "crit": true
   },
   {
    "id": 19,
    "t": "checkbox",
-   "x": "Recognises progression to severe croup on reassessment: agitation, marked recession, tachycardia and SpO2 91%.",
+   "x": "Recognises severe croup on reassessment: agitation, loud stridor at rest, marked recession with tracheal tug, RR 52 and HR 170, and SpO2 91%, a late sign that the airway is close to failing.",
    "crit": true
   },
   {
    "id": 20,
    "t": "checkbox",
-   "x": "Considers epiglottitis, bacterial tracheitis, inhaled foreign body and anaphylaxis, and states the features that argue against each here."
+   "x": "Considers epiglottitis, bacterial tracheitis, inhaled foreign body and anaphylaxis, and states what argues against each here (a coryzal start, immunised against Hib, no drooling or toxic look, no choking episode, no allergic features)."
   },
   {
    "id": 21,
    "t": "checkbox",
-   "x": "States that croup is a clinical diagnosis and that bloods and X-rays are not routinely needed and would distress the child."
+   "x": "States that croup is a clinical diagnosis and that bloods and X-rays are not needed and would distress the child."
   },
   {
    "id": 22,
@@ -177,36 +177,48 @@
   {
    "id": 23,
    "t": "checkbox",
-   "x": "On arrival: dexamethasone 0.3 mg/kg orally = 3.6 mg for 12 kg (moderate croup), as a single early dose.",
+   "x": "Gives nebulised adrenaline 1:1000 (1 mg/mL) now: 5 mL undiluted for 12 kg (5 mL is the maximum; 0.5 mL/kg would be 6 mL), repeated if needed with senior involvement.",
    "crit": true
   },
   {
    "id": 24,
    "t": "checkbox",
-   "x": "Now: calls the senior doctor and ICU or anaesthetics early for severe croup.",
+   "x": "Gives oxygen for SpO2 below 92%, aiming for 92% or above, without upsetting the child (through the nebuliser or a mask held near the face on the mother's lap).",
    "crit": true
   },
   {
    "id": 25,
    "t": "checkbox",
-   "x": "Nebulised adrenaline 1:1000 at 0.5 mL/kg (6 mL calculated), capped at the 5 mL maximum, so 5 mL for 12 kg; repeats if needed with senior review.",
-   "crit": true
+   "x": "Gives a steroid, with the dose for 12 kg:",
+   "crit": true,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Now (severe croup, no steroid given yet): dexamethasone 0.6 mg/kg = 7.2 mg (maximum 12 mg), orally if the child will take it, otherwise IM or IV"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Had the croup stayed moderate: oral dexamethasone 0.15 mg/kg = 1.8 mg, or oral prednisolone 1 mg/kg = 12 mg, as a single dose"
+    }
+   ]
   },
   {
    "id": 26,
    "t": "checkbox",
-   "x": "Oxygen for SpO2 below 92%, aiming for 92% or above, given without upsetting the child (held near the face or by nasal prongs on the mother's lap).",
+   "x": "Calls the senior doctor now and moves the child to a high-acuity (resuscitation) area; involves ICU and anaesthetics early, given the low SpO2, and for any repeat adrenaline dose or a tiring child.",
    "crit": true
   },
   {
    "id": 27,
    "t": "checkbox",
-   "x": "Reassesses after adrenaline and admits for observation with continuous SpO2 for at least 4 hours after the last adrenaline dose, as stridor can return."
+   "x": "Reassesses after adrenaline and observes with continuous SpO2 for at least 3 hours after the last dose, because its effect wears off within about 2 hours and the stridor can return."
   },
   {
    "id": 28,
    "t": "checkbox",
-   "x": "Explains to the mother that croup is a viral swelling of the upper airway, why the steroid and the adrenaline are given, and that the child will stay in hospital tonight."
+   "x": "Explains to the mother that croup is a viral swelling of the upper airway, not asthma, why the adrenaline and the steroid are given, and that the child will stay in hospital tonight."
   },
   {
    "id": 29,
@@ -216,18 +228,18 @@
   {
    "id": 30,
    "t": "checkbox",
-   "x": "Discharge only when there is no stridor at rest and no recession, at least 4 hours after the last adrenaline, the child is drinking well and the mother is confident."
+   "x": "States discharge criteria: at least 3 hours after the last adrenaline, no stridor at rest and no recession, drinking well, and the mother confident."
   },
   {
    "id": 31,
    "t": "checkbox",
-   "x": "Tells the mother to call 000 or return straight away for noisy breathing at rest, hard or fast breathing, drooling, blue lips, not drinking, or a drowsy child.",
+   "x": "Tells the mother to call 000 if the child is struggling to breathe, has blue lips, is pale or drowsy, or is drooling or cannot swallow, and to come straight back to the ED for noisy breathing at rest or the chest sucking in.",
    "crit": true
   },
   {
    "id": 32,
    "t": "checkbox",
-   "x": "Arranges follow-up: GP review if the cough lasts beyond 3 to 5 days or croup keeps recurring, with written information."
+   "x": "Explains that croup usually settles over 3 to 4 days and is often worse at night, arranges GP review if it is not settling by then or keeps coming back, and gives the RCH Kids Health Info croup fact sheet."
   }
  ],
  "complexity": "Moderate",
@@ -236,19 +248,19 @@
  "diagnosis": [
   "Croup (laryngotracheobronchitis)"
  ],
- "explain": "<h3>Severity and steroid dosing</h3><p>The RCH CPG classifies croup by severity. Mild croup has a barking cough with no stridor at rest. Moderate croup has stridor at rest with mild to moderate recession and little agitation. Severe croup has marked recession, agitation or lethargy, and possible hypoxia. Dexamethasone is dosed by severity: 0.15 mg/kg orally for mild, 0.3 mg/kg orally for moderate (3.6 mg for 12 kg) and 0.6 mg/kg for severe croup (7.2 mg for 12 kg), as a single dose given early. Oral prednisolone 1 mg/kg is an alternative.</p><h3>Interpreting the reassessment</h3><p>Steroids take hours to work, so a child with moderate croup can progress to severe croup. Agitation, marked recession, a rising heart and respiratory rate and SpO2 below 92% mark severe croup and should trigger nebulised adrenaline 1:1000 at 0.5 mL/kg (maximum 5 mL; 5 mL for this 12 kg child), oxygen to target SpO2 92% or above, and early senior and ICU involvement. Adrenaline effects wear off, so observe for at least 4 hours after the last dose.</p><h3>History, examination and investigations</h3><p>Croup is a clinical diagnosis. The history screens for its dangerous mimics: drooling and a toxic child (epiglottitis, bacterial tracheitis), a sudden choking episode (foreign body) and allergic features (anaphylaxis). Examine from a distance, keep the child on the parent's lap and do not examine the throat. Bloods and X-rays are not routinely needed and distress the child, which worsens the obstruction.</p><h3>Disposition and safety netting</h3><p>Children needing adrenaline are admitted, and can go home only once they have no stridor at rest, at least 4 hours have passed since the last adrenaline and they are feeding well. Parents should return urgently or call 000 for stridor at rest, increased work of breathing, drooling, cyanosis, inability to drink or lethargy.</p>",
+ "explain": "<h3>Severity</h3><p>The RCH CPG grades croup by behaviour, stridor and work of breathing. Mild croup is a barking cough with stridor only when upset, little or no increase in work of breathing and normal behaviour. Moderate croup has stridor at rest, with tracheal tug or chest wall recession and some irritability. Severe croup has stridor at rest with a marked increase in work of breathing and increasing agitation or lethargy. SpO2 often stays normal until late, so hypoxaemia, drowsiness, exhaustion or cyanosis mean the airway is close to failing. Stridor can quieten as a child tires, so a quieter child is not always a better one. This child had moderate croup on arrival and severe croup with hypoxaemia 20 minutes later.</p><h3>Steroids</h3><p>Give a steroid early to every child with stridor at rest. For moderate croup the RCH dose is a single oral dose of dexamethasone 0.15 mg/kg (1.8 mg for 12 kg) or prednisolone 1 mg/kg (12 mg). Mild croup may not need one; consider the same dose if there has been stridor or the family cannot easily get back. Severe croup takes dexamethasone 0.6 mg/kg, maximum 12 mg (7.2 mg for 12 kg), orally, IM or IV. Steroids take time to work, so a child can still worsen in the first hours.</p><h3>Severe croup</h3><p>Nebulised adrenaline 1:1000 (1 mg/mL), 5 mL undiluted, works within minutes; for 12 kg, 0.5 mL/kg capped at 5 mL gives the same 5 mL. Its effect wears off within about 2 hours, so repeat it if needed with senior involvement, and observe for at least 3 hours after the last dose. Give oxygen for SpO2 below 92% without upsetting the child. Severe croup needs senior review in a high-acuity area, with ICU and anaesthetics involved early for hypoxaemia, repeated adrenaline or a tiring child. Life-threatening obstruction needs the resuscitation area, high-flow oxygen and an experienced clinician to secure the airway.</p><h3>History, examination and investigations</h3><p>Croup is a clinical diagnosis: a coryzal illness, then a barking cough, hoarse voice and inspiratory stridor, worse at night, usually between 6 months and 6 years of age. The history screens for its dangerous mimics: drooling, difficulty swallowing and a toxic child (epiglottitis, now rare after Hib immunisation; bacterial tracheitis, with high fever and a poor response to adrenaline), a sudden choking episode (inhaled foreign body) and allergic features (anaphylaxis). Examine from a distance with the child upright on the parent's lap and do not look in the throat: distress worsens the obstruction, and a tongue depressor can cause complete obstruction in epiglottitis. Bloods and X-rays are not needed and upset the child.</p><h3>Disposition and safety netting</h3><p>A child who needed adrenaline is observed for at least 3 hours after the last dose and can go home only when there is no stridor at rest, they are drinking well and the parent is confident. This child, with severe croup and a low SpO2 at night, stays in hospital tonight. The RCH Kids Health Info croup fact sheet gives the advice: call 000 for a child who is struggling to breathe, pale or drowsy, has blue lips, or is drooling or cannot swallow; see a doctor urgently for stridor at rest or the chest sucking in. Croup usually settles over 3 to 4 days and is often worse at night; see the GP if it is not settling or keeps coming back.</p>",
  "focus": "Croup in a toddler with stridor",
- "guide": "<p>In Part 1, the examiner gives findings from the Exam findings only when the candidate says what they would examine. A <strong>high-performing candidate</strong> takes a focused history that rules out the dangerous mimics, keeps the child calm, avoids the throat, classifies moderate croup on arrival, recognises severe croup on reassessment, gives weight-based doses correctly (dexamethasone 0.3 mg/kg = 3.6 mg; nebulised adrenaline 0.5 mL/kg capped at 5 mL), calls for senior help and gives specific discharge criteria and red flags.</p><p>A <strong>borderline candidate</strong> identifies croup but miscalculates a dose, delays escalation, or gives vague safety netting such as \"come back if worse\".</p>",
+ "guide": "<p>In Part 1, the mother answers the history and the examiner gives findings from the Exam findings only when the candidate says what they would examine. In Part 2, hand over the results and ask the questions in order. No medicines have been given before the reassessment.</p><p>A <strong>high-performing candidate</strong> screens for the dangerous mimics in the history, examines from a distance with the child on the mother's lap and leaves the throat alone, classifies moderate croup on arrival and severe croup on reassessment, and gives nebulised adrenaline 1:1000 5 mL, oxygen for SpO2 below 92%, dexamethasone 0.6 mg/kg (7.2 mg) and an early senior and ICU call. They give specific discharge criteria (at least 3 hours after the last adrenaline, no stridor at rest) and red flags.</p><p>For the moderate-croup steroid, the RCH dose is dexamethasone 0.15 mg/kg (1.8 mg) or prednisolone 1 mg/kg (12 mg); accept up to 0.3 mg/kg (3.6 mg) if the arithmetic is right. For adrenaline, 5 mL reached as 0.5 mL/kg capped at 5 mL is also correct.</p><p>A <strong>borderline candidate</strong> identifies croup but miscalculates a dose, delays adrenaline or escalation, upsets the child, or gives vague safety netting such as \"come back if worse\".</p>",
  "id": "ai-e8892591",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Role:</strong> You are the mother of a 2-year-old (12 kg). You are worried and tired. The examiner gives examination findings from the Exam findings when the candidate says what they would examine. If the candidate tries to look in the throat or lie the child down, say the child is screaming and the noisy breathing is much worse.</p><p><strong>Opening line:</strong> \"Their breathing sounds terrible, like a seal barking, and it is getting worse.\"</p><p><strong>History (give only when asked):</strong></p><ul><li>Runny nose and mild fever for 2 days. The barking cough and noisy breathing started at about 8 pm and are worse when the child cries or is upset.</li><li>The noisy breathing is there even when the child is sitting quietly on your lap now.</li><li>Highest temperature at home 38 °C. Not floppy, still interacting with you.</li><li>Drinking smaller amounts than usual, about half; 2 wet nappies today. Has eaten a little.</li><li>No drooling, swallowing normally. No choking episode, no small toys or food missing, nothing put in the mouth before it started.</li><li>Hoarse cry. No rash, no swelling of lips or face, no new foods or medicines.</li><li>No previous episodes like this. Born at term, no breathing problems as a baby, no hospital admissions.</li><li>Fully immunised, including the 18-month vaccines. No regular medicines. No allergies.</li><li>Older sibling at childcare had a cold last week. Lives with both parents, no smokers at home.</li></ul><p><strong>Ideas, concerns, expectations:</strong> you think it might be asthma, like your nephew. You are scared the child will stop breathing tonight. You hope for medicine and to go home.</p><p><strong>Questions to ask if there is time:</strong> \"Is this serious?\" \"Why can't you look in the throat?\"</p>",
+ "patient": "<p><strong>Role:</strong> You are the mother of a 2-year-old (12 kg). You are worried and tired. The examiner gives examination findings from the Exam findings when the candidate says what they would examine. If the candidate tries to look in the throat or lie the child down, say the child is screaming and the noisy breathing is much worse.</p><p><strong>Opening line:</strong> \"Their breathing sounds terrible, like a seal barking, and it is getting worse.\"</p><p><strong>History (give only when asked):</strong></p><ul><li>Runny nose and mild fever for 2 days. The barking cough and noisy breathing started at about 8 pm and are worse when the child cries or is upset.</li><li>The noisy breathing is there even when the child is sitting quietly on your lap now.</li><li>Highest temperature at home 38 °C. Not floppy, still interacting with you.</li><li>Drinking smaller amounts than usual, about half; 2 wet nappies today. Has eaten a little.</li><li>No drooling, swallowing normally. No choking episode, no small toys or food missing, nothing put in the mouth before it started.</li><li>Hoarse cry. No rash, no swelling of lips or face, no new foods or medicines.</li><li>No previous episodes like this. Born at term, no breathing problems as a baby, no hospital admissions.</li><li>Fully immunised, including the 18-month vaccines. No regular medicines. No allergies.</li><li>Older sibling at childcare had a cold last week. Lives with both parents, no smokers at home.</li></ul><p><strong>Ideas, concerns, expectations:</strong> you think it might be asthma, like your nephew. You are scared the child will stop breathing tonight. You hope for medicine and to go home.</p><p><strong>Questions to ask if there is time:</strong> \"Is this serious?\" \"Why can't you look in the throat?\" \"Can we go home tonight?\"</p>",
  "points": [
-  "Moderate croup: dexamethasone 0.3 mg/kg orally (3.6 mg for 12 kg) as a single early dose; mild croup is 0.15 mg/kg and severe croup is 0.6 mg/kg.",
-  "Nebulised adrenaline 1:1000 is 0.5 mL/kg (maximum 5 mL), so 5 mL for 12 kg; get senior and ICU help early.",
-  "Give oxygen for SpO2 below 92% and aim for 92% or above.",
-  "Observe for at least 4 hours after the last adrenaline dose; discharge needs no stridor at rest.",
-  "Keep the child calm; avoid throat examination, bloods and X-rays in typical croup."
+  "Moderate croup: a single oral dose of dexamethasone 0.15 mg/kg (1.8 mg for 12 kg) or prednisolone 1 mg/kg (12 mg); severe croup: dexamethasone 0.6 mg/kg, maximum 12 mg (7.2 mg for 12 kg).",
+  "Severe croup: nebulised adrenaline 1:1000, 5 mL undiluted, with senior help in a high-acuity area and ICU and anaesthetics early for hypoxaemia or repeated doses.",
+  "Hypoxaemia is a late sign in croup; give oxygen for SpO2 below 92% without upsetting the child.",
+  "Observe for at least 3 hours after the last adrenaline dose; discharge needs no stridor at rest.",
+  "Keep the child calm and upright on the parent's lap; no tongue depressor, bloods or X-rays in typical croup."
  ],
  "presentation": [
   "Stridor",
@@ -256,14 +268,14 @@
   "Respiratory distress in a child"
  ],
  "refs": [
-  "RCH CPG: Croup (laryngotracheobronchitis)",
-  "Therapeutic Guidelines (eTG complete): Respiratory, croup"
+  "RCH CPG: Croup (Laryngotracheobronchitis)",
+  "RCH Kids Health Info: Croup (fact sheet)"
  ],
  "specialty": [
   "Paediatrics",
   "Emergency Medicine"
  ],
- "stem": "<p>You are the junior doctor in a metropolitan Emergency Department at night. A 2-year-old child weighing 12 kg has been brought in by their mother with a runny nose for 2 days and, since this evening, a barking cough and noisy breathing. The child is sitting on the mother's lap. A nurse is with you.</p>",
+ "stem": "<p>You are the junior doctor in a metropolitan Emergency Department at night. A 2-year-old child weighing 12 kg has been brought in by their mother with a barking cough and noisy breathing. The child is sitting on the mother's lap. A nurse is with you.</p>",
  "tasks": [
   "<p>Take a focused <strong>history</strong> from the mother and perform a focused <strong>examination</strong> of the child, telling the examiner what you are examining and why. Keep the child calm (10 minutes).</p>",
   "<p>The examiner will give you the child's observations on arrival and on reassessment. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, with doses for this child, and your <strong>safety netting</strong> (5 minutes).</p>"
@@ -276,7 +288,7 @@
   "Management"
  ],
  "part2": {
-  "lead": "Here are the observations on arrival. While you were finishing your assessment, the nurse reassessed the child 20 minutes later.",
+  "lead": "Here are the observations on arrival. No medicines have been given yet. While you were finishing your assessment, the nurse reassessed the child 20 minutes later.",
   "handover": [
    {
     "label": "Observations on arrival",
@@ -284,7 +296,7 @@
    },
    {
     "label": "Reassessment 20 minutes later",
-    "result": "<p>Agitated and difficult to settle, loud stridor at rest, marked recession with tracheal tug. RR 52, HR 170, SpO2 91% on room air. No drooling.</p>"
+    "result": "<p>Agitated and difficult to settle, loud stridor at rest, marked recession with tracheal tug. RR 52, HR 170, SpO2 91% on room air. No drooling. No medicines have been given yet.</p>"
    },
    {
     "label": "Investigations",
@@ -294,7 +306,7 @@
   "ask": [
    "How would you classify this child's croup on arrival, and on reassessment?",
    "What else would you consider, and what would point to it?",
-   "What is your management on arrival and now? Give drugs with doses for this child.",
+   "What is your management now? Give drugs with doses for this child, and the steroid dose that would have been right had the croup stayed as it was on arrival.",
    "When could this child go home, and what would you tell the mother to watch for?"
   ]
  },
