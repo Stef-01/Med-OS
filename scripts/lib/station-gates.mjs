@@ -162,6 +162,28 @@ export function flagIssues(html) {
   return out;
 }
 
+/* a blood gas against itself: bicarbonate from pH and pCO2 (Henderson-Hasselbalch, HCO3 = 0.0307 x pCO2[mmHg] x
+   10^(pH - 6.1)), column by column so a paired arterial and venous cord gas is checked as two gases; more than 2.5 mmol/L
+   apart is a note (pCO2 in kPa is converted) */
+export function gasIssues(html) {
+  const out = [], txt = x => x.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(), num = x => { const m = String(x || '').match(/-?\d+(?:\.\d+)?/); return m ? +m[0] : null; };
+  for (const tbl of String(html).match(/<table>[\s\S]*?<\/table>/g) || []) {
+    const rows = (tbl.match(/<tr>[\s\S]*?<\/tr>/g) || []).map(r => (r.match(/<t[dh]>[\s\S]*?<\/t[dh]>/g) || []).map(txt));
+    const find = re => rows.find(r => re.test(r[0] || ''));
+    const ph = find(/^pH\b/i), co2 = find(/^p(?:v|a)?CO2|^PCO2|carbon dioxide/i), hco3 = find(/^(?:HCO3|bicarbonate|standard bicarbonate|actual bicarbonate)/i);
+    if (!ph || !co2 || !hco3) continue;
+    const kpa = /kpa/i.test(co2.join(' '));
+    for (let c = 1; c < ph.length; c++) {
+      if (/ref|range|normal|interval/i.test((rows[0] || [])[c] || '')) continue;   /* a reference column is not a gas */
+      const p = num(ph[c]), q = num(co2[c]), h = num(hco3[c]);
+      if (p == null || q == null || h == null || p < 6.5 || p > 8) continue;
+      const calc = 0.0307 * q * (kpa ? 7.5 : 1) * 10 ** (p - 6.1);
+      if (Math.abs(h - calc) > 2.5) out.push(`${(rows[0] || [])[c] || `column ${c + 1}`}: pH ${p}, pCO2 ${q}${kpa ? ' kPa' : ''} gives HCO3 ${calc.toFixed(1)}, the table has ${h}`);
+    }
+  }
+  return out;
+}
+
 /* things the examiner pass must look at but that do not block on their own: a fixed amount in a paediatric checklist
    item with no per-kg dose beside it (right for a few fixed-dose drugs such as vitamin K, wrong for most) */
 export function reviewNotes(st) {
@@ -172,6 +194,7 @@ export function reviewNotes(st) {
     if (fixed.length) n.push(`paediatric checklist doses with no per-kg dose beside them (${[...new Set(fixed)].slice(0, 6).join(', ')}): each must be a fixed-dose drug in the cited guideline, else give it per kg`);
   }
   for (const h of st.part2?.handover || []) for (const i of flagIssues(h?.result || '')) n.push(`lab flag in "${plain(h.label)}": ${i}`);
+  for (const h of st.part2?.handover || []) for (const i of gasIssues(h?.result || '')) n.push(`blood gas in "${plain(h.label)}" does not add up: ${i}`);
   /* observations on the chart: a value exactly on a zone line reads two ways (pick one clearly inside a zone), and a red
      or yellow zone the checklist never asks the candidate to act on */
   const chart = chartById(chartFor(st.demo).id);

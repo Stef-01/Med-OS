@@ -174,3 +174,11 @@ test('lab flags: a value outside its printed range needs H or L, one inside need
   assert.deepEqual(flagIssues('<table><tr><td>a</td><td>b</td></tr></table>'), [], 'a table with no Result and Reference header is not checked');
   assert.deepEqual(flagIssues('<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>HBV DNA</td><td>850 IU/mL</td><td>Not detected</td></tr><tr><td>HIV RNA</td><td>86,000 H</td><td>Not detected</td></tr></table>'), ['HBV DNA: 850 IU/mL vs Not detected → H, has no flag']);
 });
+
+import { gasIssues } from './lib/station-gates.mjs';
+test('a blood gas must add up: bicarbonate from pH and pCO2, each column of a paired cord gas on its own', () => {
+  const cord = '<table><tr><th>Cord gas</th><th>Artery</th><th>Vein</th><th>Reference</th></tr><tr><td>pH</td><td>7.18</td><td>7.25</td><td>7.20 to 7.35</td></tr><tr><td>pCO2 (mmHg)</td><td>54</td><td>46</td><td>40 to 60</td></tr><tr><td>Bicarbonate (mmol/L)</td><td>19</td><td>20</td><td>20 to 26</td></tr></table>';
+  assert.deepEqual(gasIssues(cord), []);
+  assert.match(gasIssues(cord.replace('<td>20</td><td>20 to 26', '<td>26</td><td>20 to 26')).join(), /Vein: pH 7.25, pCO2 46 gives HCO3 19.\d, the table has 26/);
+  assert.match(gasIssues('<table><tr><th>Test</th><th>Result</th></tr><tr><td>pH</td><td>7.30</td></tr><tr><td>pCO2</td><td>5.0 kPa</td></tr><tr><td>HCO3</td><td>30</td></tr></table>').join(), /gives HCO3 18\.2, the table has 30/);
+});
