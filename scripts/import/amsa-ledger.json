@@ -105,12 +105,33 @@
    ],
    "why": "brief tightened (Part 2 timing)"
   },
+  "377": {
+   "status": "failed",
+   "at": "2026-10-23T09:30:09Z",
+   "title": "Abdominal Pain History 7",
+   "gates": [],
+   "blockers": [
+    "ddx: Sigmoid volvulus, 'for': Lists a low-fibre diet as a feature in favour of sigmoid volvulus. This is wrong: volvulus is linked to a high-fibre diet in endemic regions and, in Western patients, to old age, chronic constipation and a redundant sigmoid colon. A low-fibre diet is a colorectal cancer risk factor, not a volvulus one, so the line teaches a wrong association."
+   ]
+  },
   "417": {
    "status": "shipped",
    "at": "2026-10-23T09:37:20Z",
    "title": "Abdominal Pain History 9",
    "station": "amsa-417",
    "rounds": 2,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 0
+  },
+  "436": {
+   "status": "shipped",
+   "at": "2026-10-23T09:33:38Z",
+   "title": "Abdominal Pain History 8",
+   "station": "amsa-436",
+   "rounds": 4,
    "models": {
     "writer": "claude-opus-5-5",
     "examiner": "claude-opus-5-5"
