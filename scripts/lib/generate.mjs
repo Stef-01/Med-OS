@@ -136,7 +136,8 @@ export async function writeStation(topic, opts, { bank, ask, now = new Date().to
   let { value: draft, model } = await ask({ system: WRITER_SYSTEM, content: writerPrompt(topic, opts, ex, stats), schema: STATION_SCHEMA, effort: 'high', label: 'draft' });
   const id = opts.id || stationId(draft.title, now), rounds = [], models = { writer: model };
   let st = { id, ...normalize(draft), origin: 'ai' };
-  for (let round = 0; round < 2; round++) {
+  const ROUNDS = Math.max(2, opts.rounds || 2);   /* the examiner passes: the draft, then revisions (an import may ask for more) */
+  for (let round = 0; round < ROUNDS; round++) {
     const gates = [...shapeProblems(st), ...qualityProblems(st, stats)];
     const { value: review, model: rm } = await ask({ system: EXAMINER_SYSTEM, content: reviewText(st, reviewNotes(st)), schema: REVIEW_SCHEMA, effort: 'high', label: `review ${round + 1}` });
     models.examiner = rm;
@@ -147,7 +148,7 @@ export async function writeStation(topic, opts, { bank, ask, now = new Date().to
       const { value: exam } = await ask({ system: EXAM_SYSTEM, content: `The station (JSON):\n${JSON.stringify(st)}`, schema: EXAM_SCHEMA, effort: 'medium', label: 'exam findings' });
       return { ok: true, station: st, exam, rounds, models };
     }
-    if (round === 1) break;
+    if (round === ROUNDS - 1) break;
     const { value: fixed } = await ask({ system: WRITER_SYSTEM, content: reviseText(st, gates, review.issues || []), schema: STATION_SCHEMA, effort: 'high', label: 'revise' });
     st = { id, ...normalize(fixed), origin: 'ai' };
   }

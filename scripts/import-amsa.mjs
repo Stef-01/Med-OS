@@ -10,6 +10,8 @@
      node scripts/import-amsa.mjs --only 200,201  these resource ids
      node scripts/import-amsa.mjs --retry         include cases whose last attempt failed the gates
      node scripts/import-amsa.mjs --pause 60      seconds between cases (default 30: the machine and the CLI are shared)
+     node scripts/import-amsa.mjs --workers 3     convert 3 cases at a time
+     node scripts/import-amsa.mjs --watch         keep picking up raw cases until every manifest case is exported
      node scripts/import-amsa.mjs --dry-run       print, write nothing
 
    The result is an ordinary bank station (Stefan 2026-10-23: the case content feeds the existing OSCE UI, AI writes what
@@ -61,8 +63,8 @@ export function brief(raw) {
   const acute = /emergency|acute|collapse|deteriorat|resus|meksi|overdose|post-op/i.test(`${t} ${meta.section}`) || /emergency department|\bED\b|ambulance|ward call|on the ward|intensive care/i.test(opening);
   const specialty = SECTION_SPECIALTY[meta.section] || [];
   const topic = `${t} (AMSA MedEd ${meta.section} OSCE), converted to the 5 / 10 / 5 format`;
-  const source = `Source case, from AMSA MedEd's OSCE course (section "${meta.section}", "${t}"), written for an 8-minute format (a short history, then examiner questions). Convert it faithfully: keep this patient (name, age, their story and every fact the script gives), the diagnosis, the differentials, the marking points and the teaching notes; reshape it to Part 1 (focused history and examination) and Part 2 (results handed over, interpretation, management, safety netting). Where the case describes an image or result in words, hand it over as a formal report in Part 2. Add only the Part 2 results the case needs, consistent with everything the case says. Text extracted from the PDF (page breaks marked ---page---):\n<source_case>\n${body}\n</source_case>`;
-  return { topic, opts: { acute, specialty, types, source, id: `amsa-${meta.id}` } };
+  const source = `Source case, from AMSA MedEd's OSCE course (section "${meta.section}", "${t}"), written for an 8-minute format (a short history, then examiner questions). Convert it faithfully: keep this patient (name, age, their story and every fact the script gives), the diagnosis, the differentials, the marking points and the teaching notes; reshape it to Part 1 (focused history and examination) and Part 2 (results handed over, interpretation, management, safety netting). Where the case describes an image or result in words, hand it over as a formal report in Part 2. Add only the Part 2 results the case needs, consistent with everything the case says. Part 2 is 5 minutes: hand over 2 to 4 results and ask the case's own core questions, choosing the most important where the case offers alternatives (the examiner "chooses 1 of the following"); move the rest into the explanation, never into extra checklist items. Observation rows in Part 2 describe the patient before treatment or what happens whatever the candidate does (a deterioration, a nurse's repeat set); they never record treatment the candidate may not have ordered, and their notes never name the diagnosis. Anything the candidate can only judge from a Part 2 result is marked in Part 2, not in Part 1. Text extracted from the PDF (page breaks marked ---page---):\n<source_case>\n${body}\n</source_case>`;
+  return { topic, opts: { acute, specialty, types, source, id: `amsa-${meta.id}`, rounds: 3 } };
 }
 
 /* the station as the bank holds it: envelope first, then the station, then the provenance that must not be lost */
@@ -82,24 +84,31 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const dir = path.join(PUB, 'osce');
   const bank = () => fs.readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
   const ledger = readLedger();
-  const raws = readRaw(RAW).filter(r => !ONLY.length || ONLY.includes(r.meta.id)).filter(r => {
+  /* what is left: raw cases with no station yet, not failed (unless --retry), not taken by another worker */
+  const claimed = new Set();
+  const pending = () => readRaw(RAW).filter(r => !ONLY.length || ONLY.includes(r.meta.id)).filter(r => {
     const e = ledger.cases[r.meta.id];
-    if (fs.existsSync(path.join(dir, `amsa-${r.meta.id}.json`))) return false;
-    return !e || e.status !== 'failed' || flag('--retry');
-  }).slice(0, LIMIT);
-  log(`${raws.length} case${raws.length === 1 ? '' : 's'} to import`);
-  let n = 0, shipped = 0;
-  for (const raw of raws) {
-    const { topic, opts } = brief(raw), now = stamp();
-    log(`\n[${++n}/${raws.length}] ${raw.meta.title} · ${raw.meta.section} · ${opts.types.join(', ')}${opts.acute ? ' · acute' : ''}`);
+    if (claimed.has(r.meta.id) || fs.existsSync(path.join(dir, `amsa-${r.meta.id}.json`))) return false;
+    return !e || !['failed', 'error'].includes(e.status) || flag('--retry');
+  });
+  /* --watch: keep going while the browser is still exporting cases, until every manifest resource has a raw file */
+  const MF = path.join(IMPORT, 'amsa-manifest.json'), manifest = fs.existsSync(MF) ? JSON.parse(fs.readFileSync(MF, 'utf8')) : { items: [] };
+  const exportDone = () => manifest.items.filter(i => i.mod === 'resource').every(i => fs.existsSync(path.join(RAW, `${i.slug}.md`)));
+  const WORKERS = Math.max(1, Number(opt('--workers') || 1));
+  log(`${pending().length} case(s) ready · ${WORKERS} worker(s)${flag('--watch') ? ' · watching for more' : ''}`);
+  let n = 0, shipped = 0, started = 0;
+  async function one(raw) {
+    const { topic, opts } = brief(raw), now = stamp(), k = ++n;
+    const say = m => log(`[${k}] ${m}`);
+    say(`${raw.meta.title} · ${raw.meta.section} · ${opts.types.join(', ')}${opts.acute ? ' · acute' : ''}`);
     let res;
-    try { res = await writeStation(topic, opts, { bank: bank(), ask, now, log: m => log(`  ${m}`) }); }
-    catch (e) { log(`  error: ${e.message}`); ledger.cases[raw.meta.id] = { status: 'error', at: now, title: raw.meta.title, why: e.message.slice(0, 300) }; if (!flag('--dry-run')) writeLedger(ledger); await sleep(PAUSE); continue; }
+    try { res = await writeStation(topic, opts, { bank: bank(), ask, now, log: m => say(`  ${m}`) }); }
+    catch (e) { say(`  error: ${e.message}`); ledger.cases[raw.meta.id] = { status: 'error', at: now, title: raw.meta.title, why: e.message.slice(0, 300) }; if (!flag('--dry-run')) writeLedger(ledger); return; }
     if (!res.ok) {
       const last = res.rounds[res.rounds.length - 1], blockers = (last.review.issues || []).filter(i => i.severity === 'blocker');
-      log(`  not shipped: ${last.gates.length} gate problem(s), ${blockers.length} examiner blocker(s)`);
-      for (const g of last.gates) log(`    - ${g}`);
-      for (const i of blockers) log(`    - ${i.where}: ${i.problem}`);
+      say(`  not shipped: ${last.gates.length} gate problem(s), ${blockers.length} examiner blocker(s)`);
+      for (const g of last.gates) say(`    - ${g}`);
+      for (const i of blockers) say(`    - ${i.where}: ${i.problem}`);
       if (!flag('--dry-run')) {
         const out = path.join(ROOT, 'drafts', `${res.station.id}.json`);
         fs.mkdirSync(path.dirname(out), { recursive: true });
@@ -107,10 +116,11 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
         ledger.cases[raw.meta.id] = { status: 'failed', at: now, title: raw.meta.title, gates: last.gates, blockers: blockers.map(b => `${b.where}: ${b.problem}`) };
         writeLedger(ledger);
       }
-      await sleep(PAUSE); continue;
+      return;
     }
     const st = envelope(res.station, raw, now);
-    if (flag('--dry-run')) { console.log(JSON.stringify({ station: st, exam: res.exam }, null, 1)); continue; }
+    if (flag('--dry-run')) { console.log(JSON.stringify({ station: st, exam: res.exam }, null, 1)); return; }
+    /* synchronous read-modify-write: the workers share one thread, so these never interleave */
     fs.writeFileSync(path.join(dir, `${st.id}.json`), `${JSON.stringify(st, null, 1)}\n`);
     const examFile = path.join(PUB, 'exam.json'), exam = JSON.parse(fs.readFileSync(examFile, 'utf8'));
     exam.stations = Object.fromEntries(Object.entries({ ...exam.stations, [st.id]: res.exam }).sort(([a], [b]) => a.localeCompare(b)));
@@ -119,8 +129,19 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     writeLedger(ledger);
     const { rows, problems } = writeIndex(PUB);
     shipped++;
-    log(`  written · osce/${st.id}.json · ${st.title} · index ${rows} stations${problems.length ? ` · ${problems.join('; ')}` : ''}`);
-    if (n < raws.length) await sleep(PAUSE);
+    say(`  written · osce/${st.id}.json · ${st.title} · index ${rows} stations${problems.length ? ` · ${problems.join('; ')}` : ''}`);
   }
-  log(`\n${shipped} of ${raws.length} shipped`);
+  async function worker(w) {
+    await sleep(w * 20000);   /* stagger the start */
+    for (;;) {
+      if (started >= LIMIT) return;
+      const raw = pending()[0];
+      if (!raw) { if (flag('--watch') && !exportDone()) { await sleep(60000); continue; } return; }
+      claimed.add(raw.meta.id); started++;
+      await one(raw);
+      await sleep(PAUSE);
+    }
+  }
+  await Promise.all(Array.from({ length: WORKERS }, (_, w) => worker(w)));
+  log(`\n${shipped} of ${started} shipped`);
 }
