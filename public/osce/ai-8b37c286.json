@@ -566,10 +566,16 @@
    }
   ],
   "ask": [
-   "What do the blood results, ECG and X-ray show?",
-   "What is your diagnosis? What is Charcot triad, does she have it, and why is this not acute cholangitis or acute cholecystitis?",
-   "What is your management? Explain the diagnosis and the plan to Margaret.",
-   "What will you watch for while she waits for surgery, and what follow-up does she need?"
+   "You are now calling the general surgical registrar. Please give an ISBAR handover of Margaret Hollis, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Margaret now, here in the emergency department.",
+   "Margaret is here with you. Please explain to her what is causing her symptoms and what will happen next."
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, ED resident. Patient: Margaret Hollis, 74.</li><li><strong>Situation:</strong> small bowel obstruction from gallstone ileus. She is dehydrated and tachycardic at 108.</li><li><strong>Background:</strong> 4 days of colicky right upper quadrant pain. 2 days of faeculent vomiting and distension, with no flatus for 24 hours. Gallstones known for 3 years; she declined surgery. Hypertension and type 2 diabetes, on perindopril and metformin, plus ibuprofen bought over the counter. Codeine intolerance.</li><li><strong>Assessment:</strong> X-ray shows Rigler triad: small bowel obstruction, pneumobilia and a 3 cm stone in the right lower quadrant, with no free gas. Bloods: AKI stage 1 (creatinine 128, baseline 78; urea 11.6), potassium 2.8 with a hypochloraemic metabolic alkalosis from vomiting. Bilirubin, ALP and lipase normal. WCC 11.4 and CRP 38 mildly raised. Lactate 1.8. ECG: sinus tachycardia, flat T waves and U waves, no ischaemia.</li><li><strong>Recommendation:</strong> please review her urgently for enterolithotomy. I have made her nil by mouth and started fluids, potassium and an NG tube. Do you want a CT?</li></ul>",
+   "<p><strong>Gallstone ileus</strong> (stone passed through a cholecysto-enteric fistula, causing small bowel obstruction):</p><ul><li>Older woman with known gallstones</li><li>Intermittent colicky pain (tumbling stone), then faeculent vomiting, distension and no flatus</li><li>Rigler triad on X-ray; pneumobilia with no previous biliary surgery or ERCP</li></ul><p><strong>Differentials:</strong></p><ul><li><strong>Acute cholangitis:</strong> Charcot triad is fever, jaundice and RUQ pain; Reynolds pentad adds hypotension and confusion. She has the pain only. Bilirubin and ALP are normal, so this is against.</li><li><strong>Acute cholecystitis:</strong> against: Murphy's sign negative, afebrile, markers only mildly raised, and the main problem is mechanical obstruction.</li><li><strong>Other causes of small bowel obstruction (incarcerated hernia, adhesions):</strong> against: no previous surgery, and the X-ray shows the stone. Check the hernial orifices.</li><li><strong>Ischaemic bowel:</strong> lactate normal but does not exclude it, so reassess often.</li></ul>",
+   "<ol><li><strong>Immediate:</strong> ABCDE assessment, cardiac monitoring, nil by mouth, two large-bore IV cannulas.</li><li><strong>Fluids:</strong> 500 mL crystalloid bolus, then reassess and replace ongoing losses. IDC with hourly urine output, aiming for at least 0.5 mL/kg/h (about 35 mL/h). Fluid balance chart.</li><li><strong>Potassium:</strong> IV KCl, no faster than 10 mmol/h through a peripheral line, on a monitor. Keep magnesium normal. Repeat UEC, gas and ECG.</li><li><strong>NG tube</strong> on free drainage.</li><li><strong>Symptom relief:</strong> IV morphine in small titrated doses. Avoid codeine. Give an antiemetic, but take care with ondansetron (QTc 460) and avoid metoclopramide in obstruction.</li><li><strong>Medicines:</strong> withhold perindopril, ibuprofen and metformin. Monitor BGL while she is nil by mouth.</li><li><strong>Definitive:</strong> urgent general surgical referral for enterolithotomy. CT abdomen only if the surgeons need it, and it must not delay surgery.</li><li><strong>Disposition:</strong> admit under general surgery, with anaesthetic review before surgery and senior ED involvement.</li></ol>",
+   "<ul><li>Explains in plain words: a large gallstone has made a channel from the gallbladder into the bowel and is now blocking it.</li><li>Explains the plan: a drip, nothing to eat or drink, possibly a tube through the nose, and an operation by the surgeons to remove the stone.</li><li>Acknowledges her husband's death and her fear. Explains that an anaesthetist will see her first and get her fluids, kidneys and diabetes into the best state possible.</li><li>Is honest that without an operation the blockage continues and the bowel could burst. Supports informed consent and offers to involve her daughter.</li><li><strong>Safety netting:</strong> tell the nurses at once about worse or constant pain, more vomiting or vomiting blood, fever, feeling faint or confused, or passing no urine.</li><li><strong>Follow-up:</strong> the surgeons decide later about the gallbladder and the channel. Her GP restarts perindopril and metformin once her kidneys recover.</li><li>Checks understanding and invites questions.</li></ul>"
   ]
  },
  "imaging": [
@@ -592,7 +598,39 @@
   }
  ],
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
- }
+  "at": "2026-10-23T06:51:49Z",
+  "by": "rewrite-part2-asks.mjs"
+ },
+ "ddx": [
+  {
+   "dx": "Gallstone ileus causing small bowel obstruction",
+   "tier": "likely",
+   "for": "Older woman with known gallstones and days of on-and-off colicky pain, then faeculent vomiting, distension and no flatus, with Rigler triad on X-ray and no previous biliary surgery to explain the pneumobilia.",
+   "against": ""
+  },
+  {
+   "dx": "Acute ascending cholangitis",
+   "tier": "dangerous",
+   "for": "Right upper quadrant pain in a woman with known untreated gallstones.",
+   "against": "No fever, jaundice or confusion, and bilirubin and ALP are normal, so she has only one part of Charcot triad."
+  },
+  {
+   "dx": "Acute cholecystitis",
+   "tier": "reasonable",
+   "for": "Right upper quadrant pain going to the right shoulder blade in a woman with known gallstones, with a mildly raised WCC and CRP.",
+   "against": "Murphy's sign is negative, she is afebrile, the pain comes and goes, and the main problem is mechanical small bowel obstruction."
+  },
+  {
+   "dx": "Small bowel obstruction from another cause (incarcerated hernia or adhesions)",
+   "tier": "reasonable",
+   "for": "Vomiting, distension, no flatus and dilated small bowel with air-fluid levels on X-ray.",
+   "against": "No previous abdominal surgery, and the X-ray shows an ectopic gallstone at the terminal ileum."
+  },
+  {
+   "dx": "Ischaemic bowel (strangulated obstruction or mesenteric ischaemia)",
+   "tier": "dangerous",
+   "for": "Older woman with diabetes and an established obstruction, with tachycardia and a mildly raised WCC and CRP.",
+   "against": "Lactate is normal at 1.8 and the pain is colicky rather than constant, although neither rules it out."
+  }
+ ]
 }

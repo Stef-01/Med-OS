@@ -339,15 +339,21 @@
    }
   ],
   "ask": [
-   "What do the observations, the reassessment and the feeding trial show? Does this infant need admission?",
-   "What is the most likely diagnosis, and what else would you consider?",
-   "What is your management, including oxygen, hydration with volumes for this infant, and when you would escalate?",
-   "What will you tell the mother about what to expect, when the infant can go home and what to watch for?"
+   "You are now calling the paediatric registrar. Please give an ISBAR handover of this 4-month-old infant, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of this infant now, here in the emergency department.",
+   "When this infant is ready to go home, what would you tell the mother and what follow-up would you arrange?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, ED junior doctor; 4-month-old, 6 kg, with mother.</li><li><strong>Situation:</strong> bronchiolitis with hypoxaemia and poor feeding; needs admission.</li><li><strong>Background:</strong> 3 days coryza and cough, fast breathing today; about 40% of feeds, 2 wet nappies in 24 h; no apnoea; term, well, immunised; sibling with a cold.</li><li><strong>Assessment:</strong> arrival <em>red zone</em>: SpO2 87% in room air, severe distress; RR 64, HR 172 yellow; senior review and oxygen. On 1 L/min nasal prongs SpO2 96% (target 90% or above met), RR 52, HR 158, moderate distress: <em>yellow zone</em>, high flow not needed now. Feeding trial 40 of 150 mL, HR 175, no urine in 2 h: cannot feed enough, early dehydration. No tests needed.</li><li><strong>Recommendation:</strong> admit to the ward; continue oxygen; nasogastric feeds 16 mL/h; please review; high flow and PICU if worse.</li></ul>",
+   "<p><strong>Bronchiolitis:</strong> a first episode at 4 months, coryza then cough, tachypnoea, recession, widespread fine crackles and wheeze, low-grade fever, sick contact.</p><ul><li><strong>Pneumonia:</strong> against: signs are widespread on both sides, not focal; temperature only 37.8 °C; alert.</li><li><strong>Heart failure from congenital heart disease:</strong> against: well newborn period, CRT 2 s, liver edge pushed down by hyperinflation rather than enlarged.</li><li><strong>Sepsis:</strong> against: alert, CRT 2 s, low-grade fever, BGL 5.2.</li><li><strong>Pertussis:</strong> against: no apnoea, colour change or coughing fits; immunised, including 4-month vaccines.</li><li><strong>Inhaled foreign body:</strong> against: age 4 months, no choking episode, signs on both sides.</li></ul>",
+   "<ol><li><strong>Immediate:</strong> red zone, so immediate senior review. Oxygen by nasal prongs because SpO2 stays below 90% in room air; target 90% or above. Continuous SpO2, frequent reassessment, minimal handling, gentle nasal suction only if the nose is blocked.</li><li><strong>Hydration:</strong> nasogastric feeds at 2/3 maintenance: 16 mL/h (maintenance 4 mL/kg/h = 24 mL/h), for example as boluses. If these fail or are unsafe, IV isotonic fluid with glucose at 16 mL/h.</li><li><strong>Avoid:</strong> salbutamol, adrenaline, steroids, antibiotics, hypertonic saline, and routine X-ray, bloods or swab: none improves outcomes.</li><li><strong>Escalate:</strong> if breathing or hypoxaemia worsens, high flow at 2 L/kg/min = 12 L/min; early senior and PICU review for apnoea, exhaustion or rising oxygen need.</li><li><strong>Disposition:</strong> admit to the paediatric ward. Tell the mother it is a viral chest infection, often worse for the next day or two, better over 7 to 10 days; explain why antibiotics and Ventolin will not help and why oxygen and tube feeds are needed; check she understands.</li></ol>",
+   "<ul><li><strong>Ready for home when:</strong> SpO2 90% or above in room air, feeding well enough and the mother feels confident.</li><li><strong>Call 000:</strong> pauses in breathing, or a blue or grey colour.</li><li><strong>Return to the ED:</strong> breathing harder or faster, unusually drowsy, feeding less than half the usual amount, or fewer wet nappies.</li><li><strong>Expect:</strong> the cough can last up to 4 weeks.</li><li><strong>Follow-up:</strong> GP review within a day or two of discharge; written information on bronchiolitis.</li></ul>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:55:26Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 4,
@@ -355,5 +361,43 @@
   "sex": "X",
   "setting": "ed",
   "weight": 6
- }
+ },
+ "ddx": [
+  {
+   "dx": "Bronchiolitis",
+   "tier": "likely",
+   "for": "First episode at 4 months with 3 days of coryza then cough, RR 64, recession, widespread fine crackles and wheeze, low-grade fever and a sibling with a cold.",
+   "against": ""
+  },
+  {
+   "dx": "Community-acquired pneumonia",
+   "tier": "reasonable",
+   "for": "Fever of 37.8 °C, tachypnoea, crackles and hypoxaemia with SpO2 87% in room air.",
+   "against": "Crackles and wheeze are widespread on both sides rather than focal, the fever is only low grade and the infant is alert."
+  },
+  {
+   "dx": "Heart failure from congenital heart disease",
+   "tier": "dangerous",
+   "for": "Tachypnoea, HR 172, poor feeding with tachycardia during feeds and a palpable liver edge.",
+   "against": "Well newborn period with no known heart problems, CRT 2 seconds, and the liver edge is pushed down by hyperinflation rather than enlarged."
+  },
+  {
+   "dx": "Sepsis",
+   "tier": "dangerous",
+   "for": "Young infant with fever, tachycardia, poor feeding and reduced wet nappies.",
+   "against": "Alert and making eye contact, CRT 2 seconds, BP 90/55, only low-grade fever and BGL 5.2 mmol/L."
+  },
+  {
+   "dx": "Pertussis",
+   "tier": "dangerous",
+   "for": "Young infant with coryza then cough and a sick contact.",
+   "against": "No apnoea, colour change or coughing paroxysms, and immunised including the 4-month vaccines."
+  },
+  {
+   "dx": "Inhaled foreign body",
+   "tier": "reasonable",
+   "for": "Wheeze with hypoxaemia and increased work of breathing.",
+   "against": "Aged 4 months, no choking episode, a preceding coryzal illness and signs on both sides."
+  }
+ ]
 }

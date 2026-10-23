@@ -518,15 +518,52 @@
    }
   ],
   "ask": [
-   "What do the reassessment, blood gas and ECG show?",
-   "What does the fat in the curettings suggest? What is your working diagnosis and what else must you consider?",
-   "What is your management now, and who do you involve?",
-   "Which PALM-COEIN category most likely explains her original bleeding, and why does her weight raise her risk of uterine cancer?",
-   "What will you tell Jenny, and what follow-up does she need?"
+   "You are now calling the on-call gynaecology consultant. Please give an ISBAR handover of Jenny Okafor, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Jenny now, here in the day-surgery recovery bay.",
+   "Using the PALM-COEIN classification, what is the most likely cause of Jenny's original bleeding, and how does her weight raise her risk of uterine cancer?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self (gynaecology resident); Jenny Okafor, 51, day-surgery recovery.</li><li><strong>Situation:</strong> 3 hours after hysteroscopy and D&amp;C, in shock with peritonism and shoulder-tip pain; MET call made.</li><li><strong>Background:</strong> irregular, heavy bleeding; endometrium 14 mm; 108 kg, type 2 diabetes on metformin; retroverted bulky uterus; pre-op BP 125/75, Hb 126.</li><li><strong>Assessment:</strong> SBP 88 (red zone), now 96/60 and HR 114 after 1 L, GCS 14, no urine: still bleeding. Lactate 3.8, BE -5: hypoperfusion. Hb 98: significant loss, which an early Hb underestimates. ECG: sinus tachycardia, no ischaemia. Fat in curettings: <strong>uterine perforation</strong>, possible visceral injury.</li><li><strong>Recommendation:</strong> please come now; starting blood; anaesthetist and theatre told for laparoscopy or laparotomy.</li></ul>",
+   "<p><strong>Uterine perforation with intra-abdominal bleeding:</strong> fat in the curettings means the curette went through the uterine wall. She has shock that barely responded to 1 L, Hb down 28 g/L, peritonism and shoulder-tip pain, and risk factors (obesity, retroverted bulky uterus, poor view).</p><ul><li><strong>Bowel, bladder or pelvic vessel injury:</strong> must be looked for. Peritonism fits; a bowel injury may show itself later with fever.</li><li><strong>Cervical or vaginal haemorrhage:</strong> against: only a small loss on the pad.</li><li><strong>Cardiac cause or PE:</strong> against: ECG shows sinus tachycardia only, with no ischaemia or right heart strain, and SpO2 is 97%.</li><li><strong>Sepsis:</strong> against: afebrile and too early; lactate fits blood loss.</li></ul>",
+   "<ol><li><strong>Escalate:</strong> the MET team stays; call the senior gynaecologist urgently; tell the anaesthetist and theatre.</li><li><strong>Resuscitate:</strong> titrated oxygen. <strong>Transfuse red cells now</strong> (O negative or group-specific if crossmatched blood is not ready). Limit crystalloid. Activate the MTP if bleeding is major. Send coagulation and fibrinogen; repeat gas and Hb.</li><li><strong>Supportive:</strong> nil by mouth; IV morphine titrated (2.5 mg increments); ondansetron 4 mg IV; IV antibiotics per eTG (e.g. ampicillin 2 g, gentamicin, metronidazole 500 mg). Withhold metformin and monitor BGL. Hourly urine output; observations every 15 minutes with MET triggers.</li><li><strong>Definitive:</strong> urgent laparoscopy or laparotomy, including inspection of the bowel. CT only if she becomes stable, and only if the senior directs. <strong>Not for discharge.</strong></li><li><strong>Communicate:</strong> tell Jenny honestly that this is likely a complication and that histology is pending. Document, plan open disclosure and file an incident report.</li></ol>",
+   "<ul><li><strong>PALM (structural):</strong> Polyp, Adenomyosis, Leiomyoma, Malignancy and hyperplasia.</li><li><strong>COEIN (non-structural):</strong> Coagulopathy, Ovulatory dysfunction, Endometrial disorder, Iatrogenic, Not otherwise classified.</li><li><strong>Most likely: ovulatory dysfunction.</strong> She is perimenopausal, with irregular cycles, obesity and insulin resistance, and ultrasound shows no polyp, fibroid or adenomyosis.</li><li><strong>Malignancy and hyperplasia must be excluded on histology.</strong> Her endometrium is 14 mm at 51, and she is nulliparous with obesity and diabetes. More than one category can apply.</li><li><strong>Why obesity matters:</strong><ul><li>Adipose tissue aromatises androgens to oestrone.</li><li>The oestrogen is <em>unopposed</em> by progesterone because of anovulation (or menopause).</li><li>Hyperinsulinaemia and raised IGF-1 drive endometrial proliferation.</li></ul></li></ul>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
- }
+  "at": "2026-10-23T06:52:42Z",
+  "by": "rewrite-part2-asks.mjs"
+ },
+ "ddx": [
+  {
+   "dx": "Uterine perforation with intra-abdominal bleeding",
+   "tier": "likely",
+   "for": "Fat-like tissue in the curettings, a retroverted bulky uterus in an obese patient, shock that barely responded to 1 L, haemoglobin down from 126 to 98 g/L, peritonism and right shoulder-tip pain.",
+   "against": "The operation record lists the procedure as uneventful, with an estimated blood loss of 50 mL."
+  },
+  {
+   "dx": "Bowel, bladder or pelvic vessel injury from the perforation",
+   "tier": "dangerous",
+   "for": "Fat in the curettings means the curette went into omentum, mesentery or bowel fat, and she has guarding, rebound tenderness, reduced bowel sounds and no urine output.",
+   "against": "She is afebrile, has not vomited and the catheter bag is empty rather than bloodstained, though a bowel injury may only show itself days later."
+  },
+  {
+   "dx": "Cervical or vaginal haemorrhage from the procedure",
+   "tier": "reasonable",
+   "for": "The cervix was dilated to Hegar 8 and she is in haemorrhagic shock.",
+   "against": "There is only a small amount of blood on the pad and no clots, and the peritonism and shoulder-tip pain point to bleeding inside the abdomen."
+  },
+  {
+   "dx": "Acute coronary syndrome or pulmonary embolism",
+   "tier": "dangerous",
+   "for": "She has diabetes, so silent ischaemia is a risk, and she has tachycardia, hypotension and an SpO2 of 94% on air after a general anaesthetic.",
+   "against": "The ECG shows sinus tachycardia only, with no ischaemia or right heart strain, SpO2 is 97% on oxygen, and she has a falling haemoglobin with peritonism."
+  },
+  {
+   "dx": "Sepsis",
+   "tier": "dangerous",
+   "for": "She has a raised lactate, hypotension, tachycardia and drowsiness after an instrumented procedure.",
+   "against": "She is afebrile at 36.8 to 36.9 only 3 hours after surgery, and the lactate fits the blood loss shown by the fall in haemoglobin."
+  }
+ ]
 }

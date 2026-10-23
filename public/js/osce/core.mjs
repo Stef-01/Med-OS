@@ -18,14 +18,14 @@ export function osceFilter(list, query, f = {}, att = {}, bm = {}) {
   return list.filter(s => {
     if (f.spec && !(s.specialty || []).includes(f.spec)) return false;
     if ((f.rot || []).length && !(s.specialty || []).some(x => f.rot.includes(osceRotation(x)))) return false;
-    if ((f.origin || []).length && !f.origin.includes(osceOrigin(s))) return false;
+    if ((f.origin || []).length && !f.origin.some(o => o === osceOrigin(s) || o === osceFrom(s))) return false;
     if (types.length && !types.some(t => (s.type || []).includes(t))) return false;
     if (cxs.length && !cxs.includes(s.complexity)) return false;
     if (status === '1' && !att[s.id]) return false;
     if (status === '0' && att[s.id]) return false;
     if (f.saved && !bm[s.id]) return false;
     if (!words.length) return true;
-    const hay = [s.title, s.desc, ...(s.specialty || []), ...(s.type || []), ...(s.presentation || []), ...(s.diagnosis || []), ...(s.context || [])].join(' ').toLowerCase();
+    const hay = [s.title, s.desc, s.source?.label, ...(s.specialty || []), ...(s.type || []), ...(s.presentation || []), ...(s.diagnosis || []), ...(s.context || [])].join(' ').toLowerCase();
     return words.every(w => hay.includes(w));
   });
 }
@@ -186,12 +186,25 @@ export const ORIGINS = SOURCES;   /* the kit's vocabulary: AI generated | Writte
 /* a specialty the table does not know still lands somewhere: Medicine */
 export const osceRotation = disciplineOf;
 export const osceOrigin = s => (s && s.origin === 'ai' ? 'ai' : 'own');
+/* where a station's case content came from, beyond who wrote it: 'amsa' for a case converted from the AMSA MedEd OSCE
+   library (scripts/import-amsa.mjs stamps source.label), else ''. A filter value, a chip and a provenance note, never a tile */
+export const FROM = Object.freeze([['amsa', 'From AMSA MedEd']]);
+export const osceFrom = s => (/\bAMSA\b/i.test(s?.source?.label || '') ? 'amsa' : '');
+/* Part 2 as the examiner runs it: the results handed over, then each question in the order it is asked */
+export function osceAskLabel(q, i) {
+  const t = String(q || '');
+  if (/\bISBAR\b|hand ?over/i.test(t)) return 'ISBAR handover';
+  if (/differential|diagnos|else would you consider/i.test(t)) return 'Differentials';
+  if (/manag|treat|next steps?/i.test(t)) return 'Management';
+  return i === 0 ? 'Interpretation' : 'Follow-up';
+}
+export const osceP2Steps = p => [{ k: 'res', label: 'Results' }, ...((p && p.ask) || []).map((q, i) => ({ k: 'q', i, label: osceAskLabel(q, i) }))];
 /* the stations a fast run covers: any picked specialty (none picked = none), the picked sources and types (none = all) */
 export function osceRunPool(list, sel = {}) {
   const specs = new Set(sel.specs || []), origins = new Set(sel.origin || []), types = new Set(sel.type || []);
   if (!specs.size) return [];
   return list.filter(s => (s.specialty || []).some(x => specs.has(x))
-    && (!origins.size || origins.has(osceOrigin(s)))
+    && (!origins.size || origins.has(osceOrigin(s)) || origins.has(osceFrom(s)))
     && (!types.size || (s.type || []).some(t => types.has(t))));
 }
 /* the pool's ids in random order (Fisher-Yates) */
@@ -269,7 +282,16 @@ export function osceCleanStation(s) {
   return { ...s, id: String(s.id), title: String(s.title), desc: str(s.desc), specialty: arr(s.specialty), type: arr(s.type),
     complexity: CX.includes(s.complexity) ? s.complexity : '', context: arr(s.context), presentation: arr(s.presentation), diagnosis: arr(s.diagnosis),
     stem: str(s.stem), tasks: arr(s.tasks), patient: str(s.patient), check: arr(s.check), guide: str(s.guide), explain: str(s.explain),
-    points: arr(s.points), refs: arr(s.refs), media: s.media && typeof s.media === 'object' && !Array.isArray(s.media) ? s.media : {}, part2: oscePart2(s.part2), demo: cleanDemo(s.demo) };
+    points: arr(s.points), refs: arr(s.refs), media: s.media && typeof s.media === 'object' && !Array.isArray(s.media) ? s.media : {}, part2: oscePart2(s.part2), demo: cleanDemo(s.demo), ddx: osceDdx(s.ddx) };
+}
+/* the reasonable differentials (scripts/lib/generate.mjs DDX_RULES): the leading diagnosis first, then the others a candidate
+   may fairly offer, then the must-not-miss ones, each with this patient's features for and against; anything malformed is dropped */
+export const DDX_TIERS = Object.freeze({ likely: 'Most likely', reasonable: 'Reasonable', dangerous: 'Must not miss' });
+export function osceDdx(v) {
+  const str = x => (typeof x === 'string' ? x.trim() : ''), order = Object.keys(DDX_TIERS);
+  return (Array.isArray(v) ? v : []).filter(d => d && str(d.dx) && DDX_TIERS[d.tier])
+    .map(d => ({ dx: str(d.dx), tier: d.tier, for: str(d.for), against: str(d.against) }))
+    .sort((a, b) => order.indexOf(a.tier) - order.indexOf(b.tier));
 }
 /* Part 2: what the examiner says to open it, what they hand over (observations, investigations, scans: label + result,
    HTML allowlist), and the questions they ask in order. Each result may say what kind it is (KINDS), carry the examiner's
@@ -292,7 +314,9 @@ export function oscePart2(p) {
       if (labs) x.labs = labs;
       return x;
     }).filter(Boolean),
-    ask: (Array.isArray(o.ask) ? o.ask : []).map(str).filter(Boolean), ...(str(o.patient) ? { patient: str(o.patient) } : {}) };   /* patient: what the patient says or asks in Part 2 (HTML), kept out of the Part 1 script */
+    ask: (Array.isArray(o.ask) ? o.ask : []).map(str).filter(Boolean), ...(str(o.patient) ? { patient: str(o.patient) } : {}),
+    /* expect: the examiner's model answer to each question (HTML), in the same order as ask */
+    ...(Array.isArray(o.expect) && o.expect.some(str) ? { expect: o.expect.map(str) } : {}) };   /* patient: what the patient says or asks in Part 2 (HTML), kept out of the Part 1 script */
 }
 /* where Part 2 starts on a checklist: the id of its first Interpretation, Management or Safety netting heading (the format's
    order), or null; the marking sheet opens there when Part 2 starts */
@@ -318,4 +342,12 @@ export function osceBody(row, body) {
   const out = { ...row, ...s };
   delete out.lazy;
   return out;
+}
+/* the exam's vitals line ("HR 112 regular, BP 86/52 mmHg, SpO2 89% on room air ...") as [name, value] rows for the
+   candidate's screen: a comma before a capital starts a new sign; a sign's name is the words before its first number */
+export function osceVitals(line) {
+  return String(line || '').split(/,\s+(?=[A-Z]|[a-z][A-Za-z ]*\s[-<>~≈]?\d)/).map(x => x.trim()).filter(Boolean).map(x => {
+    const m = x.match(/^([A-Za-z][A-Za-z0-9₂ ]*?)\s+(?=[-<>~≈]?\d)(.+)$/);
+    return m ? [m[1][0].toUpperCase() + m[1].slice(1), m[2]] : ['', x];
+  });
 }

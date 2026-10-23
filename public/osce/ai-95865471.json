@@ -475,14 +475,52 @@
    }
   ],
   "ask": [
-   "What do the audiogram and tympanometry show, and how do they fit with your examination findings?",
-   "What is the most likely diagnosis, and what else must you consider?",
-   "What is your management approach? Mrs Halloran asks why she needs a scan of her head if the tablets might fix it, tells you she panicked in a scanner once, and asks whether steroid tablets are safe with her diabetes.",
-   "She asks: \"Can I wait and see how it goes over the weekend? Will I get my hearing back?\" What safety netting and follow-up will you arrange?"
+   "You are now calling the on-call ENT registrar. Please give an ISBAR handover of Mrs Halloran, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Mrs Halloran now, here in general practice.",
+   "Before Mrs Halloran goes home, what would you tell her and what follow-up would you arrange?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self (GP) and the practice; Jenny Halloran, 52.</li><li><strong>Situation:</strong> left hearing loss that started suddenly on waking two days ago, with tinnitus and fullness. Asking for urgent ENT review.</li><li><strong>Background:</strong> type 2 diabetes and hypertension on metformin and candesartan; no ototoxic drugs; a cold two weeks ago; brief unsteadiness yesterday, now settled.</li><li><strong>Assessment:</strong> normal otoscopy; Weber to the right with Rinne positive on both sides. Audiogram: left sensorineural loss of 40 to 70 dB with no air-bone gap, at least 30 dB worse than the right over three or more contiguous frequencies, speech discrimination 64%. This is sudden sensorineural hearing loss. Tympanometry type A on both sides, so the middle ears are normal. HbA1c 7.4%, a little above target; eGFR 87.</li><li><strong>Recommendation:</strong> start prednisolone today; ENT review; MRI of the internal auditory canals; repeat audiogram.</li></ul>",
+   "<p><strong>Most likely:</strong> left sudden sensorineural hearing loss, probably idiopathic. It came on within 72 hours, Weber goes to the right, Rinne is positive on both sides, there is no air-bone gap and at least 30 dB of loss over three or more contiguous frequencies.</p><ul><li><strong>Vestibular schwannoma (retrocochlear lesion):</strong> <em>for</em>: one-sided sensorineural loss, tinnitus, speech discrimination worse than expected. Only MRI can exclude it.</li><li><strong>Posterior circulation (AICA) stroke:</strong> <em>for</em>: diabetes, hypertension, her mother's stroke, brief unsteadiness. <em>Against</em>: no central symptoms, normal cranial nerves and coordination.</li><li><strong>Conductive cause (wax, effusion after the cold):</strong> <em>against</em>: normal otoscopy, type A tympanograms, no air-bone gap.</li><li><strong>Ototoxic, infective or autoimmune causes:</strong> <em>against</em>: no ototoxic drugs and no other features.</li></ul>",
+   "<ol><li>Contact ENT the same day through the local pathway.</li><li>Start oral prednisolone today without waiting for the MRI: 1 mg/kg (72 mg), capped at the local maximum of 60 to 75 mg (AJGP up to 70 mg), for about 7 days and then tapered, as per local guideline or ENT advice. Take it in the morning with food. Intratympanic steroid is an option ENT can offer.</li><li>Request MRI of the internal auditory canals to exclude a vestibular schwannoma. It is still needed if her hearing improves. Screen for MRI safety, and plan for her claustrophobia (support person, anxiolytic, wide-bore scanner).</li><li>Diabetes: warn that her glucose will rise, arrange home monitoring (especially in the afternoon) and early review to adjust medication. Metformin can continue.</li><li>Explain that an ear flush and antibiotics have no role. Address her fears of stroke and tumour.</li></ol>",
+   "<ul><li><strong>Not safe to wait over the weekend:</strong> treatment started earlier gives a better chance of recovery.</li><li><strong>Honest prognosis:</strong> many people get some or all of their hearing back, but this cannot be guaranteed.</li><li><strong>Go to ED or call 000 straight away for:</strong> spinning dizziness, weakness or numbness of the face, arm or leg, trouble speaking or changes in vision, a severe headache, or hearing loss in the right ear.</li><li><strong>Steroid side effects:</strong> high sugar readings, poor sleep, mood change, indigestion. Call if sugars run high.</li><li><strong>Follow-up:</strong> ENT review; repeat audiogram to measure the response; glucose check within a few days of starting steroids; review of the MRI result; hearing rehabilitation if the loss persists.</li></ul>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
- }
+  "at": "2026-10-23T06:52:14Z",
+  "by": "rewrite-part2-asks.mjs"
+ },
+ "ddx": [
+  {
+   "dx": "Idiopathic sudden sensorineural hearing loss (left)",
+   "tier": "likely",
+   "for": "Left hearing loss came on suddenly on waking within 72 hours, with Weber to the right, Rinne positive on both sides, no air-bone gap and a loss 35 to 50 dB worse than the right over five contiguous frequencies.",
+   "against": ""
+  },
+  {
+   "dx": "Vestibular schwannoma (retrocochlear lesion)",
+   "tier": "dangerous",
+   "for": "She has a one-sided sensorineural loss with constant tinnitus and 64% speech discrimination, worse than her thresholds would predict.",
+   "against": "Her cranial nerves are normal and she has had no previous hearing problems, but only MRI of the internal auditory canals can exclude it."
+  },
+  {
+   "dx": "Posterior circulation (anterior inferior cerebellar artery) stroke",
+   "tier": "dangerous",
+   "for": "She has diabetes and hypertension, her mother had a stroke, and she was briefly unsteady when turning yesterday.",
+   "against": "She has no facial, limb, speech, swallowing or visual symptoms, her cranial nerves and coordination are normal, and the unsteadiness has settled."
+  },
+  {
+   "dx": "Conductive hearing loss from wax or a middle ear effusion after her cold",
+   "tier": "reasonable",
+   "for": "She describes the ear as blocked, had a cold with a blocked nose two weeks ago and has been using olive oil drops.",
+   "against": "Otoscopy is normal, both tympanograms are type A, there is no air-bone gap and the Weber goes to the right ear."
+  },
+  {
+   "dx": "Ototoxic, infective or autoimmune inner ear damage",
+   "tier": "reasonable",
+   "for": "She had a cold two weeks ago, which could point to a post-viral or infective cause.",
+   "against": "She takes no ototoxic drugs, has no ear pain or discharge, and has no systemic or autoimmune features."
+  }
+ ]
 }

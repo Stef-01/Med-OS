@@ -467,15 +467,53 @@
    }
   ],
   "ask": [
-   "What do the PSA, MRI and biopsy results show? Explain to Mr Kostas what his PSA and his normal rectal examination mean.",
-   "Explain his Gleason score and Grade Group, and why 4+3 is not the same as 3+4.",
-   "What happens next? Explain the PSMA PET/CT scan and the treatment pathway, and how you will support him.",
-   "What safety netting and follow-up will you arrange?"
+   "You are now calling the urology registrar. Please give an ISBAR handover of Mr Kostas, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Mr Kostas now, here in general practice.",
+   "Before Mr Kostas goes home, what would you tell him and what follow-up would you arrange?"
   ],
-  "patient": "<p><strong>Questions to ask when the candidate explains the results (usually in Part 2), in this order, if not already covered:</strong></p><ol><li>\"My PSA was 9.2. Does that prove it was cancer all along?\" (Be reassured only if the candidate explains that PSA is not specific to cancer. Be confused if they use jargon.)</li><li>\"The urologist said my rectal exam was normal. Doesn't that mean the cancer is small? My old GP always just did the finger test.\"</li><li>\"Why did they go through the skin behind my testicles rather than the back passage? My mate had it done the other way and ended up in hospital with a serious infection.\"</li><li>\"My friend was told he had 3+4 and I have 4+3. Is that not the same thing?\"</li><li>\"What is this PSMA scan? Is it to check if I have cancer?\"</li></ol><p>If the candidate gives a clear explanation, say you feel less frightened and ask what the next appointment will be. If they use jargon without explaining it, say \"I'm still not following\".</p>"
+  "patient": "<p><strong>Questions to ask when the candidate explains the results (usually in Part 2), in this order, if not already covered:</strong></p><ol><li>\"My PSA was 9.2. Does that prove it was cancer all along?\" (Be reassured only if the candidate explains that PSA is not specific to cancer. Be confused if they use jargon.)</li><li>\"The urologist said my rectal exam was normal. Doesn't that mean the cancer is small? My old GP always just did the finger test.\"</li><li>\"Why did they go through the skin behind my testicles rather than the back passage? My mate had it done the other way and ended up in hospital with a serious infection.\"</li><li>\"My friend was told he had 3+4 and I have 4+3. Is that not the same thing?\"</li><li>\"What is this PSMA scan? Is it to check if I have cancer?\"</li></ol><p>If the candidate gives a clear explanation, say you feel less frightened and ask what the next appointment will be. If they use jargon without explaining it, say \"I'm still not following\".</p>",
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, GP registrar; Mr Dimitri Kostas, 66.</li><li><strong>Situation:</strong> newly diagnosed prostate cancer; calling to confirm staging and MDT plan.</li><li><strong>Background:</strong> found on PSA at a check-up; no urinary or spread symptoms; hypertension on perindopril, no 5-alpha reductase inhibitor; ECOG 0; widower, lives with daughter.</li><li><strong>Assessment:</strong> PSA 9.2 then 9.4 (about twice the age limit of 4.5), sterile urine, PSA density 0.24 (above 0.15); MRI PI-RADS 4, 11 mm left posterolateral peripheral zone, no extraprostatic extension, seminal vesicle, nodal or bone disease; biopsy 4 of 14 left cores, Gleason 4+3=7, Grade Group 3, no cribriform; normal DRE, cT1c. Unfavourable intermediate risk, localised on current tests. Anxious, low mood, no self-harm thoughts.</li><li><strong>Recommendation:</strong> PSMA PET/CT, MDT, urology and radiation oncology review; I will see him after results.</li></ul>",
+   "<p><strong>Most likely:</strong> localised unfavourable intermediate-risk prostate adenocarcinoma, ISUP Grade Group 3 (Gleason 4+3=7), cT1c: biopsy-proven, mostly pattern 4, PSA under 10, PI-RADS 4 lesion with no spread on MRI.</p><ul><li><strong>Metastatic or locally advanced disease:</strong> not excluded until PSMA PET/CT; against: no bone pain or neurological symptoms, no extraprostatic extension, nodes or bone lesions on MRI.</li><li><strong>High-risk disease:</strong> against: PSA under 10, Grade Group 3 (not 4 or 5), no extraprostatic extension.</li><li><strong>Favourable intermediate risk (3+4, Grade Group 2):</strong> against: pattern 4 predominates (about 70%).</li><li><strong>BPH or prostatitis as the cause of the PSA:</strong> BPH nodules present, but biopsy confirms cancer; sterile urine and no leucocytes argue against infection.</li></ul>",
+   "<ol><li>Check what he understands; explain in plain words: PSA is organ-specific, not cancer-specific; a normal DRE does not exclude cancer; the transperineal route lowers the infection risk.</li><li>Gleason grades how the glands look, is not \"7 out of 10\"; the lowest score is 3+3=6; 4+3 is worse than 3+4; Grade Group 3 of 5, intermediate risk.</li><li>Staging: PSMA PET/CT (Medicare-funded for intermediate and high risk; not a diagnostic or screening test).</li><li>Urology MDT; options are radical prostatectomy, or radiotherapy with about 4 to 6 months of hormone therapy; active surveillance not usually advised for Grade Group 3. Shared decision-making on erections and continence.</li><li>No firm prognosis or promise of cure before staging.</li><li>Involve the urologist, radiation oncologist, PCFA specialist nurse, Cancer Council 13 11 20, and his daughter; written information.</li></ol>",
+   "<ul><li><strong>Go to the emergency department straight away</strong> if he gets new back pain with leg weakness or numbness, or loses control of his bladder or bowels (possible spinal cord compression).</li><li>Also go straight to the emergency department if he cannot pass urine.</li><li>If he feels very low or unable to cope, come back sooner or call Lifeline on 13 11 14.</li><li><strong>Follow-up:</strong> book an early GP review after the PSMA scan and the MDT meeting to go over results and options; review his mood and sleep then.</li><li>Before then, contact the prostate cancer specialist nurse or the urologist's rooms with questions; give written information and support contacts; offer to include his daughter.</li></ul>"
+  ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
- }
+  "at": "2026-10-23T06:54:27Z",
+  "by": "rewrite-part2-asks.mjs"
+ },
+ "ddx": [
+  {
+   "dx": "Localised unfavourable intermediate-risk prostate adenocarcinoma, ISUP Grade Group 3 (Gleason 4+3=7), cT1c",
+   "tier": "likely",
+   "for": "Biopsy shows Gleason 4+3=7 in 4 of 14 left cores, with PSA 9.4, a PI-RADS 4 lesion and no spread on MRI.",
+   "against": ""
+  },
+  {
+   "dx": "Metastatic or locally advanced prostate cancer",
+   "tier": "dangerous",
+   "for": "Grade Group 3 disease cannot be called localised until PSMA PET/CT staging is done.",
+   "against": "He has no bone pain, weight loss or neurological symptoms, and MRI shows no extraprostatic extension, seminal vesicle invasion, nodal disease or bone lesions."
+  },
+  {
+   "dx": "High-risk localised prostate cancer",
+   "tier": "reasonable",
+   "for": "Pattern 4 makes up about 70% of the tumour, and PSA density is raised at 0.24.",
+   "against": "PSA is under 10, the grade is Group 3 rather than 4 or 5, and there is no extraprostatic extension or palpable disease."
+  },
+  {
+   "dx": "Favourable intermediate-risk prostate cancer (Gleason 3+4=7, Grade Group 2)",
+   "tier": "reasonable",
+   "for": "His Gleason score adds up to 7, the same total as his friend's.",
+   "against": "Pattern 4 predominates (about 70%), so this is 4+3 (Grade Group 3), not 3+4."
+  },
+  {
+   "dx": "Benign prostatic hyperplasia or prostatitis as the cause of the raised PSA",
+   "tier": "reasonable",
+   "for": "MRI shows mild benign prostatic hyperplasia (BPH) nodules in the transition zone.",
+   "against": "Biopsy confirms cancer, and the urine is sterile with no leucocytes, which argues against infection."
+  }
+ ]
 }

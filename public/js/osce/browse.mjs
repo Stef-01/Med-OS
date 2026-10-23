@@ -8,7 +8,7 @@ import { esc } from '../core.mjs';
 import { wide, reduced } from '../study-kit/util.mjs';
 import { dialogOf } from '../study-kit/ui.mjs';
 import { discRowHtml, discCounts, discToggle } from '../study-kit/vocab.mjs';
-import { osceFilter, osceRandom, osceOrigin, osceAttBy, clampMin, ROTATIONS, ORIGINS, CX, PHASES, DEFAULT_TIMING } from './core.mjs';
+import { osceFilter, osceRandom, osceOrigin, osceFrom, FROM, osceAttBy, clampMin, ROTATIONS, ORIGINS, CX, PHASES, DEFAULT_TIMING } from './core.mjs';
 import { ctx, I, PAGE, save, sess, attempted, body, NOLOAD, notify, openDialog, closeDialog, topDialog, openPop, closePop, bmButton, tagHtml, srcTag, pulse, examOf, nameOf, initialOf } from './state.mjs';
 import { tabsNav, tabBody, placePill, syncIndeterminate, contentTabs } from './session.mjs';
 
@@ -126,7 +126,7 @@ export const FOPT = {
   cx: () => CX.filter(c => ctx.stations.some(s => s.complexity === c)).map(c => [c, c]),
   type: () => [...new Set(ctx.stations.flatMap(s => s.type || []))].sort().map(t => [t, t]),
   rot: () => ROTATIONS.map(([id, l]) => [id, l]),
-  origin: () => ORIGINS.filter(([v]) => ctx.stations.some(s => osceOrigin(s) === v)),
+  origin: () => [...ORIGINS.filter(([v]) => ctx.stations.some(s => osceOrigin(s) === v)), ...FROM.filter(([v]) => ctx.stations.some(s => osceFrom(s) === v))],
 };
 const fval = k => (k === 'status' ? (filt.status ? [filt.status] : []) : filt[k]);
 function chipLabel(k, ph) {

@@ -4,7 +4,7 @@
    osceRunPool, osceShuffle) are in core.mjs. */
 import { esc } from '../core.mjs';
 import { discRowHtml } from '../study-kit/vocab.mjs';
-import { ROTATIONS, ORIGINS, osceOrigin, osceRunPool, osceShuffle, oscePeople, osceCounts, NAME_MAX } from './core.mjs';
+import { ROTATIONS, ORIGINS, FROM, osceFrom, osceOrigin, osceRunPool, osceShuffle, oscePeople, osceCounts, NAME_MAX } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, attempted, curAttempt, confirmDlg, openPop, ago, nameOf, initialOf, whoBadge } from './state.mjs';
 import { startAttempt } from './session.mjs';
 import { requestCardHtml } from './requests-view.mjs';
@@ -127,9 +127,9 @@ export function runPaint() {
   box.querySelector('.os-rots').innerHTML = discRowHtml('run', ids.map(id => [id, rotCount(id)]), rotState,
     { on: every, n: osceRunPool(stations, { ...r, specs: ids.flatMap(specsIn) }).length });
   const lab = { specs: r.specs.length ? `${r.specs.length} of ${nSpec} specialties` : 'Specialties',
-    origin: r.origin.length === 1 ? (r.origin[0] === 'ai' ? 'AI generated' : 'Written by you') : 'All sources',
+    origin: r.origin.length === 1 ? ([...ORIGINS, ...FROM].find(([v]) => v === r.origin[0])?.[1] || 'All sources') : r.origin.length ? `${r.origin.length} sources` : 'All sources',
     type: r.type.length ? (r.type.length === 1 ? r.type[0] : `${r.type[0]} +${r.type.length - 1}`) : 'All station types' };
-  const oneSource = new Set(stations.map(osceOrigin)).size < 2;   /* a one-option filter is a dead control */
+  const oneSource = new Set(stations.map(osceOrigin)).size < 2 && !stations.some(osceFrom);   /* a one-option filter is a dead control */
   box.querySelectorAll('[data-os="runpop"]').forEach(b => {
     b.innerHTML = `${esc(lab[b.dataset.k])}${I.chevD}`;
     b.classList.toggle('on', !!r[b.dataset.k].length);
@@ -164,8 +164,8 @@ export function runPop(b) {
         count(rotCount(id)), ' os-opthead')}<button class="os-optx${open ? ' open' : ''}" data-v="x:${id}" aria-label="${open ? 'Hide' : 'Show'} ${esc(l)} specialties" aria-expanded="${open}">${I.chevD}</button></div>
         ${open ? specsIn(id).map(x => row(`s:${x}`, esc(x), r.specs.includes(x), count(stations.filter(s => (s.specialty || []).includes(x)).length), ' os-optsub')).join('') : ''}</div>`;
     }).join('');
-    if (k === 'origin') return ORIGINS.map(([v, l]) => row(v, esc(l), r.origin.includes(v), count(stations.filter(s => osceOrigin(s) === v).length))).join('')
-      + '<p class="os-pophint">None ticked runs both.</p>';
+    if (k === 'origin') return [...ORIGINS.map(([v, l]) => [v, l, stations.filter(s => osceOrigin(s) === v).length]), ...FROM.map(([v, l]) => [v, l, stations.filter(s => osceFrom(s) === v).length])].filter(x => x[2])
+      .map(([v, l, n]) => row(v, esc(l), r.origin.includes(v), count(n))).join('') + '<p class="os-pophint">None ticked runs them all.</p>';
     return [...new Set(stations.flatMap(s => s.type || []))].sort().map(t => row(t, esc(t), r.type.includes(t))).join('') + '<p class="os-pophint">None ticked runs every type.</p>';
   };
   openPop(b, `<div role="listbox" aria-multiselectable="true" class="os-runlist">${draw()}</div>`, (v, o) => {

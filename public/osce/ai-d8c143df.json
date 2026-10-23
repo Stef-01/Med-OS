@@ -337,16 +337,22 @@
    }
   ],
   "ask": [
-   "What does the CTG show, and what do the observations and the reassessment tell you?",
-   "What is the diagnosis, what has contributed to the change in the trace, and what does LOA at station -2 mean?",
-   "What would you do first, and what next? Tell Mrs Costa what is happening.",
-   "What happens after the birth, for Mrs Costa and her baby?"
+   "You are now calling the obstetric registrar. Please give an ISBAR handover of Mrs Costa, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Mrs Costa now, here on the birth suite.",
+   "Before Mrs Costa goes home after the birth, what would you tell her and her husband, and what follow-up would you arrange?"
   ],
-  "patient": "<p><strong>In Part 2:</strong> if the student explains that you need an urgent caesarean, say: \"Okay, just please get my baby out safely. Can my husband come with me?\"</p>"
+  "patient": "<p><strong>In Part 2:</strong> if the student explains that you need an urgent caesarean, say: \"Okay, just please get my baby out safely. Can my husband come with me?\"</p>",
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self (final-year medical student, birth suite); Mrs Maria Costa, 29, G2P1, 39+4, induction of labour.</li><li><strong>Situation:</strong> fetal bradycardia that is not recovering, with a pulsating cord felt below the presenting part. I need you here now.</li><li><strong>Background:</strong> oxytocin increased 30 min ago; ARM 20 min ago, clear liquor, 5 cm, head high at station -2, LOA; epidural top-up 15 min ago; one previous vaginal birth, no uterine scar, GBS negative, no allergies, ate 6 h ago.</li><li><strong>Assessment:</strong> <em>CTG</em> abnormal: baseline 140, normal variability until 11:42, then a prolonged deceleration to 70 bpm; only about 90 bpm at 6 min (bradycardia), variability 3 to 5, no accelerations. Tachysystole: 6 in 10, 90 s, little relaxation. <em>Obs</em>: BP 84/50 (was 110/65), HR 105 to 108, i.e. hypotension after the epidural top-up; T 37.1 °C, so no sepsis.</li><li><strong>Recommendation:</strong> come now for a category 1 caesarean. Emergency call made, oxytocin stopped, presenting part elevated, head-down position, fluids running.</li></ul>",
+   "<p><strong>Umbilical cord prolapse</strong> with continuing cord compression and fetal compromise:</p><ul><li>Pulsating cord felt below the presenting part.</li><li>Sudden prolonged deceleration within 20 minutes of ARM, with a high head (3/5 palpable, station -2, i.e. 2 cm above the spines, not engaged). LOA means the occiput lies left and anterior.</li></ul><p><strong>Contributing causes and differentials:</strong></p><ul><li><strong>Uterine tachysystole</strong> (contributing): 6 contractions in 10 minutes, poor relaxation, oxytocin recently increased.</li><li><strong>Hypotension after the epidural</strong> (contributing): 84/50 after the top-up, so less placental blood flow.</li><li><strong>Placental abruption</strong>: against, as there is no constant pain, no bleeding and the uterus is non-tender.</li><li><strong>Uterine rupture</strong>: against, as she has no uterine scar, no pain or bleeding, and the head is not receding.</li></ul>",
+   "<ol><li><strong>Call for help now</strong>: obstetric emergency call (registrar, midwife in charge, anaesthetist, neonatal team).</li><li><strong>Stop the oxytocin.</strong></li><li><strong>Elevate the presenting part</strong> with gloved fingers and keep them there until birth. Handle the cord as little as possible to avoid vasospasm.</li><li><strong>Position</strong> knee-chest or left lateral head-down.</li><li>Large-bore IV access, bloods (FBC, group and hold), an <strong>IV fluid bolus</strong>, and anaesthetic review for a vasopressor if needed.</li><li><strong>Terbutaline 250 micrograms SC</strong> if contractions continue, as an adjunct only.</li><li><strong>Category 1 caesarean</strong> through the registrar, aiming for birth as fast as is safely possible (generally within 30 minutes). Nothing may delay birth, and there is no fetal blood sampling. She is at 5 cm, so a vaginal birth is not an option.</li><li>Fill the bladder (500 to 750 mL) only if birth will be delayed or she must be transferred.</li><li><strong>Tell Mrs Costa in plain words</strong> that the cord has slipped down ahead of the baby, why she must change position, and why an urgent caesarean is safest. Check she understands, and offer for her husband to come to theatre.</li></ol>",
+   "<ul><li><strong>At and after the birth:</strong> the neonatal team attends the birth and paired cord blood gases are taken. Offer Mrs Costa and her husband a debrief before discharge.</li><li><strong>Warning signs, in plain words:</strong><ul><li>heavy bleeding</li><li>fever</li><li>a red or leaking wound</li><li>tummy pain that is getting worse</li><li>calf pain or breathlessness</li></ul></li><li><strong>Where to go:</strong> contact the birth suite straight away, or call 000 if she is very unwell.</li><li><strong>Follow-up:</strong> GP review after discharge, and a plan for her next birth (discuss her options with the obstetric team).</li></ul>"
+  ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:54:36Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 29,
@@ -354,5 +360,37 @@
   "sex": "F",
   "setting": "birth suite",
   "pregnant": true
- }
+ },
+ "ddx": [
+  {
+   "dx": "Umbilical cord prolapse",
+   "tier": "likely",
+   "for": "A pulsating cord is felt below a high presenting part (station -2, 3/5 palpable), and a sudden prolonged deceleration to 70 bpm began within 20 minutes of artificial rupture of the membranes.",
+   "against": ""
+  },
+  {
+   "dx": "Uterine tachysystole from oxytocin",
+   "tier": "reasonable",
+   "for": "There are 6 contractions in 10 minutes, each about 90 seconds with poor relaxation, after the oxytocin rate was increased 30 minutes ago.",
+   "against": "Tachysystole does not explain the pulsating cord, and the deceleration has not recovered as it would with uterine activity alone."
+  },
+  {
+   "dx": "Maternal hypotension after the epidural top-up",
+   "tier": "reasonable",
+   "for": "Her BP fell from 110/65 to 84/50 with a maternal pulse of 105 to 108 within 15 minutes of the epidural top-up.",
+   "against": "The hypotension is moderate and only adds to the problem, and the cord felt on vaginal examination is the main cause."
+  },
+  {
+   "dx": "Placental abruption",
+   "tier": "dangerous",
+   "for": "A sudden prolonged deceleration with tachysystole and a tense uterus between contractions.",
+   "against": "She has no constant pain, no vaginal bleeding, a non-tender uterus, clear liquor, and the placenta was not low on the morphology scan."
+  },
+  {
+   "dx": "Uterine rupture",
+   "tier": "dangerous",
+   "for": "A sudden fetal bradycardia during oxytocin-augmented labour, with maternal tachycardia and hypotension.",
+   "against": "She has no uterine scar and no pain or bleeding, and the head is not receding (station -2, unchanged)."
+  }
+ ]
 }

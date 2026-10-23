@@ -373,16 +373,21 @@
    }
   ],
   "ask": [
-   "Talk me through the resuscitation record. How did the baby respond, and how do the SpO2 readings compare with the targets?",
-   "What do the cord gas and the blood glucose show, and why do you think this baby did not breathe at birth?",
-   "What is your management now? Include where the baby will be cared for and doses for this baby.",
-   "What will you tell the mother, and what will you hand over to the neonatal team?",
-   "What would worry you over the next hours, and what advice will the parents get at discharge?"
+   "The neonatal registrar has the airway now. Please give the registrar an ISBAR handover of this baby, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of this baby now, here in the birth suite.",
+   "What would make you ask for an urgent neonatal review over the next few hours, and what would you tell the parents before the baby goes home?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, birth suite; baby born 14:12, 39+2 weeks, 3.4 kg.</li><li><strong>Situation:</strong> floppy and apnoeic at birth, HR 70; needed mask ventilation, now breathing on own and crying.</li><li><strong>Background:</strong> first baby; clear liquor; fetal HR about 70 for the last 8 minutes; normal vaginal birth; no opioids or GA; GBS negative, no diabetes, normal scans.</li><li><strong>Assessment:</strong> HR 70 to 120 at 2 min, then 140 to 150: ventilation effective, no compressions needed. SpO2 in target range apart from 68% at 3 min, so oxygen went up to 30%; 85% at 5 min. Temperature 36.2 to 36.6 °C. Apgar 1 and 7. Cord pH 7.18, BE -8: mild acidaemia, below cooling criteria. BGL 2.2: hypoglycaemia.</li><li><strong>Recommendation:</strong> admit to SCN, glucose gel and feed, recheck BGL, wean oxygen, neurological observations; please review.</li></ul>",
+   "<p><strong>Most likely: neonatal respiratory depression from acute perinatal hypoxia</strong></p><ul><li>8 minutes of fetal bradycardia before birth</li><li>Quick recovery with ventilation alone (HR up, crying by 5 min)</li><li>Mild cord acidaemia (pH 7.18, lactate 5.4); hypoglycaemia</li></ul><p><strong>Differentials:</strong></p><ul><li><strong>Maternal opioids or GA:</strong> against: nitrous oxide only</li><li><strong>Sepsis:</strong> against: GBS negative, ROM 4 h, no maternal fever (keep watching)</li><li><strong>Airway obstruction:</strong> against: chest rise came back once the head was repositioned; clear liquor, no meconium</li><li><strong>Congenital or neuromuscular cause:</strong> against: normal morphology scan, tone and crying came back quickly; check at the newborn examination</li><li>Evolving <strong>HIE</strong>: less likely given Apgar 7 and the gas, but needs observation</li></ul>",
+   "<ol><li><strong>Now:</strong> keep warm (36.5 to 37.5 °C); wean oxygen towards air, keeping SpO2 no higher than 90% (85 to 90% by 10 min); brief newborn examination.</li><li><strong>Hypoglycaemia (BGL below 2.6):</strong> send a lab glucose without delaying treatment; 40% glucose gel 0.5 mL/kg = <strong>1.7 mL</strong> into the cheek, then a breastfeed or colostrum; recheck BGL in 30 to 60 min. If still below 2.6 or the baby is unwell: IV 10% glucose 2 mL/kg = <strong>6.8 mL</strong>, then an infusion.</li><li><strong>If the baby deteriorates:</strong> correct ventilation first; 3:1 compressions with 100% oxygen if HR stays below 60 after 30 s of effective ventilation; adrenaline 10 to 30 micrograms/kg IV (0.34 to 1.02 mL of 1:10 000).</li><li><strong>Disposition:</strong> SCN or NICU, not the postnatal ward; HR, RR, SpO2, temperature, BGL and neurological observations.</li><li><strong>Involve:</strong> neonatal registrar and consultant, midwife; talk honestly with the mother, skin-to-skin once stable.</li></ol>",
+   "<p><strong>Urgent neonatal review in the nursery:</strong></p><ul><li>Poor tone, poor suck or feeding, drowsy or irritable, seizures, apnoea, low BGL</li><li>Why: these may be encephalopathy, and cooling has to start within 6 hours of birth</li></ul><p><strong>Discharge criteria:</strong> feeding well, temperature 36.5 to 37.5 °C, BGL 2.6 or above, stable observations.</p><p><strong>Tell the parents:</strong></p><ul><li><strong>Call 000</strong> for blue or grey colour, pauses in breathing or seizures</li><li><strong>Come back to the ED</strong> for poor feeding, a floppy or very sleepy baby, fast or hard breathing, temperature below 36.5 °C or a fever, yellow skin, or fewer wet nappies</li></ul><p><strong>Follow-up:</strong> paediatric review arranged before discharge.</p>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:56:26Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 0,
@@ -390,5 +395,43 @@
   "sex": "X",
   "setting": "birth suite",
   "weight": 3.4
- }
+ },
+ "ddx": [
+  {
+   "dx": "Neonatal respiratory depression from acute perinatal hypoxia",
+   "tier": "likely",
+   "for": "Fetal heart rate about 70 for the last 8 minutes before birth, then a quick recovery with ventilation alone and a mild cord acidaemia (pH 7.18, lactate 5.4).",
+   "against": ""
+  },
+  {
+   "dx": "Respiratory depression from maternal opioids or general anaesthetic",
+   "tier": "reasonable",
+   "for": "Floppy and apnoeic at birth with a heart rate that rose once ventilation was effective.",
+   "against": "The mother had nitrous oxide only, with no pethidine, morphine or general anaesthetic in labour."
+  },
+  {
+   "dx": "Early-onset neonatal sepsis",
+   "tier": "dangerous",
+   "for": "Floppy, apnoeic baby who needed resuscitation and is hypoglycaemic at 30 minutes.",
+   "against": "GBS negative, membranes ruptured only 4 hours before birth, no maternal fever and clear liquor."
+  },
+  {
+   "dx": "Upper airway obstruction",
+   "tier": "reasonable",
+   "for": "There was no chest rise with mask ventilation at first.",
+   "against": "Chest rise came back once the head was repositioned, and the liquor was clear with no meconium."
+  },
+  {
+   "dx": "Congenital or neuromuscular cause of hypotonia and apnoea",
+   "tier": "reasonable",
+   "for": "Floppy at birth with an Apgar of 1 at 1 minute.",
+   "against": "Normal morphology scan, and tone and crying came back within 5 minutes."
+  },
+  {
+   "dx": "Evolving hypoxic ischaemic encephalopathy",
+   "tier": "dangerous",
+   "for": "Acute fetal bradycardia, the need for resuscitation and hypoglycaemia after birth.",
+   "against": "Apgar 7 at 5 minutes, responds to voice, and cord gas (pH 7.18, base excess -8) is below the cooling criteria."
+  }
+ ]
 }

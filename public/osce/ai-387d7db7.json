@@ -541,16 +541,59 @@
    }
   ],
   "ask": [
-   "What do his reassessment, blood gas and bloods show? How do they relate to the trauma deadly triad?",
-   "What does the CT show, what is your diagnosis for the nose, and what must you still watch for with the neck wound?",
-   "Explain the nasal problem and its treatment to Daniel. He says: \"I just want to go home and sleep. Can this wait until the swelling goes down?\"",
-   "What is the rest of your management: antibiotics, analgesia, tetanus, disposition and who you involve?",
-   "What safety netting and follow-up does he need?"
+   "You are now calling the trauma surgical registrar. Please give an ISBAR handover of Daniel Hartnett, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Daniel now, here in the emergency department.",
+   "Please explain to Daniel what is wrong with his nose and how it will be treated."
   ],
-  "patient": "<p><strong>Question to ask once</strong> (in Part 2, after the candidate explains what is wrong with your nose): \"I just want to go home and sleep. Can this wait until the swelling goes down?\" If the candidate uses jargon, say \"What does that mean?\"</p>"
+  "patient": "<p><strong>Question to ask once</strong> (in Part 2, after the candidate explains what is wrong with your nose): \"I just want to go home and sleep. Can this wait until the swelling goes down?\" If the candidate uses jargon, say \"What does that mean?\"</p>",
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self (ED registrar); Daniel Hartnett, 32.</li><li><strong>Situation:</strong> assaulted; right neck glass wound breaching platysma over the EJV, with air entrainment before occlusion; bilateral septal haematoma.</li><li><strong>Background:</strong> punched and bottled 45 min before arrival, no LOC, about 6 beers; mild asthma, ibuprofen today, penicillin rash in childhood; last tetanus in Year 10.</li><li><strong>Assessment:</strong> arrived compensating (HR 108, cool, CRT 3 s), now HR 96, BP 122/76 after occlusion; still hypothermic at 35.6 °C; pH 7.31, lactate 2.4, BE -3 is a mild lactic acidosis; coagulation normal so far, so two of the three parts of the deadly triad are present; Hb 131 is early and does not exclude blood loss; CT shows an EJV laceration only, no fracture of the cervical spine, displaced nasal fractures with septal haematoma.</li><li><strong>Recommendation:</strong> review now for exploration and repair; ENT drainage today; admit.</li></ul>",
+   "<p><strong>Most likely:</strong> right external jugular vein laceration with risk of venous air embolism (wound over SCM, platysma breached, sucking noise, venous bleeding, CT shows the vein cut), plus bilateral nasal septal haematoma with displaced nasal fractures (bilateral blockage, fluctuant red-purple swelling not shrinking with decongestant, CT septal thickening).</p><ul><li><strong>Established air embolism:</strong> against: stable, no breathlessness, no mill-wheel murmur, no gas in the deep veins.</li><li><strong>Carotid, internal jugular or aerodigestive injury:</strong> against: normal on CT angiogram.</li><li><strong>Deviated septum from old fracture:</strong> against: firm, not fluctuant, swelling is new.</li><li><strong>Septal abscess or CSF leak/NOE fracture:</strong> against: no fever, no clear rhinorrhoea, no NOE fracture on CT.</li></ul>",
+   "<ol><li><strong>Keep safe:</strong> wound occluded, flat with in-line stabilisation, oxygen, active warming; collar off only under the trauma protocol after senior review.</li><li><strong>If air embolism</strong> (sudden breathlessness, hypoxia, hypotension, mill-wheel murmur): occlude, flat or head-down, left lateral tilt only as a log-roll, 100% oxygen, senior help.</li><li><strong>Deadly triad:</strong> limit crystalloid; repeat gas, Hb and coagulation; if bleeding recurs or shock develops, massive transfusion protocol with balanced products and tranexamic acid within 3 h of injury.</li><li><strong>Antibiotic</strong> covering <em>S. aureus</em> and streptococci per eTG; a cephalosporin is reasonable for a remote mild rash.</li><li><strong>Analgesia:</strong> regular paracetamol, titrated IV opioid, no NSAIDs.</li><li><strong>Tetanus:</strong> dTpa booster (last dose more than 5 years ago); check AIR; no immunoglobulin if 3 or more doses documented.</li><li><strong>Disposition:</strong> ENT drainage today, surgical exploration and repair, admit, document the assault factually.</li></ol>",
+   "<ul><li><strong>Plain words:</strong> a collection of blood between the cartilage in the middle of the nose and its lining; checks understanding, no jargon.</li><li><strong>Why it matters:</strong> it starves the cartilage of blood, so it can become an abscess, the cartilage can die, leaving a hole in the septum or a collapsed (saddle) nose.</li><li><strong>Treatment:</strong> drained today by ENT or a senior, then packing or a splint so it does not fill up again, plus antibiotics.</li><li><strong>\"Can this wait?\":</strong> acknowledges he is tired and worried about work, but explains kindly that it cannot wait for the swelling to settle and must be done today.</li><li><strong>Tell the nurses at once:</strong> blocked nose coming back, fever, worse nose pain, breathlessness, or bleeding at the neck.</li></ul>"
+  ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
- }
+  "at": "2026-10-23T06:50:07Z",
+  "by": "rewrite-part2-asks.mjs"
+ },
+ "ddx": [
+  {
+   "dx": "Right external jugular vein laceration with risk of venous air embolism, plus bilateral nasal septal haematoma with displaced nasal fractures",
+   "tier": "likely",
+   "for": "Glass wound over right sternocleidomastoid breaching platysma with venous bleeding and a sucking noise, bilateral nasal blockage with fluctuant red-purple septal swelling that does not shrink with decongestant, and CT showing a cut external jugular vein and bilateral septal thickening.",
+   "against": ""
+  },
+  {
+   "dx": "Established venous air embolism",
+   "tier": "dangerous",
+   "for": "Open neck vein wound with a sucking noise on inspiration while he sat upright.",
+   "against": "He is stable with no breathlessness, no mill-wheel murmur, and CT shows no gas in the internal jugular, subclavian or superior vena cava."
+  },
+  {
+   "dx": "Carotid artery, internal jugular vein or aerodigestive tract injury",
+   "tier": "dangerous",
+   "for": "Penetrating glass wound breaching platysma on the right side of the neck with heavy bleeding.",
+   "against": "Bleeding was venous with no expanding haematoma, stridor or surgical emphysema, and the CT angiogram shows normal arteries, an intact internal jugular vein, larynx, trachea and oesophagus."
+  },
+  {
+   "dx": "Deviated nasal septum from previous nasal fracture",
+   "tier": "reasonable",
+   "for": "He broke his nose playing football 10 years ago and now has nasal blockage.",
+   "against": "The septal swelling is new, smooth, fluctuant and soft to a cotton bud, not firm, and it is on both sides."
+  },
+  {
+   "dx": "Nasal septal abscess",
+   "tier": "dangerous",
+   "for": "Bilateral septal haematoma after trauma, which can become infected if not drained.",
+   "against": "Injury was under an hour ago and he has no fever, and the raised white cell count fits a stress response."
+  },
+  {
+   "dx": "Naso-orbito-ethmoid fracture with cerebrospinal fluid leak",
+   "tier": "dangerous",
+   "for": "Punched in the face with displaced nasal fractures and epistaxis.",
+   "against": "No clear rhinorrhoea, no headache or visual symptoms, and CT shows no naso-orbito-ethmoid, orbital or other facial fracture."
+  }
+ ]
 }

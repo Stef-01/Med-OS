@@ -465,17 +465,22 @@
    }
   ],
   "ask": [
-   "What do these results and your examination findings show?",
-   "What is the most likely problem, and what else worries you about Noah today?",
-   "What is your management today? Alex asks: \"Can we get the blood test at the lab and come back tomorrow? And could he have vitamin K drops instead of the injection?\"",
-   "Briefly, what do you tell Alex about the two-vessel cord, a hip scan and safe sleep?",
-   "What safety netting and follow-up do you arrange?"
+   "You are now calling the paediatric registrar at the children's hospital. Please give an ISBAR handover of Noah, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Noah now, here in general practice.",
+   "Before Noah leaves the practice, what would you tell Alex and what follow-up would you arrange?"
   ],
-  "patient": "<p>In Part 2 the examiner puts your remaining questions (waiting for a lab test, vitamin K drops, the two-vessel cord) to the candidate. Interrupt if the candidate uses medical jargon without explaining it.</p>"
+  "patient": "<p>In Part 2 the examiner puts your remaining questions (waiting for a lab test, vitamin K drops, the two-vessel cord) to the candidate. Interrupt if the candidate uses medical jargon without explaining it.</p>",
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self as GP; Noah Nguyen, 18 days old.</li><li><strong>Situation:</strong> jaundice beyond 14 days with pale putty stools, dark urine and a firm liver 2 cm. No vitamin K, and a cord-stump bleed. Requesting same-day review.</li><li><strong>Background:</strong> term, 39 weeks, vaginal birth, 3.4 kg. Normal newborn exam. Isolated two-vessel cord. Vitamin K declined, no drops. Cord bled for 10 to 15 minutes on day 9.</li><li><strong>Assessment:</strong> observations, BGL 4.3 and weight gain are normal, so he is stable to travel, but this does not exclude anything. The stool chart shows acholic stools. The morphology scan shows a normal renal tract and heart. The summary has vitamin K not recorded and the mother antibody negative. Concern: biliary atresia and late VKDB.</li><li><strong>Recommendation:</strong> see today. Split bilirubin, LFTs, FBC, PT/INR. Vitamin K 1 mg IV, or IM by me now if you advise it.</li></ul>",
+   "<p><strong>Most likely:</strong> conjugated (cholestatic) jaundice: <strong>biliary atresia</strong> until proven otherwise. Supported by jaundice beyond 14 days that is worsening, acholic stools on the chart, dark staining urine and a firm liver. Being well and thriving does not exclude it.</p><p><strong>Co-existing concern:</strong> late VKDB. He had no prophylaxis, is exclusively breastfed and cholestatic, and the cord bleed may have been a warning bleed.</p><ul><li><strong>Breastmilk jaundice:</strong> against it: this is unconjugated, with yellow stools and pale urine.</li><li><strong>Other neonatal cholestasis</strong> (neonatal hepatitis, infection such as CMV or UTI, alpha-1 antitrypsin deficiency, choledochal cyst): possible, so it needs the same urgent work-up.</li><li><strong>Haemolysis:</strong> against it: jaundice would be unconjugated, and the mother is A positive and antibody negative.</li><li><strong>Inherited bleeding disorder:</strong> less likely with no family history.</li></ul>",
+   "<ol><li><strong>Same-day paediatric ED assessment, whatever the pending results.</strong> Do not order lab bloods and wait. Phone the paediatric registrar and send a written referral.</li><li><strong>Vitamin K 1 mg by injection now, without waiting for results.</strong> The receiving team giving it IV is preferred, or I give it IM before transfer if they advise. Take coagulation bloods first only if this causes no delay.</li><li><strong>Oral drops are not acceptable:</strong> cholestasis impairs absorption, drops are unreliable, and he may already be deficient.</li><li><strong>Make sure the work-up is done:</strong> split bilirubin (conjugated &gt;34 micromol/L or &gt;20% of total confirms cholestasis), LFTs, FBC, PT/INR.</li><li><strong>If Alex declines:</strong> explain the risks again without blame, involve the paediatric consultant urgently, document the informed refusal and still send Noah today.</li><li><strong>Transfer:</strong> direct, by ambulance or with Alex.</li><li><strong>Definitive care:</strong> paediatric hepatology. If biliary atresia, Kasai ideally before about 8 weeks.</li></ol>",
+   "<ul><li><strong>In plain words:</strong> bile may not be draining from the liver. This is not caused by declining vitamin K, but the missing vitamin K adds a bleeding risk. Vitamin K is not a vaccine. Do not use sunlight.</li><li><strong>Red flags:</strong> call 000 for any bleeding, drowsiness or floppiness, vomiting, a fit or a bulging soft spot. Keep breastfeeding.</li><li><strong>Where to go:</strong> straight to hospital, not home first. The team is expecting you.</li><li><strong>Two-vessel cord:</strong> often normal. Plan a renal tract ultrasound. Heart tests only if something is abnormal.</li><li><strong>Hips:</strong> normal. A cousin is not a first-degree relative, so routine checks only, no scan.</li><li><strong>Safe sleep:</strong> on his back in his own cot in your room. No couch, bed-sharing, pillows or tummy sleeping. Light wrap with the hips free. Smoke-free home.</li><li><strong>Follow-up:</strong> written information (Red Nose, stool chart). GP review after discharge. Document the vitamin K discussion.</li></ul>"
+  ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:49:06Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 18,
@@ -483,5 +488,43 @@
   "sex": "M",
   "setting": "gp",
   "weight": 3.7
- }
+ },
+ "ddx": [
+  {
+   "dx": "Biliary atresia causing cholestatic (conjugated) jaundice",
+   "tier": "likely",
+   "for": "Jaundice from day 3 that has persisted and worsened beyond 14 days, with stools pale since day 10 that match the palest chart colours, dark staining urine and a firm liver 2 cm below the costal margin.",
+   "against": ""
+  },
+  {
+   "dx": "Late vitamin K deficiency bleeding",
+   "tier": "dangerous",
+   "for": "No vitamin K injection or drops, exclusively breastfed and cholestatic, with a cord-stump bleed on day 9 that soaked a cloth and needed 10 to 15 minutes of pressure.",
+   "against": "Nothing is bleeding today, with no bruising, nosebleeds or blood in vomit or nappy, and he is alert with normal observations."
+  },
+  {
+   "dx": "Other neonatal cholestasis (neonatal hepatitis, congenital infection such as CMV, urinary tract infection, alpha-1 antitrypsin deficiency, choledochal cyst)",
+   "tier": "reasonable",
+   "for": "The same conjugated picture of pale stools, dark urine and a firm liver, which needs the same urgent work-up.",
+   "against": "Afebrile, feeding well, thriving with normal observations, and no family history of liver disease."
+  },
+  {
+   "dx": "Breastmilk jaundice",
+   "tier": "reasonable",
+   "for": "Exclusively breastfed, well and gaining weight, which is what Alex's mum suggested.",
+   "against": "Pale putty stools, dark staining urine and a firm liver point to conjugated jaundice, which breastmilk jaundice does not cause."
+  },
+  {
+   "dx": "Haemolytic jaundice",
+   "tier": "reasonable",
+   "for": "Jaundice began early, on day 3.",
+   "against": "Mother is A positive and antibody negative, and pale stools with dark urine point to conjugated rather than unconjugated jaundice."
+  },
+  {
+   "dx": "Inherited bleeding disorder",
+   "tier": "reasonable",
+   "for": "The cord-stump bleed took 10 to 15 minutes of pressure to stop.",
+   "against": "No family history of bleeding disorders, parents are not related, and there has been no bleeding anywhere else."
+  }
+ ]
 }

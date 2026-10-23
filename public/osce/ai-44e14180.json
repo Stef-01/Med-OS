@@ -660,15 +660,52 @@
    }
   ],
   "ask": [
-   "What do these results show?",
-   "Why does the hepatitis B result matter before an anti-TNF agent, and what further tests and referral does he need?",
-   "Mr Nguyen asks: \"Why can't I just start the injection now?\" and \"Is there a gentler option for my immune system?\" How would you answer him?",
-   "He asks: \"Am I going to get liver cancer? Do I need scans?\" and \"What is the calprotectin test for? Does it mean I definitely have Crohn's?\" How would you answer?",
-   "What would you advise about his partner, and what safety netting and follow-up would you arrange?"
+   "You are now calling the gastroenterology registrar. Please give an ISBAR handover of Minh Nguyen, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Mr Nguyen now, here in general practice.",
+   "Before Mr Nguyen goes home, what would you tell him and what follow-up would you arrange?"
+  ],
+  "expect": [
+   "<p><strong>Identify:</strong> self, GP registrar, practice; Minh Nguyen, 29.</p><p><strong>Situation:</strong> pre-biologic screen shows current hepatitis B infection; needs a plan before any biologic.</p><p><strong>Background:</strong> ileocolonic Crohn's, 6-week flare, on azathioprine and tapering prednisolone; born in Vietnam, mother has hepatitis B.</p><p><strong>Assessment:</strong></p><ul><li>HBsAg and anti-HBc positive, IgM negative, anti-HBs 3: chronic hepatitis B, likely perinatal.</li><li>HBeAg negative, anti-HBe positive, HBV DNA 850 IU/mL: HBeAg-negative phase, low replication; still needs antiviral cover.</li><li>ALT 52; bilirubin, INR, platelets normal: no liver failure.</li><li>Valid negative IGRA, normal CXR: no latent or active TB. HCV, HIV negative; varicella and hepatitis A immune.</li><li>Calprotectin 640, CRP 34, albumin 33, Hb 121: active flare.</li></ul><p><strong>Recommendation:</strong> urgent hepatology input, tenofovir or entecavir before the biologic, repeat LFTs and HBV DNA, elastography; hold the biologic until then.</p>",
+   "<p><strong>Most likely:</strong> chronic hepatitis B, HBeAg-negative phase with low viral load, probably acquired from his mother at birth or in early childhood. Supporting: HBsAg and total anti-HBc positive, IgM negative, anti-HBs below 10, born in Vietnam, mother infected. This is on top of active Crohn's disease: calprotectin 640, raised CRP, low albumin and anaemia. Calprotectin shows inflammation and tracks activity; it does not make the diagnosis, which was made by colonoscopy and biopsy.</p><ul><li><strong>Acute hepatitis B:</strong> against: IgM anti-HBc negative, he is well and the ALT is only mildly raised.</li><li><strong>Past cleared infection:</strong> against: HBsAg is positive (cleared infection is HBsAg negative, anti-HBc positive).</li><li><strong>Vaccine immunity:</strong> against: anti-HBs 3 and anti-HBc positive (vaccine immunity is anti-HBs positive alone).</li><li><strong>ALT rise from azathioprine or Crohn's:</strong> possible. ALT is above 30, so whether this is chronic infection or chronic hepatitis needs serial ALT and HBV DNA plus a fibrosis assessment.</li></ul>",
+   "<ol><li><strong>Explain in plain words:</strong> long-term hepatitis B, low level now, manageable. Immune-dampening drugs, including his current azathioprine and prednisolone, can wake the virus up and cause a severe liver flare or liver failure.</li><li><strong>Urgent discussion or referral to gastroenterology or hepatology</strong> this week. Make sure the treating gastroenterologist knows before any biologic is given.</li><li><strong>Antiviral prophylaxis</strong> as the specialist directs (for example tenofovir disoproxil 300 mg or entecavir 0.5 mg daily). Start it before the biologic and continue during and after it. A DNA below 2,000 IU/mL does not remove the need. The delay is weeks; he is not being refused the biologic.</li><li><strong>Tests:</strong> repeat LFTs and HBV DNA, fibrosis assessment (elastography), renal function as a baseline for tenofovir, iron studies.</li><li><strong>Vedolizumab:</strong> works only on the gut and has a good safety profile, but acts more slowly. The specialist chooses, and he still needs the hepatitis B plan.</li><li><strong>Partner and household:</strong> test Linh and household contacts and vaccinate anyone not immune. Use condoms until Linh is shown to be immune.</li><li>Review non-live vaccines, avoid live vaccines and keep alcohol low.</li></ol>",
+   "<p><strong>Go to the ED or seek urgent review for:</strong></p><ul><li>a liver flare: yellow skin or eyes, dark urine, pale stools, vomiting, a swollen tummy or confusion</li><li>a severe Crohn's flare: worsening bloody diarrhoea, fever, severe tummy pain, or feeling faint or dehydrated</li><li>on treatment: cough, fevers, night sweats or weight loss, and any new TB contact</li></ul><p><strong>Liver cancer:</strong> long-term hepatitis B can cause liver cancer, even without cirrhosis. Whether he needs six-monthly ultrasounds depends on his fibrosis or cirrhosis, family history and age, so he may not need them yet at 29. The specialist decides; do not promise scans or rule them out. Antivirals when needed and regular follow-up lower the risk.</p><p><strong>Follow-up:</strong> GP review in about a week with the repeat liver tests, then the specialist appointment. No biologic starts until the hepatitis B plan is in place. Give written information and check he understands.</p>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
- }
+  "at": "2026-10-23T06:50:24Z",
+  "by": "rewrite-part2-asks.mjs"
+ },
+ "ddx": [
+  {
+   "dx": "Chronic hepatitis B infection, HBeAg-negative phase with low viral load, alongside an active Crohn's disease flare",
+   "tier": "likely",
+   "for": "HBsAg and total anti-HBc positive with IgM negative and anti-HBs 3, HBV DNA 850 IU/mL, born in Vietnam and his mother has hepatitis B.",
+   "against": ""
+  },
+  {
+   "dx": "Acute hepatitis B infection",
+   "tier": "dangerous",
+   "for": "HBsAg positive with a mildly raised ALT of 52.",
+   "against": "IgM anti-HBc negative, he feels well without jaundice, and the ALT is only mildly raised with normal bilirubin and INR."
+  },
+  {
+   "dx": "Past cleared hepatitis B infection",
+   "tier": "reasonable",
+   "for": "Total anti-HBc and anti-HBe are positive.",
+   "against": "HBsAg is positive, confirmed by neutralisation, and HBV DNA is detectable at 850 IU/mL."
+  },
+  {
+   "dx": "Hepatitis B vaccine immunity",
+   "tier": "reasonable",
+   "for": "He does not know whether he was ever vaccinated against hepatitis B.",
+   "against": "Anti-HBs is only 3 mIU/mL and anti-HBc is positive, which vaccination does not cause."
+  },
+  {
+   "dx": "Raised ALT from azathioprine or active Crohn's disease",
+   "tier": "reasonable",
+   "for": "He takes azathioprine daily and has an active flare (calprotectin 640, CRP 34), with an isolated ALT of 52 and normal AST, GGT and ALP.",
+   "against": "HBsAg positivity with detectable HBV DNA is an alternative explanation for the ALT rise."
+  }
+ ]
 }

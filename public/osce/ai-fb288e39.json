@@ -322,16 +322,21 @@
    }
   ],
   "ask": [
-   "What do the triage observations and the reassessment show?",
-   "How would you classify this seizure, and what else would you consider?",
-   "Does this child need any investigations? What is your management, including any medicine with the dose for this child?",
-   "Explain to the parent what has happened, the chance of it happening again, and what to do if it does.",
-   "When can the child go home, and when should the parent seek help?"
+   "You are now calling the paediatric registrar. Please give an ISBAR handover of this child, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of this child now, here in the emergency department.",
+   "Before this child goes home, what would you tell the parent, and what follow-up would you arrange?"
+  ],
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, ED junior doctor; a 27-month-old, 13 kg.</li><li><strong>Situation:</strong> first seizure with fever about 30 minutes before arrival: generalised tonic-clonic, about 3 minutes, stopped on its own, no repeat.</li><li><strong>Background:</strong> 2 days of runny nose, sore throat, cough and fever; no previous seizures; normal development; immunised; sibling had a febrile seizure.</li><li><strong>Assessment:</strong> at 18:35 temperature 39.2 °C and responding to voice only (GCS 14, post-ictal), both yellow; HR 148 in keeping with the fever; RR, SpO2, BP and CRT normal; BGL 5.6 normal. At 18:55, GCS 15, playing and drinking, HR 132, temperature 38.6 °C (only yellow): normal recovery. Red throat, normal ears, clear chest, no meningism, rash or focal signs.</li><li><strong>Recommendation:</strong> no investigations; plan discharge with first aid teaching and GP follow-up; asks if the registrar agrees.</li></ul>",
+   "<p><strong>Simple febrile seizure:</strong> generalised tonic-clonic, under 15 minutes, full recovery within 1 hour, no recurrence in this illness, aged 6 months to 6 years; clear viral URTI source; sibling history.</p><ul><li><strong>Complex febrile seizure:</strong> against: no focal features, short, single, recovered within the hour.</li><li><strong>Meningitis or encephalitis:</strong> against: no neck stiffness, rash or vomiting, back to GCS 15, no recent antibiotics.</li><li><strong>First afebrile seizure or epilepsy:</strong> against: fever with a clear source, normal development, no previous seizures.</li><li><strong>Febrile rigor:</strong> against: unresponsive, eyes rolled back, tonic then clonic phase.</li></ul><p>Hypoglycaemia excluded by BGL 5.6 mmol/L.</p>",
+   "<ol><li>Repeat observations until back to baseline; BGL already normal.</li><li>Paracetamol 15 mg/kg = <strong>195 mg</strong> orally for comfort (given at 18:45), or ibuprofen 10 mg/kg = 130 mg; does <strong>not</strong> prevent seizures, so not given regularly for that.</li><li><strong>No investigations:</strong> no routine bloods, EEG or neuroimaging; urine only if no source; LP only for meningism or persistent drowsiness. None needed here.</li><li>No daily anti-seizure medicine.</li><li>Comfort care: fluids, light clothing.</li><li><strong>Disposition:</strong> discharge home once at baseline and drinking, source identified and the parent confident with first aid.</li><li><strong>Involve:</strong> the parent, the GP and written information.</li></ol>",
+   "<ul><li><strong>Explanation:</strong> febrile seizures are common and cause no brain damage; later epilepsy about 1 to 2 in 100; another febrile seizure about 1 in 3, a little more likely with the family history; no scan, brain wave test or blood tests needed.</li><li><strong>First aid:</strong> note the time, lie the child on their side, nothing in the mouth, do not restrain, stay with them.</li><li><strong>Call 000:</strong> seizure lasting 5 minutes or more, trouble breathing or turning blue, or not waking properly afterwards.</li><li><strong>Return to ED:</strong> another seizure, persistent drowsiness, neck stiffness, a spotty rash that does not fade, repeated vomiting, not drinking or fewer wet nappies, or getting worse.</li><li><strong>Follow-up:</strong> see the GP in the next few days; give the written febrile seizure fact sheet.</li></ul>"
   ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:55:53Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 27,
@@ -339,5 +344,43 @@
   "sex": "X",
   "setting": "ed",
   "weight": 13
- }
+ },
+ "ddx": [
+  {
+   "dx": "Simple febrile seizure",
+   "tier": "likely",
+   "for": "A single generalised tonic-clonic seizure lasting about 3 minutes in a febrile 27-month-old with a viral URTI, back to GCS 15 within an hour and a sibling who had a febrile seizure.",
+   "against": ""
+  },
+  {
+   "dx": "Complex febrile seizure",
+   "tier": "reasonable",
+   "for": "A seizure with fever in a child of the right age, still drowsy with GCS 14 at triage.",
+   "against": "No focal onset or one-sided features, it lasted about 3 minutes, there was no repeat and recovery was complete within the hour."
+  },
+  {
+   "dx": "Bacterial meningitis or viral encephalitis",
+   "tier": "dangerous",
+   "for": "Fever of 39.2 °C with a seizure and a drowsy child responding only to voice at triage.",
+   "against": "No neck stiffness, rash, vomiting or recent antibiotics, a clear URTI source, and alert with GCS 15 and a normal neurological exam by 18:55."
+  },
+  {
+   "dx": "First afebrile seizure or new-onset epilepsy",
+   "tier": "reasonable",
+   "for": "This is the child's first seizure, with a generalised tonic-clonic pattern.",
+   "against": "It happened during a febrile illness with a clear source, and the child has normal development and no previous seizures."
+  },
+  {
+   "dx": "Febrile rigor",
+   "tier": "reasonable",
+   "for": "High fever with shaking of all four limbs.",
+   "against": "The child was unresponsive with the eyes rolled back, there was a tonic phase followed by a clonic phase, and the child was drowsy afterwards."
+  },
+  {
+   "dx": "Hypoglycaemic seizure",
+   "tier": "dangerous",
+   "for": "Eating less over two days of illness, then a seizure followed by drowsiness.",
+   "against": "BGL was 5.6 mmol/L at triage and the child recovered fully without glucose."
+  }
+ ]
 }

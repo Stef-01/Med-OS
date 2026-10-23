@@ -13,7 +13,7 @@ import { ago as agoAt, reduced } from '../study-kit/util.mjs';
 import { icon } from '../study-kit/icons.mjs';
 import { specialtyEmoji, sourceTag } from '../study-kit/vocab.mjs';
 import { popover, closePopover, dialog as kitDialog, closeTop, topDialog as topDlg, confirm as kitConfirm, toast as kitToast } from '../study-kit/ui.mjs';
-import { osceScore, osceStations, osceIndexRows, osceLazy, osceBody, osceOrigin, osceName, osceWho } from './core.mjs';
+import { osceScore, osceStations, osceIndexRows, osceLazy, osceBody, osceOrigin, osceFrom, osceName, osceWho } from './core.mjs';
 
 export const LS = 'osce.practice.v1';
 export const KEY_LS = 'osce.marker.v1';   /* this device only, never synced: {key, model} for AI marking */
@@ -166,7 +166,7 @@ export function tagHtml(s, maxSpec = 2) {
 /* the station's source tag (the kit's, on every surface a station shows): AI with the class or weak concept it came from, else eMedici */
 /* the AI-written examination findings for a station (osce_exam_findings.py), or null: never eMedici content */
 export const examOf = st => (st && ctx.exam?.[String(st.id)]) || null;
-export const srcTag = s => sourceTag(osceOrigin(s), osceOrigin(s) === 'ai' ? `${s.source?.label ? `AI generated from ${s.source.label}` : s.basis?.length ? 'AI generated from weak concepts' : 'AI generated'}${s.focus ? `: ${s.focus}` : ''}` : 'Written by you');
+export const srcTag = s => (osceFrom(s) === 'amsa' ? '<span class="os-tag os-tag--amsa" role="img" aria-label="Case from AMSA MedEd OSCEs" title="Case content from the AMSA MedEd OSCE library; AI filled in what the source left out">AMSA</span>' : '') + sourceTag(osceOrigin(s), osceOrigin(s) === 'ai' ? `${s.source?.label ? `AI generated from ${s.source.label}` : s.basis?.length ? 'AI generated from weak concepts' : 'AI generated'}${s.focus ? `: ${s.focus}` : ''}` : 'Written by you');
 
 /* ---------------------------------------------------------------- dialogs (Dialog.vue in ui-modal), popovers, alerts */
 const DLG = { wrap: 'os-modal', box: 'os-dlg', head: 'os-dlg-head', close: 'os-ic os-dlg-x', title: 'os-dlg-title', titleTag: 'h1', act: 'os-dlg-act', body: 'os-dlg-body', in: 'in', out: 'out' };

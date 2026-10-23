@@ -75,7 +75,8 @@ test('sources: AI generated or written by you, one tag each', () => {
 test('the shipped bank: every index row has its body, every body passes the station gate, the rubric is intact', () => {
   const index = JSON.parse(fs.readFileSync(path.join(PUB, 'osce', 'index.json'), 'utf8'));
   const rows = osceStations(osceIndexRows(index), null);
-  assert.equal(rows.length, 26);
+  assert.equal(rows.length, fs.readdirSync(path.join(PUB, 'osce')).filter(f => f.endsWith('.json') && f !== 'index.json').length, 'one index row per station body');
+  assert.ok(rows.length >= 26);
   for (const r of rows) {
     const body = JSON.parse(fs.readFileSync(path.join(PUB, 'osce', `${r.id}.json`), 'utf8'));
     const full = osceBody(r, body);
@@ -151,10 +152,52 @@ test('Part 2: results with a label and a result, questions in order, anything ma
   assert.ok(!hasPart2({ part2: oscePart2(null) }));
 });
 
-import { qaSlides, qaHtml } from '../public/js/osce/session.mjs';
+import { qaSlides, qaHtml, p2State, examSlides, provHtml } from '../public/js/osce/session.mjs';
+import { ctx } from '../public/js/osce/state.mjs';
+import { osceAskLabel, osceP2Steps, osceVitals, osceFrom, osceFilter, osceRunPool, FROM } from '../public/js/osce/core.mjs';
+
+test('Part 2 steps: the results, then each question named the way the examiner asks it', () => {
+  assert.equal(osceAskLabel('Give me an ISBAR handover of this patient to the registrar.', 0), 'ISBAR handover');
+  assert.equal(osceAskLabel('What is the most likely diagnosis, and what else would you consider?', 1), 'Differentials');
+  assert.equal(osceAskLabel('How would you manage her in the next hour?', 2), 'Management');
+  assert.equal(osceAskLabel('What would you tell her before she goes home?', 3), 'Follow-up');
+  assert.equal(osceAskLabel('What do these results show?', 0), 'Interpretation');
+  assert.deepEqual(osceP2Steps({ ask: ['ISBAR?', 'Manage?'] }), [{ k: 'res', label: 'Results' }, { k: 'q', i: 0, label: 'ISBAR handover' }, { k: 'q', i: 1, label: 'Management' }]);
+  assert.deepEqual(osceP2Steps(null), [{ k: 'res', label: 'Results' }]);
+});
+
+test('vitals on the candidate\'s screen: one row per sign, named by the words before its number', () => {
+  assert.deepEqual(osceVitals('HR 112 regular, BP 86/52 mmHg, RR 32/min, SpO2 89% on room air at triage and 93% on 4 L/min oxygen via nasal prongs, Temp 38.9 °C, CRT 4 seconds, GCS 15'),
+    [['HR', '112 regular'], ['BP', '86/52 mmHg'], ['RR', '32/min'], ['SpO2', '89% on room air at triage and 93% on 4 L/min oxygen via nasal prongs'], ['Temp', '38.9 °C'], ['CRT', '4 seconds'], ['GCS', '15']]);
+  assert.deepEqual(osceVitals('BGL 5.4 mmol/L, weight 78 kg'), [['BGL', '5.4 mmol/L'], ['Weight', '78 kg']], 'a lower-case sign with a number starts a row too');
+  assert.deepEqual(osceVitals('SpO2 98% on room air, settling'), [['SpO2', '98% on room air, settling']]);
+  assert.deepEqual(osceVitals('Alert and talking'), [['', 'Alert and talking']]);
+  assert.deepEqual(osceVitals(''), []);
+  const sl = examSlides({ vitals: 'HR 108, BP 114/72', bedside: [{ test: 'BGL', find: '5.6 mmol/L' }], steps: [{ area: 'Abdomen', find: 'Guarding' }] });
+  assert.deepEqual(sl.map(x => x.label), ['Vital signs', 'Bedside tests']);
+  assert.match(sl[0].html, /<dt>HR<\/dt><dd>108<\/dd>/);
+  assert.match(sl[1].html, /<th>BGL<\/th><td>5.6 mmol\/L<\/td>/);
+  assert.doesNotMatch(sl.map(x => x.html).join(''), /Guarding/, 'the examination findings stay with the examiner');
+  assert.deepEqual(examSlides({ steps: [] }), []);
+});
+
+test('AMSA cases: tagged by their source, filterable, searchable, with a provenance note; never a category of their own', () => {
+  const amsa = { id: 'amsa-1', title: 'Chest pain 1', origin: 'ai', specialty: ['Cardiology'], source: { label: 'AMSA MedEd OSCEs', url: 'https://amsameded.org.au/resources/mod/resource/view.php?id=1', title: 'Chest Pain 1' } };
+  const ai = { id: 'ai-1', title: 'Chest pain 2', origin: 'ai', specialty: ['Cardiology'] }, own = { id: '3', title: 'Chest pain 3', specialty: ['Cardiology'] };
+  assert.equal(osceFrom(amsa), 'amsa');
+  assert.equal(osceFrom(ai), '');
+  assert.deepEqual(FROM, [['amsa', 'From AMSA MedEd']]);
+  assert.deepEqual(osceFilter([amsa, ai, own], '', { origin: ['amsa'] }).map(s => s.id), ['amsa-1']);
+  assert.deepEqual(osceFilter([amsa, ai, own], '', { origin: ['amsa', 'own'] }).map(s => s.id), ['amsa-1', '3']);
+  assert.deepEqual(osceFilter([amsa, ai, own], '', { origin: ['ai'] }).map(s => s.id), ['amsa-1', 'ai-1'], 'an AMSA case is still AI generated');
+  assert.deepEqual(osceFilter([amsa, ai, own], 'amsa').map(s => s.id), ['amsa-1'], 'a search for AMSA finds them');
+  assert.deepEqual(osceRunPool([amsa, ai, own], { specs: ['Cardiology'], origin: ['amsa'] }).map(s => s.id), ['amsa-1']);
+  assert.match(provHtml(amsa), /Case from the AMSA MedEd OSCE library: <a href="https:\/\/amsameded.org.au\/resources\/mod\/resource\/view.php\?id=1" target="_blank" rel="noopener noreferrer">Chest Pain 1<\/a>\./);
+  assert.equal(provHtml(ai), '');
+});
 
 test('Part 2 slides: each result, then each image labelled by its alt text; the examiner\'s caption never reaches the candidate', () => {
-  const st = { id: 's1', part2: oscePart2({ lead: 'Say this', handover: [{ label: 'Bloods', result: '<p>Hb 92</p>' }], ask: ['What do they show?', 'Management?'] }),
+  const st = { id: 's1', part2: oscePart2({ lead: 'Say this', handover: [{ label: 'Bloods', result: '<p>Hb 92</p>' }], ask: ['What do they show?', 'Management?'], expect: ['<p>Low Hb</p>', ''] }),
     media: { part2: [{ src: 'media/s1/cxr-1.png', alt: 'Frontal chest radiograph', caption: 'Chest X-ray: show when asked', credit: { author: 'A', license: 'CC BY 4.0', page: 'https://commons.wikimedia.org/x' } }] } };
   const slides = qaSlides(st);
   assert.deepEqual(slides.map(x => x.label), ['Bloods', 'Frontal chest radiograph']);
@@ -164,13 +207,30 @@ test('Part 2 slides: each result, then each image labelled by its alt text; the 
   assert.match(slides[1].html, /CC BY 4.0/, 'the licence credit stays with the image');
   const html = qaHtml(st);
   assert.match(html, /data-os="present" data-sid="s1" data-i="0"/);
-  assert.equal((html.match(/data-os="present"/g) || []).length, 3, 'Show results plus one pop-out per result');
-  assert.match(html, /<ol><li>What do they show\?<\/li><li>Management\?<\/li><\/ol>/);
+  assert.equal((html.match(/data-os="present"/g) || []).length, 3, 'Turn the screen plus one pop-out per result');
+  assert.deepEqual([...html.matchAll(/data-os="p2step" data-sid="s1" data-n="(\d)"(?: aria-current="step")?><b>[^<]*<\/b><span>([^<]+)/g)].map(m => m[2]), ['Results', 'Interpretation', 'Management'], 'a step for the results, then one per question');
+  assert.match(html, /data-n="0" aria-current="step"/, 'Part 2 opens on the results');
+  assert.doesNotMatch(html, /Expected answer/, 'the results step shows no question yet');
+  assert.match(html, /data-os="p2step" data-sid="s1" data-n="1"><span>Ask the first question<\/span>/);
+  p2State('s1').n = 2;   /* the examiner has moved on to the second question */
+  const q2 = qaHtml(st);
+  assert.match(q2, /Question 2 of 2 · Management<\/small><p class="os-qaq">“Management\?”<\/p>/);
+  assert.doesNotMatch(q2, /What do they show/, 'one question at a time');
+  assert.match(q2, /class="os-p2chip" data-os="present" data-sid="s1" data-i="0" data-q="1">/, 'a chip turns the screen to any result, with the question');
+  assert.equal((q2.match(/class="os-p2chip[ "]/g) || []).length, 2, 'a chip per result, the image included');
+  assert.match(q2, /data-n="1">.*<span>Back<\/span>/s, 'Back goes to the first question');
+  p2State('s1').seen.add(0);
+  assert.match(qaHtml(st), /class="os-p2chip seen" data-os="present" data-sid="s1" data-i="0"/, 'a result the candidate has seen carries a tick');
+  ctx.mem = { p2flat: true };
+  const flat = qaHtml(st);
+  assert.match(flat, /Examiner questions<\/h4><ol><li><p class="os-qaq">“What do they show\?”<\/p><div class="os-qaexp"><small>Expected answer<\/small><div class="os-html"><p>Low Hb<\/p><\/div><\/div><\/li><li><p class="os-qaq">“Management\?”<\/p><\/li><\/ol>/);
+  assert.ok(flat.indexOf('Examiner questions') > flat.indexOf('os-qares'), 'all on one page: the examiner questions come last, after the results');
+  assert.doesNotMatch(flat, /os-p2steps/);
+  ctx.mem = undefined;
   assert.equal(qaHtml({ id: 'x', part2: oscePart2(null) }), '');
 });
 
 import { contentTabs, tabBody, markingHtml } from '../public/js/osce/session.mjs';
-import { ctx } from '../public/js/osce/state.mjs';
 test('the Patient Script tab runs in the order of the clock: the history, the exam findings, then Part 2; the marking sheet keeps to the marking', () => {
   ctx.exam = { s3: { vitals: 'HR 118', steps: [{ area: 'Abdomen', find: 'Guarding' }] } };
   const st = { id: 's3', patient: '<p>HISTORY</p>', tasks: [], points: [], refs: [],
@@ -192,4 +252,30 @@ test('the Patient Script tab runs in the order of the clock: the history, the ex
   ctx.exam = {};
   assert.doesNotMatch(tabBody({ ...st, part2: oscePart2(null) }, null, 'Patient Script'), /os-jump/, 'one part: no jump bar');
   assert.deepEqual(contentTabs({ id: 'x', patient: '', part2: oscePart2(null) }), ['Instructions'], 'nothing for the examiner, no tab');
+});
+
+import { ddxHtml } from '../public/js/osce/session.mjs';
+import { osceDdx, DDX_TIERS } from '../public/js/osce/core.mjs';
+test('reasonable differentials: the leading diagnosis first, malformed rows dropped, shown in the script and at the differentials question', () => {
+  const raw = [{ dx: 'Mesenteric ischaemia', tier: 'dangerous', for: 'Ex-smoker', against: 'Normal lactate' }, { dx: '', tier: 'reasonable' }, { dx: 'Toxic megacolon', tier: 'weird' },
+    { dx: 'Adhesive small bowel obstruction', tier: 'likely', for: 'CT transition point', against: '' }, { dx: 'Large bowel obstruction', tier: 'reasonable', for: '', against: 'Collapsed colon' }];
+  const dd = osceDdx(raw);
+  assert.deepEqual(dd.map(d => d.tier), ['likely', 'reasonable', 'dangerous']);
+  assert.deepEqual(osceDdx('x'), []);
+  assert.equal(DDX_TIERS.dangerous, 'Must not miss');
+  const st = { id: 's9', ddx: dd, patient: '<p>HISTORY</p>', tasks: [], check: [], part2: oscePart2({ handover: [{ label: 'CT', result: '<p>SBO</p>' }], ask: ['Give an ISBAR handover.', 'What is your most likely diagnosis, and what else would you consider?', 'How would you manage her?'] }) };
+  const card = ddxHtml(st);
+  assert.match(card, /<strong id="os-ddx-h">Reasonable differentials<\/strong>/);
+  assert.match(card, /os-dd--likely"><div class="os-ddtop"><small class="os-ddtier">Most likely<\/small><strong>Adhesive small bowel obstruction<\/strong><\/div><p><b>For<\/b> CT transition point<\/p><\/li>/, 'an empty against line is left out');
+  assert.match(card, /Must not miss<\/small><strong>Mesenteric ischaemia/);
+  assert.equal(ddxHtml({ id: 'x' }), '');
+  const h = tabBody(st, null, 'Patient Script');
+  assert.match(h, /data-to="dd">Differentials<\/button>/, 'the jump bar has the differentials');
+  assert.ok(h.indexOf('class="os-ddx"') > h.indexOf('HISTORY') && h.indexOf('class="os-ddx"') < h.indexOf('class="os-part2"'), 'after the history and exam, before Part 2');
+  p2State('s9').n = 2;
+  const q = qaHtml(st);
+  assert.match(q, /Question 2 of 3 · Differentials<\/small><p class="os-qaq">[^<]*<\/p><div class="os-ddx os-ddx--compact">/, 'the differentials question carries the list');
+  assert.doesNotMatch(q, /<b>For<\/b>/, 'compact: names and tiers only');
+  p2State('s9').n = 3;
+  assert.doesNotMatch(qaHtml(st), /os-ddx/, 'not on the management question');
 });

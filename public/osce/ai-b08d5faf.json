@@ -387,17 +387,22 @@
    }
   ],
   "ask": [
-   "What do these reports show, and what can NIPT not tell Hannah?",
-   "Why might the result be high chance when the baby does not have trisomy 16, and how would you explain this to her?",
-   "What is your management approach? Hannah asks why she cannot just have a CVS now, since it is earlier.",
-   "Hannah asks: \"My sister had the same test last year and it came back as no result. Her doctor said not to worry. Is that right?\" What do you tell her?",
-   "What follow-up and safety netting would you arrange?"
+   "You are now calling the obstetric registrar. Please give an ISBAR handover of Hannah Doyle, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of Hannah now, here in the clinic.",
+   "Before Hannah goes home, what would you tell her and what follow-up would you arrange?"
   ],
-  "patient": "<p><strong>In Part 2, if the candidate explains the result to you:</strong></p><ul><li>If they explain that it is a screening test, you are relieved but still scared. If they do not explain the limits of the test, ask: \"So does my baby definitely have this?\"</li><li>Ask: \"Could the test be wrong? How could that happen?\"</li><li>Ask: \"Why can't I just have a CVS now, since it is earlier? My friend had one.\" If they recommend amniocentesis, ask about the risk of miscarriage and the timing.</li><li>You must ask this before the end of the station: \"My sister had the same test last year and it came back as 'no result'. Her doctor said not to worry and that it probably meant everything was fine. Is that right?\"</li><li>Ask: \"What happens if the follow-up test shows a problem?\"</li><li>If the candidate gives a directive opinion about continuing or ending the pregnancy, say: \"I'm not sure I can decide that today.\"</li></ul>"
+  "patient": "<p><strong>In Part 2, if the candidate explains the result to you:</strong></p><ul><li>If they explain that it is a screening test, you are relieved but still scared. If they do not explain the limits of the test, ask: \"So does my baby definitely have this?\"</li><li>Ask: \"Could the test be wrong? How could that happen?\"</li><li>Ask: \"Why can't I just have a CVS now, since it is earlier? My friend had one.\" If they recommend amniocentesis, ask about the risk of miscarriage and the timing.</li><li>You must ask this before the end of the station: \"My sister had the same test last year and it came back as 'no result'. Her doctor said not to worry and that it probably meant everything was fine. Is that right?\"</li><li>Ask: \"What happens if the follow-up test shows a problem?\"</li><li>If the candidate gives a directive opinion about continuing or ending the pregnancy, say: \"I'm not sure I can decide that today.\"</li></ul>",
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, junior doctor in the early pregnancy and fetal medicine clinic; Hannah Doyle, 36, G2P1, 12 weeks 4 days.</li><li><strong>Situation:</strong> GP referral with a high-chance NIPT result for trisomy 16; she needs fetal medicine review and genetic counselling.</li><li><strong>Background:</strong> previous pregnancy uncomplicated, term vaginal birth, no miscarriages; NIPT taken at 11 weeks because of her age; no bleeding, pain or fluid loss; well, fetal heart about 155 bpm.</li><li><strong>Assessment:</strong> NIPT valid (fetal fraction 9%), low chance for T21, T18, T13 and sex chromosome conditions, high chance of T16, a rare autosomal trisomy; this is a screening result, not a diagnosis, and confined placental mosaicism is the likeliest cause. Scan: single live fetus, dates confirmed, NT 1.6 mm, no structural abnormality, no second sac. Bloods: Hb 128 normal; A RhD positive, antibodies negative; BBVs negative; rubella immune.</li><li><strong>Recommendation:</strong> fetal medicine and genetic counselling review within days; offer amniocentesis from 15 weeks; detailed anatomy scan and growth scans. She is very anxious.</li></ul>",
+   "<p><strong>Most likely: high-chance NIPT for trisomy 16 caused by confined placental mosaicism (false positive for the fetus).</strong> Cell-free DNA comes mostly from the placenta; full trisomy 16 almost always ends in early miscarriage, but this pregnancy is ongoing with a normal 12-week scan (NT 1.6 mm, no structural abnormality).</p><ul><li><strong>True fetal mosaic trisomy 16:</strong> cannot be excluded by a normal 12-week scan; can cause growth restriction or heart defects; only amniocentesis separates it from CPM.</li><li><strong>Full fetal trisomy 16:</strong> very unlikely, given the live, structurally normal fetus at 12 weeks.</li><li><strong>Vanishing twin:</strong> less likely because no second sac was seen, though an early loss can leave no trace.</li><li><strong>Maternal chromosomal change:</strong> possible; no family history; genetic counselling advises on testing.</li></ul>",
+   "<ol><li><strong>Counsel without directing:</strong> plain language, explain that NIPT is a screening test, set out the options neutrally, make no recommendation on continuing or ending the pregnancy, and give her time.</li><li><strong>Refer</strong> urgently for genetic counselling and fetal medicine review.</li><li><strong>Offer diagnostic testing: amniocentesis from about 15 weeks</strong> (a 2 to 3 week wait). Prefer it to CVS because CVS samples the placenta, which probably carries the trisomy, so the result may be falsely positive or mosaic and need amniocentesis anyway. Miscarriage risk well under 1 in 100; acknowledge her friend's experience.</li><li><strong>No anti-D needed</strong> (RhD positive); BBV screen negative.</li><li><strong>Imaging:</strong> detailed anatomy scan at 18 to 20 weeks, then serial growth scans, because placental trisomy 16 can cause growth restriction.</li><li>No decisions until the diagnostic results are back; offer psychological support; give written information; write to her GP.</li></ol>",
+   "<ul><li><strong>Seek urgent care</strong> at the early pregnancy unit or ED for vaginal bleeding, abdominal pain or cramping, fluid leaking from the vagina, or fever, now or in the days after amniocentesis.</li><li><strong>Call 000</strong> for heavy bleeding, severe pain or collapse.</li><li><strong>Follow-up:</strong> review with the genetic counsellor or fetal medicine team within a few days, with a direct contact number; amniocentesis booked from about 15 weeks; results and decisions discussed together at a planned review; detailed anatomy scan at 18 to 20 weeks, then growth scans; GP kept informed.</li><li><strong>Support:</strong> offer psychological or perinatal mental health support and written information; check that Sam or another support person is with her today.</li><li>Check she understands, using teach-back.</li></ul>"
+  ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
+  "at": "2026-10-23T06:53:12Z",
+  "by": "rewrite-part2-asks.mjs"
  },
  "demo": {
   "age": 36,
@@ -406,5 +411,37 @@
   "setting": "clinic",
   "weight": 64,
   "pregnant": true
- }
+ },
+ "ddx": [
+  {
+   "dx": "Confined placental mosaicism for trisomy 16 (high-chance NIPT that is a false positive for the fetus)",
+   "tier": "likely",
+   "for": "The NIPT was valid with a 9% fetal fraction and showed high chance for trisomy 16 only, while the pregnancy is ongoing and the 12-week scan was normal (NT 1.6 mm, no structural abnormality).",
+   "against": "There is no diagnostic test yet, and a normal 12-week scan cannot rule out trisomic cells in the fetus."
+  },
+  {
+   "dx": "True fetal mosaic trisomy 16",
+   "tier": "dangerous",
+   "for": "She has a valid high-chance trisomy 16 result, and mosaic trisomy 16 can still look normal on a 12-week scan.",
+   "against": "The 12-week scan was structurally normal with a normal nuchal translucency and nasal bone present."
+  },
+  {
+   "dx": "Full (non-mosaic) fetal trisomy 16",
+   "tier": "reasonable",
+   "for": "Her NIPT showed a high chance of trisomy 16 with an adequate fetal fraction.",
+   "against": "The fetus is alive and structurally normal at 12 weeks 1 day, with a heart rate of 158 bpm and no bleeding or pain, whereas full trisomy 16 almost always ends in early miscarriage."
+  },
+  {
+   "dx": "Vanishing twin as the source of the trisomic cell-free DNA",
+   "tier": "reasonable",
+   "for": "An early twin loss can leave no trace on a scan and still contribute cell-free DNA to her blood.",
+   "against": "The scan showed a single gestational sac with no second sac, she conceived naturally, and she has had no bleeding in this pregnancy."
+  },
+  {
+   "dx": "Maternal chromosomal change (maternal mosaicism or copy number change involving chromosome 16)",
+   "tier": "reasonable",
+   "for": "NIPT analyses maternal plasma, which includes the mother's own cell-free DNA, so a change in Hannah herself could give this result.",
+   "against": "Neither family has a known chromosomal or genetic condition, she has no medical history, and her previous pregnancy was uncomplicated with a healthy child."
+  }
+ ]
 }

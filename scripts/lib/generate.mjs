@@ -28,11 +28,15 @@ const LAB_ROW = obj({ t: str, v: strs, u: str, r: str, f: { type: 'array', items
 const LAB_PANEL = obj({ title: str, cols: strs, rows: { type: 'array', items: LAB_ROW } });
 const RESULT = obj({ label: str, kind: { type: 'string', enum: Object.keys(KINDS) }, result: str, model: str, obs: obj({ rows: { type: 'array', items: OBS_ROW } }), labs: { type: 'array', items: LAB_PANEL } });
 const ITEM = obj({ id: { type: 'integer' }, t: { type: 'string', enum: ['heading', 'checkbox', 'info'] }, x: str, crit: { type: 'boolean' }, d: str, kids: { type: 'array', items: KID } });
+/* the reasonable differentials for this case: the most likely diagnosis, the others a candidate may fairly name, and the
+   ones that must not be missed, each with this patient's features for and against it */
+export const DDX_SCHEMA = { type: 'array', items: obj({ dx: str, tier: { type: 'string', enum: ['likely', 'reasonable', 'dangerous'] }, for: str, against: str }) };
+export const DDX_RULES = `ddx is the reasonable differentials for this case, 3 to 6 of them, the examiner's reference for crediting a candidate who names or explores them in the history or in Part 2: exactly one tier likely (the leading diagnosis), then each other diagnosis a well-prepared final-year student could fairly offer as tier reasonable, and each one that must not be missed or must be excluded as tier dangerous. dx is the diagnosis as a clinician names it ("Small bowel obstruction from adhesions", not "SBO"). for and against are this patient's own features (history, examination, results), one short plain-text sentence each, "" when there are none; never a textbook list. The same diagnoses as the expected answer to the differentials question.`;
 export const STATION_SCHEMA = obj({
   title: str, desc: str, focus: str, specialty: strs, type: { type: 'array', items: { type: 'string', enum: TYPES } }, complexity: { type: 'string', enum: CX },
   context: strs, presentation: strs, diagnosis: strs, stem: str, tasks: strs, patient: str, check: { type: 'array', items: ITEM },
-  demo: DEMO, part2: obj({ lead: str, handover: { type: 'array', items: RESULT }, ask: strs, patient: str }),
-  guide: str, explain: str, points: strs, refs: strs, imaging: { type: 'array', items: REQUEST_SCHEMA },
+  demo: DEMO, part2: obj({ lead: str, handover: { type: 'array', items: RESULT }, ask: strs, expect: strs, patient: str }),
+  ddx: DDX_SCHEMA, guide: str, explain: str, points: strs, refs: strs, imaging: { type: 'array', items: REQUEST_SCHEMA },
 });
 export const REVIEW_SCHEMA = obj({ pass: { type: 'boolean' }, issues: { type: 'array', items: obj({ where: str, problem: str, fix: str, severity: { type: 'string', enum: ['blocker', 'minor'] } }) } });
 export const EXAM_SCHEMA = obj({ vitals: str, general: str, steps: { type: 'array', items: obj({ area: str, do: str, find: str }) }, bedside: { type: 'array', items: obj({ test: str, find: str }) }, key: str });
@@ -52,7 +56,14 @@ Write one station on the topic you are given, at the depth, tone and checklist g
   - labs: bloods, gases, serology, urine chemistry and any other lab panel, printed the way a pathology system prints them: panels of {title, cols, rows}; cols is [] for one result column, or the column names when there are more ("Artery", "Vein"; "Today 08:40", "On arrival"); each row {t: the test, v: its value (one per column), u: units, r: the reference range for this patient's age, sex and pregnancy ("115-165", "<5", ">60", "Not detected"), f: H or L when outside the range (HH, LL critical; A for an abnormal qualitative result; "" inside it), n: a short lab note ("baseline 76")}. A test reported two ways (a percentage and a count) takes a second row with t "". Every flag must agree with its own value and range. For any other kind, labs is [].
   - result: what the candidate is handed besides the lab panels, complete enough to interpret on its own. For a lab result, only the lab's comments or the sample details (or ""). An ECG as a report: rate, rhythm, axis, PR, QRS, QTc, ST and T changes, and the comparison with any old ECG. An X-ray, CT or ultrasound as a formal report: the examination and view, the clinical details, the findings by structure, and a conclusion; a CT says whether contrast was given. Observations: a one-line note ("on 2 L/min nasal prongs since 14:10") with the numbers in obs.
   - model: for the examiner only, never shown to the candidate: what a good candidate says about this result, in order (a systematic read, then what it means for this patient and what it changes). For observations, name the chart zone of each abnormal value and the response it calls for (clinical review, rapid response).
-  - obs: for kind obs, one row per time the observations were taken (2 to 6 rows, times as HH:MM, a realistic interval), the first matching the Part 1 vitals; the later rows show what happened (better after treatment, or worse). Each value sits clearly inside one zone of the patient's chart, never on a line between two. dev is the oxygen device (${Object.entries(DEVICES).map(([k, v]) => `${k} ${v}`).join(', ')}) and o2 its flow in L/min; init are the nurse's initials; note is an action taken at that time ("Rapid response called", "Salbutamol given"). null where not measured. For any other kind, rows is []. ask is 3 to 5 examiner questions in order: what the results show, the most likely diagnosis and what else to consider, the management approach (immediate, definitive, disposition and who to involve), and how the candidate would safety-net and follow up.
+  - obs: for kind obs, one row per time the observations were taken (2 to 6 rows, times as HH:MM, a realistic interval), the first matching the Part 1 vitals; the later rows show what happened (better after treatment, or worse). Each value sits clearly inside one zone of the patient's chart, never on a line between two. dev is the oxygen device (${Object.entries(DEVICES).map(([k, v]) => `${k} ${v}`).join(', ')}) and o2 its flow in L/min; init are the nurse's initials; note is an action taken at that time ("Rapid response called", "Salbutamol given"). null where not measured. For any other kind, rows is []. ask is 3 or 4 examiner questions (never fold one into another: the diagnosis is its own question, not part of the ISBAR), worded exactly as an Australian OSCE examiner says them aloud to the candidate (second person, one clear task each, no hints, no answers, never naming the diagnosis), in this order:
+    1. an ISBAR handover that carries the interpretation of the results ("You are now calling the medical registrar. Please give an ISBAR handover of [patient name], including your interpretation of these results.");
+    2. the most likely diagnosis and the differentials ("What is your most likely diagnosis, and what else would you consider? Justify your answer.");
+    3. management in this setting ("Outline your management of [name] now, here in the emergency department." or "...here in general practice."): immediate, definitive, disposition and who to involve;
+    4. if the case needs it, safety netting and follow-up ("Before [name] goes home, what would you tell them and what follow-up would you arrange?"), or a focused question the source case asks (an explanation to the patient, a complication, a dose).
+  Every question is always asked (never 'if time remains'), so every Part 2 checklist item is earned from an answer to one of them; with 4 questions, about 75 seconds each; Part 2 is 5 minutes, about 90 seconds a question with 3: the ISBAR is a phone handover of 6 to 8 sentences, the differentials 3 or 4, management the key steps; keep the Part 2 checklist items to what those answers contain.
+  ${DDX_RULES}
+  expect is the examiner's expected answer to each question, same order and same number (HTML, a short list of what earns the marks, under about 120 words each): for ISBAR the five parts filled in for this patient (Identify, Situation, Background, Assessment with each result interpreted, Recommendation); for the diagnosis the leading diagnosis with its supporting features, then each differential with the feature for or against it; for management the steps in order with doses and the guideline's thresholds; for safety netting the red flags in plain words and when and where to return.
 - check: the marking checklist, under these headings in this order: Professionalism, History, Examination, Interpretation, Management, Safety netting (communication items sit under Professionalism or Management). Items are specific, observable and markable from what the candidate says or does ("States that PERC cannot be used because ..." not "Knows PERC"). Examination items match the examination this case needs. Interpretation has an item for each result that matters. Safety netting has at least 2 items: the specific red flags in plain words, when and where to come back (000, ED, GP), and the follow-up arranged. Use kids for a multi-part item. Mark crit true on the items a safe junior doctor must not miss (usually a third to a half). Ids are integers in order; kid ids start at 1 within their item. crit false, d "" and kids [] where they do not apply.
 - guide: a short note for the examiner on running and marking the station ("" if not needed).
 - explain: the teaching after the station: the diagnosis and the reasoning, the differentials that matter, the interpretation of the results, management and safety netting as the cited guideline sets them out.
@@ -70,6 +81,7 @@ Check, item by item:
 3. Fairness: Part 1 items can be earned in ${PART1_MIN} minutes and Part 2 items in ${PART2_MIN}, from what the candidate says or does; the script and the Part 2 results give the candidate what the checklist expects them to find. Safety-netting items name specific red flags. Critical items are the safety-critical ones.
 4. Imaging requests show a finding that the case really has and that is visible on that kind of image.
 5. Each Part 2 result is complete enough to interpret (bloods with units and reference ranges, an ECG with its measurements, an imaging report with findings and a conclusion), its model interpretation is right and complete, and the observation rows sit in the zones the model interpretation and the checklist say they do.
+Part 2 always runs as the house format: an ISBAR handover that carries the interpretation of the results, then the most likely diagnosis and differentials, then management (then, optionally, safety netting or a focused question), about 90 seconds each. Do not call this order unfair or too long in itself; judge whether each expected answer and the Part 2 checklist items are sized to fit it, and give the exact trim if they are not. An imaging or ECG report keeps its formal conclusion line as the format requires (that is not a giveaway: the candidate still has to interpret it, justify the diagnosis and weigh the differentials); only a score or calculation the candidate is asked to work out (Wells, CURB-65, an anion gap) must not be printed on a result.
 Report each problem with where it is, what is wrong and the exact fix. severity is blocker for anything clinically wrong, inconsistent, unfair or unsafe, minor for wording and polish. pass is true only if there is no blocker.`;
 
 export const EXAM_SYSTEM = `You write the examination findings for Part 1 of an OSCE station, used in an "Exam mode" where the candidate says what they would examine and then sees what they find. The findings must fit the station exactly (the same patient, observations, side and severity as the patient script). vitals is one line of observations with units. general is the general inspection. steps are 6 to 10 examination areas in a sensible order, each with what the candidate does and what they find (normal findings stated as normal). bedside are the bedside tests with results (urinalysis, BGL, ECG, bladder scan, ...). key is two or three sentences on the findings that matter and why. Australian spelling. Plain text, no HTML.`;
@@ -90,7 +102,7 @@ export function exemplars(bank, { acute, specialty = [] }, n = 3) {
 export function writerPrompt(topic, opts, ex, stats) {
   const kind = opts.acute ? 'acute' : 'clinic', b = stats[kind];
   return `Topic: ${topic}
-Kind: ${opts.acute ? 'an acute station (simulated ward or ED, a nurse assistant, observations that change with management)' : 'a clinic or ward station (history, explanation, counselling, management planning)'}${opts.specialty?.length ? `\nSpecialty: ${opts.specialty.join(', ')}` : ''}${opts.types?.length ? `\nStation types: ${opts.types.join(', ')}` : ''}${opts.notes ? `\nAlso cover: ${opts.notes}` : ''}
+Kind: ${opts.acute ? 'an acute station (simulated ward or ED, a nurse assistant, observations that change with management)' : 'a clinic or ward station (history, explanation, counselling, management planning)'}${opts.specialty?.length ? `\nSpecialty: ${opts.specialty.join(', ')}` : ''}${opts.types?.length ? `\nStation types: ${opts.types.join(', ')}` : ''}${opts.notes ? `\nAlso cover: ${opts.notes}` : ''}${opts.source ? `\n\n${opts.source}\n` : ''}
 Checklist size: ${LEAVES.min} to ${LEAVES.max} markable items counting kids, across the six sections (the bank's median for this kind is ${b.median}); every item earns its place, none is filler.
 
 Example stations from the bank (JSON), for depth and house style only; do not copy their cases:
@@ -98,11 +110,16 @@ ${ex.map((s, i) => `<example_${i + 1}>\n${JSON.stringify(s)}\n</example_${i + 1}
 }
 
 /* the model's checklist into the bank's shape: headings carry only id/t/x, false crit and empty d/kids are dropped */
+/* specialty names the model reaches for that the bank spells another way */
+const SPECIALTY_ALIASES = { Otolaryngology: 'Otorhinolaryngology', ENT: 'Otorhinolaryngology', 'Ear, Nose and Throat': 'Otorhinolaryngology', 'Ear, Nose and Throat Surgery': 'Otorhinolaryngology' };
 export function normalize(draft) {
+  if (Array.isArray(draft.specialty)) draft = { ...draft, specialty: [...new Set(draft.specialty.map(s => SPECIALTY_ALIASES[s] || s))] };
+  /* a bare < or > before a number ("SpO2 <92%") is not HTML: say it in words */
+  const words = t => (typeof t === 'string' ? t.replace(/<\s*(?=[\d.])/g, 'below ').replace(/>\s*(?=[\d.])/g, 'above ') : t);
   const item = i => {
-    if (i.t === 'heading' || i.t === 'info') return { id: i.id, t: i.t, x: i.x };
-    const kids = (i.kids || []).filter(k => String(k.x || '').trim()).map(k => ({ id: k.id, t: 'checkbox', x: k.x, ...(k.crit ? { crit: true } : {}), ...(k.d ? { d: k.d } : {}) }));
-    return { id: i.id, t: 'checkbox', x: i.x, ...(i.crit ? { crit: true } : {}), ...(i.d ? { d: i.d } : {}), ...(kids.length ? { kids } : {}) };
+    if (i.t === 'heading' || i.t === 'info') return { id: i.id, t: i.t, x: words(i.x) };
+    const kids = (i.kids || []).filter(k => String(k.x || '').trim()).map(k => ({ id: k.id, t: 'checkbox', x: words(k.x), ...(k.crit ? { crit: true } : {}), ...(k.d ? { d: words(k.d) } : {}) }));
+    return { id: i.id, t: 'checkbox', x: words(i.x), ...(i.crit ? { crit: true } : {}), ...(i.d ? { d: words(i.d) } : {}), ...(kids.length ? { kids } : {}) };
   };
   const out = { ...draft, check: (draft.check || []).map(item) };
   if (draft.demo) { const d = { ...draft.demo }; if (!(d.weight > 0)) delete d.weight; if (!d.pregnant) delete d.pregnant; if (!d.postpartum) delete d.postpartum; out.demo = d; }
@@ -114,13 +131,14 @@ export function normalize(draft) {
     if (h.kind === 'obs' && h.obs?.rows?.length) x.obs = { rows: h.obs.rows.map(r => Object.fromEntries(Object.entries(r).filter(([, v]) => v != null && v !== ''))) };
     return x;
   }) };
-  if (out.part2 && !out.part2.patient) delete out.part2.patient;   /* nothing for the patient to say in Part 2 */
+  if (out.part2 && !out.part2.patient) delete out.part2.patient;
+  if (out.part2 && !(out.part2.expect || []).some(Boolean)) delete out.part2.expect;   /* nothing for the patient to say in Part 2 */
   if (!out.guide) out.guide = '';
   return out;
 }
 export const stationId = (title, now) => `ai-${crypto.createHash('sha1').update(`${title}\n${now}`).digest('hex').slice(0, 8)}`;
 
-const reviewText = (st, notes) => `${notes.length ? `Check these in particular:\n${notes.map(n => `- ${n}`).join('\n')}\n\n` : ''}The station (JSON):\n${JSON.stringify(st)}`;
+export const reviewText = (st, notes) => `${notes.length ? `Check these in particular:\n${notes.map(n => `- ${n}`).join('\n')}\n\n` : ''}The station (JSON):\n${JSON.stringify(st)}`;
 const reviseText = (st, gates, issues) => `Revise this station. Fix every problem below and change nothing else that is right. Return the whole station.
 ${gates.length ? `\nProblems found in code (each must be fixed):\n${gates.map(g => `- ${g}`).join('\n')}` : ''}
 ${issues.length ? `\nThe examiner's review:\n${issues.map(i => `- [${i.severity}] ${i.where}: ${i.problem} Fix: ${i.fix}`).join('\n')}` : ''}
@@ -136,7 +154,8 @@ export async function writeStation(topic, opts, { bank, ask, now = new Date().to
   let { value: draft, model } = await ask({ system: WRITER_SYSTEM, content: writerPrompt(topic, opts, ex, stats), schema: STATION_SCHEMA, effort: 'high', label: 'draft' });
   const id = opts.id || stationId(draft.title, now), rounds = [], models = { writer: model };
   let st = { id, ...normalize(draft), origin: 'ai' };
-  for (let round = 0; round < 2; round++) {
+  const ROUNDS = Math.max(2, opts.rounds || 2);   /* the examiner passes: the draft, then revisions (an import may ask for more) */
+  for (let round = 0; round < ROUNDS; round++) {
     const gates = [...shapeProblems(st), ...qualityProblems(st, stats)];
     const { value: review, model: rm } = await ask({ system: EXAMINER_SYSTEM, content: reviewText(st, reviewNotes(st)), schema: REVIEW_SCHEMA, effort: 'high', label: `review ${round + 1}` });
     models.examiner = rm;
@@ -147,7 +166,7 @@ export async function writeStation(topic, opts, { bank, ask, now = new Date().to
       const { value: exam } = await ask({ system: EXAM_SYSTEM, content: `The station (JSON):\n${JSON.stringify(st)}`, schema: EXAM_SCHEMA, effort: 'medium', label: 'exam findings' });
       return { ok: true, station: st, exam, rounds, models };
     }
-    if (round === 1) break;
+    if (round === ROUNDS - 1) break;
     const { value: fixed } = await ask({ system: WRITER_SYSTEM, content: reviseText(st, gates, review.issues || []), schema: STATION_SCHEMA, effort: 'high', label: 'revise' });
     st = { id, ...normalize(fixed), origin: 'ai' };
   }

@@ -9,7 +9,7 @@ import { wide, fmtDate } from '../study-kit/util.mjs';
 import { safeHtml } from '../study-kit/safe.mjs';
 import { figureHtml } from '../study-kit/media.mjs';
 import { mnemonicsFor } from './mnemonics.mjs';
-import { KINDS, HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceP2Start, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
+import { KINDS, HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceP2Start, osceP2Steps, DDX_TIERS, osceAskLabel, osceVitals, osceFrom, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, curAttempt, findAttempt, now, body, NOLOAD, bell, notify, confirmDlg, openDialog, closeDialog, openPop, closePop, tagHtml, srcTag, ago, aiEnabled, markerCfg, examOf, nameOf, whoBadge, roleLine, openPresenter, topDialog } from './state.mjs';
 import { markDirect, markPromptText, parseReply } from './marker.mjs';
 import { candidateLink } from './candidate.mjs';
@@ -170,6 +170,8 @@ export function placePill(root, animate) {
     if (!animate) { void pill.offsetWidth; pill.style.transition = ''; }
   });
 }
+/* where an imported case came from: the AMSA MedEd case it was converted from, and what AI added to it */
+export const provHtml = st => (osceFrom(st) === 'amsa' ? `<p class="os-prov"><span class="os-tag os-tag--amsa">AMSA</span><span>Case from the AMSA MedEd OSCE library${st.source?.title ? `: ${st.source.url ? `<a href="${esc(st.source.url)}" target="_blank" rel="noopener noreferrer">${esc(st.source.title)}</a>` : esc(st.source.title)}` : ''}. AI turned it into this station and wrote what the source left out: the patient's words, the exam findings, the results and the examiner's questions.</span></p>` : '');
 const imgs = list => (list || []).map(figureHtml).join('');   /* each image with its caption and credit (study-kit/media.mjs) */
 export function tabBody(st, a, t, o = {}) {
   if (t === 'Patient Script') return scriptHtml(st, a, o);
@@ -178,7 +180,7 @@ export function tabBody(st, a, t, o = {}) {
     return `<div class="os-sheet" data-hl="Instructions"><h2>Instructions to Candidate</h2><div class="os-html">${safeHtml(st.stem)}</div>${imgs(st.media?.stem)}
       ${formatHtml()}
       ${st.tasks.length ? `<h3>Tasks</h3><ol class="os-tasks" role="list">${st.tasks.map((x, i) => `<li><span class="os-tn">${i + 1}</span><div class="os-html">${safeHtml(x)}</div></li>`).join('')}</ol>` : ''}
-      </div>${a && o.editable ? toolbar() : ''}`;
+      </div>${provHtml(st)}${a && o.editable ? toolbar() : ''}`;
   }
   if (t === 'Marking') return `<div class="os-sheet">${markingHtml(st, a, !!o.editable)}</div>`;
   return attemptsHtml(st);
@@ -188,15 +190,25 @@ export function tabBody(st, a, t, o = {}) {
    highlight never stores the findings or the results */
 function scriptHtml(st, a, o) {
   const t = 'Patient Script', script = a?.hl?.[t] || (st.patient || st.media?.patientScript?.length ? `<h2>Patient Script</h2><div class="os-html">${safeHtml(st.patient)}</div>${imgs(st.media?.patientScript)}` : '');
-  const parts = [script && ['hx', 'History'], examOf(st) && ['ex', 'Exam'], hasPart2(st) && ['p2', 'Part 2']].filter(Boolean);
-  return `${parts.length > 1 ? `<nav class="os-jump" aria-label="Jump to">${parts.map(([k, l], i) => `<button data-os="jump" data-to="${k}"${i ? '' : ' aria-current="true"'}>${l}</button>`).join('')}</nav>` : ''}${script ? `<div class="os-sheet" data-hl="${t}">${script}</div>` : ''}${examHtml(examOf(st))}${qaHtml(st)}${a && o.editable ? toolbar() : ''}`;
+  const parts = [script && ['hx', 'History'], examOf(st) && ['ex', 'Exam'], st.ddx?.length && ['dd', 'Differentials'], hasPart2(st) && ['p2', 'Part 2']].filter(Boolean);
+  return `${parts.length > 1 ? `<nav class="os-jump" aria-label="Jump to">${parts.map(([k, l], i) => `<button data-os="jump" data-to="${k}"${i ? '' : ' aria-current="true"'}>${l}</button>`).join('')}</nav>` : ''}${script ? `<div class="os-sheet" data-hl="${t}">${script}</div>` : ''}${examHtml(examOf(st), st.id)}${ddxHtml(st)}${qaHtml(st)}${a && o.editable ? toolbar() : ''}`;
+}
+/* the reasonable differentials, in the script where the examiner needs them: in the history (credit the questions that
+   rule each one in or out) and at the differentials question (credit each one named with a reason). The leading diagnosis
+   first, then the others a candidate may fairly offer, then the must-not-miss ones, each with this patient's features */
+export function ddxHtml(st, o = {}) {
+  const dd = st.ddx || []; if (!dd.length) return '';
+  const row = d => `<li class="os-dd os-dd--${d.tier}"><div class="os-ddtop"><small class="os-ddtier">${DDX_TIERS[d.tier]}</small><strong>${esc(d.dx)}</strong></div>${o.compact ? '' : `${d.for ? `<p><b>For</b> ${esc(d.for)}</p>` : ''}${d.against ? `<p><b>Against</b> ${esc(d.against)}</p>` : ''}`}</li>`;
+  return o.compact
+    ? `<div class="os-ddx os-ddx--compact"><small>Reasonable differentials: credit any named with a reason</small><ul role="list">${dd.map(row).join('')}</ul></div>`
+    : `<section class="os-ddx" aria-labelledby="os-ddx-h"><header class="os-ddhead"><strong id="os-ddx-h">Reasonable differentials</strong><small>Credit the candidate for exploring these in the history and for naming them, with a reason, in Part 2</small></header><ul role="list">${dd.map(row).join('')}</ul></section>`;
 }
 /* the jump bar: a tap scrolls to its part; scrolling lights the part in view */
-const PARTS = { hx: '.os-sheet[data-hl]', ex: '.os-exam', p2: '.os-part2' };
+const PARTS = { hx: '.os-sheet[data-hl]', ex: '.os-exam', dd: '.os-ddx', p2: '.os-part2' };
 export function jumpTo(b) { b.closest('.os-pbody')?.querySelector(PARTS[b.dataset.to])?.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
 export function syncJump(sc) {
   const nav = sc?.querySelector?.('.os-jump'); if (!nav) return;
-  const line = nav.getBoundingClientRect().bottom + 24, btns = [...nav.querySelectorAll('[data-os="jump"]')];
+  const line = nav.getBoundingClientRect().bottom + 40, btns = [...nav.querySelectorAll('[data-os="jump"]')];
   const on = btns.filter(x => { const e = sc.querySelector(PARTS[x.dataset.to]); return e && e.getBoundingClientRect().top <= line; }).pop() || btns[0];
   btns.forEach(x => (x === on ? x.setAttribute('aria-current', 'true') : x.removeAttribute('aria-current')));
 }
@@ -251,32 +263,72 @@ export function part2Html(st) {
   const slides = qaSlides(st);
   return `<div class="os-sheet os-p2"><h2>Results from the examiner</h2><ul class="os-p2list" role="list">${slides.map(x => `<li><strong>${esc(x.label)}</strong>${x.html}</li>`).join('')}</ul></div>`;
 }
-/* Part 2 under the patient script: what to say, Show results (full screen, so the candidate never sees the script or
-   the rubric), the questions to ask, then each result with its own pop-out and its model answer */
+/* Part 2 under the patient script, run the way a pair runs it with one laptop (2026-10-23, founder: "show the results,
+   then move to the next question, then order a new test and show the new result"). The examiner steps through it:
+   Results (what to say, Turn the screen, each result with its model answer), then each question in the order it is
+   asked (ISBAR handover, differentials, management, follow-up), one at a time, with its expected answer and a chip per
+   result to turn the screen to when the candidate asks for it again or orders it. A chip once shown carries a tick.
+   "All on one page" lays the whole of Part 2 out at once, for reading a station before running it */
+const p2 = new Map();   /* per station and attempt: { n: the step on screen, seen: the results the candidate has seen } */
+export const p2State = sid => p2s(sid);
+const p2s = sid => { const k = `${sid}:${ctx.view === 'session' ? sess().aid || '' : ''}`; if (!p2.has(k)) p2.set(k, { n: 0, seen: new Set() }); return p2.get(k); };
 export function qaHtml(st) {
   if (!hasPart2(st)) return '';
-  const p = st.part2, slides = qaSlides(st), m = ctx.mem?.timing?.mx, sid = esc(st.id);
-  return `<section class="os-part2" aria-labelledby="os-qa-h">
-    <header class="os-qahead"><span class="os-bigic">${I.max}</span><span class="os-handt"><strong id="os-qa-h">Part 2 · questions and results</strong>
-      <small>Interpretation, management and safety netting${m ? ` · ${m} minutes` : ''}</small></span></header>
-    ${p.lead ? `<div class="os-p2lead"><small>Say</small><p>“${esc(p.lead)}”</p></div>` : ''}
-    ${slides.length ? `<button class="os-btn os-btn--lg os-primary os-qashow" data-os="present" data-sid="${sid}" data-i="0">${I.max}<span>Show results to the candidate</span></button>` : ''}
-    ${p.ask.length ? `<div class="os-qaask"><h4>Ask</h4><ol>${p.ask.map(q => `<li>${esc(q)}</li>`).join('')}</ol></div>` : ''}
+  const p = st.part2, slides = qaSlides(st), m = ctx.mem?.timing?.mx, sid = esc(st.id), steps = osceP2Steps(p), flat = !!ctx.mem?.p2flat || steps.length < 2;
+  const s = p2s(st.id), n = Math.min(s.n, steps.length - 1), mark = osceP2Start(st.check) != null;
+  const markBtn = cls => (mark ? `<button class="os-btn ${cls}" data-os="markp2">${I.check}<span>Mark Part 2</span></button>` : '');
+  const results = slides.length ? `<div class="os-qares"><h4>Results</h4><ul class="os-p2list" role="list">${slides.map((x, i) => `<li class="os-qacard">
+      <div class="os-qatop"><span class="os-qalab">${x.h?.kind && KINDS[x.h.kind] ? `<small class="os-kind os-kind--${esc(x.h.kind)}">${esc(KINDS[x.h.kind])}</small>` : ''}<strong>${esc(x.label)}</strong></span><button class="os-ic os-ic--sm" data-os="present" data-sid="${sid}" data-i="${i}" aria-label="Show ${esc(x.label)} to the candidate" title="Show the candidate">${I.max}</button></div>${qaCardBody(st, x)}</li>`).join('')}</ul></div>` : '';
+  const resStep = `${p.lead ? `<div class="os-p2lead"><small>Say</small><p>“${esc(p.lead)}”</p></div>` : ''}
+    ${slides.length ? `<button class="os-btn os-btn--lg os-primary os-qashow" data-os="present" data-sid="${sid}" data-i="0">${I.max}<span>Turn the screen: show the results</span></button>` : ''}
     ${p.patient ? `<div class="os-p2lead os-p2pt"><small>As the patient</small><div class="os-html">${safeHtml(p.patient)}</div></div>` : ''}
-    ${osceP2Start(st.check) != null ? `<button class="os-btn os-p2mark" data-os="markp2">${I.check}<span>Mark Part 2</span></button>` : ''}
-    ${slides.length ? `<div class="os-qares"><h4>Results</h4><ul class="os-p2list" role="list">${slides.map((x, i) => `<li class="os-qacard">
-      <div class="os-qatop"><span class="os-qalab">${x.h?.kind && KINDS[x.h.kind] ? `<small class="os-kind os-kind--${esc(x.h.kind)}">${esc(KINDS[x.h.kind])}</small>` : ''}<strong>${esc(x.label)}</strong></span><button class="os-ic os-ic--sm" data-os="present" data-sid="${sid}" data-i="${i}" aria-label="Show ${esc(x.label)} full screen" title="Show full screen">${I.max}</button></div>${qaCardBody(st, x)}</li>`).join('')}</ul></div>` : ''}
+    ${markBtn('os-p2mark')}${results}`;
+  const exp = i => (p.expect?.[i] ? `<div class="os-qaexp"><small>Expected answer</small><div class="os-html">${safeHtml(p.expect[i])}</div></div>` : '');
+  const chips = i => (slides.length ? `<div class="os-p2show"><small>Turn the screen to a result when the candidate asks for it</small><div class="os-p2chips">${slides.map((x, j) => `<button class="os-p2chip${s.seen.has(j) ? ' seen' : ''}" data-os="present" data-sid="${sid}" data-i="${j}" data-q="${i}">${s.seen.has(j) ? I.check : I.max}<span>${esc(x.label)}</span></button>`).join('')}</div></div>` : '');
+  const qStep = i => `<div class="os-p2q"><small class="os-p2eye">Question ${i + 1} of ${p.ask.length} · ${esc(osceAskLabel(p.ask[i], i))}</small><p class="os-qaq">“${esc(p.ask[i])}”</p>${osceAskLabel(p.ask[i], i) === 'Differentials' ? ddxHtml(st, { compact: true }) : ''}${exp(i)}${chips(i)}</div>`;
+  const go = (j, label, cls = '', ic = '') => `<button class="os-btn ${cls}" data-os="p2step" data-sid="${sid}" data-n="${j}">${ic}<span>${label}</span>${cls ? I.chevR : ''}</button>`;
+  const foot = `<div class="os-p2foot">${n ? go(n - 1, 'Back', '', I.prev) : '<span></span>'}${n < steps.length - 1 ? go(n + 1, n ? 'Next question' : 'Ask the first question', 'os-primary') : markBtn('os-primary')}</div>`;
+  const body = flat
+    ? `${resStep}${p.ask.length ? `<div class="os-qaask"><h4>Examiner questions</h4><ol>${p.ask.map((q, i) => `<li><p class="os-qaq">“${esc(q)}”</p>${exp(i)}</li>`).join('')}</ol></div>` : ''}`
+    : `${n ? qStep(n - 1) : resStep}${foot}`;
+  return `<section class="os-part2" data-sid="${sid}" aria-labelledby="os-qa-h">
+    <header class="os-qahead"><span class="os-bigic">${I.max}</span><span class="os-handt"><strong id="os-qa-h">Part 2 · questions and results</strong>
+      <small>Interpretation, management and safety netting${m ? ` · ${m} minutes` : ''}</small></span>${steps.length > 1 ? `<button class="os-link os-p2flat" data-os="p2flat" data-sid="${sid}" aria-pressed="${flat}">${flat ? 'Step through' : 'All on one page'}</button>` : ''}</header>
+    ${flat ? '' : `<ol class="os-p2steps" role="list" aria-label="Part 2 steps">${steps.map((x, j) => `<li><button data-os="p2step" data-sid="${sid}" data-n="${j}"${j === n ? ' aria-current="step"' : ''}${j < n ? ' class="done"' : ''}><b>${j || '•'}</b><span>${esc(x.label)}</span></button></li>`).join('')}</ol>`}
+    <div class="os-p2body">${body}</div>
   </section>`;
 }
-/* the presenter: one result at a time, full screen; Previous / Next, the arrow keys or a swipe move through them */
-let pres = null;   /* { slides, i } while open */
-export function present(sid, i = 0) {
+/* a step of Part 2: repaint it in place and bring its top into view (Next sits at the bottom of a long step) */
+export function p2Go(sid, n) {
   const st = ctx.byId.get(sid); if (!st) return;
-  const slides = qaSlides(st); if (!slides.length) return;
-  pres = { slides, i: Math.max(0, Math.min(slides.length - 1, i)) };
-  const d = openPresenter(`<div class="os-prs"><div class="os-prs-top"><span class="os-prs-n" aria-live="polite"></span><span class="os-prs-time" hidden></span><button class="os-ic os-prs-x" data-ui="close" aria-label="Close and go back to the questions">${I.x}</button></div>
+  p2s(sid).n = Math.max(0, n);
+  const sel = `.os-part2[data-sid="${CSS.escape(sid)}"]`;
+  ctx.ov.querySelectorAll(sel).forEach(el => { el.outerHTML = qaHtml(st); });
+  const el = ctx.ov.querySelector(`.os-pl ${sel}`) || ctx.ov.querySelector(sel);
+  const bar = el?.querySelector('.os-p2steps') || el, top = bar?.getBoundingClientRect().top;
+  if (bar && (top < 0 || top > innerHeight / 3)) bar.scrollIntoView({ block: 'start' });   /* at once: the question is what the examiner reads next */
+  el?.querySelector('[aria-current="step"]')?.focus({ preventScroll: true });
+}
+export function p2Flat(sid) { ctx.mem.p2flat = !ctx.mem.p2flat; save(); p2Go(sid, p2s(sid).n); }
+/* the exam's numbers the candidate asks to see in Part 1: the vitals as a grid, the bedside tests as a table */
+export function examSlides(x) {
+  if (!x) return [];
+  return [x.vitals && { label: 'Vital signs', html: `<dl class="os-vitals">${osceVitals(x.vitals).map(([k, v]) => `<div>${k ? `<dt>${esc(k)}</dt>` : ''}<dd>${esc(v)}</dd></div>`).join('')}</dl>` },
+    x.bedside?.length && { label: 'Bedside tests', html: `<div class="os-html"><table><tbody>${x.bedside.map(b => `<tr><th>${esc(b.test)}</th><td>${esc(b.find)}</td></tr>`).join('')}</tbody></table></div>` }].filter(Boolean);
+}
+/* the candidate's view: full screen and opaque, so the laptop can be turned round with nothing of the script, the rubric
+   or the expected answers on it. It says who it is for, carries the question being asked when it was opened from one,
+   moves through the results (Previous / Next, the arrow keys or a swipe) and hands back with one big button */
+let pres = null;   /* { sid, exam, slides, i } while open */
+export function present(sid, i = 0, o = {}) {
+  const st = ctx.byId.get(sid); if (!st) return;
+  const exam = o.set === 'exam', slides = exam ? examSlides(examOf(st)) : qaSlides(st); if (!slides.length) return;
+  const q = !exam && o.q != null && o.q !== '' ? st.part2?.ask?.[+o.q] || '' : '';
+  pres = { sid, exam, slides, i: Math.max(0, Math.min(slides.length - 1, i)) };
+  const d = openPresenter(`<div class="os-prs"><div class="os-prs-top"><span class="os-prs-who">For the candidate</span><span class="os-prs-n" aria-live="polite"></span><span class="os-prs-time" hidden></span><button class="os-ic os-prs-x" data-ui="close" aria-label="Turn back to the examiner">${I.x}</button></div>
+    ${q ? `<p class="os-prs-q"><small>The examiner asks</small>“${esc(q)}”</p>` : ''}
     <div class="os-prs-stage"></div>
-    <div class="os-prs-nav"><button class="os-btn os-btn--lg" data-os="pprev">${I.prev}<span>Previous</span></button><button class="os-btn os-btn--lg" data-os="pnext"><span>Next</span>${I.chevR}</button></div></div>`, () => { pres = null; });   /* the inner box fills the layer, so a tap never lands on the layer itself (which would close it) */
+    <div class="os-prs-nav"><button class="os-btn os-btn--lg os-prs-step" data-os="pprev" aria-label="Previous result">${I.prev}<span>Previous</span></button><button class="os-btn os-btn--lg os-primary os-prs-back" data-ui="close">${I.back}<span>Turn back to the examiner</span></button><button class="os-btn os-btn--lg os-prs-step" data-os="pnext" aria-label="Next result"><span>Next</span>${I.chevR}</button></div></div>`, () => { pres = null; });   /* the inner box fills the layer, so a tap never lands on the layer itself (which would close it) */
   let x0 = null;
   const stage = d.el.querySelector('.os-prs-stage');
   stage.addEventListener('pointerdown', e => { x0 = e.clientX; });
@@ -288,27 +340,31 @@ export function presentStep(dir) { if (!pres) return; const n = pres.i + dir; if
 export const presenting = () => !!pres && topDialog()?.kind === 'present';
 function paintPresenter() {
   const d = topDialog(); if (!pres || !d || d.kind !== 'present') return;
-  const { slides, i } = pres, x = slides[i];
-  d.el.querySelector('.os-prs-n').textContent = slides.length > 1 ? `${i + 1} of ${slides.length}` : '';
+  const { slides, i, sid, exam } = pres, x = slides[i], many = slides.length > 1;
+  d.el.querySelector('.os-prs-n').textContent = many ? `${i + 1} of ${slides.length}` : '';
   d.el.querySelector('.os-prs-stage').innerHTML = `<div class="os-prs-slide"><h2>${esc(x.label)}</h2>${x.html}</div>`;
   d.el.querySelector('[data-os="pprev"]').disabled = i === 0;
   d.el.querySelector('[data-os="pnext"]').disabled = i === slides.length - 1;
-  d.el.querySelector('.os-prs-nav').hidden = slides.length < 2;
+  d.el.querySelectorAll('.os-prs-step').forEach(b => { b.hidden = !many; });
+  if (exam) return;
+  p2s(sid).seen.add(i);   /* the examiner's chip for this result gets its tick, under the layer, so focus still returns to it */
+  ctx.ov.querySelectorAll(`.os-part2[data-sid="${CSS.escape(sid)}"] .os-p2chip[data-i="${i}"]:not(.seen)`).forEach(b => { b.classList.add('seen'); const ic = b.querySelector('svg'); if (ic) ic.outerHTML = I.check; });
 }
 /* Exam mode (2026-10-22, founder: "a clear separate section, as this has been invented from the original eMedici content"):
    the AI-written findings in their own box under the patient's history, labelled as such; each step is closed until tapped, so the candidate says what
    they would do before seeing what they find */
-function examHtml(x) {
+function examHtml(x, id) {
   if (!x) return '';
+  const sid = esc(id), shows = examSlides(x).map(y => y.label), show = l => (shows.includes(l) ? `<button class="os-ic os-ic--sm os-exshow" data-os="present" data-set="exam" data-sid="${sid}" data-i="${shows.indexOf(l)}" aria-label="Show the ${l.toLowerCase()} to the candidate" title="Show the candidate">${I.max}</button>` : '');
   const step = (s, i) => `<li><details class="os-exstep"><summary><span class="os-exn">${i + 1}</span><span class="os-exa"><strong>${esc(s.area)}</strong>${s.do ? `<small>${esc(s.do)}</small>` : ''}</span>${I.chevD}</summary><p>${esc(s.find)}</p></details></li>`;
   return `<section class="os-exam" aria-labelledby="os-exam-h">
     <header class="os-exhead"><span class="os-bigic">${I.check}</span><span class="os-handt"><strong id="os-exam-h">Exam mode</strong><small>As the candidate examines each area, tap it and give what they find</small></span></header>
     <p class="os-exwarn"><b>AI-written</b> These findings were invented to fit this case.</p>
-    ${x.vitals ? `<div class="os-exbox"><h4>Vitals</h4><p>${esc(x.vitals)}</p></div>` : ''}
+    ${x.vitals ? `<div class="os-exbox"><h4>Vitals${show('Vital signs')}</h4><p>${esc(x.vitals)}</p></div>` : ''}
     ${x.general ? `<div class="os-exbox"><h4>General inspection</h4><p>${esc(x.general)}</p></div>` : ''}
     <div class="os-exrow"><h4>Examination</h4><button class="os-link" data-os="examall">Reveal all</button></div>
     <ol class="os-exsteps" role="list">${(x.steps || []).map(step).join('')}</ol>
-    ${x.bedside?.length ? `<div class="os-exbox"><h4>Bedside tests</h4><ul role="list" class="os-exbed">${x.bedside.map(b => `<li><b>${esc(b.test)}</b><span>${esc(b.find)}</span></li>`).join('')}</ul></div>` : ''}
+    ${x.bedside?.length ? `<div class="os-exbox"><h4>Bedside tests${show('Bedside tests')}</h4><ul role="list" class="os-exbed">${x.bedside.map(b => `<li><b>${esc(b.test)}</b><span>${esc(b.find)}</span></li>`).join('')}</ul></div>` : ''}
     ${x.key ? `<details class="os-exstep os-exkey"><summary><span class="os-exa"><strong>Findings that matter</strong></span>${I.chevD}</summary><p>${esc(x.key)}</p></details>` : ''}
   </section>`;
 }

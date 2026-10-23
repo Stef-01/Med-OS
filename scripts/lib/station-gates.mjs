@@ -69,6 +69,7 @@ export function shapeProblems(st) {
   if (st.part2 != null && (typeof st.part2 !== 'object' || Array.isArray(st.part2))) p.push('part2 is not an object');
   if (st.part2?.patient != null && typeof st.part2.patient !== 'string') p.push('part2.patient is not HTML text');
   if (st.request != null && !(typeof st.request === 'object' && /^r[a-z0-9]{6,24}$/.test(st.request.id || ''))) p.push('request: the case request a station answers is { id: "r…", at }');
+  (Array.isArray(st.part2?.expect) ? st.part2.expect : []).forEach((h, n) => allowlistCheck(h || '', { attrs: false }).forEach(x => p.push(`part2.expect[${n}]: ${x}`)));
   allowlistCheck(typeof st.part2?.patient === 'string' ? st.part2.patient : '', { attrs: false }).forEach(x => p.push(`part2.patient: ${x}`));
   ((st.part2 && st.part2.handover) || []).forEach((h, n) => {
     if (!h) return;
@@ -94,7 +95,7 @@ export function shapeProblems(st) {
 
 /* the bar a NEW station clears on top of its shape: benchmarks, timing, structure, guidelines, imaging requests */
 export function qualityProblems(st, stats) {
-  const p = [];   /* `stats` (bankStats) is kept in the signature for callers; the size band is LEAVES */
+  const p = [...ddxProblems(st.ddx)];   /* `stats` (bankStats) is kept in the signature for callers; the size band is LEAVES */
   for (const s of st.specialty || []) if (!KNOWN_SPECIALTIES.has(s) && !specialtyEmoji(s)) p.push(`specialty "${s}" is not a known specialty name`);
   for (const t of st.type || []) if (!TYPES.includes(t)) p.push(`station type "${t}" is not one of ${TYPES.join(', ')}`);
   if (!CX.includes(st.complexity)) p.push('complexity must be Low, Moderate or High');
@@ -114,7 +115,8 @@ export function qualityProblems(st, stats) {
     if (mins.reduce((a, c) => a + c, 0) !== STATION_MIN) p.push(`task times add to ${mins.reduce((a, c) => a + c, 0)} minutes; Part 1 and Part 2 are ${PART1_MIN} + ${PART2_MIN}`);
     if (mins[mins.length - 1] !== PART2_MIN) p.push(`the last task is Part 2 (${PART2_MIN} minutes): interpretation, management and safety netting`);
   }
-  if (/\b\d+\s*min(ute)?s?\b/i.test(plain(st.stem))) p.push('leave times out of the stem: the tasks carry them and the page shows the format');
+  /* station timing ("(5 minutes)", "you have 8 minutes", "10 minutes to take a history"), not a clinical duration ("40 minutes of chest flutters") */
+  if (/\(\s*\d+\s*min(?:ute)?s?\s*\)|\byou (?:will )?have\s+\d+\s*min|\b\d+\s*min(?:ute)?s?\s+(?:to|for)\s+(?:take|perform|examine|explain|complete|discuss|this station|the station|each task)/i.test(plain(st.stem))) p.push('leave times out of the stem: the tasks carry them and the page shows the format');
   const p2 = st.part2 || {};
   if (!cleanDemo(st.demo)) p.push('demo: the patient (age with its unit, sex, setting) so the station shows the right observation chart');
   for (const [n, h] of (p2.handover || []).entries()) {
@@ -128,6 +130,7 @@ export function qualityProblems(st, stats) {
   if (!Array.isArray(p2.handover) || p2.handover.filter(h => h && plain(h.label) && (plain(h.result) || (h.obs?.rows || []).length || cleanLabs(h.labs))).length < 2) p.push('Part 2 hands over at least 2 results (observations, investigations or imaging reports), each with its numbers');
   if (!Array.isArray(p2.ask) || p2.ask.filter(q => plain(q)).length < 2) p.push('Part 2 has at least 2 examiner questions (interpretation, then management and safety netting)');
   if (!plain(p2.lead)) p.push('Part 2 needs the examiner\'s opening line (lead)');
+  p.push(...askProblems(p2));
   for (const b of part2InScript(st.patient)) p.push(`the patient script is for Part 1; move what the patient says in Part 2 to part2.patient: "${b.slice(0, 70)}…"`);
   const pat = plain(st.patient).length;
   if (pat < 1200 || pat > 9000) p.push(`patient and examiner script is ${pat} characters; the bank's run 1,600 to 6,600`);
@@ -197,6 +200,19 @@ export function gasIssues(html) {
   return out;
 }
 
+/* the examiner's Part 2 questions in the order a real OSCE examiner asks them: an ISBAR handover carrying the
+   interpretation of the results, then the diagnosis and differentials, then management; each with its expected answer */
+export function askProblems(p2) {
+  const ask = (p2?.ask || []).map(plain), exp = (p2?.expect || []).map(plain), p = [];
+  if (ask.length < 3 || ask.length > 4) p.push(`${ask.length} examiner questions; Part 2 asks 3 or 4 (ISBAR handover, differentials, management, then safety netting or a focused question)`);
+  if (ask.length && !/\bISBAR\b/i.test(ask[0])) p.push('the first examiner question asks for an ISBAR handover that includes the interpretation of the results');
+  if (ask.length > 1 && !/differential|diagnos|else would you consider/i.test(ask[1])) p.push('the second examiner question asks for the most likely diagnosis and the differentials');
+  if (ask.length > 2 && !/manag/i.test(ask[2])) p.push('the third examiner question asks how the candidate would manage the patient');
+  if (exp.length !== ask.length || exp.some(e => !e)) p.push('every examiner question has its expected answer (part2.expect, same order and number as part2.ask)');
+  else if (!/Situation[\s\S]*Background[\s\S]*Assessment[\s\S]*Recommendation/i.test(exp[0])) p.push('the expected ISBAR answer fills in Situation, Background, Assessment and Recommendation for this patient');
+  return p;
+}
+
 /* a paragraph or heading of the Part 1 script that is Part 2 role-play ("In Part 2, …", "Questions to ask … (usually in Part 2)");
    a passing mention ("management is marked in Part 2", "handed over in Part 2") is not */
 export const part2InScript = html => (String(html || '').match(/<(p|h[2-4])>[\s\S]*?<\/\1>/g) || []).map(plain).filter(t => /^(?:In|During) Part 2\b|\((?:usually )?in Part 2\b/i.test(t));
@@ -229,4 +245,19 @@ export function reviewNotes(st) {
       n.push(`the observations reach the ${worst} zone on the chart but no checklist item asks the candidate to escalate (${worst === 'red' ? 'rapid response' : 'clinical review'})`);
   }
   return n;
+}
+
+/* the reasonable differentials: 3 to 6, exactly one leading diagnosis, each named, tiers from the three */
+export function ddxProblems(ddx) {
+  if (ddx == null) return [];
+  if (!Array.isArray(ddx)) return ['ddx is not a list'];
+  const p = [];
+  if (ddx.length < 3 || ddx.length > 6) p.push(`ddx lists 3 to 6 reasonable differentials (has ${ddx.length})`);
+  if (ddx.filter(d => d?.tier === 'likely').length !== 1) p.push('ddx has exactly one tier likely: the leading diagnosis');
+  ddx.forEach((d, i) => {
+    if (!String(d?.dx || '').trim()) p.push(`ddx ${i + 1} has no diagnosis`);
+    if (!['likely', 'reasonable', 'dangerous'].includes(d?.tier)) p.push(`ddx ${i + 1} tier is likely, reasonable or dangerous`);
+    for (const k of ['dx', 'for', 'against']) if (/[<>]/.test(String(d?.[k] || ''))) p.push(`ddx ${i + 1} ${k} is plain text`);
+  });
+  return p;
 }

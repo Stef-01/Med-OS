@@ -423,16 +423,53 @@
    }
   ],
   "ask": [
-   "What do these results show?",
-   "What is the diagnosis, and what else did you need to consider for her short stature and absent puberty?",
-   "What is your management approach, and who will you involve?",
-   "The mother asks: \"Did I cause this? Could our next baby have it? Will she grow, go through puberty and be able to have children?\" How do you answer?",
-   "What safety netting and follow-up will you arrange?"
+   "You are now calling the paediatric endocrinology registrar. Please give an ISBAR handover of this 13-year-old girl, including your interpretation of these results.",
+   "What is your most likely diagnosis, and what else would you consider? Justify your answer.",
+   "Outline your management of her now, here in general practice.",
+   "Before they leave today, what would you tell the mother and her daughter, and what follow-up would you arrange?"
   ],
-  "patient": "<p>In Part 2 the examiner puts your other questions to the candidate. Ask \"What does that mean?\" if the candidate uses jargon.</p>"
+  "patient": "<p>In Part 2 the examiner puts your other questions to the candidate. Ask \"What does that mean?\" if the candidate uses jargon.</p>",
+  "expect": [
+   "<ul><li><strong>Identify:</strong> self, GP. Calling about a 13-year-old girl.</li><li><strong>Situation:</strong> new diagnosis of 45,X Turner syndrome with absent puberty. Requesting prompt endocrinology review.</li><li><strong>Background:</strong> below the 3rd centile since age 4. Mid-parental height 165 cm. Lymphoedema as a newborn, recurrent otitis media, a murmur that was never followed up, and a UTI at age 5. Has Turner features. Breast Tanner 1, pubic hair Tanner 2.</li><li><strong>Assessment:</strong> 138 cm, growing 4 cm/year with no spurt. Bone age 11 years and plates open, so growth remains. 45,X in all 30 cells, with no marker or Y. FSH 58, LH 24 and oestradiol under 40 mean primary ovarian insufficiency. TSH 7.8 with normal fT4 and positive anti-TPO means subclinical Hashimoto thyroiditis. Coeliac screen negative with normal IgA. Bicuspid aortic valve, no coarctation, normal aorta. Horseshoe kidney, no hydronephrosis. Mild bilateral conductive hearing loss.</li><li><strong>Recommendation:</strong> endocrinology review soon for growth hormone, oestrogen induction and a thyroxine decision. I am referring to cardiology, ENT and genetics.</li></ul>",
+   "<p><strong>Turner syndrome (non-mosaic 45,X) with primary ovarian insufficiency:</strong> 45,X in all 30 cells. Short stature far below her target, Turner features, high FSH and LH with low oestradiol, bicuspid valve, horseshoe kidney, conductive hearing loss.</p><ul><li><strong>Constitutional delay:</strong> against it are the dysmorphic features, high gonadotrophins, no family history, and being below the 3rd centile since age 4.</li><li><strong>Hypothyroidism:</strong> TSH is raised, but fT4 is normal (subclinical). It does not explain the high gonadotrophins or the features.</li><li><strong>Coeliac disease:</strong> no GI symptoms. tTG-IgA negative with normal total IgA, so the screen is valid.</li><li><strong>GH deficiency or a pituitary/hypothalamic cause:</strong> these would give <em>low</em> gonadotrophins.</li></ul>",
+   "<ol><li><strong>Explain sensitively</strong> in private and check understanding. One X chromosome is missing. It is a random event, not the parents' fault. Intelligence is usually normal. Offer written information and a second appointment.</li><li><strong>Prompt paediatric endocrinology referral</strong> (doses set by endocrinology):<ul><li>Growth hormone, still possible while the plates are open.</li><li>Low-dose, usually transdermal, oestradiol now (due from about 11 to 12 years). Increase over 2 to 3 years, then add a progestogen.</li><li>Repeat TSH and fT4 to decide on thyroxine.</li></ul></li><li><strong>Paediatric cardiology</strong> for lifelong aortic surveillance (cardiac MRI) and blood pressure control.</li><li><strong>ENT and audiology</strong>, with preferential seating at school.</li><li><strong>Genetic counselling.</strong> <strong>Fertility:</strong> ovarian insufficiency is likely. Donor eggs or specialist counselling when ready. Any pregnancy needs cardiac assessment first.</li><li><strong>Psychosocial and learning support</strong>, support groups, and lifelong multidisciplinary follow-up.</li></ol>",
+   "<p><strong>Call 000 or go to ED</strong> for possible aortic dissection:</p><ul><li>chest pain or tearing back pain</li><li>sudden breathlessness</li><li>palpitations</li><li>fainting</li></ul><p><strong>See the GP promptly</strong> for:</p><ul><li>ear pain, discharge or worse hearing</li><li>fever with flank pain or burning urine (horseshoe kidney: needs a urine test)</li><li>persistent diarrhoea, abdominal pain or weight loss</li><li>excessive thirst or passing a lot of urine (diabetes risk: check glucose)</li></ul><p><strong>Follow-up:</strong></p><ul><li>GP review within 2 weeks to check referrals are booked, answer questions and support the family</li><li>written information and Turner syndrome support groups</li><li>lifelong checks of thyroid, coeliac serology, blood pressure, hearing, bone and metabolic health</li><li>planned transition to an adult Turner clinic</li></ul>"
+  ]
  },
  "revised": {
-  "at": "2026-10-23",
-  "by": "format 5/10/5"
- }
+  "at": "2026-10-23T06:49:39Z",
+  "by": "rewrite-part2-asks.mjs"
+ },
+ "ddx": [
+  {
+   "dx": "Turner syndrome (non-mosaic 45,X) with primary ovarian insufficiency",
+   "tier": "likely",
+   "for": "Karyotype is 45,X in all 30 cells, and she is far below her mid-parental height of 165 cm with neonatal lymphoedema, Turner features, FSH 58 and LH 24 with low oestradiol, a bicuspid aortic valve, a horseshoe kidney and conductive hearing loss.",
+   "against": ""
+  },
+  {
+   "dx": "Constitutional delay of growth and puberty",
+   "tier": "reasonable",
+   "for": "Her bone age is delayed by 2 years with open growth plates, and her mother hopes she is a late bloomer.",
+   "against": "She has been below the 3rd centile since age 4, is far below her mid-parental height, has dysmorphic features and high gonadotrophins, and there is no family history of late puberty."
+  },
+  {
+   "dx": "Hypothyroidism (autoimmune Hashimoto thyroiditis)",
+   "tier": "reasonable",
+   "for": "She is tired and feels the cold, and her TSH is 7.8 with positive anti-TPO and a delayed bone age.",
+   "against": "Free T4 is normal, so this is subclinical, and it does not explain the high FSH and LH or the dysmorphic features."
+  },
+  {
+   "dx": "Coeliac disease",
+   "tier": "reasonable",
+   "for": "She has short stature, delayed puberty and mild tiredness.",
+   "against": "She has no diarrhoea, abdominal pain or weight loss, her BMI is around the 50th centile, and tTG-IgA is negative with a normal total IgA."
+  },
+  {
+   "dx": "Growth hormone deficiency or a pituitary or hypothalamic lesion such as craniopharyngioma",
+   "tier": "dangerous",
+   "for": "Her growth has slowed to 4 cm a year with a delayed bone age and no puberty.",
+   "against": "Her FSH and LH are high rather than low, and she has no headaches or change in vision."
+  }
+ ]
 }
