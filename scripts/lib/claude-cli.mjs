@@ -34,7 +34,7 @@ export async function claudeCliJson({ system, content, schema, effort = 'high', 
     '--strict-mcp-config', '--mcp-config', '{"mcpServers":{}}', '--setting-sources', '', '--disable-slash-commands'];
   const env = { ...process.env };
   delete env.CLAUDECODE; delete env.CLAUDE_CODE_ENTRYPOINT;   /* the CLI refuses to nest inside a Claude Code session otherwise */
-  const out = await new Promise((resolve, reject) => {
+  const run = () => new Promise((resolve, reject) => {
     const p = spawn(claudeExe(), args, { env, windowsHide: true, stdio: ['pipe', 'pipe', 'pipe'] });
     let so = '', se = '';
     p.stdout.on('data', d => { so += d; }); p.stderr.on('data', d => { se += d; });
@@ -42,6 +42,16 @@ export async function claudeCliJson({ system, content, schema, effort = 'high', 
     p.on('close', code => (code === 0 || so.trim()) ? resolve(so) : reject(new Error(`${label}: claude exited ${code}: ${se.slice(0, 400)}`)));
     p.stdin.end(content);
   });
+  /* a failure to start the CLI at all (the binary mid-update, a busy file on Windows) is retried twice, 30 s apart */
+  let out;
+  for (let attempt = 0; ; attempt++) {
+    try { out = await run(); break; }
+    catch (e) {
+      if (attempt >= 2 || !e.syscall?.startsWith('spawn')) throw e;
+      exe = null;
+      await new Promise(r => setTimeout(r, 30000));
+    }
+  }
   fs.rmSync(tmp, { recursive: true, force: true });
   const line = out.split('\n').find(l => l.startsWith('{') && /"type":"result"/.test(l));
   if (!line) throw new Error(`${label}: no result line from the CLI: ${out.slice(0, 400)}`);
