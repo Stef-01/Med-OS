@@ -21,45 +21,52 @@
   {
    "id": 2,
    "t": "checkbox",
-   "x": "Hand hygiene, clear introduction, confirms identity of parent and baby."
+   "x": "Hand hygiene, clear introduction, confirms the identity of the parent and baby."
   },
   {
-   "crit": true,
    "id": 3,
    "t": "checkbox",
-   "x": "Non-judgemental, empathic approach throughout, including to the vitamin K decision. Acknowledges the parent's worry and guilt without blame."
+   "x": "Non-judgemental, empathic approach throughout, including to the vitamin K decision. Acknowledges the parent's worry and guilt without blame.",
+   "crit": true
   },
   {
    "id": 4,
-   "t": "heading",
-   "x": "History (3 minutes)"
+   "t": "checkbox",
+   "x": "Uses plain language, checks understanding, invites questions, summarises the plan and confirms Alex agrees."
   },
   {
    "id": 5,
-   "t": "checkbox",
-   "x": "Establishes prolonged jaundice: onset, persistence beyond 14 days, progression."
+   "t": "heading",
+   "x": "History"
   },
   {
-   "crit": true,
    "id": 6,
+   "t": "checkbox",
+   "x": "Establishes prolonged jaundice: onset on day 3, persistence beyond 14 days, worse in the last week."
+  },
+  {
+   "id": 7,
+   "t": "checkbox",
+   "x": "Asks about stool and urine colour:",
+   "crit": true,
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Pale or putty-coloured stools, asks to see the photo or a stool colour chart."
+     "x": "Pale or putty-coloured stools, and asks to see the photo or uses a stool colour chart."
     },
     {
      "id": 2,
      "t": "checkbox",
      "x": "Dark urine staining the nappy."
     }
-   ],
-   "t": "checkbox",
-   "x": "Asks about stool and urine colour."
+   ]
   },
   {
+   "id": 8,
+   "t": "checkbox",
+   "x": "Asks about bleeding, including the cord stump:",
    "crit": true,
-   "id": 7,
    "kids": [
     {
      "id": 1,
@@ -71,63 +78,128 @@
      "t": "checkbox",
      "x": "Bruising, nosebleeds, bleeding from other sites, blood in vomit or nappy."
     }
-   ],
-   "t": "checkbox",
-   "x": "Asks about bleeding, including the cord stump."
-  },
-  {
-   "crit": true,
-   "id": 8,
-   "t": "checkbox",
-   "x": "Asks whether vitamin K was given at birth (injection or oral) and why it was declined, using open, non-blaming questions."
+   ]
   },
   {
    "id": 9,
    "t": "checkbox",
-   "x": "Screens for red flags: feeding, wet nappies, weight gain, vomiting, drowsiness or irritability, fever, fits."
+   "x": "Asks whether vitamin K was given at birth (injection or oral) and why it was declined, using open, non-blaming questions.",
+   "crit": true
   },
   {
    "id": 10,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Antenatal scan findings, including the two-vessel cord, and presentation at birth."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Family history of liver disease, bleeding disorders and hip dysplasia (first-degree relatives)."
-    }
-   ],
    "t": "checkbox",
-   "x": "Asks relevant birth, antenatal and family history."
+   "x": "Screens for red flags: feeding, wet nappies, weight gain, vomiting, drowsiness or irritability, fever, fits."
   },
   {
    "id": 11,
    "t": "checkbox",
-   "x": "Asks briefly how and where Noah sleeps and about smoke exposure."
+   "x": "Asks relevant birth, antenatal and family history:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Antenatal scan findings, including the two-vessel cord, gestation, mode of birth, presentation and birth weight."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Family history of liver disease and bleeding disorders, and of hip dysplasia in first-degree relatives."
+    }
+   ]
   },
   {
    "id": 12,
-   "t": "heading",
-   "x": "Interpretation and management"
+   "t": "checkbox",
+   "x": "Asks briefly how and where Noah sleeps and about smoke exposure."
   },
   {
-   "crit": true,
    "id": 13,
    "t": "checkbox",
-   "x": "Recognises jaundice beyond 14 days in a term baby with pale stools, dark urine and hepatomegaly as cholestasis until proven otherwise, and says biliary atresia must be urgently excluded."
+   "x": "Explores Alex's ideas, concerns and expectations, including the breastmilk jaundice and sunshine ideas."
   },
   {
-   "crit": true,
    "id": 14,
-   "t": "checkbox",
-   "x": "Recognises the cord-stump bleed in an infant who had no vitamin K prophylaxis and who has cholestasis as a possible warning bleed of late vitamin K deficiency bleeding (VKDB), including the risk of intracranial haemorrhage."
+   "t": "heading",
+   "x": "Examination"
   },
   {
-   "crit": true,
    "id": 15,
+   "t": "checkbox",
+   "x": "General inspection: alertness, tone and cry, extent of the jaundice and scleral icterus, pallor."
+  },
+  {
+   "id": 16,
+   "t": "checkbox",
+   "x": "Examines the abdomen for the liver and spleen (firm liver edge 2 cm below the costal margin, spleen not palpable)."
+  },
+  {
+   "id": 17,
+   "t": "checkbox",
+   "x": "Inspects the stool and urine in the nappy (or the photo) against a stool colour chart."
+  },
+  {
+   "id": 18,
+   "t": "checkbox",
+   "x": "Looks for bleeding: umbilicus (separated, dry, not bleeding), bruising, petechiae and the heel-prick sites."
+  },
+  {
+   "id": 19,
+   "t": "checkbox",
+   "x": "Checks hydration and growth: fontanelle, mucous membranes, weight against birth weight; listens to the heart and feels the femoral pulses."
+  },
+  {
+   "id": 20,
+   "t": "checkbox",
+   "x": "Examines the hips: Barlow and Ortolani, symmetry of abduction, leg lengths and skin creases."
+  },
+  {
+   "id": 21,
+   "t": "heading",
+   "x": "Interpretation"
+  },
+  {
+   "id": 22,
+   "t": "checkbox",
+   "x": "Recognises jaundice beyond 14 days in a term baby with pale stools, dark urine and a firm liver as cholestasis until proven otherwise, and says biliary atresia must be urgently excluded.",
+   "crit": true
+  },
+  {
+   "id": 23,
+   "t": "checkbox",
+   "x": "Recognises the cord-stump bleed in an infant who had no vitamin K prophylaxis and who has cholestasis as a possible warning bleed of late vitamin K deficiency bleeding (VKDB), with the risk of bleeding in the brain.",
+   "crit": true
+  },
+  {
+   "id": 24,
+   "t": "checkbox",
+   "x": "Explains why this is not breastmilk jaundice: breastmilk jaundice is unconjugated with normal yellow stools, while pale stools and dark urine point to conjugated (cholestatic) jaundice."
+  },
+  {
+   "id": 25,
+   "t": "checkbox",
+   "x": "Interprets the observations and growth: well, thriving, normal BGL, and states that a well, thriving baby does not exclude biliary atresia."
+  },
+  {
+   "id": 26,
+   "t": "checkbox",
+   "x": "Interprets the stool colour chart: pale colours in the abnormal range, confirming acholic stools."
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "Interprets the records: an isolated single umbilical artery with a normal renal tract and heart on the morphology scan, a normal newborn examination including hips, and vitamin K not recorded (so the history is what confirms it was declined)."
+  },
+  {
+   "id": 28,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "id": 29,
+   "t": "checkbox",
+   "x": "Arranges same-day urgent paediatric or ED assessment regardless of pending results. Does not make referral conditional on a split bilirubin result and does not send the baby for outpatient bloods and wait:",
+   "crit": true,
    "kids": [
     {
      "id": 1,
@@ -144,13 +216,13 @@
      "t": "checkbox",
      "x": "Arranges safe direct transfer (ambulance or accompanied by the parent) without delay."
     }
-   ],
-   "t": "checkbox",
-   "x": "Arranges same-day urgent paediatric or ED assessment regardless of pending results. Does not make referral conditional on a split bilirubin result and does not send the baby for outpatient bloods and wait."
+   ]
   },
   {
+   "id": 30,
+   "t": "checkbox",
+   "x": "Ensures urgent coagulation studies (PT/INR) are done with the cholestasis work-up:",
    "crit": true,
-   "id": 16,
    "kids": [
     {
      "id": 1,
@@ -162,13 +234,13 @@
      "t": "checkbox",
      "x": "States vitamin K treatment must not wait for the results."
     }
-   ],
-   "t": "checkbox",
-   "x": "Ensures urgent coagulation studies (PT/INR) are done with the cholestasis work-up."
+   ]
   },
   {
+   "id": 31,
+   "t": "checkbox",
+   "x": "Recommends IM vitamin K 1 mg (the fixed dose for a term baby) without delay, given by the GP before transfer if available or by the receiving team, and does not accept oral vitamin K as an alternative:",
    "crit": true,
-   "id": 17,
    "kids": [
     {
      "id": 1,
@@ -185,35 +257,25 @@
      "t": "checkbox",
      "x": "Does not offer the oral option as a parental choice."
     }
-   ],
-   "t": "checkbox",
-   "x": "Recommends IM vitamin K (1 mg) without delay, given by the GP before transfer if available or by the receiving team, and does not accept oral vitamin K as an alternative."
+   ]
   },
   {
+   "id": 32,
+   "t": "checkbox",
+   "x": "Respects the parent's autonomy while clearly recommending IM vitamin K. If the parent declines, explains the risks again, involves the paediatric consultant urgently, documents the informed refusal and still sends Noah to hospital today.",
+   "crit": true
+  },
+  {
+   "id": 33,
+   "t": "checkbox",
+   "x": "Gives the urgent plan first and keeps the hip, cord and sleep counselling brief.",
+   "crit": true
+  },
+  {
+   "id": 34,
+   "t": "checkbox",
+   "x": "Explains vitamin K in plain language and corrects the vaccine misconception:",
    "crit": true,
-   "id": 18,
-   "t": "checkbox",
-   "x": "Respects the parent's autonomy while clearly recommending IM vitamin K. If the parent declines, explains the risks again, involves the paediatric consultant urgently, documents the informed refusal and still sends Noah to hospital today."
-  },
-  {
-   "crit": true,
-   "id": 19,
-   "t": "checkbox",
-   "x": "Gives the urgent plan first and keeps the hip, cord and sleep counselling brief."
-  },
-  {
-   "id": 20,
-   "t": "checkbox",
-   "x": "Safety-nets: call 000 if bleeding, drowsiness, vomiting, a seizure, a bulging fontanelle or floppiness occurs on the way or while waiting. Continue breastfeeding."
-  },
-  {
-   "id": 21,
-   "t": "heading",
-   "x": "Counselling"
-  },
-  {
-   "crit": true,
-   "id": 22,
    "kids": [
     {
      "id": 1,
@@ -223,144 +285,77 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Without it, rare but serious bleeding can occur, including in the brain, for up to six months."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "A single IM dose works best."
+     "x": "Without it, rare but serious bleeding can occur, including in the brain, for up to six months, and a single injection works best."
     }
-   ],
-   "t": "checkbox",
-   "x": "Explains vitamin K in plain language and corrects the vaccine misconception."
+   ]
   },
   {
-   "id": 23,
+   "id": 35,
+   "t": "checkbox",
+   "x": "Explains the likely problem and its urgency in plain language:",
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Pale stools and dark urine suggest bile is not draining properly from the liver."
+     "x": "Pale stools and dark urine suggest bile is not draining properly from the liver; if biliary atresia is the cause, early surgery (Kasai procedure, ideally before about 8 weeks of age) gives the best outcome."
     },
     {
      "id": 2,
-     "t": "checkbox",
-     "x": "If biliary atresia is the cause, early diagnosis and surgery (Kasai procedure, ideally before about 8 weeks of age) give the best outcome."
-    },
-    {
-     "id": 3,
      "t": "checkbox",
      "x": "The jaundice is not caused by declining vitamin K, but the lack of vitamin K adds a bleeding risk."
     },
     {
-     "id": 4,
+     "id": 3,
      "t": "checkbox",
      "x": "Advises against sunlight as treatment: it does not help this type of jaundice and is unsafe for a newborn."
     }
-   ],
-   "t": "checkbox",
-   "x": "Explains the likely problem and its urgency in plain language."
+   ]
   },
   {
-   "id": 24,
+   "id": 36,
    "t": "checkbox",
-   "x": "Two-vessel cord (brief): often a normal variant, with a slightly higher chance of an undetected anomaly, especially of the kidneys and urinary tract or the heart. Says Noah will have a renal tract ultrasound, with cardiac assessment if the heart examination is abnormal or an anomaly is suspected. Does not imply an echocardiogram is needed for every isolated two-vessel cord. Mentions it in the handover."
+   "x": "Two-vessel cord (brief): often a normal variant with a slightly higher chance of an undetected kidney or heart anomaly. The morphology scan and newborn heart examination were normal, so Noah will have a renal tract ultrasound, with cardiac assessment only if the heart examination is abnormal or an anomaly is suspected. Does not imply an echocardiogram is needed for every isolated two-vessel cord."
   },
   {
-   "id": 25,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Describes Barlow (adduct the flexed hip with gentle backward pressure to see if a located hip can be dislocated) and Ortolani (abduct the flexed hip while lifting the greater trochanter to relocate a dislocated hip, felt as a clunk)."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "The sister's baby is a second-degree relative, which is not a standard DDH risk factor."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Plan: ongoing hip checks at routine visits, with ultrasound only if the examination becomes abnormal or other risk factors are present (first-degree family history, breech). Does not order a routine hip ultrasound."
-    }
-   ],
+   "id": 37,
    "t": "checkbox",
-   "x": "Hips (brief): Noah's hips are normal."
+   "x": "Hips (brief): Noah's hips are normal on Barlow (can a located hip be pushed out) and Ortolani (does a dislocated hip clunk back in). The sister's baby is a second-degree relative, which is not a standard risk factor, so the plan is hip checks at routine visits, not a routine hip ultrasound."
   },
   {
-   "id": 26,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "SUDI means sudden unexpected death in infancy and is an umbrella term, including SIDS and fatal sleep accidents such as accidental suffocation."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "SIDS is the sudden unexpected death of a baby under 1 year, usually during sleep, with no cause found after thorough investigation."
-    }
-   ],
+   "id": 38,
    "t": "checkbox",
-   "x": "Explains SUDI and SIDS."
+   "x": "Explains SUDI and SIDS: SUDI is the umbrella term for sudden unexpected death in infancy, including SIDS and fatal sleep accidents; SIDS is the sudden unexpected death of a baby under 1 year, usually during sleep, with no cause found after full investigation."
   },
   {
-   "id": 27,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Sleep on the back with the feet at the foot of the cot, never on the tummy."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Head and face uncovered, with no pillows, toys or loose bedding. No sofa sleeping."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Cot meeting Australian standards with a firm, flat mattress and lightweight, tucked-in bedding or a safe wrap."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "Smoke-free environment before and after birth."
-    },
-    {
-     "id": 5,
-     "t": "checkbox",
-     "x": "Own safe sleep space in the same room as a caregiver for the first 6 to 12 months."
-    },
-    {
-     "id": 6,
-     "t": "checkbox",
-     "x": "Continue breastfeeding, as it lowers the risk."
-    }
-   ],
+   "id": 39,
    "t": "checkbox",
-   "x": "Gives safe sleep advice (at least four measures) and corrects the unsafe practices described."
+   "x": "Gives safe sleep advice (at least four measures) and corrects the unsafe practices described: on the back with feet at the foot of the cot, never on the tummy; head and face uncovered with no pillows, toys or loose bedding and no sofa sleeping; a cot meeting Australian standards with a firm flat mattress and lightweight tucked-in bedding or a safe wrap; smoke-free environment; own safe sleep space in the same room as a caregiver for the first 6 to 12 months; continue breastfeeding."
   },
   {
-   "id": 28,
+   "id": 40,
    "t": "heading",
-   "x": "Communication and closing"
+   "x": "Safety netting"
   },
   {
-   "id": 29,
+   "id": 41,
    "t": "checkbox",
-   "x": "Uses plain language, checks understanding, invites questions, summarises the plan and confirms the parent agrees."
+   "x": "Tells Alex to call 000 if Noah bleeds, becomes drowsy or floppy, vomits, has a fit or a bulging soft spot on the way to hospital or while waiting, and to keep breastfeeding.",
+   "crit": true
   },
   {
-   "id": 30,
+   "id": 42,
    "t": "checkbox",
-   "x": "Offers written information (Red Nose safe sleeping, stool colour chart, hospital information) and arranges follow-up: GP review after discharge, hip checks at routine visits, renal ultrasound. Documents the vitamin K discussion."
+   "x": "Tells Alex to go straight to the hospital today, not home first, and that the team is expecting them."
+  },
+  {
+   "id": 43,
+   "t": "checkbox",
+   "x": "Offers written information (Red Nose safe sleeping, stool colour chart, hospital information) and arranges follow-up: GP review after discharge, hip checks at routine visits, renal tract ultrasound. Documents the vitamin K discussion."
   }
  ],
  "complexity": "High",
  "context": [],
- "desc": "This station involves taking a focused history from the parent of an 18-day-old with prolonged jaundice, pale stools and an earlier cord-stump bleed after vitamin K was declined, then arranging same-day urgent assessment and counselling on vitamin K, the two-vessel cord, hips and safe sleep.",
+ "desc": "This station involves a focused history from the parent and a focused examination of an 18-day-old with prolonged jaundice, pale stools and an earlier cord-stump bleed after vitamin K was declined, then interpreting the observations, stool colour chart and antenatal and newborn records, arranging same-day urgent assessment with IM vitamin K, and briefly counselling on the two-vessel cord, hips and safe sleep.",
  "diagnosis": [
   "Cholestatic jaundice",
   "Biliary atresia",
@@ -368,13 +363,13 @@
   "Single umbilical artery",
   "SUDI and SIDS prevention"
  ],
- "explain": "<h3>Cholestasis until proven otherwise</h3><p>Jaundice beyond 14 days in a term baby needs a split (total and conjugated) bilirubin. Pale putty stools, dark urine and hepatomegaly make cholestasis likely, and biliary atresia must be urgently excluded. Outcomes after Kasai portoenterostomy are best when surgery is done early, ideally before about 8 weeks of age. A GP cannot order a test and wait: Noah needs same-day paediatric or ED assessment whatever the pending results.</p><h3>The cord bleed and vitamin K deficiency bleeding</h3><p>Vitamin K is a vitamin that helps blood clot. It is not a vaccine, and newborns are born with low levels. Late VKDB occurs from about 2 to 12 weeks and can occur up to 6 months, with intracranial haemorrhage a major risk. Risk factors include no prophylaxis, exclusive breastfeeding and cholestasis. A cord-stump bleed that was slow to stop in an unprophylaxed, now cholestatic infant may be a warning bleed. The plan is urgent coagulation studies (PT/INR) and IM vitamin K 1 mg without delay, by the GP or the receiving team, without waiting for results.</p><h3>Why oral vitamin K is not an option here</h3><p>Oral prophylaxis needs several doses and protects less reliably. Cholestasis impairs absorption of fat-soluble vitamins, and active deficiency may already be present. Clinicians should clearly recommend IM treatment while respecting the parent's autonomy. If the parent declines, explain the risks again, involve the paediatric consultant urgently and document the informed refusal. Do not accept oral drops as a compromise.</p><h3>Sunlight and jaundice</h3><p>Sunlight is not a treatment for cholestatic jaundice and is unsafe for newborns because of the risk of sunburn. Phototherapy treats unconjugated hyperbilirubinaemia and does not address this problem.</p><h3>Two-vessel cord</h3><p>A two-vessel cord (single umbilical artery) can be a normal variant, but it raises the chance of an undetected congenital anomaly, especially of the renal tract and the heart. For an isolated finding with a normal antenatal scan and normal newborn examination, renal tract ultrasound is commonly arranged. Cardiac assessment (echocardiogram) is indicated if an anomaly is suspected or the newborn examination is abnormal, not automatically for every isolated two-vessel cord.</p><h3>Hips</h3><p>Barlow tests whether a located hip can be dislocated (adduct the flexed hip with gentle backward pressure). Ortolani relocates a dislocated hip (abduct the flexed hip while lifting the greater trochanter forward), felt as a clunk. A positive or abnormal finding needs hip ultrasound and paediatric or orthopaedic review. A cousin or nephew with DDH is a second-degree relationship and not a standard risk factor. With a normal documented hip examination and no first-degree family history, the plan is continued hip checks at routine visits, with ultrasound only if the examination is abnormal or other risk factors (for example first-degree family history or breech presentation) are present.</p><h3>SUDI, SIDS and safe sleep</h3><p>SUDI is the umbrella term for sudden unexpected death in infancy and includes SIDS and fatal sleep accidents such as accidental suffocation. SIDS is the sudden unexpected death of a baby under 1 year, usually during sleep, with no cause found after thorough investigation. Risk reduction: sleep on the back with feet at the foot of the cot, face and head uncovered with nothing loose near the head, a cot meeting Australian standards with a firm flat mattress and lightweight tucked-in bedding, a smoke-free environment, the baby's own safe sleep space in the same room as a caregiver for the first 6 to 12 months, and breastfeeding if possible. Sofa sleeping, pillows and tummy sleeping are particular hazards.</p><h3>Prioritising</h3><p>With a baby who may have both cholestasis and an active vitamin K deficiency, the urgent referral comes first. Hip, cord and sleep counselling can be brief, with written resources and follow-up for the rest.</p>",
+ "explain": "<h3>Cholestasis until proven otherwise</h3><p>Jaundice beyond 14 days in a term baby needs a split (total and conjugated) bilirubin. Pale putty stools, dark urine and a firm liver make cholestasis likely, and biliary atresia must be urgently excluded. Breastmilk jaundice is unconjugated, the stools stay yellow and the baby is well; it does not explain pale stools. A well, thriving baby with normal observations does not exclude biliary atresia. Outcomes after Kasai portoenterostomy are best when surgery is done early, ideally before about 8 weeks of age. A GP cannot order a test and wait: Noah needs same-day paediatric or ED assessment whatever the pending results.</p><h3>Interpreting the Part 2 results</h3><p>The stool colour chart match at the pale end confirms acholic stools. The observations, BGL and weight gain show a stable baby who can travel with a parent, but they change nothing about the urgency. The morphology scan shows an isolated single umbilical artery with a normal renal tract and heart. The discharge summary records a normal newborn examination including hips, and does not record vitamin K, so the history is what tells you it was declined.</p><h3>The cord bleed and vitamin K deficiency bleeding</h3><p>Vitamin K is a vitamin that helps blood clot. It is not a vaccine, and newborns are born with low levels. Late VKDB occurs from about 2 to 12 weeks and can occur up to 6 months, with intracranial haemorrhage a major risk. Risk factors include no prophylaxis, exclusive breastfeeding and cholestasis. A cord-stump bleed that was slow to stop in an unprophylaxed, now cholestatic infant may be a warning bleed. The plan is urgent coagulation studies (PT/INR) and IM vitamin K 1 mg without delay, by the GP or the receiving team, without waiting for results.</p><h3>Why oral vitamin K is not an option here</h3><p>Oral prophylaxis needs several doses and protects less reliably. Cholestasis impairs absorption of fat-soluble vitamins, and active deficiency may already be present. Clinicians should clearly recommend IM treatment while respecting the parent's autonomy. If the parent declines, explain the risks again, involve the paediatric consultant urgently and document the informed refusal. Do not accept oral drops as a compromise.</p><h3>Sunlight and jaundice</h3><p>Sunlight is not a treatment for cholestatic jaundice and is unsafe for newborns because of the risk of sunburn. Phototherapy treats unconjugated hyperbilirubinaemia and does not address this problem.</p><h3>Two-vessel cord</h3><p>A two-vessel cord (single umbilical artery) can be a normal variant, but it raises the chance of an undetected congenital anomaly, especially of the renal tract and the heart. For an isolated finding with a normal antenatal scan and normal newborn examination, renal tract ultrasound is commonly arranged. Cardiac assessment (echocardiogram) is indicated if an anomaly is suspected or the newborn examination is abnormal, not automatically for every isolated two-vessel cord.</p><h3>Hips</h3><p>Barlow tests whether a located hip can be dislocated (adduct the flexed hip with gentle backward pressure). Ortolani relocates a dislocated hip (abduct the flexed hip while lifting the greater trochanter forward), felt as a clunk. A positive or abnormal finding needs hip ultrasound and paediatric or orthopaedic review. A cousin or nephew with DDH is a second-degree relationship and not a standard risk factor. With a normal documented hip examination and no first-degree family history, the plan is continued hip checks at routine visits, with ultrasound only if the examination is abnormal or other risk factors (for example first-degree family history or breech presentation) are present.</p><h3>SUDI, SIDS and safe sleep</h3><p>SUDI is the umbrella term for sudden unexpected death in infancy and includes SIDS and fatal sleep accidents such as accidental suffocation. SIDS is the sudden unexpected death of a baby under 1 year, usually during sleep, with no cause found after thorough investigation. Risk reduction: sleep on the back with feet at the foot of the cot, face and head uncovered with nothing loose near the head, a cot meeting Australian standards with a firm flat mattress and lightweight tucked-in bedding, a smoke-free environment, the baby's own safe sleep space in the same room as a caregiver for the first 6 to 12 months, and breastfeeding if possible. Sofa sleeping, pillows and tummy sleeping are particular hazards.</p><h3>Prioritising and safety netting</h3><p>With a baby who may have both cholestasis and an active vitamin K deficiency, the urgent referral comes first. Hip, cord and sleep counselling can be brief, with written resources and follow-up for the rest. On the way to hospital, bleeding, drowsiness, floppiness, vomiting, a fit or a bulging fontanelle (possible intracranial bleeding) mean calling 000.</p>",
  "focus": "Newborn check and parent counselling: vitamin K, hips, jaundice, safe sleep",
- "guide": "<p>A <strong>high-performing candidate</strong> takes a focused history that finds the pale stools, dark urine and the cord-stump bleed, and asks directly about vitamin K without blame. They recognise that jaundice at 18 days with pale stools and dark urine is cholestasis until proven otherwise, so biliary atresia must be excluded urgently. They also recognise that the cord bleed in an infant with no vitamin K prophylaxis and cholestasis may be a warning bleed of late VKDB. They arrange same-day paediatric or ED assessment by phone and letter without waiting for any result. They ensure coagulation studies (PT/INR) are done with the split bilirubin and recommend IM vitamin K without delay. They explain that oral vitamin K is not an acceptable alternative in this situation. They explain that vitamin K is not a vaccine, respect the parent's autonomy and escalate to the paediatric consultant if the parent declines. They answer the sunshine question clearly. Once the urgent plan is set, they answer the other questions briefly. They explain that a two-vessel cord is often a normal variant but warrants renal tract ultrasound and cardiac review only if indicated. They explain Barlow and Ortolani and that a second-degree relative with DDH does not justify a routine hip ultrasound when the hip examination is normal and there is no first-degree family history. They distinguish SUDI from SIDS, correct the unsafe sleep practices, and close with a summary, written resources and follow-up.</p><p>A <strong>borderline candidate</strong> notes the jaundice but does not link the pale stools, dark urine and cord bleed. They may order a split bilirubin and wait for the result before referring, or send Noah for outpatient bloods. They may offer oral vitamin K drops as a choice. They may order a hip ultrasound because of the sister's baby, or imply an echocardiogram is mandatory for the two-vessel cord. They may spend most of the time on safe sleep and hips, or sound judgemental about the vitamin K decision.</p>",
+ "guide": "<p>In Part 1 the examiner gives findings from the Exam findings only when the candidate says what they would examine. Alex raises the vitamin K, sunshine, hip and SUDI questions during Part 1; brief answers then, or a promise to come back to them, are fine. In Part 2 the examiner hands over the results and puts Alex's remaining questions (a lab test and waiting, vitamin K drops, the two-vessel cord).</p><p>A <strong>high-performing candidate</strong> finds the pale stools, dark urine and the cord-stump bleed, asks about vitamin K without blame, and finds the firm liver on examination. They recognise cholestasis until proven otherwise, so biliary atresia must be excluded urgently, and a possible warning bleed of late VKDB. They arrange same-day paediatric or ED assessment by phone and letter without waiting for any result, ensure PT/INR is done with the split bilirubin, and recommend IM vitamin K now, explaining why drops are not acceptable here. They respect Alex's autonomy and escalate if Alex declines. Once the urgent plan is set, they answer the cord, hip and sleep questions briefly and give specific red flags.</p><p>A <strong>borderline candidate</strong> notes the jaundice but does not link the pale stools, dark urine and cord bleed. They may order a split bilirubin and wait, offer oral vitamin K drops as a choice, order a hip ultrasound because of the sister's baby, imply an echocardiogram is mandatory for the two-vessel cord, spend most of the time on hips and sleep, or sound judgemental about the vitamin K decision.</p>",
  "id": "ai-1337df24",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Profile:</strong></p><ul><li><p>Name: Alex Nguyen, parent of Noah (18 days old, firstborn)</p></li><li><p>Aboriginal or Torres Strait Islander: No</p></li><li><p>Location: General Practice clinic</p></li><li><p>Demeanour: tired, anxious and a little defensive about the vitamin K decision. You become tearful if blamed.</p></li></ul><p><strong>Opening line:</strong> 'Noah is still really yellow. My mum says it's just breastmilk jaundice.'</p><p><strong>History (give only if asked):</strong></p><ul><li><p><strong>Jaundice:</strong> Noticed on day 3. It improved a little but never went away and has looked worse in the last week.</p></li><li><p><strong>Stools:</strong> Mustard yellow at first. Since about day 10 they have been getting paler. Now they are pale grey-white, like putty. You have a photo on your phone and show it if asked.</p></li><li><p><strong>Urine:</strong> Nappies are dark yellow-brown and stain.</p></li><li><p><strong>Feeding and general:</strong> Breastfed 8 times a day with a good latch, many wet nappies. He wakes for feeds, is not floppy or drowsy, and has had no vomiting, fever, fits or unusual irritability. You are not aware of any head injury.</p></li><li><p><strong>Bleeding:</strong> Around day 9 the cord stump bled as it was about to fall off. It soaked a cloth and you pressed on it for 10 to 15 minutes before it stopped. The midwife said it was probably normal. No bruises, nosebleeds, bleeding from the mouth, blood in vomit or blood in the nappy. Nothing is bleeding today.</p></li><li><p><strong>Vitamin K:</strong> 'We said no to it at the hospital. We thought it was a vaccine and we're not comfortable with vaccines. He had no drops either.' You signed a form. Say this only when asked about vitamin K or injections.</p></li><li><p><strong>Pregnancy and family:</strong> Uncomplicated pregnancy. The 20-week scan said the cord has two vessels instead of three, and nobody has mentioned it since. No diabetes, medications, alcohol or drugs. Mother's blood group A positive. No family history of liver disease, bleeding disorders or jaundice in babies. No first-degree family history of hip problems.</p></li><li><p><strong>Sleep (only if asked):</strong> Noah sleeps in your bed, or on the couch on a pillow with you when you are exhausted. He is wrapped tightly in a fluffy blanket and sometimes put on his tummy because he settles. His other parent smokes on the balcony.</p></li></ul><p><strong>Cues and questions to ask the candidate (spread through the counselling):</strong></p><ul><li><p>'Is it because we said no to vitamin K? Did we cause this?'</p></li><li><p>'Do we just need more sunshine?' Accept the answer if the candidate advises against it and explains why. If told sunlight is fine, say 'OK, I'll take him to the park.'</p></li><li><p>'Can we get the blood test at the lab and wait for the results before going anywhere?' or 'Can we come back tomorrow?' Agree to go today only after a clear explanation of the urgency.</p></li><li><p>'Is there a drops version of vitamin K instead? Would that be fine?' If the candidate offers drops as acceptable, say 'Good, drops then.' If the candidate clearly recommends the injection and explains why drops are not suitable now, say 'If that is what is safest for him, OK. I would rather the hospital doctors do it.' If the candidate is dismissive or does not explain, say 'I need to think about it' and stay hesitant about the injection, but agree to go to hospital.</p></li><li><p>'My sister's baby needed a hip brace. Should Noah have a hip scan?'</p></li><li><p>'The midwife said two vessels in the cord. Does that matter?'</p></li><li><p>'A friend's baby died last year and they said SUDI, not SIDS. Is that different?' Ask this if the candidate raises sleep, or in the last two minutes.</p></li></ul><p><em>Use only the script above. Give a realistic answer if asked anything outside it. Interrupt if the candidate uses medical jargon without explaining it.</em></p>",
+ "patient": "<p><strong>Role:</strong> You are Alex Nguyen, parent of Noah, who is 18 days old and your first baby. You are tired, anxious and a little defensive about the vitamin K decision. You become tearful if blamed. Noah is with you and the examiner gives examination findings from the Exam findings when the candidate says what they would examine.</p><p><strong>Opening line:</strong> \"Noah is still really yellow. My mum says it's just breastmilk jaundice.\"</p><p><strong>History (give only when asked):</strong></p><ul><li><strong>Jaundice:</strong> noticed on day 3. It improved a little but never went away, and he has looked more yellow in the last week.</li><li><strong>Stools:</strong> mustard yellow at first. Since about day 10 they have been getting paler. Now they are pale grey-white, like putty. You have a photo on your phone and show it if asked.</li><li><strong>Urine:</strong> the nappies are dark yellow-brown and stain.</li><li><strong>Feeding and general:</strong> breastfed about 8 times a day with a good latch, plenty of wet nappies. He wakes for feeds and is not floppy or drowsy. No vomiting, fever, fits or unusual irritability. No falls or knocks to the head that you know of.</li><li><strong>Bleeding:</strong> around day 9 the cord stump bled as it was about to fall off. It soaked a cloth and you pressed on it for 10 to 15 minutes before it stopped. The midwife said it was probably normal. No bruises, nosebleeds, bleeding from the mouth, blood in vomit or blood in the nappy. Nothing is bleeding today.</li><li><strong>Vitamin K (say this only when asked about vitamin K or injections):</strong> \"We said no to it at the hospital. We thought it was a vaccine and we're not comfortable with vaccines. He had no drops either.\" You signed a form.</li><li><strong>Pregnancy and birth:</strong> uncomplicated pregnancy, antenatal blood tests normal as far as you know. The 20-week scan said the cord has two vessels instead of three, and nobody has mentioned it since. No diabetes, medicines, alcohol or drugs. Born at 39 weeks by normal vaginal birth, head first, weighing 3.4 kg. Home on day 2. The heel-prick test was done.</li><li><strong>Family:</strong> no family history of liver disease, bleeding disorders or jaundice in babies. You and your partner are not related. Your sister's baby needed a hip brace. No hip problems in you, your partner or any of Noah's brothers or sisters (he has none).</li><li><strong>Medicines and allergies:</strong> none for Noah. You take no medicines.</li><li><strong>Sleep and home (only if asked):</strong> Noah sleeps in your bed, or on the couch on a pillow with you when you are exhausted. He is wrapped tightly in a fluffy blanket and is sometimes put on his tummy because he settles. Your partner smokes on the balcony. Your mum helps most days.</li></ul><p><strong>Ideas, concerns, expectations:</strong> you think it is breastmilk jaundice, as your mum says, and wonder if he just needs more sun. You are worried it is your fault for saying no to vitamin K. You expect a blood test at the lab and to be told it will settle.</p><p><strong>Questions to raise in Part 1 (one at a time):</strong></p><ul><li>When vitamin K comes up: \"Is it because we said no to vitamin K? Did we cause this?\"</li><li>During the history: \"Do we just need more sunshine?\" Accept the answer if the candidate advises against it and explains why. If told sunlight is fine, say \"OK, I'll take him to the park.\"</li><li>When the candidate examines the hips: \"My sister's baby needed a hip brace. Should Noah have a hip scan?\"</li><li>If the candidate asks about sleep, or near the end of Part 1: \"A friend's baby died last year and they said SUDI, not SIDS. Is that different?\"</li></ul><p>In Part 2 the examiner puts your remaining questions (waiting for a lab test, vitamin K drops, the two-vessel cord) to the candidate. Interrupt if the candidate uses medical jargon without explaining it.</p>",
  "points": [
   "Jaundice beyond 14 days in a term baby, especially with pale stools and dark urine, is cholestasis until proven otherwise. Refer for same-day paediatric or ED assessment, not outpatient tests.",
   "A cord bleed in an infant who had no vitamin K and has cholestasis may be a warning bleed of late VKDB. Get urgent PT/INR and give IM vitamin K without delay.",
@@ -400,15 +395,48 @@
   "Paediatrics",
   "General Practice"
  ],
- "stem": "<p>You are a GP seeing Noah, an 18-day-old boy, with his parent, Alex Nguyen. Alex has brought Noah in because 'he is still yellow'. A tertiary children's hospital with a paediatric emergency department is 25 minutes away.</p><p>The hospital discharge summary (day 2) records: term (39+3 weeks) spontaneous vaginal delivery, cephalic presentation, birth weight 3.4 kg, two-vessel umbilical cord noted at birth, normal newborn examination including hips and heart sounds, newborn screening collected. Vitamin K status is not recorded.</p><p><strong>Your examination findings today (already completed):</strong></p><ul><li><p>Alert, feeding, normal tone. Temperature 36.8 °C, heart rate 140/min, respiratory rate 40/min, weight 3.7 kg</p></li><li><p>Jaundiced to the thighs. No pallor, bruising or petechiae</p></li><li><p>Cord stump has separated and the umbilicus is dry with no active bleeding</p></li><li><p>Anterior fontanelle soft and flat. Heart sounds normal with no murmur</p></li><li><p>Abdomen soft, liver edge palpable 2 cm below the right costal margin, spleen not palpable</p></li><li><p>Hips: Barlow and Ortolani negative bilaterally, abduction symmetrical</p></li></ul><p>The total time for this station is 11 minutes.</p>",
+ "stem": "<p>You are a GP. Alex Nguyen has brought in Noah, their 18-day-old son, because \"he is still yellow\". A tertiary children's hospital with a paediatric emergency department is about half an hour away by car. A practice nurse is available to help.</p>",
  "tasks": [
-  "<p>Take a <strong>focused history</strong> from the parent (3 minutes).</p>",
-  "<p><strong>Explain</strong> your assessment and <strong>arrange</strong> the management Noah needs today. <strong>Counsel</strong> the parent on their questions: vitamin K, jaundice, the two-vessel cord, hips and safe sleep (8 minutes). Deal with the urgent problem first. The hip, cord and sleep questions can be answered briefly.</p>"
+  "<p>Take a focused <strong>history</strong> from Alex and perform a focused <strong>examination</strong> of Noah, telling the examiner what you are examining and why (10 minutes).</p>",
+  "<p>The examiner will give you Noah's observations, a stool colour chart comparison, his 20-week morphology scan report and his hospital discharge summary. <strong>Interpret</strong> them, then outline your <strong>management approach</strong> for today, answer Alex's questions about vitamin K, the two-vessel cord, hips and safe sleep briefly, and give your <strong>safety netting</strong> (5 minutes).</p>"
  ],
  "title": "Pale stools and a bleeding cord stump in a jaundiced 18-day-old",
  "type": [
   "History",
+  "Examination",
   "Counselling",
   "Management"
- ]
+ ],
+ "part2": {
+  "lead": "Here are Noah's observations from the practice nurse, the stool colour chart comparison, his 20-week morphology scan report and his day 2 hospital discharge summary.",
+  "handover": [
+   {
+    "label": "Observations",
+    "result": "<p>HR 140, RR 40, temperature 36.8 °C, SpO2 98% on room air, CRT under 2 seconds, BGL 4.3 mmol/L. Weight 3.7 kg (birth weight 3.4 kg), gaining appropriately.</p>"
+   },
+   {
+    "label": "Stool colour chart",
+    "result": "<p>Today's nappy and the photo on Alex's phone both match the palest cards on the infant stool colour chart (pale grey-white, the abnormal range). Urine in the nappy dark yellow-brown and staining.</p>"
+   },
+   {
+    "label": "20-week morphology ultrasound report",
+    "result": "<p>Single umbilical artery (two-vessel cord). Fetal kidneys and bladder normal. Four-chamber view and outflow tracts of the heart normal. Growth on the 50th centile. No other structural anomaly seen.</p>"
+   },
+   {
+    "label": "Hospital discharge summary (day 2)",
+    "result": "<p>Term (39+3 weeks) spontaneous vaginal birth, cephalic. Birth weight 3.4 kg. Two-vessel umbilical cord noted at birth. Newborn examination normal, including hips (Barlow and Ortolani negative) and heart sounds. Newborn bloodspot screening collected. Vitamin K: not recorded.</p>"
+   }
+  ],
+  "ask": [
+   "What do these results and your examination findings show?",
+   "What is the most likely problem, and what else worries you about Noah today?",
+   "What is your management today? Alex asks: \"Can we get the blood test at the lab and come back tomorrow? And could he have vitamin K drops instead of the injection?\"",
+   "Briefly, what do you tell Alex about the two-vessel cord, a hip scan and safe sleep?",
+   "What safety netting and follow-up do you arrange?"
+  ]
+ },
+ "revised": {
+  "at": "2026-10-23",
+  "by": "format 5/10/5"
+ }
 }

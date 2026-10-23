@@ -10,7 +10,6 @@ import { writeStation, exemplars, normalize, stationId, STATION_SCHEMA, REVIEW_S
 
 const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 const bank = fs.readdirSync(path.join(PUB, 'osce')).filter(f => f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(PUB, 'osce', f), 'utf8')));
-const stats = bankStats(bank);
 
 /* a well-formed acute paediatric station in the 5 / 10 / 5 format, as the model would return it */
 const leaf = (id, x, crit = false) => ({ id, t: 'checkbox', x, crit, d: '', kids: [] });
@@ -37,13 +36,17 @@ const DRAFT = {
   imaging: [],
 };
 
+/* the gates and the flow are tested against a fixed bank (three acute and three clinic stations shaped like DRAFT), so a
+   change in the shipped stations never moves these tests; the shipped bank has its own tests below and in bank.test.mjs */
+const SYNTH = [0, 1, 2].flatMap(i => [{ id: `ai-acute${i}`, ...normalize(DRAFT) }, { id: `ai-clinic${i}`, ...normalize({ ...DRAFT, type: ['History', 'Examination', 'Management'] }) }]);
+const stats = bankStats(SYNTH);
+
 test('every shipped station passes the shape gate', () => {
   for (const s of bank) assert.deepEqual(shapeProblems(s), [], s.id);
 });
 
 test('the bank sets the checklist range for each kind', () => {
-  assert.ok(stats.acute.min >= 12 && stats.acute.max > stats.acute.min);
-  assert.ok(stats.clinic.min >= 12 && stats.clinic.max > stats.clinic.min);
+  for (const b of [bankStats(bank), stats]) for (const k of ['acute', 'clinic']) assert.ok(b[k].min >= 12 && b[k].max > b[k].min, k);
 });
 
 test('the quality gates pass a sound draft and name each thing wrong with a broken one', () => {
@@ -101,7 +104,7 @@ function stub(script) {
 
 test('flow: a draft that passes the gates and the examiner ships with its exam findings', async () => {
   const { calls, ask } = stub(a => (a.label === 'draft' ? DRAFT : a.label.startsWith('review') ? { pass: true, issues: [] } : EXAM));
-  const r = await writeStation('acute asthma', { acute: true, specialty: ['Paediatrics'] }, { bank, ask, now: '2026-10-23T00:00:00Z' });
+  const r = await writeStation('acute asthma', { acute: true, specialty: ['Paediatrics'] }, { bank: SYNTH, ask, now: '2026-10-23T00:00:00Z' });
   assert.equal(r.ok, true);
   assert.deepEqual(calls, ['draft', 'review 1', 'exam findings']);
   assert.match(r.station.id, /^ai-[0-9a-f]{8}$/);
@@ -118,7 +121,7 @@ test('flow: gate problems and examiner blockers go back for one revision', async
     if (a.label === 'review 2') return { pass: true, issues: [{ where: 'stem', problem: 'comma', fix: 'add one', severity: 'minor' }] };
     return EXAM;
   });
-  const r = await writeStation('acute asthma', { acute: true }, { bank, ask });
+  const r = await writeStation('acute asthma', { acute: true }, { bank: SYNTH, ask });
   assert.equal(r.ok, true);
   assert.deepEqual(calls, ['draft', 'review 1', 'revise', 'review 2', 'exam findings']);
   assert.equal(r.rounds.length, 2);
@@ -126,7 +129,7 @@ test('flow: gate problems and examiner blockers go back for one revision', async
 
 test('flow: a station that still fails after its revision is kept back', async () => {
   const { calls, ask } = stub(a => (a.label === 'draft' || a.label === 'revise' ? DRAFT : a.label.startsWith('review') ? { pass: false, issues: [{ where: 'x', problem: 'unsafe dose', fix: 'fix it', severity: 'blocker' }] } : EXAM));
-  const r = await writeStation('acute asthma', { acute: true }, { bank, ask });
+  const r = await writeStation('acute asthma', { acute: true }, { bank: SYNTH, ask });
   assert.equal(r.ok, false);
   assert.equal(r.exam, null);
   assert.deepEqual(calls, ['draft', 'review 1', 'revise', 'review 2']);

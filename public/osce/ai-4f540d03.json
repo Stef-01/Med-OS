@@ -17,112 +17,223 @@
   {
    "id": 2,
    "t": "checkbox",
-   "x": "Performs hand hygiene, introduces self and confirms the infant's identity with the mother."
+   "x": "Washes hands, introduces self to the mother, confirms the infant's name and age, and handles the infant gently."
   },
   {
    "id": 3,
-   "t": "heading",
-   "x": "Assessment (A to E)"
+   "t": "checkbox",
+   "x": "Uses plain language, acknowledges the mother's worry and explains what they are doing."
   },
   {
    "id": 4,
-   "t": "checkbox",
-   "x": "Assesses airway and breathing: patent airway, RR and SpO2 98%; states oxygen is only needed if SpO2 falls below 92%, with a target of 92% or above."
+   "t": "heading",
+   "x": "History"
   },
   {
-   "crit": true,
    "id": 5,
    "t": "checkbox",
-   "x": "Assesses circulation: HR 170, CRT 3 seconds, BP and pulses; recognises compensated shock from dehydration."
+   "x": "Characterises the vomiting:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Onset 5 days ago and getting worse, now after almost every feed"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Forceful (projectile) vomiting"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Hungry and keen to feed again straight after vomiting"
+    }
+   ]
   },
   {
    "id": 6,
    "t": "checkbox",
-   "x": "Assesses hydration: sunken fontanelle, dry mucous membranes, reduced wet nappies, weight loss from 4.4 kg to 4.0 kg; classifies as moderate dehydration (5 to 10%)."
+   "x": "Asks specifically whether the vomit has been green (bile) or contained blood, and says why green vomit matters (malrotation with volvulus).",
+   "crit": true
   },
   {
-   "crit": true,
    "id": 7,
    "t": "checkbox",
-   "x": "Checks disability: AVPU and BGL (4.1 mmol/L)."
+   "x": "Asks about intake and output: feeding pattern, wet nappies (2 in 12 hours) and stools."
   },
   {
    "id": 8,
    "t": "checkbox",
-   "x": "Elicits the key history and examination: projectile non-bilious vomiting after feeds, hungry after vomiting, olive mass, visible peristalsis; notes absence of bile, which argues against malrotation."
+   "x": "Screens for other causes: fever, diarrhoea, cough, rash, jaundice and how alert he has been."
   },
   {
    "id": 9,
-   "t": "heading",
-   "x": "Management"
+   "t": "checkbox",
+   "x": "Birth, growth and background: term birth, weight at the 2-week check (4.4 kg), first-born, medicines including any antibiotics, and the father's operation for vomiting as a baby."
   },
   {
    "id": 10,
    "t": "checkbox",
-   "x": "Orders nil by mouth and obtains IV access."
+   "x": "Explores the mother's ideas, concerns and expectations, including her worry that she caused it."
   },
   {
-   "crit": true,
    "id": 11,
-   "t": "checkbox",
-   "x": "Requests a venous gas with electrolytes and interprets a hypochloraemic, hypokalaemic metabolic alkalosis."
+   "t": "heading",
+   "x": "Examination"
   },
   {
-   "crit": true,
    "id": 12,
    "t": "checkbox",
-   "x": "Gives a 0.9% sodium chloride bolus for shock: 10 mL/kg = 40 mL for 4 kg, then reassesses."
+   "x": "Assesses general state and hydration:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Alertness and tone (sleepy but rousable)"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Sunken fontanelle, dry mucous membranes, no tears and reduced skin turgor"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Weighs him and compares with the previous weight (about 9% loss)"
+    }
+   ]
   },
   {
    "id": 13,
    "t": "checkbox",
-   "x": "Continues 0.9% sodium chloride with 5% glucose at 1.5 times maintenance, adds potassium once urine output is established (per local protocol), and avoids hypotonic fluid."
+   "x": "Assesses circulation: heart rate, central CRT, peripheral temperature, pulses and BP."
   },
   {
-   "crit": true,
    "id": 14,
    "t": "checkbox",
-   "x": "States that surgery is delayed until bicarbonate is below 28 mmol/L and chloride is above 100 mmol/L, with repeat electrolytes and BGL monitoring."
+   "x": "Asks for a BGL, as every vomiting infant needs one.",
+   "crit": true
   },
   {
    "id": 15,
    "t": "checkbox",
-   "x": "Confirms the diagnosis with ultrasound and refers early to the paediatric surgical team for pyloromyotomy."
+   "x": "Examines the abdomen with the infant calm: looks for visible peristalsis (ideally during a test feed) and palpates for an olive-shaped mass in the right upper abdomen."
   },
   {
    "id": 16,
-   "t": "heading",
-   "x": "Communication"
+   "t": "checkbox",
+   "x": "Checks the groins and genitalia for a hernia and looks at the vomit and nappy for bile or blood."
   },
   {
    "id": 17,
-   "t": "checkbox",
-   "x": "Explains pyloric stenosis in plain language (narrowed muscle at the stomach outlet), reassures the mother it is not caused by her feeding, and explains why he is dehydrated."
+   "t": "heading",
+   "x": "Interpretation"
   },
   {
    "id": 18,
    "t": "checkbox",
-   "x": "Explains the plan: fasting, drip and blood tests, surgery once the blood chemistry is corrected, excellent outcome, no recurrence, and feeds restarting after surgery."
+   "x": "Recognises moderate dehydration with compensated shock: HR 170, CRT 3 seconds and cool peripheries with a normal BP, a sunken fontanelle and about 9% weight loss.",
+   "crit": true
   },
   {
    "id": 19,
    "t": "checkbox",
-   "x": "Elicits and addresses the mother's concerns with empathy and checks understanding."
+   "x": "Interprets the gas as a hypochloraemic, hypokalaemic metabolic alkalosis (pH 7.52, bicarbonate 36, chloride 88, potassium 3.0) with a normal lactate, and explains it: loss of acid and chloride in the vomit, then the kidney holding sodium at the cost of potassium and hydrogen.",
+   "crit": true
+  },
+  {
+   "id": 20,
+   "t": "checkbox",
+   "x": "States that the ultrasound confirms pyloric stenosis: wall thickness 5 mm and channel length 19 mm."
+  },
+  {
+   "id": 21,
+   "t": "checkbox",
+   "x": "Considers other causes and what argues against them: malrotation with volvulus (bilious vomiting), reflux, gastroenteritis, infection such as a UTI or sepsis, raised intracranial pressure, and salt-wasting congenital adrenal hyperplasia (which gives low sodium, high potassium and an acidosis, the opposite pattern)."
+  },
+  {
+   "id": 22,
+   "t": "checkbox",
+   "x": "Interprets the repeat gas: bicarbonate 26 and chloride 103 meet the targets for surgery, potassium is normal and he is passing urine, so he is ready for theatre."
+  },
+  {
+   "id": 23,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "id": 24,
+   "t": "checkbox",
+   "x": "Keeps him nil by mouth, inserts an IV cannula and takes bloods for the gas, electrolytes and BGL."
+  },
+  {
+   "id": 25,
+   "t": "checkbox",
+   "x": "Gives a 0.9% sodium chloride bolus for compensated shock: 10 mL/kg = 40 mL for 4 kg, then reassesses HR and CRT and repeats if still shocked.",
+   "crit": true
+  },
+  {
+   "id": 26,
+   "t": "checkbox",
+   "x": "Then rehydrates with 0.9% sodium chloride with 5% glucose at 1.5 times maintenance: 6 mL/kg/h = 24 mL/h for 4 kg, adds potassium once he is passing urine, and avoids hypotonic fluid."
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "States that surgery is urgent but not an emergency, and is delayed until bicarbonate is below 28 mmol/L and chloride above 100 mmol/L, with repeat electrolytes and BGL monitoring.",
+   "crit": true
+  },
+  {
+   "id": 28,
+   "t": "checkbox",
+   "x": "Refers early to the paediatric surgical team for pyloromyotomy and admits him under their care."
+  },
+  {
+   "id": 29,
+   "t": "checkbox",
+   "x": "Explains pyloric stenosis to the mother in plain language (a thickened muscle at the outlet of the stomach), reassures her it is not caused by her feeding, and explains why he is dry and why the blood tests matter."
+  },
+  {
+   "id": 30,
+   "t": "checkbox",
+   "x": "Explains the plan: a drip and no feeds for now, an operation once the blood salts are corrected, an excellent outcome, it does not come back, and feeds usually restart within hours of the operation. Checks understanding."
+  },
+  {
+   "id": 31,
+   "t": "heading",
+   "x": "Safety netting"
+  },
+  {
+   "id": 32,
+   "t": "checkbox",
+   "x": "Asks the nurse to call them straight away while he waits for surgery if he vomits green, his heart rate rises or his perfusion worsens again, he becomes harder to wake, or a BGL is low."
+  },
+  {
+   "id": 33,
+   "t": "checkbox",
+   "x": "Tells the mother to return to the ED after discharge (or call 000 if he is floppy or hard to wake) for repeated forceful or green vomiting, fewer wet nappies, poor feeding or drowsiness, fever, or redness or discharge from the wound.",
+   "crit": true
+  },
+  {
+   "id": 34,
+   "t": "checkbox",
+   "x": "Arranges follow-up after discharge: a weight and wound check with the GP or maternal and child health nurse within a week, and surgical review as the team arranges."
   }
  ],
  "complexity": "Moderate",
  "context": [],
- "desc": "This station involves assessing a dehydrated infant with vomiting, interpreting the metabolic alkalosis of pyloric stenosis, starting fluid resuscitation and explaining the plan to the mother.",
+ "desc": "This station involves a focused history from the mother and an examination of a 5-week-old boy with worsening vomiting after feeds, then interpreting his observations, venous gas and ultrasound, outlining fluid resuscitation and the plan for surgery, and safety-netting the mother.",
  "diagnosis": [
   "Hypertrophic pyloric stenosis"
  ],
- "explain": "<h3>Why the metabolic alkalosis develops</h3><p>Persistent vomiting of gastric contents loses hydrogen and chloride ions. Volume depletion then stimulates aldosterone, which retains sodium at the cost of potassium and hydrogen excretion. The result is a hypochloraemic, hypokalaemic metabolic alkalosis with dehydration.</p><h3>Resuscitation before surgery</h3><p>Pyloric stenosis is a medical emergency but a surgical urgency, not an emergency. Treat shock with an isotonic bolus, then rehydrate with 0.9% sodium chloride with 5% glucose, adding potassium once the infant is passing urine. Operating before the alkalosis is corrected risks post-anaesthetic apnoea, because the respiratory compensation for the alkalosis (hypoventilation) leaves the infant vulnerable.</p><h3>Diagnosis</h3><p>The classic picture is a first-born boy aged 3 to 6 weeks with non-bilious projectile vomiting who stays hungry after vomiting. An olive mass or visible peristalsis may be found, and ultrasound confirms the diagnosis. Bilious vomiting needs urgent exclusion of malrotation with volvulus.</p>",
+ "explain": "<h3>Diagnosis</h3><p>The classic picture is a first-born boy aged 3 to 6 weeks with non-bilious projectile vomiting who stays hungry after vomiting. A family history, especially in a parent, raises the risk. An olive mass or visible peristalsis may be found, and ultrasound confirms the diagnosis (here a wall thickness of 5 mm and a channel length of 19 mm). Bilious vomiting needs urgent exclusion of malrotation with volvulus. Salt-wasting congenital adrenal hyperplasia can also present with vomiting and dehydration in a young boy, but gives hyponatraemia, hyperkalaemia and an acidosis.</p><h3>Why the metabolic alkalosis develops</h3><p>Persistent vomiting of gastric contents loses hydrogen and chloride ions. Volume depletion then stimulates aldosterone, which retains sodium at the cost of potassium and hydrogen excretion. The result is a hypochloraemic, hypokalaemic metabolic alkalosis with dehydration.</p><h3>Resuscitation before surgery</h3><p>Pyloric stenosis is a medical emergency but a surgical urgency, not an emergency. Keep the infant nil by mouth, treat shock with a 10 mL/kg 0.9% sodium chloride bolus (40 mL for 4 kg) and reassess, then rehydrate with 0.9% sodium chloride with 5% glucose at 1.5 times maintenance (24 mL/h for 4 kg), adding potassium once the infant is passing urine. Operating before the alkalosis is corrected risks post-anaesthetic apnoea, because the respiratory compensation for the alkalosis (hypoventilation) leaves the infant vulnerable. Surgery waits until bicarbonate is below 28 mmol/L and chloride above 100 mmol/L, as on the repeat gas here.</p><h3>Safety netting</h3><p>While he waits, the nurse should escalate bilious vomiting, worsening perfusion, drowsiness or a low BGL. After pyloromyotomy, feeds restart within hours and the condition does not recur. Parents should return for repeated forceful or green vomiting, fewer wet nappies, poor feeding, fever or a red or discharging wound, with a weight and wound check after discharge.</p>",
  "focus": "Pyloric stenosis: a vomiting infant, dehydration and the metabolic alkalosis",
- "guide": "<p>A <strong>high-performing candidate</strong> uses a systematic A to E approach, recognises compensated shock and gives a 10 mL/kg bolus promptly. They check the BGL, interpret the gas as a hypochloraemic, hypokalaemic metabolic alkalosis, and state the electrolyte targets that must be met before surgery. They explain the diagnosis and plan to the mother without jargon and reassure her about the cause and the outcome.</p><p>A <strong>borderline candidate</strong> identifies pyloric stenosis but delays fluid resuscitation, misses the BGL, or cannot state the targets for surgery. They may suggest early theatre or oral feeds. Their explanation to the mother is vague or technical.</p>",
+ "guide": "<p>In Part 1, the mother answers the history and the examiner gives findings from the Exam findings only when the candidate says what they would examine. In Part 2, hand over the results and ask the questions in order.</p><p>A <strong>high-performing candidate</strong> takes a focused history that confirms non-bilious projectile vomiting and screens for other causes, checks the BGL, recognises compensated shock with moderate dehydration, interprets the hypochloraemic, hypokalaemic metabolic alkalosis and the ultrasound, gives a 10 mL/kg bolus (40 mL) and then 1.5 times maintenance (24 mL/h), states the electrolyte targets for surgery and recognises that the repeat gas meets them. They explain the diagnosis and plan without jargon, reassure the mother about the cause and the outcome, and give specific return advice.</p><p>A <strong>borderline candidate</strong> identifies pyloric stenosis but does not ask about bile, misses the BGL, delays fluid resuscitation, cannot state the targets for surgery or suggests early theatre or oral feeds, and gives vague safety netting.</p>",
  "id": "ai-4f540d03",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Role:</strong> You are the ED nurse. The mother is at the bedside (the nurse voices the mother's answers). Respond only to what the candidate asks or requests.</p><p><strong>Opening observations:</strong> HR 170, RR 40, SpO2 98% in room air, BP 85/50, CRT 3 seconds, temperature 36.9°C, alert but sleepy, BGL 4.1 mmol/L. Weight 4.0 kg today; 4.4 kg at the 2-week check.</p><p><strong>History if asked:</strong></p><ul><li><p>Forceful non-bilious vomiting after almost every feed for 5 days, getting worse.</p></li><li><p>Hungry and keen to feed again straight after vomiting.</p></li><li><p>No blood or green vomit, no fever, no diarrhoea.</p></li><li><p>Fewer wet nappies (2 in the last 12 hours).</p></li><li><p>Born at term, otherwise well, no medications, no sick contacts.</p></li></ul><p><strong>Examination if asked:</strong> fontanelle sunken, dry mucous membranes, abdomen soft. A firm olive-shaped mass is felt in the right upper abdomen. Visible peristalsis is seen after a test feed.</p><p><strong>Results if requested:</strong></p><ul><li><p>Venous gas: pH 7.52, bicarbonate 36 mmol/L, chloride 88 mmol/L, potassium 3.0 mmol/L, sodium 134 mmol/L, lactate 1.2 mmol/L.</p></li><li><p>Ultrasound: pyloric muscle thickness 5 mm, channel length 19 mm.</p></li></ul><p><strong>Changes in observations:</strong></p><ul><li><p>If a 10 mL/kg 0.9% sodium chloride bolus (40 mL) is given: HR falls to 150 and CRT to 2 seconds.</p></li><li><p>If no bolus is ordered by 5 minutes: HR rises to 185, CRT 4 seconds, infant becomes lethargic.</p></li><li><p>If a hypotonic fluid or oral feeds are ordered: nurse queries the order.</p></li></ul><p><strong>Mother's questions (near the end):</strong></p><ul><li><p>\"Did I do something wrong with his feeding?\"</p></li><li><p>\"Why is he so dry and why do the blood tests matter?\"</p></li><li><p>\"Does he need an operation, and will it come back?\"</p></li><li><p>\"When can he feed again?\"</p></li></ul>",
+ "patient": "<p><strong>Role:</strong> You are the mother of a 5-week-old boy who weighs 4.0 kg today. You are worried and tired. The examiner gives examination findings from the Exam findings when the candidate says what they would examine, and the nurse gives the observations and the BGL if asked. If the candidate asks to watch a test feed, the nurse gives a small feed so they can look at the abdomen.</p><p><strong>Opening line:</strong> \"He keeps throwing up after his feeds, and it shoots right out. He isn't keeping anything down.\"</p><p><strong>History (give only when asked):</strong></p><ul><li>The vomiting started 5 days ago, a few times a day at first. Now it happens soon after almost every feed.</li><li>The vomit is forceful and shoots out of his mouth. It looks like milk or curdled milk. It has never been green or yellow, and there has been no blood in it.</li><li>He is hungry straight after vomiting and wants to feed again.</li><li>He is breastfed every 2 to 3 hours and feeds keenly.</li><li>Only 2 wet nappies in the last 12 hours (he usually has 6 or more a day). His poos are small, pasty and fewer than usual. No diarrhoea.</li><li>No fever, cough, runny nose, rash or yellow skin. He has been sleepier than usual today.</li><li>He weighed 4.4 kg at his 2-week check with the maternal and child health nurse.</li><li>Born at 39 weeks by normal vaginal birth with no problems. He is your first baby. He had his hepatitis B vaccine at birth.</li><li>No medicines, and he has never had antibiotics. No allergies.</li><li>Family history: his father had an operation for vomiting as a baby. You are not sure what it was called.</li><li>He lives with you and his father. Nobody at home is unwell.</li></ul><p><strong>Ideas, concerns, expectations:</strong> you think it might be reflux, or that your milk does not agree with him, and you worry you are doing something wrong with his feeding. You are frightened because he looks thinner. You were hoping for a medicine for reflux.</p><p><strong>Questions to ask if there is time:</strong> \"Did I do something wrong with his feeding?\" \"Why is he so sleepy?\"</p>",
  "points": [
   "Pyloric stenosis causes a hypochloraemic, hypokalaemic metabolic alkalosis.",
   "Correct dehydration and electrolytes before surgery; the RCH targets are bicarbonate below 28 mmol/L and chloride above 100 mmol/L.",
@@ -144,16 +255,48 @@
   "Paediatrics",
   "Emergency Medicine"
  ],
- "stem": "<p>You are the junior doctor in a paediatric Emergency Department. A 5-week-old boy, weight 4.0 kg today, has been brought in by his mother with a 5-day history of worsening vomiting after feeds. A nurse is with the infant and has attached monitoring. You have <strong>2 minutes reading time</strong> and <strong>8 minutes</strong> in the station.</p>",
+ "stem": "<p>You are the junior doctor in a paediatric Emergency Department. A 5-week-old boy has been brought in by his mother because he has been vomiting after feeds, and it is getting worse. He weighs 4.0 kg today. A nurse has attached monitoring and is with you.</p>",
  "tasks": [
-  "<p><strong>Assess</strong> the infant using an A to E approach and ask the nurse and mother for a focused history (3 minutes).</p>",
-  "<p><strong>Outline</strong> your investigations and initial management, including fluids, to the examiner and nurse (3 minutes).</p>",
-  "<p><strong>Explain</strong> the likely diagnosis and plan to the mother (2 minutes).</p>"
+  "<p>Take a focused <strong>history</strong> from the mother and perform a focused <strong>examination</strong> of the infant, telling the examiner what you are examining and why (10 minutes).</p>",
+  "<p>The examiner will give you the infant's observations, a venous blood gas, an ultrasound report and a repeat gas the next day. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, with fluid volumes for this infant, and your <strong>safety netting</strong> (5 minutes).</p>"
  ],
  "title": "Projectile vomiting in a 5-week-old infant",
  "type": [
   "Emergency",
-  "Management",
-  "Counselling"
- ]
+  "History",
+  "Examination",
+  "Management"
+ ],
+ "part2": {
+  "lead": "Here are his observations on arrival, a venous blood gas and the ultrasound report. The last result is a repeat gas the next morning, after 24 hours of IV fluids.",
+  "handover": [
+   {
+    "label": "Observations on arrival",
+    "result": "<p>HR 170, RR 40, BP 85/50, SpO2 98% on room air, CRT 3 seconds with cool hands and feet, temperature 36.9 °C, sleepy but rousable. BGL 4.1 mmol/L. Weight 4.0 kg today; 4.4 kg at the 2-week check.</p>"
+   },
+   {
+    "label": "Venous blood gas with electrolytes",
+    "result": "<table><thead><tr><th>Test</th><th>Result</th><th>Reference</th></tr></thead><tbody><tr><td>pH</td><td>7.52</td><td>7.35 to 7.45</td></tr><tr><td>Bicarbonate</td><td>36 mmol/L</td><td>20 to 28</td></tr><tr><td>Chloride</td><td>88 mmol/L</td><td>95 to 110</td></tr><tr><td>Sodium</td><td>134 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>3.0 mmol/L</td><td>3.5 to 5.5</td></tr><tr><td>Lactate</td><td>1.2 mmol/L</td><td>below 2.0</td></tr></tbody></table>"
+   },
+   {
+    "label": "Abdominal ultrasound",
+    "result": "<p>The pyloric muscle is thickened: wall thickness 5 mm, pyloric channel length 19 mm. The channel stays closed through the scan and little fluid passes from a full stomach. Impression: hypertrophic pyloric stenosis.</p>"
+   },
+   {
+    "label": "Repeat venous gas the next morning",
+    "result": "<p>After the first fluid bolus and 24 hours of IV fluids: pH 7.43, bicarbonate 26 mmol/L, chloride 103 mmol/L, sodium 138 mmol/L, potassium 3.9 mmol/L. BGL 5.0 mmol/L. HR 135, CRT under 2 seconds, 5 wet nappies overnight.</p>"
+   }
+  ],
+  "ask": [
+   "What do the observations and the venous gas show, and why does this pattern develop?",
+   "What does the ultrasound show? What is the diagnosis, and what else would you consider?",
+   "What is your management now? Give fluids with volumes for this infant.",
+   "Is he ready for theatre on the repeat gas, and what will you tell his mother about the plan?",
+   "What should the nurse watch for while he waits, and what return advice will his mother get when he goes home?"
+  ]
+ },
+ "revised": {
+  "at": "2026-10-23",
+  "by": "format 5/10/5"
+ }
 }

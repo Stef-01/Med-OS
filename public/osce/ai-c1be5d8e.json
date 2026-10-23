@@ -34,12 +34,14 @@
   },
   {
    "id": 5,
+   "t": "checkbox",
+   "x": "Explores the blood pressure concern:",
    "kids": [
     {
-     "crit": true,
      "id": 1,
      "t": "checkbox",
-     "x": "Asks about symptoms of end-organ involvement or severe hypertension (headache, chest pain, visual change, neurological symptoms)."
+     "x": "Asks about symptoms of end-organ involvement or severe hypertension (headache, chest pain, visual change, neurological symptoms).",
+     "crit": true
     },
     {
      "id": 2,
@@ -50,14 +52,19 @@
      "id": 3,
      "t": "checkbox",
      "x": "Asks about medicines and substances that raise blood pressure (NSAIDs, decongestants, caffeine, licorice, alcohol)."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Screens for secondary causes: kidney disease, episodes of sweating, palpitations and headache, muscle weakness or cramps."
     }
-   ],
-   "t": "checkbox",
-   "x": "Explores the blood pressure concern:"
+   ]
   },
   {
-   "crit": true,
    "id": 6,
+   "t": "checkbox",
+   "x": "Assesses the four Life's Essential 8 health behaviours:",
+   "crit": true,
    "kids": [
     {
      "id": 1,
@@ -77,41 +84,124 @@
     {
      "id": 4,
      "t": "checkbox",
-     "x": "Sleep health (duration, snoring, daytime sleepiness)."
+     "x": "Sleep health (duration, snoring, witnessed pauses in breathing, daytime sleepiness)."
     }
-   ],
-   "t": "checkbox",
-   "x": "Assesses the four Life's Essential 8 health behaviours:"
+   ]
   },
   {
    "id": 7,
    "t": "checkbox",
-   "x": "Reviews the four health factors using the results provided: BMI, non-HDL cholesterol, blood glucose and blood pressure."
+   "x": "Elicits past history, medications, allergies, family history (premature paternal myocardial infarction) and alcohol intake."
   },
   {
    "id": 8,
    "t": "checkbox",
-   "x": "Elicits past history, medications, allergies, family history (premature paternal myocardial infarction) and alcohol intake."
+   "x": "Explores ideas, concerns and expectations (fear of lifelong tablets, belief that surgery readings do not count, the trip and the prescription he needs)."
   },
   {
    "id": 9,
-   "t": "checkbox",
-   "x": "Explores ideas, concerns and expectations (fear of lifelong tablets, belief that surgery readings do not count)."
+   "t": "heading",
+   "x": "Examination"
   },
   {
    "id": 10,
+   "t": "checkbox",
+   "x": "Rechecks blood pressure correctly: seated after rest, correctly sized cuff, both arms, and standing."
+  },
+  {
+   "id": 11,
+   "t": "checkbox",
+   "x": "Measures weight, height, BMI, waist circumference and neck circumference."
+  },
+  {
+   "id": 12,
+   "t": "checkbox",
+   "x": "Looks for end-organ damage and secondary causes:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Fundoscopy for hypertensive retinopathy."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Heart: apex beat, heart sounds and added sounds."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Pulses: radial and femoral pulses, radio-femoral delay and carotid bruits."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Abdomen: palpable kidneys, renal bruits and an abdominal aortic mass."
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "t": "checkbox",
+   "x": "Requests a urine dipstick and a 12-lead ECG."
+  },
+  {
+   "id": 14,
+   "t": "heading",
+   "x": "Interpretation"
+  },
+  {
+   "id": 15,
+   "t": "checkbox",
+   "x": "Interprets the clinic readings: repeated readings of 150 to 154/92 to 94 mmHg in both arms are in the grade 1 (mild) range, and with a lower home average this suggests white coat hypertension, but it is not yet confirmed or excluded.",
+   "crit": true
+  },
+  {
+   "id": 16,
+   "t": "checkbox",
+   "x": "Recognises the home diary is not a valid protocol (single evening readings, after coffee and talking, a device not known to be validated, too few days), so it can neither confirm nor exclude hypertension."
+  },
+  {
+   "id": 17,
+   "t": "checkbox",
+   "x": "Finds no end-organ damage or secondary cause: normal ECG with no LVH, no proteinuria and a normal urine albumin to creatinine ratio, eGFR above 90 and a normal potassium."
+  },
+  {
+   "id": 18,
+   "t": "checkbox",
+   "x": "Interprets the bloods: non-HDL cholesterol 3.7 mmol/L and HDL 1.1 mmol/L on atorvastatin, and a normal fasting glucose and HbA1c (no diabetes)."
+  },
+  {
+   "id": 19,
+   "t": "checkbox",
+   "x": "Names all eight Life's Essential 8 components (diet, physical activity, nicotine exposure, sleep health, BMI, blood lipids as non-HDL cholesterol, blood glucose and blood pressure) and identifies his gaps (diet, activity, vaping, sleep, BMI 29.7 and clinic blood pressure).",
+   "crit": true
+  },
+  {
+   "id": 20,
+   "t": "checkbox",
+   "x": "Considers obstructive sleep apnoea: snoring, witnessed pauses, unrefreshing sleep, age over 50, male sex and a neck circumference of 42 cm give a high STOP-BANG score, and sleep apnoea itself raises blood pressure."
+  },
+  {
+   "id": 21,
+   "t": "checkbox",
+   "x": "Defines masked hypertension (normal in the clinic, raised outside it) and states it is detected with ambulatory or home blood pressure monitoring."
+  },
+  {
+   "id": 22,
    "t": "heading",
    "x": "Management"
   },
   {
-   "crit": true,
-   "id": 11,
+   "id": 23,
    "t": "checkbox",
-   "x": "Correctly interprets the readings: clinic blood pressure at or above 140/90 on repeat readings with a lower home average suggests white coat hypertension, but it is not yet confirmed or excluded."
+   "x": "Explains in plain words that his clinic readings are high, that his home readings may be the truer picture but were not taken in a reliable way, and that proper readings outside the clinic will show which is right."
   },
   {
+   "id": 24,
+   "t": "checkbox",
+   "x": "Arranges out-of-office confirmation before diagnosing or treating:",
    "crit": true,
-   "id": 12,
    "kids": [
     {
      "id": 1,
@@ -121,46 +211,26 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "States the daytime ambulatory or home average threshold of 135/85 mmHg or higher for diagnosing hypertension."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Explains that normal clinic readings with raised out-of-office readings (masked hypertension) can also occur."
+     "x": "States the daytime ambulatory or home average threshold of 135/85 mmHg or higher for diagnosing hypertension (24-hour average 130/80 mmHg or higher)."
     }
-   ],
-   "t": "checkbox",
-   "x": "Arranges out-of-office confirmation before diagnosing or treating:"
+   ]
   },
   {
+   "id": 25,
+   "t": "checkbox",
+   "x": "Does not start antihypertensive drugs today and explains why (diagnosis not yet confirmed, no end-organ damage).",
+   "crit": true
+  },
+  {
+   "id": 26,
+   "t": "checkbox",
+   "x": "Calculates his 5-year cardiovascular risk with the Australian CVD Risk Calculator, recognising the result depends on which blood pressure is true, so it is confirmed once the out-of-office readings are back; takes his father's premature heart attack into account and continues atorvastatin."
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "Explains in plain language why salt matters and gives the target:",
    "crit": true,
-   "id": 13,
-   "t": "checkbox",
-   "x": "Does not start antihypertensive drugs today and explains why (diagnosis not yet confirmed)."
-  },
-  {
-   "id": 14,
-   "t": "checkbox",
-   "x": "Plans to calculate absolute cardiovascular risk (Australian CVD Risk Calculator) once blood pressure is confirmed, and reviews the statin plan."
-  },
-  {
-   "id": 15,
-   "t": "checkbox",
-   "x": "Considers sleep apnoea given snoring, witnessed pauses and unrefreshing sleep (for example STOP-BANG, sleep study referral)."
-  },
-  {
-   "id": 16,
-   "t": "checkbox",
-   "x": "Safety-nets and arranges review (ABPM results before he leaves in two weeks; when to seek urgent care; advises limiting NSAID use)."
-  },
-  {
-   "id": 17,
-   "t": "heading",
-   "x": "Communication and counselling"
-  },
-  {
-   "crit": true,
-   "id": 18,
    "kids": [
     {
      "id": 1,
@@ -182,89 +252,87 @@
      "t": "checkbox",
      "x": "Practical swaps: read labels, choose reduced-salt products, use herbs and spices."
     }
-   ],
-   "t": "checkbox",
-   "x": "Explains in plain language why salt matters and gives the target:"
+   ]
   },
   {
-   "id": 19,
+   "id": 28,
    "t": "checkbox",
-   "x": "Gives other tailored lifestyle advice: more vegetables, fruit, wholegrains, fish and nuts; alcohol within guidelines (no more than 10 standard drinks a week); 150 to 300 minutes of moderate activity a week; modest weight loss; 7 to 9 hours of sleep."
+   "x": "Gives other tailored lifestyle advice: more vegetables, fruit, wholegrains, fish and nuts; alcohol within guidelines (no more than 10 standard drinks a week and no more than 4 on any one day); 150 to 300 minutes of moderate activity a week; modest weight loss; 7 to 9 hours of sleep."
   },
   {
-   "id": 20,
+   "id": 29,
    "t": "checkbox",
    "x": "Advises stopping nicotine vaping, offers support (Quitline 13 78 48, pharmacist or GP-supported cessation) and agrees on goals."
   },
   {
-   "id": 21,
+   "id": 30,
    "t": "checkbox",
-   "x": "Addresses the daughter's question: healthy habits from childhood and family meals (primordial prevention)."
+   "x": "Arranges assessment for sleep apnoea (screening questionnaire and a sleep study referral), and advises limiting ibuprofen, using paracetamol and other measures for his back pain."
   },
   {
-   "id": 22,
+   "id": 31,
+   "t": "checkbox",
+   "x": "Defines primordial (prevent risk factors developing), primary (manage risk factors to prevent a first event) and secondary prevention (established CVD, prevent progression and recurrence); classifies Mr Pereira as primary and his daughter as primordial, with healthy habits from childhood and family meals.",
+   "crit": true
+  },
+  {
+   "id": 32,
+   "t": "checkbox",
+   "x": "Writes a complete, legal prescription: patient name and details, date, atorvastatin 20 mg tablets, one tablet orally at night, and the prescriber's details and signature."
+  },
+  {
+   "id": 33,
+   "t": "checkbox",
+   "x": "Writes quantity 30 (one month) with 2 repeats to give three months' supply (original plus two repeats).",
+   "crit": true
+  },
+  {
+   "id": 34,
+   "t": "checkbox",
+   "x": "States that 0 repeats would be written if no further supply was wanted.",
+   "crit": true
+  },
+  {
+   "id": 35,
    "t": "checkbox",
    "x": "Checks understanding (teach-back) and responds to the fear of lifelong tablets."
   },
   {
-   "id": 23,
+   "id": 36,
    "t": "heading",
-   "x": "Prescribing"
+   "x": "Safety netting"
   },
   {
-   "id": 24,
+   "id": 37,
    "t": "checkbox",
-   "x": "Writes a complete, legal prescription: patient name and details, atorvastatin 20 mg tablets, one tablet orally nocte."
+   "x": "Gives red flags in plain words: call 000 for chest pain, sudden weakness or numbness, a drooping face, trouble speaking or seeing, or a sudden severe headache.",
+   "crit": true
   },
   {
-   "crit": true,
-   "id": 25,
+   "id": 38,
    "t": "checkbox",
-   "x": "Writes quantity 30 (one month) with 2 repeats to give three months' supply (original plus two repeats)."
+   "x": "Advises that a home or pharmacy reading of 180/110 mmHg or higher on repeat needs a doctor that day, wherever he is on the trip."
   },
   {
-   "crit": true,
-   "id": 26,
+   "id": 39,
    "t": "checkbox",
-   "x": "States that 0 repeats would be written if no further supply was wanted."
-  },
-  {
-   "id": 27,
-   "t": "heading",
-   "x": "Examiner questions"
-  },
-  {
-   "crit": true,
-   "id": 28,
-   "t": "checkbox",
-   "x": "Names all eight Life's Essential 8 components: diet, physical activity, nicotine exposure, sleep health, BMI, blood lipids (non-HDL cholesterol), blood glucose and blood pressure."
-  },
-  {
-   "crit": true,
-   "id": 29,
-   "t": "checkbox",
-   "x": "Defines primordial (prevent risk factors developing), primary (manage risk factors to prevent a first event) and secondary prevention (established CVD, prevent progression and recurrence); classifies Mr Pereira as primary and his daughter as primordial."
-  },
-  {
-   "id": 30,
-   "t": "checkbox",
-   "x": "Defines masked hypertension (normal in the clinic, raised outside it) and states it is detected with ambulatory or home blood pressure monitoring."
+   "x": "Arranges follow-up: ambulatory monitoring (or the home protocol) with a review of the results before he leaves in 2 weeks, a plan for review during the trip (telehealth) and on return, including the sleep study."
   }
  ],
  "complexity": "Moderate",
  "context": [],
- "desc": "This station involves a heart health check in which the candidate takes a focused cardiovascular history, counsels on raised clinic blood pressure with normal home readings, and writes a three-month statin prescription.",
+ "desc": "This station involves a heart health check: a focused cardiovascular history and examination, then interpreting raised clinic blood pressure against home readings, the bloods and the ECG, counselling on diet and lifestyle, writing a three-month statin prescription and safety-netting.",
  "diagnosis": [
   "White coat hypertension",
   "Cardiovascular disease prevention"
  ],
- "explain": "<h3>Confirming the diagnosis of hypertension</h3><p>Clinic blood pressure at or above 140/90 mmHg on repeated measurement suggests hypertension, but the diagnosis should be confirmed out of the office unless readings are very high or there is end-organ damage. <strong>White coat hypertension</strong> is raised clinic blood pressure with normal readings outside the clinic. <strong>Masked hypertension</strong> is the reverse: normal in the clinic but raised outside it. Both are detected with ambulatory (ABPM) or home blood pressure monitoring.</p><ul><li><p>Hypertension is confirmed by a daytime ABPM average or home average of 135/85 mmHg or higher (24-hour average 130/80 mmHg or higher).</p></li><li><p>Home protocol: validated upper-arm device with a correctly sized cuff, seated and rested, two readings one minute apart morning and evening for 7 days, discarding day 1 and averaging the rest.</p></li><li><p>Mr Pereira's single evening readings, taken after coffee and conversation on an unvalidated device, are not enough to exclude hypertension. White coat patterns still carry some cardiovascular risk and need follow-up.</p></li></ul><h3>Life's Essential 8</h3><p>The AHA 2022 framework updated Life's Simple 7. It has <strong>four health behaviours</strong> (diet, physical activity, nicotine exposure, sleep health) and <strong>four health factors</strong> (BMI, blood lipids reported as non-HDL cholesterol, blood glucose, blood pressure). Sleep was the addition. In this case sleep (about 5.5 hours, snoring, possible apnoea), nicotine (vaping), diet and activity are the modifiable gaps. Sleep apnoea is itself linked to hypertension.</p><h3>Levels of prevention</h3><ul><li><p><strong>Primordial:</strong> preventing risk factors from developing at all, with a life-course approach. This applies to his 15-year-old daughter.</p></li><li><p><strong>Primary:</strong> managing risk factors to prevent a first event in people without established CVD. This applies to Mr Pereira.</p></li><li><p><strong>Secondary:</strong> in established CVD (coronary heart disease, stroke or TIA, peripheral arterial disease), preventing progression and recurrence with drugs, procedures and rehabilitation.</p></li></ul><h3>Sodium</h3><p>High sodium intake raises blood pressure and increases cardiovascular risk, making it a leading dietary cause of death. The NHMRC suggested dietary target for adults is 2000 mg of sodium a day (about 5 g or one teaspoon of salt). Most intake comes from processed and takeaway foods, so not using the salt shaker does not mean a low intake.</p><h3>Writing repeats</h3><p>A repeat is an extra supply on top of the original. Total supplies equal the number of repeats plus one. To give three one-month supplies of atorvastatin, write quantity 30 and <strong>2 repeats</strong>. If no further supply is wanted, write 0 repeats. The prescriber chooses the repeats within the PBS maximum, which here allows more.</p>",
+ "explain": "<h3>Interpreting the blood pressure readings</h3><p>Clinic blood pressure at or above 140/90 mmHg on repeated measurement suggests hypertension; Mr Pereira's 150 to 154/92 to 94 mmHg is in the grade 1 (mild) range. The diagnosis should be confirmed out of the office unless readings are very high or there is end-organ damage. <strong>White coat hypertension</strong> is raised clinic blood pressure with normal readings outside the clinic. <strong>Masked hypertension</strong> is the reverse: normal in the clinic but raised outside it. Both are detected with ambulatory (ABPM) or home blood pressure monitoring.</p><ul><li><p>Hypertension is confirmed by a daytime ABPM average or home average of 135/85 mmHg or higher (24-hour average 130/80 mmHg or higher).</p></li><li><p>Home protocol: validated upper-arm device with a correctly sized cuff, seated and rested, two readings one minute apart morning and evening for 7 days, discarding day 1 and averaging the rest.</p></li><li><p>Mr Pereira's single evening readings, taken after coffee and conversation on a device not known to be validated, are not enough to confirm or exclude hypertension. White coat patterns still carry some cardiovascular risk and need follow-up.</p></li></ul><h3>The other results</h3><p>The work-up looks for end-organ damage and secondary causes. His fundi, heart, pulses and abdomen are normal, the ECG shows no left ventricular hypertrophy, there is no proteinuria and the urine albumin to creatinine ratio, eGFR and potassium are normal. His non-HDL cholesterol is 3.7 mmol/L on atorvastatin and his glucose and HbA1c exclude diabetes. Nothing here pushes towards treating before the diagnosis is confirmed.</p><h3>Life's Essential 8</h3><p>The AHA 2022 framework updated Life's Simple 7. It has <strong>four health behaviours</strong> (diet, physical activity, nicotine exposure, sleep health) and <strong>four health factors</strong> (BMI, blood lipids reported as non-HDL cholesterol, blood glucose, blood pressure). Sleep was the addition. In this case sleep (about 5.5 hours, snoring, possible apnoea), nicotine (vaping), diet and activity are the modifiable gaps, with a BMI of 29.7. Snoring, witnessed pauses, daytime sleepiness, age over 50, male sex and a neck circumference over 40 cm give a high STOP-BANG score; sleep apnoea is itself linked to hypertension and warrants a sleep study.</p><h3>Cardiovascular risk</h3><p>The Australian guideline for assessing and managing cardiovascular disease risk uses the Australian CVD Risk Calculator to estimate 5-year risk in people aged 45 to 79 without known CVD. The estimate depends on his systolic blood pressure, so it is finalised once his out-of-office readings show which pressure is true. His father's heart attack at 52 is a family history of premature CVD and is taken into account when deciding his risk category. He continues atorvastatin.</p><h3>Levels of prevention</h3><ul><li><p><strong>Primordial:</strong> preventing risk factors from developing at all, with a life-course approach. This applies to his 15-year-old daughter.</p></li><li><p><strong>Primary:</strong> managing risk factors to prevent a first event in people without established CVD. This applies to Mr Pereira.</p></li><li><p><strong>Secondary:</strong> in established CVD (coronary heart disease, stroke or TIA, peripheral arterial disease), preventing progression and recurrence with drugs, procedures and rehabilitation.</p></li></ul><h3>Sodium and lifestyle</h3><p>High sodium intake raises blood pressure and increases cardiovascular risk, making it a leading dietary cause of death. The NHMRC suggested dietary target for adults is 2000 mg of sodium a day (about 5 g or one teaspoon of salt). Most intake comes from processed and takeaway foods, so not using the salt shaker does not mean a low intake. The rest of the plan: 150 to 300 minutes of moderate activity a week, no more than 10 standard drinks a week and 4 on any one day, stopping nicotine vaping with Quitline or GP support, 7 to 9 hours of sleep, and limiting NSAIDs, which raise blood pressure.</p><h3>Writing repeats</h3><p>A repeat is an extra supply on top of the original. Total supplies equal the number of repeats plus one. To give three one-month supplies of atorvastatin, write quantity 30 and <strong>2 repeats</strong>. If no further supply is wanted, write 0 repeats. The prescriber chooses the repeats within the PBS maximum, which here allows more.</p><h3>Safety netting and follow-up</h3><p>He should call 000 for chest pain or signs of stroke (sudden weakness or numbness, facial droop, trouble speaking or seeing) or a sudden severe headache, and see a doctor the same day if repeated readings are 180/110 mmHg or higher. Review the ambulatory or home readings before he leaves, recalculate his risk, and plan review by telehealth during the trip and in person on return.</p>",
  "focus": "Heart health check: cardiovascular prevention, hypertension, diet and prescribing",
- "guide": "<p>A <strong>high-performing candidate</strong> would take a structured history that covers all four Life's Essential 8 behaviours and picks up the sleep apnoea clues and the unvalidated, poorly timed home readings. They would recognise suspected white coat hypertension without diagnosing or treating it, and arrange ABPM or a proper home protocol with review before the patient leaves. They would give clear sodium advice with the 2000 mg target and hidden-salt examples, address the vaping non-judgementally, and respond to the daughter's question. They would write the atorvastatin script with quantity 30 and 2 repeats, and answer all the examiner questions accurately.</p><p>A <strong>borderline candidate</strong> may accept the home diary at face value or start a drug on the clinic readings. They may give generic advice to \"cut salt\" without a target or mention of hidden salt, and miss the nicotine vape or sleep. They may confuse repeats with total supplies (writing 3 repeats), or not distinguish primordial from primary prevention.</p>",
+ "guide": "<p>In Part 1, the examiner gives findings from the Exam findings only when the candidate says what they would examine. In Part 2, hand over all five results together and ask the questions in order; Mr Pereira stays for the explanation and asks his questions if the candidate has not covered them.</p><p>A <strong>high-performing candidate</strong> takes a structured history that covers all four Life's Essential 8 behaviours, picks up the sleep apnoea clues and the poorly taken home readings, and examines for end-organ damage and secondary causes. They recognise suspected white coat hypertension without diagnosing or treating it, find no end-organ damage in the results, and arrange ambulatory monitoring or a proper home protocol with review before he leaves. They give clear sodium advice with the 2000 mg target and hidden-salt examples, address the vaping non-judgementally, answer the question about his daughter, write the atorvastatin script with quantity 30 and 2 repeats, and give specific red flags and follow-up.</p><p>A <strong>borderline candidate</strong> accepts the home diary at face value or starts a drug on the clinic readings, gives generic advice to \"cut salt\" without a target or mention of hidden salt, misses the vaping or the sleep, confuses repeats with total supplies (writing 3 repeats), or ends with \"come back if you are worried\".</p>",
  "id": "ai-c1be5d8e",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name:</strong> Daniel Pereira.</p></li><li><p><strong>Age:</strong> 54 years old.</p></li><li><p><strong>Gender:</strong> Male (he/him).</p></li><li><p><strong>Aboriginal and/or Torres Strait Islander:</strong> No.</p></li><li><p><strong>Setting:</strong> General practice.</p></li></ul><p><strong>Presenting complaint:</strong> <em>\"I'm here for my heart health check. The nurse said my blood pressure's high today, but it's always fine at home.\"</em></p><p><strong>History of presenting complaint</strong></p><ul><li><p>Feels well. Denies headache, chest pain, palpitations, shortness of breath, visual disturbance, dizziness, syncope, leg swelling and focal neurological symptoms.</p></li><li><p>He has never been told he has high blood pressure. A pharmacy reading last year was \"a bit high\".</p></li><li><p><strong>Home monitoring:</strong> bought an upper-arm cuff online (medium cuff, brand unknown, does not know if it is validated). He measures once, in the evening, after arriving home from work, often after a coffee and while chatting to his wife. This is the diary he brought; reveal the details only if asked.</p></li><li><p>Feels nervous in medical settings. His blood pressure \"always goes up at the doctor\".</p></li></ul><p><strong>Cardiovascular health behaviours (reveal if asked):</strong></p><ul><li><p><strong>Diet:</strong> toast with Vegemite for breakfast. Lunch is a bakery pie or ham-and-cheese sandwich three times a week. Takeaway twice a week, instant noodles and packet sauces at home. Little fruit, vegetables at dinner only. Fish rarely. He does not add salt at the table, \"so salt can't be my problem\". About three coffees a day.</p></li><li><p><strong>Physical activity:</strong> desk job. Walks the dog about 15 minutes most days. No structured exercise (around 60 minutes a week in total).</p></li><li><p><strong>Nicotine:</strong> ex-smoker (about 15 pack-years), quit 8 years ago. Uses a nicotine vape daily (about one pod a week), obtained online and from a friend. Would like to stop but gets cravings.</p></li><li><p><strong>Sleep:</strong> in bed 11:30 pm, up 5:30 am (about 5.5 hours). Wakes unrefreshed, dozes in the afternoon. His wife says he snores loudly and sometimes seems to stop breathing. Say this only if asked.</p></li><li><p><strong>Alcohol:</strong> about 8 standard drinks of beer a week, mostly Friday and Saturday.</p></li></ul><p><strong>Medical history:</strong> dyslipidaemia. No diabetes, kidney disease or previous cardiovascular events.</p><p><strong>Medications:</strong> atorvastatin 20 mg nocte (adherent, no muscle aches). Ibuprofen 400 mg once or twice a week for back pain. No decongestants, licorice, supplements or other over-the-counter products.</p><p><strong>Allergies:</strong> Nil.</p><p><strong>Family history:</strong> father had a heart attack at 52 and stents. Mother has high blood pressure. No sudden deaths.</p><p><strong>Social history:</strong> lives with his wife, Carla, and their 15-year-old daughter, Mia. Mia \"lives on chips and energy drinks\". He is starting three months of long service leave in two weeks, touring Australia in a caravan, and will not see his regular GP during this time.</p><p><strong>ICE:</strong></p><ul><li><p><strong>Ideas:</strong> thinks the doctor's surgery makes him anxious, so the readings do not count. Worried that a high reading means a stroke like his workmate's.</p></li><li><p><strong>Concerns:</strong> being put on tablets for life.</p></li><li><p><strong>Expectations:</strong> wants to know whether he has high blood pressure, and wants enough cholesterol tablets to last his trip.</p></li></ul><p><strong>Questions to ask if the candidate does not cover them:</strong></p><ul><li><p>\"Do I need blood pressure tablets today?\"</p></li><li><p>\"I never use the salt shaker, so how much salt is too much?\"</p></li><li><p>\"Should I be worrying about Mia's heart at her age?\"</p></li><li><p>\"Will one script cover my cholesterol tablets for the three months?\"</p></li></ul><p><strong>Examiner questions (at the 7-minute mark):</strong></p><ol><li><p>Name the eight components of cardiovascular health in the Life's Essential 8 framework.</p></li><li><p>Define primordial, primary and secondary prevention. Which applies to Mr Pereira, and which applies to his daughter?</p></li><li><p>What is masked hypertension and how is it detected?</p></li><li><p>If you wanted no further supply after the original, how many repeats would you write?</p></li></ol><p><em>The candidate may ask further questions of you. Use only the provided history above, and give a realistic answer if asked something outside the script. Use lay language and interrupt the candidate if they use jargon that a layperson would not understand.</em></p>",
+ "patient": "<p><strong>Role:</strong> You are Daniel Pereira, a 54-year-old accountant (he/him), not Aboriginal or Torres Strait Islander. You feel well and are a little nervous, as you always are at the doctor. The examiner gives examination findings from the Exam findings when the candidate says what they would examine.</p><p><strong>Opening line:</strong> \"I'm here for my heart health check. The nurse said my blood pressure's high today, but it's always fine at home.\"</p><p><strong>History (give only when asked):</strong></p><ul><li><strong>Blood pressure:</strong> you have never been told you have high blood pressure. A pharmacy reading last year was \"a bit high\". Your blood pressure \"always goes up at the doctor\".</li><li><strong>Symptoms:</strong> none. No headache, chest pain, palpitations, shortness of breath, visual change, dizziness, fainting, leg swelling, weakness, numbness or speech problems.</li><li><strong>Home readings:</strong> you bought an upper-arm cuff online (medium cuff, brand unknown, you do not know if it is validated). You measure once, in the evening after you get home from work, often after a coffee and while chatting to your wife. You have brought your diary; the examiner hands it over in Part 2. If asked what it shows, say the readings are \"all in the 120s\".</li><li><strong>Other causes (only if asked):</strong> no episodes of sweating, pounding heart and headache, no muscle weakness or cramps, no kidney or thyroid problems.</li><li><strong>Diet:</strong> toast with Vegemite for breakfast. A bakery pie or a ham-and-cheese sandwich for lunch three times a week. Takeaway twice a week, instant noodles and packet sauces at home. Little fruit, vegetables at dinner only, fish rarely. You do not add salt at the table, \"so salt can't be my problem\". About three coffees a day. No licorice.</li><li><strong>Physical activity:</strong> desk job. You walk the dog for about 15 minutes most days and do no other exercise (about 60 minutes a week in total).</li><li><strong>Nicotine:</strong> ex-smoker, about 15 pack-years, quit 8 years ago. You use a nicotine vape every day (about one pod a week), bought online and from a friend. You would like to stop but get cravings.</li><li><strong>Sleep:</strong> in bed at 11.30 pm, up at 5.30 am (about 5.5 hours). You wake unrefreshed and doze in the afternoon. Your wife says you snore loudly and sometimes seem to stop breathing. Say this only if asked about sleep or snoring.</li><li><strong>Alcohol:</strong> about 8 standard drinks of beer a week, mostly on Friday and Saturday.</li><li><strong>Medical history:</strong> high cholesterol. No diabetes, kidney disease, heart attack, stroke or circulation problems.</li><li><strong>Medicines:</strong> atorvastatin 20 mg at night, taken every day, no muscle aches; you have one 30-tablet pack left. Ibuprofen 400 mg once or twice a week for back pain. No decongestants, supplements or other over-the-counter products. No allergies.</li><li><strong>Family history:</strong> your father had a heart attack at 52 and needed stents. Your mother has high blood pressure. No sudden deaths.</li><li><strong>Social:</strong> you live with your wife, Carla, and your 15-year-old daughter, Mia, who \"lives on chips and energy drinks\". You start three months of long service leave in two weeks, touring Australia in a caravan, and will not see your regular GP during that time.</li></ul><p><strong>Ideas, concerns, expectations:</strong> you think the surgery makes you anxious, so the readings here do not count, but you worry that a high reading means a stroke like your workmate's. You are worried about being put on tablets for life. You want to know whether you have high blood pressure, and you want enough cholesterol tablets to last the trip.</p><p><strong>Questions to ask when the candidate explains the plan (usually in Part 2), if not already covered:</strong></p><ul><li>\"Do I need blood pressure tablets today?\"</li><li>\"I never use the salt shaker, so how much salt is too much?\"</li><li>\"Should I be worrying about Mia's heart at her age?\"</li><li>\"Will one script cover my cholesterol tablets for the three months?\"</li></ul><p>Use lay language and say you do not follow if the candidate uses jargon. Give a realistic answer if asked something outside the script.</p>",
  "points": [
   "Raised clinic BP with normal home readings suggests white coat hypertension: confirm with ABPM or a structured home protocol before diagnosing or treating.",
   "Masked hypertension (normal clinic, raised outside) is detected with the same out-of-office monitoring.",
@@ -289,17 +357,52 @@
   "General Practice",
   "Cardiology"
  ],
- "stem": "<p>You are a general practice registrar. Daniel Pereira is a 54-year-old accountant who has booked a heart health check. The practice nurse has recorded the following before you see him.</p><ul><li><p><strong>Blood pressure (right arm, seated, after 5 minutes' rest, appropriately sized cuff):</strong> 154/94 mmHg, repeated 150/92 mmHg.</p></li><li><p><strong>Heart rate:</strong> 72 beats/min, regular.</p></li><li><p><strong>Weight/height:</strong> 94 kg, 178 cm (BMI 29.7 kg/m<sup>2</sup>). Waist circumference 101 cm.</p></li><li><p><strong>Bloods (6 weeks ago, fasting):</strong> total cholesterol 4.8 mmol/L, HDL 1.1 mmol/L, non-HDL 3.7 mmol/L, triglycerides 1.6 mmol/L, glucose 5.3 mmol/L, HbA1c 5.5%, eGFR above 90 mL/min/1.73 m<sup>2</sup>.</p></li><li><p><strong>Home blood pressure diary (brought by the patient):</strong> 10 readings over 5 days, average 124/78 mmHg.</p></li><li><p><strong>Current medication:</strong> atorvastatin 20 mg nocte (one 30-tablet pack).</p></li></ul><p>He has no known cardiovascular disease. He has asked for a prescription before he goes away.</p>",
+ "stem": "<p>You are a general practice registrar. Daniel Pereira, a 54-year-old accountant, has booked a heart health check. Before you see him, the practice nurse has measured his blood pressure, weight and waist, and tells you his blood pressure was high today. He has also asked for a prescription for his regular medicine.</p>",
  "tasks": [
-  "<p>Take a <strong>focused history</strong> from the patient, including an assessment of his cardiovascular health behaviours and risk factors (3 minutes).</p>",
-  "<p><strong>Explain</strong> the blood pressure findings and your plan to the patient, and <strong>counsel</strong> him on diet and lifestyle (3 minutes).</p>",
-  "<p><strong>Write</strong> the prescription the patient has requested and state its details to the examiner (1 minute).</p>",
-  "<p><strong>Answer</strong> the examiner's questions (1 minute).</p>"
+  "<p>Take a focused <strong>history</strong> from Mr Pereira, including his cardiovascular risk factors and health behaviours, and perform a focused <strong>examination</strong>, telling the examiner what you are examining and why (10 minutes).</p>",
+  "<p>The examiner will give you his clinic and home blood pressure readings, his measurements, his blood and urine results and his ECG. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, including your advice to Mr Pereira and the prescription he has asked for, and your <strong>safety netting</strong> (5 minutes).</p>"
  ],
  "title": "Heart health check: raised clinic blood pressure",
  "type": [
   "History",
+  "Examination",
   "Counselling",
   "Prescribing"
- ]
+ ],
+ "part2": {
+  "lead": "Here are today's blood pressure readings, the home diary Mr Pereira brought, his measurements, his blood and urine tests from 6 weeks ago, and today's ECG and urine dipstick.",
+  "handover": [
+   {
+    "label": "Clinic blood pressure today",
+    "result": "<p>Nurse, right arm, seated after rest, correctly sized cuff: 154/94 mmHg, repeated 150/92 mmHg.</p><p>Your readings after rest: right arm 150/92 mmHg, left arm 152/92 mmHg; standing 148/90 mmHg (no postural drop). Heart rate 72 beats/min, regular.</p>"
+   },
+   {
+    "label": "Home blood pressure diary (brought by Mr Pereira)",
+    "result": "<p>Upper-arm device bought online, medium cuff, not known to be validated. One reading each evening at about 6.30 pm on 10 evenings over the last 2 weeks; \"after coffee\" is written beside 7 of them.</p><p>122/78, 128/80, 120/76, 126/79, 124/77, 130/82, 118/74, 125/79, 123/78 and 124/77 mmHg. Average 124/78 mmHg.</p>"
+   },
+   {
+    "label": "Measurements today",
+    "result": "<p>Weight 94 kg, height 178 cm, BMI 29.7 kg/m<sup>2</sup>. Waist circumference 101 cm. Neck circumference 42 cm.</p>"
+   },
+   {
+    "label": "Blood and urine tests (6 weeks ago, fasting)",
+    "result": "<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>Total cholesterol</td><td>4.8 mmol/L</td><td></td></tr><tr><td>HDL cholesterol</td><td>1.1 mmol/L</td><td>1.0 or above</td></tr><tr><td>Non-HDL cholesterol</td><td>3.7 mmol/L</td><td></td></tr><tr><td>Triglycerides</td><td>1.6 mmol/L</td><td>below 2.0</td></tr><tr><td>Total cholesterol to HDL ratio</td><td>4.4</td><td></td></tr><tr><td>Fasting glucose</td><td>5.3 mmol/L</td><td>diabetes 7.0 or above</td></tr><tr><td>HbA1c</td><td>5.5%</td><td>diabetes 6.5% or above</td></tr><tr><td>Sodium</td><td>140 mmol/L</td><td>135 to 145</td></tr><tr><td>Potassium</td><td>4.3 mmol/L</td><td>3.5 to 5.2</td></tr><tr><td>Creatinine</td><td>78 µmol/L</td><td>60 to 110</td></tr><tr><td>eGFR</td><td>above 90 mL/min/1.73 m<sup>2</sup></td><td>above 90</td></tr><tr><td>Urine albumin to creatinine ratio</td><td>1.2 mg/mmol</td><td>below 2.5 (men)</td></tr></table>"
+   },
+   {
+    "label": "ECG and urine dipstick today",
+    "result": "<p>12-lead ECG: sinus rhythm at 72 beats/min, normal axis, no voltage criteria for left ventricular hypertrophy, no ischaemic changes.</p><p>Urine dipstick: negative for protein, blood and glucose.</p>"
+   }
+  ],
+  "ask": [
+   "What do his clinic and home blood pressure readings show? Does he have hypertension?",
+   "Summarise his cardiovascular health using the Life's Essential 8 framework. What else would you consider, and what do the other results add?",
+   "What is your management approach for his blood pressure, his cardiovascular risk and his lifestyle? Which level of prevention applies to him, and to his daughter?",
+   "Tell me the prescription you would write for him. How many repeats would you write if you wanted no further supply?",
+   "What follow-up and safety netting will you arrange before he leaves?"
+  ]
+ },
+ "revised": {
+  "at": "2026-10-23",
+  "by": "format 5/10/5"
+ }
 }

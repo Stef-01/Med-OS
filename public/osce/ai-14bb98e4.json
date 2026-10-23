@@ -17,12 +17,12 @@
   {
    "id": 2,
    "t": "checkbox",
-   "x": "Hand hygiene, clear introduction, confirms patient identity and explains purpose of the consultation."
+   "x": "Hand hygiene, clear introduction, confirms identity, explains the purpose of the consultation, and asks consent for a breast examination with a chaperone offered."
   },
   {
    "id": 3,
    "t": "checkbox",
-   "x": "Empathic, non-judgemental approach, including when discussing smoking."
+   "x": "Empathic, non-judgemental approach, including when discussing smoking; uses plain language without jargon."
   },
   {
    "id": 4,
@@ -31,6 +31,8 @@
   },
   {
    "id": 5,
+   "t": "checkbox",
+   "x": "Characterises the lump and the infection:",
    "kids": [
     {
      "id": 1,
@@ -47,18 +49,18 @@
      "t": "checkbox",
      "x": "Response to antibiotics so far, adherence and allergies."
     }
-   ],
-   "t": "checkbox",
-   "x": "Characterises the lump and the infection:"
+   ]
   },
   {
-   "crit": true,
    "id": 6,
    "t": "checkbox",
-   "x": "Establishes that this is non-lactational: asks about breastfeeding, pregnancy and last menstrual period."
+   "x": "Establishes that this is non-lactational: asks about breastfeeding, pregnancy and last menstrual period.",
+   "crit": true
   },
   {
    "id": 7,
+   "t": "checkbox",
+   "x": "Asks about breast cancer symptoms and risk factors:",
    "kids": [
     {
      "id": 1,
@@ -75,9 +77,7 @@
      "t": "checkbox",
      "x": "Family history of breast and ovarian cancer, previous imaging or biopsy, hormone use."
     }
-   ],
-   "t": "checkbox",
-   "x": "Asks about breast cancer symptoms and risk factors:"
+   ]
   },
   {
    "id": 8,
@@ -86,126 +86,153 @@
   },
   {
    "id": 9,
-   "t": "heading",
-   "x": "Interpretation"
-  },
-  {
-   "crit": true,
-   "id": 10,
    "t": "checkbox",
-   "x": "Correctly identifies a breast abscess with a persisting underlying mass and skin changes in a non-breastfeeding woman, with failure to respond to antibiotics."
+   "x": "Explores her ideas, concerns and expectations, including her fear of cancer and her reluctance to have tests."
   },
   {
-   "crit": true,
+   "id": 10,
+   "t": "heading",
+   "x": "Examination"
+  },
+  {
    "id": 11,
    "t": "checkbox",
-   "x": "States that non-lactational abscess or mastitis is a red flag because it may be caused by, or may mask, an underlying carcinoma, including inflammatory breast cancer."
+   "x": "Asks for observations (temperature, heart rate, blood pressure) and looks for signs of sepsis."
   },
   {
    "id": 12,
    "t": "checkbox",
-   "x": "Identifies the features that raise suspicion of malignancy: residual firm irregular mass, peau d'orange, nipple retraction, axillary node, recurrence at same site, age over 40, family history."
-  },
-  {
-   "id": 13,
-   "t": "heading",
-   "x": "Management"
-  },
-  {
-   "id": 14,
-   "t": "checkbox",
-   "x": "Assesses for sepsis and need for hospital referral (observations, systemic features, comorbidities) and decides she can be managed as an outpatient with close review."
-  },
-  {
-   "crit": true,
-   "id": 15,
+   "x": "Inspects both breasts, sitting with arms by her sides and then raised:",
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Age 35 or over, so ultrasound plus mammogram (bilateral mammogram, with axillary assessment)."
+     "x": "Extent of the erythema."
     },
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Ultrasound to confirm and characterise the collection and the underlying mass."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Arranges imaging now, at presentation, not after the infection has settled:"
-  },
-  {
-   "id": 16,
-   "t": "checkbox",
-   "x": "Plans drainage of the abscess, with ultrasound-guided needle aspiration preferred, and sends pus for culture."
-  },
-  {
-   "crit": true,
-   "id": 17,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Core biopsy (not FNA alone) of the residual solid mass and abscess wall."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Skin punch biopsy for the skin thickening or peau d'orange if inflammatory breast cancer is suspected."
+     "x": "Skin thickening or peau d'orange."
     },
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Biopsy of any suspicious axillary node on ultrasound."
+     "x": "Nipple retraction or discharge."
     }
-   ],
-   "t": "checkbox",
-   "x": "Plans tissue diagnosis:"
+   ]
   },
   {
-   "crit": true,
+   "id": 13,
+   "t": "checkbox",
+   "x": "Palpates both breasts, the normal side first, including the retroareolar region, and describes the mass: size, consistency, fixity to skin and a fluctuant centre."
+  },
+  {
+   "id": 14,
+   "t": "checkbox",
+   "x": "Examines the axillary, supraclavicular and cervical lymph nodes on both sides."
+  },
+  {
+   "id": 15,
+   "t": "checkbox",
+   "x": "Briefly checks the chest, liver and spine for signs of spread, given the suspicion of malignancy."
+  },
+  {
+   "id": 16,
+   "t": "heading",
+   "x": "Interpretation"
+  },
+  {
+   "id": 17,
+   "t": "checkbox",
+   "x": "Bloods: raised white cell count, neutrophilia and CRP in keeping with bacterial infection; normal HbA1c, so no diabetes."
+  },
+  {
    "id": 18,
    "t": "checkbox",
-   "x": "Explains the triple assessment (clinical, imaging, non-operative tissue biopsy) and the rule that all three must be concordant before the lesion is called benign."
+   "x": "Ultrasound: an abscess suitable for aspiration with a separate irregular solid mass beneath it that is suspicious for malignancy, plus an indeterminate axillary node.",
+   "crit": true
   },
   {
    "id": 19,
    "t": "checkbox",
-   "x": "States that any discordance, or a persistent or recurrent lesion after treatment, needs further investigation and tissue diagnosis."
+   "x": "Mammogram: suspicious left retroareolar mass with skin thickening and nipple retraction; right breast normal."
   },
   {
    "id": 20,
    "t": "checkbox",
-   "x": "Antibiotics reviewed according to eTG, with culture results, as non-lactational infection often needs anaerobic cover; analgesia advised."
+   "x": "States that a non-lactational abscess that has not responded to antibiotics, with a persisting mass, may be caused by or may mask a carcinoma, including inflammatory breast cancer, and that cancer must be excluded.",
+   "crit": true
   },
   {
    "id": 21,
    "t": "checkbox",
-   "x": "Urgent referral to a breast surgeon or breast clinic, and a review within 48 to 72 hours with a safety net."
+   "x": "Names the features that raise suspicion here: residual firm irregular mass, peau d'orange, nipple retraction, axillary node, recurrence at the same site, age over 40 and family history."
   },
   {
    "id": 22,
-   "t": "checkbox",
-   "x": "Plans follow-up until the mass has fully resolved, with repeat imaging or biopsy if any mass remains after the infection clears."
+   "t": "heading",
+   "x": "Management"
   },
   {
    "id": 23,
    "t": "checkbox",
-   "x": "Offers smoking cessation support and notes it as a risk factor for periductal mastitis and recurrence."
+   "x": "Decides she is not septic and can be managed as an outpatient with close review, and states when she would need hospital referral."
   },
   {
    "id": 24,
-   "t": "heading",
-   "x": "Communication"
+   "t": "checkbox",
+   "x": "Plans drainage of the abscess, with ultrasound-guided needle aspiration preferred to incision, and sends the pus for culture."
   },
   {
    "id": 25,
    "t": "checkbox",
-   "x": "Uses plain language without jargon and checks understanding."
+   "x": "Plans tissue diagnosis now, not after the infection settles:",
+   "crit": true,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Core biopsy (not FNA alone) of the solid mass and abscess wall."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Skin punch biopsy of the thickened skin if inflammatory breast cancer is suspected."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Biopsy of the indeterminate axillary node."
+    }
+   ]
   },
   {
-   "crit": true,
    "id": 26,
+   "t": "checkbox",
+   "x": "Explains the triple test (clinical, imaging and non-operative biopsy) and that all three must agree before the lump is called benign.",
+   "crit": true
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "States that any discordance, or a persistent or recurrent lesion after treatment, needs further investigation and tissue diagnosis."
+  },
+  {
+   "id": 28,
+   "t": "checkbox",
+   "x": "Reviews the antibiotic with eTG: non-lactational infection often needs anaerobic cover (for example amoxicillin with clavulanate), adjusted to the culture; advises analgesia."
+  },
+  {
+   "id": 29,
+   "t": "checkbox",
+   "x": "Refers urgently to a breast surgeon or breast clinic.",
+   "crit": true
+  },
+  {
+   "id": 30,
+   "t": "checkbox",
+   "x": "Responds honestly to her fear of cancer:",
+   "crit": true,
    "kids": [
     {
      "id": 1,
@@ -215,48 +242,62 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Says that infection is the most likely cause but that cancer must be excluded; avoids false reassurance and avoids premature diagnosis of cancer."
+     "x": "Says infection is part of the picture but the scans show a mass that must be tested for cancer; avoids both false reassurance and a premature diagnosis of cancer."
     }
-   ],
-   "t": "checkbox",
-   "x": "Responds honestly to the patient's fear of cancer:"
+   ]
   },
   {
-   "id": 27,
+   "id": 31,
    "t": "checkbox",
-   "x": "Explains why a mammogram and biopsy are needed even though this looks like an infection, and addresses her reluctance about tests."
+   "x": "Explains why the biopsy is needed even though this looks like an infection, and what aspiration and core biopsy involve, addressing her reluctance about tests."
   },
   {
-   "id": 28,
+   "id": 32,
    "t": "checkbox",
-   "x": "Explains what drainage and biopsy involve, and what to expect from the next appointments."
+   "x": "Offers smoking cessation support and notes smoking as a risk factor for periductal mastitis and recurrence."
   },
   {
-   "id": 29,
+   "id": 33,
    "t": "checkbox",
-   "x": "Gives clear safety-netting: return or go to the Emergency Department for worsening pain, spreading redness, high fever, feeling unwell or rigors."
+   "x": "Summarises the plan, checks understanding, confirms she agrees and invites questions."
   },
   {
-   "id": 30,
+   "id": 34,
+   "t": "heading",
+   "x": "Safety netting"
+  },
+  {
+   "id": 35,
    "t": "checkbox",
-   "x": "Summarises the plan, confirms the patient agrees and invites questions."
+   "x": "Tells her to return the same day or go to the Emergency Department for spreading redness, worsening pain, high fever or rigors, vomiting, or feeling faint or very unwell.",
+   "crit": true
+  },
+  {
+   "id": 36,
+   "t": "checkbox",
+   "x": "Arranges review in 48 to 72 hours after drainage, with the culture result."
+  },
+  {
+   "id": 37,
+   "t": "checkbox",
+   "x": "Arranges follow-up for the biopsy results with the breast team, and follows her until the mass has fully resolved, with repeat imaging or biopsy if any mass remains."
   }
  ],
  "complexity": "Moderate",
  "context": [],
- "desc": "This station involves taking a focused history from a woman with a red, painful breast lump who is not breastfeeding, planning her work-up and management, and counselling her about why imaging and biopsy are needed as well as treating the infection.",
+ "desc": "This station involves a focused history and breast examination of a woman who is not breastfeeding and has a red, painful breast lump that has not settled on antibiotics, then interpreting her bloods, ultrasound and mammogram, planning drainage, tissue diagnosis and referral, and explaining why cancer must be excluded.",
  "diagnosis": [
   "Non-lactational breast abscess",
   "Inflammatory breast cancer",
   "Periductal mastitis"
  ],
- "explain": "<h3>Why a non-lactational breast abscess is a red flag</h3><p>Breast infection in a woman who is not breastfeeding is unusual. It may be periductal mastitis (strongly associated with smoking), but an infection can also be caused by, or can mask, an underlying carcinoma. Inflammatory breast cancer commonly mimics mastitis, with a red, warm, swollen breast, skin thickening and peau d'orange, and is often treated as an infection for weeks before it is recognised. Failure to respond to antibiotics, a residual mass, nipple retraction, an axillary node and recurrence in the same site all raise concern. In this case Helen is 46, has a family history, has a persistent underlying irregular mass and skin changes extending beyond the area of erythema, and has had a previous episode.</p><h3>What must be done, and when</h3><ul><li><p>Image at presentation, not after the infection settles. At 35 or over this means ultrasound plus mammogram. Ultrasound defines the collection and the underlying mass, and also assesses the axilla.</p></li><li><p>Treat the infection: ultrasound-guided needle aspiration is preferred over incision and drainage, with pus sent for culture, and antibiotics chosen according to eTG (non-lactational infection often needs anaerobic cover).</p></li><li><p>Biopsy any residual mass, abscess wall or skin change. Core biopsy is preferred to FNA for a solid lesion. A skin punch biopsy is needed if inflammatory breast cancer is a possibility. Persistent or recurrent disease requires tissue diagnosis.</p></li><li><p>Refer urgently to a breast surgeon or breast clinic and review early (48 to 72 hours). Follow the patient until the mass has resolved completely.</p></li></ul><h3>Triple assessment</h3><p>The three components are clinical assessment (history and examination of both breasts and axillae), imaging (age 35 or over: mammogram plus ultrasound; under 35: ultrasound first, with mammogram added selectively) and non-operative tissue biopsy (core biopsy preferred to FNA for solid lesions). The key rule is concordance: a lump can be called benign only if all three components agree. Any discordance, for example a benign-looking biopsy from a mass that is clinically or radiologically suspicious, needs further investigation, such as repeat or larger-volume biopsy, or excision.</p><h3>Communication</h3><p>Patients are often reluctant to have more tests when they have been told it is an infection. Explain honestly that infection is the most likely cause, but that the same signs can occur with cancer and that the only way to be certain is imaging and a biopsy. Avoid false reassurance, but also avoid telling her she has cancer before the results are available. Support smoking cessation and give clear safety-net advice.</p>",
+ "explain": "<h3>Why a non-lactational breast abscess is a red flag</h3><p>Breast infection in a woman who is not breastfeeding is unusual. It may be periductal mastitis (strongly associated with smoking), but an infection can also be caused by, or can mask, an underlying carcinoma. Inflammatory breast cancer commonly mimics mastitis, with a red, warm, swollen breast, skin thickening and peau d'orange, and is often treated as an infection for weeks before it is recognised. Failure to respond to antibiotics, a residual mass, nipple retraction, an axillary node and recurrence at the same site all raise concern. Helen is 46, has a family history, has had a previous episode at the same site, and on examination has a firm, ill-defined retroareolar mass partly fixed to the skin, new nipple retraction, early peau d'orange and an axillary node.</p><h3>Interpreting the results</h3><ul><li><p><strong>Bloods:</strong> a raised white cell count, neutrophilia and CRP fit a bacterial infection. They do not exclude cancer. A normal HbA1c excludes undiagnosed diabetes as a contributor.</p></li><li><p><strong>Ultrasound:</strong> the collection with debris is the abscess and can be aspirated under ultrasound. The separate irregular, vascular solid mass with angular margins is the finding that matters: it is suspicious for malignancy and needs a core biopsy. A node with a thickened cortex is indeterminate (it may be reactive to infection) and should be sampled.</p></li><li><p><strong>Mammogram:</strong> at 35 or over, imaging is ultrasound plus mammogram. Here it shows a suspicious retroareolar mass with skin thickening and nipple retraction, and a normal right breast. Inflammation can limit the mammogram, which is another reason ultrasound and biopsy are essential.</p></li></ul><h3>What must be done, and when</h3><ul><li><p>Image at presentation, not after the infection settles, and assess the axilla.</p></li><li><p>Treat the infection: ultrasound-guided needle aspiration is preferred over incision and drainage, with pus sent for culture, and antibiotics chosen according to eTG (non-lactational infection often needs anaerobic cover).</p></li><li><p>Biopsy any residual mass, abscess wall or skin change. Core biopsy is preferred to FNA for a solid lesion. A skin punch biopsy is needed if inflammatory breast cancer is a possibility. Persistent or recurrent disease requires tissue diagnosis.</p></li><li><p>Refer urgently to a breast surgeon or breast clinic and review early (48 to 72 hours). Follow the patient until the mass has resolved completely.</p></li></ul><h3>Triple test</h3><p>The three components are clinical assessment (history and examination of both breasts and axillae), imaging (age 35 or over: mammogram plus ultrasound; under 35: ultrasound first, with mammogram added selectively) and non-operative tissue biopsy (core biopsy preferred to FNA for solid lesions). The key rule is concordance: a lump can be called benign only if all three components agree. Any discordance, for example a benign-looking biopsy from a mass that is clinically or radiologically suspicious, needs further investigation, such as repeat or larger-volume biopsy, or excision.</p><h3>Communication and safety netting</h3><p>Patients are often reluctant to have more tests when they have been told it is an infection. Explain honestly that there is an infection, but that the scans show a separate lump that must be tested and that the only way to be certain is a biopsy. Avoid false reassurance, but also avoid telling her she has cancer before the results are available. Support smoking cessation. Tell her to return the same day or go to the Emergency Department for spreading redness, worsening pain, high fever, rigors or feeling very unwell, and make sure the biopsy results and her follow-up are booked.</p>",
  "focus": "Breast lump and breast abscess work-up",
- "guide": "<p>A <strong>high-performing candidate</strong> would take a focused history that establishes the lump is non-lactational, recognise the abscess with an underlying mass and skin changes as a red flag, and clearly state that malignancy including inflammatory breast cancer must be excluded. They would plan ultrasound and mammogram now, drainage with culture, and core biopsy of the residual mass and any skin change, and explain the concordance rule of triple assessment. They would refer urgently, arrange early review and follow-up until the mass is gone, and counsel the patient honestly and empathically.</p><p>A <strong>borderline candidate</strong> would treat this as simple mastitis, change the antibiotic and arrange review, without imaging or biopsy, or would defer imaging until after the infection has resolved. They would not recognise the significance of the residual mass and the skin changes, and would give false reassurance when asked about cancer.</p>",
+ "guide": "<p>In Part 1, the examiner gives findings from the Exam findings only when the candidate says what they would examine. A <strong>high-performing candidate</strong> establishes that the lump is non-lactational, asks about cancer symptoms and risk factors, examines both breasts and all nodal areas with a chaperone offered, and in Part 2 recognises an abscess with a separate suspicious solid mass and an indeterminate node. They state clearly that malignancy, including inflammatory breast cancer, must be excluded, plan aspiration with culture and core biopsy now, explain the concordance rule of the triple test, refer urgently to a breast surgeon, and counsel her honestly with specific safety netting and follow-up until the mass has gone.</p><p>A <strong>borderline candidate</strong> treats this as simple mastitis, changes the antibiotic and arranges review without tissue diagnosis, or defers biopsy until the infection has resolved. They may miss the separate solid mass on the ultrasound report, omit the axilla in the examination, or give false reassurance when asked about cancer.</p>",
  "id": "ai-14bb98e4",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name:</strong> Helen Marchetti</p></li><li><p><strong>Age:</strong> 46-years-old</p></li><li><p><strong>Gender:</strong> Female</p></li><li><p><strong>Aboriginal or Torres Strait Islander:</strong> No</p></li><li><p><strong>Setting:</strong> General Practice clinic</p></li></ul><p><strong>Presenting complaint:</strong> Painful, red lump in the left breast.</p><p><strong>History of presenting complaint (give only if asked):</strong></p><ul><li><p>Ten days ago you noticed a tender area near the left nipple. It has become a firm, red, painful lump.</p></li><li><p>You saw a locum GP five days ago, who said it was mastitis and gave you flucloxacillin 500 mg four times a day. You have taken every dose. The redness is a bit better but the lump is still there and feels hard. It has not shrunk. You are worried about it.</p></li><li><p>You have had fevers and sweats on and off for four days. You feel tired.</p></li><li><p>You are not breastfeeding. Your youngest child is 12 and you last breastfed 11 years ago. You are not pregnant (periods are regular, last period 2 weeks ago).</p></li><li><p>No nipple discharge. The left nipple has been slightly pulled in for about a month; you thought it was nothing. No trauma, piercings or recent breast procedures.</p></li><li><p>You have had a similar, smaller sore area near the same nipple 18 months ago, which settled with antibiotics. No imaging was done.</p></li><li><p>No weight loss, night sweats, bone pain, cough or headaches.</p></li></ul><p><strong>Medical history:</strong> Nil significant. No diabetes. No previous breast biopsies. Never had a mammogram.</p><p><strong>Medications:</strong> Flucloxacillin as above. No hormonal contraception or HRT. No known drug allergies.</p><p><strong>Family history:</strong> Your mother had breast cancer at age 58. No known BRCA gene testing. No ovarian cancer.</p><p><strong>Social history:</strong> Smoker, 15 cigarettes a day for 25 years. Alcohol 2 standard drinks on weekends. Married, works as a primary school teacher.</p><p><strong>Cues and questions to ask:</strong></p><ul><li><p>Early on say: “I just want this infection gone. I haven't got time for lots of tests.”</p></li><li><p>Ask: “A friend of mine was told she had mastitis and it turned out to be cancer. Could that be what this is?” (Be reassured if the candidate is honest and explains clearly, without false reassurance or alarm.)</p></li><li><p>Ask: “Why do I need a mammogram if it's an infection?”</p></li><li><p>Ask: “Will I need a needle in it, or an operation?”</p></li><li><p>Agree to the plan if it is explained clearly, including attending the scans and returning for review.</p></li></ul><p><strong>Examiner findings (provide to the candidate after the history):</strong></p><ol><li><p>Left breast: 4 cm tender, warm, erythematous area in the upper outer quadrant adjacent to the areola, with a fluctuant centre.</p></li><li><p>A separate firm, irregular, non-tender area about 2 cm across, deep to the abscess, which does not feel cystic.</p></li><li><p>Skin thickening and mild peau d'orange over the lateral breast, extending beyond the area of erythema.</p></li><li><p>Left nipple is mildly retracted. No discharge.</p></li><li><p>One tender, mobile 1 cm left axillary lymph node. Right breast and right axilla normal. Supraclavicular fossae clear.</p></li></ol>",
+ "patient": "<p><strong>Role:</strong> You are Helen Marchetti, a 46-year-old primary school teacher. You are worried but trying to play it down. The examiner gives examination findings from the Exam findings when the candidate says what they would examine. Agree to a breast examination if the candidate explains it, asks your permission and offers a chaperone.</p><p><strong>Opening line:</strong> \"This lump in my breast is still sore and red, and the antibiotics don't seem to be doing much.\"</p><p><strong>The lump and the infection (give only when asked):</strong></p><ul><li>Ten days ago you noticed a tender area near the left nipple. It has become a firm, red, painful lump. It has not shrunk.</li><li>You saw a locum GP five days ago, who said it was mastitis and gave you flucloxacillin 500 mg four times a day. You have taken every dose. The redness is a bit better but the lump is still there and feels hard.</li><li>Fevers and sweats on and off for four days. You feel tired. No rigors, no vomiting, no dizziness.</li><li>No trauma, nipple piercing or recent breast procedure.</li></ul><p><strong>Breastfeeding and pregnancy:</strong> You are not breastfeeding. Your youngest child is 12 and you last breastfed 11 years ago. You are not pregnant: periods are regular, last period 2 weeks ago.</p><p><strong>Breast symptoms and past episodes:</strong></p><ul><li>No nipple discharge. The left nipple has been slightly pulled in for about a month; you thought it was nothing.</li><li>You had a similar, smaller sore area near the same nipple 18 months ago, which settled with antibiotics. No scan was done.</li><li>You have never had a mammogram, a breast biopsy or any breast imaging.</li><li>No weight loss, bone pain, cough, breathlessness or headaches.</li></ul><p><strong>Medical history:</strong> Nil significant. No diabetes. No regular medicines apart from the flucloxacillin. No hormonal contraception or HRT. No known drug allergies.</p><p><strong>Family history:</strong> Your mother had breast cancer at 58. No ovarian cancer in the family. No one has had genetic testing.</p><p><strong>Social history:</strong> You smoke 15 cigarettes a day and have for 25 years. Alcohol 2 standard drinks on weekends. Married, two children. You are busy at work and do not want to take time off.</p><p><strong>Ideas, concerns, expectations:</strong> You think it is an infection that needs a stronger antibiotic. Underneath, you are frightened because a friend was told she had mastitis and it turned out to be cancer. You hope for a different antibiotic and to get back to work.</p><p><strong>Things to say:</strong></p><ul><li>Early on: \"I just want this infection gone. I haven't got time for lots of tests.\"</li><li>If there is time: \"A friend of mine was told she had mastitis and it turned out to be cancer. Could that be what this is?\" Settle if the candidate is honest and clear, without false reassurance or alarm.</li></ul>",
  "points": [
   "Non-lactational breast abscess or mastitis is a red flag for underlying carcinoma, including inflammatory breast cancer, and needs imaging at presentation as well as treatment of the infection.",
   "Women aged 35 or over need ultrasound plus mammogram; under 35, ultrasound first with selective mammogram.",
@@ -280,16 +321,43 @@
   "General Practice",
   "General Surgery"
  ],
- "stem": "<p>You are a final-year medical student on a General Practice placement. Helen Marchetti, a 46-year-old woman, has come to the clinic with a painful, red lump in her left breast. She was seen by a locum GP five days ago, diagnosed with mastitis and started on oral flucloxacillin. She has returned because the lump is not settling.</p><p>Her observations today are: temperature 37.9 °C, heart rate 92/min, blood pressure 124/76 mmHg, respiratory rate 16/min, SpO<sub>2</sub> 98% on room air.</p>",
+ "stem": "<p>You are a final-year medical student on a General Practice placement. Helen Marchetti, a 46-year-old woman, has come back to the clinic because a painful, red lump in her left breast has not settled on the antibiotics a locum GP started five days ago.</p>",
  "tasks": [
-  "<p><strong>Take a focused history</strong> from Mrs Marchetti (3 minutes).</p>",
-  "<p><strong>Interpret</strong> the examination findings given by the examiner and <strong>outline your investigation and management plan</strong> to the examiner (2 minutes).</p>",
-  "<p><strong>Explain</strong> to Mrs Marchetti what you think is happening and what will happen next (3 minutes).</p>"
+  "<p>Take a focused <strong>history</strong> from Mrs Marchetti and perform a focused <strong>examination</strong>, telling the examiner what you are examining and why (10 minutes).</p>",
+  "<p>The examiner will give you her blood results and the reports of her breast ultrasound and mammogram. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, including what you would explain to Mrs Marchetti, and your <strong>safety netting</strong> (5 minutes).</p>"
  ],
  "title": "Non-lactational breast abscess",
  "type": [
   "History",
-  "Management",
-  "Counselling"
- ]
+  "Examination",
+  "Interpretation",
+  "Management"
+ ],
+ "part2": {
+  "lead": "Mrs Marchetti had blood tests, a bilateral mammogram and an ultrasound of the left breast and axilla at the imaging centre next door this afternoon. She has come back to see you. Here are the results.",
+  "handover": [
+   {
+    "label": "Bloods (today)",
+    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>Haemoglobin</td><td>128 g/L</td><td>115 to 165</td></tr><tr><td>White cell count</td><td>13.6 ×10<sup>9</sup>/L</td><td>4.0 to 11.0</td></tr><tr><td>Neutrophils</td><td>10.8 ×10<sup>9</sup>/L</td><td>2.0 to 7.5</td></tr><tr><td>Platelets</td><td>362 ×10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>CRP</td><td>58 mg/L</td><td>below 5</td></tr><tr><td>HbA1c</td><td>5.3%</td><td>below 6.5%</td></tr></tbody></table>"
+   },
+   {
+    "label": "Ultrasound of the left breast and axilla",
+    "result": "<p>Retroareolar region extending into the upper inner quadrant: a 2.6 × 2.2 cm thick-walled hypoechoic collection with mobile internal debris, in keeping with an abscess. Deep to the collection and separate from it, a 2.1 cm irregular, hypoechoic solid mass with angular, indistinct margins and internal vascularity, which does not change with probe pressure. Overlying skin thickened to 6 mm.</p><p>Left axilla: one 15 mm lymph node with a thickened cortex (5 mm) and a preserved fatty hilum, indeterminate (may be reactive).</p><p><strong>Impression:</strong> left retroareolar abscess suitable for ultrasound-guided aspiration. Underlying solid mass, suspicious for malignancy (category 4). Indeterminate left axillary node. Ultrasound-guided core biopsy of the mass and sampling of the node recommended.</p>"
+   },
+   {
+    "label": "Bilateral diagnostic mammogram",
+    "result": "<p>Left: an ill-defined retroareolar density about 4 cm across with an irregular margin, retraction of the nipple and skin thickening over the inner breast. No suspicious calcifications. Compression was limited by tenderness.</p><p>Right: no mass, distortion or suspicious calcification.</p><p><strong>Impression:</strong> left retroareolar mass with skin thickening and nipple retraction, suspicious (category 4). Correlate with ultrasound and tissue sampling. Right breast normal.</p>"
+   }
+  ],
+  "ask": [
+   "What do these results show?",
+   "What is the most likely diagnosis, and what must you exclude? Why does it matter that she is not breastfeeding?",
+   "What is your management approach, including drainage, tissue diagnosis, antibiotics and referral? How would you explain this to Mrs Marchetti?",
+   "What safety netting and follow-up will you arrange?"
+  ]
+ },
+ "revised": {
+  "at": "2026-10-23",
+  "by": "format 5/10/5"
+ }
 }

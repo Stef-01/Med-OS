@@ -24,280 +24,326 @@
   {
    "id": 3,
    "t": "checkbox",
-   "x": "Uses plain language, checks understanding and responds empathetically to the patient's anxiety."
+   "x": "Uses plain language, checks understanding and responds empathetically to his anxiety."
   },
   {
    "id": 4,
    "t": "heading",
-   "x": "History (2 minutes)"
+   "x": "History"
   },
   {
-   "crit": true,
    "id": 5,
+   "t": "checkbox",
+   "x": "Characterises the Crohn's flare:",
    "kids": [
     {
-     "crit": true,
      "id": 1,
      "t": "checkbox",
-     "x": "Country of birth and age at migration (endemic region)."
+     "x": "Stool frequency, blood, abdominal pain, weight loss and fever."
     },
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Family history of hepatitis B (mother) and of liver disease or liver cancer."
+     "x": "Extraintestinal and perianal symptoms (mouth ulcers, joints, eyes, skin, perianal pain or discharge)."
     },
     {
      "id": 3,
+     "t": "checkbox",
+     "x": "Current treatment (azathioprine, tapering prednisolone) and adherence."
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "t": "checkbox",
+   "x": "Takes a focused history of hepatitis B risk factors:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Country of birth, age at migration and his mother's hepatitis B.",
+     "crit": true
+    },
+    {
+     "id": 2,
      "t": "checkbox",
      "x": "Hepatitis B vaccination status."
     },
     {
-     "id": 4,
+     "id": 3,
      "t": "checkbox",
-     "x": "Sexual partners and condom use, injecting drug use, tattoos, transfusions, alcohol intake."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Takes a focussed history of hepatitis B risk factors:"
-  },
-  {
-   "id": 6,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Asks about cough, fever, night sweats and weight loss, and about previous TB exposure and travel."
+     "x": "Sexual partners and condom use, injecting drug use, tattoos and transfusions."
     },
     {
-     "id": 2,
+     "id": 4,
      "t": "checkbox",
-     "x": "Asks about BCG vaccination or previous chest imaging."
+     "x": "Alcohol intake, previous liver problems and family history of liver cancer."
     }
-   ],
-   "t": "checkbox",
-   "x": "Takes a focussed history of TB risk and symptoms, because anti-TNF therapy is planned:"
+   ]
   },
   {
    "id": 7,
    "t": "checkbox",
-   "x": "Asks about varicella history, recent live vaccines and current immunosuppressants."
+   "x": "Takes a focused history of TB risk and symptoms, because anti-TNF therapy is planned:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Cough, fever, night sweats and weight loss, TB contacts and travel."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "BCG vaccination and previous chest imaging."
+    }
+   ]
   },
   {
    "id": 8,
-   "t": "heading",
-   "x": "Counselling (6 minutes)"
+   "t": "checkbox",
+   "x": "Asks about varicella history, recent live vaccines, other medicines and allergies."
   },
   {
-   "crit": true,
    "id": 9,
-   "kids": [
-    {
-     "crit": true,
-     "id": 1,
-     "t": "checkbox",
-     "x": "States in plain language that he has hepatitis B infection (HBsAg positive), which is probably long-term (chronic) and was likely acquired at birth or in early childhood."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Explains the other results: TB test negative (no sign of latent TB), hepatitis C and HIV negative, and that he is immune to chickenpox."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Explains that more tests (viral load, liver scan/fibrosis assessment) are needed to see how active the infection is and whether the liver is damaged."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "Reassures that hepatitis B is manageable and that most people with chronic infection are well with specialist care."
-    }
-   ],
    "t": "checkbox",
-   "x": "Explains the results to the patient:"
+   "x": "Explores what he understands, his concerns and his expectations about starting treatment."
   },
   {
-   "crit": true,
    "id": 10,
-   "kids": [
-    {
-     "crit": true,
-     "id": 1,
-     "t": "checkbox",
-     "x": "Explains in plain language that treatments that dampen the immune system can wake up the hidden virus, causing a serious liver flare or liver failure."
-    },
-    {
-     "crit": true,
-     "id": 2,
-     "t": "checkbox",
-     "x": "States that the biologic will not be started until antiviral therapy is in place."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Explains that he will be referred to or discussed with a gastroenterologist or hepatologist, that antiviral tablets (for example tenofovir or entecavir) are usually started before the biologic and continued during and for a period after treatment, and that his liver will be monitored."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "Reassures that this is a delay of weeks, not a reason to be denied biologic treatment."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Explains why the hepatitis B result matters before starting an anti-TNF drug:"
+   "t": "heading",
+   "x": "Examination"
   },
   {
    "id": 11,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Explains it is a stool test of bowel inflammation, used when IBD is suspected to decide who needs a colonoscopy or specialist referral; a normal result makes IBD unlikely and a raised result prompts referral."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Explains that once IBD is known it is used to follow disease activity and response to treatment between colonoscopies without invasive tests."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Explains that a raised result is not a diagnosis by itself, which was made by colonoscopy and biopsy."
-    }
-   ],
    "t": "checkbox",
-   "x": "Answers patient question 1: faecal calprotectin."
+   "x": "Asks for observations and weight, and inspects for nutrition, pallor and jaundice."
   },
   {
    "id": 12,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Explains in plain language that vedolizumab stops immune cells travelling into the bowel wall (examiner may accept naming alpha4beta7 integrin if it is explained)."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Explains that it is bowel-selective with a favourable safety profile, but works more slowly than anti-TNF drugs."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "States that the choice of drug is made with the specialist, and that his hepatitis B still needs a plan and specialist review."
-    }
-   ],
    "t": "checkbox",
-   "x": "Answers patient question 3: vedolizumab."
+   "x": "Looks for signs of chronic liver disease: jaundice, spider naevi, palmar erythema, leuconychia and asterixis."
   },
   {
-   "crit": true,
    "id": 13,
-   "kids": [
-    {
-     "crit": true,
-     "id": 1,
-     "t": "checkbox",
-     "x": "Explains that long-term hepatitis B can cause liver cancer (hepatocellular carcinoma), which can occur even without cirrhosis."
-    },
-    {
-     "crit": true,
-     "id": 2,
-     "t": "checkbox",
-     "x": "Explains that regular 6-monthly ultrasound surveillance may not be needed at his age yet, and that it will depend on fibrosis or cirrhosis, family history of liver cancer and age. Do NOT award this mark if the candidate tells him he will definitely need 6-monthly ultrasounds now."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Explains that antiviral treatment and specialist follow-up reduce his risk."
-    }
-   ],
    "t": "checkbox",
-   "x": "Answers patient question 4: hepatitis B and liver cancer."
+   "x": "Inspects the mouth for aphthous ulcers."
   },
   {
    "id": 14,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Advises that his partner and household contacts should be tested and vaccinated if not immune, and explains that hepatitis B vaccination (starting at birth) prevents infection and liver cancer."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Advises safer sex (condoms) until his partner is immune."
-    }
-   ],
    "t": "checkbox",
-   "x": "Addresses prevention and contacts:"
+   "x": "Examines the abdomen: tenderness or a mass in the right iliac fossa, liver and spleen size, and ascites."
   },
   {
    "id": 15,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Mentions that other non-live vaccines should be reviewed before treatment starts, and that live vaccines are avoided on immunosuppression."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Mentions that TB screening may be repeated if risk changes."
-    }
-   ],
    "t": "checkbox",
-   "x": "Briefly covers other pre-treatment points (non-critical, examiner-prompted)."
+   "x": "Offers a perianal inspection with a chaperone, looking for skin tags, fistula or abscess."
   },
   {
    "id": 16,
-   "t": "heading",
-   "x": "Management"
+   "t": "checkbox",
+   "x": "Checks the lymph nodes and listens to the chest."
   },
   {
-   "crit": true,
    "id": 17,
-   "kids": [
-    {
-     "crit": true,
-     "id": 1,
-     "t": "checkbox",
-     "x": "Arranges urgent referral or discussion with gastroenterology and hepatology (or infectious diseases) and requests HBV DNA, HBeAg, repeat LFTs and fibrosis assessment."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Arranges hepatitis B testing and vaccination for his partner and household."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Provides safety-net advice (worsening bloody diarrhoea, fever, jaundice, dark urine, severe abdominal pain) and a follow-up time."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Outlines a safe plan:"
+   "t": "heading",
+   "x": "Interpretation"
   },
   {
    "id": 18,
    "t": "checkbox",
-   "x": "Invites questions and checks understanding with a summary."
+   "x": "Hepatitis B serology: HBsAg and anti-HBc positive with anti-HBs negative and IgM negative means current hepatitis B infection, most likely chronic and acquired at birth or in early childhood.",
+   "crit": true
+  },
+  {
+   "id": 19,
+   "t": "checkbox",
+   "x": "Distinguishes this from past cleared infection (HBsAg negative, anti-HBc positive) and vaccine immunity (anti-HBs positive alone)."
+  },
+  {
+   "id": 20,
+   "t": "checkbox",
+   "x": "Mildly raised ALT may reflect hepatitis B activity, azathioprine or the Crohn's disease; normal bilirubin, INR and platelets show no sign of liver failure, but fibrosis still needs assessing."
+  },
+  {
+   "id": 21,
+   "t": "checkbox",
+   "x": "Negative IGRA with a valid control and a normal chest X-ray: no evidence of latent TB, read alongside his risk history because steroids and azathioprine can blunt the test. Hepatitis C and HIV negative; immune to varicella."
+  },
+  {
+   "id": 22,
+   "t": "checkbox",
+   "x": "Raised calprotectin and CRP, low albumin and mild anaemia fit active bowel inflammation from the flare."
+  },
+  {
+   "id": 23,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "id": 24,
+   "t": "checkbox",
+   "x": "Explains the hepatitis B result in plain language:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "He has hepatitis B infection, probably long-term and likely caught at birth or in early childhood."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "More tests (viral load, liver scan or fibrosis assessment) will show how active it is and whether the liver is damaged."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Hepatitis B is manageable and most people with long-term infection stay well with specialist care."
+    }
+   ]
+  },
+  {
+   "id": 25,
+   "t": "checkbox",
+   "x": "Explains why it matters before immunosuppression:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Treatments that dampen the immune system, including the azathioprine and steroids he takes now, can wake up the virus and cause a serious liver flare or liver failure.",
+     "crit": true
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "An antiviral tablet (for example tenofovir or entecavir) is started before the biologic and continued during and after treatment, as the specialist advises.",
+     "crit": true
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "This is a delay of weeks, not a reason to be denied biologic treatment."
+    }
+   ]
+  },
+  {
+   "id": 26,
+   "t": "checkbox",
+   "x": "Refers or discusses urgently with gastroenterology or hepatology, requests HBV DNA, HBeAg, repeat LFTs and fibrosis assessment, and makes sure the treating gastroenterologist knows before any biologic is given.",
+   "crit": true
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "Answers his question about vedolizumab:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "It stops immune cells moving into the bowel wall, so it is bowel-selective with a favourable safety profile, but it works more slowly than anti-TNF drugs."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "The choice is made with the specialist, and his hepatitis B still needs a plan whichever drug is used."
+    }
+   ]
+  },
+  {
+   "id": 28,
+   "t": "checkbox",
+   "x": "Answers his question about liver cancer:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Long-term hepatitis B can cause liver cancer, even without cirrhosis."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Six-monthly ultrasound surveillance depends on fibrosis or cirrhosis, family history and age, and may not be needed yet at 29; does not promise or rule it out before the specialist assessment."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Antiviral treatment, when needed, and regular follow-up reduce the risk."
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "t": "checkbox",
+   "x": "Answers his question about faecal calprotectin:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "It is a stool test of bowel inflammation used to decide who needs a colonoscopy or specialist referral."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "In known Crohn's disease it tracks activity and response to treatment between colonoscopies."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "A raised result is not a diagnosis by itself; his diagnosis was made by colonoscopy and biopsy."
+    }
+   ]
+  },
+  {
+   "id": 30,
+   "t": "checkbox",
+   "x": "Advises that his partner and household contacts are tested for hepatitis B and vaccinated if not immune, and that he uses condoms until Linh is shown to be immune.",
+   "crit": true
+  },
+  {
+   "id": 31,
+   "t": "checkbox",
+   "x": "Reviews non-live vaccines before treatment (including hepatitis A if not immune), explains that live vaccines are avoided on immunosuppression, and advises keeping alcohol low."
+  },
+  {
+   "id": 32,
+   "t": "checkbox",
+   "x": "Summarises the plan, checks understanding and invites questions."
+  },
+  {
+   "id": 33,
+   "t": "heading",
+   "x": "Safety netting"
+  },
+  {
+   "id": 34,
+   "t": "checkbox",
+   "x": "Tells him to seek urgent review or go to the Emergency Department for yellow skin or eyes, dark urine, pale stools, vomiting, swelling of the tummy or confusion.",
+   "crit": true
+  },
+  {
+   "id": 35,
+   "t": "checkbox",
+   "x": "Tells him to seek same-day review or go to the Emergency Department for worsening bloody diarrhoea, fever, severe abdominal pain, or feeling faint or dehydrated."
+  },
+  {
+   "id": 36,
+   "t": "checkbox",
+   "x": "Arranges follow-up: review with the HBV DNA and HBeAg results within about a week, the specialist appointment, and that no biologic starts until the hepatitis B plan is in place."
   }
  ],
  "complexity": "High",
  "context": [],
- "desc": "This station involves taking a focussed pre-immunosuppression risk history and counselling a young man with Crohn's disease about a positive hepatitis B screening result, faecal calprotectin and the choice of advanced therapy.",
+ "desc": "This station involves a focused pre-immunosuppression history and examination of a young man with a Crohn's disease flare, then interpreting his pre-biologic screening results (hepatitis B serology, TB and other screening, liver tests and faecal calprotectin), and explaining what a positive hepatitis B result means for his treatment, his liver and his partner.",
  "diagnosis": [
   "Crohn's disease",
   "Chronic hepatitis B infection"
  ],
- "explain": "<h3>Pre-treatment screening for advanced IBD therapy</h3><p>Before anti-TNF therapy, screen for latent TB (IGRA and/or tuberculin skin test, with a risk and symptom history and chest imaging as indicated), hepatitis B (HBsAg, anti-HBc, anti-HBs), hepatitis C, HIV and varicella immunity. TNF blockade can reactivate latent TB and hepatitis B, causing disseminated or severe disease. In this case the IGRA is negative, but HBsAg and anti-HBc positivity with negative anti-HBs indicates chronic hepatitis B infection.</p><h3>Managing hepatitis B before immunosuppression</h3><p>Chronic hepatitis B needs HBV DNA, HBeAg, liver function tests and fibrosis assessment, ideally with hepatology or gastroenterology input. Antiviral prophylaxis (tenofovir or entecavir) is started before immunosuppression and continued during and for a period afterwards, as advised by the specialist. The biologic is started once antiviral therapy is in place; this is a short delay rather than a refusal of treatment.</p><h3>Hepatitis B and hepatocellular carcinoma</h3><p>Chronic hepatitis B causes hepatocellular carcinoma (HCC), which can occur even without cirrhosis. Prevention relies on vaccination (starting with a birth dose, with HBIG for infants of HBsAg-positive mothers) and, for people already infected, linkage to care and antivirals when indicated. In Australia, six-monthly HCC ultrasound surveillance is recommended for people with cirrhosis and for non-cirrhotic people with chronic hepatitis B in higher-risk groups, which includes Asian-born men aged 40 years or older and those with a family history of HCC. At 29, without cirrhosis or a family history of HCC, Mr Nguyen may not need surveillance yet, and the decision depends on his fibrosis or cirrhosis status, family history and age. A candidate should not promise him 6-monthly ultrasounds now.</p><h3>Faecal calprotectin</h3><p>Faecal calprotectin is a stool marker of neutrophil-driven intestinal inflammation. In adults with chronic lower bowel symptoms where cancer is not suspected (red flags need urgent investigation), a low result makes IBD unlikely, a raised result prompts gastroenterology referral, and a borderline result is repeated per local pathway. In known IBD it is used for non-invasive monitoring of disease activity between colonoscopies.</p><h3>Vedolizumab</h3><p>Vedolizumab is an anti-alpha4beta7 integrin antibody that blocks lymphocyte trafficking to the gut. It is gut-selective with a favourable safety profile, but has a slower onset of action than anti-TNF agents. It does not remove the need for a hepatitis B plan.</p>",
+ "explain": "<h3>Pre-treatment screening for advanced IBD therapy</h3><p>Before anti-TNF therapy, screen for latent TB (a risk and symptom history, an IGRA and/or tuberculin skin test, and a chest X-ray), hepatitis B (HBsAg, anti-HBc, anti-HBs), hepatitis C, HIV and varicella immunity, and review vaccinations. TNF blockade can reactivate latent TB and hepatitis B, causing disseminated or severe disease.</p><h3>Interpreting the results</h3><ul><li><p><strong>Hepatitis B serology:</strong> HBsAg positive means current infection. Anti-HBc positive with IgM negative and anti-HBs negative fits chronic infection rather than acute infection or immunity, most likely acquired from his mother at birth or in early childhood. Past cleared infection would be HBsAg negative and anti-HBc positive; vaccine immunity is anti-HBs positive alone. HBV DNA and HBeAg show how active the infection is.</p></li><li><p><strong>ALT 52 U/L:</strong> a mild rise that may reflect hepatitis B activity, azathioprine or the Crohn's disease itself. Normal bilirubin, INR and platelets show no sign of liver failure, but fibrosis must still be assessed (for example with elastography).</p></li><li><p><strong>TB screen:</strong> a negative IGRA with a valid positive control and a normal chest X-ray give no evidence of latent TB. Steroids and azathioprine can blunt the IGRA, so the result is read alongside his risk history (born in a high-incidence country).</p></li><li><p><strong>Calprotectin, CRP, albumin and haemoglobin:</strong> these fit active bowel inflammation from the flare.</p></li></ul><h3>Managing hepatitis B before immunosuppression</h3><p>Chronic hepatitis B needs HBV DNA, HBeAg, liver function tests and fibrosis assessment, with hepatology or gastroenterology input. Antiviral prophylaxis (tenofovir or entecavir) is started before immunosuppression and continued during and for a period afterwards, as advised by the specialist. He is already taking azathioprine and has had prednisolone, so this is urgent. The biologic is started once antiviral therapy is in place; this is a short delay rather than a refusal of treatment. His partner and household contacts should be tested and vaccinated if not immune, with condoms until his partner is shown to be immune.</p><h3>Hepatitis B and hepatocellular carcinoma</h3><p>Chronic hepatitis B causes hepatocellular carcinoma (HCC), which can occur even without cirrhosis. Prevention relies on vaccination (starting with a birth dose, with HBIG for infants of HBsAg-positive mothers) and, for people already infected, linkage to care and antivirals when indicated. In Australia, six-monthly HCC ultrasound surveillance is recommended for people with cirrhosis and for non-cirrhotic people with chronic hepatitis B in higher-risk groups, which includes Asian-born men aged 40 years or older and those with a family history of HCC. At 29, without cirrhosis or a family history of HCC, Mr Nguyen may not need surveillance yet, and the decision depends on his fibrosis or cirrhosis status, family history and age. A candidate should not promise him 6-monthly ultrasounds now.</p><h3>Faecal calprotectin</h3><p>Faecal calprotectin is a stool marker of neutrophil-driven intestinal inflammation. In adults with chronic lower bowel symptoms where cancer is not suspected (red flags need urgent investigation), a low result makes IBD unlikely, a raised result prompts gastroenterology referral, and a borderline result is repeated per local pathway. In known IBD it is used for non-invasive monitoring of disease activity between colonoscopies.</p><h3>Vedolizumab</h3><p>Vedolizumab is an anti-alpha4beta7 integrin antibody that blocks lymphocyte trafficking to the gut. It is gut-selective with a favourable safety profile, but has a slower onset of action than anti-TNF agents. It does not remove the need for a hepatitis B plan.</p><h3>Safety netting</h3><p>Tell him to seek urgent care for symptoms of a liver flare (jaundice, dark urine, pale stools, vomiting, abdominal swelling or confusion) or a severe Crohn's flare (worsening bloody diarrhoea, fever, severe pain, dehydration), and book review with the HBV DNA and HBeAg results and the specialist appointment.</p>",
  "focus": "Counselling before starting advanced therapy for IBD",
- "guide": "<p>A <strong>high-performing candidate</strong> takes a brief, targeted history that covers hepatitis B risk factors (country of birth, maternal infection, vaccination, partner) and TB and vaccine status. They then explain clearly and sensitively that he has chronic hepatitis B, why that matters before anti-TNF therapy (reactivation), and that the biologic will not be started until antiviral therapy is in place. They answer his questions about calprotectin (diagnostic and monitoring use), vedolizumab (gut-selective, favourable safety, slower onset), and liver cancer risk, without over- or under-promising surveillance. They end with a safe plan, contact tracing and follow-up.</p><p>A <strong>borderline candidate</strong> takes an unfocussed history, uses jargon, or reports the result without explaining why it affects treatment. They may say that he will definitely need 6-monthly ultrasounds, may omit the antiviral plan, or may not link hepatitis B to liver cancer. They may state that he cannot have biologic therapy at all, leaving the patient distressed, and may overlook his partner.</p>",
+ "guide": "<p>In Part 1, the examiner gives findings from the Exam findings only when the candidate says what they would examine. A <strong>high-performing candidate</strong> takes a targeted history that covers the flare, hepatitis B risk factors (country of birth, maternal infection, vaccination, partner), TB risk and vaccine status, and examines for chronic liver disease and active Crohn's disease. In Part 2 they read the serology correctly as current, probably chronic, hepatitis B, explain clearly why it matters before anti-TNF therapy (reactivation, including on his current azathioprine and steroids), and state that the biologic will not start until antiviral therapy is in place, with urgent specialist input. They answer his questions about vedolizumab, liver cancer and calprotectin without over- or under-promising surveillance, and cover his partner, red flags and follow-up.</p><p>A <strong>borderline candidate</strong> takes an unfocused history, misreads the serology as past infection or vaccination, or reports the result without explaining why it affects treatment. They may say he will definitely need 6-monthly ultrasounds, omit the antiviral plan, tell him he cannot have biologic therapy at all, or overlook his partner.</p>",
  "id": "ai-44e14180",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name:</strong> Minh Nguyen.</p></li><li><p><strong>Age:</strong> 29-years-old.</p></li><li><p><strong>Gender:</strong> Male (he/him).</p></li><li><p><strong>Aboriginal or Torres Strait Islander:</strong> No.</p></li><li><p><strong>Setting:</strong> General practice clinic. You are anxious and slightly worried about what the 'abnormal' test means.</p></li></ul><p><strong>Opening statement:</strong> <em>\"The nurse said one of my tests was abnormal. Is it serious? I just want to get my bowel sorted.\"</em></p><p><strong>History if asked (2 minutes):</strong></p><ul><li><p><strong>Crohn's disease:</strong> Diarrhoea 5-6 times per day with some blood, cramping right-sided abdominal pain and tiredness for 6 weeks. Weight has dropped about 2 kg. Currently on azathioprine and finishing a prednisolone taper.</p></li><li><p><strong>Hepatitis B risk factors:</strong> Born in Vietnam and moved to Australia aged 12. Your mother has hepatitis B and sees a liver specialist. You do not know whether you were ever vaccinated. No history of injecting drugs, no tattoos or piercings, no blood transfusions. One long-term partner (Linh) for 3 years, who has not been tested; you use condoms inconsistently. Alcohol: 2 standard drinks per week. No family history of liver cancer or cirrhosis. You have never had a liver problem diagnosed.</p></li><li><p><strong>TB risk and symptoms:</strong> You have a BCG scar from childhood. Visited Vietnam for 3 weeks about 2 years ago. No known TB contacts. No cough, fevers or night sweats (other than the weight loss attributed to the bowel flare). No previous chest X-ray.</p></li><li><p><strong>Immunity and vaccines:</strong> Had chickenpox as a child. No live vaccines recently. No other regular medications. No allergies.</p></li></ul><p><strong>If asked about your understanding:</strong> <em>\"I didn't know I had hepatitis B. I feel fine apart from my bowel.\"</em></p><p><strong>Reactions during counselling:</strong></p><ul><li><p>When told of the hepatitis B result, appear worried: <em>\"Did I catch it from Linh? Is she at risk?\"</em></p></li><li><p>If the candidate says you will not be able to start the biologic at all, become upset: <em>\"So I'm stuck with this bowel for ever?\"</em> Settle if the candidate explains that treatment will be started once the antiviral is in place.</p></li><li><p>Interrupt the candidate if they use medical jargon (for example 'seroconversion', 'reactivation', 'integrin', 'prophylaxis') without a plain explanation, saying: <em>\"Sorry, what does that mean?\"</em></p></li></ul><p><strong>If the candidate has not already addressed these by about 5 minutes into the station, ask the following questions:</strong></p><ol><li><p><em>\"Why do I keep having to do poo tests? What is the calprotectin one for, and does it mean I definitely have Crohn's?\"</em></p></li><li><p><em>\"Why can't I just start the injection now?\"</em></p></li><li><p><em>\"Is there a gentler option for my immune system?\"</em></p></li><li><p><em>\"Am I going to get liver cancer? Do I need scans?\"</em></p></li></ol><p><em>The candidate may ask further questions of you; use only the provided history above. The candidate should use non-medical terminology.</em></p>",
+ "patient": "<p><strong>Role:</strong> You are Minh Nguyen (he/him), a 29-year-old IT support officer. You are anxious about what the \"abnormal\" test means but cooperative. The examiner gives examination findings from the Exam findings when the candidate says what they would examine. If the candidate uses jargon (for example \"reactivation\" or \"prophylaxis\") without explaining it, say: \"Sorry, what does that mean?\"</p><p><strong>Opening line:</strong> \"The nurse said one of my tests was abnormal. Is it serious? I just want to get my bowel sorted.\" If the candidate says they will go through the results after the history and examination, accept this.</p><p><strong>Crohn's disease (give only when asked):</strong></p><ul><li>Diagnosed 18 months ago after a colonoscopy. This flare started 6 weeks ago.</li><li>Diarrhoea 5 to 6 times a day with some blood, cramping pain on the right side of your tummy and tiredness. Weight down about 2 kg. No fevers, no vomiting.</li><li>Occasional mouth ulcers. No joint pains, red or painful eyes or skin rashes. No pain, swelling or discharge around the bottom.</li><li>You take azathioprine every day and are finishing a course of prednisolone that is being tapered. You have not missed doses.</li></ul><p><strong>Hepatitis B risk factors (give only when asked):</strong></p><ul><li>Born in Vietnam; moved to Australia aged 12.</li><li>Your mother has hepatitis B and sees a liver specialist. No one in the family has had liver cancer or cirrhosis.</li><li>You do not know whether you were ever vaccinated against hepatitis B.</li><li>One long-term partner, Linh, for 3 years. She has never been tested. You use condoms inconsistently.</li><li>No injecting drug use, no tattoos or piercings, no blood transfusions. You have never been told you have a liver problem.</li></ul><p><strong>TB risk (give only when asked):</strong> You have a BCG scar from childhood. You visited Vietnam for 3 weeks about 2 years ago. No known contact with anyone with TB. No cough, fevers or night sweats. You have never had a chest X-ray.</p><p><strong>Other history:</strong> You had chickenpox as a child. No live vaccines recently. No other medicines. No allergies. Never smoked. Alcohol about 2 standard drinks a week.</p><p><strong>Social history:</strong> Lives with Linh. Works full time and has had to take days off with the flare.</p><p><strong>Ideas, concerns, expectations:</strong> You feel fine apart from your bowel and have no idea what the abnormal test could be. You are worried it will stop you getting the new treatment. You hope to start the injection as soon as possible.</p>",
  "points": [
   "Before anti-TNF therapy, screen for latent TB, hepatitis B, hepatitis C, HIV and varicella immunity, because TNF blockade can reactivate TB and hepatitis B.",
   "Chronic hepatitis B needs antiviral prophylaxis before immunosuppression; delay the biologic until it is in place.",
@@ -322,15 +368,48 @@
   "Gastroenterology",
   "General Practice"
  ],
- "stem": "<p>You are a general practice registrar. Minh Nguyen is a 29-year-old man with ileocolonic Crohn's disease diagnosed 18 months ago. He has had a moderate-to-severe flare despite azathioprine and a recent prednisolone course. A gastroenterologist has recommended starting advanced therapy and has asked you to complete the pre-treatment screening bloods. He is likely to be offered an anti-TNF agent (for example infliximab or adalimumab), and vedolizumab is also being considered.</p><p>Results of the screening bloods are now back:</p><ul><li><p>Interferon-gamma release assay (IGRA): negative.</p></li><li><p>Hepatitis B: HBsAg positive, anti-HBc (total) positive, anti-HBs negative.</p></li><li><p>Hepatitis C antibody and HIV: negative.</p></li><li><p>Varicella IgG: immune.</p></li><li><p>ALT: mildly elevated at 52 U/L. Hepatitis B DNA and HBeAg have been requested and are pending.</p></li><li><p>Faecal calprotectin (taken at the time of the flare): 640 mcg/g.</p></li></ul><p>The practice nurse has told Mr Nguyen that one blood test was abnormal and that he needs to discuss it with you. He has not yet been told what it means.</p><p><em>For the purpose of this station, assume that the results above are correct and that the gastroenterology team is happy for you to begin the work-up and discuss options with him.</em></p>",
+ "stem": "<p>You are a general practice registrar. Minh Nguyen, a 29-year-old man with ileocolonic Crohn's disease, has come in about the screening blood tests his gastroenterologist asked you to arrange before he starts advanced (biologic) therapy for a flare. He is likely to be offered an anti-TNF agent such as infliximab or adalimumab, and vedolizumab is also being considered.</p><p>The practice nurse has told Mr Nguyen that one result was abnormal and that he needs to discuss it with you. He has not yet been told what it means.</p>",
  "tasks": [
-  "<p>Take a <strong>focussed pre-immunosuppression risk history</strong>, including risk factors for the abnormal result (2 minutes).</p>",
-  "<p><strong>Counsel</strong> Mr Nguyen about his results and the next steps before advanced therapy (6 minutes).</p>"
+  "<p>Take a focused <strong>history</strong> from Mr Nguyen, covering his current Crohn's symptoms and the risk factors that matter before immunosuppression, and perform a focused <strong>examination</strong>, telling the examiner what you are examining and why (10 minutes).</p>",
+  "<p>The examiner will give you his pre-treatment screening results. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, including how you would explain the results to Mr Nguyen and answer his questions, and your <strong>safety netting</strong> (5 minutes).</p>"
  ],
  "title": "Pre-biologic screening: an abnormal hepatitis B result in Crohn's disease",
  "type": [
   "History",
-  "Counselling",
-  "Management"
- ]
+  "Examination",
+  "Interpretation",
+  "Counselling"
+ ],
+ "part2": {
+  "lead": "Here are Mr Nguyen's pre-treatment screening results. Hepatitis B DNA and HBeAg have been requested and are pending.",
+  "handover": [
+   {
+    "label": "Hepatitis B serology",
+    "result": "<table><tbody><tr><th>Test</th><th>Result</th></tr><tr><td>HBsAg (surface antigen)</td><td>Positive</td></tr><tr><td>Anti-HBc (core antibody), total</td><td>Positive</td></tr><tr><td>Anti-HBc IgM</td><td>Negative</td></tr><tr><td>Anti-HBs (surface antibody)</td><td>Negative</td></tr><tr><td>HBeAg and HBV DNA</td><td>Pending</td></tr></tbody></table>"
+   },
+   {
+    "label": "Other pre-treatment screening",
+    "result": "<ul><li>Interferon-gamma release assay (QuantiFERON): negative, with a satisfactory positive control (mitogen) response.</li><li>Chest X-ray: clear lungs, no hilar lymphadenopathy, no apical scarring or calcified granulomas.</li><li>Hepatitis C antibody: not detected. HIV antigen and antibody: not detected.</li><li>Varicella zoster IgG: detected (immune).</li></ul>"
+   },
+   {
+    "label": "Blood tests",
+    "result": "<table><tbody><tr><th>Test</th><th>Result</th><th>Reference range</th></tr><tr><td>ALT</td><td>52 U/L</td><td>below 40</td></tr><tr><td>Bilirubin</td><td>11 µmol/L</td><td>below 20</td></tr><tr><td>Albumin</td><td>33 g/L</td><td>35 to 50</td></tr><tr><td>INR</td><td>1.0</td><td>0.9 to 1.2</td></tr><tr><td>Haemoglobin</td><td>121 g/L</td><td>135 to 175</td></tr><tr><td>White cell count</td><td>7.2 ×10<sup>9</sup>/L</td><td>4.0 to 11.0</td></tr><tr><td>Platelets</td><td>385 ×10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>CRP</td><td>34 mg/L</td><td>below 5</td></tr></tbody></table>"
+   },
+   {
+    "label": "Faecal calprotectin (taken at the start of the flare)",
+    "result": "<p>640 µg/g (normal below 50).</p>"
+   }
+  ],
+  "ask": [
+   "What do these results show?",
+   "Why does the hepatitis B result matter before an anti-TNF agent, and what further tests and referral does he need?",
+   "Mr Nguyen asks: \"Why can't I just start the injection now?\" and \"Is there a gentler option for my immune system?\" How would you answer him?",
+   "He asks: \"Am I going to get liver cancer? Do I need scans?\" and \"What is the calprotectin test for? Does it mean I definitely have Crohn's?\" How would you answer?",
+   "What would you advise about his partner, and what safety netting and follow-up would you arrange?"
+  ]
+ },
+ "revised": {
+  "at": "2026-10-23",
+  "by": "format 5/10/5"
+ }
 }

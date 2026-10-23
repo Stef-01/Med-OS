@@ -19,503 +19,307 @@
   },
   {
    "id": 2,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Gives short instructions to the nurse and uses closed-loop communication."
-    }
-   ],
    "t": "checkbox",
-   "x": "Introduces self, explains what is being done in plain language and keeps a calm, clear approach with the anxious patient."
+   "x": "Introduces self, explains what is being done in plain language, stays calm with the anxious, intoxicated patient, and gives short closed-loop instructions to the nurse."
   },
   {
    "id": 3,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Gloves, gown and eye protection."
-    }
-   ],
    "t": "checkbox",
-   "x": "Uses standard precautions for a bleeding patient."
+   "x": "Uses standard precautions for a bleeding patient: gloves, gown and eye protection."
   },
   {
    "id": 4,
    "t": "heading",
-   "x": "Primary survey (ABCDE): the examiner gives findings as requested"
+   "x": "History"
   },
   {
    "id": 5,
+   "t": "checkbox",
+   "x": "Takes a focused AMPLE history once the primary survey is under way:",
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Airway with cervical spine control."
+     "x": "Allergies: penicillin, and clarifies the reaction (childhood itchy rash only, no swelling or breathing trouble)"
     },
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Breathing."
+     "x": "Medications: salbutamol and recent ibuprofen (bleeding risk, asthma), no anticoagulants"
     },
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Circulation with haemorrhage control."
+     "x": "Past history: mild asthma, previous nasal fracture, no operations"
     },
     {
      "id": 4,
      "t": "checkbox",
-     "x": "Disability."
+     "x": "Last meal about 3 hours ago and about 6 beers, relevant to any procedure or sedation"
     },
     {
      "id": 5,
      "t": "checkbox",
-     "x": "Exposure and environment control."
+     "x": "Events: the mechanism, the time of injury, no loss of consciousness, and nasal blockage on both sides"
     }
-   ],
+   ]
+  },
+  {
+   "id": 6,
+   "t": "checkbox",
+   "x": "Asks about tetanus immunisation: childhood course completed, last dose in Year 10, booster status unknown."
+  },
+  {
+   "id": 7,
+   "t": "heading",
+   "x": "Examination: primary survey and nose"
+  },
+  {
+   "id": 8,
    "t": "checkbox",
    "x": "Works through A, B, C, D and E in order, treats problems as found and reassesses after each intervention."
   },
   {
-   "id": 6,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Asks the patient to speak and inspects the mouth for blood, clots and teeth."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Applies manual in-line stabilisation or a cervical collar because of the mechanism, alcohol and distracting injury."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Looks for stridor, neck swelling and surgical emphysema."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Airway: checks patency and protects the cervical spine."
-  },
-  {
-   "id": 7,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Trachea, expansion, percussion and auscultation [normal, SpO2 96% on air]."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Breathing: checks RR and SpO2, examines the chest and gives high-flow oxygen by non-rebreather mask."
-  },
-  {
-   "crit": true,
-   "id": 8,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "The superficial wound over sternocleidomastoid is in the line of the external jugular vein."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "The investing fascia holds the cut vein open, and negative intrathoracic pressure on inspiration can suck air in, causing venous air embolism."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Notes the sucking noise and considers deeper injury (platysma breached, other neck structures)."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Recognises the right neck laceration as a possible external jugular vein injury and explains the danger."
-  },
-  {
-   "crit": true,
    "id": 9,
+   "t": "checkbox",
+   "x": "Airway with cervical spine control:",
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Direct pressure with a gloved finger or gauze straight away, then an occlusive dressing (e.g. petrolatum gauze sealed with adhesive dressing)."
+     "x": "Asks him to speak, inspects the mouth for blood, clots and teeth, and looks for stridor, neck swelling and surgical emphysema"
     },
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Lies the patient flat or head-down (Trendelenburg) with in-line stabilisation, not left sitting upright with the wound open."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "If embolism is suspected (sudden dyspnoea, hypoxia, hypotension, mill-wheel murmur), a left lateral tilt is done only as a log-roll with spinal precautions."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "Calls early for senior help (ED consultant and trauma or surgical team) per local rapid response criteria."
+     "x": "Applies manual in-line stabilisation or a collar because of the mechanism, alcohol and distracting injury"
     }
-   ],
-   "t": "checkbox",
-   "x": "Immediately occludes the wound and protects against air embolism."
+   ]
   },
   {
    "id": 10,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "HR, BP, capillary refill and skin temperature [108/min, 114/72 mmHg, 3 seconds]."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Two large-bore IV cannulae."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Bloods: FBC, coagulation studies, group and crossmatch, venous gas with lactate."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "Avoids large volumes of crystalloid and activates the massive transfusion protocol if bleeding or shock progresses."
-    }
-   ],
    "t": "checkbox",
-   "x": "Circulation: assesses perfusion and manages haemorrhage."
+   "x": "Breathing: checks RR and SpO2, examines the chest (trachea, expansion, percussion, auscultation) and gives high-flow oxygen."
   },
   {
    "id": 11,
+   "t": "checkbox",
+   "x": "Recognises the right neck laceration as a possible external jugular vein injury and explains the danger:",
+   "crit": true,
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "GCS 15, pupils equal and reactive, BGL 5.6, no focal deficit."
+     "x": "The wound over sternocleidomastoid lies in the line of the external jugular vein, and the platysma is breached"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "The investing fascia holds the cut vein open, so breathing in while upright can suck air in (venous air embolism); notes the sucking noise"
     }
-   ],
-   "t": "checkbox",
-   "x": "Disability: GCS, pupils and a bedside glucose."
+   ]
   },
   {
-   "crit": true,
    "id": 12,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Removes wet clothing and checks core temperature [35.2°C]."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Warm blankets, forced-air warmer and warmed IV fluids."
-    }
-   ],
    "t": "checkbox",
-   "x": "Exposure: fully exposes, log-rolls with spinal precautions, then covers the patient and prevents hypothermia."
-  },
-  {
+   "x": "Immediately occludes the wound and protects against air embolism:",
    "crit": true,
-   "id": 13,
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Hypothermia, coagulopathy and acidosis, each worsening the others and increasing mortality."
+     "x": "Direct pressure with a gloved finger or gauze straight away, then an occlusive dressing"
     },
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Haemorrhage control, active warming, early balanced blood products and consideration of tranexamic acid (within 3 hours of injury) if there is significant bleeding."
+     "x": "Lies him flat or head-down with in-line stabilisation, not left sitting upright with the wound open"
     },
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Monitors lactate and base excess on venous gas and coagulation results."
+     "x": "Calls early for senior help: ED consultant and the trauma or surgical team"
     }
-   ],
+   ]
+  },
+  {
+   "id": 13,
    "t": "checkbox",
-   "x": "States the trauma deadly triad and how to prevent it."
+   "x": "Circulation: assesses perfusion and prepares for bleeding:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "HR, BP, capillary refill and skin temperature (108, 114/72, 3 seconds, cool), and looks for other bleeding"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Two large-bore cannulae with bloods: FBC, coagulation studies, group and crossmatch, venous gas with lactate"
+    }
+   ]
   },
   {
    "id": 14,
-   "t": "heading",
-   "x": "History"
+   "t": "checkbox",
+   "x": "Disability: GCS, pupils, limb neurology and a bedside glucose (GCS 15, pupils equal and reactive, BGL 5.6)."
   },
   {
    "id": 15,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "A: penicillin allergy, and clarifies the reaction (childhood itchy rash only, no anaphylaxis)."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "M: salbutamol as needed and recent ibuprofen (bleeding risk, asthma)."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "P: mild asthma, previous nasal fracture, no operations."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "L: last meal about 3 hours ago and about 6 beers, relevant to any procedure or sedation."
-    },
-    {
-     "id": 5,
-     "t": "checkbox",
-     "x": "E: the assault, the mechanism, no loss of consciousness and the time of injury."
-    }
-   ],
    "t": "checkbox",
-   "x": "Takes a focused AMPLE history."
+   "x": "Exposure: fully exposes, log-rolls with spinal precautions, measures core temperature (35.2 °C), removes wet clothing and starts active warming (warm blankets, forced-air warmer, warmed fluids).",
+   "crit": true
   },
   {
    "id": 16,
+   "t": "checkbox",
+   "x": "Examines the nose with correct technique:",
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Childhood course completed, last dose in Year 10 (more than 5 years ago), booster status unknown."
+     "x": "Inspects and palpates the external nose, notes epistaxis or clear rhinorrhoea (CSF leak), and checks midface stability, eye movements and dental occlusion"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Uses a headlight and nasal speculum, with suction to clear clots and topical decongestant as needed"
     }
-   ],
-   "t": "checkbox",
-   "x": "Asks about tetanus immunisation status."
+   ]
   },
   {
    "id": 17,
-   "t": "heading",
-   "x": "Examination"
+   "t": "checkbox",
+   "x": "Identifies a bilateral nasal septal haematoma: smooth, red-purple, fluctuant septal swelling that does not shrink with decongestant and is soft to a cotton bud, unlike a firm deviated septum.",
+   "crit": true
   },
   {
    "id": 18,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Inspects and palpates the external nose and notes any epistaxis or clear rhinorrhoea (CSF leak)."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Uses a headlight and nasal speculum, with suction to clear clots and topical decongestant or anaesthetic as needed."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Checks the midface stability, eye movements and dental occlusion."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Examines the nose with correct technique."
+   "t": "heading",
+   "x": "Interpretation"
   },
   {
-   "crit": true,
    "id": 19,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Bilateral smooth, red-purple, fluctuant septal swelling that does not shrink with decongestant."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Palpates with a cotton bud to distinguish it from a firm deviated septum."
-    }
-   ],
    "t": "checkbox",
-   "x": "Identifies a nasal septal haematoma on speculum examination."
+   "x": "Interprets the reassessment: haemodynamically stable after occlusion, positioning and oxygen, with no further bleeding or air entrainment, but still hypothermic at 35.6 °C, so active warming continues."
   },
   {
    "id": 20,
-   "t": "heading",
-   "x": "Communication"
+   "t": "checkbox",
+   "x": "States the trauma deadly triad and links it to the results:",
+   "crit": true,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Hypothermia, coagulopathy and acidosis, each worsening the others and increasing mortality"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Here: hypothermia on arrival, a mild lactic acidosis (pH 7.33, lactate 2.4, base excess -3) and normal coagulation so far"
+    }
+   ]
   },
   {
    "id": 21,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "A collection of blood between the septal cartilage and its lining."
-    }
-   ],
    "t": "checkbox",
-   "x": "Explains the diagnosis in plain language."
+   "x": "States that a normal haemoglobin (131 g/L) early after injury does not exclude significant blood loss, and repeats it."
   },
   {
-   "crit": true,
    "id": 22,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Septal abscess."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Cartilage necrosis."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Saddle nose deformity."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "Septal perforation."
-    }
-   ],
    "t": "checkbox",
-   "x": "Explains the risks of leaving it untreated."
+   "x": "Interprets the CT: external jugular vein injury without arterial, airway or oesophageal injury; no cervical spine fracture; displaced nasal fractures with a bilateral septal haematoma, confirming the clinical diagnosis."
   },
   {
-   "crit": true,
    "id": 23,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Urgent drainage as soon as it is diagnosed, today, by the ENT team or a senior."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Packing or splinting to prevent re-accumulation."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Antibiotics."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Explains the treatment."
-  },
-  {
-   "id": 24,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Says it cannot wait for the swelling to settle and must be drained today."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Answers the question 'can this wait?' with empathy and a clear recommendation, and checks understanding."
-  },
-  {
-   "id": 25,
    "t": "heading",
    "x": "Management"
   },
   {
-   "id": 26,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "A drug active against Staphylococcus aureus and streptococci."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Avoids penicillins if the reaction was immediate or severe, and says that a cephalosporin may be reasonable for a remote, non-severe rash."
-    }
-   ],
+   "id": 24,
    "t": "checkbox",
-   "x": "Chooses an appropriate antibiotic for the septal haematoma, considering the penicillin allergy history and current eTG or local guidance."
+   "x": "Explains the diagnosis to Daniel in plain words: a collection of blood between the cartilage of the middle of the nose and its lining."
+  },
+  {
+   "id": 25,
+   "t": "checkbox",
+   "x": "Explains the risks of leaving it untreated: septal abscess, cartilage necrosis, saddle nose deformity and septal perforation.",
+   "crit": true
+  },
+  {
+   "id": 26,
+   "t": "checkbox",
+   "x": "Explains the treatment: drainage today by the ENT team or a senior, then packing or splinting to stop it re-collecting, and antibiotics.",
+   "crit": true
   },
   {
    "id": 27,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Regular paracetamol with titrated IV opioid for severe pain."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Avoids NSAIDs for now because of bleeding risk and asthma."
-    }
-   ],
    "t": "checkbox",
-   "x": "Prescribes appropriate analgesia."
+   "x": "Answers \"can this wait?\" with empathy: it cannot wait for the swelling to settle and must be drained today; checks understanding."
   },
   {
    "id": 28,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Dirty, glass-contaminated wound with last dose more than 5 years ago, so gives a dTpa booster."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Checks the Australian Immunisation Register, and tetanus immunoglobulin is not needed if at least 3 documented doses."
-    }
-   ],
    "t": "checkbox",
-   "x": "Gives tetanus prophylaxis for a tetanus-prone wound."
+   "x": "States what to do if venous air embolism develops (sudden breathlessness, chest tightness, hypoxia, hypotension, mill-wheel murmur): occlude the wound, lie him flat or head-down, left lateral tilt only as a log-roll with spinal precautions, 100% oxygen and senior help.",
+   "crit": true
   },
   {
    "id": 29,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "CT angiography of the neck if stable and the wound breaches the platysma."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "CT facial bones, with CT head and cervical spine as indicated by clinical decision rules or inability to clear the spine."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Full head-to-toe secondary survey and admission for observation with ENT and surgical review."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "Documents the assault factually and offers support."
-    }
-   ],
    "t": "checkbox",
-   "x": "Plans imaging, secondary survey and disposition."
+   "x": "Continues to prevent the deadly triad: active warming, limits crystalloid, and activates the massive transfusion protocol with early balanced blood products and considers tranexamic acid within 3 hours of injury if bleeding recurs or shock develops."
+  },
+  {
+   "id": 30,
+   "t": "checkbox",
+   "x": "Chooses an antibiotic for the septal haematoma active against Staphylococcus aureus and streptococci per eTG, considering the allergy: a cephalosporin may be reasonable for a remote, non-severe rash; avoids penicillins if the reaction was immediate or severe."
+  },
+  {
+   "id": 31,
+   "t": "checkbox",
+   "x": "Analgesia: regular paracetamol with titrated IV opioid; avoids NSAIDs for now because of bleeding risk and asthma."
+  },
+  {
+   "id": 32,
+   "t": "checkbox",
+   "x": "Tetanus: a dirty, glass-contaminated wound with the last dose more than 5 years ago needs a tetanus-containing booster (dTpa); checks the Australian Immunisation Register; tetanus immunoglobulin is not needed if at least 3 doses are documented."
+  },
+  {
+   "id": 33,
+   "t": "checkbox",
+   "x": "Disposition: ENT for drainage today, the trauma or surgical team for wound exploration and repair, admission for observation, and factual documentation of the assault."
+  },
+  {
+   "id": 34,
+   "t": "heading",
+   "x": "Safety netting"
+  },
+  {
+   "id": 35,
+   "t": "checkbox",
+   "x": "Tells Daniel and the nurses what to report at once: sudden breathlessness or chest pain, bleeding or swelling at the neck, a blocked nose returning after drainage, fever, or worsening nose pain. After discharge he calls 000 for breathlessness or neck bleeding and returns to ED for these symptoms."
+  },
+  {
+   "id": 36,
+   "t": "checkbox",
+   "x": "Arranges follow-up: ENT review for pack removal and to check for re-collection, nasal fracture review at about 1 week for possible reduction, wound review and suture removal, tetanus recorded, a brief alcohol intervention and support after the assault (social work, and police if he wishes), and a GP letter."
   }
  ],
  "complexity": "High",
  "context": [],
- "desc": "This station involves a trauma primary survey with immediate management of a superficial neck wound over the external jugular vein, followed by a focused history, a nasal examination and counselling for a nasal septal haematoma.",
+ "desc": "This station involves a trauma primary survey with immediate management of a neck wound over the external jugular vein, a focused AMPLE history and a nasal examination, then interpreting the reassessment, blood gas, bloods and CT report, and managing and explaining a nasal septal haematoma with safety netting.",
  "diagnosis": [
   "External jugular vein laceration",
   "Venous air embolism",
   "Nasal septal haematoma"
  ],
- "explain": "<h3>Summary</h3><p>This man has two life- or tissue-threatening problems hidden behind an apparently minor assault. The first is a superficial right neck wound over the external jugular vein, with an air entrainment risk. The second is a bilateral nasal septal haematoma that needs same-day drainage.</p><h3>Primary survey (ABCDE)</h3><p>Airway with cervical spine control comes first, then Breathing, Circulation (with haemorrhage control), Disability and Exposure. Call for help early and reassess after every intervention. Alcohol and a distracting injury mean the cervical spine cannot be cleared clinically, so in-line stabilisation continues.</p><h3>External jugular vein laceration</h3><p>The external jugular vein is covered by the investing layer of deep cervical fascia, which holds a cut vein open. When the patient is upright, venous pressure at the neck is low or negative and inspiration can draw air into the circulation, causing venous air embolism. Features are sudden dyspnoea, chest tightness, hypoxia, hypotension and a mill-wheel murmur.</p><ul><li><p>Immediately occlude the wound with direct finger or gauze pressure, then apply an occlusive dressing.</p></li><li><p>Lay the patient flat or head-down (Trendelenburg) with in-line stabilisation so that venous pressure at the neck is raised. Use head-down tilt with caution if there is a head injury.</p></li><li><p>If air embolism is suspected, a left lateral tilt may be used, but in a trauma patient it must be done as a log-roll with spinal precautions.</p></li><li><p>Get urgent senior help, give high-flow oxygen and consider CT angiography of the neck once stable.</p></li></ul><h3>Trauma deadly triad</h3><p>Hypothermia, coagulopathy and acidosis each worsen the others and increase mortality. Prevent them by controlling haemorrhage, warming the patient actively (remove wet clothes, warm blankets, forced-air warmer, warmed fluids), limiting crystalloid and giving early balanced blood products through the massive transfusion protocol. Consider tranexamic acid within 3 hours if bleeding is significant. Follow lactate, base excess and coagulation results.</p><h3>AMPLE</h3><p>Allergies, Medications, Past medical history (and pregnancy where applicable), Last meal, and Events and environment. Here the allergy history is only useful if the reaction is clarified, because a remote non-severe rash is handled differently from anaphylaxis. Recent ibuprofen adds to bleeding risk, and alcohol and the last meal matter for any procedure.</p><h3>Nasal septal haematoma</h3><p>Blood collects between the septal cartilage and its perichondrium and cuts off the cartilage's blood supply. The presentation is nasal obstruction (often bilateral) after trauma with a smooth, red-purple, fluctuant septal swelling that does not shrink with decongestant. Untreated, it risks septal abscess, cartilage necrosis, saddle nose deformity and septal perforation. Treatment is urgent drainage as soon as it is diagnosed, usually with packing or splinting to prevent re-accumulation, plus antibiotics. Do not wait for swelling to settle.</p><h3>Other management</h3><ul><li><p>Antibiotics follow eTG and local guidance, with the penicillin reaction type clarified.</p></li><li><p>Analgesia is paracetamol with titrated opioid, avoiding NSAIDs for now.</p></li><li><p>For a tetanus-prone wound with the last dose more than 5 years ago, give dTpa. Tetanus immunoglobulin is not needed with at least 3 documented doses.</p></li><li><p>Complete a secondary survey, imaging as indicated, ENT and surgical review, and factual documentation of the assault.</p></li></ul>",
+ "explain": "<h3>Summary</h3><p>This man has two life- or tissue-threatening problems hidden behind an apparently minor assault. The first is a right neck wound over the external jugular vein, with an air entrainment risk. The second is a bilateral nasal septal haematoma that needs same-day drainage.</p><h3>Primary survey (ABCDE)</h3><p>Airway with cervical spine control comes first, then Breathing, Circulation (with haemorrhage control), Disability and Exposure. Call for help early and reassess after every intervention. Alcohol and a distracting injury mean the cervical spine cannot be cleared clinically, so in-line stabilisation continues until imaging and senior review allow it to come off under the local trauma protocol.</p><h3>External jugular vein laceration</h3><p>The external jugular vein is covered by the investing layer of deep cervical fascia, which holds a cut vein open. When the patient is upright, venous pressure at the neck is low or negative and inspiration can draw air into the circulation, causing venous air embolism. Features are sudden dyspnoea, chest tightness, hypoxia, hypotension and a mill-wheel murmur.</p><ul><li><p>Immediately occlude the wound with direct finger or gauze pressure, then apply an occlusive dressing.</p></li><li><p>Lay the patient flat or head-down (Trendelenburg) with in-line stabilisation so that venous pressure at the neck is raised. Use head-down tilt with caution if there is a head injury.</p></li><li><p>If air embolism is suspected, a left lateral tilt may be used, but in a trauma patient it must be done as a log-roll with spinal precautions.</p></li><li><p>Get urgent senior help and give high-flow oxygen. A wound that breaches the platysma needs CT angiography of the neck once stable, and surgical exploration and repair.</p></li></ul><h3>Interpreting the results</h3><p>After occlusion, positioning, oxygen and warming he is stable, which is the expected response. He is still hypothermic. The venous gas shows a mild lactic acidosis, and the coagulation results are normal so far. A normal haemoglobin soon after injury does not exclude significant blood loss, because haemoglobin falls only as fluid shifts or is given, so it is repeated. The CT angiogram confirms an external jugular vein injury without arterial, airway or oesophageal injury, the cervical spine shows no fracture, and the facial CT shows displaced nasal fractures with septal thickening that matches the clinical septal haematoma.</p><h3>Trauma deadly triad</h3><p>Hypothermia, coagulopathy and acidosis each worsen the others and increase mortality. Prevent them by controlling haemorrhage, warming the patient actively (remove wet clothes, warm blankets, forced-air warmer, warmed fluids), limiting crystalloid and giving early balanced blood products through the massive transfusion protocol if bleeding is significant. Consider tranexamic acid within 3 hours if bleeding is significant. Follow lactate, base excess and coagulation results.</p><h3>AMPLE</h3><p>Allergies, Medications, Past medical history (and pregnancy where applicable), Last meal, and Events and environment. Here the allergy history is only useful if the reaction is clarified, because a remote non-severe rash is handled differently from anaphylaxis. Recent ibuprofen adds to bleeding risk, and alcohol and the last meal matter for any procedure.</p><h3>Nasal septal haematoma</h3><p>Blood collects between the septal cartilage and its perichondrium and cuts off the cartilage's blood supply. The presentation is nasal obstruction (often bilateral) after trauma with a smooth, red-purple, fluctuant septal swelling that does not shrink with decongestant. Untreated, it risks septal abscess, cartilage necrosis, saddle nose deformity and septal perforation. Treatment is urgent drainage as soon as it is diagnosed, usually with packing or splinting to prevent re-accumulation, plus antibiotics. Do not wait for swelling to settle.</p><h3>Other management</h3><ul><li><p>Antibiotics follow eTG and local guidance, with the penicillin reaction type clarified.</p></li><li><p>Analgesia is paracetamol with titrated opioid, avoiding NSAIDs for now.</p></li><li><p>For a tetanus-prone wound with the last dose more than 5 years ago, give a tetanus-containing booster (dTpa). Tetanus immunoglobulin is not needed with at least 3 documented doses.</p></li><li><p>Complete a secondary survey, arrange ENT and surgical review, admit for observation, and document the assault factually.</p></li></ul><h3>Safety netting and follow-up</h3><p>He and the nursing staff need to know the warning signs: sudden breathlessness or chest pain (air embolism), bleeding or swelling at the neck, a blocked nose returning, fever or worsening nose pain (re-collection or abscess). Follow-up covers ENT review for pack removal and re-collection, nasal fracture review at about a week for possible reduction, wound review and suture removal, the tetanus dose recorded on the Australian Immunisation Register, a brief alcohol intervention, and support after the assault.</p>",
  "focus": "Trauma primary survey in the ED: neck and nasal injuries",
- "guide": "<p>A <strong>high-performing candidate</strong> works in strict ABCDE order, recognises the neck wound as a possible external jugular vein injury and occludes it at once with pressure and an occlusive dressing. They position the patient flat or head-down with in-line stabilisation, and call for senior help early. They state hypothermia, coagulopathy and acidosis and take active steps to prevent them. They take a rapid AMPLE history, clarify the penicillin reaction, and examine the nose with a light, speculum and suction to identify a septal haematoma. They explain the risks (abscess, cartilage necrosis, saddle nose, perforation) and the need for same-day drainage, packing or splinting and antibiotics, and cover tetanus, imaging and secondary survey.</p><p>A <strong>borderline candidate</strong> leaves the patient sitting upright with the neck wound open, or does not explain why it is dangerous. They omit cervical spine control or warming, cannot name the deadly triad, or give a vague AMPLE history. They do not use a speculum, miss the septal haematoma or offer reassurance and discharge, and omit the tetanus, antibiotic and imaging plans.</p>",
+ "guide": "<p>In Part 1, the examiner gives findings from the Exam findings as the candidate works through the primary survey and examines the nose. The primary survey comes first; mark the History items whenever the AMPLE history is taken. If the candidate leaves him upright with the wound open, say that the sucking noise is still heard with each breath in. In Part 2, hand over the reassessment, blood gas and bloods, and the CT report, then ask the questions in order, reading out Daniel's question for the third.</p><p>A <strong>high-performing candidate</strong> works in strict ABCDE order, recognises the neck wound as a possible external jugular vein injury and occludes it at once with pressure and an occlusive dressing. They lie him flat or head-down with in-line stabilisation, call for senior help early, and start active warming. They take a rapid AMPLE history, clarify the penicillin reaction, and examine the nose with a light, speculum and suction to identify a septal haematoma. In Part 2 they link the hypothermia and mild lactic acidosis to the deadly triad, note that an early normal haemoglobin is reassuring only up to a point, read the CT correctly, explain the risks of the septal haematoma and the need for drainage today, and cover air embolism, antibiotics, analgesia, tetanus, disposition and follow-up.</p><p>A <strong>borderline candidate</strong> leaves the patient sitting upright with the neck wound open, or does not explain why it is dangerous. They omit cervical spine control or warming, cannot name the deadly triad, or take a vague AMPLE history. They do not use a speculum, miss the septal haematoma or offer reassurance and discharge, and omit the tetanus, antibiotic and follow-up plans.</p>",
  "id": "ai-387d7db7",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name:</strong> Daniel Hartnett</p></li><li><p><strong>Age:</strong> 32-years-old</p></li><li><p><strong>Gender:</strong> Male</p></li><li><p><strong>Aboriginal or Torres Strait Islander:</strong> No</p></li><li><p><strong>Setting:</strong> Emergency Department resuscitation bay. You are anxious, a bit drunk and holding a wad of gauze to your nose.</p></li></ul><p><strong>Background (give only when asked, in short answers):</strong></p><ul><li><p><strong>Events:</strong> About 45 minutes ago you were punched in the nose, then a bottle was smashed and swiped across the right side of your neck. You did not lose consciousness, you did not hit your head on the ground, and you remember everything. Your nose is blocked on both sides and throbs. The neck cut does not hurt much, but it was bleeding a lot.</p></li><li><p><strong>Allergies:</strong> Penicillin. You had an itchy rash as a child and your mother told you not to take it. There was no swelling and no trouble breathing. Say this only if asked what the reaction was.</p></li><li><p><strong>Medications:</strong> A salbutamol puffer when needed. You take ibuprofen occasionally for gym aches and took two tablets this morning. No blood thinners.</p></li><li><p><strong>Past history:</strong> Mild asthma. You broke your nose playing football 10 years ago and had no surgery. No other operations. You had your childhood vaccinations, and your last tetanus needle was in Year 10 at school. You do not know whether you have had a booster since.</p></li><li><p><strong>Last meal:</strong> A burger about 3 hours ago. You have had about 6 beers over the evening.</p></li><li><p><strong>Social:</strong> You work as an electrician and are not on any other drugs.</p></li></ul><p><strong>Examiner findings (give as requested):</strong></p><ul><li><p><strong>Airway:</strong> Speaking in full sentences with a normal voice. A small amount of blood-stained saliva in the mouth. No stridor, no neck swelling, no surgical emphysema, trachea midline. Mild midline neck tenderness cannot be cleared clinically because of alcohol and distracting injury, so in-line stabilisation or a collar is needed.</p></li><li><p><strong>Breathing:</strong> RR 20/min, SpO2 96% on room air, symmetrical air entry, resonant percussion, chest clear.</p></li><li><p><strong>Circulation:</strong> HR 108/min, BP 114/72 mmHg, capillary refill 3 seconds, cool peripheries. A 3 cm laceration over the right sternocleidomastoid, oozing dark non-pulsatile blood. No expanding haematoma or bruit. A faint sucking noise is heard at the wound on inspiration when he is upright and the wound is open.</p></li><li><p><strong>Disability:</strong> GCS 15 (E4 V5 M6), pupils equal and reactive at 3 mm, no focal deficit, BGL 5.6 mmol/L.</p></li><li><p><strong>Exposure:</strong> Tympanic temperature 35.2°C. The shirt is soaked in blood and spilled drink. On log-roll with spinal precautions there are no other injuries and no spinous tenderness except the mild cervical tenderness above. If the candidate does not warm him, the temperature falls to 34.6°C.</p></li></ul><p><strong>Cue (examiner and patient):</strong> If the candidate leaves him sitting upright with the wound exposed or open for more than about 30 seconds, say: 'You hear a loud sucking and gurgling at the neck wound. The patient says he feels dizzy and has sudden chest tightness. SpO2 drops to 90% and BP to 92/58 mmHg.' If asked to auscultate the heart, report a churning (mill-wheel) murmur. If the candidate occludes the wound with pressure and an occlusive dressing and lays him flat or head-down with in-line stabilisation, the observations stay stable. If air embolism is suspected and the candidate suggests a left lateral tilt, accept it only if it is done as a log-roll with spinal precautions.</p><p><strong>Nasal examination findings (when the candidate examines the nose):</strong></p><ul><li><p>The external nose is swollen and bruised, with slight deviation to the left. There is no active epistaxis and no clear rhinorrhoea (no halo sign on the gauze).</p></li><li><p>With a headlight, nasal speculum and suction to clear clots, both nasal cavities are obstructed by a smooth, red-purple, boggy swelling of the septum on each side.</p></li><li><p>It does not shrink with topical decongestant. A cotton bud palpation shows it is soft and fluctuant, not firm like a deviated septum.</p></li><li><p>The midface is stable, eye movements are full with no diplopia, and the teeth occlude normally.</p></li></ul><p><strong>Question to ask the candidate (once only, after the explanation):</strong> 'I just want to go home and sleep. Can this wait until the swelling goes down?' Accept a clear, empathic explanation that it needs treatment today. If the candidate uses jargon, say 'What does that mean?'</p>",
+ "patient": "<p><strong>Role:</strong> You are Daniel Hartnett, a 32-year-old electrician. You are anxious and a bit drunk, sitting upright on the trolley holding a wad of gauze to your nose. Answer in short sentences. The examiner gives examination findings from the Exam findings as the candidate works through the primary survey and examines your nose.</p><p><strong>Opening line:</strong> \"Mate, my nose is killing me and I can't breathe through it. Is my neck bad?\"</p><p><strong>During the primary survey:</strong> do what the candidate asks: speak when asked, keep your head still if they hold it or put on a collar, lie flat if asked. If the candidate leaves you sitting up with the neck wound open, the examiner tells them that a sucking noise is still heard at the wound with each breath in.</p><p><strong>History (give only when asked):</strong></p><ul><li><strong>Events:</strong> about 45 minutes before arrival you were punched in the nose outside a hotel, then a bottle was smashed and swiped across the right side of your neck. You did not lose consciousness, did not hit your head on the ground and remember everything. Your nose is blocked on both sides and throbs. The neck cut does not hurt much, but it was bleeding a lot.</li><li><strong>Allergies:</strong> penicillin. You had an itchy rash as a child and your mother told you not to take it. There was no swelling and no trouble breathing. Say this only if asked what the reaction was.</li><li><strong>Medications:</strong> a salbutamol puffer when needed. You take ibuprofen occasionally for gym aches and took two tablets this morning. No blood thinners.</li><li><strong>Past history:</strong> mild asthma. You broke your nose playing football 10 years ago and had no surgery. No other operations.</li><li><strong>Tetanus:</strong> you had your childhood vaccinations and your last tetanus needle was in Year 10 at school. You do not know whether you have had a booster since.</li><li><strong>Last meal:</strong> a burger about 3 hours ago. About 6 beers over the evening. No other drugs.</li><li><strong>Other symptoms:</strong> no headache, no vomiting, no blurred or double vision, no clear fluid running from the nose, no neck weakness, numbness or tingling. No pain anywhere else.</li><li><strong>Social:</strong> you live with your partner and work as an electrician.</li></ul><p><strong>Ideas, concerns, expectations:</strong> you think your nose is broken again and the neck just needs a few stitches. You are worried about missing work. You want to get patched up and go home to sleep.</p><p><strong>Question to ask once</strong> (in Part 2, after the candidate explains what is wrong with your nose): \"I just want to go home and sleep. Can this wait until the swelling goes down?\" If the candidate uses jargon, say \"What does that mean?\"</p>",
  "points": [
   "ABCDE: Airway (with cervical spine control), Breathing, Circulation, Disability, Exposure. Work in order, treat as you go and call for help early.",
   "AMPLE: Allergies, Medications, Past history (and pregnancy), Last meal, Events and environment. Clarify the allergy reaction type because it changes the antibiotic.",
@@ -540,16 +344,44 @@
   "Emergency Medicine",
   "Otorhinolaryngology"
  ],
- "stem": "<p>You are the emergency registrar. Mr Daniel Hartnett, a 32-year-old man, arrived by ambulance 15 minutes ago after being punched in the face and cut on the right side of the neck with a broken glass bottle during a fight outside a hotel. Paramedics report that their dressing came off during transfer. He is now sitting upright on the trolley with the neck wound exposed and a blood-stained shirt. A nurse is with you and can carry out any instructions you give. Monitoring is being attached.</p><p>The examiner will provide findings when you ask for or perform an assessment.</p>",
+ "stem": "<p>You are the emergency registrar. Mr Daniel Hartnett, a 32-year-old man, has arrived by ambulance after being punched in the face and cut on the right side of the neck with a broken glass bottle during a fight outside a hotel. Paramedics report that their dressing came off during transfer. He is now sitting upright on the trolley with the neck wound exposed and a blood-stained shirt. A nurse is with you and can carry out any instructions you give. Monitoring is being attached.</p>",
  "tasks": [
-  "<p><strong>Perform</strong> (or describe) a primary survey (ABCDE), starting immediate management as you go, and <strong>state</strong> how you would prevent the trauma deadly triad (3 minutes).</p>",
-  "<p><strong>Take</strong> a brief, focused AMPLE history from the patient, then <strong>examine the nose</strong>. The examiner will facilitate the nasal examination and give the findings. The nasal examination falls inside this 2-minute block (2 minutes).</p>",
-  "<p><strong>Explain</strong> the nasal diagnosis, its risks and its treatment to the patient. Then <strong>outline</strong> to the examiner your further management plan, including antibiotics, analgesia, tetanus prophylaxis, imaging and secondary survey (3 minutes).</p>"
+  "<p>Perform a <strong>primary survey</strong> (ABCDE), telling the examiner what you are examining and starting immediate management as you go. Then take a focused <strong>AMPLE history</strong> and <strong>examine the nose</strong> (10 minutes).</p>",
+  "<p>The examiner will give you his reassessment, blood gas and blood results, and the CT report. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, explaining the nasal diagnosis and its treatment to the patient, and your <strong>safety netting</strong> (5 minutes).</p>"
  ],
  "title": "Assault with neck laceration and nasal injury",
  "type": [
   "Emergency",
+  "History",
   "Examination",
   "Management"
- ]
+ ],
+ "part2": {
+  "lead": "Here is his reassessment after your initial management, his blood gas and blood results, and the CT report.",
+  "handover": [
+   {
+    "label": "Reassessment 20 minutes later",
+    "result": "<p>Lying flat with in-line stabilisation, occlusive dressing on the neck wound, high-flow oxygen and forced-air warming. The dressing is dry with no further bleeding or sucking noise. HR 96, BP 122/76, RR 18, SpO2 99% on oxygen, CRT 2 seconds, temperature 35.6 °C, GCS 15. Heart sounds normal with no murmur.</p>"
+   },
+   {
+    "label": "Venous blood gas and bloods (on arrival)",
+    "result": "<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>pH</td><td>7.33</td><td>7.32 to 7.42</td></tr><tr><td>Base excess</td><td>-3 mmol/L</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>2.4 mmol/L</td><td>below 2</td></tr><tr><td>Haemoglobin</td><td>131 g/L</td><td>130 to 180</td></tr><tr><td>Platelets</td><td>245 x 10<sup>9</sup>/L</td><td>150 to 400</td></tr><tr><td>INR</td><td>1.1</td><td>0.9 to 1.2</td></tr><tr><td>APTT</td><td>31 seconds</td><td>25 to 38</td></tr><tr><td>Fibrinogen</td><td>2.8 g/L</td><td>2 to 4</td></tr><tr><td>Group and crossmatch</td><td>O positive, antibody screen negative, 2 units crossmatched</td><td></td></tr></table>"
+   },
+   {
+    "label": "CT report",
+    "result": "<p><strong>CT angiogram of the neck:</strong> laceration of the right external jugular vein beneath the wound with a small surrounding haematoma. No injury to the carotid or vertebral arteries, internal jugular vein, larynx, trachea or oesophagus. <strong>CT cervical spine:</strong> no fracture or malalignment. <strong>CT facial bones:</strong> displaced nasal bone fractures with deviation to the left, and bilateral soft tissue thickening of the nasal septum in keeping with a septal haematoma. No other facial fracture.</p>"
+   }
+  ],
+  "ask": [
+   "What do his reassessment, blood gas and bloods show? How do they relate to the trauma deadly triad?",
+   "What does the CT show, what is your diagnosis for the nose, and what must you still watch for with the neck wound?",
+   "Explain the nasal problem and its treatment to Daniel. He says: \"I just want to go home and sleep. Can this wait until the swelling goes down?\"",
+   "What is the rest of your management: antibiotics, analgesia, tetanus, disposition and who you involve?",
+   "What safety netting and follow-up does he need?"
+  ]
+ },
+ "revised": {
+  "at": "2026-10-23",
+  "by": "format 5/10/5"
+ }
 }

@@ -18,60 +18,22 @@
   {
    "id": 2,
    "t": "checkbox",
-   "x": "Introduces self, confirms the patient's identity and communicates calmly and clearly while managing an urgent situation"
+   "x": "Introduces self, confirms the patient's identity and communicates calmly and clearly while managing an urgent situation."
   },
   {
    "id": 3,
    "t": "checkbox",
-   "x": "Uses plain language with the patient and addresses her pain and distress promptly"
+   "x": "Uses plain language with the patient and addresses her pain and distress promptly."
   },
   {
    "id": 4,
    "t": "heading",
-   "x": "Assessment and resuscitation (Task 1)"
+   "x": "History"
   },
   {
-   "crit": true,
    "id": 5,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Airway and breathing: assesses airway, RR and SpO2 and applies titrated oxygen as indicated"
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Circulation: checks HR, BP and capillary refill and recognises shock (tachycardia, hypotension compared with baseline)"
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Inserts two large-bore IV cannulas and gives a crystalloid fluid bolus with reassessment"
-    },
-    {
-     "crit": true,
-     "id": 4,
-     "t": "checkbox",
-     "x": "Takes bloods: FBC, group and crossmatch, coagulation, electrolytes, lactate or venous gas"
-    },
-    {
-     "id": 5,
-     "t": "checkbox",
-     "x": "Disability and exposure: GCS, blood glucose (diabetic patient), temperature and checks for visible blood loss"
-    }
-   ],
    "t": "checkbox",
-   "x": "Performs a systematic ABCDE assessment with simultaneous resuscitation"
-  },
-  {
-   "crit": true,
-   "id": 6,
-   "t": "checkbox",
-   "x": "Recognises that the patient meets clinical deterioration criteria and activates a MET or rapid response call per the local track-and-trigger system, rather than waiting"
-  },
-  {
-   "id": 7,
+   "x": "Takes a focused history without delaying resuscitation:",
    "kids": [
     {
      "id": 1,
@@ -86,196 +48,156 @@
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Asks about allergies, anticoagulants, regular medications and time of last meal"
+     "x": "Asks about allergies, anticoagulants, regular medicines and the time of her last meal"
     }
-   ],
+   ]
+  },
+  {
+   "id": 6,
    "t": "checkbox",
-   "x": "Takes a focussed history without delaying resuscitation"
+   "x": "Asks about the background to the procedure:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "The bleeding pattern: irregular cycles for 2 years and heavy bleeding for 8 months"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Risk factors: obesity, type 2 diabetes, nulliparity, no hormone use, and cervical screening status"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Family history of bowel, endometrial or ovarian cancer (mother with bowel cancer at 54)"
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "t": "checkbox",
+   "x": "Explores her understanding and concerns, including her fear of cancer."
   },
   {
    "id": 8,
-   "t": "checkbox",
-   "x": "Examines the abdomen and identifies peritonism (guarding, rebound, reduced bowel sounds)"
+   "t": "heading",
+   "x": "Examination"
   },
   {
    "id": 9,
+   "t": "checkbox",
+   "x": "Performs a systematic ABCDE assessment with simultaneous resuscitation:",
+   "crit": true,
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Tells her the pain and observations suggest a complication of the procedure, and does not falsely reassure her"
+     "x": "Airway and breathing: airway, RR and SpO2, with titrated oxygen"
     },
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Explains that a senior doctor is being called, that she is nil by mouth and that further tests or surgery may be needed"
+     "x": "Circulation: HR, BP against her baseline and capillary refill, and recognises shock"
     },
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Addresses her cancer concern: tissue results are not back, and the priority now is her pain and safety"
-    }
-   ],
-   "t": "checkbox",
-   "x": "Explains the concern and plan to the patient honestly and empathetically"
-  },
-  {
-   "id": 10,
-   "t": "heading",
-   "x": "Diagnosis and management (Task 2)"
-  },
-  {
-   "crit": true,
-   "id": 11,
-   "kids": [
-    {
-     "crit": true,
-     "id": 1,
-     "t": "checkbox",
-     "x": "States that fat in the curettings suggests the curette has passed through the uterine wall into omentum, mesentery or bowel fat"
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Links the diagnosis to her hypotension, tachycardia, peritonism and shoulder-tip pain, and considers intra-abdominal bleeding"
-    }
-   ],
-   "t": "checkbox",
-   "x": "Identifies suspected uterine perforation as the working diagnosis"
-  },
-  {
-   "crit": true,
-   "id": 12,
-   "t": "checkbox",
-   "x": "Urgently calls the senior gynaecologist (consultant on call) and informs the anaesthetist and theatre team"
-  },
-  {
-   "crit": true,
-   "id": 13,
-   "t": "checkbox",
-   "x": "Considers injury to bowel, bladder and pelvic vessels, and states the need to assess for visceral injury"
-  },
-  {
-   "id": 14,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Keeps her nil by mouth and gives IV analgesia and antiemetic"
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Starts IV broad-spectrum antibiotics per local guidelines (eTG)"
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Arranges group and crossmatch (not group and hold alone) and repeats Hb, with continuous or frequent observations"
-    }
-   ],
-   "t": "checkbox",
-   "x": "Initiates supportive management while awaiting senior review"
-  },
-  {
-   "id": 15,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "If unstable or peritonitic: urgent laparoscopy or laparotomy to inspect for and repair injury"
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "If stable: urgent contrast CT abdomen and pelvis as directed by the senior"
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "States she must not be discharged and that she needs admission and close observation"
-    }
-   ],
-   "t": "checkbox",
-   "x": "Describes the definitive approach, depending on stability"
-  },
-  {
-   "id": 16,
-   "t": "checkbox",
-   "x": "Documents clearly, plans open disclosure with the patient and her support person, and files an incident report"
-  },
-  {
-   "id": 17,
-   "t": "heading",
-   "x": "Knowledge: abnormal uterine bleeding and cancer risk (Task 3)"
-  },
-  {
-   "crit": true,
-   "id": 18,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "P: Polyp"
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "A: Adenomyosis"
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "L: Leiomyoma"
+     "x": "Two large-bore IV cannulas, bloods (FBC, group and crossmatch, coagulation, electrolytes, venous gas) and a crystalloid bolus with reassessment"
     },
     {
      "id": 4,
      "t": "checkbox",
-     "x": "M: Malignancy and hyperplasia"
-    },
-    {
-     "id": 5,
-     "t": "checkbox",
-     "x": "C: Coagulopathy"
-    },
-    {
-     "id": 6,
-     "t": "checkbox",
-     "x": "O: Ovulatory dysfunction"
-    },
-    {
-     "id": 7,
-     "t": "checkbox",
-     "x": "E: Endometrial disorder"
-    },
-    {
-     "id": 8,
-     "t": "checkbox",
-     "x": "I: Iatrogenic"
-    },
-    {
-     "id": 9,
-     "t": "checkbox",
-     "x": "N: Not otherwise classified"
+     "x": "Disability and exposure: GCS, blood glucose (she has diabetes), temperature, and the pad for visible blood loss"
     }
-   ],
+   ]
+  },
+  {
+   "id": 10,
    "t": "checkbox",
-   "x": "States what PALM-COEIN stands for (FIGO 2018 classification of causes of abnormal uterine bleeding)"
+   "x": "Recognises that she meets clinical deterioration criteria and activates a MET or rapid response call per the local track-and-trigger system, rather than waiting.",
+   "crit": true
+  },
+  {
+   "id": 11,
+   "t": "checkbox",
+   "x": "Examines the abdomen and identifies peritonism: guarding, rebound tenderness and reduced bowel sounds."
+  },
+  {
+   "id": 12,
+   "t": "checkbox",
+   "x": "Checks the vaginal loss on the pad, leaves speculum and bimanual examination to the senior, and inserts a urinary catheter to monitor output."
+  },
+  {
+   "id": 13,
+   "t": "heading",
+   "x": "Interpretation"
+  },
+  {
+   "id": 14,
+   "t": "checkbox",
+   "x": "Interprets the reassessment: persisting shock despite 1 L of crystalloid (HR 114, BP 96/60, no urine), which means ongoing bleeding."
+  },
+  {
+   "id": 15,
+   "t": "checkbox",
+   "x": "Interprets the blood gas: lactate 3.8 with base excess -5 shows hypoperfusion, and the haemoglobin fall from 126 to 98 g/L shows significant blood loss, which early haemoglobin underestimates."
+  },
+  {
+   "id": 16,
+   "t": "checkbox",
+   "x": "Interprets the ECG: sinus tachycardia without ischaemia, in keeping with hypovolaemia rather than a cardiac cause."
+  },
+  {
+   "id": 17,
+   "t": "checkbox",
+   "x": "States that fat in the curettings means the curette has passed through the uterine wall into omentum, mesentery or bowel fat.",
+   "crit": true
+  },
+  {
+   "id": 18,
+   "t": "checkbox",
+   "x": "Gives uterine perforation with intra-abdominal bleeding as the working diagnosis, linked to her shock, peritonism and shoulder-tip pain.",
+   "crit": true
   },
   {
    "id": 19,
    "t": "checkbox",
-   "x": "Notes that PALM are structural causes and COEIN are non-structural causes"
+   "x": "Considers injury to bowel, bladder and pelvic vessels, and states the need to look for visceral injury.",
+   "crit": true
   },
   {
-   "crit": true,
    "id": 20,
    "t": "checkbox",
-   "x": "Identifies ovulatory dysfunction (O) as the most likely category, related to obesity, probable PCOS or insulin resistance and perimenopausal anovulation, while stating that M (hyperplasia or malignancy) must be excluded because of the thickened endometrium and risk factors"
+   "x": "Interprets the ultrasound: an endometrial thickness of 14 mm at 51 with her risk factors means hyperplasia or cancer must be excluded on histology."
   },
   {
-   "crit": true,
    "id": 21,
+   "t": "checkbox",
+   "x": "States what PALM-COEIN stands for (FIGO classification of causes of abnormal uterine bleeding):",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Structural (PALM): Polyp, Adenomyosis, Leiomyoma, Malignancy and hyperplasia"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Non-structural (COEIN): Coagulopathy, Ovulatory dysfunction, Endometrial disorder, Iatrogenic, Not otherwise classified"
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "t": "checkbox",
+   "x": "Identifies ovulatory dysfunction as the most likely category (obesity, insulin resistance and perimenopausal anovulation), while stating that malignancy and hyperplasia must be excluded because of the thickened endometrium and her risk factors.",
+   "crit": true
+  },
+  {
+   "id": 23,
+   "t": "checkbox",
+   "x": "Explains why obesity raises the risk of uterine cancer:",
    "kids": [
     {
      "id": 1,
@@ -283,46 +205,114 @@
      "x": "Adipose tissue aromatises androgens to oestrone, raising circulating oestrogen"
     },
     {
-     "crit": true,
      "id": 2,
      "t": "checkbox",
-     "x": "Oestrogen is unopposed by progesterone: absent after menopause, and low in obesity-related anovulation before menopause"
+     "x": "The oestrogen is unopposed by progesterone: absent after menopause, and low in obesity-related anovulation before menopause"
     },
     {
      "id": 3,
      "t": "checkbox",
      "x": "Hyperinsulinaemia and raised IGF-1 also promote endometrial proliferation"
     }
-   ],
-   "t": "checkbox",
-   "x": "Explains why obesity raises the risk of uterine cancer"
+   ]
   },
   {
-   "id": 22,
-   "t": "checkbox",
-   "x": "Asks about or comments on a fuller family history of endometrial, bowel or ovarian cancer; notes that a single first-degree relative with bowel cancer at 54 does not alone meet Lynch syndrome criteria, but a fuller family history is warranted"
+   "id": 24,
+   "t": "heading",
+   "x": "Management"
   },
   {
-   "id": 23,
+   "id": 25,
    "t": "checkbox",
-   "x": "Acknowledges that the curettings still need histology and that the result will guide her future gynaecological care"
+   "x": "Urgently calls the senior gynaecologist (consultant on call) and informs the anaesthetist and theatre team.",
+   "crit": true
+  },
+  {
+   "id": 26,
+   "t": "checkbox",
+   "x": "Starts supportive management while the senior comes:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Nil by mouth, IV analgesia and antiemetic, and IV broad-spectrum antibiotics per eTG"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Crossmatched blood ready (not group and hold alone), transfusion if bleeding continues with the massive transfusion protocol if needed, repeat haemoglobin, and continuous observations"
+    }
+   ]
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "States that with persisting shock and peritonism she needs urgent laparoscopy or laparotomy to find and repair the injury (urgent CT only if she becomes stable, as the senior directs), and must not be discharged.",
+   "crit": true
+  },
+  {
+   "id": 28,
+   "t": "checkbox",
+   "x": "Explains to Jenny honestly and kindly:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "The pain and observations suggest a complication of the procedure, possibly a small hole in the womb with bleeding inside, without false reassurance"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "A senior doctor is coming, she must not eat or drink, and she may need an operation today"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Her cancer question: the tissue results are not back yet, and the priority now is her safety"
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "t": "checkbox",
+   "x": "Documents clearly, plans open disclosure with Jenny and her husband, and files an incident report."
+  },
+  {
+   "id": 30,
+   "t": "heading",
+   "x": "Safety netting"
+  },
+  {
+   "id": 31,
+   "t": "checkbox",
+   "x": "Tells Jenny and the nurses what to report at once: worsening pain, feeling faint, heavier bleeding, breathlessness or vomiting; sets observations with clear MET criteria."
+  },
+  {
+   "id": 32,
+   "t": "checkbox",
+   "x": "Before any later discharge, tells her to call 000 or return to ED for increasing abdominal pain, fever, vomiting, heavy bleeding or offensive discharge, because a bowel injury can show itself days later."
+  },
+  {
+   "id": 33,
+   "t": "checkbox",
+   "x": "Arranges follow-up: histology reviewed with a gynaecologist, a fuller family history (a single first-degree relative with bowel cancer at 54 does not alone meet Lynch syndrome criteria), and weight and diabetes care with her GP."
   }
  ],
  "complexity": "High",
  "context": [],
- "desc": "This station involves assessing and resuscitating a woman who deteriorates in day-surgery recovery after a dilatation and curettage, escalating for suspected uterine perforation, and then explaining the PALM-COEIN classification and why obesity raises endometrial cancer risk.",
+ "desc": "This station involves assessing and resuscitating a woman who deteriorates in day-surgery recovery after a hysteroscopy and D&C, then interpreting her reassessment, blood gas, ECG, operation record and pre-operative ultrasound, recognising uterine perforation, escalating, placing her original bleeding in PALM-COEIN and explaining why obesity raises endometrial cancer risk.",
  "diagnosis": [
   "Uterine perforation",
   "Obesity-related ovulatory dysfunction",
   "Endometrial hyperplasia or cancer"
  ],
- "explain": "<h3>Fat in the curettings</h3><p>Fat in the curettings means the curette or other instrument has passed through the uterine wall into omentum, mesentery or bowel fat. It is a red flag for <strong>uterine perforation</strong>, even when the procedure seemed uneventful. The risk is higher in obese women and in those with a retroverted or fixed uterus. The dangers are haemorrhage from uterine or pelvic vessels, and unrecognised <strong>bowel or bladder injury</strong>, which can lead to peritonitis. This patient's tachycardia, hypotension, drowsiness, worsening pain, peritonism and shoulder-tip pain suggest bleeding or peritoneal irritation.</p><p>Management is simultaneous resuscitation and escalation. Use an ABCDE approach, titrated oxygen, two large-bore cannulas, crystalloid and early bloods including <strong>group and crossmatch</strong>. Activate a MET call if deterioration criteria are met, and <strong>call the senior gynaecologist urgently</strong>. Give analgesia, keep her nil by mouth and start IV antibiotics per eTG. Unstable or peritonitic patients need urgent laparoscopy or laparotomy to look for visceral injury. Stable patients may have urgent CT as directed by the senior. Document, practise open disclosure and file an incident report.</p><h3>PALM-COEIN (FIGO 2018)</h3><p>PALM-COEIN classifies the causes of abnormal uterine bleeding. The structural causes are <strong>P</strong>olyp, <strong>A</strong>denomyosis, <strong>L</strong>eiomyoma and <strong>M</strong>alignancy and hyperplasia. The non-structural causes are <strong>C</strong>oagulopathy, <strong>O</strong>vulatory dysfunction, <strong>E</strong>ndometrial disorder, <strong>I</strong>atrogenic and <strong>N</strong>ot otherwise classified. This patient has irregular cycles and heavy bleeding with obesity and diabetes, so <strong>ovulatory dysfunction</strong> is the most likely category. However, a 14 mm endometrium at 51 years, with her risk factors, means <strong>malignancy and hyperplasia</strong> must be excluded by histology. Several categories can coexist.</p><h3>Why obesity raises uterine cancer risk</h3><ul><li><p>Adipose tissue aromatises androgens to oestrone, raising circulating oestrogen.</p></li><li><p>The oestrogen is unopposed by progesterone. Progesterone is absent after menopause, and low in obesity-related anovulation before menopause. Unopposed oestrogen drives endometrial proliferation, hyperplasia and endometrioid cancer.</p></li><li><p>Hyperinsulinaemia and raised IGF-1 further promote endometrial proliferation.</p></li></ul><h3>Family history</h3><p>Ask about endometrial, bowel and ovarian cancer in relatives. A single first-degree relative with bowel cancer at 54 does not meet the usual Amsterdam II or revised Bethesda thresholds for Lynch syndrome, which generally involve younger onset or multiple affected relatives. A fuller family history is still warranted.</p>",
+ "explain": "<h3>Recognising the deterioration</h3><p>Three hours after a D&amp;C she has worsening lower abdominal pain, shoulder-tip pain, tachycardia, hypotension against her baseline, cool peripheries, drowsiness and peritonism. This is shock with peritoneal irritation, most likely from intra-abdominal bleeding. Assessment and resuscitation happen together: ABCDE, titrated oxygen, two large-bore cannulas, crystalloid with reassessment, bloods including <strong>group and crossmatch</strong>, a urinary catheter, and a MET call because she meets deterioration criteria.</p><h3>Interpreting the results</h3><p>She stays shocked after 1 L of crystalloid, so she is still bleeding. A lactate of 3.8 with a base deficit shows hypoperfusion, and the haemoglobin has already fallen from 126 to 98 g/L; early haemoglobin underestimates acute blood loss. The ECG shows sinus tachycardia without ischaemia, which fits hypovolaemia.</p><h3>Fat in the curettings</h3><p>Fat in the curettings means the curette or other instrument has passed through the uterine wall into omentum, mesentery or bowel fat. It is a red flag for <strong>uterine perforation</strong>, even when the procedure seemed uneventful. The risk is higher in obese women and in those with a retroverted or fixed uterus. The dangers are haemorrhage from uterine or pelvic vessels, and unrecognised <strong>bowel or bladder injury</strong>, which can lead to peritonitis.</p><p>Management is simultaneous resuscitation and escalation. <strong>Call the senior gynaecologist urgently</strong> and inform the anaesthetist and theatre. Give analgesia, keep her nil by mouth and start IV antibiotics per eTG. Unstable or peritonitic patients, like this one, need urgent laparoscopy or laparotomy to look for visceral injury. Stable patients may have urgent CT as directed by the senior. Document, practise open disclosure and file an incident report.</p><h3>PALM-COEIN (FIGO 2018)</h3><p>PALM-COEIN classifies the causes of abnormal uterine bleeding. The structural causes are <strong>P</strong>olyp, <strong>A</strong>denomyosis, <strong>L</strong>eiomyoma and <strong>M</strong>alignancy and hyperplasia. The non-structural causes are <strong>C</strong>oagulopathy, <strong>O</strong>vulatory dysfunction, <strong>E</strong>ndometrial disorder, <strong>I</strong>atrogenic and <strong>N</strong>ot otherwise classified. This patient has irregular cycles and heavy bleeding with obesity and diabetes, so <strong>ovulatory dysfunction</strong> is the most likely category. However, a 14 mm endometrium at 51 years, with her risk factors, means <strong>malignancy and hyperplasia</strong> must be excluded by histology. Several categories can coexist.</p><h3>Why obesity raises uterine cancer risk</h3><ul><li><p>Adipose tissue aromatises androgens to oestrone, raising circulating oestrogen.</p></li><li><p>The oestrogen is unopposed by progesterone. Progesterone is absent after menopause, and low in obesity-related anovulation before menopause. Unopposed oestrogen drives endometrial proliferation, hyperplasia and endometrioid cancer.</p></li><li><p>Hyperinsulinaemia and raised IGF-1 further promote endometrial proliferation.</p></li></ul><h3>Safety netting and follow-up</h3><p>While she is in hospital, she and the nurses need clear triggers to escalate: worsening pain, faintness, heavier bleeding, breathlessness or vomiting. A bowel injury can declare itself days later, so before discharge she is told to call 000 or return to ED for increasing pain, fever, vomiting, heavy bleeding or offensive discharge. Follow-up covers the histology with a gynaecologist, and weight and diabetes care. Ask about endometrial, bowel and ovarian cancer in relatives: a single first-degree relative with bowel cancer at 54 does not meet the usual Amsterdam II or revised Bethesda thresholds for Lynch syndrome, which generally involve younger onset or multiple affected relatives, but a fuller family history is still warranted.</p>",
  "focus": "Abnormal uterine bleeding assessment",
- "guide": "<p>A <strong>high-performing candidate</strong> starts resuscitation straight away with an ABCDE approach, large-bore access, fluids, a crossmatch and a MET call, while taking a brief history. They recognise that fat in the curettings means uterine perforation, call the senior gynaecologist urgently and consider bowel or other visceral injury. They explain honestly to the patient, including that results are pending. They then list all nine PALM-COEIN categories, identify ovulatory dysfunction in obesity while keeping malignancy and hyperplasia in mind, and give all three obesity mechanisms.</p><p>A <strong>borderline candidate</strong> takes a long history before resuscitating, or treats the pain as routine postoperative pain and gives analgesia alone. They may not link fat in the curettings to perforation, or may forget to escalate urgently. They recall only part of PALM-COEIN and explain obesity only as 'more oestrogen' without the absence of progesterone or the insulin and IGF-1 effect.</p>",
+ "guide": "<p>In Part 1, the examiner gives findings from the Exam findings only when the candidate says what they would examine. If the candidate asks for blood results or the operation record in Part 1, say they will be given in Part 2. In Part 2, hand over the reassessment, blood gas, ECG, operation record and ultrasound report, then ask the questions in order. A one-example-per-letter list is not required for PALM-COEIN; marks are for what each letter stands for.</p><p>A <strong>high-performing candidate</strong> starts resuscitation straight away with an ABCDE approach, large-bore access, fluids, a crossmatch and a MET call, while taking a brief, focused history that includes shoulder-tip pain and the background to the procedure. They examine the abdomen and find peritonism. In Part 2 they recognise persisting shock and a falling haemoglobin, state that fat in the curettings means uterine perforation, consider bowel or other visceral injury, call the senior gynaecologist urgently and plan theatre. They explain honestly to the patient, including that results are pending. They name all nine PALM-COEIN categories, identify ovulatory dysfunction while keeping malignancy and hyperplasia in mind, give all three obesity mechanisms and give specific safety netting and follow-up.</p><p>A <strong>borderline candidate</strong> takes a long history before resuscitating, or treats the pain as routine postoperative pain and gives analgesia alone. They may not link fat in the curettings to perforation, may plan a CT in an unstable patient, or may forget to escalate urgently. They recall only part of PALM-COEIN and explain obesity only as \"more oestrogen\" without the absence of progesterone or the insulin and IGF-1 effect.</p>",
  "id": "ai-9fdfd7be",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Profile:</strong></p><ul><li><p>Name: Jenny Okafor</p></li><li><p>Age: 51-years-old</p></li><li><p>Gender: Female</p></li><li><p>Aboriginal or Torres Strait Islander: No</p></li><li><p>Location: Day-surgery recovery bay, 3 hours after hysteroscopy and D&amp;C under general anaesthetic</p></li></ul><p><strong>Presenting complaint:</strong> Worsening lower abdominal pain since waking from the anaesthetic</p><p><strong>History (give only if asked):</strong></p><ul><li><p>Pain began about an hour after you woke and was mild at first. It is now 8/10, constant, across the lower tummy, and worse with movement or deep breaths.</p></li><li><p>Pain in the tip of the right shoulder.</p></li><li><p>Feels dizzy, sweaty, nauseated and very sleepy. You answer questions slowly but correctly.</p></li><li><p>Vaginal bleeding: a small amount on the pad, much less than your usual periods. No clots.</p></li><li><p>You have not vomited and have not passed urine since the operation.</p></li><li><p>You do not know what the doctor found during the procedure.</p></li><li><p>Allergies: nil known. Medications: metformin only. No blood thinners. Last ate eight hours before surgery.</p></li><li><p>Last cervical screening test was normal.</p></li></ul><p><strong>Examiner to provide when the candidate performs each step:</strong></p><ul><li><p>Airway: patent, speaking in short sentences</p></li><li><p>Breathing: RR 22, SpO<sub>2</sub> 94% on room air, chest clear</p></li><li><p>Circulation: HR 118, BP 92/58 (was 125/75 pre-operatively), cool peripheries, capillary refill 4 seconds</p></li><li><p>Disability: GCS 14 (E3 V5 M6), drowsy but rousable, BGL 9.8 mmol/L</p></li><li><p>Exposure: temperature 36.9 °C, small amount of blood on the pad</p></li><li><p>Abdomen: lower abdominal tenderness with guarding and rebound, reduced bowel sounds</p></li></ul><p><strong>Actor cues:</strong></p><ul><li><p>Appear pale, sleepy and distressed by pain. Wince on abdominal palpation.</p></li><li><p>Ideas: you think the pain is just from the operation, but it feels much worse than expected.</p></li><li><p>Concerns: ask quietly, <em>\"Did they find cancer? Is something wrong with me?\"</em> Be reassured by honesty and a clear plan. Accept that results are not yet back.</p></li><li><p>Expectations: you want the pain to stop and want to know what is happening.</p></li></ul><p><strong>Examiner prompts:</strong></p><ul><li><p>Task 2: if not mentioned, ask <em>\"What does the fat in the curettings suggest, and who do you need to involve?\"</em></p></li><li><p>Task 3: if the candidate has not addressed it, ask <em>\"Which PALM-COEIN category fits this woman best, and why does her weight matter for cancer risk?\"</em> If time allows, ask <em>\"Is there anything in the family history you would explore further?\"</em></p></li><li><p>A one-example-per-letter list is not required. Marks are for what each letter stands for.</p></li></ul><p><em>The candidate should interact with you using non-medical terminology. Please interrupt if medical terminology that would not be understood by the lay public is used.</em></p>",
+ "patient": "<p><strong>Role:</strong> You are Jenny Okafor, a 51-year-old woman in the day-surgery recovery bay about 3 hours after a hysteroscopy and D&amp;C under general anaesthetic. You are pale, sleepy and distressed by pain, and you answer slowly but correctly. Wince when your tummy is touched. The examiner gives examination findings from the Exam findings when the candidate says what they would examine.</p><p><strong>Opening line:</strong> \"My tummy is really hurting. It's much worse than they said it would be.\"</p><p><strong>History (give only when asked):</strong></p><p><strong>Since the procedure</strong></p><ul><li>The pain began about an hour after you woke and was mild at first. It is now 8/10, constant, across the lower tummy, and worse when you move or take a deep breath.</li><li>Pain in the tip of your right shoulder.</li><li>You feel dizzy, sweaty, nauseated and very sleepy.</li><li>A small amount of vaginal bleeding on the pad, much less than your usual periods. No clots.</li><li>You have not vomited and have not passed urine since the operation.</li><li>You do not know what the doctor found during the procedure. If the candidate asks the nurse or the chart about the operation, the examiner says the operation record will be given in Part 2.</li></ul><p><strong>Why you had the procedure</strong></p><ul><li>Your periods have been irregular for about 2 years, and for the last 8 months the bleeding has been very heavy and unpredictable.</li><li>You have never been pregnant. You are not on any hormones or the pill.</li><li>You had an internal ultrasound before the operation but do not know the result.</li><li>Your last cervical screening test was normal and is up to date.</li></ul><p><strong>Background</strong></p><ul><li>Type 2 diabetes on metformin. You weigh about 108 kg and have struggled with your weight for years.</li><li>No other medicines, no blood thinners. No known allergies. Last ate 8 hours before surgery.</li><li>Your mother was diagnosed with bowel cancer at 54. No one else you know of has had bowel, womb or ovarian cancer, but you know little about your father's family.</li><li>You live with your husband, who is waiting in the car park. You work as an office manager.</li></ul><p><strong>Ideas, concerns, expectations:</strong> you thought the pain was just from the operation, but it feels much worse than expected. Ask quietly: \"Did they find cancer? Is something wrong with me?\" You are reassured by honesty and a clear plan, and accept that the results are not back yet. You want the pain to stop and to know what is happening.</p><p><em>If the candidate uses medical words you would not understand, interrupt and ask what they mean.</em></p>",
  "points": [
   "Fat in curettings after D&C means uterine perforation until proven otherwise: resuscitate, call the senior gynaecologist urgently and assess for bowel or other visceral injury.",
   "In a deteriorating post-procedure patient, use ABCDE with simultaneous resuscitation, group and crossmatch, and activate a MET call when criteria are met.",
@@ -347,16 +337,53 @@
   "Gynaecology",
   "Critical Care Medicine"
  ],
- "stem": "<p>You are the gynaecology resident on call at a metropolitan public hospital. You have been called to the day-surgery recovery bay to review Jenny Okafor, a 51-year-old woman who had a hysteroscopy and dilatation and curettage (D&amp;C) three hours ago for eight months of heavy, irregular vaginal bleeding.</p><p><strong>Pre-operative summary (from the chart):</strong></p><ul><li><p>BMI 41 kg/m<sup>2</sup>, type 2 diabetes on metformin, nulliparous</p></li><li><p>Cycles irregular for two years, with heavy bleeding for eight months; not on anticoagulants or hormones</p></li><li><p>Pre-operative transvaginal ultrasound: endometrial thickness 14 mm, no discrete polyp or fibroid seen</p></li><li><p>Cervical screening test up to date and normal</p></li><li><p>Mother diagnosed with bowel cancer at 54 years</p></li></ul><p>The recovery nurse tells you she is worried about the patient. She also mentions that the scrub nurse noted yellow, fat-like tissue in the curettings container. The operating registrar has since gone to another theatre.</p>",
+ "stem": "<p>You are the gynaecology resident on call at a metropolitan public hospital. You have been called to the day-surgery recovery bay to review Jenny Okafor, a 51-year-old woman who had a hysteroscopy and dilatation and curettage (D&amp;C) under general anaesthetic three hours ago for abnormal uterine bleeding. The recovery nurse is worried about her. The operating registrar has gone to another theatre.</p>",
  "tasks": [
-  "<p><strong>Assess</strong> the patient: take a brief focussed history, perform an ABCDE assessment with initial resuscitation and examine the abdomen. <strong>Explain</strong> to the patient what you are concerned about and what will happen next (3 minutes).</p>",
-  "<p><strong>State</strong> to the examiner your working diagnosis with the significance of the fat in the curettings, and <strong>outline</strong> your further management and escalation (2 minutes).</p>",
-  "<p><strong>Explain</strong> to the examiner what each letter of PALM-COEIN stands for, which category most likely explains this patient's original bleeding, and why obesity increases her risk of uterine cancer (3 minutes).</p>"
+  "<p>Assess the patient: take a focused <strong>history</strong> and perform a focused <strong>examination</strong> (ABCDE and the abdomen), starting resuscitation as you go and telling the examiner what you are examining (10 minutes).</p>",
+  "<p>The examiner will give you her reassessment, blood gas, ECG, the operation record and her pre-operative ultrasound report. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, including the likely cause of her original bleeding, and your <strong>safety netting</strong> (5 minutes).</p>"
  ],
  "title": "Severe abdominal pain after curettage for abnormal bleeding",
  "type": [
   "Ward Call",
   "Emergency",
+  "History",
+  "Examination",
   "Management"
- ]
+ ],
+ "part2": {
+  "lead": "Here is her reassessment, her blood gas and ECG, the operation record the nurse has found, and the pre-operative ultrasound report.",
+  "handover": [
+   {
+    "label": "Reassessment after 1 L of crystalloid and oxygen",
+    "result": "<p>HR 114, BP 96/60, RR 22, SpO2 97% on 4 L/min oxygen via nasal prongs, CRT 3 seconds, GCS 14. Pain still 8/10 with lower abdominal guarding. No urine in the catheter bag.</p>"
+   },
+   {
+    "label": "Venous blood gas (at your arrival)",
+    "result": "<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>pH</td><td>7.31</td><td>7.32 to 7.42</td></tr><tr><td>Base excess</td><td>-5 mmol/L</td><td>-2 to +2</td></tr><tr><td>Lactate</td><td>3.8 mmol/L</td><td>below 2</td></tr><tr><td>Haemoglobin</td><td>98 g/L (pre-operative 126)</td><td>115 to 165</td></tr><tr><td>Glucose</td><td>9.8 mmol/L</td><td></td></tr></table>"
+   },
+   {
+    "label": "ECG",
+    "result": "<p>Sinus tachycardia at 118/min. No ischaemic changes.</p>"
+   },
+   {
+    "label": "Operation record",
+    "result": "<p>Hysteroscopy and D&amp;C under general anaesthetic, recorded as uneventful. Scrub nurse's note: yellow, fat-like tissue seen in the curettings container. Specimen sent for histology; result pending.</p>"
+   },
+   {
+    "label": "Pre-operative transvaginal ultrasound",
+    "result": "<p>Endometrial thickness 14 mm. No discrete polyp or fibroid seen.</p>"
+   }
+  ],
+  "ask": [
+   "What do the reassessment, blood gas and ECG show?",
+   "What does the fat in the curettings suggest? What is your working diagnosis and what else must you consider?",
+   "What is your management now, and who do you involve?",
+   "Which PALM-COEIN category most likely explains her original bleeding, and why does her weight raise her risk of uterine cancer?",
+   "What will you tell Jenny, and what follow-up does she need?"
+  ]
+ },
+ "revised": {
+  "at": "2026-10-23",
+  "by": "format 5/10/5"
+ }
 }

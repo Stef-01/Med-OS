@@ -6,7 +6,7 @@
  "note": "AI-written examination findings; not eMedici content",
  "stations": {
   "ai-12e898ea": {
-   "vitals": "HR 112 regular, BP 86/52 mmHg, RR 32/min, SpO2 89% on 4 L/min oxygen via nasal prongs, Temp 38.9 °C, BGL 7.8 mmol/L, CRT 4 seconds, GCS 15",
+   "vitals": "HR 112 regular, BP 86/52 mmHg, RR 32/min, SpO2 89% on room air at triage and 93% on 4 L/min oxygen via nasal prongs, Temp 38.9 °C, BGL 7.8 mmol/L, CRT 4 seconds, GCS 15",
    "general": "Older woman sitting upright in the resuscitation bay on a cardiac monitor. She is pale, diaphoretic and visibly breathless, speaking in short phrases. She is alert, oriented and tearful, and she holds her hand over her central chest.",
    "steps": [
     {
@@ -57,27 +57,19 @@
    ],
    "bedside": [
     {
-     "test": "12-lead ECG",
-     "find": "Sinus tachycardia 112/min with about 2 mm ST elevation in V2 to V5 and reciprocal ST depression in the inferior leads. No AF."
-    },
-    {
-     "test": "Venous blood gas",
-     "find": "Lactate 3.4 mmol/L, mild metabolic acidosis"
-    },
-    {
-     "test": "BGL",
+     "test": "Blood glucose level",
      "find": "7.8 mmol/L"
     },
     {
-     "test": "Point-of-care troponin",
-     "find": "Elevated"
+     "test": "SpO2",
+     "find": "89% on room air at triage, 93% on 4 L/min oxygen via nasal prongs"
     },
     {
-     "test": "Chest X-ray (portable)",
-     "find": "Right lower zone consolidation with a small parapneumonic effusion. Cardiac size normal. No pneumothorax."
+     "test": "12-lead ECG, bloods, venous gas and chest X-ray",
+     "find": "Done on arrival; the examiner hands the results over in Part 2."
     }
    ],
-   "key": "Fever with hypotension, tachycardia and hypoxia, right basal consolidation with a pleural rub, and anterior ST elevation on ECG, with no signs of a leg DVT."
+   "key": "Fever with hypotension, tachycardia and hypoxia, right basal consolidation with a pleural rub, no new confusion and no signs of a leg DVT."
   },
   "ai-1337df24": {
    "vitals": "HR 140, RR 40/min, Temp 36.8 °C, SpO2 98% on room air, weight 3.7 kg (birth weight 3.4 kg), CRT under 2 seconds, BGL 4.3 mmol/L",
@@ -216,8 +208,8 @@
    "key": "A firm, ill-defined retroareolar mass with a fluctuant centre, new nipple retraction, early peau d'orange and a tender axillary node in a non-breastfeeding smoker who has had no response to antibiotics."
   },
   "ai-26435104": {
-   "vitals": "HR 84, BP 116/72 mmHg, RR 16/min, SpO2 99% on room air, Temp 36.8 °C, BGL 5.1 mmol/L, urine dipstick protein nil and glucose nil, fetal heart rate 140 bpm",
-   "general": "Pale, tense and tearful woman who sits forward holding her abdomen and keeps glancing at the clock. She is alert and orientated, comfortable at rest, and calms slightly when spoken to warmly. (Examination findings are given in case the candidate chooses to examine; the station does not require it.)",
+   "vitals": "HR 84, BP 116/72 mmHg, RR 16/min, SpO2 99% on room air, Temp 36.8 °C, BGL 5.1 mmol/L, urine dipstick protein nil and glucose nil, fetal heart rate 142 bpm on Doppler",
+   "general": "Pale, tense and tearful woman who sits forward holding her abdomen and keeps glancing at the clock. She is alert and orientated, comfortable at rest, and calms slightly when spoken to warmly.",
    "steps": [
     {
      "area": "General inspection",
@@ -253,18 +245,9 @@
      "area": "Calves",
      "do": "Palpate calves and compare",
      "find": "Soft, non-tender and symmetrical."
-    },
-    {
-     "area": "CTG review",
-     "do": "Interpret the 40-minute trace",
-     "find": "Baseline 140 bpm, normal variability, accelerations present, no decelerations, no contractions."
     }
    ],
    "bedside": [
-    {
-     "test": "CTG (40 minutes)",
-     "find": "Normal: baseline 140 bpm, variability 10 bpm, accelerations present, no decelerations."
-    },
     {
      "test": "Urine dipstick",
      "find": "Protein nil, glucose nil"
@@ -278,7 +261,7 @@
      "find": "116/72 mmHg on two readings, 10 minutes apart"
     }
    ],
-   "key": "Normal blood pressure, urine and fundal height, with a normal CTG and a heart rate of 140 bpm, in an anxious patient who describes reduced movements and has a previous stillbirth."
+   "key": "Normal blood pressure and urinalysis, a fundal height consistent with dates and a fetal heart of 142 bpm on Doppler, in an anxious woman with reduced movements and a previous stillbirth. The CTG is given in Part 2."
   },
   "ai-2ab0f580": {
    "vitals": "HR 78, BP 118/64 (right arm), BP 120/66 (leg), RR 16, SpO2 99% on room air, temp 36.6, weight 36 kg, height 138 cm, BMI 18.9",
@@ -286,13 +269,13 @@
    "steps": [
     {
      "area": "General inspection and growth",
-     "do": "Observe the child and plot height and weight on the growth chart",
-     "find": "Height 138 cm, well below the 3rd centile and tracking below it since age 4. Weight 36 kg. Mid-parental height about 165 cm. Body proportions normal for age. Looks younger than 13 years."
+     "do": "Observe the child and measure height and weight",
+     "find": "Height 138 cm, weight 36 kg. Short with normal body proportions. Looks younger than 13 years."
     },
     {
      "area": "Face and head",
      "do": "Inspect face, jaw, palate, eyes and hairline",
-     "find": "Low-set, slightly posteriorly rotated ears. Small lower jaw, high-arched palate. Mild ptosis absent, epicanthic folds present. Posterior hairline low."
+     "find": "Low-set, slightly posteriorly rotated ears. Small lower jaw, high-arched palate. No ptosis. Epicanthic folds present. Low posterior hairline."
     },
     {
      "area": "Ears",
@@ -406,16 +389,12 @@
      "find": "5.6 mmol/L"
     },
     {
-     "test": "Venous gas",
-     "find": "pH 7.33, lactate 2.4 mmol/L, base excess -3."
-    },
-    {
-     "test": "ECG",
-     "find": "Sinus tachycardia 108/min, no ST changes."
-    },
-    {
      "test": "Core temperature",
      "find": "35.2"
+    },
+    {
+     "test": "Venous gas, bloods and CT",
+     "find": "Sent or requested; the examiner hands the results over in Part 2."
     }
    ],
    "key": "A right neck wound over the external jugular vein with a sucking noise on inspiration while upright, a bilateral boggy purple septal swelling, early compensated blood loss and mild hypothermia."
@@ -537,19 +516,11 @@
      "find": "4.1 mmol/L"
     },
     {
-     "test": "Venous gas with electrolytes",
-     "find": "pH 7.52, bicarbonate 36 mmol/L, chloride 88 mmol/L, potassium 3.0 mmol/L, sodium 134 mmol/L, lactate 1.2 mmol/L."
-    },
-    {
-     "test": "Abdominal ultrasound",
-     "find": "Pyloric muscle thickness 5 mm, channel length 19 mm."
-    },
-    {
      "test": "Weight",
      "find": "4.0 kg"
     }
    ],
-   "key": "Palpable olive-shaped mass in the right upper quadrant with visible left-to-right peristalsis, non-bilious projectile vomiting, moderate dehydration with compensated shock (HR 170, CRT 3 seconds), and a hypochloraemic, hypokalaemic alkalosis on venous gas."
+   "key": "Palpable olive-shaped mass in the right upper quadrant with visible left-to-right peristalsis, non-bilious projectile vomiting, and moderate dehydration (sunken fontanelle, about 9% weight loss) with compensated shock (HR 170, CRT 3 seconds, cool peripheries) and a normal BGL."
   },
   "ai-7789e6bf": {
    "vitals": "HR 124, BP not required, RR 32, SpO2 96% on room air, temp 37.4, weight 13 kg, CRT less than 2 seconds",
@@ -608,11 +579,7 @@
     },
     {
      "test": "Temperature",
-     "find": "37.4"
-    },
-    {
-     "test": "Chest X-ray report",
-     "find": "Right lower lobe collapse with volume loss and slight mediastinal shift to the right. No effusion, no focal consolidation."
+     "find": "37.4 °C"
     }
    ],
    "key": "Localised right lower zone signs (reduced expansion, dullness, reduced air entry and monophonic wheeze) with tracheal shift to the right in a well, afebrile child, with no drooling, neck stiffness or neck swelling."
@@ -743,19 +710,15 @@
      "find": "Specific gravity 1.030, ketones 1+, no nitrites or leucocytes, no blood, no bilirubin."
     },
     {
-     "test": "ECG",
-     "find": "Sinus tachycardia 108, U waves and flattened T waves, no ST changes."
-    },
-    {
-     "test": "Venous blood gas",
-     "find": "pH 7.43, lactate 1.8 mmol/L, potassium 3.1 mmol/L."
+     "test": "Bloods, venous gas, ECG and abdominal X-ray",
+     "find": "Done; the examiner hands the results over in Part 2."
     }
    ],
    "key": "Distended, tympanic abdomen with tinkling bowel sounds, an empty rectum and no hernias, with a negative Murphy's sign, no fever or jaundice and signs of hypovolaemia."
   },
   "ai-8bb4689d": {
    "vitals": "HR 78, BP 122/76, RR 14, SpO2 99% on room air, Temp 36.6 C, weight 76 kg",
-   "general": "Well-appearing 27-year-old man, anxious and quiet at the start, who relaxes with rapport. Not cachectic. Examination was not required in this station and no abnormal findings are expected.",
+   "general": "Well-appearing 27-year-old man, anxious and quiet at the start, who relaxes with rapport. Not cachectic. No features of opportunistic infection.",
    "steps": [
     {
      "area": "General inspection",
@@ -793,26 +756,22 @@
      "find": "No ulcers, warts, discharge or rash."
     },
     {
-     "area": "Neurological and fundi",
-     "do": "Brief screen of cranial nerves and visual symptoms",
-     "find": "No focal deficit, normal cranial nerves, no cognitive concerns. Fundi not examined."
+     "area": "Neurological screen",
+     "do": "Brief screen of cranial nerves, limbs, neck stiffness and cognition",
+     "find": "No focal deficit, normal cranial nerves, no neck stiffness, no cognitive concerns."
     }
    ],
    "bedside": [
     {
-     "test": "Recent bloods (already known)",
-     "find": "CD4 410 cells/microlitre, HIV-1 viral load 86,000 copies/mL."
+     "test": "Weight",
+     "find": "76 kg, stable"
     },
     {
-     "test": "Hepatitis B, hepatitis C and syphilis serology",
-     "find": "Negative."
-    },
-    {
-     "test": "Genital STI swabs",
-     "find": "Negative."
+     "test": "Urinalysis",
+     "find": "No protein, blood or glucose."
     }
    ],
-   "key": "Clinically well with no features of opportunistic infection; CD4 410 and viral load 86,000 copies/mL guide the counselling."
+   "key": "Clinically well, with no oral candida, oral hairy leukoplakia, skin lesions or other features of a weakened immune system; small, mobile nodes only."
   },
   "ai-95865471": {
    "vitals": "HR 74 regular, BP 128/76, RR 14, SpO2 99% on room air, Temp 36.8 C, BGL 8.2 mmol/L, weight 72 kg",
@@ -941,23 +900,19 @@
      "find": "9.8 mmol/L"
     },
     {
-     "test": "Venous blood gas",
-     "find": "pH 7.31, lactate 3.8 mmol/L, base excess -5, Hb 98 g/L (pre-operative 126 g/L)."
-    },
-    {
-     "test": "ECG",
-     "find": "Sinus tachycardia 118, no ischaemic changes."
-    },
-    {
-     "test": "Urine pregnancy test",
+     "test": "Urine pregnancy test (pre-operative)",
      "find": "Negative."
+    },
+    {
+     "test": "Venous blood gas, bloods and ECG",
+     "find": "Taken; the examiner hands the results over in Part 2."
     }
    ],
    "key": "Shock with tachycardia, hypotension and delayed CRT, together with peritonism and shoulder-tip pain after a D&C, indicates uterine perforation with likely intra-abdominal bleeding."
   },
   "ai-a98052d6": {
-   "vitals": "At 0 min: HR 135, BP 100/60, RR 26, SpO2 95% on room air, temperature 36.4 C, AVPU alert, estimated blood loss about 1,000 mL and ongoing. Weight 68 kg. CRT 4 seconds. BGL 5.6 mmol/L. With oxygen by mask SpO2 97%. If not escalated by 4 min: HR 150, BP 60/40, drowsy (responds to voice). Once resuscit",
-   "general": "Young woman lying flat on the delivery bed, pale, anxious and clammy, alert and talking in short sentences. Obvious fresh blood and clots on the bed linen and under-pads. Midwife and nurse assistant at the bedside.",
+   "vitals": "HR 135, BP 100/60, RR 26, SpO2 95% on room air, temperature 36.4 C, CRT 4 seconds, AVPU alert, GCS 15, BGL 5.6 mmol/L, weight 68 kg. Blood loss about 1,000 mL by weighed pads and ongoing.",
+   "general": "Young woman lying flat on the delivery bed, pale, anxious and clammy, alert and talking in short sentences. Obvious fresh blood and clots on the bed linen and under-pads. Midwife and nurse assistant at the bedside; the baby is well in the cot.",
    "steps": [
     {
      "area": "General inspection and airway",
@@ -966,73 +921,59 @@
     },
     {
      "area": "Breathing",
-     "do": "Count respiratory rate, auscultate chest, check SpO2",
-     "find": "RR 26, shallow. Equal air entry bilaterally, clear chest with no added sounds. SpO2 95% on room air, falling to 91% at 3 min and 89% at 4 min if oxygen is not started; 97% once oxygen is given."
+     "do": "Count respiratory rate, auscultate the chest, check SpO2",
+     "find": "RR 26, shallow. Equal air entry bilaterally, clear chest with no added sounds. SpO2 95% on room air."
     },
     {
      "area": "Circulation: peripheral",
      "do": "Assess pulse, capillary refill, skin temperature and BP",
-     "find": "Pulse 135, rapid and thready. Hands and feet cool and clammy, CRT 4 seconds. BP 100/60 (shock index 1.35). Worsens to 90/50 then 60/40 without intervention."
+     "find": "Pulse 135, rapid and thready. Hands and feet cool and clammy, CRT 4 seconds. BP 100/60."
     },
     {
-     "area": "Circulation: access and fluids",
-     "do": "Request two large-bore IV cannulae and bloods, warmed fluids, and quantify blood loss",
-     "find": "Midwife can site cannulae when asked. Blood loss about 1,000 mL at 0 min, 1,500 mL by 3 min if tone not corrected, 2,000 mL by 5 min without bimanual compression. Pads and linen weighed for quantification."
+     "area": "Circulation: blood loss",
+     "do": "Quantify blood loss and look at the pads",
+     "find": "Pads and linen weighed: about 1,000 mL so far, with fresh blood and clots still coming. The midwife can site cannulae when asked."
     },
     {
      "area": "Disability",
-     "do": "Assess AVPU/GCS and check BGL",
-     "find": "Alert at start, GCS 15, pupils equal and reactive. Becomes drowsy and responds to voice only (GCS about 13) if there is no escalation by 4 min. BGL 5.6 mmol/L."
+     "do": "Assess AVPU or GCS and check BGL",
+     "find": "Alert, GCS 15, pupils equal and reactive. BGL 5.6 mmol/L."
     },
     {
      "area": "Exposure and temperature",
-     "do": "Expose and check temperature, keep patient warm",
-     "find": "Temperature 36.4 C. Cool peripheries. Warm blankets and warmed fluids needed to keep temperature at or above 36 C. Perineum has a small graze only."
+     "do": "Expose, check temperature, keep the patient warm",
+     "find": "Temperature 36.4 C. Cool peripheries."
     },
     {
-     "area": "Abdomen: fundus",
-     "do": "Palpate the uterine fundus",
-     "find": "Fundus palpable above the umbilicus, soft and boggy, poorly contracted. A full bladder is palpable and displaces the uterus. Fundus is not tender."
+     "area": "Abdomen: fundus and bladder",
+     "do": "Palpate the uterine fundus and the suprapubic area",
+     "find": "Fundus palpable above the umbilicus, soft and boggy, poorly contracted, not tender. A full bladder is palpable and displaces the uterus."
     },
     {
-     "area": "Uterine massage and bladder",
-     "do": "Perform fundal massage with clot expulsion and insert an indwelling catheter",
-     "find": "Large clots expelled on massage and the uterus firms partly. After catheterisation of the full bladder, loss at 2 min is 1,300 mL, HR 125, BP 100/60 if done. If not done, loss 1,500 mL, HR 140, BP 90/50."
-    },
-    {
-     "area": "Genital tract: inspection",
+     "area": "Genital tract and placenta",
      "do": "Inspect the perineum, vagina and cervix, and check the placenta and membranes",
-     "find": "Small superficial perineal graze only, not bleeding significantly. No expanding haematoma, no vaginal or cervical tear identified. Midwife reports the placenta and membranes were complete."
-    },
-    {
-     "area": "Bimanual compression",
-     "do": "Perform bimanual uterine compression if bleeding continues",
-     "find": "Bleeding slows with compression. With compression, TXA and escalation underway: HR 118, BP 95/58. By 6 min loss 1,800 mL, bleeding slowing."
+     "find": "Small superficial perineal graze only, not bleeding significantly. No expanding haematoma, no vaginal or cervical tear seen; blood and clots coming through the cervix. Placenta and membranes complete on the midwife's check."
     }
    ],
    "bedside": [
     {
      "test": "Blood loss quantification",
-     "find": "1,000 mL at 0 min; 1,300 mL at 2 min after massage and catheter; 1,500 mL at 3 min (stated by midwife); 1,800 mL by 6 min once stabilising; 2,000 mL if no bimanual compression by 5 min."
-    },
-    {
-     "test": "Blood results (from 4 min)",
-     "find": "Hb 78 g/L (booking 124), platelets 96, INR 1.4, fibrinogen 1.4 g/L, lactate 5.2 mmol/L, base excess -9."
-    },
-    {
-     "test": "Group and antibody screen",
-     "find": "Group A-positive, antibody screen negative."
+     "find": "About 1,000 mL by weighed pads and linen, and ongoing."
     },
     {
      "test": "Pulse oximetry",
-     "find": "95% on room air at 0 min, 97% on oxygen, 91% at 3 min and 89% at 4 min if no oxygen."
+     "find": "95% on room air."
     },
     {
-     "test": "Bladder catheter",
-     "find": "Large volume of urine drained after insertion, urine clear to concentrated, with the bladder empty and the uterus able to contract."
+     "test": "Capillary glucose",
+     "find": "5.6 mmol/L."
+    },
+    {
+     "test": "Blood group on file",
+     "find": "A-positive, antibody screen negative."
     }
    ],
-   "key": "Tachycardia 135 with BP 100/60 (shock index 1.35), a boggy fundus above the umbilicus with a full bladder, an intact tract with a complete placenta, and early coagulopathy (fibrinogen 1.4 g/L) with ongoing blood loss beyond 1,500 mL needing massage, catheter, oxygen, bimanual compression and MTP or "
+   "key": "Tachycardia 135 with BP 100/60 (shock index 1.35), a boggy fundus above the umbilicus with a full bladder, a small graze only and a complete placenta, with about 1,000 mL lost and still bleeding: primary PPH from uterine atony."
   },
   "ai-b08d5faf": {
    "vitals": "HR 76, BP 112/68, RR 14, SpO2 99% on room air, temp 36.7 C, weight 64 kg (BMI 24 kg/m2).",
@@ -1171,7 +1112,7 @@
    "key": "A boggy fundus above the umbilicus with a full bladder and large clots, ongoing heavy bleeding with compensated shock (tachycardia, narrowing BP, delayed CRT), no genital tract tear, and possible retained tissue."
   },
   "ai-c1be5d8e": {
-   "vitals": "BP 154/94 then 150/92 (right arm, seated, appropriate cuff), left arm 152/92. HR 72 regular, RR 14, SpO2 98% on room air, temp 36.6 C. Weight 94 kg, height 178 cm, BMI 29.7 kg/m2, waist 101 cm. Home BP average 124/78.",
+   "vitals": "BP 154/94 then 150/92 (right arm, seated, appropriate cuff), left arm 152/92. HR 72 regular, RR 14, SpO2 98% on room air, temp 36.6 C. Weight 94 kg, height 178 cm, BMI 29.7 kg/m2, waist 101 cm.",
    "general": "Well-appearing middle-aged man, comfortable and slightly nervous. Central obesity, no cushingoid features, not breathless, well hydrated.",
    "steps": [
     {
@@ -1232,13 +1173,9 @@
     {
      "test": "Anthropometry",
      "find": "BMI 29.7 kg/m2, waist circumference 101 cm."
-    },
-    {
-     "test": "Home BP diary review",
-     "find": "10 readings over 5 days, average 124/78, all single evening readings after coffee, on a non-validated device."
     }
    ],
-   "key": "Clinic BP is repeatedly raised while home readings are normal. There are no signs of end-organ damage, no secondary cause, a normal ECG and fundi, and a neck circumference of 42 cm."
+   "key": "Clinic BP is repeatedly raised at about 150/92 in both arms with no postural drop. There are no signs of end-organ damage or a secondary cause: normal fundi, heart and pulses with no radio-femoral delay, no renal bruits, a normal ECG and a clear urine. Central obesity and a neck circumference of 42 cm."
   },
   "ai-d8c143df": {
    "vitals": "Maternal: HR 105, BP 84/50 after epidural top-up (102/62 after left lateral position and IV fluid bolus), RR 18, SpO2 98% on room air, temp 37.1 C. Fetal heart rate: baseline 140 bpm earlier, now 70 bpm for 3 minutes, recovering slowly to 100 bpm after oxytocin is stopped and she is repositioned.",
@@ -1429,7 +1366,7 @@
    "key": "Inspiratory stridor at rest with a barking cough, mild to moderate recession and a quiet child with no drooling: moderate croup."
   },
   "ai-ea8dbb57": {
-   "vitals": "HR 188, BP 58/30, RR 74, SpO2 91% on room air (95% on oxygen), temperature 38.1 C, CRT 4 seconds, AVPU V, BGL 4.1 mmol/L, weight 3.2 kg",
+   "vitals": "HR 188, BP 58/30, RR 74, SpO2 91% on room air, temperature 38.1 C, CRT 4 seconds, AVPU V, BGL 4.1 mmol/L, weight 3.2 kg",
    "general": "14-hour-old term baby who looks unwell: lethargic, only responds to voice, mottled and cool peripheries, grunting with each breath. Poor feeding and unsettled per the midwife.",
    "steps": [
     {
@@ -1440,7 +1377,7 @@
     {
      "area": "Airway and breathing",
      "do": "Count RR, look for distress, check SpO2",
-     "find": "RR 74 with expiratory grunting, mild subcostal recession and nasal flaring. SpO2 91% on room air. Occasional short apnoea if oxygen is not given by 2 minutes (SpO2 falls to 86%)."
+     "find": "RR 74 with expiratory grunting, mild subcostal recession and nasal flaring. SpO2 91% on room air."
     },
     {
      "area": "Chest",
@@ -1450,7 +1387,7 @@
     {
      "area": "Cardiovascular",
      "do": "HR, pulses, CRT, BP, heart sounds",
-     "find": "HR 188, weak peripheral pulses, central pulses palpable. CRT 4 seconds with cool mottled peripheries. BP 58/30. Heart sounds normal, no murmur. After a fluid bolus: HR 164, CRT 2 seconds. If no bolus by 3 minutes: HR 206, CRT 5 seconds, BP 46/24, AVPU P."
+     "find": "HR 188, weak peripheral pulses, central pulses palpable. CRT 4 seconds with cool mottled peripheries. BP 58/30. Heart sounds normal, no murmur."
     },
     {
      "area": "Abdomen",
@@ -1475,35 +1412,19 @@
     {
      "area": "Metabolic",
      "do": "Check BGL immediately",
-     "find": "BGL 4.1 mmol/L, no hypoglycaemia treatment needed, plan repeat checks."
+     "find": "BGL 4.1 mmol/L."
     }
    ],
    "bedside": [
     {
      "test": "BGL",
      "find": "4.1 mmol/L"
-    },
-    {
-     "test": "Venous gas",
-     "find": "pH 7.24, lactate 4.2 mmol/L, base excess -9"
-    },
-    {
-     "test": "FBE and CRP",
-     "find": "Hb 165 g/L, WCC 3.1, neutrophils 1.0 (x10^9/L), platelets 140, CRP 6 mg/L"
-    },
-    {
-     "test": "Chest X-ray",
-     "find": "Bilateral hazy lung fields with air bronchograms"
-    },
-    {
-     "test": "Blood culture",
-     "find": "Taken before antibiotics and sent; lumbar puncture deferred while unstable"
     }
    ],
-   "key": "Respiratory distress with grunting and hypoxia, tachycardia with prolonged CRT and mottling (compensated shock), fever and reduced responsiveness in a 14-hour-old baby with maternal risk factors, who improves with oxygen and fluid and deteriorates without them."
+   "key": "Respiratory distress with grunting and SpO2 91% in room air, tachycardia with a CRT of 4 seconds and mottling (compensated shock), fever of 38.1 C and reduced responsiveness in a 14-hour-old baby with maternal risk factors for early-onset sepsis. The BGL is normal."
   },
   "ai-edd05314": {
-   "vitals": "HR 170, BP not required (if asked, 90/55), RR 64, SpO2 87% on room air (92% on oxygen, RR 58, HR 160), temperature 37.8 C, CRT 2 seconds, AVPU A, BGL 5.2 mmol/L if checked, weight 6 kg",
+   "vitals": "HR 170, BP not required (if asked, 90/55), RR 64, SpO2 87% on room air, temperature 37.8 C, CRT 2 seconds, AVPU A, BGL 5.2 mmol/L if checked, weight 6 kg",
    "general": "4-month-old infant, irritable but alert, in the mother's arms. Visibly tachypnoeic with a blocked nose and wet cough. Slightly pale, not mottled. Consolable but tiring during the exam.",
    "steps": [
     {
@@ -1514,7 +1435,7 @@
     {
      "area": "Work of breathing",
      "do": "Count RR, inspect for recession, flaring, grunt",
-     "find": "RR 64. Nasal flaring, subcostal and intercostal recession. No grunt at baseline. No apnoea witnessed. If no oxygen by 3 minutes: RR 70, intermittent grunt, tiring, SpO2 84%."
+     "find": "RR 64. Nasal flaring, subcostal and intercostal recession. No grunt. No apnoea witnessed."
     },
     {
      "area": "ENT",
@@ -1545,28 +1466,19 @@
      "area": "Neurology and skin",
      "do": "Tone, alertness, rash check",
      "find": "Normal tone and movements, AVPU alert. No rash or petechiae. Temperature 37.8 C."
-    },
-    {
-     "area": "Reassessment",
-     "do": "Review after interventions",
-     "find": "After oxygen: SpO2 92%, RR 58, HR 160. No change after salbutamol, adrenaline, steroid or antibiotic. If no feeding plan by 5 minutes: refuses a feed, nappy still dry, HR 175. High flow at 5 minutes is being set up, SpO2 stays 91 to 92%."
     }
    ],
    "bedside": [
     {
      "test": "SpO2 (continuous)",
-     "find": "87% on room air; 92% on oxygen"
+     "find": "87% on room air"
     },
     {
      "test": "BGL",
      "find": "5.2 mmol/L (only if asked)"
-    },
-    {
-     "test": "Chest X-ray, bloods, viral swab",
-     "find": "Not urgently available or indicated (examiner states this if requested)"
     }
    ],
-   "key": "Tachypnoea with nasal flaring and recession, SpO2 87% in room air, widespread crackles and wheeze in a 4-month-old with coryza, poor feeding and falling urine output, with no response to bronchodilators."
+   "key": "Tachypnoea with nasal flaring and recession, SpO2 87% in room air, and widespread crackles and wheeze in a 4-month-old with coryza, poor feeding and falling urine output."
   },
   "ai-f3a22080": {
    "vitals": "HR 72, BP 112/70, RR 14, SpO2 99% on room air, temperature 36.7 C, weight 62 kg, BMI 22",
@@ -1621,10 +1533,6 @@
     {
      "test": "Temperature",
      "find": "36.7 C, afebrile, suitable for vaccination today"
-    },
-    {
-     "test": "Immunisation record check",
-     "find": "Matches the statement: one dose of MMR, last dTpa at age 15, hepatitis B and HPV complete, no travel vaccines recorded"
     }
    ],
    "key": "She is well and afebrile with a normal examination and a negative pregnancy test, so there is no examination barrier to same-day vaccination including live vaccines."

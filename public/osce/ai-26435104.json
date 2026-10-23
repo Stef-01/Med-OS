@@ -21,17 +21,17 @@
   {
    "id": 2,
    "t": "checkbox",
-   "x": "Hand hygiene, clear introduction, confirms patient's name and explains role."
+   "x": "Washes hands, introduces self and role, confirms Rachel's name, and explains and gains consent before examining."
   },
   {
    "id": 3,
    "t": "checkbox",
-   "x": "Warm, unhurried manner, appropriate eye contact and non-verbal cues."
+   "x": "Warm and unhurried: expresses sorrow for the loss of her baby and acknowledges her fear as understandable."
   },
   {
    "id": 4,
    "t": "checkbox",
-   "x": "Uses plain language and explains or avoids jargon."
+   "x": "Uses plain language and explains or avoids jargon such as CTG and liquor."
   },
   {
    "id": 5,
@@ -39,282 +39,270 @@
    "x": "History"
   },
   {
-   "crit": true,
    "id": 6,
+   "t": "checkbox",
+   "x": "Takes a focused history of the reduced movements:",
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Establishes the usual pattern of movements and when they changed [reduced since about 6 pm yesterday]."
+     "x": "Usual pattern of movements and when they changed [reduced since about 6 pm yesterday]"
     },
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Asks when the baby last moved and what she has tried [a few weak flutters, cold drink and left side did not help]."
+     "x": "When the baby last moved and what she has tried [a few weak flutters; a cold drink and lying on her left side did not help]"
     },
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Asks about bleeding, fluid loss, pain or tightenings, and trauma [all nil]."
+     "x": "Bleeding, fluid loss, abdominal pain or tightenings, and trauma [all nil]",
+     "crit": true
     },
     {
      "id": 4,
      "t": "checkbox",
-     "x": "Asks about fever or flu-like illness, as listeria and other infections can harm the baby [nil]."
+     "x": "Fever or flu-like illness, as listeria and other infections can harm the baby [nil]"
     },
     {
      "id": 5,
      "t": "checkbox",
-     "x": "Asks about pre-eclampsia symptoms: headache, visual disturbance, upper abdominal pain [nil]."
+     "x": "Pre-eclampsia symptoms: headache, visual disturbance, upper abdominal pain, new swelling [nil]"
     }
-   ],
-   "t": "checkbox",
-   "x": "Takes a focused history of the reduced movements:"
+   ]
   },
   {
-   "crit": true,
    "id": 7,
+   "t": "checkbox",
+   "x": "Takes an obstetric history and summarises it correctly:",
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Establishes G3 with a miscarriage at 9 weeks and a term stillbirth at 39 weeks."
+     "x": "Miscarriage at 9 weeks, and a stillbirth at 39 weeks two years ago with no cause found other than a small placenta",
+     "crit": true
     },
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Identifies pre-eclampsia in the last pregnancy."
+     "x": "Pre-eclampsia in the last pregnancy"
     },
     {
      "id": 3,
      "t": "checkbox",
-     "x": "States TPAL correctly: T1 (stillbirth at 39 weeks counts as a term birth), P0, A1 (miscarriage before 20 weeks), L0 (no living children)."
+     "x": "States G3 and TPAL correctly: T1 (a term stillbirth counts as a term birth), P0, A1 (miscarriage before 20 weeks), L0"
     }
-   ],
-   "t": "checkbox",
-   "x": "Takes an obstetric history and summarises it correctly:"
+   ]
   },
   {
    "id": 8,
+   "t": "checkbox",
+   "x": "Explores risk factors in this pregnancy:",
    "kids": [
     {
      "id": 1,
      "t": "checkbox",
-     "x": "Gestational diabetes, diet-controlled [diagnosed at 27 weeks]."
+     "x": "Gestational diabetes, diet-controlled, diagnosed at 27 weeks"
     },
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Aspirin use [150 mg nocte from 13 weeks]."
+     "x": "Aspirin 150 mg at night from 13 weeks"
     },
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Growth scan result [normal at 32 weeks]."
+     "x": "Growth scan normal at 32 weeks, and blood pressure normal this pregnancy"
     },
     {
      "id": 4,
      "t": "checkbox",
-     "x": "Smoking, alcohol, drugs and maternal sleep position [non-smoker, none, sometimes sleeps on her back]."
+     "x": "Smoking, alcohol and drugs, and sleep position [non-smoker, none, often wakes on her back]"
     }
-   ],
-   "t": "checkbox",
-   "x": "Explores risk factors in this pregnancy:"
+   ]
   },
   {
-   "crit": true,
    "id": 9,
    "t": "checkbox",
-   "x": "Screens mood, sleep and support, including asking about thoughts of self-harm [anxious, sleeping poorly, no self-harm thoughts, supportive husband]."
+   "x": "Screens mood, sleep and support, including thoughts of self-harm [anxious, sleeping poorly, no self-harm thoughts, supportive husband].",
+   "crit": true
   },
   {
    "id": 10,
-   "t": "heading",
-   "x": "Explaining the CTG and the plan"
-  },
-  {
-   "crit": true,
-   "id": 11,
    "t": "checkbox",
-   "x": "Explains that the baby's heart rate trace is normal, which is reassuring."
+   "x": "Explores her ideas, concerns and expectations, including why she waited before coming in."
   },
   {
-   "crit": true,
+   "id": 11,
+   "t": "heading",
+   "x": "Examination"
+  },
+  {
    "id": 12,
    "t": "checkbox",
-   "x": "Explains that the trace cannot guarantee everything is fine, and does not say the baby is definitely well."
+   "x": "Asks for maternal observations and a urine dipstick, and repeats the blood pressure."
   },
   {
-   "crit": true,
    "id": 13,
    "t": "checkbox",
-   "x": "Offers an ultrasound to check the baby's growth and the amount of fluid around the baby, and arranges review by the registrar or obstetric team before she goes home."
+   "x": "Examines the abdomen: inspection, symphysis-fundal height compared with dates [35 cm], lie and presentation [longitudinal, cephalic] and uterine tenderness."
   },
   {
-   "crit": true,
    "id": 14,
-   "kids": [
-    {
-     "crit": true,
-     "id": 1,
-     "t": "checkbox",
-     "x": "If movements change or reduce again, come in straight away, at any time of day or night, and do not wait until morning."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Reassures her she is never wasting anyone's time by coming in."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Advises sleeping on her side (not her back) for every sleep."
-    }
-   ],
    "t": "checkbox",
-   "x": "Gives clear safety-net advice:"
+   "x": "Listens to the fetal heart with a handheld Doppler [142 bpm, regular].",
+   "crit": true
   },
   {
    "id": 15,
-   "t": "heading",
-   "x": "Communication and anxiety"
-  },
-  {
-   "crit": true,
-   "id": 16,
    "t": "checkbox",
-   "x": "Expresses sorrow for the loss of her baby and acknowledges her fear as understandable."
+   "x": "Looks for signs of pre-eclampsia: reflexes, clonus, epigastric or right upper quadrant tenderness and oedema."
   },
   {
-   "crit": true,
+   "id": 16,
+   "t": "heading",
+   "x": "Interpretation"
+  },
+  {
    "id": 17,
    "t": "checkbox",
-   "x": "Answers \"will it be all right?\" honestly: does not promise a good outcome but promises her worries will be taken seriously."
+   "x": "Interprets the observations and urinalysis as normal: normal blood pressure, no proteinuria, afebrile and a normal glucose, so no sign of pre-eclampsia or infection."
   },
   {
    "id": 18,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Suggests discussing the plan and timing of birth with the obstetric team, given the previous stillbirth."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Offers perinatal mental health support or counselling and a follow-up plan."
-    }
-   ],
    "t": "checkbox",
-   "x": "Offers to plan monitoring together and to be a continuing support:"
+   "x": "Interprets the CTG as normal: baseline 140 bpm, variability 10 bpm, accelerations present, no decelerations.",
+   "crit": true
   },
   {
    "id": 19,
-   "t": "heading",
-   "x": "Patient questions"
+   "t": "checkbox",
+   "x": "States that a normal CTG is reassuring now but does not exclude a baby at risk, for example from growth restriction or a poorly functioning placenta.",
+   "crit": true
   },
   {
    "id": 20,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Explains that listeria is usually mild for her but can seriously harm the baby."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Advises avoiding cold deli meats and soft cheeses such as brie and camembert, and offers a written food list."
-    },
-    {
-     "crit": true,
-     "id": 3,
-     "t": "checkbox",
-     "x": "Explains that avoiding these foods lowers the risk but cannot remove it, and that yesterday's baguette is most likely low risk."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "Advises her to contact the unit promptly if she develops a fever or flu-like illness."
-    }
-   ],
    "t": "checkbox",
-   "x": "Answers the food question:"
+   "x": "Identifies her risk factors for stillbirth: previous stillbirth with a small placenta, previous pre-eclampsia, gestational diabetes, sleeping on her back and the delay before coming in."
   },
   {
-   "crit": true,
    "id": 21,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Explains that aspirin is used to lower pre-eclampsia risk and is stopped at 36 weeks."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Does not tell her to keep taking it, and confirms the plan with the registrar rather than guessing."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Answers the aspirin question: confirms aspirin should now be stopped (ceased at 36 weeks per guideline) and checks with the obstetric team."
+   "t": "heading",
+   "x": "Management"
   },
   {
    "id": 22,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Explains that pre-eclampsia and gestational diabetes both predict a higher risk of heart disease later in life."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Explains that pre-eclampsia also raises the later risk of high blood pressure, stroke and kidney disease."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Explains that gestational diabetes greatly raises the risk of type 2 diabetes, so she needs a glucose tolerance test 6 to 12 weeks after birth and regular glucose checks afterwards."
-    },
-    {
-     "id": 4,
-     "t": "checkbox",
-     "x": "Advises regular GP follow-up with blood pressure, weight and cholesterol checks."
-    }
-   ],
    "t": "checkbox",
-   "x": "Answers the question about later health risks:"
+   "x": "Tells Rachel the baby's heart rate trace is normal and reassuring, but does not say the baby is definitely well.",
+   "crit": true
   },
   {
    "id": 23,
    "t": "checkbox",
-   "x": "If asked about twins: explains that this is not possible, because twins sharing one sac always share one placenta (monoamniotic twins are always monochorionic)."
+   "x": "Arranges an ultrasound today to check the baby's growth and the amount of fluid around the baby, and review by the registrar or obstetric team before she goes home.",
+   "crit": true
   },
   {
    "id": 24,
-   "t": "heading",
-   "x": "Overall"
+   "t": "checkbox",
+   "x": "Answers \"Will it be all right?\" honestly: does not promise a good outcome, but promises that her worries will always be taken seriously."
   },
   {
    "id": 25,
    "t": "checkbox",
-   "x": "Closes the consultation by summarising the plan, checking her understanding and asking if she has any other questions."
+   "x": "Aspirin: explains it lowers the risk of pre-eclampsia and is stopped at 36 weeks, so she should now stop it, and confirms the plan with the registrar rather than guessing.",
+   "crit": true
+  },
+  {
+   "id": 26,
+   "t": "checkbox",
+   "x": "Answers the food question:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Listeria is usually a mild illness for her but can seriously harm the baby"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Avoid cold deli meats and soft cheeses such as brie and camembert, with a written food list"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Avoiding these foods lowers the risk but cannot remove it; yesterday's baguette is most likely low risk and needs no test while she is well"
+    }
+   ]
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "Plans ongoing care with the obstetric team: closer monitoring and the timing of birth given the previous stillbirth, and offers perinatal mental health support."
+  },
+  {
+   "id": 28,
+   "t": "checkbox",
+   "x": "Summarises the plan, checks her understanding and asks if she has other questions."
+  },
+  {
+   "id": 29,
+   "t": "heading",
+   "x": "Safety netting"
+  },
+  {
+   "id": 30,
+   "t": "checkbox",
+   "x": "If movements reduce or change again, come in straight away, at any time of day or night, without waiting until morning; she is never wasting anyone's time.",
+   "crit": true
+  },
+  {
+   "id": 31,
+   "t": "checkbox",
+   "x": "Go to sleep on her side, not her back, for every sleep, including daytime naps."
+  },
+  {
+   "id": 32,
+   "t": "checkbox",
+   "x": "Come in promptly for a fever or flu-like illness (listeria can show up weeks after eating), or for bleeding, fluid loss, abdominal pain, headache or changes in vision.",
+   "crit": true
+  },
+  {
+   "id": 33,
+   "t": "checkbox",
+   "x": "Explains her later health risks and the follow-up:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Pre-eclampsia and gestational diabetes both raise her later risk of heart disease; pre-eclampsia also raises the risk of high blood pressure, stroke and kidney disease"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Gestational diabetes greatly raises the risk of type 2 diabetes: a glucose tolerance test 6 to 12 weeks after the birth, then regular glucose checks"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Regular GP review of blood pressure, weight and cholesterol"
+    }
+   ]
   }
  ],
  "complexity": "Moderate",
  "context": [],
- "desc": "This station involves assessing a woman at 36 weeks with reduced fetal movements and a normal CTG, explaining the result honestly, supporting her anxiety after a previous stillbirth, and answering her questions about food safety, aspirin and later health risks.",
+ "desc": "This station involves a focused history and examination of a woman at 36 weeks with reduced fetal movements after a previous stillbirth, then interpreting her observations and CTG, explaining honestly what a normal trace means, planning further assessment, answering her questions about aspirin, food safety and later health, and safety-netting.",
  "diagnosis": [
   "Reduced fetal movements with normal cardiotocograph"
  ],
- "explain": "<h3>Reduced fetal movements</h3><p>Women should be encouraged to learn their baby's usual pattern of movements and to report any reduction promptly, at any time of day or night. Assessment includes a focused history, maternal observations, assessment of fundal height or growth, and a CTG. A normal CTG is reassuring but does not exclude the risk of a poor outcome, so an ultrasound to assess fetal growth and amniotic fluid volume should be offered. Previous stillbirth, growth restriction, pre-eclampsia, diabetes and maternal supine sleeping are recognised risk factors. Women should be advised to sleep on their side. The Safer Baby Bundle supports awareness of movements, side sleeping, smoking cessation, growth surveillance and timing of birth.</p><h3>Communicating after a previous stillbirth</h3><ul><li><p>Acknowledge the loss and validate the anxiety. Do not say \"it will be fine\".</p></li><li><p>Be honest about uncertainty, but promise to take her concerns seriously and to respond each time she presents.</p></li><li><p>Plan surveillance and the timing of birth together with the obstetric team, and offer perinatal mental health support. Screen for depression and anxiety and ask about self-harm.</p></li></ul><h3>TPAL</h3><p>T: term births (37 weeks or more). P: preterm births (20 weeks to under 37 weeks). A: pregnancies lost before 20 weeks. L: living children. A multiple pregnancy counts once. A stillbirth at term counts as a term birth. Rachel is G3, with T1 P0 A1 L0, and her current pregnancy adds to gravidity but not to parity until she gives birth.</p><h3>Listeria and food safety</h3><p>Listeria is usually a mild illness in the mother but can cause miscarriage, stillbirth, preterm birth or severe neonatal infection. Advise avoiding cold deli meats, pâté and soft or semi-soft cheeses such as brie and camembert, along with other high-risk foods listed in the national guidance, and give a written list. Avoidance lowers the risk but cannot remove it. Any fever or flu-like illness in pregnancy should prompt early contact with the maternity unit.</p><h3>Aspirin for pre-eclampsia prevention</h3><p>Low-dose aspirin (100 to 150 mg nocte) started before 16 weeks lowers the risk of pre-eclampsia in women at higher risk, such as those with previous pre-eclampsia. In line with current Australian guidance (SOMANZ 2023), it is stopped at 36 weeks, or earlier if birth is imminent. Rachel is at 36+2, so the correct advice is that it should now be stopped. Because she is unsure, the candidate should confirm the plan with the obstetric team and not simply rely on memory.</p><h3>Later health risks of pre-eclampsia and gestational diabetes</h3><ul><li><p>Pregnancy acts as a cardiometabolic stress test. Both conditions predict higher later cardiovascular disease risk.</p></li><li><p>Pre-eclampsia also raises the later risk of chronic hypertension, stroke and chronic kidney disease.</p></li><li><p>Gestational diabetes greatly raises the risk of type 2 diabetes. A glucose tolerance test is recommended 6 to 12 weeks after birth, followed by glucose screening at least every 1 to 3 years.</p></li><li><p>The GP should continue to review blood pressure, weight, lipids and lifestyle after pregnancy.</p></li></ul><h3>Chorionicity and amnionicity in twins</h3><p>The time of splitting of the fertilised egg determines the twin type. A split early enough to form two chorions also forms two amnions, so a monoamniotic twin pregnancy is always monochorionic. Monoamniotic dichorionic twins therefore cannot exist. Monochorionic monoamniotic twins are rare and carry a higher risk of cord entanglement, so they need close specialist monitoring.</p>",
+ "explain": "<h3>Reduced fetal movements</h3><p>Women should be encouraged to learn their baby's usual pattern of movements and to report any reduction promptly, at any time of day or night. Assessment is a focused history (the change in movements, bleeding, fluid loss, pain, infection and pre-eclampsia symptoms, and risk factors), maternal observations and urinalysis, abdominal palpation with symphysis-fundal height, auscultation of the fetal heart, and a CTG. Previous stillbirth, growth restriction, pre-eclampsia, diabetes and going to sleep on the back are recognised risk factors. The Safer Baby Bundle supports awareness of movements, side sleeping from 28 weeks, smoking cessation, growth surveillance and decisions about the timing of birth.</p><h3>Interpreting the results</h3><p>Rachel's blood pressure, urinalysis, temperature and glucose are normal, so there is no sign of pre-eclampsia or infection. Her CTG is normal: a baseline of 140 bpm (normal range 110 to 160), variability of 10 bpm (normal 6 to 25), accelerations and no decelerations. A normal CTG is reassuring about the baby's condition now but does not exclude the risk of a poor outcome, so with her risk factors an ultrasound to assess fetal growth and amniotic fluid volume should be arranged today, with obstetric review before she goes home.</p><h3>Communicating after a previous stillbirth</h3><ul><li>Acknowledge the loss and validate the anxiety. Do not say \"it will be fine\".</li><li>Be honest about uncertainty, but promise to take her concerns seriously and to respond each time she presents.</li><li>Plan surveillance and the timing of birth together with the obstetric team, and offer perinatal mental health support. Screen for depression and anxiety and ask about self-harm.</li></ul><h3>TPAL</h3><p>T: term births (37 weeks or more). P: preterm births (20 weeks to under 37 weeks). A: pregnancies lost before 20 weeks. L: living children. A multiple pregnancy counts once. A stillbirth at term counts as a term birth. Rachel is G3, with T1 P0 A1 L0, and her current pregnancy adds to gravidity but not to parity until she gives birth.</p><h3>Listeria and food safety</h3><p>Listeria is usually a mild illness in the mother but can cause miscarriage, stillbirth, preterm birth or severe neonatal infection. Advise avoiding cold deli meats, pâté and soft or semi-soft cheeses such as brie and camembert, along with the other high-risk foods in the national guidance, and give a written list. Avoidance lowers the risk but cannot remove it. A well woman who ate a high-risk food needs no test, but any fever or flu-like illness in pregnancy should prompt early contact with the maternity unit, as illness can appear weeks after exposure.</p><h3>Aspirin for pre-eclampsia prevention</h3><p>Low-dose aspirin (100 to 150 mg at night) started before 16 weeks lowers the risk of pre-eclampsia in women at higher risk, such as those with previous pre-eclampsia. In line with current Australian guidance (SOMANZ 2023), it is stopped at 36 weeks, or earlier if birth is imminent. Rachel is at 36+2, so the correct advice is that it should now be stopped. Because she is unsure, the candidate should confirm the plan with the obstetric team and not rely on memory.</p><h3>Safety netting and later health</h3><ul><li>Come in straight away, at any hour, if movements reduce or change again, and go to sleep on her side for every sleep.</li><li>Come in promptly for fever, bleeding, fluid loss, abdominal pain, headache or visual changes.</li><li>Pregnancy acts as a cardiometabolic stress test. Pre-eclampsia and gestational diabetes both predict higher later cardiovascular risk. Pre-eclampsia also raises the later risk of chronic hypertension, stroke and chronic kidney disease.</li><li>Gestational diabetes greatly raises the risk of type 2 diabetes. A glucose tolerance test is recommended 6 to 12 weeks after birth, followed by glucose screening every 1 to 3 years, with GP review of blood pressure, weight, lipids and lifestyle.</li></ul>",
  "focus": "Antenatal visit: food advice, reduced fetal movements, anxiety after stillbirth and later health risks",
- "guide": "<p>A <strong>high-performing candidate</strong> would take a focused history that clarifies the change in movements and screens for bleeding, fluid loss, infection and pre-eclampsia symptoms. They would state her obstetric history correctly (G3, T1 P0 A1 L0) and screen mood. They would explain that the normal CTG is reassuring but not a guarantee, offer an ultrasound, and give clear advice to return at any hour if movements change. They would acknowledge the stillbirth, avoid false promises, and offer to plan monitoring and support together. They would give accurate listeria advice, recognise that aspirin should now be stopped and confirm this with the obstetric team, and explain her later cardiovascular and diabetes risks.</p><p>A <strong>borderline candidate</strong> would take a reasonable history but miss the obstetric summary or the mood screen. They might say the baby is fine because the trace is normal, or promise that everything will be all right. They might give vague food advice, tell her to keep taking aspirin, or not explain the later health risks of pre-eclampsia and gestational diabetes.</p>",
+ "guide": "<p>In Part 1, the examiner gives findings from the Exam findings only when the candidate says what they would examine. Rachel raises her food and aspirin questions near the end of Part 1; the candidate may answer them then or in Part 2, and both count. A <strong>high-performing candidate</strong> takes a focused history that clarifies the change in movements and screens for bleeding, fluid loss, infection and pre-eclampsia, states her obstetric history correctly (G3, T1 P0 A1 L0), screens mood including self-harm, and examines the abdomen, the fetal heart and for signs of pre-eclampsia. In Part 2 they interpret the observations and CTG as normal but explain that a normal trace is not a guarantee, arrange an ultrasound today and obstetric review, recognise that aspirin should now be stopped and confirm this with the registrar, give accurate listeria advice, and tell her to come in at any hour if movements change, to sleep on her side, and what her pre-eclampsia and gestational diabetes mean later in life.</p><p>A <strong>borderline candidate</strong> takes a reasonable history but misses the obstetric summary, the mood screen or the fetal heart. They may say the baby is fine because the trace is normal, promise that everything will be all right, tell her to keep taking aspirin, give vague food advice, or give vague safety netting such as \"come back if you are worried\".</p>",
  "id": "ai-26435104",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name: </strong>Rachel Bennett.</p></li><li><p><strong>Age: </strong>34-years-old.</p></li><li><p><strong>Occupation: </strong>Primary school teacher (on leave).</p></li><li><p><strong>Gender: </strong>Female (she/her).</p></li><li><p><strong>Aboriginal/Torres Strait Islander: </strong>No.</p></li><li><p><strong>Presenting location: </strong>Maternity day assessment unit.</p></li></ul><p><strong>Demeanour: </strong>Pale, tearful and tense. Sits forward, holds her abdomen and keeps checking the clock. Speaks quickly. Calms slightly if the candidate is warm and unhurried.</p><p><strong>Opening statement: </strong>\"<em>I haven't felt the baby move much since last night. I'm so scared it's happening again.</em>\"</p><p><strong>Reduced movements (give if asked):</strong></p><ul><li><p>The baby is usually very active, especially after dinner and when she lies down in the evening.</p></li><li><p>Since about 6 pm yesterday she has felt only a few weak flutters. This morning she felt perhaps two small movements.</p></li><li><p>She tried a cold drink and lying on her left side. This did not help much. She felt the baby move a little during the heart rate trace.</p></li><li><p>She has no vaginal bleeding, no fluid leaking, no abdominal pain or tightenings, no fall or abdominal injury.</p></li><li><p>No fever, chills, sore throat or flu-like illness at any point in the pregnancy.</p></li><li><p>No headache, visual disturbance, upper abdominal pain or new swelling.</p></li><li><p>She sleeps on her back at times and often wakes on her back.</p></li><li><p>She waited about 18 hours before coming in because she did not want to \"waste anyone's time\". If asked, say she is sorry she did not come sooner.</p></li></ul><p><strong>Obstetric history:</strong></p><ul><li><p>This is her third pregnancy (G3).</p></li><li><p>First pregnancy: spontaneous miscarriage at 9 weeks.</p></li><li><p>Second pregnancy (two years ago): pre-eclampsia (high blood pressure and protein in urine) diagnosed at 37 weeks. Her baby, a boy, was stillborn at 39 weeks, before induction took place. No cause was found other than a small placenta.</p></li><li><p>She has no living children. If asked, she says: \"<em>I've never taken a baby home.</em>\"</p></li><li><p>If the candidate says a TPAL or similar summary, she does not need to comment. Correct summary: 1 term birth, 0 preterm, 1 pregnancy lost before 20 weeks, 0 living children.</p></li></ul><p><strong>This pregnancy:</strong></p><ul><li><p>Single baby. Conceived naturally.</p></li><li><p>Takes aspirin 150 mg every night, started at 13 weeks because of the pre-eclampsia last time.</p></li><li><p>Gestational diabetes diagnosed at 27 weeks on a glucose tolerance test. Managed with diet only. Home sugar readings have been fine.</p></li><li><p>Growth scan at 32 weeks was normal.</p></li><li><p>Antenatal visits have been regular. Blood pressure has been normal this pregnancy.</p></li></ul><p><strong>Medical history: </strong>Nil other. No mental health diagnosis before the stillbirth.</p><p><strong>Medications: </strong>Aspirin 150 mg nocte and a pregnancy multivitamin with iodine. No other medications.</p><p><strong>Allergies: </strong>Nil known.</p><p><strong>Social history:</strong></p><ul><li><p>Lives with her husband, Daniel, who is very supportive.</p></li><li><p>Non-smoker, no alcohol and no drugs since conceiving.</p></li></ul><p><strong>Mood (give if asked):</strong></p><ul><li><p>She has been very anxious since the stillbirth and sleeps poorly. She counts movements through the night.</p></li><li><p>She feels low at times but has no thoughts of harming herself and no plans.</p></li><li><p>She has not seen a counsellor or psychologist this pregnancy and would like help if offered.</p></li></ul><p><strong>Scripted responses to the candidate:</strong></p><ul><li><p>If told the trace is normal: \"<em>So the baby is fine? Can I go home?</em>\"</p></li><li><p>If the candidate says everything is fine or that the baby is definitely okay: become more distressed. \"<em>They said that last time too.</em>\"</p></li><li><p>If the candidate explains that the trace cannot guarantee everything is fine and offers an ultrasound: accept, with relief. Ask how long it will take.</p></li><li><p>If the candidate does not say when to come back, ask: \"<em>What if it happens again when I get home?</em>\"</p></li><li><p>If the candidate uses jargon (for example CTG, liquor, EFW, OGTT, listeriosis), interrupt and ask what it means.</p></li></ul><p><strong>Questions (ask in this order as time allows):</strong></p><ol><li><p>\"<em>Is it going to be all right this time? Please just tell me it will be.</em>\"</p></li><li><p>\"<em>Yesterday Daniel bought me a ham and brie baguette. I ate half before I remembered I'm not supposed to. What foods should I avoid, and should I be worried?</em>\" (She has no fever or flu-like symptoms now.)</p></li><li><p>\"<em>I take my aspirin every night. I think the midwife said something about stopping it at some point but I can't remember. Should I keep taking it until the baby comes?</em>\" (She took her last dose last night and has not taken tonight's.)</p></li><li><p>\"<em>I had pre-eclampsia last time and now sugar diabetes in this pregnancy. Does that mean anything for my health later on?</em>\"</p></li><li><p>(Only if time allows) \"<em>My cousin is having twins. She says they share one sac but have two separate placentas. Is that possible?</em>\"</p></li></ol><p><em>The candidate may ask further questions of you – use only the provided history above.</em></p><p><em>The candidate should interact with you using non-medical terminology. Please interrupt the candidate if they use medical terminology that would not be clearly understood by the lay public.</em></p>",
+ "patient": "<p><strong>Role:</strong> You are Rachel Bennett, a 34-year-old primary school teacher (on leave), 36 weeks and 2 days into your third pregnancy, in the maternity day assessment unit. You are not Aboriginal or Torres Strait Islander. The examiner gives examination findings from the Exam findings when the candidate says what they would examine.</p><p><strong>Demeanour:</strong> Pale, tearful and tense. You sit forward, hold your abdomen and keep checking the clock. You speak quickly, and calm a little if the candidate is warm and unhurried.</p><p><strong>Opening line:</strong> \"I haven't felt the baby move much since last night. I'm so scared it's happening again.\"</p><p><strong>Reduced movements (give only when asked):</strong></p><ul><li>The baby is usually very active, especially after dinner and when you lie down in the evening.</li><li>Since about 6 pm yesterday you have felt only a few weak flutters. This morning you felt perhaps two small movements.</li><li>You tried a cold drink and lying on your left side. This did not help much.</li><li>No vaginal bleeding, no fluid leaking, no abdominal pain or tightenings, no fall or injury to your abdomen.</li><li>No fever, chills, sore throat or flu-like illness at any point in the pregnancy.</li><li>No headache, problems with your vision, pain under the ribs or new swelling.</li><li>You go to sleep on your side but often wake on your back.</li><li>You waited about 18 hours before coming in because you did not want to \"waste anyone's time\". If asked, say you are sorry you did not come sooner.</li></ul><p><strong>Obstetric history:</strong></p><ul><li>This is your third pregnancy.</li><li>First pregnancy: miscarriage at 9 weeks.</li><li>Second pregnancy, two years ago: pre-eclampsia (high blood pressure and protein in the urine) diagnosed at 37 weeks. Your son was stillborn at 39 weeks, before the planned induction. No cause was found other than a small placenta.</li><li>You have no living children. If asked, say: \"I've never taken a baby home.\"</li><li>If the candidate gives a summary such as G3, T1 P0 A1 L0, you do not need to comment.</li></ul><p><strong>This pregnancy:</strong></p><ul><li>Single baby, conceived naturally. Regular antenatal visits.</li><li>Aspirin 150 mg every night, started at 13 weeks because of the pre-eclampsia last time.</li><li>Gestational diabetes diagnosed at 27 weeks on a glucose tolerance test, managed with diet only. Home sugar readings have been fine.</li><li>Growth scan at 32 weeks was normal. Blood pressure has been normal this pregnancy.</li></ul><p><strong>Medical history:</strong> nil else. No mental health diagnosis before the stillbirth. <strong>Medicines:</strong> aspirin 150 mg at night and a pregnancy multivitamin with iodine. <strong>Allergies:</strong> none.</p><p><strong>Social history:</strong> you live with your husband, Daniel, who is very supportive. Non-smoker. No alcohol or drugs since conceiving.</p><p><strong>Mood (give if asked):</strong> very anxious since the stillbirth and sleeping poorly; you count movements through the night. You feel low at times but have no thoughts of harming yourself. You have not seen a counsellor this pregnancy and would like help if offered.</p><p><strong>Ideas, concerns and expectations:</strong> you are terrified the baby will die like your son. You want someone to check the baby properly. You hope to be told everything is fine so you can go home.</p><p><strong>During the examination:</strong> if the candidate listens to the baby's heartbeat, ask \"Is that the heartbeat? Is it normal?\" Say you feel a small movement while your abdomen is being examined.</p><p><strong>Questions to raise near the end of Part 1</strong> (the candidate may answer them now or in Part 2):</p><ol><li>\"Yesterday Daniel bought me a ham and brie baguette. I ate half before I remembered I'm not supposed to. Should I be worried?\" (You have no fever or flu-like symptoms.)</li><li>\"I take my aspirin every night. I think the midwife said something about stopping it at some point. Should I keep taking it until the baby comes?\" (You took your last dose last night.)</li></ol><p><strong>In Part 2, if the candidate speaks to you:</strong> if told the trace is normal, ask \"So the baby is fine? Can I go home?\" If told the baby is definitely fine, become more distressed: \"They said that last time too.\" If the candidate explains that the trace cannot guarantee everything is fine and offers an ultrasound, accept with relief. Ask \"Is it going to be all right this time? Please just tell me it will be.\" If there is time, ask \"I had pre-eclampsia last time and sugar diabetes this time. Does that mean anything for my health later on?\" If the candidate does not say when to come back, ask \"What if it happens again when I get home?\"</p><p>If the candidate uses jargon (CTG, liquor, EFW, OGTT, listeriosis), interrupt and ask what it means.</p>",
  "points": [
   "A normal CTG for reduced fetal movements is reassuring but not a guarantee, so offer an ultrasound and advise her to come in again straight away, at any hour, if movements change.",
   "After a previous stillbirth, acknowledge the loss and validate the anxiety. Do not promise a good outcome, but promise to take her worries seriously and plan monitoring and support together.",
@@ -339,15 +327,43 @@
  "specialty": [
   "Obstetrics"
  ],
- "stem": "<p>You are the junior doctor in the maternity day assessment unit of a metropolitan public hospital. Your patient is Rachel Bennett, a 34-year-old woman at 36+2 weeks of pregnancy. She presented 45 minutes ago because she has felt her baby moving less since yesterday evening.</p><p>The midwife has recorded observations and performed a 40-minute CTG. You and the registrar have reviewed the trace and it is normal (baseline 140 bpm, normal variability, accelerations present, no decelerations). The registrar has asked you to speak with Rachel while they review another patient.</p><ul><li><p>BP: 116/72 mmHg</p></li><li><p>HR: 84 bpm</p></li><li><p>T: 36.8°C</p></li><li><p>RR: 16 breaths per minute</p></li><li><p>O2 Sats: 99% on room air</p></li><li><p>Urine dipstick: protein nil, glucose nil</p></li></ul><p>An ultrasound slot is available in the unit today if requested. You do not need to examine Rachel.</p>",
+ "stem": "<p>You are the junior doctor in the maternity day assessment unit of a metropolitan public hospital. Rachel Bennett, a 34-year-old woman who is 36 weeks and 2 days pregnant, has come in because she has felt her baby moving less since yesterday evening. The midwife has recorded her observations and started a CTG. The registrar has asked you to see Rachel while they review another patient.</p>",
  "tasks": [
-  "<p>Take a <strong>focused history</strong> from Rachel, including her obstetric history (3 minutes).</p>",
-  "<p><strong>Explain</strong> the CTG result and the next steps to Rachel, and <strong>respond</strong> to her worries (2 minutes).</p>",
-  "<p><strong>Answer</strong> Rachel's questions (3 minutes).</p>"
+  "<p>Take a focused <strong>history</strong> from Rachel, including her obstetric history, and perform a focused <strong>examination</strong>, telling the examiner what you are examining and why (10 minutes).</p>",
+  "<p>The examiner will give you Rachel's observations, urinalysis and CTG. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, including your answers to Rachel's questions, and your <strong>safety netting</strong> (5 minutes).</p>"
  ],
  "title": "Reduced movements and worry after a previous stillbirth",
  "type": [
   "History",
+  "Examination",
+  "Interpretation",
   "Counselling"
- ]
+ ],
+ "part2": {
+  "lead": "Here are Rachel's observations and urinalysis, and her 40-minute CTG.",
+  "handover": [
+   {
+    "label": "Maternal observations and urinalysis",
+    "result": "<p>BP 116/72 mmHg on two readings 10 minutes apart, HR 84, RR 16, temperature 36.8 °C, SpO2 99% on room air. Urine dipstick: protein nil, glucose nil. Capillary glucose 5.1 mmol/L.</p>"
+   },
+   {
+    "label": "CTG (40 minutes)",
+    "result": "<p>Baseline fetal heart rate 140 bpm. Variability 10 bpm. Accelerations present. No decelerations. No contractions. Rachel felt the baby move a little during the trace.</p>"
+   },
+   {
+    "label": "Ultrasound",
+    "result": "<p>Not yet done. A slot is available in the unit today if the candidate requests it.</p>"
+   }
+  ],
+  "ask": [
+   "What do the observations, urinalysis and CTG show, and how reassuring are they for Rachel?",
+   "What is your assessment of Rachel's risk, and what else would you want to exclude?",
+   "What is your management plan today? Include what you tell Rachel about her aspirin and the baguette she ate.",
+   "What safety netting and follow-up would you give, including what her pre-eclampsia and gestational diabetes mean for her health later in life?"
+  ]
+ },
+ "revised": {
+  "at": "2026-10-23",
+  "by": "format 5/10/5"
+ }
 }

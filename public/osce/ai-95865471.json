@@ -15,6 +15,8 @@
   },
   {
    "id": 2,
+   "t": "checkbox",
+   "x": "Hand hygiene and clear introduction:",
    "kids": [
     {
      "id": 1,
@@ -26,14 +28,12 @@
      "t": "checkbox",
      "x": "Explains the purpose of the consultation."
     }
-   ],
-   "t": "checkbox",
-   "x": "Hand hygiene and clear introduction."
+   ]
   },
   {
    "id": 3,
    "t": "checkbox",
-   "x": "Uses plain language, empathy and appropriate non-verbal communication throughout."
+   "x": "Uses plain language, empathy and appropriate non-verbal communication throughout, facing her and speaking towards her better ear."
   },
   {
    "id": 4,
@@ -42,6 +42,8 @@
   },
   {
    "id": 5,
+   "t": "checkbox",
+   "x": "Characterises the hearing loss:",
    "kids": [
     {
      "id": 1,
@@ -56,14 +58,14 @@
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Asks about previous episodes or previous hearing problems."
+     "x": "Previous episodes or previous hearing problems."
     }
-   ],
-   "t": "checkbox",
-   "x": "Characterises the hearing loss."
+   ]
   },
   {
    "id": 6,
+   "t": "checkbox",
+   "x": "Asks about associated ear symptoms:",
    "kids": [
     {
      "id": 1,
@@ -73,25 +75,25 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "No otalgia or otorrhoea."
+     "x": "Otalgia, otorrhoea or itch."
     },
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Asks specifically about vertigo and imbalance (brief unsteadiness yesterday, now resolved)."
+     "x": "Vertigo and imbalance (brief unsteadiness yesterday, now resolved)."
     }
-   ],
-   "t": "checkbox",
-   "x": "Asks about associated ear symptoms."
+   ]
   },
   {
-   "crit": true,
    "id": 7,
    "t": "checkbox",
-   "x": "Screens for stroke and central red flags: facial droop, limb weakness or numbness, speech or visual disturbance, severe headache."
+   "x": "Screens for stroke and central red flags: facial droop, limb weakness or numbness, speech, swallowing or visual disturbance, severe headache.",
+   "crit": true
   },
   {
    "id": 8,
+   "t": "checkbox",
+   "x": "Explores possible causes:",
    "kids": [
     {
      "id": 1,
@@ -106,26 +108,26 @@
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Ear history and surgery, and previous self-treatment (olive oil drops)."
+     "x": "Ear history and surgery, and self-treatment (olive oil drops)."
     }
-   ],
-   "t": "checkbox",
-   "x": "Explores possible causes."
+   ]
   },
   {
-   "crit": true,
    "id": 9,
    "t": "checkbox",
-   "x": "Asks about ototoxic drugs (aminoglycosides, loop diuretics, chemotherapy, high-dose aspirin or NSAIDs)."
+   "x": "Asks about ototoxic drugs (aminoglycosides, loop diuretics, chemotherapy, high-dose aspirin or NSAIDs).",
+   "crit": true
   },
   {
    "id": 10,
+   "t": "checkbox",
+   "x": "Elicits medical history relevant to corticosteroid treatment and vascular risk:",
    "kids": [
     {
-     "crit": true,
      "id": 1,
      "t": "checkbox",
-     "x": "Type 2 diabetes recognised as relevant to steroid use."
+     "x": "Type 2 diabetes, recognised as relevant to steroid use.",
+     "crit": true
     },
     {
      "id": 2,
@@ -135,73 +137,133 @@
     {
      "id": 3,
      "t": "checkbox",
-     "x": "Asks about peptic ulcer disease and mental health history."
+     "x": "Peptic ulcer disease and mental health history."
     }
-   ],
-   "t": "checkbox",
-   "x": "Elicits medical history relevant to corticosteroid treatment and vascular risk."
+   ]
   },
   {
    "id": 11,
    "t": "checkbox",
-   "x": "Takes medication history and allergies (metformin, candesartan, no ototoxics, no known allergies)."
+   "x": "Takes a medication history and allergies."
   },
   {
    "id": 12,
    "t": "checkbox",
-   "x": "Takes family and social history (family hearing loss, mother's stroke, occupation, alcohol, smoking, earbud use)."
+   "x": "Takes a family and social history (family hearing loss, mother's stroke, occupation, alcohol, smoking, earbud use)."
   },
   {
    "id": 13,
    "t": "checkbox",
-   "x": "Elicits ideas, concerns and expectations (wax or cold; fear of stroke, tumour or permanent deafness; expects flush or antibiotics)."
+   "x": "Elicits ideas, concerns and expectations (wax or the cold; fear of stroke, tumour or permanent deafness; expects a flush or antibiotics)."
   },
   {
    "id": 14,
    "t": "heading",
-   "x": "Interpretation"
+   "x": "Examination"
   },
   {
    "id": 15,
    "t": "checkbox",
-   "x": "Interprets otoscopy: normal canals and drums make wax, otitis externa or media, and perforation unlikely."
+   "x": "Inspects the external ears and mastoids, and performs otoscopy of both canals and tympanic membranes."
   },
   {
-   "crit": true,
    "id": 16,
    "t": "checkbox",
-   "x": "Interprets tuning fork tests: Weber to the right with Rinne positive bilaterally indicates a left sensorineural hearing loss."
+   "x": "Performs Weber and Rinne tests with a 512 Hz tuning fork, and a whisper or finger-rub test of each ear."
   },
   {
    "id": 17,
    "t": "checkbox",
-   "x": "Recognises sudden sensorineural hearing loss as a time-critical presentation needing same-day action, and notes the cause is often idiopathic but other causes must be excluded."
+   "x": "Examines the cranial nerves, including facial nerve function and eye movements, and looks for nystagmus.",
+   "crit": true
   },
   {
    "id": 18,
-   "t": "heading",
-   "x": "Investigations"
+   "t": "checkbox",
+   "x": "Checks coordination and gait (finger-nose, gait, Romberg) and a head impulse test."
   },
   {
-   "crit": true,
    "id": 19,
    "t": "checkbox",
-   "x": "Explains that an urgent pure-tone audiogram is needed to confirm a sensorineural loss and measure its degree, since tuning forks are only a screen."
+   "x": "Asks for observations, including blood pressure and capillary blood glucose."
   },
   {
-   "crit": true,
    "id": 20,
-   "t": "checkbox",
-   "x": "Explains MRI of the internal auditory canals is needed to exclude a retrocochlear lesion such as a vestibular schwannoma, which can present as sudden hearing loss."
+   "t": "heading",
+   "x": "Interpretation"
   },
   {
-   "crit": true,
    "id": 21,
    "t": "checkbox",
-   "x": "Explains the MRI is still required even if hearing improves with steroids, because improvement does not exclude a retrocochlear lesion."
+   "x": "Normal otoscopy makes wax, otitis externa or media, and perforation unlikely."
   },
   {
    "id": 22,
+   "t": "checkbox",
+   "x": "Weber to the right with Rinne positive on both sides indicates a left sensorineural hearing loss.",
+   "crit": true
+  },
+  {
+   "id": 23,
+   "t": "checkbox",
+   "x": "Audiogram: left sensorineural loss of 40 to 70 dB with no air-bone gap, at least 30 dB worse than the right over three or more contiguous frequencies, with poor speech discrimination; with onset within 72 hours this confirms sudden sensorineural hearing loss.",
+   "crit": true
+  },
+  {
+   "id": 24,
+   "t": "checkbox",
+   "x": "Tympanometry type A confirms a normal middle ear (no effusion or conductive cause); HbA1c 7.4% shows reasonably controlled diabetes that steroids will worsen; normal kidney function."
+  },
+  {
+   "id": 25,
+   "t": "checkbox",
+   "x": "Recognises sudden sensorineural hearing loss as time-critical, usually idiopathic, and names causes to exclude: a retrocochlear lesion such as vestibular schwannoma, posterior circulation stroke, and ototoxic, infective or autoimmune causes."
+  },
+  {
+   "id": 26,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "Arranges urgent same-day contact with ENT or the local ENT pathway.",
+   "crit": true
+  },
+  {
+   "id": 28,
+   "t": "checkbox",
+   "x": "Starts a corticosteroid promptly, without waiting for the MRI:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Oral prednisolone, dose and duration per local guideline or ENT advice (commonly 1 mg/kg up to 60 mg daily, so 60 mg for her 72 kg, for 7 to 14 days).",
+     "crit": true
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Mentions intratympanic steroid as an ENT-led option, for example if oral steroids are contraindicated or as salvage."
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "t": "checkbox",
+   "x": "Explains that MRI of the internal auditory canals is needed to exclude a retrocochlear lesion such as a vestibular schwannoma, which can present as sudden hearing loss.",
+   "crit": true
+  },
+  {
+   "id": 30,
+   "t": "checkbox",
+   "x": "Explains that the MRI is still required even if her hearing improves with steroids, because improvement does not exclude a retrocochlear lesion.",
+   "crit": true
+  },
+  {
+   "id": 31,
+   "t": "checkbox",
+   "x": "Addresses MRI concerns:",
    "kids": [
     {
      "id": 1,
@@ -211,115 +273,77 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Explores claustrophobia and offers options (explanation, practical support, anxiolytic if needed, discussion with radiology)."
+     "x": "Acknowledges her claustrophobia and offers options (explanation, a support person, an anxiolytic if needed, discussion with radiology about a wider-bore scanner)."
     }
-   ],
-   "t": "checkbox",
-   "x": "Addresses MRI concerns."
-  },
-  {
-   "id": 23,
-   "t": "heading",
-   "x": "Management"
-  },
-  {
-   "crit": true,
-   "id": 24,
-   "t": "checkbox",
-   "x": "Arranges urgent same-day contact with ENT or the local ENT pathway for assessment and audiology."
-  },
-  {
-   "id": 25,
-   "kids": [
-    {
-     "crit": true,
-     "id": 1,
-     "t": "checkbox",
-     "x": "Oral prednisolone, dose and duration per local guideline or ENT advice (commonly about 1 mg/kg up to 60 mg daily for 7 to 14 days)."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Mentions intratympanic steroid as an ENT-led option, for example if oral steroids are contraindicated or as salvage."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Starts a corticosteroid promptly without waiting for the MRI result."
-  },
-  {
-   "id": 26,
-   "t": "checkbox",
-   "x": "Explains why antibiotics and ear syringing are not indicated (no infection, no wax)."
-  },
-  {
-   "id": 27,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Warns steroids will raise blood glucose."
-    },
-    {
-     "id": 2,
-     "t": "checkbox",
-     "x": "Gives a plan for home glucose monitoring and early review or medication adjustment."
-    },
-    {
-     "id": 3,
-     "t": "checkbox",
-     "x": "Mentions other steroid adverse effects (insomnia, mood change, indigestion) and taking it in the morning with food."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Addresses diabetes and steroid safety."
-  },
-  {
-   "crit": true,
-   "id": 28,
-   "t": "checkbox",
-   "x": "Gives clear safety-net advice: attend ED immediately for vertigo, facial or limb weakness, speech or visual change, severe headache, or hearing loss in the other ear."
-  },
-  {
-   "id": 29,
-   "t": "checkbox",
-   "x": "Arranges follow-up: repeat audiogram and review, ENT follow-up, hearing rehabilitation if the loss persists."
-  },
-  {
-   "id": 30,
-   "t": "heading",
-   "x": "Communication"
-  },
-  {
-   "id": 31,
-   "kids": [
-    {
-     "id": 1,
-     "t": "checkbox",
-     "x": "Explains why waiting over the weekend is unsafe (earlier treatment gives a better chance of recovery)."
-    }
-   ],
-   "t": "checkbox",
-   "x": "Explains the likely diagnosis and plan in plain language and checks understanding."
+   ]
   },
   {
    "id": 32,
    "t": "checkbox",
-   "x": "Addresses the patient's fears and gives honest prognosis: many recover some or all hearing, outcome is uncertain, and earlier treatment is better."
+   "x": "Explains why an ear flush and antibiotics are not indicated (no wax, no infection)."
+  },
+  {
+   "id": 33,
+   "t": "checkbox",
+   "x": "Addresses diabetes and steroid safety:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Warns that steroids will raise her blood glucose."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Gives a plan for home glucose monitoring, especially in the afternoon, with early review or medication adjustment if readings run high."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Mentions other steroid adverse effects (insomnia, mood change, indigestion) and taking the tablets in the morning with food."
+    }
+   ]
+  },
+  {
+   "id": 34,
+   "t": "checkbox",
+   "x": "Explains the likely diagnosis and plan in plain language, and why waiting over the weekend is unsafe: earlier treatment gives a better chance of recovery."
+  },
+  {
+   "id": 35,
+   "t": "checkbox",
+   "x": "Gives an honest prognosis: many people recover some or all of their hearing, the outcome is uncertain, and earlier treatment is better."
+  },
+  {
+   "id": 36,
+   "t": "heading",
+   "x": "Safety netting"
+  },
+  {
+   "id": 37,
+   "t": "checkbox",
+   "x": "Tells her to go to the Emergency Department immediately or call 000 for vertigo, facial or limb weakness or numbness, speech or visual change, severe headache, or hearing loss in the other ear.",
+   "crit": true
+  },
+  {
+   "id": 38,
+   "t": "checkbox",
+   "x": "Arranges follow-up: ENT review, a repeat audiogram to measure the response, a glucose check within a few days of starting steroids, the MRI result, and hearing rehabilitation if the loss persists."
   }
  ],
  "complexity": "Moderate",
  "context": [],
- "desc": "This station involves taking a focused history from a patient with sudden hearing loss in one ear, interpreting bedside findings, and explaining the urgent investigations (including why an MRI is needed) and initial steroid treatment.",
+ "desc": "This station involves a focused history and ear and neurological examination of a woman with sudden hearing loss in one ear, then interpreting her audiogram, tympanometry and recent bloods, and explaining the urgent management: same-day ENT contact, prompt steroids with a diabetes plan, an MRI to exclude a retrocochlear lesion, and safety netting.",
  "diagnosis": [
   "Sudden sensorineural hearing loss"
  ],
- "explain": "<h3>Sudden sensorineural hearing loss (SSNHL)</h3><p>SSNHL is usually defined as a sensorineural loss of at least 30 dB over three contiguous frequencies developing within 72 hours. It is typically unilateral. Most cases remain idiopathic, but the first priority is to confirm that the loss is sensorineural rather than conductive, and to exclude dangerous mimics. It should be managed as urgent because earlier treatment is associated with better recovery.</p><h3>Why the history matters</h3><ul><li><p><strong>Central red flags:</strong> Vertigo with facial, limb, speech or visual symptoms may indicate a posterior circulation (for example AICA) stroke, which can present with sudden hearing loss. This patient has vascular risk factors (diabetes, hypertension).</p></li><li><p><strong>Ototoxic drugs:</strong> Aminoglycosides, loop diuretics, platinum chemotherapy and high-dose salicylates should be identified.</p></li><li><p><strong>Other triggers:</strong> Trauma, barotrauma, infection, noise and previous ear disease point to alternative causes or conductive loss.</p></li><li><p><strong>Steroid safety:</strong> Diabetes, peptic ulcer disease and psychiatric history change the plan.</p></li></ul><h3>Bedside interpretation</h3><p>Normal otoscopy makes wax, otitis and perforation unlikely. In a sensorineural loss the Weber lateralises to the <strong>better</strong> ear and the Rinne remains positive (air conduction better than bone conduction) on both sides. A conductive loss would lateralise to the affected ear with a negative Rinne on that side. Tuning forks are a screen only, so an audiogram is required.</p><h3>Investigations and why</h3><ul><li><p><strong>Audiogram (pure-tone):</strong> confirms a sensorineural pattern and quantifies the loss. It also provides a baseline for monitoring treatment response.</p></li><li><p><strong>MRI of the internal auditory canals:</strong> excludes a retrocochlear lesion such as a vestibular schwannoma, which can present as SSNHL. Hearing may partly recover with steroids even when a lesion is present, so improvement does not exclude it. MRI should be arranged regardless of response, and it must not delay starting steroids.</p></li><li><p><strong>Other tests</strong> (for example glucose, and tympanometry or bloods as directed by ENT) are guided by the clinical picture.</p></li></ul><h3>Management</h3><ul><li><p>Contact ENT the same day (local pathway) and arrange urgent audiology.</p></li><li><p>Start a corticosteroid promptly. Oral prednisolone is commonly used at about 1 mg/kg up to 60 mg daily for 7 to 14 days, but doses should follow the local guideline and ENT advice. Intratympanic steroid is an ENT-led option for those who cannot take oral steroids or as salvage therapy.</p></li><li><p>In diabetes, warn about hyperglycaemia, arrange home glucose monitoring, and review early for medication adjustment.</p></li><li><p>Antibiotics and ear syringing have no role here.</p></li><li><p>Safety-net for stroke symptoms, vertigo and bilateral hearing loss. Arrange follow-up with repeat audiogram and consider hearing rehabilitation if recovery is incomplete.</p></li></ul><h3>Communication</h3><p>Acknowledge fears about stroke, tumour and deafness. Explain that MRI is both a safety check and part of the standard work-up, and address practical barriers such as claustrophobia. Be honest that many patients recover some or all of their hearing, but that the outcome cannot be guaranteed.</p>",
+ "explain": "<h3>Sudden sensorineural hearing loss (SSNHL)</h3><p>SSNHL is usually defined as a sensorineural loss of at least 30 dB over three contiguous frequencies developing within 72 hours. It is typically unilateral. Most cases remain idiopathic, but the first priority is to confirm that the loss is sensorineural rather than conductive, and to exclude dangerous mimics. It should be managed as urgent because earlier treatment is associated with better recovery.</p><h3>Why the history matters</h3><ul><li><p><strong>Central red flags:</strong> Vertigo with facial, limb, speech or visual symptoms may indicate a posterior circulation (for example AICA) stroke, which can present with sudden hearing loss. This patient has vascular risk factors (diabetes, hypertension).</p></li><li><p><strong>Ototoxic drugs:</strong> Aminoglycosides, loop diuretics, platinum chemotherapy and high-dose salicylates should be identified.</p></li><li><p><strong>Other triggers:</strong> Trauma, barotrauma, infection, noise and previous ear disease point to alternative causes or conductive loss.</p></li><li><p><strong>Steroid safety:</strong> Diabetes, peptic ulcer disease and psychiatric history change the plan.</p></li></ul><h3>Bedside interpretation</h3><p>Normal otoscopy makes wax, otitis and perforation unlikely. In a sensorineural loss the Weber lateralises to the <strong>better</strong> ear and the Rinne remains positive (air conduction better than bone conduction) on both sides. A conductive loss would lateralise to the affected ear with a negative Rinne on that side. Tuning forks are a screen only, so an audiogram is required.</p><h3>Interpreting the audiogram and tympanometry</h3><p>The audiogram confirms the bedside findings. The left air conduction thresholds are 40 to 70 dB, worse in the high frequencies, and the masked bone conduction thresholds match them, so there is no air-bone gap: the loss is sensorineural, not conductive. The left ear is more than 30 dB worse than the right over three or more contiguous frequencies, and with onset within 72 hours this meets the definition of SSNHL. Poor speech discrimination (64%) shows how much the loss affects her day to day and gives a baseline for recovery. Type A tympanograms confirm a normal middle ear. Her HbA1c of 7.4% matters because steroids will raise her glucose. The audiogram also provides the baseline for monitoring the response to treatment.</p><h3>Investigations and why</h3><ul><li><p><strong>Audiogram (pure-tone):</strong> confirms a sensorineural pattern and quantifies the loss. It also provides a baseline for monitoring treatment response.</p></li><li><p><strong>MRI of the internal auditory canals:</strong> excludes a retrocochlear lesion such as a vestibular schwannoma, which can present as SSNHL. Hearing may partly recover with steroids even when a lesion is present, so improvement does not exclude it. MRI should be arranged regardless of response, and it must not delay starting steroids.</p></li><li><p><strong>Other tests</strong> (for example glucose, and bloods as directed by ENT) are guided by the clinical picture.</p></li></ul><h3>Management</h3><ul><li><p>Contact ENT the same day (local pathway) and arrange urgent audiology.</p></li><li><p>Start a corticosteroid promptly. Oral prednisolone is commonly used at about 1 mg/kg up to 60 mg daily for 7 to 14 days, but doses should follow the local guideline and ENT advice. Intratympanic steroid is an ENT-led option for those who cannot take oral steroids or as salvage therapy.</p></li><li><p>In diabetes, warn about hyperglycaemia, arrange home glucose monitoring, and review early for medication adjustment.</p></li><li><p>Antibiotics and ear syringing have no role here.</p></li><li><p>Safety-net for stroke symptoms, vertigo and hearing loss in the other ear. Arrange follow-up with repeat audiogram and consider hearing rehabilitation if recovery is incomplete.</p></li></ul><h3>Communication</h3><p>Acknowledge fears about stroke, tumour and deafness. Explain that MRI is both a safety check and part of the standard work-up, and address practical barriers such as claustrophobia. Explain that waiting over the weekend is not safe because earlier treatment gives a better chance of recovery. Be honest that many patients recover some or all of their hearing, but that the outcome cannot be guaranteed.</p>",
  "focus": "Sudden hearing loss",
- "guide": "<p>A <strong>high-performing candidate</strong> takes a structured history that screens for stroke red flags, ototoxic drugs and recent triggers, and identifies diabetes as relevant to steroid use. They interpret Weber to the right with a positive Rinne bilaterally as a left sensorineural loss, treat it as urgent, and arrange an audiogram and same-day ENT contact. They explain clearly that MRI of the internal auditory canals is needed to exclude a retrocochlear lesion such as a vestibular schwannoma, even if the hearing recovers. They start oral steroids without waiting for imaging, give a diabetes plan, safety-net and follow-up, and respond to the claustrophobia, antibiotic and \"wait and see\" concerns empathetically.</p><p>A <strong>borderline candidate</strong> recognises a sensorineural loss and offers steroids and ENT referral, but gives vague reasons for the MRI (\"to see what is going on\") and cannot explain why it is needed if steroids work. They may overlook ototoxic drugs, central red flags or the diabetes interaction, or delay treatment until the scan, or accept the ear flush or antibiotic request.</p>",
+ "guide": "<p>In Part 1, the examiner gives findings from the Exam findings only when the candidate says what they would examine. A <strong>high-performing candidate</strong> takes a structured history that screens for stroke red flags, ototoxic drugs and recent triggers, identifies diabetes as relevant to steroid use, and examines the ears, tuning forks, cranial nerves and balance. In Part 2 they read the audiogram as a left sensorineural loss with no air-bone gap that meets the definition of sudden sensorineural hearing loss, consistent with Weber to the right and a positive Rinne on both sides, and treat it as urgent: same-day ENT contact and oral steroids without waiting for imaging, with a diabetes plan. They explain clearly that MRI of the internal auditory canals is needed to exclude a retrocochlear lesion such as a vestibular schwannoma, even if the hearing recovers, respond to her claustrophobia and her wish to wait, and give specific red flags and follow-up.</p><p>A <strong>borderline candidate</strong> recognises a sensorineural loss and offers steroids and ENT referral, but gives vague reasons for the MRI (\"to see what is going on\") and cannot explain why it is needed if steroids work. They may overlook ototoxic drugs, central red flags or the diabetes interaction, delay treatment until the scan, or accept the ear flush or antibiotic request.</p>",
  "id": "ai-95865471",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name:</strong> Jenny Halloran.</p></li><li><p><strong>Age:</strong> 52 years.</p></li><li><p><strong>Aboriginal or Torres Strait Islander:</strong> No.</p></li><li><p><strong>Setting:</strong> General practice clinic. You are anxious but cooperative.</p></li></ul><p><strong>Presenting complaint:</strong> \"My left ear is blocked and I can't hear properly out of it.\"</p><p><strong>History of presenting complaint (give only when asked):</strong></p><ul><li><p><strong>Onset:</strong> Woke two days ago (Wednesday) with the left ear sounding muffled, \"like I have my head underwater\". It was a bit worse by the end of that day and has not changed since. It did not come and go.</p></li><li><p><strong>Severity:</strong> On the phone you cannot make out words in the left ear. You have to swap ears. Right ear is normal.</p></li><li><p><strong>Tinnitus and fullness:</strong> Constant high-pitched ringing in the left ear since waking, and a feeling of fullness.</p></li><li><p><strong>Pain, discharge, itch:</strong> None.</p></li><li><p><strong>Dizziness:</strong> No spinning. Yesterday you felt slightly unsteady when turning quickly, but this has settled. (Only reveal if asked about balance or dizziness.)</p></li><li><p><strong>Red flags:</strong> No facial droop, limb weakness or numbness, speech or swallowing difficulty, double or blurred vision, or severe headache. No head injury.</p></li><li><p><strong>Possible triggers:</strong> Cold with a blocked nose two weeks ago, now resolved. No flying, diving, straining or barotrauma. No loud noise exposure (you use earbuds on the train at moderate volume).</p></li><li><p><strong>Self-treatment:</strong> Tried olive oil drops for two days. They did not help.</p></li><li><p><strong>Previous episodes:</strong> Never had this before. No previous hearing problems, ear infections, ear surgery or hearing tests.</p></li></ul><p><strong>Past medical history:</strong></p><ul><li><p>Type 2 diabetes, diagnosed 6 years ago; \"sugars are okay\".</p></li><li><p>Hypertension.</p></li><li><p>No stomach ulcers, no mental health history, no previous stroke or heart disease.</p></li></ul><p><strong>Medications:</strong> Metformin and candesartan (doses not known). Occasional paracetamol. No aminoglycoside antibiotics, frusemide, chemotherapy, aspirin or regular anti-inflammatories. No herbal remedies.</p><p><strong>Allergies:</strong> Nil known. <strong>Vaccinations:</strong> Up to date.</p><p><strong>Family history:</strong> No hearing loss. Mother had a stroke at 75.</p><p><strong>Social history:</strong> Bookkeeper. Lives with partner and teenage son. Non-smoker. Two standard drinks, two or three nights a week. No recreational drugs. Walks occasionally.</p><p><strong>ICE:</strong></p><ul><li><p><strong>Ideas:</strong> Wax, or a blocked ear left over from the cold.</p></li><li><p><strong>Concerns:</strong> That it could be a stroke or a brain tumour, and that the hearing will not come back.</p></li><li><p><strong>Expectations:</strong> An ear flush or antibiotics.</p></li></ul><p><strong>Examiner provides at 3 minutes (read out or hand over):</strong></p><ul><li><p>Otoscopy: both canals clear, no wax, both tympanic membranes intact and normal.</p></li><li><p>Weber test: lateralises to the <strong>right</strong> ear.</p></li><li><p>Rinne test: air conduction better than bone conduction (positive) in both ears.</p></li><li><p>Cranial nerves including facial nerve normal. Limb power, sensation and finger-nose normal. Gait normal. No nystagmus.</p></li></ul><p><strong>Questions to ask during task 2 (prompt if the candidate does not cover them):</strong></p><ul><li><p>\"Can't you just flush my ear or give me antibiotics?\"</p></li><li><p>\"If these tablets might fix it, why do I need a scan of my head as well?\"</p></li><li><p>\"I got very panicky in a small scanner once when I had my knee done. Do I have to have it?\"</p></li><li><p>\"I'm diabetic. Is it safe for me to take steroid tablets?\"</p></li><li><p>\"Can I wait and see how it goes over the weekend?\"</p></li><li><p>\"Will I get my hearing back?\"</p></li></ul><p><em>Use only the history above. Speak in lay terms and ask the candidate to explain any jargon. You have no pacemaker or metal implants (only reveal if asked).</em></p>",
+ "patient": "<p><strong>Role:</strong> You are Jenny Halloran, a 52-year-old bookkeeper. You are anxious but cooperative. Speak in lay terms and ask the candidate to explain any jargon. The examiner gives examination findings from the Exam findings when the candidate says what they would examine.</p><p><strong>Opening line:</strong> \"My left ear is blocked and I can't hear properly out of it.\"</p><p><strong>The hearing loss (give only when asked):</strong></p><ul><li><strong>Onset:</strong> You woke two days ago (Wednesday) with the left ear sounding muffled, \"like I have my head underwater\". It was a bit worse by the end of that day and has not changed since. It does not come and go.</li><li><strong>Severity:</strong> On the phone you cannot make out words in the left ear and have to swap ears. The right ear is normal.</li><li><strong>Tinnitus and fullness:</strong> Constant high-pitched ringing in the left ear since waking, and a feeling of fullness.</li><li><strong>Pain, discharge, itch:</strong> None.</li><li><strong>Dizziness:</strong> No spinning. Yesterday you felt slightly unsteady when turning quickly, but this has settled. (Only reveal if asked about balance or dizziness.)</li><li><strong>Red flags:</strong> No facial droop, limb weakness or numbness, speech or swallowing difficulty, double or blurred vision, or severe headache. No head injury.</li><li><strong>Possible triggers:</strong> A cold with a blocked nose two weeks ago, now resolved. No flying, diving, straining or barotrauma. No loud noise exposure (you use earbuds on the train at moderate volume).</li><li><strong>Self-treatment:</strong> Olive oil drops for two days, which did not help.</li><li><strong>Previous episodes:</strong> Never had this before. No previous hearing problems, ear infections, ear surgery or hearing tests.</li></ul><p><strong>Past medical history:</strong> Type 2 diabetes for 6 years (\"sugars are okay\"). Hypertension. No stomach ulcers, no mental health history, no previous stroke or heart disease. Three years ago you had an MRI of your knee and panicked in the scanner; they had to stop and start again (only if asked about scans or small spaces). You have no pacemaker or metal implants (only if asked).</p><p><strong>Medications:</strong> Metformin and candesartan (doses not known). Occasional paracetamol. No aminoglycoside antibiotics, frusemide, chemotherapy, aspirin or regular anti-inflammatories. No herbal remedies. <strong>Allergies:</strong> nil known. <strong>Vaccinations:</strong> up to date.</p><p><strong>Family history:</strong> No hearing loss in the family. Your mother had a stroke at 75.</p><p><strong>Social history:</strong> Lives with partner and teenage son. Non-smoker. Two standard drinks two or three nights a week. No recreational drugs. Walks occasionally.</p><p><strong>Ideas, concerns, expectations:</strong> You think it is wax, or a blocked ear left over from the cold. You are worried it could be a stroke or a brain tumour, and that the hearing will not come back. You expect an ear flush or antibiotics.</p><p><strong>Things to say:</strong> Early on: \"I think it's just wax. Can't you just flush it out?\" If there is time: \"This isn't a stroke, is it?\"</p>",
  "points": [
   "Sudden sensorineural hearing loss is time-critical: confirm with an audiogram, start steroids promptly (oral, or intratympanic via ENT, dose per local guideline) and involve ENT the same day.",
   "MRI of the internal auditory canals is arranged to exclude a retrocochlear lesion such as a vestibular schwannoma, and is still needed if hearing improves with steroids because improvement does not exclude a lesion.",
@@ -339,15 +363,43 @@
   "General Practice",
   "Otorhinolaryngology"
  ],
- "stem": "<p>You are the GP reviewing <strong>Jenny Halloran</strong>, a 52-year-old bookkeeper who has presented to your practice on a Friday morning. The patient reports that the hearing in the left ear has been much worse since waking two days ago.</p><p>A practice nurse has recorded the following before you enter:</p><ul><li><p>Temperature 36.8 °C, BP 128/76 mmHg, HR 74 regular, weight 72 kg, capillary blood glucose 8.2 mmol/L.</p></li></ul><p>No audiogram has been performed yet.</p>",
+ "stem": "<p>You are a GP in a suburban general practice. Jenny Halloran, a 52-year-old bookkeeper, has come in on a Friday morning because she cannot hear properly in her left ear.</p>",
  "tasks": [
-  "<p>Take a <strong>focused history</strong> from the patient (3 minutes). At 3 minutes the examiner will give you your examination findings.</p>",
-  "<p><strong>Interpret</strong> the examination findings and <strong>explain</strong> to the patient the likely problem, the investigations you will arrange and why, and your initial management plan. Answer the patient's questions (5 minutes).</p>"
+  "<p>Take a focused <strong>history</strong> from Mrs Halloran and perform a focused <strong>examination</strong>, telling the examiner what you are examining and why (10 minutes).</p>",
+  "<p>The examiner will give you the results of an urgent audiogram and tympanometry done at the audiology clinic next door, and her recent blood tests. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, including how you would explain it to Mrs Halloran and answer her questions, and your <strong>safety netting</strong> (5 minutes).</p>"
  ],
  "title": "Sudden hearing loss in one ear on waking",
  "type": [
   "History",
-  "Counselling",
+  "Examination",
+  "Interpretation",
   "Management"
- ]
+ ],
+ "part2": {
+  "lead": "Mrs Halloran had a pure-tone audiogram and tympanometry at the audiology clinic next door late this morning. Here are the results, with her blood tests from her diabetes review three weeks ago.",
+  "handover": [
+   {
+    "label": "Pure-tone audiogram",
+    "result": "<table><tbody><tr><th>Frequency</th><th>250 Hz</th><th>500 Hz</th><th>1 kHz</th><th>2 kHz</th><th>4 kHz</th><th>8 kHz</th></tr><tr><td>Right, air conduction (dB HL)</td><td>15</td><td>10</td><td>10</td><td>15</td><td>20</td><td>20</td></tr><tr><td>Left, air conduction (dB HL)</td><td>40</td><td>45</td><td>50</td><td>55</td><td>65</td><td>70</td></tr></tbody></table><p>Left masked bone conduction thresholds match the air conduction thresholds (no air-bone gap). Right bone conduction normal. Speech discrimination: right 100%, left 64%.</p><p><strong>Audiologist's summary:</strong> normal hearing on the right. Left moderate sensorineural hearing loss, worse in the high frequencies.</p>"
+   },
+   {
+    "label": "Tympanometry",
+    "result": "<p>Type A in both ears: normal middle ear pressure and compliance.</p>"
+   },
+   {
+    "label": "Blood tests (diabetes review three weeks ago)",
+    "result": "<p>HbA1c 7.4% (57 mmol/mol). Creatinine 72 µmol/L, eGFR 82 mL/min/1.73 m<sup>2</sup>. Electrolytes normal.</p>"
+   }
+  ],
+  "ask": [
+   "What do the audiogram and tympanometry show, and how do they fit with your examination findings?",
+   "What is the most likely diagnosis, and what else must you consider?",
+   "What is your management approach? Mrs Halloran asks why she needs a scan of her head if the tablets might fix it, tells you she panicked in a scanner once, and asks whether steroid tablets are safe with her diabetes.",
+   "She asks: \"Can I wait and see how it goes over the weekend? Will I get my hearing back?\" What safety netting and follow-up will you arrange?"
+  ]
+ },
+ "revised": {
+  "at": "2026-10-23",
+  "by": "format 5/10/5"
+ }
 }
