@@ -123,12 +123,23 @@ async function runIn(width, height, label) {
   ok(await pg.evaluate(() => { const nav = document.querySelector('.os-pl .os-jump').getBoundingClientRect(), e = document.querySelector('.os-pl .os-exam').getBoundingClientRect(); return e.top >= nav.bottom - 1 && e.top - nav.bottom < 30; })
     && await pg.locator('.os-pl [data-os="jump"][data-to="ex"][aria-current="true"]').count() === 1, `${label}: the jump bar takes the examiner to the exam findings and lights Exam`);
   await shot('jump');
+  if (await pg.locator('.os-pl .os-exshow').count()) {   /* the candidate asks for the vitals: the examiner turns the screen */
+    await pg.locator('.os-pl .os-exshow').first().click();
+    await pg.waitForSelector('.os-present.in');
+    ok((await pg.textContent('.os-prs-slide h2')).trim() === 'Vital signs' && await pg.locator('.os-present .os-vitals dt').count() >= 3 && !(await pg.locator('.os-present .os-exsteps').count()),
+      `${label}: the vitals turn to the candidate as a grid, without the examination findings`);
+    ok((await pg.textContent('.os-prs-who')).trim() === 'For the candidate', `${label}: the turned screen says who it is for`);
+    await pg.waitForTimeout(300);
+    await shot('vitals');
+    await click('.os-prs-back');
+    await pg.waitForSelector('.os-present', { state: 'detached' });
+  }
   await click('[data-os="skip"]');   /* Part 1 → Part 2 */
   await pg.waitForTimeout(300);
   const qa = pg.locator('.os-part2').first();
   ok(await qa.isVisible() && await pg.locator('[data-os="tab"][data-tab="Patient Script"][aria-selected="true"]').count() === 1, `${label}: Part 2 opens the patient script at its questions and results`);
   ok(await pg.evaluate(() => { const [h, e, q] = ['.os-pl .os-sheet[data-hl]', '.os-pl .os-exam', '.os-pl .os-part2'].map(s => document.querySelector(s)); return !!(h && e && q) && !!(h.compareDocumentPosition(e) & 4) && !!(e.compareDocumentPosition(q) & 4); }), `${label}: the script runs the history, the exam findings, then Part 2`);
-  ok(await qa.locator('.os-qaask li').count() >= 2 && await qa.locator('.os-qacard').count() >= 2, `${label}: Part 2 lists the questions and the results`);
+  ok(await qa.locator('.os-p2steps button').count() >= 4 && await qa.locator('.os-p2steps [aria-current="step"]').textContent().then(t => /Results/.test(t)) && await qa.locator('.os-qacard').count() >= 2, `${label}: Part 2 opens on the results, with a step for each question`);
   await pg.waitForTimeout(900);   /* the smooth scroll settles */
   ok(await qa.evaluate(e => { const t = e.getBoundingClientRect().top; return t >= 0 && t < innerHeight / 2; }), `${label}: the patient script scrolls to the Part 2 questions`);
   await shot('part2');
@@ -148,7 +159,25 @@ async function runIn(width, height, label) {
   ok(/^1 of/.test(await pg.textContent('.os-prs-n')) && n >= 2, `${label}: the arrow keys move back`);
   await pg.keyboard.press('Escape');
   await pg.waitForSelector('.os-present', { state: 'detached' });
-  ok(await qa.locator('.os-qaask').isVisible(), `${label}: closing the results shows the examiner's questions again`);
+  ok(await qa.locator('.os-qashow').isVisible(), `${label}: closing the results brings the examiner back to the results step`);
+  await qa.locator('.os-p2foot .os-primary').click();   /* Ask the first question */
+  const q1 = pg.locator('.os-pl .os-part2').first();
+  ok(/^Question 1 of \d · ISBAR handover$/.test((await q1.locator('.os-p2eye').textContent()).trim()) && await q1.locator('.os-qaexp').isVisible() && !(await q1.locator('.os-qacard').count()),
+    `${label}: the first question is the ISBAR handover, with its expected answer and nothing else`);
+  await pg.waitForTimeout(350);   /* the step settles */
+  await shot('question1');
+  const chip = q1.locator('.os-p2chip').nth(1), chipLabel = (await chip.textContent()).trim();
+  await chip.click();   /* the candidate asks to see a result again */
+  await pg.waitForSelector('.os-present.in');
+  ok((await pg.textContent('.os-prs-slide h2')).trim() === chipLabel && /ISBAR/.test(await pg.textContent('.os-prs-q')) && !(await pg.locator('.os-present .os-qaexp').count()),
+    `${label}: a chip turns the screen to that result, with the question and without the expected answer`);
+  await pg.waitForTimeout(300);
+  await shot('chip');
+  await click('.os-prs-back');
+  await pg.waitForSelector('.os-present', { state: 'detached' });
+  ok(await pg.locator('.os-pl .os-p2chip.seen').count() >= 2, `${label}: each result the candidate has seen carries a tick`);
+  await pg.locator('.os-pl .os-p2foot .os-primary').click();   /* Next question */
+  ok(/^Question 2 of/.test((await pg.locator('.os-pl .os-p2eye').textContent()).trim()) && await pg.locator('.os-pl .os-p2steps button.done').count() === 2, `${label}: Next question moves on and ticks off the steps behind it`);
   ok(await pg.locator('.os-pl [data-os="jump"][data-to="p2"][aria-current="true"]').count() === 1, `${label}: the jump bar lights Part 2`);
   await click('[data-os="tab"][data-tab="Marking"]');
   ok(await pg.evaluate(() => { const sc = document.querySelector('.os-pl .os-pscroll'), h = document.querySelector('.os-pl .os-h-p2'); const d = h && h.getBoundingClientRect().top - sc.getBoundingClientRect().top; return d >= 0 && d < 60; }), `${label}: after the Part 2 bell, Marking opens at the Part 2 items`);

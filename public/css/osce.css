@@ -1049,3 +1049,61 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-lab-t thead tr:last-child :is(th.os-lab-r, th.os-lab-v) { white-space:normal; }   /* outranks the header row's nowrap: "Ref. Range (Units)" or a dated column ("Day 2 08:40") may take two lines on a phone */
 @media (max-width:480px) { .os-lab-t th, .os-lab-t td { padding:4px 6px; } .os-lab-t tbody .os-lab-n { min-width:5.5em; } .os-lab-t .os-lab-r { min-width:5em; } .os-lab-t .os-lab-v.os-lab-tx { min-width:5em; } }
 @media (max-width:360px) { .os-prs-slide .os-lab-t { font-size:14px; } .os-lab-t .os-lab-r { overflow-wrap:anywhere; } }   /* a long unit (mL/min/1.73 m^2) breaks rather than push the table wide */
+
+/* ---- where a case came from: the AMSA MedEd chip on every station surface, and its note under the Instructions */
+.os-tag.os-tag--amsa { display:inline-flex; align-items:center; height:20px; padding:0 7px; border-radius:999px; background:var(--pri-soft); color:var(--pri); font-size:11px; font-weight:800; letter-spacing:.04em; vertical-align:middle; margin-right:4px; }
+.os-prov { display:flex; gap:10px; align-items:flex-start; margin:14px 0 0; padding:12px 14px; border-radius:12px; background:var(--fill); color:var(--mute); font-size:13px; line-height:1.5; }
+.os-prov .os-tag--amsa { flex:none; margin-top:1px; }
+.os-prov a { color:var(--pri); }
+
+/* ---- Part 2, stepped: Results, then one question at a time; the footer's Next stays in reach at the bottom of the pane */
+.os-qahead .os-p2flat { margin-left:auto; flex:none; font-size:13px; }
+.os-p2steps { list-style:none; margin:4px 0 0; padding:0; display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+.os-p2steps::-webkit-scrollbar { display:none; }
+.os-p2steps li { flex:1 0 auto; }
+.os-p2steps button { width:100%; min-height:44px; display:flex; align-items:center; gap:7px; padding:6px 12px 6px 7px; border-radius:999px; border:1px solid var(--stroke); background:var(--solid); color:var(--mute); font-size:13px; font-weight:600; white-space:nowrap; }
+.os-p2steps b { flex:none; display:grid; place-items:center; width:26px; height:26px; border-radius:999px; background:var(--fill); color:var(--ink); font-size:12.5px; font-weight:700; }
+.os-p2steps button.done { color:var(--ink); }
+.os-p2steps button.done b { background:var(--ok-soft); color:var(--ok-ink); }
+.os-p2steps button[aria-current="step"] { border-color:var(--pri); background:var(--pri-soft); color:var(--pri); }
+.os-p2steps button[aria-current="step"] b { background:var(--pri); color:#fff; }
+.os-p2body { display:flex; flex-direction:column; gap:12px; }
+.os-p2q { display:flex; flex-direction:column; gap:12px; animation:os-drop .22s var(--ease); }
+.os-p2eye { font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--pri); }
+.os-p2q .os-qaq { margin:0; font-size:clamp(18px, 4.6vw, 21px); line-height:1.4; font-weight:600; }
+.os-p2q .os-qaexp { font-size:14.5px; padding:12px 14px; border-radius:12px; }
+.os-p2show { display:flex; flex-direction:column; gap:8px; }
+.os-p2show > small { font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--mute); }
+.os-p2chips { display:flex; flex-wrap:wrap; gap:8px; }
+.os-p2chip { min-height:44px; max-width:100%; display:inline-flex; align-items:center; gap:7px; padding:8px 14px 8px 11px; border-radius:12px; border:1px solid var(--stroke); background:var(--solid); color:var(--ink); font-size:14px; font-weight:600; text-align:left; }
+.os-p2chip svg { flex:none; width:18px; height:18px; color:var(--pri); }
+.os-p2chip span { min-width:0; overflow-wrap:anywhere; }
+.os-p2chip.seen { background:var(--ok-soft); border-color:transparent; }
+.os-p2chip.seen svg { color:var(--ok-ink); }
+.os-p2foot { position:sticky; bottom:0; z-index:1; display:flex; justify-content:space-between; gap:10px; padding:10px 0; background:linear-gradient(to bottom, transparent, var(--card2) 14px); }
+.os-p2foot .os-btn { min-height:48px; }
+.os-p2foot .os-primary { flex:1; max-width:320px; margin-left:auto; justify-content:center; }
+
+/* ---- the exam's numbers, turned to the candidate: a button beside Vitals and Bedside tests, the vitals as a grid */
+.os-exbox h4 { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.os-exshow { color:var(--pri); margin:-8px -6px -8px 0; }
+.os-vitals { margin:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap:10px; }
+.os-vitals div { padding:12px 16px; border-radius:14px; background:var(--fill); }
+.os-vitals dt { font-size:clamp(14px, 3.4vw, 17px); font-weight:700; color:var(--mute); }
+.os-vitals dd { margin:2px 0 0; font-size:clamp(20px, 4.8vw, 28px); font-weight:600; line-height:1.35; font-variant-numeric:tabular-nums; }
+
+/* ---- the candidate's view: says who it is for, carries the question, and hands back with one big button */
+.os-prs-top { gap:10px; }
+.os-prs-who { font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--pri); padding:6px 12px; border-radius:999px; background:var(--pri-soft); white-space:nowrap; }
+.os-prs-top .os-prs-n { margin-right:auto; }
+.os-prs-q { flex:none; margin:4px auto 0; width:100%; max-width:900px; padding:10px 14px; border-left:4px solid var(--pri); border-radius:4px 12px 12px 4px; background:var(--fill); font-size:clamp(16px, 4vw, 21px); line-height:1.45; font-weight:600; }
+.os-prs-q small { display:block; font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--mute); margin-bottom:2px; }
+.os-prs-nav { align-items:center; }
+.os-prs-nav .os-prs-back { flex:1 1 auto; max-width:360px; margin:0 auto; justify-content:center; }
+.os-prs-nav .os-btn:last-child { margin-left:0; }
+.os-prs-nav .os-prs-step { flex:0 1 auto; }
+@media (max-width:560px) { .os-prs-nav .os-prs-step { width:48px; padding:0; justify-content:center; } .os-prs-nav .os-prs-step span { display:none; } .os-prs-nav .os-prs-back span { font-size:15px; } }
+.os-p2steps { scroll-margin-top:72px; }   /* clears the sticky jump bar */
+.os-prs .os-prs-q { margin:4px auto 0; }
+.os-prs-n, .os-prs-time { white-space:nowrap; }
+@media (max-width:420px) { .os-prs-who { font-size:10.5px; padding:5px 9px; letter-spacing:.04em; } .os-prs-top { gap:6px; } .os-prs-time { padding:4px 9px; font-size:13px; } }

@@ -28,7 +28,7 @@ import { attach as syncAttach, pull as syncPull, configureSync, wire as syncWire
 import { renderStart, toggleRot, runAll, runPop, runClear, runGo, onPerson, pickCand, toggleAlt } from './osce/run.mjs';
 import { renderGroup, browseReset, browseDlg, browseSheetOpen, paintQueue, clearQueue, removeQueued, queueFromButton, addRandom, toggleDetails, afterBookmark, discPick, filterPop, toggleSaved, resetFilters, timingDlg, saveTiming, previewDlg, previewTab, onSearch, onPointerDown } from './osce/browse.mjs';
 import { renderMarked, markedReset } from './osce/marked.mjs';
-import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, candSend, swapCand, onHand, present, presentStep, presenting, jumpTo, syncJump, markPart2 } from './osce/session.mjs';
+import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, candSend, swapCand, onHand, present, presentStep, presenting, p2Go, p2Flat, jumpTo, syncJump, markPart2 } from './osce/session.mjs';
 import { settingsDlg, saveSettings, clearKey, exportFile } from './osce/settings.mjs';
 
 export * from './osce/core.mjs';   /* the pure laws, under the names learn.mjs and scripts/osce.test.js import */
@@ -201,7 +201,9 @@ async function onClick(e) {
     case 'end': return endSession();
     case 'aisend': return aiSend(b.dataset.aid);
     case 'aicopy': return aiCopy(b.dataset.aid);
-    case 'present': return present(b.dataset.sid, +b.dataset.i || 0);
+    case 'present': return present(b.dataset.sid, +b.dataset.i || 0, { set: b.dataset.set, q: b.dataset.q });
+    case 'p2step': return p2Go(b.dataset.sid, +b.dataset.n || 0);
+    case 'p2flat': return p2Flat(b.dataset.sid);
     case 'jump': return jumpTo(b);
     case 'markp2': return markPart2(b);
     case 'pprev': return presentStep(-1);
