@@ -24,7 +24,7 @@ const DRAFT = {
   part2: { lead: 'Here are her observations on arrival and after treatment.', handover: [{ label: 'Observations', result: '<p>RR 40, HR 150, SpO2 93% on room air</p>' }, { label: 'After 3 doses of salbutamol', result: '<p>RR 30, SpO2 96%</p>' }],
     ask: ['How severe is her asthma?', 'What is your management?', 'What would you tell her father before she goes home?'] },
   check: [H(1, 'Professionalism'), leaf(2, 'Introduces self'), leaf(3, 'Plain language'),
-    H(4, 'History'), ...Array.from({ length: 5 }, (_, i) => leaf(5 + i, `History item ${i + 1}`)),
+    H(4, 'History'), ...Array.from({ length: 5 }, (_, i) => leaf(5 + i, `History item ${i + 1}`)), leaf(50, 'Asks about triggers'), leaf(51, 'Asks about previous admissions and ICU'), leaf(52, 'Asks about preventer use and technique'), leaf(53, 'Asks about smoke exposure at home'),
     H(10, 'Examination'), ...Array.from({ length: 4 }, (_, i) => leaf(11 + i, `Examines item ${i + 1}`, i === 0)),
     H(15, 'Interpretation'), leaf(16, 'Classifies moderate asthma', true), leaf(17, 'Recognises the response to treatment'),
     H(18, 'Management'),

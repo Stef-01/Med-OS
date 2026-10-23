@@ -12,6 +12,9 @@ export const KNOWN_SPECIALTIES = new Set(DISCIPLINES.flatMap(d => d[3]));
 export const isAcute = st => (st.type || []).some(t => t === 'Emergency' || t === 'Ward Call');
 /* the format: 5 minutes reading, Part 1 history and examination 10, Part 2 interpretation, management and safety netting 5 */
 export const READING_MIN = 5, PART1_MIN = 10, PART2_MIN = 5, STATION_MIN = PART1_MIN + PART2_MIN;
+/* markable items (leaves) a 5 / 10 / 5 station has: fixed, not drawn from the bank, so rewriting or adding stations never
+   moves the bar under the next one (a bank-relative range ratcheted up while the bank was being converted) */
+export const LEAVES = Object.freeze({ min: 24, max: 52 });
 /* the checklist sections every station is marked under, in order */
 export const SECTIONS = [['Professionalism', /professional/i], ['History', /history/i], ['Examination', /examin|primary survey|a to e|abcde/i],
   ['Interpretation', /interpret/i], ['Management', /manage/i], ['Safety netting', /safety[- ]?net/i]];
@@ -68,13 +71,12 @@ export function shapeProblems(st) {
 
 /* the bar a NEW station clears on top of its shape: benchmarks, timing, structure, guidelines, imaging requests */
 export function qualityProblems(st, stats) {
-  const p = [], kind = isAcute(st) ? 'acute' : 'clinic', b = stats[kind];
+  const p = [];   /* `stats` (bankStats) is kept in the signature for callers; the size band is LEAVES */
   for (const s of st.specialty || []) if (!KNOWN_SPECIALTIES.has(s) && !specialtyEmoji(s)) p.push(`specialty "${s}" is not a known specialty name`);
   for (const t of st.type || []) if (!TYPES.includes(t)) p.push(`station type "${t}" is not one of ${TYPES.join(', ')}`);
   if (!CX.includes(st.complexity)) p.push('complexity must be Low, Moderate or High');
   const leaves = osceLeaves(st.check), crit = leaves.filter(l => l.crit).length;
-  const lo = Math.max(20, b.min), hi = Math.min(55, Math.max(b.max, lo + 10));
-  if (leaves.length < lo || leaves.length > hi) p.push(`${leaves.length} checklist items; a 5 / 10 / 5 ${kind} station has ${lo} to ${hi}`);
+  if (leaves.length < LEAVES.min || leaves.length > LEAVES.max) p.push(`${leaves.length} checklist items; a 5 / 10 / 5 station has ${LEAVES.min} to ${LEAVES.max}`);
   if (crit < 2) p.push(`${crit} Critical items; mark at least 2 (the ones a safe junior doctor must not miss)`);
   if (crit > Math.ceil(leaves.length * 0.6)) p.push(`${crit} of ${leaves.length} items are Critical; keep Critical for the safety-critical ones (60% at most)`);
   /* the sections, the timing, Part 2 */

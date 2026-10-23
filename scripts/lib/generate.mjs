@@ -9,7 +9,7 @@
    A station ships only when the gates pass and the examiner has no blocker. Imaging is resolved after (resolve.mjs).
    Every Claude call goes through `ask` (lib/claude.mjs claudeJson by default), so the flow is tested with a stub. */
 import crypto from 'node:crypto';
-import { shapeProblems, qualityProblems, reviewNotes, bankStats, isAcute, TYPES, READING_MIN, PART1_MIN, PART2_MIN } from './station-gates.mjs';
+import { shapeProblems, qualityProblems, reviewNotes, bankStats, isAcute, TYPES, READING_MIN, PART1_MIN, PART2_MIN, LEAVES } from './station-gates.mjs';
 import { REQUEST_SCHEMA } from '../imaging/resolve.mjs';
 import { CX } from '../../public/js/osce/core.mjs';
 
@@ -72,7 +72,7 @@ export function writerPrompt(topic, opts, ex, stats) {
   const kind = opts.acute ? 'acute' : 'clinic', b = stats[kind];
   return `Topic: ${topic}
 Kind: ${opts.acute ? 'an acute station (simulated ward or ED, a nurse assistant, observations that change with management)' : 'a clinic or ward station (history, explanation, counselling, management planning)'}${opts.specialty?.length ? `\nSpecialty: ${opts.specialty.join(', ')}` : ''}${opts.types?.length ? `\nStation types: ${opts.types.join(', ')}` : ''}${opts.notes ? `\nAlso cover: ${opts.notes}` : ''}
-Checklist size: ${Math.max(20, b.min)} to ${Math.min(55, Math.max(b.max, Math.max(20, b.min) + 10))} markable items counting kids, across the six sections.
+Checklist size: ${LEAVES.min} to ${LEAVES.max} markable items counting kids, across the six sections (the bank's median for this kind is ${b.median}); every item earns its place, none is filler.
 
 Example stations from the bank (JSON), for depth and house style only; do not copy their cases:
 ${ex.map((s, i) => `<example_${i + 1}>\n${JSON.stringify(s)}\n</example_${i + 1}>`).join('\n')}`;
