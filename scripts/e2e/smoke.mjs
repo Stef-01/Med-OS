@@ -69,6 +69,16 @@ async function runIn(width, height, label) {
   const ctx = await b.newContext({ viewport: { width, height }, deviceScaleFactor: 2 });
   await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: BASE.slice(0, -1) });
   await ctx.route(/^https:\/\//, r => r.abort());   /* nothing leaves the machine */
+  /* the X-ray station's body and image come from fixtures, routed before the first load: the app keeps a body once fetched,
+     so a random session that happens to pick this station must already get the fixture */
+  const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64');
+  await ctx.route(/\/osce\/ai-8b37c286\.json$/, async r => {
+    const body = JSON.parse(fs.readFileSync(path.join(ROOT, 'osce', 'ai-8b37c286.json'), 'utf8'));
+    body.media = { patientScript: [{ src: 'media/ai-8b37c286/axr-1.png', alt: 'Supine abdominal radiograph', w: 800, h: 900, caption: 'Abdominal X-ray: show when the candidate asks for imaging', req: 'axr-1',
+      credit: { author: 'Dr Example', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', page: 'https://commons.wikimedia.org/wiki/File:Example.png', via: 'Wikimedia Commons' } }] };
+    return r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(body) });
+  });
+  await ctx.route(/\/media\/ai-8b37c286\/axr-1\.png$/, r => r.fulfill({ status: 200, contentType: 'image/png', body: PNG }));
   const pg = await ctx.newPage();
   lastPage = pg;
   const errs = [];
@@ -107,6 +117,12 @@ async function runIn(width, height, label) {
   ok(/5:00/.test(await pg.textContent('.os-tc.cur')), `${label}: reading time is 5 minutes`);
   await click('[data-os="skip"]');   /* reading → Part 1 */
   ok(/10:00|9:5\d/.test(await pg.textContent('.os-tc.cur')), `${label}: Part 1 is 10 minutes`);
+  await click('[data-os="tab"][data-tab="Patient Script"]');
+  await click('.os-pl [data-os="jump"][data-to="ex"]');
+  await pg.waitForTimeout(900);   /* the smooth scroll settles */
+  ok(await pg.evaluate(() => { const nav = document.querySelector('.os-pl .os-jump').getBoundingClientRect(), e = document.querySelector('.os-pl .os-exam').getBoundingClientRect(); return e.top >= nav.bottom - 1 && e.top - nav.bottom < 30; })
+    && await pg.locator('.os-pl [data-os="jump"][data-to="ex"][aria-current="true"]').count() === 1, `${label}: the jump bar takes the examiner to the exam findings and lights Exam`);
+  await shot('jump');
   await click('[data-os="skip"]');   /* Part 1 → Part 2 */
   await pg.waitForTimeout(300);
   const qa = pg.locator('.os-part2').first();
@@ -123,6 +139,7 @@ async function runIn(width, height, label) {
   ok(covered && !(await pg.locator('.os-present .os-check, .os-present .os-qaask').count()), `${label}: the results fill the screen and nothing of the rubric or the questions shows`);
   ok((await pg.textContent('.os-prs-slide h2')).trim() === firstResult, `${label}: the presenter starts at the first result`);
   ok(await pg.waitForFunction(() => getComputedStyle(document.querySelector('.os-present')).opacity === '1', null, { timeout: 2000 }).then(() => true, () => false), `${label}: the results layer fades in fully opaque`);
+  ok(/^Part 2 · [0-5]:\d\d$/.test((await pg.textContent('.os-prs-time')).trim()), `${label}: the results show the time left in Part 2`);
   await shot('presenter');
   const n = await qa.locator('.os-qacard').count();
   await click('[data-os="pnext"]');
@@ -132,6 +149,11 @@ async function runIn(width, height, label) {
   await pg.keyboard.press('Escape');
   await pg.waitForSelector('.os-present', { state: 'detached' });
   ok(await qa.locator('.os-qaask').isVisible(), `${label}: closing the results shows the examiner's questions again`);
+  ok(await pg.locator('.os-pl [data-os="jump"][data-to="p2"][aria-current="true"]').count() === 1, `${label}: the jump bar lights Part 2`);
+  await click('[data-os="tab"][data-tab="Marking"]');
+  ok(await pg.evaluate(() => { const sc = document.querySelector('.os-pl .os-pscroll'), h = document.querySelector('.os-pl .os-h-p2'); const d = h && h.getBoundingClientRect().top - sc.getBoundingClientRect().top; return d >= 0 && d < 60; }), `${label}: after the Part 2 bell, Marking opens at the Part 2 items`);
+  await shot('mark-p2');
+  await click('[data-os="tab"][data-tab="Patient Script"]');
   await click('[data-os="skip"]');   /* Part 2 → finished */
   await pg.waitForSelector('.os-finished');
   if (width < 900) await click('[data-os="tab"][data-tab="Marking"]');
@@ -259,20 +281,16 @@ async function runIn(width, height, label) {
   await shot('labs');
   await pg.keyboard.press('Escape');
   await pg.waitForSelector('.os-present', { state: 'detached' });
+  ok(/Am I going to die/.test(await pg.textContent('.os-pv .os-part2 .os-p2pt')) && !/Am I going to die/.test(await pg.textContent('.os-pv .os-sheet[data-hl]')), `${label}: what the patient says in Part 2 sits in the Part 2 card, not the Part 1 script`);
+  await click('.os-pv [data-os="markp2"]');
+  await pg.waitForTimeout(800);
+  ok(await pg.locator('.os-pv [data-tab="Marking"][aria-selected="true"]').count() === 1 && await pg.locator('.os-pv .os-h-p2').evaluate(h => { const t = h.getBoundingClientRect().top; return t >= 0 && t < innerHeight / 2; }), `${label}: Mark Part 2 opens the marking sheet at Interpretation`);
   await pg.keyboard.press('Escape');
   if (width < 900) await pg.keyboard.press('Escape');
   await pg.keyboard.press('Escape');
 
   /* a station with an X-ray: the figure, its caption and the licence credit (the body and the image from fixtures) */
   if (label !== 'small') {
-    const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64');
-    await ctx.route(/\/osce\/ai-8b37c286\.json$/, async r => {
-      const body = JSON.parse(fs.readFileSync(path.join(ROOT, 'osce', 'ai-8b37c286.json'), 'utf8'));
-      body.media = { patientScript: [{ src: 'media/ai-8b37c286/axr-1.png', alt: 'Supine abdominal radiograph', w: 800, h: 900, caption: 'Abdominal X-ray: show when the candidate asks for imaging', req: 'axr-1',
-        credit: { author: 'Dr Example', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', page: 'https://commons.wikimedia.org/wiki/File:Example.png', via: 'Wikimedia Commons' } }] };
-      return r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(body) });
-    });
-    await ctx.route(/\/media\/ai-8b37c286\/axr-1\.png$/, r => r.fulfill({ status: 200, contentType: 'image/png', body: PNG }));
     await click('[data-os="new"]');
     if (width < 900) { await click('[data-os="browse"]'); }
     await pg.fill('.os-q', 'right upper quadrant');

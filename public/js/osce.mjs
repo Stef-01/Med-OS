@@ -28,7 +28,7 @@ import { attach as syncAttach, pull as syncPull, configureSync, wire as syncWire
 import { renderStart, toggleRot, runAll, runPop, runClear, runGo, onPerson, pickCand, toggleAlt } from './osce/run.mjs';
 import { renderGroup, browseReset, browseDlg, browseSheetOpen, paintQueue, clearQueue, removeQueued, queueFromButton, addRandom, toggleDetails, afterBookmark, discPick, filterPop, toggleSaved, resetFilters, timingDlg, saveTiming, previewDlg, previewTab, onSearch, onPointerDown } from './osce/browse.mjs';
 import { renderMarked, markedReset } from './osce/marked.mjs';
-import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, candSend, swapCand, onHand, present, presentStep, presenting } from './osce/session.mjs';
+import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, candSend, swapCand, onHand, present, presentStep, presenting, jumpTo, syncJump, markPart2 } from './osce/session.mjs';
 import { settingsDlg, saveSettings, clearKey, exportFile } from './osce/settings.mjs';
 
 export * from './osce/core.mjs';   /* the pure laws, under the names learn.mjs and scripts/osce.test.js import */
@@ -89,6 +89,7 @@ function build() {
   ov.addEventListener('input', onInput);
   ov.addEventListener('change', onChange);
   ov.addEventListener('pointerdown', onPointerDown);
+  let jumpRaf = 0; ov.addEventListener('scroll', e => { if (jumpRaf || !e.target.querySelector?.('.os-jump')) return; jumpRaf = requestAnimationFrame(() => { jumpRaf = 0; syncJump(e.target); }); }, true);   /* the script's jump bar follows the scroll */
   let tapped = null; ov.addEventListener('click', e => { tapped = e.target.closest('summary')?.parentElement || null; }, true);
   ov.addEventListener('toggle', e => { const d = e.target; if (d.open && d === tapped) { d.classList.add('os-opening'); setTimeout(() => d.classList.remove('os-opening'), 260); } }, true);   // disclosure reveal on user toggles only
   document.addEventListener('selectionchange', onSelectionChange);
@@ -201,6 +202,8 @@ async function onClick(e) {
     case 'aisend': return aiSend(b.dataset.aid);
     case 'aicopy': return aiCopy(b.dataset.aid);
     case 'present': return present(b.dataset.sid, +b.dataset.i || 0);
+    case 'jump': return jumpTo(b);
+    case 'markp2': return markPart2(b);
     case 'pprev': return presentStep(-1);
     case 'pnext': return presentStep(1);
     case 'aipaste': return aiPaste(b.dataset.aid);

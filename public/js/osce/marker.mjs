@@ -79,7 +79,7 @@ ${plain(st.patient).slice(0, SCRIPT_MAX)}
 </examiner_and_patient_script>
 
 ${(st.part2?.handover || []).length ? `<part_2_results_handed_to_the_candidate>
-${st.part2.handover.map(resultLines).join('\n')}${st.part2.ask?.length ? `\nExaminer's questions: ${st.part2.ask.join(' | ')}` : ''}
+${st.part2.handover.map(resultLines).join('\n')}${st.part2.ask?.length ? `\nExaminer's questions: ${st.part2.ask.join(' | ')}` : ''}${st.part2.patient ? `\nThe patient in Part 2: ${plain(st.part2.patient)}` : ''}
 </part_2_results_handed_to_the_candidate>
 
 ` : ''}<checklist>

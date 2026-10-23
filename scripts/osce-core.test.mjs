@@ -90,7 +90,15 @@ test('the shipped bank: every index row has its body, every body passes the stat
   }
 });
 
-import { osceStart, osceTick, osceNext, osceLeft, osceFinished, osceResume, oscePause, phasesOf, nextPhase, DEFAULT_TIMING, oscePart2, hasPart2 } from '../public/js/osce/core.mjs';
+import { osceStart, osceTick, osceNext, osceLeft, osceFinished, osceResume, oscePause, phasesOf, nextPhase, DEFAULT_TIMING, oscePart2, hasPart2, osceP2Start } from '../public/js/osce/core.mjs';
+
+test('where Part 2 starts on a checklist: the first Interpretation, Management or Safety netting heading', () => {
+  const h = (id, x) => ({ id, t: 'heading', x });
+  assert.equal(osceP2Start([h(1, 'Professionalism'), { id: 2, x: 'Washes hands' }, h(3, 'History'), h(9, 'Examination: primary survey'), h(13, '<b>Interpretation</b>'), h(20, 'Management')]), 13);
+  assert.equal(osceP2Start([h(1, 'History'), h(5, 'Management and safety-netting')]), 5, 'no Interpretation heading: Management starts Part 2');
+  assert.equal(osceP2Start([h(1, 'History'), { id: 2, x: 'Interprets the ECG' }]), null, 'an item is not a heading');
+  assert.equal(osceP2Start(null), null);
+});
 
 test('the clock: 5 minutes reading, 10 of history and examination, 5 of interpretation and management', () => {
   const T = DEFAULT_TIMING;
@@ -136,6 +144,8 @@ test('Part 2: results with a label and a result, questions in order, anything ma
   const p = oscePart2({ lead: ' Here are the bloods. ', handover: [{ label: 'FBC', result: '<p>Hb 92</p>' }, { label: '', result: 'x' }, 'junk'], ask: ['What do they show?', '', 7] });
   assert.deepEqual(p, { lead: 'Here are the bloods.', handover: [{ label: 'FBC', result: '<p>Hb 92</p>' }], ask: ['What do they show?'] });
   assert.deepEqual(oscePart2(null), { lead: '', handover: [], ask: [] });
+  assert.equal(oscePart2({ patient: ' <p>Asks "Can I go home?"</p> ' }).patient, '<p>Asks "Can I go home?"</p>', 'what the patient says in Part 2 is kept');
+  assert.ok(!('patient' in oscePart2({ patient: '  ' })));
   assert.ok(hasPart2({ part2: p }));
   assert.ok(hasPart2({ part2: oscePart2(null), media: { part2: [{}] } }));
   assert.ok(!hasPart2({ part2: oscePart2(null) }));
@@ -163,17 +173,23 @@ import { contentTabs, tabBody, markingHtml } from '../public/js/osce/session.mjs
 import { ctx } from '../public/js/osce/state.mjs';
 test('the Patient Script tab runs in the order of the clock: the history, the exam findings, then Part 2; the marking sheet keeps to the marking', () => {
   ctx.exam = { s3: { vitals: 'HR 118', steps: [{ area: 'Abdomen', find: 'Guarding' }] } };
-  const st = { id: 's3', patient: '<p>HISTORY</p>', tasks: [], points: [], refs: [], check: [{ id: 1, x: 'Takes a history' }], part2: oscePart2({ lead: 'Say this', handover: [{ label: 'Bloods', result: '<p>Hb 92</p>' }], ask: ['What do they show?'] }) };
+  const st = { id: 's3', patient: '<p>HISTORY</p>', tasks: [], points: [], refs: [],
+    check: [{ id: 1, t: 'heading', x: 'History' }, { id: 2, x: 'Takes a history' }, { id: 3, t: 'heading', x: 'Interpretation' }, { id: 4, x: 'Reads the Hb' }],
+    part2: oscePart2({ lead: 'Say this', handover: [{ label: 'Bloods', result: '<p>Hb 92</p>' }], ask: ['What do they show?'], patient: '<p>Asks "Am I going to die?"</p>' }) };
   assert.deepEqual(contentTabs(st), ['Instructions', 'Patient Script'], 'no separate Exam tab');
-  const order = h => ['HISTORY', 'class="os-exam"', 'class="os-part2"'].map(x => h.indexOf(x));
-  const [hx, ex, p2] = order(tabBody(st, null, 'Patient Script'));
-  assert.ok(hx >= 0 && hx < ex && ex < p2, 'history, then exam findings, then Part 2');
+  const h = tabBody(st, null, 'Patient Script');
+  assert.match(h, /^<nav class="os-jump" aria-label="Jump to"><button data-os="jump" data-to="hx" aria-current="true">History<\/button><button data-os="jump" data-to="ex">Exam<\/button><button data-os="jump" data-to="p2">Part 2<\/button><\/nav>/, 'a jump bar for the three parts');
+  const at = x => h.indexOf(x);
+  assert.ok(at('HISTORY') > 0 && at('HISTORY') < at('class="os-exam"') && at('class="os-exam"') < at('class="os-part2"'), 'history, then exam findings, then Part 2');
+  assert.ok(at('<h4>Ask</h4>') < at('As the patient') && at('As the patient') < at('data-os="markp2"') && at('data-os="markp2"') < at('<h4>Results</h4>'), 'Part 2: ask, what the patient says, Mark Part 2, then the results');
+  assert.match(h, /As the patient<\/small><div class="os-html"><p>Asks "Am I going to die\?"<\/p><\/div>/);
   const kept = tabBody(st, { hl: { 'Patient Script': '<h2>Patient Script</h2><div class="os-html"><p><mark>HISTORY</mark></p></div>' } }, 'Patient Script');
-  assert.match(kept, /^<div class="os-sheet" data-hl="Patient Script"><h2>Patient Script<\/h2><div class="os-html"><p><mark>HISTORY<\/mark><\/p><\/div><\/div><section class="os-exam"/, 'a highlight keeps the history only; the findings and results render fresh after it');
-  assert.match(kept, /class="os-part2"/);
+  assert.match(kept, /<\/nav><div class="os-sheet" data-hl="Patient Script"><h2>Patient Script<\/h2><div class="os-html"><p><mark>HISTORY<\/mark><\/p><\/div><\/div><section class="os-exam"/, 'a highlight keeps the history only; the findings and results render fresh after it');
   const marking = markingHtml(st, null, false);
   assert.match(marking, /Takes a history/);
+  assert.match(marking, /<h3>History<\/h3>.*<h3 class="os-h-p2">Interpretation<\/h3>/s, 'Part 2 starts at Interpretation on the marking sheet');
   assert.doesNotMatch(marking, /os-part2|os-exam/);
   ctx.exam = {};
+  assert.doesNotMatch(tabBody({ ...st, part2: oscePart2(null) }, null, 'Patient Script'), /os-jump/, 'one part: no jump bar');
   assert.deepEqual(contentTabs({ id: 'x', patient: '', part2: oscePart2(null) }), ['Instructions'], 'nothing for the examiner, no tab');
 });

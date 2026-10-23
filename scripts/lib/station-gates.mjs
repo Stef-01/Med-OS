@@ -67,6 +67,8 @@ export function shapeProblems(st) {
   for (const [k, list] of [['tasks', st.tasks], ['points', st.points], ['refs', st.refs]]) (list || []).forEach((h, n) => allowlistCheck(h, { attrs: false }).forEach(x => p.push(`${k}[${n}]: ${x}`)));
   ((st.part2 && st.part2.handover) || []).forEach((h, n) => allowlistCheck(h && h.result, { attrs: false }).forEach(x => p.push(`part2.handover[${n}]: ${x}`)));
   if (st.part2 != null && (typeof st.part2 !== 'object' || Array.isArray(st.part2))) p.push('part2 is not an object');
+  if (st.part2?.patient != null && typeof st.part2.patient !== 'string') p.push('part2.patient is not HTML text');
+  allowlistCheck(typeof st.part2?.patient === 'string' ? st.part2.patient : '', { attrs: false }).forEach(x => p.push(`part2.patient: ${x}`));
   ((st.part2 && st.part2.handover) || []).forEach((h, n) => {
     if (!h) return;
     if (h.kind != null && !KINDS[h.kind]) p.push(`part2.handover[${n}]: kind "${h.kind}" is not one of ${Object.keys(KINDS).join(', ')}`);
@@ -125,6 +127,7 @@ export function qualityProblems(st, stats) {
   if (!Array.isArray(p2.handover) || p2.handover.filter(h => h && plain(h.label) && (plain(h.result) || (h.obs?.rows || []).length || cleanLabs(h.labs))).length < 2) p.push('Part 2 hands over at least 2 results (observations, investigations or imaging reports), each with its numbers');
   if (!Array.isArray(p2.ask) || p2.ask.filter(q => plain(q)).length < 2) p.push('Part 2 has at least 2 examiner questions (interpretation, then management and safety netting)');
   if (!plain(p2.lead)) p.push('Part 2 needs the examiner\'s opening line (lead)');
+  for (const b of part2InScript(st.patient)) p.push(`the patient script is for Part 1; move what the patient says in Part 2 to part2.patient: "${b.slice(0, 70)}…"`);
   const pat = plain(st.patient).length;
   if (pat < 1200 || pat > 9000) p.push(`patient and examiner script is ${pat} characters; the bank's run 1,600 to 6,600`);
   if ((st.points || []).length < 3) p.push('at least 3 learning points');
@@ -192,6 +195,10 @@ export function gasIssues(html) {
   }
   return out;
 }
+
+/* a paragraph or heading of the Part 1 script that is Part 2 role-play ("In Part 2, …", "Questions to ask … (usually in Part 2)");
+   a passing mention ("management is marked in Part 2", "handed over in Part 2") is not */
+export const part2InScript = html => (String(html || '').match(/<(p|h[2-4])>[\s\S]*?<\/\1>/g) || []).map(plain).filter(t => /^(?:In|During) Part 2\b|\((?:usually )?in Part 2\b/i.test(t));
 
 /* lab panels as a plain table for the gas check: a header row of the result columns, then test | value per column */
 const labsTable = labs => (cleanLabs(labs) || []).map(p => `<table><tr><th>Test</th>${(p.cols || ['Result']).map(c => `<th>${c}</th>`).join('')}</tr>${p.rows.map(r => `<tr><td>${r.t}${r.u ? ` (${r.u})` : ''}</td>${r.v.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}</table>`).join('');

@@ -9,7 +9,7 @@ import { wide, fmtDate } from '../study-kit/util.mjs';
 import { safeHtml } from '../study-kit/safe.mjs';
 import { figureHtml } from '../study-kit/media.mjs';
 import { mnemonicsFor } from './mnemonics.mjs';
-import { KINDS, HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
+import { KINDS, HANDOVER, osceScore, osceLeft, osceFinished, osceStart, oscePause, osceResume, osceNext, osceTick, mmss, phasesOf, phaseName, phaseWhat, nextPhase, hasPart2, osceP2Start, osceAiTicks, osceAiMissed, osceAiQuotes, osceAiFeedback, AI_MAX, osceNextCand } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, curAttempt, findAttempt, now, body, NOLOAD, bell, notify, confirmDlg, openDialog, closeDialog, openPop, closePop, tagHtml, srcTag, ago, aiEnabled, markerCfg, examOf, nameOf, whoBadge, roleLine, openPresenter, topDialog } from './state.mjs';
 import { markDirect, markPromptText, parseReply } from './marker.mjs';
 import { candidateLink } from './candidate.mjs';
@@ -18,6 +18,7 @@ import { obsChartHtml, obsTableHtml, obsZonesHtml } from './obs-chart.mjs';
 import { labsHtml } from './labs.mjs';
 
 let tickT = 0, hlOn = false, hlT = 0, lastScroll = {};   /* StationTabs.vue: each tab keeps its scroll position */
+let p2Mark = false;   /* Part 2 has started: the next switch to Marking opens at its Part 2 items */
 
 /* ---------------------------------------------------------------- Session (OscesSession.vue) */
 export function renderSession(main) {
@@ -65,6 +66,8 @@ function paintTimer() {
   bar.querySelector('.os-ring').setAttribute('aria-valuenow', Math.round(p * 100));
   const b = bar.querySelector(`.os-tc[data-c="${t.c}"] b`);
   if (b) b.textContent = mmss(left);
+  const pt = ctx.ov.querySelector('.os-prs-time');   /* the results on screen cover the clock: the time left rides on them */
+  if (pt) { pt.hidden = false; pt.textContent = `${phaseName(t.c)} · ${mmss(left)}`; pt.classList.toggle('low', left <= 60); }
   bar.querySelector('.os-ring').classList.toggle('low', t.c !== 'reading' && !nextPhase(t.c, ctx.mem.timing) && left <= 60);
 }
 function startTick() {
@@ -95,15 +98,18 @@ export function skip() {
   if (!s.timer.at) return finishStation();
   onPhase(s.timer.c); paintBar();
 }
-/* a new phase: say so; at Part 2 the patient script opens at its questions and results, just below the exam findings */
+/* a new phase: say so; at Part 2 the patient script opens at its questions and results, just below the exam findings, and
+   the marking sheet will open at its Part 2 items */
 function onPhase(c) {
   notify(phaseNotice(c, ctx.mem.timing));
   const st = ctx.byId.get(sess().queue[sess().idx]);
   if (c !== 'mx' || !hasPart2(st)) return;
+  p2Mark = true;
   if (ctx.tab !== 'Patient Script') switchTab('Patient Script');
   requestAnimationFrame(() => ctx.ov.querySelector('.os-pl .os-part2')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
 }
 function finishStation() {
+  p2Mark = false;
   const a = curAttempt();
   if (a && !a.fin) a.fin = now();
   if (a && !sess().done.includes(a.id)) sess().done.push(a.id);
@@ -126,7 +132,7 @@ export async function startAttempt(idx) {
   Object.assign(s, { idx, aid: a.id, timer: osceStart(mem.timing, now()) });
   s.done = s.done.filter(x => x !== a.id);
   save();
-  lastScroll = {};
+  lastScroll = {}; p2Mark = false;
   ctx.tab = 'Instructions';
   ctx.view = 'session';
   bell();
@@ -182,7 +188,23 @@ export function tabBody(st, a, t, o = {}) {
    highlight never stores the findings or the results */
 function scriptHtml(st, a, o) {
   const t = 'Patient Script', script = a?.hl?.[t] || (st.patient || st.media?.patientScript?.length ? `<h2>Patient Script</h2><div class="os-html">${safeHtml(st.patient)}</div>${imgs(st.media?.patientScript)}` : '');
-  return `${script ? `<div class="os-sheet" data-hl="${t}">${script}</div>` : ''}${examHtml(examOf(st))}${qaHtml(st)}${a && o.editable ? toolbar() : ''}`;
+  const parts = [script && ['hx', 'History'], examOf(st) && ['ex', 'Exam'], hasPart2(st) && ['p2', 'Part 2']].filter(Boolean);
+  return `${parts.length > 1 ? `<nav class="os-jump" aria-label="Jump to">${parts.map(([k, l], i) => `<button data-os="jump" data-to="${k}"${i ? '' : ' aria-current="true"'}>${l}</button>`).join('')}</nav>` : ''}${script ? `<div class="os-sheet" data-hl="${t}">${script}</div>` : ''}${examHtml(examOf(st))}${qaHtml(st)}${a && o.editable ? toolbar() : ''}`;
+}
+/* the jump bar: a tap scrolls to its part; scrolling lights the part in view */
+const PARTS = { hx: '.os-sheet[data-hl]', ex: '.os-exam', p2: '.os-part2' };
+export function jumpTo(b) { b.closest('.os-pbody')?.querySelector(PARTS[b.dataset.to])?.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
+export function syncJump(sc) {
+  const nav = sc?.querySelector?.('.os-jump'); if (!nav) return;
+  const line = nav.getBoundingClientRect().bottom + 24, btns = [...nav.querySelectorAll('[data-os="jump"]')];
+  const on = btns.filter(x => { const e = sc.querySelector(PARTS[x.dataset.to]); return e && e.getBoundingClientRect().top <= line; }).pop() || btns[0];
+  btns.forEach(x => (x === on ? x.setAttribute('aria-current', 'true') : x.removeAttribute('aria-current')));
+}
+/* Mark Part 2: the marking sheet at its first Part 2 heading, in its own tab or in the pane beside the script */
+export function markPart2(b) {
+  const root = b.closest('.os-pv, .os-sess') || ctx.ov, tab = root.querySelector('[data-tab="Marking"]');
+  if (tab && tab.getAttribute('aria-selected') !== 'true') { tab.click(); tab.focus({ preventScroll: true }); }   /* the button goes with the pane it sat in: focus stays in the view, on its tab */
+  requestAnimationFrame(() => root.querySelector('.os-h-p2')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
 }
 /* the station's shape, from the timing in use: Reading 5 · Part 1 10 · Part 2 5 */
 export function formatHtml(timing = ctx.mem.timing) {
@@ -240,6 +262,8 @@ export function qaHtml(st) {
     ${p.lead ? `<div class="os-p2lead"><small>Say</small><p>“${esc(p.lead)}”</p></div>` : ''}
     ${slides.length ? `<button class="os-btn os-btn--lg os-primary os-qashow" data-os="present" data-sid="${sid}" data-i="0">${I.max}<span>Show results to the candidate</span></button>` : ''}
     ${p.ask.length ? `<div class="os-qaask"><h4>Ask</h4><ol>${p.ask.map(q => `<li>${esc(q)}</li>`).join('')}</ol></div>` : ''}
+    ${p.patient ? `<div class="os-p2lead os-p2pt"><small>As the patient</small><div class="os-html">${safeHtml(p.patient)}</div></div>` : ''}
+    ${osceP2Start(st.check) != null ? `<button class="os-btn os-p2mark" data-os="markp2">${I.check}<span>Mark Part 2</span></button>` : ''}
     ${slides.length ? `<div class="os-qares"><h4>Results</h4><ul class="os-p2list" role="list">${slides.map((x, i) => `<li class="os-qacard">
       <div class="os-qatop"><span class="os-qalab">${x.h?.kind && KINDS[x.h.kind] ? `<small class="os-kind os-kind--${esc(x.h.kind)}">${esc(KINDS[x.h.kind])}</small>` : ''}<strong>${esc(x.label)}</strong></span><button class="os-ic os-ic--sm" data-os="present" data-sid="${sid}" data-i="${i}" aria-label="Show ${esc(x.label)} full screen" title="Show full screen">${I.max}</button></div>${qaCardBody(st, x)}</li>`).join('')}</ul></div>` : ''}
   </section>`;
@@ -250,7 +274,7 @@ export function present(sid, i = 0) {
   const st = ctx.byId.get(sid); if (!st) return;
   const slides = qaSlides(st); if (!slides.length) return;
   pres = { slides, i: Math.max(0, Math.min(slides.length - 1, i)) };
-  const d = openPresenter(`<div class="os-prs"><div class="os-prs-top"><span class="os-prs-n" aria-live="polite"></span><button class="os-ic os-prs-x" data-ui="close" aria-label="Close and go back to the questions">${I.x}</button></div>
+  const d = openPresenter(`<div class="os-prs"><div class="os-prs-top"><span class="os-prs-n" aria-live="polite"></span><span class="os-prs-time" hidden></span><button class="os-ic os-prs-x" data-ui="close" aria-label="Close and go back to the questions">${I.x}</button></div>
     <div class="os-prs-stage"></div>
     <div class="os-prs-nav"><button class="os-btn os-btn--lg" data-os="pprev">${I.prev}<span>Previous</span></button><button class="os-btn os-btn--lg" data-os="pnext"><span>Next</span>${I.chevR}</button></div></div>`, () => { pres = null; });   /* the inner box fills the layer, so a tap never lands on the layer itself (which would close it) */
   let x0 = null;
@@ -258,6 +282,7 @@ export function present(sid, i = 0) {
   stage.addEventListener('pointerdown', e => { x0 = e.clientX; });
   stage.addEventListener('pointerup', e => { if (x0 != null && Math.abs(e.clientX - x0) > 60) presentStep(e.clientX < x0 ? 1 : -1); x0 = null; });
   paintPresenter();
+  if (ctx.view === 'session') paintTimer();   /* on the clock: the time left shows at once */
 }
 export function presentStep(dir) { if (!pres) return; const n = pres.i + dir; if (n < 0 || n >= pres.slides.length) return; pres.i = n; paintPresenter(); }
 export const presenting = () => !!pres && topDialog()?.kind === 'present';
@@ -277,7 +302,7 @@ function examHtml(x) {
   if (!x) return '';
   const step = (s, i) => `<li><details class="os-exstep"><summary><span class="os-exn">${i + 1}</span><span class="os-exa"><strong>${esc(s.area)}</strong>${s.do ? `<small>${esc(s.do)}</small>` : ''}</span>${I.chevD}</summary><p>${esc(s.find)}</p></details></li>`;
   return `<section class="os-exam" aria-labelledby="os-exam-h">
-    <header class="os-exhead"><span class="os-bigic">${I.check}</span><span class="os-handt"><strong id="os-exam-h">Exam mode</strong><small>Say what you would examine, then tap to see what you find</small></span></header>
+    <header class="os-exhead"><span class="os-bigic">${I.check}</span><span class="os-handt"><strong id="os-exam-h">Exam mode</strong><small>As the candidate examines each area, tap it and give what they find</small></span></header>
     <p class="os-exwarn"><b>AI-written</b> These findings were invented to fit this case.</p>
     ${x.vitals ? `<div class="os-exbox"><h4>Vitals</h4><p>${esc(x.vitals)}</p></div>` : ''}
     ${x.general ? `<div class="os-exbox"><h4>General inspection</h4><p>${esc(x.general)}</p></div>` : ''}
@@ -302,6 +327,9 @@ export function switchTab(t) {
   pane.innerHTML = tabBody(st, ctx.view === 'session' ? curAttempt() : findAttempt(ctx.reviewId), t, { editable: ctx.view === 'session' });
   pane.classList.remove('os-fade'); void pane.offsetWidth; pane.classList.add('os-fade');
   sc.scrollTop = lastScroll[`${ctx.view}:${t}`] || 0; syncIndeterminate();
+  const h = t === 'Marking' && p2Mark && pane.querySelector('.os-h-p2');
+  if (h) { p2Mark = false; sc.scrollTop += h.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12; }
+  syncJump(sc);
   placePill(pl, true);
 }
 
@@ -311,13 +339,14 @@ export function markingHtml(st, a, editable) {
   const showFb = !a || a.fin;
   const sc = osceScore(st.check, a?.ticks);
   const q = a?.ai?.status === 'done' && a.ai.result ? osceAiQuotes(a.ai.result.items) : null;   /* "said: …" under each AI-ticked item (the Evidence chip shows them) */
+  const p2 = osceP2Start(st.check);
   return `<div class="os-marking${q && evid ? ' os-ai-evid' : ''}">
     ${a && !editable ? '' : '<h2>Marking Sheet</h2>'}
     <div class="os-notice">${I.info}<div><h5>Marking Sheet Provided for Information Only</h5><p>Please note that the marking checklist provided below is intended as a prompt for you to consider key areas in this station. It is not exhaustive. It does not equate to an assessment of competency and therefore no 'pass mark' is provided.</p></div></div>
     ${a && a.fin ? aiHtml(st, a) : ''}
     ${a && a.fin ? handHtml(a) : ''}
     ${a ? `<div class="os-tally"><b>${sc.got}</b> of ${sc.of} items ticked</div>` : ''}
-    <div class="os-check">${st.check.map(i => checkItem(i, on, dis, q)).join('')}
+    <div class="os-check">${st.check.map(i => checkItem(i, on, dis, q, p2)).join('')}
       <h3>Global impression</h3>
       <div class="os-gi" role="radiogroup" aria-label="Global impression">${GI.map((l, n) => `<label class="os-gil c-${GI_C[n]}"><input type="radio" name="gi-${esc(a?.id || 'p')}" value="${n}" data-gi${a?.global === n ? ' checked' : ''}${dis}><span>${l}</span></label>`).join('')}</div>
     </div>
@@ -329,8 +358,8 @@ export function markingHtml(st, a, editable) {
 }
 const crit = c => (c ? `<span class="os-crit">${I.info}Critical</span>` : '');
 const said = (q, key) => (q && q[key] ? `<small class="os-said">said: “${esc(q[key])}”</small>` : '');
-function checkItem(i, on, dis, q) {
-  if (i.t === 'heading') return `<h3>${safeHtml(i.x)}</h3>`;
+function checkItem(i, on, dis, q, p2) {
+  if (i.t === 'heading') return `<h3${i.id === p2 ? ' class="os-h-p2"' : ''}>${safeHtml(i.x)}</h3>`;   /* Part 2 starts here: Mark Part 2 and the Part 2 bell land on it */
   if (i.t === 'info') return `<div class="os-notice os-notice--sm">${I.info}<div class="os-html">${safeHtml(i.x)}</div></div>`;
   if (i.t === 'media') return `<div class="os-cmedia"><div class="os-html">${safeHtml(i.x)}</div>${imgs(i.media)}</div>`;
   const kids = (i.kids || []).filter(k => k.t === 'checkbox' || !k.t);

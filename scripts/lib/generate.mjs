@@ -31,7 +31,7 @@ const ITEM = obj({ id: { type: 'integer' }, t: { type: 'string', enum: ['heading
 export const STATION_SCHEMA = obj({
   title: str, desc: str, focus: str, specialty: strs, type: { type: 'array', items: { type: 'string', enum: TYPES } }, complexity: { type: 'string', enum: CX },
   context: strs, presentation: strs, diagnosis: strs, stem: str, tasks: strs, patient: str, check: { type: 'array', items: ITEM },
-  demo: DEMO, part2: obj({ lead: str, handover: { type: 'array', items: RESULT }, ask: strs }),
+  demo: DEMO, part2: obj({ lead: str, handover: { type: 'array', items: RESULT }, ask: strs, patient: str }),
   guide: str, explain: str, points: strs, refs: strs, imaging: { type: 'array', items: REQUEST_SCHEMA },
 });
 export const REVIEW_SCHEMA = obj({ pass: { type: 'boolean' }, issues: { type: 'array', items: obj({ where: str, problem: str, fix: str, severity: { type: 'string', enum: ['blocker', 'minor'] } }) } });
@@ -45,9 +45,9 @@ ${READING_MIN} minutes reading; Part 1, ${PART1_MIN} minutes: a focused history 
 Write one station on the topic you are given, at the depth, tone and checklist granularity of the example stations (they come from the same bank and show the house style).
 - stem: Instructions to Candidate. Setting, the candidate's role, the patient (name, age) and why they are here. Never the diagnosis. No times (the page shows the format).
 - tasks: exactly 2. Task 1 is Part 1 and ends "(${PART1_MIN} minutes)": take a focused history from the patient and perform a focused examination, telling the examiner what you are examining. Task 2 is Part 2 and ends "(${PART2_MIN} minutes)": the examiner will give you the named results; interpret them, then outline your management approach and safety netting.
-- patient: the script for Part 1, for the person playing the patient and the examiner: opening line, the history by domain with the answers to give only when asked, feelings, ideas, concerns and expectations, questions to raise, and a note that examination findings are given from the Exam findings when the candidate says what they examine. For an acute station, what the nurse reports and how the patient changes with what the candidate does.
+- patient: the script for Part 1, for the person playing the patient and the examiner: opening line, the history by domain with the answers to give only when asked, feelings, ideas, concerns and expectations, questions to raise, and a note that examination findings are given from the Exam findings when the candidate says what they examine. For an acute station, what the nurse reports and how the patient changes with what the candidate does. Nothing for Part 2 here: what the patient says or asks in Part 2 goes in part2.patient.
 - demo: the patient: age as a number with its unit (days, weeks, months, years), sex, weight in kg (0 if it does not matter), the setting (${SETTINGS.join(', ')}), pregnant and postpartum. It picks the observation chart the station shows: the NSW adult chart from 16 years, the paediatric charts from 3 months, none in a clinic or GP room, in pregnancy or the postnatal period, or under 3 months (the observations are then written out).
-- part2: lead is the examiner's opening line for Part 2 ("Here are her observations and blood results."). handover is 2 to 6 results, each {label, kind, result, model, obs}. They fit the history and the examination exactly.
+- part2: lead is the examiner's opening line for Part 2 ("Here are her observations and blood results."). patient is what the person playing the patient says or asks in Part 2, as HTML (a short paragraph or a list: the questions to put when the candidate explains, how the patient reacts), or "" when the patient has nothing to say in Part 2. handover is 2 to 6 results, each {label, kind, result, model, obs}. They fit the history and the examination exactly.
   - kind: ${Object.entries(KINDS).map(([k, v]) => `${k} (${v})`).join(', ')}.
   - labs: bloods, gases, serology, urine chemistry and any other lab panel, printed the way a pathology system prints them: panels of {title, cols, rows}; cols is [] for one result column, or the column names when there are more ("Artery", "Vein"; "Today 08:40", "On arrival"); each row {t: the test, v: its value (one per column), u: units, r: the reference range for this patient's age, sex and pregnancy ("115-165", "<5", ">60", "Not detected"), f: H or L when outside the range (HH, LL critical; A for an abnormal qualitative result; "" inside it), n: a short lab note ("baseline 76")}. A test reported two ways (a percentage and a count) takes a second row with t "". Every flag must agree with its own value and range. For any other kind, labs is [].
   - result: what the candidate is handed besides the lab panels, complete enough to interpret on its own. For a lab result, only the lab's comments or the sample details (or ""). An ECG as a report: rate, rhythm, axis, PR, QRS, QTc, ST and T changes, and the comparison with any old ECG. An X-ray, CT or ultrasound as a formal report: the examination and view, the clinical details, the findings by structure, and a conclusion; a CT says whether contrast was given. Observations: a one-line note ("on 2 L/min nasal prongs since 14:10") with the numbers in obs.
@@ -114,6 +114,7 @@ export function normalize(draft) {
     if (h.kind === 'obs' && h.obs?.rows?.length) x.obs = { rows: h.obs.rows.map(r => Object.fromEntries(Object.entries(r).filter(([, v]) => v != null && v !== ''))) };
     return x;
   }) };
+  if (out.part2 && !out.part2.patient) delete out.part2.patient;   /* nothing for the patient to say in Part 2 */
   if (!out.guide) out.guide = '';
   return out;
 }

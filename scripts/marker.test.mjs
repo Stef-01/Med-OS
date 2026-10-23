@@ -53,6 +53,7 @@ test('the Part 2 results go to the marker with the examiner\'s questions', () =>
   const p = markPrompt(withP2, 'tx');
   assert.match(p, /<part_2_results_handed_to_the_candidate>\nObservations: SpO2 91%\nExaminer's questions: What do they show\?\n<\/part_2_results_handed_to_the_candidate>/);
   assert.doesNotMatch(markPrompt({ ...st, part2: { lead: '', handover: [], ask: [] } }, 'tx'), /part_2_results/);
+  assert.match(markPrompt({ ...withP2, part2: { ...withP2.part2, patient: '<p>Asks <b>"Am I going to die?"</b></p>' } }, 'tx'), /Examiner's questions: What do they show\?\nThe patient in Part 2: Asks "Am I going to die\?"\n<\/part_2_results/, 'the patient\'s Part 2 lines go with the results');
   const charted = markPrompt({ ...st, part2: { lead: 'x', ask: [], handover: [{ label: 'Obs', kind: 'obs', result: '', model: '<p>SpO2 in the <b>yellow</b> zone</p>', obs: { rows: [{ t: '10:05', rr: 44, spo2: 93, dev: 'RA' }] } }] } }, 'tx');
   assert.match(charted, /Obs: 10:05: RR 44, SpO2 93% on room air\n  Model interpretation \(examiner only\): SpO2 in the yellow zone/);
 });

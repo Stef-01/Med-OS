@@ -29,7 +29,7 @@ const DRAFT = {
         { ...ROW, t: '10:50', rr: 32, spo2: 96, dev: 'RA', hr: 138, temp: 37.4, avpu: 'A', distress: 'mild', crt: 2, init: 'KL', note: '3 doses of salbutamol given' }] } },
     { label: 'Venous gas', kind: 'gas', result: '', labs: [{ title: '', cols: [], rows: [{ t: 'pH', v: ['7.38'], u: '', r: '7.32-7.42', f: [''], n: '' }, { t: 'pCO2', v: ['38'], u: 'mmHg', r: '38-50', f: [''], n: '' }] }],
       model: '<p>No respiratory acidosis: a normal pCO2 in a child breathing fast is reassuring now, but a rising pCO2 would be a late sign of tiring.</p>', obs: { rows: [] } }],
-    ask: ['How severe is her asthma?', 'What is your management?', 'What would you tell her father before she goes home?'] },
+    ask: ['How severe is her asthma?', 'What is your management?', 'What would you tell her father before she goes home?'], patient: '' },
   check: [H(1, 'Professionalism'), leaf(2, 'Introduces self'), leaf(3, 'Plain language'),
     H(4, 'History'), ...Array.from({ length: 5 }, (_, i) => leaf(5 + i, `History item ${i + 1}`)), leaf(50, 'Asks about triggers'), leaf(51, 'Asks about previous admissions and ICU'), leaf(52, 'Asks about preventer use and technique'), leaf(53, 'Asks about smoke exposure at home'),
     H(10, 'Examination'), ...Array.from({ length: 4 }, (_, i) => leaf(11 + i, `Examines item ${i + 1}`, i === 0)),
@@ -86,6 +86,19 @@ test('Part 2 results: the patient picks the chart, every result names its kind a
   assert.doesNotMatch(qualityProblems({ ...noRows, demo: { ...ok.demo, setting: 'gp' } }, stats).join(), /give the observations as rows/, 'a GP room has no chart');
   assert.match(shapeProblems({ ...ok, part2: { ...ok.part2, handover: [{ ...ok.part2.handover[0], obs: { rows: [{ t: '9am', rr: 20 }] } }] } }).join(), /without a valid time/);
   assert.match(shapeProblems({ ...ok, part2: { ...ok.part2, handover: [{ ...ok.part2.handover[0], obs: { rows: [{ t: '10:00', rr: 20, dev: 'TENT' }] } }] } }).join(), /"dev" "TENT" is not a value/);
+});
+
+test('what the patient says in Part 2 lives in part2.patient, never in the Part 1 script', () => {
+  const ok = { id: 'ai-test', ...normalize(DRAFT) };
+  assert.ok(!('patient' in ok.part2), 'nothing to say in Part 2: no field');
+  const said = normalize({ ...DRAFT, part2: { ...DRAFT.part2, patient: '<p>Asks "Can she go home today?"</p>' } });
+  assert.equal(said.part2.patient, '<p>Asks "Can she go home today?"</p>');
+  assert.deepEqual(qualityProblems({ id: 'ai-test', ...said }, stats), []);
+  const inScript = { ...ok, patient: `${ok.patient}<p><strong>In Part 2,</strong> when told the plan, ask "Can she go home?"</p><p>Her inhaler is in the car; the examiner hands it over in Part 2.</p>` };
+  const q = qualityProblems(inScript, stats).join('\n');
+  assert.match(q, /the patient script is for Part 1; move what the patient says in Part 2 to part2.patient: "In Part 2, when told the plan/);
+  assert.doesNotMatch(q, /inhaler/, 'a passing mention of Part 2 is not role-play');
+  assert.match(shapeProblems({ ...ok, part2: { ...ok.part2, patient: '<p onclick="x()">hi</p>' } }).join(), /part2.patient: .*onclick/);
 });
 
 test('observations on the chart: a value on a zone line and an unanswered red zone go to the examiner', () => {

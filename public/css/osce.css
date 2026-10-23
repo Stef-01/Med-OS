@@ -993,6 +993,22 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
    the exam and Part 2 cards follow the patient's history in the Patient Script tab, each as wide as the history's sheet */
 .os-pbody > :is(.os-exam, .os-part2) { margin-top:14px; }
 @media (min-width:900px) { .os-pbody > :is(.os-exam, .os-part2) { padding:28px 32px; border-radius:20px; } }
+/* the script's jump bar, History · Exam · Part 2, held at the top of the pane; the part in view is lit */
+.os-jump { position:sticky; top:0; z-index:var(--z-sticky); display:flex; gap:4px; margin:-10px 0 12px; padding:8px 0; background:var(--bg); }
+.os-pv-scroll .os-jump { background:var(--solid); }
+.os-jump button { flex:1; height:34px; border-radius:9px; font-size:13.5px; font-weight:600; color:var(--mute); background:var(--card); transition:color .2s, background-color .2s, transform .15s var(--ease); }
+.os-jump button[aria-current="true"] { color:var(--pri); background:var(--pri-soft); }
+.os-jump button:active { transform:scale(.97); }
+.os-jump ~ :is(.os-sheet, .os-exam, .os-part2) { scroll-margin-top:58px; }
+.os-h-p2 { scroll-margin-top:12px; }
+/* in the Part 2 card: what the patient says in Part 2, then the way to the Part 2 items on the marking sheet */
+.os-p2pt { background:var(--pri-soft); }
+.os-p2pt small { color:var(--pri); }
+.os-p2pt .os-html { font-size:14.5px; line-height:1.5; }
+.os-p2mark { align-self:flex-start; }
+/* the time left, on the results while they cover the clock */
+.os-prs-time { font-size:14px; font-weight:600; font-variant-numeric:tabular-nums; color:var(--ink); padding:4px 12px; border-radius:99px; background:var(--fill); }
+.os-prs-time.low { color:var(--danger); background:var(--danger-soft); }
 .os-p2list .os-html :is(td, th), .os-obs-table :is(td, th) { overflow-wrap:normal; -webkit-hyphens:auto; hyphens:auto; }
 .os-p2list .os-html table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
 .os-p2list .os-html td:first-child, .os-p2list .os-html th:first-child { min-width:7.5em; }

@@ -290,7 +290,13 @@ export function oscePart2(p) {
       if (labs) x.labs = labs;
       return x;
     }).filter(Boolean),
-    ask: (Array.isArray(o.ask) ? o.ask : []).map(str).filter(Boolean) };
+    ask: (Array.isArray(o.ask) ? o.ask : []).map(str).filter(Boolean), ...(str(o.patient) ? { patient: str(o.patient) } : {}) };   /* patient: what the patient says or asks in Part 2 (HTML), kept out of the Part 1 script */
+}
+/* where Part 2 starts on a checklist: the id of its first Interpretation, Management or Safety netting heading (the format's
+   order), or null; the marking sheet opens there when Part 2 starts */
+export function osceP2Start(check) {
+  const h = (Array.isArray(check) ? check : []).find(i => i && i.t === 'heading' && /interpret|manage|safety[- ]?net/i.test(String(i.x || '').replace(/<[^>]+>/g, '')));
+  return h ? h.id : null;
 }
 export const hasPart2 = st => !!st && ((st.part2?.handover || []).length > 0 || (st.media?.part2 || []).length > 0);
 /* the bank, then the AI stations, each through the gate; one station per id, the first (eMedici's) wins */
