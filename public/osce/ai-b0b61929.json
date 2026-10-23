@@ -1,0 +1,370 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": "ai",
+ "licence": "own",
+ "basis": [
+  "0f886857f275",
+  "3f08e6cd33a2",
+  "4207eba8f363",
+  "84b477939733",
+  "b4709182d397",
+  "e8c703d0947e"
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Introduces self and role clearly to Mrs Rao, Mr Rao and the midwives. Performs hand hygiene and puts on gloves and PPE."
+  },
+  {
+   "id": 3,
+   "t": "checkbox",
+   "x": "Takes the lead calmly and gives clear closed-loop instructions to the midwives (for example, who is to site the cannulas, who is to record the quantified blood loss)."
+  },
+  {
+   "id": 4,
+   "t": "heading",
+   "x": "Recognition and immediate management"
+  },
+  {
+   "crit": true,
+   "id": 5,
+   "t": "checkbox",
+   "x": "Recognises primary PPH from the history (blood loss over 500 mL, now over 1000 mL, with signs of shock) and escalates, confirming that the obstetric registrar and anaesthetist are coming and activating the local PPH or massive haemorrhage protocol."
+  },
+  {
+   "crit": true,
+   "id": 6,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Overdistended uterus: macrosomia (4.3 kg baby) and polyhydramnios."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Prolonged labour (16 hours) augmented with oxytocin."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Higher parity (third birth)."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Full bladder impairing uterine contraction."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Identifies uterine atony as the most likely cause (Tone) and links it to the risk factors in this case:"
+  },
+  {
+   "id": 7,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Asks for the quantified blood loss rather than relying on visual estimation."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Performs rapid A to E assessment, including pulse, BP, capillary refill and level of alertness, and states that she is in compensated shock."
+  },
+  {
+   "crit": true,
+   "id": 8,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Lies the woman flat and keeps her warm."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Two large-bore IV cannulas (14 to 16G)."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Oxygen if SpO2 falls or she is shocked."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Bloods: FBE, group and crossmatch, coagulation including fibrinogen, UEC, venous gas with lactate."
+    },
+    {
+     "id": 5,
+     "t": "checkbox",
+     "x": "Warmed IV crystalloid; escalates to blood products as per local protocol if bleeding continues."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Calls for resuscitation measures straight away:"
+  },
+  {
+   "id": 9,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Considers other causes of PPH (Tissue, Trauma, Thrombin) and checks the perineum or vagina for tears."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Palpates the abdomen and identifies a soft, boggy fundus above the umbilicus and a full bladder."
+  },
+  {
+   "crit": true,
+   "id": 10,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Retained clots distend the uterus and stop it contracting effectively."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Fundal massage can be followed by manual removal of clots from the vagina or uterus if needed."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Gives uterotonics at the same time and does not rely on massage alone."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Expels retained clots by rubbing up a contraction with fundal massage and explains why this is done:"
+  },
+  {
+   "crit": true,
+   "id": 11,
+   "t": "checkbox",
+   "x": "Empties the bladder with an indwelling urinary catheter and monitors hourly urine output."
+  },
+  {
+   "crit": true,
+   "id": 12,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Oxytocin: further IV bolus and then an infusion."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Second-line agent chosen after checking contraindications (for example, ergometrine is avoided in hypertension; carboprost is avoided in asthma; this woman has neither)."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Misoprostol is an option if other agents are unavailable."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Tranexamic acid 1 g IV over 10 minutes, as early as possible and within 3 hours of birth."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Orders or administers uterotonics and tranexamic acid in line with local protocol:"
+  },
+  {
+   "id": 13,
+   "t": "heading",
+   "x": "Bimanual compression"
+  },
+  {
+   "crit": true,
+   "id": 14,
+   "t": "checkbox",
+   "x": "Decides early that bimanual compression is needed because the uterus will not stay firm despite fundal massage, and continues other PPH management at the same time."
+  },
+  {
+   "crit": true,
+   "id": 15,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "States that she is bleeding heavily because her womb is not tightening."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Explains that one hand will go inside the vagina and one on her tummy to squeeze the womb."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Warns that it will be painful and arranges analgesia."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Explains that it may slow the bleeding while other treatments work, and does not promise it will stop it."
+    },
+    {
+     "id": 5,
+     "t": "checkbox",
+     "x": "Asks for her agreement and says he or she will tell her each step."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Counsels Mrs Rao before performing it:"
+  },
+  {
+   "crit": true,
+   "id": 16,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Wears sterile gloves."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Places one hand on the abdomen behind the uterus."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Places a closed fist in the anterior vaginal fornix."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Compresses the uterus firmly between the two hands."
+    },
+    {
+     "id": 5,
+     "t": "checkbox",
+     "x": "States that compression is maintained until bleeding is controlled or she is in theatre."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Describes and demonstrates bimanual compression correctly:"
+  },
+  {
+   "id": 17,
+   "t": "checkbox",
+   "x": "Provides analgesia and reassurance during compression, checks in with Mrs Rao and keeps monitoring vital signs and blood loss."
+  },
+  {
+   "id": 18,
+   "t": "heading",
+   "x": "Communication with the partner"
+  },
+  {
+   "id": 19,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Says she is bleeding more than we would like after the birth, and the team is working together to stop it."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Says the team is massaging the womb and giving medicines, and that he will be told if she needs to go to theatre."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Acknowledges that this is frightening to watch and offers to stay with him and explain what is happening."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Offers a chair, or support person or midwife to stay with him and the baby."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Speaks to Mr Rao with simple, jargon-free language:"
+  },
+  {
+   "id": 20,
+   "t": "heading",
+   "x": "Placenta and next steps"
+  },
+  {
+   "crit": true,
+   "id": 21,
+   "t": "checkbox",
+   "x": "Examines the maternal surface of the placenta and membranes systematically, and identifies the missing cotyledon with a ragged defect."
+  },
+  {
+   "crit": true,
+   "id": 22,
+   "t": "checkbox",
+   "x": "States that this suggests retained placental tissue, alerts the senior obstetrician, and anticipates continued bleeding and a possible need for removal of retained tissue in theatre under anaesthesia."
+  },
+  {
+   "id": 23,
+   "t": "checkbox",
+   "x": "Plans ongoing care: transfer to theatre if bleeding continues despite medical measures, close observation, documentation of quantified blood loss and drugs given, and an open disclosure discussion with the woman and her partner afterwards."
+  }
+ ],
+ "complexity": "High",
+ "context": [],
+ "desc": "This station involves the emergency management of an atonic postpartum haemorrhage on the labour ward, including consented bimanual compression, communication with the partner and recognition of retained placental tissue.",
+ "diagnosis": [
+  "Uterine atony",
+  "Primary postpartum haemorrhage",
+  "Retained placental tissue"
+ ],
+ "explain": "<h3>Uterine atony</h3><p>Uterine atony is failure of the uterus to contract and retract after birth. It is the most common cause of primary PPH (the Tone of the four Ts: Tone, Tissue, Trauma, Thrombin). Risk factors are precipitate or prolonged labour, an overdistended uterus (macrosomia, polyhydramnios, multiple pregnancy), high parity and chorioamnionitis. A full bladder can also get in the way of the uterus contracting. Mrs Rao had several of these: a 4.3 kg baby, polyhydramnios, a long augmented labour, a third birth and a bladder that had not been emptied.</p><h3>Why expel the clots</h3><p>Retained clots distend the uterus and stop it contracting effectively, which sets up a cycle of more bleeding and more clot. The clots should be expelled by fundal massage (rubbing up a contraction) or removed manually. Uterotonics are still given at the same time. The bladder should be emptied by catheter because a full bladder displaces the fundus upwards and impairs contraction.</p><h3>Medical management</h3><p>Resuscitate and treat the cause at the same time. Call for help early and follow the local PPH protocol. Site two large-bore cannulas, take bloods including group and crossmatch and fibrinogen, give warmed crystalloid and blood products as indicated, and measure blood loss by weight rather than estimating it. Escalate uterotonics stepwise, for example oxytocin bolus then infusion, then ergometrine or carboprost if there are no contraindications, or misoprostol if other agents are not available. Give tranexamic acid 1 g IV over 10 minutes within 3 hours of birth. If bleeding continues, move to theatre early for examination under anaesthesia, removal of retained tissue, and balloon tamponade or surgical options. Follow your hospital's protocol for doses.</p><h3>Bimanual compression</h3><p>Consider it early, with colleagues, if bleeding is heavy from an atonic uterus, and continue other PPH management at the same time. Wear sterile gloves. Place one hand on the abdomen behind the uterus and a closed fist in the anterior vaginal fornix, then compress the uterus between the two hands. Maintain compression until bleeding is controlled or she is in theatre. It is painful, so give analgesia.</p><p>Counselling before compression should be brief and honest: she is bleeding heavily because her womb is not tightening; with her agreement you will place one hand in the vagina and one on the tummy to squeeze the womb; it will hurt, so pain relief is being given; it may slow the bleeding while other treatments work; and you will tell her each step. Ask permission and respect her answer where she is able to give it, even in an emergency.</p><h3>Talking to the partner</h3><p>A partner watching a PPH is frightened and often feels ignored. Use plain language: she is bleeding more than we would like after the birth and the team is working together to stop it; we are massaging the womb and giving medicines, and I will tell you if she needs to go to theatre. Acknowledge that this is frightening to watch and offer to stay with him and explain what is happening. Make sure a midwife or support person can stay with him, and follow up with open disclosure and debriefing afterwards.</p><h3>Retained placental tissue</h3><p>Always inspect the placenta and membranes after delivery. A missing cotyledon or a ragged defect on the maternal surface suggests retained tissue. Alert the senior clinician and be prepared for ongoing PPH. Retained tissue stops the uterus contracting well and may need removal under anaesthesia in theatre.</p>",
+ "focus": "Atonic postpartum haemorrhage on the labour ward",
+ "guide": "<p>A <strong>high-performing candidate</strong> will call for help early, name atony as the likely cause and tie it to this woman's risk factors (macrosomia, polyhydramnios, prolonged augmented labour, parity, full bladder). They will expel the clots with fundal massage, catheterise the bladder, give uterotonics and tranexamic acid, and decide early on bimanual compression. They will explain compression to Mrs Rao in plain language, warn her it will hurt, arrange analgesia and ask her agreement before they begin, then demonstrate a correct technique (one hand on the abdomen behind the uterus, a fist in the anterior fornix). They will kindly acknowledge Mr Rao's fear and explain what is happening without jargon. They will recognise the missing cotyledon as retained tissue and tell the senior clinician.</p><p>A <strong>borderline candidate</strong> will recognise PPH and call for help, and may start fundal massage and oxytocin, but will miss some of the following: the full bladder, the reason for expelling clots, a complete bimanual technique, a consent discussion before compression, or the significance of the cotyledon defect. Their communication with the partner may be hurried or contain jargon. An <strong>unsafe candidate</strong> will delay escalation, omit IV access and bloods, perform compression without explanation or consent, or fail to notice the retained placental tissue.</p>",
+ "id": "ai-b0b61929",
+ "media": {},
+ "origin": "ai",
+ "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name</strong>: Anita Rao.</p></li><li><p><strong>Age</strong>: 33 years old.</p></li><li><p><strong>Gender</strong>: Female (she/her).</p></li><li><p><strong>Aboriginal or Torres Strait Islander:</strong> No.</p></li><li><p><strong>Location:</strong> Labour ward birth room, on the bed.</p></li></ul><p><strong>Background (if asked):</strong></p><ul><li><p>Third baby. Two previous uncomplicated vaginal births (3.4 kg and 3.7 kg).</p></li><li><p>Gestational diabetes managed with diet and metformin. Polyhydramnios on ultrasound. Baby estimated large for gestational age.</p></li><li><p>Labour was 16 hours, augmented with oxytocin. Afebrile throughout.</p></li><li><p>Syntocinon (oxytocin) 10 units IM given at birth. Placenta delivered by controlled cord traction 10 minutes ago.</p></li><li><p>No asthma. No hypertension or pre-eclampsia. No bleeding disorder. Not on anticoagulants. Allergies: nil. Blood group known O positive, antibody screen negative.</p></li><li><p>Last passed urine about 4 hours ago, before pushing.</p></li></ul><p><strong>Behaviour (Mrs Rao):</strong></p><ul><li><p>Pale, anxious and a little light-headed. Say: \"I feel a bit dizzy and cold. Is that a lot of blood?\"</p></li><li><p>You are able to follow commands and answer questions.</p></li><li><p>If the candidate explains clearly and asks permission before bimanual compression, say: \"Yes, please do whatever you need to.\" If they do not explain or ask permission, say: \"What are you doing?\"</p></li><li><p>Ask: \"Will this stop the bleeding? Am I going to need an operation?\" The candidate should answer honestly: it may slow the bleeding while other treatments work, and you will say if she needs to go to theatre.</p></li></ul><p><strong>Behaviour (Mr Rao):</strong></p><ul><li><p>Standing frozen at the bedside, holding the baby's blanket, looking pale.</p></li><li><p>Say: \"There is so much blood. Is she going to die? Nobody is telling me anything.\"</p></li><li><p>Settle if the candidate acknowledges how frightening it is, explains simply what is happening and offers to stay and update him.</p></li><li><p>If the candidate uses jargon, say: \"I do not understand what that means.\"</p></li></ul><p><strong>Examiner findings (give only when requested):</strong></p><ul><li><p><strong>Airway:</strong> patent, speaking in full sentences.</p></li><li><p><strong>Breathing:</strong> RR 22/min, SpO2 97% on room air, chest clear.</p></li><li><p><strong>Circulation:</strong> HR 112/min, BP 98/58 mmHg, CRT 3 seconds, cool peripheries. Ongoing bright red bleeding. The midwife has weighed pads and drapes: quantified blood loss now 1100 mL and rising.</p></li><li><p><strong>Disability:</strong> alert, GCS 15. BGL 7.2 mmol/L.</p></li><li><p><strong>Exposure and abdomen:</strong> temperature 36.8 °C. Fundus is soft and boggy, 3 cm above the umbilicus and deviated to the right. Bladder is palpable and full. No perineal or vaginal tear bleeding on inspection; the perineum has a small first-degree tear that is not bleeding actively.</p></li><li><p><strong>Speculum or vaginal inspection (if requested):</strong> large clots in the vagina and uterus. After fundal massage, a large clot is expelled and the fundus firms briefly, then relaxes again.</p></li><li><p><strong>After catheter and uterotonics:</strong> 600 mL of urine drained. The uterus is still soft and bleeding continues, so bimanual compression is needed.</p></li><li><p><strong>Bimanual compression:</strong> candidate demonstrates on the model. Bleeding slows once compression is held correctly.</p></li><li><p><strong>Placenta (examiner hands over a card or model):</strong> intact membranes, three-vessel cord, but one cotyledon is missing on the maternal surface with a ragged defect about 4 cm wide.</p></li></ul><p><strong>Examiner prompts:</strong></p><ul><li><p>If the candidate has not named the cause by the end of task 1, ask: \"What is the most likely cause of this bleeding?\"</p></li><li><p>In task 4, ask: \"What does this placental finding suggest and who do you need to tell?\"</p></li></ul>",
+ "points": [
+  "Uterine atony (Tone) is the most common cause of primary PPH; risk factors include prolonged or precipitate labour, overdistension (macrosomia, polyhydramnios, multiple pregnancy), high parity and chorioamnionitis, and a full bladder can impair contraction.",
+  "Expel retained clots by fundal massage or manual removal because they distend the uterus and prevent effective contraction, and keep giving uterotonics at the same time.",
+  "Consider bimanual compression early: one hand on the abdomen behind the uterus, a fist in the anterior fornix, maintained until bleeding is controlled or she is in theatre, with analgesia and explanation and consent beforehand.",
+  "Speak to the partner in plain language, acknowledge how frightening it is and say you will keep them updated.",
+  "A missing cotyledon or ragged maternal surface defect suggests retained placental tissue: alert the senior clinician and expect PPH."
+ ],
+ "presentation": [
+  "Postpartum haemorrhage",
+  "Heavy vaginal bleeding after birth"
+ ],
+ "refs": [
+  "Queensland Clinical Guidelines. Primary postpartum haemorrhage. Queensland Health.",
+  "RANZCOG. Statement on management of postpartum haemorrhage. Royal Australian and New Zealand College of Obstetricians and Gynaecologists.",
+  "National Blood Authority. Patient Blood Management Guidelines: Module 5 Obstetrics and Maternity. Australian Government.",
+  "Local hospital PPH and massive haemorrhage protocol (check current doses and drug availability)."
+ ],
+ "specialty": [
+  "Obstetrics",
+  "Emergency Medicine"
+ ],
+ "stem": "<p>You are the medical resident on call for the labour ward at a metropolitan hospital. The midwife has asked you to urgently review Mrs Anita Rao, a 33-year-old woman (G3P2, now P3) who gave birth vaginally 25 minutes ago to a 4.3 kg baby after a 16-hour labour augmented with oxytocin. Her pregnancy was complicated by gestational diabetes and polyhydramnios. She received oxytocin 10 units IM with the birth of the baby, and the placenta was delivered by controlled cord traction 10 minutes ago. The midwife reports ongoing bright red bleeding with clots and estimates blood loss so far at 900 mL. The baby is skin to skin with the mother and is well. Her partner, Mr Vikram Rao, is in the room.</p><p>The midwife has already called for the obstetric registrar and the anaesthetist, who are on their way. A second midwife is in the room. A bimanual compression model is available. The examiner will give you findings as you ask for them.</p>",
+ "tasks": [
+  "<p><strong>Assess</strong> Mrs Rao and <strong>commence</strong> immediate management of her bleeding. State your actions and orders aloud, and ask the examiner for findings (3 minutes).</p>",
+  "<p><strong>Explain</strong> to Mrs Rao what is happening and <strong>obtain consent</strong> for bimanual compression. Then describe and demonstrate how you would perform it on the model (3 minutes).</p>",
+  "<p><strong>Speak</strong> to Mr Rao, who is standing at the bedside and looks distressed (1 minute).</p>",
+  "<p><strong>Examine</strong> the placenta the midwife hands you, <strong>state</strong> your finding to the examiner and say what you will do next (1 minute).</p>"
+ ],
+ "title": "Boggy uterus after a big baby",
+ "type": [
+  "Emergency",
+  "Management",
+  "Counselling"
+ ]
+}

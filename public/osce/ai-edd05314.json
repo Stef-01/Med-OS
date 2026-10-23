@@ -1,0 +1,196 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": {
+  "date": "2026-10-19",
+  "label": "CPE brief"
+ },
+ "licence": "own",
+ "basis": [],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Performs hand hygiene, introduces self to the mother and nurse, and handles the infant gently with minimal disturbance."
+  },
+  {
+   "id": 3,
+   "t": "heading",
+   "x": "Assessment (A to E)"
+  },
+  {
+   "id": 4,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Identifies increased work of breathing [RR 64, nasal flaring, recession]."
+    },
+    {
+     "crit": true,
+     "id": 2,
+     "t": "checkbox",
+     "x": "Asks for SpO2 and identifies hypoxaemia in room air [SpO2 87%]."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Auscultates the chest [widespread crackles and wheeze]."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Assesses airway and breathing:"
+  },
+  {
+   "id": 5,
+   "t": "checkbox",
+   "x": "Assesses circulation and hydration [HR 170, CRT 2 seconds, dry mucous membranes, 2 wet nappies in 24 hours]."
+  },
+  {
+   "id": 6,
+   "t": "checkbox",
+   "x": "Assesses disability and exposure [AVPU alert, temperature 37.8°C] and asks about apnoea."
+  },
+  {
+   "id": 7,
+   "t": "checkbox",
+   "x": "Elicits history of feeding [about 40% of usual intake], age and risk factors for severe disease."
+  },
+  {
+   "id": 8,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "crit": true,
+   "id": 9,
+   "t": "checkbox",
+   "x": "Starts oxygen by nasal prongs once SpO2 is persistently below 90% in room air, with target SpO2 of 90% or above, by 2 minutes."
+  },
+  {
+   "id": 10,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "High flow oxygen at 2 L/kg/min = 12 L/min for 6 kg."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Early senior and PICU involvement if apnoea, exhaustion or rising oxygen need."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Plans escalation if work of breathing or hypoxaemia worsens on standard oxygen:"
+  },
+  {
+   "crit": true,
+   "id": 11,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Nasogastric feeds first if unable to maintain oral hydration."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "If nasogastric feeds fail or are unsafe, IV isotonic fluid at 2/3 maintenance = 16 mL/h (maintenance 4 mL/kg/h = 24 mL/h for 6 kg)."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Plans hydration as intake is below the infant's needs:"
+  },
+  {
+   "crit": true,
+   "id": 12,
+   "t": "checkbox",
+   "x": "Avoids salbutamol, adrenaline, corticosteroids, antibiotics, hypertonic saline and routine chest X-ray or blood tests."
+  },
+  {
+   "id": 13,
+   "t": "checkbox",
+   "x": "Orders continuous SpO2 monitoring while on oxygen, frequent reassessment and nasal suction only if the nose is blocked."
+  },
+  {
+   "id": 14,
+   "t": "checkbox",
+   "x": "Admits to the paediatric ward and states discharge criteria [SpO2 90% or above in room air, feeding adequately, family confident]."
+  },
+  {
+   "id": 15,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 16,
+   "t": "checkbox",
+   "x": "Explains in plain language that bronchiolitis is a viral chest infection, worst around day 3 to 5, with cough lasting up to 3 weeks, and acknowledges the mother's worry."
+  },
+  {
+   "id": 17,
+   "t": "checkbox",
+   "x": "Explains why antibiotics and Ventolin are not used, and why oxygen and tube or drip feeds are needed."
+  },
+  {
+   "crit": true,
+   "id": 18,
+   "t": "checkbox",
+   "x": "Gives red flags to report: pauses in breathing, colour change, worsening effort, drowsiness or fewer wet nappies. Checks understanding."
+  }
+ ],
+ "complexity": "Moderate",
+ "context": [
+  "Emergency Department"
+ ],
+ "desc": "This station involves assessing and managing an infant with bronchiolitis, hypoxaemia and poor feeding in the Emergency Department, then explaining the plan to their parent.",
+ "diagnosis": [
+  "Bronchiolitis"
+ ],
+ "explain": "<h3>Oxygen</h3><p>Bronchiolitis is a viral lower airway infection with mucus plugging and airway oedema. Start oxygen if SpO2 is persistently below 90% in room air, and aim for a target of 90% or above. Do not give oxygen for saturations above this, as it can prolong admission.</p><h3>Escalation</h3><p>If hypoxaemia or work of breathing worsens on standard oxygen, consider high flow oxygen at 2 L/kg/min and involve senior or PICU staff early, especially with apnoea or tiring.</p><h3>Hydration</h3><p>Fast breathing impairs feeding. Offer nasogastric feeds if oral intake is inadequate. If these fail or are unsafe, give isotonic IV fluid at 2/3 maintenance to avoid hyponatraemia.</p><h3>What not to do</h3><p>Bronchodilators, adrenaline, corticosteroids, antibiotics, hypertonic saline and routine X-rays or bloods do not improve outcomes and are not recommended.</p>",
+ "focus": "Bronchiolitis in an infant with increased work of breathing",
+ "guide": "<p>A <strong>high-performing candidate</strong> recognises hypoxaemia and increased work of breathing early, starts oxygen to a clear target, and plans a hydration strategy with correct fractions and weight-based figures. They avoid ineffective drugs, give a clear escalation plan, and explain the illness to the mother empathically in plain language.</p><p>A <strong>borderline candidate</strong> assesses breathing but delays oxygen or gives no threshold or target, orders salbutamol or antibiotics, or gives vague hydration advice. Their explanation to the mother is rushed or jargon-heavy, with few red flags.</p>",
+ "id": "ai-edd05314",
+ "media": {},
+ "origin": "ai",
+ "patient": "<p><strong>You are the ED nurse assistant.</strong> The infant is 4 months old, 6 kg, born at term, previously well, immunised to date. Day 3 of coryza and cough, today breathing fast and taking about 40% of usual feeds, with 2 wet nappies in 24 hours. No apnoea at home, no sick-contact concerns other than a sibling with a cold. The mother is anxious but cooperative.</p><p><strong>Opening observations (room air):</strong> HR 170, RR 64, SpO2 87%, temperature 37.8°C, CRT 2 seconds, irritable but alert (AVPU: A). BGL not required unless asked (5.2 mmol/L).</p><p><strong>Give when asked or examined:</strong> nasal flaring, subcostal and intercostal recession, no grunt, widespread crackles and wheeze, no apnoea witnessed, mildly dry mucous membranes, anterior fontanelle normal. No chest X-ray, bloods or viral swab are needed; state they are not available urgently if requested.</p><p><strong>Changes in observations:</strong></p><ul><li>Oxygen started by 2 minutes: SpO2 rises to 92%, RR 58, HR 160.</li><li>No oxygen by 3 minutes: SpO2 falls to 84%, RR 70, HR 180, intermittent grunt, tiring.</li><li>If salbutamol, adrenaline, steroid or antibiotic is ordered: no change in observations.</li><li>No feeding or fluid plan by 5 minutes: the infant refuses a feed and the nappy is still dry; HR 175.</li><li>If high flow is requested at 5 minutes: it is being set up; SpO2 stays 91 to 92%.</li></ul><p><strong>Mother (from 6 minutes):</strong> Ask: \"Why can't you give Ventolin or antibiotics?\" \"Why does a tube or drip need to go in?\" \"How long will this last?\" \"When can we go home, and what should I watch for?\"</p>",
+ "points": [
+  "Start oxygen when SpO2 is persistently below 90% in room air, and target 90% or above.",
+  "Supportive care is the treatment: oxygen, hydration and minimal handling.",
+  "Use nasogastric feeds before IV fluids, and give IV fluids at 2/3 maintenance.",
+  "Salbutamol, adrenaline, steroids, antibiotics and routine investigations are not recommended.",
+  "Escalate early to high flow oxygen and senior or PICU review for apnoea, exhaustion or worsening hypoxaemia."
+ ],
+ "presentation": [
+  "Increased work of breathing",
+  "Poor feeding",
+  "Cough and coryza"
+ ],
+ "refs": [
+  "RCH CPG: Bronchiolitis",
+  "RCH CPG: Intravenous fluids"
+ ],
+ "specialty": [
+  "Paediatrics",
+  "Emergency Medicine"
+ ],
+ "stem": "<p>You are the doctor in the Emergency Department. A 4-month-old infant weighing 6 kg has been brought in by their mother with 3 days of runny nose and cough, and today fast breathing and poor feeding. A nurse is at the bedside. You have 2 minutes reading time, then 8 minutes in the station.</p>",
+ "tasks": [
+  "<p><strong>Assess</strong> the infant using an A to E approach, state your findings aloud, and start immediate management (3 minutes).</p>",
+  "<p><strong>Outline</strong> your ongoing management plan to the examiner, including escalation (3 minutes).</p>",
+  "<p><strong>Explain</strong> the diagnosis and plan to the mother and answer their questions (2 minutes).</p>"
+ ],
+ "title": "Infant with increased work of breathing",
+ "type": [
+  "Emergency",
+  "Management",
+  "Counselling"
+ ]
+}

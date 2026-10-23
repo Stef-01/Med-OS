@@ -1,0 +1,204 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": {
+  "label": "Primary PPH simulation",
+  "date": "2026-10-06",
+  "key": "e0eacbbce6"
+ },
+ "licence": "own",
+ "id": "ai-a98052d6",
+ "title": "Primary postpartum haemorrhage on delivery suite",
+ "desc": "This station involves leading the assessment, resuscitation and escalation of a primary postpartum haemorrhage from uterine atony, interpreting blood results, and explaining the plan, disposition and safety-netting to the patient at the bedside.",
+ "specialty": [
+  "Obstetrics"
+ ],
+ "type": [
+  "Emergency",
+  "Management",
+  "Counselling"
+ ],
+ "complexity": "High",
+ "context": [],
+ "presentation": [
+  "Postpartum bleeding",
+  "Tachycardia",
+  "Hypotension"
+ ],
+ "diagnosis": [
+  "Primary postpartum haemorrhage",
+  "Uterine atony"
+ ],
+ "stem": "<p>You are the junior doctor on delivery suite and the first doctor to arrive in room 1. The patient is a 24-year-old G2P2 who gave birth vaginally at 39 weeks, 40 minutes ago, after a precipitate labour of about 2 hours. She is not breastfeeding and was booked for early discharge today. She is bleeding heavily. The midwife has already given an intramuscular uterotonic and is at the bedside with a nurse assistant. You are the team leader.</p><p>You have 2 minutes reading time, then 8 minutes in the station. Verbalise your actions and requests to the nurse.</p>",
+ "tasks": [
+  "<p>Rapidly <strong>assess</strong> and resuscitate the patient, request <strong>investigations</strong> with reasons, and begin and <strong>escalate management</strong> as team leader (4 minutes).</p>",
+  "<p><strong>Interpret</strong> the results the nurse gives you and make the <strong>calls</strong> required to the nurse as if on the phone (2 minutes).</p>",
+  "<p><strong>Explain</strong> to the patient what has happened and the plan, including disposition, safety-netting advice and follow-up (2 minutes).</p>"
+ ],
+ "patient": "<p><strong>Role:</strong> You are the SIM-lab nurse assistant, playing the delivery suite midwife in room 1. Be brisk and answer only what is asked. The patient is a 24-year-old G2P2 at 39 weeks, birth 40 minutes ago, not breastfeeding. IM uterotonic given at birth. Placenta reported complete, small perineal graze only, bladder palpable, fundus boggy on first palpation.</p><p><strong>Opening obs (0 min):</strong> HR 135, BP 100/60, RR 26, SpO2 95% on air, temperature 36.4 °C, AVPU alert. Blood loss about 1,000 mL and still bleeding. Blood group on file A-positive.</p><ul><li>By 2 min, if fundal massage with clot expulsion and catheter done: loss 1,300 mL, HR 125, BP 100/60. If not: loss 1,500 mL, HR 140, BP 90/50.</li><li>If oxygen is given: SpO2 97%. If no oxygen by 3 min: SpO2 91%, then 89% at 4 min.</li><li>At 3 min say: 'Blood loss is now 1,500 mL.' Say nothing more unless asked.</li><li>If no MTP or theatre call by 4 min: BP 60/40, HR 150, drowsy (responds to voice). Say 'She is near-arrest, what now?'. If escalated, with TXA and bimanual compression underway: HR 118, BP 95/58.</li><li>If no bimanual compression by 5 min: bleeding continues, loss 2,000 mL.</li></ul><p><strong>Results when asked (from 4 min):</strong> Hb 78 g/L (booking 124), platelets 96, INR 1.4, fibrinogen 1.4 g/L, lactate 5.2 mmol/L, base excess -9. Group A-positive, antibody screen negative.</p><p><strong>Calls:</strong> If the candidate gives a long history to blood bank, say 'Just the key information, please.' If they ask for reception to arrange theatre, say 'Reception can't book theatre, who should I call?'.</p><p><strong>From 6 min (stabilising):</strong> HR 110, BP 100/62, SpO2 97%, alert, loss 1,800 mL, bleeding slowing. The patient asks: 'Am I going to die?' 'Am I still going home today?' 'Can I still hold my baby?' 'Will I need my womb taken out?' 'What should I look out for later?'</p>",
+ "guide": "<p>A <strong>high-performing candidate</strong> takes the lead immediately, assigns roles and uses a T-sheet. They start oxygen before sats fall below 90%, gain access and recognise the shock index of 1.35 as significant compromise. They work through the 4 Ts, massage the uterus and catheterise, name uterotonics with routes, give tranexamic acid within 3 hours and perform bimanual compression. They activate the MTP or theatre by 1,500 mL, give blood bank and the theatre manager key information only, interpret the fibrinogen and lactate correctly, and stay at the bedside reassuring the patient. They then explain why discharge is cancelled, with specific discharge criteria, return advice and follow-up.</p><p>A <strong>borderline candidate</strong> manages tone and gives drugs but is slow to escalate, activating the MTP only after BP falls to 60/40. They give long handovers, ring reception, omit tranexamic acid or bimanual compression, or misread the fibrinogen. Their explanation to the patient is brief and lacks specific safety-netting.</p><p>A <strong>poor candidate</strong> does not assess for shock, does not control the uterus or empty the bladder, never escalates, and does not speak to the patient.</p>",
+ "explain": "<h3>Recognition</h3><p>Primary PPH is blood loss of 500 mL or more after vaginal birth within 24 hours; loss over 1,000 mL or signs of shock is treated as major. Visual estimates under-read the true loss. A shock index (HR over SBP) above 1 signals significant haemodynamic compromise needing urgent escalation; a BP of 60/40 is near-arrest. Here the opening shock index is 135/100 = 1.35, so the patient is compromised, not peri-arrest, and needs escalation now to prevent deterioration. Start oxygen by mask before SpO2 falls below 90% and aim for 94% or above.</p><h3>The 4 Ts</h3><p>Tone is the commonest cause (about 70%). Here a precipitate labour, a full bladder and no breastfeeding (so no endogenous oxytocin stimulus) all promote atony. Also exclude Trauma (perineum, vagina, cervix, uterine rupture or inversion), Tissue (retained placenta or membranes) and Thrombin (coagulopathy, which can be a consequence of the haemorrhage itself).</p><h3>Investigations and interpretation</h3><p>Send group and crossmatch, FBC, coagulation with fibrinogen, and VBG with lactate. Hb falls late, so Hb 78 g/L after 1.5 L of loss underestimates the deficit. A fibrinogen below 2 g/L predicts progression to severe PPH and needs replacement (cryoprecipitate or fibrinogen concentrate) within the MTP; keep platelets above 50 and maintain temperature at 36 °C or above. Lactate 5.2 mmol/L with base excess -9 confirms hypoperfusion.</p><h3>Treatment and escalation</h3><p>Rub up the fundus and expel clots, empty the bladder, and give oxytocin (IM then IV infusion) and ergometrine IM per local protocol, avoiding ergometrine in hypertension. Escalate to carboprost IM or misoprostol per local protocol. Give tranexamic acid IV per local protocol within 3 hours of birth. Apply bimanual compression while arranging definitive care. Activate the massive transfusion protocol or call theatre by 1,500 mL at the latest; calling early has no penalty. Calls give key information only (for example 'Primary PPH, A-positive, MTP, delivery suite room 1') and theatre requests go to the theatre manager, not reception. A T-sheet tracks drugs, timing and cumulative loss.</p><h3>Communication, disposition and follow-up</h3><p>Stay at the bedside and give brief reassurance during cannulation and fundal checks. The planned early discharge is cancelled. She stays on monitored observations and may be considered for discharge once bleeding has settled, the uterus is firm, pulse is under 100/min, systolic BP is above 100 mmHg without postural symptoms, she is passing urine, Hb is rechecked with an iron plan, and VTE risk is reviewed. Return advice includes soaking more than one pad an hour, clots larger than a golf ball, fever of 38 °C or above, offensive lochia, dizziness or fainting, palpitations or breathlessness, and calf pain or swelling. Follow-up includes FBC and ferritin, GP and midwife review, a debrief, and a plan for birth in a hospital with transfusion capability in any future pregnancy.</p>",
+ "points": [
+  "Primary PPH is 500 mL or more after vaginal birth; tone causes most cases and risk factors here are precipitate labour, a full bladder and no breastfeeding.",
+  "A shock index above 1 signals significant haemodynamic compromise needing urgent escalation; BP 60/40 is near-arrest.",
+  "Start oxygen by mask before SpO2 falls below 90% and aim for SpO2 94% or above.",
+  "Work through the 4 Ts: Tone, Trauma, Tissue, Thrombin.",
+  "Fundal massage, emptying the bladder and uterotonics (oxytocin IM and IV, ergometrine IM, carboprost IM, misoprostol, all per local protocol) treat tone.",
+  "Give tranexamic acid IV per local protocol within 3 hours of birth."
+ ],
+ "refs": [
+  "Royal Australian and New Zealand College of Obstetricians and Gynaecologists (RANZCOG). Management of postpartum haemorrhage (PPH) (C-Obs 43). RANZCOG; current edition. Available at: https://ranzcog.edu.au",
+  "Safer Care Victoria. Postpartum haemorrhage. Maternity eHandbook. Victorian Government. Available at: https://www.safercare.vic.gov.au",
+  "RCH Clinical Practice Guidelines do not cover obstetrics."
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Hand hygiene and PPE, introduces self as team leader and allocates roles, including a scribe using a T-sheet to track drugs, times and cumulative blood loss."
+  },
+  {
+   "id": 3,
+   "t": "heading",
+   "x": "Assessment (A to E)"
+  },
+  {
+   "id": 4,
+   "t": "checkbox",
+   "x": "Performs a rapid A to E assessment with simultaneous resuscitation:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Oxygen by mask started before SpO2 falls below 90% (target SpO2 94% or above)."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Two large-bore IV cannulae with bloods drawn, warmed IV fluid while blood is arranged, temperature kept at 36 °C or above and blood loss quantified (weighed pads)."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Recognises HR 135 over SBP 100 (shock index 1.35, above 1) as significant haemodynamic compromise needing urgent escalation, and BP 60/40 as near-arrest.",
+     "crit": true
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "t": "checkbox",
+   "x": "Identifies the cause using the 4 Ts:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Tone: boggy fundus and full bladder, with precipitate labour and no breastfeeding as risk factors.",
+     "crit": true
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Trauma, Tissue and Thrombin: inspects perineum, vagina and cervix, checks placenta and membranes are complete, and considers coagulopathy."
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "t": "checkbox",
+   "x": "Requests investigations with reasons: group and crossmatch, FBC (Hb lags behind acute loss), coagulation including fibrinogen (below 2 g/L predicts severe PPH) and platelets, and VBG with lactate (perfusion)."
+  },
+  {
+   "id": 7,
+   "t": "checkbox",
+   "x": "Interprets the results given:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Hb 78 g/L understates the acute loss; fibrinogen 1.4 g/L (below 2 g/L) and INR 1.4 show early coagulopathy needing fibrinogen replacement within the MTP, with platelets kept above 50."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Lactate 5.2 mmol/L and base excess -9 show hypoperfusion; repeat to guide resuscitation."
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "id": 9,
+   "t": "checkbox",
+   "x": "Treats tone first: fundal massage with expulsion of clots, and empties the bladder with an indwelling catheter.",
+   "crit": true
+  },
+  {
+   "id": 10,
+   "t": "checkbox",
+   "x": "Uterotonics named with route per local protocol: oxytocin IM given, oxytocin IV infusion, ergometrine IM (check for hypertension), then carboprost IM or misoprostol if bleeding persists."
+  },
+  {
+   "id": 11,
+   "t": "checkbox",
+   "x": "Tranexamic acid IV per local protocol, given within 3 hours of birth.",
+   "crit": true
+  },
+  {
+   "id": 12,
+   "t": "checkbox",
+   "x": "Performs bimanual uterine compression while bleeding continues and further measures are arranged."
+  },
+  {
+   "id": 13,
+   "t": "checkbox",
+   "x": "Activates the massive transfusion protocol and/or calls theatre by 1,500 mL blood loss at the latest.",
+   "crit": true
+  },
+  {
+   "id": 14,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 15,
+   "t": "checkbox",
+   "x": "Calls with key information only: to blood bank ('Primary PPH, A-positive, MTP, delivery suite room 1'), and to the theatre manager rather than reception."
+  },
+  {
+   "id": 16,
+   "t": "checkbox",
+   "x": "Stays at the bedside, giving brief plain-language reassurance during cannulation and fundal checks, and honestly answers 'Am I going to die?' and the hysterectomy question."
+  },
+  {
+   "id": 17,
+   "t": "checkbox",
+   "x": "Explains disposition, safety-netting and follow-up:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Early discharge cancelled; stays on monitored obstetric observations; discharge only when bleeding has settled, uterus is firm, pulse under 100/min, systolic BP above 100 mmHg without postural symptoms, passing urine, Hb rechecked with an iron plan, and VTE risk reviewed."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Return advice: soaking more than one pad an hour, clots larger than a golf ball, fever of 38 °C or above, offensive lochia, dizziness, fainting, palpitations or breathlessness, calf pain or swelling; follow-up with FBC and ferritin, GP and midwife review, debrief, and a birth plan for future pregnancies."
+    }
+   ]
+  }
+ ],
+ "origin": "ai",
+ "focus": "Primary postpartum haemorrhage",
+ "basis": [],
+ "media": {}
+}

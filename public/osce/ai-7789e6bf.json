@@ -1,0 +1,276 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": "ai",
+ "licence": "own",
+ "basis": [
+  "243b07dc1b1b",
+  "9130aa8f7c83"
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Hand hygiene, introduces self and confirms identity of child and parent."
+  },
+  {
+   "id": 3,
+   "t": "checkbox",
+   "x": "Empathic, non-judgemental approach that acknowledges the parent's frustration and does not blame them for the delay."
+  },
+  {
+   "id": 4,
+   "t": "heading",
+   "x": "History"
+  },
+  {
+   "id": 5,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Onset and duration [Five weeks, daily]."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Nature of the cough, timing and triggers [Dry then wet, day and night, no trigger]."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Asks about noisy breathing or localised wheeze [Occasional right-sided noise]."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Characterises the cough:"
+  },
+  {
+   "crit": true,
+   "id": 6,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Elicits witnessed choking episode at a party after eating mixed nuts five weeks ago."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Establishes that the cough began that same evening."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Asks specifically about a sudden onset, choking, gagging or an event while eating or playing with small objects."
+  },
+  {
+   "crit": true,
+   "id": 7,
+   "t": "checkbox",
+   "x": "Reviews previous treatments and response [Amoxicillin, prednisolone and salbutamol, no response]."
+  },
+  {
+   "id": 8,
+   "t": "checkbox",
+   "x": "Asks about access to small objects at home and in day care [Sibling's Lego and beads]."
+  },
+  {
+   "id": 9,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Atopy, eczema, family history of asthma and previous wheeze."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Recurrent chest infections, failure to thrive, sick contacts, TB exposure, passive smoke exposure."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Screens for alternative causes of persistent cough:"
+  },
+  {
+   "id": 10,
+   "t": "checkbox",
+   "x": "Screens for upper airway and deep neck infection red flags [Fever, drooling, difficulty swallowing, neck stiffness or head tilt, stridor, voice change; all absent]."
+  },
+  {
+   "id": 11,
+   "t": "checkbox",
+   "x": "Asks about feeding, hydration, urine output, growth, immunisations and development."
+  },
+  {
+   "id": 12,
+   "t": "heading",
+   "x": "Interpretation"
+  },
+  {
+   "crit": true,
+   "id": 13,
+   "t": "checkbox",
+   "x": "Interprets the chest X-ray correctly as right lower lobe collapse with volume loss (not simple pneumonia)."
+  },
+  {
+   "crit": true,
+   "id": 14,
+   "t": "checkbox",
+   "x": "Links the history, localised signs and X-ray to a likely inhaled foreign body, and explains that a normal X-ray would not have excluded this."
+  },
+  {
+   "id": 15,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "crit": true,
+   "id": 16,
+   "t": "checkbox",
+   "x": "Arranges urgent referral to a paediatric centre with paediatric respiratory or ENT services for rigid bronchoscopy under general anaesthesia, both to confirm and to remove the foreign body."
+  },
+  {
+   "crit": true,
+   "id": 17,
+   "t": "checkbox",
+   "x": "Advises fasting (nil by mouth) pending the anaesthetic and arranges safe transfer (phone call to the receiving team, escalating transport if there is any deterioration)."
+  },
+  {
+   "id": 18,
+   "t": "checkbox",
+   "x": "Stops further empirical treatment with antibiotics, steroids and bronchodilators, explaining why they have not helped."
+  },
+  {
+   "crit": true,
+   "id": 19,
+   "t": "checkbox",
+   "x": "Gives clear safety-netting for sudden worsening, including stridor, increased work of breathing, cyanosis or complete choking, and advises calling 000."
+  },
+  {
+   "id": 20,
+   "t": "checkbox",
+   "x": "Gives first aid advice for choking in a toddler: encourage coughing if effective, back blows and chest thrusts if ineffective, and call 000. No blind finger sweeps."
+  },
+  {
+   "id": 21,
+   "t": "checkbox",
+   "x": "Counsels on prevention: avoid whole nuts and hard, small or round foods under 5 years, keep small objects and toy parts away from toddlers, and keep children seated while eating."
+  },
+  {
+   "id": 22,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 23,
+   "t": "checkbox",
+   "x": "Explains the diagnosis and the plan in plain language and checks understanding."
+  },
+  {
+   "id": 24,
+   "t": "checkbox",
+   "x": "Responds to the parent's questions honestly, including reassurance that bronchoscopy is the usual and effective treatment and that the delay is common because history is often missed."
+  },
+  {
+   "id": 25,
+   "t": "heading",
+   "x": "Examiner questions"
+  },
+  {
+   "crit": true,
+   "id": 26,
+   "t": "checkbox",
+   "x": "Question 1: States inhaled foreign body as the leading diagnosis, with supporting features: sudden onset after choking, persistent cough unresponsive to antibiotics, steroids and bronchodilators, focal collapse and localised signs."
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "Question 2: States that rigid bronchoscopy under general anaesthesia by an experienced paediatric team is the definitive diagnostic and therapeutic procedure."
+  },
+  {
+   "crit": true,
+   "id": 28,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "The retropharyngeal space runs from the skull base to about T1–T2 and opens into the superior mediastinum, so infection can spread to cause mediastinitis."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Swelling can cause airway obstruction."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Abscess is most common in young children after a pharyngeal, tonsillar or upper respiratory tract infection."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Question 3: Explains why retropharyngeal infection is dangerous:"
+  },
+  {
+   "id": 29,
+   "t": "checkbox",
+   "x": "Question 3: Outlines the urgent approach to a suspected retropharyngeal abscess: keep the child calm, avoid distressing examination of the throat, secure the airway, obtain imaging (CT with contrast) once safe, start IV antibiotics and involve ENT for drainage."
+  }
+ ],
+ "complexity": "High",
+ "context": [],
+ "desc": "This station involves taking a focused history from the parent of a toddler with a five-week cough that has not responded to antibiotics, steroids or bronchodilators, interpreting a chest X-ray showing focal lung collapse, explaining the plan, and answering examiner questions about airway infections including retropharyngeal abscess.",
+ "diagnosis": [
+  "Inhaled foreign body",
+  "Retropharyngeal abscess"
+ ],
+ "explain": "<h3>Inhaled foreign body in a toddler</h3><p>Foreign body aspiration peaks between one and three years of age, when children explore with their mouths, are not yet able to chew hard foods well, and are often walking, playing or laughing while eating. Nuts, seeds, raw vegetables and small toy parts are common. After the choking event, which may be brief and unwitnessed, many children settle and appear well, so the diagnosis is often delayed.</p><p>Think of an inhaled foreign body in a child with a persistent cough that does not respond to antibiotics, steroids or bronchodilators, especially when there is focal collapse on chest X-ray. Other clues are a sudden onset, unilateral wheeze, reduced air entry on one side and recurrent pneumonia in the same lobe. A normal chest X-ray does not exclude aspiration. Many foreign bodies, particularly organic ones such as nuts, are radiolucent.</p><ul><li><p>Typical findings include focal collapse or air trapping (hyperinflation) distal to the object.</p></li><li><p>The definitive management is rigid bronchoscopy under general anaesthesia in a centre with paediatric airway expertise.</p></li><li><p>Treatment with antibiotics or bronchodilators will not fix the problem and delays the diagnosis. Prolonged retention risks infection, bronchiectasis and a lung that does not re-expand.</p></li></ul><p>The child should be kept nil by mouth, monitored closely and transferred safely. Parents should know to call 000 if complete obstruction, stridor or severe respiratory distress occurs, and how to give choking first aid. Prevention includes avoiding whole nuts and other hard or small foods under five years, supervising meals and keeping small objects away.</p><h3>Retropharyngeal space infection</h3><p>The retropharyngeal space runs from the skull base to about T1–T2 and opens into the superior mediastinum. Infection here can spread downwards to cause mediastinitis, which is life-threatening. Swelling in the posterior pharynx can also narrow the airway.</p><p>Retropharyngeal abscess is most common in young children after a pharyngeal, tonsillar or upper respiratory tract infection. It should be considered when a toddler has fever, sore throat or refusal to swallow, drooling, muffled voice, neck stiffness or torticollis, and sometimes stridor.</p><ul><li><p>Keep the child calm and avoid distressing examination. Prioritise airway.</p></li><li><p>Obtain imaging, usually CT neck with contrast, once the child is stable.</p></li><li><p>Start IV antibiotics and involve ENT and anaesthetics for possible drainage.</p></li><li><p>Further complications include jugular vein thrombosis, carotid involvement and aspiration of pus.</p></li></ul>",
+ "focus": "Toddler with persistent cough and airway infection",
+ "guide": "<p>A <strong>high-performing candidate</strong> recognises early that a persistent cough with a treatment-resistant course and focal collapse needs an explanation beyond infection or asthma. They ask the key question about a sudden onset and choking, uncover the nut aspiration event without leading the parent, and link it to the X-ray. They explain clearly that the plan is urgent paediatric referral for bronchoscopy, keep Jasper fasted, give robust safety-netting and choking first aid advice, and counsel on food and toy safety without blame. When asked about retropharyngeal abscess, they explain the anatomy (skull base to T1–T2, continuous with the superior mediastinum), name mediastinitis and airway obstruction as the dangers, and describe airway-first management.</p><p>A <strong>borderline candidate</strong> may take a general cough history but does not ask about choking or a sudden onset, and may suggest further antibiotics, a different inhaler or a repeat X-ray. They may recognise the collapse but not name foreign body, or recommend referral without urgency or fasting. They may know that retropharyngeal abscess is serious but be unable to explain why, missing the link to the mediastinum.</p>",
+ "id": "ai-7789e6bf",
+ "media": {},
+ "origin": "ai",
+ "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name:</strong> Jasper Nguyen, aged 2 years 4 months.</p></li><li><p><strong>Parent:</strong> Linh Nguyen, a tired and worried parent who feels they have been \"fobbed off\" by earlier clinics.</p></li><li><p><strong>Setting:</strong> General practice clinic.</p></li><li><p><strong>Aboriginal or Torres Strait Islander:</strong> No.</p></li></ul><p><strong>Presenting complaint:</strong> Cough every day for five weeks that will not go away.</p><p><strong>Volunteer freely:</strong></p><ul><li><p>The cough is present day and night, sometimes dry and sometimes a bit wet and rattly.</p></li><li><p>It has not improved at all with three treatments: a week of amoxicillin, three days of prednisolone liquid, and a puffer with a spacer.</p></li><li><p>You are frustrated and worried that something has been missed.</p></li></ul><p><strong>Only if specifically asked about onset, choking, gagging or what Jasper was eating:</strong></p><ul><li><p>The cough began suddenly five weeks ago at a family birthday party. Jasper was walking around with a handful of mixed nuts from a bowl, then started gagging, coughing and went red in the face for about a minute.</p></li><li><p>It settled by itself, nothing was seen to come out, and you assumed the nuts were swallowed. You did not mention this to the other doctors because Jasper \"seemed fine afterwards\". The cough started that evening.</p></li><li><p>If the candidate is empathic and asks about it, say: <em>\"I honestly never thought it could have gone down the wrong way.\"</em></p></li></ul><p><strong>Cough characteristics:</strong></p><ul><li><p>Not worse at any particular time and not triggered by cold air or exercise.</p></li><li><p>No whooping, no vomiting after coughing, no blue episodes since the first event.</p></li><li><p>Occasional noisy breathing on the right side of the chest that you can hear when your ear is against Jasper's back (only if asked about wheeze or noisy breathing).</p></li></ul><p><strong>Associated symptoms:</strong></p><ul><li><p>No fever apart from a mild temperature (up to 37.8°C) on a few days. No night sweats.</p></li><li><p>Eating and drinking normally, with no change in weight (growth tracking is normal). No drooling. No difficulty or pain with swallowing.</p></li><li><p>No neck pain, stiffness or head tilt. No stridor. No voice change.</p></li><li><p>Normal urine output.</p></li></ul><p><strong>Past history:</strong></p><ul><li><p>Born at term, no complications. No neonatal respiratory problems.</p></li><li><p>No previous chronic cough, no recurrent chest infections, no hospital admissions.</p></li><li><p>No eczema, food allergy or family history of asthma. No wheeze before this illness.</p></li><li><p>Immunisations up to date for age. Development normal.</p></li><li><p>No known sick contacts. No travel. No TB exposure.</p></li></ul><p><strong>Social history:</strong></p><ul><li><p>Lives with both parents and a five-year-old sibling who plays with small Lego pieces and beads.</p></li><li><p>Attends family day care two days per week.</p></li><li><p>Nobody smokes or vapes at home.</p></li></ul><p><strong>Questions to ask the candidate (use if not covered):</strong></p><ul><li><p><em>\"Why did the antibiotics and puffer not work?\"</em></p></li><li><p><em>\"Will Jasper need to go to hospital? Will they need an operation?\"</em></p></li><li><p><em>\"Is there anything I should have done when it happened?\"</em></p></li></ul><p><strong>Examiner questions (read after the counselling task):</strong></p><ol><li><p>What is your leading diagnosis and what features support it?</p></li><li><p>What is the definitive investigation and treatment, and where should it occur?</p></li><li><p>A different toddler presents with fever, a sore throat, refusal to swallow, drooling and a stiff, tilted neck after a recent upper respiratory tract infection. You suspect a retropharyngeal abscess. Why is infection in this space dangerous?</p></li></ol><p><em>The candidate should use non-medical language with the parent. Interrupt politely if jargon is used that a lay person would not understand. Use only the history above.</em></p>",
+ "points": [
+  "A toddler with persistent cough unresponsive to antibiotics, steroids and inhalers, plus focal collapse, may have an inhaled foreign body needing bronchoscopy.",
+  "Always ask about a sudden onset or choking episode; the event is often brief, forgotten or not mentioned.",
+  "A normal chest X-ray does not exclude an inhaled foreign body, as many are radiolucent.",
+  "The definitive treatment is rigid bronchoscopy under general anaesthesia at a paediatric centre; keep the child fasted and give clear safety-netting.",
+  "The retropharyngeal space runs from the skull base to about T1–T2 and opens into the superior mediastinum, so infection can cause mediastinitis and airway obstruction.",
+  "Retropharyngeal abscess is most common in young children after pharyngeal, tonsillar or upper respiratory infection."
+ ],
+ "presentation": [
+  "Cough",
+  "Persistent cough",
+  "Focal collapse on chest X-ray"
+ ],
+ "refs": [
+  "Royal Children's Hospital Melbourne. Clinical Practice Guidelines: Foreign body aspiration.",
+  "Royal Children's Hospital Melbourne. Clinical Practice Guidelines: Cough.",
+  "Royal Children's Hospital Melbourne. Clinical Practice Guidelines: Neck infections and stridor in children.",
+  "Australian Resuscitation Council. Guideline 4: Airway (choking first aid).",
+  "Therapeutic Guidelines (eTG). Respiratory and Antibiotic chapters: Pneumonia and paediatric chronic cough.",
+  "Chang AB, et al. Cough in children: definitions and clinical evaluation. Med J Aust 2006;184(8):398-403."
+ ],
+ "specialty": [
+  "Paediatrics",
+  "General Practice"
+ ],
+ "stem": "<p>You are a general practitioner reviewing Jasper Nguyen, a two-year-old child brought in by their parent, Linh. Jasper has had a daily cough for five weeks. Over this time they have been seen three times at other clinics and have tried amoxicillin, oral prednisolone and salbutamol by spacer, with no improvement. You ordered a chest X-ray at the last visit and the report has just come back.</p><p><strong>Observations today:</strong> temperature 37.4°C, heart rate 124/min, respiratory rate 32/min, SpO<sub>2</sub> 96% on room air. Jasper is alert, playful and well hydrated.</p><p><strong>Chest X-ray report:</strong> Right lower lobe collapse with volume loss and slight shift of the mediastinum to the right. No pleural effusion. No focal consolidation.</p>",
+ "tasks": [
+  "<p>Take a <strong>focused history</strong> from Linh, including any cause for the cough that has not yet been identified (4 minutes).</p>",
+  "<p><strong>Explain</strong> to Linh what you think is happening and outline your <strong>management plan</strong>, including safety advice (2 minutes).</p>",
+  "<p>Answer the examiner's <strong>questions</strong> (2 minutes).</p>"
+ ],
+ "title": "Persistent cough in a toddler not responding to treatment",
+ "type": [
+  "History",
+  "Counselling",
+  "Management"
+ ]
+}

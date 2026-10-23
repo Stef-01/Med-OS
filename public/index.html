@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f2236">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex, nofollow">
+<title>OSCE Practice</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon.svg">
+<link rel="preload" href="./fonts/Figtree-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fonts/Figtree-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }   /* the reset osce.css is drawn against */
+  html, body { min-height:100%; background:#1c1f31; color:#ededed; }
+  .boot { position:fixed; inset:0; display:grid; place-items:center; padding:24px; font:500 14px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif; color:#9499b8; text-align:center; }
+</style>
+<script src="./config.js"></script>
+</head>
+<body>
+<div class="boot" id="boot" role="status">Loading the stations…</div>
+<div id="cand" hidden></div>
+<noscript><div class="boot">This page needs JavaScript.</div></noscript>
+<script type="module">
+  import { openOsce } from './js/osce.mjs';
+  import { parseCandidate, renderCandidate } from './js/osce/candidate.mjs';
+
+  const cfg = window.OSCE_CONFIG || {};
+  const boot = document.getElementById('boot');
+  const fail = () => { boot.textContent = 'The stations did not load. Check the connection and reload the page.'; };
+  const cand = parseCandidate(location.search);
+  if (cand) renderCandidate(document.getElementById('cand'), cand).then(() => boot.remove(), fail);
+  else openOsce({ root: true, sbUrl: cfg.supabaseUrl || '', sbKey: cfg.supabaseAnonKey || '' }).then(() => boot.remove(), fail);
+</script>
+</body>
+</html>

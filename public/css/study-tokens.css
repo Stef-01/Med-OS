@@ -1,0 +1,137 @@
+/* study-tokens.css — the one palette and scale for every Learn overlay (plan 2026-10-19-001, unit K3).
+   eMedici's dark theme sampled from app.emedici.com (page #1c1f31, card #252941, ink #ededed, muted #9499b8, cyan
+   #00b7db, nav pill #434d8a, Figtree). Every module stylesheet @imports this file and aliases its own names
+   (--pri, --cyan, --accent, …) to these `--em-*` tokens, so a colour is written once. scripts/css-tokens.test.js
+   fails on a raw hex / rgba() anywhere else in the six module sheets.
+   The roots: .lh home · .lx deck · .nt notes · .mq question bank · .os OSCE · .cs cases (the deck and Notes also carry
+   data-theme="dark" so app.css's dark tokens apply inside them; the aliases in learn.css / notes.css re-point those).
+
+   Drift decisions (the value each module used most wins; the old values are listed so a reader can see what moved):
+     line        rgba(148,153,184,.25)   was .25 (home, deck, notes, cases) · .22 (mcq) · .26 (osce); the plan's .24 was
+                                         the midpoint, .25 is what four of six sheets drew
+     warn        #f5a524                 was #f5a524 (home badge, deck, notes, mcq) · #f2a20d (osce) · #ffaa00 (cases)
+     ok          #00a37a                 was #00a37a (deck, notes, mcq, osce; cases' ok-text) · #00b88a (cases' ok)
+     ok-soft     rgba(0,163,122,.16)     was .16 (mcq, osce) · rgba(0,184,138,.15) (cases)
+     nav         #434d8a                 was #434d8a (home, mcq, osce) · #424d8a (cases --pri-soft)
+     pri-soft    rgba(0,183,219,.14)     was .14 (mcq) · .16 (osce) · .12 (home tile)
+     pri-contrast #0d1b26                text on cyan: was #0d1b26 (mcq) · #06222c (osce) · #252941 (cases --pri-c) ·
+                                         #1c1f31 (home badge) · #1B120C (deck's app.css accent contrast)
+     pri-hover   #22c6e8                 was #22c6e8 (mcq) · #1cc6e8 (osce)
+     card2       #2b3050                 was #2b3050 (home tile hover, deck surface-2, osce) · #2c3150 (mcq menu)
+     ink-dim     #cfd2e6                 dim prose: was #cfd2e6 (mcq result cards) · #c9cbe0 (osce station cards)
+     pend-ink    #c8c9f4                 was #c8c9f4 (osce notice p) · #d4d5f7 (osce small notice)
+     scrim       rgba(8,9,18,.6)         was rgba(8,10,20,.6) (mcq) · rgba(8,9,18,.62) (osce) · rgba(0,0,0,.5) (cases)
+     ease        cubic-bezier(.36,.66,.04,1)   eMedici's --ease-out: was mcq, cases, the deck's exam chip, Notes' practise
+                                         button · (.2,.8,.2,1) (osce --ease, home, the deck's tiles)
+     ctl         44px                    was 44px (home, deck, notes, mcq) · 2.6em = 41.6px (cases; its touch rule already
+                                         lifted every control to 44)
+     shadow-lg   0 18px 48px .45         popovers/menus: was .45 (mcq) · 0 18px 50px .5 (osce) · 0 16px 48px .5 (deck)
+     shadow-md   0 8px 24px .3           floating controls: was .3 (osce) · 0 8px 30px .35 (deck undo) · 0 6px 18px .35 (stamp)
+   z scale: each overlay root is its own stacking context, so the fixed layers inside one (popover < dialog < toast <
+   confetti < lightbox) are ordered once here. Before: mcq menu 6 < dialog 8 < zoom 9 < toast 10 < burst 11; osce
+   modal 10 < pop 20 < alerts 30 (a popover over its own dialog); cases pop 20 < dialog 30 < alerts 40 < confetti 50 <
+   lightbox 60. Now a popover never paints over a dialog, and a lightbox is above everything. */
+
+.lh, .lx, .nt, .mq, .os, .cs {
+  /* surfaces */
+  --em-bg:#1c1f31;            /* the page */
+  --em-hdr:#1f2236;           /* OSCE's navbar, a shade over the page */
+  --em-card:#252941;          /* a card (eMedici --color-bg) */
+  --em-card2:#2b3050;         /* a card's hover, a popover */
+  --em-card3:#323860;         /* the deck's third surface (menus' pressed rows) */
+  --em-solid:#22263b;         /* an input well on a card (OSCE) */
+  --em-fill:#2f3452;          /* a solid button fill (mcq) */
+  --em-fill2:#383e60;         /* its hover / a progress track */
+  --em-paper:#f1f3fb;         /* the light toast (mcq) */
+  --em-slate:#2f3641;         /* the dark toast (cases) */
+  --em-grey:#3a3d3f;          /* eMedici's notepad pill */
+  --em-grey-ink:#a9abb0;
+  --em-black:#000;
+  --em-white:#fff;
+  /* ink */
+  --em-ink:#ededed;
+  --em-ink-soft:#dfe0ee;      /* long prose (OSCE sheet) */
+  --em-ink-dim:#cfd2e6;       /* a card's description */
+  --em-mute:#9499b8;
+  --em-mute2:#6f7494;         /* the deck's --ink-3 */
+  --em-line:rgba(148,153,184,.25);
+  --em-line-strong:rgba(148,153,184,.4);
+  --em-tint:rgba(148,153,184,.12);        /* a translucent fill (OSCE --fill) */
+  --em-tint-hover:rgba(148,153,184,.2);
+  --em-shade:rgba(0,0,0,.3);              /* eMedici's --color-fill on dark (cases) */
+  --em-shade-soft:rgba(0,0,0,.15);
+  /* primary */
+  --em-pri:#00b7db;
+  --em-pri-ink:#4fd0ea;       /* cyan text on the page (deck --accent-strong) */
+  --em-pri-hover:#22c6e8;
+  --em-pri-soft:rgba(0,183,219,.14);
+  --em-pri-deep:#16384a;      /* deck --accent-soft */
+  --em-pri-contrast:#0d1b26;  /* text on a cyan fill */
+  --em-nav:#434d8a;           /* the nav pill, a selected tab / segment */
+  /* semantic */
+  --em-ok:#00a37a;
+  --em-ok-ink:#2fd3a5;        /* green text on the page */
+  --em-ok-soft:rgba(0,163,122,.16);
+  --em-ok-pale:#d6f5ec;       /* text on an ok-soft panel */
+  --em-ok-bright:#9ff0d6;     /* text on the success alert */
+  --em-ok-deep:#163330;       /* the success alert */
+  --em-ok-hover:#00b386;
+  --em-ok-btn:#4fbf8f;        /* eMedici's End Session green */
+  --em-ok-btn-hover:#5ec79a;
+  --em-ok-btn-ink:#06331f;
+  --em-ok-status:#4fd6ae;     /* a "correct" cell / status chip */
+  --em-warn:#f5a524;
+  --em-warn-soft:rgba(245,165,36,.14);
+  --em-warn-contrast:#2a1d00;
+  --em-danger:#f24e0d;
+  --em-danger-ink:#ff7a45;    /* deck --danger-strong */
+  --em-danger-soft:rgba(242,78,13,.14);
+  --em-danger-hover:#ff5f20;
+  --em-danger-deep:#3a2026;   /* the danger alert */
+  --em-danger-pale:#ffb79a;   /* its text */
+  --em-danger-status:#ff8a5c; /* an "incorrect" cell / status chip */
+  --em-pend:#a7a9ff;          /* AI / pending (OSCE notice) */
+  --em-pend-ink:#c8c9f4;
+  --em-pend-soft:rgba(124,128,255,.13);
+  --em-flag:#ffac38;          /* a bookmark (cases) */
+  --em-flag-soft:rgba(255,191,56,.2);
+  --em-hl:#f2c40d;            /* the highlighter */
+  --em-hl-soft:rgba(242,196,13,.35);
+  --em-occ:#ff7a59;           /* an ECG occlusion box (on a white figure) */
+  --em-lp:#ffb54c;            /* learning points */
+  --em-star:#F5C451;          /* the deck's promoted star */
+  /* scrims and shadows */
+  --em-scrim:rgba(8,9,18,.6);
+  --em-scrim-deep:rgba(5,6,12,.92);
+  --em-shadow-sm:0 2px 8px rgba(0,0,0,.25);
+  --em-shadow-md:0 8px 24px rgba(0,0,0,.3);
+  --em-shadow-lg:0 18px 48px rgba(0,0,0,.45);
+  --em-shadow-xl:0 22px 56px rgba(0,0,0,.5);
+  --em-shadow-card:0 0 0 1px rgba(148,153,184,.1), 0 5px 15px rgba(0,0,0,.25);
+  --em-shadow-sheet:0 -10px 40px rgba(0,0,0,.4);
+  --em-shadow-dialog:0 24px 80px rgba(0,0,0,.55);
+  --em-shadow-thumb:0 3px 10px rgba(0,0,0,.28), 0 0 0 .5px rgba(255,255,255,.06);
+  /* shape, size, motion */
+  --em-r:1.25rem;             /* eMedici --radius */
+  --em-r-sm:10px;
+  --em-ctl:44px;              /* a control's height (eMedici 2.6em, lifted to the 44px tap target) */
+  --em-ease:cubic-bezier(.36,.66,.04,1);
+  --em-ease-soft:cubic-bezier(.2,.8,.2,1);
+  --em-ease-elastic:linear(0, .005 .98%, .0253, .0582, .1009 4.91%, .2058 7.52%, .5696 15.7%, .6701, .7569, .8293 23.56%, .8941, .9429, .978 32.39%, .9996 35.01%, 1.0154, 1.0242 40.9%, 1.0282 44.49%, 1.0262 49.73%, 1.0094 63.8%, 1.0027 72.63%, .9996 83.1%, .9994 99.79%);   /* eMedici --ease-elastic: popovers, wide dialogs (lifted from osce.css, P2 2026-10-19) */
+  --em-spring:cubic-bezier(.34,1.4,.64,1);
+  --em-dur:.45s;              /* eMedici --transition-duration (HeightTransition, slides, modals, nav cells) */
+  --em-dur-fast:.2s;          /* eMedici's hover / press scale, ring stroke colour, sidebar margin */
+  --em-dur-mid:.3s;           /* eMedici .transition (chevrons), choice-select pop, ui-popup elastic enter */
+  --em-dur-slow:.5s;          /* eMedici ProgressBar-appear, ProgressRing dasharray, OptionResult scale-x-in, history bars */
+  --em-filter-hover:contrast(.8) brightness(1);   /* eMedici --filter-hover on dark */
+  --em-filter-active:contrast(.8) brightness(.8); /* eMedici --filter-active on dark: the press darkens as it scales to .97 */
+  /* safe areas */
+  --em-st:env(safe-area-inset-top);
+  --em-sb:env(safe-area-inset-bottom);
+  --em-sl:max(16px, env(safe-area-inset-left));
+  --em-sr:max(16px, env(safe-area-inset-right));
+  /* z: the overlay roots over the app, then the fixed layers inside a root, then in-flow layering */
+  --z-home:130; --z-deck:135; --z-modal:140;
+  --z-pop:20; --z-dialog:30; --z-toast:40; --z-fx:50; --z-lightbox:60;
+  --z-raise:1; --z-sticky:2; --z-float:3; --z-cover:4; --z-sheet:5;
+}

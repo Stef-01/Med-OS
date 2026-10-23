@@ -1,0 +1,383 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": "ai",
+ "licence": "own",
+ "basis": [
+  "45e27c8891e3",
+  "5fcdb41ba3d4",
+  "c0c139c4fdb4"
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Introduces self, confirms the patient's name and date of birth, and explains the purpose of the consultation"
+  },
+  {
+   "id": 3,
+   "t": "checkbox",
+   "x": "Shows empathy and appropriate verbal and non-verbal communication, and acknowledges the patient's distress"
+  },
+  {
+   "id": 4,
+   "t": "heading",
+   "x": "History"
+  },
+  {
+   "crit": true,
+   "id": 5,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Onset, duration and episodic or colicky pattern"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Location, radiation (right shoulder or back) and severity"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Aggravating and relieving factors"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Characterises the pain:"
+  },
+  {
+   "crit": true,
+   "id": 6,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Vomiting, including its colour and character"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Last bowel motion and passage of flatus"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Abdominal distension"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Asks about features of bowel obstruction:"
+  },
+  {
+   "crit": true,
+   "id": 7,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Fever or rigors"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Jaundice, dark urine, pale stools or itch"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Right upper quadrant pain (already established)"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Screens for each component of Charcot triad:"
+  },
+  {
+   "id": 8,
+   "t": "checkbox",
+   "x": "Screens for features of severe cholangitis (Reynolds pentad): confusion and dizziness or hypotension"
+  },
+  {
+   "id": 9,
+   "t": "checkbox",
+   "x": "Asks about previous gallstones, biliary colic or biliary investigation and why surgery was declined"
+  },
+  {
+   "crit": true,
+   "id": 10,
+   "t": "checkbox",
+   "x": "Assesses dehydration and renal risk: oral intake, urine output, postural symptoms and nephrotoxic medicines (perindopril, metformin, NSAID)"
+  },
+  {
+   "id": 11,
+   "t": "checkbox",
+   "x": "Takes past medical history, medications (including over-the-counter), allergies and previous abdominal surgery"
+  },
+  {
+   "id": 12,
+   "t": "checkbox",
+   "x": "Takes brief family and social history, including alcohol, living situation and independence"
+  },
+  {
+   "id": 13,
+   "t": "checkbox",
+   "x": "Elicits ideas, concerns and expectations, including the fear of general anaesthesia"
+  },
+  {
+   "id": 14,
+   "t": "heading",
+   "x": "Examination"
+  },
+  {
+   "id": 15,
+   "t": "checkbox",
+   "x": "Requests observations, hydration status and assessment for jaundice and sepsis"
+  },
+  {
+   "id": 16,
+   "t": "checkbox",
+   "x": "Requests abdominal examination (distension, tenderness, peritonism, scars, hernias, bowel sounds)"
+  },
+  {
+   "id": 17,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Palpates under the right costal margin while the patient breathes in"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Positive sign is pain causing the patient to stop inspiring (inspiratory arrest), suggesting acute cholecystitis"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Recognises it is negative here, which argues against acute cholecystitis"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Describes Murphy's sign correctly and interprets the result:"
+  },
+  {
+   "id": 18,
+   "t": "checkbox",
+   "x": "Requests appropriate bloods (FBC, CRP, UEC, LFTs, lipase, lactate, VBG) and notes the acute kidney injury and hypokalaemia"
+  },
+  {
+   "id": 19,
+   "t": "heading",
+   "x": "Interpretation"
+  },
+  {
+   "crit": true,
+   "id": 20,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Small bowel obstruction (dilated loops with air-fluid levels)"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Gas in the biliary tree (pneumobilia)"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Ectopic gallstone, here in the right lower quadrant"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Identifies Rigler triad on the X-ray:"
+  },
+  {
+   "crit": true,
+   "id": 21,
+   "t": "checkbox",
+   "x": "States the diagnosis of gallstone ileus due to a biliary-enteric (cholecysto-enteric) fistula"
+  },
+  {
+   "crit": true,
+   "id": 22,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "States Charcot triad: fever, jaundice and right upper quadrant pain"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Notes this patient has only pain, with no fever and no jaundice, and normal bilirubin and ALP"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "States Reynolds pentad adds hypotension and confusion, which are absent"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains why this is not acute cholangitis:"
+  },
+  {
+   "id": 23,
+   "t": "checkbox",
+   "x": "Explains why this is not simple acute cholecystitis: Murphy's sign is negative, there is no fever and inflammatory markers are only mildly raised, and the main problem is mechanical obstruction"
+  },
+  {
+   "id": 24,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "crit": true,
+   "id": 25,
+   "t": "checkbox",
+   "x": "Escalates early for urgent general surgical review for relief of the obstruction"
+  },
+  {
+   "crit": true,
+   "id": 26,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Nil by mouth and IV access"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "IV crystalloid resuscitation with potassium replacement guided by results"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Nasogastric tube for decompression if vomiting persists"
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "IV antiemetic and analgesia, avoiding codeine"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Starts initial resuscitation:"
+  },
+  {
+   "id": 27,
+   "t": "checkbox",
+   "x": "Withholds nephrotoxic and risky medicines (NSAID, perindopril, metformin) and monitors urine output and renal function"
+  },
+  {
+   "id": 28,
+   "t": "checkbox",
+   "x": "Mentions further imaging (CT abdomen) if needed to confirm the transition point and fistula, and monitors for deterioration or perforation"
+  },
+  {
+   "id": 29,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 30,
+   "t": "checkbox",
+   "x": "Explains the diagnosis in lay terms: a gallstone has passed through a channel into the bowel and is blocking it"
+  },
+  {
+   "id": 31,
+   "t": "checkbox",
+   "x": "Explains the plan: fluids, a drip, no food, a tube if needed, and an urgent operation by the surgical team to remove the blockage"
+  },
+  {
+   "crit": true,
+   "id": 32,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Acknowledges her husband's death and her fear"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Explains that an anaesthetist will assess her and optimise her fluids and diabetes before surgery"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Explains the risks of not operating (ongoing obstruction, perforation) honestly"
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Supports informed consent and offers to involve her daughter"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Addresses the fear of anaesthesia:"
+  },
+  {
+   "id": 33,
+   "t": "checkbox",
+   "x": "Checks understanding and invites questions"
+  }
+ ],
+ "complexity": "High",
+ "context": [],
+ "desc": "This station involves taking a focused history from an older woman with right upper quadrant pain and vomiting, interpreting her abdominal X-ray, explaining why this is not cholecystitis or cholangitis, and counselling her about the diagnosis and initial plan.",
+ "diagnosis": [
+  "Gallstone ileus",
+  "Small bowel obstruction"
+ ],
+ "explain": "<h3>Gallstone ileus</h3><p>Gallstone ileus is a mechanical small bowel obstruction caused by a large gallstone (usually over 2 to 2.5 cm) that has eroded from the gallbladder into the adjacent bowel through a biliary-enteric fistula, commonly into the duodenum. The stone usually lodges at the narrowest point, the terminal ileum. It typically affects older women with long-standing gallstones, and the preceding biliary symptoms are often intermittent. This is why the pain may come and go (tumbling stone) before the obstruction becomes fixed.</p><h3>Rigler triad</h3><ul><li><p>Small bowel obstruction</p></li><li><p>Gas in the biliary tree (pneumobilia)</p></li><li><p>An ectopic gallstone, usually in the right lower quadrant</p></li></ul><p>All three features are present in only a minority of cases on plain film, so CT is often used and is more sensitive. The finding indicates gallstone ileus from a biliary-enteric fistula, and the patient needs surgical referral for relief of the obstruction.</p><h3>Distinguishing the biliary emergencies</h3><ul><li><p><strong>Acute cholecystitis:</strong> persistent right upper quadrant pain, fever, raised inflammatory markers and a positive Murphy's sign (inspiratory arrest on palpation under the right costal margin). It is typically not obstructive.</p></li><li><p><strong>Acute ascending cholangitis:</strong> Charcot triad of fever, jaundice and right upper quadrant pain, with a cholestatic liver profile. Reynolds pentad adds hypotension and confusion and signals severe disease needing urgent biliary drainage. Cholangitis is not simple cholecystitis.</p></li><li><p><strong>Gallstone ileus:</strong> obstructive picture (vomiting, distension, constipation) with imaging showing Rigler triad. Fever and jaundice are usually absent, as in this patient.</p></li></ul><h3>Management</h3><p>Management begins with resuscitation: nil by mouth, IV fluids, correction of electrolytes, antiemetics, analgesia and nasogastric decompression if vomiting. Nephrotoxic and risky drugs (NSAID, ACE inhibitor, metformin) are withheld while she has acute kidney injury. Definitive treatment is surgical, usually enterolithotomy to remove the stone. Whether to deal with the fistula and gallbladder at the same operation is a surgical decision, weighed against the patient's frailty and comorbidities. In an older patient, anaesthetic fears are common and should be heard and addressed, and the discussion should support informed consent and shared decision making.</p>",
+ "focus": "Acute right upper quadrant pain with suspected cholecystitis, cholangitis or gallstone ileus",
+ "guide": "<p>A <strong>high-performing candidate</strong> takes a structured history that separates the biliary pain from the obstructive features (vomiting, constipation, no flatus). They screen explicitly for Charcot triad and for Reynolds pentad, and identify dehydration and renal risk from perindopril, metformin and ibuprofen. They request an abdominal examination and describe Murphy's sign correctly. They recognise Rigler triad on the X-ray, state gallstone ileus and explain clearly why this is not cholangitis or cholecystitis. They start fluid resuscitation, make the patient nil by mouth and escalate to the surgeons. In the counselling task they use plain language and respond with empathy to the fear of anaesthesia.</p><p>A <strong>borderline candidate</strong> recognises small bowel obstruction in a patient with known gallstones but does not name all three features of Rigler triad, or labels the picture as cholecystitis or cholangitis without justifying it. They may screen for fever and jaundice without linking them to Charcot triad, and may miss the renal risk from her medicines. They may give a reasonable explanation to the patient but use jargon and not explore her concerns about anaesthesia.</p>",
+ "id": "ai-8b37c286",
+ "media": {},
+ "origin": "ai",
+ "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name</strong>: Margaret Hollis</p></li><li><p><strong>Age</strong>: 74 years old</p></li><li><p><strong>Gender</strong>: Female</p></li><li><p><strong>Aboriginal or Torres Strait Islander</strong>: No</p></li><li><p><strong>Setting</strong>: Emergency department</p></li></ul><p><strong>Presenting complaint:</strong> Right upper abdominal pain, then vomiting and bloating</p><p><strong>History of presenting complaint:</strong></p><ul><li><p><strong>Onset and duration:</strong> Crampy pain under your right ribs came and went for 4 days. For the last 2 days you have been vomiting and your belly has swollen up.</p><ul><li><p>Episodes of pain last a few hours and then ease. Pain is about 5/10 at its worst, mostly colicky, sometimes goes to the right shoulder blade.</p></li></ul></li><li><p><strong>Vomiting:</strong> About 6 times a day, now dark green-brown and foul-smelling. You cannot keep fluids down.</p></li><li><p><strong>Bowels:</strong> Last bowel motion 3 days ago. You have passed no wind for about 24 hours. Stool colour was normal before that.</p></li><li><p><strong>Fever, jaundice:</strong> You have had no fevers or rigors. Eyes and skin are not yellow. Urine has been normal to slightly dark because you are dehydrated; stools were not pale. No itch.</p></li><li><p><strong>Confusion, dizziness:</strong> No confusion. You feel lightheaded when you stand.</p></li><li><p><strong>Urine output:</strong> Passing much less urine over the last day.</p></li><li><p><strong>Prior biliary history:</strong> Gallstones were found on an ultrasound 3 years ago after similar attacks. Your GP suggested surgery and you declined because you were frightened of an operation.</p></li><li><p><strong>Other:</strong> No weight loss, no chest pain, no shortness of breath. No blood in vomit or stool. No previous abdominal surgery.</p></li></ul><p><strong>Medical history:</strong></p><ul><li><p>Hypertension</p></li><li><p>Type 2 diabetes</p></li><li><p>Osteoarthritis of the knees</p></li></ul><p><strong>Medications:</strong></p><ul><li><p>Perindopril 5 mg daily</p></li><li><p>Metformin 500 mg twice daily</p></li><li><p>Paracetamol as needed</p></li><li><p>Ibuprofen from the pharmacy for the last 4 days for the pain (if asked specifically about over-the-counter medicines)</p></li></ul><p><strong>Allergies:</strong> Codeine causes severe nausea (intolerance, not allergy)</p><p><strong>Family history:</strong> Sister had her gallbladder removed</p><p><strong>Social history:</strong></p><ul><li><p>Widowed, lives alone in a unit; daughter lives nearby</p></li><li><p>Retired primary school teacher</p></li><li><p>Never smoked; one sherry on weekends</p></li><li><p>Independent in all activities of daily living</p></li></ul><p><strong>ICE:</strong></p><ul><li><p><strong>Ideas:</strong> You think a stomach bug or the gallstones have flared up again.</p></li><li><p><strong>Concerns:</strong> Your husband died of complications after an operation under a general anaesthetic, and you are terrified of needing surgery and of not waking up. Raise this only if asked about your concerns or when surgery is mentioned.</p></li><li><p><strong>Expectations:</strong> You want the vomiting and pain to stop and you want to avoid an operation if possible.</p></li></ul><p><strong>Examiner information (give only when the candidate asks):</strong></p><ul><li><p><strong>Observations:</strong> HR 98 bpm, BP 118/70 mmHg (lying), postural drop to 100/62, temperature 37.2 C, RR 18, SpO2 97% on room air, BGL 9.8 mmol/L.</p></li><li><p><strong>General:</strong> Dry mucous membranes, no jaundice, alert and orientated.</p></li><li><p><strong>Abdomen:</strong> Distended and tympanic, mild right upper quadrant tenderness without guarding or peritonism, no palpable mass, no hernias, no scars. Bowel sounds are high pitched and tinkling.</p></li><li><p><strong>Murphy's sign:</strong> Negative. If the candidate describes the technique correctly, report no inspiratory arrest.</p></li><li><p><strong>Bloods (if requested):</strong> WCC 11.4, CRP 38, creatinine 128 umol/L (baseline 78), potassium 3.3, bilirubin and ALP normal, lipase normal, lactate 1.9.</p></li></ul><p><strong>Abdominal X-ray report (give at task 2):</strong> Dilated loops of small bowel with air-fluid levels. Branching linear gas lucency over the right upper quadrant consistent with gas in the biliary tree. A 3 cm rounded calcified density in the right lower quadrant. No free subdiaphragmatic gas.</p><p><strong>Examiner prompt in task 2 if not yet covered:</strong> 'What is Charcot triad and does this patient have it?'</p><p><em>The candidate may ask further questions of you; use only the provided history above. Provide a realistic answer if the candidate asks a question outside the script.</em></p><p><em>The candidate should interact with you using non-medical terminology. Please interrupt the candidate if they use medical terminology that would not be clearly understood by the lay public.</em></p>",
+ "points": [
+  "Murphy's sign is elicited by palpating under the right costal margin while the patient breathes in; inspiratory arrest suggests acute cholecystitis.",
+  "Charcot triad (fever, jaundice, right upper quadrant pain) points to acute ascending cholangitis; Reynolds pentad adds hypotension and confusion.",
+  "Rigler triad (small bowel obstruction, pneumobilia, ectopic gallstone) indicates gallstone ileus from a biliary-enteric fistula and needs surgical referral to relieve the obstruction.",
+  "Always check for dehydration and acute kidney injury in vomiting patients, and review ACE inhibitors, metformin and NSAIDs."
+ ],
+ "presentation": [
+  "Abdominal pain",
+  "Vomiting",
+  "Abdominal distension"
+ ],
+ "refs": [
+  "Therapeutic Guidelines (eTG): Gastrointestinal – gallstones, acute cholecystitis and acute cholangitis",
+  "Kiriyama S, et al. Tokyo Guidelines 2018: diagnostic criteria and severity grading of acute cholangitis and cholecystitis. J Hepatobiliary Pancreat Sci 2018",
+  "Royal Australasian College of Surgeons: guidance on emergency general surgery and small bowel obstruction",
+  "Australian Commission on Safety and Quality in Health Care: National Safety and Quality Health Service Standards – partnering with consumers and informed consent",
+  "Australian and New Zealand College of Anaesthetists (ANZCA): patient information on anaesthesia and preoperative assessment"
+ ],
+ "specialty": [
+  "Emergency Medicine",
+  "General Surgery"
+ ],
+ "stem": "<p>You are the emergency department resident reviewing Margaret Hollis, a 74-year-old woman who has presented with 4 days of intermittent right upper quadrant pain, followed by 2 days of vomiting and abdominal bloating. Observations have been taken and an abdominal X-ray has been done.</p><p>The examiner will give you examination findings and the X-ray report when you ask for them.</p>",
+ "tasks": [
+  "<p>Take a <strong>focused history</strong> from the patient and <strong>request</strong> the examination findings you would want, including how you would test for Murphy's sign (4 minutes).</p>",
+  "<p><strong>Interpret</strong> the abdominal X-ray findings provided by the examiner, <strong>state</strong> your diagnosis and <strong>explain</strong> to the examiner why the findings argue against acute cholangitis and acute cholecystitis (2 minutes).</p>",
+  "<p><strong>Explain</strong> the diagnosis and your initial management plan to the patient in lay terms, and <strong>address</strong> her concerns (2 minutes).</p>"
+ ],
+ "title": "Right upper quadrant pain with vomiting in an older woman",
+ "type": [
+  "History",
+  "Interpretation",
+  "Counselling"
+ ]
+}

@@ -1,0 +1,182 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": {
+  "label": "CPE brief",
+  "date": "2026-10-19"
+ },
+ "licence": "own",
+ "id": "ai-ea8dbb57",
+ "title": "Unwell newborn with suspected early-onset sepsis",
+ "desc": "This station involves stabilising a 14-hour-old term neonate with suspected early-onset sepsis and shock, interpreting the initial investigations, and explaining the plan to the mother.",
+ "specialty": [
+  "Paediatrics",
+  "Obstetrics"
+ ],
+ "type": [
+  "Emergency",
+  "Management",
+  "Counselling"
+ ],
+ "complexity": "High",
+ "context": [
+  "Postnatal ward",
+  "Hospital"
+ ],
+ "presentation": [
+  "Grunting",
+  "Tachycardia",
+  "Fever in a neonate",
+  "Poor perfusion"
+ ],
+ "diagnosis": [
+  "Early-onset neonatal sepsis",
+  "Group B streptococcus infection"
+ ],
+ "stem": "<p>You are the junior doctor called to the postnatal ward to review a 14-hour-old baby, born at 38+5 weeks, birth weight 3.2 kg. The midwife is concerned because the baby has become unsettled, feeds poorly and is breathing noisily. The mother is at the bedside. A midwife-nurse will assist you and give observations and results when asked.</p><p>You have 2 minutes reading time. The station runs for 8 minutes.</p>",
+ "tasks": [
+  "<p><strong>Assess</strong> the baby using an A to E approach and <strong>start</strong> immediate management, including escalation (4 minutes).</p>",
+  "<p><strong>Request</strong> investigations with reasons, <strong>interpret</strong> the results given and state the ongoing plan and disposition to the examiner (2 minutes).</p>",
+  "<p><strong>Explain</strong> the assessment and plan to the mother and answer questions (2 minutes).</p>"
+ ],
+ "patient": "<p><strong>You are</strong> the postnatal ward nurse assisting. Give observations only when asked. The mother is anxious.</p><p><strong>Opening observations (room air):</strong> HR 188, RR 74 with grunting and mild recession, SpO2 91%, BP 58/30, CRT 4 s with cool mottled peripheries, temperature 38.1 °C, responds to voice only (AVPU: V), weight 3.2 kg. BGL 4.1 mmol/L if checked.</p><p><strong>Risk factors if asked:</strong> maternal GBS positive; one dose of intrapartum benzylpenicillin 2 hours before birth; membranes ruptured 20 hours; maternal temperature 38.2 °C in labour.</p><p><strong>Changes:</strong></p><ul><li>Oxygen given: SpO2 rises to 95% and grunting eases slightly. If no oxygen by 2 minutes: SpO2 falls to 86% and the baby has a short apnoea.</li><li>Access obtained and 32 mL 0.9% sodium chloride given with reassessment: HR 164, CRT 2 s. If no bolus by 3 minutes: HR 206, CRT 5 s, BP 46/24, AVPU P.</li><li>Neonatal team called: the registrar arrives 2 minutes after the call. If not called by 4 minutes, say you are very worried and ask who else should be told.</li><li>Antibiotics: you can draw up and give them once ordered, and a blood culture is taken first if asked.</li></ul><p><strong>Results when asked (task 2):</strong> venous gas pH 7.24, lactate 4.2 mmol/L, base excess -9; FBE Hb 165 g/L, WCC 3.1, neutrophils 1.0 (x10^9/L), platelets 140; CRP 6 mg/L; BGL 4.1 mmol/L; CXR bilateral hazy lung fields with air bronchograms. Blood culture sent. Lumbar puncture is deferred while unstable.</p><p><strong>Mother's questions (task 3):</strong> \"Is my baby going to die?\" \"Did I cause this?\" \"Can I still breastfeed?\" \"When can we go home?\"</p>",
+ "guide": "<p>A <strong>high-performing candidate</strong> recognises sepsis with shock quickly, gives oxygen and a 32 mL bolus, checks the glucose, takes a blood culture then gives benzylpenicillin and gentamicin without delay, and escalates early. They interpret the blood gas and FBE correctly, note that a normal early CRP does not exclude sepsis, state review at 48 hours, and speak to the mother with honesty and empathy.</p><p>A <strong>borderline candidate</strong> recognises that the baby is unwell and starts oxygen and antibiotics but is slow to give the fluid bolus or check the glucose, escalates late, gives vague interpretation of the results and gives a limited explanation to the mother.</p>",
+ "explain": "<h3>Early-onset neonatal sepsis</h3><p>Sepsis in the first 72 hours is usually from maternal flora, most commonly Group B streptococcus and E. coli. Risk factors include maternal GBS carriage, inadequate intrapartum antibiotics, prolonged rupture of membranes (18 hours or more), maternal fever and prematurity.</p><h3>Recognition and stabilisation</h3><p>Signs include grunting, tachypnoea, tachycardia, poor perfusion (CRT 3 s or more), temperature instability, lethargy and poor feeding. Treat early with oxygen to keep SpO2 92 to 96%, IV or IO access, a 10 mL/kg 0.9% sodium chloride bolus with reassessment, a BGL, a blood culture and prompt antibiotics.</p><h3>Investigations</h3><p>Blood culture is the key test. FBE, CRP and lactate guide risk and response, but a normal early CRP does not exclude sepsis. Lumbar puncture is done once the baby is stable.</p><h3>Disposition</h3><p>The baby needs neonatal unit care. Antibiotics are reviewed at 48 hours, and the mother is supported to keep close and provide breast milk.</p>",
+ "points": [
+  "Treat suspected early-onset sepsis urgently: blood culture, then benzylpenicillin and gentamicin as per RCH neonatal dosing, without delaying treatment.",
+  "Compensated shock in a neonate (HR above 160, CRT 3 s or more, raised lactate) needs a 10 mL/kg 0.9% sodium chloride bolus with reassessment and a BGL check.",
+  "A normal early CRP does not exclude sepsis; repeat at 12 to 24 hours and review antibiotics at 48 hours.",
+  "Communicate honestly with the mother, reassure that GBS carriage is common, and support breast milk expression and bonding."
+ ],
+ "refs": [
+  "Royal Children's Hospital Melbourne. Clinical practice guidelines and neonatal dosing guidance for neonatal sepsis.",
+  "Safer Care Victoria. Maternity and Newborn eHandbook: Group B streptococcus and early-onset neonatal sepsis.",
+  "Australian and New Zealand Committee on Resuscitation (ANZCOR). Guideline 13: Neonatal resuscitation."
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Hand hygiene, clear introduction to the mother and nurse, and calm, organised approach."
+  },
+  {
+   "id": 3,
+   "t": "heading",
+   "x": "Assessment (A to E)"
+  },
+  {
+   "id": 4,
+   "t": "checkbox",
+   "x": "Assesses breathing and starts support:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Recognises respiratory distress: RR 74 (above 60), grunting, recession, SpO2 91%."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Gives oxygen because SpO2 is below 92%, targeting 92 to 96%, and escalates support if no improvement.",
+     "crit": true
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "t": "checkbox",
+   "x": "Recognises compensated shock: HR 188 (above 160), CRT 4 s (3 s or more), cool mottled peripheries, then lactate 4.2 mmol/L."
+  },
+  {
+   "id": 6,
+   "t": "checkbox",
+   "x": "Assesses disability and exposure: responds to voice only (AVPU V), temperature 38.1 °C."
+  },
+  {
+   "id": 7,
+   "t": "checkbox",
+   "x": "Checks BGL immediately and interprets it: 4.1 mmol/L is normal (2.6 mmol/L or above), so no hypoglycaemia treatment is needed; plans repeat BGLs.",
+   "crit": true
+  },
+  {
+   "id": 8,
+   "t": "checkbox",
+   "x": "Identifies early-onset sepsis risk factors: maternal GBS positive, inadequate intrapartum antibiotics, ruptured membranes 18 hours or more (20 h), maternal fever."
+  },
+  {
+   "id": 9,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "id": 10,
+   "t": "checkbox",
+   "x": "Escalates early using a structured handover (SBAR) to the neonatal registrar or NICU team for transfer to the neonatal unit.",
+   "crit": true
+  },
+  {
+   "id": 11,
+   "t": "checkbox",
+   "x": "Obtains IV or IO access and gives a 10 mL/kg bolus of 0.9% sodium chloride = 32 mL for 3.2 kg, then reassesses HR and CRT (repeat bolus per RCH guidance if still shocked).",
+   "crit": true
+  },
+  {
+   "id": 12,
+   "t": "checkbox",
+   "x": "Takes a blood culture first without delaying treatment, then gives IV benzylpenicillin and gentamicin as per RCH neonatal dosing immediately.",
+   "crit": true
+  },
+  {
+   "id": 13,
+   "t": "checkbox",
+   "x": "Requests investigations with reasons:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Blood culture, FBE with neutrophil count, CRP (repeat at 12 to 24 hours as it may be normal early) and venous gas with lactate."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Chest X-ray for respiratory distress; lumbar puncture deferred until stable; BGL monitoring."
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "t": "checkbox",
+   "x": "Interprets results: neutrophils 1.0 (neutropenia) and WCC 3.1 support sepsis; CRP 6 mg/L does not exclude it early; lactate 4.2 mmol/L and pH 7.24 show hypoperfusion; CXR consistent with pneumonia or sepsis."
+  },
+  {
+   "id": 15,
+   "t": "checkbox",
+   "x": "States disposition and follow-up: admit to the neonatal unit with continuous monitoring, review antibiotics at 48 hours with culture result, CRP and clinical state, and discharge only when well, feeding and the course is complete or stopped."
+  },
+  {
+   "id": 16,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 17,
+   "t": "checkbox",
+   "x": "Explains in plain language that the baby is unwell with a suspected blood infection, needs antibiotics, fluids, oxygen and neonatal unit care, and that tests will guide treatment."
+  },
+  {
+   "id": 18,
+   "t": "checkbox",
+   "x": "Answers the questions with empathy: reassures that GBS is common and not the mother's fault, encourages expressing breast milk and staying close, and gives honest prognosis and expected hospital stay."
+  }
+ ],
+ "origin": "ai",
+ "focus": "Suspected early-onset neonatal sepsis",
+ "basis": [],
+ "media": {}
+}

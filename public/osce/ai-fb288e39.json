@@ -1,0 +1,183 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": {
+  "date": "2026-10-19",
+  "label": "CPE brief"
+ },
+ "licence": "own",
+ "basis": [],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Handwashing, introduces self and confirms the child's identity and roles."
+  },
+  {
+   "id": 3,
+   "t": "checkbox",
+   "x": "Uses appropriate verbal and non-verbal cues and acknowledges the parent's distress."
+  },
+  {
+   "id": 4,
+   "t": "heading",
+   "x": "History"
+  },
+  {
+   "crit": true,
+   "id": 5,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Generalised tonic-clonic, no focal features, duration about 3 minutes (under 15 minutes)."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "First seizure, none recurring in this illness, and recovery to baseline (drowsy then settling)."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Asks about previous seizures, development, family history of febrile seizures or epilepsy."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Characterises the seizure."
+  },
+  {
+   "id": 6,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Upper respiratory symptoms, urinary symptoms, rash, neck stiffness, vomiting, drowsiness, immunisation status."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Requests ENT, chest, skin and neurological examination and identifies a viral upper respiratory tract infection as the source."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Looks for the fever source and red flags."
+  },
+  {
+   "id": 7,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "id": 8,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Temp, HR, RR, SpO2, GCS and BSL requested; BSL 5.6 mmol/L is normal."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Notes GCS 14 improving to 15 at 4 minutes with HR falling, which is consistent with a normal post-ictal recovery."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Requests and interprets observations."
+  },
+  {
+   "crit": true,
+   "id": 9,
+   "t": "checkbox",
+   "x": "Classifies as a simple febrile seizure: generalised, under 15 minutes, once in 24 hours, full recovery, age 6 months to 6 years."
+  },
+  {
+   "crit": true,
+   "id": 10,
+   "t": "checkbox",
+   "x": "Investigations: no routine bloods, EEG or neuroimaging. Urine only if no source found, and LP only if meningism, persistent drowsiness or other concern. None needed here as the source is clear and the child is recovering."
+  },
+  {
+   "id": 11,
+   "t": "checkbox",
+   "x": "States that antipyretics are for comfort only and do not prevent febrile seizures. Drug and dose per local protocol."
+  },
+  {
+   "id": 12,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 13,
+   "t": "checkbox",
+   "x": "Explains the diagnosis and prognosis: the seizure is common and benign, does not cause brain damage, and the epilepsy risk is about 1%. Recurrence risk is about 1 in 3 overall, and about 1 in 2 if the first seizure was under 12 months."
+  },
+  {
+   "crit": true,
+   "id": 14,
+   "t": "checkbox",
+   "x": "Seizure first aid: note the time, lie the child on their side in the recovery position, nothing in the mouth, do not restrain, call an ambulance if it lasts 5 minutes or more."
+  },
+  {
+   "id": 15,
+   "t": "checkbox",
+   "x": "Discharge criteria: back to baseline, drinking, fever source identified, parents confident with first aid. Arranges GP follow-up."
+  },
+  {
+   "crit": true,
+   "id": 16,
+   "t": "checkbox",
+   "x": "Specific return advice: seizure of 5 minutes or more, another seizure, not waking or persistent drowsiness, neck stiffness, non-blanching rash, breathing difficulty, repeated vomiting, not drinking or worsening. Checks the parent's understanding."
+  }
+ ],
+ "complexity": "Moderate",
+ "context": [],
+ "desc": "This station involves assessing a toddler who has had a first brief generalised seizure with fever, requesting and interpreting appropriate investigations, and counselling the parents on recurrence, seizure first aid, discharge and return advice.",
+ "diagnosis": [
+  "Simple febrile seizure"
+ ],
+ "explain": "<h3>Simple versus complex</h3><p>A simple febrile seizure is generalised, lasts under 15 minutes, occurs once in 24 hours and is followed by full recovery, in a child aged 6 months to 6 years. Focal features, longer duration, recurrence within 24 hours or incomplete recovery make it complex and prompt further assessment.</p><h3>Investigations</h3><p>Look for the source of fever. EEG, neuroimaging and routine bloods are not indicated. Check BSL if recovery is slow. Collect urine if there is no source. Consider LP if there is meningism, ongoing drowsiness or the child is very young or unwell.</p><h3>Counselling</h3><p>Reassure about the good outcome. Recurrence risk is about 1 in 3 overall. Antipyretics give comfort only. Teach first aid and specific return criteria.</p>",
+ "focus": "A simple febrile seizure: assessment, the parents' questions, discharge and first aid",
+ "guide": "<p>A <strong>high-performing candidate</strong> takes a structured history, classifies the seizure as simple using the stated features, and explains why no bloods, EEG, imaging or LP are needed. They interpret the improving observations and normal BSL, state that antipyretics do not prevent seizures, and give clear first aid, discharge and return advice with the 5-minute ambulance threshold, in plain language.</p><p>A <strong>borderline candidate</strong> may order unnecessary tests, omit the fever source or recurrence risk, suggest regular paracetamol to prevent seizures, or give vague return advice.</p>",
+ "id": "ai-fb288e39",
+ "media": {},
+ "origin": "ai",
+ "patient": "<p><strong>Role:</strong> ED nurse assisting the doctor, standing with the parent. Answer only what is asked. Relay the parent's questions in task 3.</p><p><strong>Patient:</strong> 27-month-old, 13 kg, ED.</p><p><strong>Opening statement:</strong> \"The parent brought the child in after a fit at home. The child is sleepy but rousable. Triage obs are done.\"</p><p><strong>History:</strong></p><ul><li><p>Two days of runny nose, sore throat, cough and fever. Eating less, still drinking, normal wet nappies. No paracetamol yet today.</p></li><li><p>Seizure: whole body stiff then jerking of all four limbs, eyes rolled back, unresponsive. About 3 minutes by the parent's phone clock. Lips briefly dusky. No injury, no incontinence. One episode only, no repeat. Drowsy afterwards, now settling.</p></li><li><p>No vomiting, rash, neck stiffness, headache or urinary symptoms. No previous seizures.</p></li><li><p>Immunisations up to date, development normal, no medications or allergies. Sibling had a febrile seizure at age 2.</p></li></ul><p><strong>Observations at 0 minutes:</strong> T 39.2 °C, HR 150, RR 30, SpO2 98% room air, BP 95/58, GCS 14 (drowsy, rousable), BSL 5.6 mmol/L.</p><p><strong>Examination (give on request):</strong> ears normal, throat red without exudate, chest clear, no rash, no neck stiffness, moist mucous membranes, CRT 2 s, normal tone, no focal deficit.</p><p><strong>Repeat obs from 4 minutes, if the candidate has asked for antipyretic for comfort, fluids and monitoring:</strong> T 38.6 °C, HR 132, RR 26, SpO2 98%, GCS 15, now sitting up and playing. If not requested: T 39.0 °C, HR 140, GCS 15.</p><p><strong>Parent's ideas, concerns, expectations (relay):</strong> afraid the child was dying, worried about brain damage and epilepsy. Expects a scan or blood tests.</p><p><strong>Questions in task 3:</strong> \"Will it happen again?\" \"Does the child need a scan or brain wave test?\" \"Should I give paracetamol regularly to stop another?\" \"What do I do if it happens again?\" \"Can we go home, and when should we come back?\"</p>",
+ "points": [
+  "A simple febrile seizure is generalised, under 15 minutes, once in 24 hours, with full recovery.",
+  "No routine EEG, imaging or bloods; investigate the fever source (urine if no source; LP only on specific indications).",
+  "Antipyretics are for comfort and do not prevent febrile seizures.",
+  "Recurrence risk is about 1 in 3 overall; epilepsy risk is about 1%.",
+  "First aid: time it, recovery position, nothing in the mouth, ambulance at 5 minutes."
+ ],
+ "presentation": [
+  "Febrile seizure",
+  "Fever in a child"
+ ],
+ "refs": [
+  "RCH CPG: Febrile seizure",
+  "RCH CPG: Urinary tract infection"
+ ],
+ "specialty": [
+  "Paediatrics",
+  "Emergency Medicine"
+ ],
+ "stem": "<p>You are the doctor in the Emergency Department. A 27-month-old child (13 kg) has been brought in by a parent after a seizure at home during a febrile illness. The seizure has stopped and the child is now settling. The ED nurse is at the bedside with the parent and has done the triage observations and a blood glucose level. The nurse will answer your questions and relay the parent's questions.</p><p>You have 2 minutes reading time and 8 minutes in the station.</p>",
+ "tasks": [
+  "<p>Take a <strong>focused history</strong> from the nurse and ask for the observations and examination findings you want (3 minutes).</p>",
+  "<p>State your <strong>classification</strong> of the seizure and the <strong>investigations</strong> you would or would not request, with reasons, and interpret the findings provided (2 minutes).</p>",
+  "<p><strong>Counsel</strong> the parent (via the nurse) on the diagnosis, recurrence, seizure first aid, discharge and when to return (3 minutes).</p>"
+ ],
+ "title": "Simple febrile seizure",
+ "type": [
+  "History",
+  "Counselling",
+  "Management"
+ ]
+}

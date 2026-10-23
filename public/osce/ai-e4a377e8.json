@@ -1,0 +1,344 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": "ai",
+ "licence": "own",
+ "basis": [
+  "51e215321a9b",
+  "5f0f5abe45e0",
+  "68b3da508d78",
+  "70f43bed6bea",
+  "7ec3e63402c0",
+  "b2fc82fdd8bb"
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Introduces self by name and role, confirms patient identity and asks permission to discuss results (including whether his daughter should join)."
+  },
+  {
+   "id": 3,
+   "t": "checkbox",
+   "x": "Uses plain language, avoids or explains jargon, pauses and checks understanding."
+  },
+  {
+   "id": 4,
+   "t": "checkbox",
+   "x": "Responds empathetically to the patient's fear and acknowledges the shock of the diagnosis."
+  },
+  {
+   "id": 5,
+   "t": "heading",
+   "x": "Exploring understanding"
+  },
+  {
+   "id": 6,
+   "t": "checkbox",
+   "x": "Elicits what the patient has already been told and what he understands by the letter."
+  },
+  {
+   "id": 7,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Corrects the misconception that a Gleason score of 7 means a 70% chance of dying or \"7 out of 10\"."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explores ideas, concerns and expectations."
+  },
+  {
+   "id": 8,
+   "t": "heading",
+   "x": "PSA and rectal examination"
+  },
+  {
+   "crit": true,
+   "id": 9,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "PSA (prostate-specific antigen) is a protein made by the prostate gland."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "It is organ-specific, not cancer-specific. It also rises with age, benign prostatic enlargement, prostatitis or infection, and ejaculation."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Explains that the raised PSA was the reason for further tests (MRI and biopsy), and the biopsy is what confirmed the diagnosis."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains what PSA is and why a raised level was not specific for cancer."
+  },
+  {
+   "crit": true,
+   "id": 10,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Small, early tumours are not palpable, so DRE has low sensitivity."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Says DRE alone is not recommended for screening asymptomatic men."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains that a normal digital rectal examination does not exclude cancer."
+  },
+  {
+   "id": 11,
+   "t": "heading",
+   "x": "Biopsy"
+  },
+  {
+   "id": 12,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Most cancers arise in the peripheral zone, commonly posteriorly, whereas benign enlargement arises centrally (transition zone)."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains where prostate cancer usually arises and where the MRI lesion was."
+  },
+  {
+   "crit": true,
+   "id": 13,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Both transperineal and transrectal routes can sample the peripheral zone."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "The transperineal route is preferred because it carries a lower risk of infection and sepsis, which addresses the patient's worry about his friend's experience."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains why the transperineal route was used."
+  },
+  {
+   "id": 14,
+   "t": "heading",
+   "x": "Grading"
+  },
+  {
+   "crit": true,
+   "id": 15,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "It grades how abnormal the glandular architecture looks under the microscope. It does not measure tumour size and is not a percentage."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "On needle biopsy, the score is the most common pattern plus the highest-grade pattern present, whatever its extent (here 4+3=7)."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "The lowest score now assigned is 3+3=6."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains the Gleason score in understandable terms."
+  },
+  {
+   "crit": true,
+   "id": 16,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Both add to 7, but 4+3 means the more aggressive pattern 4 predominates and carries a worse prognosis than 3+4."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Does not tell the patient that his result is the same as his friend's."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains that 4+3 is not the same as 3+4."
+  },
+  {
+   "crit": true,
+   "id": 17,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Grade Group 1 = 3+3=6; GG2 = 3+4=7; GG3 = 4+3=7; GG4 = 8; GG5 = 9-10."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "His result is Grade Group 3, in the middle of a scale of 1 to 5. It is intermediate-to-higher risk, not the highest."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains the ISUP Grade Group and places his result on the scale."
+  },
+  {
+   "id": 18,
+   "t": "heading",
+   "x": "Staging and next steps"
+  },
+  {
+   "id": 19,
+   "t": "checkbox",
+   "x": "Explains that more tests are needed to find out whether the cancer is confined to the prostate (staging), and that the full picture combines PSA, grade group, extent of disease on biopsy and imaging."
+  },
+  {
+   "crit": true,
+   "id": 20,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "PSMA = prostate-specific membrane antigen, a protein found on prostate cancer cells that the scan tracer attaches to."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "The scan stages higher-risk prostate cancer before definitive treatment, by looking for spread to lymph nodes or bone. It is also used to restage recurrence."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "It is not a test to diagnose cancer or to screen healthy men. The biopsy has already confirmed the diagnosis."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains the PSMA PET/CT scan."
+  },
+  {
+   "id": 21,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Results will be discussed at the urology multidisciplinary team meeting."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Treatment options (surgery, radiotherapy with or without hormone therapy) will be discussed with the urologist and a radiation oncologist, with shared decision-making."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Mentions that side effects such as erectile and bladder function depend on the treatment chosen and will be discussed before any decision."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains the pathway after the scan."
+  },
+  {
+   "crit": true,
+   "id": 22,
+   "t": "checkbox",
+   "x": "Does not give a firm prognosis or promise a cure before staging is complete."
+  },
+  {
+   "id": 23,
+   "t": "heading",
+   "x": "Communication and support"
+  },
+  {
+   "id": 24,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Offers an early GP review after the scan."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Offers written information and support services (e.g. Prostate Cancer Foundation of Australia nurses or Cancer Council 13 11 20), and offers to involve his daughter."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Asks about mood and coping, given his bereavement."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Offers support and follow-up."
+  },
+  {
+   "id": 25,
+   "t": "checkbox",
+   "x": "Summarises, checks understanding and invites final questions."
+  }
+ ],
+ "complexity": "High",
+ "context": [],
+ "desc": "This station involves counselling a man about his prostate biopsy result, explaining Gleason score and ISUP Grade Group, and outlining staging with PSMA PET/CT.",
+ "diagnosis": [
+  "Prostate cancer"
+ ],
+ "explain": "<h3>Why this station matters</h3><p>Mr Kostas has a confirmed diagnosis, but the tests that led to it and the numbers in his letter are easily misunderstood. Counselling is about translating the PSA, the DRE, the biopsy route, the Gleason score, the Grade Group and the PSMA scan into one coherent story, without false reassurance or false alarm.</p><h3>PSA and DRE</h3><p>PSA (prostate-specific antigen) is a protein made by the prostate. It is organ-specific, not cancer-specific. Levels rise with age, benign prostatic enlargement, prostatitis or urinary infection, and ejaculation, so a raised value needs interpretation in context and cannot diagnose cancer. Digital rectal examination (DRE) has low sensitivity because small early tumours are impalpable, so a normal DRE does not exclude cancer. It is not recommended as a screening test in asymptomatic men. The urologist's normal DRE therefore says nothing reassuring about this cancer.</p><h3>Where cancer arises and biopsy route</h3><p>Most prostate cancers arise in the peripheral zone, commonly posteriorly, whereas benign prostatic hyperplasia arises centrally in the transition zone. This explains why BPH causes urinary symptoms and early cancer is often silent. Both transperineal and transrectal biopsy can sample the peripheral zone, but the transperineal route is preferred because of its lower risk of infection and sepsis. Current Australian PSA testing guidance supports MRI before biopsy and favours the transperineal approach.</p><h3>Gleason score and ISUP Grade Group</h3><p>The Gleason system grades glandular architecture only. It does not measure tumour volume. On prostatectomy, the score is the most common pattern plus the second most common. On needle biopsy it is the most common pattern plus the highest-grade pattern present, whatever its extent. Patterns 1 and 2 are no longer assigned, so the lowest score is 3+3=6, which is why \"7 out of 10\" is a misconception. The ISUP Grade Groups were introduced because Gleason 7 hides two different prognoses.</p><table><tr><td><p><strong>Grade Group</strong></p></td><td><p><strong>Gleason score</strong></p></td></tr><tr><td><p>1</p></td><td><p>6 (3+3)</p></td></tr><tr><td><p>2</p></td><td><p>7 (3+4)</p></td></tr><tr><td><p>3</p></td><td><p>7 (4+3)</p></td></tr><tr><td><p>4</p></td><td><p>8</p></td></tr><tr><td><p>5</p></td><td><p>9-10 (4+5, 5+4, 5+5)</p></td></tr></table><p>Mr Kostas has 4+3=7, Grade Group 3. Pattern 4 predominates, so the prognosis is worse than for his friend's 3+4 (Grade Group 2), even though both sum to 7.</p><h3>Staging and PSMA PET/CT</h3><p>Risk stratification combines PSA, Grade Group, extent of biopsy involvement and clinical or imaging stage. PSMA (prostate-specific membrane antigen) PET/CT is more accurate than conventional CT and bone scan for detecting nodal and bone metastases. It is used to stage higher-risk disease before definitive treatment and to restage biochemical recurrence. It is not a screening or diagnostic test. Treatment options and expected side effects are then discussed at the multidisciplinary meeting and with the patient through shared decision-making.</p><h3>Communication points</h3><ul><li><p>Check understanding first and correct catastrophic misconceptions.</p></li><li><p>Use the Grade Group scale to show where he sits, without minimising or catastrophising.</p></li><li><p>Do not offer a prognosis until staging is complete.</p></li><li><p>Offer support, including involving his daughter, and screen for distress given his recent bereavement.</p></li></ul>",
+ "focus": "Counselling a man with a raised PSA: biopsy, Gleason/ISUP grading and staging",
+ "guide": "<p>A <strong>high-performing candidate</strong> first checks what Mr Kostas understands, then breaks the result into small pieces. They explain that PSA is organ-specific but not cancer-specific, that a normal DRE does not rule out cancer, and that the transperineal route was chosen to lower the infection risk. They explain that a Gleason score grades architecture and is not a percentage. They state that 4+3 is more aggressive than 3+4, map his result to ISUP Grade Group 3, and explain that a PSMA PET/CT stages higher-risk disease and is not a diagnostic or screening test. They avoid false reassurance or firm prognoses before staging, respond to his fear and finish with a clear plan and follow-up.</p><p>A <strong>borderline candidate</strong> gives accurate information but uses jargon, reads out the numbers without explaining them, or treats 3+4 and 4+3 as equivalent. They may say the PSMA scan is a \"cancer test\" or that a normal rectal exam is reassuring. They may miss the patient's misconception that a score of 7 means \"7 out of 10\", provide premature reassurance or prognosis, and end without a clear plan.</p>",
+ "id": "ai-e4a377e8",
+ "media": {},
+ "origin": "ai",
+ "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name</strong>: Dimitri Kostas</p></li><li><p><strong>Age</strong>: 66-years-old</p></li><li><p><strong>Gender</strong>: Male</p></li><li><p><strong>Aboriginal or Torres Strait Islander</strong>: No</p></li><li><p><strong>Presenting location</strong>: General Practice clinic</p></li></ul><p><strong>Opening statement:</strong> <em>\"The urologist said they found cancer in my prostate, but it all went very quickly. I have a letter with numbers like 4+3 and Grade Group 3 and I don't understand any of it. Is it bad?\"</em></p><p><strong>Background (answer only if asked):</strong></p><ul><li><p>Asymptomatic. No urinary symptoms, no bone pain, no weight loss.</p></li><li><p>Medical history: hypertension, well controlled on perindopril. No known drug allergies.</p></li><li><p>Widower for 3 years. He lives with his daughter, who is a nurse and is waiting outside.</p></li><li><p>Biopsy was uneventful. He had no fever and no problems passing urine afterwards.</p></li></ul><p><strong>ICE:</strong></p><ul><li><p><strong>Ideas</strong>: Thinks \"cancer\" means a death sentence. Believes a Gleason score of 7 means \"7 out of 10, so I am 70% dead\".</p></li><li><p><strong>Concerns</strong>: Wants to know whether it has spread and whether he will need to be cut open. Is anxious about erectile and bladder function.</p></li><li><p><strong>Expectations</strong>: Wants a plain-English explanation and to know what happens next.</p></li></ul><p><strong>Questions and cues (ask in this order if the candidate has not already covered them):</strong></p><ol><li><p><em>\"My PSA was 9.2. Does that prove it was cancer all along?\"</em> (Reassure only if the candidate explains that PSA is not cancer-specific. Be confused if they use jargon.)</p></li><li><p><em>\"The urologist said my rectal exam was normal. Doesn't that mean the cancer is small? My old GP always just did the finger test.\"</em></p></li><li><p><em>\"Why did they go through the skin behind my testicles rather than the back passage? My mate had it done the other way and ended up in hospital with a serious infection.\"</em></p></li><li><p><em>\"My friend was told he had 3+4 and I have 4+3. Is that not the same thing?\"</em></p></li><li><p><em>\"What is this PSMA scan? Is it to check if I have cancer?\"</em></p></li></ol><p>If the candidate gives a clear explanation, say you feel less frightened and ask what the next appointment will be. If they use jargon without explaining it, say \"I'm still not following\".</p>",
+ "points": [
+  "PSA is organ-specific, not cancer-specific. It rises with age, BPH, prostatitis or infection and ejaculation.",
+  "A normal DRE does not exclude prostate cancer. DRE has low sensitivity and is not a screening test.",
+  "Prostate cancer mostly arises in the peripheral zone (BPH centrally). Transperineal biopsy is preferred because of its lower infection and sepsis risk.",
+  "Gleason grades architecture only. Biopsy score = most common pattern + highest-grade pattern. The lowest score is 3+3=6, and 4+3 is worse than 3+4.",
+  "ISUP Grade Groups: GG1 = 6, GG2 = 3+4, GG3 = 4+3, GG4 = 8, GG5 = 9-10.",
+  "PSMA = prostate-specific membrane antigen. PSMA PET/CT stages higher-risk disease before treatment and restages recurrence. It is not a screening or diagnostic test."
+ ],
+ "presentation": [
+  "Raised PSA",
+  "Abnormal biopsy result"
+ ],
+ "refs": [
+  "Cancer Council Australia and Prostate Cancer Foundation of Australia. Clinical practice guidelines for PSA testing and early management of test-detected prostate cancer (including the updated Australian PSA testing guidelines)",
+  "RACGP. Guidelines for preventive activities in general practice (Red Book): prostate cancer",
+  "Epstein JI et al. The 2014 ISUP consensus conference on Gleason grading of prostatic carcinoma and the 2016 WHO/ISUP grade group system",
+  "Hofman MS et al. Prostate-specific membrane antigen PET-CT in patients with high-risk prostate cancer before curative-intent surgery or radiotherapy (proPSMA). Lancet 2020",
+  "Cancer Australia. Prostate cancer: information for health professionals",
+  "European Association of Urology. Guidelines on Prostate Cancer (biopsy route and staging)"
+ ],
+ "specialty": [
+  "General Practice",
+  "Urology"
+ ],
+ "stem": "<p>You are the general practice registrar. Mr Dimitri Kostas, a 66-year-old retired bus driver, has come to review the results of his recent investigations. Six weeks ago he had a PSA of 9.2 ng/mL (age-specific reference range &lt;4.5 ng/mL), which was unchanged on repeat testing. His urologist then arranged a multiparametric prostate MRI, which showed a PI-RADS 4 lesion in the posterior peripheral zone, and a <strong>transperineal</strong> prostate biopsy. The urologist's letter has arrived and states:</p><ul><li><p>Digital rectal examination: smooth, no palpable nodule</p></li><li><p>Histology: acinar adenocarcinoma in 4 of 14 cores, Gleason score 4+3=7 (ISUP Grade Group 3)</p></li><li><p>Plan: PSMA PET/CT, then multidisciplinary team discussion</p></li></ul><p>The urologist has already told Mr Kostas that the biopsy showed cancer, but he has asked you to explain what the results mean. You are not required to take a full history or examine him.</p>",
+ "tasks": [
+  "<p><strong>Explore</strong> the patient's current understanding, concerns and expectations (2 minutes).</p>",
+  "<p><strong>Explain</strong> the biopsy result, including the grading, in language the patient can understand, and answer his questions about the PSA, the rectal examination and the biopsy route (4 minutes).</p>",
+  "<p><strong>Outline</strong> the next steps, including the purpose of the PSMA scan, and answer his questions (2 minutes).</p>"
+ ],
+ "title": "Prostate biopsy result: grading and staging",
+ "type": [
+  "Counselling"
+ ]
+}

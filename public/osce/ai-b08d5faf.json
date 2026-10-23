@@ -1,0 +1,315 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": "ai",
+ "licence": "own",
+ "basis": [
+  "2112d310d18f",
+  "23a389c80cb9",
+  "41f8de8f32b6",
+  "82fa32bc6908",
+  "f8eff45cf19d"
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Washes or sanitises hands, introduces self and role, confirms the patient's name and identity."
+  },
+  {
+   "id": 3,
+   "t": "checkbox",
+   "x": "Ensures privacy, offers a support person, sits at the patient's level and uses appropriate eye contact and non-verbal cues."
+  },
+  {
+   "id": 4,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Allows silence and responds to emotional cues (tearfulness, fear of the procedure)."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Shows empathy and acknowledges the patient's distress."
+  },
+  {
+   "id": 5,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 6,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Uses a warning shot and plain language, avoiding jargon."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Elicits the patient's understanding and expectations before disclosing, and corrects the information she found online."
+  },
+  {
+   "crit": true,
+   "id": 7,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Does not recommend or imply termination or continuation on the basis of the screening result."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Acknowledges she may need time and offers a follow-up visit."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Takes a non-directive, patient-centred approach: presents options neutrally and supports her decision-making."
+  },
+  {
+   "id": 8,
+   "t": "checkbox",
+   "x": "Checks understanding and summarises the plan, offers written information and a contact number for questions."
+  },
+  {
+   "id": 9,
+   "t": "heading",
+   "x": "Clinical practice"
+  },
+  {
+   "crit": true,
+   "id": 10,
+   "kids": [
+    {
+     "crit": true,
+     "id": 1,
+     "t": "checkbox",
+     "x": "NIPT = non-invasive prenatal testing: analysis of cell-free DNA in maternal blood, most of which comes from the placenta."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "It estimates the chance of common chromosomal conditions (and, if the test includes them, some rare ones); it does not diagnose."
+    },
+    {
+     "crit": true,
+     "id": 3,
+     "t": "checkbox",
+     "x": "A high-chance result needs confirmation by a diagnostic test (CVS or amniocentesis) before any decisions are made."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains what NIPT is and that it is a screening test, not a diagnostic test."
+  },
+  {
+   "id": 11,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Clarifies that this is a chance, not a diagnosis, and that the other results are low chance."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Explains that some RAAs are rarely compatible with ongoing pregnancy, but that the result cannot be assumed to reflect the fetus."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains the result: a high chance of a rare autosomal trisomy (RAA), meaning a trisomy of a chromosome other than 13, 18 or 21."
+  },
+  {
+   "crit": true,
+   "id": 12,
+   "kids": [
+    {
+     "crit": true,
+     "id": 1,
+     "t": "checkbox",
+     "x": "The DNA tested is mainly of placental origin, so confined placental mosaicism (the placenta has the trisomy but the fetus does not) can cause a high-chance result in an unaffected fetus."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Other causes: a vanishing twin, or a maternal chromosomal change (maternal mosaicism or, rarely, other maternal conditions)."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Mentions that confined placental mosaicism can still be associated with placental dysfunction and fetal growth restriction, so closer surveillance is warranted even if the fetus is chromosomally normal."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains why a high-chance result can occur in an unaffected fetus."
+  },
+  {
+   "crit": true,
+   "id": 13,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Detailed early ultrasound (morphology and growth assessment) before and after diagnostic testing."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Explains that uniparental disomy testing may be considered if a mosaic or trisomy rescue result is found."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Recommends referral for genetic counselling and fetal medicine review, with a detailed ultrasound."
+  },
+  {
+   "crit": true,
+   "id": 14,
+   "kids": [
+    {
+     "crit": true,
+     "id": 1,
+     "t": "checkbox",
+     "x": "For a RAA, amniocentesis is preferred because the placenta is likely to carry the abnormality, so a CVS (which samples placenta) may be falsely positive or give an uninterpretable mosaic result."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "If CVS is chosen anyway (e.g. for earlier results), a mosaic or positive result is likely to need confirmation by amniocentesis."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Amniocentesis is usually performed from about 15 weeks, so she will need to wait about 2-3 weeks."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Explains the small procedure-related risk of miscarriage in plain language (well under 1%), and acknowledges her friend's experience with CVS."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Offers diagnostic testing and explains that amniocentesis is preferred for a rare autosomal trisomy."
+  },
+  {
+   "id": 15,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Checks her RhD status (RhD positive: anti-D not required) and arranges aftercare advice for the procedure."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Results from the diagnostic test (rapid and full) and the plan to review them together with the counsellor."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Explains that decisions about the pregnancy can be discussed after the diagnostic results and that support services and psychological support are available."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains the follow-up process."
+  },
+  {
+   "crit": true,
+   "id": 16,
+   "kids": [
+    {
+     "crit": true,
+     "id": 1,
+     "t": "checkbox",
+     "x": "A failed test (no result) is not a normal result, and the chance of an aneuploidy is higher in pregnancies with a no result, e.g. low fetal fraction."
+    },
+    {
+     "crit": true,
+     "id": 2,
+     "t": "checkbox",
+     "x": "She should be offered genetic counselling, a detailed ultrasound and diagnostic testing (CVS or amniocentesis)."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Does not falsely reassure; advises that her sister should be encouraged to see her doctor if she has not had this follow-up, and that any pregnancy should be followed up in the same way."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "A repeat NIPT is an option, but it must not delay the offer of diagnostic testing."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Answers the question about the relative's failed NIPT: a 'no result' is not reassuring."
+  },
+  {
+   "id": 17,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Arranges a review in a few days with the genetic counsellor or fetal medicine team and gives clear contact details."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Advises her to seek urgent care for bleeding, pain or fluid loss."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Safety-nets and arranges timely follow-up."
+  }
+ ],
+ "complexity": "High",
+ "context": [],
+ "desc": "This station involves counselling a pregnant woman about a high-chance NIPT result for a rare autosomal trisomy, explaining why it is not diagnostic, advising on confirmatory testing and answering her question about a relative's failed NIPT.",
+ "diagnosis": [
+  "Differential: true fetal rare autosomal trisomy vs confined placental mosaicism / false-positive NIPT result"
+ ],
+ "explain": "<h3>What NIPT is</h3><p>Non-invasive prenatal testing (NIPT) analyses cell-free DNA in maternal blood. Most of this DNA comes from the placenta (trophoblast), with a smaller part from the mother. It is a screening test: it estimates the chance of common chromosomal conditions (trisomy 21, 18, 13 and sex chromosome conditions) and, depending on the test, may also report rare autosomal aneuploidies (RAAs) or copy number variants. It does not diagnose.</p><h3>Why a high-chance result may not mean an affected fetus</h3><p>Because the DNA is largely placental, the test can detect a chromosomal change that is confined to the placenta (confined placental mosaicism, CPM) when the fetus is chromosomally normal. Other causes include a vanishing twin and maternal chromosomal changes. High-chance results must always be confirmed by diagnostic testing (CVS or amniocentesis) before any irreversible decision.</p><h3>Rare autosomal aneuploidies (RAAs)</h3><p>In NIPT reporting, RAAs are trisomies of chromosomes other than 13, 18 and 21 (for example trisomy 16). Many are rarely compatible with a live birth, but a high-chance result is frequently due to CPM. CPM may be associated with placental insufficiency and fetal growth restriction, and a trisomy rescue event may cause uniparental disomy (UPD), which can be clinically significant for some chromosomes.</p><h3>CVS or amniocentesis?</h3><p>For an RAA, amniocentesis is preferred because the placenta is likely to be affected, which would confound a CVS result (CPM versus a true fetal abnormality). Amniocentesis samples amniotic fluid containing fetal cells and is usually performed from about 15 weeks. For trisomy 13 and 18, CPM is also relatively common, so amniocentesis is generally preferred; if CVS is chosen, a mosaic or positive result may need amniocentesis to clarify. The procedure-related miscarriage risk is small (under 1%) and should be explained in plain terms.</p><h3>Failed NIPT (no result)</h3><p>A NIPT 'no result' (test failure) is not reassuring. The chance of aneuploidy is higher in these pregnancies, particularly with a low fetal fraction. The woman should be offered counselling, a detailed ultrasound and diagnostic testing. A repeat NIPT is an option but must not delay diagnostic testing.</p><h3>Counselling approach</h3><p>Counselling should be non-directive, in plain language, without assuming what the woman will decide. Check what she understands, use a warning shot, acknowledge emotion, avoid false reassurance and false alarm, give her time, involve genetic counselling and fetal medicine, and arrange follow-up and psychological support. If she is RhD negative, anti-D should be given after an invasive procedure.</p>",
+ "focus": "Counselling after a high-risk NIPT result",
+ "guide": "<p>A <strong>high-performing candidate</strong> checks the patient's understanding and corrects the misconception that NIPT is diagnostic. They explain clearly that NIPT analyses cell-free DNA in maternal blood that is largely placental in origin, so confined placental mosaicism can cause a high-chance result in an unaffected fetus. They define a rare autosomal trisomy as a trisomy other than 13, 18 or 21, explain why amniocentesis is preferred over CVS, and organise genetic counselling and a detailed ultrasound. They deal with the sister's failed NIPT directly and without false reassurance, and they remain non-directive throughout.</p><p>A <strong>borderline candidate</strong> explains that the result needs confirmation and offers a diagnostic test, but may not explain why the result can be a false positive, may not explain why amniocentesis is preferred, or may reassure the patient about the relative's 'no result'. They may give directive advice about the pregnancy or use jargon, and their explanation of the risks and the process may be incomplete.</p>",
+ "id": "ai-b08d5faf",
+ "media": {},
+ "origin": "ai",
+ "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name</strong>: Hannah Doyle.</p></li><li><p><strong>Age</strong>: 36-year-old.</p></li><li><p><strong>Gender</strong>: Female (she/her).</p></li><li><p><strong>Aboriginal or Torres Strait Islander</strong>: No.</p></li><li><p><strong>Setting</strong>: Hospital early pregnancy and fetal medicine clinic.</p></li></ul><p><strong>Notes for patient:</strong></p><ul><li><p>This is a wanted pregnancy after one previous uncomplicated pregnancy (a healthy 3-year-old). You chose NIPT because you are over 35 and wanted reassurance.</p></li><li><p>You are anxious and tearful. You googled the result last night and read that 'trisomy 16 is always fatal'. You say: <em>\"I read that this means my baby has a fatal condition.\"</em></p></li><li><p>You assumed that NIPT 'tests the baby's DNA' and gave a definite answer.</p></li><li><p>If the candidate explains that it is a screening test, you are relieved but still scared. If the candidate does not explain the limits of the test, ask: <em>\"So does my baby definitely have this?\"</em></p></li><li><p>Your friend had a CVS in her last pregnancy and miscarried a few weeks afterwards. You are afraid of any procedure.</p></li><li><p>You have no strong views yet about the outcome of the pregnancy. You want time and information, and you want to be told what the doctor thinks is best. If the candidate gives a directive opinion, say: <em>\"I'm not sure I can decide that today.\"</em></p></li></ul><p><strong>Questions for candidate (ask them in this order):</strong></p><ul><li><p><em>\"Does this mean my baby definitely has trisomy 16? I thought the test was accurate.\"</em></p></li><li><p><em>\"Could the test be wrong? How could that happen?\"</em></p></li><li><p><em>\"Why can't I just have a CVS now, since it is earlier? My friend had one.\"</em> If the candidate recommends amniocentesis, ask about the risk of miscarriage and the timing.</p></li><li><p><strong>You MUST ask this question before the end of the station (it is a required cue):</strong> <em>\"My sister had the same NIPT last year and it came back as 'no result'. Her doctor said not to worry and that it probably meant everything was fine. Is that right?\"</em> If the candidate has not raised it by the final 2 minutes, ask it then, even if you have to interrupt gently.</p></li><li><p><em>\"What happens if the follow-up test shows a problem?\"</em></p></li></ul>",
+ "points": [
+  "NIPT is a screening test on cell-free DNA in maternal blood, most of which comes from the placenta; a high-chance result is not a diagnosis and needs confirmation by CVS or amniocentesis before any decision.",
+  "A high-chance result can occur in an unaffected fetus because of confined placental mosaicism (and other causes, such as a vanishing twin).",
+  "Rare autosomal aneuploidies (RAAs) are trisomies other than 13, 18 and 21; amniocentesis is preferred for confirmation because the placenta is likely to be affected and would confound a CVS result.",
+  "A failed NIPT (no result) is not reassuring: offer counselling, detailed ultrasound and diagnostic testing; a repeat NIPT is an option but must not delay diagnosis.",
+  "Counsel non-directively, avoid false reassurance, and arrange genetic counselling, fetal medicine review and follow-up."
+ ],
+ "presentation": [
+  "Abnormal prenatal screening result",
+  "High-chance NIPT result"
+ ],
+ "refs": [
+  "RANZCOG. Prenatal screening and diagnostic testing for fetal chromosomal and genetic conditions in pregnancy (C-Obs 59), current edition.",
+  "Department of Health and Aged Care. Clinical Practice Guidelines: Pregnancy Care, module on genetic testing and screening for fetal chromosomal conditions.",
+  "Human Genetics Society of Australasia (HGSA) / RANZCOG. Position statement on non-invasive prenatal testing and prenatal diagnosis, current edition.",
+  "RACGP. Genomics in general practice: prenatal screening and testing, current edition."
+ ],
+ "specialty": [
+  "Obstetrics",
+  "General Practice"
+ ],
+ "stem": "<p>You are a junior doctor working in a hospital early pregnancy and fetal medicine outpatient clinic. Hannah Doyle, a 36-year-old G2P1, is 12 weeks and 4 days pregnant by a dating ultrasound. Her GP arranged a non-invasive prenatal test (NIPT) at 11 weeks, and the report arrived yesterday. The GP has referred her for urgent review.</p><p>The pathology report states:</p><ul><li><p>Trisomy 21: low chance</p></li><li><p>Trisomy 18: low chance</p></li><li><p>Trisomy 13: low chance</p></li><li><p>Sex chromosome conditions: low chance</p></li><li><p><strong>Additional finding: trisomy 16 (rare autosomal trisomy): high chance</strong></p></li></ul><p>The dating ultrasound and the nuchal translucency measurement were reported as normal. Her booking history is otherwise unremarkable: BMI 24 kg/m<sup>2</sup>, no medications other than a pregnancy multivitamin, no known drug allergies, blood group A RhD positive. She has not yet discussed the report with anyone except her partner.</p><p>No examination is required.</p>",
+ "tasks": [
+  "<p><strong>Explain</strong> the result to the patient, including what NIPT can and cannot tell her (3 minutes).</p>",
+  "<p><strong>Advise</strong> her on the next steps and the options for confirmatory testing (3 minutes).</p>",
+  "<p><strong>Answer</strong> her questions, including her question about a relative's NIPT result (2 minutes).</p>"
+ ],
+ "title": "High-chance NIPT result for a rare autosomal trisomy",
+ "type": [
+  "Counselling",
+  "Interpretation"
+ ]
+}

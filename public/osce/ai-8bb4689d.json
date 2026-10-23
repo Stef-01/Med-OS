@@ -1,0 +1,328 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": "ai",
+ "licence": "own",
+ "basis": [
+  "21b86eba35f7",
+  "b3ad0e338dc3",
+  "f50ca9fd79ba"
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "crit": true,
+   "id": 2,
+   "t": "checkbox",
+   "x": "Handwashing and clear introduction, confirms patient's name and role."
+  },
+  {
+   "id": 3,
+   "t": "checkbox",
+   "x": "Ensures privacy, sits at the patient's level and uses open, non-judgemental body language."
+  },
+  {
+   "crit": true,
+   "id": 4,
+   "t": "checkbox",
+   "x": "Acknowledges the emotional impact of the diagnosis and responds empathetically to his anxiety."
+  },
+  {
+   "id": 5,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 6,
+   "t": "checkbox",
+   "x": "Explores what Daniel already knows and what he has read before explaining."
+  },
+  {
+   "id": 7,
+   "t": "checkbox",
+   "x": "Uses plain language, chunks information and avoids jargon (or explains terms immediately)."
+  },
+  {
+   "id": 8,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Uses teach-back or asks Daniel to summarise in his own words."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Checks understanding at intervals and invites questions."
+  },
+  {
+   "id": 9,
+   "t": "heading",
+   "x": "Explaining the virus"
+  },
+  {
+   "crit": true,
+   "id": 10,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "HIV mainly infects CD4 helper T cells, which co-ordinate the immune response (also macrophages and dendritic cells)."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "The virus uses the cell to make copies of itself, and infected CD4 cells are progressively lost."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Falling CD4 numbers lead to immune failure, leaving the person open to serious infections and cancers."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains which cells HIV mainly infects and what happens to them."
+  },
+  {
+   "crit": true,
+   "id": 11,
+   "t": "checkbox",
+   "x": "Explains that AIDS is the late stage of untreated HIV, not the same as HIV, and is preventable with treatment."
+  },
+  {
+   "crit": true,
+   "id": 12,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "HIV binds the CD4 receptor on the cell surface."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "It then needs a co-receptor, usually CCR5, to enter the cell."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "People who are homozygous for the CCR5 delta 32 deletion lack CCR5 and are resistant to CCR5-tropic HIV."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "The deletion is uncommon (about 1% of Northern Europeans are homozygous); it is inherited and Daniel's infection shows it does not protect him."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains how HIV enters CD4 cells."
+  },
+  {
+   "id": 13,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "CD4 count of 410 is below the typical normal range but well above the level at which opportunistic infections become a major risk (below 200), so his immune system is largely intact."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Viral load shows the amount of virus in the blood and is the main marker of treatment response."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Puts the CD4 count and viral load in context."
+  },
+  {
+   "id": 14,
+   "t": "heading",
+   "x": "Antiretroviral therapy"
+  },
+  {
+   "crit": true,
+   "id": 15,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "ART stands for antiretroviral therapy."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "It is a combination of antiretroviral drugs, usually a few tablets (often one tablet) once daily, which block the virus from replicating at different steps."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains what ART is."
+  },
+  {
+   "crit": true,
+   "id": 16,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Suppresses viral load, usually to undetectable levels within about 3 to 6 months."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Allows the CD4 count to recover and protects against progression to AIDS."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "People who start ART early and stay on it can expect a near-normal life expectancy."
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Recommends starting ART soon, regardless of CD4 count."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains the benefits of ART for Daniel's own health."
+  },
+  {
+   "crit": true,
+   "id": 17,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Once the viral load has been undetectable (below 200 copies/mL) for at least 6 months on ART, there is effectively no risk of sexual transmission."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Until then, advises condoms with Sam (or Sam using PrEP or PEP as appropriate), and recommends Sam be tested urgently."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Notes that ART requires ongoing adherence and viral load monitoring for this to hold, and that condoms still protect against other STIs."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains that undetectable equals untransmissible (U=U)."
+  },
+  {
+   "crit": true,
+   "id": 18,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "HIV persists in long-lived reservoirs (for example resting CD4 cells) where ART cannot remove it."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "If tablets are stopped, the virus rebounds, usually within weeks."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "An undetectable viral load means the treatment is working, not that the virus has gone."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Explains that ART is not a cure and is lifelong."
+  },
+  {
+   "id": 19,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Taking ART consistently is essential; missed doses risk resistance."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Mentions common early side effects are usually mild and that regimens can be changed."
+    }
+   ],
+   "t": "checkbox",
+   "x": "Discusses adherence and what to expect."
+  },
+  {
+   "id": 20,
+   "t": "heading",
+   "x": "Management and support"
+  },
+  {
+   "id": 21,
+   "t": "checkbox",
+   "x": "Outlines next steps: baseline tests and genotype results, ART initiation and follow-up viral load monitoring."
+  },
+  {
+   "crit": true,
+   "id": 22,
+   "t": "checkbox",
+   "x": "Addresses partner notification and testing for Sam, and offers support with disclosure."
+  },
+  {
+   "id": 23,
+   "t": "checkbox",
+   "x": "Offers psychosocial support, such as counselling, peer support and HIV-specialist or sexual health service referral, and discusses confidentiality including workplace concerns."
+  },
+  {
+   "id": 24,
+   "t": "checkbox",
+   "x": "Closes appropriately: summarises, arranges follow-up and gives written information or reliable resources."
+  }
+ ],
+ "complexity": "Moderate",
+ "context": [],
+ "desc": "This station involves explaining a new HIV diagnosis to a young man, including how HIV causes disease, how it enters cells, and what antiretroviral therapy can and cannot achieve.",
+ "diagnosis": [
+  "HIV infection"
+ ],
+ "explain": "<h3>The virus and the immune system</h3><p>HIV is a retrovirus that mainly infects CD4 helper T cells, and also macrophages and dendritic cells. CD4 cells co-ordinate the immune response, so their progressive loss in untreated infection leads to immune failure. AIDS is the stage at which the CD4 count falls (typically below 200 cells/microlitre) or an AIDS-defining illness develops, such as Pneumocystis pneumonia or cerebral toxoplasmosis. With effective ART, progression to AIDS is largely preventable.</p><h3>How HIV enters cells</h3><p>HIV binds the CD4 receptor and then a co-receptor, most commonly CCR5 (CCR5-tropic virus) or CXCR4. This allows fusion with the cell membrane and entry. People homozygous for the CCR5 delta 32 deletion do not express CCR5 on the cell surface and are resistant to CCR5-tropic HIV; about 1% of people of Northern European ancestry are homozygous. This is relevant clinically because maraviroc, a CCR5 antagonist, uses the same pathway, and because it illustrates why the co-receptor matters. It is not something a person with HIV can use or rely on, and it does not explain or alter Daniel's infection.</p><h3>What ART achieves</h3><p>ART is lifelong combination therapy, typically an integrase strand transfer inhibitor plus two nucleos(t)ide reverse transcriptase inhibitors, often as a single daily tablet. Current Australian guidelines recommend offering ART to everyone with HIV regardless of CD4 count, and starting soon after diagnosis once baseline investigations are available.</p><ul><li><p><strong>Personal health: </strong>viral load usually becomes undetectable within 3 to 6 months, the CD4 count recovers, opportunistic infections are prevented and life expectancy is near normal.</p></li><li><p><strong>Prevention: </strong>people on ART whose viral load has been below 200 copies/mL for at least 6 months do not sexually transmit HIV (U=U). Condoms are still advised until then and for protection against other STIs. His partner should be tested and, if negative, offered PrEP, or PEP if there was recent high-risk exposure and within 72 hours.</p></li><li><p><strong>Not a cure: </strong>HIV integrates into the DNA of long-lived cells and persists in reservoirs, so stopping ART leads to viral rebound within weeks. Treatment is lifelong, and adherence protects against resistance.</p></li></ul><h3>Communication</h3><p>Newly diagnosed patients are often overwhelmed. Check what they know, avoid jargon, chunk information, use teach-back, and address stigma, disclosure, confidentiality and mental health early. Notifying and testing partners is a core part of care and can be supported by the clinic's contact-tracing service.</p>",
+ "focus": "Newly diagnosed HIV: explaining the virus and what ART achieves",
+ "guide": "<p>A <strong>high-performing candidate</strong> builds rapport, finds out what Daniel already knows, and explains in plain language that HIV infects CD4 helper T cells and, if untreated, progressively depletes them until the immune system fails (AIDS). They explain that HIV enters cells by binding CD4 and a co-receptor, usually CCR5, and correctly describe the CCR5 delta 32 deletion as a rare protective variant that Daniel does not have. They explain that ART is lifelong combination therapy that suppresses the viral load, protects his health and, once undetectable for 6 months, prevents sexual transmission (U=U), but is not a cure because the virus persists in reservoirs. They address risk to Sam in the interim, support and disclosure, and check understanding.</p><p>A <strong>borderline candidate</strong> may give an accurate but jargon-heavy explanation without checking understanding, omit the co-receptor and CCR5 concept, or state vaguely that ART lowers the virus without covering U=U or the need for lifelong therapy. They may imply that ART cures HIV or that Daniel can stop when his viral load is undetectable, or forget to address Sam's testing and interim protection.</p>",
+ "id": "ai-8bb4689d",
+ "media": {},
+ "origin": "ai",
+ "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name: </strong>Daniel Reyes</p></li><li><p><strong>Age: </strong>27-years-old</p></li><li><p><strong>Gender: </strong>Male (he/him)</p></li><li><p><strong>Aboriginal or Torres Strait Islander: </strong>Neither</p></li><li><p><strong>Presenting location: </strong>Sexual health clinic</p></li></ul><p><strong>Opening statement: </strong><em>\"I got my results last week and I've been googling all weekend. I don't really understand what HIV actually does to my body. Is this going to turn into AIDS?\"</em></p><p><strong>Background (give only if asked):</strong></p><ul><li><p>Works as a graphic designer. Lives with his partner Sam, who is also male and has been with him for 18 months. Sam has not yet been tested.</p></li><li><p>Feels well now. Had a flu-like illness with a sore throat and rash about 2 months ago.</p></li><li><p>Nil regular medications, nil allergies.</p></li><li><p>Has told no one except Sam. Worried about telling his family and about his job.</p></li></ul><p><strong>Questions and cues (use in this order, prompting if the candidate does not cover them):</strong></p><ul><li><p>\"What cells does it actually attack?\" If the answer is jargon-heavy, say: <em>\"I'm a designer, not a scientist. Can you put that more simply?\"</em></p></li><li><p>\"What happens if I don't treat it?\"</p></li><li><p>\"My friend said some people can't get HIV because of a gene. How does the virus even get into the cell? Is that something I could have?\"</p></li><li><p>\"So what does the medication do? Does it cure it?\"</p></li><li><p>\"Can I still pass it to Sam? We have been having sex without condoms.\"</p></li><li><p>\"Do I have to take tablets forever? Can I stop when my blood tests look good?\"</p></li><li><p>If the candidate does not mention it, ask: <em>\"Is my CD4 count of 410 bad?\"</em></p></li></ul><p><strong>Emotional cues:</strong></p><ul><li><p>Appears anxious and quiet at the start. If the candidate shows empathy and checks understanding, he relaxes and engages.</p></li><li><p>If the candidate uses a lot of jargon or gives a long monologue without checking, become more withdrawn and say: <em>\"I'm not sure I followed that.\"</em></p></li><li><p>If the candidate falsely says ART cures HIV, or says he can stop when undetectable, react with confusion and ask them to repeat it.</p></li><li><p>If the candidate offers to arrange support, accept.</p></li></ul>",
+ "points": [
+  "HIV mainly infects CD4 helper T cells; progressive CD4 loss without treatment leads to immune failure (AIDS).",
+  "HIV enters cells via the CD4 receptor plus a co-receptor, usually CCR5; CCR5 delta 32 homozygotes (about 1% of Northern Europeans) are resistant to CCR5-tropic HIV.",
+  "ART is lifelong combination antiretroviral therapy that suppresses viral load, protects health and, when undetectable for 6 months, prevents sexual transmission (U=U).",
+  "ART is not a cure: HIV persists in reservoirs and rebounds if treatment stops.",
+  "Always address partner testing, interim protection (condoms, PrEP or PEP), disclosure and psychosocial support."
+ ],
+ "presentation": [
+  "New HIV diagnosis",
+  "Patient questions about HIV and treatment"
+ ],
+ "refs": [
+  "Australasian Society for HIV, Viral Hepatitis and Sexual Health Medicine (ASHM): Australian National Guidelines for the Treatment and Management of HIV",
+  "ASHM: Australian National Guidelines for Post-Exposure Prophylaxis after Non-Occupational and Occupational Exposure to HIV, and PrEP guidelines",
+  "Australian Immunisation Handbook (vaccination for people living with HIV)",
+  "Therapeutic Guidelines (eTG): Antibiotic and Sexual and reproductive health, HIV sections",
+  "RACGP: Guidelines for preventive activities in general practice and Red Book sexual health chapter",
+  "Prevention Access Campaign: U=U consensus statement; Kirby Institute HIV surveillance reports"
+ ],
+ "specialty": [
+  "Infectious Diseases",
+  "Sexual Health"
+ ],
+ "stem": "<p>You are a GP in a sexual health clinic. Daniel Reyes, a 27-year-old man, attended last week after a recent unwell episode and had a routine sexual health screen. His fourth-generation HIV antigen/antibody test was reactive and confirmed on a supplementary test (HIV-1 confirmed). His baseline CD4 count is 410 cells/microlitre and viral load is 86,000 copies/mL. Hepatitis B, hepatitis C and syphilis serology, and the genital STI swabs, were negative. Baseline HIV genotype, HLA-B*5701, creatinine and eGFR have been sent or are normal. The result has already been disclosed to him by a colleague at the previous visit. He has returned today with questions.</p><p>You are not required to take a full history or examine the patient. Do not prescribe a specific regimen in this station.</p>",
+ "tasks": [
+  "<p><strong>Explain</strong> to Daniel what HIV is and how it affects the immune system, including how the virus gets into cells, in response to his questions (4 minutes).</p>",
+  "<p><strong>Counsel</strong> Daniel about antiretroviral therapy: what it is, what it achieves for his own health and for his partner, and what it does not achieve (4 minutes).</p>"
+ ],
+ "title": "Newly Diagnosed HIV: Explaining the Virus and ART",
+ "type": [
+  "Counselling",
+  "Management"
+ ]
+}

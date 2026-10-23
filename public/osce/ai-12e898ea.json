@@ -1,0 +1,355 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": "ai",
+ "licence": "own",
+ "basis": [
+  "92ff1fc17482",
+  "9c882eaf109d",
+  "9d19db24133b"
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Hand hygiene, clear introduction and confirms the patient's identity."
+  },
+  {
+   "id": 3,
+   "t": "checkbox",
+   "x": "Recognises an acutely unwell patient: keeps questions short and focused, uses plain language, and acknowledges distress and the recent bereavement with empathy."
+  },
+  {
+   "id": 4,
+   "t": "heading",
+   "x": "History"
+  },
+  {
+   "crit": true,
+   "id": 5,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Onset and time course (about 6 hours, constant)"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Character (central pressure) and the separate pleuritic right-sided component"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Radiation to the left shoulder or jaw"
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Severity, and exacerbating or relieving factors"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Characterises the chest pain:"
+  },
+  {
+   "id": 6,
+   "t": "checkbox",
+   "x": "Asks about associated symptoms: breathlessness, sweating, nausea, light-headedness, syncope, palpitations."
+  },
+  {
+   "id": 7,
+   "t": "checkbox",
+   "x": "Explores the infective picture: fever, rigors, cough, sputum colour, haemoptysis, sick contacts, vaccination status."
+  },
+  {
+   "id": 8,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Unilateral leg pain or swelling"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Previous DVT or PE, and malignancy"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Surgery, trauma, immobility or long travel in the last 4 weeks"
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Oestrogen or hormone therapy"
+    },
+    {
+     "id": 5,
+     "t": "checkbox",
+     "x": "Haemoptysis"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Asks about the risk factors for pulmonary embolism that make up the PERC criteria:"
+  },
+  {
+   "id": 9,
+   "t": "checkbox",
+   "x": "Assesses cardiovascular risk factors and history: hypertension, cholesterol, diabetes, ex-smoking (pack-years), family history, previous cardiac symptoms."
+  },
+  {
+   "crit": true,
+   "id": 10,
+   "t": "checkbox",
+   "x": "Checks for contraindications to antiplatelets and anticoagulants before treatment: drug allergies, current antiplatelets or anticoagulants, bleeding history, peptic ulcer, stroke."
+  },
+  {
+   "id": 11,
+   "t": "checkbox",
+   "x": "Elicits the recent emotional stressor (husband died 4 days ago), asks about sleep, eating and alcohol, and explores ideas, concerns and expectations."
+  },
+  {
+   "id": 12,
+   "t": "heading",
+   "x": "Interpretation and risk stratification"
+  },
+  {
+   "crit": true,
+   "id": 13,
+   "t": "checkbox",
+   "x": "Interprets the ECG as sinus tachycardia with ST elevation of about 2 mm in V2 to V5 (anterior territory) and recognises this as an anterior STEMI. States that the diagnosis rests on the ECG with the clinical picture and does not wait for the troponin or echo."
+  },
+  {
+   "crit": true,
+   "id": 14,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Confusion (new): absent"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Urea above 7 mmol/L: present (9.2)"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Respiratory rate 30 or more: present (32)"
+    },
+    {
+     "id": 4,
+     "t": "checkbox",
+     "x": "Blood pressure systolic below 90 or diastolic 60 or less: present (86/52)"
+    },
+    {
+     "id": 5,
+     "t": "checkbox",
+     "x": "Age 65 or more: present"
+    },
+    {
+     "id": 6,
+     "t": "checkbox",
+     "x": "Total 4 (CRB-65 would be 3): high mortality risk, needs urgent senior and ICU/HDU assessment, not ward-level care"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Calculates CURB-65 correctly and states what each part stands for:"
+  },
+  {
+   "id": 15,
+   "t": "checkbox",
+   "x": "Recognises severe community-acquired pneumonia with sepsis (fever, tachycardia, hypotension, hypoxia, lactate 3.4) and states that CURB-65 is an adjunct to clinical judgement, not a substitute for it."
+  },
+  {
+   "id": 16,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Age under 50, heart rate under 100, SpO2 95% or more"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "No haemoptysis, no oestrogen use, no prior DVT or PE"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "No unilateral leg swelling, no surgery or trauma in the last 4 weeks"
+    }
+   ],
+   "t": "checkbox",
+   "x": "States what PERC is: the Pulmonary Embolism Rule-out Criteria, used only when pretest probability of PE is low, where all 8 criteria negative rules out PE without D-dimer or imaging."
+  },
+  {
+   "crit": true,
+   "id": 17,
+   "t": "checkbox",
+   "x": "Correctly states that PERC cannot be used to dismiss PE in this patient (age 71, heart rate 112, SpO2 89%, not low pretest probability). PE stays on the differential and is pursued with a Wells score and further testing after the STEMI pathway decision."
+  },
+  {
+   "crit": true,
+   "id": 18,
+   "t": "checkbox",
+   "x": "Gives the working diagnosis as anterior STEMI until proven otherwise, with severe community-acquired pneumonia or sepsis, and lists the differentials: Takotsubo cardiomyopathy, type 2 myocardial infarction (demand ischaemia in sepsis), pulmonary embolism, myocarditis or pericarditis."
+  },
+  {
+   "id": 19,
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Transient LV systolic dysfunction, typically apical ballooning, often after emotional or physical stress (here bereavement and sepsis)"
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "About 90% of cases are in women, mostly postmenopausal"
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Named from the Japanese octopus pot (tako-tsubo)"
+    }
+   ],
+   "t": "checkbox",
+   "x": "Considers Takotsubo cardiomyopathy as a differential and describes it:"
+  },
+  {
+   "crit": true,
+   "id": 20,
+   "t": "checkbox",
+   "x": "States that Takotsubo is only accepted after coronary angiography (or CT coronary angiography where appropriate) shows no culprit obstructive lesion, plus imaging showing the typical wall-motion abnormality, in line with the InterTAK criteria. Echo alone cannot exclude ACS."
+  },
+  {
+   "id": 21,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "id": 22,
+   "t": "checkbox",
+   "x": "Starts immediate resuscitation: stays in resus with continuous monitoring, two large-bore IV lines, oxygen titrated to SpO2 92 to 96% (hypoxic), and a senior call."
+  },
+  {
+   "crit": true,
+   "id": 23,
+   "t": "checkbox",
+   "x": "Activates the STEMI pathway or cath lab immediately, phones the interventional cardiologist and requests emergency angiography within the 90-minute reperfusion window. Does not delay this for echo, CT or the pneumonia work-up."
+  },
+  {
+   "crit": true,
+   "id": 24,
+   "t": "checkbox",
+   "x": "Gives aspirin 300 mg (chewed or dispersed) unless contraindicated, and states that sepsis or hypotension is not a contraindication. Agrees the second antiplatelet and the anticoagulant with the interventional cardiologist."
+  },
+  {
+   "id": 25,
+   "t": "checkbox",
+   "x": "Gives titrated IV opioid analgesia with antiemetic as needed, and avoids GTN because systolic BP is below 90 mmHg."
+  },
+  {
+   "crit": true,
+   "id": 26,
+   "t": "checkbox",
+   "x": "Treats sepsis and severe pneumonia in parallel: blood cultures and lactate without delaying treatment, IV empirical antibiotics within 1 hour per eTG severe CAP guidance, cautious fluid resuscitation in small aliquots with frequent reassessment, and ICU/HDU review."
+  },
+  {
+   "crit": true,
+   "id": 27,
+   "t": "checkbox",
+   "x": "Arranges an urgent bedside echo (without delaying angiography) to assess LV function, wall motion, RV strain and the LVOT gradient. States that inotropes should be avoided if LVOT obstruction is present, and that fluid and vasopressor choice should then be agreed with ICU and cardiology."
+  },
+  {
+   "id": 28,
+   "t": "checkbox",
+   "x": "Orders further investigations: repeat ECG and troponin, FBC, UEC, CRP, coagulation screen, group and hold, arterial or venous gas, sputum and respiratory pathogen testing. If PE is still suspected after angiography and echo, uses a Wells score and CTPA, noting that D-dimer is non-specific in sepsis and MI."
+  },
+  {
+   "crit": true,
+   "id": 29,
+   "t": "checkbox",
+   "x": "Defers VTE prophylaxis until after the cardiology and angiography decision, because the patient is heading for emergency angiography and antithrombotic loading."
+  },
+  {
+   "id": 30,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 31,
+   "t": "checkbox",
+   "x": "Explains in plain language that this looks like a heart attack with a serious chest infection, that an urgent procedure on the heart is needed, and checks understanding and consent."
+  },
+  {
+   "id": 32,
+   "t": "checkbox",
+   "x": "Addresses the 'broken heart' concern: explains that severe stress can affect the heart, but that the heart arteries must be checked first. Offers to call the daughter Karen, and gives a clear ISBAR handover to cardiology."
+  }
+ ],
+ "complexity": "High",
+ "context": [],
+ "desc": "This station involves assessing an acutely unwell older woman with chest pain, breathlessness and fever, risk stratifying for STEMI, pneumonia and pulmonary embolism, and recognising where Takotsubo cardiomyopathy fits as a differential.",
+ "diagnosis": [
+  "Anterior STEMI",
+  "Community-acquired pneumonia",
+  "Sepsis",
+  "Takotsubo cardiomyopathy",
+  "Pulmonary embolism"
+ ],
+ "explain": "<h3>Anterior STEMI comes first</h3><p>This patient has chest pressure with radiation, sweating and nausea, ST elevation of about 2 mm in V2 to V5 and a rising troponin. That meets STEMI criteria. STEMI is an ECG and clinical diagnosis, so reperfusion is not delayed for the troponin, echo or the pneumonia work-up. The Australian ACS guideline recommends immediate STEMI pathway activation and emergency angiography, with first medical contact to reperfusion within 90 minutes. Pneumonia, sepsis and Takotsubo can all coexist with, or mimic, a STEMI, but none of them can be assumed before angiography.</p><h3>Antithrombotic therapy</h3><p>Aspirin 300 mg is a default step in suspected STEMI unless there is a true contraindication such as aspirin allergy or active major bleeding. Sepsis and hypotension are not contraindications. The second antiplatelet agent and the anticoagulant are agreed with the interventional cardiologist, who knows the angiography plan. VTE prophylaxis is deferred until after this decision, because the patient is heading for angiography and loading with antithrombotics.</p><h3>CURB-65 and severe pneumonia</h3><p>CURB-65 stands for new Confusion, Urea above 7 mmol/L, Respiratory rate 30 or more, Blood pressure (systolic below 90 or diastolic 60 or less) and age 65 or more. Each criterion scores one point. CRB-65 omits urea when blood results are not yet available. This patient scores 4 (urea, respiratory rate, blood pressure and age), which is high risk and warrants ICU or HDU assessment. The score guides site of care but does not replace clinical judgement. Hypoxia, hypotension and a lactate of 3.4 mmol/L also point to sepsis and call for antibiotics within the hour per the eTG severe CAP guidance and the Sepsis Clinical Care Standard.</p><h3>PERC</h3><p>PERC is the Pulmonary Embolism Rule-out Criteria. It is used only when clinical pretest probability of PE is low, and PE is ruled out without D-dimer or imaging only if all 8 criteria are negative: age under 50, heart rate under 100, SpO2 95% or more, no haemoptysis, no oestrogen use, no prior DVT or PE, no unilateral leg swelling, and no surgery or trauma in the last 4 weeks. This patient fails several criteria and is not low probability, so PERC cannot be used. PE stays on the differential and is pursued with a Wells score and further testing once the STEMI pathway decision is made. D-dimer is of limited value here because sepsis and myocardial infarction both raise it.</p><h3>Takotsubo cardiomyopathy as a differential</h3><p>Takotsubo is transient LV systolic dysfunction, typically apical ballooning (other variants exist), often triggered by emotional or physical stress. About 90% of cases are in women, mostly postmenopausal. The name comes from the Japanese octopus pot that the ballooned ventricle resembles. This patient has two plausible triggers: acute bereavement and sepsis. It can mimic a STEMI on ECG and troponin, so it is a reasonable differential. Under the InterTAK criteria it is diagnosed only when coronary angiography (or CT coronary angiography where appropriate) shows no culprit obstructive lesion and imaging shows the typical wall-motion abnormality. Echo alone cannot exclude ACS. The diagnosis is made after angiography, not before.</p><h3>Hypotension and LVOT obstruction</h3><p>A hypotensive patient with possible Takotsubo needs an urgent echo to assess LV function and the LVOT gradient, without delaying angiography. LVOT obstruction occurs in some Takotsubo patients because of basal hyperkinesis. If obstruction is present, inotropes and vasodilators such as nitrates can worsen it. Fluid and vasopressor choices are then made with ICU and cardiology. In sepsis with possible LV dysfunction, fluid is given in small aliquots with frequent reassessment.</p>",
+ "focus": "Acute chest pain and breathlessness: risk stratifying PE, pneumonia and Takotsubo",
+ "guide": "<p>A <strong>high-performing candidate</strong> would recognise within seconds that this is an unstable patient and keep the history focused. They would elicit the central pressure, the radiation and the bereavement. They would identify ST elevation in V2 to V5 as an anterior STEMI and give the working diagnosis as anterior STEMI until proven otherwise, with severe pneumonia and sepsis. They would activate the STEMI pathway, give aspirin 300 mg unless contraindicated, and agree further antithrombotics with the interventional cardiologist.</p><p>They would calculate CURB-65 as 4 using the correct criteria, say that PERC cannot be applied to this patient, and keep PE on the differential. They would raise Takotsubo as a differential because of the bereavement, the sepsis and the patient being an older woman, but state that it can only be accepted after angiography shows no culprit lesion. They would treat the sepsis in parallel, ask for an urgent echo to assess LV function and the LVOT gradient, and avoid inotropes if obstruction is present. They would defer VTE prophylaxis and explain the plan clearly and kindly.</p><p>A <strong>borderline candidate</strong> would ask a reasonable range of questions but may miss the PE risk factors or the antiplatelet contraindications. They may recognise ST elevation but call it 'non-specific changes', or accept Takotsubo as the diagnosis because of the bereavement. They may name the CURB-65 components but miscalculate the score, or try to use PERC to exclude PE in an older, hypoxic, tachycardic patient. Their management may focus on antibiotics and fluids, with only 'cardiology review' and no immediate STEMI pathway activation, or they may withhold aspirin because of the hypotension or sepsis.</p>",
+ "id": "ai-12e898ea",
+ "media": {},
+ "origin": "ai",
+ "patient": "<p><strong>Profile:</strong></p><ul><li><p><strong>Name</strong>: Dorothy Whitfield</p></li><li><p><strong>Age</strong>: 71-years-old</p></li><li><p><strong>Gender</strong>: Female</p></li><li><p><strong>Aboriginal or Torres Strait Islander</strong>: No</p></li><li><p><strong>Location</strong>: Emergency Department resuscitation bay</p></li></ul><p><strong>Manner:</strong> You are pale, sweaty and breathless. Speak in short sentences and pause to catch your breath. You become tearful when the candidate asks about the past week.</p><p><strong>Presenting complaint:</strong> 'My chest is tight and I can't catch my breath.'</p><p><strong>History of presenting complaint:</strong></p><ul><li><p><strong>Onset and duration:</strong></p><ul><li><p>You have felt unwell for <strong>three days</strong> with fevers, shaking chills and a cough.</p></li><li><p>About <strong>six hours ago</strong> you woke with a heavy pressure in the middle of your chest. It has been constant and worsening since.</p></li></ul></li><li><p><strong>Quality:</strong> a tight band or pressure in the centre of the chest. There is also a separate sharp catch on the <strong>right side</strong> when you breathe in deeply or cough.</p></li><li><p><strong>Severity:</strong> 7/10</p></li><li><p><strong>Radiation:</strong> to the left shoulder and a little into the jaw</p></li><li><p><strong>Exacerbating and relieving factors:</strong> the central pressure does not change with position or breathing. The sharp right-sided pain is worse with deep breaths and coughing. Nothing has helped.</p></li><li><p><strong>Associated symptoms:</strong></p><ul><li><p>Breathless even when talking</p></li><li><p>Sweaty and nauseated</p></li><li><p>Cough with <strong>rusty-coloured sputum</strong>, but no frank blood (no haemoptysis)</p></li><li><p>Light-headed when you sit up, but no fainting and no palpitations</p></li></ul></li></ul><p><strong>Pulmonary embolism and cardiac risk questions (answer only if asked):</strong></p><ul><li><p>No leg pain or swelling</p></li><li><p>No previous clots in the legs or lungs, and no cancer</p></li><li><p>No recent surgery, injury, hospital admission or long trips. You have been home or at the funeral home.</p></li><li><p>No hormone replacement or oestrogen tablets</p></li><li><p>No previous chest pain or heart problems, and you have never had a stress test</p></li></ul><p><strong>Systems review:</strong> no headache, no abdominal pain, no vomiting, no black stools, no urinary symptoms.</p><p><strong>Medical history:</strong> high blood pressure and osteoarthritis. No diabetes. No stroke. No stomach ulcers or bleeding problems.</p><p><strong>Medications:</strong></p><ul><li><p>Perindopril 5 mg daily</p></li><li><p>Paracetamol occasionally</p></li><li><p>No aspirin, no blood thinners, no regular anti-inflammatories, no over-the-counter supplements</p></li></ul><p><strong>Allergies</strong>: Nil</p><p><strong>Family history:</strong> your mother had a stroke in her 80s. There is no early heart disease in the family.</p><p><strong>Social history:</strong></p><ul><li><p><strong>Bereavement</strong>: your husband died suddenly in his sleep <strong>four days ago</strong> and the funeral was yesterday. Since then you have barely slept or eaten and feel overwhelmed. Reveal this only if asked how you have been or what has happened recently.</p></li><li><p><strong>Smoking</strong>: ex-smoker, 15 cigarettes a day for 20 years, stopped 12 years ago</p></li><li><p><strong>Alcohol</strong>: usually one glass of wine at night, a few glasses a night since the funeral</p></li><li><p><strong>Recreational drugs</strong>: none</p></li><li><p><strong>Occupation</strong>: retired teacher</p></li><li><p><strong>Home</strong>: lives alone now. Your daughter Karen lives nearby and brought you in.</p></li><li><p><strong>Vaccinations</strong>: you have not had this year's flu vaccine</p></li></ul><p><strong>ICE:</strong></p><ul><li><p><strong>Ideas</strong>: you think the chest infection has got worse. Your daughter said people can die of a broken heart, and you ask: 'Is that what this is?'</p></li><li><p><strong>Concerns</strong>: you are frightened of dying and leaving your daughter on her own so soon after losing your husband</p></li><li><p><strong>Expectations</strong>: you want to know what is wrong and you want treatment quickly</p></li></ul><p><em>Use only the history above. If the candidate uses medical jargon, ask them to explain it in plain words. If the candidate says you need an urgent procedure on your heart, ask what it involves and whether it is risky. If the candidate asks, you consent to Karen being called.</em></p><h3>Examiner information (give to the candidate at the start of Task 2):</h3><ul><li><p><strong>Observations</strong>: temperature 38.9 C, heart rate 112/min (regular), respiratory rate 32/min, blood pressure 86/52 mmHg, SpO2 89% on room air, alert and orientated (GCS 15, no new confusion)</p></li><li><p><strong>ECG (image provided)</strong>: sinus tachycardia at about 112/min, ST elevation of about 2 mm in V2 to V5, no reciprocal inferior ST depression, no pathological Q waves</p></li><li><p><strong>Bloods</strong>: urea 9.2 mmol/L, creatinine 118 micromol/L, lactate 3.4 mmol/L, CRP 240 mg/L, WCC 19 x 10^9/L, hs-troponin I 210 ng/L on arrival and 480 ng/L at one hour (rising)</p></li><li><p><strong>Chest X-ray</strong>: right lower zone consolidation, no pneumothorax, normal mediastinal width</p></li></ul><h3>Examiner prompts (use if not covered spontaneously):</h3><ol><li><p>'What does CURB-65 stand for, and what is this patient's score?' (Expected: Confusion, Urea above 7 mmol/L, Respiratory rate 30 or more, Blood pressure systolic below 90 or diastolic 60 or less, age 65 or more. Score 4 with no confusion. CRB-65 would be 3.)</p></li><li><p>'Can you use PERC to rule out pulmonary embolism here?' (Expected: no. PERC is only for low pretest probability, and all 8 criteria must be negative. This patient is over 50, tachycardic and hypoxic, so PERC fails.)</p></li><li><p>'Your registrar suggests Takotsubo cardiomyopathy. What do you think?' (Expected: reasonable differential given the bereavement and the sepsis, but treat as anterior STEMI until angiography shows no culprit occlusion.)</p></li><li><p>'The blood pressure is 86/52. What concerns you about fluids and inotropes?' (Expected: sepsis needs cautious fluid. Possible LV dysfunction or left ventricular outflow tract obstruction needs an urgent echo, and inotropes should be avoided if obstruction is present.)</p></li></ol>",
+ "points": [
+  "Treat ST elevation in contiguous leads with chest pain and a rising troponin as STEMI: activate the cath lab at once, with first medical contact to reperfusion within 90 minutes.",
+  "Give aspirin 300 mg in suspected STEMI unless truly contraindicated. Sepsis and hypotension are not contraindications, and the second antiplatelet and anticoagulant are agreed with the interventional cardiologist.",
+  "CURB-65 scores new Confusion, Urea above 7 mmol/L, Respiratory rate 30 or more, Blood pressure (systolic below 90 or diastolic 60 or less) and age 65 or more. A score of 3 or more is severe and warrants senior and ICU/HDU assessment.",
+  "PERC applies only when pretest probability of PE is low. All 8 criteria must be negative to rule out PE without D-dimer or imaging, and it cannot be used in older, tachycardic or hypoxic patients.",
+  "Takotsubo, mainly in postmenopausal women after emotional or physical stress, mimics STEMI. It is diagnosed only after angiography shows no culprit obstructive lesion plus a typical wall-motion abnormality.",
+  "In a hypotensive patient with possible Takotsubo, do an urgent echo for LV function and LVOT gradient, avoid inotropes if obstruction is present, and defer VTE prophylaxis until the angiography decision."
+ ],
+ "presentation": [
+  "Chest pain",
+  "Shortness of breath",
+  "Fever"
+ ],
+ "refs": [
+  "National Heart Foundation of Australia and Cardiac Society of Australia and New Zealand. Australian clinical guideline for diagnosing and managing acute coronary syndrome (current edition).",
+  "Therapeutic Guidelines (eTG). Respiratory: Community-acquired pneumonia, including severe CAP. Therapeutic Guidelines Limited, current version.",
+  "Australian Commission on Safety and Quality in Health Care. Sepsis Clinical Care Standard (2022).",
+  "Thrombosis and Haemostasis Society of Australia and New Zealand (THANZ). Guidance on the diagnosis and management of venous thromboembolism.",
+  "Ghadri JR, et al. International Expert Consensus Document on Takotsubo Syndrome (Parts I and II). Eur Heart J 2018;39:2032-2062.",
+  "Ibanez B, et al. 2017 ESC Guidelines for the management of acute myocardial infarction in patients presenting with ST-segment elevation. Eur Heart J 2018;39:119-177."
+ ],
+ "specialty": [
+  "Emergency Medicine",
+  "Cardiology"
+ ],
+ "stem": "<p>You are the junior doctor in the Emergency Department. Dorothy Whitfield, a 71-year-old woman, has been brought in by her daughter with chest pain and breathlessness. She is in the resuscitation bay on a cardiac monitor with oxygen running and an IV cannula in situ. The triage nurse reports that she has been unwell for three days and that her husband died four days ago.</p>",
+ "tasks": [
+  "<p>Take a <strong>focussed history</strong> from the patient. She is breathless and distressed, so keep your questions targeted. (3 minutes)</p>",
+  "<p>The examiner will give you an ECG, observations and initial results. <strong>Interpret</strong> them, <strong>risk stratify</strong> using CURB-65 and PERC where appropriate, and tell the examiner your most urgent working diagnosis and differential diagnoses. (2 minutes)</p>",
+  "<p><strong>Outline</strong> your immediate management and escalation plan to the examiner, and briefly explain to the patient what is happening. (3 minutes)</p>"
+ ],
+ "title": "Chest pain, fever and breathlessness after a bereavement",
+ "type": [
+  "History",
+  "Interpretation",
+  "Emergency"
+ ]
+}

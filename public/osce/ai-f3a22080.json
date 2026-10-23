@@ -1,0 +1,191 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-21T06:29:16Z",
+ "generator": "osce_ai_stations.py",
+ "source": {
+  "label": "CPE brief",
+  "date": "2026-10-19"
+ },
+ "licence": "own",
+ "id": "ai-f3a22080",
+ "title": "Pre-travel consultation: vaccines and travel health",
+ "desc": "This station involves taking a focused pre-travel history from a young adult planning a long rural trip through mainland Asia, interpreting their immunisation record, and counselling on risk-based vaccines, malaria prevention, food and water safety and return-fever safety-netting.",
+ "specialty": [
+  "General Practice",
+  "Infectious Diseases"
+ ],
+ "type": [
+  "Counselling",
+  "Management"
+ ],
+ "complexity": "Moderate",
+ "context": [],
+ "presentation": [
+  "Pre-travel advice",
+  "Travel vaccines",
+  "Malaria prevention"
+ ],
+ "diagnosis": [
+  "Travel health",
+  "Incomplete immunisation record"
+ ],
+ "stem": "<p>You are a general practice registrar in a suburban General Practice clinic. A 31-year-old woman has booked a pre-travel consultation. She is a new patient and is generally well. She plans to travel in 5 weeks. Her immunisation history statement from the Australian Immunisation Register is shown below. You have 2 minutes reading time, then 8 minutes in the station.</p><table><tr><td><strong>Vaccine</strong></td><td><strong>Recorded</strong></td></tr><tr><td>Measles-mumps-rubella (MMR)</td><td>1 dose at 12 months</td></tr><tr><td>Diphtheria-tetanus-pertussis</td><td>Last booster (dTpa) at 15 years, school program</td></tr><tr><td>Hepatitis B</td><td>3 doses, complete, school program</td></tr><tr><td>HPV</td><td>Complete, school program</td></tr><tr><td>Hepatitis A, typhoid, Japanese encephalitis, rabies, influenza</td><td>Nil recorded</td></tr></table>",
+ "tasks": [
+  "<p>Take a <strong>focused travel history</strong> from the patient (3 minutes).</p>",
+  "<p><strong>Interpret</strong> her immunisation record and <strong>counsel</strong> her on your recommended vaccines, malaria prevention, food and water advice and safety-netting for during and after travel (5 minutes).</p>"
+ ],
+ "patient": "<p><strong>Profile:</strong> 31-year-old woman (she/her), not Aboriginal or Torres Strait Islander, office worker, General Practice clinic.</p><p><strong>Opening statement:</strong> \"I'm going travelling in five weeks and want to know what vaccines and tablets I need.\"</p><p><strong>Travel history (give if asked):</strong></p><ul><li>Backpacking for 6 weeks through Vietnam, Cambodia and Laos, flying out in 5 weeks.</li><li>Mostly rural: village homestays, trekking in forested northern Cambodia and southern Laos, cycling past rice paddies. A few days in cities.</li><li>Plans to eat street food, may drink tap or ice. Expects contact with stray dogs and monkeys at temples, and has been told she can pat them.</li><li>No stopover in Africa or South America.</li></ul><p><strong>Other history:</strong></p><ul><li>Well. No medications other than a combined oral contraceptive pill. NKDA. No egg allergy or previous vaccine reaction. No immune problems, no steroids, no splenectomy.</li><li>Not pregnant, not planning pregnancy for a year, last period 2 weeks ago, pill taken reliably.</li><li>No previous overseas travel to the tropics. Records match the statement; no other vaccines.</li></ul><p><strong>Ideas, concerns, expectations:</strong></p><ul><li>Idea: \"I assume I just need a malaria tablet.\"</li><li>Concerns: cost and \"lots of needles\". Worried about getting sick on a trip with no flexibility.</li><li>Expectation: a clear list of what is essential versus optional.</li></ul><p><strong>Cues and questions to ask the candidate:</strong></p><ul><li>\"Do I really need Japanese encephalitis and rabies vaccines? They sound rare.\"</li><li>If live vaccines are mentioned: \"Can I have them all in one visit?\"</li><li>\"What should I do if a monkey scratches me?\"</li><li>\"What if I get a fever after I'm home?\"</li></ul>",
+ "guide": "<p>A <strong>high-performing candidate</strong> takes a focused travel history, identifies that the trip is long and rural, and recognises the single MMR dose and old dTpa booster as catch-up items. They recommend hepatitis A, typhoid, Japanese encephalitis and discuss rabies with reasons, plan live-vaccine spacing, explain malaria chemoprophylaxis per eTG with bite avoidance, and safety-net clearly for fever within 3 months of return and for animal bites. They address cost and needle concerns and prioritise the plan.</p><p>A <strong>borderline candidate</strong> offers only a malaria tablet and a generic vaccine list, misses the MMR and dTpa gaps, does not ask about pregnancy before live vaccines, and gives vague return advice such as 'see a doctor if unwell' without stating the 3-month window and urgency.</p>",
+ "explain": "<h3>Approach</h3><p>A pre-travel consultation is risk-based: itinerary, duration, rural exposure and activities, then host factors (pregnancy, immune status, allergies). The record is checked first for routine catch-up, then travel vaccines are added.</p><h3>Catch-up</h3><p>Adults born 1966 or later need 2 documented MMR doses, and measles circulates in parts of Asia. A tetanus-containing booster is advised if more than 10 years since the last dose when travelling to areas with limited access to care.</p><h3>Travel vaccines</h3><p>Hepatitis A and typhoid are recommended for most travellers to this region. Japanese encephalitis is recommended for 1 month or more in endemic rural areas. Rabies pre-exposure vaccination is considered for extended rural travel with animal contact. Live vaccines are given the same day or at least 4 weeks apart, and are avoided in pregnancy.</p><h3>Malaria and safety-netting</h3><p>Chemoprophylaxis agent and timing are chosen per eTG alongside bite avoidance. Any fever during travel or within 3 months of return needs urgent malaria testing. A bite requires wound washing for 15 minutes and urgent post-exposure treatment even if vaccinated.</p>",
+ "points": [
+  "Take a travel history covering destinations, rural or urban, duration, activities, timing before departure, pregnancy, immune status and routine vaccine record.",
+  "Adults born 1966 or later need 2 documented MMR doses; check and give catch-up before travel.",
+  "Hepatitis A and typhoid vaccines are recommended for travel to much of Asia; give at least 2 weeks before departure where possible.",
+  "Japanese encephalitis vaccine is recommended for 1 month or more in endemic rural areas, or shorter stays with high-risk activities.",
+  "Give live vaccines on the same day or at least 4 weeks apart, and avoid them in pregnancy.",
+  "Malaria prevention combines chemoprophylaxis per eTG with bite avoidance (DEET or picaridin, nets, long clothing at dusk and dawn)."
+ ],
+ "refs": [
+  "Australian Immunisation Handbook. Australian Government Department of Health and Aged Care. Available at: https://immunisationhandbook.health.gov.au (chapters: Vaccination for international travellers; Japanese encephalitis; Rabies and other lyssaviruses; Typhoid; Hepatitis A; Measles).",
+  "Therapeutic Guidelines (eTG): Malaria prevention for travellers. Therapeutic Guidelines Limited.",
+  "Smartraveller. Australian Government Department of Foreign Affairs and Trade. Available at: https://www.smartraveller.gov.au"
+ ],
+ "check": [
+  {
+   "id": 1,
+   "t": "heading",
+   "x": "Professionalism"
+  },
+  {
+   "id": 2,
+   "t": "checkbox",
+   "x": "Performs hand hygiene, introduces self and role, explains the purpose of the consultation and uses clear, jargon-free language with appropriate eye contact."
+  },
+  {
+   "id": 3,
+   "t": "heading",
+   "x": "History"
+  },
+  {
+   "id": 4,
+   "t": "checkbox",
+   "x": "Takes a travel history:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Destinations and whether rural or urban [rural Vietnam, Cambodia, Laos with forest trekking and homestays]."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Duration and timing before departure [6 weeks, leaving in 5 weeks]."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Activities and exposures [street food, tap water, animals, rice paddies, outdoor nights]."
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "t": "checkbox",
+   "x": "Asks host factors that change vaccine choice: pregnancy or planned pregnancy and contraception, immune status and medications, allergies or previous vaccine reactions, and the routine vaccine record.",
+   "crit": true
+  },
+  {
+   "id": 6,
+   "t": "heading",
+   "x": "Management"
+  },
+  {
+   "id": 7,
+   "t": "checkbox",
+   "x": "Interprets the immunisation record per the Australian Immunisation Handbook:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "MMR: only 1 recorded dose, so a second dose is needed before travel (2 documented doses for adults born 1966 or later)."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "dTpa: last booster 16 years ago, more than 10 years, so a booster is advised before travel to a region with limited access to care. Hepatitis B is complete and needs no further dose."
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "t": "checkbox",
+   "x": "Recommends vaccines by risk per the Australian Immunisation Handbook:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Hepatitis A and typhoid (injectable Vi) recommended; ideally at least 2 weeks before departure."
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Japanese encephalitis recommended: 1 month or more with rural exposure in an endemic region. Names the vaccine type and schedule."
+    },
+    {
+     "id": 3,
+     "t": "checkbox",
+     "x": "Rabies pre-exposure vaccination offered for extended rural travel, animal contact and limited access to post-exposure care; explains this does not remove the need for treatment after a bite. Yellow fever not required (no endemic country on the itinerary)."
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "t": "checkbox",
+   "x": "Plans live vaccines safely: MMR and live-attenuated Japanese encephalitis vaccine on the same day or at least 4 weeks apart; confirms not pregnant and advises avoiding pregnancy for 28 days after live vaccines.",
+   "crit": true
+  },
+  {
+   "id": 10,
+   "t": "checkbox",
+   "x": "Malaria: explains risk in the forested areas, advises chemoprophylaxis choice and duration per eTG (start before, during and after leaving the risk area), plus bite avoidance: DEET or picaridin repellent, long clothing at dusk and dawn, permethrin-treated nets.",
+   "crit": true
+  },
+  {
+   "id": 11,
+   "t": "heading",
+   "x": "Communication"
+  },
+  {
+   "id": 12,
+   "t": "checkbox",
+   "x": "Gives food and water advice (bottled or boiled water, no ice, well-cooked food, hand hygiene, oral rehydration for diarrhoea) and advises registering on Smartraveller and arranging travel insurance."
+  },
+  {
+   "id": 13,
+   "t": "checkbox",
+   "x": "Safety-nets specifically:",
+   "kids": [
+    {
+     "id": 1,
+     "t": "checkbox",
+     "x": "Any fever during travel or within 3 months of return needs same-day medical review for malaria testing; tells the doctor about the travel.",
+     "crit": true
+    },
+    {
+     "id": 2,
+     "t": "checkbox",
+     "x": "Animal bite or scratch: wash wound with soap and water for 15 minutes and seek urgent post-exposure treatment, even if vaccinated (vaccinated people still need further doses)."
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "t": "checkbox",
+   "x": "Explores ideas, concerns and expectations (cost, number of needles), prioritises essential versus optional vaccines, checks understanding and books a follow-up visit before departure."
+  }
+ ],
+ "origin": "ai",
+ "focus": "Pre-travel consultation: vaccines and travel health",
+ "basis": [],
+ "media": {}
+}
