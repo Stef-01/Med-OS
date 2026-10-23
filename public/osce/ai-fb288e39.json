@@ -48,7 +48,7 @@
     {
      "id": 2,
      "t": "checkbox",
-     "x": "Duration about 3 minutes (under 15 minutes)"
+     "x": "Duration about 3 minutes (under 15 minutes), stopping on its own"
     },
     {
      "id": 3,
@@ -64,11 +64,6 @@
   },
   {
    "id": 7,
-   "t": "checkbox",
-   "x": "Asks about colour change, injury or incontinence during the seizure, and whether it stopped on its own."
-  },
-  {
-   "id": 8,
    "t": "checkbox",
    "x": "Looks for the source of fever and red flags:",
    "kids": [
@@ -91,168 +86,143 @@
    ]
   },
   {
-   "id": 9,
+   "id": 8,
    "t": "checkbox",
    "x": "Asks about previous seizures, development and any head injury."
   },
   {
-   "id": 10,
+   "id": 9,
    "t": "checkbox",
    "x": "Asks about immunisations, medicines and allergies."
   },
   {
-   "id": 11,
+   "id": 10,
    "t": "checkbox",
    "x": "Asks about family history of febrile seizures or epilepsy (sibling had a febrile seizure)."
   },
   {
-   "id": 12,
+   "id": 11,
    "t": "checkbox",
    "x": "Explores the parent's ideas, concerns and expectations: fear of death, brain damage and epilepsy, and the expectation of a scan or blood tests."
   },
   {
-   "id": 13,
+   "id": 12,
    "t": "heading",
    "x": "Examination"
   },
   {
+   "id": 13,
+   "t": "checkbox",
+   "x": "Asks for the full set of observations including GCS, the temperature and the BGL, and notes the general state (alertness, colour, work of breathing)."
+  },
+  {
    "id": 14,
-   "t": "checkbox",
-   "x": "Asks for the full set of observations, the temperature and the BGL."
-  },
-  {
-   "id": 15,
-   "t": "checkbox",
-   "x": "Assesses general state: alertness and GCS, colour and work of breathing."
-  },
-  {
-   "id": 16,
-   "t": "checkbox",
-   "x": "Assesses hydration: CRT, mucous membranes and skin turgor."
-  },
-  {
-   "id": 17,
    "t": "checkbox",
    "x": "Looks for meningism and a non-blanching rash: neck stiffness, photophobia, and the whole skin (glass test for any spots).",
    "crit": true
   },
   {
-   "id": 18,
+   "id": 15,
    "t": "checkbox",
    "x": "Examines the ears and throat and the neck nodes."
   },
   {
-   "id": 19,
+   "id": 16,
    "t": "checkbox",
    "x": "Examines the chest and abdomen."
   },
   {
-   "id": 20,
+   "id": 17,
    "t": "checkbox",
    "x": "Performs a neurological examination: pupils, tone, power, reflexes and plantars, looking for a focal deficit or Todd paresis."
   },
   {
-   "id": 21,
+   "id": 18,
    "t": "heading",
    "x": "Interpretation"
   },
   {
-   "id": 22,
+   "id": 19,
    "t": "checkbox",
    "x": "Interprets the triage observations: fever with a tachycardia in keeping with it, normal SpO2 and BP, a normal BGL (5.6 mmol/L), and GCS 14 in keeping with the post-ictal state."
   },
   {
-   "id": 23,
+   "id": 20,
    "t": "checkbox",
-   "x": "Interprets the reassessment: GCS back to 15, playing and drinking, with HR falling as the temperature falls, which is a normal recovery."
+   "x": "Interprets the reassessment: GCS back to 15 within an hour of the seizure, playing and drinking, with HR falling as the temperature falls, which is a normal recovery."
   },
   {
-   "id": 24,
+   "id": 21,
    "t": "checkbox",
    "x": "Identifies the fever source as a viral upper respiratory tract infection: red throat and runny nose, normal ears and a clear chest."
   },
   {
-   "id": 25,
+   "id": 22,
    "t": "checkbox",
-   "x": "Classifies a simple febrile seizure: generalised, under 15 minutes, once in 24 hours, full recovery, in a child aged 6 months to 6 years.",
+   "x": "Classifies a simple febrile seizure: generalised tonic-clonic, under 15 minutes, complete recovery within 1 hour, and no recurrence in the same illness, in a child aged 6 months to 6 years.",
    "crit": true
   },
   {
-   "id": 26,
-   "t": "checkbox",
-   "x": "States what would point to meningitis or encephalitis or a complex seizure (meningism, a non-blanching rash, persistent drowsiness, focal features, a prolonged or repeated seizure) and that none are present."
-  },
-  {
-   "id": 27,
+   "id": 23,
    "t": "checkbox",
    "x": "States that no investigations are needed: no routine bloods, EEG or neuroimaging; urine only if no source is found; lumbar puncture only for meningism, persistent drowsiness or other concern. None are needed here because the source is clear and the child has recovered.",
    "crit": true
   },
   {
-   "id": 28,
+   "id": 24,
    "t": "heading",
    "x": "Management"
   },
   {
-   "id": 29,
+   "id": 25,
    "t": "checkbox",
    "x": "Offers paracetamol for comfort only: 15 mg/kg = 195 mg for 13 kg orally (or ibuprofen 10 mg/kg = 130 mg), and states that antipyretics do not prevent febrile seizures and should not be given regularly to try to."
   },
   {
-   "id": 30,
+   "id": 26,
    "t": "checkbox",
    "x": "Advises comfort care at home: plenty of fluids, light clothing, and no need to wake the child to give medicine."
   },
   {
-   "id": 31,
+   "id": 27,
    "t": "checkbox",
-   "x": "Explains the diagnosis and prognosis: febrile seizures are common and do not cause brain damage, the epilepsy risk is about 1%, and the recurrence risk is about 1 in 3 overall (about 1 in 2 if the first seizure is under 12 months)."
+   "x": "Explains the diagnosis and prognosis: febrile seizures are common and do not cause brain damage, the chance of later epilepsy is low (about 1 to 2 in 100, little more than other children), another febrile seizure happens in about 1 in 3 (about 1 in 2 if the first is under 12 months), and a scan, brain wave test or blood tests are not needed."
   },
   {
-   "id": 32,
+   "id": 28,
    "t": "checkbox",
    "x": "Explains that the family history makes another febrile seizure a little more likely, and that no daily medicine is needed to prevent one."
   },
   {
-   "id": 33,
-   "t": "checkbox",
-   "x": "Explains why a scan, a brain wave test (EEG) and blood tests are not needed, addressing the parent's expectation."
-  },
-  {
-   "id": 34,
+   "id": 29,
    "t": "checkbox",
    "x": "Teaches seizure first aid: note the time, lie the child on their side in the recovery position, nothing in the mouth, do not restrain, and stay with the child.",
    "crit": true
   },
   {
-   "id": 35,
+   "id": 30,
    "t": "checkbox",
    "x": "Discharges home once back to baseline and drinking, with the fever source identified and the parent confident with first aid."
   },
   {
-   "id": 36,
+   "id": 31,
    "t": "heading",
    "x": "Safety netting"
   },
   {
-   "id": 37,
+   "id": 32,
    "t": "checkbox",
    "x": "Tells the parent to call an ambulance (000) if a seizure lasts 5 minutes or more, the child has trouble breathing or turns blue, or does not wake up properly afterwards.",
    "crit": true
   },
   {
-   "id": 38,
+   "id": 33,
    "t": "checkbox",
    "x": "Gives specific return advice to the ED: another seizure, persistent drowsiness, neck stiffness, a non-blanching rash, breathing difficulty, repeated vomiting, not drinking or fewer wet nappies, or the child getting worse.",
    "crit": true
   },
   {
-   "id": 39,
-   "t": "checkbox",
-   "x": "Advises that after any future seizure, even a short one, the child should see a doctor (GP or ED) to find the cause of the fever."
-  },
-  {
-   "id": 40,
+   "id": 34,
    "t": "checkbox",
    "x": "Arranges GP follow-up in the next few days and gives written information on febrile seizures."
   }
@@ -263,18 +233,18 @@
  "diagnosis": [
   "Simple febrile seizure"
  ],
- "explain": "<h3>Simple versus complex</h3><p>A simple febrile seizure is generalised, lasts under 15 minutes, occurs once in 24 hours and is followed by full recovery, in a child aged 6 months to 6 years. Focal features, longer duration, recurrence within 24 hours or incomplete recovery make it complex and prompt further assessment. This child meets every criterion for a simple febrile seizure, and the reassessment confirms full recovery.</p><h3>History and examination</h3><p>The history pins down what the seizure looked like, how long it lasted, whether it recurred and how the child recovered, and screens for meningitis or encephalitis (rash, neck stiffness, vomiting, persistent drowsiness, recent antibiotics). The examination looks for the fever source, meningism, a non-blanching rash and focal neurological signs. A family history of febrile seizures is common and raises the recurrence risk.</p><h3>Investigations</h3><p>Look for the source of fever. EEG, neuroimaging and routine bloods are not indicated. Check the BGL if recovery is slow. Collect urine if there is no source. Consider LP if there is meningism, ongoing drowsiness or the child is very young or unwell.</p><h3>Management and counselling</h3><p>Antipyretics such as paracetamol 15 mg/kg (195 mg for 13 kg) give comfort only and do not prevent seizures. Reassure about the good outcome: no brain damage, an epilepsy risk of about 1%, and a recurrence risk of about 1 in 3 overall. Teach first aid: time the seizure, recovery position, nothing in the mouth, do not restrain.</p><h3>Safety netting</h3><p>Call 000 for a seizure lasting 5 minutes or more, breathing difficulty or a child who does not wake properly. Return for another seizure, persistent drowsiness, neck stiffness, a non-blanching rash, repeated vomiting or poor drinking. Arrange GP follow-up and give written information.</p>",
+ "explain": "<h3>Simple versus complex</h3><p>The RCH Febrile seizure guideline defines a simple febrile seizure as generalised tonic-clonic, lasting under 15 minutes, with complete recovery within 1 hour and no recurrence in the same illness, usually in a child aged 6 months to 6 years. Focal features, longer duration, recurrence in the same illness or slow recovery make it complex and prompt further assessment. This child meets every criterion, and the reassessment confirms full recovery within the hour.</p><h3>History and examination</h3><p>The history pins down what the seizure looked like, how long it lasted, whether it recurred and how the child recovered, and screens for meningitis or encephalitis (rash, neck stiffness, vomiting, persistent drowsiness, recent antibiotics). The examination looks for the fever source, meningism, a non-blanching rash and focal neurological signs. A family history of febrile seizures is common and raises the recurrence risk.</p><h3>Investigations</h3><p>Look for the source of fever. EEG, neuroimaging and routine bloods are not indicated. Check the BGL if recovery is slow. Collect urine if there is no source. Consider LP if there is meningism, ongoing drowsiness or the child is very young or unwell.</p><h3>Management and counselling</h3><p>Antipyretics such as paracetamol 15 mg/kg (195 mg for 13 kg) give comfort only and do not prevent seizures. Reassure about the good outcome: no brain damage, a low chance of later epilepsy (about 1 to 2 in 100, little more than other children), and a recurrence risk of about 1 in 3 overall, higher if the first seizure is under 12 months or there is a family history. No daily seizure medicine is needed. Teach first aid: time the seizure, recovery position, nothing in the mouth, do not restrain.</p><h3>Safety netting</h3><p>Call 000 for a seizure lasting 5 minutes or more, breathing difficulty or a child who does not wake properly. Return for another seizure, persistent drowsiness, neck stiffness, a non-blanching rash, repeated vomiting or poor drinking. Arrange GP follow-up and give written information.</p>",
  "focus": "A simple febrile seizure: assessment, the parents' questions, discharge and first aid",
  "guide": "<p>In Part 1, the parent answers the history and the examiner gives findings from the Exam findings only when the candidate says what they would examine. In Part 2, hand over the results and ask the questions in order; the candidate speaks to the parent for the explanation, first aid and safety netting.</p><p>A <strong>high-performing candidate</strong> characterises the seizure precisely, screens for meningitis and a focal or prolonged seizure, examines for meningism, rash, the fever source and focal signs, classifies a simple febrile seizure using the stated features, and explains why no bloods, EEG, imaging or LP are needed. They give a weight-based dose for comfort, state that antipyretics do not prevent seizures, and give clear first aid, discharge and return advice with the 5-minute ambulance threshold, in plain language.</p><p>A <strong>borderline candidate</strong> takes an incomplete seizure history, orders unnecessary tests, omits the fever source or recurrence risk, suggests regular paracetamol to prevent seizures, or gives vague return advice.</p>",
  "id": "ai-fb288e39",
  "media": {},
  "origin": "ai",
- "patient": "<p><strong>Role:</strong> You are the parent of a 27-month-old (13 kg). You are shaken and frightened, but calmer now that the seizure has stopped. The examiner gives examination findings from the Exam findings when the candidate says what they would examine, and the nurse gives the triage observations and BGL if asked.</p><p><strong>Opening line:</strong> \"My child had a fit at home. I thought they were dying.\"</p><p><strong>History (give only when asked):</strong></p><ul><li>The seizure: the whole body went stiff, then all four limbs jerked. The eyes rolled back and your child did not respond to you. It was the same on both sides and did not start in one arm or leg.</li><li>It lasted about 3 minutes by your phone clock. The lips looked briefly dusky. No injury, no wet pants. It stopped on its own.</li><li>Only one seizure, no repeat since. Very drowsy afterwards, now waking up and settling.</li><li>Two days of runny nose, sore throat, cough and fever. Eating less but still drinking, normal wet nappies. No paracetamol given today.</li><li>No vomiting, rash, neck stiffness, headache, ear pulling, diarrhoea or pain passing urine. No head injury. No recent antibiotics.</li><li>No previous seizures. Development normal: walking, running and saying short sentences.</li><li>Immunisations up to date. No regular medicines, no allergies.</li><li>Family history: an older sibling had a febrile seizure at age 2. Nobody in the family has epilepsy.</li><li>Lives with both parents and the sibling. The sibling also has a cold.</li></ul><p><strong>Ideas, concerns, expectations:</strong> you were afraid your child was dying. You are worried about brain damage and epilepsy. You expect a brain scan or blood tests.</p><p><strong>Questions to ask if there is time:</strong> \"Will it happen again?\" \"Does my child need a scan or a brain wave test?\"</p><p><strong>Later questions (when the candidate explains the plan):</strong> \"Should I give paracetamol regularly to stop another one?\" \"What do I do if it happens again?\" \"Can we go home, and when should we come back?\"</p>",
+ "patient": "<p><strong>Role:</strong> You are the parent of a 27-month-old (13 kg). You are shaken and frightened, but calmer now that the seizure has stopped. The examiner gives examination findings from the Exam findings when the candidate says what they would examine, and the nurse gives the triage observations and BGL if asked.</p><p><strong>Opening line:</strong> \"My child had a fit at home. I thought they were dying.\"</p><p><strong>History (give only when asked):</strong></p><ul><li>The seizure: the whole body went stiff, then all four limbs jerked. The eyes rolled back and your child did not respond to you. It was the same on both sides and did not start in one arm or leg.</li><li>It lasted about 3 minutes by your phone clock. The lips looked briefly dusky. No injury, no wet pants. It stopped on its own.</li><li>The seizure was about 30 minutes ago. Only one seizure, no repeat since. Very drowsy afterwards, now waking up and settling.</li><li>Two days of runny nose, sore throat, cough and fever. Eating less but still drinking, normal wet nappies. No paracetamol given today.</li><li>No vomiting, rash, neck stiffness, headache, ear pulling, diarrhoea or pain passing urine. No head injury. No recent antibiotics.</li><li>No previous seizures. Development normal: walking, running and saying short sentences.</li><li>Immunisations up to date. No regular medicines, no allergies.</li><li>Family history: an older sibling had a febrile seizure at age 2. Nobody in the family has epilepsy.</li><li>Lives with both parents and the sibling. The sibling also has a cold.</li></ul><p><strong>Ideas, concerns, expectations:</strong> you were afraid your child was dying. You are worried about brain damage and epilepsy. You expect a brain scan or blood tests.</p><p><strong>Questions to ask if there is time:</strong> \"Will it happen again?\" \"Does my child need a scan or a brain wave test?\"</p><p><strong>Later questions (when the candidate explains the plan):</strong> \"Should I give paracetamol regularly to stop another one?\" \"What do I do if it happens again?\" \"Can we go home, and when should we come back?\"</p>",
  "points": [
-  "A simple febrile seizure is generalised, under 15 minutes, once in 24 hours, with full recovery.",
+  "A simple febrile seizure is generalised tonic-clonic, under 15 minutes, with complete recovery within 1 hour and no recurrence in the same illness.",
   "No routine EEG, imaging or bloods; investigate the fever source (urine if no source; LP only on specific indications).",
   "Antipyretics are for comfort and do not prevent febrile seizures.",
-  "Recurrence risk is about 1 in 3 overall; epilepsy risk is about 1%.",
+  "Recurrence risk is about 1 in 3 overall (about 1 in 2 under 12 months); later epilepsy is uncommon, about 1 to 2 in 100.",
   "First aid: time it, recovery position, nothing in the mouth, ambulance at 5 minutes."
  ],
  "presentation": [
@@ -283,7 +253,7 @@
  ],
  "refs": [
   "RCH CPG: Febrile seizure",
-  "RCH CPG: Urinary tract infection"
+  "RCH Kids Health Info: Febrile seizures (fact sheet)"
  ],
  "specialty": [
   "Paediatrics",
@@ -292,7 +262,7 @@
  "stem": "<p>You are the junior doctor in a metropolitan Emergency Department. A 27-month-old child (13 kg) has been brought in by a parent after a seizure at home during a febrile illness. The seizure has stopped and the child is drowsy on the trolley beside the parent. The ED nurse has done the triage observations and a blood glucose level.</p>",
  "tasks": [
   "<p>Take a focused <strong>history</strong> from the parent and perform a focused <strong>examination</strong> of the child, telling the examiner what you are examining and why (10 minutes).</p>",
-  "<p>The examiner will give you the triage observations and a reassessment 1 hour later. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, including any investigations and medicine doses for this child, and your <strong>safety netting</strong>, speaking to the parent (5 minutes).</p>"
+  "<p>The examiner will give you the triage observations and a reassessment 20 minutes later. <strong>Interpret</strong> them, then outline your <strong>management approach</strong>, including any investigations and medicine doses for this child, and your <strong>safety netting</strong>, speaking to the parent (5 minutes).</p>"
  ],
  "title": "Simple febrile seizure",
  "type": [
@@ -302,15 +272,15 @@
   "Counselling"
  ],
  "part2": {
-  "lead": "Here are the triage observations and a reassessment 1 hour later. No other tests have been done.",
+  "lead": "Here are the triage observations and a reassessment 20 minutes later. No other tests have been done.",
   "handover": [
    {
     "label": "Triage observations",
     "result": "<p>Temperature 39.2 °C, HR 150, RR 30, SpO2 98% on room air, BP 95/58, CRT 2 seconds, GCS 14 (E3 V5 M6, drowsy but rousable). BGL 5.6 mmol/L. Weight 13 kg.</p>"
    },
    {
-    "label": "Reassessment 1 hour later",
-    "result": "<p>After paracetamol given for comfort: temperature 38.6 °C, HR 132, RR 26, SpO2 98% on room air, GCS 15. Sitting up on the parent's lap, playing with a toy and drinking. No further seizure. Neurological examination normal, no rash, no neck stiffness.</p>"
+    "label": "Reassessment 20 minutes later (about 50 minutes after the seizure)",
+    "result": "<p>After a dose of paracetamol for comfort: temperature 38.6 °C, HR 132, RR 26, SpO2 98% on room air, GCS 15. Sitting up on the parent's lap, playing with a toy and drinking. No further seizure. Neurological examination normal, no rash, no neck stiffness.</p>"
    },
    {
     "label": "Investigations",
