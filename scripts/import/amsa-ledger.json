@@ -15,6 +15,18 @@
    "station": "amsa-188",
    "by": "publish-amsa-draft.mjs"
   },
+  "189": {
+   "status": "shipped",
+   "at": "2026-10-23T12:06:15Z",
+   "title": "Cough History 1",
+   "station": "amsa-189",
+   "rounds": 3,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 1
+  },
   "196": {
    "status": "shipped",
    "at": "2026-10-23T07:38:55Z",
@@ -41,6 +53,23 @@
    "title": "Chest Pain History 2",
    "station": "amsa-199",
    "by": "publish-amsa-draft.mjs"
+  },
+  "203": {
+   "status": "shipped",
+   "at": "2026-10-23T12:28:40Z",
+   "title": "Cough History 2",
+   "station": "amsa-203",
+   "by": "publish-amsa-draft.mjs"
+  },
+  "204": {
+   "status": "failed",
+   "at": "2026-10-23T12:10:37Z",
+   "title": "Cough History 3",
+   "gates": [],
+   "blockers": [
+    "check (Interpretation section, after item 28) vs part2.ask[1] / part2.expect[1]: Part 2 question 2 asks for the most likely diagnosis AND differentials with justification, but no checklist item rewards differentials. Items 27–28 credit only the TB call. A candidate who weighs pneumonia, lung cancer, PE and melioidosis well earns nothing for it, and one who gives no differentials loses nothing. The task is not marked.",
+    "guide (paragraphs 1 and 2) vs check item 32 (crit): The rules for crediting critical item 32 contradict each other. Paragraph 1 credits it if the candidate offers a mask OR moves her to a separate room at any point, including Part 1. Paragraph 2 requires a mask AND a separate room in Part 2. The item text also requires P2/N95 respirators for staff, which a candidate masking her in Part 1 would rarely say. Examiners will mark a critical item inconsistently."
+   ]
   },
   "212": {
    "status": "shipped",
