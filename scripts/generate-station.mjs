@@ -6,11 +6,14 @@
      node scripts/generate-station.mjs --revise ai-1337df24        an existing station through the same examiner and gates
    options: --acute (default: a clinic station) · --specialty "A, B" · --type "History, Management" · --notes "…"
             --request <id> (the case request it answers: the station carries the id, so the requester sees it is ready;
-            scripts/requests.mjs passes it) · --no-imaging · --dry-run (print, write nothing)
+            scripts/requests.mjs passes it) · --rounds <n> (examiner passes, at least 2; the import runs 4)
+            --no-imaging · --dry-run (print, write nothing)
 
-   Needs Claude credentials (ANTHROPIC_API_KEY or `ant auth login`; `npm install` once for the SDK). Imaging also needs
-   network access to commons.wikimedia.org, upload.wikimedia.org and openi.nlm.nih.gov. A station that does not pass
-   is written to drafts/ with its problems instead of the bank. */
+   Claude is reached as import-amsa.mjs reaches it: through lib/claude.mjs (the SDK; `npm install` once) when
+   ANTHROPIC_API_KEY is set, else through the Claude Code CLI on the signed-in subscription (lib/claude-cli.mjs). Imaging
+   needs the API for its pixel check and network access to commons.wikimedia.org, upload.wikimedia.org and
+   openi.nlm.nih.gov; on the CLI the requests stay on the station for `node scripts/fetch-imaging.mjs <id>` later. A
+   station that does not pass is written to drafts/ with its problems instead of the bank. */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -24,7 +27,7 @@ const argv = process.argv.slice(2);
 const opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
 const flag = k => argv.includes(k);
 const list = v => (v ? v.split(',').map(s => s.trim()).filter(Boolean) : []);
-const VALUED = ['--specialty', '--type', '--notes', '--revise', '--request'];
+const VALUED = ['--specialty', '--type', '--notes', '--revise', '--request', '--rounds'];
 const topic = argv.filter((a, i) => !a.startsWith('--') && !VALUED.includes(argv[i - 1])).join(' ').trim();
 if (opt('--request') != null && !/^r[a-z0-9]{6,24}$/.test(opt('--request'))) { console.error(`--request: "${opt('--request')}" is not a request id`); process.exit(2); }
 if (!topic && !opt('--revise')) { console.error('usage: node scripts/generate-station.mjs "<topic>" [--acute] [--specialty "…"] [--type "…"] [--notes "…"] [--no-imaging] [--dry-run]\n       node scripts/generate-station.mjs --revise <station id>'); process.exit(2); }
@@ -33,16 +36,20 @@ const dir = path.join(PUB, 'osce');
 const bank = fs.readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
 const log = m => console.log(m);
 const now = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+const API = !!process.env.ANTHROPIC_API_KEY;
+const ask = API ? claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
+const rounds = Math.max(2, Number(opt('--rounds')) || 2);
+log(`Claude via ${API ? 'the API' : 'the Claude Code CLI (subscription)'} · ${rounds} examiner rounds`);
 
 let res, original = null;
 if (opt('--revise')) {
   original = bank.find(s => s.id === opt('--revise'));
   if (!original) { console.error(`no station ${opt('--revise')}`); process.exit(2); }
   log(`revising ${original.id} · ${original.title}`);
-  res = await reviseStation(original, { bank, ask: claudeJson, log });
+  res = await reviseStation(original, { bank, ask, log });
 } else {
   log(`writing · ${topic}`);
-  res = await writeStation(topic, { acute: flag('--acute'), specialty: list(opt('--specialty')), types: list(opt('--type')), notes: opt('--notes') }, { bank, ask: claudeJson, now, log });
+  res = await writeStation(topic, { acute: flag('--acute'), specialty: list(opt('--specialty')), types: list(opt('--type')), notes: opt('--notes'), rounds }, { bank, ask, now, log });
 }
 
 if (!res.ok) {
@@ -77,7 +84,8 @@ exam.stations = Object.fromEntries(Object.entries({ ...exam.stations, [st.id]: u
 fs.writeFileSync(examFile, `${JSON.stringify(exam, null, 1)}\n`);
 log(`\nwritten · osce/${st.id}.json · ${st.title}`);
 
-if (!flag('--no-imaging') && (st.imaging || []).length) {
+if (!API && (st.imaging || []).length) log(`imaging · ${st.imaging.length} request${st.imaging.length === 1 ? '' : 's'} kept: the image check needs the API, so run node scripts/fetch-imaging.mjs ${st.id} with ANTHROPIC_API_KEY set`);
+else if (!flag('--no-imaging') && (st.imaging || []).length) {
   log(`imaging · ${st.imaging.length} request${st.imaging.length === 1 ? '' : 's'}`);
   const { station, report } = await resolveStation(st, { pub: PUB, log });
   fs.writeFileSync(file, `${JSON.stringify(station, null, 1)}\n`);

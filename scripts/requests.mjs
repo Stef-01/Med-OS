@@ -7,11 +7,14 @@
                                                         request file or a progress file; no file: paste, then Ctrl-D)
      node scripts/requests.mjs show <id>                one request, the brief it becomes and the command that makes it
      node scripts/requests.mjs accept <id> ["note"]     Being written: the student sees it, with your note
-     node scripts/requests.mjs make <id> [--no-imaging] [--dry-run]
-                                                        generate-station.mjs on the request's brief (written, gated,
-                                                        examined, revised, given exam findings and real images); on
+     node scripts/requests.mjs make <id> [--rounds 4] [--no-imaging] [--dry-run]
+                                                        generate-station.mjs on the request's brief, the import's way
+                                                        (Claude through the API or the Claude Code CLI, 4 examiner rounds
+                                                        by default, exam findings, images when the API is there); on
                                                         success the station carries the request's id and the request is
                                                         Ready. Then npm test, commit and push as for any station.
+     node scripts/requests.mjs make --all               every open request in turn, oldest first; one that fails stays
+                                                        Being written and the rest go on
      node scripts/requests.mjs decline <id> "reason"    Not made, with the reason
 
    An id can be cut to any unique start ("r1k3"). The queue is the shared record (when OSCE_SUPABASE_URL and
@@ -29,7 +32,9 @@ import { projectFrom, remoteRequests, putRemote, inboxRequests, putInbox, mergeQ
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public');
 const INBOX = process.env.OSCE_REQUESTS_DIR || path.join(ROOT, 'requests');
 const project = projectFrom(process.env, fs.existsSync(path.join(PUB, 'config.js')) ? fs.readFileSync(path.join(PUB, 'config.js'), 'utf8') : '');
-const argv = process.argv.slice(2), flags = argv.filter(a => a.startsWith('--')), [cmd = 'list', ...args] = argv.filter(a => !a.startsWith('--'));
+const argv = process.argv.slice(2), VALUED = ['--rounds'], flags = argv.filter(a => a.startsWith('--'));
+const [cmd = 'list', ...args] = argv.filter((a, i) => !a.startsWith('--') && !VALUED.includes(argv[i - 1]));
+const opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
 const fail = m => { console.error(m); process.exit(2); };
 
 const bankRows = () => { try { return JSON.parse(fs.readFileSync(path.join(PUB, 'osce', 'index.json'), 'utf8')).stations || []; } catch { return []; } };
@@ -81,16 +86,24 @@ if (cmd === 'list') {
   await write(item, answer(item.req, { status: cmd === 'accept' ? 'accepted' : 'declined', ...(note ? { reply: note } : {}) }));   /* a note only when you write one: the status says the rest */
   console.log(`${item.req.id} · ${cmd === 'accept' ? 'Being written' : 'Not made'}${note ? ` · "${note}"` : ''}`);
 } else if (cmd === 'make') {
-  const item = await find(args[0]), r = item.req, dry = flags.includes('--dry-run');
-  const done = statusOf(r);
-  if (done.status === 'made' && done.station) fail(`${r.id} is already made: ${done.station}`);
-  if (!dry) await write(item, answer(r, { status: 'accepted' }));
-  console.log(`making ${r.id} · ${r.topic}\n`);
-  const run = spawnSync(process.execPath, [path.join(ROOT, 'scripts', 'generate-station.mjs'), ...requestArgs(r), ...flags.filter(f => f === '--no-imaging' || f === '--dry-run')], { stdio: 'inherit' });
-  if (run.status !== 0) { console.log(`\n${r.id} stays Being written: fix the draft and run make again, or decline it with a reason`); process.exit(run.status || 1); }
-  if (dry) process.exit(0);
-  const dir = path.join(PUB, 'osce'), made = fs.readdirSync(dir).filter(f => f.startsWith('ai-')).map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))).find(s => s.request?.id === r.id);
-  if (!made) fail(`the generator finished but no station carries ${r.id}`);
-  await write(item, answer(r, { status: 'made', station: made.id, reply: `Ready: ${made.title}` }));
-  console.log(`\n${r.id} · Ready · ${made.id} · ${made.title}\nnext: npm test, then commit and push; the student sees it once the site updates`);
+  const dry = flags.includes('--dry-run'), rounds = opt('--rounds') || '4';
+  const list = flags.includes('--all') && !args[0] ? (await queue()).filter(x => ['new', 'accepted'].includes(statusOf(x.req).status)).reverse() : [await find(args[0])];
+  if (!list.length) { console.log('no open requests'); process.exit(0); }
+  const made = [], failed = [];
+  for (const item of list) {
+    const r = item.req, done = statusOf(r);
+    if (done.status === 'made' && done.station) { console.log(`${r.id} is already made: ${done.station}`); continue; }
+    if (!dry) await write(item, answer(r, { status: 'accepted' }));
+    console.log(`\nmaking ${r.id} · ${r.topic}\n`);
+    const run = spawnSync(process.execPath, [path.join(ROOT, 'scripts', 'generate-station.mjs'), ...requestArgs(r), '--rounds', rounds, ...flags.filter(f => f === '--no-imaging' || f === '--dry-run')], { stdio: 'inherit' });
+    if (run.status !== 0) { console.log(`\n${r.id} stays Being written: fix the draft and run make again, or decline it with a reason`); failed.push(r.id); continue; }
+    if (dry) continue;
+    const dir = path.join(PUB, 'osce'), st = fs.readdirSync(dir).filter(f => f.startsWith('ai-')).map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))).find(s => s.request?.id === r.id);
+    if (!st) { console.log(`the generator finished but no station carries ${r.id}`); failed.push(r.id); continue; }
+    await write(item, answer(r, { status: 'made', station: st.id, reply: `Ready: ${st.title}` }));
+    console.log(`\n${r.id} · Ready · ${st.id} · ${st.title}`);
+    made.push(st.id);
+  }
+  if (made.length) console.log(`\n${made.length} made (${made.join(', ')}). next: npm test, then commit and push; students see them once the site updates`);
+  if (failed.length) { console.log(`${failed.length} not made: ${failed.join(', ')}`); process.exit(1); }
 } else fail(`unknown command ${cmd}: list, add, show, accept, make, decline`);

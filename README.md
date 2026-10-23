@@ -66,10 +66,11 @@ node scripts/requests.mjs add [file]               # a request copied or shared 
 node scripts/requests.mjs show r1k3                # the request, the brief it becomes, the generate command
 node scripts/requests.mjs accept r1k3 "This week"  # Being written, with your note
 node scripts/requests.mjs make r1k3                # the pipeline below on the request's brief; on success, Ready
+node scripts/requests.mjs make --all               # every open request in turn, oldest first
 node scripts/requests.mjs decline r1k3 "Already in the bank as acute coronary syndrome"
 ```
 
-`make` runs `generate-station.mjs` with the topic, `--acute` for an acute setting, the specialty and focus, and notes that carry the patient, the Part 2 results asked for and the student's own words; the station carries the request's id (`request: { id, at }`). Then `npm test`, commit and push as for any station. Through the shared record the student sees each step; from the inbox they see Ready once the station is published, because the bank's index carries the id.
+`make` runs `generate-station.mjs` with the topic, `--acute` for an acute setting, the specialty and focus, and notes that carry the patient, the Part 2 results asked for and the student's own words; the station carries the request's id (`request: { id, at }`). It runs the way the AMSA import does: Claude through the API when `ANTHROPIC_API_KEY` is set, else through the Claude Code CLI on your subscription; 4 examiner rounds (`--rounds` to change); images found when the API is there, else left on the station for `node scripts/fetch-imaging.mjs <id>`. Then `npm test`, commit and push as for any station. Through the shared record the student sees each step; from the inbox they see Ready once the station is published, because the bank's index carries the id.
 
 Each station goes through:
 
