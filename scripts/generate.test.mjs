@@ -12,6 +12,7 @@ const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'publi
 const bank = fs.readdirSync(path.join(PUB, 'osce')).filter(f => f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(PUB, 'osce', f), 'utf8')));
 
 /* a well-formed acute paediatric station in the 5 / 10 / 5 format, as the model would return it */
+const ROW = { rr: null, spo2: null, o2: null, dev: null, sbp: null, dbp: null, hr: null, rhythm: null, temp: null, avpu: null, pain: null, distress: null, crt: null, bgl: null, lactate: null, concern: null, init: '', note: '' };
 const leaf = (id, x, crit = false) => ({ id, t: 'checkbox', x, crit, d: '', kids: [] });
 const H = (id, x) => ({ id, t: 'heading', x, crit: false, d: '', kids: [] });
 const DRAFT = {
@@ -21,7 +22,13 @@ const DRAFT = {
   stem: '<p>You are the junior doctor in a paediatric ED. Mia, 4, is wheezy and her father is with her.</p>',
   tasks: ['<p>Take a focused history from her father and examine Mia (10 minutes).</p>', '<p>The examiner will give you her observations. Interpret them, then outline your management approach and safety netting (5 minutes).</p>'],
   patient: `<p>${'Mia has been wheezy since last night after a cold. '.repeat(40)}</p>`,
-  part2: { lead: 'Here are her observations on arrival and after treatment.', handover: [{ label: 'Observations', result: '<p>RR 40, HR 150, SpO2 93% on room air</p>' }, { label: 'After 3 doses of salbutamol', result: '<p>RR 30, SpO2 96%</p>' }],
+  demo: { age: 4, unit: 'years', sex: 'F', weight: 16, setting: 'ed', pregnant: false, postpartum: false },
+  part2: { lead: 'Here are her observations on arrival and after treatment, and her blood gas.', handover: [
+    { label: 'Observations', kind: 'obs', result: '<p>On room air throughout.</p>', model: '<p>On arrival RR 44 and HR 146 (blue zone) and SpO2 93% (yellow zone): a clinical review; better after salbutamol.</p>',
+      obs: { rows: [{ ...ROW, t: '10:05', rr: 44, spo2: 93, dev: 'RA', hr: 146, temp: 37.6, avpu: 'A', distress: 'mild', crt: 2, init: 'KL' },
+        { ...ROW, t: '10:50', rr: 32, spo2: 96, dev: 'RA', hr: 138, temp: 37.4, avpu: 'A', distress: 'mild', crt: 2, init: 'KL', note: '3 doses of salbutamol given' }] } },
+    { label: 'Venous gas', kind: 'gas', result: '<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>pH</td><td>7.38</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>38 mmHg</td><td>38 to 50</td></tr></table>',
+      model: '<p>No respiratory acidosis: a normal pCO2 in a child breathing fast is reassuring now, but a rising pCO2 would be a late sign of tiring.</p>', obs: { rows: [] } }],
     ask: ['How severe is her asthma?', 'What is your management?', 'What would you tell her father before she goes home?'] },
   check: [H(1, 'Professionalism'), leaf(2, 'Introduces self'), leaf(3, 'Plain language'),
     H(4, 'History'), ...Array.from({ length: 5 }, (_, i) => leaf(5 + i, `History item ${i + 1}`)), leaf(50, 'Asks about triggers'), leaf(51, 'Asks about previous admissions and ICU'), leaf(52, 'Asks about preventer use and technique'), leaf(53, 'Asks about smoke exposure at home'),
@@ -29,7 +36,7 @@ const DRAFT = {
     H(15, 'Interpretation'), leaf(16, 'Classifies moderate asthma', true), leaf(17, 'Recognises the response to treatment'),
     H(18, 'Management'),
     { id: 19, t: 'checkbox', x: 'Gives salbutamol by spacer:', crit: true, d: '', kids: [{ id: 1, x: '6 puffs (age under 6)', crit: false, d: '' }, { id: 2, x: 'Reassesses at 20 minutes', crit: false, d: '' }] },
-    ...Array.from({ length: 3 }, (_, i) => leaf(20 + i, `Management item ${i + 1}`, i === 0)),
+    leaf(20, 'Management item 1', true), leaf(21, 'Asks for a senior clinical review'), leaf(22, 'Management item 3'),
     H(23, 'Safety netting'), leaf(24, 'Red flags: hard breathing, can\'t talk, blue lips: call 000', true), leaf(25, 'GP review in 1 to 2 days with a written asthma action plan')],
   guide: '', explain: '<p>Asthma severity guides treatment.</p>', points: ['<p>One</p>', '<p>Two</p>', '<p>Three</p>', '<p>Four</p>'],
   refs: ['RCH Clinical Practice Guideline: Asthma acute', 'National Asthma Council Australia: Australian Asthma Handbook'],
@@ -63,6 +70,31 @@ test('the quality gates pass a sound draft and name each thing wrong with a brok
   assert.match(qualityProblems({ id: 'ai-test', ...oneSafety }, stats).join(), /1 safety-netting item/);
   const lastNotPart2 = normalize({ ...DRAFT, tasks: ['<p>Part 2 first (5 minutes)</p>', '<p>Then history (10 minutes)</p>'] });
   assert.match(qualityProblems({ id: 'ai-test', ...lastNotPart2 }, stats).join(), /the last task is Part 2/);
+});
+
+test('Part 2 results: the patient picks the chart, every result names its kind and carries a model interpretation, observations are rows', () => {
+  const ok = { id: 'ai-test', ...normalize(DRAFT) };
+  assert.deepEqual(ok.part2.handover[0].obs.rows[0], { t: '10:05', rr: 44, spo2: 93, dev: 'RA', hr: 146, temp: 37.6, avpu: 'A', distress: 'mild', crt: 2, init: 'KL' }, 'nulls and blanks dropped');
+  assert.equal(ok.part2.handover[1].obs, undefined, 'no rows on a non-observation result');
+  const bare = { ...ok, demo: undefined, part2: { ...ok.part2, handover: ok.part2.handover.map(({ kind, model, ...h }) => h) } };
+  const q = qualityProblems(bare, stats).join('\n');
+  assert.match(q, /demo: the patient/);
+  assert.match(q, /names its kind/);
+  assert.match(q, /model interpretation/);
+  const noRows = { ...ok, part2: { ...ok.part2, handover: [{ ...ok.part2.handover[0], obs: undefined }, ok.part2.handover[1]] } };
+  assert.match(qualityProblems(noRows, stats).join(), /give the observations as rows/);
+  assert.doesNotMatch(qualityProblems({ ...noRows, demo: { ...ok.demo, setting: 'gp' } }, stats).join(), /give the observations as rows/, 'a GP room has no chart');
+  assert.match(shapeProblems({ ...ok, part2: { ...ok.part2, handover: [{ ...ok.part2.handover[0], obs: { rows: [{ t: '9am', rr: 20 }] } }] } }).join(), /without a valid time/);
+  assert.match(shapeProblems({ ...ok, part2: { ...ok.part2, handover: [{ ...ok.part2.handover[0], obs: { rows: [{ t: '10:00', rr: 20, dev: 'TENT' }] } }] } }).join(), /"dev" "TENT" is not a value/);
+});
+
+test('observations on the chart: a value on a zone line and an unanswered red zone go to the examiner', () => {
+  const ok = { id: 'ai-test', ...normalize(DRAFT) };
+  const red = { ...ok, check: ok.check.filter(i => !/senior|escalat/i.test(i.x)), part2: { ...ok.part2, handover: [{ ...ok.part2.handover[0], obs: { rows: [{ t: '10:05', rr: 50, spo2: 88, hr: 152 }] } }] } };
+  const notes = reviewNotes(red).join('\n');
+  assert.match(notes, /rr 50 sits on the line/);
+  assert.match(notes, /red zone .* no checklist item asks the candidate to escalate/);
+  assert.doesNotMatch(reviewNotes(ok).join(), /sits on the line|escalate/);
 });
 
 test('a paediatric fixed dose with no per-kg dose beside it goes to the examiner, not the hard gate', () => {

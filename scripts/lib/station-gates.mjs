@@ -4,7 +4,8 @@
    -> [problems] (empty = passes). Tested in scripts/station-gates.test.js. */
 import { allowlistCheck } from '../../public/js/study-kit/safe.mjs';
 import { DISCIPLINES, specialtyEmoji } from '../../public/js/study-kit/vocab.mjs';
-import { osceLeaves, CX } from '../../public/js/osce/core.mjs';
+import { osceLeaves, CX, KINDS } from '../../public/js/osce/core.mjs';
+import { cleanDemo, cleanObs, chartFor, chartById, zoneOf, escalation } from '../../public/js/osce/obs.mjs';
 import { requestProblems } from '../imaging/rank.mjs';
 
 export const TYPES = ['History', 'Examination', 'Management', 'Counselling', 'Emergency', 'Ward Call', 'Interpretation', 'Prescribing', 'Procedure'];
@@ -65,6 +66,18 @@ export function shapeProblems(st) {
   for (const [k, list] of [['tasks', st.tasks], ['points', st.points], ['refs', st.refs]]) (list || []).forEach((h, n) => allowlistCheck(h, { attrs: false }).forEach(x => p.push(`${k}[${n}]: ${x}`)));
   ((st.part2 && st.part2.handover) || []).forEach((h, n) => allowlistCheck(h && h.result, { attrs: false }).forEach(x => p.push(`part2.handover[${n}]: ${x}`)));
   if (st.part2 != null && (typeof st.part2 !== 'object' || Array.isArray(st.part2))) p.push('part2 is not an object');
+  ((st.part2 && st.part2.handover) || []).forEach((h, n) => {
+    if (!h) return;
+    if (h.kind != null && !KINDS[h.kind]) p.push(`part2.handover[${n}]: kind "${h.kind}" is not one of ${Object.keys(KINDS).join(', ')}`);
+    allowlistCheck(h.model || '', { attrs: false }).forEach(x => p.push(`part2.handover[${n}].model: ${x}`));
+    if (h.obs != null && h.kind !== 'obs') p.push(`part2.handover[${n}]: observation rows on a result whose kind is not "obs"`);
+    if (h.kind === 'obs' && h.obs != null) {
+      const raw = Array.isArray(h.obs.rows) ? h.obs.rows : [], clean = cleanObs(h.obs)?.rows || [];
+      if (clean.length !== raw.length) p.push(`part2.handover[${n}].obs: ${raw.length - clean.length} row(s) without a valid time (HH:MM) or not an object`);
+      raw.forEach((r, i) => { const c = clean.find(x => x.t === r?.t); if (c) for (const k of Object.keys(r)) if (!(k in c)) p.push(`part2.handover[${n}].obs row ${r.t}: "${k}" ${JSON.stringify(r[k])} is not a value the chart takes`); });
+    }
+  });
+  if (st.demo != null && !cleanDemo(st.demo)) p.push('demo (the patient: age, unit, sex, setting) is malformed');
   for (const i of st.check || []) for (const h of [i.x, i.d, ...(i.kids || []).flatMap(k => [k.x, k.d])]) allowlistCheck(h || '', { attrs: false }).forEach(x => p.push(`check ${i.id}: ${x}`));
   return p;
 }
@@ -93,7 +106,14 @@ export function qualityProblems(st, stats) {
   }
   if (/\b\d+\s*min(ute)?s?\b/i.test(plain(st.stem))) p.push('leave times out of the stem: the tasks carry them and the page shows the format');
   const p2 = st.part2 || {};
-  if (!Array.isArray(p2.handover) || p2.handover.filter(h => h && plain(h.label) && plain(h.result)).length < 2) p.push('Part 2 hands over at least 2 results (observations, investigations or imaging reports), each with its numbers');
+  if (!cleanDemo(st.demo)) p.push('demo: the patient (age with its unit, sex, setting) so the station shows the right observation chart');
+  for (const [n, h] of (p2.handover || []).entries()) {
+    if (!h) continue;
+    if (!KINDS[h.kind]) p.push(`Part 2 result "${plain(h.label)}" names its kind (${Object.keys(KINDS).join(', ')})`);
+    if (h.kind !== 'obs' && !plain(h.model)) p.push(`Part 2 result "${plain(h.label)}" has the examiner's model interpretation (model): what a good candidate says about it, in order`);
+    if (h.kind === 'obs' && chartFor(st.demo).id && !(h.obs?.rows || []).length) p.push(`Part 2 result "${plain(h.label)}": this patient is charted on the ${chartFor(st.demo).why}; give the observations as rows (obs) so they are charted`);
+  }
+  if (!Array.isArray(p2.handover) || p2.handover.filter(h => h && plain(h.label) && (plain(h.result) || (h.obs?.rows || []).length)).length < 2) p.push('Part 2 hands over at least 2 results (observations, investigations or imaging reports), each with its numbers');
   if (!Array.isArray(p2.ask) || p2.ask.filter(q => plain(q)).length < 2) p.push('Part 2 has at least 2 examiner questions (interpretation, then management and safety netting)');
   if (!plain(p2.lead)) p.push('Part 2 needs the examiner\'s opening line (lead)');
   const pat = plain(st.patient).length;
@@ -123,6 +143,19 @@ export function reviewNotes(st) {
     const fixed = (st.check || []).flatMap(i => [i, ...(i.kids || [])]).map(i => plain(`${i.x} ${i.d || ''}`))
       .filter(t => !/\/\s*kg|per\s+kg/i.test(t)).flatMap(t => t.match(/\b\d+(?:\.\d+)?\s*(?:mg|mcg|microgram|g|mL|units?)\b/gi) || []);
     if (fixed.length) n.push(`paediatric checklist doses with no per-kg dose beside them (${[...new Set(fixed)].slice(0, 6).join(', ')}): each must be a fixed-dose drug in the cited guideline, else give it per kg`);
+  }
+  /* observations on the chart: a value exactly on a zone line reads two ways (pick one clearly inside a zone), and a red
+     or yellow zone the checklist never asks the candidate to act on */
+  const chart = chartById(chartFor(st.demo).id);
+  if (chart) {
+    const rows = (st.part2?.handover || []).filter(h => h?.kind === 'obs').flatMap(h => cleanObs(h.obs)?.rows || []);
+    for (const r of rows) for (const k of ['rr', 'spo2', 'sbp', 'hr', 'temp']) if (r[k] != null && zoneOf(chart, k, r[k])?.line) n.push(`obs ${r.t} ${k} ${r[k]} sits on the line between two zones on the ${chart.id} chart; move it clearly inside one`);
+    const worst = rows.map(r => escalation(chart, r)).reduce((w, e) => (e.zone === 'red' || (e.zone === 'yellow' && w !== 'red') ? e.zone : w), '');
+    let head = '';   /* only what the candidate is asked to do: items under Interpretation, Management, Safety netting */
+    const items = (st.check || []).filter(i => (i.t === 'heading' ? ((head = plain(i.x)), false) : /interpret|manage|safety|escalat/i.test(head)))
+      .flatMap(i => [i, ...(i.kids || [])]).map(i => plain(`${i.x} ${i.d || ''}`)).join(' ');
+    if (worst && !/rapid response|\bMET\b|medical emergency|escalat|clinical review|senior|registrar|consultant|\bICU\b|retrieval|call for help|team leader/i.test(items))
+      n.push(`the observations reach the ${worst} zone on the chart but no checklist item asks the candidate to escalate (${worst === 'red' ? 'rapid response' : 'clinical review'})`);
   }
   return n;
 }

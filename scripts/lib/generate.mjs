@@ -11,15 +11,23 @@
 import crypto from 'node:crypto';
 import { shapeProblems, qualityProblems, reviewNotes, bankStats, isAcute, TYPES, READING_MIN, PART1_MIN, PART2_MIN, LEAVES } from './station-gates.mjs';
 import { REQUEST_SCHEMA } from '../imaging/resolve.mjs';
-import { CX } from '../../public/js/osce/core.mjs';
+import { CX, KINDS } from '../../public/js/osce/core.mjs';
+import { SETTINGS, AGE_UNITS, DEVICES, AVPU, DISTRESS } from '../../public/js/osce/obs.mjs';
 
 const str = { type: 'string' }, strs = { type: 'array', items: str }, obj = (props, req = Object.keys(props)) => ({ type: 'object', additionalProperties: false, required: req, properties: props });
 const KID = obj({ id: { type: 'integer' }, x: str, crit: { type: 'boolean' }, d: str });
+const num = { type: 'number' }, nnum = { anyOf: [num, { type: 'null' }] }, nstr = e => ({ anyOf: [{ type: 'string', enum: e }, { type: 'null' }] });
+/* one time point on the observation chart; null where it was not taken */
+const OBS_ROW = obj({ t: str, rr: nnum, spo2: nnum, o2: nnum, dev: nstr(Object.keys(DEVICES)), sbp: nnum, dbp: nnum, hr: nnum, rhythm: nstr(['Reg', 'Irreg']), temp: nnum,
+  avpu: nstr(Object.keys(AVPU)), pain: nnum, distress: nstr(DISTRESS), crt: nnum, bgl: nnum, lactate: nnum, concern: nstr(['yes', 'no', 'na']), init: str, note: str });
+const DEMO = obj({ age: num, unit: { type: 'string', enum: Object.keys(AGE_UNITS) }, sex: { type: 'string', enum: ['F', 'M', 'X'] }, weight: num,
+  setting: { type: 'string', enum: [...SETTINGS] }, pregnant: { type: 'boolean' }, postpartum: { type: 'boolean' } });
+const RESULT = obj({ label: str, kind: { type: 'string', enum: Object.keys(KINDS) }, result: str, model: str, obs: obj({ rows: { type: 'array', items: OBS_ROW } }) });
 const ITEM = obj({ id: { type: 'integer' }, t: { type: 'string', enum: ['heading', 'checkbox', 'info'] }, x: str, crit: { type: 'boolean' }, d: str, kids: { type: 'array', items: KID } });
 export const STATION_SCHEMA = obj({
   title: str, desc: str, focus: str, specialty: strs, type: { type: 'array', items: { type: 'string', enum: TYPES } }, complexity: { type: 'string', enum: CX },
   context: strs, presentation: strs, diagnosis: strs, stem: str, tasks: strs, patient: str, check: { type: 'array', items: ITEM },
-  part2: obj({ lead: str, handover: { type: 'array', items: obj({ label: str, result: str }) }, ask: strs }),
+  demo: DEMO, part2: obj({ lead: str, handover: { type: 'array', items: RESULT }, ask: strs }),
   guide: str, explain: str, points: strs, refs: strs, imaging: { type: 'array', items: REQUEST_SCHEMA },
 });
 export const REVIEW_SCHEMA = obj({ pass: { type: 'boolean' }, issues: { type: 'array', items: obj({ where: str, problem: str, fix: str, severity: { type: 'string', enum: ['blocker', 'minor'] } }) } });
@@ -34,7 +42,12 @@ Write one station on the topic you are given, at the depth, tone and checklist g
 - stem: Instructions to Candidate. Setting, the candidate's role, the patient (name, age) and why they are here. Never the diagnosis. No times (the page shows the format).
 - tasks: exactly 2. Task 1 is Part 1 and ends "(${PART1_MIN} minutes)": take a focused history from the patient and perform a focused examination, telling the examiner what you are examining. Task 2 is Part 2 and ends "(${PART2_MIN} minutes)": the examiner will give you the named results; interpret them, then outline your management approach and safety netting.
 - patient: the script for Part 1, for the person playing the patient and the examiner: opening line, the history by domain with the answers to give only when asked, feelings, ideas, concerns and expectations, questions to raise, and a note that examination findings are given from the Exam findings when the candidate says what they examine. For an acute station, what the nurse reports and how the patient changes with what the candidate does.
-- part2: lead is the examiner's opening line for Part 2 ("Here are her observations and blood results."). handover is 2 to 6 results, each {label, result}: observations, bedside tests, bloods (with units and reference ranges where they matter), an ECG, an imaging report in words. They fit the history and the examination exactly. ask is 3 to 5 examiner questions in order: what the results show, the most likely diagnosis and what else to consider, the management approach (immediate, definitive, disposition and who to involve), and how the candidate would safety-net and follow up.
+- demo: the patient: age as a number with its unit (days, weeks, months, years), sex, weight in kg (0 if it does not matter), the setting (${SETTINGS.join(', ')}), pregnant and postpartum. It picks the observation chart the station shows: the NSW adult chart from 16 years, the paediatric charts from 3 months, none in a clinic or GP room, in pregnancy or the postnatal period, or under 3 months (the observations are then written out).
+- part2: lead is the examiner's opening line for Part 2 ("Here are her observations and blood results."). handover is 2 to 6 results, each {label, kind, result, model, obs}. They fit the history and the examination exactly.
+  - kind: ${Object.entries(KINDS).map(([k, v]) => `${k} (${v})`).join(', ')}.
+  - result: what the candidate is handed, complete enough to interpret on its own. Bloods and gases as a table (Test | Result | Reference range, units, the abnormal ones flagged H or L, the baseline beside it where there is one). An ECG as a report: rate, rhythm, axis, PR, QRS, QTc, ST and T changes, and the comparison with any old ECG. An X-ray, CT or ultrasound as a formal report: the examination and view, the clinical details, the findings by structure, and a conclusion; a CT says whether contrast was given. Observations: a one-line note ("on 2 L/min nasal prongs since 14:10") with the numbers in obs.
+  - model: for the examiner only, never shown to the candidate: what a good candidate says about this result, in order (a systematic read, then what it means for this patient and what it changes). For observations, name the chart zone of each abnormal value and the response it calls for (clinical review, rapid response).
+  - obs: for kind obs, one row per time the observations were taken (2 to 6 rows, times as HH:MM, a realistic interval), the first matching the Part 1 vitals; the later rows show what happened (better after treatment, or worse). Each value sits clearly inside one zone of the patient's chart, never on a line between two. dev is the oxygen device (${Object.entries(DEVICES).map(([k, v]) => `${k} ${v}`).join(', ')}) and o2 its flow in L/min; init are the nurse's initials; note is an action taken at that time ("Rapid response called", "Salbutamol given"). null where not measured. For any other kind, rows is []. ask is 3 to 5 examiner questions in order: what the results show, the most likely diagnosis and what else to consider, the management approach (immediate, definitive, disposition and who to involve), and how the candidate would safety-net and follow up.
 - check: the marking checklist, under these headings in this order: Professionalism, History, Examination, Interpretation, Management, Safety netting (communication items sit under Professionalism or Management). Items are specific, observable and markable from what the candidate says or does ("States that PERC cannot be used because ..." not "Knows PERC"). Examination items match the examination this case needs. Interpretation has an item for each result that matters. Safety netting has at least 2 items: the specific red flags in plain words, when and where to come back (000, ED, GP), and the follow-up arranged. Use kids for a multi-part item. Mark crit true on the items a safe junior doctor must not miss (usually a third to a half). Ids are integers in order; kid ids start at 1 within their item. crit false, d "" and kids [] where they do not apply.
 - guide: a short note for the examiner on running and marking the station ("" if not needed).
 - explain: the teaching after the station: the diagnosis and the reasoning, the differentials that matter, the interpretation of the results, management and safety netting as the cited guideline sets them out.
@@ -51,6 +64,7 @@ Check, item by item:
 2. Consistency: the stem, the tasks, the patient script, the Part 2 results, the checklist, the explanation and the imaging requests describe the same patient and the same findings (same side, same numbers, same age). The Part 2 results follow from the history and examination.
 3. Fairness: Part 1 items can be earned in ${PART1_MIN} minutes and Part 2 items in ${PART2_MIN}, from what the candidate says or does; the script and the Part 2 results give the candidate what the checklist expects them to find. Safety-netting items name specific red flags. Critical items are the safety-critical ones.
 4. Imaging requests show a finding that the case really has and that is visible on that kind of image.
+5. Each Part 2 result is complete enough to interpret (bloods with units and reference ranges, an ECG with its measurements, an imaging report with findings and a conclusion), its model interpretation is right and complete, and the observation rows sit in the zones the model interpretation and the checklist say they do.
 Report each problem with where it is, what is wrong and the exact fix. severity is blocker for anything clinically wrong, inconsistent, unfair or unsafe, minor for wording and polish. pass is true only if there is no blocker.`;
 
 export const EXAM_SYSTEM = `You write the examination findings for Part 1 of an OSCE station, used in an "Exam mode" where the candidate says what they would examine and then sees what they find. The findings must fit the station exactly (the same patient, observations, side and severity as the patient script). vitals is one line of observations with units. general is the general inspection. steps are 6 to 10 examination areas in a sensible order, each with what the candidate does and what they find (normal findings stated as normal). bedside are the bedside tests with results (urinalysis, BGL, ECG, bladder scan, ...). key is two or three sentences on the findings that matter and why. Australian spelling. Plain text, no HTML.`;
@@ -86,6 +100,12 @@ export function normalize(draft) {
     return { id: i.id, t: 'checkbox', x: i.x, ...(i.crit ? { crit: true } : {}), ...(i.d ? { d: i.d } : {}), ...(kids.length ? { kids } : {}) };
   };
   const out = { ...draft, check: (draft.check || []).map(item) };
+  if (draft.demo) { const d = { ...draft.demo }; if (!(d.weight > 0)) delete d.weight; if (!d.pregnant) delete d.pregnant; if (!d.postpartum) delete d.postpartum; out.demo = d; }
+  if (draft.part2) out.part2 = { ...draft.part2, handover: (draft.part2.handover || []).map(h => {
+    const x = { label: h.label, kind: h.kind, result: h.result || '' }; if (h.model) x.model = h.model;
+    if (h.kind === 'obs' && h.obs?.rows?.length) x.obs = { rows: h.obs.rows.map(r => Object.fromEntries(Object.entries(r).filter(([, v]) => v != null && v !== ''))) };
+    return x;
+  }) };
   if (!out.guide) out.guide = '';
   return out;
 }

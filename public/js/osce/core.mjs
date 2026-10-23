@@ -2,8 +2,9 @@
    score, the reading/station clock, the save migration, Add Random, the Fast Run rotations and pool, the station gate
    and the split bank's index rows and bodies. No DOM, no storage, no clock of its own (every law that needs the time
    takes `now`): scripts/osce-core.test.js imports this file alone; osce.mjs re-exports every name for learn.mjs and the
-   older tests. The only import is the kit's vocabulary (SOURCES: em | ai). */
+   older tests. The imports are the kit's vocabulary (SOURCES: em | ai) and the observation-chart laws (obs.mjs, pure). */
 import { SOURCES, DISCIPLINES, disciplineOf } from '../study-kit/vocab.mjs';
+import { cleanDemo, cleanObs } from './obs.mjs';
 
 export const CX = ['Low', 'Moderate', 'High'];
 
@@ -265,14 +266,27 @@ export function osceCleanStation(s) {
   return { ...s, id: String(s.id), title: String(s.title), desc: str(s.desc), specialty: arr(s.specialty), type: arr(s.type),
     complexity: CX.includes(s.complexity) ? s.complexity : '', context: arr(s.context), presentation: arr(s.presentation), diagnosis: arr(s.diagnosis),
     stem: str(s.stem), tasks: arr(s.tasks), patient: str(s.patient), check: arr(s.check), guide: str(s.guide), explain: str(s.explain),
-    points: arr(s.points), refs: arr(s.refs), media: s.media && typeof s.media === 'object' && !Array.isArray(s.media) ? s.media : {}, part2: oscePart2(s.part2) };
+    points: arr(s.points), refs: arr(s.refs), media: s.media && typeof s.media === 'object' && !Array.isArray(s.media) ? s.media : {}, part2: oscePart2(s.part2), demo: cleanDemo(s.demo) };
 }
 /* Part 2: what the examiner says to open it, what they hand over (observations, investigations, scans: label + result,
-   HTML allowlist), and the questions they ask in order. Anything malformed is dropped; no Part 2 is an empty one. */
+   HTML allowlist), and the questions they ask in order. Each result may say what kind it is (KINDS), carry the examiner's
+   model interpretation (`model`, HTML, never shown to the candidate) and, for observations, the rows to chart (`obs`,
+   obs.mjs cleanObs). An observations result may have no text when its rows say it all. Anything malformed is dropped. */
+export const KINDS = Object.freeze({ obs: 'Observations', bloods: 'Bloods', gas: 'Blood gas', ecg: 'ECG', xray: 'X-ray', ct: 'CT', us: 'Ultrasound', mri: 'MRI',
+  ctg: 'CTG', micro: 'Microbiology', urine: 'Urine', report: 'Report', other: 'Result' });
 export function oscePart2(p) {
   const o = p && typeof p === 'object' && !Array.isArray(p) ? p : {}, str = v => (typeof v === 'string' ? v.trim() : '');
   return { lead: str(o.lead),
-    handover: (Array.isArray(o.handover) ? o.handover : []).filter(h => h && str(h.label) && str(h.result)).map(h => ({ label: str(h.label), result: str(h.result) })),
+    handover: (Array.isArray(o.handover) ? o.handover : []).map(h => {
+      if (!h || !str(h.label)) return null;
+      const obs = h.kind === 'obs' ? cleanObs(h.obs) : null;
+      if (!str(h.result) && !obs) return null;
+      const x = { label: str(h.label), result: str(h.result) };
+      if (KINDS[h.kind]) x.kind = h.kind;
+      if (str(h.model)) x.model = str(h.model);
+      if (obs) x.obs = obs;
+      return x;
+    }).filter(Boolean),
     ask: (Array.isArray(o.ask) ? o.ask : []).map(str).filter(Boolean) };
 }
 export const hasPart2 = st => !!st && ((st.part2?.handover || []).length > 0 || (st.media?.part2 || []).length > 0);

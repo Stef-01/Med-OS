@@ -7,6 +7,12 @@
    The pure parts (leaves, prompt, schema, reply parsing) have no DOM and are tested in scripts/marker.test.js. */
 import { plain } from '../study-kit/safe.mjs';
 import { HANDOVER, osceAiResult } from './core.mjs';
+import { obsText } from './obs.mjs';
+
+/* one Part 2 result for the marker: what the candidate was handed (observation rows in words), then the examiner's model
+   interpretation, so the marker can hold the candidate's reading against it */
+const resultLines = h => [`${h.label}: ${[plain(h.result), ...(h.obs?.rows || []).map(obsText)].filter(Boolean).join(' | ')}`,
+  h.model ? `  Model interpretation (examiner only): ${plain(h.model)}` : ''].filter(Boolean).join('\n');
 
 export const GI_SCALE = ['0 Below standard', '1 Borderline', '2 At standard', '3 Above standard'];
 const TX_MAX = 60000, SCRIPT_MAX = 8000;
@@ -72,7 +78,7 @@ ${plain(st.patient).slice(0, SCRIPT_MAX)}
 </examiner_and_patient_script>
 
 ${(st.part2?.handover || []).length ? `<part_2_results_handed_to_the_candidate>
-${st.part2.handover.map(h => `${h.label}: ${plain(h.result)}`).join('\n')}${st.part2.ask?.length ? `\nExaminer's questions: ${st.part2.ask.join(' | ')}` : ''}
+${st.part2.handover.map(resultLines).join('\n')}${st.part2.ask?.length ? `\nExaminer's questions: ${st.part2.ask.join(' | ')}` : ''}
 </part_2_results_handed_to_the_candidate>
 
 ` : ''}<checklist>
