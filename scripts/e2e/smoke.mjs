@@ -109,7 +109,7 @@ async function runIn(width, height, label) {
   ok(/10:00|9:5\d/.test(await pg.textContent('.os-tc.cur')), `${label}: Part 1 is 10 minutes`);
   await click('[data-os="skip"]');   /* Part 1 → Part 2 */
   await pg.waitForTimeout(300);
-  const qa = pg.locator('.os-qa').first();
+  const qa = pg.locator('.os-part2').first();
   ok(await qa.isVisible() && (width >= 900 || await pg.locator('[data-os="tab"][data-tab="Marking"][aria-selected="true"]').count() === 1), `${label}: Part 2 opens the marking sheet at its questions and results`);
   ok(await qa.locator('.os-qaask li').count() >= 2 && await qa.locator('.os-qacard').count() >= 2, `${label}: Part 2 lists the questions and the results`);
   await pg.waitForTimeout(900);   /* the smooth scroll settles */

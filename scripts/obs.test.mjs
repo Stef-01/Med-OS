@@ -94,3 +94,11 @@ test('observation rows: malformed values are dropped, the row reads in words', (
   assert.equal(obsText(o.rows[0]), '14:05: RR 32, SpO2 91% on 2 L/min nasal prongs, BP 98/60, HR 128, T 38.9 °C, Alert, pain 6/10');
   assert.equal(cleanObs({ rows: [] }), null);
 });
+
+import { parseVitals, vitalsMismatch } from '../public/js/osce/obs.mjs';
+test('Part 1 vitals read from the exam findings line, and set against the first charted row', () => {
+  assert.deepEqual(parseVitals('HR 128 bpm, BP 98/60 mmHg, RR 26/min, SpO2 91% on 2 L/min nasal prongs, temperature 38.9 °C'), { rr: 26, spo2: 91, hr: 128, sbp: 98, dbp: 60, temp: 38.9 });
+  assert.deepEqual(parseVitals('Heart rate 152, respiratory rate 46, sats 93% on air, T 37.9°C'), { rr: 46, spo2: 93, hr: 152, temp: 37.9 });
+  assert.deepEqual(vitalsMismatch('HR 128, RR 26, SpO2 91%', { t: '14:05', hr: 128, rr: 28, spo2: 91 }), ['rr 26 in Part 1, 28 on the chart at 14:05']);
+  assert.deepEqual(vitalsMismatch('', { t: '14:05', hr: 1 }), []);
+});

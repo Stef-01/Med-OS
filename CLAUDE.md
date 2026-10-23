@@ -24,4 +24,5 @@ npx serve public            # local dev
 4. **The HTML allowlist** (`public/js/study-kit/safe.mjs`) is the one sanitiser; station HTML has no attributes.
 5. **Pure laws are tested without a browser**: `osce/core.mjs`, `osce/marker.mjs`, `osce/candidate.mjs`, `scripts/lib/*`, `scripts/imaging/*`. A new rule is a pure function with a test before it has a button.
 6. **Claude calls** go through `scripts/lib/claude.mjs` (official SDK, streamed, JSON schema output, server-side fallbacks) in Node, and `osce/marker.mjs` (the vendored SDK bundle `public/js/vendor/anthropic-sdk.mjs`) in the browser. Default model `claude-opus-5-5`.
-7. **Phones first.** Every screen works at 320 px with no sideways scroll; the e2e checks it.
+7. **Observation charts are data.** The zones in `public/js/osce/obs-charts.mjs` are written by `scripts/charts/extract_zones.py` from the NSW chart PDFs and checked by `scripts/obs.test.mjs` against the thresholds printed on each chart; never edit them by hand. `obs.mjs` decides the chart and the zone, `obs-chart.mjs` draws it; the candidate never sees the zones or the model interpretation. `docs/obs-charts.md` explains why.
+8. **Phones first.** Every screen works at 320 px with no sideways scroll; the e2e checks it.

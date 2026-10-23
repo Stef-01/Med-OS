@@ -56,7 +56,7 @@ function doneHtml() {
       <span class="os-dtx"><strong>${whoBadge(a)}${esc(st.title)}</strong><span>${badge}<span class="os-dmeta">${esc(ago(a.fin))}${g}</span></span></span>
       <span class="os-chev">${I.chevR}</span></button></li>`;
   };
-  return `<details class="os-card os-done os-in" style="--d:3">
+  return `<details class="os-card os-donecard os-in" style="--d:3">
     <summary><span class="os-bigic">${I.check}</span><span class="os-bigtx"><strong>AI marking</strong>
       <span>${marked} marked${rows.length - marked ? ` · ${rows.length - marked} not marked` : ''}</span></span>
       ${I.chevD}</summary>

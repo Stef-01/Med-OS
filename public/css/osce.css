@@ -503,7 +503,6 @@ b.c-danger, b.c-warning, b.c-success, .os-rgi { color:var(--c); }
 .os-optsub { padding-left:30px; font-size:13.5px; }
 .os-optgrp + .os-optgrp { border-top:1px solid var(--stroke); }
 .os-pophint { margin:4px 10px 6px; color:var(--mute); font-size:12px; }
-.os-ai { color:var(--pend); font-weight:700; letter-spacing:.04em; }
 
 /* ---------- AI marking (2026-10-19): the transcript fold, the queued / declined / arrived states, "said: …" evidence ---------- */
 .os-aifold { border-radius:12px; background:var(--card2); border:1px solid var(--stroke); }
@@ -669,12 +668,12 @@ b.c-danger, b.c-warning, b.c-success, .os-rgi { color:var(--c); }
 
 /* ---------- Completed stations on the home (2026-10-20): a toggle at the bottom; rows are inset tiles on the card so
    the list reads as children of it; the AI score as plain n/N text per station ---------- */
-.os-done { display:block; padding:0; overflow:hidden; }
-.os-done > summary { display:flex; align-items:center; gap:18px; padding:20px 22px; cursor:pointer; list-style:none; }
-.os-done > summary::-webkit-details-marker { display:none; }
-.os-done > summary > svg { flex:none; width:18px; height:18px; color:var(--mute); transition:transform .2s var(--ease); }
-.os-done[open] > summary > svg { transform:rotate(180deg); }
-.os-done > summary .os-link { flex:none; }
+.os-donecard { display:block; padding:0; overflow:hidden; }
+.os-donecard > summary { display:flex; align-items:center; gap:18px; padding:20px 22px; cursor:pointer; list-style:none; }
+.os-donecard > summary::-webkit-details-marker { display:none; }
+.os-donecard > summary > svg { flex:none; width:18px; height:18px; color:var(--mute); transition:transform .2s var(--ease); }
+.os-donecard[open] > summary > svg { transform:rotate(180deg); }
+.os-donecard > summary .os-link { flex:none; }
 .os-dlist { list-style:none; margin:0; padding:4px 12px 14px; display:flex; flex-direction:column; gap:8px; background:var(--bg); border-top:1px solid var(--stroke); padding-top:12px; }
 .os-drow { width:100%; display:flex; align-items:center; gap:14px; padding:12px 14px; border-radius:14px; background:var(--card2); border:1px solid var(--stroke);
   text-align:left; transition:transform .15s var(--ease), border-color .2s; }
@@ -711,7 +710,7 @@ b.c-danger, .os-dmeta .c-danger, .os-aihtx .c-danger, .os-aibox--miss h5, .os-sb
 .os-aifull summary { min-height:44px; }
 .os-hmodel summary { display:flex; align-items:center; min-height:44px; padding:0; }
 .os-marked-top .os-link { min-height:44px; padding:0 8px; }
-.os-hbtn:focus-visible, .os-dall:focus-visible, .os-done > summary:focus-visible, .os-hand > summary:focus-visible, .os-aifull summary:focus-visible,
+.os-hbtn:focus-visible, .os-dall:focus-visible, .os-donecard > summary:focus-visible, .os-hand > summary:focus-visible, .os-aifull summary:focus-visible,
 .os-hmodel summary:focus-visible, .os-mcard summary:focus-visible { outline:2px solid var(--pri); outline-offset:2px; border-radius:12px; }
 
 /* ---------- Memory aids (2026-10-20): closed by default at the foot of the marking sheet; group folds, then one fold
@@ -752,8 +751,8 @@ b.c-danger, .os-dmeta .c-danger, .os-aihtx .c-danger, .os-aibox--miss h5, .os-sb
    folds give press feedback like the buttons around them; reduced-motion users get the instant version above */
 details.os-opening[open] > :not(summary) { animation:os-reveal .22s var(--ease) both; }   /* set on a user toggle only, so repaints never replay it */
 @keyframes os-reveal { from { opacity:0; transform:translateY(-4px); } }
-:is(.os-done, .os-mem, .os-hand, .os-mcard details) > summary { transition:transform .15s var(--ease), background-color .2s; }
-:is(.os-done, .os-mem, .os-hand, .os-mcard details) > summary:active { transform:scale(.99); }
+:is(.os-donecard, .os-mem, .os-hand, .os-mcard details) > summary { transition:transform .15s var(--ease), background-color .2s; }
+:is(.os-donecard, .os-mem, .os-hand, .os-mcard details) > summary:active { transform:scale(.99); }
 
 /* ---------- Exam mode (2026-10-22): AI-written findings in their own box, set apart from the eMedici sheet */
 .os-exam { display:flex; flex-direction:column; gap:14px; margin-top:4px; padding:18px; border-radius:16px; border:1.5px dashed var(--pri); background:var(--pri-soft); }
@@ -924,7 +923,7 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-tform > div { flex-basis:90px; }
 
 /* ---------- Part 2 at the bottom of the marking sheet: what to say, Show results, the questions, each result ---------- */
-.os-qa { margin-top:8px; padding:18px; border-radius:16px; background:var(--card2); border:1.5px solid var(--pri); display:flex; flex-direction:column; gap:14px; scroll-margin-top:12px; }
+.os-part2 { margin-top:8px; padding:18px; border-radius:16px; background:var(--card2); border:1.5px solid var(--pri); display:flex; flex-direction:column; gap:14px; scroll-margin-top:12px; }
 .os-qahead { display:flex; align-items:center; gap:12px; }
 .os-qahead .os-bigic svg { width:28px; height:28px; }
 .os-qahead strong { font-size:16px; font-weight:700; }

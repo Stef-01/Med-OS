@@ -9,6 +9,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { shapeProblems, qualityProblems, bankStats } from './lib/station-gates.mjs';
+import { cleanObs, vitalsMismatch } from '../public/js/osce/obs.mjs';
 import { buildIndex, readBodies } from './build-index.mjs';
 import { licenceOk } from './imaging/rank.mjs';
 import { isLocal } from '../public/js/study-kit/media.mjs';
@@ -44,6 +45,11 @@ export function validate(pub, { quality = false } = {}) {
       else for (const st of e.steps) if (!st.area || !st.find) errors.push(`exam.json: ${id} has a step without an area or a finding`);
     }
     for (const id of ids) if (!ex[id]) notes.push(`${id}: no exam findings (the Exam tab is hidden)`);
+    /* the vitals the examiner reads out in Part 1 head the chart in Part 2 */
+    for (const s of stations) for (const h of (s.part2?.handover || []).filter(h => h?.kind === 'obs')) {
+      const first = cleanObs(h.obs)?.rows?.[0];
+      if (first && ex[s.id]?.vitals) for (const m of vitalsMismatch(ex[s.id].vitals, first)) notes.push(`${s.id}: ${m}`);
+    }
   }
   for (const f of fs.existsSync(path.join(pub, 'media')) ? fs.readdirSync(path.join(pub, 'media')) : []) if (!ids.has(f)) errors.push(`media/${f} belongs to no station`);
   if (quality) { const stats = bankStats(stations); for (const s of stations) for (const p of qualityProblems(s, stats)) notes.push(`${s.id}: ${p}`); }

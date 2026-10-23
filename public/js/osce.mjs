@@ -222,7 +222,7 @@ async function onClick(e) {
       closeAllDialogs(ctx.ov);
       ctx.view = 'attempt'; ctx.tab = wide() ? 'Instructions' : 'Marking';
       render();
-      if (b.closest('.os-done')) ctx.ov.querySelector('.os-ai')?.scrollIntoView({ block: 'start' });   /* from the AI marking card: straight to the marks, not item 1 of 41 */
+      if (b.closest('.os-donecard')) ctx.ov.querySelector('.os-ai')?.scrollIntoView({ block: 'start' });   /* from the AI marking card: straight to the marks, not item 1 of 41 */
       return;
     }
   }

@@ -99,7 +99,7 @@ function onPhase(c) {
   const st = ctx.byId.get(sess().queue[sess().idx]);
   if (c !== 'mx' || !hasPart2(st)) return;
   if (ctx.tab !== 'Marking' && ctx.ov.querySelector('[data-os="tab"][data-tab="Marking"]')) switchTab('Marking');
-  requestAnimationFrame(() => ctx.ov.querySelector('.os-pl .os-qa, .os-pr .os-qa')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
+  requestAnimationFrame(() => ctx.ov.querySelector('.os-pl .os-part2, .os-pr .os-part2')?.scrollIntoView({ block: 'start', behavior: 'smooth' }));
 }
 function finishStation() {
   const a = curAttempt();
@@ -226,7 +226,7 @@ export function part2Html(st) {
 export function qaHtml(st) {
   if (!hasPart2(st)) return '';
   const p = st.part2, slides = qaSlides(st), m = ctx.mem?.timing?.mx, sid = esc(st.id);
-  return `<section class="os-qa" aria-labelledby="os-qa-h">
+  return `<section class="os-part2" aria-labelledby="os-qa-h">
     <header class="os-qahead"><span class="os-bigic">${I.max}</span><span class="os-handt"><strong id="os-qa-h">Part 2 · questions and results</strong>
       <small>Interpretation, management and safety netting${m ? ` · ${m} minutes` : ''}</small></span></header>
     ${p.lead ? `<div class="os-p2lead"><small>Say</small><p>“${esc(p.lead)}”</p></div>` : ''}

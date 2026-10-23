@@ -130,3 +130,17 @@ export function obsText(r) {
     r.bgl != null && `BGL ${fmt(r.bgl)}`, r.lactate != null && `lactate ${fmt(r.lactate)}`].filter(Boolean);
   return `${r.t}: ${parts.join(', ')}${r.note ? `. ${r.note}` : ''}`;
 }
+
+/* Part 1's vitals line (exam findings, free text) against the first charted row: the numbers the examiner reads out in
+   Part 1 are the numbers at the head of the chart in Part 2 */
+const VITAL_RE = { rr: /\b(?:RR|resp(?:iratory)?\s*rate)\D{0,12}?(\d+(?:\.\d+)?)/i, spo2: /\b(?:SpO2|SaO2|sats?|oxygen saturation)\D{0,12}?(\d+(?:\.\d+)?)\s*%/i,
+  hr: /\b(?:HR|heart rate|pulse)\D{0,12}?(\d+(?:\.\d+)?)/i, bp: /\b(?:BP|blood pressure)\D{0,12}?(\d+)\s*\/\s*(\d+)/i, temp: /\b(?:T|temp(?:erature)?)\b\D{0,12}?(\d{2}(?:\.\d)?)\s*(?:°|degrees|C\b)/i };
+export function parseVitals(s) {
+  const t = String(s || ''), out = {};
+  for (const [k, re] of Object.entries(VITAL_RE)) { const m = t.match(re); if (!m) continue; if (k === 'bp') { out.sbp = +m[1]; out.dbp = +m[2]; } else out[k] = +m[1]; }
+  return out;
+}
+export function vitalsMismatch(vitals, row) {
+  const v = parseVitals(vitals);
+  return Object.entries(v).filter(([k, x]) => row?.[k] != null && Math.abs(row[k] - x) > (k === 'temp' ? 0.05 : 0.5)).map(([k, x]) => `${k} ${x} in Part 1, ${row[k]} on the chart at ${row.t}`);
+}
