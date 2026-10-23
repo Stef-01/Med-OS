@@ -347,13 +347,11 @@
    "by": "publish-amsa-draft.mjs"
   },
   "475": {
-   "status": "failed",
-   "at": "2026-10-23T13:58:22Z",
+   "status": "shipped",
+   "at": "2026-10-23T14:34:07Z",
    "title": "Dyspnoea History 12",
-   "gates": [],
-   "blockers": [
-    "part2.expect[0] (ISBAR model answer), Assessment line, against checklist items 26–31: The handover is where the results get interpreted, but the model answer reads most results without interpreting them, so it would not earn several items scored from it. Item 28 (critical) needs bilateral effusions and no consolidation; the answer only says 'CXR cardiomegaly and oedema'. Item 30 (critical) needs the flat troponin called chronic myocardial injury rather than an acute MI; the answer only gives '24→25 flat'. Item 27 (critical) needs sinus tachycardia, which isn't named. Item 29 needs the NT-proBNP stated as strongly supporting HF; only the number is given. Item 31 needs 2 of 3 (low sodium, creatinine above baseline, normal Hb/TSH); only creatinine is given. Item 26 needs 'not shocked / perfused', which isn't said."
-   ]
+   "station": "amsa-475",
+   "by": "publish-amsa-draft.mjs"
   },
   "476": {
    "status": "shipped",
@@ -426,6 +424,27 @@
    "title": "Chest Pain History 10",
    "station": "amsa-626",
    "by": "publish-amsa-draft.mjs"
+  },
+  "630": {
+   "status": "shipped",
+   "at": "2026-10-23T14:19:37Z",
+   "title": "Dyspnoea History 14",
+   "station": "amsa-630",
+   "rounds": 3,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 1
+  },
+  "631": {
+   "status": "failed",
+   "at": "2026-10-23T14:21:48Z",
+   "title": "Dyspnoea History 15",
+   "gates": [
+    "check 31: a stray \"<\" in text"
+   ],
+   "blockers": []
   },
   "633": {
    "status": "shipped",
