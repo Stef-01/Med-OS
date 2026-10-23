@@ -15,6 +15,7 @@ import { markDirect, markPromptText, parseReply } from './marker.mjs';
 import { candidateLink } from './candidate.mjs';
 import { chartFor } from './obs.mjs';
 import { obsChartHtml, obsTableHtml, obsZonesHtml } from './obs-chart.mjs';
+import { labsHtml } from './labs.mjs';
 
 let tickT = 0, hlOn = false, hlT = 0, lastScroll = {};   /* StationTabs.vue: each tab keeps its scroll position */
 
@@ -204,7 +205,7 @@ export function flagHtml(html) {
 export function qaSlides(st) {
   const p = st.part2 || { handover: [] }, chart = chartFor(st.demo).id;
   const note = h => (h.result ? `<div class="os-html${h.obs ? ' os-obs-note' : ''}">${flagHtml(safeHtml(h.result))}</div>` : '');
-  return [...p.handover.map(h => ({ label: h.label, h, html: h.obs ? `${(chart && obsChartHtml(chart, h.obs, { label: h.label })) || obsTableHtml(h.obs)}${note(h)}` : note(h) })),
+  return [...p.handover.map(h => ({ label: h.label, h, html: h.obs ? `${(chart && obsChartHtml(chart, h.obs, { label: h.label })) || obsTableHtml(h.obs)}${note(h)}` : `${labsHtml(h.labs, { label: h.label })}${note(h)}` })),
     ...(st.media?.part2 || []).map(m => ({ label: m.alt || 'Image', html: figureHtml({ ...m, caption: '' }) }))];
 }
 /* the examiner's card for one result: observations compact (the table, then what the zones call for at each time), any

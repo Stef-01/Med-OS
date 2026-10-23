@@ -5,6 +5,7 @@
    older tests. The imports are the kit's vocabulary (SOURCES: em | ai) and the observation-chart laws (obs.mjs, pure). */
 import { SOURCES, DISCIPLINES, disciplineOf } from '../study-kit/vocab.mjs';
 import { cleanDemo, cleanObs } from './obs.mjs';
+import { cleanLabs } from './labs.mjs';
 
 export const CX = ['Low', 'Moderate', 'High'];
 
@@ -271,7 +272,8 @@ export function osceCleanStation(s) {
 /* Part 2: what the examiner says to open it, what they hand over (observations, investigations, scans: label + result,
    HTML allowlist), and the questions they ask in order. Each result may say what kind it is (KINDS), carry the examiner's
    model interpretation (`model`, HTML, never shown to the candidate) and, for observations, the rows to chart (`obs`,
-   obs.mjs cleanObs). An observations result may have no text when its rows say it all. Anything malformed is dropped. */
+   obs.mjs cleanObs), for lab results the panels to print (`labs`, labs.mjs cleanLabs). A result may have no text when its
+   rows or panels say it all. Anything malformed is dropped. */
 export const KINDS = Object.freeze({ obs: 'Observations', bloods: 'Bloods', gas: 'Blood gas', ecg: 'ECG', xray: 'X-ray', ct: 'CT', us: 'Ultrasound', mri: 'MRI',
   ctg: 'CTG', micro: 'Microbiology', urine: 'Urine', report: 'Report', other: 'Result' });
 export function oscePart2(p) {
@@ -279,12 +281,13 @@ export function oscePart2(p) {
   return { lead: str(o.lead),
     handover: (Array.isArray(o.handover) ? o.handover : []).map(h => {
       if (!h || !str(h.label)) return null;
-      const obs = h.kind === 'obs' ? cleanObs(h.obs) : null;
-      if (!str(h.result) && !obs) return null;
+      const obs = h.kind === 'obs' ? cleanObs(h.obs) : null, labs = cleanLabs(h.labs);
+      if (!str(h.result) && !obs && !labs) return null;
       const x = { label: str(h.label), result: str(h.result) };
       if (KINDS[h.kind]) x.kind = h.kind;
       if (str(h.model)) x.model = str(h.model);
       if (obs) x.obs = obs;
+      if (labs) x.labs = labs;
       return x;
     }).filter(Boolean),
     ask: (Array.isArray(o.ask) ? o.ask : []).map(str).filter(Boolean) };

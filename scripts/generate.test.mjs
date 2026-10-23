@@ -27,7 +27,7 @@ const DRAFT = {
     { label: 'Observations', kind: 'obs', result: '<p>On room air throughout.</p>', model: '<p>On arrival RR 44 and HR 146 (blue zone) and SpO2 93% (yellow zone): a clinical review; better after salbutamol.</p>',
       obs: { rows: [{ ...ROW, t: '10:05', rr: 44, spo2: 93, dev: 'RA', hr: 146, temp: 37.6, avpu: 'A', distress: 'mild', crt: 2, init: 'KL' },
         { ...ROW, t: '10:50', rr: 32, spo2: 96, dev: 'RA', hr: 138, temp: 37.4, avpu: 'A', distress: 'mild', crt: 2, init: 'KL', note: '3 doses of salbutamol given' }] } },
-    { label: 'Venous gas', kind: 'gas', result: '<table><tr><th>Test</th><th>Result</th><th>Reference</th></tr><tr><td>pH</td><td>7.38</td><td>7.32 to 7.42</td></tr><tr><td>pCO2</td><td>38 mmHg</td><td>38 to 50</td></tr></table>',
+    { label: 'Venous gas', kind: 'gas', result: '', labs: [{ title: '', cols: [], rows: [{ t: 'pH', v: ['7.38'], u: '', r: '7.32-7.42', f: [''], n: '' }, { t: 'pCO2', v: ['38'], u: 'mmHg', r: '38-50', f: [''], n: '' }] }],
       model: '<p>No respiratory acidosis: a normal pCO2 in a child breathing fast is reassuring now, but a rising pCO2 would be a late sign of tiring.</p>', obs: { rows: [] } }],
     ask: ['How severe is her asthma?', 'What is your management?', 'What would you tell her father before she goes home?'] },
   check: [H(1, 'Professionalism'), leaf(2, 'Introduces self'), leaf(3, 'Plain language'),

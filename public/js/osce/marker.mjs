@@ -8,10 +8,11 @@
 import { plain } from '../study-kit/safe.mjs';
 import { HANDOVER, osceAiResult } from './core.mjs';
 import { obsText } from './obs.mjs';
+import { labsText } from './labs.mjs';
 
 /* one Part 2 result for the marker: what the candidate was handed (observation rows in words), then the examiner's model
    interpretation, so the marker can hold the candidate's reading against it */
-const resultLines = h => [`${h.label}: ${[plain(h.result), ...(h.obs?.rows || []).map(obsText)].filter(Boolean).join(' | ')}`,
+const resultLines = h => [`${h.label}: ${[labsText(h.labs), plain(h.result), ...(h.obs?.rows || []).map(obsText)].filter(Boolean).join(' | ')}`,
   h.model ? `  Model interpretation (examiner only): ${plain(h.model)}` : ''].filter(Boolean).join('\n');
 
 export const GI_SCALE = ['0 Below standard', '1 Borderline', '2 At standard', '3 Above standard'];

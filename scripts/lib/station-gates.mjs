@@ -6,6 +6,7 @@ import { allowlistCheck } from '../../public/js/study-kit/safe.mjs';
 import { DISCIPLINES, specialtyEmoji } from '../../public/js/study-kit/vocab.mjs';
 import { osceLeaves, CX, KINDS } from '../../public/js/osce/core.mjs';
 import { cleanDemo, cleanObs, chartFor, chartById, zoneOf, escalation } from '../../public/js/osce/obs.mjs';
+import { cleanLabs, labFlagProblems, FLAGS } from '../../public/js/osce/labs.mjs';
 import { requestProblems } from '../imaging/rank.mjs';
 
 export const TYPES = ['History', 'Examination', 'Management', 'Counselling', 'Emergency', 'Ward Call', 'Interpretation', 'Prescribing', 'Procedure'];
@@ -77,6 +78,12 @@ export function shapeProblems(st) {
       raw.forEach((r, i) => { const c = clean.find(x => x.t === r?.t); if (c) for (const k of Object.keys(r)) if (!(k in c)) p.push(`part2.handover[${n}].obs row ${r.t}: "${k}" ${JSON.stringify(r[k])} is not a value the chart takes`); });
     }
   });
+  ((st.part2 && st.part2.handover) || []).forEach((h, n) => {
+    if (!h || h.labs == null) return;
+    const raw = (Array.isArray(h.labs) ? h.labs : []).flatMap(x => (Array.isArray(x?.rows) ? x.rows : [])), kept = (cleanLabs(h.labs) || []).flatMap(x => x.rows);
+    if (!Array.isArray(h.labs) || kept.length !== raw.length) p.push(`part2.handover[${n}].labs: ${raw.length - kept.length} row(s) without a value, or panels that are not {title, cols, rows}`);
+    raw.forEach(r => [].concat(r?.f ?? []).forEach(f => { if (!FLAGS.includes(f)) p.push(`part2.handover[${n}].labs: flag "${f}" on ${r.t || 'a row'} is not one of H, L, HH, LL, A`); }));
+  });
   if (st.demo != null && !cleanDemo(st.demo)) p.push('demo (the patient: age, unit, sex, setting) is malformed');
   for (const i of st.check || []) for (const h of [i.x, i.d, ...(i.kids || []).flatMap(k => [k.x, k.d])]) allowlistCheck(h || '', { attrs: false }).forEach(x => p.push(`check ${i.id}: ${x}`));
   return p;
@@ -110,10 +117,12 @@ export function qualityProblems(st, stats) {
   for (const [n, h] of (p2.handover || []).entries()) {
     if (!h) continue;
     if (!KINDS[h.kind]) p.push(`Part 2 result "${plain(h.label)}" names its kind (${Object.keys(KINDS).join(', ')})`);
+    if ((h.kind === 'bloods' || h.kind === 'gas') && !cleanLabs(h.labs)) p.push(`Part 2 result "${plain(h.label)}" gives its values as lab panels (labs: test, value, units, range, flag), printed the way a pathology system prints them`);
+    for (const x of labFlagProblems(h.labs)) p.push(`Part 2 result "${plain(h.label)}", lab flag: ${x}`);
     if (h.kind !== 'obs' && !plain(h.model)) p.push(`Part 2 result "${plain(h.label)}" has the examiner's model interpretation (model): what a good candidate says about it, in order`);
     if (h.kind === 'obs' && chartFor(st.demo).id && !(h.obs?.rows || []).length) p.push(`Part 2 result "${plain(h.label)}": this patient is charted on the ${chartFor(st.demo).why}; give the observations as rows (obs) so they are charted`);
   }
-  if (!Array.isArray(p2.handover) || p2.handover.filter(h => h && plain(h.label) && (plain(h.result) || (h.obs?.rows || []).length)).length < 2) p.push('Part 2 hands over at least 2 results (observations, investigations or imaging reports), each with its numbers');
+  if (!Array.isArray(p2.handover) || p2.handover.filter(h => h && plain(h.label) && (plain(h.result) || (h.obs?.rows || []).length || cleanLabs(h.labs))).length < 2) p.push('Part 2 hands over at least 2 results (observations, investigations or imaging reports), each with its numbers');
   if (!Array.isArray(p2.ask) || p2.ask.filter(q => plain(q)).length < 2) p.push('Part 2 has at least 2 examiner questions (interpretation, then management and safety netting)');
   if (!plain(p2.lead)) p.push('Part 2 needs the examiner\'s opening line (lead)');
   const pat = plain(st.patient).length;
@@ -184,6 +193,9 @@ export function gasIssues(html) {
   return out;
 }
 
+/* lab panels as a plain table for the gas check: a header row of the result columns, then test | value per column */
+const labsTable = labs => (cleanLabs(labs) || []).map(p => `<table><tr><th>Test</th>${(p.cols || ['Result']).map(c => `<th>${c}</th>`).join('')}</tr>${p.rows.map(r => `<tr><td>${r.t}${r.u ? ` (${r.u})` : ''}</td>${r.v.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}</table>`).join('');
+
 /* things the examiner pass must look at but that do not block on their own: a fixed amount in a paediatric checklist
    item with no per-kg dose beside it (right for a few fixed-dose drugs such as vitamin K, wrong for most) */
 export function reviewNotes(st) {
@@ -194,7 +206,7 @@ export function reviewNotes(st) {
     if (fixed.length) n.push(`paediatric checklist doses with no per-kg dose beside them (${[...new Set(fixed)].slice(0, 6).join(', ')}): each must be a fixed-dose drug in the cited guideline, else give it per kg`);
   }
   for (const h of st.part2?.handover || []) for (const i of flagIssues(h?.result || '')) n.push(`lab flag in "${plain(h.label)}": ${i}`);
-  for (const h of st.part2?.handover || []) for (const i of gasIssues(h?.result || '')) n.push(`blood gas in "${plain(h.label)}" does not add up: ${i}`);
+  for (const h of st.part2?.handover || []) for (const i of [...gasIssues(h?.result || ''), ...gasIssues(labsTable(h?.labs))]) n.push(`blood gas in "${plain(h.label)}" does not add up: ${i}`);
   /* observations on the chart: a value exactly on a zone line reads two ways (pick one clearly inside a zone), and a red
      or yellow zone the checklist never asks the candidate to act on */
   const chart = chartById(chartFor(st.demo).id);
