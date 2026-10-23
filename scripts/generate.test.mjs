@@ -29,7 +29,11 @@ const DRAFT = {
         { ...ROW, t: '10:50', rr: 32, spo2: 96, dev: 'RA', hr: 138, temp: 37.4, avpu: 'A', distress: 'mild', crt: 2, init: 'KL', note: '3 doses of salbutamol given' }] } },
     { label: 'Venous gas', kind: 'gas', result: '', labs: [{ title: '', cols: [], rows: [{ t: 'pH', v: ['7.38'], u: '', r: '7.32-7.42', f: [''], n: '' }, { t: 'pCO2', v: ['38'], u: 'mmHg', r: '38-50', f: [''], n: '' }] }],
       model: '<p>No respiratory acidosis: a normal pCO2 in a child breathing fast is reassuring now, but a rising pCO2 would be a late sign of tiring.</p>', obs: { rows: [] } }],
-    ask: ['How severe is her asthma?', 'What is your management?', 'What would you tell her father before she goes home?'], patient: '' },
+    ask: ['You are now calling the paediatric registrar. Please give an ISBAR handover of Mia, including your interpretation of these results.',
+      'What is your most likely diagnosis, and what else would you consider? Justify your answer.',
+      'Outline your management of Mia now, here in the emergency department.', 'Before Mia goes home, what would you tell her father and what follow-up would you arrange?'],
+    expect: ['<ul><li>Identify: me and Mia</li><li>Situation: moderate acute asthma</li><li>Background: known asthma</li><li>Assessment: obs and gas read</li><li>Recommendation: review</li></ul>',
+      '<p>Moderate acute asthma; consider pneumonia, foreign body</p>', '<p>Salbutamol, prednisolone 1 mg/kg</p>', '<p>Red flags and GP review in 2 days</p>'], patient: '' },
   check: [H(1, 'Professionalism'), leaf(2, 'Introduces self'), leaf(3, 'Plain language'),
     H(4, 'History'), ...Array.from({ length: 5 }, (_, i) => leaf(5 + i, `History item ${i + 1}`)), leaf(50, 'Asks about triggers'), leaf(51, 'Asks about previous admissions and ICU'), leaf(52, 'Asks about preventer use and technique'), leaf(53, 'Asks about smoke exposure at home'),
     H(10, 'Examination'), ...Array.from({ length: 4 }, (_, i) => leaf(11 + i, `Examines item ${i + 1}`, i === 0)),
@@ -194,4 +198,16 @@ test('a blood gas must add up: bicarbonate from pH and pCO2, each column of a pa
   assert.deepEqual(gasIssues(cord), []);
   assert.match(gasIssues(cord.replace('<td>20</td><td>20 to 26', '<td>26</td><td>20 to 26')).join(), /Vein: pH 7.25, pCO2 46 gives HCO3 19.\d, the table has 26/);
   assert.match(gasIssues('<table><tr><th>Test</th><th>Result</th></tr><tr><td>pH</td><td>7.30</td></tr><tr><td>pCO2</td><td>5.0 kPa</td></tr><tr><td>HCO3</td><td>30</td></tr></table>').join(), /gives HCO3 18\.2, the table has 30/);
+});
+
+test('Part 2 questions run the way an examiner asks them: ISBAR with the results, then differentials, then management, each with its answer', async () => {
+  const { askProblems } = await import('./lib/station-gates.mjs');
+  const good = { ask: ['Please give an ISBAR handover of Sam, including your interpretation of these results.', 'What is your most likely diagnosis, and what else would you consider?', 'Outline your management of Sam now.'],
+    expect: ['<ul><li>Situation: x</li><li>Background: x</li><li>Assessment: x</li><li>Recommendation: x</li></ul>', '<p>d</p>', '<p>m</p>'] };
+  assert.deepEqual(askProblems(good), []);
+  assert.match(askProblems({ ...good, ask: ['What do the results show?', ...good.ask.slice(1)] }).join(), /ISBAR/);
+  assert.match(askProblems({ ...good, ask: [good.ask[0], 'Outline your management.', 'And then?'] }).join(), /diagnosis and the differentials/);
+  assert.match(askProblems({ ...good, expect: good.expect.slice(0, 2) }).join(), /expected answer/);
+  assert.match(askProblems({ ...good, expect: ['<p>he is unwell</p>', '<p>d</p>', '<p>m</p>'] }).join(), /Situation, Background, Assessment and Recommendation/);
+  assert.match(askProblems({ ask: good.ask.slice(0, 2), expect: good.expect.slice(0, 2) }).join(), /3 to 5/);
 });

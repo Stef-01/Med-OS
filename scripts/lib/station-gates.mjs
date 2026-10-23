@@ -68,6 +68,7 @@ export function shapeProblems(st) {
   ((st.part2 && st.part2.handover) || []).forEach((h, n) => allowlistCheck(h && h.result, { attrs: false }).forEach(x => p.push(`part2.handover[${n}]: ${x}`)));
   if (st.part2 != null && (typeof st.part2 !== 'object' || Array.isArray(st.part2))) p.push('part2 is not an object');
   if (st.part2?.patient != null && typeof st.part2.patient !== 'string') p.push('part2.patient is not HTML text');
+  (Array.isArray(st.part2?.expect) ? st.part2.expect : []).forEach((h, n) => allowlistCheck(h || '', { attrs: false }).forEach(x => p.push(`part2.expect[${n}]: ${x}`)));
   allowlistCheck(typeof st.part2?.patient === 'string' ? st.part2.patient : '', { attrs: false }).forEach(x => p.push(`part2.patient: ${x}`));
   ((st.part2 && st.part2.handover) || []).forEach((h, n) => {
     if (!h) return;
@@ -127,6 +128,7 @@ export function qualityProblems(st, stats) {
   if (!Array.isArray(p2.handover) || p2.handover.filter(h => h && plain(h.label) && (plain(h.result) || (h.obs?.rows || []).length || cleanLabs(h.labs))).length < 2) p.push('Part 2 hands over at least 2 results (observations, investigations or imaging reports), each with its numbers');
   if (!Array.isArray(p2.ask) || p2.ask.filter(q => plain(q)).length < 2) p.push('Part 2 has at least 2 examiner questions (interpretation, then management and safety netting)');
   if (!plain(p2.lead)) p.push('Part 2 needs the examiner\'s opening line (lead)');
+  p.push(...askProblems(p2));
   for (const b of part2InScript(st.patient)) p.push(`the patient script is for Part 1; move what the patient says in Part 2 to part2.patient: "${b.slice(0, 70)}…"`);
   const pat = plain(st.patient).length;
   if (pat < 1200 || pat > 9000) p.push(`patient and examiner script is ${pat} characters; the bank's run 1,600 to 6,600`);
@@ -194,6 +196,19 @@ export function gasIssues(html) {
     }
   }
   return out;
+}
+
+/* the examiner's Part 2 questions in the order a real OSCE examiner asks them: an ISBAR handover carrying the
+   interpretation of the results, then the diagnosis and differentials, then management; each with its expected answer */
+export function askProblems(p2) {
+  const ask = (p2?.ask || []).map(plain), exp = (p2?.expect || []).map(plain), p = [];
+  if (ask.length < 3 || ask.length > 5) p.push(`${ask.length} examiner questions; Part 2 asks 3 to 5 (ISBAR handover, differentials, management, then safety netting or a focused question)`);
+  if (ask.length && !/\bISBAR\b/i.test(ask[0])) p.push('the first examiner question asks for an ISBAR handover that includes the interpretation of the results');
+  if (ask.length > 1 && !/differential|diagnos|else would you consider/i.test(ask[1])) p.push('the second examiner question asks for the most likely diagnosis and the differentials');
+  if (ask.length > 2 && !/manag/i.test(ask[2])) p.push('the third examiner question asks how the candidate would manage the patient');
+  if (exp.length !== ask.length || exp.some(e => !e)) p.push('every examiner question has its expected answer (part2.expect, same order and number as part2.ask)');
+  else if (!/Situation[\s\S]*Background[\s\S]*Assessment[\s\S]*Recommendation/i.test(exp[0])) p.push('the expected ISBAR answer fills in Situation, Background, Assessment and Recommendation for this patient');
+  return p;
 }
 
 /* a paragraph or heading of the Part 1 script that is Part 2 role-play ("In Part 2, …", "Questions to ask … (usually in Part 2)");

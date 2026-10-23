@@ -155,7 +155,7 @@ test('Part 2: results with a label and a result, questions in order, anything ma
 import { qaSlides, qaHtml } from '../public/js/osce/session.mjs';
 
 test('Part 2 slides: each result, then each image labelled by its alt text; the examiner\'s caption never reaches the candidate', () => {
-  const st = { id: 's1', part2: oscePart2({ lead: 'Say this', handover: [{ label: 'Bloods', result: '<p>Hb 92</p>' }], ask: ['What do they show?', 'Management?'] }),
+  const st = { id: 's1', part2: oscePart2({ lead: 'Say this', handover: [{ label: 'Bloods', result: '<p>Hb 92</p>' }], ask: ['What do they show?', 'Management?'], expect: ['<p>Low Hb</p>', ''] }),
     media: { part2: [{ src: 'media/s1/cxr-1.png', alt: 'Frontal chest radiograph', caption: 'Chest X-ray: show when asked', credit: { author: 'A', license: 'CC BY 4.0', page: 'https://commons.wikimedia.org/x' } }] } };
   const slides = qaSlides(st);
   assert.deepEqual(slides.map(x => x.label), ['Bloods', 'Frontal chest radiograph']);
@@ -166,7 +166,8 @@ test('Part 2 slides: each result, then each image labelled by its alt text; the 
   const html = qaHtml(st);
   assert.match(html, /data-os="present" data-sid="s1" data-i="0"/);
   assert.equal((html.match(/data-os="present"/g) || []).length, 3, 'Show results plus one pop-out per result');
-  assert.match(html, /<ol><li>What do they show\?<\/li><li>Management\?<\/li><\/ol>/);
+  assert.match(html, /Examiner questions<\/h4><ol><li><p class="os-qaq">“What do they show\?”<\/p><div class="os-qaexp"><small>Expected answer<\/small><div class="os-html"><p>Low Hb<\/p><\/div><\/div><\/li><li><p class="os-qaq">“Management\?”<\/p><\/li><\/ol>/);
+  assert.ok(html.indexOf('Examiner questions') > html.indexOf('os-qares'), 'the examiner questions come last, after the results');
   assert.equal(qaHtml({ id: 'x', part2: oscePart2(null) }), '');
 });
 

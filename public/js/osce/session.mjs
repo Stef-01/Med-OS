@@ -252,7 +252,8 @@ export function part2Html(st) {
   return `<div class="os-sheet os-p2"><h2>Results from the examiner</h2><ul class="os-p2list" role="list">${slides.map(x => `<li><strong>${esc(x.label)}</strong>${x.html}</li>`).join('')}</ul></div>`;
 }
 /* Part 2 under the patient script: what to say, Show results (full screen, so the candidate never sees the script or
-   the rubric), the questions to ask, then each result with its own pop-out and its model answer */
+   the rubric), each result with its own pop-out and its model answer, then at the bottom the examiner's questions in
+   the order they are asked (ISBAR handover, differentials, management, safety netting), each with its expected answer */
 export function qaHtml(st) {
   if (!hasPart2(st)) return '';
   const p = st.part2, slides = qaSlides(st), m = ctx.mem?.timing?.mx, sid = esc(st.id);
@@ -261,11 +262,11 @@ export function qaHtml(st) {
       <small>Interpretation, management and safety netting${m ? ` · ${m} minutes` : ''}</small></span></header>
     ${p.lead ? `<div class="os-p2lead"><small>Say</small><p>“${esc(p.lead)}”</p></div>` : ''}
     ${slides.length ? `<button class="os-btn os-btn--lg os-primary os-qashow" data-os="present" data-sid="${sid}" data-i="0">${I.max}<span>Show results to the candidate</span></button>` : ''}
-    ${p.ask.length ? `<div class="os-qaask"><h4>Ask</h4><ol>${p.ask.map(q => `<li>${esc(q)}</li>`).join('')}</ol></div>` : ''}
     ${p.patient ? `<div class="os-p2lead os-p2pt"><small>As the patient</small><div class="os-html">${safeHtml(p.patient)}</div></div>` : ''}
     ${osceP2Start(st.check) != null ? `<button class="os-btn os-p2mark" data-os="markp2">${I.check}<span>Mark Part 2</span></button>` : ''}
     ${slides.length ? `<div class="os-qares"><h4>Results</h4><ul class="os-p2list" role="list">${slides.map((x, i) => `<li class="os-qacard">
       <div class="os-qatop"><span class="os-qalab">${x.h?.kind && KINDS[x.h.kind] ? `<small class="os-kind os-kind--${esc(x.h.kind)}">${esc(KINDS[x.h.kind])}</small>` : ''}<strong>${esc(x.label)}</strong></span><button class="os-ic os-ic--sm" data-os="present" data-sid="${sid}" data-i="${i}" aria-label="Show ${esc(x.label)} full screen" title="Show full screen">${I.max}</button></div>${qaCardBody(st, x)}</li>`).join('')}</ul></div>` : ''}
+    ${p.ask.length ? `<div class="os-qaask"><h4>Examiner questions</h4><ol>${p.ask.map((q, i) => `<li><p class="os-qaq">“${esc(q)}”</p>${p.expect?.[i] ? `<div class="os-qaexp"><small>Expected answer</small><div class="os-html">${safeHtml(p.expect[i])}</div></div>` : ''}</li>`).join('')}</ol></div>` : ''}
   </section>`;
 }
 /* the presenter: one result at a time, full screen; Previous / Next, the arrow keys or a swipe move through them */

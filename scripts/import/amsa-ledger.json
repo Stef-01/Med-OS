@@ -2,7 +2,7 @@
  "note": "import-amsa.mjs progress: one entry per AMSA resource id",
  "cases": {
   "187": {
-   "status": "failed",
+   "status": "requeued",
    "at": "2026-10-23T05:50:53Z",
    "title": "Chest Pain History 1",
    "gates": [
@@ -11,10 +11,11 @@
    "blockers": [
     "Checklist item 17 (critical): The critical mark depends on the candidate saying the ECG must be done 'within 10 minutes of arrival'. A candidate who asks for monitoring and a 12-lead ECG in the first minute but doesn't quote the standard fails a critical item. This is unfair and contradicts the examiner guide ('credit the request'). The Australian standard is also 10 minutes from first medical contact, not from arrival.",
     "Checklist item 29, kid 2 (long-term medicines and assessment): One tick box bundles about nine elements: high-intensity statin, LDL target, ezetimibe, FH consideration, cascade screening, DAPT duration, pre-discharge echo, beta-blocker with its conditions, and ACE inhibitor with its indication. Part 2 is 5 minutes and already holds about 14 other marked items, so the box is almost impossible to earn and partial answers get no credit."
-   ]
+   ],
+   "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
   },
   "188": {
-   "status": "shipped",
+   "status": "requeued",
    "at": "2026-10-23T05:51:33Z",
    "title": "Cardiovascular Examination 1",
    "station": "amsa-188",
@@ -23,10 +24,11 @@
     "writer": "claude-opus-5-5",
     "examiner": "claude-opus-5-5"
    },
-   "imaging": 1
+   "imaging": 1,
+   "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
   },
   "310": {
-   "status": "shipped",
+   "status": "requeued",
    "at": "2026-10-23T06:01:32Z",
    "title": "Calf Pain History 1",
    "station": "amsa-310",
@@ -35,10 +37,11 @@
     "writer": "claude-opus-5-5",
     "examiner": "claude-opus-5-5"
    },
-   "imaging": 1
+   "imaging": 1,
+   "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
   },
   "626": {
-   "status": "shipped",
+   "status": "requeued",
    "at": "2026-10-23T05:51:13Z",
    "title": "Chest Pain History 10",
    "station": "amsa-626",
@@ -47,7 +50,8 @@
     "writer": "claude-opus-5-5",
     "examiner": "claude-opus-5-5"
    },
-   "imaging": 2
+   "imaging": 2,
+   "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
   }
  }
 }
