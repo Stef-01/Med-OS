@@ -2,26 +2,21 @@
  "note": "import-amsa.mjs progress: one entry per AMSA resource id",
  "cases": {
   "187": {
-   "status": "requeued",
-   "at": "2026-10-23T05:50:53Z",
-   "title": "Chest Pain History 1",
-   "gates": [
-    "check 29: a stray \"<\" in text"
-   ],
-   "blockers": [
-    "Checklist item 17 (critical): The critical mark depends on the candidate saying the ECG must be done 'within 10 minutes of arrival'. A candidate who asks for monitoring and a 12-lead ECG in the first minute but doesn't quote the standard fails a critical item. This is unfair and contradicts the examiner guide ('credit the request'). The Australian standard is also 10 minutes from first medical contact, not from arrival.",
-    "Checklist item 29, kid 2 (long-term medicines and assessment): One tick box bundles about nine elements: high-intensity statin, LDL target, ezetimibe, FH consideration, cascade screening, DAPT duration, pre-discharge echo, beta-blocker with its conditions, and ACE inhibitor with its indication. Part 2 is 5 minutes and already holds about 14 other marked items, so the box is almost impossible to earn and partial answers get no credit."
-   ],
-   "why": "Part 2 questions now ISBAR, differentials, management with expected answers (2026-10-23)"
-  },
-  "188": {
    "status": "failed",
-   "at": "2026-10-23T10:22:35Z",
-   "title": "Cardiovascular Examination 1",
+   "at": "2026-10-23T10:33:41Z",
+   "title": "Chest Pain History 1",
    "gates": [],
    "blockers": [
-    "Part 2 ask[2] / expect[2] with checklist items 27–40, part2.patient and guide: The management answer (about 90 seconds) has to carry 8 management steps plus Phillip's four interjected questions, the plain-language explanation (item 36) and all three safety-netting items (38–40): 14 checklist items in one slot. Most candidates cannot earn them all. The tasks also promise 'safety netting', but no ask covers it; it is reachable only through interruptions during management."
+    "Part 2 checklist (items 23–39) and part2.expect, sized against the 5-minute Part 2: Part 2 carries 15 scored checkbox items plus James's interjections, inside a 5-minute block that runs four questions at about 90 s each (about 6 min). Several items overlap the ISBAR and the diagnosis answer: item 24 (systematic ECG read) and item 25 (inferior STEMI); item 28 (other bloods) and items 23/27. Item 36 (explain to James, consent, offer to call his wife) has no question of its own and has to be squeezed in while the candidate is answering the registrar or examiner. As written, a competent candidate cannot reliably earn every Part 2 item in time.",
+    "Checklist item 33 (critical): The critical item bundles withholding GTN, which is safety-critical in hypotension or suspected RV infarction, with requesting V4R, which is good practice but not safety-critical. A candidate who safely withholds GTN but forgets right-sided leads would fail a critical item."
    ]
+  },
+  "188": {
+   "status": "shipped",
+   "at": "2026-10-23T10:50:18Z",
+   "title": "Cardiovascular Examination 1",
+   "station": "amsa-188",
+   "by": "publish-amsa-draft.mjs"
   },
   "196": {
    "status": "shipped",
