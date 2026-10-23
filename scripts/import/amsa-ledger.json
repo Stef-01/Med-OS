@@ -36,15 +36,16 @@
    "note": "converter blockers fixed by hand, then passed a fresh examiner review; minor notes applied"
   },
   "197": {
-   "status": "requeued",
-   "at": "2026-10-23T06:15:25Z",
+   "status": "shipped",
+   "at": "2026-10-23T08:56:37Z",
    "title": "Abdominal Pain History 2",
-   "gates": [],
-   "blockers": [
-    "part2.ask[0] / part2.expect[0] / tasks[1] / guide (Part 2): Part 2 cannot fairly be done in 5 minutes. The guide allows about 1 minute per question, but the ISBAR answer alone must cover identification, situation, a long background, interpretation of all four results and recommendations, and the management answer has 9 elements plus John's three questions. Items 21-37 (13 scored items with sub-items) cannot be earned in that time. The ISBAR is also unrealistic: the call goes to the gastroenterologist who performed the scope and whose report already recommends this exact plan ('confirms no repeat scope' just reads their report back to them). Task 2 never mentions an ISBAR handover, so candidates are not warned.",
-    "check item 28, kid 4 (crit) and matching text in expect[2] and explain: This critical item accepts only withholding atorvastatin. Standard Australian drug references allow either temporarily stopping atorvastatin or limiting it to 20 mg daily during clarithromycin. The 7-day myopathy risk is real but small, so making this one action a critical fail is unfair. The parent item 28 is already critical for the regimen."
-   ],
-   "why": "brief tightened (Part 2 timing)"
+   "station": "amsa-197",
+   "rounds": 2,
+   "models": {
+    "writer": "claude-opus-5-5",
+    "examiner": "claude-opus-5-5"
+   },
+   "imaging": 2
   },
   "310": {
    "status": "requeued",
