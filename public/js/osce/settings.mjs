@@ -39,10 +39,11 @@ export function saveSettings() {
 }
 export function clearKey() { setMarkerCfg({ key: '', model: markerCfg().model }); closeDialog(true); notify('API key removed from this device.'); ctx.render(); }
 
-/* the progress file: attempts, saved stations and names; the running session and this device's settings stay out */
+/* the progress file: attempts, saved stations, case requests and names; the running session and this device's settings
+   stay out (the case writer's pipeline reads the requests from it too: node scripts/requests.mjs add <file>) */
 export function exportFile() {
-  const { hist, bm, people } = ctx.mem;
-  const blob = new Blob([JSON.stringify({ kind: 'osce-progress', v: 1, exportedAt: new Date().toISOString(), people, hist, bm })], { type: 'application/json' });
+  const { hist, bm, people, req } = ctx.mem;
+  const blob = new Blob([JSON.stringify({ kind: 'osce-progress', v: 1, exportedAt: new Date().toISOString(), people, hist, bm, req })], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `osce-progress-${nameOf(0)}-${nameOf(1)}-${new Date().toISOString().slice(0, 10)}.json`.replace(/[^\w.-]+/g, '-');
@@ -55,7 +56,7 @@ async function importFile(f) {
   try { j = JSON.parse(await f.text()); } catch { return notify('That file is not a progress file.', 'danger'); }
   if (!j || j.kind !== 'osce-progress') return notify('That file is not a progress file.', 'danger');
   const { mem, added } = osceMergeImport(ctx.mem, j);
-  Object.assign(ctx.mem, { hist: mem.hist, bm: mem.bm, people: mem.people });
+  Object.assign(ctx.mem, { hist: mem.hist, bm: mem.bm, req: mem.req, people: mem.people });
   save();
   closeDialog(true);
   notify(added ? `Imported ${added} attempt${added === 1 ? '' : 's'}.` : 'Nothing new in that file.', added ? 'success' : '');

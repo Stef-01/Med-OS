@@ -848,6 +848,35 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-set .os-link { align-self:flex-start; min-height:44px; display:inline-flex; align-items:center; }
 .os-filebtn { cursor:pointer; height:42px; padding:0 18px; }
 
+/* ---------- Case requests: the start card's count, the form (chips are radios and checkboxes), your requests ---------- */
+.os-bigic:has(.os-reqbadge) { position:relative; }
+.os-reqbadge { position:absolute; top:-4px; right:-6px; min-width:20px; height:20px; padding:0 6px; border-radius:99px; background:var(--pri); color:var(--card); font-size:12px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--card); }   /* on the icon's corner: how many are ready to open (the line under the title says it in words) */
+.os-setf textarea { padding:10px 12px; border:1px solid var(--stroke); border-radius:10px; background:var(--solid); color:var(--ink); font:inherit; font-size:16px; font-weight:400; line-height:1.45; resize:vertical; outline:0; }
+.os-setf textarea:focus { border-color:var(--pri); }
+.os-reqf { gap:18px; }
+.os-reqset { border:0; margin:0; padding:0; min-width:0; }
+.os-reqset legend { padding:0; margin-bottom:8px; font-size:13px; font-weight:600; color:var(--mute); }
+.os-reqchips { display:flex; flex-wrap:wrap; gap:6px; }
+.os-reqchip { cursor:pointer; }
+.os-reqchip input { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+.os-reqchip:has(input:focus-visible) { outline:2px solid var(--pri); outline-offset:2px; }
+.os-reqsend { width:100%; margin-top:4px; }
+.os-reqs { display:flex; flex-direction:column; gap:14px; padding:18px 22px calc(24px + var(--sb)); }
+.os-reqlist { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+.os-reqrow { padding:14px; border-radius:14px; background:var(--card2); display:flex; flex-direction:column; gap:6px; }
+.os-reqtop { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.os-reqtop strong { font-size:15px; font-weight:600; line-height:1.4; overflow-wrap:anywhere; }
+.os-reqst { flex:none; padding:3px 9px; border-radius:99px; font-size:12px; font-weight:700; background:var(--fill); color:var(--mute); white-space:nowrap; }
+.os-reqst--accepted { background:var(--pend-soft); color:var(--em-pend-ink); }
+.os-reqst--made { background:var(--ok-soft); color:var(--ok-ink); }
+.os-reqst--declined { background:var(--danger-soft); color:var(--danger); }
+.os-reqmeta { font-size:13px; line-height:1.45; color:var(--mute); }
+.os-reqreply { font-size:14px; line-height:1.45; padding:8px 10px; border-radius:10px; background:var(--solid); white-space:pre-line; }
+.os-reqacts { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:2px; }
+.os-reqacts:not(:has(*)) { display:none; }
+.os-reqacts .os-link { min-height:44px; display:inline-flex; align-items:center; }
+@media (max-width:420px) { .os-reqs { padding-inline:16px; } .os-reqf { padding-inline:16px; } }
+
 /* ---------- Candidate screen: the link dialog, and the read-only page on the candidate's phone ---------- */
 .os-cand { display:flex; flex-direction:column; gap:12px; padding:20px 22px calc(22px + var(--sb)); font-size:14.5px; line-height:1.5; }
 .os-candurl { width:100%; height:var(--em-ctl); padding:0 12px; border:1px solid var(--stroke); border-radius:10px; background:var(--solid); color:var(--mute); font:inherit; font-size:13px; }

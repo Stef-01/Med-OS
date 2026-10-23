@@ -25,6 +25,7 @@ import { osceMigrate, osceFinished, oscePeople } from './osce/core.mjs';
 import { ctx, I, $, load, save, sess, attempted, findAttempt, body, now, css, loadStations, audio, bmButton, srcTag, syncBm, closePop, topDialog, closeDialog, notify, NOLOAD, curAttempt, confirmDlg, roleShort, nameOf } from './osce/state.mjs';
 import { esc } from './core.mjs';
 import { attach as syncAttach, pull as syncPull, configureSync, wire as syncWire } from './study-kit/sync.mjs';   /* both of your devices, when config.js names a project */
+import { requestsDlg, requestForm, copyRequest, shareRequest, withdrawRequest, paintRequests } from './osce/requests-view.mjs';
 import { renderStart, toggleRot, runAll, runPop, runClear, runGo, onPerson, pickCand, toggleAlt } from './osce/run.mjs';
 import { renderGroup, browseReset, browseDlg, browseSheetOpen, paintQueue, clearQueue, removeQueued, queueFromButton, addRandom, toggleDetails, afterBookmark, discPick, filterPop, toggleSaved, resetFilters, timingDlg, saveTiming, previewDlg, previewTab, onSearch, onPointerDown } from './osce/browse.mjs';
 import { renderMarked, markedReset } from './osce/marked.mjs';
@@ -43,7 +44,7 @@ export async function openOsce(deps = {}) {
   try { await Promise.all([css(), loadStations()]); } catch (e) { ctx.isOpen = false; throw e; }
   if (!ctx.isOpen) return;
   const { mem, byId } = ctx;
-  syncAttach('osce', mem, () => { if (ctx.isOpen) { mem.people = oscePeople(mem.people); save(); if (!topDialog() && !ctx.ov.contains(document.activeElement?.closest?.('input, textarea'))) ctx.render(); } });   /* a newer shard from the other device: the same object, names re-checked, the att mirror rebuilt, a repaint unless someone is typing */
+  syncAttach('osce', mem, () => { if (ctx.isOpen) { mem.people = oscePeople(mem.people); save(); paintRequests(); if (!topDialog() && !ctx.ov.contains(document.activeElement?.closest?.('input, textarea'))) ctx.render(); } });   /* a newer shard from the other device: the same object, names re-checked, the att mirror rebuilt, a repaint unless someone is typing */
   syncPull('osce');
   /* drop queued ids the bank no longer has */
   mem.sess.queue = mem.sess.queue.filter(id => byId.has(id));
@@ -213,6 +214,11 @@ async function onClick(e) {
     case 'candcopy': return candSend('copy');
     case 'candshare': return candSend('share');
     case 'settings': return settingsDlg();
+    case 'requests': return requestsDlg();
+    case 'reqnew': return requestForm(b.dataset.topic || '');
+    case 'reqcopy': return copyRequest(b.dataset.id);
+    case 'reqshare': return shareRequest(b.dataset.id);
+    case 'reqdrop': return withdrawRequest(b.dataset.id);
     case 'ssave': return saveSettings();
     case 'skeyclear': return clearKey();
     case 'sexport': return exportFile();

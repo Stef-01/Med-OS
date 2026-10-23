@@ -68,6 +68,7 @@ export function shapeProblems(st) {
   ((st.part2 && st.part2.handover) || []).forEach((h, n) => allowlistCheck(h && h.result, { attrs: false }).forEach(x => p.push(`part2.handover[${n}]: ${x}`)));
   if (st.part2 != null && (typeof st.part2 !== 'object' || Array.isArray(st.part2))) p.push('part2 is not an object');
   if (st.part2?.patient != null && typeof st.part2.patient !== 'string') p.push('part2.patient is not HTML text');
+  if (st.request != null && !(typeof st.request === 'object' && /^r[a-z0-9]{6,24}$/.test(st.request.id || ''))) p.push('request: the case request a station answers is { id: "r…", at }');
   allowlistCheck(typeof st.part2?.patient === 'string' ? st.part2.patient : '', { attrs: false }).forEach(x => p.push(`part2.patient: ${x}`));
   ((st.part2 && st.part2.handover) || []).forEach((h, n) => {
     if (!h) return;

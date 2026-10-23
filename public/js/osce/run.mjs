@@ -7,6 +7,7 @@ import { discRowHtml } from '../study-kit/vocab.mjs';
 import { ROTATIONS, ORIGINS, osceOrigin, osceRunPool, osceShuffle, oscePeople, osceCounts, NAME_MAX } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, attempted, curAttempt, confirmDlg, openPop, ago, nameOf, initialOf, whoBadge } from './state.mjs';
 import { startAttempt } from './session.mjs';
+import { requestCardHtml } from './requests-view.mjs';
 
 export function renderStart(main) {
   const s = sess(), n = s.queue.length, live = s.idx != null;
@@ -25,6 +26,7 @@ export function renderStart(main) {
       <span class="os-bigtx"><strong>New Study Session</strong>
         <span>Queue stations and run each one on the clock: one of you is the candidate, the other reads the patient and marks.</span></span>
       <span class="os-chev">${I.chevR}</span></button>
+    ${requestCardHtml()}
     ${doneHtml()}
   </div>`;
   runPaint();

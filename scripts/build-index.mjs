@@ -23,6 +23,7 @@ export function stationRow(s, size) {
     complexity: typeof s.complexity === 'string' ? s.complexity : '', context: arr(s.context), presentation: arr(s.presentation), diagnosis: arr(s.diagnosis),
     ...(s.origin ? { origin: String(s.origin) } : {}), ...(typeof s.focus === 'string' && s.focus ? { focus: s.focus } : {}),
     ...(s.source && typeof s.source.label === 'string' ? { source: { label: s.source.label } } : {}), ...(arr(s.basis).length ? { basis: arr(s.basis) } : {}),
+    ...(s.request && typeof s.request.id === 'string' ? { request: s.request.id } : {}),   /* the case request it answers: the requester's app sees it is ready */
     hasPatient: !!(typeof s.patient === 'string' && s.patient.trim()) || arr(s.media && s.media.patientScript).length > 0, mediaCount: mediaCount(s), size };
 }
 

@@ -12,6 +12,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { execFile } from 'node:child_process';
+import { requestsFrom } from '../../public/js/osce/requests.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'public');
 const SHOTS = process.argv[2] || fs.mkdtempSync(path.join(os.tmpdir(), 'osce-e2e-'));
@@ -307,6 +309,34 @@ async function runIn(width, height, label) {
     await pg.keyboard.press('Escape');
   }
 
+  /* a case request with no shared database: a search that finds nothing offers it, the form sends it, and the request
+     travels as a message the writer's pipeline reads back */
+  await click('[data-os="new"]');
+  if (width < 900) { await click('[data-os="browse"]'); }
+  await pg.fill('.os-q', 'snakebite on a bush walk'); await pg.waitForTimeout(400);
+  ok(await pg.locator('.os-empty [data-os="reqnew"]').count() === 1, `${label}: a search that finds nothing offers to request the case`);
+  await click('.os-empty [data-os="reqnew"]');
+  await pg.waitForSelector('.os-reqf');
+  ok(await pg.inputValue('.os-reqf [name="topic"]') === 'snakebite on a bush walk', `${label}: the search becomes the request's topic`);
+  await pg.locator('.os-reqchip:has(input[value="acute"])').click();
+  await pg.locator('.os-reqchip:has(input[value="bloods"])').click();
+  ok(await pg.locator('.os-reqchip.on:has(input[value="bloods"])').count() === 1, `${label}: a chosen chip shows as chosen`);
+  ok(await pg.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.os-reqf *')].every(e => e.getBoundingClientRect().right <= innerWidth + 1)), `${label}: the request form fits the screen`);
+  await shot('request-form');
+  await click('.os-reqsend');
+  await pg.waitForSelector('.os-reqlist');
+  ok(/Requested/.test(await pg.textContent('.os-reqrow .os-reqst')) && await pg.locator('.os-reqrow [data-os="reqcopy"]').count() === 1, `${label}: the request is listed as Requested, with Copy to send it`);
+  await click('.os-reqrow [data-os="reqcopy"]');
+  const asked = requestsFrom(await pg.evaluate(() => navigator.clipboard.readText()));
+  ok(asked.length === 1 && asked[0].topic === 'snakebite on a bush walk' && asked[0].setting === 'acute' && (asked[0].results || []).includes('bloods'), `${label}: Copy gives a message the writer's pipeline reads back`);
+  await shot('requests');
+  await pg.keyboard.press('Escape');
+  await pg.fill('.os-q', ''); await pg.waitForTimeout(300);   /* the browser keeps its search between opens: leave it as found */
+  if (width < 900) await pg.keyboard.press('Escape');
+  await pg.keyboard.press('Escape');
+  await pg.waitForSelector('.os-start [data-os="requests"]');
+  ok(/1 waiting/.test(await pg.textContent('.os-start [data-os="requests"]')), `${label}: the start view counts the request as waiting`);
+
   /* settings */
   await pg.waitForSelector('[data-os="settings"]');
   await click('[data-os="settings"]');
@@ -360,9 +390,10 @@ async function runIn(width, height, label) {
 /* two devices, one shared record: what one of you does on your phone shows on the other's */
 async function sync() {
   const b = await chromium.launch(), errs = [];
-  const device = async () => {
+  const device = async route => {
     const ctx = await b.newContext({ viewport: { width: 393, height: 852 } });
     await ctx.route(/\/config\.js$/, r => r.fulfill({ contentType: 'text/javascript', body: `window.OSCE_CONFIG = { supabaseUrl: '${BASE}sb', supabaseAnonKey: 'anon' };` }));
+    if (route) await route(ctx);
     const pg = await ctx.newPage(); pg.on('pageerror', e => errs.push(e.message));
     await pg.goto(BASE, { waitUntil: 'networkidle' }); await pg.waitForSelector('.os[data-ready]');
     return pg;
@@ -381,6 +412,35 @@ async function sync() {
   ok(![...SB.keys()].some(k => /k\/(sess|run|disc)/.test(k)), 'sync: the running session and filters stay on the device');
   const bpg = await device();
   ok(await bpg.inputValue('[data-person="0"]') === 'Alex' && /Alex 1/.test(await bpg.textContent('.os-kicker')), 'sync: the other device shows the names and Alex\'s attempt');
+
+  /* a case request through the shared record: asked on one phone, answered by the writer's pipeline (the real script,
+     against this stand-in), seen on the other phone; and Ready once the bank holds a station made from it */
+  await a.click('.os-results [data-os="dclose"]'); await a.waitForTimeout(300); await a.click('[data-os="back"]'); await a.waitForSelector('.os-start [data-os="requests"]');   /* the session's setup, then the start view */
+  await a.click('[data-os="requests"]'); await a.waitForSelector('.os-reqf');
+  await a.fill('.os-reqf [name="topic"]', 'acute pulmonary oedema in an 80-year-old');
+  await a.locator('.os-reqchip:has(input[value="xray"])').click();
+  await a.click('.os-reqsend'); await a.waitForSelector('.os-reqlist');
+  await a.waitForTimeout(900);
+  const reqKey = [...SB.keys()].find(k => k.startsWith('osce\nreq/')), rid = reqKey ? reqKey.split('req/')[1] : '';
+  ok(!!rid && SB.get(reqKey).value.topic === 'acute pulmonary oedema in an 80-year-old' && SB.get(reqKey).value.by === 'Alex', 'sync: the request reaches the shared record, with who asked');
+  const inbox = fs.mkdtempSync(path.join(os.tmpdir(), 'req-e2e-'));
+  const writer = (...args) => new Promise(res => execFile(process.execPath, [path.join(ROOT, '..', 'scripts', 'requests.mjs'), ...args],
+    { env: { ...process.env, OSCE_SUPABASE_URL: `${BASE}sb`, OSCE_SUPABASE_KEY: 'anon', OSCE_REQUESTS_DIR: inbox } }, (e, out, err) => res({ e, out: `${out}${err}` })));
+  const queued = await writer();
+  ok(!queued.e && queued.out.includes(rid) && /acute pulmonary oedema/.test(queued.out) && /X-ray/.test(queued.out), 'sync: the writer\'s queue lists it from the shared record');
+  const acc = await writer('accept', rid.slice(0, 6), 'Writing it this week');
+  ok(!acc.e && SB.get(reqKey).value.status === 'accepted', `sync: the writer accepts it by a short id${acc.e ? `: ${acc.out}` : ''}`);
+  const cpg = await device();
+  await cpg.click('[data-os="requests"]'); await cpg.waitForSelector('.os-reqlist');
+  ok(/Being written/.test(await cpg.textContent('.os-reqrow .os-reqst')) && /Writing it this week/.test(await cpg.textContent('.os-reqrow')), 'sync: the other phone shows it being written, with the writer\'s note');
+  const index = JSON.parse(fs.readFileSync(path.join(ROOT, 'osce', 'index.json'), 'utf8')), made = index.stations[0];
+  made.request = rid;
+  const dpg = await device(ctx => ctx.route(/\/osce\/index\.json$/, r => r.fulfill({ contentType: 'application/json', body: JSON.stringify(index) })));
+  ok(/1 ready/.test(await dpg.textContent('.os-start [data-os="requests"]')), 'sync: a station made from the request makes the start view say it is ready');
+  await dpg.click('[data-os="requests"]'); await dpg.waitForSelector('.os-reqlist');
+  ok(/Ready/.test(await dpg.textContent('.os-reqrow .os-reqst')), 'sync: the request reads Ready once the bank holds its station');
+  await dpg.click('.os-reqrow [data-os="preview"]'); await dpg.waitForSelector('.os-pv');
+  ok(await dpg.locator(`[role="dialog"][aria-label="${made.title.replace(/"/g, '\\"')}"] .os-pv`).count() === 1, 'sync: Open station opens the station made from it');
   ok(!errs.length, `sync: no page errors${errs.length ? `: ${errs.join(' | ')}` : ''}`);
   await b.close();
 }

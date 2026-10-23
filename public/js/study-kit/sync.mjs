@@ -22,7 +22,7 @@ export const TABLE = 'osce_state';
 const obj = v => (v && typeof v === 'object' && !Array.isArray(v) ? v : null);
 const STAMPS = 'osce.sync.v1';          /* { ns: { shardId: updated_at } } — what this device last agreed with the server on */
 export const SPEC = {
-  osce: { ls: 'osce.practice.v1', perId: ['hist', 'bm'], whole: ['timing', 'people'], derive: osceAtt },
+  osce: { ls: 'osce.practice.v1', perId: ['hist', 'bm', 'req'], whole: ['timing', 'people'], derive: osceAtt },   /* req/<id>: a case request, which the case writer's pipeline reads and answers */
 };
 /* the start view's count reads mem.att (one key per attempted station); osce/state.mjs rebuilds it with scores on every
    save(), but a pull with the module closed must rebuild the keys itself or the other device's attempts stay invisible

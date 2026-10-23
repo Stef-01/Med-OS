@@ -5,7 +5,8 @@
      node scripts/generate-station.mjs "explaining a new diagnosis of type 1 diabetes to a parent" --specialty Paediatrics --notes "sick day rules, DKA signs"
      node scripts/generate-station.mjs --revise ai-1337df24        an existing station through the same examiner and gates
    options: --acute (default: a clinic station) · --specialty "A, B" · --type "History, Management" · --notes "…"
-            --no-imaging · --dry-run (print, write nothing)
+            --request <id> (the case request it answers: the station carries the id, so the requester sees it is ready;
+            scripts/requests.mjs passes it) · --no-imaging · --dry-run (print, write nothing)
 
    Needs Claude credentials (ANTHROPIC_API_KEY or `ant auth login`; `npm install` once for the SDK). Imaging also needs
    network access to commons.wikimedia.org, upload.wikimedia.org and openi.nlm.nih.gov. A station that does not pass
@@ -23,8 +24,9 @@ const argv = process.argv.slice(2);
 const opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
 const flag = k => argv.includes(k);
 const list = v => (v ? v.split(',').map(s => s.trim()).filter(Boolean) : []);
-const VALUED = ['--specialty', '--type', '--notes', '--revise'];
+const VALUED = ['--specialty', '--type', '--notes', '--revise', '--request'];
 const topic = argv.filter((a, i) => !a.startsWith('--') && !VALUED.includes(argv[i - 1])).join(' ').trim();
+if (opt('--request') != null && !/^r[a-z0-9]{6,24}$/.test(opt('--request'))) { console.error(`--request: "${opt('--request')}" is not a request id`); process.exit(2); }
 if (!topic && !opt('--revise')) { console.error('usage: node scripts/generate-station.mjs "<topic>" [--acute] [--specialty "…"] [--type "…"] [--notes "…"] [--no-imaging] [--dry-run]\n       node scripts/generate-station.mjs --revise <station id>'); process.exit(2); }
 
 const dir = path.join(PUB, 'osce');
@@ -61,9 +63,9 @@ if (original) {
   const same = new Map((st.imaging || []).map(r => [r.id, r.finding]));
   const media = Object.fromEntries(Object.entries(keep).map(([p, l]) => [p, (l || []).filter(m => !m.req || (same.has(m.req) && (original.imaging || []).find(r => r.id === m.req)?.finding === same.get(m.req)))]).filter(([, l]) => l.length));
   st = { schemaVersion: original.schemaVersion ?? 1, generatedAt: original.generatedAt, ...(original.generator ? { generator: original.generator } : {}), source: 'ai', licence: original.licence || 'own',
-    ...st, ...(original.basis ? { basis: original.basis } : {}), ...(original.source && typeof original.source === 'object' ? { source: original.source } : {}), media, revised: { at: now, by: 'generate-station.mjs' } };
+    ...st, ...(original.basis ? { basis: original.basis } : {}), ...(original.request ? { request: original.request } : {}), ...(original.source && typeof original.source === 'object' ? { source: original.source } : {}), media, revised: { at: now, by: 'generate-station.mjs' } };
 } else {
-  st = { schemaVersion: 1, generatedAt: now, generator: 'generate-station.mjs', source: 'ai', licence: 'own', ...st, media: {} };
+  st = { schemaVersion: 1, generatedAt: now, generator: 'generate-station.mjs', source: 'ai', licence: 'own', ...(opt('--request') ? { request: { id: opt('--request'), at: now } } : {}), ...st, media: {} };
 }
 if (flag('--dry-run')) { console.log(JSON.stringify({ station: st, exam: res.exam }, null, 1)); process.exit(0); }
 

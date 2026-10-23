@@ -28,6 +28,7 @@ To put it online, import the repo into Vercel (it reads `vercel.json`, output di
 5. When the bell goes, the examiner ticks the checklist and the global impression, and can write feedback. The **Handover add-on** and **Memory aids** sit below the Part 2 questions.
 6. **Next Station** shows who sits next (Swap to change it). **End Session** lists every station with whose attempt it was.
 7. **Marked** (top right of the start screen) collects every AI-marked attempt.
+8. **Request a case** (on the start screen, or **Request this case** when a search finds nothing) asks for a station the bank does not have: the case in a line, and if you like the setting, specialty, patient, the results you want to interpret in Part 2, the focus and a note. Your requests list shows where each stands: Requested, Being written (with the writer's note), Ready (open it from there) or Not made (with the reason). With sync set up the request goes by itself; without it, **Copy** or **Share** it to whoever writes your cases.
 
 ### AI marking
 
@@ -43,7 +44,7 @@ Marks that arrive on an attempt nobody ticked yet tick the checklist straight aw
 Progress lives in each browser. Two ways to share it:
 
 - **Settings → Export progress / Import progress**: a file with attempts, saved stations and names. Importing merges by attempt, so nothing is lost or doubled.
-- **Automatic sync**: create a free Supabase project, run `supabase/migrations/0001_osce_state.sql` in its SQL editor, and put the project URL and anon key in `public/config.js`. Attempts, saved stations, names and timing then reach both devices. Anyone with the site's URL can read and write that record, so keep the URL between the two of you.
+- **Automatic sync**: create a free Supabase project, run `supabase/migrations/0001_osce_state.sql` in its SQL editor, and put the project URL and anon key in `public/config.js`. Attempts, saved stations, names, timing and case requests then reach both devices, and the case writer's pipeline. Anyone with the site's URL can read and write that record, so keep the URL between the two of you.
 
 ## Writing new stations
 
@@ -54,6 +55,21 @@ npm run generate -- "tension pneumothorax after a fall from a ladder" --acute --
 npm run generate -- "explaining a new diagnosis of type 1 diabetes to a parent" --specialty Paediatrics --notes "sick day rules, DKA signs"
 npm run generate -- --revise ai-1337df24     # an existing station through the same examiner and gates
 ```
+
+### From a request to a station
+
+Requests from the app are the writer's queue. `scripts/requests.mjs` reads them from the shared record (when `public/config.js`, or `OSCE_SUPABASE_URL` and `OSCE_SUPABASE_KEY`, name the project) and from the inbox `requests/` (gitignored), and answers each one where it came from:
+
+```
+node scripts/requests.mjs                          # the open requests (--all: every one)
+node scripts/requests.mjs add [file]               # a request copied or shared from the app, or a progress file (no file: paste, then Ctrl-D)
+node scripts/requests.mjs show r1k3                # the request, the brief it becomes, the generate command
+node scripts/requests.mjs accept r1k3 "This week"  # Being written, with your note
+node scripts/requests.mjs make r1k3                # the pipeline below on the request's brief; on success, Ready
+node scripts/requests.mjs decline r1k3 "Already in the bank as acute coronary syndrome"
+```
+
+`make` runs `generate-station.mjs` with the topic, `--acute` for an acute setting, the specialty and focus, and notes that carry the patient, the Part 2 results asked for and the student's own words; the station carries the request's id (`request: { id, at }`). Then `npm test`, commit and push as for any station. Through the shared record the student sees each step; from the inbox they see Ready once the station is published, because the bank's index carries the id.
 
 Each station goes through:
 
@@ -103,4 +119,5 @@ node scripts/check-station.mjs <id>   # one station against every gate
 | `public/css/` | the theme and styles |
 | `public/osce/` | one file per station plus `index.json`; `public/exam.json` the exam findings; `public/media/` the images |
 | `scripts/` | generator, imaging pipeline, index builder, validator and tests |
-| `supabase/migrations/` | the table for optional sync |
+| `supabase/migrations/` | the table for optional sync (case requests ride it as `req/<id>` rows) |
+| `requests/` | the case writer's inbox of pasted requests (gitignored) |

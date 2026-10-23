@@ -9,6 +9,7 @@ npm test                    # node:test units + scripts/validate.mjs; must pass 
 npm run e2e                 # Playwright smoke, phone / 320 px / wide; run after any UI change
 npm run index               # rebuild public/osce/index.json after a station file changes
 npm run validate            # validator + the quality gates as notes
+node scripts/requests.mjs   # the case requests queue: add / show / accept / make / decline (make runs generate-station.mjs)
 npx serve public            # local dev
 ```
 

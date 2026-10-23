@@ -159,7 +159,7 @@ export function paintGrid(more) {
   const from = more ? grid.children.length : 0;
   const html = list.slice(from, shown).map((s, i) => card(s, more ? i : Math.min(i, 8))).join('');
   if (more) grid.insertAdjacentHTML('beforeend', html);
-  else grid.innerHTML = html || `<div class="os-empty"><p>No stations match these filters.</p>${anyFilter() ? '<button class="os-btn" data-os="reset">Reset filters</button>' : ''}</div>`;
+  else grid.innerHTML = html || `<div class="os-empty"><p>No stations match these filters.</p>${anyFilter() ? '<button class="os-btn" data-os="reset">Reset filters</button>' : ''}${q.trim().length >= 3 ? `<button class="os-btn os-primary" data-os="reqnew" data-topic="${esc(q.trim())}">${I.plus}<span>Request this case</span></button>` : ''}</div>`;   /* nothing in the bank: ask for it, the search as the topic */
   /* filter row state */
   browseEl.querySelectorAll('[data-os="filter"]').forEach(b => { b.textContent = chipLabel(b.dataset.k, b.dataset.ph); b.classList.toggle('on', !!fval(b.dataset.k).length); });
   const sv = browseEl.querySelector('[data-os="saved"]'); sv.classList.toggle('on', filt.saved); sv.setAttribute('aria-pressed', String(filt.saved));

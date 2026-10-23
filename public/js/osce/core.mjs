@@ -96,7 +96,7 @@ export function osceMigrate(old, now) {
     m.v = 2;
   }
   const obj = v => (v && typeof v === 'object' && !Array.isArray(v) ? v : {});
-  m.bm = obj(m.bm); m.att = obj(m.att); m.hist = obj(m.hist);
+  m.bm = obj(m.bm); m.att = obj(m.att); m.hist = obj(m.hist); m.req = obj(m.req);   /* req: case requests (osce/requests.mjs), cleaned where they are read */
   /* a half-synced or hand-edited store must never stop OSCE opening (2026-10-22 edge sweep): every history is a list
      of attempts that each carry an id, ticks are a list, and an AI record is an object */
   for (const [id, list] of Object.entries(m.hist)) {
@@ -145,7 +145,7 @@ export function osceAttBy(hist, i) {
 /* an exported progress file merged into this record: attempts are kept by id (the one finished later, or AI-marked,
    wins), saved stations are a union, names fill only the empty slots. Returns {mem, added} and never mutates its input. */
 export function osceMergeImport(mem, file) {
-  const out = { ...mem, hist: { ...(mem.hist || {}) }, bm: { ...(mem.bm || {}) }, people: [...(mem.people || ['', ''])] };
+  const out = { ...mem, hist: { ...(mem.hist || {}) }, bm: { ...(mem.bm || {}) }, req: { ...(mem.req || {}) }, people: [...(mem.people || ['', ''])] };
   const src = file && typeof file === 'object' ? file : {};
   let added = 0;
   const better = (x, y) => (y.ai?.status === 'done' && x.ai?.status !== 'done') || (y.fin || 0) > (x.fin || 0);
@@ -160,6 +160,8 @@ export function osceMergeImport(mem, file) {
     if (mine.length) out.hist[sid] = mine.sort((x, y) => (x.at || 0) - (y.at || 0));
   }
   for (const [id, v] of Object.entries(src.bm && typeof src.bm === 'object' ? src.bm : {})) if (v) out.bm[id] = 1;
+  const stamp = r => (r && typeof r === 'object' ? +r.updated || +r.at || 0 : 0);   /* a case request: the newer copy (the writer's status over the original) */
+  for (const [id, r] of Object.entries(src.req && typeof src.req === 'object' ? src.req : {})) if (r && typeof r === 'object' && r.id === id && stamp(r) > stamp(out.req[id])) out.req[id] = r;
   const theirs = oscePeople(src.people);
   out.people = out.people.map((n, i) => n || theirs[i]);
   return { mem: out, added };
