@@ -152,6 +152,7 @@ export function flagIssues(html) {
       if ((mm = ref.match(/(-?\d+(?:\.\d+)?)\s*(?:to|-|–)\s*(-?\d+(?:\.\d+)?)/))) { lo = +mm[1]; hi = +mm[2]; }
       else if ((mm = ref.match(/(?:below|under|less than|<|≤)\s*(-?\d+(?:\.\d+)?)/i))) hi = +mm[1];
       else if ((mm = ref.match(/(?:above|over|more than|greater than|>|≥)\s*(-?\d+(?:\.\d+)?)/i))) lo = +mm[1];
+      else if (/not detected|undetectable/i.test(ref)) hi = 0;   /* a measured amount where none should be: a viral load, a DNA level */
       else continue;
       const want = lo != null && v < lo ? 'L' : hi != null && v > hi ? 'H' : '';
       const got = flag.replace(/HH/, 'H').replace(/LL/, 'L');
