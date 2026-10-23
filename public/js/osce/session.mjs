@@ -212,9 +212,9 @@ export function qaSlides(st) {
 function qaCardBody(st, x) {
   const h = x.h; if (!h) return x.html;
   const ch = chartFor(st.demo);
-  const shown = h.obs ? `${obsTableHtml(h.obs)}${h.result ? `<div class="os-html os-obs-note">${safeHtml(h.result)}</div>` : ''}<p class="os-obs-on">${ch.id ? `The candidate sees this on the ${esc(ch.why)}.` : esc(ch.why)}</p>` : x.html;
+  const shown = h.obs ? `${obsTableHtml(h.obs)}${h.result ? `<div class="os-html os-obs-note">${safeHtml(h.result)}</div>` : ''}<p class="os-obs-on">${esc(ch.short)}</p>` : x.html;
   const zones = h.obs && ch.id ? obsZonesHtml(ch.id, h.obs) : '';
-  return `${shown}${zones || h.model ? `<details class="os-model"><summary>${I.check}<span>Model interpretation</span></summary>${zones ? `<div class="os-model-z"><small>The chart calls for</small>${zones}</div>` : ''}${h.model ? `<div class="os-html">${safeHtml(h.model)}</div>` : ''}</details>` : ''}`;
+  return `${shown}${zones || h.model ? `<details class="os-model"><summary>${I.check}<span>Model answer</span></summary>${zones ? `<div class="os-model-z"><small>The chart calls for</small>${zones}</div>` : ''}${h.model ? `<div class="os-html">${safeHtml(h.model)}</div>` : ''}</details>` : ''}`;
 }
 /* the candidate's phone in Part 2: the results, nothing of the examiner's */
 export function part2Html(st) {

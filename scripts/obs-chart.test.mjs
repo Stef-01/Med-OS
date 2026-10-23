@@ -56,7 +56,7 @@ test('Part 2 with observations: the candidate gets the chart only; the examiner\
   assert.match(card, /MODEL: RR in the red zone/);
   assert.match(card, /os-z-red/);
   assert.match(card, /<small class="os-kind os-kind--obs">Observations<\/small>/);
-  assert.match(card, /The candidate sees this on the Standard Adult General Observation Chart/);
+  assert.match(card, /The candidate sees this on the adult chart/);
   const gp = { ...st, demo: { ...st.demo, setting: 'gp' } };
   assert.match(qaSlides(gp)[0].html, /os-obs-table/, 'a GP room: written out');
   assert.doesNotMatch(qaHtml(gp), /os-obs-zones/, 'no chart, no zones');

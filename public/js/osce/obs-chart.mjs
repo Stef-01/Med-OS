@@ -136,9 +136,10 @@ export function obsTableHtml(obs) {
   const lines = [['Resp rate', r => r.rr], ['SpO2 %', r => r.spo2], ['Oxygen', r => (r.dev && r.dev !== 'RA' ? `${r.o2 != null ? `${num(r.o2)} L/min ` : ''}${r.dev}` : r.dev === 'RA' ? 'Room air' : null)],
     ['BP', r => (r.sbp != null ? `${num(r.sbp)}${r.dbp != null ? `/${num(r.dbp)}` : ''}` : null)], ['Heart rate', r => (r.hr != null ? `${num(r.hr)}${r.rhythm === 'Irreg' ? ' irreg' : ''}` : null)],
     ['Temp °C', r => r.temp], ['Cap refill', r => (r.crt != null ? `${num(r.crt)} s` : null)], ['Resp distress', r => r.distress], ['Conscious', r => (r.avpu ? AVPU[r.avpu] : null)],
-    ['Pain /10', r => r.pain], ['BGL', r => r.bgl], ['Lactate', r => r.lactate], ['Action', r => r.note]]
+    ['Pain /10', r => r.pain], ['BGL', r => r.bgl], ['Lactate', r => r.lactate]]
     .filter(([, f]) => rows.some(r => f(r) != null && f(r) !== ''));
-  return `<table class="os-obs-table"><tr><th>Time</th>${rows.map(r => `<th>${esc(r.t)}</th>`).join('')}</tr>${lines.map(([l, f]) => `<tr><th>${esc(l)}</th>${rows.map(r => `<td>${esc(f(r) != null ? (typeof f(r) === 'number' ? num(f(r)) : f(r)) : '')}</td>`).join('')}</tr>`).join('')}</table>`;
+  const notes = rows.filter(r => r.note).map(r => `<li><b>${esc(r.t)}</b> ${esc(r.note)}</li>`).join('');   /* actions read as the notes they are, under the numbers */
+  return `<table class="os-obs-table"><tr><th>Time</th>${rows.map(r => `<th>${esc(r.t)}</th>`).join('')}</tr>${lines.map(([l, f]) => `<tr><th>${esc(l)}</th>${rows.map(r => `<td>${esc(f(r) != null ? (typeof f(r) === 'number' ? num(f(r)) : f(r)) : '')}</td>`).join('')}</tr>`).join('')}</table>${notes ? `<ul class="os-obs-acts">${notes}</ul>` : ''}`;
 }
 
 /* for the examiner: what the chart calls for at each time, worked out from the zones (never written by hand) */

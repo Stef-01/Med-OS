@@ -985,3 +985,16 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-obs-zones .os-z-blue .os-zc { background:#d6edf2; }
 .os-prs-slide .os-obs-page { max-width:520px; }
 .os-prs-slide .os-obs-cap { font-size:clamp(14px, 3.4vw, 18px); }
+/* result tables keep whole words (a proper hyphen at most) and scroll sideways inside their card rather than squeeze;
+   the Part 2 card gives its padding back on a phone, where it sits inside the marking sheet */
+.os-p2list .os-html :is(td, th), .os-obs-table :is(td, th) { overflow-wrap:normal; -webkit-hyphens:auto; hyphens:auto; }
+.os-p2list .os-html table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.os-p2list .os-html td:first-child, .os-p2list .os-html th:first-child { min-width:7.5em; }
+@media (max-width:480px) {
+  .os-part2 { padding:14px 12px; margin-inline:-8px; border-radius:14px; gap:12px; }
+  .os-part2 .os-qacard { padding:12px; }
+  .os-qahead .os-bigic { display:none; }
+}
+.os-obs-acts { list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:3px; font-size:13.5px; line-height:1.45; color:var(--em-ink-soft); }
+.os-obs-acts b { margin-right:6px; color:var(--ink); font-variant-numeric:tabular-nums; }
+.os-prs-slide .os-obs-acts { font-size:clamp(15px, 3.6vw, 20px); }

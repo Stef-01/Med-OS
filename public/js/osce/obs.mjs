@@ -30,13 +30,13 @@ export function ageText(d) {
 /* the chart this patient's observations go on, or none and why (said in words to the examiner) */
 export function chartFor(demo) {
   const d = cleanDemo(demo);
-  if (!d) return { id: null, why: 'No patient details for this station, so the observations are written out.' };
-  if (OUTPATIENT.has(d.setting)) return { id: null, why: 'Clinic and GP observations are written in the notes, not on an inpatient chart.' };
-  if (d.pregnant || d.postpartum) return { id: null, why: 'A pregnant or postnatal woman is charted on the maternity observation chart, which is not in this set, so the observations are written out.' };
+  if (!d) return { id: null, why: 'No patient details for this station, so the observations are written out.', short: 'Written out' };
+  if (OUTPATIENT.has(d.setting)) return { id: null, why: 'Clinic and GP observations are written in the notes, not on an inpatient chart.', short: 'Written out: a clinic or GP room has no inpatient chart' };
+  if (d.pregnant || d.postpartum) return { id: null, why: 'A pregnant or postnatal woman is charted on the maternity observation chart, which is not in this set, so the observations are written out.', short: 'Written out: the maternity chart is not in this set' };
   const m = ageMonths(d);
-  if (m < 3) return { id: null, why: 'A baby under 3 months is charted on the 0 to 3 months or newborn chart, which is not in this set, so the observations are written out.' };
+  if (m < 3) return { id: null, why: 'A baby under 3 months is charted on the 0 to 3 months or newborn chart, which is not in this set, so the observations are written out.', short: 'Written out: the under 3 months and newborn charts are not in this set' };
   const c = CHARTS.find(c => m >= c.months[0] && (c.months[1] == null || m < c.months[1]));
-  return c ? { id: c.id, why: `${c.title}, ${c.ages.toLowerCase()} (${c.form})` } : { id: null, why: 'No chart for this age.' };
+  return c ? { id: c.id, why: `${c.title}, ${c.ages.toLowerCase()} (${c.form})`, short: `The candidate sees this on the ${c.id === 'sago' ? 'adult chart' : `paediatric chart, ${c.ages.toLowerCase()}`}` } : { id: null, why: 'No chart for this age.', short: 'Written out' };
 }
 
 /* ---- zones -------------------------------------------------------------------------------------------------------- */
