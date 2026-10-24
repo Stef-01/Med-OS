@@ -347,6 +347,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         bar.parentElement.classList.toggle('pd-on', live);
         bar.style.transform = `scaleX(${live ? Math.max(0, s.left / secs).toFixed(4) : 0})`;
         bar.parentElement.classList.toggle('pd-low', live && s.left < 5000);
+        /* the bar is hidden from a screen reader (a frame-by-frame value is noise); the low-time warning is said once */
+        if (s.name === 'question' && s.left > 0 && s.left < 5000 && S._low !== s.round) { S._low = s.round; say('5 seconds left'); }
       }
       const h = shell.querySelector('.pd-big');
       if (s.name === 'ready' && h) h.textContent = String(Math.max(1, Math.ceil(s.left / 1000)));
@@ -397,6 +399,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         M.round = s.round;
         shell.querySelector('.pd-qtag').textContent = [q.origin === 'ai' ? 'AI-written' : '', q.topic || ''].filter(Boolean).join(' · ');
         shell.querySelector('.pd-stem').textContent = q.stem;
+        if (s.name === 'question') say(`Question ${s.round + 1} of ${st.rounds.length}. ${secs} seconds.`);
         const opts = shell.querySelector('.pd-opts');
         opts.replaceChildren(...q.options.map((o, i) => {
           const b = document.createElement('button'); b.type = 'button'; b.className = 'pd-opt'; b.dataset.i = i;
