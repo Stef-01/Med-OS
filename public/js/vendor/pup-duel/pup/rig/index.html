@@ -869,6 +869,9 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
   function pt(p) { return r3(p[0]) + ' ' + r3(p[1]); }
 
   // A U: rounded top corners of radius r, straight sides, a full half-circle bottom.
+  function ellPath(cx, cy, rx, ry) {
+    return 'M' + r3(cx - rx) + ' ' + cy + ' A' + r3(rx) + ' ' + r3(ry) + ' 0 1 0 ' + r3(cx + rx) + ' ' + cy + ' A' + r3(rx) + ' ' + r3(ry) + ' 0 1 0 ' + r3(cx - rx) + ' ' + cy + ' Z';
+  }
   function uPath(cx, top, w, h, r) {
     var half = w / 2, bot = top + h, L = cx - half, R = cx + half;
     return 'M' + (L + r) + ' ' + top + ' H' + (R - r) + ' A' + r + ' ' + r + ' 0 0 1 ' + R + ' ' + (top + r) +
@@ -1057,6 +1060,10 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
           // a hat with ear holes: the ears' parts outside the head drawn again over the brim
           '<clipPath id="' + P + '-outHead"><path clip-rule="evenodd" d="M-320 -420 H320 V320 H-320 Z ' + uPath(0, -55, 100, c.head.h, c.head.r) + '"/></clipPath>' +
           '<g data-p="earsOver" display="none" clip-path="url(#' + P + '-outHead)"><use href="#' + P + '-eb"/><use href="#' + P + '-et"/></g>' +
+          // glasses' arms ([data-arm]) end at the head's outline (a Pomeranian's: halfway into its mane, where fur hides
+          // them), this outline carried into the glasses' own space each frame
+          (c.pom ? '<clipPath id="' + P + '-ruff"><path data-p="ruffClip" d="M-400 -400 H400 V400 H-400 Z"/></clipPath>' : '') +
+          '<clipPath id="' + P + '-arms"><path data-p="armClip" d="' + (c.pom ? ellPath(1, -6, c.pom.rx + c.pom.sc / 2, c.pom.ry + c.pom.sc / 2) : uPath(0, -55, 100, c.head.h, c.head.r)) + '"/></clipPath>' +
           '<g data-p="accHead"></g>' +
         '</g>' +
         '<g data-p="acc"></g>' +
@@ -1092,7 +1099,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     ['disc', 'dog', 'floor', 'body', 'tail', 'leg0', 'leg1', 'leg2', 'collar', 'tag', 'head', 'earL', 'earR', 'tipL', 'tipR',
      'tipOutL', 'tipOutR', 'tipInL', 'tipInR', 'earsBack', 'earsFront', 'earTips', 'feat', 'browL', 'browR', 'pupilL', 'pupilR',
      'heyeL', 'heyeR', 'lidL', 'lidR', 'cheekL', 'cheekR', 'shutL', 'shutR', 'snout', 'blush', 'mouth', 'tongue', 'bone',
-     'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'earsOver'].forEach(function (k) { e[k] = q(k); });
+     'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearBack', 'earsOver', 'armClip', 'ruff', 'ruffClip'].forEach(function (k) { e[k] = q(k); });
     e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
     var g = c.geo, m = c.mirror ? -1 : 1, F = hatFit(c);
     var rig = {
@@ -1275,6 +1282,9 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       var hipX = shift - 0.05 * w0 + 3.2 * ch('wiggle') * wave(t, 600) + shake * 1.6 * wave(t, 60) + dance * 3.5 * wave(t, 900, 0.25);
       set(e.body, 'transform', tr(g.fx + hipX, g.fy - hop.lift) + ' scale(' + r3(sx) + ' ' + r3(sy) + ') ' +
         tr(-g.fx, -g.fy) + ' ' + rot(0.03 * w0, g.fx, g.fy));
+      // back bling is rigid (wings, a guitar, a pack): it keeps a fifth of the body's squash in width, not all of it,
+      // so a landing does not stretch a wide piece out of the frame
+      if (e.wearBack && e.wearBack.firstChild) set(e.wearBack, 'transform', tr(g.fx, g.fy) + ' scale(' + r3(Math.pow(sx, -0.8)) + ' 1) ' + tr(-g.fx, -g.fy));
 
       // Tail: a three-link chain drawn as one smooth thick curve.
       var curl = ch('tailCurl');
@@ -1312,8 +1322,16 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       set(e.feat, 'transform', tr(yaw * 10, 0));
       // the hat: the spring above, the head's turn (a hat sits between the face's depth and the head's outline), and
       // this dog's fit (hatFit); glasses take a quarter of the spring and ride the features' yaw in their own group
-      set(e.wearHead, 'transform', tr(yaw * 4, rig.hatY + F.y) + ' ' + rot(-0.6 * rig.hatY, 1, -55) + ' ' + scl(F.s, 1, -55));
-      if (e.wearFace) set(e.wearFace, 'transform', tr(0, rig.hatY * 0.25));
+      var HF = rig.hoodFit || F, hatT = tr(yaw * 4, rig.hatY + HF.y) + ' ' + rot(-0.6 * rig.hatY, 1, -55) + ' ' + scl(HF.s, 1, -55);
+      set(e.wearHead, 'transform', hatT);
+      if (rig.hoodFit && e.ruffClip) set(e.ruffClip, 'transform', hatT);   // the mane's trim rides the hood
+      /* worn glasses: on a "deal with it" (the shades channel) they get a push up the nose instead of a second pair */
+      var faceOn = !!(e.wearFace && e.wearFace.firstChild), push = faceOn ? -7 * Math.sin(Math.PI * clamp(ch('shades'), 0, 1)) : 0;
+      if (e.wearFace) set(e.wearFace, 'transform', tr(0, rig.hatY * 0.25 + push));
+      // the head's outline seen from inside the glasses (the inverse of the face's yaw, this dog's eye scale, a mirror
+      // and the push above), so the arms clip to where the head is now, not where it was drawn
+      if (faceOn && e.armClip) set(e.armClip, 'transform', tr(0, -(rig.hatY * 0.25 + push)) + (c.mirror ? ' matrix(-1 0 0 1 2 0)' : '') +
+        ' translate(1 -17.4) scale(' + r3(1 / c.eye) + ') translate(-1 17.4) ' + tr(-yaw * 10, 0));
       set(e.snout, 'transform', tr(yaw * 13, 0));
       set(e.earsBack, 'transform', tr(-yaw * 9, 0));
       set(e.earTips, 'transform', tr(-yaw * 9, 0));
@@ -1422,7 +1440,8 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       var red = clamp(ch('redEye'), 0, 1);
       set(e.white, 'fill', 'rgb(255,' + Math.round(255 - 56 * red) + ',' + Math.round(255 - 56 * red) + ')');
       // Shades drop in from above the head and settle with a small bounce.
-      var shv = ch('shades');
+      // A dog already wearing glasses keeps its own (faceOn, above): no second pair stacked over them.
+      var shv = faceOn ? 0 : ch('shades');
       set(e.shades, 'opacity', clamp(shv / 0.12, 0, 1));
       if (shv > 0) set(e.shades, 'transform', tr(0, -110 * (1 - shv)));
 
@@ -1437,6 +1456,8 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
 
       var spin = eB > 0 && BE.burst.spin ? flow(b, BE.burst.spin) : 0;   // ends on a whole turn, so it never unwinds
       var z = ch('zoom'), cs = Math.cos(spin * Math.PI * 2);
+      if (EMBED && rig.hatTop) z = Math.min(z, 1.06);   // the embed's headroom covers a tall hat pushed in this far (contentBox)
+      if (EMBED && rig.backWide) z = Math.min(z, 1);    // and wings or a guitar out past the head leave no room for a push-in
       set(e.dog, 'transform', tr(m * 18 * c.scale, 0) + ' scale(' + r3(m * c.scale * z * cs) + ' ' + r3(c.scale * z) + ') ' + tr(0, -g.fy));
       var shd = 1 - hop.lift / 32;
       set(e.floor, 'transform', tr(g.fx + hipX * 0.5, g.fy) + ' scale(' + r3(shd) + ' ' + r3(0.75 + 0.25 * shd) + ') ' + tr(-g.fx, -g.fy));
@@ -1495,9 +1516,11 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     var x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
     P.forEach(function (p) { x0 = Math.min(x0, p[0] - 150); x1 = Math.max(x1, p[0] + 150); y0 = Math.min(y0, p[1] - 310); y1 = Math.max(y1, p[1] + 30); });
     if (document.documentElement.classList.contains('embed')) {   // the mascot: frame the dog itself, not the stage around it
-      // room above the head for the tallest piece in the wardrobe (130 head units up from the floor point: the wizard's
-      // tip, the headwrap's fan), so a tall dog (Rosie) is framed a little wider instead of losing its hat to the edge
-      var c = list[0] ? list[0].c : null, top = c ? Math.min(y0 - 8, -(c.floorY + 132) * c.scale) : y0 - 8;
+      // room above the head: 132 head units up from the floor point, or more under a tall hat (the wizard's tip, the
+      // headwrap's fan): its top pushed in 6 % (Locked in) and lifted by a hop and the hat's spring, so the camera
+      // reframes a few percent wider instead of the hat losing its tip to the edge
+      var c = list[0] ? list[0].c : null, ht = list[0] && list[0].rig.hatTop || 0;
+      var top = c ? Math.min(y0 - 8, -Math.max(c.floorY + 132, ht * 1.06 + 10) * c.scale) : y0 - 8;
       return [x0 + 30, top, x1 - x0 - 60, y1 - top];
     }
     return [x0 - 10, y0 - 10, x1 - x0 + 20, y1 - y0 + 20];
@@ -1595,6 +1618,32 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     ['earsBack', 'earTips'].forEach(function (n) { var el = q(n); if (el) el.setAttribute('display', up); });
     if (q('earsFront')) q('earsFront').setAttribute('display', ears === 'hood' ? 'none' : 'inline');
     if (q('earsOver')) q('earsOver').setAttribute('display', ears === 'over' ? 'inline' : 'none');
+    // a hood on a Pomeranian: the fur is squashed inside it, so the hood grows to the mane's width and the mane is
+    // trimmed to the hood's sides (fluff below the hood stays); any other head piece leaves the mane alone
+    var ruff = q('ruff'), rc = q('ruffClip'), hw = q('wearHead'), b = null;
+    if (ruff && rc) {
+      if (ears === 'hood' && hw && hw.firstChild) { try { b = hw.getBBox(); } catch (err) { b = null; } }
+      if (b && b.width > 20) {
+        var pm = r.c.pom, w4 = b.width / 4;
+        r.rig.hoodFit = { s: r3((2 * (pm.rx + pm.sc) - 8) / b.width), y: 0 };
+        rc.setAttribute('d', 'M' + r3(b.x) + ' 400 V' + r3(b.y + w4) + ' Q' + r3(b.x) + ' ' + r3(b.y) + ' ' + r3(b.x + w4) + ' ' + r3(b.y) +
+          ' H' + r3(b.x + 3 * w4) + ' Q' + r3(b.x + b.width) + ' ' + r3(b.y) + ' ' + r3(b.x + b.width) + ' ' + r3(b.y + w4) + ' V400 Z');
+        ruff.setAttribute('clip-path', 'url(#' + rc.parentNode.id + ')');
+      } else { r.rig.hoodFit = null; ruff.removeAttribute('clip-path'); }
+    }
+    // the worn hat's top, in head units above the floor point (the embed's camera makes room for it)
+    var ht = 0;
+    if (hw && hw.firstChild) {
+      var hb2 = null; try { hb2 = hw.getBBox(); } catch (err) { hb2 = null; }
+      var HF0 = r.rig.hoodFit || hatFit(r.c);
+      if (hb2 && hb2.height > 0) ht = r3(r.c.floorY - (-55 + (hb2.y + 55) * HF0.s + HF0.y));
+    }
+    if (ht !== (r.rig.hatTop || 0)) { r.rig.hatTop = ht; if (EMBED && r.state === 'in') relayout(null); }
+    var bk = q('wearBack'), bb = null;
+    if (bk && bk.firstChild) { try { bb = bk.getBBox(); } catch (err) { bb = null; } }
+    r.rig.backWide = !!(bb && bb.x + bb.width - r.c.geo.fx > 100);
+    var arms = q('armClip');
+    if (arms && q('wearFace')) q('wearFace').querySelectorAll('[data-arm]').forEach(function (a) { a.setAttribute('clip-path', 'url(#' + arms.parentNode.id + ')'); });
     if (q('tag')) q('tag').setAttribute('display', m.neck ? 'none' : 'inline');   // a worn neck piece replaces the collar's own tag
     if (changed && !fresh) r.rig.excite(clock);
   }
