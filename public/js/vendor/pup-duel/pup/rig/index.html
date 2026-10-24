@@ -327,7 +327,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
   var DOGS = [
     {
       id: 'duke', name: 'Duke', expr: 'overjoyed', scale: 1.5, mirror: false,
-      pal: { coat: '#3a3352', sh: '#2a2440', tan: '#e5a259', tanSh: '#cf8a45', feature: '#8a80ad',
+      pal: { coat: '#463e62', sh: '#352e4e', tan: '#e5a259', tanSh: '#cf8a45', feature: '#8a80ad',
              ink: '#241f36', nose: '#241f36', noseHi: '#4a4363', mouth: '#b03a3a', tongue: '#ff7a8c',
              tongueSh: '#e45c70', collar: '#ff4b4b', tag: '#ffc800', tagSh: '#e5a800', disc: '#ffe3e4', floor: '#ffc4c8',
              blush: '#ff8a8a' },
@@ -371,7 +371,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     },
     {
       id: 'pepper', name: 'Pepper', expr: 'proud', scale: 1.36, mirror: false,
-      pal: { coat: '#3b3442', sh: '#2f2936', tan: '#f2ab5c', tanSh: '#d98f43', feature: '#f2ab5c',
+      pal: { coat: '#473f52', sh: '#393243', tan: '#f2ab5c', tanSh: '#d98f43', feature: '#f2ab5c',
              ink: '#16121b', nose: '#16121b', noseHi: '#4a4352', mouth: '#a8343a', tongue: '#ff7a8c',
              tongueSh: '#e45c70', collar: '#ff4b4b', tag: '#ffc800', tagSh: '#e5a800', disc: '#ece6ff', floor: '#d6ccf5',
              blush: '#ff8a8a', mane: '#5a5066', maneSh: '#2a2430', bib: '#f2c389', bibSh: '#e2a964', earIn: '#f2ab5c', tail: '#4b4354' },
@@ -1133,7 +1133,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     ['disc', 'dog', 'floor', 'body', 'tail', 'leg0', 'leg1', 'leg2', 'collar', 'tag', 'head', 'earL', 'earR', 'tipL', 'tipR',
      'tipOutL', 'tipOutR', 'tipInL', 'tipInR', 'earsBack', 'earsFront', 'earTips', 'feat', 'browL', 'browR', 'pupilL', 'pupilR',
      'heyeL', 'heyeR', 'lidL', 'lidR', 'cheekL', 'cheekR', 'shutL', 'shutR', 'snout', 'blush', 'mouth', 'tongue', 'bone',
-     'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearBack', 'earsOver', 'armClip', 'ruff', 'ruffClip'].forEach(function (k) { e[k] = q(k); });
+     'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearNeck', 'wearBack', 'earsOver', 'armClip', 'ruff', 'ruffClip'].forEach(function (k) { e[k] = q(k); });
     e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
     var g = c.geo, m = c.mirror ? -1 : 1, F = hatFit(c);
     var rig = {
@@ -1169,6 +1169,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     // the pops' and floats' half width and height, unscaled (placeAccent keeps them clear of a hat and the ears)
     var POP = { ex: [2.4, 11], q: [4.5, 10.5], sparkle: [7, 7], heart: [8.3, 8], z: [6.7, 6.7], note: [7.5, 9.5], steam: [6.6, 8.6] };
     var FLOATS = { heart: 1, z: 1, note: 1, steam: 1 };
+    var POPON = [[0, 0.55], [150, 1.1], [240, 0.97], [320, 1]];   // a piece put on: small, a touch over, settled (popK)
     // the ears as they are drawn this frame, boxed in head space (once a frame, and only while a pop is up)
     function earBoxes() {
       if (rig.ebAt === rig.frames) return rig.eb;
@@ -1378,9 +1379,18 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       var hipX = shift - 0.05 * w0 + 3.2 * ch('wiggle') * wave(t, 600) + shake * 1.6 * wave(t, 60) + dance * 3.5 * wave(t, 900, 0.25);
       set(e.body, 'transform', tr(g.fx + hipX, g.fy - hop.lift) + ' scale(' + r3(sx) + ' ' + r3(sy) + ') ' +
         tr(-g.fx, -g.fy) + ' ' + rot(0.03 * w0, g.fx, g.fy));
+      // a piece just put on pops on: a quick overshoot about its anchor (the hat's brim, the eyes, the collar, the back
+      // piece's middle), 320 ms from when wear() saw it change
+      function popK(k) {
+        var a = rig.popAt && rig.popAt[k], u = a == null ? -1 : clock - a;
+        if (u < 0 || u >= 320) { if (rig.popAt) rig.popAt[k] = null; return 1; }
+        return r3(flow(u, POPON));
+      }
+      var kH = popK('Head'), kF = popK('Face'), kN = popK('Neck'), kB = popK('Back');
       // back bling is rigid (wings, a guitar, a pack): it keeps a fifth of the body's squash in width, not all of it,
       // so a landing does not stretch a wide piece out of the frame
-      if (e.wearBack && e.wearBack.firstChild) set(e.wearBack, 'transform', tr(g.fx, g.fy) + ' scale(' + r3(Math.pow(sx, -0.8)) + ' 1) ' + tr(-g.fx, -g.fy));
+      if (e.wearBack && e.wearBack.firstChild) set(e.wearBack, 'transform', tr(g.fx, g.fy) + ' scale(' + r3(Math.pow(sx, -0.8)) + ' 1) ' + tr(-g.fx, -g.fy) +
+        (kB !== 1 && rig.backC ? ' ' + scl(kB, rig.backC[0], rig.backC[1]) : ''));
 
       // Tail: a three-link chain drawn as one smooth thick curve.
       var curl = ch('tailCurl');
@@ -1407,6 +1417,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       // a worn hat rides the head on a soft spring (hatSpring); with nothing on, it rests
       if (e.wearHead && e.wearHead.firstChild) hatSpring(rig, headY, dt); else { rig.hatY = rig.hatS = rig.hatV = rig.aY = 0; rig.pHY = null; rig.pVY = 0; }   // a hat put on later starts at rest
       set(e.collar, 'transform', tr(hipX * 0.75, headY * 0.85 - 0.15 * hop.lift));
+      if (e.wearNeck) { if (rig.neckT == null) rig.neckT = e.wearNeck.getAttribute('transform') || ''; set(e.wearNeck, 'transform', rig.neckT + (kN !== 1 ? ' ' + scl(kN, 0, 0) : '')); }
       set(e.tag, 'transform', rot(-0.3 * w1 + 3 * wave(t - 120, 1440) + 40 * (hopEars.sy - hop.sy), -4, g.hb + 4));
 
       // The turn, without a second drawing: each part slides by its depth. The pointer pulls it a little.
@@ -1414,15 +1425,15 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       set(e.feat, 'transform', tr(yaw * 10, 0));
       // the hat: the spring above, the head's turn (a hat sits between the face's depth and the head's outline), and
       // this dog's fit (hatFit); glasses take a quarter of the spring and ride the features' yaw in their own group
-      var HF = rig.hoodFit || F, hatT = tr(yaw * 4, rig.hatY + HF.y) + ' ' + rot(-0.6 * rig.hatY, 1, -55) + ' ' + scl(HF.s, 1, -55);
+      var HF = rig.hoodFit || F, hatT = tr(yaw * 4, rig.hatY + HF.y) + ' ' + rot(-0.6 * rig.hatY, 1, -55) + ' ' + scl(HF.s, 1, -55) + (kH !== 1 ? ' ' + scl(kH, 1, -55) : '');
       set(e.wearHead, 'transform', hatT);
       if (rig.hoodFit && e.ruffClip) set(e.ruffClip, 'transform', hatT);   // the mane's trim rides the hood
       /* worn glasses: on a "deal with it" (the shades channel) they get a push up the nose instead of a second pair */
       var faceOn = !!(e.wearFace && e.wearFace.firstChild), push = faceOn ? -3.5 * Math.sin(Math.PI * clamp(ch('shades'), 0, 1)) : 0;   /* a nudge: the lenses stay over the eyes */
-      if (e.wearFace) set(e.wearFace, 'transform', tr(0, rig.hatY * 0.25 + push));
+      if (e.wearFace) set(e.wearFace, 'transform', tr(0, rig.hatY * 0.25 + push) + (kF !== 1 ? ' ' + scl(kF, 1, -30) : ''));
       // the head's outline seen from inside the glasses (the inverse of the face's yaw, this dog's eye scale, a mirror
       // and the push above), so the arms clip to where the head is now, not where it was drawn
-      if (faceOn && e.armClip) set(e.armClip, 'transform', tr(0, -(rig.hatY * 0.25 + push)) + (c.mirror ? ' matrix(-1 0 0 1 2 0)' : '') +
+      if (faceOn && e.armClip) set(e.armClip, 'transform', (kF !== 1 ? scl(r3(1 / kF), 1, -30) + ' ' : '') + tr(0, -(rig.hatY * 0.25 + push)) + (c.mirror ? ' matrix(-1 0 0 1 2 0)' : '') +
         ' translate(1 -17.4) scale(' + r3(1 / c.eye) + ') translate(-1 17.4) ' + tr(-yaw * 10, 0));
       set(e.snout, 'transform', tr(yaw * 13, 0));
       set(e.earsBack, 'transform', tr(-yaw * 9, 0));
@@ -1702,7 +1713,12 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     var changed = false;
     ['Head', 'Face', 'Neck', 'Back'].forEach(function (k) {
       var g = r.slot && r.slot.querySelector('[data-p="wear' + k + '"]'), v = typeof m[k.toLowerCase()] === 'string' ? m[k.toLowerCase()] : '';
-      if (g && g.getAttribute('data-v') !== v) { g.innerHTML = v; g.setAttribute('data-v', v); changed = changed || !!v; }
+      if (g && g.getAttribute('data-v') !== v) {
+        g.innerHTML = v; g.setAttribute('data-v', v); changed = changed || !!v;
+        // a piece put on pops on (frame: popK), unless the dog is dressing as it loads, or no frames are running to
+        // finish the pop (reduced motion, a hidden page): one frame drawn mid-pop would leave it half size
+        if (v && !fresh && running() && live()) (r.rig.popAt || (r.rig.popAt = {}))[k] = clock;
+      }
     });
     // the head piece's ears: '' they pass behind it, 'over' they come through holes in it (drawn again over the brim,
     // outside the head), 'hide' fabric covers the pricked or round ears, 'hood' covers floppy ones too
@@ -1745,6 +1761,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     var bk = q('wearBack'), bb = null;
     if (bk && bk.firstChild) { try { bb = bk.getBBox(); } catch (err) { bb = null; } }
     r.rig.backWide = !!(bb && bb.x + bb.width - r.c.geo.fx > 100);
+    r.rig.backC = bb ? [r3(bb.x + bb.width / 2), r3(bb.y + bb.height / 2)] : null;   // the back piece pops on about its middle
     var arms = q('armClip');
     if (arms && q('wearFace')) q('wearFace').querySelectorAll('[data-arm]').forEach(function (a) { a.setAttribute('clip-path', 'url(#' + arms.parentNode.id + ')'); });
     if (q('tag')) q('tag').setAttribute('display', m.neck ? 'none' : 'inline');   // a worn neck piece replaces the collar's own tag
@@ -2098,7 +2115,9 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     var m = e.data || {}, r = roster[first].rig;
     if (e.origin !== location.origin || typeof m.dob !== 'string') return;
     if (m.dob === 'look') { if (typeof m.x === 'number' && typeof m.y === 'number') lookAt(m.x, m.y); return; }   // eyes only: the idle stays slow
-    if (m.dob === 'wear') { wear(roster[first], m, !!m.fresh); if (!running()) draw(16); return; }
+    // a piece put on (not the outfit it loads in): full speed for the hop it makes and the piece's pop, which at the
+    // idle's quarter speed played in slow motion
+    if (m.dob === 'wear') { if (!m.fresh) lively = Math.max(lively, performance.now() + 1500); wear(roster[first], m, !!m.fresh); if (!running()) draw(16); return; }
     lively = performance.now() + (m.id === 'happy' || m.id === 'proud' || m.id === 'sleepy' ? 900 : 4200);
     if (m.dob === 'expr' && EXPR[m.id] && m.id !== r.exprId) r.setExpr(m.id, clock - 420);   // a verdict lands at once: 230 ms of the blend left
     else if (m.dob === 'tap') r.excite(clock);
