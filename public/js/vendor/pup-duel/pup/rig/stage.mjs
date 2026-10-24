@@ -5,7 +5,7 @@
 import { EASE_IN_OUT, EASE_OUT, EASE_IN, clamp, PERIOD, B, SWITCH, MOVE, GIF_FPS, STILL } from './motion.mjs';
 import { EXPR, EXPR_ORDER } from './expressions.mjs';
 import { DOGS, resolve } from './breeds.mjs';
-import { NS, r3, set, tr } from './parts.mjs';
+import { NS, r3, set, tr, reach } from './parts.mjs';
 import { hatFit, boxIn, makeDog } from './rig.mjs';
 
 // ---- the scene: a roster, a camera, and dogs that walk to their spots ----
@@ -65,19 +65,19 @@ function cameraFor(list) {
   // tail, so then the frame grows to take the tail in as well, keeping all its room round the head (a brim, wings, a
   // guitar), and the height follows the stage's shape
   var span = document.documentElement.classList.contains('embed') && list.length === 1 && dogSpan(list[0]);
-  if (span && (span[0] < cx - w / 2 || span[1] > cx + w / 2)) {
+  var long = !!span && (span[0] < cx - w / 2 || span[1] > cx + w / 2);
+  if (long) {
     var x0 = Math.min(cx - w / 2, span[0]), x1 = Math.max(cx + w / 2, span[1]);
     w = x1 - x0; h = w / A; cx = (x0 + x1) / 2;
   }
+  if (span && list[0].rig) list[0].rig.long = long;   // and the rig gives it no push-in, which would take the tail out again
   return [cx - w / 2, cy - h / 2, w, h];
 }
-// a dog's own left and right in the scene, from its build: the head (100 wide), the body behind it, and the reach of
-// its tail (the chain leans back 50 degrees at rest), with a margin for a wag
+// a dog's own left and right in the scene (parts.mjs reach: the head and its tail at full length and level)
 function dogSpan(r) {
-  var c = r.c, g = c.geo; if (!g) return null;
-  var reach = c.tail.len.reduce(function (a, b) { return a + b; }, 0) * Math.sin(50 * Math.PI / 180) * (c.tail.curl ? 0.5 : 1);
-  var L = Math.min(-56, g.bL - reach - 10), R = 56, s = c.scale, m = c.mirror ? -1 : 1;
-  var a = m * 18 * s + m * s * L, b = m * 18 * s + m * s * R;   // the mascot's one dog stands at the origin (positions)
+  var c = r.c; if (!c.geo) return null;
+  var lr = reach(c), s = c.scale, m = c.mirror ? -1 : 1;
+  var a = m * 18 * s + m * s * lr[0], b = m * 18 * s + m * s * lr[1];   // the mascot's one dog stands at the origin (positions)
   return [Math.min(a, b), Math.max(a, b)];
 }
 function live() { return !reduced.matches; }

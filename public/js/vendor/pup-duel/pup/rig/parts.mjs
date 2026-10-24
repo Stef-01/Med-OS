@@ -264,4 +264,14 @@ function dogMarkup(c, P) {
     '</g>';
 }
 
-export { NS, r3, set, rot, tr, pt, ellPath, uPath, scl, EAR_UP, EAR_FLOP, UP_EARS, FLOP_EARS, HEART, SHADES, MANE, BIB, dogMarkup };
+/* a dog's own left and right, in its own units (before its scale and mirror), from its build (dogMarkup's geo): the head
+   (100 wide) and the tail at full length and level (Sleepy lays it flat, Hyped streams it out, Sad lets a curl hang
+   straight), on a body stretched 9 % about its middle and swayed 5 units at the hips (a hop's landing squashes it to
+   0.8 and stretches it 14 % for a frame or two; frame-audit.mjs holds the result). The stage widens a long dog's frame
+   to it; the rig turns a spinning dog about its middle */
+function reach(c) {
+  var g = c.geo, tip = g.tail[0] - c.tail.len.reduce(function (a, b) { return a + b; }, 0) - c.tail.w / 2;
+  return [Math.min(-56, tip - 0.09 * (g.fx - tip) - 5), 56];
+}
+
+export { NS, r3, set, rot, tr, pt, ellPath, uPath, scl, EAR_UP, EAR_FLOP, UP_EARS, FLOP_EARS, HEART, SHADES, MANE, BIB, dogMarkup, reach };

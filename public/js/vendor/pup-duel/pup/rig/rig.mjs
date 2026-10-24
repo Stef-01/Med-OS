@@ -4,7 +4,7 @@
 // stage.mjs (the page: the scene, the menu, the embed's messages). docs/doberman/README.md has the map.
 import { EASE_IN_OUT, EASE_OUT, track, flow, wave, bell, clamp, seeded, PERIOD, ago, B, TREAT, CALL, SWITCH, MOVE } from './motion.mjs';
 import { EXPR, DEF, PET, CALLED, TREAT_KEYS, TREAT_HOPS, MOVE_HOPS } from './expressions.mjs';
-import { NS, r3, set, rot, tr, pt, ellPath, uPath, scl, EAR_UP, EAR_FLOP, HEART, dogMarkup } from './parts.mjs';
+import { NS, r3, set, rot, tr, pt, ellPath, uPath, scl, EAR_UP, EAR_FLOP, HEART, dogMarkup, reach } from './parts.mjs';
 
 // the Learn mascot's frame (index.html marks <html class="embed"> before its first paint): the rig trims a zoom-in
 // there so a tall hat or wide back piece keeps its room
@@ -105,7 +105,7 @@ function makeDog(c, slot, P) {
    'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearNeck', 'wearBack', 'earsOver', 'armClip', 'armEars', 'armEarL', 'armEarR', 'ruff', 'ruffClip',
    'tailIn', 'tailDots'].forEach(function (k) { e[k] = q(k); });
   e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
-  var g = c.geo, m = c.mirror ? -1 : 1, F = hatFit(c);
+  var g = c.geo, m = c.mirror ? -1 : 1, F = hatFit(c), span = reach(c);
   var rig = {
     cfg: c, slot: slot, exprId: c.expr, E: EXPR[c.expr], Pv: EXPR[c.expr], swStart: -1e12,
     burstStart: -1e12, BE: EXPR[c.expr], treatStart: -1e12, callStart: -1e12,
@@ -150,9 +150,9 @@ function makeDog(c, slot, P) {
   // the frame's left and right edges in the dog's own space (rig.view from draw, the dog's scale from frame), less a
   // pop's half width; none mid-spin, when the dog is edge on
   function viewX(w) {
-    var v = rig.view, k = rig.kx;
+    var v = rig.view, k = rig.kx, o = rig.spinX || 0;
     if (!v || !k || Math.abs(k) < 0.3 * rig.ky) return null;
-    var a = v[0] / k, b = v[1] / k;
+    var a = (v[0] - o) / k, b = (v[1] - o) / k;
     return [Math.min(a, b) + w, Math.max(a, b) - w];
   }
   function placeAccent(el, type, p, i, fade) {
@@ -536,9 +536,14 @@ function makeDog(c, slot, P) {
     var spin = eB > 0 && BE.burst.spin ? flow(b, BE.burst.spin) : 0;   // ends on a whole turn, so it never unwinds
     var z = ch('zoom'), cs = Math.cos(spin * Math.PI * 2);
     if (EMBED && rig.hatTop) z = Math.min(z, 1.06);   // the embed's headroom covers a tall hat pushed in this far (contentBox)
-    if (EMBED && rig.backWide) z = Math.min(z, 1);    // and wings or a guitar out past the head leave no room for a push-in
-    set(e.dog, 'transform', tr(m * 18 * c.scale, 0) + ' scale(' + r3(m * c.scale * z * cs) + ' ' + r3(c.scale * z) + ') ' + tr(0, -g.fy));
+    if (EMBED && (rig.backWide || rig.long)) z = Math.min(z, 1);   // wings or a guitar out past the head, or a long dog's tail (stage.mjs dogSpan), leave no room for a push-in
+    // a whole turn (Dancing's tap) mirrors the mascot about the middle of its frame, so what fits on one side fits on the
+    // other at the half turn (a long dog's tail, a hanging ear, a brim); among other dogs on the page, about its own
+    // middle (reach). Otherwise the pivot is the head, where a push-in centres
+    var pv = !spin ? 0 : EMBED && rig.view ? (rig.view[0] + rig.view[1]) / 2 / (m * c.scale * z) : (span[0] + span[1]) / 2;
+    set(e.dog, 'transform', tr(m * 18 * c.scale + m * c.scale * z * pv, 0) + ' scale(' + r3(m * c.scale * z * cs) + ' ' + r3(c.scale * z) + ') ' + tr(-pv, -g.fy));
     rig.kx = m * c.scale * z * cs; rig.ky = c.scale * z; rig.frames = (rig.frames || 0) + 1;   // for the pops (viewX, earBoxes)
+    rig.spinX = m * c.scale * z * pv * (1 - cs);   // and how far that pivot moves the dog's own space across the frame
     var shd = 1 - hop.lift / 32;
     set(e.floor, 'transform', tr(g.fx + hipX * 0.5, g.fy) + ' scale(' + r3(shd) + ' ' + r3(0.75 + 0.25 * shd) + ') ' + tr(-g.fx, -g.fy));
 
