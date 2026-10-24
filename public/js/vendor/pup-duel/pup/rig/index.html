@@ -956,16 +956,30 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
   }
   /* A worn hat rides the head on a soft spring: it lifts a touch as a hop leaves the ground and settles back, so it
      sits on the head instead of being painted on it (secondary motion; glasses get a quarter of it). The spring (hatS)
-     is damped to settle in one bob, and what is drawn (hatY, + down) saturates softly and one-sidedly: a hat lifts off
-     a head (up to 2.6) but presses into it only a hair of fur (0.5), so a hard hop never sinks it or slams it into a
-     wall (the ±5 clamp this replaced swung end to end in 64 ms on a hyped hop). Pure: scripts/mascot.test.js runs it. */
+     is soft and damped to settle in one slow bob (a 350 ms period, ζ ≈ 0.7), driven by the head's acceleration
+     smoothed over a frame or two (a finite difference spikes as a hop starts), and what is drawn (hatY, + down)
+     saturates softly and one-sidedly: a hat lifts off a head (up to 2.6) but presses into it only a hair of fur (0.5),
+     so a hard hop never sinks it or slams it into a wall (the ±5 clamp this replaced swung end to end in 64 ms on a
+     hyped hop). Pure: scripts/mascot.test.js runs it; scripts/doberman/switch-audit.mjs watches it in the rig. */
   function hatSpring(s, headY, dt) {
     var kk = Math.min(dt, 48) / 16, vy = s.pHY == null ? 0 : (headY - s.pHY) / kk, ay = vy - (s.pVY || 0);
     s.pHY = headY; s.pVY = vy;
-    s.hatV = (s.hatV || 0) + (-0.22 * (s.hatS || 0) - 0.6 * (s.hatV || 0) - 0.4 * ay) * kk;
+    s.aY = (s.aY || 0) + (ay - (s.aY || 0)) * Math.min(1, 0.5 * kk);
+    s.hatV = (s.hatV || 0) + (-0.08 * (s.hatS || 0) - 0.4 * (s.hatV || 0) - 0.3 * s.aY) * kk;
     s.hatS = Math.max(-12, Math.min(12, (s.hatS || 0) + s.hatV * kk));
     s.hatY = s.hatS > 0 ? 0.5 * Math.tanh(s.hatS / 0.5) : 2.6 * Math.tanh(s.hatS / 2.6);
     return s;
+  }
+  // an element's box in another element's user space (each corner carried through the CTMs); null when not drawn
+  function boxIn(el, space) {
+    var b, M;
+    try { b = el.getBBox(); M = space.getCTM().inverse().multiply(el.getCTM()); } catch (err) { return null; }
+    if (!b || !(b.width > 0 || b.height > 0)) return null;
+    var xs = [], ys = [];
+    [[b.x, b.y], [b.x + b.width, b.y], [b.x, b.y + b.height], [b.x + b.width, b.y + b.height]].forEach(function (q) {
+      xs.push(M.a * q[0] + M.c * q[1] + M.e); ys.push(M.b * q[0] + M.d * q[1] + M.f);
+    });
+    return { x0: Math.min.apply(null, xs), x1: Math.max.apply(null, xs), y0: Math.min.apply(null, ys), y1: Math.max.apply(null, ys) };
   }
   function scl(k, x, y) { return k === 1 ? '' : 'translate(' + x + ' ' + y + ') scale(' + k + ') translate(' + (-x) + ' ' + (-y) + ')'; }
   function dogMarkup(c, P) {
@@ -1150,6 +1164,22 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       if (shots.length < 14) shots.push({ type: type, start: at, el: makeAccent(type), i: shots.length + 7 });
     }
 
+    var POP = { ex: [2.4, 11], q: [4.5, 10.5], sparkle: [7, 7] };   // the head pops' half width and height, unscaled
+    // the ears as they are drawn this frame, boxed in head space (once a frame, and only while a pop is up)
+    function earBoxes() {
+      if (rig.ebAt === rig.frames) return rig.eb;
+      rig.ebAt = rig.frames; rig.eb = [];
+      [e.earL, e.earR, e.tipL, e.tipR].forEach(function (el) { var b = el && !el.closest('[display="none"]') && boxIn(el, e.head); if (b) rig.eb.push(b); });
+      return rig.eb;
+    }
+    // the frame's left and right edges in the dog's own space (rig.view from draw, the dog's scale from frame), less a
+    // pop's half width; none mid-spin, when the dog is edge on
+    function viewX(w) {
+      var v = rig.view, k = rig.kx;
+      if (!v || !k || Math.abs(k) < 0.3 * rig.ky) return null;
+      var a = v[0] / k, b = v[1] / k;
+      return [Math.min(a, b) + w, Math.max(a, b) - w];
+    }
     function placeAccent(el, type, p, i, fade) {
       if (!(p > 0 && p < 1) || fade <= 0) { set(el, 'opacity', 0); return; }
       var x, y, s, r = 0, o, s1 = seeded(i, 1), s3 = seeded(i, 3);
@@ -1216,6 +1246,33 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
         x = 12 + 22 * EASE_OUT(p); y = -14 - 8 * EASE_OUT(p);
         s = 0.4 + 0.9 * EASE_OUT(p);
         o = bell(p);
+      }
+      // a pop above the head (a "!", a "?", a sparkle) keeps clear of what is up there and rides the head. It is placed
+      // in head space, slid sideways out of every shape of a worn hat (a brim, a horn, a crown: rig.hatShapes, from
+      // wear) and of the ears as they are now, never over the top (the embed's frame ends just above a hat), so it
+      // neither lands on them nor reads as part of a hat. A "!" or "?" goes out on its own side unless only the other
+      // fits the frame; the side is chosen once per pop, so it never hops across. Then the head's hop and tilt carry it
+      // out of head space, upright (a tap's leap does not lift an ear into it, a curious tilt does not swing a hat
+      // under it), and the frame's edge stops it
+      if (type === 'ex' || type === 'q' || type === 'sparkle') {
+        var H = rig.headAt, th = r * Math.PI / 180 - (H ? H[2] : 0), ca = Math.abs(Math.cos(th)), sa = Math.abs(Math.sin(th));
+        var pw = 2 + (POP[type][0] * ca + POP[type][1] * sa) * s, ph = 2 + (POP[type][0] * sa + POP[type][1] * ca) * s;   // its extent in head space
+        var boxes = (rig.hatShapes || []).concat(earBoxes()), py = y;
+        var hit = function (hx) {
+          for (var k = 0; k < boxes.length; k++) { var B = boxes[k]; if (hx > B.x0 - pw && hx < B.x1 + pw && py > B.y0 - ph && py < B.y1 + ph) return B; }
+          return null;
+        };
+        var clear = function (hx, side) { for (var k = 0, B; k < 8 && (B = hit(hx)); k++) hx = side > 0 ? B.x1 + pw : B.x0 - pw; return hx; };
+        var toDog = function (hx) { if (!H) return [hx, py]; var cs = Math.cos(H[2]), sn = Math.sin(H[2]), ry = py - H[3]; return [hx * cs - ry * sn + H[0], H[3] + hx * sn + ry * cs + H[1]]; };
+        var V = viewX(pw), fits = function (hx) { var d = toDog(hx)[0]; return !V || (d >= V[0] + 10 && d <= V[1] - 10); };   // with room to tilt on
+        if (!(p >= (el._p || 0))) el._side = 0;   // a new pop (or the loop's next one)
+        el._p = p;
+        if (!el._side) {
+          var B0 = hit(x), out = x >= 0 ? 1 : -1;
+          el._side = !B0 ? out : type === 'sparkle' ? (x - B0.x0 < B0.x1 - x ? -1 : 1) : fits(clear(x, out)) || !fits(clear(x, -out)) ? out : -out;
+        }
+        var D = toDog(clear(x, el._side));
+        x = V ? clamp(D[0], V[0], V[1]) : D[0]; y = D[1];
       }
       var flip = ACCENT[type].upright && m < 0 ? ' scale(-1 1)' : '';   // letters read the right way round
       set(el, 'transform', tr(x, y) + ' rotate(' + r3(r) + ') scale(' + r3(s) + ')' + flip);
@@ -1323,9 +1380,11 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       var headY = -hopLate.lift + (1 - hopLate.sy) * 52 - 1.2 * (wave(t, 3600) + 1) / 2 + ch('headY');
       var shiftLate = E.act.shift ? flow(ago(t, 120), E.act.shift) : 0;
       var tilt = ch('tilt') + 1.8 * wave(t, 3600, 0.3) - 0.35 * shiftLate + 8 * ch('wobble') * wave(t, 450) + dance * 8 * wave(t, 900);
-      set(e.head, 'transform', tr(hipX * 0.7 + shake * 1.1 * wave(t, 60, 0.3), headY) + ' ' + rot(tilt, 0, g.hb - 10));
+      var headX = hipX * 0.7 + shake * 1.1 * wave(t, 60, 0.3);
+      set(e.head, 'transform', tr(headX, headY) + ' ' + rot(tilt, 0, g.hb - 10));
+      rig.headAt = [headX, headY, tilt * Math.PI / 180, g.hb - 10];   // the pops above the head ride it (placeAccent)
       // a worn hat rides the head on a soft spring (hatSpring); with nothing on, it rests
-      if (e.wearHead && e.wearHead.firstChild) hatSpring(rig, headY, dt); else { rig.hatY = rig.hatS = rig.hatV = 0; rig.pHY = null; rig.pVY = 0; }   // a hat put on later starts at rest
+      if (e.wearHead && e.wearHead.firstChild) hatSpring(rig, headY, dt); else { rig.hatY = rig.hatS = rig.hatV = rig.aY = 0; rig.pHY = null; rig.pVY = 0; }   // a hat put on later starts at rest
       set(e.collar, 'transform', tr(hipX * 0.75, headY * 0.85 - 0.15 * hop.lift));
       set(e.tag, 'transform', rot(-0.3 * w1 + 3 * wave(t - 120, 1440) + 40 * (hopEars.sy - hop.sy), -4, g.hb + 4));
 
@@ -1471,6 +1530,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       if (EMBED && rig.hatTop) z = Math.min(z, 1.06);   // the embed's headroom covers a tall hat pushed in this far (contentBox)
       if (EMBED && rig.backWide) z = Math.min(z, 1);    // and wings or a guitar out past the head leave no room for a push-in
       set(e.dog, 'transform', tr(m * 18 * c.scale, 0) + ' scale(' + r3(m * c.scale * z * cs) + ' ' + r3(c.scale * z) + ') ' + tr(0, -g.fy));
+      rig.kx = m * c.scale * z * cs; rig.ky = c.scale * z; rig.frames = (rig.frames || 0) + 1;   // for the pops (viewX, earBoxes)
       var shd = 1 - hop.lift / 32;
       set(e.floor, 'transform', tr(g.fx + hipX * 0.5, g.fy) + ' scale(' + r3(shd) + ' ' + r3(0.75 + 0.25 * shd) + ') ' + tr(-g.fx, -g.fy));
 
@@ -1644,12 +1704,22 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       } else { r.rig.hoodFit = null; ruff.removeAttribute('clip-path'); }
     }
     // the worn hat's top, in head units above the floor point (the embed's camera makes room for it)
-    var ht = 0;
+    var ht = 0, shapes = null;
     if (hw && hw.firstChild) {
       var hb2 = null; try { hb2 = hw.getBBox(); } catch (err) { hb2 = null; }
       var HF0 = r.rig.hoodFit || hatFit(r.c);
-      if (hb2 && hb2.height > 0) ht = r3(r.c.floorY - (-55 + (hb2.y + 55) * HF0.s + HF0.y));
+      if (hb2 && hb2.height > 0) {
+        ht = r3(r.c.floorY - (-55 + (hb2.y + 55) * HF0.s + HF0.y));
+        // each shape of the hat boxed in head space (its fit applied): what the pops above the head keep clear of
+        var hx = function (x) { return r3(1 + (x - 1) * HF0.s); }, hy = function (y) { return r3(-55 + (y + 55) * HF0.s + HF0.y); };
+        shapes = [];
+        for (var k = 0; k < hw.children.length; k++) {
+          var sb = boxIn(hw.children[k], hw);
+          if (sb) shapes.push({ x0: hx(sb.x0), x1: hx(sb.x1), y0: hy(sb.y0), y1: hy(sb.y1) });
+        }
+      }
     }
+    r.rig.hatShapes = shapes;
     if (ht !== (r.rig.hatTop || 0)) { r.rig.hatTop = ht; if (EMBED && r.state === 'in') relayout(null); }
     var bk = q('wearBack'), bb = null;
     if (bk && bk.firstChild) { try { bb = bk.getBBox(); } catch (err) { bb = null; } }
@@ -1771,6 +1841,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       r.rig.gaze.on = pointer.on; r.rig.gaze.last = pointer.last;
       r.rig.gaze.x = clamp(ux / 14, -4.5, 4.5); r.rig.gaze.y = clamp(uy / 16, -3.5, 4);
       r.rig.gaze.yaw = clamp(ux / 260, -0.22, 0.22);
+      r.rig.view = [vb[0] - hx, vb[0] + vb[2] - hx];   // the frame's edges from the dog's origin (its pops stay inside)
       r.rig.frame(t, clock, dt, clock - r.moveStart);
     });
   }
