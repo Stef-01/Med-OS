@@ -4,7 +4,7 @@
 // stage.mjs (the page: the scene, the menu, the embed's messages). docs/doberman/README.md has the map.
 import { EASE_IN_OUT, EASE_OUT, EASE_IN, clamp, PERIOD, B, SWITCH, MOVE, GIF_FPS, STILL } from './motion.mjs';
 import { EXPR, EXPR_ORDER } from './expressions.mjs';
-import { DOGS, resolve } from './breeds.mjs';
+import { DOGS, resolve, dogById } from './breeds.mjs';
 import { NS, r3, set, tr, reach } from './parts.mjs';
 import { hatFit, boxIn, makeDog } from './rig.mjs';
 
@@ -538,7 +538,7 @@ againEl.addEventListener('click', function () { if (lastGif) offer(lastGif); });
 
 // ---- start: Duke alone, zoomed in (embed mode: the dog the parent asked for) ----
 var Q = new URLSearchParams(location.search), EMBED = Q.get('embed') === '1';
-var first = EMBED ? Math.max(0, roster.findIndex(function (r) { return r.c.id === Q.get('dog'); })) : 0;
+var first = EMBED ? roster.findIndex(function (r) { return r.c.id === dogById(Q.get('dog')).id; }) : 0;   // an unknown dog: the registry's default
 if (EMBED) document.documentElement.classList.add('embed');
 addDog(roster[first]);
 if (EMBED) roster[first].rig.setExpr(EXPR[Q.get('expr')] ? Q.get('expr') : 'happy', clock);
