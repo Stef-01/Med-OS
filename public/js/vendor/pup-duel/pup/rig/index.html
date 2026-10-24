@@ -1331,7 +1331,7 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       set(e.wearHead, 'transform', hatT);
       if (rig.hoodFit && e.ruffClip) set(e.ruffClip, 'transform', hatT);   // the mane's trim rides the hood
       /* worn glasses: on a "deal with it" (the shades channel) they get a push up the nose instead of a second pair */
-      var faceOn = !!(e.wearFace && e.wearFace.firstChild), push = faceOn ? -7 * Math.sin(Math.PI * clamp(ch('shades'), 0, 1)) : 0;
+      var faceOn = !!(e.wearFace && e.wearFace.firstChild), push = faceOn ? -3.5 * Math.sin(Math.PI * clamp(ch('shades'), 0, 1)) : 0;   /* a nudge: the lenses stay over the eyes */
       if (e.wearFace) set(e.wearFace, 'transform', tr(0, rig.hatY * 0.25 + push));
       // the head's outline seen from inside the glasses (the inverse of the face's yaw, this dog's eye scale, a mirror
       // and the push above), so the arms clip to where the head is now, not where it was drawn
