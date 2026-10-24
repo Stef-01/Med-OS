@@ -5,10 +5,12 @@
    The frames match @supabase/realtime-js 2.118.0 (REA ev_95bd19d4..., RealtimeChannel.js subscribe(): the join
    config {broadcast: {ack, self}, presence: {key, enabled}, postgres_changes: [], private}, access_token only when
    the key is a JWT). Two choices differ, for the 5-second budget: a heartbeat every 5 s rather than 25 s, and a
-   socket whose heartbeat goes unanswered by the next one is closed and reopened (1, 2, 5, 10 s, then 10 s). */
+   socket whose heartbeat goes unanswered by the next one is dropped at once and reopened (1, 2, 5, 10 s, then 10 s),
+   without waiting for a close event a dead link may never deliver. With no channel left the socket closes itself
+   after IDLE_MS, and the next channel opens it again. */
 
 const isJwt = k => typeof k === 'string' && k.split('.').length === 3;
-export const BACKOFF = [1000, 2000, 5000, 10000];
+export const BACKOFF = [1000, 2000, 5000, 10000], IDLE_MS = 10000;
 
 export function joinFrame(topic, key, ref) {
   return {
@@ -18,10 +20,10 @@ export function joinFrame(topic, key, ref) {
 }
 export const endpointOf = (url, key) => `${String(url).replace(/^http/, 'ws').replace(/\/+$/, '')}/realtime/v1/websocket?apikey=${encodeURIComponent(key)}&vsn=1.0.0`;
 
-export function createRealtime({ url, key, WebSocket = globalThis.WebSocket, timers, heartbeatMs = 5000, backoff = BACKOFF, onState = () => {} }) {
+export function createRealtime({ url, key, WebSocket = globalThis.WebSocket, timers, heartbeatMs = 5000, backoff = BACKOFF, idleMs = IDLE_MS, onState = () => {} }) {
   const T = timers || { setTimeout: (f, ms) => globalThis.setTimeout(f, ms), clearTimeout: id => globalThis.clearTimeout(id) };
-  const chans = new Map();
-  let ws = null, ref = 0, tries = 0, hbTimer = null, hbRef = null, retryTimer = null, closed = false, state = 'idle';
+  const chans = new Map(), leaving = new Map();   /* leaving: join ref -> topic, for a channel closed before its join came back */
+  let ws = null, ref = 0, tries = 0, hbTimer = null, hbRef = null, retryTimer = null, idleTimer = null, closed = false, state = 'idle';
   const setState = s => { if (s !== state) { state = s; onState(s); } };
   const nextRef = () => String(++ref);
   const open = () => ws && ws.readyState === 1;
@@ -35,11 +37,20 @@ export function createRealtime({ url, key, WebSocket = globalThis.WebSocket, tim
     T.clearTimeout(hbTimer);
     hbTimer = T.setTimeout(() => {
       if (!open()) return;
-      if (hbRef !== null) { hbRef = null; try { ws.close(4000, 'heartbeat timeout'); } catch { /* already closing */ } return; }   // the last one never came back: the socket is dead
+      if (hbRef !== null) { hbRef = null; drop(ws, 'heartbeat timeout'); return; }   // the last one never came back: the socket is dead
       hbRef = nextRef();
       send({ topic: 'phoenix', event: 'heartbeat', payload: {}, ref: hbRef });
       beat();
     }, heartbeatMs);
+  }
+  /* let go of a socket now, and retry unless we meant to close it */
+  function drop(sock, why) {
+    if (ws !== sock) return;
+    sock.onopen = sock.onmessage = sock.onerror = sock.onclose = null;
+    try { sock.close(4000, why); } catch { /* already gone */ }
+    T.clearTimeout(hbTimer); ws = null; hbRef = null; leaving.clear();
+    chans.forEach(ch => { ch.joined = false; });
+    if (!closed && chans.size) retry(); else setState(closed ? 'closed' : 'idle');
   }
   function retry() {
     if (closed || retryTimer !== null) return;
@@ -57,18 +68,18 @@ export function createRealtime({ url, key, WebSocket = globalThis.WebSocket, tim
     sock.onopen = () => { if (ws !== sock) return; tries = 0; setState('open'); chans.forEach(join); beat(); };
     sock.onmessage = e => { if (ws === sock) receive(e.data); };
     sock.onerror = () => { /* onclose follows */ };
-    sock.onclose = () => {
-      if (ws !== sock) return;
-      T.clearTimeout(hbTimer); ws = null;
-      chans.forEach(ch => { ch.joined = false; });
-      if (!closed) retry(); else setState('closed');
-    };
+    sock.onclose = () => drop(sock, 'closed');
   }
   function receive(data) {
     let m;
     try { m = JSON.parse(typeof data === 'string' ? data : new TextDecoder().decode(data)); } catch { return; }
     if (!m || typeof m !== 'object') return;
     if (m.topic === 'phoenix' && m.event === 'phx_reply') { if (m.ref === hbRef) hbRef = null; return; }
+    if (m.event === 'phx_reply' && leaving.get(m.ref) === m.topic) {   /* joined after all, but nobody wants it now */
+      leaving.delete(m.ref);
+      if (m.payload?.status === 'ok' && !chans.has(m.topic)) send({ topic: m.topic, event: 'phx_leave', payload: {}, ref: nextRef(), join_ref: m.ref });
+      return;
+    }
     const ch = chans.get(m.topic);
     if (!ch) return;
     if (m.event === 'phx_reply' && m.ref === ch.joinRef) {
@@ -78,15 +89,21 @@ export function createRealtime({ url, key, WebSocket = globalThis.WebSocket, tim
       return;
     }
     if (m.event === 'broadcast' && m.payload && typeof m.payload.event === 'string') { ch.handlers.forEach(h => { try { h(m.payload.event, m.payload.payload); } catch { /* a handler's bug stays its own */ } }); return; }
-    if (m.event === 'phx_error' || m.event === 'phx_close') { ch.joined = false; if (open() && !closed) T.setTimeout(() => { if (chans.get(ch.topic) === ch && open()) join(ch); }, backoff[0]); }
+    if (m.event === 'phx_error' || m.event === 'phx_close') {
+      if (m.join_ref && m.join_ref !== ch.joinRef) return;   /* about an earlier join of this topic: not this one */
+      ch.joined = false;
+      const was = ch.joinRef;
+      if (open() && !closed) T.setTimeout(() => { if (chans.get(ch.topic) === ch && ch.joinRef === was && !ch.joined && open()) join(ch); }, backoff[0]);
+    }
   }
 
   return {
     get state() { return state; },
     channel(name, onBroadcast) {
       const topic = `realtime:${name}`;
+      T.clearTimeout(idleTimer); idleTimer = null;
       let ch = chans.get(topic);
-      if (!ch) { ch = { topic, joined: false, joinRef: null, handlers: new Set(), queue: [], error: '' }; chans.set(topic, ch); if (open()) join(ch); else connect(); }
+      if (!ch) { ch = { topic, joined: false, joinRef: null, handlers: new Set(), queue: [], error: '' }; chans.set(topic, ch); if (open()) join(ch); else if (retryTimer === null) connect(); }
       ch.handlers.add(onBroadcast);
       return {
         send(event, payload) {
@@ -97,16 +114,21 @@ export function createRealtime({ url, key, WebSocket = globalThis.WebSocket, tim
         },
         close() {
           ch.handlers.delete(onBroadcast);
-          if (ch.handlers.size) return;
+          if (ch.handlers.size || chans.get(topic) !== ch) return;
           chans.delete(topic);
           if (ch.joined) send({ topic, event: 'phx_leave', payload: {}, ref: nextRef(), join_ref: ch.joinRef });
+          else if (ch.joinRef) leaving.set(ch.joinRef, topic);
+          if (!chans.size && !closed) {   /* nobody listening: let the socket go after a while */
+            T.clearTimeout(idleTimer);
+            idleTimer = T.setTimeout(() => { idleTimer = null; if (!chans.size && ws) drop(ws, 'idle'); T.clearTimeout(retryTimer); retryTimer = null; }, idleMs);
+          }
         },
         get joined() { return ch.joined; }
       };
     },
     close() {
-      closed = true; T.clearTimeout(hbTimer); T.clearTimeout(retryTimer); retryTimer = null;
-      if (ws) { try { ws.close(1000, 'bye'); } catch { /* gone */ } }
+      closed = true; T.clearTimeout(hbTimer); T.clearTimeout(retryTimer); T.clearTimeout(idleTimer); retryTimer = null;
+      if (ws) drop(ws, 'bye');
       setState('closed');
     }
   };

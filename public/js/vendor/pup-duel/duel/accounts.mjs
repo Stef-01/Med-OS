@@ -15,8 +15,9 @@ export const DOGS = [
 ];
 export const SLOTS = ['head', 'face', 'neck', 'back'];
 
-/* trimmed, single spaces: "  Sam   Lee " is "Sam Lee" */
-export const normName = s => (typeof s === 'string' ? s.trim().replace(/\s+/g, ' ') : '');
+/* trimmed, single spaces: "  Sam   Lee " is "Sam Lee". ASCII whitespace only, as the migration's regex sees it (a
+   non-breaking space is not a space here or there, so the name rule refuses it in both) */
+export const normName = s => (typeof s === 'string' ? s.replace(/^[ \t\n\r\f\v]+|[ \t\n\r\f\v]+$/g, '').replace(/[ \t\n\r\f\v]+/g, ' ') : '');
 export const nameKey = s => normName(s).toLowerCase();
 
 export function nameError(s) {

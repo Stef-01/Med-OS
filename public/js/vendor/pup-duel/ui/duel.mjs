@@ -350,7 +350,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       }
       const h = shell.querySelector('.pd-big');
       if (s.name === 'ready' && h) h.textContent = String(Math.max(1, Math.ceil(s.left / 1000)));
-      if (S._stage !== s.name || S._round !== s.round) { S._stage = s.name; S._round = s.round; paintMatch(); }
+      const up = s.name === 'question' && s.left <= 0;   /* time is up: the options lock until the blank answer lands */
+      if (S._stage !== s.name || S._round !== s.round || S._up !== up) { S._stage = s.name; S._round = s.round; S._up = up; paintMatch(); }
       S.raf = requestAnimationFrame(step);
     };
     S.raf = requestAnimationFrame(step);
@@ -411,7 +412,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       const picked = v.picked ?? v.mine?.choice;
       const R = st.rounds[s.round], reveal = s.name === 'reveal' && R?.closed;
       shell.querySelectorAll('.pd-opt').forEach((b, i) => {
-        b.disabled = s.name !== 'question' || picked !== undefined;
+        b.disabled = s.name !== 'question' || picked !== undefined || s.left <= 0;
         b.classList.toggle('pd-picked', picked === i);
         b.classList.toggle('pd-right', !!reveal && i === q.answer);
         b.classList.toggle('pd-wrong', !!reveal && picked === i && i !== q.answer);
@@ -437,16 +438,19 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       } else if (!reveal) why.hidden = true;
     }
     shell.querySelector('.pd-match').toggleAttribute('data-live', st.phase === 'live' || st.phase === 'done');
-    /* the holds: waiting for an accept, the countdown, the end */
+    /* the holds: waiting for an accept, the countdown, the end. An ending shows only once the log agrees (v.firm):
+       this phone's own reply can run ahead of a move it has not polled yet */
     const big = shell.querySelector('.pd-big'), sub = shell.querySelector('.pd-hold-sub'), acts = shell.querySelector('.pd-hold-acts');
+    const fp = v.firm.phase;
     let holdOn = true;
     if (st.phase === 'invited') {
       if (me === st.b) { big.textContent = `${M.them.name || 'A mate'} challenges you`; sub.textContent = setupLine(st.setup); setActs([['Accept', 'pri', () => S.session.accept()], ['Decline', '', () => { S.session.decline(); setTimeout(showLobbyOrAuth, 800); }]]); }
       else { big.textContent = `Waiting for ${M.them.name || 'your mate'}`; sub.textContent = `${setupLine(st.setup)}. The duel starts when they accept.`; setActs([['Cancel', '', () => { S.session.leave(); setTimeout(showLobbyOrAuth, 800); }]]); }
     } else if (s.name === 'ready') { sub.textContent = 'Get ready'; setActs([]); }
     else if (s.name === 'wait') { big.textContent = '…'; sub.textContent = 'Starting'; setActs([]); }
-    else if (st.phase === 'declined' || st.phase === 'cancelled') { big.textContent = st.phase === 'declined' ? 'Not this time' : 'Cancelled'; sub.textContent = st.phase === 'declined' ? `${M.them.name || 'Your mate'} declined.` : 'The challenge was called off.'; setActs([['Back', 'pri', showLobbyOrAuth]]); }
-    else if (st.phase === 'done' && s.name !== 'reveal') { holdOn = false; showResults(); return; }
+    else if (fp === 'declined' || fp === 'cancelled') { big.textContent = fp === 'declined' ? 'Not this time' : 'Cancelled'; sub.textContent = fp === 'declined' ? `${M.them.name || 'Your mate'} declined.` : 'The challenge was called off.'; setActs([['Back', 'pri', showLobbyOrAuth]]); }
+    else if (fp === 'done' && s.name !== 'reveal') { holdOn = false; showResults(); return; }
+    else if (st.phase !== 'live' && s.name !== 'reveal') { big.textContent = '…'; sub.textContent = 'Checking the result'; setActs([]); }
     else holdOn = false;
     hold.hidden = !holdOn;
     function setActs(list) {
@@ -477,7 +481,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (!v || !M || S.screen === 'results') return;
     S.screen = 'results';
     cancelAnimationFrame(S.raf);
-    const st = v.state, me = v.me, opp = v.opp, out = outcome(st, me) || 'loss';
+    const st = v.firm, me = v.me, opp = v.opp, out = outcome(st, me) || 'loss';
     const head = out === 'win' ? 'You win!' : out === 'draw' ? 'A draw' : `${M.them.name || 'Your mate'} wins`;
     const why = st.reason === 'leave' ? (st.winner === me ? `${M.them.name || 'Your mate'} left the duel.` : 'You left the duel.') : st.reason === 'forfeit' ? (st.winner === me ? `${M.them.name || 'Your mate'} went quiet for three rounds.` : 'You were away for three rounds.') : '';
     const main = shell.querySelector('.pd-main');

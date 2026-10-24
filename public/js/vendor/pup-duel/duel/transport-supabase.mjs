@@ -2,12 +2,16 @@
    (POST /rest/v1/rpc/pup_*), and broadcast channels through Realtime for the fast path. No supabase-js: two fetch
    calls and realtime.mjs are all it needs.
 
-   An error the server raised (a taken name, a wrong PIN) has `server: true` and is never retried; a network failure
-   or a 5xx is, by the session, with the same event id. */
+   An error the server raised (a taken name, a wrong PIN) has `server: true` and is not retried at once; a network
+   failure, a 5xx, a 404 (PostgREST reloading its function list), a 408 or a 429 is, by the session, with the same
+   event id. */
 
 import { createRealtime } from './realtime.mjs';
 
 const isJwt = k => typeof k === 'string' && k.split('.').length === 3;
+const RETRYABLE = new Set([404, 408, 425, 429]);
+/* pup_login answers a wrong PIN with {error} (so the failure it records survives): a refusal like any other */
+const refusal = r => { if (r && typeof r.error === 'string') throw Object.assign(new Error(r.error), { server: true }); return r; };
 
 export function supabaseTransport({ url, key, fetch = globalThis.fetch?.bind(globalThis), WebSocket = globalThis.WebSocket, timers, realtime = true, heartbeatMs } = {}) {
   if (!url || !key) throw new Error('supabaseTransport needs the project URL and its anon key');
@@ -23,7 +27,7 @@ export function supabaseTransport({ url, key, fetch = globalThis.fetch?.bind(glo
     try { data = text ? JSON.parse(text) : null; } catch { data = null; }
     if (!res.ok) {
       const msg = (data && (data.message || data.error_description || data.error)) || `${fn} failed (${res.status})`;
-      throw Object.assign(new Error(msg), { server: res.status < 500, status: res.status, code: data?.code });
+      throw Object.assign(new Error(msg), { server: !RETRYABLE.has(res.status) && res.status < 500, status: res.status, code: data?.code });
     }
     return data;
   }
@@ -38,7 +42,7 @@ export function supabaseTransport({ url, key, fetch = globalThis.fetch?.bind(glo
   return {
     name: 'supabase',
     register: (name, pin, look) => rpc('pup_register', { p_name: name, p_pin: pin, p_look: look || {} }),
-    login: (name, pin) => rpc('pup_login', { p_name: name, p_pin: pin }),
+    login: async (name, pin) => refusal(await rpc('pup_login', { p_name: name, p_pin: pin })),
     touch: (me, look) => rpc('pup_touch', { p_token: me.token, p_look: look ?? null }),
     roster: me => rpc('pup_roster', { p_token: me.token }),
     challenge: (me, opp, setup) => rpc('pup_challenge', { p_token: me.token, p_opponent: opp, p_setup: setup }),

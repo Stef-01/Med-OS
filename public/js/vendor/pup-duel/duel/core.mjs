@@ -18,6 +18,18 @@ export const PHASES = ['invited', 'live', 'done', 'declined', 'cancelled'];
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
+/* the bytes Postgres counts for a jsonb value (octet_length(v::text)): JSON with a space after every ':' and ',',
+   so a size limit means the same thing in the browser, in server-core.mjs and in the migration */
+export function jsonbBytes(v) {
+  let seps = 0;
+  const walk = x => {
+    if (Array.isArray(x)) { seps += Math.max(0, x.length - 1); x.forEach(walk); }
+    else if (x && typeof x === 'object') { const k = Object.keys(x).filter(key => x[key] !== undefined); seps += k.length + Math.max(0, k.length - 1); k.forEach(key => walk(x[key])); }
+  };
+  walk(v ?? {});
+  return new TextEncoder().encode(JSON.stringify(v ?? {})).length + seps;
+}
+
 /* ---- setting a duel up ---- */
 
 /* the challenger's phone deals the questions (seeded, so a test can pin a deal) and shuffles each one's options;
@@ -48,7 +60,7 @@ export function setupError(s) {
     if (!Array.isArray(q.options) || q.options.length < 2 || q.options.length > 6) return '2 to 6 options a question';
     if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer >= q.options.length) return 'an answer out of range';
   }
-  if (new TextEncoder().encode(JSON.stringify(s)).length > RULES.maxSetupBytes) return 'the setup is too big';
+  if (jsonbBytes(s) > RULES.maxSetupBytes) return 'the setup is too big';
   return '';
 }
 
@@ -67,12 +79,26 @@ export function evId(duel, kind, { round, who, nonce } = {}) {
   }
 }
 
+/* the id a move must have, given who makes it: the server refuses any other, so nobody can take a move's id before
+   its owner does (an emote's id has a free tail: { prefix }) */
+export function idFor(duel, kind, body, by) {
+  const b = body || {};
+  switch (kind) {
+    case 'answer': return { id: `${duel}/a/${b.round ?? ''}/${by}` };
+    case 'timeout': return { id: `${duel}/t/${b.round ?? ''}/${b.for ?? ''}` };
+    case 'accept': case 'decline': return { id: `${duel}/${kind}` };
+    case 'leave': case 'final': case 'rematch': return { id: `${duel}/${kind}/${by}` };
+    case 'emote': return { prefix: `${duel}/e/${by}/` };
+    default: return { id: null };
+  }
+}
+
 /* Kahoot's points, halved for a slow answer: 500 to 1000 for a right one, +100 a right answer in a row before it
-   (at most +300); 0 for wrong or none */
+   (at most +300); 0 for wrong or none. Integer arithmetic (half rounds up), so Postgres gets the same number */
 export function points(ok, ms, secs, run = 0) {
   if (!ok) return 0;
-  const t = clamp(ms / (secs * 1000), 0, 1);
-  return 500 + Math.round(500 * (1 - t)) + 100 * clamp(run, 0, 3);
+  const T = secs * 1000, m = clamp(Math.round(ms), 0, T);
+  return 500 + Math.floor((1000 * (T - m) + T) / (2 * T)) + 100 * clamp(run, 0, 3);
 }
 
 export const other = (st, p) => (p === st.a ? st.b : st.a);
@@ -80,7 +106,7 @@ export const other = (st, p) => (p === st.a ? st.b : st.a);
 function fresh(duel) {
   const { id, a, b, setup } = duel, zero = () => ({ [a]: 0, [b]: 0 });
   return {
-    id, a, b, setup, phase: 'invited', round: 0, last: 0,
+    id, a, b, setup, phase: 'invited', round: 0, last: 0, liveN: 0,
     rounds: (setup?.questions || []).map(() => ({ answers: {}, closed: false, closedN: 0 })),
     score: zero(), right: zero(), time: zero(), run: zero(), idle: zero(),
     winner: null, reason: '', emotes: [], finals: [], rematch: null
@@ -116,7 +142,7 @@ export function reduce(duel, rows) {
     const by = row.by, body = row.body || {};
     if (!players.includes(by)) continue;
     switch (row.kind) {
-      case 'accept': if (st.phase === 'invited' && by === st.b) st.phase = 'live'; break;
+      case 'accept': if (st.phase === 'invited' && by === st.b) { st.phase = 'live'; st.liveN = row.n; } break;
       case 'decline': if (st.phase === 'invited' && by === st.b) st.phase = 'declined'; break;
       case 'leave':
         if (st.phase === 'invited') st.phase = by === st.a ? 'cancelled' : 'declined';
@@ -127,7 +153,7 @@ export function reduce(duel, rows) {
         const R = st.rounds[st.round], q = st.setup.questions[st.round];
         if (R.answers[by]) break;
         const choice = Number.isInteger(body.choice) && body.choice >= 0 && body.choice < q.options.length ? body.choice : null;
-        const ms = clamp(Math.round(Number(body.ms) || 0), 0, secs * 1000), ok = choice === q.answer;
+        const ms = typeof body.ms === 'number' && !Number.isNaN(body.ms) ? clamp(Math.round(body.ms), 0, secs * 1000) : 0, ok = choice === q.answer;
         const pts = points(ok, ms, secs, st.run[by]);
         st.score[by] += pts; st.run[by] = ok ? st.run[by] + 1 : 0; st.idle[by] = 0;
         if (ok) { st.right[by]++; st.time[by] += ms; }
@@ -165,12 +191,15 @@ export const summary = st => ({ score: st.score, right: st.right, winner: st.win
 export const newClock = () => ({ liveAt: null, openAt: {}, closedAt: {} });
 
 /* note what this phone has just seen: the duel going live opens round 0 after a short countdown; a round closing
-   opens the next after the reveal */
-export function stepClock(clock, st, now, rules = RULES) {
+   opens the next after the reveal. Normally "when" is now, the moment this phone learned it. `past(n)`, given on a
+   reload, says when row n happened on this phone's clock (from the server's timestamp), so a phone that comes back
+   mid-round sees the time its opponent sees, not a fresh clock (never later than now, never more than 10 min back) */
+export function stepClock(clock, st, now, rules = RULES, past = null) {
   const c = { liveAt: clock.liveAt, openAt: { ...clock.openAt }, closedAt: { ...clock.closedAt } };
-  if (c.liveAt === null && (st.phase === 'live' || (st.phase === 'done' && st.rounds.some(r => r.closed)))) { c.liveAt = now; c.openAt[0] = now + rules.readyMs; }
+  const when = n => { const t = past ? past(n) : undefined; return typeof t === 'number' && Number.isFinite(t) ? clamp(t, now - 600000, now) : now; };
+  if (c.liveAt === null && (st.phase === 'live' || (st.phase === 'done' && st.rounds.some(r => r.closed)))) { const t = when(st.liveN); c.liveAt = t; c.openAt[0] = t + rules.readyMs; }
   st.rounds.forEach((R, i) => {
-    if (R.closed && c.closedAt[i] === undefined) { c.closedAt[i] = now; if (i + 1 < st.rounds.length) c.openAt[i + 1] = Math.max(now + rules.revealMs, c.openAt[i] ?? 0); }
+    if (R.closed && c.closedAt[i] === undefined) { const t = when(R.closedN); c.closedAt[i] = t; if (i + 1 < st.rounds.length) c.openAt[i + 1] = Math.max(t + rules.revealMs, c.openAt[i] ?? 0); }
   });
   return c;
 }

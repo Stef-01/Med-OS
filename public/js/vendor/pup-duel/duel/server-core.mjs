@@ -7,7 +7,7 @@
    it in localStorage. */
 
 import { normName, nameKey } from './accounts.mjs';
-import { KINDS } from './core.mjs';
+import { KINDS, idFor, jsonbBytes, reduce, summary } from './core.mjs';
 
 export const ERR = {
   name: 'Pick a name of 2 to 20 letters or numbers', pin: 'The PIN is 4 digits', look: 'That look is too big',
@@ -15,27 +15,35 @@ export const ERR = {
   nobody: 'No such player', noQs: 'A duel needs questions', nQs: 'A duel has 1 to 15 questions',
   rounds: 'Rounds must match the questions', secs: 'A question lasts 5 to 120 seconds', big: 'That duel is too big',
   q: 'A question needs 2 to 6 options and its answer', notYours: 'Not your duel', kind: 'Unknown move',
-  id: 'Bad move id', moveBig: 'That move is too big'
+  id: 'Bad move id', moveBig: 'That move is too big', tries: 'Too many wrong PINs: try again in 10 minutes'
 };
-export const LIMITS = { look: 2048, setup: 65536, body: 4096, id: 200, page: 200, finished: 20, minQ: 1, maxQ: 15, minSecs: 5, maxSecs: 120 };
+export const LIMITS = { look: 2048, setup: 65536, body: 4096, id: 200, page: 200, finished: 20, minQ: 1, maxQ: 15, minSecs: 5, maxSecs: 120, fails: 5, failMinutes: 10 };
 const SQL_NAME = /^[A-Za-z0-9 ._-]{2,20}$/;
 
 export class DuelError extends Error {}
 const fail = m => { throw new DuelError(m); };
-const bytes = v => new TextEncoder().encode(JSON.stringify(v ?? {})).length;
+const bytes = jsonbBytes;
 const uuid = () => globalThis.crypto.randomUUID();
 const hex = buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
 
 /* bcrypt in Postgres; salted SHA-256 here (local play only: the hash never leaves the device) */
 export const sha256 = async text => hex(await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
 
-export const emptyDb = () => ({ players: {}, duels: {}, events: [], n: 0 });
+export const emptyDb = () => ({ players: {}, duels: {}, events: [], n: 0, fails: [] });
+
+/* the duel as the log says it stands: the same fold the phones run (core.reduce), as pup_outcome() in Postgres.
+   The server keeps the status and the record from this, never from what a phone claims */
+export function outcomeOf(duel, events) {
+  const st = reduce(duel, events.filter(e => e.duel === duel.id));
+  return { phase: st.phase, ...summary(st) };
+}
 
 const profile = p => ({ id: p.id, name: p.name, look: p.look, wins: p.wins, losses: p.losses, draws: p.draws, seen_at: p.seen_at });
 const duelRow = d => ({ id: d.id, a: d.a, b: d.b, status: d.status, setup: d.setup, result: d.result, created_at: d.created_at, updated_at: d.updated_at });
 
 /* the server: every method is the SQL function of the same name (pup_<name>) */
-export function createServer({ db = emptyDb(), now = () => new Date().toISOString(), sleep = () => Promise.resolve(), digest = sha256 } = {}) {
+export function createServer({ db = emptyDb(), now = () => new Date().toISOString(), digest = sha256 } = {}) {
+  db.fails ||= [];
   const hashPin = async (pin, salt = hex(globalThis.crypto.getRandomValues(new Uint8Array(8)).buffer)) => `${salt}$${await digest(`${salt}:${pin}`)}`;
   const pinOk = async (pin, stored) => (await hashPin(pin, stored.split('$')[0])) === stored;
   const me = token => Object.values(db.players).find(p => p.token === token) || fail(ERR.token);
@@ -52,9 +60,13 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
       db.players[p.id] = p;
       return { ...profile(p), token: p.token };
     },
+    /* five wrong PINs for a name in 10 minutes and that name waits (a 4-digit PIN is guessed in minutes otherwise) */
     async login(name, pin) {
-      const p = Object.values(db.players).find(x => x.name_key === nameKey(name));
-      if (!p || !(await pinOk(String(pin ?? ''), p.pin_hash))) { await sleep(400); fail(ERR.login); }
+      const key = nameKey(name), since = Date.parse(now()) - LIMITS.failMinutes * 60000;
+      db.fails = db.fails.filter(f => Date.parse(f.at) > since);
+      if (db.fails.filter(f => f.name_key === key).length >= LIMITS.fails) fail(ERR.tries);
+      const p = Object.values(db.players).find(x => x.name_key === key);
+      if (!p || !(await pinOk(String(pin ?? ''), p.pin_hash))) { db.fails.push({ name_key: key, at: now() }); fail(ERR.login); }
       seen(p);
       return { ...profile(p), token: p.token };
     },
@@ -94,20 +106,23 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
       const p = me(token), d = db.duels[duel];
       if (!d || (p.id !== d.a && p.id !== d.b)) fail(ERR.notYours);
       if (!KINDS.includes(kind)) fail(ERR.kind);
-      if (typeof id !== 'string' || !id || id.length > LIMITS.id || !id.startsWith(`${duel}/`)) fail(ERR.id);
+      /* a move's id is the one its kind, round and maker give it (core.idFor): nobody can take another's id first */
+      const want = idFor(duel, kind, body, p.id);
+      if (typeof id !== 'string' || !id || id.length > LIMITS.id || (want.id ? id !== want.id : !id.startsWith(want.prefix))) fail(ERR.id);
       if (bytes(body) > LIMITS.body) fail(ERR.moveBig);
       const old = db.events.find(e => e.id === id);
       if (old) return { ...old };
       const t = now(), e = { n: ++db.n, id, duel, by: p.id, kind, body: body || {}, at: t };
       db.events.push(e);
-      if (kind === 'accept' && d.status === 'invited' && p.id === d.b) d.status = 'live';
-      else if (kind === 'decline' && d.status === 'invited' && p.id === d.b) d.status = 'declined';
-      else if (kind === 'leave' && d.status === 'invited') d.status = p.id === d.a ? 'cancelled' : 'declined';
-      else if (kind === 'final' && d.status === 'live') {
-        d.status = 'done'; d.result = body || {};
-        const w = body?.winner || null;
-        if (w === null) { db.players[d.a].draws++; db.players[d.b].draws++; }
-        else if (w === d.a || w === d.b) { db.players[w].wins++; db.players[w === d.a ? d.b : d.a].losses++; }
+      /* the status and the record follow the log, once, whatever any phone says */
+      const o = outcomeOf(d, db.events);
+      if (o.phase !== d.status && !(d.status === 'done' || d.status === 'declined' || d.status === 'cancelled')) {
+        d.status = o.phase;
+        if (o.phase === 'done') {
+          d.result = o;
+          if (o.winner === null) { db.players[d.a].draws++; db.players[d.b].draws++; }
+          else { db.players[o.winner].wins++; db.players[o.winner === d.a ? d.b : d.a].losses++; }
+        }
       }
       d.updated_at = t; seen(p);
       return { ...e };
