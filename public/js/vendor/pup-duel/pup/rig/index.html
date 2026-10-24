@@ -954,6 +954,19 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
     var k = Math.max(0, c.head.r - 26);
     return { y: Math.round(k * 17) / 100, s: Math.round(1000 - k * 5.5) / 1000 };
   }
+  /* A worn hat rides the head on a soft spring: it lifts a touch as a hop leaves the ground and settles back, so it
+     sits on the head instead of being painted on it (secondary motion; glasses get a quarter of it). The spring (hatS)
+     is damped to settle in one bob, and what is drawn (hatY, + down) saturates softly and one-sidedly: a hat lifts off
+     a head (up to 2.6) but presses into it only a hair of fur (0.5), so a hard hop never sinks it or slams it into a
+     wall (the ±5 clamp this replaced swung end to end in 64 ms on a hyped hop). Pure: scripts/mascot.test.js runs it. */
+  function hatSpring(s, headY, dt) {
+    var kk = Math.min(dt, 48) / 16, vy = s.pHY == null ? 0 : (headY - s.pHY) / kk, ay = vy - (s.pVY || 0);
+    s.pHY = headY; s.pVY = vy;
+    s.hatV = (s.hatV || 0) + (-0.22 * (s.hatS || 0) - 0.6 * (s.hatV || 0) - 0.4 * ay) * kk;
+    s.hatS = Math.max(-12, Math.min(12, (s.hatS || 0) + s.hatV * kk));
+    s.hatY = s.hatS > 0 ? 0.5 * Math.tanh(s.hatS / 0.5) : 2.6 * Math.tanh(s.hatS / 2.6);
+    return s;
+  }
   function scl(k, x, y) { return k === 1 ? '' : 'translate(' + x + ' ' + y + ') scale(' + k + ') translate(' + (-x) + ' ' + (-y) + ')'; }
   function dogMarkup(c, P) {
     var p = c.pal, s = c.scale, m = c.mirror ? -1 : 1;
@@ -1311,14 +1324,8 @@ html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
       var shiftLate = E.act.shift ? flow(ago(t, 120), E.act.shift) : 0;
       var tilt = ch('tilt') + 1.8 * wave(t, 3600, 0.3) - 0.35 * shiftLate + 8 * ch('wobble') * wave(t, 450) + dance * 8 * wave(t, 900);
       set(e.head, 'transform', tr(hipX * 0.7 + shake * 1.1 * wave(t, 60, 0.3), headY) + ' ' + rot(tilt, 0, g.hb - 10));
-      // A worn hat rides the head on a soft spring: it lifts a touch as a hop lands and settles back, so it sits on the
-      // head instead of being painted on it (secondary motion; glasses get a quarter of it)
-      if (e.wearHead && e.wearHead.firstChild) {
-        var kk = Math.min(dt, 48) / 16, vy = rig.pHY == null ? 0 : (headY - rig.pHY) / kk, ay = vy - (rig.pVY || 0);
-        rig.pHY = headY; rig.pVY = vy;
-        rig.hatV = (rig.hatV || 0) + (-0.2 * (rig.hatY || 0) - 0.3 * (rig.hatV || 0) - 0.7 * ay) * kk;
-        rig.hatY = clamp((rig.hatY || 0) + rig.hatV * kk, -5, 5);
-      } else rig.hatY = 0;
+      // a worn hat rides the head on a soft spring (hatSpring); with nothing on, it rests
+      if (e.wearHead && e.wearHead.firstChild) hatSpring(rig, headY, dt); else { rig.hatY = rig.hatS = rig.hatV = 0; rig.pHY = null; rig.pVY = 0; }   // a hat put on later starts at rest
       set(e.collar, 'transform', tr(hipX * 0.75, headY * 0.85 - 0.15 * hop.lift));
       set(e.tag, 'transform', rot(-0.3 * w1 + 3 * wave(t - 120, 1440) + 40 * (hopEars.sy - hop.sy), -4, g.hb + 4));
 
