@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Wagging Doberman</title>
+<!-- embedded (a host's mascot frame), the page is marked before its first paint: see html.embed below -->
+<script>if (/[?&]embed=1(&|$)/.test(location.search)) document.documentElement.classList.add('embed');</script>
 <!-- Duke, Rosie and Pip: docs/doberman/README.md. Self-contained (inline CSS and JS, no network), so it runs under
      this site's CSP as is; the same file, minus this document wrapper, is the claude.ai artifact. -->
 <style>
@@ -179,6 +181,9 @@ button { font: inherit; color: inherit; }
 /* Embed mode (?embed=1&dog=pip): the Learn mascot (public/js/study-kit/mascot.mjs). One dog, no chrome, a clear
    background; the parent drives it with postMessage {dob: 'expr' | 'tap' | 'treat', id}. */
 html.embed, html.embed body { background: transparent; height: 100%; overflow: hidden; padding: 0; }
+/* every host frame is color-scheme: light; a document whose scheme differs from its frame's gets an opaque canvas,
+   so under a dark system theme this page (dark there) drew a black box round the dog: embedded, it is always light */
+html.embed { color-scheme: light !important; }
 html.embed .wrap { padding: 0; max-width: none; height: 100%; }
 html.embed header, html.embed .dock, html.embed .try { display: none; }
 html.embed .stage { background: transparent; border-radius: 0; aspect-ratio: auto; height: 100%; }
