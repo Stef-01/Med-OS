@@ -66,13 +66,15 @@
 .pd-field input, .pd-field select { width: 100%; min-height: 50px; padding: 0 14px; border: 2px solid var(--pd-line2); border-radius: 12px; background: var(--pd-card2); font-size: 17px; font-weight: 600; outline: 0; }
 .pd-field input:focus, .pd-field select:focus { border-color: var(--pd-pri); }
 .pd-field input[name="pin"] { letter-spacing: .6em; font-variant-numeric: tabular-nums; }
-.pd-dogs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.pd-dogpick { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; padding: 10px 6px 12px; border: 2px solid var(--pd-line); border-bottom-width: var(--pd-edge); border-radius: 14px; background: var(--pd-card2); cursor: pointer; }
-.pd-dogpick img { width: 100%; max-width: 72px; aspect-ratio: 1; }
-.pd-dogpick b { font-size: 14px; font-weight: 800; }
-.pd-dogpick small { font-size: 11px; line-height: 1.25; color: var(--pd-mute); text-align: center; }
+/* every dog in the registry (src/pup/rig/breeds.mjs): as many columns as fit, three on a 320 px phone */
+.pd-dogs { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); grid-auto-rows: 1fr; gap: 8px; }   /* every tile one size, a two-line breed or not */
+.pd-dogpick { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; padding: 8px 4px 10px; border: 2px solid var(--pd-line); border-bottom-width: var(--pd-edge); border-radius: 14px; background: var(--pd-card2); cursor: pointer; }
+.pd-dogpick img { width: 100%; max-width: 64px; aspect-ratio: 1; }
+.pd-dogpick b { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 800; }
+.pd-dogpick small { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-width: 100%; overflow: hidden; font-size: 11px; line-height: 1.2; color: var(--pd-mute); text-align: center; }   /* a long breed takes two lines */
 .pd-dogpick[aria-checked="true"] { border-color: var(--pd-pri); background: var(--pd-pri-soft); }
 .pd-dogs-sm .pd-dogpick { padding: 6px 4px 8px; }
+.pd-dogs-sm { grid-template-columns: repeat(auto-fill, minmax(68px, 1fr)); }
 .pd-dogs-sm .pd-dogpick img { max-width: 52px; }
 
 /* rows: mates, duels, practice, the past */

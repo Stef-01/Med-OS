@@ -14,7 +14,7 @@ import { RULES, EMOTES, makeSetup, outcome } from '../duel/core.mjs';
 import { createSession } from '../duel/session.mjs';
 import { createLobby } from '../duel/lobby.mjs';
 import { practiceWorld, BOT } from '../duel/bot.mjs';
-import { nameError, pinError, normName, DOGS, dogName, SLOTS } from '../duel/accounts.mjs';
+import { nameError, pinError, normName, DOGS, DEFAULT_DOG, dogName, SLOTS } from '../duel/accounts.mjs';
 import { topicsOf } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
@@ -22,7 +22,7 @@ import { ITEMS, wearMsg, SLOT_NAME, VB } from '../pup/wardrobe.mjs';
 
 const BASE = new URL('../', import.meta.url);
 export const RIG = new URL('pup/rig/index.html', BASE).href;
-export const ICON = dog => new URL(`pup/rig/icons/${DOGS.some(d => d.id === dog) ? dog : 'pip'}.png`, BASE).href;
+export const ICON = dog => new URL(`pup/rig/icons/${DOGS.some(d => d.id === dog) ? dog : DEFAULT_DOG}.png`, BASE).href;
 const CSS = new URL('ui/duel.css', BASE).href;
 const LETTERS = 'ABCDEF';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -48,7 +48,7 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
   const box = document.createElement('div');
   box.className = 'pd-dog' + (mirror ? ' pd-mirror' : '');
   const f = document.createElement('iframe');
-  f.src = `${RIG}?embed=1&dog=${encodeURIComponent(look?.dog || 'pip')}&expr=happy`;
+  f.src = `${RIG}?embed=1&dog=${encodeURIComponent(look?.dog || DEFAULT_DOG)}&expr=happy`;
   f.title = label; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1; f.loading = 'lazy';
   box.append(f);
   let ready = false, wantExpr = null;
@@ -78,7 +78,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.innerHTML = `
       <header class="pd-top"><button class="pd-x" type="button" data-pd="close" aria-label="Close the duel"></button><h1 class="pd-h1">${esc(title)}</h1><span></span></header>
       <main class="pd-main pd-auth">
-        <div class="pd-hero"><img src="${ICON(draft.dog || 'pip')}" alt=""><div><h2>Duel your mates</h2><p>Same questions, same clock. Right and fast wins.</p></div></div>
+        <div class="pd-hero"><img src="${ICON(draft.dog || DEFAULT_DOG)}" alt=""><div><h2>Duel your mates</h2><p>Same questions, same clock. Right and fast wins.</p></div></div>
         ${step === 'name' ? `
         <form class="pd-card pd-form" data-pd="signin" novalidate>
           <label class="pd-field"><span>Your name</span><input name="name" autocomplete="username" autocapitalize="words" maxlength="20" required value="${esc(draft.name || '')}"></label>
@@ -90,7 +90,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         </form>` : `
         <form class="pd-card pd-form" data-pd="create">
           <h2 class="pd-h2">Pick your dog</h2>
-          <div class="pd-dogs" role="radiogroup" aria-label="Your dog">${DOGS.map(d => `<button type="button" role="radio" class="pd-dogpick" data-dog="${d.id}" aria-checked="${d.id === (draft.dog || 'pip')}"><img src="${ICON(d.id)}" alt=""><b>${esc(d.name)}</b><small>${esc(d.hint)}</small></button>`).join('')}</div>
+          <div class="pd-dogs" role="radiogroup" aria-label="Your dog">${DOGS.map(d => `<button type="button" role="radio" class="pd-dogpick" data-dog="${d.id}" aria-checked="${d.id === (draft.dog || DEFAULT_DOG)}" title="${esc(d.hint)}"><img src="${ICON(d.id)}" alt=""><b>${esc(d.name)}</b><small>${esc(d.breedShort)}</small></button>`).join('')}</div>
           <p class="pd-err" role="alert">${esc(S.err)}</p>
           <button class="pd-btn pd-pri" type="submit">Create ${esc(normName(draft.name))}</button>
           <button class="pd-btn" type="button" data-pd="back">Back</button>
@@ -107,14 +107,14 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         if (S.err) return showAuth('name', { name, pin });
         await busy(async () => { const me = await transport.login(name, pin); signedIn(me); }, () => showAuth('name', { name, pin }));
       } else {
-        const dog = form.querySelector('[aria-checked="true"]')?.dataset.dog || 'pip';
+        const dog = form.querySelector('[aria-checked="true"]')?.dataset.dog || DEFAULT_DOG;
         await busy(async () => { const me = await transport.register(draft.name, draft.pin, { dog, wear: {} }); signedIn(me); }, () => showAuth('create', { ...draft, dog }));
       }
     });
     shell.querySelector('[data-pd="new"]')?.addEventListener('click', () => {
       const name = form.name.value, pin = form.pin.value, bad = nameError(name) || pinError(pin);
       S.err = bad;
-      showAuth(bad ? 'name' : 'create', { name, pin, dog: 'pip' });
+      showAuth(bad ? 'name' : 'create', { name, pin, dog: DEFAULT_DOG });
     });
     shell.querySelector('[data-pd="back"]')?.addEventListener('click', () => { S.err = ''; showAuth('name', draft); });
     shell.querySelectorAll('.pd-dogpick').forEach(b => b.addEventListener('click', () => {
@@ -133,9 +133,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
 
   /* ---- the lobby ---- */
   function myLook() {
-    const base = S.lv?.self?.look || S.me?.look || { dog: 'pip', wear: {} };
+    const base = S.lv?.self?.look || S.me?.look || { dog: DEFAULT_DOG, wear: {} };
     if (hostLook) { const h = hostLook(); if (h) return h; }
-    return fitLook({ dog: base.dog || 'pip', wear: base.wear || {} }, lockerFor(ITEMS, S.lv?.self?.wins || 0).open);
+    return fitLook({ dog: base.dog || DEFAULT_DOG, wear: base.wear || {} }, lockerFor(ITEMS, S.lv?.self?.wins || 0).open);
   }
   function showLobby() {
     stopAll(); S.screen = 'lobby';
@@ -259,7 +259,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const piece = it => `<button type="button" class="pd-piece" data-id="${it.id}" data-slot="${it.slot}" data-r="${it.rarity}" aria-pressed="${cur.wear[it.slot] === it.id}" ${locker.open.has(it.id) ? '' : 'disabled'} title="${esc(it.name)}"><svg viewBox="${it.tile || it.vb || VB[it.slot]}" aria-hidden="true">${it.svg}</svg><span>${esc(it.name)}</span></button>`;
     sheet(`
       <h2 class="pd-h2">Dress up</h2>
-      <div class="pd-dogs pd-dogs-sm" role="radiogroup" aria-label="Your dog">${DOGS.map(d => `<button type="button" role="radio" class="pd-dogpick" data-dog="${d.id}" aria-checked="${d.id === cur.dog}"><img src="${ICON(d.id)}" alt=""><b>${esc(d.name)}</b></button>`).join('')}</div>
+      <div class="pd-dogs pd-dogs-sm" role="radiogroup" aria-label="Your dog">${DOGS.map(d => `<button type="button" role="radio" class="pd-dogpick" data-dog="${d.id}" aria-checked="${d.id === cur.dog}" title="${esc(d.breedName)}: ${esc(d.hint)}"><img src="${ICON(d.id)}" alt=""><b>${esc(d.name)}</b></button>`).join('')}</div>
       <p class="pd-sub">${locker.open.size} of ${locker.total} pieces open · every win opens two more</p>
       ${SLOTS.map(s => `<p class="pd-sub">${esc(SLOT_NAME[s])}</p><div class="pd-pieces">${unlockedFirst(s, locker).map(piece).join('')}</div>`).join('')}
       <button class="pd-btn pd-pri" type="button" data-pd="save">Save</button>

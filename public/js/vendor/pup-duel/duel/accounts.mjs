@@ -5,14 +5,11 @@
 export const NAME_MIN = 2, NAME_MAX = 20;
 export const NAME_RE = /^[A-Za-z0-9 ._-]{2,20}$/;
 export const PIN_RE = /^[0-9]{4}$/;
-export const DOGS = [
-  { id: 'duke', name: 'Duke', hint: 'Steady and proud' },
-  { id: 'rosie', name: 'Rosie', hint: 'Warm and bashful' },
-  { id: 'pip', name: 'Pip', hint: 'Floppy-eared hype' },
-  { id: 'mochi', name: 'Mochi', hint: 'Orange Pomeranian' },
-  { id: 'biscuit', name: 'Biscuit', hint: 'Cream teddy Pomeranian' },
-  { id: 'pepper', name: 'Pepper', hint: 'Black-and-tan Pomeranian' }
-];
+/* the dogs come from the dog kit's registry (src/pup/rig/breeds.mjs, the same file as Optimus's): a new dog there is
+   a new choice here */
+import { ROSTER, DEFAULT_DOG } from '../pup/rig/breeds.mjs';
+export { DEFAULT_DOG };
+export const DOGS = ROSTER;
 export const SLOTS = ['head', 'face', 'neck', 'back'];
 
 /* trimmed, single spaces: "  Sam   Lee " is "Sam Lee". ASCII whitespace only, as the migration's regex sees it (a
@@ -34,6 +31,6 @@ export const pinError = s => (PIN_RE.test(String(s ?? '')) ? '' : 'The PIN is 4 
 export function normLook(l, known = () => true) {
   const o = l && typeof l === 'object' ? l : {}, wear = {};
   for (const s of SLOTS) { const v = o.wear?.[s]; if (typeof v === 'string' && v.length <= 40 && known(v)) wear[s] = v; }
-  return { dog: DOGS.some(d => d.id === o.dog) ? o.dog : 'pip', wear };
+  return { dog: DOGS.some(d => d.id === o.dog) ? o.dog : DEFAULT_DOG, wear };
 }
-export const dogName = id => (DOGS.find(d => d.id === id) || DOGS[2]).name;
+export const dogName = id => (DOGS.find(d => d.id === id) || DOGS.find(d => d.id === DEFAULT_DOG)).name;

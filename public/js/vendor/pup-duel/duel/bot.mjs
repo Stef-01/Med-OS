@@ -6,6 +6,7 @@
 import { createSession } from './session.mjs';
 import { memoryNet, realTimers } from './transport-memory.mjs';
 import { rng } from './rng.mjs';
+import { DEFAULT_DOG } from '../pup/rig/breeds.mjs';
 
 export const BOT = { name: 'Rex', look: { dog: 'duke', wear: { head: 'snapback', face: 'aviators' } }, skill: 0.7, early: 0.25, late: 0.75 };
 
@@ -47,7 +48,7 @@ export function createBot({ transport, me, timers = realTimers, seed = 7, skill 
 }
 
 /* you and the bot in a backend of your own: { transport, me, bot, stop } */
-export async function practiceWorld({ name = 'You', look = { dog: 'pip', wear: {} }, timers = realTimers, latency = 120, seed = 7, bot = BOT } = {}) {
+export async function practiceWorld({ name = 'You', look = { dog: DEFAULT_DOG, wear: {} }, timers = realTimers, latency = 120, seed = 7, bot = BOT } = {}) {
   const net = memoryNet({ latency, timers, seed });
   const meT = net.client('me'), botT = net.client('bot');
   const me = await meT.register(name.slice(0, 20).padEnd(2, '.'), '0000', look);
