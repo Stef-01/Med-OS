@@ -59,8 +59,13 @@ function duelRpc(req, res, fn) {
     catch (e) { res.writeHead(400, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ code: 'P0001', message: e.message })); }
   });
 }
+/* the headers vercel.json gives each path, the CSP above all, so the e2e sees what production allows (a later rule
+   overrides an earlier one for the same header, as on Vercel) */
+const VERCEL = JSON.parse(fs.readFileSync(path.join(ROOT, '..', 'vercel.json'), 'utf8')).headers.map(h => ({ re: new RegExp(`^${h.source}$`), headers: h.headers }));
+const prodHeaders = p => Object.fromEntries(VERCEL.filter(h => h.re.test(p)).flatMap(h => h.headers.map(x => [x.key, x.value])));
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://x');
+  for (const [k, v] of Object.entries(prodHeaders(url.pathname))) res.setHeader(k, v);
   if (url.pathname === '/sb/rest/v1/osce_state') return supabase(req, res, url);
   const rpc = /^\/sb\/rest\/v1\/rpc\/(pup_[a-z]+)$/.exec(url.pathname);
   if (rpc) return duelRpc(req, res, rpc[1]);
@@ -529,7 +534,10 @@ async function duel() {
   await c.click('.os-duel [data-sec="invites"] .pd-btn.pd-pri');
   for (let r = 0; r < 2; r++) {
     await Promise.all([a, c].map(pg => pg.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 12000 })));
-    if (r === 0) { await a.screenshot({ path: path.join(SHOTS, 'duel-question.png') }); ok(/AI-written/.test(await a.textContent('.os-duel .pd-qtag')), 'duel: the question carries the AI tag'); ok(/most likely diagnosis/.test(await a.textContent('.os-duel .pd-stem')), 'duel: the question is a station\'s differential'); }
+    if (r === 0) {
+      const dogs = await a.evaluate(() => [...document.querySelectorAll('.os-duel .pd-dog iframe')].map(f => { try { return !!f.contentWindow.__dob; } catch { return false; } }));
+      ok(dogs.length === 2 && dogs.every(Boolean), `duel: both dogs draw (the rig may be framed by its own site: ${dogs})`);
+      await a.screenshot({ path: path.join(SHOTS, 'duel-question.png') }); ok(/AI-written/.test(await a.textContent('.os-duel .pd-qtag')), 'duel: the question carries the AI tag'); ok(/most likely diagnosis/.test(await a.textContent('.os-duel .pd-stem')), 'duel: the question is a station\'s differential'); }
     await a.locator('.os-duel .pd-opt').nth(0).click();
     await timed(`round ${r + 1}: Sam's answer shows on Alex's phone`, () => c.waitForSelector('.os-duel .pd-theirs .pd-status >> text=Answered', { timeout: 6000 }));
     await c.locator('.os-duel .pd-opt').nth(1).click();
