@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* smoke.mjs - the whole two-person flow in Chromium, at 393 px (a phone), 320 px and 1280 px:
+/* smoke.mjs - the whole two-person flow in Chromium, at 393 px (a phone), 320 px and 1280 px (and Duel a Mate, two phones):
    names → first candidate → New Study Session → Add Random ×2 → Start Practice → skip reading → finish → tick items +
    global impression → AI marking (chat path: paste a reply) → Next Station shows the other partner → swap → End Session
    → results → Marked → a preview (the patient script runs history, exam findings, Part 2) → Settings → the candidate screen link opens and counts down.
@@ -14,6 +14,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { execFile } from 'node:child_process';
 import { requestsFrom } from '../../public/js/osce/requests.mjs';
+import { createServer as duelServer } from '../../public/js/vendor/pup-duel/duel/server-core.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'public');
 const SHOTS = process.argv[2] || fs.mkdtempSync(path.join(os.tmpdir(), 'osce-e2e-'));
@@ -43,9 +44,26 @@ function supabase(req, res, url) {
     res.writeHead(201); res.end();
   });
 }
+/* and for the duel's functions (supabase/migrations/0002_pup_duel.sql), the vendored package's own copy of their rules */
+const DUEL = duelServer();
+function duelRpc(req, res, fn) {
+  let body = '';
+  req.on('data', c => { body += c; });
+  req.on('end', async () => {
+    const a = JSON.parse(body || '{}'), call = {
+      pup_register: () => DUEL.register(a.p_name, a.p_pin, a.p_look ?? {}), pup_login: () => DUEL.login(a.p_name, a.p_pin), pup_touch: () => DUEL.touch(a.p_token, a.p_look ?? null),
+      pup_roster: () => DUEL.roster(a.p_token), pup_challenge: () => DUEL.challenge(a.p_token, a.p_opponent, a.p_setup), pup_inbox: () => DUEL.inbox(a.p_token),
+      pup_post: () => DUEL.post(a.p_token, a.p_duel, a.p_id, a.p_kind, a.p_body ?? {}), pup_log: () => DUEL.log(a.p_token, a.p_duel, a.p_after ?? 0)
+    }[fn];
+    try { const out = await call(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(out)); }
+    catch (e) { res.writeHead(400, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ code: 'P0001', message: e.message })); }
+  });
+}
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://x');
   if (url.pathname === '/sb/rest/v1/osce_state') return supabase(req, res, url);
+  const rpc = /^\/sb\/rest\/v1\/rpc\/(pup_[a-z]+)$/.exec(url.pathname);
+  if (rpc) return duelRpc(req, res, rpc[1]);
   const u = decodeURIComponent(url.pathname);
   let f = path.join(ROOT, u.endsWith('/') ? `${u}index.html` : u);
   if (!f.startsWith(ROOT) || !fs.existsSync(f)) { res.writeHead(404); return res.end(); }
@@ -478,7 +496,70 @@ async function sync() {
   await b.close();
 }
 
+/* Duel a Mate: two phones through the shared record (polling only: no realtime here), every move inside 5 s; then
+   practice against the bot on a phone with no shared record */
+async function duel() {
+  const b = await chromium.launch(), errs = [], lags = [];
+  const phone = async (width, height, cfg) => {
+    const ctx = await b.newContext({ viewport: { width, height }, deviceScaleFactor: 2 });
+    await ctx.route(/^https:\/\//, r => r.abort());
+    await ctx.route(/\/config\.js$/, r => r.fulfill({ contentType: 'text/javascript', body: `window.OSCE_CONFIG = ${JSON.stringify(cfg)};` }));
+    const pg = await ctx.newPage();
+    pg.on('pageerror', e => errs.push(e.message));
+    pg.on('console', m => { if (m.type() === 'error' && !/status of 400/.test(m.text())) errs.push(m.text()); });
+    await pg.goto(BASE, { waitUntil: 'networkidle' }); await pg.waitForSelector('.os[data-ready]');
+    return pg;
+  };
+  const timed = async (label, fn) => { const t = Date.now(); await fn(); const ms = Date.now() - t; lags.push(ms); ok(ms <= 5000, `duel: ${label} in ${ms} ms (at most 5 s)`); };
+  const shared = { supabaseUrl: `${BASE}sb`, supabaseAnonKey: 'anon', duelRealtime: false };
+  const a = await phone(320, 640, shared), c = await phone(393, 852, shared);
+  for (const [pg, name, pin, dog] of [[a, 'Sam', '1234', 'mochi'], [c, 'Alex', '4321', 'rosie']]) {
+    await pg.click('[data-os="duel"]');
+    await pg.waitForSelector('.os-duel[data-ready] form[data-pd="signin"]');
+    await pg.fill('.os-duel input[name="name"]', name); await pg.fill('.os-duel input[name="pin"]', pin);
+    await pg.click('.os-duel [data-pd="new"]'); await pg.click(`.os-duel .pd-dogpick[data-dog="${dog}"]`);
+    await pg.click('.os-duel form[data-pd="create"] button[type="submit"]');
+    await pg.waitForSelector('.os-duel .pd-lobby');
+  }
+  ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.os-duel *')].every(e => e.getBoundingClientRect().right <= innerWidth + 1)), 'duel: the lobby fits a 320 px phone');
+  await a.screenshot({ path: path.join(SHOTS, 'duel-lobby.png') });
+  await timed('a new mate reaches the lobby', () => a.waitForSelector('.os-duel .pd-mate b >> text=Alex', { timeout: 6000 }));
+  await a.click('.os-duel .pd-mate .pd-btn'); await a.click('.os-duel [data-rounds="5"]'); await a.click('.os-duel [data-secs="15"]'); await a.click('.os-duel [data-pd="send"]');
+  await timed('the challenge reaches the mate', () => c.waitForSelector('.os-duel [data-sec="invites"] .pd-duelrow', { timeout: 6000 }));
+  await c.click('.os-duel [data-sec="invites"] .pd-btn.pd-pri');
+  for (let r = 0; r < 2; r++) {
+    await Promise.all([a, c].map(pg => pg.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 12000 })));
+    if (r === 0) { await a.screenshot({ path: path.join(SHOTS, 'duel-question.png') }); ok(/AI-written/.test(await a.textContent('.os-duel .pd-qtag')), 'duel: the question carries the AI tag'); ok(/most likely diagnosis/.test(await a.textContent('.os-duel .pd-stem')), 'duel: the question is a station\'s differential'); }
+    await a.locator('.os-duel .pd-opt').nth(0).click();
+    await timed(`round ${r + 1}: Sam's answer shows on Alex's phone`, () => c.waitForSelector('.os-duel .pd-theirs .pd-status >> text=Answered', { timeout: 6000 }));
+    await c.locator('.os-duel .pd-opt').nth(1).click();
+    await timed(`round ${r + 1}: the reveal reaches Sam`, () => a.waitForSelector('.os-duel .pd-why:not([hidden])', { timeout: 6000 }));
+  }
+  await a.screenshot({ path: path.join(SHOTS, 'duel-reveal.png') });
+  await a.keyboard.press('Escape');
+  await a.waitForSelector('.os-duel .pd-sheet [data-pd="go"]');
+  ok(true, 'duel: Escape in a live duel asks before leaving');
+  await a.click('.os-duel .pd-sheet [data-pd="go"]');
+  await timed('leaving hands Alex the win', () => c.waitForSelector('.os-duel .pd-result[data-out="win"]', { timeout: 6000 }));
+  await c.screenshot({ path: path.join(SHOTS, 'duel-result.png') });
+  await a.waitForSelector('.os-duel .pd-result'); await a.click('.os-duel [data-pd="lobby"]'); await a.waitForSelector('.os-duel .pd-lobby');
+  await a.keyboard.press('Escape');
+  await a.waitForSelector('.os-duel', { state: 'hidden' });
+  ok(await a.locator('.os-start [data-os="duel"]').isVisible(), 'duel: Escape from the lobby closes it, back on the start view');
+  const solo = await phone(320, 640, {});
+  await solo.click('[data-os="duel"]'); await solo.waitForSelector('.os-duel [data-pd="practice"]');
+  await solo.click('.os-duel [data-pd="practice"]');
+  await solo.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 15000 });
+  await solo.locator('.os-duel .pd-opt').first().click();
+  await solo.waitForSelector('.os-duel .pd-why:not([hidden])', { timeout: 25000 });
+  ok(true, 'duel: practice against the bot needs no shared record');
+  ok(!errs.length, `duel: no page errors${errs.length ? `: ${errs.join(' | ')}` : ''}`);
+  console.log(`duel: slowest move ${Math.max(...lags)} ms`);
+  await b.close();
+}
+
 try {
+  await duel();
   await sync();
   await run(393, 852, 'phone');
   await run(320, 640, 'small');

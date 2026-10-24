@@ -1,0 +1,1960 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Wagging Doberman</title>
+<!-- Duke, Rosie and Pip: docs/doberman/README.md. Self-contained (inline CSS and JS, no network), so it runs under
+     this site's CSP as is; the same file, minus this document wrapper, is the claude.ai artifact. -->
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; font-size: 14px; }
+img { max-width: 100%; }
+</style>
+<style>
+/* Layout: the stage on top (one dog, zoomed in, to start), the bottom menu under it, then a short list of things to try. */
+:root {
+  --bg: #ffffff;
+  --fg: #23324a;
+  --muted: #67778f;
+  --line: #e5e5e5;
+  --card: #ffffff;
+  --panel: #f7fbfe;
+  --stage: #f5fbff;
+  --accent: #58cc02;
+  --accent-ink: #58a700;
+  --sel-bg: #ddf4ff;
+  --sel-line: #84d8ff;
+  --sel-fg: #1899d6;
+  --focus: #1cb0f6;
+
+  --display: "Baloo 2", ui-rounded, "Trebuchet MS", system-ui, sans-serif;
+  --body: "Nunito", ui-rounded, system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131f24;
+    --fg: #f1f7fb;
+    --muted: #94a8b4;
+    --line: #37464f;
+    --card: #131f24;
+    --panel: #16252c;
+    --stage: #e6f2f9;
+    --accent: #58cc02;
+    --accent-ink: #3f8f00;
+    --sel-bg: #18323f;
+    --sel-line: #3f85a7;
+    --sel-fg: #49c0f8;
+    --focus: #84d8ff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131f24;
+  --fg: #f1f7fb;
+  --muted: #94a8b4;
+  --line: #37464f;
+  --card: #131f24;
+  --panel: #16252c;
+  --stage: #e6f2f9;
+  --accent: #58cc02;
+  --accent-ink: #3f8f00;
+  --sel-bg: #18323f;
+  --sel-line: #3f85a7;
+  --sel-fg: #49c0f8;
+  --focus: #84d8ff;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  min-height: 100%;
+}
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 5.6vw, 2.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+.sub { margin: 6px 0 0; color: var(--muted); font-size: 0.98rem; line-height: 1.5; max-width: 62ch; }
+
+.stage {
+  background: var(--stage);
+  border-radius: 32px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  max-width: 100%;
+}
+.stage svg { display: block; width: 100%; height: 100%; touch-action: pan-y pinch-zoom; }
+.slot { cursor: pointer; outline: none; }
+.slot:focus-visible .disc { stroke: var(--focus); stroke-width: 6; }
+
+.dock {
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: 24px;
+  padding: 16px;
+  display: grid;
+  gap: 16px;
+}
+.dock-row { display: grid; gap: 8px; min-width: 0; }
+.label {
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.label b { color: var(--fg); }
+.dogs, .chips, .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+button { font: inherit; color: inherit; }
+.btn, .chip, .avatar {
+  font-family: var(--display);
+  font-weight: 700;
+  background: var(--card);
+  color: var(--fg);
+  border: 2px solid var(--line);
+  border-bottom-width: 4px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1), background-color 160ms, border-color 160ms;
+}
+.btn:active, .chip:active, .avatar:active { transform: translateY(2px); border-bottom-width: 2px; margin-top: 2px; }
+.btn:focus-visible, .chip:focus-visible, .avatar:focus-visible, .remove:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.btn { padding: 9px 16px 7px; font-size: 0.95rem; letter-spacing: 0.02em; }
+.btn.primary { background: var(--accent); border-color: var(--accent-ink); color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
+.btn[disabled] { opacity: 0.55; cursor: progress; }
+.chip { padding: 6px 13px 4px; font-size: 0.92rem; }
+.chip[aria-pressed="true"], .avatar.selected { background: var(--sel-bg); border-color: var(--sel-line); color: var(--sel-fg); }
+
+.avatar-wrap { position: relative; }
+.avatar { display: flex; align-items: center; gap: 9px; padding: 5px 14px 3px 5px; text-align: left; }
+.avatar svg { width: 46px; height: 46px; border-radius: 12px; display: block; flex: none; }
+.avatar .who { display: grid; line-height: 1.05; }
+.avatar .who span { font-family: var(--body); font-weight: 700; font-size: 0.74rem; color: var(--muted); }
+.avatar.out { border-style: dashed; }
+.avatar.out svg { opacity: 0.55; }
+.remove {
+  position: absolute; top: -7px; right: -7px;
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--line); background: var(--card); color: var(--muted);
+  font: 800 14px/1 var(--body); cursor: pointer; display: grid; place-items: center; padding: 0;
+}
+.status { font-size: 0.88rem; color: var(--muted); min-width: 0; }
+.export { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.export img { width: 200px; max-width: 100%; border-radius: 14px; border: 2px solid var(--line); display: block; }
+.export p { margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--muted); max-width: 40ch; }
+
+.try { margin: 0; padding: 0 0 0 1.1em; display: grid; gap: 4px; font-size: 0.9rem; line-height: 1.5; color: var(--muted); }
+.try b { color: var(--fg); }
+
+@media (max-width: 640px) {
+  .stage { aspect-ratio: 1 / 1; }
+  .dock { padding: 14px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn, .chip, .avatar { transition: none; }
+}
+</style>
+<style>
+/* Embed mode (?embed=1&dog=pip): the Learn mascot (public/js/study-kit/mascot.mjs). One dog, no chrome, a clear
+   background; the parent drives it with postMessage {dob: 'expr' | 'tap' | 'treat', id}. */
+html.embed, html.embed body { background: transparent; height: 100%; overflow: hidden; padding: 0; }
+html.embed .wrap { padding: 0; max-width: none; height: 100%; }
+html.embed header, html.embed .dock, html.embed .try { display: none; }
+html.embed .stage { background: transparent; border-radius: 0; aspect-ratio: auto; height: 100%; }
+html.embed .slot .disc, html.embed [data-p="floor"] { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Duke, Rosie and Pip</h1>
+    <p class="sub">Start with one doberman, add the others from the menu, give each an expression and save the scene as a GIF you can send.</p>
+  </header>
+
+  <div class="stage" id="stage">
+    <svg id="scene" viewBox="-284 -325 568 355" role="img" aria-label="Cartoon dobermans on a stage. Tap one to make it react, press and drag across it to pet it."></svg>
+  </div>
+
+  <nav class="dock" aria-label="Scene menu">
+    <div class="dock-row">
+      <span class="label">Dogs in the scene</span>
+      <div class="dogs" id="dogs"></div>
+    </div>
+    <div class="dock-row">
+      <span class="label" id="exprLabel">Expression</span>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="dock-row">
+      <span class="label">Play</span>
+      <div class="actions">
+        <button class="btn" id="treat" type="button">Throw a treat</button>
+        <button class="btn" id="call" type="button">Call them</button>
+        <button class="btn" id="toggle" type="button">Pause</button>
+        <button class="btn primary" id="gif" type="button">Save GIF</button>
+        <span class="status" id="status" role="status" aria-live="polite"></span>
+      </div>
+      <div class="export" id="export" hidden>
+        <img id="gifPreview" alt="The GIF you just made">
+        <div>
+          <p id="exportNote"></p>
+          <button class="btn" id="saveAgain" type="button" hidden>Save this GIF</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <ul class="try">
+    <li><b>Tap a dog</b> to set off its reaction for the expression it's wearing.</li>
+    <li><b>Press and drag across a dog</b> to pet it. Its eyes follow your pointer.</li>
+    <li><b>Throw a treat</b> to the selected dog, or <b>call them</b> and watch every ear go up, Pip's included.</li>
+  </ul>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---- engine (ported from the motion skill's motion.ts) ----
+  function bezier(x1, y1, x2, y2) {
+    var A = function (a, b) { return 1 - 3 * b + 3 * a; };
+    var B = function (a, b) { return 3 * b - 6 * a; };
+    var C = function (a) { return 3 * a; };
+    var calc = function (t, a, b) { return ((A(a, b) * t + B(a, b)) * t + C(a)) * t; };
+    var slope = function (t, a, b) { return 3 * A(a, b) * t * t + 2 * B(a, b) * t + C(a); };
+    return function (x) {
+      if (x <= 0) return 0;
+      if (x >= 1) return 1;
+      var t = x;
+      for (var i = 0; i < 6; i++) {
+        var s = slope(t, x1, x2);
+        if (s === 0) break;
+        t -= (calc(t, x1, x2) - x) / s;
+      }
+      return calc(t, y1, y2);
+    };
+  }
+  var EASE_IN_OUT = bezier(0.77, 0, 0.175, 1);   // things that travel
+  var EASE_OUT = bezier(0.23, 1, 0.32, 1);       // things that open or arrive
+  var EASE_IN = bezier(0.55, 0, 1, 0.45);        // things leaving
+
+  // Keyframes [ms, value, 'out'?]. Stops at every key: right for ONE move (a blink).
+  function track(t, keys) {
+    if (t <= keys[0][0]) return keys[0][1];
+    for (var i = 1; i < keys.length; i++) {
+      var k1 = keys[i];
+      if (t <= k1[0]) {
+        var k0 = keys[i - 1];
+        var span = k1[0] - k0[0];
+        var p = span > 0 ? (t - k0[0]) / span : 1;
+        var e = k1[2] === 'out' ? EASE_OUT(p) : EASE_IN_OUT(p);
+        return k0[1] + (k1[1] - k0[1]) * e;
+      }
+    }
+    return keys[keys.length - 1][1];
+  }
+
+  // A monotone cubic through key poses: continuous speed, no overshoot, no dead stops.
+  function flow(t, k) {
+    var n = k.length;
+    if (t <= k[0][0]) return k[0][1];
+    if (t >= k[n - 1][0]) return k[n - 1][1];
+    var i = 0;
+    while (k[i + 1][0] < t) i++;
+    function slope(j) { return (k[j + 1][1] - k[j][1]) / (k[j + 1][0] - k[j][0]); }
+    function tangent(j) {
+      if (j === 0 || j === n - 1) return 0;
+      var a = slope(j - 1), b = slope(j);
+      if (a * b <= 0) return 0;
+      var h0 = k[j][0] - k[j - 1][0], h1 = k[j + 1][0] - k[j][0];
+      var w0 = 2 * h1 + h0, w1 = h1 + 2 * h0;
+      return (w0 + w1) / (w0 / a + w1 / b);
+    }
+    var h = k[i + 1][0] - k[i][0];
+    var s = (t - k[i][0]) / h, s2 = s * s, s3 = s2 * s;
+    return (2 * s3 - 3 * s2 + 1) * k[i][1] +
+      (s3 - 2 * s2 + s) * h * tangent(i) +
+      (-2 * s3 + 3 * s2) * k[i + 1][1] +
+      (s3 - s2) * h * tangent(i + 1);
+  }
+
+  function wave(t, period, phase) { return Math.sin((t / period + (phase || 0)) * Math.PI * 2); }
+  function bell(p) { return Math.sin(Math.PI * Math.min(1, Math.max(0, p))); }
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function seeded(i, salt) {
+    var x = Math.sin(i * 12.9898 + (salt || 0) * 78.233) * 43758.5453;
+    return x - Math.floor(x);
+  }
+
+  var PERIOD = 7200;            // every loop period below divides it
+  // A delayed read that wraps the loop seam, so follow-through never jumps at t = 0.
+  function ago(t, ms) { return ((t - ms) % PERIOD + PERIOD) % PERIOD; }
+  var B = 2600;                 // a tap's one-shot
+  var TREAT = 2400;             // a treat, from throw to happy
+  var CALL = 1700;              // the "call them" perk-up
+  var SWITCH = 650;             // blend between two expressions
+  var MOVE = 900;               // a dog walking to its new spot
+  var GIF_FPS = 25;             // 4 cs per frame: 180 frames for one loop
+  var STILL = 1e12;             // a clock far past every one-shot: rigs that only pose (thumbnails, GIF frames)
+
+  // ---- six looks: one build; three dobermans and three Pomeranians (mane, bib, round ears, plume tail) ----
+  // Drawing units: head width = 100, head centred on (0, 0).
+  var DOGS = [
+    {
+      id: 'duke', name: 'Duke', expr: 'overjoyed', scale: 1.5, mirror: false,
+      pal: { coat: '#3a3352', sh: '#2a2440', tan: '#e5a259', tanSh: '#cf8a45', feature: '#8a80ad',
+             ink: '#241f36', nose: '#241f36', noseHi: '#4a4363', mouth: '#b03a3a', tongue: '#ff7a8c',
+             tongueSh: '#e45c70', collar: '#ff4b4b', tag: '#ffc800', tagSh: '#e5a800', disc: '#ffe3e4', floor: '#ffc4c8',
+             blush: '#ff8a8a' },
+      head: { h: 103, r: 22 }, muzzle: { w: 58, h: 44 }, eye: 1, pupil: 1, brow: { w: 12, h: 5.5, y: -53 },
+      ears: ['up', 'up'], foldable: false, body: { w: 108, h: 83 }, leg: 14, floorY: 80, tail: { len: [17, 15, 13], w: 12.5 },
+      wag: { slow: 14, fast: 28, amp: 34 }, hopH: 11, flopGain: 1, yaw0: 0.34, tongueSide: 0
+    },
+    {
+      id: 'rosie', name: 'Rosie', expr: 'bashful', scale: 1.58, mirror: false,
+      pal: { coat: '#8c4a2f', sh: '#713a24', tan: '#e8a15f', tanSh: '#d0894a', feature: '#562a19',
+             ink: '#2d1a14', nose: '#4a2416', noseHi: '#6e3a26', mouth: '#a8343a', tongue: '#ff7a8c',
+             tongueSh: '#e45c70', collar: '#1cb0f6', tag: '#ffc800', tagSh: '#e5a800', disc: '#ddf4ff', floor: '#bfe4f7',
+             blush: '#ff8a8a' },
+      head: { h: 110, r: 28 }, muzzle: { w: 56, h: 48 }, eye: 0.96, pupil: 1.06, brow: { w: 11, h: 5, y: -52.5 },
+      ears: ['flop', 'flop'], foldable: false, flop: { w: 22, h: 38 }, body: { w: 112, h: 86 }, leg: 14, floorY: 84,
+      tail: { len: [18, 16, 14], w: 12.5 }, wag: { slow: 12, fast: 24, amp: 24 }, hopH: 8, flopGain: 2.2, yaw0: -0.26, tongueSide: 0
+    },
+    {
+      // Pomeranians (founder 2026-10-23, from a reference sketch): a round head framed by a two-tone mane, small rounded
+      // ears with a pink inner, a cream bib from the cheeks down the chest, a plume tail. Three looks on one build.
+      id: 'mochi', name: 'Mochi', expr: 'excited', scale: 1.34, mirror: false,
+      pal: { coat: '#f2953f', sh: '#e2822e', tan: '#ffe7c7', tanSh: '#f6d0a0', feature: '#8a4a1a',
+             ink: '#2b1a0e', nose: '#2b1a0e', noseHi: '#5e3d24', mouth: '#b03a3a', tongue: '#ff7a8c',
+             tongueSh: '#e45c70', collar: '#2ec4a6', tag: '#ffc800', tagSh: '#e5a800', disc: '#fff0dc', floor: '#ffdcae',
+             blush: '#ff8a8a', mane: '#f7aa58', maneSh: '#e88a36', bib: '#ffe7c7', bibSh: '#f8d6a9', earIn: '#ffc4a0', tail: '#f7aa58' },
+      head: { h: 92, r: 42 }, muzzle: { w: 44, h: 34 }, eye: 1.1, pupil: 0.95, brow: { w: 9, h: 4.5, y: -52 },
+      ears: ['up', 'up'], earShape: 'round', earScale: 0.8, foldable: false, pom: { rx: 58, ry: 46, n: 14, sc: 16 },
+      body: { w: 98, h: 80 }, leg: 12, floorY: 70,
+      tail: { len: [13, 12, 10], w: 24 }, wag: { slow: 20, fast: 34, amp: 40 }, hopH: 13, flopGain: 1.5, yaw0: -0.3, tongueSide: 0
+    },
+    {
+      id: 'biscuit', name: 'Biscuit', expr: 'bashful', scale: 1.28, mirror: true,
+      pal: { coat: '#f7d9ae', sh: '#ecc68f', tan: '#fff8ee', tanSh: '#f2dcc0', feature: '#a86b3c',
+             ink: '#3a2414', nose: '#3a2414', noseHi: '#6b4a33', mouth: '#b03a3a', tongue: '#ff7a8c',
+             tongueSh: '#e45c70', collar: '#ff7eb6', tag: '#ffc800', tagSh: '#e5a800', disc: '#ffeef3', floor: '#ffd6e4',
+             blush: '#ff9aa8', mane: '#fde6c6', maneSh: '#efcc98', bib: '#fffaf2', bibSh: '#f6e6cf', earIn: '#f7c9ae', tail: '#fde6c6' },
+      head: { h: 90, r: 46 }, muzzle: { w: 42, h: 32 }, eye: 1.14, pupil: 1, brow: { w: 8.5, h: 4.2, y: -51 },
+      ears: ['up', 'up'], earShape: 'round', earScale: 0.64, foldable: false, pom: { rx: 52, ry: 42, n: 12, sc: 14 },
+      body: { w: 94, h: 78 }, leg: 12, floorY: 68,
+      tail: { len: [12, 11, 9], w: 22 }, wag: { slow: 22, fast: 36, amp: 44 }, hopH: 14, flopGain: 1.4, yaw0: 0.28, tongueSide: 1
+    },
+    {
+      id: 'pepper', name: 'Pepper', expr: 'proud', scale: 1.36, mirror: false,
+      pal: { coat: '#3b3442', sh: '#2f2936', tan: '#f2ab5c', tanSh: '#d98f43', feature: '#f2ab5c',
+             ink: '#16121b', nose: '#16121b', noseHi: '#4a4352', mouth: '#a8343a', tongue: '#ff7a8c',
+             tongueSh: '#e45c70', collar: '#ff4b4b', tag: '#ffc800', tagSh: '#e5a800', disc: '#ece6ff', floor: '#d6ccf5',
+             blush: '#ff8a8a', mane: '#5a5066', maneSh: '#2a2430', bib: '#f2c389', bibSh: '#e2a964', earIn: '#f2ab5c', tail: '#4b4354' },
+      head: { h: 94, r: 40 }, muzzle: { w: 46, h: 36 }, eye: 1.08, pupil: 0.95, brow: { w: 10, h: 5, y: -52.5 },
+      ears: ['up', 'up'], earShape: 'round', earScale: 0.84, foldable: false, pom: { rx: 62, ry: 48, n: 16, sc: 17 },
+      body: { w: 100, h: 82 }, leg: 12, floorY: 72,
+      tail: { len: [14, 12, 10], w: 25 }, wag: { slow: 18, fast: 32, amp: 38 }, hopH: 12, flopGain: 1.6, yaw0: -0.32, tongueSide: 0
+    },
+    {
+      id: 'pip', name: 'Pip', expr: 'goofy', scale: 1.25, mirror: true,
+      pal: { coat: '#5d6b8e', sh: '#4a5675', tan: '#ebaa6e', tanSh: '#d69157', feature: '#38415c',
+             ink: '#222a3d', nose: '#3c4560', noseHi: '#5d688a', mouth: '#b03a3a', tongue: '#ff7a8c',
+             tongueSh: '#e45c70', collar: '#ce82ff', tag: '#ffc800', tagSh: '#e5a800', disc: '#f3e6ff', floor: '#e2c9fb',
+             blush: '#ff9ab5' },
+      head: { h: 96, r: 30 }, muzzle: { w: 54, h: 40 }, eye: 1.12, pupil: 0.8, brow: { w: 9.5, h: 5, y: -52.5 },
+      ears: ['up', 'up'], foldable: true, body: { w: 96, h: 74 }, leg: 13, floorY: 72, tail: { len: [14, 13, 11], w: 11 },
+      wag: { slow: 18, fast: 32, amp: 42 }, hopH: 14, flopGain: 2.6, yaw0: 0.3, tongueSide: 1,
+      // Puppy ears that won't make up their minds: each tip folds down and flips back up on its own beat.
+      foldIdle: {
+        L: [[0, 0], [900, 0], [1250, 1], [2400, 1], [2750, 0], [4600, 0], [4950, 1], [5600, 1], [5950, 0], [7200, 0]],
+        R: [[0, 1], [1500, 1], [1850, 0], [3300, 0], [3650, 1], [6000, 1], [6350, 0], [6850, 0], [7200, 1]]
+      }
+    }
+  ];
+
+  // ---- the expression library: any dog can wear any of these ----
+  // Each is a 7.2 s loop (first key = last key), its own blinks, hops and floating accents,
+  // and what a tap sets off while wearing it.
+  var EXPR = {
+    overjoyed: {
+      name: 'Overjoyed',
+      act: {
+        notice: [[0, 0], [1150, 0], [1950, 1], [4700, 1], [5700, 0.18], [7200, 0]],
+        joy:    [[0, 0], [1650, 0.07], [2300, 1], [4400, 1], [5250, 0.26], [6300, 0.05], [7200, 0]],
+        tilt:   [[0, 2.4], [1500, -1.8], [2450, 4.6], [3350, -4], [4250, 3.8], [5400, -1.4], [6400, 1.8], [7200, 2.4]],
+        shift:  [[0, 2], [1800, -1.6], [3000, 2.8], [4400, -2.4], [5800, 1.4], [7200, 2]],
+        brows:  [[0, 0], [1250, 0], [1700, 1], [2500, 0.55], [4300, 0.55], [5200, 0.1], [7200, 0]],
+        tongue: [[0, 0], [2050, 0], [2500, 1], [4500, 1], [5200, 0], [7200, 0]],
+        cheek:  [[0, 0], [2900, 0], [3080, 1], [3420, 1], [3640, 0], [7200, 0]]
+      },
+      lid: [[0, 0], [1380, 0], [1490, 1], [1530, 1], [1720, 0, 'out'], [4380, 0], [4490, 1], [4530, 1], [4720, 0, 'out'],
+            [5830, 0], [5940, 1], [5980, 1], [6170, 0, 'out'], [7200, 0]],
+      hops: [[2380, 2740], [3140, 3500], [3900, 4260]], hopK: 1,
+      accents: [['heart', 2500, 1150], ['heart', 3260, 1150], ['heart', 4020, 1150]],
+      burst: {
+        act: { joy: [[0, 1], [B, 1]], notice: [[0, 1], [B, 1]], brows: [[0, 0.4], [200, 1], [B, 0.6]],
+               tongue: [[0, 0.3], [300, 1], [B, 1]], cheek: [[0, 0], [700, 0], [850, 1], [1300, 1], [1500, 0], [B, 0]] },
+        hops: [[200, 560], [820, 1180]], accents: [['heart', 150], ['heart', 650]]
+      }
+    },
+    bashful: {
+      name: 'Bashful',
+      act: {
+        notice:  [[0, 0], [1300, 0], [1900, 1], [6200, 1], [6900, 0], [7200, 0]],
+        joy:     [[0, 0], [1800, 0], [2600, 0.55], [5200, 0.55], [6200, 0.1], [7200, 0]],
+        tilt:    [[0, 3], [1600, 0], [2900, 9], [3800, 9], [4200, 2], [5000, 2], [5400, -7], [6400, -7], [7200, 3]],
+        shift:   [[0, 1], [2400, -1], [4800, 1.5], [7200, 1]],
+        wiggle:  [[0, 0], [2600, 0], [3000, 1], [3800, 1], [4200, 0], [7200, 0]],
+        lookX:   [[0, -3], [1500, -3], [1900, 0], [2500, 0], [2900, -4], [3800, -4], [4200, 0], [5000, 0], [5400, -3.5], [6400, -3.5], [7200, -3]],
+        lookY:   [[0, 1], [1500, 1], [1900, -0.5], [2500, -0.5], [2900, 4], [3800, 4], [4200, -0.5], [5000, -0.5], [5400, 3.5], [6400, 3.5], [7200, 1]],
+        lidRest: [[0, 0.18], [1900, 0.08], [2500, 0.08], [2900, 0.32], [3800, 0.32], [4200, 0.06], [5000, 0.06], [5400, 0.3], [6400, 0.3], [7200, 0.18]],
+        blush:   [[0, 0], [2400, 0], [2900, 1], [5600, 1], [6400, 0], [7200, 0]],
+        earBack: [[0, 0.3], [1900, 0], [2700, 0.8], [3900, 0.8], [4300, 0.1], [5200, 0.1], [5500, 0.7], [6400, 0.7], [7200, 0.3]],
+        fold:    [[0, 0.3], [2700, 0.9], [3900, 0.9], [4300, 0.2], [5500, 0.8], [6400, 0.8], [7200, 0.3]],
+        brows:   [[0, 0], [1900, 0.6], [2600, 0.2], [7200, 0]],
+        browTilt:[[0, 0], [2700, 0], [3000, 1], [3800, 1], [4200, 0], [5300, 0], [5600, 0.8], [6400, 0.8], [7200, 0]],
+        slant:   [[0, 0.2], [2700, 0], [3000, 1], [3800, 1], [4200, 0], [5300, 0], [5600, 0.8], [6400, 0.8], [7200, 0.2]],
+        mouth:   [[0, 0.2], [1900, 0.36], [2500, 0.36], [2900, 0.18], [7200, 0.2]],
+        pant:    [[0, 0.35], [7200, 0.35]],
+        cheek:   [[0, 0], [2900, 0], [3300, 0.35], [3800, 0.35], [4100, 0], [7200, 0]]
+      },
+      // Slow, soft blinks: a 160 ms close, a 260 ms reopen.
+      lid: [[0, 0], [2000, 0], [2160, 1], [2220, 1], [2480, 0, 'out'], [4250, 0], [4410, 1], [4470, 1], [4730, 0, 'out'], [7200, 0]],
+      hops: [], hopK: 1, accents: [['heart', 4200, 1300]],
+      burst: {
+        act: { blush: [[0, 1], [B, 1]], earBack: [[0, 0.9], [B, 0.9]], fold: [[0, 1], [B, 1]], browTilt: [[0, 1], [B, 1]],
+               slant: [[0, 1], [B, 1]], lookX: [[0, -4], [B, -4]], lookY: [[0, 4], [B, 4]], lidRest: [[0, 0.3], [B, 0.3]],
+               joy: [[0, 0.7], [B, 0.7]], wiggle: [[0, 1], [B, 1]], mouth: [[0, 0.18], [B, 0.18]], tilt: [[0, 8], [B, 8]],
+               notice: [[0, 1], [B, 1]] },
+        hops: [], accents: [['heart', 900]]
+      }
+    },
+    goofy: {
+      name: 'Goofy',
+      act: {
+        notice: [[0, 0], [700, 0], [1200, 1], [5600, 1], [6300, 0], [7200, 0]],
+        joy:    [[0, 0.2], [900, 0.3], [1400, 1], [4800, 1], [5600, 0.4], [6500, 0.2], [7200, 0.2]],
+        wobble: [[0, 0], [1400, 0], [1700, 1], [2300, 1], [2600, 0], [4300, 0], [4600, 1], [5000, 1], [5300, 0], [7200, 0]],
+        tilt:   [[0, -2], [1200, 4], [2600, -3], [4300, 5], [5600, -4], [7200, -2]],
+        shift:  [[0, 0], [1800, 2], [3600, -2], [5400, 2], [7200, 0]],
+        tongue: [[0, 0.6], [1300, 1], [5600, 1], [6400, 0.6], [7200, 0.6]],
+        tside:  [[0, 1], [7200, 1]],
+        derp:   [[0, 0], [5300, 0], [5500, 1], [6100, 1], [6400, 0], [7200, 0]],
+        brows:  [[0, 0.3], [1200, 1], [2600, 0.6], [5500, 1], [6400, 0.3], [7200, 0.3]],
+        cheek:  [[0, 0], [3300, 0], [3450, 1], [3800, 1], [3950, 0], [7200, 0]]
+      },
+      // Quick blinks: the shortest close that still doesn't flicker (110 ms).
+      lid: [[0, 0], [1080, 0], [1190, 1], [1225, 1], [1400, 0, 'out'], [4480, 0], [4590, 1], [4625, 1], [4800, 0, 'out'], [7200, 0]],
+      hops: [[1500, 1760], [2050, 2310], [2600, 2860], [3150, 3410], [4400, 4660], [4950, 5210]], hopK: 1, accents: [],
+      burst: {
+        act: { joy: [[0, 1], [B, 1]], wobble: [[0, 1], [B, 1]], tongue: [[0, 1], [B, 1]], notice: [[0, 1], [B, 1]],
+               brows: [[0, 1], [B, 1]], derp: [[0, 0], [1400, 0], [1550, 1], [1950, 1], [2150, 0], [B, 0]] },
+        hops: [[150, 410], [620, 880], [1090, 1350]], accents: []
+      }
+    },
+    sleepy: {
+      name: 'Sleepy',
+      act: {
+        lidRest: [[0, 0.55], [1200, 0.62], [2000, 0.85], [2600, 0.94], [2950, 0.45], [3400, 0.45], [3800, 0.97], [4500, 0.97],
+                  [4950, 0.55], [5300, 0.7], [5800, 0.94], [6250, 0.5], [7200, 0.55]],
+        headY:   [[0, 1], [2000, 3], [2600, 6], [2950, 0], [3400, 1], [5300, 3], [5800, 6.5], [6250, 0.5], [7200, 1]],
+        tilt:    [[0, -2], [2600, -6], [2950, 1], [5800, 5], [6250, -1], [7200, -2]],
+        mouth:   [[0, 0.18], [3450, 0.18], [3850, 1.3], [4500, 1.3], [4900, 0.18], [7200, 0.18]],
+        mouthW:  [[0, 1], [3450, 1], [3850, 0.8], [4500, 0.8], [4900, 1], [7200, 1]],
+        pant:    [[0, 0], [7200, 0]],
+        tongue:  [[0, 0], [3650, 0], [3950, 0.45], [4450, 0.45], [4800, 0], [7200, 0]],
+        earBack: [[0, 0.35], [2600, 0.6], [2950, 0.05], [3400, 0.3], [5800, 0.6], [6250, 0.1], [7200, 0.35]],
+        fold:    [[0, 0.6], [2600, 1], [2950, 0], [3400, 0.4], [5800, 1], [6250, 0], [6700, 0.6], [7200, 0.6]],
+        brows:   [[0, -0.4], [2600, -0.4], [2950, 0.9], [3400, 0], [5800, -0.4], [6250, 0.9], [6700, -0.2], [7200, -0.4]],
+        tailRest:[[0, -35], [7200, -35]], tailAmp: [[0, 0.35], [7200, 0.35]], tailCurl: [[0, 2], [7200, 2]],
+        shift:   [[0, 0], [3600, 1], [7200, 0]]
+      },
+      lid: [[0, 0], [7200, 0]],
+      hops: [], hopK: 1,
+      accents: [['z', 200, 2000], ['z', 1100, 2000], ['z', 4400, 2000], ['z', 5300, 1800]],
+      burst: {
+        act: { lidRest: [[0, 0], [B, 0]], brows: [[0, 1], [B, 0.7]], headY: [[0, -2], [B, 0]], earBack: [[0, -0.3], [B, 0]],
+               fold: [[0, 0], [B, 0]], mouth: [[0, 0.7], [500, 0.2], [B, 0.2]], mouthW: [[0, 0.6], [600, 1], [B, 1]],
+               pupil: [[0, 0.7], [B, 0.9]], tailAmp: [[0, 1], [B, 1]], joy: [[0, 0.3], [B, 0.3]] },
+        hops: [[120, 420]], accents: [['ex', 0]]
+      }
+    },
+    puppy: {
+      name: 'Puppy eyes',
+      act: {
+        pupil:   [[0, 1.25], [7200, 1.25]],
+        slant:   [[0, 0.95], [3600, 1.1], [7200, 0.95]],
+        lidRest: [[0, 0.18], [3600, 0.24], [7200, 0.18]],
+        browTilt:[[0, 0.9], [3600, 1], [7200, 0.9]],
+        lookY:   [[0, 2.5], [2200, 2.5], [2700, -1.5], [4200, -1.5], [4700, 2.5], [7200, 2.5]],
+        lookX:   [[0, -1.5], [2200, -1.5], [2700, 0], [4200, 0], [4700, 1.5], [6500, 1.5], [7200, -1.5]],
+        headY:   [[0, 6], [2700, 3.5], [4200, 3.5], [4700, 6], [7200, 6]],
+        tilt:    [[0, -5], [2700, 4], [4200, 4], [4700, -5], [7200, -5]],
+        mouth:   [[0, -0.5], [5200, -0.5], [5350, -0.65], [5500, -0.42], [5650, -0.65], [5800, -0.5], [7200, -0.5]],
+        pant:    [[0, 0], [7200, 0]],
+        earBack: [[0, 0.85], [7200, 0.85]], fold: [[0, 1], [7200, 1]],
+        tailRest:[[0, -70], [7200, -70]], tailAmp: [[0, 0.25], [7200, 0.25]], tailCurl: [[0, -6], [7200, -6]]
+      },
+      lid: [[0, 0], [1700, 0], [1870, 1], [1930, 1], [2200, 0, 'out'], [5900, 0], [6070, 1], [6130, 1], [6400, 0, 'out'], [7200, 0]],
+      hops: [], hopK: 1, accents: [['tear', 2900, 1700], ['tear', 6300, 1700]],
+      burst: {
+        act: { joy: [[0, 0.85], [B, 0.85]], mouth: [[0, 0.35], [B, 0.35]], pant: [[0, 0.6], [B, 0.6]], slant: [[0, 0], [B, 0]],
+               browTilt: [[0, 0.2], [B, 0.2]], lookY: [[0, -1], [B, -1]], lookX: [[0, 0], [B, 0]], tailRest: [[0, 0], [B, 0]],
+               tailAmp: [[0, 1], [B, 1]], tailCurl: [[0, 9], [B, 9]], earBack: [[0, 0.1], [B, 0.1]], fold: [[0, 0], [B, 0]],
+               headY: [[0, 0], [B, 0]], tilt: [[0, 4], [B, 4]], pupil: [[0, 1.1], [B, 1.1]],
+               cheek: [[0, 0], [600, 0], [800, 0.8], [1500, 0.8], [1800, 0], [B, 0]] },
+        hops: [[300, 640]], accents: [['heart', 700]]
+      }
+    },
+    surprised: {
+      name: 'Surprised',
+      act: {
+        notice:  [[0, 0.5], [1300, 0.5], [1450, 1], [6000, 1], [6800, 0.5], [7200, 0.5]],
+        pupil:   [[0, 1], [1300, 1], [1450, 0.62], [4200, 0.62], [5000, 0.9], [6000, 1], [7200, 1]],
+        brows:   [[0, 0], [1300, 0], [1450, 1.1], [3600, 1], [5000, 0.6], [6000, 0.15], [7200, 0]],
+        earBack: [[0, 0.1], [1300, 0.1], [1450, -0.4], [4000, -0.3], [6000, 0], [7200, 0.1]],
+        fold:    [[0, 0.5], [1300, 0.5], [1450, 0], [4500, 0], [6000, 0.5], [7200, 0.5]],
+        mouth:   [[0, 0.25], [1300, 0.25], [1450, 0.95], [3600, 0.8], [5000, 0.4], [6000, 0.25], [7200, 0.25]],
+        mouthW:  [[0, 1], [1300, 1], [1450, 0.5], [3600, 0.55], [5000, 0.85], [6000, 1], [7200, 1]],
+        pant:    [[0, 0], [7200, 0]],
+        shift:   [[0, 0], [1300, 0], [1500, -6], [3500, -5], [5500, 0], [7200, 0]],
+        tilt:    [[0, 0], [1300, 0], [1500, -5], [3000, -3], [5000, 2], [7200, 0]],
+        lookX:   [[0, -3], [1300, -3], [1450, 0], [6000, 0], [6800, -3], [7200, -3]],
+        tailAmp: [[0, 0.6], [1300, 0.6], [1450, 0], [3000, 0], [4500, 0.8], [7200, 0.6]],
+        tailRest:[[0, 0], [1300, 0], [1450, 25], [3000, 20], [4500, 0], [7200, 0]]
+      },
+      lid: [[0, 0], [4700, 0], [4810, 1], [4850, 1], [5040, 0, 'out'], [7200, 0]],
+      hops: [[1330, 1630]], hopK: 1.1, accents: [['ex', 1380, 1300]],
+      burst: {
+        act: { brows: [[0, 1.1], [B, 0.8]], pupil: [[0, 0.6], [B, 0.75]], mouth: [[0, 1], [B, 0.6]], mouthW: [[0, 0.5], [B, 0.7]],
+               tailRest: [[0, 25], [B, 15]], tailAmp: [[0, 0], [1200, 0], [B, 0.6]], earBack: [[0, -0.4], [B, -0.2]],
+               fold: [[0, 0], [B, 0]], notice: [[0, 1], [B, 1]], shift: [[0, -5], [B, -3]] },
+        hops: [[120, 420]], accents: [['ex', 40]]
+      }
+    },
+    love: {
+      name: 'Lovestruck',
+      act: {
+        heartEyes: [[0, 0], [900, 0], [1300, 1], [5600, 1], [6200, 0], [7200, 0]],
+        blush:   [[0, 0.4], [900, 0.6], [1300, 1], [5600, 1], [6200, 0.4], [7200, 0.4]],
+        tilt:    [[0, -5], [1800, 5], [3600, -5], [5400, 5], [7200, -5]],
+        shift:   [[0, -2], [1800, 2], [3600, -2], [5400, 2], [7200, -2]],
+        joy:     [[0, 0.5], [1300, 0.7], [5600, 0.7], [7200, 0.5]],
+        mouth:   [[0, 0.3], [7200, 0.3]], pant: [[0, 0.35], [7200, 0.35]],
+        tongue:  [[0, 0.25], [7200, 0.25]],
+        cheek:   [[0, 0.25], [7200, 0.25]],
+        brows:   [[0, 0.6], [7200, 0.6]], browTilt: [[0, 0.45], [7200, 0.45]],
+        earBack: [[0, 0.3], [7200, 0.3]], fold: [[0, 0.3], [3600, 0.6], [7200, 0.3]]
+      },
+      lid: [[0, 0], [3300, 0], [3460, 1], [3520, 1], [3780, 0, 'out'], [7200, 0]],
+      hops: [], hopK: 1,
+      accents: [['heart', 1500, 1300], ['heart', 2300, 1300], ['heart', 3100, 1300], ['heart', 3900, 1300], ['heart', 4700, 1300]],
+      burst: {
+        act: { heartEyes: [[0, 1], [B, 1]], blush: [[0, 1], [B, 1]], joy: [[0, 1], [B, 1]], cheek: [[0, 0.5], [B, 0.5]] },
+        hops: [[150, 450]], accents: [['heart', 0], ['heart', 150], ['heart', 300], ['heart', 450]]
+      }
+    },
+    curious: {
+      name: 'Curious',
+      act: {
+        tilt:    [[0, 0], [800, 0], [1100, 14], [2300, 14], [2600, 0], [3200, 0], [3500, -14], [4700, -14], [5000, 0], [7200, 0]],
+        browSkew:[[0, 0], [800, 0], [1100, 1], [2300, 1], [2600, 0], [3200, 0], [3500, -1], [4700, -1], [5000, 0], [7200, 0]],
+        lookX:   [[0, 0], [800, 0], [1100, 2], [2300, 2], [2600, 0], [3200, 0], [3500, -2], [4700, -2], [5000, 0], [7200, 0]],
+        foldL:   [[0, 0], [800, 0], [1100, 0.85], [2300, 0.85], [2600, 0], [7200, 0]],
+        foldR:   [[0, 0], [3200, 0], [3500, 0.85], [4700, 0.85], [5000, 0], [7200, 0]],
+        earBack: [[0, -0.25], [7200, -0.25]],
+        brows:   [[0, 0.4], [7200, 0.4]],
+        pupil:   [[0, 1.1], [7200, 1.1]],
+        mouth:   [[0, 0.14], [7200, 0.14]], pant: [[0, 0.3], [7200, 0.3]],
+        joy:     [[0, 0.15], [7200, 0.15]]
+      },
+      lid: [[0, 0], [2450, 0], [2560, 1], [2600, 1], [2790, 0, 'out'], [4850, 0], [4960, 1], [5000, 1], [5190, 0, 'out'], [7200, 0]],
+      hops: [], hopK: 1, accents: [['q', 1150, 1350], ['q', 3550, 1350]],
+      burst: {
+        act: { tilt: [[0, 18], [B, 18]], browSkew: [[0, 1], [B, 1]], foldL: [[0, 1], [B, 1]], pupil: [[0, 1.15], [B, 1.15]],
+               brows: [[0, 0.8], [B, 0.8]] },
+        hops: [], accents: [['q', 60]]
+      }
+    },
+    grumpy: {
+      name: 'Grumpy',
+      act: {
+        lidRest: [[0, 0.45], [7200, 0.45]],
+        slant:   [[0, -0.6], [7200, -0.6]],
+        browTilt:[[0, -1], [7200, -1]],
+        brows:   [[0, -0.5], [7200, -0.5]],
+        notice:  [[0, 0.3], [2200, 0.3], [2500, 0.95], [3100, 0.95], [3400, 0.3], [5500, 0.3], [5800, 0.95], [6400, 0.95], [6700, 0.3], [7200, 0.3]],
+        lookX:   [[0, 4], [2200, 4], [2500, -1], [3100, -1], [3400, 4], [5500, 4], [5800, -1], [6400, -1], [6700, 4], [7200, 4]],
+        tilt:    [[0, -5], [2200, -5], [2500, -1], [3100, -1], [3400, -5], [7200, -5]],
+        mouth:   [[0, -0.18], [7200, -0.18]], mouthW: [[0, 0.75], [7200, 0.75]], pant: [[0, 0], [7200, 0]],
+        earBack: [[0, 0.5], [7200, 0.5]], fold: [[0, 0.5], [7200, 0.5]],
+        tailAmp: [[0, 0.3], [7200, 0.3]], tailRest: [[0, -15], [7200, -15]],
+        headY:   [[0, 1.5], [7200, 1.5]]
+      },
+      lid: [[0, 0], [7200, 0]],
+      hops: [], hopK: 1, accents: [['puff', 900, 900], ['puff', 4300, 900]],
+      burst: {
+        act: { notice: [[0, 0], [B, 0]], lookX: [[0, 5], [B, 5]], tilt: [[0, -9], [B, -9]], mouth: [[0, -0.3], [B, -0.3]],
+               brows: [[0, -0.8], [B, -0.8]] },
+        hops: [], accents: [['puff', 200], ['puff', 900]]
+      }
+    },
+    proud: {
+      name: 'Proud',
+      act: {
+        cheek:   [[0, 0.85], [7200, 0.85]],
+        lidRest: [[0, 0.15], [7200, 0.15]],
+        headY:   [[0, -3], [7200, -3]],
+        tilt:    [[0, -3], [3600, 3], [7200, -3]],
+        chest:   [[0, 0.6], [1800, 1], [3600, 0.6], [5400, 1], [7200, 0.6]],
+        brows:   [[0, 0.7], [7200, 0.7]],
+        mouth:   [[0, 0.3], [7200, 0.3]], pant: [[0, 0.35], [7200, 0.35]],
+        tailRest:[[0, 20], [7200, 20]], tailAmp: [[0, 0.8], [7200, 0.8]],
+        joy:     [[0, 0.35], [7200, 0.35]],
+        earBack: [[0, -0.25], [7200, -0.25]]
+      },
+      lid: [[0, 0], [7200, 0]],
+      hops: [], hopK: 1,
+      accents: [['sparkle', 700, 1100], ['sparkle', 2500, 1100], ['sparkle', 4300, 1100], ['sparkle', 6100, 1100]],
+      burst: {
+        act: { chest: [[0, 1.4], [B, 1.4]], headY: [[0, -6], [B, -6]], brows: [[0, 1], [B, 1]] },
+        hops: [], accents: [['sparkle', 0], ['sparkle', 200], ['sparkle', 400]]
+      }
+    }
+  };
+  // Hops on a beat: `count` hops, one every `every` ms, each `len` ms in the air.
+  function beats(every, offset, len, count) {
+    var out = [];
+    for (var k = 0; k < count; k++) out.push([k * every + offset, k * every + offset + len]);
+    return out;
+  }
+  function flat(v) { return [[0, v], [PERIOD, v]]; }
+
+  EXPR.happy = {
+    name: 'Happy',
+    act: {
+      cheek: [[0, 0.5], [3600, 0.6], [7200, 0.5]], mouth: flat(0.38), pant: flat(0.45), joy: flat(0.45),
+      tilt: [[0, -3], [1800, 3], [3600, -3], [5400, 3], [7200, -3]], shift: [[0, -1], [1800, 1], [3600, -1], [5400, 1], [7200, -1]],
+      brows: flat(0.35), earBack: flat(0.12), fold: flat(0.25), tongue: flat(0.35), blush: flat(0.35)
+    },
+    lid: [[0, 0], [2400, 0], [2510, 1], [2550, 1], [2740, 0, 'out'], [5800, 0], [5910, 1], [5950, 1], [6140, 0, 'out'], [7200, 0]],
+    hops: [], hopK: 1, accents: [['heart', 3300, 1300]],
+    burst: { act: { cheek: [[0, 1], [B, 1]], joy: [[0, 1], [B, 1]] }, hops: [[150, 450]], accents: [['heart', 100], ['heart', 500]] }
+  };
+
+  // Crying: frowns, then wails with the eyes squeezed shut and tears from both eyes.
+  EXPR.sad = {
+    name: 'Sad',
+    act: {
+      lidRest: [[0, 0.4], [1600, 0.4], [1900, 0.9], [2600, 0.9], [2900, 0.4], [5200, 0.4], [5500, 0.9], [6200, 0.9], [6500, 0.4], [7200, 0.4]],
+      slant: flat(1.1), browTilt: flat(1.1), brows: flat(0.2), pupil: flat(1.1), lookY: flat(3),
+      mouth: [[0, -0.5], [1600, -0.5], [1900, 0.9], [2600, 0.85], [2900, -0.5], [5200, -0.5], [5500, 0.9], [6200, 0.85], [6500, -0.5], [7200, -0.5]],
+      mouthW: [[0, 0.8], [1600, 0.8], [1900, 1.15], [2600, 1.15], [2900, 0.8], [5200, 0.8], [5500, 1.15], [6200, 1.15], [6500, 0.8], [7200, 0.8]],
+      pant: flat(0),
+      shudder: [[0, 0], [1600, 0], [1800, 1], [2700, 1], [2900, 0], [5200, 0], [5400, 1], [6300, 1], [6500, 0], [7200, 0]],
+      headY: [[0, 6], [1900, 3], [2600, 3], [2900, 6], [5500, 3], [6200, 3], [6500, 6], [7200, 6]],
+      tilt: [[0, -3], [1900, 2], [2600, 2], [2900, -3], [5500, 4], [6200, 4], [6500, -3], [7200, -3]],
+      earBack: flat(0.95), fold: flat(1), tailRest: flat(-95), tailAmp: flat(0.1), tailCurl: flat(-10)
+    },
+    lid: flat(0),
+    hops: [], hopK: 1,
+    accents: [['tear', 300, 1500], ['tear2', 700, 1500], ['tear', 1900, 1300], ['tear2', 2100, 1300], ['tear', 2400, 1300],
+              ['tear2', 3600, 1500], ['tear', 4300, 1500], ['tear', 5500, 1300], ['tear2', 5700, 1300], ['tear2', 6100, 1300]],
+    burst: {
+      act: { mouth: [[0, -0.3], [B, -0.3]], lidRest: [[0, 0.2], [B, 0.2]], lookY: [[0, -1], [B, -1]], tailAmp: [[0, 0.6], [B, 0.6]],
+             joy: [[0, 0.4], [B, 0.4]], shudder: [[0, 0], [B, 0]], pupil: [[0, 1.3], [B, 1.3]] },
+      hops: [], accents: [['heart', 600]]
+    }
+  };
+
+  // A snarl with teeth, shaking with rage, a stiff tail, steam from the ears and a throbbing vein.
+  EXPR.furious = {
+    name: 'Extremely angry',
+    act: {
+      lidRest: flat(0.35), slant: flat(-1.1), browTilt: flat(-1.3), brows: flat(-0.7), pupil: flat(0.6),
+      mouth: [[0, 0.45], [3400, 0.45], [3700, 0.75], [4600, 0.75], [4900, 0.45], [7200, 0.45]], mouthW: flat(1.3), teeth: flat(1), pant: flat(0),
+      shake: [[0, 0.35], [3400, 0.35], [3700, 1], [4600, 1], [4900, 0.35], [7200, 0.35]],
+      blush: flat(0.8), earBack: flat(0.9), fold: flat(0.6), tailRest: flat(30), tailAmp: flat(0.15), tailCurl: flat(0),
+      headY: flat(2), tilt: [[0, 0], [3600, -3], [7200, 0]], chest: [[0, 0.4], [3700, 1], [4600, 1], [4900, 0.4], [7200, 0.4]]
+    },
+    lid: flat(0),
+    hops: [[1200, 1420], [3650, 3870], [5900, 6120]], hopK: 0.4,
+    accents: [['vein', 0, 1800], ['vein', 3600, 1800], ['steam', 3650, 1300], ['steam', 3700, 1300], ['steam', 800, 1300], ['steam', 850, 1300]],
+    burst: {
+      act: { shake: [[0, 1.4], [B, 1.4]], mouth: [[0, 0.9], [B, 0.9]], chest: [[0, 1.2], [B, 1.2]], headY: [[0, -1], [B, -1]] },
+      hops: [[150, 370], [500, 720]], accents: [['vein', 0], ['steam', 100], ['steam', 150]]
+    }
+  };
+
+  // Spaced out: heavy red eyes, a drifting gaze, a lopsided grin and a slow sway; then a giggle fit.
+  EXPR.high = {
+    name: 'High',
+    act: {
+      lidRest: [[0, 0.58], [2000, 0.62], [3600, 0.55], [5400, 0.64], [7200, 0.58]], redEye: flat(1), pupil: flat(1.05),
+      lookX: [[0, -2], [1800, 2], [3600, -2], [5400, 2], [7200, -2]], lookY: flat(1),
+      tilt: [[0, -6], [1800, 6], [3600, -6], [5400, 6], [7200, -6]], shift: [[0, -1.5], [1800, 1.5], [3600, -1.5], [5400, 1.5], [7200, -1.5]],
+      mouth: [[0, 0.3], [2600, 0.3], [2800, 0.6], [3600, 0.6], [3800, 0.3], [7200, 0.3]], mouthW: flat(1.15), mouthTilt: flat(-6),
+      teeth: flat(0.7), pant: flat(0),
+      shudder: [[0, 0], [2600, 0], [2800, 1], [3600, 1], [3800, 0], [7200, 0]],
+      brows: [[0, -0.2], [2600, -0.2], [2800, 0.4], [3600, 0.4], [3900, -0.2], [7200, -0.2]],
+      earBack: flat(0.45), fold: flat(0.7), joy: flat(0.2), tailAmp: flat(0.6), headY: flat(1.5)
+    },
+    lid: [[0, 0], [1000, 0], [1250, 1], [1400, 1], [1800, 0, 'out'], [5000, 0], [5250, 1], [5400, 1], [5800, 0, 'out'], [7200, 0]],
+    hops: [], hopK: 1, accents: [],
+    burst: {
+      act: { shudder: [[0, 1], [B, 1]], mouth: [[0, 0.7], [B, 0.7]], lidRest: [[0, 0.7], [B, 0.7]], cheek: [[0, 0.6], [B, 0.6]] },
+      hops: [], accents: []
+    }
+  };
+
+  // Total focus: narrowed eyes, small pupils dead centre, ears forward, tail still, a slow push-in.
+  EXPR.lockedin = {
+    name: 'Locked in',
+    act: {
+      lidRest: flat(0.42), slant: flat(-0.35), browTilt: flat(-0.7), brows: flat(-0.35), pupil: flat(0.72),
+      lookX: flat(0), lookY: flat(0), notice: flat(1), mouth: flat(0.06), mouthW: flat(0.7), pant: flat(0),
+      earBack: flat(-0.45), fold: flat(0), tailAmp: flat(0.08), tailRest: flat(10), tailCurl: flat(3),
+      headY: flat(1.5), tilt: flat(0), zoom: [[0, 1], [3000, 1.06], [6600, 1.06], [7200, 1]]
+    },
+    lid: [[0, 0], [6700, 0], [6860, 1], [6920, 1], [7150, 0, 'out'], [7200, 0]],
+    hops: [], hopK: 1, accents: [],
+    burst: { act: { zoom: [[0, 1.1], [B, 1.1]], pupil: [[0, 0.55], [B, 0.55]], lidRest: [[0, 0.5], [B, 0.5]] }, hops: [], accents: [] }
+  };
+
+  // Deal with it: pixel shades drop in from above, a smirk, one brow up, a slow nod.
+  EXPR.shades = {
+    name: 'Dank glasses',
+    act: {
+      shades: [[0, 0], [500, 0], [1600, 1.04], [1760, 0.985], [1880, 1], [6300, 1], [6900, 0], [7200, 0]],
+      lookY: [[0, 0], [400, 0], [600, -3.5], [1400, -1], [1600, 0], [7200, 0]],
+      lidRest: [[0, 0], [1600, 0], [1900, 0.3], [6300, 0.3], [6900, 0], [7200, 0]],
+      cheek: [[0, 0], [1600, 0], [1900, 0.4], [6300, 0.4], [6900, 0], [7200, 0]],
+      mouth: [[0, 0.3], [1600, 0.3], [1900, 0.22], [7200, 0.3]], pant: flat(0.2),
+      mouthTilt: [[0, 0], [1600, 0], [1900, -9], [6300, -9], [6900, 0], [7200, 0]],
+      mouthX: [[0, 0], [1600, 0], [1900, 3], [6300, 3], [6900, 0], [7200, 0]],
+      brows: [[0, 0.3], [1600, 0.3], [1900, 0.9], [6300, 0.9], [6900, 0.3], [7200, 0.3]],
+      browSkew: [[0, 0], [1900, 0], [2200, 0.8], [6300, 0.8], [6900, 0], [7200, 0]],
+      headY: [[0, 0], [1900, 0], [2150, 3], [2400, -0.5], [2650, 3], [2900, 0], [7200, 0]],
+      tilt: [[0, 0], [1900, 0], [2200, -5], [6300, -5], [6900, 0], [7200, 0]],
+      chest: [[0, 0], [1900, 0], [2300, 0.8], [6300, 0.8], [6900, 0], [7200, 0]],
+      notice: flat(1), joy: flat(0.4)
+    },
+    lid: [[0, 0], [3400, 0], [3510, 1], [3550, 1], [3740, 0, 'out'], [7200, 0]],
+    hops: [], hopK: 1, accents: [['sparkle', 1700, 1100]],
+    burst: {
+      act: { shades: [[0, 1], [B, 1]], headY: [[0, 0], [200, 3], [400, -0.5], [600, 3], [800, 0], [B, 0]], browSkew: [[0, 1], [B, 1]],
+             cheek: [[0, 0.4], [B, 0.4]], lidRest: [[0, 0.3], [B, 0.3]] },
+      hops: [], accents: [['sparkle', 0]]
+    }
+  };
+
+  // Model face: three-quarter profile, a smoulder, one brow up, a smirk, chin up; then the turn to camera.
+  EXPR.mog = {
+    name: 'Mogging',
+    act: {
+      notice: [[0, 0.45], [2400, 0.45], [3000, 1], [4800, 1], [5400, 0.45], [7200, 0.45]],
+      lidRest: flat(0.34), slant: flat(-0.25), brows: flat(0.1), browTilt: flat(-0.3),
+      browSkew: [[0, 0.3], [3000, 0.3], [3300, 1], [4800, 1], [5100, 0.3], [7200, 0.3]],
+      pupil: flat(0.85), lookX: [[0, 2.5], [2400, 2.5], [3000, 0], [4800, 0], [5400, 2.5], [7200, 2.5]],
+      headY: flat(-3), tilt: [[0, -4], [3000, -6], [4800, -6], [7200, -4]],
+      mouth: flat(0.16), mouthW: flat(0.7), mouthTilt: flat(-10), mouthX: flat(4), pant: flat(0),
+      chest: flat(0.8), zoom: [[0, 1], [3000, 1.03], [4800, 1.03], [5400, 1], [7200, 1]],
+      earBack: flat(-0.15), fold: flat(0), tailAmp: flat(0.4), tailRest: flat(15)
+    },
+    lid: flat(0),
+    hops: [], hopK: 1, accents: [['sparkle', 3050, 1000], ['glint', 3100, 700]],
+    burst: {
+      act: { notice: [[0, 1], [B, 1]], browSkew: [[0, 1], [B, 1]], zoom: [[0, 1.05], [B, 1.05]], lookX: [[0, 0], [B, 0]] },
+      hops: [], accents: [['glint', 100], ['sparkle', 150]]
+    }
+  };
+
+  // Dancing: a bounce on every beat (450 ms), the head bobbing on the half-time, feet stepping, notes.
+  EXPR.dance = {
+    name: 'Dancing',
+    act: {
+      dance: flat(1), cheek: flat(0.7), mouth: flat(0.5), pant: flat(0.3), tongue: flat(0.6), joy: flat(1),
+      brows: flat(0.5), earBack: flat(0.2), step: flat(1)
+    },
+    lid: flat(0),
+    hops: beats(450, 40, 250, 16), hopK: 0.3,
+    accents: [['note', 200, 1500], ['note', 1100, 1500], ['note', 2000, 1500], ['note', 2900, 1500],
+              ['note', 3800, 1500], ['note', 4700, 1500], ['note', 5600, 1500], ['note', 6500, 1500]],
+    burst: { act: { joy: [[0, 1], [B, 1]] }, spin: [[0, 0], [150, 0], [850, 1], [B, 1]], hops: [[100, 330], [880, 1110]], accents: [['note', 0], ['note', 300]] }
+  };
+
+  // Hyped up: vibrating, bouncing every 300 ms, mouth wide, pupils tiny, everything at full.
+  EXPR.hyped = {
+    name: 'Hyped up',
+    act: {
+      joy: flat(1), shake: flat(0.45), pupil: flat(0.65), brows: flat(1.05), mouth: flat(1.05), mouthW: flat(1.1), pant: flat(0.3),
+      teeth: flat(1), tongue: flat(1), earBack: flat(-0.4), fold: flat(0), tailAmp: flat(1.35), notice: flat(1), wobble: flat(0.4)
+    },
+    lid: flat(0),
+    hops: beats(300, 30, 200, 24), hopK: 0.5,
+    accents: [['ex', 300, 900], ['sparkle', 800, 1000], ['ex', 1500, 900], ['sparkle', 2100, 1000], ['ex', 2700, 900], ['sparkle', 3300, 1000],
+              ['ex', 3900, 900], ['sparkle', 4500, 1000], ['ex', 5100, 900], ['sparkle', 5700, 1000], ['ex', 6300, 900]],
+    burst: { act: { shake: [[0, 1.2], [B, 1.2]] }, hops: [[100, 300], [400, 600], [700, 900], [1000, 1200]], accents: [['ex', 0], ['sparkle', 100], ['sparkle', 300]] }
+  };
+
+  // Excited: can't keep still, bouncing on its toes, big bright eyes, a grin, feet tapping, stars.
+  EXPR.excited = {
+    name: 'Excited',
+    act: {
+      joy: flat(1), pupil: flat(1.2), brows: flat(0.85), mouth: flat(0.7), mouthW: flat(0.85), pant: flat(0.25), teeth: flat(0.6),
+      tongue: flat(0.4), step: flat(0.7), earBack: flat(-0.3), fold: flat(0.1), notice: flat(1), shudder: flat(0.4),
+      tilt: [[0, -3], [900, 3], [1800, -3], [2700, 3], [3600, -3], [4500, 3], [5400, -3], [6300, 3], [7200, -3]]
+    },
+    lid: [[0, 0], [3000, 0], [3110, 1], [3145, 1], [3320, 0, 'out'], [7200, 0]],
+    hops: beats(600, 50, 210, 12), hopK: 0.28,
+    accents: [['sparkle', 400, 1100], ['sparkle', 1600, 1100], ['sparkle', 2800, 1100], ['sparkle', 4000, 1100], ['sparkle', 5200, 1100], ['sparkle', 6400, 1100]],
+    burst: { act: {}, hops: [[120, 480], [620, 980]], accents: [['sparkle', 0], ['sparkle', 200], ['heart', 400]] }
+  };
+
+  var EXPR_ORDER = ['happy', 'overjoyed', 'excited', 'hyped', 'dance', 'bashful', 'love', 'goofy', 'high', 'sleepy',
+                    'sad', 'puppy', 'surprised', 'curious', 'lockedin', 'grumpy', 'furious', 'proud', 'mog', 'shades'];
+
+  var DEF = { notice: 1, joy: 0, tilt: 0, shift: 0, wiggle: 0, wobble: 0, brows: 0, browTilt: 0, browSkew: 0,
+              slant: 0, lidRest: 0, cheek: 0, lookX: 0, lookY: 0, derp: 0, blush: 0, tongue: 0, mouth: 0.32, mouthW: 1,
+              pant: 1, earBack: 0, fold: 0, foldL: 0, foldR: 0, headY: 0, tailRest: 0, tailAmp: 1, tailCurl: 9, chest: 0,
+              heartEyes: 0, pupil: 1, shake: 0, shudder: 0, teeth: 0, mouthTilt: 0, mouthX: 0, redEye: 0, zoom: 1,
+              shades: 0, dance: 0, step: 0 };
+
+  // ---- interaction layers, blended over whatever the dog is wearing ----
+  var PET = { cheek: 0.9, joy: 1, earBack: 0.6, fold: 0.7, lidRest: 0, blush: 0.7, tongue: 0.7, tilt: 7, slant: 0,
+              browTilt: 0.3, mouth: 0.4, pant: 0.4, tailAmp: 1.2, tailRest: 5, notice: 1, heartEyes: 0, pupil: 1, headY: 1 };
+  var CALLED = { notice: 1, earBack: -0.45, fold: 0, brows: 1, lookX: 0, lookY: -0.5, joy: 0.6, cheek: 0, lidRest: 0,
+                 slant: 0, pupil: 0.9, tailAmp: 1, tailRest: 10, mouth: 0.5, headY: -1 };
+  var TREAT_KEYS = {
+    notice: [[0, 1], [TREAT, 1]], brows: [[0, 1], [700, 0.6], [TREAT, 0.4]], earBack: [[0, -0.4], [700, -0.1], [TREAT, 0]],
+    fold: [[0, 0], [TREAT, 0]], joy: [[0, 0.6], [700, 1], [TREAT, 1]],
+    mouth: [[0, 0.3], [430, 0.45], [600, 1], [680, 0.25], [820, 0.6], [940, 0.2], [1060, 0.55], [1180, 0.2], [1320, 0.45], [TREAT, 0.45]],
+    pant: [[0, 0], [1300, 0], [1500, 0.6], [TREAT, 0.6]], mouthW: [[0, 1], [TREAT, 1]],
+    cheek: [[0, 0], [1250, 0], [1400, 0.9], [2100, 0.9], [TREAT, 0.4]], tongue: [[0, 0], [1300, 0], [1500, 0.8], [TREAT, 0.8]],
+    lidRest: [[0, 0], [TREAT, 0]], slant: [[0, 0], [TREAT, 0]], pupil: [[0, 1], [TREAT, 1]], heartEyes: [[0, 0], [TREAT, 0]],
+    tailAmp: [[0, 1], [TREAT, 1]], tailRest: [[0, 10], [TREAT, 0]], headY: [[0, 0], [TREAT, 0]], browTilt: [[0, 0], [TREAT, 0]]
+  };
+  var TREAT_HOPS = [[430, 790]];
+  var MOVE_HOPS = [[60, 300], [340, 580], [620, 860]];
+
+  // ---- drawing helpers ----
+  var NS = 'http://www.w3.org/2000/svg';
+  function r3(v) { return Math.round(v * 1000) / 1000; }
+  function set(node, attr, v) {
+    var s = typeof v === 'number' ? String(r3(v)) : v;
+    if (node.getAttribute(attr) !== s) node.setAttribute(attr, s);
+  }
+  function rot(deg, cx, cy) { return 'rotate(' + r3(deg) + ' ' + cx + ' ' + cy + ')'; }
+  function tr(x, y) { return 'translate(' + r3(x) + ' ' + r3(y) + ')'; }
+  function pt(p) { return r3(p[0]) + ' ' + r3(p[1]); }
+
+  // A U: rounded top corners of radius r, straight sides, a full half-circle bottom.
+  function uPath(cx, top, w, h, r) {
+    var half = w / 2, bot = top + h, L = cx - half, R = cx + half;
+    return 'M' + (L + r) + ' ' + top + ' H' + (R - r) + ' A' + r + ' ' + r + ' 0 0 1 ' + R + ' ' + (top + r) +
+      ' V' + (bot - half) + ' A' + half + ' ' + half + ' 0 0 1 ' + L + ' ' + (bot - half) +
+      ' V' + (top + r) + ' A' + r + ' ' + r + ' 0 0 1 ' + (L + r) + ' ' + top + ' Z';
+  }
+
+  // An upright ear in two parts: a base that turns at its root, and a tip hinged 24 units up
+  // that folds over like a page (its height flips through zero), so an ear goes up and down
+  // without ever swapping drawings. The tip overlaps the base by 2 units, so the hinge has no seam.
+  var EAR_UP = { L: { x: -29, y: -47 }, R: { x: 31, y: -47 } };
+  var EAR_FLOP = { L: { x: -37, y: -47 }, R: { x: 39, y: -47 } };
+  var HEART = '<rect x="-5" y="-5" width="10" height="10" rx="2.4" transform="translate(0 -2.4) rotate(45)" fill="#ff4b4b"/>' +
+              '<circle cx="-3.4" cy="-6" r="4.9" fill="#ff4b4b"/><circle cx="3.4" cy="-6" r="4.9" fill="#ff4b4b"/>';
+  var ACCENT = {
+    heart:   { head: false, upright: false, dur: 1150, svg: HEART },
+    z:       { head: false, upright: true, dur: 2000,
+               svg: '<path d="M-5 -5 H5 L-5 5 H5" fill="none" stroke="#1899d6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>' },
+    q:       { head: false, upright: true, dur: 1350,
+               svg: '<path d="M-4.5 -5.5 Q-4.5 -10.5 0 -10.5 Q4.5 -10.5 4.5 -6 Q4.5 -2.5 0 -0.5 V1.5" fill="none" stroke="#ff9600" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="0" cy="7" r="2.3" fill="#ff9600"/>' },
+    ex:      { head: false, upright: true, dur: 1100,
+               svg: '<rect x="-2.1" y="-11" width="4.2" height="12" rx="2.1" fill="#ff4b4b"/><circle cx="0" cy="6" r="2.4" fill="#ff4b4b"/>' },
+    sparkle: { head: false, upright: false, dur: 1100,
+               svg: '<rect x="-1.8" y="-7" width="3.6" height="14" rx="1.8" fill="#ffb100"/><rect x="-7" y="-1.8" width="14" height="3.6" rx="1.8" fill="#ffb100"/>' },
+    tear:    { head: true, upright: false, dur: 1700,
+               svg: '<circle cx="0" cy="3" r="3.6" fill="#84d8ff"/><path d="M-3.1 1.6 L0 -5.2 L3.1 1.6 Z" fill="#84d8ff" stroke="#84d8ff" stroke-width="1.4" stroke-linejoin="round"/>' },
+    puff:    { head: true, upright: false, dur: 900,
+               svg: '<circle cx="0" cy="0" r="4" fill="#ffffff"/><circle cx="5" cy="-2" r="3" fill="#ffffff"/>' },
+    tear2:   { head: true, upright: false, dur: 1700,
+               svg: '<circle cx="0" cy="3" r="3.6" fill="#84d8ff"/><path d="M-3.1 1.6 L0 -5.2 L3.1 1.6 Z" fill="#84d8ff" stroke="#84d8ff" stroke-width="1.4" stroke-linejoin="round"/>' },
+    note:    { head: false, upright: true, dur: 1500,
+               svg: '<circle cx="-2.4" cy="4.4" r="3.8" fill="#ce82ff"/><rect x="0.2" y="-9.5" width="2.8" height="14" rx="1.4" fill="#ce82ff"/><path d="M1.6 -9.2 Q8.5 -7.4 6.8 -1.6" fill="none" stroke="#ce82ff" stroke-width="2.8" stroke-linecap="round"/>' },
+    vein:    { head: true, upright: false, dur: 1800,
+               svg: '<path d="M-6.5 -2 Q-2 -2 -2 -6.5 M2 -6.5 Q2 -2 6.5 -2 M6.5 2 Q2 2 2 6.5 M-2 6.5 Q-2 2 -6.5 2" fill="none" stroke="#ff4b4b" stroke-width="2.8" stroke-linecap="round"/>' },
+    steam:   { head: true, upright: false, dur: 1300,
+               svg: '<circle cx="0" cy="0" r="4.2" fill="#ffffff"/><circle cx="-3.5" cy="-4" r="3" fill="#ffffff"/><circle cx="3" cy="-6.2" r="2.4" fill="#ffffff"/>' },
+    glint:   { head: true, upright: false, dur: 700,
+               svg: '<rect x="-1.4" y="-6" width="2.8" height="12" rx="1.4" fill="#ffffff"/><rect x="-6" y="-1.4" width="12" height="2.8" rx="1.4" fill="#ffffff"/>' }
+  };
+
+  // "Deal with it" shades, on a 5-unit pixel grid, sized to cover both eyes.
+  var SHADES = (function () {
+    var k = '#15131c', w = '#ffffff';
+    var cells = [[-27, -48, 56, 5, k], [-25, -43, 25, 10, k], [-21, -33, 17, 5, k], [-17, -28, 9, 5, k],
+                 [2, -43, 25, 10, k], [6, -33, 17, 5, k], [10, -28, 9, 5, k], [0, -43, 2, 5, k],
+                 [-21, -43, 5, 5, w], [-16, -38, 5, 5, w], [6, -43, 5, 5, w], [11, -38, 5, 5, w]];
+    return '<g data-p="shades" opacity="0">' + cells.map(function (q) {
+      return '<rect x="' + q[0] + '" y="' + q[1] + '" width="' + q[2] + '" height="' + q[3] + '" rx="0.8" fill="' + q[4] + '"/>';
+    }).join('') + '</g>';
+  })();
+
+  // A Pomeranian's mane: big soft scallops round the head in two tones (a shadow ring set low, the coat ring over it),
+  // so it reads as fur with depth, not a flat disc. The bib: cream cheeks and chest over the lower head, under the face.
+  function MANE(p, c) {
+    var m = c.pom, sh = '', hi = '';
+    for (var i = 0; i < m.n; i++) {
+      var a = (i / m.n) * Math.PI * 2 + 0.2;
+      sh += '<circle cx="' + r3(1 + Math.cos(a) * m.rx) + '" cy="' + r3(-6 + Math.sin(a) * m.ry) + '" r="' + m.sc + '" fill="' + p.maneSh + '"/>';
+      hi += '<circle cx="' + r3(1 + Math.cos(a + Math.PI / m.n) * (m.rx - 6)) + '" cy="' + r3(-10 + Math.sin(a + Math.PI / m.n) * (m.ry - 6)) + '" r="' + (m.sc - 1) + '" fill="' + p.mane + '"/>';
+    }
+    return '<g data-p="ruff">' + sh + '<ellipse cx="1" cy="-6" rx="' + m.rx + '" ry="' + m.ry + '" fill="' + p.maneSh + '"/>' + hi +
+      '<ellipse cx="1" cy="-10" rx="' + (m.rx - 6) + '" ry="' + (m.ry - 6) + '" fill="' + p.mane + '"/></g>';
+  }
+  function BIB(p, c) {
+    var hb = -55 + c.head.h, k = '';
+    var Q = [[-30, hb - 10, 11], [32, hb - 10, 11], [-16, hb + 2, 12], [18, hb + 2, 12], [1, hb + 8, 12]];
+    Q.forEach(function (q) { k += '<circle cx="' + q[0] + '" cy="' + (q[1] + 2) + '" r="' + (q[2] + 1) + '" fill="' + p.bibSh + '"/>'; });
+    Q.forEach(function (q) { k += '<circle cx="' + q[0] + '" cy="' + (q[1] - 1) + '" r="' + q[2] + '" fill="' + p.bib + '"/>'; });
+    return '<g data-p="bib">' + k + '<ellipse cx="1" cy="' + (hb - 6) + '" rx="28" ry="13" fill="' + p.bib + '"/></g>';
+  }
+  // A hat's flat base on a domed head (a Pomeranian's corner radius is 40-46 against a doberman's 22-30): the rounder
+  // the head, the lower and narrower the hat sits, so its band rests on the dome instead of hovering at its corners.
+  // Tuned with scripts/doberman/fit-audit.mjs (hat contact over the middle 60 % of the head).
+  function hatFit(c) {
+    var k = Math.max(0, c.head.r - 26);
+    return { y: Math.round(k * 17) / 100, s: Math.round(1000 - k * 5.5) / 1000 };
+  }
+  function scl(k, x, y) { return k === 1 ? '' : 'translate(' + x + ' ' + y + ') scale(' + k + ') translate(' + (-x) + ' ' + (-y) + ')'; }
+  function dogMarkup(c, P) {
+    var p = c.pal, s = c.scale, m = c.mirror ? -1 : 1;
+    var hb = -55 + c.head.h;                       // head bottom
+    var bR = 36, bL = bR - c.body.w;               // body edges
+    var fx = (bL + bR) / 2, fy = c.floorY;          // floor point under the body
+    c.geo = { hb: hb, bL: bL, fx: fx, fy: fy, legs: [bL + 23, bL + 56, bL + 89], tail: [bL + 12, 12] };
+    var legs = c.geo.legs.map(function (x, i) {
+      var foot = i === 0 ? p.tanSh : p.tan;        // the far leg is one step darker
+      return '<g data-p="leg' + i + '">' +
+        '<rect x="' + (x - c.leg / 2) + '" y="24" width="' + c.leg + '" height="' + (fy - 24) + '" rx="' + c.leg / 2 + '" fill="' + p.sh + '"/>' +
+        '<rect x="' + (x - c.leg / 2) + '" y="' + (fy - 16) + '" width="' + c.leg + '" height="16" rx="' + c.leg / 2 + '" fill="' + foot + '"/></g>';
+    }).join('');
+    var back = '', front = '', tips = '';
+    ['L', 'R'].forEach(function (side, i) {
+      if (c.ears[i] === 'up' && c.earShape === 'round') {
+        back += '<g data-p="ear' + side + '"><path d="M-16 10 L-11 -14 Q-6 -34 0 -34 Q6 -34 11 -14 L16 10 Z" fill="' + p.coat + '"/>' +
+          '<path d="M-6.5 -4 L-5 -13 Q-3 -24 0 -24 Q3 -24 5 -13 L6.5 -4 Z" fill="' + p.earIn + '"/></g>';
+        tips += '<g data-p="tip' + side + '"><path data-p="tipOut' + side + '" d="M0 0" fill="none"/><path data-p="tipIn' + side + '" d="M0 0"/></g>';
+      } else if (c.ears[i] === 'up') {
+        back += '<g data-p="ear' + side + '">' +
+          '<path d="M-14 10 L-9.66 -24 L9.66 -24 L14 10 Z" fill="' + p.coat + '"/>' +
+          // a round crease at the hinge, so a folded ear reads as folded, not cut flat
+          '<circle cx="0" cy="-24" r="9.66" fill="' + p.coat + '"/>' +
+          '<path d="M-7 4 L-4.05 -24 L4.05 -24 L7 4 Z" fill="' + p.tan + '"/></g>';
+        tips += '<g data-p="tip' + side + '">' +
+          '<path data-p="tipOut' + side + '" d="M-9.92 2 L-6.6 -24 C-5.54 -32.3 5.54 -32.3 6.6 -24 L9.92 2 Z" fill="' + p.coat + '"/>' +
+          '<path data-p="tipIn' + side + '" d="M-4.26 2 L-3 -10 C-2.42 -15.5 2.42 -15.5 3 -10 L4.26 2 Z" fill="' + p.tan + '"/></g>';
+      } else {
+        var w = c.flop.w, h = c.flop.h;
+        front += '<g data-p="ear' + side + '"><rect x="' + (-w / 2) + '" y="-7" width="' + w + '" height="' + h + '" rx="' + w / 2 + '" fill="' + p.sh + '"/></g>';
+      }
+    });
+    var bone = '<g data-p="bone" opacity="0"><rect x="-11" y="-3.2" width="22" height="6.4" rx="3.2" fill="#fff1c9"/>' +
+      '<circle cx="-11" cy="-3.2" r="4" fill="#fff1c9"/><circle cx="-11" cy="3.2" r="4" fill="#fff1c9"/>' +
+      '<circle cx="11" cy="-3.2" r="4" fill="#fff1c9"/><circle cx="11" cy="3.2" r="4" fill="#fff1c9"/></g>';
+    var heye = '<g opacity="0"><g transform="scale(1.15)">' + HEART + '</g></g>';
+    return '' +
+      '<circle class="disc" data-p="disc" cx="0" cy="-125" r="140" fill="' + p.disc + '"/>' +
+      '<g data-p="dog" style="--dob-coat:' + p.coat + ';--dob-sh:' + p.sh + ';--dob-tan:' + p.tan + '" transform="' + tr(m * 18 * s, -fy * s) + ' scale(' + m * s + ' ' + s + ')">' +
+        '<rect data-p="floor" x="' + (fx - 75) + '" y="' + (fy - 5) + '" width="150" height="10" rx="5" fill="' + p.floor + '"/>' +
+        '<g data-p="body">' +
+          // back bling rides the body behind everything (wings, packs, capes peek out round the head and body)
+          '<g data-p="wearBack"></g>' +
+          '<path data-p="tail" d="M0 0" fill="none" stroke="' + (p.tail || p.sh) + '" stroke-width="' + c.tail.w + '" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '<rect x="' + bL + '" y="-20" width="' + c.body.w + '" height="' + c.body.h + '" rx="' + r3(c.body.h * 0.476) + '" fill="' + p.sh + '"/>' +
+          legs +
+        '</g>' +
+        '<g data-p="collar">' +
+          '<circle cx="-2" cy="' + (hb - 45) + '" r="51" fill="' + p.collar + '"/>' +
+          '<g data-p="tag">' +
+            '<rect x="-5.5" y="' + (hb + 3) + '" width="3" height="6" rx="1.5" fill="' + p.tagSh + '"/>' +
+            '<circle cx="-4" cy="' + (hb + 14) + '" r="7" fill="' + p.tag + '"/>' +
+            '<circle cx="-4" cy="' + (hb + 14) + '" r="2.6" fill="' + p.tagSh + '"/>' +
+          '</g>' +
+          (c.pom ? '' : '<g data-p="wearNeck" transform="translate(0 ' + (hb - 2) + ')"></g>') +   // on the collar's crescent under the chin (hb-8 hid a chain behind it)
+        '</g>' +
+        '<g data-p="head">' +
+          (c.pom ? MANE(p, c) : '') +
+          '<g data-p="earsBack" id="' + P + '-eb">' + back + '</g>' +
+          '<path d="' + uPath(0, -55, 100, c.head.h, c.head.r) + '" fill="' + p.coat + '"/>' +
+          (c.pom ? BIB(p, c) : '') +
+          '<g data-p="earsFront">' + front + '</g>' +
+          '<g data-p="earTips" id="' + P + '-et">' + tips + '</g>' +
+          '<g data-p="feat">' +
+            '<rect data-p="browL" x="' + (-10.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.tan + '"/>' +
+            '<rect data-p="browR" x="' + (12.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.tan + '"/>' +
+            '<g transform="translate(1 -17.4) scale(' + c.eye + ') translate(-1 17.4)">' +
+              '<clipPath id="' + P + '-eyeL"><path d="M1 -17.4 V-33.3 A11.7 11.7 0 0 0 -22.4 -33.3 V-25.4 A8 8 0 0 0 -14.4 -17.4 Z"/></clipPath>' +
+              '<clipPath id="' + P + '-eyeR"><path d="M1 -17.4 V-33.3 A11.7 11.7 0 0 1 24.4 -33.3 V-25.4 A8 8 0 0 1 16.4 -17.4 Z"/></clipPath>' +
+              '<clipPath id="' + P + '-lidL"><rect x="-23.7" y="-46.5" width="25.3" height="30.5"/></clipPath>' +
+              '<clipPath id="' + P + '-lidR"><rect x="0.4" y="-46.5" width="25.3" height="30.5"/></clipPath>' +
+              // both whites as ONE outline: two clip edges meeting at the centre line leave a hairline
+              '<path data-p="white" d="M1 -17.4 H-14.4 A8 8 0 0 1 -22.4 -25.4 V-33.3 A11.7 11.7 0 0 1 1 -33.3 A11.7 11.7 0 0 1 24.4 -33.3 V-25.4 A8 8 0 0 1 16.4 -17.4 Z" fill="#ffffff"/>' +
+              '<g clip-path="url(#' + P + '-eyeL)"><g data-p="pupilL">' +
+                '<rect x="-13" y="-40" width="11.4" height="16" rx="5.7" fill="' + p.ink + '"/><circle cx="-9.6" cy="-35.8" r="2.2" fill="#fff"/></g>' +
+                '<g data-p="heyeL">' + heye + '</g></g>' +
+              '<g clip-path="url(#' + P + '-eyeR)"><g data-p="pupilR">' +
+                '<rect x="6.4" y="-40" width="11.4" height="16" rx="5.7" fill="' + p.ink + '"/><circle cx="9.8" cy="-35.8" r="2.2" fill="#fff"/></g>' +
+                '<g data-p="heyeR">' + heye + '</g></g>' +
+              '<g clip-path="url(#' + P + '-lidL)">' +
+                '<rect data-p="lidL" x="-30" y="-76" width="38" height="29.5" fill="' + p.coat + '"/>' +
+                '<circle data-p="cheekL" cx="-10.7" cy="-1.2" r="15" fill="' + p.coat + '"/></g>' +
+              '<g clip-path="url(#' + P + '-lidR)">' +
+                '<rect data-p="lidR" x="-6" y="-76" width="38" height="29.5" fill="' + p.coat + '"/>' +
+                '<circle data-p="cheekR" cx="12.7" cy="-1.2" r="15" fill="' + p.coat + '"/></g>' +
+              '<path data-p="shutL" d="M-19.5 -29 Q-10.7 -38 -1.9 -29" fill="none" stroke="' + p.feature + '" stroke-width="3.2" stroke-linecap="round" opacity="0"/>' +
+              '<path data-p="shutR" d="M3.9 -29 Q12.7 -38 21.5 -29" fill="none" stroke="' + p.feature + '" stroke-width="3.2" stroke-linecap="round" opacity="0"/>' +
+              SHADES +
+              // glasses ride the eyes: this group's per-dog scale and the features' yaw; a mirrored dog wears them unmirrored
+              (c.mirror ? '<g transform="matrix(-1 0 0 1 2 0)"><g data-p="wearFace"></g></g>' : '<g data-p="wearFace"></g>') +
+            '</g>' +
+          '</g>' +
+          '<g data-p="snout">' +
+            '<path d="' + uPath(1, -17, c.muzzle.w, c.muzzle.h, 10) + '" fill="' + p.tan + '"/>' +
+            '<g data-p="blush" opacity="0"><rect x="-27" y="-8" width="11" height="6" rx="3" fill="' + p.blush + '"/>' +
+              '<rect x="18" y="-8" width="11" height="6" rx="3" fill="' + p.blush + '"/></g>' +
+            '<g data-p="mouth"><path d="M-8.5 -7 H11.5 A10 13 0 0 1 -8.5 -7 Z" fill="' + p.mouth + '"/>' +
+              '<rect data-p="teeth" x="-6.5" y="-7" width="16" height="4" rx="1.6" fill="#ffffff"/></g>' +
+            '<g data-p="tongue">' +
+              '<rect x="-4.5" y="-5" width="12" height="19" rx="6" fill="' + p.tongue + '"/>' +
+              '<rect x="0.2" y="-3" width="2.6" height="10.5" rx="1.3" fill="' + p.tongueSh + '"/></g>' +
+            '<rect x="-8" y="-22" width="19" height="12.5" rx="6.25" fill="' + p.nose + '"/>' +
+            '<rect x="-4.2" y="-19.8" width="6.5" height="2.8" rx="1.4" fill="' + p.noseHi + '"/>' +
+          '</g>' +
+          bone +
+          (c.pom ? '<g data-p="wearNeck" transform="translate(0 ' + (hb - 4) + ')"></g>' : '') +
+          '<g data-p="wearHead"></g>' +
+          // a hat with ear holes: the ears' parts outside the head drawn again over the brim
+          '<clipPath id="' + P + '-outHead"><path clip-rule="evenodd" d="M-320 -420 H320 V320 H-320 Z ' + uPath(0, -55, 100, c.head.h, c.head.r) + '"/></clipPath>' +
+          '<g data-p="earsOver" display="none" clip-path="url(#' + P + '-outHead)"><use href="#' + P + '-eb"/><use href="#' + P + '-et"/></g>' +
+          '<g data-p="accHead"></g>' +
+        '</g>' +
+        '<g data-p="acc"></g>' +
+      '</g>';
+  }
+
+  // A sum of hops (they may overlap): crouch, stretch, a parabola, squash, one small rebound.
+  function hopSum(t, list, H) {
+    var lift = 0, d = 0;
+    for (var i = 0; i < list.length; i++) {
+      var a = list[i][0], b = list[i][1];
+      if (t < a - 120 || t > b + 260) continue;
+      var mid = (a + b) / 2;
+      d += flow(t, [[a - 120, 1], [a, 0.93], [a + 60, 1.07], [mid, 1], [b - 50, 1.05], [b, 1],
+                    [b + 55, 0.86], [b + 135, 1.04], [b + 200, 0.99], [b + 260, 1]]) - 1;
+      var p = (t - a) / (b - a);
+      if (p > 0 && p < 1) lift += H * 4 * p * (1 - p);
+    }
+    return { lift: lift, d: d };
+  }
+
+  // A loop's hops, read across the seam: a hop that starts before 0 or recovers after 7.2 s still counts.
+  function hopLoop(t, list, H) {
+    var a = hopSum(t, list, H), b = hopSum(t + PERIOD, list, H), c = hopSum(t - PERIOD, list, H);
+    return { lift: a.lift + b.lift + c.lift, d: a.d + b.d + c.d };
+  }
+
+  // ---- one rig, driven by a look and an expression ----
+  function makeDog(c, slot, P) {
+    slot.innerHTML = dogMarkup(c, P);
+    function q(name) { return slot.querySelector('[data-p="' + name + '"]'); }
+    var e = {};
+    ['disc', 'dog', 'floor', 'body', 'tail', 'leg0', 'leg1', 'leg2', 'collar', 'tag', 'head', 'earL', 'earR', 'tipL', 'tipR',
+     'tipOutL', 'tipOutR', 'tipInL', 'tipInR', 'earsBack', 'earsFront', 'earTips', 'feat', 'browL', 'browR', 'pupilL', 'pupilR',
+     'heyeL', 'heyeR', 'lidL', 'lidR', 'cheekL', 'cheekR', 'shutL', 'shutR', 'snout', 'blush', 'mouth', 'tongue', 'bone',
+     'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'earsOver'].forEach(function (k) { e[k] = q(k); });
+    e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
+    var g = c.geo, m = c.mirror ? -1 : 1, F = hatFit(c);
+    var rig = {
+      cfg: c, slot: slot, exprId: c.expr, E: EXPR[c.expr], Pv: EXPR[c.expr], swStart: -1e12,
+      burstStart: -1e12, BE: EXPR[c.expr], treatStart: -1e12, callStart: -1e12,
+      pet: 0, petting: false, petHeartAt: 0, gaze: { on: false, last: -1e12, x: 0, y: 0, yaw: 0 }, gazeW: 0,
+      fsL: 0, fsR: 0
+    };
+
+    // Floating accents: one element per loop accent of each expression (made on first use),
+    // and a small pool for one-shots (taps, treats, petting).
+    var loopEls = {};
+    function makeAccent(type) {
+      var el = document.createElementNS(NS, 'g');
+      el.setAttribute('opacity', '0');
+      el.innerHTML = ACCENT[type].svg;
+      el._type = type;
+      (ACCENT[type].head ? e.accHead : e.acc).appendChild(el);
+      return el;
+    }
+    function loopAccents(E) {
+      if (!loopEls[E.name]) loopEls[E.name] = E.accents.map(function (a) { return makeAccent(a[0]); });
+      return loopEls[E.name];
+    }
+    var shots = [];
+    function shot(type, at) {
+      for (var i = 0; i < shots.length; i++) {
+        if (shots[i].type === type && shots[i].start + ACCENT[type].dur < at - 50) { shots[i].start = at; return; }
+      }
+      if (shots.length < 14) shots.push({ type: type, start: at, el: makeAccent(type), i: shots.length + 7 });
+    }
+
+    function placeAccent(el, type, p, i, fade) {
+      if (!(p > 0 && p < 1) || fade <= 0) { set(el, 'opacity', 0); return; }
+      var x, y, s, r = 0, o, s1 = seeded(i, 1), s3 = seeded(i, 3);
+      var inOut = p < 0.12 ? p / 0.12 : p > 0.8 ? (1 - p) / 0.2 : 1;
+      if (type === 'heart') {
+        x = 44 + 16 * s1 + 6 * wave(p * 1150, 1200, seeded(i, 2)) + 10 * p;
+        y = -62 - 6 * s3 - 38 * EASE_OUT(p);
+        s = (0.55 + 0.35 * seeded(i, 4)) * (0.5 + 0.5 * EASE_OUT(Math.min(1, p * 3)));
+        r = -12 + 24 * seeded(i, 5) + 8 * wave(p * 1150, 1200, 0.3);
+        o = bell(p) > 0.5 ? 1 : bell(p) * 2;
+      } else if (type === 'z') {
+        x = 30 + 10 * s1 + 22 * p + 4 * wave(p * 2000, 900);
+        y = -62 - 50 * p;
+        s = 0.55 + 0.6 * p;
+        r = -15 + 10 * wave(p * 2000, 1100);
+        o = p < 0.2 ? p / 0.2 : p > 0.75 ? (1 - p) / 0.25 : 1;
+      } else if (type === 'q') {
+        x = 40 + 6 * s1;
+        y = -80 - 5 * EASE_OUT(Math.min(1, p * 4)) + 1.5 * wave(p * 1350, 700);
+        s = 0.6 + 0.45 * EASE_OUT(Math.min(1, p * 5));
+        r = 10 * wave(p * 1350, 900);
+        o = inOut;
+      } else if (type === 'ex') {
+        x = 38 + 10 * s1;
+        y = -84 - 4 * EASE_OUT(Math.min(1, p * 5));
+        s = 0.6 + 0.5 * EASE_OUT(Math.min(1, p * 6));
+        r = 9 * wave(p * 1100, 180) * (1 - p);
+        o = inOut;
+      } else if (type === 'sparkle') {
+        var a = Math.PI * (0.1 + 0.8 * s1);
+        x = 68 * Math.cos(a); y = -18 - 70 * Math.sin(a);
+        s = 0.95 * bell(p);                       // tiny sparkles may start from nothing
+        r = 45 + 120 * p;
+        o = bell(p) > 0.3 ? 1 : bell(p) / 0.3;
+      } else if (type === 'tear') {
+        var x0 = 1 - 21 * c.eye;
+        x = x0 - 3 * p; y = -18 + 30 * p * p;      // falls, speeding up
+        s = 0.5 + 0.5 * EASE_OUT(Math.min(1, p * 3));
+        o = p < 0.1 ? p / 0.1 : p > 0.8 ? (1 - p) / 0.2 : 1;
+      } else if (type === 'tear2') {               // the other eye
+        x = 1 + 21 * c.eye + 3 * p; y = -18 + 30 * p * p;
+        s = 0.5 + 0.5 * EASE_OUT(Math.min(1, p * 3));
+        o = p < 0.1 ? p / 0.1 : p > 0.8 ? (1 - p) / 0.2 : 1;
+      } else if (type === 'note') {
+        x = 40 + 18 * s1 + 8 * wave(p * 1500, 1000, seeded(i, 2)) + 6 * p;
+        y = -60 - 8 * s3 - 42 * EASE_OUT(p);
+        s = (0.6 + 0.3 * seeded(i, 4)) * (0.5 + 0.5 * EASE_OUT(Math.min(1, p * 3)));
+        r = -15 + 30 * seeded(i, 5) + 12 * wave(p * 1500, 800);
+        o = bell(p) > 0.5 ? 1 : bell(p) * 2;
+      } else if (type === 'vein') {                // the cross-popping vein, throbbing on the brow
+        x = 30; y = -44;
+        s = 0.7 + 0.25 * EASE_OUT(Math.min(1, p * 5)) + 0.12 * wave(p * 1800, 300);
+        o = inOut;
+      } else if (type === 'steam') {               // out of the ears, both sides
+        var side = i % 2 ? 1 : -1;
+        x = side * (34 + 6 * p); y = -50 - 26 * EASE_OUT(p);
+        s = 0.5 + 0.8 * EASE_OUT(p);
+        o = bell(p);
+      } else if (type === 'glint') {               // a shine off the jawline
+        x = 30; y = 26;
+        s = 0.9 * bell(p); r = 45 + 90 * p;
+        o = bell(p) > 0.3 ? 1 : bell(p) / 0.3;
+      } else {                                     // puff: a huff from the nose
+        x = 12 + 22 * EASE_OUT(p); y = -14 - 8 * EASE_OUT(p);
+        s = 0.4 + 0.9 * EASE_OUT(p);
+        o = bell(p);
+      }
+      var flip = ACCENT[type].upright && m < 0 ? ' scale(-1 1)' : '';   // letters read the right way round
+      set(el, 'transform', tr(x, y) + ' rotate(' + r3(r) + ') scale(' + r3(s) + ')' + flip);
+      set(el, 'opacity', clamp(o * fade, 0, 1));
+    }
+
+    rig.setExpr = function (id, clock) {
+      if (id === rig.exprId) return;
+      var now = rig.E;
+      rig.Pv = now; rig.E = EXPR[id]; rig.exprId = id; rig.swStart = clock;
+    };
+    rig.excite = function (clock) {
+      if (clock - rig.burstStart >= B) {
+        rig.burstStart = clock; rig.BE = rig.E;
+        rig.E.burst.accents.forEach(function (a) { shot(a[0], clock + a[1]); });
+      } else {
+        shot('heart', clock);              // tapping again mid-burst: one more heart, no restart
+      }
+    };
+    rig.treat = function (clock) {
+      if (clock - rig.treatStart < TREAT) return false;
+      rig.treatStart = clock;
+      shot('heart', clock + 1400); shot('heart', clock + 1750);
+      return true;
+    };
+    rig.call = function (clock) { rig.callStart = clock; shot('ex', clock + 80); };
+
+    rig.frame = function (t, clock, dt, moveB) {
+      var E = rig.E, Pv = rig.Pv;
+      var sw = EASE_IN_OUT(clamp((clock - rig.swStart) / SWITCH, 0, 1));
+      var b = clock - rig.burstStart, BE = rig.BE;
+      var eB = b >= 0 && b < B ? flow(b, [[0, 0], [150, 1], [B - 600, 1], [B, 0]]) : 0;
+      var tb = clock - rig.treatStart;
+      var eT = tb >= 0 && tb < TREAT ? flow(tb, [[0, 0], [120, 1], [TREAT - 400, 1], [TREAT, 0]]) : 0;
+      var cb = clock - rig.callStart;
+      var eC = cb >= 0 && cb < CALL ? flow(cb, [[0, 0], [150, 1], [CALL - 500, 1], [CALL, 0]]) : 0;
+      var k = 1 - Math.exp(-dt / (rig.petting ? 220 : 600));
+      rig.pet += ((rig.petting ? 1 : 0) - rig.pet) * k;
+      var pet = rig.pet;
+      var gazeOn = rig.gaze.on && clock - rig.gaze.last < 2500;
+      rig.gazeW += ((gazeOn ? 1 : 0) - rig.gazeW) * (1 - Math.exp(-dt / 250));
+
+      function val(X, name) { var keys = X.act[name]; return keys ? flow(t, keys) : (name === 'tside' ? c.tongueSide : DEF[name]); }
+      function base(name) { var v = val(E, name); return sw < 1 ? val(Pv, name) + (v - val(Pv, name)) * sw : v; }
+      function over(name, v) {
+        if (eB > 0 && BE.burst.act[name]) v += (flow(b, BE.burst.act[name]) - v) * eB;
+        if (eT > 0 && TREAT_KEYS[name]) v += (flow(tb, TREAT_KEYS[name]) - v) * eT;
+        if (eC > 0 && CALLED[name] !== undefined) v += (CALLED[name] - v) * eC;
+        if (pet > 0.001 && PET[name] !== undefined) v += (PET[name] - v) * pet;
+        return v;
+      }
+      function ch(name) { return over(name, base(name)); }
+
+      function hops(dt2) {
+        var keep = 1 - Math.max(eB, eT);          // a tap's or treat's hops replace the loop's, never stack
+        var H = c.hopH;
+        var hn = hopLoop(ago(t, dt2), E.hops, H * E.hopK), hp = sw < 1 ? hopLoop(ago(t, dt2), Pv.hops, H * Pv.hopK) : hn;
+        var lift = (hp.lift + (hn.lift - hp.lift) * sw) * keep, d = (hp.d + (hn.d - hp.d) * sw) * keep;
+        if (eB > 0) { var hb = hopSum(b - dt2, BE.burst.hops, H); lift += hb.lift; d += hb.d; }
+        if (eT > 0) { var ht = hopSum(tb - dt2, TREAT_HOPS, Math.max(H, 9)); lift += ht.lift; d += ht.d; }
+        if (moveB >= 0 && moveB < MOVE + 300) { var hm = hopSum(moveB - dt2, MOVE_HOPS, 6); lift += hm.lift; d += hm.d; }
+        return { lift: lift, sy: 1 + d };
+      }
+
+      var joy = clamp(ch('joy'), 0, 1);
+      var notice = clamp(ch('notice'), 0, 1);
+      var shift = ch('shift');
+      var hop = hops(0), hopLate = hops(45), hopEars = hops(110);
+      var boop = b >= 0 && b < 260 ? flow(b, [[0, 0], [60, -0.06], [170, 0.02], [260, 0]]) : 0;
+      hop.sy += boop;
+
+      var fast = PERIOD / c.wag.fast, tailAmp = ch('tailAmp');
+      function wag(tt) { return tailAmp * ((1 - joy) * c.wag.slow * wave(tt, PERIOD / 8) + joy * c.wag.amp * wave(tt, fast)); }
+      var w0 = wag(t), w1 = wag(t - 70), w2 = wag(t - 140);
+
+      // Body: breathing, weight, a hip wiggle, a puffed chest, the hips swinging against the tail.
+      var chest = ch('chest');
+      var breath = 1 + 0.012 * wave(t, 3600) + 0.01 * joy * wave(t, 1200);
+      var dance = ch('dance'), shake = ch('shake');
+      var sy = breath * hop.sy * (1 + 0.03 * chest) + ch('shudder') * 0.028 * wave(t, 150);   // sobs, giggles, trembling
+      var sx = (1 / Math.pow(sy, 0.6)) * (1 + 0.035 * chest);
+      var hipX = shift - 0.05 * w0 + 3.2 * ch('wiggle') * wave(t, 600) + shake * 1.6 * wave(t, 60) + dance * 3.5 * wave(t, 900, 0.25);
+      set(e.body, 'transform', tr(g.fx + hipX, g.fy - hop.lift) + ' scale(' + r3(sx) + ' ' + r3(sy) + ') ' +
+        tr(-g.fx, -g.fy) + ' ' + rot(0.03 * w0, g.fx, g.fy));
+
+      // Tail: a three-link chain drawn as one smooth thick curve.
+      var curl = ch('tailCurl');
+      var a1 = -50 + ch('tailRest') + w0 + 2.2 * wave(t, 3600);
+      var a2 = a1 + curl + 0.42 * (w1 - w0) + 1.8 * wave(t, 3600, 0.2);
+      var a3 = a2 + curl + 0.55 * (w2 - w1) + 1.6 * wave(t, 2400, 0.4);
+      function step(q0, a, l) { var r = a * Math.PI / 180; return [q0[0] + l * Math.sin(r), q0[1] - l * Math.cos(r)]; }
+      var P0 = g.tail, P1 = step(P0, a1, c.tail.len[0]), P2 = step(P1, a2, c.tail.len[1]), P3 = step(P2, a3, c.tail.len[2]);
+      var M12 = [(P1[0] + P2[0]) / 2, (P1[1] + P2[1]) / 2];
+      set(e.tail, 'd', 'M' + pt(P0) + ' Q' + pt(P1) + ' ' + pt(M12) + ' Q' + pt(P2) + ' ' + pt(P3));
+
+      var stepK = ch('step');                       // feet that tap or step to a beat
+      set(e.leg0, 'transform', rot(-shift * 0.5 + 1.4 * wave(t, 2400) + stepK * 7 * wave(t, 900), g.legs[0], 26));
+      set(e.leg1, 'transform', rot(-shift * 0.5 - 1.2 * wave(t, 1800, 0.35) + stepK * 7 * wave(t, 900, 0.5), g.legs[1], 26));
+      set(e.leg2, 'transform', rot(-shift * 0.5 + 1.1 * wave(t, 2400, 0.6) + stepK * 7 * wave(t, 900, 0.25), g.legs[2], 26));
+
+      // Head: rides the squash a beat late; its own tilt and carriage, a wobble, counter-motion.
+      var headY = -hopLate.lift + (1 - hopLate.sy) * 52 - 1.2 * (wave(t, 3600) + 1) / 2 + ch('headY');
+      var shiftLate = E.act.shift ? flow(ago(t, 120), E.act.shift) : 0;
+      var tilt = ch('tilt') + 1.8 * wave(t, 3600, 0.3) - 0.35 * shiftLate + 8 * ch('wobble') * wave(t, 450) + dance * 8 * wave(t, 900);
+      set(e.head, 'transform', tr(hipX * 0.7 + shake * 1.1 * wave(t, 60, 0.3), headY) + ' ' + rot(tilt, 0, g.hb - 10));
+      // A worn hat rides the head on a soft spring: it lifts a touch as a hop lands and settles back, so it sits on the
+      // head instead of being painted on it (secondary motion; glasses get a quarter of it)
+      if (e.wearHead && e.wearHead.firstChild) {
+        var kk = Math.min(dt, 48) / 16, vy = rig.pHY == null ? 0 : (headY - rig.pHY) / kk, ay = vy - (rig.pVY || 0);
+        rig.pHY = headY; rig.pVY = vy;
+        rig.hatV = (rig.hatV || 0) + (-0.2 * (rig.hatY || 0) - 0.3 * (rig.hatV || 0) - 0.7 * ay) * kk;
+        rig.hatY = clamp((rig.hatY || 0) + rig.hatV * kk, -5, 5);
+      } else rig.hatY = 0;
+      set(e.collar, 'transform', tr(hipX * 0.75, headY * 0.85 - 0.15 * hop.lift));
+      set(e.tag, 'transform', rot(-0.3 * w1 + 3 * wave(t - 120, 1440) + 40 * (hopEars.sy - hop.sy), -4, g.hb + 4));
+
+      // The turn, without a second drawing: each part slides by its depth. The pointer pulls it a little.
+      var yaw = c.yaw0 * (1 - notice) + rig.gaze.yaw * rig.gazeW * (1 - eT);
+      set(e.feat, 'transform', tr(yaw * 10, 0));
+      // the hat: the spring above, the head's turn (a hat sits between the face's depth and the head's outline), and
+      // this dog's fit (hatFit); glasses take a quarter of the spring and ride the features' yaw in their own group
+      set(e.wearHead, 'transform', tr(yaw * 4, rig.hatY + F.y) + ' ' + rot(-0.6 * rig.hatY, 1, -55) + ' ' + scl(F.s, 1, -55));
+      if (e.wearFace) set(e.wearFace, 'transform', tr(0, rig.hatY * 0.25));
+      set(e.snout, 'transform', tr(yaw * 13, 0));
+      set(e.earsBack, 'transform', tr(-yaw * 9, 0));
+      set(e.earTips, 'transform', tr(-yaw * 9, 0));
+      set(e.earsFront, 'transform', tr(-yaw * 5, 0));
+
+      // Ears: perk on a look, press back when shy, flick, flop a beat behind each hop.
+      var perk = 0.25 + 0.75 * notice, back = ch('earBack');
+      var flick = 2.4 * wave(t, 2400, 0.1) + 1.2 * wave(t, 1800, 0.3);
+      var flop = 1.7 * (hopEars.lift - hopLate.lift) + 26 * (hopLate.sy - hopEars.sy) + dance * 5 * wave(t, 450, 0.15);
+      var lagT = E.act.tilt ? 0.35 * (flow(ago(t, 110), E.act.tilt) - flow(t, E.act.tilt)) : 0;
+      var foldBase = base('fold');
+      ['L', 'R'].forEach(function (side, i) {
+        var sgn = side === 'L' ? -1 : 1, node = e['ear' + side];
+        if (c.ears[i] === 'up') {
+          var u = EAR_UP[side];
+          var ang = sgn * (13 - 7 * (1 - perk) + 22 * back) - flick * (sgn < 0 ? 1 : 0.8) - sgn * flop - lagT;
+          var earT = tr(u.x, u.y) + ' ' + rot(ang, 0, 0) + (c.earScale ? ' scale(' + c.earScale + ')' : '');
+          set(node, 'transform', earT);
+          var fold = 0;
+          if (c.foldable) {
+            var idle = c.foldIdle ? flow(t, c.foldIdle[side]) : 0;
+            fold = clamp(over('fold', clamp(idle + foldBase + base('fold' + side), 0, 1)), 0, 1);
+          }
+          var key = 'fs' + side;
+          rig[key] += (fold - rig[key]) * (1 - Math.exp(-dt / 90));   // the tip lags its own fold, then settles
+          var cf = Math.cos(fold * Math.PI);
+          var tipR = -sgn * 12 * fold - sgn * 40 * (fold - rig[key]) + 0.8 * sgn * flop;
+          set(e['tip' + side], 'transform', earT + ' translate(0 -24) rotate(' + r3(tipR) + ') scale(1 ' + r3(cf) + ')');
+          set(e['tipOut' + side], 'fill', cf >= 0 ? c.pal.coat : c.pal.sh);   // the back of the ear shows once it's over
+          set(e['tipIn' + side], 'opacity', cf > 0 ? 1 : 0);                  // swaps only when the tip is edge-on
+        } else {
+          var f = EAR_FLOP[side];
+          set(node, 'transform', tr(f.x, f.y) + ' ' + rot(-sgn * (24 - 8 * perk + 10 * back - c.flopGain * flop) + 0.6 * flick - lagT, 0, 0));
+        }
+      });
+
+      // Brows: the breed's tan marks. Lift on a look; inner ends up when worried, down when cross.
+      var brow = ch('brows'), browTilt = ch('browTilt'), skew = ch('browSkew');
+      var browY = -3.2 * brow - 0.6 * (wave(t, 2400, 0.7) + 1) / 2 - 2.2 * (hop.sy - 1) * 10;
+      set(e.browL, 'transform', tr(0, browY - 2.4 * skew) + ' ' + rot(-7 * brow - 14 * browTilt, -10.7, c.brow.y + 3));
+      set(e.browR, 'transform', tr(0, browY + 2.4 * skew) + ' ' + rot(7 * brow + 14 * browTilt, 12.7, c.brow.y + 3));
+
+      // Pupils: lead the turn, glance, follow the pointer or a falling treat, cross, sink in a squint.
+      var cheekK = clamp(ch('cheek'), 0, 1), derp = ch('derp'), he = clamp(ch('heartEyes'), 0, 1);
+      var lookX = ch('lookX'), lookY = ch('lookY');
+      var gw = rig.gazeW * (1 - eT);
+      lookX += (rig.gaze.x - lookX) * gw; lookY += (rig.gaze.y - lookY) * gw;
+      var boneX = 0, boneY = 0, boneOn = 0, boneS = 1, boneR = 0;
+      if (tb >= 0 && tb < TREAT) {
+        var mouthX = 1.5 + yaw * 13, mouthY = -1;
+        if (tb < 650) {                                   // falling: gravity, spinning, eyes on it
+          var fp = tb / 650;
+          boneX = 8 - hipX * 0.7 + (mouthX - 8 + hipX * 0.7) * fp;
+          boneY = -250 - headY + (mouthY + 250 + headY) * fp * fp;   // from beyond the top edge, already falling
+          boneR = 360 * fp; boneOn = 1; boneS = 0.85 + 0.15 * fp;     // one whole turn, so the catch lands level
+          var w = 1 - Math.max(0, (tb - 520) / 130);
+          lookX += (clamp((boneX - 1) / 12, -4, 4) - lookX) * w * eT;
+          lookY += (clamp((boneY + 32) / 14, -4.5, 4) - lookY) * w * eT;
+        } else {                                          // caught: chomped away in three bites
+          boneX = mouthX; boneY = mouthY; boneR = 0;
+          boneS = flow(tb, [[650, 1], [850, 0.75], [1050, 0.5], [1250, 0.28], [1350, 0.2]]);
+          boneOn = tb < 1250 ? 1 : Math.max(0, 1 - (tb - 1250) / 100);
+        }
+      }
+      set(e.bone, 'opacity', boneOn);
+      if (boneOn > 0) set(e.bone, 'transform', tr(boneX, boneY) + ' rotate(' + r3(boneR) + ') scale(' + r3(boneS) + ')');
+      lookY += 7 * cheekK - 1.2 * joy + 1.1 * wave(t, 3600, 0.5);
+      lookX += yaw * 8 + 1.4 * wave(t, 2400, 0.15) * notice;
+      // a pinpoint pupil (surprised, furious, locked in) still reads as a pupil: below 0.8 the eye read as blank white
+      var ps = Math.max(0.8, c.pupil * ch('pupil')) * clamp(1 - 1.6 * he, 0, 1);   // hearts in, pupils out: never both small mid-blend
+      // Each pupil stays inside its own eye. The offsets add up (the expression's glance, the pointer, the head's yaw,
+      // the idle wander, a derp), and unclamped they slid a pupil out of its clip and left a blank white eye (RCA
+      // 2026-10-23, scripts/doberman-eyes audit). The bounds keep at least 80% of the pupil inside the white; the left
+      // pupil starts 3.4 units toward the nose (the three-quarter view), so its room is uneven. A squint lets it sink
+      // under the rising cheek, which covers it anyway.
+      var down = 9.5;   // not lower under a squint either: the cheek would hide the pupil and leave a white crescent
+      var dxL = clamp(lookX + 3.2 * derp, -11, 4.6), dyL = clamp(lookY - 1.5 * derp, -8, down);
+      var dxR = clamp(lookX - 3.2 * derp, -7.4, 8.6), dyR = clamp(lookY + 1.5 * derp, -8, down);
+      set(e.pupilL, 'transform', tr(-7.3 + dxL, -32 + dyL) + ' scale(' + r3(ps) + ') ' + tr(7.3, 32));
+      set(e.pupilR, 'transform', tr(12.1 + dxR, -32 + dyR) + ' scale(' + r3(ps) + ') ' + tr(-12.1, 32));
+      set(e.heyeL, 'opacity', he > 0.01 ? 1 : 0);
+      set(e.heyeR, 'opacity', he > 0.01 ? 1 : 0);
+      var hs = clamp(he * 1.8, 0, 1) * (1 + 0.06 * wave(t, 600));
+      set(e.heyeL, 'transform', tr(-9.7 + lookX * 0.5, -30 + lookY * 0.4) + ' scale(' + r3(hs) + ')');
+      set(e.heyeR, 'transform', tr(11.7 + lookX * 0.5, -30 + lookY * 0.4) + ' scale(' + r3(hs) + ')');
+
+      // Lids from above, with a slant for worry or temper; cheeks rise into a happy squint.
+      var blink = clamp(track(t, E.lid), 0, 1);
+      if (sw < 1) blink = clamp(track(t, Pv.lid), 0, 1) * (1 - sw) + blink * sw;
+      var lid = clamp(Math.max(blink, ch('lidRest')), 0, 1);
+      var slant = ch('slant'), edge = -46.5 + lid * 30.5;
+      set(e.lidL, 'height', 29.5 + lid * 30.5);
+      set(e.lidR, 'height', 29.5 + lid * 30.5);
+      set(e.lidL, 'transform', rot(-14 * slant, -10.7, edge));
+      set(e.lidR, 'transform', rot(14 * slant, 12.7, edge));
+      var cheekY = -1.2 - 21 * cheekK - 4 * lid;
+      set(e.cheekL, 'cy', cheekY);
+      set(e.cheekR, 'cy', cheekY);
+      var shut = clamp((lid - 0.72) / 0.22, 0, 1);
+      set(e.shutL, 'opacity', shut);
+      set(e.shutR, 'opacity', shut);
+
+      set(e.blush, 'opacity', clamp(ch('blush'), 0, 1));
+
+      // Red eyes blend the white toward pink (a blend, never a swap).
+      var red = clamp(ch('redEye'), 0, 1);
+      set(e.white, 'fill', 'rgb(255,' + Math.round(255 - 56 * red) + ',' + Math.round(255 - 56 * red) + ')');
+      // Shades drop in from above the head and settle with a small bounce.
+      var shv = ch('shades');
+      set(e.shades, 'opacity', clamp(shv / 0.12, 0, 1));
+      if (shv > 0) set(e.shades, 'transform', tr(0, -110 * (1 - shv)));
+
+      // Mouth: one D shape. Taller is a pant or a yawn, narrower an "o", flipped a pout.
+      var mouth = clamp(ch('mouth') + ch('pant') * joy * (0.6 + 0.12 * wave(t, 600)), -0.6, 1.4);
+      var mouthW = ch('mouthW'), mx = ch('mouthX'), mt = ch('mouthTilt');
+      set(e.mouth, 'transform', tr(1.5 + mx, -7) + ' rotate(' + r3(mt) + ') scale(' + r3(mouthW) + ' ' + r3(mouth) + ') ' + tr(-1.5, 7));
+      set(e.teeth, 'transform', tr(0, -7) + ' scale(1 ' + r3(clamp(ch('teeth'), 0, 1)) + ') ' + tr(0, 7));
+      var tongue = clamp(ch('tongue'), 0, 1) * clamp(mouth / 0.3, 0, 1), side = clamp(ch('tside'), 0, 1);
+      set(e.tongue, 'transform', tr(1.5 + 6.5 * side + mx, -5) + ' rotate(' + r3(4 * wave(t, 600, 0.25) * tongue + 26 * side + 0.6 * tilt * side + mt) + ') scale(1 ' +
+        r3(0.12 * clamp(mouth / 0.3, 0, 1) + 0.88 * tongue) + ') ' + tr(-1.5, 5));
+
+      var spin = eB > 0 && BE.burst.spin ? flow(b, BE.burst.spin) : 0;   // ends on a whole turn, so it never unwinds
+      var z = ch('zoom'), cs = Math.cos(spin * Math.PI * 2);
+      set(e.dog, 'transform', tr(m * 18 * c.scale, 0) + ' scale(' + r3(m * c.scale * z * cs) + ' ' + r3(c.scale * z) + ') ' + tr(0, -g.fy));
+      var shd = 1 - hop.lift / 32;
+      set(e.floor, 'transform', tr(g.fx + hipX * 0.5, g.fy) + ' scale(' + r3(shd) + ' ' + r3(0.75 + 0.25 * shd) + ') ' + tr(-g.fx, -g.fy));
+
+      // Accents: the loop's own (fading across an expression switch), then the one-shots.
+      var now = loopAccents(E);
+      E.accents.forEach(function (a, i) { placeAccent(now[i], a[0], ((t - a[1]) % PERIOD + PERIOD) % PERIOD / a[2], i, sw); });
+      if (Pv !== E) {
+        var was = loopAccents(Pv);
+        Pv.accents.forEach(function (a, i) { placeAccent(was[i], a[0], ((t - a[1]) % PERIOD + PERIOD) % PERIOD / a[2], i, 1 - sw); });
+      }
+      if (rig.petting && pet > 0.5 && clock - rig.petHeartAt > 650) { rig.petHeartAt = clock; shot('heart', clock); }
+      for (var j = 0; j < shots.length; j++) {
+        var sh = shots[j];
+        placeAccent(sh.el, sh.type, (clock - sh.start) / ACCENT[sh.type].dur, sh.i, 1);
+      }
+    };
+    return rig;
+  }
+
+  // ---- the scene: a roster, a camera, and dogs that walk to their spots ----
+  var svg = document.getElementById('scene');
+  var stageEl = document.getElementById('stage');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var narrowMq = window.matchMedia('(max-width: 640px)');
+  var clock = 0;
+
+  function tween(v) { return { a: v, b: v, s: 0, d: 0, ease: EASE_IN_OUT }; }
+  function tv(tw, c) {
+    if (tw.d <= 0 || c >= tw.s + tw.d) return tw.b;
+    return tw.a + (tw.b - tw.a) * tw.ease(clamp((c - tw.s) / tw.d, 0, 1));
+  }
+  function retarget(tw, to, d, ease) { tw.a = tv(tw, clock); tw.b = to; tw.s = clock; tw.d = d; tw.ease = ease || EASE_IN_OUT; }
+
+  var roster = DOGS.map(function (c) {
+    return { c: c, rig: null, slot: null, state: 'out', tx: tween(0), ty: tween(0), moveStart: -1e12, leaveEnd: 0 };
+  });
+  var selected = roster[0];
+  var cam = [tween(-284), tween(-325), tween(568), tween(355)];
+
+  function positions(n) {
+    if (n === 1) return [[0, 0]];
+    if (n === 2) return [[-160, 0], [160, 0]];
+    if (n > 4) {   // a grid, three a row (two on a phone)
+      var cols = narrowMq.matches ? 2 : 3, out = [];
+      for (var k = 0; k < n; k++) out.push([((k % cols) - (Math.min(cols, n - Math.floor(k / cols) * cols) - 1) / 2) * 300, Math.floor(k / cols) * 330]);
+      return out;
+    }
+    if (n === 4) return narrowMq.matches ? [[-150, 0], [150, 0], [-150, 330], [150, 330]] : [[-450, 0], [-150, 0], [150, 0], [450, 0]];
+    return narrowMq.matches ? [[-150, 0], [150, 0], [0, 330]] : [[-300, 0], [0, 0], [300, 0]];
+  }
+  function inScene() { return roster.filter(function (r) { return r.state === 'in'; }); }
+  // The dogs' own bounds (discs, ears, floating accents), with a small margin.
+  function contentBox(list) {
+    var P = positions(list.length);
+    var x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    P.forEach(function (p) { x0 = Math.min(x0, p[0] - 150); x1 = Math.max(x1, p[0] + 150); y0 = Math.min(y0, p[1] - 310); y1 = Math.max(y1, p[1] + 30); });
+    if (document.documentElement.classList.contains('embed')) {   // the mascot: frame the dog itself, not the stage around it
+      // room above the head for the tallest piece in the wardrobe (130 head units up from the floor point: the wizard's
+      // tip, the headwrap's fan), so a tall dog (Rosie) is framed a little wider instead of losing its hat to the edge
+      var c = list[0] ? list[0].c : null, top = c ? Math.min(y0 - 8, -(c.floorY + 132) * c.scale) : y0 - 8;
+      return [x0 + 30, top, x1 - x0 - 60, y1 - top];
+    }
+    return [x0 - 10, y0 - 10, x1 - x0 + 20, y1 - y0 + 20];
+  }
+  // The camera: the content box, widened to the stage's shape.
+  function cameraFor(list) {
+    var c = contentBox(list), w = c[2], h = c[3];
+    var A = stageEl.clientWidth / Math.max(1, stageEl.clientHeight) || 1.6;
+    if (w / h < A) w = h * A; else h = w / A;
+    return [c[0] + c[2] / 2 - w / 2, c[1] + c[3] / 2 - h / 2, w, h];
+  }
+  function live() { return !reduced.matches; }
+
+  function relayout(arriving) {
+    var list = inScene(), P = positions(list.length), target = cameraFor(list);
+    var d = live() && running() ? 1 : 0;
+    list.forEach(function (r, i) {
+      if (r === arriving) {                       // enter from beyond the frame, already moving
+        var fromLeft = roster.indexOf(r) === 0;
+        var sx = fromLeft ? target[0] - 190 : target[0] + target[2] + 190;
+        r.tx = tween(sx); r.ty = tween(P[i][1]);
+        retarget(r.tx, P[i][0], MOVE * d, EASE_OUT); retarget(r.ty, P[i][1], MOVE * d, EASE_OUT);
+        r.moveStart = clock;
+      } else {
+        if (Math.abs(tv(r.tx, clock) - P[i][0]) > 40 || Math.abs(tv(r.ty, clock) - P[i][1]) > 40) r.moveStart = clock;
+        retarget(r.tx, P[i][0], MOVE * d); retarget(r.ty, P[i][1], MOVE * d);
+      }
+    });
+    roster.forEach(function (r) {
+      if (r.state !== 'leaving') return;
+      var cur = tv(r.tx, clock), right = cur > target[0] + target[2] / 2;
+      retarget(r.tx, right ? target[0] + target[2] + 220 : target[0] - 220, 700 * d, EASE_IN);
+      r.moveStart = clock; r.leaveEnd = clock + 700 * d;
+    });
+    for (var k = 0; k < 4; k++) retarget(cam[k], target[k], 800 * d);
+    if (!d) { draw(16); }
+  }
+
+  function addDog(r) {
+    if (r.state === 'in') return;
+    var wasLeaving = r.state === 'leaving';   // turn round where it is, don't re-enter from the edge
+    if (!r.slot) {
+      r.slot = document.createElementNS(NS, 'g');
+      r.slot.setAttribute('class', 'slot');
+      r.slot.setAttribute('tabindex', '0');
+      r.slot.setAttribute('role', 'button');
+      r.slot.setAttribute('aria-label', r.c.name + '. Tap to react, press and drag to pet.');
+      r.rig = makeDog(r.c, r.slot, 's-' + r.c.id);
+      bindSlot(r);
+    }
+    var next = null;
+    for (var i = roster.indexOf(r) + 1; i < roster.length; i++) if (roster[i].slot && roster[i].slot.parentNode) { next = roster[i].slot; break; }
+    if (!r.slot.parentNode) svg.insertBefore(r.slot, next);
+    r.state = 'in';
+    relayout(wasLeaving ? null : r);
+    syncDock();
+  }
+  function removeDog(r) {
+    if (r.state !== 'in' || inScene().length <= 1) return;
+    r.state = 'leaving';
+    if (selected === r) selected = inScene()[0];
+    relayout(null);
+    syncDock();
+  }
+
+  // ---- pointer: eyes follow it; a press and drag pets; a still press is a tap ----
+  var pointer = { on: false, x: 0, y: 0, last: -1e12 };
+  function toWorld(ev) {
+    var m = svg.getScreenCTM();
+    if (!m) return null;
+    var p = svg.createSVGPoint(); p.x = ev.clientX; p.y = ev.clientY;
+    return p.matrixTransform(m.inverse());
+  }
+  svg.addEventListener('pointermove', function (ev) {
+    var w = toWorld(ev); if (!w) return;
+    pointer.on = true; pointer.x = w.x; pointer.y = w.y; pointer.last = clock;
+  });
+  svg.addEventListener('pointerleave', function () { pointer.on = false; });
+  function lookAt(fx, fy) {
+    var m = svg.getScreenCTM(); if (!m) return;
+    var p = svg.createSVGPoint(); p.x = fx; p.y = fy; var w = p.matrixTransform(m.inverse());
+    pointer.on = true; pointer.x = w.x; pointer.y = w.y; pointer.last = clock;
+  }
+  // wear: the parent sends each slot's markup (its catalogue, public/js/study-kit/mascot.mjs); a change gets a little shake
+  function wear(r, m, fresh) {
+    var changed = false;
+    ['Head', 'Face', 'Neck', 'Back'].forEach(function (k) {
+      var g = r.slot && r.slot.querySelector('[data-p="wear' + k + '"]'), v = typeof m[k.toLowerCase()] === 'string' ? m[k.toLowerCase()] : '';
+      if (g && g.getAttribute('data-v') !== v) { g.innerHTML = v; g.setAttribute('data-v', v); changed = changed || !!v; }
+    });
+    // the head piece's ears: '' they pass behind it, 'over' they come through holes in it (drawn again over the brim,
+    // outside the head), 'hide' fabric covers the pricked or round ears, 'hood' covers floppy ones too
+    var ears = m.head && typeof m.ears === 'string' ? m.ears : '', q = function (n) { return r.slot && r.slot.querySelector('[data-p="' + n + '"]'); };
+    var up = ears === 'hide' || ears === 'hood' ? 'none' : 'inline';
+    ['earsBack', 'earTips'].forEach(function (n) { var el = q(n); if (el) el.setAttribute('display', up); });
+    if (q('earsFront')) q('earsFront').setAttribute('display', ears === 'hood' ? 'none' : 'inline');
+    if (q('earsOver')) q('earsOver').setAttribute('display', ears === 'over' ? 'inline' : 'none');
+    if (q('tag')) q('tag').setAttribute('display', m.neck ? 'none' : 'inline');   // a worn neck piece replaces the collar's own tag
+    if (changed && !fresh) r.rig.excite(clock);
+  }
+
+  function bindSlot(r) {
+    var press = null;
+    r.slot.addEventListener('pointerdown', function (ev) {
+      press = { x: ev.clientX, y: ev.clientY, moved: false };
+      try { r.slot.setPointerCapture(ev.pointerId); } catch (err) { /* capture is optional */ }
+    });
+    r.slot.addEventListener('pointermove', function (ev) {
+      if (!press) return;
+      if (!press.moved && Math.hypot(ev.clientX - press.x, ev.clientY - press.y) > 6) press.moved = true;
+      if (press.moved) r.rig.petting = true;
+    });
+    function end(tap) {
+      if (press && !press.moved && tap) { select(r); r.rig.excite(clock); kick(); }
+      press = null; r.rig.petting = false;
+    }
+    r.slot.addEventListener('pointerup', function () { end(true); });
+    r.slot.addEventListener('pointercancel', function () { end(false); });
+    r.slot.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(r); r.rig.excite(clock); kick(); }
+    });
+  }
+
+  // ---- the bottom menu ----
+  var dogsEl = document.getElementById('dogs'), chipsEl = document.getElementById('chips'), exprLabel = document.getElementById('exprLabel');
+  roster.forEach(function (r) {
+    var wrap = document.createElement('div');
+    wrap.className = 'avatar-wrap';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'avatar';
+    var thumb = document.createElementNS(NS, 'svg');
+    var s = r.c.scale, m = r.c.mirror ? -1 : 1, hx = m * 18 * s, hy = -r.c.floorY * s;
+    thumb.setAttribute('viewBox', [hx - 64 * s, hy - 92 * s, 128 * s, 128 * s].map(r3).join(' '));
+    thumb.setAttribute('aria-hidden', 'true');
+    thumb.style.background = r.c.pal.disc;
+    var tg = document.createElementNS(NS, 'g');
+    thumb.appendChild(tg);
+    var trig = makeDog(r.c, tg, 'th-' + r.c.id);
+    tg.querySelector('[data-p="disc"]').setAttribute('r', '0');
+    trig.setExpr('curious', -1e12);          // a neutral, attentive face for the menu
+    trig.frame(0, STILL, 16);
+    var who = document.createElement('span');
+    who.className = 'who';
+    who.innerHTML = '<b></b><span></span>';
+    who.firstChild.textContent = r.c.name;
+    btn.appendChild(thumb); btn.appendChild(who);
+    btn.addEventListener('click', function () { if (r.state !== 'in') addDog(r); select(r); });
+    var rm = document.createElement('button');
+    rm.type = 'button'; rm.className = 'remove'; rm.textContent = '×';
+    rm.setAttribute('aria-label', 'Take ' + r.c.name + ' out of the scene');
+    rm.addEventListener('click', function (ev) { ev.stopPropagation(); removeDog(r); });
+    wrap.appendChild(btn); wrap.appendChild(rm);
+    dogsEl.appendChild(wrap);
+    r.ui = { btn: btn, sub: who.lastChild, rm: rm };
+  });
+  EXPR_ORDER.forEach(function (id) {
+    var chip = document.createElement('button');
+    chip.type = 'button'; chip.className = 'chip'; chip.textContent = EXPR[id].name; chip.dataset.expr = id;
+    chip.addEventListener('click', function () {
+      if (!selected || selected.state !== 'in') return;
+      selected.rig.setExpr(id, live() && running() ? clock : -1e12);
+      kick(); syncDock();
+    });
+    chipsEl.appendChild(chip);
+  });
+  function select(r) { selected = r; syncDock(); }
+  function syncDock() {
+    var n = inScene().length;
+    roster.forEach(function (r) {
+      var isIn = r.state === 'in';
+      r.ui.btn.classList.toggle('out', !isIn);
+      r.ui.btn.classList.toggle('selected', isIn && r === selected);
+      r.ui.btn.setAttribute('aria-pressed', String(isIn && r === selected));
+      r.ui.btn.setAttribute('aria-label', isIn ? 'Select ' + r.c.name : 'Add ' + r.c.name + ' to the scene');
+      r.ui.sub.textContent = isIn ? EXPR[r.rig.exprId].name : '+ Add';
+      r.ui.rm.hidden = !isIn || n <= 1;
+    });
+    exprLabel.innerHTML = 'Expression · <b></b>';
+    exprLabel.lastChild.textContent = selected ? selected.c.name : '';
+    [].forEach.call(chipsEl.children, function (chip) {
+      chip.setAttribute('aria-pressed', String(!!selected && selected.rig && selected.rig.exprId === chip.dataset.expr));
+    });
+  }
+
+  document.getElementById('treat').addEventListener('click', function () {
+    if (selected && selected.state === 'in') { selected.rig.treat(clock); kick(); }
+  });
+  document.getElementById('call').addEventListener('click', function () {
+    inScene().forEach(function (r, i) { r.rig.call(clock + i * 110); });
+    kick();
+  });
+
+  // ---- the clock: one loop for everyone, paused when it can't be seen ----
+  var toggleEl = document.getElementById('toggle');
+  var wanted = !reduced.matches;     // reduced motion holds frame 0, which reads on its own
+  var visible = true, raf = 0, last = 0, lively = 0;
+
+  function draw(dt) {
+    var t = clock % PERIOD;
+    var vb = cam.map(function (tw) { return tv(tw, clock); });
+    set(svg, 'viewBox', vb.map(r3).join(' '));
+    roster.forEach(function (r) {
+      if (!r.slot || !r.slot.parentNode) return;
+      if (r.state === 'leaving' && clock >= r.leaveEnd) { svg.removeChild(r.slot); r.state = 'out'; syncDock(); return; }
+      var x = tv(r.tx, clock), y = tv(r.ty, clock);
+      set(r.slot, 'transform', tr(x, y));
+      var c = r.c, s = c.scale, m = c.mirror ? -1 : 1, hx = x + m * 18 * s, hy = y - c.floorY * s;
+      var ux = (pointer.x - hx) / s * m, uy = (pointer.y - hy) / s;
+      r.rig.gaze.on = pointer.on; r.rig.gaze.last = pointer.last;
+      r.rig.gaze.x = clamp(ux / 14, -4.5, 4.5); r.rig.gaze.y = clamp(uy / 16, -3.5, 4);
+      r.rig.gaze.yaw = clamp(ux / 260, -0.22, 0.22);
+      r.rig.frame(t, clock, dt, clock - r.moveStart);
+    });
+  }
+  function running() { return wanted && visible && !document.hidden; }
+  function tick(now) {
+    if (!running()) { raf = 0; return; }
+    var dt = last ? Math.min(now - last, 64) : 16;
+    // embed mode (the Learn mascot): a slow, quiet idle at a third of the speed; full speed for a while after a reaction
+    if (EMBED && now > lively) dt *= 0.25;   // Duo 'mostly stands still': the idle is a breath, not a dance
+    clock += dt; last = now;
+    draw(dt);
+    raf = requestAnimationFrame(tick);
+  }
+  function kick() { if (!running()) draw(16); }
+  function sync() {
+    if (running()) {
+      if (!raf) { last = 0; raf = requestAnimationFrame(tick); }
+    } else if (raf) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    }
+    toggleEl.textContent = wanted ? 'Pause' : 'Play';
+  }
+  toggleEl.addEventListener('click', function () { wanted = !wanted; sync(); });
+  document.addEventListener('visibilitychange', sync);
+  if (reduced.addEventListener) reduced.addEventListener('change', function () { wanted = !reduced.matches; sync(); });
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; sync(); }, { threshold: 0.05 }).observe(svg);
+  }
+  window.addEventListener('resize', function () { relayout(null); });
+  if (narrowMq.addEventListener) narrowMq.addEventListener('change', function () { relayout(null); });
+
+  // ---- GIF: render one loop of the scene as it is set up, encode it here, offer it to save ----
+  // Flat art needs no dithering: a 256-colour palette from the scene's own pixels, mapped per
+  // 15-bit colour, then plain GIF LZW. One loop, so the GIF repeats without a seam.
+  var LZW_TABLE = new Int32Array(1 << 20), LZW_USED = new Int32Array(4096);
+  function lzw(ix, buf) {
+    var p = 0, clear = 256, eoi = 257, next = 258, size = 9, cur = 0, shift = 0, nUsed = 0;
+    buf[p++] = 8;
+    var sub = p++;
+    function byte(v) { buf[p++] = v; if (p === sub + 256) { buf[sub] = 255; sub = p++; } }
+    function emit(code) { cur |= code << shift; shift += size; while (shift >= 8) { byte(cur & 255); cur >>>= 8; shift -= 8; } }
+    function reset() { for (var i = 0; i < nUsed; i++) LZW_TABLE[LZW_USED[i]] = 0; nUsed = 0; next = 258; size = 9; }
+    emit(clear);
+    var prefix = ix[0];
+    for (var i = 1, n = ix.length; i < n; i++) {
+      var k = ix[i], key = (prefix << 8) | k, code = LZW_TABLE[key];
+      if (code) { prefix = code - 1; continue; }
+      emit(prefix);
+      if (next === 4096) { emit(clear); reset(); }
+      else { if (next >= (1 << size)) size++; LZW_TABLE[key] = next + 1; LZW_USED[nUsed++] = key; next++; }
+      prefix = k;
+    }
+    emit(prefix); emit(eoi);
+    if (shift > 0) byte(cur & 255);
+    if (sub + 1 === p) buf[sub] = 0; else { buf[sub] = p - sub - 1; buf[p++] = 0; }
+    reset();
+    return p;
+  }
+  function u16(v) { return [v & 255, (v >> 8) & 255]; }
+
+  // The GIF crops to the dogs, not the stage: no empty bands, and one dog makes a tall GIF.
+  function sceneSnapshot(W, H) {
+    var vb = contentBox(inScene());
+    var xs = document.createElementNS(NS, 'svg');
+    xs.setAttribute('xmlns', NS);
+    xs.setAttribute('viewBox', vb.map(r3).join(' '));
+    xs.setAttribute('width', W); xs.setAttribute('height', H);
+    var bg = document.createElementNS(NS, 'rect');
+    bg.setAttribute('x', vb[0] - 10); bg.setAttribute('y', vb[1] - 10); bg.setAttribute('width', vb[2] + 20); bg.setAttribute('height', vb[3] + 20);
+    bg.setAttribute('fill', getComputedStyle(stageEl).backgroundColor || '#f5fbff');
+    xs.appendChild(bg);
+    var list = inScene(), P = positions(list.length);
+    var rigs = list.map(function (r, i) {
+      var gg = document.createElementNS(NS, 'g');
+      gg.setAttribute('transform', tr(P[i][0], P[i][1]));
+      xs.appendChild(gg);
+      var x = makeDog(r.c, gg, 'x' + i + '-' + r.c.id);
+      x.setExpr(r.rig.exprId, -1e12);
+      return x;
+    });
+    return { svg: xs, rigs: rigs, vb: vb, names: list.map(function (r) { return r.c.name.toLowerCase(); }) };
+  }
+
+  var busy = false, lastGif = null;
+  var gifBtn = document.getElementById('gif'), statusEl = document.getElementById('status');
+  var exportEl = document.getElementById('export'), previewEl = document.getElementById('gifPreview');
+  var noteEl = document.getElementById('exportNote'), againEl = document.getElementById('saveAgain');
+  var downloadsP = (window.claude && typeof window.claude.use === 'function')
+    ? window.claude.use('downloads').catch(function () { return null; }) : Promise.resolve(null);
+
+  async function makeGif(onProgress) {
+    var vb = contentBox(inScene()), fit = 720 / Math.max(vb[2], vb[3]);
+    var W = Math.round(vb[2] * fit), H = Math.round(vb[3] * fit);
+    var snap = sceneSnapshot(W, H);
+    var canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    var ctx = canvas.getContext('2d', { willReadFrequently: true });
+    var ser = new XMLSerializer();
+    var step = 1000 / GIF_FPS, N = Math.round(PERIOD / step);
+    function pose(t) { snap.rigs.forEach(function (x) { x.frame(t, STILL, step); }); }
+    async function grab(t) {
+      pose(t);
+      var img = new Image();
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(ser.serializeToString(snap.svg));
+      if (img.decode) await img.decode(); else await new Promise(function (ok, no) { img.onload = ok; img.onerror = no; });
+      ctx.clearRect(0, 0, W, H);
+      ctx.drawImage(img, 0, 0, W, H);
+      return ctx.getImageData(0, 0, W, H).data;
+    }
+    // 1. palette: the most-used 15-bit colours across six moments of the loop
+    var cnt = new Uint32Array(32768), sr = new Float64Array(32768), sg = new Float64Array(32768), sb = new Float64Array(32768);
+    for (var s = 0; s < 6; s++) {
+      var d = await grab(s * PERIOD / 6);
+      for (var i = 0; i < d.length; i += 4) {
+        var key = ((d[i] >> 3) << 10) | ((d[i + 1] >> 3) << 5) | (d[i + 2] >> 3);
+        cnt[key]++; sr[key] += d[i]; sg[key] += d[i + 1]; sb[key] += d[i + 2];
+      }
+      onProgress(0.04 * (s + 1) / 6);
+    }
+    var keys = [];
+    for (var k2 = 0; k2 < 32768; k2++) if (cnt[k2]) keys.push(k2);
+    keys.sort(function (a, b) { return cnt[b] - cnt[a]; });
+    keys = keys.slice(0, 256);
+    var pal = new Uint8Array(768);
+    keys.forEach(function (kk, j) { pal[j * 3] = sr[kk] / cnt[kk]; pal[j * 3 + 1] = sg[kk] / cnt[kk]; pal[j * 3 + 2] = sb[kk] / cnt[kk]; });
+    var map = new Int16Array(32768).fill(-1);
+    function nearest(key) {
+      var r = (key >> 10) * 8 + 4, gg = ((key >> 5) & 31) * 8 + 4, bb = (key & 31) * 8 + 4, best = 0, bd = 1e9;
+      for (var j = 0; j < keys.length; j++) {
+        var dr = pal[j * 3] - r, dg = pal[j * 3 + 1] - gg, db = pal[j * 3 + 2] - bb, dd = dr * dr * 2 + dg * dg * 4 + db * db * 3;
+        if (dd < bd) { bd = dd; best = j; }
+      }
+      return best;
+    }
+    // 2. header, palette, loop forever
+    var chunks = [];
+    chunks.push(new Uint8Array([0x47, 0x49, 0x46, 0x38, 0x39, 0x61].concat(u16(W), u16(H), [0xf7, 0, 0])));
+    chunks.push(pal);
+    chunks.push(new Uint8Array([0x21, 0xff, 0x0b, 0x4e, 0x45, 0x54, 0x53, 0x43, 0x41, 0x50, 0x45, 0x32, 0x2e, 0x30, 0x03, 0x01, 0, 0, 0]));
+    // 3. frames: a pre-roll first, so the follow-through state at frame 0 matches the end of the loop
+    for (var pr = 0; pr < N; pr++) pose(pr * step);
+    var ix = new Uint8Array(W * H), buf = new Uint8Array(W * H * 2 + 2048);
+    var delay = Math.round(100 / GIF_FPS);
+    for (var f = 0; f < N; f++) {
+      var px = await grab(f * step);
+      for (var q2 = 0, o = 0; q2 < px.length; q2 += 4, o++) {
+        var kk2 = ((px[q2] >> 3) << 10) | ((px[q2 + 1] >> 3) << 5) | (px[q2 + 2] >> 3), v = map[kk2];
+        if (v < 0) { v = nearest(kk2); map[kk2] = v; }
+        ix[o] = v;
+      }
+      chunks.push(new Uint8Array([0x21, 0xf9, 0x04, 0x04].concat(u16(delay), [0, 0])));
+      chunks.push(new Uint8Array([0x2c, 0, 0, 0, 0].concat(u16(W), u16(H), [0])));
+      var len = lzw(ix, buf);
+      chunks.push(buf.slice(0, len));
+      onProgress(0.04 + 0.96 * (f + 1) / N);
+      if (f % 3 === 2) await new Promise(function (ok) { setTimeout(ok, 0); });
+    }
+    chunks.push(new Uint8Array([0x3b]));
+    return { blob: new Blob(chunks, { type: 'image/gif' }), name: snap.names.join('-') + '.gif' };
+  }
+
+  async function offer(gif) {
+    var dl = await downloadsP;
+    if (!dl && !window.claude) {                 // served as its own page (the optimus site): a plain download works
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(gif.blob); a.download = gif.name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 30000);
+      statusEl.textContent = 'Saved ' + gif.name + ' to your downloads.';
+      againEl.hidden = false;
+      return;
+    }
+    if (!dl) {
+      noteEl.textContent = 'Saving straight from this page isn’t available here. Right-click or long-press the GIF to save it.';
+      againEl.hidden = true;
+      return;
+    }
+    againEl.hidden = false;
+    try {
+      await dl.save({ filename: gif.name, data: gif.blob });
+      statusEl.textContent = 'Saved ' + gif.name + '.';
+    } catch (err) {
+      var code = err && err.code;
+      statusEl.textContent = code === 'declined' ? 'Not saved. Press “Save this GIF” to try again.'
+        : code === 'rate_limited' ? 'A save is already open. Finish that one, then try again.'
+        : code === 'too_large' ? 'That GIF is too big to save here. Try it with fewer dogs.'
+        : 'Saving isn’t available here. Right-click or long-press the GIF to save it.';
+      if (code !== 'declined' && code !== 'rate_limited') againEl.hidden = true;
+    }
+  }
+
+  gifBtn.addEventListener('click', async function () {
+    if (busy) return;
+    busy = true; gifBtn.disabled = true;
+    statusEl.textContent = 'Drawing the GIF… 0%';
+    try {
+      var gif = await makeGif(function (p) { statusEl.textContent = 'Drawing the GIF… ' + Math.round(p * 100) + '%'; });
+      lastGif = gif;
+      previewEl.src = await new Promise(function (ok) { var fr = new FileReader(); fr.onload = function () { ok(fr.result); }; fr.readAsDataURL(gif.blob); });
+      exportEl.hidden = false;
+      noteEl.textContent = gif.name + ', ' + (gif.blob.size / 1048576).toFixed(1) + ' MB, one 7.2-second loop that repeats forever.';
+      statusEl.textContent = 'GIF ready.';
+      await offer(gif);
+    } catch (err) {
+      statusEl.textContent = 'The GIF couldn’t be drawn in this browser. Try again, or try another browser.';
+    } finally {
+      busy = false; gifBtn.disabled = false;
+    }
+  });
+  againEl.addEventListener('click', function () { if (lastGif) offer(lastGif); });
+
+  // ---- start: Duke alone, zoomed in (embed mode: the dog the parent asked for) ----
+  var Q = new URLSearchParams(location.search), EMBED = Q.get('embed') === '1';
+  var first = EMBED ? Math.max(0, roster.findIndex(function (r) { return r.c.id === Q.get('dog'); })) : 0;
+  if (EMBED) document.documentElement.classList.add('embed');
+  addDog(roster[first]);
+  if (EMBED) roster[first].rig.setExpr(EXPR[Q.get('expr')] ? Q.get('expr') : 'happy', clock);
+  var startCam = cameraFor(inScene());
+  for (var ci = 0; ci < 4; ci++) cam[ci] = tween(startCam[ci]);
+  roster[first].tx = tween(0); roster[first].ty = tween(0); roster[first].moveStart = -1e12;
+  syncDock();
+  // Test hook: scripts/doberman/*.mjs drive the clock and the scene through this (it changes nothing on its own).
+  window.__dob = {
+    roster: roster, add: function (i) { addDog(roster[i]); }, remove: function (i) { removeDog(roster[i]); },
+    expr: function (i, id) { roster[i].rig.setExpr(id, clock); }, stop: function () { wanted = false; sync(); },
+    at: function (c) { clock = c; draw(1000 / 60); }, tap: function (i) { roster[i].rig.excite(clock); },
+    treat: function (i) { roster[i].rig.treat(clock); }, call: function () { inScene().forEach(function (r, i) { r.rig.call(clock + i * 110); }); },
+    makeGif: makeGif, clock: function () { return clock; }, look: function (x, y) { lookAt(x, y); },
+    wear: function (i, m) { wear(roster[i], m, true); }   // scripts/doberman/fit-audit.mjs dresses a dog without postMessage
+  };
+  if (EMBED) window.addEventListener('message', function (e) {
+    var m = e.data || {}, r = roster[first].rig;
+    if (e.origin !== location.origin || typeof m.dob !== 'string') return;
+    if (m.dob === 'look') { if (typeof m.x === 'number' && typeof m.y === 'number') lookAt(m.x, m.y); return; }   // eyes only: the idle stays slow
+    if (m.dob === 'wear') { wear(roster[first], m, !!m.fresh); if (!running()) draw(16); return; }
+    lively = performance.now() + (m.id === 'happy' || m.id === 'proud' || m.id === 'sleepy' ? 900 : 4200);
+    if (m.dob === 'expr' && EXPR[m.id] && m.id !== r.exprId) r.setExpr(m.id, clock - 420);   // a verdict lands at once: 230 ms of the blend left
+    else if (m.dob === 'tap') r.excite(clock);
+    else if (m.dob === 'treat') r.treat(clock);
+    if (!running()) { clock += SWITCH + B; draw(16); }   // reduced motion: show the new pose as a still
+  });
+  draw(16);   // frame 0 must be a good drawing
+  sync();
+})();
+</script>
+</body>
+</html>

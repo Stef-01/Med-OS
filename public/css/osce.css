@@ -24,6 +24,8 @@
 :where(.os) button { background:none; border:0; padding:0; cursor:pointer; -webkit-user-select:none; user-select:none; }
 :where(.os) :focus-visible { outline:2px solid var(--pri); outline-offset:2px; }
 .os svg { flex:none; }
+/* Duel a Mate (js/osce/duel.mjs): the vendored duel scrolls inside the OSCE overlay frame and takes its tokens and font */
+.os-duel-body { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; }
 .os h1, .os h2, .os h3, .os h5, .os p { margin:0; }
 
 /* ---------- header (navbar) ---------- */

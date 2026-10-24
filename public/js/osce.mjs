@@ -156,6 +156,7 @@ async function onClick(e) {
   audio();   /* unlock the bell inside a gesture */
   switch (a) {
     case 'back': return back();
+    case 'duel': return (await import('./osce/duel.mjs')).openDuel(b).catch(() => notify('The duel did not load. Check the connection and try again.', 'danger'));
     case 'dclose': return closeDialog();
     case 'new': {
       const s = sess();

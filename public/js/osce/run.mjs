@@ -26,6 +26,11 @@ export function renderStart(main) {
       <span class="os-bigtx"><strong>New Study Session</strong>
         <span>Queue stations and run each one on the clock: one of you is the candidate, the other reads the patient and marks.</span></span>
       <span class="os-chev">${I.chevR}</span></button>
+    <button class="os-card os-bigcard os-in" data-os="duel" style="--d:2">
+      <span class="os-bigic">${I.duel}</span>
+      <span class="os-bigtx"><strong>Duel a Mate</strong>
+        <span>Race each other on the bank's differentials: the same questions on both phones, right and fast wins.</span></span>
+      <span class="os-chev">${I.chevR}</span></button>
     ${requestCardHtml()}
     ${doneHtml()}
   </div>`;

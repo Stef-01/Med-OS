@@ -26,7 +26,7 @@ export const I = {   /* tabler icons, as eMedici uses: the kit's table under thi
   check: icon('check'), shuffle: icon('shuffle'), minus: icon('circleMinus'), plusC: icon('circlePlus'), grip: icon('grip'), clock: icon('clock'),
   reload: icon('refresh'), play: icon('playFilled'), pause: icon('pauseFilled'), next: icon('nextFilled'), stop: icon('stopFilled'), dots: icon('circleDots'),
   exit: icon('exit'), done: icon('circleCheck'), arrowR: icon('circleArrowRight'), info: icon('infoCircle'), chevR: icon('chevronRight'), chevD: icon('chevronDown'),
-  bolt: icon('bolt'), newS: icon('circlePlus'), resume: icon('circlePlay'), marker: icon('marker'), note: icon('pencil'),
+  bolt: icon('bolt'), duel: icon('paw'), newS: icon('circlePlus'), resume: icon('circlePlay'), marker: icon('marker'), note: icon('pencil'),
   gear: icon('settings'), users: icon('users'), max: icon('maximize'), prev: icon('chevronLeft'), share: icon('share'), bulb: icon('bulb'),
 };   /* bolt, arrowR, chevR, newS, resume once asked for 1.3-1.4 in a second stroke-width attribute the parser ignored: they always drew at 2 */
 

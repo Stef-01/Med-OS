@@ -11,6 +11,15 @@ What's in it:
 - **AI marking**: paste a transcript of the attempt and Claude marks it item by item against that station's checklist, with quotes as evidence, what was missed, phrasing that would score, and a model handover.
 - **A station generator** that writes new stations against the bank's own standard and **finds the right X-rays** (and CTs, ultrasounds, ECGs) from open-licensed sources, with Claude checking the pixels before an image is used.
 
+## Duel a Mate
+
+**Duel a Mate** on the start screen is a live quiz between the two of you, with a cartoon dog each: the same questions on both phones against the same clock, right and fast wins, round by round. The questions come from the bank: one per station, "what is the most likely diagnosis?", with the station's findings as the stem and its own differential as the other options (the dangerous alternatives first), and after each answer why each wrong option is wrong. They are AI-written like the stations and say so.
+
+- Sign in with a name and a 4-digit PIN (no email, no password). Challenge the other, pick 5, 7 or 10 questions, 15, 20 or 30 seconds each, and a specialty if you like. Every win opens two more pieces for your dog to wear.
+- Moves reach the other phone within 5 seconds, even when the realtime connection drops, because both phones read a shared log of the duel (and the e2e times every move).
+- It needs the shared record: the same Supabase project as **Sharing progress** below, with `supabase/migrations/0002_pup_duel.sql` run once in its SQL editor. Without it, **Practice with Rex** plays a bot on your own phone.
+- It is the Pup Duel package, vendored in `public/js/vendor/pup-duel/`; see its README for how it works. `npm run duel-pack` rebuilds the questions after the stations change.
+
 ## Run it
 
 ```
@@ -44,7 +53,7 @@ Marks that arrive on an attempt nobody ticked yet tick the checklist straight aw
 Progress lives in each browser. Two ways to share it:
 
 - **Settings → Export progress / Import progress**: a file with attempts, saved stations and names. Importing merges by attempt, so nothing is lost or doubled.
-- **Automatic sync**: create a free Supabase project, run `supabase/migrations/0001_osce_state.sql` in its SQL editor, and put the project URL and anon key in `public/config.js`. Attempts, saved stations, names, timing and case requests then reach both devices, and the case writer's pipeline. Anyone with the site's URL can read and write that record, so keep the URL between the two of you.
+- **Automatic sync**: create a free Supabase project, run `supabase/migrations/0001_osce_state.sql` (and `0002_pup_duel.sql` for Duel a Mate) in its SQL editor, and put the project URL and anon key in `public/config.js`. Attempts, saved stations, names, timing and case requests then reach both devices, and the case writer's pipeline. Anyone with the site's URL can read and write that record, so keep the URL between the two of you.
 
 ## Writing new stations
 

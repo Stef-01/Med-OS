@@ -8,6 +8,7 @@ OSCE practice for two medical students: a static site in `public/` (vanilla HTML
 npm test                    # node:test units + scripts/validate.mjs; must pass with no node_modules
 npm run e2e                 # Playwright smoke, phone / 320 px / wide; run after any UI change
 npm run index               # rebuild public/osce/index.json after a station file changes
+npm run duel-pack           # rebuild public/duel/pack.json (the duel's questions) after a station file changes; npm test fails on a stale pack
 npm run validate            # validator + the quality gates as notes
 node scripts/requests.mjs   # the case requests queue: add / show / accept / make / decline (make runs generate-station.mjs)
 npx serve public            # local dev
@@ -27,3 +28,4 @@ npx serve public            # local dev
 6. **Claude calls** go through `scripts/lib/claude.mjs` (official SDK, streamed, JSON schema output, server-side fallbacks) in Node, and `osce/marker.mjs` (the vendored SDK bundle `public/js/vendor/anthropic-sdk.mjs`) in the browser. Default model `claude-opus-5-5`.
 7. **Observation charts are data.** The zones in `public/js/osce/obs-charts.mjs` are written by `scripts/charts/extract_zones.py` from the NSW chart PDFs and checked by `scripts/obs.test.mjs` against the thresholds printed on each chart; never edit them by hand. `obs.mjs` decides the chart and the zone, `obs-chart.mjs` draws it; the candidate never sees the zones or the model interpretation. `docs/obs-charts.md` explains why.
 8. **Phones first.** Every screen works at 320 px with no sideways scroll; the e2e checks it.
+9. **Duel a Mate is a vendored package.** `public/js/vendor/pup-duel/` is Pup Duel (the dog, its wardrobe, live MCQ duels), copied by the package's `scripts/vendor.mjs` with `VERSION.json` holding a hash of every file; `scripts/duel-pack.test.mjs` fails on a hand edit. Change the package (in Optimus, `packages/pup-duel/`, until it has a repository of its own) and vendor again. `supabase/migrations/0002_pup_duel.sql` is the package's migration, checked against the same manifest. `public/js/osce/duel.mjs` is the only Med-OS code: the overlay, the transport from config.js, the pack.
