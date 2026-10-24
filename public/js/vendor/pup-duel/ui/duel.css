@@ -83,6 +83,7 @@
 .pd-row > span:not(.pd-acts) { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .pd-row b { font-size: 15px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pd-row small { font-size: 12.5px; color: var(--pd-mute); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pd-practice small { white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 1.3; }   /* its point is the second half: let it wrap */
 .pd-row small.pd-on { color: var(--pd-ok-ink); }
 .pd-row small.pd-on::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--pd-ok); vertical-align: 1px; }
 .pd-acts { display: flex; gap: 8px; flex: none; }

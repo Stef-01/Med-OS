@@ -146,7 +146,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Challenges for you</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Your duels</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mates"><h2 class="pd-h2">Challenge a mate</h2><div class="pd-list"></div><p class="pd-empty" hidden>Nobody else yet. Send a mate this page: they pick a name and a PIN, and appear here.</p></section>
-        ${practice ? `<button class="pd-row pd-practice" type="button" data-pd="practice"><img src="${ICON(BOT.look.dog)}" alt=""><span><b>Practice with ${esc(BOT.name)}</b><small>A bot; your record stays as it is</small></span><i aria-hidden="true">›</i></button>` : ''}
+        ${practice ? `<button class="pd-row pd-practice" type="button" data-pd="practice"><img src="${ICON(BOT.look.dog)}" alt=""><span><b>Practice with ${esc(BOT.name)}</b><small>A bot; your record is safe</small></span><i aria-hidden="true">›</i></button>` : ''}
         <section class="pd-sec" data-sec="past" hidden><h2 class="pd-h2">Recent</h2><div class="pd-list"></div></section>
         <p class="pd-err" role="alert"></p>
       </main>`;
@@ -519,6 +519,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     res.querySelector('[data-pd="lobby"]').addEventListener('click', showLobbyOrAuth);
     res.querySelector('[data-pd="again"]').addEventListener('click', () => rematch(st));
     res.querySelector('.pd-big').focus({ preventScroll: true });
+    /* answering on a small phone leaves the view scrolled down to the options: bring the two dogs back into view, the
+       winner's celebration is the point of this screen (whatever scrolls: the page here, a sheet in a host) */
+    shell.scrollIntoView?.({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     if (!M.reported) { M.reported = true; try { onResult({ outcome: out, score: st.score[me], theirs: st.score[opp], right: st.right[me], rounds: st.rounds.length, practice: M.practice, reason: st.reason }); } catch { /* the host's */ } }
   }
   async function rematch(st) {
