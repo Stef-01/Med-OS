@@ -99,4 +99,8 @@ test('the vendored Pup Duel is exactly what its VERSION.json says, and the migra
   assert.deepEqual(files, Object.keys(v.files).sort(), 'the same files');
   for (const f of files) assert.equal(sha(path.join(dir, f)), v.files[f], `${f} was edited: change the package and vendor again`);
   assert.equal(sha(path.join(ROOT, 'supabase/migrations/0002_pup_duel.sql')), v.migration.sha, '0002_pup_duel.sql is the package\'s migration');
+  /* the shop's migration (the package's 0002_pup_shop.sql) is 0003 here */
+  const shop = (v.migrations || []).find(m => m.file.endsWith('_pup_shop.sql'));
+  assert.ok(shop, 'the package pins its shop migration');
+  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0003_pup_shop.sql')), shop.sha, '0003_pup_shop.sql is the package\'s shop migration');
 });

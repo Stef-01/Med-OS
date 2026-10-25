@@ -38,6 +38,10 @@ export function memoryNet({ server = createServer(), latency = 0, drop = 0, seed
       inbox: me => call('inbox')(me.token),
       post: (me, duel, ev) => call('post')(me.token, duel, ev.id, ev.kind, ev.body || {}),
       log: (me, duel, after) => call('log')(me.token, duel, after || 0),
+      wallet: me => call('wallet')(me.token),
+      buy: (me, ids, total) => call('buy')(me.token, ids, total),
+      practice: (me, right) => call('practice')(me.token, right),
+      outfits: (me, list) => call('outfits')(me.token, list),
       live(topic, onMsg) {
         if (!topics.has(topic)) topics.set(topic, new Set());
         const subs = topics.get(topic), sub = { cid, onMsg };

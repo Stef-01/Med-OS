@@ -25,6 +25,10 @@ export function localTransport({ key = 'pup-duel.local', storage = globalThis.lo
     inbox: me => run(s => s.inbox(me.token)),
     post: (me, duel, ev) => run(s => s.post(me.token, duel, ev.id, ev.kind, ev.body || {})),
     log: (me, duel, after) => run(s => s.log(me.token, duel, after || 0)),
+    wallet: me => run(s => s.wallet(me.token)),
+    buy: (me, ids, total) => run(s => s.buy(me.token, ids, total)),
+    practice: (me, right) => run(s => s.practice(me.token, right)),
+    outfits: (me, list) => run(s => s.outfits(me.token, list)),
     live: BC ? (topic, onMsg) => {
       const bc = new BC(`${key}:${topic}`);   // a BroadcastChannel never hears itself: self: false
       bc.onmessage = e => onMsg(e.data);

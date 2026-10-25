@@ -53,7 +53,9 @@ function duelRpc(req, res, fn) {
     const a = JSON.parse(body || '{}'), call = {
       pup_register: () => DUEL.register(a.p_name, a.p_pin, a.p_look ?? {}), pup_login: () => DUEL.login(a.p_name, a.p_pin), pup_touch: () => DUEL.touch(a.p_token, a.p_look ?? null),
       pup_roster: () => DUEL.roster(a.p_token), pup_challenge: () => DUEL.challenge(a.p_token, a.p_opponent, a.p_setup), pup_inbox: () => DUEL.inbox(a.p_token),
-      pup_post: () => DUEL.post(a.p_token, a.p_duel, a.p_id, a.p_kind, a.p_body ?? {}), pup_log: () => DUEL.log(a.p_token, a.p_duel, a.p_after ?? 0)
+      pup_post: () => DUEL.post(a.p_token, a.p_duel, a.p_id, a.p_kind, a.p_body ?? {}), pup_log: () => DUEL.log(a.p_token, a.p_duel, a.p_after ?? 0),
+      /* the shop (supabase/migrations/0003_pup_shop.sql) */
+      pup_wallet: () => DUEL.wallet(a.p_token), pup_buy: () => DUEL.buy(a.p_token, a.p_ids, a.p_total), pup_practice: () => DUEL.practice(a.p_token, a.p_right), pup_outfits: () => DUEL.outfits(a.p_token, a.p_outfits)
     }[fn];
     try { const out = await call(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(out)); }
     catch (e) { res.writeHead(400, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ code: 'P0001', message: e.message })); }
@@ -544,12 +546,25 @@ async function duel() {
   ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.os-duel *')].every(e => e.getBoundingClientRect().right <= innerWidth + 1)), 'duel: the lobby fits a 320 px phone');
   await a.screenshot({ path: path.join(SHOTS, 'duel-lobby.png') });
   await timed('a new mate reaches the lobby', () => a.waitForSelector('.os-duel .pd-mate b >> text=Alex', { timeout: 6000 }));
-  /* the dressing room over the overlay: the dog redrawn live, and Escape closes the room before the duel */
-  await a.click('.os-duel [data-pd="dress"]'); await a.waitForSelector('.os-duel .pd-full .pd-preview iframe');
-  await a.click('.os-duel .pd-tabs [data-tab="coat"]'); await a.click('.os-duel .pd-swatch[aria-label="Black and tan"]');
+  /* the wardrobe over the overlay: the dog redrawn live; Escape with a look not saved asks first, Discard closes it */
+  await a.waitForSelector('.os-duel .pd-wallet:not([hidden])');
+  ok(/25/.test(await a.textContent('.os-duel .pd-wallet')), 'duel: a new player has 25 bones in the lobby');
+  await a.click('.os-duel [data-pd="dress"]'); await a.waitForSelector('.os-duel .pd-ward .pd-wpv iframe');
+  await a.click('.os-duel [data-ltab="coat"]'); await a.click('.os-duel .pd-swatch[aria-label="Black and tan"]');
   await a.screenshot({ path: path.join(SHOTS, 'duel-dress.png') });
+  await a.keyboard.press('Escape'); await a.waitForSelector('.os-duel .pd-wbar[data-ask]');
+  ok(true, 'duel: Escape with a look not saved asks first');
+  await a.click('.os-duel [data-w="discard"]'); await a.waitForSelector('.os-duel .pd-full', { state: 'detached' });
+  ok(await a.locator('.os-duel .pd-lobby').isVisible(), 'duel: Discard closes the wardrobe and leaves the lobby open');
+  /* the shop: a piece bought with the welcome bones, worn, the balance down */
+  await a.click('.os-duel .pd-wallet'); await a.waitForSelector('.os-duel .pd-wall .pd-st[data-st="buy"]');
+  ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'duel: the shop fits a 320 px phone');
+  const piece = await a.evaluate(() => document.querySelector('.os-duel .pd-wall .pd-st[data-st="buy"]').dataset.item);
+  await a.click(`.os-duel .pd-wall .pd-st[data-item="${piece}"]`); await a.click('.os-duel .pd-wcta[data-w="act"]');
+  await a.waitForFunction(id => document.querySelector(`.os-duel .pd-wall .pd-st[data-item="${id}"]`)?.dataset.st === 'equipped', piece, { timeout: 5000 });
+  ok(+(await a.textContent('.os-duel .pd-bal b')) < 25, `duel: bought the ${piece} and wearing it`);
+  await a.screenshot({ path: path.join(SHOTS, 'duel-shop.png') });
   await a.keyboard.press('Escape'); await a.waitForSelector('.os-duel .pd-full', { state: 'detached' });
-  ok(await a.locator('.os-duel .pd-lobby').isVisible(), 'duel: Escape closes the dressing room and leaves the lobby open');
   await a.click('.os-duel .pd-mate'); await a.click('.os-duel [data-rounds="5"]'); await a.click('.os-duel [data-secs="15"]'); await a.click('.os-duel [data-pd="send"]');
   await timed('the challenge reaches the mate', () => c.waitForSelector('.os-duel [data-sec="invites"] .pd-duelrow', { timeout: 6000 }));
   await c.click('.os-duel [data-sec="invites"] .pd-btn.pd-pri');

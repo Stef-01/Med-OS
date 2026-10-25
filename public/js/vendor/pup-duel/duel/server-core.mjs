@@ -8,6 +8,8 @@
 
 import { normName, nameKey } from './accounts.mjs';
 import { KINDS, idFor, jsonbBytes, reduce, summary } from './core.mjs';
+import { ITEMS } from '../pup/wardrobe.mjs';
+import { legacyWallet, duelPay, practicePay, buyError, fitWear, logged, starterOwned, OUTFITS, BUY_ERR } from './shop.mjs';
 
 export const ERR = {
   name: 'Pick a name of 2 to 20 letters or numbers', pin: 'The PIN is 4 digits', look: 'That look is too big',
@@ -15,7 +17,8 @@ export const ERR = {
   nobody: 'No such player', noQs: 'A duel needs questions', nQs: 'A duel has 1 to 15 questions',
   rounds: 'Rounds must match the questions', secs: 'A question lasts 5 to 120 seconds', big: 'That duel is too big',
   q: 'A question needs 2 to 6 options and its answer', notYours: 'Not your duel', kind: 'Unknown move',
-  id: 'Bad move id', moveBig: 'That move is too big', tries: 'Too many wrong PINs: try again in 10 minutes'
+  id: 'Bad move id', moveBig: 'That move is too big', tries: 'Too many wrong PINs: try again in 10 minutes',
+  outfits: 'At most 3 outfits', ...Object.fromEntries(Object.entries(BUY_ERR).map(([k, v]) => [`buy_${k}`, v]))
 };
 export const LIMITS = { look: 2048, setup: 65536, body: 4096, id: 200, page: 200, finished: 20, minQ: 1, maxQ: 15, minSecs: 5, maxSecs: 120, fails: 5, failMinutes: 10 };
 const SQL_NAME = /^[A-Za-z0-9 ._-]{2,20}$/;
@@ -38,6 +41,10 @@ export function outcomeOf(duel, events) {
   return { phase: st.phase, ...summary(st) };
 }
 
+/* the wallet as pup_wallet() returns it; made on first use (0002_pup_shop.sql pup_wallet_init) */
+const walletRow = w => ({ bones: w.bones, owned: [...w.owned], outfits: w.outfits.map(x => x), ledger: w.ledger.map(x => ({ ...x })), practice: { ...w.practice } });
+const ensureWallet = p => (p.wallet ||= legacyWallet(ITEMS, p));
+const dayOf = iso => iso.slice(0, 10);
 const profile = p => ({ id: p.id, name: p.name, look: p.look, wins: p.wins, losses: p.losses, draws: p.draws, seen_at: p.seen_at });
 const duelRow = d => ({ id: d.id, a: d.a, b: d.b, status: d.status, setup: d.setup, result: d.result, created_at: d.created_at, updated_at: d.updated_at });
 
@@ -55,6 +62,7 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
       if (!SQL_NAME.test(n) || !/[A-Za-z0-9]/.test(n)) fail(ERR.name);
       if (!/^[0-9]{4}$/.test(pin ?? '')) fail(ERR.pin);
       if (bytes(look) > LIMITS.look) fail(ERR.look);
+      look = fitWear(look || {}, starterOwned(ITEMS));
       if (Object.values(db.players).some(p => p.name_key === nameKey(n))) fail(ERR.taken);
       const t = now(), p = { id: uuid(), name: n, name_key: nameKey(n), pin_hash: await hashPin(pin), token: uuid(), look: look || {}, wins: 0, losses: 0, draws: 0, created_at: t, seen_at: t };
       db.players[p.id] = p;
@@ -73,7 +81,7 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
     async touch(token, look = null) {
       const p = me(token);
       if (look !== null && bytes(look) > LIMITS.look) fail(ERR.look);
-      seen(p); if (look !== null) p.look = look;
+      seen(p); if (look !== null) p.look = fitWear(look, ensureWallet(p).owned);   // a look wears only what its player owns
       return profile(p);
     },
     async roster(token) {
@@ -120,12 +128,33 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
         d.status = o.phase;
         if (o.phase === 'done') {
           d.result = o;
+          for (const id of [d.a, d.b]) { const pl = db.players[id], w = ensureWallet(pl), pay = duelPay(o, id); w.bones += pay.d; w.ledger = logged(w.ledger, pay.d, pay.why, t); }
           if (o.winner === null) { db.players[d.a].draws++; db.players[d.b].draws++; }
           else { db.players[o.winner].wins++; db.players[o.winner === d.a ? d.b : d.a].losses++; }
         }
       }
       d.updated_at = t; seen(p);
       return { ...e };
+    },
+    /* ---- the shop (0002_pup_shop.sql) ---- */
+    async wallet(token) { const p = me(token); seen(p); return walletRow(ensureWallet(p)); },
+    async buy(token, ids, total) {
+      const p = me(token), w = ensureWallet(p), err = buyError(ITEMS, w, ids, total);
+      if (err) fail(err);
+      w.bones -= total; w.owned.push(...new Set(ids)); w.ledger = logged(w.ledger, -total, 'buy', now());
+      return walletRow(w);
+    },
+    async practice(token, right) {
+      const p = me(token), w = ensureWallet(p), t = now(), r = practicePay(w.practice, right, dayOf(t));
+      w.practice = r.practice; if (r.d) { w.bones += r.d; w.ledger = logged(w.ledger, r.d, 'practice', t); }
+      return { ...walletRow(w), paid: r.d };
+    },
+    async outfits(token, list) {
+      const p = me(token), w = ensureWallet(p);
+      if (!Array.isArray(list) || list.length > OUTFITS) fail(ERR.outfits);
+      if (list.some(x => x !== null && bytes(x) > LIMITS.look)) fail(ERR.look);
+      w.outfits = list.map(x => (x ? fitWear(x, w.owned) : null));
+      return walletRow(w);
     },
     async log(token, duel, after = 0) {
       const p = me(token), d = db.duels[duel];

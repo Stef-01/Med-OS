@@ -49,6 +49,11 @@ export function supabaseTransport({ url, key, fetch = globalThis.fetch?.bind(glo
     inbox: me => rpc('pup_inbox', { p_token: me.token }),
     post: (me, duel, ev) => rpc('pup_post', { p_token: me.token, p_duel: duel, p_id: ev.id, p_kind: ev.kind, p_body: ev.body || {} }),
     log: (me, duel, after) => rpc('pup_log', { p_token: me.token, p_duel: duel, p_after: after || 0 }),
+    /* the shop (0002_pup_shop.sql) */
+    wallet: me => rpc('pup_wallet', { p_token: me.token }),
+    buy: (me, ids, total) => rpc('pup_buy', { p_token: me.token, p_ids: ids, p_total: total }),
+    practice: (me, right) => rpc('pup_practice', { p_token: me.token, p_right: right }),
+    outfits: (me, list) => rpc('pup_outfits', { p_token: me.token, p_outfits: list }),
     live,
     get socket() { return rt?.state || 'idle'; },
     close() { rt?.close(); rt = null; }

@@ -21,10 +21,11 @@ import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } f
 import { topicsOf } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
-import { ITEMS, wearMsg, SLOT_NAME, VB, itemOf } from '../pup/wardrobe.mjs';
-import { coatsFor, COLLARS } from '../pup/rig/coats.mjs';
+import { normWallet, fitWear } from '../duel/shop.mjs';
+import { ITEMS, wearMsg, itemOf } from '../pup/wardrobe.mjs';
 import { still, lookDog } from '../pup/rig/still.mjs';
 import { icon } from './icons.mjs';
+import { openWardrobe } from './shop.mjs';
 
 const BASE = new URL('../', import.meta.url);
 export const RIG = new URL('pup/rig/index.html', BASE).href;
@@ -204,7 +205,16 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   function myLook() {
     const base = lookOf(S.lv?.self?.look || S.me?.look);
     if (hostLook) { const h = hostLook(); if (h) return lookOf(h); }
-    return fitLook(base, lockerFor(ITEMS, S.lv?.self?.wins || 0).open);
+    /* the server keeps a look to what its player owns; before the wallet is read, the old locker's rule stands in */
+    return S.wallet ? fitWear(base, S.wallet.owned) : fitLook(base, lockerFor(ITEMS, S.lv?.self?.wins || 0).open);
+  }
+  /* the wallet (the shop's bones and pieces), read when the lobby opens and after every duel; a backend from before
+     the shop (no pup_wallet) leaves it null and the dressing room on the old locker */
+  async function loadWallet() {
+    if (hostLook || !transport?.wallet || !S.me) return null;
+    try { S.wallet = normWallet(await transport.wallet(S.me), id => !!itemOf(id)); } catch { /* the next lobby */ }
+    if (S.screen === 'lobby') paintLobby();
+    return S.wallet;
   }
   function showLobby() {
     stopAll(); S.screen = 'lobby';
@@ -212,7 +222,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       <main class="pd-main pd-lobby">
         <section class="pd-me" aria-label="You">
           ${hostLook ? '<div class="pd-me-dog"></div>' : `<button class="pd-me-dog" type="button" data-pd="dress" aria-label="Dress your dog"><span class="pd-badge">${icon('shirt')}</span></button>`}
-          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p></div>
+          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>
+          ${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="shop" hidden aria-label="Bones: open the shop">${icon('bone')}<b></b><span class="pd-wallet-go">Shop</span></button>`}</div>
         </section>
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Duels</h2><div class="pd-list"></div></section>
@@ -222,8 +233,10 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       </main>`;
     wireCommon();
     shell.querySelector('[data-pd="menu"]').addEventListener('click', openMenu);
-    shell.querySelector('[data-pd="dress"]')?.addEventListener('click', openDress);
+    shell.querySelector('[data-pd="dress"]')?.addEventListener('click', () => openDress('locker'));
+    shell.querySelector('[data-pd="shop"]')?.addEventListener('click', () => openDress('shop'));
     if (!S.t) return;
+    loadWallet();
     S.lobby = createLobby({ transport: S.t, me: S.me, onChange: lv => { S.lv = lv; paintLobby(); } });
     S.lobby.start();
     paintLobby();
@@ -233,6 +246,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const lv = S.lv || { mates: [], invites: [], waiting: [], live: [], past: [], self: null, loaded: false };
     const self = lv.self || S.me, look = myLook();
     shell.querySelector('.pd-name').textContent = self?.name || '';
+    const wb = shell.querySelector('.pd-wallet');
+    if (wb) { wb.hidden = !S.wallet; if (S.wallet) { wb.querySelector('b').textContent = S.wallet.bones; wb.setAttribute('aria-label', `${S.wallet.bones} bones: open the shop`); } }
     shell.querySelector('.pd-rec').textContent = self ? `${self.wins || 0} won · ${self.losses || 0} lost${self.draws ? ` · ${self.draws} drawn` : ''}` : '';
     const holder = shell.querySelector('.pd-me-dog');
     if (!S.hero || !holder.contains(S.hero.el)) { S.hero = dogFrame(look, { label: dogName(look.dog) }); holder.prepend(S.hero.el); }
@@ -335,18 +350,20 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   }
 
   /* ---- sheets: the menu, the challenge, the dressing room, the review, leaving ---- */
-  function sheet(html, wire, { full = false, label = '' } = {}) {
-    closeSheet();
+  function sheet(html, wire, { full = false, label = '', cls = '' } = {}) {
+    closeSheet(true);
     const el = document.createElement('div');
     el.className = 'pd-sheet-wrap';
-    el.innerHTML = `<div class="pd-scrim" data-pd="shut"></div><div class="pd-sheet${full ? ' pd-full' : ''}" role="dialog" aria-modal="true"${label ? ` aria-label="${esc(label)}"` : ''}>${html}</div>`;
+    el.innerHTML = `<div class="pd-scrim" data-pd="shut"></div><div class="pd-sheet${full ? ' pd-full' : ''}${cls ? ' ' + cls : ''}" role="dialog" aria-modal="true"${label ? ` aria-label="${esc(label)}"` : ''}>${html}</div>`;
     S.sheetFrom = document.activeElement; root.append(el); S.sheet = el;
-    el.querySelectorAll('[data-pd="shut"]').forEach(b => b.addEventListener('click', closeSheet));
+    el.querySelectorAll('[data-pd="shut"]').forEach(b => b.addEventListener('click', () => closeSheet()));
     wire(el.querySelector('.pd-sheet'));
     el.querySelector('.pd-sheet button:not([data-pd="shut"]), .pd-sheet select')?.focus({ preventScroll: true });
   }
-  function closeSheet() {
-    const from = S.sheetFrom; S.sheet?.remove(); S.sheet = null; S.sheetFrom = null;
+  /* a sheet may hold its close (the wardrobe, with a look not saved, asks first); `force` closes it whatever it says */
+  function closeSheet(force = false) {
+    if (!force && S.sheet && S.sheetGuard?.() === false) return;
+    const from = S.sheetFrom; S.sheet?.remove(); S.sheet = null; S.sheetFrom = null; S.sheetGuard = null;
     if (from?.isConnected) from.focus({ preventScroll: true });   // back on what opened it
   }
   function openMenu() {
@@ -381,114 +398,21 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     }, { label: `Challenge ${mate.name}` });
   }
 
-  /* the dressing room: a live preview of the dog, and one tab each for the dog, its coat, its collar and the four
-     slots; locked pieces open with wins (locker.mjs). The line under the preview names what was just chosen */
-  const TABS = [['dog', 'paw', 'Dog'], ['coat', 'palette', 'Coat'], ['collar', 'collar', 'Collar'], ['head', 'hat', SLOT_NAME.head], ['face', 'glasses', SLOT_NAME.face], ['neck', 'bow', SLOT_NAME.neck], ['back', 'pack', SLOT_NAME.back]];
-  function openDress() {
+  /* the wardrobe (shop.mjs): the shop and the locker over a live dog; a look saved goes to the server, which keeps
+     it to the pieces its player owns */
+  async function openDress(tab = 'locker') {
     if (hostLook) return;
-    const self = S.lv?.self || S.me, locker = lockerFor(ITEMS, self?.wins || 0), cur = structuredClone(myLook());
-    sheet(`
-      <header class="pd-top pd-dresstop">${ib('shut', 'back', 'Cancel')}<span></span><span></span></header>
-      <div class="pd-preview"></div>
-      <p class="pd-chosen" aria-live="polite"></p>
-      <div class="pd-tabs" role="tablist" aria-label="Dress up">${TABS.map(([id, ic, name], i) => `<button type="button" role="tab" data-tab="${id}" aria-selected="${i === 0}" aria-controls="pd-panel" aria-label="${esc(name)}" title="${esc(name)}">${icon(ic)}</button>`).join('')}</div>
-      <div class="pd-panel" id="pd-panel" role="tabpanel"></div>
-      <div class="pd-dressbar"><button class="pd-btn pd-pri" type="button" data-pd="save">${icon('check')}Save</button></div>`, el => {
-      const prev = dogFrame(cur, { label: 'Your dog' }), panel = el.querySelector('.pd-panel'), chosen = el.querySelector('.pd-chosen');
-      el.querySelector('.pd-preview').append(prev.el);
-      let tab = 'dog';
-      /* "<tab> · <its pick>": it names the icon tab and what is on the dog for it */
-      const pickName = id => {
-        const d = breedOf(cur.dog);
-        if (id === 'dog') return `${d.name} (${d.breedShort})`;
-        if (id === 'coat') { const own = cur.coat ? null : coatsFor(cur.dog).find(k => k.from === cur.dog); return (own || coatsFor(cur.dog).find(k => k.id === cur.coat) || {}).name || ''; }
-        if (id === 'collar') { const k = COLLARS.find(c => c.id === cur.collar) || COLLARS.find(c => c.hex === lookDog({ dog: cur.dog }).pal.collar); return k ? k.name : 'Its own'; }
-        return cur.wear[id] ? itemOf(cur.wear[id]).name : 'None';
-      };
-      const label = () => { chosen.textContent = `${TABS.find(t => t[0] === tab)[2]} · ${pickName(tab)}`; };
-      const coatTab = () => { el.querySelector('[data-tab="coat"]').hidden = coatsFor(cur.dog).length < 2; };   // a breed of one coat has nothing to choose
-      const update = () => { prev.dress(cur); label(); };
-      const radio = (b, on) => b.setAttribute('aria-checked', String(on));
-      const tabs = {
-        dog() {
-          const g = document.createElement('div'); g.className = 'pd-dogs'; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', 'Dog');
-          g.append(...DOGS.map(d => {
-            const b = document.createElement('button');
-            b.type = 'button'; b.className = 'pd-dogpick'; b.dataset.dog = d.id; b.setAttribute('role', 'radio'); radio(b, d.id === cur.dog);
-            b.setAttribute('aria-label', `${d.name}, ${d.breedName}`); b.title = d.hint;
-            b.append(face({ dog: d.id, collar: cur.collar }));
-            b.addEventListener('click', () => {
-              /* a coat carries over where the new breed has one of that name (black and tan, cream), else its own */
-              if (cur.coat && !coatsFor(d.id).some(k => k.id === cur.coat && k.from !== d.id)) delete cur.coat;
-              cur.dog = d.id; g.querySelectorAll('.pd-dogpick').forEach(x => radio(x, x === b));
-              update(); coatTab(); prev.tap();
-            });
-            return b;
-          }));
-          return g;
-        },
-        coat() {   /* the breed's coats; the dog's own is the empty id, the look's default */
-          return swatches('Coat', coatsFor(cur.dog).map(k => ({ id: k.from === cur.dog ? '' : k.id, name: k.name, colors: k.swatch })), cur.coat || '', v => { if (v) cur.coat = v; else delete cur.coat; });
-        },
-        collar() {   /* the dog's own colour first, then every other */
-          const own = lookDog({ dog: cur.dog }).pal.collar;
-          if (COLLARS.find(k => k.id === cur.collar)?.hex === own) delete cur.collar;
-          return swatches('Collar', [{ id: '', name: 'Its own', colors: [own] }, ...COLLARS.filter(k => k.hex !== own).map(k => ({ id: k.id, name: k.name, colors: [k.hex] }))], cur.collar || '', v => { if (v) cur.collar = v; else delete cur.collar; });
-        }
-      };
-      function swatches(label, opts, now, set) {
-        const g = document.createElement('div'); g.className = 'pd-swatches'; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', label);
-        g.append(...opts.map(o => {
-          const b = document.createElement('button');
-          b.type = 'button'; b.className = 'pd-swatch'; b.dataset.v = o.id; b.setAttribute('role', 'radio'); radio(b, o.id === now);
-          b.setAttribute('aria-label', o.name); b.title = o.name;
-          b.innerHTML = `<i style="--a:${o.colors[0]};--b:${o.colors[1] || o.colors[0]}"></i>`;
-          b.addEventListener('click', () => { set(o.id); g.querySelectorAll('.pd-swatch').forEach(x => radio(x, x === b)); update(); });
-          return b;
-        }));
-        return g;
-      }
-      function pieces(slot) {
-        const g = document.createElement('div'); g.className = 'pd-pieces';
-        const list = ITEMS.filter(i => i.slot === slot && !i.exclusive).sort((a, b) => Number(locker.open.has(b.id)) - Number(locker.open.has(a.id)) || a.price - b.price);
-        const none = document.createElement('button');
-        none.type = 'button'; none.className = 'pd-piece pd-none'; none.dataset.slot = slot; none.dataset.id = '';
-        none.setAttribute('aria-label', `No ${SLOT_NAME[slot].toLowerCase()}`); none.innerHTML = icon('x');
-        g.append(none, ...list.map(it => {
-          const b = document.createElement('button'), open = locker.open.has(it.id);
-          b.type = 'button'; b.className = 'pd-piece'; b.dataset.id = it.id; b.dataset.slot = slot; b.dataset.r = it.rarity;
-          b.disabled = !open; b.setAttribute('aria-label', open ? it.name : `${it.name}, locked`); b.title = it.name;
-          b.innerHTML = `<svg viewBox="${it.tile || it.vb || VB[slot]}" aria-hidden="true">${it.icon || it.svg}</svg>${open ? '' : `<span class="pd-lock">${icon('lock')}</span>`}`;
-          return b;
-        }));
-        const mark = () => g.querySelectorAll('.pd-piece').forEach(x => x.setAttribute('aria-pressed', String((cur.wear[slot] || '') === x.dataset.id)));
-        g.addEventListener('click', e => {
-          const b = e.target.closest('.pd-piece'); if (!b || b.disabled) return;
-          if (b.dataset.id) cur.wear[slot] = b.dataset.id; else delete cur.wear[slot];
-          mark(); update();
-        });
-        mark();
-        const wrap = document.createElement('div'); wrap.append(g);
-        if (list.some(it => !locker.open.has(it.id))) wrap.insertAdjacentHTML('afterbegin', `<p class="pd-locknote">${icon('trophy')}<span>Win duels to open more</span></p>`);
-        return wrap;
-      }
-      const show = id => {
-        tab = id; label();
-        el.querySelectorAll('[role="tab"]').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
-        panel.replaceChildren(tabs[id] ? tabs[id]() : pieces(id));
-        /* the one chosen in view (Heidi is far down the dogs), moving only the panel */
-        panel.scrollTop = 0;
-        const on = panel.querySelector('[aria-checked="true"], [aria-pressed="true"]'), pr = panel.getBoundingClientRect(), r = on?.getBoundingClientRect();
-        if (r && r.bottom > pr.bottom) panel.scrollTop = r.bottom - pr.bottom + 16;
-        panel.setAttribute('aria-label', TABS.find(t => t[0] === id)[2]);
-      };
-      el.querySelector('.pd-tabs').addEventListener('click', e => { const t = e.target.closest('[role="tab"]'); if (t) show(t.dataset.tab); });
-      show('dog'); coatTab();
-      el.querySelector('[data-pd="save"]').addEventListener('click', async () => {
-        const look = lookOf(cur);
-        await busy(async () => { const p = await (S.lobby ? S.lobby.look(look) : S.t.touch(S.me, look)); S.me = { ...S.me, look: p.look }; remember(S.me); closeSheet(); paintLobby(); }, () => { chosen.textContent = S.err; });
-      });
-    }, { full: true, label: 'Dress your dog' });
+    const live = S.wallet || await loadWallet(), w = live || normWallet({ owned: [...lockerFor(ITEMS, S.lv?.self?.wins || 0).open] });
+    openWardrobe({
+      sheet, dogFrame, face, ib, lookOf, look: myLook(), wallet: w, offline: !live, tab, say,
+      guard: fn => { S.sheetGuard = fn; }, close: () => closeSheet(true),
+      buy: async (ids, total) => {
+        if (!transport?.buy) throw new Error('The shop opens once the server is updated.');
+        S.wallet = normWallet(await transport.buy(S.me, ids, total), id => !!itemOf(id)); return S.wallet;
+      },
+      saveLook: async look => { const p = await (S.lobby ? S.lobby.look(look) : transport.touch(S.me, look)); S.me = { ...S.me, look: p.look }; remember(S.me); paintLobby(); return p; },
+      saveOutfits: async list => { S.wallet = normWallet(await transport.outfits(S.me, list), id => !!itemOf(id)); return S.wallet; }
+    });
   }
   function openReview(st, me, opp) {
     const ai = st.setup.questions.some(q => q.origin === 'ai');
@@ -798,7 +722,36 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
        winner's celebration is the point of this screen (whatever scrolls: the page here, a sheet in a host) */
     shell.scrollIntoView?.({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     if (!M.practice && M.them.id) watchRematch();
+    earned(M, st, me, res);
     if (!M.reported) { M.reported = true; try { onResult({ outcome: out, score: st.score[me], theirs: st.score[opp], right: st.right[me], rounds: st.rounds.length, practice: M.practice, reason: st.reason }); } catch { /* the host's */ } }
+  }
+  /* what the duel paid, under the score: the server pays a mate's duel when it ends (read back from the wallet);
+     practice is paid here, a bone a right answer up to the day's cap */
+  async function earned(M, st, me, res) {
+    if (hostLook || !S.me || !transport?.wallet || M.paid) return;
+    M.paid = true;
+    const was = S.wallet?.bones;
+    let d = null, note = '';
+    try {
+      if (M.practice) {
+        const w = await transport.practice(S.me, st.right[me] || 0);
+        d = w.paid; S.wallet = normWallet(w, id => !!itemOf(id));
+        if (!d) note = 'Practice bones are done for today';
+      } else {
+        await new Promise(r => setTimeout(r, 400));
+        const w = normWallet(await transport.wallet(S.me), id => !!itemOf(id));
+        S.wallet = w; d = was == null ? null : w.bones - was;
+      }
+    } catch { return; }
+    if (!res.isConnected || (d == null && !note)) return;
+    const p = document.createElement('button');
+    p.type = 'button'; p.className = 'pd-earned'; p.dataset.pd = 'shop';
+    p.innerHTML = d ? `${icon('bone')}<b>+${d}</b><span>bones</span><span class="pd-earned-go">Shop</span>` : `${icon('bone')}<span></span>`;
+    if (!d) p.querySelector('span').textContent = note;
+    p.setAttribute('aria-label', d ? `You earned ${d} bones. Open the shop` : `${note}. Open the shop`);
+    p.addEventListener('click', () => openDress('shop'));
+    res.prepend(p);
+    if (d) say(`You earned ${d} bones`);
   }
   /* their rematch, while this phone shows the result: a new challenge from them in the inbox (the finished duel's
      own log has stopped being asked by then), and the big button plays it */
@@ -848,7 +801,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     S.session?.stop(); S.session = null;
     S.lobby?.stop(); S.lobby = null;
     if (!keepWorld && S.world) { S.world.stop(); S.world = null; S.t = transport; }
-    closeSheet();
+    closeSheet(true);
     S.view = null; S._stage = null; S.hero = null;
   }
   function destroy() { stopAll(); if (keys === 'document') document.removeEventListener('keydown', onDocKey); root.replaceChildren(); root.classList.remove('pd'); }
