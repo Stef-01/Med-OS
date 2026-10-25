@@ -1,4 +1,4 @@
-/* the duel: its question pack (scripts/lib/duel-pack.mjs, public/duel/pack.json) and the vendored Pup Duel package
+/* the duel: its question pack (scripts/lib/duel-pack.mjs from the standard MCQ pool, public/duel/pack.json) and the vendored Pup Duel package
    (public/js/vendor/pup-duel, never edited by hand: VERSION.json holds a hash of every file) */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -6,8 +6,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { shortDx, patientLine, stationQuestion, buildPack } from './lib/duel-pack.mjs';
-import { stationsOnDisk, packText } from './build-duel-pack.mjs';
+import { shortDx, patientLine, stationQuestion, buildPack, poolQuestion, DUEL } from './lib/duel-pack.mjs';
+import { stationsOnDisk, poolOnDisk, packText } from './build-duel-pack.mjs';
+import { stationItems } from './lib/mcq-sources.mjs';
 import { normQuestion } from '../public/js/vendor/pup-duel/duel/pack.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -71,23 +72,45 @@ test('stationQuestion drops an option that repeats the answer, tops up from the 
   assert.match(stationQuestion({ id: 's4', ddx: [] }).why, /no likely/);
 });
 
-test('the pack from the bank: a question for nearly every station, every one playable by the duel', () => {
+test('the station writer: a fair question for nearly every station, every one playable by the duel', () => {
   const stations = stationsOnDisk(path.join(ROOT, 'public'));
-  const { pack, dropped } = buildPack(stations);
-  assert.ok(pack.questions.length >= stations.length - 5, `${pack.questions.length} of ${stations.length} (${dropped.join('; ')})`);
+  const { items, dropped } = stationItems(stations);
+  assert.ok(items.length >= stations.length - 5, `${items.length} of ${stations.length} (${dropped.join('; ')})`);
+  for (const q of items) {
+    assert.ok(normQuestion(poolQuestion(q).q).q, q.id);
+    assert.ok(q.options.every(o => o.length <= 70), q.id);
+    assert.ok(!q.stem.toLowerCase().includes(q.options[q.answer].toLowerCase()), `${q.id}: the stem names the answer`);
+  }
+});
+
+const pooled = (kind, over = {}) => ({ id: `q-${kind}`, stem: 'A 60-year-old man has chest pain.', ask: 'What is the most likely diagnosis?', options: ['A', 'B', 'C', 'D'], answer: 2, explanation: 'Because it is C. It is not the others.', why: ['not A', 'not B', null, 'not D'], topic: 'Cardiology', provenance: { kind }, ...over });
+test('poolQuestion: the whole stem, provenance kept as origin (ai for ai and amsa) and source, too long for the duel is left out', () => {
+  const q = poolQuestion(pooled('amsa')).q;
+  assert.equal(q.stem, 'A 60-year-old man has chest pain. What is the most likely diagnosis?');
+  assert.deepEqual([q.origin, q.source, q.answer, q.why], ['ai', 'amsa', 2, 'Because it is C. It is not the others.']);
+  assert.deepEqual(q.notes, ['not A', 'not B', null, 'not D']);
+  assert.deepEqual(['ai', 'amsa', 'user', 'usmle-resource'].map(k => poolQuestion(pooled(k)).q.origin), ['ai', 'ai', 'human', 'human']);
+  assert.match(poolQuestion(pooled('user', { stem: 'x'.repeat(DUEL.stem) })).why, /characters/);
+  assert.equal(poolQuestion(pooled('user', { explanation: `${'Long sentence here. '.repeat(80)}` })).q.why.length <= DUEL.why, true);
+  const { pack } = buildPack({ questions: [pooled('ai'), pooled('user', { id: 'q-user2' })] });
+  assert.equal(pack.origin, 'mixed'); assert.equal(pack.questions.length, 2);
+});
+
+test('the pack from the pool: every pooled question that fits, each playable by the duel', () => {
+  const pool = poolOnDisk(path.join(ROOT, 'public')), { pack, dropped } = buildPack(pool);
+  assert.equal(pack.questions.length + dropped.length, pool.questions.length);
   assert.equal(new Set(pack.questions.map(q => q.id)).size, pack.questions.length);
   for (const q of pack.questions) {
     const { q: ok, why } = normQuestion(q);
     assert.ok(ok, why);
-    assert.equal(q.options.length, 4);
-    assert.ok(q.options.every(o => o.length <= 70 && o.split(' ').length >= 1), q.id);
-    assert.ok(!q.stem.toLowerCase().includes(q.options[0].toLowerCase()), `${q.id}: the stem names the answer`);
+    assert.equal(ok.stem, q.stem, `${q.id}: the duel shows the whole stem`);
+    const p = pool.questions.find(x => x.id === q.id);
+    assert.equal(q.source, p.provenance.kind); assert.equal(q.origin, ['ai', 'amsa'].includes(p.provenance.kind) ? 'ai' : 'human');
   }
-  assert.equal(pack.origin, 'ai');
 });
 
-test('public/duel/pack.json is current (npm run duel-pack after a station changes)', () => {
-  const { pack } = buildPack(stationsOnDisk(path.join(ROOT, 'public')));
+test('public/duel/pack.json is current (node scripts/mcq-pool.mjs, then npm run duel-pack)', () => {
+  const { pack } = buildPack(poolOnDisk(path.join(ROOT, 'public')));
   assert.equal(fs.readFileSync(path.join(ROOT, 'public/duel/pack.json'), 'utf8'), packText(pack));
 });
 

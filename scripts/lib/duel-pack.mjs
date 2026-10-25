@@ -1,5 +1,6 @@
-/* duel-pack.mjs: the duel's MCQs, made from the station bank (scripts/build-duel-pack.mjs writes them to
-   public/duel/pack.json; npm test fails when that file is stale).
+/* duel-pack.mjs: the duel's MCQs. buildPack takes them from the standard MCQ pool (public/mcq/pool.json; scripts/
+   build-duel-pack.mjs writes public/duel/pack.json and npm test fails when that file is stale). stationQuestion is
+   one of the pool's writers (lib/mcq-sources.mjs): the question a station makes of its own differential.
 
    One single-best-answer question per station: "what is the most likely diagnosis?"
      stem     the patient (age, sex, setting from `demo`) and the findings the station's own differential gives for
@@ -8,7 +9,7 @@
               alternatives an examiner wants ruled out, so the question tests the reasoning, not a guess
      notes    for each wrong option, why it is not it (that differential's `against`)
      why      the station's first learning point
-   The stations are AI-written (origin "ai"), so every question is too, and the duel shows the AI tag. Pure.
+   The stations are AI-written (origin "ai"), so every such question is too, and the duel shows the AI tag. Pure.
    Known limit: the likely diagnosis is often the most specific name, so it is the longest option in about 4 of 10
    questions (1 in 4 by chance); the duel shuffles the options, and an AI-written pack can replace this one. */
 
@@ -92,12 +93,37 @@ export function stationQuestion(st, pool = []) {
   };
 }
 
-/* the pack: every station that makes a fair question, in id order; `dropped` says why the others did not */
-export function buildPack(stations) {
-  const list = [...stations].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
-  for (const st of list) { const { q, why } = stationQuestion(st, list); if (q) questions.push(q); else dropped.push(why); }
+/* the pack, from the standard pool (public/mcq/pool.json, scripts/mcq-pool.mjs): every pooled question the duel can
+   play whole (the vendored duel cuts a stem at 1200 characters and an option at 160, so a longer one is left out, not
+   cut), in id order. Each keeps its provenance: origin is "ai" for AI-written (kind ai or amsa, so the duel's
+   AI-written chip shows) and "human" otherwise, and `source` carries the kind for the chips the package does not draw
+   yet (docs/mcq.md, package follow-up). The explanation becomes `why`, cut at a sentence; the per-option reasons
+   become `notes`. `dropped` says why the others are not in the pack. */
+export const DUEL = Object.freeze({ stem: 1200, option: 160, why: 1200, note: 600 });
+const cut = (s, n) => { const t = strip(s); if (t.length <= n) return t; const c = t.slice(0, n), i = Math.max(c.lastIndexOf('. '), c.lastIndexOf('? ')); return i > n / 3 ? c.slice(0, i + 1) : `${c.slice(0, n - 1).replace(/\s+\S*$/, '')}…`; };
+export function poolQuestion(q) {
+  const stem = q.ask ? `${strip(q.stem)} ${strip(q.ask)}` : strip(q.stem);
+  if (stem.length > DUEL.stem) return { q: null, why: `${q.id}: the stem is ${stem.length} characters (the duel shows ${DUEL.stem})` };
+  if (q.options.some(o => o.length > DUEL.option)) return { q: null, why: `${q.id}: an option is longer than ${DUEL.option} characters` };
+  const kind = q.provenance?.kind || '';
+  const notes = (q.why || []).map((w, i) => (i === q.answer || !w ? null : cut(w, DUEL.note)));
+  const out = { id: q.id, stem, options: [...q.options], answer: q.answer };
+  const why = q.explanation ? cut(q.explanation, DUEL.why) : ''; if (why) out.why = why;
+  if (notes.some(Boolean)) out.notes = notes;
+  if (q.topic) out.topic = q.topic;
+  out.origin = kind === 'ai' || kind === 'amsa' ? 'ai' : 'human';
+  out.source = kind;
+  return { q: out, why: '' };
+}
+export function buildPack(pool) {
+  const list = [...(pool?.questions || [])].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
+  for (const p of list) { const { q, why } = poolQuestion(p); if (q) questions.push(q); else dropped.push(why); }
+  const kinds = questions.reduce((m, q) => ((m[q.source] = (m[q.source] || 0) + 1), m), {});
+  const origins = new Set(questions.map(q => q.origin));
   return {
-    pack: { schemaVersion: 1, version: `stations-${list.length}`, title: 'OSCE differentials', source: 'Built by scripts/build-duel-pack.mjs from public/osce/: one question per station, its likely diagnosis against its own differential.', origin: 'ai', questions },
+    pack: { schemaVersion: 1, version: `pool-${questions.length}`, title: 'Standard MCQ pool',
+      source: `Built by scripts/build-duel-pack.mjs from public/mcq/pool.json: ${Object.entries(kinds).map(([k, n]) => `${n} ${k}`).join(', ')}.`,
+      origin: origins.size === 1 ? [...origins][0] : 'mixed', questions },
     dropped
   };
 }

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-/* build-duel-pack.mjs: public/duel/pack.json, the duel's questions, from the stations in public/osce/
-   (scripts/lib/duel-pack.mjs says how). Run it after any station changes, like build-index.mjs:
+/* build-duel-pack.mjs: public/duel/pack.json, the duel's questions, from the standard MCQ pool public/mcq/pool.json
+   (scripts/lib/duel-pack.mjs says how). Run it after the pool is rebuilt (node scripts/mcq-pool.mjs), which a station
+   change also needs:
 
      npm run duel-pack            write the pack and list what was left out
      npm run duel-pack -- --check exit 1 when the pack on disk is not what the stations make (npm test runs this) */
@@ -12,6 +13,7 @@ import { buildPack } from './lib/duel-pack.mjs';
 
 const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 const OUT = path.join(PUB, 'duel', 'pack.json');
+export const poolOnDisk = (pub = PUB) => JSON.parse(fs.readFileSync(path.join(pub, 'mcq', 'pool.json'), 'utf8'));
 
 export function stationsOnDisk(pub = PUB) {
   const dir = path.join(pub, 'osce');
@@ -20,11 +22,11 @@ export function stationsOnDisk(pub = PUB) {
 export const packText = pack => JSON.stringify(pack, null, 1) + '\n';
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const { pack, dropped } = buildPack(stationsOnDisk());
+  const { pack, dropped } = buildPack(poolOnDisk());
   const text = packText(pack);
   if (process.argv.includes('--check')) {
     const now = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';
-    if (now !== text) { console.error('public/duel/pack.json is stale: run npm run duel-pack'); process.exit(1); }
+    if (now !== text) { console.error('public/duel/pack.json is stale: run node scripts/mcq-pool.mjs, then npm run duel-pack'); process.exit(1); }
     console.log(`duel pack: current (${pack.questions.length} questions)`);
   } else {
     fs.mkdirSync(path.dirname(OUT), { recursive: true });

@@ -1,219 +1,107 @@
 {
  "schemaVersion": 1,
- "version": "stations-133",
- "title": "OSCE differentials",
- "source": "Built by scripts/build-duel-pack.mjs from public/osce/: one question per station, its likely diagnosis against its own differential.",
- "origin": "ai",
+ "version": "pool-57",
+ "title": "Standard MCQ pool",
+ "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json: 1 usmle-resource, 14 ai, 42 amsa.",
+ "origin": "mixed",
  "questions": [
+  {
+   "id": "medqa-us4-test-0002",
+   "stem": "Two weeks after undergoing an emergency cardiac catherization with stenting for unstable angina pectoris, a 61-year-old man has decreased urinary output and malaise. He has type 2 diabetes mellitus and osteoarthritis of the hips. Prior to admission, his medications were insulin and naproxen. He was also started on aspirin, clopidogrel, and metoprolol after the coronary intervention. His temperature is 38°C (100.4°F), pulse is 93/min, and blood pressure is 125/85 mm Hg. Examination shows mottled, reticulated purplish discoloration of the feet. Laboratory studies show: Hemoglobin count 14 g/dL Leukocyte count 16,400/mm3 Segmented neutrophils 56% Eosinophils 11% Lymphocytes 31% Monocytes 2% Platelet count 260,000/mm3 Erythrocyte sedimentation rate 68 mm/h Serum Urea nitrogen 25 mg/dL Creatinine 4.2 mg/dL Renal biopsy shows intravascular spindle-shaped vacuoles. Which of the following is the most likely cause of this patient's symptoms?\"",
+   "options": [
+    "Renal papillary necrosis",
+    "Cholesterol embolization",
+    "Eosinophilic granulomatosis with polyangiitis",
+    "Polyarteritis nodosa"
+   ],
+   "answer": 1,
+   "topic": "Nephrology",
+   "origin": "human",
+   "source": "usmle-resource"
+  },
   {
    "id": "osce-ai-12e898ea",
    "stem": "A 71-year-old woman in the emergency department. She woke 6 hours ago with central pressure going to the left shoulder and jaw, with sweating and nausea, and has 2 mm ST elevation in V2 to V5 with hs-troponin rising from 210 to 480 ng/L. What is the most likely diagnosis?",
    "options": [
-    "Anterior ST-elevation myocardial infarction",
     "Pulmonary embolism",
     "Takotsubo cardiomyopathy",
+    "Anterior ST-elevation myocardial infarction",
     "Type 2 myocardial infarction"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Treat ST elevation in contiguous leads with chest pain and a rising troponin as STEMI: activate the cath lab at once, with first medical contact to reperfusion within 90 minutes.",
    "notes": [
-    null,
     "She has no leg pain or swelling, no previous clots, no cancer, surgery, travel or oestrogen, and the right lower lobe consolidation already explains her hypoxia and pleuritic pain.",
     "It cannot be accepted until angiography shows no culprit lesion, and she has hypertension and a 15 pack-year smoking history that put her at risk of coronary disease.",
+    null,
     "The ST elevation is territorial in V2 to V5, which points to coronary occlusion rather than global ischaemia from demand."
    ],
-   "why": "Treat ST elevation in contiguous leads with chest pain and a rising troponin as STEMI: activate the cath lab at once, with first medical contact to reperfusion within 90 minutes.",
    "topic": "Emergency Medicine",
    "origin": "ai",
-   "station": "ai-12e898ea"
-  },
-  {
-   "id": "osce-ai-1337df24",
-   "stem": "An 18-day-old baby boy in general practice. Jaundice from day 3 that has persisted and worsened beyond 14 days, with stools pale since day 10 that match the palest chart colours, dark staining urine and a firm liver 2 cm below the costal margin. What is the most likely diagnosis?",
-   "options": [
-    "Biliary atresia causing cholestatic jaundice",
-    "Late vitamin K deficiency bleeding",
-    "Other neonatal cholestasis",
-    "Breastmilk jaundice"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Nothing is bleeding today, with no bruising, nosebleeds or blood in vomit or nappy, and he is alert with normal observations.",
-    "Afebrile, feeding well, thriving with normal observations, and no family history of liver disease.",
-    "Pale putty stools, dark staining urine and a firm liver point to conjugated jaundice, which breastmilk jaundice does not cause."
-   ],
-   "why": "Jaundice beyond 14 days in a term baby, especially with pale stools and dark urine, is cholestasis until proven otherwise. Refer for same-day paediatric or ED assessment, not outpatient tests.",
-   "topic": "Paediatrics",
-   "origin": "ai",
-   "station": "ai-1337df24"
-  },
-  {
-   "id": "osce-ai-14bb98e4",
-   "stem": "A 46-year-old woman in general practice. Fever, a tender red retroareolar lump, raised white cell count and CRP, and a thick-walled collection with mobile debris on ultrasound. What is the most likely diagnosis?",
-   "options": [
-    "Non-lactational left breast abscess",
-    "Underlying breast carcinoma",
-    "Periductal mastitis",
-    "Lactational mastitis or breast abscess"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Fever, neutrophilia and a true abscess collection show that infection is at least part of the picture, and there is no tissue diagnosis yet.",
-    "It does not explain the separate irregular solid mass, the suspicious mammogram or the indeterminate axillary node.",
-    "She last breastfed 11 years ago and is not pregnant (regular periods, last period two weeks ago), so this is non-lactational."
-   ],
-   "why": "Non-lactational breast abscess or mastitis is a red flag for underlying carcinoma, including inflammatory breast cancer, and needs imaging at presentation as well as treatment of the infection.",
-   "topic": "General Practice",
-   "origin": "ai",
-   "station": "ai-14bb98e4"
-  },
-  {
-   "id": "osce-ai-26435104",
-   "stem": "A 34-year-old woman on the ward. Her CTG is normal (baseline 140 bpm, variability 10 bpm, accelerations, no decelerations), the fetal heart is 142 bpm and she felt movements on examination and on the event marker. What is the most likely diagnosis?",
-   "options": [
-    "Reduced fetal movements",
-    "Fetal growth restriction or placental insufficiency",
-    "Pre-eclampsia",
-    "Maternal infection such as listeriosis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Her growth scan was normal at 32 weeks, SFH is 35 cm at 36+2 weeks and the CTG is normal, but only an ultrasound can settle it.",
-    "Her BP was 116/72 on two readings, the dipstick shows no protein and she has no headache, visual change, upper abdominal pain or new swelling.",
-    "She is afebrile at 36.8 °C, has had no fever or flu-like illness at any point and her urinalysis is clear."
-   ],
-   "why": "A normal CTG for reduced fetal movements is reassuring but not a guarantee, so offer an ultrasound and advise her to come in again straight away, at any hour, if movements change.",
-   "topic": "Obstetrics",
-   "origin": "ai",
-   "station": "ai-26435104"
-  },
-  {
-   "id": "osce-ai-2ab0f580",
-   "stem": "A 13-year-old girl in general practice. Karyotype is 45,X in all 30 cells, and she is far below her mid-parental height of 165 cm with neonatal lymphoedema, Turner features, FSH 58 and LH 24 with low oestradiol, a bicuspid aortic valve, a horseshoe kidney and conductive hearing loss. What is the most likely diagnosis?",
-   "options": [
-    "Turner syndrome",
-    "Growth hormone deficiency or a pituitary or hypothalamic lesion such",
-    "Constitutional delay of growth and puberty",
-    "Hypothyroidism"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Her FSH and LH are high rather than low, and she has no headaches or change in vision.",
-    "She has been below the 3rd centile since age 4, is far below her mid-parental height, has dysmorphic features and high gonadotrophins, and there is no family history of late puberty.",
-    "Free T4 is normal, so this is subclinical, and it does not explain the high FSH and LH or the dysmorphic features."
-   ],
-   "why": "Consider Turner syndrome in any girl with unexplained short stature or delayed puberty; compare height with the mid-parental height.",
-   "topic": "Paediatrics",
-   "origin": "ai",
-   "station": "ai-2ab0f580"
-  },
-  {
-   "id": "osce-ai-387d7db7",
-   "stem": "A 32-year-old man in the emergency department. Glass wound over right sternocleidomastoid breaching platysma with venous bleeding and a sucking noise, bilateral nasal blockage with fluctuant red-purple septal swelling that does not shrink with decongestant, and CT showing a cut external jugular vein and bilateral septal thickening. What is the most likely diagnosis?",
-   "options": [
-    "Right external jugular vein laceration",
-    "Established venous air embolism",
-    "Carotid artery",
-    "Nasal septal abscess"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "He is stable with no breathlessness, no mill-wheel murmur, and CT shows no gas in the internal jugular, subclavian or superior vena cava.",
-    "Bleeding was venous with no expanding haematoma, stridor or surgical emphysema, and the CT angiogram shows normal arteries, an intact internal jugular vein, larynx, trachea and oesophagus.",
-    "Injury was under an hour ago and he has no fever, and the raised white cell count fits a stress response."
-   ],
-   "why": "ABCDE: Airway (with cervical spine control), Breathing, Circulation, Disability, Exposure. Work in order, treat as you go and call for help early.",
-   "topic": "Emergency Medicine",
-   "origin": "ai",
-   "station": "ai-387d7db7"
+   "source": "ai"
   },
   {
    "id": "osce-ai-44e14180",
    "stem": "A 29-year-old man in general practice. HBsAg and total anti-HBc positive with IgM negative and anti-HBs 3, HBV DNA 850 IU/mL, born in Vietnam and his mother has hepatitis B. What is the most likely diagnosis?",
    "options": [
-    "Chronic hepatitis B infection",
     "Acute hepatitis B infection",
     "Past cleared hepatitis B infection",
+    "Chronic hepatitis B infection",
     "Hepatitis B vaccine immunity"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Before anti-TNF therapy, screen for latent TB, hepatitis B, hepatitis C, HIV and varicella immunity, because TNF blockade can reactivate TB and hepatitis B.",
    "notes": [
-    null,
     "IgM anti-HBc negative, he feels well without jaundice, and the ALT is only mildly raised with normal bilirubin and INR.",
     "HBsAg is positive, confirmed by neutralisation, and HBV DNA is detectable at 850 IU/mL.",
+    null,
     "Anti-HBs is only 3 mIU/mL and anti-HBc is positive, which vaccination does not cause."
    ],
-   "why": "Before anti-TNF therapy, screen for latent TB, hepatitis B, hepatitis C, HIV and varicella immunity, because TNF blockade can reactivate TB and hepatitis B.",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "ai-44e14180"
+   "source": "ai"
   },
   {
    "id": "osce-ai-4f540d03",
    "stem": "A 5-week-old baby boy in the emergency department. A first-born 5-week-old boy whose forceful, non-bilious vomiting is getting worse and who is hungry straight after vomiting; his father had infant surgery; he has a hypochloraemic, hypokalaemic metabolic alkalosis; ultrasound shows a 5 mm wall and a 19 mm channel. What is the most likely diagnosis?",
    "options": [
-    "Hypertrophic pyloric stenosis",
     "Malrotation",
+    "Hypertrophic pyloric stenosis",
     "Sepsis",
     "Salt-wasting congenital adrenal hyperplasia"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "Pyloric stenosis causes a hypochloraemic, hypokalaemic metabolic alkalosis.",
    "notes": [
-    null,
     "The vomit has never been green, lactate is normal and the superior mesenteric vein lies to the right of the artery, although this does not exclude it.",
+    null,
     "Afebrile, normal lactate, hungry and feeding keenly, and quick recovery after one fluid bolus.",
     "Potassium is low (3.0), sodium is low-normal (134) and he has an alkalosis, not the low sodium, high potassium and acidosis of salt wasting."
    ],
-   "why": "Pyloric stenosis causes a hypochloraemic, hypokalaemic metabolic alkalosis.",
    "topic": "Paediatrics",
    "origin": "ai",
-   "station": "ai-4f540d03"
+   "source": "ai"
   },
   {
    "id": "osce-ai-7789e6bf",
    "stem": "A 28-month-old baby in general practice. Choked on mixed nuts at age 2 with the cough starting that evening, then one-sided monophonic wheeze, tracheal shift and right lower lobe collapse that did not respond to antibiotics, steroids or salbutamol. What is the most likely diagnosis?",
    "options": [
-    "Inhaled foreign body obstructing the right lower lobe bronchus",
     "Tuberculosis",
+    "Inhaled foreign body obstructing the right lower lobe bronchus",
     "Community-acquired pneumonia of the right lower lobe",
     "Asthma"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "A toddler with persistent cough unresponsive to antibiotics, steroids and inhalers, plus focal collapse, may have an inhaled foreign body needing bronchoscopy.",
    "notes": [
-    null,
     "No TB contact or travel, no night sweats, and weight steady on the 50th centile.",
+    null,
     "Afebrile and playful, the lobe has lost volume with no air bronchograms, and a week of amoxicillin did not help.",
     "No atopy, eczema, family history or earlier wheeze, the wheeze is one-sided and monophonic, and salbutamol and prednisolone did not help."
    ],
-   "why": "A toddler with persistent cough unresponsive to antibiotics, steroids and inhalers, plus focal collapse, may have an inhaled foreign body needing bronchoscopy.",
    "topic": "Paediatrics",
    "origin": "ai",
-   "station": "ai-7789e6bf"
-  },
-  {
-   "id": "osce-ai-787441f6",
-   "stem": "A 10-year-old boy in general practice. He hits his tummy, passes hard stools every 4 to 5 days with soiling, has a firm tender left iliac fossa mass, pulls at the left of his face, refuses crunchy food and has a carious tender lower left molar with gum swelling. What is the most likely diagnosis?",
-   "options": [
-    "Pain-driven behaviour change",
-    "Physical abuse or neglect",
-    "Risperidone adverse effects",
-    "Distress at losing his familiar teacher's aide and bus driver"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "He has no bruises, is not fearful of anyone, and his parent denies harm and has no concerns about other carers.",
-    "It does not explain his facial pulling or the tender molar with gum swelling.",
-    "It does not explain his abdominal and dental pain signs."
-   ],
-   "why": "In a child with intellectual disability who cannot report symptoms, a sudden behavioural change is pain or illness until proven otherwise: look for dental pain, constipation, reflux, UTI and endocrine causes.",
-   "topic": "Paediatrics",
-   "origin": "ai",
-   "station": "ai-787441f6"
+   "source": "ai"
   },
   {
    "id": "osce-ai-8b37c286",
@@ -225,16 +113,16 @@
     "Acute cholecystitis"
    ],
    "answer": 0,
+   "why": "Murphy's sign is elicited by palpating under the right costal margin while the patient breathes in; inspiratory arrest suggests acute cholecystitis.",
    "notes": [
     null,
     "No fever, jaundice or confusion, and bilirubin and ALP are normal, so she has only one part of Charcot triad.",
     "Lactate is normal at 1.8 and the pain is colicky rather than constant, although neither rules it out.",
     "Murphy's sign is negative, she is afebrile, the pain comes and goes, and the main problem is mechanical small bowel obstruction."
    ],
-   "why": "Murphy's sign is elicited by palpating under the right costal margin while the patient breathes in; inspiratory arrest suggests acute cholecystitis.",
    "topic": "Emergency Medicine",
    "origin": "ai",
-   "station": "ai-8b37c286"
+   "source": "ai"
   },
   {
    "id": "osce-ai-8bb4689d",
@@ -246,121 +134,58 @@
     "HIV-2 infection or HIV-1 and HIV-2 dual infection"
    ],
    "answer": 0,
+   "why": "HIV mainly infects CD4 helper T cells; progressive CD4 loss without treatment leads to immune failure (AIDS).",
    "notes": [
     null,
     "His CD4 is above 200 and above 14%, he has no weight loss, fevers, cough, oral candida or other AIDS-defining illness, and he had a negative test 14 months ago.",
     "The Western blot is positive for envelope, core and polymerase antibodies, a second separately collected sample is reactive again, and the viral load is detectable.",
     "HIV-2 antibody was not detected, and the HIV-1 Western blot and HIV-1 viral load are positive."
    ],
-   "why": "HIV mainly infects CD4 helper T cells; progressive CD4 loss without treatment leads to immune failure (AIDS).",
    "topic": "Infectious Diseases",
    "origin": "ai",
-   "station": "ai-8bb4689d"
+   "source": "ai"
   },
   {
    "id": "osce-ai-95865471",
    "stem": "A 52-year-old woman in general practice. Left hearing loss came on suddenly on waking within 72 hours, with Weber to the right, Rinne positive on both sides, no air-bone gap and a loss 35 to 50 dB worse than the right over five contiguous frequencies. What is the most likely diagnosis?",
    "options": [
-    "Idiopathic sudden sensorineural hearing loss",
     "Vestibular schwannoma",
     "Posterior circulation stroke",
+    "Idiopathic sudden sensorineural hearing loss",
     "Conductive hearing loss"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Sudden sensorineural hearing loss is time-critical: confirm with an audiogram, start steroids promptly (oral, or intratympanic via ENT, dose per local guideline) and involve ENT the same day.",
    "notes": [
-    null,
     "Her cranial nerves are normal and she has had no previous hearing problems, but only MRI of the internal auditory canals can exclude it.",
     "She has no facial, limb, speech, swallowing or visual symptoms, her cranial nerves and coordination are normal, and the unsteadiness has settled.",
+    null,
     "Otoscopy is normal, both tympanograms are type A, there is no air-bone gap and the Weber goes to the right ear."
    ],
-   "why": "Sudden sensorineural hearing loss is time-critical: confirm with an audiogram, start steroids promptly (oral, or intratympanic via ENT, dose per local guideline) and involve ENT the same day.",
    "topic": "General Practice",
    "origin": "ai",
-   "station": "ai-95865471"
-  },
-  {
-   "id": "osce-ai-9fdfd7be",
-   "stem": "A 51-year-old woman in recovery. Fat-like tissue in the curettings, a retroverted bulky uterus in an obese patient, shock that barely responded to 1 L, haemoglobin down from 126 to 98 g/L, peritonism and right shoulder-tip pain. What is the most likely diagnosis?",
-   "options": [
-    "Uterine perforation",
-    "Bowel",
-    "Acute coronary syndrome or pulmonary embolism",
-    "Sepsis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "She is afebrile, has not vomited and the catheter bag is empty rather than bloodstained, though a bowel injury may only show itself days later.",
-    "The ECG shows sinus tachycardia only, with no ischaemia or right heart strain, SpO2 is 97% on oxygen, and she has a falling haemoglobin with peritonism.",
-    "She is afebrile at 36.8 to 36.9 only 3 hours after surgery, and the lactate fits the blood loss shown by the fall in haemoglobin."
-   ],
-   "why": "Fat in curettings after D&C means uterine perforation until proven otherwise: resuscitate, call the senior gynaecologist urgently and assess for bowel or other visceral injury.",
-   "topic": "Gynaecology",
-   "origin": "ai",
-   "station": "ai-9fdfd7be"
-  },
-  {
-   "id": "osce-ai-a98052d6",
-   "stem": "A 24-year-old woman in the birth suite. Soft, boggy fundus above the umbilicus with a precipitate 2-hour labour, a full bladder, no breastfeeding and heavy bleeding with clots starting after the placenta. What is the most likely diagnosis?",
-   "options": [
-    "Major primary postpartum haemorrhage",
-    "Uterine inversion or uterine rupture",
-    "Coagulopathy",
-    "Genital tract trauma"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "The fundus can be felt above the umbilicus, there is no mass in the vagina, the placenta came away complete with controlled cord traction, and she has no uterine scar.",
-    "INR 1.1, APTT 27 and platelets 168 are normal, and she has no bleeding disorder and takes no anticoagulants.",
-    "Inspection shows only a small perineal graze, with no tear or haematoma."
-   ],
-   "why": "Primary PPH is 500 mL or more after vaginal birth; tone causes most cases and risk factors here are precipitate labour, a full bladder and no breastfeeding.",
-   "topic": "Obstetrics",
-   "origin": "ai",
-   "station": "ai-a98052d6"
+   "source": "ai"
   },
   {
    "id": "osce-ai-b08d5faf",
    "stem": "A 36-year-old woman in clinic. The NIPT was valid with a 9% fetal fraction and showed high chance for trisomy 16 only, while the pregnancy is ongoing and the 12-week scan was normal (NT 1.6 mm, no structural abnormality). What is the most likely diagnosis?",
    "options": [
-    "Confined placental mosaicism for trisomy 16",
     "True fetal mosaic trisomy 16",
+    "Confined placental mosaicism for trisomy 16",
     "Full fetal trisomy 16",
     "Vanishing twin as the source of the trisomic cell-free DNA"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "NIPT is a screening test on cell-free DNA in maternal blood, most of which comes from the placenta; a high-chance result is not a diagnosis and needs confirmation by CVS or amniocentesis before any decision.",
    "notes": [
-    null,
     "The 12-week scan was structurally normal with a normal nuchal translucency and nasal bone present.",
+    null,
     "The fetus is alive and structurally normal at 12 weeks 1 day, with a heart rate of 158 bpm and no bleeding or pain, whereas full trisomy 16 almost always ends in early miscarriage.",
     "The scan showed a single gestational sac with no second sac, she conceived naturally, and she has had no bleeding in this pregnancy."
    ],
-   "why": "NIPT is a screening test on cell-free DNA in maternal blood, most of which comes from the placenta; a high-chance result is not a diagnosis and needs confirmation by CVS or amniocentesis before any decision.",
    "topic": "Obstetrics",
    "origin": "ai",
-   "station": "ai-b08d5faf"
-  },
-  {
-   "id": "osce-ai-b0b61929",
-   "stem": "A 33-year-old woman in the birth suite. Soft, boggy fundus above the umbilicus that stays soft despite first measures, after a 4.3 kg baby, polyhydramnios, a 16-hour oxytocin-augmented labour and with a full bladder. What is the most likely diagnosis?",
-   "options": [
-    "Primary postpartum haemorrhage",
-    "Retained placental tissue",
-    "Coagulopathy",
-    "Genital tract trauma"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Membranes are complete and there are no vessels running to the membrane edge, so there is no sign of a missed succenturiate lobe.",
-    "No bleeding disorder or anticoagulants, she is afebrile, and she is still forming clots.",
-    "No tear or haematoma on inspection, and the blood and clots are coming through the cervix from a boggy uterus."
-   ],
-   "why": "Uterine atony (Tone) is the most common cause of primary PPH; risk factors include prolonged or precipitate labour, overdistension (macrosomia, polyhydramnios, multiple pregnancy), grand multiparity and chorioamnionitis, and a full bladder can impair contraction.",
-   "topic": "Obstetrics",
-   "origin": "ai",
-   "station": "ai-b0b61929"
+   "source": "ai"
   },
   {
    "id": "osce-ai-c1be5d8e",
@@ -372,289 +197,184 @@
     "Drug or substance-induced raised blood pressure"
    ],
    "answer": 0,
+   "why": "Raised clinic BP with normal home readings suggests white coat hypertension: confirm with ABPM or a structured home protocol before diagnosing or treating.",
    "notes": [
     null,
     "Normal potassium, eGFR above 90 with a normal urine albumin to creatinine ratio, no episodes of sweating, palpitations and headache, and equal readings in both arms.",
     "His home readings average 124/78 mmHg, although they were taken unreliably.",
     "His ibuprofen use is intermittent and he takes no decongestants, licorice or supplements."
    ],
-   "why": "Raised clinic BP with normal home readings suggests white coat hypertension: confirm with ABPM or a structured home protocol before diagnosing or treating.",
    "topic": "General Practice",
    "origin": "ai",
-   "station": "ai-c1be5d8e"
-  },
-  {
-   "id": "osce-ai-d8c143df",
-   "stem": "A 29-year-old woman in the birth suite. A pulsating cord is felt below a high presenting part (station -2, 3/5 palpable), and a sudden prolonged deceleration to 70 bpm began within 20 minutes of artificial rupture of the membranes. What is the most likely diagnosis?",
-   "options": [
-    "Umbilical cord prolapse",
-    "Placental abruption",
-    "Uterine rupture",
-    "Uterine tachysystole"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "She has no constant pain, no vaginal bleeding, a non-tender uterus, clear liquor, and the placenta was not low on the morphology scan.",
-    "She has no uterine scar and no pain or bleeding, and the head is not receding (station -2, unchanged).",
-    "Tachysystole does not explain the pulsating cord, and the deceleration has not recovered as it would with uterine activity alone."
-   ],
-   "why": "For an abnormal CTG, call for help early, alongside the first measures: reposition, correct hypotension, stop oxytocin for hyperstimulation, check temperature, check signal and perform a vaginal examination to exclude cord prolapse.",
-   "topic": "Obstetrics",
-   "origin": "ai",
-   "station": "ai-d8c143df"
+   "source": "ai"
   },
   {
    "id": "osce-ai-e4a377e8",
    "stem": "A 66-year-old man in general practice. Biopsy shows Gleason 4+3=7 in 4 of 14 left cores, with PSA 9.4, a PI-RADS 4 lesion and no spread on MRI. What is the most likely diagnosis?",
    "options": [
-    "Localised unfavourable intermediate-risk prostate adenocarcinoma",
     "Metastatic or locally advanced prostate cancer",
+    "Localised unfavourable intermediate-risk prostate adenocarcinoma",
     "High-risk localised prostate cancer",
     "Favourable intermediate-risk prostate cancer"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "PSA is organ-specific, not cancer-specific. It rises with age, BPH, prostatitis or infection and ejaculation.",
    "notes": [
-    null,
     "He has no bone pain, weight loss or neurological symptoms, and MRI shows no extraprostatic extension, seminal vesicle invasion, nodal disease or bone lesions.",
+    null,
     "PSA is under 10, the grade is Group 3 rather than 4 or 5, and there is no extraprostatic extension or palpable disease.",
     "Pattern 4 predominates (about 70%), so this is 4+3 (Grade Group 3), not 3+4."
    ],
-   "why": "PSA is organ-specific, not cancer-specific. It rises with age, BPH, prostatitis or infection and ejaculation.",
    "topic": "General Practice",
    "origin": "ai",
-   "station": "ai-e4a377e8"
+   "source": "ai"
   },
   {
    "id": "osce-ai-e8892591",
    "stem": "A 2-year-old child in the emergency department. A 2-year-old with 2 days of coryza and fever to 38 °C, then a barking cough, hoarse cry and inspiratory stridor from 8 pm, with a sibling who had a cold. What is the most likely diagnosis?",
    "options": [
-    "Croup",
     "Epiglottitis",
     "Bacterial tracheitis",
+    "Croup",
     "Inhaled foreign body"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Moderate croup: a single oral dose of dexamethasone 0.15 mg/kg (1.8 mg for 12 kg) or prednisolone 1 mg/kg (12 mg); severe croup: dexamethasone 0.6 mg/kg, maximum 12 mg (7.2 mg for 12 kg).",
    "notes": [
-    null,
     "Fully immunised including Hib, no drooling, swallowing normally, not toxic, and the illness began with coryza and a barking cough.",
     "Only low-grade fever (38 °C at home, 37.8 °C on arrival), the child is alert and not toxic, and no poor response to adrenaline has been shown.",
+    null,
     "No choking episode, no small toys or food missing, and the onset was gradual after 2 days of coryza and fever."
    ],
-   "why": "Moderate croup: a single oral dose of dexamethasone 0.15 mg/kg (1.8 mg for 12 kg) or prednisolone 1 mg/kg (12 mg); severe croup: dexamethasone 0.6 mg/kg, maximum 12 mg (7.2 mg for 12 kg).",
    "topic": "Paediatrics",
    "origin": "ai",
-   "station": "ai-e8892591"
+   "source": "ai"
   },
   {
    "id": "osce-ai-ea8dbb57",
    "stem": "A 0.6-day-old baby on the ward. Mother was GBS positive with only 2 hours of antibiotics before birth, membranes ruptured 20 hours and a fever of 38.2 °C in labour; the baby has a fever of 38.1 °C, grunting, HR 188, CRT 4 s, lactate 4.2, neutropenia with toxic changes and bilateral hazy opacification on chest X-ray. What is the most likely diagnosis?",
    "options": [
-    "Early-onset neonatal sepsis",
     "Duct-dependent congenital heart disease",
+    "Early-onset neonatal sepsis",
     "Inborn error of metabolism",
     "Transient tachypnoea of the newborn"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "Treat suspected early-onset sepsis urgently: blood culture, then benzylpenicillin and gentamicin (RCH Neonatal antimicrobial guidelines, doses from the Australasian Neonatal Medicines Formulary), without delaying treatment.",
    "notes": [
-    null,
     "Heart size and shape are normal and the baby improved with fluid and oxygen, but this does not exclude it, so pre- and post-ductal SpO2 are needed.",
+    null,
     "BGL and electrolytes are normal, there is a fever, and poor perfusion explains the lactate; check ammonia if not improving.",
     "Fever, shock and neutropenia, onset after 10 hours of normal feeding, and no fluid in the fissures on the chest X-ray."
    ],
-   "why": "Treat suspected early-onset sepsis urgently: blood culture, then benzylpenicillin and gentamicin (RCH Neonatal antimicrobial guidelines, doses from the Australasian Neonatal Medicines Formulary), without delaying treatment.",
    "topic": "Paediatrics",
    "origin": "ai",
-   "station": "ai-ea8dbb57"
+   "source": "ai"
   },
   {
    "id": "osce-ai-edd05314",
    "stem": "A 4-month-old baby in the emergency department. First episode at 4 months with 3 days of coryza then cough, RR 64, recession, widespread fine crackles and wheeze, low-grade fever and a sibling with a cold. What is the most likely diagnosis?",
    "options": [
-    "Bronchiolitis",
     "Heart failure",
     "Sepsis",
-    "Pertussis"
+    "Pertussis",
+    "Bronchiolitis"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "Start oxygen when SpO2 is persistently below 90% in room air, and target 90% or above.",
    "notes": [
-    null,
     "Well newborn period with no known heart problems, CRT 2 seconds, and the liver edge is pushed down by hyperinflation rather than enlarged.",
     "Alert and making eye contact, CRT 2 seconds, BP 90/55, only low-grade fever and BGL 5.2 mmol/L.",
-    "No apnoea, colour change or coughing paroxysms, and immunised including the 4-month vaccines."
+    "No apnoea, colour change or coughing paroxysms, and immunised including the 4-month vaccines.",
+    null
    ],
-   "why": "Start oxygen when SpO2 is persistently below 90% in room air, and target 90% or above.",
    "topic": "Paediatrics",
    "origin": "ai",
-   "station": "ai-edd05314"
-  },
-  {
-   "id": "osce-ai-f3a22080",
-   "stem": "A 31-year-old woman in general practice. The register shows only 1 MMR dose and her last dTpa was at 15, she is afebrile with a clear checklist, and about 5 of her 6 weeks are rural with food, water, mosquito and animal exposure. What is the most likely diagnosis?",
-   "options": [
-    "Healthy traveller fit for vaccination today",
-    "Contraindication to live vaccines",
-    "Vaccine doses given but not recorded",
-    "Varicella non-immunity"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Her urine hCG is negative, she takes the combined pill reliably, her last period was 2 weeks ago and the pre-vaccination checklist is clear.",
-    "She says her records match the statement and she has had no other vaccines.",
-    "She has a reliable history of childhood chickenpox that her mother remembers well, so she needs no vaccine or serology."
-   ],
-   "why": "Take a travel history covering destinations, rural or urban, duration, activities, timing before departure, pregnancy, immune status and routine vaccine record.",
-   "topic": "General Practice",
-   "origin": "ai",
-   "station": "ai-f3a22080"
+   "source": "ai"
   },
   {
    "id": "osce-ai-fb288e39",
    "stem": "A 27-month-old baby in the emergency department. A single generalised tonic-clonic seizure lasting about 3 minutes in a febrile 27-month-old with a viral URTI, back to GCS 15 within an hour and a sibling who had a febrile seizure. What is the most likely diagnosis?",
    "options": [
-    "Simple febrile seizure",
     "Bacterial meningitis or viral encephalitis",
     "Hypoglycaemic seizure",
+    "Simple febrile seizure",
     "Complex febrile seizure"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "A simple febrile seizure is generalised tonic-clonic, under 15 minutes, with complete recovery within 1 hour and no recurrence in the same illness.",
    "notes": [
-    null,
     "No neck stiffness, rash, vomiting or recent antibiotics, a clear URTI source, and alert with GCS 15 and a normal neurological exam by 18:55.",
     "BGL was 5.6 mmol/L at triage and the child recovered fully without glucose.",
+    null,
     "No focal onset or one-sided features, it lasted about 3 minutes, there was no repeat and recovery was complete within the hour."
    ],
-   "why": "A simple febrile seizure is generalised tonic-clonic, under 15 minutes, with complete recovery within 1 hour and no recurrence in the same illness.",
    "topic": "Paediatrics",
    "origin": "ai",
-   "station": "ai-fb288e39"
-  },
-  {
-   "id": "osce-ai-fbe23e14",
-   "stem": "A patient in the birth suite. Fetal heart rate about 70 for the last 8 minutes before birth, then a quick recovery with ventilation alone and a mild cord acidaemia (pH 7.18, lactate 5.4). What is the most likely diagnosis?",
-   "options": [
-    "Neonatal respiratory depression",
-    "Early-onset neonatal sepsis",
-    "Evolving hypoxic ischaemic encephalopathy",
-    "Upper airway obstruction"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "GBS negative, membranes ruptured only 4 hours before birth, no maternal fever and clear liquor.",
-    "Apgar 7 at 5 minutes, responds to voice, and cord gas (pH 7.18, base excess -8) is below the cooling criteria.",
-    "Chest rise came back once the head was repositioned, and the liquor was clear with no meconium."
-   ],
-   "why": "Most apnoeic newborns respond to warmth, airway positioning and effective ventilation; HR rise is the key sign of effective ventilation.",
-   "topic": "Paediatrics",
-   "origin": "ai",
-   "station": "ai-fbe23e14"
+   "source": "ai"
   },
   {
    "id": "osce-amsa-187",
    "stem": "A 50-year-old man in the emergency department. An hour of central crushing pain to the left jaw with sweating and nausea, hypertension, untreated high cholesterol and premature family history, ST elevation in II, III and aVF with reciprocal depression in I and aVL, a raised troponin, and new bradycardia with hypotension. What is the most likely diagnosis?",
    "options": [
-    "Inferior ST-elevation myocardial infarction",
     "Acute aortic dissection extending into the right coronary artery",
     "Pulmonary embolism",
-    "Acute pericarditis"
+    "Acute pericarditis",
+    "Inferior ST-elevation myocardial infarction"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "STEMI is an ECG and clinical diagnosis. Activate the cath lab without waiting for the troponin, aiming for primary PCI within 90 minutes of first medical contact.",
    "notes": [
-    null,
     "The pain came on gradually as a pressure, it is not tearing and does not go to the back, the arm BPs and pulses are equal, and there is no aortic regurgitation murmur.",
     "No immobility, surgery, cancer or calf symptoms, the pain is not pleuritic, SpO2 is 97% on room air and the calves are normal.",
-    "No viral prodrome, the pain is pressure-like and not positional, there is no rub, and the ST elevation is territorial with reciprocal depression in aVL."
+    "No viral prodrome, the pain is pressure-like and not positional, there is no rub, and the ST elevation is territorial with reciprocal depression in aVL.",
+    null
    ],
-   "why": "STEMI is an ECG and clinical diagnosis. Activate the cath lab without waiting for the troponin, aiming for primary PCI within 90 minutes of first medical contact.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-187"
-  },
-  {
-   "id": "osce-amsa-188",
-   "stem": "A 60-year-old man in general practice. Central pressure pain at rest spreading to the left arm and jaw with sweating and nausea, three weeks of exertional chest tightness, smoker with hypertension and high cholesterol, and new ST elevation in V1 to V4 with reciprocal inferior depression. What is the most likely diagnosis?",
-   "options": [
-    "Acute anterior ST-elevation myocardial infarction",
-    "Acute aortic dissection",
-    "Pulmonary embolism",
-    "Acute pericarditis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Pain built up over minutes, is not tearing and does not go to the back, arm pressures are equal (150/90 and 146/88 mmHg), there is no radio-femoral delay and no aortic regurgitation murmur.",
-    "No surgery, immobility, travel, leg swelling or haemoptysis, SpO2 96% on room air, normal calves and non-pleuritic pain.",
-    "ST elevation is territorial with reciprocal depression and no PR depression, the pain is not pleuritic or positional, there is no rub and no recent viral illness."
-   ],
-   "why": "Chest pain that may be cardiac needs a 12-lead ECG within 10 minutes of first medical contact, before a complete examination.",
-   "topic": "Cardiology",
-   "origin": "ai",
-   "station": "amsa-188"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-189",
    "stem": "A 75-year-old man in general practice. Age 75 with asbestos exposure in the late 1960s and 1970s, progressive dry cough and exertional breathlessness, 6 kg weight loss, hoarseness, dull upper right chest pain, right apical dullness and a 6 cm right apical mass on the chest X-ray. What is the most likely diagnosis?",
    "options": [
-    "Primary lung carcinoma of the right superior sulcus",
     "Malignant pleural mesothelioma",
+    "Primary lung carcinoma of the right superior sulcus",
     "Pulmonary tuberculosis",
     "Asbestos-related pulmonary fibrosis"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "A cough lasting more than 3 weeks with weight loss, hoarseness, chest pain or breathlessness in an older adult needs a chest X-ray. A suspicious film needs an urgent CT and specialist referral, with the patient seen within 2 weeks.",
    "notes": [
-    null,
     "The X-ray shows a discrete apical mass with no pleural effusion, plaques or pleural thickening.",
+    null,
     "No fevers, night sweats, travel or TB contact, and the lesion is a solid mass without cavitation.",
     "No clubbing, no fine crackles, no reticular change on the X-ray, and it does not explain the mass."
    ],
-   "why": "A cough lasting more than 3 weeks with weight loss, hoarseness, chest pain or breathlessness in an older adult needs a chest X-ray. A suspicious film needs an urgent CT and specialist referral, with the patient seen within 2 weeks.",
    "topic": "Respiratory Medicine",
    "origin": "ai",
-   "station": "amsa-189"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-190",
    "stem": "A 55-year-old woman in general practice. Two spontaneous attacks of spinning vertigo lasting about 8 hours, fluctuating right hearing loss with tinnitus and fullness, a documented right low-frequency sensorineural loss, and a normal examination between attacks. What is the most likely diagnosis?",
    "options": [
-    "Ménière's disease of the right ear",
     "Vestibular schwannoma",
     "Posterior circulation TIA or stroke",
-    "Vestibular migraine"
+    "Vestibular migraine",
+    "Ménière's disease of the right ear"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "Clarify what “dizzy” means first. True vertigo is vestibular, and its timing and triggers (seconds and positional, hours and spontaneous, or days and continuous) narrow the cause.",
    "notes": [
-    null,
     "The symptoms are episodic and the loss is low-frequency, with good word recognition, present acoustic reflexes and normal cranial nerves V and VII.",
     "The attacks lasted 8 hours each with full recovery, there are no neurological symptoms, the examination is normal and the ear symptoms point to the inner ear.",
-    "No headache, aura or light or noise sensitivity, and she has a documented one-sided low-frequency sensorineural loss."
+    "No headache, aura or light or noise sensitivity, and she has a documented one-sided low-frequency sensorineural loss.",
+    null
    ],
-   "why": "Clarify what “dizzy” means first. True vertigo is vestibular, and its timing and triggers (seconds and positional, hours and spontaneous, or days and continuous) narrow the cause.",
    "topic": "Neurology",
    "origin": "ai",
-   "station": "amsa-190"
-  },
-  {
-   "id": "osce-amsa-194",
-   "stem": "A 41-year-old man on the ward. Symmetrical synovitis of the wrists, MCPs, PIPs and MTPs with 2 hours of morning stiffness, fixed ulnar deviation, swan neck and Z-thumbs, rheumatoid nodules, raised CRP and ESR, strongly positive RF and anti-CCP, and marginal erosions on X-ray. What is the most likely diagnosis?",
-   "options": [
-    "Flare of established seropositive erosive rheumatoid arthritis",
-    "Septic arthritis superimposed on rheumatoid arthritis",
-    "Psoriatic arthritis",
-    "Chronic tophaceous gout"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Afebrile with normal observations, symmetrical involvement of many joints, and no single joint out of proportion or skin break.",
-    "No psoriasis, nail pitting or onycholysis, no dactylitis, DIPs spared, and strongly positive RF and anti-CCP.",
-    "The nodules are rubbery rather than chalky, he has never had an acute attack, the erosions are marginal without overhanging edges, and anti-CCP is strongly positive."
-   ],
-   "why": "Examine the hands in order: prepare (pain, pillow, exposure, jewellery), general and face, elbows and shoulders, then look, feel and move, special tests and function, and finish with the feet, heart, lungs and cervical spine.",
-   "topic": "Rheumatology",
-   "origin": "ai",
-   "station": "amsa-194"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-195",
@@ -666,58 +386,37 @@
     "Toxic adenoma"
    ],
    "answer": 0,
+   "why": "Examine thyroid status as well as the gland: hands, tremor, reflexes, eyes from the front, side and above, the neck with a swallow and tongue protrusion, palpation from behind, percussion of the manubrium, a bruit, and the legs.",
    "notes": [
     null,
     "Afebrile (37.0 °C), alert and oriented, no vomiting, only mildly increased bowel frequency, no heart failure, haemodynamically stable. A Burch–Wartofsky score may reach the mid-20s to 30s from the AF and restlessness alone, but clinically she is compensated. Admit if fever, confusion, vomiting, worsening tachycardia or heart failure develop.",
     "She is 32, the gland is smooth and diffuse with no nodules, she has eye signs, and TRAb is positive.",
     "There is no solitary nodule, both lobes are enlarged, and TRAb is positive."
    ],
-   "why": "Examine thyroid status as well as the gland: hands, tremor, reflexes, eyes from the front, side and above, the neck with a swallow and tongue protrusion, palpation from behind, percussion of the manubrium, a bruit, and the legs.",
    "topic": "Endocrinology",
    "origin": "ai",
-   "station": "amsa-195"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-196",
    "stem": "A 58-year-old woman in the emergency department. Colicky periumbilical pain, faeculent vomiting, no stool or flatus, distension, tinkling bowel sounds, previous laparoscopy, and a CT transition point under the right iliac fossa port site with no mass or hernia. What is the most likely diagnosis?",
    "options": [
-    "Adhesive small bowel obstruction",
     "Acute mesenteric ischaemia",
+    "Adhesive small bowel obstruction",
     "Clostridioides difficile colitis",
     "Large bowel obstruction"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "Colicky pain, vomiting, distension and absolute constipation (no stool or flatus) are the cardinal features of bowel obstruction. Always ask specifically about flatus and previous surgery.",
    "notes": [
-    null,
     "Lactate is normal, bowel wall enhancement is normal, the SMA and SMV are patent, she has no AF and the pain is colicky, not constant.",
+    null,
     "She had only one episode of diarrhoea and nothing since, she is afebrile, and the colon is collapsed on CT with no wall thickening.",
     "Vomiting began within hours of the pain, and CT shows a collapsed colon with the transition point in the small bowel."
    ],
-   "why": "Colicky pain, vomiting, distension and absolute constipation (no stool or flatus) are the cardinal features of bowel obstruction. Always ask specifically about flatus and previous surgery.",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "amsa-196"
-  },
-  {
-   "id": "osce-amsa-197",
-   "stem": "A 45-year-old man in general practice. Burning epigastric pain 2 to 3 hours after large meals that wakes him at night, ibuprofen most days for over 10 years, a smoker, and an 8 mm duodenal bulb ulcer with H. pylori on biopsy. What is the most likely diagnosis?",
-   "options": [
-    "Duodenal ulcer",
-    "Myocardial ischaemia presenting as epigastric pain",
-    "Gastric cancer",
-    "Gastro-oesophageal reflux disease"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Pain linked to meals rather than exertion, no breathlessness or sweating, and a normal ECG.",
-    "Aged 45 with no weight loss, dysphagia, vomiting or bleeding, a normal haemoglobin, no gastric mass and biopsies without dysplasia or malignancy.",
-    "No heartburn rising into the chest, regurgitation or sour taste, and a normal oesophagus at gastroscopy."
-   ],
-   "why": "Screen every patient with dyspepsia for ALARM features (anaemia, weight loss, anorexia, recent progressive symptoms at an older age, melaena or haematemesis, dysphagia or persistent vomiting): they decide who needs prompt endoscopy.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-197"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-199",
@@ -729,121 +428,58 @@
     "Pulmonary embolism"
    ],
    "answer": 0,
+   "why": "Pericarditis pain is sharp, pleuritic and positional: worse lying flat and eased by sitting forward. Acute pericarditis needs 2 of 4 criteria: typical pain, a friction rub, typical ECG changes and a pericardial effusion.",
    "notes": [
     null,
     "She is 34 with no cardiovascular risk factors, the pain is sharp, pleuritic and positional, the ST elevation spans limb and chest leads without fitting one coronary territory, with PR depression and no Q waves, and hs-troponin is normal at 0 and 2 hours.",
     "The pain is not tearing and does not go to the back, BP is equal in both arms, and the mediastinum is not widened on the chest X-ray.",
     "She has no breathlessness, haemoptysis, calf symptoms, previous clot, immobility or oestrogen, SpO2 is 99%, Wells is 1.5 and the D-dimer is normal."
    ],
-   "why": "Pericarditis pain is sharp, pleuritic and positional: worse lying flat and eased by sitting forward. Acute pericarditis needs 2 of 4 criteria: typical pain, a friction rub, typical ECG changes and a pericardial effusion.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-199"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-200",
    "stem": "A 78-year-old woman in general practice. Progressive breathlessness now at 5 m with orthopnoea and PND, NSTEMI 6 months ago and hypertension, raised JVP, S3, displaced apex, bibasal crackles and effusions, 3 kg weight gain, cardiomegaly with batwing oedema on X-ray and BNP 1,280. What is the most likely diagnosis?",
    "options": [
-    "Congestive heart failure",
     "Recurrent myocardial ischaemia or acute coronary syndrome",
     "Pulmonary embolism",
-    "Aortic stenosis or other valvular heart disease"
+    "Aortic stenosis or other valvular heart disease",
+    "Congestive heart failure"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "Quantify breathlessness by what the patient can do (distance, stairs, dressing), not a score out of 10. This gives the NYHA class and the impact on daily life.",
    "notes": [
-    null,
     "No chest pain, sweating or nausea and no new change on the ECG; troponin is still needed.",
     "Gradual 2-month course with orthopnoea and PND, no pleuritic pain, haemoptysis or calf signs, and an X-ray that explains the picture.",
-    "No exertional syncope or chest pain, no murmur and a normal carotid upstroke; the echo will confirm."
+    "No exertional syncope or chest pain, no murmur and a normal carotid upstroke; the echo will confirm.",
+    null
    ],
-   "why": "Quantify breathlessness by what the patient can do (distance, stairs, dressing), not a score out of 10. This gives the NYHA class and the impact on daily life.",
    "topic": "Respiratory Medicine",
    "origin": "ai",
-   "station": "amsa-200"
-  },
-  {
-   "id": "osce-amsa-201",
-   "stem": "A 23-year-old man in the emergency department. A tall 23-year-old male smoker with sudden breathlessness and left pleuritic pain during soccer, left hyper-resonance with reduced breath sounds, and a left pleural line with absent lung markings on X-ray. What is the most likely diagnosis?",
-   "options": [
-    "Left primary spontaneous pneumothorax without tension",
-    "Tension pneumothorax",
-    "Pulmonary embolism",
-    "Acute coronary syndrome"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "BP is normal, the trachea is central, the JVP is not raised and the X-ray shows no mediastinal shift.",
-    "No leg pain or swelling, travel, immobilisation or haemoptysis, and the X-ray explains his symptoms.",
-    "He is 23 with pleuritic rather than central crushing pain, no sweating or nausea, and a normal ECG apart from sinus tachycardia."
-   ],
-   "why": "Think of primary spontaneous pneumothorax in a tall young smoker with sudden breathlessness and one-sided pleuritic pain, and ask about chest pain directly: patients often mention only the breathlessness.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-201"
-  },
-  {
-   "id": "osce-amsa-202",
-   "stem": "A 20-year-old man in the emergency department. Asthma since 12 with a previous severe flare needing IV steroids, reliever only, breathlessness with chest tightness, wheeze and dry cough during sport after a cold, widespread polyphonic wheeze, and reversible obstruction on spirometry. What is the most likely diagnosis?",
-   "options": [
-    "Acute severe asthma",
-    "Spontaneous pneumothorax",
-    "Community-acquired pneumonia or viral lower respiratory tract",
-    "Tachyarrhythmia such as supraventricular tachycardia"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Gradual onset with no sharp pleuritic pain, no connective tissue disease, a central trachea, and equal resonance and air entry on both sides.",
-    "No fever, chills or sweats, a dry cough without purulent sputum, no sick contacts, and no crackles or bronchial breathing.",
-    "No palpitations, dizziness, syncope or chest pain, and the monitor shows a regular sinus tachycardia explained by his work of breathing and salbutamol."
-   ],
-   "why": "Treat while you take the history: a patient who cannot complete sentences needs a bronchodilator and senior help within minutes.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-202"
-  },
-  {
-   "id": "osce-amsa-203",
-   "stem": "A 60-year-old woman in general practice. Rusty productive cough, fever, left pleuritic pain and breathlessness after a cold with sick contacts, left basal dullness with bronchial breathing, neutrophilia with CRP 148, and left lower lobe consolidation with a small effusion on X-ray. What is the most likely diagnosis?",
-   "options": [
-    "Community-acquired pneumonia of the left lower lobe",
-    "Pulmonary embolism",
-    "Lung cancer",
-    "Acute bronchitis or viral lower respiratory tract infection"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No travel, immobility, surgery or calf symptoms; purulent rusty sputum after a viral illness, a neutrophilia and lobar consolidation.",
-    "Lifelong non-smoker, no weight or appetite loss, no haemoptysis, no lymphadenopathy, and no mass or hilar abnormality on the X-ray.",
-    "Focal bronchial breathing and dullness at the left base, CRP 148, and consolidation on the X-ray."
-   ],
-   "why": "A productive cough with rusty sputum, fever, pleuritic pain and focal chest signs after a viral illness is community-acquired pneumonia until proven otherwise; Streptococcus pneumoniae is the most common cause.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-203"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-204",
    "stem": "A 26-year-old woman in general practice. Six-week progressive productive cough with 5 days of haemoptysis, low-grade fever, fatigue, breathlessness and 5 kg weight loss; born in and travels annually to Cambodia; right upper zone crackles and right upper lobe opacification. What is the most likely diagnosis?",
    "options": [
-    "Pulmonary tuberculosis",
     "Lung cancer",
     "Pulmonary embolism",
-    "Melioidosis"
+    "Melioidosis",
+    "Pulmonary tuberculosis"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "A cough lasting more than 3 weeks with haemoptysis, fever and weight loss in someone born in or travelling to a country with high TB rates is pulmonary TB until proven otherwise.",
    "notes": [
-    null,
     "Aged 26 with only 1.5 pack-years and a 6-week history, no clubbing or lymphadenopathy, and no mass or hilar enlargement on the X-ray.",
     "Gradual productive cough with fever, no pleuritic pain, no immobility or calf signs, SpO2 97% and a normal heart rate.",
-    "No diabetes, heavy alcohol use or kidney disease; sputum culture with the lab alerted to Burkholderia will help exclude it."
+    "No diabetes, heavy alcohol use or kidney disease; sputum culture with the lab alerted to Burkholderia will help exclude it.",
+    null
    ],
-   "why": "A cough lasting more than 3 weeks with haemoptysis, fever and weight loss in someone born in or travelling to a country with high TB rates is pulmonary TB until proven otherwise.",
    "topic": "Respiratory Medicine",
    "origin": "ai",
-   "station": "amsa-204"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-212",
@@ -855,79 +491,79 @@
     "Crohn's disease"
    ],
    "answer": 0,
+   "why": "Early appendicitis causes vague, constant periumbilical pain (visceral afferents) that later localises to the right iliac fossa as the parietal peritoneum becomes inflamed.",
    "notes": [
     null,
     "Lower abdominal and periumbilical rather than epigastric pain, no back radiation, and no gallstones.",
     "No distension, bowel sounds present, and no previous abdominal surgery.",
     "No weight loss, fatigue, diarrhoea or blood in the stool, and only a 12-hour history."
    ],
-   "why": "Early appendicitis causes vague, constant periumbilical pain (visceral afferents) that later localises to the right iliac fossa as the parietal peritoneum becomes inflamed.",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "amsa-212"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-213",
    "stem": "A 20-year-old woman in general practice. Two months of right iliac fossa pain, nocturnal diarrhoea with blood, weight loss, perianal inflammation with skin tags, clubbing, a smoker, calprotectin 820, and cobblestoning with skip lesions and granulomas at colonoscopy. What is the most likely diagnosis?",
    "options": [
-    "Crohn's disease",
     "Intestinal tuberculosis",
     "Ulcerative colitis",
-    "Infective colitis or gastroenteritis"
+    "Infective colitis or gastroenteritis",
+    "Crohn's disease"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "Chronic diarrhoea with blood, nocturnal symptoms, weight loss or fever is organic until proven otherwise; ask about each directly, along with NSAIDs, smoking and a family history of IBD.",
    "notes": [
-    null,
     "The granulomas are non-caseating, the acid-fast bacilli stain is negative, and she has no TB risk factors.",
     "Right iliac fossa pain, perianal skin tags, terminal ileal disease, skip lesions with rectal sparing, and granulomas on biopsy.",
-    "Symptoms for 2 months with no travel, antibiotics or sick contacts, and negative stool PCR, culture and C. difficile toxin."
+    "Symptoms for 2 months with no travel, antibiotics or sick contacts, and negative stool PCR, culture and C. difficile toxin.",
+    null
    ],
-   "why": "Chronic diarrhoea with blood, nocturnal symptoms, weight loss or fever is organic until proven otherwise; ask about each directly, along with NSAIDs, smoking and a family history of IBD.",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "amsa-213"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-214",
    "stem": "A 56-year-old man in the emergency department. About 4 beers a night with 12 last night, constant epigastric pain through to the back eased by leaning forward, lipase 1850 U/L, a bulky pancreas with peripancreatic fluid on ultrasound, no gallstones and an isolated raised GGT. What is the most likely diagnosis?",
    "options": [
-    "Acute alcohol-related pancreatitis",
     "Perforated peptic ulcer",
     "Ruptured or leaking abdominal aortic aneurysm",
+    "Acute alcohol-related pancreatitis",
     "Inferior myocardial infarction"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Acute pancreatitis needs 2 of 3 criteria: typical epigastric pain through to the back, lipase more than 3 times the upper limit, and characteristic imaging. The height of the lipase does not reflect severity.",
    "notes": [
-    null,
     "No NSAIDs or previous indigestion, no rigidity or rebound, and the lipase is more than 30 times the upper limit.",
     "The pain is not tearing, BP is normal and equal in both arms, there is no pulsatile mass, the aorta measures 2.0 cm on ultrasound, and (partly) at 56 he is below the usual risk age.",
+    null,
     "No chest pain or breathlessness, the pain is positional, and the ECG shows sinus tachycardia with no ST or T wave changes."
    ],
-   "why": "Acute pancreatitis needs 2 of 3 criteria: typical epigastric pain through to the back, lipase more than 3 times the upper limit, and characteristic imaging. The height of the lipase does not reflect severity.",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "amsa-214"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-215",
    "stem": "A 41-year-old woman in the emergency department. Constant right upper quadrant pain for about 20 hours after a rich meal, radiating to the shoulder tip, with fever, chills, vomiting, earlier postprandial episodes, a positive Murphy's sign, WCC 15.8, CRP 142 and an ultrasound showing a 6 mm wall, pericholecystic fluid and an impacted neck stone. What is the most likely diagnosis?",
    "options": [
-    "Acute calculous cholecystitis",
     "Ascending cholangitis",
+    "Acute calculous cholecystitis",
     "Perforated peptic ulcer",
     "Ectopic pregnancy"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "Biliary colic settles within a few hours. Constant RUQ pain lasting longer, with fever, Murphy's sign and raised WCC and CRP, is acute cholecystitis.",
    "notes": [
-    null,
     "No jaundice or confusion, bilirubin 16, common bile duct 4 mm with no duct stone, normal BP and lactate.",
+    null,
     "Pain maximal in the RUQ with only mild epigastric tenderness, no reflux or melaena, no rigidity or generalised peritonism, and the ultrasound shows a clear biliary cause.",
     "She takes the pill daily, had a normal period 2 weeks ago, has no bleeding or faintness, a normal BP and a serum beta-hCG below 2 IU/L."
    ],
-   "why": "Biliary colic settles within a few hours. Constant RUQ pain lasting longer, with fever, Murphy's sign and raised WCC and CRP, is acute cholecystitis.",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "amsa-215"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-216",
@@ -939,142 +575,79 @@
     "Peptic ulcer disease"
    ],
    "answer": 0,
+   "why": "In ED chest pain, rule out ACS before settling on reflux: a 12-lead ECG within 10 minutes, then serial high-sensitivity troponin on a validated assay-specific 0/1 h or 0/2 h pathway. A normal ECG alone does not exclude ACS.",
    "notes": [
     null,
     "The pain is burning, positional and related to meals, never exertional and has no associated features, and her ECG during pain and her troponin at 0 and 2 hours are normal.",
     "She has no anaemia, haematemesis, hoarseness or palpable lymph nodes, and she is 45 and a non-smoker.",
     "The pain is retrosternal rather than epigastric, with no bloating, early satiety, NSAID use or bleeding, and her Hb is normal."
    ],
-   "why": "In ED chest pain, rule out ACS before settling on reflux: a 12-lead ECG within 10 minutes, then serial high-sensitivity troponin on a validated assay-specific 0/1 h or 0/2 h pathway. A normal ECG alone does not exclude ACS.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-216"
-  },
-  {
-   "id": "osce-amsa-217",
-   "stem": "A 21-year-old man in general practice. Twelve weeks of pale floating loose stools with weight loss, fatigue and bloating, an itchy blistering rash on both knees, family type 1 diabetes and thyroid disease, iron and folate deficiency, and strongly positive tTG-IgA and EMA with normal total IgA. What is the most likely diagnosis?",
-   "options": [
-    "Coeliac disease",
-    "Crohn's disease of the small bowel",
-    "Hyperthyroidism",
-    "Giardiasis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No blood, abdominal pain, mouth ulcers or perianal disease, a normal CRP, and serology and a rash that point to coeliac disease.",
-    "No heat intolerance, palpitations or tremor, no goitre, and a normal TSH and free T4.",
-    "No travel, untreated water, sick contacts or fever."
-   ],
-   "why": "In chronic diarrhoea, ask what the stool looks like: pale, floating stools suggest fat malabsorption, and weight loss, steatorrhoea or anaemia are red flags that rule out a label of IBS until they are explained.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-217"
-  },
-  {
-   "id": "osce-amsa-218",
-   "stem": "A 63-year-old man in general practice. Past injecting drug use and never tested, HCV antibody and RNA positive, jaundice with low albumin, raised INR, low platelets, splenomegaly and spider naevi, and recurrent palpable purpura on the legs. What is the most likely diagnosis?",
-   "options": [
-    "Cirrhosis",
-    "Hepatocellular carcinoma or liver metastases",
-    "Lymphoma or leukaemia",
-    "Chronic hepatitis B"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No mass on examination, but this cannot be excluded without an ultrasound and AFP.",
-    "No fevers, sweats or lymphadenopathy, and a normal white cell count, differential and haemoglobin.",
-    "HBsAg and core antibody are negative and surface antibody is positive, so he is immune from vaccination."
-   ],
-   "why": "Open-ended presentations such as fatigue often hide the key clue in the social history: ask every patient about injecting drug use, tattoos, transfusions and country of birth, without judgement.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-218"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-219",
    "stem": "A 56-year-old woman in general practice. Jaundice, right upper quadrant pain, fever, confusion and hypotension with known gallstones, a cholestatic LFT pattern and a dilated duct with a distal stone. What is the most likely diagnosis?",
    "options": [
-    "Severe acute cholangitis",
     "Pancreatic head carcinoma causing malignant biliary obstruction",
+    "Severe acute cholangitis",
     "Acute gallstone pancreatitis",
     "Acute calculous cholecystitis"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "Charcot's triad (jaundice, right upper quadrant pain, fever) suggests acute cholangitis. Adding confusion and hypotension makes Reynolds' pentad, which marks sepsis with organ dysfunction and hypoperfusion and needs urgent drainage of the bile duct.",
    "notes": [
-    null,
     "No weight loss or steatorrhoea, acute febrile onset, a stone seen in the duct, and no distal duct stricture or mass effect on the ERCP cholangiogram.",
+    null,
     "Normal lipase and no peripancreatic fluid on ultrasound.",
     "Murphy's sign negative, no gallbladder wall thickening or pericholecystic fluid, and conjugated jaundice with a dilated common bile duct."
    ],
-   "why": "Charcot's triad (jaundice, right upper quadrant pain, fever) suggests acute cholangitis. Adding confusion and hypotension makes Reynolds' pentad, which marks sepsis with organ dysfunction and hypoperfusion and needs urgent drainage of the bile duct.",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "amsa-219"
-  },
-  {
-   "id": "osce-amsa-220",
-   "stem": "A 24-year-old woman in the emergency department. Sudden onset at rest of a fast regular rhythm she can tap out, a regular narrow complex tachycardia at 150 with pseudo r' in V1 and pseudo S in the inferior leads (very short RP), and weight loss, heat intolerance, loose stools, tremor, a diffuse smooth goitre, suppressed TSH and raised free T4 and T3. What is the most likely diagnosis?",
-   "options": [
-    "Supraventricular tachycardia",
-    "AV re-entrant tachycardia through an accessory pathway",
-    "Atrial flutter",
-    "Sinus tachycardia"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "The RP interval is very short (pseudo r' in V1, under 70 ms), which favours AVNRT; orthodromic AVRT usually has a longer RP (over 70 ms). Pre-excitation can only be judged on a sinus-rhythm ECG.",
-    "No flutter waves in II, III, aVF or V1, retrograde P waves at the end of the QRS (pseudo r' and pseudo S), and she is 24 with a structurally normal heart on examination.",
-    "Onset was abrupt, the rate is fixed at 150, and there is no P wave before each QRS."
-   ],
-   "why": "Ask specifically whether palpitations are regular or irregular, or ask the patient to tap them out. Sudden onset of a fast, regular beat suggests a re-entrant SVT.",
-   "topic": "Cardiology",
-   "origin": "ai",
-   "station": "amsa-220"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-221",
    "stem": "A 69-year-old man in the emergency department. Sudden racing palpitations at rest for 40 minutes that he cannot tap out, an irregularly irregular pulse with a pulse deficit, and an ECG with absent P waves, fibrillatory waves and irregular RR intervals at about 132. What is the most likely diagnosis?",
    "options": [
-    "New-onset atrial fibrillation",
     "Acute coronary syndrome",
     "Atrial flutter",
+    "New-onset atrial fibrillation",
     "Thyrotoxicosis precipitating atrial fibrillation"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Pin down the exact time of onset of palpitations: under 48 hours allows early cardioversion once anticoagulation has started, while 48 hours or more (or unknown) needs a TOE or 3 to 4 weeks of anticoagulation first. Newer guidance (ESC 2024) uses 24 hours; Philip, at under 2 hours, is within both.",
    "notes": [
-    null,
     "Discomfort that is not crushing or radiating, no sweating or nausea, no ischaemic ST change and a normal 0-hour hs-troponin, which still needs repeating.",
     "No sawtooth flutter waves, and the RR intervals are irregular with no repeating pattern.",
+    null,
     "No weight loss, heat intolerance, tremor, goitre or eye signs, with a normal TSH and free T4."
    ],
-   "why": "Pin down the exact time of onset of palpitations: under 48 hours allows early cardioversion once anticoagulation has started, while 48 hours or more (or unknown) needs a TOE or 3 to 4 weeks of anticoagulation first. Newer guidance (ESC 2024) uses 24 hours; Philip, at under 2 hours, is within both.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-221"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-222",
    "stem": "A 54-year-old man in general practice. Four months of daily burning retrosternal pain after dinner, worse lying down and with spicy food, with an acid taste in the throat, a night cough and a normal ECG and bloods. What is the most likely diagnosis?",
    "options": [
-    "Gastro-oesophageal reflux disease",
     "Barrett's oesophagus or oesophageal adenocarcinoma",
     "Stable angina",
-    "Peptic ulcer disease"
+    "Peptic ulcer disease",
+    "Gastro-oesophageal reflux disease"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "Burning retrosternal pain after meals, worse lying down, with an acid taste and a night cough, is typical of GORD, which is a clinical diagnosis.",
    "notes": [
-    null,
     "No dysphagia, weight loss, vomiting or anaemia, and a short 4-month history.",
     "Burning pain that lasts about 30 minutes whatever he does and is not relieved by rest, is not brought on by tennis, is worse lying down with an acid taste, and a normal ECG.",
-    "No epigastric tenderness, no NSAID or aspirin use, and a normal haemoglobin and ferritin."
+    "No epigastric tenderness, no NSAID or aspirin use, and a normal haemoglobin and ferritin.",
+    null
    ],
-   "why": "Burning retrosternal pain after meals, worse lying down, with an acid taste and a night cough, is typical of GORD, which is a clinical diagnosis.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-222"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-223",
@@ -1086,142 +659,79 @@
     "Spontaneous pneumothorax"
    ],
    "answer": 0,
+   "why": "Ask every patient with pleuritic chest pain or breathlessness about VTE risk factors (travel, oestrogen, immobility, surgery, cancer, previous VTE, smoking), and examine both legs.",
    "notes": [
     null,
     "The pain is sharp and pleuritic with no radiation, nausea or sweating, and the ECG and hs-troponin are normal.",
     "No tearing pain or radiation to the back, no syncope or hypertension, equal arm BPs, and a normal-calibre aorta with no flap on CT.",
     "No chest trauma or lung disease, the trachea is central, percussion and breath sounds are normal, and CT shows no pneumothorax."
    ],
-   "why": "Ask every patient with pleuritic chest pain or breathlessness about VTE risk factors (travel, oestrogen, immobility, surgery, cancer, previous VTE, smoking), and examine both legs.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-223"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-246",
    "stem": "A 64-year-old man in the emergency department. A 64-year-old with a new right temporal headache, scalp tenderness, jaw claudication, worsening right visual loss with RAPD and a pale swollen disc, a tender pulseless right temporal artery, ESR 86 and CRP 78. What is the most likely diagnosis?",
    "options": [
-    "Giant cell arteritis",
     "Subarachnoid haemorrhage",
+    "Giant cell arteritis",
     "Intracranial mass lesion",
     "Non-arteritic anterior ischaemic optic neuropathy"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "A new headache in anyone over 50 is giant cell arteritis until proven otherwise. Always ask about scalp tenderness, jaw claudication, visual symptoms and polymyalgia rheumatica.",
    "notes": [
-    null,
     "The onset was gradual, not thunderclap, and he has no meningism, vomiting or focal signs.",
+    null,
     "The headache is not worse in the morning or on lying or straining, he has no weight loss or behaviour change, and the disc swelling is in one eye with a field defect and RAPD rather than bilateral papilloedema.",
     "The disc is pale (chalky) rather than hyperaemic, and he has headache, jaw claudication, an abnormal temporal artery and ESR 86 with CRP 78."
    ],
-   "why": "A new headache in anyone over 50 is giant cell arteritis until proven otherwise. Always ask about scalp tenderness, jaw claudication, visual symptoms and polymyalgia rheumatica.",
    "topic": "Neurology",
    "origin": "ai",
-   "station": "amsa-246"
-  },
-  {
-   "id": "osce-amsa-247",
-   "stem": "An 18-year-old woman in the emergency department. Four hours of a progressive headache with fever, rigors, neck stiffness, photophobia and positive Kernig's and Brudzinski's signs in an unvaccinated 18-year-old, with turbid neutrophilic CSF, low glucose and Gram-positive diplococci. What is the most likely diagnosis?",
-   "options": [
-    "Bacterial meningitis",
-    "Meningococcal meningitis or septicaemia",
-    "Subarachnoid haemorrhage",
-    "Herpes simplex encephalitis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "She has no petechial or purpuric rash, and the Gram stain shows Gram-positive, not Gram-negative, diplococci.",
-    "The onset was gradual over hours, not thunderclap, she has a high fever, and the CSF has minimal red cells.",
-    "GCS 15 with no confusion, memory change, behaviour change, seizures or focal signs, and a bacterial CSF pattern."
-   ],
-   "why": "Fever, headache, neck stiffness and photophobia mean meningitis until proven otherwise. Always ask about and look for a non-blanching rash, which suggests meningococcal disease.",
-   "topic": "Neurology",
-   "origin": "ai",
-   "station": "amsa-247"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-248",
    "stem": "A 70-year-old man in general practice. Sudden single hot, swollen knee with an effusion, pain on any movement, unable to bear weight, fever with rigors and tachycardia, a dirty nail puncture 2 days earlier, diabetes and pre-existing OA. What is the most likely diagnosis?",
    "options": [
-    "Septic arthritis of the left knee",
     "Acute crystal arthritis",
     "Septic prepatellar or superficial infrapatellar bursitis",
-    "Disseminated gonococcal arthritis"
+    "Disseminated gonococcal arthritis",
+    "Septic arthritis of the left knee"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "An acute, single hot, swollen joint with fever is septic arthritis until proven otherwise. The knee is involved in about half of cases.",
    "notes": [
-    null,
     "Against gout: no previous attacks, no tophi, no diuretics, normal first MTPs. Pseudogout (CPPD) is common in an OA knee at 70 and cannot be excluded clinically; only crystals on aspiration distinguish it, and crystals do not exclude coexisting infection. The nail puncture and rigors favour infection.",
     "A true joint effusion with tenderness all around the joint, pain on any movement and no separate swelling in front of the patella.",
-    "Married and monogamous for 45 years, with no discharge, dysuria, rash or tenosynovitis."
+    "Married and monogamous for 45 years, with no discharge, dysuria, rash or tenosynovitis.",
+    null
    ],
-   "why": "An acute, single hot, swollen joint with fever is septic arthritis until proven otherwise. The knee is involved in about half of cases.",
    "topic": "Rheumatology",
    "origin": "ai",
-   "station": "amsa-248"
-  },
-  {
-   "id": "osce-amsa-249",
-   "stem": "A 36-year-old man in the emergency department. Sudden onset overnight of an exquisitely tender, red, hot joint, a self-limiting big toe attack last year, lots of seafood, nightly red wine and BMI 35, with monosodium urate crystals on aspirate. What is the most likely diagnosis?",
-   "options": [
-    "Acute gout of the left ring finger DIP joint",
-    "Septic arthritis",
-    "Calcium pyrophosphate crystal arthritis",
-    "Psoriatic arthritis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "He is afebrile and well with no skin break or penetrating injury, the Gram stain is negative, the synovial WCC is 18 000 rather than above 50 000, and urate crystals are present, though culture is pending.",
-    "He is 36, the crystals are needle-shaped and negatively birefringent rather than rhomboid and positive, and there is no chondrocalcinosis on X-ray.",
-    "He has no psoriasis, nail pitting or onycholysis, the swelling is confined to the joint rather than the whole finger (no dactylitis), and there are urate crystals on aspirate."
-   ],
-   "why": "A hot, swollen single joint is septic arthritis until proven otherwise. A normal temperature does not exclude it, and crystals in the aspirate do not exclude coexisting infection, so always send Gram stain and culture and follow the culture to its final report (about 5 days).",
-   "topic": "Rheumatology",
-   "origin": "ai",
-   "station": "amsa-249"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-250",
    "stem": "A 56-year-old woman in general practice. Gradual mechanical pain worse on weight-bearing, stiffness under 30 minutes, crepitus, Heberden's and Bouchard's nodes, previous knee fractures, BMI 32, an affected mother, and X-ray narrowing with osteophytes and sclerosis. What is the most likely diagnosis?",
    "options": [
-    "Generalised osteoarthritis of the hands",
     "Osteoporotic vertebral fracture or spinal malignancy causing back pain",
     "Rheumatoid arthritis",
+    "Generalised osteoarthritis of the hands",
     "Polymyalgia rheumatica"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Gradual mechanical pain in the DIPs, PIPs, thumb bases, knees, hips and spine, with morning stiffness under 30 minutes and hard bony nodes, is osteoarthritis. Stiffness lasting over 30 to 60 minutes or soft synovial swelling suggests inflammatory arthritis.",
    "notes": [
-    null,
     "Gradual mechanical pain on both sides with no night pain, weight loss, fever, falls, midline tenderness or neurological signs.",
     "Stiffness under 30 minutes, hard bony swelling without synovitis, DIPs involved, normal CRP and ESR, negative RF and anti-CCP, and no erosions.",
+    null,
     "No shoulder or hip girdle stiffness, stiffness settles within 30 minutes, small hand joints affected, and ESR and CRP are normal."
    ],
-   "why": "Gradual mechanical pain in the DIPs, PIPs, thumb bases, knees, hips and spine, with morning stiffness under 30 minutes and hard bony nodes, is osteoarthritis. Stiffness lasting over 30 to 60 minutes or soft synovial swelling suggests inflammatory arthritis.",
    "topic": "Rheumatology",
    "origin": "ai",
-   "station": "amsa-250"
-  },
-  {
-   "id": "osce-amsa-251",
-   "stem": "A 28-year-old woman in the emergency department. A 28-year-old woman with a 4-day asymmetric spastic paraparesis, a T10 sensory level, sphincter involvement, a probable optic neuritis 2 years ago with right disc pallor, a short, peripheral, enhancing cord lesion at T7-T8, and non-enhancing periventricular and juxtacortical brain lesions. What is the most likely diagnosis?",
-   "options": [
-    "Acute transverse myelitis",
-    "Spinal cord compression",
-    "Neuromyelitis optica spectrum disorder",
-    "Traumatic spinal cord injury"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "She has no trauma, fever, cancer, anticoagulants or severe back pain, her CRP and white cell count are normal, and MRI shows no compression at any level.",
-    "The cord lesion is short (about 1.5 segments, not 3 or more), peripheral and less than half the cross-section, and the brain lesions are typical of MS; aquaporin-4 antibodies are pending.",
-    "She has had no injury or heavy lifting, no spinal tenderness, and normal vertebrae on MRI."
-   ],
-   "why": "Decide upper or lower motor neuron first, then localise. Spastic tone, brisk reflexes and upgoing plantars mean an upper motor neuron lesion; normal arms with a truncal sensory level put it in the thoracic cord.",
-   "topic": "Neurology",
-   "origin": "ai",
-   "station": "amsa-251"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-256",
@@ -1233,58 +743,58 @@
     "Anorectal or colorectal cancer"
    ],
    "answer": 0,
+   "why": "Anal fissure pain is sharp during a bowel motion and lasts minutes to hours afterwards, often with a small amount of bright red blood on the paper, after a hard stool.",
    "notes": [
     null,
     "Pain is episodic rather than constant and throbbing, he is afebrile, and there is no swelling, fluctuance, discharge or external opening.",
     "Single posterior midline fissure; one long-term partner, no anal sex or STI symptoms; no diarrhoea, weight loss, abdominal pain or extraintestinal features.",
     "Short history with bleeding on the paper explained by the fissure, no change in bowel habit, weight loss or family history."
    ],
-   "why": "Anal fissure pain is sharp during a bowel motion and lasts minutes to hours afterwards, often with a small amount of bright red blood on the paper, after a hard stool.",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "amsa-256"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-257",
    "stem": "A 20-year-old man in general practice. His first 20 km run after a longest run of 12 km, gradual onset late in the run that eased on walking and settled within about 10 minutes of stopping, no red-flag symptoms, and a normal examination, X-ray and spirometry. What is the most likely diagnosis?",
    "options": [
-    "Physiological exertional breathlessness",
     "Primary spontaneous pneumothorax",
     "Pulmonary embolism",
-    "Structural heart disease or arrhythmia"
+    "Structural heart disease or arrhythmia",
+    "Physiological exertional breathlessness"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "A respiratory examination is systematic: general inspection, vital signs, hands, face, neck, chest (inspection, palpation, percussion, auscultation, front, side and back, comparing sides) and legs, completed with a cardiovascular examination, peak flow and spirometry.",
    "notes": [
-    null,
     "No pleuritic or one-sided chest pain, symmetrical expansion, resonant percussion, normal breath sounds and no pneumothorax on the X-ray.",
     "No VTE risk factors, no leg symptoms or haemoptysis, symptoms fully resolved, normal observations and PERC negative.",
-    "No chest pain, palpitations, dizziness or syncope, no family history of sudden death, and a normal heart examination with a regular pulse; a resting ECG today is reasonable."
+    "No chest pain, palpitations, dizziness or syncope, no family history of sudden death, and a normal heart examination with a regular pulse; a resting ECG today is reasonable.",
+    null
    ],
-   "why": "A respiratory examination is systematic: general inspection, vital signs, hands, face, neck, chest (inspection, palpation, percussion, auscultation, front, side and back, comparing sides) and legs, completed with a cardiovascular examination, peak flow and spirometry.",
    "topic": "Respiratory Medicine",
    "origin": "ai",
-   "station": "amsa-257"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-258",
    "stem": "A 35-year-old woman in clinic. Three months of symmetrical synovitis of the wrists, MCPs and PIPs with DIP sparing, tender MTPs, 90 minutes of morning stiffness, raised CRP and ESR, positive RF and anti-CCP, and marginal erosions with periarticular osteopenia on X-ray. What is the most likely diagnosis?",
    "options": [
-    "Early seropositive erosive rheumatoid arthritis",
     "Psoriatic arthritis",
     "Systemic lupus erythematosus",
+    "Early seropositive erosive rheumatoid arthritis",
     "Viral polyarthritis"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Examine the hands in order: prepare (consent, exposure above the elbows, pillow, ask about pain), general inspection, look at the backs and palms, elbows, feel each joint group, move with special tests and function, then the feet and the systemic features.",
    "notes": [
-    null,
     "No psoriasis, nail pitting, onycholysis or dactylitis, the DIPs are spared, there is no periostitis or pencil-in-cup change, and anti-CCP is strongly positive.",
     "No rash, photosensitivity, mouth ulcers, alopecia or Raynaud's, ANA is negative, and the X-ray shows erosions, which SLE arthritis does not cause.",
+    null,
     "It has lasted 3 months rather than a few weeks, there is no rash in her or her contacts, and she has erosions and a strongly positive anti-CCP."
    ],
-   "why": "Examine the hands in order: prepare (consent, exposure above the elbows, pillow, ask about pain), general inspection, look at the backs and palms, elbows, feel each joint group, move with special tests and function, then the feet and the systemic features.",
    "topic": "Rheumatology",
    "origin": "ai",
-   "station": "amsa-258"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-263",
@@ -1296,625 +806,247 @@
     "Acute hepatitis E infection"
    ],
    "answer": 0,
+   "why": "Classify jaundice as pre-hepatic, hepatic or post-hepatic using the urine and stool colour, itch, and the LFT pattern (transaminases versus ALP and GGT, conjugated versus unconjugated bilirubin).",
    "notes": [
     null,
     "HBsAg and anti-HBc are both negative.",
     "Only occasional doses within the recommended amount, a normal INR, and a positive hepatitis A IgM.",
     "Hepatitis E IgM not detected, and hepatitis A IgM is positive."
    ],
-   "why": "Classify jaundice as pre-hepatic, hepatic or post-hepatic using the urine and stool colour, itch, and the LFT pattern (transaminases versus ALP and GGT, conjugated versus unconjugated bilirubin).",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "amsa-263"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-264",
    "stem": "A 63-year-old man in general practice. Right neck pain radiating to the thumb with paraesthesia, weakness of shoulder abduction, elbow flexion and wrist extension, reduced biceps and brachioradialis reflexes, pain reproduced by neck extension, and concordant right C4-5 and C5-6 foraminal stenosis on MRI. What is the most likely diagnosis?",
    "options": [
-    "Right C5 and C6 radiculopathy",
     "Cervical spondylotic myelopathy",
+    "Right C5 and C6 radiculopathy",
     "Transient ischaemic attack",
     "Motor neurone disease"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "Examine the upper limbs in a fixed order, comparing sides at every step: inspection, tone, pronator drift, power, reflexes, coordination, then sensation. Isolate each movement and use reinforcement before calling a reflex absent.",
    "notes": [
-    null,
     "No hand clumsiness, gait change or bladder symptoms, normal tone, no Hoffmann's sign or inverted supinator reflex, normal lower limbs and a normal cord on MRI.",
+    null,
     "The weakness is never sudden in onset; it comes only when he loads the arm and settles with rest, with no face, speech or leg involvement, and there is a fixed lower motor neuron deficit with radicular pain.",
     "Pain and sensory symptoms, no fasciculations, no upper motor neuron signs anywhere (normal tone, no Hoffmann's sign, normal lower limbs), a deficit confined to two roots and concordant root compression on MRI."
    ],
-   "why": "Examine the upper limbs in a fixed order, comparing sides at every step: inspection, tone, pronator drift, power, reflexes, coordination, then sensation. Isolate each movement and use reinforcement before calling a reflex absent.",
    "topic": "Neurology",
    "origin": "ai",
-   "station": "amsa-264"
-  },
-  {
-   "id": "osce-amsa-265",
-   "stem": "A 62-year-old woman in general practice. Five to six months of new constipation at 62 with straining, tenesmus, blood mixed with the stool, fatigue, iron deficiency anaemia, a brother diagnosed at 48 and smoking. What is the most likely diagnosis?",
-   "options": [
-    "Colorectal cancer",
-    "Upper gastrointestinal source of iron deficiency",
-    "Recurrent haemorrhoids",
-    "Diverticular disease"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No dyspepsia, weight loss or melaena, and the visible blood and change in bowel habit point to the colon.",
-    "Blood is mixed through the stool rather than on the paper, there are no haemorrhoids on rectal examination or proctoscopy, and haemorrhoids do not explain the change in habit.",
-    "Diverticulosis is usually silent and does not cause a progressive change in habit or chronic iron deficiency; no LIF pain or fever to suggest diverticulitis; diverticular bleeding is usually sudden, painless and large."
-   ],
-   "why": "A new, persistent change in bowel habit at an older age, especially with rectal bleeding, tenesmus or anaemia, is colorectal cancer until proven otherwise, even when there is a benign explanation such as previous haemorrhoids.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-265"
-  },
-  {
-   "id": "osce-amsa-266",
-   "stem": "A 34-year-old woman in general practice. Three months of fatigue with weight gain, cold intolerance, constipation, dry skin, hair loss and irregular periods; HR 56, a diffuse firm goitre and slow-relaxing reflexes; TSH 52, free T4 4.3 and positive anti-TPO and anti-Tg in a woman with type 1 diabetes. What is the most likely diagnosis?",
-   "options": [
-    "Hashimoto thyroiditis",
-    "Primary adrenal insufficiency as part",
-    "Vitamin B12 deficiency",
-    "Alcohol-related macrocytosis or folate deficiency"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "She has gained weight, has no hypos, pigmentation, salt craving or postural drop, and her sodium and potassium are normal.",
-    "Her neurological examination and tongue are normal, and B12 has not yet been measured.",
-    "Alcohol alone rarely pushes the MCV as high as 118."
-   ],
-   "why": "Screen fatigue by system (endocrine, haematological, malignancy and infection, cardiorespiratory and sleep, psychiatric, alcohol and medicines), then look for a cluster such as weight gain, cold intolerance, constipation, dry skin and hair loss.",
-   "topic": "Endocrinology",
-   "origin": "ai",
-   "station": "amsa-266"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-268",
    "stem": "A 30-year-old man in general practice. Strictly left orbital pain at 10/10, lasting 2 to 3 hours, at the same time almost daily for 2 months and waking him, with same-sided tearing, red eye, rhinorrhoea and partial Horner's, restlessness, an earlier bout a year ago with 8 pain-free months, a father with similar headaches, and a normal examination and MRI. What is the most likely diagnosis?",
    "options": [
-    "Cluster headache",
     "Subarachnoid haemorrhage",
+    "Cluster headache",
     "Space-occupying lesion or raised intracranial pressure",
     "Carotid artery dissection"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "Strictly one-sided orbital pain lasting 15 to 180 minutes, at the same time each day, with tearing, a red eye, a runny or blocked nose on the same side and restlessness, is cluster headache. Patients with migraine lie still, while patients with cluster headache pace.",
    "notes": [
-    null,
     "Daily recurrent attacks that build over minutes and resolve completely, with no thunderclap onset, meningism or neurological deficit, and a normal MRI with no blood on SWI.",
+    null,
     "Fixed-time attacks with complete resolution, no vomiting, positional or Valsalva features or progression, no papilloedema or focal signs, and a normal MRI with contrast.",
     "Recurrent stereotyped attacks over months with full resolution; Horner's resolves between attacks; no neck pain, trauma or focal deficit."
    ],
-   "why": "Strictly one-sided orbital pain lasting 15 to 180 minutes, at the same time each day, with tearing, a red eye, a runny or blocked nose on the same side and restlessness, is cluster headache. Patients with migraine lie still, while patients with cluster headache pace.",
    "topic": "Neurology",
    "origin": "ai",
-   "station": "amsa-268"
-  },
-  {
-   "id": "osce-amsa-271",
-   "stem": "A 42-year-old man in general practice. Painless bright red blood on the paper after wiping, fullness after defaecation, chronic constipation and a low-fibre diet, with bleeding internal cushions and no prolapse on proctoscopy. What is the most likely diagnosis?",
-   "options": [
-    "Internal haemorrhoids",
-    "Colon cancer",
-    "Rectal cancer",
-    "Anal fissure"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No change in bowel habit, weight loss, abdominal pain or anaemia symptoms, with a normal haemoglobin and ferritin.",
-    "Normal digital rectal examination and normal lower rectal mucosa on proctoscopy, with no tenesmus.",
-    "Painless bleeding with no pain on defaecation, and no fissure on inspection or proctoscopy."
-   ],
-   "why": "Painless bright red blood on the toilet paper after wiping, not mixed with the stool, points to an anal canal source, most often internal haemorrhoids.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-271"
-  },
-  {
-   "id": "osce-amsa-272",
-   "stem": "A 16-year-old girl in the emergency department. Three weeks of polyuria, polydipsia, polyphagia and weight loss, then vomiting, Kussmaul breathing and ketotic breath, an autoimmune family history, glucose 38.2, pH 7.05 and blood ketones 6.0. What is the most likely diagnosis?",
-   "options": [
-    "Severe diabetic ketoacidosis as the first presentation",
-    "Sepsis",
-    "Adrenal crisis",
-    "Viral gastroenteritis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Afebrile, no rigors, dysuria or loin pain, CRP 3, and no leucocytes, nitrites or bacteria in the urine.",
-    "Glucose is high not low, the corrected sodium is normal, K is only 5.3, no pigmentation, and the ketoacidosis explains the picture.",
-    "No diarrhoea or sick contacts, 3 weeks of osmotic symptoms and weight loss, and a severe ketoacidosis with a glucose of 38.2."
-   ],
-   "why": "Vomiting with polyuria, polydipsia, polyphagia and weight loss in a young person is DKA until proven otherwise; check a bedside glucose and ketones early.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-272"
-  },
-  {
-   "id": "osce-amsa-301",
-   "stem": "A 57-year-old man in general practice. Eleven years of diabetes with HbA1c 9.4%, microaneurysms, dot and blot haemorrhages and cotton wool spots, stocking sensory loss with absent ankle jerks, and uACR 6.8 mg/mmol. What is the most likely diagnosis?",
-   "options": [
-    "Poorly controlled type 2 diabetes",
-    "Sight-threatening diabetic retinopathy",
-    "Peripheral arterial disease",
-    "Hypertensive retinopathy"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No new vessels, venous beading or exudates near the fovea, and acuity corrects to 6/6 with pinhole, but macular oedema needs OCT to exclude.",
-    "His pedal and popliteal pulses are palpable, capillary refill is under 2 seconds, hair is normal and he has no claudication. Palpable pulses do not fully exclude PAD in diabetes, so consider ABI/TBI if pulses are reduced, symptoms develop or a wound occurs.",
-    "There is no arteriovenous nipping, arteriolar narrowing or flame haemorrhage, and the microaneurysms and dot and blot haemorrhages are the diabetic pattern."
-   ],
-   "why": "The annual cycle of care covers HbA1c, BP, weight, lipids, eGFR and uACR, an eye check (more often once retinopathy is present: every 3 to 6 months for moderate NPDR), a foot risk assessment, lifestyle and a medication review that includes how insulin is injected.",
-   "topic": "Endocrinology",
-   "origin": "ai",
-   "station": "amsa-301"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-303",
    "stem": "A 28-year-old woman in general practice. Pale foul-smelling diarrhoea, bloating, 3 kg weight loss, grouped vesicles on both extensor knees, a mother with Graves' and a twin with type 1 diabetes, and tTG-IgA 128 U/mL with normal total IgA. What is the most likely diagnosis?",
    "options": [
-    "Coeliac disease",
     "Crohn's disease",
+    "Coeliac disease",
     "Iron deficiency anaemia",
     "Chronic pancreatitis"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "Do not accept 'stress' for new fatigue with diarrhoea and weight loss: screen every system, and ask specifically about the stool, the skin and the periods.",
    "notes": [
-    null,
     "No blood or mucus, no mouth ulcers, normal CRP and ESR, and serology strongly positive for coeliac; faecal calprotectin, or ileocolonoscopy (with terminal ileal biopsy), with MR enterography or capsule endoscopy if needed, if duodenal histology is not typical.",
+    null,
     "Heavy periods do not explain the steatorrhoea, weight loss, low folate and vitamin D, or the strongly positive coeliac serology.",
     "Her faecal elastase is normal at 410 and her pain does not radiate to the back."
    ],
-   "why": "Do not accept 'stress' for new fatigue with diarrhoea and weight loss: screen every system, and ask specifically about the stool, the skin and the periods.",
    "topic": "Dermatology",
    "origin": "ai",
-   "station": "amsa-303"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-307",
    "stem": "A 66-year-old man in the emergency department. Sudden maximal tearing central pain through to the back with syncope in a hypertensive smoker, a weak right radial with a 32 mmHg arm BP difference, an aortic regurgitation murmur, very raised D-dimer and a CT flap from the ascending aorta. What is the most likely diagnosis?",
    "options": [
-    "Acute Stanford type A aortic dissection",
     "Acute myocardial infarction",
+    "Acute Stanford type A aortic dissection",
     "Pulmonary embolism",
     "Pneumothorax"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "Sudden, maximal, tearing chest pain radiating to the back, especially with syncope, is aortic dissection until proven otherwise; descending dissection may give interscapular pain and some patients present with syncope alone.",
    "notes": [
-    null,
     "The pain is tearing and goes to the back rather than crushing to the jaw or arm, the ECG shows no ST elevation and is unchanged from 2024, and the small troponin rise can be explained by demand or coronary involvement by the dissection.",
+    null,
     "He has no calf symptoms, travel, immobility, previous clot or cancer, and the arm BP difference, murmur and CT findings explain everything.",
     "There was no trauma, the pain is not pleuritic, the chest is resonant with equal breath sounds, and CT shows no pneumothorax."
    ],
-   "why": "Sudden, maximal, tearing chest pain radiating to the back, especially with syncope, is aortic dissection until proven otherwise; descending dissection may give interscapular pain and some patients present with syncope alone.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-307"
-  },
-  {
-   "id": "osce-amsa-308",
-   "stem": "A 66-year-old man in the emergency department. Crushing central rest pain for over 30 minutes to the left neck and arm, unrelieved by 3 GTN doses, after 3 weeks of more frequent, longer and lower-threshold angina, with diabetes, smoking and a mother with an MI at 57. What is the most likely diagnosis?",
-   "options": [
-    "Unstable angina",
-    "Non-ST-elevation myocardial infarction",
-    "Acute aortic dissection",
-    "Pulmonary embolism"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "His hs-troponin is 4 ng/L and the ECG is normal, although the troponin was taken only about 40 minutes after onset.",
-    "The pain is crushing rather than tearing, built up rather than maximal at onset, does not go to the back, the arm BPs are equal and the mediastinum is normal.",
-    "No calf pain or swelling, no travel or immobility, the pain is not pleuritic and SpO2 is 97% on room air."
-   ],
-   "why": "Unstable angina is rest angina (usually over 20 minutes), new severe angina or crescendo angina. Measure the change: GTN use, exercise tolerance and how long episodes take to settle.",
-   "topic": "Cardiology",
-   "origin": "ai",
-   "station": "amsa-308"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-310",
    "stem": "A 26-year-old woman in general practice. Gradual, constant left calf pain with 3.5 cm calf swelling, pitting oedema and deep vein tenderness while on the combined pill after months of sitting, and a non-compressible popliteal vein on ultrasound. What is the most likely diagnosis?",
    "options": [
-    "Acute proximal deep vein thrombosis of the left leg",
     "Pulmonary embolism",
+    "Acute proximal deep vein thrombosis of the left leg",
     "Cellulitis of the left leg",
     "Gastrocnemius or soleus tear or contusion"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "In unilateral calf pain, ask specifically about immobility, oestrogen-containing contraception, pregnancy, previous or family VTE, cancer and PE symptoms.",
    "notes": [
-    null,
     "No breathlessness, chest pain, cough or haemoptysis, and HR 84 with SpO2 99% on room air.",
+    null,
     "No fever, redness, streaking or skin break, and a normal white cell count.",
     "No injury or sudden tearing pain, she weight bears, there is no palpable defect, and the ultrasound shows no tear or haematoma."
    ],
-   "why": "In unilateral calf pain, ask specifically about immobility, oestrogen-containing contraception, pregnancy, previous or family VTE, cancer and PE symptoms.",
    "topic": "General Practice",
    "origin": "ai",
-   "station": "amsa-310"
-  },
-  {
-   "id": "osce-amsa-323",
-   "stem": "A 38-year-old man on the ward. Periumbilical pain migrating to the right iliac fossa with nausea and anorexia, McBurney's point tenderness with guarding, WCC 13.8 and CRP 48, and an 11 mm inflamed appendix on CT. What is the most likely diagnosis?",
-   "options": [
-    "Acute uncomplicated appendicitis",
-    "Perforated appendicitis or appendiceal abscess",
-    "Terminal ileal Crohn's disease",
-    "Right ureteric colic"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Localised signs without generalised peritonism, stable observations, and no free gas, abscess or collection on CT.",
-    "No previous diarrhoea, weight loss or blood in the stool, and a normal terminal ileum on CT.",
-    "No loin-to-groin pain or urinary symptoms, non-tender renal angles, and no calculi or hydronephrosis on CT."
-   ],
-   "why": "Classic appendicitis begins as vague periumbilical pain that localises to the right iliac fossa as the parietal peritoneum becomes inflamed, with nausea and anorexia.",
-   "topic": "General Surgery",
-   "origin": "ai",
-   "station": "amsa-323"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-327",
    "stem": "A 75-year-old man in general practice. Worsening left calf claudication, night rest pain eased by hanging the foot down, a punched-out pale ulcer on a bony prominence, absent left popliteal and pedal pulses, Buerger's angle 20 degrees, ABI 0.56 and toe pressure 24 mmHg in a smoker with diabetes. What is the most likely diagnosis?",
    "options": [
-    "Arterial ulcer",
     "Infected diabetes-related foot ulcer or osteomyelitis",
     "Acute limb ischaemia",
-    "Neuropathic diabetes-related foot ulcer"
+    "Neuropathic diabetes-related foot ulcer",
+    "Arterial ulcer"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "Ask about rest pain: night pain in the forefoot eased by hanging the foot down, with an ulcer, means chronic limb-threatening ischaemia and needs urgent vascular referral.",
    "notes": [
-    null,
     "No cellulitis, pus or odour, afebrile, probe to bone negative, and normal WCC and CRP.",
     "Gradual worsening over a year, no sudden pain, coldness, numbness or weakness, and sensation and movement are normal.",
-    "The ulcer is painful, not on the sole, has no callus, and monofilament and vibration sensation are intact."
+    "The ulcer is painful, not on the sole, has no callus, and monofilament and vibration sensation are intact.",
+    null
    ],
-   "why": "Ask about rest pain: night pain in the forefoot eased by hanging the foot down, with an ulcer, means chronic limb-threatening ischaemia and needs urgent vascular referral.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-327"
-  },
-  {
-   "id": "osce-amsa-328",
-   "stem": "A 75-year-old man in the emergency department. A 75-year-old with lifelong constipation and a low-fibre diet who suddenly passed a large volume of painless dark red blood with clots, has a normal anorectal examination and CRP, and whose colonoscopy shows extensive sigmoid and descending diverticula with no other source. What is the most likely diagnosis?",
-   "options": [
-    "Diverticular bleeding",
-    "Colorectal cancer",
-    "Angiodysplasia of the colon",
-    "Haemorrhoids"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No change in bowel habit, weight loss or tiredness, no rectal mass, normal MCV and ferritin, and no tumour or polyp on a complete colonoscopy (a negative screening FOBT 2 years ago gives little reassurance in a symptomatic patient).",
-    "No vascular lesions were seen on a complete colonoscopy and diverticula explain the bleed.",
-    "No lump, itch or prolapse, the blood was dark with clots and mixed with stool rather than on the paper, and no haemorrhoids on inspection or retroflexion."
-   ],
-   "why": "Diverticular bleeding is sudden, painless and often large-volume, bright red or maroon with clots, in an older patient with constipation or a low-fibre diet. It usually stops by itself but can recur.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-328"
-  },
-  {
-   "id": "osce-amsa-338",
-   "stem": "A 32-year-old woman in the emergency department. Fever, progressive headache, vomiting, photophobia and meningism after 4 days of left earache with a bulging left eardrum; a neutrophilic CSF with high protein, a glucose ratio of 0.17 and Gram-positive diplococci. What is the most likely diagnosis?",
-   "options": [
-    "Bacterial meningitis",
-    "Meningococcal meningitis or septicaemia",
-    "Herpes simplex encephalitis",
-    "Subarachnoid haemorrhage"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No rash anywhere, and the Gram stain shows Gram-positive diplococci, whereas meningococci are Gram-negative.",
-    "GCS 15 with no confusion, behaviour change, seizures or focal signs, and a bacterial CSF picture with organisms seen.",
-    "The headache built up over hours rather than suddenly, she is febrile, and the CSF is turbid with only 4 red cells."
-   ],
-   "why": "Never delay antibiotics for a lumbar puncture or CT: take blood cultures, then give dexamethasone and ceftriaxone within 60 minutes of arrival, straight after the LP and without waiting for the CSF result.",
-   "topic": "Neurology",
-   "origin": "ai",
-   "station": "amsa-338"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-355",
    "stem": "A 68-year-old woman in the emergency department. One day of fever with worsening confusion, personality change and right arm weakness in an immunosuppressed woman with past cold sores, left temporal hypodensity on CT and HSV-1 PCR detected in a lymphocytic CSF. What is the most likely diagnosis?",
    "options": [
-    "Herpes simplex virus type 1 encephalitis",
     "Bacterial meningitis",
     "Brain abscess",
+    "Herpes simplex virus type 1 encephalitis",
     "Left hemisphere ischaemic stroke"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Fever with an altered mental state, personality change or focal signs is encephalitis until proven otherwise. Start IV aciclovir 10 mg/kg 8-hourly at once, without waiting for CT, LP or PCR.",
    "notes": [
-    null,
     "She has no headache, neck stiffness, photophobia or rash, and her CSF has a normal glucose, no organisms and a lymphocytic pattern.",
     "She has no swinging fevers, seizures or ear, sinus or dental source, and CT shows no mass or collection.",
+    null,
     "She has fever and a progressive course over a day, no facial droop or dysarthria, an inflammatory CSF and a CT change outside a single arterial territory."
    ],
-   "why": "Fever with an altered mental state, personality change or focal signs is encephalitis until proven otherwise. Start IV aciclovir 10 mg/kg 8-hourly at once, without waiting for CT, LP or PCR.",
    "topic": "Neurology",
    "origin": "ai",
-   "station": "amsa-355"
-  },
-  {
-   "id": "osce-amsa-357",
-   "stem": "A 78-year-old man on the ward. He woke with a congruous, macula-sparing left homonymous hemianopia and no other deficit; MRI shows an acute right calcarine infarct with a P2 occlusion; the ECG shows AF; and he had a transient left-sided visual episode 2 months ago. What is the most likely diagnosis?",
-   "options": [
-    "Right posterior cerebral artery territory ischaemic stroke",
-    "Intracerebral haemorrhage in the right occipital lobe",
-    "Right occipital tumour or metastasis",
-    "Right middle cerebral artery territory infarct involving the optic"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No haemorrhage on the ED CT or on MRI susceptibility imaging.",
-    "The onset was sudden, on waking, and the MRI shows diffusion restriction in an arterial territory with an occluded P2 and no mass effect.",
-    "No face or arm weakness, sensory loss or neglect; the macula is spared; and the MRI shows the MCA territory and optic radiations are normal."
-   ],
-   "why": "Localise a field defect: one eye only is in front of the chiasm, bitemporal is the chiasm, and homonymous is behind the chiasm on the opposite side.",
-   "topic": "Neurology",
-   "origin": "ai",
-   "station": "amsa-357"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-361",
    "stem": "A 40-year-old man in the emergency department. A thunderclap worst-ever headache while jogging, a sentinel headache 2 weeks ago, neck stiffness, photophobia, vomiting, GCS 13 and subhyaloid (Terson) haemorrhages in a man with ADPKD and hypertension, with basal cistern blood and a 7 mm ACom aneurysm on CT. What is the most likely diagnosis?",
    "options": [
-    "Aneurysmal subarachnoid haemorrhage",
     "Intracerebral haemorrhage",
+    "Aneurysmal subarachnoid haemorrhage",
     "Bacterial meningitis",
     "Extradural or subdural haematoma"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "A thunderclap headache, maximal within seconds to a minute, is subarachnoid haemorrhage until proven otherwise. Always ask about an earlier 'warning' headache, which is often mistaken for migraine.",
    "notes": [
-    null,
     "He has no focal deficit, and the CT shows no parenchymal haematoma.",
+    null,
     "The onset was sudden rather than over hours, he is afebrile at 37.3 °C, and he has no rash or infective symptoms.",
     "He had no head injury or fall, and the CT shows no extra-axial collection."
    ],
-   "why": "A thunderclap headache, maximal within seconds to a minute, is subarachnoid haemorrhage until proven otherwise. Always ask about an earlier 'warning' headache, which is often mistaken for migraine.",
    "topic": "Neurology",
    "origin": "ai",
-   "station": "amsa-361"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-374",
    "stem": "A 70-year-old man in the emergency department. Two hours of central pressure to the left arm and jaw on exertion with breathlessness, sweating and nausea, multiple risk factors, new ST depression in V4 to V6, I and aVL and hs-troponin T rising from 62 to 148 ng/L. What is the most likely diagnosis?",
    "options": [
-    "Non-ST-elevation myocardial infarction",
     "Acute aortic dissection",
     "Pulmonary embolism",
-    "Pneumothorax"
+    "Pneumothorax",
+    "Non-ST-elevation myocardial infarction"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "Central pressure radiating to the arm and jaw, brought on by exertion and not relieved by rest, with breathlessness, sweating and nausea in a man with many risk factors is an acute coronary syndrome until proven otherwise; get an ECG within 10 minutes.",
    "notes": [
-    null,
     "The pain built over minutes as a pressure, is not tearing and does not go to the back, the arm BPs are equal and the mediastinum is not widened.",
     "No pleuritic pain, haemoptysis, calf swelling, immobility, surgery, travel or previous clot, and the ECG and troponin pattern fit coronary ischaemia.",
-    "The pain was not sudden or one-sided, breath sounds and percussion are equal, and the chest X-ray shows no pneumothorax."
+    "The pain was not sudden or one-sided, breath sounds and percussion are equal, and the chest X-ray shows no pneumothorax.",
+    null
    ],
-   "why": "Central pressure radiating to the arm and jaw, brought on by exertion and not relieved by rest, with breathlessness, sweating and nausea in a man with many risk factors is an acute coronary syndrome until proven otherwise; get an ECG within 10 minutes.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-374"
-  },
-  {
-   "id": "osce-amsa-375",
-   "stem": "A 74-year-old man in general practice. Breathlessness over years now at 10 m, orthopnoea and PND, exertional chest tightness and syncope, a slow-rising pulse, an ejection systolic murmur to the carotids, congestion with effusions on the X-ray, BNP 640, and severe AS with EF 60% on the echo. What is the most likely diagnosis?",
-   "options": [
-    "Heart failure",
-    "Coronary artery disease",
-    "Pulmonary embolism",
-    "Chronic obstructive pulmonary disease"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Severe aortic stenosis alone can explain the angina, there is no rest pain and no regional wall motion abnormality; coronary angiography is still needed.",
-    "Gradual course over years, no pleuritic pain, haemoptysis, calf signs or immobility, and the echo and X-ray explain the picture.",
-    "No chronic cough, sputum or wheeze, no hyperinflation on the X-ray, and the orthopnoea and PND point to the heart."
-   ],
-   "why": "Measure breathlessness by what the patient can do (the hill, the letterbox, dressing), not a score out of 10. This gives the NYHA class: walking 10 m with symptoms lying flat and at night is class IV.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-375"
-  },
-  {
-   "id": "osce-amsa-376",
-   "stem": "A 51-year-old woman in general practice. Known COPD on home oxygen with a week of worsening breathlessness, a more frequent and severe cough, purulent foul sputum, fever and a hospital sick contact, wheeze and hyperinflation, and neutrophilia with CRP 62. What is the most likely diagnosis?",
-   "options": [
-    "Acute exacerbation of COPD",
-    "Pulmonary embolism",
-    "Spontaneous pneumothorax",
-    "Community-acquired pneumonia"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Gradual onset with purulent sputum and fever, no pleuritic pain, haemoptysis or calf signs, and no right heart strain on the ECG.",
-    "Gradual onset with no sharp one-sided pain, symmetrical signs, a changed sputum, and no pneumothorax on the X-ray.",
-    "No focal dullness or bronchial breathing, and no consolidation on the chest X-ray."
-   ],
-   "why": "An exacerbation of COPD is a clinical diagnosis: a sustained worsening of breathlessness, cough or sputum beyond the usual day-to-day variation. Increased sputum purulence points to a bacterial infection, the trigger in most cases.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-376"
-  },
-  {
-   "id": "osce-amsa-377",
-   "stem": "A 53-year-old man in general practice. Sudden left lower quadrant colicky pain now constant, gross tympanic distension, early obstipation, late vomiting, empty rectum, previous diverticulitis, adenomas with missed surveillance and a father with colon cancer. What is the most likely diagnosis?",
-   "options": [
-    "Large bowel obstruction",
-    "Toxic megacolon",
-    "Acute mesenteric ischaemia",
-    "Sigmoid volvulus"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No bloody diarrhoea, no IBD, no recent antibiotics, and he is obstipated rather than having diarrhoea.",
-    "Regular pulse with no history of AF, no bloody diarrhoea, and abdominal signs that match the pain.",
-    "No previous episodes of distension that settled, and he is younger and more active than the typical patient; it cannot be excluded without imaging."
-   ],
-   "why": "Large bowel obstruction gives early obstipation, marked distension and late vomiting; small bowel obstruction gives early vomiting, central colic and late obstipation.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-377"
-  },
-  {
-   "id": "osce-amsa-379",
-   "stem": "A 65-year-old man in the emergency department. Sudden left leg weakness and sensory loss with urinary incontinence, sparing the face and arm, still present at 2 hours after two 10-minute TIAs, in AF with missed apixaban doses, with a right A2 occlusion and ACA perfusion deficit on CT. What is the most likely diagnosis?",
-   "options": [
-    "Acute ischaemic stroke",
-    "Intracerebral haemorrhage",
-    "Hypoglycaemia mimicking stroke",
-    "Spinal cord or cauda equina compression"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No headache, vomiting or drowsiness, and the non-contrast CT shows no haemorrhage.",
-    "He ate breakfast, has no adrenergic symptoms, and his bedside glucose is 8.4 mmol/L.",
-    "Only one leg is affected, with no back or radicular pain, intact saddle sensation, no retention on bladder scan, no sensory level, and an upgoing plantar with a vascular cause shown on CT."
-   ],
-   "why": "A sudden focal deficit still present after an hour, with ischaemia on imaging, is a stroke, not a TIA. Earlier brief episodes in the same territory were TIAs and are warnings that need same-day assessment.",
-   "topic": "Neurology",
-   "origin": "ai",
-   "station": "amsa-379"
-  },
-  {
-   "id": "osce-amsa-380",
-   "stem": "A 23-year-old woman in general practice. Eight-day periods with 2-hourly changes, flooding and clots, a takeaway diet, pallor and koilonychia, Hb 86 with MCV 68, and ferritin 4 with a normal CRP. What is the most likely diagnosis?",
-   "options": [
-    "Iron deficiency anaemia",
-    "Occult gastrointestinal blood loss",
-    "Haematological malignancy such as acute leukaemia",
-    "Primary hypothyroidism"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No melaena, rectal bleeding, abdominal pain or bowel change, she is 23, and heavy periods fully explain the loss.",
-    "White cells are normal, the film shows no blasts, the platelets are raised rather than low, and she has no bruising, lymphadenopathy, splenomegaly or fevers.",
-    "TSH is normal at 1.6, and she has no weight gain or goitre, so it is not contributing to her fatigue or her heavy bleeding."
-   ],
-   "why": "In fatigue in a young woman, always take a menstrual history: lengthening periods, changes every 2 hours, overnight changes, flooding and clots indicate heavy menstrual bleeding.",
-   "topic": "General Practice",
-   "origin": "ai",
-   "station": "amsa-380"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-382",
    "stem": "A 26-year-old man in general practice. A daily bilateral pressing headache of 5 to 6/10 that builds through the day, not worse with cycling, with neck and shoulder stiffness, tender pericranial muscles, thesis stress and long desk hours, and a normal examination. What is the most likely diagnosis?",
    "options": [
-    "Tension-type headache",
     "Meningitis",
     "Raised intracranial pressure / space-occupying lesion",
+    "Tension-type headache",
     "Migraine without aura"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "Separate primary from secondary headache by grouping your red flag questions by diagnosis: SAH (thunderclap onset), meningitis (fever, rash, neck stiffness), raised pressure or tumour (progressive, worst on waking, worse with coughing or straining, vomiting), stroke or TIA, and head injury.",
    "notes": [
-    null,
     "Six weeks of daily headache in someone who is well, afebrile, with no rash, photophobia or meningism and full passive neck flexion.",
     "Never on waking, not worse with coughing, straining or lying down, no vomiting, sharp discs with venous pulsations and a normal neurological examination.",
+    null,
     "The pain is bilateral, pressing and moderate, not throbbing, with no nausea, light or noise sensitivity or aura, and it is not worsened by activity."
    ],
-   "why": "Separate primary from secondary headache by grouping your red flag questions by diagnosis: SAH (thunderclap onset), meningitis (fever, rash, neck stiffness), raised pressure or tumour (progressive, worst on waking, worse with coughing or straining, vomiting), stroke or TIA, and head injury.",
    "topic": "Neurology",
    "origin": "ai",
-   "station": "amsa-382"
-  },
-  {
-   "id": "osce-amsa-392",
-   "stem": "A 64-year-old man in the emergency department. Three hours of left-sided pressure to the left arm and jaw with sweating, nausea and breathlessness, hypertension and a father with an MI at 61, ST elevation in V2 to V5, I and aVL with reciprocal depression in III, and a raised troponin. What is the most likely diagnosis?",
-   "options": [
-    "Anterior ST-elevation myocardial infarction",
-    "Acute aortic dissection",
-    "Pulmonary embolism",
-    "Acute pericarditis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "The pain is a gradual pressure, not tearing, with no back pain, his arm BPs and pulses are equal, and the mediastinum is not widened.",
-    "The pain is not pleuritic, he has no travel, immobility or calf symptoms, SpO2 is 96% on room air, and the ECG shows territorial ST elevation.",
-    "No viral illness, the pain is not positional or pleuritic, there is no rub, and the ST elevation is territorial with reciprocal depression and Q waves."
-   ],
-   "why": "STEMI is an ECG and clinical diagnosis: ST elevation in two or more contiguous leads (in V2 to V3 at least 2 mm in men 40 or over, 1 mm in other leads) with ischaemic symptoms. Reperfusion never waits for the troponin.",
-   "topic": "Cardiology",
-   "origin": "ai",
-   "station": "amsa-392"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-411",
    "stem": "A 66-year-old man in general practice. Sudden-onset, self-terminating, fast irregular palpitations now daily, an irregularly irregular pulse with a pulse deficit, an ECG with no P waves, a regular pulse after the episode stopped, and heavy alcohol, smoking, hypertension, OSA and obesity. What is the most likely diagnosis?",
    "options": [
-    "Paroxysmal atrial fibrillation",
     "Ventricular tachycardia",
     "Atrial or ventricular ectopic beats",
-    "Atrial flutter"
+    "Atrial flutter",
+    "Paroxysmal atrial fibrillation"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "Ask the patient to tap out the palpitations: fast and irregular points to AF, fast and regular to SVT or VT, and a missed beat to ectopics.",
    "notes": [
-    null,
     "Narrow QRS complexes, no chest pain, breathlessness or fainting, and no ischaemic change on the ECG.",
     "Sustained fast episodes lasting minutes to hours, and the ECG shows a continuous irregular rhythm without P waves rather than isolated early beats.",
-    "The rhythm he taps and the ECG are irregularly irregular, with no regular flutter waves."
+    "The rhythm he taps and the ECG are irregularly irregular, with no regular flutter waves.",
+    null
    ],
-   "why": "Ask the patient to tap out the palpitations: fast and irregular points to AF, fast and regular to SVT or VT, and a missed beat to ectopics.",
    "topic": "Cardiology",
    "origin": "ai",
-   "station": "amsa-411"
-  },
-  {
-   "id": "osce-amsa-412",
-   "stem": "A 67-year-old man in the emergency department. Known heart failure with 3 days of worsening exertional breathlessness, 3-pillow orthopnoea, PND, ankle swelling and weight gain, a raised JVP, bibasal crackles, NT-proBNP 4800, congestion on X-ray, and 5 days of ibuprofen with creatinine 132 from a baseline of 86. What is the most likely diagnosis?",
-   "options": [
-    "Acute decompensated heart failure precipitated by a non-steroidal",
-    "Acute coronary syndrome precipitating heart failure",
-    "Pulmonary embolism",
-    "Community-acquired pneumonia precipitating heart failure"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No chest pain, no ischaemic change on the ECG and a normal hs-troponin.",
-    "He is anticoagulated with rivaroxaban, the onset was gradual, the leg swelling is symmetrical with soft calves, and congestion explains the picture.",
-    "No fever, sputum or URTI symptoms, normal WCC and CRP, and no consolidation on X-ray."
-   ],
-   "why": "Orthopnoea, PND, ankle swelling and falling exercise tolerance in someone with known heart failure mean decompensation: quantify the change (pillows, distance walked, weight).",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-412"
-  },
-  {
-   "id": "osce-amsa-413",
-   "stem": "A 20-year-old woman in the emergency department. Known asthma, sudden breathlessness while jogging without her pre-exercise reliever, a recent cold, allergen and smoke exposure, wheeze, chest tightness and night cough, atopy, widespread bilateral wheeze and a low pCO2. What is the most likely diagnosis?",
-   "options": [
-    "Severe acute exacerbation",
-    "Pulmonary embolism",
-    "Anaphylaxis",
-    "Spontaneous pneumothorax"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Widespread wheeze with an asthma trigger, no pleuritic pain or haemoptysis, no immobility or previous clot, and soft, non-tender calves.",
-    "No lip, tongue or throat swelling, no stridor, hives or GI symptoms, and a normal BP.",
-    "No pleuritic or one-sided pain, no trauma, a central trachea, and symmetrical resonance and air entry."
-   ],
-   "why": "In acute breathlessness with wheeze, assess severity from speech, accessory muscle use, conscious state and SpO2, and start oxygen and bronchodilators before taking a detailed history.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-413"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-414",
@@ -1926,121 +1058,58 @@
     "Acute heart failure or acute coronary syndrome"
    ],
    "answer": 0,
+   "why": "In a person with COPD, more breathlessness with wheeze and a change in sputum colour or volume is an exacerbation until proven otherwise; actively exclude pneumonia, pneumothorax, PE and cardiac causes in the history, the examination and the X-ray.",
    "notes": [
     null,
     "No pleuritic pain, symmetrical expansion and breath sounds, trachea central, and no pneumothorax on X-ray.",
     "Already anticoagulated with apixaban, no pleuritic pain, haemoptysis, immobility or calf swelling, and a clear infective, wheezy picture.",
     "Tightness is respiratory in character (not crushing, no radiation), ECG sinus tachycardia with no acute change, first hs-troponin below the 99th percentile (repeat pending), no orthopnoea or oedema, JVP not raised, and no oedema on CXR."
    ],
-   "why": "In a person with COPD, more breathlessness with wheeze and a change in sputum colour or volume is an exacerbation until proven otherwise; actively exclude pneumonia, pneumothorax, PE and cardiac causes in the history, the examination and the X-ray.",
    "topic": "Respiratory Medicine",
    "origin": "ai",
-   "station": "amsa-414"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-415",
    "stem": "A 70-year-old man in the emergency department. Previous MI and CABG with hypertension, diabetes and smoking, a month of falling exercise tolerance, orthopnoea, PND, frothy sputum and leg oedema to the knees, a raised JVP with an S3, NT-proBNP 6200 and a chest X-ray showing oedema, bilateral effusions and cardiomegaly. What is the most likely diagnosis?",
    "options": [
-    "Acute cardiogenic pulmonary oedema",
     "Acute coronary syndrome precipitating heart failure",
     "Pulmonary embolism",
-    "Pneumothorax"
+    "Pneumothorax",
+    "Acute cardiogenic pulmonary oedema"
    ],
-   "answer": 0,
+   "answer": 3,
+   "why": "Ask every breathless patient about orthopnoea, PND, frothy sputum, ankle swelling and falling exercise tolerance, and examine the JVP, heart sounds, lung bases and legs.",
    "notes": [
-    null,
     "Chest tightness unlike his MI and non-radiating, no nausea or drenching sweat like his MI, unchanged ECG.",
     "No pleuritic pain, haemoptysis, immobility or recent surgery, the leg swelling is symmetrical with soft calves, and heart failure explains the whole picture.",
-    "No pleuritic pain or injury, the trachea is central, both bases are dull rather than hyperresonant, and the X-ray shows no pneumothorax."
+    "No pleuritic pain or injury, the trachea is central, both bases are dull rather than hyperresonant, and the X-ray shows no pneumothorax.",
+    null
    ],
-   "why": "Ask every breathless patient about orthopnoea, PND, frothy sputum, ankle swelling and falling exercise tolerance, and examine the JVP, heart sounds, lung bases and legs.",
    "topic": "Respiratory Medicine",
    "origin": "ai",
-   "station": "amsa-415"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-416",
    "stem": "A 65-year-old woman in general practice. 50 pack-years, progressive exertional breathlessness, chronic white productive cough, wheeze, flare-ups with colds, hyperinflation with wheeze, and post-bronchodilator FEV1/FVC 0.50 with FEV1 58% predicted. What is the most likely diagnosis?",
    "options": [
-    "Chronic obstructive pulmonary disease",
     "Lung cancer",
     "Chronic stable angina",
+    "Chronic obstructive pulmonary disease",
     "Idiopathic pulmonary fibrosis"
    ],
-   "answer": 0,
+   "answer": 2,
+   "why": "COPD is confirmed on spirometry by a post-bronchodilator FEV1/FVC below 0.7; by COPD-X, an FEV1 of 40 to 59% predicted is moderate disease. A chest X-ray supports it and excludes other causes but cannot diagnose it.",
    "notes": [
-    null,
     "No weight loss, appetite change, night sweats, haemoptysis, hoarseness or lymphadenopathy, and no mass or hilar enlargement on the chest X-ray.",
     "The tightness comes with wheeze and breathlessness, is not crushing, does not radiate and has no sweating or nausea.",
+    null,
     "Productive rather than dry cough, no fine crackles or clubbing, no interstitial change on X-ray, and obstructive rather than restrictive spirometry."
    ],
-   "why": "COPD is confirmed on spirometry by a post-bronchodilator FEV1/FVC below 0.7; by COPD-X, an FEV1 of 40 to 59% predicted is moderate disease. A chest X-ray supports it and excludes other causes but cannot diagnose it.",
    "topic": "Respiratory Medicine",
    "origin": "ai",
-   "station": "amsa-416"
-  },
-  {
-   "id": "osce-amsa-417",
-   "stem": "A 26-year-old woman in general practice. Lower abdominal pain before bowel motions with urgency, alternating loose and hard stools, bloating, triggers of stress and dairy, gastroenteritis 6 months ago, and normal bloods, coeliac serology, calprotectin and stool tests. What is the most likely diagnosis?",
-   "options": [
-    "Irritable bowel syndrome",
-    "Inflammatory bowel disease",
-    "Colorectal cancer",
-    "Coeliac disease"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No blood, weight loss, night symptoms or extraintestinal features, no right iliac fossa mass, and a normal CRP and calprotectin of 28.",
-    "Aged 26 with no rectal bleeding, weight loss, anaemia or family history, a normal examination and a normal calprotectin.",
-    "Negative tTG-IgA with a normal total IgA while eating gluten, and normal ferritin and folate."
-   ],
-   "why": "In chronic lower GI symptoms, screen every patient for red flags: rectal bleeding, weight loss, nocturnal symptoms, anaemia, fever, a mass, and a family history of colorectal cancer, IBD or coeliac disease. Rectal bleeding with a change in bowel habit warrants colonoscopy even in a young adult.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-417"
-  },
-  {
-   "id": "osce-amsa-418",
-   "stem": "A 68-year-old man in general practice. Sudden productive cough with offensive yellow sputum 2 days after discharge, fevers and rigors, right pleuritic pain, right basal consolidation signs, WCC 16.4 with neutrophilia, CRP 168, and right lower lobe consolidation that was not on the X-ray 8 days ago. What is the most likely diagnosis?",
-   "options": [
-    "Hospital-acquired pneumonia of the right lower lobe",
-    "Pulmonary embolism",
-    "Acute left heart failure or acute coronary syndrome",
-    "Community-acquired pneumonia"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "He walked daily and had daily prophylactic anticoagulant injections in hospital, has normal calves and no haemoptysis, has a Wells score of 1.5 (HR over 100 only) with a D-dimer below the age-adjusted cut-off, and the X-ray shows a clear alternative.",
-    "No pink frothy sputum, orthopnoea, paroxysmal nocturnal dyspnoea or oedema, JVP not raised, pleuritic pain unlike the admission pain, ECG with sinus tachycardia and no acute ischaemic change, and normal heart size with no oedema on the X-ray; troponin still to be checked in hospital.",
-    "The recent admission is the more likely source; normal sodium and LFTs, with no diarrhoea, headache, confusion or exposure to potting mix, spas or cooling towers, argue against Legionella."
-   ],
-   "why": "Always ask about recent hospital stays in a patient with an acute cough: pneumonia starting soon after discharge may be hospital-acquired, and the stay is also a risk factor for PE.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-418"
-  },
-  {
-   "id": "osce-amsa-420",
-   "stem": "A 35-year-old woman in general practice. First episode starting after daily oxycodone with no laxative, hard pebbly stools with straining, faecal loading, hard stool in the rectum and a posterior midline fissure. What is the most likely diagnosis?",
-   "options": [
-    "Opioid-induced constipation",
-    "Postoperative ileus or adhesive small bowel obstruction",
-    "Colorectal cancer",
-    "Hypothyroidism"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Passing wind, no pain or vomiting, a soft non-tender abdomen, normal bowel sounds and normal observations.",
-    "Aged 35, acute onset with a clear trigger, no weight loss or family history, a fissure explains the blood, and no rectal mass.",
-    "No cold intolerance, weight gain or dry skin, no goitre, and TSH 1.6."
-   ],
-   "why": "New constipation needs a search for what has changed: here, oxycodone and iron after surgery, on a low-fibre diet with less activity.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-420"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-425",
@@ -2052,16 +1121,16 @@
     "Perimenopause"
    ],
    "answer": 0,
+   "why": "Separate sleepiness (dozing off) from fatigue (lack of energy) early. Sleepiness points to a sleep disorder such as OSA.",
    "notes": [
     null,
     "No weight loss, night sweats, fevers, lumps or bleeding, and a normal blood count.",
     "No cold intolerance, constipation or skin changes, normal reflexes and a normal TSH.",
     "Regular periods and no hot flushes or night sweats."
    ],
-   "why": "Separate sleepiness (dozing off) from fatigue (lack of energy) early. Sleepiness points to a sleep disorder such as OSA.",
    "topic": "Respiratory Medicine",
    "origin": "ai",
-   "station": "amsa-425"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-429",
@@ -2073,58 +1142,37 @@
     "Intracranial tumour"
    ],
    "answer": 0,
+   "why": "In every older person with a new or progressive headache, ask directly about falls or head injury and about anticoagulants. A trivial knock days earlier, with no loss of consciousness, is the typical story for a subdural haematoma.",
    "notes": [
     null,
     "No loss of consciousness or lucid interval, no skull fracture, and the collection is crescentic and crosses the suture lines.",
     "Gradual onset over days with no thunderclap, no neck stiffness or photophobia, and no subarachnoid blood on CT.",
     "Clear history of head trauma, no morning or postural features or weight loss, and no mass on CT."
    ],
-   "why": "In every older person with a new or progressive headache, ask directly about falls or head injury and about anticoagulants. A trivial knock days earlier, with no loss of consciousness, is the typical story for a subdural haematoma.",
    "topic": "Neurology",
    "origin": "ai",
-   "station": "amsa-429"
-  },
-  {
-   "id": "osce-amsa-430",
-   "stem": "A 78-year-old man in general practice. Progressive jaundice with dark urine, pale stools, pain radiating to the back, weight loss, smoking since 15, diabetes from age 75, CA 19-9 of 1,240 and a pancreatic head mass with a double duct sign. What is the most likely diagnosis?",
-   "options": [
-    "Pancreatic head adenocarcinoma causing obstructive jaundice",
-    "Distal cholangiocarcinoma or ampullary carcinoma",
-    "Choledocholithiasis",
-    "Benign biliary stricture"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "The mass is centred in the pancreatic head with pancreatic duct dilatation and body and tail atrophy.",
-    "The obstruction ends at a pancreatic head mass and the course is progressive with weight loss; no stone is seen, though CT can miss stones.",
-    "Surgery was 10 years ago and the duct ends at a pancreatic head mass."
-   ],
-   "why": "Dark urine, pale stools and a cholestatic LFT pattern (conjugated bilirubin, ALP and GGT raised more than ALT) mean post-hepatic obstruction; always ask specifically about stool colour.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-430"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-431",
    "stem": "A 76-year-old man in the emergency department. A sudden 30-second blackout with no warning, palpitations minutes before, quick full recovery, on metoprolol, HR 34 with cannon a waves, and an ECG showing AV dissociation with a broad infranodal escape. What is the most likely diagnosis?",
    "options": [
-    "Cardiac syncope",
     "Ventricular tachyarrhythmia",
+    "Cardiac syncope",
     "Acute myocardial infarction causing AV block",
     "Vasovagal syncope"
    ],
-   "answer": 0,
+   "answer": 1,
+   "why": "In transient loss of consciousness, first establish that consciousness was truly lost. Then take the history before, during and after the event, including the witness account and a question about head strike and injuries.",
    "notes": [
-    null,
     "The monitor and ECG show a slow escape rhythm with no ventricular tachycardia, and he has no family history of sudden cardiac death.",
+    null,
     "He had no chest pain or breathlessness, the ECG has no ST elevation or Q waves, and the first troponin is not raised (repeat pending).",
     "He had no prodrome (no light-headedness, sweating, pallor or visual greying), no emotional or situational trigger, and his ECG shows complete heart block."
    ],
-   "why": "In transient loss of consciousness, first establish that consciousness was truly lost. Then take the history before, during and after the event, including the witness account and a question about head strike and injuries.",
    "topic": "Neurology",
    "origin": "ai",
-   "station": "amsa-431"
+   "source": "amsa"
   },
   {
    "id": "osce-amsa-436",
@@ -2136,625 +1184,16 @@
     "Acute alcohol-related pancreatitis"
    ],
    "answer": 0,
+   "why": "Fever, abdominal pain, worsening ascites, encephalopathy, AKI or a GI bleed in a patient with cirrhosis and ascites call for a diagnostic ascitic tap. SBP can be painless.",
    "notes": [
     null,
     "Gradual onset, no guarding or rigidity, no previous surgery, ascitic protein 9 g/L, glucose 5.4 mmol/L and LDH below the serum limit, and no organisms on Gram stain.",
     "It does not explain the fever, rigors, WCC 13.8 or the ascitic neutrophil count.",
     "The pain is generalised, not epigastric through to the back, there is no vomiting, and lipase is 40 U/L."
    ],
-   "why": "Fever, abdominal pain, worsening ascites, encephalopathy, AKI or a GI bleed in a patient with cirrhosis and ascites call for a diagnostic ascitic tap. SBP can be painless.",
    "topic": "Gastroenterology",
    "origin": "ai",
-   "station": "amsa-436"
-  },
-  {
-   "id": "osce-amsa-438",
-   "stem": "A 25-year-old man in clinic. Crampy right iliac fossa pain, diarrhoea, mouth ulcers and 6 kg weight loss, with terminal ileal linear ulcers, cobblestoning, skip lesions, rectal sparing and a non-caseating granuloma. What is the most likely diagnosis?",
-   "options": [
-    "Ileocolonic Crohn's disease",
-    "Intestinal tuberculosis or infective ileitis",
-    "Colorectal cancer or small bowel lymphoma",
-    "Ulcerative colitis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Born in Australia with no travel or TB contact, non-caseating granuloma with no acid-fast bacilli, and a negative stool pathogen PCR.",
-    "Aged 25, no palpable mass, no mass at colonoscopy and no dysplasia or malignancy on biopsy.",
-    "No rectal bleeding, terminal ileal disease, skip lesions, a normal rectum and granulomas on histology."
-   ],
-   "why": "Structure a procedure explanation with IPBRAD: indication, procedure (before, during, after), benefits, risks including the risk of not having it, alternatives, and documentation. Find out what the patient knows first and check understanding throughout.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-438"
-  },
-  {
-   "id": "osce-amsa-475",
-   "stem": "A 69-year-old woman in the emergency department. Four months of exertional dyspnoea, 2-pillow orthopnoea, PND and ankle swelling a year after an anterior STEMI, with a raised JVP, S3, bibasal crackles, oedema, cardiomegaly and congestion on CXR and an NT-proBNP of 4850. What is the most likely diagnosis?",
-   "options": [
-    "Decompensated biventricular heart failure",
-    "Acute coronary syndrome precipitating heart failure",
-    "Lung cancer",
-    "Chronic obstructive pulmonary disease"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No chest pain, a gradual 4-month course, a flat troponin (24 then 25) and an ECG unchanged from 12 months ago.",
-    "No weight loss, haemoptysis or hoarseness, and no mass or nodule on CXR.",
-    "No cough, sputum or wheeze, orthopnoea and PND with oedema, and no hyperinflation on CXR."
-   ],
-   "why": "Quantify breathlessness against the patient's baseline (distance, stairs or activities) and ask specifically about orthopnoea (number of pillows), PND and ankle swelling.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-475"
-  },
-  {
-   "id": "osce-amsa-476",
-   "stem": "A 62-year-old man in the emergency department. Fifteen years of heavy drinking, large-volume haematemesis with melaena, ascites, splenomegaly, stigmata of chronic liver disease, platelets 82, INR 1.8, albumin 27 and cirrhosis with portal hypertension on ultrasound. What is the most likely diagnosis?",
-   "options": [
-    "Acute oesophageal variceal haemorrhage",
-    "Hepatocellular carcinoma",
-    "Bleeding peptic ulcer",
-    "Mallory-Weiss tear"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No weight loss, night sweats or fever and no focal liver lesion on ultrasound, with the AFP still pending.",
-    "No NSAIDs, no epigastric pain or indigestion, and only endoscopy can tell the two apart.",
-    "The blood came up without any retching or vomiting beforehand."
-   ],
-   "why": "In a heavy drinker with haematemesis, ascites and stigmata of chronic liver disease, treat the bleed as variceal until endoscopy proves otherwise.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-476"
-  },
-  {
-   "id": "osce-amsa-477",
-   "stem": "A 63-year-old man in general practice. Eight years of type 2 diabetes with HbA1c 8.9% from metformin non-adherence, gradual symmetrical stocking sensory loss to mid-shin, absent ankle reflexes, positive Romberg and loss of protective sensation. What is the most likely diagnosis?",
-   "options": [
-    "Diabetic peripheral neuropathy",
-    "Spinal cord or cauda equina compression",
-    "Vitamin B12 deficiency neuropathy",
-    "Alcohol-related peripheral neuropathy"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Against cord compression: no upper motor neuron signs (flexor plantars, no clonus, normal tone, knee reflexes not brisk) and no sensory level; against cauda equina: no back pain, no sphincter or saddle symptoms, and a gradual symmetrical stocking pattern rather than a saddle or radicular one.",
-    "He rarely takes the metformin, he is not vegetarian or vegan, and his B12, folate and MCV are normal.",
-    "He drinks only an occasional can of beer on weekends, and his GGT, LFTs and MCV are normal."
-   ],
-   "why": "Glove-and-stocking sensory loss points to a length-dependent peripheral neuropathy, a dermatomal pattern to a root or cord lesion, and a single nerve territory to a nerve compression or injury.",
-   "topic": "Neurology",
-   "origin": "ai",
-   "station": "amsa-477"
-  },
-  {
-   "id": "osce-amsa-576",
-   "stem": "A 34-year-old man in general practice. Abrupt dry cough 3 days ago with fever, malaise, fatigue, sore throat and nasal congestion, a coughing friend, no influenza vaccine this year, and influenza A detected on PCR. What is the most likely diagnosis?",
-   "options": [
-    "Uncomplicated influenza A",
-    "Pertussis",
-    "Community-acquired pneumonia",
-    "COVID-19"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Cough of only 3 days with fever, no whoop or vomiting after coughing, and Bordetella pertussis not detected on PCR.",
-    "Dry cough without pleuritic pain, a clear chest, SpO2 97% on room air and RR 18.",
-    "SARS-CoV-2 not detected on PCR, with influenza A detected."
-   ],
-   "why": "Abrupt-onset dry cough with fever, malaise, sore throat and nasal congestion during flu season, especially with a sick contact and no vaccine this year, is influenza until proven otherwise.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-576"
-  },
-  {
-   "id": "osce-amsa-578",
-   "stem": "A 69-year-old woman in the emergency department. Abrupt vomiting and watery diarrhoea two days after changing her grandson's diarrhoeal nappies, temperature 37.9 °C, crampy pain eased by bowel motions and a soft abdomen with hyperactive bowel sounds. What is the most likely diagnosis?",
-   "options": [
-    "Acute infectious gastroenteritis",
-    "Acute mesenteric ischaemia",
-    "Bacterial gastroenteritis",
-    "Clostridioides difficile infection"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Pain not out of proportion, soft abdomen, sinus rhythm with no AF and lactate 1.6, although a normal lactate does not exclude it.",
-    "No blood or mucus in the stool, no high fever, no food source or travel, and a clear sick contact with a viral pattern.",
-    "No recent antibiotics or hospital stay, and a sick contact with similar symptoms."
-   ],
-   "why": "Acute infectious diarrhoea is diarrhoea of rapid onset lasting under 14 days. It is usually viral (norovirus in adults) and self-limiting, and rehydration is the mainstay of treatment.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-578"
-  },
-  {
-   "id": "osce-amsa-582",
-   "stem": "A 72-year-old man in the emergency department. Five months of progressive breathlessness with 20 kg weight loss, night sweats, blood-tinged sputum, a hoarse voice, clubbing, a hard right supraclavicular node and 50 pack-years, with a large unilateral right effusion on X-ray. What is the most likely diagnosis?",
-   "options": [
-    "Malignant right pleural effusion",
-    "Parapneumonic effusion or empyema",
-    "Malignant pleural mesothelioma",
-    "Tuberculous pleural effusion"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "The 5-month gradual course, no pleuritic pain or sick contacts, and a normal white cell count.",
-    "Haemoptysis, a hoarse voice and a supraclavicular node point more to a primary lung cancer.",
-    "Born in Australia with no TB travel, contacts or past TB, and the smoking history and node make cancer more likely."
-   ],
-   "why": "In a smoker with progressive breathlessness, ask directly about weight loss, haemoptysis, hoarseness and night sweats, and quantify smoking in pack-years (20 a day for 50 years is 50 pack-years).",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-582"
-  },
-  {
-   "id": "osce-amsa-583",
-   "stem": "A 35-year-old man in the emergency department. Sudden chest tightness and audible wheeze after a cat and pollen exposure. He has had previous similar attacks, got partial relief from Ventolin, has had asthma since 8, both parents have asthma and he is atopic. He has widespread wheeze, raised eosinophils and hyperinflation on X-ray. What is the most likely diagnosis?",
-   "options": [
-    "Severe acute exacerbation",
-    "Anaphylaxis",
-    "Spontaneous pneumothorax",
-    "Pulmonary embolism"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No urticaria, angioedema, stridor, GI symptoms or hypotension; BP 132/80; isolated lower-airway picture typical of his previous attacks.",
-    "No pleuritic chest pain, percussion and breath sounds are equal on both sides, and the X-ray shows no pneumothorax.",
-    "No pleuritic pain, haemoptysis, leg swelling, surgery, flights or previous clots, and the widespread wheeze is explained by asthma."
-   ],
-   "why": "Treat first in a breathless asthmatic who cannot finish sentences: inhaled salbutamol, controlled oxygen and senior help come before the full history.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-583"
-  },
-  {
-   "id": "osce-amsa-584",
-   "stem": "A 35-year-old woman in the emergency department. An unvaccinated traveller who ate street food, salads and ice in India, with a prodrome of fever, malaise and anorexia, RUQ pain, a tender liver, dark urine, pale stools, ALT 2840 and hepatitis A IgM detected. What is the most likely diagnosis?",
-   "options": [
-    "Acute hepatitis A",
-    "Malaria",
-    "Acute cholangitis or acute calculous cholecystitis",
-    "Acute pancreatitis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Normal platelets and spleen, a negative first antigen test and film set, and a confirmed alternative diagnosis, though 3 negative sets are still needed.",
-    "The pain is a dull constant ache rather than colic, Murphy's sign is negative, there are no gallstones and the CBD is 3 mm, and the LFTs are hepatocellular.",
-    "No epigastric pain through to the back, minimal alcohol, normal lipase and a normal pancreas on ultrasound."
-   ],
-   "why": "In a vomiting patient, find the cause behind the vomiting: here the prodrome, the RUQ pain and the dark urine and pale stools pointed to the liver. Patients rarely volunteer urine and stool colour, so ask.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-584"
-  },
-  {
-   "id": "osce-amsa-592",
-   "stem": "A 75-year-old man in the emergency department. A diabetic ex-smoker with breathlessness, chest tightness and sweating since 05:30, VF, ST elevation in V2 to V4, I, aVL, V5 and V6 with reciprocal inferior depression and Q waves, and a raised troponin. What is the most likely diagnosis?",
-   "options": [
-    "Ventricular fibrillation cardiac arrest",
-    "Massive pulmonary embolism",
-    "Hyperkalaemia or another metabolic cause",
-    "Tension pneumothorax or cardiac tamponade"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "He has no leg swelling, travel, surgery or previous clot, his rhythm was VF rather than PEA, and the ECG shows territorial ST elevation with reciprocal change.",
-    "The rise is mild, fits an acidosis of pH 7.12 after 10 minutes of arrest, and the ECG has no peaked T waves or broad QRS.",
-    "His trachea is central, air entry is equal, heart sounds are not muffled, and defibrillation restored a perfusing rhythm."
-   ],
-   "why": "Unresponsive and not breathing normally means cardiac arrest: call for help and start CPR at once (lower half of the sternum, 100 to 120/min, one third of chest depth, 30:2, minimal interruptions).",
-   "topic": "Cardiology",
-   "origin": "ai",
-   "station": "amsa-592"
-  },
-  {
-   "id": "osce-amsa-598",
-   "stem": "A 65-year-old man on the ward. Constant LIF pain for 3 days, a change in bowel habit, fever of 38.1 °C, LIF tenderness with localised rebound, WCC 14.6, CRP 128 and CT sigmoid wall thickening with fat stranding but no abscess or free gas. What is the most likely diagnosis?",
-   "options": [
-    "Acute uncomplicated sigmoid diverticulitis",
-    "Colorectal cancer",
-    "Complicated diverticulitis",
-    "Leaking abdominal aortic aneurysm"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No weight loss, no previous rectal bleeding or bowel change, normal Hb, no family history, and no discrete mass or enlarged nodes on CT.",
-    "Peritonism is localised with no rigidity, he is haemodynamically stable, and CT shows no collection, extraluminal gas or free gas.",
-    "No back pain or collapse, normal BP, no pulsatile mass, fever and raised markers, and an aorta of 2.1 cm on CT."
-   ],
-   "why": "Diverticulitis typically causes constant left iliac fossa pain with fever and a change in bowel habit. Right-sided disease is more common in patients of Asian descent.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-598"
-  },
-  {
-   "id": "osce-amsa-599",
-   "stem": "A 65-year-old woman in general practice. Progressive solids-only dysphagia over 3 months with no difficulty initiating, 5 kg weight loss and anorexia, 15 years of GORD, obesity and 40 pack-years, and an ulcerated distal mass with adenocarcinoma in a Barrett's segment. What is the most likely diagnosis?",
-   "options": [
-    "Adenocarcinoma of the distal oesophagus",
-    "Extrinsic compression of the oesophagus",
-    "Benign peptic oesophageal stricture",
-    "Oesophageal squamous cell carcinoma"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No cough, haemoptysis or hoarseness, and no lung mass or bulky mediastinal nodes on CT.",
-    "Rapid progression with weight loss, anorexia and iron deficiency, and a malignant mass on biopsy.",
-    "The tumour is distal, within a Barrett's segment, and the histology is adenocarcinoma."
-   ],
-   "why": "Oropharyngeal dysphagia is difficulty starting a swallow (with choking, coughing or nasal regurgitation); oesophageal dysphagia is food sticking after the swallow.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-599"
-  },
-  {
-   "id": "osce-amsa-625",
-   "stem": "A 62-year-old woman in the emergency department. Three weeks of constant burning forefoot pain that is worse lying flat and eased by hanging the leg, after years of claudication, with gangrene of three toes, absent right popliteal and pedal pulses, right ABI 0.28 and heavy cardiovascular risk. What is the most likely diagnosis?",
-   "options": [
-    "Chronic limb-threatening ischaemia of the right leg",
-    "Acute-on-chronic limb ischaemia or atheroembolism",
-    "Deep vein thrombosis",
-    "Intermittent claudication"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "She has no new numbness or weakness, power is 5/5 and her rhythm is regular, with a stable 3-week course.",
-    "Her calves are soft, non-tender and equal with no warmth or swelling, and the pain is in the toes and eased by dependency.",
-    "The current pain is constant at rest and there is tissue loss, so she has moved beyond claudication."
-   ],
-   "why": "Ischaemic rest pain is constant forefoot and toe pain, worse lying flat or at night and eased by hanging the leg down. Present for more than 2 weeks, or with gangrene or an ulcer, it defines chronic limb-threatening ischaemia.",
-   "topic": "Cardiology",
-   "origin": "ai",
-   "station": "amsa-625"
-  },
-  {
-   "id": "osce-amsa-626",
-   "stem": "A 47-year-old man on the ward. Day 5 after major orthopaedic surgery with little mobilisation, sudden pleuritic chest pain, breathlessness, HR 124, SpO2 92%, a swollen red right calf, Wells 9, and bilateral lower lobe emboli on CTPA. What is the most likely diagnosis?",
-   "options": [
-    "Acute pulmonary embolism",
-    "Acute coronary syndrome",
-    "Acute aortic dissection",
-    "Hospital-acquired pneumonia"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Sharp right-sided pleuritic pain without radiation, sweating or nausea, no ischaemic change on the ECG, and two normal troponins.",
-    "Pain is not tearing and does not go to the back, BP is equal in both arms, and the aorta is normal on CT.",
-    "No cough or sputum, a clear chest on examination and no consolidation on CT."
-   ],
-   "why": "Sudden pleuritic chest pain and breathlessness after major orthopaedic surgery is PE until proven otherwise: always examine both legs for a DVT.",
-   "topic": "Cardiology",
-   "origin": "ai",
-   "station": "amsa-626"
-  },
-  {
-   "id": "osce-amsa-630",
-   "stem": "A 20-year-old man in the emergency department. Breathlessness and sharp left pleuritic pain straight after a fall onto the left side, with tracheal deviation to the right, distended neck veins, left hyper-resonance and reduced breath sounds, tachycardia, hypotension, hypoxia, and complete left lung collapse with mediastinal shift on X-ray. What is the most likely diagnosis?",
-   "options": [
-    "Left tension pneumothorax",
-    "Cardiac tamponade",
-    "Traumatic haemothorax or haemopneumothorax",
-    "Pulmonary embolism"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Heart sounds are not muffled, the trachea is deviated, and the left chest is hyper-resonant with absent breath sounds on one side; a normal cardiac silhouette does not exclude acute tamponade, so eFAST is still needed.",
-    "The left chest is hyper-resonant rather than dull, the X-ray shows no effusion or fluid level, the neck veins are distended rather than flat, and the Hb is normal.",
-    "No leg swelling, immobility, travel or previous clots, and the trauma and one-sided signs explain the picture."
-   ],
-   "why": "Tension pneumothorax is a clinical diagnosis: breathlessness, hypoxia, tachycardia, hypotension, distended neck veins, tracheal deviation away from the affected side, and hyper-resonance with reduced or absent breath sounds. Decompress before imaging.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-630"
-  },
-  {
-   "id": "osce-amsa-631",
-   "stem": "A 3-year-old boy in the emergency department. Acute expiratory wheeze with recession over a few hours after a 2-day cold, a partial response to salbutamol, rhinovirus on PCR, smoke exposure, day-care, preterm birth and atopy. What is the most likely diagnosis?",
-   "options": [
-    "Viral-induced wheeze",
-    "Inhaled foreign body",
-    "Anaphylaxis",
-    "Acute asthma"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "There was no choking episode, the wheeze is bilateral and symmetrical, and it followed a coryzal illness.",
-    "No urticaria, angioedema, vomiting or floppiness, no new food or sting, and the onset was gradual after a cold.",
-    "He has no wheeze or night cough between colds and no other triggers, and at 3 years episodic viral wheeze is more likely."
-   ],
-   "why": "In a wheezy preschool child, always ask about anaphylaxis (skin signs with another system involved, new foods, stings) and an inhaled foreign body (sudden choking), because both need different, urgent treatment.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-631"
-  },
-  {
-   "id": "osce-amsa-632",
-   "stem": "A 73-year-old man in the emergency department. Two weeks of worsening breathlessness with orthopnoea, PND and pink frothy sputum a month after an MI, 2 weeks of regular ibuprofen, a raised JVP, S3 and crackles, NT-proBNP 8400 and a chest X-ray showing alveolar oedema, upper lobe diversion and effusions. What is the most likely diagnosis?",
-   "options": [
-    "Acute cardiogenic pulmonary oedema",
-    "Recurrent myocardial infarction",
-    "Pulmonary embolism",
-    "Community-acquired pneumonia"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No chest pain, nausea or radiation, and the ECG is unchanged from his discharge ECG.",
-    "No pleuritic pain, calf swelling or immobility, and orthopnoea, PND, an S3 and oedema on X-ray explain the picture.",
-    "No fever or purulent sputum, normal WCC, only a small CRP rise, and the change is bilateral with upper lobe diversion and effusions."
-   ],
-   "why": "Ask every breathless patient about orthopnoea (how many pillows), PND, frothy pink sputum and exercise tolerance, and examine the JVP, heart sounds for an S3, lung bases and ankles.",
-   "topic": "Respiratory Medicine",
-   "origin": "ai",
-   "station": "amsa-632"
-  },
-  {
-   "id": "osce-amsa-633",
-   "stem": "A 47-year-old woman in the emergency department. Constant right upper quadrant pain for over 24 hours after a fatty meal, with right shoulder radiation, fever to 38.9, a positive Murphy's sign, WCC 14.2, CRP 96, and an ultrasound showing a 5 mm wall, pericholecystic fluid and a stone impacted in the gallbladder neck. What is the most likely diagnosis?",
-   "options": [
-    "Acute calculous cholecystitis",
-    "Choledocholithiasis or ascending cholangitis",
-    "Acute coronary syndrome or right lower lobe pneumonia",
-    "Biliary colic"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No clinical jaundice, bilirubin only 26, common bile duct 5 mm with no intrahepatic dilatation, and normal BP and lactate.",
-    "No chest pain, breathlessness or cough, chest clear including the right base, SpO2 97% on room air, and the ECG shows sinus tachycardia with no ST or T wave changes.",
-    "This pain has been constant and worsening for over a day, with fever, raised WCC and CRP, and a thickened gallbladder wall."
-   ],
-   "why": "Biliary colic is postprandial pain that settles within about 6 hours. Constant RUQ pain for hours, with fever, Murphy's sign and raised WCC and CRP, is acute cholecystitis.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-633"
-  },
-  {
-   "id": "osce-amsa-634",
-   "stem": "A 45-year-old woman in the emergency department. Sudden colicky periumbilical pain, early large bilious vomiting, no stool or flatus for 3 days, mild distension and tinkling bowel sounds after two caesarean sections and an appendicectomy, with dilated small bowel and a collapsed colon on X-ray. What is the most likely diagnosis?",
-   "options": [
-    "Adhesive small bowel obstruction",
-    "Strangulated or closed-loop small bowel obstruction",
-    "Incarcerated hernia",
-    "Large bowel obstruction"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "The pain is still colicky, she is afebrile with no guarding or rebound, and the lactate is normal.",
-    "The hernial orifices and scars are normal with no cough impulse.",
-    "Distension is mild, the vomiting was early, large and bilious, and the colon is collapsed on X-ray."
-   ],
-   "why": "Colicky pain, vomiting, distension and absolute constipation are the cardinal features of bowel obstruction. Always ask specifically about flatus and previous abdominal surgery.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-634"
-  },
-  {
-   "id": "osce-amsa-635",
-   "stem": "A 40-year-old man in the emergency department. He shared needles 2 months ago, had a prodrome of fever, arthralgia, urticaria and malaise, now has jaundice with dark urine and pale stools and a tender smooth liver, with ALT 1635 and HBsAg, IgM anti-HBc and HBeAg positive. What is the most likely diagnosis?",
-   "options": [
-    "Acute hepatitis B infection",
-    "Acute ascending cholangitis",
-    "Paracetamol or other drug-induced liver injury",
-    "Acute hepatitis C infection"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No rigors, haemodynamically stable, normal WCC with only a mild CRP rise, transaminase rise far greater than the ALP rise, a viral prodrome, and no duct dilatation or stones on ultrasound.",
-    "He denies any paracetamol, overdose, other medicines or supplements, and the paracetamol level is undetectable.",
-    "The HCV antibody is negative, although this can be falsely reassuring in the window period, and the hepatitis B serology already explains the illness."
-   ],
-   "why": "Viral hepatitis has a prodrome (anorexia, malaise, fever, RUQ pain; urticaria and arthralgia especially in hepatitis B), then an icteric phase with dark urine, pale stools, itch and jaundice.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-635"
-  },
-  {
-   "id": "osce-amsa-636",
-   "stem": "A 74-year-old man in the emergency department. He takes ibuprofen 400 mg TDS with aspirin, rarely takes his PPI, has months of nocturnal epigastric pain eased by food, haematemesis with 2 weeks of melaena, a fall in Hb from 138 to 84 and a urea of 16.8. What is the most likely diagnosis?",
-   "options": [
-    "Bleeding peptic ulcer related to NSAID and aspirin use",
-    "Oesophageal or gastric variceal bleeding",
-    "Perforated peptic ulcer",
-    "Severe erosive oesophagitis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Only one spider naevus with no other stigmata, no ascites or splenomegaly, and normal platelets, INR, albumin and bilirubin.",
-    "The abdomen is soft and not distended with normal bowel sounds and no rigidity, and the erect chest X-ray shows no free gas.",
-    "Erosive disease rarely causes a bleed large enough to drop the Hb by more than 50 g/L with haemodynamic change."
-   ],
-   "why": "In upper GI bleeding, decide three things early: stable or unstable, variceal or non-variceal, and major or minor (Glasgow-Blatchford score). Each changes the management.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-636"
-  },
-  {
-   "id": "osce-amsa-637",
-   "stem": "A 30-year-old woman in general practice. Returned from Thailand a month ago after eating street food without pre-travel vaccination, with a 2-week prodrome, then jaundice, a hepatocellular picture and a positive HAV IgM. What is the most likely diagnosis?",
-   "options": [
-    "Acute hepatitis A infection",
-    "Ascending cholangitis",
-    "Malaria",
-    "Choledocholithiasis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No gallstones or bile duct dilatation on ultrasound, ALT far higher than ALP, and a normal white cell count.",
-    "Normal haemoglobin and platelets, and a positive HAV IgM explains the picture.",
-    "Constant pain not related to food, no history of gallstones, and no stones or duct dilatation on ultrasound."
-   ],
-   "why": "Dark urine and pale stools mean conjugated hyperbilirubinaemia. Always ask the 4 Ps (pee, poo, pruritus, pain) in jaundice.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-637"
-  },
-  {
-   "id": "osce-amsa-638",
-   "stem": "A 28-year-old woman in the emergency department. RUQ pain, fever with rigors and jaundice (Charcot's triad), pale stools, dark urine and itch, cholestatic LFTs with WCC 17.8 and CRP 186, and an 11 mm common bile duct with a distal stone. What is the most likely diagnosis?",
-   "options": [
-    "Acute ascending cholangitis",
-    "Acute gallstone pancreatitis",
-    "Acute calculous cholecystitis",
-    "Acute viral hepatitis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Lipase 42 is normal, the pain does not go through to the back, and the visualised pancreas is normal.",
-    "She is jaundiced with obstructive features, Murphy's sign is negative, and the gallbladder wall is thin with no pericholecystic fluid.",
-    "No IV drugs, travel or unsafe sex, the LFTs are cholestatic with ALP and GGT raised more than ALT, and the bile ducts are dilated."
-   ],
-   "why": "RUQ pain, fever with rigors and jaundice (Charcot's triad) is acute cholangitis until proven otherwise. Confusion and hypotension (Reynolds' pentad) mean severe disease.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-638"
-  },
-  {
-   "id": "osce-amsa-639",
-   "stem": "A 15-year-old girl in the emergency department. Type 1 diabetes with doses skipped to lose weight, HbA1c 9%, thirst, polyuria, weight loss, vomiting, Kussmaul breathing, glucose 22, ketones 5.3 and a high anion gap acidosis with pH 7.25. What is the most likely diagnosis?",
-   "options": [
-    "Diabetic ketoacidosis precipitated by insulin omission",
-    "Cerebral oedema complicating diabetic ketoacidosis",
-    "Meningitis or encephalitis",
-    "Ingestion or alcohol intoxication"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "No headache, bradycardia, hypertension, pupil change or focal signs; pCO2 appropriately compensated (no excess hypocapnia); drowsiness can come from the DKA itself. But her effective osmolality is normal (2 × 128 + 22 = 278 mOsm/kg) and her acidosis is only moderate, so a GCS of 13 is not fully explained: treat as possible cerebral oedema and reassess the GCS hourly.",
-    "She is afebrile with no neck stiffness or rash, the CRP is normal, and DKA explains the drowsiness.",
-    "She was home all evening, no tablets are missing, and the glucose, ketones and gas explain her conscious state."
-   ],
-   "why": "Check a glucose and ketones in every vomiting or drowsy child with diabetes. Be cautious about diagnosing gastroenteritis when there is vomiting without diarrhoea; look for another cause. DKA can be the first presentation of type 1 diabetes.",
-   "topic": "Paediatrics",
-   "origin": "ai",
-   "station": "amsa-639"
-  },
-  {
-   "id": "osce-amsa-644",
-   "stem": "A 64-year-old man on the ward. Ischaemic chest pain and palpitations just before a witnessed collapse, a troponin rising from 46 to 2850 ng/L, lateral ST depression and VF on the strip. What is the most likely diagnosis?",
-   "options": [
-    "Ventricular fibrillation cardiac arrest",
-    "Massive pulmonary embolism",
-    "Cardiac tamponade",
-    "Pulseless ventricular tachycardia"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "He is on therapeutic enoxaparin, his chest pain was ischaemic rather than pleuritic, and the rhythm is VF rather than PEA.",
-    "Rupture usually occurs days after infarction and presents with PEA, not VF, and his haemoglobin is normal.",
-    "The strip shows chaotic deflections of varying amplitude with no organised QRS complexes."
-   ],
-   "why": "In an unresponsive patient, slow noisy gasps are not normal breathing, and a few seconds of jerking at collapse is usually hypoxic jerking, not a seizure. Start compressions straight away; do not wait for a pulse check.",
-   "topic": "Emergency Medicine",
-   "origin": "ai",
-   "station": "amsa-644"
-  },
-  {
-   "id": "osce-amsa-645",
-   "stem": "A 32-year-old man in the emergency department. Two days of worsening headache with fever, vomiting, neck stiffness, photophobia and positive Kernig's sign in a man on prednisolone, with turbid neutrophilic CSF, high protein and a low glucose ratio. What is the most likely diagnosis?",
-   "options": [
-    "Bacterial meningitis",
-    "Viral encephalitis",
-    "Subarachnoid haemorrhage",
-    "Viral meningitis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "He is oriented with GCS 15, intact attention, no drowsiness, behaviour change, seizures or focal signs.",
-    "It was not a thunderclap or worst-ever, with no collapse, and has built over 2 days with fever; the CT is normal and the CSF has minimal red cells.",
-    "His CSF is turbid with neutrophils, a high protein and a low glucose, and he has a CRP of 214 with a raised lactate."
-   ],
-   "why": "Fever, headache, neck stiffness and photophobia mean meningitis until proven otherwise. Always ask about and look for a non-blanching rash.",
-   "topic": "Neurology",
-   "origin": "ai",
-   "station": "amsa-645"
-  },
-  {
-   "id": "osce-amsa-646",
-   "stem": "An 18-year-old woman in general practice. Fever of 39 °C, a worsening generalised headache, neck stiffness, photophobia and a positive Kernig's sign in an 18-year-old after a crowded festival with a shared tent and uncertain meningococcal vaccination; the CSF is neutrophilic with a low glucose, Gram-negative diplococci and a positive N. meningitidis PCR. What is the most likely diagnosis?",
-   "options": [
-    "Bacterial meningitis",
-    "Viral encephalitis",
-    "Subarachnoid haemorrhage",
-    "Viral meningitis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "She is alert and oriented (GCS 15) with no seizures, behaviour change or focal signs, and the CSF is neutrophilic with organisms seen.",
-    "The headache built up over hours, she has a fever and a coryzal prodrome, and the CSF has no xanthochromia and only 5 red cells.",
-    "The CSF has 8500 neutrophils, a protein of 1.1 g/L, a glucose ratio of 0.24 and Gram-negative diplococci."
-   ],
-   "why": "Fever, headache, neck stiffness and photophobia mean bacterial meningitis until proven otherwise. Ask about and look for a rash, but its absence does not exclude meningococcal disease.",
-   "topic": "Neurology",
-   "origin": "ai",
-   "station": "amsa-646"
-  },
-  {
-   "id": "osce-amsa-647",
-   "stem": "A 24-year-old woman in general practice. Five stereotyped attacks of severe, one-sided throbbing headache lasting 6 to 7 hours, with light and noise sensitivity and nausea, each preceded by about 20 minutes of fully reversible visual aura, with a normal examination. What is the most likely diagnosis?",
-   "options": [
-    "Migraine",
-    "Subarachnoid haemorrhage",
-    "Bacterial meningitis",
-    "Transient ischaemic attack"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "The onset was gradual, it is the same as four previous attacks, and the neurological examination and fundi are normal.",
-    "She is afebrile, with no neck stiffness, negative Kernig's sign and no rash.",
-    "The visual symptoms are positive (dots, jumbled lines), spread gradually, resolve fully and are followed by headache, with no weakness, numbness or speech change and a normal examination."
-   ],
-   "why": "Ask how fast the headache started and whether it matches previous attacks. A gradual, stereotyped headache with a normal examination and no red flags (SNOOP) needs no imaging.",
-   "topic": "Neurology",
-   "origin": "ai",
-   "station": "amsa-647"
-  },
-  {
-   "id": "osce-amsa-663",
-   "stem": "A 25-year-old man in general practice. Two months of bloody, mucousy diarrhoea with LIF pain, weight loss, fatigue and erythema nodosum, and continuous mucosal inflammation from the rectum to 25 cm with crypt distortion. What is the most likely diagnosis?",
-   "options": [
-    "Ulcerative colitis",
-    "Colorectal cancer",
-    "Crohn's colitis",
-    "Infective colitis"
-   ],
-   "answer": 0,
-   "notes": [
-    null,
-    "Age 25, and colonoscopy found no mass, with no dysplasia on biopsy.",
-    "Continuous inflammation from the rectum, normal terminal ileum, inflammation confined to the mucosa, no granulomas and no perianal disease.",
-    "No travel, sick contacts or antibiotics, a 2-month course, and negative stool PCR, culture, C. difficile and parasite tests."
-   ],
-   "why": "Chronic bloody, mucousy diarrhoea with weight loss in a young adult is inflammatory bowel disease until proven otherwise; IBS cannot be diagnosed with blood, weight loss, nocturnal stools or a raised calprotectin.",
-   "topic": "Gastroenterology",
-   "origin": "ai",
-   "station": "amsa-663"
+   "source": "amsa"
   }
  ]
 }
