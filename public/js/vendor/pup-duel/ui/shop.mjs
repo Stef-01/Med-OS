@@ -15,9 +15,10 @@
 
    The pure rules are elsewhere: prices and rotation in pup/wardrobe.mjs, the wallet in duel/shop.mjs. */
 
-import { ITEMS as ALL, SETS, SLOTS, SLOT_NAME, RARITY, VB, itemOf, shopFor, priceToday, setPrice, isNew, msToReset, resetLabel, DEAL_OFF, SET_OFF } from '../pup/wardrobe.mjs';
+import { ITEMS as ALL, SETS, SLOTS, SLOT_NAME, RARITY, VB, itemOf, sigOf, shopFor, priceToday, setPrice, isNew, msToReset, resetLabel, DEAL_OFF, SET_OFF } from '../pup/wardrobe.mjs';
 import { coatsFor, COLLARS } from '../pup/rig/coats.mjs';
 import { lookDog } from '../pup/rig/still.mjs';
+import { MOVES } from '../pup/rig/moves.mjs';
 import { DOGS } from '../duel/accounts.mjs';
 import { PAY, PER_RIGHT, PRACTICE_CAP, OUTFITS, WHY, stateOf, winsAway, collection, fitWear } from '../duel/shop.mjs';
 import { icon } from './icons.mjs';
@@ -100,6 +101,7 @@ export function openWardrobe(ctx) {
     if (w === 'save') return save();
     if (w === 'undo') { cur = structuredClone(saved); V.sel = null; paint(); prev.dress(cur); return; }
     if (w === 'keep') return keepOutfit(+t.dataset.i, t);
+    if (w === 'move') { playMove(); return; }
     if (w === 'earn') { el.querySelector('#pd-h-earn')?.scrollIntoView({ block: 'start', behavior: reduced() ? 'auto' : 'smooth' }); return; }
     if (w === 'discard') { cur = structuredClone(saved); ctx.close(); return; }
     if (w === 'saveclose') { save(true).then(ok => ok && ctx.close()); return; }
@@ -188,8 +190,8 @@ export function openWardrobe(ctx) {
     const tag = st === 'equipped' ? `<span class="pd-tag pd-t-on">On</span>` : deal ? `<span class="pd-tag pd-t-deal">−${Math.round(DEAL_OFF * 100)}%</span>` : isNew(it, V.day) && !owns(it.id) ? '<span class="pd-tag pd-t-new">New</span>' : '';
     const cost = owns(it.id) ? `<span class="pd-own">${icon('check')}Owned</span>` : `${bones(price)}${deal ? `<s>${it.price}</s>` : ''}`;
     const said = owns(it.id) ? (st === 'equipped' ? 'wearing it' : 'owned') : `${price} bones${deal ? `, ${Math.round(DEAL_OFF * 100)} percent off today` : ''}`;
-    return `<button type="button" class="pd-st" data-r="${it.rarity}" data-item="${it.id}" data-st="${st}" aria-pressed="false" aria-label="${esc(it.name)}, ${RARITY[it.rarity].name.toLowerCase()} ${ONE[it.slot].toLowerCase()}, ${said}">
-      <span class="pd-st-art">${art(it)}</span>${tag}<span class="pd-st-plate"><b>${esc(it.name)}</b><span class="pd-st-cost">${cost}</span></span></button>`;
+    return `<button type="button" class="pd-st" data-r="${it.rarity}" data-item="${it.id}" data-st="${st}" aria-pressed="false" aria-label="${esc(it.name)}, ${RARITY[it.rarity].name.toLowerCase()} ${ONE[it.slot].toLowerCase()}${it.sig ? `, with the ${esc(MOVES[it.sig.move].name)} move` : ''}, ${said}">
+      <span class="pd-st-art">${art(it)}</span>${tag}${it.sig ? `<span class="pd-sigb" title="Signature move: ${esc(MOVES[it.sig.move].name)}">${icon('sparkle')}</span>` : ''}<span class="pd-st-plate"><b>${esc(it.name)}</b><span class="pd-st-cost">${cost}</span></span></button>`;
   }
   function setTile(set, wide) {
     const { full, price, left } = setPrice(set.id, W.owned), items = set.items.map(itemOf), have = items.length - left.length;
@@ -285,7 +287,7 @@ export function openWardrobe(ctx) {
         : short ? `About ${winsAway(short)} ${winsAway(short) === 1 ? 'win' : 'wins'} away. Every right answer earns a bone.`
         : price < it.price ? `Today only. Usually ${it.price}.` : 'Worn the moment you buy it.';
       html = `<h2 class="pd-wname">${esc(it.name)}</h2><p class="pd-wkick"><span class="pd-rar" data-r="${it.rarity}">${RARITY[it.rarity].name}</span>${ONE[it.slot]}${isNew(it, V.day) ? '<span class="pd-rar pd-rar-new">New</span>' : ''}</p>
-        <p class="pd-wnod">A nod to ${esc(it.nod)}</p>${button}<p class="pd-wfine">${fine}</p>`;
+        <p class="pd-wnod">A nod to ${esc(it.nod)}</p>${it.sig ? `<p class="pd-wsig"><button type="button" class="pd-sigplay" data-w="move" aria-label="Play the ${esc(MOVES[it.sig.move].name)} move">${icon('sparkle')}<span>${esc(MOVES[it.sig.move].name)}</span></button>${it.sig.aura ? '<span>Shimmers while worn</span>' : ''}</p>` : ''}${button}<p class="pd-wfine">${fine}</p>`;
       box.innerHTML = html;
     }
     if (!reduced()) { box.classList.remove('pd-in'); void box.offsetWidth; box.classList.add('pd-in'); }
@@ -298,7 +300,17 @@ export function openWardrobe(ctx) {
     if (V.sel?.kind === 'item') { const it = itemOf(V.sel.id); if (it && !(V.tab === 'locker' && owns(it.id))) w[it.slot] = it.id; }
     if (V.sel?.kind === 'set') for (const id of SETS.find(s => s.id === V.sel.id).items) w[itemOf(id).slot] = id;
     prev.dress({ ...cur, wear: w });
-    if (fresh) prev.tap();
+    if (fresh && !playMove()) prev.tap();
+  }
+
+  /* the selection's signature move (a set's first), after the piece's pop has landed; false when it has none */
+  function playMove() {
+    const ids = V.sel?.kind === 'set' ? SETS.find(s => s.id === V.sel.id).items : V.sel ? [V.sel.id] : [];
+    /* in the Locker, a piece just taken off does not dance */
+    const mv = ids.filter(id => V.tab !== 'locker' || V.sel.kind === 'set' || Object.values(cur.wear).includes(id)).map(id => sigOf(id)?.move).find(Boolean);
+    if (!mv) return false;
+    clearTimeout(V.moveT); V.moveT = setTimeout(() => prev.perform(mv), 380);
+    return true;
   }
 
   /* ---- acting ---- */

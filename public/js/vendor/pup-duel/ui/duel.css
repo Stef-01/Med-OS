@@ -238,6 +238,13 @@ div.pd-me-dog { cursor: default; }
 .pd-t-deal { background: var(--pd-warn); color: #2b2100; }
 .pd-t-new { background: var(--pd-pri); color: var(--pd-pri-ink); }
 .pd-t-on { background: var(--pd-ok); color: #0f2a00; }
+/* a piece with a signature move: a spark in the tile's corner, and on the stage a chip that plays the move again */
+.pd-sigb { position: absolute; z-index: 2; top: 6px; right: 6px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: color-mix(in srgb, var(--r) 70%, #000); color: #fff; }
+.pd-sigb .pd-i { width: 14px; height: 14px; }
+.pd-wsig { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 2px 0 0; font-size: 13px; color: var(--pd-mute); }
+.pd-sigplay { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px 0 10px; border: 2px solid color-mix(in srgb, var(--r) 60%, var(--pd-line2)); border-radius: 999px; background: color-mix(in srgb, var(--r) 18%, transparent); color: var(--pd-ink); font-size: 14px; font-weight: 700; cursor: pointer; }
+.pd-sigplay .pd-i { width: 16px; height: 16px; color: color-mix(in srgb, var(--r) 70%, #fff); }
+.pd-sigplay:active { transform: scale(.96); }
 /* a set: its four pieces in a square, how many you own as pips */
 .pd-quad { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 4px; padding: 8%; }
 .pd-quad span { display: grid; place-items: center; min-width: 0; min-height: 0; border-radius: 8px; background: rgba(0, 0, 0, .14); }

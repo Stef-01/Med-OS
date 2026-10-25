@@ -22,7 +22,7 @@ import { topicsOf } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
 import { normWallet, fitWear } from '../duel/shop.mjs';
-import { ITEMS, wearMsg, itemOf } from '../pup/wardrobe.mjs';
+import { ITEMS, wearMsg, itemOf, movesOf } from '../pup/wardrobe.mjs';
 import { still, lookDog } from '../pup/rig/still.mjs';
 import { icon } from './icons.mjs';
 import { openWardrobe } from './shop.mjs';
@@ -61,7 +61,7 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
   const box = document.createElement('div');
   box.className = 'pd-dog' + (mirror ? ' pd-mirror' : '');
   const f = document.createElement('iframe');
-  let cur = lookOf(look), ready = false, wantExpr = null;
+  let cur = lookOf(look), ready = false, wantExpr = null, wantMove = null;
   const q = new URLSearchParams({ embed: '1', dog: cur.dog, expr: 'happy' });
   if (cur.coat) q.set('coat', cur.coat);
   if (cur.collar) q.set('collar', cur.collar);
@@ -75,12 +75,15 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
     ready = true;
     if (cur.dog !== loadedAs.dog || cur.coat !== loadedAs.coat || cur.collar !== loadedAs.collar) send(skin(cur));
     send(wearMsg(cur.wear, false)); if (wantExpr) send({ dob: 'expr', id: wantExpr });
+    if (wantMove) { send({ dob: 'perform', id: wantMove }); wantMove = null; }
     loadedAs = cur;
   });
   return {
     el: box,
     expr(id) { if (wantExpr === id) return; wantExpr = id; if (ready) send({ dob: 'expr', id }); },
     tap() { if (ready) send({ dob: 'tap' }); },
+    /* a worn piece's signature move (moves.mjs), played once; a frame still loading plays it when it is up */
+    perform(id) { if (!id) return; if (ready) send({ dob: 'perform', id }); else wantMove = id; },
     dress(look) {
       const n = lookOf(look), was = cur;
       cur = n;
@@ -519,8 +522,10 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('.pd-mine .pd-dogslot').append(myDog.el);
     shell.querySelector('.pd-theirs .pd-dogslot').append(theirDog.el);
     S.dogs = { me: myDog, them: theirDog };
+    /* the walk-on: each dog plays its own signature move as the duel opens, never during a question */
+    myDog.perform(movesOf(myL.wear)[0]); setTimeout(() => theirDog.perform(movesOf(theirL.wear)[0]), 500);
     /* the two faces that mark who picked what on a reveal: drawn once, moved to the option each picked */
-    S.match = { d, me, them, t, practice: isPractice, last: {}, round: -1, revealed: -1, emoteN: 0, reported: false, faces: { me: face(myL, 'pd-pick'), them: face(theirL, 'pd-pick') } };
+    S.match = { d, me, them, t, myLook: myL, theirLook: theirL, practice: isPractice, last: {}, round: -1, revealed: -1, emoteN: 0, reported: false, faces: { me: face(myL, 'pd-pick'), them: face(theirL, 'pd-pick') } };
     S.match.faces.me.dataset.who = 'me'; S.match.faces.them.dataset.who = 'them';
     shell.querySelector('[data-pd="leave"]').addEventListener('click', confirmLeave);
     shell.querySelectorAll('.pd-emote').forEach(b => b.addEventListener('click', () => { if (S.session?.emote(b.dataset.e)) { b.classList.add('pd-sent'); setTimeout(() => b.classList.remove('pd-sent'), 600); S.dogs.me.expr(EXPR.emote); } }));
@@ -743,7 +748,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('.pd-dots').replaceChildren();
     S.dogs.me.expr(out === 'win' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);
     S.dogs.them.expr(out === 'loss' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);
-    if (out === 'win') S.dogs.me.tap();
+    /* the winner's celebration: their signature move if their look has one, else the cheer */
+    const winner = out === 'win' ? 'me' : out === 'loss' ? 'them' : null, wm = winner && movesOf((winner === 'me' ? lookOf(S.match.myLook) : lookOf(S.match.theirLook)).wear)[0];
+    if (winner && wm) setTimeout(() => S.dogs[winner]?.perform(wm), 700); else if (out === 'win') S.dogs.me.tap();
     say(`${head}. ${fmt(st.score[me])} to ${fmt(st.score[opp])}.`);
     res.querySelector('[data-pd="lobby"]').addEventListener('click', showLobbyOrAuth);
     res.querySelector('[data-pd="again"]').addEventListener('click', () => rematch(st));
