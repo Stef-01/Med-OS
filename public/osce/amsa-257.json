@@ -454,7 +454,31 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-257/cxr-normal-sam.jpg",
+    "alt": "PA erect chest radiograph of a young adult man",
+    "w": 1400,
+    "h": 1365,
+    "caption": "Chest X-ray, PA erect, taken at 10:55 today",
+    "req": "cxr-normal-sam",
+    "credit": {
+     "author": "InRad, Hospital das Clínicas, University of São Paulo",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://inlab-opendata-covid-anonymized-images.s3.us-west-2.amazonaws.com/chest_xr/images/b19ba3dc78937f01b0e99e98327c2bb3.png",
+     "via": "InRad COVID-19 X-ray and CT (AWS Open Data)"
+    },
+    "findings": "A normal PA chest radiograph: clear lungs with vessels reaching the periphery, normal heart size, normal mediastinum and hila, sharp costophrenic angles, and no pneumothorax or effusion.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.85,
+     "sees": "A normal PA chest radiograph: clear lungs with vessels reaching the periphery, normal heart size, normal mediastinum and hila, sharp costophrenic angles, and no pneumothorax or effusion."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T20:35:37Z",
   "by": "publish-amsa-draft.mjs"

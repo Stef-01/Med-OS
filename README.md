@@ -123,6 +123,7 @@ node scripts/fetch-imaging.mjs --staged <stage> amsa-187 amsa-188 …           
 
 - **ECGs.** These come from PTB-XL: 21,799 clinical 12-lead ECGs, each read by a cardiologist, CC BY 4.0. The monitor strips come from the CU Ventricular Tachyarrhythmia Database (ODC-BY). Both are downloaded from PhysioNet's open bucket. `scripts/imaging/ecg.mjs` draws each recording sample for sample, the way a machine prints it: 25 mm/s, 10 mm/mV, a 1 mm grid and a calibration pulse. The 12 leads sit in the standard 3 by 4 layout, with lead II as a 10 s rhythm strip.
 - **Choosing a record.** Records are shortlisted by PTB-XL's diagnostic statements and its 12SL measurements (rate, PR, QRS, axis, and the J-point ST level in every lead) against the station's own report.
+- **Chest radiographs.** Normal films come from InRad (University of São Paulo, CC BY 4.0) and hyperinflated ones from LIDC-IDRI (TCIA, CC BY 3.0); both are windowed for display and resized, nothing else. Pneumonias are Radiopaedia and Eurorad cases from the COVID-19 image data collection (CC BY-NC-SA). `scripts/imaging/stage-files.mjs` stages a prepared file with its credit.
 - **The review.** Every shortlisted image is then looked at. `<stage>/verdicts.json` holds one verdict per candidate, in `verify.mjs`'s schema plus `findings`, written by Claude with the image in front of it (`verified.model` says so). A candidate without a verdict is never accepted, and `acceptVerdict` applies the same rules as for a web image.
 
 ## Checks

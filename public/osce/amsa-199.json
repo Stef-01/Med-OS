@@ -684,7 +684,31 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-199/cxr-normal-adult-female.jpg",
+    "alt": "Frontal chest radiograph of an adult with clear lung fields and a normal cardiac and mediastinal outline.",
+    "w": 1340,
+    "h": 1400,
+    "caption": "PA erect chest X-ray of a 34-year-old woman with pleuritic central chest pain.",
+    "req": "cxr-normal-adult-female",
+    "credit": {
+     "author": "InRad, Hospital das Clínicas, University of São Paulo",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://inlab-opendata-covid-anonymized-images.s3.us-west-2.amazonaws.com/chest_xr/images/0dbf3a9a2dad61bf7b8ade4f9a37f98e.png",
+     "via": "InRad COVID-19 X-ray and CT (AWS Open Data)"
+    },
+    "findings": "A normal PA chest radiograph: clear lungs with vessels reaching the periphery, normal heart size, normal mediastinum and hila, sharp costophrenic angles, and no pneumothorax or effusion. Breast shadows overlie both lower zones.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.85,
+     "sees": "A normal PA chest radiograph: clear lungs with vessels reaching the periphery, normal heart size, normal mediastinum and hila, sharp costophrenic angles, and no pneumothorax or effusion. Breast shadows overlie both lower zones."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T11:05:06Z",
   "by": "publish-amsa-draft.mjs"

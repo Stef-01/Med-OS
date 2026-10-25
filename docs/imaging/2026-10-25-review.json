@@ -1,7 +1,7 @@
 {
  "reviewed": "2026-10-25",
  "by": "claude (session review)",
- "note": "every staged candidate and the verdict it got; the accepted ones are on their stations",
+ "note": "every staged candidate (ECGs, chest radiographs) and the verdict it got; the accepted ones are on their stations",
  "candidates": [
   {
    "key": "amsa-187/ecg-inferior-stemi/ptb-xl-15059.png",
@@ -1432,6 +1432,138 @@
    "quality": "good",
    "sees": "Coarse ventricular fibrillation: chaotic, irregular deflections of varying amplitude and shape with no identifiable P waves, QRS complexes or T waves.",
    "reason": "matches the request"
+  },
+  {
+   "key": "amsa-199/cxr-normal-adult-female/inrad-0dbf3a9a.jpg",
+   "source": "inrad",
+   "title": "InRad 0dbf3a9a (healthy)",
+   "page": "https://inlab-opendata-covid-anonymized-images.s3.us-west-2.amazonaws.com/chest_xr/images/0dbf3a9a2dad61bf7b8ade4f9a37f98e.png",
+   "license": "CC BY 4.0",
+   "accepted": true,
+   "quality": "good",
+   "sees": "A normal PA chest radiograph: clear lungs with vessels reaching the periphery, normal heart size, normal mediastinum and hila, sharp costophrenic angles, and no pneumothorax or effusion. Breast shadows overlie both lower zones.",
+   "reason": "matches the request"
+  },
+  {
+   "key": "amsa-257/cxr-normal-sam/inrad-b19ba3dc.jpg",
+   "source": "inrad",
+   "title": "InRad b19ba3dc (healthy)",
+   "page": "https://inlab-opendata-covid-anonymized-images.s3.us-west-2.amazonaws.com/chest_xr/images/b19ba3dc78937f01b0e99e98327c2bb3.png",
+   "license": "CC BY 4.0",
+   "accepted": true,
+   "quality": "good",
+   "sees": "A normal PA chest radiograph: clear lungs with vessels reaching the periphery, normal heart size, normal mediastinum and hila, sharp costophrenic angles, and no pneumothorax or effusion.",
+   "reason": "matches the request"
+  },
+  {
+   "key": "amsa-308/cxr1/inrad-16eea377.jpg",
+   "source": "inrad",
+   "title": "InRad 16eea377 (healthy)",
+   "page": "https://inlab-opendata-covid-anonymized-images.s3.us-west-2.amazonaws.com/chest_xr/images/16eea377085aa61851307d84697136d8.png",
+   "license": "CC BY 4.0",
+   "accepted": true,
+   "quality": "good",
+   "sees": "A normal PA chest radiograph: clear lungs with vessels reaching the periphery, normal heart size, normal mediastinum and hila, sharp costophrenic angles, and no pneumothorax or effusion.",
+   "reason": "matches the request"
+  },
+  {
+   "key": "amsa-636/cxr-erect-no-free-gas/inrad-13887971.jpg",
+   "source": "inrad",
+   "title": "InRad 13887971 (healthy)",
+   "page": "https://inlab-opendata-covid-anonymized-images.s3.us-west-2.amazonaws.com/chest_xr/images/13887971930c2594ef646fe2cfc66c8c.png",
+   "license": "CC BY 4.0",
+   "accepted": true,
+   "quality": "good",
+   "sees": "An erect PA chest radiograph with both hemidiaphragms fully in view: no free gas under either hemidiaphragm, a normal gastric bubble under the left, clear lungs, normal heart and mediastinum.",
+   "reason": "matches the request"
+  },
+  {
+   "key": "amsa-203/cxr-lll-pneumonia/cc-4e74cbafeab0bfd317a93e1aace6cf_jumbo.jpg",
+   "source": "radiopaedia",
+   "title": "Left lower lobe pneumonia (Radiopaedia 34855)",
+   "page": "https://radiopaedia.org/cases/left-lower-lobe-pneumonia-2",
+   "license": "CC BY-NC-SA 3.0",
+   "accepted": true,
+   "quality": "good",
+   "sees": "Left lower lobe consolidation: increased density behind the heart with loss of the medial left hemidiaphragm outline, while the left heart border stays clear; normal heart size.",
+   "reason": "matches the request"
+  },
+  {
+   "key": "amsa-204/cxr-rul-opacification/cc-right-upper-lobe-pneumonia-9-PA.jpg",
+   "source": "radiopaedia",
+   "title": "Right upper lobe pneumonia (Radiopaedia 60944)",
+   "page": "https://radiopaedia.org/cases/right-upper-lobe-pneumonia-9",
+   "license": "CC BY-NC-SA 3.0",
+   "accepted": true,
+   "quality": "good",
+   "sees": "Patchy airspace opacification in the right upper zone, bounded below by the horizontal fissure (right upper lobe), with no cavity; the left lung is clear and there is no effusion.",
+   "reason": "matches the request"
+  },
+  {
+   "key": "amsa-418/cxr-rll-consolidation/cc-pneumonia-7.jpg",
+   "source": "radiopaedia",
+   "title": "Pneumonia (Radiopaedia 11009)",
+   "page": "https://radiopaedia.org/cases/pneumonia-7",
+   "license": "CC BY-NC-SA 3.0",
+   "accepted": false,
+   "quality": "good",
+   "sees": "Extensive right mid and lower zone consolidation with air bronchograms obscuring the right hemidiaphragm and the right heart border, and left perihilar haze.",
+   "reason": "the right heart border is lost (middle lobe too) and the left lung is involved; the station reports a lower lobe pneumonia with the heart border preserved"
+  },
+  {
+   "key": "amsa-418/cxr-rll-consolidation/cc-000001-18.jpg",
+   "source": "eurorad",
+   "title": "Eurorad case 4210",
+   "page": "https://www.eurorad.org/case/4210",
+   "license": "CC BY-NC-SA 4.0",
+   "accepted": false,
+   "quality": "fair",
+   "sees": "Right lower zone consolidation with air bronchograms and a lucency suggesting a cavity; small, low-resolution film.",
+   "reason": "a cavity, which the station says is absent; low resolution"
+  },
+  {
+   "key": "amsa-374/cxr-copd-hyperinflation/lidc-0023-85c82601.jpg",
+   "source": "lidc-idri",
+   "title": "LIDC-IDRI-0023 chest radiograph",
+   "page": "https://doi.org/10.7937/K9/TCIA.2015.LO9QL9SX",
+   "license": "CC BY 3.0",
+   "accepted": true,
+   "quality": "good",
+   "sees": "Hyperinflated lungs: large lung volumes with flattened hemidiaphragms low on the chest; clear lung fields, no pneumothorax, normal heart size and mediastinum.",
+   "reason": "matches the request"
+  },
+  {
+   "key": "amsa-376/cxr-copd-hyperinflation/lidc-0002-2b89d580.jpg",
+   "source": "lidc-idri",
+   "title": "LIDC-IDRI-0002 chest radiograph",
+   "page": "https://doi.org/10.7937/K9/TCIA.2015.LO9QL9SX",
+   "license": "CC BY 3.0",
+   "accepted": true,
+   "quality": "good",
+   "sees": "Hyperinflated lungs with flattened hemidiaphragms and a narrow vertical heart; no consolidation, effusion or pneumothorax.",
+   "reason": "matches the request"
+  },
+  {
+   "key": "amsa-414/cxr-copd-hyperinflation/lidc-0009-5cc99975.jpg",
+   "source": "lidc-idri",
+   "title": "LIDC-IDRI-0009 chest radiograph",
+   "page": "https://doi.org/10.7937/K9/TCIA.2015.LO9QL9SX",
+   "license": "CC BY 3.0",
+   "accepted": true,
+   "quality": "good",
+   "sees": "Hyperinflated lungs: long lung fields with low, flattened hemidiaphragms and a narrow vertical heart; no consolidation, pneumothorax, effusion or mass.",
+   "reason": "matches the request"
+  },
+  {
+   "key": "amsa-416/cxr-copd-hyperinflation/lidc-0048-f2084b6b.jpg",
+   "source": "lidc-idri",
+   "title": "LIDC-IDRI-0048 chest radiograph",
+   "page": "https://doi.org/10.7937/K9/TCIA.2015.LO9QL9SX",
+   "license": "CC BY 3.0",
+   "accepted": false,
+   "quality": "good",
+   "sees": "Hyperinflated lungs with flattened hemidiaphragms and a rounded opacity in the left mid zone.",
+   "reason": "a left mid-zone nodule; the station says no mass"
   }
  ]
 }
