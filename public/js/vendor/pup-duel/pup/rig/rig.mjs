@@ -105,7 +105,9 @@ function makeDog(c, slot, P) {
    'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearNeck', 'wearBack', 'earsOver', 'armClip', 'armEars', 'armEarL', 'armEarR', 'ruff', 'ruffClip',
    'tailIn', 'tailDots'].forEach(function (k) { e[k] = q(k); });
   e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
-  e.eyeL = e.pupilL.parentNode; e.eyeR = e.pupilR.parentNode;   // each eye's clip: its pupil and its heart
+  // the eye as a whole: the whites, each eye's clip (its pupil and its heart), the lids and the cheeks that squint into
+  // it, the strokes of a closed eye; all left out under solid lenses (below)
+  e.eyeParts = [e.white, e.pupilL.parentNode, e.pupilR.parentNode, e.lidL.parentNode, e.lidR.parentNode, e.shutL, e.shutR];
   var g = c.geo, m = c.mirror ? -1 : 1, F = hatFit(c), span = reach(c);
   var rig = {
     cfg: c, slot: slot, exprId: c.expr, E: EXPR[c.expr], Pv: EXPR[c.expr], swStart: -1e12,
@@ -407,7 +409,7 @@ function makeDog(c, slot, P) {
     if (e.wearFace) set(e.wearFace, 'transform', tr(0, rig.hatY * 0.25 + push) + (kF !== 1 ? ' ' + scl(kF, 1, -30) : ''));
     // under solid lenses the eyes are not drawn once the pair has settled (stage.mjs wear: rig.shade)
     var eyesOut = faceOn && rig.shade && kF === 1 ? 'none' : 'inline';
-    set(e.white, 'display', eyesOut); set(e.eyeL, 'display', eyesOut); set(e.eyeR, 'display', eyesOut);
+    e.eyeParts.forEach(function (el) { set(el, 'display', eyesOut); });
     // the head's outline seen from inside the glasses (the inverse of the face's yaw, this dog's eye scale, a mirror
     // and the push above), so the arms clip to where the head is now, not where it was drawn
     if (faceOn && e.armClip) set(e.armClip, 'transform', (kF !== 1 ? scl(r3(1 / kF), 1, -30) + ' ' : '') + tr(0, -(rig.hatY * 0.25 + push)) + (c.mirror ? ' matrix(-1 0 0 1 2 0)' : '') +
