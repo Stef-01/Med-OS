@@ -6,13 +6,18 @@
   "description": "OSCE practice for two medical students: timed stations, full marking checklists, AI marking and a station generator with verified imaging.",
   "scripts": {
     "start": "npx serve public",
-    "test": "node --test scripts/*.test.mjs && node scripts/validate.mjs",
+    "test": "node --test scripts/*.test.mjs && node scripts/validate.mjs && node scripts/validate-mcq.mjs",
     "e2e": "node scripts/e2e/smoke.mjs",
     "index": "node scripts/build-index.mjs",
     "validate": "node scripts/validate.mjs --quality",
     "generate": "node scripts/generate-station.mjs",
     "imaging": "node scripts/fetch-imaging.mjs",
-    "duel-pack": "node scripts/build-duel-pack.mjs"
+    "duel-pack": "node scripts/build-duel-pack.mjs",
+    "mcq-pool": "node scripts/mcq-pool.mjs",
+    "mcq-judge": "node scripts/mcq-judge.mjs",
+    "mcq-submissions": "node scripts/mcq-submissions.mjs",
+    "generate-mcq": "node scripts/generate-mcq.mjs",
+    "mcq-evals": "node scripts/mcq-evals.mjs"
   },
   "engines": { "node": ">=20" },
   "devDependencies": {
