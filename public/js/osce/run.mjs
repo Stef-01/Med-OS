@@ -8,6 +8,7 @@ import { ROTATIONS, ORIGINS, FROM, osceFrom, osceOrigin, osceRunPool, osceShuffl
 import { ctx, I, GI, GI_C, save, sess, attempted, curAttempt, confirmDlg, openPop, ago, nameOf, initialOf, whoBadge } from './state.mjs';
 import { startAttempt } from './session.mjs';
 import { requestCardHtml } from './requests-view.mjs';
+import { mcqCardHtml } from './mcq-view.mjs';
 
 export function renderStart(main) {
   const s = sess(), n = s.queue.length, live = s.idx != null;
@@ -27,6 +28,7 @@ export function renderStart(main) {
         <span>Queue stations and run each one on the clock: one of you is the candidate, the other reads the patient and marks.</span></span>
       <span class="os-chev">${I.chevR}</span></button>
     ${requestCardHtml()}
+    ${mcqCardHtml()}
     ${doneHtml()}
     ${duelHtml()}
   </div>`;
@@ -41,7 +43,7 @@ function duelHtml() {
   const face = id => `<span><img src="./js/vendor/pup-duel/pup/rig/icons/${id}.png" alt="" width="40" height="40" decoding="async"></span>`;
   return `<button class="os-card os-duelcard os-in" data-os="duel" style="--d:3">
       <span class="os-duelfaces" aria-hidden="true">${face('mochi')}${face('duke')}</span>
-      <span class="os-bigtx"><strong>Duel a Mate <span class="os-beta">Beta</span></strong><span>Race a mate on the differentials</span></span>
+      <span class="os-bigtx"><strong>Duel a Mate <span class="os-beta">Beta</span></strong><span>Race a mate on the question pool</span></span>
       <span class="os-chev">${I.chevR}</span></button>`;
 }
 

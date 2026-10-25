@@ -26,6 +26,7 @@ import { ctx, I, $, load, save, sess, attempted, findAttempt, body, now, css, lo
 import { esc } from './core.mjs';
 import { attach as syncAttach, pull as syncPull, configureSync, wire as syncWire } from './study-kit/sync.mjs';   /* both of your devices, when config.js names a project */
 import { requestsDlg, requestForm, copyRequest, shareRequest, withdrawRequest, paintRequests } from './osce/requests-view.mjs';
+import { mcqDlg, mcqForm, importPaste, resend as mcqResend, exportMcqs, copyMcqs } from './osce/mcq-view.mjs';   /* Submit a question: the standard MCQ pool's way in (docs/mcq.md) */
 import { renderStart, toggleRot, runAll, runPop, runClear, runGo, onPerson, pickCand, toggleAlt } from './osce/run.mjs';
 import { renderGroup, browseReset, browseDlg, browseSheetOpen, paintQueue, clearQueue, removeQueued, queueFromButton, addRandom, toggleDetails, afterBookmark, discPick, filterPop, toggleSaved, resetFilters, timingDlg, saveTiming, previewDlg, previewTab, onSearch, onPointerDown } from './osce/browse.mjs';
 import { renderMarked, markedReset } from './osce/marked.mjs';
@@ -222,6 +223,12 @@ async function onClick(e) {
     case 'reqcopy': return copyRequest(b.dataset.id);
     case 'reqshare': return shareRequest(b.dataset.id);
     case 'reqdrop': return withdrawRequest(b.dataset.id);
+    case 'mcq': return mcqDlg();
+    case 'mcqnew': return mcqForm();
+    case 'mcqimport': return importPaste(b);
+    case 'mcqsend': return mcqResend(b.dataset.id);
+    case 'mcqexport': return exportMcqs();
+    case 'mcqcopy': return copyMcqs();
     case 'ssave': return saveSettings();
     case 'skeyclear': return clearKey();
     case 'sexport': return exportFile();

@@ -14,6 +14,8 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { execFile } from 'node:child_process';
 import { requestsFrom } from '../../public/js/osce/requests.mjs';
+import { submissionsFrom } from '../lib/mcq-intake.mjs';
+import { cleanItem } from '../../public/js/mcq/schema.mjs';
 import { createServer as duelServer } from '../../public/js/vendor/pup-duel/duel/server-core.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'public');
@@ -44,6 +46,20 @@ function supabase(req, res, url) {
     res.writeHead(201); res.end();
   });
 }
+/* and for mcq_submissions (supabase/migrations/0003_mcq.sql): GET every row, POST an insert (a repeated id is 409, as RLS
+   with a primary key gives; there is no update) */
+const MCQ = new Map();
+function mcqTable(req, res) {
+  if (req.method === 'GET') { res.writeHead(200, { 'Content-Type': 'application/json' }); return res.end(JSON.stringify([...MCQ.values()])); }
+  let body = '';
+  req.on('data', c => { body += c; });
+  req.on('end', () => {
+    const rows = [].concat(JSON.parse(body || '[]'));
+    if (rows.some(r => MCQ.has(r.id) || r.item?.id !== r.id || r.item?.provenance?.kind !== 'user')) { res.writeHead(409); return res.end(); }
+    for (const r of rows) MCQ.set(r.id, { ...r, created_at: new Date().toISOString() });
+    res.writeHead(201); res.end();
+  });
+}
 /* and for the duel's functions (supabase/migrations/0002_pup_duel.sql), the vendored package's own copy of their rules */
 const DUEL = duelServer();
 function duelRpc(req, res, fn) {
@@ -67,6 +83,7 @@ const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://x');
   for (const [k, v] of Object.entries(prodHeaders(url.pathname))) res.setHeader(k, v);
   if (url.pathname === '/sb/rest/v1/osce_state') return supabase(req, res, url);
+  if (url.pathname === '/sb/rest/v1/mcq_submissions') return mcqTable(req, res);
   const rpc = /^\/sb\/rest\/v1\/rpc\/(pup_[a-z]+)$/.exec(url.pathname);
   if (rpc) return duelRpc(req, res, rpc[1]);
   const u = decodeURIComponent(url.pathname);
@@ -79,6 +96,7 @@ await new Promise(r => server.listen(0, r));
 const BASE = `http://localhost:${server.address().port}/`;
 
 const fails = [];
+const PACK = JSON.parse(fs.readFileSync(path.join(ROOT, 'duel', 'pack.json'), 'utf8'));
 const ok = (cond, msg) => { if (!cond) fails.push(msg); console.log(`${cond ? 'ok  ' : 'FAIL'} ${msg}`); };
 
 const REPLY = id => JSON.stringify({ items: [{ id, done: true, quote: 'I am washing my hands' }], global: 2, feedback: 'Clear introduction. Keep going.',
@@ -399,6 +417,44 @@ async function runIn(width, height, label) {
   await pg.waitForSelector('.os-start [data-os="requests"]');
   ok(/1 waiting/.test(await pg.textContent('.os-start [data-os="requests"]')), `${label}: the start view counts the request as waiting`);
 
+  /* Submit a question with no shared database: the checks run as you type, a flaw is named before submit, the key is
+     marked, the question is kept on the phone and Export gives the file the pool's intake reads; paste reads CSV */
+  await click('.os-start [data-os="mcq"]');
+  await pg.waitForSelector('.os-mcqf');
+  ok(await pg.locator('.os-mcqf .os-reqsend').isDisabled(), `${label}: an empty question cannot be submitted`);
+  await pg.fill('.os-mcqf [name="stem"]', 'A 64-year-old man comes to the emergency department because of crushing central chest pain for 2 hours. He smokes. His pulse is 96/min and blood pressure is 150/90 mm Hg. Examination shows diaphoresis. An ECG shows 3 mm ST elevation in leads II, III and aVF.');
+  await pg.fill('.os-mcqf [name="ask"]', 'Each of the following is appropriate EXCEPT which?');
+  for (const [i, o] of ['Primary percutaneous coronary intervention', 'Exercise electrocardiographic stress testing', 'Outpatient transthoracic echocardiography', 'Oral proton pump inhibitor therapy trial'].entries()) await pg.fill(`.os-mcqf [name="opt${i}"]`, o);
+  await pg.waitForSelector('.os-mcqchecks [data-check="schema"]');
+  ok(/mark one option/.test(await pg.textContent('.os-mcqchecks')) && await pg.locator('.os-mcqf .os-reqsend').isDisabled(), `${label}: with no key marked the checks say so and Submit waits`);
+  await pg.locator('.os-mcqf .os-mcqkey').first().click();
+  await pg.waitForSelector('.os-mcqchecks [data-check="negative-stem"]');
+  ok(await pg.locator('.os-mcqchecks [data-check="negative-stem"] .os-mcqsev').textContent() === 'Fix', `${label}: the negative lead-in is named before submit, live`);
+  await pg.fill('.os-mcqf [name="ask"]', 'Which of the following is the most appropriate next step in management?');
+  await pg.fill('.os-mcqf [name="explanation"]', 'Inferior STEMI within 12 hours of onset needs reperfusion; primary PCI is preferred where it is available in time.');
+  await pg.selectOption('.os-mcqf [name="topic"]', 'Cardiology');
+  await pg.waitForSelector('.os-mcqchecks .os-mcqok');
+  ok(await pg.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.os-mcqf *')].every(e => e.getBoundingClientRect().right <= innerWidth + 1)), `${label}: the question form fits the screen`);
+  await shot('mcq-form');
+  await click('.os-mcqf .os-reqsend');
+  await pg.waitForSelector('.os-mcqs .os-mcqrow');
+  ok(/Not sent/.test(await pg.textContent('.os-mcqrow .os-reqst')), `${label}: with no shared database the question is kept on the phone, marked not sent`);
+  await click('.os-mcqs [data-os="mcqcopy"]');
+  const exported = submissionsFrom(await pg.evaluate(() => navigator.clipboard.readText()));
+  ok(exported.length === 1 && exported[0].provenance.kind === 'user' && exported[0].answer === 0 && !!cleanItem(exported[0]) && exported[0].provenance.submittedBy, `${label}: the export is the user's question, with its key and who sent it, as the intake reads it`);
+  await click('[data-os="mcqnew"]');
+  await pg.waitForSelector('.os-mcqf');
+  await pg.locator('.os-mcqpaste summary').click();
+  const csv = 'stem,a,b,c,d,e,answer,explanation\n"A 5-year-old girl is brought to the clinic with a limp for 3 days. Her temperature is 38.9°C. Examination shows a hot, swollen right knee. What is the most likely diagnosis?",Septic arthritis,Transient synovitis,Perthes disease,Juvenile idiopathic arthritis,,A,Fever and a hot joint\n"A 70-year-old woman comes to the clinic with a 2-week history of headache and jaw pain. Examination shows a tender temporal artery. What is the most appropriate next step?",High-dose prednisolone,Temporal artery biopsy only,Paracetamol,MRI brain,All of the above,A,Treat first';
+  await pg.fill('.os-mcqf [name="paste"]', csv);
+  await click('.os-mcqf [data-os="mcqimport"]');
+  ok(/2 questions read/.test(await pg.textContent('.os-mcqfound')) && /Question 2: Option E is "All of the above"/.test(await pg.textContent('.os-mcqchecks')), `${label}: a pasted CSV of two questions is read and each is checked (all of the above is named)`);
+  await shot('mcq-paste');
+  await pg.keyboard.press('Escape');
+  await pg.keyboard.press('Escape');
+  await pg.waitForSelector('.os-start [data-os="mcq"]');
+  ok(/1 submitted/.test(await pg.textContent('.os-start [data-os="mcq"]')), `${label}: the start view counts the submitted question`);
+
   /* settings */
   await pg.waitForSelector('[data-os="settings"]');
   await click('[data-os="settings"]');
@@ -503,6 +559,26 @@ async function sync() {
   ok(/Ready/.test(await dpg.textContent('.os-reqrow .os-reqst')), 'sync: the request reads Ready once the bank holds its station');
   await dpg.click('.os-reqrow [data-os="preview"]'); await dpg.waitForSelector('.os-pv');
   ok(await dpg.locator(`[role="dialog"][aria-label="${made.title.replace(/"/g, '\\"')}"] .os-pv`).count() === 1, 'sync: Open station opens the station made from it');
+  /* a question through the shared table: submitted on a phone, inserted (never updated), pulled by the pool's intake (the
+     real script, against this stand-in, into a temp file), and its status from the pool build shown to the submitter */
+  await dpg.keyboard.press('Escape'); await dpg.keyboard.press('Escape'); await dpg.waitForSelector('.os-start [data-os="mcq"]');
+  await dpg.click('.os-start [data-os="mcq"]'); await dpg.waitForSelector('.os-mcqf');
+  await dpg.fill('.os-mcqf [name="stem"]', 'A 25-year-old woman comes to the emergency department because of wheeze and breathlessness for 6 hours. Her respiratory rate is 30/min, pulse 120/min and SpO2 91% on room air. Examination shows widespread wheeze.');
+  await dpg.fill('.os-mcqf [name="ask"]', 'Which of the following is the most appropriate initial treatment?');
+  for (const [i, o] of ['Inhaled salbutamol via spacer', 'Intravenous magnesium sulfate', 'Oral montelukast tablets', 'Intramuscular adrenaline injection'].entries()) await dpg.fill(`.os-mcqf [name="opt${i}"]`, o);
+  await dpg.locator('.os-mcqf .os-mcqkey').first().click();
+  await dpg.click('.os-mcqf .os-reqsend'); await dpg.waitForSelector('.os-mcqs .os-mcqrow');
+  const sentRow = [...MCQ.values()][0];
+  ok(MCQ.size === 1 && sentRow.item.provenance.kind === 'user' && sentRow.submitted_by === 'Alex' && /Waiting for review/.test(await dpg.textContent('.os-mcqrow .os-reqst')), 'sync: the question is inserted into mcq_submissions as the user\'s, and reads Waiting for review');
+  const tmpSubs = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'mcq-e2e-')), 'submissions.json');
+  const intake = await new Promise(res => execFile(process.execPath, [path.join(ROOT, '..', 'scripts', 'mcq-submissions.mjs'), '--out', tmpSubs],
+    { env: { ...process.env, OSCE_SUPABASE_URL: `${BASE}sb`, OSCE_SUPABASE_KEY: 'anon' } }, (e, out, err) => res({ e, out: `${out}${err}` })));
+  const pulled = JSON.parse(fs.readFileSync(tmpSubs, 'utf8')).items;
+  ok(!intake.e && pulled.length === 1 && pulled[0].id === sentRow.id && JSON.stringify(pulled[0]) === JSON.stringify(sentRow.item), `sync: the intake pulls it exactly as submitted${intake.e ? `: ${intake.out}` : ''}`);
+  const epg = await device(ctx => ctx.route(/\/mcq\/status\.json$/, r => r.fulfill({ contentType: 'application/json', body: JSON.stringify({ submissions: { [sentRow.id]: { status: 'rejected', reasons: ['an independent solver reached another answer both times'] } } }) })));
+  await epg.evaluate(rows => localStorage.setItem('osce.mcq.v1', JSON.stringify({ items: { [rows.id]: { item: rows.item, at: Date.now(), sent: true } } })), sentRow);
+  await epg.click('.os-start [data-os="mcq"]'); await epg.waitForSelector('.os-mcqs .os-mcqrow .os-mcqwhy');
+  ok(/Not taken/.test(await epg.textContent('.os-mcqrow .os-reqst')) && /another answer both times/.test(await epg.textContent('.os-mcqrow .os-mcqwhy')), 'sync: after the pool build the submitter sees Not taken, with the reason');
   ok(!errs.length, `sync: no page errors${errs.length ? `: ${errs.join(' | ')}` : ''}`);
   await b.close();
 }
@@ -556,7 +632,9 @@ async function duel() {
     if (r === 0) {
       const dogs = await a.evaluate(() => [...document.querySelectorAll('.os-duel .pd-dog iframe')].map(f => { try { return !!f.contentWindow.__dob; } catch { return false; } }));
       ok(dogs.length === 2 && dogs.every(Boolean), `duel: both dogs draw (the rig may be framed by its own site: ${dogs})`);
-      await a.screenshot({ path: path.join(SHOTS, 'duel-question.png') }); ok(/AI-written/.test(await a.textContent('.os-duel .pd-qtag')), 'duel: the question carries the AI tag'); ok(/most likely diagnosis/.test(await a.textContent('.os-duel .pd-stem')), 'duel: the question is a station\'s differential'); }
+      await a.screenshot({ path: path.join(SHOTS, 'duel-question.png') }); const stem = await a.textContent('.os-duel .pd-stem'), inPack = PACK.questions.find(q => q.stem === stem), tag = await a.locator('.os-duel .pd-qtag').isVisible() ? await a.textContent('.os-duel .pd-qtag') : '';
+      ok(!!inPack, 'duel: the question comes from the pool\'s pack, its stem whole');
+      ok(inPack && (inPack.origin === 'ai') === /AI-written/.test(tag), `duel: the AI-written tag shows exactly when the question is AI-written (${inPack?.source})`); }
     await a.locator('.os-duel .pd-opt').nth(0).click();
     await timed(`round ${r + 1}: Sam's answer shows on Alex's phone`, () => c.waitForSelector('.os-duel .pd-theirs .pd-status >> text=Answered', { timeout: 6000 }));
     await c.locator('.os-duel .pd-opt').nth(1).click();

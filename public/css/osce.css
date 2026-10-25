@@ -900,6 +900,31 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-reqacts:not(:has(*)) { display:none; }
 .os-reqacts .os-link { min-height:44px; display:inline-flex; align-items:center; }
 @media (max-width:420px) { .os-reqs { padding-inline:16px; } .os-reqf { padding-inline:16px; } }
+/* Submit a question (osce/mcq-view.mjs): the options with their key radio, the live item-writing checks, your questions */
+.os-mcqopts { display:flex; flex-direction:column; gap:8px; }
+.os-mcqopt { display:flex; align-items:center; gap:8px; min-width:0; }
+.os-mcqopt > input { flex:1; min-width:0; height:var(--em-ctl); padding:0 12px; border:1px solid var(--stroke); border-radius:10px; background:var(--solid); color:var(--ink); font:inherit; font-size:16px; outline:0; }
+.os-mcqopt > input:focus { border-color:var(--pri); }
+.os-mcqkey { flex:none; position:relative; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--fill); color:var(--mute); font-weight:700; cursor:pointer; }
+.os-mcqkey input { position:absolute; inset:0; opacity:0; margin:0; cursor:pointer; }
+.os-mcqkey:has(input:checked) { background:var(--ok-soft); color:var(--ok-ink); box-shadow:inset 0 0 0 2px var(--ok-ink); }
+.os-mcqkey:has(input:focus-visible) { outline:2px solid var(--pri); outline-offset:2px; }
+.os-mcqpaste summary { cursor:pointer; min-height:44px; display:flex; align-items:center; font-size:14px; font-weight:600; color:var(--pri); }
+.os-mcqpaste[open] { display:flex; flex-direction:column; gap:10px; }
+.os-mcqpaste .os-btn { align-self:flex-start; }
+.os-mcqpaste textarea { font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:14px; }
+.os-mcqchecks { display:flex; flex-direction:column; gap:8px; padding:12px 14px; border-radius:14px; background:var(--card2); min-width:0; }
+.os-mcqchecks h3 { font-size:14px; font-weight:700; }
+.os-mcqlist, .os-mcqwhy { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.os-mcqlist li { display:flex; align-items:flex-start; gap:8px; font-size:13.5px; line-height:1.45; overflow-wrap:anywhere; min-width:0; }
+.os-mcqsev { flex:none; padding:2px 8px; border-radius:99px; font-size:11.5px; font-weight:700; white-space:nowrap; background:var(--fill); color:var(--mute); }
+.os-mcqsev--danger { background:var(--danger-soft); color:var(--danger); }
+.os-mcqsev--warn { background:var(--pend-soft); color:var(--em-pend-ink); }
+.os-mcqok { display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--ok-ink); }
+.os-mcqok svg { width:20px; height:20px; flex:none; }
+.os-mcqwhy li { font-size:13px; line-height:1.45; color:var(--mute); padding-left:12px; border-left:2px solid var(--danger-soft); overflow-wrap:anywhere; }
+.os-mcqrow .os-reqtop strong { font-weight:500; font-size:14px; }
+.os-reqsend:disabled { opacity:.5; cursor:not-allowed; }
 
 /* ---------- Candidate screen: the link dialog, and the read-only page on the candidate's phone ---------- */
 .os-cand { display:flex; flex-direction:column; gap:12px; padding:20px 22px calc(22px + var(--sb)); font-size:14.5px; line-height:1.5; }
