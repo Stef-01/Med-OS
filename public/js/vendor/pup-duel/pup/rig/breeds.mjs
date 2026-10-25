@@ -91,6 +91,80 @@ export const BREEDS = {
       ears: ['up', 'up'], earShape: 'prick', earScale: 0.86, body: { w: 104, h: 78 }, leg: 13, floorY: 78,
       tail: { len: [15, 14, 12], w: 22, curl: 65, inner: 10, over: true }, bib: 'chest',
       wag: { slow: 16, fast: 30, amp: 28 }, hopH: 11, flopGain: 1, yaw0: -0.3, tongueSide: 0 }
+  },
+  // Beagle: a tricolour hound: a tan head with a white blaze and muzzle, long low-set ears, a black saddle on a white
+  // body, the tail carried high with a white tip (its one spot: a dotted line's second dot, 2.2 × dots along it, falls
+  // at its end; `at` roots it a dot's radius inside the body, which hides the first)
+  beagle: {
+    name: 'Beagle',
+    build: { head: { h: 100, r: 30 }, muzzle: { w: 54, h: 46 }, eye: 1.06, pupil: 1.04, brow: { w: 10, h: 5, y: -52.5 },
+      ears: ['flop', 'flop'], flop: { w: 28, h: 58, shape: 'long' }, earAt: { flop: { L: { x: -40, y: -42 }, R: { x: 42, y: -42 } } },
+      body: { w: 126, h: 76 }, leg: 14, floorY: 80, tail: { len: [12, 11, 10], w: 11, rest: 26, curl: -4, dots: 14.2, at: [19.7, -7.3] },
+      wag: { slow: 18, fast: 36, amp: 40 }, hopH: 12, flopGain: 2.6, yaw0: 0.3, tongueSide: 0 }
+  },
+  // French Bulldog: a square head with a short, wide, flat face, broad bat ears, a compact body on short legs, a stub tail
+  frenchie: {
+    name: 'French Bulldog', short: 'Frenchie',
+    build: { head: { h: 92, r: 26 }, muzzle: { w: 66, h: 32, r: 15 }, eye: 1.12, pupil: 1.04, brow: { w: 9, h: 4.5, y: -51.5 },
+      ears: ['up', 'up'], earShape: 'frenchie', earScale: 0.92, earAt: { up: { L: { x: -32, y: -46 }, R: { x: 34, y: -46 } } },
+      body: { w: 100, h: 78 }, leg: 15, floorY: 70, tail: { len: [6, 5, 4], w: 12, rest: 10 },
+      wag: { slow: 22, fast: 40, amp: 36 }, hopH: 10, flopGain: 1.2, yaw0: -0.3, tongueSide: 1 }
+  },
+  // Border Collie: black and white (a white blaze, muzzle and collar), semi-erect ears whose tips fold over, a long low
+  // tail that sweeps up at its end
+  collie: {
+    name: 'Border Collie',
+    build: { head: { h: 100, r: 30 }, muzzle: { w: 48, h: 44 }, eye: 1.04, pupil: 0.95, brow: { w: 10, h: 5, y: -53 },
+      ears: ['up', 'up'], earShape: 'prick', earScale: 1, foldable: true, foldIdle: { L: flat(1), R: flat(1) }, bib: 'chest',
+      body: { w: 112, h: 76 }, leg: 13, floorY: 80, tail: { len: [17, 16, 14], w: 12, rest: -62, curl: 14 },
+      wag: { slow: 14, fast: 30, amp: 30 }, hopH: 13, flopGain: 1.4, yaw0: 0.32, tongueSide: 1 }
+  },
+  // Labrador Retriever: one plain coat, a broad head and muzzle, soft drop ears, the otter tail: thick, straight, carried out
+  lab: {
+    name: 'Labrador Retriever', short: 'Labrador',
+    build: { head: { h: 104, r: 30 }, muzzle: { w: 58, h: 46 }, eye: 1.02, pupil: 1.05, brow: { w: 11, h: 5, y: -52.5 },
+      ears: ['flop', 'flop'], flop: { w: 27, h: 44 }, earAt: { flop: { L: { x: -41, y: -44 }, R: { x: 43, y: -44 } } },
+      body: { w: 116, h: 84 }, leg: 15, floorY: 84, tail: { len: [16, 15, 13], w: 17, rest: -20, curl: -9 },
+      wag: { slow: 16, fast: 34, amp: 42 }, hopH: 11, flopGain: 2.2, yaw0: 0.3, tongueSide: 0 }
+  },
+  // Samoyed: a white cloud: a ruff round the head, small prick ears, the smile (black lips turned up at the corners),
+  // a plume curled over the back
+  samoyed: {
+    name: 'Samoyed',
+    build: { head: { h: 98, r: 38 }, muzzle: { w: 50, h: 40 }, eye: 1.04, pupil: 1, brow: { w: 9, h: 4.5, y: -52 },
+      ears: ['up', 'up'], earShape: 'prick', earScale: 0.72, mane: { rx: 56, ry: 47, n: 16, sc: 15 }, bib: 'chest',
+      body: { w: 112, h: 86 }, leg: 15, floorY: 84, tail: { len: [16, 15, 13], w: 26, curl: 60, inner: 12, over: true },
+      wag: { slow: 14, fast: 28, amp: 32 }, hopH: 11, flopGain: 1, yaw0: 0.3, tongueSide: 0 }
+  },
+  // Chihuahua: a small domed apple head with huge eyes and a short snout, enormous ears, a tiny body on thin legs, a
+  // thin sickle tail
+  chihuahua: {
+    name: 'Chihuahua',
+    build: { head: { h: 90, r: 46 }, muzzle: { w: 40, h: 30 }, eye: 1.16, pupil: 1.06, brow: { w: 8, h: 4, y: -53.6 },
+      ears: ['up', 'up'], earShape: 'chi', earScale: 1.2, earAt: { up: { L: { x: -36, y: -41 }, R: { x: 38, y: -41 } } },
+      body: { w: 102, h: 60 }, leg: 10, floorY: 66, tail: { len: [11, 10, 9], w: 7, rest: 22, curl: 14 },
+      wag: { slow: 22, fast: 40, amp: 46 }, hopH: 15, flopGain: 1.5, yaw0: -0.3, tongueSide: 1 }
+  },
+  // Poodle, in a show clip: a topknot (a tall mane: its crown over the head, its fluff under the chin, its sides behind
+  // the ears), ears of curls, a shaved face and hindquarters on long legs, a rosette on the hip, pom-pom bracelets (its
+  // feet) and the pom-pom tail (its one spot, at the end)
+  poodle: {
+    name: 'Poodle',
+    build: { head: { h: 100, r: 30 }, muzzle: { w: 44, h: 46 }, eye: 1, pupil: 1, brow: { w: 9, h: 4.5, y: -52.5 },
+      ears: ['flop', 'flop'], flop: { w: 30, h: 56, shape: 'puff' }, earAt: { flop: { L: { x: -40, y: -44 }, R: { x: 42, y: -44 } } },
+      mane: { rx: 42, ry: 58, n: 14, sc: 15 }, body: { w: 120, h: 70 }, leg: 12, floorY: 86,
+      tail: { len: [10.5, 9.5, 9], w: 6, rest: 28, curl: -9, dots: 12.6, at: [18.2, -8.2] },
+      wag: { slow: 18, fast: 34, amp: 34 }, hopH: 13, flopGain: 2.4, yaw0: -0.3, tongueSide: 0 }
+  },
+  // Bernese Mountain Dog: big and fluffy, tricolour: a black coat, a white blaze, muzzle and chest, rust brows and
+  // cheeks, feathered drop ears, a bushy tail carried low that sweeps up at its end
+  bernese: {
+    name: 'Bernese Mountain Dog', short: 'Bernese',
+    build: { head: { h: 104, r: 32 }, muzzle: { w: 54, h: 44 }, eye: 1.02, pupil: 1, brow: { w: 11, h: 5.5, y: -52.5 },
+      ears: ['flop', 'flop'], flop: { w: 30, h: 40, shape: 'feather' }, earAt: { flop: { L: { x: -40, y: -46 }, R: { x: 42, y: -46 } } },
+      bib: 'chest', body: { w: 122, h: 88 }, leg: 16, floorY: 86,
+      tail: { len: [14, 13, 12], w: 18, rest: -70, curl: 16, inner: 8, at: [12.5, 14] },
+      wag: { slow: 12, fast: 26, amp: 30 }, hopH: 9, flopGain: 2.2, yaw0: 0.3, tongueSide: 0 }
   }
 };
 
@@ -191,7 +265,64 @@ export const DOGS = [
     ],
     pal: { coat: '#e3843a', sh: '#c96f2a', tan: '#fbebd3', tanSh: '#f0d8b6', feature: '#8a4512', ink: '#2b170a', nose: '#2b170a',
       noseHi: '#5e3a22', collar: '#1cb0f6', disc: '#fff0dc', floor: '#ffd9ae', urajiro: '#fbebd3', brow: '#fbebd3', earIn: '#fbebd3',
-      tail: '#d97a33', tailIn: '#fbebd3', bib: '#fbebd3', bibSh: '#efd6b2', foot: '#fbebd3', footFar: '#f0d8b6' } }
+      tail: '#d97a33', tailIn: '#fbebd3', bib: '#fbebd3', bibSh: '#efd6b2', foot: '#fbebd3', footFar: '#f0d8b6' } },
+  { id: 'bagel', name: 'Bagel', breed: 'beagle', hint: 'Follows its nose anywhere', expr: 'curious', scale: 1.36, mirror: false,
+    marks: [
+      { on: 'head', svg: '<rect x="-4" y="-64" width="10" height="26" rx="5" fill="{blaze}"/><ellipse cx="1" cy="44" rx="24" ry="15" fill="{blaze}"/>' },
+      { on: 'body', svg: g => `<ellipse cx="${g.bL + 18}" cy="28" rx="21" ry="23" fill="{coat}"/>` +
+          `<path d="M${g.bL - 4} -24 H${g.bR + 4} V16 C${g.bR - 44} 24 ${g.bL + 40} 24 ${g.bL + 18} 12 C${g.bL + 8} 6 ${g.bL - 4} -2 ${g.bL - 4} -24 Z" fill="{saddle}"/>` }
+    ],
+    pal: { coat: '#cf8a48', sh: '#b8743a', tan: '#fbf7f1', tanSh: '#ece4d8', feature: '#6e3c17', ink: '#2a1a10', nose: '#2a1d18',
+      noseHi: '#5a463c', collar: '#58cc02', disc: '#eaffd6', floor: '#c9f0a8', body: '#f6f1ea', blaze: '#fbf7f1', saddle: '#3a3236',
+      ear: '#a9622c', brow: '#e8ad6e', tail: '#c4803f', tailDots: '#ffffff', foot: '#ffffff', footFar: '#ece6dc' } },
+  { id: 'gaston', name: 'Gaston', breed: 'frenchie', hint: 'Struts like he owns Paris', expr: 'mog', scale: 1.3, mirror: true,
+    marks: [
+      { on: 'snout', svg: '<circle cx="-14" cy="4" r="15" fill="{muzzle}"/><circle cx="16" cy="4" r="15" fill="{muzzle}"/>' +
+          '<path d="M-13 -20 Q1 -25 15 -20" fill="none" stroke="{wrinkle}" stroke-width="2.4" stroke-linecap="round"/>' },
+      { on: 'body', svg: g => `<ellipse cx="${g.bR - 26}" cy="50" rx="18" ry="16" fill="{blaze}"/>` }
+    ],
+    pal: { coat: '#8b93a8', sh: '#77809a', tan: '#646c84', tanSh: '#59617a', feature: '#4a5166', ink: '#1f2433', nose: '#262a36',
+      noseHi: '#545a6c', collar: '#ff4b4b', disc: '#ffe3e4', floor: '#ffc4c8', earIn: '#f2b8c0', brow: '#a7aec1', blaze: '#f4f5f8',
+      wrinkle: '#6c748a', foot: '#9aa2b6', footFar: '#8a92a7' } },
+  { id: 'dash', name: 'Dash', breed: 'collie', hint: 'Herds anything that moves', expr: 'lockedin', scale: 1.4, mirror: false,
+    foldIdle: { L: flat(0), R: flat(1) },   // one ear that never folds
+    marks: [
+      { on: 'head', svg: '<path d="M-5 -60 H7 L9 -30 H-7 Z" fill="{blaze}"/><ellipse cx="1" cy="40" rx="27" ry="18" fill="{blaze}"/>' },
+      { on: 'body', svg: g => `<ellipse cx="${g.bR - 84}" cy="-6" rx="16" ry="34" fill="{blaze}"/>` }
+    ],
+    pal: { coat: '#48455a', sh: '#3a3849', tan: '#ffffff', tanSh: '#e4e6ee', feature: '#26242f', ink: '#2b2433', nose: '#1d1b25',
+      noseHi: '#4a4758', collar: '#1cb0f6', disc: '#ddf4ff', floor: '#bfe4f7', blaze: '#ffffff', bib: '#ffffff', bibSh: '#dfe2ea',
+      brow: '#5f5b72', earIn: '#d8b8c2', foot: '#ffffff', footFar: '#e4e6ee', tail: '#3e3c4f' } },
+  { id: 'fudge', name: 'Fudge', breed: 'lab', hint: 'Fetch first, questions later', expr: 'excited', scale: 1.42, mirror: true,
+    pal: { coat: '#7b5039', sh: '#69432f', tan: '#8f644c', tanSh: '#7d5640', feature: '#3e2619', ink: '#22140d', nose: '#2a1a14',
+      noseHi: '#5a4036', collar: '#ff9600', disc: '#fff0dc', floor: '#ffdcae', ear: '#62402f', brow: '#9a7059', tail: '#714a36',
+      foot: '#87604b', footFar: '#76523f' } },
+  { id: 'nimbus', name: 'Nimbus', breed: 'samoyed', hint: 'A cloud with a smile', expr: 'overjoyed', scale: 1.42, mirror: false,
+    marks: [
+      { on: 'snout', svg: '<path d="M-8.5 -7 Q-13 -6.5 -15.5 -10.5 M11.5 -7 Q16 -6.5 18.5 -10.5" fill="none" stroke="{lip}" stroke-width="2.4" stroke-linecap="round"/>' }
+    ],
+    pal: { coat: '#f6f8fb', sh: '#d5dbe6', tan: '#ffffff', tanSh: '#e7ebf2', feature: '#5d6577', ink: '#231f2a', nose: '#22212a',
+      noseHi: '#4c4a58', collar: '#ce82ff', disc: '#f3e6ff', floor: '#e2c9fb', mane: '#ffffff', maneSh: '#d9dfe9', bib: '#ffffff',
+      bibSh: '#e1e6ee', earIn: '#f6d3d8', brow: '#e3e7ef', tail: '#eef1f6', tailIn: '#ffffff', foot: '#ffffff', footFar: '#e9edf3', lip: '#3a3842' } },
+  { id: 'churro', name: 'Churro', breed: 'chihuahua', hint: 'All ears, no fear', expr: 'hyped', scale: 1.16, mirror: true,
+    pal: { coat: '#e3a868', sh: '#cd8f52', tan: '#fbe3c4', tanSh: '#f0cfa5', feature: '#8a5527', ink: '#24160c', nose: '#2b1a10',
+      noseHi: '#5a4030', collar: '#ff7eb6', disc: '#ffeef3', floor: '#ffd6e4', earIn: '#ffb9b0', brow: '#f6c98f', tail: '#d9995a',
+      foot: '#fbe3c4', footFar: '#f0cfa5' } },
+  { id: 'lulu', name: 'Lulu', breed: 'poodle', hint: 'Prances, never walks', expr: 'proud', scale: 1.38, mirror: true,
+    marks: [
+      { on: 'body', svg: g => `<circle cx="${g.bL + 22}" cy="16" r="16" fill="{maneSh}"/><circle cx="${g.bL + 22}" cy="13" r="14" fill="{mane}"/>` }
+    ],
+    pal: { coat: '#eea77f', sh: '#e39a72', tan: '#f3b791', tanSh: '#e8a47c', feature: '#9a5532', ink: '#2a1810', nose: '#2b1a12',
+      noseHi: '#5c3f30', collar: '#2ec4a6', disc: '#ddfaf3', floor: '#b8efe2', mane: '#f7c4a3', maneSh: '#e8956b', ear: '#f7c4a3',
+      brow: '#f7c4a3', tail: '#e39a72', tailDots: '#f7c4a3', foot: '#f7c4a3', footFar: '#eeb38f' } },
+  { id: 'heidi', name: 'Heidi', breed: 'bernese', hint: 'A gentle giant who leans in', expr: 'love', scale: 1.52, mirror: false,
+    marks: [
+      { on: 'head', svg: '<ellipse cx="-22" cy="12" rx="14" ry="12" fill="{rust}"/><ellipse cx="24" cy="12" rx="14" ry="12" fill="{rust}"/>' +
+          '<path d="M-4 -60 H6 L8 -38 H-6 Z" fill="{blaze}"/><ellipse cx="1" cy="42" rx="24" ry="14" fill="{blaze}"/>' }
+    ],
+    pal: { coat: '#4a4248', sh: '#3d363c', tan: '#fbf8f4', tanSh: '#ebe5de', feature: '#2a2328', ink: '#2a1d18', nose: '#1e181b',
+      noseHi: '#4d4448', collar: '#ff4b4b', disc: '#ffe3e4', floor: '#ffc4c8', brow: '#d27a3e', rust: '#c96a33', blaze: '#fbf8f4',
+      bib: '#fbf8f4', bibSh: '#e6dfd6', tail: '#3f383e', tailIn: '#564d54', foot: '#fbf8f4', footFar: '#ebe5de' } }
 ];
 
 /* one dog, everything the rig reads: the breed's build under the dog's own keys, and a palette with every role filled

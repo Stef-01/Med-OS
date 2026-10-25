@@ -70,7 +70,18 @@ var UP_EARS = {
   button: {
     base: function (o, i) { return '<path d="M-14 10 L-11 -24 L11 -24 L14 10 Z" fill="' + o + '"/><circle cx="0" cy="-24" r="11" fill="' + o + '"/>' +
       '<path d="M-7 6 L-5 -24 L5 -24 L7 6 Z" fill="' + i + '"/>'; },
-    out: 'M-11.4 2 L-2 -16 Q0 -19 2 -16 L11.4 2 Z', in: 'M-5.5 2 L-1 -9 Q0 -10.5 1 -9 L5.5 2 Z' }
+    out: 'M-11.4 2 L-2 -16 Q0 -19 2 -16 L11.4 2 Z', in: 'M-5.5 2 L-1 -9 Q0 -10.5 1 -9 L5.5 2 Z' },
+  // a French bulldog's bat ear: broad from the root, short, its top a wide round arch (its sides run on through the
+  // hinge without a bend)
+  frenchie: {
+    base: function (o, i) { return '<path d="M-23 10 L-21 -24 L21 -24 L23 10 Z" fill="' + o + '"/><path d="M-12 6 L-10.6 -24 L10.6 -24 L12 6 Z" fill="' + i + '"/>'; },
+    out: 'M-21.2 2 C-20.3 -13 -11 -29 0 -29 C11 -29 20.3 -13 21.2 2 Z',
+    in: 'M-10.7 2 C-10.2 -7 -6 -17 0 -17 C6 -17 10.2 -7 10.7 2 Z' },
+  // a Chihuahua's: a huge leaf on a broad root, its sides bowed, its point softened
+  chi: {
+    base: function (o, i) { return '<path d="M-21 10 L-14.5 -24 L14.5 -24 L21 10 Z" fill="' + o + '"/><path d="M-11 6 L-8 -24 L8 -24 L11 6 Z" fill="' + i + '"/>'; },
+    out: 'M-14.8 2 C-12 -12 -6 -28 -1.8 -34.5 Q0 -37 1.8 -34.5 C6 -28 12 -12 14.8 2 Z',
+    in: 'M-8.2 2 C-6.6 -9 -3.4 -19 -1.1 -23.5 Q0 -25 1.1 -23.5 C3.4 -19 6.6 -9 8.2 2 Z' }
 };
 /* a hanging ear (the 'flop' engine: EAR_FLOP, rig.mjs swings it), w wide and h long from 7 above its root: an outline
    path (for a clip, when markings sit on it) and the markup that draws it */
@@ -100,6 +111,13 @@ var FLOP_EARS = {
     var r = w / 2;
     var d = 'M' + (-r) + ' -5 Q0 -10 ' + r + ' -5 Q' + r + ' ' + r3(h * 0.6) + ' 0 ' + (h - 6) + ' Q' + (-r) + ' ' + r3(h * 0.6) + ' ' + (-r) + ' -5 Z';
     return { d: d, draw: function (f) { return '<path d="' + d + '" fill="' + f + '"/>'; } };
+  },
+  // a poodle's: a pendant of curls, puffs in pairs down from a small one at the root to a round one at the end
+  puff: function (w, h) {
+    var Q = [[0, -7 + w * 0.36, w * 0.36], [-w * 0.2, -7 + h * 0.4, w * 0.36], [w * 0.2, -7 + h * 0.4, w * 0.36],
+      [-w * 0.22, -7 + h * 0.62, w * 0.38], [w * 0.22, -7 + h * 0.62, w * 0.38], [0, h - 7 - w * 0.4, w * 0.4]];
+    var d = Q.map(function (q) { return ellPath(r3(q[0]), r3(q[1]), q[2], q[2]); }).join(' ');
+    return { d: d, draw: function (f) { return Q.map(function (q) { return '<circle cx="' + r3(q[0]) + '" cy="' + r3(q[1]) + '" r="' + r3(q[2]) + '" fill="' + f + '"/>'; }).join(''); } };
   }
 };
 /* a breed's markings (breeds.mjs `marks`): SVG with {role} for a palette colour (or a function of the build's geometry

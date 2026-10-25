@@ -29,7 +29,11 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
 
   const now = () => timers.now();
   const wall = () => (timers.wall ? timers.wall() : Date.now());
-  const sleep = ms => new Promise(res => timers.setTimeout(res, ms));
+  /* a retry's wait, cut short when the network is back (a poll that worked, the browser's online event): an answer
+     queued on a dropped connection goes as soon as it can, not at the end of its backoff */
+  const naps = new Set();
+  const nap = ms => new Promise(res => { const done = () => { timers.clearTimeout(t); naps.delete(done); res(); }, t = timers.setTimeout(done, ms); naps.add(done); });
+  const wake = () => { for (const f of [...naps]) f(); };
   const emit = () => { if (!stopped) try { onChange(view()); } catch { /* the screen's bug is the screen's */ } };
 
   function add(list, via) {
@@ -81,7 +85,7 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
            refusal can pass: a function list reloading, a rate limit), so the game never waits on it for ever */
         if (e.server) { pending.delete(id); refused.set(id, now()); emit(); return null; }
         emit();
-        await sleep(retry[Math.min(job.tries - 1, retry.length - 1)]);
+        await nap(retry[Math.min(job.tries - 1, retry.length - 1)]);
       }
     }
   }
@@ -98,6 +102,7 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
         for (let page = 0; page < 10; page++) {
           const res = await transport.log(me, d.id, cursor);
           net.polls++; net.lastOk = now(); net.error = '';
+          wake();
           if (res?.duel) d = { ...d, status: res.duel.status, result: res.duel.result };
           const got = res?.rows || [];
           if (!loaded) {   /* a reload: what already happened happened at the server's time, not now */
@@ -131,6 +136,7 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
   }
   const onLive = () => { net.pokes++; poke(); };
   const onVisible = () => { if (visible()) poll(); };
+  const onOnline = () => { wake(); poll(); };
 
   function view() {
     const s = stage(st, clock, now(), me.id), opp = other(st, me.id), R = s.round !== undefined ? st.rounds[s.round] : null;
@@ -151,6 +157,7 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
       started = true;
       if (transport.live) { try { chan = transport.live(`pup-duel-${d.id}`, onLive); } catch { chan = null; net.live = false; } }
       if (typeof document !== 'undefined') document.addEventListener('visibilitychange', onVisible);
+      if (typeof window !== 'undefined') window.addEventListener('online', onOnline);
       settle(); poll();
       return this;
     },
@@ -159,6 +166,8 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
       timers.clearTimeout(pollTimer); timers.clearTimeout(edgeTimer); timers.clearTimeout(pokeTimer);
       chan?.close(); chan = null;
       if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', onVisible);
+      if (typeof window !== 'undefined') window.removeEventListener('online', onOnline);
+      wake();
     },
     poll, view, get state() { return st; }, get firm() { return firm; }, seenAt: id => firstSeen.get(id), get rows() { return [...rows.values()].sort((a, b) => a.n - b.n); },
     /* my pick for the open question; false when there is nothing to answer (or my time is up: the blank is on its way) */

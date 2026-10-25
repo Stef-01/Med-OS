@@ -6,6 +6,7 @@
                                                  second copy of a row is the same row */
 
 import { rng, shuffle } from './rng.mjs';
+import { ProcessGameConfig, CreateGameReducer, InitializeGame, INVALID_MOVE, ActivePlayers, makeMove, setLogger } from '../engine/index.mjs';
 
 export const RULES = {
   rounds: 7, secs: 20, readyMs: 3000, revealMs: 3500, graceMs: 8000, forfeitAfter: 3,
@@ -103,79 +104,120 @@ export function points(ok, ms, secs, run = 0) {
 
 export const other = (st, p) => (p === st.a ? st.b : st.a);
 
-function fresh(duel) {
-  const { id, a, b, setup } = duel, zero = () => ({ [a]: 0, [b]: 0 });
+/* ---- the game, on the engine ----
+   The duel is a boardgame.io Game (src/engine/, the engine of boardgame.io ported from its source; its LICENSE is
+   MIT), and the engine folds the log: phases invited, live, done, declined and cancelled, each a set of moves; both
+   players act at once in every phase (ActivePlayers.ALL: nobody waits for a turn); a row is a move by the player who
+   posted it, '0' the challenger (a) and '1' the mate (b); a move the rules refuse is INVALID_MOVE, which leaves the
+   game as it was (a row out of turn, a second answer, an accept from the challenger). G is the game the screens and
+   the server read, keyed by the players' own ids; a phase ends when its moves move G.phase on (its endIf), and
+   `done` is a phase rather than the engine's gameover, so emotes, finals and a rematch still land after the last
+   round. The engine is the authority for the order of things inside a phone; the server's log (pup_post, pup_log in
+   Postgres) is the authority for which rows exist and in what order. */
+
+const zero = (a, b) => ({ [a]: 0, [b]: 0 });
+
+function finish(G, reason, winner, a, b) {
+  G.phase = 'done'; G.reason = reason;
+  if (winner !== undefined) { G.winner = winner; return; }
+  const sa = G.score[a], sb = G.score[b];
+  /* a tie on points goes to the faster on right answers; 0 to 0 is a draw */
+  G.winner = sa !== sb ? (sa > sb ? a : b) : sa > 0 && G.time[a] !== G.time[b] ? (G.time[a] < G.time[b] ? a : b) : null;
+}
+
+/* the Game for one duel: its questions and players close over the moves, so G carries only what changes */
+export function duelGame(duel, rules = RULES) {
+  const { a, b } = duel, qs = duel.setup?.questions || [], secs = duel.setup?.secs || rules.secs;
+  const who = playerID => (playerID === '0' ? a : b), opp = p => (p === a ? b : a);
+  function record(G, p, entry, n) {
+    const R = G.rounds[G.round];
+    R.answers[p] = { ...entry, n };
+    if (R.answers[opp(p)]) {
+      R.closed = true; R.closedN = n; G.round++;
+      if (G.round >= G.rounds.length) finish(G, 'end', undefined, a, b);
+    }
+  }
+  const moves = {
+    accept({ G, playerID }, { n }) { if (who(playerID) !== b) return INVALID_MOVE; G.phase = 'live'; G.liveN = n; },
+    decline({ G, playerID }) { if (who(playerID) !== b) return INVALID_MOVE; G.phase = 'declined'; },
+    leave({ G, playerID }) {
+      if (G.phase === 'invited') G.phase = who(playerID) === a ? 'cancelled' : 'declined';
+      else finish(G, 'leave', opp(who(playerID)), a, b);
+    },
+    answer({ G, playerID }, body) {
+      const p = who(playerID), R = G.rounds[G.round], q = qs[G.round];
+      if (body.round !== G.round || !R || !q || R.answers[p]) return INVALID_MOVE;
+      const choice = Number.isInteger(body.choice) && body.choice >= 0 && body.choice < q.options.length ? body.choice : null;
+      const ms = typeof body.ms === 'number' && !Number.isNaN(body.ms) ? clamp(Math.round(body.ms), 0, secs * 1000) : 0, ok = choice === q.answer;
+      const pts = points(ok, ms, secs, G.run[p]);
+      G.score[p] += pts; G.run[p] = ok ? G.run[p] + 1 : 0; G.idle[p] = 0;
+      if (ok) { G.right[p]++; G.time[p] += ms; }
+      record(G, p, { choice, ms, ok, pts, how: 'answer' }, body.n);
+    },
+    timeout({ G, playerID }, body) {
+      const by = who(playerID), late = body.for, R = G.rounds[G.round];
+      if (body.round !== G.round || (late !== a && late !== b) || late === by || !R || R.answers[late]) return INVALID_MOVE;
+      G.run[late] = 0; G.idle[late]++;
+      record(G, late, { choice: null, ms: secs * 1000, ok: false, pts: 0, how: 'timeout' }, body.n);
+      if (G.phase === 'live' && G.idle[late] >= rules.forfeitAfter) finish(G, 'forfeit', by, a, b);
+    },
+    emote({ G, playerID }, { e, n }) { if (!EMOTES[e]) return INVALID_MOVE; G.emotes.push({ by: who(playerID), e, n }); if (G.emotes.length > 12) G.emotes.shift(); },
+    final({ G, playerID }, { n }) { G.finals.push({ by: who(playerID), n }); },
+    rematch({ G, playerID }, { duel: next }) { if (typeof next !== 'string') return INVALID_MOVE; G.rematch = { by: who(playerID), duel: next }; }
+  };
+  const pick = (...names) => Object.fromEntries(names.map(k => [k, moves[k]]));
+  const phase = (name, names, start = false) => ({ start, moves: pick(...names), turn: { activePlayers: ActivePlayers.ALL }, endIf: ({ G }) => G.phase !== name, next: ({ G }) => G.phase });
   return {
-    id, a, b, setup, phase: 'invited', round: 0, last: 0, liveN: 0,
-    rounds: (setup?.questions || []).map(() => ({ answers: {}, closed: false, closedN: 0 })),
-    score: zero(), right: zero(), time: zero(), run: zero(), idle: zero(),
-    winner: null, reason: '', emotes: [], finals: [], rematch: null
+    name: 'pup-duel', disableLog: true, seed: duel.setup?.seed ?? 1,
+    setup: () => ({
+      phase: 'invited', round: 0, liveN: 0,
+      rounds: qs.map(() => ({ answers: {}, closed: false, closedN: 0 })),
+      score: zero(a, b), right: zero(a, b), time: zero(a, b), run: zero(a, b), idle: zero(a, b),
+      winner: null, reason: '', emotes: [], finals: [], rematch: null
+    }),
+    phases: {
+      invited: phase('invited', ['accept', 'decline', 'leave', 'emote', 'final'], true),
+      live: phase('live', ['leave', 'answer', 'timeout', 'emote', 'final']),
+      done: phase('done', ['emote', 'final', 'rematch']),
+      declined: phase('declined', ['emote', 'final']),
+      cancelled: phase('cancelled', ['emote', 'final'])
+    }
   };
 }
 
-function finish(st, reason, winner) {
-  st.phase = 'done'; st.reason = reason;
-  if (winner !== undefined) { st.winner = winner; return; }
-  const { a, b } = st, sa = st.score[a], sb = st.score[b];
-  /* a tie on points goes to the faster on right answers; 0 to 0 is a draw */
-  st.winner = sa !== sb ? (sa > sb ? a : b) : sa > 0 && st.time[a] !== st.time[b] ? (st.time[a] < st.time[b] ? a : b) : null;
+/* the engine says why it refused a move (a late answer, a second copy of a rematch): in a duel that is the rules
+   working, not an error, so it goes to this short list (a debugger reads it) instead of the phone's console */
+export const refusals = [];
+setLogger({ info: () => {}, error: (...m) => { refusals.push(m.join(' ')); if (refusals.length > 50) refusals.shift(); } });
+
+/* the engine for a duel, made once: its questions do not change once it is dealt. The start state is made afresh for
+   every fold: the engine's reducer writes into the state it is given (its move counters), so a shared one would carry
+   one fold's moves into the next */
+const engines = new WeakMap();
+function engineFor(duel) {
+  const key = duel.setup || duel, hit = engines.get(key);
+  if (hit && hit.a === duel.a && hit.b === duel.b) return hit;
+  const game = ProcessGameConfig(duelGame(duel));
+  const made = { a: duel.a, b: duel.b, game, reducer: CreateGameReducer({ game }) };
+  engines.set(key, made);
+  return made;
 }
 
-function record(st, who, entry, n) {
-  const R = st.rounds[st.round];
-  R.answers[who] = { ...entry, n };
-  const opp = other(st, who);
-  if (R.answers[opp]) {
-    R.closed = true; R.closedN = n; st.round++;
-    if (st.round >= st.rounds.length) finish(st, 'end');
-  }
-}
-
-/* the whole game from the log: rows in any order, any number of copies */
+/* the whole game from the log: rows in any order, any number of copies. Each row is a move on the engine, in the
+   server's order; a row from neither player is not a move at all */
 export function reduce(duel, rows) {
-  const st = fresh(duel), secs = duel.setup?.secs || RULES.secs, players = [st.a, st.b], seen = new Set();
+  const { game, reducer } = engineFor(duel), seen = new Set();
   const sorted = (rows || []).filter(r => r && r.duel === duel.id).slice().sort((x, y) => x.n - y.n);
+  let state = InitializeGame({ game, numPlayers: 2 }), last = 0;
   for (const row of sorted) {
     if (seen.has(row.id)) continue;
     seen.add(row.id);
-    st.last = Math.max(st.last, row.n);
-    const by = row.by, body = row.body || {};
-    if (!players.includes(by)) continue;
-    switch (row.kind) {
-      case 'accept': if (st.phase === 'invited' && by === st.b) { st.phase = 'live'; st.liveN = row.n; } break;
-      case 'decline': if (st.phase === 'invited' && by === st.b) st.phase = 'declined'; break;
-      case 'leave':
-        if (st.phase === 'invited') st.phase = by === st.a ? 'cancelled' : 'declined';
-        else if (st.phase === 'live') finish(st, 'leave', other(st, by));
-        break;
-      case 'answer': {
-        if (st.phase !== 'live' || body.round !== st.round) break;
-        const R = st.rounds[st.round], q = st.setup.questions[st.round];
-        if (R.answers[by]) break;
-        const choice = Number.isInteger(body.choice) && body.choice >= 0 && body.choice < q.options.length ? body.choice : null;
-        const ms = typeof body.ms === 'number' && !Number.isNaN(body.ms) ? clamp(Math.round(body.ms), 0, secs * 1000) : 0, ok = choice === q.answer;
-        const pts = points(ok, ms, secs, st.run[by]);
-        st.score[by] += pts; st.run[by] = ok ? st.run[by] + 1 : 0; st.idle[by] = 0;
-        if (ok) { st.right[by]++; st.time[by] += ms; }
-        record(st, by, { choice, ms, ok, pts, how: 'answer' }, row.n);
-        break;
-      }
-      case 'timeout': {
-        const who = body.for;
-        if (st.phase !== 'live' || body.round !== st.round || !players.includes(who) || who === by) break;
-        const R = st.rounds[st.round];
-        if (R.answers[who]) break;
-        st.run[who] = 0; st.idle[who]++;
-        record(st, who, { choice: null, ms: secs * 1000, ok: false, pts: 0, how: 'timeout' }, row.n);
-        if (st.phase === 'live' && st.idle[who] >= RULES.forfeitAfter) finish(st, 'forfeit', by);
-        break;
-      }
-      case 'emote': if (EMOTES[body.e]) { st.emotes.push({ by, e: body.e, n: row.n }); if (st.emotes.length > 12) st.emotes.shift(); } break;
-      case 'final': st.finals.push({ by, n: row.n }); break;
-      case 'rematch': if (st.phase === 'done' && typeof body.duel === 'string') st.rematch = { by, duel: body.duel }; break;
-    }
+    last = Math.max(last, row.n);
+    if ((row.by !== duel.a && row.by !== duel.b) || !KINDS.includes(row.kind)) continue;
+    const body = row.body && typeof row.body === 'object' && !Array.isArray(row.body) ? row.body : {};
+    state = reducer(state, makeMove(row.kind, [{ ...body, n: row.n }], row.by === duel.a ? '0' : '1'));
   }
-  return st;
+  return { id: duel.id, a: duel.a, b: duel.b, setup: duel.setup, ...state.G, last, engine: { phase: state.ctx.phase, turn: state.ctx.turn } };
 }
 
 /* how the duel ended for me */

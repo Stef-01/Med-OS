@@ -16,5 +16,5 @@ export function lockerFor(items, wins = 0) {
   return { open: new Set(order.slice(0, n).map(i => i.id)), next: order.slice(n, n + PER_WIN), toNext: n < order.length ? 1 : 0, total: order.length };
 }
 
-/* a look with only pieces in the locker */
-export const fitLook = (look, open) => ({ dog: look.dog, wear: Object.fromEntries(Object.entries(look.wear || {}).filter(([, id]) => open.has(id))) });
+/* a look with only pieces in the locker (its dog, coat and collar as they are) */
+export const fitLook = (look, open) => ({ ...look, wear: Object.fromEntries(Object.entries(look.wear || {}).filter(([, id]) => open.has(id))) });

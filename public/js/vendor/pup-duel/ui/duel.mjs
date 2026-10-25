@@ -1,6 +1,9 @@
 /* duel.mjs: the duel on screen. Sign in with a name and a 4-digit PIN, a lobby of mates, a challenge, the match
-   (both dogs facing each other, the question, the clock, the reveal) and the result. Phone first: every screen
-   works at 320 px. All text a player or a pack wrote goes in through textContent.
+   (both dogs facing each other, the question, the clock, the reveal), the result and the dressing room.
+   Minimal on purpose (Impeccable's craft floor; docs/plans/2026-10-24-001-pup-duel.md, "The screens"): one primary
+   action a screen; a drawn icon where a word is not needed (icons.mjs; an icon-only control carries its name for a
+   screen reader); the reading (why an answer is right) after the game, in its review, not between rounds. Phone
+   first: every screen works at 320 px. All text a player or a pack wrote goes in through textContent.
 
    const ui = mountDuel(root, { transport, pack, onClose, onResult });   // ui.destroy()
 
@@ -14,11 +17,14 @@ import { RULES, EMOTES, makeSetup, outcome } from '../duel/core.mjs';
 import { createSession } from '../duel/session.mjs';
 import { createLobby } from '../duel/lobby.mjs';
 import { practiceWorld, BOT } from '../duel/bot.mjs';
-import { nameError, pinError, normName, DOGS, DEFAULT_DOG, dogName, SLOTS } from '../duel/accounts.mjs';
+import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
 import { topicsOf } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
-import { ITEMS, wearMsg, SLOT_NAME, VB } from '../pup/wardrobe.mjs';
+import { ITEMS, wearMsg, SLOT_NAME, VB, itemOf } from '../pup/wardrobe.mjs';
+import { coatsFor, COLLARS } from '../pup/rig/coats.mjs';
+import { still, lookDog } from '../pup/rig/still.mjs';
+import { icon } from './icons.mjs';
 
 const BASE = new URL('../', import.meta.url);
 export const RIG = new URL('pup/rig/index.html', BASE).href;
@@ -27,14 +33,18 @@ const CSS = new URL('ui/duel.css', BASE).href;
 const LETTERS = 'ABCDEF';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmt = n => Math.round(n).toLocaleString('en-AU');
-const ago = iso => {
-  const s = Math.max(0, (Date.now() - Date.parse(iso || 0)) / 1000);
-  return s < 120 ? 'online' : s < 3600 ? `${Math.round(s / 60)} min ago` : s < 86400 ? `${Math.round(s / 3600)} h ago` : `${Math.round(s / 86400)} d ago`;
-};
 const EXPR = { idle: 'happy', think: 'lockedin', wait: 'curious', right: 'excited', wrong: 'sad', win: 'overjoyed', loss: 'puppy', draw: 'bashful', emote: 'goofy' };
+const EMOTE_ICON = { gg: 'thumb', woof: 'paw', wow: 'star', close: 'oof' };
+const STATUS = { think: ['more', 'Thinking'], done: ['check', 'Answered'], lock: ['lock', 'Locked in'], ok: ['check', 'Right'], no: ['x', 'Wrong'] };
+const BETA = '<span class="pd-beta">Beta</span>';
+/* a look as this build can draw it: its dog, coat and collar known, its pieces in the wardrobe */
+const lookOf = l => normLook(l, id => !!itemOf(id));
+const ib = (pd, name, label, cls = '') => `<button class="pd-ib${cls ? ' ' + cls : ''}" type="button" data-pd="${pd}" aria-label="${esc(label)}" title="${esc(label)}">${icon(name)}</button>`;
+const setupLine = s => `${s?.rounds || '?'} questions, ${s?.secs || '?'} seconds each${s?.topic ? `, ${s.topic}` : ''}`;
+const breedOf = id => DOGS.find(d => d.id === id) || DOGS.find(d => d.id === DEFAULT_DOG);
 
 function loadCss() {
-  if (document.querySelector(`link[data-pup-duel]`)) return Promise.resolve();
+  if (document.querySelector('link[data-pup-duel]')) return Promise.resolve();
   return new Promise(res => {
     const l = Object.assign(document.createElement('link'), { rel: 'stylesheet', href: CSS });
     l.dataset.pupDuel = '';
@@ -43,72 +53,131 @@ function loadCss() {
   });
 }
 
-/* a dog in an iframe of the rig, dressed; `.expr(id)` changes its face */
+/* a dog in an iframe of the rig, in its look; `.expr(id)` changes its face, `.dress(look)` its look in place (another
+   dog, coat or collar redraws it at once; a new piece pops on) */
 function dogFrame(look, { mirror = false, label = '' } = {}) {
   const box = document.createElement('div');
   box.className = 'pd-dog' + (mirror ? ' pd-mirror' : '');
   const f = document.createElement('iframe');
-  f.src = `${RIG}?embed=1&dog=${encodeURIComponent(look?.dog || DEFAULT_DOG)}&expr=happy`;
-  f.title = label; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1; f.loading = 'lazy';
+  let cur = lookOf(look), ready = false, wantExpr = null;
+  const q = new URLSearchParams({ embed: '1', dog: cur.dog, expr: 'happy' });
+  if (cur.coat) q.set('coat', cur.coat);
+  if (cur.collar) q.set('collar', cur.collar);
+  f.src = `${RIG}?${q}`;
+  f.title = label; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1;
   box.append(f);
-  let ready = false, wantExpr = null;
   const send = m => { try { f.contentWindow?.postMessage(m, location.origin); } catch { /* not ready */ } };
-  f.addEventListener('load', () => { ready = true; send(wearMsg(look?.wear || {}, false)); if (wantExpr) send({ dob: 'expr', id: wantExpr }); });
+  const skin = L => ({ dob: 'skin', dog: L.dog, coat: L.coat || '', collar: L.collar || '' });
+  let loadedAs = cur;
+  f.addEventListener('load', () => {
+    ready = true;
+    if (cur.dog !== loadedAs.dog || cur.coat !== loadedAs.coat || cur.collar !== loadedAs.collar) send(skin(cur));
+    send(wearMsg(cur.wear, false)); if (wantExpr) send({ dob: 'expr', id: wantExpr });
+    loadedAs = cur;
+  });
   return {
     el: box,
     expr(id) { if (wantExpr === id) return; wantExpr = id; if (ready) send({ dob: 'expr', id }); },
-    tap() { if (ready) send({ dob: 'tap' }); }
+    tap() { if (ready) send({ dob: 'tap' }); },
+    dress(look) {
+      const n = lookOf(look), was = cur;
+      cur = n;
+      if (!ready) return;
+      if (n.dog !== was.dog || n.coat !== was.coat || n.collar !== was.collar) send(skin(n));
+      if (JSON.stringify(n.wear) !== JSON.stringify(was.wear)) send(wearMsg(n.wear, false));
+    }
   };
+}
+
+/* a dog's face, drawn once (the kit's still.mjs): for lists, tiles and the reveal's who-picked-what */
+function face(look, cls = '') {
+  const el = document.createElement('span');
+  el.className = 'pd-face' + (cls ? ' ' + cls : '');
+  el.append(still(lookDog(lookOf(look))));
+  return el;
+}
+/* the setup as icons and numbers, the sentence for a screen reader */
+function bits(s) {
+  const el = document.createElement('span');
+  el.className = 'pd-bits';
+  el.innerHTML = `<span aria-hidden="true">${icon('hash')}<b></b>${icon('timer')}<b></b></span><span class="pd-vh"></span>`;
+  const [r, t] = el.querySelectorAll('b');
+  r.textContent = s?.rounds ?? '?'; t.textContent = `${s?.secs ?? '?'}s`;
+  el.querySelector('.pd-vh').textContent = setupLine(s);
+  return el;
+}
+/* a list kept by key: a row whose key is unchanged is the same node (its face is not drawn again each poll) */
+function keyed(list, items, keyOf, make) {
+  const old = new Map([...list.children].map(n => [n.dataset.key, n]));
+  const next = items.map(it => { const k = keyOf(it), n = old.get(k) || make(it); n.dataset.key = k; return n; });
+  if (next.length !== list.children.length || next.some((n, i) => n !== list.children[i])) list.replaceChildren(...next);
 }
 
 export function mountDuel(root, { transport = null, pack = { questions: [] }, look: hostLook = null, storage = globalThis.localStorage, storeKey = 'pup-duel', practice = true, title = 'Duel', keys = 'document', onClose = () => {}, onResult = () => {} } = {}) {
   const storeAt = `${storeKey}:${transport?.name || 'none'}`;
   const remembered = () => { try { return JSON.parse(storage.getItem(storeAt)) || null; } catch { return null; } };
   const remember = me => { try { if (me) storage.setItem(storeAt, JSON.stringify(me)); else storage.removeItem(storeAt); } catch { /* private mode */ } };
-  const S = { screen: '', me: null, lobby: null, lv: null, session: null, world: null, worldMe: null, t: transport, err: '', busy: false, raf: 0, dogs: {}, live: null, match: null, sheet: null };
+  const S = { screen: '', me: null, lobby: null, lv: null, session: null, world: null, worldMe: null, t: transport, err: '', busy: false, raf: 0, dogs: {}, hero: null, match: null, sheet: null, crossT: 0, rejoin: false };
   root.classList.add('pd');
   root.innerHTML = '<div class="pd-shell"></div><div class="pd-live" aria-live="polite"></div>';
   const shell = root.querySelector('.pd-shell'), liveEl = root.querySelector('.pd-live');
   const say = text => { liveEl.textContent = ''; setTimeout(() => { liveEl.textContent = text; }, 30); };
   const topics = topicsOf(pack);
+  const top = (left, right = '<span></span>') => `<header class="pd-top">${left}<h1 class="pd-h1"><span>${esc(title)}</span>${BETA}</h1>${right}</header>`;
 
-  /* ---- sign in ---- */
+  /* ---- sign in: a name and a PIN, or a new player picking a dog ---- */
   function showAuth(step = 'name', draft = {}) {
     stopAll(); S.screen = 'auth';
-    shell.innerHTML = `
-      <header class="pd-top"><button class="pd-x" type="button" data-pd="close" aria-label="Close the duel"></button><h1 class="pd-h1">${esc(title)}</h1><span></span></header>
+    const dog = draft.dog || DEFAULT_DOG;
+    shell.innerHTML = `${top(step === 'name' ? ib('close', 'x', 'Close the duel') : ib('back', 'back', 'Back'))}
       <main class="pd-main pd-auth">
-        <div class="pd-hero"><img src="${ICON(draft.dog || DEFAULT_DOG)}" alt=""><div><h2>Duel your mates</h2><p>Same questions, same clock. Right and fast wins.</p></div></div>
-        ${step === 'name' ? `
-        <form class="pd-card pd-form" data-pd="signin" novalidate>
-          <label class="pd-field"><span>Your name</span><input name="name" autocomplete="username" autocapitalize="words" maxlength="20" required value="${esc(draft.name || '')}"></label>
-          <label class="pd-field"><span>4-digit PIN</span><input name="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" maxlength="4" required value="${esc(draft.pin || '')}"></label>
+        <div class="pd-stage"></div>
+        ${step === 'name' ? `${transport ? `
+        <form class="pd-form" data-pd="signin" novalidate>
+          <label class="pd-field"><span>Name</span><input name="name" autocomplete="username" autocapitalize="words" maxlength="20" required value="${esc(draft.name || '')}"></label>
+          <label class="pd-field"><span>PIN</span><input name="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" maxlength="4" required value="${esc(draft.pin || '')}"></label>
           <p class="pd-err" role="alert">${esc(S.err)}</p>
-          <button class="pd-btn pd-pri" type="submit" data-act="login">Sign in</button>
-          <button class="pd-btn" type="button" data-pd="new">I'm new here</button>
-          <p class="pd-fine">No email, no password: a name your mates know you by and a PIN you will remember.${transport ? '' : ' Duels with mates need the shared backend; practice works anywhere.'}</p>
-        </form>` : `
-        <form class="pd-card pd-form" data-pd="create">
-          <h2 class="pd-h2">Pick your dog</h2>
-          <div class="pd-dogs" role="radiogroup" aria-label="Your dog">${DOGS.map(d => `<button type="button" role="radio" class="pd-dogpick" data-dog="${d.id}" aria-checked="${d.id === (draft.dog || DEFAULT_DOG)}" title="${esc(d.hint)}"><img src="${ICON(d.id)}" alt=""><b>${esc(d.name)}</b><small>${esc(d.breedShort)}</small></button>`).join('')}</div>
+          <button class="pd-btn pd-pri" type="submit" data-act="login">Play</button>
+          <button class="pd-link" type="button" data-pd="new">New player</button>
+        </form>` : '<p class="pd-note">Duels with mates are off on this site</p>'}
+        ${practice ? `<button class="pd-btn${transport ? ' pd-ghost' : ' pd-pri'}" type="button" data-pd="practice">${icon('bot')}Practice</button>` : ''}` : `
+        <form class="pd-form" data-pd="create">
+          <p class="pd-pickname" aria-live="polite"></p>
+          <div class="pd-dogs" role="radiogroup" aria-label="Your dog"></div>
           <p class="pd-err" role="alert">${esc(S.err)}</p>
-          <button class="pd-btn pd-pri" type="submit">Create ${esc(normName(draft.name))}</button>
-          <button class="pd-btn" type="button" data-pd="back">Back</button>
+          <button class="pd-btn pd-pri" type="submit">Play as ${esc(normName(draft.name))}</button>
         </form>`}
-        ${practice ? `<button class="pd-row pd-practice" type="button" data-pd="practice"><img src="${ICON(BOT.look.dog)}" alt=""><span><b>Practice with ${esc(BOT.name)}</b><small>A bot, on this device</small></span><i aria-hidden="true">›</i></button>` : ''}
       </main>`;
+    const preview = dogFrame({ dog }, { label: 'Your dog' });
+    shell.querySelector('.pd-stage').append(preview.el);
     const form = shell.querySelector('form');
-    form.addEventListener('submit', async e => {
+    if (step === 'create') {
+      const grid = shell.querySelector('.pd-dogs'), named = shell.querySelector('.pd-pickname');
+      const nameIt = id => { const d = breedOf(id); named.textContent = `${d.name} · ${d.breedName}`; };
+      grid.append(...DOGS.map(d => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'pd-dogpick'; b.dataset.dog = d.id; b.setAttribute('role', 'radio');
+        b.setAttribute('aria-checked', String(d.id === dog)); b.setAttribute('aria-label', `${d.name}, ${d.breedName}`); b.title = d.hint;
+        b.append(face({ dog: d.id }));
+        b.addEventListener('click', () => {
+          grid.querySelectorAll('.pd-dogpick').forEach(x => x.setAttribute('aria-checked', String(x === b)));
+          preview.dress({ dog: d.id }); preview.tap(); nameIt(d.id);
+        });
+        return b;
+      }));
+      nameIt(dog);
+    }
+    form?.addEventListener('submit', async e => {
       e.preventDefault();
       if (S.busy) return;
       if (step === 'name') {
         const name = form.name.value, pin = form.pin.value;
-        S.err = nameError(name) || pinError(pin) || (transport ? '' : 'Duels with mates need the shared backend (see the README); try practice instead.');
+        S.err = nameError(name) || pinError(pin);
         if (S.err) return showAuth('name', { name, pin });
         await busy(async () => { const me = await transport.login(name, pin); signedIn(me); }, () => showAuth('name', { name, pin }));
       } else {
-        const dog = form.querySelector('[aria-checked="true"]')?.dataset.dog || DEFAULT_DOG;
-        await busy(async () => { const me = await transport.register(draft.name, draft.pin, { dog, wear: {} }); signedIn(me); }, () => showAuth('create', { ...draft, dog }));
+        const pick = form.querySelector('[aria-checked="true"]')?.dataset.dog || DEFAULT_DOG;
+        await busy(async () => { const me = await transport.register(draft.name, draft.pin, { dog: pick, wear: {} }); signedIn(me); }, () => showAuth('create', { ...draft, dog: pick }));
       }
     });
     shell.querySelector('[data-pd="new"]')?.addEventListener('click', () => {
@@ -117,13 +186,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       showAuth(bad ? 'name' : 'create', { name, pin, dog: DEFAULT_DOG });
     });
     shell.querySelector('[data-pd="back"]')?.addEventListener('click', () => { S.err = ''; showAuth('name', draft); });
-    shell.querySelectorAll('.pd-dogpick').forEach(b => b.addEventListener('click', () => {
-      shell.querySelectorAll('.pd-dogpick').forEach(x => x.setAttribute('aria-checked', String(x === b)));
-      shell.querySelector('.pd-hero img').src = ICON(b.dataset.dog);
-    }));
     wireCommon();
     S.err = '';
-    ([...shell.querySelectorAll('input')].find(i => !i.value) || shell.querySelector('input, .pd-dogpick'))?.focus({ preventScroll: true });
+    ([...shell.querySelectorAll('input')].find(i => !i.value) || shell.querySelector('.pd-dogpick[aria-checked="true"], input'))?.focus({ preventScroll: true });
   }
   async function busy(fn, onErr) {
     S.busy = true; root.dataset.busy = '';
@@ -131,31 +196,31 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   }
   function signedIn(me) { S.me = me; S.t = transport; S.world = null; remember(me); S.err = ''; showLobby(); }
 
-  /* ---- the lobby ---- */
+  /* ---- the lobby: you, the duels that wait on you, your mates (and Rex, the practice bot), what happened ---- */
   function myLook() {
-    const base = S.lv?.self?.look || S.me?.look || { dog: DEFAULT_DOG, wear: {} };
-    if (hostLook) { const h = hostLook(); if (h) return h; }
-    return fitLook({ dog: base.dog || DEFAULT_DOG, wear: base.wear || {} }, lockerFor(ITEMS, S.lv?.self?.wins || 0).open);
+    const base = lookOf(S.lv?.self?.look || S.me?.look);
+    if (hostLook) { const h = hostLook(); if (h) return lookOf(h); }
+    return fitLook(base, lockerFor(ITEMS, S.lv?.self?.wins || 0).open);
   }
   function showLobby() {
     stopAll(); S.screen = 'lobby';
-    shell.innerHTML = `
-      <header class="pd-top"><button class="pd-x" type="button" data-pd="close" aria-label="Close the duel"></button><h1 class="pd-h1">${esc(title)}</h1><button class="pd-link" type="button" data-pd="signout">Sign out</button></header>
+    shell.innerHTML = `${top(ib('close', 'x', 'Close the duel'), ib('menu', 'more', 'Menu'))}
       <main class="pd-main pd-lobby">
-        <section class="pd-card pd-me"><div class="pd-me-dog"></div><div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p><button class="pd-btn pd-sm" type="button" data-pd="dress">Dress up</button></div></section>
-        <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Challenges for you</h2><div class="pd-list"></div></section>
-        <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Your duels</h2><div class="pd-list"></div></section>
-        <section class="pd-sec" data-sec="mates"><h2 class="pd-h2">Challenge a mate</h2><div class="pd-list"></div><p class="pd-empty" hidden>Nobody else yet. Send a mate this page: they pick a name and a PIN, and appear here.</p></section>
-        ${practice ? `<button class="pd-row pd-practice" type="button" data-pd="practice"><img src="${ICON(BOT.look.dog)}" alt=""><span><b>Practice with ${esc(BOT.name)}</b><small>A bot; your record is safe</small></span><i aria-hidden="true">›</i></button>` : ''}
+        <section class="pd-me" aria-label="You">
+          ${hostLook ? '<div class="pd-me-dog"></div>' : `<button class="pd-me-dog" type="button" data-pd="dress" aria-label="Dress your dog"><span class="pd-badge">${icon('shirt')}</span></button>`}
+          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p></div>
+        </section>
+        <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
+        <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Duels</h2><div class="pd-list"></div></section>
+        <section class="pd-sec" data-sec="mates"><h2 class="pd-h2">Mates</h2><div class="pd-grid"></div></section>
         <section class="pd-sec" data-sec="past" hidden><h2 class="pd-h2">Recent</h2><div class="pd-list"></div></section>
         <p class="pd-err" role="alert"></p>
       </main>`;
     wireCommon();
-    shell.querySelector('[data-pd="signout"]').addEventListener('click', () => { remember(null); S.me = null; showAuth(); });
-    shell.querySelector('[data-pd="dress"]').addEventListener('click', openDress);
+    shell.querySelector('[data-pd="menu"]').addEventListener('click', openMenu);
+    shell.querySelector('[data-pd="dress"]')?.addEventListener('click', openDress);
     if (!S.t) return;
-    const me = S.me;
-    S.lobby = createLobby({ transport: S.t, me, onChange: lv => { S.lv = lv; paintLobby(); } });
+    S.lobby = createLobby({ transport: S.t, me: S.me, onChange: lv => { S.lv = lv; paintLobby(); } });
     S.lobby.start();
     paintLobby();
   }
@@ -166,48 +231,96 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('.pd-name').textContent = self?.name || '';
     shell.querySelector('.pd-rec').textContent = self ? `${self.wins || 0} won · ${self.losses || 0} lost${self.draws ? ` · ${self.draws} drawn` : ''}` : '';
     const holder = shell.querySelector('.pd-me-dog');
-    if (holder.dataset.look !== JSON.stringify(look)) { holder.dataset.look = JSON.stringify(look); holder.replaceChildren(dogFrame(look, { label: dogName(look.dog) }).el); }
-    const fill = (sec, items, row) => {
-      const s = shell.querySelector(`[data-sec="${sec}"]`), list = s.querySelector('.pd-list');
-      s.hidden = sec !== 'mates' && !items.length;
-      list.replaceChildren(...items.map(row));
-    };
-    fill('invites', lv.invites, d => card(d, `${d.them?.name || 'A mate'} challenged you`, setupLine(d.setup), [['Accept', 'pri', () => openDuel(d, { accept: true })], ['Decline', '', () => declineDuel(d)]]));
-    fill('mine', [...lv.live, ...lv.waiting], d => d.status === 'live'
-      ? card(d, `Live against ${d.them?.name || 'a mate'}`, setupLine(d.setup), [['Play', 'pri', () => openDuel(d)]])
-      : card(d, `Waiting for ${d.them?.name || 'your mate'}`, `${setupLine(d.setup)} · they have been told`, [['Open', '', () => openDuel(d)]]));
-    fill('mates', lv.mates, p => {
-      const b = document.createElement('div'); b.className = 'pd-row pd-mate';
-      b.innerHTML = `<img src="${ICON(p.look?.dog)}" alt=""><span><b></b><small></small></span><button class="pd-btn pd-sm pd-pri" type="button">Duel</button>`;
-      b.querySelector('b').textContent = p.name;
-      b.querySelector('small').textContent = `${p.online ? 'Online' : ago(p.seen_at)} · ${p.wins || 0}–${p.losses || 0}`;
-      b.querySelector('small').classList.toggle('pd-on', !!p.online);
-      b.querySelector('button').setAttribute('aria-label', `Challenge ${p.name}`);
-      b.querySelector('button').addEventListener('click', () => openSetup(p));
-      return b;
-    });
-    shell.querySelector('[data-sec="mates"] .pd-empty').hidden = !lv.loaded || lv.mates.length > 0;
-    fill('past', lv.past, d => {
-      const res = d.result || {}, mine = res.score?.[S.me.id], theirs = res.score?.[d.them?.id];
-      const line = d.status === 'done' ? (res.winner === null ? 'Draw' : res.winner === S.me.id ? 'Won' : 'Lost') + (mine !== undefined ? ` ${fmt(mine)}–${fmt(theirs ?? 0)}` : '') : d.status === 'declined' ? 'Declined' : 'Cancelled';
-      const b = document.createElement('div'); b.className = 'pd-row pd-past';
-      b.innerHTML = `<img src="${ICON(d.them?.look?.dog)}" alt=""><span><b></b><small></small></span>`;
-      b.querySelector('b').textContent = `${line} · ${d.them?.name || 'a mate'}`;
-      b.querySelector('small').textContent = setupLine(d.setup);
-      return b;
-    });
-    shell.querySelector('.pd-lobby > .pd-err').textContent = lv.error ? `Can't reach the server (${lv.error}). Retrying.` : '';
+    if (!S.hero || !holder.contains(S.hero.el)) { S.hero = dogFrame(look, { label: dogName(look.dog) }); holder.prepend(S.hero.el); }
+    else S.hero.dress(look);
+    const sec = (name, show) => { const s = shell.querySelector(`[data-sec="${name}"]`); s.hidden = !show; return s.querySelector('.pd-list, .pd-grid'); };
+    keyed(sec('invites', lv.invites.length > 0), lv.invites, d => `${d.id}|${JSON.stringify(d.them?.look)}|${d.them?.name}`, inviteRow);
+    const mine = [...lv.live, ...lv.waiting];
+    keyed(sec('mine', mine.length > 0), mine, d => `${d.id}|${d.status}|${JSON.stringify(d.them?.look)}`, duelRow);
+    const tiles = [...lv.mates.map(p => ({ p })), ...(practice ? [{ bot: true }] : []), ...(lv.loaded ? [{ invite: true }] : [])];
+    keyed(sec('mates', true), tiles, t => (t.p ? `m|${t.p.id}|${t.p.name}|${!!t.p.online}|${JSON.stringify(t.p.look)}` : t.bot ? 'bot' : 'invite'), mateTile);
+    keyed(sec('past', lv.past.length > 0), lv.past, d => `${d.id}|${d.status}|${JSON.stringify(d.them?.look)}`, pastRow);
+    /* back from a reload (or a phone that slept) in the middle of a duel: straight back into it, once */
+    if (S.rejoin && lv.loaded) { S.rejoin = false; if (lv.live.length === 1) { openDuel(lv.live[0]); return; } }
+    shell.querySelector('.pd-lobby > .pd-err').textContent = lv.error ? `Can't reach the server. Retrying.` : '';
   }
-  const setupLine = s => `${s?.rounds || '?'} questions · ${s?.secs || '?'} s${s?.topic ? ` · ${s.topic}` : ''}`;
-  function card(d, head, sub, acts) {
-    const c = document.createElement('div'); c.className = 'pd-row pd-duelrow';
-    c.innerHTML = `<img src="${ICON(d.them?.look?.dog)}" alt=""><span><b></b><small></small></span><span class="pd-acts"></span>`;
-    c.querySelector('b').textContent = head; c.querySelector('small').textContent = sub;
-    for (const [label, kind, fn] of acts) {
-      const b = document.createElement('button'); b.type = 'button'; b.className = `pd-btn pd-sm${kind ? ' pd-' + kind : ''}`; b.textContent = label;
-      b.addEventListener('click', fn); c.querySelector('.pd-acts').append(b);
+  function row(cls, look) {
+    const r = document.createElement('div');
+    r.className = `pd-row ${cls}`;
+    r.append(face(look), Object.assign(document.createElement('span'), { className: 'pd-rtx' }));
+    r.lastChild.innerHTML = '<b></b>';
+    return r;
+  }
+  function inviteRow(d) {
+    const r = row('pd-duelrow', d.them?.look);
+    r.querySelector('b').textContent = d.them?.name || 'A mate';
+    r.querySelector('.pd-rtx').append(bits(d.setup));
+    const acts = document.createElement('span'); acts.className = 'pd-acts';
+    acts.innerHTML = `<button class="pd-btn pd-sm pd-pri" type="button">${icon('check')}Play</button>${ib('decline', 'x', 'Decline')}`;
+    acts.querySelector('.pd-pri').setAttribute('aria-label', `Accept ${d.them?.name || 'the'} challenge`);
+    acts.querySelector('.pd-pri').addEventListener('click', () => openDuel(d, { accept: true }));
+    acts.querySelector('[data-pd="decline"]').addEventListener('click', () => declineDuel(d));
+    r.append(acts);
+    return r;
+  }
+  function duelRow(d) {
+    const live = d.status === 'live', r = row('pd-duelrow pd-tap', d.them?.look), b = document.createElement('button');
+    r.querySelector('b').textContent = d.them?.name || 'Your mate';
+    const st = document.createElement('small'); st.className = live ? 'pd-on' : ''; st.textContent = live ? 'Live' : 'Waiting';
+    r.querySelector('.pd-rtx').append(st);
+    b.type = 'button'; b.className = 'pd-cover'; b.setAttribute('aria-label', `${live ? 'Play' : 'Open'} the duel with ${d.them?.name || 'your mate'}`);
+    b.addEventListener('click', () => openDuel(d));
+    r.append(b, Object.assign(document.createElement('span'), { className: 'pd-chev', innerHTML: icon('back', 'pd-flip') }));
+    return r;
+  }
+  function mateTile(t) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    if (t.invite) {
+      b.className = 'pd-tile pd-invite'; b.dataset.pd = 'invite';
+      b.innerHTML = `<span class="pd-face pd-faceic">${icon('share')}</span><b>Invite</b>`;
+      b.setAttribute('aria-label', 'Invite a mate: share this page');
+      b.addEventListener('click', () => invite(b));
+      return b;
     }
-    return c;
+    if (t.bot) {
+      b.className = 'pd-tile pd-bot'; b.dataset.pd = 'practice';
+      b.append(face(BOT.look));
+      b.insertAdjacentHTML('beforeend', `<b></b><span class="pd-tbadge">${icon('bot')}</span>`);
+      b.querySelector('b').textContent = BOT.name;
+      b.setAttribute('aria-label', `Practice with ${BOT.name}, a bot on this device`);
+      b.addEventListener('click', startPractice);
+      return b;
+    }
+    const p = t.p;
+    b.className = 'pd-tile pd-mate';
+    b.append(face(p.look));
+    b.insertAdjacentHTML('beforeend', '<b></b>');
+    b.querySelector('b').textContent = p.name;
+    if (p.online) b.insertAdjacentHTML('beforeend', '<span class="pd-dot" aria-hidden="true"></span>');
+    b.setAttribute('aria-label', `Challenge ${p.name}${p.online ? ', online' : ''}, ${p.wins || 0} won, ${p.losses || 0} lost`);
+    b.addEventListener('click', () => openSetup(p));
+    return b;
+  }
+  function pastRow(d) {
+    const res = d.result || {}, mine = res.score?.[S.me.id], theirs = res.score?.[d.them?.id];
+    const out = d.status === 'done' ? (res.winner === null ? 'draw' : res.winner === S.me.id ? 'win' : 'loss') : d.status;
+    const r = row('pd-past', d.them?.look);
+    r.querySelector('b').textContent = d.them?.name || 'A mate';
+    if (mine !== undefined) { const s = document.createElement('small'); s.className = 'pd-num'; s.textContent = `${fmt(mine)}–${fmt(theirs ?? 0)}`; r.querySelector('.pd-rtx').append(s); }
+    const pill = document.createElement('span');
+    pill.className = 'pd-pill'; pill.dataset.out = out;
+    pill.textContent = { win: 'Won', loss: 'Lost', draw: 'Draw', declined: 'Declined', cancelled: 'Called off' }[out] || '';
+    r.append(pill);
+    return r;
+  }
+  async function invite(b) {
+    const url = location.href.split('#')[0], label = b.querySelector('b');
+    try {
+      if (navigator.share) { await navigator.share({ title, url }); return; }
+      await navigator.clipboard.writeText(url);
+      label.textContent = 'Copied'; say('Link copied'); setTimeout(() => { label.textContent = 'Invite'; }, 1800);
+    } catch { /* cancelled, or no clipboard: nothing to say */ }
   }
   async function declineDuel(d) {
     const s = createSession({ transport: S.t, me: S.me, duel: d });
@@ -216,29 +329,37 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     setTimeout(() => S.lobby?.refresh(), 600);
   }
 
-  /* ---- sheets: the challenge setup, the dress-up locker, leaving ---- */
-  function sheet(html, wire) {
+  /* ---- sheets: the menu, the challenge, the dressing room, the review, leaving ---- */
+  function sheet(html, wire, { full = false, label = '' } = {}) {
     closeSheet();
     const el = document.createElement('div');
     el.className = 'pd-sheet-wrap';
-    el.innerHTML = `<div class="pd-scrim" data-pd="shut"></div><div class="pd-sheet" role="dialog" aria-modal="true">${html}</div>`;
+    el.innerHTML = `<div class="pd-scrim" data-pd="shut"></div><div class="pd-sheet${full ? ' pd-full' : ''}" role="dialog" aria-modal="true"${label ? ` aria-label="${esc(label)}"` : ''}>${html}</div>`;
     root.append(el); S.sheet = el;
     el.querySelectorAll('[data-pd="shut"]').forEach(b => b.addEventListener('click', closeSheet));
     wire(el.querySelector('.pd-sheet'));
-    el.querySelector('.pd-sheet button, .pd-sheet select')?.focus({ preventScroll: true });
+    el.querySelector('.pd-sheet button:not([data-pd="shut"]), .pd-sheet select')?.focus({ preventScroll: true });
   }
   function closeSheet() { S.sheet?.remove(); S.sheet = null; }
+  function openMenu() {
+    sheet(`<p class="pd-sheet-who"></p><button class="pd-btn" type="button" data-pd="signout">Sign out</button>`, el => {
+      el.querySelector('.pd-sheet-who').textContent = S.me?.name || '';
+      el.querySelector('[data-pd="signout"]').addEventListener('click', () => { remember(null); S.me = null; S.hero = null; showAuth(); });
+    }, { label: 'Menu' });
+  }
   function openSetup(mate, last = null) {
     const opt = last || { rounds: RULES.rounds, secs: RULES.secs, topic: '' };
-    const seg = (name, vals, cur, fmtv) => `<div class="pd-seg" role="radiogroup" aria-label="${name}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}">${fmtv(v)}</button>`).join('')}</div>`;
+    const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div class="pd-seg" role="radiogroup" aria-label="${label}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}">${f(v)}</button>`).join('')}</div></div>`;
     sheet(`
-      <h2 class="pd-h2">Challenge ${esc(mate.name)}</h2>
-      <p class="pd-sub">Questions</p>${seg('rounds', RULES.roundChoices, opt.rounds, v => v)}
-      <p class="pd-sub">Seconds each</p>${seg('secs', RULES.secsChoices, opt.secs, v => `${v} s`)}
-      ${topics.length > 1 ? `<label class="pd-field"><span>Topic</span><select name="topic"><option value="">Everything (${pack.questions.length})</option>${topics.map(t => `<option value="${esc(t.topic)}"${t.topic === opt.topic ? ' selected' : ''}>${esc(t.topic)} (${t.count})</option>`).join('')}</select></label>` : ''}
+      <div class="pd-vsmini" aria-hidden="true"></div>
+      <h2 class="pd-sheet-title"></h2>
+      ${seg('rounds', 'hash', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
+      ${seg('secs', 'timer', 'Seconds each', RULES.secsChoices, opt.secs, v => `${v}s`)}
+      ${topics.length > 1 ? `<label class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><select name="topic" aria-label="Topic"><option value="">Every topic</option>${topics.map(t => `<option value="${esc(t.topic)}"${t.topic === opt.topic ? ' selected' : ''}>${esc(t.topic)}</option>`).join('')}</select></label>` : ''}
       <p class="pd-err" role="alert"></p>
-      <button class="pd-btn pd-pri" type="button" data-pd="send">Send the challenge</button>
-      <button class="pd-btn" type="button" data-pd="shut">Not now</button>`, el => {
+      <button class="pd-btn pd-pri" type="button" data-pd="send">${icon('zap')}Duel</button>`, el => {
+      el.querySelector('.pd-vsmini').append(face(myLook()), face(mate.look, 'pd-mirror'));
+      el.querySelector('.pd-sheet-title').textContent = mate.name;
       el.querySelectorAll('.pd-seg').forEach(g => g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; g.querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', String(x === b))); }));
       el.querySelector('[data-pd="send"]').addEventListener('click', async () => {
         const rounds = +el.querySelector('[data-rounds][aria-checked="true"]').dataset.rounds, secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs;
@@ -250,32 +371,124 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           closeSheet(); openDuel({ ...d, them: mate });
         }, () => { el.querySelector('.pd-err').textContent = S.err; });
       });
-    });
+    }, { label: `Challenge ${mate.name}` });
   }
+
+  /* the dressing room: a live preview of the dog, and one tab each for the dog, its coat, its collar and the four
+     slots; locked pieces open with wins (locker.mjs). The line under the preview names what was just chosen */
+  const TABS = [['dog', 'paw', 'Dog'], ['coat', 'palette', 'Coat'], ['collar', 'collar', 'Collar'], ['head', 'hat', SLOT_NAME.head], ['face', 'glasses', SLOT_NAME.face], ['neck', 'bow', SLOT_NAME.neck], ['back', 'pack', SLOT_NAME.back]];
   function openDress() {
-    const self = S.lv?.self || S.me, locker = lockerFor(ITEMS, self?.wins || 0), look = myLook();
-    if (hostLook) { sheet(`<h2 class="pd-h2">Your dog</h2><p class="pd-sub">Your dog wears what it wears in ${esc(title)}'s shop.</p><button class="pd-btn" type="button" data-pd="shut">OK</button>`, () => {}); return; }
-    const cur = { dog: look.dog, wear: { ...look.wear } };
-    const piece = it => `<button type="button" class="pd-piece" data-id="${it.id}" data-slot="${it.slot}" data-r="${it.rarity}" aria-pressed="${cur.wear[it.slot] === it.id}" ${locker.open.has(it.id) ? '' : 'disabled'} title="${esc(it.name)}"><svg viewBox="${it.tile || it.vb || VB[it.slot]}" aria-hidden="true">${it.icon || it.svg}</svg><span>${esc(it.name)}</span></button>`;
+    if (hostLook) return;
+    const self = S.lv?.self || S.me, locker = lockerFor(ITEMS, self?.wins || 0), cur = structuredClone(myLook());
     sheet(`
-      <h2 class="pd-h2">Dress up</h2>
-      <div class="pd-dogs pd-dogs-sm" role="radiogroup" aria-label="Your dog">${DOGS.map(d => `<button type="button" role="radio" class="pd-dogpick" data-dog="${d.id}" aria-checked="${d.id === cur.dog}" title="${esc(d.breedName)}: ${esc(d.hint)}"><img src="${ICON(d.id)}" alt=""><b>${esc(d.name)}</b></button>`).join('')}</div>
-      <p class="pd-sub">${locker.open.size} of ${locker.total} pieces open · every win opens two more</p>
-      ${SLOTS.map(s => `<p class="pd-sub">${esc(SLOT_NAME[s])}</p><div class="pd-pieces">${unlockedFirst(s, locker).map(piece).join('')}</div>`).join('')}
-      <button class="pd-btn pd-pri" type="button" data-pd="save">Save</button>
-      <button class="pd-btn" type="button" data-pd="shut">Cancel</button>`, el => {
-      el.querySelectorAll('.pd-dogpick').forEach(b => b.addEventListener('click', () => { cur.dog = b.dataset.dog; el.querySelectorAll('.pd-dogpick').forEach(x => x.setAttribute('aria-checked', String(x === b))); }));
-      el.querySelectorAll('.pd-piece').forEach(b => b.addEventListener('click', () => {
-        const on = cur.wear[b.dataset.slot] === b.dataset.id;
-        if (on) delete cur.wear[b.dataset.slot]; else cur.wear[b.dataset.slot] = b.dataset.id;
-        el.querySelectorAll(`.pd-piece[data-slot="${b.dataset.slot}"]`).forEach(x => x.setAttribute('aria-pressed', String(cur.wear[x.dataset.slot] === x.dataset.id)));
-      }));
+      <header class="pd-top pd-dresstop">${ib('shut', 'back', 'Cancel')}<span></span><button class="pd-btn pd-pri pd-sm" type="button" data-pd="save">${icon('check')}Save</button></header>
+      <div class="pd-preview"></div>
+      <p class="pd-chosen" aria-live="polite"></p>
+      <div class="pd-tabs" role="tablist" aria-label="Dress up">${TABS.map(([id, ic, name], i) => `<button type="button" role="tab" data-tab="${id}" aria-selected="${i === 0}" aria-controls="pd-panel" aria-label="${esc(name)}" title="${esc(name)}">${icon(ic)}</button>`).join('')}</div>
+      <div class="pd-panel" id="pd-panel" role="tabpanel"></div>`, el => {
+      const prev = dogFrame(cur, { label: 'Your dog' }), panel = el.querySelector('.pd-panel'), chosen = el.querySelector('.pd-chosen');
+      el.querySelector('.pd-preview').append(prev.el);
+      const update = (what) => { prev.dress(cur); if (what) chosen.textContent = what; };
+      const radio = (b, on) => b.setAttribute('aria-checked', String(on));
+      const tabs = {
+        dog() {
+          const g = document.createElement('div'); g.className = 'pd-dogs'; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', 'Dog');
+          g.append(...DOGS.map(d => {
+            const b = document.createElement('button');
+            b.type = 'button'; b.className = 'pd-dogpick'; b.dataset.dog = d.id; b.setAttribute('role', 'radio'); radio(b, d.id === cur.dog);
+            b.setAttribute('aria-label', `${d.name}, ${d.breedName}`); b.title = d.hint;
+            b.append(face({ dog: d.id, collar: cur.collar }));
+            b.addEventListener('click', () => {
+              /* a coat carries over where the new breed has one of that name (black and tan, cream), else its own */
+              if (cur.coat && !coatsFor(d.id).some(k => k.id === cur.coat && k.from !== d.id)) delete cur.coat;
+              cur.dog = d.id; g.querySelectorAll('.pd-dogpick').forEach(x => radio(x, x === b));
+              update(`${d.name} · ${d.breedName}`); prev.tap();
+            });
+            return b;
+          }));
+          return g;
+        },
+        coat() {   /* the breed's coats; the dog's own is the empty id, the look's default */
+          return swatches('Coat', coatsFor(cur.dog).map(k => ({ id: k.from === cur.dog ? '' : k.id, name: k.name, colors: k.swatch })), cur.coat || '', v => { if (v) cur.coat = v; else delete cur.coat; });
+        },
+        collar() {   /* the dog's own colour first, then every other */
+          const own = lookDog({ dog: cur.dog }).pal.collar;
+          if (COLLARS.find(k => k.id === cur.collar)?.hex === own) delete cur.collar;
+          return swatches('Collar', [{ id: '', name: 'Its own', colors: [own] }, ...COLLARS.filter(k => k.hex !== own).map(k => ({ id: k.id, name: k.name, colors: [k.hex] }))], cur.collar || '', v => { if (v) cur.collar = v; else delete cur.collar; });
+        }
+      };
+      function swatches(label, opts, now, set) {
+        const g = document.createElement('div'); g.className = 'pd-swatches'; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', label);
+        g.append(...opts.map(o => {
+          const b = document.createElement('button');
+          b.type = 'button'; b.className = 'pd-swatch'; b.dataset.v = o.id; b.setAttribute('role', 'radio'); radio(b, o.id === now);
+          b.setAttribute('aria-label', o.name); b.title = o.name;
+          b.innerHTML = `<i style="--a:${o.colors[0]};--b:${o.colors[1] || o.colors[0]}"></i>`;
+          b.addEventListener('click', () => { set(o.id); g.querySelectorAll('.pd-swatch').forEach(x => radio(x, x === b)); update(o.name); });
+          return b;
+        }));
+        return g;
+      }
+      function pieces(slot) {
+        const g = document.createElement('div'); g.className = 'pd-pieces';
+        const list = ITEMS.filter(i => i.slot === slot && !i.exclusive).sort((a, b) => Number(locker.open.has(b.id)) - Number(locker.open.has(a.id)) || a.price - b.price);
+        const none = document.createElement('button');
+        none.type = 'button'; none.className = 'pd-piece pd-none'; none.dataset.slot = slot; none.dataset.id = '';
+        none.setAttribute('aria-label', `No ${SLOT_NAME[slot].toLowerCase()}`); none.innerHTML = icon('x');
+        g.append(none, ...list.map(it => {
+          const b = document.createElement('button'), open = locker.open.has(it.id);
+          b.type = 'button'; b.className = 'pd-piece'; b.dataset.id = it.id; b.dataset.slot = slot; b.dataset.r = it.rarity;
+          b.disabled = !open; b.setAttribute('aria-label', open ? it.name : `${it.name}, locked`); b.title = it.name;
+          b.innerHTML = `<svg viewBox="${it.tile || it.vb || VB[slot]}" aria-hidden="true">${it.icon || it.svg}</svg>${open ? '' : `<span class="pd-lock">${icon('lock')}</span>`}`;
+          return b;
+        }));
+        const mark = () => g.querySelectorAll('.pd-piece').forEach(x => x.setAttribute('aria-pressed', String((cur.wear[slot] || '') === x.dataset.id)));
+        g.addEventListener('click', e => {
+          const b = e.target.closest('.pd-piece'); if (!b || b.disabled) return;
+          if (b.dataset.id) cur.wear[slot] = b.dataset.id; else delete cur.wear[slot];
+          mark(); update(b.dataset.id ? itemOf(b.dataset.id).name : `No ${SLOT_NAME[slot].toLowerCase()}`);
+        });
+        mark();
+        const wrap = document.createElement('div'); wrap.append(g);
+        if (list.some(it => !locker.open.has(it.id))) wrap.insertAdjacentHTML('beforeend', `<p class="pd-locknote">${icon('trophy')}<span>Win duels to open more</span></p>`);
+        return wrap;
+      }
+      const show = id => {
+        el.querySelectorAll('[role="tab"]').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+        panel.replaceChildren(tabs[id] ? tabs[id]() : pieces(id));
+        panel.setAttribute('aria-label', TABS.find(t => t[0] === id)[2]);
+      };
+      el.querySelector('.pd-tabs').addEventListener('click', e => { const t = e.target.closest('[role="tab"]'); if (t) show(t.dataset.tab); });
+      show('dog');
+      chosen.textContent = `${breedOf(cur.dog).name} · ${breedOf(cur.dog).breedName}`;
       el.querySelector('[data-pd="save"]').addEventListener('click', async () => {
-        await busy(async () => { const p = await (S.lobby ? S.lobby.look(cur) : S.t.touch(S.me, cur)); S.me = { ...S.me, look: p.look }; remember(S.me); closeSheet(); paintLobby(); }, () => {});
+        const look = lookOf(cur);
+        await busy(async () => { const p = await (S.lobby ? S.lobby.look(look) : S.t.touch(S.me, look)); S.me = { ...S.me, look: p.look }; remember(S.me); closeSheet(); paintLobby(); }, () => { chosen.textContent = S.err; });
       });
-    });
+    }, { full: true, label: 'Dress your dog' });
   }
-  const unlockedFirst = (slot, locker) => ITEMS.filter(i => i.slot === slot && !i.exclusive).sort((a, b) => Number(locker.open.has(b.id)) - Number(locker.open.has(a.id)) || a.price - b.price);
+  function openReview(st, me, opp) {
+    const ai = st.setup.questions.some(q => q.origin === 'ai');
+    sheet(`<div class="pd-sheet-head"><span></span><h2 class="pd-sheet-title">Review</h2>${ai ? '<span class="pd-qtag">AI-written</span>' : ''}${ib('shut', 'x', 'Close')}</div><ol class="pd-review"></ol>`, el => {
+      el.querySelector('.pd-review').append(...st.setup.questions.map((q, i) => {
+        const R = st.rounds[i], a = R?.answers[me], b = R?.answers[opp], li = document.createElement('li');
+        li.className = 'pd-rv'; li.dataset.ok = a?.ok ? '1' : '0';
+        li.innerHTML = `<p class="pd-rv-q"></p><p class="pd-rv-a">${icon('check')}<span></span></p>`;
+        li.querySelector('.pd-rv-q').textContent = q.stem;
+        li.querySelector('.pd-rv-a span').textContent = q.options[q.answer];
+        if (a && a.choice !== null && a.choice !== undefined && !a.ok) {
+          li.insertAdjacentHTML('beforeend', `<p class="pd-rv-no">${icon('x')}<span></span></p>`);
+          li.lastChild.querySelector('span').textContent = q.options[a.choice];
+          if (q.notes?.[a.choice]) { const n = document.createElement('p'); n.className = 'pd-rv-why'; n.textContent = q.notes[a.choice]; li.append(n); }
+        }
+        if (q.why) { const w = document.createElement('p'); w.className = 'pd-rv-why'; w.textContent = q.why; li.append(w); }
+        const who = document.createElement('p'); who.className = 'pd-rv-who';
+        who.textContent = `You ${a?.ok ? 'right' : 'wrong'} · ${S.match?.them?.name || 'Them'} ${b?.ok ? 'right' : 'wrong'}`;
+        li.append(who);
+        return li;
+      }));
+    }, { label: 'Review' });
+  }
 
   /* ---- practice ---- */
   async function startPractice() {
@@ -297,39 +510,56 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     S.screen = 'match';
     const me = isPractice ? S.worldMe : S.me, t = isPractice ? S.world.transport : S.t;
     const mine = d.a === me.id, them = d.them || (S.lv?.mates || []).find(p => p.id === (mine ? d.b : d.a)) || { name: 'Your mate', look: { dog: 'rosie', wear: {} } };
-    const myL = myLook();
+    const myL = myLook(), theirL = lookOf(them.look || { dog: 'rosie' });
+    const side = who => `<div class="pd-side pd-${who}"><div class="pd-dogslot"></div>
+      <div class="pd-meta"><b class="pd-pname"></b><span class="pd-score">0</span><i class="pd-status"></i></div>${who === 'theirs' ? '<span class="pd-say" hidden></span>' : ''}</div>`;
     shell.innerHTML = `
-      <header class="pd-top pd-mtop"><button class="pd-x" type="button" data-pd="leave" aria-label="Leave the duel"></button><div class="pd-dots" aria-hidden="true"></div><span class="pd-roundno"></span></header>
+      <header class="pd-top pd-mtop">${ib('leave', 'x', 'Leave the duel')}<div class="pd-dots" aria-hidden="true"></div><span class="pd-roundno"></span></header>
       <main class="pd-main pd-match">
-        <section class="pd-versus">
-          <div class="pd-side pd-mine"><div class="pd-dogslot"></div><b class="pd-pname">You</b><span class="pd-score">0</span><i class="pd-status"></i></div>
-          <div class="pd-vs" aria-hidden="true">VS</div>
-          <div class="pd-side pd-theirs"><div class="pd-dogslot"></div><b class="pd-pname"></b><span class="pd-score">0</span><i class="pd-status"></i><span class="pd-say" hidden></span></div>
-        </section>
+        <section class="pd-versus">${side('mine')}${side('theirs')}</section>
         <div class="pd-timer" aria-hidden="true"><i></i></div>
-        <article class="pd-card pd-q" aria-live="off">
-          <p class="pd-qtag"></p><p class="pd-stem"></p>
+        <article class="pd-q" aria-live="off">
+          <p class="pd-qtag" hidden></p><p class="pd-stem"></p>
           <div class="pd-opts"></div>
           <div class="pd-why" hidden></div>
         </article>
         <div class="pd-hold" hidden><div class="pd-hold-in"><p class="pd-big"></p><p class="pd-hold-sub"></p><div class="pd-hold-acts"></div></div></div>
-        <footer class="pd-emotes">${Object.entries(EMOTES).filter(([k]) => k !== 'again').map(([k, v]) => `<button type="button" class="pd-emote" data-e="${k}">${esc(v)}</button>`).join('')}</footer>
+        <footer class="pd-emotes" aria-label="Emotes">${Object.keys(EMOTE_ICON).map(k => `<button type="button" class="pd-emote" data-e="${k}" aria-label="${esc(EMOTES[k])}" title="${esc(EMOTES[k])}">${icon(EMOTE_ICON[k])}</button>`).join('')}</footer>
         <p class="pd-net" hidden></p>
       </main>`;
     wireCommon();
     const theirName = them.name || 'Your mate';
+    shell.querySelector('.pd-mine .pd-pname').textContent = 'You';
     shell.querySelector('.pd-theirs .pd-pname').textContent = theirName;
-    const myDog = dogFrame(myL, { label: 'Your dog' }), theirDog = dogFrame(them.look || { dog: 'rosie' }, { mirror: true, label: `${theirName}'s dog` });
+    const myDog = dogFrame(myL, { label: 'Your dog' }), theirDog = dogFrame(theirL, { mirror: true, label: `${theirName}'s dog` });
     shell.querySelector('.pd-mine .pd-dogslot').append(myDog.el);
     shell.querySelector('.pd-theirs .pd-dogslot').append(theirDog.el);
     S.dogs = { me: myDog, them: theirDog };
-    S.match = { d, me, them, t, practice: isPractice, last: {}, round: -1, revealed: -1, emoteN: 0, reported: false };
+    /* the two faces that mark who picked what on a reveal: drawn once, moved to the option each picked */
+    S.match = { d, me, them, t, practice: isPractice, last: {}, round: -1, revealed: -1, emoteN: 0, reported: false, faces: { me: face(myL, 'pd-pick'), them: face(theirL, 'pd-pick') } };
+    S.match.faces.me.dataset.who = 'me'; S.match.faces.them.dataset.who = 'them';
     shell.querySelector('[data-pd="leave"]').addEventListener('click', confirmLeave);
     shell.querySelectorAll('.pd-emote').forEach(b => b.addEventListener('click', () => { if (S.session?.emote(b.dataset.e)) { b.classList.add('pd-sent'); setTimeout(() => b.classList.remove('pd-sent'), 600); S.dogs.me.expr(EXPR.emote); } }));
     S.session = createSession({ transport: t, me, duel: d, onChange: v => { S.view = v; paintMatch(); } });
     S.session.start();
     if (accept) S.session.accept();
+    if (!isPractice && d.a === me.id && (d.status || 'invited') === 'invited') watchCrossed(d, me, them);
     tick();
+  }
+  /* crossed challenges (both tapped Rematch, or challenged each other at once): the duel with the smaller id is the
+     one both play, so the two phones settle on the same one without asking anybody */
+  function watchCrossed(d, me, them) {
+    clearInterval(S.crossT);
+    S.crossT = setInterval(async () => {
+      if (S.screen !== 'match' || S.match?.d.id !== d.id || S.view?.state.phase !== 'invited') { clearInterval(S.crossT); return; }
+      try {
+        const theirs = (await S.t.inbox(S.me)).find(x => x.status === 'invited' && x.a === them.id && x.b === me.id);
+        if (!theirs || theirs.id > d.id || S.match?.d.id !== d.id) return;
+        clearInterval(S.crossT);
+        S.session.leave();
+        openDuel({ ...theirs, them }, { accept: true });
+      } catch { /* the next tick */ }
+    }, 2000);
   }
   function pick(i) {
     if (!S.session?.answer(i)) return;
@@ -358,6 +588,11 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     };
     S.raf = requestAnimationFrame(step);
   }
+  function setStatus(el, k) {
+    if (el.dataset.k === k) return;
+    el.dataset.k = k;
+    el.innerHTML = k ? `${icon(STATUS[k][0])}<span class="pd-vh">${STATUS[k][1]}</span>` : '';
+  }
   function paintMatch() {
     const v = S.view, M = S.match;
     if (S.screen !== 'match' || !v || !M) return;
@@ -372,147 +607,147 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('.pd-roundno').textContent = st.phase === 'live' || s.name === 'reveal' ? `${Math.min(st.rounds.length, (s.round ?? st.round) + 1)}/${st.rounds.length}` : '';
     /* scores move on the reveal, never before: a jump while they are still thinking would tell them you were right */
     const shown = p => st.rounds.reduce((t, R) => t + (R.closed ? R.answers[p]?.pts || 0 : 0), 0);
-    shell.querySelector('.pd-mine .pd-score').textContent = fmt(shown(me));
-    shell.querySelector('.pd-theirs .pd-score').textContent = fmt(shown(opp));
+    for (const [sel, p] of [['.pd-mine .pd-score', me], ['.pd-theirs .pd-score', opp]]) {
+      const el = shell.querySelector(sel), txt = fmt(shown(p));
+      if (el.textContent !== txt) { el.textContent = txt; el.classList.remove('pd-bump'); void el.offsetWidth; if (txt !== '0') el.classList.add('pd-bump'); }
+    }
     /* their status: never what they picked until the round closes */
-    const theirStatus = s.name === 'question' || s.name === 'locked' ? (v.theirs ? 'Answered' : 'Thinking…') : s.name === 'reveal' ? (st.rounds[s.round]?.answers[opp]?.ok ? 'Right' : 'Wrong') : '';
-    const myStatus = s.name === 'locked' ? 'Locked in' : s.name === 'reveal' ? (st.rounds[s.round]?.answers[me]?.ok ? 'Right' : 'Wrong') : '';
-    shell.querySelector('.pd-theirs .pd-status').textContent = theirStatus;
-    shell.querySelector('.pd-mine .pd-status').textContent = myStatus;
-    shell.querySelector('.pd-theirs').classList.toggle('pd-done', !!v.theirs && (s.name === 'question' || s.name === 'locked'));
+    const live = s.name === 'question' || s.name === 'locked', rv = s.name === 'reveal' ? st.rounds[s.round] : null;
+    setStatus(shell.querySelector('.pd-theirs .pd-status'), live ? (v.theirs ? 'done' : 'think') : rv ? (rv.answers[opp]?.ok ? 'ok' : 'no') : '');
+    setStatus(shell.querySelector('.pd-mine .pd-status'), s.name === 'locked' ? 'lock' : rv ? (rv.answers[me]?.ok ? 'ok' : 'no') : '');
+    shell.querySelector('.pd-theirs').classList.toggle('pd-done', !!v.theirs && live);
     if (v.theirs && M.last.theirs !== `${s.round}`) { M.last.theirs = `${s.round}`; if (s.name === 'question') say(`${M.them.name || 'Your mate'} answered`); }
     /* an emote from them shows over their dog */
     const em = st.emotes.filter(e => e.by === opp);
     if (em.length > M.emoteN) {
       M.emoteN = em.length;
-      const b = shell.querySelector('.pd-say');
-      b.textContent = EMOTES[em.at(-1).e]; b.hidden = false; S.dogs.them.expr(EXPR.emote); S.dogs.them.tap();
+      const b = shell.querySelector('.pd-say'), e = em.at(-1).e;
+      b.innerHTML = `${icon(EMOTE_ICON[e] || 'paw')}<span class="pd-vh"></span>`; b.lastChild.textContent = EMOTES[e] || '';
+      b.hidden = false; S.dogs.them.expr(EXPR.emote); S.dogs.them.tap(); say(`${M.them.name || 'Your mate'}: ${EMOTES[e] || ''}`);
       clearTimeout(M.sayT); M.sayT = setTimeout(() => { b.hidden = true; }, 2600);
     }
     /* the question card */
     const card = shell.querySelector('.pd-q'), hold = shell.querySelector('.pd-hold');
-    const showQ = q && (s.name === 'question' || s.name === 'locked' || s.name === 'reveal');
+    const showQ = q && (live || s.name === 'reveal');
     card.hidden = !showQ;
     if (showQ) {
-      const key = `${s.round}`;
       if (M.round !== s.round) {
         M.round = s.round;
-        shell.querySelector('.pd-qtag').textContent = [q.origin === 'ai' ? 'AI-written' : '', q.topic || ''].filter(Boolean).join(' · ');
+        const tag = shell.querySelector('.pd-qtag');
+        tag.textContent = q.origin === 'ai' ? 'AI-written' : ''; tag.hidden = q.origin !== 'ai';
         shell.querySelector('.pd-stem').textContent = q.stem;
         if (s.name === 'question') say(`Question ${s.round + 1} of ${st.rounds.length}. ${secs} seconds.`);
         const opts = shell.querySelector('.pd-opts');
         opts.replaceChildren(...q.options.map((o, i) => {
           const b = document.createElement('button'); b.type = 'button'; b.className = 'pd-opt'; b.dataset.i = i;
-          b.innerHTML = '<kbd></kbd><span></span><em class="pd-who" hidden></em>';
+          b.innerHTML = '<kbd></kbd><span></span><em class="pd-who"></em>';
           b.querySelector('kbd').textContent = LETTERS[i]; b.querySelector('span').textContent = o;
           b.addEventListener('click', () => pick(i));
           return b;
         }));
         shell.querySelector('.pd-why').hidden = true;
         S.dogs.me.expr(EXPR.think); S.dogs.them.expr(EXPR.think);
-        card.dataset.round = key;
       }
-      const picked = v.picked ?? v.mine?.choice;
+      /* the log's answer, once it has one, over this phone's pick: the same player on another phone may have answered
+         first, and the round counts that one */
+      const picked = v.mine ? v.mine.choice : v.picked;
       const R = st.rounds[s.round], reveal = s.name === 'reveal' && R?.closed;
       shell.querySelectorAll('.pd-opt').forEach((b, i) => {
         b.disabled = s.name !== 'question' || picked !== undefined || s.left <= 0;
         b.classList.toggle('pd-picked', picked === i);
         b.classList.toggle('pd-right', !!reveal && i === q.answer);
         b.classList.toggle('pd-wrong', !!reveal && picked === i && i !== q.answer);
-        const who = b.querySelector('.pd-who'), mineHere = reveal && R.answers[me]?.choice === i, theirsHere = reveal && R.answers[opp]?.choice === i;
-        who.hidden = !(mineHere || theirsHere);
-        who.textContent = mineHere && theirsHere ? 'You both' : mineHere ? 'You' : theirsHere ? (M.them.name || 'Them') : '';
         b.setAttribute('aria-pressed', String(picked === i));
       });
       const why = shell.querySelector('.pd-why');
       if (reveal && M.revealed !== s.round) {
         M.revealed = s.round;
-        const a = R.answers[me], b = R.answers[opp];
-        const note = a?.choice !== null && a?.choice !== undefined && !a.ok ? q.notes?.[a.choice] : null;
-        why.innerHTML = `<p class="pd-pts"></p>${note ? '<p class="pd-note"></p>' : ''}${q.why ? '<p class="pd-whytext"></p>' : ''}`;
-        why.querySelector('.pd-pts').textContent = a?.ok ? `Right! +${fmt(a.pts)}` : a?.how === 'answer' && a.choice === null ? 'Out of time' : 'Not this time';
-        why.querySelector('.pd-pts').classList.toggle('pd-good', !!a?.ok);
-        if (note) why.querySelector('.pd-note').textContent = `Why not ${LETTERS[a.choice]}: ${note}`;
-        if (q.why) why.querySelector('.pd-whytext').textContent = q.why;
+        const a = R.answers[me], b = R.answers[opp], opts = shell.querySelectorAll('.pd-opt');
+        /* who picked what: each dog's face on its option */
+        for (const [k, ans] of [['me', a], ['them', b]]) { const o = opts[ans?.choice]; if (o && ans.choice !== null) o.querySelector('.pd-who').append(M.faces[k]); else M.faces[k].remove(); }
+        why.innerHTML = '<p class="pd-pts"></p>';
+        const pts = why.querySelector('.pd-pts');
+        pts.textContent = a?.ok ? `+${fmt(a.pts)}` : a?.how === 'answer' && a.choice === null ? 'Too slow' : 'Wrong';
+        pts.classList.toggle('pd-good', !!a?.ok);
         why.hidden = false;
         S.dogs.me.expr(a?.ok ? EXPR.right : EXPR.wrong); S.dogs.them.expr(b?.ok ? EXPR.right : EXPR.wrong);
         if (a?.ok) S.dogs.me.tap();
         say(`${a?.ok ? 'Right' : 'Wrong'}. ${M.them.name || 'Your mate'} was ${b?.ok ? 'right' : 'wrong'}. ${fmt(st.score[me])} to ${fmt(st.score[opp])}.`);
-      } else if (!reveal) why.hidden = true;
+      } else if (!reveal) { why.hidden = true; M.faces.me.remove(); M.faces.them.remove(); }
     }
     shell.querySelector('.pd-match').toggleAttribute('data-live', st.phase === 'live' || st.phase === 'done');
     /* the holds: waiting for an accept, the countdown, the end. An ending shows only once the log agrees (v.firm):
        this phone's own reply can run ahead of a move it has not polled yet */
     const big = shell.querySelector('.pd-big'), sub = shell.querySelector('.pd-hold-sub'), acts = shell.querySelector('.pd-hold-acts');
-    const fp = v.firm.phase;
+    const fp = v.firm.phase, them = M.them.name || 'your mate';
     let holdOn = true;
+    hold.dataset.k = '';
     if (st.phase === 'invited') {
-      if (me === st.b) { big.textContent = `${M.them.name || 'A mate'} challenges you`; sub.textContent = setupLine(st.setup); setActs([['Accept', 'pri', () => S.session.accept()], ['Decline', '', () => { S.session.decline(); setTimeout(showLobbyOrAuth, 800); }]]); }
-      else { big.textContent = `Waiting for ${M.them.name || 'your mate'}`; sub.textContent = `${setupLine(st.setup)}. The duel starts when they accept.`; setActs([['Cancel', '', () => { S.session.leave(); setTimeout(showLobbyOrAuth, 800); }]]); }
-    } else if (s.name === 'ready') { sub.textContent = 'Get ready'; setActs([]); }
+      if (me === st.b) { big.textContent = `${M.them.name || 'A mate'} challenges you`; setBits(st.setup); setActs([['Play', 'pri', 'check', () => S.session.accept()], ['Decline', '', 'x', () => { S.session.decline(); setTimeout(showLobbyOrAuth, 800); }]]); }
+      else { big.textContent = `Waiting for ${them}`; setBits(st.setup); setActs([['Cancel', '', 'x', () => { S.session.leave(); setTimeout(showLobbyOrAuth, 800); }]]); }
+    } else if (s.name === 'ready') { hold.dataset.k = 'count'; sub.textContent = 'Get ready'; setActs([]); }
     else if (s.name === 'wait') { big.textContent = '…'; sub.textContent = 'Starting'; setActs([]); }
-    else if (fp === 'declined' || fp === 'cancelled') { big.textContent = fp === 'declined' ? 'Not this time' : 'Cancelled'; sub.textContent = fp === 'declined' ? `${M.them.name || 'Your mate'} declined.` : 'The challenge was called off.'; setActs([['Back', 'pri', showLobbyOrAuth]]); }
+    else if (fp === 'declined' || fp === 'cancelled') { big.textContent = fp === 'declined' ? 'Declined' : 'Called off'; sub.textContent = ''; setActs([['Back', 'pri', 'home', showLobbyOrAuth]]); }
     else if (fp === 'done' && s.name !== 'reveal') { holdOn = false; showResults(); return; }
     else if (st.phase !== 'live' && s.name !== 'reveal') { big.textContent = '…'; sub.textContent = 'Checking the result'; setActs([]); }
     else holdOn = false;
     hold.hidden = !holdOn;
+    function setBits(setup) { sub.replaceChildren(bits(setup)); }
     function setActs(list) {
       const sig = list.map(x => x[0]).join('|');
       if (acts.dataset.sig === sig) return;
       acts.dataset.sig = sig;
-      acts.replaceChildren(...list.map(([label, kind, fn]) => { const b = document.createElement('button'); b.type = 'button'; b.className = `pd-btn${kind ? ' pd-' + kind : ''}`; b.textContent = label; b.addEventListener('click', fn); return b; }));
+      acts.replaceChildren(...list.map(([label, kind, ic, fn]) => { const b = document.createElement('button'); b.type = 'button'; b.className = `pd-btn${kind ? ' pd-' + kind : ''}`; b.innerHTML = `${icon(ic)}<span></span>`; b.lastChild.textContent = label; b.addEventListener('click', fn); return b; }));
     }
     /* the network, only when it matters */
     const net = shell.querySelector('.pd-net'), sending = v.sending.find(x => x.tries > 0);
     const away = st.phase === 'live' && v.mine && !v.theirs && s.name === 'locked' && s.left <= 0;
     net.hidden = !(sending || away);
-    net.textContent = sending ? 'Reconnecting… your answer is safe and will send' : away ? `${M.them.name || 'Your mate'} seems away. Moving on in a few seconds.` : '';
+    net.textContent = sending ? 'Reconnecting… your answer is safe' : away ? `${M.them.name || 'Your mate'} seems away` : '';
   }
   function showLobbyOrAuth() { if (S.world) { S.world.stop(); S.world = null; S.t = transport; } if (S.me) showLobby(); else showAuth(); }
   function confirmLeave() {
     const st = S.view?.state;
     if (!st || st.phase !== 'live') { S.session?.leave?.(); showLobbyOrAuth(); return; }
-    sheet(`<h2 class="pd-h2">Leave the duel?</h2><p class="pd-sub">${esc(S.match.them.name || 'Your mate')} wins if you go.</p>
+    sheet(`<h2 class="pd-sheet-title">Leave the duel?</h2><p class="pd-sub"></p>
       <button class="pd-btn pd-danger" type="button" data-pd="go">Leave</button><button class="pd-btn" type="button" data-pd="shut">Keep playing</button>`, el => {
+      el.querySelector('.pd-sub').textContent = `${S.match.them.name || 'Your mate'} wins if you go.`;
       el.querySelector('[data-pd="go"]').addEventListener('click', () => { S.session.leave(); closeSheet(); });   // the leave row ends the game and paints the result
-    });
+    }, { label: 'Leave the duel?' });
   }
 
-  /* ---- the result ---- */
+  /* ---- the result: the dogs react, a crown on the winner, the score and each round under each dog ---- */
   function showResults() {
     const v = S.view, M = S.match;
     if (!v || !M || S.screen === 'results') return;
     S.screen = 'results';
     cancelAnimationFrame(S.raf);
-    const st = v.firm, me = v.me, opp = v.opp, out = outcome(st, me) || 'loss';
-    const head = out === 'win' ? 'You win!' : out === 'draw' ? 'A draw' : `${M.them.name || 'Your mate'} wins`;
-    const why = st.reason === 'leave' ? (st.winner === me ? `${M.them.name || 'Your mate'} left the duel.` : 'You left the duel.') : st.reason === 'forfeit' ? (st.winner === me ? `${M.them.name || 'Your mate'} went quiet for three rounds.` : 'You were away for three rounds.') : '';
+    const st = v.firm, me = v.me, opp = v.opp, out = outcome(st, me) || 'loss', them = M.them.name || 'Your mate';
+    const head = out === 'win' ? 'You win!' : out === 'draw' ? 'A draw' : `${them} wins`;
+    const why = st.reason === 'leave' ? (st.winner === me ? `${them} left` : 'You left') : st.reason === 'forfeit' ? (st.winner === me ? `${them} went quiet` : 'You went quiet') : '';
     const main = shell.querySelector('.pd-main');
     main.classList.add('pd-over');
     shell.querySelector('.pd-q').hidden = true; shell.querySelector('.pd-hold').hidden = true; shell.querySelector('.pd-timer').hidden = true; shell.querySelector('.pd-net').hidden = true;
     shell.querySelector('.pd-roundno').textContent = '';
+    shell.querySelectorAll('.pd-status').forEach(el => setStatus(el, ''));
     const res = document.createElement('section');
-    res.className = 'pd-card pd-result';
+    res.className = 'pd-result';
     res.dataset.out = out;
-    res.innerHTML = `<h2 class="pd-big" tabindex="-1"></h2><p class="pd-sub pd-reason"></p>
-      <div class="pd-tally"><span><b></b><small>You · <i></i> right</small></span><span><b></b><small><em></em> · <i></i> right</small></span></div>
-      <div class="pd-strip" role="img"></div>
-      <div class="pd-acts"><button class="pd-btn pd-pri" type="button" data-pd="again">Rematch</button><button class="pd-btn" type="button" data-pd="lobby">${M.practice ? 'Done' : 'Back to the lobby'}</button></div>`;
+    res.innerHTML = `<h2 class="pd-big" tabindex="-1"></h2><p class="pd-reason" hidden></p>
+      <div class="pd-tally"><span><b></b><span class="pd-rounds"></span></span><span><b></b><span class="pd-rounds"></span></span></div>
+      <div class="pd-acts"><button class="pd-btn pd-pri" type="button" data-pd="again">${icon('repeat')}Rematch</button>${ib('review', 'list', 'Review the questions')}${ib('lobby', 'home', M.practice ? 'Done' : 'Back to the lobby')}</div>`;
     res.querySelector('.pd-big').textContent = head;
-    res.querySelector('.pd-reason').textContent = why || `${st.rounds.length} questions · ${st.setup.secs} s each`;
+    if (why) { res.querySelector('.pd-reason').textContent = why; res.querySelector('.pd-reason').hidden = false; }
     const [mine, theirs] = res.querySelectorAll('.pd-tally > span');
-    mine.querySelector('b').textContent = fmt(st.score[me]); mine.querySelector('i').textContent = st.right[me];
-    theirs.querySelector('b').textContent = fmt(st.score[opp]); theirs.querySelector('em').textContent = M.them.name || 'Them'; theirs.querySelector('i').textContent = st.right[opp];
-    /* round by round: a row of dots each, green where right */
-    const strip = res.querySelector('.pd-strip'), line = (label, p) => {
-      const row = document.createElement('div'); row.className = 'pd-strow';
-      row.innerHTML = '<b></b><span></span>';
-      row.querySelector('b').textContent = label;
-      row.querySelector('span').append(...st.rounds.map(R => Object.assign(document.createElement('i'), { className: R.answers[p]?.ok ? 'pd-ok' : 'pd-no' })));
-      return row;
+    const dots = (el, p) => {
+      el.append(...st.rounds.map(R => Object.assign(document.createElement('i'), { className: R.answers[p]?.ok ? 'pd-ok' : 'pd-no' })));
+      el.setAttribute('role', 'img');
+      el.setAttribute('aria-label', `${st.right[p]} of ${st.rounds.length} right`);
     };
-    strip.replaceChildren(line('You', me), line(M.them.name || 'Them', opp));
-    strip.setAttribute('aria-label', `Right answers by round: you ${st.rounds.map(R => (R.answers[me]?.ok ? 'right' : 'wrong')).join(', ')}; ${M.them.name || 'them'} ${st.rounds.map(R => (R.answers[opp]?.ok ? 'right' : 'wrong')).join(', ')}`);
+    mine.querySelector('b').textContent = fmt(st.score[me]); dots(mine.querySelector('.pd-rounds'), me);
+    theirs.querySelector('b').textContent = fmt(st.score[opp]); dots(theirs.querySelector('.pd-rounds'), opp);
+    /* the winner's crown, by their score (over the dog, a tall hat or an ear would meet it) */
+    if (st.winner) (st.winner === me ? mine : theirs).querySelector('b').insertAdjacentHTML('afterbegin', `<span class="pd-crown" aria-hidden="true">${icon('crown')}</span>`);
     main.insertBefore(res, shell.querySelector('.pd-emotes'));
     shell.querySelector('.pd-dots').replaceChildren();
     S.dogs.me.expr(out === 'win' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);
@@ -521,15 +756,36 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     say(`${head}. ${fmt(st.score[me])} to ${fmt(st.score[opp])}.`);
     res.querySelector('[data-pd="lobby"]').addEventListener('click', showLobbyOrAuth);
     res.querySelector('[data-pd="again"]').addEventListener('click', () => rematch(st));
+    res.querySelector('[data-pd="review"]').addEventListener('click', () => openReview(st, me, opp));
     res.querySelector('.pd-big').focus({ preventScroll: true });
     /* answering on a small phone leaves the view scrolled down to the options: bring the two dogs back into view, the
        winner's celebration is the point of this screen (whatever scrolls: the page here, a sheet in a host) */
     shell.scrollIntoView?.({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    if (!M.practice && M.them.id) watchRematch();
     if (!M.reported) { M.reported = true; try { onResult({ outcome: out, score: st.score[me], theirs: st.score[opp], right: st.right[me], rounds: st.rounds.length, practice: M.practice, reason: st.reason }); } catch { /* the host's */ } }
+  }
+  /* their rematch, while this phone shows the result: a new challenge from them in the inbox (the finished duel's
+     own log has stopped being asked by then), and the big button plays it */
+  function watchRematch() {
+    const M = S.match;
+    clearInterval(S.crossT);
+    S.crossT = setInterval(async () => {
+      if (S.screen !== 'results' || S.match !== M) { clearInterval(S.crossT); return; }
+      try {
+        const inv = (await S.t.inbox(S.me)).find(x => x.status === 'invited' && x.a === M.them.id && x.b === S.me.id);
+        const b = shell.querySelector('[data-pd="again"]');
+        if (!inv || !b || M.offer?.id === inv.id || S.match !== M) return;
+        M.offer = inv;
+        b.innerHTML = `${icon('zap')}<span>Play</span>`; b.classList.add('pd-glow');
+        b.setAttribute('aria-label', `Play the rematch ${M.them.name || 'your mate'} sent`);
+        say(`${M.them.name || 'Your mate'} wants a rematch`);
+      } catch { /* the next tick */ }
+    }, 2500);
   }
   async function rematch(st) {
     const M = S.match, opt = { rounds: st.rounds.length, secs: st.setup.secs, topic: st.setup.topic || '' };
     if (M.practice) { await startPractice(); return; }
+    if (M.offer) { openDuel({ ...M.offer, them: M.them }, { accept: true }); return; }
     const setup = makeSetup(pack, { ...opt, seed: freshSeed(), title: pack.title });
     await busy(async () => {
       const d = await challengeMate(M.them.id, setup);
@@ -547,15 +803,15 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   /* ---- plumbing ---- */
   function wireCommon() {
     shell.querySelector('[data-pd="close"]')?.addEventListener('click', () => { destroy(); onClose(); });
-    shell.querySelectorAll('[data-pd="practice"]').forEach(b => b.addEventListener('click', startPractice));
+    shell.querySelectorAll('.pd-auth [data-pd="practice"]').forEach(b => b.addEventListener('click', startPractice));
   }
   function stopAll(keepWorld = false) {
-    cancelAnimationFrame(S.raf);
+    cancelAnimationFrame(S.raf); clearInterval(S.crossT);
     S.session?.stop(); S.session = null;
     S.lobby?.stop(); S.lobby = null;
     if (!keepWorld && S.world) { S.world.stop(); S.world = null; S.t = transport; }
     closeSheet();
-    S.view = null; S._stage = null;
+    S.view = null; S._stage = null; S.hero = null;
   }
   function destroy() { stopAll(); if (keys === 'document') document.removeEventListener('keydown', onDocKey); root.replaceChildren(); root.classList.remove('pd'); }
 
@@ -579,7 +835,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   loadCss().then(async () => {
     const was = transport ? remembered() : null;
     if (was) {
-      S.me = was;
+      S.me = was; S.rejoin = true;
       showLobby();
       try { const p = await transport.touch(was); S.me = { ...was, ...p }; remember(S.me); } catch (e) { if (e.server) { remember(null); S.me = null; S.err = 'Please sign in again.'; showAuth(); } }
     } else showAuth();

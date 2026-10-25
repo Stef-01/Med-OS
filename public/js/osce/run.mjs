@@ -14,6 +14,7 @@ export function renderStart(main) {
   const done = Object.keys(ctx.mem.hist).filter(attempted).length, n3 = osceCounts(ctx.mem.hist);
   main.innerHTML = `<div class="os-start">
     <p class="os-kicker">${ctx.stations.length} stations · ${done} attempted${n3[0] || n3[1] ? ` · ${esc(nameOf(0))} ${n3[0]} · ${esc(nameOf(1))} ${n3[1]}` : ''}</p>
+    ${duelHtml()}
     ${pairHtml()}
     ${live || n ? `<button class="os-card os-bigcard os-in" data-os="resume">
         <span class="os-bigic">${I.resume}</span>
@@ -26,15 +27,21 @@ export function renderStart(main) {
       <span class="os-bigtx"><strong>New Study Session</strong>
         <span>Queue stations and run each one on the clock: one of you is the candidate, the other reads the patient and marks.</span></span>
       <span class="os-chev">${I.chevR}</span></button>
-    <button class="os-card os-bigcard os-in" data-os="duel" style="--d:2">
-      <span class="os-bigic">${I.duel}</span>
-      <span class="os-bigtx"><strong>Duel a Mate</strong>
-        <span>Race each other on the bank's differentials: the same questions on both phones, right and fast wins.</span></span>
-      <span class="os-chev">${I.chevR}</span></button>
     ${requestCardHtml()}
     ${doneHtml()}
   </div>`;
   runPaint();
+}
+
+/* Duel a Mate (founder 2026-10-25: "something you tap into from the main screen of the OSCE UI ... as it is a work in
+   progress"): a slim tile at the top, two of the duel's dogs face to face, marked Beta. The duel itself loads on the
+   tap (osce/duel.mjs, the vendored Pup Duel package); the faces are its dogs' icons */
+function duelHtml() {
+  const face = id => `<span><img src="./js/vendor/pup-duel/pup/rig/icons/${id}.png" alt="" width="40" height="40" decoding="async"></span>`;
+  return `<button class="os-card os-duelcard os-in" data-os="duel" style="--d:1">
+      <span class="os-duelfaces" aria-hidden="true">${face('mochi')}${face('duke')}</span>
+      <span class="os-bigtx"><strong>Duel a Mate <span class="os-beta">Beta</span></strong><span>Race a mate on the differentials</span></span>
+      <span class="os-chev">${I.chevR}</span></button>`;
 }
 
 /* Completed stations on the home (2026-10-20, founder: at the bottom, toggleable, a badge for completed vs AI-marked, a

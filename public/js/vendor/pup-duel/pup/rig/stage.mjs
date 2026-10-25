@@ -5,6 +5,8 @@
 import { EASE_IN_OUT, EASE_OUT, EASE_IN, clamp, PERIOD, B, SWITCH, MOVE, GIF_FPS, STILL } from './motion.mjs';
 import { EXPR, EXPR_ORDER } from './expressions.mjs';
 import { DOGS, resolve, dogById } from './breeds.mjs';
+import { dress } from './coats.mjs';
+import { still } from './still.mjs';
 import { NS, r3, set, tr, reach, drape } from './parts.mjs';
 import { hatFit, boxIn, makeDog } from './rig.mjs';
 
@@ -110,21 +112,22 @@ function relayout(arriving) {
 function addDog(r) {
   if (r.state === 'in') return;
   var wasLeaving = r.state === 'leaving';   // turn round where it is, don't re-enter from the edge
-  if (!r.slot) {
-    r.slot = document.createElementNS(NS, 'g');
-    r.slot.setAttribute('class', 'slot');
-    r.slot.setAttribute('tabindex', '0');
-    r.slot.setAttribute('role', 'button');
-    r.slot.setAttribute('aria-label', r.c.name + '. Tap to react, press and drag to pet.');
-    r.rig = makeDog(r.c, r.slot, 's-' + r.c.id);
-    bindSlot(r);
-  }
+  if (!r.slot) makeSlot(r);
   var next = null;
   for (var i = roster.indexOf(r) + 1; i < roster.length; i++) if (roster[i].slot && roster[i].slot.parentNode) { next = roster[i].slot; break; }
   if (!r.slot.parentNode) svg.insertBefore(r.slot, next);
   r.state = 'in';
   relayout(wasLeaving ? null : r);
   syncDock();
+}
+function makeSlot(r) {
+  r.slot = document.createElementNS(NS, 'g');
+  r.slot.setAttribute('class', 'slot');
+  r.slot.setAttribute('tabindex', '0');
+  r.slot.setAttribute('role', 'button');
+  r.slot.setAttribute('aria-label', r.c.name + '. Tap to react, press and drag to pet.');
+  r.rig = makeDog(r.c, r.slot, 's-' + r.c.id);
+  bindSlot(r);
 }
 function removeDog(r) {
   if (r.state !== 'in' || inScene().length <= 1) return;
@@ -255,24 +258,17 @@ function bindSlot(r) {
 }
 
 // ---- the bottom menu ----
+// (not in the embed, which never shows it: a still of every dog was most of an embed's DOM, and a duel has three
+// embeds open at once)
 var dogsEl = document.getElementById('dogs'), chipsEl = document.getElementById('chips'), exprLabel = document.getElementById('exprLabel');
-roster.forEach(function (r) {
+if (new URLSearchParams(location.search).get('embed') !== '1') roster.forEach(function (r) {
   var wrap = document.createElement('div');
   wrap.className = 'avatar-wrap';
   var btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'avatar';
-  var thumb = document.createElementNS(NS, 'svg');
-  var s = r.c.scale, m = r.c.mirror ? -1 : 1, hx = m * 18 * s, hy = -r.c.floorY * s;
-  thumb.setAttribute('viewBox', [hx - 64 * s, hy - 92 * s, 128 * s, 128 * s].map(r3).join(' '));
-  thumb.setAttribute('aria-hidden', 'true');
+  var thumb = still(r.c, { expr: 'curious' });   // a neutral, attentive face for the menu
   thumb.style.background = r.c.pal.disc;
-  var tg = document.createElementNS(NS, 'g');
-  thumb.appendChild(tg);
-  var trig = makeDog(r.c, tg, 'th-' + r.c.id);
-  tg.querySelector('[data-p="disc"]').setAttribute('r', '0');
-  trig.setExpr('curious', -1e12);          // a neutral, attentive face for the menu
-  trig.frame(0, STILL, 16);
   var who = document.createElement('span');
   who.className = 'who';
   who.innerHTML = '<b></b><span></span>';
@@ -301,6 +297,7 @@ function select(r) { selected = r; syncDock(); }
 function syncDock() {
   var n = inScene().length;
   roster.forEach(function (r) {
+    if (!r.ui) return;   // the embed has no menu
     var isIn = r.state === 'in';
     r.ui.btn.classList.toggle('out', !isIn);
     r.ui.btn.classList.toggle('selected', isIn && r === selected);
@@ -560,6 +557,7 @@ againEl.addEventListener('click', function () { if (lastGif) offer(lastGif); });
 var Q = new URLSearchParams(location.search), EMBED = Q.get('embed') === '1';
 var first = EMBED ? roster.findIndex(function (r) { return r.c.id === dogById(Q.get('dog')).id; }) : 0;   // an unknown dog: the registry's default
 if (EMBED) document.documentElement.classList.add('embed');
+if (EMBED) roster[first].c = resolve(dress(DOGS[first], { coat: Q.get('coat'), collar: Q.get('collar') }));   // the look's coat and collar (coats.mjs)
 addDog(roster[first]);
 if (EMBED) roster[first].rig.setExpr(EXPR[Q.get('expr')] ? Q.get('expr') : 'happy', clock);
 var startCam = cameraFor(inScene());
@@ -573,15 +571,33 @@ window.__dob = {
   at: function (c) { clock = c; draw(1000 / 60); }, tap: function (i) { roster[i].rig.excite(clock); },
   treat: function (i) { roster[i].rig.treat(clock); }, call: function () { inScene().forEach(function (r, i) { r.rig.call(clock + i * 110); }); },
   makeGif: makeGif, clock: function () { return clock; }, look: function (x, y) { lookAt(x, y); },
-  wear: function (i, m) { wear(roster[i], m, true); }   // scripts/doberman/fit-audit.mjs dresses a dog without postMessage
+  wear: function (i, m) { wear(roster[i], m, true); },   // scripts/doberman/fit-audit.mjs dresses a dog without postMessage
+  skin: function (m) { reskin(m); }                       // and the embed's dog in another coat (coats.mjs)
 };
+// the parent's dressing room (the duel's): the embedded dog becomes another dog, or itself in another coat or collar,
+// at once and where it stands (no walk on), keeping its face and what it wears
+var worn = null;
+function reskin(m) {
+  var i = roster.findIndex(function (q) { return q.c.id === dogById(m.dog).id; }), r = roster[i], was = roster[first], face = was.rig.exprId;
+  if (r !== was) { if (was.slot.parentNode) svg.removeChild(was.slot); was.state = 'out'; first = i; }
+  r.c = resolve(dress(DOGS[i], m));
+  if (r.slot) { r.rig = makeDog(r.c, r.slot, 's-' + r.c.id); r.slot.setAttribute('aria-label', r.c.name + '. Tap to react, press and drag to pet.'); } else makeSlot(r);
+  if (!r.slot.parentNode) svg.appendChild(r.slot);
+  r.state = 'in'; r.tx = tween(0); r.ty = tween(0); r.moveStart = -1e12; selected = r;
+  r.rig.setExpr(face, -1e12);
+  if (worn) wear(r, worn, true);
+  var at = cameraFor(inScene());
+  for (var k = 0; k < 4; k++) cam[k] = tween(at[k]);
+  syncDock(); draw(16);
+}
 if (EMBED) window.addEventListener('message', function (e) {
   var m = e.data || {}, r = roster[first].rig;
   if (e.origin !== location.origin || typeof m.dob !== 'string') return;
   if (m.dob === 'look') { if (typeof m.x === 'number' && typeof m.y === 'number') lookAt(m.x, m.y); return; }   // eyes only: the idle stays slow
+  if (m.dob === 'skin') { reskin(m); return; }
   // a piece put on (not the outfit it loads in): full speed for the hop it makes and the piece's pop, which at the
   // idle's quarter speed played in slow motion
-  if (m.dob === 'wear') { if (!m.fresh) lively = Math.max(lively, performance.now() + 1500); wear(roster[first], m, !!m.fresh); if (!running()) draw(16); return; }
+  if (m.dob === 'wear') { if (!m.fresh) lively = Math.max(lively, performance.now() + 1500); worn = m; wear(roster[first], m, !!m.fresh); if (!running()) draw(16); return; }
   lively = performance.now() + (m.id === 'happy' || m.id === 'proud' || m.id === 'sleepy' ? 900 : 4200);
   if (m.dob === 'expr' && EXPR[m.id] && m.id !== r.exprId) r.setExpr(m.id, clock - 420);   // a verdict lands at once: 230 ms of the blend left
   else if (m.dob === 'tap') r.excite(clock);

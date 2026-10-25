@@ -8,6 +8,7 @@ export const PIN_RE = /^[0-9]{4}$/;
 /* the dogs come from the dog kit's registry (src/pup/rig/breeds.mjs, the same file as Optimus's): a new dog there is
    a new choice here */
 import { ROSTER, DEFAULT_DOG } from '../pup/rig/breeds.mjs';
+import { coatsFor, COLLARS } from '../pup/rig/coats.mjs';
 export { DEFAULT_DOG };
 export const DOGS = ROSTER;
 export const SLOTS = ['head', 'face', 'neck', 'back'];
@@ -27,10 +28,16 @@ export function nameError(s) {
 }
 export const pinError = s => (PIN_RE.test(String(s ?? '')) ? '' : 'The PIN is 4 digits');
 
-/* a dog and what it wears; anything unknown falls away. `known(id)` says whether a wardrobe id exists */
+/* a dog, its coat and collar (src/pup/rig/coats.mjs) and what it wears; anything unknown falls away, so a coat
+   another breed has, or one this build has never heard of, leaves the dog in its own. `known(id)` says whether a
+   wardrobe id exists. The server stores a look as sent (up to 2 KB), so every look read back goes through here */
 export function normLook(l, known = () => true) {
   const o = l && typeof l === 'object' ? l : {}, wear = {};
   for (const s of SLOTS) { const v = o.wear?.[s]; if (typeof v === 'string' && v.length <= 40 && known(v)) wear[s] = v; }
-  return { dog: DOGS.some(d => d.id === o.dog) ? o.dog : DEFAULT_DOG, wear };
+  const dog = DOGS.some(d => d.id === o.dog) ? o.dog : DEFAULT_DOG, out = { dog };
+  if (coatsFor(dog).some(k => k.id === o.coat && k.from !== dog)) out.coat = o.coat;
+  if (COLLARS.some(k => k.id === o.collar)) out.collar = o.collar;
+  out.wear = wear;
+  return out;
 }
 export const dogName = id => (DOGS.find(d => d.id === id) || DOGS.find(d => d.id === DEFAULT_DOG)).name;
