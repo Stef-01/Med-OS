@@ -7,7 +7,8 @@
    planImaging() proposes requests for a station that has none (the 26 written before this pipeline existed). */
 import fs from 'node:fs';
 import path from 'node:path';
-import { MODALITIES, PLACES, searchQueries, rankCandidates, requestProblems } from './rank.mjs';
+import { fileURLToPath } from 'node:url';
+import { MODALITIES, PLACES, searchQueries, rankCandidates, scoreCandidate, requestProblems } from './rank.mjs';
 import { search, UA } from './sources.mjs';
 import { imageSize, EXT } from './image-size.mjs';
 import { verifyImage, acceptVerdict } from './verify.mjs';
@@ -27,9 +28,13 @@ export function placeMedia(station, place, entry) {
 export const pending = (station, refresh) => (station.imaging || []).filter(r => refresh || !PLACES.some(p => (station.media?.[p] || []).some(m => m.req === r.id)));
 
 export async function download(url, f = fetch) {
-  const r = await f(url, { headers: { 'User-Agent': UA } });
-  if (!r.ok) throw new Error(`download ${r.status}`);
-  const bytes = new Uint8Array(await r.arrayBuffer());
+  let bytes;
+  if (String(url).startsWith('file://')) bytes = new Uint8Array(fs.readFileSync(fileURLToPath(url)));   /* a staged candidate (staged.mjs) */
+  else {
+    const r = await f(url, { headers: { 'User-Agent': UA } });
+    if (!r.ok) throw new Error(`download ${r.status}`);
+    bytes = new Uint8Array(await r.arrayBuffer());
+  }
   if (bytes.length > MAX_BYTES) throw new Error('larger than 4.5 MB');
   const info = imageSize(bytes);
   if (!info || !EXT[info.mime]) throw new Error('not a PNG, JPEG, GIF or WebP image');
@@ -37,18 +42,21 @@ export async function download(url, f = fetch) {
   return { bytes, ...info };
 }
 
-export async function resolveRequest(req, { stationId, pub, f = fetch, maxVerify = 4, log = () => {}, verify = verifyImage } = {}) {
+/* candidates: staged ones (staged.mjs) in place of the web search; they keep their order (the stage script chose
+   them from a collection's own labels) but pass the same licence, type and size rules, and are all looked at */
+export async function resolveRequest(req, { stationId, pub, f = fetch, maxVerify = 4, log = () => {}, verify = verifyImage, candidates = null } = {}) {
   const tried = [];
-  const cands = await search(req, searchQueries(req), { fetch: f, modalities: MODALITIES, log });
-  const short = rankCandidates(req, cands, maxVerify * 2);
-  log(`  ${req.id}: ${cands.length} results, ${short.length} shortlisted`);
+  const cands = candidates || await search(req, searchQueries(req), { fetch: f, modalities: MODALITIES, log });
+  const short = candidates ? candidates.filter(c => !scoreCandidate(req, c).reject) : rankCandidates(req, cands, maxVerify * 2);
+  if (candidates) maxVerify = short.length;
+  log(`  ${req.id}: ${cands.length} ${candidates ? 'staged' : 'results'}, ${short.length} shortlisted`);
   let checked = 0;
   for (const c of short) {
     if (checked >= maxVerify) break;
     let img;
     try { img = await download(c.url, f); } catch (e) { tried.push({ title: c.title, why: [e.message] }); continue; }
     checked++;
-    const { verdict, model } = await verify(req, img.bytes, img.mime);
+    const { verdict, model } = await verify(req, img.bytes, img.mime, c);
     const { ok, why } = acceptVerdict(req, verdict);
     tried.push({ title: c.title, source: c.source, score: c.score, sees: verdict.sees, confidence: verdict.confidence, why });
     log(`    ${ok ? 'accept' : 'reject'} ${c.title.slice(0, 70)} (${verdict.confidence})${ok ? '' : `: ${why.join('; ')}`}`);
@@ -59,6 +67,7 @@ export async function resolveRequest(req, { stationId, pub, f = fetch, maxVerify
     return {
       entry: { src: rel, alt: req.alt, w: img.width, h: img.height, caption: req.caption, req: req.id,
         credit: { author: String(c.author || 'Unknown author').slice(0, 160), license: c.license, licenseUrl: c.licenseUrl || '', page: c.page || '', via: c.via },
+        ...(verdict.findings ? { findings: String(verdict.findings).slice(0, 300) } : {}),
         verified: { model, confidence: verdict.confidence, sees: String(verdict.sees || '').slice(0, 300) } },
       tried,
     };
@@ -74,7 +83,9 @@ export async function resolveStation(station, opts = {}) {
     const bad = requestProblems(req);
     if (bad.length) { report.push({ id: req.id, ok: false, why: bad }); continue; }
     try {
-      const { entry, tried } = await resolveRequest(req, { ...opts, stationId: station.id });
+      const candidates = opts.staged ? opts.staged(station.id, req.id) : null;
+      if (candidates && !candidates.length) { report.push({ id: req.id, ok: false, why: ['no staged candidates'], skipped: true }); continue; }
+      const { entry, tried } = await resolveRequest(req, { ...opts, candidates, stationId: station.id });
       if (entry) { st = placeMedia(st, req.place, entry); report.push({ id: req.id, ok: true, src: entry.src, license: entry.credit.license }); }
       else report.push({ id: req.id, ok: false, why: tried.length ? tried.map(t => `${t.title}: ${(t.why || []).join('; ')}`) : ['no usable search results'] });
     } catch (e) { report.push({ id: req.id, ok: false, why: [e.message] }); }

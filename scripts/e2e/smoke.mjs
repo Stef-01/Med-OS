@@ -99,7 +99,7 @@ async function runIn(width, height, label) {
   const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64');
   await ctx.route(/\/osce\/ai-8b37c286\.json$/, async r => {
     const body = JSON.parse(fs.readFileSync(path.join(ROOT, 'osce', 'ai-8b37c286.json'), 'utf8'));
-    body.media = { patientScript: [{ src: 'media/ai-8b37c286/axr-1.png', alt: 'Supine abdominal radiograph', w: 800, h: 900, caption: 'Abdominal X-ray: show when the candidate asks for imaging', req: 'axr-1',
+    body.media = { patientScript: [{ src: 'media/ai-8b37c286/axr-1.png', alt: 'Supine abdominal radiograph', w: 800, h: 900, caption: 'Abdominal X-ray: show when the candidate asks for imaging', req: 'axr-1', findings: 'Dilated central small bowel loops with valvulae conniventes and a collapsed colon.',
       credit: { author: 'Dr Example', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0', page: 'https://commons.wikimedia.org/wiki/File:Example.png', via: 'Wikimedia Commons' } }] };
     return r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(body) });
   });
@@ -359,6 +359,12 @@ async function runIn(width, height, label) {
     await pg.waitForSelector('.os-pv .os-fig img');
     ok(await pg.locator('.os-pv .os-fig img').evaluate(i => i.complete && i.naturalWidth > 0), `${label}: the X-ray loads in the patient script`);
     ok(/Abdominal X-ray: show when/.test(await pg.textContent('.os-pv figcaption')) && await pg.locator('.os-pv .os-credit a[href^="https://creativecommons.org"]').count() === 1, `${label}: the caption and the licence credit show under it`);
+    /* the findings under the image: closed until tapped, labelled AI-written; the image opens full size */
+    const fnd = pg.locator('.os-pv .os-findings');
+    ok(await fnd.count() === 1 && !(await fnd.evaluate(d => d.open)) && /Findings/.test(await fnd.locator('summary').textContent()) && /AI-written/i.test(await fnd.locator('summary b').textContent()), `${label}: the findings sit under the image, closed, labelled AI-written`);
+    await fnd.locator('summary').click();
+    ok(await fnd.evaluate(d => d.open) && /valvulae conniventes/.test(await fnd.locator('p').textContent()) && await fnd.locator('p').isVisible(), `${label}: a tap opens the findings sentence`);
+    ok(await pg.locator('.os-pv .os-figzoom').getAttribute('href') === './media/ai-8b37c286/axr-1.png', `${label}: the image links to itself at full size`);
     await shot('figure');
     await pg.keyboard.press('Escape'); await pg.waitForSelector('.os-pv', { state: 'detached' });
     if (width < 900) { await pg.keyboard.press('Escape'); await pg.waitForTimeout(300); }

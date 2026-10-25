@@ -714,7 +714,31 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-200/ecg-lvh-strain.png",
+    "alt": "12-lead ECG showing a regular narrow-complex rhythm at about 100 beats per minute, tall QRS voltages and inverted T waves in the lateral leads",
+    "w": 1596,
+    "h": 900,
+    "caption": "Kathy Jefferson, 78: 12-lead ECG recorded in the practice",
+    "req": "ecg-lvh-strain",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/00000/00814_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "Sinus tachycardia at about 100/min with left ventricular hypertrophy by voltage (very deep S waves in V1 to V3, tall R waves in V4 to V6) and lateral ST depression with asymmetric T wave inversion in V4 to V6 (strain pattern).",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.85,
+     "sees": "Sinus tachycardia at about 100/min with left ventricular hypertrophy by voltage (very deep S waves in V1 to V3, tall R waves in V4 to V6) and lateral ST depression with asymmetric T wave inversion in V4 to V6 (strain pattern)."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T14:00:49Z",
   "by": "publish-amsa-draft.mjs"

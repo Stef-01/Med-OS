@@ -582,7 +582,31 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-413/ecg-sinus-tachy.png",
+    "alt": "A 12-lead ECG showing a fast regular rhythm with a P wave before every narrow QRS complex",
+    "w": 1596,
+    "h": 900,
+    "caption": "12-lead ECG recorded in the ED, 14:25",
+    "req": "ecg-sinus-tachy",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/06000/06003_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "Sinus tachycardia at about 126/min with a normal axis, normal PR, QRS and QT intervals, and no ST segment or T wave changes.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.9,
+     "sees": "Sinus tachycardia at about 126/min with a normal axis, normal PR, QRS and QT intervals, and no ST segment or T wave changes."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T15:34:46Z",
   "by": "publish-amsa-draft.mjs"

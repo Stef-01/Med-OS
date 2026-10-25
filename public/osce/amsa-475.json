@@ -682,7 +682,31 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-475/ecg-old-anterior-mi.png",
+    "alt": "12-lead ECG showing a regular narrow-complex rhythm at about 100 per minute with Q waves in the anterior chest leads.",
+    "w": 1596,
+    "h": 900,
+    "caption": "12-lead ECG of Sophia Greenwood, recorded at 13:50.",
+    "req": "ecg-old-anterior-mi",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/02000/02843_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "Sinus rhythm at about 100/min with QS complexes in V1 to V4 (no R wave progression) and left axis deviation; the ST segments are isoelectric: an old anterior myocardial infarction.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.8,
+     "sees": "Sinus rhythm at about 100/min with QS complexes in V1 to V4 (no R wave progression) and left axis deviation; the ST segments are isoelectric: an old anterior myocardial infarction."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T14:34:07Z",
   "by": "publish-amsa-draft.mjs"

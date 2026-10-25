@@ -603,7 +603,31 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-187/ecg-inferior-stemi.png",
+    "alt": "12-lead ECG of a 50-year-old man with central chest pain",
+    "w": 1596,
+    "h": 900,
+    "caption": "12-lead ECG recorded at 13:15 in the ED",
+    "req": "ecg-inferior-stemi",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/12000/12899_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "Sinus rhythm at about 72/min with ST elevation in II, III and aVF (greatest in III) and reciprocal ST depression in I and aVL, with ST depression in V2: an acute inferior STEMI.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.9,
+     "sees": "Sinus rhythm at about 72/min with ST elevation in II, III and aVF (greatest in III) and reciprocal ST depression in I and aVL, with ST depression in V2: an acute inferior STEMI."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T11:01:47Z",
   "by": "publish-amsa-draft.mjs"

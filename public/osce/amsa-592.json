@@ -725,7 +725,54 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-592/img-post-rosc-ecg.png",
+    "alt": "12-lead ECG with ST-segment changes across several leads",
+    "w": 1596,
+    "h": 900,
+    "caption": "Post-resuscitation 12-lead ECG at 10:22",
+    "req": "img-post-rosc-ecg",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/01000/01371_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "Sinus tachycardia at about 118/min with QS complexes and convex ST elevation in V1 to V4: an anterior STEMI with Q waves.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.8,
+     "sees": "Sinus tachycardia at about 118/min with QS complexes and convex ST elevation in V1 to V4: an anterior STEMI with Q waves."
+    }
+   }
+  ],
+  "patientScript": [
+   {
+    "src": "media/amsa-592/img-vf-strip.png",
+    "alt": "Single-lead rhythm strip showing a chaotic, irregular waveform of varying amplitude",
+    "w": 1596,
+    "h": 432,
+    "caption": "Monitor rhythm when the defibrillator pads are attached",
+    "req": "img-vf-strip",
+    "credit": {
+     "author": "Nolle FM et al., CU Ventricular Tachyarrhythmia Database (1986)",
+     "license": "ODC-BY 1.0 (Open Data Commons Attribution)",
+     "licenseUrl": "https://opendatacommons.org/licenses/by/1-0/",
+     "page": "https://physionet.org/content/cudb/1.0.0/cu20.hea",
+     "via": "CU Ventricular Tachyarrhythmia Database (PhysioNet)"
+    },
+    "findings": "Coarse ventricular fibrillation: chaotic, irregular deflections of varying amplitude and shape with no identifiable P waves, QRS complexes or T waves.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.9,
+     "sees": "Coarse ventricular fibrillation: chaotic, irregular deflections of varying amplitude and shape with no identifiable P waves, QRS complexes or T waves."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T19:22:54Z",
   "by": "publish-amsa-draft.mjs"

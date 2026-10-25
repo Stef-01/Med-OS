@@ -530,7 +530,31 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-188/ecg-anterior-ste.png",
+    "alt": "Representative 12-lead ECG showing sinus rhythm with anterior ST elevation, slight ST elevation in aVL and inferior ST depression.",
+    "w": 1596,
+    "h": 900,
+    "caption": "Representative 12-lead ECG showing the pattern in Phillip's ECG at 10:12; use the written report for measurements.",
+    "req": "ecg-anterior-ste",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/03000/03868_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "Sinus rhythm at about 77/min with ST elevation and tall T waves in V1 to V4 and QS complexes in V1 to V3 (acute anterior STEMI), and one ventricular ectopic beat.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.8,
+     "sees": "Sinus rhythm at about 77/min with ST elevation and tall T waves in V1 to V4 and QS complexes in V1 to V3 (acute anterior STEMI), and one ventricular ectopic beat."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T10:50:18Z",
   "by": "publish-amsa-draft.mjs"

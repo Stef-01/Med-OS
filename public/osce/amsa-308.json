@@ -673,5 +673,29 @@
   }
  ],
  "origin": "ai",
- "media": {}
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-308/ecg1.png",
+    "alt": "A 12-lead ECG from a 66-year-old man recorded during chest pain",
+    "w": 1596,
+    "h": 900,
+    "caption": "Markus's 12-lead ECG, recorded at 10:08 during chest pain",
+    "req": "ecg1",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/02000/02191_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "Sinus rhythm at about 85/min with a normal axis, normal PR, QRS and QT intervals, and no ST segment or T wave changes.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.9,
+     "sees": "Sinus rhythm at about 85/min with a normal axis, normal PR, QRS and QT intervals, and no ST segment or T wave changes."
+    }
+   }
+  ]
+ }
 }

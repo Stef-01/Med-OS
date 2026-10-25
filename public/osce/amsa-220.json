@@ -581,5 +581,29 @@
   }
  ],
  "origin": "ai",
- "media": {}
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-220/ecg-svt.png",
+    "alt": "12-lead ECG showing a fast, regular rhythm with narrow QRS complexes",
+    "w": 1596,
+    "h": 900,
+    "caption": "12-lead ECG recorded on arrival at 10:07",
+    "req": "ecg-svt",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/10000/10306_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "A regular narrow-complex tachycardia at about 150/min with no visible P waves before the QRS complexes (supraventricular tachycardia) and no ST elevation.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.9,
+     "sees": "A regular narrow-complex tachycardia at about 150/min with no visible P waves before the QRS complexes (supraventricular tachycardia) and no ST elevation."
+    }
+   }
+  ]
+ }
 }

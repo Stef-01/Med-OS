@@ -110,6 +110,21 @@ If nothing passes, the station keeps the result in words in the patient script, 
 
 This needs network access to `commons.wikimedia.org`, `upload.wikimedia.org` and `openi.nlm.nih.gov`, and Claude credentials.
 
+Under each image the student can open **Findings**: one sentence saying what the image shows, written by the reviewer who checked it and labelled AI-written. It stays closed until tapped, so the image is read first. Tapping the image opens it full size, which helps when zooming into an ECG on a phone.
+
+### Images from open collections (staged)
+
+Some of the best open images are not on Commons or Open-i, and a session may be unable to reach those sites. `--staged` takes candidates from a folder that a stage script fills, and takes the pixel check from a reviewer's verdicts:
+
+```
+node scripts/imaging/stage-ecg.mjs <stage> picks.json                           # real ECGs drawn from PhysioNet recordings
+node scripts/fetch-imaging.mjs --staged <stage> amsa-187 amsa-188 …            # licence and size rules, verdicts, acceptVerdict, save
+```
+
+- **ECGs.** These come from PTB-XL: 21,799 clinical 12-lead ECGs, each read by a cardiologist, CC BY 4.0. The monitor strips come from the CU Ventricular Tachyarrhythmia Database (ODC-BY). Both are downloaded from PhysioNet's open bucket. `scripts/imaging/ecg.mjs` draws each recording sample for sample, the way a machine prints it: 25 mm/s, 10 mm/mV, a 1 mm grid and a calibration pulse. The 12 leads sit in the standard 3 by 4 layout, with lead II as a 10 s rhythm strip.
+- **Choosing a record.** Records are shortlisted by PTB-XL's diagnostic statements and its 12SL measurements (rate, PR, QRS, axis, and the J-point ST level in every lead) against the station's own report.
+- **The review.** Every shortlisted image is then looked at. `<stage>/verdicts.json` holds one verdict per candidate, in `verify.mjs`'s schema plus `findings`, written by Claude with the image in front of it (`verified.model` says so). A candidate without a verdict is never accepted, and `acceptVerdict` applies the same rules as for a web image.
+
 ## Checks
 
 ```

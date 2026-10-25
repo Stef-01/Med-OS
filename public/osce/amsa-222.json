@@ -556,7 +556,31 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-222/ecg-normal-sinus.png",
+    "alt": "A 12-lead ECG from a 54-year-old man at rest showing a regular rhythm at about 74 beats per minute.",
+    "w": 1596,
+    "h": 900,
+    "caption": "Carl's 12-lead ECG, recorded today while pain-free.",
+    "req": "ecg-normal-sinus",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/02000/02799_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "Sinus rhythm at about 78/min with a normal axis, normal PR, QRS and QT intervals, and no ST segment or T wave changes.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.9,
+     "sees": "Sinus rhythm at about 78/min with a normal axis, normal PR, QRS and QT intervals, and no ST segment or T wave changes."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T11:24:03Z",
   "by": "publish-amsa-draft.mjs"

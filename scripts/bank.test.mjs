@@ -53,4 +53,10 @@ test('figures: local files only, everything printed is escaped, credit links onl
   assert.doesNotMatch(html, /javascript:/);
   assert.match(html, /href="https:\/\/commons\.wikimedia\.org\/wiki\/File:A\.jpg"[^>]*>Wikimedia Commons</);
   assert.equal(creditHtml(null), '');
+  /* the findings: escaped, closed until tapped, labelled AI-written; none when the entry has none */
+  const f = figureHtml({ src: 'media/s/ecg.png', alt: '12-lead ECG', findings: 'ST elevation in II, III <and> aVF' });
+  assert.match(f, /<details class="os-findings"><summary><span>Findings<\/span><b>AI-written<\/b><\/summary><p>ST elevation in II, III &lt;and&gt; aVF<\/p><\/details>/);
+  assert.doesNotMatch(f, /<details[^>]* open/);
+  assert.doesNotMatch(html, /os-findings/);
+  assert.match(f, /<a class="os-figzoom" href="\.\/media\/s\/ecg\.png"/);
 });

@@ -840,6 +840,14 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-fig figcaption { display:flex; flex-direction:column; gap:2px; font-size:13px; color:var(--mute); line-height:1.45; }
 .os-fig figcaption > span { color:var(--em-ink-soft); }
 .os-credit { font-size:11.5px; color:var(--mute); }
+/* the findings under an image: one tap, so the image is read first; the AI-written chip as on the exam findings */
+.os-figzoom { display:flex; align-self:flex-start; max-width:100%; }
+.os-findings { border-radius:10px; background:var(--fill); }
+.os-findings > summary { display:flex; align-items:center; gap:8px; min-height:44px; padding:8px 12px; cursor:pointer; list-style:none; font-size:13.5px; font-weight:600; color:var(--pri); }
+.os-findings > summary::-webkit-details-marker { display:none; }
+.os-findings > summary b { margin-left:auto; padding:1px 8px; border-radius:99px; background:var(--pend); color:var(--card); font-size:11px; letter-spacing:.02em; text-transform:uppercase; }
+.os-findings[open] > summary { padding-bottom:4px; }
+.os-findings p { margin:0; padding:0 12px 12px; font-size:14px; line-height:1.5; color:var(--ink); }
 .os-credit a { color:var(--mute); text-decoration:underline; text-underline-offset:2px; }
 
 /* ---------- AI marking: the chat path ---------- */

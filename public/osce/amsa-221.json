@@ -694,7 +694,31 @@
   }
  ],
  "origin": "ai",
- "media": {},
+ "media": {
+  "part2": [
+   {
+    "src": "media/amsa-221/ecg-af-rvr.png",
+    "alt": "12-lead ECG showing a fast, irregular narrow-complex rhythm with no clear P waves before the QRS complexes.",
+    "w": 1596,
+    "h": 900,
+    "caption": "Philip Miller's 12-lead ECG, recorded at 13:52 during palpitations.",
+    "req": "ecg-af-rvr",
+    "credit": {
+     "author": "Wagner P et al., PTB-XL (Sci Data 2020)",
+     "license": "CC BY 4.0",
+     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+     "page": "https://physionet.org/content/ptb-xl/1.0.3/records500/04000/04117_hr.hea",
+     "via": "PTB-XL (PhysioNet)"
+    },
+    "findings": "Atrial fibrillation: an irregularly irregular narrow-complex rhythm with no P waves and a fibrillatory baseline, fast ventricular rate about 130/min, normal axis, and no ST segment changes.",
+    "verified": {
+     "model": "claude (session review)",
+     "confidence": 0.9,
+     "sees": "Atrial fibrillation: an irregularly irregular narrow-complex rhythm with no P waves and a fibrillatory baseline, fast ventricular rate about 130/min, normal axis, and no ST segment changes."
+    }
+   }
+  ]
+ },
  "revised": {
   "at": "2026-10-23T20:01:01Z",
   "by": "publish-amsa-draft.mjs"

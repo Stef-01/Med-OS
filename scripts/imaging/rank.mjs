@@ -16,12 +16,12 @@ export const MODALITIES = {
 };
 export const PLACES = ['part2', 'stem', 'patientScript', 'explanation'];   /* part2: handed over in Part 2 (the usual place for a scan) */
 
-/* licences a study page may show with a credit line: public domain, CC0 and the CC BY family (SA, NC, ND: the image is
-   shown unchanged, for study, with its credit). Unknown, "all rights reserved", "fair use" and "non-free" never pass. */
+/* licences a study page may show with a credit line: public domain, CC0, the CC BY family (SA, NC, ND: the image is
+   shown unchanged, for study, with its credit) and Open Data Commons Attribution (PhysioNet's older databases). Unknown, "all rights reserved", "fair use" and "non-free" never pass. */
 export function licenceOk(lic) {
   const s = String(lic || '').replace(/<[^>]*>/g, ' ').toLowerCase().replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim();
   if (!s || /non ?free|fair use|all rights reserved|copyright(?!ed free)|unknown/.test(s)) return false;
-  return /^(public domain|pd\b|cc0|cc zero|cc by\b|creative commons attribution|attribution\b|gfdl|no restrictions)/.test(s);
+  return /^(public domain|pd\b|cc0|cc zero|cc by\b|creative commons attribution|attribution\b|gfdl|no restrictions|odc by\b|open data commons attribution)/.test(s);
 }
 
 /* words that mark a picture we never want in a station: drawings, annotated teaching figures, collages, specimens */

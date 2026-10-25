@@ -29,6 +29,7 @@ export function validate(pub, { quality = false } = {}) {
         if (!m.alt) errors.push(`osce/${name}: ${m.src} has no alt text`);
         if (!m.credit || !licenceOk(m.credit.license)) errors.push(`osce/${name}: ${m.src} has no acceptable licence (${m.credit?.license || 'none'})`);
         else if (!m.credit.author || !m.credit.page) errors.push(`osce/${name}: ${m.src} credit needs an author and a source page`);
+        if (m.findings !== undefined && (typeof m.findings !== 'string' || !m.findings.trim() || m.findings.length > 300)) errors.push(`osce/${name}: ${m.src} findings must be one sentence of at most 300 characters`);
       }
     }
   }

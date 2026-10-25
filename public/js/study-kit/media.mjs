@@ -3,7 +3,10 @@
    both, and the figure prints them under the image (the licences require the credit).
 
    mediaAttr(src) -> the src attribute for a local path (no scheme, no leading slash, no ..); anything else gives no src.
-   figureHtml(m) -> one <figure> for a media entry {src, alt, w, h, caption?, credit?: {author, license, licenseUrl, page}} */
+   figureHtml(m) -> one <figure> for a media entry {src, alt, w, h, caption?, findings?, credit?: {author, license, licenseUrl, page}}:
+   the image (a link to the file at full size, for zooming into an ECG on a phone), then the findings, one sentence of
+   what the image shows, closed until tapped so the image is read first and labelled AI-written (the reviewer that
+   checked the image wrote it), then the caption and the credit */
 
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -26,5 +29,6 @@ export function figureHtml(m) {
   const size = m.w && m.h ? ` width="${+m.w}" height="${+m.h}"` : '';
   const cap = m.caption ? `<span>${esc(m.caption)}</span>` : '';
   const credit = creditHtml(m.credit);
-  return `<figure class="os-fig"><img${mediaAttr(m.src)} alt="${esc(m.alt || m.caption || '')}" loading="lazy" decoding="async"${size}>${cap || credit ? `<figcaption>${cap}${credit}</figcaption>` : ''}</figure>`;
+  const findings = m.findings ? `<details class="os-findings"><summary><span>Findings</span><b>AI-written</b></summary><p>${esc(m.findings)}</p></details>` : '';
+  return `<figure class="os-fig"><a class="os-figzoom" href="${esc(localUrl(m.src))}" target="_blank" rel="noreferrer" aria-label="Open the image full size"><img${mediaAttr(m.src)} alt="${esc(m.alt || m.caption || '')}" loading="lazy" decoding="async"${size}></a>${findings}${cap || credit ? `<figcaption>${cap}${credit}</figcaption>` : ''}</figure>`;
 }
