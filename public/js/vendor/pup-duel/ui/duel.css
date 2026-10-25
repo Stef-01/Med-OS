@@ -137,7 +137,7 @@ button.pd-row:active { transform: translateY(2px); border-bottom-width: 2px; }
 .pd-q { display: flex; flex-direction: column; gap: 12px; }
 .pd-qtag { margin: 0; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--pd-mute); }
 .pd-qtag:empty { display: none; }
-.pd-stem { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.45; overflow-wrap: anywhere; }
+.pd-stem { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.45; }
 .pd-opts { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
 .pd-opt { display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: center; gap: 4px 12px; width: 100%; min-height: 56px; padding: 10px 14px;
   border: 2px solid var(--pd-line2); border-bottom-width: var(--pd-edge); border-radius: 14px; background: var(--pd-card); text-align: left;
@@ -146,7 +146,6 @@ button.pd-row:active { transform: translateY(2px); border-bottom-width: 2px; }
 .pd-opt:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
 .pd-opt:disabled { cursor: default; }
 .pd-opt kbd { display: grid; place-items: center; width: 30px; height: 30px; border: 2px solid var(--pd-line2); border-radius: 9px; font: inherit; font-size: 13px; font-weight: 800; color: var(--pd-mute); }
-.pd-opt span { overflow-wrap: anywhere; }
 .pd-opt.pd-picked { border-color: var(--pd-pri); background: var(--pd-pri-soft); }
 .pd-opt.pd-picked kbd { border-color: var(--pd-pri); color: var(--pd-pri); }
 .pd-opt.pd-right { border-color: var(--pd-ok); background: var(--pd-ok-soft); }
@@ -157,6 +156,11 @@ button.pd-row:active { transform: translateY(2px); border-bottom-width: 2px; }
 .pd-who { grid-column: 2; justify-self: start; padding: 2px 8px; border-radius: 6px; background: var(--pd-card2); font-size: 11px; font-weight: 800; font-style: normal; letter-spacing: .06em; text-transform: uppercase; color: var(--pd-ink); }
 .pd-why { display: flex; flex-direction: column; gap: 8px; padding-top: 4px; animation: pd-rise .3s ease both; }
 .pd-why p { margin: 0; }
+/* a long medical word breaks at a syllable, with a hyphen (laryngotracheobron-chitis), where the browser knows the
+   language (lang on the page; Safari and Chrome do English); an everyday word never does: six letters each side of a
+   break rules out every word under 12 (Chrome reads the standard limit, Safari its own two); anywhere, as a last resort */
+.pd-stem, .pd-opt span, .pd-why p { overflow-wrap: anywhere; -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 12 6 6;
+  -webkit-hyphenate-limit-before: 6; -webkit-hyphenate-limit-after: 6; }
 .pd-pts { font-size: 18px; font-weight: 900; color: var(--pd-no); }
 .pd-pts.pd-good { color: var(--pd-ok-ink); }
 .pd-note, .pd-whytext { font-size: 14px; line-height: 1.5; color: var(--pd-mute); }
