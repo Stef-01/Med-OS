@@ -524,9 +524,13 @@ async function duel() {
   const timed = async (label, fn) => { const t = Date.now(); await fn(); const ms = Date.now() - t; lags.push(ms); ok(ms <= 5000, `duel: ${label} in ${ms} ms (at most 5 s)`); };
   const shared = { supabaseUrl: `${BASE}sb`, supabaseAnonKey: 'anon', duelRealtime: false };
   const a = await phone(320, 640, shared), c = await phone(393, 852, shared);
-  /* the way in: a slim tile at the top of Start, before the study partners, marked Beta (a work in progress) */
-  ok(await a.locator('.os-start > [data-os="duel"] .os-beta').isVisible(), 'duel: the Start tile is marked Beta');
-  ok(await a.evaluate(() => { const t = document.querySelector('.os-start > [data-os="duel"]'), p = document.querySelector('.os-start > .os-pair'); return !!t && !!p && !!(t.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_FOLLOWING); }), 'duel: the tile comes before the study partners');
+  /* the way in: a slim bar at the bottom of the screen on Start, marked Beta (a work in progress), in view without scrolling */
+  ok(await a.locator('.os-start > [data-os="duel"] .os-beta').isVisible(), 'duel: the Start bar is marked Beta');
+  const atFoot = pg => pg.evaluate(() => { const r = document.querySelector('.os-start > [data-os="duel"]').getBoundingClientRect(); return r.bottom <= innerHeight + 1 && r.bottom > innerHeight - 140 && r.top >= 0; });
+  ok(await atFoot(a), 'duel: the bar sits at the bottom of the screen');
+  await a.evaluate(() => { const s = document.querySelector('.os-start'); s.scrollTop = s.scrollHeight; });
+  ok(await atFoot(a), 'duel: the bar stays at the bottom when the start view scrolls');
+  await a.evaluate(() => { document.querySelector('.os-start').scrollTop = 0; });
   for (const [pg, name, pin, dog] of [[a, 'Sam', '1234', 'mochi'], [c, 'Alex', '4321', 'rosie']]) {
     await pg.click('[data-os="duel"]');
     await pg.waitForSelector('.os-duel[data-ready] form[data-pd="signin"]');

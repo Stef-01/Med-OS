@@ -100,6 +100,8 @@
 .os-chev svg { width:24px; height:24px; }
 /* Duel a Mate: a slim tile at the top of Start, two dogs face to face, a Beta chip (a work in progress) */
 .os-duelcard { display:flex; align-items:center; gap:14px; padding:12px 16px 12px 12px; text-align:left; transition:transform .16s var(--ease), background-color .2s, box-shadow .2s; }
+/* held at the bottom of the start view while it scrolls; margin-top:auto takes it to the bottom when the view is short */
+.os-start > .os-duelcard { position:sticky; bottom:0; z-index:2; margin-top:auto; box-shadow:var(--em-shadow-md), 0 -12px 24px -8px var(--bg); }
 .os-duelcard:hover { background:var(--card2); box-shadow:var(--em-shadow-md); }
 .os-duelcard:active { transform:scale(.97); }
 .os-duelfaces { display:flex; flex:none; }
