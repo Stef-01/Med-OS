@@ -407,8 +407,9 @@ function makeDog(c, slot, P) {
     /* worn glasses: on a "deal with it" (the shades channel) they get a push up the nose instead of a second pair */
     var faceOn = !!(e.wearFace && e.wearFace.firstChild), push = faceOn ? -3.5 * Math.sin(Math.PI * clamp(ch('shades'), 0, 1)) : 0;   /* a nudge: the lenses stay over the eyes */
     if (e.wearFace) set(e.wearFace, 'transform', tr(0, rig.hatY * 0.25 + push) + (kF !== 1 ? ' ' + scl(kF, 1, -30) : ''));
-    // under solid lenses the eyes are not drawn once the pair has settled (stage.mjs wear: rig.shade)
-    var eyesOut = faceOn && rig.shade && kF === 1 ? 'none' : 'inline';
+    // under solid lenses the eyes are not drawn (stage.mjs wear: rig.shade); a pair popping on takes them at 0.97 of its
+    // size, on its way up to the overshoot (POPON never falls below 0.97 after that), so the change is inside the motion
+    var eyesOut = faceOn && rig.shade && kF >= 0.97 ? 'none' : 'inline';
     e.eyeParts.forEach(function (el) { set(el, 'display', eyesOut); });
     // the head's outline seen from inside the glasses (the inverse of the face's yaw, this dog's eye scale, a mirror
     // and the push above), so the arms clip to where the head is now, not where it was drawn
