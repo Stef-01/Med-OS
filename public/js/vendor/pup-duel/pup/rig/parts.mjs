@@ -145,7 +145,7 @@ function dogMarkup(c, P) {
   var legs = c.geo.legs.map(function (x, i) {
     var foot = i === 0 ? p.footFar : p.foot;     // the far leg is one step darker
     return '<g data-p="leg' + i + '">' +
-      '<rect x="' + (x - c.leg / 2) + '" y="24" width="' + c.leg + '" height="' + (fy - 24) + '" rx="' + c.leg / 2 + '" fill="' + p.leg + '"/>' +
+      '<rect x="' + (x - c.leg / 2) + '" y="24" width="' + c.leg + '" height="' + (fy - 24) + '" rx="' + c.leg / 2 + '" fill="' + p.body + '"/>' +
       '<rect x="' + (x - c.leg / 2) + '" y="' + (fy - 16) + '" width="' + c.leg + '" height="16" rx="' + c.leg / 2 + '" fill="' + foot + '"/></g>';
   }).join('');
   var back = '', front = '', tips = '', under = '';   // under: each hanging ear's outline, for the glasses' arms to tuck beneath
@@ -163,7 +163,7 @@ function dogMarkup(c, P) {
     }
   });
   var headPath = uPath(0, -55, 100, c.head.h, c.head.r), muzzlePath = uPath(1, -17, c.muzzle.w, c.muzzle.h, c.muzzle.r || 10);
-  var bodyRect = '<rect x="' + bL + '" y="-20" width="' + c.body.w + '" height="' + c.body.h + '" rx="' + r3(c.body.h * 0.476) + '"';
+  var bodyRect = '<rect x="' + bL + '" y="-20" width="' + c.body.w + '" height="' + c.body.h + '" rx="' + r3(c.body.h * 0.476) + '"', bodyMarks = marksOn(c, 'body');
   function tailLine(k, col, w, more) { return '<path data-p="' + k + '" d="M0 0" fill="none" stroke="' + col + '" stroke-width="' + w + '" stroke-linecap="round" stroke-linejoin="round"' + (more || '') + '/>'; }
   // the tail, and a plume's lighter core or a spotted tail's spots (round dashes along the same line)
   var tail = tailLine('tail', p.tail, c.tail.w) + (c.tail.inner ? tailLine('tailIn', p.tailIn || p.tan, c.tail.inner) : '') +
@@ -181,7 +181,11 @@ function dogMarkup(c, P) {
         '<g data-p="wearBack"></g>' +
         (c.tail.over ? '' : tail) +
         bodyRect + ' fill="' + p.body + '"/>' +
-        clipped(P + '-body', bodyRect + '/>', marksOn(c, 'body')) +
+        '<clipPath id="' + P + '-body">' + bodyRect + '/></clipPath>' +
+        (bodyMarks ? '<g clip-path="url(#' + P + '-body)">' + bodyMarks + '</g>' : '') +
+        // what lies on the body (a cape's near side: a back piece's [data-on], stage.mjs moves it here) over the coat and
+        // its marks, trimmed to the body's outline and fitted to its build (drape); under a curled tail and the legs
+        '<g data-p="wearOn" clip-path="url(#' + P + '-body)"><g data-p="wearOnPop"><g data-p="wearOnFit" transform="' + drape(c).on + '"></g></g></g>' +
         (c.tail.over ? tail : '') +   // a tail that curls over the back lies on it
         legs +
       '</g>' +
@@ -274,4 +278,15 @@ function reach(c) {
   return [Math.min(-56, tip - 0.09 * (g.fx - tip) - 5), 56];
 }
 
-export { NS, r3, set, rot, tr, pt, ellPath, uPath, scl, EAR_UP, EAR_FLOP, UP_EARS, FLOP_EARS, HEART, SHADES, MANE, BIB, dogMarkup, reach };
+/* a back piece's fabric is drawn on the doberman's body (its rump at x -72, its top at -20, 83 tall, the floor at 80)
+   and fitted to this dog's, from the rump: what lies on the body ([data-on], the wearOn layer) takes the body's height,
+   so a hem keeps its line on the flank; what hangs from the rump ([data-rump]: a cape's free end) takes the legs' share
+   of the drop, so it ends as far off the floor in proportion (on a dachshund, never through it). Neither is stretched
+   along the body: a longer dog shows more of the fabric's front, which a shorter one keeps under its head */
+var DRAPE = { bL: -72, h: 83, fy: 80 };
+function drape(c) {
+  var g = c.geo, at = 'translate(' + r3(g.bL - DRAPE.bL) + ' -20) scale(1 ';
+  return { on: at + r3(c.body.h / DRAPE.h) + ') translate(0 20)', rump: at + r3((g.fy + 20) / (DRAPE.fy + 20)) + ') translate(0 20)' };
+}
+
+export { NS, r3, set, rot, tr, pt, ellPath, uPath, scl, EAR_UP, EAR_FLOP, UP_EARS, FLOP_EARS, HEART, SHADES, MANE, BIB, dogMarkup, reach, drape };

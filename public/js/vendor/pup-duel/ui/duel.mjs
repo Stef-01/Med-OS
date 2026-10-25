@@ -256,7 +256,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const self = S.lv?.self || S.me, locker = lockerFor(ITEMS, self?.wins || 0), look = myLook();
     if (hostLook) { sheet(`<h2 class="pd-h2">Your dog</h2><p class="pd-sub">Your dog wears what it wears in ${esc(title)}'s shop.</p><button class="pd-btn" type="button" data-pd="shut">OK</button>`, () => {}); return; }
     const cur = { dog: look.dog, wear: { ...look.wear } };
-    const piece = it => `<button type="button" class="pd-piece" data-id="${it.id}" data-slot="${it.slot}" data-r="${it.rarity}" aria-pressed="${cur.wear[it.slot] === it.id}" ${locker.open.has(it.id) ? '' : 'disabled'} title="${esc(it.name)}"><svg viewBox="${it.tile || it.vb || VB[it.slot]}" aria-hidden="true">${it.svg}</svg><span>${esc(it.name)}</span></button>`;
+    const piece = it => `<button type="button" class="pd-piece" data-id="${it.id}" data-slot="${it.slot}" data-r="${it.rarity}" aria-pressed="${cur.wear[it.slot] === it.id}" ${locker.open.has(it.id) ? '' : 'disabled'} title="${esc(it.name)}"><svg viewBox="${it.tile || it.vb || VB[it.slot]}" aria-hidden="true">${it.icon || it.svg}</svg><span>${esc(it.name)}</span></button>`;
     sheet(`
       <h2 class="pd-h2">Dress up</h2>
       <div class="pd-dogs pd-dogs-sm" role="radiogroup" aria-label="Your dog">${DOGS.map(d => `<button type="button" role="radio" class="pd-dogpick" data-dog="${d.id}" aria-checked="${d.id === cur.dog}" title="${esc(d.breedName)}: ${esc(d.hint)}"><img src="${ICON(d.id)}" alt=""><b>${esc(d.name)}</b></button>`).join('')}</div>

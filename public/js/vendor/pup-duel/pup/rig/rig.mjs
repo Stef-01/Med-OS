@@ -102,7 +102,7 @@ function makeDog(c, slot, P) {
   ['disc', 'dog', 'floor', 'body', 'tail', 'leg0', 'leg1', 'leg2', 'collar', 'tag', 'head', 'earL', 'earR', 'tipL', 'tipR',
    'tipOutL', 'tipOutR', 'tipInL', 'tipInR', 'earsBack', 'earsFront', 'earTips', 'feat', 'browL', 'browR', 'pupilL', 'pupilR',
    'heyeL', 'heyeR', 'lidL', 'lidR', 'cheekL', 'cheekR', 'shutL', 'shutR', 'snout', 'blush', 'mouth', 'tongue', 'bone',
-   'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearNeck', 'wearBack', 'earsOver', 'armClip', 'armEars', 'armEarL', 'armEarR', 'ruff', 'ruffClip',
+   'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearNeck', 'wearBack', 'wearOnPop', 'wearOnFit', 'earsOver', 'armClip', 'armEars', 'armEarL', 'armEarR', 'ruff', 'ruffClip',
    'tailIn', 'tailDots'].forEach(function (k) { e[k] = q(k); });
   e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
   // the eye as a whole: the whites, each eye's clip (its pupil and its heart), the lids and the cheeks that squint into
@@ -352,6 +352,8 @@ function makeDog(c, slot, P) {
     var hipX = shift - 0.05 * w0 + 3.2 * ch('wiggle') * wave(t, 600) + shake * 1.6 * wave(t, 60) + dance * 3.5 * wave(t, 900, 0.25);
     set(e.body, 'transform', tr(g.fx + hipX, g.fy - hop.lift) + ' scale(' + r3(sx) + ' ' + r3(sy) + ') ' +
       tr(-g.fx, -g.fy) + ' ' + rot(0.03 * w0, g.fx, g.fy));
+    // what hangs (a floppy ear, a cape's free end) swings a beat behind each hop: down as the dog rises, out as it falls
+    var flop = 1.7 * (hopEars.lift - hopLate.lift) + 26 * (hopLate.sy - hopEars.sy) + dance * 5 * wave(t, 450, 0.15);
     // a piece just put on pops on: a quick overshoot about its anchor (the hat's brim, the eyes, the collar, the back
     // piece's middle), 320 ms from when wear() saw it change
     function popK(k) {
@@ -364,6 +366,14 @@ function makeDog(c, slot, P) {
     // so a landing does not stretch a wide piece out of the frame
     if (e.wearBack && e.wearBack.firstChild) set(e.wearBack, 'transform', tr(g.fx, g.fy) + ' scale(' + r3(Math.pow(sx, -0.8)) + ' 1) ' + tr(-g.fx, -g.fy) +
       (kB !== 1 && rig.backC ? ' ' + scl(kB, rig.backC[0], rig.backC[1]) : ''));
+    // its fabric on the body squashes with the body (it is the body's), and pops on about the same middle
+    if (e.wearOnFit && e.wearOnFit.firstChild) set(e.wearOnPop, 'transform', kB !== 1 && rig.backC ? scl(kB, rig.backC[0], rig.backC[1]) : '');
+    // and its free end ([data-rump], fitted to the rump by the stage) trails the hops about the rump's top, half as far as
+    // an ear swings, and stirs with the breath
+    if (rig.rumps && rig.rumps.length) {
+      var trail = rot(0.5 * flop + 1.5 * wave(t, 3600, 0.15), g.bL, -20) + ' ' + rig.rumpFit;
+      rig.rumps.forEach(function (el) { set(el, 'transform', trail); });
+    }
 
     // Tail: a three-link chain drawn as one smooth thick curve.
     var curl = ch('tailCurl') + (c.tail.curl || 0);            // a husky's or a pug's curls over its back
@@ -424,7 +434,6 @@ function makeDog(c, slot, P) {
     // Ears: perk on a look, press back when shy, flick, flop a beat behind each hop.
     var perk = 0.25 + 0.75 * notice, back = ch('earBack');
     var flick = 2.4 * wave(t, 2400, 0.1) + 1.2 * wave(t, 1800, 0.3);
-    var flop = 1.7 * (hopEars.lift - hopLate.lift) + 26 * (hopLate.sy - hopEars.sy) + dance * 5 * wave(t, 450, 0.15);
     var lagT = E.act.tilt ? 0.35 * (flow(ago(t, 110), E.act.tilt) - flow(t, E.act.tilt)) : 0;
     var foldBase = base('fold');
     ['L', 'R'].forEach(function (side, i) {

@@ -166,7 +166,7 @@ export const DOGS = [
     ],
     pal: { coat: '#76839c', sh: '#5f6b83', tan: '#ffffff', tanSh: '#e2e8f0', feature: '#454f63', ink: '#2c5fa8', nose: '#1f232b',
       noseHi: '#4b5262', collar: '#ff4b4b', disc: '#e6f2ff', floor: '#c7dcf5', mask: '#f4f7fb', brow: '#ffffff', earIn: '#f4dcdc',
-      leg: '#e9eef5', foot: '#ffffff', footFar: '#e2e8f0', tail: '#66728a', tailIn: '#f4f7fb', bib: '#f4f7fb', bibSh: '#dde4ee' } },
+      foot: '#ffffff', footFar: '#e2e8f0', tail: '#66728a', tailIn: '#f4f7fb', bib: '#f4f7fb', bibSh: '#dde4ee' } },
   { id: 'pudding', name: 'Pudding', breed: 'pug', hint: 'Snores, snuggles, snacks', expr: 'goofy', scale: 1.36, mirror: true,
     marks: [
       { on: 'snout', svg: '<path d="M-14 -20.5 Q1 -26 16 -20.5" fill="none" stroke="{wrinkle}" stroke-width="2.6" stroke-linecap="round"/>' },
@@ -202,7 +202,9 @@ export function resolve(d) {
   const c = { ...B.build, ...d, breedName: B.name };
   const p = { ...PAL0, ...d.pal };
   const up = side => c.ears[side === 'L' ? 0 : 1] === 'up';
-  p.body = p.body || p.sh; p.leg = p.leg || p.sh; p.foot = p.foot || p.tan; p.footFar = p.footFar || p.tanSh;
+  /* the legs are drawn over the body from the hip down (parts.mjs), in its colour: a leg of another colour would show
+     its whole length on the body, a stilt. A dog's socks are its `foot` */
+  p.body = p.body || p.sh; p.foot = p.foot || p.tan; p.footFar = p.footFar || p.tanSh;
   p.muzzle = p.muzzle || p.tan; p.brow = p.brow || p.tan; p.tail = p.tail || p.sh;
   for (const s of ['L', 'R']) {
     p['lid' + s] = p['lid' + s] || p.coat;                                  // the lid and the cheek that rises into a squint

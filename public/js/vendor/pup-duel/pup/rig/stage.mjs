@@ -5,7 +5,7 @@
 import { EASE_IN_OUT, EASE_OUT, EASE_IN, clamp, PERIOD, B, SWITCH, MOVE, GIF_FPS, STILL } from './motion.mjs';
 import { EXPR, EXPR_ORDER } from './expressions.mjs';
 import { DOGS, resolve, dogById } from './breeds.mjs';
-import { NS, r3, set, tr, reach } from './parts.mjs';
+import { NS, r3, set, tr, reach, drape } from './parts.mjs';
 import { hatFit, boxIn, makeDog } from './rig.mjs';
 
 // ---- the scene: a roster, a camera, and dogs that walk to their spots ----
@@ -159,6 +159,7 @@ function wear(r, m, fresh) {
     var g = r.slot && r.slot.querySelector('[data-p="wear' + k + '"]'), v = typeof m[k.toLowerCase()] === 'string' ? m[k.toLowerCase()] : '';
     if (g && g.getAttribute('data-v') !== v) {
       g.innerHTML = v; g.setAttribute('data-v', v); changed = changed || !!v;
+      if (k === 'Back') fitDrape(r, g);
       // a piece put on pops on (frame: popK), unless the dog is dressing as it loads, or no frames are running to
       // finish the pop (reduced motion, a hidden page): one frame drawn mid-pop would leave it half size
       if (v && !fresh && running() && live()) (r.rig.popAt || (r.rig.popAt = {}))[k] = clock;
@@ -187,32 +188,48 @@ function wear(r, m, fresh) {
       ruff.setAttribute('clip-path', 'url(#' + rc.parentNode.id + ')');
     } else { r.rig.hoodFit = null; ruff.removeAttribute('clip-path'); }
   }
-  // the worn hat's top, in head units above the floor point (the embed's camera makes room for it)
+  // the worn hat's top, in head units above the floor point (the embed's camera makes room for it), from each of its
+  // shapes boxed in head space (its fit applied): what the pops above the head keep clear of. A shape trimmed by a
+  // clip-path (a shade, a seam) lies inside the shapes it is trimmed to; its untrimmed outline is not drawn, and
+  // measured it made a toque's shade raise the hat and pull the camera back
   var ht = 0, shapes = null;
   if (hw && hw.firstChild) {
-    var hb2 = null; try { hb2 = hw.getBBox(); } catch (err) { hb2 = null; }
-    var HF0 = r.rig.hoodFit || hatFit(r.c);
-    if (hb2 && hb2.height > 0) {
-      ht = r3(r.c.floorY - (-55 + (hb2.y + 55) * HF0.s + HF0.y));
-      // each shape of the hat boxed in head space (its fit applied): what the pops above the head keep clear of
-      var hx = function (x) { return r3(1 + (x - 1) * HF0.s); }, hy = function (y) { return r3(-55 + (y + 55) * HF0.s + HF0.y); };
-      shapes = [];
-      for (var k = 0; k < hw.children.length; k++) {
-        var sb = boxIn(hw.children[k], hw);
-        if (sb) shapes.push({ x0: hx(sb.x0), x1: hx(sb.x1), y0: hy(sb.y0), y1: hy(sb.y1) });
-      }
+    var HF0 = r.rig.hoodFit || hatFit(r.c), top = Infinity;
+    var hx = function (x) { return r3(1 + (x - 1) * HF0.s); }, hy = function (y) { return r3(-55 + (y + 55) * HF0.s + HF0.y); };
+    shapes = [];
+    for (var k = 0; k < hw.children.length; k++) {
+      var sb = hw.children[k].hasAttribute('clip-path') ? null : boxIn(hw.children[k], hw);
+      if (sb) { shapes.push({ x0: hx(sb.x0), x1: hx(sb.x1), y0: hy(sb.y0), y1: hy(sb.y1) }); top = Math.min(top, sb.y0); }
     }
+    if (top < Infinity) ht = r3(r.c.floorY - (-55 + (top + 55) * HF0.s + HF0.y)); else shapes = null;
   }
   r.rig.hatShapes = shapes; r.rig.wearGen = (r.rig.wearGen || 0) + 1;   // a pop already up re-clears for it
   if (ht !== (r.rig.hatTop || 0)) { r.rig.hatTop = ht; if (EMBED && r.state === 'in') relayout(null); }
-  var bk = q('wearBack'), bb = null;
+  var bk = q('wearBack'), bb = null, on = q('wearOnFit');
   if (bk && bk.firstChild) { try { bb = bk.getBBox(); } catch (err) { bb = null; } }
+  if (on && on.firstChild) { try { bb = union(bb, q('wearOnPop').getBBox()); } catch (err) { /* measured behind only */ } }
   r.rig.backWide = !!(bb && bb.x + bb.width - r.c.geo.fx > 100);
   r.rig.backC = bb ? [r3(bb.x + bb.width / 2), r3(bb.y + bb.height / 2)] : null;   // the back piece pops on about its middle
   var arms = q('armClip');
   if (arms && q('wearFace')) q('wearFace').querySelectorAll('[data-arm]').forEach(function (a) { a.setAttribute('mask', 'url(#' + arms.parentNode.id + ')'); });
   if (q('tag')) q('tag').setAttribute('display', m.neck ? 'none' : 'inline');   // a worn neck piece replaces the collar's own tag
   if (changed && !fresh) r.rig.excite(clock);
+}
+
+// a back piece's fabric (parts.mjs drape): what lies on the body ([data-on]) goes to the dog's wearOn layer, trimmed to
+// its body; what hangs from the rump ([data-rump]) moves to this dog's rump, its drop fitted to the legs
+function fitDrape(r, g) {
+  var on = r.slot.querySelector('[data-p="wearOnFit"]'), f = drape(r.c);
+  if (!on) return;
+  on.innerHTML = '';
+  g.querySelectorAll('[data-on]').forEach(function (el) { on.appendChild(el); });
+  r.rig.rumps = [].slice.call(g.querySelectorAll('[data-rump]')); r.rig.rumpFit = f.rump;   // the rig swings them each frame
+  r.rig.rumps.forEach(function (el) { el.setAttribute('transform', f.rump); });
+}
+function union(a, b) {
+  if (!a) return b;
+  var x = Math.min(a.x, b.x), y = Math.min(a.y, b.y);
+  return { x: x, y: y, width: Math.max(a.x + a.width, b.x + b.width) - x, height: Math.max(a.y + a.height, b.y + b.height) - y };
 }
 
 function bindSlot(r) {
