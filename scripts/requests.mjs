@@ -17,7 +17,7 @@
                                                         Being written and the rest go on
      node scripts/requests.mjs decline <id> "reason"    Not made, with the reason
 
-   An id can be cut to any unique start ("r1k3"). The queue is the shared record (when OSCE_SUPABASE_URL and
+   An id can be cut to any unique start ("r1k3"). The queue is the shared record (OSCE_SUPABASE_URL=none for the inbox alone; when OSCE_SUPABASE_URL and
    OSCE_SUPABASE_KEY, or public/config.js, name the project) and the inbox requests/ (OSCE_REQUESTS_DIR to move it). An
    answer goes back where the request lives: through the shared record the student sees each step; from the inbox they
    see Ready once the station is published. */

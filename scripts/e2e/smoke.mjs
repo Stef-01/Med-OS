@@ -94,6 +94,8 @@ async function runIn(width, height, label) {
   const ctx = await b.newContext({ viewport: { width, height }, deviceScaleFactor: 2 });
   await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: BASE.slice(0, -1) });
   await ctx.route(/^https:\/\//, r => r.abort());   /* nothing leaves the machine */
+  /* the solo flows run with no shared record, whatever project the real config.js names */
+  await ctx.route(/\/config\.js$/, r => r.fulfill({ contentType: 'text/javascript', body: "window.OSCE_CONFIG = { supabaseUrl: '', supabaseAnonKey: '' };" }));
   /* the X-ray station's body and image come from fixtures, routed before the first load: the app keeps a body once fetched,
      so a random session that happens to pick this station must already get the fixture */
   const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64');

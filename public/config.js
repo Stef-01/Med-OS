@@ -3,6 +3,6 @@
    anon (publishable) key below. Left empty, everything stays in each browser, and Settings → Export / Import progress
    moves it between you instead. */
 window.OSCE_CONFIG = {
-  supabaseUrl: '',
-  supabaseAnonKey: '',
+  supabaseUrl: 'https://pquajwxvlpvaygrkzfkl.supabase.co',
+  supabaseAnonKey: 'sb_publishable_PiquDoAysA14sxfVDDGzFQ_fVehWhlZ',
 };
