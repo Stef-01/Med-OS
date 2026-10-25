@@ -53,7 +53,7 @@ Marks that arrive on an attempt nobody ticked yet tick the checklist straight aw
 Progress lives in each browser. Two ways to share it:
 
 - **Settings → Export progress / Import progress**: a file with attempts, saved stations and names. Importing merges by attempt, so nothing is lost or doubled.
-- **Automatic sync**: create a free Supabase project, run `supabase/migrations/0001_osce_state.sql` (and `0002_pup_duel.sql` for Duel a Mate) in its SQL editor, and put the project URL and anon key in `public/config.js`. Attempts, saved stations, names, timing and case requests then reach both devices, and the case writer's pipeline. Anyone with the site's URL can read and write that record, so keep the URL between the two of you.
+- **Automatic sync**: Med-OS has its own Supabase project (`pquajwxvlpvaygrkzfkl`), separate from Optimus. `SUPABASE_ACCESS_TOKEN=sbp_... npm run supabase-setup` runs every file in `supabase/migrations/` against it and writes its URL and publishable key into `public/config.js`. A different project works the same way with `--ref <project_ref>`. Attempts, saved stations, names, timing and case requests then reach both devices, and the case writer's pipeline. Anyone with the site's URL can read and write that record, so keep the URL between the two of you.
 
 ## Writing new stations
 

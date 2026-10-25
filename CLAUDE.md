@@ -12,6 +12,7 @@ npm run duel-pack           # rebuild public/duel/pack.json (the duel's question
 npm run validate            # validator + the quality gates as notes
 node scripts/requests.mjs   # the case requests queue: add / show / accept / make / decline (make runs generate-station.mjs)
 npx serve public            # local dev
+npm run supabase-setup      # SUPABASE_ACCESS_TOKEN set: migrate Med-OS's own Supabase project and fill config.js
 ```
 
 ## Station format
@@ -29,3 +30,4 @@ npx serve public            # local dev
 7. **Observation charts are data.** The zones in `public/js/osce/obs-charts.mjs` are written by `scripts/charts/extract_zones.py` from the NSW chart PDFs and checked by `scripts/obs.test.mjs` against the thresholds printed on each chart; never edit them by hand. `obs.mjs` decides the chart and the zone, `obs-chart.mjs` draws it; the candidate never sees the zones or the model interpretation. `docs/obs-charts.md` explains why.
 8. **Phones first.** Every screen works at 320 px with no sideways scroll; the e2e checks it.
 9. **Duel a Mate is a vendored package.** `public/js/vendor/pup-duel/` is Pup Duel (the dog, its wardrobe, live MCQ duels), copied by the package's `scripts/vendor.mjs` with `VERSION.json` holding a hash of every file; `scripts/duel-pack.test.mjs` fails on a hand edit. Change the package (in Optimus, `packages/pup-duel/`, until it has a repository of its own) and vendor again. `supabase/migrations/0002_pup_duel.sql` is the package's migration, checked against the same manifest. `public/js/osce/duel.mjs` is the only Med-OS code: the overlay, the transport from config.js, the pack.
+10. **Med-OS has its own Supabase.** Project `pquajwxvlpvaygrkzfkl`, never Optimus's. A schema change is a new idempotent file in `supabase/migrations/`, applied with `npm run supabase-setup`; `.mcp.json` points the Supabase MCP at the same project.
