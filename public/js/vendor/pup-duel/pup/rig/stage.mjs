@@ -171,6 +171,9 @@ function wear(r, m, fresh) {
   ['earsBack', 'earTips'].forEach(function (n) { var el = q(n); if (el) el.setAttribute('display', up); });
   if (q('earsFront')) q('earsFront').setAttribute('display', ears === 'hood' ? 'none' : 'inline');
   if (q('earsOver')) q('earsOver').setAttribute('display', ears === 'over' ? 'inline' : 'none');
+  // a pair with dark or solid lenses (lens 'shade') covers the eyes, so they are not drawn under it: no white shows
+  // between the lenses, round a heart or between a star's points (the rig keeps them while the pair pops on)
+  r.rig.shade = !!m.face && m.lens === 'shade';
   // a hood on a Pomeranian: the fur is squashed inside it, so the hood grows to the mane's width and the mane is
   // trimmed to the hood's sides (fluff below the hood stays); any other head piece leaves the mane alone
   var ruff = q('ruff'), rc = q('ruffClip'), hw = q('wearHead'), b = null;

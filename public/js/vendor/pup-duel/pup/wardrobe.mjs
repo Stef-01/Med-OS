@@ -159,7 +159,7 @@ export const ITEMS = [
 export const itemOf = id => ITEMS.find(i => i.id === id) || null;
 
 /* the outfit as the dog page's message: one SVG string per slot ('' takes the slot off) */
-export const wearMsg = (w, fresh) => ({ dob: 'wear', fresh: !!fresh, ...Object.fromEntries(SLOTS.map(s => [s, itemOf(w?.[s])?.svg || ''])), ears: itemOf(w?.head)?.ears || '' });
+export const wearMsg = (w, fresh) => ({ dob: 'wear', fresh: !!fresh, ...Object.fromEntries(SLOTS.map(s => [s, itemOf(w?.[s])?.svg || ''])), ears: itemOf(w?.head)?.ears || '', lens: itemOf(w?.face)?.lens || '' });
 
 /* ---- the shop ---- */
 /* bundles: one piece per slot around a theme; a bundle costs SET_OFF less than its parts, and only the parts you lack */
