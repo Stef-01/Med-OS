@@ -35,7 +35,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const fmt = n => Math.round(n).toLocaleString('en-AU');
 const EXPR = { idle: 'happy', think: 'lockedin', wait: 'curious', right: 'excited', wrong: 'sad', win: 'overjoyed', loss: 'puppy', draw: 'bashful', emote: 'goofy' };
 const EMOTE_ICON = { gg: 'thumb', woof: 'paw', wow: 'star', close: 'oof' };
-const STATUS = { think: ['more', 'Thinking'], done: ['check', 'Answered'], lock: ['lock', 'Locked in'], ok: ['check', 'Right'], no: ['x', 'Wrong'] };
+const STATUS = { think: ['more', 'Thinking'], done: ['check', 'Answered'], lock: ['check', 'Locked in'], ok: ['check', 'Right'], no: ['x', 'Wrong'] };
 const BETA = '<span class="pd-beta">Beta</span>';
 /* a look as this build can draw it: its dog, coat and collar known, its pieces in the wardrobe */
 const lookOf = l => normLook(l, id => !!itemOf(id));
@@ -100,7 +100,7 @@ function face(look, cls = '') {
 function bits(s) {
   const el = document.createElement('span');
   el.className = 'pd-bits';
-  el.innerHTML = `<span aria-hidden="true">${icon('hash')}<b></b>${icon('timer')}<b></b></span><span class="pd-vh"></span>`;
+  el.innerHTML = `<span aria-hidden="true">${icon('q')}<b></b>${icon('timer')}<b></b></span><span class="pd-vh"></span>`;
   const [r, t] = el.querySelectorAll('b');
   r.textContent = s?.rounds ?? '?'; t.textContent = `${s?.secs ?? '?'}s`;
   el.querySelector('.pd-vh').textContent = setupLine(s);
@@ -135,8 +135,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         ${step === 'name' ? `${transport ? `
         <form class="pd-form" data-pd="signin" novalidate>
           <label class="pd-field"><span>Name</span><input name="name" autocomplete="username" autocapitalize="words" maxlength="20" required value="${esc(draft.name || '')}"></label>
+          <p class="pd-err" role="alert" data-for="name">${draft.bad === 'name' ? esc(S.err) : ''}</p>
           <label class="pd-field"><span>PIN</span><input name="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" maxlength="4" required value="${esc(draft.pin || '')}"></label>
-          <p class="pd-err" role="alert">${esc(S.err)}</p>
+          <p class="pd-err" role="alert" data-for="pin">${draft.bad === 'name' ? '' : esc(S.err)}</p>
           <button class="pd-btn pd-pri" type="submit" data-act="login">Play</button>
           <button class="pd-link" type="button" data-pd="new">New player</button>
         </form>` : '<p class="pd-note">Duels with mates are off on this site</p>'}
@@ -173,7 +174,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       if (step === 'name') {
         const name = form.name.value, pin = form.pin.value;
         S.err = nameError(name) || pinError(pin);
-        if (S.err) return showAuth('name', { name, pin });
+        if (S.err) return showAuth('name', { name, pin, bad: nameError(name) ? 'name' : 'pin' });
         await busy(async () => { const me = await transport.login(name, pin); signedIn(me); }, () => showAuth('name', { name, pin }));
       } else {
         const pick = form.querySelector('[aria-checked="true"]')?.dataset.dog || DEFAULT_DOG;
@@ -183,12 +184,15 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('[data-pd="new"]')?.addEventListener('click', () => {
       const name = form.name.value, pin = form.pin.value, bad = nameError(name) || pinError(pin);
       S.err = bad;
-      showAuth(bad ? 'name' : 'create', { name, pin, dog: DEFAULT_DOG });
+      showAuth(bad ? 'name' : 'create', { name, pin, dog: DEFAULT_DOG, bad: nameError(name) ? 'name' : 'pin' });
     });
     shell.querySelector('[data-pd="back"]')?.addEventListener('click', () => { S.err = ''; showAuth('name', draft); });
     wireCommon();
+    /* an error is about one field: it says so to a screen reader, and the cursor goes there */
+    const bad = S.err && draft.bad && shell.querySelector(`input[name="${draft.bad}"]`);
+    if (bad) { bad.setAttribute('aria-invalid', 'true'); bad.setAttribute('aria-describedby', 'pd-autherr'); shell.querySelector(`.pd-err[data-for="${draft.bad}"]`)?.setAttribute('id', 'pd-autherr'); }
     S.err = '';
-    ([...shell.querySelectorAll('input')].find(i => !i.value) || shell.querySelector('.pd-dogpick[aria-checked="true"], input'))?.focus({ preventScroll: true });
+    (bad || [...shell.querySelectorAll('input')].find(i => !i.value) || shell.querySelector('.pd-dogpick[aria-checked="true"], input'))?.focus({ preventScroll: true });
   }
   async function busy(fn, onErr) {
     S.busy = true; root.dataset.busy = '';
@@ -256,7 +260,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     r.querySelector('b').textContent = d.them?.name || 'A mate';
     r.querySelector('.pd-rtx').append(bits(d.setup));
     const acts = document.createElement('span'); acts.className = 'pd-acts';
-    acts.innerHTML = `<button class="pd-btn pd-sm pd-pri" type="button">${icon('check')}Play</button>${ib('decline', 'x', 'Decline')}`;
+    acts.innerHTML = `<button class="pd-btn pd-sm pd-pri" type="button">${icon('zap')}Duel</button>${ib('decline', 'x', 'Decline')}`;
     acts.querySelector('.pd-pri').setAttribute('aria-label', `Accept ${d.them?.name || 'the'} challenge`);
     acts.querySelector('.pd-pri').addEventListener('click', () => openDuel(d, { accept: true }));
     acts.querySelector('[data-pd="decline"]').addEventListener('click', () => declineDuel(d));
@@ -297,7 +301,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     b.append(face(p.look));
     b.insertAdjacentHTML('beforeend', '<b></b>');
     b.querySelector('b').textContent = p.name;
-    if (p.online) b.insertAdjacentHTML('beforeend', '<span class="pd-dot" aria-hidden="true"></span>');
+    b.insertAdjacentHTML('beforeend', `<span class="pd-tbadge" aria-hidden="true">${icon('zap')}</span>`);
+    b.classList.toggle('pd-online', !!p.online);
     b.setAttribute('aria-label', `Challenge ${p.name}${p.online ? ', online' : ''}, ${p.wins || 0} won, ${p.losses || 0} lost`);
     b.addEventListener('click', () => openSetup(p));
     return b;
@@ -335,15 +340,17 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const el = document.createElement('div');
     el.className = 'pd-sheet-wrap';
     el.innerHTML = `<div class="pd-scrim" data-pd="shut"></div><div class="pd-sheet${full ? ' pd-full' : ''}" role="dialog" aria-modal="true"${label ? ` aria-label="${esc(label)}"` : ''}>${html}</div>`;
-    root.append(el); S.sheet = el;
+    S.sheetFrom = document.activeElement; root.append(el); S.sheet = el;
     el.querySelectorAll('[data-pd="shut"]').forEach(b => b.addEventListener('click', closeSheet));
     wire(el.querySelector('.pd-sheet'));
     el.querySelector('.pd-sheet button:not([data-pd="shut"]), .pd-sheet select')?.focus({ preventScroll: true });
   }
-  function closeSheet() { S.sheet?.remove(); S.sheet = null; }
+  function closeSheet() {
+    const from = S.sheetFrom; S.sheet?.remove(); S.sheet = null; S.sheetFrom = null;
+    if (from?.isConnected) from.focus({ preventScroll: true });   // back on what opened it
+  }
   function openMenu() {
-    sheet(`<p class="pd-sheet-who"></p><button class="pd-btn" type="button" data-pd="signout">Sign out</button>`, el => {
-      el.querySelector('.pd-sheet-who').textContent = S.me?.name || '';
+    sheet(`<button class="pd-btn" type="button" data-pd="signout">Sign out</button>`, el => {
       el.querySelector('[data-pd="signout"]').addEventListener('click', () => { remember(null); S.me = null; S.hero = null; showAuth(); });
     }, { label: 'Menu' });
   }
@@ -353,9 +360,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     sheet(`
       <div class="pd-vsmini" aria-hidden="true"></div>
       <h2 class="pd-sheet-title"></h2>
-      ${seg('rounds', 'hash', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
+      ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
       ${seg('secs', 'timer', 'Seconds each', RULES.secsChoices, opt.secs, v => `${v}s`)}
-      ${topics.length > 1 ? `<label class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><select name="topic" aria-label="Topic"><option value="">Every topic</option>${topics.map(t => `<option value="${esc(t.topic)}"${t.topic === opt.topic ? ' selected' : ''}>${esc(t.topic)}</option>`).join('')}</select></label>` : ''}
+      ${topics.length > 1 ? `<label class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><select name="topic" aria-label="Topic"><option value="">Every topic</option>${topics.map(t => `<option value="${esc(t.topic)}"${t.topic === opt.topic ? ' selected' : ''}>${esc(t.topic)}</option>`).join('')}</select><span class="pd-chevsel" aria-hidden="true">${icon('chev')}</span></label>` : ''}
       <p class="pd-err" role="alert"></p>
       <button class="pd-btn pd-pri" type="button" data-pd="send">${icon('zap')}Duel</button>`, el => {
       el.querySelector('.pd-vsmini').append(face(myLook()), face(mate.look, 'pd-mirror'));
@@ -381,14 +388,26 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (hostLook) return;
     const self = S.lv?.self || S.me, locker = lockerFor(ITEMS, self?.wins || 0), cur = structuredClone(myLook());
     sheet(`
-      <header class="pd-top pd-dresstop">${ib('shut', 'back', 'Cancel')}<span></span><button class="pd-btn pd-pri pd-sm" type="button" data-pd="save">${icon('check')}Save</button></header>
+      <header class="pd-top pd-dresstop">${ib('shut', 'back', 'Cancel')}<span></span><span></span></header>
       <div class="pd-preview"></div>
       <p class="pd-chosen" aria-live="polite"></p>
       <div class="pd-tabs" role="tablist" aria-label="Dress up">${TABS.map(([id, ic, name], i) => `<button type="button" role="tab" data-tab="${id}" aria-selected="${i === 0}" aria-controls="pd-panel" aria-label="${esc(name)}" title="${esc(name)}">${icon(ic)}</button>`).join('')}</div>
-      <div class="pd-panel" id="pd-panel" role="tabpanel"></div>`, el => {
+      <div class="pd-panel" id="pd-panel" role="tabpanel"></div>
+      <div class="pd-dressbar"><button class="pd-btn pd-pri" type="button" data-pd="save">${icon('check')}Save</button></div>`, el => {
       const prev = dogFrame(cur, { label: 'Your dog' }), panel = el.querySelector('.pd-panel'), chosen = el.querySelector('.pd-chosen');
       el.querySelector('.pd-preview').append(prev.el);
-      const update = (what) => { prev.dress(cur); if (what) chosen.textContent = what; };
+      let tab = 'dog';
+      /* "<tab> · <its pick>": it names the icon tab and what is on the dog for it */
+      const pickName = id => {
+        const d = breedOf(cur.dog);
+        if (id === 'dog') return `${d.name} (${d.breedShort})`;
+        if (id === 'coat') { const own = cur.coat ? null : coatsFor(cur.dog).find(k => k.from === cur.dog); return (own || coatsFor(cur.dog).find(k => k.id === cur.coat) || {}).name || ''; }
+        if (id === 'collar') { const k = COLLARS.find(c => c.id === cur.collar) || COLLARS.find(c => c.hex === lookDog({ dog: cur.dog }).pal.collar); return k ? k.name : 'Its own'; }
+        return cur.wear[id] ? itemOf(cur.wear[id]).name : 'None';
+      };
+      const label = () => { chosen.textContent = `${TABS.find(t => t[0] === tab)[2]} · ${pickName(tab)}`; };
+      const coatTab = () => { el.querySelector('[data-tab="coat"]').hidden = coatsFor(cur.dog).length < 2; };   // a breed of one coat has nothing to choose
+      const update = () => { prev.dress(cur); label(); };
       const radio = (b, on) => b.setAttribute('aria-checked', String(on));
       const tabs = {
         dog() {
@@ -402,7 +421,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
               /* a coat carries over where the new breed has one of that name (black and tan, cream), else its own */
               if (cur.coat && !coatsFor(d.id).some(k => k.id === cur.coat && k.from !== d.id)) delete cur.coat;
               cur.dog = d.id; g.querySelectorAll('.pd-dogpick').forEach(x => radio(x, x === b));
-              update(`${d.name} · ${d.breedName}`); prev.tap();
+              update(); coatTab(); prev.tap();
             });
             return b;
           }));
@@ -424,7 +443,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           b.type = 'button'; b.className = 'pd-swatch'; b.dataset.v = o.id; b.setAttribute('role', 'radio'); radio(b, o.id === now);
           b.setAttribute('aria-label', o.name); b.title = o.name;
           b.innerHTML = `<i style="--a:${o.colors[0]};--b:${o.colors[1] || o.colors[0]}"></i>`;
-          b.addEventListener('click', () => { set(o.id); g.querySelectorAll('.pd-swatch').forEach(x => radio(x, x === b)); update(o.name); });
+          b.addEventListener('click', () => { set(o.id); g.querySelectorAll('.pd-swatch').forEach(x => radio(x, x === b)); update(); });
           return b;
         }));
         return g;
@@ -446,21 +465,25 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         g.addEventListener('click', e => {
           const b = e.target.closest('.pd-piece'); if (!b || b.disabled) return;
           if (b.dataset.id) cur.wear[slot] = b.dataset.id; else delete cur.wear[slot];
-          mark(); update(b.dataset.id ? itemOf(b.dataset.id).name : `No ${SLOT_NAME[slot].toLowerCase()}`);
+          mark(); update();
         });
         mark();
         const wrap = document.createElement('div'); wrap.append(g);
-        if (list.some(it => !locker.open.has(it.id))) wrap.insertAdjacentHTML('beforeend', `<p class="pd-locknote">${icon('trophy')}<span>Win duels to open more</span></p>`);
+        if (list.some(it => !locker.open.has(it.id))) wrap.insertAdjacentHTML('afterbegin', `<p class="pd-locknote">${icon('trophy')}<span>Win duels to open more</span></p>`);
         return wrap;
       }
       const show = id => {
+        tab = id; label();
         el.querySelectorAll('[role="tab"]').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
         panel.replaceChildren(tabs[id] ? tabs[id]() : pieces(id));
+        /* the one chosen in view (Heidi is far down the dogs), moving only the panel */
+        panel.scrollTop = 0;
+        const on = panel.querySelector('[aria-checked="true"], [aria-pressed="true"]'), pr = panel.getBoundingClientRect(), r = on?.getBoundingClientRect();
+        if (r && r.bottom > pr.bottom) panel.scrollTop = r.bottom - pr.bottom + 16;
         panel.setAttribute('aria-label', TABS.find(t => t[0] === id)[2]);
       };
       el.querySelector('.pd-tabs').addEventListener('click', e => { const t = e.target.closest('[role="tab"]'); if (t) show(t.dataset.tab); });
-      show('dog');
-      chosen.textContent = `${breedOf(cur.dog).name} · ${breedOf(cur.dog).breedName}`;
+      show('dog'); coatTab();
       el.querySelector('[data-pd="save"]').addEventListener('click', async () => {
         const look = lookOf(cur);
         await busy(async () => { const p = await (S.lobby ? S.lobby.look(look) : S.t.touch(S.me, look)); S.me = { ...S.me, look: p.look }; remember(S.me); closeSheet(); paintLobby(); }, () => { chosen.textContent = S.err; });
@@ -483,7 +506,13 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         }
         if (q.why) { const w = document.createElement('p'); w.className = 'pd-rv-why'; w.textContent = q.why; li.append(w); }
         const who = document.createElement('p'); who.className = 'pd-rv-who';
-        who.textContent = `You ${a?.ok ? 'right' : 'wrong'} · ${S.match?.them?.name || 'Them'} ${b?.ok ? 'right' : 'wrong'}`;
+        for (const [look, ans, name] of [[myLook(), a, 'You'], [S.match?.them?.look, b, S.match?.them?.name || 'Them']]) {
+          const w = document.createElement('span');
+          w.append(face(look, 'pd-rv-face'));
+          w.insertAdjacentHTML('beforeend', `<span class="${ans?.ok ? 'pd-yes' : 'pd-nay'}">${icon(ans?.ok ? 'check' : 'x')}</span><span class="pd-vh"></span>`);
+          w.lastChild.textContent = `${name} ${ans?.ok ? 'right' : 'wrong'}`;
+          who.append(w);
+        }
         li.append(who);
         return li;
       }));
@@ -511,15 +540,15 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const me = isPractice ? S.worldMe : S.me, t = isPractice ? S.world.transport : S.t;
     const mine = d.a === me.id, them = d.them || (S.lv?.mates || []).find(p => p.id === (mine ? d.b : d.a)) || { name: 'Your mate', look: { dog: 'rosie', wear: {} } };
     const myL = myLook(), theirL = lookOf(them.look || { dog: 'rosie' });
-    const side = who => `<div class="pd-side pd-${who}"><div class="pd-dogslot"></div>
-      <div class="pd-meta"><b class="pd-pname"></b><span class="pd-score">0</span><i class="pd-status"></i></div>${who === 'theirs' ? '<span class="pd-say" hidden></span>' : ''}</div>`;
+    const side = who => `<div class="pd-side pd-${who}"><div class="pd-dogslot">${who === 'theirs' ? '<span class="pd-say" hidden></span>' : ''}</div>
+      <div class="pd-meta"><b class="pd-pname"></b><span class="pd-scorerow"><span class="pd-score">0</span><i class="pd-gain"></i></span><i class="pd-status"></i></div></div>`;
     shell.innerHTML = `
-      <header class="pd-top pd-mtop">${ib('leave', 'x', 'Leave the duel')}<div class="pd-dots" aria-hidden="true"></div><span class="pd-roundno"></span></header>
+      <header class="pd-top pd-mtop">${ib('leave', 'x', 'Leave the duel')}<div class="pd-dots" aria-hidden="true"></div><span class="pd-qtag" hidden></span></header>
       <main class="pd-main pd-match">
         <section class="pd-versus">${side('mine')}${side('theirs')}</section>
         <div class="pd-timer" aria-hidden="true"><i></i></div>
         <article class="pd-q" aria-live="off">
-          <p class="pd-qtag" hidden></p><p class="pd-stem"></p>
+          <p class="pd-stem"></p>
           <div class="pd-opts"></div>
           <div class="pd-why" hidden></div>
         </article>
@@ -604,12 +633,13 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       const dot = dots.children[i], a = R.answers[me];
       dot.className = R.closed ? (a?.ok ? 'pd-ok' : 'pd-no') : i === st.round && st.phase === 'live' ? 'pd-now' : '';
     });
-    shell.querySelector('.pd-roundno').textContent = st.phase === 'live' || s.name === 'reveal' ? `${Math.min(st.rounds.length, (s.round ?? st.round) + 1)}/${st.rounds.length}` : '';
     /* scores move on the reveal, never before: a jump while they are still thinking would tell them you were right */
     const shown = p => st.rounds.reduce((t, R) => t + (R.closed ? R.answers[p]?.pts || 0 : 0), 0);
     for (const [sel, p] of [['.pd-mine .pd-score', me], ['.pd-theirs .pd-score', opp]]) {
       const el = shell.querySelector(sel), txt = fmt(shown(p));
       if (el.textContent !== txt) { el.textContent = txt; el.classList.remove('pd-bump'); void el.offsetWidth; if (txt !== '0') el.classList.add('pd-bump'); }
+      const gain = el.nextElementSibling, R = s.name === 'reveal' && st.rounds[s.round], g = R?.closed && R.answers[p]?.ok ? `+${fmt(R.answers[p].pts)}` : '';
+      if (gain.textContent !== g) gain.textContent = g;
     }
     /* their status: never what they picked until the round closes */
     const live = s.name === 'question' || s.name === 'locked', rv = s.name === 'reveal' ? st.rounds[s.round] : null;
@@ -657,6 +687,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         b.classList.toggle('pd-picked', picked === i);
         b.classList.toggle('pd-right', !!reveal && i === q.answer);
         b.classList.toggle('pd-wrong', !!reveal && picked === i && i !== q.answer);
+        b.classList.toggle('pd-miss', !!reveal && R.answers[opp]?.choice === i && i !== q.answer && picked !== i);
         b.setAttribute('aria-pressed', String(picked === i));
       });
       const why = shell.querySelector('.pd-why');
@@ -667,7 +698,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         for (const [k, ans] of [['me', a], ['them', b]]) { const o = opts[ans?.choice]; if (o && ans.choice !== null) o.querySelector('.pd-who').append(M.faces[k]); else M.faces[k].remove(); }
         why.innerHTML = '<p class="pd-pts"></p>';
         const pts = why.querySelector('.pd-pts');
-        pts.textContent = a?.ok ? `+${fmt(a.pts)}` : a?.how === 'answer' && a.choice === null ? 'Too slow' : 'Wrong';
+        pts.textContent = a?.ok ? `+${fmt(a.pts)}` : a && a.choice != null ? 'Wrong' : 'Too slow';
         pts.classList.toggle('pd-good', !!a?.ok);
         why.hidden = false;
         S.dogs.me.expr(a?.ok ? EXPR.right : EXPR.wrong); S.dogs.them.expr(b?.ok ? EXPR.right : EXPR.wrong);
@@ -728,19 +759,23 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const main = shell.querySelector('.pd-main');
     main.classList.add('pd-over');
     shell.querySelector('.pd-q').hidden = true; shell.querySelector('.pd-hold').hidden = true; shell.querySelector('.pd-timer').hidden = true; shell.querySelector('.pd-net').hidden = true;
-    shell.querySelector('.pd-roundno').textContent = '';
+    shell.querySelector('.pd-mtop .pd-qtag').hidden = true;
     shell.querySelectorAll('.pd-status').forEach(el => setStatus(el, ''));
+    const verdict = document.createElement('section');
+    verdict.className = 'pd-verdict';
+    verdict.dataset.out = out;
+    verdict.innerHTML = '<h2 class="pd-big" tabindex="-1"></h2><p class="pd-reason" hidden></p>';
+    verdict.querySelector('.pd-big').textContent = head;
+    if (why) { verdict.querySelector('.pd-reason').textContent = why; verdict.querySelector('.pd-reason').hidden = false; }
     const res = document.createElement('section');
     res.className = 'pd-result';
     res.dataset.out = out;
-    res.innerHTML = `<h2 class="pd-big" tabindex="-1"></h2><p class="pd-reason" hidden></p>
-      <div class="pd-tally"><span><b></b><span class="pd-rounds"></span></span><span><b></b><span class="pd-rounds"></span></span></div>
-      <div class="pd-acts"><button class="pd-btn pd-pri" type="button" data-pd="again">${icon('repeat')}Rematch</button>${ib('review', 'list', 'Review the questions')}${ib('lobby', 'home', M.practice ? 'Done' : 'Back to the lobby')}</div>`;
-    res.querySelector('.pd-big').textContent = head;
-    if (why) { res.querySelector('.pd-reason').textContent = why; res.querySelector('.pd-reason').hidden = false; }
+    res.innerHTML = `<div class="pd-tally"><span><b></b><span class="pd-rounds"></span></span><span><b></b><span class="pd-rounds"></span></span></div>
+      <div class="pd-acts"><button class="pd-btn pd-pri" type="button" data-pd="again">${icon('repeat')}<span>Rematch</span></button><button class="pd-btn" type="button" data-pd="review">${icon('list')}<span>Review</span></button>${ib('lobby', 'home', M.practice ? 'Done' : 'Back to the lobby')}</div>`;
     const [mine, theirs] = res.querySelectorAll('.pd-tally > span');
     const dots = (el, p) => {
-      el.append(...st.rounds.map(R => Object.assign(document.createElement('i'), { className: R.answers[p]?.ok ? 'pd-ok' : 'pd-no' })));
+      /* right, wrong, or no answer in time */
+      el.append(...st.rounds.map(R => { const a = R.answers[p]; return Object.assign(document.createElement('i'), { className: a?.ok ? 'pd-ok' : a && a.choice != null ? 'pd-no' : 'pd-skip' }); }));
       el.setAttribute('role', 'img');
       el.setAttribute('aria-label', `${st.right[p]} of ${st.rounds.length} right`);
     };
@@ -748,6 +783,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     theirs.querySelector('b').textContent = fmt(st.score[opp]); dots(theirs.querySelector('.pd-rounds'), opp);
     /* the winner's crown, by their score (over the dog, a tall hat or an ear would meet it) */
     if (st.winner) (st.winner === me ? mine : theirs).querySelector('b').insertAdjacentHTML('afterbegin', `<span class="pd-crown" aria-hidden="true">${icon('crown')}</span>`);
+    main.insertBefore(verdict, shell.querySelector('.pd-versus'));
     main.insertBefore(res, shell.querySelector('.pd-emotes'));
     shell.querySelector('.pd-dots').replaceChildren();
     S.dogs.me.expr(out === 'win' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);
@@ -757,7 +793,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     res.querySelector('[data-pd="lobby"]').addEventListener('click', showLobbyOrAuth);
     res.querySelector('[data-pd="again"]').addEventListener('click', () => rematch(st));
     res.querySelector('[data-pd="review"]').addEventListener('click', () => openReview(st, me, opp));
-    res.querySelector('.pd-big').focus({ preventScroll: true });
+    verdict.querySelector('.pd-big').focus({ preventScroll: true });
     /* answering on a small phone leaves the view scrolled down to the options: bring the two dogs back into view, the
        winner's celebration is the point of this screen (whatever scrolls: the page here, a sheet in a host) */
     shell.scrollIntoView?.({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
@@ -776,8 +812,10 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         const b = shell.querySelector('[data-pd="again"]');
         if (!inv || !b || M.offer?.id === inv.id || S.match !== M) return;
         M.offer = inv;
-        b.innerHTML = `${icon('zap')}<span>Play</span>`; b.classList.add('pd-glow');
-        b.setAttribute('aria-label', `Play the rematch ${M.them.name || 'your mate'} sent`);
+        b.innerHTML = `${icon('zap')}<span>Accept rematch</span>`; b.classList.add('pd-offer');
+        b.setAttribute('aria-label', `Accept the rematch ${M.them.name || 'your mate'} sent`);
+        const ask = shell.querySelector('.pd-theirs .pd-say');
+        if (ask) { clearTimeout(M.sayT); ask.className = 'pd-say pd-ask'; ask.innerHTML = `${icon('repeat')}<span>Rematch?</span>`; ask.hidden = false; }
         say(`${M.them.name || 'Your mate'} wants a rematch`);
       } catch { /* the next tick */ }
     }, 2500);

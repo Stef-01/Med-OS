@@ -22,7 +22,7 @@
   scrollbar-width: thin; scrollbar-color: var(--pd-line2) transparent;
 }
 .pd *, .pd *::before, .pd *::after { box-sizing: border-box; }
-.pd button, .pd input, .pd select { font: inherit; color: inherit; }
+:where(.pd) :where(button, input, select) { font: inherit; color: inherit; }   /* no weight: a component's own font-weight wins */
 .pd [hidden] { display: none !important; }
 .pd ::selection { background: var(--pd-pri-soft); color: var(--pd-ink); }
 .pd input, .pd select { caret-color: var(--pd-pri); }
@@ -32,7 +32,7 @@
 .pd-shell { max-width: 560px; margin: 0 auto; padding: 0 16px calc(24px + env(safe-area-inset-bottom, 0px)); }
 .pd-i { width: 24px; height: 24px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .pd-flip { transform: scaleX(-1); }
-.pd-score, .pd-roundno, .pd-num, .pd-bits b, .pd-seg button, .pd-tally b, .pd-rec { font-variant-numeric: tabular-nums; }
+.pd-score, .pd-gain, .pd-num, .pd-bits b, .pd-seg button, .pd-tally b, .pd-rec { font-variant-numeric: tabular-nums; }
 
 /* the top bar: close or back, the title and its Beta chip, one more control */
 .pd-top { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 8px; min-height: 56px; margin: 0 -16px; padding: calc(6px + env(safe-area-inset-top, 0px)) 12px 6px; background: var(--pd-bg); }
@@ -71,6 +71,8 @@
 .pd-dog iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: transparent; pointer-events: none; color-scheme: light; }
 .pd-mirror { transform: scaleX(-1); }
 .pd-face { display: block; aspect-ratio: 1; }
+/* a round face is clipped to its circle, so the body's crop lands on the circle's edge, not across it */
+.pd-row > .pd-face, .pd-tile > .pd-face, .pd-vsmini .pd-face, .pd-pick, .pd-rv-face { overflow: hidden; }
 .pd-face svg { display: block; width: 100%; height: 100%; }
 
 /* sign in */
@@ -81,13 +83,14 @@
 .pd-field > span { font-size: 14px; font-weight: 600; color: var(--pd-mute); }
 .pd-field input { width: 100%; min-height: 52px; padding: 0 16px; border: 2px solid var(--pd-line2); border-radius: 12px; background: var(--pd-card2); font-size: 17px; font-weight: 600; outline: 0; }
 .pd-field input[name="pin"] { letter-spacing: .5em; font-variant-numeric: tabular-nums; }
+.pd-field input[aria-invalid="true"] { border-color: var(--pd-no); }
 .pd-auth > .pd-btn { margin-top: 8px; }
 .pd-pickname { min-height: 1.45em; margin: 0; font-size: 16px; font-weight: 600; text-align: center; }
 /* the grid is long (every dog): its button stays in reach at the bottom of the screen */
 form[data-pd="create"] > .pd-btn.pd-pri { position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 1; box-shadow: 0 6px 18px 2px var(--pd-bg); }
 /* every dog in the registry, faces only (the name of the one picked is said above the grid) */
 .pd-dogs { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px; }
-.pd-dogpick { display: block; min-width: 0; padding: 4px; border: 2px solid var(--pd-line); border-bottom-width: var(--pd-edge); border-radius: 14px; background: var(--pd-card2); cursor: pointer; transition: border-color .15s, background-color .15s; }
+.pd-dogpick { display: block; min-width: 0; padding: 4px 4px 0; overflow: hidden; border: 2px solid var(--pd-line); border-bottom-width: var(--pd-edge); border-radius: 14px; background: var(--pd-card2); cursor: pointer; transition: border-color .15s, background-color .15s; }
 .pd-dogpick:hover { border-color: var(--pd-line2); }
 .pd-dogpick[aria-checked="true"] { border-color: var(--pd-pri); background: var(--pd-pri-soft); }
 
@@ -128,11 +131,14 @@ div.pd-me-dog { cursor: default; }
 .pd-tile:active { transform: translateY(2px); border-bottom-width: 2px; }
 .pd-tile > .pd-face { width: 60px; border-radius: 50%; background: var(--pd-card2); }
 .pd-tile b { max-width: 100%; font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pd-dot { position: absolute; top: 10px; right: 12px; width: 12px; height: 12px; border: 2px solid var(--pd-card); border-radius: 50%; background: var(--pd-ok); }
+/* every mate's face is a challenge (its duel badge); an online one leads, with a ring round the face */
+.pd-mate.pd-online > .pd-face { outline: 3px solid var(--pd-ok); outline-offset: 2px; }   /* online: the ring alone, the tile stays quiet */
+.pd-mate .pd-tbadge { color: var(--pd-pri); }
 .pd-tbadge { position: absolute; top: 6px; right: 8px; display: grid; color: var(--pd-mute); }
 .pd-tbadge .pd-i { width: 18px; height: 18px; }
 .pd-invite { border-style: dashed; border-bottom-style: solid; background: transparent; color: var(--pd-mute); }
 .pd-faceic { display: grid; place-items: center; width: 60px; }
+.pd-faceic .pd-i { width: 26px; height: 26px; }
 
 /* sheets: a bottom sheet on a phone, a dialog on a wide screen */
 .pd-sheet-wrap { position: fixed; inset: 0; z-index: 60; }
@@ -151,19 +157,24 @@ div.pd-me-dog { cursor: default; }
 .pd-seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; }
 .pd-seg button { min-height: 48px; border: 2px solid var(--pd-line2); border-bottom-width: var(--pd-edge); border-radius: 12px; background: var(--pd-card2); font-size: 16px; font-weight: 700; cursor: pointer; }
 .pd-seg button[aria-checked="true"] { border-color: var(--pd-pri); background: var(--pd-pri-soft); }
-.pd-segrow select { width: 100%; min-height: 48px; padding: 0 12px; border: 2px solid var(--pd-line2); border-radius: 12px; background: var(--pd-card2); font-size: 16px; font-weight: 600; }
+/* the topic: the game's own chevron, not the browser's */
+.pd-segrow { position: relative; }
+.pd-segrow .pd-chevsel { position: absolute; right: 12px; top: 50%; display: grid; color: var(--pd-mute); transform: translateY(-50%) rotate(-90deg); pointer-events: none; }
+.pd-segrow .pd-chevsel .pd-i { width: 18px; height: 18px; }
+.pd-segrow select { -webkit-appearance: none; appearance: none; width: 100%; min-height: 48px; padding: 0 40px 0 12px; border: 2px solid var(--pd-line2); border-bottom-width: var(--pd-edge); border-radius: 12px; background: var(--pd-card2); font-size: 16px; font-weight: 600; }
 .pd-sheet > .pd-btn.pd-pri { margin-top: 8px; }
 
 /* the dressing room: the whole screen; the preview and the tabs stay, the panel under them scrolls */
 .pd-sheet.pd-full { top: 0; max-height: none; padding: 0 16px; gap: 8px; overflow: hidden; border: 0; border-radius: 0; animation-duration: .36s; }
-.pd-dresstop { margin: 0 -12px; position: static; padding-left: 8px; padding-right: 8px; background: transparent; grid-template-columns: 44px minmax(0, 1fr) auto; }
+.pd-dresstop { margin: 0 -12px; position: static; padding-left: 8px; padding-right: 8px; background: transparent; grid-template-columns: 44px minmax(0, 1fr) 44px; }
+.pd-dressbar { flex: none; margin: 0 -16px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--pd-line); background: var(--pd-card); }   /* Save, in reach */
 .pd-preview { display: grid; place-items: center; height: min(32vh, 240px); flex: none; }
 .pd-preview .pd-dog { width: auto; height: 100%; }
 .pd-chosen { flex: none; min-height: 1.45em; margin: 0; font-size: 16px; font-weight: 600; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pd-tabs { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; flex: none; padding: 4px; border-radius: 14px; background: var(--pd-card2); }
+.pd-tabs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; flex: none; padding: 4px; border-radius: 14px; background: var(--pd-card2); }
 .pd-tabs button { display: grid; place-items: center; min-height: 44px; padding: 0; border: 0; border-radius: 10px; background: transparent; color: var(--pd-mute); cursor: pointer; transition: background-color .15s, color .15s; }
 .pd-tabs button[aria-selected="true"] { background: var(--pd-card); color: var(--pd-pri); }
-.pd-panel { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; margin: 0 -16px; padding: 8px 16px calc(24px + env(safe-area-inset-bottom, 0px)); }
+.pd-panel { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; margin: 0 -16px; padding: 8px 16px 16px; }
 .pd-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 12px; }
 .pd-swatch { aspect-ratio: 1; padding: 5px; border: 2px solid var(--pd-line2); border-radius: 50%; background: transparent; cursor: pointer; transition: border-color .15s, transform .12s var(--pd-spring); }
 .pd-swatch i { display: block; width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, var(--a) 50%, var(--b) 50%); }
@@ -176,60 +187,74 @@ div.pd-me-dog { cursor: default; }
 .pd-piece svg { width: 100%; height: 100%; overflow: hidden; }
 .pd-piece:active:not(:disabled) { transform: scale(.94); }
 .pd-piece[aria-pressed="true"] { border-color: var(--pd-pri); box-shadow: 0 0 0 2px var(--pd-pri); }
-.pd-piece:disabled { cursor: default; }
-.pd-piece:disabled svg { opacity: .3; filter: grayscale(.8); }
+/* what you own is in its rarity's colour, what is locked is quiet */
+.pd-piece:disabled { cursor: default; background: var(--pd-card2); border-color: transparent; }
+.pd-piece:disabled svg { opacity: .28; filter: grayscale(1); }
 .pd-lock { position: absolute; right: 4px; bottom: 4px; display: grid; color: var(--pd-mute); }
 .pd-lock .pd-i { width: 16px; height: 16px; }
 .pd-none { background: transparent; color: var(--pd-mute); border-style: dashed; }
-.pd-locknote { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0 0; font-size: 14px; color: var(--pd-mute); }
+.pd-none[aria-pressed="true"] { border-style: solid; color: var(--pd-ink); }   /* chosen: the one selected style */
+.pd-none .pd-i { width: 26px; height: 26px; }
+.pd-locknote { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 0 10px; font-size: 14px; color: var(--pd-mute); }
 .pd-locknote .pd-i { width: 18px; height: 18px; }
 
 /* the match */
-.pd-mtop { grid-template-columns: 44px minmax(0, 1fr) 44px; }
+.pd-mtop { grid-template-columns: minmax(44px, 1fr) auto minmax(44px, 1fr); }
+.pd-mtop .pd-qtag { justify-self: end; }   /* the AI tag where a round count was: the dots count the rounds */
+.pd-mtop:has(~ .pd-over) [data-pd="leave"] { visibility: hidden; }   /* the result has one way out, its home button */
+.pd-match:not([data-live]) .pd-dots, .pd-match:not([data-live]) .pd-score, .pd-match:not([data-live]) .pd-timer { visibility: hidden; }   /* no match furniture before the match */
 .pd-dots { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
 .pd-dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--pd-line2); transition: background-color .2s, transform .2s var(--pd-spring); }
 .pd-dots i.pd-now { background: var(--pd-pri); transform: scale(1.3); }
 .pd-dots i.pd-ok { background: var(--pd-ok); }
 .pd-dots i.pd-no { background: var(--pd-no); }
-.pd-roundno { font-size: 14px; font-weight: 700; color: var(--pd-mute); text-align: right; }
 .pd-match { gap: 12px; padding-top: 0; }
 .pd-versus { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .pd-side { position: relative; display: flex; flex-direction: column; align-items: center; min-width: 0; }
 .pd-dogslot { position: relative; width: min(140px, 38vw); }
 .pd-meta { display: grid; justify-items: center; grid-template-rows: auto auto 24px; margin-top: -8px; min-width: 0; max-width: 100%; }
 .pd-pname { max-width: 100%; font-size: 14px; font-weight: 600; color: var(--pd-mute); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pd-scorerow { display: inline-flex; align-items: baseline; gap: 4px; }
 .pd-score { font-size: 26px; font-weight: 700; line-height: 1.15; }
 .pd-score.pd-bump { animation: pd-bump .5s var(--pd-ease); }
+/* the round's points beside each score on the reveal: the fast half of right and fast */
+.pd-gain { font-size: 13px; font-weight: 700; font-style: normal; color: var(--pd-ok-ink); animation: pd-rise .35s var(--pd-ease) both; }
+.pd-gain:empty { display: none; }
 .pd-status { display: grid; place-items: center; height: 24px; font-style: normal; color: var(--pd-mute); }
 .pd-status .pd-i { width: 22px; height: 22px; }
 .pd-status[data-k="think"] .pd-i { animation: pd-think 1.2s ease-in-out infinite; }
 .pd-status[data-k="done"], .pd-status[data-k="ok"] { color: var(--pd-ok-ink); }
 .pd-status[data-k="no"] { color: var(--pd-no); }
 .pd-status[data-k="lock"] { color: var(--pd-pri); }
-/* their emote: a bubble at the inner top corner of their side, off their dog's face */
-.pd-say { position: absolute; top: 2px; left: 2px; z-index: 1; display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid var(--pd-line2); border-radius: 50%; background: var(--pd-card); color: var(--pd-ink); animation: pd-pop .28s var(--pd-spring) both; }
+/* their emote, or their ask for a rematch: a bubble at the top corner of their dog */
+.pd-say.pd-ask { display: flex; gap: 6px; width: auto; height: 36px; padding: 0 12px 0 10px; border-radius: 999px; border-color: var(--pd-pri); color: var(--pd-pri); font-size: 14px; font-weight: 700; white-space: nowrap; }
+.pd-say.pd-ask .pd-i { width: 18px; height: 18px; }
+.pd-say { position: absolute; top: -4px; right: -6px; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid var(--pd-line2); border-radius: 50%; background: var(--pd-card); color: var(--pd-ink); animation: pd-pop .28s var(--pd-spring) both; }
 .pd-timer { height: 8px; border-radius: 4px; background: var(--pd-card2); overflow: hidden; opacity: .4; transition: opacity .2s; }
 .pd-timer.pd-on { opacity: 1; }
 .pd-timer i { display: block; height: 100%; border-radius: 4px; background: var(--pd-pri); transform-origin: 0 50%; transform: scaleX(0); }
 .pd-timer.pd-low i { background: var(--pd-warn); }
-.pd-q { display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 2px solid var(--pd-line); border-radius: var(--pd-r); background: var(--pd-card); }
-.pd-qtag { align-self: flex-start; margin: 0; padding: 2px 8px; border-radius: 6px; background: var(--pd-card2); font-size: 12px; font-weight: 700; color: var(--pd-mute); }
+/* the question sits on the screen and its options are the cards: no card in a card */
+.pd-q { display: flex; flex-direction: column; gap: 12px; padding: 4px 0 0; }
+.pd-qtag { margin: 0; padding: 2px 8px; border-radius: 6px; background: var(--pd-card2); font-size: 12px; font-weight: 700; color: var(--pd-mute); white-space: nowrap; }
 .pd-stem { margin: 0; font-size: 17px; font-weight: 600; line-height: 1.45; text-wrap: pretty; }
 .pd-opts { display: flex; flex-direction: column; gap: 8px; }
-.pd-opt { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 10px 12px;
+.pd-opt { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; align-items: center; gap: 10px; width: 100%; min-height: 54px; padding: 9px 12px 9px 10px;
   border: 2px solid var(--pd-line2); border-bottom-width: var(--pd-edge); border-radius: 14px; background: var(--pd-card); text-align: left;
   font-size: 16px; font-weight: 600; line-height: 1.3; cursor: pointer; transition: transform .12s var(--pd-spring), background-color .15s, border-color .15s, opacity .2s; }
 .pd-opt:hover:not(:disabled) { background: var(--pd-card2); }
 .pd-opt:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
 .pd-opt:disabled { cursor: default; }
-.pd-opt kbd { display: grid; place-items: center; width: 30px; height: 30px; border: 2px solid var(--pd-line2); border-radius: 9px; font: inherit; font-size: 14px; font-weight: 700; color: var(--pd-mute); }
+.pd-opt kbd { display: grid; place-items: center; width: 26px; height: 26px; border: 2px solid var(--pd-line2); border-radius: 8px; font: inherit; font-size: 13px; font-weight: 700; color: var(--pd-mute); }
 .pd-opt.pd-picked { border-color: var(--pd-pri); background: var(--pd-pri-soft); }
 .pd-opt.pd-picked kbd { border-color: var(--pd-pri); color: var(--pd-pri); }
 .pd-opt.pd-right { border-color: var(--pd-ok); background: var(--pd-ok-soft); animation: pd-right .5s var(--pd-ease); }
 .pd-opt.pd-right kbd { border-color: var(--pd-ok); background: var(--pd-ok); color: #fff; }
 .pd-opt.pd-wrong { border-color: var(--pd-no); background: var(--pd-no-soft); }
 .pd-opt.pd-wrong kbd { border-color: var(--pd-no); background: var(--pd-no); color: #fff; }
-.pd-q:has(.pd-right) .pd-opt:not(.pd-right):not(.pd-wrong) { opacity: .55; }
+/* the rest dim on the reveal, never the faces on them: who picked what is the point */
+.pd-q:has(.pd-right) .pd-opt:not(.pd-right):not(.pd-wrong):not(.pd-miss) > :not(.pd-who) { opacity: .55; }
+.pd-opt.pd-miss { border-color: var(--pd-no); }   /* their wrong pick: marked, not filled (the fill is mine) */
 .pd-who { display: flex; gap: 2px; font-style: normal; }
 .pd-who:empty { display: none; }
 .pd-pick { width: 30px; border: 2px solid var(--pd-card); border-radius: 50%; background: var(--pd-card2); animation: pd-pop-in .4s var(--pd-spring) both; }
@@ -259,13 +284,15 @@ div.pd-me-dog { cursor: default; }
 .pd-net { margin: 0; padding: 10px 14px; border-radius: 12px; background: var(--pd-card2); font-size: 14px; font-weight: 600; color: var(--pd-warn); text-align: center; }
 
 /* the result: under the two dogs, each one's score and its rounds; one big button and two small ones */
-.pd-over .pd-meta .pd-score, .pd-over .pd-status { display: none; }
+.pd-over .pd-meta .pd-score, .pd-over .pd-status, .pd-over .pd-gain { display: none; }
+/* the verdict first, then each player's score and rounds under their own dog */
+.pd-verdict { display: grid; justify-items: center; gap: 2px; order: -1; text-align: center; animation: pd-rise .4s var(--pd-ease) both; }
+.pd-verdict .pd-big { font-size: 30px; outline: 0; }
+.pd-verdict[data-out="win"] .pd-big { color: var(--pd-ok-ink); }
 .pd-over .pd-emotes { order: 9; }
 .pd-result { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; animation: pd-rise .4s var(--pd-ease) both; }
-.pd-result .pd-big { font-size: 30px; outline: 0; }
-.pd-result[data-out="win"] .pd-big { color: var(--pd-ok-ink); }
-.pd-reason { margin: -8px 0 0; font-size: 15px; color: var(--pd-mute); }
-.pd-tally { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; order: -1; margin-top: -4px; }
+.pd-reason { margin: 0; font-size: 15px; color: var(--pd-mute); }
+.pd-tally { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: -4px; }
 .pd-tally > span { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
 .pd-tally b { display: inline-flex; align-items: center; gap: 6px; font-size: 28px; font-weight: 700; line-height: 1.1; }
 .pd-crown { display: grid; color: var(--pd-warn); animation: pd-crown .6s var(--pd-ease) both; }
@@ -273,11 +300,14 @@ div.pd-me-dog { cursor: default; }
 .pd-rounds { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; max-width: 150px; }
 .pd-rounds i { width: 12px; height: 12px; border-radius: 50%; }
 .pd-rounds .pd-ok { background: var(--pd-ok); }
-.pd-rounds .pd-no { background: var(--pd-line2); }
-/* their rematch is waiting: the button breathes once a second until it is pressed */
-.pd-btn.pd-glow { animation: pd-glow 1.6s var(--pd-ease) infinite; }
-@keyframes pd-glow { 50% { box-shadow: 0 0 0 6px var(--pd-pri-soft); } }
-.pd-result .pd-acts { display: grid; grid-template-columns: minmax(0, 1fr) 52px 52px; gap: 8px; width: 100%; max-width: 380px; }
+.pd-rounds .pd-no { background: var(--pd-no); }
+.pd-rounds .pd-skip { background: transparent; box-shadow: inset 0 0 0 2px var(--pd-line2); }   /* no answer in time: an empty ring */
+/* their rematch is waiting: the button says so, with one nudge when it changes */
+.pd-btn.pd-offer { animation: pd-nudge .5s var(--pd-spring); }
+@keyframes pd-nudge { 40% { transform: scale(1.04); } }
+/* the one big action on its own row ("Accept rematch" whole at 320), Review and home under it */
+.pd-result .pd-acts { display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 8px; width: 100%; max-width: 400px; }
+.pd-result .pd-acts .pd-pri { grid-column: 1 / -1; }
 .pd-result .pd-ib { width: 52px; height: 52px; border: 2px solid var(--pd-line2); border-bottom-width: var(--pd-edge); border-radius: 14px; color: var(--pd-ink); }
 .pd-result .pd-ib:active { transform: translateY(2px); border-bottom-width: 2px; }
 
@@ -291,7 +321,11 @@ div.pd-me-dog { cursor: default; }
 .pd-rv-no { color: var(--pd-no); }
 .pd-rv-a .pd-i, .pd-rv-no .pd-i { width: 18px; height: 18px; margin-top: 2px; }
 .pd-rv-why { font-size: 15px; line-height: 1.5; color: var(--pd-mute); text-wrap: pretty; }
-.pd-rv-who { font-size: 13px; color: var(--pd-mute); }
+.pd-rv-who { display: flex; gap: 12px; }
+.pd-rv-who > span { display: inline-flex; align-items: center; gap: 4px; }
+.pd-rv-face { width: 28px; border-radius: 50%; background: var(--pd-card2); }
+.pd-rv-who .pd-i { width: 16px; height: 16px; }
+.pd-rv-who .pd-yes { color: var(--pd-ok-ink); } .pd-rv-who .pd-nay { color: var(--pd-no); }
 
 @keyframes pd-pop { from { transform: scale(.6); opacity: 0; } }
 @keyframes pd-pop-in { from { transform: scale(.5); opacity: 0; } }
@@ -305,22 +339,32 @@ div.pd-me-dog { cursor: default; }
 @keyframes pd-up { from { transform: translateY(40px); opacity: 0; } }
 @media (min-width: 600px) {
   .pd-sheet { left: 50%; right: auto; top: 50%; bottom: auto; width: 460px; transform: translate(-50%, -50%); border-radius: 20px; border-bottom: 2px solid var(--pd-line); padding: 24px; animation: pd-fade .2s ease both; }
-  .pd-sheet.pd-full { width: 480px; height: min(780px, 92vh); padding: 0 20px; border: 2px solid var(--pd-line); border-radius: 20px; }
+  .pd-sheet.pd-full { top: 50%; width: 480px; height: min(780px, 92vh); padding: 0 20px; border: 2px solid var(--pd-line); border-radius: 20px; }
 }
-@media (min-width: 720px) { .pd-dogslot { width: 172px; } .pd-me-dog { width: 140px; } }
+@media (min-width: 720px) { .pd-dogslot { width: min(172px, 20vh); } .pd-me-dog { width: 140px; } }   /* by the screen's height: the emotes stay in view on a laptop */
 @media (max-width: 360px) {
-  .pd-q { padding: 14px; }
   .pd-stem { font-size: 16px; }
-  .pd-opt { min-height: 52px; padding: 8px 10px; gap: 10px; }
+  .pd-opt { min-height: 50px; padding: 8px 10px 8px 8px; gap: 8px; }
   .pd-big { font-size: 24px; }
   .pd-me-dog { width: 100px; }
   .pd-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 /* a short phone (an SE at 320 by 640): the dogs stand beside their scores, so the question and its options fit */
 @media (max-height: 700px) and (max-width: 480px) {
-  .pd-side { flex-direction: row; justify-content: center; gap: 4px; }
-  .pd-theirs { flex-direction: row-reverse; }
-  .pd-dogslot { width: min(100px, 28vw); }
-  .pd-meta { margin-top: 0; grid-template-rows: auto auto 24px; }
+  /* the two dogs face off in the middle and each score stands at its own edge: two scores never read as one number */
+  .pd-match:not(.pd-over) .pd-side { flex-direction: row; justify-content: space-between; align-items: center; gap: 6px; }
+  .pd-match:not(.pd-over) .pd-mine { flex-direction: row-reverse; }
+  .pd-match:not(.pd-over) .pd-dogslot { width: min(84px, 20vw); }
+  .pd-match:not(.pd-over) .pd-say { right: auto; left: -12px; }   /* over the middle, off their score */
+  /* the score, and under it the round's mark and points: a five-digit score fits beside a dog at 320 */
+  .pd-match:not(.pd-over) .pd-meta { margin-top: 0; justify-items: start; grid-template-columns: auto auto; grid-template-rows: auto auto 22px; column-gap: 4px; }
+  .pd-match:not(.pd-over) .pd-theirs .pd-meta { justify-items: end; }
+  .pd-match:not(.pd-over) .pd-scorerow { display: contents; }
+  .pd-match:not(.pd-over) .pd-pname, .pd-match:not(.pd-over) .pd-score { grid-column: 1 / -1; }
+  .pd-match:not(.pd-over) .pd-score { font-size: 20px; }
+  .pd-match:not(.pd-over) .pd-status, .pd-match:not(.pd-over) .pd-gain { grid-row: 3; align-self: center; }
+  .pd-match:not(.pd-over) .pd-mine .pd-status, .pd-match:not(.pd-over) .pd-theirs .pd-gain { grid-column: 1; }
+  .pd-match:not(.pd-over) .pd-mine .pd-gain, .pd-match:not(.pd-over) .pd-theirs .pd-status { grid-column: 2; }
+  .pd-over .pd-dogslot { width: min(116px, 34vw); }
 }
 @media (prefers-reduced-motion: reduce) { .pd *, .pd *::before, .pd *::after { animation: none !important; transition: none !important; } }

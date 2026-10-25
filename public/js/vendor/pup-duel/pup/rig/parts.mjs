@@ -181,6 +181,11 @@ function dogMarkup(c, P) {
     }
   });
   var headPath = uPath(0, -55, 100, c.head.h, c.head.r), muzzlePath = uPath(1, -17, c.muzzle.w, c.muzzle.h, c.muzzle.r || 10);
+  // a snout mark above the muzzle's top (y -17: the bridge of the nose, a pug's or a frenchie's brow wrinkle) lies over
+  // the eyes but under the glasses worn on them, unscaled by the eyes' group; the rest of it lies on the snout, over
+  // everything there. rig.mjs moves the bridge with the snout's turn
+  var snoutMarks = marksOn(c, 'snout'), bridge = snoutMarks ? '<g data-p="bridge" transform="translate(1 -17.4) scale(' + r3(1 / c.eye) + ') translate(-1 17.4)">' +
+    clipped(P + '-bridge', '<rect x="-80" y="-100" width="160" height="83"/>', snoutMarks) + '</g>' : '';
   var bodyRect = '<rect x="' + bL + '" y="-20" width="' + c.body.w + '" height="' + c.body.h + '" rx="' + r3(c.body.h * 0.476) + '"', bodyMarks = marksOn(c, 'body');
   function tailLine(k, col, w, more) { return '<path data-p="' + k + '" d="M0 0" fill="none" stroke="' + col + '" stroke-width="' + w + '" stroke-linecap="round" stroke-linejoin="round"' + (more || '') + '/>'; }
   // the tail, and a plume's lighter core or a spotted tail's spots (round dashes along the same line)
@@ -249,6 +254,7 @@ function dogMarkup(c, P) {
               '<circle data-p="cheekR" cx="12.7" cy="-1.2" r="15" fill="' + p.lidR + '"/></g>' +
             '<path data-p="shutL" d="M-19.5 -29 Q-10.7 -38 -1.9 -29" fill="none" stroke="' + p.feature + '" stroke-width="3.2" stroke-linecap="round" opacity="0"/>' +
             '<path data-p="shutR" d="M3.9 -29 Q12.7 -38 21.5 -29" fill="none" stroke="' + p.feature + '" stroke-width="3.2" stroke-linecap="round" opacity="0"/>' +
+            bridge +
             SHADES +
             // glasses ride the eyes: this group's per-dog scale and the features' yaw; a mirrored dog wears them unmirrored
             (c.mirror ? '<g transform="matrix(-1 0 0 1 2 0)"><g data-p="wearFace"></g></g>' : '<g data-p="wearFace"></g>') +
@@ -256,7 +262,7 @@ function dogMarkup(c, P) {
         '</g>' +
         '<g data-p="snout">' +
           '<path d="' + muzzlePath + '" fill="' + p.muzzle + '"/>' +
-          clipped(P + '-muzzle', '<path d="' + muzzlePath + '"/>', marksOn(c, 'muzzle')) + marksOn(c, 'snout') +
+          clipped(P + '-muzzle', '<path d="' + muzzlePath + '"/>', marksOn(c, 'muzzle')) + clipped(P + '-snout', '<rect x="-80" y="-17" width="160" height="120"/>', snoutMarks) +
           '<g data-p="blush" opacity="0"><rect x="-27" y="-8" width="11" height="6" rx="3" fill="' + p.blush + '"/>' +
             '<rect x="18" y="-8" width="11" height="6" rx="3" fill="' + p.blush + '"/></g>' +
           '<g data-p="mouth"><path d="M-8.5 -7 H11.5 A10 13 0 0 1 -8.5 -7 Z" fill="' + p.mouth + '"/>' +

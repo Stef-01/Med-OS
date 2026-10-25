@@ -7,7 +7,7 @@ import { EXPR, EXPR_ORDER } from './expressions.mjs';
 import { DOGS, resolve, dogById } from './breeds.mjs';
 import { dress } from './coats.mjs';
 import { still } from './still.mjs';
-import { NS, r3, set, tr, reach, drape } from './parts.mjs';
+import { NS, r3, set, tr, scl, reach, drape } from './parts.mjs';
 import { hatFit, boxIn, makeDog } from './rig.mjs';
 
 // ---- the scene: a roster, a camera, and dogs that walk to their spots ----
@@ -162,7 +162,8 @@ function wear(r, m, fresh) {
     var g = r.slot && r.slot.querySelector('[data-p="wear' + k + '"]'), v = typeof m[k.toLowerCase()] === 'string' ? m[k.toLowerCase()] : '';
     if (g && g.getAttribute('data-v') !== v) {
       g.innerHTML = v; g.setAttribute('data-v', v); changed = changed || !!v;
-      if (k === 'Back') fitDrape(r, g);
+      if (k === 'Back') { fitDrape(r, g); fitBack(r, g); }
+      if (k === 'Neck') fitNeck(r, g);
       // a piece put on pops on (frame: popK), unless the dog is dressing as it loads, or no frames are running to
       // finish the pop (reduced motion, a hidden page): one frame drawn mid-pop would leave it half size
       if (v && !fresh && running() && live()) (r.rig.popAt || (r.rig.popAt = {}))[k] = clock;
@@ -228,6 +229,75 @@ function fitDrape(r, g) {
   g.querySelectorAll('[data-on]').forEach(function (el) { on.appendChild(el); });
   r.rig.rumps = [].slice.call(g.querySelectorAll('[data-rump]')); r.rig.rumpFit = f.rump;   // the rig swings them each frame
   r.rig.rumps.forEach(function (el) { el.setAttribute('transform', f.rump); });
+}
+// what an element draws, boxed in another element's user space: each shape's box (rig.mjs boxIn) widened by half its
+// stroke where it is stroked (a scarf's fringe, a chain's links), so a fit counts the ink, not the outline under it
+var SHAPES = 'path,rect,circle,ellipse,line,polyline,polygon';
+function inkBox(el, space) {
+  var out = null, list = [].slice.call(el.querySelectorAll(SHAPES));
+  if (el.matches(SHAPES)) list.push(el);
+  list.forEach(function (s) {
+    if (s.closest('clipPath,mask,defs')) return;
+    var b = boxIn(s, space), cs = getComputedStyle(s), M;
+    if (!b) return;
+    var w = cs.stroke && cs.stroke !== 'none' ? (parseFloat(cs.strokeWidth) || 0) / 2 : 0;
+    if (w) { try { M = space.getCTM().inverse().multiply(s.getCTM()); w *= Math.sqrt(Math.abs(M.a * M.d - M.b * M.c)); } catch (err) { /* unscaled */ } }
+    out = { x0: Math.min(out ? out.x0 : Infinity, b.x0 - w), x1: Math.max(out ? out.x1 : -Infinity, b.x1 + w),
+      y0: Math.min(out ? out.y0 : Infinity, b.y0 - w), y1: Math.max(out ? out.y1 : -Infinity, b.y1 + w) };
+  });
+  return out;
+}
+// A neck piece fitted to its dog's room between the collar band and the floor (a corgi's chin is near the ground, a
+// dachshund's nearly on it). What hangs from it ([data-hang]: a scarf's end, a stole's two) shortens about its top to end
+// NECK_GAP off the floor, which keeps it off the floor when a sad or sleepy head drops (about 5.5). What still reaches past
+// that (a pendant on a low dog) is drawn smaller about the collar band (y 0), its sides tucking behind the chin and what
+// hangs staying under it. A dog with little room under its chin (the dachshund's is nine units) gives up some of the gap
+// before the piece shrinks to nothing; the rig then slides it up under the chin when the head comes down further (its
+// lowest point, rig.neckLow)
+var NECK_GAP = 6, NECK_SHOW = 8, HANG_MIN = 0.3;
+function fitNeck(r, g) {
+  r.rig.neckLow = null;
+  if (!g.firstChild) return;
+  var c = r.c, ny = c.neckOn === 'collar' ? c.geo.hb - 2 : c.geo.hb - 4;   // where parts.mjs sets wearNeck
+  var room = c.geo.fy - ny, lim = room - clamp(room - (c.geo.hb - ny) - NECK_SHOW, 1, NECK_GAP);
+  [].forEach.call(g.querySelectorAll('[data-hang]'), function (h) {
+    var b = inkBox(h, g);
+    if (b && b.y1 > lim) set(h, 'transform', 'translate(0 ' + r3(b.y0) + ') scale(1 ' + r3(Math.max(HANG_MIN, (lim - b.y0) / (b.y1 - b.y0))) + ') translate(0 ' + r3(-b.y0) + ')');
+  });
+  var all = inkBox(g, g);
+  if (all && all.y1 > lim) {
+    var fit = document.createElementNS(NS, 'g');
+    fit.setAttribute('transform', scl(r3(lim / all.y1), 1, 0));
+    while (g.firstChild) fit.appendChild(g.firstChild);
+    g.appendChild(fit);
+  }
+  if (all) { r.rig.neckY = ny; r.rig.neckLow = r3(Math.min(all.y1, lim)); }
+}
+// Back pieces are drawn on the doberman's body, its rump at x -72 (parts.mjs drape fits their fabric from there). A pack
+// ([data-pack]: a llama, a med kit, a balloon's string) is drawn with its foot inside that body; on a shorter dog it moves
+// forward with the rump, so it never hangs past it in the air (a longer dog has its back under the pack already). A mane
+// covers the rump, so on a maned dog it keeps its place, clear of the fur. What stands beside the head ([data-side]: a
+// jetpack's tanks, drawn on the left and mirrored) moves out to this dog's outline at its height, a mane or a hanging ear
+// (a Pomeranian's ruff hid all of the tanks but their caps), as far as the frame has room for
+var RUMP = -72, SIDE_SHOW = 6, SIDE_MAX = 14;
+function fitBack(r, g) {
+  var c = r.c, dx = c.mane ? 0 : r3(Math.max(0, c.geo.bL - RUMP));
+  [].forEach.call(g.querySelectorAll('[data-pack]'), function (el) { set(el, 'transform', dx ? 'translate(' + dx + ' 0)' : ''); });
+  var sides = g.querySelectorAll('[data-side]'), dog = r.slot.querySelector('[data-p="dog"]');
+  if (!sides.length || !dog) return;
+  var s0 = null;
+  [].forEach.call(sides, function (el) { el.removeAttribute('transform'); var b = inkBox(el, dog); if (b && b.x1 < 1 && (!s0 || b.x0 < s0.x0)) s0 = b; });
+  if (!s0) return;
+  // the outline over the side piece's height: the head (50 each side of its centre line, x 1), a mane, the hanging ears
+  var edge = 50, cover = [r.slot.querySelector('[data-p="ruff"]')].concat([].slice.call(r.slot.querySelectorAll('[data-p="earsFront"] > g')));
+  cover.forEach(function (el) {
+    var b = el && !el.closest('[display="none"]') && boxIn(el, dog);
+    if (!b || b.y1 < s0.y0 || b.y0 > s0.y1) return;
+    var h = (b.y1 - b.y0) / 2, cy = (b.y0 + b.y1) / 2, y = clamp(cy, s0.y0, s0.y1), e = el.getAttribute('data-p') === 'ruff' ? Math.sqrt(Math.max(0, 1 - Math.pow((y - cy) / h, 2))) : 1;
+    edge = Math.max(edge, Math.max(1 - b.x0, b.x1 - 1) * e);   // a mane is an ellipse: its half width where the piece is
+  });
+  var out = r3(clamp(edge - SIDE_SHOW - (1 - s0.x1), 0, SIDE_MAX));
+  if (out) [].forEach.call(sides, function (el) { el.setAttribute('transform', 'translate(' + (-out) + ' 0)'); });
 }
 function union(a, b) {
   if (!a) return b;

@@ -103,7 +103,7 @@ function makeDog(c, slot, P) {
    'tipOutL', 'tipOutR', 'tipInL', 'tipInR', 'earsBack', 'earsFront', 'earTips', 'feat', 'browL', 'browR', 'pupilL', 'pupilR',
    'heyeL', 'heyeR', 'lidL', 'lidR', 'cheekL', 'cheekR', 'shutL', 'shutR', 'snout', 'blush', 'mouth', 'tongue', 'bone',
    'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearNeck', 'wearBack', 'wearOnPop', 'wearOnFit', 'earsOver', 'armClip', 'armEars', 'armEarL', 'armEarR', 'ruff', 'ruffClip',
-   'tailIn', 'tailDots'].forEach(function (k) { e[k] = q(k); });
+   'tailIn', 'tailDots', 'bridge'].forEach(function (k) { e[k] = q(k); });
   e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
   // the eye as a whole: the whites, each eye's clip (its pupil and its heart), the lids and the cheeks that squint into
   // it, the strokes of a closed eye; all left out under solid lenses (below)
@@ -403,7 +403,10 @@ function makeDog(c, slot, P) {
     // a worn hat rides the head on a soft spring (hatSpring); with nothing on, it rests
     if (e.wearHead && e.wearHead.firstChild) hatSpring(rig, headY, dt); else { rig.hatY = rig.hatS = rig.hatV = rig.aY = 0; rig.pHY = null; rig.pVY = 0; }   // a hat put on later starts at rest
     set(e.collar, 'transform', tr(hipX * 0.75, headY * 0.85 - 0.15 * hop.lift));
-    if (e.wearNeck) { if (rig.neckT == null) rig.neckT = e.wearNeck.getAttribute('transform') || ''; set(e.wearNeck, 'transform', rig.neckT + (kN !== 1 ? ' ' + scl(kN, 0, 0) : '')); }
+    // a neck piece never reaches through the floor: when the chest comes down to it (a sad head, a hop's landing) it slides
+    // up under the chin by what it would have reached past the paws (stage.mjs fitNeck leaves it room at rest: rig.neckLow)
+    var neckUp = rig.neckLow == null ? 0 : Math.max(0, rig.neckY + rig.neckLow + (c.neckOn === 'collar' ? headY * 0.85 - 0.15 * hop.lift : headY) - (g.fy - hop.lift) + 1);
+    if (e.wearNeck) { if (rig.neckT == null) rig.neckT = e.wearNeck.getAttribute('transform') || ''; set(e.wearNeck, 'transform', rig.neckT + (kN !== 1 ? ' ' + scl(kN, 0, 0) : '') + (neckUp > 0.01 ? ' ' + tr(0, -neckUp) : '')); }
     set(e.tag, 'transform', rot(-0.3 * w1 + 3 * wave(t - 120, 1440) + 40 * (hopEars.sy - hop.sy), -4, g.hb + 4));
 
     // The turn, without a second drawing: each part slides by its depth. The pointer pulls it a little.
@@ -426,6 +429,8 @@ function makeDog(c, slot, P) {
     if (faceOn && e.armClip) set(e.armClip, 'transform', (kF !== 1 ? scl(r3(1 / kF), 1, -30) + ' ' : '') + tr(0, -(rig.hatY * 0.25 + push)) + (c.mirror ? ' matrix(-1 0 0 1 2 0)' : '') +
       ' translate(1 -17.4) scale(' + r3(1 / c.eye) + ') translate(-1 17.4) ' + tr(-yaw * 10, 0));
     set(e.snout, 'transform', tr(yaw * 13, 0));
+    // a snout mark on the bridge of the nose (parts.mjs) sits in the eyes' group, which turns by 10: it takes the other 3
+    if (e.bridge) { if (rig.bridgeT == null) rig.bridgeT = e.bridge.getAttribute('transform') || ''; set(e.bridge, 'transform', rig.bridgeT + ' ' + tr(yaw * 3, 0)); }
     set(e.earsBack, 'transform', tr(-yaw * 9, 0));
     set(e.earTips, 'transform', tr(-yaw * 9, 0));
     set(e.earsFront, 'transform', tr(-yaw * 5, 0));
