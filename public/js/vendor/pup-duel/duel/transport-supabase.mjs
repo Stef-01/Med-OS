@@ -54,6 +54,10 @@ export function supabaseTransport({ url, key, fetch = globalThis.fetch?.bind(glo
     buy: (me, ids, total) => rpc('pup_buy', { p_token: me.token, p_ids: ids, p_total: total }),
     practice: (me, right) => rpc('pup_practice', { p_token: me.token, p_right: right }),
     outfits: (me, list) => rpc('pup_outfits', { p_token: me.token, p_outfits: list }),
+    /* ranked (0003_pup_ranked.sql) */
+    queue: (me, setup) => rpc('pup_queue', { p_token: me.token, p_setup: setup }),
+    unqueue: me => rpc('pup_unqueue', { p_token: me.token }),
+    leaderboard: me => rpc('pup_leaderboard', { p_token: me.token }),
     live,
     get socket() { return rt?.state || 'idle'; },
     close() { rt?.close(); rt = null; }

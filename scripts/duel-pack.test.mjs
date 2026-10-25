@@ -103,4 +103,8 @@ test('the vendored Pup Duel is exactly what its VERSION.json says, and the migra
   const shop = (v.migrations || []).find(m => m.file.endsWith('_pup_shop.sql'));
   assert.ok(shop, 'the package pins its shop migration');
   assert.equal(sha(path.join(ROOT, 'supabase/migrations/0003_pup_shop.sql')), shop.sha, '0003_pup_shop.sql is the package\'s shop migration');
+  /* ranked play's (the package's 0003_pup_ranked.sql) is 0004 here */
+  const ranked = (v.migrations || []).find(m => m.file.endsWith('_pup_ranked.sql'));
+  assert.ok(ranked, 'the package pins its ranked migration');
+  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0004_pup_ranked.sql')), ranked.sha, '0004_pup_ranked.sql is the package\'s ranked migration');
 });

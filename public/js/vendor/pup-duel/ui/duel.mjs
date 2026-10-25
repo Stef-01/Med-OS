@@ -26,6 +26,7 @@ import { ITEMS, wearMsg, itemOf } from '../pup/wardrobe.mjs';
 import { still, lookDog } from '../pup/rig/still.mjs';
 import { icon } from './icons.mjs';
 import { openWardrobe } from './shop.mjs';
+import { rankCard, openSearch, openLadder } from './ranked.mjs';
 
 const BASE = new URL('../', import.meta.url);
 export const RIG = new URL('pup/rig/index.html', BASE).href;
@@ -225,6 +226,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>
           ${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="shop" hidden aria-label="Bones: open the shop">${icon('bone')}<b></b><span class="pd-wallet-go">Shop</span></button>`}</div>
         </section>
+        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" aria-label="Ranked" hidden></section>' : ''}
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Duels</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mates"><h2 class="pd-h2">Mates</h2><div class="pd-grid"></div></section>
@@ -235,8 +237,12 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('[data-pd="menu"]').addEventListener('click', openMenu);
     shell.querySelector('[data-pd="dress"]')?.addEventListener('click', () => openDress('locker'));
     shell.querySelector('[data-pd="shop"]')?.addEventListener('click', () => openDress('shop'));
+    shell.querySelector('[data-sec="ranked"]')?.addEventListener('click', e => {
+      const b = e.target.closest('[data-pd]'); if (!b) return;
+      if (b.dataset.pd === 'ranked') startRanked(); else if (b.dataset.pd === 'ladder') openLadder({ sheet, face, ib, transport, me: S.me, say });
+    });
     if (!S.t) return;
-    loadWallet();
+    loadWallet(); loadBoard();
     S.lobby = createLobby({ transport: S.t, me: S.me, onChange: lv => { S.lv = lv; paintLobby(); } });
     S.lobby.start();
     paintLobby();
@@ -246,6 +252,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const lv = S.lv || { mates: [], invites: [], waiting: [], live: [], past: [], self: null, loaded: false };
     const self = lv.self || S.me, look = myLook();
     shell.querySelector('.pd-name').textContent = self?.name || '';
+    const rk = shell.querySelector('[data-sec="ranked"]'), myRow = S.board?.find(p => p.id === S.me?.id);
+    if (rk && myRow) { const key = `${myRow.rating}|${myRow.ranked}`; if (rk.dataset.key !== key) { rk.dataset.key = key; rk.innerHTML = rankCard(myRow); } rk.hidden = false; }
     const wb = shell.querySelector('.pd-wallet');
     if (wb) { wb.hidden = !S.wallet; if (S.wallet) { wb.querySelector('b').textContent = S.wallet.bones; wb.setAttribute('aria-label', `${S.wallet.bones} bones: open the shop`); } }
     shell.querySelector('.pd-rec').textContent = self ? `${self.wins || 0} won · ${self.losses || 0} lost${self.draws ? ` · ${self.draws} drawn` : ''}` : '';
@@ -396,6 +404,29 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         }, () => { el.querySelector('.pd-err').textContent = S.err; });
       });
     }, { label: `Challenge ${mate.name}` });
+  }
+
+  /* the ladder (ranked.mjs): read when the lobby opens and after a ranked duel; null on a backend without it */
+  async function loadBoard() {
+    if (!transport?.leaderboard || !S.me) return null;
+    try { S.board = await transport.leaderboard(S.me); } catch { /* the next lobby */ }
+    if (S.screen === 'lobby') paintLobby();
+    return S.board;
+  }
+  function startRanked() {
+    openSearch({
+      sheet, closeSheet, transport, me: S.me, say,
+      guard: fn => { S.sheetGuard = fn; },
+      makeSetup: () => makeSetup(pack, { rounds: RULES.rounds, secs: RULES.secs, seed: freshSeed(), title: pack.title }),
+      onMatch: async d => {
+        const other = d.a === S.me.id ? d.b : d.a;
+        /* a mate who joined since the lobby last polled: ask the roster */
+        let p = S.lv?.mates.find(x => x.id === other) || S.board?.find(x => x.id === other);
+        if (!p) { try { p = (await transport.roster(S.me)).find(x => x.id === other); } catch { /* the duel still opens */ } }
+        say(`Matched with ${p?.name || 'a mate'}`);
+        openDuel({ ...d, them: p ? { id: p.id, name: p.name, look: p.look } : { id: other, name: 'Your opponent', look: {} } });
+      }
+    });
   }
 
   /* the wardrobe (shop.mjs): the shop and the locker over a live dog; a look saved goes to the server, which keeps
@@ -721,7 +752,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     /* answering on a small phone leaves the view scrolled down to the options: bring the two dogs back into view, the
        winner's celebration is the point of this screen (whatever scrolls: the page here, a sheet in a host) */
     shell.scrollIntoView?.({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    if (!M.practice && M.them.id) watchRematch();
+    /* a ranked duel's next is another ranked match, not a rematch (which would not be ranked) */
+    if (M.d?.setup?.ranked) { const b = res.querySelector('[data-pd="again"]'); b.innerHTML = `${icon('zap')}<span>Find another</span>`; b.replaceWith(b.cloneNode(true)); res.querySelector('[data-pd="again"]').addEventListener('click', startRanked); }
+    else if (!M.practice && M.them.id) watchRematch();
     earned(M, st, me, res);
     if (!M.reported) { M.reported = true; try { onResult({ outcome: out, score: st.score[me], theirs: st.score[opp], right: st.right[me], rounds: st.rounds.length, practice: M.practice, reason: st.reason }); } catch { /* the host's */ } }
   }
@@ -743,6 +776,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         S.wallet = w; d = was == null ? null : w.bones - was;
       }
     } catch { return; }
+    if (M.d?.setup?.ranked && res.isConnected) rated(res);
     if (!res.isConnected || (d == null && !note)) return;
     const p = document.createElement('button');
     p.type = 'button'; p.className = 'pd-earned'; p.dataset.pd = 'shop';
@@ -752,6 +786,19 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     p.addEventListener('click', () => openDress('shop'));
     res.prepend(p);
     if (d) say(`You earned ${d} bones`);
+  }
+  async function rated(res) {
+    const before = S.board?.find(p => p.id === S.me.id)?.rating;
+    await loadBoard();
+    const now = S.board?.find(p => p.id === S.me.id);
+    if (!now || before == null || !res.isConnected) return;
+    const d = now.rating - before, el = document.createElement('p');
+    el.className = 'pd-rated'; el.dataset.sign = d > 0 ? '+' : d < 0 ? '-' : '0';
+    el.innerHTML = `${icon('shield')}<b></b><span></span>`;
+    el.querySelector('b').textContent = `${d > 0 ? '+' : d < 0 ? '−' : '±'}${Math.abs(d)}`;
+    el.querySelector('span').textContent = `rating, now ${now.rating}`;
+    res.prepend(el);
+    say(`Rating ${d >= 0 ? 'up' : 'down'} ${Math.abs(d)}, now ${now.rating}`);
   }
   /* their rematch, while this phone shows the result: a new challenge from them in the inbox (the finished duel's
      own log has stopped being asked by then), and the big button plays it */

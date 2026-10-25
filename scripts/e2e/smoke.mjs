@@ -55,7 +55,9 @@ function duelRpc(req, res, fn) {
       pup_roster: () => DUEL.roster(a.p_token), pup_challenge: () => DUEL.challenge(a.p_token, a.p_opponent, a.p_setup), pup_inbox: () => DUEL.inbox(a.p_token),
       pup_post: () => DUEL.post(a.p_token, a.p_duel, a.p_id, a.p_kind, a.p_body ?? {}), pup_log: () => DUEL.log(a.p_token, a.p_duel, a.p_after ?? 0),
       /* the shop (supabase/migrations/0003_pup_shop.sql) */
-      pup_wallet: () => DUEL.wallet(a.p_token), pup_buy: () => DUEL.buy(a.p_token, a.p_ids, a.p_total), pup_practice: () => DUEL.practice(a.p_token, a.p_right), pup_outfits: () => DUEL.outfits(a.p_token, a.p_outfits)
+      pup_wallet: () => DUEL.wallet(a.p_token), pup_buy: () => DUEL.buy(a.p_token, a.p_ids, a.p_total), pup_practice: () => DUEL.practice(a.p_token, a.p_right), pup_outfits: () => DUEL.outfits(a.p_token, a.p_outfits),
+      /* ranked (supabase/migrations/0004_pup_ranked.sql) */
+      pup_queue: () => DUEL.queue(a.p_token, a.p_setup), pup_unqueue: () => DUEL.unqueue(a.p_token), pup_leaderboard: () => DUEL.leaderboard(a.p_token)
     }[fn];
     try { const out = await call(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(out)); }
     catch (e) { res.writeHead(400, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ code: 'P0001', message: e.message })); }
@@ -565,6 +567,20 @@ async function duel() {
   ok(+(await a.textContent('.os-duel .pd-bal b')) < 25, `duel: bought the ${piece} and wearing it`);
   await a.screenshot({ path: path.join(SHOTS, 'duel-shop.png') });
   await a.keyboard.press('Escape'); await a.waitForSelector('.os-duel .pd-full', { state: 'detached' });
+  /* ranked: the card, then both in the queue meet in a live duel; Escape leaves it as any duel */
+  await a.waitForSelector('.os-duel [data-sec="ranked"]:not([hidden]) .pd-rank');
+  ok(/Placing/.test(await a.textContent('.os-duel .pd-rank')), 'duel: the ranked card shows a new player placing');
+  await a.click('.os-duel [data-pd="ladder"]'); await a.waitForSelector('.os-duel .pd-lboard .pd-lrow[data-me]');
+  ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'duel: the leaderboard fits a 320 px phone');
+  await a.screenshot({ path: path.join(SHOTS, 'duel-ladder.png') });
+  await a.keyboard.press('Escape'); await a.waitForSelector('.os-duel .pd-lboard', { state: 'detached' });
+  await a.click('.os-duel [data-pd="ranked"]'); await a.waitForSelector('.os-duel .pd-search');
+  await c.click('.os-duel [data-pd="ranked"]');
+  await timed('a ranked match is made', () => Promise.all([a, c].map(pg => pg.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 6000 }))));
+  await a.keyboard.press('Escape'); await a.click('.os-duel .pd-sheet [data-pd="go"]');
+  await Promise.all([a, c].map(pg => pg.waitForSelector('.os-duel .pd-rated', { timeout: 6000 })));
+  ok(/-16|−16/.test(await a.textContent('.os-duel .pd-rated')) && /\+16/.test(await c.textContent('.os-duel .pd-rated')), 'duel: walking out of a ranked duel costs 16 and the mate gains 16');
+  for (const pg of [a, c]) { await pg.click('.os-duel [data-pd="lobby"]'); await pg.waitForSelector('.os-duel .pd-lobby'); }
   await a.click('.os-duel .pd-mate'); await a.click('.os-duel [data-rounds="5"]'); await a.click('.os-duel [data-secs="15"]'); await a.click('.os-duel [data-pd="send"]');
   await timed('the challenge reaches the mate', () => c.waitForSelector('.os-duel [data-sec="invites"] .pd-duelrow', { timeout: 6000 }));
   await c.click('.os-duel [data-sec="invites"] .pd-btn.pd-pri');
