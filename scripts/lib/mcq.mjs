@@ -36,7 +36,11 @@ Rules for every question:
 - why is one or two sentences (at most ${LIMITS.why} characters) explaining why the right answer is right, with the fact the student should keep.
 - notes has one entry per option in the same order: "" for the right one, and for each wrong one a single sentence (at most ${LIMITS.note} characters) saying why it is wrong here.
 - Doses, thresholds and names as an Australian intern would use them (generic drug names, SI units, Australian spelling). Do not invent a fact the station does not support when the question depends on this patient.
-- Make it fair at final-year level: testing understanding and the decision, not trivia.`;
+- Make it fair at final-year level: testing understanding and the decision, not trivia.
+- The stem never shows the answer: when the question asks for a feature, a sign or a behaviour, the vignette does not already describe it.
+- Every word in the stem and the options belongs to this question: no detail carried over from another scenario, and no option that depends on a drug, finding or history the stem does not give.
+- When the case has a feature that changes the answer (overuse of an analgesic, instability, a contraindication), either the question is about it or the stem leaves it out, so a second option does not become defensible.
+- The why is exact: when a guideline staggers steps (drain first, remove the stone later), say so rather than collapsing them.`;
 
 /* the station as the writer reads it: its case in plain text, no images, no marking sheet */
 const strip = s => String(s ?? '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();

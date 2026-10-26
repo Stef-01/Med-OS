@@ -6,6 +6,7 @@
      node scripts/generate-duel-mcq.mjs                  every station without a file yet (resumes where it stopped)
      node scripts/generate-duel-mcq.mjs --only ai-12e898ea,amsa-381    those stations, rewritten
      node scripts/generate-duel-mcq.mjs --limit 5        the first five still to do
+     node scripts/generate-duel-mcq.mjs --redo amsa-268:skills   that question written again, the station's others kept
      MCQ_CONCURRENCY=4 node scripts/generate-duel-mcq.mjs
 
    Claude: the SDK when ANTHROPIC_API_KEY is set (lib/claude.mjs), else the signed-in Claude Code CLI (lib/claude-cli.mjs).
@@ -20,7 +21,10 @@ import { stationsOnDisk } from './build-duel-pack.mjs';
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const MCQ_DIR = path.join(ROOT, 'public', 'duel', 'mcq');
 const arg = k => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : null; };
-const fill = process.argv.includes('--fill');   /* stations short of a kind: keep what they have, ask for the rest */
+const fill = process.argv.includes('--fill');
+/* --redo amsa-268:skills,amsa-219:clinical  drops those questions (a review found them wanting) and writes them again, keeping
+   the station's others */
+const redo = (arg('--redo') || '').split(',').filter(Boolean).map(x => x.split(':'));   /* stations short of a kind: keep what they have, ask for the rest */
 
 async function asker() {
   if (process.env.ANTHROPIC_API_KEY) { const { claudeJson } = await import('./lib/claude.mjs'); return claudeJson; }
@@ -48,6 +52,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const todo = stationsOnDisk().sort((a, b) => (a.id < b.id ? -1 : 1))
     .filter(st => {
       const f = path.join(MCQ_DIR, `${st.id}.json`);
+      if (redo.length) return redo.some(([id]) => id === st.id);
       if (only) return only.includes(st.id);
       if (fill) return fs.existsSync(f) && JSON.parse(fs.readFileSync(f, 'utf8')).questions.length < CATS.length;   /* only stations short of a kind */
       return !fs.existsSync(f);
@@ -58,7 +63,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const work = async () => {
     for (let st; (st = todo.shift());) {
       try {
-        const f = path.join(MCQ_DIR, `${st.id}.json`), have = fill && fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')).questions : [];
+        const f = path.join(MCQ_DIR, `${st.id}.json`), drop = new Set(redo.filter(([id]) => id === st.id).map(([, c]) => c));
+        const have = (fill || drop.size) && fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')).questions.filter(q => !drop.has(q.cat)) : [];
         const { file, failed } = await writeStationMcq(st, ask, undefined, have);
         if (file.questions.length) fs.writeFileSync(path.join(MCQ_DIR, `${st.id}.json`), JSON.stringify(file, null, 1) + '\n');
         if (file.questions.length < CATS.length) short++;
