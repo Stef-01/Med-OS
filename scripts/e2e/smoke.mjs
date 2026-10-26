@@ -638,6 +638,7 @@ async function duel() {
   ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.os-duel *')].every(e => e.getBoundingClientRect().right <= innerWidth + 1)), 'duel: the lobby fits a 320 px phone');
   await a.screenshot({ path: path.join(SHOTS, 'duel-lobby.png') });
   await timed('a new mate reaches the lobby', () => a.waitForSelector('.os-duel .pd-mate b >> text=Alex', { timeout: 6000 }));
+  await a.waitForFunction(() => document.querySelectorAll('.os-duel [data-sec="board"] .pd-lrow:not(.pd-skel)').length === 2, null, { timeout: 12000 }).then(() => ok(true, 'duel: the lobby leaderboard shows a mate who just joined'), () => ok(false, 'duel: the lobby leaderboard shows a mate who just joined'));
   /* the wardrobe over the overlay: the dog redrawn live; Escape with a look not saved asks first, Discard closes it */
   await a.waitForSelector('.os-duel .pd-wallet:not([hidden])');
   ok(/25/.test(await a.textContent('.os-duel .pd-wallet')), 'duel: a new player has 25 bones in the lobby');
@@ -705,7 +706,7 @@ async function duel() {
   ok(/Signed in as Sam/.test(await a.textContent('.os-acctwho')), "account: Settings shows the duel's sign-in");
   await a.waitForFunction(() => !/Loading/.test(document.querySelector('[data-set="aduel"]')?.textContent || 'Loading'), null, { timeout: 6000 });
   const duelLine = await a.textContent('[data-set="aduel"]');
-  ok(/rating/.test(duelLine) && /lost/.test(duelLine) && /bones/.test(duelLine), `account: the duel progress shows (${duelLine})`);
+  ok(/rating/i.test(duelLine) && /lost/.test(duelLine) && /bones/.test(duelLine), `account: the duel progress shows (${duelLine})`);
   ok(/attempted/.test(await a.textContent('.os-acctstats')), 'account: the OSCE progress shows');
   ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'account: Settings fits a 320 px phone');
   await a.waitForTimeout(700); await a.evaluate(() => document.querySelector('.os-acct').scrollIntoView({ block: 'start' })); await a.screenshot({ path: path.join(SHOTS, 'settings-account.png') });
@@ -715,6 +716,31 @@ async function duel() {
   const sam = Object.values(DUEL.db.players).find(p => p.name === 'Sam');
   ok([...SB.keys()].some(k => k.startsWith(`u:${sam.id}:osce
 `)), 'account: the OSCE record is kept on the account (osce_push)');
+  /* another device: signing in from Settings brings the account's record down (partner names only the account has) */
+  SB.set(`u:${sam.id}:osce
+k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], updated_at: new Date(Date.now() + 60000).toISOString() });
+  const other = await phone(375, 812, shared);
+  ok(await other.inputValue('[data-person="0"]') !== 'Priya', "account: a device not signed in does not see the account's record");
+  await other.click('[data-os="settings"]'); await other.waitForSelector('[data-set="aname"]');
+  await other.fill('[data-set="aname"]', 'Sam'); await other.fill('[data-set="apin"]', '0000'); await other.click('[data-set="ain"]');
+  await other.waitForFunction(() => /Wrong name or PIN/.test(document.querySelector('[data-set="aerr"]')?.textContent || ''));
+  ok(await other.getAttribute('[data-set="apin"]', 'aria-invalid') === 'true', 'account: a wrong PIN is said on the PIN field');
+  await other.fill('[data-set="apin"]', '1234'); await other.click('[data-set="ain"]');
+  await other.waitForSelector('.os-acctwho');
+  await other.keyboard.press('Escape');
+  await other.waitForFunction(() => document.querySelector('[data-person="0"]')?.value === 'Priya', null, { timeout: 6000 }).then(() => ok(true, "account: signed in on another device, the account's progress comes down"), () => ok(false, "account: signed in on another device, the account's progress comes down"));
+  await other.screenshot({ path: path.join(SHOTS, 'account-other-device.png') });
+
+  /* a laptop: Settings' account and games, and the duel's card on Start, at 1280 by 800 */
+  const wide = await phone(1280, 800, shared);
+  await wide.click('[data-os="settings"]'); await wide.waitForSelector('.os-switch[data-game="duel"]'); await wide.waitForTimeout(600);
+  ok(await wide.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'wide: Settings fits');
+  await wide.screenshot({ path: path.join(SHOTS, 'duel-wide-settings.png') });
+  /* the phones above switched it on in the shared record, which this device may already have pulled */
+  if (await wide.getAttribute('.os-switch[data-game="duel"]', 'aria-checked') !== 'true') await wide.click('.os-switch[data-game="duel"]');
+  await wide.keyboard.press('Escape'); await wide.waitForSelector('.os-start [data-os="duel"]'); await wide.waitForTimeout(600);
+  await wide.evaluate(() => document.querySelector('.os-start [data-os="duel"]').scrollIntoView({ block: 'center' }));
+  await wide.screenshot({ path: path.join(SHOTS, 'duel-wide-start.png') });
   const solo = await phone(320, 640, {});
   await solo.click('[data-os="settings"]'); await solo.click('.os-switch[data-game="duel"]'); await solo.keyboard.press('Escape');   /* off until switched on */
   await solo.click('[data-os="duel"]'); await solo.waitForSelector('.os-duel [data-pd="practice"]');

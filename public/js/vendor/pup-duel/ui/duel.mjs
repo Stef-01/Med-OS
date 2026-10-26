@@ -11,6 +11,7 @@
    pack       a normalised question pack (pack.mjs)
    look       optional: () => the host's own dog and wear (Optimus passes its mascot's), else the duel's wardrobe
               (shop.mjs: the shop and the locker, pieces bought with bones earned by playing; the server keeps the wallet)
+   signOutNote  optional: a line under Sign out, when the host shares the sign-in (Med-OS: it signs Settings out too)
    keys       'document' (default) listens for keys itself; 'host' leaves them to the host, which calls ui.key(e) from its
               own key owner (Med-OS's overlay stack captures every key) and gets true back when the duel used it */
 
@@ -120,7 +121,7 @@ function keyed(list, items, keyOf, make) {
   if (next.length !== list.children.length || next.some((n, i) => n !== list.children[i])) list.replaceChildren(...next);
 }
 
-export function mountDuel(root, { transport = null, pack = { questions: [] }, look: hostLook = null, storage = globalThis.localStorage, storeKey = 'pup-duel', practice = true, title = 'Duel', keys = 'document', onClose = () => {}, onResult = () => {} } = {}) {
+export function mountDuel(root, { transport = null, pack = { questions: [] }, look: hostLook = null, storage = globalThis.localStorage, storeKey = 'pup-duel', practice = true, title = 'Duel', keys = 'document', signOutNote = '', onClose = () => {}, onResult = () => {} } = {}) {
   const storeAt = `${storeKey}:${transport?.name || 'none'}`;
   const remembered = () => { try { return JSON.parse(storage.getItem(storeAt)) || null; } catch { return null; } };
   const remember = me => { try { if (me) storage.setItem(storeAt, JSON.stringify(me)); else storage.removeItem(storeAt); } catch { /* private mode */ } };
@@ -259,6 +260,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const self = lv.self || S.me, look = myLook();
     shell.querySelector('.pd-name').textContent = self?.name || '';
     const rk = shell.querySelector('[data-sec="ranked"]'), myRow = S.board?.find(p => p.id === S.me?.id);
+    /* a mate who joined since the board was read: read it again (at most every 5 s) */
+    if (S.board && lv.loaded && lv.mates.length + 1 !== S.board.length && Date.now() - (S.boardAt || 0) > 5000) { S.boardAt = Date.now(); loadBoard(); }
     if (S.board && S.lboard && S.lboardKey !== JSON.stringify(S.board)) { S.lboardKey = JSON.stringify(S.board); S.lboard.paint(); }
     if (rk && myRow) { const key = `${myRow.rating}|${myRow.ranked}`; if (rk.dataset.key !== key) { rk.dataset.key = key; rk.innerHTML = rankCard(myRow); } rk.hidden = false; }
     const wb = shell.querySelector('.pd-wallet');
@@ -384,7 +387,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (from?.isConnected) from.focus({ preventScroll: true });   // back on what opened it
   }
   function openMenu() {
-    sheet(`<button class="pd-btn" type="button" data-pd="signout">Sign out</button>`, el => {
+    sheet(`<button class="pd-btn" type="button" data-pd="signout"${signOutNote ? ' aria-describedby="pd-sonote"' : ''}>Sign out</button>${signOutNote ? '<p class="pd-note pd-sonote" id="pd-sonote"></p>' : ''}`, el => {
+      if (signOutNote) el.querySelector('.pd-sonote').textContent = signOutNote;
       el.querySelector('[data-pd="signout"]').addEventListener('click', () => { remember(null); S.me = null; S.hero = null; S.wallet = null; showAuth(); });
     }, { label: 'Menu' });
   }
@@ -402,7 +406,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const tree = topicTree(pack), layered = tree.topics.length > 1 || tree.all.cats.length > 1;
     const opt = { ...lastPick(), ...(last || {}) };
     if (!poolOf(pack, opt).length) { opt.topic = ''; opt.cat = ''; }   /* a pick the pack no longer has */
-    const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div class="pd-seg" role="radiogroup" aria-label="${label}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}" tabindex="${v === cur ? 0 : -1}">${f(v)}</button>`).join('')}</div></div>`;
+    const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div><span class="pd-seglabel" id="pd-sl-${name}">${label}</span><div class="pd-seg" role="radiogroup" aria-labelledby="pd-sl-${name}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}" tabindex="${v === cur ? 0 : -1}">${f(v)}</button>`).join('')}</div></div></div>`;
     sheet(`
       <div class="pd-step" data-step="setup">
         <div class="pd-vsmini" aria-hidden="true"></div>
@@ -445,12 +449,13 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
             + tree.topics.map(t => item(t.topic, t.count, `data-dt="${esc(t.topic)}"`, { go: true, sub: t.topic === opt.topic ? `Chosen: ${pickLabel(pack, opt).split(' › ')[1] || 'all of it'}` : '' })).join('');
         } else {
           const node = dt ? tree.topics.find(t => t.topic === dt) : tree.all;
-          crumbs.innerHTML = `<button type="button" class="pd-crumb" data-pd="up">Topics</button><span aria-hidden="true">›</span><b></b>`;
+          crumbs.innerHTML = '<span>Topics</span><span aria-hidden="true">›</span><b></b>';
           crumbs.querySelector('b').textContent = dt || 'Every topic';
           ul.innerHTML = item(dt ? `All of ${dt}` : 'Every question', node.count, 'data-dc=""', { on: opt.topic === dt && !opt.cat })
             + node.cats.map(c => item(c.label, c.count, `data-dc="${esc(c.id)}"`, { on: opt.topic === dt && opt.cat === c.id })).join('');
         }
         if (focusFirst) (ul.querySelector('.pd-on:not(:disabled)') || ul.querySelector('button:not(:disabled)'))?.focus({ preventScroll: true });
+        say(dt === null ? `Choose a topic: ${tree.topics.length + 1} choices` : `${dt || 'Every topic'}: choose a kind of question`);
       };
       el.querySelector('[data-pd="choose"]')?.addEventListener('click', () => { dt = null; step('choose'); drill(); });
       el.querySelector('[data-step="choose"]').addEventListener('click', e => {
@@ -528,7 +533,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelector('.pd-review').append(...st.setup.questions.map((q, i) => {
         const R = st.rounds[i], a = R?.answers[me], b = R?.answers[opp], li = document.createElement('li');
         li.className = 'pd-rv'; li.dataset.ok = a?.ok ? '1' : '0';
-        li.innerHTML = `<p class="pd-rv-q"></p><p class="pd-rv-a">${icon('check')}<span></span></p>`;
+        const where = st.setup.topic || q.topic;   /* a duel narrowed to a topic names that topic, not the question's first */
+        li.innerHTML = `${where || q.catLabel ? '<p class="pd-rv-meta"></p>' : ''}<p class="pd-rv-q"></p><p class="pd-rv-a">${icon('check')}<span></span></p>`;
+        if (where || q.catLabel) li.querySelector('.pd-rv-meta').textContent = [where, q.catLabel].filter(Boolean).join(' › ');   /* where it came from: what to revise */
         li.querySelector('.pd-rv-q').textContent = q.stem;
         li.querySelector('.pd-rv-a span').textContent = q.options[q.answer];
         if (a && a.choice !== null && a.choice !== undefined && !a.ok) {
