@@ -2,7 +2,7 @@
    check (public/js/mcq/flaws.mjs), the mutations that test the checks (lib/mcq-mutate.mjs) */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanItem, itemProblems, licenceOk, draftsFrom, parseCsv, userItem, contentHash, fullStem, duelOrigin, kindLabel, newUserId, displayOrder } from '../public/js/mcq/schema.mjs';
+import { cleanItem, itemProblems, licenceOk, draftsFrom, parseCsv, userItem, contentHash, fullStem, duelOrigin, kindLabel, newUserId, displayOrder, pastedDraft } from '../public/js/mcq/schema.mjs';
 import * as F from '../public/js/mcq/flaws.mjs';
 import { mutantsOf, MUTATIONS, wrongKey } from './lib/mcq-mutate.mjs';
 
@@ -205,4 +205,13 @@ test('displayOrder: the key where the card id says, the rest in their order; the
   const at = {}; for (let i = 0; i < 400; i++) { const p = displayOrder(q, `k${i}`).indexOf(0); at[p] = (at[p] || 0) + 1; }
   assert.ok(Object.values(at).every(n => n > 60), `the key lands on every position (${JSON.stringify(at)})`);
   assert.deepEqual(displayOrder({ options: ['a', 'b'], answer: 9 }, 'k'), [0, 1], 'a bad key: as stored');
+});
+
+test('pastedDraft: the form\'s source fills a paste that names none; a paste with its own keeps it whole; topics read as specialties', () => {
+  const form = { source: 'Geeky Medics', url: 'https://geekymedics.com/x', licence: 'CC BY 4.0', author: 'Sam' };
+  const spec = t => ({ cardio: 'Cardiology', Cardiology: 'Cardiology' })[t] || '';
+  assert.deepEqual(pastedDraft({ stem: 's', topic: 'cardio' }, form, spec), { stem: 's', topic: 'Cardiology', source: 'Geeky Medics', url: 'https://geekymedics.com/x', licence: 'CC BY 4.0', author: 'Sam' });
+  const own = pastedDraft({ stem: 's', source: 'OpenStax', licence: 'CC BY 4.0', topic: 'made up' }, form, spec);
+  assert.deepEqual([own.source, own.url, own.licence, own.author, own.topic], ['OpenStax', '', 'CC BY 4.0', 'Sam', ''], 'never another source\'s link; an unknown topic is left for the review');
+  assert.equal(pastedDraft({ stem: 's' }).source, '', 'no form: written by the submitter');
 });

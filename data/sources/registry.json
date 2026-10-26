@@ -1,0 +1,30 @@
+{
+ "note": "Every open MCQ source considered for Med-OS (research 2026-10-26, licences read at their source; scripts/lib/sources.mjs checks this file). verdict: import (fetch-sources.mjs brings it in as pool candidates, which still face the flaw checks, the model review and the bar), in-app (already in the pool or the bank by another route), benchmark-only (used to measure, never shipped), reject. A licence that covers only a repository's code is said so.",
+ "checked": "2026-10-26",
+ "sources": [
+  { "id": "headqa", "name": "HEAD-QA v1 (English), medicine", "what": "Spanish MIR residency exam 2013 to 2016, medicine paper, machine-translated by the dataset's authors; 4 to 5 options, no explanations", "n": 918,
+    "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)", "licenceUrl": "https://www.mscbs.gob.es/avisoLegal/home.htm", "coversContent": true,
+    "terms": "The meaning may not be changed; cite the source; give the date of the documents' last update (14 January 2019)",
+    "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json", "format": "json", "adapter": "headqa", "kind": "open-exam",
+    "keep": { "category": "medicine", "years": [2013, 2014, 2015, 2016], "noImage": true },
+    "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+    "verdict": "import", "why": "real exam questions with a reuse grant; 2017 is left out because its answer keys look taken from another paper (6 of 9 sampled implausible), and questions that need an image are left out" },
+  { "id": "medqa-us", "name": "MedQA US 4-option", "what": "USMLE-style questions collected from prep material", "n": 1273, "licence": "MIT (the repository's code)", "coversContent": false,
+    "url": "https://raw.githubusercontent.com/intron-innovation/AfriMed-QA/master/data/MedQA-USMLE-4-options-test.csv", "kind": "usmle-resource", "verdict": "in-app",
+    "why": "in the pool as usmle-resource (data/benchmarks), its licence shown; the founder chose to admit it with the caveat that MIT covers the code" },
+  { "id": "mmlu-medicine", "name": "MMLU professional medicine", "what": "clinical vignettes collected from free online sources", "n": 272, "licence": "MIT", "coversContent": false, "kind": "usmle-resource", "verdict": "in-app", "why": "in the pool as usmle-resource" },
+  { "id": "medexpqa", "name": "MedExpQA / Antidote CasiMedicos", "what": "MIR clinical cases with doctors' explanations", "n": 622, "licence": "CC BY 4.0 (CC0 in the GitHub repository)", "coversContent": true,
+    "url": "https://raw.githubusercontent.com/ixa-ehu/antidote-casimedicos/main/casimedicos-arg.tar.gz", "kind": "open-exam", "verdict": "in-app", "why": "in the bank, adapted for Australian practice with its credit (scripts/import-medexpqa.mjs); the GitHub tarball is a second download path" },
+  { "id": "quest-ai", "name": "QUEST-AI (official USMLE Step 2 CK samples and GPT-4 look-alikes)", "licence": "copyright FSMB/NBME", "coversContent": true, "verdict": "benchmark-only", "why": "sets the pool's bar; never committed (scripts/validate-mcq.mjs checks)" },
+  { "id": "medmcqa", "name": "MedMCQA", "what": "Indian AIIMS/NEET PG questions", "licence": "MIT (code)", "coversContent": false, "verdict": "benchmark-only", "why": "calibration only; recall items, many negative stems" },
+  { "id": "afrimedqa", "name": "AfriMed-QA", "what": "3,910 expert MCQs from 18 African countries", "n": 3910, "licence": "CC BY-NC-SA 4.0", "coversContent": true,
+    "url": "https://raw.githubusercontent.com/intron-innovation/AfriMed-QA/master/data/afri_med_qa_15k_v2.5_phase_2_15275.csv", "verdict": "benchmark-only", "why": "non-commercial; only 305 have a rationale" },
+  { "id": "medxpertqa", "name": "MedXpertQA Text", "what": "2,450 ten-option specialty-board questions", "n": 2450, "licence": "MIT (code)", "coversContent": false,
+    "url": "https://raw.githubusercontent.com/TsinghuaC3I/MedXpertQA/main/eval/data/medxpertqa/input/medxpertqa_text_input.jsonl", "verdict": "benchmark-only", "why": "content drawn from exam and board-style sources with model-written options; rights unclear" },
+  { "id": "medbullets", "name": "Medbullets (ChallengeClinicalQA)", "what": "308 Step 2/3 questions with explanations", "n": 308, "licence": "none; content links to step2.medbullets.com", "coversContent": false, "verdict": "benchmark-only", "why": "Medbullets' copyright; the pool's banned-source rule refuses it" },
+  { "id": "jama-cc", "name": "JAMA Clinical Challenge", "licence": "JAMA copyright", "coversContent": true, "verdict": "reject", "why": "the data is not released; scraping needs a JAMA licence" },
+  { "id": "openstax", "name": "OpenStax end-of-chapter questions", "licence": "CC BY-NC-SA 4.0 (current repositories)", "coversContent": true, "verdict": "reject", "why": "non-commercial, and recall questions far from Step 2 CK" },
+  { "id": "pubmedqa", "name": "PubMedQA", "licence": "MIT; abstracts are publishers' text", "coversContent": false, "verdict": "reject", "why": "yes/no/maybe questions on abstracts, not single best answer" },
+  { "id": "igakuqa", "name": "IgakuQA", "licence": "none", "coversContent": false, "verdict": "reject", "why": "no licence" }
+ ]
+}

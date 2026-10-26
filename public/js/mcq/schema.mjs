@@ -15,12 +15,13 @@
    Pure: the app's submit form, the scripts and the tests share it. */
 import { isYear, isDiff } from './year.mjs';
 
-export const KINDS = Object.freeze({ user: 'User', ai: 'AI', amsa: 'AMSA', 'usmle-resource': 'USMLE resource' });
+export const KINDS = Object.freeze({ user: 'User', ai: 'AI', amsa: 'AMSA', 'usmle-resource': 'USMLE resource', 'open-exam': 'Open exam' });
 export const KIND_NOTE = Object.freeze({
   user: 'Written or brought by a student',
   ai: 'Written by AI',
   amsa: 'Made from an AMSA MedEd OSCE case (the station text is AI-written)',
-  'usmle-resource': 'From an open online USMLE-style question bank'
+  'usmle-resource': 'From an open online USMLE-style question bank',
+  'open-exam': 'A real exam question from an open set (data/sources/registry.json), shown as published with its credit'
 });
 export const HOWS = Object.freeze(['session', 'cli', 'api', 'duel-pack', 'stub']);
 export const MAX = Object.freeze({ id: 80, stem: 4000, ask: 300, option: 300, explanation: 4000, why: 800, topic: 60, tag: 40, tags: 16, name: 200, url: 500, licence: 200, author: 80 });
@@ -29,8 +30,8 @@ export const LETTERS = 'ABCDE';
 
 /* the licences an item may ship under. "own" means the writer licenses it to this pool (a user's own question, a
    generated one); anything copyrighted, or from a commercial bank, never ships */
-export const LICENCES = Object.freeze(['own', 'CC0', 'CC BY 4.0', 'CC BY-SA 4.0', 'CC BY-NC 4.0', 'CC BY-NC-SA 4.0', 'MIT', 'Public domain']);
-const LICENCE_RE = /^(own|cc0|cc[ -]by(?:[ -](?:sa|nc|nc[ -]sa|nd))?(?:[ -]\d\.\d)?|mit\b|public domain)/i;
+export const LICENCES = Object.freeze(['own', 'CC0', 'CC BY 4.0', 'CC BY-SA 4.0', 'CC BY-NC 4.0', 'CC BY-NC-SA 4.0', 'MIT', 'Public domain', 'Reuse with attribution']);   /* the last: a public body's reuse terms (cite, date, meaning unchanged), as for HEAD-QA's MIR papers */
+const LICENCE_RE = /^(own|cc0|cc[ -]by(?:[ -](?:sa|nc|nc[ -]sa|nd))?(?:[ -]\d\.\d)?|mit\b|public domain|reuse with attribution\b)/i;
 export const BANNED_SOURCE = /\b(nbme|fsmb|usmle\.org|uworld|amboss|kaplan|pastest|passmedicine|boards ?and ?beyond|truelearn|first ?aid q|rx ?bank|lecturio|onexamination|bmj onexamination|medbullets|osmosis)\b/i;
 export const licenceOk = l => typeof l === 'string' && LICENCE_RE.test(l.trim()) && !/all rights reserved/i.test(l);   /* an MIT licence names its copyright holder; "Copyright NBME" alone does not match the list */
 
@@ -194,4 +195,13 @@ export function displayOrder(q, key = q?.id) {
   const to = parseInt(fnv(String(key ?? '')), 16) % n;
   order.splice(q.answer, 1); order.splice(to, 0, q.answer);
   return order;
+}
+
+/* a pasted question (one of several) as the form sends it: the form's source, link, licence and author fill what the
+   paste left empty (a paste that names its own source keeps its own link and licence, never another source's), and its
+   topic is read as a specialty (topicOf: library/item.mjs specialtyOf) or left for the review to fill */
+export function pastedDraft(d, form = {}, topicOf = t => t) {
+  const own = !!String(d?.source || '').trim();
+  return { ...d, source: own ? d.source : form.source || '', url: own ? d.url || '' : form.url || '', licence: own ? d.licence || '' : form.licence || '',
+    author: d?.author || form.author || '', topic: topicOf(d?.topic || '') || '' };
 }

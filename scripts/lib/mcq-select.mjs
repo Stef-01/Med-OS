@@ -20,8 +20,8 @@ import { cleanItem, itemProblems, KINDS } from '../../public/js/mcq/schema.mjs';
 import { flawReport, signature, nearDuplicate, positionBalance, EVAL_VERSION } from '../../public/js/mcq/flaws.mjs';
 import { verdictFor, judgeScore, judgeGates, solved, JUDGE_VERSION } from './mcq-judge.mjs';
 
-export const PRIORITY = Object.freeze(['user', 'usmle-resource', 'amsa', 'ai']);
-export const QUOTA = Object.freeze({ 'usmle-resource': 160, amsa: 110, ai: 110, 'ai-rapid': 80 });
+export const PRIORITY = Object.freeze(['user', 'usmle-resource', 'open-exam', 'amsa', 'ai']);
+export const QUOTA = Object.freeze({ 'usmle-resource': 160, 'open-exam': 120, amsa: 110, ai: 110, 'ai-rapid': 80 });
 /* the quota a question counts against: AI-written questions in the Rapid form (tag form:rapid, for the duel's 15 s
    format) have their own, so short questions and vignettes do not crowd each other out */
 export const quotaOf = a => (a.kind === 'ai' && Array.isArray(a.q?.tags) && a.q.tags.includes('form:rapid') ? 'ai-rapid' : a.kind);
@@ -75,7 +75,7 @@ export function select(candidates, { verdicts = {}, bars = DEFAULT_BARS, quota =
   /* 6: duplicates, best first; a user's question is checked first, so it is the one kept */
   for (const a of passing) {
     const sig = signature(a.q), dup = sigs.findIndex(s => nearDuplicate(sig, s).dup);
-    if (dup >= 0) { Object.assign(a, { status: 'rejected', reasons: [`a near-duplicate of ${admitted[dup].id}, which is kept (${PRIORITY.indexOf(admitted[dup].kind) < PRIORITY.indexOf(a.kind) ? 'its source ranks first' : 'it scores higher'})`] }); continue; }
+    if (dup >= 0) { Object.assign(a, { status: 'rejected', twin: admitted[dup], sig, reasons: [`a near-duplicate of ${admitted[dup].id}, which is kept (${PRIORITY.indexOf(admitted[dup].kind) < PRIORITY.indexOf(a.kind) ? 'its source ranks first' : 'it scores higher'})`] }); continue; }
     admitted.push(a); sigs.push(sig);
   }
   /* 7: quotas and topic balance (users are exempt from both) */
@@ -90,6 +90,18 @@ export function select(candidates, { verdicts = {}, bars = DEFAULT_BARS, quota =
     if ((perTopic[topic] || 0) >= topicCap) { Object.assign(a, { status: 'reserve', reasons: [`passed (quality ${a.quality}), but ${topic} already holds ${topicCap} questions (topic balance)`] }); continue; }
     used[qk] = (used[qk] || 0) + 1; perTopic[topic] = (perTopic[topic] || 0) + 1; kept.push(a);
   }
+  /* 6 again: a near-duplicate whose twin went to reserve copies nothing in the pool, so it has its own chance, unless
+     it copies another question that is kept */
+  const keptSigs = kept.map(a => signature(a.q));
+  for (const a of assessed.filter(x => x.twin && kept.indexOf(x.twin) < 0).sort((x, y) => y.quality - x.quality || rank(x, y))) {
+    const other = keptSigs.findIndex(sg => nearDuplicate(a.sig, sg).dup);
+    if (other >= 0) { a.reasons = [`a near-duplicate of ${kept[other].id}, which is kept`]; continue; }
+    const topic = a.q.topic || a.verdict.rubric.topic || 'General Practice', qk = quotaOf(a);
+    if (a.kind !== 'user' && ((used[qk] || 0) >= (quota[qk] ?? Infinity) || (perTopic[topic] || 0) >= topicCap)) { Object.assign(a, { status: 'reserve', reasons: [`passed (quality ${a.quality}); its near-duplicate ${a.twin.id} is on reserve, and there is no room for either`] }); continue; }
+    if (a.kind !== 'user') { used[qk] = (used[qk] || 0) + 1; perTopic[topic] = (perTopic[topic] || 0) + 1; }
+    kept.push(a); keptSigs.push(a.sig); a.reasons = [];
+  }
+  for (const a of assessed) { delete a.twin; delete a.sig; }
   for (const a of kept) a.status = 'pool';
   const pool = kept.map(a => poolItem(a)).sort((x, y) => (x.id < y.id ? -1 : 1));
   const decisions = assessed.map(a => ({ id: a.id, kind: a.kind, status: a.status, reasons: a.reasons, ...(a.quality != null ? { quality: a.quality } : {}), ...(a.flaws?.length ? { flaws: a.flaws.filter(f => f.severity !== 'info').map(f => `${f.check}:${f.severity}`) } : {}) }))

@@ -14,7 +14,8 @@ import { esc } from '../core.mjs';
 import { lsGet, lsSet } from '../study-kit/store.mjs';
 import { dialogOf } from '../study-kit/ui.mjs';
 import { DISCIPLINES, SPECIALTIES } from '../study-kit/vocab.mjs';
-import { cleanItem, itemProblems, userItem, draftsFrom, newUserId, LETTERS, LICENCES, MAX } from '../mcq/schema.mjs';
+import { cleanItem, itemProblems, userItem, draftsFrom, newUserId, pastedDraft, LETTERS, LICENCES, MAX } from '../mcq/schema.mjs';
+import { specialtyOf } from '../library/item.mjs';
 import { flawReport } from '../mcq/flaws.mjs';
 import { ctx, I, save, notify, openDialog, closeDialog, nameOf, ago, now } from './state.mjs';
 
@@ -106,7 +107,8 @@ export function mcqForm() {
   f._drafts = null;
   let t = 0;
   const live = () => { clearTimeout(t); t = setTimeout(() => paintChecks(f), 150); };
-  f.addEventListener('input', e => { if (e.target.name !== 'paste') { f._drafts = null; live(); } });
+  /* typing in the one-question fields means writing one; the source, link, licence, author and who go with a paste too */
+  f.addEventListener('input', e => { if (e.target.name === 'paste') return; if (!['source', 'url', 'licence', 'author', 'who', 'from'].includes(e.target.name)) f._drafts = null; live(); });
   f.addEventListener('change', e => {
     if (e.target.closest('.os-reqchip')) f.querySelectorAll('.os-reqchip').forEach(l => l.classList.toggle('on', l.querySelector('input').checked));
     f.querySelector('.os-mcqsrc').hidden = val(f, 'from') !== 'open';
@@ -124,6 +126,7 @@ function draftOf(f) {
   return { stem: val(f, 'stem'), ask: val(f, 'ask'), options: LETTERS.split('').map((_, i) => val(f, `opt${i}`)), answer: key ? Number(key.value) : -1,
     explanation: val(f, 'explanation'), why: [], topic: val(f, 'topic'), tags: [], source: open ? val(f, 'source') || 'An open resource' : '', url: open ? val(f, 'url') : '', licence: open ? val(f, 'licence') : '', author: val(f, 'author') };
 }
+const pasted = f => f._drafts.map(d => pastedDraft(d, draftOf(f), specialtyOf));   /* several pasted: each with the form's source and author */
 const itemOf = (draft, f, id = 'u-preview0') => userItem(draft, { by: nameOf(val(f, 'who') === '1' ? 1 : 0), now: now(), id });
 /* everything the checks find, worst first: the shape (must fix), then the item-writing flaws */
 export function findings(item) {
@@ -140,7 +143,7 @@ function paintChecks(f) {
   const box = f.querySelector('.os-mcqchecks'), btn = f.querySelector('.os-reqsend');
   f.querySelector('.os-mcqone').hidden = !!f._drafts;   /* several pasted questions: the one-question fields step aside */
   if (f._drafts) {
-    const all = f._drafts.map((dr, i) => findings(itemOf(dr, f, `u-preview${i}`)).map(x => ({ ...x, reason: `Question ${i + 1}: ${x.reason}` }))).flat();
+    const all = pasted(f).map((dr, i) => findings(itemOf(dr, f, `u-preview${i}`)).map(x => ({ ...x, reason: `Question ${i + 1}: ${x.reason}` }))).flat();
     box.innerHTML = checksHtml(all, f._drafts.length);
     btn.textContent = `Submit ${f._drafts.length} questions`; btn.disabled = all.some(x => x.severity === 'block');
     return;
@@ -179,7 +182,7 @@ async function send(item) {
   } catch { return false; }
 }
 async function submit(f) {
-  const drafts = f._drafts || [draftOf(f)], who = val(f, 'who') === '1' ? 1 : 0, s = store(), made = [];
+  const drafts = f._drafts ? pasted(f) : [draftOf(f)], who = val(f, 'who') === '1' ? 1 : 0, s = store(), made = [];
   for (const d of drafts) {
     const raw = userItem(d, { by: nameOf(who), now: now(), id: newUserId(now()) }), item = cleanItem(raw);
     if (!item || findings(item).some(x => x.severity === 'block')) { notify('A question still has something to fix: see the list above the button.', 'danger'); return paintChecks(f); }

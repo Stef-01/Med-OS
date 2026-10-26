@@ -6,6 +6,7 @@
      node scripts/generate-mcq.mjs --stations amsa-187,ai-12e898ea [--focus management]
      node scripts/generate-mcq.mjs --sample 40            40 stations (seeded), the focus rotating over the four
      node scripts/generate-mcq.mjs --sample 80 --form rapid    short questions for the duel's Rapid 15 s format
+     node scripts/generate-mcq.mjs --gaps 15 --form rapid --sample 60   aimed at the topics the audit finds thin at 15 s
    options: --jobs 3 · --dry-run (print, write nothing)
 
    Claude: lib/claude.mjs (the SDK) when ANTHROPIC_API_KEY is set, else the Claude Code CLI (lib/claude-cli.mjs); the
@@ -14,7 +15,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeMcq, FOCUS, FORMS } from './lib/mcq-generate.mjs';
+import { writeMcq, FOCUS, FORMS, gapJobs } from './lib/mcq-generate.mjs';
+import { THIN } from './lib/mcq-audit.mjs';
 import { readJsonl, benchmarkItem, readJson } from './lib/mcq-sources.mjs';
 import { stationsOnDisk } from './build-duel-pack.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
@@ -35,8 +37,15 @@ const have = new Set(store.items.map(q => `${q.provenance.generator.basis[0]}|${
 const focuses = Object.keys(FOCUS);
 let jobs = [];
 if (opt('--stations')) jobs = list(opt('--stations')).map((id, i) => ({ st: stations.find(s => s.id === id), focus: opt('--focus') || focuses[i % focuses.length] }));
+else if (opt('--gaps')) {   /* where the duel is thin: the audit's topics with fewer than THIN questions fitting a format */
+  const secs = String(opt('--gaps')), f = readJson(path.join(ROOT, 'data', 'mcq', 'audit.json'), {}).pack?.formats?.[secs];
+  if (!f) { console.error(`no audit for ${secs} s: node scripts/mcq-audit.mjs first (formats are ${Object.keys(readJson(path.join(ROOT, 'data', 'mcq', 'audit.json'), {}).pack?.formats || {}).join(', ')})`); process.exit(2); }
+  const need = t => THIN - (f.byTopic[t] || 0), thin = new Set(f.thin);
+  jobs = gapJobs(stations, thin, need, Number(opt('--sample')) || 40, focuses, opt('--focus'));
+  console.log(`gaps at ${secs} s: ${f.thin.length} thin topics; ${jobs.length} stations in them`);
+}
 else if (opt('--sample')) jobs = [...stations].sort((a, b) => fnv(`g:${a.id}`).localeCompare(fnv(`g:${b.id}`))).slice(0, Number(opt('--sample'))).map((st, i) => ({ st, focus: opt('--focus') || focuses[i % focuses.length] }));
-else { console.error('usage: node scripts/generate-mcq.mjs --stations <id,id> | --sample <n> [--focus management|investigation|interpretation|complication] [--form vignette|rapid] [--jobs 3] [--dry-run]'); process.exit(2); }
+else { console.error('usage: node scripts/generate-mcq.mjs --stations <id,id> | --sample <n> [--focus management|investigation|interpretation|complication] [--form vignette|rapid] [--gaps 15|30|90] [--jobs 3] [--dry-run]'); process.exit(2); }
 if (jobs.some(j => !j.st)) { console.error('no such station'); process.exit(2); }
 jobs = jobs.filter(j => !have.has(`${j.st.id}|${j.focus}|${FORM}`));
 const { ask, how, name } = await claudeAsk();

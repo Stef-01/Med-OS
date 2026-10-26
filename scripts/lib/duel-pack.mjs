@@ -136,6 +136,7 @@ export function poolQuestion(q, byStation = new Map()) {
   out.cat = 'clinical';
   out.origin = kind === 'ai' || kind === 'amsa' ? 'ai' : 'human';
   out.source = kind;
+  if (kind === 'open-exam') out.credit = String(q.provenance?.source?.name || '').slice(0, 300);   /* the citation its terms ask for */
   return { q: out, why: '' };
 }
 /* years: { id: 1..4 } from scripts/tag-years.mjs (data/mcq/years.json); a question it has not tagged gets guessYear() */

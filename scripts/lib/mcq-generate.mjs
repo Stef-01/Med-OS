@@ -132,3 +132,15 @@ export async function writeMcq(st, focus, { bench, ask, how = 'api', now = new D
   }
   return { ok: !problems.length, item, problems: problems.map(p => p.reason), rounds, draft };
 }
+
+/* the stations to write for when filling the duel's gaps: those whose specialty is a thin topic, the thinnest first
+   (need: how many more that topic wants), round-robin over the topics so one large specialty does not take every place,
+   and the focus rotating. Pure */
+export function gapJobs(stations, thin, need, n, focuses, focus) {
+  const by = new Map();
+  for (const st of stations) { const t = (st.specialty || []).find(x => thin.has(x)); if (t) (by.get(t) || by.set(t, []).get(t)).push(st); }
+  const topics = [...by.keys()].sort((a, b) => need(b) - need(a) || a.localeCompare(b)), out = [];
+  for (let round = 0; out.length < n && topics.some(t => by.get(t).length > round); round++)
+    for (const t of topics) { const st = by.get(t)[round]; if (st && out.length < n && round < Math.max(1, need(t))) out.push({ st, focus: focus || focuses[out.length % focuses.length], gap: t }); }
+  return out;
+}

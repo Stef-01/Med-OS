@@ -4,17 +4,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { good, GOOD } from './mcq.test.mjs';
 import { judgeItem, judgeScore, judgeGates, verdictFor, solveText, rubricText, cleanRubric, SPECIALTIES } from './lib/mcq-judge.mjs';
 import { assess, select, statusOf, quality, poolItem } from './lib/mcq-select.mjs';
 import { mergeSubmissions, submissionsFrom, remoteSubmissions } from './lib/mcq-intake.mjs';
-import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM } from './lib/mcq-generate.mjs';
+import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs } from './lib/mcq-generate.mjs';
 import { quotaOf } from './lib/mcq-select.mjs';
 import { checkLength } from '../public/js/mcq/flaws.mjs';
 import { fits } from '../public/js/vendor/pup-duel/duel/core.mjs';
-import { spreadKey, stationItem, benchmarkItem, stationItems } from './lib/mcq-sources.mjs';
+import { spreadKey, stationItem, benchmarkItem, stationItems, allCandidates } from './lib/mcq-sources.mjs';
 import { cleanItem, contentHash, LETTERS } from '../public/js/mcq/schema.mjs';
 import { flawReport } from '../public/js/mcq/flaws.mjs';
 import { build } from './mcq-pool.mjs';
@@ -120,6 +121,20 @@ test('select: user questions always kept, dedupe keeps the user\'s, quotas and t
   const st = statusOf(decisions); assert.deepEqual(Object.keys(st).sort(), users.map(u => u.id)); assert.equal(st['u-user000'].status, 'pool');
 });
 
+test('a near-duplicate whose twin goes to reserve has its own chance; one whose twin is kept does not', () => {
+  const best = distinct('bank-best', 'usmle-resource', 50), twin = distinct('bank-twin', 'usmle-resource', 51);
+  const copy = { ...distinct('ai-copy', 'ai', 51), stem: twin.stem };   /* the same case as bank-twin, written by a model */
+  const all = [best, twin, copy], verdicts = Object.fromEntries(all.map(q => [q.id, verdict(q)]));
+  verdicts['bank-best'] = verdict(best, { distractors: 5, explanation: 5 });   /* scores highest, so it takes the one bank place */
+  const { pool, decisions } = select(all, { verdicts, bars: BARS, quota: { 'usmle-resource': 1, ai: 5 }, topicShare: 1 });
+  const st = Object.fromEntries(decisions.map(d => [d.id, d]));
+  assert.equal(st['bank-best'].status, 'pool'); assert.equal(st['bank-twin'].status, 'reserve', 'the bank quota is full');
+  assert.equal(st['ai-copy'].status, 'pool', 'its twin is not in the pool, so the copy is no copy of anything kept');
+  assert.ok(pool.some(q => q.id === 'ai-copy'));
+  const roomy = select(all, { verdicts, bars: BARS, quota: { 'usmle-resource': 5, ai: 5 }, topicShare: 1 }).decisions;
+  assert.equal(roomy.find(d => d.id === 'ai-copy').status, 'rejected', 'with room for its twin, the copy stays out');
+  assert.match(roomy.find(d => d.id === 'ai-copy').reasons[0], /near-duplicate of bank-twin/);
+});
 test('topic balance: no topic past its share of the non-user pool', () => {
   const many = Array.from({ length: 10 }, (_, n) => distinct(`b-${n}`, 'usmle-resource', n));
   const { pool, decisions } = select(many, { verdicts: Object.fromEntries(many.map(q => [q.id, verdict(q)])), bars: BARS, quota: { 'usmle-resource': 100 }, topicShare: 0.1 });
@@ -132,6 +147,17 @@ test('poolItem fills an empty topic from the review and says so', () => {
   const p = poolItem(a); assert.equal(p.topic, 'Neurology'); assert.equal(p.eval.topicFrom, 'review'); assert.deepEqual(p.provenance, q.provenance);
 });
 
+test('a stored submission is a candidate as the selector cleans it, so its verdict matches (CRLF, double spaces)', () => {
+  const root = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), 'mcq-cand-'));
+  fs.mkdirSync(path.join(root, 'data', 'mcq'), { recursive: true });
+  const raw = { ...distinct('u-user900', 'user', 41), stem: `${distinct('u-user900', 'user', 41).stem.replace(/ /g, '  ')}\r\n` };
+  fs.writeFileSync(path.join(root, 'data', 'mcq', 'submissions.json'), JSON.stringify({ items: [raw, { id: 'u-broken', stem: '' }] }));
+  const { items } = allCandidates(root, { stations: [] });
+  const c = items.find(q => q.id === 'u-user900');
+  assert.equal(c.stem, cleanItem(raw).stem, 'the clean text, which the judge hashes');
+  assert.equal(contentHash(c), contentHash(cleanItem(raw)));
+  assert.ok(items.some(q => q.id === 'u-broken'), 'one that will not clean still reaches the selector, which says why');
+});
 test('intake: user questions only, the first copy of an id kept, an export or a list read', async () => {
   const u = item('u-abcdef1', 'user'), other = { ...u, stem: `${u.stem} Changed.` };
   const r = mergeSubmissions([u], [other, item('u-abcdef2', 'user'), { ...item('u-abcdef3', 'user'), provenance: { ...u.provenance, kind: 'ai' } }, { id: 'medqa-1', provenance: { kind: 'user' } }]);
@@ -194,6 +220,16 @@ test('the Rapid form: a short case that fits the duel\'s 15 s, written to its ow
   assert.ok(!v.tags.some(t => t.startsWith('form:')));
   assert.equal(blocking(v, 'vignette').some(p => /to read/.test(p.reason)), false, 'a vignette has no time to fit');
   assert.notEqual(WRITER_SYSTEM, RAPID_SYSTEM);
+});
+test('gap jobs: stations in the thin topics, the thinnest first, round-robin, no more than a topic needs', () => {
+  const st = (id, spec) => ({ id, specialty: [spec] });
+  const stations = [st('a1', 'Neurology'), st('a2', 'Neurology'), st('a3', 'Neurology'), st('b1', 'Dermatology'), st('b2', 'Dermatology'), st('c1', 'Cardiology')];
+  const need = t => ({ Neurology: 2, Dermatology: 9 })[t] || 0, thin = new Set(['Neurology', 'Dermatology']);
+  const jobs = gapJobs(stations, thin, need, 10, ['management', 'investigation'], '');
+  assert.deepEqual(jobs.map(j => j.st.id), ['b1', 'a1', 'b2', 'a2'], 'Dermatology first (it needs more), alternating, Neurology stops at the 2 it needs');
+  assert.ok(!jobs.some(j => j.st.id === 'c1'), 'a topic that is not thin gets nothing');
+  assert.deepEqual(jobs.map(j => j.focus), ['management', 'investigation', 'management', 'investigation']);
+  assert.equal(gapJobs(stations, thin, need, 1, ['management'], 'complication')[0].focus, 'complication');
 });
 test('the key as the single longest option is sent back for revision; a tie is not a cue', () => {
   const q = cleanItem(good({ id: 'medqa-kl' }));

@@ -49,13 +49,15 @@ export function stationItems(stations) {
 }
 
 /* a normalised benchmark row (research/mcq-src/<set>/normalised.jsonl, or data/benchmarks/) as a usmle-resource item */
-export const BENCH_TAG = { medqa: 'src:medqa', mmlu: 'src:mmlu', medmcqa: 'src:medmcqa' };
+export const BENCH_TAG = { medqa: 'src:medqa', mmlu: 'src:mmlu', medmcqa: 'src:medmcqa', headqa: 'src:headqa' };
+/* an open exam set (data/sources/registry.json kind open-exam) is a real exam's question, not a USMLE-style bank's */
+const SET_KIND = { headqa: 'open-exam' };
 export function benchmarkItem(r) {
-  const set = /^medqa/.test(r.id) ? 'medqa' : /^mmlu/.test(r.id) ? 'mmlu' : /^medmcqa/.test(r.id) ? 'medmcqa' : 'bench';
+  const set = /^medqa/.test(r.id) ? 'medqa' : /^mmlu/.test(r.id) ? 'mmlu' : /^medmcqa/.test(r.id) ? 'medmcqa' : /^headqa/.test(r.id) ? 'headqa' : 'bench';
   return cleanItem({
     id: r.id, stem: r.stem, options: r.options, answer: r.answer, explanation: r.explanation || '', why: [], topic: '',
     tags: [BENCH_TAG[set] || 'src:bench', r.meta_info ? `exam:${r.meta_info}` : `exam:${set}`],
-    provenance: { kind: 'usmle-resource', source: { name: r.source?.name || set, url: r.source?.url || '', licence: r.source?.licence || '', retrieved: r.source?.retrieved || '' }, createdAt: r.source?.retrieved || '2026-10-25' }
+    provenance: { kind: SET_KIND[set] || 'usmle-resource', source: { name: r.source?.name || set, url: r.source?.url || '', licence: r.source?.licence || '', retrieved: r.source?.retrieved || '' }, createdAt: r.source?.retrieved || '2026-10-25' }
   });
 }
 /* the same row as a benchmark-only item (the official NBME samples, the GPT-4 look-alikes): kept in memory, never written
@@ -73,7 +75,9 @@ export function allCandidates(root, { stations } = {}) {
   for (const q of readJson(path.join(root, 'data', 'mcq', 'generated.json'), { items: [] }).items || []) { const c = cleanItem(q); if (c && c.provenance.kind === 'ai') items.push(c); else dropped.push(`${q?.id}: generated item not valid`); }
   const bdir = path.join(root, 'data', 'benchmarks');
   for (const f of fs.existsSync(bdir) ? fs.readdirSync(bdir).filter(x => x.endsWith('.jsonl')).sort() : []) for (const r of readJsonl(path.join(bdir, f))) { const c = benchmarkItem(r); if (c) items.push(c); else dropped.push(`${r.id}: benchmark row not valid`); }
-  for (const q of readJson(path.join(root, 'data', 'mcq', 'submissions.json'), { items: [] }).items || []) items.push(q);   /* checked by the selector, so a bad one gets its reasons */
+  /* cleaned as the selector cleans them, so the judge's verdict (hashed on the clean text) matches; one that will not
+     clean goes in as it is, for the selector to give it its reasons */
+  for (const q of readJson(path.join(root, 'data', 'mcq', 'submissions.json'), { items: [] }).items || []) items.push(cleanItem(q) || q);
   const seen = new Set();
   return { items: items.filter(q => (q && !seen.has(q.id) ? seen.add(q.id) : false)), dropped };
 }

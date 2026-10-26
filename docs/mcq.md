@@ -23,10 +23,11 @@ A standard pool of single-best-answer questions (`public/mcq/pool.json`) that th
 
 | kind | What it is | Its source | The duel's chip today |
 |---|---|---|---|
-| `user` | written by a student, or brought by one from an open resource | "Written by the submitter" (licence `own`), or the resource's name, link and licence | none |
+| `user` | written by a student, or brought by one from an open resource | "Written by the submitter" (licence `own`), or the resource's name, link and licence | Student |
 | `ai` | written by a model (`generate-mcq.mjs`, `generator.how` = `cli` or `api`), or made in code from an AI-written station (`how` = `duel-pack`) | "Written by AI from Med-OS station …" | AI-written |
 | `amsa` | made in code from an AMSA MedEd OSCE station's own differential | "AMSA MedEd OSCEs: <case>", with the AMSA page | AI-written (the station text is AI-written) |
-| `usmle-resource` | an open, licensed online USMLE-style bank: MedQA (Step 2&3 split), MMLU professional medicine | the bank's name, URL and licence, on every item | none |
+| `usmle-resource` | an open, licensed online USMLE-style bank: MedQA (Step 2&3 split), MMLU professional medicine | the bank's name, URL and licence, on every item | USMLE |
+| `open-exam` | a real exam's question from an open set the registry says to import (HEAD-QA's Spanish MIR medicine papers 2013 to 2016), as published | the set's citation and the date its terms ask for, as the credit under the explanation | Exam |
 
 - **The tag is never rewritten.** `cleanItem` copies provenance and only cleans it. The selector adds `eval` and fills an empty `topic` from the review (and marks `eval.topicFrom: "review"`). It changes nothing else. A test checks this (`scripts/mcq-pool.test.mjs`, "provenance untouched").
 - **A user's question stays the user's.** The reviewer's suggestion for fixing it goes in its verdict (`data/mcq/verdicts.json`, `rubric.suggestion`), not into the question. A submission whose kind is not `user` is refused at intake, not relabelled, and the table's check constraint refuses it too.
@@ -90,7 +91,7 @@ The judge never sees provenance: every kind gets the same prompt. Judge score (0
 Then, over everything that passed, best first:
 
 6. **Dedupe**: a near-duplicate of an admitted question is refused, with the id it duplicates. Kinds go in the order user, usmle-resource, amsa, ai, so a user's question is never displaced by a copy from a bank.
-7. **Quotas and topics**: user questions that pass are always kept, with no cap. Other kinds have caps (`QUOTA`: usmle-resource 160, amsa 110, ai 110, and ai-rapid 80 for AI-written questions in the Rapid form, so short questions and vignettes do not crowd each other out), and no topic may hold more than 15% of the non-user pool (at least 6). A question over a cap is **reserve**: it passed and takes a place when one drops out.
+7. **Quotas and topics**: user questions that pass are always kept, with no cap. Other kinds have caps (`QUOTA`: usmle-resource 160, open-exam 120, amsa 110, ai 110, and ai-rapid 80 for AI-written questions in the Rapid form, so short questions and vignettes do not crowd each other out), and no topic may hold more than 15% of the non-user pool (at least 6). A question over a cap is **reserve**: it passed and takes a place when one drops out.
 
 `data/mcq/selection.json` holds every decision with its reasons; `node scripts/mcq-pool.mjs --why <id>` prints one. `public/mcq/status.json` holds one line per submitted question. `npm test` fails when the pool on disk is not what the candidates make now.
 
@@ -115,7 +116,13 @@ The e2e (`scripts/e2e/smoke.mjs`) runs the flow at 393, 320 and 1280 px against 
 
 Each kept question is `ai` with `generator: { how, version, basis: [station, osce-<station>], exemplars, model }`, and its key is spread by its id's hash. It still has to pass the review (`mcq-judge.mjs --kind ai`) and the AI bar before it reaches the pool.
 
-## 8. The benchmarks and their licences
+## 8. Finding questions online: the sources registry
+
+`data/sources/registry.json` lists every open MCQ set considered (13 on 2026-10-26), each with its licence as read at its source, whether that licence covers the questions or only a repository's code, and a verdict: **import**, **in-app** (already here by another route), **benchmark-only** or **reject**, each with its reason. `scripts/lib/sources.mjs` checks the file (`npm test`) and holds one adapter per imported set. `node scripts/fetch-sources.mjs` downloads each import, keeps the raw file outside the repo (it is data, never run), adapts it and writes `data/benchmarks/<id>.jsonl`. Nothing rewrites the text: HEAD-QA's terms (Ministerio de Sanidad) forbid changing the meaning and ask for the source and the date of the documents' last update, which travel as the credit. From there each row is a candidate like any other: the flaw checks, the review (`node scripts/mcq-judge.mjs --tag src:headqa --sample 60` for a pilot), and the bar, with an open-exam quota of 120.
+
+The first import: HEAD-QA medicine 2013 to 2016, 788 questions after dropping the 130 that need an image. 2017 is left out: 6 of 9 sampled keys were implausible, the same in the Spanish file, as if taken from another paper's answer sheet. No open Australian or New Zealand set was found; the AMC, NBME and USMLE samples are treated as not redistributable.
+
+## 9. The benchmarks and their licences
 
 - `data/benchmarks/medqa-us-step2-3.jsonl` (594) and `mmlu-professional-medicine.jsonl` (272), written by `scripts/import-benchmarks.mjs`. Only MIT rows are copied, with the source and licence on every line. **Caveat**: MedQA's MIT licence is written for its code, and its questions were collected from USMLE-style prep material. MMLU's items were collected from freely available online sources. The founder chose to admit them as `usmle-resource` with their licence shown. Removing a bank is one line in `scripts/import-benchmarks.mjs` `SETS` plus a rebuild.
 - The official USMLE samples never enter the repo: no text, no per-item verdicts, only aggregates. `scripts/validate-mcq.mjs` (in `npm test`) checks every text file under `data/`, `docs/`, `scripts/` and `public/` for any 12-word run of their text. It skips runs the open banks also use (stock phrasing such as "which of the following is the most appropriate next step in management"). It runs when the samples are on the machine and says it was skipped otherwise.
@@ -124,6 +131,7 @@ Each kept question is `ai` with `generator: { how, version, basis: [station, osc
 ## Commands
 
 ```
+node scripts/fetch-sources.mjs [--only headqa]           # the registry's imports -> data/benchmarks/<id>.jsonl
 node scripts/import-benchmarks.mjs                       # data/benchmarks from the downloads
 node scripts/generate-mcq.mjs --sample 64 [--form rapid] # new ai questions -> data/mcq/generated.json
 node scripts/mcq-submissions.mjs [export.json]           # students' questions -> data/mcq/submissions.json
