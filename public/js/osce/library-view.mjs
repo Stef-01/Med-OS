@@ -20,6 +20,8 @@ import { chatPrompt } from '../library/prompt.mjs';
 import { checkUpload, deckName, layers, layerLabel, yearLabel, diffLabel, inPick, KINDS, KIND_IDS, LIMITS } from '../library/item.mjs';
 import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
 import { displayOrder } from '../mcq/schema.mjs';
+import { inText } from '../library/ranges.mjs';
+import { openRanges } from './ranges-view.mjs';
 import { record, summary, wrapped, monthOf, monthName, dayOf } from '../library/stats.mjs';
 import { grade, queue, counts, preview, soon, isNew, GRADES } from '../library/sched.mjs';
 import { today, streak, heat, session, timedSecs, tally, smart, snapshot, resumable, examPlan, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
@@ -52,6 +54,7 @@ export function libraryCardHtml() {
 
 export async function libraryDlg(tab) {
   V.tab = TABS.some(t => t[0] === tab) || tab === 'upload' ? tab : V.tab; V.lib = api.current(); V.st.q = null; V.st.view = ''; V.share = ''; V.msg = '';   /* the sheet opens at the top of its tab, not on a page pushed last time */
+  if (V.tab === 'upload' && tab !== 'upload') V.tab = 'library';
   const d = openDialog({ kind: 'lib', title: 'Your questions', cls: 'os-dlg--lib', onClose: () => ctx.render?.(),
     body: `<div class="os-lib"><nav class="os-libtabs" role="tablist" aria-label="Your questions">${TABS.map(([id, label]) => `<button role="tab" data-lib="tab" data-tab="${id}" id="os-libt-${id}" aria-controls="os-libp" aria-selected="${id === tabOf(V.tab)}" tabindex="${id === tabOf(V.tab) ? 0 : -1}">${label}</button>`).join('')}<span class="os-libtabs-ind" aria-hidden="true" style="--i:${tabIdx(V.tab)}"></span></nav>
       <div class="os-libp" id="os-libp" role="tabpanel" tabindex="-1"></div></div>` });
@@ -415,6 +418,7 @@ function cardHtml() {
       <div class="os-libbar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="${V.st.q.length}" aria-valuenow="${V.st.i}"><i style="transform:scaleX(${(V.st.i / V.st.q.length).toFixed(3)})"></i></div>
       <span class="os-libcount2">${V.st.i + 1}/${V.st.q.length}</span>
       ${timed && !shown ? '<span class="os-libclock" aria-live="off" title="Time left"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle class="arc" cx="12" cy="12" r="10" pathLength="100"/></svg><b></b></span>' : ''}
+      ${labsIn(it).length ? `<button class="os-libflag os-librng" data-lib="ranges" aria-label="Normal ranges" title="Normal ranges">${icon('flask')}</button>` : ''}
       <button class="os-libflag${card.f ? ' on' : ''}" data-lib="flag" aria-pressed="${!!card.f}" aria-label="${card.f ? 'Flagged' : 'Flag this question'}">${icon('bookmark')}</button>
     </div>
     <p class="os-liblayer">${meta}</p>
@@ -477,6 +481,8 @@ function gradesHtml(right, card, t) {
     ? `<div class="os-libgrades os-libgrades--right" role="group" aria-label="Next, and how well you knew it">${b('hard', 'Hard')}${b('good', 'Next', ' os-primary os-libnext', false)}${b('easy', 'Easy')}</div>${back('good')}`
     : `<div class="os-libgrades os-libgrades--wrong" role="group" aria-label="Next">${b('again', 'Next', ' os-primary os-libnext', false)}${back('again')}<button class="os-link os-libmisread" data-lib="grade" data-g="good" aria-keyshortcuts="3">I knew it, I misread</button></div>`;
 }
+/* the tests a question gives results for (its stem and ask; an option's drug is not a result): Normal ranges shows only then */
+const labsIn = it => inText(`${it.stem} ${it.ask || ''}`);
 function strike(i) {
   if (V.st.pick != null || !V.st.q) return;
   const s = V.st.x || (V.st.x = new Set()); s.has(i) ? s.delete(i) : s.add(i);
@@ -679,6 +685,7 @@ async function act(a, b, e) {
     case 'redo': { const by = new Map(V.st.q.map(x => [x.key, x])), l = [...new Set(V.st.seen.filter(s => !s.ok).map(s => s.key))].map(k => by.get(k)).filter(Boolean); return startWith(l, { label: 'Redo' }); }
     case 'notestudy': { const mem = api.studyMem(); V.st.view = ''; return startWith(everything().filter(e => mem.card[e.key]?.note), { label: 'Notebook' }); }
     case 'note': { V.st.note = true; paint(); return panel()?.querySelector('[data-lib-note]')?.focus(); }
+    case 'ranges': { const it = V.st.q?.[V.st.i]?.item; if (it) openRanges(`${it.stem} ${it.ask || ''}`); return; }
     case 'opt': return V.st.x?.has(+b.dataset.i) ? strike(+b.dataset.i) : answer(+b.dataset.i);
     case 'grade': return rate(b.dataset.g);
     case 'endstudy': return endStudy();

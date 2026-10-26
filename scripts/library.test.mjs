@@ -7,6 +7,7 @@ import { readUpload, check, checkUpload, specialtyOf, kindOf, stripFence, layers
 import { grade, queue, counts, preview, newCard, soon, recall, NEW_A_DAY, DAY } from '../public/js/library/sched.mjs';
 import { duelQuestion, mixPack } from '../public/js/library/mix.mjs';
 import { normPack, normQuestion, topicTree } from '../public/js/vendor/pup-duel/duel/pack.mjs';
+import { RANGES, GROUPS, inText, find } from '../public/js/library/ranges.mjs';
 
 const NOW = Date.parse('2026-10-26T09:00:00Z');
 const Q = (o = {}) => ({
@@ -147,4 +148,20 @@ test('check the medicine: Claude answers blind; a disagreement is held back with
   assert.equal(r.held.length, 1); assert.match(r.held[0].issue, /anterior/);
   assert.equal(applyChecks(ready, [{ id: ready[0].id, choice: 2, ok: true, issue: '' }]).held.length, 1, 'ok but a different choice is held');
   assert.deepEqual(VERIFY_SCHEMA.properties.checks.items.required, ['id', 'choice', 'ok', 'issue']);
+});
+
+test('normal ranges: every test whole; the tests a stem names found as whole words, in its order; find by name or by what stems call it', () => {
+  assert.ok(RANGES.length >= 60 && GROUPS.length >= 8);
+  for (const x of RANGES) assert.ok(x.g && x.t && x.r && typeof x.u === 'string' && x.k.length && x.k.every(k => k === k.toLowerCase()), x.t);
+  assert.equal(new Set(RANGES.map(x => x.t)).size, RANGES.length, 'one row a test');
+  const t = s => inText(s).map(x => x.t);
+  assert.deepEqual(t('Her potassium is 6.8 mmol/L, creatinine 410 µmol/L and pH 7.21.'), ['Potassium', 'Creatinine', 'pH (arterial)']);
+  assert.deepEqual(t('Haemoglobin 82 g/L, MCV 68 fL, ferritin 6 µg/L'), ['Haemoglobin', 'MCV', 'Ferritin']);
+  assert.deepEqual(t('An alternative plan for her asthma 2 days ago; phosphate is 0.4 mmol/L'), ['Phosphate'], 'ALT, AST and pH only as whole words');
+  assert.deepEqual(t('She takes sodium valproate and was given calcium gluconate; her sodium is 128 mmol/L'), ['Sodium'], 'a result has a number after it: a drug is not a result');
+  assert.deepEqual(t('HbA1c 8.1%'), ['HbA1c'], 'Hb is not in HbA1c');
+  assert.deepEqual(t('A 30-year-old woman with a sore knee'), []);
+  assert.deepEqual(find('trop').map(x => x.t), ['hs-Troponin'], 'a word that starts so, not a word with it inside');
+  assert.ok(find('white cell').some(x => x.t === 'White cell count') && find('pot').some(x => x.t === 'Potassium'));
+  assert.ok(find('troponin').some(x => x.t === 'hs-Troponin') && find('wcc').some(x => x.t === 'White cell count') && find('').length === RANGES.length);
 });

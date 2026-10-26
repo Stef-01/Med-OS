@@ -31,6 +31,7 @@ export const ICONS = Object.freeze({
   filter: '<path d="M4 6h16M7 12h10M10 18h4"/>',
   stairs: '<path d="M22 5h-5v5h-5v5H7v5H2"/>',
   target: '<circle cx="12" cy="12" r="1"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9"/>',
+  flask: '<path d="M9 3h6"/><path d="M10 9h4"/><path d="M10 3v6l-4 11a.7 .7 0 0 0 .5 1h11a.7 .7 0 0 0 .5 -1l-4 -11v-6"/>',
   grip: '<path d="M4 6h16M4 12h16M4 18h16"/>',
   dots: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
   dotsDiagonal: '<path d="M7 17h.01M12 12h.01M17 7h.01"/>',

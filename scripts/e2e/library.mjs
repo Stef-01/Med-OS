@@ -305,6 +305,22 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(/1 question found/.test(await solo.textContent('.os-libp')) && /Right coronary/i.test(await solo.textContent('.os-libfound')), 'library: from 20 questions, find one across your decks (with its answer)');
   await open(solo, 'upload'); await solo.click('.os-libpool [data-os="mcqnew"]'); await solo.waitForSelector('.os-mcqf', { timeout: 5000 }).then(() => ok(true, 'upload: a link to submit a question to the shared bank'), () => ok(false, 'upload: a link to submit a question to the shared bank'));
   await solo.keyboard.press('Escape'); await solo.waitForTimeout(300);
+  /* Normal ranges: a question with a lab value has the flask; the sheet opens on its tests; find narrows; Escape closes only the sheet */
+  await solo.keyboard.press('Escape'); await solo.waitForTimeout(500);
+  await open(solo, 'upload');
+  await solo.fill('.os-libp [name="paste"]', JSON.stringify([Q({ stem: 'A 70-year-old man on spironolactone and ramipril has 2 days of weakness. His potassium is 6.9 mmol/L and creatinine 210 µmol/L. His ECG shows peaked T waves.', ask: 'What is the most appropriate first treatment?', options: ['Intravenous calcium gluconate', 'Oral sodium polystyrene sulfonate', 'Intravenous furosemide', 'Inhaled salbutamol alone'], answer: 'A', why: ['Correct: it steadies the heart first.', 'Too slow.', 'Not first.', 'An adjunct.'], explanation: 'With ECG changes, calcium gluconate stabilises the myocardium first; insulin and dextrose then shift potassium into cells.', specialty: 'Nephrology', kind: 'clinical', year: 3 })]));
+  await solo.waitForSelector('.os-libsum'); await solo.fill('.os-libp [name="deck"]', 'Kidneys'); await solo.click('.os-libsave');
+  await solo.locator('.os-libdeck', { hasText: 'Kidneys' }).locator('[data-lib="studydeck"]').click(); await solo.waitForSelector('.os-libopt');
+  ok(await solo.locator('.os-libtop [data-lib="ranges"]').isVisible(), 'ranges: a question with a lab value has Normal ranges beside the flag');
+  await solo.click('.os-libtop [data-lib="ranges"]'); await solo.waitForSelector('.os-rng');
+  const hit = await solo.locator('.os-rnghit li b').allTextContents();
+  ok(hit[0] === 'Potassium' && hit.includes('Creatinine') && /3\.5–5\.2/.test(await solo.textContent('.os-rnghit li')), `ranges: the question's tests first, in its order (${hit.join(', ')})`);
+  await shot(solo, '320-ranges');
+  await solo.fill('.os-rng [name="rfind"]', 'trop'); await solo.waitForTimeout(100);
+  ok(await solo.locator('.os-rngall li').count() === 1 && /Troponin/.test(await solo.textContent('.os-rngall')), 'ranges: find narrows to the test');
+  await solo.keyboard.press('Escape'); await solo.waitForTimeout(500);
+  ok(await solo.locator('.os-rng').count() === 0 && await solo.locator('.os-libopt').count() > 0, 'ranges: Escape closes the sheet, the card is still there');
+  await solo.click('[data-lib="endstudy"]'); await solo.waitForTimeout(300);
 
   /* a laptop */
   const wide = await phone(1280, 800);

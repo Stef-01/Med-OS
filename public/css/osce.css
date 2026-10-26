@@ -1770,3 +1770,26 @@ button.os-libcheck { align-self:flex-start; }
 @media (min-width:640px) { .os-dlg { transform:scale(.95); } .os-modal.out .os-dlg { transform:scale(.97); } }
 .os-cb input::after, .os-optck svg { opacity:0; transform:scale(.4); transition:transform var(--sp-bouncy-ms) var(--sp-bouncy), opacity .12s ease; }
 .os-cb input:is(:checked, :indeterminate)::after, .os-opt[aria-selected="true"] .os-optck svg { opacity:1; transform:scale(1); }
+
+/* Normal ranges: a sheet over the card; the question's tests first, then every range by group */
+.os-librng svg { width:20px; height:20px; }
+.os-rng { display:flex; flex-direction:column; gap:12px; padding:14px 22px calc(20px + var(--sb, 0px)); }
+@media (max-width:420px) { .os-rng { padding:12px 16px calc(20px + var(--sb, 0px)); } }
+.os-rng .os-libh { margin:0; }
+.os-rnglist { list-style:none; margin:0; padding:0; border-radius:14px; background:var(--card); overflow:hidden; }
+.os-rnglist li { display:grid; grid-template-columns:minmax(7em, 1fr) minmax(0, auto); column-gap:12px; align-items:baseline; padding:11px 14px; border-top:1px solid var(--fill); }
+.os-rnglist li:first-child { border-top:0; }
+.os-rnglist b { font-size:14.5px; font-weight:600; }
+.os-rngr { min-width:0; font-size:14.5px; font-weight:700; font-variant-numeric:tabular-nums; text-align:right; line-height:1.35; }
+.os-rngr small { color:var(--mute); font-weight:500; font-size:12.5px; }
+.os-rngn { grid-column:1 / -1; margin-top:2px; color:var(--mute); font-size:12.5px; }
+.os-rnghit { background:color-mix(in srgb, var(--pri) 12%, var(--card)); box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--pri) 35%, transparent); }
+.os-rnghit li { animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) backwards; }
+.os-rnghit li:nth-child(2) { animation-delay:40ms; } .os-rnghit li:nth-child(3) { animation-delay:80ms; } .os-rnghit li:nth-child(n+4) { animation-delay:120ms; }
+.os-rngfind { display:flex; align-items:center; gap:8px; min-height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--stroke); background:var(--solid); color:var(--mute); }
+.os-rngfind svg { width:18px; height:18px; flex:none; }
+.os-rngfind input { flex:1; min-width:0; height:42px; border:0; outline:0; background:transparent; color:var(--ink); font:inherit; font-size:16px; }
+.os-rngfind:focus-within { border-color:var(--pri); }
+.os-rngall { display:flex; flex-direction:column; gap:14px; }
+.os-rngall h4 { margin:0 0 6px; font-size:12.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--mute); }
+@media (min-width:640px) { .os-dlg--rng { width:min(520px, 100%); max-height:min(86vh, 860px); } }
