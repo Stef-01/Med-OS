@@ -486,6 +486,12 @@ async function runIn(width, height, label) {
   await click('[data-os="ssave"]');
   ok(await pg.locator('.os-set').count() === 1, `${label}: a malformed key is refused`);
   await shot('settings');
+  /* a special gift: a wrong code is refused; "Pokémon" (any case, accents) unlocks the Eevee family on this device */
+  await pg.fill('[data-set="gift"]', 'nope'); await click('[data-os="sgift"]');
+  ok((await pg.getAttribute('[data-set="gift"]', 'aria-invalid')) === 'true', `${label}: a wrong gift code is refused`);
+  await pg.fill('[data-set="gift"]', ' Pokémon '); await click('[data-os="sgift"]');
+  ok(/Unlocked/.test(await pg.textContent('.os-giftmsg')) && (await pg.evaluate(() => localStorage.getItem('pup.gifts'))).includes('pokemon'), `${label}: the pokemon gift unlocks`);
+  await pg.evaluate(() => document.querySelector('.os-giftrow').scrollIntoView({ block: 'center' })); await shot('settings-gift');
   await pg.keyboard.press('Escape');
   await pg.waitForSelector('.os-set', { state: 'detached' });
 
