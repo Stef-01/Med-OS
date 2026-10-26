@@ -11,6 +11,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildPack } from './lib/duel-pack.mjs';
 import { readYears, readDifficulty } from './tag-years.mjs';
+import { readHy } from './generate-hy.mjs';
+import { readMxq, CREDIT } from './import-medexpqa.mjs';
 
 const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 const OUT = path.join(PUB, 'duel', 'pack.json');
@@ -29,7 +31,7 @@ export function mcqOnDisk(pub = PUB) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const { pack, dropped } = buildPack(poolOnDisk(), { mcq: mcqOnDisk(), stations: stationsOnDisk(), years: readYears(), difficulty: readDifficulty() });
+  const { pack, dropped } = buildPack(poolOnDisk(), { mcq: mcqOnDisk(), stations: stationsOnDisk(), years: readYears(), difficulty: readDifficulty(), hy: readHy(), mxq: readMxq(), mxqCredit: CREDIT });
   const text = packText(pack);
   if (process.argv.includes('--check')) {
     const now = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';

@@ -336,13 +336,14 @@ export function present(sid, i = 0, o = {}) {
   paintPresenter();
   if (ctx.view === 'session') paintTimer();   /* on the clock: the time left shows at once */
 }
-export function presentStep(dir) { if (!pres) return; const n = pres.i + dir; if (n < 0 || n >= pres.slides.length) return; pres.i = n; paintPresenter(); }
+export function presentStep(dir) { if (!pres) return; const n = pres.i + dir; if (n < 0 || n >= pres.slides.length) return; pres.i = n; pres.dir = dir; paintPresenter(); }
 export const presenting = () => !!pres && topDialog()?.kind === 'present';
 function paintPresenter() {
   const d = topDialog(); if (!pres || !d || d.kind !== 'present') return;
   const { slides, i, sid, exam } = pres, x = slides[i], many = slides.length > 1;
   d.el.querySelector('.os-prs-n').textContent = many ? `${i + 1} of ${slides.length}` : '';
-  d.el.querySelector('.os-prs-stage').innerHTML = `<div class="os-prs-slide"><h2>${esc(x.label)}</h2>${x.html}</div>`;
+  d.el.querySelector('.os-prs-stage').innerHTML = `<div class="os-prs-slide${pres.dir ? (pres.dir > 0 ? ' os-prs-in' : ' os-prs-in os-prs-back') : ''}"><h2>${esc(x.label)}</h2>${x.html}</div>`;   /* a step slides in the way you moved (study-kit/spring.mjs tokens) */
+  pres.dir = 0;
   d.el.querySelector('[data-os="pprev"]').disabled = i === 0;
   d.el.querySelector('[data-os="pnext"]').disabled = i === slides.length - 1;
   d.el.querySelectorAll('.os-prs-step').forEach(b => { b.hidden = !many; });

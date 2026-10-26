@@ -221,3 +221,21 @@ grant execute on function public.friend_list(uuid) to anon, authenticated;
 grant execute on function public.lib_share(uuid, uuid, uuid, boolean) to anon, authenticated;
 
 notify pgrst, 'reload schema';
+
+-- the week among friends (added 2026-10-26; research: Duolingo's friends layer, scored on effort only): you and each
+-- friend with the answers given in the last 7 days and the days studied, from each one's own Study record on their
+-- account (osce_state ns 'u:<id>:lib', shard 'k/days', written by study-kit/sync.mjs). Counts only: nobody sees another's
+-- answers, cards or notes. [{ id, name, me, week, days }], the most first
+create or replace function public.friend_week(p_token uuid) returns jsonb
+language plpgsql security definer set search_path = public, extensions as $$
+declare me public.pup_players := public.pup_me(p_token); since text := to_char((now() at time zone 'Australia/Sydney')::date - 6, 'YYYY-MM-DD');
+begin
+  return coalesce((select jsonb_agg(x order by (x ->> 'week')::int desc, x ->> 'name') from (
+    select jsonb_build_object('id', pe.id, 'name', pe.name, 'me', pe.id = me.id,
+      'week', coalesce((select sum(coalesce((e.value ->> 'n')::int, 0)) from jsonb_each(case when jsonb_typeof(s.value) = 'object' then s.value else '{}'::jsonb end) e where e.key >= since), 0),
+      'days', coalesce((select count(*) from jsonb_each(case when jsonb_typeof(s.value) = 'object' then s.value else '{}'::jsonb end) e where e.key >= since and coalesce((e.value ->> 'n')::int, 0) > 0), 0)) as x
+    from (select me.id, me.name union select p.id, p.name from public.lib_friends f join public.pup_players p on p.id = case when f.a = me.id then f.b else f.a end where me.id in (f.a, f.b) and f.status = 'friends') pe
+    left join public.osce_state s on s.ns = 'u:' || pe.id::text || ':lib' and s.id = 'k/days') q), '[]'::jsonb);
+end $$;
+grant execute on function public.friend_week(uuid) to anon, authenticated;
+notify pgrst, 'reload schema';

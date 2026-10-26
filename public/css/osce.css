@@ -1428,3 +1428,251 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-wrapacts { display:flex; flex-direction:column; gap:10px; margin-top:6px; }
 .os-wrapbtn { min-height:50px; border-radius:999px; background:#fff; color:#121212; font-size:16px; font-weight:800; }
 .os-wrapbtn--ghost { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.6); }
+
+/* Apple springs (study-kit/spring.mjs, written by its easing(); scripts/spring.test.mjs keeps them equal): damping and
+   response, as CSS linear() easings and their settle times. Everything that moves uses one of these */
+:root {
+  --sp-smooth: linear(0, 0.0255, 0.0869, 0.1676, 0.2563, 0.3457, 0.4313, 0.5105, 0.5822, 0.6458, 0.7014, 0.7496, 0.791, 0.8261, 0.8559, 0.8809, 0.9019, 0.9193, 0.9338, 0.9459, 0.9558, 0.9639, 0.9706, 0.9761, 0.9806, 0.9843, 0.9873, 0.9897, 0.9917, 0.9933, 0.9946, 0.9956, 0.9965, 0.9972, 0.9977, 0.9982, 0.9985, 0.9988, 0.9991, 0.9992, 1);
+  --sp-smooth-ms: 545ms;
+  --sp-snappy: linear(0, 0.0273, 0.0925, 0.1774, 0.2699, 0.3622, 0.4499, 0.5303, 0.6022, 0.6656, 0.7205, 0.7676, 0.8076, 0.8414, 0.8697, 0.8933, 0.9128, 0.929, 0.9423, 0.9532, 0.9621, 0.9694, 0.9753, 0.9801, 0.984, 0.9871, 0.9897, 0.9917, 0.9934, 0.9947, 0.9958, 0.9966, 0.9973, 0.9978, 0.9983, 0.9986, 0.9989, 0.9991, 0.9993, 0.9995, 1);
+  --sp-snappy-ms: 404ms;
+  --sp-sheet: linear(0, 0.0236, 0.0827, 0.1629, 0.2537, 0.3477, 0.4396, 0.5261, 0.605, 0.6755, 0.7371, 0.79, 0.8348, 0.8722, 0.9029, 0.9278, 0.9477, 0.9634, 0.9755, 0.9847, 0.9916, 0.9965, 1, 1.0024, 1.0038, 1.0046, 1.005, 1.005, 1.0048, 1.0044, 1.004, 1.0035, 1.003, 1.0026, 1.0022, 1.0018, 1.0015, 1.0012, 1.0009, 1.0007, 1);
+  --sp-sheet-ms: 621ms;
+  --sp-bouncy: linear(0, 0.0311, 0.109, 0.2143, 0.332, 0.4513, 0.5648, 0.6675, 0.7571, 0.8323, 0.8934, 0.9412, 0.9773, 1.0032, 1.0207, 1.0314, 1.0368, 1.0384, 1.0372, 1.0342, 1.0302, 1.0257, 1.0211, 1.0167, 1.0128, 1.0093, 1.0065, 1.0041, 1.0023, 1.0009, 0.9999, 0.9992, 0.9988, 0.9986, 0.9985, 0.9986, 0.9987, 0.9988, 0.999, 0.9992, 1);
+  --sp-bouncy-ms: 644ms;
+  --sp-gentle: linear(0, 0.0231, 0.0794, 0.1543, 0.2376, 0.3227, 0.4052, 0.4826, 0.5534, 0.6171, 0.6735, 0.723, 0.766, 0.803, 0.8348, 0.8618, 0.8848, 0.9041, 0.9204, 0.934, 0.9454, 0.955, 0.9629, 0.9694, 0.9749, 0.9794, 0.9831, 0.9861, 0.9887, 0.9907, 0.9924, 0.9938, 0.995, 0.9959, 0.9967, 0.9973, 0.9978, 0.9982, 0.9985, 0.9988, 1);
+  --sp-gentle-ms: 812ms;
+}
+
+/* ---------- motion (study-kit/spring.mjs; founder 2026-10-26: "apple motion with spring based UI interaction") ----------
+   Press: the moment a finger lands, the thing gives (on pointer-down, 60 ms), and springs back on release. Sheets arrive
+   on the sheet spring and leave on the snappy one, along the same path; on a phone they follow a dragging finger. Lists
+   and panels rise in once, on arrival, not on every repaint. Reduced motion: everything settles at once. */
+.os :is(.os-btn, .os-chip, .os-card, .os-libopt, .os-libgaps, .os-libwrapbtn, .os-libdeck .os-libacts .os-btn, .os-seg button, .os-libtabs button, .os-link, .os-ic) { transition-property:transform, background-color, color, border-color, box-shadow, opacity; transition-duration:var(--sp-snappy-ms), .2s, .2s, .2s, .2s, .2s; transition-timing-function:var(--sp-snappy), ease, ease, ease, ease, ease; }
+.os :is(.os-btn, .os-chip, .os-card, .os-libopt:not([aria-disabled]), .os-libgaps, .os-libwrapbtn, .os-seg button, .os-libtabs button, .os-ic):active { transform:scale(.965); transition-duration:60ms; transition-timing-function:ease-out; }
+.os .os-bigcard:active { transform:scale(.985); }
+.os-modal .os-dlg { transition:transform var(--sp-sheet-ms) var(--sp-sheet), opacity .26s; }
+.os-modal.out .os-dlg { transition:transform var(--sp-snappy-ms) var(--sp-snappy), opacity .2s; }
+.os-dlg.dragging { transition:none !important; }
+.os-grabber { position:absolute; top:6px; left:50%; width:36px; height:5px; margin-left:-18px; border-radius:3px; background:var(--stroke); opacity:.9; pointer-events:none; }
+.os-dlg-head { position:relative; touch-action:pan-x; }
+@media (min-width:640px) {
+  .os-modal .os-dlg { transition:transform var(--sp-bouncy-ms) var(--sp-bouncy), opacity .25s ease; }
+  .os-modal.out .os-dlg { transition:transform var(--sp-snappy-ms) var(--sp-snappy), opacity .18s ease; }
+  .os-grabber { display:none; }
+}
+.os-in { animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) backwards; animation-delay:calc(var(--d, 0) * 35ms); }   /* backwards: once risen, a press can move it */
+/* Your questions: the tab's pill slides; a panel rises in when you arrive at it; the study card arrives from the right;
+   a right answer lands with a bounce, a wrong one shakes its head */
+.os-libtabs { position:relative; }
+.os-libtabs button[aria-selected="true"] { background:transparent; box-shadow:none; }
+.os-libtabs-ind { position:absolute; top:3px; bottom:3px; left:3px; width:calc((100% - 6px) / 4); border-radius:9px; background:var(--solid); box-shadow:var(--em-shadow-md); transform:translateX(calc(var(--i, 0) * 100%)); transition:transform var(--sp-smooth-ms) var(--sp-smooth); pointer-events:none; }
+.os-libtabs button { position:relative; z-index:1; }
+.os-libp--enter > * { animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) both; }
+.os-libp--enter > *:nth-child(2) { animation-delay:30ms; } .os-libp--enter > *:nth-child(3) { animation-delay:60ms; } .os-libp--enter > *:nth-child(4) { animation-delay:90ms; } .os-libp--enter > *:nth-child(n+5) { animation-delay:120ms; }
+.os-libp--enter :is(.os-libdecks, .os-libgapl, .os-libfriends, .os-libbars) > li { animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) both; animation-delay:calc(min(var(--n, 0), 8) * 30ms); }
+.os-libcard--in { animation:os-libcardin var(--sp-sheet-ms) var(--sp-sheet) both; }
+@keyframes os-libcardin { from { opacity:0; transform:translateX(28px); } to { opacity:1; transform:none; } }
+.os-libopt.ok { animation:os-libpop var(--sp-bouncy-ms) var(--sp-bouncy); }
+@keyframes os-libpop { 0% { transform:scale(.96); } 100% { transform:scale(1); } }
+.os-libopt.no { animation:os-libshake .42s cubic-bezier(.36,.07,.19,.97); }
+@keyframes os-libshake { 15% { transform:translateX(-6px); } 35% { transform:translateX(5px); } 55% { transform:translateX(-3px); } 75% { transform:translateX(2px); } 100% { transform:none; } }
+.os-libexp, .os-libgrades, .os-libwhy { animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) both; }
+.os-libgrades { animation-delay:70ms; }
+.os-libbar i { transition:transform var(--sp-gentle-ms) var(--sp-gentle); }
+.os-libp--enter .os-libbart i { animation:os-libgrow var(--sp-gentle-ms) var(--sp-gentle) both; animation-delay:calc(min(var(--n, 0), 8) * 30ms + 80ms); }
+@keyframes os-libgrow { from { transform:scaleX(0); } }
+.os-libchips .os-chip.on { animation:os-libpop var(--sp-bouncy-ms) var(--sp-bouncy); }
+.os-libchips .os-chip.on.os-still { animation:none; }
+@media (prefers-reduced-motion: reduce) {
+  .os *, .os *::before, .os *::after { animation-duration:1ms !important; animation-delay:0ms !important; transition-duration:1ms !important; }
+}
+
+/* Study (library-view.mjs): Today, the modes, Custom, and the card in focus */
+.os-libtoday { display:flex; align-items:center; gap:16px; padding:16px; border-radius:18px; background:var(--card2); }
+.os-libring { position:relative; flex:none; width:76px; height:76px; display:grid; place-items:center; align-content:center; }
+.os-libring svg { position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg); }
+.os-libring circle { fill:none; stroke:var(--fill); stroke-width:4.5; }
+.os-libring .arc { stroke:var(--pri); stroke-linecap:round; stroke-dasharray:100; stroke-dashoffset:calc(100 - var(--p, 0) * 100); transition:stroke-dashoffset var(--sp-gentle-ms) var(--sp-gentle); }
+.os-libring b { font-size:22px; line-height:1; font-variant-numeric:tabular-nums; }
+.os-libring small { font-size:11px; color:var(--mute); }
+.os-libp--enter .os-libring .arc { animation:os-libring var(--sp-gentle-ms) var(--sp-gentle) both; animation-delay:120ms; }
+@keyframes os-libring { from { stroke-dashoffset:100; } }
+.os-libtoday-tx { min-width:0; display:flex; flex-direction:column; gap:4px; }
+.os-libtoday-tx h3 { margin:0; font-size:18px; }
+.os-libstreak { display:flex; align-items:center; gap:5px; font-size:14px; font-weight:600; color:var(--mute); }
+.os-libstreak svg { width:17px; height:17px; color:var(--mute); }
+.os-libstreak.live { color:var(--ink); } .os-libstreak.live svg { color:#ff7a1a; }
+.os-libmodes { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.os-libmode { display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding:14px; border-radius:16px; background:var(--card2); text-align:left; min-width:0; position:relative; }
+.os-libmode:last-child:nth-child(odd) { grid-column:1 / -1; flex-direction:row; align-items:center; }
+.os-libmode-ic { width:34px; height:34px; border-radius:10px; display:grid; place-items:center; background:var(--pri-soft); color:var(--pri); flex:none; }
+.os-libmode-ic svg { width:19px; height:19px; }
+.os-libmode-tx { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.os-libmode-tx b { font-size:14.5px; }
+.os-libmode-tx small { font-size:12px; color:var(--mute); line-height:1.35; overflow-wrap:anywhere; }
+.os-libmode-n { position:absolute; top:12px; right:12px; min-width:24px; height:24px; padding:0 7px; border-radius:12px; background:var(--pri); color:var(--em-pri-contrast); font-size:12px; font-weight:800; display:grid; place-items:center; }
+.os-libgoal, .os-libsegrow { display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+.os-libgoal .os-seg button, .os-libsegrow .os-seg button { min-width:52px; }
+.os-libsegrow .os-seg { max-width:100%; overflow-x:auto; scrollbar-width:none; }
+.os-libmodenote { margin-top:-6px !important; }
+/* the card in focus: the tabs step aside, a slim bar on top */
+.os-lib--focus .os-libtabs { display:none; }
+.os-libtop { display:flex; align-items:center; gap:10px; }
+.os-libtop .os-libbar { flex:1; height:6px; border-radius:3px; }
+.os-libcount2 { font-size:12.5px; font-weight:700; color:var(--mute); font-variant-numeric:tabular-nums; }
+.os-libflag { flex:none; width:36px; height:36px; border-radius:10px; display:grid; place-items:center; color:var(--mute); position:relative; }
+.os-libflag::after { content:''; position:absolute; inset:-4px; }
+.os-libflag svg { width:20px; height:20px; transition:transform var(--sp-bouncy-ms) var(--sp-bouncy); }
+.os-libflag.on { color:#ffb020; } .os-libflag.on svg { fill:currentColor; transform:scale(1.12); }
+.os-libclock { position:relative; flex:none; width:36px; height:36px; display:grid; place-items:center; }
+.os-libclock svg { position:absolute; inset:0; transform:rotate(-90deg); }
+.os-libclock circle { fill:none; stroke:var(--fill); stroke-width:2.5; }
+.os-libclock .arc { stroke:var(--pri); stroke-dasharray:100; stroke-dashoffset:calc(100 - var(--p, 1) * 100); transition:stroke-dashoffset .25s linear, stroke .3s; }
+.os-libclock b { font-size:11.5px; font-variant-numeric:tabular-nums; }
+.os-libclock.low .arc { stroke:var(--danger); } .os-libclock.low b { color:var(--danger); }
+.os-libcard > .os-liblayer { margin:-4px 0 0; }
+.os-libopt.dim { opacity:.55; }
+.os-libnote2 { display:flex; flex-direction:column; gap:6px; font-size:12.5px; font-weight:700; color:var(--mute); }
+.os-libnote2 textarea { width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid var(--stroke); border-radius:10px; background:var(--solid); color:var(--ink); font:inherit; font-size:16px; font-weight:400; resize:vertical; }
+.os-libaddnote { align-self:flex-start; }
+.os-libdone .os-libring { width:96px; height:96px; }
+.os-libdone .os-libacts { justify-content:center; }
+
+.os-libheat { margin:0; display:flex; flex-wrap:wrap; gap:3px; }
+.os-libheat > div { display:flex; flex-direction:column; gap:3px; }
+.os-libheat i { width:14px; height:14px; border-radius:3.5px; background:var(--fill); }
+.os-libheat i.x { background:transparent; }
+.os-libheat i[data-level="1"] { background:color-mix(in srgb, var(--pri) 30%, var(--fill)); }
+.os-libheat i[data-level="2"] { background:color-mix(in srgb, var(--pri) 55%, var(--fill)); }
+.os-libheat i[data-level="3"] { background:color-mix(in srgb, var(--pri) 78%, var(--fill)); }
+.os-libheat i[data-level="4"] { background:var(--pri); }
+.os-libheat figcaption { flex-basis:100%; font-size:12px; color:var(--mute); margin-top:4px; }
+@media (max-width:360px) { .os-libheat i { width:12px; height:12px; } }
+
+/* how others answered (0009_mcq_picks.sql): a quiet fill behind each option and its share */
+.os-libopt--pct { position:relative; overflow:hidden; }
+.os-libopt--pct::before { content:''; position:absolute; inset:0 auto 0 0; width:var(--pct, 0%); background:currentColor; opacity:.07; transform-origin:left; animation:os-libgrow var(--sp-gentle-ms) var(--sp-gentle) both; pointer-events:none; }
+.os-libpct { margin-left:auto; flex:none; font-style:normal; font-size:12.5px; font-weight:700; color:var(--mute); font-variant-numeric:tabular-nums; align-self:center; animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) both; }
+.os-libothers { text-align:right; margin-top:-4px !important; font-size:12px !important; }
+
+.os-libresume { display:flex; align-items:center; gap:10px; width:100%; padding:12px 14px; border-radius:14px; background:var(--pend-soft); color:var(--em-pend-ink); text-align:left; }
+.os-libresume > span:first-child { flex:1; display:flex; flex-direction:column; gap:2px; min-width:0; }
+.os-libresume b { font-size:15px; } .os-libresume small { font-size:12.5px; opacity:.85; }
+.os-libresume .os-chev svg { width:18px; height:18px; }
+.os-libleech { display:flex; gap:8px; align-items:flex-start; padding:10px 12px; border-radius:12px; background:var(--pend-soft); color:var(--em-pend-ink); font-size:13.5px; line-height:1.45; }
+.os-libleech svg { flex:none; width:18px; height:18px; margin-top:1px; }
+.os-libreview { width:100%; text-align:left; display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+.os-libreview ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+.os-libreview li { display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border-radius:12px; background:var(--card2); font-size:13.5px; line-height:1.45; }
+.os-libreview li > span { flex:none; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; }
+.os-libreview li > span svg { width:14px; height:14px; }
+.os-libreview li.ok > span { background:var(--ok-soft); color:var(--ok-ink); }
+.os-libreview li.no > span { background:var(--danger-soft); color:var(--danger); }
+.os-libreview li p { margin:0; min-width:0; overflow-wrap:anywhere; color:var(--ink); }
+.os-libreview .os-btn { align-self:flex-start; }
+.os-libnotes { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+.os-libnotes li { padding:12px 14px; border-radius:14px; background:var(--card2); display:flex; flex-direction:column; gap:6px; }
+.os-libnotes-q { font-size:13.5px; line-height:1.45; color:var(--mute) !important; overflow-wrap:anywhere; }
+.os-libnotes-a { font-size:14px; font-weight:700; }
+.os-libnotes blockquote { margin:0; padding:8px 12px; border-left:3px solid var(--pri); border-radius:0; background:var(--pri-soft); font-size:14px; line-height:1.45; overflow-wrap:anywhere; }
+.os-libdone { padding-bottom:12px; }
+
+/* motion across OSCE: views slide in by depth; popovers grow from their trigger on a bouncy spring and leave on the
+   snappy one; toasts drop in on the sheet spring */
+.os-main.os-vin { animation:os-vin var(--sp-smooth-ms) var(--sp-smooth) backwards; }   /* backwards: no transform left behind (a transformed ancestor would hold position:fixed children) */
+.os-main.os-vin--back { animation-name:os-vin-back; }
+@keyframes os-vin { from { opacity:0; transform:translateX(18px); } to { opacity:1; transform:none; } }
+@keyframes os-vin-back { from { opacity:0; transform:translateX(-18px); } to { opacity:1; transform:none; } }
+.os-pop { transition:opacity .14s ease, transform var(--sp-bouncy-ms) var(--sp-bouncy); }
+.os-pop.out { transition:opacity .12s ease, transform var(--sp-snappy-ms) var(--sp-snappy); }
+.os-alert { transition:opacity .2s ease, transform var(--sp-sheet-ms) var(--sp-sheet); }
+@media (max-width:520px) { .os-frow { flex-wrap:wrap; row-gap:4px; } .os-count { flex-basis:100%; text-align:right; } }
+
+.os-libprev { margin:0; padding:12px 14px; border-radius:14px; border:1px solid var(--stroke); background:var(--solid); display:flex; flex-direction:column; gap:8px; animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) both; }
+.os-libprev p { margin:0; font-size:13.5px; line-height:1.5; color:var(--ink) !important; overflow-wrap:anywhere; }
+.os-libprev ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px; }
+.os-libprev li { display:flex; gap:8px; align-items:flex-start; font-size:13px; line-height:1.4; padding:6px 8px; border-radius:8px; }
+.os-libprev li b { flex:none; width:20px; height:20px; border-radius:50%; background:var(--fill); display:grid; place-items:center; font-size:11px; }
+.os-libprev li.ok { background:var(--ok-soft); } .os-libprev li.ok b { background:var(--ok); color:var(--em-white); }
+.os-libprev li span { min-width:0; overflow-wrap:anywhere; }
+.os-libdeckchips { margin-top:-4px; }
+
+.os-libcredit { margin-top:2px !important; font-size:11.5px !important; color:var(--mute); line-height:1.4; }
+/* the switch: the thumb springs across with a little bounce, and stretches under the finger like iOS's */
+.os-switch-ui::after { transition:transform var(--sp-bouncy-ms) var(--sp-bouncy), width .18s ease; }
+.os-switch:active .os-switch-ui::after { width:28px; }
+.os-switch[aria-checked="true"]:active .os-switch-ui::after { transform:translateX(14px); }
+.os-prs-slide.os-prs-in { animation:os-vin var(--sp-smooth-ms) var(--sp-smooth) backwards; }
+.os-prs-slide.os-prs-back { animation-name:os-vin-back; }
+
+/* the exam plan */
+.os-libexam { display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:14px; background:var(--card2); }
+.os-libexam p { margin:0; flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; font-size:13px; line-height:1.4; color:var(--mute); }
+.os-libexam b { font-size:14.5px; color:var(--ink); }
+.os-libexamd input { height:40px; padding:0 10px; border:1px solid var(--stroke); border-radius:10px; background:var(--solid); color:var(--ink); font:inherit; font-size:15px; color-scheme:dark; max-width:150px; }
+/* confetti when the day's goal is done: each piece flies out on a spring, then falls and fades */
+.os-libcard { position:relative; }
+.os-confetti { position:absolute; left:50%; top:0; width:0; height:0; z-index:5; pointer-events:none; }
+.os-confetti i { position:absolute; width:8px; height:12px; border-radius:2px; background:var(--c); opacity:0; animation:os-confetti 1.3s cubic-bezier(.2,.8,.3,1) forwards; animation-delay:var(--d); }
+@keyframes os-confetti {
+  0% { opacity:1; transform:translate(0, 0) rotate(0); }
+  55% { opacity:1; transform:translate(var(--x), var(--y)) rotate(calc(var(--r) * .6)); }
+  100% { opacity:0; transform:translate(calc(var(--x) * 1.15), calc(var(--y) + 260px)) rotate(var(--r)); }
+}
+
+/* the week among friends */
+.os-libweek { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+.os-libweek li { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background:var(--card2); }
+.os-libweek li.me { background:var(--pri-soft); }
+.os-libweek-n { flex:none; width:18px; text-align:center; font-weight:800; color:var(--mute); font-variant-numeric:tabular-nums; }
+.os-libweek li:first-child .os-libweek-n { color:#ffb020; }
+.os-libweek-tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:3px; }
+.os-libweek-tx b { font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.os-libweek-tx small { font-size:11.5px; color:var(--mute); }
+.os-libweek-bar { height:5px; border-radius:3px; background:var(--fill); overflow:hidden; }
+.os-libweek-bar i { display:block; height:100%; background:var(--pri); transform-origin:left; animation:os-libgrow var(--sp-gentle-ms) var(--sp-gentle) both; }
+.os-libweek-v { flex:none; font-size:18px; font-weight:800; font-variant-numeric:tabular-nums; }
+/* finding a question */
+.os-libfind { display:flex; align-items:center; gap:8px; height:44px; padding:0 12px; border:1px solid var(--stroke); border-radius:12px; background:var(--solid); color:var(--mute); }
+.os-libfind:focus-within { border-color:var(--pri); }
+.os-libfind svg { flex:none; width:18px; height:18px; }
+.os-libfind input { flex:1; min-width:0; height:100%; border:0; outline:0; background:transparent; color:var(--ink); font:inherit; font-size:16px; padding:0; }
+.os-libfind input::-webkit-search-cancel-button { filter:invert(.6); }
+.os-libfound .os-libgap > div b { font-weight:600; font-size:13.5px; line-height:1.4; }
+
+/* one big Next; Hard and Easy beside a right answer */
+.os-libgrades--right { grid-template-columns:1fr 1.8fr 1fr; }
+.os-libgrades--wrong { display:flex; flex-direction:column; align-items:stretch; gap:6px; }
+.os-libnext { min-height:56px !important; font-size:16px; }
+.os-libnext small { opacity:.85; }
+.os-libmisread { align-self:center; font-size:13px; }
+
+.os-libstartstreak { display:inline-flex; align-items:center; gap:2px; margin-left:6px; padding:1px 8px 1px 5px; border-radius:99px; background:var(--fill); color:var(--mute); font-size:13px; font-weight:800; vertical-align:2px; }
+.os-libstartstreak svg { width:14px; height:14px; }
+.os-libstartstreak.live { background:rgba(255,122,26,.16); color:#ff9a4a; }
+
+/* Check the medicine */
+.os-libcheck { display:flex; align-items:center; gap:8px; font-size:13.5px; line-height:1.45; }
+.os-libcheck svg { flex:none; width:18px; height:18px; color:var(--pri); }
+button.os-libcheck { align-self:flex-start; }
+.os-libcheck--off { padding:10px 12px; border-radius:12px; background:var(--card2); color:var(--mute); align-items:flex-start; }
+.os-libcheck--done { flex-direction:column; align-items:stretch; padding:12px; border-radius:12px; background:var(--card2); }
+.os-libcheck--done > p { display:flex; gap:8px; margin:0; }
+.os-libheld { list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.os-libheld li { padding:10px; border-radius:10px; background:var(--solid); display:flex; flex-direction:column; gap:4px; }
+.os-libheld p { margin:0; font-size:13px; color:var(--ink) !important; overflow-wrap:anywhere; }
+.os-libheld .os-libheld-why { color:var(--em-pend-ink) !important; }
+.os-libheld .os-link { align-self:flex-start; padding:4px 0; }
+.os-libcheck--done > p { color:var(--ink) !important; } .os-libcheck--done > p b { color:var(--ink); }
+
+.os-libreportbtn { align-self:center; font-size:12.5px; color:var(--mute); }
+.os-libreport { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:13px; color:var(--mute); }
+.os-libreport > span { flex-basis:100%; }
+.os-libreported { text-align:center; }
+
+.os-wrapacts { gap:8px; }
+
+.os-libcard.swiping, .os-libcard.swiping * { user-select:none; }
+.os-libcard.swiping { cursor:grabbing; }
+.os-libpool { text-align:center; } .os-libpool .os-link { padding:0; font-size:inherit; }

@@ -106,11 +106,20 @@ function build() {
 }
 
 /* ---------------------------------------------------------------- render: header + view */
+/* moving between views: deeper (Start, the queue, the station) arrives from the right, back from the left, on the
+   smooth spring (study-kit/spring.mjs tokens); the repaint itself stays synchronous */
+const DEPTH = { start: 0, group: 1, marked: 1, session: 2, attempt: 2 };
+let lastView = null;
 function render() {
   closePop();
   stopTick();
   browseReset();
   const main = $('.os-main'), { view } = ctx;
+  if (lastView !== null && lastView !== view) {
+    main.classList.remove('os-vin', 'os-vin--back'); void main.offsetWidth;
+    main.classList.add('os-vin'); if ((DEPTH[view] ?? 1) < (DEPTH[lastView] ?? 1)) main.classList.add('os-vin--back');
+  }
+  lastView = view;
   main.dataset.view = view;
   if (view === 'start') renderStart(main);
   else if (view === 'group') renderGroup(main);

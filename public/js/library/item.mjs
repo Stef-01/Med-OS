@@ -17,7 +17,7 @@ import { yearOf, guessYear, YEARS, diffOf, guessDiff, DIFFICULTY } from '../mcq/
 export const KINDS = Object.freeze({
   skills: { label: 'OSCE skills', brief: 'how to run the station: the question to ask, the examination step, what to say, the procedure.' },
   clinical: { label: 'Clinical', brief: 'diagnosis, investigation or management: the next test, its result, the treatment and dose.' },
-  physio: { label: 'Physiology and pathophysiology', brief: 'the mechanism behind a condition, sign, result or treatment.' },
+  physio: { label: 'Physiology and pathophysiology', short: 'Physiology', brief: 'the mechanism behind a condition, sign, result or treatment.' },
   anatomy: { label: 'Anatomy', brief: 'the structure, its supply or innervation, a landmark, where a lesion sits.' }
 });
 export const KIND_IDS = Object.keys(KINDS);

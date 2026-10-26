@@ -4,7 +4,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { chatPrompt } from '../public/js/library/prompt.mjs';
 import { readUpload, check, checkUpload, specialtyOf, kindOf, stripFence, layers, deckName, KIND_IDS, SPECIALTIES, LIMITS } from '../public/js/library/item.mjs';
-import { grade, queue, counts, preview, newCard, NEW_A_DAY, DAY } from '../public/js/library/sched.mjs';
+import { grade, queue, counts, preview, newCard, soon, recall, NEW_A_DAY, DAY } from '../public/js/library/sched.mjs';
 import { duelQuestion, mixPack } from '../public/js/library/mix.mjs';
 import { normPack, normQuestion, topicTree } from '../public/js/vendor/pup-duel/duel/pack.mjs';
 
@@ -69,19 +69,26 @@ test('the drill-down over a library: specialty, then every kind with its count',
   assert.deepEqual(L[0].cats.map(c => c.count), [0, 1, 0, 1]);
 });
 
-test('the scheduler: Again in 10 minutes, Good 1 then 3 days then by ease, Hard and Easy either side', () => {
-  let c = grade(null, 'good', NOW); assert.equal(c.ivl, 1); assert.equal(c.due, NOW + DAY);
-  c = grade(c, 'good', NOW); assert.equal(c.ivl, 3);
-  c = grade(c, 'good', NOW); assert.equal(c.ivl, 8);
-  const again = grade(c, 'again', NOW); assert.equal(again.due, NOW + 6e5); assert.equal(again.lapses, 1); assert.equal(again.reps, 0); assert.equal(again.ease, 2.3);
-  assert.ok(grade(c, 'hard', NOW).ivl < grade(c, 'good', NOW).ivl && grade(c, 'easy', NOW).ivl > grade(c, 'good', NOW).ivl);
-  let e = newCard(); for (let i = 0; i < 20; i++) e = grade(e, 'again', NOW); assert.equal(e.ease, 1.3, 'ease never below 1.3');
-  assert.equal(preview(null, 'again', NOW), '10 min'); assert.equal(preview(null, 'good', NOW), '1 day'); assert.equal(preview(null, 'easy', NOW), '4 days');
+test('FSRS-6: one 10-minute learning step, then days; Hard < Good < Easy; a lapse relearns; an SM-2 card converts', () => {
+  let c = grade(null, 'good', NOW); assert.equal(c.st, 2, 'Good on a new card graduates'); assert.ok(c.due - NOW >= DAY);
+  const a1 = grade(null, 'again', NOW); assert.equal(a1.due - NOW, 10 * 6e4, 'Again: 10 minutes'); assert.equal(a1.st, 1);
+  assert.equal(grade(null, 'hard', NOW).due - NOW, 15 * 6e4, 'Hard on the first step: 1.5 times it');
+  assert.equal(grade(a1, 'good', NOW + 10 * 6e4).st, 2, 'then Good graduates');
+  const later = c.due, hard = grade(c, 'hard', later), good = grade(c, 'good', later), easy = grade(c, 'easy', later);
+  assert.ok(hard.due < good.due && good.due < easy.due, 'Hard < Good < Easy');
+  assert.ok(good.s > c.s, 'a recall makes it more stable');
+  const lapse = grade(good, 'again', good.due); assert.equal(lapse.st, 3); assert.equal(lapse.lapses, 1); assert.equal(lapse.due - good.due, 10 * 6e4); assert.ok(lapse.s < good.s);
+  const old = grade({ due: NOW, ivl: 30, ease: 2.5, reps: 5, lapses: 0 }, 'good', NOW);
+  assert.equal(old.st, 2); assert.ok(old.due - NOW > 20 * DAY, `an SM-2 card at 30 days keeps its place (${Math.round((old.due - NOW) / DAY)} days)`); assert.equal(old.ivl, undefined);
+  assert.equal(preview(null, 'again', NOW), '10 min'); assert.match(preview(null, 'good', NOW), /day/); assert.match(preview(null, 'easy', NOW), /day/);
+  const fz = new Set(Array.from({ length: 30 }, (_, i) => grade(good, 'good', good.due, () => i / 30).due)); assert.ok(fz.size > 1, 'fuzzed with rnd');
+  assert.ok(Math.abs(recall(10, 10) - 0.9) < 1e-9, 'R(S, S) = 90 %');
+  assert.equal(soon(grade(null, 'again', NOW), NOW), true); assert.equal(soon(c, NOW), false);
 });
 
 test('a study session: overdue first, then new up to the day\'s allowance; counts', () => {
   const items = Array.from({ length: 30 }, (_, i) => ({ id: `q${i}` }));
-  const cards = { q0: { ...newCard(), due: NOW - 5 * DAY, reps: 2, ivl: 3 }, q1: { ...newCard(), due: NOW - DAY, reps: 2, ivl: 3 }, q2: { ...newCard(), due: NOW + DAY, reps: 2, ivl: 3 } };
+  const cards = { q0: { ...newCard(), st: 2, due: NOW - 5 * DAY, reps: 2 }, q1: { ...newCard(), st: 2, due: NOW - DAY, reps: 2 }, q2: { ...newCard(), st: 2, due: NOW + DAY, reps: 2 } };
   const q = queue(items, cards, NOW);
   assert.deepEqual(q.slice(0, 2).map(x => x.id), ['q0', 'q1']); assert.equal(q.length, 2 + NEW_A_DAY); assert.ok(!q.some(x => x.id === 'q2'));
   assert.equal(queue(items, cards, NOW, NEW_A_DAY).length, 2);
@@ -108,7 +115,7 @@ test('0008_library.sql: every table closed to the public key, every function che
   for (const t of ['lib_decks', 'lib_items', 'lib_friends', 'lib_shares']) assert.ok(S.includes(`alter table public.${t} enable row level security`), t);
   assert.doesNotMatch(S, /create policy/i, 'no policy: the tables are reached only through the functions');
   const fns = [...S.matchAll(/create or replace function public\.(\w+)\(p_token uuid/g)].map(m => m[1]);
-  assert.deepEqual(fns.sort(), ['friend_list', 'friend_request', 'friend_respond', 'lib_delete', 'lib_library', 'lib_rename', 'lib_share', 'lib_upload']);
+  assert.deepEqual(fns.sort(), ['friend_list', 'friend_request', 'friend_respond', 'friend_week', 'lib_delete', 'lib_library', 'lib_rename', 'lib_share', 'lib_upload']);
   for (const f of fns) { const body = S.slice(S.indexOf(`function public.${f}(`)); assert.match(body.slice(0, body.indexOf('end $$')), /public\.pup_me\(p_token\)/, f); assert.ok(S.includes(`grant execute on function public.${f}(`), f); }
   assert.match(S, /revoke all on function public\.lib_are_friends/);
   assert.match(S, /> 500 then raise/); assert.match(S, />= 50 then raise/); assert.match(S, /tot > 2000/); assert.match(S, /16384/);
@@ -129,4 +136,15 @@ test('year: read as students write it, guessed when missing, kept by the schema,
   assert.equal(chatPrompt().includes('"year"') && Object.values(YEARS).every(y => chatPrompt().includes(y.name)), true, 'the prompt asks for the year');
   assert.deepEqual(ladder([{ year: 3 }, { year: 1 }, {}, { year: 2 }, { year: 1 }]).map(x => x.year ?? 0), [1, 1, 2, 3, 0]);
   assert.deepEqual(ladder([{ year: 2 }, { year: 2 }, { year: 4 }], x => x.year, 1).map(x => x.year), [2, 4]);
+});
+
+import { verifyPrompt, applyChecks, VERIFY_SCHEMA } from '../public/js/library/verify.mjs';
+test('check the medicine: Claude answers blind; a disagreement is held back with its reason; unanswered ones pass', () => {
+  const { ready } = checkUpload(JSON.stringify([Q(), Q({ stem: `${Q().stem} Second.` }), Q({ stem: `${Q().stem} Third.` })]), { by: 'S', now: NOW });
+  const p = JSON.parse(verifyPrompt(ready)); assert.equal(p.length, 3); assert.equal(p[0].key, 'A'); assert.match(p[0].options[0], /^A\. /);
+  const r = applyChecks(ready, [{ id: ready[0].id, choice: 0, ok: true, issue: '' }, { id: ready[1].id, choice: 1, ok: false, issue: 'LAD gives anterior changes; this is inferior.' }]);
+  assert.equal(r.pass.length, 2); assert.equal(r.pass[0].checked, 1); assert.equal(r.unchecked, 1);
+  assert.equal(r.held.length, 1); assert.match(r.held[0].issue, /anterior/);
+  assert.equal(applyChecks(ready, [{ id: ready[0].id, choice: 2, ok: true, issue: '' }]).held.length, 1, 'ok but a different choice is held');
+  assert.deepEqual(VERIFY_SCHEMA.properties.checks.items.required, ['id', 'choice', 'ok', 'issue']);
 });

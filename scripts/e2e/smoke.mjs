@@ -19,6 +19,7 @@ import { cleanItem } from '../../public/js/mcq/schema.mjs';
 import { createServer as duelServer } from '../../public/js/vendor/pup-duel/duel/server-core.mjs';
 import { libraryFake } from './library-fake.mjs';
 import { library } from './library.mjs';
+import { motion } from './motion.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'public');
 const SHOTS = process.argv[2] || fs.mkdtempSync(path.join(os.tmpdir(), 'osce-e2e-'));
@@ -67,7 +68,7 @@ function mcqTable(req, res) {
 const DUEL = duelServer();
 const byToken = t => { const p = Object.values(DUEL.db.players).find(x => x.token === t); if (!p) throw new Error('Sign in again'); return p; };
 /* and the library's (supabase/migrations/0008_library.sql): decks, friends, shares, over the same players */
-const LIB = libraryFake({ byToken, players: () => DUEL.db.players });
+const LIB = libraryFake({ byToken, players: () => DUEL.db.players, state: () => SB });
 function duelRpc(req, res, fn) {
   let body = '';
   req.on('data', c => { body += c; });
@@ -97,7 +98,7 @@ const server = http.createServer((req, res) => {
   for (const [k, v] of Object.entries(prodHeaders(url.pathname))) res.setHeader(k, v);
   if (url.pathname === '/sb/rest/v1/osce_state') return supabase(req, res, url);
   if (url.pathname === '/sb/rest/v1/mcq_submissions') return mcqTable(req, res);
-  const rpc = /^\/sb\/rest\/v1\/rpc\/((?:pup|osce|lib|friend)_[a-z_]+)$/.exec(url.pathname);
+  const rpc = /^\/sb\/rest\/v1\/rpc\/((?:pup|osce|lib|friend|mcq)_[a-z_]+)$/.exec(url.pathname);
   if (rpc) return duelRpc(req, res, rpc[1]);
   const u = decodeURIComponent(url.pathname);
   let f = path.join(ROOT, u.endsWith('/') ? `${u}index.html` : u);
@@ -782,12 +783,14 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
 }
 
 try {
+  if (process.env.ONLY === 'motion') { await motion({ chromium, BASE, SHOTS, ok }); throw Object.assign(new Error('only'), { only: true }); }
   if (process.env.ONLY === 'library') { await library({ chromium, BASE, SHOTS, ok }); throw Object.assign(new Error('only'), { only: true }); }
   await duel();
   await sync();
   await run(393, 852, 'phone');
   await run(320, 640, 'small');
   await run(1280, 860, 'wide');
+  await motion({ chromium, BASE, SHOTS, ok });
   await library({ chromium, BASE, SHOTS, ok });   /* last: its players join the fake backend the duel's leaderboard counts */
 } catch (e) { if (!e.only) { fails.push(`crashed: ${e.message}`); console.error(e); } }
 server.close();

@@ -80,6 +80,8 @@ export async function rename(deck, name) {
 const tok = () => { const a = account(); if (!a) throw new Error('Sign in first, in Settings'); return a.token; };
 export const addFriend = async name => { const r = await rpc('friend_request', { p_token: tok(), p_name: name }); await refresh(); return r; };
 export const answerFriend = async (id, accept) => { const r = await rpc('friend_respond', { p_token: tok(), p_other: id, p_accept: accept }); await refresh(); return r; };
+/* the week among friends (0008_library.sql friend_week): [{ id, name, me, week, days }] */
+export const friendWeek = async () => { const a = account(); return a ? rpc('friend_week', { p_token: a.token }) : []; };
 export const share = async (deck, friend, on) => { const r = await rpc('lib_share', { p_token: tok(), p_deck: deck, p_friend: friend, p_on: on }); await refresh(); return r; };
 
 /* the device's local library goes onto the account the first time it signs in (nothing is lost by signing in) */
