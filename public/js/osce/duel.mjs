@@ -34,7 +34,8 @@ export async function openDuel(opener) {
   const cfg = window.OSCE_CONFIG || {};
   const transport = cfg.supabaseUrl && cfg.supabaseAnonKey ? supabaseTransport({ url: cfg.supabaseUrl, key: cfg.supabaseAnonKey, realtime: cfg.duelRealtime !== false }) : null;
   shell.open(opener);
-  ui = mountDuel(shell.el.firstElementChild, { transport, pack: questions, title: 'Duel a Mate', keys: 'host', storeKey: 'osce.duel', onClose: closeDuel });
+  ui = mountDuel(shell.el.firstElementChild, { transport, pack: questions, title: 'Duel a Mate', keys: 'host', storeKey: 'osce.duel', onClose: closeDuel,
+    signOutNote: 'This also signs you out of Settings on this device: your OSCE progress stops saving to your account here.' });
   shell.el.dataset.ready = '1';
 }
 

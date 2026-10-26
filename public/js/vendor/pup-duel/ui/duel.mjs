@@ -10,6 +10,7 @@
    transport  supabaseTransport(config) | localTransport() | null (practice only)
    pack       a normalised question pack (pack.mjs)
    look       optional: () => the host's own dog and wear (Optimus passes its mascot's), else the duel locker
+   signOutNote  optional: a line under Sign out, when the host shares the sign-in (Med-OS: it signs Settings out too)
    keys       'document' (default) listens for keys itself; 'host' leaves them to the host, which calls ui.key(e) from its
               own key owner (Med-OS's overlay stack captures every key) and gets true back when the duel used it */
 
@@ -119,7 +120,7 @@ function keyed(list, items, keyOf, make) {
   if (next.length !== list.children.length || next.some((n, i) => n !== list.children[i])) list.replaceChildren(...next);
 }
 
-export function mountDuel(root, { transport = null, pack = { questions: [] }, look: hostLook = null, storage = globalThis.localStorage, storeKey = 'pup-duel', practice = true, title = 'Duel', keys = 'document', onClose = () => {}, onResult = () => {} } = {}) {
+export function mountDuel(root, { transport = null, pack = { questions: [] }, look: hostLook = null, storage = globalThis.localStorage, storeKey = 'pup-duel', practice = true, title = 'Duel', keys = 'document', signOutNote = '', onClose = () => {}, onResult = () => {} } = {}) {
   const storeAt = `${storeKey}:${transport?.name || 'none'}`;
   const remembered = () => { try { return JSON.parse(storage.getItem(storeAt)) || null; } catch { return null; } };
   const remember = me => { try { if (me) storage.setItem(storeAt, JSON.stringify(me)); else storage.removeItem(storeAt); } catch { /* private mode */ } };
@@ -381,7 +382,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (from?.isConnected) from.focus({ preventScroll: true });   // back on what opened it
   }
   function openMenu() {
-    sheet(`<button class="pd-btn" type="button" data-pd="signout">Sign out</button>`, el => {
+    sheet(`<button class="pd-btn" type="button" data-pd="signout"${signOutNote ? ' aria-describedby="pd-sonote"' : ''}>Sign out</button>${signOutNote ? '<p class="pd-note pd-sonote" id="pd-sonote"></p>' : ''}`, el => {
+      if (signOutNote) el.querySelector('.pd-sonote').textContent = signOutNote;
       el.querySelector('[data-pd="signout"]').addEventListener('click', () => { remember(null); S.me = null; S.hero = null; showAuth(); });
     }, { label: 'Menu' });
   }
