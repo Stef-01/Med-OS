@@ -26,6 +26,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { writeStation } from './lib/generate.mjs';
 import { writeIndex } from './build-index.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public');
 const IMPORT = path.join(ROOT, 'scripts', 'import'), RAW = path.join(IMPORT, 'amsa-raw'), LEDGER = path.join(IMPORT, 'amsa-ledger.json');
@@ -81,8 +82,8 @@ const writeLedger = l => fs.writeFileSync(LEDGER, `${JSON.stringify(l, null, 1)}
 const setCase = (ledger, id, v) => { const d = readLedger(); d.cases[id] = v; writeLedger(d); ledger.cases = d.cases; };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const ask = process.env.ANTHROPIC_API_KEY ? (await import('./lib/claude.mjs')).claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
-  log(`Claude via ${process.env.ANTHROPIC_API_KEY ? 'the API' : 'the Claude Code CLI (subscription)'}`);
+  const { ask, name } = await claudeAsk();
+  log(`Claude via ${name}`);
   const dir = path.join(PUB, 'osce');
   const bank = () => fs.readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
   const ledger = readLedger();

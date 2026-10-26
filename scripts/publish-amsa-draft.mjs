@@ -17,12 +17,13 @@ import { EXAMINER_SYSTEM, REVIEW_SCHEMA, EXAM_SYSTEM, EXAM_SCHEMA, reviewText } 
 import { shapeProblems, qualityProblems, reviewNotes, bankStats } from './lib/station-gates.mjs';
 import { ddxFor } from './add-ddx.mjs';
 import { writeIndex } from './build-index.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public'), DIR = path.join(PUB, 'osce');
 const LEDGER = path.join(ROOT, 'scripts', 'import', 'amsa-ledger.json');
 const argv = process.argv.slice(2), flag = k => argv.includes(k), id = argv.find(a => /^\d+$/.test(a));
 if (!id) { console.error('usage: node scripts/publish-amsa-draft.mjs <amsa resource id> [--accept] [--dry-run]'); process.exit(2); }
-const ask = process.env.ANTHROPIC_API_KEY ? (await import('./lib/claude.mjs')).claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
+const { ask } = await claudeAsk();
 const F = path.join(ROOT, 'drafts', `amsa-${id}.json`), j = JSON.parse(fs.readFileSync(F, 'utf8'));
 let st = j.station;
 const now = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');

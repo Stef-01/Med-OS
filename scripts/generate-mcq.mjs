@@ -18,6 +18,7 @@ import { writeMcq, FOCUS, FORMS } from './lib/mcq-generate.mjs';
 import { readJsonl, benchmarkItem, readJson } from './lib/mcq-sources.mjs';
 import { stationsOnDisk } from './build-duel-pack.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const GENERATED = path.join(ROOT, 'data', 'mcq', 'generated.json');
@@ -38,15 +39,14 @@ else if (opt('--sample')) jobs = [...stations].sort((a, b) => fnv(`g:${a.id}`).l
 else { console.error('usage: node scripts/generate-mcq.mjs --stations <id,id> | --sample <n> [--focus management|investigation|interpretation|complication] [--form vignette|rapid] [--jobs 3] [--dry-run]'); process.exit(2); }
 if (jobs.some(j => !j.st)) { console.error('no such station'); process.exit(2); }
 jobs = jobs.filter(j => !have.has(`${j.st.id}|${j.focus}|${FORM}`));
-const API = !!process.env.ANTHROPIC_API_KEY;
-const ask = API ? (await import('./lib/claude.mjs')).claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
-console.log(`${jobs.length} ${FORM} questions to write · Claude via ${API ? 'the API' : 'the Claude Code CLI'}`);
+const { ask, how, name } = await claudeAsk();
+console.log(`${jobs.length} ${FORM} questions to write · Claude via ${name}`);
 let kept = 0, failed = 0;
 const save = () => { if (argv.includes('--dry-run')) return; fs.mkdirSync(path.dirname(GENERATED), { recursive: true }); store.items.sort((a, b) => a.id.localeCompare(b.id)); fs.writeFileSync(GENERATED, `${JSON.stringify(store, null, 1)}\n`); };
 const worker = async () => {
   for (let j; (j = jobs.shift());) {
     try {
-      const r = await writeMcq(j.st, j.focus, { bench, ask, how: API ? 'api' : 'cli', log: m => console.log(m), form: FORM });
+      const r = await writeMcq(j.st, j.focus, { bench, ask, how, log: m => console.log(m), form: FORM });
       if (r.ok) { store.items.push(r.item); save(); kept++; console.log(`kept ${r.item.id} · ${j.st.id} · ${j.focus}${r.rounds > 1 ? ' (revised)' : ''}`); }
       else {
         failed++; console.log(`not kept · ${j.st.id} · ${j.focus}: ${r.problems.join('; ')}`);

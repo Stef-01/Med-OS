@@ -16,15 +16,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { CATS, LIMITS, gate } from './lib/mcq.mjs';
+import { CATS, LIMITS, writerChecks } from './lib/mcq.mjs';
 import { YEARS, DIFFICULTY, isYear, isDiff } from '../public/js/mcq/year.mjs';
-import { DISCIPLINES } from '../public/js/study-kit/vocab.mjs';
+import { SPECIALTIES } from '../public/js/study-kit/vocab.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const HY_FILE = path.join(ROOT, 'data', 'mcq', 'high-yield.json');
 const TOPICS_FILE = path.join(ROOT, 'data', 'mcq', 'high-yield-topics.json');
-export const SPECIALTIES = DISCIPLINES.flatMap(d => d[3]);
+export { SPECIALTIES };
 export const readHy = (file = HY_FILE) => { try { const j = JSON.parse(fs.readFileSync(file, 'utf8')); return Array.isArray(j.items) ? j.items : []; } catch { return []; } };
 
 const str = { type: 'string' }, int = (a, b) => ({ type: 'integer', minimum: a, maximum: b });
@@ -56,7 +56,7 @@ export const EXAM_SCHEMA = obj({ answers: { type: 'array', items: obj({ id: str,
 
 /* one written question, checked, as a bank question; null with the reasons when it fails */
 export function hyQuestion(q, spec, topic) {
-  const issues = gate(q);
+  const issues = writerChecks(q);
   if (!isYear(q?.year)) issues.push('no year'); if (!isDiff(q?.difficulty)) issues.push('no difficulty');
   if (!SPECIALTIES.includes(q?.specialty)) issues.push('no specialty');
   if (issues.length) return { q: null, why: issues.join('; ') };

@@ -13,7 +13,7 @@
 import { esc } from '../core.mjs';
 import { lsGet, lsSet } from '../study-kit/store.mjs';
 import { dialogOf } from '../study-kit/ui.mjs';
-import { DISCIPLINES } from '../study-kit/vocab.mjs';
+import { DISCIPLINES, SPECIALTIES } from '../study-kit/vocab.mjs';
 import { cleanItem, itemProblems, userItem, draftsFrom, newUserId, LETTERS, LICENCES, MAX } from '../mcq/schema.mjs';
 import { flawReport } from '../mcq/flaws.mjs';
 import { ctx, I, save, notify, openDialog, closeDialog, nameOf, ago, now } from './state.mjs';
@@ -68,7 +68,7 @@ function listHtml() {
 }
 
 /* ------------------------------------------------------------------ the form */
-const SPECS = DISCIPLINES.flatMap(d => d[3]);
+const SPECS = SPECIALTIES;
 export function mcqForm() {
   const who = ctx.mem.reqWho === 1 ? 1 : 0;
   const chip = (name, value, label, on) => `<label class="os-chip os-reqchip${on ? ' on' : ''}"><input type="radio" name="${name}" value="${esc(value)}"${on ? ' checked' : ''}><span>${esc(label)}</span></label>`;

@@ -29,6 +29,7 @@ import { verdictFor, judgeScore, judgeGates, judgeItem } from './lib/mcq-judge.m
 import { quality, select, DEFAULT_BARS } from './lib/mcq-select.mjs';
 import { benchDir } from './import-benchmarks.mjs';
 import { sample } from './mcq-judge.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2), opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
@@ -121,8 +122,7 @@ const evf = path.join(ROOT, 'data/mcq/eval-verdicts.json'), evv = readJson(evf, 
 if (opt('--wrong-key')) {
   const judgedMedqa = sets['MedQA Step 2&3'].filter(q => verdictFor(verdicts, q) && !judgeGates(verdictFor(verdicts, q), q).length);
   const todo = sample(judgedMedqa, Number(opt('--wrong-key'))).map(wrongKey).filter(q => !verdictFor(evv, q));
-  const ask = process.env.ANTHROPIC_API_KEY ? (await import('./lib/claude.mjs')).claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
-  const via = process.env.ANTHROPIC_API_KEY ? 'via the API' : 'via the Claude Code CLI';
+  const { ask, name } = await claudeAsk(), via = `via ${name}`;
   console.log(`wrong key: judging ${todo.length}`);
   await Promise.all(Array.from({ length: 4 }, async () => { for (let q; (q = todo.shift());) { try { let m = ''; const v = await judgeItem(q, { ask: async a => { const r = await ask(a); m = r.model || m; return r; } }); v.judge = `${m} ${via}`; evv[q.id] = v; fs.writeFileSync(evf, `${JSON.stringify(evv, null, 1)}\n`); console.log(`wrong key ${q.id}: ${judgeGates(v, q).length ? 'refused' : 'passed'}`); } catch (e) { console.error(`fail ${q.id}: ${e.message}`); } } }));
 }

@@ -17,6 +17,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MCQ_SYSTEM, MCQ_SCHEMA, CATS, stationBrief, normalizeMcq, mcqFile } from './lib/mcq.mjs';
 import { stationsOnDisk } from './build-duel-pack.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const MCQ_DIR = path.join(ROOT, 'public', 'duel', 'mcq');
@@ -26,10 +27,6 @@ const fill = process.argv.includes('--fill');
    the station's others */
 const redo = (arg('--redo') || '').split(',').filter(Boolean).map(x => x.split(':'));   /* stations short of a kind: keep what they have, ask for the rest */
 
-async function asker() {
-  if (process.env.ANTHROPIC_API_KEY) { const { claudeJson } = await import('./lib/claude.mjs'); return claudeJson; }
-  const { claudeCliJson } = await import('./lib/claude-cli.mjs'); return claudeCliJson;
-}
 
 export async function writeStationMcq(st, ask, at = new Date().toISOString(), have = []) {
   const content = `The station:\n${stationBrief(st)}`;
@@ -58,7 +55,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       return !fs.existsSync(f);
     }).slice(0, limit);
   console.log(`mcq: ${todo.length} station${todo.length === 1 ? '' : 's'} to write, ${conc} at a time`);
-  const ask = await asker();
+  const { ask } = await claudeAsk();
   let done = 0, short = 0;
   const work = async () => {
     for (let st; (st = todo.shift());) {

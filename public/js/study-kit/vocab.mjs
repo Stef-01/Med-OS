@@ -50,6 +50,8 @@ export const DISCIPLINES = [
   ['gp', 'General Practice & Community', '🩺', ['General Practice', 'Indigenous Health', 'Rural & Remote Medicine', 'Occupational/Environmental Medicine',
     'Public Health', 'Bioethics', 'Professionalism', 'Medicolegal'], 'GP'],
 ];
+/* every specialty, in the table's order: the one list the judge, the writers, the uploads and the gates check against */
+export const SPECIALTIES = Object.freeze(DISCIPLINES.flatMap(d => d[3]));
 const DISC_OF = new Map(DISCIPLINES.flatMap(([id, , , specs]) => specs.map(s => [s, id])));
 export const disciplineOf = name => DISC_OF.get(name) || 'med';
 export const disciplineName = id => (DISCIPLINES.find(d => d[0] === id) || [])[1] || '';

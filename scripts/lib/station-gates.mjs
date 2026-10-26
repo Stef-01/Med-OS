@@ -3,14 +3,14 @@
    itself (bankStats): a new station's checklist sits inside the range the existing stations of its kind cover.
    -> [problems] (empty = passes). Tested in scripts/station-gates.test.js. */
 import { allowlistCheck } from '../../public/js/study-kit/safe.mjs';
-import { DISCIPLINES, specialtyEmoji } from '../../public/js/study-kit/vocab.mjs';
+import { SPECIALTIES, specialtyEmoji } from '../../public/js/study-kit/vocab.mjs';
 import { osceLeaves, CX, KINDS } from '../../public/js/osce/core.mjs';
 import { cleanDemo, cleanObs, chartFor, chartById, zoneOf, escalation } from '../../public/js/osce/obs.mjs';
 import { cleanLabs, labFlagProblems, FLAGS } from '../../public/js/osce/labs.mjs';
 import { requestProblems } from '../imaging/rank.mjs';
 
 export const TYPES = ['History', 'Examination', 'Management', 'Counselling', 'Emergency', 'Ward Call', 'Interpretation', 'Prescribing', 'Procedure'];
-export const KNOWN_SPECIALTIES = new Set(DISCIPLINES.flatMap(d => d[3]));
+export const KNOWN_SPECIALTIES = new Set(SPECIALTIES);
 export const isAcute = st => (st.type || []).some(t => t === 'Emergency' || t === 'Ward Call');
 /* the format: 5 minutes reading, Part 1 history and examination 10, Part 2 interpretation, management and safety netting 5 */
 export const READING_MIN = 5, PART1_MIN = 10, PART2_MIN = 5, STATION_MIN = PART1_MIN + PART2_MIN;

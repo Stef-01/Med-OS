@@ -14,6 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { YEARS, isYear, DIFFICULTY, isDiff } from '../public/js/mcq/year.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const YEARS_FILE = path.join(ROOT, 'data', 'mcq', 'years.json');
@@ -40,9 +41,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const todo = pack.questions.filter(q => !isYear(years[q.id]) || !isDiff(diff[q.id]));
   const size = Math.max(5, +opt('--batch', 40)), batches = [];
   for (let i = 0; i < todo.length; i += size) batches.push(todo.slice(i, i + size));
-  const API = !!process.env.ANTHROPIC_API_KEY;
-  const ask = API ? (await import('./lib/claude.mjs')).claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
-  console.log(`${todo.length} questions to tag in ${batches.length} batches · Claude via ${API ? 'the API' : 'the Claude Code CLI'}`);
+  const { ask, name } = await claudeAsk();
+  console.log(`${todo.length} questions to tag in ${batches.length} batches · Claude via ${name}`);
   const save = () => { fs.mkdirSync(path.dirname(YEARS_FILE), { recursive: true }); fs.writeFileSync(YEARS_FILE, `${JSON.stringify({ note: 'Written by scripts/tag-years.mjs: the year (1 to 4, public/js/mcq/year.mjs) of each duel question, by Claude.', years: Object.fromEntries(Object.entries(years).sort(([a], [b]) => (a < b ? -1 : 1))), difficulty: Object.fromEntries(Object.entries(diff).sort(([a], [b]) => (a < b ? -1 : 1))) }, null, 1)}\n`); };
   let done = 0, failed = 0;
   const worker = async () => {

@@ -10,7 +10,7 @@
    item-writing checks the pool runs, mcq/flaws.mjs). Plain text only. Pure: the view, the tests and nothing else. */
 import { draftsFrom, parseCsv, userItem, cleanItem, itemProblems, newUserId, fnv, contentHash } from '../mcq/schema.mjs';
 import { flawReport } from '../mcq/flaws.mjs';
-import { DISCIPLINES } from '../study-kit/vocab.mjs';
+import { DISCIPLINES, SPECIALTIES } from '../study-kit/vocab.mjs';
 import { yearOf, guessYear, YEARS, diffOf, guessDiff, DIFFICULTY } from '../mcq/year.mjs';
 
 /* the kinds, in the order the drill-down shows them (the duel's pack.json cats use the same ids and labels) */
@@ -21,7 +21,7 @@ export const KINDS = Object.freeze({
   anatomy: { label: 'Anatomy', brief: 'the structure, its supply or innervation, a landmark, where a lesion sits.' }
 });
 export const KIND_IDS = Object.keys(KINDS);
-export const SPECIALTIES = DISCIPLINES.flatMap(d => d[3]);
+export { SPECIALTIES };
 export const LIMITS = Object.freeze({ upload: 500, items: 2000, decks: 50, bytes: 16384, deckName: 40 });
 
 const squash = s => String(s ?? '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '');

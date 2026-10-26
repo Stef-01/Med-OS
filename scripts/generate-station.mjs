@@ -18,7 +18,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { writeStation, reviseStation } from './lib/generate.mjs';
-import { claudeJson } from './lib/claude.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 import { resolveStation } from './imaging/resolve.mjs';
 import { writeIndex } from './build-index.mjs';
 
@@ -36,8 +36,7 @@ const dir = path.join(PUB, 'osce');
 const bank = fs.readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
 const log = m => console.log(m);
 const now = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
-const API = !!process.env.ANTHROPIC_API_KEY;
-const ask = API ? claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
+const { ask, api: API } = await claudeAsk();
 const rounds = Math.max(2, Number(opt('--rounds')) || 2);
 log(`Claude via ${API ? 'the API' : 'the Claude Code CLI (subscription)'} · ${rounds} examiner rounds`);
 

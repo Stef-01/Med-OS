@@ -18,6 +18,7 @@ import { fileURLToPath } from 'node:url';
 import { WRITER_SYSTEM } from './lib/generate.mjs';
 import { askProblems, shapeProblems } from './lib/station-gates.mjs';
 import { writeIndex } from './build-index.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public'), DIR = path.join(PUB, 'osce');
 const argv = process.argv.slice(2);
@@ -40,7 +41,7 @@ export const userPrompt = (st, problems = []) => {
 export const needsRewrite = st => askProblems(st.part2 || {}).length > 0;
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const ask = process.env.ANTHROPIC_API_KEY ? (await import('./lib/claude.mjs')).claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
+  const { ask } = await claudeAsk();
   if (!ASK_RULES) { console.error('could not find the ask rules in WRITER_SYSTEM'); process.exit(2); }
   const only = (opt('--only') || '').split(',').map(s => s.trim()).filter(Boolean);
   const files = fs.readdirSync(DIR).filter(f => f.endsWith('.json') && f !== 'index.json');

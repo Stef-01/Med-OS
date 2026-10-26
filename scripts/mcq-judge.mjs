@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { allCandidates, readJsonl, benchOnlyItem, benchmarkItem } from './lib/mcq-sources.mjs';
 import { judgeItem, verdictFor } from './lib/mcq-judge.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const VERDICTS = path.join(ROOT, 'data', 'mcq', 'verdicts.json');
@@ -36,10 +37,6 @@ export function addVerdict(f, id, v) {
 /* a seeded sample: the n items whose id hashes lowest (stable across runs and machines) */
 export const sample = (items, n) => [...items].sort((a, b) => fnv(`s:${a.id}`).localeCompare(fnv(`s:${b.id}`))).slice(0, n);
 
-async function pickAsk() {
-  if (process.env.ANTHROPIC_API_KEY) { const { claudeJson, MODEL } = await import('./lib/claude.mjs'); return { ask: claudeJson, via: m => `${m || MODEL} via the API` }; }
-  const { claudeCliJson } = await import('./lib/claude-cli.mjs'); return { ask: claudeCliJson, via: m => `${m || 'opus'} via the Claude Code CLI` };
-}
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const argv = process.argv.slice(2), opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; }, flag = k => argv.includes(k);
@@ -67,7 +64,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   if (opt('--limit')) todo = todo.slice(0, Number(opt('--limit')));
   console.log(`${items.length} questions · ${items.length - todo.length} already judged · ${todo.length} to judge -> ${path.relative(ROOT, out) || out}`);
   if (flag('--dry-run') || !todo.length) process.exit(0);
-  const { ask, via } = await pickAsk();
+  const { ask, via } = await claudeAsk();
   const jobs = Math.max(1, Number(opt('--jobs')) || 4);
   let done = 0, failed = 0; const t0 = Date.now();
   const worker = async () => {

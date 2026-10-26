@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { DDX_RULES, DDX_SCHEMA } from './lib/generate.mjs';
 import { ddxProblems } from './lib/station-gates.mjs';
 import { writeIndex } from './build-index.mjs';
+import { claudeAsk } from './lib/ask.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public'), DIR = path.join(PUB, 'osce');
 const argv = process.argv.slice(2);
@@ -48,7 +49,7 @@ export async function ddxFor(st, ask, log = () => {}) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const ask = process.env.ANTHROPIC_API_KEY ? (await import('./lib/claude.mjs')).claudeJson : (await import('./lib/claude-cli.mjs')).claudeCliJson;
+  const { ask } = await claudeAsk();
   const file = opt('--file'), only = (opt('--only') || '').split(',').map(s => s.trim()).filter(Boolean);
   const targets = file
     ? [{ path: path.resolve(file), wrap: true }]

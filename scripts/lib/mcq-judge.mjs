@@ -12,10 +12,10 @@
    judgeScore turns a verdict into 0..100 and judgeGates into hard reasons to refuse; the selector (lib/mcq-select.mjs)
    combines it with the flaw score against the bar calibrated on the benchmarks. */
 import { fullStem, LETTERS, contentHash } from '../../public/js/mcq/schema.mjs';
-import { DISCIPLINES } from '../../public/js/study-kit/vocab.mjs';
+import { SPECIALTIES } from '../../public/js/study-kit/vocab.mjs';
 
 export const JUDGE_VERSION = 'judge-1';
-export const SPECIALTIES = Object.freeze(DISCIPLINES.flatMap(d => d[3]));
+export { SPECIALTIES };
 const str = { type: 'string' }, int = (min, max) => ({ type: 'integer', minimum: min, maximum: max });
 const obj = (props, req = Object.keys(props)) => ({ type: 'object', additionalProperties: false, required: req, properties: props });
 
