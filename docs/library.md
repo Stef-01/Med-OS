@@ -127,3 +127,12 @@ sequenceDiagram
 - **Plain text only.** Every surface renders with textContent or `esc()`; an uploaded question can carry no markup.
 - **Limits.** 2,000 questions and 50 decks an account, 16 KB a question, 500 a single upload; friends only through accepted requests, so nobody sees a deck that was not shared with them.
 - **Phones first.** Every tab works at 320 px with no sideways scroll, in Chromium and WebKit (the e2e runs both).
+
+## 0 to 1: Year 1 to final year
+
+Founder 2026-10-26: "a mode called 0 to 1 ... first year medical content to second year to third year, then final year ... so you can learn from first principles", with the year tagged in the schema.
+
+- **The tag.** Every question carries `year`, 1 to 4 (`public/js/mcq/year.mjs`): 1 first principles (normal structure and function), 2 how it goes wrong (pathology, mechanisms, how drugs work), 3 clinical years (diagnosis, the right test), 4 final year (management, doses, the unwell patient). It is judged by what the question asks, not where the vignette is set.
+- **Who sets it.** ChatGPT, through the prompt; for the bank, `scripts/tag-years.mjs` (Claude, kept in `data/mcq/years.json`, merged by `build-duel-pack.mjs`); otherwise `guessYear()`, and an upload says so as a tip.
+- **Study.** The bank is a deck you can study too. There are Year chips, and Order is Due first or 0 to 1: five not-yet-learnt cards from each year, Year 1 first, with a banner at each new year.
+- **Duel.** Order is Shuffled or 0 to 1 (Pup Duel `makeSetup({ ladder })`). It deals round the years and plays them in year order, and the question's tag shows its year.
