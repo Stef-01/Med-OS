@@ -30,7 +30,8 @@ export async function writeStationMcq(st, ask, at = new Date().toISOString()) {
   const content = `The station:\n${stationBrief(st)}`;
   let best = { kept: [], failed: [] };
   for (let tryN = 0; tryN < 2 && best.kept.length < CATS.length; tryN++) {
-    const draft = await ask({ system: MCQ_SYSTEM, content, schema: MCQ_SCHEMA, effort: 'high', label: `mcq ${st.id}` });
+    const raw = await ask({ system: MCQ_SYSTEM, content, schema: MCQ_SCHEMA, effort: 'high', label: `mcq ${st.id}` });
+    const draft = raw && !raw.questions && raw.value ? raw.value : raw;   /* the CLI wraps the structured output as { value } */
     const r = normalizeMcq(st, draft);
     /* keep, per category, a question that passed, from either answer */
     const by = new Map(best.kept.map(q => [q.cat, q]));
