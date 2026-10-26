@@ -16,6 +16,7 @@ export function duelQuestion(it, from) {
   if (it.topic) { q.topic = it.topic; q.topics = [it.topic]; }
   if (it.cat) q.cat = it.cat;
   if (it.year) q.year = it.year;
+  if (it.difficulty) q.difficulty = it.difficulty;
   return q;
 }
 

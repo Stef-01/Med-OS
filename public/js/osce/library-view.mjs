@@ -16,15 +16,16 @@ import { dialogOf } from '../study-kit/ui.mjs';
 import { ctx, I, notify, openDialog, confirmDlg, now } from './state.mjs';
 import { account } from '../study-kit/sync.mjs';
 import { chatPrompt } from '../library/prompt.mjs';
-import { checkUpload, deckName, layers, layerLabel, yearLabel, inPick, KINDS, KIND_IDS, LIMITS } from '../library/item.mjs';
-import { YEARS, YEAR_IDS, ladder } from '../mcq/year.mjs';
+import { checkUpload, deckName, layers, layerLabel, yearLabel, diffLabel, inPick, KINDS, KIND_IDS, LIMITS } from '../library/item.mjs';
+import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
+import { record, summary, wrapped, monthOf, monthName } from '../library/stats.mjs';
 import { grade, queue, counts, preview, GRADES } from '../library/sched.mjs';
 import * as api from '../library/api.mjs';
 
 const TABS = [['library', 'Library'], ['upload', 'Upload'], ['friends', 'Friends'], ['study', 'Study']];
 const LET = 'ABCDE', GLABEL = { again: 'Again', hard: 'Hard', good: 'Good', easy: 'Easy' };
 const SEV = { block: ['Must fix', 'danger'], major: ['Fix', 'warn'], minor: ['Tip', 'tip'] };
-const V = { tab: 'library', lib: null, up: { text: '', res: null, deck: '' }, st: { deck: '', topic: '', cat: '', year: 0, order: 'due', q: null, i: 0, pick: null, n: 0 }, bank: null, share: '', busy: false, msg: '' };
+const V = { tab: 'library', lib: null, up: { text: '', res: null, deck: '' }, st: { deck: '', topic: '', cat: '', year: 0, diff: 0, order: 'due', view: '', q: null, i: 0, pick: null, n: 0 }, bank: null, share: '', busy: false, msg: '' };
 const day = () => new Date(now()).toISOString().slice(0, 10);
 
 /* the start view's card */
@@ -191,7 +192,7 @@ async function loadBank() {
   if (V.bank) return V.bank;
   try {
     const r = await fetch('./duel/pack.json', { cache: 'no-cache' }); if (!r.ok) throw new Error();
-    V.bank = (await r.json()).questions.map(q => ({ item: { id: q.id, stem: q.stem, options: q.options, answer: q.answer, explanation: q.why || '', why: Array.isArray(q.notes) ? q.notes : [], topic: q.topic || '', cat: q.cat || '', year: q.year || 0 }, deck: BANK, deckName: 'The bank', owner: '', ownerName: '', key: `b:${q.id}` }));
+    V.bank = (await r.json()).questions.map(q => ({ item: { id: q.id, stem: q.stem, options: q.options, answer: q.answer, explanation: q.why || '', why: Array.isArray(q.notes) ? q.notes : [], topic: q.topic || '', cat: q.cat || '', year: q.year || 0, difficulty: q.difficulty || 0 }, deck: BANK, deckName: 'The bank', owner: '', ownerName: '', key: `b:${q.id}` }));
   } catch { V.bank = []; }
   return V.bank;
 }
@@ -201,34 +202,64 @@ function studyPool() {
   const all = api.allItems(V.lib);
   return d ? all.filter(x => x.deck === d) : all;
 }
-const inStudyPick = x => inPick(x.item, V.st) && (!V.st.year || x.item.year === V.st.year);
+const inStudyPick = x => inPick(x.item, V.st) && (!V.st.year || x.item.year === V.st.year) && (!V.st.diff || x.item.difficulty === V.st.diff);
 function studyHtml() {
   if (V.st.q) return cardHtml();
+  if (V.st.view === 'summary') return summaryHtml();
   const all = api.allItems(V.lib);
   if (!all.length && V.st.deck !== BANK) V.st.deck = BANK;   /* nothing of yours yet: the bank */
   if (V.st.deck === BANK && !V.bank) { loadBank().then(() => { if (V.tab === 'study' && !V.st.q) paint(); }); return '<p class="os-libmeta">Loading the bank…</p>'; }
   const pool = studyPool(), cards = api.studyMem().card, t = now(), L = layers(pool.map(x => x.item));
   const pick = pool.filter(inStudyPick), c = counts(pick.map(x => ({ id: x.key })), cards, t), q = V.st.order === 'ladder' ? climbQueue(pick) : sessionQueue(pick);
-  const inTK = pool.filter(x => inPick(x.item, V.st)), yN = y => inTK.filter(x => x.item.year === y).length;
+  const inTK = pool.filter(x => inPick(x.item, V.st)), yN = y => inTK.filter(x => x.item.year === y && (!V.st.diff || x.item.difficulty === V.st.diff)).length;
+  const inTKY = inTK.filter(x => !V.st.year || x.item.year === V.st.year), dN = d => inTKY.filter(x => x.item.difficulty === d).length;
   const chip = (k, v, label, n, on) => `<button class="os-chip${on ? ' on' : ''}" data-lib="pick" data-k="${k}" data-v="${esc(v)}" aria-pressed="${on}"${n === 0 ? ' disabled' : ''}>${esc(label)}<span class="os-libn2">${n}</span></button>`;
   const topic = L.find(x => x.topic === V.st.topic);
   const decks = [...V.lib.decks.map(d => [d.id, d.name]), ...V.lib.shared.map(d => [d.id, `${d.name} (${d.owner_name})`]), [BANK, `The bank${V.bank ? ` (${V.bank.length})` : ''}`]];
   const order = (v, label) => `<button role="radio" data-lib="order" data-v="${v}" aria-checked="${V.st.order === v}">${label}</button>`;
-  return `<label class="os-setf"><span>Deck</span><select name="sdeck">${all.length ? `<option value="">Every deck of yours (${all.length})</option>` : ''}${decks.map(([id, n]) => `<option value="${esc(id)}"${id === V.st.deck ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></label>
+  return `${gapsCardHtml()}<label class="os-setf"><span>Deck</span><select name="sdeck">${all.length ? `<option value="">Every deck of yours (${all.length})</option>` : ''}${decks.map(([id, n]) => `<option value="${esc(id)}"${id === V.st.deck ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></label>
     <div class="os-liborder"><div class="os-seg" role="radiogroup" aria-label="Order">${order('due', 'Due first')}${order('ladder', '0 to 1')}</div>
       <p class="os-libmeta">${V.st.order === 'ladder' ? 'Year 1 first principles, then each year up to final year: learn it from the ground up.' : 'Cards due today, then new ones, as spaced repetition says.'}</p></div>
     <p class="os-libh2">Specialty</p><div class="os-libchips">${chip('topic', '', 'All', pool.length, !V.st.topic)}${L.map(x => chip('topic', x.topic, x.topic, x.count, V.st.topic === x.topic)).join('')}</div>
     <p class="os-libh2">Kind</p><div class="os-libchips">${chip('cat', '', 'All', topic ? topic.count : pool.length, !V.st.cat)}${KIND_IDS.map(k => chip('cat', k, KINDS[k].label, topic ? topic.cats.find(x => x.id === k).count : pool.filter(x => x.item.cat === k).length, V.st.cat === k)).join('')}</div>
     <p class="os-libh2">Year</p><div class="os-libchips">${chip('year', '', 'All', inTK.length, !V.st.year)}${YEAR_IDS.map(y => chip('year', String(y), YEARS[y].label, yN(y), V.st.year === y)).join('')}</div>
+    <p class="os-libh2">Difficulty</p><div class="os-libchips">${chip('diff', '', 'All', inTKY.length, !V.st.diff)}${DIFF_IDS.map(d => chip('diff', String(d), DIFFICULTY[d].label, dN(d), V.st.diff === d)).join('')}</div>
     <p class="os-libstat"><span><b>${c.due}</b> due</span><span><b>${c.new}</b> new</span><span><b>${c.learnt}</b> learnt</span></p>
     <button class="os-btn os-btn--lg os-primary os-libgo" data-lib="start"${q.length ? '' : ' disabled'}>${q.length ? `Study ${plural(q.length, 'card')}` : 'Nothing due: come back later'}</button>
     ${!q.length && pick.length ? `<button class="os-link" data-lib="cram">Go over them anyway</button>` : ''}`;
 }
+/* ---------------------------------------------------------------- your gaps (stats.mjs) */
+const everything = () => [...api.allItems(V.lib), ...(V.bank || [])];
+function gapsCardHtml() {
+  const s = summary(everything(), api.studyMem().card);
+  if (!s.total.n) return '';
+  const g = s.gaps[0];
+  return `<button class="os-libgaps" data-lib="summary"><span class="os-libgaps-tx"><small>Your summary</small><b>${g ? `Gap: ${esc(g.label)} · ${g.acc}%` : `${s.total.acc}% right over ${plural(s.total.n, 'answer')}`}</b></span><span class="os-chev" aria-hidden="true">${I.chevR}</span></button>`;
+}
+const bar = (label, x, sub = '') => `<li class="os-libbarrow"><span class="os-libbarl">${esc(label)}${sub ? `<small>${esc(sub)}</small>` : ''}</span><span class="os-libbart" aria-hidden="true"><i style="transform:scaleX(${x.n ? (x.acc / 100).toFixed(3) : 0})" class="${x.acc < 60 ? 'lo' : x.acc < 80 ? 'mid' : 'hi'}"></i></span><span class="os-libbarn">${x.n ? `${x.acc}%` : '–'}</span></li>`;
+function summaryHtml() {
+  const mem = api.studyMem(), s = summary(everything(), mem.card), t = now(), cur = monthOf(t);
+  const months = [...new Set(Object.keys(mem.days || {}).map(d => d.slice(0, 7)))].sort().reverse().filter(m => wrapped(mem, m));
+  const head = `<div class="os-libsumhead"><button class="os-link" data-lib="sumback">${I.back || '‹'}<span>Study</span></button><h3>Your summary</h3></div>`;
+  if (!s.total.n) return `${head}<div class="os-libempty">${icon('reportAnalytics')}<p><strong>No answers yet</strong><br>Study a few cards and this shows where you are strong and where your gaps are.</p></div>`;
+  const row = x => `<li class="os-libgap"><div><b>${esc(x.label)}</b><small>${x.acc}% right · ${plural(x.n, 'answer')}</small></div><button class="os-btn" data-lib="gap" data-v="${esc(x.id.includes('|') ? x.id : `${x.id}|`)}">Study this</button></li>`;
+  return `${head}
+    <div class="os-libbig"><div><b>${s.total.acc}%</b><small>right</small></div><div><b>${s.total.n}</b><small>answers</small></div><div><b>${s.total.seen}</b><small>of ${s.total.items} questions seen</small></div></div>
+    ${months.length ? `<div class="os-libwraps">${months.slice(0, 3).map(m => `<button class="os-libwrapbtn" data-lib="wrapped" data-m="${m}"${m === cur ? ' data-preview="1"' : ''}>${icon('star')}<span>${esc(monthName(m))}${m === cur ? ' so far' : ''}, wrapped</span></button>`).join('')}</div>` : ''}
+    <h3 class="os-libh">Your gaps</h3>
+    ${s.gaps.length ? `<ul class="os-libgapl" role="list">${s.gaps.map(row).join('')}</ul>` : (s.total.acc < 70 ? `<p class="os-libmeta">Not enough answers in one place to name a gap yet: three in a specialty does it.</p>` : `<p class="os-libmeta">No gaps: nothing under 70% with three or more answers. Keep going.</p>`)}
+    ${s.untouched.length ? `<h3 class="os-libh">Not started</h3><ul class="os-libgapl" role="list">${s.untouched.map(x => `<li class="os-libgap"><div><b>${esc(x.label)}</b><small>${plural(x.items, 'question')} waiting</small></div><button class="os-btn" data-lib="gap" data-v="${esc(x.id)}|">Start</button></li>`).join('')}</ul>` : ''}
+    ${s.strong.length ? `<h3 class="os-libh">Strongest</h3><ul class="os-libgapl os-libstrong" role="list">${s.strong.map(x => `<li class="os-libgap"><div><b>${esc(x.label)}</b><small>${x.acc}% right · ${plural(x.n, 'answer')}</small></div></li>`).join('')}</ul>` : ''}
+    <h3 class="os-libh">By year</h3><ul class="os-libbars" role="list">${s.years.map(x => bar(x.label, x, YEARS[x.id]?.name || '')).join('')}</ul>
+    ${s.diffs.length ? `<h3 class="os-libh">By difficulty</h3><ul class="os-libbars" role="list">${s.diffs.map(x => bar(x.label, x)).join('')}</ul>` : ''}
+    <h3 class="os-libh">By specialty</h3><ul class="os-libbars" role="list">${s.spec.filter(x => x.n).sort((a, b) => a.acc - b.acc).map(x => bar(x.label, x, plural(x.n, 'answer'))).join('')}</ul>`;
+}
+
 /* 0 to 1: what is not learnt yet (due or new), five from each year, Year 1 first; then, when that is all learnt, the
    learnt ones in the same climb */
 const climbQueue = pick => {
   const cards = api.studyMem().card, t = now(), open = pick.filter(x => { const c = cards[x.key]; return !c || c.due <= t; });
-  return ladder(open.length ? open : pick, x => x.item.year, 5);
+  return ladder(open.length ? open : pick, x => x.item.year, 5, x => x.item.difficulty);
 };
 const sessionQueue = pick => {
   const m = api.studyMem(), started = m.day.d === day() ? m.day.n | 0 : 0;
@@ -247,7 +278,7 @@ function cardHtml() {
   if (!x) return `<div class="os-libempty os-libdone">${I.check}<p><strong>Done for now</strong><br>${plural(V.st.n, 'card')} studied. Due cards come back when they are due.</p><button class="os-btn os-btn--lg os-primary" data-lib="endstudy">Back to Study</button></div>`;
   const it = x.item, picked = V.st.pick, shown = picked != null, card = api.studyMem().card[x.key], t = now();
   return `<div class="os-libcard">
-    <div class="os-libprog"><span>${V.st.i + 1} of ${V.st.q.length}</span><span class="os-liblayer">${it.year ? `${esc(yearLabel(it))} · ` : ''}${esc(layerLabel(it))}${x.ownerName ? ` · from ${esc(x.ownerName)}` : ''}</span><button class="os-link" data-lib="endstudy">End</button></div>
+    <div class="os-libprog"><span>${V.st.i + 1} of ${V.st.q.length}</span><span class="os-liblayer">${it.year ? `${esc(yearLabel(it))} · ` : ''}${it.difficulty ? `${esc(diffLabel(it))} · ` : ''}${esc(layerLabel(it))}${x.ownerName ? ` · from ${esc(x.ownerName)}` : ''}</span><button class="os-link" data-lib="endstudy">End</button></div>
     ${V.st.order === 'ladder' && it.year && it.year !== V.st.q[V.st.i - 1]?.item.year ? `<p class="os-libyear"><b>${esc(YEARS[it.year].label)}</b> ${esc(YEARS[it.year].name)}</p>` : ''}
     <div class="os-libbar" aria-hidden="true"><i style="transform:scaleX(${(V.st.i / V.st.q.length).toFixed(3)})"></i></div>
     <p class="os-libstem">${esc(it.stem)}</p>${it.ask ? `<p class="os-libask">${esc(it.ask)}</p>` : ''}
@@ -261,7 +292,10 @@ function cardHtml() {
 }
 function answer(i) {
   if (V.st.pick != null) return;
-  V.st.pick = i; paint();
+  V.st.pick = i;
+  const x = V.st.q[V.st.i], m = api.studyMem();   /* every answer counts towards your gaps and the month's Wrapped (stats.mjs) */
+  if (x) { record(m, x, i === x.item.answer, now()); api.saveStudy(m); }
+  paint();
   panel()?.querySelector(`[data-lib="grade"].os-primary`)?.focus({ preventScroll: true });
 }
 function rate(g) {
@@ -323,8 +357,19 @@ async function act(a, b, e) {
       try { await api.answerFriend(b.dataset.id, false); V.lib = api.current(); } catch (err) { notify(err.message, 'danger'); }
       return paint();
     }
-    case 'pick': { V.st[b.dataset.k] = b.dataset.k === 'year' ? +b.dataset.v || 0 : b.dataset.v; if (b.dataset.k === 'topic') V.st.cat = ''; return paint(); }
+    case 'pick': { V.st[b.dataset.k] = b.dataset.k === 'year' || b.dataset.k === 'diff' ? +b.dataset.v || 0 : b.dataset.v; if (b.dataset.k === 'topic') V.st.cat = ''; return paint(); }
     case 'order': V.st.order = b.dataset.v === 'ladder' ? 'ladder' : 'due'; return paint();
+    case 'summary': V.st.view = 'summary'; if (!V.bank) await loadBank(); paint(); return panel()?.focus({ preventScroll: true });
+    case 'sumback': V.st.view = ''; return paint();
+    case 'gap': {   /* Study this: the gap's specialty and kind, in your own questions when they have it, else the bank */
+      const [topic, cat] = String(b.dataset.v).split('|'), match = x => x.item.topic === topic && (!cat || x.item.cat === cat);
+      Object.assign(V.st, { view: '', topic: topic || '', cat: cat || '', year: 0, diff: 0, deck: api.allItems(V.lib).some(match) ? '' : BANK });
+      if (V.st.deck === BANK && !V.bank) await loadBank();
+      start(false); if (!V.st.q) start(true);   /* nothing due there: go over it anyway */
+      if (!V.st.q) paint();
+      return;
+    }
+    case 'wrapped': return (await import('./wrapped-view.mjs')).openWrapped(b.dataset.m, { preview: b.dataset.preview === '1' });
     case 'start': return start(false);
     case 'cram': return start(true);
     case 'opt': return answer(+b.dataset.i);

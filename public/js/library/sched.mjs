@@ -8,7 +8,8 @@ export const START_EASE = 2.5, MIN_EASE = 1.3, NEW_A_DAY = 20, DAY = 864e5;
 const MIN = 6e4;
 
 export const newCard = () => ({ due: 0, ivl: 0, ease: START_EASE, reps: 0, lapses: 0 });
-const ok = c => (c && typeof c === 'object' && Number.isFinite(c.due) ? { ...newCard(), ...c } : null);
+/* a card as stored, or null; other fields on it (stats.mjs's r and w) are kept through every grade */
+const ok = c => (c && typeof c === 'object' && !Array.isArray(c) ? { ...newCard(), ...c, due: Number.isFinite(c.due) ? c.due : 0 } : null);
 
 /* the card after a grade, at `now` */
 export function grade(card, g, now) {

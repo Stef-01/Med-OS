@@ -1,6 +1,6 @@
 /* mcq/schema.mjs - one single-best-answer question, the shape every writer of the MCQ pool uses (docs/mcq.md).
 
-     { id, stem, ask?, options[4..5], answer (0-based), explanation, why[one per option, or null], topic, tags[], year? (1-4, mcq/year.mjs),
+     { id, stem, ask?, options[4..5], answer (0-based), explanation, why[one per option, or null], topic, tags[], year? (1-4), difficulty? (1-3; mcq/year.mjs),
        provenance: { kind, source: { name, url, licence, retrieved }, author?, submittedBy?, createdAt,
                      generator?: { how, version, basis[], exemplars[]?, model? } },
        eval?: { ... the selector's record: flaws, scores, verdict, reasons, evaluatedAt, evalVersion } }
@@ -13,7 +13,7 @@
    The reviewer's suggestion for a question is kept beside it, in its verdict (data/mcq/verdicts.json, rubric.suggestion),
    and never applied to it: a user's question stays exactly the user's. Plain text throughout: every surface renders with textContent or esc(), so a question can carry no markup.
    Pure: the app's submit form, the scripts and the tests share it. */
-import { isYear } from './year.mjs';
+import { isYear, isDiff } from './year.mjs';
 
 export const KINDS = Object.freeze({ user: 'User', ai: 'AI', amsa: 'AMSA', 'usmle-resource': 'USMLE resource' });
 export const KIND_NOTE = Object.freeze({
@@ -55,6 +55,7 @@ export function cleanItem(q) {
   out.topic = line(q.topic, MAX.topic);
   out.tags = [...new Set((Array.isArray(q.tags) ? q.tags : []).map(tagOf).filter(Boolean))].slice(0, MAX.tags);
   if (isYear(q.year)) out.year = q.year;
+  if (isDiff(q.difficulty)) out.difficulty = q.difficulty;
   out.provenance = cleanProvenance(q.provenance);
   if (q.eval && typeof q.eval === 'object' && !Array.isArray(q.eval)) out.eval = q.eval;
   return itemProblems(out).length ? null : out;
@@ -89,6 +90,7 @@ export function itemProblems(q) {
   if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer >= n) p.push('answer: mark one option as the key');
   if (q.why && (!Array.isArray(q.why) || q.why.length !== n)) p.push('why: one entry per option');
   if (q.year != null && !isYear(q.year)) p.push('year: 1, 2, 3 or 4');
+  if (q.difficulty != null && !isDiff(q.difficulty)) p.push('difficulty: 1, 2 or 3');
   const pv = q.provenance || {};
   if (!Object.hasOwn(KINDS, pv.kind)) p.push(`provenance.kind: one of ${Object.keys(KINDS).join(', ')}`);
   if (!pv.source || !String(pv.source.name || '').trim()) p.push('provenance.source.name: where the question came from');

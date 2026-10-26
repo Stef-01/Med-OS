@@ -11,7 +11,7 @@
 import { draftsFrom, parseCsv, userItem, cleanItem, itemProblems, newUserId, fnv, contentHash } from '../mcq/schema.mjs';
 import { flawReport } from '../mcq/flaws.mjs';
 import { DISCIPLINES } from '../study-kit/vocab.mjs';
-import { yearOf, guessYear, YEARS } from '../mcq/year.mjs';
+import { yearOf, guessYear, YEARS, diffOf, guessDiff, DIFFICULTY } from '../mcq/year.mjs';
 
 /* the kinds, in the order the drill-down shows them (the duel's pack.json cats use the same ids and labels) */
 export const KINDS = Object.freeze({
@@ -43,12 +43,12 @@ function layersOf(text) {
   let j; try { j = JSON.parse(stripFence(s)); } catch { j = undefined; }
   if (j !== undefined) {
     const list = Array.isArray(j) ? j : Array.isArray(j?.questions) ? j.questions : Array.isArray(j?.items) ? j.items.map(x => x?.item || x) : [j];
-    return list.filter(x => x && typeof x === 'object').map(x => ({ specialty: String(x.specialty ?? x.topic ?? ''), kind: String(x.kind ?? x.cat ?? x.category ?? ''), year: x.year ?? x.level ?? '' }));
+    return list.filter(x => x && typeof x === 'object').map(x => ({ specialty: String(x.specialty ?? x.topic ?? ''), kind: String(x.kind ?? x.cat ?? x.category ?? ''), year: x.year ?? x.level ?? '', difficulty: x.difficulty ?? x.diff ?? '' }));
   }
   const rows = parseCsv(s); if (rows.length < 2) return [];
   const head = rows[0].map(h => h.trim().toLowerCase().replace(/[^a-z0-9]/g, ''));
-  const sp = head.findIndex(h => ['specialty', 'topic'].includes(h)), kd = head.findIndex(h => ['kind', 'cat', 'category'].includes(h)), yr = head.findIndex(h => ['year', 'level'].includes(h));
-  return rows.slice(1).map(r => ({ specialty: sp >= 0 ? String(r[sp] ?? '') : '', kind: kd >= 0 ? String(r[kd] ?? '') : '', year: yr >= 0 ? String(r[yr] ?? '') : '' }));
+  const sp = head.findIndex(h => ['specialty', 'topic'].includes(h)), kd = head.findIndex(h => ['kind', 'cat', 'category'].includes(h)), yr = head.findIndex(h => ['year', 'level'].includes(h)), df = head.findIndex(h => ['difficulty', 'diff'].includes(h));
+  return rows.slice(1).map(r => ({ specialty: sp >= 0 ? String(r[sp] ?? '') : '', kind: kd >= 0 ? String(r[kd] ?? '') : '', year: yr >= 0 ? String(r[yr] ?? '') : '', difficulty: df >= 0 ? String(r[df] ?? '') : '' }));
 }
 /* ChatGPT often wraps its answer in a ```json fence, or says a line first: keep the JSON */
 export function stripFence(s) {
@@ -61,7 +61,7 @@ export function stripFence(s) {
 /* drafts from an upload: the pool's draft fields plus topic (the specialty as written) and kind (as written) */
 export function readUpload(text) {
   const clean = stripFence(text), drafts = draftsFrom(clean), layers = layersOf(clean);
-  return drafts.map((d, i) => ({ ...d, topic: layers[i]?.specialty || d.topic, kind: layers[i]?.kind || '', year: layers[i]?.year ?? '' }));
+  return drafts.map((d, i) => ({ ...d, topic: layers[i]?.specialty || d.topic, kind: layers[i]?.kind || '', year: layers[i]?.year ?? '', difficulty: layers[i]?.difficulty ?? '' }));
 }
 
 /* one draft as a library item, and every reason it cannot be saved yet (worst first); a question with only "Fix" or
@@ -77,10 +77,12 @@ export function check(draft, { by, now, id } = {}) {
   /* the year (mcq/year.mjs): as given, else a guess from the kind and the lead-in, said as a tip */
   let year = yearOf(draft.year);
   if (!year) { year = guessYear({ ...base, cat }); if (!out.some(x => x.severity === 'block')) out.push({ check: 'year', severity: 'minor', reason: `year: ${String(draft.year ?? '').trim() ? `"${String(draft.year).slice(0, 20)}" is not 1 to 4` : 'not given'}, so ${YEARS[year].label} (${YEARS[year].name}) is guessed` }); }
+  let difficulty = diffOf(draft.difficulty);
+  if (!difficulty) { difficulty = guessDiff(base); if (!out.some(x => x.severity === 'block')) out.push({ check: 'difficulty', severity: 'minor', reason: `difficulty: not given, so ${DIFFICULTY[difficulty].label} is guessed` }); }
   out.sort((a, b) => SEV_ORDER[a.severity] - SEV_ORDER[b.severity]);
   const item = out.some(x => x.severity === 'block') ? null : cleanItem(base);
   if (item && JSON.stringify(item).length > LIMITS.bytes) return { item: null, problems: [{ check: 'size', severity: 'block', reason: 'too long: keep a question under 16 KB' }, ...out] };
-  return { item: item ? { ...item, year, cat } : null, problems: out };
+  return { item: item ? { ...item, year, difficulty, cat } : null, problems: out };
 }
 
 /* a whole upload: { ready: [item], rows: [{ n, stem, item, problems }] }; a question already in `have` (the same
@@ -101,6 +103,7 @@ export const deckName = s => String(s ?? '').replace(/\s+/g, ' ').trim().slice(0
 /* "Paediatrics › Clinical", and with the year "Year 2 · Paediatrics › Clinical" */
 export const layerLabel = it => `${it.topic || 'No specialty'}${it.cat ? ` › ${KINDS[it.cat]?.label || it.cat}` : ''}`;
 export const yearLabel = it => (YEARS[it?.year] ? YEARS[it.year].label : '');
+export const diffLabel = it => (DIFFICULTY[it?.difficulty] ? DIFFICULTY[it.difficulty].label : '');
 
 /* the drill-down over a set of items: [{ topic, count, cats: [{ id, label, count }] }], biggest topic first */
 export function layers(items) {
