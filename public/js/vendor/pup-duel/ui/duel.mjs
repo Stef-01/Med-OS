@@ -15,7 +15,7 @@
    keys       'document' (default) listens for keys itself; 'host' leaves them to the host, which calls ui.key(e) from its
               own key owner (Med-OS's overlay stack captures every key) and gets true back when the duel used it */
 
-import { RULES, EMOTES, makeSetup, outcome } from '../duel/core.mjs';
+import { RULES, EMOTES, makeSetup, outcome, secsOf } from '../duel/core.mjs';
 import { createSession } from '../duel/session.mjs';
 import { createLobby, settleCrossed, offerFrom, rematchTarget } from '../duel/lobby.mjs';
 import { practiceWorld, BOT } from '../duel/bot.mjs';
@@ -45,7 +45,8 @@ const BETA = '<span class="pd-beta">Beta</span>';
 /* a look as this build can draw it: its dog, coat and collar known, its pieces in the wardrobe */
 const lookOf = l => normLook(l, id => !!itemOf(id));
 const ib = (pd, name, label, cls = '') => `<button class="pd-ib${cls ? ' ' + cls : ''}" type="button" data-pd="${pd}" aria-label="${esc(label)}" title="${esc(label)}">${icon(name)}</button>`;
-const setupLine = s => `${s?.rounds || '?'} questions, ${s?.secs || '?'} seconds each${s?.topic ? `, ${s.topic}` : ''}${s?.catLabel ? `, ${s.catLabel}` : ''}`;
+const reads = s => (s?.questions || []).some(q => Number.isInteger(q?.secs));   /* reading time on (core.mjs readSecs) */
+const setupLine = s => `${s?.rounds || '?'} questions, ${s?.secs || '?'} seconds each${reads(s) ? ' plus reading time' : ''}${s?.topic ? `, ${s.topic}` : ''}${s?.catLabel ? `, ${s.catLabel}` : ''}`;
 const breedOf = id => DOGS.find(d => d.id === id) || DOGS.find(d => d.id === DEFAULT_DOG);
 
 function loadCss() {
@@ -110,7 +111,7 @@ function bits(s) {
   el.className = 'pd-bits';
   el.innerHTML = `<span aria-hidden="true">${icon('q')}<b></b>${icon('timer')}<b></b></span><span class="pd-vh"></span>`;
   const [r, t] = el.querySelectorAll('b');
-  r.textContent = s?.rounds ?? '?'; t.textContent = `${s?.secs ?? '?'}s`;
+  r.textContent = s?.rounds ?? '?'; t.textContent = `${s?.secs ?? '?'}s${reads(s) ? '+' : ''}`;
   el.querySelector('.pd-vh').textContent = setupLine(s);
   return el;
 }
@@ -414,7 +415,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         <h2 class="pd-sheet-title"></h2>
         ${layered ? `<button class="pd-pickrow" type="button" data-pd="choose"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><span class="pd-pick-tx"><small>Questions from</small><b></b></span><span class="pd-pick-n"></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
         ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
-        ${seg('secs', 'timer', 'Seconds each', RULES.secsChoices, opt.secs, v => `${v}s`)}
+        ${seg('secs', 'timer', 'Seconds to answer', RULES.secsChoices, opt.secs, v => `${v}s`)}
+        <p class="pd-note pd-readnote">Each question adds time to read it: a long case gets longer.</p>
         <p class="pd-note" data-pd="fewer" hidden></p>
         <p class="pd-err" role="alert"></p>
         <button class="pd-btn pd-pri" type="button" data-pd="send">${icon(isPractice ? 'bot' : 'zap')}${isPractice ? 'Practice' : 'Duel'}</button>
@@ -646,7 +648,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const step = () => {
       if (S.screen !== 'match' || !S.session) return;
       const v = S.session.view(); S.view = v;
-      const bar = shell.querySelector('.pd-timer i'), s = v.stage, secs = v.state.setup.secs * 1000;
+      const bar = shell.querySelector('.pd-timer i'), s = v.stage, secs = secsOf(v.state.setup, s.round) * 1000;
       if (bar) {
         const live = s.name === 'question' || s.name === 'locked';
         bar.parentElement.classList.toggle('pd-on', live);
@@ -671,7 +673,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   function paintMatch() {
     const v = S.view, M = S.match;
     if (S.screen !== 'match' || !v || !M) return;
-    const st = v.state, s = v.stage, me = v.me, opp = v.opp, q = v.question, secs = st.setup.secs;
+    const st = v.state, s = v.stage, me = v.me, opp = v.opp, q = v.question, secs = secsOf(st.setup, s.round);
     /* the header: a dot per round, filled as they close */
     const dots = shell.querySelector('.pd-dots');
     if (dots.childElementCount !== st.rounds.length) dots.replaceChildren(...st.rounds.map(() => document.createElement('i')));

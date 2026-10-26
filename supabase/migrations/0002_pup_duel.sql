@@ -206,17 +206,18 @@ end $$;
 -- both and compares). The phones fold the same rows the same way; this is the copy the record is kept from.
 create or replace function public.pup_outcome(p_duel uuid) returns jsonb
 language plpgsql stable security definer set search_path = public, extensions as $$
+-- each round is scored against its question's own secs (reading time, founder 2026-10-25), else the setup's
 -- (the column "by" is quoted: PL/pgSQL reads a bare by as its own keyword)
 declare
   d public.pup_duels; e public.pup_events; qs jsonb; q jsonb; body jsonb;
-  nq int; t int; phase text := 'invited'; rnd int := 0; reason text := ''; winner uuid := null;
+  nq int; t int; t0 int; phase text := 'invited'; rnd int := 0; reason text := ''; winner uuid := null;
   sa int := 0; sb int := 0; ra int := 0; rb int := 0; ta bigint := 0; tb bigint := 0;
   ua int := 0; ub int := 0; ia int := 0; ib int := 0; ha boolean := false; hb boolean := false;
   who uuid; tfor uuid; ch int; ms int; ok boolean; pts int; nopt int; c numeric;
 begin
   select * into d from public.pup_duels where id = p_duel;
   if not found then return null; end if;
-  qs := d.setup -> 'questions'; nq := coalesce(jsonb_array_length(qs), 0); t := coalesce((d.setup ->> 'secs')::int, 20) * 1000;
+  qs := d.setup -> 'questions'; nq := coalesce(jsonb_array_length(qs), 0); t0 := coalesce((d.setup ->> 'secs')::int, 20) * 1000;
   for e in select * from public.pup_events where duel = p_duel order by n loop
     continue when e."by" not in (d.a, d.b);
     body := coalesce(e.body, '{}'::jsonb); tfor := null;
@@ -232,6 +233,9 @@ begin
       if phase = 'live' and jsonb_typeof(body -> 'round') = 'number' and (body ->> 'round')::numeric = rnd
          and ((e."by" = d.a and not ha) or (e."by" = d.b and not hb)) then
         q := qs -> rnd; nopt := jsonb_array_length(q -> 'options'); ch := null; ms := 0;
+        -- the round's seconds: its question's own (reading time, core.mjs secsOf), else the setup's
+        t := case when jsonb_typeof(q -> 'secs') = 'number' and (q ->> 'secs')::numeric = trunc((q ->> 'secs')::numeric)
+                   and (q ->> 'secs')::numeric between 5 and 120 then (q ->> 'secs')::int * 1000 else t0 end;
         if jsonb_typeof(body -> 'choice') = 'number' then
           c := (body ->> 'choice')::numeric;
           if c = trunc(c) and c >= 0 and c < nopt then ch := c::int; end if;
