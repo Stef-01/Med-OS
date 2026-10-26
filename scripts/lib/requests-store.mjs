@@ -22,6 +22,7 @@ export function readConfig(text) {
 }
 /* the environment first (a writer's machine can point at the project without editing the site), then config.js */
 export function projectFrom(env, configText) {
+  if (env?.OSCE_SUPABASE_URL === 'none') return null;   // the inbox alone (tests, a writer offline)
   const url = String(env?.OSCE_SUPABASE_URL || '').replace(/\/+$/, ''), key = String(env?.OSCE_SUPABASE_KEY || '');
   return url && key ? { url, key } : readConfig(configText);
 }

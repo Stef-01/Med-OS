@@ -42,16 +42,23 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
   /* a call that has not answered in HEDGE_MS is sent again beside it, and the first answer wins: both calls a session
      makes are safe to repeat (a log read; a post, whose fixed id makes a second copy the same row). On flaky wifi a
      request can stall for seconds or vanish until the transport's timeout, and the poll after it waited on it: the
-     slowest move took 15 s there, now about the hedge plus a round trip (evals, 2026-10-25). It fails when every copy
-     sent has failed, or at once when the server refused */
+     slowest move took 15 s there, now about the hedge plus a round trip (evals, 2026-10-25). It fails at once when the
+     server refused; when every copy sent has failed; or when a copy fails and the ones still out are past the hedge
+     (presumed stuck: the caller's retry beats waiting out their timeout, which once held an answer 8.6 s) */
   function hedged(call) {
     return new Promise((resolve, reject) => {
-      let running = 0, sent = 0, over = false, timer = null;
-      const end = () => { over = true; timers.clearTimeout(timer); };
+      let sent = 0, over = false, timer = null;
+      const out = new Set(), end = () => { over = true; timers.clearTimeout(timer); };
       const send = () => {
-        sent++; running++;
-        Promise.resolve().then(call).then(v => { if (!over) { end(); resolve(v); } }, e => { running--; if (!over && (e?.server || running === 0)) { end(); reject(e); } });
-        if (sent < 2) timer = timers.setTimeout(() => { if (!over && !stopped) { net.hedged++; send(); } }, HEDGE_MS);
+        sent++;
+        const copy = { at: now() };
+        out.add(copy);
+        Promise.resolve().then(call).then(v => { if (!over) { end(); resolve(v); } }, e => {
+          out.delete(copy);
+          if (!over && (e?.server || [...out].every(c => now() - c.at >= HEDGE_MS))) { end(); reject(e); }
+        });
+        /* up to three copies, HEDGE_MS apart: a hung first copy and a stalled second once held an answer past its time */
+        if (sent < 3) timer = timers.setTimeout(() => { if (!over && !stopped) { net.hedged++; send(); } }, HEDGE_MS);
       };
       send();
     });
@@ -99,6 +106,9 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
         const row = await hedged(() => transport.post(me, d.id, { id, kind, body }));
         pending.delete(id); refused.delete(id); net.lastOk = now(); net.error = '';
         if (add([row], 'own') && !stopped) settle();
+        /* my answer is in and its round is still open here: the mate's answer may well be on the server already, so ask
+           now rather than at the next poll (the last to answer saw its reveal up to 1.5 s late; evals 2026-10-25) */
+        if ((kind === 'answer' || kind === 'timeout') && st.phase === 'live' && st.rounds[body.round] && !st.rounds[body.round].closed) poke();
         chan?.send({ type: 'poke', n: row?.n });
         emit();
         return row;

@@ -33,11 +33,11 @@ const P = {
   pack: 'M9 7V6a3 3 0 0 1 6 0v1M7 7h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2zM9 14h6v4H9z',
   q: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01',
   chev: 'M15 5l-7 7 7 7',
-  /* the store: a bone (the currency), the shop's bag, loadouts as stacked layers, saving into one */
-  bone: 'M8.3 11H15.7A2.5 2.5 0 1 1 19.5 12A2.5 2.5 0 1 1 15.7 13H8.3A2.5 2.5 0 1 1 4.5 12A2.5 2.5 0 1 1 8.3 11Z',
+  bone: 'M8 10.5h8a2.6 2.6 0 1 1 3.1 1.5 2.6 2.6 0 1 1-3.1 1.5H8a2.6 2.6 0 1 1-3.1-1.5A2.6 2.6 0 1 1 8 10.5z',
   bag: 'M5 8h14l-1.2 12H6.2L5 8zM9 8V6.5a3 3 0 0 1 6 0V8',
-  layers: 'M12 4l8 4-8 4-8-4 8-4zM4 12l8 4 8-4M4 16l8 4 8-4',
-  savein: 'M12 4v10M8 10l4 4 4-4M5 19h14'
+  plus: 'M12 5v14M5 12h14',
+  shield: 'M12 3l7 3v5.5c0 4.3-3 7.8-7 9.5-4-1.7-7-5.2-7-9.5V6l7-3z',
+  sparkle: 'M12 3.5l1.8 5.2 5.2 1.8-5.2 1.8-1.8 5.2-1.8-5.2-5.2-1.8 5.2-1.8L12 3.5zM18.5 16v4M16.5 18h4'
 };
 
 export const ICONS = Object.keys(P);

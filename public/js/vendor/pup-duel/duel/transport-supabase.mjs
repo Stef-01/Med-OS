@@ -59,11 +59,15 @@ export function supabaseTransport({ url, key, fetch = globalThis.fetch?.bind(glo
     inbox: me => rpc('pup_inbox', { p_token: me.token }),
     post: (me, duel, ev) => rpc('pup_post', { p_token: me.token, p_duel: duel, p_id: ev.id, p_kind: ev.kind, p_body: ev.body || {} }),
     log: (me, duel, after) => rpc('pup_log', { p_token: me.token, p_duel: duel, p_after: after || 0 }),
-    /* the store (0002_pup_store.sql) */
+    /* the shop (0002_pup_shop.sql) */
     wallet: me => rpc('pup_wallet', { p_token: me.token }),
-    buy: (me, item, price, day) => rpc('pup_buy', { p_token: me.token, p_item: item, p_price: price, p_day: day }),
-    buySet: (me, set, price) => rpc('pup_buy_set', { p_token: me.token, p_set: set, p_price: price }),
-    loadout: (me, slot, name, look) => rpc('pup_loadout', { p_token: me.token, p_slot: slot, p_name: name, p_look: look ?? {} }),
+    buy: (me, ids, total) => rpc('pup_buy', { p_token: me.token, p_ids: ids, p_total: total }),
+    practice: (me, right) => rpc('pup_practice', { p_token: me.token, p_right: right }),
+    outfits: (me, list) => rpc('pup_outfits', { p_token: me.token, p_outfits: list }),
+    /* ranked (0003_pup_ranked.sql) */
+    queue: (me, setup) => rpc('pup_queue', { p_token: me.token, p_setup: setup }),
+    unqueue: me => rpc('pup_unqueue', { p_token: me.token }),
+    leaderboard: me => rpc('pup_leaderboard', { p_token: me.token }),
     live,
     get socket() { return rt?.state || 'idle'; },
     close() { rt?.close(); rt = null; }

@@ -98,19 +98,15 @@
 .os-bigtx span { color:var(--mute); font-size:13.5px; }
 .os-chev { color:var(--mute); align-self:center; }
 .os-chev svg { width:24px; height:24px; }
-/* Duel a Mate: a slim tile at the top of Start, two dogs face to face, a Beta chip (a work in progress) */
-.os-duelcard { display:flex; align-items:center; gap:14px; padding:12px 16px 12px 12px; text-align:left; transition:transform .16s var(--ease), background-color .2s, box-shadow .2s; }
-/* held at the bottom of the start view while it scrolls; margin-top:auto takes it to the bottom when the view is short */
-.os-start > .os-duelcard { position:sticky; bottom:0; z-index:2; margin-top:auto; box-shadow:var(--em-shadow-md), 0 -12px 24px -8px var(--bg); }
-.os-duelcard:hover { background:var(--card2); box-shadow:var(--em-shadow-md); }
-.os-duelcard:active { transform:scale(.97); }
-.os-duelfaces { display:flex; flex:none; }
+/* Duel a Mate: a card like the others (os-bigcard), two dogs face to face where its icon goes, a Beta chip; on Start
+   only once switched on in Settings */
+.os-bigic.os-duelfaces { display:flex; flex:none; width:auto; height:auto; background:none; padding:0; }
 .os-duelfaces span { width:42px; height:42px; border-radius:50%; background:var(--card2); overflow:hidden; }
 .os-duelfaces span + span { margin-left:-10px; box-shadow:0 0 0 2px var(--card); }
 .os-duelfaces img { display:block; width:100%; height:100%; transform-origin:50% 58%; transform:scale(1.75); }   /* the icon is the whole dog: its face */
 .os-duelfaces span + span img { transform:scale(-1.75, 1.75); }   /* the second faces the first */
 .os-duelcard .os-bigtx { min-width:0; }
-.os-duelcard .os-bigtx strong { display:flex; align-items:center; gap:8px; font-size:17px; white-space:nowrap; }
+.os-duelcard .os-bigtx strong { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
 .os-beta { padding:2px 8px; border-radius:99px; background:var(--pri-soft); color:var(--pri); font-size:12px; font-weight:700; letter-spacing:.02em; }
 
 /* ---------- Study Session (OscesGroup) ---------- */
@@ -870,6 +866,25 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-setf input:focus, .os-setf select:focus { border-color:var(--pri); }
 .os-set .os-crow { justify-content:flex-start; margin-top:0; flex-wrap:wrap; }
 .os-set .os-link { align-self:flex-start; min-height:44px; display:inline-flex; align-items:center; }
+/* the account (osce/account.mjs) and the games' switches */
+.os-acct .os-err { min-height:1.2em; margin:-4px 0 0; color:var(--danger); font-size:13.5px; font-weight:600; }
+.os-acctwho { font-size:15.5px; }
+.os-acctstats { display:grid; gap:0; margin:0; border-radius:12px; background:var(--fill); padding:2px 14px; }
+.os-acctstats > div { display:grid; grid-template-columns:96px minmax(0, 1fr); gap:10px; padding:10px 0; }
+.os-acctstats > div + div { border-top:1px solid var(--stroke); }
+.os-acctstats dt { font-size:13px; font-weight:700; color:var(--mute); }
+.os-acctstats dd { display:flex; flex-direction:column; margin:0; font-size:14.5px; font-variant-numeric:tabular-nums; }
+.os-switch { display:flex; align-items:center; gap:14px; width:100%; min-height:64px; padding:12px 14px; border:1px solid var(--stroke); border-radius:12px; background:var(--solid); color:var(--ink); font:inherit; text-align:left; cursor:pointer; transition:border-color .2s, background-color .2s; }
+.os-switch:hover { background:var(--card2); }
+.os-switch-tx { display:flex; flex-direction:column; gap:3px; min-width:0; flex:1; }
+.os-switch-tx strong { display:flex; align-items:center; flex-wrap:wrap; gap:8px; font-size:15.5px; }
+.os-switch-tx > span { font-size:13.5px; color:var(--mute); line-height:1.4; }
+.os-switch-ui { position:relative; flex:none; width:48px; height:28px; border-radius:99px; background:var(--stroke); transition:background-color .2s var(--ease); }
+.os-switch-ui::after { content:""; position:absolute; top:3px; left:3px; width:22px; height:22px; border-radius:50%; background:var(--em-white, #fff); box-shadow:0 1px 3px rgba(0,0,0,.3); transition:transform .22s var(--ease); }
+.os-switch[aria-checked="true"] { border-color:var(--pri); }
+.os-switch[aria-checked="true"] .os-switch-ui { background:var(--pri); }
+.os-switch[aria-checked="true"] .os-switch-ui::after { transform:translateX(20px); }
+@media (prefers-reduced-motion: reduce) { .os-switch-ui, .os-switch-ui::after { transition:none; } }
 .os-filebtn { cursor:pointer; height:42px; padding:0 18px; }
 
 /* ---------- Case requests: the start card's count, the form (chips are radios and checkboxes), your requests ---------- */

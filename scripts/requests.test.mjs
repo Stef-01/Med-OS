@@ -87,6 +87,7 @@ test('a station made from a request carries its id: the index row passes it on, 
 test('the writer\'s queue: the project from the environment or config.js, the shared rows read and written, the inbox, both merged', async () => {
   assert.deepEqual(readConfig("window.OSCE_CONFIG = {\n  supabaseUrl: 'https://abc.supabase.co/',\n  supabaseAnonKey: 'pk_1',\n};"), { url: 'https://abc.supabase.co', key: 'pk_1' });
   assert.equal(readConfig("supabaseUrl: '', supabaseAnonKey: ''"), null);
+  assert.equal(projectFrom({ OSCE_SUPABASE_URL: 'none' }, "supabaseUrl: 'https://cfg.co', supabaseAnonKey: 'c'"), null);
   assert.deepEqual(projectFrom({ OSCE_SUPABASE_URL: 'https://env.co', OSCE_SUPABASE_KEY: 'k' }, "supabaseUrl: 'https://cfg.co', supabaseAnonKey: 'c'"), { url: 'https://env.co', key: 'k' });
   const calls = [], rows = [{ id: `req/${REQ.id}`, value: REQ, updated_at: 'x' }, { id: 'req/rgone0000', value: null }, { id: 'hist/ai-1', value: { a: 1 } }];
   const fetch = async (url, init = {}) => { calls.push({ url, init }); return { ok: true, status: 200, json: async () => rows }; };
@@ -112,7 +113,7 @@ test('the writer\'s queue: the project from the environment or config.js, the sh
 test('the writer\'s commands on the inbox: add a pasted message, list, show the command it makes, accept, decline', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'req-cli-')), msg = path.join(dir, 'msg.txt');
   fs.writeFileSync(msg, `Hi, can you write this?\n\n${requestText(REQ)}\n`);
-  const env = { ...process.env, OSCE_REQUESTS_DIR: path.join(dir, 'inbox'), OSCE_SUPABASE_URL: '', OSCE_SUPABASE_KEY: '' };
+  const env = { ...process.env, OSCE_REQUESTS_DIR: path.join(dir, 'inbox'), OSCE_SUPABASE_URL: 'none', OSCE_SUPABASE_KEY: '' };
   const cli = (...a) => execFileSync(process.execPath, [path.join(ROOT, 'scripts', 'requests.mjs'), ...a], { env, encoding: 'utf8' });
   assert.match(cli('add', msg), /added rmgz1k2ab3c · chest pain in a 58-year-old smoker/);
   assert.match(cli(), /1 open request · inbox .*\n\nrmgz1k2ab3c  Requested .*Alex  \[inbox\]\n  chest pain in a 58-year-old smoker\n  acute · Cardiology · Adult · focus: History, Interpretation · Part 2: ECG, Bloods/);

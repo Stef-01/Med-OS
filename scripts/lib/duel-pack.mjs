@@ -13,6 +13,8 @@
    Known limit: the likely diagnosis is often the most specific name, so it is the longest option in about 4 of 10
    questions (1 in 4 by chance); the duel shuffles the options, and an AI-written pack can replace this one. */
 
+import { CATS, gate } from './mcq.mjs';
+
 export const LIMITS = { option: 70, minDistractors: 3 }, LONG = 1.8;
 const SETTING = { gp: 'in general practice', ed: 'in the emergency department', ward: 'on the ward', clinic: 'in clinic', 'birth suite': 'in the birth suite', recovery: 'in recovery' };
 const strip = s => String(s ?? '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
@@ -87,21 +89,32 @@ export function stationQuestion(st, pool = []) {
     q: {
       id: `osce-${st.id}`, stem, options: [answer, ...picked.map(p => p.o)], answer: 0,
       notes: [null, ...picked.map(p => p.note)], why: sentence(st.points?.[0]) || undefined,
-      topic: st.specialty?.[0] || undefined, origin: 'ai', station: st.id
+      topic: st.specialty?.[0] || undefined, cat: 'clinical', origin: 'ai', station: st.id
     },
     why: ''
   };
 }
 
-/* the pack, from the standard pool (public/mcq/pool.json, scripts/mcq-pool.mjs): every pooled question the duel can
-   play whole (the vendored duel cuts a stem at 1200 characters and an option at 160, so a longer one is left out, not
-   cut), in id order. Each keeps its provenance: origin is "ai" for AI-written (kind ai or amsa, so the duel's
-   AI-written chip shows) and "human" otherwise, and `source` carries the kind for the chips the package does not draw
-   yet (docs/mcq.md, package follow-up). The explanation becomes `why`, cut at a sentence; the per-option reasons
-   become `notes`. `dropped` says why the others are not in the pack. */
+/* the pack: the standard pool first (public/mcq/pool.json, scripts/mcq-pool.mjs), then the stations' category
+   questions (scripts/generate-duel-mcq.mjs, public/duel/mcq/<station>.json), each in id order.
+
+   pool      every pooled question the duel can play whole (the vendored duel cuts a stem at 1200 characters and an
+             option at 160, so a longer one is left out, not cut). Each keeps its provenance: origin is "ai" for
+             AI-written (kind ai or amsa, so the duel's AI-written chip shows) and "human" otherwise, and `source`
+             carries the kind for the chips the package does not draw yet (docs/mcq.md, package follow-up). The
+             explanation becomes `why`, cut at a sentence; the per-option reasons become `notes`. Every pooled question is
+             a clinical vignette (diagnosis, next step, investigation, a result read, a complication), so its kind in the
+             duel's second layer is Clinical; one written from a station also sits under each of that station's
+             specialties (topics)
+   category  one question in each of OSCE skills, Clinical, Physiology and pathophysiology, and Anatomy per station,
+             each passing lib/mcq.mjs gate again here (a hand edit that breaks one leaves it out), under the station's
+             specialties
+   `dropped` says why any are not in the pack. */
 export const DUEL = Object.freeze({ stem: 1200, option: 160, why: 1200, note: 600 });
 const cut = (s, n) => { const t = strip(s); if (t.length <= n) return t; const c = t.slice(0, n), i = Math.max(c.lastIndexOf('. '), c.lastIndexOf('? ')); return i > n / 3 ? c.slice(0, i + 1) : `${c.slice(0, n - 1).replace(/\s+\S*$/, '')}…`; };
-export function poolQuestion(q) {
+/* a station's specialties as the duel's topics (the first is its topic), up to the package's six */
+const topicsOfStation = (st, first) => [...new Set([first, ...(Array.isArray(st?.specialty) ? st.specialty : [])].filter(Boolean))].slice(0, 6);
+export function poolQuestion(q, byStation = new Map()) {
   const stem = q.ask ? `${strip(q.stem)} ${strip(q.ask)}` : strip(q.stem);
   if (stem.length > DUEL.stem) return { q: null, why: `${q.id}: the stem is ${stem.length} characters (the duel shows ${DUEL.stem})` };
   if (q.options.some(o => o.length > DUEL.option)) return { q: null, why: `${q.id}: an option is longer than ${DUEL.option} characters` };
@@ -111,19 +124,35 @@ export function poolQuestion(q) {
   const why = q.explanation ? cut(q.explanation, DUEL.why) : ''; if (why) out.why = why;
   if (notes.some(Boolean)) out.notes = notes;
   if (q.topic) out.topic = q.topic;
+  const st = byStation.get(q.provenance?.generator?.basis?.[0]), topics = st ? topicsOfStation(st, q.topic) : [];
+  if (topics.length > 1) out.topics = topics;
+  out.cat = 'clinical';
   out.origin = kind === 'ai' || kind === 'amsa' ? 'ai' : 'human';
   out.source = kind;
   return { q: out, why: '' };
 }
-export function buildPack(pool) {
+export function buildPack(pool, { mcq = {}, stations = [] } = {}) {
   const list = [...(pool?.questions || [])].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
-  for (const p of list) { const { q, why } = poolQuestion(p); if (q) questions.push(q); else dropped.push(why); }
+  const byStation = new Map(stations.map(st => [st.id, st]));
+  for (const p of list) { const { q, why } = poolQuestion(p, byStation); if (q) questions.push(q); else dropped.push(why); }
+  let catN = 0;
+  for (const sid of Object.keys(mcq).sort()) {
+    const st = byStation.get(sid);
+    if (!st) { dropped.push(`public/duel/mcq/${sid}.json: no such station`); continue; }
+    for (const m of mcq[sid]?.questions || []) {
+      const issues = gate(m);
+      if (issues.length) { dropped.push(`${m.id}: ${issues.join('; ')}`); continue; }
+      const topics = topicsOfStation(st, st.specialty?.[0]);
+      questions.push({ id: m.id, stem: m.stem, options: m.options, answer: m.answer, notes: m.notes, why: m.why, topic: topics[0] || undefined, ...(topics.length > 1 ? { topics } : {}), cat: m.cat, origin: 'ai', source: 'ai', station: st.id });
+      catN++;
+    }
+  }
   const kinds = questions.reduce((m, q) => ((m[q.source] = (m[q.source] || 0) + 1), m), {});
   const origins = new Set(questions.map(q => q.origin));
   return {
-    pack: { schemaVersion: 1, version: `pool-${questions.length}`, title: 'Standard MCQ pool',
-      source: `Built by scripts/build-duel-pack.mjs from public/mcq/pool.json: ${Object.entries(kinds).map(([k, n]) => `${n} ${k}`).join(', ')}.`,
-      origin: origins.size === 1 ? [...origins][0] : 'mixed', questions },
+    pack: { schemaVersion: 1, version: `pool-${questions.length - catN}-mcq-${catN}`, title: 'Standard MCQ pool',
+      source: `Built by scripts/build-duel-pack.mjs from public/mcq/pool.json${catN ? ' and public/duel/mcq/' : ''}: ${Object.entries(kinds).map(([k, n]) => `${n} ${k}`).join(', ')}.`,
+      origin: origins.size === 1 ? [...origins][0] : 'mixed', cats: CATS.map(c => ({ id: c.id, label: c.label })), questions },
     dropped
   };
 }

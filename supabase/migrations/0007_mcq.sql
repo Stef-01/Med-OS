@@ -1,5 +1,6 @@
 -- Submit a question (public/js/osce/mcq-view.mjs): students' MCQs for the standard pool. Optional: only needed when
--- config.js names a Supabase project. Run once in the project's SQL editor, after 0001 (and 0002 for the duel).
+-- config.js names a Supabase project. Run once in the project's SQL editor, after 0001 (and the duel's 0002 to 0005).
+-- It was 0003_mcq.sql on the branch that made it; renumbered 0007 when it met main's 0003 to 0006.
 --
 -- The app inserts one row per question; the pool's pipeline reads them (node scripts/mcq-submissions.mjs), and a
 -- question's status comes back in public/mcq/status.json at the next pool build, so nothing here is ever updated.

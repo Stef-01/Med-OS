@@ -5,7 +5,7 @@
    (js/mcq/flaws.mjs, the same code the pool's selector runs) run as you type and list what to fix before you send it.
    Paste JSON or CSV to fill the form, or to send several at once (js/mcq/schema.mjs draftsFrom).
 
-   Where a question goes: with a Supabase project in config.js (and supabase/migrations/0003_mcq.sql run in it) it is
+   Where a question goes: with a Supabase project in config.js (and supabase/migrations/0007_mcq.sql run in it) it is
    inserted into mcq_submissions, which the pool's pipeline reads (node scripts/mcq-submissions.mjs); without one it is
    kept on this phone and Export gives a file for whoever builds the pool. Either way it is listed here with its
    status from mcq/status.json, written at every pool build: waiting for review, in the pool, or not taken with the

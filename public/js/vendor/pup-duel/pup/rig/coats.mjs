@@ -132,8 +132,7 @@ const SPEC = {
   ],
   lab: [
     { id: 'chocolate', name: 'Chocolate', from: 'fudge' },
-    { id: 'yellow', name: 'Yellow', pal: { coat: '#efc27c', sh: '#ddab62', tan: '#f6d498', tanSh: '#ebc283', feature: '#9a6a30', nose: '#3a2416', noseHi: '#6b4a33',
-      ear: '#dba45c', brow: '#f8d9a6', tail: '#e5b56e', foot: '#f2c986', footFar: '#e2b673' } },
+    { id: 'yellow', name: 'Yellow', from: 'honey' },
     { id: 'black', name: 'Black', pal: { coat: '#4a4552', sh: '#3c3843', tan: '#55505e', tanSh: '#4a4552', feature: '#8f8899', nose: '#1a181e', noseHi: '#46424e',
       ear: '#3c3843', brow: '#5e5968', tail: '#45404d', foot: '#524c5a', footFar: '#46414e' } }
   ],
@@ -162,7 +161,169 @@ const SPEC = {
       mane: '#cfd2da', maneSh: '#9fa3b0', ear: '#cfd2da', brow: '#cfd2da', tail: '#a3a7b3', tailDots: '#cfd2da', foot: '#cfd2da', footFar: '#bfc3cc' } }
   ],
   /* a Bernese comes in one coat, the tricolour */
-  bernese: [{ id: 'tri', name: 'Tricolour', from: 'heidi' }]
+  bernese: [{ id: 'tri', name: 'Tricolour', from: 'heidi' }],
+  // ---- the second eighteen breeds ----
+  german: [
+    { id: 'tan', name: 'Black and tan', from: 'max' },
+    { id: 'black', name: 'Black', from: 'nova' },
+    { id: 'sable', name: 'Sable', pal: { coat: '#b88a56', sh: '#9f7444', tan: '#d8b07a', tanSh: '#c69b64', feature: '#4a3420', nose: '#1e1816', noseHi: '#4a403d',
+      mask: '#4f4440', patch: '#6a5848', ear: '#5a4c44', earIn: '#d8b07a', brow: '#d8b07a', tail: '#5a4c44', tailIn: '#7a6858',
+      foot: '#d8b07a', footFar: '#c69b64' } },
+    { id: 'white', name: 'White', pal: { coat: '#f5f1ea', sh: '#e3ddd2', tan: '#fbf8f3', tanSh: '#ece6dc', feature: '#7a6e62', nose: '#2a2420', noseHi: '#5a504a',
+      mask: '#ece6dc', patch: '#ebe5da', ear: '#f5f1ea', earIn: '#f2cfc6', brow: '#fbf8f3', tail: '#ebe5da', tailIn: '#f8f5ef',
+      foot: '#fbf8f3', footFar: '#ece6dc' } }
+  ],
+  rottweiler: [
+    { id: 'rust', name: 'Black and rust', from: 'bruno' },
+    { id: 'tan', name: 'Black and tan', pal: { coat: '#4a4250', sh: '#3c3542', tan: '#dc9a58', tanSh: '#c78446', feature: '#efb67a', nose: '#1a1517', noseHi: '#4a4248',
+      ear: '#3c3542', brow: '#e2a462', tail: '#433b48', foot: '#dc9a58', footFar: '#c78446' } },
+    { id: 'mahogany', name: 'Black and mahogany', pal: { coat: '#4a4250', sh: '#3c3542', tan: '#9a4a28', tanSh: '#843e20', feature: '#c97a52', nose: '#1a1517', noseHi: '#4a4248',
+      ear: '#3c3542', brow: '#a8552e', tail: '#433b48', foot: '#9a4a28', footFar: '#843e20' } }
+  ],
+  boxer: [
+    { id: 'fawn', name: 'Fawn', from: 'rocky' },
+    { id: 'brindle', name: 'Brindle', pal: { coat: '#9a6236', sh: '#84522c', tan: '#fbf4ea', tanSh: '#ebdfd0', feature: '#3a200e', nose: '#1a1414', noseHi: '#4a3e3e',
+      muzzle: '#3e3334', blaze: '#fbf4ea', bib: '#fbf4ea', bibSh: '#e6d8c6', brow: '#b47a4a', ear: '#7a4a28', tail: '#8c5830', foot: '#fbf4ea', footFar: '#ebdfd0' } },
+    { id: 'white', name: 'White', pal: { coat: '#f6f1ea', sh: '#e4ddd2', tan: '#fdfaf5', tanSh: '#ede7dd', feature: '#7a6a5e', nose: '#3a2c2a', noseHi: '#6a5a56',
+      muzzle: '#efd8d0', blaze: '#fdfaf5', bib: '#fdfaf5', bibSh: '#e8e0d4', brow: '#ede6dc', ear: '#ebe2d6', tail: '#ebe4da', foot: '#fdfaf5', footFar: '#ede7dd' } }
+  ],
+  bulldog: [
+    { id: 'fawn', name: 'Fawn and white', from: 'winston' },
+    { id: 'red', name: 'Red and white', pal: { coat: '#b8643a', sh: '#9e5430', tan: '#fbf6ef', tanSh: '#ede3d6', feature: '#5a2a12', nose: '#2a1c18', noseHi: '#5a4840',
+      muzzle: '#fbf6ef', blaze: '#fbf6ef', wrinkle: '#8e4a28', ear: '#8e4a28', brow: '#d48a5a', body: '#ebe1d2', tail: '#e8d9c6', foot: '#fbf6ef', footFar: '#ede3d6' } },
+    { id: 'brindle', name: 'Brindle and white', pal: { coat: '#86603e', sh: '#704e32', tan: '#fbf6ef', tanSh: '#ede3d6', feature: '#3a2412', nose: '#1e1614', noseHi: '#4a3e3a',
+      muzzle: '#fbf6ef', blaze: '#fbf6ef', wrinkle: '#5e4028', ear: '#5e4028', brow: '#a8805a', body: '#ebe1d2', tail: '#e8d9c6', foot: '#fbf6ef', footFar: '#ede3d6' } },
+    { id: 'white', name: 'White', pal: { coat: '#f4ede4', sh: '#e2d9cc', tan: '#fdfaf5', tanSh: '#eee6da', feature: '#7a6a5a', nose: '#2a1c18', noseHi: '#5a4840',
+      muzzle: '#fdfaf5', blaze: '#fdfaf5', wrinkle: '#d6c6b2', ear: '#e8c8b8', brow: '#ece2d4', body: '#ebe1d2', tail: '#e8d9c6', foot: '#fdfaf5', footFar: '#eee6da' } }
+  ],
+  cavalier: [
+    { id: 'blenheim', name: 'Blenheim', from: 'archie' },
+    { id: 'ruby', name: 'Ruby', pal: { coat: '#b05a2c', sh: '#964a24', tan: '#c9733e', tanSh: '#b4632f', feature: '#4a200c', nose: '#2a1c18', noseHi: '#5a4840',
+      patch: '#b05a2c', lidL: '#b05a2c', lidR: '#b05a2c', ear: '#934822', brow: '#cf7c48', tail: '#a4532a', tailIn: '#c9733e',
+      foot: '#c9733e', footFar: '#b4632f' } },
+    { id: 'blacktan', name: 'Black and tan', pal: { coat: '#4a4352', sh: '#3c3644', tan: '#d08a4c', tanSh: '#ba763e', feature: '#e8a466', nose: '#1a1519', noseHi: '#554b59',
+      patch: '#4a4352', lidL: '#4a4352', lidR: '#4a4352', ear: '#3c3644', brow: '#d08a4c', tail: '#45404d', tailIn: '#5a5363',
+      foot: '#d08a4c', footFar: '#ba763e' } },
+    { id: 'tri', name: 'Tricolour', pal: { coat: '#fbf6ef', sh: '#ebe2d6', tan: '#ffffff', tanSh: '#efe8de', feature: '#2e2a32', nose: '#1e1a1c', noseHi: '#4a4448',
+      patch: '#45404d', lidL: '#45404d', lidR: '#45404d', ear: '#3c3644', brow: '#d08a4c', tail: '#45404d', tailIn: '#5a5363',
+      foot: '#ffffff', footFar: '#efe8de' } }
+  ],
+  shihtzu: [
+    { id: 'gold', name: 'Gold and white', from: 'mei' },
+    { id: 'black', name: 'Black and white', pal: { coat: '#4c4654', sh: '#3e3946', tan: '#fdf8f0', tanSh: '#efe5d6', feature: '#a59cae', nose: '#16131a', noseHi: '#47414e',
+      blaze: '#fdf8f0', beard: '#fdf8f0', ear: '#3e3946', brow: '#6a6374', tail: '#4c4654', tailIn: '#fdf8f0', foot: '#fdf8f0', footFar: '#efe5d6' } },
+    { id: 'liver', name: 'Liver and white', pal: { coat: '#8a5038', sh: '#74422e', tan: '#fdf8f0', tanSh: '#efe5d6', feature: '#3a1a0e', nose: '#5a2e22', noseHi: '#86584a',
+      blaze: '#fdf8f0', beard: '#fdf8f0', ear: '#74422e', brow: '#a8705a', tail: '#8a5038', tailIn: '#fdf8f0', foot: '#fdf8f0', footFar: '#efe5d6' } },
+    { id: 'silver', name: 'Silver and white', pal: { coat: '#b4b6c0', sh: '#9ea1ac', tan: '#fdfcfa', tanSh: '#eceef2', feature: '#4a4c58', nose: '#1e1e24', noseHi: '#4a4a54',
+      blaze: '#fdfcfa', beard: '#fdfcfa', ear: '#9ea1ac', brow: '#d0d2d8', tail: '#b4b6c0', tailIn: '#fdfcfa', foot: '#fdfcfa', footFar: '#eceef2' } }
+  ],
+  yorkie: [
+    { id: 'blue', name: 'Blue and tan', from: 'pixie' },
+    { id: 'black', name: 'Black and tan', pal: { coat: '#d39a54', sh: '#bd8442', tan: '#e8be86', tanSh: '#d8a86c', feature: '#7a4a1e', nose: '#1d1714', noseHi: '#4a3f3a',
+      body: '#48434f', tail: '#433e4a', ear: '#c88e48', earIn: '#efc59a', brow: '#e8be86', foot: '#d39a54', footFar: '#bd8442' } },
+    { id: 'gold', name: 'Gold', pal: { coat: '#e2b46e', sh: '#cc9c58', tan: '#f2d4a0', tanSh: '#e4c088', feature: '#8a5a26', nose: '#1d1714', noseHi: '#4a3f3a',
+      body: '#d6a862', tail: '#cfa05a', ear: '#d8a862', earIn: '#f6d6ae', brow: '#f2d4a0', foot: '#e2b46e', footFar: '#cc9c58' } }
+  ],
+  aussie: [
+    { id: 'bluemerle', name: 'Blue merle', from: 'ziggy' },
+    { id: 'redmerle', name: 'Red merle', pal: { coat: '#cfa088', sh: '#b98a72', tan: '#ffffff', tanSh: '#efe6e0', feature: '#5a2c18', nose: '#5a3020', noseHi: '#86584a',
+      patch: '#9a5034', rust: '#c47640', blaze: '#ffffff', bib: '#ffffff', bibSh: '#ece2da', lidL: '#9a5034', earL: '#9a5034', earR: '#cfa088',
+      earIn: '#f0c8c0', brow: '#c47640', tail: '#b98a72', foot: '#ffffff', footFar: '#efe6e0' } },
+    { id: 'blacktri', name: 'Black tricolour', pal: { coat: '#4a4654', sh: '#3c3946', tan: '#ffffff', tanSh: '#e6e8ee', feature: '#22202a', nose: '#16141a', noseHi: '#45424e',
+      patch: '#4a4654', rust: '#c47640', blaze: '#ffffff', bib: '#ffffff', bibSh: '#dfe2ea', lidL: '#4a4654', earL: '#3c3946', earR: '#3c3946',
+      earIn: '#d8b8c0', brow: '#c47640', tail: '#3c3946', foot: '#ffffff', footFar: '#e6e8ee' } },
+    { id: 'redtri', name: 'Red tricolour', pal: { coat: '#9c5634', sh: '#84482a', tan: '#ffffff', tanSh: '#efe6de', feature: '#4a200e', nose: '#4a2618', noseHi: '#76483a',
+      patch: '#9c5634', rust: '#d8955a', blaze: '#ffffff', bib: '#ffffff', bibSh: '#ece2d8', lidL: '#9c5634', earL: '#84482a', earR: '#84482a',
+      earIn: '#e8c0b0', brow: '#d8955a', tail: '#84482a', foot: '#ffffff', footFar: '#efe6de' } }
+  ],
+  whippet: [
+    { id: 'fawn', name: 'Fawn', from: 'flash' },
+    { id: 'blue', name: 'Blue', pal: { coat: '#8e98ab', sh: '#7a8498', tan: '#a8b0c0', tanSh: '#97a0b2', feature: '#3c4254', nose: '#2a2c36', noseHi: '#565a66',
+      blaze: '#f4f5f8', ear: '#737d92', brow: '#a8b0c0', tail: '#848ea2', foot: '#f4f5f8', footFar: '#e2e5ec' } },
+    { id: 'black', name: 'Black', pal: { coat: '#4c4756', sh: '#3e3a47', tan: '#5e5868', tanSh: '#524c5c', feature: '#9a92a5', nose: '#16131a', noseHi: '#47414e',
+      blaze: '#f4f2f6', ear: '#3e3a47', brow: '#5e5868', tail: '#45404d', foot: '#f4f2f6', footFar: '#e2dfe6' } },
+    { id: 'cream', name: 'Cream', pal: { coat: '#efd6b2', sh: '#dfc296', tan: '#f8e8d0', tanSh: '#ecd6b6', feature: '#8a6a44', nose: '#3a2a22', noseHi: '#66544a',
+      blaze: '#fdf8f0', ear: '#d8b88c', brow: '#f8e8d0', tail: '#e2c69c', foot: '#fdf8f0', footFar: '#efe6d8' } }
+  ],
+  basset: [
+    { id: 'red', name: 'Red and white', from: 'barney' },
+    { id: 'tri', name: 'Tricolour', pal: { coat: '#c98a48', sh: '#b2763a', tan: '#fbf7f1', tanSh: '#ece4d8', feature: '#6e3c17', nose: '#2a1d18', noseHi: '#5a463c',
+      body: '#f6f1ea', blaze: '#fbf7f1', patch: '#3a3236', ear: '#a9622c', brow: '#e8ad6e', tail: '#3a3236', foot: '#ffffff', footFar: '#ece6dc' } },
+    { id: 'lemon', name: 'Lemon and white', pal: { coat: '#e6c07a', sh: '#d2a960', tan: '#fbf7f1', tanSh: '#ece4d8', feature: '#8a6a3a', nose: '#3a2a22', noseHi: '#66544a',
+      body: '#f6f1ea', blaze: '#fbf7f1', patch: '#ddb468', ear: '#d0a058', brow: '#f2d8a4', tail: '#ddb468', foot: '#ffffff', footFar: '#ece6dc' } }
+  ],
+  dane: [
+    { id: 'fawn', name: 'Fawn', from: 'moose' },
+    { id: 'harlequin', name: 'Harlequin', pal: { coat: '#f7f6f4', sh: '#e4e2de', tan: '#ffffff', tanSh: '#ececea', feature: '#3a3a44', nose: '#1c1c22', noseHi: '#4a4a55',
+      mask: '#3a3640', harl: '#3a3640', harlB: '#3a3640', ear: '#3a3640', brow: '#dcdade', tail: '#e4e2de',
+      foot: '#ffffff', footFar: '#ececea' } },
+    { id: 'blue', name: 'Blue', pal: { coat: '#7f889c', sh: '#6c7589', tan: '#8f98aa', tanSh: '#7f889c', feature: '#323848', nose: '#262a36', noseHi: '#545a6c',
+      mask: '#5e6678', harl: '#7f889c', harlB: '#6c7589', ear: '#5e6678', brow: '#959eb0', tail: '#6c7589',
+      foot: '#8f98aa', footFar: '#7f889c' } },
+    { id: 'black', name: 'Black', pal: { coat: '#4c4756', sh: '#3e3a47', tan: '#5e5868', tanSh: '#524c5c', feature: '#9a92a5', nose: '#16131a', noseHi: '#47414e',
+      mask: '#3e3a47', harl: '#4c4756', harlB: '#3e3a47', ear: '#3e3a47', brow: '#5e5868', tail: '#45404e',
+      foot: '#5e5868', footFar: '#524c5c' } }
+  ],
+  stbernard: [
+    { id: 'red', name: 'Red and white', from: 'barry' },
+    { id: 'brindle', name: 'Brindle and white', pal: { coat: '#8a5634', sh: '#74462a', tan: '#fbf6ef', tanSh: '#ece2d4', feature: '#2a160c', nose: '#1e1616', noseHi: '#4a3e3c',
+      mask: '#4a2a1a', lidL: '#4a2a1a', lidR: '#4a2a1a', blaze: '#fbf6ef', bib: '#fbf6ef', bibSh: '#e8ddcc', patch: '#8a5634', body: '#ece3d6', ear: '#6a3e24',
+      brow: '#b07a52', tail: '#8a5634', tailIn: '#a8704a', foot: '#fbf6ef', footFar: '#ece2d4' } },
+    { id: 'orange', name: 'Orange and white', pal: { coat: '#d67e3c', sh: '#bd6a30', tan: '#fbf6ef', tanSh: '#ece2d4', feature: '#3a1a0a', nose: '#1e1616', noseHi: '#4a3e3c',
+      mask: '#8a4420', lidL: '#8a4420', lidR: '#8a4420', blaze: '#fbf6ef', bib: '#fbf6ef', bibSh: '#e8ddcc', patch: '#d67e3c', body: '#ece3d6', ear: '#b0602a',
+      brow: '#eaa266', tail: '#d67e3c', tailIn: '#eaa266', foot: '#fbf6ef', footFar: '#ece2d4' } }
+  ],
+  chow: [
+    { id: 'red', name: 'Red', from: 'leo' },
+    { id: 'black', name: 'Black', pal: { coat: '#4c4654', sh: '#3e3946', tan: '#5a5363', tanSh: '#4e4857', feature: '#9a92a5', nose: '#16131a', noseHi: '#47414e',
+      mane: '#534c5c', maneSh: '#38333f', ear: '#3e3946', earIn: '#5a5363', brow: '#5a5363', tail: '#534c5c', tailIn: '#665e70', foot: '#4c4654', footFar: '#3e3946' } },
+    { id: 'blue', name: 'Blue', pal: { coat: '#7f889c', sh: '#6c7589', tan: '#8f98aa', tanSh: '#7f889c', feature: '#323848', nose: '#262a36', noseHi: '#545a6c',
+      mane: '#8790a4', maneSh: '#626b80', ear: '#6c7589', earIn: '#8f98aa', brow: '#8f98aa', tail: '#8790a4', tailIn: '#9ca4b6', foot: '#7f889c', footFar: '#6c7589' } },
+    { id: 'cream', name: 'Cream', pal: { coat: '#edd5ac', sh: '#dcbf92', tan: '#f6e4c4', tanSh: '#ead2ac', feature: '#8a6a40', nose: '#2b1a10', noseHi: '#5a4030',
+      mane: '#f2dcb6', maneSh: '#d8b888', ear: '#dcbf92', earIn: '#f6e4c4', brow: '#f6e4c4', tail: '#f2dcb6', tailIn: '#faecd2', foot: '#edd5ac', footFar: '#dcbf92' } },
+    { id: 'cinnamon', name: 'Cinnamon', pal: { coat: '#b98a62', sh: '#a27652', tan: '#cfa27a', tanSh: '#bc8e68', feature: '#4a2e18', nose: '#3a2418', noseHi: '#6a4e40',
+      mane: '#c2946c', maneSh: '#966a48', ear: '#a27652', earIn: '#cfa27a', brow: '#cfa27a', tail: '#c2946c', tailIn: '#d6ae88', foot: '#b98a62', footFar: '#a27652' } }
+  ],
+  schnauzer: [
+    { id: 'salt', name: 'Salt and pepper', from: 'otto' },
+    { id: 'black', name: 'Black', pal: { coat: '#4c4756', sh: '#3e3a47', tan: '#5a5464', tanSh: '#4e4858', feature: '#9a92a5', nose: '#16131a', noseHi: '#47414e',
+      beard: '#615a6c', brow: '#655e70', ear: '#3e3a47', earBack: '#34303c', earIn: '#6a6374', tail: '#45404e', foot: '#5a5464', footFar: '#4e4858' } },
+    { id: 'silver', name: 'Black and silver', pal: { coat: '#4c4756', sh: '#3e3a47', tan: '#cfd1d8', tanSh: '#bcbfc8', feature: '#22202a', nose: '#16131a', noseHi: '#47414e',
+      beard: '#e4e6eb', brow: '#e4e6eb', ear: '#3e3a47', earBack: '#34303c', earIn: '#8a8494', tail: '#45404e', foot: '#cfd1d8', footFar: '#bcbfc8' } },
+    { id: 'white', name: 'White', pal: { coat: '#f3f2ef', sh: '#e1dfda', tan: '#fbfaf8', tanSh: '#ebe9e4', feature: '#77746e', nose: '#1e1e22', noseHi: '#4a4a50',
+      beard: '#ffffff', brow: '#ffffff', ear: '#e1dfda', earBack: '#d2cfc8', earIn: '#f2d4d0', tail: '#e8e6e2', foot: '#fbfaf8', footFar: '#ebe9e4' } }
+  ],
+  /* a Weimaraner comes in grey: silver, mouse or blue */
+  weimaraner: [
+    { id: 'silver', name: 'Silver grey', from: 'ghost' },
+    { id: 'mouse', name: 'Mouse grey', pal: { coat: '#9b928e', sh: '#867d79', tan: '#b4aca8', tanSh: '#a29a96', feature: '#4e4642', nose: '#7e6664', noseHi: '#9c8682',
+      ear: '#847b77', brow: '#b4aca8', tail: '#8e8581', foot: '#aca4a0', footFar: '#9b928e' } },
+    { id: 'blue', name: 'Blue', pal: { coat: '#838b9c', sh: '#707888', tan: '#9aa1b0', tanSh: '#8a91a0', feature: '#3c4250', nose: '#4e5260', noseHi: '#6e7280',
+      ear: '#6e7686', brow: '#9aa1b0', tail: '#7a8292', foot: '#929aa8', footFar: '#838b9c' } }
+  ],
+  heeler: [
+    { id: 'blue', name: 'Blue', from: 'digger' },
+    { id: 'red', name: 'Red', from: 'rusty' }
+  ],
+  cavoodle: [
+    { id: 'apricot', name: 'Apricot', from: 'coco' },
+    { id: 'chocolate', name: 'Chocolate', from: 'milo' },
+    { id: 'red', name: 'Ruby red', pal: { coat: '#b95c34', sh: '#a04c2a', tan: '#cd7546', tanSh: '#b9643a', feature: '#4a1e0c', nose: '#2a1812', noseHi: '#5a4036',
+      mane: '#c2663c', maneSh: '#93441f', fluff: '#d6825a', ear: '#a54f2a', brow: '#d6825a', tail: '#a54f2a', foot: '#c2663c', footFar: '#ad5832' } },
+    { id: 'black', name: 'Black', pal: { coat: '#4c4756', sh: '#3e3a47', tan: '#5e5868', tanSh: '#524c5c', feature: '#9a92a5', nose: '#16131a', noseHi: '#47414e',
+      mane: '#56505f', maneSh: '#38343f', fluff: '#6a6374', ear: '#45404e', brow: '#6a6374', tail: '#45404e', foot: '#56505f', footFar: '#4a4553' } },
+    { id: 'cream', name: 'Cream', pal: { coat: '#f0d8b4', sh: '#e0c29a', tan: '#f8e6cc', tanSh: '#ecd4b2', feature: '#9a7650', nose: '#2b1a12', noseHi: '#5c3f30',
+      mane: '#f4dfbe', maneSh: '#dcbe92', fluff: '#fbecd6', ear: '#e6cca6', brow: '#fbecd6', tail: '#e6cca6', foot: '#f4dfbe', footFar: '#e6cca6' } }
+  ],
+  staffy: [
+    { id: 'red', name: 'Red', from: 'ruby' },
+    { id: 'blue', name: 'Blue', pal: { coat: '#7f889c', sh: '#6c7589', tan: '#939cae', tanSh: '#838ca0', feature: '#323848', nose: '#262a36', noseHi: '#545a6c',
+      blaze: '#f6f6f8', ear: '#646d82', brow: '#939cae', tail: '#6c7589', foot: '#f6f6f8', footFar: '#e4e6ec' } },
+    { id: 'brindle', name: 'Brindle', pal: { coat: '#765a48', sh: '#644a3a', tan: '#8c6e5a', tanSh: '#7a5e4c', feature: '#2e1e14', nose: '#1a1414', noseHi: '#4a3e3a',
+      blaze: '#f8f4ee', ear: '#5a4232', brow: '#937462', tail: '#644a3a', foot: '#f8f4ee', footFar: '#e8e0d6' } },
+    { id: 'black', name: 'Black and white', pal: { coat: '#4c4756', sh: '#3e3a47', tan: '#5e5868', tanSh: '#524c5c', feature: '#9a92a5', nose: '#16131a', noseHi: '#47414e',
+      blaze: '#f8f6fa', ear: '#3e3a47', brow: '#5e5868', tail: '#45404e', foot: '#f8f6fa', footFar: '#e6e3ea' } }
+  ]
 };
 
 const byId = id => DOGS.find(d => d.id === id);

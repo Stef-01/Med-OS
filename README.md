@@ -13,17 +13,18 @@ What's in it:
 
 ## Duel a Mate
 
-**Duel a Mate** (Beta: the slim tile at the top of the start screen, a work in progress) is a live quiz between the two of you, with a cartoon dog each: the same questions on both phones against the same clock, right and fast wins, round by round. The questions come from the standard MCQ pool (below): Step 2 CK-style questions from the stations, from the open USMLE-style banks and from you, each admitted only after the item-writing checks and a review against the official samples. AI-written ones say so. The game itself stays quiet (a reveal shows who picked what, and the points); after it, **Review** lists every question with its answer and why each wrong pick is wrong. Your dog is yours to dress: 22 dogs of 18 breeds, each breed's real coats, eight collar colours and 93 pieces in four slots, bought in the duel's store with the bones your duels earn (nothing to feed, nothing that runs down).
+**Duel a Mate** (Beta, a work in progress: off until you switch it on in **Settings → Games**, then a card on the start screen right after Request a case) is a live quiz between the two of you, with a cartoon dog each: the same questions on both phones against the same clock, right and fast wins, round by round. The questions come from the standard MCQ pool (below): Step 2 CK-style questions from the stations, from the open USMLE-style banks and from you, each admitted only after the item-writing checks and a review against the official samples, and any category questions written for a station (OSCE skills, Clinical, Physiology and pathophysiology, Anatomy). Choose them in two layers: a specialty, then a kind. AI-written ones say so. The game itself stays quiet (a reveal shows who picked what, and the points); after it, **Review** lists every question with its answer and why each wrong pick is wrong. Your dog is yours to dress: 44 dogs of 36 breeds, each breed's real coats, eight collar colours and 104 pieces in four slots (19 sets), eleven of them with a signature move, bought with the bones you earn by playing (nothing to feed, nothing that runs down).
 
-- Sign in with a name and a 4-digit PIN (no email, no password). Challenge the other, pick 5, 7 or 10 questions, 15, 20 or 30 seconds each, and a specialty if you like. Every duel with a mate pays bones: 1 a right answer, 2 for playing to the last question, 5 for a win with at least one right; you start with 20, and practice pays nothing. The server works them out from the duel itself.
+- Sign in with a name and a 4-digit PIN (no email, no password; the same account keeps your OSCE progress, Settings → Account). Challenge the other, pick 5, 7 or 10 questions, 15, 20 or 30 seconds each, and the questions' specialty and kind. A finished duel pays bones: 12 for a win, 8 for a draw, 5 for playing to the end, and 1 for each right answer; practice with Rex pays a bone a right answer, up to 15 a day. You start with 25 bones and every common piece. The server works it all out from the duel itself.
+- **Ranked**: Find a ranked match pairs you with the nearest rating (Elo from 1000, Bronze to Diamond after three placing games); the leaderboard shows the week, the month and all time.
 - Moves reach the other phone within 5 seconds, even when the realtime connection drops, because both phones read a shared log of the duel (and the e2e times every move).
-- **Store**: the bag by your bone count in the lobby. Your dog tries on whatever you tap; one button buys it (and puts it on). A featured bundle (a quarter off the pieces you lack), two featured pieces, six daily pieces with one on a deal, all new at midnight, then every piece by slot. **Locker**: your dog's shirt badge: dog, coat, collar, the pieces you own, and three named **loadouts** to save a look and put it back on. Your mate only ever sees pieces you bought.
-- It plays on **Casa**, Optimus's Supabase project, where the duel is its own set of `pup_*` tables (`duelSupabaseUrl` and `duelSupabaseAnonKey` in `public/config.js`; the OSCE progress sync below stays off). It needs `supabase/migrations/0002_pup_duel.sql` and then `0004_pup_duel_store.sql` run once in Casa's SQL editor (https://supabase.com/dashboard/project/psozzmlxhhajcszlplns/sql/new: paste each file whole and press Run; Optimus keeps the same two files as `0022_pup_duel.sql` and `0023_pup_duel_store.sql`, either copy will do). Until 0002 is in, **Practice with Rex** plays a bot on your own phone; until 0004 is in, duels work and the store says it is not set up yet.
-- It is the Pup Duel package, vendored in `public/js/vendor/pup-duel/`; see its README for how it works. `npm run duel-pack` rebuilds the questions from the pool.
+- **Shop**: your bone count in the lobby. Your dog tries on whatever you tap; one button buys it (and puts it on). A featured bundle (a quarter off the pieces you lack), two featured pieces, six daily pieces with one on a deal, all new at midnight, the sets, then every piece by slot. **Locker**: your dog's shirt badge: three saved outfits, each named as you like, then dog, coat, collar and the pieces in each slot. Your mate only ever sees pieces you own.
+- It plays on Med-OS's own Supabase project (`supabaseUrl` and `supabaseAnonKey` in `public/config.js`, the same as progress sync), with the duel's migrations run there (**Supabase**, below). Without a project, **Practice with Rex** plays a bot on your own phone.
+- It is the Pup Duel package, vendored in `public/js/vendor/pup-duel/`; see its README for how it works. `npm run duel-pack` rebuilds the questions from the pool (and `public/duel/mcq/`, which `node scripts/generate-duel-mcq.mjs` writes: one question of each kind per station).
 
 ## The MCQ pool and Submit a question
 
-**Submit a question** (on the start screen) takes your own single-best-answer question, or one from an open resource with its licence: the case, the lead-in, four or five options with the key marked, an explanation. The item-writing checks (no "all of the above", no negative stem, no cue that gives the key away, a complete vignette, units on every value…) run as you type and say what to fix. Paste JSON or CSV to send several. With sync set up (`supabase/migrations/0003_mcq.sql`) it goes straight to the pool's review; without, **Export file** sends it. **Your questions** shows each one: waiting for review, in the pool, or not taken with the reasons.
+**Submit a question** (on the start screen) takes your own single-best-answer question, or one from an open resource with its licence: the case, the lead-in, four or five options with the key marked, an explanation. The item-writing checks (no "all of the above", no negative stem, no cue that gives the key away, a complete vignette, units on every value…) run as you type and say what to fix. Paste JSON or CSV to send several. With sync set up (`supabase/migrations/0007_mcq.sql`) it goes straight to the pool's review; without, **Export file** sends it. **Your questions** shows each one: waiting for review, in the pool, or not taken with the reasons.
 
 The pool (`public/mcq/pool.json`) takes questions from four places and tags each with where it came from, a tag that is never rewritten: **user** (yours), **ai** (written by Claude from the stations), **amsa** (made from an AMSA MedEd case), **usmle-resource** (MedQA and MMLU, MIT-licensed). Each is checked in code, reviewed by a model that does not know its source (it solves the question twice without the key, then scores it the NBME way), and admitted only above a bar calibrated on the official USMLE Step 2 CK samples, with a higher bar for AI-written questions. Your questions that pass are always kept. `docs/mcq.md` explains it; `docs/mcq-evals.md` has the numbers.
 
@@ -46,6 +47,10 @@ To put it online, import the repo into Vercel (it reads `vercel.json`, output di
 7. **Marked** (top right of the start screen) collects every AI-marked attempt.
 8. **Request a case** (on the start screen, or **Request this case** when a search finds nothing) asks for a station the bank does not have: the case in a line, and if you like the setting, specialty, patient, the results you want to interpret in Part 2, the focus and a note. Your requests list shows where each stands: Requested, Being written (with the writer's note), Ready (open it from there) or Not made (with the reason). With sync set up the request goes by itself; without it, **Copy** or **Share** it to whoever writes your cases.
 
+### Your account
+
+**Settings → Account**: sign in with a name and a 4-digit PIN (the same as Duel a Mate's; **New account** makes one). Signed in, your OSCE progress (attempts, saved stations, case requests, names, which games are on) is kept on your account, and Settings shows it next to your Duel a Mate progress (rating, record, bones). Sign in on another device and it picks up where you left off. Signed out, progress is shared through the site's one record, as before. `supabase/migrations/0006_osce_accounts.sql` keeps account rows apart: the public key cannot read them; only `osce_pull` and `osce_push`, with your sign-in, can.
+
 ### AI marking
 
 Record the station (a phone's voice memo with transcription works), paste the transcript into **AI marking** on the marking sheet, then either:
@@ -60,7 +65,34 @@ Marks that arrive on an attempt nobody ticked yet tick the checklist straight aw
 Progress lives in each browser. Two ways to share it:
 
 - **Settings → Export progress / Import progress**: a file with attempts, saved stations and names. Importing merges by attempt, so nothing is lost or doubled.
-- **Automatic sync**: create a free Supabase project, run `supabase/migrations/0001_osce_state.sql` in its SQL editor (Duel a Mate has its own project, Casa: see above), and put the project URL and anon key in `public/config.js`. Attempts, saved stations, names, timing and case requests then reach both devices, and the case writer's pipeline. Anyone with the site's URL can read and write that record, so keep the URL between the two of you.
+- **Automatic sync**: Med-OS has its own Supabase project (`pquajwxvlpvaygrkzfkl`), separate from Optimus. `SUPABASE_ACCESS_TOKEN=sbp_... npm run supabase-setup` runs every file in `supabase/migrations/` against it and writes its URL and publishable key into `public/config.js`. A different project works the same way with `--ref <project_ref>`. Attempts, saved stations, names, timing and case requests then reach both devices, and the case writer's pipeline. Anyone with the site's URL can read and write that record, so keep the URL between the two of you.
+
+### Supabase: bringing Med-OS's project up to this code (2026-10-26)
+
+Med-OS's project is `pquajwxvlpvaygrkzfkl` (never Optimus's Casa). Already run there, per the commits that made them:
+`0001_osce_state.sql`, and the duel's `0002_pup_duel.sql` to `0005_pup_ladder.sql` as they were before 2026-10-26.
+The merge of the Pup Duel and MCQ branch changed two of those and added one, so run these, **in this order**, each pasted
+whole into the SQL editor (https://supabase.com/dashboard/project/pquajwxvlpvaygrkzfkl/sql/new) and Run; every file is
+idempotent:
+
+1. `supabase/migrations/0002_pup_duel.sql` (the package's 0001, changed): `pup_log` returns the server's time with the
+   rows (`now`), so a phone whose clock is off ages a duel on the server's clock after a reload; `pup_challenge` keeps
+   one open challenge between two players (a per-pair advisory lock: crossed rematches and rematch storms settle on one
+   duel), the ranked queue's own duel exempt.
+2. `supabase/migrations/0003_pup_shop.sql` (the package's 0002, changed): the catalogue rows `pup_items` for the 104-piece
+   wardrobe (52 before), and every common piece owned, the new ones too, by a wallet made before (`pup_wallet_of`,
+   `pup_fit_look`).
+3. `supabase/migrations/0006_osce_accounts.sql`, only if it is not in yet (its commit does not say it was applied):
+   `select to_regprocedure('public.osce_pull(uuid,text)');` answers null when it is missing.
+4. `supabase/migrations/0007_mcq.sql` (new; it was `0003_mcq.sql` on the MCQ branch): the `mcq_submissions` table that
+   Submit a question writes to (insert and read only, never update or delete).
+
+`0004_pup_ranked.sql` and `0005_pup_ladder.sql` are unchanged: leave them (run alone, 0004 would put back the
+leaderboard 0005 replaced; `npm run supabase-setup` is safe, as it runs every file in order). Checks afterwards:
+`select count(*) from public.pup_items;` gives 104, `select to_regclass('public.mcq_submissions');` names the table, and
+`select pg_get_functiondef('public.pup_log(uuid,uuid,bigint)'::regprocedure) like '%''now'', now()%';` is true. The same
+upgrade (main's six files, then these) ran clean in a scratch Postgres 16 on 2026-10-26; it was not run on the project
+itself, which this machine cannot reach.
 
 ## Writing new stations
 

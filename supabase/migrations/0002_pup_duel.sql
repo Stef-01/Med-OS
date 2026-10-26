@@ -176,11 +176,14 @@ begin
   end loop;
   -- one open challenge between two players: a second (the other tapped Rematch too, or my other phone did) gets the
   -- open one back, to accept or to wait on, so a storm of taps settles on one duel (evals, 2026-10-25). The pair's
-  -- lock makes two challenges at the same moment take turns
+  -- lock makes two challenges at the same moment take turns. The ranked queue's duel (0003, pup.ranked on) is always
+  -- its own
   perform pg_advisory_xact_lock(hashtextextended(least(me.id::text, p_opponent::text) || greatest(me.id::text, p_opponent::text), 0));
-  select * into d from public.pup_duels where status = 'invited' and ((a = me.id and b = p_opponent) or (a = p_opponent and b = me.id))
-    order by created_at, id limit 1;
-  if not found then
+  if coalesce(current_setting('pup.ranked', true), '') <> 'on' then
+    select * into d from public.pup_duels where status = 'invited' and ((a = me.id and b = p_opponent) or (a = p_opponent and b = me.id))
+      order by created_at, id limit 1;
+  end if;
+  if d.id is null then
     insert into public.pup_duels (a, b, setup) values (me.id, p_opponent, p_setup) returning * into d;
   end if;
   update public.pup_players set seen_at = now() where id = me.id;

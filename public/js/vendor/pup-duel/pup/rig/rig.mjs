@@ -5,6 +5,7 @@
 import { EASE_IN_OUT, EASE_OUT, track, flow, wave, bell, clamp, seeded, PERIOD, ago, B, TREAT, CALL, SWITCH, MOVE } from './motion.mjs';
 import { EXPR, DEF, PET, CALLED, TREAT_KEYS, TREAT_HOPS, MOVE_HOPS } from './expressions.mjs';
 import { NS, r3, set, rot, tr, pt, ellPath, uPath, scl, EAR_UP, EAR_FLOP, HEART, dogMarkup, reach } from './parts.mjs';
+import { MOVES, AURA, PARTS } from './moves.mjs';
 
 // the Learn mascot's frame (index.html marks <html class="embed"> before its first paint): the rig trims a zoom-in
 // there so a tall hat or wide back piece keeps its room
@@ -280,12 +281,34 @@ function makeDog(c, slot, P) {
     rig.Pv = now; rig.E = EXPR[id]; rig.exprId = id; rig.swStart = clock;
   };
   rig.excite = function (clock) {
-    if (clock - rig.burstStart >= B) {
+    if (clock - rig.burstStart >= (rig.BE.burst.dur || B)) {
       rig.burstStart = clock; rig.BE = rig.E;
       rig.E.burst.accents.forEach(function (a) { shot(a[0], clock + a[1]); });
     } else {
       shot('heart', clock);              // tapping again mid-burst: one more heart, no restart
     }
+  };
+  /* a signature move (moves.mjs): played as a burst is, over whatever the dog feels; false when there is no such move */
+  rig.perform = function (id, clock) {
+    var mv = Object.prototype.hasOwnProperty.call(MOVES, id) ? MOVES[id] : null;
+    if (!mv) return false;
+    rig.burstStart = clock; rig.BE = { burst: mv };
+    mv.accents.forEach(function (a) { shot(a[0], clock + a[1]); });
+    return true;
+  };
+  /* the worn piece's aura (moves.mjs AURA): one element, made once, shown once a period */
+  rig.setAura = function (type) {
+    if (rig.aura && rig.aura.type === type) return;
+    if (rig.aura) set(rig.aura.el, 'opacity', 0);
+    rig.aura = type && AURA[type] && ACCENT[type] ? { type: type, el: makeAccent(type) } : null;
+  };
+  /* the worn pieces' moving parts (<g data-fx>), each turned about its own centre by its PARTS function */
+  rig.setParts = function (nodes) {
+    rig.parts = (nodes || []).filter(function (n) { return PARTS[n.getAttribute('data-fx')]; }).map(function (n) {
+      var b = null; try { b = n.getBBox(); } catch (err) { b = null; }
+      var fn = PARTS[n.getAttribute('data-fx')];
+      return { el: n, fn: fn, cx: b ? (fn.at === 'br' ? b.x + b.width : b.x + b.width / 2) : 0, cy: b ? (fn.at === 'top' ? b.y : fn.at === 'br' ? b.y + b.height : b.y + b.height / 2) : 0 };
+    });
   };
   rig.treat = function (clock) {
     if (clock - rig.treatStart < TREAT) return false;
@@ -299,7 +322,8 @@ function makeDog(c, slot, P) {
     var E = rig.E, Pv = rig.Pv;
     var sw = EASE_IN_OUT(clamp((clock - rig.swStart) / SWITCH, 0, 1));
     var b = clock - rig.burstStart, BE = rig.BE;
-    var eB = b >= 0 && b < B ? flow(b, [[0, 0], [150, 1], [B - 600, 1], [B, 0]]) : 0;
+    var bd = BE.burst.dur || B;   // a signature move (moves.mjs) has its own length
+    var eB = b >= 0 && b < bd ? flow(b, [[0, 0], [150, 1], [bd - 600, 1], [bd, 0]]) : 0;
     var tb = clock - rig.treatStart;
     var eT = tb >= 0 && tb < TREAT ? flow(tb, [[0, 0], [120, 1], [TREAT - 400, 1], [TREAT, 0]]) : 0;
     var cb = clock - rig.callStart;
@@ -326,7 +350,7 @@ function makeDog(c, slot, P) {
       var H = c.hopH;
       var hn = hopLoop(ago(t, dt2), E.hops, H * E.hopK), hp = sw < 1 ? hopLoop(ago(t, dt2), Pv.hops, H * Pv.hopK) : hn;
       var lift = (hp.lift + (hn.lift - hp.lift) * sw) * keep, d = (hp.d + (hn.d - hp.d) * sw) * keep;
-      if (eB > 0) { var hb = hopSum(b - dt2, BE.burst.hops, H); lift += hb.lift; d += hb.d; }
+      if (eB > 0) { var hb = hopSum(b - dt2, BE.burst.hops, H * (BE.burst.hopK || 1)); lift += hb.lift; d += hb.d; }   // a move's hops can be lower (moves.mjs hopK)
       if (eT > 0) { var ht = hopSum(tb - dt2, TREAT_HOPS, Math.max(H, 9)); lift += ht.lift; d += ht.d; }
       if (moveB >= 0 && moveB < MOVE + 300) { var hm = hopSum(moveB - dt2, MOVE_HOPS, 6); lift += hm.lift; d += hm.d; }
       return { lift: lift, sy: 1 + d };
@@ -579,6 +603,11 @@ function makeDog(c, slot, P) {
     for (var j = 0; j < shots.length; j++) {
       var sh = shots[j];
       placeAccent(sh.el, sh.type, (clock - sh.start) / ACCENT[sh.type].dur, sh.i, 1);
+    }
+    if (rig.aura) placeAccent(rig.aura.el, rig.aura.type, (t % AURA[rig.aura.type]) / ACCENT[rig.aura.type].dur, 13, 1);
+    if (rig.parts) for (var pi = 0; pi < rig.parts.length; pi++) {
+      var pp = rig.parts[pi];
+      set(pp.el, 'transform', 'translate(' + r3(pp.cx) + ' ' + r3(pp.cy) + ') ' + pp.fn(t) + ' translate(' + r3(-pp.cx) + ' ' + r3(-pp.cy) + ')');
     }
   };
   return rig;

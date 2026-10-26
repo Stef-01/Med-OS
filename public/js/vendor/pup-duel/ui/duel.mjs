@@ -9,24 +9,26 @@
 
    transport  supabaseTransport(config) | localTransport() | null (practice only)
    pack       a normalised question pack (pack.mjs)
-   look       optional: () => the host's own dog and wear (a host with its own wardrobe), else the duel's store and
-              locker (store.mjs: pieces bought with bones earned in duels; the server keeps the wallet)
+   look       optional: () => the host's own dog and wear (Optimus passes its mascot's), else the duel's wardrobe
+              (shop.mjs: the shop and the locker, pieces bought with bones earned by playing; the server keeps the wallet)
    keys       'document' (default) listens for keys itself; 'host' leaves them to the host, which calls ui.key(e) from its
               own key owner (Med-OS's overlay stack captures every key) and gets true back when the duel used it */
 
 import { RULES, EMOTES, makeSetup, outcome } from '../duel/core.mjs';
 import { createSession } from '../duel/session.mjs';
-import { createLobby, settleCrossed, offerFrom } from '../duel/lobby.mjs';
+import { createLobby, settleCrossed, offerFrom, rematchTarget } from '../duel/lobby.mjs';
 import { practiceWorld, BOT } from '../duel/bot.mjs';
 import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
-import { topicsOf } from '../duel/pack.mjs';
+import { topicTree, poolOf, pickLabel } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
-import { fitOwned } from '../duel/wallet.mjs';
-import { openStore, storeTile, loadoutsPanel, bones } from './store.mjs';
-import { ITEMS, SETS, wearMsg, SLOT_NAME, VB, itemOf } from '../pup/wardrobe.mjs';
-import { coatsFor, COLLARS } from '../pup/rig/coats.mjs';
+import { lockerFor, fitLook } from '../duel/locker.mjs';
+import { normWallet, fitWear } from '../duel/shop.mjs';
+import { ITEMS, wearMsg, itemOf, movesOf } from '../pup/wardrobe.mjs';
 import { still, lookDog } from '../pup/rig/still.mjs';
 import { icon } from './icons.mjs';
+import { openWardrobe } from './shop.mjs';
+import { rankCard, openSearch, openLadder, lobbyBoard } from './ranked.mjs';
+import { rankChange } from '../duel/ranked.mjs';
 
 const BASE = new URL('../', import.meta.url);
 export const RIG = new URL('pup/rig/index.html', BASE).href;
@@ -42,7 +44,7 @@ const BETA = '<span class="pd-beta">Beta</span>';
 /* a look as this build can draw it: its dog, coat and collar known, its pieces in the wardrobe */
 const lookOf = l => normLook(l, id => !!itemOf(id));
 const ib = (pd, name, label, cls = '') => `<button class="pd-ib${cls ? ' ' + cls : ''}" type="button" data-pd="${pd}" aria-label="${esc(label)}" title="${esc(label)}">${icon(name)}</button>`;
-const setupLine = s => `${s?.rounds || '?'} questions, ${s?.secs || '?'} seconds each${s?.topic ? `, ${s.topic}` : ''}`;
+const setupLine = s => `${s?.rounds || '?'} questions, ${s?.secs || '?'} seconds each${s?.topic ? `, ${s.topic}` : ''}${s?.catLabel ? `, ${s.catLabel}` : ''}`;
 const breedOf = id => DOGS.find(d => d.id === id) || DOGS.find(d => d.id === DEFAULT_DOG);
 
 function loadCss() {
@@ -61,7 +63,7 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
   const box = document.createElement('div');
   box.className = 'pd-dog' + (mirror ? ' pd-mirror' : '');
   const f = document.createElement('iframe');
-  let cur = lookOf(look), ready = false, wantExpr = null;
+  let cur = lookOf(look), ready = false, wantExpr = null, wantMove = null;
   const q = new URLSearchParams({ embed: '1', dog: cur.dog, expr: 'happy' });
   if (cur.coat) q.set('coat', cur.coat);
   if (cur.collar) q.set('collar', cur.collar);
@@ -75,12 +77,15 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
     ready = true;
     if (cur.dog !== loadedAs.dog || cur.coat !== loadedAs.coat || cur.collar !== loadedAs.collar) send(skin(cur));
     send(wearMsg(cur.wear, false)); if (wantExpr) send({ dob: 'expr', id: wantExpr });
+    if (wantMove) { send({ dob: 'perform', id: wantMove }); wantMove = null; }
     loadedAs = cur;
   });
   return {
     el: box,
     expr(id) { if (wantExpr === id) return; wantExpr = id; if (ready) send({ dob: 'expr', id }); },
     tap() { if (ready) send({ dob: 'tap' }); },
+    /* a worn piece's signature move (moves.mjs), played once; a frame still loading plays it when it is up */
+    perform(id) { if (!id) return; if (ready) send({ dob: 'perform', id }); else wantMove = id; },
     dress(look) {
       const n = lookOf(look), was = cur;
       cur = n;
@@ -124,7 +129,6 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   root.innerHTML = '<div class="pd-shell"></div><div class="pd-live" aria-live="polite"></div>';
   const shell = root.querySelector('.pd-shell'), liveEl = root.querySelector('.pd-live');
   const say = text => { liveEl.textContent = ''; setTimeout(() => { liveEl.textContent = text; }, 30); };
-  const topics = topicsOf(pack);
   const top = (left, right = '<span></span>') => `<header class="pd-top">${left}<h1 class="pd-h1"><span>${esc(title)}</span>${BETA}</h1>${right}</header>`;
 
   /* ---- sign in: a name and a PIN, or a new player picking a dog ---- */
@@ -206,56 +210,16 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   function myLook() {
     const base = lookOf(S.lv?.self?.look || S.me?.look);
     if (hostLook) { const h = hostLook(); if (h) return lookOf(h); }
-    return base;   /* the server keeps a look with owned pieces only (0002_pup_store.sql) */
+    /* the server keeps a look to what its player owns; before the wallet is read, the old locker's rule stands in */
+    return S.wallet ? fitWear(base, S.wallet.owned) : fitLook(base, lockerFor(ITEMS, S.lv?.self?.wins || 0).open);
   }
-  /* the wallet: { ok: true, bones, owned: Set, loadouts } once the server answers; { ok: false } on a server without
-     the store yet (0002 not run: its functions are not there), which leaves the duel as it was */
-  const asWallet = w => ({ ok: true, bones: w.bones, earned: w.earned, owned: new Set(w.owned || []), loadouts: w.loadouts || [] });
+  /* the wallet (the shop's bones and pieces), read when the lobby opens and after every duel; a backend from before
+     the shop (no pup_wallet) leaves it null and the dressing room on the old locker */
   async function loadWallet() {
-    if (hostLook || !S.t?.wallet || !S.me) { S.wallet = { ok: false }; return S.wallet; }
-    const was = S.wallet;
-    try { S.wallet = asWallet(await S.t.wallet(S.me)); } catch (e) { S.wallet = was?.ok && !e.server ? was : { ok: false, why: e.message }; }
-    paintWallet(was);
-    S.onWallet?.();
+    if (hostLook || !transport?.wallet || !S.me) return null;
+    try { S.wallet = normWallet(await transport.wallet(S.me), id => !!itemOf(id)); } catch { /* the next lobby */ }
+    if (S.screen === 'lobby') paintLobby();
     return S.wallet;
-  }
-  /* the bone count in the lobby's header, a tap from the store; it pops when a duel has paid */
-  function paintWallet(was) {
-    const b = S.screen === 'lobby' && shell.querySelector('[data-pd="store"]');
-    if (!b) return;
-    const w = S.wallet;
-    b.querySelector('.pd-wbal').innerHTML = w?.ok ? bones(w.bones) : '';
-    b.setAttribute('aria-label', w?.ok ? `Store, ${w.bones} bones` : 'Store');
-    if (w?.ok && was?.ok && w.bones > was.bones) { b.classList.remove('pd-pop'); void b.offsetWidth; b.classList.add('pd-pop'); say(`${w.bones - was.bones} bones earned`); }
-  }
-  /* what the store screen needs from the duel: the wallet, the look, and the calls that change them */
-  function storeCtx(back = null) {
-    const ctx = {
-      sheet, dogFrame, back,
-      wallet: () => S.wallet,
-      look: () => myLook(),
-      async buy(id, price, day) { S.wallet = asWallet(await S.t.buy(S.me, id, price, day)); await wearLook({ ...myLook(), wear: { ...myLook().wear, [itemOf(id).slot]: id } }); },
-      async buySet(id, price) {
-        S.wallet = asWallet(await S.t.buySet(S.me, id, price));
-        const wear = { ...myLook().wear }; for (const i of SETS.find(x => x.id === id).items) wear[itemOf(i).slot] = i;
-        await wearLook({ ...myLook(), wear });
-      },
-      wear: look => wearLook(look)
-    };
-    S.onWallet = () => ctx.onWallet?.();
-    return ctx;
-  }
-  async function wearLook(look) {
-    const p = await (S.lobby ? S.lobby.look(lookOf(look)) : S.t.touch(S.me, lookOf(look)));
-    S.me = { ...S.me, look: p.look }; remember(S.me);
-    if (S.lv?.self) S.lv = { ...S.lv, self: { ...S.lv.self, look: p.look } };
-    paintLobby();
-    return p;
-  }
-  async function openShop(opts = {}, back = null) {
-    if (hostLook) return;
-    if (!S.wallet) loadWallet();
-    openStore(storeCtx(back), opts);
   }
   function showLobby() {
     stopAll(); S.screen = 'lobby';
@@ -263,8 +227,10 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       <main class="pd-main pd-lobby">
         <section class="pd-me" aria-label="You">
           ${hostLook ? '<div class="pd-me-dog"></div>' : `<button class="pd-me-dog" type="button" data-pd="dress" aria-label="Dress your dog"><span class="pd-badge">${icon('shirt')}</span></button>`}
-          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="store" aria-label="Store">${icon('bag')}<span class="pd-wbal"></span></button>`}</div>
+          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>
+          ${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="shop" hidden aria-label="Bones: open the shop">${icon('bone')}<b></b><span class="pd-wallet-go">Shop</span></button>`}</div>
         </section>
+        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" hidden></section><section class="pd-sec pd-boardsec" data-sec="board" aria-labelledby="pd-h-board"></section>' : ''}
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Duels</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mates"><h2 class="pd-h2">Mates</h2><div class="pd-grid"></div></section>
@@ -273,19 +239,30 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       </main>`;
     wireCommon();
     shell.querySelector('[data-pd="menu"]').addEventListener('click', openMenu);
-    shell.querySelector('[data-pd="dress"]')?.addEventListener('click', () => openDress());
-    shell.querySelector('[data-pd="store"]')?.addEventListener('click', () => openShop());
+    shell.querySelector('[data-pd="dress"]')?.addEventListener('click', () => openDress('locker'));
+    shell.querySelector('[data-pd="shop"]')?.addEventListener('click', () => openDress('shop'));
+    shell.querySelector('[data-sec="ranked"]')?.addEventListener('click', e => { if (e.target.closest('[data-pd="ranked"]')) startRanked(); });
+    const bs = shell.querySelector('[data-sec="board"]');
+    if (bs) {
+      S.lboard = lobbyBoard(bs, { face, meId: S.me.id, list: () => S.board || null, error: () => (S.board ? '' : S.boardErr || '') });
+      bs.addEventListener('click', e => { if (e.target.closest('[data-pd="ladder"]')) openLadder({ sheet, face, ib, transport, me: S.me, say, onPeriod: () => S.lboard?.paint() }); });
+    }
     if (!S.t) return;
+    loadWallet(); loadBoard();
     S.lobby = createLobby({ transport: S.t, me: S.me, onChange: lv => { S.lv = lv; paintLobby(); } });
     S.lobby.start();
     paintLobby();
-    paintWallet(); loadWallet();
   }
   function paintLobby() {
     if (S.screen !== 'lobby') return;
     const lv = S.lv || { mates: [], invites: [], waiting: [], live: [], past: [], self: null, loaded: false };
     const self = lv.self || S.me, look = myLook();
     shell.querySelector('.pd-name').textContent = self?.name || '';
+    const rk = shell.querySelector('[data-sec="ranked"]'), myRow = S.board?.find(p => p.id === S.me?.id);
+    if (S.board && S.lboard && S.lboardKey !== JSON.stringify(S.board)) { S.lboardKey = JSON.stringify(S.board); S.lboard.paint(); }
+    if (rk && myRow) { const key = `${myRow.rating}|${myRow.ranked}`; if (rk.dataset.key !== key) { rk.dataset.key = key; rk.innerHTML = rankCard(myRow); } rk.hidden = false; }
+    const wb = shell.querySelector('.pd-wallet');
+    if (wb) { wb.hidden = !S.wallet; if (S.wallet) { wb.querySelector('b').textContent = S.wallet.bones; wb.setAttribute('aria-label', `${S.wallet.bones} bones: open the shop`); } }
     shell.querySelector('.pd-rec').textContent = self ? `${self.wins || 0} won · ${self.losses || 0} lost${self.draws ? ` · ${self.draws} drawn` : ''}` : '';
     const holder = shell.querySelector('.pd-me-dog');
     if (!S.hero || !holder.contains(S.hero.el)) { S.hero = dogFrame(look, { label: dogName(look.dog) }); holder.prepend(S.hero.el); }
@@ -346,7 +323,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       b.insertAdjacentHTML('beforeend', `<b></b><span class="pd-tbadge">${icon('bot')}</span>`);
       b.querySelector('b').textContent = BOT.name;
       b.setAttribute('aria-label', `Practice with ${BOT.name}, a bot on this device`);
-      b.addEventListener('click', startPractice);
+      b.addEventListener('click', openPractice);
       return b;
     }
     const p = t.p;
@@ -388,18 +365,22 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   }
 
   /* ---- sheets: the menu, the challenge, the dressing room, the review, leaving ---- */
-  function sheet(html, wire, { full = false, label = '' } = {}) {
-    closeSheet();
+  function sheet(html, wire, { full = false, label = '', cls = '' } = {}) {
+    closeSheet(true);
     const el = document.createElement('div');
     el.className = 'pd-sheet-wrap';
-    el.innerHTML = `<div class="pd-scrim" data-pd="shut"></div><div class="pd-sheet${full ? ' pd-full' : ''}" role="dialog" aria-modal="true"${label ? ` aria-label="${esc(label)}"` : ''}>${html}</div>`;
+    el.innerHTML = `<div class="pd-scrim" data-pd="shut"></div><div class="pd-sheet${full ? ' pd-full' : ''}${cls ? ' ' + cls : ''}" role="dialog" aria-modal="true"${label ? ` aria-label="${esc(label)}"` : ''}>${html}</div>`;
     S.sheetFrom = document.activeElement; root.append(el); S.sheet = el;
-    el.querySelectorAll('[data-pd="shut"]').forEach(b => b.addEventListener('click', closeSheet));
+    el.querySelectorAll('[data-pd="shut"]').forEach(b => b.addEventListener('click', () => closeSheet()));
     wire(el.querySelector('.pd-sheet'));
-    el.querySelector('.pd-sheet button:not([data-pd="shut"]), .pd-sheet select')?.focus({ preventScroll: true });
+    /* the focus goes in: the first control that is not Close, else Close (the review has nothing else; the evals found
+       it opening with the focus left behind it) */
+    (el.querySelector('.pd-sheet button:not([data-pd="shut"]), .pd-sheet select') || el.querySelector('.pd-sheet button'))?.focus({ preventScroll: true });
   }
-  function closeSheet() {
-    const from = S.sheetFrom; S.sheet?.remove(); S.sheet = null; S.sheetFrom = null;
+  /* a sheet may hold its close (the wardrobe, with a look not saved, asks first); `force` closes it whatever it says */
+  function closeSheet(force = false) {
+    if (!force && S.sheet && S.sheetGuard?.() === false) return;
+    const from = S.sheetFrom; S.sheet?.remove(); S.sheet = null; S.sheetFrom = null; S.sheetGuard = null;
     if (from?.isConnected) from.focus({ preventScroll: true });   // back on what opened it
   }
   function openMenu() {
@@ -407,161 +388,139 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelector('[data-pd="signout"]').addEventListener('click', () => { remember(null); S.me = null; S.hero = null; S.wallet = null; showAuth(); });
     }, { label: 'Menu' });
   }
-  function openSetup(mate, last = null) {
-    const opt = last || { rounds: RULES.rounds, secs: RULES.secs, topic: '' };
-    const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div class="pd-seg" role="radiogroup" aria-label="${label}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}">${f(v)}</button>`).join('')}</div></div>`;
+  /* the setup of a duel with a mate or a practice with Rex, one sheet with two steps (founder 2026-10-25: "make the drill
+     down for question options have more layers, and consistent"):
+       setup   who, the questions it is played on ("Paediatrics › Anatomy, 11 questions"), how many, how long, Start
+       choose  the questions in two layers, the same for a duel and a practice: Every topic or a topic (Paediatrics),
+               then all of it or one category (OSCE skills, Clinical, Physiology and pathophysiology, Anatomy), each with
+               its count; a category with none yet is shown, greyed, so the layers read the same everywhere
+     The last pick and lengths are remembered on this device */
+  const PICK_KEY = `${storeKey}:pick`;
+  const lastPick = () => { try { const p = JSON.parse(storage.getItem(PICK_KEY)) || {}; return { rounds: RULES.roundChoices.includes(p.rounds) ? p.rounds : RULES.rounds, secs: RULES.secsChoices.includes(p.secs) ? p.secs : RULES.secs, topic: typeof p.topic === 'string' ? p.topic : '', cat: typeof p.cat === 'string' ? p.cat : '' }; } catch { return { rounds: RULES.rounds, secs: RULES.secs, topic: '', cat: '' }; } };
+  const keepPick = p => { try { storage.setItem(PICK_KEY, JSON.stringify(p)); } catch { /* private mode */ } };
+  function openSetup(mate, last = null, { practice: isPractice = false } = {}) {
+    const tree = topicTree(pack), layered = tree.topics.length > 1 || tree.all.cats.length > 1;
+    const opt = { ...lastPick(), ...(last || {}) };
+    if (!poolOf(pack, opt).length) { opt.topic = ''; opt.cat = ''; }   /* a pick the pack no longer has */
+    const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div class="pd-seg" role="radiogroup" aria-label="${label}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}" tabindex="${v === cur ? 0 : -1}">${f(v)}</button>`).join('')}</div></div>`;
     sheet(`
-      <div class="pd-vsmini" aria-hidden="true"></div>
-      <h2 class="pd-sheet-title"></h2>
-      ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
-      ${seg('secs', 'timer', 'Seconds each', RULES.secsChoices, opt.secs, v => `${v}s`)}
-      ${topics.length > 1 ? `<label class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><select name="topic" aria-label="Topic"><option value="">Every topic</option>${topics.map(t => `<option value="${esc(t.topic)}"${t.topic === opt.topic ? ' selected' : ''}>${esc(t.topic)}</option>`).join('')}</select><span class="pd-chevsel" aria-hidden="true">${icon('chev')}</span></label>` : ''}
-      <p class="pd-err" role="alert"></p>
-      <button class="pd-btn pd-pri" type="button" data-pd="send">${icon('zap')}Duel</button>`, el => {
+      <div class="pd-step" data-step="setup">
+        <div class="pd-vsmini" aria-hidden="true"></div>
+        <h2 class="pd-sheet-title"></h2>
+        ${layered ? `<button class="pd-pickrow" type="button" data-pd="choose"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><span class="pd-pick-tx"><small>Questions from</small><b></b></span><span class="pd-pick-n"></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
+        ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
+        ${seg('secs', 'timer', 'Seconds each', RULES.secsChoices, opt.secs, v => `${v}s`)}
+        <p class="pd-note" data-pd="fewer" hidden></p>
+        <p class="pd-err" role="alert"></p>
+        <button class="pd-btn pd-pri" type="button" data-pd="send">${icon(isPractice ? 'bot' : 'zap')}${isPractice ? 'Practice' : 'Duel'}</button>
+      </div>
+      <div class="pd-step" data-step="choose" hidden>
+        <div class="pd-sheet-head"><button class="pd-ib" type="button" data-pd="up" aria-label="Back">${icon('back')}</button><h2 class="pd-sheet-title" tabindex="-1">Choose questions</h2><span></span><span></span></div>
+        <p class="pd-crumbs"></p>
+        <ul class="pd-drill" role="list"></ul>
+      </div>`, el => {
+      const step = id => { el.querySelectorAll('.pd-step').forEach(s => { s.hidden = s.dataset.step !== id; }); };
+      const pickedRounds = () => +el.querySelector('[data-rounds][aria-checked="true"]').dataset.rounds;
       el.querySelector('.pd-vsmini').append(face(myLook()), face(mate.look, 'pd-mirror'));
-      el.querySelector('.pd-sheet-title').textContent = mate.name;
-      el.querySelectorAll('.pd-seg').forEach(g => g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; g.querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', String(x === b))); }));
+      el.querySelector('[data-step="setup"] .pd-sheet-title').textContent = isPractice ? `Practice with ${mate.name}` : mate.name;
+      const paintPick = () => {
+        const n = poolOf(pack, opt).length, row = el.querySelector('[data-pd="choose"]');
+        if (row) {
+          row.querySelector('b').textContent = pickLabel(pack, opt);
+          row.querySelector('.pd-pick-n').textContent = n;
+          row.setAttribute('aria-label', `Questions from ${pickLabel(pack, opt).replace(' › ', ', ')}: ${n} questions. Change`);
+        }
+        const few = el.querySelector('[data-pd="fewer"]'), r = pickedRounds();
+        few.hidden = n >= r; few.textContent = n < r ? `Only ${n} question${n === 1 ? '' : 's'} here, so it plays ${n}.` : '';
+      };
+      /* the two layers: dt null shows the topics; '' (Every topic) or a topic shows its categories */
+      let dt = null;
+      const drill = (focusFirst = true) => {
+        const ul = el.querySelector('.pd-drill'), crumbs = el.querySelector('.pd-crumbs');
+        const item = (label, n, attrs, { go = false, on = false, sub = '' } = {}) => `<li><button type="button" class="pd-drow${on ? ' pd-on' : ''}" ${attrs}${n ? '' : ' disabled'} aria-label="${esc(label)}, ${n ? `${n} question${n === 1 ? '' : 's'}` : 'none yet'}${on ? ', chosen' : ''}${go ? ', open' : ''}">
+          <span class="pd-drow-tx"><b>${esc(label)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</span><span class="pd-drow-n">${n || 'None yet'}</span>${go ? `<span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span>` : on ? `<span class="pd-drow-on" aria-hidden="true">${icon('check')}</span>` : '<span class="pd-drow-sp"></span>'}</button></li>`;
+        if (dt === null) {
+          crumbs.textContent = 'Pick a topic, then a kind of question.';
+          ul.innerHTML = item('Every topic', tree.all.count, 'data-dt=""', { go: true, sub: 'The whole bank' })
+            + tree.topics.map(t => item(t.topic, t.count, `data-dt="${esc(t.topic)}"`, { go: true, sub: t.topic === opt.topic ? `Chosen: ${pickLabel(pack, opt).split(' › ')[1] || 'all of it'}` : '' })).join('');
+        } else {
+          const node = dt ? tree.topics.find(t => t.topic === dt) : tree.all;
+          crumbs.innerHTML = `<button type="button" class="pd-crumb" data-pd="up">Topics</button><span aria-hidden="true">›</span><b></b>`;
+          crumbs.querySelector('b').textContent = dt || 'Every topic';
+          ul.innerHTML = item(dt ? `All of ${dt}` : 'Every question', node.count, 'data-dc=""', { on: opt.topic === dt && !opt.cat })
+            + node.cats.map(c => item(c.label, c.count, `data-dc="${esc(c.id)}"`, { on: opt.topic === dt && opt.cat === c.id })).join('');
+        }
+        if (focusFirst) (ul.querySelector('.pd-on:not(:disabled)') || ul.querySelector('button:not(:disabled)'))?.focus({ preventScroll: true });
+      };
+      el.querySelector('[data-pd="choose"]')?.addEventListener('click', () => { dt = null; step('choose'); drill(); });
+      el.querySelector('[data-step="choose"]').addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b || b.disabled) return;
+        if (b.dataset.pd === 'up') { if (dt === null) { step('setup'); el.querySelector('[data-pd="choose"]').focus({ preventScroll: true }); } else { dt = null; drill(); } return; }
+        if (b.dataset.dt !== undefined) { dt = b.dataset.dt; drill(); return; }
+        if (b.dataset.dc !== undefined) { opt.topic = dt || ''; opt.cat = b.dataset.dc; keepPick({ ...opt }); paintPick(); step('setup'); el.querySelector('[data-pd="choose"]').focus({ preventScroll: true }); say(`Questions from ${pickLabel(pack, opt)}`); }
+      });
+      el.querySelectorAll('.pd-seg').forEach(g => {
+        const set = b => { g.querySelectorAll('button').forEach(x => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; }); paintPick(); };
+        g.addEventListener('click', e => { const b = e.target.closest('button'); if (b) set(b); });
+        g.addEventListener('keydown', e => {   /* a radio group: the arrows move and choose */
+          const all = [...g.querySelectorAll('button')], i = all.indexOf(document.activeElement), n = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+          if (i < 0 || !n) return;
+          e.preventDefault(); const b = all[(i + n + all.length) % all.length]; set(b); b.focus();
+        });
+      });
+      paintPick();
       el.querySelector('[data-pd="send"]').addEventListener('click', async () => {
-        const rounds = +el.querySelector('[data-rounds][aria-checked="true"]').dataset.rounds, secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs;
-        const topic = el.querySelector('select')?.value || '';
-        const setup = makeSetup(pack, { rounds, secs, topic, seed: freshSeed(), title: pack.title });
+        const rounds = pickedRounds(), secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs;
+        keepPick({ ...opt, rounds, secs });
+        if (isPractice) { closeSheet(); startPractice({ rounds, secs, topic: opt.topic, cat: opt.cat }); return; }
+        const setup = makeSetup(pack, { rounds, secs, topic: opt.topic, cat: opt.cat, seed: freshSeed(), title: pack.title });
         if (!setup.questions.length) { el.querySelector('.pd-err').textContent = 'No questions to play.'; return; }
         await busy(async () => {
           const d = await challengeMate(mate.id, setup);
           closeSheet(); openDuel({ ...d, them: mate }, { accept: d.b === S.me.id });
         }, () => { el.querySelector('.pd-err').textContent = S.err; });
       });
-    }, { label: `Challenge ${mate.name}` });
+    }, { label: isPractice ? `Practice with ${mate.name}` : `Challenge ${mate.name}` });
   }
 
-  /* the locker (the dressing room): a live preview of the dog, and one tab each for the dog, its coat, its collar and
-     the four slots, each slot with the pieces you own and a way to the store; and three saved loadouts. The line
-     under the preview names what was just chosen. `draft` is a look in progress (back from the store) */
-  const TABS = [['dog', 'paw', 'Dog'], ['coat', 'palette', 'Coat'], ['collar', 'collar', 'Collar'], ['head', 'hat', SLOT_NAME.head], ['face', 'glasses', SLOT_NAME.face], ['neck', 'bow', SLOT_NAME.neck], ['back', 'pack', SLOT_NAME.back]];
-  function openDress(draft = null, startTab = 'dog') {
+  /* the ladder (ranked.mjs): read when the lobby opens and after a ranked duel; null on a backend without it */
+  async function loadBoard() {
+    if (!transport?.leaderboard || !S.me) return null;
+    try { S.board = await transport.leaderboard(S.me); S.boardErr = ''; } catch (e) { S.boardErr = `Can't load the leaderboard. ${e.server ? e.message : 'Retrying when the lobby opens.'}`; S.lboard?.paint(); }
+    if (S.screen === 'lobby') paintLobby();
+    return S.board;
+  }
+  function startRanked() {
+    openSearch({
+      sheet, closeSheet, transport, me: S.me, say,
+      guard: fn => { S.sheetGuard = fn; },
+      makeSetup: () => makeSetup(pack, { rounds: RULES.rounds, secs: RULES.secs, seed: freshSeed(), title: pack.title }),
+      onMatch: async d => {
+        const other = d.a === S.me.id ? d.b : d.a;
+        /* a mate who joined since the lobby last polled: ask the roster */
+        let p = S.lv?.mates.find(x => x.id === other) || S.board?.find(x => x.id === other);
+        if (!p) { try { p = (await transport.roster(S.me)).find(x => x.id === other); } catch { /* the duel still opens */ } }
+        say(`Matched with ${p?.name || 'a mate'}`);
+        openDuel({ ...d, them: p ? { id: p.id, name: p.name, look: p.look } : { id: other, name: 'Your opponent', look: {} } });
+      }
+    });
+  }
+
+  /* the wardrobe (shop.mjs): the shop and the locker over a live dog; a look saved goes to the server, which keeps
+     it to the pieces its player owns */
+  async function openDress(tab = 'locker') {
     if (hostLook) return;
-    if (!S.wallet) loadWallet();
-    const owned = () => (S.wallet?.ok ? S.wallet.owned : new Set()), cur = structuredClone(draft || fitOwned(myLook(), owned()));
-    sheet(`
-      <header class="pd-top pd-dresstop">${ib('shut', 'back', 'Cancel')}<h2 class="pd-h1"><span>Locker</span></h2>${ib('loadouts', 'layers', 'Loadouts')}</header>
-      <div class="pd-preview"></div>
-      <p class="pd-chosen" aria-live="polite"></p>
-      <div class="pd-tabs" role="tablist" aria-label="Dress up">${TABS.map(([id, ic, name], i) => `<button type="button" role="tab" data-tab="${id}" aria-selected="${i === 0}" aria-controls="pd-panel" aria-label="${esc(name)}" title="${esc(name)}">${icon(ic)}</button>`).join('')}</div>
-      <div class="pd-panel" id="pd-panel" role="tabpanel"></div>
-      <div class="pd-dressbar"><button class="pd-btn pd-pri" type="button" data-pd="save">${icon('check')}Save</button></div>`, el => {
-      const prev = dogFrame(cur, { label: 'Your dog' }), panel = el.querySelector('.pd-panel'), chosen = el.querySelector('.pd-chosen');
-      el.querySelector('.pd-preview').append(prev.el);
-      let tab = 'dog';
-      /* "<tab> · <its pick>": it names the icon tab and what is on the dog for it */
-      const pickName = id => {
-        const d = breedOf(cur.dog);
-        if (id === 'dog') return `${d.name} (${d.breedShort})`;
-        if (id === 'coat') { const own = cur.coat ? null : coatsFor(cur.dog).find(k => k.from === cur.dog); return (own || coatsFor(cur.dog).find(k => k.id === cur.coat) || {}).name || ''; }
-        if (id === 'collar') { const k = COLLARS.find(c => c.id === cur.collar) || COLLARS.find(c => c.hex === lookDog({ dog: cur.dog }).pal.collar); return k ? k.name : 'Its own'; }
-        return cur.wear[id] ? itemOf(cur.wear[id]).name : 'None';
-      };
-      const label = () => { const t = TABS.find(x => x[0] === tab); chosen.textContent = t ? `${t[2]} · ${pickName(tab)}` : 'Loadouts'; };
-      const coatTab = () => { el.querySelector('[data-tab="coat"]').hidden = coatsFor(cur.dog).length < 2; };   // a breed of one coat has nothing to choose
-      const update = () => { prev.dress(cur); label(); };
-      const radio = (b, on) => b.setAttribute('aria-checked', String(on));
-      const tabs = {
-        dog() {
-          const g = document.createElement('div'); g.className = 'pd-dogs'; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', 'Dog');
-          g.append(...DOGS.map(d => {
-            const b = document.createElement('button');
-            b.type = 'button'; b.className = 'pd-dogpick'; b.dataset.dog = d.id; b.setAttribute('role', 'radio'); radio(b, d.id === cur.dog);
-            b.setAttribute('aria-label', `${d.name}, ${d.breedName}`); b.title = d.hint;
-            b.append(face({ dog: d.id, collar: cur.collar }));
-            b.addEventListener('click', () => {
-              /* a coat carries over where the new breed has one of that name (black and tan, cream), else its own */
-              if (cur.coat && !coatsFor(d.id).some(k => k.id === cur.coat && k.from !== d.id)) delete cur.coat;
-              cur.dog = d.id; g.querySelectorAll('.pd-dogpick').forEach(x => radio(x, x === b));
-              update(); coatTab(); prev.tap();
-            });
-            return b;
-          }));
-          return g;
-        },
-        coat() {   /* the breed's coats; the dog's own is the empty id, the look's default */
-          return swatches('Coat', coatsFor(cur.dog).map(k => ({ id: k.from === cur.dog ? '' : k.id, name: k.name, colors: k.swatch })), cur.coat || '', v => { if (v) cur.coat = v; else delete cur.coat; });
-        },
-        collar() {   /* the dog's own colour first, then every other */
-          const own = lookDog({ dog: cur.dog }).pal.collar;
-          if (COLLARS.find(k => k.id === cur.collar)?.hex === own) delete cur.collar;
-          return swatches('Collar', [{ id: '', name: 'Its own', colors: [own] }, ...COLLARS.filter(k => k.hex !== own).map(k => ({ id: k.id, name: k.name, colors: [k.hex] }))], cur.collar || '', v => { if (v) cur.collar = v; else delete cur.collar; });
-        }
-      };
-      function swatches(label, opts, now, set) {
-        const g = document.createElement('div'); g.className = 'pd-swatches'; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', label);
-        g.append(...opts.map(o => {
-          const b = document.createElement('button');
-          b.type = 'button'; b.className = 'pd-swatch'; b.dataset.v = o.id; b.setAttribute('role', 'radio'); radio(b, o.id === now);
-          b.setAttribute('aria-label', o.name); b.title = o.name;
-          b.innerHTML = `<i style="--a:${o.colors[0]};--b:${o.colors[1] || o.colors[0]}"></i>`;
-          b.addEventListener('click', () => { set(o.id); g.querySelectorAll('.pd-swatch').forEach(x => radio(x, x === b)); update(); });
-          return b;
-        }));
-        return g;
-      }
-      function pieces(slot) {
-        const g = document.createElement('div'); g.className = 'pd-pieces';
-        /* the pieces you own for the slot, then the store's door for more */
-        const list = ITEMS.filter(i => i.slot === slot && !i.exclusive && owned().has(i.id)).sort((a, b) => a.price - b.price || a.name.localeCompare(b.name));
-        const none = document.createElement('button');
-        none.type = 'button'; none.className = 'pd-piece pd-none'; none.dataset.slot = slot; none.dataset.id = '';
-        none.setAttribute('aria-label', `No ${SLOT_NAME[slot].toLowerCase()}`); none.innerHTML = icon('x');
-        g.append(none, ...list.map(it => {
-          const b = document.createElement('button');
-          b.type = 'button'; b.className = 'pd-piece'; b.dataset.id = it.id; b.dataset.slot = slot; b.dataset.r = it.rarity;
-          b.setAttribute('aria-label', it.name); b.title = it.name;
-          b.innerHTML = `<svg viewBox="${it.tile || it.vb || VB[slot]}" aria-hidden="true">${it.icon || it.svg}</svg>`;
-          return b;
-        }));
-        if (S.t?.wallet) g.append(storeTile(slot, sl => openShop({ slot: sl }, () => openDress(cur, sl))));
-        const mark = () => g.querySelectorAll('.pd-piece').forEach(x => x.setAttribute('aria-pressed', String((cur.wear[slot] || '') === x.dataset.id)));
-        g.addEventListener('click', e => {
-          const b = e.target.closest('.pd-piece'); if (!b || b.disabled || b.dataset.pd === 'toshop') return;
-          if (b.dataset.id) cur.wear[slot] = b.dataset.id; else delete cur.wear[slot];
-          mark(); update();
-        });
-        mark();
-        const wrap = document.createElement('div'); wrap.append(g);
-        return wrap;
-      }
-      /* the loadouts: Save keeps the look on the dog in one of three; Wear puts one on (the room's Save keeps it) */
-      tabs.loadouts = () => loadoutsPanel({
-        wallet: S.wallet, face, cur: () => lookOf(cur),
-        onWear(look, name) {
-          const l = lookOf(fitOwned(look, owned()));
-          for (const k of ['dog', 'coat', 'collar', 'wear']) { if (l[k] === undefined) delete cur[k]; else cur[k] = structuredClone(l[k]); }
-          update(); coatTab(); prev.tap(); chosen.textContent = `Loadouts · ${name}`;
-        },
-        async onSave(slot, name, look) {
-          await busy(async () => { S.wallet = asWallet(await S.t.loadout(S.me, slot, name, look)); show('loadouts'); chosen.textContent = `Loadouts · saved as ${S.wallet.loadouts.find(l => l.slot === slot)?.name || name}`; }, () => { chosen.textContent = S.err; });
-        }
-      });
-      const show = id => {
-        tab = id;
-        if (id === 'loadouts') chosen.textContent = 'Loadouts'; else label();
-        el.querySelectorAll('[role="tab"]').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
-        el.querySelector('[data-pd="loadouts"]').setAttribute('aria-pressed', String(id === 'loadouts'));
-        panel.replaceChildren(tabs[id] ? tabs[id]() : pieces(id));
-        /* the one chosen in view (Heidi is far down the dogs), moving only the panel */
-        panel.scrollTop = 0;
-        const on = panel.querySelector('[aria-checked="true"], [aria-pressed="true"]'), pr = panel.getBoundingClientRect(), r = on?.getBoundingClientRect();
-        if (r && r.bottom > pr.bottom) panel.scrollTop = r.bottom - pr.bottom + 16;
-        panel.setAttribute('aria-label', TABS.find(t => t[0] === id)?.[2] || 'Loadouts');
-      };
-      el.querySelector('.pd-tabs').addEventListener('click', e => { const t = e.target.closest('[role="tab"]'); if (t) show(t.dataset.tab); });
-      el.querySelector('[data-pd="loadouts"]').addEventListener('click', () => show(tab === 'loadouts' ? 'dog' : 'loadouts'));
-      show(startTab); coatTab();
-      /* the wallet arrives after the room opens (or changes): the slot's pieces are drawn again */
-      S.onWallet = () => { if (el.isConnected && tab !== 'dog' && tab !== 'coat' && tab !== 'collar') show(tab); };
-      el.querySelector('[data-pd="save"]').addEventListener('click', async () => {
-        const look = lookOf(cur);
-        await busy(async () => { await wearLook(look); closeSheet(); }, () => { chosen.textContent = S.err; });
-      });
-    }, { full: true, label: 'Locker' });
+    const live = S.wallet || await loadWallet(), w = live || normWallet({ owned: [...lockerFor(ITEMS, S.lv?.self?.wins || 0).open] });
+    openWardrobe({
+      sheet, dogFrame, face, ib, lookOf, look: myLook(), wallet: w, offline: !live, tab, say,
+      guard: fn => { S.sheetGuard = fn; }, close: () => closeSheet(true),
+      buy: async (ids, total) => {
+        if (!transport?.buy) throw new Error('The shop opens once the server is updated.');
+        S.wallet = normWallet(await transport.buy(S.me, ids, total), id => !!itemOf(id)); return S.wallet;
+      },
+      saveLook: async look => { const p = await (S.lobby ? S.lobby.look(look) : transport.touch(S.me, look)); S.me = { ...S.me, look: p.look }; remember(S.me); paintLobby(); return p; },
+      saveOutfits: async list => { S.wallet = normWallet(await transport.outfits(S.me, list), id => !!itemOf(id)); return S.wallet; }
+    });
   }
   function openReview(st, me, opp) {
     const ai = st.setup.questions.some(q => q.origin === 'ai');
@@ -593,13 +552,16 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   }
 
   /* ---- practice ---- */
-  async function startPractice() {
+  /* practice: the same setup as a duel (the drill-down), then Rex on this device */
+  function openPractice() { openSetup({ name: BOT.name, look: BOT.look }, null, { practice: true }); }
+  async function startPractice(opts = S.lastPractice || lastPick()) {
+    S.lastPractice = opts;
     stopAll();
     await busy(async () => {
       const look = myLook();
       const w = await practiceWorld({ name: S.me?.name || 'You', look });
       S.world = w; S.t = w.transport; S.worldMe = w.me;
-      const setup = makeSetup(pack, { rounds: RULES.rounds, secs: RULES.secs, seed: freshSeed(), title: pack.title });
+      const setup = makeSetup(pack, { rounds: opts.rounds || RULES.rounds, secs: opts.secs || RULES.secs, topic: opts.topic || '', cat: opts.cat || '', seed: freshSeed(), title: pack.title });
       if (!setup.questions.length) throw new Error('No questions to play.');
       const d = await w.transport.challenge(w.me, w.bot.id, setup);
       openDuel({ ...d, them: { ...w.bot, look: BOT.look } }, { practice: true });
@@ -637,11 +599,13 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('.pd-mine .pd-dogslot').append(myDog.el);
     shell.querySelector('.pd-theirs .pd-dogslot').append(theirDog.el);
     S.dogs = { me: myDog, them: theirDog };
+    /* the walk-on: each dog plays its own signature move as the duel opens, never during a question */
+    myDog.perform(movesOf(myL.wear)[0]); setTimeout(() => theirDog.perform(movesOf(theirL.wear)[0]), 500);
     /* the two faces that mark who picked what on a reveal: drawn once, moved to the option each picked */
-    S.match = { d, me, them, t, practice: isPractice, last: {}, round: -1, revealed: -1, emoteN: 0, reported: false, faces: { me: face(myL, 'pd-pick'), them: face(theirL, 'pd-pick') } };
+    S.match = { d, me, them, t, myLook: myL, theirLook: theirL, practice: isPractice, last: {}, round: -1, revealed: -1, emoteN: 0, reported: false, faces: { me: face(myL, 'pd-pick'), them: face(theirL, 'pd-pick') } };
     S.match.faces.me.dataset.who = 'me'; S.match.faces.them.dataset.who = 'them';
     shell.querySelector('[data-pd="leave"]').addEventListener('click', confirmLeave);
-    shell.querySelectorAll('.pd-emote').forEach(b => b.addEventListener('click', () => { if (S.session?.emote(b.dataset.e)) { b.classList.add('pd-sent'); setTimeout(() => b.classList.remove('pd-sent'), 600); S.dogs.me.expr(EXPR.emote); } }));
+    shell.querySelectorAll('.pd-emote').forEach(b => b.addEventListener('click', () => { if (S.session?.emote(b.dataset.e)) { b.classList.add('pd-sent'); setTimeout(() => b.classList.remove('pd-sent'), 600); S.dogs.me.expr(EXPR.emote); showOff('me'); } }));
     S.session = createSession({ transport: t, me, duel: d, onChange: v => { S.view = v; paintMatch(); } });
     S.session.start();
     if (accept) S.session.accept();
@@ -726,7 +690,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       M.emoteN = em.length;
       const b = shell.querySelector('.pd-say'), e = em.at(-1).e;
       b.innerHTML = `${icon(EMOTE_ICON[e] || 'paw')}<span class="pd-vh"></span>`; b.lastChild.textContent = EMOTES[e] || '';
-      b.hidden = false; S.dogs.them.expr(EXPR.emote); S.dogs.them.tap(); say(`${M.them.name || 'Your mate'}: ${EMOTES[e] || ''}`);
+      b.hidden = false; S.dogs.them.expr(EXPR.emote); showOff('them'); say(`${M.them.name || 'Your mate'}: ${EMOTES[e] || ''}`);
       clearTimeout(M.sayT); M.sayT = setTimeout(() => { b.hidden = true; }, 2600);
     }
     /* the question card */
@@ -861,7 +825,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('.pd-dots').replaceChildren();
     S.dogs.me.expr(out === 'win' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);
     S.dogs.them.expr(out === 'loss' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);
-    if (out === 'win') S.dogs.me.tap();
+    /* the winner's celebration: their signature move if their look has one, else the cheer */
+    const winner = out === 'win' ? 'me' : out === 'loss' ? 'them' : null, wm = winner && movesOf((winner === 'me' ? lookOf(S.match.myLook) : lookOf(S.match.theirLook)).wear)[0];
+    if (winner && wm) setTimeout(() => S.dogs[winner]?.perform(wm), 700); else if (out === 'win') S.dogs.me.tap();
     say(`${head}. ${fmt(st.score[me])} to ${fmt(st.score[opp])}.`);
     res.querySelector('[data-pd="lobby"]').addEventListener('click', showLobbyOrAuth);
     res.querySelector('[data-pd="again"]').addEventListener('click', () => rematch(st));
@@ -870,8 +836,71 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     /* answering on a small phone leaves the view scrolled down to the options: bring the two dogs back into view, the
        winner's celebration is the point of this screen (whatever scrolls: the page here, a sheet in a host) */
     shell.scrollIntoView?.({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    if (!M.practice && M.them.id) watchRematch();
+    /* a ranked duel's next is another ranked match, not a rematch (which would not be ranked) */
+    if (M.d?.setup?.ranked) { const b = res.querySelector('[data-pd="again"]'); b.innerHTML = `${icon('zap')}<span>Find another</span>`; b.replaceWith(b.cloneNode(true)); res.querySelector('[data-pd="again"]').addEventListener('click', startRanked); }
+    else if (!M.practice && M.them.id) watchRematch();
+    earned(M, st, me, res);
     if (!M.reported) { M.reported = true; try { onResult({ outcome: out, score: st.score[me], theirs: st.score[opp], right: st.right[me], rounds: st.rounds.length, practice: M.practice, reason: st.reason }); } catch { /* the host's */ } }
+  }
+  /* what the duel paid, under the score: the server pays a mate's duel when it ends (read back from the wallet);
+     practice is paid here, a bone a right answer up to the day's cap */
+  async function earned(M, st, me, res) {
+    if (hostLook || !S.me || !transport?.wallet || M.paid) return;
+    M.paid = true;
+    const was = S.wallet?.bones;
+    let d = null, note = '';
+    try {
+      if (M.practice) {
+        const w = await transport.practice(S.me, st.right[me] || 0);
+        d = w.paid; S.wallet = normWallet(w, id => !!itemOf(id));
+        if (!d) note = 'Practice bones are done for today';
+      } else {
+        await new Promise(r => setTimeout(r, 400));
+        const w = normWallet(await transport.wallet(S.me), id => !!itemOf(id));
+        S.wallet = w; d = was == null ? null : w.bones - was;
+      }
+    } catch { return; }
+    if (M.d?.setup?.ranked && res.isConnected) rated(res);
+    if (!res.isConnected || (d == null && !note)) return;
+    const p = document.createElement('button');
+    p.type = 'button'; p.className = 'pd-earned'; p.dataset.pd = 'shop';
+    p.innerHTML = d ? `${icon('bone')}<b>+${d}</b><span>bones</span><span class="pd-earned-go">Shop</span>` : `${icon('bone')}<span></span>`;
+    if (!d) p.querySelector('span').textContent = note;
+    p.setAttribute('aria-label', d ? `You earned ${d} bones. Open the shop` : `${note}. Open the shop`);
+    p.addEventListener('click', () => openDress('shop'));
+    res.prepend(p);
+    if (d) say(`You earned ${d} bones`);
+  }
+  async function rated(res) {
+    const was = S.board?.find(p => p.id === S.me.id), before = was?.rating;
+    await loadBoard();
+    const now = S.board?.find(p => p.id === S.me.id);
+    if (!now || before == null || !res.isConnected) return;
+    const d = now.rating - before, el = document.createElement('p');
+    el.className = 'pd-rated'; el.dataset.sign = d > 0 ? '+' : d < 0 ? '-' : '0';
+    el.innerHTML = `${icon('shield')}<b></b><span></span>`;
+    el.querySelector('b').textContent = `${d > 0 ? '+' : d < 0 ? '−' : '±'}${Math.abs(d)}`;
+    el.querySelector('span').textContent = `rating, now ${now.rating}`;
+    res.prepend(el);
+    say(`Rating ${d >= 0 ? 'up' : 'down'} ${Math.abs(d)}, now ${now.rating}`);
+    /* a new tier (or the last placing game) is the moment of the result: a line in the tier's colour, and a dog that
+       climbed celebrates with its move */
+    const ch = rankChange(was, now);
+    if (!ch) return;
+    const m = document.createElement('p');
+    m.className = 'pd-promo'; m.dataset.kind = ch.kind; m.dataset.tier = ch.tier.toLowerCase();
+    m.innerHTML = `${icon('shield')}<span></span>`;
+    m.querySelector('span').textContent = ch.kind === 'placed' ? `Placed in ${ch.tier}` : ch.kind === 'up' ? `Up to ${ch.tier}` : `Down to ${ch.tier}`;
+    el.after(m);
+    say(m.textContent);
+    if (ch.kind !== 'down') { const mv = movesOf(lookOf(S.match?.myLook).wear)[0]; if (mv) setTimeout(() => S.dogs.me?.perform(mv), 2600); else S.dogs.me?.tap(); }
+  }
+  /* an emote is a dog's chance to show off: its signature move (moves.mjs) when it has one and no question is up
+     (a dance beside the options would pull the eye off them), else the cheer it always had. Both phones play it: each
+     knows both looks, so nothing about the move travels with the emote */
+  function showOff(who) {
+    const M = S.match, mv = M && movesOf(lookOf(who === 'me' ? M.myLook : M.theirLook).wear)[0];
+    if (mv && S.view?.stage?.name !== 'question') S.dogs[who]?.perform(mv); else S.dogs[who]?.tap();
   }
   /* their rematch, while this phone shows the result: a new challenge from them in the inbox (the finished duel's
      own log has stopped being asked by then), and the big button plays it */
@@ -896,15 +925,18 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   async function rematch(st) {
     const M = S.match, opt = { rounds: st.rounds.length, secs: st.setup.secs, topic: st.setup.topic || '' };
     if (M.practice) { await startPractice(); return; }
-    if (M.offer) { openDuel({ ...M.offer, them: M.them }, { accept: true }); return; }
     const setup = makeSetup(pack, { ...opt, seed: freshSeed(), title: pack.title });
     await busy(async () => {
+      /* the rematch already under way (my other phone's, or theirs, live or offered) before a new challenge */
+      const to = rematchTarget(S.me.id, M.them.id, M.d, await S.t.inbox(S.me).catch(() => [])) || (M.offer ? { duel: M.offer, accept: true } : null);
+      if (to) { openDuel({ ...to.duel, them: M.them }, { accept: to.accept }); return; }
       const d = await challengeMate(M.them.id, setup);
       S.session?.rematch(d.id);
-      openDuel({ ...d, them: M.them });
+      openDuel({ ...d, them: M.them }, { accept: d.b === S.me.id });
     }, () => {});
   }
-  /* a challenge, and a nudge on the mate's channel so their lobby shows it at once (the poll covers a lost one) */
+  /* a challenge, and a nudge on the mate's channel so their lobby shows it at once (the poll covers a lost one). With
+     a challenge already open between us the server hands that one back: theirs is accepted, mine is waited on */
   async function challengeMate(opp, setup) {
     const d = await S.t.challenge(S.me, opp, setup);
     if (S.t.live) { try { const c = S.t.live(`pup-player-${opp}`, () => {}); c.send({ type: 'invite', duel: d.id, from: S.me.id }); setTimeout(() => c.close(), 4000); } catch { /* the poll covers it */ } }
@@ -914,15 +946,15 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   /* ---- plumbing ---- */
   function wireCommon() {
     shell.querySelector('[data-pd="close"]')?.addEventListener('click', () => { destroy(); onClose(); });
-    shell.querySelectorAll('.pd-auth [data-pd="practice"]').forEach(b => b.addEventListener('click', startPractice));
+    shell.querySelectorAll('.pd-auth [data-pd="practice"]').forEach(b => b.addEventListener('click', openPractice));
   }
   function stopAll(keepWorld = false) {
     cancelAnimationFrame(S.raf); clearInterval(S.crossT);
     S.session?.stop(); S.session = null;
     S.lobby?.stop(); S.lobby = null;
     if (!keepWorld && S.world) { S.world.stop(); S.world = null; S.t = transport; }
-    closeSheet();
-    S.view = null; S._stage = null; S.hero = null;
+    closeSheet(true);
+    S.view = null; S._stage = null; S.hero = null; S.lboard = null; S.lboardKey = null;
   }
   function destroy() { stopAll(); if (keys === 'document') document.removeEventListener('keydown', onDocKey); root.replaceChildren(); root.classList.remove('pd'); }
 

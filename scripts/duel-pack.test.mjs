@@ -7,7 +7,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { shortDx, patientLine, stationQuestion, buildPack, poolQuestion, DUEL } from './lib/duel-pack.mjs';
-import { stationsOnDisk, poolOnDisk, packText } from './build-duel-pack.mjs';
+import { stationsOnDisk, poolOnDisk, packText, mcqOnDisk } from './build-duel-pack.mjs';
 import { stationItems } from './lib/mcq-sources.mjs';
 import { normQuestion } from '../public/js/vendor/pup-duel/duel/pack.mjs';
 
@@ -110,7 +110,7 @@ test('the pack from the pool: every pooled question that fits, each playable by 
 });
 
 test('public/duel/pack.json is current (node scripts/mcq-pool.mjs, then npm run duel-pack)', () => {
-  const { pack } = buildPack(poolOnDisk(path.join(ROOT, 'public')));
+  const pub = path.join(ROOT, 'public'), { pack } = buildPack(poolOnDisk(pub), { mcq: mcqOnDisk(pub), stations: stationsOnDisk(pub) });
   assert.equal(fs.readFileSync(path.join(ROOT, 'public/duel/pack.json'), 'utf8'), packText(pack));
 });
 
@@ -122,24 +122,27 @@ test('the vendored Pup Duel is exactly what its VERSION.json says, and the migra
   assert.deepEqual(files, Object.keys(v.files).sort(), 'the same files');
   for (const f of files) assert.equal(sha(path.join(dir, f)), v.files[f], `${f} was edited: change the package and vendor again`);
   assert.equal(sha(path.join(ROOT, 'supabase/migrations/0002_pup_duel.sql')), v.migration.sha, '0002_pup_duel.sql is the package\'s migration');
+  /* the shop's migration (the package's 0002_pup_shop.sql) is 0003 here */
+  const shop = (v.migrations || []).find(m => m.file.endsWith('_pup_shop.sql'));
+  assert.ok(shop, 'the package pins its shop migration');
+  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0003_pup_shop.sql')), shop.sha, '0003_pup_shop.sql is the package\'s shop migration');
+  /* ranked play's (the package's 0003_pup_ranked.sql) is 0004 here */
+  const ranked = (v.migrations || []).find(m => m.file.endsWith('_pup_ranked.sql'));
+  assert.ok(ranked, 'the package pins its ranked migration');
+  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0004_pup_ranked.sql')), ranked.sha, '0004_pup_ranked.sql is the package\'s ranked migration');
+  /* the leaderboard's periods (the package's 0004_pup_ladder.sql) are 0005 here */
+  const ladder = (v.migrations || []).find(m => m.file.endsWith('_pup_ladder.sql'));
+  assert.ok(ladder, 'the package pins its ladder migration');
+  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0005_pup_ladder.sql')), ladder.sha, '0005_pup_ladder.sql is the package\'s ladder migration');
 });
 
-test('the store\'s migration is the package\'s too (0004_pup_duel_store.sql, after 0002)', () => {
+test('the package\'s four migrations, in order, are Med-OS\'s 0002 to 0005, and the duel plays on Med-OS\'s own project', () => {
   const v = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/js/vendor/pup-duel/VERSION.json'), 'utf8'));
   const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex').slice(0, 16);
-  assert.deepEqual(v.migrations.map(m => m.file), ['supabase/migrations/0001_pup_duel.sql', 'supabase/migrations/0002_pup_store.sql']);
-  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0002_pup_duel.sql')), v.migrations[0].sha, '0002_pup_duel.sql is the package\'s 0001');
-  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0004_pup_duel_store.sql')), v.migrations[1].sha, '0004_pup_duel_store.sql is the package\'s 0002: vendor again and copy it');
-});
-
-test('the duel plays on Casa when config.js names it, and the progress sync stays off', async () => {
-  const { duelBackend } = await import('../public/js/osce/duel.mjs');
-  assert.deepEqual(duelBackend({ supabaseUrl: 'https://a.supabase.co', supabaseAnonKey: 'k1', duelSupabaseUrl: 'https://casa.supabase.co', duelSupabaseAnonKey: 'k2' }), { url: 'https://casa.supabase.co', key: 'k2' });
-  assert.deepEqual(duelBackend({ supabaseUrl: 'https://a.supabase.co', supabaseAnonKey: 'k1' }), { url: 'https://a.supabase.co', key: 'k1' }, 'else the progress-sync project');
-  assert.equal(duelBackend({ duelSupabaseUrl: 'https://casa.supabase.co' }), null, 'a URL without its key is nothing');
-  assert.equal(duelBackend({}), null, 'practice only');
+  const here = ['0002_pup_duel.sql', '0003_pup_shop.sql', '0004_pup_ranked.sql', '0005_pup_ladder.sql'];
+  assert.deepEqual(v.migrations.map(m => m.file), ['0001_pup_duel.sql', '0002_pup_shop.sql', '0003_pup_ranked.sql', '0004_pup_ladder.sql'].map(f => `supabase/migrations/${f}`));
+  here.forEach((f, i) => assert.equal(sha(path.join(ROOT, 'supabase/migrations', f)), v.migrations[i].sha, `${f} is the package's ${v.migrations[i].file}: vendor again and copy it`));
   const cfg = {}; new Function('window', fs.readFileSync(path.join(ROOT, 'public/config.js'), 'utf8'))(cfg);
-  assert.equal(cfg.OSCE_CONFIG.duelSupabaseUrl, 'https://psozzmlxhhajcszlplns.supabase.co', 'Casa');
-  assert.equal(JSON.parse(Buffer.from(cfg.OSCE_CONFIG.duelSupabaseAnonKey.split('.')[1], 'base64url')).role, 'anon', 'the public anon key, never a service key');
-  assert.equal(cfg.OSCE_CONFIG.supabaseUrl, '', 'the OSCE progress sync is not turned on');
+  assert.match(cfg.OSCE_CONFIG.supabaseUrl, /^https:\/\/pquajwxvlpvaygrkzfkl\.supabase\.co$/, 'Med-OS\'s own project, never Optimus\'s');
+  assert.ok(!('duelSupabaseUrl' in cfg.OSCE_CONFIG) && !('duelSupabaseAnonKey' in cfg.OSCE_CONFIG), 'no second project for the duel');
 });

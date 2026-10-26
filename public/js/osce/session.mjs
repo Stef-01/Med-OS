@@ -429,7 +429,7 @@ function checkItem(i, on, dis, q, p2) {
 export function syncIndeterminate() { ctx.ov.querySelectorAll('[data-ind]').forEach(x => { x.indeterminate = true; }); }
 /* ---------------------------------------------------------------- AI marking (2026-10-19; Stefan: "copy paste a transcript recording
    that is text and then AI will mark … later on, when a routine process is run"). On a finished attempt the marking sheet
-   grows a fold: paste the transcript, Send → one pending row in optimus_osce_marking and `a.ai = {reqId, status, at}` on
+   grows a fold: paste the transcript, Send → one pending marking request and `a.ai = {reqId, status, at}` on
    the attempt (save() → every device). The fleet's hourly osce_marking.py marks it against this station's own checklist;
    the next open of the marking view (and Refresh, and a sync pull) reads done/declined rows for this station's attempts
    and offers Apply AI marks: leaf ticks only (a parent id never ticks), the global impression, and the AI's feedback

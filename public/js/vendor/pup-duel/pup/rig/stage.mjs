@@ -9,6 +9,7 @@ import { dress } from './coats.mjs';
 import { still } from './still.mjs';
 import { NS, r3, set, tr, scl, reach, drape } from './parts.mjs';
 import { hatFit, boxIn, makeDog } from './rig.mjs';
+import { MOVES, peakOf } from './moves.mjs';
 
 // ---- the scene: a roster, a camera, and dogs that walk to their spots ----
 var svg = document.getElementById('scene');
@@ -179,6 +180,9 @@ function wear(r, m, fresh) {
   // a pair with dark or solid lenses (lens 'shade') covers the eyes, so they are not drawn under it: no white shows
   // between the lenses, round a heart or between a star's points (the rig keeps them while the pair pops on)
   r.rig.shade = !!m.face && m.lens === 'shade';
+  // a legendary piece's aura and any piece's moving parts (moves.mjs): ids and marked shapes, never code
+  if (r.rig.setAura) r.rig.setAura(typeof m.aura === 'string' ? m.aura : '');
+  if (r.rig.setParts && r.slot) r.rig.setParts([].slice.call(r.slot.querySelectorAll('[data-p^="wear"] [data-fx]')));
   // a hood on a Pomeranian: the fur is squashed inside it, so the hood grows to the mane's width and the mane is
   // trimmed to the hood's sides (fluff below the hood stays); any other head piece leaves the mane alone
   var ruff = q('ruff'), rc = q('ruffClip'), hw = q('wearHead'), b = null;
@@ -639,7 +643,7 @@ window.__dob = {
   roster: roster, add: function (i) { addDog(roster[i]); }, remove: function (i) { removeDog(roster[i]); },
   expr: function (i, id) { roster[i].rig.setExpr(id, clock); }, stop: function () { wanted = false; sync(); },
   at: function (c) { clock = c; draw(1000 / 60); }, tap: function (i) { roster[i].rig.excite(clock); },
-  treat: function (i) { roster[i].rig.treat(clock); }, call: function () { inScene().forEach(function (r, i) { r.rig.call(clock + i * 110); }); },
+  treat: function (i) { roster[i].rig.treat(clock); }, perform: function (i, id) { return roster[i].rig.perform(id, clock); }, call: function () { inScene().forEach(function (r, i) { r.rig.call(clock + i * 110); }); },
   makeGif: makeGif, clock: function () { return clock; }, look: function (x, y) { lookAt(x, y); },
   wear: function (i, m) { wear(roster[i], m, true); },   // scripts/doberman/fit-audit.mjs dresses a dog without postMessage
   skin: function (m) { reskin(m); }                       // and the embed's dog in another coat (coats.mjs)
@@ -672,7 +676,9 @@ if (EMBED) window.addEventListener('message', function (e) {
   if (m.dob === 'expr' && EXPR[m.id] && m.id !== r.exprId) r.setExpr(m.id, clock - 420);   // a verdict lands at once: 230 ms of the blend left
   else if (m.dob === 'tap') r.excite(clock);
   else if (m.dob === 'treat') r.treat(clock);
-  if (!running()) { clock += SWITCH + B; draw(16); }   // reduced motion: show the new pose as a still
+  else if (m.dob === 'perform') { if (!r.perform(m.id, clock)) return; lively = performance.now() + MOVES[m.id].dur + 600; }
+  // reduced motion: show the new pose as a still (a signature move's at its peak, half way through)
+  if (!running()) { clock += m.dob === 'perform' ? peakOf(MOVES[m.id]) : SWITCH + B; draw(16); }
 });
 draw(16);   // frame 0 must be a good drawing
 sync();

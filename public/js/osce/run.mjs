@@ -4,7 +4,7 @@
    osceRunPool, osceShuffle) are in core.mjs. */
 import { esc } from '../core.mjs';
 import { discRowHtml } from '../study-kit/vocab.mjs';
-import { ROTATIONS, ORIGINS, FROM, osceFrom, osceOrigin, osceRunPool, osceShuffle, oscePeople, osceCounts, NAME_MAX } from './core.mjs';
+import { ROTATIONS, ORIGINS, FROM, osceFrom, osceOrigin, osceRunPool, osceShuffle, oscePeople, osceCounts, NAME_MAX, osceGames } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, attempted, curAttempt, confirmDlg, openPop, ago, nameOf, initialOf, whoBadge } from './state.mjs';
 import { startAttempt } from './session.mjs';
 import { requestCardHtml } from './requests-view.mjs';
@@ -28,22 +28,22 @@ export function renderStart(main) {
         <span>Queue stations and run each one on the clock: one of you is the candidate, the other reads the patient and marks.</span></span>
       <span class="os-chev">${I.chevR}</span></button>
     ${requestCardHtml()}
+    ${osceGames(ctx.mem).duel ? duelHtml() : ''}
     ${mcqCardHtml()}
     ${doneHtml()}
-    ${duelHtml()}
   </div>`;
   runPaint();
 }
 
-/* Duel a Mate (founder 2026-10-25: "something you tap into from the main screen of the OSCE UI ... as it is a work in
-   progress", then "present at bottom of the screen"): a slim bar held at the bottom of the start view as it scrolls,
-   two of the duel's dogs face to face, marked Beta. The duel itself loads on the
-   tap (osce/duel.mjs, the vendored Pup Duel package); the faces are its dogs' icons */
+/* Duel a Mate: a card like Request a case (founder 2026-10-25: it was a bar held at the bottom of the screen, "a glitch
+   ... instead of being like the other buttons"), shown only once switched on in Settings (off by default). Two of the
+   duel's dogs face to face stand where the other cards have their icon. The duel itself loads on the tap
+   (osce/duel.mjs, the vendored Pup Duel package) */
 function duelHtml() {
   const face = id => `<span><img src="./js/vendor/pup-duel/pup/rig/icons/${id}.png" alt="" width="40" height="40" decoding="async"></span>`;
-  return `<button class="os-card os-duelcard os-in" data-os="duel" style="--d:3">
-      <span class="os-duelfaces" aria-hidden="true">${face('mochi')}${face('duke')}</span>
-      <span class="os-bigtx"><strong>Duel a Mate <span class="os-beta">Beta</span></strong><span>Race a mate on the question pool</span></span>
+  return `<button class="os-card os-bigcard os-duelcard os-in" data-os="duel" style="--d:3">
+      <span class="os-bigic os-duelfaces" aria-hidden="true">${face('mochi')}${face('duke')}</span>
+      <span class="os-bigtx"><strong>Duel a Mate <span class="os-beta">Beta</span></strong><span>Race a mate on the question pool, live, a cartoon dog each.</span></span>
       <span class="os-chev">${I.chevR}</span></button>`;
 }
 

@@ -1,9 +1,27 @@
 {
  "schemaVersion": 1,
- "version": "pool-159",
+ "version": "pool-159-mcq-0",
  "title": "Standard MCQ pool",
  "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json: 61 ai, 47 usmle-resource, 51 amsa.",
  "origin": "mixed",
+ "cats": [
+  {
+   "id": "skills",
+   "label": "OSCE skills"
+  },
+  {
+   "id": "clinical",
+   "label": "Clinical"
+  },
+  {
+   "id": "physio",
+   "label": "Physiology and pathophysiology"
+  },
+  {
+   "id": "anatomy",
+   "label": "Anatomy"
+  }
+ ],
  "questions": [
   {
    "id": "ai-mcq-031e86eb",
@@ -25,6 +43,7 @@
     "A Kleihauer-Betke test looks for fetomaternal haemorrhage, which would be suspected with a sinusoidal or abnormal trace, trauma or bleeding, and none of these is present here."
    ],
    "topic": "Obstetrics",
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -48,6 +67,11 @@
     "Balloon tamponade is wrong because it is only a temporary rescue for bleeding that cannot be controlled after drug and endoscopic therapy, and endoscopy is already planned."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -71,6 +95,12 @@
     "Bronchoscopy with lavage is invasive and carries a risk of spreading infection to staff, so it is kept for patients who cannot produce sputum or whose sputum samples are negative despite strong suspicion."
    ],
    "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Respiratory Medicine",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -94,6 +124,12 @@
     null
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -117,6 +153,12 @@
     "Elective colectomy is kept for recurrent or uncontrollable bleeding and is not offered after a first bleed that stopped by itself."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Emergency Medicine",
+    "General Surgery"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -140,6 +182,11 @@
     "She is RhD positive with a negative antibody screen, so the invasive procedure carries essentially no risk of clinically important sensitisation."
    ],
    "topic": "Obstetrics",
+   "topics": [
+    "Obstetrics",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -163,6 +210,11 @@
     null
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Ophthalmology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -186,6 +238,11 @@
     null
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -209,6 +266,12 @@
     null
    ],
    "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -232,6 +295,11 @@
     "Wrong: he has had no trauma, falls, injections or exertion, and the raised troponin with ST elevation places the enzyme source in the heart, not skeletal muscle."
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -255,6 +323,11 @@
     "Stress testing is contraindicated while rest pain continues, and putting off assessment until tomorrow is unsafe in very high-risk ACS."
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -278,6 +351,12 @@
     "A paratracheal nodal mass widens the mediastinum and may narrow the trachea, but it would not shift the whole mediastinum away from a large right effusion."
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Emergency Medicine",
+    "Oncology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -301,6 +380,12 @@
     "Gastric cancer is a long-term risk of pernicious anaemia itself, and starting folic acid neither causes it nor speeds it up."
    ],
    "topic": "Haematology",
+   "topics": [
+    "Haematology",
+    "Endocrinology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -324,6 +409,12 @@
     "She does not take digoxin, and digoxin causes a scooped ST segment, not asymmetric lateral T-wave inversion with high QRS voltages."
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Respiratory Medicine",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -347,6 +438,12 @@
     "Wrong: insulin is still needed to clear the ketosis, and stopping it does not treat the raised intracranial pressure."
    ],
    "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "Endocrinology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -370,6 +467,12 @@
     "Wrong: neurogenic stunned myocardium from a catecholamine surge usually causes a fast heart rate, low blood pressure and pulmonary oedema, not a slow heart rate with severe hypertension."
    ],
    "topic": "Neurosurgery",
+   "topics": [
+    "Neurosurgery",
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -393,6 +496,11 @@
     "Wrong: pyloromyotomy should wait until shock and the alkalosis are corrected, because operating sooner risks apnoea after the anaesthetic."
    ],
    "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -416,6 +524,11 @@
     null
    ],
    "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -439,6 +552,12 @@
     "Acetylcysteine treats paracetamol toxicity or early acute liver failure, but his paracetamol level is undetectable and his INR and mental state are normal."
    ],
    "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -462,6 +581,11 @@
     "Nebulised adrenaline treats anaphylaxis or upper airway obstruction such as croup, and she has no urticaria, angioedema, allergen exposure or stridor."
    ],
    "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Respiratory Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -485,6 +609,11 @@
     "Wrong: in chronic respiratory acidosis the bicarbonate is raised and the pH is close to normal, but he has a low bicarbonate and severe acidaemia after an acute event."
    ],
    "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -508,6 +637,12 @@
     null
    ],
    "topic": "Vascular Surgery",
+   "topics": [
+    "Vascular Surgery",
+    "Cardiology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -531,6 +666,7 @@
     "Wrong: laparotomy with a B-Lynch or similar suture is for haemorrhage that continues despite uterotonics and tamponade, so it is premature here."
    ],
    "topic": "Obstetrics",
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -554,6 +690,12 @@
     null
    ],
    "topic": "General Surgery",
+   "topics": [
+    "General Surgery",
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -577,6 +719,12 @@
     "Ileocaecal Crohn's disease is unlikely after a 16-hour illness with no diarrhoea, weight loss or bleeding, and an elective gastroenterology referral would miss a surgical emergency."
    ],
    "topic": "General Surgery",
+   "topics": [
+    "General Surgery",
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -600,6 +748,12 @@
     "Vitamin K reverses warfarin or treats a deficiency-related coagulopathy, and her INR is normal and she takes no vitamin K antagonist."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Emergency Medicine",
+    "General Surgery"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -623,6 +777,13 @@
     "Wrong: delaying drainage by 72 hours is acceptable only in mild cholangitis that responds to antibiotics. In severe cholangitis with hypotension and confusion, this delay increases the risk of death."
    ],
    "topic": "Gastrointestinal Surgery",
+   "topics": [
+    "Gastrointestinal Surgery",
+    "Gastroenterology",
+    "General Surgery",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -646,6 +807,12 @@
     "A score of 4 would need four criteria such as confusion and hypotension, and she has none of them. The high white cell count and CRP do not count towards the score."
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -669,6 +836,12 @@
     "Heparin speeds up bleeding into the pericardium and the false lumen; giving antithrombotics because of the low-grade suspicion of a coronary syndrome is a known harmful error in dissection."
    ],
    "topic": "Cardiothoracic Surgery",
+   "topics": [
+    "Cardiothoracic Surgery",
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -692,6 +865,12 @@
     "Wrong: hysteroscopy is not indicated in a 24-year-old with a normal pelvic examination, no endometrial risk factors and no failed medical treatment."
    ],
    "topic": "Gynaecology",
+   "topics": [
+    "Gynaecology",
+    "General Practice",
+    "Haematology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -715,6 +894,7 @@
     null
    ],
    "topic": "General Surgery",
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -738,6 +918,12 @@
     "Immobilising the neck in a rigid collar for weeks has no proven benefit in cervical radiculopathy and causes stiffness and muscle deconditioning."
    ],
    "topic": "Neurosurgery",
+   "topics": [
+    "Neurosurgery",
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -761,6 +947,12 @@
     "Colonoscopic decompression treats large bowel problems such as sigmoid volvulus or pseudo-obstruction and cannot reach or relieve an obstructed small bowel loop."
    ],
    "topic": "General Surgery",
+   "topics": [
+    "General Surgery",
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -784,6 +976,11 @@
     "She has no chest symptoms and normal oxygen saturation, and her fever, tachycardia and lower abdominal guarding point to an intra-abdominal source rather than pulmonary embolism."
    ],
    "topic": "Gynaecology",
+   "topics": [
+    "Gynaecology",
+    "Critical Care Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -807,6 +1004,13 @@
     "Wrong: tachycardia and tachypnoea are not TG18 organ dysfunction criteria, and her blood pressure and oxygenation are normal."
    ],
    "topic": "Gastrointestinal Surgery",
+   "topics": [
+    "Gastrointestinal Surgery",
+    "Gastroenterology",
+    "General Surgery",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -830,6 +1034,11 @@
     null
    ],
    "topic": "General Practice",
+   "topics": [
+    "General Practice",
+    "Haematology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -853,6 +1062,11 @@
     "Testing hepatitis B antibodies after a completed adolescent course is not routinely recommended in an immunocompetent traveller, and the result would not affect today's vaccines."
    ],
    "topic": "General Practice",
+   "topics": [
+    "General Practice",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -876,6 +1090,12 @@
     null
    ],
    "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -899,6 +1119,11 @@
     "Faecal elastase tests for pancreatic exocrine insufficiency and cannot confirm coeliac disease, which her serology already strongly suggests."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -922,6 +1147,12 @@
     null
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Dermatology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -945,6 +1176,11 @@
     null
    ],
    "topic": "General Practice",
+   "topics": [
+    "General Practice",
+    "Cardiology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -968,6 +1204,11 @@
     "Bilateral loss would need raised thresholds in both ears, but every left threshold is within the normal range of 20 dB HL or less, so the loss is one-sided."
    ],
    "topic": "Otorhinolaryngology",
+   "topics": [
+    "Otorhinolaryngology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -991,6 +1232,12 @@
     "Fatigue early in beta-blocker treatment is common and usually short-lived, and stopping it removes a proven mortality benefit and can bring on ischaemia or arrhythmia."
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Respiratory Medicine",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1014,6 +1261,11 @@
     "A D-dimer is non-specific, does not confirm a pneumothorax, and should not come before imaging when the examination already points strongly to another diagnosis."
    ],
    "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Respiratory Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1037,6 +1289,11 @@
     null
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1060,6 +1317,11 @@
     "A viral cold triggered this attack, and with no fever, purulent sputum or consolidation there is no indication for antibiotics."
    ],
    "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Respiratory Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1083,6 +1345,12 @@
     "Wrong: her shock is obstructive, not caused by blood loss, so fluid will not restore venous return while the tension pneumothorax is untreated, and giving it delays the treatment that saves her life."
    ],
    "topic": "Trauma Surgery",
+   "topics": [
+    "Trauma Surgery",
+    "Respiratory Medicine",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1106,6 +1374,12 @@
     null
    ],
    "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1129,6 +1403,11 @@
     "Wrong: intubation is kept for a tiring child, ongoing hypoxaemia or repeated adrenaline needs, none of which this improving child has."
    ],
    "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1152,6 +1431,11 @@
     "CT colonography cannot take biopsies or show flat dysplasia, so it is not used for surveillance in inflammatory bowel disease."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1175,6 +1459,12 @@
     "Amylase is less specific than lipase and clears sooner, so it adds nothing to a lipase already more than 30 times the upper limit and does not show the cause."
    ],
    "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Gastroenterology",
+    "General Surgery"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1198,6 +1488,11 @@
     null
    ],
    "topic": "General Practice",
+   "topics": [
+    "General Practice",
+    "Endocrinology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1221,6 +1516,12 @@
     "Repeat photographs after dilation give a better view but are still two-dimensional, so they cannot measure retinal thickness or reliably exclude macular oedema."
    ],
    "topic": "Ophthalmology",
+   "topics": [
+    "Ophthalmology",
+    "Endocrinology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1244,6 +1545,11 @@
     "Haemoglobin lags behind acute blood loss and only measures red cells, so it cannot guide replacement of clotting factors."
    ],
    "topic": "Obstetrics",
+   "topics": [
+    "Obstetrics",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1267,6 +1573,12 @@
     "Liver biopsy is invasive and not needed when serology has confirmed acute hepatitis A and the INR shows preserved synthetic function."
    ],
    "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1290,6 +1602,12 @@
     "Occult infection means HBV DNA is detectable without HBsAg, and anti-HBc is usually present; his negative core antibody and protective surface antibody do not suggest it."
    ],
    "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1313,6 +1631,11 @@
     "Wrong: regular testing picks up infection after it has happened but does nothing to stop it during high-risk ongoing exposure."
    ],
    "topic": "Sexual Health",
+   "topics": [
+    "Sexual Health",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1336,6 +1659,11 @@
     "Hepatitis B immunoglobulin gives passive protection after exposure or at birth and does not prevent reactivation of a chronic infection."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1359,6 +1687,12 @@
     "Wrong: nerve biopsy is invasive and is kept for suspected vasculitic or infiltrative neuropathy, which would present with asymmetric or rapidly progressive deficits."
    ],
    "topic": "Endocrinology",
+   "topics": [
+    "Endocrinology",
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1382,6 +1716,12 @@
     "A small GGT rise alongside a raised ALP fits reactive cholestasis, and she rarely drinks, so alcohol does not explain these results."
    ],
    "topic": "General Surgery",
+   "topics": [
+    "General Surgery",
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1405,6 +1745,12 @@
     null
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Respiratory Medicine",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "ai"
   },
@@ -1419,6 +1765,7 @@
    ],
    "answer": 1,
    "topic": "Nephrology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1433,6 +1780,7 @@
    ],
    "answer": 0,
    "topic": "Nephrology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1447,6 +1795,7 @@
    ],
    "answer": 1,
    "topic": "Gastroenterology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1461,6 +1810,7 @@
    ],
    "answer": 0,
    "topic": "Psychiatry",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1475,6 +1825,7 @@
    ],
    "answer": 0,
    "topic": "Paediatrics",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1489,6 +1840,7 @@
    ],
    "answer": 0,
    "topic": "Neonatology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1503,6 +1855,7 @@
    ],
    "answer": 2,
    "topic": "Breast/Endocrine Surgery",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1517,6 +1870,7 @@
    ],
    "answer": 3,
    "topic": "Obstetrics",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1531,6 +1885,7 @@
    ],
    "answer": 0,
    "topic": "Immunology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1545,6 +1900,7 @@
    ],
    "answer": 3,
    "topic": "Paediatrics",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1559,6 +1915,7 @@
    ],
    "answer": 0,
    "topic": "Infectious Diseases",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1573,6 +1930,7 @@
    ],
    "answer": 0,
    "topic": "Trauma Surgery",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1587,6 +1945,7 @@
    ],
    "answer": 1,
    "topic": "Rheumatology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1601,6 +1960,7 @@
    ],
    "answer": 3,
    "topic": "Trauma Surgery",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1615,6 +1975,7 @@
    ],
    "answer": 2,
    "topic": "Critical Care Medicine",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1629,6 +1990,7 @@
    ],
    "answer": 2,
    "topic": "Cardiology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1643,6 +2005,7 @@
    ],
    "answer": 0,
    "topic": "Gastroenterology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1657,6 +2020,7 @@
    ],
    "answer": 2,
    "topic": "Neonatology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1671,6 +2035,7 @@
    ],
    "answer": 3,
    "topic": "Respiratory Medicine",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1685,6 +2050,7 @@
    ],
    "answer": 2,
    "topic": "Plastic Surgery",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1699,6 +2065,7 @@
    ],
    "answer": 3,
    "topic": "Gynaecology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1713,6 +2080,7 @@
    ],
    "answer": 3,
    "topic": "Haematology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1727,6 +2095,7 @@
    ],
    "answer": 2,
    "topic": "Neurology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1741,6 +2110,7 @@
    ],
    "answer": 1,
    "topic": "Gynaecology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1755,6 +2125,7 @@
    ],
    "answer": 2,
    "topic": "Gastroenterology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1769,6 +2140,7 @@
    ],
    "answer": 0,
    "topic": "Haematology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1783,6 +2155,7 @@
    ],
    "answer": 3,
    "topic": "Paediatrics",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1797,6 +2170,7 @@
    ],
    "answer": 2,
    "topic": "Orthopaedics",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1811,6 +2185,7 @@
    ],
    "answer": 0,
    "topic": "Endocrinology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1825,6 +2200,7 @@
    ],
    "answer": 1,
    "topic": "Gynaecology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1839,6 +2215,7 @@
    ],
    "answer": 1,
    "topic": "Paediatrics",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1853,6 +2230,7 @@
    ],
    "answer": 0,
    "topic": "Gynaecology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1867,6 +2245,7 @@
    ],
    "answer": 0,
    "topic": "Neonatology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1881,6 +2260,7 @@
    ],
    "answer": 2,
    "topic": "Neurology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1895,6 +2275,7 @@
    ],
    "answer": 2,
    "topic": "Infectious Diseases",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1909,6 +2290,7 @@
    ],
    "answer": 1,
    "topic": "Medicolegal",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1923,6 +2305,7 @@
    ],
    "answer": 3,
    "topic": "Neurology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1937,6 +2320,7 @@
    ],
    "answer": 3,
    "topic": "Urology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1951,6 +2335,7 @@
    ],
    "answer": 3,
    "topic": "Infectious Diseases",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1965,6 +2350,7 @@
    ],
    "answer": 3,
    "topic": "Psychiatry",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1979,6 +2365,7 @@
    ],
    "answer": 1,
    "topic": "Toxicology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -1993,6 +2380,7 @@
    ],
    "answer": 1,
    "topic": "Paediatrics",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -2007,6 +2395,7 @@
    ],
    "answer": 3,
    "topic": "Infectious Diseases",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -2021,6 +2410,7 @@
    ],
    "answer": 0,
    "topic": "Rheumatology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -2035,6 +2425,7 @@
    ],
    "answer": 1,
    "topic": "Sexual Health",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -2049,6 +2440,7 @@
    ],
    "answer": 3,
    "topic": "Oncology",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -2063,6 +2455,7 @@
    ],
    "answer": 2,
    "topic": "Respiratory Medicine",
+   "cat": "clinical",
    "origin": "human",
    "source": "usmle-resource"
   },
@@ -2084,6 +2477,12 @@
     "No clubbing, no fine crackles, no reticular change on the X-ray, and it does not explain the mass."
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice",
+    "Oncology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2105,6 +2504,12 @@
     null
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Otorhinolaryngology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2126,6 +2531,11 @@
     "There is no solitary nodule, both lobes are enlarged, and TRAb is positive."
    ],
    "topic": "Endocrinology",
+   "topics": [
+    "Endocrinology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2147,6 +2557,12 @@
     "Vomiting began within hours of the pain, and CT shows a collapsed colon with the transition point in the small bowel."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Surgery",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2168,6 +2584,11 @@
     "She has no breathlessness, haemoptysis, calf symptoms, previous clot, immobility or oestrogen, SpO2 is 99%, Wells is 1.5 and the D-dimer is normal."
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2189,6 +2610,12 @@
     null
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Infectious Diseases",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2210,6 +2637,12 @@
     "No weight loss, fatigue, diarrhoea or blood in the stool, and only a 12-hour history."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Surgery",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2231,6 +2664,11 @@
     null
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2252,6 +2690,12 @@
     "No chest pain or breathlessness, the pain is positional, and the ECG shows sinus tachycardia with no ST or T wave changes."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Surgery",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2273,6 +2717,12 @@
     "She takes the pill daily, had a normal period 2 weeks ago, has no bleeding or faintness, a normal BP and a serum beta-hCG below 2 IU/L."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Surgery",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2294,6 +2744,12 @@
     "The pain is retrosternal rather than epigastric, with no bloating, early satiety, NSAID use or bleeding, and her Hb is normal."
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2315,6 +2771,11 @@
     null
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2336,6 +2797,12 @@
     "Murphy's sign negative, no gallbladder wall thickening or pericholecystic fluid, and conjugated jaundice with a dilated common bile duct."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Surgery",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2357,6 +2824,12 @@
     null
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2378,6 +2851,12 @@
     "No chest trauma or lung disease, the trachea is central, percussion and breath sounds are normal, and CT shows no pneumothorax."
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine",
+    "Respiratory Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2399,6 +2878,13 @@
     "The disc is pale (chalky) rather than hyperaemic, and he has headache, jaw claudication, an abnormal temporal artery and ESR 86 with CRP 78."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Rheumatology",
+    "Emergency Medicine",
+    "Ophthalmology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2420,6 +2906,12 @@
     null
    ],
    "topic": "Rheumatology",
+   "topics": [
+    "Rheumatology",
+    "Orthopaedics",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2441,6 +2933,12 @@
     "Short history with bleeding on the paper explained by the fissure, no change in bowel habit, weight loss or family history."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice",
+    "General Surgery"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2462,6 +2960,7 @@
     "It has lasted 3 months rather than a few weeks, there is no rash in her or her contacts, and she has erosions and a strongly positive anti-CCP."
    ],
    "topic": "Rheumatology",
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2483,6 +2982,12 @@
     "Hepatitis E IgM not detected, and hepatitis A IgM is positive."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2504,6 +3009,11 @@
     "Pain and sensory symptoms, no fasciculations, no upper motor neuron signs anywhere (normal tone, no Hoffmann's sign, normal lower limbs), a deficit confined to two roots and concordant root compression on MRI."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2525,6 +3035,12 @@
     "Diverticulosis is usually silent and does not cause a progressive change in habit or chronic iron deficiency; no LIF pain or fever to suggest diverticulitis; diverticular bleeding is usually sudden, painless and large."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice",
+    "General Surgery"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2546,6 +3062,11 @@
     "Recurrent stereotyped attacks over months with full resolution; Horner's resolves between attacks; no neck pain, trauma or focal deficit."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2567,6 +3088,12 @@
     "Her faecal elastase is normal at 410 and her pain does not radiate to the back."
    ],
    "topic": "Dermatology",
+   "topics": [
+    "Dermatology",
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2588,6 +3115,12 @@
     "There was no trauma, the pain is not pleuritic, the chest is resonant with equal breath sounds, and CT shows no pneumothorax."
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine",
+    "Cardiothoracic Surgery"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2609,6 +3142,11 @@
     "No injury or sudden tearing pain, she weight bears, there is no palpable defect, and the ultrasound shows no tear or haematoma."
    ],
    "topic": "General Practice",
+   "topics": [
+    "General Practice",
+    "Haematology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2630,6 +3168,12 @@
     null
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Vascular Surgery",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2651,6 +3195,12 @@
     "She has fever and a progressive course over a day, no facial droop or dysarthria, an inflammatory CSF and a CT change outside a single arterial territory."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Emergency Medicine",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2672,6 +3222,12 @@
     "He had no head injury or fall, and the CT shows no extra-axial collection."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Emergency Medicine",
+    "Neurosurgery"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2693,6 +3249,11 @@
     null
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2714,6 +3275,11 @@
     "The pain is bilateral, pressing and moderate, not throbbing, with no nausea, light or noise sensitivity or aura, and it is not worsened by activity."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2735,6 +3301,11 @@
     null
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2756,6 +3327,11 @@
     "Productive rather than dry cough, no fine crackles or clubbing, no interstitial change on X-ray, and obstructive rather than restrictive spirometry."
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2777,6 +3353,11 @@
     "Negative tTG-IgA with a normal total IgA while eating gluten, and normal ferritin and folate."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2798,6 +3379,11 @@
     "Regular periods and no hot flushes or night sweats."
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2819,6 +3405,13 @@
     "Clear history of head trauma, no morning or postural features or weight loss, and no mass on CT."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Emergency Medicine",
+    "Neurosurgery",
+    "Geriatrics"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2840,6 +3433,12 @@
     "He had no prodrome (no light-headedness, sweating, pallor or visual greying), no emotional or situational trigger, and his ECG shows complete heart block."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2861,6 +3460,11 @@
     "The pain is generalised, not epigastric through to the back, there is no vomiting, and lipase is 40 U/L."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2882,6 +3486,12 @@
     "No cough, sputum or wheeze, orthopnoea and PND with oedema, and no hyperinflation on CXR."
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2903,6 +3513,12 @@
     null
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "General Practice",
+    "Endocrinology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2924,6 +3540,12 @@
     "Born in Australia with no TB travel, contacts or past TB, and the smoking history and node make cancer more likely."
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Emergency Medicine",
+    "Oncology"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2945,6 +3567,12 @@
     "The current pain is constant at rest and there is tissue loss, so she has moved beyond claudication."
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Vascular Surgery",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2966,6 +3594,12 @@
     null
    ],
    "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Respiratory Medicine",
+    "Orthopaedics"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -2987,6 +3621,11 @@
     "No leg swelling, immobility, travel or previous clots, and the trauma and one-sided signs explain the picture."
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -3008,6 +3647,12 @@
     null
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Paediatrics",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -3029,6 +3674,12 @@
     "No fever or purulent sputum, normal WCC, only a small CRP rise, and the change is bilateral with upper lobe diversion and effusions."
    ],
    "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -3050,6 +3701,12 @@
     "No IV drugs, travel or unsafe sex, the LFTs are cholestatic with ALP and GGT raised more than ALT, and the bile ducts are dilated."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Surgery",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -3071,6 +3728,12 @@
     "His CSF is turbid with neutrophils, a high protein and a low glucose, and he has a CRP of 214 with a raised lactate."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Emergency Medicine",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -3092,6 +3755,12 @@
     "The CSF has 8500 neutrophils, a protein of 1.1 g/L, a glucose ratio of 0.24 and Gram-negative diplococci."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Infectious Diseases",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -3113,6 +3782,11 @@
     "The visual symptoms are positive (dots, jumbled lines), spread gradually, resolve fully and are followed by headache, with no weakness, numbness or speech change and a normal examination."
    ],
    "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   },
@@ -3134,6 +3808,11 @@
     "No travel, sick contacts or antibiotics, a 2-month course, and negative stool PCR, culture, C. difficile and parasite tests."
    ],
    "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
   }

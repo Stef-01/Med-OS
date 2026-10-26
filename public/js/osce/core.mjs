@@ -83,6 +83,11 @@ export function osceTick(t, timing, now) {
 }
 /* old saves ({att, ticks, mark}) → v2 ({v, bm, att, hist, timing, details, sess}); `now` stamps a v1 attempt that
    carried no time (the caller passes the clock: this law never reads one) */
+/* the games on the start screen (founder 2026-10-25: "dual a mate should be a toggleable game in settings to turn on,
+   not on by default"): each off until switched on in Settings; mem.games syncs with the rest of your progress */
+export const GAMES = [{ id: 'duel', name: 'Duel a Mate', beta: true, line: 'A live quiz against a mate on the bank\'s questions, with a cartoon dog each.' }];
+export const osceGames = mem => Object.fromEntries(GAMES.map(g => [g.id, mem?.games?.[g.id] === true]));
+
 export function osceMigrate(old, now) {
   const m = old && typeof old === 'object' ? { ...old } : {};
   if (m.v !== 2) {

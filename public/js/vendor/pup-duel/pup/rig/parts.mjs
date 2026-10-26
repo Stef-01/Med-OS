@@ -112,6 +112,22 @@ var FLOP_EARS = {
     var d = 'M' + (-r) + ' -5 Q0 -10 ' + r + ' -5 Q' + r + ' ' + r3(h * 0.6) + ' 0 ' + (h - 6) + ' Q' + (-r) + ' ' + r3(h * 0.6) + ' ' + (-r) + ' -5 Z';
     return { d: d, draw: function (f) { return '<path d="' + d + '" fill="' + f + '"/>'; } };
   },
+  // a rottweiler's or a boxer's: a triangle on a broad root, hanging to a rounded point
+  tri: function (w, h) {
+    var r = w / 2, b = h - 7, t = r3(w * 0.16);
+    var d = 'M' + (-r) + ' -3 Q0 -11 ' + r + ' -3 L' + t + ' ' + r3(b - 4) + ' Q0 ' + (b + 1) + ' ' + (-t) + ' ' + r3(b - 4) + ' Z';
+    return { d: d, draw: function (f) { return '<path d="' + d + '" fill="' + f + '"/>'; } };
+  },
+  // a spaniel's or a shih tzu's: long silky hair, narrow at the root, its sides in soft waves down to a scalloped end
+  silk: function (w, h) {
+    var t = w * 0.4, r = w / 2, b = h - 7;
+    var d = 'M' + r3(-t) + ' ' + r3(-7 + t) + ' A' + r3(t) + ' ' + r3(t) + ' 0 0 1 ' + r3(t) + ' ' + r3(-7 + t) +
+      ' Q' + r3(r + 1) + ' ' + r3(b * 0.3) + ' ' + r3(r - 1) + ' ' + r3(b * 0.5) + ' Q' + r3(r + 4) + ' ' + r3(b * 0.72) + ' ' + r3(r + 2) + ' ' + r3(b - 5) +
+      ' Q' + r + ' ' + (b + 2) + ' ' + r3(w / 6) + ' ' + (b - 1) + ' Q0 ' + (b + 4) + ' ' + r3(-w / 6) + ' ' + (b - 1) +
+      ' Q' + (-r) + ' ' + (b + 2) + ' ' + r3(-r - 2) + ' ' + r3(b - 5) + ' Q' + r3(-r - 4) + ' ' + r3(b * 0.72) + ' ' + r3(-r + 1) + ' ' + r3(b * 0.5) +
+      ' Q' + r3(-r - 1) + ' ' + r3(b * 0.3) + ' ' + r3(-t) + ' ' + r3(-7 + t) + ' Z';
+    return { d: d, draw: function (f) { return '<path d="' + d + '" fill="' + f + '"/>'; } };
+  },
   // a poodle's: a pendant of curls, puffs in pairs down from a small one at the root to a round one at the end
   puff: function (w, h) {
     var Q = [[0, -7 + w * 0.36, w * 0.36], [-w * 0.2, -7 + h * 0.4, w * 0.36], [w * 0.2, -7 + h * 0.4, w * 0.36],

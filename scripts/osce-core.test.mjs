@@ -279,3 +279,24 @@ test('reasonable differentials: the leading diagnosis first, malformed rows drop
   p2State('s9').n = 3;
   assert.doesNotMatch(qaHtml(st), /os-ddx/, 'not on the management question');
 });
+
+/* ---- games and the account (founder 2026-10-25) ---- */
+import { GAMES, osceGames } from '../public/js/osce/core.mjs';
+import * as acct from '../public/js/osce/account.mjs';
+import * as duelAcct from '../public/js/vendor/pup-duel/duel/accounts.mjs';
+
+test('games: Duel a Mate is off until switched on, and only true turns it on', () => {
+  assert.deepEqual(osceGames({}), { duel: false });
+  assert.deepEqual(osceGames(null), { duel: false });
+  assert.deepEqual(osceGames({ games: { duel: 'yes' } }), { duel: false });
+  assert.deepEqual(osceGames({ games: { duel: true } }), { duel: true });
+  assert.ok(GAMES.every(g => g.id && g.name && g.line));
+});
+
+test('the account takes the same names and PINs as the duel (its own rules, re-exported)', () => {
+  assert.equal(acct.nameError, duelAcct.nameError); assert.equal(acct.pinError, duelAcct.pinError);
+  assert.equal(acct.NAME_RE.source, duelAcct.NAME_RE.source);
+  assert.equal(acct.PIN_RE.source, duelAcct.PIN_RE.source);
+  for (const n of ['Sam', 'S', '  Sam  Lee ', 'a'.repeat(21), 'Zoë', '__', 'Dr. K-9']) assert.equal(acct.nameError(n), duelAcct.nameError(n), n);
+  for (const p of ['1234', '123', '12a4', '', '12345']) assert.equal(acct.pinError(p), duelAcct.pinError(p), p);
+});

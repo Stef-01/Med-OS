@@ -1,6 +1,6 @@
 /* lib/mcq-intake.mjs - students' submitted questions into the pool's pipeline (scripts/mcq-submissions.mjs).
 
-   From the shared table mcq_submissions (supabase/migrations/0003_mcq.sql) when a project is named, and from files
+   From the shared table mcq_submissions (supabase/migrations/0007_mcq.sql) when a project is named, and from files
    exported by the app (Your questions → Export file: { mcqSubmissions: 1, items: [...] }) or pasted. Each becomes an
    entry of data/mcq/submissions.json exactly as submitted: a submission is a "user" question, and anything else is
    refused, not relabelled; an id already there keeps its first text (a later copy that differs is reported, never
