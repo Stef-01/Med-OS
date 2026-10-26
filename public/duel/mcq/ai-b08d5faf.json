@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "ai-b08d5faf",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:19:09.321Z",
+ "questions": [
+  {
+   "id": "osce-ai-b08d5faf-skills",
+   "cat": "skills",
+   "stem": "Hannah, 36, is 12 weeks 4 days pregnant and in a fetal medicine clinic. Her NIPT result is valid (fetal fraction 9%) and shows a high chance of trisomy 16. Her 12-week scan was normal. She believed NIPT tests the baby's own DNA and gives a definite answer. Which explanation is most appropriate to give her?",
+   "options": [
+    "Because your scan was normal, this result is most likely a laboratory error",
+    "It's a screening test of mostly placental DNA, so only a diagnostic test can tell us",
+    "The test is about 99% accurate, so your baby very likely has trisomy 16",
+    "We'll repeat the blood test, and that will tell us whether the baby is affected"
+   ],
+   "answer": 1,
+   "why": "Most of the cell-free DNA that NIPT measures comes from the placenta, so the test gives a chance, not a diagnosis. A high-chance result must be confirmed by a diagnostic test (here, amniocentesis) before any decision is made.",
+   "notes": [
+    "This is false reassurance. A normal 12-week scan cannot exclude mosaic trisomy 16, and a valid high-chance result needs diagnostic testing.",
+    null,
+    "The published high accuracy figures apply mainly to trisomy 21. For rare autosomal trisomies the positive predictive value is low, mostly because of confined placental mosaicism, so this overstates the risk.",
+    "A repeat NIPT measures the same placental DNA, so it cannot diagnose the fetus and would only delay diagnostic testing."
+   ]
+  },
+  {
+   "id": "osce-ai-b08d5faf-clinical",
+   "cat": "clinical",
+   "stem": "Hannah, 36, is 12 weeks 4 days pregnant. She has a valid high-chance NIPT result for trisomy 16 (fetal fraction 9%), and her 12-week scan was structurally normal. After non-directive counselling she wants to find out whether the baby is affected. Which diagnostic approach should be offered?",
+   "options": [
+    "Amniocentesis from about 15 weeks",
+    "Chorionic villus sampling at 12 to 13 weeks",
+    "Repeat NIPT in 4 weeks, then test if still high chance",
+    "Morphology scan at 18 to 20 weeks, then test if abnormal"
+   ],
+   "answer": 0,
+   "why": "For a rare autosomal trisomy, amniocentesis is preferred. It samples amniocytes of fetal origin, whereas the placenta probably carries the trisomy. It is done from about 15 weeks and the procedure-related miscarriage risk is under 1%.",
+   "notes": [
+    null,
+    "CVS samples chorionic villi, which probably carry trisomy 16. The result may be falsely positive or mosaic and then need an amniocentesis anyway.",
+    "A repeat NIPT analyses the same placental cell-free DNA, so it would probably stay high chance, cannot diagnose and delays decisions.",
+    "A normal morphology scan cannot exclude mosaic trisomy 16, and waiting until 20 weeks narrows her options for no gain."
+   ]
+  },
+  {
+   "id": "osce-ai-b08d5faf-physio",
+   "cat": "physio",
+   "stem": "Hannah, 36, is 12 weeks 4 days pregnant. She is reading her NIPT report, which says 'fetal fraction 9% (minimum for a result 4%)', and asks what this number means. What does the fetal fraction measure?",
+   "options": [
+    "The proportion of fetal cells among the nucleated cells in her blood",
+    "The proportion of sequencing reads that map to chromosome 16",
+    "The probability that the high-chance result is a true positive",
+    "The proportion of cell-free DNA in her plasma that comes from the placenta"
+   ],
+   "answer": 3,
+   "why": "Fetal fraction is the share of total cell-free DNA in maternal plasma that comes from the placenta (mainly apoptotic trophoblast). It must reach a threshold for a reliable result. It is lower earlier in pregnancy and at higher maternal weight.",
+   "notes": [
+    "NIPT analyses fragments of cell-free DNA, not intact fetal cells, which are very scarce in maternal blood.",
+    "An excess of chromosome 16 reads is the signal used to call the trisomy. Fetal fraction is a quality measure of the whole sample.",
+    "That is the positive predictive value, which depends on prevalence and placental mosaicism and is low for rare autosomal trisomies. Fetal fraction does not tell you this.",
+    null
+   ]
+  },
+  {
+   "id": "osce-ai-b08d5faf-anatomy",
+   "cat": "anatomy",
+   "stem": "During your focused examination of Hannah, 36, G2P1, who is 12 weeks 4 days pregnant with a singleton and dates confirmed on scan, you palpate her abdomen to assess uterine size. Where would you expect to find the uterine fundus at this gestation?",
+   "options": [
+    "Not palpable, as the uterus stays a pelvic organ until about 16 weeks",
+    "Midway between the pubic symphysis and the umbilicus",
+    "At the level of the umbilicus",
+    "Just palpable above the pubic symphysis"
+   ],
+   "answer": 3,
+   "why": "The uterus rises out of the pelvis at about 12 weeks, so the fundus can just be felt above the pubic symphysis. It reaches midway to the umbilicus at about 16 weeks and the umbilicus at about 20 weeks.",
+   "notes": [
+    "The uterus becomes an abdominal organ at about 12 weeks, not 16, so the fundus is usually just palpable at this gestation.",
+    "A fundus midway between the symphysis and the umbilicus fits about 16 weeks. That would be large for dates here.",
+    "A fundus at the umbilicus fits about 20 weeks. That would be much larger than expected at 12 weeks 4 days.",
+    null
+   ]
+  }
+ ]
+}

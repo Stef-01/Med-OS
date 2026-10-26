@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-592",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:57:26.226Z",
+ "questions": [
+  {
+   "id": "osce-amsa-592-skills",
+   "cat": "skills",
+   "stem": "Phillip, 75, collapsed in the ED waiting area. CPR is in progress, pads are on, and the first rhythm check shows VF. Using COACHED, you charge the defibrillator during compressions, then deliver a single shock once everyone is clear. What do you direct the team to do immediately after the shock?",
+   "options": [
+    "Check the carotid pulse for up to 10 seconds, then resume CPR if absent",
+    "Watch the monitor for an organised rhythm before restarting compressions",
+    "Resume compressions straight away for 2 minutes, then check the rhythm",
+    "Give adrenaline 1 mg IV, then restart compressions once it is flushed"
+   ],
+   "answer": 2,
+   "why": "ANZCOR: after each shock, restart CPR straight away for 2 minutes without a pulse or rhythm check, because the heart is rarely perfusing just after a shock and pauses in CPR lower survival. Check the rhythm only at the end of each 2-minute loop.",
+   "notes": [
+    "A pulse check straight after the shock delays compressions; check the pulse only if the 2-minute rhythm check shows an organised rhythm.",
+    "Pausing to watch the monitor interrupts CPR; even if a rhythm appears after a shock, it rarely perfuses at first, so compressions continue.",
+    null,
+    "ANZCOR gives adrenaline after the second shock, not the first, and drugs are given during CPR, never as a reason to delay restarting compressions."
+   ]
+  },
+  {
+   "id": "osce-amsa-592-clinical",
+   "cat": "clinical",
+   "stem": "Phillip, 75, had a VF arrest in the ED of a hospital that has a cath lab, with ROSC at 10:18. His ECG at 10:22 shows ST elevation in V2 to V4, I, aVL, V5 and V6 with reciprocal depression in III and aVF. He is GCS 3 and ventilated by bag-valve-mask, BP 96/60. What is the most appropriate reperfusion plan?",
+   "options": [
+    "Immediate coronary angiography with primary PCI",
+    "IV tenecteplase in ED, then transfer for angiography",
+    "CT brain first, then angiography if there is no bleed",
+    "Defer angiography until his GCS improves in ICU"
+   ],
+   "answer": 0,
+   "why": "When the ECG shows STEMI after ROSC and a cath lab is on site, the patient goes for immediate angiography and primary PCI, whatever his conscious state. Do not wait for the troponin or for him to wake up.",
+   "notes": [
+    null,
+    "Fibrinolysis is only for when timely PCI is not available. Here the lab is on site, and lysis after CPR carries extra bleeding risk.",
+    "A witnessed VF arrest with a clear STEMI has an obvious cause. Routine CT brain first only delays reperfusion.",
+    "A low GCS soon after ROSC does not predict outcome. Prognosis is judged at 72 hours or later, and delaying PCI makes the infarct bigger."
+   ]
+  },
+  {
+   "id": "osce-amsa-592-physio",
+   "cat": "physio",
+   "stem": "Before his arrest, Phillip, 75, had been breathless since early morning. At triage his RR was 24 and his SpO2 93% on room air. After ROSC he has fine crackles at both lung bases, and his ECG shows an evolving anterolateral STEMI. Which mechanism best explains his crackles and hypoxia?",
+   "options": [
+    "Reduced plasma oncotic pressure from albumin moving into the interstitium",
+    "Increased capillary permeability from inflammatory alveolar injury",
+    "Raised systemic venous pressure from right ventricular failure",
+    "Raised LV filling pressure transmitted back to the pulmonary capillaries"
+   ],
+   "answer": 3,
+   "why": "Infarcted LV myocardium contracts poorly, so LV end-diastolic and left atrial pressures rise. This pressure is transmitted back to the pulmonary capillaries, and the raised hydrostatic pressure pushes fluid into the interstitium and alveoli, which causes the crackles and V/Q mismatch (cardiogenic pulmonary oedema).",
+   "notes": [
+    "Low oncotic pressure (e.g. nephrotic syndrome or liver failure) is not the problem in an acute MI, and his oedema is pulmonary rather than generalised.",
+    "A permeability (non-cardiogenic) leak is the mechanism in ARDS or sepsis, not in an acute anterior infarct with LV failure.",
+    "Right ventricular failure raises the JVP and causes peripheral oedema, not alveolar oedema; his infarct is in the LV territory.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-592-anatomy",
+   "cat": "anatomy",
+   "stem": "Phillip, 75, has ST elevation in V2 to V4 and also in I and aVL after his VF arrest. Angiography shows a single occlusion in the left anterior descending artery. Which branch, beyond the occlusion, supplies the high lateral wall shown by I and aVL, which is why the occlusion is judged to be proximal?",
+   "options": [
+    "First diagonal branch of the LAD",
+    "First septal perforator of the LAD",
+    "Obtuse marginal branch of the circumflex",
+    "Posterior descending artery"
+   ],
+   "answer": 0,
+   "why": "Diagonal branches of the LAD supply the anterolateral and high lateral LV wall, which leads I and aVL show. ST elevation in I and aVL alongside V2 to V4 therefore places the LAD occlusion proximal to the first diagonal.",
+   "notes": [
+    null,
+    "The septal perforators supply the interventricular septum (seen in V1 and V2), not the high lateral wall seen in I and aVL.",
+    "The obtuse marginal arises from the circumflex, so it lies outside the LAD and would not be affected by an LAD occlusion.",
+    "The posterior descending artery usually arises from the RCA and supplies the inferior wall and posterior septum (II, III, aVF), not the lateral wall."
+   ]
+  }
+ ]
+}

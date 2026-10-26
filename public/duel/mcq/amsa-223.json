@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-223",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:33:49.410Z",
+ "questions": [
+  {
+   "id": "osce-amsa-223-skills",
+   "cat": "skills",
+   "stem": "You are examining Bertha, 51, in the ED. She has sudden pleuritic chest pain and 3 days of a painful right calf after a 22-hour flight. Her right calf looks red and swollen. You want to record the swelling the way the Wells criteria define it. How should you do this?",
+   "options": [
+    "Passively dorsiflex the right ankle and note whether this causes calf pain (Homans' sign)",
+    "Measure the right calf at its widest point and compare it with a population normal value",
+    "Measure both calves 10 cm below the tibial tuberosity and compare; >3 cm is significant",
+    "Measure both legs 10 cm above the medial malleolus and compare; >1 cm is significant"
+   ],
+   "answer": 2,
+   "why": "The Wells criteria define calf swelling as more than 3 cm larger than the other side, with both calves measured at the same fixed landmark, 10 cm below the tibial tuberosity. Always examine and compare both legs.",
+   "notes": [
+    "Homans' sign is unreliable. It has poor sensitivity and specificity for DVT and is not how swelling is measured or recorded.",
+    "Calf size varies a lot between people. Only a comparison with her own other leg, at the same landmark, is meaningful.",
+    null,
+    "The Wells landmark is 10 cm below the tibial tuberosity, and the significant difference is more than 3 cm, not 1 cm."
+   ]
+  },
+  {
+   "id": "osce-amsa-223-clinical",
+   "cat": "clinical",
+   "stem": "CTPA confirms bilateral PE in Bertha, 51, with no RV strain. BP is 126/80, hs-troponin is normal, eGFR is above 90, and you have found no bleeding risk. She has been admitted under medicine and you plan to start oral anticoagulation tonight. Which regimen is correct?",
+   "options": [
+    "Apixaban 5 mg twice daily from day 1, continued for at least 3 months",
+    "Apixaban 10 mg twice daily for 7 days, then 5 mg twice daily for at least 3 months",
+    "Rivaroxaban 20 mg once daily from day 1, continued for at least 3 months",
+    "Dabigatran 150 mg twice daily from day 1, continued for at least 3 months"
+   ],
+   "answer": 1,
+   "why": "For acute VTE, apixaban starts with a higher loading phase of 10 mg twice daily for 7 days, then drops to 5 mg twice daily. Treatment of provoked PE lasts at least 3 months.",
+   "notes": [
+    "This leaves out the 7-day loading phase of 10 mg twice daily, so she would be undertreated during the period of highest risk.",
+    null,
+    "Rivaroxaban starts at 15 mg twice daily for 21 days. Only after that does it change to 20 mg once daily.",
+    "Dabigatran for VTE needs at least 5 days of parenteral anticoagulation, such as enoxaparin, before it is started."
+   ]
+  },
+  {
+   "id": "osce-amsa-223-physio",
+   "cat": "physio",
+   "stem": "Bertha, 51, has bilateral PE on CTPA. On room air her RR is 28 and SpO2 is 92%. With supplemental oxygen her SpO2 rises to 96%. Her chest is clear and there is no consolidation on CT. What is the main mechanism of her hypoxaemia?",
+   "options": [
+    "V/Q mismatch: flow diverted from blocked arteries overperfuses other lung units",
+    "Alveolar hypoventilation from splinting of the chest due to pleuritic pain",
+    "Diffusion limitation from thickening of the alveolar-capillary membrane",
+    "Fixed right-to-left shunt of blood through a patent foramen ovale"
+   ],
+   "answer": 0,
+   "why": "In PE, blood is diverted away from the blocked arteries into the remaining lung, which is now relatively underventilated. These low V/Q units cause hypoxaemia. Hypoxaemia from V/Q mismatch improves with supplemental oxygen.",
+   "notes": [
+    null,
+    "She is tachypnoeic, and PE usually causes hypocapnia. Hypoventilation would raise CO2 and is not the main mechanism here.",
+    "PE does not thicken the alveolar-capillary membrane. Diffusion limitation is a feature of interstitial lung disease.",
+    "A shunt through a PFO happens only when right heart pressures are raised, as in massive PE. She has no RV strain, and a true shunt responds poorly to oxygen."
+   ]
+  },
+  {
+   "id": "osce-amsa-223-anatomy",
+   "cat": "anatomy",
+   "stem": "Bertha, 51, describes sharp, well-localised pain low in the right side of her chest, worse on deep breathing and coughing, with no radiation. CTPA shows a small pleural-based right lower lobe infarct with a trace effusion. Which structure, and which nerve supply, explains her pain?",
+   "options": [
+    "Visceral pleura, supplied by the vagus nerve via the pulmonary plexus",
+    "Pulmonary artery wall, supplied by sympathetic fibres from T1 to T4",
+    "Diaphragmatic pleura centrally, supplied by the phrenic nerve (C3 to C5)",
+    "Costal parietal pleura, supplied by the intercostal nerves"
+   ],
+   "answer": 3,
+   "why": "The pleura-based infarct inflames the overlying costal parietal pleura. This pleura has somatic supply from the intercostal nerves, so the pain is sharp, well localised to the chest wall and worse when the pleura moves on breathing.",
+   "notes": [
+    "Visceral pleura has only autonomic supply and is insensitive to pain, so it cannot produce sharp, localised pleuritic pain.",
+    "Visceral pain from vessels is dull and poorly localised and does not change with breathing. That does not fit her pain.",
+    "Irritation of the central diaphragmatic pleura is referred to the shoulder tip through C3 to C5. Her pain is in the lower chest wall and does not radiate.",
+    null
+   ]
+  }
+ ]
+}

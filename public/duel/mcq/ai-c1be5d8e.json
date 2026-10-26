@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "ai-c1be5d8e",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:20:25.079Z",
+ "questions": [
+  {
+   "id": "osce-ai-c1be5d8e-skills",
+   "cat": "skills",
+   "stem": "Mr Pereira, 54, has clinic BP readings of 150 to 154/92 to 94 mmHg. His diary has single evening readings, mostly taken after coffee, on a device not known to be validated. You ask him to repeat home monitoring on a validated upper-arm device with a correctly sized cuff, seated and rested. Which instruction best describes the protocol he should follow?",
+   "options": [
+    "One reading each evening after work for 14 days, then average all of them",
+    "Three readings each morning for 3 days, then record only the lowest one",
+    "Two readings a minute apart, morning and evening for 7 days, discarding day 1",
+    "Two readings whenever he feels stressed or unwell, over the next month"
+   ],
+   "answer": 2,
+   "why": "A valid home protocol is duplicate readings 1 minute apart, morning and evening, for 7 days. Discard day 1 and average the rest. Hypertension is confirmed if the home average is 135/85 mmHg or higher.",
+   "notes": [
+    "Single readings in the evening only are what made his diary unreliable. They leave out morning readings and there are too few to average reliably.",
+    "Three days is too short, and keeping only the lowest reading biases the average downwards. Every valid reading after day 1 should be averaged.",
+    null,
+    "Readings taken only when stressed or unwell are biased upwards and don't show his usual resting blood pressure. The protocol needs scheduled, rested readings."
+   ]
+  },
+  {
+   "id": "osce-ai-c1be5d8e-clinical",
+   "cat": "clinical",
+   "stem": "Mr Pereira, 54, has repeated clinic BP readings of 150 to 154/92 to 94 mmHg. His home diary averages 124/78 mmHg but was taken unreliably. His fundi, ECG, eGFR and urine albumin to creatinine ratio are normal. He has no symptoms and leaves on a 3-month caravan trip in 2 weeks. What is the most appropriate next step for his blood pressure?",
+   "options": [
+    "Arrange 24-hour ambulatory BP monitoring and review the result before he leaves",
+    "Start amlodipine 5 mg daily now and review him by telehealth during his trip",
+    "Reassure him this is white coat hypertension and recheck his BP in 12 months",
+    "Request a transthoracic echocardiogram to look for LVH before deciding further"
+   ],
+   "answer": 0,
+   "why": "In grade 1 clinic hypertension without organ damage, confirm the diagnosis out of the office before treating. 24-hour ABPM is preferred: a daytime average of 135/85 mmHg or higher, or a 24-hour average of 130/80 mmHg or higher, confirms hypertension. Doing it now lets him be reviewed before the trip.",
+   "notes": [
+    null,
+    "Treatment isn't justified yet. The diagnosis isn't confirmed, he has no end-organ damage, and he may have white coat hypertension, so he could end up on tablets he doesn't need.",
+    "White coat hypertension can't be diagnosed from an invalid diary. Even when it is confirmed, it carries some risk and needs closer follow-up than every 12 months.",
+    "An echocardiogram isn't routine in uncomplicated grade 1 hypertension, and it doesn't answer the main question, which is whether his out-of-office blood pressure is raised."
+   ]
+  },
+  {
+   "id": "osce-ai-c1be5d8e-physio",
+   "cat": "physio",
+   "stem": "Mr Pereira, 54, snores loudly, has witnessed pauses in his breathing, wakes unrefreshed and has a neck circumference of 42 cm. His clinic BP is 150 to 154/92 to 94 mmHg. You suspect obstructive sleep apnoea is contributing to his raised blood pressure. Which mechanism best explains how obstructive sleep apnoea raises blood pressure?",
+   "options": [
+    "Hypercapnia causes systemic vasodilation, and cardiac output rises to compensate",
+    "Atrial stretch suppresses natriuretic peptide release, so sodium is retained overnight",
+    "Increased vagal tone during each apnoea raises peripheral vascular resistance",
+    "Repeated hypoxaemia and arousals drive chemoreflex sympathetic overactivity"
+   ],
+   "answer": 3,
+   "why": "Recurrent apnoeas cause intermittent hypoxaemia and arousals. These activate carotid body chemoreflexes and the sympathetic nervous system, causing vasoconstriction and renin release, and the effect persists into the day. This is why OSA is a recognised secondary cause of hypertension.",
+   "notes": [
+    "Overall, hypercapnia and hypoxaemia in OSA cause sympathetic vasoconstriction, not a vasodilation-driven rise in cardiac output.",
+    "Straining against a closed airway stretches the atria and increases natriuretic peptide release, which is why OSA causes nocturia. It doesn't suppress it.",
+    "Vagal activity slows the heart during apnoeas but doesn't raise vascular resistance. The pressor effect comes from the sympathetic system.",
+    null
+   ]
+  },
+  {
+   "id": "osce-ai-c1be5d8e-anatomy",
+   "cat": "anatomy",
+   "stem": "You measure Mr Pereira's BP in both arms. In this case the arms differed by only 2 mmHg. Suppose instead his left arm had read 22 mmHg lower than his right, consistently, with a weaker left radial pulse. Narrowing of which vessel would best explain this?",
+   "options": [
+    "Brachiocephalic trunk, before it gives off the right subclavian artery",
+    "Left subclavian artery, near where it arises from the aortic arch",
+    "Left common carotid artery, as it arises from the aortic arch",
+    "Left vertebral artery, after it arises from the left subclavian artery"
+   ],
+   "answer": 1,
+   "why": "The left subclavian artery arises directly from the aortic arch and supplies the left arm. Narrowing near its origin, usually from atherosclerosis, lowers the left arm pressure. A difference between the arms of more than 10 mmHg should prompt you to look for subclavian stenosis.",
+   "notes": [
+    "The brachiocephalic trunk supplies the right arm through the right subclavian artery, so narrowing there would lower the right arm reading, not the left.",
+    null,
+    "The left common carotid artery supplies the head and neck, not the arm, so narrowing it wouldn't change the brachial pressure.",
+    "The vertebral artery branches off the subclavian and supplies the brain. Narrowing it doesn't affect arm blood flow, which comes from the subclavian further along."
+   ]
+  }
+ ]
+}

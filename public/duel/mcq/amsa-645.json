@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-645",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T06:04:15.515Z",
+ "questions": [
+  {
+   "id": "osce-amsa-645-skills",
+   "cat": "skills",
+   "stem": "Ned, 32, is in ED with 2 days of worsening headache, fever, vomiting, photophobia and a stiff neck. He is on prednisolone. You tell the examiner you will test for Kernig's sign. Which manoeuvre do you perform, and what counts as a positive result?",
+   "options": [
+    "Flex the neck passively; positive if the hips and knees flex involuntarily",
+    "Raise the straight leg with knee extended; positive if pain shoots down the leg",
+    "Flex hip and knee to 90°, then extend the knee; positive if pain and resistance",
+    "Turn the head side to side 2 to 3 times a second; positive if the headache worsens"
+   ],
+   "answer": 2,
+   "why": "For Kernig's sign, flex the hip and knee to 90° and then try to straighten the knee. Pain or resistance from stretched, inflamed meninges is positive. The sign is specific but insensitive, so a negative result never rules out meningitis.",
+   "notes": [
+    "This is Brudzinski's neck sign, a different sign of meningism.",
+    "This is the straight leg raise (Lasègue's sign), which tests for lumbosacral nerve root irritation, for example from a disc prolapse.",
+    null,
+    "This is jolt accentuation of headache, a separate bedside test for meningism."
+   ]
+  },
+  {
+   "id": "osce-amsa-645-clinical",
+   "cat": "clinical",
+   "stem": "Ned, 32, has bacterial meningitis on CSF. He has been on oral prednisolone for a month. He reports a non-severe rash with penicillin as a child. Ceftriaxone 2 g IV 12-hourly and dexamethasone have been given. Which antibiotic should you add to cover Listeria monocytogenes?",
+   "options": [
+    "Benzylpenicillin 2.4 g IV 4-hourly",
+    "IV trimethoprim+sulfamethoxazole, with infectious diseases advice",
+    "Vancomycin IV, dosed to target trough levels",
+    "Azithromycin 500 mg IV daily"
+   ],
+   "answer": 1,
+   "why": "Cephalosporins do not cover Listeria. His corticosteroids put him at risk, so he needs added cover. With a penicillin allergy label, avoid benzylpenicillin empirically and use IV trimethoprim+sulfamethoxazole with ID input. Refer him for allergy delabelling later.",
+   "notes": [
+    "Benzylpenicillin is the usual Listeria cover, but empirical penicillin is avoided while he carries a penicillin allergy label that has not been assessed.",
+    null,
+    "Vancomycin is added for resistant pneumococcus. It is not reliable treatment for Listeria meningitis.",
+    "Azithromycin does not cover Listeria meningitis and does not reach adequate CSF levels for this purpose."
+   ]
+  },
+  {
+   "id": "osce-amsa-645-physio",
+   "cat": "physio",
+   "stem": "In ED, Ned, 32, with suspected bacterial meningitis, has blood cultures taken, and dexamethasone 10 mg IV is given just before his first dose of ceftriaxone 2 g IV. A student asks why the steroid has to be given before or with the first antibiotic dose, not hours later. What is the best explanation?",
+   "options": [
+    "It improves antibiotic penetration across the inflamed meninges",
+    "It replaces cortisol, because a month of prednisolone has suppressed his adrenals",
+    "It lowers intracranial pressure by reducing CSF production at the choroid plexus",
+    "It blunts the cytokine surge triggered when the first antibiotic dose lyses bacteria"
+   ],
+   "answer": 3,
+   "why": "Antibiotics that kill bacteria release cell wall components that drive a burst of cytokines and subarachnoid inflammation. Dexamethasone given before or with the first dose blunts this burst, which lowers the rate of hearing loss and neurological sequelae (and deaths in pneumococcal meningitis).",
+   "notes": [
+    "Dexamethasone reduces meningeal inflammation, which actually lowers antibiotic penetration. This is why it matters when vancomycin is used.",
+    "Adrenal suppression is a real concern for Ned and may need stress-dose cover, but it is not why dexamethasone has to be timed with the first antibiotic.",
+    "Reducing CSF production is how acetazolamide works. Dexamethasone's benefit in meningitis is anti-inflammatory.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-645-anatomy",
+   "cat": "anatomy",
+   "stem": "The ED registrar does Ned's lumbar puncture in the left lateral position after a normal CT brain. She palpates the line joining the highest points of the iliac crests to choose her level. Which level does she target, and why is it safe in an adult?",
+   "options": [
+    "L3–4 or L4–5 interspace; the conus medullaris ends at about L1–L2",
+    "T12–L1 interspace; the spinal cord ends at about T10",
+    "L1–L2 interspace; the spinal cord ends at about L3",
+    "L5–S1 interspace; the dural sac ends at about L5"
+   ],
+   "answer": 0,
+   "why": "The intercristal (Tuffier's) line crosses the L4 spinous process or the L4–5 interspace. The adult cord ends at about L1–L2, so a needle at L3–4 or L4–5 enters the lumbar cistern among cauda equina roots, below the cord.",
+   "notes": [
+    null,
+    "The adult cord does not end at T10, and a T12–L1 puncture would risk hitting the conus.",
+    "The intercristal line marks L4, not L1–L2, and the adult cord ends at about L1–L2, not L3.",
+    "The dural sac ends at about S2, not L5. Low lumbar interspaces above S1 are the usual targets."
+   ]
+  }
+ ]
+}

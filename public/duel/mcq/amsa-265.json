@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-265",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:38:38.566Z",
+ "questions": [
+  {
+   "id": "osce-amsa-265-skills",
+   "cat": "skills",
+   "stem": "Jane, 62, sees you at the GP with 5 to 6 months of new constipation, straining, blood mixed through her stool and tiredness. Her brother was diagnosed with bowel cancer at 48. She says, \"I was hoping to get one of those bowel test kits.\" What is the best response?",
+   "options": [
+    "Give her the kit today and refer for colonoscopy only if the result is positive",
+    "Say it is likely her haemorrhoids again and give the kit for peace of mind",
+    "Explain the kit is for people without symptoms and she needs a colonoscopy",
+    "Give her the kit and suggest she repeats it in two years if it is negative"
+   ],
+   "answer": 2,
+   "why": "An FOBT is a screening test for people without symptoms. A patient with symptoms (change in habit, blood mixed in the stool) needs a diagnostic colonoscopy, because a negative FOBT does not rule out cancer and would falsely reassure her.",
+   "notes": [
+    "Waiting for an FOBT result delays a colonoscopy she needs now, and a false negative could stop the referral altogether.",
+    "Blood mixed through the stool and a change in habit are not explained by haemorrhoids, and an FOBT does not suit a patient with symptoms.",
+    null,
+    "This applies the screening interval to a patient with symptoms; she needs a diagnostic test now, not routine screening."
+   ]
+  },
+  {
+   "id": "osce-amsa-265-clinical",
+   "cat": "clinical",
+   "stem": "Jane's bloods show Hb 108 g/L, MCV 76 fL and ferritin 8 µg/L. TSH, calcium and kidney function are normal. You are referring her for an urgent colonoscopy. Which further investigation should also be arranged for her iron deficiency anaemia?",
+   "options": [
+    "Gastroscopy with duodenal biopsies, together with coeliac serology",
+    "Serum carcinoembryonic antigen (CEA) level to screen for cancer",
+    "CT colonography to image the whole colon as well",
+    "Faecal calprotectin to look for bowel inflammation"
+   ],
+   "answer": 0,
+   "why": "Iron deficiency anaemia in a postmenopausal woman needs both ends of the gut looked at: colonoscopy plus gastroscopy with duodenal biopsies, and coeliac serology. This finds upper GI cancer, peptic ulcer or coeliac disease, and two lesions can occur together.",
+   "notes": [
+    null,
+    "CEA is too insensitive and nonspecific to diagnose cancer; it is used for staging and follow-up once cancer is confirmed.",
+    "CT colonography repeats the colonoscopy, cannot take biopsies and does not look at the upper GI tract.",
+    "Calprotectin helps tell IBD from IBS in diarrhoea; it does not look for an upper GI source of iron loss."
+   ]
+  },
+  {
+   "id": "osce-amsa-265-physio",
+   "cat": "physio",
+   "stem": "Jane, 62, with iron deficiency anaemia (ferritin 8 µg/L), is started on oral ferrous sulfate while she waits for endoscopy. She is advised to take it on alternate days rather than twice daily. What is the main reason alternate-day dosing can improve absorption?",
+   "options": [
+    "Daily iron fully saturates transferrin, so the extra iron is excreted in bile",
+    "Iron is absorbed in the terminal ileum, which needs 48 hours between doses",
+    "Daily dosing suppresses erythropoietin, so less iron is taken up by marrow",
+    "Each dose raises hepcidin for about a day, blocking ferroportin in enterocytes"
+   ],
+   "answer": 3,
+   "why": "An oral iron dose raises hepcidin for about 24 hours. Hepcidin breaks down ferroportin, the channel that moves iron out of duodenal enterocytes, so a dose taken the next day is poorly absorbed. Spacing doses avoids this and causes fewer GI side effects.",
+   "notes": [
+    "Her transferrin saturation is 5%, far from saturated, and the body has no regulated way to excrete excess iron in bile.",
+    "Non-haem iron is absorbed mainly in the duodenum and proximal jejunum, not the terminal ileum.",
+    "Oral iron does not suppress erythropoietin; the limit on the dose schedule is gut absorption, not uptake by the marrow.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-265-anatomy",
+   "cat": "anatomy",
+   "stem": "Jane's colonoscopy shows a tumour at the rectosigmoid junction, above the dentate line. Biopsy confirms adenocarcinoma, and the surgeon plans a resection with its regional lymph nodes. To which lymph nodes does this tumour first drain?",
+   "options": [
+    "Superficial inguinal nodes in the femoral triangle",
+    "Nodes along the superior rectal vessels to the inferior mesenteric nodes",
+    "Internal iliac nodes along the middle rectal vessels",
+    "Superior mesenteric nodes at the root of the small bowel mesentery"
+   ],
+   "answer": 1,
+   "why": "Lymph from the sigmoid and upper rectum drains alongside the superior rectal and inferior mesenteric vessels to the inferior mesenteric nodes. This is why the resection includes a high tie of the inferior mesenteric artery with its mesentery.",
+   "notes": [
+    "Superficial inguinal nodes drain the anal canal below the dentate line, not a tumour at the rectosigmoid.",
+    null,
+    "Drainage to the internal iliac nodes along the middle rectal vessels is mainly from the lower rectum, not the rectosigmoid junction.",
+    "Superior mesenteric nodes drain the midgut up to the proximal two-thirds of the transverse colon, not the hindgut."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "ai-fbe23e14",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:23:16.174Z",
+ "questions": [
+  {
+   "id": "osce-ai-fbe23e14-skills",
+   "cat": "skills",
+   "stem": "A term baby (39+2 weeks) is floppy and apnoeic at birth. After drying and warming, the heart rate is 70/min. You start mask ventilation in air at 40 seconds, but the chest is not rising. What is your next step?",
+   "options": [
+    "Start chest compressions at a ratio of 3:1 with ventilation",
+    "Increase the oxygen to 100% and continue the same ventilation",
+    "Reposition the head to neutral, reseal the mask and give jaw support",
+    "Go straight to tracheal intubation before trying other steps"
+   ],
+   "answer": 2,
+   "why": "If the chest does not rise, the ventilation is not working. Fix the airway and the mask first: head in neutral, a better mask seal, jaw support (the start of the MR SOPA steps). Chest rise followed by a rising heart rate shows the ventilation is effective.",
+   "notes": [
+    "Compressions start only if the heart rate stays below 60/min after 30 seconds of effective ventilation, and this heart rate is 70 with no chest rise yet.",
+    "More oxygen does nothing if no gas reaches the lungs, and a term baby starts in air.",
+    null,
+    ">Intubation is an advanced airway step for when simple corrections fail; repositioning, the mask seal and jaw support come first."
+   ]
+  },
+  {
+   "id": "osce-ai-fbe23e14-clinical",
+   "cat": "clinical",
+   "stem": "The term baby (3.4 kg) needed mask ventilation at birth and is now breathing on its own, pink and responding. At 30 minutes of age, before any feed, the meter blood glucose is 2.2 mmol/L. A laboratory glucose has been sent. What is the most appropriate management now?",
+   "options": [
+    "IV 10% glucose 6.8 mL bolus, then start a glucose infusion",
+    "40% glucose gel 1.7 mL into the cheek, breastfeed, recheck BGL in 30 to 60 min",
+    "Formula top-up feed now, then recheck the BGL before the next feed in 3 hours",
+    "Wait for the laboratory glucose result before giving any treatment"
+   ],
+   "answer": 1,
+   "why": "A BGL below 2.6 mmol/L in a well baby is treated with 40% glucose gel 0.5 mL/kg (1.7 mL for 3.4 kg) into the buccal mucosa, then a breastfeed or colostrum, with a recheck 30 to 60 minutes later. IV glucose is for a BGL that stays low or a baby who is unwell.",
+   "notes": [
+    "IV 10% glucose 2 mL/kg is the next step if the BGL stays below 2.6 despite gel and feeds, or if the baby is unwell; this baby is stable.",
+    null,
+    "A feed alone with a recheck 3 hours later is too slow for a BGL of 2.2 mmol/L; give gel first, then feed, and recheck in 30 to 60 minutes.",
+    "A meter is less accurate at low values, so confirm with a lab glucose, but do not hold treatment while you wait."
+   ]
+  },
+  {
+   "id": "osce-ai-fbe23e14-physio",
+   "cat": "physio",
+   "stem": "A term baby had 8 minutes of fetal bradycardia (about 70) before birth and is apnoeic, with a heart rate of 70. Once the mask technique is corrected and the chest rises, the heart rate climbs to 120 by 2 minutes and 140 by 3 minutes, with no compressions or drugs. Which mechanism best explains the rise in heart rate?",
+   "options": [
+    "Aerating the lungs drops pulmonary resistance, oxygenating the hypoxic myocardium",
+    "Lung inflation triggers a vagal reflex that directly speeds the sinoatrial node",
+    "Positive pressure raises intrathoracic pressure and so increases venous return",
+    "Ventilation lowers pCO2, and the fall in pCO2 directly speeds the sinoatrial node"
+   ],
+   "answer": 0,
+   "why": "Newborn bradycardia at birth is caused by hypoxia. Inflating the lungs lowers pulmonary vascular resistance, so more blood flows through the lungs and oxygenated blood reaches the heart, and the heart rate recovers. That is why the heart rate is the best sign that ventilation is working.",
+   "notes": [
+    null,
+    "Vagal stimulation slows the sinoatrial node rather than speeding it up, so a vagal reflex cannot explain the rise in heart rate.",
+    "Positive pressure ventilation raises intrathoracic pressure, which reduces venous return to the heart rather than increasing it.",
+    "The bradycardia comes from hypoxia, not carbon dioxide; the cord pCO2 was within range, and it is oxygen reaching the heart that brings the rate back."
+   ]
+  },
+  {
+   "id": "osce-ai-fbe23e14-anatomy",
+   "cat": "anatomy",
+   "stem": "During resuscitation of a newborn, the midwife puts the pulse oximeter probe on the right wrist so the SpO2 can be compared with the ANZCOR preductal targets (for example 70 to 90% at 3 minutes). What is the anatomical reason the right wrist gives a preductal reading?",
+   "options": [
+    "The right radial artery fills from the pulmonary trunk until the ductus closes",
+    "The left subclavian arises from the brachiocephalic trunk, so either wrist is preductal",
+    "The lower limbs receive umbilical venous blood via the ductus venosus, reading high",
+    "The right subclavian arises from the brachiocephalic trunk, proximal to the ductus"
+   ],
+   "answer": 3,
+   "why": "The right arm is supplied by the right subclavian artery, which comes off the brachiocephalic trunk before the point where the ductus arteriosus joins the aorta (the isthmus). Its saturation therefore matches the blood going to the brain and heart, without deoxygenated blood shunted right-to-left through the ductus.",
+   "notes": [
+    "The pulmonary trunk sends blood through the ductus to the descending aorta, not to the right arm, so this is wrong.",
+    "The left subclavian comes straight off the aortic arch, right next to where the ductus joins, so the left arm may get some ductal blood.",
+    "The ductus venosus carries umbilical venous blood to the IVC; the legs are supplied from below the ductus and give postductal, often lower, readings.",
+    null
+   ]
+  }
+ ]
+}

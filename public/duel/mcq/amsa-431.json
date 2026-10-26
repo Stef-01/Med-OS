@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-431",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:53:36.788Z",
+ "questions": [
+  {
+   "id": "osce-amsa-431-skills",
+   "cat": "skills",
+   "stem": "Frank, 76, is on an ED trolley after a 30-second blackout with no warning. On examination his radial pulse is regular, large-volume and 34/min. Before you see the ECG, you want bedside evidence of AV dissociation. Which examination step should you tell the examiner you are doing next?",
+   "options": [
+    "Lie and then stand him to measure postural blood pressure over 3 minutes",
+    "Perform right carotid sinus massage while watching the cardiac monitor",
+    "Inspect the JVP at 45 degrees for intermittent cannon a waves",
+    "Auscultate for an ejection systolic murmur radiating to the carotids"
+   ],
+   "answer": 2,
+   "why": "In AV dissociation the right atrium sometimes contracts against a closed tricuspid valve, which produces irregular cannon a waves in the JVP. A first heart sound that varies in loudness is the matching sign on auscultation.",
+   "notes": [
+    "Postural BP looks for orthostatic hypotension, not AV dissociation, and standing a patient with a pulse of 34 risks another collapse, so it is deferred.",
+    "Carotid sinus massage increases vagal tone and could cause asystole in a patient who already has severe bradycardia and pauses.",
+    null,
+    "An ejection systolic murmur suggests aortic stenosis as a cause of exertional syncope, but it says nothing about whether the atria and ventricles are dissociated."
+   ]
+  },
+  {
+   "id": "osce-amsa-431-clinical",
+   "cat": "clinical",
+   "stem": "At 11:00, Frank, 76, has a 4-second pause on the monitor with light-headedness, and his systolic BP falls to 94. His ECG shows complete heart block with a broad escape at 30/min. Pacing pads are on and IV access is in. Electrolytes are normal. He took metoprolol 50 mg at 7 am. Which drug should be given first?",
+   "options": [
+    "Atropine 0.6 mg IV, repeated as needed to a maximum of 3 mg",
+    "Glucagon 5 mg IV bolus to reverse the beta-blockade",
+    "Calcium gluconate 10% 10 mL IV over 10 minutes",
+    "Adrenaline 1 mg IV bolus, repeated every 3 to 5 minutes"
+   ],
+   "answer": 0,
+   "why": "Under ANZCOR, symptomatic bradycardia with adverse features (syncope, pauses, hypotension) is treated first with atropine 0.5 to 0.6 mg IV, repeated up to 3 mg. If that fails, the next steps are an isoprenaline or adrenaline infusion or transcutaneous pacing.",
+   "notes": [
+    null,
+    "Glucagon is for beta-blocker overdose. Frank is on a therapeutic dose, and his block is below the AV node, so beta-blockade does not explain it.",
+    "IV calcium treats hyperkalaemia or calcium channel blocker toxicity. His potassium and calcium are normal.",
+    "A 1 mg IV adrenaline bolus is the cardiac arrest dose. A patient who has a pulse needs a titrated adrenaline infusion, and only if atropine fails."
+   ]
+  },
+  {
+   "id": "osce-amsa-431-physio",
+   "cat": "physio",
+   "stem": "Frank, 76, has complete heart block with a broad-complex (150 ms) escape rhythm at 32/min. The ED consultant gives atropine but warns that it will probably not raise his ventricular rate. Which mechanism best explains this warning?",
+   "options": [
+    "Metoprolol occupies the muscarinic receptors, so atropine cannot bind at the AV node",
+    "Atropine needs intact sympathetic tone to work, and beta-blockade has removed it",
+    "Broad escape rhythms arise in atrial tissue, which atropine does not reach",
+    "His-Purkinje tissue gets little vagal input, so muscarinic blockade cannot speed it"
+   ],
+   "answer": 3,
+   "why": "Atropine blocks vagal M2 receptors, which mainly sit in the SA and AV nodes. A broad escape comes from below the node, in His-Purkinje or ventricular tissue that has little vagal supply, so atropine rarely helps and the patient needs an infusion or pacing.",
+   "notes": [
+    "Metoprolol is a beta-1 adrenoceptor blocker. It does not occupy muscarinic receptors.",
+    "Atropine works by removing vagal tone, which is a separate mechanism from sympathetic tone. Beta-blockade does not stop it working at the nodes.",
+    "An atrial or junctional escape would give a narrow QRS. A broad escape points to an origin below the AV node.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-431-anatomy",
+   "cat": "anatomy",
+   "stem": "The cardiology registrar asks whether Frank, 76, could be having an inferior MI. She points out that inferior infarction usually causes block at the AV node itself with a narrow escape, rather than the broad escape Frank has. Which artery most commonly supplies the AV node?",
+   "options": [
+    "Left anterior descending artery via its septal perforator branches",
+    "Right coronary artery via the AV nodal branch at the crux",
+    "Left circumflex artery via its obtuse marginal branches",
+    "Left main coronary artery via the ramus intermedius"
+   ],
+   "answer": 1,
+   "why": "In most people the circulation is right-dominant, and the AV nodal artery comes off the RCA at the crux of the heart. That is why an inferior (RCA) MI usually causes AV nodal block, which is often transient and has a narrow escape.",
+   "notes": [
+    "The septal perforators of the LAD supply the bundle branches. An anterior MI therefore causes block below the node with a broad escape, not AV nodal block.",
+    null,
+    "In left-dominant hearts the circumflex can supply the AV node, but through its terminal posterior branch at the crux, not through the obtuse marginals, which supply the lateral wall.",
+    "The left main divides into the LAD and circumflex, and the ramus intermedius supplies the lateral wall, not the AV node."
+   ]
+  }
+ ]
+}

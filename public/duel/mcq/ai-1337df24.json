@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "ai-1337df24",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T06:07:18.064Z",
+ "questions": [
+  {
+   "id": "osce-ai-1337df24-skills",
+   "cat": "skills",
+   "stem": "You are seeing Noah, 18 days old, in general practice. He has been jaundiced since day 3, and now has pale putty-coloured stools and dark urine that stains the nappy. His parent Alex asks, \"Do we just need more sunshine?\" Which response is best?",
+   "options": [
+    "\"A little sun is fine, but it won't fix the pale stools, so we'll test him as well.\"",
+    "\"No: sun won't treat this jaundice and can burn him; his pale stools need checking today.\"",
+    "\"Yes, a few minutes behind a window each morning safely lowers his bilirubin.\"",
+    "\"Sun helps breastmilk jaundice, so try it for a week and come back if he's still yellow.\""
+   ],
+   "answer": 1,
+   "why": "Sunlight is not a treatment for newborn jaundice and is unsafe because of sunburn and overheating. Pale stools with dark urine point to conjugated (cholestatic) jaundice, which even phototherapy does not treat, so the answer is a clear no plus same-day assessment.",
+   "notes": [
+    "Calling sun exposure fine is wrong: it is unsafe for newborns and does nothing for conjugated jaundice, and Alex has already said she will take him to the park.",
+    null,
+    "Window sunlight is not a safe or reliable treatment, and phototherapy only lowers unconjugated bilirubin, which is not Noah's problem.",
+    "Pale stools and dark urine rule out breastmilk jaundice, and waiting a week delays the diagnosis of biliary atresia, where early Kasai surgery gives better outcomes."
+   ]
+  },
+  {
+   "id": "osce-ai-1337df24-clinical",
+   "cat": "clinical",
+   "stem": "Noah, 18 days old, arrives in the paediatric ED from his GP. He has acholic stools, dark urine and a firm liver. He had no vitamin K at birth, and on day 9 his cord stump bled for 10 to 15 minutes. Nothing is bleeding now, and coagulation studies have been sent. What is the most appropriate vitamin K treatment?",
+   "options": [
+    "Phytomenadione 1 mg by slow IV injection now, before the INR result returns",
+    "Phytomenadione 2 mg orally now, repeated at 4 weeks of age",
+    "Phytomenadione 1 mg IM, given only once the INR comes back prolonged",
+    "Fresh frozen plasma 10–15 mL/kg now, then vitamin K if bleeding starts"
+   ],
+   "answer": 0,
+   "why": "In suspected late VKDB, give vitamin K 1 mg by injection straight away without waiting for results. Slow IV in hospital works quickly and avoids an IM haematoma if clotting is already deranged.",
+   "notes": [
+    null,
+    "The oral regimen is prophylaxis for a well baby. Absorption is unreliable in cholestasis, and it does not treat a deficiency that may already be there.",
+    "Waiting for the INR delays treatment in a baby at risk of intracranial haemorrhage, and IM injection risks a haematoma if he is coagulopathic.",
+    "FFP is kept for active, life-threatening bleeding alongside vitamin K. It is not first-line here, and vitamin K should not be held back until bleeding starts."
+   ]
+  },
+  {
+   "id": "osce-ai-1337df24-physio",
+   "cat": "physio",
+   "stem": "Noah, 18 days old, has conjugated jaundice with pale putty stools and probably has biliary atresia. He is exclusively breastfed and had no vitamin K prophylaxis. His liver is firm, 2 cm below the costal margin, and he is thriving. Which mechanism best explains why his cholestasis raises his risk of bleeding?",
+   "options": [
+    "Hepatocyte failure reduces the liver's synthesis of fibrinogen and factor V",
+    "Conjugated bilirubin in plasma directly inhibits platelet aggregation",
+    "Portal hypertension causes hypersplenism, which consumes circulating platelets",
+    "Absent bile salts impair vitamin K uptake, so II, VII, IX and X are not carboxylated"
+   ],
+   "answer": 3,
+   "why": "Bile salts form the micelles needed to absorb fat-soluble vitamins. Without bile in the gut, vitamin K is not absorbed, so the liver cannot gamma-carboxylate factors II, VII, IX and X (and proteins C and S) into working form.",
+   "notes": [
+    "Factor V and fibrinogen do not depend on vitamin K. Their synthesis falls only in advanced liver failure, which a thriving 18-day-old does not have.",
+    "Bilirubin does not meaningfully impair platelet function. The bleeding risk in cholestasis comes from deficiency of the vitamin K-dependent factors.",
+    "Portal hypertension and hypersplenism develop months into untreated biliary atresia, not at 18 days of age.",
+    null
+   ]
+  },
+  {
+   "id": "osce-ai-1337df24-anatomy",
+   "cat": "anatomy",
+   "stem": "Noah, 18 days old, is confirmed to have biliary atresia, and the surgeons plan a Kasai portoenterostomy. They will excise the fibrosed extrahepatic bile ducts and bring up a Roux-en-Y loop of jejunum. Where is the jejunal loop anastomosed?",
+   "options": [
+    "The common bile duct, as for excision of a choledochal cyst",
+    "The porta hepatis, over the transected fibrous ductal remnant",
+    "The gallbladder fundus, as a cholecystojejunostomy",
+    "The common hepatic duct, at the confluence of the hepatic ducts"
+   ],
+   "answer": 1,
+   "why": "In biliary atresia the extrahepatic ducts are obliterated, so there is no patent duct to join. The jejunal limb is sewn onto the porta hepatis, where tiny residual ductules can drain bile. Outcomes are best when this is done early, ideally before about 8 weeks.",
+   "notes": [
+    "Joining a dilated common bile duct (hepaticojejunostomy) is the repair for a choledochal cyst. In biliary atresia this duct is fibrosed and has no lumen.",
+    null,
+    "The gallbladder is usually atretic or fibrosed in biliary atresia, and it does not connect to the obliterated proximal ducts, so bile would not drain.",
+    "The common hepatic duct and the confluence are part of the obliterated extrahepatic tree, so there is no patent lumen to anastomose to."
+   ]
+  }
+ ]
+}

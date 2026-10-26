@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-635",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T06:02:03.120Z",
+ "questions": [
+  {
+   "id": "osce-amsa-635-skills",
+   "cat": "skills",
+   "stem": "Andrew, 40, is in ED with jaundice, dark urine and right upper quadrant pain. He was irritable after a long wait but has settled. When you ask whether he has ever used drugs or needles, he snaps, \"What's that got to do with anything?\" What is the best thing to say next?",
+   "options": [
+    "\"It's a routine question on our form, so I need an answer before we move on.\"",
+    "\"Some liver infections spread by shared needles. I ask everyone, and it's confidential.\"",
+    "\"That's fine, it's probably not relevant, so we'll skip it and focus on the pain.\"",
+    "\"Your blood tests will show any drugs anyway, so it's better to be upfront with me.\""
+   ],
+   "answer": 1,
+   "why": "Explaining why the question matters, saying you ask everyone and promising confidentiality keeps it non-judgemental, and patients disclose more that way. Here it uncovers the needle sharing 2 months ago that explains his hepatitis B.",
+   "notes": [
+    "Pointing to a form gives no clinical reason for the question and feels bureaucratic, so a defensive patient is likely to stay curt or lie.",
+    null,
+    "Dropping the question misses the key risk factor for viral hepatitis; you should explain why it matters, not give up on it.",
+    "This is coercive and misleading (a routine LFT panel doesn't screen for drugs), and it damages trust just when you need him to tell you more."
+   ]
+  },
+  {
+   "id": "osce-amsa-635-clinical",
+   "cat": "clinical",
+   "stem": "Andrew, 40, has acute hepatitis B in ED: bilirubin 185 µmol/L, ALT 1635 U/L, INR 1.0, albumin 38 g/L, and he is alert with no asterixis. Gastroenterology plans early outpatient review if he stays well. Which blood test best tracks whether his liver's synthetic function is starting to fail over the coming days?",
+   "options": [
+    "Serum albumin",
+    "ALT",
+    "INR (prothrombin time)",
+    "Total bilirubin"
+   ],
+   "answer": 2,
+   "why": "Clotting factors (especially factor VII, half-life about 6 hours) turn over fast, so a rising INR is the earliest blood marker of failing synthetic function. Along with glucose and conscious state, it defines acute liver failure.",
+   "notes": [
+    "Albumin has a half-life of about 3 weeks, so it falls too slowly to pick up acute liver failure early.",
+    "ALT measures how much liver is being damaged, not how well it is working, and a falling ALT can mean either recovery or massive loss of liver cells.",
+    null,
+    "Bilirubin shows the degree of jaundice and cholestasis, but it can stay high in an uncomplicated recovery and is not a direct measure of synthetic function."
+   ]
+  },
+  {
+   "id": "osce-amsa-635-physio",
+   "cat": "physio",
+   "stem": "Andrew, 40, has acute icteric hepatitis B with bilirubin 185 µmol/L and a hepatocellular pattern of LFTs. For the past week his urine has been dark like tea and his stools pale. His haemoglobin and haemolysis index are normal. What best explains his dark urine?",
+   "options": [
+    "Unconjugated bilirubin from haemolysis being filtered at the glomerulus",
+    "Excess urobilinogen absorbed from the gut and excreted by the kidneys",
+    "Concentrated urine from poor oral intake and fever-related fluid loss",
+    "Conjugated bilirubin, which is water-soluble, refluxing into blood and filtered"
+   ],
+   "answer": 3,
+   "why": "Damaged hepatocytes fail to excrete conjugated bilirubin into bile, so it leaks back into the blood. It is water-soluble and not tightly bound to albumin, so the kidneys filter it and the urine turns dark. Less bilirubin reaches the gut, so less stercobilin is made and the stools turn pale.",
+   "notes": [
+    "Unconjugated bilirubin is bound to albumin and is not filtered, so it never darkens urine, and he has no evidence of haemolysis.",
+    "Urobilinogen is colourless, and with pale stools less bilirubin is reaching the gut, so urobilinogen production falls rather than rises.",
+    "Mild dehydration makes urine more concentrated but does not make it tea-coloured, and it doesn't explain the pale stools that come with it.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-635-anatomy",
+   "cat": "anatomy",
+   "stem": "You are examining Andrew, 40, an ED patient with fever, jaundice and right upper quadrant pain. You want to elicit Murphy's sign to look for acute cholecystitis. Where on the abdominal wall does the gallbladder fundus lie, which is where you place your fingers?",
+   "options": [
+    "Right costal margin at the midclavicular line, tip of the ninth costal cartilage",
+    "Right fifth intercostal space in the midclavicular line",
+    "Angle between the twelfth rib and the lateral border of erector spinae",
+    "Just below the xiphisternum in the midline"
+   ],
+   "answer": 0,
+   "why": "The gallbladder fundus lies where the right midclavicular line (or the lateral edge of rectus) meets the costal margin, at the tip of the ninth costal cartilage. When the patient breathes in, an inflamed gallbladder descends onto the examining fingers and the breath catches.",
+   "notes": [
+    null,
+    "The fifth intercostal space marks roughly the upper border of the liver, which you find by percussion, not the gallbladder.",
+    "This is the renal angle, used to check for renal tenderness in pyelonephritis, not the gallbladder.",
+    "The subxiphoid epigastrium overlies the stomach and pancreas, not the gallbladder fundus."
+   ]
+  }
+ ]
+}

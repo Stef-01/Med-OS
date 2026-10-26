@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-213",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T06:07:18.144Z",
+ "questions": [
+  {
+   "id": "osce-amsa-213-skills",
+   "cat": "skills",
+   "stem": "In a GP clinic, Beth, 20, has had 2 months of right iliac fossa pain and loose stools 3 to 4 times a day. She wonders if it is exam stress. You want to ask the history question that best separates an organic bowel cause from irritable bowel syndrome. Which question should you ask?",
+   "options": [
+    "\"Does opening your bowels ease the pain?\"",
+    "\"Do you ever wake at night needing to open your bowels?\"",
+    "\"Does the pain get worse when you are stressed?\"",
+    "\"Do you feel bloated after you eat?\""
+   ],
+   "answer": 1,
+   "why": "Waking at night to open the bowels is a red flag for organic disease such as IBD. Functional symptoms rarely wake patients. Chronic diarrhoea with nocturnal symptoms, blood, weight loss or fever is organic until proven otherwise.",
+   "notes": [
+    "Pain relieved by defecation is one of the Rome IV criteria for IBS, so it points towards a functional cause rather than ruling out an organic one.",
+    null,
+    "Stress makes both IBS and IBD symptoms worse, so this answer cannot separate the two.",
+    "Bloating is common in both IBS and organic disease and is not a red flag, so it does little to tell them apart."
+   ]
+  },
+  {
+   "id": "osce-amsa-213-clinical",
+   "cat": "clinical",
+   "stem": "Beth, 20, has ileocolonic Crohn's disease confirmed on colonoscopy. Her gastroenterologist plans to start azathioprine for maintenance and asks you, her GP, to arrange the bloods before treatment starts. Which test identifies her risk of severe early bone marrow suppression on this drug?",
+   "options": [
+    "HLA-B*5801 genotyping",
+    "G6PD enzyme activity",
+    "Thiopurine methyltransferase (TPMT) enzyme activity",
+    "Interferon-gamma release assay"
+   ],
+   "answer": 2,
+   "why": "TPMT breaks down thiopurines. People with low or absent TPMT activity build up toxic thioguanine nucleotides and can develop severe myelosuppression. TPMT is checked before azathioprine to choose the dose or avoid the drug, and FBC and LFTs are then monitored.",
+   "notes": [
+    "HLA-B*5801 predicts severe skin reactions to allopurinol, not toxicity from azathioprine.",
+    "G6PD deficiency predicts haemolysis with drugs such as primaquine, dapsone and rasburicase, not myelosuppression from thiopurines.",
+    null,
+    "An IGRA screens for latent TB before immunosuppression, especially before anti-TNF biologics, but it does not predict marrow toxicity."
+   ]
+  },
+  {
+   "id": "osce-amsa-213-physio",
+   "cat": "physio",
+   "stem": "Beth, 20, has active ileocolonic Crohn's disease. Her bloods show Hb 108 g/L, MCV 76 fL, ferritin 9 µg/L, raised transferrin and CRP 36 mg/L. The gastroenterologist warns that oral iron may be poorly absorbed while her disease is active. Which mechanism best explains this?",
+   "options": [
+    "Ileal inflammation destroys the main site of dietary non-haem iron absorption",
+    "Low serum albumin reduces carriage of absorbed iron from enterocyte to plasma",
+    "Inflammation stops transferrin being made, so absorbed iron cannot be carried",
+    "IL-6 raises hepatic hepcidin, which degrades ferroportin and blocks iron export"
+   ],
+   "answer": 3,
+   "why": "Inflammatory cytokines, mainly IL-6, make the liver produce more hepcidin. Hepcidin binds ferroportin and causes it to be broken down, so iron stays trapped in enterocytes and macrophages and less is absorbed. This is also why IV iron is often preferred in active IBD.",
+   "notes": [
+    "Non-haem iron is absorbed mainly in the duodenum and proximal jejunum, not the terminal ileum (where B12 and bile salts are absorbed).",
+    "Absorbed iron travels in plasma bound to transferrin, not albumin. Her low albumin reflects inflammation and protein loss.",
+    "Her transferrin is high, as expected in iron deficiency, so a lack of carrier protein is not the problem.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-213-anatomy",
+   "cat": "anatomy",
+   "stem": "Beth, 20, has Crohn's disease that is most severe in the terminal ileum, with cobblestoning and deep linear ulcers. Her gastroenterologist mentions that if the ileal disease extends, or she needs an ileal resection, absorption of one nutrient is particularly at risk because it is absorbed mainly at this site. Which nutrient is this?",
+   "options": [
+    "Iron",
+    "Folate",
+    "Calcium",
+    "Vitamin B12"
+   ],
+   "answer": 3,
+   "why": "Vitamin B12 bound to intrinsic factor is absorbed by receptors in the terminal ileum, which also reabsorbs bile acids. Extensive ileal Crohn's disease or resection can cause B12 deficiency and bile acid diarrhoea, so B12 should be monitored.",
+   "notes": [
+    "Iron is absorbed mainly in the duodenum and proximal jejunum. Beth's iron deficiency comes from blood loss and hepcidin, not from ileal malabsorption.",
+    "Folate is absorbed mainly in the proximal jejunum, so it is at more risk from proximal small bowel disease.",
+    "Calcium is absorbed mainly in the duodenum and proximal jejunum, so it does not depend on an intact terminal ileum.",
+    null
+   ]
+  }
+ ]
+}

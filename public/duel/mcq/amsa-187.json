@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-187",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:23:17.126Z",
+ "questions": [
+  {
+   "id": "osce-amsa-187-skills",
+   "cat": "skills",
+   "stem": "You are taking a history from James, 50, in the ED. He has had an hour of heavy central chest pain going to his left jaw, with sweating. No ECG has been done yet. Three minutes in he says, \"It's just indigestion, isn't it? I need to get back to work.\" What is the best response?",
+   "options": [
+    "\"It's most likely reflux, so I'll get you some antacid and you can head back soon.\"",
+    "\"We can't tell until the troponin comes back, so let's wait for that result first.\"",
+    "\"It might be, but this could be your heart, so we need an ECG and blood tests now.\"",
+    "\"You are definitely having a heart attack and you must not leave this hospital.\""
+   ],
+   "answer": 2,
+   "why": "Acknowledge his idea, explain honestly that the pain may be cardiac, and get a 12-lead ECG within 10 minutes. This keeps him engaged and safe without false reassurance or premature alarm.",
+   "notes": [
+    "This is false reassurance: ischaemic-sounding pain that antacids did not help needs an urgent ECG, not a trial of antacids.",
+    "The troponin does not decide the first step. An ECG within 10 minutes is the priority, and STEMI is diagnosed on the ECG and the clinical picture.",
+    null,
+    "Without an ECG this states a diagnosis you cannot yet make, and the confrontational wording is likely to frighten him without explaining why tests are needed."
+   ]
+  },
+  {
+   "id": "osce-amsa-187-clinical",
+   "cat": "clinical",
+   "stem": "James, 50, has had central chest pain for 1 hour. His ECG at 13:15 shows 2 mm ST elevation in II, III and aVF, with reciprocal depression in I and aVL. You are in a metropolitan ED with a cardiac catheter laboratory. He has had aspirin 300 mg and his hs-troponin is pending. What is the most appropriate reperfusion step?",
+   "options": [
+    "Activate the cath lab now for primary PCI within 90 minutes of first medical contact",
+    "Repeat hs-troponin at 1 hour and activate the cath lab if the level is rising",
+    "Give IV tenecteplase now, then transfer for angiography within 24 hours",
+    "Arrange a CT aortogram to exclude dissection before any reperfusion therapy"
+   ],
+   "answer": 0,
+   "why": "STEMI is an ECG and clinical diagnosis. With a cath lab on site, activate primary PCI straight away, aiming for 90 minutes or less from first medical contact. Do not wait for the troponin.",
+   "notes": [
+    null,
+    "Waiting for the troponin delays reperfusion and costs myocardium. An early troponin can be normal and does not change the decision in STEMI.",
+    "Fibrinolysis is for when timely primary PCI is not available. Here the cath lab is on site, so PCI is preferred.",
+    "Dissection is excluded at the bedside first. His gradual pressure-like pain without back pain, and his equal arm BPs, do not justify delaying reperfusion for a CT scan."
+   ]
+  },
+  {
+   "id": "osce-amsa-187-physio",
+   "cat": "physio",
+   "stem": "At 13:20 James, 50, with an inferior STEMI, has a heart rate of 46 and a BP of 96/60, and his lungs are clear. Right-sided leads show ST elevation in V4R, consistent with right ventricular infarction. A colleague suggests sublingual GTN for his ongoing pain. Why is GTN likely to worsen his hypotension?",
+   "options": [
+    "It dilates the coronary arteries, stealing flow away from the ischaemic right ventricle",
+    "It causes reflex vagal stimulation, which slows conduction through the AV node",
+    "It directly depresses contractility of the infarcted right ventricular myocardium",
+    "Venodilation lowers preload, which the stiff, ischaemic right ventricle depends on"
+   ],
+   "answer": 3,
+   "why": "In right ventricular infarction, LV filling depends on venous return being pushed through a poorly contracting RV. Nitrates venodilate, preload falls and cardiac output drops sharply, so nitrates are avoided and cautious fluid is given instead.",
+   "notes": [
+    "Coronary steal is not the main problem. The large fall in BP comes from reduced preload caused by venous pooling.",
+    "Nitrate-induced hypotension usually causes a reflex tachycardia, not a vagal slowing of the AV node.",
+    "GTN is not a negative inotrope. Its harm here comes from reduced filling, not from a direct effect on the myocardium.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-187-anatomy",
+   "cat": "anatomy",
+   "stem": "James, 50, has ST elevation in II, III and aVF that is greatest in III, with reciprocal ST depression in aVL. Ten minutes after arrival his heart rate falls from 60 to 46/min and he becomes light-headed. Occlusion of which artery best explains both the ECG pattern and the bradycardia?",
+   "options": [
+    "Left anterior descending artery, which supplies the bundle branches",
+    "Right coronary artery, which supplies the AV node in most people",
+    "Left circumflex artery, which supplies the AV node in most people",
+    "Left main coronary artery, which supplies the SA node in most people"
+   ],
+   "answer": 1,
+   "why": "Most people have a right-dominant circulation, so the RCA supplies the inferior wall, the AV node (through the AV nodal artery at the crux) and the right ventricle. ST elevation greater in III than in II, with depression in aVL, favours the RCA.",
+   "notes": [
+    "LAD occlusion causes anterior ST elevation in V1 to V4, not inferior ST elevation with reciprocal change in aVL.",
+    null,
+    "The circumflex supplies the AV node only in the minority with a left-dominant circulation. III greater than II with depression in aVL points to the RCA.",
+    "Left main occlusion causes widespread ischaemia, often with ST elevation in aVR and shock, and the SA node is usually supplied by the RCA."
+   ]
+  }
+ ]
+}

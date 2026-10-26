@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-221",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T06:08:00.366Z",
+ "questions": [
+  {
+   "id": "osce-amsa-221-skills",
+   "cat": "skills",
+   "stem": "Philip, 69, has had 40 minutes of racing palpitations and has come to a rural ED. He is not yet on a cardiac monitor. You find an irregularly irregular radial pulse of about 110 and want to know whether some heartbeats are not reaching the periphery. The triage nurse is free to help. How do you best show this?",
+   "options": [
+    "Feel both radial pulses at the same time and compare their timing and volume",
+    "Listen at the apex and count the rate for 1 min while the nurse counts the radial pulse",
+    "Feel the radial and femoral pulses at the same time, checking for a delay",
+    "Count the radial pulse for 15 seconds and compare it with the carotid pulse rate"
+   ],
+   "answer": 1,
+   "why": "A pulse deficit is the gap between the apical rate (heard with a stethoscope) and the radial rate, counted at the same time over a full minute. In AF it shows that some beats are too weak to be felt at the wrist.",
+   "notes": [
+    "Comparing the two radial pulses looks for a radio-radial delay (for example aortic dissection or subclavian stenosis). It does not compare central beats with peripheral beats.",
+    null,
+    "A radio-femoral delay points to coarctation of the aorta. Both are peripheral pulses, so this cannot show beats that fail to reach the periphery.",
+    "A 15-second count multiplied up is inaccurate in an irregular rhythm, and the carotid is also a peripheral pulse rather than the apical heart rate."
+   ]
+  },
+  {
+   "id": "osce-amsa-221-clinical",
+   "cat": "clinical",
+   "stem": "Philip, 69, has new-onset AF that started under 2 hours ago, and he is haemodynamically stable. He has hypertension and hypercholesterolaemia. He has no diabetes, heart failure, stroke, TIA or vascular disease, and no valve disease. His father died of a stroke. Creatinine 92, eGFR 74, Hb 146, INR 1.0. What is the best choice for his long-term stroke prevention?",
+   "options": [
+    "CHA2DS2-VA 2: apixaban 5 mg orally twice daily",
+    "CHA2DS2-VA 1: aspirin 100 mg orally once daily",
+    "CHA2DS2-VA 3: warfarin, aiming for an INR of 2 to 3",
+    "CHA2DS2-VA 1: no antithrombotic, and review the score yearly"
+   ],
+   "answer": 0,
+   "why": "He scores 1 for age 65 to 74 and 1 for hypertension, so CHA2DS2-VA is 2 and oral anticoagulation is recommended. In non-valvular AF a DOAC is preferred, and he meets none of the dose-reduction criteria for apixaban.",
+   "notes": [
+    null,
+    "He scores 2, not 1, because both age 65 to 74 and hypertension count. Aspirin is not used for stroke prevention in AF: it works poorly and still causes bleeding.",
+    "Family history and high cholesterol do not score, so he scores 2. Warfarin is also second line to a DOAC in non-valvular AF.",
+    "He scores 2, not 1, so anticoagulation is recommended now. Leaving him without treatment exposes him to a preventable risk of stroke."
+   ]
+  },
+  {
+   "id": "osce-amsa-221-physio",
+   "cat": "physio",
+   "stem": "Philip, 69, has atrial fibrillation. His atria are depolarising chaotically at about 400 to 600 times a minute, but his ECG shows a ventricular rate of about 132/min. Which property mainly stops most of these atrial impulses from reaching the ventricles?",
+   "options": [
+    "Slowing conduction and a long refractory period in the AV node, which block many impulses",
+    "Overdrive suppression of the sinoatrial node by the rapidly fibrillating atria",
+    "Fast conduction in the His–Purkinje system, which limits how often the ventricles capture",
+    "The plateau of the ventricular action potential, which makes ventricular muscle refractory"
+   ],
+   "answer": 0,
+   "why": "Conduction in the AV node slows as impulses arrive faster, and the node has a relatively long refractory period. Many fibrillatory impulses therefore arrive while the node is still refractory and are blocked. Rate-control drugs (beta-blockers, diltiazem, verapamil) work by lengthening this AV nodal refractoriness further.",
+   "notes": [
+    null,
+    "The sinus node is suppressed in AF, but that explains the absent P waves, not why the ventricular rate is held well below the atrial rate.",
+    "The His–Purkinje system conducts quickly and does not filter impulses. The rate-limiting gate sits above it, in the AV node.",
+    "Ventricular refractoriness would still allow rates above 200/min. The ventricles beat at about 132 because the AV node lets through only that many impulses."
+   ]
+  },
+  {
+   "id": "osce-amsa-221-anatomy",
+   "cat": "anatomy",
+   "stem": "Philip, 69, has new-onset non-valvular AF. He asks why the doctors keep mentioning his father's stroke when his problem is his heart rhythm. You explain that blood pools where the atrium no longer contracts properly. In non-valvular AF, where in the heart does the thrombus behind most cardioembolic strokes usually form?",
+   "options": [
+    "The apex of the left ventricle",
+    "The right atrial appendage",
+    "The openings of the pulmonary veins",
+    "The left atrial appendage"
+   ],
+   "answer": 3,
+   "why": "About 90% of thrombi in non-valvular AF form in the left atrial appendage. It is a blind-ending, trabeculated pouch where blood stagnates once the atrium stops contracting, and clot from there can travel to the brain. This is why TOE looks at the appendage before cardioversion.",
+   "notes": [
+    "Left ventricular apical thrombus is typical after an anterior MI or with an LV aneurysm. It is not the usual source in AF when ventricular function is normal.",
+    "Clot from the right side of the heart travels to the lungs, not the brain, and right atrial appendage thrombus is much less common in AF.",
+    "The openings of the pulmonary veins are where the ectopic triggers that start AF usually arise, and this is the target of catheter ablation. They are not the usual site of thrombus.",
+    null
+   ]
+  }
+ ]
+}

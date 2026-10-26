@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-374",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T06:08:18.992Z",
+ "questions": [
+  {
+   "id": "osce-amsa-374-skills",
+   "cat": "skills",
+   "stem": "Bill, 70, is in the ED with 2 hours of central chest pressure, 5/10. BP 148/86, HR 94. You have screened for aortic dissection and plan to ask the nurse to give sublingual GTN. Which question must you ask Bill before the GTN is given?",
+   "options": [
+    "\"Have you taken Viagra, Cialis or a similar tablet in the last two days?\"",
+    "\"Have you ever had a stomach ulcer, black stools or vomited blood?\"",
+    "\"Have you ever reacted to the X-ray dye used for scans?\"",
+    "\"Which puffers do you use for your COPD, and how often?\""
+   ],
+   "answer": 0,
+   "why": "PDE5 inhibitors taken with nitrates can cause severe, refractory hypotension. Before any GTN, ask about sildenafil or vardenafil (within 24 h) and tadalafil (within 48 h), and check that systolic BP is above 90.",
+   "notes": [
+    null,
+    "Bleeding and ulcer history is the screen you do before aspirin, P2Y12 inhibitors and anticoagulants. It has no bearing on GTN.",
+    "Contrast allergy matters before coronary angiography, not before sublingual GTN.",
+    "His inhalers matter if a beta blocker is being considered. They are not a contraindication to nitrates."
+   ]
+  },
+  {
+   "id": "osce-amsa-374-clinical",
+   "cat": "clinical",
+   "stem": "Bill, 70, 92 kg, has an NSTEMI: new ST depression in V4 to V6 and hs-troponin T rising from 62 to 148 ng/L. Creatinine clearance is about 73 mL/min, with no bleeding risk. Cardiology agree to enoxaparin. Which regimen should you prescribe?",
+   "options": [
+    "Enoxaparin 40 mg subcut once daily",
+    "Enoxaparin 1.5 mg/kg (about 140 mg) subcut once daily",
+    "Enoxaparin 1 mg/kg (about 90 mg) subcut once daily",
+    "Enoxaparin 1 mg/kg (about 90 mg) subcut 12-hourly"
+   ],
+   "answer": 3,
+   "why": "For NSTEACS the therapeutic enoxaparin dose is 1 mg/kg subcut 12-hourly when creatinine clearance is 30 mL/min or more. The interval only drops to once daily when CrCl is below 30.",
+   "notes": [
+    "This is a VTE prophylaxis dose. It gives no therapeutic anticoagulation for an acute coronary syndrome.",
+    "Once-daily 1.5 mg/kg is a VTE treatment regimen. It is not the dose used in acute coronary syndrome.",
+    "Once-daily 1 mg/kg is the renally adjusted dose for CrCl below 30 mL/min. Bill's clearance is about 73.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-374-physio",
+   "cat": "physio",
+   "stem": "Bill, 70, has ongoing ischaemic chest pain. His ECG shows new horizontal ST depression of 1.5 mm in V4 to V6 and 1 mm in I and aVL, with no ST elevation in any lead, including V1 to V3. Potassium is 4.6 mmol/L. What best explains the ST depression?",
+   "options": [
+    "Transmural infarction with injury through the full wall thickness",
+    "Subendocardial ischaemia in the layer furthest from epicardial supply",
+    "A reciprocal change from ST elevation in the posterior wall",
+    "Repolarisation changes caused by a raised serum potassium"
+   ],
+   "answer": 1,
+   "why": "The subendocardium is at the far end of the coronary circulation and is squeezed hardest during systole, so it becomes ischaemic first. Subendocardial injury causes ST depression that does not reliably localise the culprit artery, whereas transmural injury causes ST elevation.",
+   "notes": [
+    "Transmural injury produces ST elevation, and Bill has none.",
+    null,
+    "Posterior MI causes reciprocal ST depression in V1 to V3, which Bill does not have; his is in V4 to V6.",
+    "His potassium of 4.6 mmol/L is normal, and hyperkalaemia causes peaked T waves, not horizontal ST depression."
+   ]
+  },
+  {
+   "id": "osce-amsa-374-anatomy",
+   "cat": "anatomy",
+   "stem": "Bill, 70, describes central chest pressure radiating down the inner left arm and into his jaw. You explain to the examiner that this is referred pain from ischaemic myocardium. Which spinal cord segments receive the cardiac pain afferents that explain the arm radiation?",
+   "options": [
+    "C3 to C5, via afferents travelling in the phrenic nerves",
+    "T10 to L1, via the thoracic splanchnic nerves",
+    "T1 to T4, via afferents travelling with the cardiac sympathetic nerves",
+    "Nucleus tractus solitarius in the medulla, via the vagus nerve"
+   ],
+   "answer": 2,
+   "why": "Cardiac pain afferents run with the sympathetic cardiac nerves to the T1 to T4 segments. There they converge with somatic afferents from the chest wall and the medial arm (T1, and T2 via the intercostobrachial nerve), so the pain is felt in those areas.",
+   "notes": [
+    "Phrenic afferents (C3 to C5) carry pain from the pericardium and diaphragm to the shoulder tip, as in pericarditis. They do not carry myocardial ischaemic pain.",
+    "T10 to L1 receive visceral afferents from the lower gut and pelvic organs. They do not explain pain in the arm.",
+    null,
+    "Vagal cardiac afferents mainly carry reflex and baroreceptor information to the brainstem, not the pain that is referred to the arm."
+   ]
+  }
+ ]
+}
