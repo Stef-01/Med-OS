@@ -1,0 +1,602 @@
+{
+ "bars": {
+  "base": 81,
+  "ai": 89,
+  "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
+ },
+ "calibration": {
+  "MedQA Step 2&3": {
+   "n": 594,
+   "flaw": {
+    "mean": 97.7,
+    "p5": 88,
+    "p10": 94,
+    "p50": 100,
+    "anyMajor": 2
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 0.5,
+    "cover-options": 10.1,
+    "all-none": 0,
+    "negative-stem": 0.2,
+    "longest-key": 4.5,
+    "grammar-cue": 0,
+    "convergence": 0,
+    "absolute-terms": 1.5,
+    "clang": 4,
+    "duplicate-options": 0.2,
+    "vignette": 9.9,
+    "stem-length": 0.3,
+    "units": 2.7
+   },
+   "judged": 51,
+   "quality": {
+    "mean": 85.2,
+    "p5": 70,
+    "p10": 75,
+    "p25": 81,
+    "p50": 87
+   },
+   "gatesPass": 92.2,
+   "solved2": 94.1,
+   "keyCorrect": 98,
+   "passBase": 80.4,
+   "passAi": 37.3,
+   "passAsSelected": 80.4
+  },
+  "MMLU professional medicine": {
+   "n": 272,
+   "flaw": {
+    "mean": 96.4,
+    "p5": 80,
+    "p10": 94,
+    "p50": 100,
+    "anyMajor": 5.1
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 0.7,
+    "cover-options": 9.9,
+    "all-none": 0,
+    "negative-stem": 0.4,
+    "longest-key": 4.8,
+    "grammar-cue": 0,
+    "convergence": 0,
+    "absolute-terms": 0.4,
+    "clang": 6.6,
+    "duplicate-options": 1.1,
+    "vignette": 19.9,
+    "stem-length": 0,
+    "units": 0
+   },
+   "judged": 16,
+   "quality": {
+    "mean": 88.1,
+    "p5": 74,
+    "p10": 80,
+    "p25": 85,
+    "p50": 88
+   },
+   "gatesPass": 100,
+   "solved2": 93.8,
+   "keyCorrect": 100,
+   "passBase": 87.5,
+   "passAi": 50,
+   "passAsSelected": 87.5
+  },
+  "Official USMLE Step 2 CK samples": {
+   "n": 41,
+   "flaw": {
+    "mean": 98.5,
+    "p5": 94,
+    "p10": 94,
+    "p50": 100,
+    "anyMajor": 2.4
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 0,
+    "cover-options": 0,
+    "all-none": 0,
+    "negative-stem": 0,
+    "longest-key": 0,
+    "grammar-cue": 0,
+    "convergence": 0,
+    "absolute-terms": 7.3,
+    "clang": 4.9,
+    "duplicate-options": 0,
+    "vignette": 7.3,
+    "stem-length": 0,
+    "units": 0
+   },
+   "judged": 41,
+   "quality": {
+    "mean": 91.4,
+    "p5": 81,
+    "p10": 84,
+    "p25": 89,
+    "p50": 92
+   },
+   "gatesPass": 97.6,
+   "solved2": 97.6,
+   "keyCorrect": 100,
+   "passBase": 95.1,
+   "passAi": 75.6,
+   "passAsSelected": 95.1
+  },
+  "QUEST-AI GPT-4 look-alikes": {
+   "n": 43,
+   "flaw": {
+    "mean": 99.2,
+    "p5": 94,
+    "p10": 94,
+    "p50": 100,
+    "anyMajor": 0
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 0,
+    "cover-options": 2.3,
+    "all-none": 0,
+    "negative-stem": 0,
+    "longest-key": 7,
+    "grammar-cue": 0,
+    "convergence": 0,
+    "absolute-terms": 2.3,
+    "clang": 0,
+    "duplicate-options": 0,
+    "vignette": 2.3,
+    "stem-length": 0,
+    "units": 0
+   },
+   "judged": 43,
+   "quality": {
+    "mean": 80.6,
+    "p5": 52,
+    "p10": 60,
+    "p25": 77,
+    "p50": 85
+   },
+   "gatesPass": 72.1,
+   "solved2": 81.4,
+   "keyCorrect": 83.7,
+   "passBase": 69.8,
+   "passAi": 30.2,
+   "passAsSelected": 69.8
+  },
+  "MedQA Step 1": {
+   "n": 679,
+   "flaw": {
+    "mean": 96.1,
+    "p5": 80,
+    "p10": 88,
+    "p50": 100,
+    "anyMajor": 9.3
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 0.1,
+    "cover-options": 5.4,
+    "all-none": 0,
+    "negative-stem": 0.7,
+    "longest-key": 3.1,
+    "grammar-cue": 0,
+    "convergence": 0,
+    "absolute-terms": 1.6,
+    "clang": 2.5,
+    "duplicate-options": 1.3,
+    "vignette": 24.2,
+    "stem-length": 0.7,
+    "units": 0.7
+   },
+   "judged": 0
+  },
+  "MMLU clinical knowledge + college medicine": {
+   "n": 428,
+   "flaw": {
+    "mean": 73.8,
+    "p5": 56,
+    "p10": 62,
+    "p50": 68,
+    "anyMajor": 65.4
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 41.8,
+    "cover-options": 15.2,
+    "all-none": 1.2,
+    "negative-stem": 7.7,
+    "longest-key": 6.5,
+    "grammar-cue": 0,
+    "convergence": 0,
+    "absolute-terms": 9.6,
+    "clang": 1.2,
+    "duplicate-options": 2.1,
+    "vignette": 100,
+    "stem-length": 84.8,
+    "units": 0.2
+   },
+   "judged": 0
+  },
+  "MedMCQA dev (Indian PG entrance)": {
+   "n": 4091,
+   "flaw": {
+    "mean": 69.5,
+    "p5": 48,
+    "p10": 48,
+    "p50": 68,
+    "anyMajor": 70.2
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 51.8,
+    "cover-options": 20,
+    "all-none": 5.9,
+    "negative-stem": 15.5,
+    "longest-key": 4.8,
+    "grammar-cue": 0,
+    "convergence": 0.1,
+    "absolute-terms": 3.4,
+    "clang": 0.3,
+    "duplicate-options": 1.7,
+    "vignette": 98.6,
+    "stem-length": 89.9,
+    "units": 0.3
+   },
+   "judged": 0
+  },
+  "Station-derived (AMSA)": {
+   "n": 105,
+   "flaw": {
+    "mean": 96.4,
+    "p5": 88,
+    "p10": 88,
+    "p50": 100,
+    "anyMajor": 1.9
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 0,
+    "cover-options": 0,
+    "all-none": 0,
+    "negative-stem": 0,
+    "longest-key": 9.5,
+    "grammar-cue": 0,
+    "convergence": 0,
+    "absolute-terms": 0,
+    "clang": 12.4,
+    "duplicate-options": 0,
+    "vignette": 15.2,
+    "stem-length": 0,
+    "units": 18.1
+   },
+   "judged": 105,
+   "quality": {
+    "mean": 80.4,
+    "p5": 71,
+    "p10": 74,
+    "p25": 78,
+    "p50": 81
+   },
+   "gatesPass": 92.4,
+   "solved2": 99,
+   "keyCorrect": 98.1,
+   "passBase": 53.3,
+   "passAi": 1.9,
+   "passAsSelected": 53.3
+  },
+  "Station-derived (AI stations)": {
+   "n": 26,
+   "flaw": {
+    "mean": 93.8,
+    "p5": 80,
+    "p10": 80,
+    "p50": 94,
+    "anyMajor": 11.5
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 0,
+    "cover-options": 0,
+    "all-none": 0,
+    "negative-stem": 0,
+    "longest-key": 11.5,
+    "grammar-cue": 0,
+    "convergence": 0,
+    "absolute-terms": 0,
+    "clang": 11.5,
+    "duplicate-options": 0,
+    "vignette": 42.3,
+    "stem-length": 0,
+    "units": 11.5
+   },
+   "judged": 26,
+   "quality": {
+    "mean": 77.6,
+    "p5": 64,
+    "p10": 71,
+    "p25": 74,
+    "p50": 80
+   },
+   "gatesPass": 76.9,
+   "solved2": 100,
+   "keyCorrect": 92.3,
+   "passBase": 26.9,
+   "passAi": 0,
+   "passAsSelected": 0
+  },
+  "Generated (generate-mcq.mjs)": {
+   "n": 64,
+   "flaw": {
+    "mean": 98.1,
+    "p5": 94,
+    "p10": 94,
+    "p50": 100,
+    "anyMajor": 0
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 0,
+    "cover-options": 0,
+    "all-none": 0,
+    "negative-stem": 0,
+    "longest-key": 3.1,
+    "grammar-cue": 0,
+    "convergence": 1.6,
+    "absolute-terms": 6.3,
+    "clang": 1.6,
+    "duplicate-options": 0,
+    "vignette": 15.6,
+    "stem-length": 0,
+    "units": 3.1
+   },
+   "judged": 64,
+   "quality": {
+    "mean": 94.7,
+    "p5": 89,
+    "p10": 90,
+    "p25": 93,
+    "p50": 95
+   },
+   "gatesPass": 100,
+   "solved2": 100,
+   "keyCorrect": 100,
+   "passBase": 100,
+   "passAi": 95.3,
+   "passAsSelected": 95.3
+  }
+ },
+ "mutations": {
+  "all-of-the-above": {
+   "n": 582,
+   "caught": 582,
+   "scoreDrop": 582,
+   "expect": [
+    "all-none"
+   ],
+   "baseRate": 0,
+   "detection": 100,
+   "scoreDropRate": 100
+  },
+  "longest-correct": {
+   "n": 582,
+   "caught": 580,
+   "scoreDrop": 554,
+   "expect": [
+    "longest-key"
+   ],
+   "baseRate": 4.6,
+   "detection": 99.7,
+   "scoreDropRate": 95.2
+  },
+  "negative-stem": {
+   "n": 582,
+   "caught": 582,
+   "scoreDrop": 582,
+   "expect": [
+    "negative-stem"
+   ],
+   "baseRate": 0,
+   "detection": 100,
+   "scoreDropRate": 100
+  },
+  "key-in-stem": {
+   "n": 578,
+   "caught": 557,
+   "scoreDrop": 557,
+   "expect": [
+    "clang"
+   ],
+   "baseRate": 3.8,
+   "detection": 96.4,
+   "scoreDropRate": 96.4
+  },
+  "duplicate-options": {
+   "n": 582,
+   "caught": 582,
+   "scoreDrop": 582,
+   "expect": [
+    "duplicate-options"
+   ],
+   "baseRate": 0,
+   "detection": 100,
+   "scoreDropRate": 100
+  },
+  "missing-lead-in": {
+   "n": 582,
+   "caught": 562,
+   "scoreDrop": 582,
+   "expect": [
+    "lead-in"
+   ],
+   "baseRate": 0,
+   "detection": 96.6,
+   "scoreDropRate": 100
+  },
+  "truncated-vignette": {
+   "n": 578,
+   "caught": 544,
+   "scoreDrop": 507,
+   "expect": [
+    "vignette",
+    "stem-length"
+   ],
+   "baseRate": 8.6,
+   "detection": 94.1,
+   "scoreDropRate": 87.7
+  },
+  "none-of-the-above": {
+   "n": 582,
+   "caught": 582,
+   "scoreDrop": 582,
+   "expect": [
+    "all-none"
+   ],
+   "baseRate": 0,
+   "detection": 100,
+   "scoreDropRate": 100
+  }
+ },
+ "quest": {
+  "official": 41,
+  "gpt": 43,
+  "judgedOfficial": 41,
+  "judgedGpt": 43,
+  "aucFlaw": 0.484,
+  "aucQuality": 0.826,
+  "officialPassBase": 95.1,
+  "gptPassAi": 30.2,
+  "gptPassBase": 69.8,
+  "labels": {
+   "n": 43,
+   "bad": 15,
+   "good": 28
+  },
+  "confusion": {
+   "tp": 12,
+   "fn": 3,
+   "fp": 18,
+   "tn": 10
+  },
+  "accuracy": 51.2,
+  "sensitivity": 80,
+  "specificity": 35.7,
+  "kappa": 0.13,
+  "atBase": {
+   "confusion": {
+    "tp": 9,
+    "fn": 6,
+    "fp": 4,
+    "tn": 24
+   },
+   "accuracy": 76.7,
+   "sensitivity": 60,
+   "specificity": 85.7,
+   "kappa": 0.47
+  },
+  "gatesOnly": {
+   "confusion": {
+    "tp": 9,
+    "fn": 6,
+    "fp": 3,
+    "tn": 25
+   },
+   "accuracy": 79.1,
+   "sensitivity": 60,
+   "specificity": 89.3,
+   "kappa": 0.52
+  },
+  "reviewerKeyAgreement": 76.7
+ },
+ "wrongKey": {
+  "n": 16,
+  "refused": 100,
+  "keyJudgedWrong": 93.8,
+  "solvedToWrongKey": 0
+ },
+ "pool": {
+  "candidates": {
+   "ai": 90,
+   "amsa": 105,
+   "usmle-resource": 866
+  },
+  "pool": {
+   "ai": 61,
+   "usmle-resource": 54,
+   "amsa": 51
+  },
+  "status": {
+   "pool": 166,
+   "rejected": 91,
+   "pending": 798,
+   "reserve": 6
+  },
+  "topics": {
+   "Obstetrics": 5,
+   "Gastroenterology": 26,
+   "Infectious Diseases": 11,
+   "Neurology": 19,
+   "Cardiology": 16,
+   "Respiratory Medicine": 13,
+   "Haematology": 4,
+   "Paediatrics": 11,
+   "Neurosurgery": 2,
+   "Emergency Medicine": 5,
+   "Vascular Surgery": 1,
+   "General Surgery": 6,
+   "Gastrointestinal Surgery": 2,
+   "Cardiothoracic Surgery": 1,
+   "Gynaecology": 7,
+   "General Practice": 5,
+   "Otorhinolaryngology": 1,
+   "Trauma Surgery": 3,
+   "Ophthalmology": 1,
+   "Sexual Health": 2,
+   "Endocrinology": 3,
+   "Nephrology": 2,
+   "Psychiatry": 2,
+   "Neonatology": 3,
+   "Breast/Endocrine Surgery": 1,
+   "Immunology": 1,
+   "Rheumatology": 5,
+   "Critical Care Medicine": 1,
+   "Plastic Surgery": 1,
+   "Orthopaedics": 1,
+   "Medicolegal": 1,
+   "Urology": 1,
+   "Toxicology": 1,
+   "Oncology": 1,
+   "Dermatology": 1
+  },
+  "positions": {
+   "4": {
+    "counts": [
+     29,
+     25,
+     24,
+     27
+    ],
+    "n": 105,
+    "chi2": 0.56
+   },
+   "5": {
+    "counts": [
+     7,
+     16,
+     12,
+     10,
+     16
+    ],
+    "n": 61,
+    "chi2": 4.98
+   }
+  },
+  "topicCap": 26,
+  "bars": {
+   "base": 81,
+   "ai": 89,
+   "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
+  }
+ }
+}

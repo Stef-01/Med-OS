@@ -1,0 +1,789 @@
+{
+ "medqa-us4-test-0804.m-wrong-key": {
+  "hash": "69d670d3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-25T20:09:56.346Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Home-canned food, stomach symptoms first, then descending weakness starting in the cranial nerves and spreading to breathing muscles: this is foodborne botulism, which is treated with botulinum antitoxin."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "Top-down weakness starting with the eyes, speech and swallowing, in a man who cans his own food and has no fever, points to foodborne botulism, which is treated with botulinum antitoxin plus breathing support."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches neostigmine as treatment for botulism, which is ineffective and would delay the time-critical botulinum antitoxin."
+    ]
+   },
+   "flaws": [
+    "wrong key",
+    "no explanation",
+    "riluzole is an implausible distractor for an acute presentation",
+    "the recent diarrhoea and cough may confuse matters by suggesting post-infectious Guillain-Barré syndrome"
+   ],
+   "topic": "Neurology",
+   "verdict": "reject",
+   "reasons": [
+    "The vignette describes foodborne botulism (home canning, top-down paralysis, early blurred vision and trouble swallowing), and the correct treatment is antitoxin (A).",
+    "Neostigmine is not effective in botulism because the toxin blocks acetylcholine release; the item would teach harmful practice.",
+    "There is no explanation."
+   ],
+   "suggestion": "Change the key to A (botulinum antitoxin) and add an explanation of why neostigmine (myasthenia gravis), plasmapheresis (Guillain-Barré syndrome) and riluzole (ALS) are wrong. Consider replacing riluzole with a more plausible distractor, such as IVIG or pyridostigmine."
+  }
+ },
+ "medqa-us4-test-0802.m-wrong-key": {
+  "hash": "e41746bc",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-25T20:09:56.953Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "Lifting the head and chest with hands fisted half the time fits 2 months; rolling from back to front and passing an object between hands fits 6 months; first steps without yet following a one-step command without a gesture fits 12 months."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.85,
+    "reason": "The milestones fit 2 months (lifts head and chest prone, hands half fisted), 6 months (rolls back to front, passes objects hand to hand) and 12 months (first steps, knows object names, cannot yet follow a command without a gesture)."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Keyed answer is incorrect; milestones fit 2, 6 and 12 months (option D)",
+    "Child 1 has mixed milestones: tracking only to midline is a 1-month finding, while lifting the chest and hands open abou",
+    "Typo in lead-in: \"patient's\" should be \"patients'\"",
+    "No explanation provided",
+    "Three age sets combined in one option makes each option harder to judge (multi-part options)"
+   ],
+   "topic": "Paediatrics",
+   "verdict": "reject",
+   "reasons": [
+    "The key is wrong. Rolling from supine to prone and moving an object from hand to hand happen at about 6 months, not 4. Walking independently and recognizing object names without following a one-step command fits 12 months, not 9.",
+    "The first child's milestones conflict: tracking to midline suggests 1 month, but lifting the chest and having hands fisted only half the time suggest 2 months.",
+    "There is no explanation."
+   ],
+   "suggestion": "Change the key to D (2, 6, 12 months) and make the first child's findings fit 2 months: lifts the chest, tracks past midline, hands open half the time. Add an explanation that links each milestone to its age."
+  }
+ },
+ "medqa-us4-test-0874.m-wrong-key": {
+  "hash": "ccb42d24",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-25T20:09:57.883Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.75,
+    "reason": "A young, stable patient with clear lungs and a lingering post-infectious cough with a little blood-streaked sputum most likely has resolving bronchitis, so supportive care is appropriate without imaging or tests."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.72,
+    "reason": "A healthy young man with a lingering cough and a little blood-streaked sputum after viral bronchitis, with normal vital signs and lung exam, most likely has post-infectious bronchitis and needs only supportive care."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 3,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Mislabels a 2-week post-infectious cough as 'chronic' (chronic cough is >8 weeks)",
+    "Internal inconsistency: 'otherwise healthy' yet takes metformin and albuterol, with the conditions unstated",
+    "Lymphadenopathy described as part of the 'HEENT exam'",
+    "D-dimer is a weak distractor (no chest pain, shortness of breath or tachycardia)",
+    "No smoking or TB risk history, which leaves supportive care for post-bronchitic blood-streaked sputum arguable",
+    "No explanation provided"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "Key (chest radiograph for new hemoptysis) is standard and defensible",
+    "Stem has inaccurate wording ('chronic' cough) and unexplained comorbid medications",
+    "Supportive care is arguable in a low-risk patient after bronchitis; no explanation is given"
+   ],
+   "suggestion": "Call the cough 'persistent' (2 weeks), and either remove the metformin and albuterol or name the conditions and add smoking or TB risk to make imaging clearly needed. Add an explanation of why hemoptysis calls for a chest radiograph and why each distractor is wrong."
+  }
+ },
+ "medqa-us4-test-0360.m-wrong-key": {
+  "hash": "94c4cb12",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-25T20:09:58.328Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "An infant with symmetric flaccid weakness, low reflexes, a weak cry and suck, and a bell-shaped chest, but normal eye movements and face, most likely has spinal muscular atrophy (SMN1 gene) from anterior horn cell degeneration."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Progressive symmetric flaccid weakness with hyporeflexia, weak cry and suck, a bell-shaped chest and normal eye and facial movements in an infant who was normal at birth points to SMA type 1, caused by anterior horn cell degeneration."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 1,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches that the classic SMA presentation (hypotonia, areflexia, bell-shaped chest, sparing of the face and eyes) is a demyelinating process. This could lead to missing SMA and delaying time-critical "
+    ]
+   },
+   "flaws": [
+    "Wrong key: the correct answer is A (anterior horn cell degeneration)",
+    "Option B ('axonal demyelination') contradicts itself as a term",
+    "No explanation provided",
+    "Only four options"
+   ],
+   "topic": "Paediatrics",
+   "verdict": "reject",
+   "reasons": [
+    "The vignette is classic SMA, so the answer is anterior horn cell degeneration (A), not B",
+    "The keyed option is a self-contradictory term",
+    "The wrong key would teach students to misdiagnose a treatable, time-sensitive disease"
+   ],
+   "suggestion": "Change the key to A and reword B as 'Peripheral nerve demyelination'. Add an explanation contrasting SMA with infant botulism, myasthenia and myopathy, and consider adding tongue fasciculations to the stem."
+  }
+ },
+ "medqa-us4-test-0249.m-wrong-key": {
+  "hash": "9c950327",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-25T20:10:26.581Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.98,
+    "reason": "When prevalence falls, sensitivity and specificity stay the same, but positive predictive value (PPV) drops because more positives are false, and negative predictive value (NPV) rises because more negatives are true."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "Sensitivity and specificity stay fixed as prevalence changes, so when prevalence falls, PPV goes down and NPV goes up."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 1,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": [
+     "Teaches an incorrect fundamental principle (NPV falling with lower prevalence), though no direct patient harm"
+    ]
+   },
+   "flaws": [
+    "Wrong key: decreasing prevalence decreases PPV and increases NPV (option B)",
+    "Extensive numerical data in stem are irrelevant to the question asked",
+    "Recall-level biostatistics concept with no clinical decision",
+    "No explanation provided",
+    "Options are an exhaustive 2x2 grid missing 'PPV increases, NPV increases' and other unchanged combinations"
+   ],
+   "topic": "Public Health",
+   "verdict": "reject",
+   "reasons": [
+    "Keyed answer A is incorrect; B is correct",
+    "Stem data are superfluous to the question",
+    "No explanation"
+   ],
+   "suggestion": "Change the key to B. Either ask for a value that needs the 2x2 data (e.g., calculate the new PPV at a stated lower prevalence) or drop the unused numbers, and add an explanation."
+  }
+ },
+ "medqa-us4-test-0867.m-wrong-key": {
+  "hash": "e2a62336",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-25T20:10:36.793Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "The aPTT barely rose after an IV heparin bolus and six hours of infusion, which points to heparin resistance; heparin needs antithrombin III to work, so the best explanation is inherited antithrombin III deficiency."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "After a heparin bolus and infusion, his aPTT barely rose (26 to 30 seconds), which points to antithrombin III deficiency, because heparin needs antithrombin III to work."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 2,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches that a failure to prolong the aPTT on heparin points to Factor V Leiden. Heparin resistance is the hallmark of antithrombin III deficiency, so learners could keep giving ineffective heparin in"
+    ]
+   },
+   "flaws": [
+    "Wrong key: the heparin-resistance clue points to antithrombin III deficiency (A)",
+    "No explanation provided",
+    "Acute thrombus described as a hyperechoic mass; acute clot is usually hypoechoic",
+    "Red-herring risk factors (smoking, obesity, family history) don't help tell the options apart"
+   ],
+   "topic": "Haematology",
+   "verdict": "reject",
+   "reasons": [
+    "The key is wrong: an aPTT that barely rises (26 to 30 s) after a heparin bolus and infusion shows heparin resistance, which points to antithrombin III deficiency",
+    "Factor V Leiden does not affect how heparin works; the aPTT would prolong normally",
+    "No explanation, and the wrong key would teach an unsafe misconception"
+   ],
+   "suggestion": "Change the key to A (antithrombin III deficiency) and add an explanation: heparin needs antithrombin to work, Factor V Leiden and protein C deficiency respond normally to heparin, and antiphospholipid syndrome usually prolongs the aPTT before treatment. Also describe the acute thrombus as hypoechoic."
+  }
+ },
+ "medqa-us4-test-0302.m-wrong-key": {
+  "hash": "cfdb0335",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:23:59.475Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.99,
+    "reason": "Hematuria, high-frequency sensorineural hearing loss and anterior lenticonus, plus a family history of early kidney failure, are the classic signs of Alport syndrome, a type IV collagen defect."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.99,
+    "reason": "Alport syndrome is a type IV collagen defect that causes hematuria and nephritis, sensorineural hearing loss and anterior lenticonus, and it often runs in families with relatives needing a kidney transplant at a young age."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "mis-keyed: correct answer is A (Alport syndrome), not B",
+    "anterior lenticonus is pathognomonic and gives the answer away",
+    "VHL and tuberous sclerosis are weak, easily dismissed distractors",
+    "only four options",
+    "no explanation provided",
+    "inconsistent option format (possessive 'Fabry's')"
+   ],
+   "topic": "Nephrology",
+   "verdict": "reject",
+   "reasons": [
+    "Keyed answer (Fabry disease) is wrong; the triad of hematuric nephritis, high-frequency SNHL and anterior lenticonus is Alport syndrome",
+    "Fabry causes cornea verticillata, angiokeratomas and acroparesthesias, not lenticonus, and is X-linked so father-to-son transmission is inconsistent",
+    "No explanation and weak distractors"
+   ],
+   "suggestion": "Re-key to A (Alport syndrome) and add an explanation covering the autosomal (COL4A3/4) inheritance implied by father-to-son transmission. Consider replacing VHL and tuberous sclerosis with more plausible options (e.g., thin basement membrane disease, IgA nephropathy, Fabry disease) and giving a less pathognomonic eye finding, or asking about the mechanism (type IV collagen defect)."
+  }
+ },
+ "medqa-us4-test-0361.m-wrong-key": {
+  "hash": "f7d8eb11",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:24:02.729Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "A goiter, tachycardia, diaphoresis, diarrhea and weight loss in a baby of a mother with Graves' disease point to neonatal thyrotoxicosis, which appears after the PTU wears off and is treated with methimazole plus propranolol."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "The goiter, tachycardia, irritability, diarrhea and weight loss in the infant of a mother with Graves' disease point to neonatal thyrotoxicosis, which is treated with methimazole plus propranolol."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 2,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches potassium iodide alone as the first step for neonatal thyrotoxicosis. Iodide is only an add-on given after a thionamide; leaving out methimazole and the beta-blocker undertreats a condition th"
+    ]
+   },
+   "flaws": [
+    "Key is incorrect; the correct answer is A (methimazole and propranolol)",
+    "No explanation provided",
+    "Only four options"
+   ],
+   "topic": "Neonatology",
+   "verdict": "reject",
+   "reasons": [
+    "The keyed answer is wrong: first-line treatment for neonatal Graves' thyrotoxicosis is methimazole plus propranolol",
+    "Potassium iodide is only an adjunct after a thionamide, so keying it as the next step is misleading and potentially harmful",
+    "No explanation to correct the misconception"
+   ],
+   "suggestion": "Rekey to A (methimazole and propranolol). Add an explanation covering transplacental thyroid-stimulating antibodies and the delayed onset as maternal PTU clears, and explain why naloxone is contraindicated in opioid-exposed infants and why calcium and iodide alone are wrong. Consider adding a fifth option."
+  }
+ },
+ "medqa-us4-test-0806.m-wrong-key": {
+  "hash": "bf1191b4",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:24:03.764Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.8,
+    "reason": "A month of bloody diarrhea with patchy skip ulcerations across the colon and crypt inflammation on biopsy suggests Crohn's disease; with no antibiotic exposure and no pseudomembranes, C. difficile is unlikely."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "A month of bloody diarrhoea with patchy, skip-pattern ulceration across colonic segments and chronic inflammation in the crypts points to Crohn's disease, and the lack of antibiotic use or pseudomembranes makes C. difficile colitis unlikely."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 2,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "two keys: a month of bloody diarrhoea with patchy, discontinuous colonic ulceration fits Crohn's disease at least as wel",
+    "the biopsy does not say whether crypt architecture is preserved (acute self-limited colitis) or distorted, and does not ",
+    "a one-month illness labelled 'acute' is borderline: infective colitis usually settles within about 4 weeks",
+    "nursing-home work is a vague clue that hints at C. difficile, but the item then gives no antibiotic exposure and no pseu",
+    "suprapubic tenderness and the repeated history line ('ongoing for 1 month… intermittently present for the past month') a",
+    "IBS is a weak distractor because the stem has blood and ulceration"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "reject",
+   "reasons": [
+    "Patchy colonic ulceration over a month with crypt inflammation makes Crohn's disease equally or more defensible than the keyed answer",
+    "The biopsy leaves out the key distinguishing histology (crypt architecture, granulomas), so the item cannot pick out one best answer",
+    "No explanation, and clues that point nowhere (nursing home, suprapubic tenderness)"
+   ],
+   "suggestion": "If you keep it, shorten the illness to about 1 week with fever and sick contacts, and state that the biopsy shows preserved crypt architecture with no granulomas and that the stool culture is positive. Or re-key to Crohn's and describe crypt distortion and non-caseating granulomas. Replace IBS with ulcerative colitis or ischaemic colitis, and add an explanation."
+  }
+ },
+ "medqa-us4-test-0807.m-wrong-key": {
+  "hash": "28a0d1fe",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:24:17.733Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.8,
+    "reason": "Refractory hypotension despite massive transfusion, no active bleeding, cold extremities and a very low ScvO2 point to obstructive (low-output) shock, most likely tamponade from his stab wounds, rather than neurogenic shock, which gives warm extremities and a high ScvO2."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "A very low ScvO2 with cold extremities that persists despite volume and vasopressors, with no ongoing bleeding, points to obstructive shock, most likely tamponade from a penetrating cardiac wound, rather than neurogenic shock, which would give warm extremities and a high ScvO2."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 3,
+   "accuracy": 2,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches that low ScvO2, cold extremities and narrow pulse pressure point to neurogenic shock, which could lead to missing cardiac tamponade (obstructive shock) in penetrating trauma"
+    ]
+   },
+   "flaws": [
+    "Internally contradictory physiology: low ScvO2, cold extremities and narrow pulse pressure suggest low-output or obstruc",
+    "Two defensible answers (A arguably better than the key)",
+    "Implausible distractor (undiagnosed pneumonia)",
+    "Excessive and misleading detail in the stem",
+    "No explanation"
+   ],
+   "topic": "Trauma Surgery",
+   "verdict": "reject",
+   "reasons": [
+    "Findings (ScvO2 39%, cold extremities, narrow pulse pressure, multiple stab wounds, no response to fluids or pressors) fit tamponade better than neurogenic shock",
+    "The only clue for the key is relative bradycardia; the rest of the stem conflicts with it",
+    "No explanation, and one distractor is weak"
+   ],
+   "suggestion": "If neurogenic shock is the intended answer, change the stem to warm, flushed skin, normal or high ScvO2, a wide pulse pressure, a neck stab wound and loss of motor function, and use norepinephrine instead of phenylephrine. Otherwise re-key the item to tamponade, add FAST and JVD findings, and write an explanation."
+  }
+ },
+ "medqa-us4-test-0870.m-wrong-key": {
+  "hash": "45084189",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:24:26.492Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "Continuous mucosal lesions starting in the rectum and extending up the colon, with bloody diarrhea and tenesmus, are typical of ulcerative colitis."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "Bloody diarrhea with tenesmus, plus continuous mucosal lesions that start in the rectum and extend up to the hepatic flexure, point to ulcerative colitis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 4,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches that bloody diarrhoea with continuous colitis from the rectum is celiac disease, which could delay diagnosis and treatment of ulcerative colitis"
+    ]
+   },
+   "flaws": [
+    "Wrong key: the vignette describes ulcerative colitis (A), not celiac disease",
+    "Celiac disease and IBS are implausible distractors given bloody stool and colonoscopic lesions",
+    "Irrelevant laxative-abuse history and an odd blood pressure (105/86) with no stated purpose",
+    "No explanation provided"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "reject",
+   "reasons": [
+    "Keyed answer (celiac disease) is incorrect; findings are classic for ulcerative colitis",
+    "Two distractors are too weak to be plausible",
+    "No explanation and stem contains unexplained details"
+   ],
+   "suggestion": "Change the key to A (ulcerative colitis). Replace celiac disease and IBS with closer distractors, such as infectious colitis, ischemic colitis or microscopic colitis. Remove or justify the laxative history and the odd blood pressure, and add an explanation that contrasts continuous rectal disease with Crohn's skip lesions."
+  }
+ },
+ "medqa-us4-test-0363.m-wrong-key": {
+  "hash": "7908c66f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:24:32.575Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "On ultrasound, microcalcifications (psammoma bodies), increased vascularity and cervical lymph node spread in a healthy 36-year-old woman are classic for papillary thyroid carcinoma."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "A thyroid nodule with microcalcifications (psammoma bodies) and cervical lymph node spread in a young woman is classic for papillary carcinoma."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "C"
+   ],
+   "single_best": 2,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 2,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Wrong key: microcalcifications plus cervical lymph node spread point to papillary carcinoma, not follicular",
+    "No explanation provided",
+    "Irrelevant detail (FNA scheduled next week) adds nothing"
+   ],
+   "topic": "Breast/Endocrine Surgery",
+   "verdict": "reject",
+   "reasons": [
+    "Keyed answer (follicular) is incorrect; papillary carcinoma (C) is the clear best answer",
+    "Follicular carcinoma spreads through the blood, not typically to cervical nodes, and lacks psammomatous microcalcifications",
+    "No explanation"
+   ],
+   "suggestion": "Rekey to C (papillary carcinoma). Add an explanation linking microcalcifications to psammoma bodies and lymphatic spread, and contrast this with the blood-borne spread of follicular/Hürthle cell carcinoma and the older age and rapid growth of anaplastic carcinoma."
+  }
+ },
+ "medqa-us4-test-0809.m-wrong-key": {
+  "hash": "b23c4a93",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:24:38.863Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "A febrile teenager with an acutely hot, swollen single joint and high CRP and procalcitonin has septic arthritis, which gives joint fluid with more than 50,000 WBC/mm3, over 75% neutrophils and low viscosity."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "A sudden hot, swollen single joint with fever and high CRP and procalcitonin points to septic arthritis, where joint fluid shows more than 50,000 white cells/mm³, more than 75% neutrophils and low viscosity."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 4,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches that septic arthritis has near-normal synovial fluid (WBC 1,600), which could lead to a missed septic joint, a surgical emergency that destroys the joint"
+    ]
+   },
+   "flaws": [
+    "key is wrong (correct answer is B)",
+    "grammatical error in lead-in ('will most likely found')",
+    "redundant wording ('16-year-old teenager') and repeated exam findings",
+    "unexplained abbreviation 'N' in option A",
+    "PMN cutoffs and viscosity descriptors inconsistent across options",
+    "no sexual history, though gonococcal arthritis is relevant at this age"
+   ],
+   "topic": "Rheumatology",
+   "verdict": "reject",
+   "reasons": [
+    "Keyed answer A describes near-normal fluid; septic arthritis gives WBC >50,000, PMN >75%, low viscosity (option B)",
+    "Learned as keyed, it could lead to missing septic arthritis",
+    "Several wording and option-construction flaws, and no explanation"
+   ],
+   "suggestion": "Re-key to B and rebuild the distractors as the standard normal, non-inflammatory and inflammatory synovial fluid profiles (e.g. 200–2,000/mm³ and 2,000–50,000/mm³). Fix the grammar and add an explanation of each profile."
+  }
+ },
+ "medqa-us4-test-0865.m-wrong-key": {
+  "hash": "432a6cb3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:24:51.192Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "An unresponsive patient who stays hypoxemic on a non-rebreather cannot protect his airway, which rules out BiPAP and means he must be reintubated right away."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "An unresponsive patient who stays severely hypoxemic on 100% oxygen by non-rebreather cannot protect his airway, which rules out BiPAP, so he needs immediate reintubation."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "C"
+   ],
+   "single_best": 1,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches tracheostomy as first-line rescue for post-extubation respiratory failure instead of immediate reintubation; a surgical airway is only for cannot-intubate-cannot-oxygenate situations, and a fo",
+     "Delaying definitive airway control in an unresponsive hypoxaemic patient could be fatal."
+    ]
+   },
+   "flaws": [
+    "Keyed answer is incorrect; the correct answer (reintubate) is listed as a distractor",
+    "Internally inconsistent ABG (PO2 73 mm Hg with SaO2 73%)",
+    "Vital signs given twice; tense errors; stray quotation mark",
+    "Irrelevant history padding",
+    "No explanation"
+   ],
+   "topic": "Critical Care Medicine",
+   "verdict": "reject",
+   "reasons": [
+    "Key is wrong: an unresponsive, hypoxaemic patient who fails a non-rebreather after extubation needs reintubation (C)",
+    "Unsafe teaching: tracheostomy is not an emergency airway",
+    "ABG values contradict each other (PO2 73 vs SaO2 73%)"
+   ],
+   "suggestion": "Change the key to C (Reintubate), correct the ABG to show matching severe hypoxaemia (e.g., PO2 ~40 mm Hg), remove the duplicate vital signs and padding, and add an explanation of why tracheostomy, continuing the non-rebreather and BiPAP are inappropriate."
+  }
+ },
+ "medqa-us4-test-0808.m-wrong-key": {
+  "hash": "c92994b7",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:24:53.892Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "This picture fits Alzheimer's disease: she forgets new information, gets lost (visuospatial problems), scores 18 on the MoCA, has no focal neurological signs and has a family history of dementia, so an acetylcholinesterase inhibitor like donepezil is the first-line treatment."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.98,
+    "reason": "Gradually worsening memory loss and getting lost, with a normal neurological exam and a MoCA of 18, point to mild-to-moderate Alzheimer disease, for which the cholinesterase inhibitor donepezil is the first-line treatment."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "C"
+   ],
+   "single_best": 2,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Keys imipramine, a strongly anticholinergic TCA on the Beers list, as treatment for dementia; it worsens memory and raises the risk of delirium, falls and orthostatic hypotension in older adults",
+     "Teaches against the correct first-line cholinesterase inhibitor (donepezil) for Alzheimer's disease"
+    ]
+   },
+   "flaws": [
+    "Wrong key (the correct answer is C, donepezil)",
+    "No explanation provided",
+    "Long run of irrelevant normal cranial-nerve findings (window dressing)"
+   ],
+   "topic": "Neurology",
+   "verdict": "reject",
+   "reasons": [
+    "Keyed answer imipramine is incorrect and harmful in dementia",
+    "Correct answer, donepezil, is listed as a distractor",
+    "No explanation to correct the error"
+   ],
+   "suggestion": "Change the key to C (donepezil) and add an explanation of why cholinesterase inhibitors are first-line for mild-to-moderate Alzheimer's disease and why anticholinergic TCAs, lithium and antipsychotics are not indicated. Shorten the normal neurological findings."
+  }
+ },
+ "medqa-us4-test-0864.m-wrong-key": {
+  "hash": "9bf81729",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T00:25:00.670Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "This patient has blunt abdominal trauma, peritonitis, and hemoperitoneum on FAST, and he is still hemodynamically unstable after fluids, so he needs an exploratory laparotomy right away rather than more fluids or a CT scan."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "A blunt trauma patient with a positive FAST, peritonitis and shock that doesn't respond to fluids needs emergency exploratory laparotomy, not CT or more crystalloid."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 5,
+   "accuracy": 1,
+   "explanation": 0,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches continued crystalloid bolus in a fluid-nonresponsive patient with haemorrhagic shock from intra-abdominal bleeding, delaying definitive surgical haemorrhage control",
+     "Contradicts ATLS/damage-control resuscitation principles (limit crystalloid, give blood products, operate)"
+    ]
+   },
+   "flaws": [
+    "Wrong key (D is correct)",
+    "Implausible vital sign (HR 180 in haemorrhagic shock)",
+    "Morphine is an implausible distractor for 'next step' in shock",
+    "No explanation provided",
+    "Imprecise wording ('light percussion')"
+   ],
+   "topic": "Trauma Surgery",
+   "verdict": "reject",
+   "reasons": [
+    "Keyed answer is incorrect; an unstable patient with a positive FAST and peritonitis who has not responded to fluids needs emergency laparotomy",
+    "Keyed answer would teach harmful over-resuscitation with crystalloid and delay haemorrhage control",
+    "No explanation; stem has an implausible heart rate"
+   ],
+   "suggestion": "Rekey to D (exploratory laparotomy) and add an explanation of why the other options are wrong: more saline is harmful, CT is only for stable patients, and pain relief doesn't stop bleeding. Correct the heart rate to a plausible value such as 140, and replace morphine with a stronger distractor such as packed red cell transfusion followed by CT."
+  }
+ }
+}
