@@ -159,6 +159,7 @@ Founder: "a much more robust personal study ecosystem by researching online how 
 | A monthly Wrapped, with a story card to post | Spotify | `osce/wrapped-view.mjs` |
 | Cross out an option: hold it, right-click, or Shift and its number; a tap brings it back | UWorld, AMBOSS | the card |
 | A run of right answers on the Right line, the best run at the end | Duolingo | the card, the end |
+| Exam mode: the exam's clock on each question, no answers until the end, then go through them | UWorld (timed, untutored) | Custom, the card |
 | Normal ranges beside a question that gives results: its tests first, then 63 adult ranges in nine groups, a find box | UWorld, AMBOSS (lab values) | `library/ranges.mjs`, `osce/ranges-view.mjs` |
 
 The bank Study and the duel draw on is the stations' questions, the reviewed pool, 523 high-yield questions written to 225 topics from the AMC MCQ specification (`scripts/generate-hy.mjs`) and 494 MedExpQA cases (CC BY 4.0, adapted, `scripts/import-medexpqa.mjs`); every one tagged by year and difficulty.

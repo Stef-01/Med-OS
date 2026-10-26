@@ -1793,3 +1793,11 @@ button.os-libcheck { align-self:flex-start; }
 .os-rngall { display:flex; flex-direction:column; gap:14px; }
 .os-rngall h4 { margin:0 0 6px; font-size:12.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--mute); }
 @media (min-width:640px) { .os-dlg--rng { width:min(520px, 100%); max-height:min(86vh, 860px); } }
+
+/* Exam mode: a chosen option is marked, nothing else; going through the answers afterwards */
+.os-libopt.sel { border-color:var(--pri); background:color-mix(in srgb, var(--pri) 14%, var(--card)); }
+.os-libopt.sel > b { background:var(--pri); color:var(--em-pri-contrast, #001018); }
+.os-libexamnext { width:100%; margin-top:4px; }
+.os-librevnav { display:grid; grid-template-columns:1fr 2fr; gap:10px; margin-top:4px; }
+.os-librevrow { display:flex; align-items:flex-start; gap:12px; width:100%; min-height:44px; padding:0; text-align:left; color:inherit; font:inherit; background:none; border:0; cursor:pointer; }
+.os-librevrow::after { content:'›'; margin-left:auto; padding-left:6px; color:var(--mute); font-size:20px; line-height:1.2; }

@@ -99,7 +99,8 @@ export function libraryKey(e) {
   if (V.tab !== 'study' || !V.st.q || e.metaKey || e.ctrlKey || e.altKey || e.target.closest?.('input, textarea, select')) return false;
   const it = V.st.q[V.st.i];
   if (it && V.st.pick == null && e.shiftKey && /^Digit[1-5]$/.test(e.code) && +e.code.slice(5) <= it.item.options.length) { strike(displayOrder(it.item, it.key)[+e.code.slice(5) - 1]); return true; }
-  if (it && V.st.pick == null && /^[1-5]$/.test(e.key) && +e.key <= it.item.options.length) { answer(displayOrder(it.item, it.key)[+e.key - 1]); return true; }
+  if (it && V.st.pick == null && /^[1-5]$/.test(e.key) && +e.key <= it.item.options.length) { choose(displayOrder(it.item, it.key)[+e.key - 1]); return true; }
+  if (it && V.st.mode === 'exam' && V.st.pick == null && e.key === 'Enter' && !e.target.closest?.('button, a')) { examNext(); return true; }
   if (it && V.st.pick != null && /^[1-4]$/.test(e.key)) { rate(GRADES[+e.key - 1]); return true; }
   if (it && V.st.pick != null && (e.key === 'Enter' || e.key === ' ') && !e.target.closest?.('button, a')) { rate(V.st.pick === it.item.answer ? 'good' : 'again'); return true; }
   return false;
@@ -366,7 +367,7 @@ function customHtml() {
     ${seg('which', Object.entries(WHICH).map(([v, l]) => [v, l, whichN[v]]), p.which, 'Questions')}
     ${seg('size', SIZES.map(n => [n, n ? String(n) : 'All']), p.size, 'How many')}
     ${seg('mode', Object.entries(MODES), p.mode, 'Mode')}
-    <p class="os-libmeta os-libmodenote">${p.mode === 'timed' ? 'Timed: the exam’s clock on each question (90 s plus reading time); the answer after each.' : 'Tutor: no clock; the answer and why after each.'}</p>
+    <p class="os-libmeta os-libmodenote">${p.mode === 'exam' ? 'Exam: the exam’s clock on each question and no answers until the end, then go through them.' : p.mode === 'timed' ? 'Timed: the exam’s clock on each question (90 s plus reading time); the answer after each.' : 'Tutor: no clock; the answer and why after each.'}</p>
     ${seg('order', Object.entries(ORDERS), p.order, 'Order')}
     <div class="os-libstick"><button class="os-btn os-btn--lg os-primary os-libgo" data-lib="start"${q.length ? '' : ' disabled'}>${q.length ? `Start · ${plural(q.length, 'card')}` : 'Nothing matches: loosen a filter'}</button></div>`;
 }
@@ -374,7 +375,7 @@ function customHtml() {
 /* a session from a list (already in order): into focus */
 function startWith(list, { mode = 'tutor', order = 'due', label = '' } = {}) {
   if (!list.length) { notify('Nothing to study there right now.', ''); return false; }
-  Object.assign(V.st, { q: list, i: 0, pick: null, n: 0, right: 0, mode, order, label, note: false, seen: [], x: null, combo: 0, best: 0 });
+  Object.assign(V.st, { q: list, i: 0, pick: null, n: 0, right: 0, mode, order, label, note: false, seen: [], x: null, combo: 0, best: 0, sel: null, picks: null, rv: null });
   saveLive();
   dlg()?.querySelector('.os-lib')?.classList.add('os-lib--focus');
   paint(); tick(); panel()?.querySelector('.os-libopt')?.focus({ preventScroll: true });
@@ -385,30 +386,50 @@ function endStudy() {
   dlg()?.querySelector('.os-lib')?.classList.remove('os-lib--focus');
   paint(); arrive(); panel()?.querySelector('.os-libgo')?.focus({ preventScroll: true });
 }
-/* timed mode: the question's clock, every quarter second; at 0 it is answered blank */
+/* timed and exam: the question's clock, every quarter second; at 0 it is answered blank (in an exam, with what was chosen) */
 function tick() {
   clearInterval(V.st.timer);
   const x = V.st.q?.[V.st.i];
-  if (!x || V.st.mode !== 'timed' || V.st.pick != null) return;
+  if (!x || (V.st.mode !== 'timed' && V.st.mode !== 'exam') || V.st.pick != null) return;
   const total = timedSecs(x.item) * 1000; V.st.ends = now() + total;
   const draw = () => {
     const left = Math.max(0, V.st.ends - now()), el = panel()?.querySelector('.os-libclock');
     if (el) { el.querySelector('b').textContent = String(Math.ceil(left / 1000)); el.style.setProperty('--p', (left / total).toFixed(3)); el.classList.toggle('low', left < 15000); }
-    if (!left) { clearInterval(V.st.timer); answer(-1); }
+    if (!left) { clearInterval(V.st.timer); if (V.st.mode === 'exam') examNext(); else answer(-1); }
   };
   draw(); V.st.timer = setInterval(draw, 250);
 }
 
+/* after an exam: each question as you answered it, with the answer and why; Back, Next, and Results at the end */
+function revHtml() {
+  const keys = [...new Set((V.st.seen || []).map(s => s.key))], by = new Map(V.st.q.map(x => [x.key, x]));
+  const n = Math.min(V.st.rv, keys.length - 1), x = by.get(keys[n]); if (!x) { V.st.rv = null; return cardHtml(); }
+  const it = x.item, ord = displayOrder(it, x.key), picked = V.st.picks[x.key] ?? -1;
+  return `<div class="os-libcard os-libcard--in os-librev" data-q="${esc(x.key)}">
+    <div class="os-libtop">
+      <button class="os-libx" data-lib="revend" aria-label="Back to the results">${I.x}</button>
+      <div class="os-libbar" role="progressbar" aria-label="Answers gone through" aria-valuemin="0" aria-valuemax="${keys.length}" aria-valuenow="${n + 1}"><i style="transform:scaleX(${((n + 1) / keys.length).toFixed(3)})"></i></div>
+      <span class="os-libcount2">${n + 1}/${keys.length}</span>
+    </div>
+    <p class="os-liblayer"><b>${esc(layerLabel(it))}</b></p>
+    <p class="os-libstem">${esc(it.stem)}</p>${it.ask ? `<p class="os-libask">${esc(it.ask)}</p>` : ''}
+    ${optsHtml(it, ord, picked, true)}
+    ${expHtml(x, it, ord, picked)}
+    <div class="os-librevnav"><button class="os-btn os-btn--lg" data-lib="revgo" data-v="${n - 1}"${n ? '' : ' disabled'}>Back</button><button class="os-btn os-btn--lg os-primary" data-lib="${n + 1 < keys.length ? 'revgo' : 'revend'}" data-v="${n + 1}">${n + 1 < keys.length ? 'Next' : 'Results'}</button></div>
+  </div>`;
+}
 function cardHtml() {
+  if (V.st.rv != null && V.st.picks) return revHtml();
   const x = V.st.q[V.st.i];
   if (!x) {
     const mem = api.studyMem(), p = myPref(), td = today(mem.days, now(), p.goal), sk = streak(mem.days, now()), pct = V.st.n ? Math.round((100 * V.st.right) / V.st.n) : 0;
     const missed = (V.st.seen || []).some(x => !x.ok);
-    return `<div class="os-libempty os-libdone">${ring(V.st.n ? V.st.right / V.st.n : 0, V.st.right, V.st.n, 'right')}<p><strong>${td.done ? 'Daily goal done' : 'Session done'}</strong><br>${plural(V.st.n, 'card')} · ${pct}% right · ${td.n} of ${td.goal} today${sk.days ? ` · ${sk.days}-day streak` : ''}${V.st.best >= 3 ? `<br><span class="os-libbest">${icon('flame')}Best run: ${V.st.best} in a row</span>` : ''}</p>
-      <div class="os-libacts os-libacts--col">${missed ? `<button class="os-btn os-btn--lg os-primary" data-lib="redo">Redo the ${(() => { const k = new Set((V.st.seen || []).filter(x => !x.ok).map(x => x.key)).size; return k === 1 ? 'one' : k; })()} missed</button><button class="os-btn os-btn--lg" data-lib="today">Keep going</button>` : '<button class="os-btn os-btn--lg os-primary" data-lib="today">Keep going</button>'}<button class="os-link" data-lib="endstudy">Done</button></div>
+    const exam = V.st.mode === 'exam' && V.st.picks;
+    return `<div class="os-libempty os-libdone">${ring(V.st.n ? V.st.right / V.st.n : 0, V.st.right, V.st.n, 'right')}<p><strong>${exam ? 'Exam done' : td.done ? 'Daily goal done' : 'Session done'}</strong><br>${plural(V.st.n, 'card')} · ${pct}% right · ${td.n} of ${td.goal} today${sk.days ? ` · ${sk.days}-day streak` : ''}${V.st.best >= 3 ? `<br><span class="os-libbest">${icon('flame')}Best run: ${V.st.best} in a row</span>` : ''}</p>
+      <div class="os-libacts os-libacts--col">${exam ? '<button class="os-btn os-btn--lg os-primary" data-lib="revgo" data-v="0">Go through the answers</button>' : ''}${missed ? `<button class="os-btn os-btn--lg${exam ? '' : ' os-primary'}" data-lib="redo">Redo the ${(() => { const k = new Set((V.st.seen || []).filter(x => !x.ok).map(x => x.key)).size; return k === 1 ? 'one' : k; })()} missed</button><button class="os-btn os-btn--lg" data-lib="today">Keep going</button>` : '<button class="os-btn os-btn--lg os-primary" data-lib="today">Keep going</button>'}<button class="os-link" data-lib="endstudy">Done</button></div>
       ${reviewHtml()}</div>`;
   }
-  const it = x.item, picked = V.st.pick, shown = picked != null, card = api.studyMem().card[x.key] || {}, t = now(), timed = V.st.mode === 'timed';
+  const it = x.item, picked = V.st.pick, shown = picked != null, card = api.studyMem().card[x.key] || {}, t = now(), timed = V.st.mode === 'timed' || V.st.mode === 'exam', exam = V.st.mode === 'exam';
   const ord = displayOrder(it, x.key);   /* the key spread by the card's id; each button keeps its stored index */
   const banner = V.st.order === 'ladder' && it.year && it.year !== V.st.q[V.st.i - 1]?.item.year;
   const meta = [it.year && !banner ? esc(yearLabel(it)) : '', it.difficulty ? esc(diffLabel(it)) : '', `<b>${esc(layerLabel(it))}</b>`, x.ownerName ? `from ${esc(x.ownerName)}` : ''].filter(Boolean).join(' · ');
@@ -424,17 +445,26 @@ function cardHtml() {
     <p class="os-liblayer">${meta}</p>
     ${banner ? `<p class="os-libyear"><b>${esc(YEARS[it.year].label)}</b> ${esc(YEARS[it.year].name)}</p>` : ''}
     <p class="os-libstem">${esc(it.stem)}</p>${it.ask ? `<p class="os-libask">${esc(it.ask)}</p>` : ''}
-    <div class="os-libopts" role="group" aria-label="Options">${ord.map((i, pos) => {
-      const o = it.options[i], st = !shown ? '' : i === it.answer ? ' ok' : i === picked ? ' no' : ' dim';
-      const xd = !shown && V.st.x?.has(i);
-      return `<button class="os-libopt${st}${xd ? ' os-libopt--x' : ''}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : ''}><b>${LET[pos]}</b><span>${esc(o)}</span><span class="os-vh os-libxvh">${xd ? 'crossed out' : ''}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
-    }).join('')}</div>
-    ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? `Right${V.st.combo >= 3 ? ` <span class="os-libcombo${V.st.comboAt === x.key + V.st.i ? ' os-still' : ''}">${icon('flame')}${V.st.combo} in a row</span>` : ''}` : picked < 0 ? `Time’s up: the answer is ${LET[ord.indexOf(it.answer)]}` : `The answer is ${LET[ord.indexOf(it.answer)]}`}</strong>${it.explanation ? explainHtml(it.explanation) : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>
+    ${optsHtml(it, ord, picked, shown)}
+    ${shown ? `${expHtml(x, it, ord, picked, V.st.combo >= 3 ? `<span class="os-libcombo${V.st.comboAt === x.key + V.st.i ? ' os-still' : ''}">${icon('flame')}${V.st.combo} in a row</span>` : '')}
       ${picked !== it.answer && (card.w | 0) >= 4 && !card.note ? `<p class="os-libleech">${icon('alert')}<span>This one has caught you ${card.w} times. Write the rule in your own words: it is the fastest fix.</span></p>` : ''}
       ${V.st.note || card.note || (picked !== it.answer && (card.w | 0) >= 4) ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
       ${gradesHtml(picked === it.answer, card, t)}
-      ${x.key.startsWith('b:') && accountsOn() ? (V.st.report === x.key ? `<div class="os-libreport" role="group" aria-label="What is wrong with it?"><span>What is wrong?</span>${Object.entries(REPORTS).map(([k, l]) => `<button class="os-chip" data-lib="report" data-v="${k}">${esc(l)}</button>`).join('')}</div>` : V.st.reported === x.key ? '<p class="os-libmeta os-libreported">Reported. Thank you.</p>' : '<button class="os-link os-libreportbtn" data-lib="reportopen">Report a problem</button>') : ''}` : '<p class="os-libmeta os-libkeys"><span class="os-libkeys-touch">Tap an answer. Hold one to cross it out.</span><span class="os-libkeys-mouse">Press 1 to 5 to answer. Right-click, or Shift and the number, crosses one out.</span></p>'}
+      ${x.key.startsWith('b:') && accountsOn() ? (V.st.report === x.key ? `<div class="os-libreport" role="group" aria-label="What is wrong with it?"><span>What is wrong?</span>${Object.entries(REPORTS).map(([k, l]) => `<button class="os-chip" data-lib="report" data-v="${k}">${esc(l)}</button>`).join('')}</div>` : V.st.reported === x.key ? '<p class="os-libmeta os-libreported">Reported. Thank you.</p>' : '<button class="os-link os-libreportbtn" data-lib="reportopen">Report a problem</button>') : ''}` : (exam ? `<button class="os-btn os-btn--lg os-primary os-libnext os-libexamnext" data-lib="examnext">${V.st.sel == null ? 'Skip' : V.st.i + 1 >= V.st.q.length ? 'Finish' : 'Next'}</button><p class="os-libmeta os-libkeys">Exam: no answers until the end.</p>` : '<p class="os-libmeta os-libkeys"><span class="os-libkeys-touch">Tap an answer. Hold one to cross it out.</span><span class="os-libkeys-mouse">Press 1 to 5 to answer. Right-click, or Shift and the number, crosses one out.</span></p>')}
   </div>`;
+}
+/* the options: before the answer, tap to answer (in an exam, to choose: it can change until Next); after it, right, yours
+   and the rest dimmed, with why beside the two that matter */
+function optsHtml(it, ord, picked, shown) {
+  return `<div class="os-libopts" role="group" aria-label="Options">${ord.map((i, pos) => {
+      const o = it.options[i], st = !shown ? '' : i === it.answer ? ' ok' : i === picked ? ' no' : ' dim';
+      const xd = !shown && V.st.x?.has(i), sel = !shown && V.st.mode === 'exam' && V.st.sel === i;
+      return `<button class="os-libopt${st}${xd ? ' os-libopt--x' : ''}${sel ? ' sel' : ''}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : V.st.mode === 'exam' ? ` aria-pressed="${sel}"` : ''}><b>${LET[pos]}</b><span>${esc(o)}</span><span class="os-vh os-libxvh">${xd ? 'crossed out' : ''}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
+    }).join('')}</div>`;
+}
+/* the answer box: right (with the run), or which was right; the explanation; the credit */
+function expHtml(x, it, ord, picked, run = '') {
+  return `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? `Right${run ? ` ${run}` : ''}` : picked < 0 ? `${V.st.mode === 'exam' ? 'Not answered' : 'Time’s up'}: the answer is ${LET[ord.indexOf(it.answer)]}` : `The answer is ${LET[ord.indexOf(it.answer)]}`}</strong>${it.explanation ? explainHtml(it.explanation) : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>`;
 }
 /* the day's goal, done: a burst of confetti from the top of the card (springs out, gravity down, fades), a buzz on a
    phone that has one, and a toast. Reduced motion: the toast alone */
@@ -457,7 +487,8 @@ function reviewHtml() {
   for (const s of V.st.seen || []) if (!keys.has(s.key)) { keys.add(s.key); seen.push(s); }
   if (!seen.length) return '';
   const by = new Map(V.st.q.map(x => [x.key, x])), missed = seen.filter(s => !s.ok);
-  return `<div class="os-libreview"><h3 class="os-libh">This session</h3><ol>${seen.map(s => { const x = by.get(s.key); return x ? `<li class="${s.ok ? 'ok' : 'no'}"><span aria-label="${s.ok ? 'right' : 'missed'}">${s.ok ? I.check : I.x}</span><p>${esc(x.item.stem.length > 90 ? `${x.item.stem.slice(0, 90)}…` : x.item.stem)}</p></li>` : ''; }).join('')}</ol>
+  const open = V.st.mode === 'exam' && V.st.picks;   /* after an exam, each opens its answer */
+  return `<div class="os-libreview"><h3 class="os-libh">This session</h3><ol>${seen.map((s, n) => { const x = by.get(s.key); if (!x) return ''; const inner = `<span aria-label="${s.ok ? 'right' : 'missed'}">${s.ok ? I.check : I.x}</span><p>${esc(x.item.stem.length > 90 ? `${x.item.stem.slice(0, 90)}…` : x.item.stem)}</p>`; return `<li class="${s.ok ? 'ok' : 'no'}">${open ? `<button class="os-librevrow" data-lib="revgo" data-v="${n}">${inner}</button>` : inner}</li>`; }).join('')}</ol>
     ${missed.length ? '' : '<p class="os-libmeta">Every one right.</p>'}</div>`;
 }
 /* the Notebook: every question you wrote a note on */
@@ -483,6 +514,29 @@ function gradesHtml(right, card, t) {
 }
 /* the tests a question gives results for (its stem and ask; an option's drug is not a result): Normal ranges shows only then */
 const labsIn = it => inText(`${it.stem} ${it.ask || ''}`);
+/* a tap on an option: in an exam it chooses (in place, until Next); otherwise it answers */
+function choose(i) {
+  if (V.st.mode !== 'exam') return answer(i);
+  if (V.st.pick != null || !V.st.q?.[V.st.i]) return;
+  V.st.sel = V.st.sel === i ? null : i;
+  panel()?.querySelectorAll('.os-libopt').forEach(b => { const on = +b.dataset.i === V.st.sel; b.classList.toggle('sel', on); b.setAttribute('aria-pressed', String(on)); });
+  const nx = panel()?.querySelector('.os-libexamnext'); if (nx) nx.textContent = V.st.sel == null ? 'Skip' : V.st.i + 1 >= V.st.q.length ? 'Finish' : 'Next';
+  try { navigator.vibrate?.(6); } catch {}
+}
+/* Next in an exam: the choice counts (towards your gaps, the month's Wrapped, and the card's next showing: Good if right,
+   Again if not), nothing is shown, and the next question comes */
+function examNext() {
+  const x = V.st.q?.[V.st.i]; if (!x || V.st.mode !== 'exam') return;
+  clearInterval(V.st.timer);
+  const i = V.st.sel ?? -1, ok = i === x.item.answer, m = api.studyMem(), had = m.card[x.key], fresh = isNew(had);
+  record(m, x, ok, now()); if (ok) V.st.right++;
+  m.card[x.key] = grade(had, ok ? 'good' : 'again', now(), Math.random);
+  if (fresh) { if (m.day.d !== day()) m.day = { d: day(), n: 0 }; m.day.n++; }
+  api.saveStudy(m);
+  (V.st.picks ||= {})[x.key] = i; V.st.seen.push({ key: x.key, ok });
+  V.st.i++; V.st.n++; V.st.sel = null; V.st.x = null;
+  saveLive(); paint(); tick(); panel()?.querySelector('.os-libopt, [data-lib="revgo"]')?.focus({ preventScroll: true });
+}
 function strike(i) {
   if (V.st.pick != null || !V.st.q) return;
   const s = V.st.x || (V.st.x = new Set()); s.has(i) ? s.delete(i) : s.add(i);
@@ -686,7 +740,10 @@ async function act(a, b, e) {
     case 'notestudy': { const mem = api.studyMem(); V.st.view = ''; return startWith(everything().filter(e => mem.card[e.key]?.note), { label: 'Notebook' }); }
     case 'note': { V.st.note = true; paint(); return panel()?.querySelector('[data-lib-note]')?.focus(); }
     case 'ranges': { const it = V.st.q?.[V.st.i]?.item; if (it) openRanges(`${it.stem} ${it.ask || ''}`); return; }
-    case 'opt': return V.st.x?.has(+b.dataset.i) ? strike(+b.dataset.i) : answer(+b.dataset.i);
+    case 'opt': return V.st.x?.has(+b.dataset.i) ? strike(+b.dataset.i) : choose(+b.dataset.i);
+    case 'examnext': return examNext();
+    case 'revgo': V.st.rv = Math.max(0, +b.dataset.v || 0); paint(); panel()?.scrollTo?.(0, 0); dlg()?.querySelector('.os-dlg-body')?.scrollTo(0, 0); return panel()?.querySelector('.os-librevnav .os-primary')?.focus({ preventScroll: true });
+    case 'revend': V.st.rv = null; paint(); return arrive(-1);
     case 'grade': return rate(b.dataset.g);
     case 'endstudy': return endStudy();
   }

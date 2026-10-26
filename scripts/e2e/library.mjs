@@ -99,7 +99,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await sam.click('.os-libchips [data-k="cat"][data-v="anatomy"]'); await sam.waitForTimeout(150);
   ok(/Start · 1 card/.test(await sam.textContent('.os-libgo')), 'custom: then Anatomy narrows to 1');
   ok(await sam.locator('.os-libchips [data-k="cat"][data-v="skills"]').count() === 0, 'custom: a kind with no questions is left out');
-  ok(await sam.locator('[data-lib="pref"][data-k="which"]').count() === 4 && await sam.locator('[data-lib="pref"][data-k="mode"]').count() === 2, 'custom: which questions (all, unused, incorrect, flagged), how many, tutor or timed, order');
+  ok(await sam.locator('[data-lib="pref"][data-k="which"]').count() === 4 && await sam.locator('[data-lib="pref"][data-k="mode"]').count() === 3, 'custom: which questions (all, unused, incorrect, flagged), how many, tutor, timed or exam, order');
   await sam.evaluate(() => document.querySelector('.os-dlg-body')?.scrollTo(0, 0)); await shot(sam, '320-custom'); await flat(sam, 'custom');
   await sam.click('.os-libchips [data-k="cat"][data-v=""]'); await sam.click('.os-libgo');
   await sam.waitForSelector('.os-libopt');
@@ -321,6 +321,27 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await solo.keyboard.press('Escape'); await solo.waitForTimeout(500);
   ok(await solo.locator('.os-rng').count() === 0 && await solo.locator('.os-libopt').count() > 0, 'ranges: Escape closes the sheet, the card is still there');
   await solo.click('[data-lib="endstudy"]'); await solo.waitForTimeout(300);
+  /* Exam mode (UWorld's timed, untutored block): a tap chooses and can change, nothing is shown, Finish ends it; then go through the answers */
+  await solo.click('[data-lib="mode"][data-m="custom"]'); await solo.waitForSelector('.os-libgo');
+  await solo.selectOption('.os-libp [name="sdeck"]', { label: 'Kidneys' }); await solo.waitForTimeout(150);
+  await solo.click('[data-lib="pref"][data-k="mode"][data-v="exam"]'); await solo.waitForTimeout(150);
+  ok(/no answers until the end/.test(await solo.textContent('.os-libmodenote')), 'exam: Custom offers Exam, and says what it does');
+  await solo.click('.os-libgo'); await solo.waitForSelector('.os-libopt');
+  ok(await solo.locator('.os-libclock').count() === 1 && (await solo.textContent('.os-libexamnext')).trim() === 'Skip', 'exam: the clock runs; with nothing chosen, Next is Skip');
+  await solo.locator('.os-libopt[data-i="1"]').click(); await solo.locator('.os-libopt[data-i="0"]').click();
+  ok(await solo.locator('.os-libopt.sel').count() === 1 && await solo.locator('.os-libopt[data-i="0"].sel').count() === 1 && await solo.locator('.os-libexp, .os-libopt.ok, .os-libopt.no').count() === 0 && (await solo.textContent('.os-libexamnext')).trim() === 'Finish',
+    'exam: a tap chooses and a second changes it; nothing says right or wrong; the last question finishes');
+  await shot(solo, '320-exam');
+  await solo.click('.os-libexamnext'); await solo.waitForSelector('.os-libdone');
+  ok(/Exam done/.test(await solo.textContent('.os-libdone')) && /of 1 right/.test(await solo.textContent(".os-libring")), 'exam: the end says Exam done, with the score');
+  await solo.click('.os-libdone [data-lib="revgo"]'); await solo.waitForSelector('.os-librev');
+  ok(await solo.locator('.os-librev .os-libexp').isVisible() && await solo.locator('.os-librev .os-libopt.ok').count() === 1, 'exam: going through the answers shows each with the answer and why');
+  await shot(solo, '320-exam-review');
+  await solo.click('.os-librevnav .os-primary'); await solo.waitForSelector('.os-libdone');
+  ok(await solo.locator('.os-librevrow').count() === 1, 'exam: back on the results, each question opens its answer');
+  await solo.click('.os-libdone [data-lib="endstudy"]'); await solo.waitForSelector('.os-libgo');
+  ok(/Custom session/.test(await solo.textContent('.os-libsumhead')), 'exam: Done goes back to Custom, where it started');
+  await solo.click('[data-lib="pref"][data-k="mode"][data-v="tutor"]'); await solo.click('[data-lib="sumback"]'); await solo.waitForTimeout(300);
 
   /* a laptop */
   const wide = await phone(1280, 800);

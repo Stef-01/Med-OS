@@ -15,7 +15,7 @@ export const GOALS = Object.freeze([10, 20, 40, 60]);
 export const SIZES = Object.freeze([10, 20, 40, 0]);   /* 0: all of them */
 export const WHICH = Object.freeze({ all: 'All', unused: 'Unused', incorrect: 'Incorrect', flagged: 'Flagged' });
 export const ORDERS = Object.freeze({ due: 'Due first', shuffle: 'Shuffled', ladder: '0 to 1' });
-export const MODES = Object.freeze({ tutor: 'Tutor', timed: 'Timed' });
+export const MODES = Object.freeze({ tutor: 'Tutor', timed: 'Timed', exam: 'Exam' });   /* exam: UWorld's timed, untutored block */
 export const DEFAULT_PREF = Object.freeze({ goal: 20, size: 20, which: 'all', order: 'due', mode: 'tutor', exam: '' });
 export const pref = p => ({
   goal: GOALS.includes(p?.goal) ? p.goal : DEFAULT_PREF.goal,
