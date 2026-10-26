@@ -632,6 +632,16 @@ async function duel() {
   const sam = Object.values(DUEL.db.players).find(p => p.name === 'Sam');
   ok([...SB.keys()].some(k => k.startsWith(`u:${sam.id}:osce
 `)), 'account: the OSCE record is kept on the account (osce_push)');
+  /* a laptop: Settings' account and games, and the duel's card on Start, at 1280 by 800 */
+  const wide = await phone(1280, 800, shared);
+  await wide.click('[data-os="settings"]'); await wide.waitForSelector('.os-switch[data-game="duel"]'); await wide.waitForTimeout(600);
+  ok(await wide.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'wide: Settings fits');
+  await wide.screenshot({ path: path.join(SHOTS, 'duel-wide-settings.png') });
+  /* the phones above switched it on in the shared record, which this device may already have pulled */
+  if (await wide.getAttribute('.os-switch[data-game="duel"]', 'aria-checked') !== 'true') await wide.click('.os-switch[data-game="duel"]');
+  await wide.keyboard.press('Escape'); await wide.waitForSelector('.os-start [data-os="duel"]'); await wide.waitForTimeout(600);
+  await wide.evaluate(() => document.querySelector('.os-start [data-os="duel"]').scrollIntoView({ block: 'center' }));
+  await wide.screenshot({ path: path.join(SHOTS, 'duel-wide-start.png') });
   const solo = await phone(320, 640, {});
   await solo.click('[data-os="settings"]'); await solo.click('.os-switch[data-game="duel"]'); await solo.keyboard.press('Escape');   /* off until switched on */
   await solo.click('[data-os="duel"]'); await solo.waitForSelector('.os-duel [data-pd="practice"]');
