@@ -60,3 +60,13 @@ export function ranked(list, cmp, key) {
   const s = list.slice().sort(cmp);
   return s.map((p, i) => ({ ...p, place: i && key(s[i - 1]) === key(p) ? null : i + 1 })).map((p, i, a) => ({ ...p, place: p.place ?? a.slice(0, i).reverse().find(x => x.place != null).place }));
 }
+
+/* what a ranked result did to a player's standing, for the result's one line: null (nothing worth a moment),
+   { kind: 'placed', tier } (the last placing game), { kind: 'up' | 'down', tier } (into another tier) */
+export function rankChange(before, after) {
+  if (!before || !after) return null;
+  const a = tierOf(before.rating, before.ranked), b = tierOf(after.rating, after.ranked);
+  if (a.placing && !b.placing) return { kind: 'placed', tier: b.name };
+  if (b.placing || a.id === b.id) return null;
+  return { kind: after.rating > before.rating ? 'up' : 'down', tier: b.name };
+}

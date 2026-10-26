@@ -477,6 +477,18 @@ div.pd-me-dog { cursor: default; }
 @keyframes pd-ping { 0% { transform: scale(.55); opacity: .9; } 100% { transform: scale(1.15); opacity: 0; } }
 .pd-search-line { display: flex; gap: 12px; margin: 0; color: var(--pd-mute); font-variant-numeric: tabular-nums; }
 .pd-search-time { color: var(--pd-ink); font-weight: 700; }
+/* the ladder: one period toggle (Week, Month, All time), always on show, in the lobby and in the sheet */
+.pd-board { display: grid; gap: 10px; }
+.pd-periods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 14px; background: var(--pd-card2); }
+.pd-periods button { min-height: 44px; padding: 0 8px; border: 0; border-radius: 10px; background: transparent; color: var(--pd-mute); font-size: 15px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: background-color .15s, color .15s; }
+.pd-periods button[aria-selected="true"] { background: var(--pd-card); color: var(--pd-ink); box-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
+.pd-periods button:hover:not([aria-selected="true"]) { color: var(--pd-ink); }
+.pd-boardsec .pd-whead { align-items: center; }
+.pd-seeall { min-height: 44px; padding: 0 4px; color: var(--pd-pri); }
+.pd-lmini .pd-lrow { min-height: 56px; }
+.pd-lsub { margin-left: 4px; color: var(--pd-mute); font-weight: 600; font-variant-numeric: tabular-nums; }
+.pd-lsub::before { content: ""; display: inline-block; width: 3px; height: 3px; margin: 0 6px 3px 0; border-radius: 50%; background: currentColor; }
+.pd-board-full .pd-lboard { max-height: min(60vh, 520px); overflow-y: auto; overscroll-behavior: contain; padding-right: 2px; }
 /* the ladder */
 .pd-ladder .pd-ltabs { justify-self: center; align-self: center; }
 .pd-lboard { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
@@ -500,6 +512,10 @@ div.pd-me-dog { cursor: default; }
 .pd-rated { grid-column: 1 / -1; justify-self: center; display: inline-flex; align-items: center; gap: 6px; margin: 0; font-weight: 600; color: var(--pd-mute); font-variant-numeric: tabular-nums; animation: pd-pop-in .4s var(--pd-spring) both; }
 .pd-rated .pd-i { width: 18px; height: 18px; }
 .pd-rated b { font-size: 17px; color: var(--pd-ink); }
+.pd-promo { grid-column: 1 / -1; justify-self: center; display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 6px 14px 6px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--tier) 22%, var(--pd-card)); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--tier) 60%, transparent); color: var(--pd-ink); font-weight: 800; animation: pd-pop-in .5s var(--pd-spring) .2s both; }
+.pd-promo .pd-i { width: 20px; height: 20px; color: var(--tier); fill: color-mix(in srgb, var(--tier) 35%, transparent); }
+.pd-promo[data-kind="down"] { background: var(--pd-card2); box-shadow: none; color: var(--pd-mute); font-weight: 700; }
 .pd-rated[data-sign="+"] b { color: var(--pd-ok-ink); } .pd-rated[data-sign="-"] b { color: var(--pd-no); }
 @media (min-width: 600px) {
   .pd-sheet { left: 50%; right: auto; top: 50%; bottom: auto; width: 460px; transform: translate(-50%, -50%); border-radius: 20px; border-bottom: 2px solid var(--pd-line); padding: 24px; animation: pd-fade .2s ease both; }

@@ -5,10 +5,11 @@
                             many placing games are left), Find a match, and the ladder
      openSearch(ctx)        a sheet that asks the server for a match every 2 s, shows how long and how wide, and opens
                             the duel the moment there is one; closing it leaves the queue
-     openLadder(ctx)        the leaderboard: Ranked (by rating) or This week (by wins in 7 days); you are marked and,
-                            if far down, pinned at the foot */
+     lobbyBoard(root, ctx)  the lobby's leaderboard: Week, Month or All time, the top three and you, See all
+     openLadder(ctx)        the whole leaderboard in a sheet, the same toggle; you are marked and, if far down, pinned
+                            at the foot after a gap */
 
-import { tierOf, ranked, byRating, byWeek, PLACING } from '../duel/ranked.mjs';
+import { tierOf, ranked, byRating, PLACING } from '../duel/ranked.mjs';
 import { icon } from './icons.mjs';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -20,7 +21,6 @@ export function rankCard(p) {
   return `<div class="pd-rank" data-tier="${t.id}">
     <span class="pd-tier" aria-hidden="true">${icon('shield')}</span>
     <div class="pd-rank-txt"><b>${t.name}</b><span><span class="pd-rating">${p?.rating ?? 1000}</span> rating</span><small>${sub}</small></div>
-    <button class="pd-ib pd-rank-ladder" type="button" data-pd="ladder" aria-label="Leaderboard" title="Leaderboard">${icon('trophy')}</button>
   </div>
   <button class="pd-btn pd-pri" type="button" data-pd="ranked">${icon('zap')}Find a ranked match</button>`;
 }
@@ -62,42 +62,80 @@ export function openSearch(ctx) {
   return { stop };
 }
 
+/* ---- the leaderboard: one board, three periods, in the lobby (top three and you) and in a sheet (everyone) ----
+   Week and Month rank by duel wins in the last 7 and 30 days; All time is the ranked ladder, by rating. The period
+   toggle is always on show, and the one chosen is remembered on this device */
+export const PERIODS = [
+  { id: 'week', label: 'Week', note: 'Duel wins in the last 7 days', unit: n => (n === 1 ? 'win' : 'wins') },
+  { id: 'month', label: 'Month', note: 'Duel wins in the last 30 days', unit: n => (n === 1 ? 'win' : 'wins') },
+  { id: 'all', label: 'All time', note: 'The ranked ladder: ranked duels move your rating', unit: () => 'rating' }
+];
+const PKEY = 'pup-duel:period';
+export const savedPeriod = () => { try { const v = localStorage.getItem(PKEY); return PERIODS.some(p => p.id === v) ? v : 'week'; } catch { return 'week'; } };
+const savePeriod = v => { try { localStorage.setItem(PKEY, v); } catch { /* private mode */ } };
+const valueOf = (p, period) => (period === 'all' ? p.rating : p[period] || 0);
+
+/* the rows for a period, placed (ties share a place); `limit` keeps the top and adds you after a gap when you are lower */
+export function boardRows(list, period, meId, limit = Infinity) {
+  const cmp = period === 'all' ? byRating : (a, b) => (b[period] || 0) - (a[period] || 0) || b.rating - a.rating || a.name.localeCompare(b.name);
+  const rows = ranked(list.map(p => ({ ...p, week: p.week || 0, month: p.month || 0 })), cmp, p => valueOf(p, period));
+  const mine = rows.findIndex(p => p.id === meId);
+  return mine >= limit ? [...rows.slice(0, limit), { gap: true }, rows[mine]] : rows.slice(0, limit);
+}
+
+function periodTabs(cur, idp) {
+  return `<div class="pd-periods" role="tablist" aria-label="Leaderboard period">${PERIODS.map(p => `<button type="button" role="tab" id="${idp}-${p.id}" data-period="${p.id}" aria-selected="${p.id === cur}" tabindex="${p.id === cur ? 0 : -1}">${p.label}</button>`).join('')}</div>`;
+}
+function rowEl(p, period, meId, face) {
+  if (p.gap) return Object.assign(document.createElement('li'), { className: 'pd-lgap', ariaHidden: 'true' });
+  const li = document.createElement('li'), t = tierOf(p.rating, p.ranked), me = p.id === meId, v = valueOf(p, period), P = PERIODS.find(x => x.id === period);
+  li.className = 'pd-lrow'; if (me) li.dataset.me = ''; li.dataset.tier = t.id; li.dataset.place = p.place;
+  li.innerHTML = `<span class="pd-lplace">${p.place}</span><span class="pd-lface"></span><span class="pd-lname"><b></b><small>${t.placing ? 'Placing' : t.name}${period !== 'all' ? ` <span class="pd-lsub">${p.rating}</span>` : ''}${me ? ' <em>You</em>' : ''}</small></span><span class="pd-lval"><b>${v}</b><small>${P.unit(v)}</small></span>`;
+  li.querySelector('.pd-lname b').textContent = p.name;
+  li.querySelector('.pd-lface').append(face(p.look));
+  li.setAttribute('aria-label', `${p.place}. ${p.name}${me ? ' (you)' : ''}, ${v} ${P.unit(v)}${period === 'all' ? `, ${t.placing ? 'placing' : t.name}` : ''}`);
+  return li;
+}
+/* a board in `root`: the toggle, the list, the line under it. ctx: { face, meId, limit, list() (null while loading), onPeriod } */
+function board(root, ctx, idp) {
+  let period = savedPeriod();
+  root.innerHTML = `${periodTabs(period, idp)}<ol class="pd-lboard${ctx.limit < Infinity ? ' pd-lmini' : ''}" role="tabpanel"></ol><p class="pd-lnote"></p>`;
+  const tabs = root.querySelector('.pd-periods'), ol = root.querySelector('.pd-lboard'), note = root.querySelector('.pd-lnote');
+  const pick = id => { period = id; savePeriod(id); paint(); ctx.onPeriod?.(id); };
+  tabs.addEventListener('click', e => { const b = e.target.closest('[data-period]'); if (b) pick(b.dataset.period); });
+  tabs.addEventListener('keydown', e => {
+    const i = PERIODS.findIndex(p => p.id === period), n = { ArrowRight: 1, ArrowLeft: -1 }[e.key], to = e.key === 'Home' ? 0 : e.key === 'End' ? PERIODS.length - 1 : n ? (i + n + PERIODS.length) % PERIODS.length : -1;
+    if (to < 0) return;
+    e.preventDefault(); pick(PERIODS[to].id); tabs.querySelector(`[data-period="${period}"]`).focus();
+  });
+  function paint() {
+    if (ctx.follow) period = savedPeriod();   // the lobby's board follows a period chosen in the sheet
+    tabs.querySelectorAll('[data-period]').forEach(b => { const on = b.dataset.period === period; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
+    ol.setAttribute('aria-labelledby', `${idp}-${period}`);
+    const list = ctx.list(), P = PERIODS.find(p => p.id === period);
+    if (!list) { ol.innerHTML = Array.from({ length: Math.min(ctx.limit, 5) }, () => '<li class="pd-lrow pd-skel" aria-hidden="true"><i></i><i></i><i></i></li>').join(''); note.textContent = ctx.error?.() || ''; return; }
+    ol.replaceChildren(...boardRows(list, period, ctx.meId, ctx.limit).map(p => rowEl(p, period, ctx.meId, ctx.face)));
+    const quiet = period !== 'all' && !list.some(p => (p[period] || 0) > 0);
+    note.textContent = list.length < 2 ? 'Just you so far. Invite a mate to start the ladder.' : quiet ? `No duel wins in the last ${period === 'week' ? '7' : '30'} days yet. Win one to top the board.` : P.note;
+  }
+  paint();
+  return { paint, get period() { return period; } };
+}
+
+/* the lobby's board: the top three and you, the toggle, See all */
+export function lobbyBoard(root, ctx) {
+  root.innerHTML = `<div class="pd-whead"><h2 class="pd-h2" id="pd-h-board">Leaderboard</h2><button class="pd-link pd-seeall" type="button" data-pd="ladder">See all</button></div><div class="pd-board"></div>`;
+  return board(root.querySelector('.pd-board'), { ...ctx, limit: 3, follow: true }, 'pd-lp');
+}
+
 /* ctx: { sheet, face, ib, transport, me, say } */
 export async function openLadder(ctx) {
-  const V = { tab: 'rating' };
-  let list = null, err = '', el;
+  let list = null, err = '', b = null;
   ctx.sheet(`
     <div class="pd-sheet-head"><span></span><h2 class="pd-sheet-title">Leaderboard</h2><span></span>${ctx.ib('shut', 'x', 'Close')}</div>
-    <div class="pd-wtabs pd-ltabs" role="tablist" aria-label="Board"><button type="button" role="tab" data-lt="rating" id="pd-lt-rating" aria-controls="pd-lboard">${icon('shield')}<span>Ranked</span></button><button type="button" role="tab" data-lt="week" id="pd-lt-week" aria-controls="pd-lboard">${icon('clock')}<span>This week</span></button></div>
-    <ol class="pd-lboard" id="pd-lboard" role="tabpanel"></ol>
-    <p class="pd-lnote"></p>`, root => {
-    el = root;
-    el.querySelector('.pd-ltabs').addEventListener('click', e => { const b = e.target.closest('[data-lt]'); if (b) { V.tab = b.dataset.lt; paint(); } });
-    el.querySelector('.pd-ltabs').addEventListener('keydown', e => { if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return; e.preventDefault(); V.tab = V.tab === 'rating' ? 'week' : 'rating'; paint(); el.querySelector(`[data-lt="${V.tab}"]`).focus(); });
-    paint();
+    <div class="pd-board pd-board-full"></div>`, root => {
+    b = board(root.querySelector('.pd-board'), { face: ctx.face, meId: ctx.me.id, limit: 50, list: () => list, error: () => err, onPeriod: ctx.onPeriod }, 'pd-ls');
   }, { label: 'Leaderboard', cls: 'pd-ladder' });
   try { list = await ctx.transport.leaderboard(ctx.me); } catch (e) { err = e.message || 'Could not load the leaderboard'; }
-  if (el?.isConnected) paint();
-
-  function paint() {
-    el.querySelectorAll('[data-lt]').forEach(b => { const on = b.dataset.lt === V.tab; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
-    const ol = el.querySelector('.pd-lboard'), note = el.querySelector('.pd-lnote');
-    ol.setAttribute('aria-labelledby', `pd-lt-${V.tab}`);
-    if (!list) { ol.innerHTML = err ? '' : Array.from({ length: 5 }, () => '<li class="pd-lrow pd-skel" aria-hidden="true"><i></i><i></i><i></i></li>').join(''); note.textContent = err; return; }
-    const week = V.tab === 'week';
-    const rows = ranked(list, week ? byWeek : byRating, p => (week ? p.week : p.rating));
-    const mine = rows.findIndex(p => p.id === ctx.me.id), TOP = 50;
-    const shown = rows.slice(0, TOP);
-    ol.replaceChildren(...shown.map(row), ...(mine >= TOP ? [Object.assign(document.createElement('li'), { className: 'pd-lgap', ariaHidden: 'true' }), row(rows[mine])] : []));
-    note.textContent = rows.length < 2 ? 'Just you so far. Invite a mate to start the ladder.' : week ? 'Duel wins in the last 7 days.' : 'Ranked duels move your rating. Find a match from the lobby.';
-    function row(p) {
-      const li = document.createElement('li'), t = tierOf(p.rating, p.ranked), me = p.id === ctx.me.id;
-      li.className = 'pd-lrow'; if (me) li.dataset.me = ''; li.dataset.tier = t.id;
-      li.innerHTML = `<span class="pd-lplace">${p.place}</span><span class="pd-lface"></span><span class="pd-lname"><b></b><small>${t.placing ? 'Placing' : t.name}${me ? ' <em>You</em>' : ''}</small></span><span class="pd-lval"><b>${week ? p.week : p.rating}</b><small>${week ? (p.week === 1 ? 'win' : 'wins') : 'rating'}</small></span>`;
-      li.querySelector('.pd-lname b').textContent = p.name;
-      li.querySelector('.pd-lface').append(ctx.face(p.look));
-      li.setAttribute('aria-label', `${p.place}. ${p.name}${me ? ' (you)' : ''}, ${week ? `${p.week} ${p.week === 1 ? 'win' : 'wins'} this week` : `${p.rating} rating, ${t.placing ? 'placing' : t.name}`}`);
-      return li;
-    }
-  }
+  b?.paint();
 }

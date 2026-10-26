@@ -26,7 +26,8 @@ import { ITEMS, wearMsg, itemOf, movesOf } from '../pup/wardrobe.mjs';
 import { still, lookDog } from '../pup/rig/still.mjs';
 import { icon } from './icons.mjs';
 import { openWardrobe } from './shop.mjs';
-import { rankCard, openSearch, openLadder } from './ranked.mjs';
+import { rankCard, openSearch, openLadder, lobbyBoard } from './ranked.mjs';
+import { rankChange } from '../duel/ranked.mjs';
 
 const BASE = new URL('../', import.meta.url);
 export const RIG = new URL('pup/rig/index.html', BASE).href;
@@ -229,7 +230,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>
           ${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="shop" hidden aria-label="Bones: open the shop">${icon('bone')}<b></b><span class="pd-wallet-go">Shop</span></button>`}</div>
         </section>
-        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" aria-label="Ranked" hidden></section>' : ''}
+        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" aria-label="Ranked" hidden></section><section class="pd-sec pd-boardsec" data-sec="board" aria-labelledby="pd-h-board"></section>' : ''}
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Duels</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mates"><h2 class="pd-h2">Mates</h2><div class="pd-grid"></div></section>
@@ -240,10 +241,12 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('[data-pd="menu"]').addEventListener('click', openMenu);
     shell.querySelector('[data-pd="dress"]')?.addEventListener('click', () => openDress('locker'));
     shell.querySelector('[data-pd="shop"]')?.addEventListener('click', () => openDress('shop'));
-    shell.querySelector('[data-sec="ranked"]')?.addEventListener('click', e => {
-      const b = e.target.closest('[data-pd]'); if (!b) return;
-      if (b.dataset.pd === 'ranked') startRanked(); else if (b.dataset.pd === 'ladder') openLadder({ sheet, face, ib, transport, me: S.me, say });
-    });
+    shell.querySelector('[data-sec="ranked"]')?.addEventListener('click', e => { if (e.target.closest('[data-pd="ranked"]')) startRanked(); });
+    const bs = shell.querySelector('[data-sec="board"]');
+    if (bs) {
+      S.lboard = lobbyBoard(bs, { face, meId: S.me.id, list: () => S.board || null });
+      bs.addEventListener('click', e => { if (e.target.closest('[data-pd="ladder"]')) openLadder({ sheet, face, ib, transport, me: S.me, say, onPeriod: () => S.lboard?.paint() }); });
+    }
     if (!S.t) return;
     loadWallet(); loadBoard();
     S.lobby = createLobby({ transport: S.t, me: S.me, onChange: lv => { S.lv = lv; paintLobby(); } });
@@ -256,6 +259,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const self = lv.self || S.me, look = myLook();
     shell.querySelector('.pd-name').textContent = self?.name || '';
     const rk = shell.querySelector('[data-sec="ranked"]'), myRow = S.board?.find(p => p.id === S.me?.id);
+    if (S.board && S.lboard && S.lboardKey !== JSON.stringify(S.board)) { S.lboardKey = JSON.stringify(S.board); S.lboard.paint(); }
     if (rk && myRow) { const key = `${myRow.rating}|${myRow.ranked}`; if (rk.dataset.key !== key) { rk.dataset.key = key; rk.innerHTML = rankCard(myRow); } rk.hidden = false; }
     const wb = shell.querySelector('.pd-wallet');
     if (wb) { wb.hidden = !S.wallet; if (S.wallet) { wb.querySelector('b').textContent = S.wallet.bones; wb.setAttribute('aria-label', `${S.wallet.bones} bones: open the shop`); } }
@@ -528,7 +532,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     S.match = { d, me, them, t, myLook: myL, theirLook: theirL, practice: isPractice, last: {}, round: -1, revealed: -1, emoteN: 0, reported: false, faces: { me: face(myL, 'pd-pick'), them: face(theirL, 'pd-pick') } };
     S.match.faces.me.dataset.who = 'me'; S.match.faces.them.dataset.who = 'them';
     shell.querySelector('[data-pd="leave"]').addEventListener('click', confirmLeave);
-    shell.querySelectorAll('.pd-emote').forEach(b => b.addEventListener('click', () => { if (S.session?.emote(b.dataset.e)) { b.classList.add('pd-sent'); setTimeout(() => b.classList.remove('pd-sent'), 600); S.dogs.me.expr(EXPR.emote); } }));
+    shell.querySelectorAll('.pd-emote').forEach(b => b.addEventListener('click', () => { if (S.session?.emote(b.dataset.e)) { b.classList.add('pd-sent'); setTimeout(() => b.classList.remove('pd-sent'), 600); S.dogs.me.expr(EXPR.emote); showOff('me'); } }));
     S.session = createSession({ transport: t, me, duel: d, onChange: v => { S.view = v; paintMatch(); } });
     S.session.start();
     if (accept) S.session.accept();
@@ -613,7 +617,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       M.emoteN = em.length;
       const b = shell.querySelector('.pd-say'), e = em.at(-1).e;
       b.innerHTML = `${icon(EMOTE_ICON[e] || 'paw')}<span class="pd-vh"></span>`; b.lastChild.textContent = EMOTES[e] || '';
-      b.hidden = false; S.dogs.them.expr(EXPR.emote); S.dogs.them.tap(); say(`${M.them.name || 'Your mate'}: ${EMOTES[e] || ''}`);
+      b.hidden = false; S.dogs.them.expr(EXPR.emote); showOff('them'); say(`${M.them.name || 'Your mate'}: ${EMOTES[e] || ''}`);
       clearTimeout(M.sayT); M.sayT = setTimeout(() => { b.hidden = true; }, 2600);
     }
     /* the question card */
@@ -795,7 +799,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (d) say(`You earned ${d} bones`);
   }
   async function rated(res) {
-    const before = S.board?.find(p => p.id === S.me.id)?.rating;
+    const was = S.board?.find(p => p.id === S.me.id), before = was?.rating;
     await loadBoard();
     const now = S.board?.find(p => p.id === S.me.id);
     if (!now || before == null || !res.isConnected) return;
@@ -806,6 +810,24 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     el.querySelector('span').textContent = `rating, now ${now.rating}`;
     res.prepend(el);
     say(`Rating ${d >= 0 ? 'up' : 'down'} ${Math.abs(d)}, now ${now.rating}`);
+    /* a new tier (or the last placing game) is the moment of the result: a line in the tier's colour, and a dog that
+       climbed celebrates with its move */
+    const ch = rankChange(was, now);
+    if (!ch) return;
+    const m = document.createElement('p');
+    m.className = 'pd-promo'; m.dataset.kind = ch.kind; m.dataset.tier = ch.tier.toLowerCase();
+    m.innerHTML = `${icon('shield')}<span></span>`;
+    m.querySelector('span').textContent = ch.kind === 'placed' ? `Placed in ${ch.tier}` : ch.kind === 'up' ? `Up to ${ch.tier}` : `Down to ${ch.tier}`;
+    el.after(m);
+    say(m.textContent);
+    if (ch.kind !== 'down') { const mv = movesOf(lookOf(S.match?.myLook).wear)[0]; if (mv) setTimeout(() => S.dogs.me?.perform(mv), 2600); else S.dogs.me?.tap(); }
+  }
+  /* an emote is a dog's chance to show off: its signature move (moves.mjs) when it has one and no question is up
+     (a dance beside the options would pull the eye off them), else the cheer it always had. Both phones play it: each
+     knows both looks, so nothing about the move travels with the emote */
+  function showOff(who) {
+    const M = S.match, mv = M && movesOf(lookOf(who === 'me' ? M.myLook : M.theirLook).wear)[0];
+    if (mv && S.view?.stage?.name !== 'question') S.dogs[who]?.perform(mv); else S.dogs[who]?.tap();
   }
   /* their rematch, while this phone shows the result: a new challenge from them in the inbox (the finished duel's
      own log has stopped being asked by then), and the big button plays it */
@@ -856,7 +878,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     S.lobby?.stop(); S.lobby = null;
     if (!keepWorld && S.world) { S.world.stop(); S.world = null; S.t = transport; }
     closeSheet(true);
-    S.view = null; S._stage = null; S.hero = null;
+    S.view = null; S._stage = null; S.hero = null; S.lboard = null; S.lboardKey = null;
   }
   function destroy() { stopAll(); if (keys === 'document') document.removeEventListener('keydown', onDocKey); root.replaceChildren(); root.classList.remove('pd'); }
 

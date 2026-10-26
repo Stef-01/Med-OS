@@ -186,11 +186,13 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
       return { duel: duelRow(db.duels[d.id]) };
     },
     async unqueue(token) { const p = me(token); db.queue = (db.queue || []).filter(q => q.player !== p.id); return { queued: false }; },
-    /* everyone on the ladder, with their wins in the last 7 days */
+    /* everyone on the ladder, with their wins this week and this month */
     async leaderboard(token) {
       seen(me(token));
-      const since = Date.parse(now()) - 7 * 864e5, done = Object.values(db.duels).filter(d => d.status === 'done' && Date.parse(d.updated_at) > since);
-      return Object.values(db.players).map(p => ({ ...board(p), week: done.filter(d => d.result?.winner === p.id).length }));
+      /* wins in the last 7 and 30 days (0004_pup_ladder.sql); all time is the rating and the record */
+      const at = Date.parse(now()), done = Object.values(db.duels).filter(d => d.status === 'done');
+      const won = (p, days) => done.filter(d => d.result?.winner === p.id && Date.parse(d.updated_at) > at - days * 864e5).length;
+      return Object.values(db.players).map(p => ({ ...board(p), week: won(p, 7), month: won(p, 30) }));
     },
     async log(token, duel, after = 0) {
       const p = me(token), d = db.duels[duel];
