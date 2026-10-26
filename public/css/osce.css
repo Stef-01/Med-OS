@@ -1577,3 +1577,14 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-libnotes-a { font-size:14px; font-weight:700; }
 .os-libnotes blockquote { margin:0; padding:8px 12px; border-left:3px solid var(--pri); border-radius:0; background:var(--pri-soft); font-size:14px; line-height:1.45; overflow-wrap:anywhere; }
 .os-libdone { padding-bottom:12px; }
+
+/* motion across OSCE: views slide in by depth; popovers grow from their trigger on a bouncy spring and leave on the
+   snappy one; toasts drop in on the sheet spring */
+.os-main.os-vin { animation:os-vin var(--sp-smooth-ms) var(--sp-smooth) backwards; }   /* backwards: no transform left behind (a transformed ancestor would hold position:fixed children) */
+.os-main.os-vin--back { animation-name:os-vin-back; }
+@keyframes os-vin { from { opacity:0; transform:translateX(18px); } to { opacity:1; transform:none; } }
+@keyframes os-vin-back { from { opacity:0; transform:translateX(-18px); } to { opacity:1; transform:none; } }
+.os-pop { transition:opacity .14s ease, transform var(--sp-bouncy-ms) var(--sp-bouncy); }
+.os-pop.out { transition:opacity .12s ease, transform var(--sp-snappy-ms) var(--sp-snappy); }
+.os-alert { transition:opacity .2s ease, transform var(--sp-sheet-ms) var(--sp-sheet); }
+@media (max-width:520px) { .os-frow { flex-wrap:wrap; row-gap:4px; } .os-count { flex-basis:100%; text-align:right; } }
