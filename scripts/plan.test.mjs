@@ -47,3 +47,23 @@ test('timed: 90 s a question plus its reading; preferences fall back to the defa
   assert.equal(timedSecs({ stem: 'w '.repeat(160), options: ['a', 'b', 'c', 'd'] }), 90 + Math.ceil((164 - 60) / 4));
   assert.deepEqual(pref({ goal: 7, size: 40, which: 'x', mode: 'timed' }), { ...DEFAULT_PREF, size: 40, mode: 'timed' });
 });
+
+import { smart, snapshot, resumable } from '../public/js/library/plan.mjs';
+test('Smart 10: seven from the weakest (or untouched) specialties, three from the rest, mixed', () => {
+  const E = []; for (const t of ['Cardiology', 'Renal', 'Psychiatry', 'Neurology']) for (let i = 0; i < 12; i++) E.push({ key: `${t}${i}`, item: { id: `${t}${i}`, topic: t } });
+  const cards = {}; const T0 = T('2026-10-26');
+  for (let i = 0; i < 6; i++) cards[`Cardiology${i}`] = { st: 2, due: T0 + 864e5, r: i < 1 ? 1 : 0, w: i < 1 ? 0 : 1, last: 0 };   /* Cardiology 1 of 6: weak */
+  for (let i = 0; i < 12; i++) { cards[`Renal${i}`] = { st: 2, due: T0 + 864e5, r: 1, w: 0, last: 1 }; cards[`Psychiatry${i}`] = { st: 2, due: T0 - 1, r: 1, w: 0, last: 1 }; }   /* Renal strong, not due; Psychiatry strong, due */
+  const s = smart(E, cards, T0, 10, () => 0.5);
+  const by = s.reduce((m, e) => ((m[e.item.topic] = (m[e.item.topic] || 0) + 1), m), {});
+  assert.equal(s.length, 10); assert.ok(!by.Renal, 'nothing learnt and not due');
+  assert.ok((by.Cardiology || 0) + (by.Neurology || 0) >= 7, `mostly the weak and the untouched (${JSON.stringify(by)})`);
+  assert.ok(by.Psychiatry >= 1, 'some due ones from the rest');
+});
+test('resume: a session left within 12 hours comes back where it was', () => {
+  const E = [1, 2, 3, 4].map(i => ({ key: `k${i}`, item: { id: `k${i}` } })), t = T('2026-10-26');
+  const snap = snapshot({ q: E, i: 2, n: 2, right: 1, mode: 'timed', order: 'shuffle', label: 'x' }, t);
+  const r = resumable(snap, E, t + 36e5); assert.equal(r.left, 2); assert.equal(r.q[r.i].key, 'k3'); assert.equal(r.mode, 'timed');
+  assert.equal(resumable(snap, E, t + 13 * 36e5), null, 'stale after 12 hours');
+  assert.equal(resumable({ ...snap, i: 4 }, E, t), null, 'finished');
+});

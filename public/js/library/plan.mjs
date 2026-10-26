@@ -103,3 +103,33 @@ export function tally(entries, cards, t) {
   }
   return { due, fresh, flagged, incorrect, unused };
 }
+
+/* Smart 10 (AMBOSS's adaptive sessions; research: pick from weak areas but stay winnable, and interleave): seven
+   from your weakest specialties (accuracy under 70 % with three or more answers, then specialties never answered),
+   due or wrong or unseen first, and three from the rest that are due, so the session mixes topics and you get some
+   right; shuffled together. rnd for the shuffle */
+export function smart(entries, cards, t = Date.now(), n = 10, rnd = Math.random) {
+  const acc = new Map();
+  for (const e of entries) { const c = cards?.[e.key], s = acc.get(e.item.topic) || { n: 0, r: 0 }; s.n += (c?.r | 0) + (c?.w | 0); s.r += c?.r | 0; acc.set(e.item.topic, s); }
+  const weakTopics = [...acc].filter(([, s]) => s.n >= 3 && s.r / s.n < 0.7).sort((a, b) => a[1].r / a[1].n - b[1].r / b[1].n).map(([k]) => k);
+  const fresh = [...acc].filter(([, s]) => !s.n).map(([k]) => k);
+  const weak = new Set([...weakTopics, ...fresh].slice(0, 4));
+  const urgency = e => { const c = cards?.[e.key]; return isNew(c) ? 1 : c.last === 0 ? 0 : c.due <= t ? 2 : 3; };
+  const shuffle = l => { for (let i = l.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [l[i], l[j]] = [l[j], l[i]]; } return l; };
+  const order = l => shuffle([...l]).sort((a, b) => urgency(a) - urgency(b));
+  const fromWeak = order(entries.filter(e => weak.has(e.item.topic) && urgency(e) < 3)).slice(0, Math.round(n * 0.7));
+  const taken = new Set(fromWeak.map(e => e.key));
+  const rest = order(entries.filter(e => !weak.has(e.item.topic) && urgency(e) < 3)).slice(0, n - fromWeak.length);
+  rest.forEach(e => taken.add(e.key));
+  const fill = order(entries.filter(e => !taken.has(e.key) && urgency(e) < 3)).slice(0, n - fromWeak.length - rest.length);   /* short of either: top up */
+  return shuffle([...fromWeak, ...rest, ...fill]);
+}
+/* a session to come back to: the keys left, where you were (plan for resume; kept on this device) */
+export const RESUME_HOURS = 12;
+export function snapshot(st, t) { return { keys: st.q.map(x => x.key), i: st.i, n: st.n, right: st.right, mode: st.mode, order: st.order, label: st.label || '', at: t }; }
+export function resumable(snap, entries, t) {
+  if (!snap || !Array.isArray(snap.keys) || t - (snap.at || 0) > RESUME_HOURS * 36e5) return null;
+  const by = new Map(entries.map(e => [e.key, e])), q = snap.keys.map(k => by.get(k)).filter(Boolean);
+  const i = Math.min(snap.i | 0, q.length); if (i >= q.length) return null;
+  return { q, i, n: snap.n | 0, right: snap.right | 0, mode: snap.mode === 'timed' ? 'timed' : 'tutor', order: snap.order || 'due', label: snap.label || '', left: q.length - i };
+}

@@ -110,8 +110,9 @@ test('the pack from the pool: every pooled question that fits, each playable by 
 });
 
 import { readYears, readDifficulty } from './tag-years.mjs';
+import { readHy } from './generate-hy.mjs';
 test('public/duel/pack.json is current (node scripts/mcq-pool.mjs, then npm run duel-pack)', () => {
-  const pub = path.join(ROOT, 'public'), { pack } = buildPack(poolOnDisk(pub), { mcq: mcqOnDisk(pub), stations: stationsOnDisk(pub), years: readYears(), difficulty: readDifficulty() });
+  const pub = path.join(ROOT, 'public'), { pack } = buildPack(poolOnDisk(pub), { mcq: mcqOnDisk(pub), stations: stationsOnDisk(pub), years: readYears(), difficulty: readDifficulty(), hy: readHy() });
   assert.equal(fs.readFileSync(path.join(ROOT, 'public/duel/pack.json'), 'utf8'), packText(pack));
 });
 

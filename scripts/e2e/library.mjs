@@ -104,6 +104,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await sam.keyboard.press('1'); await sam.waitForSelector('.os-libexp'); await sam.keyboard.press('3');
   await sam.waitForSelector('.os-libdone');
   ok(/2 cards/.test(await sam.textContent('.os-libdone')), 'card: keys 1 to 5 answer and 1 to 4 grade; the session ends with how it went');
+  ok(await sam.locator('.os-libreview li').count() === 2 && await sam.locator('.os-libreview li.no').count() >= 1 && await sam.locator('[data-lib="redo"]').isVisible(), 'review: the session lists right and missed, with Redo the missed');
   await shot(sam, '320-session-done');
   const study = await sam.evaluate(() => JSON.parse(localStorage.getItem('osce.libstudy.v1') || '{}'));
   const cs = Object.values(study.card || {});
@@ -116,6 +117,19 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await sam.evaluate(() => document.querySelector('.os-dlg-body')?.scrollTo(0, 0)); await shot(sam, '320-study-home'); await flat(sam, 'home');
   await sam.click('[data-lib="pref"][data-k="goal"][data-v="10"]'); await sam.waitForTimeout(150);
   ok(/of 10/.test(await sam.textContent('.os-libring')), 'home: the daily goal can be changed');
+  /* Smart 10, the Notebook, Resume */
+  await sam.click('[data-lib="mode"][data-m="smart"]'); await sam.waitForSelector('.os-libopt');
+  ok(/\/10$/.test((await sam.textContent('.os-libcount2')).trim()), 'smart 10: a session of ten');
+  await sam.locator('.os-libopt').first().click(); await sam.click('[data-lib="grade"][data-g="good"]'); await sam.waitForTimeout(100);
+  await sam.click('[data-lib="endstudy"]'); await sam.waitForSelector('.os-libresume');
+  ok(/9 cards left/.test(await sam.textContent('.os-libresume')), 'resume: a session left halfway is on the home');
+  await sam.click('.os-libresume'); await sam.waitForSelector('.os-libopt');
+  ok(/^2\/10$/.test((await sam.textContent('.os-libcount2')).trim()), 'resume: back where it was (2/10)');
+  await sam.click('[data-lib="endstudy"]');
+  await sam.click('[data-lib="mode"][data-m="notebook"]'); await sam.waitForSelector('.os-libnotes li');
+  ok(/Inferior leads = RCA/.test(await sam.textContent('.os-libnotes')), 'notebook: every note, with its question and answer');
+  await shot(sam, '320-notebook'); await flat(sam, 'notebook');
+  await sam.click('[data-lib="sumback"]');
   /* 0 to 1 from the home: Year 1 first, only ever up */
   await sam.click('[data-lib="mode"][data-m="ladder"]'); await sam.waitForSelector('.os-libopt');
   const climb = await sam.evaluate(() => document.querySelector('.os-libcard > .os-liblayer').textContent);
@@ -128,6 +142,15 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
     if (await sam.locator('.os-libdone').count()) break;
   }
   ok(upward && last >= 3, `0 to 1: only ever climbs (reached Year ${last})`);
+  /* how others answered: a bank question with answers from others shows each option's share */
+  if (!(await sam.locator('.os-libdone').count())) {
+    const qk = await sam.getAttribute('.os-libcard', 'data-q');
+    await sam.evaluate(async id => { const { rpc } = await import('./js/osce/account.mjs'); for (const c of [0, 0, 1, 2]) await rpc('mcq_pick', { p_qid: id, p_choice: c }); }, qk.replace(/^b:/, ''));
+    await sam.locator('.os-libopt').first().click(); await sam.waitForSelector('.os-libpct', { timeout: 4000 }).catch(() => {});
+    const pcts = await sam.locator('.os-libpct').allTextContents();
+    ok(pcts.length >= 3 && /How 5 students answered/.test(await sam.textContent('.os-libcard')), `others: each option shows how many chose it (${pcts.join(' ')})`);
+    await shot(sam, '320-others');
+  }
   await sam.click('[data-lib="endstudy"]').catch(() => {}); if (await sam.locator('.os-libdone').count()) await sam.click('.os-libdone [data-lib="endstudy"]');
   /* timed: the exam's clock on each question */
   await sam.click('[data-lib="mode"][data-m="custom"]'); await sam.waitForSelector('[data-lib="pref"][data-k="mode"]');

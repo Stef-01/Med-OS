@@ -20,8 +20,10 @@ import { checkUpload, deckName, layers, layerLabel, yearLabel, diffLabel, inPick
 import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
 import { record, summary, wrapped, monthOf, monthName } from '../library/stats.mjs';
 import { grade, queue, counts, preview, soon, isNew, GRADES } from '../library/sched.mjs';
-import { today, streak, heat, session, timedSecs, tally, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
+import { today, streak, heat, session, timedSecs, tally, smart, snapshot, resumable, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
+import { lsGet, lsSet } from '../study-kit/store.mjs';
 import * as api from '../library/api.mjs';
+import { rpc, accountsOn } from './account.mjs';
 import { animate, SPRING, reducedMotion } from '../study-kit/spring.mjs';
 
 const TABS = [['library', 'Library'], ['upload', 'Upload'], ['friends', 'Friends'], ['study', 'Study']];
@@ -216,6 +218,8 @@ function studyPool() {
 const inStudyPick = x => inPick(x.item, V.st) && (!V.st.year || x.item.year === V.st.year) && (!V.st.diff || x.item.difficulty === V.st.diff);
 const myPref = () => prefOf(api.studyMem().pref);
 function setPref(k, v) { const m = api.studyMem(); m.pref = prefOf({ ...prefOf(m.pref), [k]: v }); api.saveStudy(m); }
+const LIVE = 'osce.lib.session';   /* the session you are in, on this device: Resume on the home within 12 hours */
+const saveLive = () => { try { if (V.st.q && V.st.i < V.st.q.length) lsSet(LIVE, snapshot(V.st, now())); else lsSet(LIVE, null); } catch {} };
 const startedToday = () => { const m = api.studyMem(); return m.day?.d === day() ? m.day.n | 0 : 0; };
 
 function studyHtml() {
@@ -223,6 +227,7 @@ function studyHtml() {
   if (V.st.q) return cardHtml();
   if (V.st.view === 'summary') return summaryHtml();
   if (V.st.view === 'custom') return customHtml();
+  if (V.st.view === 'notebook') return notebookHtml();
   return homeHtml();
 }
 
@@ -231,7 +236,7 @@ const ring = (frac, n, goal) => `<div class="os-libring" role="img" aria-label="
 function homeHtml() {
   const mem = api.studyMem(), p = myPref(), t = now(), all = everything(), td = today(mem.days, t, p.goal), sk = streak(mem.days, t);
   const tl = tally(all, mem.card, t), q = session(all, mem.card, { order: 'due', size: p.size }, t, startedToday());
-  const s = summary(all, mem.card), gap = s.gaps[0];
+  const s = summary(all, mem.card), gap = s.gaps[0], res = resumable(lsGet(LIVE, null), all, t), notes = all.filter(e => mem.card[e.key]?.note).length;
   const mode = (m, label, sub, ic, n = '') => `<button class="os-libmode" data-lib="mode" data-m="${m}"><span class="os-libmode-ic" aria-hidden="true">${icon(ic)}</span><span class="os-libmode-tx"><b>${esc(label)}</b><small>${esc(sub)}</small></span>${n !== '' ? `<span class="os-libmode-n">${n}</span>` : ''}</button>`;
   return `<section class="os-libtoday">
       ${ring(td.frac, td.n, td.goal)}
@@ -239,12 +244,15 @@ function homeHtml() {
         <p class="os-libstreak${sk.live ? ' live' : ''}">${icon('flame')}<span>${sk.days ? `${sk.days}-day streak${sk.live ? '' : ': study today to keep it'}` : 'Start a streak today'}</span></p>
         <p class="os-libmeta">${tl.due} due · ${Math.max(0, Math.min(tl.fresh, 20 - startedToday()))} new</p></div>
     </section>
+    ${res ? `<button class="os-libresume" data-lib="resume"><span><b>Resume your session</b><small>${esc(res.label || 'Study')} · ${plural(res.left, 'card')} left</small></span><span class="os-chev" aria-hidden="true">${I.chevR}</span></button>` : ''}
     <button class="os-btn os-btn--lg os-primary os-libgo" data-lib="today"${q.length ? '' : ' disabled'}>${q.length ? `Start · ${plural(q.length, 'card')}` : 'All caught up: try a mode below'}</button>
     <div class="os-libmodes">
+      ${mode('smart', 'Smart 10', 'Your weak areas, mixed so you win some', 'bolt')}
       ${mode('ladder', '0 to 1', 'Year 1 first principles up to final year', 'stairs')}
       ${gap ? mode('weak', 'Your weak spot', `${gap.label} · ${gap.acc}%`, 'target') : ''}
       ${tl.incorrect ? mode('incorrect', 'Got wrong', 'Answer them again', 'refresh', tl.incorrect) : ''}
       ${tl.flagged ? mode('flagged', 'Flagged', 'The ones you marked', 'bookmark', tl.flagged) : ''}
+      ${notes ? mode('notebook', 'Notebook', 'Every note you wrote', 'pencil', notes) : ''}
       ${mode('custom', 'Custom session', 'Deck, specialty, year, timed…', 'filter')}
     </div>
     ${gapsCardHtml()}
@@ -281,13 +289,14 @@ function customHtml() {
 /* a session from a list (already in order): into focus */
 function startWith(list, { mode = 'tutor', order = 'due', label = '' } = {}) {
   if (!list.length) { notify('Nothing to study there right now.', ''); return false; }
-  Object.assign(V.st, { q: list, i: 0, pick: null, n: 0, right: 0, mode, order, label, note: false });
+  Object.assign(V.st, { q: list, i: 0, pick: null, n: 0, right: 0, mode, order, label, note: false, seen: [] });
+  saveLive();
   dlg()?.querySelector('.os-lib')?.classList.add('os-lib--focus');
   paint(); tick(); panel()?.querySelector('.os-libopt')?.focus({ preventScroll: true });
   return true;
 }
 function endStudy() {
-  clearInterval(V.st.timer); V.st.q = null;
+  clearInterval(V.st.timer); if (V.st.q && V.st.i >= V.st.q.length) lsSet(LIVE, null); V.st.q = null;
   dlg()?.querySelector('.os-lib')?.classList.remove('os-lib--focus');
   paint(); arrive(); panel()?.querySelector('.os-libgo')?.focus({ preventScroll: true });
 }
@@ -310,11 +319,12 @@ function cardHtml() {
   if (!x) {
     const mem = api.studyMem(), p = myPref(), td = today(mem.days, now(), p.goal), sk = streak(mem.days, now()), pct = V.st.n ? Math.round((100 * V.st.right) / V.st.n) : 0;
     return `<div class="os-libempty os-libdone">${ring(td.frac, td.n, td.goal)}<p><strong>${td.done ? 'Daily goal done' : 'Session done'}</strong><br>${plural(V.st.n, 'card')} · ${pct}% right${sk.days ? ` · ${sk.days}-day streak` : ''}</p>
-      <div class="os-libacts"><button class="os-btn os-btn--lg os-primary" data-lib="today">Keep going</button><button class="os-btn os-btn--lg" data-lib="endstudy">Done</button></div></div>`;
+      <div class="os-libacts"><button class="os-btn os-btn--lg os-primary" data-lib="today">Keep going</button><button class="os-btn os-btn--lg" data-lib="endstudy">Done</button></div>
+      ${reviewHtml()}</div>`;
   }
   const it = x.item, picked = V.st.pick, shown = picked != null, card = api.studyMem().card[x.key] || {}, t = now(), timed = V.st.mode === 'timed';
   const meta = [it.year ? yearLabel(it) : '', it.difficulty ? diffLabel(it) : '', layerLabel(it), x.ownerName ? `from ${x.ownerName}` : ''].filter(Boolean).join(' · ');
-  return `<div class="os-libcard${picked == null ? ' os-libcard--in' : ''}">
+  return `<div class="os-libcard${picked == null ? ' os-libcard--in' : ''}" data-q="${esc(x.key)}">
     <div class="os-libtop">
       <button class="os-libx" data-lib="endstudy" aria-label="End the session">${I.x}</button>
       <div class="os-libbar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="${V.st.q.length}" aria-valuenow="${V.st.i}"><i style="transform:scaleX(${(V.st.i / V.st.q.length).toFixed(3)})"></i></div>
@@ -330,18 +340,54 @@ function cardHtml() {
       return `<button class="os-libopt${st}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : ''}><b>${LET[i]}</b><span>${esc(o)}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
     }).join('')}</div>
     ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : picked < 0 ? `Time’s up: the answer is ${LET[it.answer]}` : `The answer is ${LET[it.answer]}`}</strong>${it.explanation ? `<p>${esc(it.explanation)}</p>` : ''}</div>
-      ${V.st.note || card.note ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
+      ${picked !== it.answer && (card.w | 0) >= 4 && !card.note ? `<p class="os-libleech">${icon('alert')}<span>This one has caught you ${card.w} times. Write the rule in your own words: it is the fastest fix.</span></p>` : ''}
+      ${V.st.note || card.note || (picked !== it.answer && (card.w | 0) >= 4) ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
       <div class="os-libgrades" role="group" aria-label="How well did you know it?">${GRADES.map((g, k) => `<button class="os-btn${(picked === it.answer ? g === 'good' : g === 'again') ? ' os-primary' : ''}" data-lib="grade" data-g="${g}" aria-keyshortcuts="${k + 1}"><span>${GLABEL[g]}</span><small>${esc(preview(card, g, t))}</small></button>`).join('')}</div>` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}
   </div>`;
+}
+/* the session's answers at its end: which you got, which you missed, and one tap to redo the missed */
+function reviewHtml() {
+  const seen = [], keys = new Set();
+  for (const s of V.st.seen || []) if (!keys.has(s.key)) { keys.add(s.key); seen.push(s); }
+  if (!seen.length) return '';
+  const by = new Map(V.st.q.map(x => [x.key, x])), missed = seen.filter(s => !s.ok);
+  return `<div class="os-libreview"><h3 class="os-libh">This session</h3><ol>${seen.map(s => { const x = by.get(s.key); return x ? `<li class="${s.ok ? 'ok' : 'no'}"><span aria-label="${s.ok ? 'right' : 'missed'}">${s.ok ? I.check : I.x}</span><p>${esc(x.item.stem.length > 90 ? `${x.item.stem.slice(0, 90)}…` : x.item.stem)}</p></li>` : ''; }).join('')}</ol>
+    ${missed.length ? `<button class="os-btn" data-lib="redo">Redo the ${missed.length === 1 ? 'one' : missed.length} you missed</button>` : '<p class="os-libmeta">Every one right.</p>'}</div>`;
+}
+/* the Notebook: every question you wrote a note on */
+function notebookHtml() {
+  const mem = api.studyMem(), l = everything().filter(e => mem.card[e.key]?.note);
+  return `<div class="os-libsumhead"><button class="os-link" data-lib="sumback">${I.back}<span>Study</span></button><h3>Notebook</h3></div>
+    ${l.length ? `<button class="os-btn os-btn--lg os-primary os-libgo" data-lib="notestudy">Study these ${plural(l.length, 'question')}</button><ul class="os-libnotes" role="list">${l.map(e => `<li><span class="os-liblayer">${esc(layerLabel(e.item))}</span><p class="os-libnotes-q">${esc(e.item.stem.length > 120 ? `${e.item.stem.slice(0, 120)}…` : e.item.stem)}</p><p class="os-libnotes-a">${esc(e.item.options[e.item.answer])}</p><blockquote>${esc(mem.card[e.key].note)}</blockquote></li>`).join('')}</ul>` : '<p class="os-libmeta">No notes yet. After you answer, Add a note keeps the rule in your words.</p>'}`;
 }
 function answer(i) {
   if (V.st.pick != null) return;
   clearInterval(V.st.timer);
   V.st.pick = i;
   const x = V.st.q[V.st.i], m = api.studyMem(), ok = !!x && i === x.item.answer;   /* every answer counts towards your gaps and the month's Wrapped (stats.mjs) */
+  V.st.lastOk = ok;
   if (x) { record(m, x, ok, now()); api.saveStudy(m); if (ok) V.st.right++; }
   paint();
+  if (x) othersPicked(x, i);
   panel()?.querySelector(`[data-lib="grade"].os-primary`)?.focus({ preventScroll: true });
+  /* a long stem puts the answer below the fold: bring the explanation up */
+  panel()?.querySelector('.os-libexp')?.scrollIntoView({ block: 'nearest', behavior: reducedMotion() ? 'auto' : 'smooth' });
+}
+/* how everyone answered a bank question (0009_mcq_picks.sql): yours is added, then each option shows its share */
+async function othersPicked(x, i) {
+  if (!x.key.startsWith('b:') || !accountsOn()) return;
+  const qid = x.item.id, at = V.st.i;
+  try {
+    if (i >= 0) await rpc('mcq_pick', { p_qid: qid, p_choice: i });
+    const ns = await rpc('mcq_picks', { p_qid: qid }), total = (Array.isArray(ns) ? ns : []).reduce((a, b) => a + (b | 0), 0);
+    if (V.st.i !== at || total < 2) return;
+    panel()?.querySelectorAll('.os-libopt').forEach(b => {
+      const k = +b.dataset.i, pct = Math.round((100 * ((ns[k] | 0))) / total);
+      b.style.setProperty('--pct', `${pct}%`); b.classList.add('os-libopt--pct');
+      b.insertAdjacentHTML('beforeend', `<em class="os-libpct">${pct}%</em>`);
+    });
+    panel()?.querySelector('.os-libopts')?.insertAdjacentHTML('afterend', `<p class="os-libmeta os-libothers">How ${total} students answered</p>`);
+  } catch { /* offline: no spread, nothing lost */ }
 }
 function rate(g) {
   const x = V.st.q?.[V.st.i]; if (!x || V.st.pick == null) return;
@@ -350,7 +396,9 @@ function rate(g) {
   if (fresh) { if (m.day.d !== day()) m.day = { d: day(), n: 0 }; m.day.n++; }
   api.saveStudy(m);
   if (soon(m.card[x.key], now()) && V.st.q.length < 200) V.st.q.push(x);   /* a learning step (1 or 10 minutes): once more before the session ends, as Anki does */
+  V.st.seen.push({ key: x.key, ok: V.st.lastOk });
   V.st.i++; V.st.pick = null; V.st.n++; V.st.note = false;
+  saveLive();
   paint(); tick(); panel()?.querySelector('.os-libopt, [data-lib="today"]')?.focus({ preventScroll: true });
 }
 function toggleFlag() {
@@ -469,6 +517,8 @@ async function act(a, b, e) {
     case 'mode': {
       const m = b.dataset.m, mem = api.studyMem(), p = myPref(), all = everything();
       if (m === 'custom') { V.st.view = 'custom'; paint(); arrive(); return panel()?.focus({ preventScroll: true }); }
+      if (m === 'smart') return startWith(smart(all, mem.card, now(), 10), { label: 'Smart 10' });
+      if (m === 'notebook') { V.st.view = 'notebook'; paint(); arrive(); return; }
       if (m === 'ladder') return startWith(session(all, mem.card, { order: 'ladder', size: p.size }, now()), { order: 'ladder', label: '0 to 1' });
       if (m === 'incorrect' || m === 'flagged') return startWith(session(all, mem.card, { which: m, order: 'shuffle', size: 0 }, now()), { label: m });
       if (m === 'weak') { const g = summary(all, mem.card).gaps[0]; if (!g) return; const [topic, cat] = g.id.split('|'); return startWith(session(all.filter(x => x.item.topic === topic && (!cat || x.item.cat === cat)), mem.card, { order: 'shuffle', size: p.size }, now()), { label: g.label }); }
@@ -476,6 +526,9 @@ async function act(a, b, e) {
     }
     case 'pref': { V.tap = `${b.dataset.k}:${b.dataset.v}`; const k = b.dataset.k, v = ['goal', 'size'].includes(k) ? +b.dataset.v : b.dataset.v; setPref(k, v); return paint(); }
     case 'flag': return toggleFlag();
+    case 'resume': { const r = resumable(lsGet(LIVE, null), everything(), now()); if (!r) { lsSet(LIVE, null); return paint(); } startWith(r.q, { mode: r.mode, order: r.order, label: r.label }); Object.assign(V.st, { i: r.i, n: r.n, right: r.right }); paint(); tick(); return; }
+    case 'redo': { const by = new Map(V.st.q.map(x => [x.key, x])), l = [...new Set(V.st.seen.filter(s => !s.ok).map(s => s.key))].map(k => by.get(k)).filter(Boolean); return startWith(l, { label: 'Redo' }); }
+    case 'notestudy': { const mem = api.studyMem(); V.st.view = ''; return startWith(everything().filter(e => mem.card[e.key]?.note), { label: 'Notebook' }); }
     case 'note': { V.st.note = true; paint(); return panel()?.querySelector('[data-lib-note]')?.focus(); }
     case 'opt': return answer(+b.dataset.i);
     case 'grade': return rate(b.dataset.g);
