@@ -14,7 +14,7 @@
    questions (1 in 4 by chance); the duel shuffles the options, and an AI-written pack can replace this one. */
 
 import { CATS, gate } from './mcq.mjs';
-import { guessYear, isYear } from '../../public/js/mcq/year.mjs';
+import { guessYear, isYear, guessDiff, isDiff } from '../../public/js/mcq/year.mjs';
 
 export const LIMITS = { option: 70, minDistractors: 3 }, LONG = 1.8;
 /* every specialty a station lists, so a player finds it under each (the duel's topics) */
@@ -135,7 +135,7 @@ export function poolQuestion(q, byStation = new Map()) {
   return { q: out, why: '' };
 }
 /* years: { id: 1..4 } from scripts/tag-years.mjs (data/mcq/years.json); a question it has not tagged gets guessYear() */
-export function buildPack(pool, { mcq = {}, stations = [], years = {} } = {}) {
+export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {} } = {}) {
   const list = [...(pool?.questions || [])].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
   const byStation = new Map(stations.map(st => [st.id, st]));
   for (const p of list) { const { q, why } = poolQuestion(p, byStation); if (q) questions.push(q); else dropped.push(why); }
@@ -151,7 +151,7 @@ export function buildPack(pool, { mcq = {}, stations = [], years = {} } = {}) {
       catN++;
     }
   }
-  for (const q of questions) q.year = isYear(years[q.id]) ? years[q.id] : guessYear(q);
+  for (const q of questions) { q.year = isYear(years[q.id]) ? years[q.id] : guessYear(q); q.difficulty = isDiff(difficulty[q.id]) ? difficulty[q.id] : guessDiff(q); }
   const kinds = questions.reduce((m, q) => ((m[q.source] = (m[q.source] || 0) + 1), m), {});
   const origins = new Set(questions.map(q => q.origin));
   return {

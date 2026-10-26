@@ -19,8 +19,9 @@ export const UPLOAD = 'Here are your questions:\n```json\n' + JSON.stringify([
 
 export async function library({ chromium, BASE, SHOTS, ok }) {
   const b = await chromium.launch(), errs = [], cfg = { supabaseUrl: `${BASE}sb`, supabaseAnonKey: 'anon', duelRealtime: false };
-  const phone = async (width, height, c = cfg) => {
+  const phone = async (width, height, c = cfg, seed = null) => {
     const ctx = await b.newContext({ viewport: { width, height }, deviceScaleFactor: 2 });
+    if (seed) await ctx.addInitScript(([k, v]) => { if (!sessionStorage.getItem('seeded')) { localStorage.setItem(k, v); sessionStorage.setItem('seeded', '1'); } }, seed);
     await ctx.route(/^https:\/\//, r => r.abort());
     await ctx.route(/\/config\.js$/, r => r.fulfill({ contentType: 'text/javascript', body: `window.OSCE_CONFIG = ${JSON.stringify(c)};` }));
     await ctx.addInitScript(() => { const cl = navigator.clipboard; if (!cl) return; const w = cl.writeText.bind(cl); cl.writeText = t => { window.__copied = String(t); return w(t).catch(() => {}); }; });
@@ -118,6 +119,16 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   }
   ok(upward && last >= 3, `study: 0 to 1 only ever climbs (reached Year ${last} after 12)`);
   await sam.click('[data-lib="endstudy"]');
+  /* your summary: from the answers just given, the gaps with a way to study them, by year, difficulty, specialty */
+  ok(await sam.locator('.os-libdiff, .os-libchips [data-k="diff"]').count() === 4, 'study: a Difficulty row (All, Easy, Medium, Hard)');
+  await sam.click('.os-libgaps'); await sam.waitForSelector('.os-libsumhead');
+  const sm = await sam.textContent('.os-libp');
+  ok(/Your gaps/.test(sm) && /By year/.test(sm) && /By difficulty/.test(sm) && /By specialty/.test(sm) && /\d+%/.test(sm), 'summary: overall, your gaps, by year, by difficulty and by specialty');
+  await sam.evaluate(() => document.querySelector('.os-dlg-body')?.scrollTo(0, 0)); await shot(sam, '320-summary'); await flat(sam, 'summary');
+  await sam.evaluate(() => document.querySelector('.os-libbars')?.scrollIntoView({ block: 'center' })); await shot(sam, '320-summary-bars');
+  const gapBtn = sam.locator('[data-lib="gap"]').first();
+  if (await gapBtn.count()) { await gapBtn.click(); await sam.waitForSelector('.os-libopt'); ok(true, 'summary: Study this starts a session on that gap'); await sam.click('[data-lib="endstudy"]'); }
+  else { await sam.click('[data-lib="sumback"]'); }
   ok(/0 due/.test(await sam.textContent('.os-libstat')) || /Study 0|Nothing due|Study 1 card/.test(await sam.textContent('.os-libgo')), 'study: the graded cards are no longer due');
 
   /* Kai, on a bigger phone: friends */
@@ -196,6 +207,28 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await open(wide, 'library'); await wide.waitForSelector('.os-libdeck');
   ok(/Wk 1 mixed/.test(await wide.textContent('.os-libp')), "library: Lee's deck is on Lee's other device");
   await shot(wide, 'wide-library'); await flat(wide, 'wide');
+
+  /* the month, wrapped: last month's answers on this phone, and the first open of this month shows the story once */
+  const prevM = new Date(); prevM.setDate(1); prevM.setMonth(prevM.getMonth() - 1);
+  const ym = `${prevM.getFullYear()}-${String(prevM.getMonth() + 1).padStart(2, "0")}`, days = {};
+  for (const [d, n, r, h] of [[3, 14, 11, 23], [4, 22, 15, 23], [5, 9, 8, 22], [12, 31, 20, 1]]) days[`${ym}-${String(d).padStart(2, '0')}`] = { n, r, s: { Cardiology: [Math.ceil(n / 2), Math.ceil(r / 2)], Nephrology: [Math.floor(n / 2), Math.floor(r / 2) - 3] }, y: { 1: [n - 4, r - 2], 3: [4, 2] }, k: { clinical: [n, r] }, h: { [h]: n } };
+  const wr = await phone(375, 812, {}, ['osce.libstudy.v1', JSON.stringify({ card: {}, day: { d: '', n: 0 }, days })]);
+  await wr.waitForSelector('.os-wrap', { timeout: 8000 });
+  ok(/wrapped/.test(await wr.textContent('.os-wrapbig')), 'wrapped: the first open of a new month pops last month out, Spotify-style');
+  const names = [];
+  for (let i = 0; i < 12 && !(await wr.locator('.os-wrapcard').count()); i++) {
+    names.push(await wr.getAttribute('.os-wrap', 'data-theme')); await shot(wr, `375-wrapped-${i}`);
+    await wr.click('.os-wraptap--r', { position: { x: 200, y: 400 } }); await wr.waitForTimeout(250);
+  }
+  ok(['count', 'streak', 'top', 'acc', 'nemesis', 'year'].every(t => names.includes(t)) && names.some(t => t.startsWith('vibe')), `wrapped: questions, streak, top specialty, accuracy, nemesis, persona, year (${names.join(' ')})`);
+  ok(/Night Owl/.test(await wr.textContent('.os-wrapcard')) && /76/.test(await wr.textContent('.os-wrapcard')), 'wrapped: the final card has the numbers and the persona');
+  await wr.waitForTimeout(500); await shot(wr, '375-wrapped-final');
+  ok(await wr.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'wrapped: fits the phone');
+  await wr.click('[data-wrap="share"]');
+  ok(/My .* on Med-OS, wrapped/.test(await wr.evaluate(() => window.__copied || '')), 'wrapped: Copy for the group chat');
+  await wr.click('[data-wrap="done"]'); await wr.waitForSelector('.os-wrap', { state: 'detached' });
+  await wr.reload({ waitUntil: 'networkidle' }); await wr.waitForSelector('.os[data-ready]'); await wr.waitForTimeout(800);
+  ok(await wr.locator('.os-wrap').count() === 0, 'wrapped: once a month, not every open');
 
   ok(!errs.length, `library: no page errors${errs.length ? `: ${errs.join(' | ')}` : ''}`);
   await b.close();

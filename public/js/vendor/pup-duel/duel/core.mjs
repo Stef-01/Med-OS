@@ -50,14 +50,15 @@ export function jsonbBytes(v) {
    the questions travel inside the duel, so both phones play the same ones whatever pack each has cached */
 /* 0 to 1 (Med-OS, founder 2026-10-26: "first year ... to final year, so it progressively gets difficult"): from the
    shuffled pool, one question of each year in turn (Year 1, 2, 3, 4, then round again) until there are enough, then
-   played in year order, so a duel starts at first principles and ends at final year; a question with no year counts
-   as Year 3 */
+   played in year order and, within a year, Easy to Hard, so a duel starts at first principles and ends at final
+   year; a question with no year counts as Year 3, one with no difficulty as Medium */
 function climb(qs, n) {
   const y = q => (Number.isInteger(q.year) ? q.year : 3), by = new Map();
   for (const q of qs) (by.get(y(q)) || by.set(y(q), []).get(y(q))).push(q);
   const keys = [...by.keys()].sort((a, b) => a - b), out = [];
   while (out.length < n && keys.some(k => by.get(k).length)) for (const k of keys) if (out.length < n && by.get(k).length) out.push(by.get(k).shift());
-  return out.sort((a, b) => y(a) - y(b));
+  const d = q => (Number.isInteger(q.difficulty) ? q.difficulty : 2);
+  return out.sort((a, b) => y(a) - y(b) || d(a) - d(b));
 }
 export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topic = '', cat = '', seed = 1, title = '', read = true, ladder = false } = {}) {
   const base = clamp(Math.round(secs) || RULES.secs, RULES.minSecs, RULES.maxSecs);
@@ -75,6 +76,7 @@ export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topi
     if (q.origin) out.origin = q.origin;
     if (q.source) out.source = q.source;
     if (q.year) out.year = q.year;
+    if (q.difficulty) out.difficulty = q.difficulty;
     return out;
   });
   return { v: 1, rounds: questions.length, secs: base, title: String(title || pack?.title || '').slice(0, 80), topic: topic || '', ...(cat ? { cat: String(cat).slice(0, 30), catLabel: String((pack?.cats || []).find(c => c.id === cat)?.label || cat).slice(0, 60) } : {}), seed: seed >>> 0, ...(ladder ? { ladder: true } : {}), questions };
