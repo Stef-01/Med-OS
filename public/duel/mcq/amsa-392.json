@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-392",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:48:54.902Z",
+ "questions": [
+  {
+   "id": "osce-amsa-392-skills",
+   "cat": "skills",
+   "stem": "Brad, 64, has an anterolateral STEMI in a regional ED with no cath lab. The PCI-centre cardiologist agrees with fibrinolysis. BP is 148/88. Before tenecteplase is drawn up, you check his history once more. Which question most directly screens for an absolute contraindication to fibrinolysis?",
+   "options": [
+    "Have you taken sildenafil or similar erection tablets in the last 48 hours?",
+    "Have you ever had a reaction to the iodine contrast used for scans?",
+    "Have you ever had a stroke, a bleed in the brain or a recent head injury?",
+    "Do you drink alcohol most days, and how much do you have each week?"
+   ],
+   "answer": 2,
+   "why": "Any previous intracranial haemorrhage, an ischaemic stroke in the last 3 months and significant head trauma in the last 3 months are all absolute contraindications to fibrinolysis. Always screen for bleeding, stroke, recent surgery or trauma, and suspected dissection before you give a lytic.",
+   "notes": [
+    "PDE5 inhibitor use is a contraindication to GTN, not to fibrinolysis, so it decides whether you can give nitrates rather than whether you can give a lytic.",
+    "Contrast reactions matter for coronary angiography later. They have no bearing on whether tenecteplase is safe.",
+    null,
+    "Daily alcohol is a risk factor worth addressing, but on its own it is not a contraindication to fibrinolysis."
+   ]
+  },
+  {
+   "id": "osce-amsa-392-clinical",
+   "cat": "clinical",
+   "stem": "Brad, 64, 92 kg, arrived 3 hours after his pain began. His ECG shows ST elevation in V2 to V5, I and aVL. He is haemodynamically stable with no contraindications to fibrinolysis. The nearest PCI centre is 3 hours away by road, and he cannot reach a cath lab within 90 minutes of first medical contact. What is the most appropriate reperfusion plan?",
+   "options": [
+    "Tenecteplase in the ED within 30 minutes of arrival, then transfer for angiography",
+    "Road transfer for primary PCI, withholding the lytic to avoid the bleeding risk",
+    "Repeat troponin at 3 hours to confirm infarction before choosing reperfusion",
+    "Heparin infusion and local admission, with elective angiography next week"
+   ],
+   "answer": 0,
+   "why": "When primary PCI cannot happen within 90 minutes of first medical contact and symptoms began less than 12 hours ago, give fibrinolysis within 30 minutes of arrival. Then transfer for angiography, which is rescue PCI if reperfusion fails.",
+   "notes": [
+    null,
+    "A 3-hour transfer goes well past the 90-minute PCI target, and the delay costs more myocardium than the lytic's bleeding risk.",
+    "STEMI is diagnosed on the ECG and the clinical picture. Reperfusion never waits for a troponin result.",
+    "Anticoagulation alone does not reperfuse an occluded LAD, and delaying angiography leaves him untreated."
+   ]
+  },
+  {
+   "id": "osce-amsa-392-physio",
+   "cat": "physio",
+   "stem": "Brad, 64, with an anterolateral STEMI, had 8/10 chest pressure. The paramedics gave him two doses of sublingual GTN 400 micrograms and his pain eased. He has no history of PDE5 inhibitor use. Which mechanism mainly explains how GTN relieves ischaemic chest pain?",
+   "options": [
+    "Direct lysis of the coronary thrombus, restoring flow down the occluded artery",
+    "Slowing of the heart rate, which lengthens diastolic coronary filling time",
+    "Inhibition of platelet thromboxane A2, preventing the thrombus from growing",
+    "Nitric oxide-mediated venodilation, lowering preload, wall stress and oxygen demand"
+   ],
+   "answer": 3,
+   "why": "GTN releases nitric oxide, which raises cGMP in vascular smooth muscle and dilates mainly the veins. Preload and ventricular wall stress fall, so myocardial oxygen demand falls. Because PDE5 inhibitors also raise cGMP, the combination can cause profound hypotension.",
+   "notes": [
+    "GTN has no fibrinolytic action. Dissolving the clot takes a plasminogen activator such as tenecteplase.",
+    "Slowing the heart rate is what beta blockers do. Nitrates tend to cause a reflex tachycardia instead.",
+    "Blocking thromboxane A2 by inhibiting COX-1 is how aspirin works, not GTN.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-392-anatomy",
+   "cat": "anatomy",
+   "stem": "Brad, 64, has 3 hours of chest pressure radiating to his left arm and jaw. His ECG shows ST elevation in V2 to V5 and in I and aVL, reciprocal ST depression in III, and Q waves in V2 to V4. Where is the culprit coronary occlusion most likely to be?",
+   "options": [
+    "Distal left anterior descending artery, beyond its diagonal branches",
+    "Proximal left anterior descending artery, before its first diagonal branch",
+    "Left circumflex artery, at the origin of its obtuse marginal branch",
+    "Right coronary artery, proximal to its acute marginal branch"
+   ],
+   "answer": 1,
+   "why": "The LAD supplies the anterior wall (V2 to V4). Its diagonal branches supply the high lateral wall (I, aVL). Changes in both territories, with reciprocal change inferiorly, point to an occlusion in the proximal LAD, which puts a large area of myocardium at risk.",
+   "notes": [
+    "A distal LAD occlusion spares the diagonal branches, so you would not expect ST elevation in I and aVL.",
+    null,
+    "A circumflex occlusion mainly affects the lateral or posterior leads. It would not give 3 to 4 mm of ST elevation in V2 to V4.",
+    "An RCA occlusion causes inferior ST elevation (II, III, aVF). Here III shows reciprocal depression instead."
+   ]
+  }
+ ]
+}

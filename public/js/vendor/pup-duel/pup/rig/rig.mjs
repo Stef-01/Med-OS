@@ -104,7 +104,7 @@ function makeDog(c, slot, P) {
    'tipOutL', 'tipOutR', 'tipInL', 'tipInR', 'earsBack', 'earsFront', 'earTips', 'feat', 'browL', 'browR', 'pupilL', 'pupilR',
    'heyeL', 'heyeR', 'lidL', 'lidR', 'cheekL', 'cheekR', 'shutL', 'shutR', 'snout', 'blush', 'mouth', 'tongue', 'bone',
    'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearNeck', 'wearBack', 'wearOnPop', 'wearOnFit', 'earsOver', 'armClip', 'armEars', 'armEarL', 'armEarR', 'ruff', 'ruffClip',
-   'tailIn', 'tailDots', 'bridge'].forEach(function (k) { e[k] = q(k); });
+   'tailIn', 'tailDots', 'bridge', 'grimeB', 'grimeH'].forEach(function (k) { e[k] = q(k); });
   e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
   // the eye as a whole: the whites, each eye's clip (its pupil and its heart), the lids and the cheeks that squint into
   // it, the strokes of a closed eye; all left out under solid lenses (below)
@@ -116,6 +116,8 @@ function makeDog(c, slot, P) {
     pet: 0, petting: false, petHeartAt: 0, gaze: { on: false, last: -1e12, x: 0, y: 0, yaw: 0 }, gazeW: 0,
     fsL: 0, fsR: 0
   };
+  // the colour a squinting eye's white darkens toward: its iris when it has one, else its ink (frame, below)
+  rig.inkRGB = (function (h) { h = String(h || '#2b2230').replace('#', ''); if (h.length === 3) h = h.replace(/./g, '$&$&'); return [0, 2, 4].map(function (i) { return parseInt(h.slice(i, i + 2), 16) || 0; }); })(c.irisDeep || c.pal.ink);
 
   // Floating accents: one element per loop accent of each expression (made on first use),
   // and a small pool for one-shots (taps, treats, petting).
@@ -275,6 +277,13 @@ function makeDog(c, slot, P) {
     set(el, 'opacity', clamp(o * fade, 0, 1));
   }
 
+  /* neglect (mood.mjs): how grubby the dog looks, 0 clean to 1 muddy and matted; a played game sets it back to 0 */
+  rig.setMood = function (dirt) {
+    var k = Math.max(0, Math.min(1, Number(dirt) || 0));
+    rig.dirt = k;
+    if (e.grimeB) e.grimeB.setAttribute('opacity', String(k));
+    if (e.grimeH) e.grimeH.setAttribute('opacity', String(Math.round(k * 0.9 * 1000) / 1000));
+  };
   rig.setExpr = function (id, clock) {
     if (id === rig.exprId) return;
     var now = rig.E;
@@ -534,6 +543,19 @@ function makeDog(c, slot, P) {
     var down = 9.5;   // not lower under a squint either: the cheek would hide the pupil and leave a white crescent
     var dxL = clamp(lookX + 3.2 * derp, -11, 4.6), dyL = clamp(lookY - 1.5 * derp, -8, down);
     var dxR = clamp(lookX - 3.2 * derp, -7.4, 8.6), dyR = clamp(lookY + 1.5 * derp, -8, down);
+    // A smile's squint never shows a blank white eye (founder 2026-10-26: "whenever the dog smiles, its eyes turns
+    // completely white which is scary"). The cheek rises from below and the lid comes down from above; what stays open
+    // between them is a band, and the pupils follow it up into that band (the cheek covered them where the glance put
+    // them, leaving two white crescents). The white darkens toward the iris as the band closes (below), so a deep smile
+    // reads as two dark happy arcs with a sparkle.
+    var lidNow = clamp(Math.max(clamp(track(t, E.lid), 0, 1), ch('lidRest')), 0, 1);
+    var bandTop = -46.5 + lidNow * 30.5, bandBot = -1.2 - 21 * cheekK - 4 * lidNow - 15;
+    var squint = clamp((cheekK - 0.15) / 0.55, 0, 1);
+    if (squint > 0) {
+      var aim = clamp((bandTop + bandBot) / 2 + 32, -8, down);
+      dyL += (aim - dyL) * squint; dyR += (aim - dyR) * squint;
+    }
+    rig.squint = clamp((cheekK - 0.35) / 0.5, 0, 1) * clamp((24 - Math.max(0, bandBot - bandTop)) / 14, 0, 1);
     set(e.pupilL, 'transform', tr(-7.3 + dxL, -32 + dyL) + ' scale(' + r3(ps) + ') ' + tr(7.3, 32));
     set(e.pupilR, 'transform', tr(12.1 + dxR, -32 + dyR) + ' scale(' + r3(ps) + ') ' + tr(-12.1, 32));
     set(e.heyeL, 'opacity', he > 0.01 ? 1 : 0);
@@ -558,11 +580,14 @@ function makeDog(c, slot, P) {
     set(e.shutL, 'opacity', shut);
     set(e.shutR, 'opacity', shut);
 
-    set(e.blush, 'opacity', clamp(ch('blush'), 0, 1));
+    // the look's blush (eyes.mjs): always on, never, or as the expression has it
+    set(e.blush, 'opacity', c.blushMode === 'off' ? 0 : c.blushMode === 'on' ? Math.max(0.85, clamp(ch('blush'), 0, 1)) : clamp(ch('blush'), 0, 1));
 
     // Red eyes blend the white toward pink (a blend, never a swap).
-    var red = clamp(ch('redEye'), 0, 1);
-    set(e.white, 'fill', 'rgb(255,' + Math.round(255 - 56 * red) + ',' + Math.round(255 - 56 * red) + ')');
+    var red = clamp(ch('redEye'), 0, 1), wR = 255, wG = 255 - 56 * red, wB = 255 - 56 * red;
+    // a closing squint tints the white toward the eye's own colour (above): never a blank white crescent
+    var sq = (rig.squint || 0) * 0.7, inkC = rig.inkRGB;
+    set(e.white, 'fill', 'rgb(' + Math.round(wR + (inkC[0] - wR) * sq) + ',' + Math.round(wG + (inkC[1] - wG) * sq) + ',' + Math.round(wB + (inkC[2] - wB) * sq) + ')');
     // Shades drop in from above the head and settle with a small bounce.
     // A dog already wearing glasses keeps its own (faceOn, above): no second pair stacked over them.
     var shv = faceOn ? 0 : ch('shades');

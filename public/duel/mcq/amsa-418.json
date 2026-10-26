@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-418",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:51:12.424Z",
+ "questions": [
+  {
+   "id": "osce-amsa-418-skills",
+   "cat": "skills",
+   "stem": "Mr Reid, 68, sees you in general practice. His opening line: \"I've had a bad cough in the past few days and have been coughing up stuff recently.\" You have characterised the cough and the yellow, offensive sputum. Which single question is most likely to change both the organisms you need to cover and his venous thromboembolism risk?",
+   "options": [
+    "Have you been working with potting mix or doing gardening recently?",
+    "Have you been in hospital or a nursing home in the past few months?",
+    "Have you been in contact with anyone known to have COVID-19?",
+    "Have you noticed any pain or swelling in either of your calves?"
+   ],
+   "answer": 1,
+   "why": "A recent admission (his was 8 to 4 days ago) points to possible hospital-acquired organisms such as Gram-negative bacilli and Staphylococcus aureus, and it is a major risk factor for PE. In this case it only comes out if you ask for it.",
+   "notes": [
+    "Potting mix exposure points to Legionella (atypical) cover but tells you nothing about his VTE risk.",
+    null,
+    "COVID contact changes viral testing and infection control but does not change his thromboembolic risk.",
+    "Calf symptoms are a sign of DVT, not a risk factor, and asking about them tells you nothing about which organisms to cover."
+   ]
+  },
+  {
+   "id": "osce-amsa-418-clinical",
+   "cat": "clinical",
+   "stem": "Mr Reid, 68, has right lower lobe consolidation on X-ray, 4 days after discharge from hospital where he walked daily and had prophylactic enoxaparin. His Wells score is 1.5 (only HR over 100 scores). His D-dimer is 0.58 mg/L FEU, against a laboratory cut-off of 0.50. What is the most appropriate next step regarding pulmonary embolism?",
+   "options": [
+    "Request a CTPA because the D-dimer is above the laboratory cut-off",
+    "Start therapeutic enoxaparin while a CTPA is being arranged",
+    "Request bilateral lower limb venous duplex ultrasound",
+    "No PE imaging, as the D-dimer is below his age-adjusted cut-off"
+   ],
+   "answer": 3,
+   "why": "When PE is unlikely (Wells 4 or less), a D-dimer below the age-adjusted cut-off (age × 0.01 mg/L FEU over 50, here 0.68) excludes PE. Using the age-adjusted cut-off avoids unnecessary CTPAs in older patients.",
+   "notes": [
+    "Using the unadjusted cut-off in a patient over 50 loses specificity and would expose him to an unnecessary CTPA and contrast.",
+    "Empirical anticoagulation is only for patients with a high probability of PE awaiting imaging. PE has been excluded here, and anticoagulating him would add bleeding risk for no benefit.",
+    "He has no leg symptoms and PE is already excluded, so a duplex scan would not change management.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-418-physio",
+   "cat": "physio",
+   "stem": "Mr Reid, 68, has dense right lower lobe consolidation with air bronchograms. His RR is 26, and his SpO2 has fallen from 94% to 91% on room air over the day. Which mechanism mainly accounts for his hypoxaemia?",
+   "options": [
+    "Alveolar hypoventilation raising alveolar PCO2 and lowering alveolar PO2",
+    "Increased dead space from ventilated alveoli that are no longer perfused",
+    "Shunt, as blood keeps perfusing alveoli filled with inflammatory exudate",
+    "Diffusion limitation across a thickened alveolar-capillary membrane"
+   ],
+   "answer": 2,
+   "why": "In consolidation the alveoli are filled with exudate but still perfused, so deoxygenated blood passes through without gas exchange (shunt, the extreme of low V/Q). Hypoxic vasoconstriction only partly offsets this, and true shunt responds poorly to supplemental oxygen.",
+   "notes": [
+    "He is tachypnoeic, so his overall ventilation is increased and his PaCO2 will be normal or low, not raised.",
+    "Dead space (ventilated but unperfused alveoli) is the typical defect in PE, not in consolidation, where the alveoli are perfused but not ventilated.",
+    null,
+    "Diffusion limitation is the main problem in interstitial lung disease and matters most on exertion. Exudate-filled alveoli are not ventilated at all."
+   ]
+  },
+  {
+   "id": "osce-amsa-418-anatomy",
+   "cat": "anatomy",
+   "stem": "Mr Reid's chest X-ray (PA and lateral) shows new right-sided airspace opacification with air bronchograms. The right hemidiaphragm outline is lost but the right heart border is preserved, so the radiologist places it in the lower lobe. Consolidation of which part of the lung would have obscured the right heart border?",
+   "options": [
+    "Right upper lobe, anterior segment",
+    "Right lower lobe, superior segment",
+    "Right lower lobe, posterior basal segment",
+    "Right middle lobe, medial segment"
+   ],
+   "answer": 3,
+   "why": "The medial segment of the right middle lobe lies against the right atrium. When it consolidates, the right heart border is lost (silhouette sign). The lower lobe lies posteriorly on the diaphragm, so its consolidation hides the hemidiaphragm instead.",
+   "notes": [
+    "The anterior segment of the upper lobe lies above the horizontal fissure and borders the ascending aorta and SVC region, not the right heart border.",
+    "The superior segment of the lower lobe lies posteriorly at about the level of the hilum. It does not touch the right heart border.",
+    "The posterior basal segment sits posteriorly on the diaphragm. Its consolidation obscures the hemidiaphragm, which is the pattern seen here.",
+    null
+   ]
+  }
+ ]
+}

@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-476",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:55:06.577Z",
+ "questions": [
+  {
+   "id": "osce-amsa-476-skills",
+   "cat": "skills",
+   "stem": "James, 62, is in ED after vomiting bright red blood with clots twice this morning, and he has had a black, sticky bowel motion. He drinks heavily. In your focused history you want to judge how likely a Mallory-Weiss tear is as the source. Which question is most useful?",
+   "options": [
+    "Have you taken any anti-inflammatory tablets such as ibuprofen recently?",
+    "Have you had burning pain in the upper middle part of your tummy?",
+    "Were you retching or vomiting before any blood came up?",
+    "Have your bowel motions been black, sticky or very smelly?"
+   ],
+   "answer": 2,
+   "why": "A Mallory-Weiss tear is a mucosal tear at the gastro-oesophageal junction caused by forceful retching or vomiting, so blood that appears only after repeated non-bloody retching suggests one. James's blood came up on its own, which argues against it.",
+   "notes": [
+    "NSAID use is a risk factor for peptic ulcer, not a Mallory-Weiss tear, so this question helps assess a different differential.",
+    "Epigastric burning pain points towards peptic ulcer disease or gastritis rather than a tear caused by retching.",
+    null,
+    "Melaena confirms an upper GI source with significant bleeding, but it does not tell a Mallory-Weiss tear apart from varices or an ulcer."
+   ]
+  },
+  {
+   "id": "osce-amsa-476-clinical",
+   "cat": "clinical",
+   "stem": "James, 62, has a suspected variceal bleed in alcohol-related cirrhosis: HR 130, BP 92/56, INR 1.8, albumin 27 g/L and moderate ascites. He is nil by mouth, terlipressin has been charted and endoscopy is being arranged. Which antibiotic regimen should you start in the emergency department?",
+   "options": [
+    "Ceftriaxone 1 g IV daily",
+    "Norfloxacin 400 mg orally twice daily",
+    "Metronidazole 500 mg IV 12-hourly",
+    "Amoxicillin with clavulanate 875/125 mg orally twice daily"
+   ],
+   "answer": 0,
+   "why": "In cirrhosis with GI bleeding, prophylactic antibiotics reduce bacterial infections (including SBP), rebleeding and death. eTG recommends ceftriaxone 1 g IV daily, started before endoscopy, for up to 7 days.",
+   "notes": [
+    null,
+    "Oral norfloxacin is an older regimen used mainly for long-term SBP prophylaxis. It is unsuitable for a shocked, vomiting, nil-by-mouth patient, and ceftriaxone works better in advanced cirrhosis.",
+    "Metronidazole covers anaerobes but misses the enteric Gram-negative bacilli that cause most infections after a variceal bleed.",
+    "An oral agent is inappropriate while he is nil by mouth and actively vomiting blood, and it is not the recommended prophylaxis in acute variceal bleeding."
+   ]
+  },
+  {
+   "id": "osce-amsa-476-physio",
+   "cat": "physio",
+   "stem": "James, 62, has suspected oesophageal variceal haemorrhage from alcohol-related cirrhosis with portal hypertension. Before endoscopy he is given terlipressin 2 mg IV. By what mechanism does terlipressin reduce bleeding from his varices?",
+   "options": [
+    "V2 receptor water reabsorption expands plasma volume and supports blood pressure",
+    "Contraction of the lower oesophageal sphincter mechanically compresses the varices",
+    "Relaxation of hepatic stellate cells lowers intrahepatic vascular resistance",
+    "V1-mediated splanchnic arteriolar constriction reduces portal venous inflow"
+   ],
+   "answer": 3,
+   "why": "Terlipressin is a vasopressin analogue that constricts splanchnic arterioles through V1 receptors. This cuts blood flow into the portal system, lowering portal pressure and variceal wall tension so the bleeding slows.",
+   "notes": [
+    "Terlipressin's V2 effect causes free water retention and hyponatraemia (watch his sodium of 131), but this does not stop the bleeding. Volume expansion would actually raise portal pressure.",
+    "Terlipressin has no useful effect on the lower oesophageal sphincter, and sphincter tone does not control variceal bleeding.",
+    "Terlipressin acts on inflow to the portal system, not on intrahepatic resistance. Lowering sinusoidal resistance is the target of other agents, not vasopressin analogues.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-476-anatomy",
+   "cat": "anatomy",
+   "stem": "James, 62, has cirrhosis with portal hypertension on ultrasound and is bleeding from suspected oesophageal varices. Varices in the lower oesophagus form where portal venous blood is diverted into the systemic circulation. Which veins make up this portosystemic anastomosis?",
+   "options": [
+    "Superior rectal veins and middle and inferior rectal veins",
+    "Left gastric vein and oesophageal tributaries of the azygos vein",
+    "Paraumbilical veins and superficial epigastric veins of the abdominal wall",
+    "Splenic vein and left renal vein via retroperitoneal collaterals"
+   ],
+   "answer": 1,
+   "why": "In the lower oesophagus, oesophageal branches of the left gastric vein (portal) join oesophageal veins that drain to the azygos system (systemic). Raised portal pressure dilates these submucosal veins into varices.",
+   "notes": [
+    "The rectal anastomosis is a real portosystemic site, but it produces anorectal varices, not oesophageal ones.",
+    null,
+    "Paraumbilical-to-abdominal wall collaterals produce caput medusae on the anterior abdominal wall, not oesophageal varices.",
+    "A splenorenal collateral is a retroperitoneal shunt that can form spontaneously, but it lies away from the oesophagus and does not form oesophageal varices."
+   ]
+  }
+ ]
+}

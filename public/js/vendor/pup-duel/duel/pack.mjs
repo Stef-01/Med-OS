@@ -1,6 +1,10 @@
 /* pack.mjs: a question pack, the one shape every host writes (Med-OS builds it from its stations).
    pack     { version, title, source, origin: 'ai' | 'human' | 'mixed', cats?[{ id, label }], questions[] }
-   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, topics?[], cat?, origin?, source? }
+   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, topics?[], cat?, origin?, source?, deck?, year? }
+   year     1 to 4, the year of medical school a question is pitched at (Med-OS: first principles to final year); a pack
+            with two or more years offers 0 to 1, the duel that climbs them in order
+   decks    [{ id, label, short? }]: where questions come from, a layer in front of the topic (Med-OS: the bank, your own questions,
+            your friends'); each question names its deck. With fewer than two decks there is no such layer
    topic is the first layer a player narrows by (Med-OS: the specialty), cat the second (Med-OS: OSCE skills, Clinical,
    Physiology and pathophysiology, Anatomy), its label and order from the pack's cats. A question can sit in more than one
    topic (topics, up to 6: a station that is Emergency Medicine and Paediatrics is found under both); topic is its first.
@@ -8,8 +12,8 @@
    question with it (sourceLabel), and a question without one is tagged AI-written when its origin is ai.
    Plain text throughout: the duel renders with textContent, so a pack can never inject markup. */
 
-export const LIMITS = { stem: 1200, option: 160, why: 1200, note: 600, topic: 60, cat: 30, cats: 12, id: 80, source: 30, minOptions: 2, maxOptions: 6 };
-export const SOURCES = { user: 'Student', ai: 'AI-written', amsa: 'AMSA', 'usmle-resource': 'USMLE' };   /* short: the tag shares the match's top bar with the round dots */
+export const LIMITS = { stem: 1200, option: 160, why: 1200, note: 600, topic: 60, cat: 30, cats: 12, id: 80, source: 30, deck: 20, decks: 6, minOptions: 2, maxOptions: 6 };
+export const SOURCES = { user: 'Student', ai: 'AI-written', amsa: 'AMSA', 'usmle-resource': 'USMLE', mine: 'Yours', friend: "A friend's" };   /* short: the tag shares the match's top bar with the round dots */
 /* the tag a question shows: its source's name, else AI-written for an ai question, else none */
 export const sourceLabel = q => (typeof q?.source === 'string' && Object.hasOwn(SOURCES, q.source) ? SOURCES[q.source] : q?.origin === 'ai' ? SOURCES.ai : '');   /* own keys only: a setup comes from the other phone */
 
@@ -36,6 +40,8 @@ export function normQuestion(q) {
   const cat = text(q.cat, LIMITS.cat); if (cat) out.cat = cat;
   if (q.origin === 'ai' || q.origin === 'human') out.origin = q.origin;
   const source = text(q.source, LIMITS.source).toLowerCase(); if (/^[a-z0-9-]+$/.test(source)) out.source = source;
+  const deck = text(q.deck, LIMITS.deck).toLowerCase(); if (/^[a-z0-9-]+$/.test(deck)) out.deck = deck;
+  if (Number.isInteger(q.year) && q.year >= 1 && q.year <= 4) out.year = q.year;
   return { q: out, why: '' };
 }
 
@@ -50,7 +56,8 @@ export function normPack(p) {
   }
   const origin = ['ai', 'human', 'mixed'].includes(src.origin) ? src.origin : 'mixed';
   const cats = (Array.isArray(src.cats) ? src.cats : []).map(c => ({ id: text(c?.id, LIMITS.cat), label: text(c?.label, LIMITS.topic) })).filter(c => c.id && c.label).slice(0, LIMITS.cats);
-  return { pack: { version: text(String(src.version ?? ''), 40), title: text(src.title, 80) || 'Questions', source: text(src.source, 200), origin, cats, questions }, dropped };
+  const decks = (Array.isArray(src.decks) ? src.decks : []).map(d => ({ id: text(d?.id, LIMITS.deck).toLowerCase(), label: text(d?.label, LIMITS.topic), ...(text(d?.short, 12) ? { short: text(d.short, 12) } : {}) })).filter(d => /^[a-z0-9-]+$/.test(d.id) && d.label).slice(0, LIMITS.decks);
+  return { pack: { version: text(String(src.version ?? ''), 40), title: text(src.title, 80) || 'Questions', source: text(src.source, 200), origin, cats, ...(decks.length ? { decks } : {}), questions }, dropped };
 }
 
 /* the two layers a player drills through: every topic with its count and, under it, every category the pack names with
@@ -72,6 +79,19 @@ export function pickLabel(pack, { topic = '', cat = '' } = {}) {
   const c = cat && ((pack?.cats || []).find(x => x.id === cat)?.label || cat);
   return `${topic || 'Every topic'}${c ? ` › ${c}` : ''}`;
 }
+
+/* the decks a player can choose from, with their counts: those the pack names that have questions; [] when there is
+   only one (no layer to show) */
+export function decksOf(pack) {
+  const list = (pack?.decks || []).map(d => ({ ...d, count: (pack.questions || []).filter(q => q.deck === d.id).length })).filter(d => d.count);
+  return list.length > 1 ? list : [];
+}
+/* the years a pack's questions span (ascending): two or more and the setup offers 0 to 1 */
+export const yearsOf = pack => [...new Set((pack?.questions || []).map(q => q.year).filter(Boolean))].sort((a, b) => a - b);
+export const YEAR_LABEL = y => `Year ${y}`;
+
+/* the pack narrowed to one deck ('' is every deck: the mix) */
+export const deckPack = (pack, deck = '') => (deck ? { ...pack, questions: (pack?.questions || []).filter(q => q.deck === deck) } : pack);
 
 /* is a question in a topic (its first, or any of its topics) */
 export const inTopic = (q, topic) => q.topic === topic || (Array.isArray(q.topics) && q.topics.includes(topic));

@@ -4,6 +4,7 @@
    touches the real project or your record. */
 
 import { createSession } from './session.mjs';
+import { secsOf } from './core.mjs';
 import { memoryNet, realTimers } from './transport-memory.mjs';
 import { rng } from './rng.mjs';
 import { DEFAULT_DOG } from '../pup/rig/breeds.mjs';
@@ -24,7 +25,7 @@ export function createBot({ transport, me, timers = realTimers, seed = 7, skill 
         if (v.stage.name === 'invited' && v.state.b === me.id) s.accept();
         if (v.stage.name === 'question' && !planned.has(v.stage.round)) {
           planned.add(v.stage.round);
-          const q = v.question, secs = v.state.setup.secs, wait = secs * 1000 * (early + (late - early) * r());
+          const q = v.question, secs = secsOf(v.state.setup, v.stage.round), wait = secs * 1000 * (early + (late - early) * r());
           const wrong = q.options.map((_, i) => i).filter(i => i !== q.answer);
           const choice = r() < skill ? q.answer : wrong[Math.floor(r() * wrong.length)];
           timers.setTimeout(() => { if (!stopped) s.answer(choice); }, wait);

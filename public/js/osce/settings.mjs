@@ -4,6 +4,8 @@
 import { esc } from '../core.mjs';
 import { enabled as syncOn, state as syncState } from '../study-kit/sync.mjs';
 import { osceMergeImport, GAMES, osceGames } from './core.mjs';
+import { redeem, unlocked, GIFTS } from '../vendor/pup-duel/pup/rig/gifts.mjs';
+import { status as remStatus, turnOn as remOn, turnOff as remOff } from './reminders.mjs';
 import { account, accountsOn, signIn, signOut, duelStats, nameError, pinError } from './account.mjs';
 import { tierOf } from '../vendor/pup-duel/duel/ranked.mjs';
 import { ctx, save, notify, openDialog, closeDialog, topDialog, markerCfg, setMarkerCfg, DEFAULT_MODEL, nameOf, confirmDlg } from './state.mjs';
@@ -44,6 +46,47 @@ function gamesHtml() {
   </section>`;
 }
 
+/* Daily reminders (reminders.mjs): a switch, painted once the phone says whether it can */
+const REM = { on: 'On: 9 AM a line from Confucius; 6 PM a note from your dog if you have not opened MDosce that day.',
+  off: '9 AM: a line from Confucius to start studying. 6 PM: your dog, if you have not opened MDosce that day.',
+  install: 'On iPhone: Share, then Add to Home Screen, and open MDosce from there to turn reminders on.',
+  denied: 'Notifications are blocked for this site in your browser settings.', none: 'This browser cannot show notifications.' };
+function remindersHtml() {
+  return `<section aria-labelledby="os-h-rem"><h3 id="os-h-rem">Daily reminders</h3>
+    <button type="button" class="os-switch" role="switch" aria-checked="false" data-set="rem" aria-labelledby="os-rem-t" aria-describedby="os-rem-d" disabled>
+      <span class="os-switch-tx"><strong id="os-rem-t">Reminders</strong><span id="os-rem-d">${esc(REM.off)}</span></span>
+      <span class="os-switch-ui" aria-hidden="true"></span></button>
+  </section>`;
+}
+async function wireReminders(el) {
+  const b = el.querySelector('[data-set="rem"]'), d = el.querySelector('#os-rem-d');
+  const paint = st => { b.setAttribute('aria-checked', String(st === 'on')); b.disabled = st !== 'on' && st !== 'off'; d.textContent = REM[st] || REM.none; };
+  paint(await remStatus());
+  b.addEventListener('click', async () => {
+    const want = b.getAttribute('aria-checked') !== 'true';
+    b.disabled = true;
+    try { const st = want ? await remOn() : await remOff(); paint(st); notify(st === 'on' ? 'Daily reminders are on.' : st === 'off' && !want ? 'Daily reminders are off.' : REM[st], st === 'on' ? 'success' : ''); }
+    catch { paint(await remStatus()); notify('Reminders could not be turned on. Try again in a moment.', 'danger'); }
+  });
+}
+/* a special gift (founder 2026-10-26: "they only are unlocked when you type pokemon in the special gift section in
+   settings"): a code unlocks dogs in Duel a Mate on this device (gifts.mjs keeps it) */
+function giftHtml() {
+  const have = [...unlocked()].map(g => GIFTS[g].name);
+  return `<section aria-labelledby="os-h-gift"><h3 id="os-h-gift">Special gift</h3>
+    <p class="os-handhint">Have a gift code? Type it here to unlock something extra in Duel a Mate.</p>
+    <div class="os-crow os-giftrow"><label class="os-setf os-giftf"><span>Gift code</span><input data-set="gift" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go"></label>
+      <button type="button" class="os-btn" data-os="sgift">Redeem</button></div>
+    <p class="os-handhint os-giftmsg" role="status">${have.length ? esc(`Unlocked: ${have.join(', ')}.`) : ''}</p>
+  </section>`;
+}
+function wireGift(el) {
+  const input = el.querySelector('[data-set="gift"]'), msg = el.querySelector('.os-giftmsg');
+  const go = () => { const r = redeem(input.value); msg.textContent = r.msg; input.setAttribute('aria-invalid', String(!r.ok)); if (r.ok) { input.value = ''; notify(r.msg, 'success'); } else input.focus(); };
+  el.querySelector('[data-os="sgift"]').addEventListener('click', go);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+}
+
 export function settingsDlg() {
   const c = markerCfg(), a = account();
   const sync = a ? 'Kept on your account (above).' : syncOn() ? `Shared between your devices${syncState.unsynced ? ' · some changes are still waiting to upload' : ''}. Sign in above to keep it on your own account.` : 'On this device only. Set a Supabase project in config.js to share between devices, or use a progress file below.';
@@ -51,6 +94,8 @@ export function settingsDlg() {
     body: `<form class="os-set">
       ${accountHtml()}
       ${gamesHtml()}
+      ${remindersHtml()}
+      ${giftHtml()}
       <section><h3>AI marking</h3>
         <p class="os-handhint">With your own Anthropic API key, Claude marks a pasted transcript here against the station's checklist. The key stays in this browser. Without one, the marking sheet copies a prompt for a Claude chat instead.</p>
         <label class="os-setf"><span>API key</span><input type="password" data-set="key" value="${esc(c.key)}" placeholder="sk-ant-..." autocomplete="off" spellcheck="false"></label>
@@ -64,7 +109,7 @@ export function settingsDlg() {
       </section></form>` });
   d.el.querySelector('form').addEventListener('submit', e => { e.preventDefault(); saveSettings(); });
   d.el.querySelector('[data-set="import"]').addEventListener('change', e => importFile(e.target.files?.[0]));
-  wireAccount(d.el); wireGames(d.el);
+  wireAccount(d.el); wireGames(d.el); wireGift(d.el); wireReminders(d.el);
 }
 
 function wireGames(el) {

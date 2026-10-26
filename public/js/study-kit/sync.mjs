@@ -29,7 +29,8 @@ export const TABLE = 'osce_state';
 const obj = v => (v && typeof v === 'object' && !Array.isArray(v) ? v : null);
 const STAMPS = 'osce.sync.v1';          /* { ns: { shardId: updated_at } } — what this device last agreed with the server on */
 export const SPEC = {
-  osce: { ls: 'osce.practice.v1', perId: ['hist', 'bm', 'req'], whole: ['timing', 'people', 'games'], derive: osceAtt },   /* games: which games Start shows (Settings) */   /* req/<id>: a case request, which the case writer's pipeline reads and answers */
+  osce: { ls: 'osce.practice.v1', perId: ['hist', 'bm', 'req'], whole: ['timing', 'people', 'games'], mine: ['games'], derive: osceAtt },   /* mine: a shard that travels only on your own account (signed out, the shared record is everyone's, so one person's game switch would turn it off for the rest) */
+  lib: { ls: 'osce.libstudy.v1', perId: ['card'], whole: ['day'] },   /* Study over your questions (library/sched.mjs): a card per question, and today's new-card count */   /* games: which games Start shows (Settings) */   /* req/<id>: a case request, which the case writer's pipeline reads and answers */
 };
 /* the start view's count reads mem.att (one key per attempted station); osce/state.mjs rebuilds it with scores on every
    save(), but a pull with the module closed must rebuild the keys itself or the other device's attempts stay invisible
@@ -73,12 +74,12 @@ export function configureSync(deps) { if (deps && deps.sbUrl) { D.sbUrl = deps.s
 export const enabled = () => !!D.sbUrl;
 
 /* ---------- pure: a record <-> its shards (tested in scripts/sync.test.js) ---------- */
-export function shardsOf(spec, mem) {
+export function shardsOf(spec, mem, signedIn = true) {
   const out = {}, m = obj(mem) || {};
   if (spec.raw) { for (const [k, lsKey] of Object.entries(spec.raw)) { const v = m[k]; if (v != null && v !== '') out[`raw/${k}`] = v; } return out; }
   for (const k of spec.perId || []) for (const [id, v] of Object.entries(obj(m[k]) || {})) if (v !== undefined) out[`${k}/${id}`] = v;
   for (const [k, idKey] of Object.entries(spec.byId || {})) for (const el of Array.isArray(m[k]) ? m[k] : []) if (obj(el) && el[idKey] != null) out[`${k}/${el[idKey]}`] = el;
-  for (const k of spec.whole || []) if (m[k] !== undefined && m[k] !== null) out[`k/${k}`] = m[k];
+  for (const k of spec.whole || []) if (m[k] !== undefined && m[k] !== null && (signedIn || !(spec.mine || []).includes(k))) out[`k/${k}`] = m[k];
   return out;
 }
 /* put one shard (or its tombstone) into the record; returns the record */
@@ -147,7 +148,7 @@ const upsert = async rows => {
 /* after a module's save(): stamp what changed, queue it. Returns the number of changed shards (tests, and nothing else). */
 export function changed(ns) {
   const sp = SPEC[ns]; if (!sp) return 0;
-  const shards = shardsOf(sp, readRecord(ns)), prev = (last[ns] ||= seed(ns, shards));
+  const shards = shardsOf(sp, readRecord(ns), !!scope()), prev = (last[ns] ||= seed(ns, shards));
   const d = diffShards(prev, shards); if (!d.length) return 0;
   const st = stamps(), s = (st[ns] ||= {}), at = new Date().toISOString();
   for (const x of d) { prev[x.id] = x.json; if (x.value == null) delete prev[x.id]; s[x.id] = at; queue[`${ns}\n${x.id}`] = { ns, id: x.id, value: x.value, updated_at: at }; }
@@ -176,11 +177,12 @@ export function pull(ns, signal) {
   return (async () => {
     const a = scope();
     const r = a ? await rpc('osce_pull', { p_token: a.token, p_ns: ns }, signal) : await rest(`${TABLE}?ns=eq.${ns}&select=id,value,updated_at`, { method: 'GET', signal });
-    const rows = await r.json(), st = stamps(), s = (st[ns] ||= {}), prev = (last[ns] ||= seed(ns, shardsOf(SPEC[ns], readRecord(ns))));
+    const rows = await r.json(), st = stamps(), s = (st[ns] ||= {}), prev = (last[ns] ||= seed(ns, shardsOf(SPEC[ns], readRecord(ns), !!a)));
     const mem = readRecord(ns); let n = 0;
     for (const row of Array.isArray(rows) ? rows : []) {
       if (!row || typeof row.id !== 'string' || row.id.length > 200) continue;
       if (!newer(row.updated_at, s[row.id])) continue;
+      if (!a && (SPEC[ns].mine || []).some(k => row.id === `k/${k}`)) continue;   /* the shared record never sets this device's own switches */
       applyShard(SPEC[ns], mem, row.id, row.value);
       if (row.value == null) delete prev[row.id]; else prev[row.id] = JSON.stringify(row.value);
       s[row.id] = row.updated_at; n++;

@@ -18,8 +18,10 @@
 import { ITEMS as ALL, SETS, SLOTS, SLOT_NAME, RARITY, VB, itemOf, sigOf, shopFor, priceToday, setPrice, isNew, msToReset, resetLabel, DEAL_OFF, SET_OFF } from '../pup/wardrobe.mjs';
 import { coatsFor, COLLARS } from '../pup/rig/coats.mjs';
 import { lookDog } from '../pup/rig/still.mjs';
+import { EYE_SHAPES, IRISES, BLUSH } from '../pup/rig/eyes.mjs';
 import { MOVES } from '../pup/rig/moves.mjs';
 import { DOGS } from '../duel/accounts.mjs';
+import { shown } from '../pup/rig/gifts.mjs';
 import { PAY, PER_RIGHT, PRACTICE_CAP, OUTFITS, NAME_MAX, WHY, stateOf, winsAway, collection, fitWear, outfitName } from '../duel/shop.mjs';
 import { icon } from './icons.mjs';
 
@@ -28,7 +30,7 @@ export const ITEMS = ALL.filter(i => !i.exclusive);
 const RANK = { legendary: 5, epic: 4, rare: 3, uncommon: 2, common: 1 };
 const byRarity = (a, b) => RANK[b.rarity] - RANK[a.rarity] || a.price - b.price || a.name.localeCompare(b.name);
 const ONE = { head: 'Hat', face: 'Glasses', neck: 'Neckwear', back: 'Back bling' };
-const TABS = [['dog', 'paw', 'Dog'], ['coat', 'palette', 'Coat'], ['collar', 'collar', 'Collar'], ['head', 'hat', SLOT_NAME.head], ['face', 'glasses', SLOT_NAME.face], ['neck', 'bow', SLOT_NAME.neck], ['back', 'pack', SLOT_NAME.back]];
+const TABS = [['dog', 'paw', 'Dog'], ['coat', 'palette', 'Coat'], ['collar', 'collar', 'Collar'], ['eyes', 'sparkle', 'Eyes'], ['head', 'hat', SLOT_NAME.head], ['face', 'glasses', SLOT_NAME.face], ['neck', 'bow', SLOT_NAME.neck], ['back', 'pack', SLOT_NAME.back]];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const art = it => `<svg viewBox="${it.tile || it.vb || VB[it.slot]}" aria-hidden="true" focusable="false">${it.icon || it.svg}</svg>`;
 const bones = n => `<span class="pd-bn">${icon('bone')}<b>${n}</b></span>`;
@@ -50,7 +52,7 @@ export function openWardrobe(ctx) {
       <span class="pd-bal" aria-live="polite">${icon('bone')}<b></b><span class="pd-vh"> bones</span></span></header>
     <div class="pd-wbody">
       <section class="pd-wstage" aria-label="Try on">
-        <div class="pd-wpv"><div class="pd-burst" aria-hidden="true"></div></div>
+        <div class="pd-wpv"><div class="pd-burst" aria-hidden="true"></div><button type="button" class="pd-wreset" data-w="reset" aria-label="Reset this dog: take off every accessory"></button></div>
         <div class="pd-winfo" tabindex="-1"></div>
       </section>
       <div class="pd-wpanel" id="pd-wpanel" role="tabpanel" tabindex="-1"></div>
@@ -98,6 +100,9 @@ export function openWardrobe(ctx) {
     if (t.dataset.wt) return setTab(t.dataset.wt);
     const w = t.dataset.w;
     if (w === 'act') return act();
+    if (w === 'reset') return askReset();
+    if (w === 'resetyes') return resetDog();
+    if (w === 'resetno') { paintBar(); return; }
     if (w === 'save') return save();
     if (w === 'undo') { cur = structuredClone(saved); V.sel = null; paint(); prev.dress(cur); return; }
     if (w === 'keep') return keepOutfit(+t.dataset.i, t);
@@ -239,7 +244,7 @@ export function openWardrobe(ctx) {
     lp.setAttribute('role', 'group'); lp.setAttribute('aria-label', TABS.find(t => t[0] === V.ltab)[2]);
     if (V.ltab === 'dog') {
       const g = document.createElement('div'); g.className = 'pd-dogs'; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', 'Dog');
-      g.append(...DOGS.map(d => {
+      g.append(...DOGS.filter(d => shown(d) || d.id === cur.dog).map(d => {   /* a gift's dogs once it is redeemed (gifts.mjs) */
         const b = document.createElement('button');
         b.type = 'button'; b.className = 'pd-dogpick'; b.dataset.dog = d.id; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', String(d.id === cur.dog)); b.tabIndex = d.id === cur.dog ? 0 : -1;
         b.setAttribute('aria-label', `${d.name}, ${d.breedName}`); b.title = d.hint;
@@ -251,11 +256,25 @@ export function openWardrobe(ctx) {
     else if (V.ltab === 'collar') {
       const own = lookDog({ dog: cur.dog }).pal.collar;
       lp.append(swatches('collar', 'Collar', [{ id: '', name: 'Its own', colors: [own] }, ...COLLARS.filter(k => k.hex !== own).map(k => ({ id: k.id, name: k.name, colors: [k.hex] }))], cur.collar || ''));
+    } else if (V.ltab === 'eyes') {
+      /* the eyes (founder 2026-10-26: "changeable eyes both shapes and colors" and "blush options so can have on or off in
+         the loadout"): free, like a coat; a dog's own is the first of each */
+      const own = lookDog({ dog: cur.dog }).pal.ink;
+      lp.append(h3('Shape'), chips('eyes', 'Eye shape', EYE_SHAPES, cur.eyes || ''),
+        h3('Colour'), swatches('iris', 'Eye colour', IRISES.map(k => ({ id: k.id, name: k.name, colors: [k.hex || own, k.deep || own] })), cur.iris || ''),
+        h3('Blush'), chips('blush', 'Blush', BLUSH, cur.blush || ''));
     } else {
       const mine = ITEMS.filter(i => i.slot === V.ltab && owns(i.id)).sort(byRarity), rest = ITEMS.filter(i => i.slot === V.ltab && !owns(i.id)).sort(byRarity);
       lp.innerHTML = `<div class="pd-wgrid pd-wall">${mine.map(tile).join('')}</div>${rest.length ? `<h3 class="pd-h3">In the shop</h3><div class="pd-wgrid pd-wall">${rest.map(tile).join('')}</div>` : ''}`;
     }
     p.querySelector('[data-ltab="coat"]').hidden = coatsFor(cur.dog).length < 2;
+  }
+  function h3(t) { const h = document.createElement('h3'); h.className = 'pd-h3'; h.textContent = t; return h; }
+  /* a radio group of words (an eye shape, a blush), picked like a swatch */
+  function chips(kind, label, opts, now) {
+    const g = document.createElement('div'); g.className = 'pd-swatches pd-chips'; g.dataset.kind = kind; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', label);
+    g.innerHTML = opts.map(o => `<button type="button" class="pd-swatch pd-chipsw" role="radio" data-v="${esc(o.id)}" aria-checked="${o.id === now}" tabindex="${o.id === now ? 0 : -1}">${esc(o.name)}</button>`).join('');
+    return g;
   }
   function swatches(kind, label, opts, now) {
     const g = document.createElement('div'); g.className = 'pd-swatches'; g.dataset.kind = kind; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', label);
@@ -397,6 +416,22 @@ export function openWardrobe(ctx) {
     prev.dress(cur);
     el.querySelectorAll(`[data-kind="${kind}"] .pd-swatch`).forEach(b => { const on = b.dataset.v === (cur[kind] || ''); b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
     paintBar();
+  }
+  /* a tap on the dog (founder 2026-10-26: "if you click the dog on preview it will go to default with no accessories with
+     a pop out that says do you want to reset accessories on the dog"): the bar asks, and a yes takes every piece off and
+     puts back its own coat, collar, eyes and blush; nothing is saved until Save */
+  function askReset() {
+    const bar = el.querySelector('.pd-wbar');
+    bar.hidden = false; bar.dataset.ask = '';
+    bar.innerHTML = `<span class="pd-wask">Reset accessories on this dog?</span><button class="pd-link" type="button" data-w="resetno">Keep</button><button class="pd-btn pd-pri" type="button" data-w="resetyes">${icon('repeat')}Reset</button>`;
+    bar.querySelector('[data-w="resetyes"]').focus({ preventScroll: true });
+    ctx.say('Reset accessories on this dog?');
+  }
+  function resetDog() {
+    cur = { dog: cur.dog, wear: {} };
+    V.sel = null; prev.dress(cur); prev.tap();
+    paintPanel(); paintInfo(); paintBar();
+    ctx.say('Reset. Save the look to keep it.');
   }
   /* a line under the stage's button, said too (an error, the shop offline) */
   function note(text) { const f = el.querySelector('.pd-wfine'); if (f) f.textContent = text; ctx.say(text); }

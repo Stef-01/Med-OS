@@ -17,6 +17,8 @@ import { requestsFrom } from '../../public/js/osce/requests.mjs';
 import { submissionsFrom } from '../lib/mcq-intake.mjs';
 import { cleanItem } from '../../public/js/mcq/schema.mjs';
 import { createServer as duelServer } from '../../public/js/vendor/pup-duel/duel/server-core.mjs';
+import { libraryFake } from './library-fake.mjs';
+import { library } from './library.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'public');
 const SHOTS = process.argv[2] || fs.mkdtempSync(path.join(os.tmpdir(), 'osce-e2e-'));
@@ -64,6 +66,8 @@ function mcqTable(req, res) {
 /* and for the duel's functions (supabase/migrations/0002_pup_duel.sql), the vendored package's own copy of their rules */
 const DUEL = duelServer();
 const byToken = t => { const p = Object.values(DUEL.db.players).find(x => x.token === t); if (!p) throw new Error('Sign in again'); return p; };
+/* and the library's (supabase/migrations/0008_library.sql): decks, friends, shares, over the same players */
+const LIB = libraryFake({ byToken, players: () => DUEL.db.players });
 function duelRpc(req, res, fn) {
   let body = '';
   req.on('data', c => { body += c; });
@@ -79,7 +83,7 @@ function duelRpc(req, res, fn) {
       /* OSCE progress on an account (supabase/migrations/0006_osce_accounts.sql): the token checked, the rows kept apart */
       osce_pull: () => { const me = byToken(a.p_token); return [...SB.values()].filter(r => r.ns === `u:${me.id}:${a.p_ns}`).map(({ id, value, updated_at }) => ({ id, value, updated_at })); },
       osce_push: () => { const me = byToken(a.p_token); for (const r of a.p_rows || []) { const k = `u:${me.id}:${a.p_ns}\n${r.id}`, had = SB.get(k); if (!had || Date.parse(r.updated_at) > Date.parse(had.updated_at)) SB.set(k, { ns: `u:${me.id}:${a.p_ns}`, ...r }); } return (a.p_rows || []).length; }
-    }[fn];
+    }[fn] || (LIB[fn] && (() => LIB[fn](a)));
     try { const out = await call(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(out)); }
     catch (e) { res.writeHead(400, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ code: 'P0001', message: e.message })); }
   });
@@ -93,7 +97,7 @@ const server = http.createServer((req, res) => {
   for (const [k, v] of Object.entries(prodHeaders(url.pathname))) res.setHeader(k, v);
   if (url.pathname === '/sb/rest/v1/osce_state') return supabase(req, res, url);
   if (url.pathname === '/sb/rest/v1/mcq_submissions') return mcqTable(req, res);
-  const rpc = /^\/sb\/rest\/v1\/rpc\/((?:pup|osce)_[a-z_]+)$/.exec(url.pathname);
+  const rpc = /^\/sb\/rest\/v1\/rpc\/((?:pup|osce|lib|friend)_[a-z_]+)$/.exec(url.pathname);
   if (rpc) return duelRpc(req, res, rpc[1]);
   const u = decodeURIComponent(url.pathname);
   let f = path.join(ROOT, u.endsWith('/') ? `${u}index.html` : u);
@@ -482,6 +486,16 @@ async function runIn(width, height, label) {
   await click('[data-os="ssave"]');
   ok(await pg.locator('.os-set').count() === 1, `${label}: a malformed key is refused`);
   await shot('settings');
+  /* a special gift: a wrong code is refused; "Pokémon" (any case, accents) unlocks the Eevee family on this device */
+  await pg.fill('[data-set="gift"]', 'nope'); await click('[data-os="sgift"]');
+  ok((await pg.getAttribute('[data-set="gift"]', 'aria-invalid')) === 'true', `${label}: a wrong gift code is refused`);
+  await pg.fill('[data-set="gift"]', ' Pokémon '); await click('[data-os="sgift"]');
+  ok(/Unlocked/.test(await pg.textContent('.os-giftmsg')) && (await pg.evaluate(() => localStorage.getItem('pup.gifts'))).includes('pokemon'), `${label}: the pokemon gift unlocks`);
+  await pg.evaluate(() => document.querySelector('.os-giftrow').scrollIntoView({ block: 'center' })); await shot('settings-gift');
+  /* Daily reminders: a switch that says what it sends, or why this browser cannot */
+  await pg.waitForFunction(() => document.querySelector('[data-set="rem"]') && /9 AM|Home Screen|cannot|blocked/.test(document.querySelector('#os-rem-d').textContent));
+  ok(/9 AM|Home Screen|cannot|blocked/.test(await pg.textContent('#os-rem-d')), `${label}: Daily reminders say what they send (${(await pg.textContent('#os-rem-d')).slice(0, 40)})`);
+  await pg.evaluate(() => document.querySelector('[data-set="rem"]').scrollIntoView({ block: 'center' })); await shot('settings-reminders');
   await pg.keyboard.press('Escape');
   await pg.waitForSelector('.os-set', { state: 'detached' });
 
@@ -690,7 +704,7 @@ async function duel() {
       ok(dogs.length === 2 && dogs.every(Boolean), `duel: both dogs draw (the rig may be framed by its own site: ${dogs})`);
       await a.screenshot({ path: path.join(SHOTS, 'duel-question.png') }); const stem = await a.textContent('.os-duel .pd-stem'), inPack = PACK.questions.find(q => q.stem === stem), tag = await a.locator('.os-duel .pd-qtag').isVisible() ? await a.textContent('.os-duel .pd-qtag') : '';
       ok(!!inPack, 'duel: the question comes from the pool\'s pack, its stem whole');
-      ok(inPack && (inPack.origin === 'ai') === /AI-written/.test(tag), `duel: the AI-written tag shows exactly when the question is AI-written (${inPack?.source})`); }
+      ok(inPack && (inPack.source === 'amsa' ? /AMSA/.test(tag) && !/AI-written/.test(tag) : (inPack.origin === 'ai') === /AI-written/.test(tag)), `duel: the source tag names where the question came from: AMSA for an AMSA one, AI-written for an AI one (${inPack?.source}: ${tag})`); }
     await a.locator('.os-duel .pd-opt').nth(0).click();
     await timed(`round ${r + 1}: Sam's answer shows on Alex's phone`, () => c.waitForSelector('.os-duel .pd-theirs .pd-status >> text=Answered', { timeout: 6000 }));
     await c.locator('.os-duel .pd-opt').nth(1).click();
@@ -768,12 +782,14 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
 }
 
 try {
+  if (process.env.ONLY === 'library') { await library({ chromium, BASE, SHOTS, ok }); throw Object.assign(new Error('only'), { only: true }); }
   await duel();
   await sync();
   await run(393, 852, 'phone');
   await run(320, 640, 'small');
   await run(1280, 860, 'wide');
-} catch (e) { fails.push(`crashed: ${e.message}`); console.error(e); }
+  await library({ chromium, BASE, SHOTS, ok });   /* last: its players join the fake backend the duel's leaderboard counts */
+} catch (e) { if (!e.only) { fails.push(`crashed: ${e.message}`); console.error(e); } }
 server.close();
 console.log(`\n${fails.length ? `${fails.length} failed` : 'all passed'} · screenshots in ${SHOTS}`);
 process.exit(fails.length ? 1 : 0);

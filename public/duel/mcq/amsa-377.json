@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-377",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:46:31.284Z",
+ "questions": [
+  {
+   "id": "osce-amsa-377-skills",
+   "cat": "skills",
+   "stem": "Jeoff, 53, a dairy farmer seen in a rural GP clinic, likely has a large bowel obstruction. He had adenomas removed 5 years ago, missed his 3-year surveillance colonoscopy, and his father had colon cancer. While you explain the hospital plan he asks, \"Be straight with me, Doc. Is it cancer?\" What is the best response?",
+   "options": [
+    "\"It's very unlikely to be cancer, so try not to worry about that right now.\"",
+    "\"Cancer is one possibility; the scan and camera test in hospital will tell us.\"",
+    "\"With your history, I'm afraid this is almost certainly a bowel cancer.\"",
+    "\"That's for the surgeons to discuss with you; I can't comment on that.\""
+   ],
+   "answer": 1,
+   "why": "When a patient asks directly, be honest without guessing at a diagnosis. Say that cancer is possible (along with a stricture or a twist), then explain in plain English how CT and colonoscopy will find the cause.",
+   "notes": [
+    "This is false reassurance. With his adenomas, missed surveillance and family history, cancer is a real possibility, and his trust is lost if it turns out to be cancer.",
+    null,
+    "This is premature and alarming. A diverticular stricture or a volvulus could equally cause this, and the diagnosis needs imaging.",
+    "This dodges a direct question, which leaves him anxious and damages rapport. You can be honest about the uncertainty without overstepping."
+   ]
+  },
+  {
+   "id": "osce-amsa-377-clinical",
+   "cat": "clinical",
+   "stem": "Jeoff, 53, is transferred to the regional ED with suspected large bowel obstruction: sudden left lower quadrant pain, gross tympanic distension, no flatus, late bilious vomiting and an empty rectum. He has sigmoid diverticulosis and previous adenomas. Which investigation best confirms the obstruction and identifies its level and cause?",
+   "options": [
+    "Supine and erect abdominal X-ray",
+    "Water-soluble contrast enema",
+    "Urgent flexible sigmoidoscopy",
+    "CT abdomen and pelvis with IV contrast"
+   ],
+   "answer": 3,
+   "why": "CT of the abdomen and pelvis with IV contrast is the key test in suspected bowel obstruction. It confirms LBO, shows the transition point and the cause (tumour, stricture or volvulus with a whirl sign), and detects ischaemia, perforation, caecal dilatation and metastases.",
+   "notes": [
+    "An X-ray may show dilated colon or a coffee-bean sign, but it is less sensitive and cannot reliably show the cause, ischaemia or staging.",
+    "A contrast enema can tell mechanical obstruction from pseudo-obstruction, but it has largely been replaced by CT and shows nothing outside the bowel lumen.",
+    "Endoscopy is used later to decompress a confirmed volvulus or to biopsy a lesion. Going straight to it without CT risks perforation and misses complications.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-377-physio",
+   "cat": "physio",
+   "stem": "Jeoff, 53, has a suspected sigmoid large bowel obstruction. The surgical registrar warns that if his ileocaecal valve is competent, the colon becomes a closed loop and the caecum is the usual site of ischaemia and perforation. What best explains why the caecum is most at risk?",
+   "options": [
+    "Its larger diameter gives the highest wall tension at a given pressure (Laplace)",
+    "It is furthest from the obstruction, so intraluminal pressure is highest there",
+    "It is a watershed zone between the superior and inferior mesenteric arteries",
+    "Its thick muscular wall contracts hardest against the obstruction and tears"
+   ],
+   "answer": 0,
+   "why": "By Laplace's law, wall tension is proportional to pressure times radius. In a closed loop the pressure is roughly the same throughout, so the caecum, which is the widest and thin-walled, carries the most tension. This compromises mucosal perfusion and leads to ischaemia and perforation.",
+   "notes": [
+    null,
+    "Pressure is roughly the same throughout a closed loop. The caecum fails because of its radius, not because it is further from the blockage.",
+    "The colonic watershed areas are the splenic flexure (Griffiths' point) and the rectosigmoid (Sudeck's point), not the caecum, which is supplied by the ileocolic artery.",
+    "The caecum is thin-walled, not thick, which adds to its risk. Strong muscle contraction is not the mechanism of perforation."
+   ]
+  },
+  {
+   "id": "osce-amsa-377-anatomy",
+   "cat": "anatomy",
+   "stem": "Jeoff, 53, presents with sudden left lower quadrant pain and gross abdominal distension that developed within a day while he was milking. Sigmoid volvulus is on the differential alongside an obstructing cancer or a diverticular stricture. Which anatomical feature allows the sigmoid colon to twist on itself?",
+   "options": [
+    "Retroperitoneal fixation of the sigmoid colon to the left psoas muscle",
+    "Convergence of the taeniae coli into a complete layer at the sigmoid",
+    "A long sigmoid mesocolon attached by a narrow base to the pelvic wall",
+    "A persistent mesentery holding the sigmoid close to a mobile caecum"
+   ],
+   "answer": 2,
+   "why": "The sigmoid colon is intraperitoneal and hangs on a long, mobile sigmoid mesocolon with a narrow root. It can therefore rotate around its mesenteric axis, causing a closed-loop obstruction and compromising its blood supply from the sigmoid branches of the inferior mesenteric artery.",
+   "notes": [
+    "Retroperitoneal fixation would stop the bowel twisting. The descending colon is retroperitoneal and rarely volvulises, whereas the sigmoid colon has a mesentery.",
+    "The taeniae coli merge into a continuous longitudinal muscle layer at the rectosigmoid junction and rectum. This does not make the sigmoid colon mobile.",
+    null,
+    "A mobile caecum on a persistent mesentery is the cause of caecal volvulus, which is a different and right-sided condition."
+   ]
+  }
+ ]
+}

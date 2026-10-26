@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-357",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:44:36.738Z",
+ "questions": [
+  {
+   "id": "osce-amsa-357-skills",
+   "cat": "skills",
+   "stem": "Mr Kenneth, 78, is on the ward with a suspected stroke. He says, \"It's my left eye, doctor. I keep bumping into things on that side.\" Acuity is 6/9 in each eye. He has not tried covering either eye. Which examination step best shows whether the problem is in his left eye or behind the optic chiasm?",
+   "options": [
+    "Swinging light test, looking for a left relative afferent pupillary defect",
+    "Fundoscopy of the left eye, looking for retinal pallor, emboli or optic disc cupping",
+    "Confrontation visual fields in each eye separately, with the other eye covered",
+    "Red desaturation test, comparing colour vision in the left and right eyes"
+   ],
+   "answer": 2,
+   "why": "Testing each eye on its own shows the pattern of field loss. If the left half-field is missing in both eyes up to the vertical midline, the defect is homonymous and the lesion is behind the chiasm on the right. Patients often blame the eye on the side of the hemianopia.",
+   "notes": [
+    "The swinging light test is normal in occipital lesions because the pupil fibres leave the visual pathway before the lateral geniculate body, so a normal result cannot show a homonymous defect.",
+    "Fundoscopy looks for eye or optic nerve disease and is normal in a lesion behind the chiasm, so it cannot show the homonymous pattern of his field loss.",
+    null,
+    "Red desaturation picks up optic nerve disease in one eye. Both eyes have intact central pathways, so the test would be normal and would not localise his defect."
+   ]
+  },
+  {
+   "id": "osce-amsa-357-clinical",
+   "cat": "clinical",
+   "stem": "Mr Kenneth, 78, has an acute right PCA infarct with no haemorrhage on MRI and newly found atrial fibrillation (CHA2DS2-VA 5). Creatinine is 98 micromol/L (eGFR 63) and his FBC and coagulation are normal. He has had aspirin since ED. The stroke team is planning his long-term antithrombotic therapy. Which regimen is most appropriate?",
+   "options": [
+    "Aspirin 100 mg plus clopidogrel 75 mg daily for 21 days, then one antiplatelet alone",
+    "Apixaban 5 mg orally twice daily, stopping the aspirin once he is anticoagulated",
+    "Apixaban 2.5 mg orally twice daily, continuing aspirin 100 mg daily alongside it",
+    "Warfarin with enoxaparin bridging, aiming for an INR of 2.0 to 3.0"
+   ],
+   "answer": 1,
+   "why": "A cardioembolic stroke from AF needs an oral anticoagulant, and a DOAC is preferred. He has none of the apixaban dose-reduction criteria (age 80 or over, weight 60 kg or less, creatinine 133 micromol/L or more), so he takes 5 mg twice daily. The stroke team times the start by infarct size.",
+   "notes": [
+    "Short-term dual antiplatelet therapy is for minor non-cardioembolic stroke or TIA. Antiplatelets alone do not adequately prevent stroke from AF.",
+    null,
+    "He needs at least two dose-reduction criteria for 2.5 mg twice daily and has none. Adding aspirin to a DOAC raises the bleeding risk without reducing stroke.",
+    "DOACs are preferred over warfarin in non-valvular AF, and heparin bridging after an acute infarct increases the risk of haemorrhagic transformation."
+   ]
+  },
+  {
+   "id": "osce-amsa-357-physio",
+   "cat": "physio",
+   "stem": "Mr Kenneth, 78, has an acute right occipital infarct. His MR angiogram shows an abrupt right P2 occlusion with no stenosis in the neck vessels, and his ECG shows atrial fibrillation that was not present two years ago. Where did the embolus most likely form, and by what mechanism?",
+   "options": [
+    "Left atrial appendage, from blood stasis after loss of coordinated atrial contraction",
+    "Left ventricle, from mural thrombus forming over a dyskinetic, ischaemic wall segment",
+    "Right atrium, with the clot crossing to the left heart through a patent foramen ovale",
+    "Carotid bifurcation, from rupture of an atherosclerotic plaque with thrombus on top"
+   ],
+   "answer": 0,
+   "why": "In AF the atria quiver instead of contracting, so blood stagnates in the blind-ended left atrial appendage and thrombus forms there (Virchow's stasis). The clot can embolise into the systemic arteries, here a branch of the posterior cerebral artery.",
+   "notes": [
+    null,
+    "Left ventricular mural thrombus follows a myocardial infarction or cardiomyopathy. His ECG shows no ischaemic change and the mechanism in AF is atrial stasis.",
+    "A paradoxical embolus needs a venous clot and a shunt. Neither is suggested here, and AF itself explains a left atrial source.",
+    "His neck vessels show no stenosis, and carotid emboli usually travel to the MCA, not the PCA, which is mostly supplied by the vertebrobasilar system."
+   ]
+  },
+  {
+   "id": "osce-amsa-357-anatomy",
+   "cat": "anatomy",
+   "stem": "Formal perimetry in Mr Kenneth, 78, shows a complete left homonymous hemianopia that is congruous between the two eyes, with sparing of the central 5 degrees. His pupils, acuity and fundi are normal, and he has no limb weakness, sensory loss or neglect. Where along the visual pathway is the lesion most likely?",
+   "options": [
+    "Right optic tract, between the optic chiasm and the lateral geniculate body",
+    "Right Meyer's loop, the inferior optic radiation in the temporal lobe",
+    "Right superior optic radiation, passing deep through the parietal lobe",
+    "Right primary visual cortex, above and below the calcarine fissure"
+   ],
+   "answer": 3,
+   "why": "Homonymous defects become more congruous the further back the lesion sits, and macular sparing is typical of the occipital cortex. The occipital pole, where central vision is represented, has a collateral MCA supply in addition to the PCA, so central vision survives a PCA infarct.",
+   "notes": [
+    "Optic tract lesions give an incongruous hemianopia that splits the macula, and often a relative afferent pupillary defect, because the pupil fibres are still in the tract.",
+    "A Meyer's loop lesion gives a contralateral superior quadrantanopia, not a complete hemianopia, and usually comes with other temporal lobe signs.",
+    "A parietal radiation lesion gives an inferior quadrantanopia that splits the macula, often with sensory loss or neglect, and he has neither.",
+    null
+   ]
+  }
+ ]
+}

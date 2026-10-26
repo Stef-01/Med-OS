@@ -10,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildPack } from './lib/duel-pack.mjs';
+import { readYears } from './tag-years.mjs';
 
 const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 const OUT = path.join(PUB, 'duel', 'pack.json');
@@ -28,7 +29,7 @@ export function mcqOnDisk(pub = PUB) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const { pack, dropped } = buildPack(poolOnDisk(), { mcq: mcqOnDisk(), stations: stationsOnDisk() });
+  const { pack, dropped } = buildPack(poolOnDisk(), { mcq: mcqOnDisk(), stations: stationsOnDisk(), years: readYears() });
   const text = packText(pack);
   if (process.argv.includes('--check')) {
     const now = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';

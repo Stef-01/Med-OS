@@ -15,12 +15,14 @@
    keys       'document' (default) listens for keys itself; 'host' leaves them to the host, which calls ui.key(e) from its
               own key owner (Med-OS's overlay stack captures every key) and gets true back when the duel used it */
 
-import { RULES, EMOTES, makeSetup, outcome } from '../duel/core.mjs';
+import { RULES, EMOTES, makeSetup, outcome, secsOf } from '../duel/core.mjs';
 import { createSession } from '../duel/session.mjs';
 import { createLobby, settleCrossed, offerFrom, rematchTarget } from '../duel/lobby.mjs';
 import { practiceWorld, BOT } from '../duel/bot.mjs';
 import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
-import { topicTree, poolOf, pickLabel, sourceLabel } from '../duel/pack.mjs';
+import { shown } from '../pup/rig/gifts.mjs';
+import { moodOf, lastPlayed, markPlayed } from '../pup/rig/mood.mjs';
+import { topicTree, poolOf, pickLabel, sourceLabel, decksOf, deckPack, yearsOf, YEAR_LABEL } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
 import { normWallet, fitWear } from '../duel/shop.mjs';
@@ -45,7 +47,8 @@ const BETA = '<span class="pd-beta">Beta</span>';
 /* a look as this build can draw it: its dog, coat and collar known, its pieces in the wardrobe */
 const lookOf = l => normLook(l, id => !!itemOf(id));
 const ib = (pd, name, label, cls = '') => `<button class="pd-ib${cls ? ' ' + cls : ''}" type="button" data-pd="${pd}" aria-label="${esc(label)}" title="${esc(label)}">${icon(name)}</button>`;
-const setupLine = s => `${s?.rounds || '?'} questions, ${s?.secs || '?'} seconds each${s?.topic ? `, ${s.topic}` : ''}${s?.catLabel ? `, ${s.catLabel}` : ''}`;
+const reads = s => (s?.questions || []).some(q => Number.isInteger(q?.secs));   /* reading time on (core.mjs readSecs) */
+const setupLine = s => `${s?.rounds || '?'} questions, ${s?.secs || '?'} seconds each${reads(s) ? ' plus reading time' : ''}${s?.topic ? `, ${s.topic}` : ''}${s?.catLabel ? `, ${s.catLabel}` : ''}`;
 const breedOf = id => DOGS.find(d => d.id === id) || DOGS.find(d => d.id === DEFAULT_DOG);
 
 function loadCss() {
@@ -58,26 +61,31 @@ function loadCss() {
   });
 }
 
+/* what redraws the dog (the rest of a look, the worn pieces, pops on): its dog, coat, collar, eyes and blush */
+const FACE = ['eyes', 'iris', 'blush'];
+const reskins = (a, b) => ['dog', 'coat', 'collar', ...FACE].some(k => (a[k] || '') !== (b[k] || ''));
+
 /* a dog in an iframe of the rig, in its look; `.expr(id)` changes its face, `.dress(look)` its look in place (another
    dog, coat or collar redraws it at once; a new piece pops on) */
 function dogFrame(look, { mirror = false, label = '' } = {}) {
   const box = document.createElement('div');
   box.className = 'pd-dog' + (mirror ? ' pd-mirror' : '');
   const f = document.createElement('iframe');
-  let cur = lookOf(look), ready = false, wantExpr = null, wantMove = null;
+  let cur = lookOf(look), ready = false, wantExpr = null, wantMove = null, wantDirt = 0;
   const q = new URLSearchParams({ embed: '1', dog: cur.dog, expr: 'happy' });
   if (cur.coat) q.set('coat', cur.coat);
   if (cur.collar) q.set('collar', cur.collar);
+  for (const k of FACE) if (cur[k]) q.set(k, cur[k]);
   f.src = `${RIG}?${q}`;
   f.title = label; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1;
   box.append(f);
   const send = m => { try { f.contentWindow?.postMessage(m, location.origin); } catch { /* not ready */ } };
-  const skin = L => ({ dob: 'skin', dog: L.dog, coat: L.coat || '', collar: L.collar || '' });
+  const skin = L => ({ dob: 'skin', dog: L.dog, coat: L.coat || '', collar: L.collar || '', eyes: L.eyes || '', iris: L.iris || '', blush: L.blush || '' });
   let loadedAs = cur;
   f.addEventListener('load', () => {
     ready = true;
-    if (cur.dog !== loadedAs.dog || cur.coat !== loadedAs.coat || cur.collar !== loadedAs.collar) send(skin(cur));
-    send(wearMsg(cur.wear, false)); if (wantExpr) send({ dob: 'expr', id: wantExpr });
+    if (reskins(cur, loadedAs)) send(skin(cur));
+    send(wearMsg(cur.wear, false)); if (wantExpr) send({ dob: 'expr', id: wantExpr }); if (wantDirt) send({ dob: 'mood', dirt: wantDirt });
     if (wantMove) { send({ dob: 'perform', id: wantMove }); wantMove = null; }
     loadedAs = cur;
   });
@@ -85,13 +93,15 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
     el: box,
     expr(id) { if (wantExpr === id) return; wantExpr = id; if (ready) send({ dob: 'expr', id }); },
     tap() { if (ready) send({ dob: 'tap' }); },
+    /* how grubby the dog is with neglect (mood.mjs), sent again whenever the frame reloads */
+    mood(dirt) { wantDirt = dirt; if (ready) send({ dob: 'mood', dirt }); },
     /* a worn piece's signature move (moves.mjs), played once; a frame still loading plays it when it is up */
     perform(id) { if (!id) return; if (ready) send({ dob: 'perform', id }); else wantMove = id; },
     dress(look) {
       const n = lookOf(look), was = cur;
       cur = n;
       if (!ready) return;
-      if (n.dog !== was.dog || n.coat !== was.coat || n.collar !== was.collar) send(skin(n));
+      if (reskins(n, was)) send(skin(n));
       if (JSON.stringify(n.wear) !== JSON.stringify(was.wear)) send(wearMsg(n.wear, false));
     }
   };
@@ -110,7 +120,7 @@ function bits(s) {
   el.className = 'pd-bits';
   el.innerHTML = `<span aria-hidden="true">${icon('q')}<b></b>${icon('timer')}<b></b></span><span class="pd-vh"></span>`;
   const [r, t] = el.querySelectorAll('b');
-  r.textContent = s?.rounds ?? '?'; t.textContent = `${s?.secs ?? '?'}s`;
+  r.textContent = s?.rounds ?? '?'; t.textContent = `${s?.secs ?? '?'}s${reads(s) ? '+' : ''}`;
   el.querySelector('.pd-vh').textContent = setupLine(s);
   return el;
 }
@@ -162,7 +172,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (step === 'create') {
       const grid = shell.querySelector('.pd-dogs'), named = shell.querySelector('.pd-pickname');
       const nameIt = id => { const d = breedOf(id); named.textContent = `${d.name} · ${d.breedName}`; };
-      grid.append(...DOGS.map(d => {
+      grid.append(...DOGS.filter(d => shown(d) || d.id === dog).map(d => {   /* a gift's dogs once it is redeemed (gifts.mjs) */
         const b = document.createElement('button');
         b.type = 'button'; b.className = 'pd-dogpick'; b.dataset.dog = d.id; b.setAttribute('role', 'radio');
         b.setAttribute('aria-checked', String(d.id === dog)); b.setAttribute('aria-label', `${d.name}, ${d.breedName}`); b.title = d.hint;
@@ -228,7 +238,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       <main class="pd-main pd-lobby">
         <section class="pd-me" aria-label="You">
           ${hostLook ? '<div class="pd-me-dog"></div>' : `<button class="pd-me-dog" type="button" data-pd="dress" aria-label="Dress your dog"><span class="pd-badge">${icon('shirt')}</span></button>`}
-          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>
+          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p><p class="pd-mood" aria-live="polite"></p>
           ${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="shop" hidden aria-label="Bones: open the shop">${icon('bone')}<b></b><span class="pd-wallet-go">Shop</span></button>`}</div>
         </section>
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
@@ -271,6 +281,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const holder = shell.querySelector('.pd-me-dog');
     if (!S.hero || !holder.contains(S.hero.el)) { S.hero = dogFrame(look, { label: dogName(look.dog) }); holder.prepend(S.hero.el); }
     else S.hero.dress(look);
+    paintMood(lv, look);
     const sec = (name, show) => { const s = shell.querySelector(`[data-sec="${name}"]`); s.hidden = !show; return s.querySelector('.pd-list, .pd-grid'); };
     keyed(sec('invites', lv.invites.length > 0), lv.invites, d => `${d.id}|${JSON.stringify(d.them?.look)}|${d.them?.name}`, inviteRow);
     const mine = [...lv.live, ...lv.waiting];
@@ -281,6 +292,20 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     /* back from a reload (or a phone that slept) in the middle of a duel: straight back into it, once */
     if (S.rejoin && lv.loaded) { S.rejoin = false; if (lv.live.length === 1) { openDuel(lv.live[0]); return; } }
     shell.querySelector('.pd-lobby > .pd-err').textContent = lv.error ? `Can't reach the server. Retrying.` : '';
+  }
+  /* the dog's mood (founder 2026-10-26: neglect): the last game on this device, a practice the wallet counted or a duel
+     finished, whichever is latest, sets how sad and how grubby the dog is; a game just played cheers it, clean */
+  function paintMood(lv, look) {
+    const pd = S.wallet?.practice?.day ? Date.parse(`${S.wallet.practice.day}T12:00:00`) : 0;
+    const duel = Math.max(0, ...lv.past.map(d => Date.parse(d.updated_at || '') || 0));
+    const m = moodOf(Math.max(lastPlayed(), pd || 0, duel), dogName(look.dog));
+    const key = `${m.id}|${look.dog}|${S.cheered ? 1 : 0}`;
+    if (S.moodKey === key) return;
+    S.moodKey = key;
+    S.hero.expr(S.cheered ? 'overjoyed' : m.expr || 'happy'); S.hero.mood(m.dirt);
+    const el = shell.querySelector('.pd-mood');
+    el.textContent = S.cheered ? `${dogName(look.dog)} is clean and happy again.` : m.id === 'happy' ? '' : m.line;
+    el.dataset.mood = S.cheered ? 'happy' : m.id;
   }
   function row(cls, look) {
     const r = document.createElement('div');
@@ -401,20 +426,27 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
                its count; a category with none yet is shown, greyed, so the layers read the same everywhere
      The last pick and lengths are remembered on this device */
   const PICK_KEY = `${storeKey}:pick`;
-  const lastPick = () => { try { const p = JSON.parse(storage.getItem(PICK_KEY)) || {}; return { rounds: RULES.roundChoices.includes(p.rounds) ? p.rounds : RULES.rounds, secs: RULES.secsChoices.includes(p.secs) ? p.secs : RULES.secs, topic: typeof p.topic === 'string' ? p.topic : '', cat: typeof p.cat === 'string' ? p.cat : '' }; } catch { return { rounds: RULES.rounds, secs: RULES.secs, topic: '', cat: '' }; } };
+  const lastPick = () => { try { const p = JSON.parse(storage.getItem(PICK_KEY)) || {}; return { rounds: RULES.roundChoices.includes(p.rounds) ? p.rounds : RULES.rounds, secs: RULES.secsChoices.includes(p.secs) ? p.secs : RULES.secs, topic: typeof p.topic === 'string' ? p.topic : '', cat: typeof p.cat === 'string' ? p.cat : '', deck: typeof p.deck === 'string' ? p.deck : '', ladder: p.ladder === true }; } catch { return { rounds: RULES.rounds, secs: RULES.secs, topic: '', cat: '', deck: '', ladder: false }; } };
   const keepPick = p => { try { storage.setItem(PICK_KEY, JSON.stringify(p)); } catch { /* private mode */ } };
   function openSetup(mate, last = null, { practice: isPractice = false } = {}) {
-    const tree = topicTree(pack), layered = tree.topics.length > 1 || tree.all.cats.length > 1;
-    const opt = { ...lastPick(), ...(last || {}) };
-    if (!poolOf(pack, opt).length) { opt.topic = ''; opt.cat = ''; }   /* a pick the pack no longer has */
+    /* where the questions come from (a host's decks: Med-OS's bank, your questions, your friends'), in front of the topic */
+    const decks = decksOf(pack), opt = { ...lastPick(), ...(last || {}) };
+    if (!decks.some(d => d.id === opt.deck)) opt.deck = '';
+    const cur = () => deckPack(pack, opt.deck);
+    let tree = topicTree(cur());
+    const layered = topicTree(pack).topics.length > 1 || topicTree(pack).all.cats.length > 1;
+    if (!poolOf(cur(), opt).length) { opt.topic = ''; opt.cat = ''; }   /* a pick the pack no longer has */
     const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div><span class="pd-seglabel" id="pd-sl-${name}">${label}</span><div class="pd-seg" role="radiogroup" aria-labelledby="pd-sl-${name}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}" tabindex="${v === cur ? 0 : -1}">${f(v)}</button>`).join('')}</div></div></div>`;
     sheet(`
       <div class="pd-step" data-step="setup">
         <div class="pd-vsmini" aria-hidden="true"></div>
         <h2 class="pd-sheet-title"></h2>
+        ${decks.length ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('pack')}</span><div><span class="pd-seglabel" id="pd-sl-deck">From</span><div class="pd-seg pd-seg--deck" role="radiogroup" aria-labelledby="pd-sl-deck">${[...decks, { id: '', label: 'Mix', count: decks.reduce((n, d) => n + d.count, 0) }].map(d => `<button type="button" role="radio" data-deck="${esc(d.id)}" aria-checked="${d.id === opt.deck}" tabindex="${d.id === opt.deck ? 0 : -1}" aria-label="${esc(d.label)}, ${d.count} questions">${esc(d.short || d.label)}</button>`).join('')}</div></div></div>` : ''}
         ${layered ? `<button class="pd-pickrow" type="button" data-pd="choose"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><span class="pd-pick-tx"><small>Questions from</small><b></b></span><span class="pd-pick-n"></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
+        ${yearsOf(pack).length > 1 ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('star')}</span><div><span class="pd-seglabel" id="pd-sl-order">Order</span><div class="pd-seg" role="radiogroup" aria-labelledby="pd-sl-order">${[['mix', 'Shuffled'], ['ladder', '0 to 1']].map(([v, l]) => `<button type="button" role="radio" data-order="${v}" aria-checked="${(v === 'ladder') === !!opt.ladder}" tabindex="${(v === 'ladder') === !!opt.ladder ? 0 : -1}"${v === 'ladder' ? ' aria-describedby="pd-laddernote"' : ''}>${l}</button>`).join('')}</div><p class="pd-note pd-readnote" id="pd-laddernote">0 to 1: Year 1 first principles up to final year, harder each question.</p></div></div>` : ''}
         ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
-        ${seg('secs', 'timer', 'Seconds each', RULES.secsChoices, opt.secs, v => `${v}s`)}
+        ${seg('secs', 'timer', 'Seconds to answer', RULES.secsChoices, opt.secs, v => `${v}s`)}
+        <p class="pd-note pd-readnote">Each question adds time to read it: a long case gets longer.</p>
         <p class="pd-note" data-pd="fewer" hidden></p>
         <p class="pd-err" role="alert"></p>
         <button class="pd-btn pd-pri" type="button" data-pd="send">${icon(isPractice ? 'bot' : 'zap')}${isPractice ? 'Practice' : 'Duel'}</button>
@@ -429,7 +461,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelector('.pd-vsmini').append(face(myLook()), face(mate.look, 'pd-mirror'));
       el.querySelector('[data-step="setup"] .pd-sheet-title').textContent = isPractice ? `Practice with ${mate.name}` : mate.name;
       const paintPick = () => {
-        const n = poolOf(pack, opt).length, row = el.querySelector('[data-pd="choose"]');
+        const n = poolOf(cur(), opt).length, row = el.querySelector('[data-pd="choose"]');
         if (row) {
           row.querySelector('b').textContent = pickLabel(pack, opt);
           row.querySelector('.pd-pick-n').textContent = n;
@@ -466,7 +498,12 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         if (b.dataset.dc !== undefined) { opt.topic = dt || ''; opt.cat = b.dataset.dc; keepPick({ ...opt }); paintPick(); step('setup'); el.querySelector('[data-pd="choose"]').focus({ preventScroll: true }); say(`Questions from ${pickLabel(pack, opt)}`); }
       });
       el.querySelectorAll('.pd-seg').forEach(g => {
-        const set = b => { g.querySelectorAll('button').forEach(x => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; }); paintPick(); };
+        const set = b => {
+          g.querySelectorAll('button').forEach(x => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; });
+          if (b.dataset.order !== undefined) { opt.ladder = b.dataset.order === 'ladder'; keepPick({ ...opt }); }
+          if (b.dataset.deck !== undefined) { opt.deck = b.dataset.deck; tree = topicTree(cur()); if (!poolOf(cur(), opt).length) { opt.topic = ''; opt.cat = ''; } keepPick({ ...opt }); }
+          paintPick();
+        };
         g.addEventListener('click', e => { const b = e.target.closest('button'); if (b) set(b); });
         g.addEventListener('keydown', e => {   /* a radio group: the arrows move and choose */
           const all = [...g.querySelectorAll('button')], i = all.indexOf(document.activeElement), n = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
@@ -478,8 +515,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelector('[data-pd="send"]').addEventListener('click', async () => {
         const rounds = pickedRounds(), secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs;
         keepPick({ ...opt, rounds, secs });
-        if (isPractice) { closeSheet(); startPractice({ rounds, secs, topic: opt.topic, cat: opt.cat }); return; }
-        const setup = makeSetup(pack, { rounds, secs, topic: opt.topic, cat: opt.cat, seed: freshSeed(), title: pack.title });
+        if (isPractice) { closeSheet(); startPractice({ rounds, secs, topic: opt.topic, cat: opt.cat, deck: opt.deck, ladder: !!opt.ladder }); return; }
+        const setup = makeSetup(cur(), { rounds, secs, topic: opt.topic, cat: opt.cat, ladder: !!opt.ladder && yearsOf(pack).length > 1, seed: freshSeed(), title: pack.title });
         if (!setup.questions.length) { el.querySelector('.pd-err').textContent = 'No questions to play.'; return; }
         await busy(async () => {
           const d = await challengeMate(mate.id, setup);
@@ -535,7 +572,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         const R = st.rounds[i], a = R?.answers[me], b = R?.answers[opp], li = document.createElement('li');
         li.className = 'pd-rv'; li.dataset.ok = a?.ok ? '1' : '0';
         const where = st.setup.topic || q.topic;   /* a duel narrowed to a topic names that topic, not the question's first */
-        const meta = [[where, q.catLabel].filter(Boolean).join(' › '), q.source ? sourceLabel(q) : ''].filter(Boolean).join(' · ');   /* what to revise, and whose question */
+        const meta = [q.year ? YEAR_LABEL(q.year) : '', [where, q.catLabel].filter(Boolean).join(' › '), q.source ? sourceLabel(q) : ''].filter(Boolean).join(' · ');   /* what to revise, and whose question */
         li.innerHTML = `${meta ? '<p class="pd-rv-meta"></p>' : ''}<p class="pd-rv-q"></p><p class="pd-rv-a">${icon('check')}<span></span></p>`;
         if (meta) li.querySelector('.pd-rv-meta').textContent = meta;
         li.querySelector('.pd-rv-q').textContent = q.stem;
@@ -570,7 +607,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       const look = myLook();
       const w = await practiceWorld({ name: S.me?.name || 'You', look });
       S.world = w; S.t = w.transport; S.worldMe = w.me;
-      const setup = makeSetup(pack, { rounds: opts.rounds || RULES.rounds, secs: opts.secs || RULES.secs, topic: opts.topic || '', cat: opts.cat || '', seed: freshSeed(), title: pack.title });
+      const setup = makeSetup(deckPack(pack, opts.deck || ''), { rounds: opts.rounds || RULES.rounds, secs: opts.secs || RULES.secs, topic: opts.topic || '', cat: opts.cat || '', ladder: !!opts.ladder && yearsOf(pack).length > 1, seed: freshSeed(), title: pack.title });
       if (!setup.questions.length) throw new Error('No questions to play.');
       const d = await w.transport.challenge(w.me, w.bot.id, setup);
       openDuel({ ...d, them: { ...w.bot, look: BOT.look } }, { practice: true });
@@ -646,7 +683,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const step = () => {
       if (S.screen !== 'match' || !S.session) return;
       const v = S.session.view(); S.view = v;
-      const bar = shell.querySelector('.pd-timer i'), s = v.stage, secs = v.state.setup.secs * 1000;
+      const bar = shell.querySelector('.pd-timer i'), s = v.stage, secs = secsOf(v.state.setup, s.round) * 1000;
       if (bar) {
         const live = s.name === 'question' || s.name === 'locked';
         bar.parentElement.classList.toggle('pd-on', live);
@@ -671,7 +708,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   function paintMatch() {
     const v = S.view, M = S.match;
     if (S.screen !== 'match' || !v || !M) return;
-    const st = v.state, s = v.stage, me = v.me, opp = v.opp, q = v.question, secs = st.setup.secs;
+    const st = v.state, s = v.stage, me = v.me, opp = v.opp, q = v.question, secs = secsOf(st.setup, s.round);
     /* the header: a dot per round, filled as they close */
     const dots = shell.querySelector('.pd-dots');
     if (dots.childElementCount !== st.rounds.length) dots.replaceChildren(...st.rounds.map(() => document.createElement('i')));
@@ -709,7 +746,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (showQ) {
       if (M.round !== s.round) {
         M.round = s.round;
-        const tag = shell.querySelector('.pd-qtag'), from = sourceLabel(q);   /* where the question came from: AI-written, AMSA, … */
+        const tag = shell.querySelector('.pd-qtag'), from = st.setup?.ladder && q.year ? YEAR_LABEL(q.year) : sourceLabel(q);   /* where the question came from (AI-written, AMSA, …); in 0 to 1 its year instead (the review keeps both) */
         tag.textContent = from; tag.hidden = !from;
         shell.querySelector('.pd-stem').textContent = q.stem;
         if (s.name === 'question') say(`Question ${s.round + 1} of ${st.rounds.length}. ${secs} seconds.`);
@@ -799,6 +836,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (!v || !M || S.screen === 'results') return;
     S.screen = 'results';
     cancelAnimationFrame(S.raf);
+    if (lastPlayed() && moodOf(lastPlayed()).id !== 'happy') S.cheered = true;   /* back after a while: the lobby cheers, clean */
+    markPlayed(); S.moodKey = '';
     const st = v.firm, me = v.me, opp = v.opp, out = outcome(st, me) || 'loss', them = M.them.name || 'Your mate';
     const head = out === 'win' ? 'You win!' : out === 'draw' ? 'A draw' : `${them} wins`;
     const why = st.reason === 'leave' ? (st.winner === me ? `${them} left` : 'You left') : st.reason === 'forfeit' ? (st.winner === me ? `${them} went quiet` : 'You went quiet') : '';

@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "ai-ea8dbb57",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:21:57.599Z",
+ "questions": [
+  {
+   "id": "osce-ai-ea8dbb57-skills",
+   "cat": "skills",
+   "stem": "On the postnatal ward, a 14-hour-old term baby with suspected early-onset GBS sepsis is being stabilised. The mother was GBS positive and had one dose of benzylpenicillin 2 hours before a quick birth. She is tearful and asks you, \"Did I cause this?\" Which response is best?",
+   "options": [
+    "It may be because you stayed home after your waters broke; that delayed the antibiotics",
+    "We can't say anything about the cause until the final culture result at 5 days",
+    "GBS is carried by many healthy women; you didn't cause this or do anything wrong",
+    "Please don't worry; babies treated this quickly nearly always recover completely"
+   ],
+   "answer": 2,
+   "why": "Answer her question honestly: GBS carriage is common and normal, it is nobody's fault, and you won't promise how things will turn out. After that, check what she has understood and offer to help her stay with the baby and express breast milk.",
+   "notes": [
+    "This blames the mother. It is unkind, it doesn't help, and the timing of labour was not something she could control.",
+    "This avoids her question. You can reassure her about blame now without waiting for any result.",
+    null,
+    "This is false reassurance. The baby is in septic shock and you cannot promise a full recovery."
+   ]
+  },
+  {
+   "id": "osce-ai-ea8dbb57-clinical",
+   "cat": "clinical",
+   "stem": "A 14-hour-old baby born at 38+5 weeks, weighing 3.2 kg, has suspected early-onset sepsis with shock. The mother is GBS positive. A blood culture has just been taken, and a lumbar puncture is deferred because the baby is unstable. Which empirical antibiotic regimen should you give now?",
+   "options": [
+    "Benzylpenicillin 192 mg IV 12-hourly plus gentamicin 16 mg IV 24-hourly",
+    "Benzylpenicillin 192 mg IV 12-hourly plus gentamicin 24 mg IV 24-hourly",
+    "Ceftriaxone 160 mg IV 24-hourly plus benzylpenicillin 192 mg IV 12-hourly",
+    "Flucloxacillin 160 mg IV 12-hourly plus gentamicin 16 mg IV 24-hourly"
+   ],
+   "answer": 0,
+   "why": "For early-onset sepsis the RCH guideline uses benzylpenicillin 60 mg/kg 12-hourly plus gentamicin 5 mg/kg 24-hourly, with doses from the Australasian Neonatal Medicines Formulary for a term baby in the first week. This covers GBS, Listeria and E. coli. Give it straight after the blood culture.",
+   "notes": [
+    null,
+    "24 mg is 7.5 mg/kg, the dose for older children. A term neonate in the first week gets 5 mg/kg, because a higher dose risks toxicity.",
+    "Ceftriaxone is avoided in neonates because it displaces bilirubin and can precipitate with calcium. If meningitis is suspected, the regimen uses a cephalosporin such as cefotaxime.",
+    "Flucloxacillin is aimed at staphylococci, which matter in late-onset sepsis. It is not the empirical choice for early-onset sepsis from maternal flora such as GBS."
+   ]
+  },
+  {
+   "id": "osce-ai-ea8dbb57-physio",
+   "cat": "physio",
+   "stem": "A 14-hour-old term baby has septic shock, with a lactate of 4.2 mmol/L, neutropenia with toxic changes and bilateral hazy opacification on chest X-ray. Bloods were taken about 4 hours after symptoms began, and the CRP is only 6 mg/L. What best explains the low CRP?",
+   "options": [
+    "Neonatal hepatocytes cannot synthesise CRP until the second week of life",
+    "The intrapartum benzylpenicillin has suppressed the baby's acute-phase response",
+    "CRP is made by neutrophils, so the neutropenia limits its production",
+    "Hepatic CRP synthesis is driven by IL-6 and takes 12 to 24 hours to rise"
+   ],
+   "answer": 3,
+   "why": "CRP is an acute-phase protein made by the liver in response to IL-6 and other cytokines. It rises over 12 to 24 hours and peaks at about 36 to 48 hours, so a low early CRP does not exclude sepsis. Repeat it within 12 to 24 hours.",
+   "notes": [
+    "Newborns can make CRP from birth. The value is low here because of timing, not because the liver is immature.",
+    "Antibiotics do not block the hepatic acute-phase response, and one dose to the mother would not suppress it in the baby.",
+    "CRP comes from hepatocytes, not neutrophils, so the neutrophil count does not limit how much is made.",
+    null
+   ]
+  },
+  {
+   "id": "osce-ai-ea8dbb57-anatomy",
+   "cat": "anatomy",
+   "stem": "A 14-hour-old baby with shock and SpO2 of 91% has improved with fluid, but the registrar still wants duct-dependent congenital heart disease excluded and asks you to measure pre- and post-ductal SpO2. Where should the pre-ductal probe go, and why?",
+   "options": [
+    "Left hand: the left subclavian artery always arises proximal to the ductus",
+    "Right hand: right subclavian comes off the brachiocephalic trunk, proximal to the duct",
+    "Either foot: the femoral arteries arise from the aorta proximal to the duct",
+    "Either hand: both subclavian arteries leave the arch proximal to the duct"
+   ],
+   "answer": 1,
+   "why": "The right subclavian artery comes off the brachiocephalic trunk, the first branch of the arch, well before the ductus arteriosus joins the aorta. That makes the right hand reliably pre-ductal, and a foot is post-ductal.",
+   "notes": [
+    "The left subclavian arises close to where the ductus joins the aorta, and it may receive ductal blood, so the left hand is not a reliable pre-ductal site.",
+    null,
+    "The legs are supplied by the descending aorta beyond the duct, so a foot is the post-ductal site.",
+    "The left subclavian is too close to the ductal insertion to be reliably pre-ductal, so only the right hand is used."
+   ]
+  }
+ ]
+}

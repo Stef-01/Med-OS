@@ -10,6 +10,7 @@
 // a base and its shade per shape, light from the top left, and readable on the hosts' dark navy.
 // A COLLAR is a colour for the collar (its tag stays gold, except on gold).
 import { DOGS } from './breeds.mjs';
+import { eyeShape, irisOf, blushOf } from './eyes.mjs';
 
 /* the roles that stay the dog's own whatever it wears */
 const OWN = new Set(['ink', 'mouth', 'tongue', 'tongueSh', 'collar', 'tag', 'tagSh', 'disc', 'floor', 'blush']);
@@ -346,16 +347,22 @@ export const COLLARS = [
 const TAG_ON_GOLD = { tag: '#ffffff', tagSh: '#e6e2da' };
 
 /* a dog's coats, its own colours and collar: what a dressing room offers and what it shows as chosen */
-export const coatsFor = id => (byId(id) ? COATS[byId(id).breed] : []);
+/* a gift dog (the Eevee family) is one character, not a coat on its breed: it keeps its own colours only */
+export const coatsFor = id => (byId(id) ? (byId(id).gift ? COATS[byId(id).breed].filter(k => k.from === id) : COATS[byId(id).breed]) : []);
 export const ownCoat = id => (coatsFor(id).find(k => k.from === id) || {}).id || '';
 export const ownCollar = id => { const d = byId(id), hex = d && d.pal.collar; return (COLLARS.find(k => k.hex === hex) || {}).id || ''; };
 
-/* a DOGS entry in a look's coat and collar, for resolve(): an unknown coat or collar leaves the dog's own */
+/* a DOGS entry in a look's coat, collar, eyes and blush, for resolve(): an unknown coat or collar leaves the dog's own */
 export function dress(d, look) {
   const k = look && coatsFor(d.id).find(c => c.id === look.coat && c.from !== d.id);
   const col = look && COLLARS.find(c => c.id === look.collar);
-  if (!k && !col) return d;
+  /* the eyes and the blush (eyes.mjs): a shape, an iris and a blush the kit knows, else the dog's own */
+  const face = {}, sh = look && eyeShape(look.eyes), ir = look && irisOf(look.iris), bl = look && blushOf(look.blush);
+  if (sh && sh.id) face.eyes = sh.id;
+  if (ir && ir.id) { face.iris = ir.id; face.irisDeep = ir.deep; }
+  if (bl && bl.id) face.blushMode = bl.id;
+  if (!k && !col) return Object.keys(face).length ? { ...d, ...face } : d;
   const pal = k ? { ...Object.fromEntries(Object.entries(d.pal).filter(([r]) => OWN.has(r))), ...k.pal } : { ...d.pal };
   if (col) { pal.collar = col.hex; if (col.id === 'gold') Object.assign(pal, TAG_ON_GOLD); }
-  return { ...d, pal };
+  return { ...d, ...face, pal };
 }

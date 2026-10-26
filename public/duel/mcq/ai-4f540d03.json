@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "ai-4f540d03",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:15:38.856Z",
+ "questions": [
+  {
+   "id": "osce-ai-4f540d03-skills",
+   "cat": "skills",
+   "stem": "A 5-week-old boy in the ED has 5 days of worsening forceful vomiting after feeds and is hungry straight afterwards. His mother thinks it is reflux. You are taking a focused history. Which question most urgently screens for a surgical emergency that must be excluded before anything else?",
+   "options": [
+    "Does he arch his back or cry during and after feeds?",
+    "How many wet nappies has he had in the last 12 hours?",
+    "Has anyone else in the family had an operation as a baby?",
+    "Has any of the vomit ever been green or yellow?"
+   ],
+   "answer": 3,
+   "why": "Bilious (green) vomiting in an infant means malrotation with volvulus until proven otherwise. It needs an urgent contrast study and surgical review, so always ask directly about the colour of the vomit.",
+   "notes": [
+    "Back arching points towards reflux. It does not screen for a time-critical surgical cause.",
+    "Wet nappies help you judge how dehydrated he is, but they do not tell you whether there is an obstruction below the pylorus.",
+    "A parent who had pyloric stenosis supports that diagnosis, but pyloric stenosis is a surgical urgency, not the emergency you need to rule out first.",
+    null
+   ]
+  },
+  {
+   "id": "osce-ai-4f540d03-clinical",
+   "cat": "clinical",
+   "stem": "The 4.0 kg boy with pyloric stenosis has had a 40 mL bolus of 0.9% sodium chloride. His HR is now 152 and CRT 2 s. His gas showed Cl 88, K 3.0 and HCO3 36. He is nil by mouth and has not passed urine yet. Which IV fluid plan is best for the next 24 hours?",
+   "options": [
+    "0.9% sodium chloride with 5% glucose at 24 mL/h",
+    "0.9% sodium chloride with 5% glucose at 16 mL/h",
+    "0.45% sodium chloride with 2.5% glucose at 24 mL/h",
+    "0.9% sodium chloride with 5% glucose at 33 mL/h"
+   ],
+   "answer": 0,
+   "why": "Maintenance for 4 kg is 16 mL/h. A 5% deficit is 200 mL over 24 h, about 8 mL/h, so the total is about 24 mL/h of isotonic 0.9% sodium chloride with 5% glucose. The chloride corrects the hypochloraemic alkalosis. Add potassium once he is passing urine.",
+   "notes": [
+    null,
+    "16 mL/h is maintenance only. It does not replace his deficit, so rehydration and correction of the alkalosis, and therefore surgery, are delayed.",
+    "Hypotonic fluid carries a risk of hyponatraemia and gives less of the chloride he needs to correct the alkalosis. Isotonic fluid is recommended.",
+    "33 mL/h replaces a 10% deficit in 24 hours. The RCH guideline replaces no more than 5% over 24 hours on top of maintenance."
+   ]
+  },
+  {
+   "id": "osce-ai-4f540d03-physio",
+   "cat": "physio",
+   "stem": "A 5-week-old boy has vomited gastric contents for 5 days and is about 9% dehydrated. His arrival venous gas shows pH 7.52, HCO3 36, Cl 88, K 3.0 and Na 134. What is the main cause of his low potassium?",
+   "options": [
+    "Potassium lost directly in the gastric juice he has vomited",
+    "Potassium moving into cells because of the alkalaemia alone",
+    "Low potassium intake because he cannot keep his feeds down",
+    "Renal loss, as aldosterone drives distal Na+ reabsorption in exchange for K+ and H+"
+   ],
+   "answer": 3,
+   "why": "Losing volume activates the renin-angiotensin-aldosterone system. Aldosterone makes the distal nephron reabsorb sodium and secrete K+ and H+ in exchange. With so little chloride available, bicarbonate is also kept. So the potassium is lost mainly through the kidneys, and this also keeps the alkalosis going (paradoxical aciduria).",
+   "notes": [
+    "Gastric juice contains only about 10 mmol/L of potassium, so what is lost in the vomit makes up only a small part of the deficit.",
+    "The alkalaemia does move some potassium into cells, but this shift is small and does not explain a fall to 3.0.",
+    "Low intake over a few days adds little; the kidneys conserve potassium well unless aldosterone is driving them to excrete it.",
+    null
+   ]
+  },
+  {
+   "id": "osce-ai-4f540d03-anatomy",
+   "cat": "anatomy",
+   "stem": "The ultrasound of this 5-week-old boy shows a pyloric muscle wall 5 mm thick and a channel 19 mm long. After he is rehydrated, the paediatric surgeon plans a pyloromyotomy. Which description best matches what the operation does?",
+   "options": [
+    "The longitudinal muscle is divided across and then closed over the mucosa",
+    "The hypertrophied circular muscle is split lengthwise, leaving the mucosa intact",
+    "The full thickness of the wall is cut lengthwise and then sewn closed crosswise",
+    "The thickened mucosa and submucosa are cut out to widen the pyloric channel"
+   ],
+   "answer": 1,
+   "why": "In pyloric stenosis it is mainly the circular muscle layer of the pylorus that hypertrophies. Ramstedt pyloromyotomy splits the serosa and this muscle lengthwise until the submucosa bulges into the gap. The mucosa is left intact, and an unrecognised mucosal perforation is the main complication to avoid.",
+   "notes": [
+    "The thickened layer is the circular muscle, not the longitudinal muscle, and the muscle is split and left open, not divided across and closed.",
+    null,
+    "Cutting through the full wall and closing it crosswise is a Heineke-Mikulicz pyloroplasty, an adult procedure that opens the bowel lumen.",
+    "The mucosa is not the thickened layer, and cutting it out would open the lumen and cause a leak."
+   ]
+  }
+ ]
+}

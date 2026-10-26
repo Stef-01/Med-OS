@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-634",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T06:02:01.317Z",
+ "questions": [
+  {
+   "id": "osce-amsa-634-skills",
+   "cat": "skills",
+   "stem": "Jaden, 45, is in a rural ED with 3 days of colicky central abdominal pain and bilious vomiting. She tells you she has not opened her bowels for 3 days. Which question best shows whether she has absolute constipation, which points to mechanical bowel obstruction?",
+   "options": [
+    "Have you tried any laxatives or enemas for this?",
+    "Was your last bowel motion hard or painful to pass?",
+    "Have you been able to pass any wind from your back passage?",
+    "How often do you normally open your bowels each day?"
+   ],
+   "answer": 2,
+   "why": "Absolute constipation means no stool and no flatus. Not passing wind is what separates complete obstruction from simple constipation, and patients rarely mention it unless you ask directly.",
+   "notes": [
+    "Her laxative use is worth knowing, but a laxative failing does not tell you whether gas can still get past a blockage.",
+    "A hard last stool fits simple constipation and says nothing about whether the bowel is completely blocked.",
+    null,
+    "Her usual bowel habit gives you a baseline, but it cannot tell you whether gas is getting through now."
+   ]
+  },
+  {
+   "id": "osce-amsa-634-clinical",
+   "cat": "clinical",
+   "stem": "Jaden, 45, has adhesive small bowel obstruction in a rural ED. She is nil by mouth, her creatinine is 102 umol/L (baseline 64) and she takes venlafaxine 75 mg daily. Her colicky pain is 8/10. Which analgesic is the most appropriate first choice?",
+   "options": [
+    "IV morphine in small increments (e.g. 2.5 mg), titrated to effect",
+    "IV tramadol 100 mg, repeated after 30 minutes if needed",
+    "IM pethidine 50 mg, repeated every 3 hours as needed",
+    "Oral ibuprofen 400 mg with oral paracetamol 1 g"
+   ],
+   "answer": 0,
+   "why": "Small IV doses of morphine, titrated against her pain and sedation, give fast and controllable relief. It is safe with venlafaxine, and giving it does not mask the signs of peritonism.",
+   "notes": [
+    null,
+    "Tramadol is serotonergic, so combining it with venlafaxine risks serotonin toxicity. It also lowers the seizure threshold.",
+    "Pethidine is serotonergic, which is a risk with venlafaxine. Its metabolite norpethidine builds up in AKI and causes neurotoxicity, and IM absorption is unreliable.",
+    "She is nil by mouth and vomiting, so she cannot take oral drugs. NSAIDs would also worsen her prerenal AKI."
+   ]
+  },
+  {
+   "id": "osce-amsa-634-physio",
+   "cat": "physio",
+   "stem": "Jaden, 45, has vomited bile for 3 days from a small bowel obstruction. Venous gas: pH 7.46, HCO3 31 mmol/L. K 3.3 mmol/L, Cl 94 mmol/L, creatinine 102 umol/L (baseline 64), Hb up from 128 to 146 g/L. What is the main mechanism of her hypokalaemia?",
+   "options": [
+    "Direct loss of potassium-rich fluid in the vomitus",
+    "Shift of potassium into cells driven by the alkalosis",
+    "Reduced dietary potassium intake while unable to eat",
+    "Aldosterone-driven renal potassium excretion from volume depletion"
+   ],
+   "answer": 3,
+   "why": "Losing fluid activates the renin-angiotensin-aldosterone system. Aldosterone makes the distal nephron reabsorb sodium in exchange for K+ and H+, so most of the potassium is lost in the urine, which also worsens the alkalosis.",
+   "notes": [
+    "Vomited gastric and upper small bowel fluid contains little potassium (about 5–15 mmol/L), so direct loss accounts for only a small part of the deficit.",
+    "Alkalosis does push some potassium into cells, but only a small amount, and it does not explain a true loss of body potassium.",
+    "Three days without food lowers intake a little, but the kidneys normally conserve potassium, so this alone would not cause much hypokalaemia.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-634-anatomy",
+   "cat": "anatomy",
+   "stem": "You are examining the hernial orifices of Jaden, 45, who has small bowel obstruction. You know that femoral hernias are easily missed in women and often present with obstruction. Where does the neck of a femoral hernia lie on examination?",
+   "options": [
+    "Above and medial to the pubic tubercle, at the superficial inguinal ring",
+    "Below and lateral to the pubic tubercle, medial to the femoral vein",
+    "Above the midpoint of the inguinal ligament, at the deep inguinal ring",
+    "Below the inguinal ligament, lateral to the femoral artery pulse"
+   ],
+   "answer": 1,
+   "why": "A femoral hernia passes through the femoral canal, the medial compartment of the femoral sheath, just medial to the femoral vein. Its neck therefore sits below and lateral to the pubic tubercle. The canal is narrow and rigid, so these hernias are prone to strangulation.",
+   "notes": [
+    "Above and medial to the pubic tubercle is where an inguinal hernia comes out through the superficial ring.",
+    null,
+    "The deep inguinal ring sits above the midpoint of the inguinal ligament. Indirect inguinal hernias enter the canal there, not femoral hernias.",
+    "Lateral to the femoral artery is the femoral nerve. The femoral canal is on the medial side of the femoral vein."
+   ]
+  }
+ ]
+}

@@ -443,8 +443,26 @@ EXPR.excited = {
   burst: { act: {}, hops: [[120, 480], [620, 980]], accents: [['sparkle', 0], ['sparkle', 200], ['heart', 400]] }
 };
 
+// Mopey: a dog left alone too long (founder 2026-10-26: "the dog gets sad the less you login ... you can physically see
+// it become depressed"). Not crying: slumped low, heavy lids, eyes on the floor, ears flat, the tail down and still,
+// one slow sigh a loop. mood.mjs puts it on a neglected dog; a game played brings the happy face back.
+EXPR.mopey = {
+  name: 'Mopey',
+  act: {
+    lidRest: [[0, 0.5], [2600, 0.5], [3000, 0.72], [3900, 0.72], [4300, 0.5], [7200, 0.5]],
+    slant: flat(0.8), browTilt: flat(0.9), brows: flat(-0.1), pupil: flat(0.95), lookY: flat(4.5), lookX: [[0, -1.5], [3600, 1.2], [7200, -1.5]],
+    mouth: flat(-0.35), mouthW: flat(0.75), pant: flat(0), joy: flat(0),
+    headY: [[0, 9], [2800, 9], [3300, 12], [3900, 12], [4400, 9], [7200, 9]], tilt: flat(-5),
+    earBack: flat(1), fold: flat(1), tailRest: flat(-100), tailAmp: flat(0.02), tailCurl: flat(-12), notice: flat(0.3)
+  },
+  lid: flat(0),
+  hops: [], hopK: 1,
+  accents: [['tear', 3200, 2400]],
+  burst: { act: { lookY: [[0, -1], [B, -1]], lidRest: [[0, 0.3], [B, 0.3]], tailAmp: [[0, 0.3], [B, 0.3]] }, hops: [], accents: [] }
+};
+
 var EXPR_ORDER = ['happy', 'overjoyed', 'excited', 'hyped', 'dance', 'bashful', 'love', 'goofy', 'high', 'sleepy',
-                  'sad', 'puppy', 'surprised', 'curious', 'lockedin', 'grumpy', 'furious', 'proud', 'mog', 'shades'];
+                  'mopey', 'sad', 'puppy', 'surprised', 'curious', 'lockedin', 'grumpy', 'furious', 'proud', 'mog', 'shades'];
 
 var DEF = { notice: 1, joy: 0, tilt: 0, shift: 0, wiggle: 0, wobble: 0, brows: 0, browTilt: 0, browSkew: 0,
             slant: 0, lidRest: 0, cheek: 0, lookX: 0, lookY: 0, derp: 0, blush: 0, tongue: 0, mouth: 0.32, mouthW: 1,

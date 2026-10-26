@@ -1,20 +1,20 @@
 {
   "name": "pup-duel",
   "version": "0.1.0",
-  "commit": "b333a365ddb6a86b3f8f357a78b2afcf19df53c4",
-  "vendoredAt": "2026-10-26T05:36:32.351Z",
+  "commit": "162305c46a5134bbfa6580155fe95b0f76760447",
+  "vendoredAt": "2026-10-26T09:55:50.982Z",
   "migration": {
     "file": "supabase/migrations/0001_pup_duel.sql",
-    "sha": "f249619fcb33ad9b"
+    "sha": "e56d1214cee93f99"
   },
   "migrations": [
     {
       "file": "supabase/migrations/0001_pup_duel.sql",
-      "sha": "f249619fcb33ad9b"
+      "sha": "e56d1214cee93f99"
     },
     {
       "file": "supabase/migrations/0002_pup_shop.sql",
-      "sha": "d9331764aa1b1e41"
+      "sha": "4622a06f3447148c"
     },
     {
       "file": "supabase/migrations/0003_pup_ranked.sql",
@@ -26,12 +26,12 @@
     }
   ],
   "files": {
-    "duel/accounts.mjs": "15c0e7875e873d5e",
-    "duel/bot.mjs": "abc48db752f94dfb",
-    "duel/core.mjs": "5412e632e5716a52",
+    "duel/accounts.mjs": "47588cd5f59ddd28",
+    "duel/bot.mjs": "7d5f3beda682c9c6",
+    "duel/core.mjs": "57ee0a444cb292c9",
     "duel/lobby.mjs": "c14da4e110c2e0b4",
     "duel/locker.mjs": "51f7f4b6e71aad77",
-    "duel/pack.mjs": "2a1d30325be813bb",
+    "duel/pack.mjs": "043065b47f46db3a",
     "duel/ranked.mjs": "32e1714ebb96cca6",
     "duel/realtime.mjs": "c34fcfc8a1ae8843",
     "duel/rng.mjs": "ec881a104ffe0588",
@@ -66,9 +66,11 @@
     "engine/plugins/random/random.alea.mjs": "d10560169410b6b0",
     "engine/plugins/random/random.mjs": "21a9e8c9a4ce9386",
     "pup/play.mjs": "8df10007ab5074ff",
-    "pup/rig/breeds.mjs": "98db62ea7721b752",
-    "pup/rig/coats.mjs": "73444a61d457ea77",
-    "pup/rig/expressions.mjs": "c5b32f2682eb4510",
+    "pup/rig/breeds.mjs": "fc3acb7993d47816",
+    "pup/rig/coats.mjs": "2b450644e7f9e1cc",
+    "pup/rig/expressions.mjs": "c927096c8bb5c8e9",
+    "pup/rig/eyes.mjs": "f1bece2f6d3a1aee",
+    "pup/rig/gifts.mjs": "9674479ad3d487e7",
     "pup/rig/icons/archie.png": "c0f7da8fdc735433",
     "pup/rig/icons/bagel.png": "e285cf601f7c238e",
     "pup/rig/icons/barney.png": "b92e00343b3b8795",
@@ -79,16 +81,23 @@
     "pup/rig/icons/coco.png": "54e635b829dda2a8",
     "pup/rig/icons/dash.png": "df9a546e9485d583",
     "pup/rig/icons/digger.png": "13e874e2b85caa8f",
+    "pup/rig/icons/doge.png": "6b8ff7ed43a48079",
     "pup/rig/icons/domino.png": "620d565afaaaac1e",
     "pup/rig/icons/duke.png": "d4f1f0b95a1bddaa",
+    "pup/rig/icons/eevee.png": "9cb198c6bb363058",
+    "pup/rig/icons/espeon.png": "52896c7a1a1ec33e",
+    "pup/rig/icons/flareon.png": "f00d5443f4f780e1",
     "pup/rig/icons/flash.png": "9d153da236286b5a",
     "pup/rig/icons/fudge.png": "ce69169cf465c778",
     "pup/rig/icons/gaston.png": "1f8f6a8f7e2ad6b4",
     "pup/rig/icons/ghost.png": "7fdeff1360c37abf",
+    "pup/rig/icons/glaceon.png": "8124671f4457eb13",
     "pup/rig/icons/heidi.png": "55c9505397bb0879",
     "pup/rig/icons/honey.png": "1929a31789bf4fd5",
+    "pup/rig/icons/jolteon.png": "4aac794e3dfa967f",
     "pup/rig/icons/kiko.png": "37ed46c7bab86bc5",
     "pup/rig/icons/koda.png": "569f097fcd5ed136",
+    "pup/rig/icons/leafeon.png": "ab8f36afc90191b9",
     "pup/rig/icons/leo.png": "46df29ce6cc96d3e",
     "pup/rig/icons/lulu.png": "b5b680e946e963fc",
     "pup/rig/icons/max.png": "8d683dfa83299802",
@@ -110,21 +119,25 @@
     "pup/rig/icons/rusty.png": "4995dcda99170035",
     "pup/rig/icons/scout.png": "669355435caa95ca",
     "pup/rig/icons/sunny.png": "749def085a9e03a2",
+    "pup/rig/icons/sylveon.png": "818e9dc62760d3c7",
+    "pup/rig/icons/umbreon.png": "b8b7d8d0beab02dd",
+    "pup/rig/icons/vaporeon.png": "1a0f7c03a5a86bf3",
     "pup/rig/icons/waffles.png": "44ff5e3a5879da7e",
     "pup/rig/icons/winston.png": "07d460c4ea27f86f",
     "pup/rig/icons/ziggy.png": "20327550c4376fcb",
     "pup/rig/index.html": "a2808c7e1e969a7c",
+    "pup/rig/mood.mjs": "f1ecf7deb725e444",
     "pup/rig/motion.mjs": "1d3cf3d09837c316",
     "pup/rig/moves.mjs": "77c2d6b08c984dc9",
-    "pup/rig/parts.mjs": "cec32f1bd5a23d16",
-    "pup/rig/rig.mjs": "a83215113ac3f677",
-    "pup/rig/stage.mjs": "8a53f159cac6c6a4",
+    "pup/rig/parts.mjs": "0f100b9c07e0d720",
+    "pup/rig/rig.mjs": "5e977f2eca64bd4b",
+    "pup/rig/stage.mjs": "10abb0dd0731766b",
     "pup/rig/still.mjs": "e5089c92c4ee67ba",
-    "pup/wardrobe.mjs": "15602c75ea44cdcd",
-    "ui/duel.css": "564e2ba50ee9f047",
-    "ui/duel.mjs": "a8537cbc9fc933a8",
+    "pup/wardrobe.mjs": "ef752f519cedeb65",
+    "ui/duel.css": "7fe2fe7c71b4c1b9",
+    "ui/duel.mjs": "ff0faf14e489ea87",
     "ui/icons.mjs": "eb006c95a8217047",
     "ui/ranked.mjs": "d1943fcfdc948a9d",
-    "ui/shop.mjs": "27946ce0120abd98"
+    "ui/shop.mjs": "3da8916df5af69a6"
   }
 }

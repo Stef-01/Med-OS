@@ -2,6 +2,7 @@
 // Part of the dog kit (public/doberman/): motion.mjs (easing, keyframes, the loop's clock), expressions.mjs (what a
 // dog can feel), breeds.mjs (who the dogs are), parts.mjs (how a dog is drawn), rig.mjs (one dog, animated) and
 // stage.mjs (the page: the scene, the menu, the embed's messages). docs/doberman/README.md has the map.
+import { pupilMarkup, eyeShape, irisOf } from './eyes.mjs';
 
 // ---- drawing helpers ----
 var NS = 'http://www.w3.org/2000/svg';
@@ -142,6 +143,26 @@ function paint(svg, c) {
   var s = typeof svg === 'function' ? svg(c.geo, c) : svg;
   return s.replace(/\{([A-Za-z]+)\}/g, function (all, k) { return c.pal[k] || all; });
 }
+// Neglect, in the dogs' flat style: a dull grey wash, mud blotches and a few matted knots (dark tangled tufts). The rig
+// fades the group in from mood.mjs's dirt; a played game takes it away.
+var MUD = '#6b4a2e', MUD2 = '#54391f', KNOT = '#3d342c';
+function GRIME_BODY(bL, w, h) {
+  var x = function (f) { return r3(bL + w * f); }, out = '<rect x="' + (bL - 4) + '" y="-24" width="' + (w + 8) + '" height="' + (h + 8) + '" fill="#7d7a74" opacity="0.32"/>';
+  [[0.18, 14, 9, 6], [0.42, 30, 11, 7], [0.7, 8, 8, 5.5], [0.85, 36, 10, 6], [0.3, 46, 7, 4.5]].forEach(function (b, i) {
+    out += '<ellipse cx="' + x(b[0]) + '" cy="' + b[1] + '" rx="' + b[2] + '" ry="' + b[3] + '" fill="' + (i % 2 ? MUD2 : MUD) + '" opacity="0.85"/>';
+  });
+  [[0.12, -10], [0.36, -14], [0.58, -12], [0.8, -8]].forEach(function (k) {
+    var cx = bL + w * k[0], cy = k[1];
+    out += '<path d="M' + r3(cx - 6) + ' ' + cy + ' q3 -6 6 0 q3 6 6 0 M' + r3(cx - 4) + ' ' + (cy + 4) + ' q2 -4 4 0 q2 4 4 0" fill="none" stroke="' + KNOT + '" stroke-width="2" stroke-linecap="round"/>';
+  });
+  return out;
+}
+var GRIME_HEAD = '<rect x="-60" y="-60" width="122" height="120" fill="#7d7a74" opacity="0.3"/>' +
+  '<ellipse cx="-32" cy="-44" rx="12" ry="7" fill="' + MUD + '" opacity="0.85"/><ellipse cx="36" cy="10" rx="11" ry="7" fill="' + MUD2 + '" opacity="0.85"/>' +
+  '<ellipse cx="24" cy="-50" rx="7" ry="4.6" fill="' + MUD2 + '" opacity="0.85"/><ellipse cx="-38" cy="18" rx="8" ry="5" fill="' + MUD + '" opacity="0.8"/>' +
+  '<circle cx="-14" cy="-50" r="2.6" fill="' + MUD + '"/><circle cx="44" cy="-22" r="2.2" fill="' + MUD2 + '"/>' +
+  '<path d="M-44 -10 q3 -7 7 0 q3 7 7 0 M40 -32 q3 -7 7 0 q3 7 7 0 M-8 -54 q3 -6 7 0 q3 6 7 0 M-46 30 q3 -6 6 0 q3 6 6 0" fill="none" stroke="' + KNOT + '" stroke-width="2.6" stroke-linecap="round"/>';
+
 function marksOn(c, on) { return (c.marks || []).filter(function (m) { return m.on === on; }).map(function (m) { return paint(m.svg, c); }).join(''); }
 function clipped(id, outline, inner) { return inner ? '<clipPath id="' + id + '">' + outline + '</clipPath><g clip-path="url(#' + id + ')">' + inner + '</g>' : ''; }
 
@@ -189,7 +210,8 @@ function dogMarkup(c, P) {
       var U = UP_EARS[c.earShape || 'dober'];
       back += '<g data-p="ear' + side + '">' + U.base(o, inner) + '</g>';
       tips += '<g data-p="tip' + side + '"><path data-p="tipOut' + side + '" d="' + (U.out || 'M0 0') + '" fill="' + (U.out ? o : 'none') + '"/>' +
-        '<path data-p="tipIn' + side + '" d="' + (U.in || 'M0 0') + '"' + (U.in ? ' fill="' + inner + '"' : '') + '/></g>';
+        '<path data-p="tipIn' + side + '" d="' + (U.in || 'M0 0') + '"' + (U.in ? ' fill="' + inner + '"' : '') + '/>' +
+        (U.out ? clipped(P + '-tipm' + side, '<path d="' + U.out + '"/>', marksOn(c, 'ear' + side)) : '') + '</g>';   // an upright ear's marks ride its tip (a band, a leaf)
     } else {
       var F = FLOP_EARS[c.flop.shape || 'pill'](c.flop.w, c.flop.h);
       front += '<g data-p="ear' + side + '">' + F.draw(o) + clipped(P + '-ear' + side, '<path d="' + F.d + '"/>', marksOn(c, 'ear' + side)) + '</g>';
@@ -222,6 +244,8 @@ function dogMarkup(c, P) {
         bodyRect + ' fill="' + p.body + '"/>' +
         '<clipPath id="' + P + '-body">' + bodyRect + '/></clipPath>' +
         (bodyMarks ? '<g clip-path="url(#' + P + '-body)">' + bodyMarks + '</g>' : '') +
+        // neglect (mood.mjs): the fur dulled, mud on the coat and matted knots, faded in by the rig (rig.setMood)
+        '<g data-p="grimeB" opacity="0" clip-path="url(#' + P + '-body)">' + GRIME_BODY(bL, c.body.w, c.body.h) + '</g>' +
         // what lies on the body (a cape's near side: a back piece's [data-on], stage.mjs moves it here) over the coat and
         // its marks, trimmed to the body's outline and fitted to its build (drape); under a curled tail and the legs
         '<g data-p="wearOn" clip-path="url(#' + P + '-body)"><g data-p="wearOnPop"><g data-p="wearOnFit" transform="' + drape(c).on + '"></g></g></g>' +
@@ -239,12 +263,16 @@ function dogMarkup(c, P) {
       '</g>' +
       '<g data-p="head">' +
         (c.mane ? MANE(p, c) : '') +
+        marksOn(c, 'behind') +   // unclipped, behind the head: a ruff, a frill, a spiky collar (the Eevee family)
         '<g data-p="earsBack" id="' + P + '-eb">' + back + '</g>' +
         '<path d="' + headPath + '" fill="' + p.coat + '"/>' +
         clipped(P + '-head', '<path d="' + headPath + '"/>', marksOn(c, 'head')) +
+        '<g data-p="grimeH" opacity="0">' + clipped(P + '-headg', '<path d="' + headPath + '"/>', GRIME_HEAD) + '</g>' +
         (c.bib ? BIB(p, c) : '') +
         '<g data-p="earsFront">' + front + '</g>' +
         '<g data-p="earTips" id="' + P + '-et">' + tips + '</g>' +
+        marksOn(c, 'crest') +    // unclipped, over the head and ears: a tuft, a fin, a headpiece, a bow
+        ''+
         '<g data-p="feat">' +
           '<rect data-p="browL" x="' + (-10.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.brow + '"/>' +
           '<rect data-p="browR" x="' + (12.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.brow + '"/>' +
@@ -256,10 +284,10 @@ function dogMarkup(c, P) {
             // both whites as ONE outline: two clip edges meeting at the centre line leave a hairline
             '<path data-p="white" d="M1 -17.4 H-14.4 A8 8 0 0 1 -22.4 -25.4 V-33.3 A11.7 11.7 0 0 1 1 -33.3 A11.7 11.7 0 0 1 24.4 -33.3 V-25.4 A8 8 0 0 1 16.4 -17.4 Z" fill="#ffffff"/>' +
             '<g clip-path="url(#' + P + '-eyeL)"><g data-p="pupilL">' +
-              '<rect x="-13" y="-40" width="11.4" height="16" rx="5.7" fill="' + p.ink + '"/><circle cx="-9.6" cy="-35.8" r="2.2" fill="#fff"/></g>' +
+              pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, -7.3, -1) + '</g>' +
               '<g data-p="heyeL">' + heye + '</g></g>' +
             '<g clip-path="url(#' + P + '-eyeR)"><g data-p="pupilR">' +
-              '<rect x="6.4" y="-40" width="11.4" height="16" rx="5.7" fill="' + p.ink + '"/><circle cx="9.8" cy="-35.8" r="2.2" fill="#fff"/></g>' +
+              pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, 12.1, 1) + '</g>' +
               '<g data-p="heyeR">' + heye + '</g></g>' +
             // the lids, and the cheeks that rise into a squint, wear the face round each eye (a patch over one: its colour)
             '<g clip-path="url(#' + P + '-lidL)">' +

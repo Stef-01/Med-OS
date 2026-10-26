@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-411",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:49:13.952Z",
+ "questions": [
+  {
+   "id": "osce-amsa-411-skills",
+   "cat": "skills",
+   "stem": "Frank, 66, is in your GP room with fast irregular palpitations right now. His radial pulse is irregularly irregular. The practice nurse is with you. You want to show the examiner whether he has a pulse deficit. Which technique is best?",
+   "options": [
+    "Palpate both radial pulses at the same time and compare their timing",
+    "Palpate the radial and femoral pulses together and feel for any delay",
+    "Count the apex rate by auscultation while the radial is counted, over 60 s",
+    "Count the radial pulse for 15 seconds and multiply the result by four"
+   ],
+   "answer": 2,
+   "why": "A pulse deficit is when the apical rate is higher than the radial rate. You find it by counting both at the same time for a full minute. It is typical of AF, where some beats are too weak to reach the wrist.",
+   "notes": [
+    "Comparing both radials looks for radio-radial delay (e.g. subclavian stenosis or dissection), not for beats that fail to reach the wrist.",
+    "Radio-femoral delay is a sign of coarctation of the aorta and does not compare the heart rate with the peripheral pulse rate.",
+    null,
+    ">Counting for 15 seconds is unreliable in an irregular rhythm and only measures the radial rate, which undercounts the true ventricular rate in AF."
+   ]
+  },
+  {
+   "id": "osce-amsa-411-clinical",
+   "cat": "clinical",
+   "stem": "Frank, 66, has newly diagnosed paroxysmal AF and is now back in sinus rhythm. He has hypertension but no diabetes, stroke, heart failure or vascular disease. BMI 36, eGFR 75, Hb 148, platelets and INR normal. He drinks about nine middies of full-strength beer a day. Which stroke prevention plan is best?",
+   "options": [
+    "Aspirin 100 mg daily, as his AF is paroxysmal rather than persistent",
+    "Apixaban 5 mg twice daily, with support to cut down his alcohol intake",
+    "Apixaban 2.5 mg twice daily, because heavy drinking raises bleeding risk",
+    "No anticoagulant until his alcohol intake has fallen to safe levels"
+   ],
+   "answer": 1,
+   "why": "His CHA2DS2-VA score is 2 (age 65 to 74, hypertension), so he needs oral anticoagulation, preferably a DOAC. Apixaban stays at the full 5 mg twice daily unless he meets two of: age 80 or over, weight 60 kg or under, creatinine 133 µmol/L or over.",
+   "notes": [
+    "Aspirin does not prevent stroke well in AF and still causes bleeding, and paroxysmal AF carries a stroke risk similar to persistent AF.",
+    null,
+    "Alcohol is not a criterion for reducing the apixaban dose, and the 2.5 mg dose would leave him under-protected from stroke.",
+    "You lower bleeding risk by treating modifiable factors such as alcohol and BP, not by withholding indicated anticoagulation in the meantime."
+   ]
+  },
+  {
+   "id": "osce-amsa-411-physio",
+   "cat": "physio",
+   "stem": "Frank's ECG during palpitations shows a fibrillatory baseline with no P waves and an irregularly irregular narrow-complex rhythm at about 110/min. His atria are depolarising chaotically at 350 to 600/min. Which mechanism best explains this ventricular rate and rhythm?",
+   "options": [
+    "The sinoatrial node fires irregularly at around 110 impulses per minute",
+    "A ventricular escape focus takes over and fires at an irregular rate",
+    "The bundle of His blocks alternate atrial impulses in a fixed 2:1 ratio",
+    "The AV node is refractory after each impulse, so only some pass, at random"
+   ],
+   "answer": 3,
+   "why": "The AV node conducts slowly and stays refractory after each impulse it passes, so it filters the chaotic atrial impulses and lets only some through, at random. That is why the narrow-complex response is irregularly irregular. Rate-control drugs such as beta-blockers work by lengthening AV nodal refractoriness.",
+   "notes": [
+    "In AF the sinoatrial node is overridden by chaotic atrial activity, which is why there are no P waves.",
+    "A ventricular escape rhythm is slow (20 to 40/min) and broad-complex, not a narrow-complex rhythm at about 110/min.",
+    "A fixed conduction ratio gives a regular ventricular rhythm, as in atrial flutter with 2:1 block, not an irregularly irregular one.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-411-anatomy",
+   "cat": "anatomy",
+   "stem": "Frank, 66, has paroxysmal AF without valve disease. You explain that the main danger is a clot travelling to the brain and causing a stroke. Where in the heart does this thrombus most often form?",
+   "options": [
+    "Left atrial appendage",
+    "Right atrial appendage",
+    "Left ventricular apex",
+    "Coronary sinus"
+   ],
+   "answer": 0,
+   "why": "Over 90% of thrombi in non-valvular AF form in the left atrial appendage, a blind-ended, trabeculated pouch where blood pools once the atrium stops contracting. Clot from the left heart embolises into the systemic circulation, including the brain.",
+   "notes": [
+    null,
+    "Clot from the right atrium would go to the lungs as a pulmonary embolus rather than to the brain, and the right appendage is a much less common site.",
+    "Left ventricular apical thrombus is linked to anterior myocardial infarction or cardiomyopathy, not to AF with normal ventricular function.",
+    "The coronary sinus drains venous blood into the right atrium and is not a site where clot forms in AF."
+   ]
+  }
+ ]
+}

@@ -274,6 +274,17 @@ export const BREEDS = {
       bib: 'chest', body: { w: 126, h: 90 }, leg: 17, floorY: 88, tail: { len: [16, 15, 14], w: 18, rest: -66, curl: 14, inner: 7 },
       wag: { slow: 12, fast: 24, amp: 28 }, hopH: 8, flopGain: 2.2, yaw0: -0.3, tongueSide: 0 }
   },
+  // The Eevee family (founder 2026-10-26: "Put in Evee from pokemon as one of the dogs, and all of the eeveelutions,
+  // and they only are unlocked when you type pokemon in the special gift section"): a fox-like head with huge eyes and
+  // a small muzzle, tall pointed ears, a fluffy ruff, a plume tail with a lighter core. Each one is a dog below (its
+  // colours and marks), each carries `gift: 'pokemon'`: a host lists it only once that gift is redeemed (gifts.mjs)
+  eevee: {
+    name: 'Eevee family', short: 'Eevee',
+    build: { head: { h: 92, r: 42 }, muzzle: { w: 38, h: 28 }, eye: 1.24, pupil: 1.08, brow: { w: 7, h: 3.6, y: -52 },
+      ears: ['up', 'up'], earShape: 'chi', earScale: 1.4, earAt: { up: { L: { x: -34, y: -42 }, R: { x: 36, y: -42 } } },
+      foldable: false, body: { w: 96, h: 70 }, leg: 12, floorY: 68, tail: { len: [16, 15, 14], w: 26, curl: 50, inner: 12, over: true },
+      wag: { slow: 18, fast: 34, amp: 36 }, hopH: 13, flopGain: 1.2, yaw0: -0.3, tongueSide: 0 }
+  },
   // Chow Chow: a lion's mane, small round ears half in it, a short flat muzzle, deep-set eyes, the blue-black tongue
   chow: {
     name: 'Chow Chow', short: 'Chow',
@@ -339,6 +350,31 @@ export const BREEDS = {
 };
 
 /* the dogs, grouped by breed: the menus list them in this order. `hint`: a line of personality for a tooltip */
+/* the Eevee family's own shapes, in head units (the head's top at y -55, its chin at 37 on this build; an ear's root at
+   y 2, its tip at -34.5): what makes each one itself sits outside the head (marks 'behind' and 'crest', unclipped),
+   or on an ear (clipped to it) */
+const arcPts = (cx, cy, rx, ry, a0, a1, n, f) => Array.from({ length: n }, (_, i) => { const a = a0 + (a1 - a0) * i / (n - 1); return f(cx + rx * Math.cos(a), cy + ry * Math.sin(a), i); });
+const R1 = v => Math.round(v * 10) / 10;
+/* a fluffy ruff under the chin and down the chest (Eevee, Flareon): two tones of scallops */
+const RUFF = (sh, c, k = 1) => arcPts(1, 30, 44 * k, 22 * k, -0.25, Math.PI + 0.25, 11, (x, y) => `<circle cx="${R1(x)}" cy="${R1(y + 3)}" r="${R1(13 * k)}" fill="${sh}"/>`).join('') +
+  `<ellipse cx="1" cy="${R1(26 * k)}" rx="${R1(44 * k)}" ry="${R1(24 * k)}" fill="${sh}"/>` +
+  arcPts(1, 27, 40 * k, 19 * k, -0.2, Math.PI + 0.2, 11, (x, y) => `<circle cx="${R1(x)}" cy="${R1(y)}" r="${R1(12 * k)}" fill="${c}"/>`).join('') +
+  `<ellipse cx="1" cy="${R1(22 * k)}" rx="${R1(40 * k)}" ry="${R1(20 * k)}" fill="${c}"/>`;
+/* a zigzag ring between two radii round a centre, from angle a0 to a1 */
+const zig = (cx, cy, r0, r1, a0, a1, n) => 'M' + Array.from({ length: 2 * n + 1 }, (_, i) => { const a = a0 + (a1 - a0) * i / (2 * n), r = i % 2 ? r1 : r0; return `${R1(cx + r * Math.cos(a))} ${R1(cy + r * Math.sin(a))}`; }).join(' L') + ' Z';
+/* Vaporeon's frill: a cream fan round the back of the head, scalloped, over a shadow ring */
+const FRILL = (sh, c) => `<path d="${zig(1, -6, 58, 70, Math.PI * 0.82, Math.PI * 2.18, 9)}" fill="${sh}"/><circle cx="1" cy="-6" r="58" fill="${sh}"/>` +
+  arcPts(1, -6, 58, 56, Math.PI * 0.86, Math.PI * 2.14, 12, (x, y) => `<circle cx="${R1(x)}" cy="${R1(y)}" r="9" fill="${c}"/>`).join('') + `<circle cx="1" cy="-6" r="56" fill="${c}"/>`;
+/* Jolteon's spikes: a yellow crown of points round the back of the head (k: their reach) */
+const SPIKES = (sh, c, k = 1) => `<path d="${zig(1, -10, 52, 52 + 18 * k, Math.PI * 0.9, Math.PI * 2.1, 8)}" fill="${sh}"/><path d="${zig(1, -12, 48, 48 + 14 * k, Math.PI * 0.95, Math.PI * 2.05, 8)}" fill="${c}"/>`;
+/* and its white spiked collar under the chin */
+const COLLAR = (sh, c) => `<path d="${zig(1, 18, 30, 52, -0.15, Math.PI + 0.15, 9)}" fill="${sh}"/><ellipse cx="1" cy="18" rx="44" ry="30" fill="${sh}"/><path d="${zig(1, 15, 28, 46, -0.1, Math.PI + 0.1, 9)}" fill="${c}"/><ellipse cx="1" cy="15" rx="40" ry="27" fill="${c}"/>`;
+/* on an ear: a darker tip, a ring band (Umbreon), a fin's edge (Vaporeon), a leaf's green half and vein (Leafeon) */
+const EARTIP = c => `<path d="M-20 -26 Q0 -22 20 -26 V-40 H-20 Z" fill="${c}"/>`;
+const BAND = c => `<rect x="-20" y="-16" width="40" height="7" fill="${c}"/>`;
+const FINEAR = c => `<path d="M-20 4 L-12 4 Q-6 -16 0 -30 Q6 -16 12 4 L20 4 V-40 H-20 Z" fill="${c}"/>`;
+const LEAFEAR = (c, v) => `<path d="M-20 -8 Q0 -14 20 -8 V-40 H-20 Z" fill="${c}"/><path d="M0 -10 V-32" stroke="${v}" stroke-width="2" stroke-linecap="round"/>`;
+
 export const DOGS = [
   { id: 'duke', name: 'Duke', breed: 'doberman', hint: 'Steady and proud', expr: 'overjoyed', scale: 1.5, mirror: false,
     pal: { coat: '#463e62', sh: '#352e4e', tan: '#e5a259', tanSh: '#cf8a45', feature: '#8a80ad', ink: '#241f36', nose: '#241f36',
@@ -644,7 +680,83 @@ export const DOGS = [
     ],
     pal: { coat: '#b9693d', sh: '#a05832', tan: '#d8925e', tanSh: '#c27e4e', feature: '#4e2410', ink: '#22140c', nose: '#2a1a16',
       noseHi: '#5a463e', collar: '#58cc02', disc: '#eaffd6', floor: '#c9f0a8', blaze: '#fbf6ef', ear: '#9a5230', brow: '#d8925e',
-      tail: '#a85c34', foot: '#fbf6ef', footFar: '#ebe0d2' } }
+      tail: '#a85c34', foot: '#fbf6ef', footFar: '#ebe0d2' } },
+  { id: 'doge', name: 'Doge', breed: 'shiba', hint: 'Such study. Very wow', expr: 'mog', scale: 1.38, mirror: false,
+    marks: [
+      { on: 'head', svg: '<ellipse cx="-30" cy="0" rx="19" ry="15" fill="{urajiro}"/><ellipse cx="32" cy="0" rx="19" ry="15" fill="{urajiro}"/>' }
+    ],
+    pal: { coat: '#e7b268', sh: '#cf9a50', tan: '#fbf0d8', tanSh: '#f0dfbc', feature: '#8a5a1e', ink: '#2b1a0a', nose: '#2b1a0a',
+      noseHi: '#5e4228', collar: '#ff4b4b', disc: '#fff6e0', floor: '#ffe3b0', urajiro: '#fbf0d8', brow: '#fbf0d8', earIn: '#fbf0d8',
+      tail: '#dba25a', tailIn: '#fbf0d8', bib: '#fbf0d8', bibSh: '#efdcb8', foot: '#fbf0d8', footFar: '#f0dfbc' } },
+  { id: 'eevee', name: 'Eevee', breed: 'eevee', gift: 'pokemon', hint: 'Could become anything', expr: 'excited', scale: 1.34, mirror: false,
+    marks: [
+      { on: 'behind', svg: RUFF('{ruffSh}', '{ruff}') },
+      { on: 'earL', svg: EARTIP('{earTip}') }, { on: 'earR', svg: EARTIP('{earTip}') }
+    ],
+    pal: { tag: '#dd9550', tagSh: '#c47d3c', coat: '#dd9550', sh: '#c47d3c', tan: '#e6a463', tanSh: '#d38f50', muzzle: '#e6a463', brow: '#e6a463', ink: '#2a1608', nose: '#3a2010', noseHi: '#6a4630', feature: '#5a3418',
+      collar: '#dd9550', disc: '#fff0dc', floor: '#ffdcae', ruff: '#fbe7c0', ruffSh: '#ecd09c', earIn: '#7a4320', earTip: '#a8642c', tail: '#dd9550', tailIn: '#fbe7c0', foot: '#e6a463', footFar: '#d38f50' } },
+  { id: 'vaporeon', name: 'Vaporeon', breed: 'eevee', gift: 'pokemon', hint: 'Melts into the water', expr: 'overjoyed', scale: 1.34, mirror: true,
+    marks: [
+      { on: 'behind', svg: FRILL('{frillSh}', '{frill}') },
+      { on: 'crest', svg: '<path d="M-7 -53 C-6 -66 -2 -78 4 -86 C8 -76 11 -64 10 -53 Z" fill="{fin}"/><path d="M4 -86 C8 -76 11 -64 10 -53 L5 -53 C6 -64 6 -76 4 -86 Z" fill="{finSh}"/>' },
+      { on: 'earL', svg: FINEAR('{finEdge}') }, { on: 'earR', svg: FINEAR('{finEdge}') }
+    ],
+    pal: { tag: '#62b8e8', tagSh: '#4a9ccc', coat: '#62b8e8', sh: '#4a9ccc', tan: '#78c4ee', tanSh: '#66b4e0', muzzle: '#78c4ee', brow: '#78c4ee', ink: '#14324a', nose: '#1e3e5a', noseHi: '#4a6e8c', feature: '#1f4e70',
+      collar: '#62b8e8', disc: '#e3f5ff', floor: '#bfe6fb', frill: '#fbf6e6', frillSh: '#d9d2bc', fin: '#2f6f9a', finSh: '#245a80', ear: '#f6d46a', earIn: '#e5b94a', finEdge: '#2f6f9a', tail: '#3f8cc0', tailIn: '#62b8e8', foot: '#78c4ee', footFar: '#66b4e0' } },
+  { id: 'jolteon', name: 'Jolteon', breed: 'eevee', gift: 'pokemon', hint: 'Static in every hair', expr: 'surprised', scale: 1.32, mirror: false,
+    marks: [
+      { on: 'behind', svg: SPIKES('{spikeSh}', '{spike}', 1) + COLLAR('{collarSh}', '{collarW}') }
+    ],
+    pal: { tag: '#f6cf3e', tagSh: '#dcb32a', coat: '#f6cf3e', sh: '#dcb32a', tan: '#f8da62', tanSh: '#eac74a', muzzle: '#f8da62', brow: '#f8da62', ink: '#2b2410', nose: '#3a3018', noseHi: '#6a5a38', feature: '#6a5410',
+      collar: '#f6cf3e', disc: '#fffbe0', floor: '#fbeba6', spike: '#f6cf3e', spikeSh: '#d4ac22', collarW: '#ffffff', collarSh: '#dfe3ea', earIn: '#4a3a20', tail: '#ffffff', tailIn: '#f6cf3e', foot: '#f8da62', footFar: '#eac74a' } },
+  { id: 'flareon', name: 'Flareon', breed: 'eevee', gift: 'pokemon', hint: 'Always running warm', expr: 'happy', scale: 1.36, mirror: true,
+    marks: [
+      { on: 'behind', svg: RUFF('{ruffSh}', '{ruff}', 1.15) },
+      { on: 'crest', svg: '<path d="M-20 -50 C-26 -74 -6 -94 16 -88 C30 -84 34 -70 26 -60 C24 -72 14 -78 4 -74 C12 -68 12 -58 4 -50 C0 -60 -8 -62 -12 -50 Z" fill="{ruffSh}"/><path d="M-16 -52 C-22 -72 -4 -90 15 -85 C27 -82 30 -72 25 -64 C21 -73 12 -77 2 -72 C9 -66 9 -58 3 -52 C-1 -59 -8 -60 -10 -52 Z" fill="{ruff}"/>' },
+      { on: 'earL', svg: EARTIP('{earTip}') }, { on: 'earR', svg: EARTIP('{earTip}') }
+    ],
+    pal: { tag: '#ee7a3a', tagSh: '#d4642c', coat: '#ee7a3a', sh: '#d4642c', tan: '#f28f52', tanSh: '#e47c3e', muzzle: '#f28f52', brow: '#f28f52', ink: '#2a1608', nose: '#3a1e10', noseHi: '#6a4430', feature: '#7a3412',
+      collar: '#ee7a3a', disc: '#fff0dc', floor: '#ffd2ae', ruff: '#fde39c', ruffSh: '#f2c866', earIn: '#c9541c', earTip: '#d4642c', tail: '#fde39c', tailIn: '#fff1c6', foot: '#f28f52', footFar: '#e47c3e' } },
+  { id: 'espeon', name: 'Espeon', breed: 'eevee', gift: 'pokemon', hint: 'Knows what you will answer', expr: 'proud', scale: 1.32, mirror: false, iris: 'violet',
+    marks: [
+      { on: 'behind', svg: '<path d="M-48 2 C-62 0 -68 10 -66 18 C-60 14 -54 14 -48 16 Z M50 2 C64 0 70 10 68 18 C62 14 56 14 50 16 Z" fill="{coat}"/>' },
+      { on: 'head', svg: '<circle cx="1" cy="-50" r="4.6" fill="{gem}"/><circle cx="-0.4" cy="-51.4" r="1.5" fill="#ffd1da"/>' }
+    ],
+    pal: { tag: '#eaa9d8', tagSh: '#d48fc2', coat: '#eaa9d8', sh: '#d48fc2', tan: '#f0bce2', tanSh: '#e2a6d2', muzzle: '#f0bce2', brow: '#f0bce2', ink: '#3a1e44', nose: '#5a2a4a', noseHi: '#8a5a7a', feature: '#8a4a7a',
+      collar: '#eaa9d8', disc: '#fbeaf6', floor: '#f4d0ea', gem: '#d8203a', earIn: '#9a5ec4', tail: '#d48fc2', tailIn: '#eaa9d8', foot: '#f0bce2', footFar: '#e2a6d2' } },
+  { id: 'umbreon', name: 'Umbreon', breed: 'eevee', gift: 'pokemon', hint: 'Glows after dark', expr: 'mog', scale: 1.34, mirror: true, iris: 'red',
+    tail: { len: [15, 14, 13], w: 22, curl: 50, inner: 0, over: true, dots: 13, at: [20, -6] },
+    marks: [
+      { on: 'head', svg: '<circle cx="1" cy="-51" r="5" fill="none" stroke="{ring}" stroke-width="3"/>' },
+      { on: 'earL', svg: BAND('{ring}') }, { on: 'earR', svg: BAND('{ring}') },
+      { on: 'body', svg: g => `<circle cx="${g.bL + 26}" cy="8" r="11" fill="none" stroke="{ring}" stroke-width="4.4"/><path d="M${g.bR - 30} 46 h18" stroke="{ring}" stroke-width="5" stroke-linecap="round"/>` }
+    ],
+    pal: { tag: '#424559', tagSh: '#373a4c', coat: '#424559', sh: '#373a4c', tan: '#4a4d62', tanSh: '#424559', muzzle: '#4a4d62', brow: '#4a4d62', ink: '#120f16', nose: '#100d14', noseHi: '#4a4658', feature: '#8c8aa0',
+      collar: '#424559', disc: '#eceaf6', floor: '#cfcde0', ring: '#f5c93a', earIn: '#373a4c', tail: '#424559', tailDots: '#f5c93a', foot: '#4a4d62', footFar: '#424559' } },
+  { id: 'leafeon', name: 'Leafeon', breed: 'eevee', gift: 'pokemon', hint: 'Photosynthesises during lectures', expr: 'happy', scale: 1.32, mirror: false,
+    marks: [
+      { on: 'crest', svg: '<path d="M-2 -50 C-16 -60 -14 -80 2 -92 C14 -80 14 -62 4 -50 Z" fill="{leaf}"/><path d="M1 -52 C0 -64 1 -76 2 -88" fill="none" stroke="{vein}" stroke-width="2" stroke-linecap="round"/>' },
+      { on: 'earL', svg: LEAFEAR('{leaf}', '{vein}') }, { on: 'earR', svg: LEAFEAR('{leaf}', '{vein}') }
+    ],
+    pal: { tag: '#f4e4b4', tagSh: '#dccb92', coat: '#f4e4b4', sh: '#dccb92', tan: '#f8ecc8', tanSh: '#ecdcac', muzzle: '#f8ecc8', brow: '#f8ecc8', ink: '#3a2a12', nose: '#5a3a1c', noseHi: '#8a6a4a', feature: '#8a6a3a',
+      collar: '#f4e4b4', disc: '#f0fbe0', floor: '#d6efb4', ear: '#f4e4b4', earIn: '#e8d49a', leaf: '#8cc63e', vein: '#5f9a24', tail: '#8cc63e', tailIn: '#b0dc6a', foot: '#a07a4a', footFar: '#8c6a3e' } },
+  { id: 'glaceon', name: 'Glaceon', breed: 'eevee', gift: 'pokemon', hint: 'Cool under exam pressure', expr: 'curious', scale: 1.32, mirror: true, iris: 'ice',
+    marks: [
+      { on: 'behind', svg: '<path d="M-44 -30 L-56 -8 L-50 26 L-40 4 Z M46 -30 L58 -8 L52 26 L42 4 Z" fill="{deep}"/><path d="M-50 26 L-44 -2 L-40 4 Z M52 26 L46 -2 L42 4 Z" fill="{deepSh}"/>' },
+      { on: 'crest', svg: '<path d="M-30 -52 L-18 -70 L1 -76 L20 -70 L32 -52 L18 -56 L1 -50 L-16 -56 Z" fill="{deep}"/><path d="M1 -76 L20 -70 L32 -52 L18 -56 L1 -50 Z" fill="{deepSh}"/><path d="M-6 -66 L1 -72 L8 -66 L1 -58 Z" fill="{light}"/>' },
+      { on: 'earL', svg: '<path d="M-20 -14 L0 -40 L20 -14 L0 -2 Z" fill="{deep}"/>' }, { on: 'earR', svg: '<path d="M-20 -14 L0 -40 L20 -14 L0 -2 Z" fill="{deep}"/>' },
+      { on: 'body', svg: g => `<path d="M${g.bL + 26} -4 L${g.bL + 34} 6 L${g.bL + 26} 16 L${g.bL + 18} 6 Z" fill="{deep}"/>` }
+    ],
+    pal: { tag: '#8ed2f0', tagSh: '#6fbadc', coat: '#8ed2f0', sh: '#6fbadc', tan: '#a4dcf4', tanSh: '#8ecbe8', muzzle: '#a4dcf4', brow: '#a4dcf4', ink: '#123048', nose: '#1a3a58', noseHi: '#3c5c78', feature: '#2a5a7a',
+      collar: '#8ed2f0', disc: '#e8f8ff', floor: '#c4e9f8', deep: '#3a7cba', deepSh: '#2c6498', light: '#bfe8fb', ear: '#8ed2f0', earIn: '#3a7cba', tail: '#3a7cba', tailIn: '#5a9ad0', foot: '#3a7cba', footFar: '#2c6498' } },
+  { id: 'sylveon', name: 'Sylveon', breed: 'eevee', gift: 'pokemon', hint: 'Wins every room with ribbons', expr: 'love', scale: 1.32, mirror: false, iris: 'blue',
+    marks: [
+      { on: 'crest', svg: '<path d="M30 -48 C26 -20 34 6 44 28" fill="none" stroke="{ribbon}" stroke-width="5" stroke-linecap="round"/><path d="M36 -46 C40 -18 50 2 58 18" fill="none" stroke="{bead}" stroke-width="5" stroke-linecap="round"/>' +
+        '<path d="M34 -50 L18 -62 L20 -44 Z M34 -50 L50 -62 L48 -44 Z" fill="{ribbon}"/><circle cx="34" cy="-50" r="5.4" fill="{bead}"/><circle cx="1" cy="34" r="0" fill="{ribbon}"/>' },
+      { on: 'behind', svg: '<path d="M-14 38 L-4 44 L-14 50 Z M16 38 L6 44 L16 50 Z" fill="{ribbon}"/><circle cx="1" cy="44" r="4" fill="{bead}"/>' }
+    ],
+    pal: { tag: '#fbf5f7', tagSh: '#ecdde4', coat: '#fbf5f7', sh: '#ecdde4', tan: '#fef9fb', tanSh: '#f2e6ec', muzzle: '#fef9fb', brow: '#fef9fb', ink: '#2a1a30', nose: '#4a2a3a', noseHi: '#7a5a6a', feature: '#a07090',
+      collar: '#fbf5f7', disc: '#fff0f7', floor: '#fbd3e6', ear: '#f59ac0', earIn: '#5aa6e0', ribbon: '#f47ab0', bead: '#5ab8ec', tail: '#f59ac0', tailIn: '#fbd0e2', foot: '#f59ac0', footFar: '#e286ae' } }
 ];
 
 /* one dog, everything the rig reads: the breed's build under the dog's own keys, and a palette with every role filled
@@ -670,6 +782,6 @@ export function resolve(d) {
 }
 
 /* what a host needs to name and show a dog: the menus, the duel, the push notifications */
-export const ROSTER = DOGS.map(d => ({ id: d.id, name: d.name, breed: d.breed, breedName: BREEDS[d.breed].name, breedShort: BREEDS[d.breed].short || BREEDS[d.breed].name, hint: d.hint }));
+export const ROSTER = DOGS.map(d => ({ id: d.id, name: d.name, breed: d.breed, breedName: BREEDS[d.breed].name, breedShort: BREEDS[d.breed].short || BREEDS[d.breed].name, hint: d.hint, ...(d.gift ? { gift: d.gift } : {}) }));
 export const DEFAULT_DOG = 'pip';
 export const dogById = id => ROSTER.find(d => d.id === id) || ROSTER.find(d => d.id === DEFAULT_DOG);

@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-307",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:40:56.398Z",
+ "questions": [
+  {
+   "id": "osce-amsa-307-skills",
+   "cat": "skills",
+   "stem": "Giuseppe, 66, is in the ED with sudden tearing central chest pain going through to his back, and a brief blackout. You move on to a focused examination and tell the examiner each step. Which bedside step most directly checks whether a dissection has spread into the aortic arch branches?",
+   "options": [
+    "Listen for a pericardial friction rub with him leaning forward",
+    "Feel for radio-femoral delay between the right radial and femoral pulses",
+    "Compare both radial pulses and measure the BP in both arms",
+    "Press on the sternum and costochondral joints for reproducible tenderness"
+   ],
+   "answer": 2,
+   "why": "A pulse deficit, or a systolic difference of more than 20 mmHg between the arms, shows the flap has involved the arch branches. It is a high-risk examination feature in the ADD-RS, so every patient with suspected dissection needs pulses and BP checked in both arms.",
+   "notes": [
+    "A rub is a sign of pericarditis and tells you nothing about blood flow in the arch branches.",
+    "Radio-femoral delay is the classic sign of coarctation. It compares an arm with a leg, so it cannot pick up a difference between the two arms.",
+    null,
+    "Chest wall tenderness is a cluster question for musculoskeletal pain. It does not test for dissection, and finding it would not rule dissection out."
+   ]
+  },
+  {
+   "id": "osce-amsa-307-clinical",
+   "cat": "clinical",
+   "stem": "At 10:24 Giuseppe, 66, feels faint: BP 96/60 in the left arm, HR 112, CRT 4 s. Bedside echo shows a moderate pericardial effusion with early right atrial collapse, a dilated aortic root with a possible flap, and aortic regurgitation. The cardiothoracic registrar is aware. What is the most appropriate immediate management?",
+   "options": [
+    "Start an IV esmolol infusion aiming for a heart rate of about 60/min",
+    "Withhold BP-lowering drugs, give small fluid or blood boluses, expedite theatre",
+    "Drain the pericardial effusion to dryness by ED pericardiocentesis",
+    "Give a rapid 2 L crystalloid bolus to bring the systolic BP above 140 mmHg"
+   ],
+   "answer": 1,
+   "why": "Hypotension in type A dissection points to tamponade, rupture or acute aortic regurgitation. Stop anti-impulse therapy, give only enough fluid or blood to keep him perfused and conscious, and get him to surgery, because surgery is what treats the haemopericardium.",
+   "notes": [
+    "Beta blockade removes the compensatory tachycardia in tamponade and can cause collapse, and he already has first-degree AV block on verapamil.",
+    null,
+    "Draining a haemopericardium to dryness can raise aortic pressure and cause catastrophic re-bleeding. Only controlled, small-volume drainage is used, and only if he arrests or cannot reach theatre.",
+    "Pushing the systolic BP high with large volumes raises wall stress and the risk of rupture. The aim is permissive, low-volume resuscitation."
+   ]
+  },
+  {
+   "id": "osce-amsa-307-physio",
+   "cat": "physio",
+   "stem": "On arrival Giuseppe, 66, had a BP of 150/88 and a HR of 98. If he had stayed hypertensive with his dissection, anti-impulse therapy would start with an IV beta blocker and add a vasodilator only afterwards. What is the main physiological reason for this order?",
+   "options": [
+    "A vasodilator alone lowers coronary perfusion pressure and causes myocardial ischaemia",
+    "Beta blockade prevents the cyanide toxicity caused by sodium nitroprusside",
+    "A vasodilator alone constricts the false lumen and stops branch vessel blood flow",
+    "A vasodilator alone causes reflex tachycardia, raising dP/dt and aortic wall stress"
+   ],
+   "answer": 3,
+   "why": "A fall in BP from a vasodilator triggers a baroreflex sympathetic surge, which raises the heart rate and the force of ventricular ejection (dP/dt). That increases shear stress on the torn aortic wall and can extend the flap. Beta blockade first blunts this response, with a target HR of about 60 and a systolic BP of 100 to 120 mmHg.",
+   "notes": [
+    "Lowering BP in a controlled way to a systolic of 100 to 120 mmHg does not usually cause ischaemia. The order of the drugs is about the reflex response, not coronary perfusion.",
+    "Cyanide toxicity depends on the dose and duration of nitroprusside. Beta blockers do not prevent it.",
+    "Vasodilators do not constrict the false lumen. Branch malperfusion comes from the flap, not from the choice of drug.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-307-anatomy",
+   "cat": "anatomy",
+   "stem": "Giuseppe, 66, has a weak right radial pulse and a right arm systolic BP 32 mmHg lower than the left. His CT aortogram shows a flap that starts in the ascending aorta and extends into an arch branch, narrowing it with false lumen. Involvement of which artery best explains his right arm findings?",
+   "options": [
+    "Brachiocephalic trunk",
+    "Left subclavian artery",
+    "Right common carotid artery",
+    "Right vertebral artery"
+   ],
+   "answer": 0,
+   "why": "The brachiocephalic trunk is the first branch of the arch and divides into the right subclavian and right common carotid arteries. Narrowing it lowers flow to the right arm, so the BP should be monitored in the left arm or through a left radial arterial line.",
+   "notes": [
+    null,
+    "The left subclavian artery supplies the left arm, so narrowing it would make the left arm read lower, not the right.",
+    "The right common carotid artery supplies the head and neck, not the arm. Its involvement would cause stroke symptoms, not a weak radial pulse.",
+    "The right vertebral artery branches off the subclavian and supplies the brain, so it does not carry blood to the arm."
+   ]
+  }
+ ]
+}

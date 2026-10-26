@@ -9,6 +9,7 @@ import { ctx, I, GI, GI_C, save, sess, attempted, curAttempt, confirmDlg, openPo
 import { startAttempt } from './session.mjs';
 import { requestCardHtml } from './requests-view.mjs';
 import { mcqCardHtml } from './mcq-view.mjs';
+import { libraryCardHtml } from './library-view.mjs';
 
 export function renderStart(main) {
   const s = sess(), n = s.queue.length, live = s.idx != null;
@@ -29,6 +30,7 @@ export function renderStart(main) {
       <span class="os-chev">${I.chevR}</span></button>
     ${requestCardHtml()}
     ${osceGames(ctx.mem).duel ? duelHtml() : ''}
+    ${libraryCardHtml()}
     ${mcqCardHtml()}
     ${doneHtml()}
   </div>`;

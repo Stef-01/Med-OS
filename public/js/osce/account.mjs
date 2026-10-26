@@ -12,7 +12,8 @@ export { account };
 /* the duel's own rules for a name and a PIN (one implementation: the vendored package's accounts.mjs) */
 export { nameError, pinError, NAME_RE, PIN_RE } from '../vendor/pup-duel/duel/accounts.mjs';
 
-async function rpc(fn, args) {
+/* one call to a token-checked function; the error is the server's own words (library/api.mjs uses it too) */
+export async function rpc(fn, args) {
   const { supabaseUrl: url, supabaseAnonKey: key } = cfg();
   let r;
   try {

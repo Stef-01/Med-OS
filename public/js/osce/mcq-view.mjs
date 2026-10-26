@@ -45,7 +45,7 @@ export function mcqCardHtml() {
 
 export async function mcqDlg() {
   if (!mine().length) return mcqForm();
-  openDialog({ kind: 'mcqs', title: 'Your questions', cls: 'os-dlg--small', action: `<button class="os-btn os-primary" data-os="mcqnew">${I.plus}<span>New</span></button>`, body: `<div class="os-reqs os-mcqs">${listHtml()}</div>` });
+  openDialog({ kind: 'mcqs', title: 'Submitted questions', cls: 'os-dlg--small', action: `<button class="os-btn os-primary" data-os="mcqnew">${I.plus}<span>New</span></button>`, body: `<div class="os-reqs os-mcqs">${listHtml()}</div>` });
   await loadStatus(); paintMcqs();
 }
 export function paintMcqs() { const d = dialogOf(ctx.ov, 'mcqs'); if (d) d.el.querySelector('.os-mcqs').innerHTML = listHtml(); }

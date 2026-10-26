@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-220",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:32:08.665Z",
+ "questions": [
+  {
+   "id": "osce-amsa-220-skills",
+   "cat": "skills",
+   "stem": "Sarah, 24, is in the ED with a regular narrow complex tachycardia at 150/min since 09:35. BP 114/72, alert, well perfused, no chest pain. Pads are on and a rhythm strip is running. You decide to try the modified Valsalva manoeuvre. Which instruction should you give her?",
+   "options": [
+    "Lie flat, blow into a 10 mL syringe for 15 s, then sit up quickly and stay up for 15 s",
+    "Sit upright, blow hard into the syringe for 5 s, then stay sitting quietly for a minute",
+    "Semi-recumbent, blow into a 10 mL syringe for 15 s, then lie flat with legs raised to 45°",
+    "Stand, hold your breath and bear down for 60 s, then sit down slowly on the trolley"
+   ],
+   "answer": 2,
+   "why": "Modified Valsalva (REVERT): she strains semi-recumbent for 15 s, hard enough to move the plunger of a 10 mL syringe, then lies flat straight away with her legs raised to 45° for 15 s. The leg raise boosts venous return and vagal tone in the release phase and roughly doubles the reversion rate.",
+   "notes": [
+    "This is the wrong way round: the leg raise and lying flat come after the strain. Sitting up afterwards cuts venous return and loses the reflex vagal surge.",
+    "A 5 s strain is too short to set off the reflex, and staying upright afterwards leaves out the postural step that makes the modified version work.",
+    null,
+    "A 60 s strain while standing is too long and risks syncope in a patient who is already light-headed. The standard strain is 15 s, done semi-recumbent."
+   ]
+  },
+  {
+   "id": "osce-amsa-220-clinical",
+   "cat": "clinical",
+   "stem": "Sarah, 24, stays in a regular narrow complex tachycardia at 150/min after two modified Valsalva attempts. BP 114/72, alert, no asthma, not on any rate-slowing drugs. She has an 18G antecubital cannula and a rhythm strip is running. Which adenosine regimen is correct?",
+   "options": [
+    "6 mg rapid IV push followed by a 20 mL saline flush; if no reversion, 12 mg rapid IV push",
+    "3 mg slow IV injection over 2 minutes, repeated every 5 minutes up to 12 mg in total",
+    "12 mg IV infusion over 10 minutes through the peripheral line, then reassess the rhythm",
+    "6 mg intramuscular injection into the deltoid, then 12 mg IM after 15 minutes if needed"
+   ],
+   "answer": 0,
+   "why": "Adenosine has a half-life of under 10 seconds, so give it as a rapid IV push through a proximal large vein, straight away followed by a saline flush: 6 mg first, then 12 mg (a further 12 mg can follow), with a rhythm strip recording.",
+   "notes": [
+    null,
+    "A slow injection lets the drug break down before it reaches the AV node. A 3 mg start is kept for central lines, heart transplant recipients or patients on dipyridamole, and even then it is a rapid push.",
+    "An infusion is ineffective: adenosine is cleared by red cells and endothelium within seconds, so it never reaches an effective level at the AV node.",
+    "Adenosine is not given intramuscularly. Absorption is far too slow for a drug with a half-life of seconds."
+   ]
+  },
+  {
+   "id": "osce-amsa-220-physio",
+   "cat": "physio",
+   "stem": "Sarah, 24, has AV nodal re-entrant tachycardia at 150/min. Within seconds of adenosine her monitor shows a brief pause, then sinus rhythm at 105/min. By what mechanism did adenosine end her tachycardia?",
+   "options": [
+    "Blocks fast sodium channels, slowing conduction in an accessory pathway",
+    "Blocks beta-1 receptors, lowering cAMP and slowing the sinus node rate",
+    "Blocks L-type calcium channels in ventricular myocytes, reducing contractility",
+    "Activates A1 receptors, opening K+ channels and transiently blocking the AV node"
+   ],
+   "answer": 3,
+   "why": "Adenosine acts on A1 receptors in the AV node. These open acetylcholine/adenosine-sensitive K+ channels and lower cAMP, which hyperpolarises nodal cells and causes a brief AV block. AVNRT needs the AV node as part of its circuit, so blocking the node ends the re-entry.",
+   "notes": [
+    "Sodium channel blockade is how class I drugs work (e.g. flecainide), and AVNRT does not use an accessory pathway; its circuit sits within the AV node.",
+    "That is how beta blockers act; adenosine is not a beta blocker, and slowing the sinus node would not break a re-entry circuit in the AV node.",
+    "Adenosine does not block calcium channels in ventricular muscle; the problem here is the AV nodal circuit, not ventricular contractility.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-220-anatomy",
+   "cat": "anatomy",
+   "stem": "Sarah, 24, stays in SVT at 150/min after modified Valsalva. Before adenosine, the registrar considers right carotid sinus massage, having confirmed no carotid bruit. Which nerve carries the afferent signal from the carotid sinus baroreceptors to the brainstem?",
+   "options": [
+    "Vagus nerve, through its superior laryngeal branch",
+    "Hypoglossal nerve, through its descending branch",
+    "Ansa cervicalis, from the C1 to C3 roots",
+    "Glossopharyngeal nerve, through the carotid sinus nerve"
+   ],
+   "answer": 3,
+   "why": "Carotid sinus baroreceptors, at the carotid bifurcation (about the level of the upper border of the thyroid cartilage), send signals through the carotid sinus nerve (a branch of CN IX) to the nucleus tractus solitarius. The vagus is the efferent limb: it slows the SA node and the AV node and can interrupt AV nodal re-entry.",
+   "notes": [
+    "The vagus is the efferent limb of the reflex and carries aortic arch baroreceptor afferents. The superior laryngeal branch supplies the larynx, not the carotid sinus.",
+    "The hypoglossal nerve is motor to the tongue. It crosses the carotid arteries near the bifurcation but carries no baroreceptor fibres.",
+    "The ansa cervicalis is a motor loop supplying the infrahyoid strap muscles. It lies on the carotid sheath but plays no part in the baroreflex.",
+    null
+   ]
+  }
+ ]
+}

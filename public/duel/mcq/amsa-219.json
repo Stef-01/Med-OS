@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-219",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T06:18:15.679Z",
+ "questions": [
+  {
+   "id": "osce-amsa-219-skills",
+   "cat": "skills",
+   "stem": "Michelle, 56, sees you at a GP practice with 5 days of jaundice, right upper quadrant pain and feeling hot. She is slow to answer and loses her train of thought now and then. Which history question best identifies severe disease that needs same-day transfer to hospital?",
+   "options": [
+    "\"Do you get pain in your upper tummy after fatty meals?\"",
+    "\"Have your stools been greasy, floating or hard to flush?\"",
+    "\"Have you or anyone else noticed confusion or poor concentration?\"",
+    "\"Have you had any tattoos, injecting drug use or transfusions?\""
+   ],
+   "answer": 2,
+   "why": "Confusion with Charcot's triad (jaundice, RUQ pain, fever) points towards Reynolds' pentad, which means severe cholangitis with organ dysfunction. Patients often don't mention it themselves, so ask directly. If it's present, she needs an ambulance to hospital.",
+   "notes": [
+    "Pain after fatty meals suggests biliary colic. It doesn't tell you how severe this illness is or how urgently she needs hospital.",
+    "Steatorrhoea suggests pancreatic insufficiency or pancreatic cancer. It helps sort out the differential, but it isn't a marker of acute severity.",
+    null,
+    "Viral hepatitis risk factors are part of every jaundice history, but they help with the differential. They don't show sepsis with organ dysfunction."
+   ]
+  },
+  {
+   "id": "osce-amsa-219-clinical",
+   "cat": "clinical",
+   "stem": "At ED triage Michelle, 56, has jaundice and right upper quadrant pain. Her temperature is 39.1 °C, BP 86/50, HR 126 and lactate 3.6, and she is newly confused. Ultrasound shows a stone in a dilated common bile duct. Blood cultures have been taken. She is allergic to latex but has no drug allergies. Which empirical antibiotic regimen is most appropriate?",
+   "options": [
+    "Piperacillin with tazobactam 4 g + 0.5 g IV 6-hourly",
+    "Amoxicillin with clavulanate 875 mg + 125 mg orally 12-hourly",
+    "Metronidazole 500 mg IV 12-hourly as monotherapy",
+    "Flucloxacillin 2 g IV 6-hourly as monotherapy"
+   ],
+   "answer": 0,
+   "why": "For severe biliary sepsis, eTG recommends broad IV cover of enteric Gram-negatives, enterococci and anaerobes, such as piperacillin with tazobactam 4 g + 0.5 g IV 6-hourly, given within 60 minutes. Urgent ERCP to drain the duct follows once she is resuscitated.",
+   "notes": [
+    null,
+    "An oral agent is not appropriate for a hypotensive, septic patient. She needs IV antibiotics within the hour.",
+    "Metronidazole covers only anaerobes and misses the enteric Gram-negative bacilli that cause most cholangitis.",
+    "Flucloxacillin is aimed at staphylococci and streptococci and gives no useful cover against enteric Gram-negative organisms."
+   ]
+  },
+  {
+   "id": "osce-amsa-219-physio",
+   "cat": "physio",
+   "stem": "Michelle, 56, has had pale, almost clay-coloured stools for several days. Her bilirubin is 98 µmol/L, mostly conjugated, and ultrasound shows a stone obstructing the distal common bile duct. What best explains her pale stools?",
+   "options": [
+    "Hepatocytes cannot conjugate bilirubin, so unconjugated bilirubin builds up in blood",
+    "Pancreatic lipase is blocked, so undigested fat makes the stools pale and bulky",
+    "Bilirubin is diverted into the urine as urobilinogen instead of entering the stool",
+    "Conjugated bilirubin cannot reach the gut, so bacteria make no stercobilin"
+   ],
+   "answer": 3,
+   "why": "Normally conjugated bilirubin passes into the gut in bile. Gut bacteria turn it into urobilinogen and then stercobilin, which makes stool brown. When the duct is blocked, little bilirubin reaches the gut, so the stool is pale.",
+   "notes": [
+    "Failure of conjugation causes unconjugated jaundice, as in Gilbert's syndrome. Her bilirubin is mostly conjugated, so conjugation is working.",
+    "Fat malabsorption gives greasy, floating stools. She denies these and her lipase is normal. The pale colour comes from missing stercobilin.",
+    "Urobilinogen is made in the gut, so urinary urobilinogen falls in obstruction. Dark urine comes from water-soluble conjugated bilirubin itself.",
+    null
+   ]
+  },
+  {
+   "id": "osce-amsa-219-anatomy",
+   "cat": "anatomy",
+   "stem": "The next morning Michelle has ERCP for her distal common bile duct stones. The endoscopist passes a side-viewing duodenoscope and cannulates the bile duct where it opens into the bowel. Where is this opening?",
+   "options": [
+    "Minor duodenal papilla, in the second part of the duodenum",
+    "Major duodenal papilla, in the second part of the duodenum",
+    "Major duodenal papilla, in the first part of the duodenum",
+    "Major duodenal papilla, in the third part of the duodenum"
+   ],
+   "answer": 1,
+   "why": "The common bile duct joins the main pancreatic duct at the hepatopancreatic ampulla. This opens at the major duodenal papilla on the posteromedial wall of the descending (second) part of the duodenum. The sphincter of Oddi, which is cut at sphincterotomy, controls the opening.",
+   "notes": [
+    "The minor papilla drains the accessory pancreatic duct, not the bile duct. It sits about 2 cm proximal to the major papilla.",
+    null,
+    "The first part of the duodenum (the duodenal bulb) has no bile duct opening. The common bile duct runs behind it.",
+    "The third (horizontal) part crosses in front of the IVC and aorta, below the superior mesenteric artery. It has no bile duct opening."
+   ]
+  }
+ ]
+}

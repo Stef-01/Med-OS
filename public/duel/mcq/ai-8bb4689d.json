@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "ai-8bb4689d",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:17:23.711Z",
+ "questions": [
+  {
+   "id": "osce-ai-8bb4689d-skills",
+   "cat": "skills",
+   "stem": "Daniel, 27, has newly confirmed HIV-1 with a viral load of 86,000 copies/mL. He lives with his partner Sam and they do not use condoms. He asks: \"When will I stop being a risk to Sam through sex?\" Which plain-language answer is most accurate?",
+   "options": [
+    "\"Once you have taken your tablets every day for about four weeks.\"",
+    "\"Once your viral load has stayed undetectable for at least six months.\"",
+    "\"Once your CD4 count has climbed back up into the normal range.\"",
+    "\"Only if Sam also takes PrEP, because treatment alone never removes the risk.\""
+   ],
+   "answer": 1,
+   "why": "U=U: people on ART whose viral load has stayed below 200 copies/mL for at least 6 months do not pass HIV on through sex. Until then, condoms (or PrEP for Sam) are still needed.",
+   "notes": [
+    "Four weeks of ART lowers the viral load but rarely makes it undetectable, and U=U needs 6 months of sustained suppression, not just a set number of weeks of tablets.",
+    null,
+    "Whether HIV is passed on depends on the viral load, not the CD4 count. The CD4 count can stay below normal even when the viral load is fully suppressed.",
+    "A viral load that stays suppressed prevents sexual transmission on its own. PrEP protects Sam only during the time before Daniel is durably undetectable."
+   ]
+  },
+  {
+   "id": "osce-ai-8bb4689d-clinical",
+   "cat": "clinical",
+   "stem": "Daniel, 27, has newly confirmed HIV-1. CD4 410 cells/microlitre (22%), viral load 86,000 copies/mL, no transmitted resistance, HLA-B*5701 negative, eGFR above 90, not immune to hepatitis B. He feels well and asks whether he really needs tablets yet. On current Australian guidance, what is the best plan for ART?",
+   "options": [
+    "Defer ART until CD4 falls below 350 cells/microlitre, with CD4 checks every 3 months",
+    "Offer ART soon, whatever the CD4 count, once he is ready to commit to daily dosing",
+    "Start trimethoprim-sulfamethoxazole prophylaxis now and begin ART in 6 months",
+    "Defer ART until hepatitis B vaccination is complete and immunity is confirmed"
+   ],
+   "answer": 1,
+   "why": "Australian (and international) guidelines recommend offering ART to everyone with HIV regardless of CD4 count, starting soon after diagnosis. Early ART protects his immune system and, once he is undetectable, prevents transmission.",
+   "notes": [
+    "Waiting for the CD4 count to fall is outdated practice; trials such as START showed clear benefit from treating straight away at higher CD4 counts.",
+    null,
+    "Pneumocystis prophylaxis is for a CD4 below 200 or below 14%, which he does not have, and there is no reason to delay ART.",
+    "Vaccination can be given alongside ART; waiting for it leaves him with a high viral load and very infectious for months."
+   ]
+  },
+  {
+   "id": "osce-ai-8bb4689d-physio",
+   "cat": "physio",
+   "stem": "Daniel, 27, with newly diagnosed HIV-1, has been told ART will make his viral load undetectable within 3 to 6 months. He asks why he can't stop the tablets once the virus is undetectable. What is the main reason HIV rebounds within weeks when ART is stopped?",
+   "options": [
+    "Integrated provirus in long-lived resting memory CD4 T cells is not touched by ART",
+    "Ongoing reverse transcriptase errors make the virus resistant to every regimen in time",
+    "Free virions persist in plasma at a level just below the viral load assay's limit",
+    "HIV persists in B cells and plasma cells, which antiretroviral drugs cannot enter"
+   ],
+   "answer": 0,
+   "why": "HIV integrates its DNA into the host genome. In latently infected resting memory CD4 T cells this provirus is silent, so ART, which only blocks new rounds of replication, cannot clear it. When those cells reactivate off treatment, the virus rebounds.",
+   "notes": [
+    null,
+    "With good adherence, suppressive combination ART prevents resistance from emerging; resistance is a consequence of poor adherence, not why rebound happens.",
+    "Any very low-level viraemia comes from the reservoir and is not the source of rebound; the long-lived pool of integrated provirus is.",
+    "B cells don't carry CD4, so they aren't a major HIV reservoir. The latent reservoir is mainly in resting memory CD4 T cells."
+   ]
+  },
+  {
+   "id": "osce-ai-8bb4689d-anatomy",
+   "cat": "anatomy",
+   "stem": "Daniel, 27, had a seroconversion-type illness 2 months ago and now has confirmed HIV-1 with a blood CD4 count of 410 cells/microlitre. He asks whether his blood test shows all of the damage. In acute HIV infection, where does the earliest and greatest loss of CD4 T cells occur?",
+   "options": [
+    "Thymic cortex, where T cell precursors undergo maturation and selection",
+    "Bone marrow, where the common lymphoid progenitor cells arise and divide",
+    "Red pulp of the spleen, where old and damaged blood cells are filtered out",
+    "Lamina propria of the gut mucosa, part of the gut-associated lymphoid tissue"
+   ],
+   "answer": 3,
+   "why": "Gut-associated lymphoid tissue contains most of the body's CCR5-expressing activated memory CD4 T cells, so it is severely depleted within weeks of infection, well before the blood CD4 count shows it. The blood CD4 count underestimates the early damage.",
+   "notes": [
+    "The thymus can be affected in HIV, but it holds immature T cells with little CCR5 and is not where most CD4 cells are lost in acute infection.",
+    "Bone marrow progenitors aren't the main target of HIV, and haematopoiesis is largely preserved in early infection.",
+    "The red pulp filters blood cells and holds few CCR5-expressing memory CD4 T cells, so it is not where massive early depletion occurs.",
+    null
+   ]
+  }
+ ]
+}

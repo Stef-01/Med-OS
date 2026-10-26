@@ -60,3 +60,12 @@ test('figures: local files only, everything printed is escaped, credit links onl
   assert.doesNotMatch(html, /os-findings/);
   assert.match(f, /<a class="os-figzoom" href="\.\/media\/s\/ecg\.png"/);
 });
+
+/* 2026-10-26: signed out, the shared record is everyone's; a game switch (Settings → Games) must not travel through it,
+   or one person turning Duel a Mate off turns it off for every signed-out phone */
+test('sync: the game switches travel only on your own account', () => {
+  const mem = { games: { duel: true }, timing: { read: 60 } };
+  assert.ok(!('k/games' in shardsOf(SPEC.osce, mem, false)), 'signed out: no games shard');
+  assert.ok('k/timing' in shardsOf(SPEC.osce, mem, false), 'signed out: the shared settings still travel');
+  assert.deepEqual(shardsOf(SPEC.osce, mem, true)['k/games'], { duel: true }, 'signed in: the switches follow the account');
+});

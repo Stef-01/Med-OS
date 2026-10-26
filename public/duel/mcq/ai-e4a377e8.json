@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "ai-e4a377e8",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:21:20.984Z",
+ "questions": [
+  {
+   "id": "osce-ai-e4a377e8-skills",
+   "cat": "skills",
+   "stem": "Mr Kostas, 66, is tearful in your GP rooms. His biopsy shows Gleason 4+3=7 (Grade Group 3), and he believes this means \"7 out of 10, so I am 70% dead\". Which plain-language explanation best corrects his misunderstanding?",
+   "options": [
+    "The score shows how much of your prostate is cancer; 7 means a moderate amount is involved",
+    "The score is your risk of spread out of 10, so 7 means it has probably already spread",
+    "The score describes how abnormal the cells look; scores start at 6, so 7 is in the middle",
+    "4+3 and 3+4 both add up to 7, so your outlook is the same as anyone with a score of 7"
+   ],
+   "answer": 2,
+   "why": "Gleason grades only how the glands look under the microscope. Patterns 1 and 2 are no longer used, so the lowest score is 3+3=6, and 4+3=7 (Grade Group 3 of 5) is intermediate risk. It is not a percentage or a fraction of 10.",
+   "notes": [
+    "Gleason grades how the glands look, not how much cancer there is; volume shows up in other features, such as the number of positive cores.",
+    "Gleason is not a score out of 10 for spread; spread is assessed by staging (MRI, PSMA PET/CT), and telling him it has probably spread is false and alarming.",
+    null,
+    "4+3 is worse than 3+4 (Grade Group 3 vs 2) because pattern 4 is the main pattern, so the totals being equal does not mean the outlook is the same."
+   ]
+  },
+  {
+   "id": "osce-ai-e4a377e8-clinical",
+   "cat": "clinical",
+   "stem": "Mr Kostas, 66, ECOG 0, with controlled hypertension, has Gleason 4+3=7 (Grade Group 3) prostate cancer in 4 of 14 left-sided cores, PSA 9.4 ng/mL and clinical stage cT1c. If his PSMA PET/CT shows no spread, which management should the urology MDT offer him?",
+   "options": [
+    "Radical prostatectomy, or external beam radiotherapy with 4–6 months of hormone therapy",
+    "Active surveillance with 6-monthly PSA, repeat MRI and repeat biopsy at 12 months",
+    "Androgen deprivation therapy alone with a GnRH agonist, continued long term",
+    "Watchful waiting, with hormone therapy started only if symptoms of progression develop"
+   ],
+   "answer": 0,
+   "why": "Unfavourable intermediate-risk localised disease (Grade Group 3) in a fit man with a long life expectancy needs curative treatment. The options are radical prostatectomy, or radiotherapy with short-course (about 4–6 months) androgen deprivation therapy.",
+   "notes": [
+    null,
+    "Active surveillance suits low-risk disease (Grade Group 1) and selected favourable intermediate-risk cases; it is not usually advised for Grade Group 3.",
+    "Androgen deprivation therapy alone does not cure localised disease; it is used for metastatic disease or men unfit for curative treatment.",
+    "Watchful waiting is for men with limited life expectancy; a fit 66-year-old with curable disease would lose his chance of cure."
+   ]
+  },
+  {
+   "id": "osce-ai-e4a377e8-physio",
+   "cat": "physio",
+   "stem": "Mr Kostas, 66, asks why his PSA was 9.4 ng/mL when he was told PSA also rises with an enlarged or inflamed prostate. PSA is a protease that the prostate secretes into its ducts to liquefy semen. Which mechanism best explains a raised serum PSA in these conditions?",
+   "options": [
+    "Malignant cells make a cancer-specific form of PSA that normal prostate cells do not",
+    "Disrupted gland architecture lets PSA leak from the ducts into the circulation",
+    "Reduced renal clearance with age allows normally secreted PSA to build up in serum",
+    "Inflammation makes the liver synthesise PSA as part of the acute phase response"
+   ],
+   "answer": 1,
+   "why": "PSA normally goes into the ducts, and only small amounts reach the blood. Cancer, BPH, prostatitis and instrumentation all disrupt the basal cell layer and basement membrane, so more PSA leaks into the blood. This is why PSA is organ-specific but not cancer-specific.",
+   "notes": [
+    "There is no cancer-only PSA; benign and malignant prostate epithelium both make it, and cancer cells actually make less PSA per cell.",
+    null,
+    "PSA rises with age because the gland gets bigger, not because the kidneys clear less of it; reduced renal clearance is not the reason a PSA is raised.",
+    "PSA (kallikrein-3) comes from prostatic epithelium, not the liver, and it is not an acute phase reactant."
+   ]
+  },
+  {
+   "id": "osce-ai-e4a377e8-anatomy",
+   "cat": "anatomy",
+   "stem": "Mr Kostas, 66, is worried about losing his erections after treatment. His MRI shows an 11 mm lesion in the left posterolateral peripheral zone, and the neurovascular bundles look normal. Where do the cavernous nerves that supply erection run in relation to the prostate?",
+   "options": [
+    "Anteriorly, within the dorsal venous complex over the prostatic apex",
+    "Medially, alongside the ejaculatory ducts within the central zone",
+    "Within the transition zone, wrapped around the prostatic urethra",
+    "Posterolaterally, in the neurovascular bundles outside the prostatic capsule"
+   ],
+   "answer": 3,
+   "why": "The cavernous nerves (parasympathetic, S2–4, from the pelvic plexus) run in the neurovascular bundles posterolateral to the prostate, at about 5 and 7 o'clock. Nerve-sparing prostatectomy aims to preserve them, but a posterolateral tumour may limit nerve sparing on that side.",
+   "notes": [
+    "The dorsal venous complex lies anteriorly and is controlled during prostatectomy; the cavernous nerves run posterolaterally, not inside it.",
+    "The ejaculatory ducts pass through the central zone, but the cavernous nerves run outside the gland, not alongside these ducts.",
+    "The transition zone surrounds the urethra and is where BPH arises; the erectile nerves run outside the capsule, not within the gland.",
+    null
+   ]
+  }
+ ]
+}

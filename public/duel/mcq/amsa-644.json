@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-644",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T06:03:39.127Z",
+ "questions": [
+  {
+   "id": "osce-amsa-644-skills",
+   "cat": "skills",
+   "stem": "Code Blue on a ward. Collin, 64, collapsed after chest pain. There is no danger. He does not respond to voice or a trapezius squeeze, and you have sent Sam for the defibrillator. After a head tilt and chin lift you see slow, noisy gasps every few seconds and no other movement. Sam says, \"He's still breathing!\" What is your next step?",
+   "options": [
+    "Feel for a carotid pulse for up to 10 seconds before deciding on CPR",
+    "Start chest compressions at 30:2, 100 to 120 a minute, straight away",
+    "Roll him into the recovery position and monitor him until the team arrives",
+    "Give two rescue breaths by bag-valve-mask, then reassess his breathing"
+   ],
+   "answer": 1,
+   "why": "Under ANZCOR, a person who is unresponsive and not breathing normally needs CPR. Slow, noisy agonal gasps are not normal breathing, so start compressions at once (30:2, a third of chest depth, 100 to 120 a minute).",
+   "notes": [
+    "Pulse checks are unreliable, even for skilled staff, and must not delay compressions once he is unresponsive and not breathing normally.",
+    null,
+    "The recovery position is for an unresponsive person who is breathing normally. Agonal gasps mean cardiac arrest, so turning him over only delays CPR.",
+    "Adult BLS under ANZCOR starts with compressions. Giving breaths first delays the perfusion that matters most in a witnessed VF arrest."
+   ]
+  },
+  {
+   "id": "osce-amsa-644-clinical",
+   "cat": "clinical",
+   "stem": "It is 10:47. Collin, 64, with an evolving NSTEMI, is in VF on a regional ward. He has had two 200 J biphasic shocks (10:44 and 10:46), CPR is continuing and IV access is in. VBG: pH 7.07, pCO2 64 mmHg, HCO3 18 mmol/L, K 3.2 mmol/L. The registrar asks what drug to give now, in this cycle. Which drug do you give?",
+   "options": [
+    "Amiodarone 300 mg IV bolus",
+    "Sodium bicarbonate 8.4% 1 mmol/kg IV",
+    "Adrenaline 1 mg IV bolus",
+    "Lidocaine 1 mg/kg IV bolus"
+   ],
+   "answer": 2,
+   "why": "In the ANZCOR shockable arm, adrenaline 1 mg IV goes after the second shock and then every second cycle (about every 4 minutes). Amiodarone 300 mg follows the third shock.",
+   "notes": [
+    "Amiodarone 300 mg is given after the third shock, not the second. It is the next drug if he is still in VF at the next rhythm check.",
+    "Acidosis during an arrest is expected and is treated with good CPR and ventilation. Bicarbonate is reserved for hyperkalaemia or tricyclic overdose and adds CO2.",
+    null,
+    "Lidocaine is only an alternative if amiodarone is not available. Like amiodarone, it is not given until after the third shock."
+   ]
+  },
+  {
+   "id": "osce-amsa-644-physio",
+   "cat": "physio",
+   "stem": "Collin, 64, takes indapamide. Before his VF arrest his potassium had fallen from 3.6 to 3.3 and then 3.2 mmol/L, and his magnesium was 0.62 mmol/L, neither yet replaced. By what main mechanism does hypokalaemia make the ventricular myocardium more prone to arrhythmia?",
+   "options": [
+    "Lower K+ channel conductance delays repolarisation, triggering early afterdepolarisations",
+    "The resting membrane depolarises, inactivating Na+ channels and slowing conduction",
+    "Extracellular calcium falls, shortening the plateau phase and the refractory period",
+    "Sinoatrial automaticity is suppressed, so ventricular escape rhythms take over"
+   ],
+   "answer": 0,
+   "why": "Low extracellular K+ reduces the conductance of the repolarising K+ currents (IKr, IK1). This prolongs the action potential and QT and promotes afterdepolarisations and triggered activity. Low Mg adds to this and makes K+ harder to replace.",
+   "notes": [
+    null,
+    "Depolarisation of the resting membrane with Na+ channel inactivation and slowed conduction is the mechanism of hyperkalaemia, not hypokalaemia.",
+    "Hypokalaemia does not lower calcium, and it prolongs repolarisation rather than shortening it. A shorter plateau is not how it causes VF.",
+    "Hypokalaemia increases ectopic automaticity and triggered activity. It does not cause VF by suppressing the sinus node and unmasking escape rhythms."
+   ]
+  },
+  {
+   "id": "osce-amsa-644-anatomy",
+   "cat": "anatomy",
+   "stem": "Kate arrives with the defibrillator for Collin, 64, who is in cardiac arrest on the ward. With compressions continuing, you place the first pad to the right of the upper sternum, just below the right clavicle. Where should the second (apical) pad go so that the current passes through the ventricular mass?",
+   "options": [
+    "Left midclavicular line, 2nd intercostal space, just below the left clavicle",
+    "Left sternal edge, 4th intercostal space, overlying the right ventricle",
+    "Left midclavicular line, 5th intercostal space, directly over the left nipple",
+    "Left mid-axillary line, at the level of the V6 electrode (5th intercostal space)"
+   ],
+   "answer": 3,
+   "why": "For anterolateral placement, the apical pad goes in the left mid-axillary line at the V6 level. The current between the two pads then crosses the bulk of the ventricles, which sit to the left and lie low in the chest.",
+   "notes": [
+    "This sits over the base of the heart and the great vessels, so the current between the two pads largely misses the ventricles.",
+    "A pad this medial puts the pads too close together. Current shunts across the anterior chest wall and little of it reaches the left ventricle.",
+    "This is too medial, and breast tissue raises impedance. A common error is putting the apical pad too far forward; it belongs in the mid-axillary line.",
+    null
+   ]
+  }
+ ]
+}

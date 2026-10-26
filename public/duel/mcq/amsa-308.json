@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "amsa-308",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:41:53.681Z",
+ "questions": [
+  {
+   "id": "osce-amsa-308-skills",
+   "cat": "skills",
+   "stem": "Markus Ore, 66, is in hospital with unstable angina. Before he goes home you give him his chest pain action plan for his GTN spray (400 micrograms). He asks: if the pain comes on at home and he has stopped, rested and used his spray, at what point should he call 000?",
+   "options": [
+    "After three GTN doses taken 5 minutes apart have not relieved the pain",
+    "If the pain continues for 30 minutes despite resting and using GTN",
+    "If the pain is severe, is getting worse or has lasted 10 minutes",
+    "Only if he is also sweaty, breathless or feeling faint with the pain"
+   ],
+   "answer": 2,
+   "why": "The Heart Foundation action plan says stop and rest, use GTN, repeat after 5 minutes, and call 000 if the pain is severe, getting worse or has lasted 10 minutes. He should not drive or be driven to hospital.",
+   "notes": [
+    "This is the older plan; waiting through three doses (about 15 minutes) delays reperfusion, and the current plan calls 000 at 10 minutes.",
+    "Thirty minutes of ongoing ischaemic pain is far too long to wait; heart muscle is being lost, and today's presentation began like this.",
+    null,
+    "Many patients with MI have no associated symptoms, so waiting for them before calling an ambulance would delay care."
+   ]
+  },
+  {
+   "id": "osce-amsa-308-clinical",
+   "cat": "clinical",
+   "stem": "At 10:40 Markus, 66, still has 6/10 central chest pain despite sublingual GTN and IV opioid, and an IV GTN infusion is starting. He has had aspirin. His repeat ECG shows no ST deviation, and his hs-troponin I at 40 minutes was 4 ng/L. What is the most appropriate plan for coronary assessment?",
+   "options": [
+    "Repeat hs-troponin at 2 hours, then CT coronary angiography if it stays normal",
+    "Invasive coronary angiography within 2 hours, arranged with cardiology now",
+    "Admit for invasive angiography within 24 hours if the repeat troponin rises",
+    "Thrombolysis with tenecteplase now, as his pain is not responding to nitrates"
+   ],
+   "answer": 1,
+   "why": "Ongoing ischaemic pain despite nitrates and opioid puts him in the very high-risk NSTEACS group, which needs invasive angiography within 2 hours whatever the troponin shows. Very high-risk features override a normal early troponin.",
+   "notes": [
+    "CT coronary angiography is for low to intermediate risk patients whose pain has settled, not for someone with ongoing ischaemic pain despite treatment.",
+    null,
+    "The 24-hour timeline is for high-risk patients whose pain has settled; ongoing pain despite treatment needs angiography within 2 hours, without waiting for the troponin.",
+    "Fibrinolysis is only for STEMI. In NSTEACS it gives no benefit and adds bleeding risk, and his ECG shows no ST elevation."
+   ]
+  },
+  {
+   "id": "osce-amsa-308-physio",
+   "cat": "physio",
+   "stem": "Markus, 66, has had stable exertional angina for 5 years. Over 3 weeks it has become crescendo, and today he has had over 30 minutes of crushing rest pain with a normal ECG and a normal early hs-troponin. Which process best explains the change from stable to unstable angina?",
+   "options": [
+    "Plaque rupture or erosion with a non-occlusive, platelet-rich thrombus",
+    "Slow growth of a fixed fibrous plaque with no thrombus on its surface",
+    "Complete thrombotic occlusion of an epicardial artery with transmural necrosis",
+    "Higher myocardial oxygen demand from left ventricular hypertrophy"
+   ],
+   "answer": 0,
+   "why": "In unstable angina an unstable plaque ruptures or erodes and a partly occlusive platelet-rich thrombus forms, so blood flow falls at rest without necrosis yet. This is why antiplatelets and anticoagulants are central to treatment.",
+   "notes": [
+    null,
+    "A fixed plaque with no thrombus causes stable angina at a predictable workload; it does not explain sudden prolonged rest pain.",
+    "Complete occlusion with transmural infarction is the mechanism of STEMI, and that would show ST elevation and a rising troponin.",
+    "His ECG shows no LVH by voltage criteria, and higher demand alone does not explain an abrupt change to rest pain."
+   ]
+  },
+  {
+   "id": "osce-amsa-308-anatomy",
+   "cat": "anatomy",
+   "stem": "Markus, 66, has ongoing ischaemic chest pain, but his 12-lead ECG recorded during pain shows no ST deviation. The examiner asks why you would also record posterior leads V7 to V9. Ischaemia in the territory of which artery is most often missed on the standard 12-lead ECG?",
+   "options": [
+    "Left anterior descending artery (anterior wall and septum)",
+    "Right coronary artery (inferior wall and right ventricle)",
+    "Left main coronary artery (most of the left ventricle)",
+    "Left circumflex artery (lateral and posterior walls)"
+   ],
+   "answer": 3,
+   "why": "The circumflex supplies the lateral and posterior left ventricle, which the standard leads cover poorly, so circumflex ischaemia is often electrically silent. Posterior leads V7 to V9 (posterior axillary line, scapular line, paraspinal at the V6 level) help to show it.",
+   "notes": [
+    "LAD territory sits right under V1 to V4, so ischaemia there is usually well seen on the standard ECG.",
+    "RCA ischaemia usually shows in the inferior leads II, III and aVF, and right-sided leads can show the right ventricle.",
+    "Left main ischaemia usually gives widespread ST depression with ST elevation in aVR, so it is rarely silent.",
+    null
+   ]
+  }
+ ]
+}

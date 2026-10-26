@@ -1,0 +1,84 @@
+{
+ "schemaVersion": 1,
+ "station": "ai-9fdfd7be",
+ "origin": "ai",
+ "writtenAt": "2026-10-26T05:18:20.997Z",
+ "questions": [
+  {
+   "id": "osce-ai-9fdfd7be-skills",
+   "cat": "skills",
+   "stem": "You are resuscitating Jenny, 51, in day-surgery recovery 3 hours after a hysteroscopy and D&C for heavy irregular bleeding. She is pale and in pain, and you suspect bleeding inside her abdomen. She asks quietly, \"Did they find cancer? Is something wrong with me?\" Histology has not been reported. What is the best response?",
+   "options": [
+    "\"No, the operation was recorded as uneventful, so cancer is very unlikely.\"",
+    "\"The tissue results aren't back yet; right now I'm treating bleeding inside your tummy.\"",
+    "\"Your scan showed a thick womb lining, so cancer is likely, but we will know soon.\"",
+    "\"That's for your surgeon to discuss with you at your follow-up clinic appointment.\""
+   ],
+   "answer": 1,
+   "why": "Be honest that the histology isn't back, don't guess either way, and tell her plainly what you're dealing with now and what you're doing about it. She is reassured by honesty and a clear plan.",
+   "notes": [
+    "This is false reassurance: an uneventful operation record says nothing about histology, and her 14 mm endometrium at 51 means cancer has not been excluded.",
+    null,
+    "This guesses at a diagnosis before histology, causes needless distress, and doesn't address the emergency happening right now.",
+    "This brushes off a frightened patient and says nothing about the urgent problem that is being treated."
+   ]
+  },
+  {
+   "id": "osce-ai-9fdfd7be-clinical",
+   "cat": "clinical",
+   "stem": "Jenny, 51, has been given 1 L of crystalloid and oxygen after her D&C. BP is now 96/60 (125/75 pre-op), HR 114, CRT 3 s, no urine. Hb 98 g/L (126 pre-op), lactate 3.8, lower abdominal guarding, shoulder-tip pain. Fat-like tissue was noted in the curettings. The MET team is present. What is the most appropriate next step?",
+   "options": [
+    "Transfuse red cells now and arrange urgent laparoscopy or laparotomy",
+    "Give a further 1 L crystalloid bolus and reassess in 30 minutes",
+    "Arrange urgent contrast CT abdomen and pelvis before deciding on surgery",
+    "Repeat haemoglobin in one hour and transfuse if it falls below 70 g/L"
+   ],
+   "answer": 0,
+   "why": "Her shock barely responded to 1 L of crystalloid, so she is still bleeding. She needs blood now (O negative or group-specific if crossmatched blood is not ready, with the MTP if bleeding is major) and surgical control. Fat in the curettings means uterine perforation, and she must be explored for visceral injury.",
+   "notes": [
+    null,
+    "Shock that has not responded to crystalloid means ongoing haemorrhage. More crystalloid dilutes clotting factors and red cells and worsens coagulopathy, so it should be limited.",
+    "CT is for a perforation in a stable patient. An unstable, peritonitic patient should not leave for the scanner, and surgery is needed whatever the scan shows.",
+    "An early haemoglobin underestimates acute blood loss. Transfusion in active haemorrhage is guided by haemodynamics and ongoing loss, not by waiting for a threshold."
+   ]
+  },
+  {
+   "id": "osce-ai-9fdfd7be-physio",
+   "cat": "physio",
+   "stem": "Part 2 asks about Jenny's risk of uterine cancer. She is 51, nulliparous, weighs 108 kg, has type 2 diabetes and has had irregular, heavy cycles for 2 years. Her pre-operative ultrasound showed a 14 mm endometrium. What is the main mechanism by which her obesity raises her risk of endometrial hyperplasia and cancer?",
+   "options": [
+    "Adipose aromatase converts androgens to oestrone, unopposed by progesterone in anovulation",
+    "Hyperinsulinaemia raises SHBG, increasing the free oestradiol reaching the endometrium",
+    "Persistent corpus luteum secretes excess progesterone, driving endometrial proliferation",
+    "Raised FSH in the perimenopause directly stimulates endometrial gland proliferation"
+   ],
+   "answer": 0,
+   "why": "Aromatase in fat converts androstenedione to oestrone. With anovulatory cycles there is no luteal progesterone to oppose it, and unopposed oestrogen (helped by hyperinsulinaemia and IGF-1) drives hyperplasia and endometrioid cancer.",
+   "notes": [
+    null,
+    "Hyperinsulinaemia lowers SHBG, not raises it; that is how it increases free oestrogen.",
+    "Progesterone protects the endometrium; she is likely anovulatory, so she has too little progesterone, not too much.",
+    "FSH acts on ovarian follicles, not directly on the endometrium."
+   ]
+  },
+  {
+   "id": "osce-ai-9fdfd7be-anatomy",
+   "cat": "anatomy",
+   "stem": "Jenny, 51, is 3 hours after a D&C in which the curette probably perforated the uterus. She has lower abdominal guarding, intra-abdominal bleeding and new pain at the tip of her right shoulder, which hurts more when she breathes deeply. Which nerve pathway best explains her shoulder-tip pain?",
+   "options": [
+    "Uterine visceral afferents entering the cord at T10–L1, referred to the shoulder",
+    "Lower intercostal nerves supplying the peripheral diaphragmatic peritoneum",
+    "Vagal afferents from the liver capsule, referred via the cervical plexus",
+    "Phrenic nerve (C3–C5) from diaphragmatic peritoneum, referred to the C4 dermatome"
+   ],
+   "answer": 3,
+   "why": "Blood tracks up and irritates the peritoneum under the central diaphragm, which is supplied by the phrenic nerve (C3–C5). The pain is referred to the shoulder tip, the C4 dermatome supplied by the supraclavicular nerves, which share those segments.",
+   "notes": [
+    "Uterine afferents at T10–L1 refer pain to the lower abdomen, lower back and thighs, not the shoulder.",
+    "The lower intercostal nerves supply the peripheral diaphragm and refer pain to the lower chest and abdominal wall, not the shoulder.",
+    "Liver capsule stretch causes right upper quadrant pain; vagal afferents don't produce somatic referred pain to the shoulder.",
+    null
+   ]
+  }
+ ]
+}
