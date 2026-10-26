@@ -27,6 +27,7 @@ import { esc } from './core.mjs';
 import { attach as syncAttach, pull as syncPull, configureSync, wire as syncWire } from './study-kit/sync.mjs';   /* both of your devices, when config.js names a project */
 import { requestsDlg, requestForm, copyRequest, shareRequest, withdrawRequest, paintRequests } from './osce/requests-view.mjs';
 import { mcqDlg, mcqForm, importPaste, resend as mcqResend, exportMcqs, copyMcqs } from './osce/mcq-view.mjs';   /* Submit a question: the standard MCQ pool's way in (docs/mcq.md) */
+import { libraryDlg, libraryKey } from './osce/library-view.mjs';   /* Your questions: upload, study, friends, sharing (docs/library.md) */
 import { renderStart, toggleRot, runAll, runPop, runClear, runGo, onPerson, pickCand, toggleAlt } from './osce/run.mjs';
 import { renderGroup, browseReset, browseDlg, browseSheetOpen, paintQueue, clearQueue, removeQueued, queueFromButton, addRandom, toggleDetails, afterBookmark, discPick, filterPop, toggleSaved, resetFilters, timingDlg, saveTiming, previewDlg, previewTab, onSearch, onPointerDown } from './osce/browse.mjs';
 import { renderMarked, markedReset } from './osce/marked.mjs';
@@ -223,6 +224,7 @@ async function onClick(e) {
     case 'reqcopy': return copyRequest(b.dataset.id);
     case 'reqshare': return shareRequest(b.dataset.id);
     case 'reqdrop': return withdrawRequest(b.dataset.id);
+    case 'lib': return libraryDlg();
     case 'mcq': return mcqDlg();
     case 'mcqnew': return mcqForm();
     case 'mcqimport': return importPaste(b);
@@ -263,6 +265,7 @@ function onKey(e) {
     return back();
   }
   if (e.key === 'Enter' && e.target.matches?.('.os-q')) { e.target.blur(); }
+  if (topDialog()?.kind === 'lib' && libraryKey(e)) { e.preventDefault(); return; }   /* Your questions: 1 to 5 answer, 1 to 4 grade */
   if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && presenting()) { e.preventDefault(); return presentStep(e.key === 'ArrowRight' ? 1 : -1); }   /* the results full screen */
   /* Space toggles the clock when focus is not in a control (the media-control convention); the arrow keys on a tab move
      to the neighbour tab (WAI-ARIA APG tabs). P2 polish 2026-10-19 */

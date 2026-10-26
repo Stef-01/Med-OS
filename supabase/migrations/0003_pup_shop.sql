@@ -126,7 +126,22 @@ insert into public.pup_items (id, slot, rarity, price, exclusive) values
   ('teddy', 'back', 'rare', 35, false),
   ('oxygen', 'back', 'common', 15, false),
   ('broom', 'back', 'epic', 50, false),
-  ('giftsack', 'back', 'uncommon', 25, false)
+  ('giftsack', 'back', 'uncommon', 25, false),
+  ('fitted', 'head', 'common', 15, false),
+  ('headrag', 'head', 'uncommon', 20, false),
+  ('dropout', 'head', 'rare', 35, false),
+  ('toque6', 'head', 'uncommon', 20, false),
+  ('jewelmask', 'face', 'legendary', 100, false),
+  ('cuban', 'neck', 'rare', 40, false),
+  ('nameplate', 'neck', 'uncommon', 25, false),
+  ('owlchain', 'neck', 'epic', 55, false),
+  ('boombox', 'back', 'rare', 35, false),
+  ('goldmic', 'back', 'uncommon', 20, false),
+  ('varsity', 'back', 'epic', 55, false),
+  ('puffer', 'back', 'epic', 60, false),
+  ('whitecoat', 'back', 'epic', 60, false),
+  ('pleats', 'back', 'uncommon', 20, false),
+  ('tutu', 'back', 'rare', 30, false)
 on conflict (id) do update set slot = excluded.slot, rarity = excluded.rarity, price = excluded.price, exclusive = excluded.exclusive;
 
 alter table public.pup_players add column if not exists wallet jsonb;

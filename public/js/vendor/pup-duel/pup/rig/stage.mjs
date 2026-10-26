@@ -5,6 +5,7 @@
 import { EASE_IN_OUT, EASE_OUT, EASE_IN, clamp, PERIOD, B, SWITCH, MOVE, GIF_FPS, STILL } from './motion.mjs';
 import { EXPR, EXPR_ORDER } from './expressions.mjs';
 import { DOGS, resolve, dogById } from './breeds.mjs';
+import { shown, unlocked } from './gifts.mjs';
 import { dress } from './coats.mjs';
 import { still } from './still.mjs';
 import { NS, r3, set, tr, scl, reach, drape } from './parts.mjs';
@@ -369,7 +370,7 @@ EXPR_ORDER.forEach(function (id) {
 });
 function select(r) { selected = r; syncDock(); }
 function syncDock() {
-  var n = inScene().length;
+  var n = inScene().length, have = unlocked();
   roster.forEach(function (r) {
     if (!r.ui) return;   // the embed has no menu
     var isIn = r.state === 'in';
@@ -379,6 +380,7 @@ function syncDock() {
     r.ui.btn.setAttribute('aria-label', isIn ? 'Select ' + r.c.name : 'Add ' + r.c.name + ' to the scene');
     r.ui.sub.textContent = isIn ? EXPR[r.rig.exprId].name : '+ Add';
     r.ui.rm.hidden = !isIn || n <= 1;
+    r.ui.btn.parentNode.hidden = !isIn && !shown(r.c, have);   // a gift's dogs once it is redeemed (gifts.mjs)
   });
   exprLabel.innerHTML = 'Expression · <b></b>';
   exprLabel.lastChild.textContent = selected ? selected.c.name : '';
@@ -631,7 +633,7 @@ againEl.addEventListener('click', function () { if (lastGif) offer(lastGif); });
 var Q = new URLSearchParams(location.search), EMBED = Q.get('embed') === '1';
 var first = EMBED ? roster.findIndex(function (r) { return r.c.id === dogById(Q.get('dog')).id; }) : 0;   // an unknown dog: the registry's default
 if (EMBED) document.documentElement.classList.add('embed');
-if (EMBED) roster[first].c = resolve(dress(DOGS[first], { coat: Q.get('coat'), collar: Q.get('collar') }));   // the look's coat and collar (coats.mjs)
+if (EMBED) roster[first].c = resolve(dress(DOGS[first], { coat: Q.get('coat'), collar: Q.get('collar'), eyes: Q.get('eyes'), iris: Q.get('iris'), blush: Q.get('blush') }));   // the look's coat, collar, eyes and blush (coats.mjs, eyes.mjs)
 addDog(roster[first]);
 if (EMBED) roster[first].rig.setExpr(EXPR[Q.get('expr')] ? Q.get('expr') : 'happy', clock);
 var startCam = cameraFor(inScene());

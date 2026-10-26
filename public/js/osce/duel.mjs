@@ -10,15 +10,26 @@
    takes its keys through ui.key(). */
 
 import { createOverlay } from '../study-kit/overlay.mjs';
+import { current as libNow, allItems } from '../library/api.mjs';
+import { mixPack } from '../library/mix.mjs';
 
-let shell = null, ui = null, pack = null;
+let shell = null, ui = null, bank = null;
 
+/* the bank (fetched once), with Your questions and your friends' shared decks added as decks to choose from
+   (docs/library.md: "duel with a mix of each other's questions"); the library is read fresh each time the duel opens */
 async function loadPack(normPack) {
-  if (pack) return pack;
-  const r = await fetch('./duel/pack.json', { cache: 'no-cache' });
-  if (!r.ok) throw new Error(`duel/pack.json ${r.status}`);
-  pack = normPack(await r.json()).pack;
-  return pack;
+  if (!bank) {
+    const r = await fetch('./duel/pack.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`duel/pack.json ${r.status}`);
+    bank = await r.json();
+  }
+  const all = allItems(libNow());
+  return normPack(mixPack(bank, all.filter(x => !x.owner).map(x => x.item), all.filter(x => x.owner).map(x => x.item))).pack;
+}
+/* the decks the duel offers now, with their counts (the e2e reads it) */
+export async function packDecks() {
+  const { normPack, decksOf } = await import('../vendor/pup-duel/duel/pack.mjs');
+  return decksOf(await loadPack(normPack)).map(({ id, count }) => ({ id, count }));
 }
 
 export async function openDuel(opener) {

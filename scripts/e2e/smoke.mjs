@@ -17,6 +17,8 @@ import { requestsFrom } from '../../public/js/osce/requests.mjs';
 import { submissionsFrom } from '../lib/mcq-intake.mjs';
 import { cleanItem } from '../../public/js/mcq/schema.mjs';
 import { createServer as duelServer } from '../../public/js/vendor/pup-duel/duel/server-core.mjs';
+import { libraryFake } from './library-fake.mjs';
+import { library } from './library.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'public');
 const SHOTS = process.argv[2] || fs.mkdtempSync(path.join(os.tmpdir(), 'osce-e2e-'));
@@ -64,6 +66,8 @@ function mcqTable(req, res) {
 /* and for the duel's functions (supabase/migrations/0002_pup_duel.sql), the vendored package's own copy of their rules */
 const DUEL = duelServer();
 const byToken = t => { const p = Object.values(DUEL.db.players).find(x => x.token === t); if (!p) throw new Error('Sign in again'); return p; };
+/* and the library's (supabase/migrations/0008_library.sql): decks, friends, shares, over the same players */
+const LIB = libraryFake({ byToken, players: () => DUEL.db.players });
 function duelRpc(req, res, fn) {
   let body = '';
   req.on('data', c => { body += c; });
@@ -79,7 +83,7 @@ function duelRpc(req, res, fn) {
       /* OSCE progress on an account (supabase/migrations/0006_osce_accounts.sql): the token checked, the rows kept apart */
       osce_pull: () => { const me = byToken(a.p_token); return [...SB.values()].filter(r => r.ns === `u:${me.id}:${a.p_ns}`).map(({ id, value, updated_at }) => ({ id, value, updated_at })); },
       osce_push: () => { const me = byToken(a.p_token); for (const r of a.p_rows || []) { const k = `u:${me.id}:${a.p_ns}\n${r.id}`, had = SB.get(k); if (!had || Date.parse(r.updated_at) > Date.parse(had.updated_at)) SB.set(k, { ns: `u:${me.id}:${a.p_ns}`, ...r }); } return (a.p_rows || []).length; }
-    }[fn];
+    }[fn] || (LIB[fn] && (() => LIB[fn](a)));
     try { const out = await call(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(out)); }
     catch (e) { res.writeHead(400, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ code: 'P0001', message: e.message })); }
   });
@@ -93,7 +97,7 @@ const server = http.createServer((req, res) => {
   for (const [k, v] of Object.entries(prodHeaders(url.pathname))) res.setHeader(k, v);
   if (url.pathname === '/sb/rest/v1/osce_state') return supabase(req, res, url);
   if (url.pathname === '/sb/rest/v1/mcq_submissions') return mcqTable(req, res);
-  const rpc = /^\/sb\/rest\/v1\/rpc\/((?:pup|osce)_[a-z_]+)$/.exec(url.pathname);
+  const rpc = /^\/sb\/rest\/v1\/rpc\/((?:pup|osce|lib|friend)_[a-z_]+)$/.exec(url.pathname);
   if (rpc) return duelRpc(req, res, rpc[1]);
   const u = decodeURIComponent(url.pathname);
   let f = path.join(ROOT, u.endsWith('/') ? `${u}index.html` : u);
@@ -768,12 +772,14 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
 }
 
 try {
+  if (process.env.ONLY === 'library') { await library({ chromium, BASE, SHOTS, ok }); throw Object.assign(new Error('only'), { only: true }); }
   await duel();
   await sync();
   await run(393, 852, 'phone');
   await run(320, 640, 'small');
   await run(1280, 860, 'wide');
-} catch (e) { fails.push(`crashed: ${e.message}`); console.error(e); }
+  await library({ chromium, BASE, SHOTS, ok });   /* last: its players join the fake backend the duel's leaderboard counts */
+} catch (e) { if (!e.only) { fails.push(`crashed: ${e.message}`); console.error(e); } }
 server.close();
 console.log(`\n${fails.length ? `${fails.length} failed` : 'all passed'} · screenshots in ${SHOTS}`);
 process.exit(fails.length ? 1 : 0);

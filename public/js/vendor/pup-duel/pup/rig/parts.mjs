@@ -2,6 +2,7 @@
 // Part of the dog kit (public/doberman/): motion.mjs (easing, keyframes, the loop's clock), expressions.mjs (what a
 // dog can feel), breeds.mjs (who the dogs are), parts.mjs (how a dog is drawn), rig.mjs (one dog, animated) and
 // stage.mjs (the page: the scene, the menu, the embed's messages). docs/doberman/README.md has the map.
+import { pupilMarkup, eyeShape, irisOf } from './eyes.mjs';
 
 // ---- drawing helpers ----
 var NS = 'http://www.w3.org/2000/svg';
@@ -189,7 +190,8 @@ function dogMarkup(c, P) {
       var U = UP_EARS[c.earShape || 'dober'];
       back += '<g data-p="ear' + side + '">' + U.base(o, inner) + '</g>';
       tips += '<g data-p="tip' + side + '"><path data-p="tipOut' + side + '" d="' + (U.out || 'M0 0') + '" fill="' + (U.out ? o : 'none') + '"/>' +
-        '<path data-p="tipIn' + side + '" d="' + (U.in || 'M0 0') + '"' + (U.in ? ' fill="' + inner + '"' : '') + '/></g>';
+        '<path data-p="tipIn' + side + '" d="' + (U.in || 'M0 0') + '"' + (U.in ? ' fill="' + inner + '"' : '') + '/>' +
+        (U.out ? clipped(P + '-tipm' + side, '<path d="' + U.out + '"/>', marksOn(c, 'ear' + side)) : '') + '</g>';   // an upright ear's marks ride its tip (a band, a leaf)
     } else {
       var F = FLOP_EARS[c.flop.shape || 'pill'](c.flop.w, c.flop.h);
       front += '<g data-p="ear' + side + '">' + F.draw(o) + clipped(P + '-ear' + side, '<path d="' + F.d + '"/>', marksOn(c, 'ear' + side)) + '</g>';
@@ -239,12 +241,15 @@ function dogMarkup(c, P) {
       '</g>' +
       '<g data-p="head">' +
         (c.mane ? MANE(p, c) : '') +
+        marksOn(c, 'behind') +   // unclipped, behind the head: a ruff, a frill, a spiky collar (the Eevee family)
         '<g data-p="earsBack" id="' + P + '-eb">' + back + '</g>' +
         '<path d="' + headPath + '" fill="' + p.coat + '"/>' +
         clipped(P + '-head', '<path d="' + headPath + '"/>', marksOn(c, 'head')) +
         (c.bib ? BIB(p, c) : '') +
         '<g data-p="earsFront">' + front + '</g>' +
         '<g data-p="earTips" id="' + P + '-et">' + tips + '</g>' +
+        marksOn(c, 'crest') +    // unclipped, over the head and ears: a tuft, a fin, a headpiece, a bow
+        ''+
         '<g data-p="feat">' +
           '<rect data-p="browL" x="' + (-10.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.brow + '"/>' +
           '<rect data-p="browR" x="' + (12.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.brow + '"/>' +
@@ -256,10 +261,10 @@ function dogMarkup(c, P) {
             // both whites as ONE outline: two clip edges meeting at the centre line leave a hairline
             '<path data-p="white" d="M1 -17.4 H-14.4 A8 8 0 0 1 -22.4 -25.4 V-33.3 A11.7 11.7 0 0 1 1 -33.3 A11.7 11.7 0 0 1 24.4 -33.3 V-25.4 A8 8 0 0 1 16.4 -17.4 Z" fill="#ffffff"/>' +
             '<g clip-path="url(#' + P + '-eyeL)"><g data-p="pupilL">' +
-              '<rect x="-13" y="-40" width="11.4" height="16" rx="5.7" fill="' + p.ink + '"/><circle cx="-9.6" cy="-35.8" r="2.2" fill="#fff"/></g>' +
+              pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, -7.3, -1) + '</g>' +
               '<g data-p="heyeL">' + heye + '</g></g>' +
             '<g clip-path="url(#' + P + '-eyeR)"><g data-p="pupilR">' +
-              '<rect x="6.4" y="-40" width="11.4" height="16" rx="5.7" fill="' + p.ink + '"/><circle cx="9.8" cy="-35.8" r="2.2" fill="#fff"/></g>' +
+              pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, 12.1, 1) + '</g>' +
               '<g data-p="heyeR">' + heye + '</g></g>' +
             // the lids, and the cheeks that rise into a squint, wear the face round each eye (a patch over one: its colour)
             '<g clip-path="url(#' + P + '-lidL)">' +
