@@ -104,6 +104,9 @@ div.pd-me-dog { cursor: default; }
 .pd-me-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .pd-name { margin: 0; font-size: 22px; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
 .pd-rec { margin: 0; font-size: 15px; color: var(--pd-mute); }
+.pd-mood { margin: 2px 0 0; font-size: 14px; color: var(--pd-warn); text-wrap: pretty; }
+.pd-mood:empty { display: none; }
+.pd-mood[data-mood="happy"] { color: var(--pd-ok, #58cc02); }
 .pd-sec { display: flex; flex-direction: column; gap: 8px; }
 .pd-list { display: flex; flex-direction: column; gap: 8px; }
 .pd-row { position: relative; display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 8px 12px; border: 2px solid var(--pd-line); border-radius: 14px; background: var(--pd-card); }

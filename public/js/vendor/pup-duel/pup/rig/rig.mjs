@@ -104,7 +104,7 @@ function makeDog(c, slot, P) {
    'tipOutL', 'tipOutR', 'tipInL', 'tipInR', 'earsBack', 'earsFront', 'earTips', 'feat', 'browL', 'browR', 'pupilL', 'pupilR',
    'heyeL', 'heyeR', 'lidL', 'lidR', 'cheekL', 'cheekR', 'shutL', 'shutR', 'snout', 'blush', 'mouth', 'tongue', 'bone',
    'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearNeck', 'wearBack', 'wearOnPop', 'wearOnFit', 'earsOver', 'armClip', 'armEars', 'armEarL', 'armEarR', 'ruff', 'ruffClip',
-   'tailIn', 'tailDots', 'bridge'].forEach(function (k) { e[k] = q(k); });
+   'tailIn', 'tailDots', 'bridge', 'grimeB', 'grimeH'].forEach(function (k) { e[k] = q(k); });
   e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
   // the eye as a whole: the whites, each eye's clip (its pupil and its heart), the lids and the cheeks that squint into
   // it, the strokes of a closed eye; all left out under solid lenses (below)
@@ -277,6 +277,13 @@ function makeDog(c, slot, P) {
     set(el, 'opacity', clamp(o * fade, 0, 1));
   }
 
+  /* neglect (mood.mjs): how grubby the dog looks, 0 clean to 1 muddy and matted; a played game sets it back to 0 */
+  rig.setMood = function (dirt) {
+    var k = Math.max(0, Math.min(1, Number(dirt) || 0));
+    rig.dirt = k;
+    if (e.grimeB) e.grimeB.setAttribute('opacity', String(k));
+    if (e.grimeH) e.grimeH.setAttribute('opacity', String(Math.round(k * 0.9 * 1000) / 1000));
+  };
   rig.setExpr = function (id, clock) {
     if (id === rig.exprId) return;
     var now = rig.E;

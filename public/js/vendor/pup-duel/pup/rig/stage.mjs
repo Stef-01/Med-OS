@@ -648,11 +648,12 @@ window.__dob = {
   treat: function (i) { roster[i].rig.treat(clock); }, perform: function (i, id) { return roster[i].rig.perform(id, clock); }, call: function () { inScene().forEach(function (r, i) { r.rig.call(clock + i * 110); }); },
   makeGif: makeGif, clock: function () { return clock; }, look: function (x, y) { lookAt(x, y); },
   wear: function (i, m) { wear(roster[i], m, true); },   // scripts/doberman/fit-audit.mjs dresses a dog without postMessage
-  skin: function (m) { reskin(m); }                       // and the embed's dog in another coat (coats.mjs)
+  skin: function (m) { reskin(m); },                      // and the embed's dog in another coat (coats.mjs)
+  mood: function (i, dirt) { roster[i].rig.setMood(dirt); }   // and grubby with neglect (mood.mjs)
 };
 // the parent's dressing room (the duel's): the embedded dog becomes another dog, or itself in another coat or collar,
 // at once and where it stands (no walk on), keeping its face and what it wears
-var worn = null;
+var worn = null, dirtNow = 0;
 function reskin(m) {
   var i = roster.findIndex(function (q) { return q.c.id === dogById(m.dog).id; }), r = roster[i], was = roster[first], face = was.rig.exprId;
   if (r !== was) { if (was.slot.parentNode) svg.removeChild(was.slot); was.state = 'out'; first = i; }
@@ -662,6 +663,7 @@ function reskin(m) {
   r.state = 'in'; r.tx = tween(0); r.ty = tween(0); r.moveStart = -1e12; selected = r;
   r.rig.setExpr(face, -1e12);
   if (worn) wear(r, worn, true);
+  r.rig.setMood(dirtNow);   // a new rig keeps how grubby the dog was
   var at = cameraFor(inScene());
   for (var k = 0; k < 4; k++) cam[k] = tween(at[k]);
   syncDock(); draw(16);
@@ -671,6 +673,7 @@ if (EMBED) window.addEventListener('message', function (e) {
   if (e.origin !== location.origin || typeof m.dob !== 'string') return;
   if (m.dob === 'look') { if (typeof m.x === 'number' && typeof m.y === 'number') lookAt(m.x, m.y); return; }   // eyes only: the idle stays slow
   if (m.dob === 'skin') { reskin(m); return; }
+  if (m.dob === 'mood') { dirtNow = Number(m.dirt) || 0; r.setMood(dirtNow); if (!running()) draw(16); return; }   // neglect (mood.mjs)
   // a piece put on (not the outfit it loads in): full speed for the hop it makes and the piece's pop, which at the
   // idle's quarter speed played in slow motion
   if (m.dob === 'wear') { if (!m.fresh) lively = Math.max(lively, performance.now() + 1500); worn = m; wear(roster[first], m, !!m.fresh); if (!running()) draw(16); return; }

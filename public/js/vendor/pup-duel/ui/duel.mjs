@@ -21,6 +21,7 @@ import { createLobby, settleCrossed, offerFrom, rematchTarget } from '../duel/lo
 import { practiceWorld, BOT } from '../duel/bot.mjs';
 import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
 import { shown } from '../pup/rig/gifts.mjs';
+import { moodOf, lastPlayed, markPlayed } from '../pup/rig/mood.mjs';
 import { topicTree, poolOf, pickLabel, sourceLabel, decksOf, deckPack, yearsOf, YEAR_LABEL } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
@@ -70,7 +71,7 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
   const box = document.createElement('div');
   box.className = 'pd-dog' + (mirror ? ' pd-mirror' : '');
   const f = document.createElement('iframe');
-  let cur = lookOf(look), ready = false, wantExpr = null, wantMove = null;
+  let cur = lookOf(look), ready = false, wantExpr = null, wantMove = null, wantDirt = 0;
   const q = new URLSearchParams({ embed: '1', dog: cur.dog, expr: 'happy' });
   if (cur.coat) q.set('coat', cur.coat);
   if (cur.collar) q.set('collar', cur.collar);
@@ -84,7 +85,7 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
   f.addEventListener('load', () => {
     ready = true;
     if (reskins(cur, loadedAs)) send(skin(cur));
-    send(wearMsg(cur.wear, false)); if (wantExpr) send({ dob: 'expr', id: wantExpr });
+    send(wearMsg(cur.wear, false)); if (wantExpr) send({ dob: 'expr', id: wantExpr }); if (wantDirt) send({ dob: 'mood', dirt: wantDirt });
     if (wantMove) { send({ dob: 'perform', id: wantMove }); wantMove = null; }
     loadedAs = cur;
   });
@@ -92,6 +93,8 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
     el: box,
     expr(id) { if (wantExpr === id) return; wantExpr = id; if (ready) send({ dob: 'expr', id }); },
     tap() { if (ready) send({ dob: 'tap' }); },
+    /* how grubby the dog is with neglect (mood.mjs), sent again whenever the frame reloads */
+    mood(dirt) { wantDirt = dirt; if (ready) send({ dob: 'mood', dirt }); },
     /* a worn piece's signature move (moves.mjs), played once; a frame still loading plays it when it is up */
     perform(id) { if (!id) return; if (ready) send({ dob: 'perform', id }); else wantMove = id; },
     dress(look) {
@@ -235,7 +238,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       <main class="pd-main pd-lobby">
         <section class="pd-me" aria-label="You">
           ${hostLook ? '<div class="pd-me-dog"></div>' : `<button class="pd-me-dog" type="button" data-pd="dress" aria-label="Dress your dog"><span class="pd-badge">${icon('shirt')}</span></button>`}
-          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>
+          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p><p class="pd-mood" aria-live="polite"></p>
           ${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="shop" hidden aria-label="Bones: open the shop">${icon('bone')}<b></b><span class="pd-wallet-go">Shop</span></button>`}</div>
         </section>
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
@@ -278,6 +281,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const holder = shell.querySelector('.pd-me-dog');
     if (!S.hero || !holder.contains(S.hero.el)) { S.hero = dogFrame(look, { label: dogName(look.dog) }); holder.prepend(S.hero.el); }
     else S.hero.dress(look);
+    paintMood(lv, look);
     const sec = (name, show) => { const s = shell.querySelector(`[data-sec="${name}"]`); s.hidden = !show; return s.querySelector('.pd-list, .pd-grid'); };
     keyed(sec('invites', lv.invites.length > 0), lv.invites, d => `${d.id}|${JSON.stringify(d.them?.look)}|${d.them?.name}`, inviteRow);
     const mine = [...lv.live, ...lv.waiting];
@@ -288,6 +292,20 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     /* back from a reload (or a phone that slept) in the middle of a duel: straight back into it, once */
     if (S.rejoin && lv.loaded) { S.rejoin = false; if (lv.live.length === 1) { openDuel(lv.live[0]); return; } }
     shell.querySelector('.pd-lobby > .pd-err').textContent = lv.error ? `Can't reach the server. Retrying.` : '';
+  }
+  /* the dog's mood (founder 2026-10-26: neglect): the last game on this device, a practice the wallet counted or a duel
+     finished, whichever is latest, sets how sad and how grubby the dog is; a game just played cheers it, clean */
+  function paintMood(lv, look) {
+    const pd = S.wallet?.practice?.day ? Date.parse(`${S.wallet.practice.day}T12:00:00`) : 0;
+    const duel = Math.max(0, ...lv.past.map(d => Date.parse(d.updated_at || '') || 0));
+    const m = moodOf(Math.max(lastPlayed(), pd || 0, duel), dogName(look.dog));
+    const key = `${m.id}|${look.dog}|${S.cheered ? 1 : 0}`;
+    if (S.moodKey === key) return;
+    S.moodKey = key;
+    S.hero.expr(S.cheered ? 'overjoyed' : m.expr || 'happy'); S.hero.mood(m.dirt);
+    const el = shell.querySelector('.pd-mood');
+    el.textContent = S.cheered ? `${dogName(look.dog)} is clean and happy again.` : m.id === 'happy' ? '' : m.line;
+    el.dataset.mood = S.cheered ? 'happy' : m.id;
   }
   function row(cls, look) {
     const r = document.createElement('div');
@@ -818,6 +836,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (!v || !M || S.screen === 'results') return;
     S.screen = 'results';
     cancelAnimationFrame(S.raf);
+    if (lastPlayed() && moodOf(lastPlayed()).id !== 'happy') S.cheered = true;   /* back after a while: the lobby cheers, clean */
+    markPlayed(); S.moodKey = '';
     const st = v.firm, me = v.me, opp = v.opp, out = outcome(st, me) || 'loss', them = M.them.name || 'Your mate';
     const head = out === 'win' ? 'You win!' : out === 'draw' ? 'A draw' : `${them} wins`;
     const why = st.reason === 'leave' ? (st.winner === me ? `${them} left` : 'You left') : st.reason === 'forfeit' ? (st.winner === me ? `${them} went quiet` : 'You went quiet') : '';

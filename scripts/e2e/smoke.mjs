@@ -704,7 +704,7 @@ async function duel() {
       ok(dogs.length === 2 && dogs.every(Boolean), `duel: both dogs draw (the rig may be framed by its own site: ${dogs})`);
       await a.screenshot({ path: path.join(SHOTS, 'duel-question.png') }); const stem = await a.textContent('.os-duel .pd-stem'), inPack = PACK.questions.find(q => q.stem === stem), tag = await a.locator('.os-duel .pd-qtag').isVisible() ? await a.textContent('.os-duel .pd-qtag') : '';
       ok(!!inPack, 'duel: the question comes from the pool\'s pack, its stem whole');
-      ok(inPack && (inPack.origin === 'ai') === /AI-written/.test(tag), `duel: the AI-written tag shows exactly when the question is AI-written (${inPack?.source})`); }
+      ok(inPack && (inPack.source === 'amsa' ? /AMSA/.test(tag) && !/AI-written/.test(tag) : (inPack.origin === 'ai') === /AI-written/.test(tag)), `duel: the source tag names where the question came from: AMSA for an AMSA one, AI-written for an AI one (${inPack?.source}: ${tag})`); }
     await a.locator('.os-duel .pd-opt').nth(0).click();
     await timed(`round ${r + 1}: Sam's answer shows on Alex's phone`, () => c.waitForSelector('.os-duel .pd-theirs .pd-status >> text=Answered', { timeout: 6000 }));
     await c.locator('.os-duel .pd-opt').nth(1).click();
