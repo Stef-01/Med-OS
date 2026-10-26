@@ -27,7 +27,8 @@ function loadPlaywright() {
   for (const t of tries) { try { return createRequire(t)('playwright'); } catch {} }
   throw new Error('playwright is not installed: npm i -D playwright');
 }
-const { chromium } = loadPlaywright();
+const PW = loadPlaywright(), chromium = PW[process.env.BROWSER || 'chromium'];   // BROWSER=webkit: the suite in Safari's engine
+const readClip = pg => pg.evaluate(() => window.__copied || navigator.clipboard.readText()).catch(() => '');
 
 const TYPES = { '.html': 'text/html', '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml',
   '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
@@ -112,13 +113,17 @@ const REPLY = id => JSON.stringify({ items: [{ id, done: true, quote: 'I am wash
 
 async function run(width, height, label) {
   try { await runIn(width, height, label); }
-  catch (e) { fails.push(`${label}: ${e.message.split('\n')[0]}`); console.error(`FAIL ${label}: ${e.message.split('\n')[0]}`); if (lastPage) await lastPage.screenshot({ path: path.join(SHOTS, `${label}-crash.png`) }).catch(() => {}); }
+  catch (e) {
+    const wait = (e.message.match(/waiting for ([^\n]+)/) || [])[1], what = `${e.message.split('\n')[0]}${wait ? ` (waiting for ${wait.trim()})` : ''}`;   /* the selector a timeout waited for */
+    fails.push(`${label}: ${what}`); console.error(`FAIL ${label}: ${what}`); if (lastPage) await lastPage.screenshot({ path: path.join(SHOTS, `${label}-crash.png`) }).catch(() => {}); }
 }
 let lastPage = null;
 async function runIn(width, height, label) {
   const b = await chromium.launch();
   const ctx = await b.newContext({ viewport: { width, height }, deviceScaleFactor: 2 });
-  await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: BASE.slice(0, -1) });
+  if ((process.env.BROWSER || 'chromium') === 'chromium') await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: BASE.slice(0, -1) });   // WebKit has no clipboard permissions to grant
+  /* what the app copies, kept where the test can read it in any engine (WebKit lets a page write the clipboard, not a test read it) */
+  await ctx.addInitScript(() => { const c = navigator.clipboard; if (!c) return; const w = c.writeText.bind(c); c.writeText = t => { window.__copied = String(t); return w(t).catch(() => {}); }; });
   await ctx.route(/^https:\/\//, r => r.abort());   /* nothing leaves the machine */
   /* the solo flows run with no shared record, whatever project the real config.js names */
   await ctx.route(/\/config\.js$/, r => r.fulfill({ contentType: 'text/javascript', body: "window.OSCE_CONFIG = { supabaseUrl: '', supabaseAnonKey: '' };" }));
@@ -253,7 +258,7 @@ async function runIn(width, height, label) {
   await click('[data-ai-fold] > summary');
   await pg.fill('[data-ai="tx"]', 'Candidate: Hi, I am Alex, a medical student. I am washing my hands.');
   await click('[data-os="aicopy"]');
-  const clip = await pg.evaluate(() => navigator.clipboard.readText()).catch(() => '');
+  const clip = await readClip(pg);
   ok(/checklist/.test(clip) && /transcript/.test(clip), `${label}: the copied prompt carries the checklist and the transcript`);
   const leaf = await pg.evaluate(() => document.querySelector('.os-check input[data-tick]:not([data-parent])')?.dataset.tick);
   await pg.fill('[data-ai="reply"]', `Here you go:\n\`\`\`json\n${REPLY(leaf || firstKey)}\n\`\`\``);
@@ -384,6 +389,7 @@ async function runIn(width, height, label) {
     await click('.os-scard[data-id="ai-8b37c286"] [data-os="preview"]');
     await pg.waitForSelector('.os-pv');
     await click('.os-pv [data-tab="Patient Script"]');
+    await pg.locator('.os-pv .os-fig img').scrollIntoViewIfNeeded();   /* lazy: WebKit loads it once it is near the screen, as a reader scrolls to it */
     await pg.waitForSelector('.os-pv .os-fig img');
     ok(await pg.locator('.os-pv .os-fig img').evaluate(i => i.complete && i.naturalWidth > 0), `${label}: the X-ray loads in the patient script`);
     ok(/Abdominal X-ray: show when/.test(await pg.textContent('.os-pv figcaption')) && await pg.locator('.os-pv .os-credit a[href^="https://creativecommons.org"]').count() === 1, `${label}: the caption and the licence credit show under it`);
@@ -417,7 +423,7 @@ async function runIn(width, height, label) {
   await pg.waitForSelector('.os-reqlist');
   ok(/Requested/.test(await pg.textContent('.os-reqrow .os-reqst')) && await pg.locator('.os-reqrow [data-os="reqcopy"]').count() === 1, `${label}: the request is listed as Requested, with Copy to send it`);
   await click('.os-reqrow [data-os="reqcopy"]');
-  const asked = requestsFrom(await pg.evaluate(() => navigator.clipboard.readText()));
+  const asked = requestsFrom(await readClip(pg));
   ok(asked.length === 1 && asked[0].topic === 'snakebite on a bush walk' && asked[0].setting === 'acute' && (asked[0].results || []).includes('bloods'), `${label}: Copy gives a message the writer's pipeline reads back`);
   await shot('requests');
   await pg.keyboard.press('Escape');
@@ -450,7 +456,7 @@ async function runIn(width, height, label) {
   await pg.waitForSelector('.os-mcqs .os-mcqrow');
   ok(/Not sent/.test(await pg.textContent('.os-mcqrow .os-reqst')), `${label}: with no shared database the question is kept on the phone, marked not sent`);
   await click('.os-mcqs [data-os="mcqcopy"]');
-  const exported = submissionsFrom(await pg.evaluate(() => navigator.clipboard.readText()));
+  const exported = submissionsFrom(await readClip(pg));
   ok(exported.length === 1 && exported[0].provenance.kind === 'user' && exported[0].answer === 0 && !!cleanItem(exported[0]) && exported[0].provenance.submittedBy, `${label}: the export is the user's question, with its key and who sent it, as the intake reads it`);
   await click('[data-os="mcqnew"]');
   await pg.waitForSelector('.os-mcqf');
