@@ -137,3 +137,14 @@ test('year: read as students write it, guessed when missing, kept by the schema,
   assert.deepEqual(ladder([{ year: 3 }, { year: 1 }, {}, { year: 2 }, { year: 1 }]).map(x => x.year ?? 0), [1, 1, 2, 3, 0]);
   assert.deepEqual(ladder([{ year: 2 }, { year: 2 }, { year: 4 }], x => x.year, 1).map(x => x.year), [2, 4]);
 });
+
+import { verifyPrompt, applyChecks, VERIFY_SCHEMA } from '../public/js/library/verify.mjs';
+test('check the medicine: Claude answers blind; a disagreement is held back with its reason; unanswered ones pass', () => {
+  const { ready } = checkUpload(JSON.stringify([Q(), Q({ stem: `${Q().stem} Second.` }), Q({ stem: `${Q().stem} Third.` })]), { by: 'S', now: NOW });
+  const p = JSON.parse(verifyPrompt(ready)); assert.equal(p.length, 3); assert.equal(p[0].key, 'A'); assert.match(p[0].options[0], /^A\. /);
+  const r = applyChecks(ready, [{ id: ready[0].id, choice: 0, ok: true, issue: '' }, { id: ready[1].id, choice: 1, ok: false, issue: 'LAD gives anterior changes; this is inferior.' }]);
+  assert.equal(r.pass.length, 2); assert.equal(r.pass[0].checked, 1); assert.equal(r.unchecked, 1);
+  assert.equal(r.held.length, 1); assert.match(r.held[0].issue, /anterior/);
+  assert.equal(applyChecks(ready, [{ id: ready[0].id, choice: 2, ok: true, issue: '' }]).held.length, 1, 'ok but a different choice is held');
+  assert.deepEqual(VERIFY_SCHEMA.properties.checks.items.required, ['id', 'choice', 'ok', 'issue']);
+});

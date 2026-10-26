@@ -243,6 +243,21 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(tag1 === 'Year 1' && fits, `duel: 0 to 1 starts at Year 1, and the tag says so, whole (${tag1})`);   /* the climb itself: the package's core test */
   await shot(lad, '320-duel-ladder');
 
+  /* check the medicine: with a key in Settings, Claude answers each ready question; one it disagrees with is held back */
+  const vc = await phone(375, 812, {}, ['osce.marker.v1', JSON.stringify({ key: 'sk-ant-test', model: 'claude-sonnet-5-5' })]);
+  await vc.route('https://api.anthropic.com/**', async r => {
+    if (r.request().method() === 'OPTIONS') return r.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*', 'Access-Control-Allow-Methods': 'POST' } });
+    const body = JSON.parse(r.request().postData() || '{}'), qs = JSON.parse(body.messages[0].content);
+    const checks = qs.map((q, i) => (i === 0 ? { id: q.id, choice: 1, ok: false, issue: 'The left anterior descending gives anterior changes; the key is right only if the leads are inferior.' } : { id: q.id, choice: 'ABCDE'.indexOf(q.key), ok: true, issue: '' }));
+    return r.fulfill({ status: 200, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ id: 'msg_v', type: 'message', role: 'assistant', model: 'claude-sonnet-5-5', stop_reason: 'end_turn', content: [{ type: 'text', text: JSON.stringify({ checks }) }], usage: { input_tokens: 1, output_tokens: 1 } }) });
+  });
+  await open(vc, 'upload'); await vc.fill('.os-libp [name="paste"]', UPLOAD); await vc.waitForSelector('[data-lib="verify"]');
+  await vc.click('[data-lib="verify"]'); await vc.waitForSelector('.os-libcheck--done');
+  ok(/Claude checked 3 questions/.test(await vc.textContent('.os-libcheck--done')) && /held back/.test(await vc.textContent('.os-libcheck--done')) && /Save 2 questions/.test(await vc.textContent('.os-libsave')), 'check: Claude checks each answer; the one it disputes is held back with why');
+  await vc.evaluate(() => document.querySelector('.os-libcheck--done').scrollIntoView({ block: 'center' })); await shot(vc, '375-checked-medicine');
+  await vc.click('[data-lib="keepheld"]'); await vc.waitForTimeout(150);
+  ok(/Save 3 questions/.test(await vc.textContent('.os-libsave')), 'check: a held question can be kept anyway');
+
   /* signed out: kept on this phone, and a note says how to keep it on an account */
   const solo = await phone(320, 640, {});
   await open(solo, 'upload'); await solo.fill('.os-libp [name="paste"]', UPLOAD); await solo.waitForSelector('.os-libsum');

@@ -1651,3 +1651,17 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-libstartstreak { display:inline-flex; align-items:center; gap:2px; margin-left:6px; padding:1px 8px 1px 5px; border-radius:99px; background:var(--fill); color:var(--mute); font-size:13px; font-weight:800; vertical-align:2px; }
 .os-libstartstreak svg { width:14px; height:14px; }
 .os-libstartstreak.live { background:rgba(255,122,26,.16); color:#ff9a4a; }
+
+/* Check the medicine */
+.os-libcheck { display:flex; align-items:center; gap:8px; font-size:13.5px; line-height:1.45; }
+.os-libcheck svg { flex:none; width:18px; height:18px; color:var(--pri); }
+button.os-libcheck { align-self:flex-start; }
+.os-libcheck--off { padding:10px 12px; border-radius:12px; background:var(--card2); color:var(--mute); align-items:flex-start; }
+.os-libcheck--done { flex-direction:column; align-items:stretch; padding:12px; border-radius:12px; background:var(--card2); }
+.os-libcheck--done > p { display:flex; gap:8px; margin:0; }
+.os-libheld { list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.os-libheld li { padding:10px; border-radius:10px; background:var(--solid); display:flex; flex-direction:column; gap:4px; }
+.os-libheld p { margin:0; font-size:13px; color:var(--ink) !important; overflow-wrap:anywhere; }
+.os-libheld .os-libheld-why { color:var(--em-pend-ink) !important; }
+.os-libheld .os-link { align-self:flex-start; padding:4px 0; }
+.os-libcheck--done > p { color:var(--ink) !important; } .os-libcheck--done > p b { color:var(--ink); }

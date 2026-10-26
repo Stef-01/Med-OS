@@ -13,7 +13,8 @@
 import { esc } from '../core.mjs';
 import { icon } from '../study-kit/icons.mjs';
 import { dialogOf } from '../study-kit/ui.mjs';
-import { ctx, I, notify, openDialog, confirmDlg, now } from './state.mjs';
+import { ctx, I, notify, openDialog, confirmDlg, now, markerCfg } from './state.mjs';
+import { VERIFY_SYSTEM, VERIFY_SCHEMA, verifyPrompt, applyChecks } from '../library/verify.mjs';
 import { account } from '../study-kit/sync.mjs';
 import { chatPrompt } from '../library/prompt.mjs';
 import { checkUpload, deckName, layers, layerLabel, yearLabel, diffLabel, inPick, KINDS, KIND_IDS, LIMITS } from '../library/item.mjs';
@@ -69,7 +70,7 @@ const panel = () => dlg()?.querySelector('.os-libp');
 function wire(el) {
   el.addEventListener('submit', e => e.preventDefault());   /* Enter in Add a friend clicks its button, which does the work */
   el.addEventListener('click', e => { const b = e.target.closest('[data-lib]'); if (b && !b.disabled && el.contains(b)) act(b.dataset.lib, b, e); });
-  el.addEventListener('input', e => { if (e.target.name === 'find') { V.find = e.target.value; clearTimeout(V.findT); V.findT = setTimeout(() => { const pos = e.target.selectionStart; paint(); const f = panel()?.querySelector('[name="find"]'); if (f) { f.focus(); f.setSelectionRange(pos, pos); } }, 160); return; } if (e.target.name === 'notes') { V.up.notes = e.target.value; const b = panel()?.querySelector('[data-lib="copyprompt"] span'); if (b) b.textContent = V.up.notes.trim() ? 'Copy the prompt with my notes' : 'Copy the prompt'; return; } if (e.target.matches?.('[data-lib-note]')) { clearTimeout(saveNote.t); const v = e.target.value; saveNote.t = setTimeout(() => saveNote(v), 400); return; } if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
+  el.addEventListener('input', e => { if (e.target.name === 'find') { V.find = e.target.value; clearTimeout(V.findT); V.findT = setTimeout(() => { const pos = e.target.selectionStart; paint(); const f = panel()?.querySelector('[name="find"]'); if (f) { f.focus(); f.setSelectionRange(pos, pos); } }, 160); return; } if (e.target.name === 'notes') { V.up.notes = e.target.value; const b = panel()?.querySelector('[data-lib="copyprompt"] span'); if (b) b.textContent = V.up.notes.trim() ? 'Copy the prompt with my notes' : 'Copy the prompt'; return; } if (e.target.matches?.('[data-lib-note]')) { clearTimeout(saveNote.t); const v = e.target.value; saveNote.t = setTimeout(() => saveNote(v), 400); return; } if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; V.up.check = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
   el.addEventListener('change', e => {
     if (e.target.name === 'file') readFile(e.target);
     if (e.target.name === 'exam') { setPref('exam', e.target.value || ''); paint(); return; }
@@ -168,13 +169,44 @@ function paintUploadResult() {
     ${r.ready[0] ? (() => { const q = r.ready[0]; return `<figure class="os-libprev" aria-label="How the first one looks"><figcaption class="os-liblayer">${esc([yearLabel(q), diffLabel(q), layerLabel(q)].filter(Boolean).join(' · '))}</figcaption><p>${esc(q.stem.length > 220 ? `${q.stem.slice(0, 220)}…` : q.stem)}${q.ask ? ` <b>${esc(q.ask)}</b>` : ''}</p><ol>${q.options.map((o, i) => `<li${i === q.answer ? ' class="ok"' : ''}><b>${LET[i]}</b><span>${esc(o)}</span></li>`).join('')}</ol></figure>`; })() : ''}
     ${r.more ? `<p class="os-liberr">Only the first ${LIMITS.upload} are read: upload the rest after.</p>` : ''}
     ${bad.length ? `<details class="os-libprobs" open><summary>Not saved until fixed (${bad.length})</summary><p class="os-libmeta">Fix these in ChatGPT ("question 3 has no kind") and paste again; the ready ones are not saved twice.</p><ol>${bad.map(row).join('')}</ol></details>` : ''}
-    ${tips.length ? `<details class="os-libprobs"><summary>Ready, with tips (${tips.length})</summary><ol>${tips.map(row).join('')}</ol></details>` : ''}`;
+    ${tips.length ? `<details class="os-libprobs"><summary>Ready, with tips (${tips.length})</summary><ol>${tips.map(row).join('')}</ol></details>` : ''}
+    ${checkHtml(r)}`;
   btn.disabled = !r.ready.length || V.busy; btn.textContent = r.ready.length ? `Save ${plural(r.ready.length, 'question')}` : 'Save';
+}
+/* Check the medicine (library/verify.mjs): Claude answers each ready question blind with the student's own key; one it
+   disagrees with is held back with its reason, unless kept anyway */
+function checkHtml(r) {
+  const c = V.up.check;
+  if (!r.ready.length && !c?.held?.length) return '';
+  if (!markerCfg().key) return `<p class="os-libcheck os-libcheck--off">${icon('stethoscope')}<span>ChatGPT gets about one question in five wrong. Add your Anthropic key in Settings (AI marking) and Claude can check each answer before you save.</span></p>`;
+  if (!c) return `<button class="os-btn os-libcheck" data-lib="verify">${icon('stethoscope')}<span>Check the medicine with Claude</span></button>`;
+  if (c.busy) return `<p class="os-libcheck">${icon('stethoscope')}<span>Claude is checking ${plural(c.n, 'question')}…</span></p>`;
+  const held = c.held.filter(h => !c.kept?.has(h.item.id));
+  return `<div class="os-libcheck os-libcheck--done"><p>${icon('stethoscope')}<span><b>Claude checked ${plural(c.n, 'question')}</b>: ${c.n - c.held.length} agree${c.held.length ? `, ${c.held.length} held back` : ''}.</span></p>
+    ${held.length ? `<ol class="os-libheld">${held.map(h => `<li><p>${esc(h.item.stem.length > 140 ? `${h.item.stem.slice(0, 140)}…` : h.item.stem)}</p><p class="os-libheld-why">${esc(h.issue)}</p><button class="os-link" data-lib="keepheld" data-id="${esc(h.item.id)}">Keep it anyway</button></li>`).join('')}</ol>` : ''}</div>`;
+}
+async function verify() {
+  const r = V.up.res; if (!r?.ready.length) return;
+  const all = [...r.ready]; V.up.check = { busy: true, n: all.length }; paintUploadResult();
+  try {
+    const { default: Anthropic } = await import('../vendor/anthropic-sdk.mjs');
+    const { key, model } = markerCfg(), client = new Anthropic({ apiKey: key, dangerouslyAllowBrowser: true }), checks = [];
+    for (let i = 0; i < all.length; i += 25) {
+      const res = await client.messages.create({ model, max_tokens: 8000, system: VERIFY_SYSTEM, output_config: { effort: 'medium', format: { type: 'json_schema', schema: VERIFY_SCHEMA } }, messages: [{ role: 'user', content: verifyPrompt(all.slice(i, i + 25)) }] });
+      const text = res.content.filter(b => b.type === 'text').map(b => b.text).join('');
+      checks.push(...(JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1)).checks || []));
+    }
+    const out = applyChecks(all, checks);
+    V.up.check = { n: all.length, held: out.held, kept: new Set(), all };
+    r.ready = out.pass;
+    notify(out.held.length ? `${plural(out.held.length, 'question')} held back: see why below.` : 'Claude agrees with every answer.', out.held.length ? '' : 'success');
+  } catch (e) { V.up.check = null; notify(`The check did not run: ${String(e.message || e).slice(0, 120)}`, 'danger'); }
+  paintUploadResult();
 }
 async function readFile(input) {
   const f = input.files?.[0]; if (!f) return;
   if (f.size > 4e6) { notify('That file is over 4 MB: split it.', 'danger'); input.value = ''; return; }
-  V.up.text = await f.text(); V.up.res = null; input.value = '';
+  V.up.text = await f.text(); V.up.res = null; V.up.check = null; input.value = '';
   const ta = panel()?.querySelector('[name="paste"]'); if (ta) ta.value = V.up.text;
   paintUploadResult();
 }
@@ -185,7 +217,7 @@ async function save() {
   V.busy = true; paintUploadResult();
   try {
     const out = await api.upload(name, r.ready);
-    V.lib = api.current(); V.up = { text: '', res: null, deck: name };
+    V.lib = api.current(); V.up = { text: '', res: null, deck: name, check: null };
     notify(`${plural(out.added, 'question')} saved to ${out.name}: live now in Study${V.lib.signedIn ? ' and Duel a Mate' : ''}.`, 'success');
     go('library');
   } catch (e) { notify(e.message || 'That did not save. Try again.', 'danger'); }
@@ -510,6 +542,8 @@ async function act(a, b, e) {
       return;
     }
     case 'save': return save();
+    case 'verify': return verify();
+    case 'keepheld': { const c = V.up.check, h = c?.held.find(x => x.item.id === b.dataset.id); if (!h) return; c.kept.add(h.item.id); V.up.res.ready.push(h.item); return paintUploadResult(); }
     case 'deckpick': { V.up.deck = b.dataset.v; const inp = panel()?.querySelector('[name="deck"]'); if (inp) inp.value = b.dataset.v; panel()?.querySelectorAll('.os-libdeckchips .os-chip').forEach(c => c.classList.toggle('on', c === b)); return; }
     case 'studydeck': Object.assign(V.st, { deck: b.dataset.deck, topic: '', cat: '', year: 0, diff: 0, q: null, view: 'custom' }); return go('study');
     case 'share': V.share = V.share === b.dataset.deck ? '' : b.dataset.deck; return paint();
