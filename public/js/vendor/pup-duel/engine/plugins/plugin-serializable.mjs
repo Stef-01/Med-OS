@@ -18,7 +18,9 @@ function isPlainObject(value) {
     }
   }
   const proto = Object.getPrototypeOf(value);
-  if (proto === null) return true;
+  /* the common answers first, the same as below gives them (Object's own prototype: its constructor is Object): the
+     source comparison under it ran for every object of every move, a third of a duel's fold */
+  if (proto === null || proto === Object.prototype) return true;
   const Ctor = Object.prototype.hasOwnProperty.call(proto, 'constructor') && proto.constructor;
   return typeof Ctor === 'function' && Ctor instanceof Ctor && Function.prototype.toString.call(Ctor) === objectCtorString;
 }

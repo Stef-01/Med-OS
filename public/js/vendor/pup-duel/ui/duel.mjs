@@ -9,19 +9,21 @@
 
    transport  supabaseTransport(config) | localTransport() | null (practice only)
    pack       a normalised question pack (pack.mjs)
-   look       optional: () => the host's own dog and wear (Optimus passes its mascot's), else the duel locker
+   look       optional: () => the host's own dog and wear (a host with its own wardrobe), else the duel's store and
+              locker (store.mjs: pieces bought with bones earned in duels; the server keeps the wallet)
    keys       'document' (default) listens for keys itself; 'host' leaves them to the host, which calls ui.key(e) from its
               own key owner (Med-OS's overlay stack captures every key) and gets true back when the duel used it */
 
 import { RULES, EMOTES, makeSetup, outcome } from '../duel/core.mjs';
 import { createSession } from '../duel/session.mjs';
-import { createLobby } from '../duel/lobby.mjs';
+import { createLobby, settleCrossed, offerFrom } from '../duel/lobby.mjs';
 import { practiceWorld, BOT } from '../duel/bot.mjs';
 import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
 import { topicsOf } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
-import { lockerFor, fitLook } from '../duel/locker.mjs';
-import { ITEMS, wearMsg, SLOT_NAME, VB, itemOf } from '../pup/wardrobe.mjs';
+import { fitOwned } from '../duel/wallet.mjs';
+import { openStore, storeTile, loadoutsPanel, bones } from './store.mjs';
+import { ITEMS, SETS, wearMsg, SLOT_NAME, VB, itemOf } from '../pup/wardrobe.mjs';
 import { coatsFor, COLLARS } from '../pup/rig/coats.mjs';
 import { still, lookDog } from '../pup/rig/still.mjs';
 import { icon } from './icons.mjs';
@@ -117,7 +119,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   const storeAt = `${storeKey}:${transport?.name || 'none'}`;
   const remembered = () => { try { return JSON.parse(storage.getItem(storeAt)) || null; } catch { return null; } };
   const remember = me => { try { if (me) storage.setItem(storeAt, JSON.stringify(me)); else storage.removeItem(storeAt); } catch { /* private mode */ } };
-  const S = { screen: '', me: null, lobby: null, lv: null, session: null, world: null, worldMe: null, t: transport, err: '', busy: false, raf: 0, dogs: {}, hero: null, match: null, sheet: null, crossT: 0, rejoin: false };
+  const S = { screen: '', me: null, lobby: null, lv: null, session: null, world: null, worldMe: null, t: transport, err: '', busy: false, raf: 0, dogs: {}, hero: null, match: null, sheet: null, crossT: 0, rejoin: false, wallet: null };
   root.classList.add('pd');
   root.innerHTML = '<div class="pd-shell"></div><div class="pd-live" aria-live="polite"></div>';
   const shell = root.querySelector('.pd-shell'), liveEl = root.querySelector('.pd-live');
@@ -204,7 +206,56 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   function myLook() {
     const base = lookOf(S.lv?.self?.look || S.me?.look);
     if (hostLook) { const h = hostLook(); if (h) return lookOf(h); }
-    return fitLook(base, lockerFor(ITEMS, S.lv?.self?.wins || 0).open);
+    return base;   /* the server keeps a look with owned pieces only (0002_pup_store.sql) */
+  }
+  /* the wallet: { ok: true, bones, owned: Set, loadouts } once the server answers; { ok: false } on a server without
+     the store yet (0002 not run: its functions are not there), which leaves the duel as it was */
+  const asWallet = w => ({ ok: true, bones: w.bones, earned: w.earned, owned: new Set(w.owned || []), loadouts: w.loadouts || [] });
+  async function loadWallet() {
+    if (hostLook || !S.t?.wallet || !S.me) { S.wallet = { ok: false }; return S.wallet; }
+    const was = S.wallet;
+    try { S.wallet = asWallet(await S.t.wallet(S.me)); } catch (e) { S.wallet = was?.ok && !e.server ? was : { ok: false, why: e.message }; }
+    paintWallet(was);
+    S.onWallet?.();
+    return S.wallet;
+  }
+  /* the bone count in the lobby's header, a tap from the store; it pops when a duel has paid */
+  function paintWallet(was) {
+    const b = S.screen === 'lobby' && shell.querySelector('[data-pd="store"]');
+    if (!b) return;
+    const w = S.wallet;
+    b.querySelector('.pd-wbal').innerHTML = w?.ok ? bones(w.bones) : '';
+    b.setAttribute('aria-label', w?.ok ? `Store, ${w.bones} bones` : 'Store');
+    if (w?.ok && was?.ok && w.bones > was.bones) { b.classList.remove('pd-pop'); void b.offsetWidth; b.classList.add('pd-pop'); say(`${w.bones - was.bones} bones earned`); }
+  }
+  /* what the store screen needs from the duel: the wallet, the look, and the calls that change them */
+  function storeCtx(back = null) {
+    const ctx = {
+      sheet, dogFrame, back,
+      wallet: () => S.wallet,
+      look: () => myLook(),
+      async buy(id, price, day) { S.wallet = asWallet(await S.t.buy(S.me, id, price, day)); await wearLook({ ...myLook(), wear: { ...myLook().wear, [itemOf(id).slot]: id } }); },
+      async buySet(id, price) {
+        S.wallet = asWallet(await S.t.buySet(S.me, id, price));
+        const wear = { ...myLook().wear }; for (const i of SETS.find(x => x.id === id).items) wear[itemOf(i).slot] = i;
+        await wearLook({ ...myLook(), wear });
+      },
+      wear: look => wearLook(look)
+    };
+    S.onWallet = () => ctx.onWallet?.();
+    return ctx;
+  }
+  async function wearLook(look) {
+    const p = await (S.lobby ? S.lobby.look(lookOf(look)) : S.t.touch(S.me, lookOf(look)));
+    S.me = { ...S.me, look: p.look }; remember(S.me);
+    if (S.lv?.self) S.lv = { ...S.lv, self: { ...S.lv.self, look: p.look } };
+    paintLobby();
+    return p;
+  }
+  async function openShop(opts = {}, back = null) {
+    if (hostLook) return;
+    if (!S.wallet) loadWallet();
+    openStore(storeCtx(back), opts);
   }
   function showLobby() {
     stopAll(); S.screen = 'lobby';
@@ -212,7 +263,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       <main class="pd-main pd-lobby">
         <section class="pd-me" aria-label="You">
           ${hostLook ? '<div class="pd-me-dog"></div>' : `<button class="pd-me-dog" type="button" data-pd="dress" aria-label="Dress your dog"><span class="pd-badge">${icon('shirt')}</span></button>`}
-          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p></div>
+          <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="store" aria-label="Store">${icon('bag')}<span class="pd-wbal"></span></button>`}</div>
         </section>
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Duels</h2><div class="pd-list"></div></section>
@@ -222,11 +273,13 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       </main>`;
     wireCommon();
     shell.querySelector('[data-pd="menu"]').addEventListener('click', openMenu);
-    shell.querySelector('[data-pd="dress"]')?.addEventListener('click', openDress);
+    shell.querySelector('[data-pd="dress"]')?.addEventListener('click', () => openDress());
+    shell.querySelector('[data-pd="store"]')?.addEventListener('click', () => openShop());
     if (!S.t) return;
     S.lobby = createLobby({ transport: S.t, me: S.me, onChange: lv => { S.lv = lv; paintLobby(); } });
     S.lobby.start();
     paintLobby();
+    paintWallet(); loadWallet();
   }
   function paintLobby() {
     if (S.screen !== 'lobby') return;
@@ -351,7 +404,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   }
   function openMenu() {
     sheet(`<button class="pd-btn" type="button" data-pd="signout">Sign out</button>`, el => {
-      el.querySelector('[data-pd="signout"]').addEventListener('click', () => { remember(null); S.me = null; S.hero = null; showAuth(); });
+      el.querySelector('[data-pd="signout"]').addEventListener('click', () => { remember(null); S.me = null; S.hero = null; S.wallet = null; showAuth(); });
     }, { label: 'Menu' });
   }
   function openSetup(mate, last = null) {
@@ -375,20 +428,22 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         if (!setup.questions.length) { el.querySelector('.pd-err').textContent = 'No questions to play.'; return; }
         await busy(async () => {
           const d = await challengeMate(mate.id, setup);
-          closeSheet(); openDuel({ ...d, them: mate });
+          closeSheet(); openDuel({ ...d, them: mate }, { accept: d.b === S.me.id });
         }, () => { el.querySelector('.pd-err').textContent = S.err; });
       });
     }, { label: `Challenge ${mate.name}` });
   }
 
-  /* the dressing room: a live preview of the dog, and one tab each for the dog, its coat, its collar and the four
-     slots; locked pieces open with wins (locker.mjs). The line under the preview names what was just chosen */
+  /* the locker (the dressing room): a live preview of the dog, and one tab each for the dog, its coat, its collar and
+     the four slots, each slot with the pieces you own and a way to the store; and three saved loadouts. The line
+     under the preview names what was just chosen. `draft` is a look in progress (back from the store) */
   const TABS = [['dog', 'paw', 'Dog'], ['coat', 'palette', 'Coat'], ['collar', 'collar', 'Collar'], ['head', 'hat', SLOT_NAME.head], ['face', 'glasses', SLOT_NAME.face], ['neck', 'bow', SLOT_NAME.neck], ['back', 'pack', SLOT_NAME.back]];
-  function openDress() {
+  function openDress(draft = null, startTab = 'dog') {
     if (hostLook) return;
-    const self = S.lv?.self || S.me, locker = lockerFor(ITEMS, self?.wins || 0), cur = structuredClone(myLook());
+    if (!S.wallet) loadWallet();
+    const owned = () => (S.wallet?.ok ? S.wallet.owned : new Set()), cur = structuredClone(draft || fitOwned(myLook(), owned()));
     sheet(`
-      <header class="pd-top pd-dresstop">${ib('shut', 'back', 'Cancel')}<span></span><span></span></header>
+      <header class="pd-top pd-dresstop">${ib('shut', 'back', 'Cancel')}<h2 class="pd-h1"><span>Locker</span></h2>${ib('loadouts', 'layers', 'Loadouts')}</header>
       <div class="pd-preview"></div>
       <p class="pd-chosen" aria-live="polite"></p>
       <div class="pd-tabs" role="tablist" aria-label="Dress up">${TABS.map(([id, ic, name], i) => `<button type="button" role="tab" data-tab="${id}" aria-selected="${i === 0}" aria-controls="pd-panel" aria-label="${esc(name)}" title="${esc(name)}">${icon(ic)}</button>`).join('')}</div>
@@ -405,7 +460,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         if (id === 'collar') { const k = COLLARS.find(c => c.id === cur.collar) || COLLARS.find(c => c.hex === lookDog({ dog: cur.dog }).pal.collar); return k ? k.name : 'Its own'; }
         return cur.wear[id] ? itemOf(cur.wear[id]).name : 'None';
       };
-      const label = () => { chosen.textContent = `${TABS.find(t => t[0] === tab)[2]} · ${pickName(tab)}`; };
+      const label = () => { const t = TABS.find(x => x[0] === tab); chosen.textContent = t ? `${t[2]} · ${pickName(tab)}` : 'Loadouts'; };
       const coatTab = () => { el.querySelector('[data-tab="coat"]').hidden = coatsFor(cur.dog).length < 2; };   // a breed of one coat has nothing to choose
       const update = () => { prev.dress(cur); label(); };
       const radio = (b, on) => b.setAttribute('aria-checked', String(on));
@@ -450,45 +505,63 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       }
       function pieces(slot) {
         const g = document.createElement('div'); g.className = 'pd-pieces';
-        const list = ITEMS.filter(i => i.slot === slot && !i.exclusive).sort((a, b) => Number(locker.open.has(b.id)) - Number(locker.open.has(a.id)) || a.price - b.price);
+        /* the pieces you own for the slot, then the store's door for more */
+        const list = ITEMS.filter(i => i.slot === slot && !i.exclusive && owned().has(i.id)).sort((a, b) => a.price - b.price || a.name.localeCompare(b.name));
         const none = document.createElement('button');
         none.type = 'button'; none.className = 'pd-piece pd-none'; none.dataset.slot = slot; none.dataset.id = '';
         none.setAttribute('aria-label', `No ${SLOT_NAME[slot].toLowerCase()}`); none.innerHTML = icon('x');
         g.append(none, ...list.map(it => {
-          const b = document.createElement('button'), open = locker.open.has(it.id);
+          const b = document.createElement('button');
           b.type = 'button'; b.className = 'pd-piece'; b.dataset.id = it.id; b.dataset.slot = slot; b.dataset.r = it.rarity;
-          b.disabled = !open; b.setAttribute('aria-label', open ? it.name : `${it.name}, locked`); b.title = it.name;
-          b.innerHTML = `<svg viewBox="${it.tile || it.vb || VB[slot]}" aria-hidden="true">${it.icon || it.svg}</svg>${open ? '' : `<span class="pd-lock">${icon('lock')}</span>`}`;
+          b.setAttribute('aria-label', it.name); b.title = it.name;
+          b.innerHTML = `<svg viewBox="${it.tile || it.vb || VB[slot]}" aria-hidden="true">${it.icon || it.svg}</svg>`;
           return b;
         }));
+        if (S.t?.wallet) g.append(storeTile(slot, sl => openShop({ slot: sl }, () => openDress(cur, sl))));
         const mark = () => g.querySelectorAll('.pd-piece').forEach(x => x.setAttribute('aria-pressed', String((cur.wear[slot] || '') === x.dataset.id)));
         g.addEventListener('click', e => {
-          const b = e.target.closest('.pd-piece'); if (!b || b.disabled) return;
+          const b = e.target.closest('.pd-piece'); if (!b || b.disabled || b.dataset.pd === 'toshop') return;
           if (b.dataset.id) cur.wear[slot] = b.dataset.id; else delete cur.wear[slot];
           mark(); update();
         });
         mark();
         const wrap = document.createElement('div'); wrap.append(g);
-        if (list.some(it => !locker.open.has(it.id))) wrap.insertAdjacentHTML('afterbegin', `<p class="pd-locknote">${icon('trophy')}<span>Win duels to open more</span></p>`);
         return wrap;
       }
+      /* the loadouts: Save keeps the look on the dog in one of three; Wear puts one on (the room's Save keeps it) */
+      tabs.loadouts = () => loadoutsPanel({
+        wallet: S.wallet, face, cur: () => lookOf(cur),
+        onWear(look, name) {
+          const l = lookOf(fitOwned(look, owned()));
+          for (const k of ['dog', 'coat', 'collar', 'wear']) { if (l[k] === undefined) delete cur[k]; else cur[k] = structuredClone(l[k]); }
+          update(); coatTab(); prev.tap(); chosen.textContent = `Loadouts · ${name}`;
+        },
+        async onSave(slot, name, look) {
+          await busy(async () => { S.wallet = asWallet(await S.t.loadout(S.me, slot, name, look)); show('loadouts'); chosen.textContent = `Loadouts · saved as ${S.wallet.loadouts.find(l => l.slot === slot)?.name || name}`; }, () => { chosen.textContent = S.err; });
+        }
+      });
       const show = id => {
-        tab = id; label();
+        tab = id;
+        if (id === 'loadouts') chosen.textContent = 'Loadouts'; else label();
         el.querySelectorAll('[role="tab"]').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+        el.querySelector('[data-pd="loadouts"]').setAttribute('aria-pressed', String(id === 'loadouts'));
         panel.replaceChildren(tabs[id] ? tabs[id]() : pieces(id));
         /* the one chosen in view (Heidi is far down the dogs), moving only the panel */
         panel.scrollTop = 0;
         const on = panel.querySelector('[aria-checked="true"], [aria-pressed="true"]'), pr = panel.getBoundingClientRect(), r = on?.getBoundingClientRect();
         if (r && r.bottom > pr.bottom) panel.scrollTop = r.bottom - pr.bottom + 16;
-        panel.setAttribute('aria-label', TABS.find(t => t[0] === id)[2]);
+        panel.setAttribute('aria-label', TABS.find(t => t[0] === id)?.[2] || 'Loadouts');
       };
       el.querySelector('.pd-tabs').addEventListener('click', e => { const t = e.target.closest('[role="tab"]'); if (t) show(t.dataset.tab); });
-      show('dog'); coatTab();
+      el.querySelector('[data-pd="loadouts"]').addEventListener('click', () => show(tab === 'loadouts' ? 'dog' : 'loadouts'));
+      show(startTab); coatTab();
+      /* the wallet arrives after the room opens (or changes): the slot's pieces are drawn again */
+      S.onWallet = () => { if (el.isConnected && tab !== 'dog' && tab !== 'coat' && tab !== 'collar') show(tab); };
       el.querySelector('[data-pd="save"]').addEventListener('click', async () => {
         const look = lookOf(cur);
-        await busy(async () => { const p = await (S.lobby ? S.lobby.look(look) : S.t.touch(S.me, look)); S.me = { ...S.me, look: p.look }; remember(S.me); closeSheet(); paintLobby(); }, () => { chosen.textContent = S.err; });
+        await busy(async () => { await wearLook(look); closeSheet(); }, () => { chosen.textContent = S.err; });
       });
-    }, { full: true, label: 'Dress your dog' });
+    }, { full: true, label: 'Locker' });
   }
   function openReview(st, me, opp) {
     const ai = st.setup.questions.some(q => q.origin === 'ai');
@@ -575,23 +648,23 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (!isPractice && d.a === me.id && (d.status || 'invited') === 'invited') watchCrossed(d, me, them);
     tick();
   }
-  /* crossed challenges (both tapped Rematch, or challenged each other at once): the duel with the smaller id is the
-     one both play, so the two phones settle on the same one without asking anybody */
+  /* crossed challenges (both tapped Rematch, or challenged each other at once): every phone settles on the same
+     duel without asking anybody (lobby.mjs settleCrossed: the smallest open id, or one that just went live) */
   function watchCrossed(d, me, them) {
     clearInterval(S.crossT);
     S.crossT = setInterval(async () => {
       if (S.screen !== 'match' || S.match?.d.id !== d.id || S.view?.state.phase !== 'invited') { clearInterval(S.crossT); return; }
       try {
-        const theirs = (await S.t.inbox(S.me)).find(x => x.status === 'invited' && x.a === them.id && x.b === me.id);
-        if (!theirs || theirs.id > d.id || S.match?.d.id !== d.id) return;
+        const to = settleCrossed(me.id, them.id, d, await S.t.inbox(S.me));
+        if (!to || S.match?.d.id !== d.id || S.view?.state.phase !== 'invited') return;
         clearInterval(S.crossT);
         S.session.leave();
-        openDuel({ ...theirs, them }, { accept: true });
+        openDuel({ ...to.duel, them }, { accept: to.accept });
       } catch { /* the next tick */ }
     }, 2000);
   }
   function pick(i) {
-    if (!S.session?.answer(i)) return;
+    if (!S.session?.answer(i, S.match?.round)) return;
     S.dogs.me.expr(EXPR.wait);
     paintMatch();
   }
@@ -808,7 +881,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     S.crossT = setInterval(async () => {
       if (S.screen !== 'results' || S.match !== M) { clearInterval(S.crossT); return; }
       try {
-        const inv = (await S.t.inbox(S.me)).find(x => x.status === 'invited' && x.a === M.them.id && x.b === S.me.id);
+        const inv = offerFrom(S.me.id, M.them.id, await S.t.inbox(S.me));
         const b = shell.querySelector('[data-pd="again"]');
         if (!inv || !b || M.offer?.id === inv.id || S.match !== M) return;
         M.offer = inv;

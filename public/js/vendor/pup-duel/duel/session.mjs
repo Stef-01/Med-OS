@@ -17,15 +17,19 @@
 import { RULES, EMOTES, reduce, stepClock, newClock, stage, due, nextEdge, evId, other } from './core.mjs';
 import { realTimers } from './transport-memory.mjs';
 
-export const POLL_MS = 1500, HIDDEN_POLL_MS = 5000, RETRY_MS = [1000, 2000, 4000, 8000], EMOTE_GAP_MS = 1500, REFUSED_RETRY_MS = 5000, POKE_GAP_MS = 250;
+export const POLL_MS = 1500, HIDDEN_POLL_MS = 5000, RETRY_MS = [1000, 2000, 4000, 8000], EMOTE_GAP_MS = 1500, REFUSED_RETRY_MS = 5000, POKE_GAP_MS = 250, HEDGE_MS = 2500, LASTING_MS = 60000;
 const docVisible = () => typeof document === 'undefined' || document.visibilityState !== 'hidden';
 const OVER = p => p !== 'live' && p !== 'invited';
 
 export function createSession({ transport, me, duel, timers = realTimers, rules = RULES, pollMs = POLL_MS, hiddenPollMs = HIDDEN_POLL_MS, retry = RETRY_MS, visible = docVisible, onChange = () => {} }) {
-  let d = { ...duel }, st = reduce(d, []), firm = st, clock = newClock(), cursor = 0, stopped = false, started = false, loaded = false;
+  /* a phone that opens a duel already under way (from the lobby, or a reload) takes the open round's clock from the
+     server's timestamps; one that was there before the accept learns every move as it comes, even when its first
+     polls failed (a phone on flaky wifi was once handed a round 4 s old as if it had reloaded; evals 2026-10-25) */
+  const rejoin = !!duel.status && duel.status !== 'invited';
+  let stoppedAt = 0, d = { ...duel }, st = reduce(d, []), firm = st, clock = newClock(), cursor = 0, stopped = false, started = false, loaded = false;
   let pollTimer = null, edgeTimer = null, pokeTimer = null, inFlight = null, again = false, lastPoll = -1e12, chan = null, lastEmote = -1e12, emoteSeq = 0, endedAt = null;
   const rows = new Map(), pending = new Map(), refused = new Map(), picked = {}, firstSeen = new Map();
-  const net = { live: !!transport.live, pokes: 0, viaPoll: 0, polls: 0, fails: 0, lastOk: null, error: '' };
+  const net = { live: !!transport.live, pokes: 0, viaPoll: 0, polls: 0, fails: 0, hedged: 0, lastOk: null, error: '' };
 
   const now = () => timers.now();
   const wall = () => (timers.wall ? timers.wall() : Date.now());
@@ -35,6 +39,23 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
   const nap = ms => new Promise(res => { const done = () => { timers.clearTimeout(t); naps.delete(done); res(); }, t = timers.setTimeout(done, ms); naps.add(done); });
   const wake = () => { for (const f of [...naps]) f(); };
   const emit = () => { if (!stopped) try { onChange(view()); } catch { /* the screen's bug is the screen's */ } };
+  /* a call that has not answered in HEDGE_MS is sent again beside it, and the first answer wins: both calls a session
+     makes are safe to repeat (a log read; a post, whose fixed id makes a second copy the same row). On flaky wifi a
+     request can stall for seconds or vanish until the transport's timeout, and the poll after it waited on it: the
+     slowest move took 15 s there, now about the hedge plus a round trip (evals, 2026-10-25). It fails when every copy
+     sent has failed, or at once when the server refused */
+  function hedged(call) {
+    return new Promise((resolve, reject) => {
+      let running = 0, sent = 0, over = false, timer = null;
+      const end = () => { over = true; timers.clearTimeout(timer); };
+      const send = () => {
+        sent++; running++;
+        Promise.resolve().then(call).then(v => { if (!over) { end(); resolve(v); } }, e => { running--; if (!over && (e?.server || running === 0)) { end(); reject(e); } });
+        if (sent < 2) timer = timers.setTimeout(() => { if (!over && !stopped) { net.hedged++; send(); } }, HEDGE_MS);
+      };
+      send();
+    });
+  }
 
   function add(list, via) {
     let added = 0;
@@ -68,14 +89,16 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
   async function post(kind, body, id) {
     if (rows.has(id) || pending.has(id)) return null;
     if (refused.has(id) && now() - refused.get(id) < REFUSED_RETRY_MS) return null;
-    const job = { kind, body, tries: 0, error: '' };
+    const job = { kind, body, tries: 0, error: '' }, lasting = kind === 'leave' || kind === 'decline';
     pending.set(id, job); emit();
     for (;;) {
-      if (stopped) return null;
+      /* a leave or a decline outlives the screen that sent it (a Cancel goes back to the lobby at once): it keeps
+         trying for a minute, or the mate keeps an invite nobody will play (evals, 2026-10-25: a stranded challenge) */
+      if (stopped && (!lasting || now() - stoppedAt > LASTING_MS)) return null;
       try {
-        const row = await transport.post(me, d.id, { id, kind, body });
+        const row = await hedged(() => transport.post(me, d.id, { id, kind, body }));
         pending.delete(id); refused.delete(id); net.lastOk = now(); net.error = '';
-        if (add([row], 'own')) settle();
+        if (add([row], 'own') && !stopped) settle();
         chan?.send({ type: 'poke', n: row?.n });
         emit();
         return row;
@@ -98,15 +121,23 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
     lastPoll = began;
     inFlight = (async () => {
       let past = null;
+      const local = new Map();
       try {
         for (let page = 0; page < 10; page++) {
-          const res = await transport.log(me, d.id, cursor);
+          const res = await hedged(() => transport.log(me, d.id, cursor));
           net.polls++; net.lastOk = now(); net.error = '';
           wake();
           if (res?.duel) d = { ...d, status: res.duel.status, result: res.duel.result };
           const got = res?.rows || [];
-          if (!loaded) {   /* a reload: what already happened happened at the server's time, not now */
-            const local = new Map(got.map(r => [r.n, now() - (wall() - Date.parse(r.at))]));
+          if (!loaded && rejoin) {
+            /* a reload: what already happened happened at the server's time, not now. A row's age is measured on the
+               server's clock (the log says what time it is there, `now`), never against this phone's wall clock,
+               which can be minutes out: a phone 30 s fast once saw a fresh round as over and timed its mate out
+               (evals, 2026-10-25). No half-round-trip correction: a stalled or hedged poll makes the round trip a
+               poor guess (it once took 1.2 s off a player's time), and without it the error is the reply's way back,
+               in the player's favour. An older server without `now` falls back to the wall clock */
+            const sv = Date.parse(res?.now), there = Number.isFinite(sv) ? sv : wall();
+            for (const r of got) local.set(r.n, now() - (there - Date.parse(r.at)));
             past = n => local.get(n);
           }
           for (const r of got) cursor = Math.max(cursor, r.n);
@@ -162,7 +193,7 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
       return this;
     },
     stop() {
-      stopped = true;
+      stopped = true; stoppedAt = now();
       timers.clearTimeout(pollTimer); timers.clearTimeout(edgeTimer); timers.clearTimeout(pokeTimer);
       chan?.close(); chan = null;
       if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', onVisible);
@@ -170,18 +201,21 @@ export function createSession({ transport, me, duel, timers = realTimers, rules 
       wake();
     },
     poll, view, get state() { return st; }, get firm() { return firm; }, seenAt: id => firstSeen.get(id), get rows() { return [...rows.values()].sort((a, b) => a.n - b.n); },
-    /* my pick for the open question; false when there is nothing to answer (or my time is up: the blank is on its way) */
-    answer(choice) {
+    /* my pick for the open question; false when there is nothing to answer (or my time is up: the blank is on its way).
+       `round`, when given, is the question the tap was on: a tap that lands after the next question opened (a slow
+       phone, a click queued behind a repaint) is refused, never taken as an answer to a question nobody read */
+    answer(choice, round) {
       const s = stage(st, clock, now(), me.id);
-      if (s.name !== 'question' || s.left <= 0 || picked[s.round] !== undefined) return false;
+      if (s.name !== 'question' || s.left <= 0 || picked[s.round] !== undefined || (round !== undefined && round !== s.round)) return false;
       picked[s.round] = choice;
       const ms = Math.max(0, Math.round(now() - clock.openAt[s.round]));
       post('answer', { round: s.round, choice, ms }, evId(d.id, 'answer', { round: s.round, who: me.id }));
       return true;
     },
     accept() { if (st.phase === 'invited' && me.id === st.b) post('accept', {}, evId(d.id, 'accept')); },
-    decline() { if (st.phase === 'invited' && me.id === st.b) post('decline', {}, evId(d.id, 'decline')); },
-    leave() { if (st.phase === 'invited' || st.phase === 'live') post('leave', {}, evId(d.id, 'leave', { who: me.id })); },
+    /* a decline and a leave return their post (it keeps trying after stop(): see post) */
+    decline() { return st.phase === 'invited' && me.id === st.b ? post('decline', {}, evId(d.id, 'decline')) : null; },
+    leave() { return st.phase === 'invited' || st.phase === 'live' ? post('leave', {}, evId(d.id, 'leave', { who: me.id })) : null; },
     emote(e) {
       if (!EMOTES[e] || now() - lastEmote < EMOTE_GAP_MS || (st.phase !== 'live' && st.phase !== 'done')) return false;
       lastEmote = now();

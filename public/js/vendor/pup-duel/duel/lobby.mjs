@@ -23,6 +23,38 @@ export function lobbyView(meId, roster, inbox, at = Date.now()) {
   };
 }
 
+/* crossed challenges (both tapped Rematch, or challenged each other at once, or one player on two phones tapped it
+   on both): of every challenge still open between the two of us, the one with the smallest id is the one every phone
+   plays, so they all settle on it without asking anybody. And a duel between us that went live in the last minute
+   (the other side settled first) is joined, not left waiting beside. `mine` is the duel this phone is waiting on;
+   null means keep waiting, else { duel, accept } is the one to open instead (accept: I am its mate). Pure */
+export const CROSSED_LIVE_MS = 60000;
+export function settleCrossed(meId, themId, mine, inbox) {
+  /* the server says mine is no longer an open challenge (they accepted it, and this phone has not polled it yet):
+     stay. Leaving it would forfeit a live duel (evals, 2026-10-25: a storm of rematch taps) */
+  const now = (inbox || []).find(d => d && d.id === mine.id);
+  if (now && now.status !== 'invited') return null;
+  const ours = (inbox || []).filter(d => d && d.id !== mine.id && ((d.a === meId && d.b === themId) || (d.a === themId && d.b === meId)));
+  const since = mine.created_at ? t(mine.created_at) - CROSSED_LIVE_MS : Infinity;
+  const live = ours.filter(d => d.status === 'live' && t(d.created_at) >= since).sort(byId)[0];
+  if (live) return { duel: live, accept: false };
+  const first = [...ours.filter(d => d.status === 'invited'), mine].sort(byId)[0];
+  return first.id === mine.id ? null : { duel: first, accept: first.b === meId };
+}
+/* their rematch, as an offer on my result screen: the first of their open challenges to me */
+export const offerFrom = (meId, themId, inbox) => (inbox || []).filter(d => d && d.status === 'invited' && d.a === themId && d.b === meId).sort(byId)[0] || null;
+const byId = (x, y) => (x.id < y.id ? -1 : x.id > y.id ? 1 : 0);
+/* where a Rematch tap goes, after the duel `last` (pure): a duel between us that went live since `last` began is the
+   rematch already under way, so join it; else their open challenge to me, accept it; else null: challenge (the server
+   hands back one already open). With one open challenge per pair, a second exists only once the first is live, so a
+   phone that sees the second sees the first live: a storm of taps on four phones lands in one duel (evals) */
+export function rematchTarget(meId, themId, last, inbox) {
+  const live = (inbox || []).filter(d => d && d.id !== last?.id && d.status === 'live' && ((d.a === meId && d.b === themId) || (d.a === themId && d.b === meId)) && last?.created_at && t(d.created_at) >= t(last.created_at)).sort(byId)[0];
+  if (live) return { duel: live, accept: false };
+  const offer = offerFrom(meId, themId, inbox);
+  return offer ? { duel: offer, accept: true } : null;
+}
+
 export function createLobby({ transport, me, timers = realTimers, pollMs = LOBBY_POLL_MS, hiddenMs = LOBBY_HIDDEN_MS, visible = docVisible, onChange = () => {} }) {
   let roster = [], inbox = [], error = '', loaded = false, stopped = false, timer = null, chan = null, busy = null;
   const emit = () => { if (!stopped) try { onChange(view()); } catch { /* the screen's */ } };

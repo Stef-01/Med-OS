@@ -4,6 +4,7 @@
    licence is ../LICENSE). Changed: types removed. */
 
 import * as plugins from '../plugins/main.mjs';
+import { KEEP_G } from './constants.mjs';
 import { Flow } from './flow.mjs';
 import * as logging from './logger.mjs';
 import { GameMethod } from './game-methods.mjs';
@@ -28,7 +29,7 @@ export function ProcessGameConfig(game) {
   if (game.disableUndo === undefined) game.disableUndo = false;
   if (game.setup === undefined) game.setup = () => ({});
   if (game.moves === undefined) game.moves = {};
-  if (game.onPlayerLeave === undefined) game.onPlayerLeave = ({ G }) => G;
+  if (game.onPlayerLeave === undefined) game.onPlayerLeave = KEEP_G;
   if (game.playerView === undefined) game.playerView = ({ G }) => G;
   if (game.plugins === undefined) game.plugins = [];
 

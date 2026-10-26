@@ -190,13 +190,82 @@ div.pd-me-dog { cursor: default; }
 /* what you own is in its rarity's colour, what is locked is quiet */
 .pd-piece:disabled { cursor: default; background: var(--pd-card2); border-color: transparent; }
 .pd-piece:disabled svg { opacity: .28; filter: grayscale(1); }
-.pd-lock { position: absolute; right: 4px; bottom: 4px; display: grid; color: var(--pd-mute); }
-.pd-lock .pd-i { width: 16px; height: 16px; }
 .pd-none { background: transparent; color: var(--pd-mute); border-style: dashed; }
 .pd-none[aria-pressed="true"] { border-style: solid; color: var(--pd-ink); }   /* chosen: the one selected style */
 .pd-none .pd-i { width: 26px; height: 26px; }
-.pd-locknote { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 0 10px; font-size: 14px; color: var(--pd-mute); }
-.pd-locknote .pd-i { width: 18px; height: 18px; }
+/* the store's door at the end of a slot's pieces */
+.pd-toshop { background: transparent; border-style: dashed; color: var(--pd-pri); }
+.pd-toshop .pd-i { width: 26px; height: 26px; }
+.pd-dresstop .pd-ib[aria-pressed="true"] { background: var(--pd-card2); color: var(--pd-pri); }
+
+/* bones: the one currency, a drawn bone and a number */
+.pd-bone { display: inline-flex; align-items: center; gap: 3px; font-variant-numeric: tabular-nums; }
+.pd-bone .pd-i { width: 18px; height: 18px; color: #f4dfb4; fill: color-mix(in srgb, #f4dfb4 30%, transparent); }
+.pd-bone b { font-weight: 700; }
+.pd-pop { animation: pd-pop-b .5s var(--pd-spring); }
+/* the lobby's header: the bone count, a tap from the store */
+.pd-wallet { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; min-height: 40px; margin-top: 8px; padding: 0 12px 0 10px; border: 2px solid var(--pd-line2); border-bottom-width: var(--pd-edge); border-radius: 999px; background: var(--pd-card2); color: var(--pd-ink); font-size: 15px; cursor: pointer; transition: transform .12s var(--pd-spring), background-color .15s; }
+.pd-wallet > .pd-i { width: 20px; height: 20px; color: var(--pd-pri); }
+.pd-wallet:hover { background: var(--pd-card); }
+.pd-wallet:active { transform: translateY(2px); border-bottom-width: 2px; }
+.pd-wbal:empty { display: none; }
+
+/* the store: the stage (the dog trying the selection on, its name and the one button) stays; the shop scrolls */
+.pd-storetop { grid-template-columns: 72px minmax(0, 1fr) 72px; }
+.pd-sbal { justify-self: end; padding-right: 4px; font-size: 16px; }
+.pd-stage2 { display: grid; grid-template-columns: minmax(0, 132px) minmax(0, 1fr); align-items: center; gap: 12px; flex: none; }
+.pd-spv .pd-dog { width: 100%; }
+.pd-sinfo { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pd-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; font-size: 13px; color: var(--pd-mute); }
+.pd-rar, .pd-stile { --r1: #8b97a8; }
+.pd-rar[data-r="uncommon"], .pd-stile[data-r="uncommon"] { --r1: #3fbf3f; } .pd-rar[data-r="rare"], .pd-stile[data-r="rare"] { --r1: #2aa6ff; }
+.pd-rar[data-r="epic"], .pd-stile[data-r="epic"] { --r1: #a259ff; } .pd-rar[data-r="legendary"], .pd-stile[data-r="legendary"] { --r1: #ff9f1c; }
+.pd-rar { padding: 1px 8px; border-radius: 999px; background: color-mix(in srgb, var(--r1) 22%, transparent); color: color-mix(in srgb, var(--r1) 70%, #fff); font-size: 12px; font-weight: 700; }
+.pd-sname { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+.pd-sinfo .pd-btn { min-height: 44px; margin-top: 4px; padding: 0 12px; font-size: 15px; }
+.pd-sinfo .pd-btn:disabled { cursor: default; opacity: .6; }
+.pd-fine { min-height: 1.3em; margin: 0; font-size: 13px; line-height: 1.3; color: var(--pd-mute); }
+.pd-fine.pd-err { text-align: left; font-size: 13px; }
+.pd-shop { display: flex; flex-direction: column; gap: 12px; }
+.pd-shead { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pd-reset, .pd-count { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--pd-mute); font-variant-numeric: tabular-nums; }
+.pd-reset .pd-i { width: 16px; height: 16px; }
+.pd-sgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.pd-sgrid.pd-sm { grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); }
+/* a tile: the drawing on a glow of its rarity's colour, its price under it; the stage says its name */
+.pd-stile { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 2px; aspect-ratio: 4 / 5; min-width: 0; padding: 8px 6px 4px;
+  border: 2px solid color-mix(in srgb, var(--r1) 45%, var(--pd-line)); border-bottom-width: var(--pd-edge); border-radius: 14px; cursor: pointer;
+  background: radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--r1) 38%, transparent), transparent 68%), color-mix(in srgb, var(--r1) 12%, var(--pd-card2));
+  transition: transform .12s var(--pd-spring), border-color .15s; }
+.pd-stile:active { transform: translateY(2px); border-bottom-width: 2px; }
+.pd-stile[aria-pressed="true"] { border-color: var(--pd-pri); box-shadow: 0 0 0 2px var(--pd-pri); }
+.pd-sart { display: grid; place-items: center; min-height: 0; overflow: hidden; }
+.pd-sart svg { width: 100%; height: 100%; }
+.pd-quad { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; }
+.pd-quad > span { display: grid; place-items: center; min-width: 0; min-height: 0; }
+.pd-scost { display: flex; align-items: center; justify-content: center; gap: 4px; min-height: 22px; font-size: 13px; }
+.pd-scost .pd-bone .pd-i { width: 15px; height: 15px; }
+.pd-scost s { font-size: 12px; color: var(--pd-mute); }
+.pd-stick svg { display: block; width: 18px; height: 18px; fill: none; stroke: var(--pd-ok-ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.pd-stag { position: absolute; top: 4px; left: 4px; display: inline-flex; align-items: center; padding: 1px 6px; border-radius: 999px; font-size: 11px; font-weight: 700; line-height: 1.45; }
+.pd-stag .pd-i { width: 12px; height: 12px; stroke-width: 3; }
+.pd-stag.k-deal { background: var(--pd-warn); color: #231a00; }
+.pd-stag.k-new { background: var(--pd-pri); color: var(--pd-pri-ink); }
+.pd-stag.k-on { background: var(--pd-ok); color: #0c1d00; }
+.pd-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pd-chips button { display: inline-grid; place-items: center; min-width: 48px; min-height: 40px; padding: 0 12px; border: 2px solid var(--pd-line2); border-radius: 999px; background: transparent; color: var(--pd-mute); font-size: 14px; font-weight: 700; cursor: pointer; }
+.pd-chips button .pd-i { width: 20px; height: 20px; }
+.pd-chips button[aria-pressed="true"] { border-color: var(--pd-pri); background: var(--pd-pri-soft); color: var(--pd-pri); }
+
+/* the locker's loadouts: three rows, a face, a name, Wear and Save */
+.pd-los { display: flex; flex-direction: column; gap: 8px; }
+.pd-lo { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto 44px; align-items: center; gap: 6px; padding: 6px 6px 6px 8px; border: 2px solid var(--pd-line); border-radius: 14px; background: var(--pd-card); }
+.pd-loface { width: 40px; border-radius: 50%; overflow: hidden; background: var(--pd-card2); }
+.pd-loempty { aspect-ratio: 1; border: 2px dashed var(--pd-line2); background: transparent; }
+.pd-loname { width: 100%; min-width: 0; min-height: 44px; padding: 0 10px; border: 2px solid var(--pd-line2); border-radius: 10px; background: var(--pd-card2); font-size: 15px; font-weight: 600; outline: 0; }
+.pd-loname:focus-visible { border-color: var(--pd-pri); }
+.pd-lo .pd-btn { padding: 0 12px; font-size: 15px; }
+.pd-lo .pd-btn:disabled, .pd-lo .pd-ib:disabled { opacity: .45; cursor: default; }
 
 /* the match */
 .pd-mtop { grid-template-columns: minmax(44px, 1fr) auto minmax(44px, 1fr); }
@@ -367,4 +436,5 @@ div.pd-me-dog { cursor: default; }
   .pd-match:not(.pd-over) .pd-mine .pd-gain, .pd-match:not(.pd-over) .pd-theirs .pd-status { grid-column: 2; }
   .pd-over .pd-dogslot { width: min(116px, 34vw); }
 }
+@media (max-width: 360px) { .pd-stage2 { grid-template-columns: minmax(0, 112px) minmax(0, 1fr); } .pd-sname { font-size: 17px; } }
 @media (prefers-reduced-motion: reduce) { .pd *, .pd *::before, .pd *::after { animation: none !important; transition: none !important; } }

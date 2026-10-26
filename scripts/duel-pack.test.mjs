@@ -123,3 +123,23 @@ test('the vendored Pup Duel is exactly what its VERSION.json says, and the migra
   for (const f of files) assert.equal(sha(path.join(dir, f)), v.files[f], `${f} was edited: change the package and vendor again`);
   assert.equal(sha(path.join(ROOT, 'supabase/migrations/0002_pup_duel.sql')), v.migration.sha, '0002_pup_duel.sql is the package\'s migration');
 });
+
+test('the store\'s migration is the package\'s too (0004_pup_duel_store.sql, after 0002)', () => {
+  const v = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/js/vendor/pup-duel/VERSION.json'), 'utf8'));
+  const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex').slice(0, 16);
+  assert.deepEqual(v.migrations.map(m => m.file), ['supabase/migrations/0001_pup_duel.sql', 'supabase/migrations/0002_pup_store.sql']);
+  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0002_pup_duel.sql')), v.migrations[0].sha, '0002_pup_duel.sql is the package\'s 0001');
+  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0004_pup_duel_store.sql')), v.migrations[1].sha, '0004_pup_duel_store.sql is the package\'s 0002: vendor again and copy it');
+});
+
+test('the duel plays on Casa when config.js names it, and the progress sync stays off', async () => {
+  const { duelBackend } = await import('../public/js/osce/duel.mjs');
+  assert.deepEqual(duelBackend({ supabaseUrl: 'https://a.supabase.co', supabaseAnonKey: 'k1', duelSupabaseUrl: 'https://casa.supabase.co', duelSupabaseAnonKey: 'k2' }), { url: 'https://casa.supabase.co', key: 'k2' });
+  assert.deepEqual(duelBackend({ supabaseUrl: 'https://a.supabase.co', supabaseAnonKey: 'k1' }), { url: 'https://a.supabase.co', key: 'k1' }, 'else the progress-sync project');
+  assert.equal(duelBackend({ duelSupabaseUrl: 'https://casa.supabase.co' }), null, 'a URL without its key is nothing');
+  assert.equal(duelBackend({}), null, 'practice only');
+  const cfg = {}; new Function('window', fs.readFileSync(path.join(ROOT, 'public/config.js'), 'utf8'))(cfg);
+  assert.equal(cfg.OSCE_CONFIG.duelSupabaseUrl, 'https://psozzmlxhhajcszlplns.supabase.co', 'Casa');
+  assert.equal(JSON.parse(Buffer.from(cfg.OSCE_CONFIG.duelSupabaseAnonKey.split('.')[1], 'base64url')).role, 'anon', 'the public anon key, never a service key');
+  assert.equal(cfg.OSCE_CONFIG.supabaseUrl, '', 'the OSCE progress sync is not turned on');
+});

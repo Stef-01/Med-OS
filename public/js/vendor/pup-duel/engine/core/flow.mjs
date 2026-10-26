@@ -12,6 +12,7 @@ import {
   TurnOrder,
 } from './turn-order.mjs';
 import { gameEvent } from './action-creators.mjs';
+import { KEEP_G } from './constants.mjs';
 import * as plugin from '../plugins/main.mjs';
 import * as logging from './logger.mjs';
 import { GameMethod } from './game-methods.mjs';
@@ -35,7 +36,7 @@ export function Flow({ moves, phases, endIf, onEnd, turn, events, plugins, disab
   }
 
   if (!endIf) endIf = () => undefined;
-  if (!onEnd) onEnd = ({ G }) => G;
+  if (!onEnd) onEnd = KEEP_G;
   if (!turn) turn = {};
 
   const phaseMap = { ...phases };
@@ -103,10 +104,10 @@ export function Flow({ moves, phases, endIf, onEnd, turn, events, plugins, disab
       phaseConfig.endIf = () => undefined;
     }
     if (phaseConfig.onBegin === undefined) {
-      phaseConfig.onBegin = ({ G }) => G;
+      phaseConfig.onBegin = KEEP_G;
     }
     if (phaseConfig.onEnd === undefined) {
-      phaseConfig.onEnd = ({ G }) => G;
+      phaseConfig.onEnd = KEEP_G;
     }
     if (phaseConfig.turn === undefined) {
       phaseConfig.turn = turn;
@@ -115,16 +116,16 @@ export function Flow({ moves, phases, endIf, onEnd, turn, events, plugins, disab
       phaseConfig.turn.order = TurnOrder.DEFAULT;
     }
     if (phaseConfig.turn.onBegin === undefined) {
-      phaseConfig.turn.onBegin = ({ G }) => G;
+      phaseConfig.turn.onBegin = KEEP_G;
     }
     if (phaseConfig.turn.onEnd === undefined) {
-      phaseConfig.turn.onEnd = ({ G }) => G;
+      phaseConfig.turn.onEnd = KEEP_G;
     }
     if (phaseConfig.turn.endIf === undefined) {
       phaseConfig.turn.endIf = () => false;
     }
     if (phaseConfig.turn.onMove === undefined) {
-      phaseConfig.turn.onMove = ({ G }) => G;
+      phaseConfig.turn.onMove = KEEP_G;
     }
     if (phaseConfig.turn.stages === undefined) {
       phaseConfig.turn.stages = {};

@@ -2,8 +2,9 @@
    package vendored in js/vendor/pup-duel (never edited here: change the package and vendor again; npm test checks).
 
    The questions are public/duel/pack.json (scripts/build-duel-pack.mjs, one per station: its likely diagnosis
-   against its own differential). With config.js naming a Supabase project, and supabase/migrations/0002_pup_duel.sql
-   run in it, each of you signs in with a name and a 4-digit PIN and challenges the other; a move reaches the other
+   against its own differential). With config.js naming a project for the duel (duelSupabaseUrl: Casa, Optimus's, where
+   the duel is its own pup_* tables), and supabase/migrations/0002_pup_duel.sql and 0004_pup_duel_store.sql run in it,
+   each of you signs in with a name and a 4-digit PIN and challenges the other; a move reaches the other
    phone within 5 seconds. Without one, practice against the bot on this device.
 
    The overlay is the kit's (createOverlay: one key owner, focus back to the opener); the duel renders inside it and
@@ -31,11 +32,20 @@ export async function openDuel(opener) {
     shell = createOverlay({ cls: 'os os-duel', label: 'Duel a Mate', onKey: e => { if (ui?.key(e)) e.preventDefault(); } });
     shell.el.innerHTML = '<div class="os-duel-body"></div>';
   }
-  const cfg = window.OSCE_CONFIG || {};
-  const transport = cfg.supabaseUrl && cfg.supabaseAnonKey ? supabaseTransport({ url: cfg.supabaseUrl, key: cfg.supabaseAnonKey, realtime: cfg.duelRealtime !== false }) : null;
+  /* the duel's own project when config.js names one (Casa), else the progress-sync project */
+  const cfg = window.OSCE_CONFIG || {}, duelCfg = duelBackend(cfg);
+  const transport = duelCfg ? supabaseTransport({ ...duelCfg, realtime: cfg.duelRealtime !== false }) : null;
   shell.open(opener);
   ui = mountDuel(shell.el.firstElementChild, { transport, pack: questions, title: 'Duel a Mate', keys: 'host', storeKey: 'osce.duel', onClose: closeDuel });
   shell.el.dataset.ready = '1';
+}
+
+/* where the duel plays: duelSupabaseUrl / duelSupabaseAnonKey (Casa, the duel's pup_* tables) when both are set, else
+   the progress-sync project, else nowhere (practice only). Pure */
+export function duelBackend(cfg = {}) {
+  if (cfg.duelSupabaseUrl && cfg.duelSupabaseAnonKey) return { url: cfg.duelSupabaseUrl, key: cfg.duelSupabaseAnonKey };
+  if (cfg.supabaseUrl && cfg.supabaseAnonKey) return { url: cfg.supabaseUrl, key: cfg.supabaseAnonKey };
+  return null;
 }
 
 export function closeDuel() {

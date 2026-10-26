@@ -4,10 +4,12 @@
    against a real Postgres when one is at hand.
 
    db { players: {id: player}, duels: {id: duel}, events: [row], n } is JSON all the way down, so a transport can keep
-   it in localStorage. */
+   it in localStorage. The store's functions (0002_pup_store.sql: the wallet, buying, loadouts) are store-core.mjs,
+   mounted on the same db; every look is kept with owned pieces only. */
 
 import { normName, nameKey } from './accounts.mjs';
 import { KINDS, idFor, jsonbBytes, reduce, summary } from './core.mjs';
+import { storeServer } from './store-core.mjs';
 
 export const ERR = {
   name: 'Pick a name of 2 to 20 letters or numbers', pin: 'The PIN is 4 digits', look: 'That look is too big',
@@ -48,6 +50,7 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
   const pinOk = async (pin, stored) => (await hashPin(pin, stored.split('$')[0])) === stored;
   const me = token => Object.values(db.players).find(p => p.token === token) || fail(ERR.token);
   const seen = p => { p.seen_at = now(); };
+  const store = storeServer({ db, me, now, fail, lookMax: LIMITS.look, lookErr: ERR.look });
   return {
     db,
     async register(name, pin, look = {}) {
@@ -57,6 +60,7 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
       if (bytes(look) > LIMITS.look) fail(ERR.look);
       if (Object.values(db.players).some(p => p.name_key === nameKey(n))) fail(ERR.taken);
       const t = now(), p = { id: uuid(), name: n, name_key: nameKey(n), pin_hash: await hashPin(pin), token: uuid(), look: look || {}, wins: 0, losses: 0, draws: 0, created_at: t, seen_at: t };
+      p.look = store.fitLook(p.id, p.look);
       db.players[p.id] = p;
       return { ...profile(p), token: p.token };
     },
@@ -73,7 +77,7 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
     async touch(token, look = null) {
       const p = me(token);
       if (look !== null && bytes(look) > LIMITS.look) fail(ERR.look);
-      seen(p); if (look !== null) p.look = look;
+      seen(p); if (look !== null) p.look = store.fitLook(p.id, look);
       return profile(p);
     },
     async roster(token) {
@@ -127,10 +131,11 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
       d.updated_at = t; seen(p);
       return { ...e };
     },
+    wallet: store.wallet, buy: store.buy, buySet: store.buySet, loadout: store.loadout,
     async log(token, duel, after = 0) {
       const p = me(token), d = db.duels[duel];
       if (!d || (p.id !== d.a && p.id !== d.b)) fail(ERR.notYours);
-      return { duel: duelRow(d), rows: db.events.filter(e => e.duel === duel && e.n > (after || 0)).slice(0, LIMITS.page).map(e => ({ ...e })) };
+      return { duel: duelRow(d), rows: db.events.filter(e => e.duel === duel && e.n > (after || 0)).slice(0, LIMITS.page).map(e => ({ ...e })), now: now() };
     }
   };
 }

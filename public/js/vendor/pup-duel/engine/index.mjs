@@ -9,8 +9,8 @@
    games through the published 0.50.2 and records its states (test/fixtures/engine-goldens.json); test/engine.test.mjs
    replays them through this port, equal step for step except at those changes, each pinned there.
 
-   What changed in the port: immer is replaced by a small produce() over structuredClone (plugins/plugin-immer.mjs
-   says where it differs), lodash.isplainobject by a few lines (plugins/plugin-serializable.mjs), process.env is read
+   What changed in the port: immer is replaced by a small produce() over a structured clone (plugins/plugin-immer.mjs
+   says where it differs; the engine's do-nothing hooks pass G through untouched, as immer does: core/constants.mjs), lodash.isplainobject by a few lines (plugins/plugin-serializable.mjs), process.env is read
    through globalThis.process so the modules load unbundled in a browser.
 
    Left out: the PATCH action and its creator (client delta sync over rfc6902, which we do not use); the Master

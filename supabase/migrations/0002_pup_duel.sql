@@ -174,7 +174,15 @@ begin
       raise exception 'A question needs 2 to 6 options and its answer' using errcode = 'P0001';
     end if;
   end loop;
-  insert into public.pup_duels (a, b, setup) values (me.id, p_opponent, p_setup) returning * into d;
+  -- one open challenge between two players: a second (the other tapped Rematch too, or my other phone did) gets the
+  -- open one back, to accept or to wait on, so a storm of taps settles on one duel (evals, 2026-10-25). The pair's
+  -- lock makes two challenges at the same moment take turns
+  perform pg_advisory_xact_lock(hashtextextended(least(me.id::text, p_opponent::text) || greatest(me.id::text, p_opponent::text), 0));
+  select * into d from public.pup_duels where status = 'invited' and ((a = me.id and b = p_opponent) or (a = p_opponent and b = me.id))
+    order by created_at, id limit 1;
+  if not found then
+    insert into public.pup_duels (a, b, setup) values (me.id, p_opponent, p_setup) returning * into d;
+  end if;
   update public.pup_players set seen_at = now() where id = me.id;
   return public.pup_duel_row(d);
 end $$;
@@ -318,7 +326,7 @@ begin
   return jsonb_build_object('duel', public.pup_duel_row(d), 'rows', coalesce((
     select jsonb_agg(public.pup_event_row(e) order by e.n)
     from (select * from public.pup_events where duel = p_duel and n > coalesce(p_after, 0) order by n limit 200) e
-  ), '[]'::jsonb));
+  ), '[]'::jsonb), 'now', now());
 end $$;
 
 -- the anon key may call the entry points, and nothing else
