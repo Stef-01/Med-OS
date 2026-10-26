@@ -1,6 +1,8 @@
 /* pack.mjs: a question pack, the one shape every host writes (Med-OS builds it from its stations).
    pack     { version, title, source, origin: 'ai' | 'human' | 'mixed', cats?[{ id, label }], questions[] }
-   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, topics?[], cat?, origin?, source?, deck? }
+   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, topics?[], cat?, origin?, source?, deck?, year? }
+   year     1 to 4, the year of medical school a question is pitched at (Med-OS: first principles to final year); a pack
+            with two or more years offers 0 to 1, the duel that climbs them in order
    decks    [{ id, label, short? }]: where questions come from, a layer in front of the topic (Med-OS: the bank, your own questions,
             your friends'); each question names its deck. With fewer than two decks there is no such layer
    topic is the first layer a player narrows by (Med-OS: the specialty), cat the second (Med-OS: OSCE skills, Clinical,
@@ -39,6 +41,7 @@ export function normQuestion(q) {
   if (q.origin === 'ai' || q.origin === 'human') out.origin = q.origin;
   const source = text(q.source, LIMITS.source).toLowerCase(); if (/^[a-z0-9-]+$/.test(source)) out.source = source;
   const deck = text(q.deck, LIMITS.deck).toLowerCase(); if (/^[a-z0-9-]+$/.test(deck)) out.deck = deck;
+  if (Number.isInteger(q.year) && q.year >= 1 && q.year <= 4) out.year = q.year;
   return { q: out, why: '' };
 }
 
@@ -83,6 +86,10 @@ export function decksOf(pack) {
   const list = (pack?.decks || []).map(d => ({ ...d, count: (pack.questions || []).filter(q => q.deck === d.id).length })).filter(d => d.count);
   return list.length > 1 ? list : [];
 }
+/* the years a pack's questions span (ascending): two or more and the setup offers 0 to 1 */
+export const yearsOf = pack => [...new Set((pack?.questions || []).map(q => q.year).filter(Boolean))].sort((a, b) => a - b);
+export const YEAR_LABEL = y => `Year ${y}`;
+
 /* the pack narrowed to one deck ('' is every deck: the mix) */
 export const deckPack = (pack, deck = '') => (deck ? { ...pack, questions: (pack?.questions || []).filter(q => q.deck === deck) } : pack);
 

@@ -15,6 +15,7 @@ export function duelQuestion(it, from) {
   if (Array.isArray(it.why) && it.why.length === it.options.length && it.why.some(Boolean)) q.notes = it.why;
   if (it.topic) { q.topic = it.topic; q.topics = [it.topic]; }
   if (it.cat) q.cat = it.cat;
+  if (it.year) q.year = it.year;
   return q;
 }
 

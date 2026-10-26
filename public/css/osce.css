@@ -1344,3 +1344,7 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-libkeys { text-align:center; }
 @media (hover:none) { .os-libkeys { display:none; } }
 .os-libdone > svg { color:var(--ok); }
+.os-liborder { display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+.os-liborder .os-seg button { min-width:96px; }
+.os-libyear { display:flex; gap:8px; align-items:baseline; padding:8px 12px; border-radius:10px; background:var(--pri-soft); color:var(--pri); font-size:13.5px; }
+.os-libyear b { font-weight:800; }

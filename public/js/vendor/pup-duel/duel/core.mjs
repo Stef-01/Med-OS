@@ -48,10 +48,22 @@ export function jsonbBytes(v) {
 
 /* the challenger's phone deals the questions (seeded, so a test can pin a deal) and shuffles each one's options;
    the questions travel inside the duel, so both phones play the same ones whatever pack each has cached */
-export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topic = '', cat = '', seed = 1, title = '', read = true } = {}) {
+/* 0 to 1 (Med-OS, founder 2026-10-26: "first year ... to final year, so it progressively gets difficult"): from the
+   shuffled pool, one question of each year in turn (Year 1, 2, 3, 4, then round again) until there are enough, then
+   played in year order, so a duel starts at first principles and ends at final year; a question with no year counts
+   as Year 3 */
+function climb(qs, n) {
+  const y = q => (Number.isInteger(q.year) ? q.year : 3), by = new Map();
+  for (const q of qs) (by.get(y(q)) || by.set(y(q), []).get(y(q))).push(q);
+  const keys = [...by.keys()].sort((a, b) => a - b), out = [];
+  while (out.length < n && keys.some(k => by.get(k).length)) for (const k of keys) if (out.length < n && by.get(k).length) out.push(by.get(k).shift());
+  return out.sort((a, b) => y(a) - y(b));
+}
+export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topic = '', cat = '', seed = 1, title = '', read = true, ladder = false } = {}) {
   const base = clamp(Math.round(secs) || RULES.secs, RULES.minSecs, RULES.maxSecs);
   const r = rng(seed), pool = (pack?.questions || []).filter(q => (!topic || q.topic === topic || (q.topics || []).includes(topic)) && (!cat || q.cat === cat));
-  const picked = shuffle(r, pool).slice(0, clamp(Math.floor(rounds) || RULES.rounds, 1, RULES.maxQuestions));
+  const want = clamp(Math.floor(rounds) || RULES.rounds, 1, RULES.maxQuestions), dealt = shuffle(r, pool);
+  const picked = ladder ? climb(dealt, want) : dealt.slice(0, want);
   const questions = picked.map(q => {
     const order = shuffle(r, q.options.map((_, i) => i));
     const out = { id: q.id, stem: q.stem, options: order.map(i => q.options[i]), answer: order.indexOf(q.answer) };
@@ -62,9 +74,10 @@ export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topi
     if (q.cat) { out.cat = q.cat; const l = (pack?.cats || []).find(c => c.id === q.cat)?.label; if (l) out.catLabel = String(l).slice(0, 60); }
     if (q.origin) out.origin = q.origin;
     if (q.source) out.source = q.source;
+    if (q.year) out.year = q.year;
     return out;
   });
-  return { v: 1, rounds: questions.length, secs: base, title: String(title || pack?.title || '').slice(0, 80), topic: topic || '', ...(cat ? { cat: String(cat).slice(0, 30), catLabel: String((pack?.cats || []).find(c => c.id === cat)?.label || cat).slice(0, 60) } : {}), seed: seed >>> 0, questions };
+  return { v: 1, rounds: questions.length, secs: base, title: String(title || pack?.title || '').slice(0, 80), topic: topic || '', ...(cat ? { cat: String(cat).slice(0, 30), catLabel: String((pack?.cats || []).find(c => c.id === cat)?.label || cat).slice(0, 60) } : {}), seed: seed >>> 0, ...(ladder ? { ladder: true } : {}), questions };
 }
 
 /* the same checks pup_challenge makes in Postgres; '' when the setup can be played */

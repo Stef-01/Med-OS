@@ -113,3 +113,20 @@ test('0008_library.sql: every table closed to the public key, every function che
   assert.match(S, /revoke all on function public\.lib_are_friends/);
   assert.match(S, /> 500 then raise/); assert.match(S, />= 50 then raise/); assert.match(S, /tot > 2000/); assert.match(S, /16384/);
 });
+
+import { yearOf, guessYear, ladder, YEARS } from '../public/js/mcq/year.mjs';
+import { cleanItem } from '../public/js/mcq/schema.mjs';
+test('year: read as students write it, guessed when missing, kept by the schema, climbed by 0 to 1', () => {
+  for (const [v, y] of [[2, 2], ['Year 3', 3], ['y1', 1], ['MS4', 4], ['second year', 2], ['final year', 4], ['4th', 4], ['5', 0], ['', 0], ['year five', 0]]) assert.equal(yearOf(v), y, String(v));
+  assert.equal(guessYear({ cat: 'anatomy', stem: 'Which nerve supplies deltoid?' }), 1);
+  assert.equal(guessYear({ cat: 'anatomy', stem: 'A 30-year-old man cannot abduct his arm.' }), 2);
+  assert.equal(guessYear({ cat: 'clinical', stem: 'A 70-year-old woman has chest pain.', ask: 'What is the most appropriate next step in management?' }), 4);
+  assert.equal(guessYear({ cat: 'clinical', stem: 'A 70-year-old woman has chest pain.', ask: 'What is the most likely diagnosis?' }), 3);
+  const r = checkUpload(JSON.stringify([Q({ year: 'Year 1' }), Q({ stem: `${Q().stem} Again.`, year: '' })]), { by: 'S', now: NOW });
+  assert.deepEqual(r.ready.map(x => x.year), [1, 2], 'given, else guessed (an anatomy vignette is Year 2)');
+  assert.ok(r.rows[1].problems.some(p => p.check === 'year' && p.severity === 'minor' && /guessed/.test(p.reason)), 'a guessed year is a tip, never a block');
+  assert.equal(cleanItem({ ...r.ready[0] }).year, 1);
+  assert.equal(chatPrompt().includes('"year"') && Object.values(YEARS).every(y => chatPrompt().includes(y.name)), true, 'the prompt asks for the year');
+  assert.deepEqual(ladder([{ year: 3 }, { year: 1 }, {}, { year: 2 }, { year: 1 }]).map(x => x.year ?? 0), [1, 1, 2, 3, 0]);
+  assert.deepEqual(ladder([{ year: 2 }, { year: 2 }, { year: 4 }], x => x.year, 1).map(x => x.year), [2, 4]);
+});

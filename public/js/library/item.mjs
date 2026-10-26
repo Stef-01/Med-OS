@@ -11,6 +11,7 @@
 import { draftsFrom, parseCsv, userItem, cleanItem, itemProblems, newUserId, fnv, contentHash } from '../mcq/schema.mjs';
 import { flawReport } from '../mcq/flaws.mjs';
 import { DISCIPLINES } from '../study-kit/vocab.mjs';
+import { yearOf, guessYear, YEARS } from '../mcq/year.mjs';
 
 /* the kinds, in the order the drill-down shows them (the duel's pack.json cats use the same ids and labels) */
 export const KINDS = Object.freeze({
@@ -42,12 +43,12 @@ function layersOf(text) {
   let j; try { j = JSON.parse(stripFence(s)); } catch { j = undefined; }
   if (j !== undefined) {
     const list = Array.isArray(j) ? j : Array.isArray(j?.questions) ? j.questions : Array.isArray(j?.items) ? j.items.map(x => x?.item || x) : [j];
-    return list.filter(x => x && typeof x === 'object').map(x => ({ specialty: String(x.specialty ?? x.topic ?? ''), kind: String(x.kind ?? x.cat ?? x.category ?? '') }));
+    return list.filter(x => x && typeof x === 'object').map(x => ({ specialty: String(x.specialty ?? x.topic ?? ''), kind: String(x.kind ?? x.cat ?? x.category ?? ''), year: x.year ?? x.level ?? '' }));
   }
   const rows = parseCsv(s); if (rows.length < 2) return [];
   const head = rows[0].map(h => h.trim().toLowerCase().replace(/[^a-z0-9]/g, ''));
-  const sp = head.findIndex(h => ['specialty', 'topic'].includes(h)), kd = head.findIndex(h => ['kind', 'cat', 'category'].includes(h));
-  return rows.slice(1).map(r => ({ specialty: sp >= 0 ? String(r[sp] ?? '') : '', kind: kd >= 0 ? String(r[kd] ?? '') : '' }));
+  const sp = head.findIndex(h => ['specialty', 'topic'].includes(h)), kd = head.findIndex(h => ['kind', 'cat', 'category'].includes(h)), yr = head.findIndex(h => ['year', 'level'].includes(h));
+  return rows.slice(1).map(r => ({ specialty: sp >= 0 ? String(r[sp] ?? '') : '', kind: kd >= 0 ? String(r[kd] ?? '') : '', year: yr >= 0 ? String(r[yr] ?? '') : '' }));
 }
 /* ChatGPT often wraps its answer in a ```json fence, or says a line first: keep the JSON */
 export function stripFence(s) {
@@ -60,7 +61,7 @@ export function stripFence(s) {
 /* drafts from an upload: the pool's draft fields plus topic (the specialty as written) and kind (as written) */
 export function readUpload(text) {
   const clean = stripFence(text), drafts = draftsFrom(clean), layers = layersOf(clean);
-  return drafts.map((d, i) => ({ ...d, topic: layers[i]?.specialty || d.topic, kind: layers[i]?.kind || '' }));
+  return drafts.map((d, i) => ({ ...d, topic: layers[i]?.specialty || d.topic, kind: layers[i]?.kind || '', year: layers[i]?.year ?? '' }));
 }
 
 /* one draft as a library item, and every reason it cannot be saved yet (worst first); a question with only "Fix" or
@@ -73,10 +74,13 @@ export function check(draft, { by, now, id } = {}) {
   if (!topic) out.push({ check: 'specialty', severity: 'block', reason: draft.topic ? `specialty: "${String(draft.topic).slice(0, 40)}" is not one Med-OS knows` : 'specialty: give one (e.g. Paediatrics)' });
   if (!cat) out.push({ check: 'kind', severity: 'block', reason: draft.kind ? `kind: "${String(draft.kind).slice(0, 40)}" is not one of OSCE skills, Clinical, Physiology, Anatomy` : 'kind: give one (skills, clinical, physio or anatomy)' });
   if (!out.length) for (const f of flawReport(base).failed) if (f.severity !== 'info' && f.check !== 'schema') out.push({ check: f.check, severity: f.severity, reason: f.reason });
+  /* the year (mcq/year.mjs): as given, else a guess from the kind and the lead-in, said as a tip */
+  let year = yearOf(draft.year);
+  if (!year) { year = guessYear({ ...base, cat }); if (!out.some(x => x.severity === 'block')) out.push({ check: 'year', severity: 'minor', reason: `year: ${String(draft.year ?? '').trim() ? `"${String(draft.year).slice(0, 20)}" is not 1 to 4` : 'not given'}, so ${YEARS[year].label} (${YEARS[year].name}) is guessed` }); }
   out.sort((a, b) => SEV_ORDER[a.severity] - SEV_ORDER[b.severity]);
   const item = out.some(x => x.severity === 'block') ? null : cleanItem(base);
   if (item && JSON.stringify(item).length > LIMITS.bytes) return { item: null, problems: [{ check: 'size', severity: 'block', reason: 'too long: keep a question under 16 KB' }, ...out] };
-  return { item: item ? { ...item, cat } : null, problems: out };
+  return { item: item ? { ...item, year, cat } : null, problems: out };
 }
 
 /* a whole upload: { ready: [item], rows: [{ n, stem, item, problems }] }; a question already in `have` (the same
@@ -94,8 +98,9 @@ export function checkUpload(text, { by, now, have = [] } = {}) {
 
 /* a deck's name: trimmed, one line, at most 40 characters; '' when there is none */
 export const deckName = s => String(s ?? '').replace(/\s+/g, ' ').trim().slice(0, LIMITS.deckName);
-/* "Paediatrics › Clinical" */
+/* "Paediatrics › Clinical", and with the year "Year 2 · Paediatrics › Clinical" */
 export const layerLabel = it => `${it.topic || 'No specialty'}${it.cat ? ` › ${KINDS[it.cat]?.label || it.cat}` : ''}`;
+export const yearLabel = it => (YEARS[it?.year] ? YEARS[it.year].label : '');
 
 /* the drill-down over a set of items: [{ topic, count, cats: [{ id, label, count }] }], biggest topic first */
 export function layers(items) {

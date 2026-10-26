@@ -5,7 +5,8 @@
      Upload    1 copy the prompt for ChatGPT  2 paste what it returns (or choose the file)  3 see each question's
                checks  4 save to a deck: live at once, in Study and in Duel a Mate
      Friends   add by name, answer requests, remove
-     Study     due cards first, by deck, specialty and kind; answer, see why, then Again, Hard, Good or Easy
+     Study     due cards first, by deck (yours, friends', or the bank), specialty, kind and year; answer, see why, then
+               Again, Hard, Good or Easy. 0 to 1 (founder 2026-10-26) climbs Year 1 to final year instead (mcq/year.mjs)
 
    The rules are pure and tested (js/library/*.mjs, scripts/library.test.mjs); where things live is library/api.mjs.
    Plain text throughout (esc); the dialog handles its own clicks (data-lib), so osce.mjs only opens it. */
@@ -15,14 +16,15 @@ import { dialogOf } from '../study-kit/ui.mjs';
 import { ctx, I, notify, openDialog, confirmDlg, now } from './state.mjs';
 import { account } from '../study-kit/sync.mjs';
 import { chatPrompt } from '../library/prompt.mjs';
-import { checkUpload, deckName, layers, layerLabel, inPick, KINDS, KIND_IDS, LIMITS } from '../library/item.mjs';
+import { checkUpload, deckName, layers, layerLabel, yearLabel, inPick, KINDS, KIND_IDS, LIMITS } from '../library/item.mjs';
+import { YEARS, YEAR_IDS, ladder } from '../mcq/year.mjs';
 import { grade, queue, counts, preview, GRADES } from '../library/sched.mjs';
 import * as api from '../library/api.mjs';
 
 const TABS = [['library', 'Library'], ['upload', 'Upload'], ['friends', 'Friends'], ['study', 'Study']];
 const LET = 'ABCDE', GLABEL = { again: 'Again', hard: 'Hard', good: 'Good', easy: 'Easy' };
 const SEV = { block: ['Must fix', 'danger'], major: ['Fix', 'warn'], minor: ['Tip', 'tip'] };
-const V = { tab: 'library', lib: null, up: { text: '', res: null, deck: '' }, st: { deck: '', topic: '', cat: '', q: null, i: 0, pick: null, n: 0 }, share: '', busy: false, msg: '' };
+const V = { tab: 'library', lib: null, up: { text: '', res: null, deck: '' }, st: { deck: '', topic: '', cat: '', year: 0, order: 'due', q: null, i: 0, pick: null, n: 0 }, bank: null, share: '', busy: false, msg: '' };
 const day = () => new Date(now()).toISOString().slice(0, 10);
 
 /* the start view's card */
@@ -62,7 +64,7 @@ function wire(el) {
   el.addEventListener('input', e => { if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
   el.addEventListener('change', e => {
     if (e.target.name === 'file') readFile(e.target);
-    if (e.target.name === 'sdeck') { V.st.deck = e.target.value; V.st.topic = ''; V.st.cat = ''; paint(); }
+    if (e.target.name === 'sdeck') { V.st.deck = e.target.value; V.st.topic = ''; V.st.cat = ''; V.st.year = 0; paint(); }
   });
 }
 /* a key while this dialog is on top (osce.mjs onKey hands it over: the overlay stack owns every key, study-kit/stack.mjs).
@@ -105,7 +107,7 @@ function libraryHtml() {
         ${mine ? `<button class="os-btn os-libicon" data-lib="deldeck" data-deck="${esc(d.id)}" aria-label="Delete ${esc(d.name)}" title="Delete deck">${icon('trash')}</button>` : ''}
       </div>
       ${mine && V.share === d.id ? `<div class="os-libshare" role="group" aria-label="Share ${esc(d.name)} with">${friendsOk.length ? friendsOk.map(f => { const on = d.shared.includes(f.id); return `<button class="os-chip${on ? ' on' : ''}" data-lib="sharewith" data-deck="${esc(d.id)}" data-friend="${esc(f.id)}" aria-pressed="${on}">${on ? I.check : ''}${esc(f.name)}</button>`; }).join('') : `<p class="os-libmeta">Add a friend first, in Friends.</p>`}</div>` : ''}
-      <details class="os-libqs"><summary>The questions</summary><ol>${d.items.map(it => `<li><span><span class="os-liblayer">${esc(layerLabel(it))}</span>${esc(it.stem.length > 150 ? `${it.stem.slice(0, 150)}…` : it.stem)}</span>${mine ? `<button class="os-libx" data-lib="delq" data-deck="${esc(d.id)}" data-id="${esc(it.id)}" aria-label="Delete this question">${I.x}</button>` : ''}</li>`).join('')}</ol></details>
+      <details class="os-libqs"><summary>The questions</summary><ol>${d.items.map(it => `<li><span><span class="os-liblayer">${it.year ? `${esc(yearLabel(it))} · ` : ''}${esc(layerLabel(it))}</span>${esc(it.stem.length > 150 ? `${it.stem.slice(0, 150)}…` : it.stem)}</span>${mine ? `<button class="os-libx" data-lib="delq" data-deck="${esc(d.id)}" data-id="${esc(it.id)}" aria-label="Delete this question">${I.x}</button>` : ''}</li>`).join('')}</ol></details>
     </li>`;
   };
   if (!decks.length && !shared.length) return `${signedIn ? '' : signInHtml('Signed out: questions you upload stay on this phone. Sign in to keep them on your account, on every device, and to share them with friends.')}
@@ -183,34 +185,59 @@ function friendsHtml() {
 }
 
 /* ---------------------------------------------------------------- Study */
+/* the bank (public/duel/pack.json: the stations' questions and the reviewed pool) as a deck to study, read-only */
+const BANK = '__bank';
+async function loadBank() {
+  if (V.bank) return V.bank;
+  try {
+    const r = await fetch('./duel/pack.json', { cache: 'no-cache' }); if (!r.ok) throw new Error();
+    V.bank = (await r.json()).questions.map(q => ({ item: { id: q.id, stem: q.stem, options: q.options, answer: q.answer, explanation: q.why || '', why: Array.isArray(q.notes) ? q.notes : [], topic: q.topic || '', cat: q.cat || '', year: q.year || 0 }, deck: BANK, deckName: 'The bank', owner: '', ownerName: '', key: `b:${q.id}` }));
+  } catch { V.bank = []; }
+  return V.bank;
+}
 function studyPool() {
-  const all = api.allItems(V.lib), d = V.st.deck;
+  const d = V.st.deck;
+  if (d === BANK) return V.bank || [];
+  const all = api.allItems(V.lib);
   return d ? all.filter(x => x.deck === d) : all;
 }
+const inStudyPick = x => inPick(x.item, V.st) && (!V.st.year || x.item.year === V.st.year);
 function studyHtml() {
   if (V.st.q) return cardHtml();
   const all = api.allItems(V.lib);
-  if (!all.length) return `<div class="os-libempty">${icon('cards')}<p><strong>Nothing to study yet</strong><br>Upload questions, or ask a friend to share a deck.</p><button class="os-btn os-btn--lg os-primary" data-lib="tab" data-tab="upload">${icon('plus')}<span>Upload questions</span></button></div>`;
+  if (!all.length && V.st.deck !== BANK) V.st.deck = BANK;   /* nothing of yours yet: the bank */
+  if (V.st.deck === BANK && !V.bank) { loadBank().then(() => { if (V.tab === 'study' && !V.st.q) paint(); }); return '<p class="os-libmeta">Loading the bank…</p>'; }
   const pool = studyPool(), cards = api.studyMem().card, t = now(), L = layers(pool.map(x => x.item));
-  const pick = pool.filter(x => inPick(x.item, V.st)), c = counts(pick.map(x => ({ id: x.key })), cards, t), q = sessionQueue(pick);
+  const pick = pool.filter(inStudyPick), c = counts(pick.map(x => ({ id: x.key })), cards, t), q = V.st.order === 'ladder' ? climbQueue(pick) : sessionQueue(pick);
+  const inTK = pool.filter(x => inPick(x.item, V.st)), yN = y => inTK.filter(x => x.item.year === y).length;
   const chip = (k, v, label, n, on) => `<button class="os-chip${on ? ' on' : ''}" data-lib="pick" data-k="${k}" data-v="${esc(v)}" aria-pressed="${on}"${n === 0 ? ' disabled' : ''}>${esc(label)}<span class="os-libn2">${n}</span></button>`;
   const topic = L.find(x => x.topic === V.st.topic);
-  const decks = [...V.lib.decks.map(d => [d.id, d.name]), ...V.lib.shared.map(d => [d.id, `${d.name} (${d.owner_name})`])];
-  return `<label class="os-setf"><span>Deck</span><select name="sdeck"><option value="">Every deck (${all.length})</option>${decks.map(([id, n]) => `<option value="${esc(id)}"${id === V.st.deck ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></label>
+  const decks = [...V.lib.decks.map(d => [d.id, d.name]), ...V.lib.shared.map(d => [d.id, `${d.name} (${d.owner_name})`]), [BANK, `The bank${V.bank ? ` (${V.bank.length})` : ''}`]];
+  const order = (v, label) => `<button role="radio" data-lib="order" data-v="${v}" aria-checked="${V.st.order === v}">${label}</button>`;
+  return `<label class="os-setf"><span>Deck</span><select name="sdeck">${all.length ? `<option value="">Every deck of yours (${all.length})</option>` : ''}${decks.map(([id, n]) => `<option value="${esc(id)}"${id === V.st.deck ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></label>
+    <div class="os-liborder"><div class="os-seg" role="radiogroup" aria-label="Order">${order('due', 'Due first')}${order('ladder', '0 to 1')}</div>
+      <p class="os-libmeta">${V.st.order === 'ladder' ? 'Year 1 first principles, then each year up to final year: learn it from the ground up.' : 'Cards due today, then new ones, as spaced repetition says.'}</p></div>
     <p class="os-libh2">Specialty</p><div class="os-libchips">${chip('topic', '', 'All', pool.length, !V.st.topic)}${L.map(x => chip('topic', x.topic, x.topic, x.count, V.st.topic === x.topic)).join('')}</div>
     <p class="os-libh2">Kind</p><div class="os-libchips">${chip('cat', '', 'All', topic ? topic.count : pool.length, !V.st.cat)}${KIND_IDS.map(k => chip('cat', k, KINDS[k].label, topic ? topic.cats.find(x => x.id === k).count : pool.filter(x => x.item.cat === k).length, V.st.cat === k)).join('')}</div>
+    <p class="os-libh2">Year</p><div class="os-libchips">${chip('year', '', 'All', inTK.length, !V.st.year)}${YEAR_IDS.map(y => chip('year', String(y), YEARS[y].label, yN(y), V.st.year === y)).join('')}</div>
     <p class="os-libstat"><span><b>${c.due}</b> due</span><span><b>${c.new}</b> new</span><span><b>${c.learnt}</b> learnt</span></p>
     <button class="os-btn os-btn--lg os-primary os-libgo" data-lib="start"${q.length ? '' : ' disabled'}>${q.length ? `Study ${plural(q.length, 'card')}` : 'Nothing due: come back later'}</button>
     ${!q.length && pick.length ? `<button class="os-link" data-lib="cram">Go over them anyway</button>` : ''}`;
 }
+/* 0 to 1: what is not learnt yet (due or new), five from each year, Year 1 first; then, when that is all learnt, the
+   learnt ones in the same climb */
+const climbQueue = pick => {
+  const cards = api.studyMem().card, t = now(), open = pick.filter(x => { const c = cards[x.key]; return !c || c.due <= t; });
+  return ladder(open.length ? open : pick, x => x.item.year, 5);
+};
 const sessionQueue = pick => {
   const m = api.studyMem(), started = m.day.d === day() ? m.day.n | 0 : 0;
   const ids = queue(pick.map(x => ({ id: x.key })), m.card, now(), started).map(x => x.id), by = new Map(pick.map(x => [x.key, x]));
   return ids.map(id => by.get(id));
 };
 function start(cram) {
-  const pick = studyPool().filter(x => inPick(x.item, V.st));
-  V.st.q = cram ? [...pick].sort(() => Math.random() - 0.5).slice(0, 30) : sessionQueue(pick);
+  const pick = studyPool().filter(inStudyPick);
+  V.st.q = cram ? [...pick].sort(() => Math.random() - 0.5).slice(0, 30) : V.st.order === 'ladder' ? climbQueue(pick) : sessionQueue(pick);
   V.st.i = 0; V.st.pick = null; V.st.n = 0;
   if (!V.st.q.length) { V.st.q = null; return; }
   paint(); panel()?.querySelector('.os-libopt')?.focus({ preventScroll: true });
@@ -220,7 +247,8 @@ function cardHtml() {
   if (!x) return `<div class="os-libempty os-libdone">${I.check}<p><strong>Done for now</strong><br>${plural(V.st.n, 'card')} studied. Due cards come back when they are due.</p><button class="os-btn os-btn--lg os-primary" data-lib="endstudy">Back to Study</button></div>`;
   const it = x.item, picked = V.st.pick, shown = picked != null, card = api.studyMem().card[x.key], t = now();
   return `<div class="os-libcard">
-    <div class="os-libprog"><span>${V.st.i + 1} of ${V.st.q.length}</span><span class="os-liblayer">${esc(layerLabel(it))}${x.ownerName ? ` · from ${esc(x.ownerName)}` : ''}</span><button class="os-link" data-lib="endstudy">End</button></div>
+    <div class="os-libprog"><span>${V.st.i + 1} of ${V.st.q.length}</span><span class="os-liblayer">${it.year ? `${esc(yearLabel(it))} · ` : ''}${esc(layerLabel(it))}${x.ownerName ? ` · from ${esc(x.ownerName)}` : ''}</span><button class="os-link" data-lib="endstudy">End</button></div>
+    ${V.st.order === 'ladder' && it.year && it.year !== V.st.q[V.st.i - 1]?.item.year ? `<p class="os-libyear"><b>${esc(YEARS[it.year].label)}</b> ${esc(YEARS[it.year].name)}</p>` : ''}
     <div class="os-libbar" aria-hidden="true"><i style="transform:scaleX(${(V.st.i / V.st.q.length).toFixed(3)})"></i></div>
     <p class="os-libstem">${esc(it.stem)}</p>${it.ask ? `<p class="os-libask">${esc(it.ask)}</p>` : ''}
     <div class="os-libopts" role="group" aria-label="Options">${it.options.map((o, i) => {
@@ -295,7 +323,8 @@ async function act(a, b, e) {
       try { await api.answerFriend(b.dataset.id, false); V.lib = api.current(); } catch (err) { notify(err.message, 'danger'); }
       return paint();
     }
-    case 'pick': { V.st[b.dataset.k] = b.dataset.v; if (b.dataset.k === 'topic') V.st.cat = ''; return paint(); }
+    case 'pick': { V.st[b.dataset.k] = b.dataset.k === 'year' ? +b.dataset.v || 0 : b.dataset.v; if (b.dataset.k === 'topic') V.st.cat = ''; return paint(); }
+    case 'order': V.st.order = b.dataset.v === 'ladder' ? 'ladder' : 'due'; return paint();
     case 'start': return start(false);
     case 'cram': return start(true);
     case 'opt': return answer(+b.dataset.i);

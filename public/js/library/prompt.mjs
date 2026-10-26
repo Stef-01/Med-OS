@@ -3,6 +3,7 @@
    array, each question with the specialty and the kind the duel and Study drill down by. Pure: the view copies it and
    the tests read it. */
 import { KINDS, SPECIALTIES } from './item.mjs';
+import { YEARS } from '../mcq/year.mjs';
 
 const EXAMPLE = [{
   stem: 'A 4-year-old boy is brought to the emergency department with 2 days of a barking cough and noisy breathing. He has a temperature of 38.1°C, inspiratory stridor at rest and mild subcostal recession. Oxygen saturation is 96% on room air.',
@@ -13,12 +14,14 @@ const EXAMPLE = [{
   why: ['Correct: a steroid treats the subglottic oedema.', 'Bronchodilators do not help upper-airway oedema.', 'Antibiotics are for bacterial tracheitis or epiglottitis, which this is not.', 'Croup is viral.', 'Nebulised budesonide works but oral dexamethasone is first line and easier.'],
   specialty: 'Paediatrics',
   kind: 'clinical',
+  year: 4,
   tags: ['croup', 'stridor']
 }];
 
 /* the whole prompt; `material` (optional) goes at the end so a student can paste their notes in one go */
 export function chatPrompt(material = '') {
   const kinds = Object.entries(KINDS).map(([id, k]) => `  - "${id}": ${k.label}. ${k.brief}`).join('\n');
+  const years = Object.entries(YEARS).map(([n, y]) => `  - ${n}: ${y.name}: ${y.brief}`).join('\n');
   return `You are writing single-best-answer multiple-choice questions for a medical student's question bank (Med-OS, mdosce.vercel.app). Turn the material I give you at the end into questions.
 
 Output ONLY a JSON array, no prose before or after it, no markdown code fence. Each element is one question:
@@ -31,6 +34,7 @@ Output ONLY a JSON array, no prose before or after it, no markdown code fence. E
   "why": ["one short line per option, in order, saying why it is right or wrong"],
   "specialty": "exactly one of the specialties below",
   "kind": "exactly one of the kinds below",
+  "year": "the year of medical school it is pitched at: 1, 2, 3 or 4 (below)",
   "tags": ["2 to 4 lowercase keywords"]
 }
 
@@ -39,6 +43,10 @@ ${SPECIALTIES.join(', ')}
 
 Kinds:
 ${kinds}
+
+Years (a number):
+${years}
+A question on a first principle is Year 1 even about a clinical topic; give each question the earliest year a student could answer it.
 
 Rules:
 - Plain text only: no HTML, no markdown, no images, no "all of the above" or "none of the above".

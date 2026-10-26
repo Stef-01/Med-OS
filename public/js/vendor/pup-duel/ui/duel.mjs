@@ -21,7 +21,7 @@ import { createLobby, settleCrossed, offerFrom, rematchTarget } from '../duel/lo
 import { practiceWorld, BOT } from '../duel/bot.mjs';
 import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
 import { shown } from '../pup/rig/gifts.mjs';
-import { topicTree, poolOf, pickLabel, sourceLabel, decksOf, deckPack } from '../duel/pack.mjs';
+import { topicTree, poolOf, pickLabel, sourceLabel, decksOf, deckPack, yearsOf, YEAR_LABEL } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
 import { normWallet, fitWear } from '../duel/shop.mjs';
@@ -408,7 +408,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
                its count; a category with none yet is shown, greyed, so the layers read the same everywhere
      The last pick and lengths are remembered on this device */
   const PICK_KEY = `${storeKey}:pick`;
-  const lastPick = () => { try { const p = JSON.parse(storage.getItem(PICK_KEY)) || {}; return { rounds: RULES.roundChoices.includes(p.rounds) ? p.rounds : RULES.rounds, secs: RULES.secsChoices.includes(p.secs) ? p.secs : RULES.secs, topic: typeof p.topic === 'string' ? p.topic : '', cat: typeof p.cat === 'string' ? p.cat : '', deck: typeof p.deck === 'string' ? p.deck : '' }; } catch { return { rounds: RULES.rounds, secs: RULES.secs, topic: '', cat: '', deck: '' }; } };
+  const lastPick = () => { try { const p = JSON.parse(storage.getItem(PICK_KEY)) || {}; return { rounds: RULES.roundChoices.includes(p.rounds) ? p.rounds : RULES.rounds, secs: RULES.secsChoices.includes(p.secs) ? p.secs : RULES.secs, topic: typeof p.topic === 'string' ? p.topic : '', cat: typeof p.cat === 'string' ? p.cat : '', deck: typeof p.deck === 'string' ? p.deck : '', ladder: p.ladder === true }; } catch { return { rounds: RULES.rounds, secs: RULES.secs, topic: '', cat: '', deck: '', ladder: false }; } };
   const keepPick = p => { try { storage.setItem(PICK_KEY, JSON.stringify(p)); } catch { /* private mode */ } };
   function openSetup(mate, last = null, { practice: isPractice = false } = {}) {
     /* where the questions come from (a host's decks: Med-OS's bank, your questions, your friends'), in front of the topic */
@@ -425,6 +425,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         <h2 class="pd-sheet-title"></h2>
         ${decks.length ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('pack')}</span><div><span class="pd-seglabel" id="pd-sl-deck">From</span><div class="pd-seg pd-seg--deck" role="radiogroup" aria-labelledby="pd-sl-deck">${[...decks, { id: '', label: 'Mix', count: decks.reduce((n, d) => n + d.count, 0) }].map(d => `<button type="button" role="radio" data-deck="${esc(d.id)}" aria-checked="${d.id === opt.deck}" tabindex="${d.id === opt.deck ? 0 : -1}" aria-label="${esc(d.label)}, ${d.count} questions">${esc(d.short || d.label)}</button>`).join('')}</div></div></div>` : ''}
         ${layered ? `<button class="pd-pickrow" type="button" data-pd="choose"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><span class="pd-pick-tx"><small>Questions from</small><b></b></span><span class="pd-pick-n"></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
+        ${yearsOf(pack).length > 1 ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('star')}</span><div><span class="pd-seglabel" id="pd-sl-order">Order</span><div class="pd-seg" role="radiogroup" aria-labelledby="pd-sl-order">${[['mix', 'Shuffled'], ['ladder', '0 to 1']].map(([v, l]) => `<button type="button" role="radio" data-order="${v}" aria-checked="${(v === 'ladder') === !!opt.ladder}" tabindex="${(v === 'ladder') === !!opt.ladder ? 0 : -1}"${v === 'ladder' ? ' aria-describedby="pd-laddernote"' : ''}>${l}</button>`).join('')}</div><p class="pd-note pd-readnote" id="pd-laddernote">0 to 1: Year 1 first principles up to final year, harder each question.</p></div></div>` : ''}
         ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
         ${seg('secs', 'timer', 'Seconds to answer', RULES.secsChoices, opt.secs, v => `${v}s`)}
         <p class="pd-note pd-readnote">Each question adds time to read it: a long case gets longer.</p>
@@ -481,6 +482,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelectorAll('.pd-seg').forEach(g => {
         const set = b => {
           g.querySelectorAll('button').forEach(x => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; });
+          if (b.dataset.order !== undefined) { opt.ladder = b.dataset.order === 'ladder'; keepPick({ ...opt }); }
           if (b.dataset.deck !== undefined) { opt.deck = b.dataset.deck; tree = topicTree(cur()); if (!poolOf(cur(), opt).length) { opt.topic = ''; opt.cat = ''; } keepPick({ ...opt }); }
           paintPick();
         };
@@ -495,8 +497,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelector('[data-pd="send"]').addEventListener('click', async () => {
         const rounds = pickedRounds(), secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs;
         keepPick({ ...opt, rounds, secs });
-        if (isPractice) { closeSheet(); startPractice({ rounds, secs, topic: opt.topic, cat: opt.cat, deck: opt.deck }); return; }
-        const setup = makeSetup(cur(), { rounds, secs, topic: opt.topic, cat: opt.cat, seed: freshSeed(), title: pack.title });
+        if (isPractice) { closeSheet(); startPractice({ rounds, secs, topic: opt.topic, cat: opt.cat, deck: opt.deck, ladder: !!opt.ladder }); return; }
+        const setup = makeSetup(cur(), { rounds, secs, topic: opt.topic, cat: opt.cat, ladder: !!opt.ladder && yearsOf(pack).length > 1, seed: freshSeed(), title: pack.title });
         if (!setup.questions.length) { el.querySelector('.pd-err').textContent = 'No questions to play.'; return; }
         await busy(async () => {
           const d = await challengeMate(mate.id, setup);
@@ -552,7 +554,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         const R = st.rounds[i], a = R?.answers[me], b = R?.answers[opp], li = document.createElement('li');
         li.className = 'pd-rv'; li.dataset.ok = a?.ok ? '1' : '0';
         const where = st.setup.topic || q.topic;   /* a duel narrowed to a topic names that topic, not the question's first */
-        const meta = [[where, q.catLabel].filter(Boolean).join(' › '), q.source ? sourceLabel(q) : ''].filter(Boolean).join(' · ');   /* what to revise, and whose question */
+        const meta = [q.year ? YEAR_LABEL(q.year) : '', [where, q.catLabel].filter(Boolean).join(' › '), q.source ? sourceLabel(q) : ''].filter(Boolean).join(' · ');   /* what to revise, and whose question */
         li.innerHTML = `${meta ? '<p class="pd-rv-meta"></p>' : ''}<p class="pd-rv-q"></p><p class="pd-rv-a">${icon('check')}<span></span></p>`;
         if (meta) li.querySelector('.pd-rv-meta').textContent = meta;
         li.querySelector('.pd-rv-q').textContent = q.stem;
@@ -587,7 +589,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       const look = myLook();
       const w = await practiceWorld({ name: S.me?.name || 'You', look });
       S.world = w; S.t = w.transport; S.worldMe = w.me;
-      const setup = makeSetup(deckPack(pack, opts.deck || ''), { rounds: opts.rounds || RULES.rounds, secs: opts.secs || RULES.secs, topic: opts.topic || '', cat: opts.cat || '', seed: freshSeed(), title: pack.title });
+      const setup = makeSetup(deckPack(pack, opts.deck || ''), { rounds: opts.rounds || RULES.rounds, secs: opts.secs || RULES.secs, topic: opts.topic || '', cat: opts.cat || '', ladder: !!opts.ladder && yearsOf(pack).length > 1, seed: freshSeed(), title: pack.title });
       if (!setup.questions.length) throw new Error('No questions to play.');
       const d = await w.transport.challenge(w.me, w.bot.id, setup);
       openDuel({ ...d, them: { ...w.bot, look: BOT.look } }, { practice: true });
@@ -726,7 +728,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (showQ) {
       if (M.round !== s.round) {
         M.round = s.round;
-        const tag = shell.querySelector('.pd-qtag'), from = sourceLabel(q);   /* where the question came from: AI-written, AMSA, … */
+        const tag = shell.querySelector('.pd-qtag'), from = st.setup?.ladder && q.year ? YEAR_LABEL(q.year) : sourceLabel(q);   /* where the question came from (AI-written, AMSA, …); in 0 to 1 its year instead (the review keeps both) */
         tag.textContent = from; tag.hidden = !from;
         shell.querySelector('.pd-stem').textContent = q.stem;
         if (s.name === 'question') say(`Question ${s.round + 1} of ${st.rounds.length}. ${secs} seconds.`);

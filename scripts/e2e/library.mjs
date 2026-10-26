@@ -100,6 +100,24 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   const study = await sam.evaluate(() => JSON.parse(localStorage.getItem('osce.libstudy.v1') || '{}'));
   ok(Object.keys(study.card || {}).length === 2 && Object.values(study.card).every(c => c.due > Date.now()), 'study: each graded card is due again later');
   await sam.click('.os-libdone [data-lib="endstudy"]');
+  /* the year: each question has one (given, or guessed and said so), chips by year, and 0 to 1 climbs them */
+  ok(await sam.locator('.os-libchips [data-k="year"]').count() === 5, 'study: a Year row (All and Years 1 to 4)');
+  await sam.click('[data-lib="order"][data-v="ladder"]'); await sam.waitForTimeout(150);
+  ok(/Year 1 first principles/.test(await sam.textContent('.os-liborder')), 'study: 0 to 1 says what it does');
+  await shot(sam, '320-study-ladder'); await flat(sam, 'study 0 to 1');
+  await sam.selectOption('.os-libp [name="sdeck"]', '__bank'); await sam.waitForSelector('.os-libgo');
+  await sam.click('[data-lib="order"][data-v="ladder"]').catch(() => {}); await sam.waitForTimeout(150);
+  await sam.click('.os-libgo'); await sam.waitForSelector('.os-libopt');
+  const climb = await sam.evaluate(() => document.querySelector('.os-libprog .os-liblayer').textContent);
+  ok(/^Year 1 · /.test(climb) && await sam.locator('.os-libyear').isVisible(), `study: 0 to 1 over the bank starts at Year 1, and says so (${climb})`);
+  await shot(sam, '320-ladder-card'); await flat(sam, 'ladder card');
+  let last = 1, upward = true;
+  for (let i = 0; i < 12; i++) {
+    const y = +(await sam.textContent('.os-libprog .os-liblayer')).match(/^Year (\d)/)[1]; if (y < last) upward = false; last = y;
+    await sam.locator('.os-libopt').first().click(); await sam.click('[data-lib="grade"][data-g="good"]'); await sam.waitForTimeout(60);
+  }
+  ok(upward && last >= 3, `study: 0 to 1 only ever climbs (reached Year ${last} after 12)`);
+  await sam.click('[data-lib="endstudy"]');
   ok(/0 due/.test(await sam.textContent('.os-libstat')) || /Study 0|Nothing due|Study 1 card/.test(await sam.textContent('.os-libgo')), 'study: the graded cards are no longer due');
 
   /* Kai, on a bigger phone: friends */
@@ -152,6 +170,17 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(/Yours/.test(await sam.textContent('.os-duel .pd-mtop .pd-qtag')), 'duel: the question is tagged Yours');
   await shot(sam, '320-duel-yours');
   await sam.keyboard.press('Escape');
+  /* the duel's 0 to 1: Order on the setup, the first question Year 1 */
+  const lad = await phone(320, 640, {});
+  await lad.click('[data-os="settings"]'); await lad.click('.os-switch[data-game="duel"]'); await lad.keyboard.press('Escape');
+  await lad.click('.os-start [data-os="duel"]'); await lad.waitForSelector('.os-duel [data-pd="practice"]');
+  await lad.click('.os-duel [data-pd="practice"]'); await lad.waitForSelector('.os-duel [data-order="ladder"]');
+  await lad.click('.os-duel [data-order="ladder"]');
+  await shot(lad, '320-duel-ladder-setup');
+  await lad.click('.os-duel .pd-sheet [data-pd="send"]'); await lad.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 15000 });
+  const tag1 = (await lad.textContent('.os-duel .pd-mtop .pd-qtag')).trim(), fits = await lad.evaluate(() => { const t = document.querySelector('.os-duel .pd-mtop .pd-qtag'); return t.scrollWidth <= t.clientWidth + 1; });
+  ok(tag1 === 'Year 1' && fits, `duel: 0 to 1 starts at Year 1, and the tag says so, whole (${tag1})`);   /* the climb itself: the package's core test */
+  await shot(lad, '320-duel-ladder');
 
   /* signed out: kept on this phone, and a note says how to keep it on an account */
   const solo = await phone(320, 640, {});
