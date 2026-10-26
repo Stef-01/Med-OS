@@ -101,12 +101,14 @@
 /* Duel a Mate: a card like the others (os-bigcard), two dogs face to face where its icon goes, a Beta chip; on Start
    only once switched on in Settings */
 .os-bigic.os-duelfaces { display:flex; flex:none; width:auto; height:auto; background:none; padding:0; }
+.os-duelcard .os-duelfaces span { width:36px; height:36px; }   /* room for the title and its Beta pill on one line at 320 */
 .os-duelfaces span { width:42px; height:42px; border-radius:50%; background:var(--card2); overflow:hidden; }
 .os-duelfaces span + span { margin-left:-10px; box-shadow:0 0 0 2px var(--card); }
 .os-duelfaces img { display:block; width:100%; height:100%; transform-origin:50% 58%; transform:scale(1.75); }   /* the icon is the whole dog: its face */
 .os-duelfaces span + span img { transform:scale(-1.75, 1.75); }   /* the second faces the first */
 .os-duelcard .os-bigtx { min-width:0; }
 .os-duelcard .os-bigtx strong { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.os-bigtx .os-beta { margin-right:6px; vertical-align:1px; }
 .os-beta { padding:2px 8px; border-radius:99px; background:var(--pri-soft); color:var(--pri); font-size:12px; font-weight:700; letter-spacing:.02em; }
 
 /* ---------- Study Session (OscesGroup) ---------- */
@@ -873,7 +875,10 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-acctstats > div { display:grid; grid-template-columns:96px minmax(0, 1fr); gap:10px; padding:10px 0; }
 .os-acctstats > div + div { border-top:1px solid var(--stroke); }
 .os-acctstats dt { font-size:13px; font-weight:700; color:var(--mute); }
-.os-acctstats dd { display:flex; flex-direction:column; margin:0; font-size:14.5px; font-variant-numeric:tabular-nums; }
+.os-acctstats dd { display:flex; flex-direction:column; min-height:3.9em; margin:0; font-size:14.5px; font-variant-numeric:tabular-nums; }   /* three lines held while it loads */
+.os-acctstats > div:first-child dd { min-height:0; }
+.os-setf small { margin-left:6px; font-weight:500; }
+.os-setf input[aria-invalid="true"] { border-color:var(--danger); }
 .os-switch { display:flex; align-items:center; gap:14px; width:100%; min-height:64px; padding:12px 14px; border:1px solid var(--stroke); border-radius:12px; background:var(--solid); color:var(--ink); font:inherit; text-align:left; cursor:pointer; transition:border-color .2s, background-color .2s; }
 .os-switch:hover { background:var(--card2); }
 .os-switch-tx { display:flex; flex-direction:column; gap:3px; min-width:0; flex:1; }

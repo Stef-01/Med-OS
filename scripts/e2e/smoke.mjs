@@ -622,7 +622,7 @@ async function duel() {
   ok(/Signed in as Sam/.test(await a.textContent('.os-acctwho')), "account: Settings shows the duel's sign-in");
   await a.waitForFunction(() => !/Loading/.test(document.querySelector('[data-set="aduel"]')?.textContent || 'Loading'), null, { timeout: 6000 });
   const duelLine = await a.textContent('[data-set="aduel"]');
-  ok(/rating/.test(duelLine) && /lost/.test(duelLine) && /bones/.test(duelLine), `account: the duel progress shows (${duelLine})`);
+  ok(/rating/i.test(duelLine) && /lost/.test(duelLine) && /bones/.test(duelLine), `account: the duel progress shows (${duelLine})`);
   ok(/attempted/.test(await a.textContent('.os-acctstats')), 'account: the OSCE progress shows');
   ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'account: Settings fits a 320 px phone');
   await a.waitForTimeout(700); await a.evaluate(() => document.querySelector('.os-acct').scrollIntoView({ block: 'start' })); await a.screenshot({ path: path.join(SHOTS, 'settings-account.png') });

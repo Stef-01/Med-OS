@@ -399,7 +399,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const tree = topicTree(pack), layered = tree.topics.length > 1 || tree.all.cats.length > 1;
     const opt = { ...lastPick(), ...(last || {}) };
     if (!poolOf(pack, opt).length) { opt.topic = ''; opt.cat = ''; }   /* a pick the pack no longer has */
-    const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div class="pd-seg" role="radiogroup" aria-label="${label}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}" tabindex="${v === cur ? 0 : -1}">${f(v)}</button>`).join('')}</div></div>`;
+    const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div><span class="pd-seglabel" id="pd-sl-${name}">${label}</span><div class="pd-seg" role="radiogroup" aria-labelledby="pd-sl-${name}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}" tabindex="${v === cur ? 0 : -1}">${f(v)}</button>`).join('')}</div></div></div>`;
     sheet(`
       <div class="pd-step" data-step="setup">
         <div class="pd-vsmini" aria-hidden="true"></div>
@@ -442,12 +442,13 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
             + tree.topics.map(t => item(t.topic, t.count, `data-dt="${esc(t.topic)}"`, { go: true, sub: t.topic === opt.topic ? `Chosen: ${pickLabel(pack, opt).split(' › ')[1] || 'all of it'}` : '' })).join('');
         } else {
           const node = dt ? tree.topics.find(t => t.topic === dt) : tree.all;
-          crumbs.innerHTML = `<button type="button" class="pd-crumb" data-pd="up">Topics</button><span aria-hidden="true">›</span><b></b>`;
+          crumbs.innerHTML = '<span>Topics</span><span aria-hidden="true">›</span><b></b>';
           crumbs.querySelector('b').textContent = dt || 'Every topic';
           ul.innerHTML = item(dt ? `All of ${dt}` : 'Every question', node.count, 'data-dc=""', { on: opt.topic === dt && !opt.cat })
             + node.cats.map(c => item(c.label, c.count, `data-dc="${esc(c.id)}"`, { on: opt.topic === dt && opt.cat === c.id })).join('');
         }
         if (focusFirst) (ul.querySelector('.pd-on:not(:disabled)') || ul.querySelector('button:not(:disabled)'))?.focus({ preventScroll: true });
+        say(dt === null ? `Choose a topic: ${tree.topics.length + 1} choices` : `${dt || 'Every topic'}: choose a kind of question`);
       };
       el.querySelector('[data-pd="choose"]')?.addEventListener('click', () => { dt = null; step('choose'); drill(); });
       el.querySelector('[data-step="choose"]').addEventListener('click', e => {

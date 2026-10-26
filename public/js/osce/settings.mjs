@@ -6,7 +6,7 @@ import { enabled as syncOn, state as syncState } from '../study-kit/sync.mjs';
 import { osceMergeImport, GAMES, osceGames } from './core.mjs';
 import { account, accountsOn, signIn, signOut, duelStats, nameError, pinError } from './account.mjs';
 import { tierOf } from '../vendor/pup-duel/duel/ranked.mjs';
-import { ctx, save, notify, openDialog, closeDialog, topDialog, markerCfg, setMarkerCfg, DEFAULT_MODEL, nameOf } from './state.mjs';
+import { ctx, save, notify, openDialog, closeDialog, topDialog, markerCfg, setMarkerCfg, DEFAULT_MODEL, nameOf, confirmDlg } from './state.mjs';
 
 export const MODELS = [['claude-opus-5-5', 'Claude Opus 5.5 (best marking)'], ['claude-sonnet-5-5', 'Claude Sonnet 5.5 (faster, cheaper)'], ['claude-haiku-5-5', 'Claude Haiku 5.5 (cheapest)']];
 
@@ -14,16 +14,16 @@ export const MODELS = [['claude-opus-5-5', 'Claude Opus 5.5 (best marking)'], ['
 function accountHtml() {
   if (!accountsOn()) return '';
   const a = account();
-  if (!a) return `<section class="os-acct"><h3>Account</h3>
+  if (!a) return `<section class="os-acct" aria-labelledby="os-h-acct"><h3 id="os-h-acct">Account</h3>
     <p class="os-handhint">Sign in to keep your OSCE progress and your Duel a Mate progress on every device. A name and a 4-digit PIN, the same as the duel's.</p>
-    <label class="os-setf"><span>Name</span><input data-set="aname" autocomplete="username" autocapitalize="words" maxlength="20" spellcheck="false"></label>
-    <label class="os-setf"><span>PIN</span><input data-set="apin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="current-password"></label>
-    <p class="os-err" role="alert" data-set="aerr"></p>
+    <label class="os-setf"><span>Name</span><input data-set="aname" autocomplete="username" autocapitalize="words" maxlength="20" spellcheck="false" aria-describedby="os-aerr"></label>
+    <label class="os-setf"><span>PIN <small>4 digits</small></span><input data-set="apin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="current-password" aria-describedby="os-aerr"></label>
+    <p class="os-err" role="alert" id="os-aerr" data-set="aerr"></p>
     <div class="os-crow"><button type="button" class="os-btn os-primary" data-set="ain">Sign in</button><button type="button" class="os-btn" data-set="anew">New account</button></div>
   </section>`;
   const { hist } = ctx.mem, tried = Object.values(hist || {}).filter(l => (l || []).some(x => x.fin)).length;
   const marked = Object.values(hist || {}).filter(l => (l || []).some(x => x.fin && x.ai?.status === 'done')).length;
-  return `<section class="os-acct"><h3>Account</h3>
+  return `<section class="os-acct" aria-labelledby="os-h-acct"><h3 id="os-h-acct">Account</h3>
     <p class="os-acctwho">Signed in as <b>${esc(a.name || 'you')}</b></p>
     <dl class="os-acctstats">
       <div><dt>OSCE</dt><dd>${tried} station${tried === 1 ? '' : 's'} attempted${marked ? `, ${marked} AI-marked` : ''}</dd></div>
@@ -36,9 +36,10 @@ function accountHtml() {
 /* the games on Start: a switch each, off until turned on */
 function gamesHtml() {
   const on = osceGames(ctx.mem);
-  return `<section><h3>Games</h3>
-    ${GAMES.map(g => `<button type="button" class="os-switch" role="switch" aria-checked="${on[g.id]}" data-set="game" data-game="${g.id}">
-      <span class="os-switch-tx"><strong>${esc(g.name)}${g.beta ? ' <span class="os-beta">Beta</span>' : ''}</strong><span>${esc(g.line)} ${on[g.id] ? 'On the start screen.' : 'Off: switch it on to add it to the start screen.'}</span></span>
+  return `<section aria-labelledby="os-h-games"><h3 id="os-h-games">Games</h3>
+    <p class="os-handhint">A game you switch on appears on the start screen. Switches apply straight away.</p>
+    ${GAMES.map(g => `<button type="button" class="os-switch" role="switch" aria-checked="${on[g.id]}" data-set="game" data-game="${g.id}" aria-labelledby="os-g-${g.id}" aria-describedby="os-gd-${g.id}">
+      <span class="os-switch-tx"><strong id="os-g-${g.id}">${esc(g.name)}${g.beta ? ' <span class="os-beta">Beta</span>' : ''}</strong><span id="os-gd-${g.id}">${esc(g.line)}</span></span>
       <span class="os-switch-ui" aria-hidden="true"></span></button>`).join('')}
   </section>`;
 }
@@ -72,7 +73,6 @@ function wireGames(el) {
     ctx.mem.games = { ...(ctx.mem.games || {}), [id]: on };
     save();
     b.setAttribute('aria-checked', String(on));
-    b.querySelector('.os-switch-tx > span').textContent = `${g.line} ${on ? 'On the start screen.' : 'Off: switch it on to add it to the start screen.'}`;
     notify(on ? `${g.name} is on the start screen.` : `${g.name} is off.`, on ? 'success' : '');
     ctx.render();
   }));
@@ -82,22 +82,32 @@ function wireAccount(el) {
   const repaint = () => { sec.outerHTML = accountHtml(); wireAccount(el); el.querySelector('.os-acct button, .os-acct input')?.focus({ preventScroll: true }); ctx.render(); };
   const go = async create => {
     const name = sec.querySelector('[data-set="aname"]').value, pin = sec.querySelector('[data-set="apin"]').value, err = sec.querySelector('[data-set="aerr"]');
-    const bad = nameError(name) || pinError(pin);
-    if (bad) { err.textContent = bad; return; }
-    sec.querySelectorAll('button').forEach(b => { b.disabled = true; });
+    const nIn = sec.querySelector('[data-set="aname"]'), pIn = sec.querySelector('[data-set="apin"]'), nBad = nameError(name), pBad = nBad ? '' : pinError(pin);
+    nIn.setAttribute('aria-invalid', String(!!nBad)); pIn.setAttribute('aria-invalid', String(!!pBad));
+    if (nBad || pBad) { err.textContent = nBad || pBad; (nBad ? nIn : pIn).focus(); return; }
+    const btn = sec.querySelector(create ? '[data-set="anew"]' : '[data-set="ain"]'), was = btn.textContent;
+    sec.querySelectorAll('button').forEach(b => { b.disabled = true; }); sec.setAttribute('aria-busy', 'true');
+    btn.textContent = create ? 'Making your account…' : 'Signing in…'; err.textContent = '';
     try { const p = await signIn(name, pin, create); notify(`Signed in as ${p.name}. Your progress is kept on your account.`, 'success'); repaint(); }
-    catch (e) { err.textContent = e.message || 'That did not work. Try again.'; sec.querySelectorAll('button').forEach(b => { b.disabled = false; }); }
+    catch (e) {
+      err.textContent = e.message || 'That did not work. Try again.'; btn.textContent = was; sec.removeAttribute('aria-busy');
+      sec.querySelectorAll('button').forEach(b => { b.disabled = false; });
+      const onName = /name/i.test(err.textContent); (onName ? nIn : pIn).setAttribute('aria-invalid', 'true'); (onName ? nIn : pIn).focus();
+    }
   };
   sec.querySelector('[data-set="ain"]')?.addEventListener('click', () => go(false));
   sec.querySelector('[data-set="anew"]')?.addEventListener('click', () => go(true));
   sec.querySelectorAll('[data-set="apin"], [data-set="aname"]').forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(false); } }));   // Enter signs in, it does not save and close
-  sec.querySelector('[data-set="aout"]')?.addEventListener('click', async () => { await signOut(); notify('Signed out on this device.'); repaint(); });
+  sec.querySelector('[data-set="aout"]')?.addEventListener('click', async () => {
+    if (syncState.unsynced && !await confirmDlg({ title: 'Sign out now?', message: 'Some changes have not uploaded to your account yet. They stay on this device.', confirm: 'Sign out' })) return;
+    await signOut(); notify('Signed out on this device.'); repaint();
+  });
   const dd = sec.querySelector('[data-set="aduel"]');
   if (dd) duelStats().then(st => {
     if (!dd.isConnected) return;
     if (!st) { dd.textContent = 'Not played yet'; return; }
     const t = st.rating != null ? tierOf(st.rating, st.ranked) : null;
-    const lines = [t ? (t.placing ? `${st.rating} rating, placing` : `${t.name}, ${st.rating} rating`) : '', `${st.wins} won, ${st.losses} lost${st.draws ? `, ${st.draws} drawn` : ''}`, st.bones != null ? `${st.bones} bones` : ''].filter(Boolean);
+    const lines = [t ? (t.placing ? `Rating ${st.rating} (placing, ${st.ranked} of 3)` : `${t.name}, rating ${st.rating}`) : '', `${st.wins} won, ${st.losses} lost${st.draws ? `, ${st.draws} drawn` : ''}`, st.bones != null ? `${st.bones} bones` : ''].filter(Boolean);
     dd.replaceChildren(...lines.map(l => Object.assign(document.createElement('span'), { textContent: l })));   /* one fact a line */
   }, () => { if (dd.isConnected) dd.textContent = "Can't reach the duel right now."; });
 }
