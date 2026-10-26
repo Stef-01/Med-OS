@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "version": "pool-310-mcq-532-hy-523-mxq-494",
+ "version": "pool-406-mcq-532-hy-523-mxq-494",
  "title": "Standard MCQ pool",
- "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1165 ai, 144 usmle-resource, 56 amsa, 494 open-exam.",
+ "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1245 ai, 510 open-exam, 144 usmle-resource, 56 amsa.",
  "origin": "mixed",
  "cats": [
   {
@@ -23,6 +23,67 @@
   }
  ],
  "questions": [
+  {
+   "id": "ai-mcq-00e797b1",
+   "stem": "A 54-year-old man with type 2 diabetes for 9 years attends his annual review. An early-morning urine albumin-to-creatinine ratio is 5.2 mg/mmol; eGFR is 81 mL/min/1.73m². Most appropriate next investigation?",
+   "options": [
+    "Renal tract ultrasound",
+    "24-hour urine protein",
+    "Urine protein electrophoresis",
+    "Repeat uACR twice",
+    "Kidney biopsy"
+   ],
+   "answer": 3,
+   "why": "A raised uACR (above 2.5 mg/mmol in men) can be transient, for example after exercise, fever or a UTI. Kidney Health Australia and the RACGP advise confirming albuminuria with 2 of 3 raised samples within 3 months before diagnosing diabetic kidney disease. Once it is confirmed, an ACE inhibitor or ARB is titrated and an SGLT2 inhibitor is favoured.",
+   "notes": [
+    "An ultrasound is for unexplained or progressive CKD, haematuria or suspected obstruction, not for confirming early albuminuria with a normal eGFR.",
+    "A timed 24-hour collection is awkward and less reliable than repeat spot uACR, and no longer advised for screening or confirmation.",
+    "Electrophoresis looks for a paraprotein (myeloma), which is not suggested by isolated albuminuria in long-standing diabetes.",
+    null,
+    "A biopsy is kept for atypical features such as rapid eGFR decline, active sediment or no retinopathy, not for unconfirmed moderate albuminuria."
+   ],
+   "topic": "Endocrinology",
+   "topics": [
+    "Endocrinology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-015bddb5",
+   "stem": "A 46-year-old woman, not breastfeeding, has a red retroareolar lump unresolved after five days of flucloxacillin. Ultrasound shows an abscess and a separate irregular, vascular solid mass with angular margins. Most appropriate next step for the mass?",
+   "options": [
+    "Fine-needle aspiration cytology",
+    "Review after antibiotics",
+    "Incision and drainage",
+    "Breast MRI",
+    "Core needle biopsy"
+   ],
+   "answer": 4,
+   "why": "The collection is the abscess, but the separate irregular, vascular solid mass with angular margins looks malignant and an abscess cannot explain it. In a non-lactational infection that has not responded to antibiotics, this mass needs a tissue diagnosis, and core biopsy is the preferred method to complete triple assessment.",
+   "notes": [
+    "FNA cytology cannot reliably tell invasive from in situ cancer and gives no receptor status, so core biopsy is preferred.",
+    "Waiting for the infection to settle gives false reassurance and delays the diagnosis of a mass that already looks malignant.",
+    "Incision and drainage would treat only the collection, and for a small abscess ultrasound-guided aspiration is preferred anyway.",
+    "MRI does not give a tissue diagnosis, and tissue is what this suspicious mass needs next.",
+    null
+   ],
+   "topic": "Breast/Endocrine Surgery",
+   "topics": [
+    "Breast/Endocrine Surgery",
+    "General Practice",
+    "General Surgery"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
   {
    "id": "ai-mcq-015f246d",
    "stem": "A 13-year-old girl is on the paediatric ward of a regional hospital, 6 hours after treatment began for severe diabetic ketoacidosis at the first presentation of type 1 diabetes. At presentation she weighed 40 kg. Her venous pH was 7.02, bicarbonate 3 mmol/L, glucose 41.0 mmol/L, sodium 130 mmol/L and urea 14.2 mmol/L. She received a 10 mL/kg 0.9% saline bolus, then fluids to replace her deficit over 48 hours with added potassium. An insulin infusion at 0.1 units/kg/hour was started after the first hour. She now has a severe headache, has vomited once, and is irritable and disorientated. Her temperature is 36.7 °C, pulse 64/min (previously 128/min), blood pressure 134/86 mm Hg (previously 106/64 mm Hg), respirations 20/min and SpO2 98% on room air. Her GCS is 13 (E3 V4 M6). Her pupils are equal and reactive. Capillary glucose is 15.8 mmol/L and serum sodium is 134 mmol/L. Which of the following is the most appropriate next step in management?",
@@ -82,6 +143,127 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-0391a8b4",
+   "stem": "A 34-year-old woman is brought in after a high-speed car crash, breathless with BP 82/50 mmHg. Her trachea deviates left and the right chest is hyper-resonant with absent breath sounds. Most appropriate next step?",
+   "options": [
+    "Needle decompression",
+    "Portable chest X-ray",
+    "Pericardiocentesis",
+    "Rapid sequence intubation",
+    "O-negative blood transfusion"
+   ],
+   "answer": 0,
+   "why": "She has a right tension pneumothorax with obstructive shock. This is diagnosed on clinical signs and needs immediate decompression, by needle at the 4th or 5th intercostal space just anterior to the mid-axillary line or by finger thoracostomy. An intercostal catheter on an underwater seal follows.",
+   "notes": [
+    null,
+    "Tension pneumothorax is diagnosed clinically, and waiting for a film in a hypotensive patient wastes critical time.",
+    "Tamponade does not cause tracheal deviation or a hyper-resonant hemithorax with absent breath sounds on one side.",
+    "Positive-pressure ventilation before decompression makes the tension worse and can cause cardiac arrest.",
+    "A hyper-resonant chest points to trapped air rather than haemothorax, and fluid will not relieve obstructive shock."
+   ],
+   "topic": "Trauma Surgery",
+   "topics": [
+    "Trauma Surgery",
+    "Respiratory Medicine",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-0593f125",
+   "stem": "A 26-year-old woman has left-sided ulcerative colitis confirmed on colonoscopy. Symptoms began 3 months ago. Liver function tests are normal. She asks about bowel cancer risk. When should surveillance colonoscopy begin?",
+   "options": [
+    "Annually from diagnosis",
+    "8 years after onset",
+    "15 years after onset",
+    "At age 45 years",
+    "At age 50 years"
+   ],
+   "answer": 1,
+   "why": "Colorectal cancer risk in ulcerative colitis goes up with how long the disease has lasted and how much of the colon is involved. Australian guidelines (Cancer Council Australia, GESA) advise a first surveillance colonoscopy about 8 years after symptoms began. The interval after that depends on her risk, for example whether she has PSC, active inflammation, strictures or a family history.",
+   "notes": [
+    "Yearly colonoscopy from diagnosis is for patients with primary sclerosing cholangitis, and her normal liver tests make PSC unlikely.",
+    null,
+    "Waiting 15 years would miss the period when dysplasia and cancer risk are already rising.",
+    "Age 45 is the starting age for average-risk population screening, and it does not apply to colitis-related risk.",
+    "Age 50 is an older population screening age that ignores how long she has had colitis, so cancer could be found late."
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-07b1ffe1",
+   "stem": "A 29-year-old man has two days of sharp chest pain eased by sitting forward, following a cold. ECG shows diffuse concave ST elevation with PR depression; troponin is normal. Ibuprofen is started. Which added drug most reduces recurrence?",
+   "options": [
+    "Prednisolone",
+    "Hydroxychloroquine",
+    "Metoprolol",
+    "Colchicine",
+    "Pantoprazole"
+   ],
+   "answer": 3,
+   "why": "Recurrence is the commonest complication of acute pericarditis and happens in up to about 30% of patients. Under eTG and the 2025 ESC guidelines, colchicine for 3 months is added to an NSAID: 500 micrograms once daily under 70 kg, or twice daily from 70 kg. It roughly halves the recurrence rate and speeds symptom relief.",
+   "notes": [
+    "Corticosteroids are not first-line, and early use in viral or idiopathic pericarditis actually raises the risk of recurrence.",
+    "Hydroxychloroquine is used for lupus serositis, which has not been shown here, and it does not prevent recurrence of viral or idiopathic pericarditis.",
+    "Beta-blockers may ease the tachycardia, but they do nothing to the pericardial inflammation or the recurrence risk.",
+    null,
+    "A proton pump inhibitor is given as gastroprotection with the NSAID, but it does not change the risk of recurrence."
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-0a385855",
+   "stem": "A 66-year-old woman has central chest tightness, now settled with GTN. BP 136/80 mmHg. ECG shows new lateral ST depression; hs-troponin T rises from 40 to 115 ng/L. Most appropriate next step?",
+   "options": [
+    "Angiography within 2 hours",
+    "Intravenous tenecteplase now",
+    "Exercise stress test",
+    "Angiography within 24 hours",
+    "CT coronary angiogram"
+   ],
+   "answer": 3,
+   "why": "She has a high-risk NSTEMI: no ST elevation, but dynamic ST depression and a rising troponin above the 99th percentile. Australian ACS guidelines recommend invasive coronary angiography within 24 hours, alongside aspirin, a P2Y12 inhibitor and an anticoagulant. Her pain has settled and she is haemodynamically stable, so the very-high-risk 2-hour pathway does not apply.",
+   "notes": [
+    "The 2-hour pathway is for very-high-risk features such as refractory pain, haemodynamic instability, acute heart failure or a life-threatening arrhythmia, and she has none of these.",
+    "Thrombolysis is used only for STEMI when PCI cannot be done in time, and it does not help in NSTEMI.",
+    "Stress testing is for low-risk chest pain with negative troponins and a normal ECG, not for a confirmed NSTEMI.",
+    null,
+    "CT coronary angiography is used to rule out disease in low- to intermediate-risk patients, not to plan revascularisation in a confirmed NSTEMI."
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-0a3ab6c1",
    "stem": "A 57-year-old man is brought to the emergency department 1 hour after vomiting about 400 mL of bright red blood at home. He has passed black stools for 2 days. He has drunk about 10 standard drinks of beer daily for 20 years, and his last drink was last night. He takes no regular medicines. His temperature is 36.6°C, pulse is 116/min, respirations are 20/min, blood pressure is 100/62 mm Hg, and oxygen saturation is 97% on room air. He is alert and oriented. He has spider naevi on his chest and palmar erythema. The abdomen has shifting dullness, and the spleen tip is palpable. Two large-bore cannulas are inserted and a crystalloid bolus is started. Laboratory studies show: Haemoglobin 88 g/L (130–180) Platelets 74 x10^9/L (150–400) INR 1.9 (0.9–1.2) Urea 12.4 mmol/L (2.5–7.5) Creatinine 90 µmol/L (60–110) Albumin 26 g/L (35–50) The gastroenterology registrar plans endoscopy within the next few hours. Which of the following is the most appropriate next step in management?",
    "options": [
@@ -109,6 +291,63 @@
    "origin": "ai",
    "source": "ai",
    "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-0ba1a5fe",
+   "stem": "A 31-year-old woman with type 1 diabetes and newly diagnosed Hashimoto thyroiditis reports fatigue. Haemoglobin is 101 g/L and MCV 120 fL. B12 and folate results are pending. Greatest risk of starting folic acid alone?",
+   "options": [
+    "Severe hypokalaemia",
+    "Rebound thrombocytosis",
+    "Recurrent nocturnal hypoglycaemia",
+    "Spinal cord degeneration",
+    "Thyrotoxic crisis"
+   ],
+   "answer": 3,
+   "why": "An MCV of 120 fL is too high to blame on hypothyroidism alone. Her two autoimmune diseases make pernicious anaemia likely. Folic acid alone can correct the anaemia while the B12 deficiency goes on damaging nerves, so subacute combined degeneration of the cord can appear or get worse. B12 deficiency must be excluded or treated before folate is given.",
+   "notes": [
+    "Hypokalaemia comes from the rapid red cell production after B12 replacement in severe anaemia, not from folate given to a patient with a mild anaemia.",
+    "A rise in platelets during recovery from megaloblastic anaemia is a harmless lab finding, not the main danger.",
+    "Folic acid has no effect on glucose levels or insulin needs, so it does not cause hypoglycaemia.",
+    null,
+    "Folic acid has no effect on the thyroid; thyrotoxicosis would come from too much levothyroxine, not from folate."
+   ],
+   "topic": "Haematology",
+   "topics": [
+    "Haematology",
+    "Endocrinology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-0e183e64",
+   "stem": "A 25-year-old man with newly diagnosed ileocolonic Crohn's disease has haemoglobin 118 g/L, MCV 76 fL, ferritin 16 µg/L, transferrin saturation 8% and CRP 28 mg/L. Most likely cause of his anaemia?",
+   "options": [
+    "Anaemia of inflammation",
+    "Thalassaemia trait",
+    "Iron deficiency",
+    "Vitamin B12 deficiency",
+    "Sideroblastic anaemia"
+   ],
+   "answer": 2,
+   "why": "Ferritin is an acute phase reactant, so inflammation pushes it up. A ferritin of 16 µg/L with a CRP of 28 mg/L therefore confirms true iron deficiency, and the microcytosis and low transferrin saturation support this. In active IBD, IV iron is preferred.",
+   "notes": [
+    "Anaemia of inflammation is usually normocytic with a normal or high ferritin (often above 100 µg/L), not a ferritin of 16 µg/L.",
+    "Thalassaemia trait causes microcytosis with normal iron stores, so it would not explain the low ferritin and transferrin saturation.",
+    null,
+    "Ileal Crohn's disease can cause B12 deficiency, but that gives a macrocytic anaemia, and here the MCV is 76 fL.",
+    "Sideroblastic anaemia shows iron overload, with high ferritin and transferrin saturation, which is the opposite of these results."
+   ],
+   "topic": "Gastroenterology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
    "difficulty": 2
   },
   {
@@ -143,6 +382,36 @@
    "difficulty": 1
   },
   {
+   "id": "ai-mcq-0e86e7f8",
+   "stem": "A 27-year-old woman with one previous vaginal birth is being induced at 40 weeks. Cervix 3 cm dilated, vertex 4/5 palpable at station -3. Amniotomy is planned. Which complication is she at greatest risk of?",
+   "options": [
+    "Placental abruption",
+    "Uterine rupture",
+    "Amniotic fluid embolism",
+    "Uterine tachysystole",
+    "Cord prolapse"
+   ],
+   "answer": 4,
+   "why": "If the membranes are ruptured while the presenting part is high and not engaged, the cord can slip past the head and be compressed. Queensland induction guidance and the RCOG cord prolapse guideline advise against amniotomy with a high head where possible. If it must be done, the fetal heart should be checked straight afterwards, and any sudden deceleration needs a vaginal examination to look for the cord.",
+   "notes": [
+    "Abruption after amniotomy mainly happens when a lot of fluid drains suddenly in polyhydramnios, and she has no polyhydramnios.",
+    "Uterine rupture is mainly a risk with a uterine scar or obstructed labour, and she has only had a vaginal birth.",
+    "Amniotic fluid embolism is very rare and unpredictable, so amniotomy does not make it the main risk for her.",
+    "Tachysystole is caused by too much oxytocin or prostaglandin, not by amniotomy itself.",
+    null
+   ],
+   "topic": "Obstetrics",
+   "topics": [
+    "Obstetrics",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-0f17e735",
    "stem": "A 72-year-old woman presents to the emergency department with 2 days of left-sided temporal headache. She has pain when brushing her hair and jaw pain that builds while chewing and settles at rest. This morning she woke with a grey shadow over the lower half of the vision in her left eye. She has hypertension treated with perindopril and has never had regular headaches. Her temperature is 37.3°C, pulse is 82/min, respirations are 16/min, blood pressure is 148/86 mm Hg, and oxygen saturation is 97% on room air. The left temporal artery is thickened, tender and pulseless. Visual acuity is 6/6 in the right eye and 6/24 in the left. There is a left relative afferent pupillary defect, and fundoscopy shows a pale, swollen left optic disc. ESR is 92 mm/h (reference <30), CRP is 64 mg/L (reference <5) and platelet count is 498 × 10^9/L (reference 150–400). Which of the following is the most appropriate next step in management?",
    "options": [
@@ -173,6 +442,36 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-0f25cc8d",
+   "stem": "A 28-year-old woman has 3 months of loose stools, bloating and fatigue. Ferritin is 5 µg/L. tTG-IgA is 180 U/mL (normal <20) with normal total IgA; she still eats gluten. Most appropriate next investigation?",
+   "options": [
+    "Duodenal biopsies",
+    "Colonoscopy and biopsy",
+    "HLA-DQ2/DQ8 typing",
+    "Faecal calprotectin",
+    "Capsule endoscopy"
+   ],
+   "answer": 0,
+   "why": "A strongly positive tTG-IgA with normal total IgA makes coeliac disease very likely. In Australian adults, GESA and Coeliac Australia still require confirmation by gastroscopy with duodenal biopsies (at least 4 from D2 and 1 to 2 from the bulb) while the patient is eating gluten, before a lifelong gluten-free diet is started.",
+   "notes": [
+    null,
+    "Colonoscopy does not sample the proximal small bowel, where coeliac disease causes its damage.",
+    "HLA-DQ2/DQ8 typing is mainly useful to rule coeliac disease out, because many healthy people carry these alleles, so a positive result cannot confirm it.",
+    "Faecal calprotectin helps tell inflammatory bowel disease from IBS, and it does not confirm coeliac disease.",
+    "Capsule endoscopy is kept for complicated or refractory coeliac disease, or for patients who cannot have a gastroscopy, and it does not give tissue for histology."
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-1033fce7",
@@ -233,6 +532,98 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-13ee717b",
+   "stem": "A 41-year-old woman with asthma cannot complete sentences. After one hour of salbutamol and ipratropium via spacer plus oral prednisolone, she remains breathless with widespread wheeze; venous pCO2 34 mmHg. Most appropriate next step?",
+   "options": [
+    "Intravenous aminophylline",
+    "IV magnesium sulfate",
+    "Oral montelukast",
+    "Nebulised budesonide",
+    "IV ceftriaxone"
+   ],
+   "answer": 1,
+   "why": "She has severe acute asthma that has responded poorly to an hour of salbutamol and ipratropium plus a systemic steroid. The Australian Asthma Handbook adds IV magnesium sulfate, 10 mmol over 20 minutes, at this point. Her low pCO2 shows she is not yet tiring, so the next step is to escalate drug treatment rather than intubate.",
+   "notes": [
+    "Aminophylline is not recommended routinely in acute asthma because it adds little benefit and has a narrow therapeutic index with toxicity, including arrhythmias and seizures.",
+    null,
+    "Montelukast is a maintenance controller with no role in treating a severe acute attack.",
+    "Inhaled corticosteroids do not replace systemic steroids or bronchodilators in the acute attack, and she has already had prednisolone.",
+    "There are no features of infection, and antibiotics are not part of routine management of an asthma exacerbation."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Respiratory Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-18db6652",
+   "stem": "A 20-year-old man has 6 hours of fever 39.5 °C, headache, photophobia and neck stiffness. GCS 15, no focal signs or papilloedema. Blood cultures taken, ceftriaxone and dexamethasone given; coagulation normal. Most appropriate next investigation?",
+   "options": [
+    "CT brain",
+    "MRI brain",
+    "CT cerebral angiogram",
+    "Lumbar puncture",
+    "Electroencephalogram"
+   ],
+   "answer": 3,
+   "why": "Suspected bacterial meningitis is confirmed by CSF analysis (cell count, protein, glucose ratio, Gram stain, culture, PCR). Under eTG, a CT before LP is needed only if GCS is reduced or there are focal signs, seizures or papilloedema. He has none of these and his coagulation is normal, so the next step is lumbar puncture, done after the antibiotics and dexamethasone he has already had.",
+   "notes": [
+    "CT before LP is needed only for reduced GCS, focal signs, seizures or papilloedema, and here it would only delay the diagnosis.",
+    "MRI cannot confirm meningitis or identify the organism, and getting it in the ED delays the diagnosis.",
+    "Angiography looks for an aneurysm in subarachnoid haemorrhage, but his headache built up gradually and he has a high fever.",
+    null,
+    "EEG helps with seizures or encephalitis, but he has no confusion, seizures or behaviour change."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Neurology",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-19d461ac",
+   "stem": "A 63-year-old woman, day 4 after total knee replacement, has sudden breathlessness. BP 130/80 mm Hg. CTPA: segmental emboli, normal right ventricle. She is on prophylactic enoxaparin. Most appropriate next step?",
+   "options": [
+    "Intravenous alteplase",
+    "Inferior vena cava filter",
+    "Catheter-directed thrombectomy",
+    "Continue prophylactic enoxaparin",
+    "Therapeutic anticoagulation"
+   ],
+   "answer": 4,
+   "why": "She has a pulmonary embolism provoked by surgery. She is haemodynamically stable and her right ventricle is normal, so eTG recommends therapeutic anticoagulation (for example enoxaparin 1 mg/kg twice daily in place of the prophylactic dose, not on top of it) for 3 months. Thrombolysis and other reperfusion treatments are kept for high-risk PE with shock.",
+   "notes": [
+    "Thrombolysis is only for PE with shock, and surgery 4 days ago puts her at high risk of major bleeding.",
+    "An IVC filter is only used when anticoagulation cannot be given or fails, and neither applies here.",
+    "Catheter-directed treatment is for high-risk PE when thrombolysis cannot be given or has failed, not for a stable patient with a normal right ventricle.",
+    "A prophylactic dose has already failed to prevent this clot and is too low to treat an established PE.",
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Cardiology",
+    "Orthopaedics"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {
@@ -357,6 +748,37 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-20e1851f",
+   "stem": "A male infant born at 39 weeks in a birth suite after 8 minutes of fetal bradycardia is floppy and apnoeic. His heart rate rises from 70 to 140/min with mask ventilation. Which investigation best quantifies the hypoxic insult?",
+   "options": [
+    "Cranial ultrasound",
+    "Amplitude-integrated EEG",
+    "MRI brain",
+    "Placental histopathology",
+    "Paired cord gas"
+   ],
+   "answer": 4,
+   "why": "After a baby needs resuscitation at birth, paired arterial and venous cord blood gases give an objective, immediate measure of perinatal acidaemia (pH, base excess, lactate). Cord gas results within the first hour, such as pH 7.0 or below or a base deficit of 12 mmol/L or more, also help decide on therapeutic hypothermia.",
+   "notes": [
+    "Cranial ultrasound detects haemorrhage or structural lesions but is insensitive to early hypoxic-ischaemic injury and does not measure the insult.",
+    "aEEG assesses how severe an encephalopathy is in a baby being considered for cooling, but it does not measure the hypoxic insult itself.",
+    "MRI brain shows the pattern of hypoxic-ischaemic injury best after several days, not at birth.",
+    "Placental histopathology may suggest a cause but takes days and does not measure fetal acidaemia.",
+    null
+   ],
+   "topic": "Neonatology",
+   "topics": [
+    "Neonatology",
+    "Paediatrics",
+    "Obstetrics"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-242c7475",
    "stem": "A 31-year-old woman comes to her general practitioner because of headaches for 7 weeks. They began when she started working 12-hour shifts at a desk to meet the end-of-financial-year deadline at her accounting firm. Before this she had only occasional mild headaches. The headache is a bilateral, band-like tightness that builds through the afternoon. She rates it 4/10. It now comes on every afternoon. She has no nausea or photophobia, and climbing stairs does not make it worse. She takes paracetamol 1 g about five times a week and ibuprofen 400 mg once or twice a week, which takes the edge off it. She drinks four standard drinks a week and does not smoke. Her temperature is 36.7 °C, pulse is 74/min and blood pressure is 118/74 mm Hg. Her trapezius and temporalis muscles are tender. Passive neck flexion is full and painless. Fundoscopy shows sharp discs with venous pulsations, and the neurological examination is normal. Which of the following is the most appropriate advice to prevent progression of her headache disorder?",
    "options": [
@@ -416,6 +838,37 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-2ab3fc48",
+   "stem": "A 74-year-old man with heart failure on furosemide and perindopril took naproxen for a week; now breathless and oedematous. BP 152/88 mmHg, warm peripheries. Creatinine 151 µmol/L (baseline 92). Most likely cause of his AKI?",
+   "options": [
+    "Low-output cardiorenal syndrome",
+    "Diuretic-induced volume depletion",
+    "Bladder outlet obstruction",
+    "Renal artery stenosis",
+    "NSAID-related renal hypoperfusion"
+   ],
+   "answer": 4,
+   "why": "He is taking a diuretic and an ACE inhibitor, and adding an NSAID makes the \"triple whammy\". The NSAID blocks the prostaglandins that widen the vessel into the glomerulus, while the ACE inhibitor stops the vessel out of it from tightening, so filtration falls and the creatinine rises. The same drug also makes him hold onto salt and water, which explains why his heart failure got worse, so stopping the NSAID is a key part of treatment.",
+   "notes": [
+    "Low-output cardiorenal syndrome needs poor perfusion, but his BP is 152/88 mmHg and his peripheries are warm.",
+    "He is fluid overloaded, not dry, so volume depletion does not explain the creatinine rise.",
+    "Nothing in the case points to urinary retention, and a recent NSAID gives a clearer explanation.",
+    "Renal artery stenosis shows up as a creatinine rise when an ACE inhibitor is started, not during a stable long-term course after an NSAID.",
+    null
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Respiratory Medicine",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-2b8f37a8",
@@ -479,6 +932,36 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-2bdc7081",
+   "stem": "A 6-week-old boy has 4 days of projectile non-bilious vomiting. Ultrasound shows pyloric wall thickness 4.5 mm. Venous bicarbonate 34 mmol/L, chloride 90 mmol/L. Most appropriate next step?",
+   "options": [
+    "Thickened feeds, GP review",
+    "Urgent pyloromyotomy today",
+    "Upper gastrointestinal contrast study",
+    "IV fluids, then pyloromyotomy",
+    "Intravenous atropine infusion"
+   ],
+   "answer": 3,
+   "why": "Ultrasound confirms pyloric stenosis, and he has the typical hypochloraemic metabolic alkalosis, which makes this a medical emergency but not a surgical one. Following RCH guidance, keep him nil by mouth and give IV 0.9% sodium chloride with 5% glucose, adding potassium once he passes urine. Pyloromyotomy waits until bicarbonate and chloride are back to normal.",
+   "notes": [
+    "Wrong: thickened feeds and GP review suit reflux, but this is confirmed pyloric stenosis with dehydration and alkalosis, so he needs admission and surgery.",
+    "Wrong: operating before the alkalosis is corrected risks post-anaesthetic apnoea, because the breathing has slowed to compensate for the alkalosis.",
+    "Wrong: a wall thickness of 4.5 mm on ultrasound already confirms the diagnosis, so a contrast study only adds delay and radiation.",
+    null,
+    "Wrong: atropine is a rarely used medical option that works less reliably and is not standard Australian care; pyloromyotomy is the definitive treatment."
+   ],
+   "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-2c98c94f",
    "stem": "A 72-year-old man is brought to the emergency department with 5 months of worsening breathlessness. Over this time he has lost 20 kg, has coughed up blood-tinged sputum and his voice has become hoarse. He has COPD, and his triple-therapy inhaler has not helped. He has smoked 20 cigarettes daily for 50 years and worked for decades as a mechanic. His temperature is 37.6 °C, pulse is 110/min, respirations are 29/min, blood pressure is 148/86 mmHg and SpO2 is 92% on room air. He has finger clubbing and a hard right supraclavicular lymph node. On the right side of the chest, expansion is reduced, percussion is stony dull and breath sounds are absent. The trachea is deviated to the left. An erect PA chest X-ray, not rotated, shows a large right effusion with a meniscus reaching the 2nd anterior rib, which obscures the right heart border and hilum. The trachea and mediastinum are displaced to the left. The left lung is clear. Which of the following best explains the position of the trachea and mediastinum on this film?",
    "options": [
@@ -508,6 +991,37 @@
    "source": "ai",
    "year": 2,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-2e0d61b4",
+   "stem": "A 46-year-old woman with CT-confirmed subarachnoid haemorrhage deteriorates in the ED. GCS falls from 14 to 10 and pulse to 46/min; BP rises to 210/110 mmHg, with irregular breathing. What do these findings most likely indicate?",
+   "options": [
+    "Hypertensive emergency",
+    "Delayed cerebral ischaemia",
+    "Raised intracranial pressure",
+    "Non-convulsive status epilepticus",
+    "Neurogenic stunned myocardium"
+   ],
+   "answer": 2,
+   "why": "Rising BP, a falling heart rate and irregular breathing (Cushing's triad), together with a falling GCS, mean raised intracranial pressure and impending coning. After SAH this is often caused by acute hydrocephalus. Call a rapid response, protect the airway, get an urgent neurosurgeon for an external ventricular drain, and do not chase the BP down.",
+   "notes": [
+    "The BP rise is a Cushing reflex that keeps the brain perfused against high intracranial pressure; it is not the main problem, and lowering it hard would worsen ischaemia.",
+    "Delayed cerebral ischaemia typically happens on days 3 to 14 after the bleed, not within hours of it.",
+    null,
+    "Non-convulsive seizures can lower consciousness, but they do not cause hypertension with bradycardia and irregular breathing.",
+    "Neurogenic stunned myocardium causes ECG changes, arrhythmias, hypotension or pulmonary oedema, not hypertension with bradycardia and a falling GCS."
+   ],
+   "topic": "Neurosurgery",
+   "topics": [
+    "Neurosurgery",
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-2f9aec47",
@@ -541,6 +1055,128 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-31d16244",
+   "stem": "An 81-year-old woman collapses without warning while gardening and recovers fully within a minute. Her pulse is 36/min, regular and large volume, with intermittent cannon a waves in the neck. Most appropriate next investigation?",
+   "options": [
+    "12-lead ECG",
+    "24-hour Holter monitor",
+    "CT brain",
+    "Postural blood pressure",
+    "Transthoracic echocardiogram"
+   ],
+   "answer": 0,
+   "why": "A sudden blackout with no warning, a slow regular large-volume pulse and cannon a waves points to complete heart block (a Stokes-Adams attack). Every blackout needs a 12-lead ECG, and here it is the quickest bedside test to confirm AV dissociation and show whether the escape rhythm is narrow or broad. This then guides atropine, pacing and cardiology referral.",
+   "notes": [
+    null,
+    "Ambulatory monitoring is for intermittent arrhythmias that the ECG has not caught, but this bradycardia is ongoing and an ECG will show it now.",
+    "CT brain is not a routine test for syncope with full recovery and no focal signs, and it will not explain a pulse of 36/min.",
+    "Postural blood pressure tests for orthostatic hypotension, but she collapsed with no warning and her pulse is 36/min, so this is cardiac until proven otherwise.",
+    "Echocardiography looks for structural heart disease later, but it does not diagnose the conduction block that needs urgent treatment."
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-31e34618",
+   "stem": "A 19-year-old man has fever, headache, neck stiffness and photophobia after a festival. He was given IM ceftriaxone 3 hours before lumbar puncture, which shows turbid, neutrophilic CSF. Test most likely to identify the organism?",
+   "options": [
+    "CSF bacterial culture",
+    "CSF meningococcal PCR",
+    "Paired blood cultures",
+    "Serum meningococcal serology",
+    "Throat swab culture"
+   ],
+   "answer": 1,
+   "why": "Antibiotics given before the lumbar puncture quickly sterilise CSF and blood cultures. PCR picks up N. meningitidis DNA whether or not the bacteria are still alive, so CSF meningococcal PCR stays positive and is the best way to confirm the organism (and its serogroup) after early antibiotics. That is why antibiotics should never be held back to get samples first.",
+   "notes": [
+    "Culture needs live bacteria, and the CSF is often sterile within hours of a parenteral third-generation cephalosporin, so it is likely to grow nothing.",
+    null,
+    "Blood cultures taken after an antibiotic dose usually grow nothing, and they are positive less often than CSF tests in meningitis even before treatment.",
+    "Antibody serology takes paired samples weeks apart, so it is too slow and too insensitive to confirm acute disease.",
+    "A positive throat swab may only show carriage, which is common in young adults, and a negative swab does not exclude invasive disease."
+   ],
+   "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-32596ed9",
+   "stem": "A 24-year-old woman with asthma presents to the emergency department breathless after a cold. She speaks in phrases, using accessory muscles. SpO2 is 93% on room air. Breath sounds equal bilaterally. Most appropriate next step?",
+   "options": [
+    "IV magnesium sulfate",
+    "Urgent chest X-ray",
+    "Intramuscular adrenaline",
+    "Salbutamol via spacer",
+    "Arterial blood gas"
+   ],
+   "answer": 3,
+   "why": "Speaking only in phrases, using accessory muscles and an SpO2 of 90 to 94% mean acute severe asthma. The first step is repeated inhaled salbutamol by spacer (12 puffs every 20 minutes in the first hour), given with ipratropium, oral prednisolone and oxygen titrated to 92 to 96%, as in the Australian Asthma Handbook and eTG.",
+   "notes": [
+    "IV magnesium is kept for patients who do not respond to the first round of inhaled bronchodilators, so it is not the first step.",
+    "A chest X-ray is not routine in acute asthma and is only needed if pneumothorax or pneumonia is suspected; her breath sounds are equal.",
+    "IM adrenaline treats anaphylaxis or peri-arrest asthma that is not responding to treatment, and she has neither.",
+    null,
+    "An arterial blood gas is not needed before treatment at SpO2 93%; it is for life-threatening features or a patient who is getting worse."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Respiratory Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-32931e38",
+   "stem": "A 66-year-old man has 2 hours of crushing chest pain and sweating. His ECG shows ST elevation in V2 to V5, I and aVL, with ST depression in lead III. What does the lead III change most likely represent?",
+   "options": [
+    "Inferior wall ischaemia",
+    "Reciprocal change",
+    "Posterior infarction",
+    "Digoxin effect",
+    "Left ventricular strain"
+   ],
+   "answer": 1,
+   "why": "Lead III looks at the heart from roughly the opposite direction to aVL, so ST elevation in I and aVL shows up as ST depression in III. This is a mirror image of the anterolateral injury, not a second ischaemic area. Reciprocal depression makes a true STEMI more likely (and pericarditis less likely), and it supports immediate reperfusion.",
+   "notes": [
+    "Separate inferior ischaemia is not the best explanation: a single depressed lead facing opposite aVL during a high lateral STEMI is reciprocal, and II and aVF are not involved.",
+    null,
+    "Posterior infarction causes ST depression with tall R waves in V1 to V3, not isolated ST depression in lead III.",
+    "Digoxin causes diffuse, scooped ST depression without territorial ST elevation, and nothing suggests he takes digoxin.",
+    "Left ventricular strain causes asymmetric ST depression in the lateral leads (V5, V6, I, aVL) with LVH voltages, not depression in III with lateral ST elevation."
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-33f3cc88",
    "stem": "An 81-year-old woman sees her general practitioner because her breathlessness has been getting worse for 6 weeks. She now gets breathless walking to her letterbox. She sleeps on three pillows and wakes at night gasping for air. She has had no chest pain, sweating or palpitations. She had a non-ST-elevation myocardial infarction 5 months ago and has had hypertension for 30 years. Her medicines are aspirin, atorvastatin, perindopril and metoprolol. Her pulse is 100/min and regular, blood pressure is 158/90 mm Hg, respiratory rate is 22/min and SpO2 is 94% on room air. Her jugular venous pressure is raised, her apex beat is displaced and there are crackles at both lung bases. Serum potassium is 4.3 mmol/L (reference 3.5 to 5.2). A 12-lead ECG shows sinus rhythm at 100/min and a QRS duration of 94 ms. The S wave in V1 plus the R wave in V5 measures 41 mm. There is downsloping ST depression with asymmetric T-wave inversion in leads I, aVL, V5 and V6. These changes are the same as on her ECG at hospital discharge 5 months ago. Which of the following is the most likely explanation for the ST-segment and T-wave changes on this ECG?",
    "options": [
@@ -570,6 +1206,36 @@
    "source": "ai",
    "year": 3,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-34c603a2",
+   "stem": "A 27-year-old woman has had three throbbing one-sided headaches with nausea over two months, each preceded by 20 minutes of spreading zigzag lights. Neurological examination and fundoscopy are normal. Most appropriate next investigation?",
+   "options": [
+    "CT brain",
+    "MRI brain",
+    "Lumbar puncture",
+    "ESR and CRP",
+    "Headache diary"
+   ],
+   "answer": 4,
+   "why": "Recurrent, stereotyped attacks of pulsatile, unilateral headache with nausea, after a gradually spreading, fully reversible visual aura, are typical of migraine with aura. With a normal neurological examination and fundoscopy, eTG advises no brain imaging. A headache diary confirms the pattern, counts days of acute medicine use and guides the decision to start prevention.",
+   "notes": [
+    "CT brain is wrong because there are no red flags (thunderclap onset, focal signs, papilloedema), so imaging is not indicated and adds radiation without benefit.",
+    "MRI brain is wrong because a typical migraine history with a normal examination does not need imaging, and it often finds incidental lesions that cause worry.",
+    "Lumbar puncture is wrong because there is no thunderclap onset, fever or meningism to suggest subarachnoid haemorrhage or meningitis.",
+    "ESR and CRP is wrong because temporal arteritis is a diagnosis to consider in new headache after age 50, not in recurrent headaches with aura at 27.",
+    null
+   ],
+   "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-35f5c887",
@@ -632,6 +1298,37 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-3d9b0dd2",
+   "stem": "A 13-year-old girl is being treated for diabetic ketoacidosis. Five hours into the insulin infusion she develops headache and irritability. Her heart rate falls from 130 to 60/min. BGL 13 mmol/L. Most likely complication?",
+   "options": [
+    "Hypokalaemia",
+    "Hypoglycaemia",
+    "Osmotic demyelination",
+    "Cerebral oedema",
+    "Venous sinus thrombosis"
+   ],
+   "answer": 3,
+   "why": "Cerebral oedema is the main cause of death in children with DKA. It usually appears 4 to 12 hours into treatment, with headache, irritability or a falling GCS, and a falling heart rate (Cushing response). The RCH guideline calls for hourly neurological observations. If signs appear, give mannitol or 3% saline straight away and reduce the fluid rate.",
+   "notes": [
+    "Insulin does lower potassium, but hypokalaemia causes weakness and arrhythmias such as U waves, not headache with a falling heart rate.",
+    "Her BGL is 13 mmol/L, so she is not hypoglycaemic.",
+    "Osmotic demyelination follows rapid correction of chronic hyponatraemia days later, not headache within hours of insulin in DKA.",
+    null,
+    "DKA can make clots more likely, but venous sinus thrombosis is rare and develops more slowly; this early pattern points to cerebral oedema."
+   ],
+   "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "Endocrinology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-3e928d9b",
@@ -723,6 +1420,37 @@
    "origin": "ai",
    "source": "ai",
    "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-40b99fa3",
+   "stem": "A 45-year-old woman with adhesive small bowel obstruction is managed with nasogastric decompression and IV fluids. Overnight her colicky pain becomes constant, with localised tenderness, heart rate 124/min and temperature 38.1°C. Most likely complication?",
+   "options": [
+    "Aspiration pneumonia",
+    "Bowel perforation",
+    "Bowel strangulation",
+    "Paralytic ileus",
+    "Mesenteric venous thrombosis"
+   ],
+   "answer": 2,
+   "why": "In adhesive small bowel obstruction, colicky pain that becomes constant, together with localised tenderness, tachycardia and fever, points to strangulation with ischaemia. A normal lactate does not rule it out. She needs urgent CT with IV contrast and an early surgical review for laparotomy, because conservative management has failed.",
+   "notes": [
+    "Aspiration can cause fever and tachycardia, but it would give respiratory signs, not constant pain and localised abdominal tenderness.",
+    "Perforation usually comes after ischaemia and causes generalised peritonitis with free gas, not localised tenderness alone.",
+    null,
+    "Paralytic ileus gives painless or mildly uncomfortable distension with absent bowel sounds, not fever and constant localised pain.",
+    "Mesenteric venous thrombosis is a separate cause of ischaemia in prothrombotic patients, not the usual complication of a mechanical adhesive obstruction."
+   ],
+   "topic": "General Surgery",
+   "topics": [
+    "General Surgery",
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
    "difficulty": 2
   },
   {
@@ -847,6 +1575,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-4a68402d",
+   "stem": "A 29-year-old woman in the birth suite loses 800 mL of blood 15 minutes after vaginal birth despite oxytocin 10 units IM. Pulse 108 bpm. Placenta complete; fundus soft and boggy. Most appropriate immediate step?",
+   "options": [
+    "Ergometrine IM",
+    "Carboprost IM",
+    "Fundal massage",
+    "Balloon tamponade",
+    "Examination under anaesthesia"
+   ],
+   "answer": 2,
+   "why": "A soft, boggy uterus with a complete placenta points to uterine atony, the \"Tone\" cause in the 4 Ts. Per RANZCOG and state PPH guidelines, the first step is to rub up a contraction with fundal massage, alongside calling for help, emptying the bladder and giving more uterotonics and tranexamic acid. Second-line drugs and mechanical or surgical steps follow only if bleeding continues.",
+   "notes": [
+    "Ergometrine is a reasonable next uterotonic, but it comes after massage and is contraindicated in hypertension.",
+    "Carboprost is a second-line uterotonic, kept for atony that keeps going despite massage, oxytocin and ergometrine.",
+    null,
+    "Intrauterine balloon tamponade is used for atony that does not respond to massage and uterotonics.",
+    "Examination under anaesthesia is for suspected trauma or retained tissue, and here the placenta is complete and the uterus is clearly atonic."
+   ],
+   "topic": "Obstetrics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-4b0f0034",
    "stem": "A 41-year-old woman, a school teacher, returns to her general practitioner for review of a duodenal ulcer. Last month she presented with burning epigastric pain that woke her at night. She had been taking naproxen 500 mg twice daily for low back pain over the previous 6 months. Gastroscopy showed a 7 mm clean-based duodenal bulb ulcer with mild antral gastritis. The rapid urease (CLO) result was positive, and antral biopsies showed Helicobacter pylori with no intestinal metaplasia or dysplasia. She ceased naproxen and yesterday completed 14 days of esomeprazole, amoxicillin and clarithromycin. She is now pain-free and is taking esomeprazole 20 mg daily to complete ulcer healing. She has no melaena or weight loss. Her temperature is 36.7°C, pulse 74/min and blood pressure 124/78 mm Hg. The abdomen is soft and nontender. Haemoglobin is 136 g/L (reference 115–160 g/L). Which of the following is the most appropriate investigation to confirm eradication of the infection?",
    "options": [
@@ -875,6 +1629,159 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-4b6457a0",
+   "stem": "A 69-year-old man with hypertension has two months of sudden-onset palpitations. An ECG during an episode showed atrial fibrillation, and he is now in sinus rhythm. Echocardiogram and eGFR are normal. Most appropriate treatment to reduce stroke risk?",
+   "options": [
+    "Aspirin",
+    "Apixaban",
+    "Warfarin",
+    "Clopidogrel",
+    "Aspirin plus clopidogrel"
+   ],
+   "answer": 1,
+   "why": "His CHA2DS2-VA score is 2 (age 65 to 74 and hypertension). Australian guidelines (NHFA/CSANZ, eTG) recommend oral anticoagulation at this score, and the risk is the same whether the AF is paroxysmal or persistent. Without mechanical valves or moderate to severe mitral stenosis, a DOAC such as apixaban is preferred over warfarin.",
+   "notes": [
+    "Aspirin barely prevents stroke in AF and its bleeding risk is close to that of anticoagulation, so it is not recommended.",
+    null,
+    "Warfarin works but is second line to a DOAC in nonvalvular AF, because it causes more intracranial bleeding and needs INR monitoring.",
+    "Clopidogrel is an antiplatelet with no established role as a single agent for stroke prevention in AF.",
+    "Dual antiplatelet therapy prevents fewer strokes than anticoagulation and causes about as much bleeding, so it is not a substitute."
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-4d795ffc",
+   "stem": "A 69-year-old woman taking naproxen for osteoarthritis vomits fresh blood. HR 108/min, BP 118/76 mmHg. Hb 96 g/L, platelets and INR normal; no stigmata of liver disease. IV fluids are started. Which drug is most appropriate now?",
+   "options": [
+    "IV pantoprazole",
+    "IV tranexamic acid",
+    "IV terlipressin",
+    "IV octreotide",
+    "IV ceftriaxone"
+   ],
+   "answer": 0,
+   "why": "An NSAID user with haematemesis, a normal INR and platelets, and no signs of liver disease most likely has a bleeding peptic ulcer, which is a non-variceal bleed. Australian guidelines (eTG, ACI) advise resuscitation, an IV proton pump inhibitor such as pantoprazole, and endoscopy within 24 hours. Drugs for varices are not given.",
+   "notes": [
+    null,
+    "Tranexamic acid is not recommended in upper GI bleeding: the HALT-IT trial showed it did not reduce deaths and raised the risk of venous clots.",
+    "Terlipressin lowers portal pressure and is used for suspected variceal bleeding, which nothing here suggests.",
+    "Octreotide is a splanchnic vasoconstrictor used for variceal bleeding, and it is not indicated in a presumed peptic ulcer bleed.",
+    "Prophylactic ceftriaxone is given to cirrhotic patients with a variceal bleed, not to someone with a presumed NSAID-related ulcer."
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Emergency Medicine",
+    "General Surgery"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-4f0b0534",
+   "stem": "A 14-year-old boy is 5 hours into treatment for severe diabetic ketoacidosis at first diagnosis. He develops headache and confusion, with heart rate 58/min (was 125) and BP 142/90 mmHg. Most appropriate immediate step?",
+   "options": [
+    "IV mannitol",
+    "Urgent CT brain",
+    "Increase insulin infusion",
+    "IV sodium bicarbonate",
+    "0.9% saline bolus"
+   ],
+   "answer": 0,
+   "why": "Headache, confusion, a slowing heart rate and rising BP during DKA treatment mean cerebral oedema. This is the main cause of death in paediatric DKA. The RCH guideline says to treat it straight away with mannitol 0.5 to 1 g/kg (or 3% saline), cut the fluid rate and raise the head of the bed, without waiting for imaging.",
+   "notes": [
+    null,
+    "The diagnosis is made clinically, and waiting for a CT delays treatment that saves lives; imaging comes only after treatment has started.",
+    "A faster insulin infusion lowers osmolality more quickly and does nothing for raised intracranial pressure.",
+    "Bicarbonate is not recommended in paediatric DKA and is itself linked to cerebral oedema.",
+    "More fluid could worsen cerebral oedema; the fluid rate should be reduced, not increased."
+   ],
+   "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "Gastroenterology",
+    "Endocrinology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-4f5dd328",
+   "stem": "A 22-year-old man has had 3 months of right iliac fossa pain, nocturnal diarrhoea and weight loss, and has a perianal fistula. Faecal calprotectin is 640 µg/g, and stool pathogen PCR is negative. Which test best confirms the diagnosis?",
+   "options": [
+    "Colonoscopy with biopsy",
+    "Contrast CT abdomen",
+    "MR enterography",
+    "Capsule endoscopy",
+    "Faecal immunochemical test"
+   ],
+   "answer": 0,
+   "why": "Right iliac fossa pain, nocturnal diarrhoea, weight loss and perianal disease point to Crohn's disease. A high calprotectin with negative stool tests means the bowel is inflamed and infection is unlikely. Ileocolonoscopy, which intubates the terminal ileum, with biopsies from several sites is the key test: it shows skip lesions and cobblestoning, and histology can show non-caseating granulomas.",
+   "notes": [
+    null,
+    "CT can show a thickened ileum or a complication such as an abscess, but it cannot give a tissue diagnosis, and repeated scans in young people with IBD add radiation.",
+    "MR enterography is used after diagnosis to stage small bowel disease and strictures, but it cannot take tissue to confirm Crohn's disease.",
+    "Capsule endoscopy is kept for suspected small bowel Crohn's disease after a non-diagnostic ileocolonoscopy, and it carries a risk of capsule retention if there is a stricture.",
+    "A faecal immunochemical test detects blood, not inflammation, adds nothing once calprotectin is raised, and does not confirm the diagnosis."
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-51128c2b",
+   "stem": "A 68-year-old woman whose son died three days ago has chest pain and BP 80/50 mmHg. Angiography shows unobstructed coronaries; echocardiography shows apical ballooning and an LVOT gradient of 60 mmHg. Which drug is most likely to worsen her shock?",
+   "options": [
+    "Phenylephrine",
+    "Crystalloid bolus",
+    "Esmolol infusion",
+    "Vasopressin",
+    "Dobutamine"
+   ],
+   "answer": 4,
+   "why": "In Takotsubo cardiomyopathy, the base of the heart contracts harder than normal and can cause a dynamic LV outflow tract obstruction, which leads to shock. Inotropes such as dobutamine make the base contract even harder and raise the gradient further, so they should be avoided once an echo shows obstruction. Treatment aims to increase preload and afterload and slow the heart rate.",
+   "notes": [
+    "Phenylephrine is a pure alpha-agonist that raises afterload without an inotropic effect, which reduces the LVOT gradient and helps.",
+    "A cautious fluid bolus increases preload and LV cavity size, which reduces dynamic outflow obstruction.",
+    "A short-acting beta-blocker slows the heart and reduces contractility, which lengthens filling time and can lower the gradient.",
+    "Vasopressin raises systemic vascular resistance without stimulating beta-receptors, so it supports blood pressure without worsening the obstruction.",
+    null
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-5289a1e4",
@@ -940,6 +1847,36 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-54e2d3b7",
+   "stem": "A 20-year-old tall, thin man who smokes has sudden right-sided pleuritic chest pain and breathlessness while studying. The right chest is hyper-resonant with reduced breath sounds; BP 122/76 mmHg. Most appropriate next investigation?",
+   "options": [
+    "Erect chest X-ray",
+    "CT pulmonary angiogram",
+    "Serum D-dimer",
+    "Arterial blood gas",
+    "Serum troponin"
+   ],
+   "answer": 0,
+   "why": "A tall young male smoker with sudden one-sided pleuritic pain, hyper-resonance and reduced breath sounds most likely has a primary spontaneous pneumothorax. His normal BP shows no tension, so there is time for imaging. An erect chest X-ray confirms the pleural line, measures the size and checks for mediastinal shift, which guides whether he is observed, aspirated or drained.",
+   "notes": [
+    null,
+    "A CT pulmonary angiogram looks for pulmonary embolism, but the one-sided hyper-resonance points to a pneumothorax, which a plain film can confirm without contrast or a large radiation dose.",
+    "A D-dimer can only help exclude PE in a low-risk patient and cannot confirm a pneumothorax, which is the likely diagnosis here.",
+    "An arterial blood gas measures how much gas exchange is impaired but cannot show the cause or size of a pneumothorax.",
+    "A troponin looks for myocardial injury, which is unlikely in a 20-year-old with one-sided pleuritic pain and signs of air in the pleural space."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Respiratory Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-5515c72d",
    "stem": "A 22-month-old boy is brought to a general practice in regional Victoria with a 6-week history of cough. The cough is wet and happens by day and by night. It has not improved with 7 days of amoxicillin or with inhaled salbutamol through a spacer. His mother remembers that the cough started on the evening of a family barbecue. While eating popcorn there, he coughed and gagged for a short time and then settled. He has no eczema and no previous wheeze. He is fully immunised and has had no contact with tuberculosis. He is playful. His temperature is 37.3 °C, pulse 120/min, respirations 38/min, and SpO2 96% in room air. On examination there is reduced air entry and a fixed monophonic wheeze over the left lower zone only. A chest X-ray shows a hyperinflated left lung with the mediastinum shifted to the right. No radio-opaque object is seen. If the underlying cause is not treated, this child is most at risk of which of the following complications?",
    "options": [
@@ -967,6 +1904,37 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-576a1182",
+   "stem": "A 34-year-old man who injects drugs has had jaundice for 5 days after a prodrome of joint aches. ALT is 1820 IU/L, INR is 1.0 and he is alert. HBsAg and IgM anti-HBc are positive. Most appropriate management?",
+   "options": [
+    "Supportive care",
+    "Oral entecavir",
+    "Pegylated interferon",
+    "Hepatitis B immunoglobulin",
+    "Transplant referral"
+   ],
+   "answer": 0,
+   "why": "This is acute hepatitis B. His INR is normal and he has no encephalopathy, so his liver is still working. More than 95% of immunocompetent adults clear the virus on their own, so management is supportive care with repeat LFTs and INR, notification, contact tracing and a repeat HBsAg at 6 months. Antivirals are kept for severe or fulminant acute disease (rising INR, encephalopathy or a long-lasting severe course).",
+   "notes": [
+    null,
+    "Entecavir is kept for severe acute hepatitis B (for example a rising INR or encephalopathy) or for chronic infection, and he has neither.",
+    "Interferon is not used in acute hepatitis B and may make liver inflammation worse.",
+    "Hepatitis B immunoglobulin is post-exposure prophylaxis for non-immune contacts and has no role once infection is established.",
+    "Transplant referral is for fulminant liver failure, and his normal INR and clear mental state show his liver is still working."
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Infectious Diseases",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {
@@ -1062,6 +2030,36 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-5b8cd5eb",
+   "stem": "A 2-year-old girl with croup in the emergency department had stridor at rest and recession. Thirty minutes after dexamethasone and nebulised adrenaline, she has no stridor at rest; SpO2 98%. Most appropriate next step?",
+   "options": [
+    "Discharge with safety-netting",
+    "Repeat nebulised adrenaline",
+    "Admit to paediatric intensive care",
+    "Observe for 3 hours",
+    "Lateral neck X-ray"
+   ],
+   "answer": 3,
+   "why": "Nebulised adrenaline works within minutes but wears off within about 2 hours, and stridor can come back. The steroid is not yet working fully, so the RCH guideline says to observe for at least 3 hours after the last dose. She can go home only if she still has no stridor at rest.",
+   "notes": [
+    "Sending her home 30 minutes after adrenaline risks stridor returning at home, even with good safety-netting advice.",
+    "Adrenaline is repeated only if severe signs come back, and she has no stridor at rest now.",
+    "Intensive care is for a child with low oxygen, a tiring child or one needing repeated adrenaline, and she is settled with normal oxygen saturation.",
+    null,
+    "Typical croup is diagnosed clinically, so an X-ray would not change management and may upset her."
+   ],
+   "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-5f684f23",
    "stem": "A 38-year-old woman comes to the emergency department with 2 days of worsening generalised headache, fever, vomiting and photophobia. She has Crohn disease and has been taking prednisolone 25 mg daily for 6 weeks for a flare. Her temperature is 39.1 °C, pulse 118/min, blood pressure 104/66 mm Hg, respiratory rate 22/min and SpO2 97% on room air. She has marked neck stiffness, a GCS of 15, no focal neurological signs and no rash. Blood cultures are drawn. She is given intravenous dexamethasone, ceftriaxone and benzylpenicillin. A non-contrast CT brain is normal. A lumbar puncture is done 1 hour after the first antibiotic doses. CSF results: Opening pressure 28 cmH2O (10 to 20) Appearance: turbid White cell count 1200 ×10^6/L (below 5), 85% polymorphs Red cell count 3 ×10^6/L Protein 1.6 g/L (0.15 to 0.45) Glucose 1.5 mmol/L; paired plasma glucose 8.0 mmol/L Gram stain: no organisms seen Which of the following is the most accurate interpretation of the Gram stain result?",
    "options": [
@@ -1121,6 +2119,97 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-62b29322",
+   "stem": "A 28-year-old man presents to the emergency department 2 hours after a punch to the face. He has nasal obstruction, no clear rhinorrhoea, and bilateral fluctuant, red-purple septal swellings unchanged by decongestant. Without drainage, which complication is most likely?",
+   "options": [
+    "Cerebrospinal fluid leak",
+    "Orbital cellulitis",
+    "Permanent anosmia",
+    "Saddle nose deformity",
+    "Recurrent epistaxis"
+   ],
+   "answer": 3,
+   "why": "This is a bilateral nasal septal haematoma, which separates the septal cartilage from its blood supply in the overlying mucoperichondrium. Without same-day drainage, the cartilage dies (often after an abscess forms), so the nasal bridge collapses into a saddle nose and the septum may perforate. Treatment is urgent incision and drainage, packing or splinting, and antibiotics.",
+   "notes": [
+    "A cerebrospinal fluid leak comes from a skull base or naso-orbito-ethmoid fracture, not a septal blood collection, and there is no clear rhinorrhoea here.",
+    "Orbital cellulitis usually spreads from the ethmoid sinuses and is not the expected result of a septal haematoma.",
+    "A sense of smell lost after trauma is caused by shearing of the olfactory nerve fibres, not by septal cartilage necrosis.",
+    null,
+    "Recurrent nosebleeds come from the mucosa of Little's area and are not the main danger of an undrained septal haematoma."
+   ],
+   "topic": "Otorhinolaryngology",
+   "topics": [
+    "Otorhinolaryngology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-653bf96f",
+   "stem": "A 68-year-old woman admitted to the ward with HSV-1 encephalitis confirmed on CSF PCR starts IV aciclovir 10 mg/kg 8-hourly. She is drowsy with poor oral intake. Creatinine is 72 µmol/L. Most important adverse effect to monitor?",
+   "options": [
+    "QT prolongation",
+    "Acute kidney injury",
+    "Drug-induced hepatitis",
+    "Sensorineural hearing loss",
+    "Severe hypokalaemia"
+   ],
+   "answer": 1,
+   "why": "High-dose IV aciclovir can crystallise in the renal tubules and cause crystal nephropathy and acute kidney injury. The risk is higher in older patients, with dehydration such as her poor oral intake, and with other nephrotoxins. eTG advises keeping her well hydrated, checking creatinine regularly and adjusting the dose to renal function, which also prevents aciclovir neurotoxicity that could be mistaken for worsening encephalitis.",
+   "notes": [
+    "QT prolongation is linked to macrolides, fluoroquinolones and antipsychotics, not to aciclovir.",
+    null,
+    "Aciclovir rarely causes clinically important liver injury, so liver function is not the main thing to monitor.",
+    "Ototoxicity is a typical adverse effect of aminoglycosides and loop diuretics, not of aciclovir.",
+    "Severe hypokalaemia is typical of amphotericin B, not of aciclovir."
+   ],
+   "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-69810eec",
+   "stem": "A 34-year-old woman at 17 weeks' gestation had NIPT showing a high chance of trisomy 16. Amniocentesis shows a normal fetal karyotype, and her ultrasound shows normal fetal anatomy. Which complication most warrants surveillance?",
+   "options": [
+    "Gestational diabetes mellitus",
+    "Fetal growth restriction",
+    "Polyhydramnios",
+    "Placenta accreta spectrum",
+    "Intrahepatic cholestasis"
+   ],
+   "answer": 1,
+   "why": "A high-chance trisomy 16 NIPT result with a normal fetal karyotype on amniocentesis suggests confined placental mosaicism. Trisomy 16 confined to the placenta is linked with placental dysfunction. RANZCOG and HGSA guidance therefore advises serial growth scans for fetal growth restriction, along with watching for pre-eclampsia.",
+   "notes": [
+    "Placental mosaicism does not raise the risk of gestational diabetes, which is screened for routinely at 24 to 28 weeks.",
+    null,
+    "Poor placental function tends to cause too little amniotic fluid (oligohydramnios), not too much.",
+    "Placenta accreta is caused by a previous uterine scar or a low-lying placenta, not by a chromosomal change in the placenta.",
+    "Intrahepatic cholestasis of pregnancy is a liver condition caused by bile acids and hormones, and is not linked with confined placental mosaicism."
+   ],
+   "topic": "Obstetrics",
+   "topics": [
+    "Obstetrics",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-6a6f07fd",
@@ -1245,6 +2334,67 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-6e5cfdd7",
+   "stem": "A 56-year-old man at a rural hospital, 3 hours from a PCI centre, has 2 hours of crushing chest pain and no bleeding history. ECG shows ST elevation in II, III and aVF. Most appropriate next step?",
+   "options": [
+    "Transfer for PCI",
+    "IV tenecteplase",
+    "Serial troponins",
+    "Sublingual GTN",
+    "CT aortogram"
+   ],
+   "answer": 1,
+   "why": "This is an inferior STEMI that began less than 12 hours ago. Primary PCI cannot happen within 120 minutes of first medical contact, so Australian ACS guidelines advise fibrinolysis (ideally within 30 minutes of arrival) once contraindications are excluded. He is then transferred for angiography (a pharmaco-invasive strategy).",
+   "notes": [
+    "A 3-hour transfer puts primary PCI well past the 120-minute limit, so he should have fibrinolysis first and be transferred afterwards.",
+    null,
+    "STEMI is diagnosed from the ECG and the clinical picture, so reperfusion should not wait for troponin results.",
+    "GTN only relieves symptoms and does not reperfuse, and in inferior STEMI it can cause severe hypotension if the right ventricle is involved.",
+    "Nothing here suggests dissection (no tearing pain to the back), and imaging would only delay time-critical reperfusion."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-6f50808e",
+   "stem": "A 42-year-old man is leaving the surgical ward on day 2 after laparoscopic appendicectomy with oxycodone 5 mg up to four times daily. He takes oral iron. Bowels not opened; abdomen soft. Most appropriate laxative to co-prescribe?",
+   "options": [
+    "Psyllium husk",
+    "Macrogol plus senna",
+    "Docusate sodium alone",
+    "Subcutaneous methylnaltrexone",
+    "Bisacodyl rectal suppository"
+   ],
+   "answer": 1,
+   "why": "Opioids predictably cause constipation, and oral iron and reduced mobility after surgery add to it, so a regular laxative should be prescribed whenever an opioid is supplied at discharge (ACSQHC 2022). eTG recommends a regular osmotic and/or stimulant laxative for opioid-induced constipation, usually both, such as macrogol with senna. A soft abdomen with no signs of obstruction makes this safe to start now, and it prevents hard stools, straining and anal fissure.",
+   "notes": [
+    "Bulk-forming laxatives are not recommended with opioids because they can make hard stools and faecal loading worse when gut transit is slowed.",
+    null,
+    "A stool softener used alone does not counter the slowed gut movement caused by opioids, so it is not enough as prevention.",
+    "Peripheral opioid antagonists are kept for constipation that persists despite regular conventional laxatives, not for routine prevention.",
+    "A suppository is a rescue treatment for rectal loading, not a regular preventive regimen started with a new opioid."
+   ],
+   "topic": "General Surgery",
+   "topics": [
+    "General Surgery",
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-735ee53b",
    "stem": "A 31-year-old woman, para 2, is on the birth suite 25 minutes after a spontaneous vaginal birth at 38 weeks' gestation. Her labour was induced for pre-eclampsia. She received oxytocin 10 units at the birth, and the placenta and membranes were complete. She is now bleeding heavily with clots, and the measured loss is 1,300 mL. Bimanual compression has been done, a catheter has drained 450 mL of urine, an oxytocin infusion is running, and tranexamic acid 1 g IV was given 10 minutes ago. In labour she took oral labetalol and had a magnesium sulfate infusion. She has no history of asthma. Pulse is 122/min, blood pressure 104/66 mmHg (158/102 mmHg before the birth), respirations 24/min and SpO2 98% on oxygen 15 L/min by mask. The fundus is soft and above the umbilicus. Speculum examination shows no cervical or vaginal tear. Haemoglobin is 95 g/L, platelets 146 x 10^9/L and fibrinogen 3.4 g/L. Crossmatched blood has been requested. Which of the following is the most appropriate next step in management?",
    "options": [
@@ -1333,6 +2483,36 @@
    "difficulty": 1
   },
   {
+   "id": "ai-mcq-78200f76",
+   "stem": "A 55-year-old man, a delivery driver, has had months of daytime sleepiness and loud snoring. BMI is 34 kg/m2, Epworth score 14 and STOP-Bang 6. TSH and full blood count are normal. Most appropriate next step?",
+   "options": [
+    "Empirical CPAP trial",
+    "Overnight pulse oximetry",
+    "Modafinil trial",
+    "Home sleep study",
+    "ENT surgical referral"
+   ],
+   "answer": 3,
+   "why": "His high Epworth and STOP-Bang scores, with obesity and snoring, make obstructive sleep apnoea likely, and he meets the criteria for a GP to refer him directly for an unattended home polysomnography (MBS 12250). The study confirms the diagnosis and grades severity by AHI, which then guides treatment such as CPAP.",
+   "notes": [
+    "CPAP is started after a sleep study has confirmed OSA and shown it is moderate to severe, not before.",
+    "Overnight oximetry alone is not an adequate diagnostic test for OSA: it misses hypopnoeas with arousal and cannot grade AHI.",
+    "Modafinil does not treat the airway obstruction and is only for residual sleepiness in OSA that has been confirmed and treated.",
+    null,
+    "Upper airway surgery is a later option for selected patients with confirmed OSA who cannot tolerate CPAP, not a first step."
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-7ae3a025",
    "stem": "A 71-year-old woman comes to her general practitioner because of 6 weeks of yellow eyes, generalised itch, dark urine and pale stools. She also has a dull epigastric ache that goes through to her back, poor appetite and a 6 kg weight loss. Type 2 diabetes was diagnosed 8 months ago and she takes metformin. She has a 45 pack-year smoking history. Her temperature is 36.8°C, pulse is 82/min and blood pressure is 134/78 mm Hg. She has scleral icterus and excoriations on her forearms. A smooth, non-tender mass is palpable below the right costal margin. Results: total bilirubin 164 µmol/L (reference less than 20), ALP 540 U/L (30–110), GGT 690 U/L (less than 38), ALT 118 U/L (less than 35), INR 1.2, white cell count 7.1 x10^9/L, CA 19-9 860 U/mL (less than 37). A pancreatic-protocol CT shows a 26 mm hypoattenuating mass in the pancreatic head with dilated common bile and pancreatic ducts, no vascular involvement and no liver metastases. Which of the following is the most appropriate next step in management?",
    "options": [
@@ -1362,6 +2542,36 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-7b3e17cb",
+   "stem": "A 64-year-old woman with diabetes walks into a general practice with 40 minutes of central chest heaviness spreading to her jaw, with sweating. BP 138/84 mmHg, SpO2 97%. Most appropriate next investigation?",
+   "options": [
+    "12-lead ECG",
+    "Serum troponin",
+    "Chest X-ray",
+    "Exercise stress test",
+    "CT coronary angiography"
+   ],
+   "answer": 0,
+   "why": "Australian ACS guidelines say anyone with possible acute coronary syndrome needs a 12-lead ECG within 10 minutes of first medical contact. The ECG finds STEMI, which needs a 000 call and urgent reperfusion. A troponin or other tests must not delay this.",
+   "notes": [
+    null,
+    "A troponin can be normal early and takes time, so it must not delay the ECG or the transfer of a possible STEMI.",
+    "A chest X-ray can help with other causes, but it cannot show an acute coronary occlusion and comes after the ECG.",
+    "Stress testing is unsafe during ongoing ischaemic pain at rest and is only for stable patients once ACS has been ruled out.",
+    "CT coronary angiography is for stable, lower-risk chest pain and is not the first test for ongoing pain that may be ACS."
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-7bce8cdf",
@@ -1424,6 +2634,36 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-7c29357d",
+   "stem": "A 41-year-old man has 4 months of thirst and nocturia. BMI is 36 kg/m2 with acanthosis nigricans. Urine dipstick shows glucose 3+, ketones negative, specific gravity 1.022. Which test best confirms the diagnosis?",
+   "options": [
+    "Oral glucose tolerance test",
+    "HbA1c",
+    "Water deprivation test",
+    "GAD antibodies",
+    "Serum C-peptide"
+   ],
+   "answer": 1,
+   "why": "Thirst and nocturia with heavy glycosuria in urine that is not dilute, in an obese man with acanthosis, suggest type 2 diabetes with an osmotic diuresis. Under RACGP and eTG guidance, an HbA1c of 6.5% (48 mmol/mol) or more confirms diabetes. Because he has typical symptoms, one abnormal result is enough.",
+   "notes": [
+    "An oral glucose tolerance test is kept for borderline fasting or random glucose results, and it is unnecessary and slow when hyperglycaemia is clearly likely.",
+    null,
+    "A water deprivation test looks for diabetes insipidus, which gives dilute urine without glucose, not concentrated urine with glucosuria.",
+    "GAD antibodies help tell autoimmune from type 2 diabetes once diabetes is confirmed, but they do not diagnose diabetes itself.",
+    "C-peptide measures how much insulin the body still makes, which helps classify diabetes after diagnosis, but it does not confirm hyperglycaemia."
+   ],
+   "topic": "Endocrinology",
+   "topics": [
+    "Endocrinology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-7ccbb208",
@@ -1548,6 +2788,36 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-84ec1ec1",
+   "stem": "A 34-year-old woman has had 3 days of progressive leg weakness and numbness. She has brisk lower limb reflexes, upgoing plantars, a T8 sensory level and a palpable bladder. Most appropriate next investigation?",
+   "options": [
+    "Lumbar puncture and CSF",
+    "Urgent MRI whole spine",
+    "Nerve conduction studies",
+    "CT lumbosacral spine",
+    "MRI brain with contrast"
+   ],
+   "answer": 1,
+   "why": "Upper motor neuron signs in the legs, a sensory level on the trunk and urinary retention mean an acute myelopathy. This is cord compression until proven otherwise. Urgent gadolinium MRI of the whole spine rules out compression and can show an inflammatory myelitis.",
+   "notes": [
+    "CSF studies (oligoclonal bands, cell count) help confirm demyelination, but only after imaging has ruled out compression or a mass lesion.",
+    null,
+    "Nerve conduction studies assess peripheral nerves and roots, which fit lower motor neuron signs such as Guillain-Barre syndrome, not brisk reflexes with a sensory level.",
+    "A T8 sensory level with upper motor neuron signs puts the lesion in the thoracic cord, so lumbosacral CT would miss it, and CT shows the cord poorly anyway.",
+    "A brain MRI can help with MS dissemination criteria, but it does not exclude cord compression or show the thoracic lesion causing her signs."
+   ],
+   "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-8557a042",
@@ -1702,6 +2972,98 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-8d80ebd0",
+   "stem": "A 58-year-old woman has 8 weeks of neck pain radiating to the thumb despite physiotherapy. Elbow flexion weakness progressed to 3/5; biceps reflex is reduced. MRI shows concordant C5-6 foraminal stenosis. Most appropriate next step?",
+   "options": [
+    "Oral prednisolone course",
+    "Continue physiotherapy alone",
+    "Nerve conduction studies",
+    "Spinal surgical referral",
+    "Soft cervical collar"
+   ],
+   "answer": 3,
+   "why": "Most cervical radiculopathy gets better with analgesia, physiotherapy and changes to activity. Here, though, there is a worsening objective motor deficit and a matching root compression on MRI, so she needs referral to a spinal surgeon to consider decompression.",
+   "notes": [
+    "Oral steroids may ease radicular pain for a short time, but they do not deal with a fixed compression causing worsening weakness.",
+    "Conservative care alone is suitable only when there is no motor deficit, or the deficit is stable or improving, and her weakness is getting worse.",
+    "Clinical signs and MRI already agree on the diagnosis, so nerve studies would only delay the referral she needs.",
+    null,
+    "A soft collar does not relieve root compression, and wearing one for a long time leads to stiffness and deconditioning."
+   ],
+   "topic": "Neurosurgery",
+   "topics": [
+    "Neurosurgery",
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-90d867a0",
+   "stem": "A 58-year-old man with alcohol-related cirrhosis and ascites vomits 400 mL of fresh blood. His pulse is 124/min and blood pressure is 96/60 mm Hg. Endoscopy is being arranged. Which drug is most appropriate now?",
+   "options": [
+    "IV tranexamic acid",
+    "Oral propranolol",
+    "IV vitamin K",
+    "IV furosemide",
+    "IV terlipressin"
+   ],
+   "answer": 4,
+   "why": "In cirrhosis, haematemesis should be treated as a variceal bleed until endoscopy shows otherwise. eTG and Baveno VII advise starting a vasoactive drug such as terlipressin (or octreotide) straight away, together with IV ceftriaxone, before band ligation within 12 hours. Terlipressin lowers portal pressure, which reduces bleeding and improves survival.",
+   "notes": [
+    "In the HALT-IT trial, tranexamic acid did not reduce deaths from GI bleeding and it increased venous clots, so it is not recommended.",
+    "Non-selective beta-blockers prevent variceal bleeding, but they are withheld during an acute bleed with hypotension because they worsen shock.",
+    "Vitamin K does not correct the clotting problem of cirrhosis quickly or reliably, and it does nothing to lower portal pressure.",
+    "A diuretic would worsen low blood volume and kidney blood flow in a patient who is bleeding and in early shock.",
+    null
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-91a3b5af",
+   "stem": "A 41-year-old man has fever, headache and neck stiffness after a week of right earache. CSF shows 1900 x10^6/L polymorphs and Gram-positive diplococci. Dexamethasone and ceftriaxone have been given. Which drug should be added?",
+   "options": [
+    "Vancomycin",
+    "Benzylpenicillin",
+    "Aciclovir",
+    "Amoxicillin",
+    "Meropenem"
+   ],
+   "answer": 0,
+   "why": "Gram-positive diplococci in a neutrophilic CSF mean pneumococcal meningitis, here probably spreading from otitis media. eTG advises adding vancomycin to ceftriaxone until susceptibilities are known, because the organism may be resistant to ceftriaxone. Treatment is then narrowed once susceptibilities are known.",
+   "notes": [
+    null,
+    "Benzylpenicillin is used only after the isolate is shown to be penicillin-susceptible, so it is not a safe empirical addition.",
+    "Aciclovir treats HSV encephalitis, but a polymorph-rich CSF with visible organisms points to bacterial meningitis.",
+    "Amoxicillin is added for Listeria in adults over 50, pregnant or immunocompromised patients, and this man has none of these risks.",
+    "Meropenem is not recommended as empirical cover for pneumococcus, and ceftriaxone plus vancomycin is the eTG regimen."
+   ],
+   "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-91f368bd",
    "stem": "A 31-year-old woman comes to the emergency department with 3 days of tingling that started in her feet and has spread up to her waist. Over the same time her legs have become steadily weaker. Since this morning she has been unable to pass urine. She has had no back pain, fever, trauma or weight loss. Eighteen months ago she had 2 weeks of blurred vision and pain on moving her left eye, which got better without treatment. She takes no medicines. Temperature is 36.7 °C, pulse 80 beats/min, blood pressure 118/74 mm Hg and respiratory rate 16 breaths/min. Cranial nerve and upper limb examination is normal. Tone is increased in both legs. Hip flexion and ankle dorsiflexion are 3/5 on the left and 4/5 on the right. Knee and ankle reflexes are brisk, and both plantar responses are extensor. Pinprick sensation is reduced below the umbilicus. A bladder scan shows 900 mL. Full blood count and C-reactive protein are normal. Which of the following is the most appropriate next investigation?",
    "options": [
@@ -1751,6 +3113,36 @@
     null
    ],
    "topic": "General Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-93472628",
+   "stem": "A 24-year-old woman has her fifth stereotyped left-sided throbbing headache, preceded by 20 minutes of zigzag lines. Examination is normal. Urine beta-hCG is negative with a valid control line. Most appropriate acute treatment?",
+   "options": [
+    "Paracetamol plus codeine",
+    "Aspirin plus metoclopramide",
+    "Ergotamine plus caffeine",
+    "Oxycodone plus metoclopramide",
+    "Tramadol plus ondansetron"
+   ],
+   "answer": 1,
+   "why": "The valid negative pregnancy test shows she is not pregnant, so the treatment choice for her migraine attack is not restricted. eTG first-line acute treatment is aspirin or an NSAID taken early with metoclopramide, which helps absorption and treats nausea. A triptan is used if this fails.",
+   "notes": [
+    "Codeine and other opioids are not recommended for migraine because they work poorly and carry a high risk of medication-overuse headache and dependence.",
+    null,
+    "Ergotamine is no longer recommended because it is less effective than other options and its vasoconstriction is a concern in migraine with aura.",
+    "Metoclopramide is a sensible add-on, but oxycodone is an opioid, which is not recommended for migraine and promotes medication-overuse headache.",
+    "Tramadol is an opioid with no place in migraine treatment, and ondansetron does not have the prokinetic benefit of metoclopramide."
+   ],
+   "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "General Practice"
+   ],
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -1851,6 +3243,36 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-9b3e107c",
+   "stem": "A 72-year-old woman has right face and arm weakness and aphasia that began 90 minutes ago. She took apixaban 3 hours ago. CT shows no haemorrhage; CT angiography shows left M1 occlusion. Most appropriate next step?",
+   "options": [
+    "IV tenecteplase",
+    "Endovascular clot retrieval",
+    "Idarucizumab then tenecteplase",
+    "Aspirin 300 mg",
+    "IV heparin infusion"
+   ],
+   "answer": 1,
+   "why": "She took apixaban within the last 48 hours and has no drug level showing it has worn off, so thrombolysis is contraindicated. Taking an anticoagulant does not rule out clot retrieval, and the Australian and New Zealand stroke guidelines recommend urgent endovascular thrombectomy for a proximal large vessel occlusion such as M1.",
+   "notes": [
+    "Taking apixaban 3 hours ago, with no apixaban-calibrated anti-Xa level showing no effect, contraindicates thrombolysis.",
+    null,
+    "Idarucizumab reverses only dabigatran, so it has no effect on apixaban and does not make thrombolysis safe.",
+    "Antiplatelet therapy is delayed until reperfusion is complete and is started after a swallow screen; it does not treat a large vessel occlusion.",
+    "Urgent heparin in acute ischaemic stroke raises the risk of haemorrhage without improving outcome, and it delays reperfusion."
+   ],
+   "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-9b44bc6a",
    "stem": "A 52-year-old woman presents to the emergency department 2 days after a day-surgery hysteroscopy and dilatation and curettage for heavy, irregular bleeding. Since yesterday evening she has had worsening lower abdominal pain, nausea and anorexia. The operation record describes a retroverted, bulky uterus and a view partly obscured by blood, and lists the procedure as uneventful. The histology report, released this morning, describes disordered proliferative endometrium with fragments of mature adipose tissue. She has type 2 diabetes treated with metformin, and her body mass index is 42 kg/m2. Her temperature is 38.2°C, pulse 104/min, blood pressure 132/80 mm Hg, respiratory rate 20/min and SpO2 97% on room air. The lower abdomen is tender with voluntary guarding but no rigidity, and bowel sounds are reduced. There is scant brown vaginal loss. White cell count is 15.6 x 10^9/L (4.0 to 11.0), C-reactive protein 148 mg/L (less than 5) and lactate 1.6 mmol/L (less than 2.0). Fluids, analgesia and antibiotics have been started. Which of the following is the most appropriate next investigation?",
    "options": [
@@ -1879,6 +3301,37 @@
    "source": "ai",
    "year": 3,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-9b75bd84",
+   "stem": "A 12-hour-old term boy is grunting and floppy. His mother was GBS positive and febrile in labour. Temperature 38.3 °C, heart rate 186/min, capillary refill 4 seconds. Most appropriate investigation before antibiotics?",
+   "options": [
+    "Blood culture",
+    "Serum CRP",
+    "Lumbar puncture",
+    "Urine culture",
+    "Chest X-ray"
+   ],
+   "answer": 0,
+   "why": "This baby has suspected early-onset sepsis with shock, most likely from Group B streptococcus. Under the RCH neonatal guidelines, a blood culture (at least 1 mL) is taken before benzylpenicillin and gentamicin are started, and it is the test that confirms the diagnosis. Other investigations must not delay antibiotics.",
+   "notes": [
+    null,
+    "CRP takes 12 to 24 hours to rise, so a normal value this early does not exclude sepsis, and it cannot confirm infection.",
+    "A lumbar puncture is deferred in a baby with shock and must not delay antibiotics; it is done once the baby is stable.",
+    "Early-onset sepsis reaches the baby from the mother and spreads through the blood, so urine culture has a low yield in the first 72 hours.",
+    "A chest X-ray may show pneumonia but cannot identify the organism or confirm sepsis, and it does not need to come before antibiotics."
+   ],
+   "topic": "Neonatology",
+   "topics": [
+    "Neonatology",
+    "Paediatrics",
+    "Obstetrics"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-9c5c4bc6",
@@ -1912,6 +3365,69 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-9d006206",
+   "stem": "A 78-year-old woman on apixaban struck her head in a fall four days ago. CT shows a left subdural haematoma; GCS has fallen from 15 to 13. INR is 1.1. Most appropriate reversal agent?",
+   "options": [
+    "Intravenous vitamin K",
+    "Fresh frozen plasma",
+    "Prothrombinex-VF",
+    "Idarucizumab",
+    "Protamine sulfate"
+   ],
+   "answer": 2,
+   "why": "This is an intracranial bleed on apixaban, and her GCS is falling. The urgent priority is to reverse the factor Xa inhibition so the haematoma stops expanding and she does not herniate. eTG recommends prothrombin complex concentrate (Prothrombinex-VF, about 50 units/kg IV) with haematology advice, or andexanet alfa where it is available. A normal INR does not rule out apixaban effect.",
+   "notes": [
+    "Vitamin K reverses warfarin by restoring vitamin K-dependent factor synthesis, but it has no effect on a direct factor Xa inhibitor.",
+    "Fresh frozen plasma needs a large volume, takes time to thaw, and does not reliably reverse apixaban.",
+    null,
+    "Idarucizumab is a monoclonal antibody that reverses dabigatran only, not factor Xa inhibitors.",
+    "Protamine reverses unfractionated heparin (and partly enoxaparin) and has no effect on apixaban."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Neurology",
+    "Neurosurgery",
+    "Geriatrics"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-9e38d659",
+   "stem": "A 24-year-old woman has 3 months of fatigue and heavy periods. Pulse is 84/min and blood pressure 118/72 mmHg. Haemoglobin is 88 g/L, MCV 67 fL and ferritin 5 µg/L. Most appropriate next step?",
+   "options": [
+    "Intravenous iron infusion",
+    "Red cell transfusion",
+    "Gastroscopy and colonoscopy",
+    "Oral iron supplement",
+    "Haemoglobin electrophoresis"
+   ],
+   "answer": 3,
+   "why": "She is stable, and her iron deficiency anaemia is explained by heavy menstrual bleeding. eTG recommends oral iron first line, which can be given on alternate days, alongside treatment of the heavy bleeding. Recheck the FBC and iron studies in 2 to 6 weeks.",
+   "notes": [
+    "IV iron is for patients who cannot tolerate oral iron, do not respond to it, have malabsorption or need rapid repletion, and none of these applies yet.",
+    "Transfusion is not needed for a haemodynamically stable young woman with chronic anaemia at Hb 88 g/L.",
+    "Endoscopy is not first line for a 23-year-old with no GI symptoms whose heavy periods explain the loss; it is for those who do not respond.",
+    null,
+    "Haemoglobin studies for thalassaemia trait are for persistent microcytosis once iron is replete, and a ferritin of 5 already confirms iron deficiency."
+   ],
+   "topic": "Haematology",
+   "topics": [
+    "Haematology",
+    "General Practice",
+    "Gynaecology"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-9fadfaae",
    "stem": "A 73-year-old man is brought to the emergency department with sudden severe breathlessness that began overnight. For 3 weeks he has needed three pillows to sleep, and his ankles have become swollen. He had an anterior myocardial infarction treated with a stent 9 years ago, and he has hypertension and type 2 diabetes. He has had no cardiac imaging since the infarct. On arrival, pulse is 112/min, blood pressure 178/96 mmHg, respiratory rate 30/min and SpO2 86% on room air. His jugular venous pressure is raised, there is a third heart sound, crackles reach the mid-zones and there is pitting oedema to the shins. ECG shows sinus tachycardia with Q waves in V1 to V4, unchanged from 2 years ago. Chest X-ray shows cardiomegaly, upper lobe diversion, Kerley B lines and small bilateral pleural effusions. NT-proBNP is 5800 ng/L. hs-troponin I is 42 ng/L, and 45 ng/L 3 hours later (99th percentile below 34 ng/L). He improves with non-invasive ventilation, glyceryl trinitrate and IV furosemide. Which of the following is the most appropriate next investigation to establish the underlying diagnosis?",
    "options": [
@@ -1941,6 +3457,97 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-a2ea039e",
+   "stem": "A 66-year-old woman with type 2 diabetes for 12 years, taking metformin, has five months of symmetrical burning and numbness in both feet. Ankle reflexes are absent; plantars are flexor. Most appropriate next investigation?",
+   "options": [
+    "Nerve conduction studies",
+    "Serum creatine kinase",
+    "Serum vitamin B12",
+    "MRI lumbar spine",
+    "Antinuclear antibodies"
+   ],
+   "answer": 2,
+   "why": "Symmetrical distal sensory loss with absent ankle reflexes in a person with diabetes is typical of diabetic peripheral neuropathy. Before accepting that diagnosis, treatable mimics should be excluded. Long-term metformin can cause vitamin B12 deficiency, so serum B12 is the key next test, alongside TSH and other screening bloods.",
+   "notes": [
+    "Nerve conduction studies are kept for atypical cases, such as asymmetry, rapid progression or marked weakness, and are not needed for a typical length-dependent pattern.",
+    "Creatine kinase helps assess a myopathy, which causes proximal weakness rather than distal sensory loss and burning pain.",
+    null,
+    "Lumbar spine imaging fits radicular or cauda equina symptoms, not a symmetrical stocking pattern without back pain or sphincter symptoms.",
+    "Antinuclear antibodies are not a routine screen for distal symmetrical neuropathy, and there are no features suggesting a connective tissue disease."
+   ],
+   "topic": "Endocrinology",
+   "topics": [
+    "Endocrinology",
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-a3971ea2",
+   "stem": "A 56-year-old man has clinic blood pressure 152/94 mmHg on repeated readings. His home diary averages 123/77 mmHg: single evening readings, mostly after coffee, on an unvalidated device. No end-organ damage. Most appropriate next step?",
+   "options": [
+    "Commence perindopril today",
+    "Aldosterone to renin ratio",
+    "Transthoracic echocardiography",
+    "Ambulatory BP monitoring",
+    "Reassure and discharge"
+   ],
+   "answer": 3,
+   "why": "His home diary suggests white coat hypertension, but the protocol is not valid: one reading per session, evenings only, after caffeine, on an unvalidated device. So it can neither confirm nor exclude hypertension. With grade 1 clinic readings and no end-organ damage, the Heart Foundation advises confirming the diagnosis out of the office, ideally with 24-hour ABPM, before labelling or treating him.",
+   "notes": [
+    "Starting treatment before the diagnosis is confirmed risks treating white coat hypertension, and nothing here, such as very high readings or end-organ damage, justifies treating straight away.",
+    "Testing for primary aldosteronism is not the next step: his potassium is normal, there is no resistant hypertension and hypertension is not yet confirmed.",
+    "Echocardiography is not routine in this work-up, and the ECG already shows no left ventricular hypertrophy.",
+    null,
+    "His home readings are invalid and cannot exclude hypertension; even confirmed white coat hypertension still needs follow-up."
+   ],
+   "topic": "General Practice",
+   "topics": [
+    "General Practice",
+    "Cardiology"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-a5d97492",
+   "stem": "A 74-year-old woman woke with a left homonymous hemianopia. MRI shows a small acute right occipital infarct without haemorrhage. ECG shows atrial fibrillation, previously unknown. Which long-term therapy best prevents recurrent stroke?",
+   "options": [
+    "Aspirin",
+    "Clopidogrel",
+    "Apixaban",
+    "Aspirin plus clopidogrel",
+    "Aspirin plus dipyridamole"
+   ],
+   "answer": 2,
+   "why": "Her biggest risk is another cardioembolic stroke from atrial fibrillation. The Australian stroke guidelines and eTG recommend long-term oral anticoagulation, preferably a DOAC such as apixaban, over antiplatelet therapy. The stroke team times the start by infarct size, often within a few days for a small infarct.",
+   "notes": [
+    "Aspirin prevents far fewer AF-related emboli than anticoagulation, so it is not a substitute in a patient who can take a DOAC.",
+    "Clopidogrel is antiplatelet therapy for non-cardioembolic stroke and does not adequately prevent clots forming in the left atrium.",
+    null,
+    "Short-term dual antiplatelet therapy is for minor non-cardioembolic stroke or TIA, and is inferior to anticoagulation in AF.",
+    "Aspirin plus dipyridamole is an option for non-cardioembolic stroke but does not protect against embolism from AF."
+   ],
+   "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Ophthalmology"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-a5f2390b",
@@ -1973,6 +3580,97 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-a6cd006e",
+   "stem": "A 10-year-old boy with intellectual disability and minimal speech has two weeks of aggression, hitting his lower abdomen and new daytime wetting. He is afebrile; abdomen soft, no masses. Most appropriate next investigation?",
+   "options": [
+    "Abdominal X-ray",
+    "Thyroid function tests",
+    "Renal tract ultrasound",
+    "Sleep-deprived EEG",
+    "Urine dipstick"
+   ],
+   "answer": 4,
+   "why": "A sudden change in behaviour in a child with intellectual disability should be treated as pain or illness until proven otherwise. New wetting with lower abdominal distress points to a urinary cause. A clean-catch urine dipstick, sent for culture if positive, is the quick first-line test that rules a UTI in or out before any behavioural explanation is accepted.",
+   "notes": [
+    "RCH guidelines say constipation is diagnosed clinically and an abdominal X-ray is not recommended, and here there is no faecal mass.",
+    "Thyroid disease causes gradual change and would not explain new wetting with lower abdominal pain over two weeks.",
+    "Imaging the renal tract comes after a UTI is confirmed, not before a simple urine test.",
+    "Nothing in the history suggests seizures, and an EEG does not explain the urinary or abdominal features.",
+    null
+   ],
+   "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-a7dfc69a",
+   "stem": "A 73-year-old man has two weeks of worsening breathlessness and orthopnoea, a month after an anterior myocardial infarction. He has bibasal crackles and an S3; NT-proBNP is 8400 ng/L. Which investigation best confirms the diagnosis?",
+   "options": [
+    "CT pulmonary angiogram",
+    "Echocardiography",
+    "Coronary angiography",
+    "Cardiac MRI",
+    "Serial troponin"
+   ],
+   "answer": 1,
+   "why": "Orthopnoea, an S3, crackles and a very high NT-proBNP after a recent MI point to heart failure. The Australian heart failure guidelines (NHF/CSANZ) recommend echocardiography for every patient with suspected heart failure. It confirms the diagnosis, measures the ejection fraction (which decides treatment) and looks for wall motion problems or mechanical complications after the MI.",
+   "notes": [
+    "A CT pulmonary angiogram looks for pulmonary embolism, which orthopnoea, an S3 and a high NT-proBNP do not suggest, and the contrast is a risk to kidneys already under strain.",
+    null,
+    "Coronary angiography assesses whether ischaemia is causing the heart failure; it does not confirm the heart failure or measure how well the heart pumps.",
+    "Cardiac MRI is a second-line test, used when echo images are poor or the cause of a cardiomyopathy is unclear; it is not the first test.",
+    "Serial troponin helps tell whether there has been a new infarct, but it cannot confirm heart failure or show the ejection fraction."
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Respiratory Medicine",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-a83b91e4",
+   "stem": "A 29-year-old woman has 2 months of weight loss, tremor and palpitations. Pulse is 112/min and irregularly irregular; BP 124/78 mmHg. TSH is <0.01 mIU/L and TSH receptor antibodies are positive. Most appropriate initial treatment?",
+   "options": [
+    "Oral digoxin",
+    "Oral amiodarone",
+    "Oral flecainide",
+    "Electrical cardioversion",
+    "Oral propranolol"
+   ],
+   "answer": 4,
+   "why": "She has Graves' disease with thyrotoxic atrial fibrillation and is haemodynamically stable. Per eTG, a beta blocker such as propranolol is first line: it controls the ventricular rate and eases adrenergic symptoms while antithyroid treatment starts. AF often reverts once she is euthyroid, so rhythm control is deferred.",
+   "notes": [
+    "Digoxin works poorly in thyrotoxicosis because clearance is higher and sympathetic drive is high, so it is not first line.",
+    "Amiodarone is very rich in iodine and can make thyrotoxicosis worse, so it should be avoided here.",
+    "Rhythm control with flecainide usually fails while she is still thyrotoxic, and AF often reverts once she is euthyroid.",
+    "She is stable, and cardioversion is deferred until she is euthyroid because AF very often comes back before then.",
+    null
+   ],
+   "topic": "Endocrinology",
+   "topics": [
+    "Endocrinology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-a8a331e2",
@@ -2033,6 +3731,128 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-ab44f24e",
+   "stem": "A 23-year-old woman with hay fever has chest tightness and cough beginning minutes after netball training, settling within an hour. Examination and spirometry with bronchodilator testing are normal. Most appropriate next step?",
+   "options": [
+    "Bronchial provocation test",
+    "Salbutamol before exercise",
+    "Daily inhaled corticosteroid",
+    "CT pulmonary angiogram",
+    "Reassurance and discharge"
+   ],
+   "answer": 0,
+   "why": "Her symptoms point to exercise-induced bronchoconstriction, but normal resting spirometry with no bronchodilator response does not rule it out. The Australian Asthma Handbook advises confirming it with a bronchial provocation test, such as a mannitol or exercise challenge, before starting an inhaler.",
+   "notes": [
+    null,
+    "Starting salbutamol on suspicion alone, without confirming the diagnosis, risks mislabelling her and missing other causes such as exercise-induced laryngeal obstruction.",
+    "Daily preventer therapy is not warranted when the diagnosis is unconfirmed and symptoms occur only with exercise.",
+    "She has no features of pulmonary embolism, so a CTPA would add radiation and contrast without changing management.",
+    "Her typical symptoms, together with atopy, make exercise-induced bronchoconstriction likely enough that it should be tested for, not dismissed."
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-acb3ef9a",
+   "stem": "A 47-year-old woman has had 6 hours of constant epigastric pain radiating to her back, with vomiting. She rarely drinks alcohol. Her lipase is 2400 U/L (normal <60). Her observations are stable. Most appropriate next investigation?",
+   "options": [
+    "Contrast CT abdomen",
+    "Ultrasound abdomen",
+    "MRCP",
+    "ERCP",
+    "Serum amylase"
+   ],
+   "answer": 1,
+   "why": "She has typical pain and a lipase more than 3 times the upper limit, so she already meets the criteria for acute pancreatitis. The next step is to find the cause. Every patient needs an abdominal ultrasound to look for gallstones, which are the commonest cause, especially in someone who rarely drinks, and finding them changes management (early cholecystectomy, and ERCP if needed).",
+   "notes": [
+    "Contrast CT is not needed early when the diagnosis is already clear; it is kept for diagnostic doubt or for deterioration after about 72 hours to look for necrosis.",
+    null,
+    "MRCP is a second-line test for a suspected duct stone or an unclear cause after an ultrasound has been done, not the first investigation.",
+    "ERCP is an invasive treatment for cholangitis or a persisting duct stone, not a first-line test to find the cause.",
+    "Amylase adds nothing once the lipase is raised, because lipase is more specific and stays raised for longer."
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Surgery",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-adbaa5e3",
+   "stem": "A 24-year-old man with asthma has been wheezing for two hours since mowing. He speaks in short phrases, uses accessory muscles and has SpO2 92% on room air. No stridor or rash. Most appropriate initial treatment?",
+   "options": [
+    "Intravenous magnesium sulfate",
+    "Salbutamol plus ipratropium",
+    "Intravenous aminophylline infusion",
+    "Intramuscular adrenaline",
+    "Non-invasive ventilation"
+   ],
+   "answer": 1,
+   "why": "He can speak only in short phrases, is using accessory muscles and has an SpO2 of 90 to 94%, so this is severe acute asthma without life-threatening features. Under the Australian Asthma Handbook, start repeated salbutamol (12 puffs by spacer or nebulised) with ipratropium every 20 minutes for the first hour. Also give titrated oxygen (target 93 to 95%) and oral prednisolone within the hour.",
+   "notes": [
+    "IV magnesium is kept for patients who do not respond to the first hour of bronchodilators or who have life-threatening asthma, so it is not the first step.",
+    null,
+    "Aminophylline has a narrow therapeutic margin, adds toxicity and adds little to inhaled bronchodilators, so it is not routine treatment.",
+    "IM adrenaline treats anaphylaxis, but he has a clear asthma trigger and no stridor, rash or hypotension.",
+    "NIV is not first-line treatment in acute asthma, and he is alert with no exhaustion or hypercapnia that would call for ventilatory support."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Respiratory Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-ae8c7442",
+   "stem": "A 72-year-old woman discharged last week after cholecystectomy has fever, purulent sputum and left pleuritic pain. X-ray shows left lower lobe consolidation. Wells score 3; D-dimer 0.62 mg/L FEU. Most appropriate next step regarding PE?",
+   "options": [
+    "No further PE testing",
+    "CT pulmonary angiogram",
+    "Ventilation-perfusion scan",
+    "Bilateral leg ultrasound",
+    "Repeat D-dimer tomorrow"
+   ],
+   "answer": 0,
+   "why": "A Wells score of 4 or less means PE is unlikely. Her age-adjusted D-dimer cut-off is 0.72 mg/L FEU (age × 0.01 for people over 50), so a D-dimer of 0.62 is negative. Together these exclude PE, and the consolidation gives a clear alternative diagnosis.",
+   "notes": [
+    null,
+    "CTPA is for patients where PE is likely, or unlikely with a positive D-dimer; neither applies here, so it would add radiation and contrast for no benefit.",
+    "A V/Q scan is an alternative to CTPA when imaging is needed, but imaging is not needed after a negative age-adjusted D-dimer, and consolidation makes a V/Q scan hard to read.",
+    "Leg ultrasound is used when there are signs of DVT or when lung imaging cannot be done; it is not needed once PE has been excluded.",
+    "Repeating the D-dimer adds nothing because this result is already negative; infection and recent surgery would only push the D-dimer up."
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-b1bb7e43",
@@ -2156,6 +3976,32 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-b7d7aaa0",
+   "stem": "A 35-year-old woman sees her GP before starting weekly methotrexate for seropositive, erosive rheumatoid arthritis. Her urine beta-hCG is negative. She has a 3-year-old son and hopes to conceive within two years. Most important counselling point?",
+   "options": [
+    "Take tablets daily",
+    "Avoid inactivated flu vaccine",
+    "Omit folic acid",
+    "Use effective contraception",
+    "Cease once pregnant"
+   ],
+   "answer": 3,
+   "why": "Methotrexate is teratogenic and can cause miscarriage, so a woman who may become pregnant needs reliable contraception throughout treatment. Any pregnancy should be planned with her rheumatologist, who will stop methotrexate at least 3 months before conception (Australian Rheumatology Association advice) and switch her to a drug that is safe in pregnancy, such as hydroxychloroquine or sulfasalazine.",
+   "notes": [
+    "Methotrexate for RA is taken once a week; taking it daily is a known cause of fatal toxicity.",
+    "Inactivated vaccines such as the influenza vaccine are safe and recommended on methotrexate; only live vaccines need care.",
+    "Folic acid should be taken weekly, on a different day from methotrexate, to reduce side effects, so it should not be stopped.",
+    null,
+    "Stopping only after a positive pregnancy test is too late: the drug must be stopped at least 3 months before she tries to conceive."
+   ],
+   "topic": "Rheumatology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-b95916fc",
    "stem": "A 41-year-old man is admitted to the rheumatology ward with 3 weeks of painful, swollen hands and 2 hours of morning stiffness each day. He was diagnosed with rheumatoid arthritis 9 years ago at an interstate hospital, and his records from there cannot be obtained. He stopped methotrexate 5 months ago when he moved and has taken no regular medicines since. He smokes 10 cigarettes a day. Temperature is 36.9 °C, pulse 86/min, and blood pressure 126/78 mm Hg. Both wrists and the second to fourth MCP and PIP joints are warm and boggy, and the DIP joints are spared. He has fixed ulnar deviation, swan neck deformities and firm nodules over both elbows. Haemoglobin is 118 g/L (130 to 180), CRP 46 mg/L (less than 5), ALT 24 U/L (less than 40), and creatinine 82 µmol/L (60 to 110). Rheumatoid factor and anti-CCP antibodies are strongly positive. A chest X-ray taken in the emergency department overnight is clear. The team plans a short course of prednisolone and to restart methotrexate. Which of the following investigations is most appropriate before methotrexate is restarted?",
    "options": [
@@ -2184,6 +4030,36 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-b9d55ffd",
+   "stem": "A 31-year-old woman in the birth suite loses 900 mL after vaginal birth, passing clots; pulse 104 bpm. Her fundus firms with massage and oxytocin, then repeatedly softens. Perineum intact; placenta unexamined. Most appropriate next investigation?",
+   "options": [
+    "Pelvic ultrasound",
+    "Coagulation profile",
+    "Vaginal speculum examination",
+    "Full blood count",
+    "Placental inspection"
+   ],
+   "answer": 4,
+   "why": "If the uterus firms with treatment but keeps relaxing, retained placental tissue (Tissue) is likely. The quickest way to confirm it is to check the placenta and membranes for a missing cotyledon or a ragged defect on the maternal surface. Queensland Clinical Guidelines and RANZCOG list this as a routine step when assessing the four Ts in primary PPH.",
+   "notes": [
+    "Ultrasound can show retained products, but it takes longer and is less reliable straight after birth, so it does not replace first checking the delivered placenta.",
+    "Coagulation studies are sent as part of PPH bloods, but she is forming clots and her uterus firms with treatment, so a clotting problem is not the likely cause.",
+    "A speculum examination looks for genital tract trauma, but the perineum is intact and a fundus that keeps softening points to the uterus as the source.",
+    "A full blood count measures blood loss and how much replacement she needs, but it does not identify why she is bleeding.",
+    null
+   ],
+   "topic": "Obstetrics",
+   "topics": [
+    "Obstetrics",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-b9e317b3",
@@ -2244,6 +4120,36 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-ba2ead6a",
+   "stem": "A 20-month-old girl had a 2-minute generalised tonic-clonic seizure at home with fever of 38.9 °C and coryza. One hour later she is alert with no meningism and a normal neurological examination. Most appropriate next step?",
+   "options": [
+    "Outpatient EEG referral",
+    "Urgent lumbar puncture",
+    "Non-contrast CT brain",
+    "Discharge with education",
+    "Regular paracetamol prophylaxis"
+   ],
+   "answer": 3,
+   "why": "This is a simple febrile seizure: generalised, under 15 minutes, full recovery within 1 hour, and a clear viral source. The RCH guideline advises no routine investigations. The next step is to reassure the parents, teach seizure first aid and when to return, and discharge her.",
+   "notes": [
+    "An EEG does not predict recurrence or later epilepsy after a simple febrile seizure, so it is not indicated.",
+    "A lumbar puncture is for meningism, ongoing drowsiness, or a very young or unwell child, and she is alert with no meningism.",
+    "Neuroimaging is not indicated after a simple febrile seizure with full recovery and a normal neurological examination.",
+    null,
+    "Antipyretics are for comfort only and do not prevent febrile seizures from recurring."
+   ],
+   "topic": "Paediatrics",
+   "topics": [
+    "Paediatrics",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {
@@ -2338,6 +4244,37 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-bf08d9cd",
+   "stem": "A 27-year-old unvaccinated man sees his GP with jaundice after week-long malaise, four weeks after Vietnam travel with a hepatitis A-infected companion. Tender hepatomegaly; ALT 1240 IU/L, ALP 150 U/L. Which test best confirms the diagnosis?",
+   "options": [
+    "Total anti-HAV antibody",
+    "Hepatitis A PCR",
+    "Hepatitis E IgM",
+    "Hepatitis A IgM",
+    "Malaria thick film"
+   ],
+   "answer": 3,
+   "why": "He is an unvaccinated traveller with a known hepatitis A contact, an incubation period that fits, a prodrome, jaundice, tender hepatomegaly and a hepatocellular pattern of liver tests, so acute hepatitis A is most likely. The CDNA national guideline (SoNG) confirms acute infection with a positive HAV IgM, which is present at symptom onset and lasts for about 3 to 6 months.",
+   "notes": [
+    "Total anti-HAV is mostly IgG, so it is also positive after past infection or vaccination and cannot show that the infection is acute.",
+    "HAV RNA testing is not routine, and the viraemia may be waning by the time jaundice appears, so it is less reliable than IgM.",
+    "Hepatitis E is also spread by the enteric route in Asia, but his contact with a confirmed hepatitis A case makes hepatitis A far more likely.",
+    null,
+    "Malaria causes mainly unconjugated, haemolytic jaundice with fever, not an ALT rise to over 30 times normal after a contact with hepatitis A."
+   ],
+   "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-c20114a7",
    "stem": "A 66-year-old man is reviewed on the cardiology ward of a metropolitan hospital before discharge. He was admitted 5 days ago with 3 months of worsening exertional dyspnoea, orthopnoea and ankle swelling, 18 months after an anterior STEMI treated with PCI. He has type 2 diabetes, hypertension and knee osteoarthritis. With IV furosemide he has diuresed 6 kg and now walks the ward corridor without breathlessness. Transthoracic echocardiography shows a dilated left ventricle with an ejection fraction of 30%. His discharge medicines are oral furosemide 40 mg mane, bisoprolol 2.5 mg, sacubitril/valsartan 24/26 mg twice a day, spironolactone 12.5 mg, dapagliflozin 10 mg, aspirin, atorvastatin and metformin. Temperature is 36.6 °C, pulse 72/min, blood pressure 118/70 mm Hg, respirations 16/min and SpO2 97% on room air. The JVP is not raised and there is no pitting oedema. Serum sodium is 137 mmol/L (135–145), potassium 4.8 mmol/L (3.5–5.2) and creatinine 104 µmol/L (60–110). Which of the following is the most appropriate advice to give him before discharge?",
    "options": [
@@ -2366,6 +4303,67 @@
    "origin": "ai",
    "source": "ai",
    "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-c3dc5323",
+   "stem": "A 72-year-old woman with a previous anterior myocardial infarction has two months of exertional breathlessness, orthopnoea and ankle oedema. NT-proBNP is 4100 ng/L; chest X-ray shows cardiomegaly and small bilateral effusions. Which investigation best confirms the diagnosis?",
+   "options": [
+    "Coronary angiography",
+    "CT pulmonary angiogram",
+    "Transthoracic echocardiogram",
+    "Diagnostic pleural aspiration",
+    "Spirometry with bronchodilator"
+   ],
+   "answer": 2,
+   "why": "A raised NT-proBNP with typical symptoms and X-ray signs makes heart failure very likely. The Australian (NHFA/CSANZ) heart failure guidelines recommend a transthoracic echocardiogram to confirm it, show the ejection fraction and structural cause, and guide treatment. Small bilateral effusions with heart failure are usually transudates and do not need to be tapped at first.",
+   "notes": [
+    "Coronary angiography looks for ischaemia to treat after heart failure is confirmed, but it does not confirm the diagnosis itself.",
+    "CT pulmonary angiography is for suspected PE, which does not fit gradual orthopnoea, symmetrical oedema and cardiomegaly.",
+    null,
+    "Small bilateral effusions with cardiac failure are usually transudates that settle with diuresis, so routine aspiration is not needed.",
+    "Spirometry assesses airflow obstruction such as COPD and cannot confirm or describe heart failure."
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Respiratory Medicine",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-c47a34b5",
+   "stem": "A 70-year-old man, intubated in the emergency department, has return of circulation after a 12-minute ventricular fibrillation arrest. Venous gas: pH 7.10, pCO2 60 mmHg, bicarbonate 17 mmol/L, lactate 9.0 mmol/L. Best interpretation of the gas?",
+   "options": [
+    "Compensated metabolic acidosis",
+    "Isolated respiratory acidosis",
+    "Metabolic acidosis, respiratory alkalosis",
+    "Compensated respiratory acidosis",
+    "Mixed respiratory-metabolic acidosis"
+   ],
+   "answer": 4,
+   "why": "The pCO2 is high and the bicarbonate is low, so both are pushing the pH down. This is a mixed acidosis: respiratory from hypoventilation during the arrest, and lactic from hypoperfusion. Both are expected after cardiac arrest and are treated with ventilation to normocapnia and restoring perfusion, not with bicarbonate.",
+   "notes": [
+    "Respiratory compensation would lower the pCO2 to about 33 mmHg (Winters' formula), not raise it to 60.",
+    "A pure acute respiratory acidosis would raise the bicarbonate slightly (to about 26), not leave it low with a lactate of 9.0.",
+    "A respiratory alkalosis needs a low pCO2, but here it is raised at 60 mmHg.",
+    "Compensation for a respiratory acidosis raises the bicarbonate, and the pH would not be as low as 7.10.",
+    null
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
    "difficulty": 2
   },
   {
@@ -2490,6 +4488,37 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-c7ad668c",
+   "stem": "A 68-year-old man has sudden tearing chest pain through to his back. CT shows an ascending aortic intimal flap. His BP falls to 80/50 mmHg with distended neck veins and pulsus paradoxus. Most likely cause of his hypotension?",
+   "options": [
+    "Acute aortic regurgitation",
+    "Tension pneumothorax",
+    "Right ventricular infarction",
+    "Cardiac tamponade",
+    "Haemothorax from rupture"
+   ],
+   "answer": 3,
+   "why": "A Stanford type A dissection can rupture backwards into the pericardium, and the resulting haemopericardium is a leading cause of death. Hypotension with a raised JVP and pulsus paradoxus means tamponade. Treat it by resuscitating and taking him straight to theatre for cardiothoracic surgery, and do not give a beta blocker or try to lower his BP.",
+   "notes": [
+    "Acute aortic regurgitation causes hypotension with pulmonary oedema and an early diastolic murmur, not pulsus paradoxus.",
+    "Tension pneumothorax needs a pleural air leak, which a dissection does not cause, and it would give absent breath sounds on one side and a shifted trachea.",
+    "Right ventricular infarction can give a raised JVP and hypotension, but pulsus paradoxus points to pericardial compression, and dissecting into the right coronary is less common.",
+    null,
+    "A haemothorax from rupture causes hypovolaemic shock with collapsed neck veins, not distended ones."
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "topics": [
+    "Cardiothoracic Surgery",
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-c8c8e71f",
    "stem": "A 41-year-old woman sees her general practitioner because she has not opened her bowels for 6 days. Nine days ago she had an uncomplicated laparoscopic appendicectomy. She went home on oxycodone 5 mg up to four times daily, which she still takes three times a day. She was given no bowel medicine. Her last stools were small and hard. She had to strain, passing them caused sharp anal pain, and there was bright red blood on the toilet paper. She is passing flatus and has no vomiting or abdominal pain. She takes ferrous sulfate for iron deficiency. Temperature is 36.8 °C, pulse 78/min and blood pressure 120/78 mm Hg. Her abdomen is soft and non-tender, and bowel sounds are normal. Anal inspection shows a posterior midline fissure. Digital rectal examination finds hard stool and no mass. Haemoglobin is 124 g/L (115–165), ferritin 20 µg/L (30–300), corrected calcium 2.38 mmol/L (2.10–2.60) and TSH 1.4 mIU/L (0.5–4.0). The opioid will be weaned and simple analgesia started. Which of the following is the most appropriate laxative treatment?",
    "options": [
@@ -2518,6 +4547,37 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-c8e66c72",
+   "stem": "A 27-year-old man presents to his GP with 14 hours of periumbilical pain, anorexia and vomiting. Temperature is 38.3 °C, heart rate 112/min, with rebound tenderness at McBurney's point. Most appropriate next step?",
+   "options": [
+    "Outpatient CT abdomen",
+    "Oral antibiotics, review tomorrow",
+    "Review in 24 hours",
+    "Urgent ED referral",
+    "Outpatient abdominal ultrasound"
+   ],
+   "answer": 3,
+   "why": "Periumbilical pain with anorexia, vomiting, fever, tachycardia and localised peritonism at McBurney's point points to acute appendicitis, which needs same-day referral to ED for surgical review. The GP should phone a handover, keep him nil by mouth, give analgesia (it does not mask the diagnosis) and arrange safe transport.",
+   "notes": [
+    "Imaging is arranged in hospital as part of surgical assessment; ordering it as an outpatient delays treatment and raises the risk of perforation.",
+    "Non-operative treatment of appendicitis uses IV antibiotics in hospital after imaging, and oral antibiotics in general practice are not appropriate with peritonism.",
+    "Fever, tachycardia and rebound tenderness show established inflammation, and waiting 24 hours risks perforation and peritonitis.",
+    null,
+    "Outpatient ultrasound delays definitive care and cannot reliably exclude appendicitis in an adult man with peritonism."
+   ],
+   "topic": "General Practice",
+   "topics": [
+    "General Practice",
+    "Gastroenterology",
+    "General Surgery"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-cac4a8ab",
@@ -2704,6 +4764,37 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-d5765249",
+   "stem": "A 31-year-old man from the Philippines has 8 weeks of productive cough, night sweats and 6 kg weight loss. Chest X-ray shows left upper lobe cavitation. Test most likely to confirm diagnosis?",
+   "options": [
+    "Interferon-gamma release assay",
+    "Tuberculin skin test",
+    "CT chest with contrast",
+    "Bronchoscopy with lavage",
+    "Sputum culture and NAAT"
+   ],
+   "answer": 4,
+   "why": "A chronic productive cough with night sweats, weight loss, birth in a high-TB country and upper lobe cavitation points to active pulmonary TB. The diagnosis is confirmed by three sputum samples sent for AFB microscopy, mycobacterial culture and NAAT. NAAT gives a fast result and detects rifampicin resistance, and culture provides full drug susceptibility testing.",
+   "notes": [
+    "An IGRA detects immune sensitisation to TB, not active disease, so it cannot confirm active TB and may be negative in active TB.",
+    "A tuberculin skin test cannot tell latent infection from active disease and is less specific after BCG vaccination, which is common in people born in the Philippines.",
+    "CT shows the extent of disease in more detail but cannot identify the organism, so it does not confirm TB.",
+    "Bronchoscopy is kept for patients who cannot produce sputum or whose sputum is negative, and this man has a productive cough.",
+    null
+   ],
+   "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Respiratory Medicine",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-d58bd69f",
    "stem": "A 71-year-old woman presents to her general practitioner with 3 days of cough productive of green sputum, fevers, and left-sided chest pain that is worse on inspiration. Six days ago she was discharged from hospital after a 4-day admission to investigate syncope. On the ward she walked daily and received prophylactic enoxaparin. She has hypertension treated with amlodipine and has never smoked. She has no haemoptysis and no history of venous thromboembolism or cancer. Her temperature is 38.5 °C, pulse 106/min, respirations 24/min, blood pressure 132/78 mm Hg, and SpO2 93% on room air. There is dullness and bronchial breathing at the left base. Both calves are soft and nontender, and there is no leg swelling. A chest X-ray shows new consolidation in the left lower lobe. Results: white cell count 15.2 x10^9/L (4.0 to 11.0), CRP 151 mg/L (less than 5), urea 7.9 mmol/L (2.5 to 7.5), D-dimer 0.63 mg/L FEU (less than 0.50). Which of the following is the most appropriate next step in evaluating her for pulmonary embolism?",
    "options": [
@@ -2827,6 +4918,98 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-d9949cc2",
+   "stem": "A 46-year-old man has had painful swelling of both wrists and MCP joints for 3 months, with 90 minutes of morning stiffness. His DIP joints are spared, and his skin and nails are normal. Which blood test best confirms the diagnosis?",
+   "options": [
+    "Rheumatoid factor",
+    "Anti-CCP antibodies",
+    "Antinuclear antibody",
+    "HLA-B27 typing",
+    "Serum uric acid"
+   ],
+   "answer": 1,
+   "why": "He has symmetrical inflammatory polyarthritis of the wrists and MCPs with long morning stiffness and spared DIPs, which points to rheumatoid arthritis. Anti-CCP antibodies are about 95% specific for RA, so they are the best test to confirm it. A strongly positive result also predicts erosive disease.",
+   "notes": [
+    "Rheumatoid factor is sensitive but not specific, because it is also positive in infection, Sjögren's, older people and other connective tissue diseases.",
+    null,
+    "ANA is used to screen for SLE, and his history has no lupus features; ANA is also often positive in RA, so it cannot confirm it.",
+    "HLA-B27 is linked with spondyloarthritis, which usually causes axial or asymmetrical large-joint disease rather than symmetrical small-joint synovitis.",
+    "Serum urate does not confirm gout, which usually causes acute attacks in single joints, and urate is often normal during an attack."
+   ],
+   "topic": "Rheumatology",
+   "topics": [
+    "Rheumatology",
+    "Orthopaedics"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-d9fdc48b",
+   "stem": "A 34-year-old man has four months of bloating, pale loose stools and fatigue. Ferritin is 8 microgram/L; tTG-IgA is 96 U/mL with normal total IgA. Most appropriate next step?",
+   "options": [
+    "Start gluten-free diet",
+    "Refer for duodenal biopsy",
+    "Repeat tTG-IgA in 3 months",
+    "HLA-DQ2/DQ8 genotyping",
+    "Colonoscopy with ileal biopsy"
+   ],
+   "answer": 1,
+   "why": "He has malabsorption, iron deficiency and a strongly positive tTG-IgA with normal total IgA. In Australian adults, coeliac disease must be confirmed with duodenal biopsies at gastroscopy while the patient is still eating gluten. The gluten-free diet starts only after the diagnosis is confirmed.",
+   "notes": [
+    "Starting a gluten-free diet before biopsy can heal the villi and make the histology falsely normal, so the diagnosis can no longer be confirmed.",
+    null,
+    "Waiting to repeat strongly positive serology delays the diagnosis and adds nothing, because the result is already reliable with a normal total IgA.",
+    "HLA typing is mainly useful for ruling coeliac disease out because of its high negative predictive value; a positive result cannot confirm the diagnosis.",
+    "Colonoscopy looks at the colon and terminal ileum, not the proximal small bowel where coeliac disease causes damage, so it is not the next step here."
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Dermatology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-db31fb48",
+   "stem": "A 62-year-old female smoker with type 2 diabetes presents to vascular clinic with 3 weeks of forefoot rest pain eased by dependency. No pedal pulses, dry gangrene of three toes, ABI 0.28. Most likely cause of death within 5 years?",
+   "options": [
+    "Septic foot gangrene",
+    "Pulmonary embolism",
+    "Lung cancer",
+    "Ruptured aortic aneurysm",
+    "Myocardial infarction"
+   ],
+   "answer": 4,
+   "why": "Chronic limb-threatening ischaemia is a marker of widespread atherosclerosis. Up to half of patients die within 5 years, mostly from coronary and cerebrovascular events. That is why an antiplatelet, high-intensity statin, BP and glucose control and stopping smoking are part of her treatment, alongside revascularisation.",
+   "notes": [
+    "Dry gangrene can become wet and cause sepsis, but this is a threat to the limb and a less common cause of death than coronary events.",
+    "She is less mobile, but PE causes far fewer deaths in PAD than heart attack or stroke.",
+    "Smoking raises her risk of lung cancer, but over 5 years her risk of dying from heart disease is much higher.",
+    "Aortic aneurysm is linked to PAD, but rupture causes only a small share of deaths, and fewer in women.",
+    null
+   ],
+   "topic": "Vascular Surgery",
+   "topics": [
+    "Vascular Surgery",
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-defb8d10",
    "stem": "A 33-year-old man who works as a mechanic sees his general practitioner because of tiredness for 4 months. He drinks about 4 L of water a day. He gets up three times a night to pass urine, even when he avoids drinks in the evening. He has gained 15 kg over 2 years and has not lost weight recently. He has hypertension treated with perindopril and takes no other medicines. He smokes 15 cigarettes a day. His father has type 2 diabetes. His temperature is 36.7 °C, pulse 82/min, blood pressure 138/86 mm Hg and respiratory rate 14/min. His BMI is 36 kg/m². He has velvety, darkened skin in both axillae and looks well hydrated. Urine dipstick shows glucose 3+, ketones negative, protein negative and specific gravity 1.025. A random fingerprick reading on the practice meter is 15.2 mmol/L. Which of the following is the most appropriate next investigation to confirm the diagnosis?",
    "options": [
@@ -2885,6 +5068,37 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-e36f17aa",
+   "stem": "A 72-year-old man who smokes has 5 months of worsening breathlessness. Erect chest X-ray shows a dense right opacity with a concave meniscus reaching the 2nd rib. The trachea is deviated left. Most likely diagnosis?",
+   "options": [
+    "Right lung collapse",
+    "Right lobar consolidation",
+    "Previous right pneumonectomy",
+    "Large pleural effusion",
+    "Raised right hemidiaphragm"
+   ],
+   "answer": 3,
+   "why": "A dense opacity with a concave meniscus that pushes the trachea and mediastinum to the other side is a large pleural effusion: the fluid takes up space. Anything that causes volume loss on the right, such as collapse or pneumonectomy, would pull the trachea towards the opacity instead. In a heavy smoker, this calls for ultrasound-guided pleural aspiration and a CT to look for malignancy.",
+   "notes": [
+    "Collapse causes volume loss, so the trachea would be pulled towards the right, not pushed away to the left.",
+    "Consolidation does not change lung volume, so the trachea would stay central. It usually shows air bronchograms rather than a meniscus.",
+    "After a pneumonectomy the mediastinum moves towards the empty hemithorax, so the trachea would shift right.",
+    null,
+    "A raised hemidiaphragm keeps its domed outline, has no meniscus, does not reach the 2nd rib and does not push the trachea away."
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Emergency Medicine",
+    "Oncology"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-e3b1c7c7",
@@ -3034,6 +5248,129 @@
    "source": "ai",
    "year": 3,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-e70060c2",
+   "stem": "A 52-year-old woman has fever and 30 hours of constant right upper quadrant pain. Ultrasound confirms calculous cholecystitis; common bile duct 5 mm. ALP 480 U/L, bilirubin 24 µmol/L. Most appropriate next investigation?",
+   "options": [
+    "ERCP",
+    "HIDA scan",
+    "MRCP",
+    "CT abdomen",
+    "Repeat ultrasound"
+   ],
+   "answer": 2,
+   "why": "A blocked cystic duct alone usually causes only mild LFT changes. An ALP more than 4 times the upper limit means a common bile duct stone is possible, even though the bilirubin is only slightly raised and the duct is not dilated, because partial obstruction often looks like this. This puts her at intermediate risk, so she needs non-invasive duct imaging with MRCP (or endoscopic ultrasound) before cholecystectomy.",
+   "notes": [
+    "ERCP carries a risk of pancreatitis and bleeding, so it is kept for a confirmed duct stone or cholangitis, and neither has been shown here.",
+    "Ultrasound has already confirmed cholecystitis, and a HIDA scan cannot reliably show stones in the common bile duct.",
+    null,
+    "CT misses many bile duct stones and adds radiation without answering the question.",
+    "Repeat ultrasound sees the distal common bile duct poorly and is no better at finding a stone than the first scan."
+   ],
+   "topic": "General Surgery",
+   "topics": [
+    "General Surgery",
+    "Gastroenterology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-e7483f25",
+   "stem": "A 34-year-old man has 6 weeks of burning epigastric pain waking him at night. He takes no medications and has no weight loss, vomiting or melaena. Haemoglobin is 146 g/L. Most appropriate next investigation?",
+   "options": [
+    "Gastroscopy with biopsy",
+    "H. pylori serology",
+    "Urea breath test",
+    "Upper abdominal ultrasound",
+    "Serum lipase"
+   ],
+   "answer": 2,
+   "why": "This young man has dyspepsia that sounds like a duodenal ulcer, takes no NSAIDs and has no ALARM features. eTG recommends a test-and-treat approach in this case: a non-invasive test for current H. pylori infection, either a urea breath test or a faecal antigen test, done when he has been off PPIs and antibiotics.",
+   "notes": [
+    "Gastroscopy is kept for patients with ALARM features, older patients with new symptoms, or symptoms that persist after test and treat, and he has none of these.",
+    "Serology stays positive after the infection has been cleared, so it cannot show current infection and is not recommended.",
+    null,
+    "Ultrasound looks for gallstones, but burning nocturnal pain without colic or right upper quadrant features does not point to biliary disease.",
+    "Lipase is for acute pancreatitis, which would cause severe constant pain going through to the back, not weeks of intermittent burning nocturnal pain."
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-e811a65b",
+   "stem": "A 71-year-old woman with diabetes has 40 minutes of central chest pain at rest despite aspirin, sublingual and intravenous GTN, and morphine. ECG shows no ST elevation; first troponin is normal. Most appropriate next step?",
+   "options": [
+    "Urgent coronary angiography",
+    "Tenecteplase thrombolysis",
+    "Serial hs-troponin testing",
+    "CT coronary angiography",
+    "Outpatient exercise stress testing"
+   ],
+   "answer": 0,
+   "why": "Ongoing ischaemic pain that does not respond to nitrates and opioid makes this suspected NSTEACS very high risk under the Heart Foundation/CSANZ guideline, even with a normal ECG and a normal first troponin. Very high-risk patients need invasive coronary angiography within 2 hours, so cardiology should be contacted now.",
+   "notes": [
+    null,
+    "Thrombolysis is only for STEMI and does not help in non-ST-elevation ACS.",
+    "Serial troponins are still needed, but waiting for them delays angiography, which very high-risk features require now.",
+    "CT coronary angiography is for low to intermediate risk stable patients, not for ongoing ischaemia, and it cannot open a blocked artery.",
+    "Stress testing is unsafe during ongoing pain and is only for low-risk patients once ACS has been ruled out."
+   ],
+   "topic": "Cardiology",
+   "topics": [
+    "Cardiology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-e87e3c21",
+   "stem": "A 63-year-old man has jaundice, right upper quadrant pain, fever and new confusion. After IV fluids and antibiotics, BP is 94/60 mmHg. Ultrasound: dilated common bile duct, distal stone. Most appropriate next step?",
+   "options": [
+    "Emergency cholecystectomy",
+    "Elective MRCP",
+    "Urgent ERCP",
+    "Percutaneous cholecystostomy",
+    "Antibiotics alone, observe"
+   ],
+   "answer": 2,
+   "why": "Jaundice, pain, fever, confusion and hypotension make up Reynolds' pentad. This is severe acute cholangitis from an obstructing common bile duct stone. Once sepsis resuscitation and IV antibiotics have started, he needs urgent biliary drainage by ERCP for source control, with cholecystectomy planned after he recovers.",
+   "notes": [
+    "Emergency cholecystectomy in a septic, unstable patient does not clear the duct stone; it is done after he has recovered.",
+    "MRCP only images the duct, which ultrasound has already shown is blocked, and it would delay drainage.",
+    null,
+    "Cholecystostomy drains the gallbladder, not the obstructed common bile duct, so it is used for high-risk acute cholecystitis.",
+    "Antibiotics alone leave the duct obstructed, and organ dysfunction in severe cholangitis means he needs urgent drainage."
+   ],
+   "topic": "Gastrointestinal Surgery",
+   "topics": [
+    "Gastrointestinal Surgery",
+    "Gastroenterology",
+    "General Surgery",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-e8bbd23c",
@@ -3189,6 +5526,36 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-f027011d",
+   "stem": "A 29-year-old man with new HIV, viral load 120,000 copies/mL, starts ART. His HIV-negative partner asks when condomless sex will not transmit HIV. When is transmission prevented?",
+   "options": [
+    "Undetectable for 6 months",
+    "Four weeks of ART",
+    "CD4 count above 500/µL",
+    "Single undetectable viral load",
+    "Viral load under 10,000/mL"
+   ],
+   "answer": 0,
+   "why": "Under Undetectable = Untransmittable (U=U), there is effectively no sexual transmission once the viral load has stayed below 200 copies/mL for at least 6 months on ART. Until then, the partner needs other protection, such as PrEP or condoms. Viral load, not CD4 count, is the measure of how infectious he is.",
+   "notes": [
+    null,
+    "Taking ART for a set time does not prove suppression, and at 4 weeks the viral load is often still detectable.",
+    "CD4 count shows immune recovery, not how infectious he is, and suppression can happen at any CD4 level.",
+    "One undetectable result is not enough; U=U needs suppression sustained for 6 months.",
+    "A viral load of thousands of copies/mL can still transmit HIV; U=U applies only below 200 copies/mL, held for 6 months."
+   ],
+   "topic": "Sexual Health",
+   "topics": [
+    "Sexual Health",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-f2021b21",
    "stem": "A 24-year-old man sees his general practitioner on the afternoon after his first half marathon (21 km). His longest previous run was 10 km, three weeks ago. Over the final 6 km he became gradually more short of breath, slowed to a walk, and felt back to normal within 15 minutes of finishing. He had no chest pain, palpitations, light-headedness, syncope, wheeze, cough, throat tightness or haemoptysis. He has no history of asthma or atopy, and no recent surgery, travel or immobilisation. He takes no medicines and does not smoke. No family member has died suddenly of a cardiac cause. He is 183 cm tall and weighs 75 kg. Temperature is 36.6 °C, pulse 64/min and regular, respirations 14/min, blood pressure 118/72 mm Hg, and SpO2 99% on room air. Cardiovascular and respiratory examinations are unremarkable, with no calf swelling or tenderness. A 12-lead ECG shows sinus rhythm with no abnormalities. Spirometry shows FEV1/FVC 0.85 (LLN 0.72) and FEV1 101% predicted, with a change of +100 mL (2%) after salbutamol. Which of the following is the most appropriate next step in management?",
    "options": [
@@ -3247,6 +5614,68 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-fa7f6398",
+   "stem": "A 78-year-old man is reviewed before discharge after a painless maroon rectal bleed that stopped spontaneously. Colonoscopy shows sigmoid diverticula only. He takes ibuprofen daily for knee osteoarthritis. Which advice most reduces his risk of rebleeding?",
+   "options": [
+    "Add omeprazole",
+    "Avoid nuts and seeds",
+    "Start low-residue diet",
+    "Oral tranexamic acid",
+    "Stop ibuprofen"
+   ],
+   "answer": 4,
+   "why": "Diverticular bleeding usually stops by itself but often recurs, and NSAIDs are the main risk factor you can change, so he should stop ibuprofen and use paracetamol instead. A high-fibre diet with good fluid intake and treatment of constipation are also advised.",
+   "notes": [
+    "A proton pump inhibitor protects the upper GI tract but does not protect against NSAID-related bleeding in the colon.",
+    "Avoiding nuts, seeds and popcorn is an outdated myth with no evidence that it lowers the risk of bleeding or diverticulitis.",
+    "A low-residue diet worsens constipation, whereas a high-fibre diet is recommended for diverticular disease.",
+    "Tranexamic acid has no proven benefit in GI bleeding, adds clot risk, and is not used long term to prevent recurrence.",
+    null
+   ],
+   "topic": "Gastroenterology",
+   "topics": [
+    "Gastroenterology",
+    "Emergency Medicine",
+    "General Surgery"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-fbe56f11",
+   "stem": "A 48-year-old woman has had three spontaneous attacks of rotatory vertigo over 4 months, each lasting 3 to 6 hours, with fluctuating left-ear fullness and tinnitus. Audiometry shows left low-frequency sensorineural loss. Which drug is most appropriate for her acute attacks?",
+   "options": [
+    "Prochlorperazine",
+    "Betahistine",
+    "Hydrochlorothiazide",
+    "Intratympanic gentamicin",
+    "Prednisolone"
+   ],
+   "answer": 0,
+   "why": "Her history meets the criteria for definite Ménière's disease: two or more spontaneous attacks of vertigo lasting 20 minutes to 12 hours, a documented low-frequency sensorineural loss, and fluctuating symptoms in the same ear. eTG advises a short course of a vestibular suppressant antiemetic such as prochlorperazine for acute attacks, along with ENT referral and advice to cut down on salt, caffeine and alcohol.",
+   "notes": [
+    null,
+    "Betahistine is sometimes used to try to prevent attacks, with weak evidence, and it does not relieve an attack in progress.",
+    "A thiazide diuretic is a possible preventive treatment started by a specialist, and it does nothing for acute vertigo.",
+    "Intratympanic gentamicin destroys vestibular function and is kept for ENT management of disabling attacks that have not responded to other treatment.",
+    "Oral corticosteroids are used for sudden sensorineural hearing loss, not as routine treatment of Ménière's vertigo attacks."
+   ],
+   "topic": "Otorhinolaryngology",
+   "topics": [
+    "Otorhinolaryngology",
+    "Neurology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {
@@ -3366,6 +5795,303 @@
    "source": "ai",
    "year": 3,
    "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-116",
+   "stem": "A 17-year-old boy referred to a health center referring to a 39-degree fever of 48 hours of evolution with a sore throat. The family doctor consults the history of the patient where it does not cost any previous illness. The patient did not report cough and the examination performed by his family doctor reveals the presence of bilateral whitish tonsillar exudate and anterior cervical adenopathies enlarged and painful on palpation. What would be the treatment of choice for this patient?",
+   "options": [
+    "Penicillin V or amoxicillin.",
+    "Amoxicillin clavulanic.",
+    "Doxycycline",
+    "Ciprofloxacin",
+    "Metronidazole"
+   ],
+   "answer": 0,
+   "topic": "Infectious Diseases",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-120",
+   "stem": "A 16-year-old boy who consulted due to pultulose tonsillitis, fever up to 38.5ºC, painful cervical adenopathies, non-pruritic macular exanthema in the thorax and mild hepatosplenomegaly, 4-5 days old. The Paul-Bunnell test and the IgM for the Epstein-Barr virus are positive. During his admission he develops a continuous fever of up to 40ºC, pancytopenia, icteric hepatitis and coagulopathy of progressive intensity. One week after admission, he was transferred to the ICU due to confusion and respiratory failure. The blood cultures and a urine culture are negative, the CSF is normal and the chest plate does not show infiltrates. Procalcitonin is normal, but PCR and ferritin are very high. From the statements below, what would be the most correct diagnostic and therapeutic approach?",
+   "options": [
+    "It has a bacterial sepsis of undetermined origin and should be administered ceftriaxone and supportive treatment.",
+    "It has a bacterial sepsis of undetermined origin and should be administered vancomycin, ceftacidime and supportive treatment.",
+    "It is an infectious mononucleosis of severe course and glucocorticoids must be administered.",
+    "It is an infectious mononucleosis of severe course and treatment with acyclovir should be started.",
+    "Perform a biopsy / aspirate of bone marrow and if hemophagocytosis is confirmed, start treatment with immunosuppressants."
+   ],
+   "answer": 4,
+   "topic": "Haematology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2013-126",
+   "stem": "A 38-year-old man consulted for dyspnea and hemoptysis. Blood tests have creatinine 7 mg / dl, urea 250 mg / dl and anti-MBG (anti-glomerular basement membrane antibodies) positive high titer. A renal biopsy was performed, showing crescents in 75% of the glomeruli, and in the immunofluorescence a linear Ig deposition pattern appeared. Which of the following is the correct answer?",
+   "options": [
+    "It is an Ig A Nephropathy with acute renal failure.",
+    "The performance of plasmapheresis would be indicated.",
+    "It is a membranous glomerulonephritis.",
+    "Mycophenolate mofetil is the initial treatment of choice.",
+    "Glomerular involvement is caused by the presence of circulating immune complexes."
+   ],
+   "answer": 1,
+   "topic": "Nephrology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-130",
+   "stem": "A 26-year-old patient with no prior medical-surgical history came to the emergency room for dyspnea of ​​15 days of evolution. No findings of interest were detected on the physical examination except a nodule of hard consistency in the left testicle. A chest x-ray is performed, showing multiple pulmonary nodules in \"balloon release\". His analytical highlights a B-hCG of 30,000 mIU / ml. What do you think is the most probable origin of the pathology of this picture?",
+   "options": [
+    "Seminoma",
+    "Renal angiomyolipoma.",
+    "Wilms tumor.",
+    "Testicular choriocarcinoma.",
+    "Non-Hodgkin lymphoma."
+   ],
+   "answer": 3,
+   "topic": "Urology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-131",
+   "stem": "Before a 49-year-old man, asymptomatic, with a family history of a father who died of prostate cancer, a PSA (Specific Prostate Antigen) of 5.9 ng / ml was identified in a routine company control, with a PSA ratio free / Total PSA of 11% and that in a digital rectal examination there is an increase in consistency in the right prostatic lobe, what is the following clinical indication?",
+   "options": [
+    "Ask the patient to perform a transrectal ultrasound and prostate biopsy.",
+    "Perform a abdominopelvic CT scan.",
+    "Start treatment with 5 alpha reductase inhibitors to halve PSA levels.",
+    "Start combined treatment of LHRH analogues and antiandrogens.",
+    "Perform a bone scan."
+   ],
+   "answer": 0,
+   "topic": "Urology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-133",
+   "stem": "A 55-year-old asthmatic patient goes to the ER with an exacerbation. One hour after the administration of supplemental oxygen and two nebulizations of salbutamol the patient does not improve. On examination, he breathed at 42 rpm with supraclavicular drainage and presented disseminated inspiratory and expiratory wheezing. The peak flow has dropped from 310 to 220 L / min. A gasometry extracted with oxygen at 28% shows a pO2 of 54 mmHg and a pCO2 of 35 mmHg. Which of the following attitudes seems LESS indicated?",
+   "options": [
+    "Increase oxygen flow.",
+    "Administer 80 mg of methylprednisolone iv.",
+    "Nebulize ipratropium bromide together with salbutamol every 20 minutes.",
+    "Administer intravenous magnesium",
+    "Start non-invasive mechanical ventilation."
+   ],
+   "answer": 4,
+   "topic": "Emergency Medicine",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-149",
+   "stem": "A 76-year-old man consulted for cognitive deterioration, slowness and awkwardness of movements, of eight months of evolution. The family reported that the patient had visual hallucinations, so his Primary Care physician prescribed low doses of risperidone, with a significant worsening of motor status. In view of these data, what is the most likely diagnosis?",
+   "options": [
+    "Alzheimer disease.",
+    "Dementia due to Lewy bodies.",
+    "Frontotemporal dementia.",
+    "Vascular dementia",
+    "Occasional Creutzfeldt-Jakob disease."
+   ],
+   "answer": 1,
+   "topic": "Neurology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-180",
+   "stem": "A 4-year-old boy comes to the Health Center who, 5 minutes earlier, begins with angioedema on his face, conjunctivitis, nasal congestion and hoarseness, coinciding with the intake of a spoonful of yogurt that was mistakenly given him at school. Among the background is diagnosed with cow's milk protein allergy. The examination revealed mild hypotension, heart rate 110 beats / min, Sat O2 93%, pale and somewhat sweaty, with disseminated wheezing. What is the first treatment of choice?",
+   "options": [
+    "Induce vomiting.",
+    "Adrenaline subcutaneous 1/1000.",
+    "Adrenaline 1/1000 intramuscular.",
+    "Intramuscular methylprednisone.",
+    "Nebulized salbutamol."
+   ],
+   "answer": 2,
+   "topic": "Paediatrics",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-184",
+   "stem": "A 32-year-old woman asks for preconceptional advice. The patient reports that she underwent cervical conization due to a high-grade intraepithelial lesion (H-SIL) and that she subsequently suffered three miscarriages between 20 and 22 weeks of gestation. He does not have living children. On all three occasions he went to the Emergency Department with a sensation of weight in the hypogastrium and there it was found that he arrived with a dilatation of 8 cm and with prominent amniotic membranes. I had never felt contractions. What advice would you give for the next pregnancy?",
+   "options": [
+    "I would recommend prophylaxis with atosiban orally throughout the pregnancy.",
+    "It would offer lung maturation with corticosteroids from 19-20 weeks of gestation.",
+    "I would recommend performing a cervical cerclage programmed from the 14th week of gestation.",
+    "I would advise you not to try more pregnancies because of the high risk of recurrence.",
+    "I would recommend resorting to assisted reproduction techniques."
+   ],
+   "answer": 2,
+   "topic": "Obstetrics",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2015-81",
+   "stem": "A 30-year-old woman came to the clinic with anxiety, loss of about 6 kg of weight and sensation of \"nervousness\" in the last three months. Physical examination revealed tachycardia, hyperreflexia and absence of goiter. In the analytical carried out, TSH values ​​are <0.01 microU / mL, T4 is elevated and thyroglobulin levels are lowered. When a scan is performed, an absence of uptake is detected in the thyroid region. What do you think is the most likely diagnosis ?:",
+   "options": [
+    "Factitious thyrotoxicosis.",
+    "Hyperthyroidism due to Graves' disease.",
+    "Ovarian teratoma (ovarian struma).",
+    "Subacute thyroiditis"
+   ],
+   "answer": 0,
+   "topic": "Endocrinology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2015-83",
+   "stem": "A 49-year-old man consulted for intense polyuria and polydipsia and involuntary loss of 10 kg of weight and was diagnosed with diabetes mellitus by a plasma glycemia of 322 mg / dL and a glycosylated hemoglobin of 9.8%. Your doctor gives you dietary recommendations, the convenience of physical exercise, and starts treatment with metformin 850 mg / 12 hours and glimepiride 6 mg / day. In the following weeks the glycemic controls are progressively reduced. At 4 months the glycemia is 94 mg / dL and the HbA1c is 5.9%. The patient complains of frequent episodes of dizziness, epigastric pain, blurred vision, sweating and tremor, which improve eating something and that occur especially at the end of the morning and at the end of the afternoon. What modification would you propose in your treatment?",
+   "options": [
+    "Check the distribution of carbohydrates in your diet.",
+    "Suspend metformin.",
+    "Suspend the sulfonylurea.",
+    "Replace metformin with a DPP4 inhibitor."
+   ],
+   "answer": 2,
+   "topic": "Endocrinology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2015-86",
+   "stem": "We refer from ophthalmology to a 31-year-old man who consulted for vision loss and progressive headache. On physical examination, a temporal hemianopsia was observed and in pituitary magnetic resonance a tumor measuring 35 x 30 x 20 mm compressed the chiasm and cavernous sinus. The results of the functional study are cortisol 14 microg / dL, TSH 1.4 microU / mL, T4L 1.2 ng / dL, prolactin 480 microg / L (vn <15), testosterone 160 ng / dL (vn 300-1200) , FSH 1,2 U / L (vn 5-15) and LH 2 U / L (vn 3-15). What is the initial therapeutic approach ?:",
+   "options": [
+    "Dopamine agonists.",
+    "Transsphenoidal surgery.",
+    "External radiotherapy or radiosurgery.",
+    "Treatment of hypogonadotropic hypogonadism with testosterone."
+   ],
+   "answer": 0,
+   "topic": "Endocrinology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2015-87",
+   "stem": "In a hospitalized patient who is unable to feed orally for more than 6 days, in which of the following clinical situations do we necessarily use parenteral nutrition?",
+   "options": [
+    "Cardioembolic stroke with complete neurological dysphagia.",
+    "Cachexia due to chronic empyema in an immunosuppressed patient.",
+    "Prolonged paralytic ileus.",
+    "Advanced Alzheimer's disease with serious risk of bronchoaspiration."
+   ],
+   "answer": 2,
+   "topic": "Gastroenterology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 1
+  },
+  {
+   "id": "headqa-2016-126",
+   "stem": "What type of economic analysis is used if we compare a generic medicine with the reference medicine ?:",
+   "options": [
+    "Cost minimization analysis.",
+    "Cost-effectiveness analysis.",
+    "Cost-benefit analysis.",
+    "Cost-utility analysis."
+   ],
+   "answer": 0,
+   "topic": "Public Health",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 1
+  },
+  {
+   "id": "headqa-2016-92",
+   "stem": "Which of the following is considered a disease due to a lysosomal deposit?",
+   "options": [
+    "Primary homozygous hemochromatosis.",
+    "Acute intermittent porphyria.",
+    "Lesch-Nyhan syndrome.",
+    "Fabry disease."
+   ],
+   "answer": 3,
+   "topic": "Pathology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 1
+  },
+  {
+   "id": "headqa-2016-96",
+   "stem": "In which of the following types of leukemia is the use of Imatinib the key therapeutic element for long-term disease control?",
+   "options": [
+    "Acute myeloblastic leukemia.",
+    "Chronic myeloid leukemia",
+    "Chronic prolymphocytic leukemia.",
+    "Chronic lymphocytic leukemia."
+   ],
+   "answer": 1,
+   "topic": "Haematology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 1
   },
   {
    "id": "medqa-us4-test-0004",
