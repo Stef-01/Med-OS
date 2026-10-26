@@ -66,7 +66,7 @@ const panel = () => dlg()?.querySelector('.os-libp');
 function wire(el) {
   el.addEventListener('submit', e => e.preventDefault());   /* Enter in Add a friend clicks its button, which does the work */
   el.addEventListener('click', e => { const b = e.target.closest('[data-lib]'); if (b && !b.disabled && el.contains(b)) act(b.dataset.lib, b, e); });
-  el.addEventListener('input', e => { if (e.target.matches?.('[data-lib-note]')) { clearTimeout(saveNote.t); const v = e.target.value; saveNote.t = setTimeout(() => saveNote(v), 400); return; } if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
+  el.addEventListener('input', e => { if (e.target.name === 'notes') { V.up.notes = e.target.value; const b = panel()?.querySelector('[data-lib="copyprompt"] span'); if (b) b.textContent = V.up.notes.trim() ? 'Copy the prompt with my notes' : 'Copy the prompt'; return; } if (e.target.matches?.('[data-lib-note]')) { clearTimeout(saveNote.t); const v = e.target.value; saveNote.t = setTimeout(() => saveNote(v), 400); return; } if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
   el.addEventListener('change', e => {
     if (e.target.name === 'file') readFile(e.target);
     if (e.target.name === 'sdeck') { V.st.deck = e.target.value; V.st.topic = ''; V.st.cat = ''; V.st.year = 0; paint(); }
@@ -131,8 +131,9 @@ function libraryHtml() {
 function uploadHtml() {
   const names = V.lib.decks.map(d => d.name), deck = V.up.deck || names[0] || 'My questions';
   return `<ol class="os-libsteps">
-    <li><h3>Ask ChatGPT</h3><p>Copy the prompt, paste it into ChatGPT, and add your notes, lecture slides or questions at the end. It answers in the format Med-OS reads, each question tagged with its specialty and kind.</p>
-      <div class="os-libacts"><button class="os-btn os-primary" data-lib="copyprompt">${icon('clipboardCheck')}<span>Copy the prompt</span></button>
+    <li><h3>Ask ChatGPT</h3><p>Paste your notes, a lecture or a list of topics here (optional), copy the prompt and paste it into ChatGPT. It answers in the format Med-OS reads, each question tagged with its specialty, kind, year and difficulty.</p>
+      <label class="os-setf"><span>Your notes (optional)</span><textarea name="notes" rows="3" placeholder="e.g. Croup, bronchiolitis and the febrile infant: my week 3 paeds notes…">${esc(V.up.notes || '')}</textarea></label>
+      <div class="os-libacts"><button class="os-btn os-primary" data-lib="copyprompt">${icon('clipboardCheck')}<span>${V.up.notes?.trim() ? 'Copy the prompt with my notes' : 'Copy the prompt'}</span></button>
       <a class="os-btn" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Open ChatGPT</a></div>
       <details class="os-libprompt"><summary>See the prompt</summary><textarea readonly rows="8" aria-label="The prompt for ChatGPT">${esc(chatPrompt())}</textarea></details></li>
     <li><h3>Paste what it gives you</h3>
@@ -140,6 +141,7 @@ function uploadHtml() {
       <label class="os-libfile"><input type="file" name="file" accept=".json,.csv,.txt,application/json,text/csv,text/plain"><span>${icon('plus')}Or choose a file</span></label></li>
     <li><h3>Check and save</h3><div class="os-libres" aria-live="polite"></div>
       <label class="os-setf"><span>Deck</span><input name="deck" maxlength="${LIMITS.deckName}" list="os-libdecknames" value="${esc(deck)}" autocomplete="off"></label>
+      ${names.length ? `<div class="os-libchips os-libdeckchips" aria-label="Your decks">${names.slice(0, 6).map(n => `<button class="os-chip${n === deck ? ' on os-still' : ''}" data-lib="deckpick" data-v="${esc(n)}">${esc(n)}</button>`).join('')}</div>` : ''}
       <datalist id="os-libdecknames">${names.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
       <button class="os-btn os-btn--lg os-primary os-libsave" data-lib="save" disabled>Save</button></li>
   </ol>`;
@@ -155,9 +157,10 @@ function paintUploadResult() {
   const by = layers(r.ready).map(t => `${t.topic} ${t.count}`).join(' · ');
   const row = x => `<li><span class="os-libn">${x.n}</span><div><p>${esc(x.stem || '(no stem)')}</p><ul>${x.problems.map(p2 => `<li><span class="os-mcqsev os-mcqsev--${SEV[p2.severity][1]}">${SEV[p2.severity][0]}</span><span>${esc(p2.reason)}</span></li>`).join('')}</ul></div></li>`;
   box.innerHTML = `<p class="os-libsum"><b>${plural(r.ready.length, 'question')} ready</b>${bad.length ? ` · <span class="os-libbad">${bad.length} to fix</span>` : ''}${by ? `<br><span class="os-libmeta">${esc(by)}</span>` : ''}</p>
+    ${r.ready[0] ? (() => { const q = r.ready[0]; return `<figure class="os-libprev" aria-label="How the first one looks"><figcaption class="os-liblayer">${esc([yearLabel(q), diffLabel(q), layerLabel(q)].filter(Boolean).join(' · '))}</figcaption><p>${esc(q.stem.length > 220 ? `${q.stem.slice(0, 220)}…` : q.stem)}${q.ask ? ` <b>${esc(q.ask)}</b>` : ''}</p><ol>${q.options.map((o, i) => `<li${i === q.answer ? ' class="ok"' : ''}><b>${LET[i]}</b><span>${esc(o)}</span></li>`).join('')}</ol></figure>`; })() : ''}
     ${r.more ? `<p class="os-liberr">Only the first ${LIMITS.upload} are read: upload the rest after.</p>` : ''}
     ${bad.length ? `<details class="os-libprobs" open><summary>Not saved until fixed (${bad.length})</summary><p class="os-libmeta">Fix these in ChatGPT ("question 3 has no kind") and paste again; the ready ones are not saved twice.</p><ol>${bad.map(row).join('')}</ol></details>` : ''}
-    ${tips.length ? `<details class="os-libprobs"><summary>Saved, with tips (${tips.length})</summary><ol>${tips.map(row).join('')}</ol></details>` : ''}`;
+    ${tips.length ? `<details class="os-libprobs"><summary>Ready, with tips (${tips.length})</summary><ol>${tips.map(row).join('')}</ol></details>` : ''}`;
   btn.disabled = !r.ready.length || V.busy; btn.textContent = r.ready.length ? `Save ${plural(r.ready.length, 'question')}` : 'Save';
 }
 async function readFile(input) {
@@ -460,11 +463,13 @@ async function act(a, b, e) {
   switch (a) {
     case 'tab': return go(b.dataset.tab);
     case 'copyprompt': {
-      try { await navigator.clipboard.writeText(chatPrompt()); notify('Copied. Paste it into ChatGPT, then add your notes.', 'success'); }
+      const withNotes = (V.up.notes || '').trim();
+      try { await navigator.clipboard.writeText(chatPrompt(withNotes)); notify(withNotes ? 'Copied, with your notes. Paste it into ChatGPT.' : 'Copied. Paste it into ChatGPT, then add your notes.', 'success'); }
       catch { const d = panel()?.querySelector('.os-libprompt'); if (d) { d.open = true; d.querySelector('textarea').select(); } notify('Copy it from the box below.', ''); }
       return;
     }
     case 'save': return save();
+    case 'deckpick': { V.up.deck = b.dataset.v; const inp = panel()?.querySelector('[name="deck"]'); if (inp) inp.value = b.dataset.v; panel()?.querySelectorAll('.os-libdeckchips .os-chip').forEach(c => c.classList.toggle('on', c === b)); return; }
     case 'studydeck': Object.assign(V.st, { deck: b.dataset.deck, topic: '', cat: '', year: 0, diff: 0, q: null, view: 'custom' }); return go('study');
     case 'share': V.share = V.share === b.dataset.deck ? '' : b.dataset.deck; return paint();
     case 'sharewith': {
