@@ -115,7 +115,7 @@ test('0008_library.sql: every table closed to the public key, every function che
   for (const t of ['lib_decks', 'lib_items', 'lib_friends', 'lib_shares']) assert.ok(S.includes(`alter table public.${t} enable row level security`), t);
   assert.doesNotMatch(S, /create policy/i, 'no policy: the tables are reached only through the functions');
   const fns = [...S.matchAll(/create or replace function public\.(\w+)\(p_token uuid/g)].map(m => m[1]);
-  assert.deepEqual(fns.sort(), ['friend_list', 'friend_request', 'friend_respond', 'lib_delete', 'lib_library', 'lib_rename', 'lib_share', 'lib_upload']);
+  assert.deepEqual(fns.sort(), ['friend_list', 'friend_request', 'friend_respond', 'friend_week', 'lib_delete', 'lib_library', 'lib_rename', 'lib_share', 'lib_upload']);
   for (const f of fns) { const body = S.slice(S.indexOf(`function public.${f}(`)); assert.match(body.slice(0, body.indexOf('end $$')), /public\.pup_me\(p_token\)/, f); assert.ok(S.includes(`grant execute on function public.${f}(`), f); }
   assert.match(S, /revoke all on function public\.lib_are_friends/);
   assert.match(S, /> 500 then raise/); assert.match(S, />= 50 then raise/); assert.match(S, /tot > 2000/); assert.match(S, /16384/);
