@@ -231,10 +231,11 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>
           ${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="shop" hidden aria-label="Bones: open the shop">${icon('bone')}<b></b><span class="pd-wallet-go">Shop</span></button>`}</div>
         </section>
-        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" hidden></section><section class="pd-sec pd-boardsec" data-sec="board" aria-labelledby="pd-h-board"></section>' : ''}
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Duels</h2><div class="pd-list"></div></section>
+        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" hidden></section>' : ''}
         <section class="pd-sec" data-sec="mates"><h2 class="pd-h2">Mates</h2><div class="pd-grid"></div></section>
+        ${transport?.queue ? '<section class="pd-sec pd-boardsec" data-sec="board" aria-labelledby="pd-h-board"></section>' : ''}
         <section class="pd-sec" data-sec="past" hidden><h2 class="pd-h2">Recent</h2><div class="pd-list"></div></section>
         <p class="pd-err" role="alert"></p>
       </main>`;
