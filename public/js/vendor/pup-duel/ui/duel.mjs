@@ -22,7 +22,7 @@ import { practiceWorld, BOT } from '../duel/bot.mjs';
 import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
 import { shown } from '../pup/rig/gifts.mjs';
 import { moodOf, lastPlayed, markPlayed } from '../pup/rig/mood.mjs';
-import { topicTree, poolOf, pickLabel, sourceLabel, decksOf, deckPack, yearsOf, YEAR_LABEL } from '../duel/pack.mjs';
+import { topicTree, poolOf, pickLabel, sourceLabel, publicPack, decksOf, deckPack, yearsOf, YEAR_LABEL } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
 import { normWallet, fitWear } from '../duel/shop.mjs';
@@ -519,7 +519,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         const rounds = pickedRounds(), secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs;
         keepPick({ ...opt, rounds, secs });
         if (isPractice) { closeSheet(); startPractice({ rounds, secs, topic: opt.topic, cat: opt.cat, deck: opt.deck, ladder: !!opt.ladder }); return; }
-        const setup = makeSetup(cur(), { rounds, secs, topic: opt.topic, cat: opt.cat, ladder: !!opt.ladder && yearsOf(pack).length > 1, seed: freshSeed(), title: pack.title });
+        const setup = makeSetup(cur(), { rounds, secs, topic: opt.topic, cat: opt.cat, ladder: !!opt.ladder && yearsOf(pack).length > 1, deck: opt.deck, seed: freshSeed(), title: pack.title });
         if (!setup.questions.length) { el.querySelector('.pd-err').textContent = 'No questions to play.'; return; }
         await busy(async () => {
           const d = await challengeMate(mate.id, setup);
@@ -540,7 +540,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     openSearch({
       sheet, closeSheet, transport, me: S.me, say,
       guard: fn => { S.sheetGuard = fn; },
-      makeSetup: () => makeSetup(pack, { rounds: RULES.rounds, secs: RULES.secs, seed: freshSeed(), title: pack.title }),
+      makeSetup: () => makeSetup(publicPack(pack), { rounds: RULES.rounds, secs: RULES.secs, seed: freshSeed(), title: pack.title }),   /* ranked: never a player's own deck */
       onMatch: async d => {
         const other = d.a === S.me.id ? d.b : d.a;
         /* a mate who joined since the lobby last polled: ask the roster */
@@ -974,9 +974,10 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     }, 2500);
   }
   async function rematch(st) {
-    const M = S.match, opt = { rounds: st.rounds.length, secs: st.setup.secs, topic: st.setup.topic || '' };
+    /* the same pick again: rounds, format, topic, kind, 0 to 1 and the deck (a rematch used to keep only the topic) */
+    const M = S.match, opt = { rounds: st.rounds.length, secs: st.setup.secs, topic: st.setup.topic || '', cat: st.setup.cat || '', ladder: !!st.setup.ladder, deck: st.setup.deck || '' };
     if (M.practice) { await startPractice(); return; }
-    const setup = makeSetup(pack, { ...opt, seed: freshSeed(), title: pack.title });
+    const setup = makeSetup(deckPack(pack, opt.deck), { ...opt, seed: freshSeed(), title: pack.title });
     await busy(async () => {
       /* the rematch already under way (my other phone's, or theirs, live or offered) before a new challenge */
       const to = rematchTarget(S.me.id, M.them.id, M.d, await S.t.inbox(S.me).catch(() => [])) || (M.offer ? { duel: M.offer, accept: true } : null);

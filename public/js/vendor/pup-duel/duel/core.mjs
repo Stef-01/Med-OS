@@ -70,7 +70,7 @@ function climb(qs, n) {
   const d = q => (Number.isInteger(q.difficulty) ? q.difficulty : 2);
   return out.sort((a, b) => y(a) - y(b) || d(a) - d(b));
 }
-export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topic = '', cat = '', seed = 1, title = '', read = true, ladder = false } = {}) {
+export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topic = '', cat = '', seed = 1, title = '', read = true, ladder = false, deck = '' } = {}) {
   const base = clamp(Math.round(secs) || RULES.secs, RULES.minSecs, RULES.maxSecs);
   const r = rng(seed), pool = (pack?.questions || []).filter(q => (!topic || q.topic === topic || (q.topics || []).includes(topic)) && (!cat || q.cat === cat));
   const want = clamp(Math.floor(rounds) || RULES.rounds, 1, RULES.maxQuestions), shuffled = shuffle(r, pool);
@@ -90,7 +90,7 @@ export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topi
     if (q.difficulty) out.difficulty = q.difficulty;
     return out;
   });
-  return { v: 1, rounds: questions.length, secs: base, title: String(title || pack?.title || '').slice(0, 80), topic: topic || '', ...(cat ? { cat: String(cat).slice(0, 30), catLabel: String((pack?.cats || []).find(c => c.id === cat)?.label || cat).slice(0, 60) } : {}), seed: seed >>> 0, ...(ladder ? { ladder: true } : {}), questions };
+  return { v: 1, rounds: questions.length, secs: base, title: String(title || pack?.title || '').slice(0, 80), topic: topic || '', ...(cat ? { cat: String(cat).slice(0, 30), catLabel: String((pack?.cats || []).find(c => c.id === cat)?.label || cat).slice(0, 60) } : {}), seed: seed >>> 0, ...(ladder ? { ladder: true } : {}), ...(deck ? { deck: String(deck).slice(0, 30) } : {}), questions };   /* deck: which of the host's decks it was dealt from, so a rematch deals from it again */
 }
 
 /* the same checks pup_challenge makes in Postgres; '' when the setup can be played */
