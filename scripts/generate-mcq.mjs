@@ -15,12 +15,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeMcq, FOCUS, FORMS, gapJobs } from './lib/mcq-generate.mjs';
+import { writeMcq, FOCUS, FORMS, gapJobs, topicStation } from './lib/mcq-generate.mjs';
 import { THIN } from './lib/mcq-audit.mjs';
 import { readJsonl, benchmarkItem, readJson } from './lib/mcq-sources.mjs';
 import { stationsOnDisk } from './build-duel-pack.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
 import { claudeAsk } from './lib/ask.mjs';
+import { tagOf } from '../public/js/mcq/schema.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const GENERATED = path.join(ROOT, 'data', 'mcq', 'generated.json');
@@ -41,7 +42,11 @@ else if (opt('--gaps')) {   /* where the duel is thin: the audit's topics with f
   const secs = String(opt('--gaps')), f = readJson(path.join(ROOT, 'data', 'mcq', 'audit.json'), {}).pack?.formats?.[secs];
   if (!f) { console.error(`no audit for ${secs} s: node scripts/mcq-audit.mjs first (formats are ${Object.keys(readJson(path.join(ROOT, 'data', 'mcq', 'audit.json'), {}).pack?.formats || {}).join(', ')})`); process.exit(2); }
   const need = t => THIN - (f.byTopic[t] || 0), thin = new Set(f.thin);
-  jobs = gapJobs(stations, thin, need, Number(opt('--sample')) || 40, focuses, opt('--focus'));
+  /* a thin topic no station covers gets two stand-ins (topicStation), each told what is already written for it */
+  const covered = new Set(stations.flatMap(st => st.specialty || [])), leads = spec => store.items.filter(q => q.tags.includes(tagOf(`topic:${spec}`))).map(q => q.ask || q.stem.slice(-120));
+  const standIns = f.thin.filter(t => !covered.has(t)).flatMap(t => [0, 1].map(v => topicStation(t, v, leads(t))));
+  jobs = gapJobs([...stations, ...standIns], thin, need, Number(opt('--sample')) || 40, focuses, opt('--focus'), (st, fc) => have.has(`${st.id}|${fc}|${FORM}`));
+  if (standIns.length) console.log(`${standIns.length / 2} thin topics have no station: written from the specialty alone`);
   console.log(`gaps at ${secs} s: ${f.thin.length} thin topics; ${jobs.length} stations in them`);
 }
 else if (opt('--sample')) jobs = [...stations].sort((a, b) => fnv(`g:${a.id}`).localeCompare(fnv(`g:${b.id}`))).slice(0, Number(opt('--sample'))).map((st, i) => ({ st, focus: opt('--focus') || focuses[i % focuses.length] }));

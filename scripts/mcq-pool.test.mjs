@@ -11,7 +11,7 @@ import { good, GOOD } from './mcq.test.mjs';
 import { judgeItem, judgeScore, judgeGates, verdictFor, solveText, rubricText, cleanRubric, SPECIALTIES } from './lib/mcq-judge.mjs';
 import { assess, select, statusOf, quality, poolItem } from './lib/mcq-select.mjs';
 import { mergeSubmissions, submissionsFrom, remoteSubmissions } from './lib/mcq-intake.mjs';
-import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs } from './lib/mcq-generate.mjs';
+import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs, topicStation, writerPrompt } from './lib/mcq-generate.mjs';
 import { quotaOf } from './lib/mcq-select.mjs';
 import { checkLength } from '../public/js/mcq/flaws.mjs';
 import { fits } from '../public/js/vendor/pup-duel/duel/core.mjs';
@@ -226,10 +226,27 @@ test('gap jobs: stations in the thin topics, the thinnest first, round-robin, no
   const stations = [st('a1', 'Neurology'), st('a2', 'Neurology'), st('a3', 'Neurology'), st('b1', 'Dermatology'), st('b2', 'Dermatology'), st('c1', 'Cardiology')];
   const need = t => ({ Neurology: 2, Dermatology: 9 })[t] || 0, thin = new Set(['Neurology', 'Dermatology']);
   const jobs = gapJobs(stations, thin, need, 10, ['management', 'investigation'], '');
-  assert.deepEqual(jobs.map(j => j.st.id), ['b1', 'a1', 'b2', 'a2'], 'Dermatology first (it needs more), alternating, Neurology stops at the 2 it needs');
+  assert.deepEqual(jobs.map(j => `${j.st.id}:${j.focus}`), ['b1:management', 'a1:management', 'b2:management', 'a2:management', 'b1:investigation', 'b2:investigation'],
+    'Dermatology first (it needs more), alternating; Neurology stops at the 2 it needs; Dermatology goes round its two stations again with the next focus');
   assert.ok(!jobs.some(j => j.st.id === 'c1'), 'a topic that is not thin gets nothing');
-  assert.deepEqual(jobs.map(j => j.focus), ['management', 'investigation', 'management', 'investigation']);
   assert.equal(gapJobs(stations, thin, need, 1, ['management'], 'complication')[0].focus, 'complication');
+  const skipped = gapJobs(stations, thin, need, 10, ['management', 'investigation'], '', (s2, f) => s2.id === 'b1' && f === 'management');
+  assert.equal(skipped[0].st.id + skipped[0].focus, 'b2management', 'what is written already is skipped, and the next one taken');
+});
+test('a thin topic with no station: a stand-in per variant, a prompt from the specialty alone, provenance that says so', () => {
+  const st = topicStation('Medicolegal', 1, ['Most appropriate next step regarding consent?']);
+  assert.equal(st.id, 'topic-medicolegal-1'); assert.ok(st.topicOnly);
+  const p = writerPrompt(st, 'management', [], 'rapid');
+  assert.match(p, /short \(15-second\) question in Medicolegal/); assert.doesNotMatch(p, /<station>/);
+  assert.match(p, /Already written for Medicolegal[\s\S]*consent/);
+  const draft = { stem: 'A 16-year-old girl asks her GP for the contraceptive pill and asks that her parents not be told.', ask: 'Most appropriate next step?',
+    options: ['Assess her maturity to consent', 'Call her parents', 'Refuse until she is 18', 'Refer to a gynaecologist', 'Ask for a court order'], answer: 'A', explanation: 'Gillick competence.', why: ['r', 'w', 'w', 'w', 'w'], topic: 'Medicolegal' };
+  const q = toItem(draft, { st, focus: 'management', ex: [], how: 'stub', now: '2026-10-26T12:00:00Z', form: 'rapid' });
+  assert.deepEqual(q.provenance.generator.basis, ['topic-medicolegal-1']);
+  assert.equal(q.provenance.source.name, 'Written by AI for Medicolegal (no Med-OS station)');
+  assert.ok(q.tags.includes('topic:medicolegal') && !q.tags.some(t => t.startsWith('station:')), 'tags are stored lower case (tagOf)');
+  const thin = new Set(['Medicolegal']), jobs = gapJobs([topicStation('Medicolegal', 0), st], thin, () => 4, 10, ['management', 'investigation'], '');
+  assert.deepEqual(jobs.map(j => `${j.st.id}:${j.focus}`), ['topic-medicolegal-0:management', 'topic-medicolegal-1:management', 'topic-medicolegal-0:investigation', 'topic-medicolegal-1:investigation']);
 });
 test('the key as the single longest option is sent back for revision; a tie is not a cue', () => {
   const q = cleanItem(good({ id: 'medqa-kl' }));

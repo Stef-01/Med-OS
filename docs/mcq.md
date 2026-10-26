@@ -91,7 +91,7 @@ The judge never sees provenance: every kind gets the same prompt. Judge score (0
 Then, over everything that passed, best first:
 
 6. **Dedupe**: a near-duplicate of an admitted question is refused, with the id it duplicates. Kinds go in the order user, usmle-resource, amsa, ai, so a user's question is never displaced by a copy from a bank.
-7. **Quotas and topics**: user questions that pass are always kept, with no cap. Other kinds have caps (`QUOTA`: usmle-resource 160, open-exam 120, amsa 110, ai 110, and ai-rapid 80 for AI-written questions in the Rapid form, so short questions and vignettes do not crowd each other out), and no topic may hold more than 15% of the non-user pool (at least 6). A question over a cap is **reserve**: it passed and takes a place when one drops out.
+7. **Quotas and topics**: user questions that pass are always kept, with no cap. Other kinds have caps (`QUOTA`: usmle-resource 160, open-exam 120, amsa 110, ai 110, and ai-rapid 200 for AI-written questions in the Rapid form (80 until 2026-10-26, when it filled with 25 more passing), so short questions and vignettes do not crowd each other out), and no topic may hold more than 15% of the non-user pool (at least 6). A question over a cap is **reserve**: it passed and takes a place when one drops out.
 
 `data/mcq/selection.json` holds every decision with its reasons; `node scripts/mcq-pool.mjs --why <id>` prints one. `public/mcq/status.json` holds one line per submitted question. `npm test` fails when the pool on disk is not what the candidates make now.
 
@@ -112,6 +112,7 @@ The e2e (`scripts/e2e/smoke.mjs`) runs the flow at 393, 320 and 1280 px against 
 - **Exemplars**: the three MedQA Step 2&3 items that share the most subject words with the station and have no major flaw. They are examples of style only.
 - **Draft**: one five-option question that tests management, investigation, interpretation or a complication. The station's own question already asks the diagnosis, so the focus rotates. The vignette is 80–160 words (the MedQA Step 2&3 median is 137), with units, Australian guidelines, and a reason for every option.
 - **Rapid form** (`--form rapid`, 2026-10-26): a compact case of 18 to 32 words before a short lead-in, five options of one to four words, at most 52 words in all, so it reads in about 10 s and fits the duel's Rapid 15 s format. It is tagged `form:rapid`, its stem-length floor is 15 words, not 30, and it counts against its own quota.
+- **Gaps** (`--gaps 15|30|90`): the run is aimed at the topics `docs/mcq-audit.md` finds thin at that format (fewer than 10 fitting), the thinnest first, round-robin over topics, each station with each focus in turn. A thin topic with no station (Medicolegal, Bioethics, Indigenous Health…) gets two stand-ins (`topicStation`), each written from the specialty alone and told the lead-ins already written for it; the item says "Written by AI for <specialty> (no Med-OS station)".
 - **Checks**: one revision if a major or block flaw remains, if the key is the single longest option (a cue: in the pool of 2026-10-26 the AI-written key was the longest 38% of the time against 20% by chance), or if a Rapid question does not fit 15 s by the duel's own reading rule. Then the checks run again. A question still failing goes to `drafts/mcq/` and is not kept.
 
 Each kept question is `ai` with `generator: { how, version, basis: [station, osce-<station>], exemplars, model }`, and its key is spread by its id's hash. It still has to pass the review (`mcq-judge.mjs --kind ai`) and the AI bar before it reaches the pool.
@@ -133,7 +134,7 @@ The first import: HEAD-QA medicine 2013 to 2016, 788 questions after dropping th
 ```
 node scripts/fetch-sources.mjs [--only headqa]           # the registry's imports -> data/benchmarks/<id>.jsonl
 node scripts/import-benchmarks.mjs                       # data/benchmarks from the downloads
-node scripts/generate-mcq.mjs --sample 64 [--form rapid] # new ai questions -> data/mcq/generated.json
+node scripts/generate-mcq.mjs --sample 64 [--form rapid] [--gaps 15]   # new ai questions -> data/mcq/generated.json
 node scripts/mcq-submissions.mjs [export.json]           # students' questions -> data/mcq/submissions.json
 node scripts/mcq-judge.mjs [--kind user,ai] [--tag src:medqa --sample 50]   # reviews -> data/mcq/verdicts.json
 node scripts/mcq-judge.mjs --bench <quest-ai.jsonl> --out <outside the repo> # the official samples

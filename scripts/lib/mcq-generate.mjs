@@ -75,7 +75,17 @@ export const ITEM_SCHEMA = {
   }
 };
 const exText = q => `${q.stem}\n${q.options.map((o, i) => `${LETTERS[i]}. ${o}`).join('\n')}\nKey: ${LETTERS[q.answer]}`;
+/* a specialty with no Med-OS station (the duel thin there, founder 2026-10-26): a stand-in the writer works from, one per
+   variant, so a topic can have more than one question a focus. topicOnly marks it; avoid lists the lead-ins already
+   written for it, so a second question asks something else */
+export const topicStation = (spec, variant = 0, avoid = []) => ({ id: `topic-${spec.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}-${variant}`, title: spec, specialty: [spec], diagnosis: [], presentation: [], topicOnly: true, avoid });
 export function writerPrompt(st, focus, ex, form = 'vignette') {
+  if (st.topicOnly) return `Write one ${form === 'rapid' ? 'short (15-second) ' : ''}question in ${st.title} for Australian medical students, on a common or high-stakes problem a final-year student must recognise or manage in ${st.title}. It must test ${FOCUS[focus]}.
+${st.avoid?.length ? `\nAlready written for ${st.title}, so ask about something else:\n${st.avoid.map(a => `- ${a}`).join('\n')}\n` : ''}
+Example Step 2 CK questions, for style only${form === 'rapid' ? ' (yours is far shorter)' : ''}:
+${ex.map((q, i) => `<example_${i + 1}>\n${exText(q)}\n</example_${i + 1}>`).join('\n')}
+
+In "why", give one entry per option in order: for the key, why it is right; for each other option, why it is wrong.`;
   return `Write one ${form === 'rapid' ? 'short (15-second) ' : ''}question from this OSCE station. It must test ${FOCUS[focus]}; the station's own question already asks for the diagnosis.
 
 <station>
@@ -101,9 +111,9 @@ export function toItem(draft, { st, focus, ex, how, model, now, form = 'vignette
   const why = (draft.why || []).map((w, i) => (i === answer ? null : w));
   return cleanItem(spreadKey({
     id, stem: draft.stem, ask: draft.ask, options: draft.options, answer, explanation: draft.explanation, why,
-    topic: draft.topic || st.specialty?.[0] || '', tags: ['generated', `focus:${focus}`, `station:${st.id}`, ...(form === 'vignette' ? [] : [`form:${form}`])],
-    provenance: { kind: 'ai', source: { name: `Written by AI from Med-OS station ${st.id}`, url: '', licence: 'own' }, createdAt: now,
-      generator: { how, version: GEN_VERSION, basis: [st.id, `osce-${st.id}`], exemplars: ex.map(q => q.id), ...(model ? { model } : {}) } }
+    topic: draft.topic || st.specialty?.[0] || '', tags: ['generated', `focus:${focus}`, st.topicOnly ? `topic:${st.title}` : `station:${st.id}`, ...(form === 'vignette' ? [] : [`form:${form}`])].map(t => t.slice(0, 40)),
+    provenance: { kind: 'ai', source: { name: st.topicOnly ? `Written by AI for ${st.title} (no Med-OS station)` : `Written by AI from Med-OS station ${st.id}`, url: '', licence: 'own' }, createdAt: now,
+      generator: { how, version: GEN_VERSION, basis: st.topicOnly ? [st.id] : [st.id, `osce-${st.id}`], exemplars: ex.map(q => q.id), ...(model ? { model } : {}) } }
   }));
 }
 /* what a draft must fix before it is kept: a major or block flaw; the key as the single longest option (a cue a
@@ -133,14 +143,17 @@ export async function writeMcq(st, focus, { bench, ask, how = 'api', now = new D
   return { ok: !problems.length, item, problems: problems.map(p => p.reason), rounds, draft };
 }
 
-/* the stations to write for when filling the duel's gaps: those whose specialty is a thin topic, the thinnest first
-   (need: how many more that topic wants), round-robin over the topics so one large specialty does not take every place,
-   and the focus rotating. Pure */
-export function gapJobs(stations, thin, need, n, focuses, focus) {
+/* the questions to write when filling the duel's gaps: for each thin topic (thinnest first: need says how many more
+   it wants), its stations with each focus in turn, so a topic with two stations can still get eight questions;
+   round-robin over the topics so one does not take every place; skip(st, focus) leaves out what is already written,
+   so the run picks others instead. Pure */
+export function gapJobs(stations, thin, need, n, focuses, focus, skip = () => false) {
   const by = new Map();
   for (const st of stations) { const t = (st.specialty || []).find(x => thin.has(x)); if (t) (by.get(t) || by.set(t, []).get(t)).push(st); }
-  const topics = [...by.keys()].sort((a, b) => need(b) - need(a) || a.localeCompare(b)), out = [];
-  for (let round = 0; out.length < n && topics.some(t => by.get(t).length > round); round++)
-    for (const t of topics) { const st = by.get(t)[round]; if (st && out.length < n && round < Math.max(1, need(t))) out.push({ st, focus: focus || focuses[out.length % focuses.length], gap: t }); }
+  const fs = focus ? [focus] : focuses, queue = new Map();
+  for (const [t, list] of by) queue.set(t, fs.flatMap(f => list.map(st => ({ st, focus: f, gap: t }))).filter(j => !skip(j.st, j.focus)).slice(0, Math.max(0, need(t))));
+  const topics = [...queue.keys()].sort((a, b) => need(b) - need(a) || a.localeCompare(b)), out = [];
+  for (let round = 0; out.length < n && topics.some(t => queue.get(t).length > round); round++)
+    for (const t of topics) { const j = queue.get(t)[round]; if (j && out.length < n) out.push(j); }
   return out;
 }
