@@ -7,64 +7,64 @@
   },
   "pool": {
    "ai": 61,
-   "usmle-resource": 155,
+   "usmle-resource": 160,
    "amsa": 56
   },
   "status": {
-   "pool": 272,
-   "rejected": 125,
-   "pending": 664
+   "pool": 277,
+   "rejected": 226,
+   "reserve": 296,
+   "pending": 262
   },
   "topics": {
-   "Obstetrics": 10,
+   "Obstetrics": 11,
    "Gastroenterology": 36,
-   "Infectious Diseases": 19,
-   "Neurology": 21,
-   "Cardiology": 20,
+   "Infectious Diseases": 25,
+   "Neurology": 23,
+   "Cardiology": 18,
    "Respiratory Medicine": 15,
-   "Haematology": 6,
-   "Paediatrics": 22,
+   "Haematology": 5,
+   "Paediatrics": 18,
    "Neurosurgery": 2,
-   "Emergency Medicine": 8,
+   "Emergency Medicine": 10,
    "Vascular Surgery": 3,
-   "General Surgery": 7,
+   "General Surgery": 8,
    "Gastrointestinal Surgery": 2,
-   "Cardiothoracic Surgery": 2,
-   "Gynaecology": 12,
-   "General Practice": 5,
-   "Otorhinolaryngology": 1,
-   "Trauma Surgery": 7,
-   "Ophthalmology": 2,
-   "Sexual Health": 3,
-   "Endocrinology": 7,
-   "Nephrology": 6,
-   "Public Health": 3,
-   "Toxicology": 5,
-   "Orthopaedics": 3,
-   "Rheumatology": 13,
-   "Psychiatry": 9,
-   "Dermatology": 5,
-   "Medicolegal": 2,
-   "Neonatology": 5,
-   "Geriatrics": 1,
+   "Cardiothoracic Surgery": 1,
+   "Gynaecology": 13,
+   "General Practice": 7,
+   "Otorhinolaryngology": 2,
+   "Trauma Surgery": 6,
+   "Ophthalmology": 3,
+   "Sexual Health": 4,
+   "Endocrinology": 6,
+   "Nephrology": 5,
+   "Neonatology": 6,
+   "Dermatology": 2,
+   "Rheumatology": 10,
+   "Psychiatry": 12,
+   "Orthopaedics": 6,
+   "Geriatrics": 2,
+   "Public Health": 2,
    "Bioethics": 1,
-   "Critical Care Medicine": 2,
-   "Urology": 2,
    "Oncology": 2,
    "Breast/Endocrine Surgery": 1,
-   "Immunology": 1,
-   "Plastic Surgery": 1
+   "Immunology": 2,
+   "Urology": 3,
+   "Toxicology": 3,
+   "Addiction Medicine": 1,
+   "Critical Care Medicine": 1
   },
   "positions": {
    "4": {
     "counts": [
      62,
-     48,
-     55,
-     46
+     60,
+     46,
+     48
     ],
-    "n": 211,
-    "chi2": 3.01
+    "n": 216,
+    "chi2": 3.7
    },
    "5": {
     "counts": [
@@ -78,7 +78,7 @@
     "chi2": 4.98
    }
   },
-  "topicCap": 41,
+  "topicCap": 42,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -659,8 +659,10 @@
   {
    "id": "medqa-us4-test-0011",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 89,
    "flaws": [
     "cover-options:minor"
@@ -694,8 +696,10 @@
   {
    "id": "medqa-us4-test-0017",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": [
     "vignette:minor"
@@ -704,16 +708,20 @@
   {
    "id": "medqa-us4-test-0018",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0019",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": []
   },
@@ -730,8 +738,10 @@
   {
    "id": "medqa-us4-test-0024",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": [
     "units:minor"
@@ -740,24 +750,30 @@
   {
    "id": "medqa-us4-test-0026",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0029",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0034",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 86,
    "flaws": [
     "absolute-terms:minor",
@@ -767,8 +783,10 @@
   {
    "id": "medqa-us4-test-0035",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": []
   },
@@ -808,8 +826,10 @@
   {
    "id": "medqa-us4-test-0046",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 89,
    "flaws": [
     "vignette:minor"
@@ -842,16 +862,20 @@
   {
    "id": "medqa-us4-test-0054",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0055",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 83,
    "flaws": []
   },
@@ -902,8 +926,10 @@
   {
    "id": "medqa-us4-test-0066",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 89,
    "flaws": [
     "clang:minor"
@@ -920,8 +946,10 @@
   {
    "id": "medqa-us4-test-0071",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": []
   },
@@ -964,8 +992,10 @@
   {
    "id": "medqa-us4-test-0077",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": [
     "vignette:minor"
@@ -1016,16 +1046,20 @@
   {
    "id": "medqa-us4-test-0093",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0094",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": [
     "clang:minor"
@@ -1034,8 +1068,10 @@
   {
    "id": "medqa-us4-test-0095",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": [
     "units:minor"
@@ -1044,8 +1080,10 @@
   {
    "id": "medqa-us4-test-0098",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 83,
    "flaws": []
   },
@@ -1074,8 +1112,10 @@
   {
    "id": "medqa-us4-test-0104",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
@@ -1118,8 +1158,10 @@
   {
    "id": "medqa-us4-test-0110",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": [
     "cover-options:minor"
@@ -1146,24 +1188,30 @@
   {
    "id": "medqa-us4-test-0117",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0119",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0122",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 83,
    "flaws": [
     "vignette:minor"
@@ -1172,8 +1220,10 @@
   {
    "id": "medqa-us4-test-0125",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": [
     "vignette:minor"
@@ -1182,8 +1232,10 @@
   {
    "id": "medqa-us4-test-0128",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": [
     "cover-options:minor"
@@ -1210,8 +1262,10 @@
   {
    "id": "medqa-us4-test-0133",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
@@ -1226,8 +1280,10 @@
   {
    "id": "medqa-us4-test-0141",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 89,
    "flaws": []
   },
@@ -1242,8 +1298,10 @@
   {
    "id": "medqa-us4-test-0145",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": [
     "cover-options:minor"
@@ -1252,8 +1310,10 @@
   {
    "id": "medqa-us4-test-0146",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
@@ -1268,8 +1328,10 @@
   {
    "id": "medqa-us4-test-0148",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
@@ -1286,8 +1348,10 @@
   {
    "id": "medqa-us4-test-0151",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 83,
    "flaws": [
     "vignette:minor"
@@ -1296,8 +1360,10 @@
   {
    "id": "medqa-us4-test-0153",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": [
     "vignette:minor"
@@ -1314,8 +1380,10 @@
   {
    "id": "medqa-us4-test-0155",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 89,
    "flaws": [
     "cover-options:minor"
@@ -1324,8 +1392,10 @@
   {
    "id": "medqa-us4-test-0158",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": [
     "cover-options:minor"
@@ -1350,8 +1420,10 @@
   {
    "id": "medqa-us4-test-0164",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
@@ -1368,24 +1440,30 @@
   {
    "id": "medqa-us4-test-0168",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0170",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0171",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
@@ -1418,8 +1496,10 @@
   {
    "id": "medqa-us4-test-0177",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": []
   },
@@ -1434,8 +1514,10 @@
   {
    "id": "medqa-us4-test-0182",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
@@ -1479,8 +1561,10 @@
   {
    "id": "medqa-us4-test-0200",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
@@ -1523,16 +1607,20 @@
   {
    "id": "medqa-us4-test-0211",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0213",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 86,
    "flaws": []
   },
@@ -1557,8 +1645,10 @@
   {
    "id": "medqa-us4-test-0219",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 83,
    "flaws": []
   },
@@ -1593,8 +1683,10 @@
   {
    "id": "medqa-us4-test-0228",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
@@ -1613,16 +1705,20 @@
   {
    "id": "medqa-us4-test-0232",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0239",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
@@ -1639,8 +1735,10 @@
   {
    "id": "medqa-us4-test-0242",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": []
   },
@@ -1659,8 +1757,10 @@
   {
    "id": "medqa-us4-test-0245",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 81,
    "flaws": [
     "cover-options:minor"
@@ -1716,8 +1816,10 @@
   {
    "id": "medqa-us4-test-0253",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": [
     "longest-key:minor"
@@ -1726,32 +1828,40 @@
   {
    "id": "medqa-us4-test-0254",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0260",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0261",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0270",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": [
     "vignette:minor"
@@ -1778,16 +1888,20 @@
   {
    "id": "medqa-us4-test-0274",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0278",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 81,
    "flaws": []
   },
@@ -1833,8 +1947,10 @@
   {
    "id": "medqa-us4-test-0287",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
@@ -1853,8 +1969,10 @@
   {
    "id": "medqa-us4-test-0292",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 83,
    "flaws": [
     "cover-options:minor",
@@ -1864,18 +1982,21 @@
   {
    "id": "medqa-us4-test-0293",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0297",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "cover-options:minor",
     "units:minor"
@@ -1884,17 +2005,20 @@
   {
    "id": "medqa-us4-test-0298",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0302",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 86,
    "flaws": []
   },
@@ -1929,64 +2053,66 @@
   {
    "id": "medqa-us4-test-0321",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: The patient is hypotensive (85/55 mm Hg), so this is a high-risk (massive) PE. Guidelines (ESC 2019, ACCP/CHEST) recommend IV unfractionated heparin plus a decision about reperfusion (systemic thrombo",
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0324",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0326",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0328",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0329",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0333",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0334",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 80, review 68): vignette"
    ],
+   "quality": 73,
    "flaws": [
     "vignette:major"
    ]
@@ -1994,19 +2120,21 @@
   {
    "id": "medqa-us4-test-0336",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)"
    ],
+   "quality": 74,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0337",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 65): longest-key"
    ],
+   "quality": 77,
    "flaws": [
     "longest-key:minor"
    ]
@@ -2014,19 +2142,21 @@
   {
    "id": "medqa-us4-test-0338",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0339",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 70): vignette"
    ],
+   "quality": 80,
    "flaws": [
     "vignette:minor"
    ]
@@ -2034,46 +2164,47 @@
   {
    "id": "medqa-us4-test-0340",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0342",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0344",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0345",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0346",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": [
     "vignette:minor"
    ]
@@ -2081,10 +2212,11 @@
   {
    "id": "medqa-us4-test-0348",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": [
     "vignette:minor"
    ]
@@ -2092,10 +2224,11 @@
   {
    "id": "medqa-us4-test-0350",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 70 is below the base bar of 81 (flaws 88, review 58): cover-options, longest-key"
    ],
+   "quality": 70,
    "flaws": [
     "cover-options:minor",
     "longest-key:minor"
@@ -2104,10 +2237,11 @@
   {
    "id": "medqa-us4-test-0351",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2115,10 +2249,11 @@
   {
    "id": "medqa-us4-test-0352",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": [
     "cover-options:minor",
     "units:minor"
@@ -2127,10 +2262,11 @@
   {
    "id": "medqa-us4-test-0353",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2138,19 +2274,21 @@
   {
    "id": "medqa-us4-test-0355",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 100, review 60): "
    ],
+   "quality": 76,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0357",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 94, review 68): vignette"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:minor"
    ]
@@ -2158,10 +2296,9 @@
   {
    "id": "medqa-us4-test-0358",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": [
     "clang:minor"
    ]
@@ -2169,8 +2306,10 @@
   {
    "id": "medqa-us4-test-0360",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
@@ -2201,64 +2340,65 @@
   {
    "id": "medqa-us4-test-0371",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0372",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0373",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0374",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0375",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0376",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0377",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2266,10 +2406,11 @@
   {
    "id": "medqa-us4-test-0378",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2277,10 +2418,9 @@
   {
    "id": "medqa-us4-test-0379",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
@@ -2304,10 +2444,11 @@
   {
    "id": "medqa-us4-test-0384",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2315,19 +2456,21 @@
   {
    "id": "medqa-us4-test-0386",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0387",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
@@ -2341,46 +2484,43 @@
   {
    "id": "medqa-us4-test-0390",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0392",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0393",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0394",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0395",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": [
     "vignette:minor"
    ]
@@ -2388,37 +2528,41 @@
   {
    "id": "medqa-us4-test-0397",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0401",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0402",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0404",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": [
     "vignette:minor"
    ]
@@ -2426,10 +2570,11 @@
   {
    "id": "medqa-us4-test-0408",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 70): cover-options"
    ],
+   "quality": 80,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2437,19 +2582,19 @@
   {
    "id": "medqa-us4-test-0411",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0412",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2457,28 +2602,31 @@
   {
    "id": "medqa-us4-test-0413",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0414",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0415",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer",
+    "the reviewer rejected it: The question rests on a false premise: a screening test does not have statistical power."
    ],
+   "quality": 55,
    "flaws": [
     "cover-options:major",
     "vignette:minor"
@@ -2487,10 +2635,11 @@
   {
    "id": "medqa-us4-test-0417",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 70): longest-key"
    ],
+   "quality": 80,
    "flaws": [
     "longest-key:minor"
    ]
@@ -2498,10 +2647,11 @@
   {
    "id": "medqa-us4-test-0418",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2509,28 +2659,29 @@
   {
    "id": "medqa-us4-test-0419",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0422",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0423",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)"
    ],
+   "quality": 68,
    "flaws": [
     "clang:minor"
    ]
@@ -2538,37 +2689,37 @@
   {
    "id": "medqa-us4-test-0428",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0429",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0431",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0432",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2576,37 +2727,40 @@
   {
    "id": "medqa-us4-test-0434",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0438",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0439",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer (B also defensible)"
    ],
+   "quality": 73,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0440",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "longest-key:minor",
     "clang:minor"
@@ -2615,46 +2769,49 @@
   {
    "id": "medqa-us4-test-0442",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0443",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0444",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 100, review 59): "
    ],
+   "quality": 75,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0445",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0448",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 94, review 58): absolute-terms"
    ],
+   "quality": 72,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -2662,28 +2819,31 @@
   {
    "id": "medqa-us4-test-0453",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0455",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0456",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 94, review 69): clang"
    ],
+   "quality": 79,
    "flaws": [
     "clang:minor"
    ]
@@ -2691,10 +2851,11 @@
   {
    "id": "medqa-us4-test-0457",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): absolute-terms"
    ],
+   "quality": 77,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -2702,37 +2863,40 @@
   {
    "id": "medqa-us4-test-0459",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0460",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0461",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer (D, A also defensible)"
    ],
+   "quality": 75,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0462",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times"
    ],
+   "quality": 68,
    "flaws": [
     "longest-key:minor"
    ]
@@ -2740,109 +2904,119 @@
   {
    "id": "medqa-us4-test-0463",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0464",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0469",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0471",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)"
    ],
+   "quality": 73,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0473",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0475",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0479",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0483",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: The stem shows a glucose of 59 mg/dL in a confused cirrhotic patient. Keying potassium over dextrose teaches students to put off correcting hypoglycemia in a patient with altered mental status, which ",
+    "an independent solver reached another answer both times",
+    "not a single best answer (A, B also defensible)",
+    "the reviewer rejected it: Glucose 59 mg/dL in a confused patient makes dextrose the immediate priority, so the key (potassium) is wrong as written"
    ],
+   "quality": 54,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0484",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0485",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0486",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0495",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 94, review 69): vignette"
    ],
+   "quality": 79,
    "flaws": [
     "vignette:minor"
    ]
@@ -2850,10 +3024,11 @@
   {
    "id": "medqa-us4-test-0496",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 88, review 74): cover-options, units"
    ],
+   "quality": 80,
    "flaws": [
     "cover-options:minor",
     "units:minor"
@@ -2862,64 +3037,63 @@
   {
    "id": "medqa-us4-test-0497",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0502",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0504",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0507",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0509",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0511",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0512",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "longest-key:minor"
    ]
@@ -2927,28 +3101,27 @@
   {
    "id": "medqa-us4-test-0513",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0514",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0518",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2956,28 +3129,27 @@
   {
    "id": "medqa-us4-test-0519",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0521",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0522",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "cover-options:minor"
    ]
@@ -2985,19 +3157,19 @@
   {
    "id": "medqa-us4-test-0525",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 100, review 66): "
    ],
+   "quality": 80,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0527",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3005,28 +3177,29 @@
   {
    "id": "medqa-us4-test-0528",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 100, review 66): "
    ],
+   "quality": 80,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0532",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0535",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 68, review 80): lead-in, vignette, stem-length"
    ],
+   "quality": 75,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -3036,37 +3209,39 @@
   {
    "id": "medqa-us4-test-0540",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 64): "
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0542",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0543",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0545",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": [
     "longest-key:minor"
    ]
@@ -3074,10 +3249,11 @@
   {
    "id": "medqa-us4-test-0546",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": [
     "vignette:minor"
    ]
@@ -3085,91 +3261,94 @@
   {
    "id": "medqa-us4-test-0547",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0548",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0550",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0552",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0554",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0555",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0557",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0558",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0560",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times",
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 60,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0565",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 88, review 70): cover-options, absolute-terms"
    ],
+   "quality": 77,
    "flaws": [
     "cover-options:minor",
     "absolute-terms:minor"
@@ -3178,28 +3357,30 @@
   {
    "id": "medqa-us4-test-0569",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: Teaches dantrolene as a reflex for drug-associated hyperthermia with rigidity; if the cause is serotonin syndrome or sympathomimetic toxicity (more consistent with 30-minute onset), dantrolene is inef",
+    "not a single best answer (C also defensible)"
    ],
+   "quality": 73,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0570",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0571",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": [
     "vignette:minor"
    ]
@@ -3207,118 +3388,123 @@
   {
    "id": "medqa-us4-test-0572",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0576",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0577",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C, A also defensible)"
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0578",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0581",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 63): "
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0584",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0587",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0588",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0594",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0598",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0603",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0605",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0610",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 88, review 75): cover-options, clang"
    ],
+   "quality": 80,
    "flaws": [
     "cover-options:minor",
     "clang:minor"
@@ -3327,37 +3513,37 @@
   {
    "id": "medqa-us4-test-0611",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0612",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0613",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0615",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "vignette:minor"
    ]
@@ -3365,28 +3551,29 @@
   {
    "id": "medqa-us4-test-0616",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0618",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0626",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3394,19 +3581,19 @@
   {
    "id": "medqa-us4-test-0627",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 89,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0628",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3414,19 +3601,21 @@
   {
    "id": "medqa-us4-test-0632",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0633",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C, D also defensible)"
    ],
+   "quality": 79,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -3434,28 +3623,31 @@
   {
    "id": "medqa-us4-test-0634",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0635",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0636",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 70): vignette"
    ],
+   "quality": 80,
    "flaws": [
     "vignette:minor"
    ]
@@ -3463,10 +3655,11 @@
   {
    "id": "medqa-us4-test-0645",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 70): clang"
    ],
+   "quality": 80,
    "flaws": [
     "clang:minor"
    ]
@@ -3474,28 +3667,32 @@
   {
    "id": "medqa-us4-test-0649",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0651",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer (A, B also defensible)"
    ],
+   "quality": 70,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0652",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3503,109 +3700,119 @@
   {
    "id": "medqa-us4-test-0656",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 100, review 61): "
    ],
+   "quality": 77,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0657",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0659",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 100, review 61): "
    ],
+   "quality": 77,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0660",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0662",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0667",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0669",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0671",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0677",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times"
    ],
+   "quality": 66,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0682",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0684",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0688",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 65): longest-key"
    ],
+   "quality": 77,
    "flaws": [
     "longest-key:minor"
    ]
@@ -3613,10 +3820,11 @@
   {
    "id": "medqa-us4-test-0689",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3624,37 +3832,39 @@
   {
    "id": "medqa-us4-test-0691",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0692",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0693",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0694",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": [
     "longest-key:minor"
    ]
@@ -3662,10 +3872,11 @@
   {
    "id": "medqa-us4-test-0695",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3673,19 +3884,21 @@
   {
    "id": "medqa-us4-test-0700",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0703",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): units"
    ],
+   "quality": 77,
    "flaws": [
     "units:minor"
    ]
@@ -3693,10 +3906,11 @@
   {
    "id": "medqa-us4-test-0704",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: Stem presents a 1-week-old sleeping 7-8 h uninterrupted (suggesting inadequate feeding frequency) as reassuring, and the key implies no change in feeding is needed"
    ],
+   "quality": 74,
    "flaws": [
     "clang:minor"
    ]
@@ -3704,55 +3918,62 @@
   {
    "id": "medqa-us4-test-0705",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0706",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: The key teaches routine mannitol for rhabdomyolysis. Current guidelines do not recommend it, it has not been shown to help, and it can cause osmotic nephrosis, AKI and fluid shifts.",
+    "an independent solver reached another answer both times",
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 57,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0710",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0711",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0712",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0713",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": [
     "clang:minor"
    ]
@@ -3760,19 +3981,21 @@
   {
    "id": "medqa-us4-test-0714",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0717",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3780,55 +4003,60 @@
   {
    "id": "medqa-us4-test-0724",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: The stem gives no WBC differential, Gram stain or serum glucose, so bacterial meningitis is not ruled out. Teaching supportive care alone for a febrile adult with meningism and pleocytosis on these da",
+    "not a single best answer (C also defensible)"
    ],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0725",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0728",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0729",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0731",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 100, review 66): "
    ],
+   "quality": 80,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0732",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "cover-options:minor",
     "longest-key:minor"
@@ -3837,28 +4065,31 @@
   {
    "id": "medqa-us4-test-0733",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 89,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0735",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0740",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": [
     "vignette:minor"
    ]
@@ -3866,37 +4097,41 @@
   {
    "id": "medqa-us4-test-0742",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0744",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0745",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0747",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": [
     "longest-key:minor"
    ]
@@ -3904,19 +4139,21 @@
   {
    "id": "medqa-us4-test-0749",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0754",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": [
     "cover-options:minor",
     "units:minor"
@@ -3925,28 +4162,34 @@
   {
    "id": "medqa-us4-test-0755",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "not a single best answer (B, D also defensible)",
+    "the reviewer rejected it: Guidelines recommend chest radiography as the first imaging test in pregnant women with suspected PE; V/Q is chosen only if the CXR is normal"
    ],
+   "quality": 62,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0756",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0757",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3954,19 +4197,19 @@
   {
    "id": "medqa-us4-test-0760",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0761",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 89,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3974,19 +4217,21 @@
   {
    "id": "medqa-us4-test-0762",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0764",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -3994,28 +4239,29 @@
   {
    "id": "medqa-us4-test-0767",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0768",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 100, review 56): "
    ],
+   "quality": 74,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0769",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 89,
    "flaws": [
     "units:minor"
    ]
@@ -4023,10 +4269,11 @@
   {
    "id": "medqa-us4-test-0774",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": [
     "vignette:minor"
    ]
@@ -4034,10 +4281,12 @@
   {
    "id": "medqa-us4-test-0777",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer"
    ],
+   "quality": 68,
    "flaws": [
     "clang:minor"
    ]
@@ -4045,10 +4294,11 @@
   {
    "id": "medqa-us4-test-0778",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 69 is below the base bar of 81 (flaws 74, review 66): absolute-terms, vignette"
    ],
+   "quality": 69,
    "flaws": [
     "absolute-terms:minor",
     "vignette:major"
@@ -4057,53 +4307,61 @@
   {
    "id": "medqa-us4-test-0780",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: The patient has features of secondary adrenal insufficiency (orthostatic hypotension, hypoglycaemia, hyponatraemia) and central hypothyroidism. Keying surgery alone as 'the necessary treatment' could ",
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 75,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0782",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0784",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0793",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0794",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0802",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": [
     "vignette:minor"
@@ -4112,10 +4370,11 @@
   {
    "id": "medqa-us4-test-0803",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
@@ -4129,24 +4388,30 @@
   {
    "id": "medqa-us4-test-0806",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0807",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0808",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
@@ -4161,10 +4426,11 @@
   {
    "id": "medqa-us4-test-0810",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 65): vignette"
    ],
+   "quality": 77,
    "flaws": [
     "vignette:minor"
    ]
@@ -4172,28 +4438,27 @@
   {
    "id": "medqa-us4-test-0812",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0814",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0815",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "cover-options:minor"
    ]
@@ -4201,109 +4466,115 @@
   {
    "id": "medqa-us4-test-0818",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0819",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0820",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0822",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0825",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0826",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C also defensible)"
    ],
+   "quality": 76,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0828",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0829",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0831",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0832",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0837",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0841",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": [
     "vignette:minor"
    ]
@@ -4311,37 +4582,37 @@
   {
    "id": "medqa-us4-test-0842",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0843",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0846",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0848",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
@@ -4357,8 +4628,10 @@
   {
    "id": "medqa-us4-test-0852",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 81,
    "flaws": [
     "units:minor"
@@ -4398,8 +4671,10 @@
   {
    "id": "medqa-us4-test-0865",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": [
     "cover-options:minor"
@@ -4416,48 +4691,60 @@
   {
    "id": "medqa-us4-test-0868",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0870",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0873",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0874",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0878",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0879",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 83), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 83,
    "flaws": [
     "cover-options:minor"
@@ -4466,28 +4753,35 @@
   {
    "id": "medqa-us4-test-0880",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0881",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0882",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches students to blame contrast and overlook NSAID plus ARB nephrotoxicity in a high-risk elderly diabetic patient, which could lead to continued harmful NSAID use",
+    "an independent solver reached another answer both times",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: Key D is wrong; the best answer is B (NSAID + ARB-related kidney injury)"
    ],
+   "quality": 55,
    "flaws": [
     "vignette:minor"
    ]
@@ -4495,10 +4789,11 @@
   {
    "id": "medqa-us4-test-0885",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)"
    ],
+   "quality": 74,
    "flaws": [
     "clang:minor",
     "vignette:minor"
@@ -4507,10 +4802,9 @@
   {
    "id": "medqa-us4-test-0886",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "longest-key:minor"
    ]
@@ -4518,19 +4812,24 @@
   {
    "id": "medqa-us4-test-0887",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: The stem calls IV fluids plus norepinephrine first-line for hemorrhagic shock from a pelvic fracture. Current trauma practice is early blood products, limited crystalloid and avoiding vasopressors.",
+    "not a single best answer",
+    "the reviewer rejected it: The intended answer, IgA deficiency, is not represented. The key matches vitamin E deficiency."
    ],
+   "quality": 68,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0888",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": [
     "vignette:minor"
    ]
@@ -4538,37 +4837,39 @@
   {
    "id": "medqa-us4-test-0890",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0891",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 70 is below the base bar of 81 (flaws 100, review 50): "
    ],
+   "quality": 70,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0892",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0893",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": [
     "longest-key:minor"
    ]
@@ -4576,55 +4877,62 @@
   {
    "id": "medqa-us4-test-0894",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0896",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0897",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0900",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0901",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 64): "
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0905",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "not a single best answer (C also defensible)",
+    "the reviewer rejected it: The key is wrong: the cue 'earlier detection' points to lead-time bias (C)"
    ],
+   "quality": 53,
    "flaws": [
     "vignette:minor"
    ]
@@ -4632,10 +4940,11 @@
   {
    "id": "medqa-us4-test-0907",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": [
     "longest-key:minor"
    ]
@@ -4643,46 +4952,52 @@
   {
    "id": "medqa-us4-test-0908",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0909",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "not a single best answer (A, C also defensible)",
+    "the reviewer rejected it: The vignette describes trisomy 21, and omphalocele is not a recognized association of it"
    ],
+   "quality": 49,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0910",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0918",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0919",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 94, review 69): vignette"
    ],
+   "quality": 79,
    "flaws": [
     "vignette:minor"
    ]
@@ -4690,64 +5005,65 @@
   {
    "id": "medqa-us4-test-0920",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0922",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0924",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0926",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0928",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0932",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0933",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": [
     "cover-options:minor"
    ]
@@ -4755,28 +5071,29 @@
   {
    "id": "medqa-us4-test-0934",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0936",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0937",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)"
    ],
+   "quality": 66,
    "flaws": [
     "clang:minor",
     "units:minor"
@@ -4785,10 +5102,11 @@
   {
    "id": "medqa-us4-test-0938",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 94, review 61): vignette"
    ],
+   "quality": 74,
    "flaws": [
     "vignette:minor"
    ]
@@ -4796,10 +5114,11 @@
   {
    "id": "medqa-us4-test-0942",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": [
     "cover-options:minor"
    ]
@@ -4807,8 +5126,10 @@
   {
    "id": "medqa-us4-test-0944",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 89,
    "flaws": [
     "cover-options:minor"
@@ -4817,45 +5138,53 @@
   {
    "id": "medqa-us4-test-0946",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0948",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer (B, D also defensible)",
+    "the reviewer rejected it: Lisinopril is equally or more defensible after MI with heart failure signs, hypertension and peripheral vascular disease (AIRE, HOPE)"
    ],
+   "quality": 61,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0951",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0952",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0953",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: The stem shows carvedilol being started during acute decompensated heart failure in a man with borderline-low blood pressure. Guidelines advise against starting a beta-blocker until the patient is euv"
    ],
+   "quality": 80,
    "flaws": [
     "longest-key:minor"
    ]
@@ -4863,55 +5192,61 @@
   {
    "id": "medqa-us4-test-0954",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0955",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 63): "
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0956",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0959",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0960",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0961",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 82, review 66): absolute-terms, clang, vignette"
    ],
+   "quality": 72,
    "flaws": [
     "absolute-terms:minor",
     "clang:minor",
@@ -4921,46 +5256,55 @@
   {
    "id": "medqa-us4-test-0962",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0964",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches oral amoxicillin for suppurative labyrinthitis (acute otitis media with complete sensorineural hearing loss, vertigo and nystagmus), a complication that needs IV antibiotics with CSF penetrati",
+    "an independent solver reached another answer both times",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: Vignette describes suppurative labyrinthitis complicating AOM, which needs IV third-generation cephalosporin (cefotaxime), not oral amoxicillin"
    ],
+   "quality": 54,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0966",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0967",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0970",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 70): vignette"
    ],
+   "quality": 80,
    "flaws": [
     "vignette:minor"
    ]
@@ -4968,19 +5312,21 @@
   {
    "id": "medqa-us4-test-0972",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 76,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0973",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 71): vignette"
    ],
+   "quality": 80,
    "flaws": [
     "vignette:minor"
    ]
@@ -4988,19 +5334,21 @@
   {
    "id": "medqa-us4-test-0974",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 100, review 61): "
    ],
+   "quality": 77,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0975",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 89,
    "flaws": [
     "vignette:minor"
    ]
@@ -5008,19 +5356,21 @@
   {
    "id": "medqa-us4-test-0976",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C also defensible)"
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0979",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": [
     "vignette:minor"
    ]
@@ -5028,16 +5378,20 @@
   {
    "id": "medqa-us4-test-0980",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0983",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 90,
    "flaws": []
   },
@@ -5057,34 +5411,39 @@
   {
    "id": "medqa-us4-test-0985",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0987",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0989",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer (A also defensible)"
    ],
+   "quality": 64,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0990",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
@@ -5099,19 +5458,21 @@
   {
    "id": "medqa-us4-test-0995",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1000",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": [
     "units:minor"
    ]
@@ -5119,100 +5480,107 @@
   {
    "id": "medqa-us4-test-1001",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1004",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1005",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1007",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1008",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1018",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1021",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1022",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1023",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1029",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1030",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": [
     "vignette:minor"
    ]
@@ -5220,10 +5588,11 @@
   {
    "id": "medqa-us4-test-1032",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 70): longest-key"
    ],
+   "quality": 80,
    "flaws": [
     "longest-key:minor"
    ]
@@ -5231,46 +5600,49 @@
   {
    "id": "medqa-us4-test-1034",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 100, review 66): "
    ],
+   "quality": 80,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1039",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 89,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1040",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1042",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1047",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": [
     "cover-options:minor"
    ]
@@ -5278,10 +5650,11 @@
   {
    "id": "medqa-us4-test-1048",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 94, review 64): vignette"
    ],
+   "quality": 76,
    "flaws": [
     "vignette:minor"
    ]
@@ -5289,10 +5662,11 @@
   {
    "id": "medqa-us4-test-1050",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 88, review 70): longest-key, clang"
    ],
+   "quality": 77,
    "flaws": [
     "longest-key:minor",
     "clang:minor"
@@ -5301,64 +5675,69 @@
   {
    "id": "medqa-us4-test-1052",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1054",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1056",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1061",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1065",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1069",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1071",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "cover-options:minor",
     "longest-key:minor"
@@ -5367,64 +5746,69 @@
   {
    "id": "medqa-us4-test-1074",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1078",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1079",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1082",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1083",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1084",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1086",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": [
     "units:minor"
    ]
@@ -5432,73 +5816,77 @@
   {
    "id": "medqa-us4-test-1088",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1091",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1092",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1093",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1094",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1096",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 100, review 66): "
    ],
+   "quality": 80,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1102",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1109",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "cover-options:minor"
    ]
@@ -5506,19 +5894,21 @@
   {
    "id": "medqa-us4-test-1113",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1115",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 70): vignette"
    ],
+   "quality": 80,
    "flaws": [
     "vignette:minor"
    ]
@@ -5526,10 +5916,9 @@
   {
    "id": "medqa-us4-test-1116",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "cover-options:minor"
    ]
@@ -5537,46 +5926,45 @@
   {
    "id": "medqa-us4-test-1118",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1119",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1121",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1122",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1124",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
@@ -5590,10 +5978,11 @@
   {
    "id": "medqa-us4-test-1126",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
@@ -5633,17 +6022,20 @@
   {
    "id": "medqa-us4-test-1137",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1141",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
@@ -5668,16 +6060,20 @@
   {
    "id": "medqa-us4-test-1150",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1151",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": [
     "vignette:minor"
@@ -5686,81 +6082,87 @@
   {
    "id": "medqa-us4-test-1156",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1158",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1160",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1164",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: Teaches starting an oral ACE inhibitor in the ED for a confused, possibly volume-depleted 80-year-old with creatinine 2.1 mg/dL and unknown baseline. This risks worsening acute kidney injury and hyper",
+    "not a single best answer (B, C also defensible)",
+    "the reviewer rejected it: ACE inhibitor and ARB are equally correct, and without proteinuria a CCB or thiazide is also defensible"
    ],
+   "quality": 68,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1166",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1169",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1170",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1172",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1175",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": [
     "longest-key:minor"
    ]
@@ -5768,10 +6170,11 @@
   {
    "id": "medqa-us4-test-1176",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": [
     "cover-options:minor"
    ]
@@ -5779,36 +6182,39 @@
   {
    "id": "medqa-us4-test-1179",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1183",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1187",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1189",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 89,
    "flaws": [
     "vignette:minor"
    ]
@@ -5816,55 +6222,57 @@
   {
    "id": "medqa-us4-test-1192",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1193",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1195",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1196",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1199",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: Facial weakness that keeps getting worse 3 months after onset is a red flag for a structural cause such as a parotid or cerebellopontine-angle tumour. It needs MRI and referral, not symptomatic Botox."
    ],
+   "quality": 76,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1200",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "cover-options:minor"
    ]
@@ -5872,10 +6280,11 @@
   {
    "id": "medqa-us4-test-1203",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 67 is below the base bar of 81 (flaws 62, review 71): cover-options, absolute-terms, clang, vignette"
    ],
+   "quality": 67,
    "flaws": [
     "cover-options:major",
     "absolute-terms:minor",
@@ -5886,73 +6295,75 @@
   {
    "id": "medqa-us4-test-1204",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 100, review 66): "
    ],
+   "quality": 80,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1205",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1212",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1213",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1214",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1215",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1216",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1218",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)"
    ],
+   "quality": 77,
    "flaws": [
     "vignette:minor"
    ]
@@ -5960,19 +6371,21 @@
   {
    "id": "medqa-us4-test-1224",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1226",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": [
     "vignette:minor"
    ]
@@ -5980,10 +6393,11 @@
   {
    "id": "medqa-us4-test-1228",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": [
     "cover-options:minor"
    ]
@@ -5991,19 +6405,23 @@
   {
    "id": "medqa-us4-test-1229",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches cesarean delivery for uncomplicated PPROM at 32 weeks, which means unnecessary surgery and iatrogenic preterm birth",
+    "an independent solver reached another answer both times",
+    "not a single best answer (D also defensible)",
+    "the reviewer rejected it: Uncomplicated PPROM at 32 weeks is managed expectantly with steroids and latency antibiotics, not by cesarean"
    ],
+   "quality": 49,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1231",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "vignette:minor"
    ]
@@ -6011,10 +6429,11 @@
   {
    "id": "medqa-us4-test-1232",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 94, review 68): vignette"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:minor"
    ]
@@ -6022,55 +6441,59 @@
   {
    "id": "medqa-us4-test-1233",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1234",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1236",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1237",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1239",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1241",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "vignette:minor"
    ]
@@ -6078,10 +6501,11 @@
   {
    "id": "medqa-us4-test-1245",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 65): cover-options"
    ],
+   "quality": 77,
    "flaws": [
     "cover-options:minor"
    ]
@@ -6089,10 +6513,11 @@
   {
    "id": "medqa-us4-test-1246",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 86), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 86,
    "flaws": [
     "cover-options:minor"
    ]
@@ -6100,19 +6525,19 @@
   {
    "id": "medqa-us4-test-1249",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1252",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 94, review 63): clang"
    ],
+   "quality": 75,
    "flaws": [
     "clang:minor"
    ]
@@ -6120,55 +6545,55 @@
   {
    "id": "medqa-us4-test-1254",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1256",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1257",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 84), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1258",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1259",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the USMLE resource quota of 160 is full"
    ],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1261",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
@@ -6432,8 +6857,10 @@
   {
    "id": "mmlu-professional_medicine-019",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 85), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 85,
    "flaws": []
   },
@@ -6691,8 +7118,10 @@
   {
    "id": "mmlu-professional_medicine-046",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
@@ -6745,8 +7174,10 @@
   {
    "id": "mmlu-professional_medicine-051",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
@@ -7025,8 +7456,10 @@
   {
    "id": "mmlu-professional_medicine-080",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 88), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 88,
    "flaws": []
   },
@@ -7076,8 +7509,10 @@
   {
    "id": "mmlu-professional_medicine-085",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 89), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 89,
    "flaws": [
     "vignette:minor"
@@ -7094,8 +7529,10 @@
   {
    "id": "mmlu-professional_medicine-087",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 87), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 87,
    "flaws": []
   },
@@ -7186,8 +7623,10 @@
   {
    "id": "mmlu-professional_medicine-097",
    "kind": "usmle-resource",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 82), but the USMLE resource quota of 160 is full"
+   ],
    "quality": 82,
    "flaws": [
     "vignette:minor"
