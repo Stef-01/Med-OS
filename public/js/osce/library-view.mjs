@@ -19,7 +19,7 @@ import { chatPrompt } from '../library/prompt.mjs';
 import { checkUpload, deckName, layers, layerLabel, yearLabel, diffLabel, inPick, KINDS, KIND_IDS, LIMITS } from '../library/item.mjs';
 import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
 import { record, summary, wrapped, monthOf, monthName } from '../library/stats.mjs';
-import { grade, queue, counts, preview, GRADES } from '../library/sched.mjs';
+import { grade, queue, counts, preview, soon, isNew, GRADES } from '../library/sched.mjs';
 import { today, streak, heat, session, timedSecs, tally, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
 import * as api from '../library/api.mjs';
 import { animate, SPRING, reducedMotion } from '../study-kit/spring.mjs';
@@ -345,11 +345,11 @@ function answer(i) {
 }
 function rate(g) {
   const x = V.st.q?.[V.st.i]; if (!x || V.st.pick == null) return;
-  const m = api.studyMem(), had = m.card[x.key], fresh = !had || (!had.reps && !had.lapses && !had.due);
-  m.card[x.key] = grade(had, g, now());
+  const m = api.studyMem(), had = m.card[x.key], fresh = isNew(had);
+  m.card[x.key] = grade(had, g, now(), Math.random);
   if (fresh) { if (m.day.d !== day()) m.day = { d: day(), n: 0 }; m.day.n++; }
   api.saveStudy(m);
-  if (g === 'again' && V.st.q.length < 200) V.st.q.push(x);   /* again: once more before the session ends */
+  if (soon(m.card[x.key], now()) && V.st.q.length < 200) V.st.q.push(x);   /* a learning step (1 or 10 minutes): once more before the session ends, as Anki does */
   V.st.i++; V.st.pick = null; V.st.n++; V.st.note = false;
   paint(); tick(); panel()?.querySelector('.os-libopt, [data-lib="today"]')?.focus({ preventScroll: true });
 }

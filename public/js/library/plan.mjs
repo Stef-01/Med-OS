@@ -7,7 +7,7 @@
                   after each) or timed (a clock on each, like the exam), in what order (due first, shuffled, 0 to 1)
    Pure: the Study tab and the tests. A card here is sched.mjs's card plus stats.mjs's tally (r, w), last (1 right,
    0 wrong: the last answer), f (flagged) and note. */
-import { queue } from './sched.mjs';
+import { queue, isNew } from './sched.mjs';
 import { ladder } from '../mcq/year.mjs';
 import { dayOf } from './stats.mjs';
 
@@ -75,7 +75,7 @@ export function which(entries, cards, w = 'all') {
 export function session(entries, cards, { which: w = 'all', order = 'due', size = 20 } = {}, t = Date.now(), startedToday = 0, rnd = Math.random) {
   const pool = which(entries, cards, w), cap = l => (size ? l.slice(0, size) : l);
   if (order === 'ladder') {
-    const open = pool.filter(e => { const c = cards?.[e.key]; return !c || !c.due || c.due <= t; });
+    const open = pool.filter(e => { const c = cards?.[e.key]; return isNew(c) || c.due <= t; });
     return cap(ladder(open.length ? open : pool, e => e.item.year, size ? Math.max(1, Math.ceil(size / 4)) : 0, e => e.item.difficulty));
   }
   if (order === 'shuffle' || w !== 'all') {   /* a filtered set is studied now, whatever its due dates */
@@ -96,7 +96,7 @@ export function tally(entries, cards, t) {
   let due = 0, fresh = 0, flagged = 0, incorrect = 0, unused = 0;
   for (const e of entries) {
     const c = cards?.[e.key];
-    if (!c || (!c.reps && !c.lapses && !c.due)) fresh++; else if (c.due <= t) due++;
+    if (isNew(c)) fresh++; else if (c.due <= t) due++;
     if (c?.f) flagged++;
     if (c?.last === 0) incorrect++;
     if (!((c?.r | 0) + (c?.w | 0))) unused++;

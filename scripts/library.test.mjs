@@ -4,7 +4,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { chatPrompt } from '../public/js/library/prompt.mjs';
 import { readUpload, check, checkUpload, specialtyOf, kindOf, stripFence, layers, deckName, KIND_IDS, SPECIALTIES, LIMITS } from '../public/js/library/item.mjs';
-import { grade, queue, counts, preview, newCard, NEW_A_DAY, DAY } from '../public/js/library/sched.mjs';
+import { grade, queue, counts, preview, newCard, soon, recall, NEW_A_DAY, DAY } from '../public/js/library/sched.mjs';
 import { duelQuestion, mixPack } from '../public/js/library/mix.mjs';
 import { normPack, normQuestion, topicTree } from '../public/js/vendor/pup-duel/duel/pack.mjs';
 
@@ -69,19 +69,26 @@ test('the drill-down over a library: specialty, then every kind with its count',
   assert.deepEqual(L[0].cats.map(c => c.count), [0, 1, 0, 1]);
 });
 
-test('the scheduler: Again in 10 minutes, Good 1 then 3 days then by ease, Hard and Easy either side', () => {
-  let c = grade(null, 'good', NOW); assert.equal(c.ivl, 1); assert.equal(c.due, NOW + DAY);
-  c = grade(c, 'good', NOW); assert.equal(c.ivl, 3);
-  c = grade(c, 'good', NOW); assert.equal(c.ivl, 8);
-  const again = grade(c, 'again', NOW); assert.equal(again.due, NOW + 6e5); assert.equal(again.lapses, 1); assert.equal(again.reps, 0); assert.equal(again.ease, 2.3);
-  assert.ok(grade(c, 'hard', NOW).ivl < grade(c, 'good', NOW).ivl && grade(c, 'easy', NOW).ivl > grade(c, 'good', NOW).ivl);
-  let e = newCard(); for (let i = 0; i < 20; i++) e = grade(e, 'again', NOW); assert.equal(e.ease, 1.3, 'ease never below 1.3');
-  assert.equal(preview(null, 'again', NOW), '10 min'); assert.equal(preview(null, 'good', NOW), '1 day'); assert.equal(preview(null, 'easy', NOW), '4 days');
+test('FSRS-6: one 10-minute learning step, then days; Hard < Good < Easy; a lapse relearns; an SM-2 card converts', () => {
+  let c = grade(null, 'good', NOW); assert.equal(c.st, 2, 'Good on a new card graduates'); assert.ok(c.due - NOW >= DAY);
+  const a1 = grade(null, 'again', NOW); assert.equal(a1.due - NOW, 10 * 6e4, 'Again: 10 minutes'); assert.equal(a1.st, 1);
+  assert.equal(grade(null, 'hard', NOW).due - NOW, 15 * 6e4, 'Hard on the first step: 1.5 times it');
+  assert.equal(grade(a1, 'good', NOW + 10 * 6e4).st, 2, 'then Good graduates');
+  const later = c.due, hard = grade(c, 'hard', later), good = grade(c, 'good', later), easy = grade(c, 'easy', later);
+  assert.ok(hard.due < good.due && good.due < easy.due, 'Hard < Good < Easy');
+  assert.ok(good.s > c.s, 'a recall makes it more stable');
+  const lapse = grade(good, 'again', good.due); assert.equal(lapse.st, 3); assert.equal(lapse.lapses, 1); assert.equal(lapse.due - good.due, 10 * 6e4); assert.ok(lapse.s < good.s);
+  const old = grade({ due: NOW, ivl: 30, ease: 2.5, reps: 5, lapses: 0 }, 'good', NOW);
+  assert.equal(old.st, 2); assert.ok(old.due - NOW > 20 * DAY, `an SM-2 card at 30 days keeps its place (${Math.round((old.due - NOW) / DAY)} days)`); assert.equal(old.ivl, undefined);
+  assert.equal(preview(null, 'again', NOW), '10 min'); assert.match(preview(null, 'good', NOW), /day/); assert.match(preview(null, 'easy', NOW), /day/);
+  const fz = new Set(Array.from({ length: 30 }, (_, i) => grade(good, 'good', good.due, () => i / 30).due)); assert.ok(fz.size > 1, 'fuzzed with rnd');
+  assert.ok(Math.abs(recall(10, 10) - 0.9) < 1e-9, 'R(S, S) = 90 %');
+  assert.equal(soon(grade(null, 'again', NOW), NOW), true); assert.equal(soon(c, NOW), false);
 });
 
 test('a study session: overdue first, then new up to the day\'s allowance; counts', () => {
   const items = Array.from({ length: 30 }, (_, i) => ({ id: `q${i}` }));
-  const cards = { q0: { ...newCard(), due: NOW - 5 * DAY, reps: 2, ivl: 3 }, q1: { ...newCard(), due: NOW - DAY, reps: 2, ivl: 3 }, q2: { ...newCard(), due: NOW + DAY, reps: 2, ivl: 3 } };
+  const cards = { q0: { ...newCard(), st: 2, due: NOW - 5 * DAY, reps: 2 }, q1: { ...newCard(), st: 2, due: NOW - DAY, reps: 2 }, q2: { ...newCard(), st: 2, due: NOW + DAY, reps: 2 } };
   const q = queue(items, cards, NOW);
   assert.deepEqual(q.slice(0, 2).map(x => x.id), ['q0', 'q1']); assert.equal(q.length, 2 + NEW_A_DAY); assert.ok(!q.some(x => x.id === 'q2'));
   assert.equal(queue(items, cards, NOW, NEW_A_DAY).length, 2);
