@@ -136,3 +136,28 @@ Founder 2026-10-26: "a mode called 0 to 1 ... first year medical content to seco
 - **Who sets it.** ChatGPT, through the prompt; for the bank, `scripts/tag-years.mjs` (Claude, kept in `data/mcq/years.json`, merged by `build-duel-pack.mjs`); otherwise `guessYear()`, and an upload says so as a tip.
 - **Study.** The bank is a deck you can study too. There are Year chips, and Order is Due first or 0 to 1: five not-yet-learnt cards from each year, Year 1 first, with a banner at each new year.
 - **Duel.** Order is Shuffled or 0 to 1 (Pup Duel `makeSetup({ ladder })`). It deals round the years and plays them in year order, and the question's tag shows its year.
+
+## The study ecosystem (2026-10-26)
+
+Founder: "a much more robust personal study ecosystem by researching online how other platforms have it", "minimalist", "engaging". What was borrowed, and from where:
+
+| Feature | From | Where |
+|---|---|---|
+| FSRS-6 scheduling (90 % retention, one 10-minute step) | Anki; the open SRS benchmark | `library/sched.mjs` |
+| Today: a daily goal ring, a streak (today forgiven until it is over), one Start | Duolingo | `library/plan.mjs`, Study home |
+| Modes: Smart 10, 0 to 1, your weak spot, got wrong, flagged, Notebook | AMBOSS, UWorld | `plan.mjs` `smart`, `session` |
+| Custom session: deck, specialty, kind, year, difficulty; all, unused, incorrect or flagged; size; tutor or timed; order | UWorld, AMBOSS | Custom |
+| The grade follows the answer: one big Next | Lecturio, Brainscape | the card |
+| How others answered | UWorld, AMBOSS | `0009_mcq_picks.sql` |
+| Flags, notes, a Notebook; a nudge for a question that keeps catching you | Anki, UWorld | the card |
+| Resume a session; review it at the end; redo the missed | UWorld | the card, the end |
+| The exam plan: the day's new questions from your exam date | AMBOSS, RemNote | Study home |
+| A heatmap; your gaps by specialty, year and difficulty | Anki, AMBOSS | Your summary |
+| The week among friends, effort not scores | Duolingo | Friends, `friend_week` |
+| Check the medicine before saving an upload | (49 % of ChatGPT MCQs had flaws, 22 % factual errors) | Upload, `library/verify.mjs` |
+| Report a problem with a bank question | everyone | `0010_mcq_reports.sql` |
+| A monthly Wrapped, with a story card to post | Spotify | `osce/wrapped-view.mjs` |
+
+The bank Study and the duel draw on is the stations' questions, the reviewed pool, 523 high-yield questions written to 225 topics from the AMC MCQ specification (`scripts/generate-hy.mjs`) and 494 MedExpQA cases (CC BY 4.0, adapted, `scripts/import-medexpqa.mjs`); every one tagged by year and difficulty.
+
+Motion everywhere is Apple's springs (`study-kit/spring.mjs`): damping and response, interruptible, velocity handed on; sheets you can drag; presses that give on touch.

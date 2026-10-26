@@ -51,7 +51,7 @@ export function openWrapped(month, { preview = false } = {}) {
       <button class="os-wraptap os-wraptap--l" data-wrap="prev" aria-label="Previous"></button><button class="os-wraptap os-wraptap--r" data-wrap="next" aria-label="Next"></button>
     </div>` });
   W = { month, w, i: 0, slides, timer: 0, el: d.el, preview };
-  d.el.addEventListener('click', e => { const b = e.target.closest('[data-wrap]'); if (!b) return; const a = b.dataset.wrap; if (a === 'close' || a === 'done') return closeDialog(); if (a === 'next') return go(1); if (a === 'prev') return go(-1); if (a === 'share') return share(); });
+  d.el.addEventListener('click', e => { const b = e.target.closest('[data-wrap]'); if (!b) return; const a = b.dataset.wrap; if (a === 'close' || a === 'done') return closeDialog(); if (a === 'next') return go(1); if (a === 'prev') return go(-1); if (a === 'share') return share(); if (a === 'image') return saveImage(); });
   paint();
   d.el.querySelector('[data-wrap="next"]').focus({ preventScroll: true });
 }
@@ -76,10 +76,40 @@ function paint() {
       <dl><div><dt>Questions</dt><dd>${w.n}</dd></div><div><dt>Right</dt><dd>${w.acc}%</dd></div><div><dt>Streak</dt><dd>${w.streak}d</dd></div><div><dt>Days</dt><dd>${w.days}</dd></div></dl>
       ${w.top ? `<p><span>Top specialty</span><b>${esc(w.top.id)}</b></p>` : ''}<p><span>Persona</span><b>${esc(w.vibe.name)}</b></p>
       ${w.maxYear ? `<p><span>Climbed to</span><b>${esc(YEARS[w.maxYear].label)}</b></p>` : ''}</div>
-      <div class="os-wrapacts"><button class="os-wrapbtn" data-wrap="share">Copy for the group chat</button><button class="os-wrapbtn os-wrapbtn--ghost" data-wrap="done">Done</button></div>`;
+      <div class="os-wrapacts"><button class="os-wrapbtn" data-wrap="image">Save the card</button><button class="os-wrapbtn os-wrapbtn--ghost" data-wrap="share">Copy for the group chat</button><button class="os-wrapbtn os-wrapbtn--ghost" data-wrap="done">Done</button></div>`;
   } else box.innerHTML = `${kick ? `<p class="os-wrapk">${esc(kick)}</p>` : ''}<p class="os-wrapbig">${esc(big)}</p><p class="os-wrapline">${esc(line)}</p>`;
   W.el.querySelector('.os-wraptap--r').hidden = theme === 'final';
   if (theme !== 'final' && !matchMedia('(prefers-reduced-motion: reduce)').matches) W.timer = setTimeout(() => go(1), AUTO);
+}
+/* the card as a picture for a story (1080 by 1920, Wrapped's own shape): drawn on a canvas, then the phone's share
+   sheet when it takes files, else a download */
+export function drawCard(cv, w) {
+  const g = cv.getContext('2d'), W = cv.width = 1080, H = cv.height = 1920;
+  const bg = g.createLinearGradient(0, 0, W, H); bg.addColorStop(0, '#1db954'); bg.addColorStop(0.55, '#7b2ff7'); bg.addColorStop(1, '#ff3d77');
+  g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  g.fillStyle = 'rgba(0,0,0,.28)'; round(g, 90, 520, W - 180, 980, 56); g.fill();
+  g.fillStyle = '#fff'; g.textBaseline = 'alphabetic';
+  const font = (s, wt = 800) => `${wt} ${s}px system-ui, -apple-system, 'Segoe UI', sans-serif`;
+  g.font = font(54); g.fillText('Med-OS', 90, 200);
+  g.font = font(120, 900); wrap(g, `${monthName(w.month)}, wrapped`, 90, 360, W - 180, 128);
+  const stats = [['Questions', String(w.n)], ['Right', `${w.acc}%`], ['Streak', `${w.streak}d`], ['Days', String(w.days)]];
+  stats.forEach(([k, v], i) => { const x = 150 + (i % 2) * 420, y = 680 + Math.floor(i / 2) * 260; g.font = font(40, 700); g.globalAlpha = 0.8; g.fillText(k, x, y); g.globalAlpha = 1; g.font = font(130, 900); g.fillText(v, x, y + 130); });
+  const rows = [['Top specialty', w.top?.id || '–'], ['Persona', w.vibe.name], ...(w.maxYear ? [['Climbed to', YEARS[w.maxYear].label]] : [])];
+  rows.forEach(([k, v], i) => { const y = 1260 + i * 80; g.font = font(42, 600); g.globalAlpha = 0.8; g.fillText(k, 150, y); g.globalAlpha = 1; g.font = font(46, 800); g.textAlign = 'right'; g.fillText(v, W - 150, y); g.textAlign = 'left'; });
+  g.font = font(44, 700); g.globalAlpha = 0.9; g.fillText('mdosce.vercel.app', 90, H - 120); g.globalAlpha = 1;
+  return cv;
+}
+function round(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+function wrap(g, text, x, y, max, lh) { let line = '', yy = y; for (const word of text.split(' ')) { const t = line ? `${line} ${word}` : word; if (g.measureText(t).width > max && line) { g.fillText(line, x, yy); line = word; yy += lh; } else line = t; } g.fillText(line, x, yy); }
+async function saveImage() {
+  if (!W) return;
+  const cv = drawCard(document.createElement('canvas'), W.w), name = `med-os-${W.w.month}-wrapped.png`;
+  const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
+  if (!blob) return notify('Could not make the picture on this device.', 'danger');
+  const file = new File([blob], name, { type: 'image/png' });
+  try { if (navigator.canShare?.({ files: [file] })) { await navigator.share({ files: [file], text: shareText(W.w) }); return; } } catch (e) { if (e?.name === 'AbortError') return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  notify('Saved. Post it to your story.', 'success');
 }
 async function share() {
   const t = shareText(W.w);

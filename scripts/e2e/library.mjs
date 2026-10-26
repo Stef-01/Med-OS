@@ -291,6 +291,9 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(/Night Owl/.test(await wr.textContent('.os-wrapcard')) && /76/.test(await wr.textContent('.os-wrapcard')), 'wrapped: the final card has the numbers and the persona');
   await wr.waitForTimeout(500); await shot(wr, '375-wrapped-final');
   ok(await wr.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'wrapped: fits the phone');
+  const [dl] = await Promise.all([wr.waitForEvent('download', { timeout: 5000 }).catch(() => null), wr.click('[data-wrap="image"]')]);
+  if (dl) { const fp = path.join(SHOTS, 'lib-wrapped-card.png'); await dl.saveAs(fp); ok(/wrapped\.png$/.test(dl.suggestedFilename()), `wrapped: Save the card makes a 1080 by 1920 picture (${dl.suggestedFilename()})`); }
+  else ok(false, 'wrapped: Save the card makes a picture');
   await wr.click('[data-wrap="share"]');
   ok(/My .* on Med-OS, wrapped/.test(await wr.evaluate(() => window.__copied || '')), 'wrapped: Copy for the group chat');
   await wr.click('[data-wrap="done"]'); await wr.waitForSelector('.os-wrap', { state: 'detached' });
