@@ -528,7 +528,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelector('.pd-review').append(...st.setup.questions.map((q, i) => {
         const R = st.rounds[i], a = R?.answers[me], b = R?.answers[opp], li = document.createElement('li');
         li.className = 'pd-rv'; li.dataset.ok = a?.ok ? '1' : '0';
-        li.innerHTML = `<p class="pd-rv-q"></p><p class="pd-rv-a">${icon('check')}<span></span></p>`;
+        const where = st.setup.topic || q.topic;   /* a duel narrowed to a topic names that topic, not the question's first */
+        li.innerHTML = `${where || q.catLabel ? '<p class="pd-rv-meta"></p>' : ''}<p class="pd-rv-q"></p><p class="pd-rv-a">${icon('check')}<span></span></p>`;
+        if (where || q.catLabel) li.querySelector('.pd-rv-meta').textContent = [where, q.catLabel].filter(Boolean).join(' › ');   /* where it came from: what to revise */
         li.querySelector('.pd-rv-q').textContent = q.stem;
         li.querySelector('.pd-rv-a span').textContent = q.options[q.answer];
         if (a && a.choice !== null && a.choice !== undefined && !a.ok) {

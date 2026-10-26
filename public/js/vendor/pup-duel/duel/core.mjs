@@ -44,7 +44,7 @@ export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topi
     if (q.why) out.why = q.why;
     if (q.notes) out.notes = order.map(i => q.notes[i] ?? null);
     if (q.topic) out.topic = q.topic;
-    if (q.cat) out.cat = q.cat;
+    if (q.cat) { out.cat = q.cat; const l = (pack?.cats || []).find(c => c.id === q.cat)?.label; if (l) out.catLabel = String(l).slice(0, 60); }
     if (q.origin) out.origin = q.origin;
     return out;
   });
