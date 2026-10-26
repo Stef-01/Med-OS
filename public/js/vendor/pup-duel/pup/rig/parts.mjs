@@ -31,6 +31,11 @@ function uPath(cx, top, w, h, r) {
 // square: a broad flat jaw with rounded corners (bulldogs, boxers, mastiffs); wedge: straight cheeks tapering to a
 // narrow soft chin (huskies, shibas, foxy dogs); cheeky: full cheeks a touch past the sides, then a round chin (fluffy
 // toys). Inside -50..52 at every height, so what fits the old head still fits.
+// LPS style (eyes.mjs): each eye a rounder white of its own, set LPS_GAP eye-units out from the middle (the reference's
+// eyes are 0.56 of the head apart, each a third of it wide, measured 2026-10-26), its own clip the same shape
+var LPS_GAP = 9, LPS_GLASSES = 1.62;
+var LPS_EYE_L = '<ellipse cx="-10.7" cy="-30.6" rx="12.4" ry="13.6"/>', LPS_EYE_R = '<ellipse cx="12.7" cy="-30.6" rx="12.4" ry="13.6"/>';
+
 function headOutline(c) {
   var h = c.head.h, r = c.head.r, top = -55, bot = top + h, L = -50, R = 50, jaw = c.head.jaw || 'round';
   var start = 'M' + (L + r) + ' ' + top + ' H' + (R - r) + ' A' + r + ' ' + r + ' 0 0 1 ' + R + ' ' + (top + r);
@@ -216,7 +221,7 @@ function BIB(p, c) {
 
 function scl(k, x, y) { return k === 1 ? '' : 'translate(' + x + ' ' + y + ') scale(' + k + ') translate(' + (-x) + ' ' + (-y) + ')'; }
 function dogMarkup(c, P) {
-  var p = c.pal, s = c.scale, m = c.mirror ? -1 : 1;
+  var lps = c.style === 'lps', gap = lps ? LPS_GAP : 0, p = c.pal, s = c.scale, m = c.mirror ? -1 : 1;
   var hb = -55 + c.head.h;                       // head bottom
   var bR = 36, bL = bR - c.body.w;               // body edges
   var fx = (bL + bR) / 2, fy = c.floorY;          // floor point under the body
@@ -300,35 +305,46 @@ function dogMarkup(c, P) {
         marksOn(c, 'crest') +    // unclipped, over the head and ears: a tuft, a fin, a headpiece, a bow
         ''+
         '<g data-p="feat">' +
-          '<rect data-p="browL" x="' + (-10.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.brow + '"/>' +
-          '<rect data-p="browR" x="' + (12.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.brow + '"/>' +
+          '<rect data-p="browL"' + (lps ? ' display="none"' : '') + ' x="' + (-10.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.brow + '"/>' +
+          '<rect data-p="browR"' + (lps ? ' display="none"' : '') + ' x="' + (12.7 - c.brow.w / 2) + '" y="' + c.brow.y + '" width="' + c.brow.w + '" height="' + c.brow.h + '" rx="' + c.brow.h / 2 + '" fill="' + p.brow + '"/>' +
+          '<g transform="translate(0 ' + (lps ? 3 : 0) + ')">' +   // LPS: the eyes a little lower, mid-face
           '<g transform="translate(1 -17.4) scale(' + c.eye + ') translate(-1 17.4)">' +
+            (lps ? '<clipPath id="' + P + '-eyeL">' + LPS_EYE_L + '</clipPath><clipPath id="' + P + '-eyeR">' + LPS_EYE_R + '</clipPath>' :
             '<clipPath id="' + P + '-eyeL"><path d="M1 -17.4 V-33.3 A11.7 11.7 0 0 0 -22.4 -33.3 V-25.4 A8 8 0 0 0 -14.4 -17.4 Z"/></clipPath>' +
-            '<clipPath id="' + P + '-eyeR"><path d="M1 -17.4 V-33.3 A11.7 11.7 0 0 1 24.4 -33.3 V-25.4 A8 8 0 0 1 16.4 -17.4 Z"/></clipPath>' +
+            '<clipPath id="' + P + '-eyeR"><path d="M1 -17.4 V-33.3 A11.7 11.7 0 0 1 24.4 -33.3 V-25.4 A8 8 0 0 1 16.4 -17.4 Z"/></clipPath>') +
             '<clipPath id="' + P + '-lidL"><rect x="-23.7" y="-46.5" width="25.3" height="30.5"/></clipPath>' +
             '<clipPath id="' + P + '-lidR"><rect x="0.4" y="-46.5" width="25.3" height="30.5"/></clipPath>' +
             // both whites as ONE outline: two clip edges meeting at the centre line leave a hairline
-            '<path data-p="white" d="M1 -17.4 H-14.4 A8 8 0 0 1 -22.4 -25.4 V-33.3 A11.7 11.7 0 0 1 1 -33.3 A11.7 11.7 0 0 1 24.4 -33.3 V-25.4 A8 8 0 0 1 16.4 -17.4 Z" fill="#ffffff"/>' +
+            (lps ? '<g data-p="white" fill="#ffffff"><g transform="translate(' + (-gap) + ' 0)">' + LPS_EYE_L + '</g><g transform="translate(' + gap + ' 0)">' + LPS_EYE_R + '</g></g>' :
+            '<path data-p="white" d="M1 -17.4 H-14.4 A8 8 0 0 1 -22.4 -25.4 V-33.3 A11.7 11.7 0 0 1 1 -33.3 A11.7 11.7 0 0 1 24.4 -33.3 V-25.4 A8 8 0 0 1 16.4 -17.4 Z" fill="#ffffff"/>') +
+            '<g transform="translate(' + (-gap) + ' 0)">' +   // LPS: the left eye, all of it, set out from the middle
             '<g clip-path="url(#' + P + '-eyeL)"><g data-p="pupilL">' +
               pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, -7.3, -1) + '</g>' +
               '<g data-p="heyeL">' + heye + '</g></g>' +
+            '</g><g transform="translate(' + gap + ' 0)">' +
             '<g clip-path="url(#' + P + '-eyeR)"><g data-p="pupilR">' +
               pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, 12.1, 1) + '</g>' +
-              '<g data-p="heyeR">' + heye + '</g></g>' +
+              '<g data-p="heyeR">' + heye + '</g></g>' + '</g>' +
             // the lids, and the cheeks that rise into a squint, wear the face round each eye (a patch over one: its colour)
-            '<g clip-path="url(#' + P + '-lidL)">' +
+            '<g transform="translate(' + (-gap) + ' 0)"><g clip-path="url(#' + P + '-lidL)">' +
               '<rect data-p="lidL" x="-30" y="-76" width="38" height="29.5" fill="' + p.lidL + '"/>' +
-              '<circle data-p="cheekL" cx="-10.7" cy="-1.2" r="15" fill="' + p.lidL + '"/></g>' +
-            '<g clip-path="url(#' + P + '-lidR)">' +
+              '<circle data-p="cheekL" cx="-10.7" cy="-1.2" r="15" fill="' + p.lidL + '"/></g></g>' +
+            '<g transform="translate(' + gap + ' 0)"><g clip-path="url(#' + P + '-lidR)">' +
               '<rect data-p="lidR" x="-6" y="-76" width="38" height="29.5" fill="' + p.lidR + '"/>' +
-              '<circle data-p="cheekR" cx="12.7" cy="-1.2" r="15" fill="' + p.lidR + '"/></g>' +
-            '<path data-p="shutL" d="M-19.5 -29 Q-10.7 -38 -1.9 -29" fill="none" stroke="' + p.feature + '" stroke-width="3.2" stroke-linecap="round" opacity="0"/>' +
-            '<path data-p="shutR" d="M3.9 -29 Q12.7 -38 21.5 -29" fill="none" stroke="' + p.feature + '" stroke-width="3.2" stroke-linecap="round" opacity="0"/>' +
+              '<circle data-p="cheekR" cx="12.7" cy="-1.2" r="15" fill="' + p.lidR + '"/></g></g>' +
+            '<path data-p="shutL" transform="translate(' + (-gap) + ' 0)" d="M-19.5 -29 Q-10.7 -38 -1.9 -29" fill="none" stroke="' + p.feature + '" stroke-width="3.2" stroke-linecap="round" opacity="0"/>' +
+            '<path data-p="shutR" transform="translate(' + gap + ' 0)" d="M3.9 -29 Q12.7 -38 21.5 -29" fill="none" stroke="' + p.feature + '" stroke-width="3.2" stroke-linecap="round" opacity="0"/>' +
+            // LPS style (eyes.mjs): a dark liner hugging the top of each eye and two flicked lashes at its outer corner
+            (lps ? '<g transform="translate(' + (-gap) + ' 0)"><g data-p="lashL"><path d="M-17 -51.6 Q-11 -55 -4.6 -52.2" fill="none" stroke="' + p.ink + '" stroke-width="2" stroke-linecap="round"/><path d="M-21.6 -31.6 C-21 -41 -15 -45.2 -10.2 -45.2 C-7 -45.2 -4.6 -44 -3.2 -42.4" fill="none" stroke="' + p.ink + '" stroke-width="3" stroke-linecap="round"/>' +
+                     '<path d="M-21.4 -33 Q-25.4 -34.6 -27.6 -37.8 M-20.2 -37 Q-23.4 -40.4 -24.6 -44" fill="none" stroke="' + p.ink + '" stroke-width="2.2" stroke-linecap="round"/></g></g>' +
+                   '<g transform="translate(' + gap + ' 0)"><g data-p="lashR"><path d="M19 -51.6 Q13 -55 6.6 -52.2" fill="none" stroke="' + p.ink + '" stroke-width="2" stroke-linecap="round"/><path d="M23.6 -31.6 C23 -41 17 -45.2 12.2 -45.2 C9 -45.2 6.6 -44 5.2 -42.4" fill="none" stroke="' + p.ink + '" stroke-width="3" stroke-linecap="round"/>' +
+                     '<path d="M23.4 -33 Q27.4 -34.6 29.6 -37.8 M22.2 -37 Q25.4 -40.4 26.6 -44" fill="none" stroke="' + p.ink + '" stroke-width="2.2" stroke-linecap="round"/></g></g>' : '') +
             bridge +
             SHADES +
             // glasses ride the eyes: this group's per-dog scale and the features' yaw; a mirrored dog wears them unmirrored
-            (c.mirror ? '<g transform="matrix(-1 0 0 1 2 0)"><g data-p="wearFace"></g></g>' : '<g data-p="wearFace"></g>') +
-          '</g>' +
+            (lps ? '<g transform="translate(1 0) scale(' + LPS_GLASSES + ' 1) translate(-1 0)">' : '<g>') +   // LPS: glasses spread to the set-apart eyes
+            (c.mirror ? '<g transform="matrix(-1 0 0 1 2 0)"><g data-p="wearFace"></g></g>' : '<g data-p="wearFace"></g>') + '</g>' +
+          '</g></g>' +
         '</g>' +
         '<g data-p="snout">' +
           '<path d="' + muzzlePath + '" fill="' + p.muzzle + '"/>' +
@@ -340,8 +356,11 @@ function dogMarkup(c, P) {
           '<g data-p="tongue">' +
             '<rect x="-4.5" y="-5" width="12" height="19" rx="6" fill="' + p.tongue + '"/>' +
             '<rect x="0.2" y="-3" width="2.6" height="10.5" rx="1.3" fill="' + p.tongueSh + '"/></g>' +
+          (lps ? // LPS: a small button nose and a closed little smile under it (the reference has no open mouth at rest)
+            '<path d="M-4.6 -20 Q1.5 -23 7.6 -20 Q8.6 -15 1.5 -12.6 Q-5.6 -15 -4.6 -20 Z" fill="' + p.nose + '"/><ellipse cx="-0.4" cy="-19" rx="2.2" ry="1.2" fill="' + p.noseHi + '"/>' +
+            '<path d="M1.5 -12.6 V-10 M-6 -10.6 Q-2.4 -6.6 1.5 -10 Q5.4 -6.6 9 -10.6" fill="none" stroke="' + p.ink + '" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>' :
           '<rect x="-8" y="-22" width="19" height="12.5" rx="6.25" fill="' + p.nose + '"/>' +
-          '<rect x="-4.2" y="-19.8" width="6.5" height="2.8" rx="1.4" fill="' + p.noseHi + '"/>' +
+          '<rect x="-4.2" y="-19.8" width="6.5" height="2.8" rx="1.4" fill="' + p.noseHi + '"/>') +
         '</g>' +
         bone +
         (c.neckOn === 'head' ? '<g data-p="wearNeck" transform="translate(0 ' + (hb - 4) + ')"></g>' : '') +

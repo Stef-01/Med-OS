@@ -104,7 +104,7 @@ function makeDog(c, slot, P) {
    'tipOutL', 'tipOutR', 'tipInL', 'tipInR', 'earsBack', 'earsFront', 'earTips', 'feat', 'browL', 'browR', 'pupilL', 'pupilR',
    'heyeL', 'heyeR', 'lidL', 'lidR', 'cheekL', 'cheekR', 'shutL', 'shutR', 'snout', 'blush', 'mouth', 'tongue', 'bone',
    'accHead', 'acc', 'white', 'shades', 'teeth', 'wearHead', 'wearFace', 'wearNeck', 'wearBack', 'wearOnPop', 'wearOnFit', 'earsOver', 'armClip', 'armEars', 'armEarL', 'armEarR', 'ruff', 'ruffClip',
-   'tailIn', 'tailDots', 'bridge', 'grimeB', 'grimeH'].forEach(function (k) { e[k] = q(k); });
+   'tailIn', 'tailDots', 'bridge', 'grimeB', 'grimeH', 'linerL', 'linerR', 'lashL', 'lashR'].forEach(function (k) { e[k] = q(k); });
   e.heyeL = e.heyeL.firstChild; e.heyeR = e.heyeR.firstChild;
   // the eye as a whole: the whites, each eye's clip (its pupil and its heart), the lids and the cheeks that squint into
   // it, the strokes of a closed eye; all left out under solid lenses (below)
@@ -573,6 +573,8 @@ function makeDog(c, slot, P) {
     set(e.lidR, 'height', 29.5 + lid * 30.5);
     set(e.lidL, 'transform', rot(-14 * slant, -10.7, edge));
     set(e.lidR, 'transform', rot(14 * slant, 12.7, edge));
+    // LPS style: the liner and lashes sit on the eye; a blink's lid covers the eye under them, and a closed eye (shut) hides them
+    if (e.lashL) { var lv = String(Math.max(0, 1 - Math.max(0, lid - 0.55) / 0.3)); set(e.lashL, 'opacity', lv); set(e.lashR, 'opacity', lv); }
     var cheekY = -1.2 - 21 * cheekK - 4 * lid;
     set(e.cheekL, 'cy', cheekY);
     set(e.cheekR, 'cy', cheekY);
@@ -586,7 +588,9 @@ function makeDog(c, slot, P) {
     // Red eyes blend the white toward pink (a blend, never a swap).
     var red = clamp(ch('redEye'), 0, 1), wR = 255, wG = 255 - 56 * red, wB = 255 - 56 * red;
     // a closing squint tints the white toward the eye's own colour (above): never a blank white crescent
-    var sq = (rig.squint || 0) * 0.7, inkC = rig.inkRGB;
+    // the whites stay white (founder 2026-10-26: the squint's tint toward the iris turned them black when the cheeks rose,
+    // 'scary to see'); a smile shows its pupils because they ride up into the open band (above), not because the white darkens
+    var sq = 0, inkC = rig.inkRGB;
     if (c.sclera === false) set(e.white, 'fill', c.pal.lidL);   // bead eyes: no white, only the pupils (eyes.mjs)
     else set(e.white, 'fill', 'rgb(' + Math.round(wR + (inkC[0] - wR) * sq) + ',' + Math.round(wG + (inkC[1] - wG) * sq) + ',' + Math.round(wB + (inkC[2] - wB) * sq) + ')');
     // Shades drop in from above the head and settle with a small bounce.
@@ -598,9 +602,10 @@ function makeDog(c, slot, P) {
     // Mouth: one D shape. Taller is a pant or a yawn, narrower an "o", flipped a pout.
     var mouth = clamp(ch('mouth') + ch('pant') * joy * (0.6 + 0.12 * wave(t, 600)), -0.6, 1.4);
     var mouthW = ch('mouthW'), mx = ch('mouthX'), mt = ch('mouthTilt');
-    set(e.mouth, 'transform', tr(1.5 + mx, -7) + ' rotate(' + r3(mt) + ') scale(' + r3(mouthW) + ' ' + r3(mouth) + ') ' + tr(-1.5, 7));
+    if (c.style === 'lps') { mouth = mouth > 0 ? Math.max(0, mouth - 0.36) * 0.75 : mouth * 0.6; mouthW *= 0.7; }   // LPS: at rest the closed little smile; only a real laugh or a gasp opens a (smaller) mouth
+    set(e.mouth, 'transform', tr(1.5 + mx, c.style === 'lps' ? -9 : -7) + ' rotate(' + r3(mt) + ') scale(' + r3(mouthW) + ' ' + r3(mouth) + ') ' + tr(-1.5, 7));
     set(e.teeth, 'transform', tr(0, -7) + ' scale(1 ' + r3(clamp(ch('teeth'), 0, 1)) + ') ' + tr(0, 7));
-    var tongue = clamp(ch('tongue'), 0, 1) * clamp(mouth / 0.3, 0, 1), side = clamp(ch('tside'), 0, 1);
+    var tongue = clamp(ch('tongue'), 0, 1) * clamp(mouth / 0.3, 0, 1) * (c.style === 'lps' && mouth < 0.05 ? 0 : 1), side = clamp(ch('tside'), 0, 1);
     set(e.tongue, 'transform', tr(1.5 + 6.5 * side + mx, -5) + ' rotate(' + r3(4 * wave(t, 600, 0.25) * tongue + 26 * side + 0.6 * tilt * side + mt) + ') scale(1 ' +
       r3(0.12 * clamp(mouth / 0.3, 0, 1) + 0.88 * tongue) + ') ' + tr(-1.5, 5));
 

@@ -358,7 +358,8 @@ export function dress(d, look) {
   const col = look && COLLARS.find(c => c.id === look.collar);
   /* the eyes and the blush (eyes.mjs): a shape, an iris and a blush the kit knows, else the dog's own */
   const face = {}, sh = look && eyeShape(look.eyes), ir = look && irisOf(look.iris), bl = look && blushOf(look.blush);
-  if (sh && sh.id) { face.eyes = sh.id; face.sclera = sh.id !== 'bead'; }   /* a chosen shape decides the white; Its own keeps the dog's */
+  if (sh && sh.id) { face.eyes = sh.id; face.sclera = sh.id !== 'bead'; face.eyesChosen = true; }   /* a chosen shape decides the white; Its own keeps the dog's */
+  if (look && (look.style === 'classic' || look.style === 'lps')) face.style = look.style;
   if (ir && ir.id) { face.iris = ir.id; face.irisDeep = ir.deep; }
   if (bl && bl.id) face.blushMode = bl.id;
   if (!k && !col) return Object.keys(face).length ? { ...d, ...face } : d;

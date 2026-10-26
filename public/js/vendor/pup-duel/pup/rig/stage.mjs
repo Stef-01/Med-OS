@@ -633,7 +633,7 @@ againEl.addEventListener('click', function () { if (lastGif) offer(lastGif); });
 var Q = new URLSearchParams(location.search), EMBED = Q.get('embed') === '1';
 var first = EMBED ? roster.findIndex(function (r) { return r.c.id === dogById(Q.get('dog')).id; }) : 0;   // an unknown dog: the registry's default
 if (EMBED) document.documentElement.classList.add('embed');
-if (EMBED) roster[first].c = resolve(dress(DOGS[first], { coat: Q.get('coat'), collar: Q.get('collar'), eyes: Q.get('eyes'), iris: Q.get('iris'), blush: Q.get('blush') }));   // the look's coat, collar, eyes and blush (coats.mjs, eyes.mjs)
+if (EMBED) roster[first].c = resolve(dress(DOGS[first], { coat: Q.get('coat'), collar: Q.get('collar'), eyes: Q.get('eyes'), iris: Q.get('iris'), blush: Q.get('blush'), style: Q.get('style') }));   // the look's coat, collar, eyes and blush (coats.mjs, eyes.mjs)
 addDog(roster[first]);
 if (EMBED) roster[first].rig.setExpr(EXPR[Q.get('expr')] ? Q.get('expr') : 'happy', clock);
 var startCam = cameraFor(inScene());

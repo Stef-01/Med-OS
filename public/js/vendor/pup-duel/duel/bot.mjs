@@ -11,6 +11,16 @@ import { DEFAULT_DOG } from '../pup/rig/breeds.mjs';
 
 export const BOT = { name: 'Rex', look: { dog: 'duke', wear: { head: 'snapback', face: 'aviators' } }, skill: 0.7, early: 0.25, late: 0.75 };
 
+/* Vs AI (founder 2026-10-26: "have dual a mate have vs an AI mode"): how hard Rex plays. skill: how often he is right;
+   early, late: how far through the clock he answers (a fraction of it). Seeded, so a level is the same game every time */
+export const AI_LEVELS = {
+  easy: { label: 'Easy', skill: 0.45, early: 0.45, late: 0.95 },
+  medium: { label: 'Medium', skill: 0.7, early: 0.25, late: 0.75 },
+  hard: { label: 'Hard', skill: 0.88, early: 0.12, late: 0.45 },
+  genius: { label: 'Genius', skill: 0.97, early: 0.05, late: 0.28 }
+};
+export const levelOf = id => (Object.hasOwn(AI_LEVELS, id) ? id : 'medium');
+
 export function createBot({ transport, me, timers = realTimers, seed = 7, skill = BOT.skill, early = BOT.early, late = BOT.late, pollMs = 1200, onGame = () => {} }) {
   const r = rng(seed), sessions = new Map();
   let stopped = false, timer = null;
@@ -54,6 +64,6 @@ export async function practiceWorld({ name = 'You', look = { dog: DEFAULT_DOG, w
   const meT = net.client('me'), botT = net.client('bot');
   const me = await meT.register(name.slice(0, 20).padEnd(2, '.'), '0000', look);
   const botMe = await botT.register(bot.name, '0000', bot.look);
-  const b = createBot({ transport: botT, me: botMe, timers, seed, skill: bot.skill }).start();
+  const b = createBot({ transport: botT, me: botMe, timers, seed, skill: bot.skill, early: bot.early ?? BOT.early, late: bot.late ?? BOT.late }).start();
   return { transport: meT, me, bot: botMe, net, stop: () => b.stop() };
 }

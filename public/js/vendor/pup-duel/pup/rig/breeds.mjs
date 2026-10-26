@@ -16,6 +16,8 @@
 // pop-audit.mjs) dress it in everything the shop sells.
 
 /* every colour a part may ask for. A dog's palette names its own; the rest follow from these (resolve, below) */
+import { DEFAULT_STYLE, lpsIris } from './eyes.mjs';
+
 const PAL0 = { mouth: '#b03a3a', tongue: '#ff7a8c', tongueSh: '#e45c70', tag: '#ffc800', tagSh: '#e5a800', blush: '#ff8a8a' };
 
 const flat = v => [[0, v], [7200, v]];   /* a value held through the whole 7.2 s loop */
@@ -779,6 +781,15 @@ export function resolve(d) {
     p['earIn' + s] = p['earIn' + s] || p.earIn || p.tan;                    // the ear's inner
   }
   c.pal = p;
+  /* the face's style (eyes.mjs): LPS unless the look asks for Classic. LPS gives every dog the big glossy eye (unless the
+     look chose a shape), its own colour when none is chosen, and eyes a fifth bigger */
+  c.style = c.style || DEFAULT_STYLE;
+  if (c.style === 'lps') {
+    if (!c.eyesChosen) { c.eyes = 'lps'; c.sclera = true; }
+    if (!c.iris) c.iris = lpsIris(c.id);
+    c.eye = (c.eye || 1) * 1.32;
+    c.muzzle = { ...c.muzzle, w: Math.round(c.muzzle.w * 0.74), h: Math.round(c.muzzle.h * 0.8) };   // a smaller snout patch: the face is mostly eyes
+  }
   return c;
 }
 

@@ -18,11 +18,11 @@
 import { RULES, EMOTES, makeSetup, outcome, secsOf, fits, formatOf } from '../duel/core.mjs';
 import { createSession } from '../duel/session.mjs';
 import { createLobby, settleCrossed, offerFrom, rematchTarget } from '../duel/lobby.mjs';
-import { practiceWorld, BOT } from '../duel/bot.mjs';
+import { practiceWorld, BOT, AI_LEVELS, levelOf } from '../duel/bot.mjs';
 import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
 import { shown } from '../pup/rig/gifts.mjs';
 import { moodOf, lastPlayed, markPlayed } from '../pup/rig/mood.mjs';
-import { topicTree, poolOf, pickLabel, sourceLabel, publicPack, decksOf, deckPack, yearsOf, YEAR_LABEL } from '../duel/pack.mjs';
+import { topicTree, poolOf, pickLabel, sourceLabel, publicPack, decksOf, deckPack, yearsOf, YEAR_LABEL, normPack } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
 import { normWallet, fitWear } from '../duel/shop.mjs';
@@ -62,7 +62,7 @@ function loadCss() {
 }
 
 /* what redraws the dog (the rest of a look, the worn pieces, pops on): its dog, coat, collar, eyes and blush */
-const FACE = ['eyes', 'iris', 'blush'];
+const FACE = ['eyes', 'iris', 'blush', 'style'];
 const reskins = (a, b) => ['dog', 'coat', 'collar', ...FACE].some(k => (a[k] || '') !== (b[k] || ''));
 
 /* a dog in an iframe of the rig, in its look; `.expr(id)` changes its face, `.dress(look)` its look in place (another
@@ -80,7 +80,7 @@ function dogFrame(look, { mirror = false, label = '' } = {}) {
   f.title = label; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1;
   box.append(f);
   const send = m => { try { f.contentWindow?.postMessage(m, location.origin); } catch { /* not ready */ } };
-  const skin = L => ({ dob: 'skin', dog: L.dog, coat: L.coat || '', collar: L.collar || '', eyes: L.eyes || '', iris: L.iris || '', blush: L.blush || '' });
+  const skin = L => ({ dob: 'skin', dog: L.dog, coat: L.coat || '', collar: L.collar || '', eyes: L.eyes || '', iris: L.iris || '', blush: L.blush || '', style: L.style || '' });
   let loadedAs = cur;
   f.addEventListener('load', () => {
     ready = true;
@@ -131,7 +131,8 @@ function keyed(list, items, keyOf, make) {
   if (next.length !== list.children.length || next.some((n, i) => n !== list.children[i])) list.replaceChildren(...next);
 }
 
-export function mountDuel(root, { transport = null, pack = { questions: [] }, look: hostLook = null, storage = globalThis.localStorage, storeKey = 'pup-duel', practice = true, title = 'Duel', keys = 'document', signOutNote = '', onClose = () => {}, onResult = () => {} } = {}) {
+export function mountDuel(root, { transport = null, pack = { questions: [] }, look: hostLook = null, storage = globalThis.localStorage, storeKey = 'pup-duel', practice = true, title = 'Duel', keys = 'document', signOutNote = '', onPlaylists = null, onClose = () => {}, onResult = () => {} } = {}) {
+  const bankPack = pack;   /* the host's standard bank; a playlist (onPlaylists, playlist()) swaps in its own questions until set back */
   const storeAt = `${storeKey}:${transport?.name || 'none'}`;
   const remembered = () => { try { return JSON.parse(storage.getItem(storeAt)) || null; } catch { return null; } };
   const remember = me => { try { if (me) storage.setItem(storeAt, JSON.stringify(me)); else storage.removeItem(storeAt); } catch { /* private mode */ } };
@@ -158,7 +159,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           <button class="pd-btn pd-pri" type="submit" data-act="login">Play</button>
           <button class="pd-link" type="button" data-pd="new">New player</button>
         </form>` : '<p class="pd-note">Duels with mates are off on this site</p>'}
-        ${practice ? `<button class="pd-btn${transport ? ' pd-ghost' : ' pd-pri'}" type="button" data-pd="practice">${icon('bot')}Practice</button>` : ''}` : `
+        ${practice ? `<button class="pd-btn${transport ? ' pd-ghost' : ' pd-pri'}" type="button" data-pd="practice">${icon('bot')}Vs AI</button>` : ''}` : `
         <form class="pd-form" data-pd="create">
           <p class="pd-pickname" aria-live="polite"></p>
           <div class="pd-dogs" role="radiogroup" aria-label="Your dog"></div>
@@ -351,7 +352,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       b.append(face(BOT.look));
       b.insertAdjacentHTML('beforeend', `<b></b><span class="pd-tbadge">${icon('bot')}</span>`);
       b.querySelector('b').textContent = BOT.name;
-      b.setAttribute('aria-label', `Practice with ${BOT.name}, a bot on this device`);
+      b.setAttribute('aria-label', `Vs AI: ${BOT.name}, a bot on this device, four levels`);
       b.addEventListener('click', openPractice);
       return b;
     }
@@ -426,7 +427,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
                its count; a category with none yet is shown, greyed, so the layers read the same everywhere
      The last pick and lengths are remembered on this device */
   const PICK_KEY = `${storeKey}:pick`;
-  const lastPick = () => { try { const p = JSON.parse(storage.getItem(PICK_KEY)) || {}; return { rounds: RULES.roundChoices.includes(p.rounds) ? p.rounds : RULES.rounds, secs: RULES.secsChoices.includes(p.secs) ? p.secs : RULES.secs, topic: typeof p.topic === 'string' ? p.topic : '', cat: typeof p.cat === 'string' ? p.cat : '', deck: typeof p.deck === 'string' ? p.deck : '', ladder: p.ladder === true }; } catch { return { rounds: RULES.rounds, secs: RULES.secs, topic: '', cat: '', deck: '', ladder: false }; } };
+  const lastPick = () => { try { const p = JSON.parse(storage.getItem(PICK_KEY)) || {}; return { rounds: RULES.roundChoices.includes(p.rounds) ? p.rounds : RULES.rounds, secs: RULES.secsChoices.includes(p.secs) ? p.secs : RULES.secs, topic: typeof p.topic === 'string' ? p.topic : '', cat: typeof p.cat === 'string' ? p.cat : '', deck: typeof p.deck === 'string' ? p.deck : '', ladder: p.ladder === true, level: levelOf(p.level) }; } catch { return { rounds: RULES.rounds, secs: RULES.secs, topic: '', cat: '', deck: '', ladder: false }; } };
   const keepPick = p => { try { storage.setItem(PICK_KEY, JSON.stringify(p)); } catch { /* private mode */ } };
   function openSetup(mate, last = null, { practice: isPractice = false } = {}) {
     /* where the questions come from (a host's decks: Med-OS's bank, your questions, your friends'), in front of the topic */
@@ -444,12 +445,15 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         ${decks.length ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('pack')}</span><div><span class="pd-seglabel" id="pd-sl-deck">From</span><div class="pd-seg pd-seg--deck" role="radiogroup" aria-labelledby="pd-sl-deck">${[...decks, { id: '', label: 'Mix', count: decks.reduce((n, d) => n + d.count, 0) }].map(d => `<button type="button" role="radio" data-deck="${esc(d.id)}" aria-checked="${d.id === opt.deck}" tabindex="${d.id === opt.deck ? 0 : -1}" aria-label="${esc(d.label)}, ${d.count} questions">${esc(d.short || d.label)}</button>`).join('')}</div></div></div>` : ''}
         ${layered ? `<button class="pd-pickrow" type="button" data-pd="choose"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><span class="pd-pick-tx"><small>Questions from</small><b></b></span><span class="pd-pick-n"></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
         ${yearsOf(pack).length > 1 ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('star')}</span><div><span class="pd-seglabel" id="pd-sl-order">Order</span><div class="pd-seg" role="radiogroup" aria-labelledby="pd-sl-order">${[['mix', 'Shuffled'], ['ladder', '0 to 1']].map(([v, l]) => `<button type="button" role="radio" data-order="${v}" aria-checked="${(v === 'ladder') === !!opt.ladder}" tabindex="${(v === 'ladder') === !!opt.ladder ? 0 : -1}"${v === 'ladder' ? ' aria-describedby="pd-laddernote"' : ''}>${l}</button>`).join('')}</div><p class="pd-note pd-readnote" id="pd-laddernote">0 to 1: Year 1 first principles up to final year, harder each question.</p></div></div>` : ''}
+        ${S.playlist ? `<div class="pd-plrow"><span class="pd-segic" aria-hidden="true">${icon('list')}</span><span class="pd-pick-tx"><small>Playlist</small><b>${esc(S.playlist)}</b></span><button class="pd-link" type="button" data-pd="bank">Standard questions</button></div>` :
+          onPlaylists ? `<button class="pd-pickrow pd-plbtn" type="button" data-pd="playlists"><span class="pd-segic" aria-hidden="true">${icon('list')}</span><span class="pd-pick-tx"><small>Community</small><b>Playlists</b></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
+        ${isPractice ? seg('level', 'bot', 'AI level', Object.keys(AI_LEVELS), levelOf(opt.level), v => AI_LEVELS[v].label) : ''}
         ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
         ${seg('secs', 'timer', 'Time for each question', RULES.secsChoices, opt.secs, v => (v < 60 ? `${v}s` : `${v / 60} min`))}
         <p class="pd-note pd-readnote" data-pd="fit" aria-live="polite"></p>
         <p class="pd-note" data-pd="fewer" hidden></p>
         <p class="pd-err" role="alert"></p>
-        <button class="pd-btn pd-pri" type="button" data-pd="send">${icon(isPractice ? 'bot' : 'zap')}${isPractice ? 'Practice' : 'Duel'}</button>
+        <button class="pd-btn pd-pri" type="button" data-pd="send">${icon(isPractice ? 'bot' : 'zap')}${isPractice ? 'Play the AI' : 'Duel'}</button>
       </div>
       <div class="pd-step" data-step="choose" hidden>
         <div class="pd-sheet-head"><button class="pd-ib" type="button" data-pd="up" aria-label="Back">${icon('back')}</button><h2 class="pd-sheet-title" tabindex="-1">Choose questions</h2><span></span><span></span></div>
@@ -459,7 +463,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       const step = id => { el.querySelectorAll('.pd-step').forEach(s => { s.hidden = s.dataset.step !== id; }); };
       const pickedRounds = () => +el.querySelector('[data-rounds][aria-checked="true"]').dataset.rounds;
       el.querySelector('.pd-vsmini').append(face(myLook()), face(mate.look, 'pd-mirror'));
-      el.querySelector('[data-step="setup"] .pd-sheet-title').textContent = isPractice ? `Practice with ${mate.name}` : mate.name;
+      el.querySelector('[data-step="setup"] .pd-sheet-title').textContent = isPractice ? `Vs AI: ${mate.name}` : mate.name;
       const paintPick = () => {
         const n = poolOf(cur(), opt).length, row = el.querySelector('[data-pd="choose"]');
         if (row) {
@@ -494,6 +498,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         say(dt === null ? `Choose a topic: ${tree.topics.length + 1} choices` : `${dt || 'Every topic'}: choose a kind of question`);
       };
       el.querySelector('[data-pd="choose"]')?.addEventListener('click', () => { dt = null; step('choose'); drill(); });
+      /* playlists (founder 2026-10-26): the host's community library, a set apart from the standard questions */
+      el.querySelector('[data-pd="playlists"]')?.addEventListener('click', () => { closeSheet(); onPlaylists({ mate: isPractice ? null : mate }); });
+      el.querySelector('[data-pd="bank"]')?.addEventListener('click', () => { pack = bankPack; S.playlist = ''; closeSheet(); openSetup(mate, null, { practice: isPractice }); });
       el.querySelector('[data-step="choose"]').addEventListener('click', e => {
         const b = e.target.closest('button'); if (!b || b.disabled) return;
         if (b.dataset.pd === 'up') { if (dt === null) { step('setup'); el.querySelector('[data-pd="choose"]').focus({ preventScroll: true }); } else { dt = null; drill(); } return; }
@@ -504,6 +511,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         const set = b => {
           g.querySelectorAll('button').forEach(x => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; });
           if (b.dataset.order !== undefined) { opt.ladder = b.dataset.order === 'ladder'; keepPick({ ...opt }); }
+          if (b.dataset.level !== undefined) { opt.level = b.dataset.level; keepPick({ ...opt }); }
           if (b.dataset.deck !== undefined) { opt.deck = b.dataset.deck; tree = topicTree(cur()); if (!poolOf(cur(), opt).length) { opt.topic = ''; opt.cat = ''; } keepPick({ ...opt }); }
           paintPick();
         };
@@ -518,7 +526,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelector('[data-pd="send"]').addEventListener('click', async () => {
         const rounds = pickedRounds(), secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs;
         keepPick({ ...opt, rounds, secs });
-        if (isPractice) { closeSheet(); startPractice({ rounds, secs, topic: opt.topic, cat: opt.cat, deck: opt.deck, ladder: !!opt.ladder }); return; }
+        if (isPractice) { closeSheet(); startPractice({ rounds, secs, topic: opt.topic, cat: opt.cat, deck: opt.deck, ladder: !!opt.ladder, level: levelOf(opt.level) }); return; }
         const setup = makeSetup(cur(), { rounds, secs, topic: opt.topic, cat: opt.cat, ladder: !!opt.ladder && yearsOf(pack).length > 1, deck: opt.deck, seed: freshSeed(), title: pack.title });
         if (!setup.questions.length) { el.querySelector('.pd-err').textContent = 'No questions to play.'; return; }
         await busy(async () => {
@@ -526,7 +534,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           closeSheet(); openDuel({ ...d, them: mate }, { accept: d.b === S.me.id });
         }, () => { el.querySelector('.pd-err').textContent = S.err; });
       });
-    }, { label: isPractice ? `Practice with ${mate.name}` : `Challenge ${mate.name}` });
+    }, { label: isPractice ? `Vs AI: ${mate.name}` : `Challenge ${mate.name}` });
   }
 
   /* the ladder (ranked.mjs): read when the lobby opens and after a ranked duel; null on a backend without it */
@@ -608,12 +616,13 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     stopAll();
     await busy(async () => {
       const look = myLook();
-      const w = await practiceWorld({ name: S.me?.name || 'You', look });
+      const lv = AI_LEVELS[levelOf(opts.level)], bot = { ...BOT, ...lv };   /* Rex registers by his own name (the name rules allow no dot); the level is shown, not stored */
+      const w = await practiceWorld({ name: S.me?.name || 'You', look, bot });
       S.world = w; S.t = w.transport; S.worldMe = w.me;
       const setup = makeSetup(deckPack(pack, opts.deck || ''), { rounds: opts.rounds || RULES.rounds, secs: opts.secs || RULES.secs, topic: opts.topic || '', cat: opts.cat || '', ladder: !!opts.ladder && yearsOf(pack).length > 1, seed: freshSeed(), title: pack.title });
       if (!setup.questions.length) throw new Error('No questions to play.');
       const d = await w.transport.challenge(w.me, w.bot.id, setup);
-      openDuel({ ...d, them: { ...w.bot, look: BOT.look } }, { practice: true });
+      openDuel({ ...d, them: { ...w.bot, name: `${BOT.name} (${lv.label})`, look: BOT.look } }, { practice: true });
     }, () => { S.screen === 'lobby' ? paintLobby() : showAuth(); });
   }
 
@@ -1035,5 +1044,14 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       try { const p = await transport.touch(was); S.me = { ...was, ...p }; remember(S.me); } catch (e) { if (e.server) { remember(null); S.me = null; S.err = 'Please sign in again.'; showAuth(); } }
     } else showAuth();
   });
-  return { destroy, key, get state() { return S; } };
+  /* a host's playlist: these questions, in place of the bank, for the next game (vs AI, or a mate when one is named);
+     'Standard questions' in the sheet sets the bank back */
+  function playlist(questions, name = 'Playlist', { mate = null } = {}) {
+    const pl = normPack({ title: name, origin: 'human', questions }).pack;
+    if (!pl.questions.length) return false;
+    pack = pl; S.playlist = String(name).slice(0, 60);
+    if (mate) openSetup(mate); else openSetup({ name: BOT.name, look: BOT.look }, null, { practice: true });
+    return true;
+  }
+  return { destroy, key, playlist, get state() { return S; } };
 }

@@ -11,16 +11,22 @@
 
 export const EYE_SHAPES = [
   { id: '', name: 'Its own' },
+  { id: 'lps', name: 'Big glossy' },
   { id: 'classic', name: 'Classic' },
   { id: 'bead', name: 'Bead' },
   { id: 'round', name: 'Round' },
   { id: 'sparkle', name: 'Sparkle' },
   { id: 'button', name: 'Button' },
   { id: 'cat', name: 'Cat' },
-  { id: 'star', name: 'Star' }
+  { id: 'star', name: 'Star' },
+  { id: 'heart', name: 'Heart' },
+  { id: 'anime', name: 'Anime' },
+  { id: 'diamond', name: 'Diamond' },
+  { id: 'swirl', name: 'Swirl' }
 ];
 export const IRISES = [
   { id: '', name: 'Its own', hex: '' },
+  { id: 'teal', name: 'Teal', hex: '#2fc4c0', deep: '#0e5e66', light: '#9cf2ea' },
   { id: 'brown', name: 'Brown', hex: '#8a5a2e', deep: '#3e2412', light: '#b07a48' },
   { id: 'amber', name: 'Amber', hex: '#e0a024', deep: '#5e3a06', light: '#f2c260' },
   { id: 'gold', name: 'Gold', hex: '#f2c94c', deep: '#6a4b06', light: '#f8e08a' },
@@ -31,6 +37,14 @@ export const IRISES = [
   { id: 'pink', name: 'Pink', hex: '#ef6fa8', deep: '#6e1e44', light: '#f7a0c8' },
   { id: 'red', name: 'Red', hex: '#e04848', deep: '#5e1414', light: '#f07a7a' }
 ];
+/* the style of every face (founder 2026-10-26: "like how littlest pet shop style is ... save old style seperately"):
+   lps, big glossy eyes that are mostly iris, a dark liner on the lid and flicked lashes, each dog its own eye colour;
+   classic, the style before (git tag dog-style-classic). A look can pick either; LPS is the default */
+export const STYLES = [{ id: '', name: 'Big glossy (default)' }, { id: 'classic', name: 'Classic' }];
+export const DEFAULT_STYLE = 'lps';
+/* an LPS dog's own eye colour when its look picks none: one of six, by its id, so a room of dogs is not one colour */
+export const LPS_EYES = ['teal', 'brown', 'amber', 'blue', 'green', 'violet'];
+export const lpsIris = id => LPS_EYES[[...String(id || '')].reduce((n, ch) => (n * 31 + ch.charCodeAt(0)) >>> 0, 7) % LPS_EYES.length];
 export const BLUSH = [
   { id: '', name: 'Auto' },
   { id: 'on', name: 'Always' },
@@ -66,6 +80,23 @@ export function pupilMarkup(shape, iris, ink, cx, side) {
   const cy = -32, col = iris.hex, hi = (x, y, rr) => `<circle cx="${r(x)}" cy="${r(y)}" r="${rr}" fill="#fff"/>`;
   const hx = cx - 2.3;   // the classic catch-light: 2.3 left of centre, both eyes
   switch (shape.id) {
+    case 'lps':   // the LPS eye: an iris that fills most of the white, a big dark pupil, a lighter lower half, two catch-lights
+      return irisEye(cx, cy + 1, 9.8, 11.6, col ? iris : IRISES.find(k => k.id === 'teal'), ink, 0.5) +
+        `<ellipse cx="${r(cx)}" cy="${r(cy - 3.6)}" rx="3" ry="2.2" fill="${(col ? iris : IRISES.find(k => k.id === 'teal')).deep}"/>` +
+        hi(cx - 3.8, cy - 4, 3.3) + hi(cx + 3.6, cy + 5.2, 1.7) + hi(cx + 4.8, cy - 2.4, 1);
+    case 'heart': {   // a heart for a pupil, in the eye's colour (or ink), a catch-light on its left lobe
+      const h = col ? iris.hex : ink, d = `M${r(cx)} ${r(cy + 6)} C${r(cx - 9)} ${r(cy - 1)} ${r(cx - 6)} ${r(cy - 9)} ${r(cx)} ${r(cy - 4)} C${r(cx + 6)} ${r(cy - 9)} ${r(cx + 9)} ${r(cy - 1)} ${r(cx)} ${r(cy + 6)} Z`;
+      return (col ? `<path d="${d}" fill="${iris.deep}" transform="translate(0 0.8)"/>` : '') + `<path d="${d}" fill="${h}"/>` + hi(cx - 3.2, cy - 3.4, 1.6);
+    }
+    case 'anime':   // tall and bright: an iris in bands, a big pupil, three catch-lights
+      return irisEye(cx, cy, 5.7, 8.2, col ? iris : IRISES.find(k => k.id === 'blue'), ink, 0.5) +
+        `<ellipse cx="${r(cx)}" cy="${r(cy - 4.6)}" rx="4.4" ry="1.8" fill="${(col ? iris : IRISES.find(k => k.id === 'blue')).deep}"/>` +
+        hi(cx - 2.4, cy - 3.8, 2.6) + hi(cx + 2.4, cy + 3.2, 1.4) + hi(cx + 2.8, cy - 4.4, 0.9);
+    case 'diamond':   // a gem for a pupil
+      return (col ? irisEye(cx, cy, 5.7, 7.6, iris, ink, 0) : '') +
+        `<path d="M${r(cx)} ${r(cy - 6)} L${r(cx + 4.2)} ${r(cy)} L${r(cx)} ${r(cy + 6)} L${r(cx - 4.2)} ${r(cy)} Z" fill="${ink}"/>` + `<path d="M${r(cx)} ${r(cy - 6)} L${r(cx + 4.2)} ${r(cy)} L${r(cx)} ${r(cy)} Z" fill="#fff"/>`;
+    case 'swirl':   // dizzy: a spiral where the pupil was
+      return `<path d="M${r(cx)} ${r(cy)} m-0.6 0 a0.6 0.6 0 1 1 1.2 0 a1.8 1.8 0 1 1 -3.6 0 a3 3 0 1 1 6 0 a4.2 4.2 0 1 1 -8.4 0 a5.4 5.4 0 1 1 10.8 0" fill="none" stroke="${col ? iris.deep : ink}" stroke-width="1.8" stroke-linecap="round"/>`;
     case 'bead':   // no white (rig.mjs: c.sclera false): a glossy dark bead with a catch-light, a spitz's or a teddy's
       return (col ? irisEye(cx, cy + 1, 5.2, 6.4, iris, ink, 0.5) : `<ellipse cx="${r(cx)}" cy="${cy + 1}" rx="5.2" ry="6.4" fill="${ink}"/>`) + hi(cx - 1.8, cy - 1.6, 1.7);
     case 'round':

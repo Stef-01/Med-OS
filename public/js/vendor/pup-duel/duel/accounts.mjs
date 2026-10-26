@@ -9,7 +9,7 @@ export const PIN_RE = /^[0-9]{4}$/;
    a new choice here */
 import { ROSTER, DEFAULT_DOG } from '../pup/rig/breeds.mjs';
 import { coatsFor, COLLARS } from '../pup/rig/coats.mjs';
-import { EYE_SHAPES, IRISES, BLUSH } from '../pup/rig/eyes.mjs';
+import { EYE_SHAPES, IRISES, BLUSH, STYLES } from '../pup/rig/eyes.mjs';
 export { DEFAULT_DOG };
 export const DOGS = ROSTER;
 export const SLOTS = ['head', 'face', 'neck', 'back'];
@@ -41,6 +41,7 @@ export function normLook(l, known = () => true) {
   if (EYE_SHAPES.some(k => k.id && k.id === o.eyes)) out.eyes = o.eyes;   /* the eyes and blush (pup/rig/eyes.mjs) */
   if (IRISES.some(k => k.id && k.id === o.iris)) out.iris = o.iris;
   if (BLUSH.some(k => k.id && k.id === o.blush)) out.blush = o.blush;
+  if (STYLES.some(k => k.id && k.id === o.style)) out.style = o.style;   /* Classic, the face before LPS */
   out.wear = wear;
   return out;
 }

@@ -18,7 +18,7 @@
 import { ITEMS as ALL, SETS, SLOTS, SLOT_NAME, RARITY, VB, itemOf, sigOf, shopFor, priceToday, setPrice, isNew, msToReset, resetLabel, DEAL_OFF, SET_OFF } from '../pup/wardrobe.mjs';
 import { coatsFor, COLLARS } from '../pup/rig/coats.mjs';
 import { lookDog } from '../pup/rig/still.mjs';
-import { EYE_SHAPES, IRISES, BLUSH } from '../pup/rig/eyes.mjs';
+import { EYE_SHAPES, IRISES, BLUSH, STYLES } from '../pup/rig/eyes.mjs';
 import { MOVES } from '../pup/rig/moves.mjs';
 import { DOGS } from '../duel/accounts.mjs';
 import { shown } from '../pup/rig/gifts.mjs';
@@ -260,7 +260,7 @@ export function openWardrobe(ctx) {
       /* the eyes (founder 2026-10-26: "changeable eyes both shapes and colors" and "blush options so can have on or off in
          the loadout"): free, like a coat; a dog's own is the first of each */
       const own = lookDog({ dog: cur.dog }).pal.ink;
-      lp.append(h3('Shape'), chips('eyes', 'Eye shape', EYE_SHAPES, cur.eyes || ''),
+      lp.append(h3('Face style'), chips('style', 'Face style', STYLES, cur.style || ''), h3('Shape'), chips('eyes', 'Eye shape', EYE_SHAPES, cur.eyes || ''),
         h3('Colour'), swatches('iris', 'Eye colour', IRISES.map(k => ({ id: k.id, name: k.name, colors: [k.hex || own, k.deep || own] })), cur.iris || ''),
         h3('Blush'), chips('blush', 'Blush', BLUSH, cur.blush || ''));
     } else {

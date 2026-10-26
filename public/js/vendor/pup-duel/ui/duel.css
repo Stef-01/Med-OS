@@ -157,7 +157,8 @@ div.pd-me-dog { cursor: default; }
 .pd-vsmini .pd-face { width: 76px; border-radius: 50%; background: var(--pd-card2); }
 .pd-segrow { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: center; gap: 12px; }
 .pd-segic { display: grid; color: var(--pd-mute); }
-.pd-seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; }
+.pd-seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; }
+@media (max-width: 400px) { .pd-seg:has([data-level]) { grid-auto-flow: row; grid-template-columns: repeat(2, minmax(0, 1fr)); } }   /* the four AI levels in two rows on a phone, every word whole */
 .pd-seg button { min-height: 48px; border: 2px solid var(--pd-line2); border-bottom-width: var(--pd-edge); border-radius: 12px; background: var(--pd-card2); font-size: 16px; font-weight: 700; cursor: pointer; }
 .pd-seg button[aria-checked="true"] { border-color: var(--pd-pri); background: var(--pd-pri-soft); }
 /* the topic: the game's own chevron, not the browser's */
@@ -619,3 +620,9 @@ div.pd-me-dog { cursor: default; }
   .pd-wfine { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) { .pd *, .pd *::before, .pd *::after { animation: none !important; transition: none !important; } }
+
+/* playlists (2026-10-26): the community row in the setup sheet, and the playlist in play */
+.pd-plbtn .pd-pick-tx b { color: var(--pd-pri); }
+.pd-plrow { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 2px solid var(--pd-pri); border-radius: 14px; background: var(--pd-pri-soft); }
+.pd-plrow .pd-pick-tx { flex: 1; min-width: 0; }
+.pd-plrow .pd-pick-tx b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
