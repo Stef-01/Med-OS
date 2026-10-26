@@ -78,7 +78,7 @@ export function duplicatesOf(list, groupOf = () => '') {
 const packItem = q => ({ id: q.id, stem: q.stem, options: q.options, answer: q.answer, explanation: q.why || '', tags: q.tags || [] });
 const routeOf = q => (q.source === 'ai' ? (q.id.startsWith('hy-') ? 'ai high-yield' : q.station ? 'ai station' : 'ai pool') : q.source || 'unknown');
 
-export function auditPool(pool, { pack = null, verdicts = {}, fits, readSecs, formats }) {
+export function auditPool(pool, { pack = null, verdicts = {}, funnel = null, fits, readSecs, formats }) {
   const qs = pool?.questions || [], kinds = [...new Set(qs.map(kindOf))].sort();
   const per = k => qs.filter(q => kindOf(q) === k);
   const cues = cuesOf(qs, kindOf);
@@ -92,11 +92,24 @@ export function auditPool(pool, { pack = null, verdicts = {}, fits, readSecs, fo
     review[k] = { judged: n, verdict: count(vs, v => v.rubric?.verdict || 'none'), solvesAgree: pct(agreed, n), median: { single_best: r('single_best'), distractors: r('distractors'), relevance: r('relevance'), accuracy: r('accuracy'), explanation: r('explanation') } };
   }
   const out = { pool: { n: qs.length, byKind: count(qs, kindOf), ...formatsOf(qs, { fits, readSecs, formats }) }, cues, duplicates, review };
+  if (funnel) out.funnel = funnelRates(funnel);
   if (pack) {
     const pq = pack.questions || [], dups = duplicatesOf(pq, routeOf);
     out.pack = { n: pq.length, bySource: count(pq, q => q.source || q.origin || 'unknown'), byRoute: count(pq, routeOf), ...formatsOf(pq, { fits, readSecs, formats }),
       taxonomy: taxonomyCounts(pq), uncategorised: pq.filter(q => taxonomyProblems(q).length).map(q => q.id).slice(0, 20),
       cues: cuesOf(pq, routeOf, packItem), duplicates: { n: dups.length, across: dups.filter(d => d.across).length, top: dups.slice(0, 20) } };
+  }
+  return out;
+}
+
+/* the selector's funnel (lib/mcq-select.mjs funnelOf: per route, how many stopped at each stage) with its two rates:
+   passed, the share of the reviewed that cleared the review and the bar (what the route's writing is worth), and
+   admitted, the share of all its candidates now in the pool */
+export function funnelRates(funnel) {
+  const out = {};
+  for (const [route, f] of Object.entries(funnel)) {
+    const g = k => f[k] || 0, reviewed = f.n - g('schema') - g('flaws') - g('pending'), cleared = g('banned') + g('duplicate') + g('reserve') + g('pool');
+    out[route] = { ...f, reviewed, passed: pct(cleared, reviewed), admitted: pct(g('pool'), f.n) };
   }
   return out;
 }
@@ -125,6 +138,12 @@ export function auditMarkdown(a, { date = '' } = {}) {
     const d = a.pack.duplicates;
     L.push('', `Near-duplicate stems in the duel: ${d.n} pair${d.n === 1 ? '' : 's'}, ${d.across} of them across routes (two writers making the same case).`);
     for (const x of d.top.slice(0, 10)) L.push(`- ${x.a} and ${x.b}: ${x.overlap}%${x.across ? ` (${x.across.join(' / ')})` : ''}`);
+  }
+  if (a.funnel) {
+    const cols = ['schema', 'flaws', 'pending', 'review', 'bar', 'duplicate', 'reserve', 'pool'];
+    L.push('', '## From candidate to pool, by route', '', 'Where each route\'s candidates stopped (lib/mcq-select.mjs, the stages in order). **Passed** is the share of the reviewed that cleared the review and the bar: what the route\'s writing is worth. **Admitted** is the share of all its candidates in the pool; a passed question left out is on reserve behind its quota or its topic\'s cap.', '',
+      `| route | candidates | ${cols.join(' | ')} | passed | admitted |`, `|---|---|${cols.map(() => '---').join('|')}|---|---|`);
+    for (const [r, f] of Object.entries(a.funnel)) L.push(`| ${r} | ${f.n} | ${cols.map(c => f[c] || 0).join(' | ')} | ${f.reviewed ? `${f.passed}%` : '-'} | ${f.admitted}% |`);
   }
   L.push('', '## Cues and residual flaws in the pool', '', '| kind | n | key is the longest option | chance | key position | checks still firing (share of the kind) |', '|---|---|---|---|---|---|');
   for (const [k, c] of Object.entries(a.cues)) L.push(`| ${k} | ${c.n} | ${c.keyLongest}% | ${c.chance}% | ${Object.entries(c.keyAt).sort().map(([p, n]) => `${p} ${n}`).join(', ')} | ${Object.entries(c.checks).slice(0, 4).map(([id, x]) => `${id} ${x.share}%`).join(', ') || 'none'} |`);

@@ -30,20 +30,20 @@
     "stem-length": 0.3,
     "units": 2.7
    },
-   "judged": 51,
+   "judged": 594,
    "quality": {
-    "mean": 85.2,
-    "p5": 70,
-    "p10": 75,
+    "mean": 84.6,
+    "p5": 69,
+    "p10": 76,
     "p25": 81,
-    "p50": 87
+    "p50": 86
    },
-   "gatesPass": 92.2,
-   "solved2": 94.1,
-   "keyCorrect": 98,
-   "passBase": 80.4,
-   "passAi": 37.3,
-   "passAsSelected": 80.4
+   "gatesPass": 90.2,
+   "solved2": 96,
+   "keyCorrect": 96,
+   "passBase": 75.3,
+   "passAi": 33,
+   "passAsSelected": 75.3
   },
   "MMLU professional medicine": {
    "n": 272,
@@ -70,20 +70,20 @@
     "stem-length": 0,
     "units": 0
    },
-   "judged": 16,
+   "judged": 272,
    "quality": {
-    "mean": 88.1,
-    "p5": 74,
-    "p10": 80,
-    "p25": 85,
+    "mean": 86.2,
+    "p5": 69,
+    "p10": 78,
+    "p25": 83,
     "p50": 88
    },
-   "gatesPass": 100,
-   "solved2": 93.8,
-   "keyCorrect": 100,
-   "passBase": 87.5,
-   "passAi": 50,
-   "passAsSelected": 87.5
+   "gatesPass": 92.6,
+   "solved2": 96.7,
+   "keyCorrect": 96,
+   "passBase": 82.7,
+   "passAi": 46,
+   "passAsSelected": 82.7
   },
   "Official USMLE Step 2 CK samples": {
    "n": 41,
@@ -327,9 +327,9 @@
    "passAsSelected": 0
   },
   "Generated (generate-mcq.mjs)": {
-   "n": 64,
+   "n": 331,
    "flaw": {
-    "mean": 98.1,
+    "mean": 98.5,
     "p5": 94,
     "p10": 94,
     "p50": 100,
@@ -341,30 +341,70 @@
     "cover-options": 0,
     "all-none": 0,
     "negative-stem": 0,
-    "longest-key": 3.1,
+    "longest-key": 0.6,
     "grammar-cue": 0,
-    "convergence": 1.6,
-    "absolute-terms": 6.3,
-    "clang": 1.6,
+    "convergence": 0.3,
+    "absolute-terms": 3.6,
+    "clang": 2.1,
     "duplicate-options": 0,
-    "vignette": 15.6,
+    "vignette": 16.9,
     "stem-length": 0,
-    "units": 3.1
+    "units": 1.2
    },
-   "judged": 64,
+   "judged": 273,
    "quality": {
-    "mean": 94.7,
-    "p5": 89,
+    "mean": 94.1,
+    "p5": 86,
     "p10": 90,
-    "p25": 93,
+    "p25": 92,
     "p50": 95
    },
-   "gatesPass": 100,
-   "solved2": 100,
-   "keyCorrect": 100,
-   "passBase": 100,
-   "passAi": 95.3,
-   "passAsSelected": 95.3
+   "gatesPass": 98.5,
+   "solved2": 98.9,
+   "keyCorrect": 99.3,
+   "passBase": 98.5,
+   "passAi": 92.3,
+   "passAsSelected": 92.3
+  },
+  "Open exam (HEAD-QA, Spanish MIR)": {
+   "n": 786,
+   "flaw": {
+    "mean": 78.2,
+    "p5": 54,
+    "p10": 62,
+    "p50": 80,
+    "anyMajor": 56.4
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 25.8,
+    "cover-options": 21,
+    "all-none": 0.1,
+    "negative-stem": 12.7,
+    "longest-key": 5.7,
+    "grammar-cue": 0,
+    "convergence": 0.3,
+    "absolute-terms": 8.1,
+    "clang": 4.7,
+    "duplicate-options": 0.5,
+    "vignette": 84,
+    "stem-length": 44.4,
+    "units": 2.2
+   },
+   "judged": 164,
+   "quality": {
+    "mean": 74.3,
+    "p5": 52,
+    "p10": 60,
+    "p25": 68,
+    "p50": 76
+   },
+   "gatesPass": 81.7,
+   "solved2": 97,
+   "keyCorrect": 95.1,
+   "passBase": 30.5,
+   "passAi": 5.5,
+   "passAsSelected": 30.5
   }
  },
  "mutations": {
@@ -515,88 +555,253 @@
   "keyJudgedWrong": 93.8,
   "solvedToWrongKey": 0
  },
+ "retest": {
+  "n": 40,
+  "verdictAgree": 85,
+  "keyAgree": 100,
+  "solvesAgree": 100,
+  "drift": {
+   "mean": 2,
+   "p90": 5,
+   "max": 8
+  },
+  "passFirst": 26,
+  "passSecond": 26,
+  "flips": 4,
+  "flipRate": 10,
+  "byKind": {
+   "ai": {
+    "n": 10,
+    "verdictAgree": 80,
+    "keyAgree": 100,
+    "solvesAgree": 100,
+    "drift": {
+     "mean": 1.8,
+     "p90": 3,
+     "max": 8
+    },
+    "passFirst": 9,
+    "passSecond": 9,
+    "flips": 0,
+    "flipRate": 0
+   },
+   "amsa": {
+    "n": 10,
+    "verdictAgree": 80,
+    "keyAgree": 100,
+    "solvesAgree": 100,
+    "drift": {
+     "mean": 2,
+     "p90": 3,
+     "max": 3
+    },
+    "passFirst": 5,
+    "passSecond": 7,
+    "flips": 2,
+    "flipRate": 20
+   },
+   "open-exam": {
+    "n": 10,
+    "verdictAgree": 80,
+    "keyAgree": 100,
+    "solvesAgree": 100,
+    "drift": {
+     "mean": 2.3,
+     "p90": 5,
+     "max": 8
+    },
+    "passFirst": 3,
+    "passSecond": 2,
+    "flips": 1,
+    "flipRate": 10
+   },
+   "usmle-resource": {
+    "n": 10,
+    "verdictAgree": 100,
+    "keyAgree": 100,
+    "solvesAgree": 100,
+    "drift": {
+     "mean": 1.9,
+     "p90": 5,
+     "max": 5
+    },
+    "passFirst": 9,
+    "passSecond": 8,
+    "flips": 1,
+    "flipRate": 10
+   }
+  },
+  "flipped": [
+   {
+    "id": "osce-amsa-375",
+    "kind": "amsa",
+    "quality": [
+     78,
+     81
+    ],
+    "passed": "second"
+   },
+   {
+    "id": "osce-amsa-379",
+    "kind": "amsa",
+    "quality": [
+     78,
+     81
+    ],
+    "passed": "second"
+   },
+   {
+    "id": "headqa-2016-92",
+    "kind": "open-exam",
+    "quality": [
+     84,
+     79
+    ],
+    "passed": "first"
+   },
+   {
+    "id": "mmlu-professional_medicine-097",
+    "kind": "usmle-resource",
+    "quality": [
+     82,
+     79
+    ],
+    "passed": "first"
+   }
+  ]
+ },
  "pool": {
   "candidates": {
-   "ai": 90,
+   "ai": 357,
    "amsa": 105,
+   "open-exam": 786,
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 61,
-   "usmle-resource": 54,
-   "amsa": 51
+   "ai": 239,
+   "open-exam": 50,
+   "usmle-resource": 160,
+   "amsa": 56
   },
   "status": {
-   "pool": 166,
-   "rejected": 91,
-   "pending": 798,
-   "reserve": 6
+   "pool": 505,
+   "pending": 680,
+   "rejected": 404,
+   "reserve": 525
   },
   "topics": {
-   "Obstetrics": 5,
-   "Gastroenterology": 26,
-   "Infectious Diseases": 11,
-   "Neurology": 19,
-   "Cardiology": 16,
-   "Respiratory Medicine": 13,
-   "Haematology": 4,
-   "Paediatrics": 11,
-   "Neurosurgery": 2,
-   "Emergency Medicine": 5,
-   "Vascular Surgery": 1,
-   "General Surgery": 6,
-   "Gastrointestinal Surgery": 2,
-   "Cardiothoracic Surgery": 1,
-   "Gynaecology": 7,
-   "General Practice": 5,
-   "Otorhinolaryngology": 1,
-   "Trauma Surgery": 3,
-   "Ophthalmology": 1,
-   "Sexual Health": 2,
-   "Endocrinology": 3,
-   "Nephrology": 2,
-   "Psychiatry": 2,
-   "Neonatology": 3,
-   "Breast/Endocrine Surgery": 1,
-   "Immunology": 1,
-   "Rheumatology": 5,
+   "Endocrinology": 19,
+   "Breast/Endocrine Surgery": 2,
+   "Paediatrics": 31,
+   "Obstetrics": 13,
+   "Trauma Surgery": 9,
+   "Gastroenterology": 64,
+   "Cardiology": 50,
+   "Haematology": 13,
+   "Otorhinolaryngology": 13,
+   "Vascular Surgery": 9,
+   "Infectious Diseases": 40,
+   "Rheumatology": 14,
+   "Emergency Medicine": 24,
+   "Respiratory Medicine": 26,
+   "Neurology": 39,
+   "Neonatology": 11,
+   "Neurosurgery": 5,
+   "General Surgery": 16,
+   "Gynaecology": 16,
+   "General Practice": 14,
+   "Gastrointestinal Surgery": 5,
+   "Cardiothoracic Surgery": 3,
+   "Urology": 7,
+   "Ophthalmology": 3,
+   "Sexual Health": 6,
+   "Nephrology": 7,
+   "Orthopaedics": 9,
+   "Palliative Care": 1,
+   "Geriatrics": 4,
+   "Pathology": 2,
+   "Public Health": 1,
+   "Dermatology": 2,
+   "Psychiatry": 12,
+   "Bioethics": 4,
+   "Immunology": 4,
+   "Toxicology": 4,
+   "Addiction Medicine": 1,
    "Critical Care Medicine": 1,
-   "Plastic Surgery": 1,
-   "Orthopaedics": 1,
-   "Medicolegal": 1,
-   "Urology": 1,
-   "Toxicology": 1,
-   "Oncology": 1,
-   "Dermatology": 1
+   "Professionalism": 1
   },
   "positions": {
    "4": {
     "counts": [
-     29,
-     25,
-     24,
-     27
+     59,
+     57,
+     42,
+     65
     ],
-    "n": 105,
-    "chi2": 0.56
+    "n": 223,
+    "chi2": 5.14
    },
    "5": {
     "counts": [
-     7,
-     16,
-     12,
-     10,
-     16
+     53,
+     59,
+     52,
+     55,
+     63
     ],
-    "n": 61,
-    "chi2": 4.98
+    "n": 282,
+    "chi2": 1.48
    }
   },
-  "topicCap": 26,
+  "topicCap": 76,
   "bars": {
    "base": 81,
    "ai": 89,
    "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
+  },
+  "funnel": {
+   "open-exam headqa": {
+    "n": 786,
+    "bar": 84,
+    "pool": 50,
+    "review": 30,
+    "pending": 622
+   },
+   "usmle-resource medqa": {
+    "n": 594,
+    "reserve": 345,
+    "pool": 102,
+    "review": 58,
+    "bar": 89
+   },
+   "usmle-resource mmlu": {
+    "n": 272,
+    "reserve": 167,
+    "bar": 27,
+    "pool": 58,
+    "review": 19,
+    "flaws": 1
+   },
+   "ai rapid": {
+    "n": 198,
+    "pool": 129,
+    "pending": 58,
+    "bar": 10,
+    "review": 1
+   },
+   "ai vignette": {
+    "n": 159,
+    "pool": 110,
+    "review": 9,
+    "reserve": 13,
+    "bar": 27
+   },
+   "amsa": {
+    "n": 105,
+    "bar": 41,
+    "pool": 56,
+    "review": 8
+   }
   }
  }
 }

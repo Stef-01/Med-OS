@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "version": "pool-455",
+ "version": "pool-505",
  "title": "Standard MCQ pool",
- "note": "Built by scripts/mcq-pool.mjs: candidates from the stations, generate-mcq.mjs, the open USMLE-style banks in data/benchmarks and student submissions, admitted on the flaw checks, the model review and the bars calibrated on the benchmarks (docs/mcq.md). provenance.kind says where each came from: user, ai, amsa or usmle-resource.",
+ "note": "Built by scripts/mcq-pool.mjs: candidates from the stations, generate-mcq.mjs, the open USMLE-style banks and open exam sets in data/benchmarks and student submissions, admitted on the flaw checks, the model review and the bars calibrated on the benchmarks (docs/mcq.md). provenance.kind says where each came from: user, ai, amsa, usmle-resource, open-exam.",
  "bars": {
   "base": 81,
   "ai": 89,
   "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
  },
  "counts": {
-  "ai": 217,
-  "open-exam": 22,
+  "ai": 239,
+  "open-exam": 50,
   "usmle-resource": 160,
   "amsa": 56
  },
@@ -1622,6 +1622,75 @@
    }
   },
   {
+   "id": "ai-mcq-1a513aef",
+   "stem": "A 27-year-old woman slashed with a broken bottle sits upright in the emergency department. A wound over her right sternocleidomastoid oozes dark blood and hisses on inspiration.",
+   "ask": "Most appropriate immediate step?",
+   "options": [
+    "Probe wound for depth",
+    "CT angiogram of neck",
+    "Occlude and lie flat",
+    "Elevate head of bed",
+    "Clamp the bleeding vessel"
+   ],
+   "answer": 2,
+   "explanation": "A hissing neck wound over the external jugular vein means the vein is being held open by fascia and is drawing in air, which risks venous air embolism. Under EMST principles, first press on the wound and put on an occlusive dressing, then lie her flat or head-down with in-line stabilisation to raise neck venous pressure. Give high-flow oxygen and call senior help.",
+   "why": [
+    "Probing a wound that breaches the platysma can dislodge clot and let in more air or restart bleeding, so it should only be explored in theatre.",
+    "CT angiography is right once she is stable, but it does nothing to stop air being drawn in now.",
+    null,
+    "Raising the head lowers venous pressure in the neck, which makes it more likely that air is drawn into the open vein.",
+    "Blindly clamping in the emergency department can injure nearby structures and delays the simple, effective step of occluding the wound."
+   ],
+   "topic": "Trauma Surgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-387d7db7",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-387d7db7",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:21.130Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-387d7db7",
+      "osce-ai-387d7db7"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-1216",
+      "medqa-us4-test-0342"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 86,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:29:42.390Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-1ca98ea1",
    "stem": "A 76-year-old man is reviewed on the surgical ward on the morning he is due to go home. Two days ago he came to the emergency department after suddenly passing a large volume of painless maroon blood with clots. He had one more small bleed in the department and none since. He has type 2 diabetes and knee osteoarthritis. He takes metformin. For the past 3 months he has also taken an over-the-counter anti-inflammatory tablet most days for knee pain. He takes no other medicines. Today his temperature is 36.8 °C, pulse is 72/min and blood pressure is 132/78 mm Hg. His abdomen is soft and not tender. Haemoglobin is 118 g/L (his baseline is 138 g/L; reference range 130 to 180 g/L). Colonoscopy after bowel preparation showed many diverticula in the sigmoid and descending colon, with no inflammation, active bleeding, polyp or tumour. He asks how he can lower the chance of this happening again.",
    "ask": "Which of the following is the most appropriate advice to reduce his risk of recurrent bleeding?",
@@ -2086,6 +2155,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:26:50.719Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-290aeef2",
+   "stem": "A 68-year-old man who smokes has 4 weeks of constant left forefoot pain at night, eased by dangling the leg. His second toe is dry and black; left ABI is 0.32.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Same-day vascular referral",
+    "Supervised exercise program",
+    "Intravenous antibiotics",
+    "Routine vascular clinic referral",
+    "Start oral cilostazol"
+   ],
+   "answer": 0,
+   "explanation": "This is chronic limb-threatening ischaemia: he has had ischaemic rest pain for more than 2 weeks, has dry gangrene and an ABI below 0.4. The limb is at high risk of amputation, so he needs to be discussed with the vascular team the same day, with a view to imaging and revascularisation. Meanwhile, give analgesia, keep the leg dependent, protect the foot and start an antiplatelet and a statin.",
+   "why": [
+    null,
+    "Supervised exercise is used for intermittent claudication, but he now has rest pain and tissue loss, so exercise therapy is not appropriate and would delay revascularisation.",
+    "The gangrene is dry and shows no signs of infection, such as redness, pus or fever, so antibiotics do not treat the underlying ischaemia.",
+    "A routine outpatient referral is too slow for a threatened limb with established tissue loss, and the delay risks a major amputation.",
+    "Cilostazol only improves walking distance in claudication; it does not save a limb with chronic limb-threatening ischaemia and should not replace urgent referral."
+   ],
+   "topic": "Vascular Surgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-625",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-625",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:40.848Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-625",
+      "osce-amsa-625"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0459",
+      "medqa-us4-test-1083",
+      "medqa-us4-test-0047"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 89,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:29:39.946Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -3091,6 +3229,73 @@
    }
   },
   {
+   "id": "ai-mcq-37b00158",
+   "stem": "A 29-year-old man is cut on the left neck with a broken bottle. The wound breaches platysma; bleeding stopped with pressure. No stridor, expanding haematoma or haemoptysis. HR 92/min, BP 128/80 mmHg.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Plain neck X-ray",
+    "Duplex neck ultrasound",
+    "Catheter angiography",
+    "Local wound exploration",
+    "CT angiogram neck"
+   ],
+   "answer": 4,
+   "explanation": "If a neck wound goes through platysma, assume deep injury until proven otherwise. In a stable patient with no hard signs, EMST guidance is CT angiography of the neck. It shows the vessels, airway and oesophagus, so you can decide between theatre and watching him.",
+   "why": [
+    "A plain X-ray can show surgical emphysema or a foreign body, but it cannot rule out injury to the vessels or the airway and gut.",
+    "Duplex ultrasound depends on the operator, cannot see well near the skull base or behind the clavicle, and does not assess the airway or oesophagus.",
+    "Catheter angiography is invasive. It is kept for unclear CT results or for treatment, not used as the first test.",
+    "Probing or exploring a wound through platysma in the ED can dislodge a clot and cause sudden bleeding or air embolism, so it is not done.",
+    null
+   ],
+   "topic": "Trauma Surgery",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-387d7db7",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-387d7db7",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:02.036Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-387d7db7",
+      "osce-ai-387d7db7"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-1216",
+      "medqa-us4-test-0342"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 96,
+    "quality": 98,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:29:43.740Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-3bd5914c",
    "stem": "A 62-year-old woman comes to a rural emergency department with 3 weeks of constant burning pain in her right forefoot. The pain is worst at night when she lies flat, so she has been sleeping in a recliner with the right foot hanging over the edge. For years she has had calf pain after walking short distances. She has type 2 diabetes, hypertension, a previous myocardial infarction and an ischaemic stroke. She smokes 20 cigarettes a day. Temperature is 36.8 °C, pulse 88/min and regular, blood pressure 164/88 mmHg, respiratory rate 18/min and SpO2 96% on room air. The right great, second and third toes are black, shrivelled and hard, with a sharp line of demarcation and no discharge, swelling or erythema. The fourth toe is dusky. The right popliteal and pedal pulses are absent. The right ankle-brachial index is 0.28, and both ankle pressures are below 50 mmHg. WCC is 8.9 x10^9/L and CRP is 12 mg/L. The tertiary vascular unit has accepted her, and transfer is booked for tomorrow morning.",
    "ask": "Which of the following is the most appropriate measure to reduce her risk of further tissue loss while she waits for transfer?",
@@ -3759,6 +3964,73 @@
    }
   },
   {
+   "id": "ai-mcq-42e049b2",
+   "stem": "A 62-year-old woman with hypertension has sudden, severe, tearing pain between her shoulder blades that was worst at onset. Left arm BP is 164/90 mmHg and right arm BP is 132/80 mmHg.",
+   "ask": "Which test is most likely to confirm the diagnosis?",
+   "options": [
+    "Serum D-dimer",
+    "Chest X-ray",
+    "CT pulmonary angiogram",
+    "Coronary angiography",
+    "CT aortogram"
+   ],
+   "answer": 4,
+   "explanation": "Sudden tearing interscapular pain with a difference of more than 20 mmHg between the arms gives a high aortic dissection detection risk score (ADD-RS). In a haemodynamically stable patient, the next step is urgent CT angiography of the whole aorta, which can show the intimal flap, its extent and branch involvement. A D-dimer result should not be used to rule out dissection at this level of risk.",
+   "why": [
+    "With an ADD-RS of 2 or more, D-dimer cannot exclude dissection and adds delay; CT angiography is needed whatever the result.",
+    "A chest X-ray may show a widened mediastinum, but it is often normal in dissection, so it cannot confirm or exclude the diagnosis.",
+    "A CT pulmonary angiogram is timed for the pulmonary arteries, so it may not opacify the aorta well enough to assess it, and pulmonary embolism does not cause a difference in blood pressure between the arms.",
+    "Coronary angiography is invasive and does not image the aorta; it can delay surgery and may extend a dissection.",
+    null
+   ],
+   "topic": "Emergency Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-307",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-307",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:56.992Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-307",
+      "osce-amsa-307"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0714",
+      "medqa-us4-test-0164"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 96,
+    "quality": 98,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:30:07.514Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-4374c88b",
    "stem": "A 47-year-old man wakes with a muffled right ear. Audiogram: right air conduction 45 to 65 dB HL, masked bone conduction within 5 dB at every frequency; left normal.",
    "ask": "What does the audiogram show?",
@@ -4361,6 +4633,73 @@
    }
   },
   {
+   "id": "ai-mcq-4f2ae166",
+   "stem": "A 31-year-old woman has newly confirmed HIV-1 infection and feels well. Her CD4 count is 520 cells/µL, her viral load is 40,000 copies/mL, and her genotype shows no resistance.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Await CD4 below 350",
+    "Start cotrimoxazole prophylaxis",
+    "Start antiretroviral therapy",
+    "Repeat viral load testing",
+    "Start azithromycin prophylaxis"
+   ],
+   "answer": 2,
+   "explanation": "ASHM's Australian commentary on the DHHS guidelines recommends starting antiretroviral therapy soon after diagnosis for everyone with HIV, whatever the CD4 count. Early treatment protects the immune system and lowers the risk of illness. Once the viral load has been undetectable for 6 months, she cannot pass HIV on through sex (U=U).",
+   "why": [
+    "Waiting for the CD4 count to fall is an outdated approach: the START trial showed that waiting causes more serious illness than treating straight away.",
+    "Pneumocystis prophylaxis with cotrimoxazole is given when the CD4 count is below 200 cells/µL (or below 14%), and hers is 520.",
+    null,
+    "Her infection is already confirmed and her baseline viral load is known, so repeating it adds nothing and only delays treatment.",
+    "Azithromycin prophylaxis against Mycobacterium avium complex is only considered when the CD4 count is below 50 cells/µL and ART is not yet working, which does not apply to her."
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-8bb4689d",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-8bb4689d",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:05.707Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-8bb4689d",
+      "osce-ai-8bb4689d"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0689",
+      "medqa-us4-test-0633",
+      "medqa-us4-test-0548"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 96,
+    "quality": 98,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:30:05.509Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-4f5dd328",
    "stem": "A 22-year-old man has had 3 months of right iliac fossa pain, nocturnal diarrhoea and weight loss, and has a perianal fistula. Faecal calprotectin is 640 µg/g, and stool pathogen PCR is negative.",
    "ask": "Which test best confirms the diagnosis?",
@@ -4692,6 +5031,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:42:31.318Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-537f99f4",
+   "stem": "A 52-year-old woman with subarachnoid haemorrhage has dilated ventricles on CT. Over one hour her GCS falls from 14 to 10. BP is 210/100 mmHg, heart rate 46/min.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Ventricular drain insertion",
+    "Intravenous labetalol infusion",
+    "Therapeutic lumbar puncture",
+    "Oral nimodipine 60 mg",
+    "Intravenous dexamethasone"
+   ],
+   "answer": 0,
+   "explanation": "She has subarachnoid haemorrhage with acute hydrocephalus, a falling GCS and a Cushing response (high BP, low heart rate), which means raised intracranial pressure and impending coning. The urgent treatment is for a neurosurgeon to insert an external ventricular drain to drain the CSF.",
+   "why": [
+    null,
+    "Her high BP is a Cushing reflex that keeps blood flowing to the brain, so lowering it aggressively before treating the raised intracranial pressure can cause brain ischaemia.",
+    "Lumbar puncture is contraindicated with a reduced GCS and obstructive hydrocephalus because it can cause the brain to herniate (cone).",
+    "Nimodipine is given to prevent delayed cerebral ischaemia but does not treat acute hydrocephalus, and it should not be given by mouth when the GCS is falling.",
+    "Corticosteroids are not helpful in subarachnoid haemorrhage and do not lower intracranial pressure caused by hydrocephalus."
+   ],
+   "topic": "Neurosurgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-361",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-361",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:35.831Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-361",
+      "osce-amsa-361"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0615",
+      "medqa-us4-test-1187",
+      "medqa-us4-test-0749"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 91,
+    "quality": 95,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:30:13.205Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -5431,6 +5837,140 @@
    }
   },
   {
+   "id": "ai-mcq-666bb226",
+   "stem": "A 71-year-old man, a retired plumber exposed to asbestos, has four months of cough, shoulder pain, hoarseness and 7 kg weight loss. Chest X-ray shows a 5 cm right apical mass.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Sputum cytology",
+    "Contrast CT chest",
+    "PET-CT scan",
+    "Flexible bronchoscopy",
+    "Brachial plexus MRI"
+   ],
+   "answer": 1,
+   "explanation": "An apical mass on chest X-ray in an older man with red-flag symptoms is suspicious for lung cancer (a superior sulcus tumour). Cancer Australia and the Optimal Care Pathway advise an urgent contrast CT of the chest and upper abdomen, then urgent referral to a respiratory specialist. The CT findings decide which staging tests and which biopsy route come next.",
+   "why": [
+    "Sputum cytology often misses cancer, especially a peripheral apical lesion, and is not recommended as the first test.",
+    null,
+    "PET-CT is for staging once CT has shown the lesion and the specialist team has asked for it, not the first test from general practice.",
+    "Bronchoscopy is a tissue-sampling test planned after CT, and a peripheral apical lesion is often hard to reach with it.",
+    "MRI of the brachial plexus is used to plan surgery for a superior sulcus tumour after CT and tissue diagnosis, not as the first test."
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-189",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-189",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:20.221Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-189",
+      "osce-amsa-189"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0422",
+      "medqa-us4-test-0374",
+      "medqa-us4-test-0287"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 93,
+    "quality": 96,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:30:35.835Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-6939cf80",
+   "stem": "A 68-year-old woman, a former shipyard worker, has a 3-month dry cough, 5 kg weight loss and hoarseness. She takes perindopril. Chest X-ray shows a 5 cm left hilar mass.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Sputum cytology",
+    "Trial off perindopril",
+    "Urgent CT chest",
+    "Antibiotics, repeat X-ray",
+    "Whole-body PET scan"
+   ],
+   "answer": 2,
+   "explanation": "A suspicious mass on chest X-ray, together with red-flag symptoms, should be treated as lung cancer until proven otherwise. The Cancer Australia guidance and the optimal care pathway say the next step is an urgent contrast CT of the chest and upper abdomen, with urgent referral to a specialist. Asbestos exposure raises the risk of lung cancer even in someone who has never smoked.",
+   "why": [
+    "Sputum cytology often misses cancer, and a negative result would not change the need for CT.",
+    "ACE inhibitor cough is a diagnosis of exclusion and does not explain weight loss, hoarseness or a mass.",
+    null,
+    "There is no sign of infection, and waiting 6 weeks for a repeat X-ray would delay the diagnosis of a likely cancer.",
+    "PET is a staging test that the specialist arranges after CT, not the first test from general practice."
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-189",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-189",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:36.083Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-189",
+      "osce-amsa-189"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0422",
+      "medqa-us4-test-0374",
+      "medqa-us4-test-0287"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 96,
+    "quality": 98,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:30:36.320Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-69810eec",
    "stem": "A 34-year-old woman at 17 weeks' gestation had NIPT showing a high chance of trisomy 16. Amniocentesis shows a normal fetal karyotype, and her ultrasound shows normal fetal anatomy.",
    "ask": "Which complication most warrants surveillance?",
@@ -5967,6 +6507,75 @@
    }
   },
   {
+   "id": "ai-mcq-721d224a",
+   "stem": "A 68-year-old woman with diabetes who smokes has a painful punched-out ulcer on her left fifth toe and night foot pain eased by dangling. Toe pressure 22 mmHg.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Compression bandaging",
+    "Oral flucloxacillin",
+    "Supervised walking program",
+    "Leg elevation and dressings",
+    "Urgent vascular referral"
+   ],
+   "answer": 4,
+   "explanation": "She has rest pain, tissue loss and a toe pressure below 30 mmHg, which means chronic limb-threatening ischaemia. Diabetes Feet Australia guidelines call for urgent vascular imaging and assessment for revascularisation. Wound care, stopping smoking, antiplatelet therapy and a statin run alongside the referral but do not replace it.",
+   "why": [
+    "Compression lowers blood flow to an already ischaemic limb and is contraindicated in severe arterial disease.",
+    "There is no sign of infection, and antibiotics do not treat an uninfected ischaemic ulcer.",
+    "Supervised exercise is for claudication, not for chronic limb-threatening ischaemia with rest pain and tissue loss.",
+    "Elevation worsens arterial perfusion and rest pain, and dressings alone will not heal an ulcer the limb cannot perfuse.",
+    null
+   ],
+   "topic": "Vascular Surgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-327",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-327",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:41.892Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-327",
+      "osce-amsa-327"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1083",
+      "medqa-us4-test-0926",
+      "medqa-us4-test-0511"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 93,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:30:39.519Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-735ee53b",
    "stem": "A 31-year-old woman, para 2, is on the birth suite 25 minutes after a spontaneous vaginal birth at 38 weeks' gestation. Her labour was induced for pre-eclampsia. She received oxytocin 10 units at the birth, and the placenta and membranes were complete. She is now bleeding heavily with clots, and the measured loss is 1,300 mL. Bimanual compression has been done, a catheter has drained 450 mL of urine, an oxytocin infusion is running, and tranexamic acid 1 g IV was given 10 minutes ago. In labour she took oral labetalol and had a magnesium sulfate infusion. She has no history of asthma. Pulse is 122/min, blood pressure 104/66 mmHg (158/102 mmHg before the birth), respirations 24/min and SpO2 98% on oxygen 15 L/min by mask. The fundus is soft and above the umbilicus. Speculum examination shows no cervical or vaginal tear. Haemoglobin is 95 g/L, platelets 146 x 10^9/L and fibrinogen 3.4 g/L. Crossmatched blood has been requested.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -6029,6 +6638,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:31:53.294Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-73e11c00",
+   "stem": "A 79-year-old woman taking rivaroxaban for atrial fibrillation presents drowsy, GCS 13, two days after a fall. CT brain shows a left acute subdural haematoma. Her last dose was 4 hours ago.",
+   "ask": "Most appropriate immediate treatment?",
+   "options": [
+    "Prothrombinex-VF",
+    "Intravenous vitamin K",
+    "Idarucizumab",
+    "Fresh frozen plasma",
+    "Protamine sulfate"
+   ],
+   "answer": 0,
+   "explanation": "She has an intracranial bleed and took a factor Xa inhibitor 4 hours ago, so the anticoagulant must be reversed straight away. Under eTG, the reversal agent is prothrombin complex concentrate (Prothrombinex-VF, about 50 units/kg IV), given with haematology advice while urgent neurosurgical referral is arranged. Andexanet alfa is an option only where local protocol allows it.",
+   "why": [
+    null,
+    "Vitamin K works by restoring vitamin K-dependent clotting factors, so it reverses warfarin but has no effect on rivaroxaban, a direct factor Xa inhibitor.",
+    "Idarucizumab is a specific antibody fragment that reverses only dabigatran, a direct thrombin inhibitor, and does not bind rivaroxaban.",
+    "Fresh frozen plasma needs a large volume and takes a long time to thaw, and it does little to reverse a factor Xa inhibitor.",
+    "Protamine reverses heparin, and partly low molecular weight heparin, but has no effect on direct oral anticoagulants."
+   ],
+   "topic": "Emergency Medicine",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:29.227Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 96,
+    "quality": 98,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:31:07.888Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -6966,6 +7642,75 @@
    }
   },
   {
+   "id": "ai-mcq-85579bea",
+   "stem": "A 46-year-old woman has a dilatation and curettage for heavy menstrual bleeding. The scrub nurse notes yellow fatty tissue in the curettings. Afterwards she is stable with mild lower abdominal pain.",
+   "ask": "Which complication must be excluded?",
+   "options": [
+    "Bowel injury",
+    "Intrauterine adhesions",
+    "Cervical laceration",
+    "Acute endometritis",
+    "Cervical stenosis"
+   ],
+   "answer": 0,
+   "explanation": "There is no fat inside the uterus, so fat in the curettings means the curette has gone through the uterine wall and into omentum, mesentery or bowel fat. Bowel injury must then be excluded urgently with senior gynaecology review and usually laparoscopy, even if she looks stable. A missed bowel injury can show up days later as peritonitis.",
+   "why": [
+    null,
+    "Intrauterine adhesions (Asherman syndrome) are a late complication of vigorous curettage and do not explain fat in the specimen.",
+    "A cervical tear causes vaginal bleeding during dilatation; it does not put fat in the curettings or cause intra-abdominal injury.",
+    "Endometritis is an infection that develops days later; it would not explain fat seen in the operating theatre.",
+    "Cervical stenosis is a long-term consequence of cervical surgery and has nothing to do with acute perforation."
+   ],
+   "topic": "Gynaecology",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:ai-9fdfd7be",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-9fdfd7be",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:59.920Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-9fdfd7be",
+      "osce-ai-9fdfd7be"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0241",
+      "medqa-us4-test-0245"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 85,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:31:04.226Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-8557a042",
    "stem": "A 70-year-old woman is brought to the emergency department by ambulance 1 hour after sudden, severe, tearing chest pain that radiated between her shoulder blades while she was gardening. She fainted briefly when the pain began. She has hypertension and smokes 20 cigarettes a day. Her medicines are perindopril and amlodipine. On arrival, her blood pressure is 168/94 mmHg in the left arm and 136/80 mmHg in the right arm, pulse is 104/min and SpO2 is 96% on room air. An early diastolic murmur is heard at the right sternal edge. The ECG shows sinus tachycardia with left ventricular hypertrophy and no ST elevation. CT angiography shows an intimal flap that starts just above the aortic valve and extends into the descending thoracic aorta, with a moderate high-attenuation pericardial effusion. Twenty minutes later she becomes pale and confused. Her blood pressure is 82/54 mmHg, pulse is 124/min, jugular venous pressure is raised 6 cm and her heart sounds are muffled. Two large-bore cannulas are in place and crossmatched blood is available.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -7497,6 +8242,73 @@
    }
   },
   {
+   "id": "ai-mcq-91cd4049",
+   "stem": "A 47-year-old man wakes with sudden right-sided hearing loss and tinnitus. Audiometry shows a 40 dB sensorineural loss across four contiguous frequencies, and tympanometry is normal. Prednisolone is started.",
+   "ask": "Most appropriate further investigation?",
+   "options": [
+    "MRI internal auditory canals",
+    "Non-contrast CT temporal bones",
+    "Carotid duplex ultrasound",
+    "Autoimmune antibody screen",
+    "Auditory brainstem response"
+   ],
+   "answer": 0,
+   "explanation": "Confirmed unilateral sudden sensorineural hearing loss needs gadolinium-enhanced MRI of the internal auditory canals to exclude a retrocochlear lesion such as a vestibular schwannoma. MRI is still needed if hearing recovers with steroids, because recovery does not rule out a lesion.",
+   "why": [
+    null,
+    "CT shows bony and middle ear disease well but can miss small soft-tissue lesions in the internal auditory canal, so it is not recommended routinely.",
+    "Carotid disease does not cause isolated sudden hearing loss, and the posterior circulation is not assessed this way.",
+    "A routine autoimmune screen is not recommended without features of systemic or bilateral progressive disease.",
+    "Auditory brainstem response is less sensitive than MRI for small tumours and is kept for patients who cannot have MRI."
+   ],
+   "topic": "Otorhinolaryngology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-95865471",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-95865471",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:41.020Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-95865471",
+      "osce-ai-95865471"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0964",
+      "medqa-us4-test-0302",
+      "medqa-us4-test-0504"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 96,
+    "quality": 98,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:31:00.774Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-91f368bd",
    "stem": "A 31-year-old woman comes to the emergency department with 3 days of tingling that started in her feet and has spread up to her waist. Over the same time her legs have become steadily weaker. Since this morning she has been unable to pass urine. She has had no back pain, fever, trauma or weight loss. Eighteen months ago she had 2 weeks of blurred vision and pain on moving her left eye, which got better without treatment. She takes no medicines. Temperature is 36.7 °C, pulse 80 beats/min, blood pressure 118/74 mm Hg and respiratory rate 16 breaths/min. Cranial nerve and upper limb examination is normal. Tone is increased in both legs. Hip flexion and ankle dorsiflexion are 3/5 on the left and 4/5 on the right. Knee and ankle reflexes are brisk, and both plantar responses are extensor. Pinprick sensation is reduced below the umbilicus. A bladder scan shows 900 mL. Full blood count and C-reactive protein are normal.",
    "ask": "Which of the following is the most appropriate next investigation?",
@@ -7828,6 +8640,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:35:09.401Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-9630c1c8",
+   "stem": "A 66-year-old man with ISUP Grade Group 3 prostate cancer, localised on PSMA PET/CT, chooses robotic radical prostatectomy. He is sexually active and fully continent.",
+   "ask": "Most common long-term adverse effect to counsel about?",
+   "options": [
+    "Erectile dysfunction",
+    "Urinary incontinence",
+    "Radiation proctitis",
+    "Bladder neck contracture",
+    "Hot flushes"
+   ],
+   "answer": 0,
+   "explanation": "Erectile dysfunction is the most common long-term adverse effect of radical prostatectomy, even with nerve sparing, and age over 65 makes lasting loss of erections more likely. Australian prostate cancer guidance says this risk should be discussed before he consents, along with penile rehabilitation options.",
+   "why": [
+    null,
+    "Urinary leakage is common early on, but most men regain continence within a year, so lasting incontinence affects only a minority.",
+    "Radiation proctitis follows external beam radiotherapy, not surgery.",
+    "Bladder neck contracture does occur after prostatectomy but is uncommon, especially after robotic surgery.",
+    "Hot flushes come from androgen deprivation therapy, which is not part of surgery alone for intermediate-risk disease."
+   ],
+   "topic": "Urology",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:ai-e4a377e8",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-e4a377e8",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:08.043Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-e4a377e8",
+      "osce-ai-e4a377e8"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0659",
+      "medqa-us4-test-0862",
+      "medqa-us4-test-0934"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 93,
+    "quality": 96,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:23:25.726Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -8366,6 +9245,73 @@
    }
   },
   {
+   "id": "ai-mcq-a111fffd",
+   "stem": "A 46-year-old man woke yesterday with hearing loss and tinnitus in his right ear. Otoscopy is normal, Weber lateralises left, and audiometry shows a 40 dB right sensorineural loss.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Oral valaciclovir",
+    "Oral prednisolone",
+    "Ear canal microsuction",
+    "Oral amoxicillin",
+    "Intranasal mometasone"
+   ],
+   "answer": 1,
+   "explanation": "Sudden one-sided sensorineural hearing loss that began within the last 72 hours is a time-critical emergency. Start high-dose oral corticosteroids promptly and contact ENT the same day, then arrange an MRI of the internal auditory canals to exclude a retrocochlear lesion.",
+   "why": [
+    "Guidelines advise against routine antivirals for sudden sensorineural hearing loss, as they add no benefit over steroids alone.",
+    null,
+    "Normal otoscopy rules out wax, and the loss is sensorineural rather than conductive, so microsuction will not help.",
+    "Nothing suggests a bacterial infection: otoscopy is normal and there is no middle ear effusion.",
+    "Intranasal steroids treat Eustachian tube dysfunction, which causes a conductive loss, and this is a sensorineural loss."
+   ],
+   "topic": "Otorhinolaryngology",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-95865471",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-95865471",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:12.365Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-95865471",
+      "osce-ai-95865471"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0964",
+      "medqa-us4-test-0302",
+      "medqa-us4-test-0504"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 96,
+    "quality": 98,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:23:24.455Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-a2ea039e",
    "stem": "A 66-year-old woman with type 2 diabetes for 12 years, taking metformin, has five months of symmetrical burning and numbness in both feet. Ankle reflexes are absent; plantars are flexor.",
    "ask": "Most appropriate next investigation?",
@@ -8630,6 +9576,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:11:25.408Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-a5aa4adc",
+   "stem": "A 69-year-old man has a transperineal biopsy showing Gleason 4+3=7 prostate adenocarcinoma. His PSA is 11 ng/mL, and MRI shows a 10 mm right peripheral zone lesion without extraprostatic extension. He has no symptoms.",
+   "ask": "Most appropriate staging investigation?",
+   "options": [
+    "Whole-body bone scan",
+    "CT chest/abdomen/pelvis",
+    "Repeat prostate MRI",
+    "FDG PET/CT",
+    "PSMA PET/CT"
+   ],
+   "answer": 4,
+   "explanation": "Gleason 4+3=7 (ISUP Grade Group 3) with a PSA of 10 to 20 ng/mL is unfavourable intermediate-risk disease, so it needs staging before curative treatment. In Australia, Medicare funds PSMA PET/CT for this. The proPSMA trial showed it is more accurate than CT plus bone scan for nodal and distant metastases.",
+   "why": [
+    "A bone scan shows only skeletal disease, misses nodal spread and is less sensitive than PSMA PET/CT.",
+    "Conventional CT misses small or normal-sized involved lymph nodes and is less accurate than PSMA PET/CT.",
+    "MRI has already staged the local tumour; repeating it cannot detect nodal or distant metastases.",
+    "Most prostate adenocarcinomas take up little FDG, so FDG PET/CT is not used for primary staging.",
+    null
+   ],
+   "topic": "Urology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-e4a377e8",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-e4a377e8",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:26.008Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-e4a377e8",
+      "osce-ai-e4a377e8"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0659",
+      "medqa-us4-test-0862",
+      "medqa-us4-test-0934"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 83,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:23:33.428Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -9234,6 +10247,73 @@
    }
   },
   {
+   "id": "ai-mcq-ab6709ff",
+   "stem": "A 71-year-old man with hypertension has sudden tearing chest pain radiating to his back. ECG shows tall QRS voltages with lateral downsloping ST depression and asymmetric T inversion, unchanged from 2023.",
+   "ask": "Most likely explanation of the ECG?",
+   "options": [
+    "Acute lateral NSTEMI",
+    "LVH strain pattern",
+    "Posterior STEMI",
+    "Digoxin effect",
+    "Severe hypokalaemia"
+   ],
+   "answer": 1,
+   "explanation": "High QRS voltages with lateral downsloping ST depression and asymmetric T inversion that match an earlier ECG are a long-standing strain pattern from hypertensive left ventricular hypertrophy, not acute ischaemia. A non-ischaemic or non-specific ECG does not rule out aortic dissection, so get a CT aortogram and hold off aspirin, heparin and thrombolysis until dissection has been excluded.",
+   "why": [
+    "Acute ischaemia should be new or changing compared with the old ECG, and it does not explain the high QRS voltages.",
+    null,
+    "Posterior STEMI shows ST depression in V1 to V3 with tall R waves there, not lateral changes with LVH voltages that match an old ECG.",
+    "Digoxin causes a scooped (reverse tick) ST depression across many leads, without high voltages, and he has no history of taking it.",
+    "Hypokalaemia gives flattened T waves and prominent U waves with widespread ST depression, not LVH voltages with a fixed lateral pattern."
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-307",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-307",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:45.530Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-307",
+      "osce-amsa-307"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0714",
+      "medqa-us4-test-0164"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 85,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:23:48.409Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-acb3ef9a",
    "stem": "A 47-year-old woman has had 6 hours of constant epigastric pain radiating to her back, with vomiting. She rarely drinks alcohol. Her lipase is 2400 U/L (normal <60). Her observations are stable.",
    "ask": "Most appropriate next investigation?",
@@ -9700,6 +10780,75 @@
    }
   },
   {
+   "id": "ai-mcq-b3d155cd",
+   "stem": "A 46-year-old woman with polycystic kidney disease has a sudden severe headache that peaked within a minute while lifting weights. She is drowsy, GCS 14, with neck stiffness.",
+   "ask": "Most appropriate first investigation?",
+   "options": [
+    "Lumbar puncture",
+    "MRI brain with gadolinium",
+    "Catheter cerebral angiography",
+    "CT cerebral venogram",
+    "Non-contrast CT brain"
+   ],
+   "answer": 4,
+   "explanation": "A thunderclap headache in a patient with ADPKD (a risk factor for berry aneurysm) is a subarachnoid haemorrhage until proven otherwise. A non-contrast CT brain is the first test: it is highly sensitive early on, and it also shows hydrocephalus or a mass before any LP is considered. Her reduced GCS means she needs urgent imaging, and the Ottawa SAH rule cannot be used.",
+   "why": [
+    "Lumbar puncture is only for a suspected SAH with a negative CT, and it should not be done first when the GCS is reduced, because hydrocephalus or a mass has not been excluded.",
+    "MRI is slower, less available and harder to do safely in a drowsy patient who is getting worse, and it is not the first-line test for suspected SAH.",
+    "Catheter angiography is invasive and is used to define or treat an aneurysm once SAH is confirmed, not as the first test.",
+    "A CT venogram looks for cerebral venous sinus thrombosis, which is less likely here, and it comes after a non-contrast CT rather than replacing it.",
+    null
+   ],
+   "topic": "Emergency Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-361",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-361",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:18.090Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-361",
+      "osce-amsa-361"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0615",
+      "medqa-us4-test-1187",
+      "medqa-us4-test-0749"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 96,
+    "quality": 95,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:23:49.312Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-b748662d",
    "stem": "A 29-year-old woman comes to the emergency department with 2 days of sharp central chest pain. The pain is worse when she lies flat or breathes in, and it eases when she sits forward. She had a sore throat and runny nose a week ago. She has no medical history, takes no regular medicines and weighs 62 kg. Her temperature is 37.6 °C, pulse 96/min, blood pressure 122/74 mm Hg, respiratory rate 16/min and SpO2 99% on room air. A scratchy friction rub is heard at the left sternal edge while she holds her breath. An ECG shows widespread concave ST elevation with PR depression. High-sensitivity troponin I is 4 ng/L at 0 hours and 4 ng/L at 2 hours (women's 99th percentile, under 16). CRP is 38 mg/L (under 5). A chest X-ray is normal, and a bedside echocardiogram shows no pericardial effusion. She is to be discharged on ibuprofen 600 mg orally 8-hourly.",
    "ask": "Along with the ibuprofen, which of the following is most likely to lower her risk of the most common complication of this condition?",
@@ -9962,6 +11111,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:46:20.272Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-b9b0ae77",
+   "stem": "A 27-year-old man with newly confirmed HIV-1 infection has baseline serology: hepatitis B surface antigen negative, core antibody negative, surface antibody below 10 mIU/mL.",
+   "ask": "What does this serology indicate?",
+   "options": [
+    "Chronic hepatitis B infection",
+    "Susceptible to hepatitis B",
+    "Resolved past hepatitis B",
+    "Vaccine-induced immunity",
+    "Occult hepatitis B infection"
+   ],
+   "answer": 1,
+   "explanation": "Negative surface antigen and core antibody mean he has never been infected, and a surface antibody below 10 mIU/mL means he is not immune. He is susceptible and should be vaccinated against hepatitis B. Under the Australian Immunisation Handbook, people with HIV may need a higher-dose or extended schedule, with surface antibody checked afterwards.",
+   "why": [
+    "Chronic hepatitis B needs a positive surface antigen (and core antibody), and both are negative here.",
+    null,
+    "Resolved past infection leaves a positive core antibody, usually with surface antibody of 10 mIU/mL or more, and neither is present.",
+    "Vaccine-induced immunity shows as surface antibody of 10 mIU/mL or more with a negative core antibody, and his surface antibody is below 10.",
+    "Occult hepatitis B means detectable HBV DNA without surface antigen, usually with a positive core antibody, and his core antibody is negative."
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:ai-8bb4689d",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-8bb4689d",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:51.170Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-8bb4689d",
+      "osce-ai-8bb4689d"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0689",
+      "medqa-us4-test-0633",
+      "medqa-us4-test-0548"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 89,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:23:55.249Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -11303,6 +12519,73 @@
    }
   },
   {
+   "id": "ai-mcq-ca714e89",
+   "stem": "A 49-year-old woman has guarding and shoulder-tip pain 3 hours after hysteroscopy and curettage. After 1 L crystalloid, BP rises from 86/50 to 94/56 mmHg; haemoglobin 95 g/L (pre-operatively 131).",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Second crystalloid bolus",
+    "Noradrenaline infusion",
+    "Urgent CT abdomen",
+    "Red cell transfusion",
+    "Repeat haemoglobin hourly"
+   ],
+   "answer": 3,
+   "explanation": "She is still shocked after 1 L of crystalloid, and her haemoglobin has fallen by 36 g/L with peritonism. Together these mean she is still bleeding inside the abdomen, most likely from a uterine perforation. Under the National Blood Authority critical bleeding guideline she needs blood now, with the massive transfusion protocol if needed, while the senior gynaecologist and theatre are called urgently for surgical control.",
+   "why": [
+    "Wrong: more crystalloid dilutes clotting factors and red cells, and the guideline limits it in critical bleeding once 1 L has failed to restore perfusion.",
+    "Wrong: vasopressors do not treat hypovolaemia from ongoing bleeding and can hide how much blood she has lost.",
+    "Wrong: CT is only for stable patients, and taking a shocked patient with peritonism to the scanner delays transfusion and surgery.",
+    null,
+    "Wrong: early haemoglobin underestimates acute blood loss, and waiting for repeat values delays treatment in a woman who is already shocked."
+   ],
+   "topic": "Gynaecology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:ai-9fdfd7be",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-9fdfd7be",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:10.720Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-9fdfd7be",
+      "osce-ai-9fdfd7be"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0241",
+      "medqa-us4-test-0245"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 91,
+    "quality": 95,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:24:19.362Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-cac4a8ab",
    "stem": "A 34-year-old woman is brought to the emergency department by ambulance 40 minutes after her horse fell on her during a trail ride, crushing the right side of her chest. She had right-sided pleuritic pain straight away and has become steadily more breathless during transport. She has no past medical history and takes only a combined oral contraceptive pill. On arrival she is agitated and can speak only in single words. Temperature is 36.4 °C, pulse 138/min, blood pressure 82/50 mmHg, respiratory rate 34/min, and oxygen saturation 85% on 15 L/min via a non-rebreather mask. Her trachea is deviated to the left and her neck veins are distended. There is bruising and tenderness over the right lateral ribs. The right hemithorax is hyper-resonant to percussion, and breath sounds are absent on the right. Heart sounds are clearly audible. Two large-bore cannulae are in place and blood has been sent for group and hold. A mobile chest X-ray has been requested, and the radiographer will arrive in 10 minutes.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -11365,6 +12648,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:39:48.119Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-cb57b683",
+   "stem": "A 47-year-old woman is in recovery 2 hours after hysteroscopy and curettage. She has guarding, BP 84/50 mmHg despite crystalloid and 2 units of red cells, and fat in the curettings.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Urgent surgical exploration",
+    "Repeat hysteroscopy",
+    "Urgent CT abdomen-pelvis",
+    "Further crystalloid bolus",
+    "Serial haemoglobin monitoring"
+   ],
+   "answer": 0,
+   "explanation": "Fat in the curettings means uterine perforation until proven otherwise. She is still in shock and has peritonism despite fluid and blood, so she needs emergency laparoscopy or laparotomy to stop the bleeding and look for bowel, bladder or vessel injury. CT is only for stable patients, when the senior gynaecologist asks for it.",
+   "why": [
+    null,
+    "Hysteroscopy only shows the inside of the uterus, so it cannot treat bleeding inside the abdomen or show injury to the bowel or vessels.",
+    "CT is for stable patients, and sending an unstable patient to the scanner delays the surgery that will stop the bleeding.",
+    "She is still bleeding and has already been given blood, so more crystalloid will dilute her blood and cannot replace stopping the bleeding.",
+    "Watching her haemoglobin is not safe while she is in shock, and haemoglobin falls later than the real blood loss."
+   ],
+   "topic": "Gynaecology",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-9fdfd7be",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-9fdfd7be",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:06.062Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-9fdfd7be",
+      "osce-ai-9fdfd7be"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0241",
+      "medqa-us4-test-0245"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 89,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:24:17.394Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -11701,6 +13051,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:40:40.919Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-d2d3aaeb",
+   "stem": "A 71-year-old woman has sudden tearing chest pain radiating to her back. BP is 84/50 mmHg. CT aortogram shows an ascending aortic intimal flap with haemopericardium.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "IV metoprolol infusion",
+    "Emergency surgical repair",
+    "Ultrasound-guided pericardiocentesis",
+    "IV heparin infusion",
+    "Endovascular stent graft"
+   ],
+   "answer": 1,
+   "explanation": "This is a Stanford type A aortic dissection with haemopericardium and shock. It is a surgical emergency, so call cardiothoracic surgery at once, resuscitate, and take her straight to theatre for open repair of the ascending aorta. Do not try to lower her blood pressure.",
+   "why": [
+    "Wrong: beta blockade is anti-impulse therapy for a hypertensive patient, and it is avoided in hypotension and tamponade because it worsens shock.",
+    null,
+    "Wrong: tamponade from a dissection is treated by surgical repair. Pericardiocentesis can speed up bleeding and cause collapse, and is kept only for controlled small-volume drainage when theatre is not available.",
+    "Wrong: anticoagulation is contraindicated in acute aortic dissection because it makes bleeding and rupture worse.",
+    "Wrong: endovascular stent grafting is used for complicated type B (descending) dissection, not as standard treatment of the ascending aorta."
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-307",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-307",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:05.374Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-307",
+      "osce-amsa-307"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0714",
+      "medqa-us4-test-0164"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 96,
+    "quality": 98,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:24:23.646Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -12303,6 +13720,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:14:36.989Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-de6e33b3",
+   "stem": "A 68-year-old woman, a former smoker, has 3 months of breathlessness and 9 kg weight loss. Chest X-ray shows a large left pleural effusion. SpO2 94% on room air.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Oral frusemide trial",
+    "Intercostal chest drain insertion",
+    "Talc slurry pleurodesis",
+    "Ultrasound-guided aspiration",
+    "Flexible bronchoscopy and biopsy"
+   ],
+   "answer": 3,
+   "explanation": "A new, large, one-sided effusion with weight loss in a former smoker needs a diagnosis. Ultrasound-guided pleural aspiration both diagnoses and relieves it. Send fluid for protein, LDH, pH, glucose, cell count, cytology and culture, remove no more than about 1.5 L at once, and get a contrast CT chest ideally before full drainage.",
+   "why": [
+    "Frusemide treats heart failure, but a large effusion on one side with weight loss and no features of heart failure needs fluid analysis, not a trial of diuretics.",
+    "A chest drain is not the first step for an undiagnosed effusion in a stable patient: it is more invasive and is kept for empyema, pneumothorax or planned pleurodesis.",
+    "Pleurodesis is only done once a recurrent malignant effusion is confirmed and the lung has been shown to re-expand.",
+    null,
+    "Bronchoscopy comes later, guided by CT, and has a low yield before then, while sampling the pleural fluid is less invasive and may make the diagnosis."
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-582",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-582",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:33.661Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-582",
+      "osce-amsa-582"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1245",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0392"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 88,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:24:48.679Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -14516,6 +16000,384 @@
    }
   },
   {
+   "id": "headqa-2013-101",
+   "stem": "A calcium figure of 11 mg / dL (normal less than 10.5 mg / dL) is found in a 30-year-old patient during a routine business examination. The PTH determination was 45 pg / ml (VN 10-55 pg / ml). The story is anodyne, except for the fact that the mother and the paternal grandfather were diagnosed with hyperparathyroidism and intervened, although they remained hypercalcemic. Which test is most useful to confirm the diagnosis?",
+   "options": [
+    "25-OH D.",
+    "1,25-OH 2D.",
+    "Calcium / creatinine ratio in urine.",
+    "Tubular reabsorption of phosphates.",
+    "PTHrP."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Endocrinology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "clang:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 83,
+    "quality": 85,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:27:48.934Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-106",
+   "stem": "A 67-year-old patient on ticlopidine treatment went to the emergency department with headache, asthenia and petechiae in the lower extremities. In the analytical sample hemoglobin 8.2 g / dl, VCM 100 fl, platelets 25000 / ul and leukocytes 7500 / ul with normal formula. The number of reticulocytes is high and in the blood smear numerous schistocytes are observed. The coagulation studies (APTT, TP and Fibrinogen) are normal. In the biochemistry highlights LDH 2700 IU / l and bilirubin 2.6 mg / dl. What is the most likely diagnosis of the patient?",
+   "options": [
+    "Autoimmune thrombocytopenic purpura.",
+    "Thrombotic thrombocytopenic purpura.",
+    "Medullary aplasia.",
+    "Drug-induced thrombocytopenia.",
+    "Disseminated intravascular coagulation."
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Haematology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 79,
+    "quality": 85,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:28:15.185Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-107",
+   "stem": "A 72-year-old man with a pathological fracture in the left femur goes to the Emergency Department. After the surgical intervention, the diagnostic study was performed to find out the underlying pathology with the following findings: hemoglobin 9.5 g / dl, total protein 11 g / dl, (VN: 6-8 g / dl), serum albumin 2 g / dl, (VN 3.5-5.0 g / dl), beta 2 microglobulin 6 mg / l (VN 1.1-2.4 mg / l), serum creatinine 1.8 mg / dl (VN: 0 , 1-1.4 mg / dl). Indicate what would be the diagnostic tests necessary to confirm the most probable diagnosis:",
+   "options": [
+    "Radiological bone series and bone marrow aspiration.",
+    "Serum and urinary electrophoresis and renal function tests.",
+    "Bone marrow aspirate and serum calcium concentration.",
+    "Bone marrow aspiration and serum and urinary electrophoresis.",
+    "Biopsy of the pathological fracture and radiological bone series."
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Haematology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "cover-options:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 74,
+    "quality": 82,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:28:36.487Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-108",
+   "stem": "A 19-year-old girl with no medical history of interest, except for a self-limiting flu-like illness 3 weeks before, who went to the Emergency Department for petechiae and spontaneously occurring bruising. On physical examination, the patient is in good general condition, afebrile, normotensive and oriented in time and space. Petechiae disseminated by EEII and small abdomen and ecchymoses are observed in decubitus areas. No enlarged adenopathy or splenomegaly. The analysis carried out offers the following findings: Hb 12.6 g / dL, Leukocytes 5,500 / mm3, platelets 7000 / mm3. The study of the peripheral blood smear offers a normal erythrocyte morphology, normal differential leukocyte count and the platelet count is concordant with the autoanalyzer figure without observing plaque aggregates. Biochemistry, proteinogram, beta 2 microglobulin and normal LDH. What do you think is the most appropriate initial treatment of the following?",
+   "options": [
+    "Platelet transfusion.",
+    "Rituximab in weekly schedule.",
+    "Cyclophosphamide in pulses of 4 days every 21 days.",
+    "Plasmapheresis daily.",
+    "Prednisone at 1 mg / day for 2-3 weeks."
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Haematology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "absolute-terms:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 78,
+    "quality": 84,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:28:43.677Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-110",
+   "stem": "A 34-year-old man consulted for fever and malaise. In the clinical history, homosexual relationships were collected for 4 months with a new partner. 2 months before the current consultation, she had an ulcerous lesion on the glans, painless, with bilateral inguinal adenopathies, all self-limiting. Serological studies are requested with the following results: HIV negative, RPR 1/320, TPHA 1/128. What treatment would you indicate in this patient?",
+   "options": [
+    "None.",
+    "Intravenous penicillin G, 24 MU every day for 14 days.",
+    "Penicillin Benzatine 2.4 MU intramuscular, three doses in three consecutive weeks.",
+    "Ceftriaxone 2 grams intramuscular in a single dose.",
+    "Penicillin Benzatine 2.4 MU intramuscular in a single dose."
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Sexual Health",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "absolute-terms:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 91,
+    "quality": 90,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:28:46.022Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-111",
+   "stem": "A patient under chemotherapeutic treatment for leukemia is admitted for pneumonia for which treatment with cefepime has been prescribed. A thorax Rx / CT scan shows an infiltrate with the sign of the halo and meniscus lunate. The lesion is peripheral and a transthoracic puncture is indicated for sampling. Until you have definitive histological and microbiological results, what antimicrobial would you add to the treatment?",
+   "options": [
+    "Ganciclovir",
+    "Caspofungin",
+    "Fluconazole",
+    "Piperacillin-tazobactam",
+    "Voriconazole"
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:major"
+    ],
+    "flawScore": 80,
+    "judgeScore": 83,
+    "quality": 82,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:29:03.100Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-112",
+   "stem": "A 54-year-old man diagnosed with diabetes mellitus type 2 came to our clinic. He reported fever of 40ºC with chills and shivering, arthromyalgia and headache, which is why he started treatment with paracetamol. The painting began 24 hours before his return to Spain. After 3 days, he presented with a generalized maculo-papular rash that progressed to the formation of more intense petechiae in the lower limbs. It provides analytics where leukopenia stands out with 3,200 / mm3 and platelets 91,000 / mm3 and mild elevation of aminotransferases. Thickness, peripheral blood smear, polymerase chain reaction (PCR) and malaria antigen are negative. What is the most likely suspected diagnosis?",
+   "options": [
+    "Coronavirus infection.",
+    "Lymphocyte choriomeningitis.",
+    "Dengue.",
+    "Chikungunya virus infection.",
+    "Encephalitis of Saint Louis."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 74,
+    "quality": 84,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:29:04.634Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "headqa-2013-116",
    "stem": "A 17-year-old boy referred to a health center referring to a 39-degree fever of 48 hours of evolution with a sore throat. The family doctor consults the history of the patient where it does not cost any previous illness. The patient did not report cough and the examination performed by his family doctor reveals the presence of bilateral whitish tonsillar exudate and anterior cervical adenopathies enlarged and painful on palpation. What would be the treatment of choice for this patient?",
    "options": [
@@ -14836,6 +16698,221 @@
    }
   },
   {
+   "id": "headqa-2013-138",
+   "stem": "A 50-year-old patient with a pleural effusion with the following characteristics: straw appearance, pH 7.3, ratio of pleura / serum proteins 0.8, ratio of LDH pleura / serum 0.9, Gram and Ziehl negative, total lipids, cholesterol and normal triglycerides, cells mesothelial <5%, intense lymphocytosis without atypia, ADA 64 U / l. What diagnosis do you suggest?",
+   "options": [
+    "Pleural empyema",
+    "Pleural effusion due to heart failure (transudate).",
+    "Pleural mesothelioma.",
+    "Tuberculous pleural effusion",
+    "Secondary effusion to pulmonary infarction."
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:major"
+    ],
+    "flawScore": 80,
+    "judgeScore": 84,
+    "quality": 82,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:29:39.288Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-142",
+   "stem": "A 65-year-old man with a history of pancreatic cancer undergoing chemotherapy. Emergency consultation for pain and edema of the entire lower limb from the groin. Which diagnostic test is more cost-effective to confirm the diagnostic suspicion?",
+   "options": [
+    "Dimer D.",
+    "Magnetic resonance.",
+    "Phlebography",
+    "Venous Doppler ultrasound.",
+    "Helical CT"
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Haematology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 79,
+    "quality": 87,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:30:03.215Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-143",
+   "stem": "A 40-year-old woman who consulted for approximately 20 episodes a day of intense pain, left periocular of 15 minutes duration, accompanied by intense lacrimation and rhinorrhea. Your scan and magnetic resonance are normal. Your treatment of choice would be:",
+   "options": [
+    "Indomethacin",
+    "Lamotrigine",
+    "Verapamil",
+    "Prednisone.",
+    "Lithium carbonate."
+   ],
+   "answer": 0,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Neurology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "lead-in:major",
+     "vignette:minor"
+    ],
+    "flawScore": 74,
+    "judgeScore": 86,
+    "quality": 81,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:30:30.626Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-146",
+   "stem": "Motor symptoms in Parkinson's disease predominate and define this entity. However, symptoms in other spheres are sometimes very relevant and are referred to by the general name of \"Non-motor manifestations of Parkinson's disease\". Which of the following is considered a non-motor symptom of Parkinson's disease?",
+   "options": [
+    "Hypoglycemia",
+    "Orthostatic hypotension.",
+    "Absence crisis.",
+    "Headache",
+    "Motor polyneuropathy."
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Neurology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 78,
+    "quality": 84,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:30:23.439Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "headqa-2013-149",
    "stem": "A 76-year-old man consulted for cognitive deterioration, slowness and awkwardness of movements, of eight months of evolution. The family reported that the patient had visual hallucinations, so his Primary Care physician prescribed low doses of risperidone, with a significant worsening of motor status. In view of these data, what is the most likely diagnosis?",
    "options": [
@@ -14886,6 +16963,328 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:09:53.920Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-152",
+   "stem": "An 80-year-old man is admitted with a sudden picture of aphasia and right hemiparesis. As background highlights, hypertension, well controlled diet and cognitive impairment in the last year under study by his neurologist. Emergency cranial CT demonstrates a left frontal lobar hematoma without contrast enhancement. What is the most likely cause of the hematoma?",
+   "options": [
+    "Arteriovenous malformation masked by the acute hematoma.",
+    "Chronic arterial hypertension.",
+    "Vasculitis isolated from the nervous system.",
+    "Brain tumor.",
+    "Amyloid cerebral angiopathy (congophilic angiopathy)."
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Neurology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 83,
+    "quality": 90,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:30:44.119Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-159",
+   "stem": "A 56-year-old woman presents, after a casual fall to the floor, pain, deformity and increased volume in the left arm, with impossibility for the dorsal flexion of the hand. What is the most likely diagnosis?",
+   "options": [
+    "Trocheter fracture in the left humerus.",
+    "Diaphyseal fracture of the left humerus with radial nerve injury.",
+    "Supraconcondylar fracture of the humeral palate with median nerve injury.",
+    "Fracture of the anatomical neck of the humerus with radial nerve injury.",
+    "Fracture of displaced epitrochlea with ulnar nerve injury."
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Orthopaedics",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 74,
+    "quality": 82,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:31:31.111Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-160",
+   "stem": "A 70-year-old man presents, for a few months, without previous trauma, lumbar pain, difficulty walking, loss of strength and paresthesias in lower limbs, having to stop a few meters after starting it. The patient is increasingly inclining the trunk forward. What is the most likely diagnosis?",
+   "options": [
+    "Osteoporotic lumbar vertebral fracture.",
+    "Central herniated disc L5-S1.",
+    "Spondylodiscitis.",
+    "Stenosis of the lumbar canal.",
+    "Degenerative lumbar scoliosis."
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Orthopaedics",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 83,
+    "quality": 87,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:31:26.187Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-163",
+   "stem": "84-year-old man with severe respiratory failure secondary to carcinomatous lymphangitis associated with gastric cancer. A companion of his service has begun, that same day, treatment with oral morphine 10 mg / 4 hours. The patient is restless, at 34 breaths per minute, O2 saturation is 80% with an FiO2 of 28%. What should his attitude be?",
+   "options": [
+    "Withdraw treatment because it may worsen respiratory failure.",
+    "Increase the doses up to 20 mg / 4 hours according to evolution.",
+    "Increase oxygen flow to 35%.",
+    "Change the treatment of morphine by scopolamine.",
+    "To add to a treatment of a risperidon."
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Palliative Care",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 74,
+    "quality": 82,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 3,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:31:59.184Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-165",
+   "stem": "A woman of 90 years of dementia, incontinent and immobilized by hemiparesis presents a sacral ulcer of grade III. In the examination we see that he is in bed on a wet pad and with a feeding tube that is well placed. He is afebrile and has a normal pulse and blood pressure. It has a 4 x 4 cm sacral ulcer that extends into the fascia with green exudate and normal skin surrounding the ulcer. What is the first priority in the care of this patient?",
+   "options": [
+    "Start treatment with antibiotics.",
+    "Cultivate the decubitus exudate.",
+    "Apply semi-moist bandages of saline three times a day.",
+    "Make postural changes to the patient every two hours.",
+    "Place a permanent urinary catheter."
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Geriatrics",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 79,
+    "quality": 85,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:32:02.936Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-169",
+   "stem": "80-year-old woman who consults for presenting, for 1 month, progressive increase of the abdominal perimeter. During the previous 4-5 months note asthenia, anorexia and weight loss not specified. On physical examination, tension ascites and malleolar edema are seen, with no other relevant signs. Ultrasonography and CT scan of the abdomen demonstrate the presence of ascites, of homogeneous density, without appreciating peritoneal implants or abdominal or pelvic masses. Liver, pancreas, adrenal glands, spleen and kidneys without significant findings. Paracentesis is performed through a thick needle, obtaining a somewhat yellowish, dense and gelatinous fluid with difficulty. What is the most likely etiology?",
+   "options": [
+    "Hydropic decompensation secondary to liver cirrhosis.",
+    "Chylose ascites due to non-Hodgkin's lymphoma.",
+    "Peritoneal tuberculosis.",
+    "Peritoneal metastasis of adenocarcinoma.",
+    "Ascites secondary to constrictive pericarditis."
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 75,
+    "quality": 83,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:32:39.889Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -15312,6 +17711,597 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:29:13.981Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-68",
+   "stem": "A 52-year-old patient who reported dyspnea of ​​medium effort for 6 months. He has not presented angina or syncopes. The physical examination and diagnostic tests show the existence of an average aortic transvalvular gradient of 55 mmHg and a calculated area of ​​0.7 cm2. Ejection fraction of 65%. The treatment that should be indicated to this patient is:",
+   "options": [
+    "Diuretics and more frequent controls by a specialist.",
+    "In case of increasing dyspnea on exertion, a percutaneous dilatation of the aortic valve with a balloon catheter should be performed.",
+    "Replacement of the aortic valve with a prosthesis / bioprosthesis.",
+    "Replacement of the aortic valve by a homograft.",
+    "Implantation of a percutaneous valve."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "cover-options:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 79,
+    "quality": 85,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:30:26.530Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-78",
+   "stem": "A 45-year-old man underwent a truncal vagotomy and antrectomy with Billroth II reconstruction, for suffering from a chronic peptic ulcer disease with pylorus-duodenal stenosis. Six weeks after the surgery, he reported that shortly after (less than half an hour) of the ingestions he presented with a nauseating state, asthenia and sweating, dizziness and abdominal cramps, usually accompanied by diarrheal descent. Which of the following is the most appropriate attitude for its initial management?",
+   "options": [
+    "Apply treatment with a somatostatin analog (octeotide).",
+    "Follow specific dietary measures.",
+    "Perform a test treatment with a benzodiazepine.",
+    "Perform the search for a probable neuroendocrine tumor (eg, carcinoid).",
+    "Indicate surgical treatment to perform an anti-peristaltic gastro-jejunostomy in Roux-en-Y."
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Gastrointestinal Surgery",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 79,
+    "quality": 85,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:25:22.487Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-79",
+   "stem": "Within the congenital anomalies of the abdominal wall are the omphalocele and gastroschisis. Both entities are defects of the wall. What is the difference between them?",
+   "options": [
+    "Omphalocele occurs at the umbilical level and gastroschisis at the epigastric level.",
+    "The defect, in the case of gastroschisis, is larger than the omphalocele.",
+    "In the omphalocele, a peritoneal sac covers the abdominal contents and not gastroschisis.",
+    "Omphalocele, unlike gastroschisis, is frequently associated with intestinal atresia.",
+    "Unlike the omphalocele, in gastroschisis the surgical treatment can be deferred."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Neonatology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor",
+     "stem-length:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 85,
+    "quality": 86,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:25:22.166Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-82",
+   "stem": "A 55-year-old man, the father of a celiac son, with iron deficiency anemia and a recent increase in the rhythm of deposition, has been determined to have a negative HLA-DQ2 and HLADQ8 allele. Which diagnostic study is the most appropriate in this case?",
+   "options": [
+    "Determination of IgA anti-transglutaminase antibodies.",
+    "Upper digestive endoscopy with taking of duodenal biopsies.",
+    "D-xylose test.",
+    "Evaluate the response to a gluten-free diet.",
+    "Colonoscopy"
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 86,
+    "quality": 89,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:25:47.576Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-83",
+   "stem": "A 37-year-old woman with an extensive ulcerative colitis has a severe outbreak where treatment with prednisone is started at a dose of 1 mg / kg. After a week of treatment, the patient does not show improvement. What is the next therapeutic measure to perform?",
+   "options": [
+    "Subtotal colectomy of urgency and in a second time proctectomy and ileoanal reservoir.",
+    "Associate an immunosuppressant such as azathioprine.",
+    "Associate mesalazine in doses of 4 grams per day oral and rectal triamcinolone 1 application every 12 hours",
+    "Endovenous cyclosporine 2 mg / Kg.",
+    "Treatment with etanercept (an anti-TNFa antibody) should be assessed."
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "absolute-terms:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 78,
+    "quality": 82,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:25:55.094Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-87",
+   "stem": "A 65-year-old woman with a history of joint pains treated with anti-inflammatories, who is referred for a study due to anemia. In the complementary studies it presents 3.164.000 red blood cells, Hto. 32%, Hb 11 g / dl, VCM 69 fl, Leukocytes 7800, Platelets 370,000, PCR 0.29 mg / dl, Fe 20 ng / ml, Ferritin 18 ng / ml, Glucose 105 mg / dl, GOT, GPT, GGT , F. Alkaline, total Bilirubin, Cholesterol, Creatinine, Calcium and Phosphorus normal. Ac. Anti-transglutaminase and negative antigliadin Ac. Gastroscopy: hiatus hernia of 3 cm, rest without alterations. Colonoscopy: up to blind, isolated diverticula in sigma. Intestinal transit without alterations. Ultrasound of the abdomen without alterations. Which of the explorations listed below do you find most appropriate to complete the study?",
+   "options": [
+    "Jejunal biopsy",
+    "Arteriography",
+    "Endoscopic capsule",
+    "Radioisotopes.",
+    "Pelvic MRI."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "units:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 74,
+    "quality": 82,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:26:23.069Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-90",
+   "stem": "A 50-year-old woman attended the emergency department for asthenia, anorexia, weight loss, jaundice, fever and abdominal pain. It does not refer to recent history of blood transfusion, risky sexual contacts or addiction to parenteral drugs. Usual consumption of 60 grams of alcohol per day during the last five years, consumption that has increased during the previous month due to family problems. Temperature 38.5ºC, blood pressure 100/60 mmHg. Physical examination shows temporo-spatial disorientation, malnutrition, asterixis, jaundice and painful hepatomegaly. No ascites or peritoneal irritation data. Laboratory tests include leukocytes 15,000 / microliter with 90% polymorphonuclear cells, red blood cells 3 million / mm3, hemoglobin 10 g / dl, mean corpuscular volume 115 fl, bilirubin 15 mg / dl direct predominance, AST (GOT) 300 IU / L, ALT (GPT) 120 IU / L, GGT 635 IU / L, prolongation of prothrombin time greater than 50%. What is the most likely diagnosis of the condition presented by the patient?",
+   "options": [
+    "Liver abscess.",
+    "Acute cholecystitis.",
+    "Acute cholangitis",
+    "Alcoholic hepatitis",
+    "Acute pancreatitis"
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 83,
+    "quality": 90,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:26:32.836Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-91",
+   "stem": "A 17-year-old boy, an athlete with no history of interest, goes to the doctor for occasional conjunctival jaundice. Denies drug intake and abdominal pain. In the analyzes performed, normal ALT, AST, GGT, and FA were observed, with total bilirubin of 3.2 mgr / dl and direct bilirubin of 0.4 mgr / dl. It does not have anemia and the liver is ecographically normal. What is your diagnosis?",
+   "options": [
+    "Rotor syndrome.",
+    "Coledocolithiasis",
+    "Dubin-Johnson syndrome.",
+    "Acute hepatitis",
+    "Gilbert's syndrome."
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "units:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 84,
+    "quality": 88,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:26:52.449Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-96",
+   "stem": "A 62-year-old man with type 2 diabetes mellitus of 10 years of evolution performs treatment with metformin and sitagliptin. Does little physical exercise and performs a proper diet. In the last 6 months he has lost weight and has more asthenia. Their glycemic controls have deteriorated, going from basal glycemia of 110-140 mg / dl to glycemias of 170-200 mg / dl, as well as their glycosylated hemoglobin, which has gone from 7.1 to 8.5%. The most appropriate therapeutic measure to perform is:",
+   "options": [
+    "Increase the intake of protein and long chain carbohydrates in the diet to improve asthenia and weight loss.",
+    "Associate a dose of basal insulin with the treatment.",
+    "Associate acarbose treatment.",
+    "Replace sitagliptin with pioglitazone.",
+    "Replace metformin with glimepiride."
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Endocrinology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "cover-options:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 79,
+    "quality": 83,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:27:09.208Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-97",
+   "stem": "A 70-year-old woman, worried about her risk of having a stroke, comes to our office because her mother died of this cause a year ago. He has a history of high blood pressure and type 2 diabetes mellitus, so he is being treated with glipizide, aspirin, enalapril and atorvastatin. He smokes 20 cigarettes a day and does not exercise regularly. On examination, a blood pressure of 150/80 mmHg is detected. The analytical highlights a hemoglobin A1c of 8% and an LDL cholesterol of 110 mg / dl. Which of the following is associated with a greater reduction in stroke risk?",
+   "options": [
+    "Achieve optimal levels of hemoglobin A1C.",
+    "Achieve an optimal control of blood pressure.",
+    "Add an antioxidant to the treatment.",
+    "Abandon tobacco",
+    "Achieve optimal levels of LDL."
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Neurology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 73,
+    "quality": 84,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 3,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:27:21.972Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-99",
+   "stem": "A 45-year-old woman came to the consultation sent from Surgery with the diagnosis of a neuroendocrine tumor diagnosed after partial pancreatectomy due to a 2-cm tumor in the tail of the pancreas. The tumor had been detected by chance on an abdominal CT scan requested to complete the study of a simple liver cyst. Interrogating the patient, the background is irregular rules, being in amenorrhea for 6 months, and repetitive colic of recurrence from the age of 20 for those who have required lithotripsy on several occasions. In addition, he has a family history of renoureteral colic. What is your diagnostic suspicion?",
+   "options": [
+    "A multiple endocrine neoplasia type 1 or Wermer syndrome.",
+    "A multiple endocrine neoplasia type 2 A or Sipple syndrome.",
+    "A multiple endocrine neoplasia type 2B.",
+    "Somatostatinoma.",
+    "A neuroendocrine tumor producing PTH."
+   ],
+   "answer": 0,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Endocrinology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:27:37.861Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },

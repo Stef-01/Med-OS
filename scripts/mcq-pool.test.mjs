@@ -12,7 +12,9 @@ import { judgeItem, judgeScore, judgeGates, verdictFor, solveText, rubricText, c
 import { assess, select, statusOf, quality, poolItem } from './lib/mcq-select.mjs';
 import { mergeSubmissions, submissionsFrom, remoteSubmissions } from './lib/mcq-intake.mjs';
 import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs, topicStation, writerPrompt } from './lib/mcq-generate.mjs';
-import { quotaOf } from './lib/mcq-select.mjs';
+import { quotaOf, routeOf, funnelOf, STAGES } from './lib/mcq-select.mjs';
+import { funnelRates, auditMarkdown } from './lib/mcq-audit.mjs';
+import { retestStats, retestFor, retestKey } from './lib/mcq-retest.mjs';
 import { checkLength } from '../public/js/mcq/flaws.mjs';
 import { fits } from '../public/js/vendor/pup-duel/duel/core.mjs';
 import { spreadKey, stationItem, benchmarkItem, stationItems, allCandidates } from './lib/mcq-sources.mjs';
@@ -119,6 +121,55 @@ test('select: user questions always kept, dedupe keeps the user\'s, quotas and t
   assert.deepEqual(stats.pool, { user: 3, 'usmle-resource': 3, ai: 2 });
   assert.equal(pool[0].eval.verdict, 'pool'); assert.ok(pool[0].eval.evalVersion);
   const st = statusOf(decisions); assert.deepEqual(Object.keys(st).sort(), users.map(u => u.id)); assert.equal(st['u-user000'].status, 'pool');
+});
+
+test('every decision says its route and the stage it stopped at; the funnel counts them and the audit reports its rates', () => {
+  assert.equal(routeOf({ provenance: { kind: 'usmle-resource' }, tags: ['src:medqa'] }), 'usmle-resource medqa');
+  assert.equal(routeOf({ provenance: { kind: 'open-exam' }, tags: ['x', 'src:headqa'] }), 'open-exam headqa');
+  assert.equal(routeOf({ provenance: { kind: 'ai' }, tags: ['form:rapid'] }), 'ai rapid');
+  assert.equal(routeOf({ provenance: { kind: 'ai' }, tags: [] }), 'ai vignette');
+  assert.equal(routeOf({ provenance: { kind: 'user' } }), 'user');
+  const users = [0, 1].map(n => distinct(`u-user10${n}`, 'user', 60 + n));
+  const bank = [2, 3, 4].map(n => ({ ...distinct(`bank-f${n}`, 'usmle-resource', 60 + n), tags: ['src:medqa'] }));
+  const copy = { ...item('bank-fcopy', 'usmle-resource', { stem: users[0].stem }), tags: ['src:medqa'] };
+  const waiting = distinct('ai-wait', 'ai', 70, { tags: [] }), low = distinct('ai-low', 'ai', 71, { tags: [] });
+  const all = [...users, ...bank, copy, waiting, low];
+  const verdicts = Object.fromEntries(all.filter(q => q !== waiting).map(q => [q.id, verdict(q)]));
+  verdicts['ai-low'] = verdict(low, { single_best: 2, distractors: 2, explanation: 2, relevance: 2 });
+  const { decisions, stats } = select(all, { verdicts, bars: BARS, quota: { 'usmle-resource': 1, ai: 5 }, topicShare: 1 });
+  const st = Object.fromEntries(decisions.map(d => [d.id, d]));
+  for (const d of decisions) assert.ok(STAGES.includes(d.stage), `${d.id}: ${d.stage}`);
+  assert.equal(st['ai-wait'].stage, 'pending'); assert.equal(st['bank-fcopy'].stage, 'duplicate');
+  assert.equal(st['u-user100'].stage, 'pool'); assert.equal(st['bank-f2'].route, 'usmle-resource medqa');
+  assert.ok(['bar', 'review'].includes(st['ai-low'].stage), st['ai-low'].reasons.join('; '));
+  assert.deepEqual(stats.funnel, funnelOf(decisions));
+  const med = stats.funnel['usmle-resource medqa'];
+  assert.deepEqual(med, { n: 4, pool: 1, reserve: 2, duplicate: 1 });
+  const rates = funnelRates(stats.funnel);
+  assert.equal(rates['usmle-resource medqa'].passed, 100); assert.equal(rates['usmle-resource medqa'].admitted, 25);
+  assert.equal(rates['ai vignette'].reviewed, 1, 'a question waiting for its review is not counted as reviewed');
+  assert.equal(rates['ai vignette'].passed, 0);
+  const md = auditMarkdown({ pool: { formats: {}, readSecs: { median: 0, p90: 0 } }, cues: {}, duplicates: [], review: {}, funnel: rates });
+  assert.match(md, /## From candidate to pool, by route/);
+  assert.match(md, /\| usmle-resource medqa \| 4 \| 0 \| 0 \| 0 \| 0 \| 0 \| 1 \| 2 \| 1 \| 100% \| 25% \|/);
+});
+
+test('retest: two reviews of the same question compared on verdict, key, solves, quality and whether it passes', () => {
+  const same = distinct('bank-rt1', 'usmle-resource', 80), flip = distinct('bank-rt2', 'usmle-resource', 81), ai = distinct('ai-rt3', 'ai', 82);
+  const pairs = [
+    { q: same, a: verdict(same), b: verdict(same) },
+    { q: flip, a: verdict(flip), b: verdict(flip, { key_correct: 'no', verdict: 'reject' }) },   /* the second review finds the key wrong */
+    { q: ai, a: verdict(ai), b: verdict(ai, {}, [ai.answer, (ai.answer + 1) % 5]) }   /* one solve goes elsewhere: AI items need both */
+  ];
+  const r = retestStats(pairs, { bars: BARS });
+  assert.equal(r.n, 3); assert.equal(r.passFirst, 3); assert.equal(r.passSecond, 1);
+  assert.equal(r.flips, 2); assert.equal(r.flipRate, 66.7);
+  assert.equal(r.verdictAgree, 66.7); assert.equal(r.keyAgree, 66.7); assert.equal(r.solvesAgree, 66.7);
+  assert.equal(r.byKind['usmle-resource'].flips, 1); assert.equal(r.byKind.ai.flips, 1);
+  assert.deepEqual(r.flipped.map(f => f.id).sort(), ['ai-rt3', 'bank-rt2']);
+  assert.equal(r.drift.max >= r.drift.mean, true);
+  const store = { [retestKey(same)]: verdict(same) };
+  assert.ok(retestFor(store, same)); assert.equal(retestFor(store, { ...same, stem: `${same.stem} Changed.` }), null, 'a retest of other text does not count');
 });
 
 test('a near-duplicate whose twin goes to reserve has its own chance; one whose twin is kept does not', () => {

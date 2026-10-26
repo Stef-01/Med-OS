@@ -31,20 +31,20 @@
     "stem-length": 0.3,
     "units": 2.7
    },
-   "judged": 51,
+   "judged": 594,
    "quality": {
-    "mean": 85.2,
-    "p5": 70,
-    "p10": 75,
+    "mean": 84.6,
+    "p5": 69,
+    "p10": 76,
     "p25": 81,
-    "p50": 87
+    "p50": 86
    },
-   "gatesPass": 92.2,
-   "solved2": 94.1,
-   "keyCorrect": 98,
-   "passBase": 80.4,
-   "passAi": 37.3,
-   "passAsSelected": 80.4
+   "gatesPass": 90.2,
+   "solved2": 96,
+   "keyCorrect": 96,
+   "passBase": 75.3,
+   "passAi": 33,
+   "passAsSelected": 75.3
   },
   "MMLU professional medicine": {
    "n": 272,
@@ -71,20 +71,20 @@
     "stem-length": 0,
     "units": 0
    },
-   "judged": 16,
+   "judged": 272,
    "quality": {
-    "mean": 88.1,
-    "p5": 74,
-    "p10": 80,
-    "p25": 85,
+    "mean": 86.2,
+    "p5": 69,
+    "p10": 78,
+    "p25": 83,
     "p50": 88
    },
-   "gatesPass": 100,
-   "solved2": 93.8,
-   "keyCorrect": 100,
-   "passBase": 87.5,
-   "passAi": 50,
-   "passAsSelected": 87.5
+   "gatesPass": 92.6,
+   "solved2": 96.7,
+   "keyCorrect": 96,
+   "passBase": 82.7,
+   "passAi": 46,
+   "passAsSelected": 82.7
   },
   "Official USMLE Step 2 CK samples": {
    "n": 41,
@@ -328,9 +328,9 @@
    "passAsSelected": 0
   },
   "Generated (generate-mcq.mjs)": {
-   "n": 64,
+   "n": 331,
    "flaw": {
-    "mean": 98.1,
+    "mean": 98.5,
     "p5": 94,
     "p10": 94,
     "p50": 100,
@@ -342,30 +342,70 @@
     "cover-options": 0,
     "all-none": 0,
     "negative-stem": 0,
-    "longest-key": 3.1,
+    "longest-key": 0.6,
     "grammar-cue": 0,
-    "convergence": 1.6,
-    "absolute-terms": 6.3,
-    "clang": 1.6,
+    "convergence": 0.3,
+    "absolute-terms": 3.6,
+    "clang": 2.1,
     "duplicate-options": 0,
-    "vignette": 15.6,
+    "vignette": 16.9,
     "stem-length": 0,
-    "units": 3.1
+    "units": 1.2
    },
-   "judged": 64,
+   "judged": 273,
    "quality": {
-    "mean": 94.7,
-    "p5": 89,
+    "mean": 94.1,
+    "p5": 86,
     "p10": 90,
-    "p25": 93,
+    "p25": 92,
     "p50": 95
    },
-   "gatesPass": 100,
-   "solved2": 100,
-   "keyCorrect": 100,
-   "passBase": 100,
-   "passAi": 95.3,
-   "passAsSelected": 95.3
+   "gatesPass": 98.5,
+   "solved2": 98.9,
+   "keyCorrect": 99.3,
+   "passBase": 98.5,
+   "passAi": 92.3,
+   "passAsSelected": 92.3
+  },
+  "Open exam (HEAD-QA, Spanish MIR)": {
+   "n": 786,
+   "flaw": {
+    "mean": 78.2,
+    "p5": 54,
+    "p10": 62,
+    "p50": 80,
+    "anyMajor": 56.4
+   },
+   "checks": {
+    "schema": 0,
+    "lead-in": 25.8,
+    "cover-options": 21,
+    "all-none": 0.1,
+    "negative-stem": 12.7,
+    "longest-key": 5.7,
+    "grammar-cue": 0,
+    "convergence": 0.3,
+    "absolute-terms": 8.1,
+    "clang": 4.7,
+    "duplicate-options": 0.5,
+    "vignette": 84,
+    "stem-length": 44.4,
+    "units": 2.2
+   },
+   "judged": 164,
+   "quality": {
+    "mean": 74.3,
+    "p5": 52,
+    "p10": 60,
+    "p25": 68,
+    "p50": 76
+   },
+   "gatesPass": 81.7,
+   "solved2": 97,
+   "keyCorrect": 95.1,
+   "passBase": 30.5,
+   "passAi": 5.5,
+   "passAsSelected": 30.5
   }
  }
 }

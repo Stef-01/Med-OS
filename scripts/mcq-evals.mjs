@@ -15,10 +15,13 @@
                   physicians' consensus on whether each GPT-4 item's key is correct
    4 wrong key    (--wrong-key n, makes model calls) n judged MedQA items with the key moved to a distractor: how often
                   the judge refuses them. Verdicts go to data/mcq/eval-verdicts.json (MIT items only)
+   5 retest       (--retest n, makes model calls) about n judged candidates, spread over the kinds, reviewed again from
+                  scratch (lib/mcq-retest.mjs): how often the two reviews agree, how far the quality moves, and how
+                  many questions would pass the bar on one review and not the other
 
    The official items are read where they were downloaded ($MCQ_BENCH_DIR, else ../research/mcq-src) with their verdicts
    (verdicts/quest-ai.json there, from scripts/mcq-judge.mjs --bench); only aggregate numbers reach the repo.
-     node scripts/mcq-evals.mjs [--from <dir>] [--wrong-key 30] */
+     node scripts/mcq-evals.mjs [--from <dir>] [--wrong-key 30] [--retest 40] */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -30,6 +33,7 @@ import { quality, select, DEFAULT_BARS } from './lib/mcq-select.mjs';
 import { benchDir } from './import-benchmarks.mjs';
 import { sample } from './mcq-judge.mjs';
 import { claudeAsk } from './lib/ask.mjs';
+import { retestStats, retestFor, retestKey } from './lib/mcq-retest.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2), opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
@@ -60,6 +64,7 @@ const { items: cands } = allCandidates(ROOT);
 sets['Station-derived (AMSA)'] = cands.filter(q => q.provenance.kind === 'amsa');
 sets['Station-derived (AI stations)'] = cands.filter(q => q.provenance.kind === 'ai' && q.provenance.generator?.how === 'duel-pack');
 sets['Generated (generate-mcq.mjs)'] = cands.filter(q => q.provenance.kind === 'ai' && q.provenance.generator?.how !== 'duel-pack');
+sets['Open exam (HEAD-QA, Spanish MIR)'] = cands.filter(q => q.provenance.kind === 'open-exam');
 const verdicts = { ...readJson(path.join(ROOT, 'data/mcq/verdicts.json'), {}), ...readJson(path.join(DIR, 'verdicts', 'quest-ai.json'), {}) };
 
 /* ---- 1 calibration */
@@ -129,12 +134,25 @@ if (opt('--wrong-key')) {
 const wkItems = sets['MedQA Step 2&3'].map(wrongKey).filter(q => verdictFor(evv, q));
 const wk = wkItems.length ? { n: wkItems.length, refused: rate(wkItems.filter(q => judgeGates(verdictFor(evv, q), q).length).length, wkItems.length), keyJudgedWrong: rate(wkItems.filter(q => verdictFor(evv, q).rubric.key_correct === 'no').length, wkItems.length), solvedToWrongKey: rate(wkItems.filter(q => verdictFor(evv, q).solves.some(s => s.answer === q.answer)).length, wkItems.length) } : null;
 
+/* ---- 5 retest (model calls): judged candidates reviewed a second time */
+const poolVerdicts = readJson(path.join(ROOT, 'data/mcq/verdicts.json'), {});
+const judgedCands = cands.filter(q => verdictFor(poolVerdicts, q) && !flawReport(q).blocked);
+if (opt('--retest')) {
+  const kinds = [...new Set(judgedCands.map(q => q.provenance.kind))].sort(), per = Math.ceil(Number(opt('--retest')) / kinds.length);
+  const todo = kinds.flatMap(k => sample(judgedCands.filter(q => q.provenance.kind === k), per)).filter(q => !retestFor(evv, q));
+  const { ask, name } = await claudeAsk(), via = `via ${name}`;
+  console.log(`retest: reviewing ${todo.length} again (${kinds.join(', ')})`);
+  await Promise.all(Array.from({ length: 4 }, async () => { for (let q; (q = todo.shift());) { try { let m = ''; const v = await judgeItem(q, { ask: async a => { const r = await ask(a); m = r.model || m; return r; } }); v.judge = `${m} ${via}`; evv[retestKey(q)] = v; fs.writeFileSync(evf, `${JSON.stringify(evv, null, 1)}\n`); console.log(`retest ${q.id}: ${verdictFor(poolVerdicts, q).rubric.verdict} then ${v.rubric.verdict}`); } catch (e) { console.error(`fail ${q.id}: ${e.message}`); } } }));
+}
+const rtPairs = judgedCands.map(q => ({ q, a: verdictFor(poolVerdicts, q), b: retestFor(evv, q) })).filter(x => x.b);
+const rt = rtPairs.length ? retestStats(rtPairs, { bars }) : null;
+
 /* ---- the pool as selected now */
-const { stats } = select(cands, { verdicts: readJson(path.join(ROOT, 'data/mcq/verdicts.json'), {}), bars });
+const { stats } = select(cands, { verdicts: poolVerdicts, bars });
 
 /* ---- write */
 const strip = o => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, Object.fromEntries(Object.entries(v).filter(([x]) => !x.startsWith('_')))]));
-const record = { bars, calibration: strip(calib), mutations: mut, quest: questOut, wrongKey: wk, pool: stats };
+const record = { bars, calibration: strip(calib), mutations: mut, quest: questOut, wrongKey: wk, retest: rt, pool: stats };
 fs.mkdirSync(path.join(ROOT, 'data/mcq'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'data/mcq/calibration.json'), `${JSON.stringify({ note: 'Written by scripts/mcq-evals.mjs. Aggregate numbers only: no official item text.', bars, sets: strip(calib) }, null, 1)}\n`);
 fs.writeFileSync(path.join(ROOT, 'data/mcq/evals.json'), `${JSON.stringify(record, null, 1)}\n`);
@@ -161,7 +179,14 @@ if (questOut) {
     `- Confusion at the AI bar (positive = physicians found a problem; predicted positive = refused): TP ${questOut.confusion.tp}, FN ${questOut.confusion.fn}, FP ${questOut.confusion.fp}, TN ${questOut.confusion.tn}.`,
     `- The same at the base bar: accuracy ${questOut.atBase.accuracy}%, sensitivity ${questOut.atBase.sensitivity}%, specificity ${questOut.atBase.specificity}%, kappa ${questOut.atBase.kappa}. The review's hard gates alone (no bar): accuracy ${questOut.gatesOnly.accuracy}%, sensitivity ${questOut.gatesOnly.sensitivity}%, specificity ${questOut.gatesOnly.specificity}%, kappa ${questOut.gatesOnly.kappa}.`);
 } else md.push('The QUEST-AI set was not found under the benchmark folder, so this section was not recomputed (see data/mcq/evals.json from the last run).');
-md.push('', '## 4. The pool as selected', '', `Candidates by kind: ${JSON.stringify(stats.candidates)}. Decisions: ${JSON.stringify(stats.status)}. In the pool: ${JSON.stringify(stats.pool)}. Topic cap ${stats.topicCap}. Key positions: ${Object.entries(stats.positions).map(([k, v]) => `${k} options ${v.counts.join('/')} (χ² ${v.chi2})`).join('; ')}.`, '');
+md.push('', '## 4. The review, reviewed twice', '');
+if (rt) {
+  md.push(`${rt.n} judged candidates, spread over the kinds, reviewed a second time from scratch (\`--retest\`, \`scripts/lib/mcq-retest.mjs\`). A flip is a question that passes the selector's checks and bar on one review and not the other: the share of the pool's membership that is the reviewer's noise.`, '',
+    row('Kind', 'Retested', 'Same verdict (%)', 'Same key verdict (%)', 'Same solves (%)', 'Quality drift mean', 'Drift p90', 'Drift max', 'Pass first / second', 'Flips (%)'), row('---', '---:', '---:', '---:', '---:', '---:', '---:', '---:', '---:', '---:'));
+  for (const [k, r] of [...Object.entries(rt.byKind), ['all', rt]]) md.push(row(k === 'all' ? '**all**' : k, r.n, r.verdictAgree, r.keyAgree, r.solvesAgree, r.drift.mean, r.drift.p90, r.drift.max, `${r.passFirst} / ${r.passSecond}`, `${r.flips} (${r.flipRate})`));
+  if (rt.flipped.length) md.push('', `Flipped: ${rt.flipped.slice(0, 12).map(f => `${f.id} (${f.quality.join(' then ')}, passed on the ${f.passed})`).join('; ')}${rt.flipped.length > 12 ? '; …' : ''}.`);
+} else md.push('Not run yet: `node scripts/mcq-evals.mjs --retest 40` (model calls).');
+md.push('', '## 5. The pool as selected', '', `Candidates by kind: ${JSON.stringify(stats.candidates)}. Decisions: ${JSON.stringify(stats.status)}. In the pool: ${JSON.stringify(stats.pool)}. Topic cap ${stats.topicCap}. Key positions: ${Object.entries(stats.positions).map(([k, v]) => `${k} options ${v.counts.join('/')} (χ² ${v.chi2})`).join('; ')}.`, '');
 md.push('## Limits', '', '- The judge is one model family; MedQA and MMLU items may be in its training data, so its solve rate on them is an upper bound.', '- The generated questions are written and reviewed by the same model family, which may favour its own writing: their scores above the official samples\' are not proof they are better. The blind solves, the code checks and the higher bar are the guard; a physician spot-check of the generated items in the pool is the next step.', '- The official sample is small (41 text items), so the bars move by a few points with each item.', '- The physicians\' labels cover only the GPT-4 half of QUEST-AI.', '');
 fs.writeFileSync(path.join(ROOT, 'docs/mcq-evals.md'), md.join('\n'));
 console.log(`bars ${JSON.stringify(bars)}`); console.log(JSON.stringify(questOut)); console.log(JSON.stringify(Object.fromEntries(Object.entries(mut).map(([k, s]) => [k, s.detection]))));

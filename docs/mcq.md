@@ -1,11 +1,12 @@
 # The MCQ pool: creation, evaluation and selection
 
-A standard pool of single-best-answer questions (`public/mcq/pool.json`) that the duel plays (`public/duel/pack.json` is built from it). Questions arrive from four places. Each is checked in code against the NBME item-writing guide, reviewed by a model that does not know where it came from, scored against a bar calibrated on official USMLE Step 2 CK samples, and admitted only if it clears that bar. Every question carries a tag saying where it came from, and no step rewrites it. The numbers are in `docs/mcq-evals.md`, and the set as a whole (formats, cues, duplicates, what the review said) in `docs/mcq-audit.md`.
+A standard pool of single-best-answer questions (`public/mcq/pool.json`) that the duel plays (`public/duel/pack.json` is built from it). Questions arrive from five places. Each is checked in code against the NBME item-writing guide, reviewed by a model that does not know where it came from, scored against a bar calibrated on official USMLE Step 2 CK samples, and admitted only if it clears that bar. Every question carries a tag saying where it came from, and no step rewrites it. The numbers are in `docs/mcq-evals.md`, and the set as a whole (formats, cues, duplicates, what the review said) in `docs/mcq-audit.md`.
 
 ```
  stations ──────────── station questions (amsa / ai) ─┐
  stations + MedQA ──── generate-mcq.mjs (ai) ─────────┤
- data/benchmarks ───── MedQA, MMLU (usmle-resource) ──┼─▶ flaws.mjs ─▶ mcq-judge.mjs ─▶ mcq-pool.mjs ─▶ public/mcq/pool.json ─▶ build-duel-pack.mjs ─▶ public/duel/pack.json
+ data/benchmarks ───── MedQA, MMLU (usmle-resource) ──┤
+ fetch-sources.mjs ─── HEAD-QA (open-exam) ───────────┼─▶ flaws.mjs ─▶ mcq-judge.mjs ─▶ mcq-pool.mjs ─▶ public/mcq/pool.json ─▶ build-duel-pack.mjs ─▶ public/duel/pack.json
  Submit a question ─── mcq-submissions.mjs (user) ────┘   (in code)     (model review)   (bar, dedupe,     public/mcq/status.json (what each submitter sees)
                                                                                          quotas, topics)   data/mcq/selection.json (every decision, with reasons)
 ```
@@ -90,8 +91,10 @@ The judge never sees provenance: every kind gets the same prompt. Judge score (0
 
 Then, over everything that passed, best first:
 
-6. **Dedupe**: a near-duplicate of an admitted question is refused, with the id it duplicates. Kinds go in the order user, usmle-resource, amsa, ai, so a user's question is never displaced by a copy from a bank.
+6. **Dedupe**: a near-duplicate of an admitted question is refused, with the id it duplicates. Kinds go in the order user, usmle-resource, open-exam, amsa, ai (`PRIORITY`), so a user's question is never displaced by a copy from a bank.
 7. **Quotas and topics**: user questions that pass are always kept, with no cap. Other kinds have caps (`QUOTA`: usmle-resource 160, open-exam 120, amsa 110, ai 110, and ai-rapid 200 for AI-written questions in the Rapid form (80 until 2026-10-26, when it filled with 25 more passing), so short questions and vignettes do not crowd each other out), and no topic may hold more than 15% of the non-user pool (at least 6). A question over a cap is **reserve**: it passed and takes a place when one drops out.
+
+Every decision records its **route** (the open set it came from by its `src:` tag, or for AI-written questions the form: `usmle-resource medqa`, `open-exam headqa`, `ai rapid`, `ai vignette`) and the **stage** it stopped at (`STAGES`: schema, flaws, pending, review, bar, banned, duplicate, reserve, pool). `stats.funnel` counts them per route, and `docs/mcq-audit.md` reports each route's pass rate (cleared the review and the bar, of those reviewed) and admission rate: where to spend the next generation or import.
 
 `data/mcq/selection.json` holds every decision with its reasons; `node scripts/mcq-pool.mjs --why <id>` prints one. `public/mcq/status.json` holds one line per submitted question. `npm test` fails when the pool on disk is not what the candidates make now.
 

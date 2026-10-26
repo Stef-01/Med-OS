@@ -16,6 +16,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { allCandidates, readJson } from './lib/mcq-sources.mjs';
 import { select, statusOf, DEFAULT_BARS, QUOTA } from './lib/mcq-select.mjs';
+import { KINDS } from '../public/js/mcq/schema.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const FILES = { pool: path.join(ROOT, 'public', 'mcq', 'pool.json'), status: path.join(ROOT, 'public', 'mcq', 'status.json'), selection: path.join(ROOT, 'data', 'mcq', 'selection.json') };
@@ -30,7 +31,7 @@ export function build(root = ROOT) {
   return {
     files: {
       pool: { schemaVersion: 1, version: `pool-${pool.length}`, title: 'Standard MCQ pool',
-        note: 'Built by scripts/mcq-pool.mjs: candidates from the stations, generate-mcq.mjs, the open USMLE-style banks in data/benchmarks and student submissions, admitted on the flaw checks, the model review and the bars calibrated on the benchmarks (docs/mcq.md). provenance.kind says where each came from: user, ai, amsa or usmle-resource.',
+        note: `Built by scripts/mcq-pool.mjs: candidates from the stations, generate-mcq.mjs, the open USMLE-style banks and open exam sets in data/benchmarks and student submissions, admitted on the flaw checks, the model review and the bars calibrated on the benchmarks (docs/mcq.md). provenance.kind says where each came from: ${Object.keys(KINDS).join(', ')}.`,
         bars, counts: stats.pool, questions: pool },
       status: { schemaVersion: 1, note: 'Each submitted question\'s status at the last pool build (scripts/mcq-pool.mjs).', submissions: statusOf(decisions) },
       selection: { stats: { ...stats, droppedBeforeSelection: dropped }, decisions }

@@ -8,8 +8,8 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 
 | Set | Items | Flaw mean | Flaw p5 | Any major (%) | Reviewed | Quality p5 | Quality p25 | Quality median | Solved 2/2 (%) | Passes base bar (%) | Passes AI bar (%) | Passes as selected (%) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| MedQA Step 2&3 | 594 | 97.7 | 88 | 2 | 51 | 70 | 81 | 87 | 94.1 | 80.4 | 37.3 | 80.4 |
-| MMLU professional medicine | 272 | 96.4 | 80 | 5.1 | 16 | 74 | 85 | 88 | 93.8 | 87.5 | 50 | 87.5 |
+| MedQA Step 2&3 | 594 | 97.7 | 88 | 2 | 594 | 69 | 81 | 86 | 96 | 75.3 | 33 | 75.3 |
+| MMLU professional medicine | 272 | 96.4 | 80 | 5.1 | 272 | 69 | 83 | 88 | 96.7 | 82.7 | 46 | 82.7 |
 | Official USMLE Step 2 CK samples | 41 | 98.5 | 94 | 2.4 | 41 | 81 | 89 | 92 | 97.6 | 95.1 | 75.6 | 95.1 |
 | QUEST-AI GPT-4 look-alikes | 43 | 99.2 | 94 | 0 | 43 | 52 | 77 | 85 | 81.4 | 69.8 | 30.2 | 69.8 |
 | MedQA Step 1 | 679 | 96.1 | 80 | 9.3 | 0 | – | – | – | – | – | – | – |
@@ -17,7 +17,8 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 | MedMCQA dev (Indian PG entrance) | 4091 | 69.5 | 48 | 70.2 | 0 | – | – | – | – | – | – | – |
 | Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 71 | 78 | 81 | 99 | 53.3 | 1.9 | 53.3 |
 | Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 64 | 74 | 80 | 100 | 26.9 | 0 | 0 |
-| Generated (generate-mcq.mjs) | 64 | 98.1 | 94 | 0 | 64 | 89 | 93 | 95 | 100 | 100 | 95.3 | 95.3 |
+| Generated (generate-mcq.mjs) | 331 | 98.5 | 94 | 0 | 273 | 86 | 92 | 95 | 98.9 | 98.5 | 92.3 | 92.3 |
+| Open exam (HEAD-QA, Spanish MIR) | 786 | 78.2 | 54 | 56.4 | 164 | 52 | 68 | 76 | 97 | 30.5 | 5.5 | 30.5 |
 
 **Bars:** base 81, AI-written 89 (the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality). "As selected": the bar and gates each kind meets in the selector (ai: the AI bar and two solves; amsa: the base bar and two solves; the rest: the base bar).
 
@@ -34,7 +35,8 @@ Failure rate of each check (% of items):
 | MedMCQA dev (Indian PG entrance) | 0 | 51.8 | 20 | 5.9 | 15.5 | 4.8 | 0 | 0.1 | 3.4 | 0.3 | 1.7 | 98.6 | 89.9 | 0.3 |
 | Station-derived (AMSA) | 0 | 0 | 0 | 0 | 0 | 9.5 | 0 | 0 | 0 | 12.4 | 0 | 15.2 | 0 | 18.1 |
 | Station-derived (AI stations) | 0 | 0 | 0 | 0 | 0 | 11.5 | 0 | 0 | 0 | 11.5 | 0 | 42.3 | 0 | 11.5 |
-| Generated (generate-mcq.mjs) | 0 | 0 | 0 | 0 | 0 | 3.1 | 0 | 1.6 | 6.3 | 1.6 | 0 | 15.6 | 0 | 3.1 |
+| Generated (generate-mcq.mjs) | 0 | 0 | 0 | 0 | 0 | 0.6 | 0 | 0.3 | 3.6 | 2.1 | 0 | 16.9 | 0 | 1.2 |
+| Open exam (HEAD-QA, Spanish MIR) | 0 | 25.8 | 21 | 0.1 | 12.7 | 5.7 | 0 | 0.3 | 8.1 | 4.7 | 0.5 | 84 | 44.4 | 2.2 |
 
 ## 2. Mutation test: does each check catch the flaw it is for?
 
@@ -63,9 +65,23 @@ Failure rate of each check (% of items):
 - Confusion at the AI bar (positive = physicians found a problem; predicted positive = refused): TP 12, FN 3, FP 18, TN 10.
 - The same at the base bar: accuracy 76.7%, sensitivity 60%, specificity 85.7%, kappa 0.47. The review's hard gates alone (no bar): accuracy 79.1%, sensitivity 60%, specificity 89.3%, kappa 0.52.
 
-## 4. The pool as selected
+## 4. The review, reviewed twice
 
-Candidates by kind: {"ai":90,"amsa":105,"usmle-resource":866}. Decisions: {"pool":166,"rejected":91,"pending":798,"reserve":6}. In the pool: {"ai":61,"usmle-resource":54,"amsa":51}. Topic cap 26. Key positions: 4 options 29/25/24/27 (χ² 0.56); 5 options 7/16/12/10/16 (χ² 4.98).
+40 judged candidates, spread over the kinds, reviewed a second time from scratch (`--retest`, `scripts/lib/mcq-retest.mjs`). A flip is a question that passes the selector's checks and bar on one review and not the other: the share of the pool's membership that is the reviewer's noise.
+
+| Kind | Retested | Same verdict (%) | Same key verdict (%) | Same solves (%) | Quality drift mean | Drift p90 | Drift max | Pass first / second | Flips (%) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| ai | 10 | 80 | 100 | 100 | 1.8 | 3 | 8 | 9 / 9 | 0 (0) |
+| amsa | 10 | 80 | 100 | 100 | 2 | 3 | 3 | 5 / 7 | 2 (20) |
+| open-exam | 10 | 80 | 100 | 100 | 2.3 | 5 | 8 | 3 / 2 | 1 (10) |
+| usmle-resource | 10 | 100 | 100 | 100 | 1.9 | 5 | 5 | 9 / 8 | 1 (10) |
+| **all** | 40 | 85 | 100 | 100 | 2 | 5 | 8 | 26 / 26 | 4 (10) |
+
+Flipped: osce-amsa-375 (78 then 81, passed on the second); osce-amsa-379 (78 then 81, passed on the second); headqa-2016-92 (84 then 79, passed on the first); mmlu-professional_medicine-097 (82 then 79, passed on the first).
+
+## 5. The pool as selected
+
+Candidates by kind: {"ai":357,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":505,"pending":680,"rejected":404,"reserve":525}. In the pool: {"ai":239,"open-exam":50,"usmle-resource":160,"amsa":56}. Topic cap 76. Key positions: 4 options 59/57/42/65 (χ² 5.14); 5 options 53/59/52/55/63 (χ² 1.48).
 
 ## Limits
 
