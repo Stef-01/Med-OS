@@ -33,6 +33,7 @@ import { renderGroup, browseReset, browseDlg, browseSheetOpen, paintQueue, clear
 import { renderMarked, markedReset } from './osce/marked.mjs';
 import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, candSend, swapCand, onHand, present, presentStep, presenting, p2Go, p2Flat, jumpTo, syncJump, markPart2 } from './osce/session.mjs';
 import { settingsDlg, saveSettings, clearKey, exportFile } from './osce/settings.mjs';
+import { opened as remindersOpened } from './osce/reminders.mjs';
 
 export * from './osce/core.mjs';   /* the pure laws, under the names learn.mjs and scripts/osce.test.js import */
 
@@ -42,6 +43,7 @@ export async function openOsce(deps = {}) {
   ctx.isOpen = true;
   ctx.root = !!deps.root;   /* the app's first screen: Start has no back button */
   configureSync(deps); syncWire();
+  remindersOpened();   /* opened today: no sad note from the dog tonight (reminders.mjs) */
   ctx.mem = osceMigrate(load(), now());
   try { await Promise.all([css(), loadStations()]); } catch (e) { ctx.isOpen = false; throw e; }
   if (!ctx.isOpen) return;

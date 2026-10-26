@@ -492,6 +492,10 @@ async function runIn(width, height, label) {
   await pg.fill('[data-set="gift"]', ' Pokémon '); await click('[data-os="sgift"]');
   ok(/Unlocked/.test(await pg.textContent('.os-giftmsg')) && (await pg.evaluate(() => localStorage.getItem('pup.gifts'))).includes('pokemon'), `${label}: the pokemon gift unlocks`);
   await pg.evaluate(() => document.querySelector('.os-giftrow').scrollIntoView({ block: 'center' })); await shot('settings-gift');
+  /* Daily reminders: a switch that says what it sends, or why this browser cannot */
+  await pg.waitForFunction(() => document.querySelector('[data-set="rem"]') && /9 AM|Home Screen|cannot|blocked/.test(document.querySelector('#os-rem-d').textContent));
+  ok(/9 AM|Home Screen|cannot|blocked/.test(await pg.textContent('#os-rem-d')), `${label}: Daily reminders say what they send (${(await pg.textContent('#os-rem-d')).slice(0, 40)})`);
+  await pg.evaluate(() => document.querySelector('[data-set="rem"]').scrollIntoView({ block: 'center' })); await shot('settings-reminders');
   await pg.keyboard.press('Escape');
   await pg.waitForSelector('.os-set', { state: 'detached' });
 
