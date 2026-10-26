@@ -187,11 +187,12 @@ export function checkVignette(q) {
   return ok('vignette', 'major');
 }
 
-/* the stem's length: long enough to be a case, short enough to read in an exam's 90 seconds */
-export const STEM_WORDS = Object.freeze({ min: 30, max: 450 });
+/* the stem's length: long enough to be a case, short enough to read in an exam's 90 seconds; a question written for the
+   duel's Rapid 15 s format (tag form:rapid) is a compact case, so its floor is lower */
+export const STEM_WORDS = Object.freeze({ min: 30, max: 450, rapid: 15 });
 export function checkLength(q) {
-  const n = words(fullStem(q)).length;
-  if (n < STEM_WORDS.min) return fail('stem-length', 'minor', `The stem is ${n} words: a Step 2 CK vignette is usually ${STEM_WORDS.min} to ${STEM_WORDS.max}.`);
+  const n = words(fullStem(q)).length, rapid = Array.isArray(q.tags) && q.tags.includes('form:rapid'), min = rapid ? STEM_WORDS.rapid : STEM_WORDS.min;
+  if (n < min) return fail('stem-length', 'minor', rapid ? `The stem is ${n} words: even a 15-second case needs ${min}.` : `The stem is ${n} words: a Step 2 CK vignette is usually ${STEM_WORDS.min} to ${STEM_WORDS.max}.`);
   if (n > STEM_WORDS.max) return fail('stem-length', 'minor', `The stem is ${n} words: cut what the question does not need (at most ${STEM_WORDS.max}).`);
   return ok('stem-length', 'minor');
 }

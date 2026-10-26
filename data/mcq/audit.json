@@ -1,0 +1,575 @@
+{
+ "pool": {
+  "n": 326,
+  "byKind": {
+   "ai": 110,
+   "usmle-resource": 160,
+   "amsa": 56
+  },
+  "formats": {
+   "15": {
+    "name": "Rapid",
+    "fit": 25,
+    "of": 326,
+    "share": 7.7,
+    "byKind": {
+     "amsa": 25
+    },
+    "byTopic": {
+     "Neurology": 6,
+     "Endocrinology": 1,
+     "Gastroenterology": 10,
+     "Respiratory Medicine": 4,
+     "Cardiology": 3,
+     "Dermatology": 1
+    },
+    "topics": 36,
+    "thin": [
+     "Addiction Medicine",
+     "Bioethics",
+     "Breast/Endocrine Surgery",
+     "Cardiology",
+     "Cardiothoracic Surgery",
+     "Critical Care Medicine",
+     "Dermatology",
+     "Emergency Medicine",
+     "Endocrinology",
+     "Gastrointestinal Surgery",
+     "General Practice",
+     "General Surgery",
+     "Geriatrics",
+     "Gynaecology",
+     "Haematology",
+     "Immunology",
+     "Infectious Diseases",
+     "Neonatology",
+     "Nephrology",
+     "Neurology",
+     "Neurosurgery",
+     "Obstetrics",
+     "Ophthalmology",
+     "Orthopaedics",
+     "Otorhinolaryngology",
+     "Paediatrics",
+     "Professionalism",
+     "Psychiatry",
+     "Respiratory Medicine",
+     "Rheumatology",
+     "Sexual Health",
+     "Toxicology",
+     "Trauma Surgery",
+     "Urology",
+     "Vascular Surgery"
+    ]
+   },
+   "30": {
+    "name": "Standard",
+    "fit": 63,
+    "of": 326,
+    "share": 19.3,
+    "byKind": {
+     "usmle-resource": 7,
+     "amsa": 56
+    },
+    "byTopic": {
+     "Urology": 1,
+     "Nephrology": 1,
+     "Paediatrics": 1,
+     "Otorhinolaryngology": 1,
+     "Immunology": 1,
+     "Obstetrics": 1,
+     "Cardiology": 11,
+     "Respiratory Medicine": 9,
+     "Neurology": 13,
+     "Endocrinology": 1,
+     "Gastroenterology": 19,
+     "Rheumatology": 2,
+     "Dermatology": 1,
+     "General Practice": 1
+    },
+    "topics": 36,
+    "thin": [
+     "Addiction Medicine",
+     "Bioethics",
+     "Breast/Endocrine Surgery",
+     "Cardiothoracic Surgery",
+     "Critical Care Medicine",
+     "Dermatology",
+     "Emergency Medicine",
+     "Endocrinology",
+     "Gastrointestinal Surgery",
+     "General Practice",
+     "General Surgery",
+     "Geriatrics",
+     "Gynaecology",
+     "Haematology",
+     "Immunology",
+     "Infectious Diseases",
+     "Neonatology",
+     "Nephrology",
+     "Neurosurgery",
+     "Obstetrics",
+     "Ophthalmology",
+     "Orthopaedics",
+     "Otorhinolaryngology",
+     "Paediatrics",
+     "Professionalism",
+     "Psychiatry",
+     "Respiratory Medicine",
+     "Rheumatology",
+     "Sexual Health",
+     "Toxicology",
+     "Trauma Surgery",
+     "Urology",
+     "Vascular Surgery"
+    ]
+   },
+   "90": {
+    "name": "Long case",
+    "fit": 322,
+    "of": 326,
+    "share": 98.8,
+    "byKind": {
+     "ai": 110,
+     "usmle-resource": 156,
+     "amsa": 56
+    },
+    "byTopic": {
+     "Paediatrics": 20,
+     "Obstetrics": 8,
+     "Gastroenterology": 42,
+     "Infectious Diseases": 26,
+     "Rheumatology": 10,
+     "Cardiology": 31,
+     "Neurology": 29,
+     "Respiratory Medicine": 15,
+     "General Surgery": 12,
+     "Vascular Surgery": 4,
+     "Neurosurgery": 2,
+     "Emergency Medicine": 11,
+     "Otorhinolaryngology": 7,
+     "General Practice": 10,
+     "Gastrointestinal Surgery": 3,
+     "Cardiothoracic Surgery": 1,
+     "Gynaecology": 12,
+     "Neonatology": 8,
+     "Endocrinology": 9,
+     "Trauma Surgery": 6,
+     "Ophthalmology": 2,
+     "Sexual Health": 4,
+     "Haematology": 4,
+     "Dermatology": 2,
+     "Orthopaedics": 7,
+     "Geriatrics": 3,
+     "Psychiatry": 12,
+     "Bioethics": 2,
+     "Immunology": 4,
+     "Urology": 2,
+     "Toxicology": 4,
+     "Addiction Medicine": 1,
+     "Nephrology": 6,
+     "Critical Care Medicine": 1,
+     "Breast/Endocrine Surgery": 1,
+     "Professionalism": 1
+    },
+    "topics": 36,
+    "thin": [
+     "Addiction Medicine",
+     "Bioethics",
+     "Breast/Endocrine Surgery",
+     "Cardiothoracic Surgery",
+     "Critical Care Medicine",
+     "Dermatology",
+     "Endocrinology",
+     "Gastrointestinal Surgery",
+     "Geriatrics",
+     "Haematology",
+     "Immunology",
+     "Neonatology",
+     "Nephrology",
+     "Neurosurgery",
+     "Obstetrics",
+     "Ophthalmology",
+     "Orthopaedics",
+     "Otorhinolaryngology",
+     "Professionalism",
+     "Sexual Health",
+     "Toxicology",
+     "Trauma Surgery",
+     "Urology",
+     "Vascular Surgery"
+    ]
+   }
+  },
+  "readSecs": {
+   "median": 38,
+   "p90": 48,
+   "max": 66
+  }
+ },
+ "cues": {
+  "ai": {
+   "n": 110,
+   "keyLongest": 38.2,
+   "chance": 20,
+   "keyAt": {
+    "E": 25,
+    "A": 16,
+    "C": 24,
+    "D": 20,
+    "B": 25
+   },
+   "options": {
+    "5": 110
+   },
+   "checks": {
+    "vignette": {
+     "n": 9,
+     "share": 8.2
+    },
+    "absolute-terms": {
+     "n": 5,
+     "share": 4.5
+    },
+    "units": {
+     "n": 3,
+     "share": 2.7
+    },
+    "clang": {
+     "n": 1,
+     "share": 0.9
+    },
+    "longest-key": {
+     "n": 1,
+     "share": 0.9
+    },
+    "convergence": {
+     "n": 1,
+     "share": 0.9
+    }
+   }
+  },
+  "amsa": {
+   "n": 56,
+   "keyLongest": 28.6,
+   "chance": 25,
+   "keyAt": {
+    "B": 17,
+    "D": 13,
+    "A": 15,
+    "C": 11
+   },
+   "options": {
+    "4": 56
+   },
+   "checks": {
+    "units": {
+     "n": 7,
+     "share": 12.5
+    },
+    "longest-key": {
+     "n": 5,
+     "share": 8.9
+    },
+    "vignette": {
+     "n": 4,
+     "share": 7.1
+    },
+    "clang": {
+     "n": 1,
+     "share": 1.8
+    }
+   }
+  },
+  "usmle-resource": {
+   "n": 160,
+   "keyLongest": 22.5,
+   "chance": 25,
+   "keyAt": {
+    "B": 39,
+    "C": 29,
+    "A": 41,
+    "D": 51
+   },
+   "options": {
+    "4": 160
+   },
+   "checks": {
+    "explanation": {
+     "n": 160,
+     "share": 100
+    },
+    "cover-options": {
+     "n": 9,
+     "share": 5.6
+    },
+    "vignette": {
+     "n": 8,
+     "share": 5
+    },
+    "clang": {
+     "n": 3,
+     "share": 1.9
+    },
+    "longest-key": {
+     "n": 1,
+     "share": 0.6
+    }
+   }
+  }
+ },
+ "duplicates": [],
+ "review": {
+  "ai": {
+   "judged": 110,
+   "verdict": {
+    "accept": 95,
+    "revise": 15
+   },
+   "solvesAgree": 100,
+   "median": {
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 5,
+    "explanation": 5
+   }
+  },
+  "amsa": {
+   "judged": 56,
+   "verdict": {
+    "revise": 56
+   },
+   "solvesAgree": 100,
+   "median": {
+    "single_best": 5,
+    "distractors": 2,
+    "relevance": 3,
+    "accuracy": 4,
+    "explanation": 2
+   }
+  },
+  "usmle-resource": {
+   "judged": 160,
+   "verdict": {
+    "revise": 155,
+    "accept": 5
+   },
+   "solvesAgree": 100,
+   "median": {
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 5,
+    "explanation": 0
+   }
+  }
+ },
+ "pack": {
+  "n": 842,
+  "bySource": {
+   "ai": 642,
+   "usmle-resource": 144,
+   "amsa": 56
+  },
+  "formats": {
+   "15": {
+    "name": "Rapid",
+    "fit": 14,
+    "of": 842,
+    "share": 1.7,
+    "byKind": {
+     "amsa": 9,
+     "ai": 5
+    },
+    "byTopic": {
+     "Endocrinology": 1,
+     "Gastroenterology": 7,
+     "Respiratory Medicine": 2,
+     "Neurology": 2,
+     "General Surgery": 1,
+     "Cardiology": 1
+    },
+    "topics": 36,
+    "thin": [
+     "Addiction Medicine",
+     "Bioethics",
+     "Breast/Endocrine Surgery",
+     "Cardiology",
+     "Cardiothoracic Surgery",
+     "Critical Care Medicine",
+     "Dermatology",
+     "Emergency Medicine",
+     "Endocrinology",
+     "Gastroenterology",
+     "Gastrointestinal Surgery",
+     "General Practice",
+     "General Surgery",
+     "Geriatrics",
+     "Gynaecology",
+     "Haematology",
+     "Immunology",
+     "Infectious Diseases",
+     "Neonatology",
+     "Nephrology",
+     "Neurology",
+     "Neurosurgery",
+     "Obstetrics",
+     "Ophthalmology",
+     "Orthopaedics",
+     "Otorhinolaryngology",
+     "Paediatrics",
+     "Professionalism",
+     "Psychiatry",
+     "Respiratory Medicine",
+     "Rheumatology",
+     "Sexual Health",
+     "Toxicology",
+     "Trauma Surgery",
+     "Urology",
+     "Vascular Surgery"
+    ]
+   },
+   "30": {
+    "name": "Standard",
+    "fit": 351,
+    "of": 842,
+    "share": 41.7,
+    "byKind": {
+     "usmle-resource": 7,
+     "amsa": 56,
+     "ai": 288
+    },
+    "byTopic": {
+     "Urology": 1,
+     "Nephrology": 1,
+     "Paediatrics": 21,
+     "Otorhinolaryngology": 1,
+     "Immunology": 1,
+     "Obstetrics": 10,
+     "Cardiology": 48,
+     "Respiratory Medicine": 64,
+     "Neurology": 53,
+     "Endocrinology": 9,
+     "Gastroenterology": 100,
+     "Rheumatology": 14,
+     "Dermatology": 4,
+     "General Practice": 15,
+     "Emergency Medicine": 5,
+     "Gynaecology": 1,
+     "General Surgery": 3
+    },
+    "topics": 36,
+    "thin": [
+     "Addiction Medicine",
+     "Bioethics",
+     "Breast/Endocrine Surgery",
+     "Cardiothoracic Surgery",
+     "Critical Care Medicine",
+     "Dermatology",
+     "Emergency Medicine",
+     "Endocrinology",
+     "Gastrointestinal Surgery",
+     "General Surgery",
+     "Geriatrics",
+     "Gynaecology",
+     "Haematology",
+     "Immunology",
+     "Infectious Diseases",
+     "Neonatology",
+     "Nephrology",
+     "Neurosurgery",
+     "Ophthalmology",
+     "Orthopaedics",
+     "Otorhinolaryngology",
+     "Professionalism",
+     "Psychiatry",
+     "Sexual Health",
+     "Toxicology",
+     "Trauma Surgery",
+     "Urology",
+     "Vascular Surgery"
+    ]
+   },
+   "90": {
+    "name": "Long case",
+    "fit": 841,
+    "of": 842,
+    "share": 99.9,
+    "byKind": {
+     "ai": 642,
+     "usmle-resource": 143,
+     "amsa": 56
+    },
+    "byTopic": {
+     "Paediatrics": 62,
+     "Obstetrics": 28,
+     "Gastroenterology": 177,
+     "Infectious Diseases": 29,
+     "Rheumatology": 29,
+     "Cardiology": 99,
+     "Neurology": 105,
+     "Respiratory Medicine": 107,
+     "General Surgery": 14,
+     "Vascular Surgery": 3,
+     "Neurosurgery": 2,
+     "Emergency Medicine": 27,
+     "Otorhinolaryngology": 7,
+     "General Practice": 38,
+     "Gastrointestinal Surgery": 3,
+     "Cardiothoracic Surgery": 1,
+     "Gynaecology": 15,
+     "Neonatology": 8,
+     "Endocrinology": 25,
+     "Trauma Surgery": 5,
+     "Ophthalmology": 2,
+     "Sexual Health": 4,
+     "Haematology": 3,
+     "Dermatology": 6,
+     "Orthopaedics": 7,
+     "Geriatrics": 3,
+     "Psychiatry": 11,
+     "Bioethics": 2,
+     "Immunology": 4,
+     "Urology": 2,
+     "Toxicology": 3,
+     "Addiction Medicine": 1,
+     "Nephrology": 6,
+     "Critical Care Medicine": 1,
+     "Breast/Endocrine Surgery": 1,
+     "Professionalism": 1
+    },
+    "topics": 36,
+    "thin": [
+     "Addiction Medicine",
+     "Bioethics",
+     "Breast/Endocrine Surgery",
+     "Cardiothoracic Surgery",
+     "Critical Care Medicine",
+     "Dermatology",
+     "Gastrointestinal Surgery",
+     "Geriatrics",
+     "Haematology",
+     "Immunology",
+     "Neonatology",
+     "Nephrology",
+     "Neurosurgery",
+     "Ophthalmology",
+     "Orthopaedics",
+     "Otorhinolaryngology",
+     "Professionalism",
+     "Sexual Health",
+     "Toxicology",
+     "Trauma Surgery",
+     "Urology",
+     "Vascular Surgery"
+    ]
+   }
+  },
+  "readSecs": {
+   "median": 22,
+   "p90": 45,
+   "max": 63
+  }
+ }
+}

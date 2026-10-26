@@ -1,4 +1,44 @@
 {
+ "ai-mcq-015f246d": {
+  "hash": "eb65edf5",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:39:51.834Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "Headache, vomiting, a lower conscious level, a slowing pulse and rising blood pressure during DKA treatment meet the clinical criteria for cerebral oedema, which needs an osmotic agent like mannitol straight away, before any CT."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "Headache, vomiting, a falling GCS, a slowing pulse and rising blood pressure during DKA treatment point to cerebral oedema, which should be treated straight away with mannitol (or hypertonic saline) without waiting for a CT."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Paediatrics",
+   "verdict": "accept",
+   "reasons": [
+    "Classic, well-described DKA cerebral oedema vignette with clinically important next step",
+    "Key matches ISPAD 2022/RCH guidance; hypertonic saline sensibly omitted to avoid two keys",
+    "Distractors target real misconceptions and are homogeneous"
+   ],
+   "suggestion": "Remove 'young age' from the listed risk factors, since that applies to children under about 5 and not to a 13-year-old. Optionally note that her corrected sodium is falling, which is a further warning sign."
+  }
+ },
  "ai-mcq-031e86eb": {
   "hash": "278394d3",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -37,6 +77,49 @@
     "Clear, well-constructed vignette with a thorough explanation of each option"
    ],
    "suggestion": ""
+  }
+ },
+ "ai-mcq-0946cddf": {
+  "hash": "172fd1a0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:40:07.038Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "This is a high-risk tetanus-prone wound (soil-contaminated puncture, delayed cleaning, systemic sepsis) in a man whose boosters are not up to date (4 doses, last one 12 years ago), so he needs a reinforcing vaccine dose plus tetanus immunoglobulin."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.8,
+    "reason": "Under the UK Green Book, a high-risk wound (heavy soil contamination with systemic sepsis) in someone without all five doses, whose last dose was 12 years ago, needs an immediate reinforcing tetanus vaccine dose plus tetanus immunoglobulin."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Lengthy septic-arthritis detail is largely irrelevant to the tetanus question asked",
+    "Options D and E are weak and easily eliminated"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches Australian Handbook and CDC: ≥3 doses, tetanus-prone wound, ≥5 years since last dose → booster only, no immunoglobulin",
+    "Diabetes correctly tests the student on what counts as immunocompromise for tetanus immunoglobulin",
+    "Clear explanation that covers each distractor"
+   ],
+   "suggestion": "Optionally replace E with a stronger distractor, such as 'No tetanus prophylaxis needed', and trim the septic-arthritis detail."
   }
  },
  "ai-mcq-0a3ab6c1": {
@@ -125,6 +208,90 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-0f17e735": {
+  "hash": "25ee9e68",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:39:50.140Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "GCA with vision loss from arteritic AION warrants immediate high-dose IV methylprednisolone, without waiting for a biopsy."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "Giant cell arteritis with vision loss already started (arteritic anterior ischaemic optic neuropathy) needs immediate high-dose IV methylprednisolone to protect the other eye, with temporal artery biopsy done afterwards so it does not delay treatment."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Options C and E are weak distractors that few examinees would pick"
+   ],
+   "topic": "Rheumatology",
+   "verdict": "accept",
+   "reasons": [
+    "Classic GCA with arteritic AION. IV pulse methylprednisolone is the guideline-supported next step (BSR, Australian TG), so the key is correct",
+    "Oral prednisolone at 50 mg is below the 60 mg (or 1 mg/kg) high-dose regimen, so it reads clearly as the inferior choice even though ACR lists pulse IV only as a conditional recommendation",
+    "The explanation is accurate and teaches each distractor well"
+   ],
+   "suggestion": "You could swap option E for a stronger distractor, such as urgent temporal artery ultrasound before treatment or admission for observation with a same-day ophthalmology consult."
+  }
+ },
+ "ai-mcq-1033fce7": {
+  "hash": "22e3ce8a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:39:59.186Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.85,
+    "reason": "Takotsubo cardiomyopathy with dynamic LVOT obstruction and sepsis in a patient without fluid overload needs cautious fluid to increase preload, while inotropes, nitrates, diuretics and an IABP would worsen the obstruction."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.85,
+    "reason": "Takotsubo with dynamic LVOT obstruction and no fluid overload needs a cautious fluid bolus to increase preload, while inotropes, nitrates, diuretics and IABP afterload reduction would worsen the gradient."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key is the only non-harmful option, so a test-wise student can reach it by ruling out every 'cardiac' intervention"
+   ],
+   "topic": "Cardiology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: an under-filled Takotsubo patient with dynamic LVOT obstruction needs cautious fluid first",
+    "Distractors are common cardiogenic-shock reflexes that are harmful here, so the item tests understanding",
+    "Accurate, thorough explanation with a clear safety teaching point"
+   ],
+   "suggestion": "Optionally replace furosemide with noradrenaline to make the item more discriminating; fluid stays the best first step because she is under-filled."
+  }
+ },
  "ai-mcq-1260b0c5": {
   "hash": "d4eddc3c",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -163,6 +330,93 @@
     "Explanation is accurate and goes through every option"
    ],
    "suggestion": "Optionally note that a PPI may hide early cancer if started well before the scope, so the line about starting a PPI after booking could be put more carefully."
+  }
+ },
+ "ai-mcq-13a3f163": {
+  "hash": "12f72d54",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:40:22.956Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.92,
+    "reason": "In 45,X Turner syndrome a bicuspid aortic valve is a major risk factor for aortic dilatation and dissection, the leading life-threatening cardiovascular complication; she has no Y material, so gonadoblastoma risk is not raised."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "In 45,X Turner syndrome without Y material, a bicuspid aortic valve is the major risk factor for aortic dilation and dissection, the leading life-threatening complication; gonadoblastoma needs Y material and the other risks are small."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Wording slip: 'ascending diameter' should read 'ascending aortic diameter'",
+    "Explanation says there is 'no virilisation', but the stem never mentions virilisation",
+    "Explanation repeats itself: the main text and the per-option rationales say much the same thing",
+    "The stem is long and has details that do not affect the answer (BMI, arm and leg blood pressures)"
+   ],
+   "topic": "Paediatrics",
+   "verdict": "accept",
+   "reasons": [
+    "Aortic dissection is clearly the most important life-threatening risk in 45,X Turner syndrome with a bicuspid aortic valve, and the key matches the 2024 international guideline",
+    "Each distractor is linked to a finding in the stem (no Y material for gonadoblastoma, horseshoe kidney for Wilms tumour, bicuspid valve for endocarditis, subclinical hypothyroidism for myxoedema coma), and the stem rules each one out",
+    "Only small wording and explanation issues, none of which affect validity"
+   ],
+   "suggestion": "Change 'ascending diameter' to 'ascending aortic diameter', and either remove 'no virilisation' from the gonadoblastoma rationale or add it to the stem."
+  }
+ },
+ "ai-mcq-1a1ad265": {
+  "hash": "64fe24e6",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:40:28.269Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "The SAAG is 19 g/L (high-gradient) and the neutrophil count is about 1575 ×10⁶/L (above 250, so spontaneous bacterial peritonitis), but fluid protein is below 10 g/L, glucose is above 2.8 mmol/L and LDH is below the serum upper limit, so no Runyon criteria are met."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.96,
+    "reason": "The gradient is 19 g/L (high) and the neutrophil count is about 1575 (infected), but the fluid protein (8 g/L), glucose (5.6 mmol/L) and LDH (105, below the serum limit) meet none of the Runyon criteria for secondary peritonitis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Two distractors (B, E) share the 'low-gradient' component and are eliminated together by one calculation"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "accept",
+   "reasons": [
+    "SAAG 19 g/L, PMN 1575 x10^6/L and zero Runyon criteria make A clearly correct",
+    "Multi-step data interpretation in a realistic vignette, testing applied clinical reasoning",
+    "Explanation is accurate and addresses every distractor, including albumin and prophylaxis points"
+   ],
+   "suggestion": "Optionally replace B or E with a high-gradient alternative (e.g., high-gradient ascites with high protein suggesting cardiac ascites) so that the gradient alone does not eliminate two options."
   }
  },
  "ai-mcq-1ca98ea1": {
@@ -249,6 +503,46 @@
    "suggestion": "Change the explanation to say the placenta supplies the fetal fraction of cfDNA, not most of it. Consider replacing E with a harder distractor, such as placenta accreta spectrum or macrosomia."
   }
  },
+ "ai-mcq-1f41fba4": {
+  "hash": "ce977484",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:40:27.199Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Episodic cluster headache (short attacks of pain around one eye with tearing and a blocked nostril on the same side, restlessness, and nightly timing) is prevented first-line with verapamil, and his normal baseline ECG makes it safe to start."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Episodic cluster headache is prevented first-line with verapamil, and his normal baseline ECG (PR 150 ms) makes it safe to start with ECG monitoring."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Neurology",
+   "verdict": "accept",
+   "reasons": [
+    "Classic episodic cluster headache vignette; verapamil is guideline first-line preventive",
+    "Homogeneous, plausible headache-preventive distractors with no cues",
+    "Explanation covers ECG monitoring, bridging and each distractor accurately"
+   ],
+   "suggestion": ""
+  }
+ },
  "ai-mcq-1fdb9dd4": {
   "hash": "1f8ba651",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -290,6 +584,51 @@
     "Thorough explanation that addresses the common underdosing error"
    ],
    "suggestion": ""
+  }
+ },
+ "ai-mcq-20194e35": {
+  "hash": "24a7076a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:40:48.116Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "The X-rays show narrowing worst at the DIP joints and also at the PIP, first CMC and STT joints, with osteophytes and sclerosis but no erosions or osteopenia, and serology and ferritin are normal, which fits primary nodal osteoarthritis."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "Narrowing worst at the DIP joints, also at the PIP, first CMC and STT joints, with marginal osteophytes and subchondral sclerosis but no erosions, osteopenia or chondrocalcinosis, plus normal ferritin and serology, is classic primary nodal osteoarthritis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (radiograph report explicitly lists absent erosions, osteopenia and chondrocalcinosis)",
+    "options include built-in rationales, allowing elimination by spotting false reasoning",
+    "key's rationale echoes stem wording",
+    "'symmetrical joint space narrowing' is ambiguous: it suggests uniform (inflammatory-type) narrowing rather than bilatera"
+   ],
+   "topic": "Rheumatology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and clearly best",
+    "Stem hands over the discriminating negatives, so the item is too easy",
+    "Rationale-laden options and ambiguous 'symmetrical' wording weaken the item"
+   ],
+   "suggestion": "Make the options plain diagnoses without 'as…' clauses, and describe the radiograph positively instead of listing absent features. Change 'symmetrical joint space narrowing' to 'bilateral, symmetrical distribution' so it is not read as uniform inflammatory-type narrowing."
   }
  },
  "ai-mcq-242c7475": {
@@ -417,6 +756,50 @@
     "Stem is over-cued, and the lab-source focus is only moderately Step 2 CK material"
    ],
    "suggestion": "Move the presentation to about 8–10 hours after pain onset so the AST/CK rise fits the usual timing, and remove some of the targeted negatives (e.g. the cannula and the fall/injection list). Consider asking about the most appropriate next step, such as reperfusion without liver work-up."
+  }
+ },
+ "ai-mcq-2b8f37a8": {
+  "hash": "a72b4883",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:40:53.689Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "Mild normocytic anaemia with raised platelets and CRP, low albumin, and normal bilirubin, calcium, ALP and white cells best fits anaemia of inflammation from an underlying malignancy (likely a Pancoast tumour)."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.92,
+    "reason": "Mild normocytic anaemia with raised platelets, raised CRP and low albumin in a man with a likely Pancoast tumour fits anaemia of inflammation; bilirubin, MCV, kidney function and the other cell counts argue against the alternatives."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation has a duplicated distractor section with the wrong letters: the first block labels marrow infiltration as B,",
+    "Long stem that tests lab interpretation while its main clinical picture (a Pancoast tumour) is not used",
+    "No reticulocyte count, ferritin or LDH are given, so options D and E are ruled out only indirectly"
+   ],
+   "topic": "Haematology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: mild normocytic anaemia, reactive thrombocytosis, raised CRP and low albumin together fit anaemia of inflammation",
+    "The distractors are plausible and of the same kind, and each is clearly ruled out by MCV, eGFR, bilirubin or the platelet count",
+    "The explanation's first rebuttal section is mislettered and says option C is wrong, which would confuse students"
+   ],
+   "suggestion": "Delete the first, mislettered \"Why the other options are wrong\" block and keep only the correctly lettered A, B, D, E rebuttals. You could also add a ferritin (normal or raised) and a normal reticulocyte count so the pattern is shown directly rather than inferred."
   }
  },
  "ai-mcq-2bc53a0c": {
@@ -547,6 +930,50 @@
    "suggestion": "Optionally, replace option C with a stronger distractor, such as worsening hypothyroid symptoms or hyperuricaemia/gout from rapid cell turnover, so the options are harder to rule out."
   }
  },
+ "ai-mcq-2f9aec47": {
+  "hash": "6fc7628e",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:41:05.129Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "Suspected malignant large bowel obstruction is best investigated first with contrast-enhanced CT abdomen/pelvis, which confirms the diagnosis, shows the cause and any complications, and stages disease; her normal renal function allows IV contrast."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "In suspected large bowel obstruction, most likely from a left-sided colorectal cancer, contrast CT of the abdomen and pelvis is the first-line test because it shows the level, the cause, any complications and the tumour stage, and her eGFR of 72 makes IV contrast safe."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation refers to a 'rising pulse' but the stem gives only a single pulse reading",
+    "Explanation says to withhold metformin for contrast at eGFR 72, which current contrast guidance does not require without",
+    "Plain radiograph (B) is still arguable as a routine first test in some settings"
+   ],
+   "topic": "General Surgery",
+   "verdict": "revise",
+   "reasons": [
+    "The key matches current guidance: contrast CT is first-line for suspected large bowel obstruction",
+    "The vignette and distractors are well built and the item tests clinical reasoning",
+    "The explanation has small factual errors (pulse trend, metformin and contrast) that need correcting"
+   ],
+   "suggestion": "Replace 'rising pulse' with 'tachycardia', or give two pulse readings in the stem. Change the metformin advice to say it can be held because she is acutely unwell and vomiting, not because of contrast at an eGFR of 72."
+  }
+ },
  "ai-mcq-33f3cc88": {
   "hash": "be4f1dc1",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -588,6 +1015,172 @@
     "Explanation is accurate, covers every distractor, and safely says she still needs a troponin and assessment for decompensated heart failure"
    ],
    "suggestion": "Optional: to make it harder, drop one of the explicit excluding clues, for example leave out the statement that she does not take digoxin and let the medication list do that work. The explanation could also be trimmed, because it says twice that a troponin is still needed."
+  }
+ },
+ "ai-mcq-35f5c887": {
+  "hash": "60f202d8",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:41:04.611Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "Starting an NSAID in a heart failure patient who relies on prostaglandins and is on a stable ARB and diuretic removes prostaglandin-driven afferent vasodilation, which lowers GFR; he has no signs of shock, interstitial nephritis or crystal nephropathy."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "Starting an NSAID on top of an ARB and a diuretic in heart failure blocks prostaglandin-mediated afferent arteriolar dilation, which lowers GFR, while the ARB dose has been unchanged for years."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem cues against option A by stating 'dose unchanged for 2 years'",
+    "Explanation says furosemide 'reduces circulating volume' in a clearly fluid-overloaded patient",
+    "Explanation does not mention renal venous congestion (cardiorenal syndrome) as a contributing mechanism"
+   ],
+   "topic": "Nephrology",
+   "verdict": "accept",
+   "reasons": [
+    "Keyed NSAID afferent-vasoconstriction mechanism is correct and clearly best",
+    "Distractors are the same kind of option and each is excluded by specific vignette findings",
+    "Only minor imprecision in the explanation"
+   ],
+   "suggestion": "Change the triple-whammy wording so it does not say the diuretic causes volume depletion in this overloaded patient. Add that renal venous congestion from decompensated heart failure may also contribute."
+  }
+ },
+ "ai-mcq-3bd5914c": {
+  "hash": "95ef4d56",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:41:19.772Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "In critical limb ischaemia with dry gangrene, keeping the limb below heart level helps perfusion, and loose dry padding keeps the gangrene dry and protects tissue at risk; raising, heating, moist dressings and compression all make things worse."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.92,
+    "reason": "In chronic limb-threatening ischaemia with dry gangrene, keeping the leg below heart level uses gravity to improve blood flow, and loose dry padding keeps the gangrene dry and protects the skin; raising the leg, compression, hydrogel (which softens dead tissue and can turn dry gangrene wet) and dire"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "key is a compound option (position + dressing) and slightly the longest"
+   ],
+   "topic": "Vascular Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key correct: dependent limb position and dry protective dressing are standard care for CLTI with dry gangrene awaiting revascularisation",
+    "Homogeneous, plausible distractors, each clearly wrong for a stated reason",
+    "Clear explanation that covers every option"
+   ],
+   "suggestion": "Optionally make the options equal in length, for example by adding a second detail to some distractors or shortening D, so the compound key does not stand out."
+  }
+ },
+ "ai-mcq-3e928d9b": {
+  "hash": "83f3ac9d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:41:31.597Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.8,
+    "reason": "Her vomiting has caused a hypochloraemic, hypokalaemic metabolic alkalosis that improves with chloride, so 0.9% saline with KCl restores volume, chloride and potassium, whereas balanced fluids add bicarbonate precursors that worsen the alkalosis."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Vomiting from small bowel obstruction has caused hypovolaemia with a low-chloride, low-potassium metabolic alkalosis that corrects with chloride, so 0.9% saline with KCl is best; balanced solutions supply less chloride and add bicarbonate precursors."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "General Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: chloride-responsive hypochloraemic hypokalaemic alkalosis from vomiting/NG loss is best treated with 0.9% saline plus KCl",
+    "Stem gives the data needed to reason it out (anion gap, compensation, prerenal AKI) without giving the answer away",
+    "Explanation is accurate and addresses every distractor; balanced crystalloids are only weakly arguable"
+   ],
+   "suggestion": "Optionally add a note to the explanation on watching urine output and serum potassium while giving KCl to a patient who is oliguric with an acute kidney injury."
+  }
+ },
+ "ai-mcq-3fe46b29": {
+  "hash": "b77e702a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:41:42.944Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "This is symptomatic group B COPD with one moderate exacerbation and eosinophils below 0.3, so he needs a regular long-acting bronchodilator rather than inhaled-steroid triple therapy, and tiotropium is the only option that provides this."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "He has GOLD group B COPD (symptomatic, one non-hospitalised flare-up, eosinophils below 0.3) and is on short-acting relief only, so a long-acting bronchodilator such as the LAMA tiotropium is the right next step; steroid inhalers, azithromycin and theophylline are not indicated."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Symptomatic moderate COPD with one community-treated exacerbation and low eosinophils; adding a long-acting muscarinic antagonist is guideline-concordant and is the best option offered",
+    "Distractors are homogeneous later-step or inappropriate medicines, with triple therapy a plausible lure",
+    "Explanation is accurate and addresses each option"
+   ],
+   "suggestion": ""
   }
  },
  "ai-mcq-40470f73": {
@@ -716,6 +1309,177 @@
    "suggestion": "Optional: to test more at Step 2 CK level, change the lead-in to the most appropriate next step (urgent external ventricular drain), keeping the same vignette. Also fix the explanation's \"3 hours\" to \"under 3 hours\"."
   }
  },
+ "ai-mcq-427a94f5": {
+  "hash": "ec0caa29",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:41:32.713Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "After an MI with non-sustained VT and diuretic-related low potassium and magnesium, the evidence-based way to reduce VF risk is to correct the electrolytes (IV magnesium, then IV potassium), not to give prophylactic antiarrhythmics."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "Correcting his low potassium and magnesium (giving magnesium first so the potassium correction works) is the evidence-based way to reduce VF risk in this stable NSTEMI patient with non-sustained VT, whereas preventive antiarrhythmic drugs are not recommended or are harmful."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option D's word 'alone' hints that it is incomplete"
+   ],
+   "topic": "Cardiology",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: fixing low K+ and Mg2+ (magnesium first) is the right step for peri-infarct ventricular ectopy and NSVT, and prophylactic antiarrhythmics are not recommended",
+    "The distractors are plausible, all the same kind of thing, and each is ruled out by good evidence (lidocaine mortality, CAST, no benefit from prophylactic amiodarone)",
+    "The explanation teaches well, with safe infusion rates and guideline context"
+   ],
+   "suggestion": "You could drop 'alone' from option D, or reword it, to remove the small cue. You could also note that the magnesium target of at least 1.0 mmol/L follows Australian guidance, since other guidelines use lower thresholds (about 0.8 mmol/L)."
+  }
+ },
+ "ai-mcq-42dc15b2": {
+  "hash": "866ce40f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:41:54.735Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "In severe symptomatic aortic stenosis, cardiac output depends on preload, so nitrates can cause sudden hypotension, fainting and loss of blood flow to the heart muscle."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "In symptomatic severe aortic stenosis the output is fixed and depends on preload, so the venodilation from sublingual GTN can cause profound hypotension, syncope and worsening ischaemia."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Three distractors (atorvastatin, paracetamol, tiotropium) are implausible and easy to rule out; only furosemide is a rea",
+    "The stem cues the key: he asks for chest-tightness relief and GTN is the only antianginal listed",
+    "Heterogeneous option format: the key is the only option without a dose",
+    "The explanation overstates the guidelines, which advise caution with nitrates rather than an absolute ban"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct and the concept is high-yield for Step 2 CK",
+    "Most distractors are weak, so the item tests little",
+    "The stem's wording and the format of option E cue the answer"
+   ],
+   "suggestion": "Replace paracetamol, tiotropium and atorvastatin with plausible cardiovascular drugs that carry less risk, such as low-dose bisoprolol, ongoing irbesartan or aspirin, so that GTN must be identified by its preload effect. Give a dose for every option, and soften the explanation to say nitrates should be avoided or used with great caution."
+  }
+ },
+ "ai-mcq-44d3b56b": {
+  "hash": "36bd16b4",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:42:02.380Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "He has a high chance of OSA and no conditions requiring lab testing, so the next step is a home sleep study to confirm the diagnosis and its severity before starting CPAP or a splint."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "He has a high pretest probability of uncomplicated moderate-to-severe OSA, so a home-based unattended sleep study is the right next step to confirm the diagnosis and severity before choosing treatment such as CPAP."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "The key is right: a patient with a high pre-test probability of OSA and no major other illness needs a home sleep study to confirm the diagnosis and grade it by AHI before treatment.",
+    "The distractors are all plausible management steps of the same kind, and each is clearly worse because it either skips diagnosis or cannot give the AHI.",
+    "The explanation is accurate. It matches the MBS 12250 criteria (Epworth 8 or more, plus STOP-Bang 4 or more or OSA50 5 or more) and teaches why each distractor is wrong."
+   ],
+   "suggestion": ""
+  }
+ },
+ "ai-mcq-47cd27be": {
+  "hash": "77f9b559",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:42:15.367Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.82,
+    "reason": "His facial pulling, refusal of hard foods and a carious molar that is tender to percussion point to a dental (periapical) abscess causing pain-related aggression, so an orthopantomogram is the right next investigation; constipation is diagnosed clinically and there are no features of NMS or UTI."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.85,
+    "reason": "Pulling at the left face, avoiding hard foods and a carious, percussion-tender molar point to a dental infection as a second cause of pain-related behaviour change, best assessed with an orthopantomogram; the constipation is clinically evident, the extrapyramidal signs without fever don't warrant CK"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation refers to 'extra wetting' that is not in the stem",
+    "Lead-in 'in addition to starting treatment for constipation' narrows the field and cues the answer",
+    "Explanation leans on one regional guideline (RCH)"
+   ],
+   "topic": "Paediatrics",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: findings point to a periapical abscess that needs dental imaging",
+    "Distractors are plausible red herrings (EPS/NMS, faecal mass, thyroid)",
+    "Explanation mentions wetting that is not in the stem"
+   ],
+   "suggestion": "Either add new urinary wetting to the stem or remove it from the explanation for option B. Consider the lead-in 'Which of the following is the most appropriate next investigation?' and handle constipation treatment in the stem instead."
+  }
+ },
  "ai-mcq-481e068c": {
   "hash": "8005b147",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -757,6 +1521,132 @@
     "The explanation mislabels option A as 'Correct' and never explains why A is wrong, so it contradicts the key"
    ],
    "suggestion": "Change the A line to say it is wrong: running maintenance or hypotonic fluid at 18 mL/h does not treat shock, and the current guideline for maintenance is isotonic 0.9% NaCl with 5% glucose, not 0.45%. Then add a separate line explaining why B is the key."
+  }
+ },
+ "ai-mcq-4b0f0034": {
+  "hash": "77ed034d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:42:14.549Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "To confirm eradication, do a urea breath test at least 4 weeks after antibiotics with the PPI stopped for 2 weeks beforehand, because antibiotics, PPIs and early testing all cause false negatives and serology stays positive after cure."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "To confirm H. pylori eradication, use a urea breath test at least 4 weeks after antibiotics and at least 2 weeks off the PPI, which avoids false negatives; serology stays positive after cure, and repeat endoscopy isn't needed for an uncomplicated duodenal ulcer."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "longest option is the key"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches current test-of-cure guidance (UBT at least 4 weeks after antibiotics, at least 2 weeks off PPI)",
+    "Distractors are homogeneous and each fails for a distinct, teachable reason",
+    "Explanation is thorough and covers every option"
+   ],
+   "suggestion": "Optionally make the options similar in length and detail, e.g. use a 4-week faecal antigen test on PPI as a distractor, so the key is not the most detailed option."
+  }
+ },
+ "ai-mcq-5289a1e4": {
+  "hash": "d2c175ba",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:42:31.779Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "For life-threatening intracranial bleeding on rivaroxaban taken recently, when andexanet is unavailable, prothrombin complex concentrate at 50 units/kg is the recommended reversal; a normal INR does not exclude drug effect."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "For a life-threatening intracranial bleed on recently taken rivaroxaban, when andexanet is not an option, the recommended reversal is four-factor PCC (Prothrombinex-VF) at about 50 units/kg, and a normal INR does not exclude drug effect."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 5,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Brand-name, region-specific product (Prothrombinex-VF) may be unfamiliar outside Australia"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: prothrombin complex concentrate 50 units/kg is the standard factor Xa inhibitor reversal when andexanet is unavailable",
+    "All five options are haemostatic or reversal agents, each a plausible trap",
+    "The explanation is thorough and accurate, including the point that a normal INR and APTT do not exclude a recent rivaroxaban effect"
+   ],
+   "suggestion": "Optionally write option D as 'Prothrombin complex concentrate (Prothrombinex-VF) 50 units/kg IV' so students outside Australia recognise it."
+  }
+ },
+ "ai-mcq-52c0dd42": {
+  "hash": "1a0c1eac",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:42:31.318Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "Episodic vertigo lasting hours, with fluctuating low-frequency sensorineural loss, tinnitus and aural fullness, fits probable Ménière disease, and the unilateral hearing loss calls for ENT referral and gadolinium MRI of the internal acoustic meati to exclude a retrocochlear lesion before ablative tr"
+   },
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "This looks like Ménière disease with hearing loss on one side only, so ENT referral and gadolinium-enhanced MRI of the internal acoustic meati are needed to rule out a vestibular schwannoma before confirming the diagnosis and starting treatment."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key is a compound option and slightly longer than the others"
+   ],
+   "topic": "Otorhinolaryngology",
+   "verdict": "accept",
+   "reasons": [
+    "Vignette accurately meets Bárány criteria for definite Ménière's disease, and the asymmetric SNHL means a retrocochlear lesion must be excluded with MRI of the internal acoustic meati",
+    "Each distractor is plausible and is clearly ruled out by a specific finding in the stem",
+    "Explanation teaches the diagnostic criteria and why each wrong option is wrong"
+   ],
+   "suggestion": "Optionally shorten option C to \"Gadolinium-enhanced MRI of the internal acoustic meati\" so the key is not the only compound option."
   }
  },
  "ai-mcq-5515c72d": {
@@ -846,6 +1736,89 @@
    "suggestion": "Relabel the distractor rationales to match the options (A tenofovir, C peginterferon, D acetylcysteine), take out the text explaining the key, and add an E rationale: ERCP is not indicated because the duct is 4 mm with no stones and the pattern is hepatocellular."
   }
  },
+ "ai-mcq-592447dd": {
+  "hash": "fbb695d0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:42:39.874Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "She has an NSTEMI with chest pain that persists despite maximal medical therapy, which is a very-high-risk feature, so guidelines call for immediate angiography (within 2 hours) rather than within 24 hours; fibrinolysis is not indicated without ST elevation."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "This is an NSTEMI with chest pain that persists despite maximal medical therapy, which makes her very high risk and calls for immediate (<2 h) invasive coronary angiography."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Cardiology",
+   "verdict": "accept",
+   "reasons": [
+    "Refractory ischaemic pain despite maximal medical therapy is a very high-risk NSTEACS feature, so immediate (<2 h) angiography is correct under both the Australian and the ESC 2023 guidelines",
+    "The early (<24 h) versus immediate angiography contrast tests the key decision point well, and fibrinolysis is a classic trap for weak students",
+    "The explanation is accurate, cites the guideline and explains why each distractor is wrong"
+   ],
+   "suggestion": "No fix is needed. Optionally, the explanation could say that fibrinolysis in NSTEACS has been shown to cause harm (TIMI IIIB), not just no benefit, and could note that ESC 2023 advises against routine P2Y12 pretreatment when early angiography is planned."
+  }
+ },
+ "ai-mcq-59f4002a": {
+  "hash": "4e11cf8c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:42:36.889Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "This sounds like cardiac syncope: he collapsed with no warning after feeling palpitations, his pulse is 38/min, and he has intermittent large JVP waves (cannon a waves) and a first heart sound that changes in loudness, which together point to AV dissociation from complete heart block, so a 12-lead E"
+   },
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "He fainted suddenly with no warning and has bradycardia plus cannon A waves and a first heart sound that varies in loudness, which together suggest complete heart block; a 12-lead ECG is the essential first test for all syncope and will confirm the diagnosis right away."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Low discrimination: a 12-lead ECG is the first test for any syncope, so the detailed AV-dissociation signs aren't needed",
+    "CT head and EEG are weak distractors that the vignette explicitly rules out"
+   ],
+   "topic": "Cardiology",
+   "verdict": "accept",
+   "reasons": [
+    "The key is clearly correct and matches syncope guidelines: get an immediate 12-lead ECG",
+    "The vignette is realistic and internally consistent, with accurate signs of complete heart block",
+    "The explanation is thorough and covers every distractor"
+   ],
+   "suggestion": "To make the item harder, ask about the next management step after the ECG shows complete heart block (for example, transcutaneous pacing or stopping atenolol, versus permanent pacemaker or atropine). Another option is to swap CT head and EEG for stronger cardiac distractors such as an implantable loop recorder or a tilt-table test."
+  }
+ },
  "ai-mcq-5c1577b8": {
   "hash": "fb3cd7c5",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -890,6 +1863,178 @@
    "suggestion": "Change the explanation to say 'The answer is D', and relabel the options it discusses to match the current order (4+4=8 is C). Consider either trimming the details that don't matter or changing the question to ask for the risk group or the next step in management, so the clinical details are actually used."
   }
  },
+ "ai-mcq-5f684f23": {
+  "hash": "4f393104",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:42:59.041Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "The CSF shows a classic bacterial picture: neutrophils, high protein, CSF:plasma glucose ratio of about 0.19 and a raised opening pressure; a negative Gram stain does not rule out bacteria because it is often negative, especially after antibiotics, so the current treatment should continue."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "A negative Gram stain does not rule out bacterial meningitis: sensitivity is limited, and lower still after antibiotics have started (and Listeria is often Gram stain negative), while the turbid CSF with many neutrophils, high protein and low CSF-to-blood glucose ratio (about 0.19) strongly suggests"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "B and C are weak distractors: the neutrophilic, low-glucose CSF rules them out at once, so the item is easy",
+    "Missing line break before the lead-in (formatting)"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: a negative Gram stain after antibiotics does not exclude bacterial meningitis, and Listeria cover is right for someone on corticosteroids",
+    "The CSF values, glucose ratio, sensitivity figures and eTG regimen are accurate",
+    "The explanation teaches well and covers each distractor"
+   ],
+   "suggestion": "If you want it harder, replace B or C with a more tempting distractor, such as stopping benzylpenicillin because the Gram stain showed no Gram-positive rods."
+  }
+ },
+ "ai-mcq-612fe373": {
+  "hash": "c3bb8958",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:43:01.034Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Inferior STEMI with right ventricular infarction (ST elevation III>II and in V4R, raised JVP, clear lungs, dilated RV) became hypotensive after nitrates, so the first treatment is a cautious IV saline bolus to restore preload, with vasopressors only if he stays hypotensive."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "This is an inferior STEMI with right ventricular infarction (ST elevation greater in III than II, ST elevation in V4R, dilated hypokinetic RV, high JVP, clear lungs) and hypotension caused by nitrates, so the RV needs more preload first, given as cautious IV saline boluses; vasopressors come only if"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Vignette stacks many confirmatory cues (V4R elevation, echo RV dilation, hypotension after GTN), making the answer easy",
+    "Options A, B and D are easy to eliminate for a student who knows the topic; only E is a strong competitor"
+   ],
+   "topic": "Cardiology",
+   "verdict": "accept",
+   "reasons": [
+    "Key (cautious fluid bolus for RV infarct with hypotension after nitrate) is correct and in line with guidelines",
+    "Tests applied management of a common, high-stakes emergency",
+    "Explanation is clear and addresses every distractor"
+   ],
+   "suggestion": "To make it harder, consider removing the echo or the V4R finding so the student has to infer RV involvement from the raised JVP, clear lungs and response to GTN."
+  }
+ },
+ "ai-mcq-6a6f07fd": {
+  "hash": "f204cee2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:43:05.566Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "A 66-year-old with rectal bleeding, change in bowel habit and iron-deficiency anaemia needs urgent colonoscopy and gastroscopy rather than a screening kit or iron alone."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "A symptomatic 66-year-old man with a change in bowel habit, blood mixed in the stool and iron deficiency anaemia needs urgent bidirectional endoscopy, not a screening FIT, haemorrhoid treatment or empirical iron."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Formatting: the lab list runs into the lead-in with no line break ('...IgA negative Which...')",
+    "Option E contains the qualifier 'as the first investigation', a small cue that it is wrong",
+    "Total IgA is not given, so the negative tTG-IgA cannot be fully interpreted (minor, since gastroscopy is indicated anywa"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "accept",
+   "reasons": [
+    "The key matches the Australian optimal care pathway and GESA iron deficiency guidance: urgent bidirectional endoscopy for a man with iron deficiency anaemia and red-flag bowel symptoms",
+    "The distractors test real errors students make (FOBT in a patient with symptoms, iron alone, blaming haemorrhoids, CT colonography first)",
+    "The explanation is clear and covers every option"
+   ],
+   "suggestion": "Put a line break before the lead-in. Optionally drop 'as the first investigation' from option E and add a normal total IgA to the results."
+  }
+ },
+ "ai-mcq-6d543dcb": {
+  "hash": "3df802d7",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:43:13.819Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "She took apixaban within 48 hours and her drug level is unknown, so IV thrombolysis is contraindicated (idarucizumab only reverses dabigatran), while her M1 occlusion with a small core and large salvageable area makes endovascular thrombectomy the right treatment."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "Apixaban was taken within 48 hours, so thrombolysis is contraindicated (normal INR/APTT do not exclude drug effect and PCC reversal to permit lysis is not recommended), and her M1 occlusion with a small core and large penumbra calls for direct endovascular thrombectomy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option D (aspirin) is a weak distractor for a salvageable M1 occlusion"
+   ],
+   "topic": "Neurology",
+   "verdict": "accept",
+   "reasons": [
+    "The key is right: an M1 occlusion within 6 hours, NIHSS 15 and a favourable perfusion mismatch call for thrombectomy whether or not thrombolysis is possible",
+    "The distractors test real pitfalls: a normal INR and APTT on a DOAC, the wrong reversal agent, and PCC reversal just to allow thrombolysis",
+    "The explanation is accurate and matches the Australian and New Zealand guidelines; it covers each option and the practical points"
+   ],
+   "suggestion": "You could replace option D with a more plausible distractor, such as waiting for the anti-Xa level before deciding on reperfusion, or giving andexanet alfa before thrombolysis."
+  }
+ },
  "ai-mcq-6dbd8be2": {
   "hash": "d46d285f",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -928,6 +2073,49 @@
     "The explanation is accurate and current, with correct doses, and it explains why each distractor is wrong."
    ],
    "suggestion": ""
+  }
+ },
+ "ai-mcq-6dea4d62": {
+  "hash": "4cd11d47",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:43:30.512Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "Long-standing reflux in a man over 50 with central obesity and a smoking history are the key risk factors for Barrett's oesophagus, which is the most likely complication and the forerunner of oesophageal adenocarcinoma."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Long-standing reflux in a man over 50 with central obesity and a smoking history puts him at highest risk of Barrett's oesophagus."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Some window dressing (ECG, haemoglobin, ferritin) adds little beyond excluding alarm features",
+    "Achalasia and eosinophilic oesophagitis are weak distractors because neither is a complication of GORD"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is clearly correct: the vignette is a classic Barrett's risk profile",
+    "Clean single-best-answer item with an accurate, complete explanation",
+    "No safety concerns"
+   ],
+   "suggestion": "Optionally replace achalasia or eosinophilic oesophagitis with a more tempting reflux-related option, such as peptic stricture or adenocarcinoma of the gastric cardia, to make the item harder."
   }
  },
  "ai-mcq-6fbba7f4": {
@@ -1144,6 +2332,49 @@
    "suggestion": "Optionally make the distractors multi-part as well (e.g. 'Give analgesia, encourage oral fluids and review in 24 hours') so the key is not cued by its length and compound structure."
   }
  },
+ "ai-mcq-7ae3a025": {
+  "hash": "08405303",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:43:47.102Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.72,
+    "reason": "Resectable pancreatic head cancer with jaundice but no cholangitis and bilirubin under 250 µmol/L should go promptly to a specialist surgical unit for resection, without routine biliary drainage or a tissue diagnosis first."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.8,
+    "reason": "The CT shows a resectable pancreatic head cancer, so she needs urgent referral to a hepatobiliary unit for pancreatoduodenectomy; a biopsy or biliary stent before surgery is not routinely needed without cholangitis, very high bilirubin or planned neoadjuvant therapy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Mildly heterogeneous options (referral vs procedures/investigations)",
+    "Vignette stacks every classic feature, making the diagnosis very easy"
+   ],
+   "topic": "Gastrointestinal Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches current guidance: a resectable-looking pancreatic head mass found in primary care needs urgent HPB/MDT referral",
+    "Distractors are plausible, common misconceptions (pre-op stenting, biopsy before resection) and the explanation rebuts each one",
+    "Clinically realistic and applied management question at Step 2 CK level"
+   ],
+   "suggestion": "Optionally, add a line to the explanation noting that cholestasis can falsely raise CA 19-9, and that biliary drainage may be considered if bilirubin is very high or itch is severe, as decided by the specialist team."
+  }
+ },
  "ai-mcq-7bce8cdf": {
   "hash": "4d94be52",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -1182,6 +2413,46 @@
     "Accurate, current explanation that addresses every option"
    ],
    "suggestion": "Optionally note in the explanation that NICE CG141 does not recommend a PPI before endoscopy, while Australian and ACG guidance support it."
+  }
+ },
+ "ai-mcq-7be1f6ee": {
+  "hash": "2f7dee67",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:43:40.877Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.75,
+    "reason": "This is crystal-proven acute gout with stage 4 CKD (eGFR 23), so NSAIDs are contraindicated and colchicine is relatively risky, which makes oral prednisolone the safest effective treatment for the attack."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "This is crystal-proven acute gout in a patient with stage 4 CKD (eGFR 23), so NSAIDs are contraindicated and colchicine is risky, which leaves oral prednisolone as the safest effective treatment."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Rheumatology",
+   "verdict": "accept",
+   "reasons": [
+    "Key correct: oral corticosteroid is the safest treatment for a gout flare with eGFR 23 on an ARB and a diuretic",
+    "Distractors are plausible, of the same kind as the key, and each teaches a real safety point (triple whammy, colchicine build-up, ULT timing, septic arthritis)",
+    "Explanation is thorough, current and stresses following the culture to its final report"
+   ],
+   "suggestion": ""
   }
  },
  "ai-mcq-7ccbb208": {
@@ -1224,6 +2495,90 @@
     "The explanation is thorough and current, and it covers every distractor, including PTBD as the fallback"
    ],
    "suggestion": "You could swap option E for 'Continue IV antibiotics and reassess in 24 hours' so that only one option mentions ERCP. This step is optional."
+  }
+ },
+ "ai-mcq-7dcae0d8": {
+  "hash": "fc14a6d3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:43:46.452Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "After CT-confirmed uncomplicated diverticulitis, a patient with no prior colonoscopy (missed screening) and a 5 cm segment of wall thickening should have colonoscopy about 6–8 weeks later, once the inflammation has settled, to exclude colorectal cancer."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "After a first episode of CT-confirmed diverticulitis in a patient whose colon has never been examined, and with a segment of thickened bowel wall, colonoscopy is recommended about 6–8 weeks later, once the inflammation has settled, to exclude cancer."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option E is weak and easy to rule out because of the 2-year delay"
+   ],
+   "topic": "General Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "The key matches current guidance: colonoscopy about 6–8 weeks after uncomplicated diverticulitis when the colon has never been examined",
+    "The options are all the same kind of thing (follow-up tests), and A, C and D are plausible traps",
+    "The explanation clearly covers why the key is right and why each distractor is wrong"
+   ],
+   "suggestion": ""
+  }
+ },
+ "ai-mcq-7f0ed74e": {
+  "hash": "47a8cc3f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:44:04.506Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.92,
+    "reason": "This is a young woman with possible IBS-D, no red flags, and normal blood count, CRP and coeliac serology, so NICE recommends faecal calprotectin next to exclude inflammatory bowel disease before diagnosing IBS."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "She is under 50 with likely IBS, no red flags and negative coeliac serology, so faecal calprotectin is the recommended test to exclude IBD before diagnosing IBS without colonoscopy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "The FIT rationale only holds in Australia: in the UK, NICE (DG56) uses FIT to triage symptomatic adults, so 'not used in"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "accept",
+   "reasons": [
+    "Well-built IBS-D vignette that rules out each alternative in turn (red flags, coeliac with valid IgA, infection)",
+    "Calprotectin is the guideline-backed next test to exclude IBD before a positive IBS diagnosis",
+    "Distractors are plausible, of the same kind, and each is clearly answered by the stem"
+   ],
+   "suggestion": "Optionally reword the FIT rationale to say FIT is a test for colorectal cancer, which is not the main concern in a 29-year-old with IBS-type symptoms, so it does not exclude IBD. This avoids depending on Australia's screening ages."
   }
  },
  "ai-mcq-7f2d20c9": {
@@ -1270,6 +2625,46 @@
    "suggestion": "Put the options in ascending order (0, 1, 2, 3, 4). Better still, ask for the most appropriate next step in management, with home oral amoxicillin as the key and admission or IV options as distractors."
   }
  },
+ "ai-mcq-81590e31": {
+  "hash": "25cce6df",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:44:09.276Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "This acute posterior midline fissure hasn't improved with conservative care, so a topical sphincter relaxant comes next, and diltiazem is chosen because GTN can't be combined with daily tadalafil."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "This acute anal fissure has not responded to conservative care, so a topical sphincter relaxant is next, and diltiazem is chosen over GTN because nitrates are contraindicated with daily tadalafil."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "General Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: daily tadalafil contraindicates GTN, so diltiazem 2% is the right topical sphincter relaxant once conservative care has failed.",
+    "Distractors are homogeneous, plausible treatments, and each has a clear reason it is worse.",
+    "The explanation teaches the pathophysiology, the drug interaction and the reason each distractor is wrong."
+   ],
+   "suggestion": ""
+  }
+ },
  "ai-mcq-8557a042": {
   "hash": "626c4e15",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -1311,6 +2706,49 @@
     "Distractors are the same kind of option, plausible, and each one tests a real pitfall"
    ],
    "suggestion": "Cite only guidelines that can be checked (ESC 2024, ACC/AHA 2022), and reword the explanation for E to say that antithrombotics given for a suspected ACS are harmful in dissection."
+  }
+ },
+ "ai-mcq-8727d880": {
+  "hash": "f41513c0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:44:09.649Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "He has a suspected acute coronary syndrome, so a 12-lead ECG should be done within 10 minutes to look for STEMI, which would need immediate reperfusion; troponin and other tests should not delay it."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Suspected acute coronary syndrome needs a 12-lead ECG within 10 minutes to find a STEMI needing urgent reperfusion, and this comes before troponin or imaging."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Item is easy: the classic presentation makes ECG an obvious first step",
+    "D-dimer and CT coronary angiogram are weak distractors that the stem openly rules out (normal calves, ongoing pain at re"
+   ],
+   "topic": "Cardiology",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct and matches guidelines: a 12-lead ECG within 10 minutes of first contact in suspected ACS",
+    "Only one option is clearly best, and troponin is a plausible distractor that tests the 'troponin must not delay reperfusion' point",
+    "The explanation is accurate and teaches each option well"
+   ],
+   "suggestion": "You could make the item harder by swapping D-dimer or CT coronary angiogram for a stronger distractor, such as an exercise stress test or a bedside echocardiogram."
   }
  },
  "ai-mcq-88a5965f": {
@@ -1356,6 +2794,135 @@
    "suggestion": "Change the mislabelled comments in the explanation to A (LNG-IUD), B (COCP) and C (IV iron), or delete that duplicated paragraph. Add a line break before the lead-in question."
   }
  },
+ "ai-mcq-88d9e465": {
+  "hash": "c2675731",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:44:18.301Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "The sample was taken only 75 minutes after symptom onset and the hs-cTnT (9 ng/L) is not below the very-low cut-off (<5 ng/L), so a single-sample rule-out doesn't apply and a repeat at 1–2 hours is needed."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "The sample was drawn under 3 hours after symptom onset and the hs-TnT of 9 ng/L is above the single-test rule-out cut-off of 5 ng/L, so MI cannot be excluded until a repeat test at 1 to 3 hours."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Per-option rationale labels B as 'Correct' while giving the rationale for A, which contradicts the key",
+    "Main explanation gives a rationale for A under 'A:' but never explains why B is wrong",
+    "Distractors C and D are weak because both assume a troponin above the 99th centile, which the stem clearly rules out"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "Key A is correct: hs-TnT of 9 ng/L at 75 minutes is above the very-low threshold and was taken less than 3 hours after onset, so serial testing is needed",
+    "The explanation is internally inconsistent and mislabels B as correct, which would confuse learners",
+    "C and D are easy to eliminate because her value is plainly normal"
+   ],
+   "suggestion": "Rewrite the per-option rationale so that B is marked wrong: a single sample cannot exclude MI when it is 5 ng/L or above or was taken less than 3 hours after onset. Consider replacing C or D with a more tempting distractor, such as 'The normal value means her chest tightness is rate-related, so no further troponin is needed'."
+  }
+ },
+ "ai-mcq-8a426199": {
+  "hash": "fcd1d7ab",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:44:44.217Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "The pH is 7.43 with high bicarbonate, normal anion gap (13), normal lactate, low chloride and low potassium after heavy vomiting and dehydration, which shows a chloride-responsive metabolic alkalosis with appropriate respiratory compensation."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "The raised pH and bicarbonate, normal anion gap (13), normal lactate and appropriately compensated pCO2 show a metabolic alkalosis, caused by losing gastric acid in vomit and kept going by volume depletion and low potassium."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Albumin not given, so the albumin-corrected anion gap (needed to fully exclude a hidden high anion gap acidosis) cannot ",
+    "Gallstone history (implying gallstone ileus) is extraneous to the question asked"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is clearly correct: alkalaemic pH, raised bicarbonate and base excess, low chloride and potassium after vomiting",
+    "Distractors are homogeneous, plausible and tied to deliberate red herrings in the stem",
+    "Explanation is thorough, accurate and teaches management safely"
+   ],
+   "suggestion": "Optionally add a normal serum albumin so the normal anion gap can be trusted when ruling out option E."
+  }
+ },
+ "ai-mcq-91f368bd": {
+  "hash": "ed7d4806",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:44:38.541Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.96,
+    "reason": "An acute myelopathy with a T10 sensory level and urinary retention needs urgent contrast MRI of the whole spine to rule out compression and look for demyelinating or inflammatory lesions; a lumbosacral scan would miss the cord."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "She has an acute thoracic myelopathy (upper motor neuron signs in the legs, a sensory level at T10, and urinary retention), so the first step is an urgent gadolinium MRI of the whole spine to rule out cord compression and look for demyelination; antibody tests and a lumbar puncture come after imagin"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Minor cue: the word 'only' in option C signals it is wrong"
+   ],
+   "topic": "Neurology",
+   "verdict": "accept",
+   "reasons": [
+    "Classic acute myelopathy with a sensory level and urinary retention; urgent whole-spine MRI is clearly the best answer",
+    "Distractors are plausible, of the same kind as the key, and each is wrong for a clear reason",
+    "Explanation teaches localisation and why imaging must come before CSF or antibody tests"
+   ],
+   "suggestion": ""
+  }
+ },
  "ai-mcq-92b33ba3": {
   "hash": "c02a19c8",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -1396,6 +2963,48 @@
     "The explanation is accurate and addresses every distractor"
    ],
    "suggestion": ""
+  }
+ },
+ "ai-mcq-93a4814c": {
+  "hash": "87c42f4d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:44:36.333Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "This baby most likely has early-onset neonatal sepsis, probably from group B streptococcus (mother was a carrier, had a fever in labour, waters broken 22 hours before birth, and antibiotics given less than 4 hours before delivery), and blood culture is the gold-standard test to confirm it, whereas C"
+   },
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "This is early-onset GBS sepsis after too-short intrapartum antibiotic cover, and a blood culture is the gold-standard test that confirms it; CRP, procalcitonin and a chest X-ray only support the diagnosis, and urine culture is not useful at under 72 hours of age."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "The stem is long for a question that tests a well-known gold-standard fact (blood culture confirms sepsis)"
+   ],
+   "topic": "Neonatology",
+   "verdict": "accept",
+   "reasons": [
+    "Blood culture is clearly the reference standard for confirming early-onset neonatal sepsis",
+    "The options are all investigations and are plausible, with no cues to the answer",
+    "The explanation is accurate, follows current guidelines and covers every distractor"
+   ],
+   "suggestion": "If you want a harder question, ask instead about the next step in management, such as giving a fluid bolus or choosing empirical antibiotics, or about the timing of a lumbar puncture."
   }
  },
  "ai-mcq-95c7720a": {
@@ -1524,6 +3133,88 @@
    "suggestion": "Optionally add her creatinine or eGFR, since she takes metformin and is having IV contrast."
   }
  },
+ "ai-mcq-9c5c4bc6": {
+  "hash": "7c75c617",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:44:58.671Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "This is a normotensive PE with a normal RV and troponin, but a heart rate of 114 gives sPESI 1 and a positive Hestia score, so she is intermediate-low risk and needs admission with a DOAC rather than discharge or thrombolysis."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.85,
+    "reason": "She has a normotensive PE with normal RV and troponin, but an sPESI of 1 (HR ≥110) plus tachypnoea makes her intermediate-low risk, so she needs admission and DOAC anticoagulation rather than thrombolysis or outpatient treatment."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Options A and E share the same drug and dose, which mildly cues convergence toward one of them"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key correct: normotensive, no RV strain, normal troponin, sPESI 1 from HR ≥110 = intermediate-low risk PE needing admission and anticoagulation",
+    "Distractors are homogeneous management steps, each tied to a distinct risk tier or indication",
+    "Explanation is accurate and addresses every option, including dosing and stopping oestrogen"
+   ],
+   "suggestion": ""
+  }
+ },
+ "ai-mcq-9fadfaae": {
+  "hash": "d3542b72",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:45:03.533Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "This is new acute heart failure with a flat, mildly raised troponin (strain, not a new infarct), so transthoracic echocardiography is the key test to confirm the diagnosis, measure ejection fraction and look for the structural cause."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "New acute heart failure with a high NT-proBNP needs transthoracic echocardiography to establish the structural cause and ejection fraction, and the flat, low-level troponin argues against acute coronary syndrome needing angiography."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Cardiology",
+   "verdict": "accept",
+   "reasons": [
+    "Transthoracic echocardiography is the guideline-recommended first test for suspected heart failure and clearly the best answer",
+    "Flat troponin, unchanged ECG and bilateral transudative effusions are built in to make angiography, CTPA and aspiration plausible but wrong",
+    "The explanation is accurate and teaches why each option is right or wrong"
+   ],
+   "suggestion": ""
+  }
+ },
  "ai-mcq-a5f2390b": {
   "hash": "7ec903a9",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -1565,6 +3256,134 @@
     "Explanation is accurate, complete and practical"
    ],
    "suggestion": "Optionally add a conjugated bilirubin value to the stem or drop the 'conjugated-pattern' phrase, and give the albumin cut-off (<0.7 × lower limit of normal) in the explanation."
+  }
+ },
+ "ai-mcq-a60c4da7": {
+  "hash": "474ab875",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:45:20.498Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.85,
+    "reason": "The valid negative pregnancy test means aspirin plus metoclopramide can be used for her acute attacks; it does not make her combined pill safe, because migraine with aura is UKMEC 4, and valproate and the other options remain wrong."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.85,
+    "reason": "A valid negative pregnancy test means aspirin plus metoclopramide is a safe acute treatment, while valproate stays inappropriate in a woman who could become pregnant and the combined pill is contraindicated in migraine with aura whatever the test shows."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "contrived lead-in: the key does not follow mainly from the test result",
+    "heterogeneous options (contraception, prevention, investigation, acute treatment)",
+    "the main clinical action (stopping the COCP) is relegated to a distractor",
+    "mix of positive and negative option phrasing",
+    "mixed guideline sources (eTG and UKMEC)"
+   ],
+   "topic": "Neurology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and safe: aspirin plus metoclopramide is first-line acute migraine treatment",
+    "Lead-in about a pregnancy test is artificial, and the key is driven by the diagnosis, not by the result",
+    "Options are heterogeneous, and the higher-yield COCP decision is buried in a distractor"
+   ],
+   "suggestion": "Rewrite the lead-in as 'most appropriate management' with homogeneous acute-treatment options, or test the contraception decision directly, with switching to a progestogen-only or non-hormonal method as the key."
+  }
+ },
+ "ai-mcq-a8a331e2": {
+  "hash": "ce4030f3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:45:19.084Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "This is a simple febrile seizure in a fully immunised child with a viral source who is back to normal, so she needs no tests (no LP, no EEG) and preventive fever medicine does not help; discharge with education and safety-netting is appropriate."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.88,
+    "reason": "This is a simple febrile seizure in a well, fully immunised toddler who is back to baseline and has an obvious viral source, so she needs reassurance, education and safety-netting rather than an LP, EEG, admission or scheduled antipyretics."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Paediatrics",
+   "verdict": "accept",
+   "reasons": [
+    "Classic simple febrile seizure with full recovery and benign source; discharge with education matches RCH/AAP/NICE guidance",
+    "Distractors are homogeneous, plausible management steps that are each clearly inferior",
+    "Explanation is accurate (recurrence ~30%, epilepsy 1-2%) and addresses every option"
+   ],
+   "suggestion": ""
+  }
+ },
+ "ai-mcq-a98e94e9": {
+  "hash": "5b6d59cf",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:45:23.395Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "For an overt cord prolapse with fetal bradycardia, the recommended immediate step while awaiting a category 1 caesarean is to lift the presenting part off the cord by hand and use the knee–chest position."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "In cord prolapse with an undelivered fetus who can't be born vaginally right away (6 cm dilated, station -3), the right immediate step is to push the presenting part up by hand and put the mother in knee–chest (or exaggerated Sims) position to take pressure off the cord until the category 1 caesarea"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key combines two interventions in one option (elevation plus posture), which makes it look more complete than the others"
+   ],
+   "topic": "Obstetrics",
+   "verdict": "accept",
+   "reasons": [
+    "The key matches RCOG GTG 50 on cord prolapse: lift the presenting part and use knee–chest or head-down left lateral positioning while waiting for a category 1 caesarean",
+    "The distractors are plausible and each is ruled out by a stem detail (6 cm dilated, station -3, normal blood pressure, no reason for fetal blood sampling)",
+    "The explanation is accurate and covers every option, including bladder filling and tocolysis"
+   ],
+   "suggestion": ""
   }
  },
  "ai-mcq-a9cf01d0": {
@@ -1611,6 +3430,93 @@
    "suggestion": "Keep one combined method and replace the others with an etonogestrel implant, depot medroxyprogesterone, a copper IUD and a progestogen-only pill. The heavy-bleeding history then makes the levonorgestrel device the deciding best choice."
   }
  },
+ "ai-mcq-abe23890": {
+  "hash": "fd2b43c6",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:45:59.662Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "She takes under 50% of her usual feed and has reduced urine output without impending respiratory failure, so nasogastric feeding is first line; full maintenance (700 mL/day, about 28-29 mL/h) suits a mildly dry infant, while fluid restriction mainly applies to IV fluids."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "She takes about 25% of her usual feed and shows early dehydration but no shock or impending respiratory failure, so NICE guidance favours nasogastric feeding at full maintenance (700 mL/day, about 28 mL/h) over oral trials or IV fluids."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key depends on the Australasian (RCH/PREDICT) practice of limiting fluids to two-thirds of maintenance; AAP guidance doe",
+    "Paired options built around a calculation (28 vs 19 mL/h) test arithmetic as well as clinical judgement"
+   ],
+   "topic": "Paediatrics",
+   "verdict": "accept",
+   "reasons": [
+    "Realistic bronchiolitis vignette in which the feeding trial clearly shows NG hydration is needed",
+    "Holliday-Segar maintenance (28 mL/h) and the two-thirds figure (about 19 mL/h) are correct, and shock is clearly ruled out",
+    "The explanation teaches why each distractor is wrong in terms of route, rate and resuscitation versus hydration"
+   ],
+   "suggestion": "Consider naming the guideline framework in the stem (for example, 'according to Australasian bronchiolitis guidelines') so the two-thirds maintenance rate is not challenged by readers who follow other countries' guidance."
+  }
+ },
+ "ai-mcq-ac3f63e3": {
+  "hash": "724a587b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:45:48.717Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "The deeper lesion is solid, irregular and angular, casts a posterior acoustic shadow, has internal blood flow, does not compress, and the nipple has newly pulled in, so it looks like a probable cancer and needs a core biopsy even though there is an abscess on top of it."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "The deeper lesion is solid, irregular and angular, casts a posterior acoustic shadow, has internal blood flow, does not change shape when compressed and comes with new nipple retraction, so it looks malignant (BI-RADS 4–5) and needs a core biopsy whatever happens to the abscess."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key is the only option that is not benign or reassuring, so a cautious test-taker can find it without interpreting the s",
+    "Vignette lists nearly every textbook malignant ultrasound feature, so the answer is easy to find",
+    "Options combine a diagnosis with a management plan"
+   ],
+   "topic": "Breast/Endocrine Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key is clearly correct and teaches an important safety point: a breast abscess can hide a cancer",
+    "Explanation is accurate, current and covers every distractor",
+    "Only minor cueing, because E is the only non-reassuring option"
+   ],
+   "suggestion": "Consider removing one or two of the classic malignant features, or adding a non-benign distractor (for example, a complex cystic-solid lesion with a different plan), so the item tests interpretation rather than choosing the cautious option."
+  }
+ },
  "ai-mcq-b1bb7e43": {
   "hash": "fbc882b2",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -1651,6 +3557,51 @@
     "Tests applied clinical reasoning in a realistic GP scenario"
    ],
    "suggestion": "Optionally add to the explanation that a negative urine hCG cannot exclude conception in the last 2 weeks, and that the Handbook only requires a pregnancy test when pregnancy cannot be excluded."
+  }
+ },
+ "ai-mcq-b1c5fc38": {
+  "hash": "40b2ee73",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:45:49.183Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "The rhythm is regular, and every QRS has an upright P wave of the same shape in front of it with a normal PR interval, normal axis and no right-heart strain or hypertrophy signs, so this is sinus tachycardia, most likely driven by fever and low oxygen from the COPD exacerbation, not AF, MAT, PE or c"
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "The ECG shows a regular rhythm with one P wave of the same shape before every QRS, upright in lead II, and a normal PR interval, so this is sinus tachycardia caused by fever and hypoxia from the COPD exacerbation; the dominant S wave in V1, normal axis and lack of ST/T changes argue against right ve"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away: the stem spells out a regular rhythm with uniform upright P waves before every QRS, whic",
+    "heterogeneous options: rhythm diagnoses (A-C) mixed with morphology or chamber patterns (D-E)",
+    "options combine an ECG finding with a cause",
+    "the explanation's use of apixaban to argue against PE is weak, and sinus tachycardia is itself the commonest ECG finding"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and the item is safe",
+    "The detailed ECG description reduces the task to recalling the definition of sinus rhythm, so it barely tests clinical reasoning",
+    "The options mix rhythm and morphology diagnoses"
+   ],
+   "suggestion": "Give the ECG as a figure or as less complete findings so the student must interpret it, or keep the ECG and ask for the next step in management (e.g. rate control vs cardioversion vs admission with treatment of the infective exacerbation). Drop the apixaban argument against PE from the explanation."
   }
  },
  "ai-mcq-b1fb1c81": {
@@ -1734,6 +3685,92 @@
     "The explanation is accurate and deals with every option"
    ],
    "suggestion": ""
+  }
+ },
+ "ai-mcq-b748662d": {
+  "hash": "03358d21",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:45:53.546Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "Adding colchicine for 3 months to an NSAID (0.5 mg once daily at under 70 kg) roughly halves the chance of recurrent pericarditis, which is the most common complication; steroids raise recurrence risk and 1 week of colchicine is too short."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "In acute idiopathic or viral pericarditis, the most common complication is recurrence, and adding colchicine for 3 months (0.5 mg once daily if under 70 kg) to an NSAID about halves that risk."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Two colchicine options (B and D) form a paired set that hints the key is one of them"
+   ],
+   "topic": "Cardiology",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches current ESC/eTG guidance: 3 months of colchicine, dosed by weight, to prevent recurrence",
+    "Low-risk features are fully specified, and the distractors test real misconceptions (steroids, duration)",
+    "Explanation is accurate and covers each option"
+   ],
+   "suggestion": "Optionally, ask directly which addition would most reduce the risk of recurrence. That removes the extra inference step, though the item works as written."
+  }
+ },
+ "ai-mcq-b95916fc": {
+  "hash": "c06cc43b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:46:20.272Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.88,
+    "reason": "Baseline screening before methotrexate includes FBC, liver tests, renal function, chest X-ray and hepatitis B/C serology; all are done except the viral serology, and his prior results can't be confirmed."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "Blood count, liver and kidney function and chest X-ray are already done, so hepatitis B and C serology is the remaining recommended check before restarting methotrexate, especially with his old records unavailable."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Heterogeneous options: four distractors are diagnostic tests, while the key is the only pre-treatment safety screen",
+    "Explanation wrongly gives smoking as a reason for hepatitis B/C serology",
+    "Explanation for C cites a fact the stem does not give (never had an acute attack)"
+   ],
+   "topic": "Rheumatology",
+   "verdict": "revise",
+   "reasons": [
+    "Key matches ACR and Australian guidance on screening before methotrexate",
+    "Explanation has a minor error: smoking is not a hepatitis risk factor",
+    "Distractors are easy to rule out because they are not safety screens"
+   ],
+   "suggestion": "Remove the smoking-as-hepatitis-risk reasoning and the 'never had an acute attack' claim from the explanation. Replace one or two diagnostic distractors with other plausible pre-treatment tests, such as pulmonary function testing, an interferon-gamma release assay or a fasting lipid profile, so the options are homogeneous."
   }
  },
  "ai-mcq-b9e317b3": {
@@ -1820,6 +3857,46 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-bbe3537a": {
+  "hash": "7f904ade",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:46:19.270Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.9,
+    "reason": "This is severe acute asthma that has not responded to an hour of maximal inhaled bronchodilators and systemic corticosteroids, so the next step is IV magnesium sulfate; aminophylline offers little benefit, IV steroids add nothing when oral ones can be taken, and adrenaline is for anaphylaxis."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.9,
+    "reason": "This is severe acute asthma that has not responded to an hour of inhaled salbutamol and ipratropium plus oral steroids, so IV magnesium sulfate is the recommended next step; he has already had steroids, adrenaline is only needed for anaphylaxis, and aminophylline is not favoured."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Severe asthma still severe after a full hour of first-line treatment; IV magnesium is the guideline next step",
+    "Stem clearly rules out life-threatening features and anaphylaxis, so the key is the single best answer",
+    "Distractors are the same kind of option and plausible; the explanation teaches each one well"
+   ],
+   "suggestion": ""
+  }
+ },
  "ai-mcq-bd62e001": {
   "hash": "e280d4eb",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -1858,6 +3935,97 @@
     "Accurate, thorough explanation including SSNHL criteria and urgent management"
    ],
    "suggestion": "Optional: to raise clinical yield, convert to a next-step question (urgent corticosteroids/ENT referral vs decongestant or watchful waiting), since recognising SSNHL as an emergency is the key teaching point."
+  }
+ },
+ "ai-mcq-be2fce74": {
+  "hash": "c34e2870",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:46:44.042Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.62,
+    "reason": "In a 46-year-old with isolated rectal bleeding, no red flags, no iron deficiency and haemorrhoids on proctoscopy, current UK guidance uses FIT to decide whether she needs urgent colonoscopy rather than referring her directly."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.62,
+    "reason": "This is a woman under 50 with likely haemorrhoids and no red flags (normal blood count and ferritin, no change in bowel habit, weight loss or pain), so current NICE guidance uses FIT to decide whether she needs urgent referral for colonoscopy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation wrongly says FIT is 'almost certainly positive' with visible bleeding; haemorrhoidal bleeding is often inter",
+    "Answer depends partly on the country: UK NICE DG56/BSG-ACPGBI guidance uses FIT to triage symptomatic patients, includin"
+   ],
+   "topic": "General Practice",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct under Australian and US guidance for new rectal bleeding at age 46",
+    "Reasoning against FIT is inaccurate and ignores UK practice of FIT triage for symptoms",
+    "Stem and distractors otherwise well built"
+   ],
+   "suggestion": "Name the setting (Australia) or cite the guideline in the stem. Reword the FIT explanation to say FIT does not replace colonoscopy in a patient with symptoms and a negative result would not exclude a lesion, rather than saying it is always positive."
+  }
+ },
+ "ai-mcq-beeea923": {
+  "hash": "0c2bf6a1",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:46:36.942Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "A diffuse goitre with overt, T3-predominant hyperthyroidism suggests Graves disease, and current guidelines favour TRAb as the first-line, cost-effective, highly sensitive and specific test to confirm it, before scintigraphy."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "In a young woman with a diffuse, smooth goitre and T3-predominant thyrotoxicosis, Graves' disease is most likely, and a serum TRAb test confirms it with high sensitivity and specificity as the guideline-preferred first-line test."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "C"
+   ],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Lead-in says 'confirm the cause' rather than 'initial/first', so scintigraphy (uptake pattern, often called the definiti",
+    "Long SVT preamble is mostly irrelevant to the question asked",
+    "Explanation understates Doppler ultrasound: ATA guidance accepts increased thyroid blood flow as a way to support Graves"
+   ],
+   "topic": "Endocrinology",
+   "verdict": "revise",
+   "reasons": [
+    "TRAb is the preferred first test for suspected Graves' disease with a diffuse goitre, per ATA and Australian guidance",
+    "Lead-in wording leaves room to argue for scintigraphy (RAIU), which many US Step-style sources treat as the confirmatory test",
+    "Small inaccuracy in the explanation about what Doppler ultrasound can show"
+   ],
+   "suggestion": "Change the lead-in to 'most appropriate initial investigation to determine the cause' and cut the SVT detail down. In the explanation, say that Doppler flow can support Graves' disease but depends on the operator, so it is not preferred over TRAb."
   }
  },
  "ai-mcq-c20114a7": {
@@ -1986,6 +4154,49 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-c64f06c2": {
+  "hash": "5090f104",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:46:56.511Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "This cholestatic infant who missed vitamin K at birth has a vitamin K deficiency clotting problem without major bleeding, so she needs IV phytomenadione: oral absorption is poor in cholestasis, and plasma is kept for life-threatening bleeding."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "This baby has cholestasis, received no vitamin K at birth and has a coagulopathy without major bleeding, so she needs parenteral vitamin K: oral vitamin K is poorly absorbed in cholestasis, and fresh frozen plasma is for life-threatening bleeding."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "longest and most specific option is the key",
+    "two vitamin K options may cue the examinee toward one of the pair"
+   ],
+   "topic": "Neonatology",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches standard management of late VKDB with cholestatic coagulopathy",
+    "Plausible, homogeneous distractors that test the route and the need for plasma",
+    "Clinically rich vignette with a thorough, accurate explanation"
+   ],
+   "suggestion": "Optionally word the other options with similar detail (e.g., 'Phytomenadione 2 mg by mouth weekly') to remove the length cue."
+  }
+ },
  "ai-mcq-c77ff892": {
   "hash": "2afe1cfa",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -2026,6 +4237,49 @@
     "The doses and the explanation are accurate and deal with each distractor"
    ],
    "suggestion": "If you want, swap ceftriaxone for a more tempting distractor such as non-invasive ventilation or intravenous salbutamol infusion."
+  }
+ },
+ "ai-mcq-c8c8e71f": {
+  "hash": "ec8a881b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:46:51.243Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "Opioid-induced constipation calls for an osmotic softener plus a stimulant laxative (macrogol + senna), which also softens stool to help the fissure heal; bulk-forming laxatives are avoided with opioids, and methylnaltrexone is only used after laxatives fail."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "Opioid-induced constipation is best treated first with an osmotic softener plus a stimulant laxative, and the softer stools also help the fissure heal; bulk-forming agents, docusate alone, as-needed suppositories and peripheral opioid antagonists are less appropriate first-line."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation recommends fibre for the fissure but rejects psyllium for the constipation, which is slightly inconsistent",
+    "'alone' in option D hints that it is incomplete"
+   ],
+   "topic": "General Practice",
+   "verdict": "accept",
+   "reasons": [
+    "The key matches first-line opioid-induced constipation treatment in eTG and in AGA guidance (osmotic plus stimulant laxative)",
+    "The vignette rules out ileus, obstruction and secondary causes without giving away the answer",
+    "The distractors are plausible, the same kind of option, and each is explained"
+   ],
+   "suggestion": "In the explanation, say that dietary fibre can be added once the opioid is stopped, to settle the conflict with option A. Consider removing 'alone' from option D."
   }
  },
  "ai-mcq-cac4a8ab": {
@@ -2113,6 +4367,49 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-cc692f98": {
+  "hash": "d8bd8ad0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:47:14.993Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "The likely cause is acute perinatal asphyxia from a long slow fetal heart rate, and paired umbilical artery and vein gases from the placenta still in the room confirm the acidosis and show the arterial sample is genuine."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "Paired umbilical cord gases, taken from the cord while the placenta is still available, are the way to confirm intrapartum hypoxia-acidosis as the cause of his depressed state at birth."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Base deficit threshold for cooling (≥12 mmol/L) is guideline-specific; many protocols use ≥16 mmol/L",
+    "Stem does not state whether a cord segment was double-clamped, which affects how valid a gas sampled from cord still att"
+   ],
+   "topic": "Neonatology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct and clearly the best option: paired cord gases confirm and grade intrapartum hypoxia-acidosis",
+    "The distractors are homogeneous investigations, and the stem gives clear reasons to rule each one out",
+    "The explanation teaches each option well; the only issue is a base-deficit threshold that varies by guideline"
+   ],
+   "suggestion": "In the explanation, state the hypothermia gas criterion as pH ≤7.0 or base deficit ≥12–16 mmol/L depending on the protocol. In the stem, add that a segment of cord was double-clamped at birth."
+  }
+ },
  "ai-mcq-ced5e26c": {
   "hash": "4683efb8",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -2158,6 +4455,49 @@
    "suggestion": "Relabel A as wrong (the improvement at 60 minutes is likely the adrenaline effect, and discharging now risks the obstruction returning at home), and add a 'D: Correct' entry with the 3-hour observation rationale."
   }
  },
+ "ai-mcq-cef04fb5": {
+  "hash": "e99ad002",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:47:20.036Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "The CSF shows bacterial (probably meningococcal) meningitis, and because he had penicillin before the lumbar puncture, cultures will often be sterile, whereas CSF bacterial PCR still detects DNA from organisms killed by antibiotics."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.88,
+    "reason": "Penicillin given before the lumbar puncture lowers the yield of CSF and blood cultures, while bacterial (e.g. meningococcal) PCR on CSF stays highly sensitive in this case of bacterial meningitis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Per-option explanation mislabels option A as 'Correct' (the text describes B, the PCR key), and gives no rationale for w",
+    "Formatting error: the lead-in runs on from the Gram stain line with no line break ('no organisms seen Which...')"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "revise",
+   "reasons": [
+    "Key (CSF bacterial PCR in pretreated meningitis) is correct and in line with current guidance",
+    "Good, homogeneous distractors that test applied reasoning about yield after antibiotics",
+    "The per-option explanation mislabels A as correct and leaves out A's rationale, which could confuse learners"
+   ],
+   "suggestion": "Relabel the 'A: Correct' line as B. Add a line for A saying that CSF culture should still be sent for susceptibilities but is unlikely to grow after benzylpenicillin given 4 hours earlier. Put a line break before the lead-in question."
+  }
+ },
  "ai-mcq-d268f468": {
   "hash": "3c822f73",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -2199,6 +4539,174 @@
     "Clear explanation that uses the normal ALP/GGT to rule out PSC"
    ],
    "suggestion": "Optionally reword B to 'Colonoscopy from 8 years after symptom onset, with the interval set by risk at that test' so it matches the other options, and soften 'only' to 'chiefly' for PSC in the explanation."
+  }
+ },
+ "ai-mcq-d4ee44ca": {
+  "hash": "e349994f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:47:24.679Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "He has suspected bacterial meningitis and none of the features that call for a CT before lumbar puncture (normal consciousness, no focal deficits, no swollen optic discs, no seizure, not immunocompromised, normal clotting), so lumbar puncture should be done promptly."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "This is suspected bacterial meningitis with no reason to do CT before LP (GCS 15, no focal signs, no papilloedema, no seizures, normal clotting, not immunocompromised), so lumbar puncture should be done now."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation labels option A as 'Correct' and gives B's reasoning under A; no rationale is given for why CT (A) is wrong"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "revise",
+   "reasons": [
+    "Key B is correct: the stem rules out every reason to do CT before LP",
+    "The explanation mislabels option A as correct and never says why CT is wrong",
+    "The stem and distractors are well built, and CT before LP is a high-yield trap"
+   ],
+   "suggestion": "Rewrite the option A rationale to say that CT is not needed before LP because there is no contraindication (GCS 15, no focal signs, seizure, papilloedema or immunocompromise) and would only delay CSF diagnosis. Put B's reasoning on its own line."
+  }
+ },
+ "ai-mcq-d58bd69f": {
+  "hash": "ec05f26e",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:47:41.379Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "Her Wells score is 1.5 (PE unlikely, since pneumonia is the more likely diagnosis and she was mobile in hospital), and her D-dimer of 0.63 is below the age-adjusted cut-off of 0.71, so PE is excluded without imaging."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "With a Wells score of 1.5 (PE unlikely) and a D-dimer of 0.63, below her age-adjusted cut-off of 0.71 mg/L FEU, PE is excluded and no further testing is needed."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation wrongly cites prophylactic enoxaparin as a reason she was not immobilised; anticoagulant prophylaxis has no ",
+    "Option E (repeat D-dimer in 24 h) is a weak distractor"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: Wells 1.5 (PE unlikely) and a D-dimer of 0.63 is below the age-adjusted cut-off of 0.71, so PE is excluded per ADJUST-PE",
+    "The answer still holds if the subjective Wells items are scored more harshly",
+    "Tests the age-adjusted D-dimer, a high-yield and clinically important concept"
+   ],
+   "suggestion": "Remove enoxaparin as a reason for 'not immobilised' in the explanation and rely only on her daily walking. Consider replacing option E with a more plausible distractor, such as 'Repeat D-dimer using a high-sensitivity assay' or 'Echocardiography'."
+  }
+ },
+ "ai-mcq-d658ba0b": {
+  "hash": "bd9c77c5",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:47:47.198Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "A soft, fluctuant swelling on both sides of the septum that does not shrink with decongestant is a septal hematoma, which needs same-day incision and drainage with packing to prevent cartilage necrosis, abscess and saddle nose."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "A soft, fluctuant septal swelling on both sides that does not shrink with decongestant is a septal hematoma, which needs same-day incision and drainage with packing on both sides to prevent cartilage death and saddle-nose deformity."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Otorhinolaryngology",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: a bilateral septal haematoma needs incision, drainage and packing the same day",
+    "The distractors are plausible and of the same kind; B, C and E are tempting traps",
+    "The explanation clearly says why the key is right and why each distractor is wrong"
+   ],
+   "suggestion": "Optionally, make D more tempting, for example 'Bilateral anterior nasal packing alone without incision'."
+  }
+ },
+ "ai-mcq-d68fa4b0": {
+  "hash": "36fd25a3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:47:50.688Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.82,
+    "reason": "A healthy, non-high-risk adult with uncomplicated influenza A, presenting more than 48 hours after symptom onset, should get supportive care and stay away from others rather than antivirals, antibiotics or imaging."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "A healthy, non-high-risk adult with uncomplicated PCR-confirmed influenza A who presents more than 48 hours after symptom onset needs supportive care and self-isolation, not antivirals, antibiotics or imaging."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Distractor E is weak, since the PCR already excludes SARS-CoV-2",
+    "Option C bundles several measures, so it is less homogeneous than the single-intervention distractors"
+   ],
+   "topic": "General Practice",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct under eTG and CDC: she is a healthy, low-risk outpatient with uncomplicated influenza, 72 hours after onset",
+    "The vignette is well built, with risk factors, timing and vital signs all clearly set out to support the decision",
+    "The explanation is thorough and covers every distractor, plus safety-netting advice"
+   ],
+   "suggestion": "You could swap E for a more plausible distractor, such as oseltamivir prophylaxis for household contacts or a sick certificate with a return-to-work clearance test, so the options test more."
   }
  },
  "ai-mcq-d95ed2a4": {
@@ -2283,6 +4791,49 @@
     "Only a minor internal inconsistency in the explanation"
    ],
    "suggestion": "In the explanation for B, replace 'could make his dehydration worse' with a point that fits a well-hydrated patient, such as 'is unnecessary and burdensome when glucosuria already explains the polyuria'."
+  }
+ },
+ "ai-mcq-e2e442b1": {
+  "hash": "4152c8ae",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:48:01.850Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.88,
+    "reason": "Typical migraine with aura, a normal exam and no red flags mean no imaging is needed, so a headache diary is the right next investigation to confirm the diagnosis, track how often attacks happen and how much painkiller she uses, and identify triggers."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "This is typical migraine with aura with no red flags and a normal examination, so imaging is not indicated and a headache diary is the appropriate next step to confirm the pattern and guide management."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Heterogeneous options: the key is the only non-test option, so a test-wise student could pick it as the odd one out",
+    "Calling a symptom diary an 'investigation' is a slight stretch"
+   ],
+   "topic": "Neurology",
+   "verdict": "accept",
+   "reasons": [
+    "Classic ICHD-3 migraine with aura with no red flags; the question tests a high-yield 'don't image' principle",
+    "Distractors are plausible and each is correctly ruled out by stem details (normal fundi, copper IUD, aura characteristics)",
+    "Explanation is thorough and accurate"
+   ],
+   "suggestion": "Reword the lead-in to 'most appropriate next step' and use options of the same kind (e.g. reassurance plus a diary against MRI, CT, CT venography and lumbar puncture), so the key is not the only non-test option."
   }
  },
  "ai-mcq-e3b1c7c7": {
@@ -2411,6 +4962,91 @@
    "suggestion": "Relabel the explanation so C is marked correct and A (CXR), B (blood gas), D (FBC/CRP) and E (spirometry) each have their own rationale, adding why FBC/CRP doesn't change management. You could also make the options more alike, e.g. add another clinical-assessment option such as a formal severity score, or word C as a structured reassessment of severity at 20 minutes and 1 hour."
   }
  },
+ "ai-mcq-e5286bdf": {
+  "hash": "80fa1309",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:48:14.745Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Microcytic anaemia with ferritin of 16 µg/L despite a raised CRP (ferritin rises with inflammation) plus low transferrin saturation means absolute iron deficiency alongside the inflammation of likely Crohn's disease."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "A ferritin of 16 µg/L despite a CRP of 28 mg/L, with transferrin saturation of 8%, microcytosis and a raised platelet count, shows absolute iron deficiency alongside active inflammation (likely Crohn's disease), not anaemia of inflammation alone."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "B and E (macrocytic causes) are weak because the MCV of 76 fL rules them out at once",
+    "Stem includes some unnecessary detail (pre-admission setting, diet) that adds length without testing much"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: a ferritin of 16 with a CRP of 28 and transferrin saturation of 8% shows absolute iron deficiency in active Crohn's disease",
+    "The main competitor (anaemia of inflammation) is a plausible distractor and is clearly beaten by the data",
+    "The explanation is accurate and current (ECCO ferritin thresholds, IV iron preferred) and covers each distractor"
+   ],
+   "suggestion": "Optionally, replace B or E with a microcytic alternative such as 'Mixed iron deficiency and anaemia of inflammation with replete stores' or 'Sideroblastic anaemia' so the options are more uniform. Another option is to turn the item into a next-step question (IV vs oral iron) to test management at a higher level."
+  }
+ },
+ "ai-mcq-e59f8c20": {
+  "hash": "bd88b87d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:48:20.203Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "Progressive dysphagia to solids with weight loss and iron-deficiency anaemia in an older man with long-standing reflux and a smoking history strongly suggests oesophageal cancer, so urgent gastroscopy with biopsy is needed to confirm it."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "Worsening difficulty swallowing solids with weight loss and iron-deficiency anaemia, in a man with long-standing reflux, obesity and a smoking history, suggests oesophageal cancer, so urgent endoscopy with biopsy is the first test."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key is the longest option and the only one with a qualifier ('urgent') and two parts ('and biopsy'), which is a mild cue"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "accept",
+   "reasons": [
+    "Classic alarm-feature dysphagia vignette; urgent endoscopy with biopsy is clearly the best next test",
+    "Distractors are plausible investigations of the same kind, each clearly wrong for a stated reason",
+    "Explanation is accurate and addresses every option"
+   ],
+   "suggestion": "Optionally shorten the key to 'Gastroscopy' (or add similar qualifiers to the other options) to remove the length and 'urgent' cue."
+  }
+ },
  "ai-mcq-e5f0f904": {
   "hash": "41ffa8dc",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -2453,6 +5089,91 @@
     "Only minor item-writing weaknesses"
    ],
    "suggestion": "Add 'sonographic Murphy's sign is negative' to the ultrasound findings so the explanation matches the stem. Consider replacing the hepatitis A IgG distractor with a more tempting one, such as hepatitis E serology or a dengue NS1 test."
+  }
+ },
+ "ai-mcq-e8bbd23c": {
+  "hash": "908af4cd",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:48:23.545Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "He has paroxysmal AF with a CHA2DS2-VASc score of 3 (age 65–74, hypertension, diabetes), so anticoagulation is indicated, and a DOAC such as apixaban is preferred over warfarin; aspirin should not be used."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.92,
+    "reason": "He has paroxysmal AF with a CHA2DS2-VASc score of 3 (age 65-74, hypertension, diabetes), so oral anticoagulation is indicated, and a DOAC such as apixaban is preferred over warfarin."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Options not in alphabetical or logical order"
+   ],
+   "topic": "Cardiology",
+   "verdict": "accept",
+   "reasons": [
+    "Paroxysmal AF with CHA2DS2-VA 3 clearly needs a DOAC, which fits Australian, ESC and AHA guidance",
+    "Distractors are plausible and each one tests a common misconception (aspirin, rate control, rhythm control before an echo, warfarin over a DOAC)",
+    "The explanation is accurate and covers the alcohol and bleeding-risk nuance and why each distractor is wrong"
+   ],
+   "suggestion": "Optionally list the options in alphabetical order (Apixaban, Aspirin, Digoxin, Flecainide, Warfarin)."
+  }
+ },
+ "ai-mcq-e8fe960a": {
+  "hash": "af53c57d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:48:38.447Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "Negative HBsAg, negative total anti-HBc and non-protective anti-HBs (<10 mIU/mL) mean he has never been infected and is not immune, so he is susceptible."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "Negative HBsAg and total anti-HBc with non-protective anti-HBs (<10 mIU/mL) mean no current or past infection and no vaccine immunity, so he is susceptible."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Much of the stem (hepatitis A LFTs and IgM) is window dressing that doesn't affect the hepatitis B answer",
+    "Formatting: the lead-in runs on from the last lab value with no line break ('not detected Which')"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: all three markers are negative or non-protective, so he is susceptible and not infected",
+    "Each distractor is a realistic serological state and is ruled out by one specific marker",
+    "The explanation is accurate, explains each distractor, and covers repeat testing during the incubation period and vaccination"
+   ],
+   "suggestion": "Put the lead-in question on its own line. You could also cut some of the hepatitis A detail so the item focuses on the hepatitis B serology."
   }
  },
  "ai-mcq-edf0a236": {
@@ -2542,6 +5263,49 @@
    "suggestion": "You could change 'confirmed on Western blot' to 'confirmed on a supplementary HIV-1/2 differentiation assay' so the stem matches current testing."
   }
  },
+ "ai-mcq-eea747f5": {
+  "hash": "6717d450",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:48:50.275Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "Haemodynamically stable PE with no RV dysfunction or troponin rise needs therapeutic anticoagulation, so prophylactic LMWH should be replaced by weight-based enoxaparin 1 mg/kg twice daily."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "This is a stable PE that is not high risk (normal troponin, RV/LV ratio 0.8), so the right step is to replace prophylactic heparin with treatment-dose LMWH; thrombolysis is not indicated and is risky after surgery, an IVC filter is only for patients who cannot be anticoagulated, and warfarin needs h"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Options B and D are a near-identical pair (switch vs add-on), which cues the key",
+    "Option E's wording 'without heparin cover' tells the student it is wrong"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct and the vignette is complete and realistic for non-high-risk PE after surgery",
+    "Two distractors (D and E) are cued by their wording and easy to rule out",
+    "The explanation is accurate and covers every option"
+   ],
+   "suggestion": "Replace D with another plausible option, such as 'Continue prophylactic enoxaparin and repeat imaging in 48 hours' or 'Catheter-directed thrombolysis'. Reword E without the self-flagging phrase, or replace it with 'Unfractionated heparin infusion with an aPTT-guided nomogram'."
+  }
+ },
  "ai-mcq-eebd5d1a": {
   "hash": "5b5a0cf2",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -2583,6 +5347,49 @@
     "The vignette is strong and the distractors are plausible and of the same kind"
    ],
    "suggestion": "Change the letters in the explanation paragraph to monitoring (A), vaccination (B) and ALT threshold (C). Optionally shorten option D, e.g. \"Start oral tenofovir before infliximab\", to remove the length cue."
+  }
+ },
+ "ai-mcq-f2021b21": {
+  "hash": "9dc0c390",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:48:54.239Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.85,
+    "reason": "Gradual breathlessness during a run much longer than his training, resolving within 15 minutes, with normal examination, ECG and spirometry, points to normal exertional limitation rather than bronchoconstriction (which typically peaks after exercise), PE or cardiomyopathy."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.88,
+    "reason": "Gradual breathlessness late in a run far beyond his training, which settled quickly, with no red flags and normal examination, ECG and spirometry, is physiological, so reassurance and a slower build-up are appropriate."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Extensive list of pertinent negatives somewhat cues the 'no further action' answer",
+    "Prior VTE history not explicitly stated, though PERC negativity is claimed"
+   ],
+   "topic": "General Practice",
+   "verdict": "accept",
+   "reasons": [
+    "Key is clearly correct; physiological exertional dyspnoea with normal workup",
+    "Distractors represent realistic over-investigation/over-treatment errors",
+    "Explanation addresses each option and teaches safety-netting"
+   ],
+   "suggestion": "Optionally add 'no previous venous thromboembolism' to the stem so the PERC claim is fully supported."
   }
  },
  "ai-mcq-f8ee9f83": {
@@ -2627,6 +5434,49 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-fab36a70": {
+  "hash": "f700d3ed",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:49:10.124Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.8,
+    "reason": "Too much oxygen has worsened her chronic carbon dioxide retention, so the first step is to titrate down to controlled 28% Venturi oxygen (target 88-92%) and repeat the blood gas; non-invasive ventilation comes next if the acidosis persists, never at 15 L/min, and stopping oxygen abruptly or intubati"
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "This is CO2 retention caused by too much oxygen in a chronic CO2 retainer, so the first step is to step down to controlled oxygen (28% Venturi, saturations 88–92%) and repeat the blood gas, not to stop oxygen suddenly; NIV is added if acidosis persists."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option C's qualifier 'at the current oxygen flow rate' is a cue that makes it easy to rule out",
+    "Explanation calls the respiratory rate 'falling' but the stem gives no earlier value"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches TSANZ/BTS guidance: step oxygen down to 28% Venturi with a target of 88-92%, then repeat the gas",
+    "Distractors are plausible, all management steps, and each is clearly wrong for a stated reason",
+    "Clear vignette with an earlier gas showing chronic CO2 retention; explanation is thorough and teaches well"
+   ],
+   "suggestion": "Optionally give an earlier respiratory rate at triage (e.g. 28/min) so the 'falling respiratory rate' clue is supported by the stem."
+  }
+ },
  "ai-mcq-fccc85c9": {
   "hash": "e1e2d0fd",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -2669,6 +5519,89 @@
     "Management statement on duct imaging is overstated compared with ASGE risk stratification"
    ],
    "suggestion": "Change 'Option B is wrong' to 'Option C is wrong' in the explanation. Soften the management line to say the risk of a duct stone is low to intermediate, so an intraoperative cholangiogram or MRCP may be considered if the tests rise or fail to settle."
+  }
+ },
+ "ai-mcq-fce67b0e": {
+  "hash": "47bd7fac",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:49:08.434Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "She is trying to conceive and won't use contraception, so the teratogens methotrexate, leflunomide and mycophenolate and the poorly studied tofacitinib are ruled out; sulfasalazine is safe in pregnancy and works as a disease-modifying drug (give it with folic acid)."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "She is actively trying to conceive, so methotrexate, leflunomide, mycophenolate and tofacitinib are ruled out, and sulfasalazine (with folic acid) is the pregnancy-compatible DMARD of choice."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Mycophenolate is a weak distractor as it is not a standard RA DMARD",
+    "Minor irrelevant stem details (occupation, daughter)"
+   ],
+   "topic": "Rheumatology",
+   "verdict": "accept",
+   "reasons": [
+    "Sulfasalazine is the only pregnancy-compatible csDMARD among options, consistent with ACR and Australian guidance",
+    "Each distractor is correctly excluded by teratogenicity or positioning",
+    "Explanation is accurate and teaches preconception planning well"
+   ],
+   "suggestion": ""
+  }
+ },
+ "ai-mcq-fd43ae8c": {
+  "hash": "54fa8e5d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T11:49:28.732Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "Stable thyrotoxic AF in Graves' disease is treated with a beta-blocker for rate control plus carbimazole for the thyrotoxicosis; anticoagulation is not needed at CHA2DS2-VASc 1 (sex alone), and amiodarone, radioiodine with active eye disease, and cardioversion while thyrotoxic are all inappropriate."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "This is a stable patient with Graves' disease and thyrotoxic atrial fibrillation, so the first step is rate control with a non-selective beta-blocker plus carbimazole; the AF often returns to sinus rhythm once she is euthyroid, and her CHA2DS2-VASc score of 1 (female sex only) does not call for rout"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Endocrinology",
+   "verdict": "accept",
+   "reasons": [
+    "Clear Graves' thyrotoxicosis with stable thyrotoxic AF; beta blocker plus thionamide is clearly best",
+    "Homogeneous, plausible distractors, each wrong for a distinct teachable reason",
+    "Thorough explanation including CHA2DS2-VA reasoning and agranulocytosis safety-netting"
+   ],
+   "suggestion": ""
   }
  },
  "ai-mcq-fddeed86": {

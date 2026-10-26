@@ -1,6 +1,6 @@
 # The MCQ pool: creation, evaluation and selection
 
-A standard pool of single-best-answer questions (`public/mcq/pool.json`) that the duel plays (`public/duel/pack.json` is built from it). Questions arrive from four places. Each is checked in code against the NBME item-writing guide, reviewed by a model that does not know where it came from, scored against a bar calibrated on official USMLE Step 2 CK samples, and admitted only if it clears that bar. Every question carries a tag saying where it came from, and no step rewrites it. The numbers are in `docs/mcq-evals.md`.
+A standard pool of single-best-answer questions (`public/mcq/pool.json`) that the duel plays (`public/duel/pack.json` is built from it). Questions arrive from four places. Each is checked in code against the NBME item-writing guide, reviewed by a model that does not know where it came from, scored against a bar calibrated on official USMLE Step 2 CK samples, and admitted only if it clears that bar. Every question carries a tag saying where it came from, and no step rewrites it. The numbers are in `docs/mcq-evals.md`, and the set as a whole (formats, cues, duplicates, what the review said) in `docs/mcq-audit.md`.
 
 ```
  stations ──────────── station questions (amsa / ai) ─┐
@@ -90,7 +90,7 @@ The judge never sees provenance: every kind gets the same prompt. Judge score (0
 Then, over everything that passed, best first:
 
 6. **Dedupe**: a near-duplicate of an admitted question is refused, with the id it duplicates. Kinds go in the order user, usmle-resource, amsa, ai, so a user's question is never displaced by a copy from a bank.
-7. **Quotas and topics**: user questions that pass are always kept, with no cap. Other kinds have caps (`QUOTA`: usmle-resource 160, amsa 110, ai 110), and no topic may hold more than 15% of the non-user pool (at least 6). A question over a cap is **reserve**: it passed and takes a place when one drops out.
+7. **Quotas and topics**: user questions that pass are always kept, with no cap. Other kinds have caps (`QUOTA`: usmle-resource 160, amsa 110, ai 110, and ai-rapid 80 for AI-written questions in the Rapid form, so short questions and vignettes do not crowd each other out), and no topic may hold more than 15% of the non-user pool (at least 6). A question over a cap is **reserve**: it passed and takes a place when one drops out.
 
 `data/mcq/selection.json` holds every decision with its reasons; `node scripts/mcq-pool.mjs --why <id>` prints one. `public/mcq/status.json` holds one line per submitted question. `npm test` fails when the pool on disk is not what the candidates make now.
 
@@ -110,7 +110,8 @@ The e2e (`scripts/e2e/smoke.mjs`) runs the flow at 393, 320 and 1280 px against 
 
 - **Exemplars**: the three MedQA Step 2&3 items that share the most subject words with the station and have no major flaw. They are examples of style only.
 - **Draft**: one five-option question that tests management, investigation, interpretation or a complication. The station's own question already asks the diagnosis, so the focus rotates. The vignette is 80–160 words (the MedQA Step 2&3 median is 137), with units, Australian guidelines, and a reason for every option.
-- **Checks**: one revision if a major or block flaw remains, then the checks again. A question still failing goes to `drafts/mcq/` and is not kept.
+- **Rapid form** (`--form rapid`, 2026-10-26): a compact case of 18 to 32 words before a short lead-in, five options of one to four words, at most 52 words in all, so it reads in about 10 s and fits the duel's Rapid 15 s format. It is tagged `form:rapid`, its stem-length floor is 15 words, not 30, and it counts against its own quota.
+- **Checks**: one revision if a major or block flaw remains, if the key is the single longest option (a cue: in the pool of 2026-10-26 the AI-written key was the longest 38% of the time against 20% by chance), or if a Rapid question does not fit 15 s by the duel's own reading rule. Then the checks run again. A question still failing goes to `drafts/mcq/` and is not kept.
 
 Each kept question is `ai` with `generator: { how, version, basis: [station, osce-<station>], exemplars, model }`, and its key is spread by its id's hash. It still has to pass the review (`mcq-judge.mjs --kind ai`) and the AI bar before it reaches the pool.
 
@@ -124,27 +125,18 @@ Each kept question is `ai` with `generator: { how, version, basis: [station, osc
 
 ```
 node scripts/import-benchmarks.mjs                       # data/benchmarks from the downloads
-node scripts/generate-mcq.mjs --sample 64                # new ai questions -> data/mcq/generated.json
+node scripts/generate-mcq.mjs --sample 64 [--form rapid] # new ai questions -> data/mcq/generated.json
 node scripts/mcq-submissions.mjs [export.json]           # students' questions -> data/mcq/submissions.json
 node scripts/mcq-judge.mjs [--kind user,ai] [--tag src:medqa --sample 50]   # reviews -> data/mcq/verdicts.json
 node scripts/mcq-judge.mjs --bench <quest-ai.jsonl> --out <outside the repo> # the official samples
 node scripts/mcq-evals.mjs [--wrong-key 16]              # calibration.json, evals.json, docs/mcq-evals.md
 node scripts/mcq-pool.mjs [--why <id>]                   # the pool, status.json, selection.json
 npm run duel-pack                                        # the duel's questions from the pool
+node scripts/mcq-audit.mjs                               # the set as a whole -> data/mcq/audit.json, docs/mcq-audit.md
 ```
 
-## Package follow-up (Pup Duel, `packages/pup-duel/` in Optimus)
+## In the duel (Pup Duel, `packages/pup-duel/` in Optimus, vendored)
 
-The vendored duel knows only `origin: 'ai' | 'human'`. Med-OS now writes `source` (`user`, `ai`, `amsa`, `usmle-resource`) on every question in `pack.json`, but `normQuestion` drops it. To show every source chip:
-
-1. `duel/pack.mjs` `normQuestion`: after the origin line, add
-   `if (['user', 'ai', 'amsa', 'usmle-resource'].includes(q.source)) out.source = q.source;`
-   and document `source?` in the header comment's question shape.
-2. `duel/core.mjs` `makeSetup`: after `if (q.origin) out.origin = q.origin;`, add `if (q.source) out.source = q.source;`. The SQL `pup_challenge` needs no change (it checks options, answer, secs and size only).
-3. `ui/duel.mjs`: one map, `const SOURCE_TAG = { ai: 'AI-written', amsa: 'AMSA · AI-written', user: 'Student-written', 'usmle-resource': 'USMLE resource' };` and a `tagOf = q => SOURCE_TAG[q.source] || (q.origin === 'ai' ? 'AI-written' : '')`. Then:
-   - in the question card (where `tag.textContent = q.origin === 'ai' ? …` is set, line 740 as vendored now): `const t = tagOf(q); tag.textContent = t; tag.hidden = !t;`
-   - in `openReview` (the `const ai = st.setup.questions.some(…)` line, 567 now): replace the one sheet-level AI tag with a tag per question. In each `li`, prepend `<span class="pd-qtag"></span>` with `tagOf(q)` as its text (hidden when empty), so a mixed duel says which question came from where.
-4. **Reading time**: pool questions are Step 2 CK vignettes (the pack's stems run to 1200 characters, about 180 words). The lobby offers 15, 20 or 30 seconds. Add 45 and 60, or scale each question's time by its stem's length, e.g. `secs + Math.ceil(words / 4)`. That would need `secs` per question in the setup, plus the same in `pup_challenge` and the server-core rules.
-5. **Setup size**: `RULES.maxSetupBytes` (and the SQL's 65,536) could in principle be exceeded by 15 questions at every field's limit (about 7 KB each). Measured on 2026-10-26 over 2,000 random 15-question duels from the 793-question pack, none came near it: the largest was 30,497 bytes. So `makeSetup` has no trimming step; if longer questions ever push a deal past half the cap, it should drop `notes`, then trim `why`, before giving up.
-
-Then vendor again (`scripts/vendor.mjs`). Med-OS needs no change: `pack.json` already carries `source`.
+1. **Source tags**: the package keeps each question's `source` (`user`, `ai`, `amsa`, `usmle-resource`) through `normQuestion` and `makeSetup`, and tags it in the match's top bar and on each review line (Student, AI-written, AMSA, USMLE). A pack question without one is tagged AI-written when its origin is ai.
+2. **Answer-time formats** (2026-10-26): Rapid 15 s, Standard 30 s, Long case 1.5 min, the whole time a question shows. A question fits when reading it (4 words a second past 12) takes at most two thirds of that; a duel deals the fitting questions first and tops a short pick up with the shortest of the rest, each given time to read. `node scripts/mcq-audit.mjs` reports how many pool and pack questions fit each format, per topic (`docs/mcq-audit.md`). Step 2 CK vignettes (about 150 words) fit only Long case; Rapid needs short questions.
+3. **Setup size**: `RULES.maxSetupBytes` (and the SQL's 65,536) could in principle be exceeded by 15 questions at every field's limit (about 7 KB each). Measured on 2026-10-26 over 2,000 random 15-question duels from the 793-question pack, none came near it: the largest was 30,497 bytes. So `makeSetup` has no trimming step; if longer questions ever push a deal past half the cap, it should drop `notes`, then trim `why`, before giving up.

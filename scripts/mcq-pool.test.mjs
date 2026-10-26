@@ -10,7 +10,10 @@ import { good, GOOD } from './mcq.test.mjs';
 import { judgeItem, judgeScore, judgeGates, verdictFor, solveText, rubricText, cleanRubric, SPECIALTIES } from './lib/mcq-judge.mjs';
 import { assess, select, statusOf, quality, poolItem } from './lib/mcq-select.mjs';
 import { mergeSubmissions, submissionsFrom, remoteSubmissions } from './lib/mcq-intake.mjs';
-import { writeMcq, toItem, exemplarsFor, stationBrief } from './lib/mcq-generate.mjs';
+import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM } from './lib/mcq-generate.mjs';
+import { quotaOf } from './lib/mcq-select.mjs';
+import { checkLength } from '../public/js/mcq/flaws.mjs';
+import { fits } from '../public/js/vendor/pup-duel/duel/core.mjs';
 import { spreadKey, stationItem, benchmarkItem, stationItems } from './lib/mcq-sources.mjs';
 import { cleanItem, contentHash, LETTERS } from '../public/js/mcq/schema.mjs';
 import { flawReport } from '../public/js/mcq/flaws.mjs';
@@ -168,6 +171,44 @@ test('generation with a stub: drafted from the station and exemplars, revised on
   assert.ok(exemplarsFor(station, bench).length <= 3); assert.ok(!stationBrief(station).includes('<p>'));
 });
 
+test('the Rapid form: a short case that fits the duel\'s 15 s, written to its own brief, tagged, revised when it runs long or the key is longest', async () => {
+  const bench = [cleanItem(good({ id: 'medqa-ex1' }))];
+  const short = { stem: 'A 67-year-old man has crushing central chest pain for 40 minutes. His ECG shows ST elevation in leads II, III and aVF.', ask: 'Most appropriate next step?',
+    options: ['Primary PCI', 'Oral aspirin alone', 'CT pulmonary angiogram', 'Serial troponins', 'Outpatient stress test'], answer: 'A', explanation: 'Inferior STEMI within 12 hours: primary PCI.', why: ['right', 'w1', 'w2', 'w3', 'w4'], topic: 'Cardiology' };
+  const long = { ...short, stem: `${short.stem} ${'He has a long and detailed history that a fifteen second round cannot hold. '.repeat(3)}` };
+  const asks = [];
+  const ask = async a => { asks.push(a); return { value: a.label.endsWith('revise') ? short : long, model: 'stub-model' }; };
+  const r = await writeMcq(station, 'management', { bench, ask, how: 'stub', now: '2026-10-26T12:00:00Z', form: 'rapid' });
+  assert.equal(asks[0].system, RAPID_SYSTEM); assert.match(asks[0].content, /short \(15-second\) question/);
+  assert.match(asks[1].content, /to read at 4 words a second/, 'the long draft is sent back with its reading time');
+  assert.equal(r.ok, true); assert.equal(r.rounds, 2);
+  assert.ok(r.item.tags.includes('form:rapid'));
+  assert.ok(fits({ stem: `${r.item.stem} ${r.item.ask}`, options: r.item.options }, 15), 'what is kept fits 15 s as the duel reads it');
+  assert.equal(checkLength(r.item).pass, true, 'a rapid case is not a too-short vignette');
+  assert.equal(checkLength({ ...r.item, tags: [] }).pass, false, 'the same stem as a Step 2 vignette is too short');
+  const v = toItem(short, { st: station, focus: 'management', ex: [], how: 'stub', now: '2026-10-26T12:00:00Z' });
+  assert.notEqual(v.id, r.item.id, 'a rapid question and a vignette of the same station, focus and time are different questions');
+  assert.ok(!v.tags.some(t => t.startsWith('form:')));
+  assert.equal(blocking(v, 'vignette').some(p => /to read/.test(p.reason)), false, 'a vignette has no time to fit');
+  assert.notEqual(WRITER_SYSTEM, RAPID_SYSTEM);
+});
+test('the key as the single longest option is sent back for revision; a tie is not a cue', () => {
+  const q = cleanItem(good({ id: 'medqa-kl' }));
+  const longKey = { ...q, options: q.options.map((o, i) => (i === q.answer ? `${o} with a much longer and more careful qualifier` : o)) };
+  assert.equal(keyLongest(longKey), true);
+  assert.ok(blocking(longKey).some(p => /longest option/.test(p.reason)));
+  const tie = { ...q, options: q.options.map(() => 'same length') .map((o, i) => `${o}${i}`) };
+  assert.equal(keyLongest(tie), false, 'every option as long: no cue');
+});
+test('the Rapid quota: AI-written Rapid questions count against their own cap, not the vignettes\'', () => {
+  const rapid = { kind: 'ai', q: { tags: ['generated', 'form:rapid'] } }, vig = { kind: 'ai', q: { tags: ['generated'] } };
+  assert.equal(quotaOf(rapid), 'ai-rapid'); assert.equal(quotaOf(vig), 'ai'); assert.equal(quotaOf({ kind: 'user', q: { tags: ['form:rapid'] } }), 'user');
+  const ais = [0, 1, 2, 3].map(n => distinct(`ai-v${n}`, 'ai', n + 20)), rapids = [0, 1, 2].map(n => ({ ...distinct(`ai-r${n}`, 'ai', n + 30), tags: ['generated', 'form:rapid'] }));
+  const all = [...ais, ...rapids], verdicts = Object.fromEntries(all.map(q => [q.id, verdict(q)]));
+  const { pool, decisions } = select(all, { verdicts, bars: BARS, quota: { ai: 2, 'ai-rapid': 2 }, topicShare: 1 });
+  assert.equal(pool.filter(q => q.tags.includes('form:rapid')).length, 2); assert.equal(pool.filter(q => !q.tags.includes('form:rapid')).length, 2);
+  assert.ok(decisions.some(d => /AI-written Rapid quota of 2 is full/.test(d.reasons[0] || '')));
+});
 test('the station writer: kind amsa or ai by the station, the key spread with its notes, the station as basis', () => {
   const { item: a } = stationItem(station, [station]);
   assert.equal(a.provenance.kind, 'amsa'); assert.equal(a.provenance.source.url, 'https://amsameded.org.au/x'); assert.deepEqual(a.provenance.generator.basis, ['amsa-900']);

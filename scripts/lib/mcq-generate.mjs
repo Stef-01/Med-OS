@@ -13,8 +13,14 @@ import { cleanItem, fnv, LETTERS } from '../../public/js/mcq/schema.mjs';
 import { flawReport, content } from '../../public/js/mcq/flaws.mjs';
 import { SPECIALTIES } from './mcq-judge.mjs';
 import { spreadKey } from './mcq-sources.mjs';
+import { fits, readSecs } from '../../public/js/vendor/pup-duel/duel/core.mjs';
 
-export const GEN_VERSION = 'generate-mcq-1';
+export const GEN_VERSION = 'generate-mcq-2';
+/* the form a question is written in (founder 2026-10-26: questions that fit the duel's 15 s, 30 s and 1.5 min formats):
+   vignette  a Step 2 CK case, 80 to 160 words before the lead-in: Long case, or Standard when it is short
+   rapid     a compact case a student reads in about 10 s (at most 52 words with its options), for Rapid 15 s; it must
+             fit 15 s by the duel's own rule (vendored pup-duel fits), checked here before it is kept */
+export const FORMS = Object.freeze({ vignette: { secs: null }, rapid: { secs: 15 } });
 export const FOCUS = Object.freeze({
   management: 'the most appropriate next step in management (or the most appropriate treatment)',
   investigation: 'the most appropriate next investigation, or the test most likely to confirm the diagnosis',
@@ -46,10 +52,19 @@ export const WRITER_SYSTEM = `You write single-best-answer questions in the styl
 - is a clinical vignette in this order: age and sex, setting, presenting complaint and its history, relevant past history and medicines, examination findings (vital signs with units), then investigation results (with units and, where it helps, reference ranges);
 - is 80 to 160 words before the lead-in (the Step 2 CK median is about 140), with only the findings the question needs;
 - ends with a lead-in that is one closed question a student could answer with the options covered ("Which of the following is the most appropriate next step in management?");
-- has exactly five options of the same kind (all diagnoses, all drugs, all tests), similar in length and grammar, none "all/none of the above", no negatives, no absolute words, no word of the key repeated from the stem;
+- has exactly five options of the same kind (all diagnoses, all drugs, all tests), similar in length and grammar, the key never the longest, none "all/none of the above", no negatives, no absolute words, no word of the key repeated from the stem;
 - has one answer that is clearly best by current Australian guidelines (eTG, RCH, RANZCOG, state health guidelines) and four distractors a weaker student would pick, each wrong for a clear reason;
 - has an explanation that says why the key is right and a one-sentence reason why each other option is wrong.
 Write a new patient: do not copy the station's script, and do not copy the example questions; they show the style only. Plain text, no markup.`;
+export const RAPID_SYSTEM = `You write short single-best-answer questions for a 15-second quiz round, for Australian medical students, in the spirit of USMLE Step 2 Clinical Knowledge and the NBME item-writing guide. Each question:
+- is a compact clinical case of 18 to 32 words before the lead-in: age and sex, then the presenting problem and only the one or two findings that decide the answer (a vital sign or result with its unit if it is one of them);
+- ends with a short closed lead-in ("Most likely diagnosis?", "Most appropriate next step?", "Which drug is first line?");
+- has exactly five options of the same kind, each one to four words, similar in length, the key never the longest, none "all/none of the above", no negatives, no absolute words;
+- can be read with its options in about ten seconds: at most 52 words in all;
+- has one answer that is clearly best by current Australian guidelines (eTG, RCH, RANZCOG, state health guidelines) and four plausible distractors, each wrong for a clear reason;
+- has an explanation of one to three sentences, and a one-sentence reason why each other option is wrong.
+It tests one decisive piece of clinical reasoning, not trivia. Write a new patient: do not copy the station's script or the examples. Plain text, no markup.`;
+export const systemFor = form => (form === 'rapid' ? RAPID_SYSTEM : WRITER_SYSTEM);
 export const ITEM_SCHEMA = {
   type: 'object', additionalProperties: false, required: ['stem', 'ask', 'options', 'answer', 'explanation', 'why', 'topic'],
   properties: {
@@ -59,14 +74,14 @@ export const ITEM_SCHEMA = {
   }
 };
 const exText = q => `${q.stem}\n${q.options.map((o, i) => `${LETTERS[i]}. ${o}`).join('\n')}\nKey: ${LETTERS[q.answer]}`;
-export function writerPrompt(st, focus, ex) {
-  return `Write one question from this OSCE station. It must test ${FOCUS[focus]}; the station's own question already asks for the diagnosis.
+export function writerPrompt(st, focus, ex, form = 'vignette') {
+  return `Write one ${form === 'rapid' ? 'short (15-second) ' : ''}question from this OSCE station. It must test ${FOCUS[focus]}; the station's own question already asks for the diagnosis.
 
 <station>
 ${stationBrief(st)}
 </station>
 
-Example Step 2 CK questions, for style only:
+Example Step 2 CK questions, for style only${form === 'rapid' ? ' (yours is far shorter)' : ''}:
 ${ex.map((q, i) => `<example_${i + 1}>\n${exText(q)}\n</example_${i + 1}>`).join('\n')}
 
 In "why", give one entry per option in order: for the key, why it is right; for each other option, why it is wrong.`;
@@ -79,28 +94,40 @@ The question (JSON):
 ${JSON.stringify(draft)}`;
 
 /* the model's draft as a question: the key letter to an index, the key spread by the id's hash, the provenance */
-export function toItem(draft, { st, focus, ex, how, model, now }) {
-  const id = `ai-mcq-${fnv(`${st.id}:${focus}:${now}`)}`;
+export function toItem(draft, { st, focus, ex, how, model, now, form = 'vignette' }) {
+  const id = `ai-mcq-${fnv(`${st.id}:${focus}:${form === 'vignette' ? '' : `${form}:`}${now}`)}`;
   const answer = LETTERS.indexOf(String(draft.answer || '').toUpperCase());
   const why = (draft.why || []).map((w, i) => (i === answer ? null : w));
   return cleanItem(spreadKey({
     id, stem: draft.stem, ask: draft.ask, options: draft.options, answer, explanation: draft.explanation, why,
-    topic: draft.topic || st.specialty?.[0] || '', tags: ['generated', `focus:${focus}`, `station:${st.id}`],
+    topic: draft.topic || st.specialty?.[0] || '', tags: ['generated', `focus:${focus}`, `station:${st.id}`, ...(form === 'vignette' ? [] : [`form:${form}`])],
     provenance: { kind: 'ai', source: { name: `Written by AI from Med-OS station ${st.id}`, url: '', licence: 'own' }, createdAt: now,
       generator: { how, version: GEN_VERSION, basis: [st.id, `osce-${st.id}`], exemplars: ex.map(q => q.id), ...(model ? { model } : {}) } }
   }));
 }
-const blocking = q => (q ? flawReport(q).failed.filter(f => f.severity === 'major' || f.severity === 'block') : [{ reason: 'the draft is not a valid question (five options, a key, a stem)' }]);
+/* what a draft must fix before it is kept: a major or block flaw; the key as the single longest option (a cue a
+   test-wise student uses: in the pool of 2026-10-26 the AI-written key was the longest 38% of the time against 20% by
+   chance); and, for a form with a time, reading that does not fit it, as the duel reads it (stem and lead-in, options) */
+export const keyLongest = q => { const L = q.options.map(o => String(o).trim().length), k = L[q.answer]; return L.filter(l => l >= k).length === 1; };
+export const asDuel = q => ({ stem: q.ask ? `${q.stem} ${q.ask}` : q.stem, options: q.options });
+export function blocking(q, form = 'vignette') {
+  if (!q) return [{ reason: 'the draft is not a valid question (five options, a key, a stem)' }];
+  const out = flawReport(q).failed.filter(f => f.severity === 'major' || f.severity === 'block');
+  if (keyLongest(q)) out.push({ reason: 'The key is the longest option: make another option at least as long, or the key shorter, so length gives nothing away.' });
+  const secs = FORMS[form]?.secs;
+  if (secs && !fits(asDuel(q), secs)) out.push({ reason: `It takes ${readSecs(asDuel(q))} s to read at 4 words a second past the first 12: cut the case and the options to at most 52 words in all so it reads in ${Math.floor((secs * 2) / 3)} s.` });
+  return out;
+}
 
 /* one question from one station -> { ok, item, problems, rounds } */
-export async function writeMcq(st, focus, { bench, ask, how = 'api', now = new Date().toISOString(), log = () => {} }) {
-  const ex = exemplarsFor(st, bench);
-  let { value: draft, model } = await ask({ system: WRITER_SYSTEM, content: writerPrompt(st, focus, ex), schema: ITEM_SCHEMA, effort: 'high', label: `${st.id} ${focus} draft` });
-  let item = toItem(draft, { st, focus, ex, how, model, now }), problems = blocking(item), rounds = 1;
+export async function writeMcq(st, focus, { bench, ask, how = 'api', now = new Date().toISOString(), log = () => {}, form = 'vignette' }) {
+  const ex = exemplarsFor(st, bench), system = systemFor(form);
+  let { value: draft, model } = await ask({ system, content: writerPrompt(st, focus, ex, form), schema: ITEM_SCHEMA, effort: 'high', label: `${st.id} ${focus} draft` });
+  let item = toItem(draft, { st, focus, ex, how, model, now, form }), problems = blocking(item, form), rounds = 1;
   if (problems.length) {
     log(`${st.id} ${focus}: revising (${problems.map(p => p.reason).join('; ')})`);
-    ({ value: draft, model } = await ask({ system: WRITER_SYSTEM, content: reviseText(draft, problems.map(p => p.reason)), schema: ITEM_SCHEMA, effort: 'high', label: `${st.id} ${focus} revise` }));
-    item = toItem(draft, { st, focus, ex, how, model, now }); problems = blocking(item); rounds = 2;
+    ({ value: draft, model } = await ask({ system, content: reviseText(draft, problems.map(p => p.reason)), schema: ITEM_SCHEMA, effort: 'high', label: `${st.id} ${focus} revise` }));
+    item = toItem(draft, { st, focus, ex, how, model, now, form }); problems = blocking(item, form); rounds = 2;
   }
   return { ok: !problems.length, item, problems: problems.map(p => p.reason), rounds, draft };
 }

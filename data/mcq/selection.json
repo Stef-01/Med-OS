@@ -6,39 +6,39 @@
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 61,
+   "ai": 110,
    "usmle-resource": 160,
    "amsa": 56
   },
   "status": {
-   "pending": 69,
-   "pool": 277,
-   "rejected": 272,
-   "reserve": 512
+   "pool": 326,
+   "rejected": 279,
+   "reserve": 525
   },
   "topics": {
+   "Paediatrics": 21,
    "Obstetrics": 8,
-   "Gastroenterology": 34,
-   "Infectious Diseases": 23,
-   "Neurology": 25,
-   "Cardiology": 21,
-   "Respiratory Medicine": 12,
-   "Haematology": 4,
-   "Paediatrics": 19,
-   "Neurosurgery": 2,
-   "Emergency Medicine": 9,
+   "Gastroenterology": 42,
+   "Infectious Diseases": 27,
+   "Rheumatology": 10,
+   "Cardiology": 31,
+   "Neurology": 29,
+   "Respiratory Medicine": 15,
+   "General Surgery": 12,
    "Vascular Surgery": 4,
-   "General Surgery": 9,
-   "Gastrointestinal Surgery": 2,
+   "Neurosurgery": 2,
+   "Emergency Medicine": 11,
+   "Otorhinolaryngology": 7,
+   "General Practice": 10,
+   "Gastrointestinal Surgery": 3,
    "Cardiothoracic Surgery": 1,
    "Gynaecology": 12,
-   "General Practice": 8,
-   "Otorhinolaryngology": 5,
+   "Neonatology": 8,
+   "Endocrinology": 9,
    "Trauma Surgery": 6,
    "Ophthalmology": 2,
    "Sexual Health": 4,
-   "Endocrinology": 7,
-   "Neonatology": 6,
+   "Haematology": 4,
    "Dermatology": 2,
    "Orthopaedics": 7,
    "Geriatrics": 3,
@@ -49,7 +49,6 @@
    "Toxicology": 4,
    "Addiction Medicine": 1,
    "Nephrology": 6,
-   "Rheumatology": 6,
    "Critical Care Medicine": 1,
    "Breast/Endocrine Surgery": 1,
    "Professionalism": 1
@@ -67,17 +66,17 @@
    },
    "5": {
     "counts": [
-     7,
      16,
-     12,
-     10,
-     16
+     25,
+     24,
+     20,
+     25
     ],
-    "n": 61,
-    "chi2": 4.98
+    "n": 110,
+    "chi2": 2.82
    }
   },
-  "topicCap": 42,
+  "topicCap": 49,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -92,10 +91,9 @@
   {
    "id": "ai-mcq-015f246d",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-031e86eb",
@@ -107,10 +105,12 @@
   {
    "id": "ai-mcq-0946cddf",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times"
+   ],
+   "quality": 78
   },
   {
    "id": "ai-mcq-0a3ab6c1",
@@ -132,18 +132,16 @@
   {
    "id": "ai-mcq-0f17e735",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-1033fce7",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-1260b0c5",
@@ -155,18 +153,18 @@
   {
    "id": "ai-mcq-13a3f163",
    "kind": "ai",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "passed (quality 90), but the AI quota of 110 is full"
+   ],
+   "quality": 90
   },
   {
    "id": "ai-mcq-1a1ad265",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-1ca98ea1",
@@ -178,17 +176,18 @@
   {
    "id": "ai-mcq-1ee809ad",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 90), but the AI quota of 110 is full"
+   ],
    "quality": 90
   },
   {
    "id": "ai-mcq-1f41fba4",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-1fdb9dd4",
@@ -203,10 +202,11 @@
   {
    "id": "ai-mcq-20194e35",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 88 is below the AI-written bar of 89 (flaws 94, review 84): clang"
    ],
+   "quality": 88,
    "flaws": [
     "clang:minor"
    ]
@@ -228,17 +228,18 @@
   {
    "id": "ai-mcq-27f75da9",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 90), but the AI quota of 110 is full"
+   ],
    "quality": 90
   },
   {
    "id": "ai-mcq-2b8f37a8",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-2bc53a0c",
@@ -257,8 +258,10 @@
   {
    "id": "ai-mcq-2e439d1e",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 91), but the AI quota of 110 is full"
+   ],
    "quality": 91,
    "flaws": [
     "vignette:minor"
@@ -267,10 +270,9 @@
   {
    "id": "ai-mcq-2f9aec47",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 92
   },
   {
    "id": "ai-mcq-33f3cc88",
@@ -285,34 +287,30 @@
   {
    "id": "ai-mcq-35f5c887",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-3bd5914c",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-3e928d9b",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-3fe46b29",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-40470f73",
@@ -340,18 +338,18 @@
   {
    "id": "ai-mcq-427a94f5",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-42dc15b2",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 83 is below the AI-written bar of 89 (flaws 94, review 75): vignette"
    ],
+   "quality": 83,
    "flaws": [
     "vignette:minor"
    ]
@@ -359,10 +357,9 @@
   {
    "id": "ai-mcq-44d3b56b",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "vignette:minor"
    ]
@@ -370,10 +367,11 @@
   {
    "id": "ai-mcq-47cd27be",
    "kind": "ai",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "passed (quality 90), but the AI quota of 110 is full"
+   ],
+   "quality": 90
   },
   {
    "id": "ai-mcq-481e068c",
@@ -385,26 +383,23 @@
   {
    "id": "ai-mcq-4b0f0034",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-5289a1e4",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 100
   },
   {
    "id": "ai-mcq-52c0dd42",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-5515c72d",
@@ -423,18 +418,16 @@
   {
    "id": "ai-mcq-592447dd",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-59f4002a",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-5c1577b8",
@@ -451,26 +444,23 @@
   {
    "id": "ai-mcq-5f684f23",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-612fe373",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-6a6f07fd",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "vignette:minor"
    ]
@@ -478,10 +468,9 @@
   {
    "id": "ai-mcq-6d543dcb",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-6dbd8be2",
@@ -493,23 +482,26 @@
   {
    "id": "ai-mcq-6dea4d62",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-6fbba7f4",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 90), but the AI quota of 110 is full"
+   ],
    "quality": 90
   },
   {
    "id": "ai-mcq-71636d27",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 89), but the AI quota of 110 is full"
+   ],
    "quality": 89,
    "flaws": [
     "vignette:minor"
@@ -542,10 +534,9 @@
   {
    "id": "ai-mcq-7ae3a025",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-7bce8cdf",
@@ -557,10 +548,9 @@
   {
    "id": "ai-mcq-7be1f6ee",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": [
     "units:minor"
    ]
@@ -575,24 +565,24 @@
   {
    "id": "ai-mcq-7dcae0d8",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-7f0ed74e",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-7f2d20c9",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 91), but the AI quota of 110 is full"
+   ],
    "quality": 91,
    "flaws": [
     "vignette:minor"
@@ -601,10 +591,9 @@
   {
    "id": "ai-mcq-81590e31",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-8557a042",
@@ -616,10 +605,9 @@
   {
    "id": "ai-mcq-8727d880",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-88a5965f",
@@ -631,26 +619,23 @@
   {
    "id": "ai-mcq-88d9e465",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-8a426199",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-91f368bd",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -665,10 +650,9 @@
   {
    "id": "ai-mcq-93a4814c",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-95c7720a",
@@ -700,18 +684,16 @@
   {
    "id": "ai-mcq-9c5c4bc6",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-9fadfaae",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-a5f2390b",
@@ -723,41 +705,44 @@
   {
    "id": "ai-mcq-a60c4da7",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "quality 85 is below the AI-written bar of 89 (flaws 100, review 75)"
+   ],
+   "quality": 85
   },
   {
    "id": "ai-mcq-a8a331e2",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-a98e94e9",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-a9cf01d0",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 90), but the AI quota of 110 is full"
+   ],
    "quality": 90
   },
   {
    "id": "ai-mcq-abe23890",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times"
    ],
+   "quality": 71,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -765,10 +750,11 @@
   {
    "id": "ai-mcq-ac3f63e3",
    "kind": "ai",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 91), but the AI quota of 110 is full"
    ],
+   "quality": 91,
    "flaws": [
     "vignette:minor"
    ]
@@ -783,10 +769,11 @@
   {
    "id": "ai-mcq-b1c5fc38",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "quality 88 is below the AI-written bar of 89 (flaws 100, review 80)"
+   ],
+   "quality": 88
   },
   {
    "id": "ai-mcq-b1fb1c81",
@@ -805,18 +792,16 @@
   {
    "id": "ai-mcq-b748662d",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-b95916fc",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-b9e317b3",
@@ -838,10 +823,9 @@
   {
    "id": "ai-mcq-bbe3537a",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-bd62e001",
@@ -856,18 +840,19 @@
   {
    "id": "ai-mcq-be2fce74",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times"
+   ],
+   "quality": 74
   },
   {
    "id": "ai-mcq-beeea923",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 92
   },
   {
    "id": "ai-mcq-c20114a7",
@@ -893,10 +878,9 @@
   {
    "id": "ai-mcq-c64f06c2",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-c77ff892",
@@ -908,10 +892,9 @@
   {
    "id": "ai-mcq-c8c8e71f",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 92
   },
   {
    "id": "ai-mcq-cac4a8ab",
@@ -930,10 +913,11 @@
   {
    "id": "ai-mcq-cc692f98",
    "kind": "ai",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 90), but the AI quota of 110 is full"
    ],
+   "quality": 90,
    "flaws": [
     "vignette:minor"
    ]
@@ -948,10 +932,9 @@
   {
    "id": "ai-mcq-cef04fb5",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-d268f468",
@@ -967,34 +950,30 @@
   {
    "id": "ai-mcq-d4ee44ca",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-d58bd69f",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 92
   },
   {
    "id": "ai-mcq-d658ba0b",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-d68fa4b0",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-d95ed2a4",
@@ -1013,10 +992,9 @@
   {
    "id": "ai-mcq-e2e442b1",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-e3b1c7c7",
@@ -1050,18 +1028,16 @@
   {
    "id": "ai-mcq-e5286bdf",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-e59f8c20",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "vignette:minor"
    ]
@@ -1076,24 +1052,24 @@
   {
    "id": "ai-mcq-e8bbd23c",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-e8fe960a",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-edf0a236",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 91), but the AI quota of 110 is full"
+   ],
    "quality": 91,
    "flaws": [
     "vignette:minor"
@@ -1112,10 +1088,9 @@
   {
    "id": "ai-mcq-eea747f5",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-eebd5d1a",
@@ -1130,10 +1105,9 @@
   {
    "id": "ai-mcq-f2021b21",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-f8ee9f83",
@@ -1148,10 +1122,11 @@
   {
    "id": "ai-mcq-fab36a70",
    "kind": "ai",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 92), but the AI quota of 110 is full"
    ],
+   "quality": 92,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -1166,18 +1141,16 @@
   {
    "id": "ai-mcq-fce67b0e",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-fd43ae8c",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "vignette:minor"
    ]

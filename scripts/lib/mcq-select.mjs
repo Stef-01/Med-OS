@@ -21,7 +21,11 @@ import { flawReport, signature, nearDuplicate, positionBalance, EVAL_VERSION } f
 import { verdictFor, judgeScore, judgeGates, solved, JUDGE_VERSION } from './mcq-judge.mjs';
 
 export const PRIORITY = Object.freeze(['user', 'usmle-resource', 'amsa', 'ai']);
-export const QUOTA = Object.freeze({ 'usmle-resource': 160, amsa: 110, ai: 110 });
+export const QUOTA = Object.freeze({ 'usmle-resource': 160, amsa: 110, ai: 110, 'ai-rapid': 80 });
+/* the quota a question counts against: AI-written questions in the Rapid form (tag form:rapid, for the duel's 15 s
+   format) have their own, so short questions and vignettes do not crowd each other out */
+export const quotaOf = a => (a.kind === 'ai' && Array.isArray(a.q?.tags) && a.q.tags.includes('form:rapid') ? 'ai-rapid' : a.kind);
+const QUOTA_NAME = { 'ai-rapid': 'AI-written Rapid' };
 export const TOPIC_SHARE = 0.15;
 export const DEFAULT_BARS = Object.freeze({ base: 70, ai: 80 });
 export const quality = (flaw, judge) => Math.round(0.4 * flaw + 0.6 * judge);
@@ -76,14 +80,15 @@ export function select(candidates, { verdicts = {}, bars = DEFAULT_BARS, quota =
   }
   /* 7: quotas and topic balance (users are exempt from both) */
   const users = admitted.filter(a => a.kind === 'user'), rest = admitted.filter(a => a.kind !== 'user');
-  const room = Object.fromEntries(Object.entries(quota).map(([k, n]) => [k, Math.min(n, rest.filter(a => a.kind === k).length)]));
+  const room = Object.fromEntries(Object.entries(quota).map(([k, n]) => [k, Math.min(n, rest.filter(a => quotaOf(a) === k).length)]));
   const topicCap = Math.max(6, Math.ceil(topicShare * Object.values(room).reduce((s, n) => s + n, 0)));
   const used = {}, perTopic = {}, kept = [...users];
   for (const a of rest.sort((x, y) => y.quality - x.quality || rank(x, y))) {
     const topic = a.q.topic || a.verdict.rubric.topic || 'General Practice';
-    if ((used[a.kind] || 0) >= (quota[a.kind] ?? Infinity)) { Object.assign(a, { status: 'reserve', reasons: [`passed (quality ${a.quality}), but the ${KINDS[a.kind]} quota of ${quota[a.kind]} is full`] }); continue; }
+    const qk = quotaOf(a);
+    if ((used[qk] || 0) >= (quota[qk] ?? Infinity)) { Object.assign(a, { status: 'reserve', reasons: [`passed (quality ${a.quality}), but the ${QUOTA_NAME[qk] || KINDS[a.kind]} quota of ${quota[qk]} is full`] }); continue; }
     if ((perTopic[topic] || 0) >= topicCap) { Object.assign(a, { status: 'reserve', reasons: [`passed (quality ${a.quality}), but ${topic} already holds ${topicCap} questions (topic balance)`] }); continue; }
-    used[a.kind] = (used[a.kind] || 0) + 1; perTopic[topic] = (perTopic[topic] || 0) + 1; kept.push(a);
+    used[qk] = (used[qk] || 0) + 1; perTopic[topic] = (perTopic[topic] || 0) + 1; kept.push(a);
   }
   for (const a of kept) a.status = 'pool';
   const pool = kept.map(a => poolItem(a)).sort((x, y) => (x.id < y.id ? -1 : 1));
