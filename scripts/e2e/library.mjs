@@ -146,6 +146,17 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
     if (await sam.locator('.os-libdone').count()) break;
   }
   ok(upward && last >= 3, `0 to 1: only ever climbs (reached Year ${last})`);
+  /* swipe: an answered card follows the finger and, flicked, goes to the next one */
+  if (!(await sam.locator('.os-libdone').count())) {
+    const before = (await sam.textContent('.os-libcount2')).trim();
+    await sam.locator('.os-libopt').first().click(); await sam.waitForSelector('.os-libexp');
+    await sam.waitForTimeout(500); const bx = await sam.locator('.os-libexp').boundingBox(), sy = bx.y + bx.height / 2;   /* where the thumb is after answering */
+    await sam.mouse.move(bx.x + bx.width * 0.7, sy); await sam.mouse.down();
+    for (let i = 1; i <= 6; i++) { await sam.mouse.move(bx.x + bx.width * 0.7 - i * 40, sy); await sam.waitForTimeout(12); }
+    await sam.mouse.up(); await sam.waitForTimeout(700);
+    const after = (await sam.textContent('.os-libcount2').catch(() => '')).trim();
+    ok(after !== before, `swipe: a flick sends an answered card on (${before} to ${after})`);
+  }
   /* how others answered: a bank question with answers from others shows each option's share */
   if (!(await sam.locator('.os-libdone').count())) {
     const qk = await sam.getAttribute('.os-libcard', 'data-q');

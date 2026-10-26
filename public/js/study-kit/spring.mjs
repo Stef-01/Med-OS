@@ -116,3 +116,31 @@ export function sheetDrag(box, { grab = box, scroller = null, onClose } = {}) {
   box.addEventListener('pointerup', up); box.addEventListener('pointercancel', up);
   return () => { box.removeEventListener('pointerdown', down); box.removeEventListener('pointermove', move); box.removeEventListener('pointerup', up); box.removeEventListener('pointercancel', up); };
 }
+
+/* a card you can swipe away sideways (Study: after you answer, swipe to Next). 1:1 with the finger after a 10 px
+   threshold that also decides the direction (a vertical move is left to the page to scroll); released where its
+   momentum says: past 40 % of the width (projected) it flies off at the finger's speed and onCommit(dir) runs, else it
+   springs back. canStart(): may a swipe start now */
+export function swipe(el, { canStart = () => true, onCommit } = {}) {
+  let id = null, x0 = 0, y0 = 0, x = 0, hist = [], mode = '', live = null;
+  const set = v => { el.style.transform = v ? `translateX(${v}px) rotate(${(v / (el.offsetWidth || 375)) * 6}deg)` : ''; el.style.opacity = String(1 - Math.min(0.5, Math.abs(v) / ((el.offsetWidth || 375) * 2))); };
+  const down = e => { if (e.button > 0 || id != null || !canStart() || e.target.closest('input, textarea, select, a')) return; id = e.pointerId; x0 = e.clientX; y0 = e.clientY; mode = ''; hist = [[e.timeStamp, e.clientX]]; };
+  const move = e => {
+    if (e.pointerId !== id) return;
+    const dx = e.clientX - x0, dy = e.clientY - y0;
+    if (!mode) { if (Math.hypot(dx, dy) < 10) return; mode = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'; if (mode === 'y') { id = null; return; } live?.stop(); el.setPointerCapture?.(id); el.classList.add('swiping'); }
+    e.preventDefault(); x = dx; set(x); hist.push([e.timeStamp, e.clientX]); if (hist.length > 6) hist.shift();
+  };
+  const up = e => {
+    if (e.pointerId !== id) return;
+    id = null; if (mode !== 'x') return;
+    el.classList.remove('swiping');
+    const [ta, xa] = hist[0], [tb, xb] = hist[hist.length - 1], v = tb > ta ? ((xb - xa) / (tb - ta)) * 1000 : 0, w = el.offsetWidth || 375;
+    if (Math.abs(x + project(v)) > w * 0.4) {
+      const dir = Math.sign(x + project(v)) || 1;
+      live = animate(x, dir * w * 1.3, { spec: SPRING.snappy, velocity: v, onFrame: set, onDone: () => { live = null; onCommit?.(dir); } });
+    } else live = animate(x, 0, { spec: SPRING.bouncy, velocity: v, onFrame: set, onDone: () => { live = null; set(0); } });
+  };
+  el.addEventListener('pointerdown', down); el.addEventListener('pointermove', move, { passive: false }); el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+  el.style.touchAction = 'pan-y';
+}

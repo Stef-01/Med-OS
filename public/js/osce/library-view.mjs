@@ -25,7 +25,7 @@ import { today, streak, heat, session, timedSecs, tally, smart, snapshot, resuma
 import { lsGet, lsSet } from '../study-kit/store.mjs';
 import * as api from '../library/api.mjs';
 import { rpc, accountsOn } from './account.mjs';
-import { animate, SPRING, reducedMotion } from '../study-kit/spring.mjs';
+import { animate, SPRING, reducedMotion, swipe } from '../study-kit/spring.mjs';
 
 const TABS = [['library', 'Library'], ['upload', 'Upload'], ['friends', 'Friends'], ['study', 'Study']];
 const REPORTS = { key: 'The answer is wrong', outdated: 'Out of date', unclear: 'Unclear', typo: 'A typo' };   /* 0010_mcq_reports.sql */
@@ -104,6 +104,9 @@ function paint() {
   p.innerHTML = (V.msg ? `<p class="os-libnote">${esc(V.msg)}</p>` : '') + ({ library: libraryHtml, upload: uploadHtml, friends: friendsHtml, study: studyHtml })[V.tab]();
   if (V.tab === 'upload') paintUploadResult();
   p.querySelectorAll('.os-libdecks, .os-libgapl, .os-libfriends, .os-libbars').forEach(ul => [...ul.children].forEach((li, i) => li.style.setProperty('--n', i)));
+  /* an answered card swipes away to Next (study-kit/spring.mjs swipe: 1:1, momentum decides, flies off at the finger's speed) */
+  const card = p.querySelector('.os-libcard');
+  if (card && V.st.q && V.st.pick != null) swipe(card, { canStart: () => V.st.pick != null, onCommit: () => { const x = V.st.q?.[V.st.i]; if (x) rate(V.st.pick === x.item.answer ? 'good' : 'again'); } });
   V.tap = '';
 }
 const signInHtml = why => `<div class="os-libsign"><p>${esc(why)}</p><button class="os-btn" data-os="settings">${icon('settings')}<span>Sign in, in Settings</span></button></div>`;
