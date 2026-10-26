@@ -337,8 +337,8 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await solo.click('.os-libdone [data-lib="revgo"]'); await solo.waitForSelector('.os-librev');
   ok(await solo.locator('.os-librev .os-libexp').isVisible() && await solo.locator('.os-librev .os-libopt.ok').count() === 1, 'exam: going through the answers shows each with the answer and why');
   await shot(solo, '320-exam-review');
-  await solo.click('.os-librevnav .os-primary'); await solo.waitForSelector('.os-libdone');
-  ok(await solo.locator('.os-librevrow').count() === 1, 'exam: back on the results, each question opens its answer');
+  await solo.keyboard.press('ArrowRight'); await solo.waitForSelector('.os-libdone');
+  ok(await solo.locator('.os-librevrow').count() === 1, 'exam: the arrow keys go through the answers; past the last, back on the results, where each question opens its answer');
   await solo.click('.os-libdone [data-lib="endstudy"]'); await solo.waitForSelector('.os-libgo');
   ok(/Custom session/.test(await solo.textContent('.os-libsumhead')), 'exam: Done goes back to Custom, where it started');
   await solo.click('[data-lib="pref"][data-k="mode"][data-v="tutor"]'); await solo.click('[data-lib="sumback"]'); await solo.waitForTimeout(300);

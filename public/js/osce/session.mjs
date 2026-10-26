@@ -67,7 +67,7 @@ function paintTimer() {
   const b = bar.querySelector(`.os-tc[data-c="${t.c}"] b`);
   if (b) b.textContent = mmss(left);
   const pt = ctx.ov.querySelector('.os-prs-time');   /* the results on screen cover the clock: the time left rides on them */
-  if (pt) { pt.hidden = false; pt.textContent = `${phaseName(t.c)} · ${mmss(left)}`; pt.classList.toggle('low', left <= 60); }
+  if (pt) { pt.hidden = false; pt.innerHTML = `<span class="os-prs-ph">${esc(phaseName(t.c))} · </span>${mmss(left)}`; pt.classList.toggle('low', left <= 60); }   /* at 320 the phase name steps aside, the time stays */
   bar.querySelector('.os-ring').classList.toggle('low', t.c !== 'reading' && !nextPhase(t.c, ctx.mem.timing) && left <= 60);
 }
 function startTick() {
@@ -168,6 +168,7 @@ export function placePill(root, animate) {
     pill.style.width = `${on.offsetWidth}px`;
     pill.style.transform = `translateX(${on.offsetLeft}px)`;
     if (!animate) { void pill.offsetWidth; pill.style.transition = ''; }
+    else on.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
   });
 }
 /* where an imported case came from: the AMSA MedEd case it was converted from, and what AI added to it */
@@ -328,7 +329,7 @@ export function present(sid, i = 0, o = {}) {
   const d = openPresenter(`<div class="os-prs"><div class="os-prs-top"><span class="os-prs-who">For the candidate</span><span class="os-prs-n" aria-live="polite"></span><span class="os-prs-time" hidden></span><button class="os-ic os-prs-x" data-ui="close" aria-label="Turn back to the examiner">${I.x}</button></div>
     ${q ? `<p class="os-prs-q"><small>The examiner asks</small>“${esc(q)}”</p>` : ''}
     <div class="os-prs-stage"></div>
-    <div class="os-prs-nav"><button class="os-btn os-btn--lg os-prs-step" data-os="pprev" aria-label="Previous result">${I.prev}<span>Previous</span></button><button class="os-btn os-btn--lg os-primary os-prs-back" data-ui="close">${I.back}<span>Turn back to the examiner</span></button><button class="os-btn os-btn--lg os-prs-step" data-os="pnext" aria-label="Next result"><span>Next</span>${I.chevR}</button></div></div>`, () => { pres = null; });   /* the inner box fills the layer, so a tap never lands on the layer itself (which would close it) */
+    <div class="os-prs-nav"><button class="os-btn os-btn--lg os-prs-step" data-os="pprev" aria-label="Previous result">${I.prev}<span>Previous</span></button><button class="os-btn os-btn--lg os-primary os-prs-back" data-ui="close">${I.back}<span>Turn back<span class="os-prs-long"> to the examiner</span></span></button><button class="os-btn os-btn--lg os-prs-step" data-os="pnext" aria-label="Next result"><span>Next</span>${I.chevR}</button></div></div>`, () => { pres = null; });   /* the inner box fills the layer, so a tap never lands on the layer itself (which would close it) */
   let x0 = null;
   const stage = d.el.querySelector('.os-prs-stage');
   stage.addEventListener('pointerdown', e => { x0 = e.clientX; });

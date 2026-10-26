@@ -97,6 +97,7 @@ function wire(el) {
    In a study card, 1 to 5 answer and then 1 to 4 grade; true when it was used. The arrows on the tabs are OSCE's own */
 export function libraryKey(e) {
   if (V.tab !== 'study' || !V.st.q || e.metaKey || e.ctrlKey || e.altKey || e.target.closest?.('input, textarea, select')) return false;
+  if (V.st.rv != null && V.st.picks && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { panel()?.querySelector(`.os-librevnav .os-btn:${e.key === 'ArrowRight' ? 'last' : 'first'}-child:not([disabled])`)?.click(); return true; }   /* going through an exam's answers */
   const it = V.st.q[V.st.i];
   if (it && V.st.pick == null && e.shiftKey && /^Digit[1-5]$/.test(e.code) && +e.code.slice(5) <= it.item.options.length) { strike(displayOrder(it.item, it.key)[+e.code.slice(5) - 1]); return true; }
   if (it && V.st.pick == null && /^[1-5]$/.test(e.key) && +e.key <= it.item.options.length) { choose(displayOrder(it.item, it.key)[+e.key - 1]); return true; }
@@ -311,13 +312,13 @@ function studyHtml() {
 }
 
 /* the goal ring: an arc that fills as today's answers reach the goal (a spring brings it there) */
-const ring = (frac, n, goal, what = 'today') => `<div class="os-libring" role="img" aria-label="${n} of ${goal} ${what}" style="--p:${frac.toFixed(3)}"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/><circle class="arc" cx="22" cy="22" r="19" pathLength="100"/></svg><b>${n}</b><small>of ${goal}${what === 'right' ? ' right' : ''}</small></div>`;
+const ring = (frac, n, goal, what = 'today') => `<div class="os-libring" role="img" aria-label="${n} of ${goal} ${what}" style="--p:${frac.toFixed(3)}"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/>${frac > 0 ? '<circle class="arc" cx="22" cy="22" r="19" pathLength="100"/>' : ''}</svg><b>${n}</b><small>of ${goal}${what === 'right' ? ' right' : ''}</small></div>`;
 function homeHtml() {
   const mem = api.studyMem(), p = myPref(), t = now(), all = everything(), td = today(mem.days, t, p.goal), sk = streak(mem.days, t);
   const tl = tally(all, mem.card, t), plan = examPlan(p.exam, tl.fresh, t), q = session(all, mem.card, { order: 'due', size: p.size, newADay: plan?.perDay }, t, startedToday());
   const s = summary(all, mem.card), gap = s.gaps[0], res = resumable(lsGet(LIVE, null), all, t), notes = all.filter(e => mem.card[e.key]?.note).length;
   const firstTime = !s.total.n;   /* the modes explain themselves until the first answer, then stay out of the way */
-  const mode = (m, label, sub, ic, n = '') => `<button class="os-libmode${firstTime ? '' : ' os-libmode--short'}" data-lib="mode" data-m="${m}"><span class="os-libmode-ic" aria-hidden="true">${icon(ic)}</span><span class="os-libmode-tx"><b>${esc(label)}</b>${firstTime || m === 'weak' ? `<small>${esc(sub)}</small>` : ''}</span>${n !== '' ? `<span class="os-libmode-n">${n}</span>` : ''}</button>`;
+  const mode = (m, label, sub, ic, n = '') => `<button class="os-libmode${firstTime ? '' : ' os-libmode--short'}" data-lib="mode" data-m="${m}"><span class="os-libmode-ic">${icon(ic)}${n !== '' ? `<span class="os-libmode-n">${n}</span>` : ''}</span><span class="os-libmode-tx"><b>${esc(label)}</b>${firstTime || m === 'weak' ? `<small>${esc(sub)}</small>` : ''}</span></button>`;
   return `<section class="os-libtoday">
       ${ring(td.frac, td.n, td.goal)}
       <div class="os-libtoday-tx"><h3>${td.done ? 'Goal done today' : 'Today'}</h3>
@@ -404,8 +405,8 @@ function tick() {
 function revHtml() {
   const keys = [...new Set((V.st.seen || []).map(s => s.key))], by = new Map(V.st.q.map(x => [x.key, x]));
   const n = Math.min(V.st.rv, keys.length - 1), x = by.get(keys[n]); if (!x) { V.st.rv = null; return cardHtml(); }
-  const it = x.item, ord = displayOrder(it, x.key), picked = V.st.picks[x.key] ?? -1;
-  return `<div class="os-libcard os-libcard--in os-librev" data-q="${esc(x.key)}">
+  const it = x.item, ord = displayOrder(it, x.key), picked = V.st.picks[x.key] ?? -1;   /* Back arrives from the left, Next from the right */
+  return `<div class="os-libcard os-libcard--in os-librev${V.st.rvBack ? ' os-librev--back' : ''}" data-q="${esc(x.key)}">
     <div class="os-libtop">
       <button class="os-libx" data-lib="revend" aria-label="Back to the results">${I.x}</button>
       <div class="os-libbar" role="progressbar" aria-label="Answers gone through" aria-valuemin="0" aria-valuemax="${keys.length}" aria-valuenow="${n + 1}"><i style="transform:scaleX(${((n + 1) / keys.length).toFixed(3)})"></i></div>
@@ -535,7 +536,9 @@ function examNext() {
   api.saveStudy(m);
   (V.st.picks ||= {})[x.key] = i; V.st.seen.push({ key: x.key, ok });
   V.st.i++; V.st.n++; V.st.sel = null; V.st.x = null;
-  saveLive(); paint(); tick(); panel()?.querySelector('.os-libopt, [data-lib="revgo"]')?.focus({ preventScroll: true });
+  saveLive(); paint(); tick();
+  const end = !V.st.q[V.st.i]; if (end) arrive();
+  panel()?.querySelector(end ? '.os-libdone .os-primary' : '.os-libopt')?.focus({ preventScroll: true });
 }
 function strike(i) {
   if (V.st.pick != null || !V.st.q) return;
@@ -588,7 +591,9 @@ function rate(g) {
   V.st.seen.push({ key: x.key, ok: V.st.lastOk });
   V.st.i++; V.st.pick = null; V.st.n++; V.st.note = false; V.st.x = null;
   saveLive();
-  paint(); tick(); panel()?.querySelector('.os-libopt, [data-lib="today"]')?.focus({ preventScroll: true });
+  paint(); tick();
+  const end = !V.st.q[V.st.i]; if (end) arrive();
+  panel()?.querySelector(end ? '.os-libdone .os-primary' : '.os-libopt')?.focus({ preventScroll: true });
 }
 function toggleFlag() {
   const x = V.st.q?.[V.st.i]; if (!x) return;
@@ -742,7 +747,7 @@ async function act(a, b, e) {
     case 'ranges': { const it = V.st.q?.[V.st.i]?.item; if (it) openRanges(`${it.stem} ${it.ask || ''}`); return; }
     case 'opt': return V.st.x?.has(+b.dataset.i) ? strike(+b.dataset.i) : choose(+b.dataset.i);
     case 'examnext': return examNext();
-    case 'revgo': V.st.rv = Math.max(0, +b.dataset.v || 0); paint(); panel()?.scrollTo?.(0, 0); dlg()?.querySelector('.os-dlg-body')?.scrollTo(0, 0); return panel()?.querySelector('.os-librevnav .os-primary')?.focus({ preventScroll: true });
+    case 'revgo': { const to = Math.max(0, +b.dataset.v || 0); V.st.rvBack = V.st.rv != null && to < V.st.rv; V.st.rv = to; } paint(); panel()?.scrollTo?.(0, 0); dlg()?.querySelector('.os-dlg-body')?.scrollTo(0, 0); return panel()?.querySelector('.os-librevnav .os-primary')?.focus({ preventScroll: true });
     case 'revend': V.st.rv = null; paint(); return arrive(-1);
     case 'grade': return rate(b.dataset.g);
     case 'endstudy': return endStudy();
