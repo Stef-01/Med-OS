@@ -632,6 +632,21 @@ async function duel() {
   const sam = Object.values(DUEL.db.players).find(p => p.name === 'Sam');
   ok([...SB.keys()].some(k => k.startsWith(`u:${sam.id}:osce
 `)), 'account: the OSCE record is kept on the account (osce_push)');
+  /* another device: signing in from Settings brings the account's record down (partner names only the account has) */
+  SB.set(`u:${sam.id}:osce
+k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], updated_at: new Date(Date.now() + 60000).toISOString() });
+  const other = await phone(375, 812, shared);
+  ok(await other.inputValue('[data-person="0"]') !== 'Priya', "account: a device not signed in does not see the account's record");
+  await other.click('[data-os="settings"]'); await other.waitForSelector('[data-set="aname"]');
+  await other.fill('[data-set="aname"]', 'Sam'); await other.fill('[data-set="apin"]', '0000'); await other.click('[data-set="ain"]');
+  await other.waitForFunction(() => /Wrong name or PIN/.test(document.querySelector('[data-set="aerr"]')?.textContent || ''));
+  ok(await other.getAttribute('[data-set="apin"]', 'aria-invalid') === 'true', 'account: a wrong PIN is said on the PIN field');
+  await other.fill('[data-set="apin"]', '1234'); await other.click('[data-set="ain"]');
+  await other.waitForSelector('.os-acctwho');
+  await other.keyboard.press('Escape');
+  await other.waitForFunction(() => document.querySelector('[data-person="0"]')?.value === 'Priya', null, { timeout: 6000 }).then(() => ok(true, "account: signed in on another device, the account's progress comes down"), () => ok(false, "account: signed in on another device, the account's progress comes down"));
+  await other.screenshot({ path: path.join(SHOTS, 'account-other-device.png') });
+
   /* a laptop: Settings' account and games, and the duel's card on Start, at 1280 by 800 */
   const wide = await phone(1280, 800, shared);
   await wide.click('[data-os="settings"]'); await wide.waitForSelector('.os-switch[data-game="duel"]'); await wide.waitForTimeout(600);

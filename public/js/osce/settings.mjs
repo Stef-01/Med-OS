@@ -92,7 +92,8 @@ function wireAccount(el) {
     catch (e) {
       err.textContent = e.message || 'That did not work. Try again.'; btn.textContent = was; sec.removeAttribute('aria-busy');
       sec.querySelectorAll('button').forEach(b => { b.disabled = false; });
-      const onName = /name/i.test(err.textContent); (onName ? nIn : pIn).setAttribute('aria-invalid', 'true'); (onName ? nIn : pIn).focus();
+      const onName = !/PIN/.test(err.textContent) && /name/i.test(err.textContent);   /* "Wrong name or PIN": the PIN is the likelier slip */
+      (onName ? nIn : pIn).setAttribute('aria-invalid', 'true'); (onName ? nIn : pIn).focus();
     }
   };
   sec.querySelector('[data-set="ain"]')?.addEventListener('click', () => go(false));
