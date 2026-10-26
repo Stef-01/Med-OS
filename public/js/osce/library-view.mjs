@@ -80,6 +80,7 @@ export function libraryKey(e) {
   const it = V.st.q[V.st.i];
   if (it && V.st.pick == null && /^[1-5]$/.test(e.key) && +e.key <= it.item.options.length) { answer(+e.key - 1); return true; }
   if (it && V.st.pick != null && /^[1-4]$/.test(e.key)) { rate(GRADES[+e.key - 1]); return true; }
+  if (it && V.st.pick != null && (e.key === 'Enter' || e.key === ' ') && !e.target.closest?.('button, a')) { rate(V.st.pick === it.item.answer ? 'good' : 'again'); return true; }
   return false;
 }
 /* a panel rises in when you arrive at it (a tab, the summary), not on every repaint */
@@ -354,7 +355,7 @@ function cardHtml() {
     ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : picked < 0 ? `Time’s up: the answer is ${LET[it.answer]}` : `The answer is ${LET[it.answer]}`}</strong>${it.explanation ? `<p>${esc(it.explanation)}</p>` : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>
       ${picked !== it.answer && (card.w | 0) >= 4 && !card.note ? `<p class="os-libleech">${icon('alert')}<span>This one has caught you ${card.w} times. Write the rule in your own words: it is the fastest fix.</span></p>` : ''}
       ${V.st.note || card.note || (picked !== it.answer && (card.w | 0) >= 4) ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
-      <div class="os-libgrades" role="group" aria-label="How well did you know it?">${GRADES.map((g, k) => `<button class="os-btn${(picked === it.answer ? g === 'good' : g === 'again') ? ' os-primary' : ''}" data-lib="grade" data-g="${g}" aria-keyshortcuts="${k + 1}"><span>${GLABEL[g]}</span><small>${esc(preview(card, g, t))}</small></button>`).join('')}</div>` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}
+      ${gradesHtml(picked === it.answer, card, t)}` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}
   </div>`;
 }
 /* the day's goal, done: a burst of confetti from the top of the card (springs out, gravity down, fades), a buzz on a
@@ -386,6 +387,15 @@ function notebookHtml() {
   const mem = api.studyMem(), l = everything().filter(e => mem.card[e.key]?.note);
   return `<div class="os-libsumhead"><button class="os-link" data-lib="sumback">${I.back}<span>Study</span></button><h3>Notebook</h3></div>
     ${l.length ? `<button class="os-btn os-btn--lg os-primary os-libgo" data-lib="notestudy">Study these ${plural(l.length, 'question')}</button><ul class="os-libnotes" role="list">${l.map(e => `<li><span class="os-liblayer">${esc(layerLabel(e.item))}</span><p class="os-libnotes-q">${esc(e.item.stem.length > 120 ? `${e.item.stem.slice(0, 120)}…` : e.item.stem)}</p><p class="os-libnotes-a">${esc(e.item.options[e.item.answer])}</p><blockquote>${esc(mem.card[e.key].note)}</blockquote></li>`).join('')}</ul>` : '<p class="os-libmeta">No notes yet. After you answer, Add a note keeps the rule in your words.</p>'}`;
+}
+/* the grade follows the answer (research: answer-then-grade): right is Good and wrong is Again, one big Next; Hard and
+   Easy sit either side of a right answer, and a wrong one can be marked misread. Each says when it comes back; keys 1 to 4
+   pick any, Enter is Next */
+function gradesHtml(right, card, t) {
+  const b = (g, label, cls = '') => `<button class="os-btn${cls}" data-lib="grade" data-g="${g}" aria-keyshortcuts="${GRADES.indexOf(g) + 1}"><span>${label}</span><small>in ${esc(preview(card, g, t))}</small></button>`;
+  return right
+    ? `<div class="os-libgrades os-libgrades--right" role="group" aria-label="Next, and how well you knew it">${b('hard', 'Hard')}${b('good', 'Next', ' os-primary os-libnext')}${b('easy', 'Easy')}</div>`
+    : `<div class="os-libgrades os-libgrades--wrong" role="group" aria-label="Next">${b('again', 'Next', ' os-primary os-libnext')}<button class="os-link os-libmisread" data-lib="grade" data-g="good" aria-keyshortcuts="3">I knew it, I misread</button></div>`;
 }
 function answer(i) {
   if (V.st.pick != null) return;

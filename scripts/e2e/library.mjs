@@ -101,6 +101,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await sam.locator('.os-libopt').nth(1).click(); await sam.waitForSelector('.os-libexp');
   const after = await sam.evaluate(() => ({ ok: document.querySelectorAll('.os-libopt.ok').length, no: document.querySelectorAll('.os-libopt.no').length, again: document.querySelector('[data-lib="grade"].os-primary')?.dataset.g }));
   ok(after.ok === 1 && after.no <= 1 && ['again', 'good'].includes(after.again), `card: the answer shows right and wrong, the explanation, and suggests a grade (${JSON.stringify(after)})`);
+  ok(await sam.locator('.os-libnext').count() === 1 && (await sam.locator('[data-lib="grade"]').count()) <= 3, 'card: one big Next; the grade follows the answer (Hard and Easy beside a right one)');
   await sam.click('[data-lib="note"]'); await sam.fill('[data-lib-note]', 'Inferior leads = RCA'); await sam.waitForTimeout(500);
   await shot(sam, '320-card-answered'); await flat(sam, 'answered');
   await sam.click('[data-lib="grade"][data-g="good"]'); await sam.waitForTimeout(150);
