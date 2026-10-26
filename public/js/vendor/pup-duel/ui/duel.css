@@ -350,7 +350,7 @@ div.pd-me-dog { cursor: default; }
 
 /* the match */
 .pd-mtop { grid-template-columns: minmax(44px, 1fr) auto minmax(44px, 1fr); }
-.pd-mtop .pd-qtag { justify-self: end; }   /* the AI tag where a round count was: the dots count the rounds */
+.pd-mtop .pd-qtag { justify-self: end; min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }   /* the question's source where a round count was: the dots count the rounds */
 .pd-mtop:has(~ .pd-over) [data-pd="leave"] { visibility: hidden; }   /* the result has one way out, its home button */
 .pd-match:not([data-live]) .pd-dots, .pd-match:not([data-live]) .pd-score, .pd-match:not([data-live]) .pd-timer { visibility: hidden; }   /* no match furniture before the match */
 .pd-dots { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }

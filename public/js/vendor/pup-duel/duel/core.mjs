@@ -46,6 +46,7 @@ export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topi
     if (q.topic) out.topic = q.topic;
     if (q.cat) { out.cat = q.cat; const l = (pack?.cats || []).find(c => c.id === q.cat)?.label; if (l) out.catLabel = String(l).slice(0, 60); }
     if (q.origin) out.origin = q.origin;
+    if (q.source) out.source = q.source;
     return out;
   });
   return { v: 1, rounds: questions.length, secs: clamp(Math.round(secs) || RULES.secs, RULES.minSecs, RULES.maxSecs), title: String(title || pack?.title || '').slice(0, 80), topic: topic || '', ...(cat ? { cat: String(cat).slice(0, 30), catLabel: String((pack?.cats || []).find(c => c.id === cat)?.label || cat).slice(0, 60) } : {}), seed: seed >>> 0, questions };

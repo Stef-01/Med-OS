@@ -1,12 +1,17 @@
 /* pack.mjs: a question pack, the one shape every host writes (Med-OS builds it from its stations).
    pack     { version, title, source, origin: 'ai' | 'human' | 'mixed', cats?[{ id, label }], questions[] }
-   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, topics?[], cat?, origin? }
+   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, topics?[], cat?, origin?, source? }
    topic is the first layer a player narrows by (Med-OS: the specialty), cat the second (Med-OS: OSCE skills, Clinical,
    Physiology and pathophysiology, Anatomy), its label and order from the pack's cats. A question can sit in more than one
    topic (topics, up to 6: a station that is Emergency Medicine and Paediatrics is found under both); topic is its first.
+   source is where the question came from (Med-OS's MCQ pool: user, ai, amsa, usmle-resource); the duel tags each
+   question with it (sourceLabel), and a question without one is tagged AI-written when its origin is ai.
    Plain text throughout: the duel renders with textContent, so a pack can never inject markup. */
 
-export const LIMITS = { stem: 1200, option: 160, why: 1200, note: 600, topic: 60, cat: 30, cats: 12, id: 80, minOptions: 2, maxOptions: 6 };
+export const LIMITS = { stem: 1200, option: 160, why: 1200, note: 600, topic: 60, cat: 30, cats: 12, id: 80, source: 30, minOptions: 2, maxOptions: 6 };
+export const SOURCES = { user: 'Student', ai: 'AI-written', amsa: 'AMSA', 'usmle-resource': 'USMLE' };   /* short: the tag shares the match's top bar with the round dots */
+/* the tag a question shows: its source's name, else AI-written for an ai question, else none */
+export const sourceLabel = q => (typeof q?.source === 'string' && Object.hasOwn(SOURCES, q.source) ? SOURCES[q.source] : q?.origin === 'ai' ? SOURCES.ai : '');   /* own keys only: a setup comes from the other phone */
 
 const text = (v, max) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim().slice(0, max) : '');
 
@@ -30,6 +35,7 @@ export function normQuestion(q) {
   if (topics.length) { out.topics = topic && !topics.includes(topic) ? [topic, ...topics].slice(0, 6) : topics; if (!out.topic) out.topic = out.topics[0]; }
   const cat = text(q.cat, LIMITS.cat); if (cat) out.cat = cat;
   if (q.origin === 'ai' || q.origin === 'human') out.origin = q.origin;
+  const source = text(q.source, LIMITS.source).toLowerCase(); if (/^[a-z0-9-]+$/.test(source)) out.source = source;
   return { q: out, why: '' };
 }
 

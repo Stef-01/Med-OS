@@ -20,7 +20,7 @@ import { createSession } from '../duel/session.mjs';
 import { createLobby, settleCrossed, offerFrom, rematchTarget } from '../duel/lobby.mjs';
 import { practiceWorld, BOT } from '../duel/bot.mjs';
 import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
-import { topicTree, poolOf, pickLabel } from '../duel/pack.mjs';
+import { topicTree, poolOf, pickLabel, sourceLabel } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
 import { normWallet, fitWear } from '../duel/shop.mjs';
@@ -231,10 +231,11 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>
           ${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="shop" hidden aria-label="Bones: open the shop">${icon('bone')}<b></b><span class="pd-wallet-go">Shop</span></button>`}</div>
         </section>
-        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" hidden></section><section class="pd-sec pd-boardsec" data-sec="board" aria-labelledby="pd-h-board"></section>' : ''}
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Duels</h2><div class="pd-list"></div></section>
+        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" hidden></section>' : ''}
         <section class="pd-sec" data-sec="mates"><h2 class="pd-h2">Mates</h2><div class="pd-grid"></div></section>
+        ${transport?.queue ? '<section class="pd-sec pd-boardsec" data-sec="board" aria-labelledby="pd-h-board"></section>' : ''}
         <section class="pd-sec" data-sec="past" hidden><h2 class="pd-h2">Recent</h2><div class="pd-list"></div></section>
         <p class="pd-err" role="alert"></p>
       </main>`;
@@ -534,8 +535,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         const R = st.rounds[i], a = R?.answers[me], b = R?.answers[opp], li = document.createElement('li');
         li.className = 'pd-rv'; li.dataset.ok = a?.ok ? '1' : '0';
         const where = st.setup.topic || q.topic;   /* a duel narrowed to a topic names that topic, not the question's first */
-        li.innerHTML = `${where || q.catLabel ? '<p class="pd-rv-meta"></p>' : ''}<p class="pd-rv-q"></p><p class="pd-rv-a">${icon('check')}<span></span></p>`;
-        if (where || q.catLabel) li.querySelector('.pd-rv-meta').textContent = [where, q.catLabel].filter(Boolean).join(' › ');   /* where it came from: what to revise */
+        const meta = [[where, q.catLabel].filter(Boolean).join(' › '), q.source ? sourceLabel(q) : ''].filter(Boolean).join(' · ');   /* what to revise, and whose question */
+        li.innerHTML = `${meta ? '<p class="pd-rv-meta"></p>' : ''}<p class="pd-rv-q"></p><p class="pd-rv-a">${icon('check')}<span></span></p>`;
+        if (meta) li.querySelector('.pd-rv-meta').textContent = meta;
         li.querySelector('.pd-rv-q').textContent = q.stem;
         li.querySelector('.pd-rv-a span').textContent = q.options[q.answer];
         if (a && a.choice !== null && a.choice !== undefined && !a.ok) {
@@ -707,8 +709,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (showQ) {
       if (M.round !== s.round) {
         M.round = s.round;
-        const tag = shell.querySelector('.pd-qtag');
-        tag.textContent = q.origin === 'ai' ? 'AI-written' : ''; tag.hidden = q.origin !== 'ai';
+        const tag = shell.querySelector('.pd-qtag'), from = sourceLabel(q);   /* where the question came from: AI-written, AMSA, … */
+        tag.textContent = from; tag.hidden = !from;
         shell.querySelector('.pd-stem').textContent = q.stem;
         if (s.name === 'question') say(`Question ${s.round + 1} of ${st.rounds.length}. ${secs} seconds.`);
         const opts = shell.querySelector('.pd-opts');
