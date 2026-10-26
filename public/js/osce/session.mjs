@@ -53,7 +53,7 @@ function timerBar() {
 }
 function finishedBar() {
   const s = sess(), hasNext = s.idx < s.queue.length - 1;
-  return `<div class="os-finished"><span class="os-fh">${I.done}<h5>Station Finished</h5></span>
+  return `<div class="os-finished"><span class="os-fh">${I.done}<h5><span class="os-fh-long">Station </span>Finished</h5></span>
     <button class="os-finbtn" data-os="${hasNext ? 'nextdlg' : 'end'}">${hasNext ? 'Next Station' : 'End Session'}</button></div>`;
 }
 function paintTimer() {

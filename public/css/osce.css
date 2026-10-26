@@ -1862,3 +1862,10 @@ button.os-libcheck { align-self:flex-start; }
 .os-libprompt > summary::after { content:'›'; font-size:18px; line-height:1; transition:transform var(--sp-snappy-ms) var(--sp-snappy); }
 .os-libprompt[open] > summary::after { transform:rotate(90deg); }
 @media (prefers-reduced-motion: reduce) { .os-present, .os-present.in, .os-present.out { transform:none; } }
+
+/* Station Finished on one line at 320: the banner says Finished beside Next Station */
+@media (max-width:400px) { .os-fh-long { display:none; } .os-fh h5 { white-space:nowrap; } }
+/* a switch the browser cannot use looks it */
+.os-switch:disabled { cursor:default; }
+.os-switch:disabled .os-switch-ui { opacity:.4; }
+.os-switch:disabled strong { color:var(--mute); }

@@ -68,7 +68,7 @@ export async function renderCandidate(root, p) {
     if (timer.c === 'mx') showPart2();
     const fin = !timer.at;
     const left = fin ? 0 : osceLeft(timer, Date.now()), total = p.timing[timer.c] * 60, pr = Math.min(1, Math.max(0, 1 - left / total)), C = 43 * 2 * Math.PI;
-    bar.innerHTML = fin ? `<div class="os-finished"><span class="os-fh">${I.done}<h5>Station Finished</h5></span></div>`
+    bar.innerHTML = fin ? `<div class="os-finished"><span class="os-fh">${I.done}<h5><span class="os-fh-long">Station </span>Finished</h5></span></div>`
       : `<div class="os-timer"><span class="os-ring${left <= 60 && timer.c !== 'reading' ? ' low' : ''}" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pr * 100)}"><svg viewBox="0 0 100 100"><circle class="os-ring-t" r="43" cx="50" cy="50"/><circle class="os-ring-s" r="43" cx="50" cy="50" transform="rotate(-90 50 50)" stroke-linecap="round" stroke-dasharray="${C * pr} ${C}" style="opacity:${pr ? 1 : 0}"/></svg></span>
         <div class="os-tcomps">${phasesOf(p.timing).map((k, i, ps) => `<div class="os-tc${k === timer.c ? ' cur' : ' off'}" title="${phaseName(k, true)}"><small>${phaseName(k)}</small><b>${k === timer.c ? mmss(left) : `${i < ps.indexOf(timer.c) ? 0 : p.timing[k]}:00`}</b></div>`).join('')}</div></div>`;
     root.querySelector('.os-sub').innerHTML = esc(fin ? 'Time is up' : phaseName(timer.c, true));
