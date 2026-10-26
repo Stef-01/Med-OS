@@ -142,8 +142,8 @@ The vendored duel knows only `origin: 'ai' | 'human'`. Med-OS now writes `source
    and document `source?` in the header comment's question shape.
 2. `duel/core.mjs` `makeSetup`: after `if (q.origin) out.origin = q.origin;`, add `if (q.source) out.source = q.source;`. The SQL `pup_challenge` needs no change (it checks options, answer, secs and size only).
 3. `ui/duel.mjs`: one map, `const SOURCE_TAG = { ai: 'AI-written', amsa: 'AMSA · AI-written', user: 'Student-written', 'usmle-resource': 'USMLE resource' };` and a `tagOf = q => SOURCE_TAG[q.source] || (q.origin === 'ai' ? 'AI-written' : '')`. Then:
-   - in the question card (around line 667): `const t = tagOf(q); tag.textContent = t; tag.hidden = !t;`
-   - in `openReview` (around line 494): replace the one sheet-level AI tag with a tag per question. In each `li`, prepend `<span class="pd-qtag"></span>` with `tagOf(q)` as its text (hidden when empty), so a mixed duel says which question came from where.
+   - in the question card (where `tag.textContent = q.origin === 'ai' ? …` is set, line 740 as vendored now): `const t = tagOf(q); tag.textContent = t; tag.hidden = !t;`
+   - in `openReview` (the `const ai = st.setup.questions.some(…)` line, 567 now): replace the one sheet-level AI tag with a tag per question. In each `li`, prepend `<span class="pd-qtag"></span>` with `tagOf(q)` as its text (hidden when empty), so a mixed duel says which question came from where.
 4. **Reading time**: pool questions are Step 2 CK vignettes (the pack's stems run to 1200 characters, about 180 words). The lobby offers 15, 20 or 30 seconds. Add 45 and 60, or scale each question's time by its stem's length, e.g. `secs + Math.ceil(words / 4)`. That would need `secs` per question in the setup, plus the same in `pup_challenge` and the server-core rules.
 5. **Setup size**: `RULES.maxSetupBytes` (and the SQL's 65,536) can be exceeded by 15 long questions with their notes and explanations (about 4–6 KB each). `makeSetup` should drop `notes`, then trim `why`, before giving up, or the cap could rise to 131,072.
 
