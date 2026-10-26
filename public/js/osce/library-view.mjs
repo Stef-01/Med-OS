@@ -28,6 +28,7 @@ import { rpc, accountsOn } from './account.mjs';
 import { animate, SPRING, reducedMotion } from '../study-kit/spring.mjs';
 
 const TABS = [['library', 'Library'], ['upload', 'Upload'], ['friends', 'Friends'], ['study', 'Study']];
+const REPORTS = { key: 'The answer is wrong', outdated: 'Out of date', unclear: 'Unclear', typo: 'A typo' };   /* 0010_mcq_reports.sql */
 const LET = 'ABCDE', GLABEL = { again: 'Again', hard: 'Hard', good: 'Good', easy: 'Easy' };
 const SEV = { block: ['Must fix', 'danger'], major: ['Fix', 'warn'], minor: ['Tip', 'tip'] };
 const V = { tab: 'library', lib: null, up: { text: '', res: null, deck: '' }, st: { deck: '', topic: '', cat: '', year: 0, diff: 0, view: '', q: null, i: 0, pick: null, n: 0, right: 0, mode: 'tutor', order: 'due', ends: 0, label: '', note: false }, bank: null, share: '', busy: false, msg: '' };
@@ -390,7 +391,8 @@ function cardHtml() {
     ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : picked < 0 ? `Time’s up: the answer is ${LET[it.answer]}` : `The answer is ${LET[it.answer]}`}</strong>${it.explanation ? `<p>${esc(it.explanation)}</p>` : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>
       ${picked !== it.answer && (card.w | 0) >= 4 && !card.note ? `<p class="os-libleech">${icon('alert')}<span>This one has caught you ${card.w} times. Write the rule in your own words: it is the fastest fix.</span></p>` : ''}
       ${V.st.note || card.note || (picked !== it.answer && (card.w | 0) >= 4) ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
-      ${gradesHtml(picked === it.answer, card, t)}` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}
+      ${gradesHtml(picked === it.answer, card, t)}
+      ${x.key.startsWith('b:') && accountsOn() ? (V.st.report === x.key ? `<div class="os-libreport" role="group" aria-label="What is wrong with it?"><span>What is wrong?</span>${Object.entries(REPORTS).map(([k, l]) => `<button class="os-chip" data-lib="report" data-v="${k}">${esc(l)}</button>`).join('')}</div>` : V.st.reported === x.key ? '<p class="os-libmeta os-libreported">Reported. Thank you.</p>' : '<button class="os-link os-libreportbtn" data-lib="reportopen">Report a problem</button>') : ''}` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}
   </div>`;
 }
 /* the day's goal, done: a burst of confetti from the top of the card (springs out, gravity down, fades), a buzz on a
@@ -543,6 +545,13 @@ async function act(a, b, e) {
     }
     case 'save': return save();
     case 'verify': return verify();
+    case 'reportopen': { V.st.report = V.st.q?.[V.st.i]?.key; paint(); return panel()?.querySelector('.os-libreport .os-chip')?.focus({ preventScroll: true }); }
+    case 'report': {
+      const x = V.st.q?.[V.st.i]; if (!x) return;
+      try { await rpc('mcq_report', { p_qid: x.item.id, p_reason: b.dataset.v, p_note: '' }); V.st.reported = x.key; notify('Reported. Thank you: it goes to whoever keeps the bank.', 'success'); }
+      catch { notify('The report did not send. Try again when you are online.', 'danger'); }
+      V.st.report = null; return paint();
+    }
     case 'keepheld': { const c = V.up.check, h = c?.held.find(x => x.item.id === b.dataset.id); if (!h) return; c.kept.add(h.item.id); V.up.res.ready.push(h.item); return paintUploadResult(); }
     case 'deckpick': { V.up.deck = b.dataset.v; const inp = panel()?.querySelector('[name="deck"]'); if (inp) inp.value = b.dataset.v; panel()?.querySelectorAll('.os-libdeckchips .os-chip').forEach(c => c.classList.toggle('on', c === b)); return; }
     case 'studydeck': Object.assign(V.st, { deck: b.dataset.deck, topic: '', cat: '', year: 0, diff: 0, q: null, view: 'custom' }); return go('study');

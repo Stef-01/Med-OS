@@ -12,6 +12,7 @@ export function libraryFake({ byToken, players, state = () => new Map() }) {
   return {
     /* 0009_mcq_picks.sql */
     mcq_pick({ p_qid, p_choice }) { if (!/^[A-Za-z0-9._-]{3,80}$/.test(p_qid || '') || /^u-/.test(p_qid) || !(p_choice >= 0 && p_choice <= 5)) return null; const k = `${p_qid}|${p_choice}`; picks.set(k, (picks.get(k) || 0) + 1); return null; },
+    mcq_report({ p_qid, p_reason }) { return /^[A-Za-z0-9._-]{3,80}$/.test(p_qid || '') && !/^u-/.test(p_qid) && ['key', 'outdated', 'unclear', 'typo', 'other'].includes(p_reason); },
     mcq_picks({ p_qid }) { const ks = [...picks.keys()].filter(k => k.startsWith(`${p_qid}|`)).map(k => +k.split('|')[1]); if (!ks.length) return []; return Array.from({ length: Math.max(...ks) + 1 }, (_, c) => picks.get(`${p_qid}|${c}`) || 0); },
     friend_week({ p_token }) {
       const me = byToken(p_token), since = new Date(Date.now() - 6 * 864e5).toISOString().slice(0, 10);

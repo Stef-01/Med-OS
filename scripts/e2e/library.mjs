@@ -154,6 +154,8 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
     const pcts = await sam.locator('.os-libpct').allTextContents();
     ok(pcts.length >= 3 && /How 5 students answered/.test(await sam.textContent('.os-libcard')), `others: each option shows how many chose it (${pcts.join(' ')})`);
     await shot(sam, '320-others');
+    await sam.click('[data-lib="reportopen"]'); await sam.click('[data-lib="report"][data-v="unclear"]'); await sam.waitForSelector('.os-libreported');
+    ok(true, 'report: a bank question can be reported (the answer is wrong, out of date, unclear, a typo)');
   }
   await sam.click('[data-lib="endstudy"]').catch(() => {}); if (await sam.locator('.os-libdone').count()) await sam.click('.os-libdone [data-lib="endstudy"]');
   /* timed: the exam's clock on each question */
