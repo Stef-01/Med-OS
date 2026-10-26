@@ -15,6 +15,8 @@
 import { CATS, gate } from './mcq.mjs';
 
 export const LIMITS = { option: 70, minDistractors: 3 }, LONG = 1.8;
+/* every specialty a station lists, so a player finds it under each (the duel's topics) */
+const topicsOf = st => (Array.isArray(st.specialty) && st.specialty.length ? [...new Set(st.specialty)].slice(0, 6) : undefined);
 const SETTING = { gp: 'in general practice', ed: 'in the emergency department', ward: 'on the ward', clinic: 'in clinic', 'birth suite': 'in the birth suite', recovery: 'in recovery' };
 const strip = s => String(s ?? '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
 const sentence = s => { const t = strip(s); return !t ? '' : /[.?!]$/.test(t) ? t : `${t}.`; };
@@ -88,7 +90,7 @@ export function stationQuestion(st, pool = []) {
     q: {
       id: `osce-${st.id}`, stem, options: [answer, ...picked.map(p => p.o)], answer: 0,
       notes: [null, ...picked.map(p => p.note)], why: sentence(st.points?.[0]) || undefined,
-      topic: st.specialty?.[0] || undefined, cat: 'clinical', origin: 'ai', station: st.id
+      topic: st.specialty?.[0] || undefined, topics: topicsOf(st), cat: 'clinical', origin: 'ai', station: st.id
     },
     why: ''
   };
@@ -104,7 +106,7 @@ export function buildPack(stations, mcq = {}) {
     for (const m of mcq[st.id]?.questions || []) {
       const issues = gate(m);
       if (issues.length) { dropped.push(`${m.id}: ${issues.join('; ')}`); continue; }
-      questions.push({ id: m.id, stem: m.stem, options: m.options, answer: m.answer, notes: m.notes, why: m.why, topic: st.specialty?.[0] || undefined, cat: m.cat, origin: 'ai', station: st.id });
+      questions.push({ id: m.id, stem: m.stem, options: m.options, answer: m.answer, notes: m.notes, why: m.why, topic: st.specialty?.[0] || undefined, topics: topicsOf(st), cat: m.cat, origin: 'ai', station: st.id });
     }
   }
   return {
