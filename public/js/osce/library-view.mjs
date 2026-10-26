@@ -208,7 +208,7 @@ async function loadBank() {
   if (V.bank) return V.bank;
   try {
     const r = await fetch('./duel/pack.json', { cache: 'no-cache' }); if (!r.ok) throw new Error();
-    V.bank = (await r.json()).questions.map(q => ({ item: { id: q.id, stem: q.stem, options: q.options, answer: q.answer, explanation: q.why || '', why: Array.isArray(q.notes) ? q.notes : [], topic: q.topic || '', cat: q.cat || '', year: q.year || 0, difficulty: q.difficulty || 0 }, deck: BANK, deckName: 'The bank', owner: '', ownerName: '', key: `b:${q.id}` }));
+    V.bank = (await r.json()).questions.map(q => ({ item: { id: q.id, stem: q.stem, options: q.options, answer: q.answer, explanation: q.why || '', why: Array.isArray(q.notes) ? q.notes : [], topic: q.topic || '', cat: q.cat || '', year: q.year || 0, difficulty: q.difficulty || 0, ...(q.credit ? { credit: q.credit } : {}) }, deck: BANK, deckName: 'The bank', owner: '', ownerName: '', key: `b:${q.id}` }));
   } catch { V.bank = []; }
   return V.bank;
 }
@@ -342,7 +342,7 @@ function cardHtml() {
       const st = !shown ? '' : i === it.answer ? ' ok' : i === picked ? ' no' : ' dim';
       return `<button class="os-libopt${st}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : ''}><b>${LET[i]}</b><span>${esc(o)}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
     }).join('')}</div>
-    ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : picked < 0 ? `Time’s up: the answer is ${LET[it.answer]}` : `The answer is ${LET[it.answer]}`}</strong>${it.explanation ? `<p>${esc(it.explanation)}</p>` : ''}</div>
+    ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : picked < 0 ? `Time’s up: the answer is ${LET[it.answer]}` : `The answer is ${LET[it.answer]}`}</strong>${it.explanation ? `<p>${esc(it.explanation)}</p>` : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>
       ${picked !== it.answer && (card.w | 0) >= 4 && !card.note ? `<p class="os-libleech">${icon('alert')}<span>This one has caught you ${card.w} times. Write the rule in your own words: it is the fastest fix.</span></p>` : ''}
       ${V.st.note || card.note || (picked !== it.answer && (card.w | 0) >= 4) ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
       <div class="os-libgrades" role="group" aria-label="How well did you know it?">${GRADES.map((g, k) => `<button class="os-btn${(picked === it.answer ? g === 'good' : g === 'again') ? ' os-primary' : ''}" data-lib="grade" data-g="${g}" aria-keyshortcuts="${k + 1}"><span>${GLABEL[g]}</span><small>${esc(preview(card, g, t))}</small></button>`).join('')}</div>` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}

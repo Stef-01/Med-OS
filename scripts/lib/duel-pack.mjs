@@ -136,7 +136,8 @@ export function poolQuestion(q, byStation = new Map()) {
 }
 /* years: { id: 1..4 } from scripts/tag-years.mjs (data/mcq/years.json); a question it has not tagged gets guessYear() */
 /* hy: the high-yield questions (scripts/generate-hy.mjs, data/mcq/high-yield.json), each already with its year and difficulty */
-export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {}, hy = [] } = {}) {
+/* mxq: MedExpQA adapted (scripts/import-medexpqa.mjs, data/mcq/medexpqa.json), each with the credit CC BY asks for */
+export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {}, hy = [], mxq = [], mxqCredit = '' } = {}) {
   const list = [...(pool?.questions || [])].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
   const byStation = new Map(stations.map(st => [st.id, st]));
   for (const p of list) { const { q, why } = poolQuestion(p, byStation); if (q) questions.push(q); else dropped.push(why); }
@@ -159,12 +160,19 @@ export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficult
     questions.push({ id: h.id, stem: h.stem, options: h.options, answer: h.answer, notes: h.notes, why: h.why, topic: h.specialty, cat: h.cat, origin: 'ai', source: 'ai', hy: 1, year: h.year, difficulty: h.difficulty });
     hyN++;
   }
+  let mxqN = 0;
+  for (const h of [...mxq].sort((a, b) => (a.id < b.id ? -1 : 1))) {
+    const issues = gate(h);
+    if (issues.length) { dropped.push(`${h.id}: ${issues.join('; ')}`); continue; }
+    questions.push({ id: h.id, stem: h.stem, options: h.options, answer: h.answer, notes: h.notes, why: h.why, topic: h.specialty, cat: h.cat, origin: 'human', hy: 1, year: h.year, difficulty: h.difficulty, credit: mxqCredit });
+    mxqN++;
+  }
   for (const q of questions) { if (q.hy) { delete q.hy; continue; } q.year = isYear(years[q.id]) ? years[q.id] : guessYear(q); q.difficulty = isDiff(difficulty[q.id]) ? difficulty[q.id] : guessDiff(q); }
   const kinds = questions.reduce((m, q) => ((m[q.source] = (m[q.source] || 0) + 1), m), {});
   const origins = new Set(questions.map(q => q.origin));
   return {
-    pack: { schemaVersion: 1, version: `pool-${questions.length - catN - hyN}-mcq-${catN}${hyN ? `-hy-${hyN}` : ''}`, title: 'Standard MCQ pool',
-      source: `Built by scripts/build-duel-pack.mjs from public/mcq/pool.json${catN ? ' and public/duel/mcq/' : ''}${hyN ? ' and data/mcq/high-yield.json' : ''}: ${Object.entries(kinds).map(([k, n]) => `${n} ${k}`).join(', ')}.`,
+    pack: { schemaVersion: 1, version: `pool-${questions.length - catN - hyN - mxqN}-mcq-${catN}${hyN ? `-hy-${hyN}` : ''}${mxqN ? `-mxq-${mxqN}` : ''}`, title: 'Standard MCQ pool',
+      source: `Built by scripts/build-duel-pack.mjs from public/mcq/pool.json${catN ? ' and public/duel/mcq/' : ''}${hyN ? ' and data/mcq/high-yield.json' : ''}${mxqN ? ' and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted)' : ''}: ${Object.entries(kinds).map(([k, n]) => `${n} ${k}`).join(', ')}.`,
       origin: origins.size === 1 ? [...origins][0] : 'mixed', cats: CATS.map(c => ({ id: c.id, label: c.label })), questions },
     dropped
   };
