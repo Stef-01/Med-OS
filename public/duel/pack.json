@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "version": "pool-159-mcq-0",
+ "version": "pool-159-mcq-4",
  "title": "Standard MCQ pool",
- "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json: 61 ai, 47 usmle-resource, 51 amsa.",
+ "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/: 65 ai, 47 usmle-resource, 51 amsa.",
  "origin": "mixed",
  "cats": [
   {
@@ -3815,6 +3815,114 @@
    "cat": "clinical",
    "origin": "ai",
    "source": "amsa"
+  },
+  {
+   "id": "osce-ai-12e898ea-skills",
+   "stem": "Dorothy, 71, is in ED resus with 2 mm ST elevation in V2 to V5, sepsis from a right lower lobe pneumonia, and a husband who died 4 days ago. She asks: \"My daughter says people die of a broken heart. Is that what this is?\" Which reply is best?",
+   "options": [
+    "Yes, grief can cause broken heart syndrome, and it usually recovers fully with rest.",
+    "Likely a heart attack and chest infection; an urgent angiogram will check the arteries",
+    "No, that's a myth; this is your chest infection, and antibiotics should settle it.",
+    "We can't tell until a heart scan tomorrow, so tonight we'll treat the chest infection."
+   ],
+   "answer": 1,
+   "notes": [
+    "Takotsubo can't be diagnosed until angiography shows no culprit lesion, so telling her it is broken heart syndrome is wrong and may lead her to refuse urgent reperfusion.",
+    null,
+    "This dismisses her concern and ignores the anterior STEMI, which needs emergency angiography, not just antibiotics.",
+    "An echo can't exclude ACS, and putting reperfusion off until tomorrow misses the 90-minute target from first medical contact."
+   ],
+   "why": "Give an honest answer in plain words: this looks like a heart attack plus a serious chest infection. Stress can affect the heart, but Takotsubo can only be diagnosed after an urgent angiogram shows no blocked artery, so that comes first.",
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology"
+   ],
+   "cat": "skills",
+   "origin": "ai",
+   "source": "ai",
+   "station": "ai-12e898ea"
+  },
+  {
+   "id": "osce-ai-12e898ea-clinical",
+   "stem": "Dorothy, 71, has 6 hours of central chest pressure, 2 mm ST elevation in V2 to V5, BP 86/52, lactate 3.4 and right lower lobe pneumonia. She has no bleeding history, no ulcers, no anticoagulants and no allergies. The cath lab is being activated. Which antithrombotic step is best now in ED?",
+   "options": [
+    "Withhold aspirin until systolic BP is above 90 mmHg and sepsis is controlled",
+    "Withhold antiplatelets until angiography has excluded Takotsubo cardiomyopathy",
+    "Aspirin 100 mg orally with enoxaparin 40 mg subcut daily for VTE prophylaxis",
+    "Aspirin 300 mg orally now; second antiplatelet and anticoagulant per cardiologist"
+   ],
+   "answer": 3,
+   "notes": [
+    "Sepsis and hypotension are not contraindications to aspirin, and delaying it takes away a treatment that lowers mortality.",
+    "Takotsubo is only a differential, so she should be treated as STEMI until angiography; withholding antiplatelets until then is unsafe.",
+    "100 mg is a maintenance dose, not the 300 mg loading dose, and VTE prophylaxis is deferred until the angiography and antithrombotic plan is set.",
+    null
+   ],
+   "why": "In suspected STEMI, give aspirin 300 mg (chewed or dispersed) unless there is a true contraindication such as allergy or active major bleeding. The interventional cardiologist chooses the second antiplatelet and the anticoagulant.",
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "station": "ai-12e898ea"
+  },
+  {
+   "id": "osce-ai-12e898ea-physio",
+   "stem": "Dorothy, 71, with an anterior STEMI and septic shock from pneumonia, has BP 86/52, HR 112, a CRT of 4 seconds and cool, clammy peripheries. The nurse asks whether she can have sublingual GTN for her ongoing chest pain. What is the main reason GTN is withheld here?",
+   "options": [
+    "Venodilation cuts preload, so stroke volume and BP fall further in shock",
+    "Arteriolar dilation diverts flow away from the ischaemic anterior wall",
+    "It raises systemic vascular resistance, increasing afterload on the injured LV",
+    "It causes methaemoglobinaemia, worsening her hypoxia from the pneumonia"
+   ],
+   "answer": 0,
+   "notes": [
+    null,
+    "Coronary steal is a theoretical effect of some vasodilators. It is not why GTN is withheld here; the reason is hypotension from reduced preload.",
+    "Nitrates lower systemic vascular resistance and afterload rather than raising them, so this has the mechanism backwards.",
+    "Methaemoglobinaemia is rare at therapeutic GTN doses and is not why it is contraindicated in a hypotensive patient."
+   ],
+   "why": "GTN mainly dilates veins. This lowers venous return and preload, so by the Frank-Starling mechanism stroke volume and BP drop. That is why it is avoided when systolic BP is below 90 mmHg; give titrated IV opioid for the pain instead.",
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology"
+   ],
+   "cat": "physio",
+   "origin": "ai",
+   "source": "ai",
+   "station": "ai-12e898ea"
+  },
+  {
+   "id": "osce-ai-12e898ea-anatomy",
+   "stem": "Dorothy, 71, has 2 mm ST elevation in V2 to V5, isoelectric inferior leads, no change in I, aVL or V6, and no ST elevation in aVR. If angiography finds a culprit coronary occlusion, which artery is it most likely to be in?",
+   "options": [
+    "Right coronary artery",
+    "Left circumflex artery",
+    "Left anterior descending artery",
+    "Left main coronary artery"
+   ],
+   "answer": 2,
+   "notes": [
+    "RCA occlusion usually gives inferior ST elevation (II, III, aVF), often with reciprocal depression in aVL, and her inferior leads are isoelectric.",
+    "Circumflex occlusion affects the lateral or posterior wall (I, aVL, V5 to V6, or ST depression in V1 to V3), not isolated V2 to V5 elevation.",
+    null,
+    "Left main occlusion typically gives ST elevation in aVR with widespread ST depression and severe shock, and her aVR is normal."
+   ],
+   "why": "Leads V2 to V5 face the anterior wall and septum, which are supplied by the left anterior descending artery. Contiguous ST elevation in these leads localises the occlusion to the LAD.",
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology"
+   ],
+   "cat": "anatomy",
+   "origin": "ai",
+   "source": "ai",
+   "station": "ai-12e898ea"
   }
  ]
 }

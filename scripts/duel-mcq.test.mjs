@@ -68,3 +68,9 @@ test('the pack: each pooled question is Clinical, category questions join under 
   assert.deepEqual(paeds.cats.map(c => c.label), CATS.map(c => c.label));
   assert.equal(paeds.cats.find(c => c.id === 'anatomy').count, 1);
 });
+
+test("the writer takes the CLI's answer wrapped as { value }", async () => {
+  const st = { id: 'ai-w', title: 'W', specialty: ['Paediatrics'] };
+  const { file } = await writeStationMcq(st, async () => ({ value: { questions: CAT_IDS.map(c => good(c)) } }), 't');
+  assert.deepEqual(file.questions.map(q => q.cat), CAT_IDS);
+});
