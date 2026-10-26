@@ -35,11 +35,14 @@ const day = () => new Date(now()).toISOString().slice(0, 10);
 /* the start view's card */
 export function libraryCardHtml() {
   const lib = api.current(), all = api.allItems(lib), c = counts(all.map(x => ({ id: x.key })), api.studyMem().card, now());
-  const sub = all.length ? `${all.length} question${all.length === 1 ? '' : 's'}${c.due ? ` · ${c.due} due` : ''}${lib.shared.length ? ` · ${lib.shared.length} from friends` : ''}`
-    : 'Turn your notes into questions with ChatGPT, study them and share them with friends.';
+  const mem = api.studyMem(), t = now(), sk = streak(mem.days, t), td = today(mem.days, t, myPref().goal);
+  const sub = sk.days || td.n ? `${td.n} of ${td.goal} today${c.due ? ` · ${c.due} due` : ''}`
+    : all.length ? `${all.length} question${all.length === 1 ? '' : 's'}${c.due ? ` · ${c.due} due` : ''}${lib.shared.length ? ` · ${lib.shared.length} from friends` : ''}`
+    : 'Study the bank or your own questions from ChatGPT, track your gaps, share with friends.';
+  /* the streak is on Start, so the habit is seen before the tap (Duolingo) */
   return `<button class="os-card os-bigcard os-in" data-os="lib" style="--d:3">
     <span class="os-bigic">${icon('cards')}</span>
-    <span class="os-bigtx"><strong>Your questions</strong><span>${esc(sub)}</span></span>
+    <span class="os-bigtx"><strong>Your questions${sk.days ? ` <span class="os-libstartstreak${sk.live ? ' live' : ''}">${icon('flame')}${sk.days}</span>` : ''}</strong><span>${esc(sub)}</span></span>
     <span class="os-chev">${I.chevR}</span></button>`;
 }
 

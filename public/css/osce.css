@@ -1647,3 +1647,7 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-libnext { min-height:56px !important; font-size:16px; }
 .os-libnext small { opacity:.85; }
 .os-libmisread { align-self:center; font-size:13px; }
+
+.os-libstartstreak { display:inline-flex; align-items:center; gap:2px; margin-left:6px; padding:1px 8px 1px 5px; border-radius:99px; background:var(--fill); color:var(--mute); font-size:13px; font-weight:800; vertical-align:2px; }
+.os-libstartstreak svg { width:14px; height:14px; }
+.os-libstartstreak.live { background:rgba(255,122,26,.16); color:#ff9a4a; }
