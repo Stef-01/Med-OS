@@ -1,52 +1,52 @@
 {
  "stats": {
   "candidates": {
-   "ai": 273,
+   "ai": 299,
    "amsa": 105,
    "open-exam": 786,
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 190,
-   "open-exam": 16,
+   "ai": 217,
+   "open-exam": 22,
    "usmle-resource": 160,
    "amsa": 56
   },
   "status": {
-   "pool": 422,
-   "rejected": 332,
-   "reserve": 550,
-   "pending": 726
+   "pool": 455,
+   "rejected": 352,
+   "reserve": 525,
+   "pending": 724
   },
   "topics": {
    "Endocrinology": 16,
    "Breast/Endocrine Surgery": 2,
-   "Paediatrics": 28,
+   "Paediatrics": 31,
    "Obstetrics": 13,
    "Trauma Surgery": 7,
-   "Gastroenterology": 54,
-   "Cardiology": 42,
-   "Haematology": 8,
-   "Infectious Diseases": 33,
-   "Rheumatology": 12,
-   "Emergency Medicine": 20,
-   "Respiratory Medicine": 20,
+   "Gastroenterology": 58,
+   "Cardiology": 48,
+   "Haematology": 9,
+   "Otorhinolaryngology": 11,
+   "Vascular Surgery": 7,
+   "Infectious Diseases": 36,
+   "Rheumatology": 14,
+   "Emergency Medicine": 21,
+   "Respiratory Medicine": 22,
    "Neurology": 35,
    "Neonatology": 10,
    "Neurosurgery": 4,
-   "General Surgery": 15,
-   "Vascular Surgery": 5,
-   "Otorhinolaryngology": 9,
-   "General Practice": 12,
+   "General Surgery": 16,
+   "Gynaecology": 13,
+   "General Practice": 14,
    "Gastrointestinal Surgery": 4,
    "Cardiothoracic Surgery": 2,
-   "Gynaecology": 12,
-   "Ophthalmology": 2,
+   "Urology": 5,
+   "Ophthalmology": 3,
    "Sexual Health": 5,
    "Nephrology": 7,
-   "Urology": 4,
+   "Pathology": 2,
    "Public Health": 1,
-   "Pathology": 1,
    "Dermatology": 2,
    "Orthopaedics": 7,
    "Geriatrics": 3,
@@ -71,17 +71,17 @@
    },
    "5": {
     "counts": [
-     34,
+     44,
+     47,
+     44,
      45,
-     37,
-     41,
-     42
+     52
     ],
-    "n": 199,
-    "chi2": 1.88
+    "n": 232,
+    "chi2": 0.97
    }
   },
-  "topicCap": 64,
+  "topicCap": 69,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -179,11 +179,28 @@
    "quality": 96
   },
   {
+   "id": "ai-mcq-0c000e2e",
+   "kind": "ai",
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
+  },
+  {
    "id": "ai-mcq-0e183e64",
    "kind": "ai",
    "status": "pool",
    "reasons": [],
    "quality": 93
+  },
+  {
+   "id": "ai-mcq-0e28ef04",
+   "kind": "ai",
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
+   "flaws": [
+    "vignette:minor"
+   ]
   },
   {
    "id": "ai-mcq-0e730b6c",
@@ -216,10 +233,8 @@
   {
    "id": "ai-mcq-1002d1fb",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 91), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 91,
    "flaws": [
     "absolute-terms:minor"
@@ -256,6 +271,18 @@
    "quality": 96
   },
   {
+   "id": "ai-mcq-1700aeb5",
+   "kind": "ai",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 94, review 78): vignette"
+   ],
+   "quality": 84,
+   "flaws": [
+    "vignette:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-18db6652",
    "kind": "ai",
    "status": "pool",
@@ -275,6 +302,17 @@
    "status": "pool",
    "reasons": [],
    "quality": 93
+  },
+  {
+   "id": "ai-mcq-1a513aef",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "vignette:minor"
+   ]
   },
   {
    "id": "ai-mcq-1ca98ea1",
@@ -338,10 +376,8 @@
   {
    "id": "ai-mcq-24f17d9e",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 91), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 91,
    "flaws": [
     "absolute-terms:minor"
@@ -362,6 +398,17 @@
     "passed (quality 90), but the AI quota of 110 is full"
    ],
    "quality": 90
+  },
+  {
+   "id": "ai-mcq-290aeef2",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "vignette:minor"
+   ]
   },
   {
    "id": "ai-mcq-2ab3fc48",
@@ -479,11 +526,17 @@
   {
    "id": "ai-mcq-3774818c",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 90
+  },
+  {
+   "id": "ai-mcq-37b00158",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
   },
   {
    "id": "ai-mcq-3bd5914c",
@@ -509,10 +562,8 @@
   {
    "id": "ai-mcq-3eded9df",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 92), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 92,
    "flaws": [
     "vignette:minor"
@@ -521,10 +572,8 @@
   {
    "id": "ai-mcq-3f4f920f",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 91), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 91,
    "flaws": [
     "vignette:minor"
@@ -587,12 +636,18 @@
    ]
   },
   {
+   "id": "ai-mcq-42e049b2",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
+  },
+  {
    "id": "ai-mcq-4374c88b",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 91), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 91
   },
   {
@@ -608,10 +663,8 @@
   {
    "id": "ai-mcq-4550ca09",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -666,6 +719,14 @@
    "quality": 98
   },
   {
+   "id": "ai-mcq-4f2ae166",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
+  },
+  {
    "id": "ai-mcq-4f5dd328",
    "kind": "ai",
    "status": "pool",
@@ -682,10 +743,8 @@
   {
    "id": "ai-mcq-52737390",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 90,
    "flaws": [
     "clang:minor"
@@ -704,6 +763,14 @@
    "status": "pool",
    "reasons": [],
    "quality": 98
+  },
+  {
+   "id": "ai-mcq-537f99f4",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
   },
   {
    "id": "ai-mcq-54e2d3b7",
@@ -810,6 +877,14 @@
    ]
   },
   {
+   "id": "ai-mcq-666bb226",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
+  },
+  {
    "id": "ai-mcq-66c25f9f",
    "kind": "ai",
    "status": "rejected",
@@ -834,6 +909,14 @@
    ]
   },
   {
+   "id": "ai-mcq-6939cf80",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
+  },
+  {
    "id": "ai-mcq-69810eec",
    "kind": "ai",
    "status": "pool",
@@ -843,10 +926,8 @@
   {
    "id": "ai-mcq-6a0f5077",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 92), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 92
   },
   {
@@ -919,11 +1000,30 @@
    ]
   },
   {
+   "id": "ai-mcq-721d224a",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "vignette:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-735ee53b",
    "kind": "ai",
    "status": "pool",
    "reasons": [],
    "quality": 95
+  },
+  {
+   "id": "ai-mcq-73e11c00",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
   },
   {
    "id": "ai-mcq-73ea6682",
@@ -952,10 +1052,8 @@
   {
    "id": "ai-mcq-78977a42",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 92), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 92
   },
   {
@@ -1044,6 +1142,17 @@
    "quality": 98
   },
   {
+   "id": "ai-mcq-85579bea",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "vignette:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-8557a042",
    "kind": "ai",
    "status": "pool",
@@ -1109,6 +1218,14 @@
    "quality": 95
   },
   {
+   "id": "ai-mcq-91cd4049",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
+  },
+  {
    "id": "ai-mcq-91f368bd",
    "kind": "ai",
    "status": "pool",
@@ -1147,6 +1264,14 @@
    "quality": 93,
    "flaws": [
     "vignette:minor"
+   ]
+  },
+  {
+   "id": "ai-mcq-9630c1c8",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
    ]
   },
   {
@@ -1230,6 +1355,14 @@
    "quality": 98
   },
   {
+   "id": "ai-mcq-a111fffd",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
+  },
+  {
    "id": "ai-mcq-a2ea039e",
    "kind": "ai",
    "status": "pool",
@@ -1246,20 +1379,24 @@
   {
    "id": "ai-mcq-a4dc39d7",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 91), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 91
   },
   {
    "id": "ai-mcq-a50273e5",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 89), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 89
+  },
+  {
+   "id": "ai-mcq-a5aa4adc",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
   },
   {
    "id": "ai-mcq-a5d97492",
@@ -1331,10 +1468,8 @@
   {
    "id": "ai-mcq-aa50ea7f",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 92), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 92
   },
   {
@@ -1343,6 +1478,14 @@
    "status": "pool",
    "reasons": [],
    "quality": 95
+  },
+  {
+   "id": "ai-mcq-ab6709ff",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
   },
   {
    "id": "ai-mcq-abe23890",
@@ -1402,10 +1545,8 @@
   {
    "id": "ai-mcq-aeef6992",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 89), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 89
   },
   {
@@ -1439,6 +1580,17 @@
    "quality": 98
   },
   {
+   "id": "ai-mcq-b3d155cd",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "vignette:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-b748662d",
    "kind": "ai",
    "status": "pool",
@@ -1455,10 +1607,8 @@
   {
    "id": "ai-mcq-b83a1d3a",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -1467,6 +1617,14 @@
    "status": "pool",
    "reasons": [],
    "quality": 93
+  },
+  {
+   "id": "ai-mcq-b9b0ae77",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
   },
   {
    "id": "ai-mcq-b9d55ffd",
@@ -1595,10 +1753,8 @@
   {
    "id": "ai-mcq-c79825ea",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -1625,13 +1781,19 @@
   {
    "id": "ai-mcq-c92d6c55",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 91), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 91,
    "flaws": [
     "clang:minor"
+   ]
+  },
+  {
+   "id": "ai-mcq-ca714e89",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
    ]
   },
   {
@@ -1640,6 +1802,14 @@
    "status": "pool",
    "reasons": [],
    "quality": 98
+  },
+  {
+   "id": "ai-mcq-cb57b683",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
   },
   {
    "id": "ai-mcq-cb6f7f3a",
@@ -1651,10 +1821,8 @@
   {
    "id": "ai-mcq-cbe34a57",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 91), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 91,
    "flaws": [
     "vignette:minor"
@@ -1707,6 +1875,14 @@
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor"
+   ]
+  },
+  {
+   "id": "ai-mcq-d2d3aaeb",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
    ]
   },
   {
@@ -1779,6 +1955,14 @@
    ]
   },
   {
+   "id": "ai-mcq-de6e33b3",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
+  },
+  {
    "id": "ai-mcq-defb8d10",
    "kind": "ai",
    "status": "pool",
@@ -1795,10 +1979,8 @@
   {
    "id": "ai-mcq-e335ed48",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 93), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 93
   },
   {
@@ -1906,19 +2088,15 @@
   {
    "id": "ai-mcq-ecb71b7c",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
    "id": "ai-mcq-ed06a97b",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 93), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 93
   },
   {
@@ -1963,10 +2141,8 @@
   {
    "id": "ai-mcq-eebf0140",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 93), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 93,
    "flaws": [
     "vignette:minor"
@@ -1989,29 +2165,31 @@
   {
    "id": "ai-mcq-f2dc7371",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 91), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 91
   },
   {
    "id": "ai-mcq-f2e60c9e",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 89), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 89
   },
   {
    "id": "ai-mcq-f5055925",
    "kind": "ai",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 93), but the AI-written Rapid quota of 80 is full"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 93
+  },
+  {
+   "id": "ai-mcq-f8c94d0a",
+   "kind": "ai",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
   },
   {
    "id": "ai-mcq-f8ee9f83",
@@ -3660,10 +3838,11 @@
   {
    "id": "headqa-2013-35",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: This is basic-science embryology recall with no patient and no clinical application, so it is not Step 2 CK material."
    ],
+   "quality": 60,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -3673,10 +3852,11 @@
   {
    "id": "headqa-2013-36",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 94, review 60): vignette"
    ],
+   "quality": 74,
    "flaws": [
     "vignette:minor"
    ]
@@ -3684,10 +3864,11 @@
   {
    "id": "headqa-2013-37",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -3696,10 +3877,11 @@
   {
    "id": "headqa-2013-38",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 68, review 78): lead-in, vignette, stem-length"
    ],
+   "quality": 74,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -3709,10 +3891,11 @@
   {
    "id": "headqa-2013-39",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 70 is below the base bar of 81 (flaws 68, review 71): lead-in, vignette, stem-length"
    ],
+   "quality": 70,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -3722,10 +3905,11 @@
   {
    "id": "headqa-2013-40",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Recall of a single fact with no patient, so it is not at Step 2 CK level"
    ],
+   "quality": 69,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -3735,10 +3919,9 @@
   {
    "id": "headqa-2013-41",
    "kind": "open-exam",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 81,
    "flaws": [
     "cover-options:minor"
    ]
@@ -3746,19 +3929,19 @@
   {
    "id": "headqa-2013-42",
    "kind": "open-exam",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "headqa-2013-43",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Pure basic pharmacokinetic recall with no clinical application; not Step 2 CK style"
    ],
+   "quality": 74,
    "flaws": [
     "cover-options:minor",
     "vignette:minor",
@@ -3768,10 +3951,11 @@
   {
    "id": "headqa-2013-45",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 68, review 81): cover-options, vignette, stem-length"
    ],
+   "quality": 76,
    "flaws": [
     "cover-options:major",
     "vignette:minor",
@@ -3781,10 +3965,11 @@
   {
    "id": "headqa-2013-46",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 66 is below the base bar of 81 (flaws 68, review 64): lead-in, vignette, stem-length"
    ],
+   "quality": 66,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -3794,10 +3979,11 @@
   {
    "id": "headqa-2013-47",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: The key is correct: smooth muscle contraction is regulated by Ca2+-calmodulin and myosin light-chain kinase, not troponin."
    ],
+   "quality": 68,
    "flaws": [
     "cover-options:major",
     "vignette:minor",
@@ -3834,10 +4020,11 @@
   {
    "id": "headqa-2013-50",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 74, review 76): absolute-terms, vignette"
    ],
+   "quality": 75,
    "flaws": [
     "absolute-terms:minor",
     "vignette:major"
@@ -3846,10 +4033,9 @@
   {
    "id": "headqa-2013-51",
    "kind": "open-exam",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor"
@@ -3858,10 +4044,11 @@
   {
    "id": "headqa-2013-52",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 66 is below the base bar of 81 (flaws 74, review 61): vignette, stem-length"
    ],
+   "quality": 66,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -3870,10 +4057,11 @@
   {
    "id": "headqa-2013-53",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Recall of a basic-science fact with no patient, so not Step 2 CK material"
    ],
+   "quality": 66,
    "flaws": [
     "cover-options:major",
     "vignette:minor",
@@ -3883,10 +4071,12 @@
   {
    "id": "headqa-2013-54",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D also defensible)",
+    "the reviewer rejected it: Option D is also correct because IVIG is not recommended for multiple sclerosis"
    ],
+   "quality": 56,
    "flaws": [
     "negative-stem:major",
     "vignette:minor",
@@ -3896,10 +4086,12 @@
   {
    "id": "headqa-2013-55",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (E, D also defensible)",
+    "the reviewer rejected it: Recall of a textbook list with no patient, so it is not Step 2 CK material"
    ],
+   "quality": 46,
    "flaws": [
     "lead-in:major",
     "negative-stem:major",
@@ -3910,10 +4102,11 @@
   {
    "id": "headqa-2013-56",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Pure basic-science recall with no patient; not Step 2 CK application"
    ],
+   "quality": 82,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -3922,10 +4115,11 @@
   {
    "id": "headqa-2013-57",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 74, review 80): vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -3960,10 +4154,9 @@
   {
    "id": "headqa-2013-60",
    "kind": "open-exam",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -3972,10 +4165,11 @@
   {
    "id": "headqa-2013-61",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: This is microbiology taxonomy recall with no patient, so it is not Step 2 CK material"
    ],
+   "quality": 69,
    "flaws": [
     "cover-options:minor",
     "negative-stem:major",
@@ -3986,10 +4180,11 @@
   {
    "id": "headqa-2013-62",
    "kind": "open-exam",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 74, review 83): lead-in, vignette"
    ],
+   "quality": 79,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -3998,19 +4193,17 @@
   {
    "id": "headqa-2013-63",
    "kind": "open-exam",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "headqa-2013-64",
    "kind": "open-exam",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {

@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "version": "pool-422",
+ "version": "pool-455",
  "title": "Standard MCQ pool",
  "note": "Built by scripts/mcq-pool.mjs: candidates from the stations, generate-mcq.mjs, the open USMLE-style banks in data/benchmarks and student submissions, admitted on the flaw checks, the model review and the bars calibrated on the benchmarks (docs/mcq.md). provenance.kind says where each came from: user, ai, amsa or usmle-resource.",
  "bars": {
@@ -9,8 +9,8 @@
   "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
  },
  "counts": {
-  "ai": 190,
-  "open-exam": 16,
+  "ai": 217,
+  "open-exam": 22,
   "usmle-resource": 160,
   "amsa": 56
  },
@@ -685,6 +685,73 @@
    }
   },
   {
+   "id": "ai-mcq-0c000e2e",
+   "stem": "A 47-year-old man has had three spontaneous attacks of spinning vertigo, each lasting 4 hours, with fluctuating left-ear hearing loss, tinnitus and fullness. Examination between attacks is normal.",
+   "ask": "Which test best confirms the diagnosis?",
+   "options": [
+    "Pure-tone audiometry",
+    "MRI internal acoustic meatus",
+    "Dix-Hallpike manoeuvre",
+    "Caloric testing",
+    "CT brain"
+   ],
+   "answer": 0,
+   "explanation": "His spontaneous vertigo attacks lasting hours, with fluctuating ear symptoms on one side, point to Ménière's disease. The Bárány criteria for definite Ménière's disease need a low- to medium-frequency sensorineural hearing loss in the affected ear, documented on audiometry. Pure-tone audiometry is therefore the test that confirms it.",
+   "why": [
+    null,
+    "MRI is used to rule out a vestibular schwannoma once audiometry shows an uneven sensorineural loss; it cannot confirm Ménière's disease.",
+    "The Dix-Hallpike manoeuvre tests for BPPV, which causes positional vertigo lasting seconds, not spontaneous attacks lasting hours.",
+    "Caloric testing may show reduced function on one side, but it is not specific and is not part of the diagnostic criteria.",
+    "CT scanning is poor at showing the posterior fossa and inner ear, and nothing here suggests stroke or another central cause."
+   ],
+   "topic": "Otorhinolaryngology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-190",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-190",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:41.255Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-190",
+      "osce-amsa-190"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0964",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0657"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 93,
+    "quality": 96,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:29:01.469Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-0e183e64",
    "stem": "A 25-year-old man with newly diagnosed ileocolonic Crohn's disease has haemoglobin 118 g/L, MCV 76 fL, ferritin 16 µg/L, transferrin saturation 8% and CRP 28 mg/L.",
    "ask": "Most likely cause of his anaemia?",
@@ -748,6 +815,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:04:40.260Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-0e28ef04",
+   "stem": "A 72-year-old man with 18 years of type 2 diabetes has night forefoot pain eased by hanging his foot over the bed. Pedal pulses are absent; ankle-brachial index is 1.40.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Repeat ankle-brachial index",
+    "Toe-brachial index",
+    "Exercise treadmill test",
+    "Plain foot x-ray",
+    "Lumbar spine MRI"
+   ],
+   "answer": 1,
+   "explanation": "Rest pain eased by dependency and absent pulses point to peripheral arterial disease. In long-standing diabetes, an ABI of 1.3 or more usually means calcified, incompressible tibial arteries, so the ABI cannot be trusted. Diabetes Feet Australia guidelines recommend toe pressure or toe-brachial index (with Doppler waveforms), because digital arteries are rarely calcified.",
+   "why": [
+    "Repeating the test gives the same falsely high reading, because the calcified ankle vessels still cannot be compressed.",
+    null,
+    "An exercise ABI still relies on compressing the calcified ankle arteries, and it is unsafe and unnecessary in a man with rest pain.",
+    "Plain x-ray may show calcified arteries or bone changes but does not measure limb perfusion or confirm ischaemia.",
+    "Neurogenic claudication causes pain on walking, not night forefoot pain eased by hanging the foot down with absent pulses."
+   ],
+   "topic": "Vascular Surgery",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-327",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-327",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:36.938Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-327",
+      "osce-amsa-327"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1083",
+      "medqa-us4-test-0926",
+      "medqa-us4-test-0511"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 93,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:28:55.553Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -1014,6 +1150,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:04:58.460Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-1002d1fb",
+   "stem": "A 36-year-old woman with Crohn's disease is due to start infliximab. Screening shows HBsAg positive, anti-HBc positive, HBeAg negative and HBV DNA 400 IU/mL. ALT is normal.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Hepatitis B vaccination",
+    "Monitor HBV DNA only",
+    "Hepatitis B immunoglobulin",
+    "Start entecavir first",
+    "Abandon infliximab permanently"
+   ],
+   "answer": 3,
+   "explanation": "She is HBsAg positive, which means chronic hepatitis B, and anti-TNF therapy carries a high risk of hepatitis B reactivation. Australian guidance is to start entecavir or tenofovir before immunosuppression and keep it going during treatment and for at least 12 months after. A low viral load and normal ALT do not remove the need for this prophylaxis.",
+   "why": [
+    "Vaccination does nothing for someone who already has the infection; it is for people with no markers of infection or immunity.",
+    "Monitoring without treatment is an option only for low-risk HBsAg-negative, anti-HBc-positive patients, not for HBsAg-positive patients starting anti-TNF therapy.",
+    "Hepatitis B immunoglobulin is for post-exposure protection, such as in newborns of HBsAg-positive mothers, and does not prevent reactivation.",
+    null,
+    "Infliximab can still be given safely with antiviral cover, so denying effective Crohn's treatment is not justified."
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-44e14180",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-44e14180",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:39:47.087Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-44e14180",
+      "osce-ai-44e14180"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0628",
+      "medqa-us4-test-1047",
+      "medqa-us4-test-0408"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "absolute-terms:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 89,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:04:59.291Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -1746,6 +1951,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:26:57.318Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-24f17d9e",
+   "stem": "On the paediatric ward, a 3-year-old boy recovers after bronchoscopic removal of a peanut that caused chronic cough and left-sided wheeze. His parents ask how to protect him and his 14-month-old sister.",
+   "ask": "Most important prevention advice?",
+   "options": [
+    "Delay nut introduction",
+    "Purée all foods",
+    "Back blows if coughing",
+    "Serial chest X-rays",
+    "Avoid whole nuts"
+   ],
+   "answer": 4,
+   "explanation": "Inhaled foreign bodies are most common between 1 and 3 years of age, and nuts are the classic culprit. Australian advice (RCH, Kidsafe) is to give no whole nuts or similar hard, small foods to children under 5 years, and to supervise them seated at meals. Nut allergy prevention still uses smooth nut pastes, not whole nuts.",
+   "why": [
+    "ASCIA advises introducing peanut early as smooth paste to prevent allergy, and delaying it adds allergy risk without reducing choking risk.",
+    "Puréeing everything is not needed and holds back feeding development; the aim is to avoid hard, small, round foods.",
+    "ANZCOR advises encouraging a child who is coughing effectively to keep coughing, and back blows are only for an ineffective cough.",
+    "Once the object is removed and the child recovers, routine serial X-rays do not prevent another inhalation.",
+    null
+   ],
+   "topic": "Paediatrics",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:ai-7789e6bf",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-7789e6bf",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:38:51.509Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-7789e6bf",
+      "osce-ai-7789e6bf"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0843",
+      "medqa-us4-test-0374",
+      "medqa-us4-test-1237"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "absolute-terms:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 89,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:05:33.121Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -2750,6 +3024,73 @@
    }
   },
   {
+   "id": "ai-mcq-3774818c",
+   "stem": "A 26-year-old woman taking the combined oral contraceptive pill has a proximal left leg DVT on compression ultrasound. Rivaroxaban is started for 3 months. She wants ongoing contraception.",
+   "ask": "Most appropriate contraceptive advice?",
+   "options": [
+    "Continue combined pill",
+    "Change to vaginal ring",
+    "Stop pill without replacement",
+    "Switch to 20-microgram pill",
+    "Etonogestrel implant now"
+   ],
+   "answer": 4,
+   "explanation": "After a VTE, oestrogen-containing contraception should be stopped (UKMEC 4) and replaced straight away with a non-oestrogen method such as a progestogen implant, LNG-IUD or copper IUD. Rivaroxaban must not be taken in pregnancy, so she needs effective contraception throughout anticoagulation.",
+   "why": [
+    "A progestogen-only implant is highly effective, carries no meaningful VTE risk, and protects against pregnancy while she takes a DOAC.",
+    "The combined pill's oestrogen provoked this clot, and continuing it carries an unacceptable risk of recurrent VTE.",
+    "The vaginal ring contains ethinylestradiol and carries the same VTE risk as the combined pill.",
+    "Any dose of ethinylestradiol is contraindicated after VTE, so a lower-dose combined pill is still unsafe.",
+    null
+   ],
+   "topic": "Haematology",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:amsa-310",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-310",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:37:56.103Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-310",
+      "osce-amsa-310"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0867",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0047"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 83,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:06:34.774Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-3bd5914c",
    "stem": "A 62-year-old woman comes to a rural emergency department with 3 weeks of constant burning pain in her right forefoot. The pain is worst at night when she lies flat, so she has been sleeping in a recliner with the right foot hanging over the edge. For years she has had calf pain after walking short distances. She has type 2 diabetes, hypertension, a previous myocardial infarction and an ischaemic stroke. She smokes 20 cigarettes a day. Temperature is 36.8 °C, pulse 88/min and regular, blood pressure 164/88 mmHg, respiratory rate 18/min and SpO2 96% on room air. The right great, second and third toes are black, shrivelled and hard, with a sharp line of demarcation and no discharge, swelling or erythema. The fourth toe is dusky. The right popliteal and pedal pulses are absent. The right ankle-brachial index is 0.28, and both ankle pressures are below 50 mmHg. WCC is 8.9 x10^9/L and CRP is 12 mg/L. The tertiary vascular unit has accepted her, and transfer is booked for tomorrow morning.",
    "ask": "Which of the following is the most appropriate measure to reduce her risk of further tissue loss while she waits for transfer?",
@@ -2945,6 +3286,144 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:41:31.597Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-3eded9df",
+   "stem": "A 66-year-old man presents to the emergency department with 2 days of lower abdominal colic, gross tympanic distension and no flatus since yesterday. He vomited once today. Rectum is empty.",
+   "ask": "Which investigation best confirms the diagnosis?",
+   "options": [
+    "Abdominal radiograph",
+    "Urgent colonoscopy",
+    "Abdominal ultrasound",
+    "Contrast enema",
+    "Contrast CT abdomen"
+   ],
+   "answer": 4,
+   "explanation": "Early obstipation, marked distension and late vomiting point to large bowel obstruction. CT of the abdomen and pelvis with IV contrast is the key investigation. It confirms the obstruction and shows its level and cause (cancer, diverticular stricture or volvulus), and it picks up complications such as caecal dilatation, ischaemia or perforation.",
+   "why": [
+    "A plain radiograph may show dilated colon, but it is less sensitive and cannot reliably find the cause or detect ischaemia.",
+    "Colonoscopy is not used to diagnose acute obstruction because insufflating an obstructed, distended colon risks perforation.",
+    "Ultrasound is limited by gas in a distended bowel and cannot reliably show the level or cause of a colonic obstruction.",
+    "A water-soluble contrast enema can show the site of blockage but has mostly been replaced by CT, which also assesses the rest of the abdomen and complications.",
+    null
+   ],
+   "topic": "General Surgery",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-377",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-377",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:44:48.511Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-377",
+      "osce-amsa-377"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0936",
+      "medqa-us4-test-0576",
+      "medqa-us4-test-0522"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 91,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:06:44.716Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-3f4f920f",
+   "stem": "A 71-year-old man is ready for discharge after IV diuresis for decompensated heart failure from ischaemic cardiomyopathy, LVEF 30%. He asks how to detect fluid reaccumulation early at home.",
+   "ask": "Most appropriate advice?",
+   "options": [
+    "Weekly ankle measurements",
+    "Home pulse oximetry",
+    "Monthly NT-proBNP testing",
+    "Daily blood pressure checks",
+    "Daily morning weights"
+   ],
+   "answer": 4,
+   "explanation": "Recurrent congestion is the main early risk after a heart failure admission, and fluid builds up in the body before symptoms appear. The Heart Foundation/CSANZ guidelines advise weighing every morning after voiding, on the same scales, and seeing the GP promptly if weight rises by more than 2 kg over 2 days or swelling or breathlessness gets worse. Chest pain or severe breathlessness means calling 000.",
+   "why": [
+    "Measuring the ankles once a week picks up oedema late and gives no reliable number to act on.",
+    "Oxygen saturation usually falls only once pulmonary oedema is established, so it does not give early warning.",
+    "NT-proBNP guides diagnosis and specialist review; a monthly test is too infrequent for home monitoring and not practical.",
+    "Blood pressure checks help with titrating drugs, but blood pressure does not track fluid build-up reliably.",
+    null
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:amsa-475",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-475",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:41:43.671Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-475",
+      "osce-amsa-475"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0955",
+      "medqa-us4-test-0453",
+      "medqa-us4-test-0851"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 89,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:06:48.891Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -3280,6 +3759,73 @@
    }
   },
   {
+   "id": "ai-mcq-4374c88b",
+   "stem": "A 47-year-old man wakes with a muffled right ear. Audiogram: right air conduction 45 to 65 dB HL, masked bone conduction within 5 dB at every frequency; left normal.",
+   "ask": "What does the audiogram show?",
+   "options": [
+    "Right conductive loss",
+    "Right mixed hearing loss",
+    "Right sensorineural loss",
+    "Left sensorineural loss",
+    "Functional (non-organic) loss"
+   ],
+   "answer": 2,
+   "explanation": "Raised air conduction thresholds with masked bone conduction within 10 dB of them mean there is no air-bone gap, so the loss is sensorineural. In a sudden-onset loss this needs same-day ENT contact, prompt steroids and an MRI of the internal auditory canals.",
+   "why": [
+    "A conductive loss would leave bone conduction near normal, with an air-bone gap of more than 10 dB, and here there is no gap.",
+    "A mixed loss needs raised bone conduction thresholds plus an air-bone gap, and here there is no gap.",
+    null,
+    "The left ear thresholds are normal, so the loss is in the right ear.",
+    "Masked thresholds that are consistent across frequencies and match a sudden symptomatic loss point to a real organic loss, not a non-organic one."
+   ],
+   "topic": "Otorhinolaryngology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:ai-95865471",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-95865471",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:38:48.660Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-95865471",
+      "osce-ai-95865471"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0964",
+      "medqa-us4-test-0302",
+      "medqa-us4-test-0504"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 85,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:07:01.065Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-44d3b56b",
    "stem": "A 52-year-old man, an electrician, sees his general practitioner because of 5 months of daytime sleepiness. He dozes off while watching television and in the afternoons, and he wakes unrefreshed despite 8 hours in bed. His wife reports loud snoring every night, with pauses in his breathing followed by gasping. He has had no sudden muscle weakness with laughter or anger, and he denies sleepiness while driving. He drinks 3 standard drinks most evenings and does not smoke. He has hypertension treated with perindopril. Blood pressure is 146/92 mm Hg, heart rate 76/min and oxygen saturation 97% on room air. BMI is 34 kg/m2, neck circumference is 44 cm and the oropharynx is crowded. His Epworth Sleepiness Scale score is 13 (normal 10 or less), STOP-Bang score 6/8 and OSA50 score 7/10. Full blood count, TSH and electrolytes are normal.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -3344,6 +3890,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:42:02.380Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-4550ca09",
+   "stem": "A 49-year-old woman, 2 hours after hysteroscopy and curettage, has severe lower abdominal pain and guarding. Curettings contained yellow fatty tissue. BP 90/55 mmHg despite 1 L crystalloid.",
+   "ask": "Which investigation will most likely confirm the diagnosis?",
+   "options": [
+    "Diagnostic laparoscopy",
+    "CT abdomen and pelvis",
+    "Transvaginal ultrasound",
+    "FAST ultrasound scan",
+    "Repeat hysteroscopy"
+   ],
+   "answer": 0,
+   "explanation": "Fat in the curettings means the curette went through the uterine wall into omentum or bowel fat, so this is uterine perforation until proven otherwise. She is still shocked after fluids and has peritonism, so the senior gynaecologist should do urgent laparoscopy (or laparotomy). It confirms the perforation, looks for bowel, bladder or vessel injury and allows the bleeding to be controlled at the same time. CT is only for stable patients, when the senior asks for it.",
+   "why": [
+    null,
+    "CT can be used in stable patients, but sending a shocked woman who is not responding to fluids out of the clinical area for a scan delays surgical control of the bleeding.",
+    "Transvaginal ultrasound may show free fluid but cannot reliably show the perforation or rule out bowel injury, and it delays definitive management.",
+    "FAST may show free fluid, but the source is already clear from the procedure, and FAST cannot confirm perforation or rule out bowel or bladder injury.",
+    "Putting fluid back into the cavity at repeat hysteroscopy risks making the perforation worse and pushing fluid into the abdomen, and it cannot assess injury outside the uterus."
+   ],
+   "topic": "Gynaecology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-9fdfd7be",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-9fdfd7be",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:40:01.226Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-9fdfd7be",
+      "osce-ai-9fdfd7be"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0241",
+      "medqa-us4-test-0245"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 83,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:07:10.634Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -3878,6 +4491,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:07:50.160Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-52737390",
+   "stem": "A 30-year-old female accountant has had a daily bilateral band-like headache for 2 months during tax season. She takes paracetamol on 6 days a week. Neurological examination and fundoscopy are normal.",
+   "ask": "Greatest risk if this pattern continues?",
+   "options": [
+    "Medication-overuse headache",
+    "Paracetamol hepatotoxicity",
+    "Analgesic nephropathy",
+    "Idiopathic intracranial hypertension",
+    "Chronic migraine"
+   ],
+   "answer": 0,
+   "explanation": "She has tension-type headache and takes a simple analgesic on more than 15 days a month. If this continues for more than 3 months, it causes medication-overuse headache. eTG advises keeping acute treatment to fewer than 10 days a month, avoiding codeine, and treating mainly without drugs (posture, breaks, stress management).",
+   "why": [
+    null,
+    "Paracetamol at therapeutic doses in a healthy adult does not cause liver injury; hepatotoxicity needs overdose or major risk factors.",
+    "Analgesic nephropathy follows years of heavy combination analgesic or NSAID use, not a few months of therapeutic paracetamol.",
+    "Analgesic use does not cause idiopathic intracranial hypertension, and her normal fundoscopy argues against raised pressure.",
+    "Her headache has tension-type features, and analgesic overuse makes the existing headache worse rather than turning it into migraine."
+   ],
+   "topic": "General Practice",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:amsa-382",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-382",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:38:20.692Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-382",
+      "osce-amsa-382"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0615",
+      "medqa-us4-test-1205",
+      "medqa-us4-test-0511"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "clang:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 88,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:07:53.983Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -4816,6 +5498,73 @@
    }
   },
   {
+   "id": "ai-mcq-6a0f5077",
+   "stem": "A 72-year-old woman has had 18 hours of vomiting and watery, non-bloody diarrhoea after minding her unwell grandson. She takes perindopril and metformin. HR 118/min, BP 98/60 mmHg; her abdomen is soft.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Faecal multiplex PCR",
+    "CT abdomen with contrast",
+    "Urea and electrolytes",
+    "C. difficile toxin",
+    "Blood cultures"
+   ],
+   "answer": 2,
+   "explanation": "She has a viral-pattern gastroenteritis with clear hypovolaemia while taking an ACE inhibitor and metformin. The test that changes her management is urea, electrolytes and creatinine, to look for a prerenal AKI and hypokalaemia and to guide fluids, potassium replacement and sick day rules. Under eTG, stool testing is not routine for acute watery diarrhoea without red flags.",
+   "why": [
+    "Stool testing is not routine in acute watery diarrhoea without blood, high fever, prolonged illness, immunosuppression or an outbreak, and a viral result would not change her care.",
+    "A soft abdomen with diffuse crampy pain and a clear sick contact does not justify CT, and contrast would add a kidney risk in a dehydrated patient.",
+    null,
+    "She has had no recent antibiotics or hospital stay, and a sick contact with the same illness points to a viral cause rather than C. difficile.",
+    "Blood cultures are kept for high fever, sepsis or suspected invasive bacterial disease, which this low-risk watery diarrhoea does not suggest."
+   ],
+   "topic": "Emergency Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-578",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-578",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:36:32.048Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-578",
+      "osce-amsa-578"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0117",
+      "medqa-us4-test-0936"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 86,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:08:57.873Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-6a6f07fd",
    "stem": "A 66-year-old man sees his general practitioner about 4 months of looser, more frequent stools, now three times daily. On several occasions there has been dark red blood mixed through the stool. He reports tiredness but no weight loss or abdominal pain. He had rubber band ligation of internal haemorrhoids 5 years ago. A National Bowel Cancer Screening Program kit arrived last week, and he asks whether he should complete it; his kit 2 years ago was negative. He takes no regular medicines, including no aspirin or anti-inflammatory drugs. Temperature is 36.8°C, pulse is 84/min, and blood pressure is 132/78 mm Hg. Abdominal examination is normal. Digital rectal examination and proctoscopy show small, non-bleeding internal haemorrhoids and no mass. Investigations show:\nHaemoglobin 104 g/L (130–180)\nMCV 74 fL (80–100)\nFerritin 6 µg/L (30–500)\nTSH 2.1 mIU/L (0.4–4.0)\nTissue transglutaminase IgA negative",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -5481,6 +6230,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:09:18.178Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-78977a42",
+   "stem": "A 24-year-old man has 4 months of crampy lower abdominal pain eased by defecation, with alternating loose and hard stools. No bleeding or weight loss. FBC, CRP and coeliac serology are normal.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Colonoscopy",
+    "Faecal immunochemical test",
+    "Faecal calprotectin",
+    "Hydrogen breath test",
+    "CT abdomen"
+   ],
+   "answer": 2,
+   "explanation": "In a young adult with suspected IBS, loose stools and no red flags, faecal calprotectin is the first-line test to separate IBD from IBS once FBC, CRP and coeliac serology are normal. A result below 50 µg/g makes IBD unlikely and means colonoscopy can be avoided.",
+   "why": [
+    "Invasive and not needed first in a young patient with no red flags; it is kept for a raised calprotectin or red flags.",
+    "FIT is used for bowel cancer screening in people without symptoms aged 45 to 74, not to assess IBS-type symptoms in a 24-year-old.",
+    null,
+    "May suggest lactose intolerance or bacterial overgrowth but does not exclude IBD, and is not a routine first-line test.",
+    "Gives a radiation dose with low yield for mucosal disease, and is not part of the first-line work-up for suspected IBS."
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-417",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-417",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:49:03.443Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-417",
+      "osce-amsa-417"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0522",
+      "medqa-us4-test-0448",
+      "medqa-us4-test-0273"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 86,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:09:30.181Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -7684,6 +8500,140 @@
    }
   },
   {
+   "id": "ai-mcq-a4dc39d7",
+   "stem": "A 34-year-old woman has fever, rigors, right upper quadrant pain and jaundice. Bilirubin is 72 µmol/L (mostly conjugated), ALP 310 U/L, GGT 402 U/L and ALT 150 U/L.",
+   "ask": "Which jaundice pattern is shown?",
+   "options": [
+    "Hepatocellular injury",
+    "Haemolysis",
+    "Impaired conjugation",
+    "Hepatic synthetic failure",
+    "Obstructive cholestasis"
+   ],
+   "answer": 4,
+   "explanation": "Bilirubin that is mostly conjugated, with ALP and GGT raised more than the transaminases, is a cholestatic pattern and points to post-hepatic (obstructive) jaundice. With fever and rigors, it suggests a blocked and infected bile duct (cholangitis). The next step is ultrasound to look for a dilated common bile duct.",
+   "why": [
+    "In hepatocellular injury the transaminases are raised much more than ALP, often into the high hundreds or thousands.",
+    "Haemolysis raises unconjugated bilirubin and leaves ALP and GGT normal.",
+    "A conjugation defect such as Gilbert syndrome raises unconjugated bilirubin and leaves ALP and GGT normal.",
+    "Synthetic failure shows up as a raised INR and low albumin, which are not given here and do not explain the cholestatic enzymes.",
+    null
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-638",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-638",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:40:03.714Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-638",
+      "osce-amsa-638"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1054",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-1259"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 85,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:11:17.409Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-a50273e5",
+   "stem": "A 58-year-old woman has had a productive cough for a week and a temperature of 38.4 °C. Chest X-ray: retrocardiac opacity obscuring the left hemidiaphragm, with a sharp left heart border.",
+   "ask": "Where is the consolidation?",
+   "options": [
+    "Lingular segment",
+    "Left lower lobe",
+    "Left upper lobe",
+    "Right middle lobe",
+    "Right lower lobe"
+   ],
+   "answer": 1,
+   "explanation": "The left lower lobe sits behind the heart and touches the left hemidiaphragm. When it consolidates, it shows as a retrocardiac opacity and the outline of the left hemidiaphragm is lost (silhouette sign). The left heart border stays sharp because the lingula is clear.",
+   "why": [
+    "Lingular consolidation touches the heart, so it would blur the left heart border, and here that border is sharp.",
+    null,
+    "Left upper lobe consolidation causes upper-zone opacity or a hazy veil over the left lung, not a retrocardiac density hiding the hemidiaphragm.",
+    "Right middle lobe consolidation blurs the right heart border and sits on the right, not behind the heart on the left.",
+    "Right lower lobe consolidation hides the right hemidiaphragm, not the left one."
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-203",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-203",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:44:12.338Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-203",
+      "osce-amsa-203"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1004",
+      "medqa-us4-test-0548",
+      "medqa-us4-test-0874"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 81,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:11:25.408Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-a5d97492",
    "stem": "A 74-year-old woman woke with a left homonymous hemianopia. MRI shows a small acute right occipital infarct without haemorrhage. ECG shows atrial fibrillation, previously unknown.",
    "ask": "Which long-term therapy best prevents recurrent stroke?",
@@ -8150,6 +9100,73 @@
    }
   },
   {
+   "id": "ai-mcq-aa50ea7f",
+   "stem": "A 71-year-old woman presents to the emergency department with two days of new left temporal headache, pain on chewing, and transient visual loss today. Her temporal artery is tender; ESR 92 mm/h.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Oral prednisolone 50 mg",
+    "Temporal artery biopsy",
+    "Urgent CT brain",
+    "Aspirin 300 mg",
+    "IV methylprednisolone"
+   ],
+   "answer": 4,
+   "explanation": "She has a new headache after age 50, jaw claudication, a tender temporal artery, a very high ESR and transient visual loss. This is giant cell arteritis with visual involvement, which threatens her sight. Give IV methylprednisolone (500 mg to 1 g daily for 3 days) straight away and arrange same-day ophthalmology review, without waiting for a biopsy.",
+   "why": [
+    "Oral prednisolone 40 to 60 mg is right for GCA without visual symptoms, but visual involvement needs IV pulse steroids.",
+    "A biopsy confirms the diagnosis but must not delay steroids, and it stays positive for 1 to 2 weeks after they start.",
+    "CT brain does not diagnose GCA, and this gradual headache with jaw claudication does not suggest a bleed or mass.",
+    "Aspirin treats embolic amaurosis fugax from carotid disease but does not treat the arteritis itself.",
+    null
+   ],
+   "topic": "Rheumatology",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-246",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-246",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:51:17.861Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-246",
+      "osce-amsa-246"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0497",
+      "medqa-us4-test-0749"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 86,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:12:14.403Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-ab44f24e",
    "stem": "A 23-year-old woman with hay fever has chest tightness and cough beginning minutes after netball training, settling within an hour. Examination and spirometry with bronchodilator testing are normal.",
    "ask": "Most appropriate next step?",
@@ -8414,6 +9431,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:12:49.340Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-aeef6992",
+   "stem": "A 3-month-old boy with bronchiolitis is on 1 L/min nasal oxygen, SpO2 94%. In a feeding trial he takes 35 mL of his usual 150 mL; no wet nappy for 8 hours.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Nasogastric tube feeds",
+    "Smaller frequent feeds",
+    "Intravenous isotonic fluids",
+    "High flow nasal oxygen",
+    "Nebulised hypertonic saline"
+   ],
+   "answer": 0,
+   "explanation": "The feeding trial shows he takes about a quarter of his usual feed and has had no urine output, so oral hydration is not enough. Under the RCH bronchiolitis guideline, nasogastric feeds are the first choice when oral intake is inadequate. Start at 2/3 maintenance because of the risk of increased ADH secretion.",
+   "why": [
+    null,
+    "Smaller, more frequent bottle feeds still add to his work of breathing, and they will not make up an intake this low in an infant who is already passing no urine.",
+    "Isotonic IV fluid with glucose is kept for when nasogastric feeds fail or are unsafe; it is not the first choice.",
+    "His SpO2 is 94% on low-flow oxygen, so hypoxaemia and work of breathing are not getting worse and high flow is not needed.",
+    "Nebulised hypertonic saline does not improve outcomes in bronchiolitis and does nothing for his poor intake."
+   ],
+   "topic": "Paediatrics",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:ai-edd05314",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-edd05314",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:48:03.462Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-edd05314",
+      "osce-ai-edd05314"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0635",
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0111"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 81,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 3,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:12:50.780Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -8745,6 +9829,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:12:43.324Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-b83a1d3a",
+   "stem": "A 70-year-old man has a PSA of 8.1 ng/mL and a PI-RADS 4 lesion. Transperineal biopsy shows adenocarcinoma: about 80% Gleason pattern 4 and 20% pattern 3.",
+   "ask": "Which ISUP Grade Group is this?",
+   "options": [
+    "Grade Group 1",
+    "Grade Group 2",
+    "Grade Group 3",
+    "Grade Group 4",
+    "Grade Group 5"
+   ],
+   "answer": 2,
+   "explanation": "The biopsy Gleason score is the most common pattern plus the next most common one. Here that gives 4+3=7, which is ISUP Grade Group 3. Because pattern 4 is the main pattern, this is unfavourable intermediate-risk disease, worse than 3+4.",
+   "why": [
+    "Grade Group 1 means Gleason 3+3=6, with no pattern 4 at all, but this tumour is mostly pattern 4.",
+    "Grade Group 2 means Gleason 3+4=7, where pattern 3 is the main pattern, but here pattern 4 is the main pattern.",
+    null,
+    "Grade Group 4 means Gleason score 8 (4+4, 3+5 or 5+3), and this biopsy has no pattern 5 and is not entirely pattern 4.",
+    "Grade Group 5 means Gleason score 9 to 10, which needs pattern 5, and none is reported here."
+   ],
+   "topic": "Urology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:ai-e4a377e8",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-e4a377e8",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:41:39.925Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-e4a377e8",
+      "osce-ai-e4a377e8"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0659",
+      "medqa-us4-test-0862",
+      "medqa-us4-test-0934"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:13:06.422Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -9816,6 +10967,73 @@
    }
   },
   {
+   "id": "ai-mcq-c79825ea",
+   "stem": "A 53-year-old woman with COPD on home oxygen and paroxysmal AF has worsening breathlessness, purulent sputum and fever 38.1 °C. ECG: regular rhythm, 110/min, P wave before each QRS.",
+   "ask": "Most likely rhythm?",
+   "options": [
+    "Rapid atrial fibrillation",
+    "Atrial flutter",
+    "Multifocal atrial tachycardia",
+    "AV nodal reentry",
+    "Sinus tachycardia"
+   ],
+   "answer": 4,
+   "explanation": "A regular rhythm at 110/min with a normal P wave before every QRS is sinus tachycardia. In this patient it fits fever, hypoxaemia and an infective COPD exacerbation, so her known AF is not what is driving the breathlessness.",
+   "why": [
+    "A P wave before every QRS, a regular rhythm and a rate just over 100/min define sinus tachycardia, which fits fever and an exacerbation.",
+    "Atrial flutter shows sawtooth flutter waves, and with 2:1 block the rate is usually about 150/min, not 110/min.",
+    "Multifocal atrial tachycardia is linked to COPD, but it is irregular and has at least three different P-wave shapes.",
+    "AV nodal reentry usually runs at 140 to 250/min, and the P waves are hidden or retrograde rather than upright before each QRS.",
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-376",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-376",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:45:02.921Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-376",
+      "osce-amsa-376"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1004",
+      "medqa-us4-test-0548",
+      "medqa-us4-test-1032"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:13:40.308Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-c7ad668c",
    "stem": "A 68-year-old man has sudden tearing chest pain through to his back. CT shows an ascending aortic intimal flap. His BP falls to 80/50 mmHg with distended neck veins and pulsus paradoxus.",
    "ask": "Most likely cause of his hypotension?",
@@ -10016,6 +11234,75 @@
    }
   },
   {
+   "id": "ai-mcq-c92d6c55",
+   "stem": "A 67-year-old man admitted with an NSTEMI is on cardiac telemetry awaiting coronary angiography. He takes indapamide. His potassium is 3.2 mmol/L and magnesium 0.61 mmol/L. Telemetry shows frequent ventricular ectopics.",
+   "ask": "Most appropriate preventive step?",
+   "options": [
+    "Replace potassium and magnesium",
+    "Prophylactic oral amiodarone",
+    "Prophylactic intravenous lignocaine",
+    "Wearable cardioverter-defibrillator",
+    "Temporary transvenous pacing wire"
+   ],
+   "answer": 0,
+   "explanation": "In acute coronary ischaemia, low potassium and magnesium (here caused by the thiazide-like diuretic) make ventricular fibrillation more likely. Replacing them, aiming for potassium of at least 4.0 mmol/L and magnesium of at least 1.0 mmol/L, is the simple, reversible step that lowers this risk while he waits for revascularisation. Ventricular ectopics alone are not treated with prophylactic antiarrhythmics.",
+   "why": [
+    null,
+    "Prophylactic amiodarone in ACS has not been shown to improve survival, and it leaves the electrolyte trigger untreated.",
+    "Prophylactic lignocaine after myocardial infarction is not recommended because it has been linked to higher mortality.",
+    "A wearable defibrillator is not used in the early inpatient phase before revascularisation, and it prevents nothing.",
+    "Temporary pacing is for symptomatic bradycardia or high-grade AV block, and he has neither."
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:amsa-644",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-644",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:47:41.132Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-644",
+      "osce-amsa-644"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0714",
+      "medqa-us4-test-0966",
+      "medqa-us4-test-0905"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "clang:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 89,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:14:01.369Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-cac4a8ab",
    "stem": "A 34-year-old woman is brought to the emergency department by ambulance 40 minutes after her horse fell on her during a trail ride, crushing the right side of her chest. She had right-sided pleuritic pain straight away and has become steadily more breathless during transport. She has no past medical history and takes only a combined oral contraceptive pill. On arrival she is agitated and can speak only in single words. Temperature is 36.4 °C, pulse 138/min, blood pressure 82/50 mmHg, respiratory rate 34/min, and oxygen saturation 85% on 15 L/min via a non-rebreather mask. Her trachea is deviated to the left and her neck veins are distended. There is bruising and tenderness over the right lateral ribs. The right hemithorax is hyper-resonant to percussion, and breath sounds are absent on the right. Heart sounds are clearly audible. Two large-bore cannulae are in place and blood has been sent for group and hold. A mobile chest X-ray has been requested, and the radiographer will arrive in 10 minutes.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -10144,6 +11431,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:39:56.052Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-cbe34a57",
+   "stem": "A 28-year-old woman at a travel clinic needs a second MMR dose and live Japanese encephalitis vaccine for rural Laos. Her period is 10 days late, with nausea; condom use is inconsistent.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Urine hCG test",
+    "Measles IgG serology",
+    "Pelvic ultrasound",
+    "Full blood count",
+    "Hepatitis A serology"
+   ],
+   "answer": 0,
+   "explanation": "Live vaccines such as MMR and live attenuated Japanese encephalitis vaccine are contraindicated in pregnancy. Her period is late, she has nausea and her contraception is unreliable, so a urine pregnancy test must be done before vaccinating. If it is negative, she can be vaccinated and should avoid pregnancy for 28 days afterwards.",
+   "why": [
+    null,
+    "Measles serology is not needed before a catch-up MMR dose, because adults born in 1966 or later need 2 documented doses whatever their serology shows.",
+    "A pelvic ultrasound is not the first-line test for possible early pregnancy and would be negative before about 5 weeks' gestation, so hCG comes first.",
+    "A full blood count does not affect whether she can have live vaccines and is not part of routine pre-travel screening.",
+    "Hepatitis A serology before vaccination is only considered for people likely to have past infection, such as older adults or people raised in endemic areas, and it does not address the pregnancy risk."
+   ],
+   "topic": "General Practice",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-f3a22080",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-f3a22080",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:38:06.386Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-f3a22080",
+      "osce-ai-f3a22080"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0951",
+      "medqa-us4-test-0560",
+      "medqa-us4-test-0660"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 89,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:14:01.257Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -11083,6 +12439,73 @@
    }
   },
   {
+   "id": "ai-mcq-e335ed48",
+   "stem": "A 52-year-old man who drinks heavily presents with two weeks of increasing abdominal distension. Serum albumin is 28 g/L. Ascitic fluid albumin is 7 g/L and total protein 8 g/L.",
+   "ask": "What does this ascitic result indicate?",
+   "options": [
+    "Peritoneal carcinomatosis",
+    "Tuberculous peritonitis",
+    "Portal hypertension",
+    "Nephrotic syndrome",
+    "Pancreatic ascites"
+   ],
+   "answer": 2,
+   "explanation": "The serum-ascites albumin gradient is 28 − 7 = 21 g/L. A gradient of 11 g/L or more indicates portal hypertensive ascites, which in a heavy drinker is most likely from alcohol-related cirrhosis. Ascitic protein below 10 g/L also puts him at high risk of spontaneous bacterial peritonitis.",
+   "why": [
+    "Peritoneal malignancy gives a SAAG below 11 g/L, usually with high ascitic protein.",
+    "Tuberculous peritonitis gives a low SAAG with high protein and a lymphocyte-rich fluid.",
+    null,
+    "Nephrotic syndrome gives a SAAG below 11 g/L, because the ascites comes from hypoalbuminaemia, not portal hypertension.",
+    "Pancreatic ascites gives a low SAAG with a very high ascitic amylase."
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-436",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-436",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:48:43.425Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-436",
+      "osce-amsa-436"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0448",
+      "medqa-us4-test-0072"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 88,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:14:42.870Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-e36f17aa",
    "stem": "A 72-year-old man who smokes has 5 months of worsening breathlessness. Erect chest X-ray shows a dense right opacity with a concave meniscus reaching the 2nd rib. The trachea is deviated left.",
    "ask": "Most likely diagnosis?",
@@ -11884,6 +13307,140 @@
    }
   },
   {
+   "id": "ai-mcq-ecb71b7c",
+   "stem": "A 2-year-old boy has wheeze and breathlessness overnight after 3 days of coryza. He has bilateral expiratory wheeze, equal air entry and SpO2 95% on room air, improving with salbutamol.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Chest X-ray",
+    "Venous blood gas",
+    "Full blood count",
+    "No investigation",
+    "Spirometry"
+   ],
+   "answer": 3,
+   "explanation": "This is a moderate episode of viral-induced (preschool) wheeze. The diagnosis is clinical, and RCH and Queensland guidelines advise against routine X-ray, bloods or blood gas. Severity is graded at the bedside and treatment is salbutamol by spacer.",
+   "why": [
+    "A chest X-ray is not routine with bilateral wheeze, equal air entry and no focal signs, and it does not change management.",
+    "A blood gas is kept for severe or life-threatening episodes that are not responding to treatment, which does not fit an alert child with SpO2 95%.",
+    "A full blood count does not help diagnose or grade viral wheeze and is not recommended.",
+    null,
+    "Spirometry cannot be done reliably under about 6 years and is not used in an acute episode."
+   ],
+   "topic": "Paediatrics",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-631",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-631",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:41:31.721Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-631",
+      "osce-amsa-631"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0851",
+      "medqa-us4-test-0905"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:15:23.869Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-ed06a97b",
+   "stem": "A 78-year-old woman with hypertension has worsening breathlessness. ECG: sinus 102/min, S V1 plus R V5 40 mm, downsloping ST depression with asymmetric T-wave inversion in V5-V6, unchanged from six months ago.",
+   "ask": "Best explanation of the ST changes?",
+   "options": [
+    "Acute lateral ischaemia",
+    "Digoxin effect",
+    "Hypokalaemia",
+    "Left bundle branch block",
+    "Left ventricular strain"
+   ],
+   "answer": 4,
+   "explanation": "She meets voltage criteria for LVH, and the lateral downsloping ST depression with asymmetric T-wave inversion is the typical strain pattern. It is unchanged from her ECG six months ago and fits long-standing hypertension. This makes a new ischaemic change unlikely, although a troponin is still needed.",
+   "why": [
+    "Acute ischaemia would show new or changing ST-T changes, but these are unchanged from six months ago and come with LVH voltage.",
+    "Digoxin causes scooped ST depression in many leads with a short QT, not changes confined to the lateral leads alongside LVH voltage.",
+    "Hypokalaemia causes flattened T waves, prominent U waves and a long QT, not lateral strain alongside LVH voltage.",
+    "Left bundle branch block needs a QRS of at least 120 ms with a broad notched R in V6, which is not described here.",
+    null
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-200",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-200",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:44:31.105Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-200",
+      "osce-amsa-200"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0955",
+      "medqa-us4-test-1245",
+      "medqa-us4-test-0422"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 88,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:15:35.130Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-ee02de68",
    "stem": "A 29-year-old man comes to a sexual health clinic in Melbourne with his regular male partner, aged 32, to discuss results. Last week the patient was diagnosed with HIV-1 infection after a reactive screening immunoassay was confirmed on Western blot. He has no other illness and takes no medicines. He starts daily antiretroviral therapy today. The couple have had condomless anal sex about weekly for 2 years, most recently 5 days ago. The partner says he dislikes condoms and will not use them reliably. The partner is well, has had no fever, rash or sore throat, and has a temperature of 36.7 °C and a normal examination. The patient's CD4 count is 480 cells/µL (reference 500–1500) and his HIV-1 viral load is 64,000 copies/mL. The partner's results today: HIV-1/2 antigen and antibody immunoassay non-reactive; hepatitis B surface antigen negative; hepatitis B surface antibody 120 mIU/mL; creatinine 79 µmol/L; eGFR >90 mL/min/1.73 m².",
    "ask": "Which of the following is the most appropriate measure to prevent HIV transmission to the partner?",
@@ -12086,6 +13643,75 @@
    }
   },
   {
+   "id": "ai-mcq-eebf0140",
+   "stem": "A 72-year-old woman with type 2 diabetes attends the high-risk foot clinic with a painful right fifth-toe ulcer without surrounding erythema. Pedal pulses absent. ABI is 1.42; toe pressure 22 mmHg.",
+   "ask": "Most likely interpretation?",
+   "options": [
+    "Severe ischaemia, calcified vessels",
+    "Normal lower-limb arterial perfusion",
+    "Mild peripheral arterial disease",
+    "Infection-related limb hyperaemia",
+    "Chronic venous insufficiency"
+   ],
+   "answer": 0,
+   "explanation": "In diabetes, calcification of the tibial artery walls can make the ankle arteries impossible to compress, so an ABI above 1.3 gives a falsely high reading and cannot be trusted. Digital arteries are usually spared, so the toe pressure of 22 mmHg (below 30 mmHg) with a foot ulcer shows severe ischaemia. This is chronic limb-threatening ischaemia and needs urgent vascular imaging (Diabetes Feet Australia 2021).",
+   "why": [
+    null,
+    "An ABI above 1.3 means the arteries cannot be compressed, not that perfusion is normal, and the toe pressure and absent pulses show ischaemia.",
+    "A toe pressure of 22 mmHg with tissue loss means severe ischaemia, not mild disease, whatever the ABI reading.",
+    "Infection does not raise the ABI or lower the toe pressure, and nothing here suggests infection.",
+    "Venous disease causes shallow ulcers in the gaiter area with normal pulses, not a painful toe ulcer with a low toe pressure."
+   ],
+   "topic": "Vascular Surgery",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-327",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-327",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:43:34.043Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-327",
+      "osce-amsa-327"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1083",
+      "medqa-us4-test-0926",
+      "medqa-us4-test-0511"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 93,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:15:38.040Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-f027011d",
    "stem": "A 29-year-old man with new HIV, viral load 120,000 copies/mL, starts ART. His HIV-negative partner asks when condomless sex will not transmit HIV.",
    "ask": "When is transmission prevented?",
@@ -12215,6 +13841,207 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:48:54.239Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-f2dc7371",
+   "stem": "A 58-year-old woman born in Cambodia has newly diagnosed hepatitis C cirrhosis. Hepatitis B serology: HBsAg not detected, core antibody (total) not detected, surface antibody 120 mIU/mL.",
+   "ask": "What does this serology show?",
+   "options": [
+    "Resolved past infection",
+    "Chronic hepatitis B",
+    "Immunity from vaccination",
+    "Acute hepatitis B",
+    "Non-immune, needs vaccination"
+   ],
+   "answer": 2,
+   "explanation": "Surface antibody alone, with no surface antigen and no core antibody, means immunity from vaccination. The vaccine contains only surface antigen, so it never produces core antibody. She needs no hepatitis B vaccine, though in cirrhosis her hepatitis A immunity should still be checked.",
+   "why": [
+    "Natural infection that has resolved leaves core antibody, which is not detected here.",
+    "Chronic infection needs HBsAg to persist for more than 6 months, and HBsAg is negative here.",
+    null,
+    "Acute infection shows HBsAg and core IgM antibody, and neither is present here.",
+    "A surface antibody level of 120 mIU/mL is well above the protective level of 10 mIU/mL, so she is immune."
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-218",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-218",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:41:58.425Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-218",
+      "osce-amsa-218"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1047",
+      "medqa-us4-test-0628",
+      "medqa-us4-test-0122"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 85,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:15:49.202Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-f2e60c9e",
+   "stem": "A 32-year-old man taking prednisolone has 2 days of fever, headache and neck stiffness. CSF: white cells 1650 ×10^6/L (88% polymorphs), glucose ratio 0.17, Gram stain negative.",
+   "ask": "What does the Gram stain mean?",
+   "options": [
+    "Bacteria still possible",
+    "Viral meningitis confirmed",
+    "Antibiotics can be stopped",
+    "Listeria cover unnecessary",
+    "Repeat lumbar puncture needed"
+   ],
+   "answer": 0,
+   "explanation": "A negative CSF Gram stain does not rule out bacterial meningitis. It is often negative, especially with Listeria or after antibiotics have started. This CSF has a high polymorph count and a very low glucose ratio, a bacterial pattern, so empirical treatment with Listeria cover continues until culture and PCR results are back.",
+   "why": [
+    null,
+    "Viral meningitis usually gives a lymphocytic CSF with near-normal glucose, not 88% polymorphs and a glucose ratio of 0.17.",
+    "Stopping antibiotics on a negative Gram stain risks untreated bacterial meningitis while culture and PCR are still pending.",
+    "Listeria is often missed on Gram stain, and prednisolone raises his risk, so he still needs Listeria cover.",
+    "Another LP adds nothing now, because culture and bacterial PCR on the first sample are already pending."
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-645",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-645",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:47:40.191Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-645",
+      "osce-amsa-645"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0615",
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0724"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 81,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:15:56.574Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-f5055925",
+   "stem": "A 59-year-old woman has 8 months of mechanical hand pain, 15 minutes' morning stiffness and hard DIP swellings. CRP 3 mg/L, ESR 12 mm/h, RF and anti-CCP negative.",
+   "ask": "Best interpretation of these results?",
+   "options": [
+    "Confirms osteoarthritis diagnosis",
+    "Suggests seronegative rheumatoid arthritis",
+    "Suggests psoriatic arthritis",
+    "Suggests early polymyalgia rheumatica",
+    "Inflammatory arthritis less likely"
+   ],
+   "answer": 4,
+   "explanation": "Osteoarthritis is diagnosed clinically. CRP, ESR, RF and anti-CCP are ordered to exclude inflammatory arthritis, not to prove osteoarthritis. Her normal markers and negative serology make an inflammatory cause less likely and fit her clinical picture of nodal osteoarthritis.",
+   "why": [
+    "Osteoarthritis is a clinical diagnosis, and normal bloods do not confirm it; they only make other causes less likely.",
+    "Seronegative rheumatoid arthritis would still usually show synovitis, stiffness lasting over 30 to 60 minutes and raised CRP or ESR, and it typically spares the DIPs.",
+    "Negative serology alone does not point to psoriatic arthritis, which needs features such as psoriasis, nail changes, dactylitis or erosions on X-ray.",
+    "Polymyalgia rheumatica causes shoulder and hip girdle stiffness with raised ESR and CRP, not normal markers with small-joint hand pain.",
+    null
+   ],
+   "topic": "Rheumatology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-250",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-250",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:50:13.442Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-250",
+      "osce-amsa-250"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0459",
+      "medqa-us4-test-1119",
+      "medqa-us4-test-1001"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 89,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:16:04.506Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -13165,6 +14992,326 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:13:25.260Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-41",
+   "stem": "A 20-year-old man, with symptoms of ataxia, headache and solid-cystic mass in the right cerebellar hemisphere, underwent surgery, resecting a lesion that histologically shows cells with long and fine cytoplasmic processes, a fascicular and microcystic pattern, and numerous vessels and fibers. Rosenthal. The most likely antimopathological diagnosis is:",
+   "options": [
+    "Pilocytic astrocytoma.",
+    "Pleomorphic Xanthoastrocytoma.",
+    "Central neurocytoma.",
+    "Liponeurocytoma",
+    "Prion disease."
+   ],
+   "answer": 0,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Pathology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "cover-options:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 73,
+    "quality": 81,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:26:07.990Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-42",
+   "stem": "A 70-year-old woman with a history of hypertension and moderate heart failure attended the clinic due to a persistent and dry cough that started as a sensation of itching in the throat. In the analytical hyperkalemia is observed. What is the drug suspected of causing the clinical and analytical alteration of the patient?",
+   "options": [
+    "Hydrochlorothiazide.",
+    "Bisoprolol.",
+    "Furosemide.",
+    "Enalapril",
+    "Hydralazine"
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 80,
+    "quality": 88,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:26:11.672Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-51",
+   "stem": "A 30-year-old man (index case) affected by Leber's optic atrophy presents the mutation of the mitochondrial genome LHON11778A. In genetic counseling you will be informed of the risks of transmitting the disease to your offspring. What information is correct?",
+   "options": [
+    "The index case will transmit the disease to all its male descendants (holándrica inheritance).",
+    "The disease will be transmitted to 50% of the descendants of the index case, regardless of their sex.",
+    "The disease will be transmitted to all descendants of the index case, as it is of paternal inheritance.",
+    "The disease will be transmitted to female descendants; but to no man.",
+    "The disease will not be transmitted to the descendants of the index case, because it is of maternal inheritance."
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Ophthalmology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "absolute-terms:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 80,
+    "quality": 83,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:27:01.146Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-60",
+   "stem": "Which of the following pathogens is the cause of cat scratch disease?",
+   "options": [
+    "Bartonella henselae.",
+    "Mycobacterium tuberculosis.",
+    "Mycobacterium avium complex.",
+    "Toxoplasma gondii.",
+    "Epstein Barr virus."
+   ],
+   "answer": 0,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor",
+     "stem-length:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 78,
+    "quality": 82,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:28:20.327Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-63",
+   "stem": "A 82-year-old hypertensive woman on treatment with atenolol, hydrochlorothiazide and digoxin. He goes to the emergency room for atrial fibrillation and is administered verapamil i.v. Complete atrioventricular block is evidenced in ECG. What is the most likely cause of this clinical situation?",
+   "options": [
+    "Digitalis intoxication by pharmacokinetic interaction by verapamil.",
+    "Hypokalemia due to the administration of thiazide and digoxin.",
+    "Pharmacodynamic interaction of beta-blocker, digoxin and verapamil.",
+    "Hypotensive effect of the thiazide diuretic.",
+    "Cardiac arrhythmia due to verapamil."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 74,
+    "quality": 84,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 3,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:29:08.955Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2013-64",
+   "stem": "A 45-year-old woman with a history of a heart murmur detected in the pediatric age. Enter the Emergency Department for symptoms of palpitations, easy fatigue and malignant edema. Physical examination reveals absence of cyanosis. Oxygen Saturation by pulse oximeter 97%. TA: 120/80 mm Hg. Irregular heart rate at 100 bpm. Systolic ejection murmur (2/6) in pulmonary focus. 2nd R unfolded, wide and fixed. No death rattles. Slight hepatomegaly (2-3 cm). Slight malleolar edema. ECG: complete arrhythmia due to atrial fibrillation at 100 bpm. AQRS: + 120º. Conduction disorder of the right branch of the bundle of His. What is your diagnostic orientation?",
+   "options": [
+    "Ventricular communication.",
+    "Aortic stenosis.",
+    "Mitral stenosis.",
+    "Interauricular communication.",
+    "Persistent ductus arteriosus."
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 79,
+    "quality": 87,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:29:13.981Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },

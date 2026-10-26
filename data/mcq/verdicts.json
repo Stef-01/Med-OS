@@ -465,6 +465,46 @@
    "suggestion": "Rewrite the lead-in as a full question (\"Which of the following is the greatest risk of starting folic acid alone?\"). Consider replacing C/E with recovery-phase effects such as hypophosphataemia or unmasked iron deficiency."
   }
  },
+ "ai-mcq-0c000e2e": {
+  "hash": "00990ed8",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:29:01.469Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Definite Ménière's disease requires audiometry showing a low-to-mid-frequency sensorineural hearing loss in the affected ear, alongside the typical vertigo episodes; MRI only excludes a schwannoma."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.8,
+    "reason": "Definite Ménière's disease requires a hearing test showing low-to-mid frequency sensorineural hearing loss in the affected ear, so pure-tone audiometry confirms it, while MRI is used to rule out a vestibular schwannoma."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Otorhinolaryngology",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches the 2015 Bárány criteria, which require hearing loss documented on audiometry",
+    "The options are homogeneous, plausible investigations with no cues",
+    "The explanation is accurate and addresses every distractor"
+   ],
+   "suggestion": ""
+  }
+ },
  "ai-mcq-0e183e64": {
   "hash": "a355b2c3",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -507,6 +547,49 @@
     "Explanation covers each distractor accurately and gives the management point (IV iron in active IBD)"
    ],
    "suggestion": "Optional: write the lead-in as a full question and give a fuller vignette. To make the item harder, use a ferritin of 30–100 µg/L so students must interpret it in the context of inflammation, or ask for the best next step in management (IV iron)."
+  }
+ },
+ "ai-mcq-0e28ef04": {
+  "hash": "c5fc6158",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:28:55.553Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "An ABI above 1.40 points to stiff, calcified arteries that don't compress, which is common in long-standing diabetes; this makes the ABI falsely high, so a toe-brachial index is needed to confirm the PAD suggested by rest pain and absent pulses."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "An ABI above 1.30 points to calcified, non-compressible arteries in a long-standing diabetic, so it can't be trusted, and a toe-brachial index is needed to confirm the critical limb ischemia suggested by rest pain and absent pulses."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option C is ambiguous: 'exercise treadmill test' could be read as a cardiac stress test, but the explanation treats it a",
+    "Distractors D and E are weak and easy to rule out"
+   ],
+   "topic": "Vascular Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: in diabetes, an ABI of 1.40 means the arteries can't be compressed, and toe pressure or TBI is the recommended next test (Diabetes Feet Australia and IWGDF)",
+    "The vignette tests applied reasoning: it gives the classic picture of rest pain and makes the student see that the ABI reading is falsely reassuring",
+    "The explanation is clear and covers why each option is right or wrong"
+   ],
+   "suggestion": "Rename option C 'Treadmill exercise ankle-brachial index' so it matches the explanation. You could also swap the lumbar MRI for a stronger distractor, such as nerve conduction studies for painful diabetic neuropathy."
   }
  },
  "ai-mcq-0e730b6c": {
@@ -889,6 +972,51 @@
     "The explanation is accurate, gives a sensible dose and deals with each distractor"
    ],
    "suggestion": "Add vital signs (SpO2, HR, RR) so the vignette is fuller. Consider replacing ceftriaxone or montelukast with a more plausible escalation step, such as IV salbutamol infusion or nebulised adrenaline."
+  }
+ },
+ "ai-mcq-1700aeb5": {
+  "hash": "4a1e92b2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:29:07.596Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "A reactive 4th-generation HIV screen must be confirmed, and the Western blot is the only confirmatory test listed, although current CDC guidance prefers an HIV-1/2 differentiation immunoassay followed by NAT; CD4, resistance testing and HLA-B*5701 come after diagnosis, and waiting three months is wr"
+   },
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "A reactive fourth-generation screen needs a supplementary confirmatory test before any HIV workup, and the Western blot is the only confirmatory option listed, even though a differentiation immunoassay is now preferred."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 3,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": [
+     "Western blot is less sensitive in acute infection; without mention of HIV RNA testing for discordant results, a learner might wrongly reassure a patient with recent exposure whose blot is negative or "
+    ]
+   },
+   "flaws": [
+    "Key reflects a country-specific algorithm (Australian policy) that the stem never states; Western blot is outdated under",
+    "Explanation omits HIV-1 RNA testing for discordant or indeterminate results in possible acute infection"
+   ],
+   "topic": "Sexual Health",
+   "verdict": "revise",
+   "reasons": [
+    "Western blot is no longer the recommended supplementary test in the US (CDC 2014) or in Step 2 CK teaching",
+    "Correctness depends on an unstated national guideline",
+    "Distractors and clinical framing are otherwise sound"
+   ],
+   "suggestion": "Replace option B with 'HIV-1/HIV-2 antibody differentiation immunoassay' (or 'supplementary confirmatory testing plus a second sample'). Add to the explanation that HIV-1 RNA is tested when the supplementary result is negative or indeterminate, because acute infection is possible."
   }
  },
  "ai-mcq-18db6652": {
@@ -12117,6 +12245,560 @@
    "suggestion": "Describe a defined cohort (e.g., women in a screening cohort with serum banked at enrolment) and say controls were sampled from cohort members still cancer-free at each case's diagnosis; otherwise change the key to B. Replace one of the two case-control options with another design, such as cross-sectional."
   }
  },
+ "headqa-2013-35": {
+  "hash": "9e3588de",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:25:24.436Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "The fetal part of the placenta (the chorion frondosum and villi) forms from the trophoblast of the blastocyst, which splits into the cytotrophoblast and the syncytiotrophoblast."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "The fetal part of the placenta (the chorion and chorionic villi) comes from the trophoblast, which splits into cytotrophoblast and syncytiotrophoblast; the maternal part comes from the decidua."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "pure recall with no clinical vignette",
+    "heterogeneous options (a cell layer, a structure, germ layers, the primitive streak)",
+    "oversimplified premise: the placenta also has maternal decidua and extraembryonic mesoderm components",
+    "'primitive line' is a non-standard term for the primitive streak",
+    "inconsistent punctuation across options",
+    "no explanation"
+   ],
+   "topic": "Obstetrics",
+   "verdict": "reject",
+   "reasons": [
+    "This is basic-science embryology recall with no patient and no clinical application, so it is not Step 2 CK material.",
+    "Mesoderm (D) is partly defensible: extraembryonic mesoderm forms the villous cores and fetal vessels, and the maternal part of the placenta comes from the decidua.",
+    "The options mix different kinds of things, and there is no explanation."
+   ],
+   "suggestion": "Rewrite it as a clinical vignette, for example a molar pregnancy or placenta accreta, where knowing that trophoblast gives rise to the placenta helps with diagnosis or management. Use homogeneous options and add an explanation."
+  }
+ },
+ "headqa-2013-36": {
+  "hash": "0796b6ed",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:25:42.145Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.88,
+    "reason": "Mild ptosis, a small pupil that still reacts to light, no facial sweating and C8-T1 sensory and motor loss in a heavy smoker point to Horner syndrome from a Pancoast tumour, which is a sympathetic pathway lesion."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Left ptosis, a small pupil that still reacts to light and loss of facial sweating mean Horner's syndrome (most likely from a Pancoast tumour), so the lesion is in the sympathetic pathway; the parasympathetic options are ruled out by the normal light reflex."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 2,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Badly machine-translated stem: 'Check that your left eyelid', 'Your doctor checks', 'talking about persistent cough', 'c",
+    "Key is anatomically wrong: 'Clark-intermediate column of the dorsal medulla' mixes up Clarke's dorsal nucleus with the i",
+    "Key's wording ('span from the hypothalamus to' the spinal cord) describes only the central first-order neuron, but a Pan",
+    "Option E ('tarsal muscle exclusively') is implausible and uses an absolute term",
+    "Options are not all the same kind of thing: some name a pathway and some name a single structure",
+    "Stem spells out normal pupillary light reflex and eyelid closure, which makes the parasympathetic and oculomotor options"
+   ],
+   "topic": "Neurology",
+   "verdict": "revise",
+   "reasons": [
+    "The clinical idea (Pancoast tumour causing Horner syndrome plus a lower brachial plexus lesion) is good and high-yield",
+    "The key's anatomy is inaccurate and points to the wrong neuron for where a Pancoast tumour actually does damage",
+    "The garbled translation makes the stem hard to read, and there is no explanation"
+   ],
+   "suggestion": "Rewrite the stem in clear clinical English. Change the key to 'Preganglionic (second-order) sympathetic fibres at the lung apex / T1 level', and make the distractors other points along the same sympathetic pathway (hypothalamus/brainstem first-order neuron, postganglionic fibres at the internal carotid or cavernous sinus) plus an oculomotor (CN III) lesion. Add an explanation that uses facial anhidrosis and the ulnar-side findings to place the lesion."
+  }
+ },
+ "headqa-2013-37": {
+  "hash": "53dff74f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:25:29.224Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "The skin of the big toe (its dorsal surface and the first web space) is in the L5 dermatome, while L4 supplies the medial leg and malleolus and S1 supplies the lateral foot and little toe."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "The L5 dermatome covers the dorsum of the foot and the big toe (hallux), while S1 covers the lateral foot and little toe, and L4 covers the medial malleolus."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Pure recall with no clinical vignette",
+    "Ungrammatical/garbled stem ('root depends on the sensory innervation')",
+    "Options not in logical (anatomical) order",
+    "Inconsistent punctuation across options",
+    "No explanation provided"
+   ],
+   "topic": "Neurology",
+   "verdict": "revise",
+   "reasons": [
+    "Key L5 is correct for the big toe/first web space dermatome",
+    "Bare recall question with garbled wording, below Step 2 CK standard",
+    "No explanation; options unordered and inconsistently punctuated"
+   ],
+   "suggestion": "Rewrite as a vignette (e.g., back pain with numbness over the dorsal foot/great toe and weak great-toe extension) asking which nerve root is affected, list L2–S1 in order, and add an explanation contrasting L4 (medial leg, patellar reflex) and S1 (lateral foot, ankle reflex)."
+  }
+ },
+ "headqa-2013-38": {
+  "hash": "83d4194c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:25:41.037Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.99,
+    "reason": "High-risk HPV types such as 16 and 18 cause cervical cancer: their E6 and E7 proteins switch off p53 and Rb, whereas Burkitt lymphoma is linked to EBV."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.99,
+    "reason": "High-risk HPV types, mainly 16 and 18, cause cervical cancer: their E6 and E7 proteins switch off p53 and Rb. Burkitt lymphoma is linked to EBV, and breast, ovarian and endometrial cancers are not caused by HPV."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 5,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette (pure recall)",
+    "incomplete stem that cannot be answered without the options",
+    "inconsistent punctuation across options",
+    "no explanation",
+    "too easy: the key is common knowledge"
+   ],
+   "topic": "Gynaecology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: high-risk HPV types 16 and 18 cause cervical cancer, and Burkitt lymphoma is linked to EBV, not HPV.",
+    "This is recall with no patient, so it falls below the Step 2 CK standard of applying knowledge.",
+    "There is no explanation, and the stem cannot be answered without reading the options."
+   ],
+   "suggestion": "Rewrite it as a vignette, for example a woman with abnormal cervical cytology. Ask about the next step in management, about prevention (HPV vaccination or screening intervals), or about HPV-related oropharyngeal or anal cancer. Use consistent punctuation in the options and add an explanation that covers each distractor."
+  }
+ },
+ "headqa-2013-39": {
+  "hash": "5f64b570",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:25:50.197Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Ground-glass hepatocytes come from HBsAg building up in the smooth endoplasmic reticulum, which is the classic finding in chronic hepatitis B."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Ground-glass hepatocytes come from HBsAg building up in the smooth endoplasmic reticulum, which makes them a classic sign of chronic hepatitis B."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Pure recall with no patient vignette",
+    "Poorly translated wording ('hepatocytes in ground glass', 'VH delta', 'hepatitis for alcohol')",
+    "No explanation provided",
+    "HDV option is arguable: chronic HDV happens only with HBV coinfection, so HBsAg-laden ground-glass cells can also be see",
+    "Inconsistent option phrasing"
+   ],
+   "topic": "Pathology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: ground-glass hepatocytes come from HBsAg building up in the smooth endoplasmic reticulum in chronic HBV",
+    "Bare recall with no clinical context, so it is low-value Step 2 CK material",
+    "Garbled English and no explanation; the HDV distractor is weakened because HDV needs HBV to be present"
+   ],
+   "suggestion": "Rewrite as a vignette: for example, a patient with a raised ALT for a long time whose liver biopsy shows finely granular eosinophilic cytoplasm that stains with orcein or for HBsAg. Ask which serologic profile is most likely, use clean English, and replace HDV with a distractor that cannot be defended, such as autoimmune hepatitis or Wilson disease. Add an explanation covering the Mallory–Denk bodies of alcoholic liver disease, the steatosis and lymphoid aggregates of HCV, and the patterns seen "
+  }
+ },
+ "headqa-2013-40": {
+  "hash": "cf02923e",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:26:02.909Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.99,
+    "reason": "Ductal adenocarcinoma makes up about 85–90% of pancreatic cancers, which is far more than neuroendocrine, cystic or IPMN-derived cancers."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.99,
+    "reason": "Pancreatic ductal adenocarcinoma makes up about 85–90% of all pancreatic cancers, which is far more than neuroendocrine, cystic or IPMN-derived tumors."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette (pure recall)",
+    "option A misnames IPMN (should be intraductal papillary mucinous neoplasm)",
+    "overlapping options (malignant insulinoma is a subtype of pancreatic neuroendocrine tumour)",
+    "distractors are rare entities, easily eliminated",
+    "no explanation"
+   ],
+   "topic": "Oncology",
+   "verdict": "reject",
+   "reasons": [
+    "Recall of a single fact with no patient, so it is not at Step 2 CK level",
+    "Weak distractors, one overlapping and one misnamed",
+    "No explanation; would need a full rewrite"
+   ],
+   "suggestion": "Rewrite as a vignette (e.g., an older smoker with painless jaundice, weight loss and a pancreatic head mass) and ask for the most likely histology or the next diagnostic step, with homogeneous options and an explanation."
+  }
+ },
+ "headqa-2013-41": {
+  "hash": "ed19cdc5",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:26:07.990Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "A young patient with a solid-cystic cerebellar mass whose histology shows piloid cells, a fascicular and microcystic pattern, many vessels and Rosenthal fibers is classic for pilocytic astrocytoma."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "A young patient with a cystic mass and a solid part in the cerebellum, whose biopsy shows piloid (hair-like) cells, a two-part pattern of dense fascicular and loose microcystic areas, many blood vessels and Rosenthal fibers, has the classic picture of pilocytic astrocytoma."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "garbled stem: stray fragment 'Rosenthal.' and misspelling 'antimopathological'",
+    "vignette gives the answer away (Rosenthal fibers point straight to pilocytic astrocytoma)",
+    "heterogeneous options: 'Prion disease' is not a neoplasm and is implausible",
+    "pure histopathology recall with no clinical decision",
+    "no explanation provided"
+   ],
+   "topic": "Pathology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct and clearly the best answer",
+    "The stem is a poor translation with a sentence fragment and a misspelling, and naming Rosenthal fibers gives the answer away",
+    "The distractors are weak or out of place (prion disease), and there is no explanation"
+   ],
+   "suggestion": "Rewrite the stem in clear English. Describe the imaging (a cyst with an enhancing mural nodule) and the histology without naming Rosenthal fibers, or ask about management or prognosis instead. Replace 'Prion disease' with a posterior fossa tumour such as hemangioblastoma, medulloblastoma or ependymoma, and add an explanation."
+  }
+ },
+ "headqa-2013-42": {
+  "hash": "4682741d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:26:11.672Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.98,
+    "reason": "ACE inhibitors like enalapril cause a dry cough through bradykinin buildup and hyperkalemia through lower aldosterone."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.98,
+    "reason": "ACE inhibitors like enalapril cause a dry cough because bradykinin builds up, and high potassium because aldosterone falls."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No explanation provided",
+    "Poorly translated wording ('In the analytical', 'analytical alteration')",
+    "Vignette is minimal; the classic pairing of dry cough and hyperkalemia makes it pure recall",
+    "Inconsistent punctuation across options",
+    "No vital signs, potassium value, or medication list; the patient's drugs are not stated"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: ACE inhibitors cause a bradykinin-mediated dry cough and hyperkalemia",
+    "The stem's English is poor and the vignette is too thin for Step 2 CK",
+    "There is no explanation"
+   ],
+   "suggestion": "Rewrite the stem in clear English. List her current medications, give the potassium level (e.g., 5.8 mEq/L) and the timing of the cough after starting a new drug, and perhaps ask for the best next step (switch to an ARB). Add an explanation of why the thiazide and loop diuretics (which cause hypokalemia), bisoprolol and hydralazine are wrong."
+  }
+ },
+ "headqa-2013-43": {
+  "hash": "187dce4a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:26:28.471Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "Vd depends on how much drug binds to plasma versus tissue proteins and on its partition (distribution) coefficient; half-life and the elimination constant result from Vd and clearance rather than determining Vd."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.9,
+    "reason": "The apparent volume of distribution depends on the drug's physicochemical properties: how much it binds to plasma proteins versus tissue proteins, and its partition (distribution) coefficient. Half-life and clearance do not set Vd; Vd and clearance together determine half-life."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "recall without a patient vignette",
+    "ungrammatical stem and options (apparent poor translation)",
+    "inconsistent option phrasing ('Of its...', 'constant elimination and its clearing')",
+    "no explanation provided"
+   ],
+   "topic": "Toxicology",
+   "verdict": "reject",
+   "reasons": [
+    "Pure basic pharmacokinetic recall with no clinical application; not Step 2 CK style",
+    "Stem and options are ungrammatical and confusingly worded",
+    "No explanation; key itself is correct (Vd depends on plasma/tissue binding and partition coefficient)"
+   ],
+   "suggestion": "Rewrite as a clinical vignette (e.g., choosing a loading dose for a highly lipophilic, tissue-bound drug) in correct English with parallel options, and add an explanation noting that half-life and elimination depend on Vd rather than determine it."
+  }
+ },
+ "headqa-2013-45": {
+  "hash": "52a888dd",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:26:31.898Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "Warfarin doesn't block vitamin K absorption; like acenocoumarol, it inhibits vitamin K epoxide reductase (VKORC1), so the cofactor can't be recycled to carboxylate factors II, VII, IX and X."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "Warfarin doesn't stop vitamin K from being absorbed; it blocks vitamin K epoxide reductase (VKORC1), which stops the gamma-carboxylation of clotting factors II, VII, IX and X, while the other four pairings are correct."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 2,
+   "accuracy": 5,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem (INCORRECT)",
+    "pure recall without a clinical vignette",
+    "acenocoumarol and warfarin are the same drug class but are given different mechanisms, so the answer can be found by log",
+    "no explanation provided"
+   ],
+   "topic": "Haematology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: warfarin inhibits VKORC1, not vitamin K absorption",
+    "Negative-stem recall item with no patient, below Step 2 CK style",
+    "No explanation to teach the mechanisms"
+   ],
+   "suggestion": "Rewrite as a clinical vignette (e.g., a patient on warfarin) asking positively which enzyme the drug inhibits, with options of the same kind (VKORC1, gamma-glutamyl carboxylase, antithrombin, factor Xa, thrombin), and add an explanation covering each option."
+  }
+ },
+ "headqa-2013-46": {
+  "hash": "bba526f2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:26:38.020Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "PPIs are acid-labile prodrugs, so oral forms need an enteric coating to keep stomach acid from breaking them down before they are absorbed."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "PPIs are acid-labile prodrugs that need enteric coating to get through the stomach intact; they work by irreversibly blocking the H+/K+ ATPase, not gastrin or histamine receptors, and they don't neutralize acid or turn stools black."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette (pure recall)",
+    "options grammatically inconsistent with stem (A lacks 'They')",
+    "heterogeneous options (mechanisms vs adverse effect vs formulation)",
+    "incomplete stem/not a focused question",
+    "no explanation"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "revise",
+   "reasons": [
+    "Key correct: PPIs are acid-labile prodrugs needing enteric coating",
+    "Pure pharmacology recall with no patient, low Step 2 CK relevance",
+    "Grammatically inconsistent and heterogeneous options; no explanation"
+   ],
+   "suggestion": "Rewrite as a clinical vignette, e.g. a patient with GERD who crushes or chews omeprazole and gets no benefit, asking for the best explanation, with homogeneous pharmacokinetic options. Add an explanation of acid lability, prodrug activation in parietal cell canaliculi, and why antacid, H2-blocker and bismuth effects do not apply."
+  }
+ },
+ "headqa-2013-47": {
+  "hash": "0239d2bb",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:26:48.950Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "Smooth muscle has no troponin; calcium binds calmodulin, which activates myosin light-chain kinase, whereas troponin control belongs to skeletal and cardiac muscle."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Vascular smooth muscle has no troponin; calcium binds calmodulin, which activates myosin light-chain kinase, so troponin-mediated control applies only to striated muscle."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem (FALSE)",
+    "no clinical vignette; pure basic-science recall",
+    "true/false statement format with heterogeneous options",
+    "option A ('main function is to maintain tone') is vague and loosely worded",
+    "no explanation provided"
+   ],
+   "topic": "Cardiology",
+   "verdict": "reject",
+   "reasons": [
+    "The key is correct: smooth muscle contraction is regulated by Ca2+-calmodulin and myosin light-chain kinase, not troponin.",
+    "This is basic physiology recall with no patient, so it is not Step 2 CK material.",
+    "It uses a negative-stem true/false format with no explanation."
+   ],
+   "suggestion": "Rebuild it as a clinical vignette, for example a patient on a calcium channel blocker or nitrate, and ask about the mechanism or the next step in management. Use a positive lead-in, give options of one kind, and add an explanation of the calmodulin–MLCK pathway."
+  }
+ },
  "headqa-2013-48": {
   "hash": "61820119",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -12209,6 +12891,382 @@
    "suggestion": "Rebuild it as a clinical vignette, such as a nephrotic patient with hypoalbuminemia or a patient with obstructive uropathy, and ask about the change in GFR or the Starling force involved. Use grammatically parallel options and add an explanation."
   }
  },
+ "headqa-2013-50": {
+  "hash": "41e8329b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:26:57.417Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "SCA1 is autosomal dominant with complete penetrance, so a heterozygous father passes the expanded allele to 50% of his children of either sex, and every child who inherits it will develop ataxia."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "SCA1 is an autosomal dominant disorder with complete lifetime penetrance, so a heterozygous carrier passes the expanded allele to 50% of his children, and all of those children will eventually develop ataxia."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Vague lead-in ('What follows from the above?') instead of a focused question",
+    "Awkward translated wording ('presents ... in heterozygosis', 'its offspring')",
+    "Heterogeneous options: E is long and convoluted, mixing two scenarios and an irrelevant second SCA locus; D makes no sen",
+    "Option D is absurd and A wrongly describes an X-linked pattern that is easy to rule out, so they are weak distractors",
+    "Stem cue: 'heterozygosis' plus 'complete penetrance' gives away the autosomal dominant 50% answer",
+    "No explanation provided"
+   ],
+   "topic": "Neurology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: SCA1 is autosomal dominant, so each child has a 50% risk, and the stem says penetrance is complete",
+    "The distractors are weak or heterogeneous, and the wording is vague and reads as a poor translation",
+    "There is no explanation, and the item tests basic inheritance recall rather than real counseling nuance such as anticipation"
+   ],
+   "suggestion": "Rewrite the lead-in as 'Which of the following best describes the risk to each of his children?' and make the options parallel and the same length, for example 50% with possible earlier onset (anticipation), 25%, 100%, daughters only, or 50% with later, milder onset. Add an explanation that covers autosomal dominant transmission and paternal anticipation of the CAG expansion."
+  }
+ },
+ "headqa-2013-51": {
+  "hash": "b846b04d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:27:01.146Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "LHON is caused by a mitochondrial DNA mutation, which is inherited only from the mother, so an affected father cannot pass it to any of his children."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "LHON is caused by a mitochondrial DNA mutation that is inherited only from the mother, so an affected father does not pass it to any of his children."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Poor translation: 'holándrica', 'its male descendants', switches between 'you' and the patient",
+    "Nonstandard mutation notation 'LHON11778A' (should be m.11778G>A in MT-ND4)",
+    "Options C and E are logical opposites, which narrows the choice",
+    "Option E gives its reason inside the option ('because it is of maternal inheritance'), which cues the answer",
+    "No explanation provided"
+   ],
+   "topic": "Ophthalmology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: mtDNA is inherited only from the mother, so an affected father does not pass on LHON",
+    "Translation errors and nonstandard notation make the item read poorly",
+    "There is no explanation, and the item mostly tests recall of the inheritance pattern"
+   ],
+   "suggestion": "Rewrite in clear English using m.11778G>A notation. Remove the justifications from the options, and add an explanation covering maternal mtDNA transmission, heteroplasmy, incomplete penetrance and male predominance. You could also ask about the risk to his sister's children so the item tests applied reasoning."
+  }
+ },
+ "headqa-2013-52": {
+  "hash": "daa2977d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:27:12.317Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "CF is autosomal recessive, so two carrier parents have a 25% chance in each pregnancy of a child with two mutated alleles."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "CF is autosomal recessive, so two carrier parents have a 1 in 4 (0.25) chance of an affected child in each pregnancy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "stem does not specify that both parents are heterozygous carriers (ambiguous)",
+    "recall without clinical vignette",
+    "inconsistent option formatting (0,25 with decimal comma, 'one' in words, stray full stops) cues the key",
+    "grammatically awkward stem ('possibilities')",
+    "no explanation"
+   ],
+   "topic": "Paediatrics",
+   "verdict": "revise",
+   "reasons": [
+    "Key (25%) is correct only if both parents are heterozygous carriers, which the stem does not state",
+    "Pure recall with no patient; below Step 2 CK application level",
+    "Inconsistent option formatting and no explanation"
+   ],
+   "suggestion": "Write a genetic counselling vignette, for example: 'A couple are both found to be heterozygous carriers of the F508del CFTR variant. What is the probability that each pregnancy results in an affected child?' Use consistent percentage options (1%, 10%, 25%, 50%, 100%) and add an explanation of autosomal recessive inheritance."
+  }
+ },
+ "headqa-2013-53": {
+  "hash": "52d5bf4a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:27:16.250Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "HLA (MHC) molecules are highly polymorphic glycoproteins on the cell surface, not proteins in the nucleus. They bind peptide antigens and present them at the cell surface so T cells can recognize them."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.98,
+    "reason": "HLA (MHC) molecules are highly polymorphic cell-surface glycoproteins that bind peptides and present them to T cells."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; pure recall of a basic-science fact",
+    "B is implausible: it confuses HLA classes with immunoglobulin isotypes",
+    "A and E are opposites, so a test-wise student can narrow down to them",
+    "A depends on one trap word ('nuclear')",
+    "vague stem: 'which is true' with no lead-in question",
+    "no explanation"
+   ],
+   "topic": "Immunology",
+   "verdict": "reject",
+   "reasons": [
+    "Recall of a basic-science fact with no patient, so not Step 2 CK material",
+    "Distractors are weak or absurd (B), and A and E are opposites, which cues the student",
+    "No explanation, and the item tests the definition of a term rather than clinical use"
+   ],
+   "suggestion": "Rewrite it as a clinical vignette that uses HLA function, such as HLA matching before transplant, HLA-B*5701 screening before abacavir, or HLA-B27 in spondyloarthritis. Use five options of the same kind and add an explanation."
+  }
+ },
+ "headqa-2013-54": {
+  "hash": "c8f1f619",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:27:29.404Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "IVIG is used for antibody-deficiency syndromes, Kawasaki disease, Guillain-Barré syndrome and ITP, but it has no role in preventing MGUS, which is a monoclonal plasma-cell disorder."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "IVIG is not used to prevent MGUS, a premalignant clonal plasma-cell disorder that is managed by observation, whereas ITP, Guillain-Barré syndrome, Kawasaki disease and antibody deficiencies are established IVIG uses."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 2,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem",
+    "two keys: option D includes multiple sclerosis, for which IVIG is not recommended",
+    "typo: 'immune thrombocyanic purpura'",
+    "heterogeneous options (diseases vs mechanism vs 'prevention' concept)",
+    "key is conceptually implausible and stands out",
+    "recall without a patient vignette"
+   ],
+   "topic": "Immunology",
+   "verdict": "reject",
+   "reasons": [
+    "Option D is also correct because IVIG is not recommended for multiple sclerosis",
+    "Negatively worded recall item with no clinical vignette",
+    "Typos and an implausible key that gives the answer away"
+   ],
+   "suggestion": "Rewrite as a positively worded vignette, e.g., a child with 5 days of fever, conjunctivitis and mucositis, asking for the next best step (IVIG plus aspirin), with homogeneous treatment options. Remove MS from any IVIG-indication option."
+  }
+ },
+ "headqa-2013-55": {
+  "hash": "f6ff24f7",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:27:42.161Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.75,
+    "reason": "Fever's accepted benefits are slowing bacterial growth, stronger phagocyte killing, more acute-phase proteins and immunoglobulins, and lower serum iron; stimulating the alternative complement pathway is not one of them."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.7,
+    "reason": "Fever's recognised benefits are iron sequestration, more acute phase proteins and immunoglobulins, stronger phagocyte killing and slower bacterial growth, but stimulating the alternative complement pathway isn't one of them."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "E",
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem (NOT) without emphasis",
+    "ungrammatical, poorly translated stem",
+    "pure recall with no clinical vignette",
+    "key depends on one textbook's list; the evidence on fever and complement is mixed",
+    "iron sequestration and immunoglobulin synthesis come from cytokines (IL-6/hepcidin) that go with fever, not from the tem",
+    "no explanation given"
+   ],
+   "topic": "Immunology",
+   "verdict": "reject",
+   "reasons": [
+    "Recall of a textbook list with no patient, so it is not Step 2 CK material",
+    "Key is debatable: more than one option is not a direct effect of raised temperature",
+    "Negative, badly worded stem and no explanation"
+   ],
+   "suggestion": "Replace it with a vignette that tests a clinical decision about fever, such as whether to give antipyretics in a febrile child or how to recognise hyperthermia as different from fever. A list of fever's immunological effects is not a good basis for an item."
+  }
+ },
+ "headqa-2013-56": {
+  "hash": "09ba4c9d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:27:43.448Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.98,
+    "reason": "IL-10 and TGF-beta are the main regulatory cytokines: they suppress macrophage and Th1 activation, cut down pro-inflammatory cytokine production and help regulatory T cells work, while all the other pairs are pro-inflammatory."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.98,
+    "reason": "IL-10 and TGF-beta are the main regulatory (Treg-associated) cytokines: they switch off macrophage and T-cell activation and dampen inflammation, while all the other pairs are pro-inflammatory."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 5,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "recall without a clinical vignette",
+    "no explanation provided",
+    "inconsistent option formatting/punctuation"
+   ],
+   "topic": "Immunology",
+   "verdict": "reject",
+   "reasons": [
+    "Pure basic-science recall with no patient; not Step 2 CK application",
+    "No explanation to teach the concept",
+    "Key is correct but the item tests memorization only"
+   ],
+   "suggestion": "Rebuild as a clinical vignette, e.g. an infant with very-early-onset IBD from an IL-10/IL-10R defect, asking which cytokine signalling is missing, and add an explanation covering each distractor."
+  }
+ },
+ "headqa-2013-57": {
+  "hash": "b8b4ef97",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:28:05.302Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Serology doesn't work well for diagnosing CMV reactivation in immunosuppressed patients because IgG is already present and IgM is unreliable, and CMV in urine doesn't show active systemic disease, so quantitative blood PCR for viral load is the diagnostic method of choice."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "In immunosuppressed patients, serology is unreliable and CMV shedding in urine doesn't prove active disease, so CMV reactivation is diagnosed by quantitative PCR showing the viral load in the blood."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Poorly translated, ungrammatical stem ('ethological' for 'etiological'; 'How would the ethological diagnosis?')",
+    "Garbled option wording ('chain reaction of quantitative polymerase')",
+    "No clinical vignette: it is recall with no patient",
+    "No explanation given",
+    "Option B ('advanced cell line') is vague",
+    "Key is the most specific and technical-sounding option"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: quantitative CMV PCR in blood is the standard way to diagnose CMV reactivation or disease in immunosuppressed patients. Serology (IgG and IgM) is unreliable in reactivation, and urine culture or urine antigen shows viral",
+    "The stem is a garbled translation, has no patient vignette and has no explanation.",
+    "The idea is sound and can be fixed by rewriting it as a clinical scenario."
+   ],
+   "suggestion": "Rewrite it as a vignette, for example a kidney transplant recipient on tacrolimus/mycophenolate 6 weeks after transplant with fever, leukopenia and raised transaminases, then ask 'Which of the following is the most appropriate test to confirm the diagnosis?' Fix the option wording (e.g. 'Quantitative CMV PCR of plasma', 'Urine viral culture', 'Serum CMV IgM'), and add an explanation of why serology and urine tests are not reliable in reactivation."
+  }
+ },
  "headqa-2013-58": {
   "hash": "0d0e92bf",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -12299,6 +13357,238 @@
     "Weak distractor (TTV) and no explanation"
    ],
    "suggestion": "Rewrite as a vignette, e.g. a patient with chronic hepatitis C (genotype and fibrosis stage given), asking for the most appropriate pangenotypic direct-acting antiviral regimen (e.g. glecaprevir–pibrentasvir), with other antiviral regimens as homogeneous distractors. Add an explanation covering each option."
+  }
+ },
+ "headqa-2013-60": {
+  "hash": "36b8b6cb",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:28:20.327Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.99,
+    "reason": "Cat scratch disease is caused by Bartonella henselae, a gram-negative bacillus spread by cat scratches or bites, and it typically causes regional lymphadenopathy."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.99,
+    "reason": "Cat scratch disease is caused by Bartonella henselae, a gram-negative bacillus passed on by cat scratches or bites (often from kittens), and it causes regional lymphadenopathy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 5,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "recall without a patient vignette",
+    "stem names the disease, so it gives the answer away to anyone who knows the eponym",
+    "no explanation provided"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and the distractors are homogeneous causes of lymphadenopathy",
+    "Pure fact recall with no clinical vignette, so it falls short of Step 2 CK style",
+    "No explanation"
+   ],
+   "suggestion": "Write a vignette, for example a child with a papule on the hand and tender regional (axillary or epitrochlear) lymph nodes a few weeks after getting a new kitten. Ask for the most likely cause or the best next step in management (for example azithromycin, or supportive care only), and add an explanation that covers each distractor."
+  }
+ },
+ "headqa-2013-61": {
+  "hash": "699fc25b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:28:16.742Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.98,
+    "reason": "M. avium-intracellulare belongs to the nontuberculous mycobacteria (MAC), not the M. tuberculosis complex, which includes M. bovis, M. africanum, BCG, and M. microti."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "M. avium-intracellulare is a nontuberculous mycobacterium (MAC). M. microti, BCG (an attenuated M. bovis), M. africanum and M. bovis all belong to the M. tuberculosis complex."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem (\"except one\")",
+    "pure recall of taxonomy with no clinical vignette",
+    "no explanation provided",
+    "outdated or nonstandard name 'Mycobacterium tuberculosis hominis'",
+    "BCG is a strain of M. bovis, not a separate species, so the options are not homogeneous",
+    "the option format doesn't fit the stem: options are complete sentences ending in full stops"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "reject",
+   "reasons": [
+    "This is microbiology taxonomy recall with no patient, so it is not Step 2 CK material",
+    "The negative 'except' stem goes against NBME guidance",
+    "There is no explanation, and the wording is outdated"
+   ],
+   "suggestion": "Rewrite it as a clinical vignette. For example: a patient with advanced HIV and a CD4 count below 50/µL who has disseminated infection. Ask for the most likely organism or the right prophylaxis or treatment, so the item tests the clinical difference between MAC and M. tuberculosis complex."
+  }
+ },
+ "headqa-2013-62": {
+  "hash": "186d55e7",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:29:05.619Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.9,
+    "reason": "Short periods without P waves and a junctional escape rhythm with retrograde P waves mean sinus arrest or sinoatrial block, and because it causes symptoms a permanent pacemaker is indicated."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.85,
+    "reason": "Missing P waves with a junctional escape rhythm and retrograde P waves point to sinus node dysfunction (sinus arrest or sinoatrial block), and because it causes symptoms (dizziness) a pacemaker is indicated."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no explanation provided",
+    "symptom-rhythm correlation not explicitly stated, which is the basis for pacing",
+    "'sinoatrial block' specifically cannot be distinguished from sinus arrest from the described tracing",
+    "awkward translated wording and non-standard lead-in ('Before this you would say')",
+    "longest option is the key"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: symptomatic sinus node dysfunction with junctional escape warrants a pacemaker",
+    "Stem does not show that symptoms happened during the bradycardia, which weakens the pacing indication and makes E arguable",
+    "No explanation, and the wording and lead-in need tidying"
+   ],
+   "suggestion": "State that the dizziness happened at the same time as the junctional-escape episodes on the Holter, rewrite D as 'sinus node dysfunction (sinus arrest/SA block)', and use a standard lead-in such as 'Which of the following is the most appropriate interpretation and management?' Add an explanation covering each option."
+  }
+ },
+ "headqa-2013-63": {
+  "hash": "37f211d6",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:29:08.955Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Atenolol, digoxin and IV verapamil all slow conduction through the AV node, and their combined (pharmacodynamic) effect most likely caused the acute complete AV block."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Acute complete AV block after IV verapamil in a patient already taking atenolol and digoxin comes from the combined nodal-blocking effects of all three drugs, not from the slower pharmacokinetic rise in digoxin levels."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Grammar and pronoun errors ('A 82-year-old', 'woman... He goes')",
+    "No explanation provided",
+    "Option A is arguable: verapamil really does raise digoxin levels through P-gp inhibition and lower renal clearance, but ",
+    "Option E is vague and overlaps with the key (heterogeneous level of specificity)",
+    "Stem lacks vital signs, potassium or digoxin level that would help rule options in or out",
+    "Key is the longest and most comprehensive option"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: adding IV verapamil to a beta-blocker and digoxin gives additive suppression of the AV node",
+    "The pharmacokinetic digoxin interaction (A) could be defended unless the stem says the block came on within minutes of a single dose",
+    "Language errors and no explanation"
+   ],
+   "suggestion": "Fix the grammar and pronoun, and say that complete heart block appeared within minutes of a single IV bolus, with normal potassium and a therapeutic digoxin level, so that A and B are clearly excluded. Add an explanation stressing that IV verapamil is contraindicated in patients taking beta-blockers."
+  }
+ },
+ "headqa-2013-64": {
+  "hash": "fb1e2001",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-26T16:29:13.981Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.96,
+    "reason": "A wide, fixed split S2, a pulmonary flow murmur, right axis deviation with RBBB, and atrial fibrillation with right heart failure in a middle-aged adult with a murmur since childhood are classic for a secundum atrial septal defect."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "A wide, fixed split S2, a pulmonary flow murmur, right axis deviation with right bundle branch block, and atrial fibrillation with right heart failure in a middle-aged adult are classic for an ostium secundum atrial septal defect."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 3,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "poor translation / non-standard terminology (\"malignant edema\", \"2nd R unfolded\", \"death rattles\", \"TA\", \"interauricular",
+    "grammatically incomplete stem sentences",
+    "vignette gives the answer away (fixed split S2 is pathognomonic)",
+    "vague lead-in (\"diagnostic orientation\")",
+    "no explanation"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "Key (atrial septal defect) is correct: fixed split S2, pulmonary flow murmur, RBBB with right axis deviation, AF in adulthood",
+    "Machine-translated wording contains errors, e.g. 'malignant edema' for malleolar edema",
+    "No explanation is given, and the pathognomonic sign makes the item easy"
+   ],
+   "suggestion": "Rewrite in standard English: 'malleolar edema', 'wide, fixed splitting of S2', 'no crackles', 'BP', 'atrial/ventricular septal defect'. Use the lead-in 'Which of the following is the most likely diagnosis?' and add an explanation that contrasts each option's murmur and ECG findings."
   }
  },
  "headqa-2015-38": {

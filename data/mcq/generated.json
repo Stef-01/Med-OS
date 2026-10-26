@@ -559,6 +559,57 @@
    }
   },
   {
+   "id": "ai-mcq-0c000e2e",
+   "stem": "A 47-year-old man has had three spontaneous attacks of spinning vertigo, each lasting 4 hours, with fluctuating left-ear hearing loss, tinnitus and fullness. Examination between attacks is normal.",
+   "ask": "Which test best confirms the diagnosis?",
+   "options": [
+    "Pure-tone audiometry",
+    "MRI internal acoustic meatus",
+    "Dix-Hallpike manoeuvre",
+    "Caloric testing",
+    "CT brain"
+   ],
+   "answer": 0,
+   "explanation": "His spontaneous vertigo attacks lasting hours, with fluctuating ear symptoms on one side, point to Ménière's disease. The Bárány criteria for definite Ménière's disease need a low- to medium-frequency sensorineural hearing loss in the affected ear, documented on audiometry. Pure-tone audiometry is therefore the test that confirms it.",
+   "why": [
+    null,
+    "MRI is used to rule out a vestibular schwannoma once audiometry shows an uneven sensorineural loss; it cannot confirm Ménière's disease.",
+    "The Dix-Hallpike manoeuvre tests for BPPV, which causes positional vertigo lasting seconds, not spontaneous attacks lasting hours.",
+    "Caloric testing may show reduced function on one side, but it is not specific and is not part of the diagnostic criteria.",
+    "CT scanning is poor at showing the posterior fossa and inner ear, and nothing here suggests stroke or another central cause."
+   ],
+   "topic": "Otorhinolaryngology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-190",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-190",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:41.255Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-190",
+      "osce-amsa-190"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0964",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0657"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-0e183e64",
    "stem": "A 25-year-old man with newly diagnosed ileocolonic Crohn's disease has haemoglobin 118 g/L, MCV 76 fL, ferritin 16 µg/L, transferrin saturation 8% and CRP 28 mg/L.",
    "ask": "Most likely cause of his anaemia?",
@@ -604,6 +655,57 @@
       "medqa-us4-test-0448",
       "medqa-us4-test-0117",
       "medqa-us4-test-0109"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-0e28ef04",
+   "stem": "A 72-year-old man with 18 years of type 2 diabetes has night forefoot pain eased by hanging his foot over the bed. Pedal pulses are absent; ankle-brachial index is 1.40.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Repeat ankle-brachial index",
+    "Toe-brachial index",
+    "Exercise treadmill test",
+    "Plain foot x-ray",
+    "Lumbar spine MRI"
+   ],
+   "answer": 1,
+   "explanation": "Rest pain eased by dependency and absent pulses point to peripheral arterial disease. In long-standing diabetes, an ABI of 1.3 or more usually means calcified, incompressible tibial arteries, so the ABI cannot be trusted. Diabetes Feet Australia guidelines recommend toe pressure or toe-brachial index (with Doppler waveforms), because digital arteries are rarely calcified.",
+   "why": [
+    "Repeating the test gives the same falsely high reading, because the calcified ankle vessels still cannot be compressed.",
+    null,
+    "An exercise ABI still relies on compressing the calcified ankle arteries, and it is unsafe and unnecessary in a man with rest pain.",
+    "Plain x-ray may show calcified arteries or bone changes but does not measure limb perfusion or confirm ischaemia.",
+    "Neurogenic claudication causes pain on walking, not night forefoot pain eased by hanging the foot down with absent pulses."
+   ],
+   "topic": "Vascular Surgery",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-327",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-327",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:36.938Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-327",
+      "osce-amsa-327"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1083",
+      "medqa-us4-test-0926",
+      "medqa-us4-test-0511"
      ],
      "model": "claude-opus-5-5"
     }
@@ -1064,6 +1166,57 @@
    }
   },
   {
+   "id": "ai-mcq-1700aeb5",
+   "stem": "A 31-year-old man attends a sexual health clinic for a routine screen after condomless sex with casual partners. He is well. His fourth-generation HIV antigen/antibody immunoassay is reactive.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "CD4 lymphocyte count",
+    "HIV-1 Western blot",
+    "HIV genotypic resistance test",
+    "Repeat in three months",
+    "HLA-B*5701 typing"
+   ],
+   "answer": 1,
+   "explanation": "A reactive fourth-generation screen is not yet a diagnosis. Under the Australian National HIV Testing Policy, it must be confirmed by a supplementary assay such as an HIV-1 Western blot, and by testing a second, separately collected sample. Staging and pre-treatment tests come only after the diagnosis is confirmed.",
+   "why": [
+    "The CD4 count stages the immune system once HIV is confirmed, but it cannot confirm or exclude infection.",
+    null,
+    "Genotypic resistance testing guides the choice of ART after the diagnosis is confirmed, not before.",
+    "Repeating the test after the window period applies to a negative screen after recent exposure, not to a reactive one that needs confirming now.",
+    "HLA-B*5701 typing is only needed before starting abacavir and has no role in confirming infection."
+   ],
+   "topic": "Sexual Health",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-8bb4689d",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-8bb4689d",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:08.352Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-8bb4689d",
+      "osce-ai-8bb4689d"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0689",
+      "medqa-us4-test-0633",
+      "medqa-us4-test-0548"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-18db6652",
    "stem": "A 20-year-old man has 6 hours of fever 39.5 °C, headache, photophobia and neck stiffness. GCS 15, no focal signs or papilloedema. Blood cultures taken, ceftriaxone and dexamethasone given; coagulation normal.",
    "ask": "Most appropriate next investigation?",
@@ -1210,6 +1363,57 @@
       "medqa-us4-test-0905",
       "medqa-us4-test-0448",
       "medqa-us4-test-0072"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-1a513aef",
+   "stem": "A 27-year-old woman slashed with a broken bottle sits upright in the emergency department. A wound over her right sternocleidomastoid oozes dark blood and hisses on inspiration.",
+   "ask": "Most appropriate immediate step?",
+   "options": [
+    "Probe wound for depth",
+    "CT angiogram of neck",
+    "Occlude and lie flat",
+    "Elevate head of bed",
+    "Clamp the bleeding vessel"
+   ],
+   "answer": 2,
+   "explanation": "A hissing neck wound over the external jugular vein means the vein is being held open by fascia and is drawing in air, which risks venous air embolism. Under EMST principles, first press on the wound and put on an occlusive dressing, then lie her flat or head-down with in-line stabilisation to raise neck venous pressure. Give high-flow oxygen and call senior help.",
+   "why": [
+    "Probing a wound that breaches the platysma can dislodge clot and let in more air or restart bleeding, so it should only be explored in theatre.",
+    "CT angiography is right once she is stable, but it does nothing to stop air being drawn in now.",
+    null,
+    "Raising the head lowers venous pressure in the neck, which makes it more likely that air is drawn into the open vein.",
+    "Blindly clamping in the emergency department can injure nearby structures and delays the simple, effective step of occluding the wound."
+   ],
+   "topic": "Trauma Surgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-387d7db7",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-387d7db7",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:21.130Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-387d7db7",
+      "osce-ai-387d7db7"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-1216",
+      "medqa-us4-test-0342"
      ],
      "model": "claude-opus-5-5"
     }
@@ -1712,6 +1916,57 @@
       "medqa-us4-test-0966",
       "medqa-us4-test-0714",
       "medqa-us4-test-0905"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-290aeef2",
+   "stem": "A 68-year-old man who smokes has 4 weeks of constant left forefoot pain at night, eased by dangling the leg. His second toe is dry and black; left ABI is 0.32.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Same-day vascular referral",
+    "Supervised exercise program",
+    "Intravenous antibiotics",
+    "Routine vascular clinic referral",
+    "Start oral cilostazol"
+   ],
+   "answer": 0,
+   "explanation": "This is chronic limb-threatening ischaemia: he has had ischaemic rest pain for more than 2 weeks, has dry gangrene and an ABI below 0.4. The limb is at high risk of amputation, so he needs to be discussed with the vascular team the same day, with a view to imaging and revascularisation. Meanwhile, give analgesia, keep the leg dependent, protect the foot and start an antiplatelet and a statin.",
+   "why": [
+    null,
+    "Supervised exercise is used for intermittent claudication, but he now has rest pain and tissue loss, so exercise therapy is not appropriate and would delay revascularisation.",
+    "The gangrene is dry and shows no signs of infection, such as redness, pus or fever, so antibiotics do not treat the underlying ischaemia.",
+    "A routine outpatient referral is too slow for a threatened limb with established tissue loss, and the delay risks a major amputation.",
+    "Cilostazol only improves walking distance in claudication; it does not save a limb with chronic limb-threatening ischaemia and should not replace urgent referral."
+   ],
+   "topic": "Vascular Surgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-625",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-625",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:40.848Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-625",
+      "osce-amsa-625"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0459",
+      "medqa-us4-test-1083",
+      "medqa-us4-test-0047"
      ],
      "model": "claude-opus-5-5"
     }
@@ -2527,6 +2782,57 @@
    }
   },
   {
+   "id": "ai-mcq-37b00158",
+   "stem": "A 29-year-old man is cut on the left neck with a broken bottle. The wound breaches platysma; bleeding stopped with pressure. No stridor, expanding haematoma or haemoptysis. HR 92/min, BP 128/80 mmHg.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Plain neck X-ray",
+    "Duplex neck ultrasound",
+    "Catheter angiography",
+    "Local wound exploration",
+    "CT angiogram neck"
+   ],
+   "answer": 4,
+   "explanation": "If a neck wound goes through platysma, assume deep injury until proven otherwise. In a stable patient with no hard signs, EMST guidance is CT angiography of the neck. It shows the vessels, airway and oesophagus, so you can decide between theatre and watching him.",
+   "why": [
+    "A plain X-ray can show surgical emphysema or a foreign body, but it cannot rule out injury to the vessels or the airway and gut.",
+    "Duplex ultrasound depends on the operator, cannot see well near the skull base or behind the clavicle, and does not assess the airway or oesophagus.",
+    "Catheter angiography is invasive. It is kept for unclear CT results or for treatment, not used as the first test.",
+    "Probing or exploring a wound through platysma in the ED can dislodge a clot and cause sudden bleeding or air embolism, so it is not done.",
+    null
+   ],
+   "topic": "Trauma Surgery",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-387d7db7",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-387d7db7",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:02.036Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-387d7db7",
+      "osce-ai-387d7db7"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-1216",
+      "medqa-us4-test-0342"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-3bd5914c",
    "stem": "A 62-year-old woman comes to a rural emergency department with 3 weeks of constant burning pain in her right forefoot. The pain is worst at night when she lies flat, so she has been sleeping in a recliner with the right foot hanging over the edge. For years she has had calf pain after walking short distances. She has type 2 diabetes, hypertension, a previous myocardial infarction and an ischaemic stroke. She smokes 20 cigarettes a day. Temperature is 36.8 °C, pulse 88/min and regular, blood pressure 164/88 mmHg, respiratory rate 18/min and SpO2 96% on room air. The right great, second and third toes are black, shrivelled and hard, with a sharp line of demarcation and no discharge, swelling or erythema. The fourth toe is dusky. The right popliteal and pedal pulses are absent. The right ankle-brachial index is 0.28, and both ankle pressures are below 50 mmHg. WCC is 8.9 x10^9/L and CRP is 12 mg/L. The tertiary vascular unit has accepted her, and transfer is booked for tomorrow morning.",
    "ask": "Which of the following is the most appropriate measure to reduce her risk of further tissue loss while she waits for transfer?",
@@ -3131,6 +3437,57 @@
    }
   },
   {
+   "id": "ai-mcq-42e049b2",
+   "stem": "A 62-year-old woman with hypertension has sudden, severe, tearing pain between her shoulder blades that was worst at onset. Left arm BP is 164/90 mmHg and right arm BP is 132/80 mmHg.",
+   "ask": "Which test is most likely to confirm the diagnosis?",
+   "options": [
+    "Serum D-dimer",
+    "Chest X-ray",
+    "CT pulmonary angiogram",
+    "Coronary angiography",
+    "CT aortogram"
+   ],
+   "answer": 4,
+   "explanation": "Sudden tearing interscapular pain with a difference of more than 20 mmHg between the arms gives a high aortic dissection detection risk score (ADD-RS). In a haemodynamically stable patient, the next step is urgent CT angiography of the whole aorta, which can show the intimal flap, its extent and branch involvement. A D-dimer result should not be used to rule out dissection at this level of risk.",
+   "why": [
+    "With an ADD-RS of 2 or more, D-dimer cannot exclude dissection and adds delay; CT angiography is needed whatever the result.",
+    "A chest X-ray may show a widened mediastinum, but it is often normal in dissection, so it cannot confirm or exclude the diagnosis.",
+    "A CT pulmonary angiogram is timed for the pulmonary arteries, so it may not opacify the aorta well enough to assess it, and pulmonary embolism does not cause a difference in blood pressure between the arms.",
+    "Coronary angiography is invasive and does not image the aorta; it can delay surgery and may extend a dissection.",
+    null
+   ],
+   "topic": "Emergency Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-307",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-307",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:56.992Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-307",
+      "osce-amsa-307"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0714",
+      "medqa-us4-test-0164"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-4374c88b",
    "stem": "A 47-year-old man wakes with a muffled right ear. Audiogram: right air conduction 45 to 65 dB HL, masked bone conduction within 5 dB at every frequency; left normal.",
    "ask": "What does the audiogram show?",
@@ -3637,6 +3994,57 @@
    }
   },
   {
+   "id": "ai-mcq-4f2ae166",
+   "stem": "A 31-year-old woman has newly confirmed HIV-1 infection and feels well. Her CD4 count is 520 cells/µL, her viral load is 40,000 copies/mL, and her genotype shows no resistance.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Await CD4 below 350",
+    "Start cotrimoxazole prophylaxis",
+    "Start antiretroviral therapy",
+    "Repeat viral load testing",
+    "Start azithromycin prophylaxis"
+   ],
+   "answer": 2,
+   "explanation": "ASHM's Australian commentary on the DHHS guidelines recommends starting antiretroviral therapy soon after diagnosis for everyone with HIV, whatever the CD4 count. Early treatment protects the immune system and lowers the risk of illness. Once the viral load has been undetectable for 6 months, she cannot pass HIV on through sex (U=U).",
+   "why": [
+    "Waiting for the CD4 count to fall is an outdated approach: the START trial showed that waiting causes more serious illness than treating straight away.",
+    "Pneumocystis prophylaxis with cotrimoxazole is given when the CD4 count is below 200 cells/µL (or below 14%), and hers is 520.",
+    null,
+    "Her infection is already confirmed and her baseline viral load is known, so repeating it adds nothing and only delays treatment.",
+    "Azithromycin prophylaxis against Mycobacterium avium complex is only considered when the CD4 count is below 50 cells/µL and ART is not yet working, which does not apply to her."
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-8bb4689d",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-8bb4689d",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:05.707Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-8bb4689d",
+      "osce-ai-8bb4689d"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0689",
+      "medqa-us4-test-0633",
+      "medqa-us4-test-0548"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-4f5dd328",
    "stem": "A 22-year-old man has had 3 months of right iliac fossa pain, nocturnal diarrhoea and weight loss, and has a perianal fistula. Faecal calprotectin is 640 µg/g, and stool pathogen PCR is negative.",
    "ask": "Which test best confirms the diagnosis?",
@@ -3884,6 +4292,57 @@
       "medqa-us4-test-0964",
       "medqa-us4-test-0459",
       "medqa-us4-test-0657"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-537f99f4",
+   "stem": "A 52-year-old woman with subarachnoid haemorrhage has dilated ventricles on CT. Over one hour her GCS falls from 14 to 10. BP is 210/100 mmHg, heart rate 46/min.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Ventricular drain insertion",
+    "Intravenous labetalol infusion",
+    "Therapeutic lumbar puncture",
+    "Oral nimodipine 60 mg",
+    "Intravenous dexamethasone"
+   ],
+   "answer": 0,
+   "explanation": "She has subarachnoid haemorrhage with acute hydrocephalus, a falling GCS and a Cushing response (high BP, low heart rate), which means raised intracranial pressure and impending coning. The urgent treatment is for a neurosurgeon to insert an external ventricular drain to drain the CSF.",
+   "why": [
+    null,
+    "Her high BP is a Cushing reflex that keeps blood flowing to the brain, so lowering it aggressively before treating the raised intracranial pressure can cause brain ischaemia.",
+    "Lumbar puncture is contraindicated with a reduced GCS and obstructive hydrocephalus because it can cause the brain to herniate (cone).",
+    "Nimodipine is given to prevent delayed cerebral ischaemia but does not treat acute hydrocephalus, and it should not be given by mouth when the GCS is falling.",
+    "Corticosteroids are not helpful in subarachnoid haemorrhage and do not lower intracranial pressure caused by hydrocephalus."
+   ],
+   "topic": "Neurosurgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-361",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-361",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:35.831Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-361",
+      "osce-amsa-361"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0615",
+      "medqa-us4-test-1187",
+      "medqa-us4-test-0749"
      ],
      "model": "claude-opus-5-5"
     }
@@ -4546,6 +5005,57 @@
    }
   },
   {
+   "id": "ai-mcq-666bb226",
+   "stem": "A 71-year-old man, a retired plumber exposed to asbestos, has four months of cough, shoulder pain, hoarseness and 7 kg weight loss. Chest X-ray shows a 5 cm right apical mass.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Sputum cytology",
+    "Contrast CT chest",
+    "PET-CT scan",
+    "Flexible bronchoscopy",
+    "Brachial plexus MRI"
+   ],
+   "answer": 1,
+   "explanation": "An apical mass on chest X-ray in an older man with red-flag symptoms is suspicious for lung cancer (a superior sulcus tumour). Cancer Australia and the Optimal Care Pathway advise an urgent contrast CT of the chest and upper abdomen, then urgent referral to a respiratory specialist. The CT findings decide which staging tests and which biopsy route come next.",
+   "why": [
+    "Sputum cytology often misses cancer, especially a peripheral apical lesion, and is not recommended as the first test.",
+    null,
+    "PET-CT is for staging once CT has shown the lesion and the specialist team has asked for it, not the first test from general practice.",
+    "Bronchoscopy is a tissue-sampling test planned after CT, and a peripheral apical lesion is often hard to reach with it.",
+    "MRI of the brachial plexus is used to plan surgery for a superior sulcus tumour after CT and tissue diagnosis, not as the first test."
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-189",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-189",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:20.221Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-189",
+      "osce-amsa-189"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0422",
+      "medqa-us4-test-0374",
+      "medqa-us4-test-0287"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-66c25f9f",
    "stem": "A 71-year-old woman has had six weeks of painless jaundice, pale stools and 6 kg weight loss. She is afebrile. CT shows a 25 mm pancreatic head mass without metastases.",
    "ask": "Most appropriate next step?",
@@ -4642,6 +5152,57 @@
       "medqa-us4-test-0754",
       "medqa-us4-test-0936",
       "medqa-us4-test-1054"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-6939cf80",
+   "stem": "A 68-year-old woman, a former shipyard worker, has a 3-month dry cough, 5 kg weight loss and hoarseness. She takes perindopril. Chest X-ray shows a 5 cm left hilar mass.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Sputum cytology",
+    "Trial off perindopril",
+    "Urgent CT chest",
+    "Antibiotics, repeat X-ray",
+    "Whole-body PET scan"
+   ],
+   "answer": 2,
+   "explanation": "A suspicious mass on chest X-ray, together with red-flag symptoms, should be treated as lung cancer until proven otherwise. The Cancer Australia guidance and the optimal care pathway say the next step is an urgent contrast CT of the chest and upper abdomen, with urgent referral to a specialist. Asbestos exposure raises the risk of lung cancer even in someone who has never smoked.",
+   "why": [
+    "Sputum cytology often misses cancer, and a negative result would not change the need for CT.",
+    "ACE inhibitor cough is a diagnosis of exclusion and does not explain weight loss, hoarseness or a mass.",
+    null,
+    "There is no sign of infection, and waiting 6 weeks for a repeat X-ray would delay the diagnosis of a likely cancer.",
+    "PET is a staging test that the specialist arranges after CT, not the first test from general practice."
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-189",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-189",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:36.083Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-189",
+      "osce-amsa-189"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0422",
+      "medqa-us4-test-0374",
+      "medqa-us4-test-0287"
      ],
      "model": "claude-opus-5-5"
     }
@@ -5152,6 +5713,57 @@
    }
   },
   {
+   "id": "ai-mcq-721d224a",
+   "stem": "A 68-year-old woman with diabetes who smokes has a painful punched-out ulcer on her left fifth toe and night foot pain eased by dangling. Toe pressure 22 mmHg.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Compression bandaging",
+    "Oral flucloxacillin",
+    "Supervised walking program",
+    "Leg elevation and dressings",
+    "Urgent vascular referral"
+   ],
+   "answer": 4,
+   "explanation": "She has rest pain, tissue loss and a toe pressure below 30 mmHg, which means chronic limb-threatening ischaemia. Diabetes Feet Australia guidelines call for urgent vascular imaging and assessment for revascularisation. Wound care, stopping smoking, antiplatelet therapy and a statin run alongside the referral but do not replace it.",
+   "why": [
+    "Compression lowers blood flow to an already ischaemic limb and is contraindicated in severe arterial disease.",
+    "There is no sign of infection, and antibiotics do not treat an uninfected ischaemic ulcer.",
+    "Supervised exercise is for claudication, not for chronic limb-threatening ischaemia with rest pain and tissue loss.",
+    "Elevation worsens arterial perfusion and rest pain, and dressings alone will not heal an ulcer the limb cannot perfuse.",
+    null
+   ],
+   "topic": "Vascular Surgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-327",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-327",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:41.892Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-327",
+      "osce-amsa-327"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1083",
+      "medqa-us4-test-0926",
+      "medqa-us4-test-0511"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-735ee53b",
    "stem": "A 31-year-old woman, para 2, is on the birth suite 25 minutes after a spontaneous vaginal birth at 38 weeks' gestation. Her labour was induced for pre-eclampsia. She received oxytocin 10 units at the birth, and the placenta and membranes were complete. She is now bleeding heavily with clots, and the measured loss is 1,300 mL. Bimanual compression has been done, a catheter has drained 450 mL of urine, an oxytocin infusion is running, and tranexamic acid 1 g IV was given 10 minutes ago. In labour she took oral labetalol and had a magnesium sulfate infusion. She has no history of asthma. Pulse is 122/min, blood pressure 104/66 mmHg (158/102 mmHg before the birth), respirations 24/min and SpO2 98% on oxygen 15 L/min by mask. The fundus is soft and above the umbilicus. Speculum examination shows no cervical or vaginal tear. Haemoglobin is 95 g/L, platelets 146 x 10^9/L and fibrinogen 3.4 g/L. Crossmatched blood has been requested.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -5196,6 +5808,57 @@
       "medqa-us4-test-0440",
       "medqa-us4-test-1261",
       "medqa-us4-test-0627"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-73e11c00",
+   "stem": "A 79-year-old woman taking rivaroxaban for atrial fibrillation presents drowsy, GCS 13, two days after a fall. CT brain shows a left acute subdural haematoma. Her last dose was 4 hours ago.",
+   "ask": "Most appropriate immediate treatment?",
+   "options": [
+    "Prothrombinex-VF",
+    "Intravenous vitamin K",
+    "Idarucizumab",
+    "Fresh frozen plasma",
+    "Protamine sulfate"
+   ],
+   "answer": 0,
+   "explanation": "She has an intracranial bleed and took a factor Xa inhibitor 4 hours ago, so the anticoagulant must be reversed straight away. Under eTG, the reversal agent is prothrombin complex concentrate (Prothrombinex-VF, about 50 units/kg IV), given with haematology advice while urgent neurosurgical referral is arranged. Andexanet alfa is an option only where local protocol allows it.",
+   "why": [
+    null,
+    "Vitamin K works by restoring vitamin K-dependent clotting factors, so it reverses warfarin but has no effect on rivaroxaban, a direct factor Xa inhibitor.",
+    "Idarucizumab is a specific antibody fragment that reverses only dabigatran, a direct thrombin inhibitor, and does not bind rivaroxaban.",
+    "Fresh frozen plasma needs a large volume and takes a long time to thaw, and it does little to reverse a factor Xa inhibitor.",
+    "Protamine reverses heparin, and partly low molecular weight heparin, but has no effect on direct oral anticoagulants."
+   ],
+   "topic": "Emergency Medicine",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:29.227Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
      ],
      "model": "claude-opus-5-5"
     }
@@ -5957,6 +6620,57 @@
    }
   },
   {
+   "id": "ai-mcq-85579bea",
+   "stem": "A 46-year-old woman has a dilatation and curettage for heavy menstrual bleeding. The scrub nurse notes yellow fatty tissue in the curettings. Afterwards she is stable with mild lower abdominal pain.",
+   "ask": "Which complication must be excluded?",
+   "options": [
+    "Bowel injury",
+    "Intrauterine adhesions",
+    "Cervical laceration",
+    "Acute endometritis",
+    "Cervical stenosis"
+   ],
+   "answer": 0,
+   "explanation": "There is no fat inside the uterus, so fat in the curettings means the curette has gone through the uterine wall and into omentum, mesentery or bowel fat. Bowel injury must then be excluded urgently with senior gynaecology review and usually laparoscopy, even if she looks stable. A missed bowel injury can show up days later as peritonitis.",
+   "why": [
+    null,
+    "Intrauterine adhesions (Asherman syndrome) are a late complication of vigorous curettage and do not explain fat in the specimen.",
+    "A cervical tear causes vaginal bleeding during dilatation; it does not put fat in the curettings or cause intra-abdominal injury.",
+    "Endometritis is an infection that develops days later; it would not explain fat seen in the operating theatre.",
+    "Cervical stenosis is a long-term consequence of cervical surgery and has nothing to do with acute perforation."
+   ],
+   "topic": "Gynaecology",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:ai-9fdfd7be",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-9fdfd7be",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:59.920Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-9fdfd7be",
+      "osce-ai-9fdfd7be"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0241",
+      "medqa-us4-test-0245"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-8557a042",
    "stem": "A 70-year-old woman is brought to the emergency department by ambulance 1 hour after sudden, severe, tearing chest pain that radiated between her shoulder blades while she was gardening. She fainted briefly when the pain began. She has hypertension and smokes 20 cigarettes a day. Her medicines are perindopril and amlodipine. On arrival, her blood pressure is 168/94 mmHg in the left arm and 136/80 mmHg in the right arm, pulse is 104/min and SpO2 is 96% on room air. An early diastolic murmur is heard at the right sternal edge. The ECG shows sinus tachycardia with left ventricular hypertrophy and no ST elevation. CT angiography shows an intimal flap that starts just above the aortic valve and extends into the descending thoracic aorta, with a moderate high-attenuation pericardial effusion. Twenty minutes later she becomes pale and confused. Her blood pressure is 82/54 mmHg, pulse is 124/min, jugular venous pressure is raised 6 cm and her heart sounds are muffled. Two large-bore cannulas are in place and crossmatched blood is available.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -6411,6 +7125,57 @@
    }
   },
   {
+   "id": "ai-mcq-91cd4049",
+   "stem": "A 47-year-old man wakes with sudden right-sided hearing loss and tinnitus. Audiometry shows a 40 dB sensorineural loss across four contiguous frequencies, and tympanometry is normal. Prednisolone is started.",
+   "ask": "Most appropriate further investigation?",
+   "options": [
+    "MRI internal auditory canals",
+    "Non-contrast CT temporal bones",
+    "Carotid duplex ultrasound",
+    "Autoimmune antibody screen",
+    "Auditory brainstem response"
+   ],
+   "answer": 0,
+   "explanation": "Confirmed unilateral sudden sensorineural hearing loss needs gadolinium-enhanced MRI of the internal auditory canals to exclude a retrocochlear lesion such as a vestibular schwannoma. MRI is still needed if hearing recovers with steroids, because recovery does not rule out a lesion.",
+   "why": [
+    null,
+    "CT shows bony and middle ear disease well but can miss small soft-tissue lesions in the internal auditory canal, so it is not recommended routinely.",
+    "Carotid disease does not cause isolated sudden hearing loss, and the posterior circulation is not assessed this way.",
+    "A routine autoimmune screen is not recommended without features of systemic or bilateral progressive disease.",
+    "Auditory brainstem response is less sensitive than MRI for small tumours and is kept for patients who cannot have MRI."
+   ],
+   "topic": "Otorhinolaryngology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-95865471",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-95865471",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:41.020Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-95865471",
+      "osce-ai-95865471"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0964",
+      "medqa-us4-test-0302",
+      "medqa-us4-test-0504"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-91f368bd",
    "stem": "A 31-year-old woman comes to the emergency department with 3 days of tingling that started in her feet and has spread up to her waist. Over the same time her legs have become steadily weaker. Since this morning she has been unable to pass urine. She has had no back pain, fever, trauma or weight loss. Eighteen months ago she had 2 weeks of blurred vision and pain on moving her left eye, which got better without treatment. She takes no medicines. Temperature is 36.7 °C, pulse 80 beats/min, blood pressure 118/74 mm Hg and respiratory rate 16 breaths/min. Cranial nerve and upper limb examination is normal. Tone is increased in both legs. Hip flexion and ankle dorsiflexion are 3/5 on the left and 4/5 on the right. Knee and ankle reflexes are brisk, and both plantar responses are extensor. Pinprick sensation is reduced below the umbilicus. A bladder scan shows 900 mL. Full blood count and C-reactive protein are normal.",
    "ask": "Which of the following is the most appropriate next investigation?",
@@ -6656,6 +7421,57 @@
       "medqa-us4-test-1054",
       "medqa-us4-test-0459",
       "medqa-us4-test-1083"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-9630c1c8",
+   "stem": "A 66-year-old man with ISUP Grade Group 3 prostate cancer, localised on PSMA PET/CT, chooses robotic radical prostatectomy. He is sexually active and fully continent.",
+   "ask": "Most common long-term adverse effect to counsel about?",
+   "options": [
+    "Erectile dysfunction",
+    "Urinary incontinence",
+    "Radiation proctitis",
+    "Bladder neck contracture",
+    "Hot flushes"
+   ],
+   "answer": 0,
+   "explanation": "Erectile dysfunction is the most common long-term adverse effect of radical prostatectomy, even with nerve sparing, and age over 65 makes lasting loss of erections more likely. Australian prostate cancer guidance says this risk should be discussed before he consents, along with penile rehabilitation options.",
+   "why": [
+    null,
+    "Urinary leakage is common early on, but most men regain continence within a year, so lasting incontinence affects only a minority.",
+    "Radiation proctitis follows external beam radiotherapy, not surgery.",
+    "Bladder neck contracture does occur after prostatectomy but is uncommon, especially after robotic surgery.",
+    "Hot flushes come from androgen deprivation therapy, which is not part of surgery alone for intermediate-risk disease."
+   ],
+   "topic": "Urology",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:ai-e4a377e8",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-e4a377e8",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:08.043Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-e4a377e8",
+      "osce-ai-e4a377e8"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0659",
+      "medqa-us4-test-0862",
+      "medqa-us4-test-0934"
      ],
      "model": "claude-opus-5-5"
     }
@@ -7168,6 +7984,57 @@
    }
   },
   {
+   "id": "ai-mcq-a111fffd",
+   "stem": "A 46-year-old man woke yesterday with hearing loss and tinnitus in his right ear. Otoscopy is normal, Weber lateralises left, and audiometry shows a 40 dB right sensorineural loss.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Oral valaciclovir",
+    "Oral prednisolone",
+    "Ear canal microsuction",
+    "Oral amoxicillin",
+    "Intranasal mometasone"
+   ],
+   "answer": 1,
+   "explanation": "Sudden one-sided sensorineural hearing loss that began within the last 72 hours is a time-critical emergency. Start high-dose oral corticosteroids promptly and contact ENT the same day, then arrange an MRI of the internal auditory canals to exclude a retrocochlear lesion.",
+   "why": [
+    "Guidelines advise against routine antivirals for sudden sensorineural hearing loss, as they add no benefit over steroids alone.",
+    null,
+    "Normal otoscopy rules out wax, and the loss is sensorineural rather than conductive, so microsuction will not help.",
+    "Nothing suggests a bacterial infection: otoscopy is normal and there is no middle ear effusion.",
+    "Intranasal steroids treat Eustachian tube dysfunction, which causes a conductive loss, and this is a sensorineural loss."
+   ],
+   "topic": "Otorhinolaryngology",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-95865471",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-95865471",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:12.365Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-95865471",
+      "osce-ai-95865471"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0964",
+      "medqa-us4-test-0302",
+      "medqa-us4-test-0504"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-a2ea039e",
    "stem": "A 66-year-old woman with type 2 diabetes for 12 years, taking metformin, has five months of symmetrical burning and numbness in both feet. Ankle reflexes are absent; plantars are flexor.",
    "ask": "Most appropriate next investigation?",
@@ -7366,6 +8233,57 @@
       "medqa-us4-test-1004",
       "medqa-us4-test-0548",
       "medqa-us4-test-0874"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-a5aa4adc",
+   "stem": "A 69-year-old man has a transperineal biopsy showing Gleason 4+3=7 prostate adenocarcinoma. His PSA is 11 ng/mL, and MRI shows a 10 mm right peripheral zone lesion without extraprostatic extension. He has no symptoms.",
+   "ask": "Most appropriate staging investigation?",
+   "options": [
+    "Whole-body bone scan",
+    "CT chest/abdomen/pelvis",
+    "Repeat prostate MRI",
+    "FDG PET/CT",
+    "PSMA PET/CT"
+   ],
+   "answer": 4,
+   "explanation": "Gleason 4+3=7 (ISUP Grade Group 3) with a PSA of 10 to 20 ng/mL is unfavourable intermediate-risk disease, so it needs staging before curative treatment. In Australia, Medicare funds PSMA PET/CT for this. The proPSMA trial showed it is more accurate than CT plus bone scan for nodal and distant metastases.",
+   "why": [
+    "A bone scan shows only skeletal disease, misses nodal spread and is less sensitive than PSMA PET/CT.",
+    "Conventional CT misses small or normal-sized involved lymph nodes and is less accurate than PSMA PET/CT.",
+    "MRI has already staged the local tumour; repeating it cannot detect nodal or distant metastases.",
+    "Most prostate adenocarcinomas take up little FDG, so FDG PET/CT is not used for primary staging.",
+    null
+   ],
+   "topic": "Urology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-e4a377e8",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-e4a377e8",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:26.008Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-e4a377e8",
+      "osce-ai-e4a377e8"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0659",
+      "medqa-us4-test-0862",
+      "medqa-us4-test-0934"
      ],
      "model": "claude-opus-5-5"
     }
@@ -7928,6 +8846,57 @@
    }
   },
   {
+   "id": "ai-mcq-ab6709ff",
+   "stem": "A 71-year-old man with hypertension has sudden tearing chest pain radiating to his back. ECG shows tall QRS voltages with lateral downsloping ST depression and asymmetric T inversion, unchanged from 2023.",
+   "ask": "Most likely explanation of the ECG?",
+   "options": [
+    "Acute lateral NSTEMI",
+    "LVH strain pattern",
+    "Posterior STEMI",
+    "Digoxin effect",
+    "Severe hypokalaemia"
+   ],
+   "answer": 1,
+   "explanation": "High QRS voltages with lateral downsloping ST depression and asymmetric T inversion that match an earlier ECG are a long-standing strain pattern from hypertensive left ventricular hypertrophy, not acute ischaemia. A non-ischaemic or non-specific ECG does not rule out aortic dissection, so get a CT aortogram and hold off aspirin, heparin and thrombolysis until dissection has been excluded.",
+   "why": [
+    "Acute ischaemia should be new or changing compared with the old ECG, and it does not explain the high QRS voltages.",
+    null,
+    "Posterior STEMI shows ST depression in V1 to V3 with tall R waves there, not lateral changes with LVH voltages that match an old ECG.",
+    "Digoxin causes a scooped (reverse tick) ST depression across many leads, without high voltages, and he has no history of taking it.",
+    "Hypokalaemia gives flattened T waves and prominent U waves with widespread ST depression, not LVH voltages with a fixed lateral pattern."
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-307",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-307",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:45.530Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-307",
+      "osce-amsa-307"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0714",
+      "medqa-us4-test-0164"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-abe23890",
    "stem": "A 5-month-old girl is brought to the emergency department by her father. She has had a runny nose for 4 days, and cough with fast breathing for the last 2 days. Her bottles have been getting shorter, and she has had 3 wet nappies in the past 24 hours. She was born at term, has been well, and her immunisations are up to date. She weighs 7.0 kg. Temperature is 37.6 °C, heart rate 165/min, respiratory rate 60/min, blood pressure 88/52 mm Hg, and SpO2 86% in room air. She is alert, with nasal flaring, moderate subcostal and intercostal recession, and fine crackles and expiratory wheeze on both sides. Capillary refill time is 2 seconds. On 1 L/min oxygen by nasal prongs her SpO2 rises to 94%. An hour later she is offered 180 mL of her usual milk. She takes 45 mL over 25 minutes, stopping often to breathe, with a heart rate of 178/min, then refuses the rest. She has had no wet nappy in the 2.5 hours since arrival.",
    "ask": "Based on this assessment of her oral intake, which of the following is the most appropriate next step in management?",
@@ -8483,6 +9452,57 @@
    }
   },
   {
+   "id": "ai-mcq-b3d155cd",
+   "stem": "A 46-year-old woman with polycystic kidney disease has a sudden severe headache that peaked within a minute while lifting weights. She is drowsy, GCS 14, with neck stiffness.",
+   "ask": "Most appropriate first investigation?",
+   "options": [
+    "Lumbar puncture",
+    "MRI brain with gadolinium",
+    "Catheter cerebral angiography",
+    "CT cerebral venogram",
+    "Non-contrast CT brain"
+   ],
+   "answer": 4,
+   "explanation": "A thunderclap headache in a patient with ADPKD (a risk factor for berry aneurysm) is a subarachnoid haemorrhage until proven otherwise. A non-contrast CT brain is the first test: it is highly sensitive early on, and it also shows hydrocephalus or a mass before any LP is considered. Her reduced GCS means she needs urgent imaging, and the Ottawa SAH rule cannot be used.",
+   "why": [
+    "Lumbar puncture is only for a suspected SAH with a negative CT, and it should not be done first when the GCS is reduced, because hydrocephalus or a mass has not been excluded.",
+    "MRI is slower, less available and harder to do safely in a drowsy patient who is getting worse, and it is not the first-line test for suspected SAH.",
+    "Catheter angiography is invasive and is used to define or treat an aneurysm once SAH is confirmed, not as the first test.",
+    "A CT venogram looks for cerebral venous sinus thrombosis, which is less likely here, and it comes after a non-contrast CT rather than replacing it.",
+    null
+   ],
+   "topic": "Emergency Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-361",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-361",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:27:18.090Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-361",
+      "osce-amsa-361"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0615",
+      "medqa-us4-test-1187",
+      "medqa-us4-test-0749"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-b748662d",
    "stem": "A 29-year-old woman comes to the emergency department with 2 days of sharp central chest pain. The pain is worse when she lies flat or breathes in, and it eases when she sits forward. She had a sore throat and runny nose a week ago. She has no medical history, takes no regular medicines and weighs 62 kg. Her temperature is 37.6 °C, pulse 96/min, blood pressure 122/74 mm Hg, respiratory rate 16/min and SpO2 99% on room air. A scratchy friction rub is heard at the left sternal edge while she holds her breath. An ECG shows widespread concave ST elevation with PR depression. High-sensitivity troponin I is 4 ng/L at 0 hours and 4 ng/L at 2 hours (women's 99th percentile, under 16). CRP is 38 mg/L (under 5). A chest X-ray is normal, and a bedside echocardiogram shows no pericardial effusion. She is to be discharged on ibuprofen 600 mg orally 8-hourly.",
    "ask": "Along with the ibuprofen, which of the following is most likely to lower her risk of the most common complication of this condition?",
@@ -8679,6 +9699,57 @@
       "medqa-us4-test-1001",
       "medqa-us4-test-1195",
       "medqa-us4-test-1119"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-b9b0ae77",
+   "stem": "A 27-year-old man with newly confirmed HIV-1 infection has baseline serology: hepatitis B surface antigen negative, core antibody negative, surface antibody below 10 mIU/mL.",
+   "ask": "What does this serology indicate?",
+   "options": [
+    "Chronic hepatitis B infection",
+    "Susceptible to hepatitis B",
+    "Resolved past hepatitis B",
+    "Vaccine-induced immunity",
+    "Occult hepatitis B infection"
+   ],
+   "answer": 1,
+   "explanation": "Negative surface antigen and core antibody mean he has never been infected, and a surface antibody below 10 mIU/mL means he is not immune. He is susceptible and should be vaccinated against hepatitis B. Under the Australian Immunisation Handbook, people with HIV may need a higher-dose or extended schedule, with surface antibody checked afterwards.",
+   "why": [
+    "Chronic hepatitis B needs a positive surface antigen (and core antibody), and both are negative here.",
+    null,
+    "Resolved past infection leaves a positive core antibody, usually with surface antibody of 10 mIU/mL or more, and neither is present.",
+    "Vaccine-induced immunity shows as surface antibody of 10 mIU/mL or more with a negative core antibody, and his surface antibody is below 10.",
+    "Occult hepatitis B means detectable HBV DNA without surface antigen, usually with a positive core antibody, and his core antibody is negative."
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:ai-8bb4689d",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-8bb4689d",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:51.170Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-8bb4689d",
+      "osce-ai-8bb4689d"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0689",
+      "medqa-us4-test-0633",
+      "medqa-us4-test-0548"
      ],
      "model": "claude-opus-5-5"
     }
@@ -9744,6 +10815,57 @@
    }
   },
   {
+   "id": "ai-mcq-ca714e89",
+   "stem": "A 49-year-old woman has guarding and shoulder-tip pain 3 hours after hysteroscopy and curettage. After 1 L crystalloid, BP rises from 86/50 to 94/56 mmHg; haemoglobin 95 g/L (pre-operatively 131).",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Second crystalloid bolus",
+    "Noradrenaline infusion",
+    "Urgent CT abdomen",
+    "Red cell transfusion",
+    "Repeat haemoglobin hourly"
+   ],
+   "answer": 3,
+   "explanation": "She is still shocked after 1 L of crystalloid, and her haemoglobin has fallen by 36 g/L with peritonism. Together these mean she is still bleeding inside the abdomen, most likely from a uterine perforation. Under the National Blood Authority critical bleeding guideline she needs blood now, with the massive transfusion protocol if needed, while the senior gynaecologist and theatre are called urgently for surgical control.",
+   "why": [
+    "Wrong: more crystalloid dilutes clotting factors and red cells, and the guideline limits it in critical bleeding once 1 L has failed to restore perfusion.",
+    "Wrong: vasopressors do not treat hypovolaemia from ongoing bleeding and can hide how much blood she has lost.",
+    "Wrong: CT is only for stable patients, and taking a shocked patient with peritonism to the scanner delays transfusion and surgery.",
+    null,
+    "Wrong: early haemoglobin underestimates acute blood loss, and waiting for repeat values delays treatment in a woman who is already shocked."
+   ],
+   "topic": "Gynaecology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:ai-9fdfd7be",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-9fdfd7be",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:10.720Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-9fdfd7be",
+      "osce-ai-9fdfd7be"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0241",
+      "medqa-us4-test-0245"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-cac4a8ab",
    "stem": "A 34-year-old woman is brought to the emergency department by ambulance 40 minutes after her horse fell on her during a trail ride, crushing the right side of her chest. She had right-sided pleuritic pain straight away and has become steadily more breathless during transport. She has no past medical history and takes only a combined oral contraceptive pill. On arrival she is agitated and can speak only in single words. Temperature is 36.4 °C, pulse 138/min, blood pressure 82/50 mmHg, respiratory rate 34/min, and oxygen saturation 85% on 15 L/min via a non-rebreather mask. Her trachea is deviated to the left and her neck veins are distended. There is bruising and tenderness over the right lateral ribs. The right hemithorax is hyper-resonant to percussion, and breath sounds are absent on the right. Heart sounds are clearly audible. Two large-bore cannulae are in place and blood has been sent for group and hold. A mobile chest X-ray has been requested, and the radiographer will arrive in 10 minutes.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -9788,6 +10910,57 @@
       "medqa-us4-test-0714",
       "medqa-us4-test-0905",
       "medqa-us4-test-1004"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-cb57b683",
+   "stem": "A 47-year-old woman is in recovery 2 hours after hysteroscopy and curettage. She has guarding, BP 84/50 mmHg despite crystalloid and 2 units of red cells, and fat in the curettings.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Urgent surgical exploration",
+    "Repeat hysteroscopy",
+    "Urgent CT abdomen-pelvis",
+    "Further crystalloid bolus",
+    "Serial haemoglobin monitoring"
+   ],
+   "answer": 0,
+   "explanation": "Fat in the curettings means uterine perforation until proven otherwise. She is still in shock and has peritonism despite fluid and blood, so she needs emergency laparoscopy or laparotomy to stop the bleeding and look for bowel, bladder or vessel injury. CT is only for stable patients, when the senior gynaecologist asks for it.",
+   "why": [
+    null,
+    "Hysteroscopy only shows the inside of the uterus, so it cannot treat bleeding inside the abdomen or show injury to the bowel or vessels.",
+    "CT is for stable patients, and sending an unstable patient to the scanner delays the surgery that will stop the bleeding.",
+    "She is still bleeding and has already been given blood, so more crystalloid will dilute her blood and cannot replace stopping the bleeding.",
+    "Watching her haemoglobin is not safe while she is in shock, and haemoglobin falls later than the real blood loss."
+   ],
+   "topic": "Gynaecology",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-9fdfd7be",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-9fdfd7be",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:06.062Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-9fdfd7be",
+      "osce-ai-9fdfd7be"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0241",
+      "medqa-us4-test-0245"
      ],
      "model": "claude-opus-5-5"
     }
@@ -10140,6 +11313,57 @@
       "medqa-us4-test-0576",
       "medqa-us4-test-0936",
       "medqa-us4-test-0613"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-d2d3aaeb",
+   "stem": "A 71-year-old woman has sudden tearing chest pain radiating to her back. BP is 84/50 mmHg. CT aortogram shows an ascending aortic intimal flap with haemopericardium.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "IV metoprolol infusion",
+    "Emergency surgical repair",
+    "Ultrasound-guided pericardiocentesis",
+    "IV heparin infusion",
+    "Endovascular stent graft"
+   ],
+   "answer": 1,
+   "explanation": "This is a Stanford type A aortic dissection with haemopericardium and shock. It is a surgical emergency, so call cardiothoracic surgery at once, resuscitate, and take her straight to theatre for open repair of the ascending aorta. Do not try to lower her blood pressure.",
+   "why": [
+    "Wrong: beta blockade is anti-impulse therapy for a hypertensive patient, and it is avoided in hypotension and tamponade because it worsens shock.",
+    null,
+    "Wrong: tamponade from a dissection is treated by surgical repair. Pericardiocentesis can speed up bleeding and cause collapse, and is kept only for controlled small-volume drainage when theatre is not available.",
+    "Wrong: anticoagulation is contraindicated in acute aortic dissection because it makes bleeding and rupture worse.",
+    "Wrong: endovascular stent grafting is used for complicated type B (descending) dissection, not as standard treatment of the ascending aorta."
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-307",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-307",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:05.374Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-307",
+      "osce-amsa-307"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0714",
+      "medqa-us4-test-0164"
      ],
      "model": "claude-opus-5-5"
     }
@@ -10594,6 +11818,57 @@
       "medqa-us4-test-0459",
       "medqa-us4-test-1083",
       "medqa-us4-test-0047"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-de6e33b3",
+   "stem": "A 68-year-old woman, a former smoker, has 3 months of breathlessness and 9 kg weight loss. Chest X-ray shows a large left pleural effusion. SpO2 94% on room air.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Oral frusemide trial",
+    "Intercostal chest drain insertion",
+    "Talc slurry pleurodesis",
+    "Ultrasound-guided aspiration",
+    "Flexible bronchoscopy and biopsy"
+   ],
+   "answer": 3,
+   "explanation": "A new, large, one-sided effusion with weight loss in a former smoker needs a diagnosis. Ultrasound-guided pleural aspiration both diagnoses and relieves it. Send fluid for protein, LDH, pH, glucose, cell count, cytology and culture, remove no more than about 1.5 L at once, and get a contrast CT chest ideally before full drainage.",
+   "why": [
+    "Frusemide treats heart failure, but a large effusion on one side with weight loss and no features of heart failure needs fluid analysis, not a trial of diuretics.",
+    "A chest drain is not the first step for an undiagnosed effusion in a stable patient: it is more invasive and is kept for empyema, pneumothorax or planned pleurodesis.",
+    "Pleurodesis is only done once a recurrent malignant effusion is confirmed and the lung has been shown to re-expand.",
+    null,
+    "Bronchoscopy comes later, guided by CT, and has a low yield before then, while sampling the pleural fluid is less invasive and may make the diagnosis."
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-582",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-582",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:33.661Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-582",
+      "osce-amsa-582"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1245",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0392"
      ],
      "model": "claude-opus-5-5"
     }
@@ -12007,6 +13282,57 @@
       "medqa-us4-test-0459",
       "medqa-us4-test-1119",
       "medqa-us4-test-1001"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-f8c94d0a",
+   "stem": "A 69-year-old man has transperineal biopsy showing Gleason 4+3=7 (ISUP Grade Group 3) prostate adenocarcinoma. PSA is 11 ng/mL and MRI shows an organ-confined lesion. He is asymptomatic.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Whole-body bone scan",
+    "Active surveillance",
+    "PSMA PET/CT",
+    "Radical prostatectomy",
+    "Androgen deprivation therapy"
+   ],
+   "answer": 2,
+   "explanation": "This is unfavourable intermediate-risk prostate cancer (Grade Group 3), so it has to be staged before curative treatment. In Australia, PSMA PET/CT is the preferred staging test and is Medicare-funded. It finds nodal and bone spread more accurately than conventional imaging.",
+   "why": [
+    "A bone scan misses nodal and small bone metastases, so PSMA PET/CT has replaced it for staging intermediate- and high-risk disease.",
+    "Active surveillance suits low-risk disease (Grade Group 1, sometimes selected Grade Group 2), not Gleason 4+3 disease.",
+    null,
+    "Surgery may well be his eventual treatment, but he needs staging first to rule out spread that would change the plan.",
+    "Androgen deprivation alone is not first-line for localised disease, and treatment should not start before staging."
+   ],
+   "topic": "Urology",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:ai-e4a377e8",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-e4a377e8",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:25:22.857Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-e4a377e8",
+      "osce-ai-e4a377e8"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0659",
+      "medqa-us4-test-0862",
+      "medqa-us4-test-0934"
      ],
      "model": "claude-opus-5-5"
     }
