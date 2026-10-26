@@ -485,7 +485,7 @@ async function runIn(width, height, label) {
   await pg.waitForSelector('.os-set');
   await pg.fill('[data-set="key"]', 'not-a-key');
   await click('[data-os="ssave"]');
-  ok(await pg.locator('.os-set').count() === 1, `${label}: a malformed key is refused`);
+  ok(await pg.locator('.os-modal:not(.out) .os-set').count() === 1, `${label}: a malformed key is refused`);   /* :not(.out): the dialog Escape closed may still be fading, and it has a form too */
   await shot('settings');
   /* a special gift: a wrong code is refused; "Pokémon" (any case, accents) unlocks the Eevee family on this device */
   await pg.fill('[data-set="gift"]', 'nope'); await click('[data-os="sgift"]');

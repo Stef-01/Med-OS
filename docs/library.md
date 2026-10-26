@@ -157,7 +157,9 @@ Founder: "a much more robust personal study ecosystem by researching online how 
 | Check the medicine before saving an upload | (49 % of ChatGPT MCQs had flaws, 22 % factual errors) | Upload, `library/verify.mjs` |
 | Report a problem with a bank question | everyone | `0010_mcq_reports.sql` |
 | A monthly Wrapped, with a story card to post | Spotify | `osce/wrapped-view.mjs` |
+| Cross out an option: hold it, right-click, or Shift and its number; a tap brings it back | UWorld, AMBOSS | the card |
+| A run of right answers on the Right line, the best run at the end | Duolingo | the card, the end |
 
 The bank Study and the duel draw on is the stations' questions, the reviewed pool, 523 high-yield questions written to 225 topics from the AMC MCQ specification (`scripts/generate-hy.mjs`) and 494 MedExpQA cases (CC BY 4.0, adapted, `scripts/import-medexpqa.mjs`); every one tagged by year and difficulty.
 
-Motion everywhere is Apple's springs (`study-kit/spring.mjs`): damping and response, interruptible, velocity handed on; sheets you can drag; presses that give on touch.
+Motion everywhere is Apple's springs (`study-kit/spring.mjs`): damping and response, interruptible, velocity handed on; sheets you can drag; presses that give on touch. A page arrives along the path you took: a tab from the side it sits on, a pushed page (Custom, the summary, the Notebook, Upload) from the right with the tabs stepped aside, and back from the left. Nothing grows from nothing: popovers and desktop dialogs open from 95 %, ticks from 40 %.

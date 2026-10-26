@@ -51,7 +51,7 @@ export function libraryCardHtml() {
 }
 
 export async function libraryDlg(tab) {
-  V.tab = TABS.some(t => t[0] === tab) || tab === 'upload' ? tab : V.tab; V.lib = api.current(); V.st.q = null; V.share = ''; V.msg = '';
+  V.tab = TABS.some(t => t[0] === tab) || tab === 'upload' ? tab : V.tab; V.lib = api.current(); V.st.q = null; V.st.view = ''; V.share = ''; V.msg = '';   /* the sheet opens at the top of its tab, not on a page pushed last time */
   const d = openDialog({ kind: 'lib', title: 'Your questions', cls: 'os-dlg--lib', onClose: () => ctx.render?.(),
     body: `<div class="os-lib"><nav class="os-libtabs" role="tablist" aria-label="Your questions">${TABS.map(([id, label]) => `<button role="tab" data-lib="tab" data-tab="${id}" id="os-libt-${id}" aria-controls="os-libp" aria-selected="${id === tabOf(V.tab)}" tabindex="${id === tabOf(V.tab) ? 0 : -1}">${label}</button>`).join('')}<span class="os-libtabs-ind" aria-hidden="true" style="--i:${tabIdx(V.tab)}"></span></nav>
       <div class="os-libp" id="os-libp" role="tabpanel" tabindex="-1"></div></div>` });
@@ -72,6 +72,16 @@ const panel = () => dlg()?.querySelector('.os-libp');
 
 function wire(el) {
   el.addEventListener('submit', e => e.preventDefault());   /* Enter in Add a friend clicks its button, which does the work */
+  let hold = null;
+  el.addEventListener('pointerdown', e => {
+    const b = e.target.closest('.os-libopt'); hold = null;
+    if (!b || b.hasAttribute('aria-disabled') || e.button > 0) return;
+    hold = { x: e.clientX, y: e.clientY, t: setTimeout(() => { hold.fired = true; strike(+b.dataset.i); }, 420) };
+  });
+  el.addEventListener('pointermove', e => { if (hold && !hold.fired && Math.hypot(e.clientX - hold.x, e.clientY - hold.y) > 10) { clearTimeout(hold.t); hold = null; } });
+  ['pointerup', 'pointercancel'].forEach(t => el.addEventListener(t, () => { if (hold && !hold.fired) { clearTimeout(hold.t); hold = null; } }));
+  el.addEventListener('click', e => { if (hold?.fired && e.target.closest('.os-libopt')) { e.stopPropagation(); e.preventDefault(); hold = null; } }, true);
+  el.addEventListener('contextmenu', e => { const b = e.target.closest('.os-libopt'); if (!b || b.hasAttribute('aria-disabled')) return; e.preventDefault(); if (!hold?.fired) strike(+b.dataset.i); });
   el.addEventListener('click', e => { const b = e.target.closest('[data-lib]'); if (b && !b.disabled && el.contains(b)) act(b.dataset.lib, b, e); });
   el.addEventListener('input', e => { if (e.target.name === 'find') { V.find = e.target.value; clearTimeout(V.findT); V.findT = setTimeout(() => { const pos = e.target.selectionStart; paint(); const f = panel()?.querySelector('[name="find"]'); if (f) { f.focus(); f.setSelectionRange(pos, pos); } }, 160); return; } if (e.target.name === 'notes') { V.up.notes = e.target.value; const b = panel()?.querySelector('[data-lib="copyprompt"] span'); if (b) b.textContent = V.up.notes.trim() ? 'Copy the prompt with my notes' : 'Copy the prompt'; return; } if (e.target.matches?.('[data-lib-note]')) { clearTimeout(saveNote.t); const v = e.target.value; saveNote.t = setTimeout(() => saveNote(v), 400); return; } if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; V.up.check = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
   el.addEventListener('change', e => {
@@ -85,18 +95,26 @@ function wire(el) {
 export function libraryKey(e) {
   if (V.tab !== 'study' || !V.st.q || e.metaKey || e.ctrlKey || e.altKey || e.target.closest?.('input, textarea, select')) return false;
   const it = V.st.q[V.st.i];
+  if (it && V.st.pick == null && e.shiftKey && /^Digit[1-5]$/.test(e.code) && +e.code.slice(5) <= it.item.options.length) { strike(displayOrder(it.item, it.key)[+e.code.slice(5) - 1]); return true; }
   if (it && V.st.pick == null && /^[1-5]$/.test(e.key) && +e.key <= it.item.options.length) { answer(displayOrder(it.item, it.key)[+e.key - 1]); return true; }
   if (it && V.st.pick != null && /^[1-4]$/.test(e.key)) { rate(GRADES[+e.key - 1]); return true; }
   if (it && V.st.pick != null && (e.key === 'Enter' || e.key === ' ') && !e.target.closest?.('button, a')) { rate(V.st.pick === it.item.answer ? 'good' : 'again'); return true; }
   return false;
 }
-/* a panel rises in when you arrive at it (a tab, the summary), not on every repaint */
-function arrive() { const p = panel(); if (!p || reducedMotion()) return; p.classList.remove('os-libp--enter'); void p.offsetWidth; p.classList.add('os-libp--enter'); clearTimeout(arrive.t); arrive.t = setTimeout(() => p.classList.remove('os-libp--enter'), 900); }
+/* a panel arrives when you go to it, not on every repaint: from the side its tab sits on, a pushed page (Custom, the
+   summary, Upload) from the right and back from the left (in and out along one path), otherwise it rises */
+function arrive(dx = 0) {
+  const p = panel(); if (!p || reducedMotion()) return;
+  p.classList.remove('os-libp--enter', 'os-libp--slide'); void p.offsetWidth;
+  p.style.setProperty('--dx', dx); p.classList.add('os-libp--enter', ...(dx ? ['os-libp--slide'] : []));
+  clearTimeout(arrive.t); arrive.t = setTimeout(() => p.classList.remove('os-libp--enter', 'os-libp--slide'), 900);
+}
 function go(tab) {
+  const from = V.tab;
   dlg()?.querySelector('.os-libtabs-ind')?.style.setProperty('--i', tabIdx(tab));
   V.tab = tab; V.share = '';
   dlg()?.querySelectorAll('[role="tab"]').forEach(b => { const on = b.dataset.tab === tabOf(tab); b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
-  paint(); arrive();
+  paint(); arrive(tab === 'upload' ? 1 : from === 'upload' && tab === 'library' ? -1 : Math.sign(tabIdx(tab) - tabIdx(from)));
 }
 
 /* ---------------------------------------------------------------- painting */
@@ -105,6 +123,7 @@ function paint() {
   p.setAttribute('aria-labelledby', `os-libt-${tabOf(V.tab)}`);
   p.innerHTML = (V.msg ? `<p class="os-libnote">${esc(V.msg)}</p>` : '') + ({ library: libraryHtml, upload: uploadHtml, friends: friendsHtml, study: studyHtml })[V.tab]();
   if (V.tab === 'upload') paintUploadResult();
+  dlg()?.querySelector('.os-lib')?.classList.toggle('os-lib--sub', !!p.querySelector(':scope > .os-libsumhead'));
   p.querySelectorAll('.os-libdecks, .os-libgapl, .os-libfriends, .os-libbars').forEach(ul => [...ul.children].forEach((li, i) => li.style.setProperty('--n', i)));
   /* an answered card swipes away to Next (study-kit/spring.mjs swipe: 1:1, momentum decides, flies off at the finger's speed) */
   const card = p.querySelector('.os-libcard');
@@ -242,8 +261,11 @@ function friendsHtml() {
       <p class="os-libmeta">Friends add you as <b>${esc(V.lib.me?.name || '')}</b>.</p></form>
     ${wk ? `<h3 class="os-libh">This week</h3><ol class="os-libweek">${wk.map((x, i) => `<li class="${x.me ? 'me' : ''}"><span class="os-libweek-n">${i + 1}</span><span class="os-libav" aria-hidden="true">${esc((x.name || '?')[0].toUpperCase())}</span><span class="os-libweek-tx"><b>${esc(x.me ? `${x.name} (you)` : x.name)}</b><small>${plural(x.days, 'day')} studied</small><span class="os-libweek-bar" aria-hidden="true"><i style="transform:scaleX(${(x.week / top).toFixed(3)})"></i></span></span><span class="os-libweek-v">${x.week}</span></li>`).join('')}</ol><p class="os-libmeta">Answers in Study in the last 7 days. Effort, not scores.</p>` : ''}
     ${inc.length ? `<h3 class="os-libh">Asking to be friends</h3><ul class="os-libfriends" role="list">${inc.map(x => row(x, `<button class="os-btn os-primary" data-lib="accept" data-id="${esc(x.id)}">Accept</button><button class="os-btn" data-lib="decline" data-id="${esc(x.id)}">Decline</button>`)).join('')}</ul>` : ''}
-    <h3 class="os-libh">Friends${fr.length ? ` (${fr.length})` : ''}</h3>
-    ${fr.length ? `<ul class="os-libfriends" role="list">${fr.map(x => row(x, `<button class="os-btn os-libicon" data-lib="unfriend" data-id="${esc(x.id)}" data-name="${esc(x.name)}" aria-label="Remove ${esc(x.name)}" title="Remove">${icon('trash')}</button>`)).join('')}</ul>` : '<p class="os-libmeta">None yet. Once a friend accepts, share a deck with them from Library, and their shared decks show up there for you.</p>'}
+    ${(() => {
+      const list = `<ul class="os-libfriends" role="list">${fr.map(x => row(x, `<button class="os-btn os-libicon" data-lib="unfriend" data-id="${esc(x.id)}" data-name="${esc(x.name)}" aria-label="Remove ${esc(x.name)}" title="Remove">${icon('trash')}</button>`)).join('')}</ul>`;
+      if (!fr.length) return '<h3 class="os-libh">Friends</h3><p class="os-libmeta">None yet. Once a friend accepts, share a deck with them from Library, and their shared decks show up there for you.</p>';
+      return wk ? `<details class="os-libsettings os-libmanage"><summary>Manage friends (${fr.length})</summary>${list}</details>` : `<h3 class="os-libh">Friends (${fr.length})</h3>${list}`;
+    })()}
     ${out.length ? `<h3 class="os-libh">Waiting for them</h3><ul class="os-libfriends" role="list">${out.map(x => row(x, `<button class="os-btn" data-lib="decline" data-id="${esc(x.id)}">Cancel</button>`)).join('')}</ul>` : ''}`;
 }
 
@@ -330,7 +352,7 @@ function customHtml() {
   /* a group of chips is shown only when it can narrow anything: two or more options with questions, or one chosen */
   const group = (label, k, html) => ((html.match(/data-v="[^"]+"/g) || []).length >= 2 || V.st[k] ? `<p class="os-libh2">${label}</p><div class="os-libchips">${html}</div>` : '');
   /* a choice: chips that wrap (a segmented control truncates four labels at 320 px) */
-  const seg = (k, opts, cur, label) => `<div class="os-libsegrow"><span class="os-libh2" id="os-lsr-${k}">${label}</span><div class="os-libchips" role="radiogroup" aria-labelledby="os-lsr-${k}">${opts.map(([v, l, n]) => { const on = String(cur) === String(v); return `<button class="os-chip${on ? ' on' : ''}${on && V.tap !== `${k}:${v}` ? ' os-still' : ''}" role="radio" data-lib="pref" data-k="${k}" data-v="${v}" aria-checked="${on}">${esc(l)}${n != null ? `<span class="os-libn2">${n}</span>` : ''}</button>`; }).join('')}</div></div>`;
+  const seg = (k, opts, cur, label) => `<div class="os-libsegrow"><span class="os-libh2" id="os-lsr-${k}">${label}</span><div class="os-libchips" role="radiogroup" aria-labelledby="os-lsr-${k}">${opts.map(([v, l, n]) => { const on = String(cur) === String(v); return `<button class="os-chip${on ? ' on' : ''}${on && V.tap !== `${k}:${v}` ? ' os-still' : ''}" role="radio" data-lib="pref" data-k="${k}" data-v="${v}" aria-checked="${on}"${n === 0 && !on ? ' disabled' : ''}>${esc(l)}${n != null ? `<span class="os-libn2">${n}</span>` : ''}</button>`; }).join('')}</div></div>`;
   const whichN = { all: pick.length, unused: tl.unused, incorrect: tl.incorrect, flagged: tl.flagged };
   return `<div class="os-libsumhead"><button class="os-link" data-lib="sumback">${I.back}<span>Study</span></button><h3>Custom session</h3></div>
     <label class="os-setf"><span>Deck</span><select name="sdeck"><option value="">Everything (${everything().length})</option>${decks.map(([id, n]) => `<option value="${esc(id)}"${id === V.st.deck ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></label>
@@ -349,7 +371,7 @@ function customHtml() {
 /* a session from a list (already in order): into focus */
 function startWith(list, { mode = 'tutor', order = 'due', label = '' } = {}) {
   if (!list.length) { notify('Nothing to study there right now.', ''); return false; }
-  Object.assign(V.st, { q: list, i: 0, pick: null, n: 0, right: 0, mode, order, label, note: false, seen: [] });
+  Object.assign(V.st, { q: list, i: 0, pick: null, n: 0, right: 0, mode, order, label, note: false, seen: [], x: null, combo: 0, best: 0 });
   saveLive();
   dlg()?.querySelector('.os-lib')?.classList.add('os-lib--focus');
   paint(); tick(); panel()?.querySelector('.os-libopt')?.focus({ preventScroll: true });
@@ -379,7 +401,7 @@ function cardHtml() {
   if (!x) {
     const mem = api.studyMem(), p = myPref(), td = today(mem.days, now(), p.goal), sk = streak(mem.days, now()), pct = V.st.n ? Math.round((100 * V.st.right) / V.st.n) : 0;
     const missed = (V.st.seen || []).some(x => !x.ok);
-    return `<div class="os-libempty os-libdone">${ring(V.st.n ? V.st.right / V.st.n : 0, V.st.right, V.st.n, 'right')}<p><strong>${td.done ? 'Daily goal done' : 'Session done'}</strong><br>${plural(V.st.n, 'card')} · ${pct}% right · ${td.n} of ${td.goal} today${sk.days ? ` · ${sk.days}-day streak` : ''}</p>
+    return `<div class="os-libempty os-libdone">${ring(V.st.n ? V.st.right / V.st.n : 0, V.st.right, V.st.n, 'right')}<p><strong>${td.done ? 'Daily goal done' : 'Session done'}</strong><br>${plural(V.st.n, 'card')} · ${pct}% right · ${td.n} of ${td.goal} today${sk.days ? ` · ${sk.days}-day streak` : ''}${V.st.best >= 3 ? `<br><span class="os-libbest">${icon('flame')}Best run: ${V.st.best} in a row</span>` : ''}</p>
       <div class="os-libacts os-libacts--col">${missed ? `<button class="os-btn os-btn--lg os-primary" data-lib="redo">Redo the ${(() => { const k = new Set((V.st.seen || []).filter(x => !x.ok).map(x => x.key)).size; return k === 1 ? 'one' : k; })()} missed</button><button class="os-btn os-btn--lg" data-lib="today">Keep going</button>` : '<button class="os-btn os-btn--lg os-primary" data-lib="today">Keep going</button>'}<button class="os-link" data-lib="endstudy">Done</button></div>
       ${reviewHtml()}</div>`;
   }
@@ -400,13 +422,14 @@ function cardHtml() {
     <p class="os-libstem">${esc(it.stem)}</p>${it.ask ? `<p class="os-libask">${esc(it.ask)}</p>` : ''}
     <div class="os-libopts" role="group" aria-label="Options">${ord.map((i, pos) => {
       const o = it.options[i], st = !shown ? '' : i === it.answer ? ' ok' : i === picked ? ' no' : ' dim';
-      return `<button class="os-libopt${st}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : ''}><b>${LET[pos]}</b><span>${esc(o)}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
+      const xd = !shown && V.st.x?.has(i);
+      return `<button class="os-libopt${st}${xd ? ' os-libopt--x' : ''}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : ''}><b>${LET[pos]}</b><span>${esc(o)}</span><span class="os-vh os-libxvh">${xd ? 'crossed out' : ''}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
     }).join('')}</div>
-    ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : picked < 0 ? `Time’s up: the answer is ${LET[ord.indexOf(it.answer)]}` : `The answer is ${LET[ord.indexOf(it.answer)]}`}</strong>${it.explanation ? explainHtml(it.explanation) : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>
+    ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? `Right${V.st.combo >= 3 ? ` <span class="os-libcombo${V.st.comboAt === x.key + V.st.i ? ' os-still' : ''}">${icon('flame')}${V.st.combo} in a row</span>` : ''}` : picked < 0 ? `Time’s up: the answer is ${LET[ord.indexOf(it.answer)]}` : `The answer is ${LET[ord.indexOf(it.answer)]}`}</strong>${it.explanation ? explainHtml(it.explanation) : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>
       ${picked !== it.answer && (card.w | 0) >= 4 && !card.note ? `<p class="os-libleech">${icon('alert')}<span>This one has caught you ${card.w} times. Write the rule in your own words: it is the fastest fix.</span></p>` : ''}
       ${V.st.note || card.note || (picked !== it.answer && (card.w | 0) >= 4) ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
       ${gradesHtml(picked === it.answer, card, t)}
-      ${x.key.startsWith('b:') && accountsOn() ? (V.st.report === x.key ? `<div class="os-libreport" role="group" aria-label="What is wrong with it?"><span>What is wrong?</span>${Object.entries(REPORTS).map(([k, l]) => `<button class="os-chip" data-lib="report" data-v="${k}">${esc(l)}</button>`).join('')}</div>` : V.st.reported === x.key ? '<p class="os-libmeta os-libreported">Reported. Thank you.</p>' : '<button class="os-link os-libreportbtn" data-lib="reportopen">Report a problem</button>') : ''}` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}
+      ${x.key.startsWith('b:') && accountsOn() ? (V.st.report === x.key ? `<div class="os-libreport" role="group" aria-label="What is wrong with it?"><span>What is wrong?</span>${Object.entries(REPORTS).map(([k, l]) => `<button class="os-chip" data-lib="report" data-v="${k}">${esc(l)}</button>`).join('')}</div>` : V.st.reported === x.key ? '<p class="os-libmeta os-libreported">Reported. Thank you.</p>' : '<button class="os-link os-libreportbtn" data-lib="reportopen">Report a problem</button>') : ''}` : '<p class="os-libmeta os-libkeys"><span class="os-libkeys-touch">Tap an answer. Hold one to cross it out.</span><span class="os-libkeys-mouse">Press 1 to 5 to answer. Right-click, or Shift and the number, crosses one out.</span></p>'}
   </div>`;
 }
 /* the day's goal, done: a burst of confetti from the top of the card (springs out, gravity down, fades), a buzz on a
@@ -445,7 +468,7 @@ function notebookHtml() {
 /* the explanation: its first sentence bold, five lines, then Read all */
 function explainHtml(text) {
   const m = String(text).match(/^(.+?[.!?])(\s+[\s\S]*)?$/), first = m ? m[1] : text, rest = m?.[2] || '';
-  return `<p class="os-libexptx${rest.length > 220 ? ' clamp' : ''}"><b>${esc(first)}</b>${esc(rest)}</p>${rest.length > 220 ? '<button class="os-link os-libreadall" data-lib="readall">Read all</button>' : ''}`;
+  return `<p class="os-libexptx${rest.length > 220 ? ' clamp' : ''}">${rest.trim() ? `<b>${esc(first)}</b>${esc(rest)}` : esc(first)}</p>${rest.length > 220 ? '<button class="os-link os-libreadall" data-lib="readall">Read all</button>' : ''}`;
 }
 function gradesHtml(right, card, t) {
   const b = (g, label, cls = '', small = true) => `<button class="os-btn${cls}" data-lib="grade" data-g="${g}" aria-keyshortcuts="${GRADES.indexOf(g) + 1}"><span>${label}</span>${small ? `<small>in ${esc(preview(card, g, t))}</small>` : ''}</button>`;
@@ -454,16 +477,24 @@ function gradesHtml(right, card, t) {
     ? `<div class="os-libgrades os-libgrades--right" role="group" aria-label="Next, and how well you knew it">${b('hard', 'Hard')}${b('good', 'Next', ' os-primary os-libnext', false)}${b('easy', 'Easy')}</div>${back('good')}`
     : `<div class="os-libgrades os-libgrades--wrong" role="group" aria-label="Next">${b('again', 'Next', ' os-primary os-libnext', false)}${back('again')}<button class="os-link os-libmisread" data-lib="grade" data-g="good" aria-keyshortcuts="3">I knew it, I misread</button></div>`;
 }
+function strike(i) {
+  if (V.st.pick != null || !V.st.q) return;
+  const s = V.st.x || (V.st.x = new Set()); s.has(i) ? s.delete(i) : s.add(i);
+  const b = panel()?.querySelector(`.os-libopt[data-i="${i}"]`);   /* in place: the line draws across, focus stays */
+  b?.classList.toggle('os-libopt--x', s.has(i)); const vh = b?.querySelector('.os-libxvh'); if (vh) vh.textContent = s.has(i) ? 'crossed out' : '';
+  try { navigator.vibrate?.(6); } catch {}
+}
 function answer(i) {
   if (V.st.pick != null) return;
   clearInterval(V.st.timer);
   V.st.pick = i;
   const x = V.st.q[V.st.i], m = api.studyMem(), ok = !!x && i === x.item.answer;   /* every answer counts towards your gaps and the month's Wrapped (stats.mjs) */
   V.st.lastOk = ok;
+  if (x) { V.st.combo = ok ? (V.st.combo | 0) + 1 : 0; V.st.best = Math.max(V.st.best | 0, V.st.combo); }
   const goal = myPref().goal, before = today(m.days, now(), goal).n;
   if (x) { record(m, x, ok, now()); api.saveStudy(m); if (ok) V.st.right++; }
   if (before < goal && before + 1 >= goal) V.st.celebrate = true;   /* the answer that completes the day's goal */
-  paint();
+  paint(); V.st.comboAt = x ? x.key + V.st.i : '';
   try { if (x && i >= 0) navigator.vibrate?.(ok ? 10 : [8, 50, 8]); } catch {}   /* the same frame as the green or the shake (Apple: harmony); phones that buzz */
   if (V.st.celebrate) { V.st.celebrate = false; celebrate(); }
   if (x) othersPicked(x, i);
@@ -495,7 +526,7 @@ function rate(g) {
   api.saveStudy(m);
   if (soon(m.card[x.key], now()) && V.st.q.length < 200) V.st.q.push(x);   /* a learning step (1 or 10 minutes): once more before the session ends, as Anki does */
   V.st.seen.push({ key: x.key, ok: V.st.lastOk });
-  V.st.i++; V.st.pick = null; V.st.n++; V.st.note = false;
+  V.st.i++; V.st.pick = null; V.st.n++; V.st.note = false; V.st.x = null;
   saveLive();
   paint(); tick(); panel()?.querySelector('.os-libopt, [data-lib="today"]')?.focus({ preventScroll: true });
 }
@@ -622,8 +653,8 @@ async function act(a, b, e) {
       return paint();
     }
     case 'pick': { V.tap = `${b.dataset.k}:${b.dataset.v}`; V.st[b.dataset.k] = b.dataset.k === 'year' || b.dataset.k === 'diff' ? +b.dataset.v || 0 : b.dataset.v; if (b.dataset.k === 'topic') V.st.cat = ''; return paint(); }
-    case 'summary': V.st.view = 'summary'; if (!V.bank) await loadBank(); paint(); arrive(); countUp(); return panel()?.focus({ preventScroll: true });
-    case 'sumback': V.st.view = ''; paint(); return arrive();
+    case 'summary': V.st.view = 'summary'; if (!V.bank) await loadBank(); paint(); arrive(1); countUp(); return panel()?.focus({ preventScroll: true });
+    case 'sumback': V.st.view = ''; paint(); return arrive(-1);
     case 'gap': {   /* Study this: that specialty (and kind), from everything you can study, the weakest first */
       const [topic, cat] = String(b.dataset.v).split('|'), mem = api.studyMem();
       const l = everything().filter(x => x.item.topic === topic && (!cat || x.item.cat === cat));
@@ -634,9 +665,9 @@ async function act(a, b, e) {
     case 'today': { const p = myPref(), mem = api.studyMem(), all = everything(), plan = examPlan(p.exam, tally(all, mem.card, now()).fresh, now()); V.st.q = null; return startWith(session(all, mem.card, { order: 'due', size: p.size, newADay: plan?.perDay }, now(), startedToday()), { label: 'Today' }); }
     case 'mode': {
       const m = b.dataset.m, mem = api.studyMem(), p = myPref(), all = everything();
-      if (m === 'custom') { V.st.view = 'custom'; paint(); arrive(); return panel()?.focus({ preventScroll: true }); }
+      if (m === 'custom') { V.st.view = 'custom'; paint(); arrive(1); return panel()?.focus({ preventScroll: true }); }
       if (m === 'smart') return startWith(smart(all, mem.card, now(), 10), { label: 'Smart 10' });
-      if (m === 'notebook') { V.st.view = 'notebook'; paint(); arrive(); return; }
+      if (m === 'notebook') { V.st.view = 'notebook'; paint(); arrive(1); return; }
       if (m === 'ladder') return startWith(session(all, mem.card, { order: 'ladder', size: p.size }, now()), { order: 'ladder', label: '0 to 1' });
       if (m === 'incorrect' || m === 'flagged') return startWith(session(all, mem.card, { which: m, order: 'shuffle', size: 0 }, now()), { label: m === 'incorrect' ? 'Got wrong' : 'Flagged' });
       if (m === 'weak') { const g = summary(all, mem.card).gaps[0]; if (!g) return; const [topic, cat] = g.id.split('|'); return startWith(session(all.filter(x => x.item.topic === topic && (!cat || x.item.cat === cat)), mem.card, { order: 'shuffle', size: p.size }, now()), { label: g.label }); }
@@ -648,7 +679,7 @@ async function act(a, b, e) {
     case 'redo': { const by = new Map(V.st.q.map(x => [x.key, x])), l = [...new Set(V.st.seen.filter(s => !s.ok).map(s => s.key))].map(k => by.get(k)).filter(Boolean); return startWith(l, { label: 'Redo' }); }
     case 'notestudy': { const mem = api.studyMem(); V.st.view = ''; return startWith(everything().filter(e => mem.card[e.key]?.note), { label: 'Notebook' }); }
     case 'note': { V.st.note = true; paint(); return panel()?.querySelector('[data-lib-note]')?.focus(); }
-    case 'opt': return answer(+b.dataset.i);
+    case 'opt': return V.st.x?.has(+b.dataset.i) ? strike(+b.dataset.i) : answer(+b.dataset.i);
     case 'grade': return rate(b.dataset.g);
     case 'endstudy': return endStudy();
   }

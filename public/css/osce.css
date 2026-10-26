@@ -1737,3 +1737,37 @@ button.os-libcheck { align-self:flex-start; }
 /* Custom: Start stays in reach */
 .os-libstick { position:sticky; bottom:calc(8px + var(--sb, 0px)); z-index:2; padding-top:16px; background:linear-gradient(transparent, var(--bg) 16px); }
 .os-libstick .os-libgo { width:100%; }
+
+/* round two (2026-10-26): a pushed page has one bar; pages arrive along the path you took */
+.os-lib--sub .os-libtabs { display:none; }
+.os-lib--sub .os-libsumhead { position:sticky; top:0; z-index:3; background:var(--bg); margin:-4px -22px 4px; padding:4px 22px 8px; }
+@media (max-width:420px) { .os-lib--sub .os-libsumhead { margin:-4px -16px 4px; padding:4px 16px 8px; } }
+.os-libsumhead .os-link { min-height:44px; }
+.os-libp--slide { animation:os-libslide var(--sp-snappy-ms) var(--sp-snappy) backwards; }
+.os-libp--enter.os-libp--slide > *, .os-libp--enter.os-libp--slide :is(.os-libdecks, .os-libgapl, .os-libfriends, .os-libbars) > li { animation:none; }
+@keyframes os-libslide { from { opacity:0; transform:translateX(calc(var(--dx, 1) * 32px)); } }
+.os-libchips .os-chip:disabled { opacity:.38; cursor:default; }
+.os-libmanage { margin-top:16px; }
+
+
+/* crossing out: the line draws across the text, the option steps back; holding one does not select its text */
+.os-libopt { -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+.os-libopt > span:not(.os-vh) { text-decoration:line-through; text-decoration-thickness:2px; text-decoration-color:transparent; transition:text-decoration-color .18s ease, opacity .18s ease; }
+.os-libopt--x > span:not(.os-vh) { text-decoration-color:currentColor; opacity:.42; }
+.os-libopt--x > b { opacity:.42; }
+.os-libkeys-mouse { display:none; }
+@media (hover:hover) and (pointer:fine) { .os-libkeys-touch { display:none; } .os-libkeys-mouse { display:inline; } }
+/* the run */
+.os-libcombo { display:inline-flex; align-items:center; gap:3px; margin-left:8px; padding:2px 9px 2px 6px; border-radius:999px; background:color-mix(in srgb, var(--warn, #f59e0b) 18%, transparent); color:var(--warn, #f59e0b); font-size:13px; font-weight:700; vertical-align:2px; animation:os-libcombo var(--sp-bouncy-ms) var(--sp-bouncy) backwards; }
+.os-libcombo.os-still { animation:none; }
+.os-libcombo svg, .os-libbest svg { width:14px; height:14px; color:#f97316; }
+@keyframes os-libcombo { from { opacity:0; transform:scale(.6); } }
+.os-libbest { display:inline-flex; align-items:center; gap:4px; margin-top:4px; color:var(--ink); font-weight:600; }
+
+/* motion audit (2026-10-26): nothing grows from nothing. A popover opens from 95% of itself at its trigger (the kit sets
+   the origin), a desktop dialog from 95% (centred, as dialogs are), a tick from 40% as it fades in; the way out is shorter */
+.os-pop { transform:scale(.95); }
+.os-pop.out { transform:scale(.97); }
+@media (min-width:640px) { .os-dlg { transform:scale(.95); } .os-modal.out .os-dlg { transform:scale(.97); } }
+.os-cb input::after, .os-optck svg { opacity:0; transform:scale(.4); transition:transform var(--sp-bouncy-ms) var(--sp-bouncy), opacity .12s ease; }
+.os-cb input:is(:checked, :indeterminate)::after, .os-opt[aria-selected="true"] .os-optck svg { opacity:1; transform:scale(1); }

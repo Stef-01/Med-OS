@@ -33,6 +33,8 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   };
   /* nothing wider than the screen, and nothing in the dialog sticking out of its box (the first that does is named) */
   const flat = async (pg, where) => {
+    /* measured at rest: an entrance (the card slides in from the right) is let finish first; endless ones (a clock) are not waited on */
+    await pg.evaluate(() => Promise.race([Promise.all(document.getAnimations().filter(x => x.effect?.getComputedTiming().endTime !== Infinity).map(x => x.finished.catch(() => {}))), new Promise(r => setTimeout(r, 1500))]));
     const bad = await pg.evaluate(() => {
       if (document.documentElement.scrollWidth > innerWidth + 1) return 'the page';
       const box = document.querySelector('.os-lib')?.getBoundingClientRect();
@@ -105,9 +107,20 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await shot(sam, '320-card'); await flat(sam, 'card');
   await sam.click('[data-lib="flag"]'); await sam.waitForSelector('.os-libflag.on');
   ok(true, 'card: a question can be flagged');
+  /* cross out (UWorld, AMBOSS): right-click, Shift and the number, or a hold; a tap brings a crossed one back, it does not answer */
+  await sam.locator('.os-libopt[data-i="2"]').click({ button: 'right' });
+  ok(await sam.locator('.os-libopt[data-i="2"].os-libopt--x').count() === 1 && /crossed out/.test(await sam.textContent('.os-libopt[data-i="2"]')), 'cross out: right-click crosses an option out (and says so to a screen reader)');
+  await sam.locator('.os-libopt[data-i="2"]').click();
+  ok(await sam.locator('.os-libopt--x').count() === 0 && await sam.locator('.os-libexp').count() === 0, 'cross out: a tap on a crossed-out option brings it back, it does not answer');
+  await sam.keyboard.press('Shift+Digit2'); const k1 = await sam.locator('.os-libopt--x').count();
+  await sam.keyboard.press('Shift+Digit2'); const k2 = await sam.locator('.os-libopt--x').count();
+  ok(k1 === 1 && k2 === 0, `cross out: Shift and a number crosses one out and back (${k1}, ${k2})`);
+  { const bb = await sam.locator('.os-libopt[data-i="3"]').boundingBox(); await sam.mouse.move(bb.x + 30, bb.y + bb.height / 2); await sam.mouse.down(); await sam.waitForTimeout(520); await sam.mouse.up(); await sam.waitForTimeout(80); }
+  ok(await sam.locator('.os-libopt[data-i="3"].os-libopt--x').count() === 1 && await sam.locator('.os-libexp').count() === 0, 'cross out: holding an option crosses it out, and the hold does not answer');
   await sam.locator('.os-libopt[data-i="1"]').click(); await sam.waitForSelector('.os-libexp');   /* a wrong one by its stored index: the shown order spreads the key */
   const after = await sam.evaluate(() => ({ ok: document.querySelectorAll('.os-libopt.ok').length, no: document.querySelectorAll('.os-libopt.no').length, again: document.querySelector('[data-lib="grade"].os-primary')?.dataset.g }));
   ok(after.ok === 1 && after.no <= 1 && ['again', 'good'].includes(after.again), `card: the answer shows right and wrong, the explanation, and suggests a grade (${JSON.stringify(after)})`);
+  ok(await sam.locator('.os-libopt--x').count() === 0, 'cross out: once answered, the lines go (every option is seen as it is)');
   ok(await sam.locator('.os-libnext').count() === 1 && (await sam.locator('[data-lib="grade"]').count()) <= 3, 'card: one big Next; the grade follows the answer (Hard and Easy beside a right one)');
   await sam.click('[data-lib="note"]'); await sam.fill('[data-lib-note]', 'Inferior leads = RCA'); await sam.waitForTimeout(500);
   await shot(sam, '320-card-answered'); await flat(sam, 'answered');
@@ -210,7 +223,8 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(/Asking to be friends/.test(await alex.textContent('.os-libp')) && /Lee/.test(await alex.textContent('.os-libfriend')), 'friends: Kai sees Lee asking');
   await shot(alex, '393-friends-incoming');
   await alex.click('[data-lib="accept"]'); await alex.waitForTimeout(300);
-  ok(/Friends \(1\)/.test(await alex.textContent('.os-libp')), 'friends: accepted, they are friends');
+  ok(/friends \(1\)/i.test(await alex.textContent('.os-libp')), 'friends: accepted, they are friends');
+  ok(await alex.locator('.os-libweek').count() === 0 || await alex.locator('.os-libmanage').count() === 1, 'friends: once the week board lists them, the list to manage folds under it');
   await close(alex); await open(alex, 'friends'); await alex.waitForSelector('.os-libweek li', { timeout: 5000 }).catch(() => {});
   const week = await alex.locator('.os-libweek li').allTextContents();
   ok(week.length === 2 && /Lee/.test(week[0]) && /\(you\)/.test(week[1]), `friends: this week's board, the most answers first (${week.map(w => w.replace(/\s+/g, ' ').trim()).join(' | ')})`);
