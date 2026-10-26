@@ -19,6 +19,7 @@ import { cleanItem } from '../../public/js/mcq/schema.mjs';
 import { createServer as duelServer } from '../../public/js/vendor/pup-duel/duel/server-core.mjs';
 import { libraryFake } from './library-fake.mjs';
 import { library } from './library.mjs';
+import { motion } from './motion.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'public');
 const SHOTS = process.argv[2] || fs.mkdtempSync(path.join(os.tmpdir(), 'osce-e2e-'));
@@ -782,12 +783,14 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
 }
 
 try {
+  if (process.env.ONLY === 'motion') { await motion({ chromium, BASE, SHOTS, ok }); throw Object.assign(new Error('only'), { only: true }); }
   if (process.env.ONLY === 'library') { await library({ chromium, BASE, SHOTS, ok }); throw Object.assign(new Error('only'), { only: true }); }
   await duel();
   await sync();
   await run(393, 852, 'phone');
   await run(320, 640, 'small');
   await run(1280, 860, 'wide');
+  await motion({ chromium, BASE, SHOTS, ok });
   await library({ chromium, BASE, SHOTS, ok });   /* last: its players join the fake backend the duel's leaderboard counts */
 } catch (e) { if (!e.only) { fails.push(`crashed: ${e.message}`); console.error(e); } }
 server.close();

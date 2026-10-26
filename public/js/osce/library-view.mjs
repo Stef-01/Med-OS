@@ -21,6 +21,7 @@ import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
 import { record, summary, wrapped, monthOf, monthName } from '../library/stats.mjs';
 import { grade, queue, counts, preview, GRADES } from '../library/sched.mjs';
 import * as api from '../library/api.mjs';
+import { animate, SPRING, reducedMotion } from '../study-kit/spring.mjs';
 
 const TABS = [['library', 'Library'], ['upload', 'Upload'], ['friends', 'Friends'], ['study', 'Study']];
 const LET = 'ABCDE', GLABEL = { again: 'Again', hard: 'Hard', good: 'Good', easy: 'Easy' };
@@ -42,7 +43,7 @@ export function libraryCardHtml() {
 export async function libraryDlg(tab) {
   V.tab = TABS.some(t => t[0] === tab) ? tab : V.tab; V.lib = api.current(); V.st.q = null; V.share = ''; V.msg = '';
   const d = openDialog({ kind: 'lib', title: 'Your questions', cls: 'os-dlg--lib', onClose: () => ctx.render?.(),
-    body: `<div class="os-lib"><nav class="os-libtabs" role="tablist" aria-label="Your questions">${TABS.map(([id, label]) => `<button role="tab" data-lib="tab" data-tab="${id}" id="os-libt-${id}" aria-controls="os-libp" aria-selected="${id === V.tab}" tabindex="${id === V.tab ? 0 : -1}">${label}</button>`).join('')}</nav>
+    body: `<div class="os-lib"><nav class="os-libtabs" role="tablist" aria-label="Your questions">${TABS.map(([id, label]) => `<button role="tab" data-lib="tab" data-tab="${id}" id="os-libt-${id}" aria-controls="os-libp" aria-selected="${id === V.tab}" tabindex="${id === V.tab ? 0 : -1}">${label}</button>`).join('')}<span class="os-libtabs-ind" aria-hidden="true" style="--i:${TABS.findIndex(t => t[0] === V.tab)}"></span></nav>
       <div class="os-libp" id="os-libp" role="tabpanel" tabindex="-1"></div></div>` });
   wire(d.el);
   paint();
@@ -77,10 +78,13 @@ export function libraryKey(e) {
   if (it && V.st.pick != null && /^[1-4]$/.test(e.key)) { rate(GRADES[+e.key - 1]); return true; }
   return false;
 }
+/* a panel rises in when you arrive at it (a tab, the summary), not on every repaint */
+function arrive() { const p = panel(); if (!p || reducedMotion()) return; p.classList.remove('os-libp--enter'); void p.offsetWidth; p.classList.add('os-libp--enter'); clearTimeout(arrive.t); arrive.t = setTimeout(() => p.classList.remove('os-libp--enter'), 900); }
 function go(tab) {
+  dlg()?.querySelector('.os-libtabs-ind')?.style.setProperty('--i', TABS.findIndex(t => t[0] === tab));
   V.tab = tab; V.share = '';
   dlg()?.querySelectorAll('[role="tab"]').forEach(b => { const on = b.dataset.tab === tab; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
-  paint();
+  paint(); arrive();
 }
 
 /* ---------------------------------------------------------------- painting */
@@ -89,6 +93,8 @@ function paint() {
   p.setAttribute('aria-labelledby', `os-libt-${V.tab}`);
   p.innerHTML = (V.msg ? `<p class="os-libnote">${esc(V.msg)}</p>` : '') + ({ library: libraryHtml, upload: uploadHtml, friends: friendsHtml, study: studyHtml })[V.tab]();
   if (V.tab === 'upload') paintUploadResult();
+  p.querySelectorAll('.os-libdecks, .os-libgapl, .os-libfriends, .os-libbars').forEach(ul => [...ul.children].forEach((li, i) => li.style.setProperty('--n', i)));
+  V.tap = '';
 }
 const signInHtml = why => `<div class="os-libsign"><p>${esc(why)}</p><button class="os-btn" data-os="settings">${icon('settings')}<span>Sign in, in Settings</span></button></div>`;
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
@@ -213,7 +219,7 @@ function studyHtml() {
   const pick = pool.filter(inStudyPick), c = counts(pick.map(x => ({ id: x.key })), cards, t), q = V.st.order === 'ladder' ? climbQueue(pick) : sessionQueue(pick);
   const inTK = pool.filter(x => inPick(x.item, V.st)), yN = y => inTK.filter(x => x.item.year === y && (!V.st.diff || x.item.difficulty === V.st.diff)).length;
   const inTKY = inTK.filter(x => !V.st.year || x.item.year === V.st.year), dN = d => inTKY.filter(x => x.item.difficulty === d).length;
-  const chip = (k, v, label, n, on) => `<button class="os-chip${on ? ' on' : ''}" data-lib="pick" data-k="${k}" data-v="${esc(v)}" aria-pressed="${on}"${n === 0 ? ' disabled' : ''}>${esc(label)}<span class="os-libn2">${n}</span></button>`;
+  const chip = (k, v, label, n, on) => `<button class="os-chip${on ? ' on' : ''}${on && V.tap !== `${k}:${v}` ? ' os-still' : ''}" data-lib="pick" data-k="${k}" data-v="${esc(v)}" aria-pressed="${on}"${n === 0 ? ' disabled' : ''}>${esc(label)}<span class="os-libn2">${n}</span></button>`;
   const topic = L.find(x => x.topic === V.st.topic);
   const decks = [...V.lib.decks.map(d => [d.id, d.name]), ...V.lib.shared.map(d => [d.id, `${d.name} (${d.owner_name})`]), [BANK, `The bank${V.bank ? ` (${V.bank.length})` : ''}`]];
   const order = (v, label) => `<button role="radio" data-lib="order" data-v="${v}" aria-checked="${V.st.order === v}">${label}</button>`;
@@ -277,7 +283,7 @@ function cardHtml() {
   const x = V.st.q[V.st.i];
   if (!x) return `<div class="os-libempty os-libdone">${I.check}<p><strong>Done for now</strong><br>${plural(V.st.n, 'card')} studied. Due cards come back when they are due.</p><button class="os-btn os-btn--lg os-primary" data-lib="endstudy">Back to Study</button></div>`;
   const it = x.item, picked = V.st.pick, shown = picked != null, card = api.studyMem().card[x.key], t = now();
-  return `<div class="os-libcard">
+  return `<div class="os-libcard${picked == null ? ' os-libcard--in' : ''}">
     <div class="os-libprog"><span>${V.st.i + 1} of ${V.st.q.length}</span><span class="os-liblayer">${it.year ? `${esc(yearLabel(it))} · ` : ''}${it.difficulty ? `${esc(diffLabel(it))} · ` : ''}${esc(layerLabel(it))}${x.ownerName ? ` · from ${esc(x.ownerName)}` : ''}</span><button class="os-link" data-lib="endstudy">End</button></div>
     ${V.st.order === 'ladder' && it.year && it.year !== V.st.q[V.st.i - 1]?.item.year ? `<p class="os-libyear"><b>${esc(YEARS[it.year].label)}</b> ${esc(YEARS[it.year].name)}</p>` : ''}
     <div class="os-libbar" aria-hidden="true"><i style="transform:scaleX(${(V.st.i / V.st.q.length).toFixed(3)})"></i></div>
@@ -307,6 +313,14 @@ function rate(g) {
   if (g === 'again' && V.st.q.length < 200) V.st.q.push(x);   /* again: once more before the session ends */
   V.st.i++; V.st.pick = null; V.st.n++;
   paint(); panel()?.querySelector('.os-libopt, [data-lib="endstudy"]')?.focus({ preventScroll: true });
+}
+
+/* the summary's big numbers count up on a gentle spring (to the number, never past it) */
+function countUp() {
+  for (const b of panel()?.querySelectorAll('.os-libbig b') || []) {
+    const m = b.textContent.match(/^(\d+)(%?)$/); if (!m || reducedMotion()) continue;
+    const to = +m[1]; animate(0, to, { spec: SPRING.gentle, onFrame: v => { b.textContent = `${Math.round(v)}${m[2]}`; } });
+  }
 }
 
 /* ---------------------------------------------------------------- actions */
@@ -357,9 +371,9 @@ async function act(a, b, e) {
       try { await api.answerFriend(b.dataset.id, false); V.lib = api.current(); } catch (err) { notify(err.message, 'danger'); }
       return paint();
     }
-    case 'pick': { V.st[b.dataset.k] = b.dataset.k === 'year' || b.dataset.k === 'diff' ? +b.dataset.v || 0 : b.dataset.v; if (b.dataset.k === 'topic') V.st.cat = ''; return paint(); }
+    case 'pick': { V.tap = `${b.dataset.k}:${b.dataset.v}`; V.st[b.dataset.k] = b.dataset.k === 'year' || b.dataset.k === 'diff' ? +b.dataset.v || 0 : b.dataset.v; if (b.dataset.k === 'topic') V.st.cat = ''; return paint(); }
     case 'order': V.st.order = b.dataset.v === 'ladder' ? 'ladder' : 'due'; return paint();
-    case 'summary': V.st.view = 'summary'; if (!V.bank) await loadBank(); paint(); return panel()?.focus({ preventScroll: true });
+    case 'summary': V.st.view = 'summary'; if (!V.bank) await loadBank(); paint(); arrive(); countUp(); return panel()?.focus({ preventScroll: true });
     case 'sumback': V.st.view = ''; return paint();
     case 'gap': {   /* Study this: the gap's specialty and kind, in your own questions when they have it, else the bank */
       const [topic, cat] = String(b.dataset.v).split('|'), match = x => x.item.topic === topic && (!cat || x.item.cat === cat);

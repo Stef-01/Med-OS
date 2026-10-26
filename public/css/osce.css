@@ -1428,3 +1428,62 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-wrapacts { display:flex; flex-direction:column; gap:10px; margin-top:6px; }
 .os-wrapbtn { min-height:50px; border-radius:999px; background:#fff; color:#121212; font-size:16px; font-weight:800; }
 .os-wrapbtn--ghost { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.6); }
+
+/* Apple springs (study-kit/spring.mjs, written by its easing(); scripts/spring.test.mjs keeps them equal): damping and
+   response, as CSS linear() easings and their settle times. Everything that moves uses one of these */
+:root {
+  --sp-smooth: linear(0, 0.0255, 0.0869, 0.1676, 0.2563, 0.3457, 0.4313, 0.5105, 0.5822, 0.6458, 0.7014, 0.7496, 0.791, 0.8261, 0.8559, 0.8809, 0.9019, 0.9193, 0.9338, 0.9459, 0.9558, 0.9639, 0.9706, 0.9761, 0.9806, 0.9843, 0.9873, 0.9897, 0.9917, 0.9933, 0.9946, 0.9956, 0.9965, 0.9972, 0.9977, 0.9982, 0.9985, 0.9988, 0.9991, 0.9992, 1);
+  --sp-smooth-ms: 545ms;
+  --sp-snappy: linear(0, 0.0273, 0.0925, 0.1774, 0.2699, 0.3622, 0.4499, 0.5303, 0.6022, 0.6656, 0.7205, 0.7676, 0.8076, 0.8414, 0.8697, 0.8933, 0.9128, 0.929, 0.9423, 0.9532, 0.9621, 0.9694, 0.9753, 0.9801, 0.984, 0.9871, 0.9897, 0.9917, 0.9934, 0.9947, 0.9958, 0.9966, 0.9973, 0.9978, 0.9983, 0.9986, 0.9989, 0.9991, 0.9993, 0.9995, 1);
+  --sp-snappy-ms: 404ms;
+  --sp-sheet: linear(0, 0.0236, 0.0827, 0.1629, 0.2537, 0.3477, 0.4396, 0.5261, 0.605, 0.6755, 0.7371, 0.79, 0.8348, 0.8722, 0.9029, 0.9278, 0.9477, 0.9634, 0.9755, 0.9847, 0.9916, 0.9965, 1, 1.0024, 1.0038, 1.0046, 1.005, 1.005, 1.0048, 1.0044, 1.004, 1.0035, 1.003, 1.0026, 1.0022, 1.0018, 1.0015, 1.0012, 1.0009, 1.0007, 1);
+  --sp-sheet-ms: 621ms;
+  --sp-bouncy: linear(0, 0.0311, 0.109, 0.2143, 0.332, 0.4513, 0.5648, 0.6675, 0.7571, 0.8323, 0.8934, 0.9412, 0.9773, 1.0032, 1.0207, 1.0314, 1.0368, 1.0384, 1.0372, 1.0342, 1.0302, 1.0257, 1.0211, 1.0167, 1.0128, 1.0093, 1.0065, 1.0041, 1.0023, 1.0009, 0.9999, 0.9992, 0.9988, 0.9986, 0.9985, 0.9986, 0.9987, 0.9988, 0.999, 0.9992, 1);
+  --sp-bouncy-ms: 644ms;
+  --sp-gentle: linear(0, 0.0231, 0.0794, 0.1543, 0.2376, 0.3227, 0.4052, 0.4826, 0.5534, 0.6171, 0.6735, 0.723, 0.766, 0.803, 0.8348, 0.8618, 0.8848, 0.9041, 0.9204, 0.934, 0.9454, 0.955, 0.9629, 0.9694, 0.9749, 0.9794, 0.9831, 0.9861, 0.9887, 0.9907, 0.9924, 0.9938, 0.995, 0.9959, 0.9967, 0.9973, 0.9978, 0.9982, 0.9985, 0.9988, 1);
+  --sp-gentle-ms: 812ms;
+}
+
+/* ---------- motion (study-kit/spring.mjs; founder 2026-10-26: "apple motion with spring based UI interaction") ----------
+   Press: the moment a finger lands, the thing gives (on pointer-down, 60 ms), and springs back on release. Sheets arrive
+   on the sheet spring and leave on the snappy one, along the same path; on a phone they follow a dragging finger. Lists
+   and panels rise in once, on arrival, not on every repaint. Reduced motion: everything settles at once. */
+.os :is(.os-btn, .os-chip, .os-card, .os-libopt, .os-libgaps, .os-libwrapbtn, .os-libdeck .os-libacts .os-btn, .os-seg button, .os-libtabs button, .os-link, .os-ic) { transition-property:transform, background-color, color, border-color, box-shadow, opacity; transition-duration:var(--sp-snappy-ms), .2s, .2s, .2s, .2s, .2s; transition-timing-function:var(--sp-snappy), ease, ease, ease, ease, ease; }
+.os :is(.os-btn, .os-chip, .os-card, .os-libopt:not([aria-disabled]), .os-libgaps, .os-libwrapbtn, .os-seg button, .os-libtabs button, .os-ic):active { transform:scale(.965); transition-duration:60ms; transition-timing-function:ease-out; }
+.os .os-bigcard:active { transform:scale(.985); }
+.os-modal .os-dlg { transition:transform var(--sp-sheet-ms) var(--sp-sheet), opacity .26s; }
+.os-modal.out .os-dlg { transition:transform var(--sp-snappy-ms) var(--sp-snappy), opacity .2s; }
+.os-dlg.dragging { transition:none !important; }
+.os-grabber { position:absolute; top:6px; left:50%; width:36px; height:5px; margin-left:-18px; border-radius:3px; background:var(--stroke); opacity:.9; pointer-events:none; }
+.os-dlg-head { position:relative; touch-action:pan-x; }
+@media (min-width:640px) {
+  .os-modal .os-dlg { transition:transform var(--sp-bouncy-ms) var(--sp-bouncy), opacity .25s ease; }
+  .os-modal.out .os-dlg { transition:transform var(--sp-snappy-ms) var(--sp-snappy), opacity .18s ease; }
+  .os-grabber { display:none; }
+}
+.os-in { animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) backwards; animation-delay:calc(var(--d, 0) * 35ms); }   /* backwards: once risen, a press can move it */
+/* Your questions: the tab's pill slides; a panel rises in when you arrive at it; the study card arrives from the right;
+   a right answer lands with a bounce, a wrong one shakes its head */
+.os-libtabs { position:relative; }
+.os-libtabs button[aria-selected="true"] { background:transparent; box-shadow:none; }
+.os-libtabs-ind { position:absolute; top:3px; bottom:3px; left:3px; width:calc((100% - 6px) / 4); border-radius:9px; background:var(--solid); box-shadow:var(--em-shadow-md); transform:translateX(calc(var(--i, 0) * 100%)); transition:transform var(--sp-smooth-ms) var(--sp-smooth); pointer-events:none; }
+.os-libtabs button { position:relative; z-index:1; }
+.os-libp--enter > * { animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) both; }
+.os-libp--enter > *:nth-child(2) { animation-delay:30ms; } .os-libp--enter > *:nth-child(3) { animation-delay:60ms; } .os-libp--enter > *:nth-child(4) { animation-delay:90ms; } .os-libp--enter > *:nth-child(n+5) { animation-delay:120ms; }
+.os-libp--enter :is(.os-libdecks, .os-libgapl, .os-libfriends, .os-libbars) > li { animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) both; animation-delay:calc(min(var(--n, 0), 8) * 30ms); }
+.os-libcard--in { animation:os-libcardin var(--sp-sheet-ms) var(--sp-sheet) both; }
+@keyframes os-libcardin { from { opacity:0; transform:translateX(28px); } to { opacity:1; transform:none; } }
+.os-libopt.ok { animation:os-libpop var(--sp-bouncy-ms) var(--sp-bouncy); }
+@keyframes os-libpop { 0% { transform:scale(.96); } 100% { transform:scale(1); } }
+.os-libopt.no { animation:os-libshake .42s cubic-bezier(.36,.07,.19,.97); }
+@keyframes os-libshake { 15% { transform:translateX(-6px); } 35% { transform:translateX(5px); } 55% { transform:translateX(-3px); } 75% { transform:translateX(2px); } 100% { transform:none; } }
+.os-libexp, .os-libgrades, .os-libwhy { animation:os-rise var(--sp-smooth-ms) var(--sp-smooth) both; }
+.os-libgrades { animation-delay:70ms; }
+.os-libbar i { transition:transform var(--sp-gentle-ms) var(--sp-gentle); }
+.os-libp--enter .os-libbart i { animation:os-libgrow var(--sp-gentle-ms) var(--sp-gentle) both; animation-delay:calc(min(var(--n, 0), 8) * 30ms + 80ms); }
+@keyframes os-libgrow { from { transform:scaleX(0); } }
+.os-libchips .os-chip.on { animation:os-libpop var(--sp-bouncy-ms) var(--sp-bouncy); }
+.os-libchips .os-chip.on.os-still { animation:none; }
+@media (prefers-reduced-motion: reduce) {
+  .os *, .os *::before, .os *::after { animation-duration:1ms !important; animation-delay:0ms !important; transition-duration:1ms !important; }
+}

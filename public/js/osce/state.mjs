@@ -13,6 +13,7 @@ import { ago as agoAt, reduced } from '../study-kit/util.mjs';
 import { icon } from '../study-kit/icons.mjs';
 import { specialtyEmoji, sourceTag } from '../study-kit/vocab.mjs';
 import { popover, closePopover, dialog as kitDialog, closeTop, topDialog as topDlg, confirm as kitConfirm, toast as kitToast } from '../study-kit/ui.mjs';
+import { sheetDrag } from '../study-kit/spring.mjs';
 import { osceScore, osceStations, osceIndexRows, osceLazy, osceBody, osceOrigin, osceFrom, osceName, osceWho } from './core.mjs';
 
 export const LS = 'osce.practice.v1';
@@ -172,7 +173,15 @@ export const srcTag = s => (osceFrom(s) === 'amsa' ? '<span class="os-tag os-tag
 const DLG = { wrap: 'os-modal', box: 'os-dlg', head: 'os-dlg-head', close: 'os-ic os-dlg-x', title: 'os-dlg-title', titleTag: 'h1', act: 'os-dlg-act', body: 'os-dlg-body', in: 'in', out: 'out' };
 const CONFIRM = { ...DLG, confirm: 'os-confirm', crow: 'os-crow', btn: 'os-btn', danger: 'os-btn os-dangerbtn' };
 export function openDialog({ kind, title = '', action = '', body = '', cls = '', noHead = false, onClose = null }) {
-  return kitDialog({ kind, title, action, body, extra: cls, noHead, cls: DLG, root: ctx.ov, label: title || kind, onClose });
+  const d = kitDialog({ kind, title, action, body, extra: cls, noHead, cls: DLG, root: ctx.ov, label: title || kind, onClose });
+  /* a phone's sheet: a grabber, and drag it down to close (study-kit/spring.mjs: 1:1 with the finger, momentum decides) */
+  const box = d.el.querySelector('.os-dlg'), head = box?.querySelector('.os-dlg-head');
+  if (box && head && !noHead && typeof matchMedia === 'function' && matchMedia('(max-width: 639px)').matches) {
+    head.insertAdjacentHTML('afterbegin', '<span class="os-grabber" aria-hidden="true"></span>');
+    const off = sheetDrag(box, { grab: head, scroller: box.querySelector('.os-dlg-body'), onClose: () => { box.style.transform = ''; d.close(); } });
+    const was = d.onClose; d.onClose = () => { off(); was?.(); };
+  }
+  return d;
 }
 export const closeDialog = instant => closeTop(ctx.ov, instant);
 /* the presenter: a full-screen, opaque layer over everything in OSCE (the marking sheet included) for showing the
