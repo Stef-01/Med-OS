@@ -7,62 +7,64 @@
   },
   "pool": {
    "ai": 61,
-   "usmle-resource": 54,
-   "amsa": 51
+   "usmle-resource": 155,
+   "amsa": 56
   },
   "status": {
-   "pool": 166,
-   "rejected": 91,
-   "pending": 798,
-   "reserve": 6
+   "pool": 272,
+   "rejected": 125,
+   "pending": 664
   },
   "topics": {
-   "Obstetrics": 5,
-   "Gastroenterology": 26,
-   "Infectious Diseases": 11,
-   "Neurology": 19,
-   "Cardiology": 16,
-   "Respiratory Medicine": 13,
-   "Haematology": 4,
-   "Paediatrics": 11,
+   "Obstetrics": 10,
+   "Gastroenterology": 36,
+   "Infectious Diseases": 19,
+   "Neurology": 21,
+   "Cardiology": 20,
+   "Respiratory Medicine": 15,
+   "Haematology": 6,
+   "Paediatrics": 22,
    "Neurosurgery": 2,
-   "Emergency Medicine": 5,
-   "Vascular Surgery": 1,
-   "General Surgery": 6,
+   "Emergency Medicine": 8,
+   "Vascular Surgery": 3,
+   "General Surgery": 7,
    "Gastrointestinal Surgery": 2,
-   "Cardiothoracic Surgery": 1,
-   "Gynaecology": 7,
+   "Cardiothoracic Surgery": 2,
+   "Gynaecology": 12,
    "General Practice": 5,
    "Otorhinolaryngology": 1,
-   "Trauma Surgery": 3,
-   "Ophthalmology": 1,
-   "Sexual Health": 2,
-   "Endocrinology": 3,
-   "Nephrology": 2,
-   "Psychiatry": 2,
-   "Neonatology": 3,
+   "Trauma Surgery": 7,
+   "Ophthalmology": 2,
+   "Sexual Health": 3,
+   "Endocrinology": 7,
+   "Nephrology": 6,
+   "Public Health": 3,
+   "Toxicology": 5,
+   "Orthopaedics": 3,
+   "Rheumatology": 13,
+   "Psychiatry": 9,
+   "Dermatology": 5,
+   "Medicolegal": 2,
+   "Neonatology": 5,
+   "Geriatrics": 1,
+   "Bioethics": 1,
+   "Critical Care Medicine": 2,
+   "Urology": 2,
+   "Oncology": 2,
    "Breast/Endocrine Surgery": 1,
    "Immunology": 1,
-   "Rheumatology": 5,
-   "Critical Care Medicine": 1,
-   "Plastic Surgery": 1,
-   "Orthopaedics": 1,
-   "Medicolegal": 1,
-   "Urology": 1,
-   "Toxicology": 1,
-   "Oncology": 1,
-   "Dermatology": 1
+   "Plastic Surgery": 1
   },
   "positions": {
    "4": {
     "counts": [
-     29,
-     25,
-     24,
-     27
+     62,
+     48,
+     55,
+     46
     ],
-    "n": 105,
-    "chi2": 0.56
+    "n": 211,
+    "chi2": 3.01
    },
    "5": {
     "counts": [
@@ -76,7 +78,7 @@
     "chi2": 4.98
    }
   },
-  "topicCap": 26,
+  "topicCap": 41,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -613,19 +615,23 @@
   {
    "id": "medqa-us4-test-0004",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0005",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches 'reassurance' for a diaphoretic, distressed patient with possible cocaine-associated ACS, omitting ECG, aspirin, benzodiazepines and nitrates",
+    "an independent solver reached another answer both times",
+    "not a single best answer",
+    "the reviewer rejected it: Keyed answer (reassurance) is wrong and unsafe for possible cocaine-associated ACS"
    ],
+   "quality": 47,
    "flaws": [
     "longest-key:minor"
    ]
@@ -633,19 +639,19 @@
   {
    "id": "medqa-us4-test-0007",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0008",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 80, review 74): negative-stem"
    ],
+   "quality": 76,
    "flaws": [
     "negative-stem:major"
    ]
@@ -653,10 +659,9 @@
   {
    "id": "medqa-us4-test-0011",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
    "flaws": [
     "cover-options:minor"
    ]
@@ -664,10 +669,14 @@
   {
    "id": "medqa-us4-test-0015",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches putting a cancer work-up ahead of ruling out acute gallstone pancreatitis or a stone in the bile duct in a patient with acute severe pain radiating to the back and vomiting, which could delay ",
+    "not a single best answer (D, C also defensible)",
+    "the reviewer rejected it: The acute presentation (severe pain to the back, vomiting, gallstones) makes pancreatitis or a bile duct stone the more urgent diagnosis to rule out"
    ],
+   "quality": 60,
    "flaws": [
     "clang:major"
    ]
@@ -675,19 +684,19 @@
   {
    "id": "medqa-us4-test-0016",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C also defensible)"
    ],
+   "quality": 74,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0017",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": [
     "vignette:minor"
    ]
@@ -695,37 +704,35 @@
   {
    "id": "medqa-us4-test-0018",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0019",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0022",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0024",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": [
     "units:minor"
    ]
@@ -733,28 +740,25 @@
   {
    "id": "medqa-us4-test-0026",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0029",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0034",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 86,
    "flaws": [
     "absolute-terms:minor",
     "clang:minor"
@@ -763,37 +767,39 @@
   {
    "id": "medqa-us4-test-0035",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0042",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)"
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0044",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times"
    ],
+   "quality": 66,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0045",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 74, review 78): vignette, units"
    ],
+   "quality": 76,
    "flaws": [
     "vignette:major",
     "units:minor"
@@ -802,10 +808,9 @@
   {
    "id": "medqa-us4-test-0046",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
    "flaws": [
     "vignette:minor"
    ]
@@ -813,55 +818,49 @@
   {
    "id": "medqa-us4-test-0047",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0048",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0051",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0054",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0055",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0058",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "cover-options:minor"
    ]
@@ -869,28 +868,32 @@
   {
    "id": "medqa-us4-test-0059",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times",
+    "not a single best answer (C also defensible)"
    ],
+   "quality": 54,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0062",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0063",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 88, review 74): longest-key, clang"
    ],
+   "quality": 80,
    "flaws": [
     "longest-key:minor",
     "clang:minor"
@@ -899,10 +902,9 @@
   {
    "id": "medqa-us4-test-0066",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
    "flaws": [
     "clang:minor"
    ]
@@ -910,64 +912,61 @@
   {
    "id": "medqa-us4-test-0067",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0071",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0072",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0073",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 100, review 54): "
    ],
+   "quality": 72,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0074",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0076",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0077",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": [
     "vignette:minor"
    ]
@@ -975,64 +974,59 @@
   {
    "id": "medqa-us4-test-0079",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 63): "
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0083",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0084",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0086",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0088",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0093",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0094",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": [
     "clang:minor"
    ]
@@ -1040,10 +1034,9 @@
   {
    "id": "medqa-us4-test-0095",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": [
     "units:minor"
    ]
@@ -1051,19 +1044,17 @@
   {
    "id": "medqa-us4-test-0098",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0100",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": [
     "cover-options:minor"
    ]
@@ -1071,10 +1062,11 @@
   {
    "id": "medqa-us4-test-0102",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 80, review 66): vignette"
    ],
+   "quality": 72,
    "flaws": [
     "vignette:major"
    ]
@@ -1082,28 +1074,27 @@
   {
    "id": "medqa-us4-test-0104",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0105",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0106",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 94, review 69): clang"
    ],
+   "quality": 79,
    "flaws": [
     "clang:minor"
    ]
@@ -1111,28 +1102,25 @@
   {
    "id": "medqa-us4-test-0108",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0109",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0110",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": [
     "cover-options:minor"
    ]
@@ -1140,46 +1128,43 @@
   {
    "id": "medqa-us4-test-0111",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0112",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)"
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0117",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0119",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0122",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "vignette:minor"
    ]
@@ -1187,10 +1172,9 @@
   {
    "id": "medqa-us4-test-0125",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": [
     "vignette:minor"
    ]
@@ -1198,10 +1182,9 @@
   {
    "id": "medqa-us4-test-0128",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": [
     "cover-options:minor"
    ]
@@ -1209,19 +1192,17 @@
   {
    "id": "medqa-us4-test-0129",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0130",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "cover-options:minor"
    ]
@@ -1229,46 +1210,41 @@
   {
    "id": "medqa-us4-test-0133",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0138",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0141",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0144",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0145",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": [
     "cover-options:minor"
    ]
@@ -1276,37 +1252,33 @@
   {
    "id": "medqa-us4-test-0146",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0147",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0148",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0150",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "cover-options:minor"
    ]
@@ -1314,10 +1286,9 @@
   {
    "id": "medqa-us4-test-0151",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "vignette:minor"
    ]
@@ -1325,10 +1296,9 @@
   {
    "id": "medqa-us4-test-0153",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": [
     "vignette:minor"
    ]
@@ -1336,19 +1306,17 @@
   {
    "id": "medqa-us4-test-0154",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0155",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
    "flaws": [
     "cover-options:minor"
    ]
@@ -1356,10 +1324,9 @@
   {
    "id": "medqa-us4-test-0158",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": [
     "cover-options:minor"
    ]
@@ -1367,91 +1334,83 @@
   {
    "id": "medqa-us4-test-0161",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0162",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0164",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0167",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 100, review 60): "
    ],
+   "quality": 76,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0168",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0170",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0171",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0172",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0175",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0176",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "vignette:minor"
    ]
@@ -1459,64 +1418,59 @@
   {
    "id": "medqa-us4-test-0177",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0179",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0182",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0184",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0185",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0190",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0192",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 88, review 71): cover-options, vignette"
    ],
+   "quality": 78,
    "flaws": [
     "cover-options:minor",
     "vignette:minor"
@@ -1525,28 +1479,31 @@
   {
    "id": "medqa-us4-test-0200",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0202",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: Key is wrong: an artery is not a metastatic site, and blood-borne spread goes through veins"
    ],
+   "quality": 60,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0205",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 80, review 69): lead-in"
    ],
+   "quality": 73,
    "flaws": [
     "lead-in:major"
    ]
@@ -1554,10 +1511,11 @@
   {
    "id": "medqa-us4-test-0207",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 65): longest-key"
    ],
+   "quality": 77,
    "flaws": [
     "longest-key:minor"
    ]
@@ -1565,91 +1523,89 @@
   {
    "id": "medqa-us4-test-0211",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0213",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0214",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
    ],
+   "quality": 79,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0217",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0219",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0221",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: Maternal viral load of 678 copies/mL near delivery puts this infant at high risk. Current HHS guidelines call for a three-drug presumptive HIV regimen (e.g., zidovudine + lamivudine + nevirapine or ra"
    ],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0223",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0226",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 64): "
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0228",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0229",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 70): clang"
    ],
+   "quality": 80,
    "flaws": [
     "clang:minor"
    ]
@@ -1657,46 +1613,45 @@
   {
    "id": "medqa-us4-test-0232",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0239",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0241",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: The stem says ibuprofen relieved the pain of a likely bleeding peptic ulcer. This could teach that NSAIDs are acceptable or helpful in peptic ulcer disease, when they worsen ulcers and raise the bleed"
    ],
+   "quality": 74,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0242",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0243",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C also defensible)"
    ],
+   "quality": 76,
    "flaws": [
     "clang:minor"
    ]
@@ -1704,10 +1659,9 @@
   {
    "id": "medqa-us4-test-0245",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 81,
    "flaws": [
     "cover-options:minor"
    ]
@@ -1715,10 +1669,11 @@
   {
    "id": "medqa-us4-test-0246",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): units"
    ],
+   "quality": 77,
    "flaws": [
     "units:minor"
    ]
@@ -1739,10 +1694,11 @@
   {
    "id": "medqa-us4-test-0250",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 94, review 61): vignette"
    ],
+   "quality": 74,
    "flaws": [
     "vignette:minor"
    ]
@@ -1750,19 +1706,19 @@
   {
    "id": "medqa-us4-test-0252",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)"
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0253",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": [
     "longest-key:minor"
    ]
@@ -1770,37 +1726,33 @@
   {
    "id": "medqa-us4-test-0254",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0260",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0261",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0270",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": [
     "vignette:minor"
    ]
@@ -1808,73 +1760,72 @@
   {
    "id": "medqa-us4-test-0271",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 64): "
    ],
+   "quality": 78,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0273",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0274",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0278",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0279",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0280",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0283",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0285",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "not a single best answer (D also defensible)",
+    "the reviewer rejected it: The patient is stable and not in adrenal crisis, so diagnostic testing (D) comes before starting hydrocortisone and fludrocortisone"
    ],
+   "quality": 53,
    "flaws": [
     "longest-key:minor"
    ]
@@ -1882,19 +1833,19 @@
   {
    "id": "medqa-us4-test-0287",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0290",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C also defensible)"
    ],
+   "quality": 68,
    "flaws": [
     "vignette:minor"
    ]
@@ -1902,10 +1853,9 @@
   {
    "id": "medqa-us4-test-0292",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "cover-options:minor",
     "units:minor"
@@ -1914,10 +1864,9 @@
   {
    "id": "medqa-us4-test-0293",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
@@ -4180,10 +4129,8 @@
   {
    "id": "medqa-us4-test-0806",
    "kind": "usmle-resource",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 82), but Gastroenterology already holds 26 questions (topic balance)"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 82,
    "flaws": []
   },
@@ -9614,10 +9561,8 @@
   {
    "id": "osce-amsa-272",
    "kind": "amsa",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 81), but Gastroenterology already holds 26 questions (topic balance)"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 81,
    "flaws": [
     "longest-key:minor",
@@ -9700,10 +9645,8 @@
   {
    "id": "osce-amsa-328",
    "kind": "amsa",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 82), but Gastroenterology already holds 26 questions (topic balance)"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 82
   },
   {
@@ -10120,10 +10063,8 @@
   {
    "id": "osce-amsa-633",
    "kind": "amsa",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 83), but Gastroenterology already holds 26 questions (topic balance)"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 83,
    "flaws": [
     "units:minor"
@@ -10141,10 +10082,8 @@
   {
    "id": "osce-amsa-635",
    "kind": "amsa",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 83), but Gastroenterology already holds 26 questions (topic balance)"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 83,
    "flaws": [
     "units:minor"
@@ -10168,10 +10107,8 @@
   {
    "id": "osce-amsa-637",
    "kind": "amsa",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 81), but Gastroenterology already holds 26 questions (topic balance)"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 81
   },
   {
