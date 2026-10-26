@@ -20,13 +20,14 @@ import { checkUpload, deckName, layers, layerLabel, yearLabel, diffLabel, inPick
 import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
 import { record, summary, wrapped, monthOf, monthName } from '../library/stats.mjs';
 import { grade, queue, counts, preview, GRADES } from '../library/sched.mjs';
+import { today, streak, heat, session, timedSecs, tally, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
 import * as api from '../library/api.mjs';
 import { animate, SPRING, reducedMotion } from '../study-kit/spring.mjs';
 
 const TABS = [['library', 'Library'], ['upload', 'Upload'], ['friends', 'Friends'], ['study', 'Study']];
 const LET = 'ABCDE', GLABEL = { again: 'Again', hard: 'Hard', good: 'Good', easy: 'Easy' };
 const SEV = { block: ['Must fix', 'danger'], major: ['Fix', 'warn'], minor: ['Tip', 'tip'] };
-const V = { tab: 'library', lib: null, up: { text: '', res: null, deck: '' }, st: { deck: '', topic: '', cat: '', year: 0, diff: 0, order: 'due', view: '', q: null, i: 0, pick: null, n: 0 }, bank: null, share: '', busy: false, msg: '' };
+const V = { tab: 'library', lib: null, up: { text: '', res: null, deck: '' }, st: { deck: '', topic: '', cat: '', year: 0, diff: 0, view: '', q: null, i: 0, pick: null, n: 0, right: 0, mode: 'tutor', order: 'due', ends: 0, label: '', note: false }, bank: null, share: '', busy: false, msg: '' };
 const day = () => new Date(now()).toISOString().slice(0, 10);
 
 /* the start view's card */
@@ -63,7 +64,7 @@ const panel = () => dlg()?.querySelector('.os-libp');
 function wire(el) {
   el.addEventListener('submit', e => e.preventDefault());   /* Enter in Add a friend clicks its button, which does the work */
   el.addEventListener('click', e => { const b = e.target.closest('[data-lib]'); if (b && !b.disabled && el.contains(b)) act(b.dataset.lib, b, e); });
-  el.addEventListener('input', e => { if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
+  el.addEventListener('input', e => { if (e.target.matches?.('[data-lib-note]')) { clearTimeout(saveNote.t); const v = e.target.value; saveNote.t = setTimeout(() => saveNote(v), 400); return; } if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
   el.addEventListener('change', e => {
     if (e.target.name === 'file') readFile(e.target);
     if (e.target.name === 'sdeck') { V.st.deck = e.target.value; V.st.topic = ''; V.st.cat = ''; V.st.year = 0; paint(); }
@@ -191,7 +192,11 @@ function friendsHtml() {
     ${out.length ? `<h3 class="os-libh">Waiting for them</h3><ul class="os-libfriends" role="list">${out.map(x => row(x, `<button class="os-btn" data-lib="decline" data-id="${esc(x.id)}">Cancel</button>`)).join('')}</ul>` : ''}`;
 }
 
-/* ---------------------------------------------------------------- Study */
+/* ---------------------------------------------------------------- Study
+   Home     Today: the goal ring, the streak, what is due, and one Start; the modes a tap away (0 to 1, your weak spot,
+            what you got wrong, what you flagged); Custom builds any session; Your summary under it all
+   Custom   deck, specialty, kind, year, difficulty; which questions, how many, tutor or timed, in what order
+   Card     focus: the tabs step aside; a flag and a note on every question; timed puts the exam's clock on it */
 /* the bank (public/duel/pack.json: the stations' questions and the reviewed pool) as a deck to study, read-only */
 const BANK = '__bank';
 async function loadBank() {
@@ -202,40 +207,167 @@ async function loadBank() {
   } catch { V.bank = []; }
   return V.bank;
 }
+const everything = () => [...api.allItems(V.lib), ...(V.bank || [])];
 function studyPool() {
   const d = V.st.deck;
   if (d === BANK) return V.bank || [];
-  const all = api.allItems(V.lib);
-  return d ? all.filter(x => x.deck === d) : all;
+  return d ? api.allItems(V.lib).filter(x => x.deck === d) : everything();
 }
 const inStudyPick = x => inPick(x.item, V.st) && (!V.st.year || x.item.year === V.st.year) && (!V.st.diff || x.item.difficulty === V.st.diff);
+const myPref = () => prefOf(api.studyMem().pref);
+function setPref(k, v) { const m = api.studyMem(); m.pref = prefOf({ ...prefOf(m.pref), [k]: v }); api.saveStudy(m); }
+const startedToday = () => { const m = api.studyMem(); return m.day?.d === day() ? m.day.n | 0 : 0; };
+
 function studyHtml() {
+  if (!V.bank) { loadBank().then(() => { if (V.tab === 'study' && !V.st.q) paint(); }); return '<p class="os-libmeta">Loading…</p>'; }
   if (V.st.q) return cardHtml();
   if (V.st.view === 'summary') return summaryHtml();
-  const all = api.allItems(V.lib);
-  if (!all.length && V.st.deck !== BANK) V.st.deck = BANK;   /* nothing of yours yet: the bank */
-  if (V.st.deck === BANK && !V.bank) { loadBank().then(() => { if (V.tab === 'study' && !V.st.q) paint(); }); return '<p class="os-libmeta">Loading the bank…</p>'; }
-  const pool = studyPool(), cards = api.studyMem().card, t = now(), L = layers(pool.map(x => x.item));
-  const pick = pool.filter(inStudyPick), c = counts(pick.map(x => ({ id: x.key })), cards, t), q = V.st.order === 'ladder' ? climbQueue(pick) : sessionQueue(pick);
+  if (V.st.view === 'custom') return customHtml();
+  return homeHtml();
+}
+
+/* the goal ring: an arc that fills as today's answers reach the goal (a spring brings it there) */
+const ring = (frac, n, goal) => `<div class="os-libring" role="img" aria-label="${n} of ${goal} today" style="--p:${frac.toFixed(3)}"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/><circle class="arc" cx="22" cy="22" r="19" pathLength="100"/></svg><b>${n}</b><small>of ${goal}</small></div>`;
+function homeHtml() {
+  const mem = api.studyMem(), p = myPref(), t = now(), all = everything(), td = today(mem.days, t, p.goal), sk = streak(mem.days, t);
+  const tl = tally(all, mem.card, t), q = session(all, mem.card, { order: 'due', size: p.size }, t, startedToday());
+  const s = summary(all, mem.card), gap = s.gaps[0];
+  const mode = (m, label, sub, ic, n = '') => `<button class="os-libmode" data-lib="mode" data-m="${m}"><span class="os-libmode-ic" aria-hidden="true">${icon(ic)}</span><span class="os-libmode-tx"><b>${esc(label)}</b><small>${esc(sub)}</small></span>${n !== '' ? `<span class="os-libmode-n">${n}</span>` : ''}</button>`;
+  return `<section class="os-libtoday">
+      ${ring(td.frac, td.n, td.goal)}
+      <div class="os-libtoday-tx"><h3>${td.done ? 'Goal done today' : 'Today'}</h3>
+        <p class="os-libstreak${sk.live ? ' live' : ''}">${icon('flame')}<span>${sk.days ? `${sk.days}-day streak${sk.live ? '' : ': study today to keep it'}` : 'Start a streak today'}</span></p>
+        <p class="os-libmeta">${tl.due} due · ${Math.max(0, Math.min(tl.fresh, 20 - startedToday()))} new</p></div>
+    </section>
+    <button class="os-btn os-btn--lg os-primary os-libgo" data-lib="today"${q.length ? '' : ' disabled'}>${q.length ? `Start · ${plural(q.length, 'card')}` : 'All caught up: try a mode below'}</button>
+    <div class="os-libmodes">
+      ${mode('ladder', '0 to 1', 'Year 1 first principles up to final year', 'stairs')}
+      ${gap ? mode('weak', 'Your weak spot', `${gap.label} · ${gap.acc}%`, 'target') : ''}
+      ${tl.incorrect ? mode('incorrect', 'Got wrong', 'Answer them again', 'refresh', tl.incorrect) : ''}
+      ${tl.flagged ? mode('flagged', 'Flagged', 'The ones you marked', 'bookmark', tl.flagged) : ''}
+      ${mode('custom', 'Custom session', 'Deck, specialty, year, timed…', 'filter')}
+    </div>
+    ${gapsCardHtml()}
+    <div class="os-libgoal"><span class="os-libh2">Daily goal</span><div class="os-seg" role="radiogroup" aria-label="Daily goal">${GOALS.map(g => `<button role="radio" data-lib="pref" data-k="goal" data-v="${g}" aria-checked="${p.goal === g}">${g}</button>`).join('')}</div></div>`;
+}
+
+function customHtml() {
+  const mem = api.studyMem(), cards = mem.card, p = myPref(), t = now(), all = api.allItems(V.lib);
+  const pool = studyPool(), L = layers(pool.map(x => x.item)), pick = pool.filter(inStudyPick), tl = tally(pick, cards, t);
+  const q = session(pick, cards, { which: p.which, order: p.order, size: p.size }, t, startedToday());
   const inTK = pool.filter(x => inPick(x.item, V.st)), yN = y => inTK.filter(x => x.item.year === y && (!V.st.diff || x.item.difficulty === V.st.diff)).length;
   const inTKY = inTK.filter(x => !V.st.year || x.item.year === V.st.year), dN = d => inTKY.filter(x => x.item.difficulty === d).length;
-  const chip = (k, v, label, n, on) => `<button class="os-chip${on ? ' on' : ''}${on && V.tap !== `${k}:${v}` ? ' os-still' : ''}" data-lib="pick" data-k="${k}" data-v="${esc(v)}" aria-pressed="${on}"${n === 0 ? ' disabled' : ''}>${esc(label)}<span class="os-libn2">${n}</span></button>`;
+  /* a chip with nothing behind it is left out (unless it is the one chosen) */
+  const chip = (k, v, label, n, on) => (n === 0 && !on ? '' : `<button class="os-chip${on ? ' on' : ''}${on && V.tap !== `${k}:${v}` ? ' os-still' : ''}" data-lib="pick" data-k="${k}" data-v="${esc(v)}" aria-pressed="${on}">${esc(label)}<span class="os-libn2">${n}</span></button>`);
   const topic = L.find(x => x.topic === V.st.topic);
-  const decks = [...V.lib.decks.map(d => [d.id, d.name]), ...V.lib.shared.map(d => [d.id, `${d.name} (${d.owner_name})`]), [BANK, `The bank${V.bank ? ` (${V.bank.length})` : ''}`]];
-  const order = (v, label) => `<button role="radio" data-lib="order" data-v="${v}" aria-checked="${V.st.order === v}">${label}</button>`;
-  return `${gapsCardHtml()}<label class="os-setf"><span>Deck</span><select name="sdeck">${all.length ? `<option value="">Every deck of yours (${all.length})</option>` : ''}${decks.map(([id, n]) => `<option value="${esc(id)}"${id === V.st.deck ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></label>
-    <div class="os-liborder"><div class="os-seg" role="radiogroup" aria-label="Order">${order('due', 'Due first')}${order('ladder', '0 to 1')}</div>
-      <p class="os-libmeta">${V.st.order === 'ladder' ? 'Year 1 first principles, then each year up to final year: learn it from the ground up.' : 'Cards due today, then new ones, as spaced repetition says.'}</p></div>
+  const decks = [...V.lib.decks.map(d => [d.id, d.name]), ...V.lib.shared.map(d => [d.id, `${d.name} (${d.owner_name})`]), [BANK, `The bank (${(V.bank || []).length})`]];
+  /* a choice: chips that wrap (a segmented control truncates four labels at 320 px) */
+  const seg = (k, opts, cur, label) => `<div class="os-libsegrow"><span class="os-libh2" id="os-lsr-${k}">${label}</span><div class="os-libchips" role="radiogroup" aria-labelledby="os-lsr-${k}">${opts.map(([v, l, n]) => { const on = String(cur) === String(v); return `<button class="os-chip${on ? ' on' : ''}${on && V.tap !== `${k}:${v}` ? ' os-still' : ''}" role="radio" data-lib="pref" data-k="${k}" data-v="${v}" aria-checked="${on}">${esc(l)}${n != null ? `<span class="os-libn2">${n}</span>` : ''}</button>`; }).join('')}</div></div>`;
+  const whichN = { all: pick.length, unused: tl.unused, incorrect: tl.incorrect, flagged: tl.flagged };
+  return `<div class="os-libsumhead"><button class="os-link" data-lib="sumback">${I.back}<span>Study</span></button><h3>Custom session</h3></div>
+    <label class="os-setf"><span>Deck</span><select name="sdeck"><option value="">Everything (${everything().length})</option>${decks.map(([id, n]) => `<option value="${esc(id)}"${id === V.st.deck ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></label>
     <p class="os-libh2">Specialty</p><div class="os-libchips">${chip('topic', '', 'All', pool.length, !V.st.topic)}${L.map(x => chip('topic', x.topic, x.topic, x.count, V.st.topic === x.topic)).join('')}</div>
-    <p class="os-libh2">Kind</p><div class="os-libchips">${chip('cat', '', 'All', topic ? topic.count : pool.length, !V.st.cat)}${KIND_IDS.map(k => chip('cat', k, KINDS[k].label, topic ? topic.cats.find(x => x.id === k).count : pool.filter(x => x.item.cat === k).length, V.st.cat === k)).join('')}</div>
+    <p class="os-libh2">Kind</p><div class="os-libchips">${chip('cat', '', 'All', topic ? topic.count : pool.length, !V.st.cat)}${KIND_IDS.map(k => chip('cat', k, KINDS[k].short || KINDS[k].label, topic ? topic.cats.find(x => x.id === k).count : pool.filter(x => x.item.cat === k).length, V.st.cat === k)).join('')}</div>
     <p class="os-libh2">Year</p><div class="os-libchips">${chip('year', '', 'All', inTK.length, !V.st.year)}${YEAR_IDS.map(y => chip('year', String(y), YEARS[y].label, yN(y), V.st.year === y)).join('')}</div>
     <p class="os-libh2">Difficulty</p><div class="os-libchips">${chip('diff', '', 'All', inTKY.length, !V.st.diff)}${DIFF_IDS.map(d => chip('diff', String(d), DIFFICULTY[d].label, dN(d), V.st.diff === d)).join('')}</div>
-    <p class="os-libstat"><span><b>${c.due}</b> due</span><span><b>${c.new}</b> new</span><span><b>${c.learnt}</b> learnt</span></p>
-    <button class="os-btn os-btn--lg os-primary os-libgo" data-lib="start"${q.length ? '' : ' disabled'}>${q.length ? `Study ${plural(q.length, 'card')}` : 'Nothing due: come back later'}</button>
-    ${!q.length && pick.length ? `<button class="os-link" data-lib="cram">Go over them anyway</button>` : ''}`;
+    ${seg('which', Object.entries(WHICH).map(([v, l]) => [v, l, whichN[v]]), p.which, 'Questions')}
+    ${seg('size', SIZES.map(n => [n, n ? String(n) : 'All']), p.size, 'How many')}
+    ${seg('mode', Object.entries(MODES), p.mode, 'Mode')}
+    <p class="os-libmeta os-libmodenote">${p.mode === 'timed' ? 'Timed: the exam’s clock on each question (90 s plus reading time); the answer after each.' : 'Tutor: no clock; the answer and why after each.'}</p>
+    ${seg('order', Object.entries(ORDERS), p.order, 'Order')}
+    <button class="os-btn os-btn--lg os-primary os-libgo" data-lib="start"${q.length ? '' : ' disabled'}>${q.length ? `Start · ${plural(q.length, 'card')}` : 'Nothing matches: loosen a filter'}</button>`;
 }
+
+/* a session from a list (already in order): into focus */
+function startWith(list, { mode = 'tutor', order = 'due', label = '' } = {}) {
+  if (!list.length) { notify('Nothing to study there right now.', ''); return false; }
+  Object.assign(V.st, { q: list, i: 0, pick: null, n: 0, right: 0, mode, order, label, note: false });
+  dlg()?.querySelector('.os-lib')?.classList.add('os-lib--focus');
+  paint(); tick(); panel()?.querySelector('.os-libopt')?.focus({ preventScroll: true });
+  return true;
+}
+function endStudy() {
+  clearInterval(V.st.timer); V.st.q = null;
+  dlg()?.querySelector('.os-lib')?.classList.remove('os-lib--focus');
+  paint(); arrive(); panel()?.querySelector('.os-libgo')?.focus({ preventScroll: true });
+}
+/* timed mode: the question's clock, every quarter second; at 0 it is answered blank */
+function tick() {
+  clearInterval(V.st.timer);
+  const x = V.st.q?.[V.st.i];
+  if (!x || V.st.mode !== 'timed' || V.st.pick != null) return;
+  const total = timedSecs(x.item) * 1000; V.st.ends = now() + total;
+  const draw = () => {
+    const left = Math.max(0, V.st.ends - now()), el = panel()?.querySelector('.os-libclock');
+    if (el) { el.querySelector('b').textContent = String(Math.ceil(left / 1000)); el.style.setProperty('--p', (left / total).toFixed(3)); el.classList.toggle('low', left < 15000); }
+    if (!left) { clearInterval(V.st.timer); answer(-1); }
+  };
+  draw(); V.st.timer = setInterval(draw, 250);
+}
+
+function cardHtml() {
+  const x = V.st.q[V.st.i];
+  if (!x) {
+    const mem = api.studyMem(), p = myPref(), td = today(mem.days, now(), p.goal), sk = streak(mem.days, now()), pct = V.st.n ? Math.round((100 * V.st.right) / V.st.n) : 0;
+    return `<div class="os-libempty os-libdone">${ring(td.frac, td.n, td.goal)}<p><strong>${td.done ? 'Daily goal done' : 'Session done'}</strong><br>${plural(V.st.n, 'card')} · ${pct}% right${sk.days ? ` · ${sk.days}-day streak` : ''}</p>
+      <div class="os-libacts"><button class="os-btn os-btn--lg os-primary" data-lib="today">Keep going</button><button class="os-btn os-btn--lg" data-lib="endstudy">Done</button></div></div>`;
+  }
+  const it = x.item, picked = V.st.pick, shown = picked != null, card = api.studyMem().card[x.key] || {}, t = now(), timed = V.st.mode === 'timed';
+  const meta = [it.year ? yearLabel(it) : '', it.difficulty ? diffLabel(it) : '', layerLabel(it), x.ownerName ? `from ${x.ownerName}` : ''].filter(Boolean).join(' · ');
+  return `<div class="os-libcard${picked == null ? ' os-libcard--in' : ''}">
+    <div class="os-libtop">
+      <button class="os-libx" data-lib="endstudy" aria-label="End the session">${I.x}</button>
+      <div class="os-libbar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="${V.st.q.length}" aria-valuenow="${V.st.i}"><i style="transform:scaleX(${(V.st.i / V.st.q.length).toFixed(3)})"></i></div>
+      <span class="os-libcount2">${V.st.i + 1}/${V.st.q.length}</span>
+      ${timed && !shown ? '<span class="os-libclock" aria-live="off" title="Time left"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle class="arc" cx="12" cy="12" r="10" pathLength="100"/></svg><b></b></span>' : ''}
+      <button class="os-libflag${card.f ? ' on' : ''}" data-lib="flag" aria-pressed="${!!card.f}" aria-label="${card.f ? 'Flagged' : 'Flag this question'}">${icon('bookmark')}</button>
+    </div>
+    <p class="os-liblayer">${esc(meta)}</p>
+    ${V.st.order === 'ladder' && it.year && it.year !== V.st.q[V.st.i - 1]?.item.year ? `<p class="os-libyear"><b>${esc(YEARS[it.year].label)}</b> ${esc(YEARS[it.year].name)}</p>` : ''}
+    <p class="os-libstem">${esc(it.stem)}</p>${it.ask ? `<p class="os-libask">${esc(it.ask)}</p>` : ''}
+    <div class="os-libopts" role="group" aria-label="Options">${it.options.map((o, i) => {
+      const st = !shown ? '' : i === it.answer ? ' ok' : i === picked ? ' no' : ' dim';
+      return `<button class="os-libopt${st}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : ''}><b>${LET[i]}</b><span>${esc(o)}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
+    }).join('')}</div>
+    ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : picked < 0 ? `Time’s up: the answer is ${LET[it.answer]}` : `The answer is ${LET[it.answer]}`}</strong>${it.explanation ? `<p>${esc(it.explanation)}</p>` : ''}</div>
+      ${V.st.note || card.note ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
+      <div class="os-libgrades" role="group" aria-label="How well did you know it?">${GRADES.map((g, k) => `<button class="os-btn${(picked === it.answer ? g === 'good' : g === 'again') ? ' os-primary' : ''}" data-lib="grade" data-g="${g}" aria-keyshortcuts="${k + 1}"><span>${GLABEL[g]}</span><small>${esc(preview(card, g, t))}</small></button>`).join('')}</div>` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}
+  </div>`;
+}
+function answer(i) {
+  if (V.st.pick != null) return;
+  clearInterval(V.st.timer);
+  V.st.pick = i;
+  const x = V.st.q[V.st.i], m = api.studyMem(), ok = !!x && i === x.item.answer;   /* every answer counts towards your gaps and the month's Wrapped (stats.mjs) */
+  if (x) { record(m, x, ok, now()); api.saveStudy(m); if (ok) V.st.right++; }
+  paint();
+  panel()?.querySelector(`[data-lib="grade"].os-primary`)?.focus({ preventScroll: true });
+}
+function rate(g) {
+  const x = V.st.q?.[V.st.i]; if (!x || V.st.pick == null) return;
+  const m = api.studyMem(), had = m.card[x.key], fresh = !had || (!had.reps && !had.lapses && !had.due);
+  m.card[x.key] = grade(had, g, now());
+  if (fresh) { if (m.day.d !== day()) m.day = { d: day(), n: 0 }; m.day.n++; }
+  api.saveStudy(m);
+  if (g === 'again' && V.st.q.length < 200) V.st.q.push(x);   /* again: once more before the session ends */
+  V.st.i++; V.st.pick = null; V.st.n++; V.st.note = false;
+  paint(); tick(); panel()?.querySelector('.os-libopt, [data-lib="today"]')?.focus({ preventScroll: true });
+}
+function toggleFlag() {
+  const x = V.st.q?.[V.st.i]; if (!x) return;
+  const m = api.studyMem(), c = m.card[x.key] || {};
+  m.card[x.key] = { ...c, f: c.f ? 0 : 1 }; api.saveStudy(m);
+  const b = panel()?.querySelector('.os-libflag'), on = !!m.card[x.key].f;
+  if (b) { b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); b.setAttribute('aria-label', on ? 'Flagged' : 'Flag this question'); }
+  notify(on ? 'Flagged: it is in Flagged on the Study home.' : 'Flag removed.', '');
+}
+function saveNote(v) {
+  const x = V.st.q?.[V.st.i]; if (!x) return;
+  const m = api.studyMem(), c = m.card[x.key] || {}, note = String(v).slice(0, 500).trim();
+  m.card[x.key] = { ...c, note }; if (!note) delete m.card[x.key].note; api.saveStudy(m);
+}
+
 /* ---------------------------------------------------------------- your gaps (stats.mjs) */
-const everything = () => [...api.allItems(V.lib), ...(V.bank || [])];
 function gapsCardHtml() {
   const s = summary(everything(), api.studyMem().card);
   if (!s.total.n) return '';
@@ -243,6 +375,11 @@ function gapsCardHtml() {
   return `<button class="os-libgaps" data-lib="summary"><span class="os-libgaps-tx"><small>Your summary</small><b>${g ? `Gap: ${esc(g.label)} · ${g.acc}%` : `${s.total.acc}% right over ${plural(s.total.n, 'answer')}`}</b></span><span class="os-chev" aria-hidden="true">${I.chevR}</span></button>`;
 }
 const bar = (label, x, sub = '') => `<li class="os-libbarrow"><span class="os-libbarl">${esc(label)}${sub ? `<small>${esc(sub)}</small>` : ''}</span><span class="os-libbart" aria-hidden="true"><i style="transform:scaleX(${x.n ? (x.acc / 100).toFixed(3) : 0})" class="${x.acc < 60 ? 'lo' : x.acc < 80 ? 'mid' : 'hi'}"></i></span><span class="os-libbarn">${x.n ? `${x.acc}%` : '–'}</span></li>`;
+/* the last 15 weeks, a square a day, darker for more answers (Anki's heatmap, GitHub's grid) */
+function heatHtml(days, t) {
+  const h = heat(days, t, 15), n = Object.values(days || {}).filter(d => d.n).length;
+  return `<figure class="os-libheat" aria-label="Days studied in the last 15 weeks: ${n}">${h.map(col => `<div>${col.map(c => (c ? `<i data-level="${c.level}" title="${c.d}: ${c.n}"></i>` : '<i class="x"></i>')).join('')}</div>`).join('')}<figcaption>${n} day${n === 1 ? '' : 's'} studied · last 15 weeks</figcaption></figure>`;
+}
 function summaryHtml() {
   const mem = api.studyMem(), s = summary(everything(), mem.card), t = now(), cur = monthOf(t);
   const months = [...new Set(Object.keys(mem.days || {}).map(d => d.slice(0, 7)))].sort().reverse().filter(m => wrapped(mem, m));
@@ -251,6 +388,7 @@ function summaryHtml() {
   const row = x => `<li class="os-libgap"><div><b>${esc(x.label)}</b><small>${x.acc}% right · ${plural(x.n, 'answer')}</small></div><button class="os-btn" data-lib="gap" data-v="${esc(x.id.includes('|') ? x.id : `${x.id}|`)}">Study this</button></li>`;
   return `${head}
     <div class="os-libbig"><div><b>${s.total.acc}%</b><small>right</small></div><div><b>${s.total.n}</b><small>answers</small></div><div><b>${s.total.seen}</b><small>of ${s.total.items} questions seen</small></div></div>
+    ${heatHtml(mem.days, t)}
     ${months.length ? `<div class="os-libwraps">${months.slice(0, 3).map(m => `<button class="os-libwrapbtn" data-lib="wrapped" data-m="${m}"${m === cur ? ' data-preview="1"' : ''}>${icon('star')}<span>${esc(monthName(m))}${m === cur ? ' so far' : ''}, wrapped</span></button>`).join('')}</div>` : ''}
     <h3 class="os-libh">Your gaps</h3>
     ${s.gaps.length ? `<ul class="os-libgapl" role="list">${s.gaps.map(row).join('')}</ul>` : (s.total.acc < 70 ? `<p class="os-libmeta">Not enough answers in one place to name a gap yet: three in a specialty does it.</p>` : `<p class="os-libmeta">No gaps: nothing under 70% with three or more answers. Keep going.</p>`)}
@@ -259,60 +397,6 @@ function summaryHtml() {
     <h3 class="os-libh">By year</h3><ul class="os-libbars" role="list">${s.years.map(x => bar(x.label, x, YEARS[x.id]?.name || '')).join('')}</ul>
     ${s.diffs.length ? `<h3 class="os-libh">By difficulty</h3><ul class="os-libbars" role="list">${s.diffs.map(x => bar(x.label, x)).join('')}</ul>` : ''}
     <h3 class="os-libh">By specialty</h3><ul class="os-libbars" role="list">${s.spec.filter(x => x.n).sort((a, b) => a.acc - b.acc).map(x => bar(x.label, x, plural(x.n, 'answer'))).join('')}</ul>`;
-}
-
-/* 0 to 1: what is not learnt yet (due or new), five from each year, Year 1 first; then, when that is all learnt, the
-   learnt ones in the same climb */
-const climbQueue = pick => {
-  const cards = api.studyMem().card, t = now(), open = pick.filter(x => { const c = cards[x.key]; return !c || c.due <= t; });
-  return ladder(open.length ? open : pick, x => x.item.year, 5, x => x.item.difficulty);
-};
-const sessionQueue = pick => {
-  const m = api.studyMem(), started = m.day.d === day() ? m.day.n | 0 : 0;
-  const ids = queue(pick.map(x => ({ id: x.key })), m.card, now(), started).map(x => x.id), by = new Map(pick.map(x => [x.key, x]));
-  return ids.map(id => by.get(id));
-};
-function start(cram) {
-  const pick = studyPool().filter(inStudyPick);
-  V.st.q = cram ? [...pick].sort(() => Math.random() - 0.5).slice(0, 30) : V.st.order === 'ladder' ? climbQueue(pick) : sessionQueue(pick);
-  V.st.i = 0; V.st.pick = null; V.st.n = 0;
-  if (!V.st.q.length) { V.st.q = null; return; }
-  paint(); panel()?.querySelector('.os-libopt')?.focus({ preventScroll: true });
-}
-function cardHtml() {
-  const x = V.st.q[V.st.i];
-  if (!x) return `<div class="os-libempty os-libdone">${I.check}<p><strong>Done for now</strong><br>${plural(V.st.n, 'card')} studied. Due cards come back when they are due.</p><button class="os-btn os-btn--lg os-primary" data-lib="endstudy">Back to Study</button></div>`;
-  const it = x.item, picked = V.st.pick, shown = picked != null, card = api.studyMem().card[x.key], t = now();
-  return `<div class="os-libcard${picked == null ? ' os-libcard--in' : ''}">
-    <div class="os-libprog"><span>${V.st.i + 1} of ${V.st.q.length}</span><span class="os-liblayer">${it.year ? `${esc(yearLabel(it))} · ` : ''}${it.difficulty ? `${esc(diffLabel(it))} · ` : ''}${esc(layerLabel(it))}${x.ownerName ? ` · from ${esc(x.ownerName)}` : ''}</span><button class="os-link" data-lib="endstudy">End</button></div>
-    ${V.st.order === 'ladder' && it.year && it.year !== V.st.q[V.st.i - 1]?.item.year ? `<p class="os-libyear"><b>${esc(YEARS[it.year].label)}</b> ${esc(YEARS[it.year].name)}</p>` : ''}
-    <div class="os-libbar" aria-hidden="true"><i style="transform:scaleX(${(V.st.i / V.st.q.length).toFixed(3)})"></i></div>
-    <p class="os-libstem">${esc(it.stem)}</p>${it.ask ? `<p class="os-libask">${esc(it.ask)}</p>` : ''}
-    <div class="os-libopts" role="group" aria-label="Options">${it.options.map((o, i) => {
-      const st = !shown ? '' : i === it.answer ? ' ok' : i === picked ? ' no' : '';
-      return `<button class="os-libopt${st}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : ''}><b>${LET[i]}</b><span>${esc(o)}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
-    }).join('')}</div>
-    ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : `The answer is ${LET[it.answer]}`}</strong>${it.explanation ? `<p>${esc(it.explanation)}</p>` : ''}</div>
-      <div class="os-libgrades" role="group" aria-label="How well did you know it?">${GRADES.map((g, k) => `<button class="os-btn${(picked === it.answer ? g === 'good' : g === 'again') ? ' os-primary' : ''}" data-lib="grade" data-g="${g}" aria-keyshortcuts="${k + 1}"><span>${GLABEL[g]}</span><small>${esc(preview(card, g, t))}</small></button>`).join('')}</div>` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}
-  </div>`;
-}
-function answer(i) {
-  if (V.st.pick != null) return;
-  V.st.pick = i;
-  const x = V.st.q[V.st.i], m = api.studyMem();   /* every answer counts towards your gaps and the month's Wrapped (stats.mjs) */
-  if (x) { record(m, x, i === x.item.answer, now()); api.saveStudy(m); }
-  paint();
-  panel()?.querySelector(`[data-lib="grade"].os-primary`)?.focus({ preventScroll: true });
-}
-function rate(g) {
-  const x = V.st.q?.[V.st.i]; if (!x || V.st.pick == null) return;
-  const m = api.studyMem(), had = m.card[x.key];
-  m.card[x.key] = grade(had, g, now());
-  if (!had) { if (m.day.d !== day()) m.day = { d: day(), n: 0 }; m.day.n++; }
-  api.saveStudy(m);
-  if (g === 'again' && V.st.q.length < 200) V.st.q.push(x);   /* again: once more before the session ends */
-  V.st.i++; V.st.pick = null; V.st.n++;
-  paint(); panel()?.querySelector('.os-libopt, [data-lib="endstudy"]')?.focus({ preventScroll: true });
 }
 
 /* the summary's big numbers count up on a gentle spring (to the number, never past it) */
@@ -333,7 +417,7 @@ async function act(a, b, e) {
       return;
     }
     case 'save': return save();
-    case 'studydeck': V.st.deck = b.dataset.deck; V.st.topic = ''; V.st.cat = ''; V.st.q = null; return go('study');
+    case 'studydeck': Object.assign(V.st, { deck: b.dataset.deck, topic: '', cat: '', year: 0, diff: 0, q: null, view: 'custom' }); return go('study');
     case 'share': V.share = V.share === b.dataset.deck ? '' : b.dataset.deck; return paint();
     case 'sharewith': {
       const on = b.getAttribute('aria-pressed') !== 'true'; b.disabled = true;
@@ -372,22 +456,29 @@ async function act(a, b, e) {
       return paint();
     }
     case 'pick': { V.tap = `${b.dataset.k}:${b.dataset.v}`; V.st[b.dataset.k] = b.dataset.k === 'year' || b.dataset.k === 'diff' ? +b.dataset.v || 0 : b.dataset.v; if (b.dataset.k === 'topic') V.st.cat = ''; return paint(); }
-    case 'order': V.st.order = b.dataset.v === 'ladder' ? 'ladder' : 'due'; return paint();
     case 'summary': V.st.view = 'summary'; if (!V.bank) await loadBank(); paint(); arrive(); countUp(); return panel()?.focus({ preventScroll: true });
-    case 'sumback': V.st.view = ''; return paint();
-    case 'gap': {   /* Study this: the gap's specialty and kind, in your own questions when they have it, else the bank */
-      const [topic, cat] = String(b.dataset.v).split('|'), match = x => x.item.topic === topic && (!cat || x.item.cat === cat);
-      Object.assign(V.st, { view: '', topic: topic || '', cat: cat || '', year: 0, diff: 0, deck: api.allItems(V.lib).some(match) ? '' : BANK });
-      if (V.st.deck === BANK && !V.bank) await loadBank();
-      start(false); if (!V.st.q) start(true);   /* nothing due there: go over it anyway */
-      if (!V.st.q) paint();
-      return;
+    case 'sumback': V.st.view = ''; paint(); return arrive();
+    case 'gap': {   /* Study this: that specialty (and kind), from everything you can study, the weakest first */
+      const [topic, cat] = String(b.dataset.v).split('|'), mem = api.studyMem();
+      const l = everything().filter(x => x.item.topic === topic && (!cat || x.item.cat === cat));
+      V.st.view = ''; return startWith(session(l, mem.card, { order: 'shuffle', size: 20 }, now()), { label: topic });
     }
     case 'wrapped': return (await import('./wrapped-view.mjs')).openWrapped(b.dataset.m, { preview: b.dataset.preview === '1' });
-    case 'start': return start(false);
-    case 'cram': return start(true);
+    case 'start': { const p = myPref(), mem = api.studyMem(); return startWith(session(studyPool().filter(inStudyPick), mem.card, { which: p.which, order: p.order, size: p.size }, now(), startedToday()), { mode: p.mode, order: p.order }); }
+    case 'today': { const p = myPref(), mem = api.studyMem(); V.st.q = null; return startWith(session(everything(), mem.card, { order: 'due', size: p.size }, now(), startedToday()), { label: 'Today' }); }
+    case 'mode': {
+      const m = b.dataset.m, mem = api.studyMem(), p = myPref(), all = everything();
+      if (m === 'custom') { V.st.view = 'custom'; paint(); arrive(); return panel()?.focus({ preventScroll: true }); }
+      if (m === 'ladder') return startWith(session(all, mem.card, { order: 'ladder', size: p.size }, now()), { order: 'ladder', label: '0 to 1' });
+      if (m === 'incorrect' || m === 'flagged') return startWith(session(all, mem.card, { which: m, order: 'shuffle', size: 0 }, now()), { label: m });
+      if (m === 'weak') { const g = summary(all, mem.card).gaps[0]; if (!g) return; const [topic, cat] = g.id.split('|'); return startWith(session(all.filter(x => x.item.topic === topic && (!cat || x.item.cat === cat)), mem.card, { order: 'shuffle', size: p.size }, now()), { label: g.label }); }
+      return;
+    }
+    case 'pref': { V.tap = `${b.dataset.k}:${b.dataset.v}`; const k = b.dataset.k, v = ['goal', 'size'].includes(k) ? +b.dataset.v : b.dataset.v; setPref(k, v); return paint(); }
+    case 'flag': return toggleFlag();
+    case 'note': { V.st.note = true; paint(); return panel()?.querySelector('[data-lib-note]')?.focus(); }
     case 'opt': return answer(+b.dataset.i);
     case 'grade': return rate(b.dataset.g);
-    case 'endstudy': V.st.q = null; paint(); return panel()?.querySelector('.os-libgo')?.focus({ preventScroll: true });
+    case 'endstudy': return endStudy();
   }
 }

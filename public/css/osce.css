@@ -1487,3 +1487,65 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 @media (prefers-reduced-motion: reduce) {
   .os *, .os *::before, .os *::after { animation-duration:1ms !important; animation-delay:0ms !important; transition-duration:1ms !important; }
 }
+
+/* Study (library-view.mjs): Today, the modes, Custom, and the card in focus */
+.os-libtoday { display:flex; align-items:center; gap:16px; padding:16px; border-radius:18px; background:var(--card2); }
+.os-libring { position:relative; flex:none; width:76px; height:76px; display:grid; place-items:center; align-content:center; }
+.os-libring svg { position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg); }
+.os-libring circle { fill:none; stroke:var(--fill); stroke-width:4.5; }
+.os-libring .arc { stroke:var(--pri); stroke-linecap:round; stroke-dasharray:100; stroke-dashoffset:calc(100 - var(--p, 0) * 100); transition:stroke-dashoffset var(--sp-gentle-ms) var(--sp-gentle); }
+.os-libring b { font-size:22px; line-height:1; font-variant-numeric:tabular-nums; }
+.os-libring small { font-size:11px; color:var(--mute); }
+.os-libp--enter .os-libring .arc { animation:os-libring var(--sp-gentle-ms) var(--sp-gentle) both; animation-delay:120ms; }
+@keyframes os-libring { from { stroke-dashoffset:100; } }
+.os-libtoday-tx { min-width:0; display:flex; flex-direction:column; gap:4px; }
+.os-libtoday-tx h3 { margin:0; font-size:18px; }
+.os-libstreak { display:flex; align-items:center; gap:5px; font-size:14px; font-weight:600; color:var(--mute); }
+.os-libstreak svg { width:17px; height:17px; color:var(--mute); }
+.os-libstreak.live { color:var(--ink); } .os-libstreak.live svg { color:#ff7a1a; }
+.os-libmodes { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.os-libmode { display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding:14px; border-radius:16px; background:var(--card2); text-align:left; min-width:0; position:relative; }
+.os-libmode:last-child:nth-child(odd) { grid-column:1 / -1; flex-direction:row; align-items:center; }
+.os-libmode-ic { width:34px; height:34px; border-radius:10px; display:grid; place-items:center; background:var(--pri-soft); color:var(--pri); flex:none; }
+.os-libmode-ic svg { width:19px; height:19px; }
+.os-libmode-tx { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.os-libmode-tx b { font-size:14.5px; }
+.os-libmode-tx small { font-size:12px; color:var(--mute); line-height:1.35; overflow-wrap:anywhere; }
+.os-libmode-n { position:absolute; top:12px; right:12px; min-width:24px; height:24px; padding:0 7px; border-radius:12px; background:var(--pri); color:var(--em-pri-contrast); font-size:12px; font-weight:800; display:grid; place-items:center; }
+.os-libgoal, .os-libsegrow { display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+.os-libgoal .os-seg button, .os-libsegrow .os-seg button { min-width:52px; }
+.os-libsegrow .os-seg { max-width:100%; overflow-x:auto; scrollbar-width:none; }
+.os-libmodenote { margin-top:-6px !important; }
+/* the card in focus: the tabs step aside, a slim bar on top */
+.os-lib--focus .os-libtabs { display:none; }
+.os-libtop { display:flex; align-items:center; gap:10px; }
+.os-libtop .os-libbar { flex:1; height:6px; border-radius:3px; }
+.os-libcount2 { font-size:12.5px; font-weight:700; color:var(--mute); font-variant-numeric:tabular-nums; }
+.os-libflag { flex:none; width:36px; height:36px; border-radius:10px; display:grid; place-items:center; color:var(--mute); position:relative; }
+.os-libflag::after { content:''; position:absolute; inset:-4px; }
+.os-libflag svg { width:20px; height:20px; transition:transform var(--sp-bouncy-ms) var(--sp-bouncy); }
+.os-libflag.on { color:#ffb020; } .os-libflag.on svg { fill:currentColor; transform:scale(1.12); }
+.os-libclock { position:relative; flex:none; width:36px; height:36px; display:grid; place-items:center; }
+.os-libclock svg { position:absolute; inset:0; transform:rotate(-90deg); }
+.os-libclock circle { fill:none; stroke:var(--fill); stroke-width:2.5; }
+.os-libclock .arc { stroke:var(--pri); stroke-dasharray:100; stroke-dashoffset:calc(100 - var(--p, 1) * 100); transition:stroke-dashoffset .25s linear, stroke .3s; }
+.os-libclock b { font-size:11.5px; font-variant-numeric:tabular-nums; }
+.os-libclock.low .arc { stroke:var(--danger); } .os-libclock.low b { color:var(--danger); }
+.os-libcard > .os-liblayer { margin:-4px 0 0; }
+.os-libopt.dim { opacity:.55; }
+.os-libnote2 { display:flex; flex-direction:column; gap:6px; font-size:12.5px; font-weight:700; color:var(--mute); }
+.os-libnote2 textarea { width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid var(--stroke); border-radius:10px; background:var(--solid); color:var(--ink); font:inherit; font-size:16px; font-weight:400; resize:vertical; }
+.os-libaddnote { align-self:flex-start; }
+.os-libdone .os-libring { width:96px; height:96px; }
+.os-libdone .os-libacts { justify-content:center; }
+
+.os-libheat { margin:0; display:flex; flex-wrap:wrap; gap:3px; }
+.os-libheat > div { display:flex; flex-direction:column; gap:3px; }
+.os-libheat i { width:14px; height:14px; border-radius:3.5px; background:var(--fill); }
+.os-libheat i.x { background:transparent; }
+.os-libheat i[data-level="1"] { background:color-mix(in srgb, var(--pri) 30%, var(--fill)); }
+.os-libheat i[data-level="2"] { background:color-mix(in srgb, var(--pri) 55%, var(--fill)); }
+.os-libheat i[data-level="3"] { background:color-mix(in srgb, var(--pri) 78%, var(--fill)); }
+.os-libheat i[data-level="4"] { background:var(--pri); }
+.os-libheat figcaption { flex-basis:100%; font-size:12px; color:var(--mute); margin-top:4px; }
+@media (max-width:360px) { .os-libheat i { width:12px; height:12px; } }

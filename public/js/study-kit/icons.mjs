@@ -29,6 +29,8 @@ export const ICONS = Object.freeze({
   sortDescending: '<path d="M4 6h9M4 12h7M4 18h7M15 15l3 3 3-3M18 6v12"/>',
   arrowsSort: '<path d="M3 9l4-4l4 4M7 5v14M21 15l-4 4l-4-4M17 19V5"/>',
   filter: '<path d="M4 6h16M7 12h10M10 18h4"/>',
+  stairs: '<path d="M22 5h-5v5h-5v5H7v5H2"/>',
+  target: '<circle cx="12" cy="12" r="1"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9"/>',
   grip: '<path d="M4 6h16M4 12h16M4 18h16"/>',
   dots: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
   dotsDiagonal: '<path d="M7 17h.01M12 12h.01M17 7h.01"/>',

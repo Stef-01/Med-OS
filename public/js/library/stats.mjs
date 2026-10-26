@@ -3,7 +3,8 @@
    tests.
 
    Every answer in Study is recorded twice, small:
-     on its card    r, w: right and wrong answers to that question (library/sched.mjs keeps the rest of the card)
+     on its card    r, w: right and wrong answers to that question; last: 1 when the last was right, 0 wrong
+                    (library/sched.mjs keeps the rest of the card; plan.mjs reads last for Incorrect)
      in its day     days['2026-10-26'] = { n, r, s: { specialty: [n, r] }, y: { year: [n, r] }, k: { kind: [n, r] },
                     h: { hour: n } }  (the month's Wrapped is read from these; the Study record syncs them on your
                     account only: study-kit/sync.mjs SPEC.lib, mine) */
@@ -16,7 +17,7 @@ const bump = (o, k, ok) => { const v = (o[k] ||= [0, 0]); v[0]++; if (ok) v[1]++
 
 /* one answer into the study record (mutates and returns it): its card's tally and its day */
 export function record(mem, { key, item }, ok, t) {
-  const c = mem.card[key] || {}; mem.card[key] = { ...c, r: (c.r | 0) + (ok ? 1 : 0), w: (c.w | 0) + (ok ? 0 : 1) };
+  const c = mem.card[key] || {}; mem.card[key] = { ...c, r: (c.r | 0) + (ok ? 1 : 0), w: (c.w | 0) + (ok ? 0 : 1), last: ok ? 1 : 0 };
   const days = (mem.days ||= {}), d = (days[dayOf(t)] ||= { n: 0, r: 0, s: {}, y: {}, k: {}, h: {} });
   d.n++; if (ok) d.r++;
   if (item.topic) bump(d.s, item.topic, ok);

@@ -80,56 +80,75 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await sam.click('.os-libqs summary'); await sam.waitForTimeout(200);
   ok(await sam.locator('.os-libqs li').count() === 3 && /Paediatrics › Anatomy/.test(await sam.textContent('.os-libqs')), 'library: each question shows its specialty and kind');
 
-  /* Study: the drill-down, a card answered and graded, the keys */
+  /* Study, Custom: a deck's Study opens the builder on it; the drill-down narrows, a chip with nothing is not shown */
   await sam.click('.os-libdeck [data-lib="studydeck"]'); await sam.waitForSelector('.os-libgo');
   await sam.click('.os-libchips [data-k="topic"][data-v="Paediatrics"]'); await sam.waitForTimeout(150);
-  ok(/Study 2 cards/.test(await sam.textContent('.os-libgo')), 'study: Paediatrics narrows to its 2');
+  ok(/Start · 2 cards/.test(await sam.textContent('.os-libgo')), 'custom: Paediatrics narrows to its 2');
   await sam.click('.os-libchips [data-k="cat"][data-v="anatomy"]'); await sam.waitForTimeout(150);
-  ok(/Study 1 card/.test(await sam.textContent('.os-libgo')), 'study: then Anatomy narrows to 1');
-  await shot(sam, '320-study-pick'); await flat(sam, 'study pick');
+  ok(/Start · 1 card/.test(await sam.textContent('.os-libgo')), 'custom: then Anatomy narrows to 1');
+  ok(await sam.locator('.os-libchips [data-k="cat"][data-v="skills"]').count() === 0, 'custom: a kind with no questions is left out');
+  ok(await sam.locator('[data-lib="pref"][data-k="which"]').count() === 4 && await sam.locator('[data-lib="pref"][data-k="mode"]').count() === 2, 'custom: which questions (all, unused, incorrect, flagged), how many, tutor or timed, order');
+  await sam.evaluate(() => document.querySelector('.os-dlg-body')?.scrollTo(0, 0)); await shot(sam, '320-custom'); await flat(sam, 'custom');
   await sam.click('.os-libchips [data-k="cat"][data-v=""]'); await sam.click('.os-libgo');
   await sam.waitForSelector('.os-libopt');
+  ok(!(await sam.locator('.os-libtabs').isVisible()), 'card: focus mode, the tabs step aside');
   await shot(sam, '320-card'); await flat(sam, 'card');
+  await sam.click('[data-lib="flag"]'); await sam.waitForSelector('.os-libflag.on');
+  ok(true, 'card: a question can be flagged');
   await sam.locator('.os-libopt').nth(1).click(); await sam.waitForSelector('.os-libexp');
   const after = await sam.evaluate(() => ({ ok: document.querySelectorAll('.os-libopt.ok').length, no: document.querySelectorAll('.os-libopt.no').length, again: document.querySelector('[data-lib="grade"].os-primary')?.dataset.g }));
-  ok(after.ok === 1 && after.no <= 1 && ['again', 'good'].includes(after.again), `study: the answer shows right and wrong, the explanation, and suggests a grade (${JSON.stringify(after)})`);
+  ok(after.ok === 1 && after.no <= 1 && ['again', 'good'].includes(after.again), `card: the answer shows right and wrong, the explanation, and suggests a grade (${JSON.stringify(after)})`);
+  await sam.click('[data-lib="note"]'); await sam.fill('[data-lib-note]', 'Inferior leads = RCA'); await sam.waitForTimeout(500);
   await shot(sam, '320-card-answered'); await flat(sam, 'answered');
   await sam.click('[data-lib="grade"][data-g="good"]'); await sam.waitForTimeout(150);
   await sam.keyboard.press('1'); await sam.waitForSelector('.os-libexp'); await sam.keyboard.press('3');
   await sam.waitForSelector('.os-libdone');
-  ok(/2 cards studied/.test(await sam.textContent('.os-libdone')), 'study: keys 1 to 5 answer and 1 to 4 grade; done for now');
+  ok(/2 cards/.test(await sam.textContent('.os-libdone')), 'card: keys 1 to 5 answer and 1 to 4 grade; the session ends with how it went');
+  await shot(sam, '320-session-done');
   const study = await sam.evaluate(() => JSON.parse(localStorage.getItem('osce.libstudy.v1') || '{}'));
-  ok(Object.keys(study.card || {}).length === 2 && Object.values(study.card).every(c => c.due > Date.now()), 'study: each graded card is due again later');
-  await sam.click('.os-libdone [data-lib="endstudy"]');
-  /* the year: each question has one (given, or guessed and said so), chips by year, and 0 to 1 climbs them */
-  ok(await sam.locator('.os-libchips [data-k="year"]').count() === 5, 'study: a Year row (All and Years 1 to 4)');
-  await sam.click('[data-lib="order"][data-v="ladder"]'); await sam.waitForTimeout(150);
-  ok(/Year 1 first principles/.test(await sam.textContent('.os-liborder')), 'study: 0 to 1 says what it does');
-  await shot(sam, '320-study-ladder'); await flat(sam, 'study 0 to 1');
-  await sam.selectOption('.os-libp [name="sdeck"]', '__bank'); await sam.waitForSelector('.os-libgo');
-  await sam.click('[data-lib="order"][data-v="ladder"]').catch(() => {}); await sam.waitForTimeout(150);
-  await sam.click('.os-libgo'); await sam.waitForSelector('.os-libopt');
-  const climb = await sam.evaluate(() => document.querySelector('.os-libprog .os-liblayer').textContent);
-  ok(/^Year 1 · /.test(climb) && await sam.locator('.os-libyear').isVisible(), `study: 0 to 1 over the bank starts at Year 1, and says so (${climb})`);
+  const cs = Object.values(study.card || {});
+  ok(cs.length === 2 && cs.every(c => c.due > Date.now()) && cs.some(c => c.f === 1) && cs.some(c => c.note === 'Inferior leads = RCA'), 'card: graded cards are due later; the flag and the note are kept');
+  await sam.click('.os-libdone [data-lib="endstudy"]'); await sam.click('[data-lib="sumback"]'); await sam.waitForSelector('.os-libtoday');
+  /* Home: the goal ring, the streak, Start, the modes */
+  const home = await sam.textContent('.os-libp');
+  ok(/1-day streak/.test(home) && /of 20/.test(home) && /Start · /.test(await sam.textContent('.os-libgo')), `home: today's ring (of 20), a 1-day streak, and Start`);
+  ok(await sam.locator('[data-lib="mode"][data-m="flagged"] .os-libmode-n').textContent() === '1', 'home: Flagged has the one flagged');
+  await sam.evaluate(() => document.querySelector('.os-dlg-body')?.scrollTo(0, 0)); await shot(sam, '320-study-home'); await flat(sam, 'home');
+  await sam.click('[data-lib="pref"][data-k="goal"][data-v="10"]'); await sam.waitForTimeout(150);
+  ok(/of 10/.test(await sam.textContent('.os-libring')), 'home: the daily goal can be changed');
+  /* 0 to 1 from the home: Year 1 first, only ever up */
+  await sam.click('[data-lib="mode"][data-m="ladder"]'); await sam.waitForSelector('.os-libopt');
+  const climb = await sam.evaluate(() => document.querySelector('.os-libcard > .os-liblayer').textContent);
+  ok(/^Year 1 · /.test(climb) && await sam.locator('.os-libyear').isVisible(), `0 to 1: starts at Year 1, and says so (${climb})`);
   await shot(sam, '320-ladder-card'); await flat(sam, 'ladder card');
   let last = 1, upward = true;
   for (let i = 0; i < 12; i++) {
-    const y = +(await sam.textContent('.os-libprog .os-liblayer')).match(/^Year (\d)/)[1]; if (y < last) upward = false; last = y;
+    const y = +((await sam.textContent('.os-libcard > .os-liblayer')).match(/^Year (\d)/) || [0, 0])[1]; if (y < last) upward = false; last = y;
     await sam.locator('.os-libopt').first().click(); await sam.click('[data-lib="grade"][data-g="good"]'); await sam.waitForTimeout(60);
+    if (await sam.locator('.os-libdone').count()) break;
   }
-  ok(upward && last >= 3, `study: 0 to 1 only ever climbs (reached Year ${last} after 12)`);
+  ok(upward && last >= 3, `0 to 1: only ever climbs (reached Year ${last})`);
+  await sam.click('[data-lib="endstudy"]').catch(() => {}); if (await sam.locator('.os-libdone').count()) await sam.click('.os-libdone [data-lib="endstudy"]');
+  /* timed: the exam's clock on each question */
+  await sam.click('[data-lib="mode"][data-m="custom"]'); await sam.waitForSelector('[data-lib="pref"][data-k="mode"]');
+  await sam.selectOption('.os-libp [name="sdeck"]', ''); await sam.click('[data-lib="pref"][data-k="order"][data-v="shuffle"]');
+  await sam.click('[data-lib="pref"][data-k="mode"][data-v="timed"]'); await sam.click('.os-libgo'); await sam.waitForSelector('.os-libclock b');
+  await sam.waitForTimeout(400);
+  const secs = +(await sam.textContent('.os-libclock b'));
+  ok(secs >= 85 && secs <= 240, `timed: a clock of 90 s plus reading (${secs} s)`);
+  await shot(sam, '320-timed');
   await sam.click('[data-lib="endstudy"]');
-  /* your summary: from the answers just given, the gaps with a way to study them, by year, difficulty, specialty */
-  ok(await sam.locator('.os-libdiff, .os-libchips [data-k="diff"]').count() === 4, 'study: a Difficulty row (All, Easy, Medium, Hard)');
-  await sam.click('.os-libgaps'); await sam.waitForSelector('.os-libsumhead');
+  await sam.click('[data-lib="pref"][data-k="mode"][data-v="tutor"]'); await sam.click('[data-lib="pref"][data-k="order"][data-v="due"]');
+  /* your summary: from the answers given, the gaps with a way to study them, by year, difficulty, specialty, and the heatmap */
+  await sam.click('[data-lib="sumback"]'); await sam.click('.os-libgaps'); await sam.waitForSelector('.os-libsumhead');
   const sm = await sam.textContent('.os-libp');
   ok(/Your gaps/.test(sm) && /By year/.test(sm) && /By difficulty/.test(sm) && /By specialty/.test(sm) && /\d+%/.test(sm), 'summary: overall, your gaps, by year, by difficulty and by specialty');
+  ok(await sam.locator('.os-libheat [data-level]').count() >= 70, 'summary: a heatmap of the weeks');
   await sam.evaluate(() => document.querySelector('.os-dlg-body')?.scrollTo(0, 0)); await shot(sam, '320-summary'); await flat(sam, 'summary');
   await sam.evaluate(() => document.querySelector('.os-libbars')?.scrollIntoView({ block: 'center' })); await shot(sam, '320-summary-bars');
   const gapBtn = sam.locator('[data-lib="gap"]').first();
   if (await gapBtn.count()) { await gapBtn.click(); await sam.waitForSelector('.os-libopt'); ok(true, 'summary: Study this starts a session on that gap'); await sam.click('[data-lib="endstudy"]'); }
   else { await sam.click('[data-lib="sumback"]'); }
-  ok(/0 due/.test(await sam.textContent('.os-libstat')) || /Study 0|Nothing due|Study 1 card/.test(await sam.textContent('.os-libgo')), 'study: the graded cards are no longer due');
 
   /* Kai, on a bigger phone: friends */
   const alex = await phone(393, 852);
@@ -157,8 +176,8 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(/From friends/.test(await alex.textContent('.os-libp')) && /From Lee/.test(await alex.textContent('.os-libdeck')), "share: Kai has Lee's deck under From friends");
   ok(await alex.locator('[data-lib="deldeck"]').count() === 0, "share: a friend's deck cannot be deleted by Kai");
   await shot(alex, '393-from-friends');
-  await alex.click('[data-lib="studydeck"]'); await alex.click('.os-libgo'); await alex.waitForSelector('.os-libopt');
-  ok(/from Lee/.test(await alex.textContent('.os-libprog')), "study: a friend's card says whose it is");
+  await alex.click('[data-lib="studydeck"]'); await alex.waitForSelector('.os-libgo'); await alex.click('.os-libgo'); await alex.waitForSelector('.os-libopt');
+  ok(/from Lee/.test(await alex.textContent('.os-libcard > .os-liblayer')), "study: a friend's card says whose it is");
   await shot(alex, '393-friend-card');
 
   /* the duel: the pack gains Lee's questions as a deck to pick */
