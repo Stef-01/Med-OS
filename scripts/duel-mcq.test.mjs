@@ -1,7 +1,7 @@
 /* the duel's category questions: the gates, the writer's flow with a stub for Claude, and the pack that merges them */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CATS, CAT_IDS, gate, normalizeMcq, stationBrief, MCQ_SCHEMA, MCQ_SYSTEM, LIMITS } from './lib/mcq.mjs';
+import { CATS, CAT_IDS, gate, writerChecks, normalizeMcq, stationBrief, MCQ_SCHEMA, MCQ_SYSTEM, LIMITS } from './lib/mcq.mjs';
 import { writeStationMcq } from './generate-duel-mcq.mjs';
 import { buildPack } from './lib/duel-pack.mjs';
 import { stationsOnDisk, poolOnDisk } from './build-duel-pack.mjs';
@@ -73,4 +73,13 @@ test("the writer takes the CLI's answer wrapped as { value }", async () => {
   const st = { id: 'ai-w', title: 'W', specialty: ['Paediatrics'] };
   const { file } = await writeStationMcq(st, async () => ({ value: { questions: CAT_IDS.map(c => good(c)) } }), 't');
   assert.deepEqual(file.questions.map(q => q.cat), CAT_IDS);
+});
+
+test('writerChecks: a writer sends back a key that is the single longest option; the pack builder\'s gate does not', () => {
+  const q = { cat: 'physio', stem: 'Which hormone raises serum calcium?', options: ['Parathyroid hormone acting on bone and kidney', 'Calcitonin', 'Insulin', 'Glucagon'], answer: 0,
+    why: 'PTH raises calcium.', notes: [null, 'Lowers it.', 'No direct effect.', 'No direct effect.'] };
+  assert.deepEqual(gate(q), [], 'the gate alone passes it, so a question already in the bank stays');
+  assert.match(writerChecks(q).join(' '), /key is the longest option/);
+  const even = { ...q, options: ['Parathyroid hormone', 'Growth hormone axis', 'Insulin', 'Glucagon'] };
+  assert.deepEqual(writerChecks(even), [], 'a tie for longest is no cue');
 });

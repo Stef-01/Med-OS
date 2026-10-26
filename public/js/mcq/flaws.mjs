@@ -99,6 +99,11 @@ export function checkLongest(q) {
   return ok('longest-key', 'minor');
 }
 
+/* the key as the single longest option: a cue a test-wise student uses. checkLongest above flags only a key far longer
+   than the rest; the writers send back any key that is the longest at all (a tie gives nothing away), and the audit
+   counts how often it happens against chance */
+export const keyIsLongest = q => { const L = (q?.options || []).map(o => String(o).trim().length), k = L[q?.answer]; return k != null && L.filter(l => l >= k).length === 1; };
+
 /* grammar that only the key fits: "... is an" before options of which only the key starts with a vowel, or a plural
    lead-in ("are") with only the key plural */
 const vowel = s => /^[aeiou]/i.test(String(s).trim()) && !/^(?:uni|use|usu|eu|one|ur[aei])/i.test(String(s).trim());
@@ -181,7 +186,8 @@ export const isClinical = q => CLINICAL.test(fullStem(q));
 export function checkVignette(q) {
   const s = fullStem(q);
   if (!isClinical(q)) return fail('vignette', 'minor', 'Not a clinical vignette: Step 2 CK items put a patient in front of the student (age, sex, setting, presentation, findings).');
-  const missing = Object.entries(PARTS).filter(([, re]) => !re.test(vignette(q) || s)).map(([k]) => k);
+  const rapid = Array.isArray(q.tags) && q.tags.includes('form:rapid');   /* a 15 s case leaves the setting out by design */
+  const missing = Object.entries(PARTS).filter(([k, re]) => !(rapid && k === 'setting') && !re.test(vignette(q) || s)).map(([k]) => k);
   if (missing.length >= 2) return fail('vignette', 'major', `The vignette is missing ${missing.join(' and ')}.`);
   if (missing.length === 1) return fail('vignette', 'minor', `The vignette is missing the ${missing[0]}.`);
   return ok('vignette', 'major');

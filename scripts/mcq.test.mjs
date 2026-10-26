@@ -2,7 +2,7 @@
    check (public/js/mcq/flaws.mjs), the mutations that test the checks (lib/mcq-mutate.mjs) */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanItem, itemProblems, licenceOk, draftsFrom, parseCsv, userItem, contentHash, fullStem, duelOrigin, kindLabel, newUserId } from '../public/js/mcq/schema.mjs';
+import { cleanItem, itemProblems, licenceOk, draftsFrom, parseCsv, userItem, contentHash, fullStem, duelOrigin, kindLabel, newUserId, displayOrder } from '../public/js/mcq/schema.mjs';
 import * as F from '../public/js/mcq/flaws.mjs';
 import { mutantsOf, MUTATIONS, wrongKey } from './lib/mcq-mutate.mjs';
 
@@ -191,4 +191,18 @@ test('every mutation injects its flaw and the check meant for it catches it; the
   }
   assert.equal(wrongKey(good()).answer, 1);
   assert.equal(F.flawReport(good()).score, 100, 'mutating copies: the original is untouched');
+});
+
+test('displayOrder: the key where the card id says, the rest in their order; the stored order untouched', () => {
+  const q = { id: 'hy-1', options: ['key', 'b', 'c', 'd'], answer: 0 };
+  for (const key of ['b:hy-1', 'b:hy-2', 'x', 'y', 'z']) {
+    const o = displayOrder(q, key);
+    assert.deepEqual([...o].sort(), [0, 1, 2, 3], 'every option once');
+    assert.deepEqual(o.filter(i => i !== 0), [1, 2, 3], 'the distractors keep their order');
+    assert.deepEqual(displayOrder(q, key), o, 'the same card shows the same order every time');
+  }
+  assert.deepEqual(q.options, ['key', 'b', 'c', 'd']);
+  const at = {}; for (let i = 0; i < 400; i++) { const p = displayOrder(q, `k${i}`).indexOf(0); at[p] = (at[p] || 0) + 1; }
+  assert.ok(Object.values(at).every(n => n > 60), `the key lands on every position (${JSON.stringify(at)})`);
+  assert.deepEqual(displayOrder({ options: ['a', 'b'], answer: 9 }, 'k'), [0, 1], 'a bad key: as stored');
 });

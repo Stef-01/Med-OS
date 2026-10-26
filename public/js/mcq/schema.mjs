@@ -183,3 +183,15 @@ export function userItem(d, { by, now, id }) {
     }
   };
 }
+
+/* the order to show a question's options in (stored indices, first shown first): the key at the place its id's hash
+   names, the others in their stored order, as spreadKey does to a pool item. A writer's habit of putting the key
+   first (the high-yield set had it at A in 68% of 523 on 2026-10-26) never reaches the student, and the stored order,
+   which per-option records (mcq_picks) are counted against, never changes */
+export function displayOrder(q, key = q?.id) {
+  const n = q?.options?.length || 0, order = Array.from({ length: n }, (_, i) => i);
+  if (!n || !Number.isInteger(q.answer) || q.answer < 0 || q.answer >= n) return order;
+  const to = parseInt(fnv(String(key ?? '')), 16) % n;
+  order.splice(q.answer, 1); order.splice(to, 0, q.answer);
+  return order;
+}

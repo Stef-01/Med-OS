@@ -19,6 +19,7 @@ import { account } from '../study-kit/sync.mjs';
 import { chatPrompt } from '../library/prompt.mjs';
 import { checkUpload, deckName, layers, layerLabel, yearLabel, diffLabel, inPick, KINDS, KIND_IDS, LIMITS } from '../library/item.mjs';
 import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
+import { displayOrder } from '../mcq/schema.mjs';
 import { record, summary, wrapped, monthOf, monthName, dayOf } from '../library/stats.mjs';
 import { grade, queue, counts, preview, soon, isNew, GRADES } from '../library/sched.mjs';
 import { today, streak, heat, session, timedSecs, tally, smart, snapshot, resumable, examPlan, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
@@ -83,7 +84,7 @@ function wire(el) {
 export function libraryKey(e) {
   if (V.tab !== 'study' || !V.st.q || e.metaKey || e.ctrlKey || e.altKey || e.target.closest?.('input, textarea, select')) return false;
   const it = V.st.q[V.st.i];
-  if (it && V.st.pick == null && /^[1-5]$/.test(e.key) && +e.key <= it.item.options.length) { answer(+e.key - 1); return true; }
+  if (it && V.st.pick == null && /^[1-5]$/.test(e.key) && +e.key <= it.item.options.length) { answer(displayOrder(it.item, it.key)[+e.key - 1]); return true; }
   if (it && V.st.pick != null && /^[1-4]$/.test(e.key)) { rate(GRADES[+e.key - 1]); return true; }
   if (it && V.st.pick != null && (e.key === 'Enter' || e.key === ' ') && !e.target.closest?.('button, a')) { rate(V.st.pick === it.item.answer ? 'good' : 'again'); return true; }
   return false;
@@ -376,6 +377,7 @@ function cardHtml() {
       ${reviewHtml()}</div>`;
   }
   const it = x.item, picked = V.st.pick, shown = picked != null, card = api.studyMem().card[x.key] || {}, t = now(), timed = V.st.mode === 'timed';
+  const ord = displayOrder(it, x.key);   /* the key spread by the card's id; each button keeps its stored index */
   const meta = [it.year ? yearLabel(it) : '', it.difficulty ? diffLabel(it) : '', layerLabel(it), x.ownerName ? `from ${x.ownerName}` : ''].filter(Boolean).join(' · ');
   return `<div class="os-libcard${picked == null ? ' os-libcard--in' : ''}" data-q="${esc(x.key)}">
     <div class="os-libtop">
@@ -388,11 +390,11 @@ function cardHtml() {
     <p class="os-liblayer">${esc(meta)}</p>
     ${V.st.order === 'ladder' && it.year && it.year !== V.st.q[V.st.i - 1]?.item.year ? `<p class="os-libyear"><b>${esc(YEARS[it.year].label)}</b> ${esc(YEARS[it.year].name)}</p>` : ''}
     <p class="os-libstem">${esc(it.stem)}</p>${it.ask ? `<p class="os-libask">${esc(it.ask)}</p>` : ''}
-    <div class="os-libopts" role="group" aria-label="Options">${it.options.map((o, i) => {
-      const st = !shown ? '' : i === it.answer ? ' ok' : i === picked ? ' no' : ' dim';
-      return `<button class="os-libopt${st}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : ''}><b>${LET[i]}</b><span>${esc(o)}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
+    <div class="os-libopts" role="group" aria-label="Options">${ord.map((i, pos) => {
+      const o = it.options[i], st = !shown ? '' : i === it.answer ? ' ok' : i === picked ? ' no' : ' dim';
+      return `<button class="os-libopt${st}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : ''}><b>${LET[pos]}</b><span>${esc(o)}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
     }).join('')}</div>
-    ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : picked < 0 ? `Time’s up: the answer is ${LET[it.answer]}` : `The answer is ${LET[it.answer]}`}</strong>${it.explanation ? `<p>${esc(it.explanation)}</p>` : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>
+    ${shown ? `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? 'Right' : picked < 0 ? `Time’s up: the answer is ${LET[ord.indexOf(it.answer)]}` : `The answer is ${LET[ord.indexOf(it.answer)]}`}</strong>${it.explanation ? `<p>${esc(it.explanation)}</p>` : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>
       ${picked !== it.answer && (card.w | 0) >= 4 && !card.note ? `<p class="os-libleech">${icon('alert')}<span>This one has caught you ${card.w} times. Write the rule in your own words: it is the fastest fix.</span></p>` : ''}
       ${V.st.note || card.note || (picked !== it.answer && (card.w | 0) >= 4) ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
       ${gradesHtml(picked === it.answer, card, t)}

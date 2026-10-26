@@ -186,6 +186,9 @@ test('the Rapid form: a short case that fits the duel\'s 15 s, written to its ow
   assert.ok(fits({ stem: `${r.item.stem} ${r.item.ask}`, options: r.item.options }, 15), 'what is kept fits 15 s as the duel reads it');
   assert.equal(checkLength(r.item).pass, true, 'a rapid case is not a too-short vignette');
   assert.equal(checkLength({ ...r.item, tags: [] }).pass, false, 'the same stem as a Step 2 vignette is too short');
+  const noSetting = { ...r.item, stem: 'A 67-year-old man has crushing central chest pain. His ECG shows ST elevation in II, III and aVF.' };
+  assert.ok(!flawReport(noSetting).failed.some(f => f.check === 'vignette' && /setting/.test(f.reason)), 'a Rapid case needs no setting');
+  assert.ok(flawReport({ ...noSetting, tags: [] }).failed.some(f => f.check === 'vignette' && /setting/.test(f.reason)), 'a vignette still does');
   const v = toItem(short, { st: station, focus: 'management', ex: [], how: 'stub', now: '2026-10-26T12:00:00Z' });
   assert.notEqual(v.id, r.item.id, 'a rapid question and a vignette of the same station, focus and time are different questions');
   assert.ok(!v.tags.some(t => t.startsWith('form:')));

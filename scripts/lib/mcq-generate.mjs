@@ -10,10 +10,11 @@
    and it still has to pass the model judge and the selector's bar before it reaches the pool. Every Claude call goes
    through `ask`, so the flow is tested with a stub. Pure apart from `ask`. */
 import { cleanItem, fnv, LETTERS } from '../../public/js/mcq/schema.mjs';
-import { flawReport, content } from '../../public/js/mcq/flaws.mjs';
+import { flawReport, content, keyIsLongest } from '../../public/js/mcq/flaws.mjs';
 import { SPECIALTIES } from './mcq-judge.mjs';
 import { spreadKey } from './mcq-sources.mjs';
 import { fits, readSecs } from '../../public/js/vendor/pup-duel/duel/core.mjs';
+import { plain } from '../../public/js/study-kit/safe.mjs';
 
 export const GEN_VERSION = 'generate-mcq-2';
 /* the form a question is written in (founder 2026-10-26: questions that fit the duel's 15 s, 30 s and 1.5 min formats):
@@ -27,7 +28,7 @@ export const FOCUS = Object.freeze({
   interpretation: 'interpreting one of the Part 2 results (what the result shows, or what it means for this patient)',
   complication: 'the complication or risk this patient is most at risk of, or the most important thing to prevent or counsel about'
 });
-const strip = s => String(s ?? '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
+const strip = plain;   /* station HTML as text: the study kit's one helper (study-kit/safe.mjs) */
 
 /* the station as the writer needs it: plain text, no patient script verbatim */
 export function stationBrief(st) {
@@ -108,7 +109,7 @@ export function toItem(draft, { st, focus, ex, how, model, now, form = 'vignette
 /* what a draft must fix before it is kept: a major or block flaw; the key as the single longest option (a cue a
    test-wise student uses: in the pool of 2026-10-26 the AI-written key was the longest 38% of the time against 20% by
    chance); and, for a form with a time, reading that does not fit it, as the duel reads it (stem and lead-in, options) */
-export const keyLongest = q => { const L = q.options.map(o => String(o).trim().length), k = L[q.answer]; return L.filter(l => l >= k).length === 1; };
+export const keyLongest = keyIsLongest;
 export const asDuel = q => ({ stem: q.ask ? `${q.stem} ${q.ask}` : q.stem, options: q.options });
 export function blocking(q, form = 'vignette') {
   if (!q) return [{ reason: 'the draft is not a valid question (five options, a key, a stem)' }];

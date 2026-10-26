@@ -7,6 +7,9 @@
    Each station gets one question in each category, written from that station's case, single best answer, four options,
    and a reason for each wrong one. AI-written (origin "ai"): the duel shows the tag. */
 
+import { plain } from '../../public/js/study-kit/safe.mjs';
+import { keyIsLongest } from '../../public/js/mcq/flaws.mjs';
+
 export const CATS = [
   { id: 'skills', label: 'OSCE skills', brief: 'how to run this station well: the question to ask, the examination step or manoeuvre, what to say to the patient (explaining, consent, breaking news, safety netting), or the procedure, at the point the station reaches it' },
   { id: 'clinical', label: 'Clinical', brief: 'investigation or management of this patient: the next test, its interpretation, the first-line treatment and its dose or route, escalation, disposition or follow-up (not "what is the most likely diagnosis", which the bank already asks)' },
@@ -43,7 +46,7 @@ Rules for every question:
 - The why is exact: when a guideline staggers steps (drain first, remove the stone later), say so rather than collapsing them.`;
 
 /* the station as the writer reads it: its case in plain text, no images, no marking sheet */
-const strip = s => String(s ?? '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
+const strip = plain;   /* station HTML as text: the study kit's one helper (study-kit/safe.mjs) */
 export function stationBrief(st) {
   const p2 = st.part2 || {}, lines = [];
   lines.push(`Title: ${strip(st.title)}`);
@@ -85,11 +88,16 @@ export function gate(q) {
   return out;
 }
 
+/* what a writer checks before it keeps a question: the gate, and the key as the single longest option (on 2026-10-26
+   the key was the longest in 60% of the high-yield set and 51% of the station questions, against 25% by chance).
+   Only at write time: build-duel-pack.mjs re-runs gate() alone, so questions written before this stay in the bank */
+export const writerChecks = q => [...gate(q), ...(q && Array.isArray(q.options) && keyIsLongest({ options: q.options.map(strip), answer: q.answer }) ? ['the key is the longest option: make another as long, or the key shorter'] : [])];
+
 /* a writer's answer to the file's questions: each passing question with its id and source, and why the others failed */
 export function normalizeMcq(st, draft) {
   const kept = [], failed = [], seen = new Set();
   for (const q of (draft && Array.isArray(draft.questions) ? draft.questions : [])) {
-    const issues = gate(q);
+    const issues = writerChecks(q);
     if (seen.has(q?.cat)) issues.push(`a second ${q.cat} question`);
     if (issues.length) { failed.push(`${st.id} ${q?.cat || '?'}: ${issues.join('; ')}`); continue; }
     seen.add(q.cat);

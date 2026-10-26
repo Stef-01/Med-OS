@@ -15,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { CATS, LIMITS, gate } from './lib/mcq.mjs';
+import { CATS, LIMITS, writerChecks } from './lib/mcq.mjs';
 import { YEARS, DIFFICULTY, isYear, isDiff } from '../public/js/mcq/year.mjs';
 import { SPECIALTIES, EXAM_SYSTEM, EXAM_SCHEMA } from './generate-hy.mjs';
 
@@ -42,7 +42,7 @@ Answer for every id given. For a case you do not keep, still fill the other fiel
 
 export function mxqQuestion(q, src) {
   if (!q?.keep) return { q: null, why: `left out: ${q?.reason || 'not kept'}` };
-  const issues = gate(q);
+  const issues = writerChecks(q);
   if (!isYear(q.year)) issues.push('no year'); if (!isDiff(q.difficulty)) issues.push('no difficulty'); if (!SPECIALTIES.includes(q.specialty)) issues.push('no specialty');
   if (issues.length) return { q: null, why: issues.join('; ') };
   const s = x => String(x ?? '').replace(/\s+/g, ' ').trim();
