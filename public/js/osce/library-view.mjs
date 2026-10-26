@@ -157,7 +157,8 @@ function uploadHtml() {
       ${names.length ? `<div class="os-libchips os-libdeckchips" aria-label="Your decks">${names.slice(0, 6).map(n => `<button class="os-chip${n === deck ? ' on os-still' : ''}" data-lib="deckpick" data-v="${esc(n)}">${esc(n)}</button>`).join('')}</div>` : ''}
       <datalist id="os-libdecknames">${names.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
       <button class="os-btn os-btn--lg os-primary os-libsave" data-lib="save" disabled>Save</button></li>
-  </ol>`;
+  </ol>
+  <p class="os-libmeta os-libpool">Your questions are yours and your friends'. For everyone's bank, <button class="os-link" data-os="mcqnew">submit one for review</button>.</p>`;
 }
 function paintUploadResult() {
   const p = panel(), box = p?.querySelector('.os-libres'), btn = p?.querySelector('.os-libsave'); if (!box) return;

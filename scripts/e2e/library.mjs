@@ -277,6 +277,8 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await solo.click('.os-libsave'); await solo.waitForSelector('.os-libdeck');
   ok(/Signed out/.test(await solo.textContent('.os-libp')) && /3 questions/.test(await solo.textContent('.os-libdeck')), 'signed out: the questions are kept on this phone, with a note to sign in');
   await open(solo, 'friends'); ok(/need an account/.test(await solo.textContent('.os-libp')), 'signed out: Friends asks you to sign in');
+  await open(solo, 'upload'); await solo.click('.os-libpool [data-os="mcqnew"]'); await solo.waitForSelector('.os-mcqf', { timeout: 5000 }).then(() => ok(true, 'upload: a link to submit a question to the shared bank'), () => ok(false, 'upload: a link to submit a question to the shared bank'));
+  await solo.keyboard.press('Escape'); await solo.waitForTimeout(300);
 
   /* a laptop */
   const wide = await phone(1280, 800);
