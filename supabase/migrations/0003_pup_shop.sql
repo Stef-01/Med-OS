@@ -141,7 +141,31 @@ insert into public.pup_items (id, slot, rarity, price, exclusive) values
   ('puffer', 'back', 'epic', 60, false),
   ('whitecoat', 'back', 'epic', 60, false),
   ('pleats', 'back', 'uncommon', 20, false),
-  ('tutu', 'back', 'rare', 30, false)
+  ('tutu', 'back', 'rare', 30, false),
+  ('monsterhood', 'head', 'epic', 65, false),
+  ('gat', 'head', 'epic', 55, false),
+  ('ponyhat', 'head', 'rare', 30, false),
+  ('froghat', 'head', 'uncommon', 20, false),
+  ('mushroomhat', 'head', 'uncommon', 20, false),
+  ('trainercap', 'head', 'uncommon', 25, false),
+  ('mouseears', 'head', 'uncommon', 20, false),
+  ('cherub', 'head', 'rare', 35, false),
+  ('capybara', 'head', 'epic', 50, false),
+  ('cowbow', 'head', 'common', 15, false),
+  ('ogreears', 'head', 'common', 15, false),
+  ('guardmask', 'face', 'rare', 40, false),
+  ('tinyovals', 'face', 'uncommon', 25, false),
+  ('monstercharm', 'neck', 'epic', 55, false),
+  ('erabeads', 'neck', 'common', 15, false),
+  ('bratscarf', 'neck', 'uncommon', 20, false),
+  ('puka', 'neck', 'common', 10, false),
+  ('tumbler', 'back', 'uncommon', 25, false),
+  ('matcha', 'back', 'common', 15, false),
+  ('pistachiobar', 'back', 'uncommon', 20, false),
+  ('hippoplush', 'back', 'rare', 35, false),
+  ('trackjacket', 'back', 'epic', 55, false),
+  ('mobfur', 'back', 'legendary', 90, false),
+  ('chillsweater', 'back', 'uncommon', 25, false)
 on conflict (id) do update set slot = excluded.slot, rarity = excluded.rarity, price = excluded.price, exclusive = excluded.exclusive;
 
 alter table public.pup_players add column if not exists wallet jsonb;

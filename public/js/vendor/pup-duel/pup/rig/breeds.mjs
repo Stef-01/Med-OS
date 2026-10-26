@@ -23,7 +23,7 @@ const flat = v => [[0, v], [7200, v]];   /* a value held through the whole 7.2 s
 export const BREEDS = {
   doberman: {
     name: 'Doberman',
-    build: { head: { h: 103, r: 22 }, muzzle: { w: 58, h: 44 }, eye: 1, pupil: 1, brow: { w: 12, h: 5.5, y: -53 },
+    build: { head: { h: 103, r: 22, jaw: 'wedge' }, muzzle: { w: 58, h: 44 }, eye: 1, pupil: 1, brow: { w: 12, h: 5.5, y: -53 },
       ears: ['up', 'up'], earShape: 'dober', foldable: false, body: { w: 108, h: 83 }, leg: 14, floorY: 80,
       tail: { len: [17, 15, 13], w: 12.5 }, wag: { slow: 14, fast: 28, amp: 34 }, hopH: 11, flopGain: 1, yaw0: 0.34, tongueSide: 0 }
   },
@@ -31,21 +31,21 @@ export const BREEDS = {
   // ears with a pink inner, a cream bib from the cheeks down the chest, a plume tail.
   pomeranian: {
     name: 'Pomeranian',
-    build: { head: { h: 92, r: 42 }, muzzle: { w: 44, h: 34 }, eye: 1.1, pupil: 0.95, brow: { w: 9, h: 4.5, y: -52 },
+    build: { head: { h: 92, r: 42, jaw: 'cheeky' }, muzzle: { w: 44, h: 34 }, eye: 1.1, pupil: 0.95, brow: { w: 9, h: 4.5, y: -52 },
       ears: ['up', 'up'], earShape: 'round', earScale: 0.8, foldable: false, mane: { rx: 58, ry: 46, n: 14, sc: 16 }, bib: true,
       body: { w: 98, h: 80 }, leg: 12, floorY: 70, tail: { len: [13, 12, 10], w: 24 }, wag: { slow: 20, fast: 34, amp: 40 },
       hopH: 13, flopGain: 1.5, yaw0: -0.3, tongueSide: 0 }
   },
   golden: {
     name: 'Golden Retriever', short: 'Golden',   // `short`: for a tile (the menus' dog picker); the name for everything else
-    build: { head: { h: 104, r: 34 }, muzzle: { w: 56, h: 44 }, eye: 1.04, pupil: 1, brow: { w: 11, h: 5, y: -52.5 },
+    build: { head: { h: 104, r: 34, jaw: 'cheeky' }, muzzle: { w: 56, h: 44 }, eye: 1.04, pupil: 1, brow: { w: 11, h: 5, y: -52.5 },
       ears: ['flop', 'flop'], flop: { w: 30, h: 46, shape: 'feather' }, earAt: { flop: { L: { x: -40, y: -45 }, R: { x: 42, y: -45 } } },
       body: { w: 112, h: 84 }, leg: 15, floorY: 84, tail: { len: [18, 17, 15], w: 20, inner: 7 },
-      wag: { slow: 14, fast: 30, amp: 36 }, hopH: 10, flopGain: 2.4, yaw0: 0.3, tongueSide: 0 }
+      wag: { slow: 14, fast: 30, amp: 36 }, hopH: 10, flopGain: 2.4, yaw0: 0.3, tongueSide: 0, eyes: 'sparkle' }
   },
   jack: {
     name: 'Jack Russell',
-    build: { head: { h: 98, r: 28 }, muzzle: { w: 54, h: 40 }, eye: 1.06, pupil: 0.95, brow: { w: 9, h: 4.5, y: -52 },
+    build: { head: { h: 98, r: 28, jaw: 'wedge' }, muzzle: { w: 54, h: 40 }, eye: 1.06, pupil: 0.95, brow: { w: 9, h: 4.5, y: -52 },
       // button ears: an up ear whose tip stays folded over; it lifts when the dog is called or surprised
       ears: ['up', 'up'], earShape: 'button', earScale: 0.74, foldable: true, foldIdle: { L: flat(1), R: flat(1) },
       body: { w: 100, h: 72 }, leg: 13, floorY: 76, tail: { len: [12, 11, 9], w: 10, rest: 30 },
@@ -53,7 +53,7 @@ export const BREEDS = {
   },
   corgi: {
     name: 'Corgi',
-    build: { head: { h: 96, r: 32 }, muzzle: { w: 60, h: 42 }, eye: 1.06, pupil: 1, brow: { w: 10, h: 5, y: -52.5 },
+    build: { head: { h: 96, r: 32, jaw: 'wedge' }, muzzle: { w: 60, h: 42 }, eye: 1.06, pupil: 1, brow: { w: 10, h: 5, y: -52.5 },
       ears: ['up', 'up'], earShape: 'bat', earScale: 1.12, earAt: { up: { L: { x: -29, y: -49 }, R: { x: 31, y: -49 } } },
       body: { w: 132, h: 70, legs: [24, 92, 114] }, leg: 15, floorY: 60, tail: { len: [8, 7, 6], w: 20 },
       wag: { slow: 24, fast: 40, amp: 50 }, hopH: 9, flopGain: 1.2, yaw0: 0.3, tongueSide: 1 }
@@ -67,54 +67,54 @@ export const BREEDS = {
   },
   husky: {
     name: 'Husky',
-    build: { head: { h: 100, r: 30 }, muzzle: { w: 54, h: 42 }, eye: 1.04, pupil: 0.95, brow: { w: 10, h: 5.5, y: -53 },
+    build: { head: { h: 100, r: 30, jaw: 'wedge' }, muzzle: { w: 54, h: 42 }, eye: 1.04, pupil: 0.95, brow: { w: 10, h: 5.5, y: -53 },
       ears: ['up', 'up'], earShape: 'prick', foldable: false, body: { w: 112, h: 82 }, leg: 14, floorY: 82,
       tail: { len: [16, 15, 13], w: 20, curl: 55, inner: 9, over: true }, bib: 'chest',
-      wag: { slow: 12, fast: 24, amp: 26 }, hopH: 10, flopGain: 1, yaw0: 0.32, tongueSide: 0 }
+      wag: { slow: 12, fast: 24, amp: 26 }, hopH: 10, flopGain: 1, yaw0: 0.32, tongueSide: 0, iris: 'ice' }
   },
   pug: {
     name: 'Pug',
-    build: { head: { h: 92, r: 44 }, muzzle: { w: 62, h: 34, r: 14 }, eye: 1.16, pupil: 1.05, brow: { w: 9, h: 4.5, y: -51.5 },
+    build: { head: { h: 92, r: 44, jaw: 'square' }, muzzle: { w: 62, h: 34, r: 14 }, eye: 1.16, pupil: 1.05, brow: { w: 9, h: 4.5, y: -51.5 },
       ears: ['flop', 'flop'], flop: { w: 20, h: 18, shape: 'rose' }, earAt: { flop: { L: { x: -40, y: -46 }, R: { x: 42, y: -46 } } },
       body: { w: 104, h: 86 }, leg: 13, floorY: 76, tail: { len: [9, 8, 7], w: 13, curl: 80, rest: 10, over: true, inner: 5 },
-      wag: { slow: 20, fast: 36, amp: 30 }, hopH: 9, flopGain: 2, yaw0: -0.3, tongueSide: 1 }
+      wag: { slow: 20, fast: 36, amp: 30 }, hopH: 9, flopGain: 2, yaw0: -0.3, tongueSide: 1, eyes: 'round' }
   },
   dalmatian: {
     name: 'Dalmatian',
-    build: { head: { h: 104, r: 24 }, muzzle: { w: 56, h: 46 }, eye: 1, pupil: 1, brow: { w: 11, h: 5, y: -53 },
+    build: { head: { h: 104, r: 24, jaw: 'wedge' }, muzzle: { w: 56, h: 46 }, eye: 1, pupil: 1, brow: { w: 11, h: 5, y: -53 },
       ears: ['flop', 'flop'], flop: { w: 24, h: 40 }, body: { w: 112, h: 82 }, leg: 14, floorY: 86,
       tail: { len: [18, 16, 15], w: 11, dots: 6 }, wag: { slow: 14, fast: 28, amp: 32 }, hopH: 11, flopGain: 2, yaw0: 0.3, tongueSide: 0 }
   },
   shiba: {
     name: 'Shiba Inu',
-    build: { head: { h: 98, r: 32 }, muzzle: { w: 52, h: 40 }, eye: 1.02, pupil: 0.95, brow: { w: 8, h: 5, y: -52 },
+    build: { head: { h: 98, r: 32, jaw: 'wedge' }, muzzle: { w: 52, h: 40 }, eye: 1.02, pupil: 0.95, brow: { w: 8, h: 5, y: -52 },
       ears: ['up', 'up'], earShape: 'prick', earScale: 0.86, body: { w: 104, h: 78 }, leg: 13, floorY: 78,
       tail: { len: [15, 14, 12], w: 22, curl: 65, inner: 10, over: true }, bib: 'chest',
-      wag: { slow: 16, fast: 30, amp: 28 }, hopH: 11, flopGain: 1, yaw0: -0.3, tongueSide: 0 }
+      wag: { slow: 16, fast: 30, amp: 28 }, hopH: 11, flopGain: 1, yaw0: -0.3, tongueSide: 0, eyes: 'bead', sclera: false }
   },
   // Beagle: a tricolour hound: a tan head with a white blaze and muzzle, long low-set ears, a black saddle on a white
   // body, the tail carried high with a white tip (its one spot: a dotted line's second dot, 2.2 × dots along it, falls
   // at its end; `at` roots it a dot's radius inside the body, which hides the first)
   beagle: {
     name: 'Beagle',
-    build: { head: { h: 100, r: 30 }, muzzle: { w: 54, h: 46 }, eye: 1.06, pupil: 1.04, brow: { w: 10, h: 5, y: -52.5 },
+    build: { head: { h: 100, r: 30, jaw: 'cheeky' }, muzzle: { w: 54, h: 46 }, eye: 1.06, pupil: 1.04, brow: { w: 10, h: 5, y: -52.5 },
       ears: ['flop', 'flop'], flop: { w: 28, h: 58, shape: 'long' }, earAt: { flop: { L: { x: -40, y: -42 }, R: { x: 42, y: -42 } } },
       body: { w: 126, h: 76 }, leg: 14, floorY: 80, tail: { len: [12, 11, 10], w: 11, rest: 26, curl: -4, dots: 14.2, at: [19.7, -7.3] },
-      wag: { slow: 18, fast: 36, amp: 40 }, hopH: 12, flopGain: 2.6, yaw0: 0.3, tongueSide: 0 }
+      wag: { slow: 18, fast: 36, amp: 40 }, hopH: 12, flopGain: 2.6, yaw0: 0.3, tongueSide: 0, lidBase: 0.28 }
   },
   // French Bulldog: a square head with a short, wide, flat face, broad bat ears, a compact body on short legs, a stub tail
   frenchie: {
     name: 'French Bulldog', short: 'Frenchie',
-    build: { head: { h: 92, r: 26 }, muzzle: { w: 66, h: 32, r: 15 }, eye: 1.12, pupil: 1.04, brow: { w: 9, h: 4.5, y: -51.5 },
+    build: { head: { h: 92, r: 26, jaw: 'square' }, muzzle: { w: 66, h: 32, r: 15 }, eye: 1.12, pupil: 1.04, brow: { w: 9, h: 4.5, y: -51.5 },
       ears: ['up', 'up'], earShape: 'frenchie', earScale: 0.92, earAt: { up: { L: { x: -32, y: -46 }, R: { x: 34, y: -46 } } },
       body: { w: 100, h: 78 }, leg: 15, floorY: 70, tail: { len: [6, 5, 4], w: 12, rest: 10 },
-      wag: { slow: 22, fast: 40, amp: 36 }, hopH: 10, flopGain: 1.2, yaw0: -0.3, tongueSide: 1 }
+      wag: { slow: 22, fast: 40, amp: 36 }, hopH: 10, flopGain: 1.2, yaw0: -0.3, tongueSide: 1, eyes: 'round' }
   },
   // Border Collie: black and white (a white blaze, muzzle and collar), semi-erect ears whose tips fold over, a long low
   // tail that sweeps up at its end
   collie: {
     name: 'Border Collie',
-    build: { head: { h: 100, r: 30 }, muzzle: { w: 48, h: 44 }, eye: 1.04, pupil: 0.95, brow: { w: 10, h: 5, y: -53 },
+    build: { head: { h: 100, r: 30, jaw: 'wedge' }, muzzle: { w: 48, h: 44 }, eye: 1.04, pupil: 0.95, brow: { w: 10, h: 5, y: -53 },
       ears: ['up', 'up'], earShape: 'prick', earScale: 1, foldable: true, foldIdle: { L: flat(1), R: flat(1) }, bib: 'chest',
       body: { w: 112, h: 76 }, leg: 13, floorY: 80, tail: { len: [17, 16, 14], w: 12, rest: -62, curl: 14 },
       wag: { slow: 14, fast: 30, amp: 30 }, hopH: 13, flopGain: 1.4, yaw0: 0.32, tongueSide: 1 }
@@ -122,7 +122,7 @@ export const BREEDS = {
   // Labrador Retriever: one plain coat, a broad head and muzzle, soft drop ears, the otter tail: thick, straight, carried out
   lab: {
     name: 'Labrador Retriever', short: 'Labrador',
-    build: { head: { h: 104, r: 30 }, muzzle: { w: 58, h: 46 }, eye: 1.02, pupil: 1.05, brow: { w: 11, h: 5, y: -52.5 },
+    build: { head: { h: 104, r: 30, jaw: 'square' }, muzzle: { w: 58, h: 46 }, eye: 1.02, pupil: 1.05, brow: { w: 11, h: 5, y: -52.5 },
       ears: ['flop', 'flop'], flop: { w: 27, h: 44 }, earAt: { flop: { L: { x: -41, y: -44 }, R: { x: 43, y: -44 } } },
       body: { w: 116, h: 84 }, leg: 15, floorY: 84, tail: { len: [16, 15, 13], w: 17, rest: -20, curl: -9 },
       wag: { slow: 16, fast: 34, amp: 42 }, hopH: 11, flopGain: 2.2, yaw0: 0.3, tongueSide: 0 }
@@ -131,36 +131,36 @@ export const BREEDS = {
   // a plume curled over the back
   samoyed: {
     name: 'Samoyed',
-    build: { head: { h: 98, r: 38 }, muzzle: { w: 50, h: 40 }, eye: 1.04, pupil: 1, brow: { w: 9, h: 4.5, y: -52 },
+    build: { head: { h: 98, r: 38, jaw: 'cheeky' }, muzzle: { w: 50, h: 40 }, eye: 1.04, pupil: 1, brow: { w: 9, h: 4.5, y: -52 },
       ears: ['up', 'up'], earShape: 'prick', earScale: 0.72, mane: { rx: 56, ry: 47, n: 16, sc: 15 }, bib: 'chest',
       body: { w: 112, h: 86 }, leg: 15, floorY: 84, tail: { len: [16, 15, 13], w: 26, curl: 60, inner: 12, over: true },
-      wag: { slow: 14, fast: 28, amp: 32 }, hopH: 11, flopGain: 1, yaw0: 0.3, tongueSide: 0 }
+      wag: { slow: 14, fast: 28, amp: 32 }, hopH: 11, flopGain: 1, yaw0: 0.3, tongueSide: 0, eyes: 'bead', sclera: false }
   },
   // Chihuahua: a small domed apple head with huge eyes and a short snout, enormous ears, a tiny body on thin legs, a
   // thin sickle tail
   chihuahua: {
     name: 'Chihuahua',
-    build: { head: { h: 90, r: 46 }, muzzle: { w: 40, h: 30 }, eye: 1.16, pupil: 1.06, brow: { w: 8, h: 4, y: -53.6 },
+    build: { head: { h: 90, r: 46, jaw: 'wedge' }, muzzle: { w: 40, h: 30 }, eye: 1.16, pupil: 1.06, brow: { w: 8, h: 4, y: -53.6 },
       ears: ['up', 'up'], earShape: 'chi', earScale: 1.2, earAt: { up: { L: { x: -36, y: -41 }, R: { x: 38, y: -41 } } },
       body: { w: 102, h: 60 }, leg: 10, floorY: 66, tail: { len: [11, 10, 9], w: 7, rest: 22, curl: 14 },
-      wag: { slow: 22, fast: 40, amp: 46 }, hopH: 15, flopGain: 1.5, yaw0: -0.3, tongueSide: 1 }
+      wag: { slow: 22, fast: 40, amp: 46 }, hopH: 15, flopGain: 1.5, yaw0: -0.3, tongueSide: 1, eyes: 'round' }
   },
   // Poodle, in a show clip: a topknot (a tall mane: its crown over the head, its fluff under the chin, its sides behind
   // the ears), ears of curls, a shaved face and hindquarters on long legs, a rosette on the hip, pom-pom bracelets (its
   // feet) and the pom-pom tail (its one spot, at the end)
   poodle: {
     name: 'Poodle',
-    build: { head: { h: 100, r: 30 }, muzzle: { w: 44, h: 46 }, eye: 1, pupil: 1, brow: { w: 9, h: 4.5, y: -52.5 },
+    build: { head: { h: 100, r: 30, jaw: 'cheeky' }, muzzle: { w: 44, h: 46 }, eye: 1, pupil: 1, brow: { w: 9, h: 4.5, y: -52.5 },
       ears: ['flop', 'flop'], flop: { w: 30, h: 56, shape: 'puff' }, earAt: { flop: { L: { x: -40, y: -44 }, R: { x: 42, y: -44 } } },
       mane: { rx: 42, ry: 58, n: 14, sc: 15 }, body: { w: 120, h: 70 }, leg: 12, floorY: 86,
       tail: { len: [10.5, 9.5, 9], w: 6, rest: 28, curl: -9, dots: 12.6, at: [18.2, -8.2] },
-      wag: { slow: 18, fast: 34, amp: 34 }, hopH: 13, flopGain: 2.4, yaw0: -0.3, tongueSide: 0 }
+      wag: { slow: 18, fast: 34, amp: 34 }, hopH: 13, flopGain: 2.4, yaw0: -0.3, tongueSide: 0, eyes: 'bead', sclera: false }
   },
   // Bernese Mountain Dog: big and fluffy, tricolour: a black coat, a white blaze, muzzle and chest, rust brows and
   // cheeks, feathered drop ears, a bushy tail carried low that sweeps up at its end
   bernese: {
     name: 'Bernese Mountain Dog', short: 'Bernese',
-    build: { head: { h: 104, r: 32 }, muzzle: { w: 54, h: 44 }, eye: 1.02, pupil: 1, brow: { w: 11, h: 5.5, y: -52.5 },
+    build: { head: { h: 104, r: 32, jaw: 'square' }, muzzle: { w: 54, h: 44 }, eye: 1.02, pupil: 1, brow: { w: 11, h: 5.5, y: -52.5 },
       ears: ['flop', 'flop'], flop: { w: 30, h: 40, shape: 'feather' }, earAt: { flop: { L: { x: -40, y: -46 }, R: { x: 42, y: -46 } } },
       bib: 'chest', body: { w: 122, h: 88 }, leg: 16, floorY: 86,
       tail: { len: [14, 13, 12], w: 18, rest: -70, curl: 16, inner: 8, at: [12.5, 14] },
@@ -173,7 +173,7 @@ export const BREEDS = {
   // German Shepherd: tall prick ears, a black saddle and a dark bridge down to the nose on tan, a bushy tail carried low
   german: {
     name: 'German Shepherd', short: 'Shepherd',
-    build: { head: { h: 102, r: 28 }, muzzle: { w: 50, h: 46 }, eye: 1.02, pupil: 0.95, brow: { w: 10, h: 5, y: -53 },
+    build: { head: { h: 102, r: 28, jaw: 'wedge' }, muzzle: { w: 50, h: 46 }, eye: 1.02, pupil: 0.95, brow: { w: 10, h: 5, y: -53 },
       ears: ['up', 'up'], earShape: 'prick', earScale: 1.28, earAt: { up: { L: { x: -30, y: -48 }, R: { x: 32, y: -48 } } },
       body: { w: 120, h: 80 }, leg: 14, floorY: 84, tail: { len: [17, 16, 15], w: 18, rest: -66, curl: 12, inner: 7 },
       wag: { slow: 14, fast: 28, amp: 30 }, hopH: 10, flopGain: 1.2, yaw0: 0.32, tongueSide: 0,
@@ -187,7 +187,7 @@ export const BREEDS = {
   // banned in Australia)
   rottweiler: {
     name: 'Rottweiler', short: 'Rottie',
-    build: { head: { h: 100, r: 26 }, muzzle: { w: 58, h: 42 }, eye: 1.02, pupil: 1, brow: { w: 11, h: 6, y: -53 },
+    build: { head: { h: 100, r: 26, jaw: 'square' }, muzzle: { w: 58, h: 42 }, eye: 1.02, pupil: 1, brow: { w: 11, h: 6, y: -53 },
       ears: ['flop', 'flop'], flop: { w: 26, h: 30, shape: 'tri' }, earAt: { flop: { L: { x: -38, y: -49 }, R: { x: 40, y: -49 } } },
       body: { w: 116, h: 88 }, leg: 16, floorY: 82, tail: { len: [15, 14, 12], w: 13, rest: -18, curl: -4 },
       wag: { slow: 14, fast: 28, amp: 34 }, hopH: 9, flopGain: 1.8, yaw0: -0.3, tongueSide: 0 }
@@ -195,15 +195,15 @@ export const BREEDS = {
   // Boxer: fawn with a black mask, a white blaze and chest, a short wide muzzle with jowls, high drop ears
   boxer: {
     name: 'Boxer',
-    build: { head: { h: 98, r: 24 }, muzzle: { w: 62, h: 36, r: 14 }, eye: 1.08, pupil: 1, brow: { w: 9, h: 4.5, y: -52 },
+    build: { head: { h: 98, r: 24, jaw: 'square' }, muzzle: { w: 62, h: 36, r: 14 }, eye: 1.08, pupil: 1, brow: { w: 9, h: 4.5, y: -52 },
       ears: ['flop', 'flop'], flop: { w: 24, h: 28, shape: 'tri' }, earAt: { flop: { L: { x: -38, y: -51 }, R: { x: 40, y: -51 } } },
       bib: 'chest', body: { w: 110, h: 80 }, leg: 15, floorY: 86, tail: { len: [14, 13, 11], w: 10, rest: -6, curl: 6 },
-      wag: { slow: 22, fast: 40, amp: 48 }, hopH: 14, flopGain: 2, yaw0: 0.3, tongueSide: 1 }
+      wag: { slow: 22, fast: 40, amp: 48 }, hopH: 14, flopGain: 2, yaw0: 0.3, tongueSide: 1, eyes: 'round' }
   },
   // English Bulldog: low and wide, the widest muzzle in the kit with jowls hanging past it, small rose ears, a screw tail
   bulldog: {
     name: 'English Bulldog', short: 'Bulldog',
-    build: { head: { h: 96, r: 30 }, muzzle: { w: 74, h: 34, r: 16 }, eye: 1.1, pupil: 1, brow: { w: 10, h: 4.5, y: -51.5 },
+    build: { head: { h: 96, r: 30, jaw: 'square' }, muzzle: { w: 74, h: 34, r: 16 }, eye: 1.1, pupil: 1, brow: { w: 10, h: 4.5, y: -51.5 },
       ears: ['flop', 'flop'], flop: { w: 20, h: 18, shape: 'rose' }, earAt: { flop: { L: { x: -42, y: -48 }, R: { x: 44, y: -48 } } },
       body: { w: 116, h: 80 }, leg: 16, floorY: 66, tail: { len: [6, 5, 4], w: 11, rest: 40, curl: -40 },
       wag: { slow: 16, fast: 28, amp: 26 }, hopH: 7, flopGain: 1.6, yaw0: -0.3, tongueSide: 1 }
@@ -211,39 +211,39 @@ export const BREEDS = {
   // Cavalier King Charles Spaniel: a domed head, big round eyes, long silky ears, Blenheim chestnut on white
   cavalier: {
     name: 'Cavalier King Charles', short: 'Cavalier',
-    build: { head: { h: 96, r: 34 }, muzzle: { w: 46, h: 36 }, eye: 1.14, pupil: 1.06, brow: { w: 9, h: 4.5, y: -52 },
+    build: { head: { h: 96, r: 34, jaw: 'cheeky' }, muzzle: { w: 46, h: 36 }, eye: 1.14, pupil: 1.06, brow: { w: 9, h: 4.5, y: -52 },
       ears: ['flop', 'flop'], flop: { w: 30, h: 58, shape: 'silk' }, earAt: { flop: { L: { x: -42, y: -46 }, R: { x: 44, y: -46 } } },
       body: { w: 104, h: 74 }, leg: 12, floorY: 70, tail: { len: [14, 13, 11], w: 14, rest: 10, curl: -6, inner: 6 },
-      wag: { slow: 20, fast: 36, amp: 44 }, hopH: 12, flopGain: 2.6, yaw0: 0.3, tongueSide: 0 }
+      wag: { slow: 20, fast: 36, amp: 44 }, hopH: 12, flopGain: 2.6, yaw0: 0.3, tongueSide: 0, eyes: 'round' }
   },
   // Shih Tzu: a round face in long hair: a white blaze and moustache, gold silk ears to the chin, a plume over the back
   shihtzu: {
     name: 'Shih Tzu',
-    build: { head: { h: 92, r: 42 }, muzzle: { w: 44, h: 32 }, eye: 1.1, pupil: 1.04, brow: { w: 9, h: 4.5, y: -52 },
+    build: { head: { h: 92, r: 42, jaw: 'cheeky' }, muzzle: { w: 44, h: 32 }, eye: 1.1, pupil: 1.04, brow: { w: 9, h: 4.5, y: -52 },
       ears: ['flop', 'flop'], flop: { w: 32, h: 62, shape: 'silk' }, earAt: { flop: { L: { x: -42, y: -44 }, R: { x: 44, y: -44 } } },
       body: { w: 100, h: 72 }, leg: 11, floorY: 66, tail: { len: [12, 11, 10], w: 18, curl: 60, inner: 8, over: true },
-      wag: { slow: 18, fast: 32, amp: 30 }, hopH: 12, flopGain: 2.4, yaw0: -0.3, tongueSide: 1 }
+      wag: { slow: 18, fast: 32, amp: 30 }, hopH: 12, flopGain: 2.4, yaw0: -0.3, tongueSide: 1, eyes: 'bead', sclera: false }
   },
   // Yorkshire Terrier: tiny, a tan head with small V prick ears, a steel-blue body, a tail carried high
   yorkie: {
     name: 'Yorkshire Terrier', short: 'Yorkie',
-    build: { head: { h: 94, r: 34 }, muzzle: { w: 42, h: 34 }, eye: 1.1, pupil: 1, brow: { w: 8, h: 4, y: -52 },
+    build: { head: { h: 94, r: 34, jaw: 'cheeky' }, muzzle: { w: 42, h: 34 }, eye: 1.1, pupil: 1, brow: { w: 8, h: 4, y: -52 },
       ears: ['up', 'up'], earShape: 'prick', earScale: 0.8, earAt: { up: { L: { x: -27, y: -50 }, R: { x: 29, y: -50 } } },
       body: { w: 98, h: 70 }, leg: 11, floorY: 70, tail: { len: [12, 11, 9], w: 9, rest: 24, curl: 10 },
-      wag: { slow: 22, fast: 40, amp: 46 }, hopH: 15, flopGain: 1.5, yaw0: -0.3, tongueSide: 1 }
+      wag: { slow: 22, fast: 40, amp: 46 }, hopH: 15, flopGain: 1.5, yaw0: -0.3, tongueSide: 1, eyes: 'bead', sclera: false }
   },
   // Australian Shepherd: blue merle patches, copper brows and cheeks, a white blaze and chest, tipped ears, a bobtail
   aussie: {
     name: 'Australian Shepherd', short: 'Aussie',
-    build: { head: { h: 100, r: 30 }, muzzle: { w: 50, h: 44 }, eye: 1.04, pupil: 0.95, brow: { w: 10, h: 5, y: -53 },
+    build: { head: { h: 100, r: 30, jaw: 'wedge' }, muzzle: { w: 50, h: 44 }, eye: 1.04, pupil: 0.95, brow: { w: 10, h: 5, y: -53 },
       ears: ['up', 'up'], earShape: 'prick', earScale: 0.94, foldable: true, foldIdle: { L: flat(1), R: flat(1) }, bib: 'chest',
       body: { w: 112, h: 78 }, leg: 14, floorY: 80, tail: { len: [5, 4, 3], w: 14, rest: 20 },
-      wag: { slow: 22, fast: 40, amp: 50 }, hopH: 13, flopGain: 1.4, yaw0: 0.32, tongueSide: 1 }
+      wag: { slow: 22, fast: 40, amp: 50 }, hopH: 13, flopGain: 1.4, yaw0: 0.32, tongueSide: 1, iris: 'blue' }
   },
   // Whippet: all legs: a slim body high off the ground, a long narrow muzzle, rose ears folded back, a low tucked tail
   whippet: {
     name: 'Whippet',
-    build: { head: { h: 100, r: 26 }, muzzle: { w: 44, h: 50 }, eye: 1, pupil: 1, brow: { w: 9, h: 4.5, y: -53 },
+    build: { head: { h: 100, r: 26, jaw: 'wedge' }, muzzle: { w: 44, h: 50 }, eye: 1, pupil: 1, brow: { w: 9, h: 4.5, y: -53 },
       ears: ['flop', 'flop'], flop: { w: 18, h: 22, shape: 'rose' }, earAt: { flop: { L: { x: -36, y: -52 }, R: { x: 38, y: -52 } } },
       body: { w: 118, h: 56 }, leg: 10, floorY: 96, tail: { len: [18, 17, 16], w: 6, rest: -84, curl: 22 },
       wag: { slow: 14, fast: 30, amp: 30 }, hopH: 14, flopGain: 2, yaw0: 0.3, tongueSide: 0 }
@@ -256,12 +256,12 @@ export const BREEDS = {
       ears: ['flop', 'flop'], flop: { w: 30, h: 74, shape: 'long' }, earAt: { flop: { L: { x: -40, y: -40 }, R: { x: 42, y: -40 } } },
       body: { w: 150, h: 66, legs: [22, 104, 132] }, leg: 15, floorY: 58,
       tail: { len: [16, 15, 14], w: 10, rest: 30, curl: -4 },
-      wag: { slow: 14, fast: 26, amp: 30 }, hopH: 6, flopGain: 3, yaw0: -0.3, tongueSide: 0 }
+      wag: { slow: 14, fast: 26, amp: 30 }, hopH: 6, flopGain: 3, yaw0: -0.3, tongueSide: 0, lidBase: 0.28 }
   },
   // Great Dane: the tallest: a long square head, high-set drop ears, long legs, a long tail
   dane: {
     name: 'Great Dane', short: 'Dane',
-    build: { head: { h: 108, r: 24 }, muzzle: { w: 58, h: 52 }, eye: 0.98, pupil: 1, brow: { w: 11, h: 5.5, y: -53 },
+    build: { head: { h: 108, r: 24, jaw: 'square' }, muzzle: { w: 58, h: 52 }, eye: 0.98, pupil: 1, brow: { w: 11, h: 5.5, y: -53 },
       ears: ['flop', 'flop'], flop: { w: 22, h: 34 }, earAt: { flop: { L: { x: -38, y: -50 }, R: { x: 40, y: -50 } } },
       body: { w: 124, h: 78 }, leg: 16, floorY: 104, tail: { len: [20, 18, 16], w: 10, rest: -40, curl: 6 },
       wag: { slow: 12, fast: 24, amp: 30 }, hopH: 8, flopGain: 2, yaw0: 0.3, tongueSide: 0 }
@@ -269,10 +269,10 @@ export const BREEDS = {
   // Saint Bernard: huge, red and white, a dark mask round the eyes, a white blaze, muzzle and chest, a bushy low tail
   stbernard: {
     name: 'Saint Bernard', short: 'St Bernard',
-    build: { head: { h: 106, r: 32 }, muzzle: { w: 60, h: 48 }, eye: 1, pupil: 1, brow: { w: 11, h: 5.5, y: -53 },
+    build: { head: { h: 106, r: 32, jaw: 'square' }, muzzle: { w: 60, h: 48 }, eye: 1, pupil: 1, brow: { w: 11, h: 5.5, y: -53 },
       ears: ['flop', 'flop'], flop: { w: 30, h: 38, shape: 'feather' }, earAt: { flop: { L: { x: -41, y: -46 }, R: { x: 43, y: -46 } } },
       bib: 'chest', body: { w: 126, h: 90 }, leg: 17, floorY: 88, tail: { len: [16, 15, 14], w: 18, rest: -66, curl: 14, inner: 7 },
-      wag: { slow: 12, fast: 24, amp: 28 }, hopH: 8, flopGain: 2.2, yaw0: -0.3, tongueSide: 0 }
+      wag: { slow: 12, fast: 24, amp: 28 }, hopH: 8, flopGain: 2.2, yaw0: -0.3, tongueSide: 0, lidBase: 0.28 }
   },
   // The Eevee family (founder 2026-10-26: "Put in Evee from pokemon as one of the dogs, and all of the eeveelutions,
   // and they only are unlocked when you type pokemon in the special gift section"): a fox-like head with huge eyes and
@@ -280,41 +280,41 @@ export const BREEDS = {
   // colours and marks), each carries `gift: 'pokemon'`: a host lists it only once that gift is redeemed (gifts.mjs)
   eevee: {
     name: 'Eevee family', short: 'Eevee',
-    build: { head: { h: 92, r: 42 }, muzzle: { w: 38, h: 28 }, eye: 1.24, pupil: 1.08, brow: { w: 7, h: 3.6, y: -52 },
+    build: { head: { h: 92, r: 42, jaw: 'round' }, muzzle: { w: 38, h: 28 }, eye: 1.24, pupil: 1.08, brow: { w: 7, h: 3.6, y: -52 },
       ears: ['up', 'up'], earShape: 'chi', earScale: 1.4, earAt: { up: { L: { x: -34, y: -42 }, R: { x: 36, y: -42 } } },
       foldable: false, body: { w: 96, h: 70 }, leg: 12, floorY: 68, tail: { len: [16, 15, 14], w: 26, curl: 50, inner: 12, over: true },
-      wag: { slow: 18, fast: 34, amp: 36 }, hopH: 13, flopGain: 1.2, yaw0: -0.3, tongueSide: 0 }
+      wag: { slow: 18, fast: 34, amp: 36 }, hopH: 13, flopGain: 1.2, yaw0: -0.3, tongueSide: 0, eyes: 'sparkle' }
   },
   // Chow Chow: a lion's mane, small round ears half in it, a short flat muzzle, deep-set eyes, the blue-black tongue
   chow: {
     name: 'Chow Chow', short: 'Chow',
-    build: { head: { h: 94, r: 40 }, muzzle: { w: 50, h: 34, r: 14 }, eye: 0.96, pupil: 0.9, brow: { w: 10, h: 5, y: -51 },
+    build: { head: { h: 94, r: 40, jaw: 'cheeky' }, muzzle: { w: 50, h: 34, r: 14 }, eye: 0.96, pupil: 0.9, brow: { w: 10, h: 5, y: -51 },
       ears: ['up', 'up'], earShape: 'round', earScale: 0.62, earAt: { up: { L: { x: -34, y: -48 }, R: { x: 36, y: -48 } } },
       mane: { rx: 62, ry: 52, n: 16, sc: 18 }, body: { w: 112, h: 86 }, leg: 16, floorY: 76,
       tail: { len: [14, 13, 11], w: 24, curl: 60, inner: 10, over: true },
-      wag: { slow: 10, fast: 22, amp: 22 }, hopH: 8, flopGain: 1, yaw0: 0.3, tongueSide: 0 }
+      wag: { slow: 10, fast: 22, amp: 22 }, hopH: 8, flopGain: 1, yaw0: 0.3, tongueSide: 0, eyes: 'bead', sclera: false }
   },
   // Miniature Schnauzer: a boxy head, bushy brows and a beard, folded V ears, salt and pepper
   schnauzer: {
     name: 'Schnauzer',
-    build: { head: { h: 100, r: 22 }, muzzle: { w: 50, h: 44, r: 8 }, eye: 1, pupil: 0.95, brow: { w: 17, h: 8, y: -55 },
+    build: { head: { h: 100, r: 22, jaw: 'square' }, muzzle: { w: 50, h: 44, r: 8 }, eye: 1, pupil: 0.95, brow: { w: 17, h: 8, y: -55 },
       ears: ['up', 'up'], earShape: 'button', earScale: 0.84, foldable: true, foldIdle: { L: flat(1), R: flat(1) },
       body: { w: 108, h: 76 }, leg: 14, floorY: 80, tail: { len: [11, 10, 9], w: 10, rest: 24, curl: 6 },
-      wag: { slow: 18, fast: 34, amp: 40 }, hopH: 12, flopGain: 1.6, yaw0: 0.3, tongueSide: 0 }
+      wag: { slow: 18, fast: 34, amp: 40 }, hopH: 12, flopGain: 1.6, yaw0: 0.3, tongueSide: 0, eyes: 'bead', sclera: false }
   },
   // Weimaraner: the grey ghost: one silver coat, amber eyes, a pink-grey nose, long drop ears
   weimaraner: {
     name: 'Weimaraner', short: 'Weim',
-    build: { head: { h: 104, r: 26 }, muzzle: { w: 52, h: 48 }, eye: 1, pupil: 1, brow: { w: 10, h: 5, y: -53 },
+    build: { head: { h: 104, r: 26, jaw: 'wedge' }, muzzle: { w: 52, h: 48 }, eye: 1, pupil: 1, brow: { w: 10, h: 5, y: -53 },
       ears: ['flop', 'flop'], flop: { w: 28, h: 50, shape: 'long' }, earAt: { flop: { L: { x: -40, y: -46 }, R: { x: 42, y: -46 } } },
       body: { w: 118, h: 80 }, leg: 14, floorY: 88, tail: { len: [16, 15, 13], w: 10, rest: -10, curl: -4 },
-      wag: { slow: 16, fast: 32, amp: 38 }, hopH: 11, flopGain: 2.2, yaw0: -0.3, tongueSide: 0 }
+      wag: { slow: 16, fast: 32, amp: 38 }, hopH: 11, flopGain: 2.2, yaw0: -0.3, tongueSide: 0, iris: 'amber' }
   },
   // Australian Cattle Dog (the blue heeler): speckled, a dark mask over one eye, a white star on the forehead, tan
   // brows and cheeks, broad prick ears, a low brush tail
   heeler: {
     name: 'Australian Cattle Dog', short: 'Heeler',
-    build: { head: { h: 100, r: 30 }, muzzle: { w: 52, h: 42 }, eye: 1.04, pupil: 0.95, brow: { w: 10, h: 5, y: -53 },
+    build: { head: { h: 100, r: 30, jaw: 'wedge' }, muzzle: { w: 52, h: 42 }, eye: 1.04, pupil: 0.95, brow: { w: 10, h: 5, y: -53 },
       ears: ['up', 'up'], earShape: 'prick', earScale: 1.06, earAt: { up: { L: { x: -30, y: -49 }, R: { x: 32, y: -49 } } },
       body: { w: 110, h: 78 }, leg: 14, floorY: 80, tail: { len: [16, 15, 13], w: 13, rest: -58, curl: 10 },
       wag: { slow: 16, fast: 32, amp: 36 }, hopH: 13, flopGain: 1.2, yaw0: 0.32, tongueSide: 1,
@@ -330,11 +330,11 @@ export const BREEDS = {
   // head, ears of curls, a fluffy muzzle
   cavoodle: {
     name: 'Cavoodle',
-    build: { head: { h: 94, r: 42 }, muzzle: { w: 46, h: 36 }, eye: 1.1, pupil: 1.04, brow: { w: 9, h: 4.5, y: -52 },
+    build: { head: { h: 94, r: 42, jaw: 'cheeky' }, muzzle: { w: 46, h: 36 }, eye: 1.1, pupil: 1.04, brow: { w: 9, h: 4.5, y: -52 },
       ears: ['flop', 'flop'], flop: { w: 30, h: 48, shape: 'puff' }, earAt: { flop: { L: { x: -42, y: -44 }, R: { x: 44, y: -44 } } },
       mane: { rx: 52, ry: 50, n: 18, sc: 11 }, body: { w: 102, h: 76 }, leg: 13, floorY: 72,
       tail: { len: [12, 11, 10], w: 18, rest: 20, curl: 8 },
-      wag: { slow: 22, fast: 38, amp: 46 }, hopH: 13, flopGain: 2.4, yaw0: 0.3, tongueSide: 1,
+      wag: { slow: 22, fast: 38, amp: 46 }, hopH: 13, flopGain: 2.4, yaw0: 0.3, tongueSide: 1, eyes: 'bead', sclera: false,
       marks: [
         { on: 'snout', svg: '<circle cx="-16" cy="10" r="10" fill="{fluff}"/><circle cx="1" cy="16" r="11" fill="{fluff}"/><circle cx="18" cy="10" r="10" fill="{fluff}"/>' }
       ] }
@@ -342,7 +342,7 @@ export const BREEDS = {
   // Staffordshire Bull Terrier: a broad head and cheeks, the widest grin, small rose ears, a white chest, muscle
   staffy: {
     name: 'Staffordshire Bull Terrier', short: 'Staffy',
-    build: { head: { h: 96, r: 26 }, muzzle: { w: 62, h: 40, r: 12 }, eye: 1.04, pupil: 1, brow: { w: 10, h: 5, y: -52.5 },
+    build: { head: { h: 96, r: 26, jaw: 'square' }, muzzle: { w: 62, h: 40, r: 12 }, eye: 1.04, pupil: 1, brow: { w: 10, h: 5, y: -52.5 },
       ears: ['flop', 'flop'], flop: { w: 22, h: 20, shape: 'rose' }, earAt: { flop: { L: { x: -40, y: -50 }, R: { x: 42, y: -50 } } },
       body: { w: 108, h: 84 }, leg: 16, floorY: 76, tail: { len: [14, 12, 10], w: 10, rest: -20, curl: -6 },
       wag: { slow: 20, fast: 38, amp: 48 }, hopH: 12, flopGain: 1.6, yaw0: -0.3, tongueSide: 1 }
@@ -688,14 +688,14 @@ export const DOGS = [
     pal: { coat: '#e7b268', sh: '#cf9a50', tan: '#fbf0d8', tanSh: '#f0dfbc', feature: '#8a5a1e', ink: '#2b1a0a', nose: '#2b1a0a',
       noseHi: '#5e4228', collar: '#ff4b4b', disc: '#fff6e0', floor: '#ffe3b0', urajiro: '#fbf0d8', brow: '#fbf0d8', earIn: '#fbf0d8',
       tail: '#dba25a', tailIn: '#fbf0d8', bib: '#fbf0d8', bibSh: '#efdcb8', foot: '#fbf0d8', footFar: '#f0dfbc' } },
-  { id: 'eevee', name: 'Eevee', breed: 'eevee', gift: 'pokemon', hint: 'Could become anything', expr: 'excited', scale: 1.34, mirror: false,
+  { id: 'eevee', name: 'Eevee', breed: 'eevee', gift: 'pokemon', hint: 'Could become anything', expr: 'excited', scale: 1.34, mirror: false, iris: 'brown', eyes: 'sparkle', blushMode: 'on',
     marks: [
       { on: 'behind', svg: RUFF('{ruffSh}', '{ruff}') },
       { on: 'earL', svg: EARTIP('{earTip}') }, { on: 'earR', svg: EARTIP('{earTip}') }
     ],
     pal: { tag: '#dd9550', tagSh: '#c47d3c', coat: '#dd9550', sh: '#c47d3c', tan: '#e6a463', tanSh: '#d38f50', muzzle: '#e6a463', brow: '#e6a463', ink: '#2a1608', nose: '#3a2010', noseHi: '#6a4630', feature: '#5a3418',
       collar: '#dd9550', disc: '#fff0dc', floor: '#ffdcae', ruff: '#fbe7c0', ruffSh: '#ecd09c', earIn: '#7a4320', earTip: '#a8642c', tail: '#dd9550', tailIn: '#fbe7c0', foot: '#e6a463', footFar: '#d38f50' } },
-  { id: 'vaporeon', name: 'Vaporeon', breed: 'eevee', gift: 'pokemon', hint: 'Melts into the water', expr: 'overjoyed', scale: 1.34, mirror: true,
+  { id: 'vaporeon', name: 'Vaporeon', breed: 'eevee', gift: 'pokemon', hint: 'Melts into the water', expr: 'overjoyed', scale: 1.34, mirror: true, iris: 'blue', eyes: 'sparkle', blushMode: 'on',
     marks: [
       { on: 'behind', svg: FRILL('{frillSh}', '{frill}') },
       { on: 'crest', svg: '<path d="M-7 -53 C-6 -66 -2 -78 4 -86 C8 -76 11 -64 10 -53 Z" fill="{fin}"/><path d="M4 -86 C8 -76 11 -64 10 -53 L5 -53 C6 -64 6 -76 4 -86 Z" fill="{finSh}"/>' },
@@ -703,13 +703,13 @@ export const DOGS = [
     ],
     pal: { tag: '#62b8e8', tagSh: '#4a9ccc', coat: '#62b8e8', sh: '#4a9ccc', tan: '#78c4ee', tanSh: '#66b4e0', muzzle: '#78c4ee', brow: '#78c4ee', ink: '#14324a', nose: '#1e3e5a', noseHi: '#4a6e8c', feature: '#1f4e70',
       collar: '#62b8e8', disc: '#e3f5ff', floor: '#bfe6fb', frill: '#fbf6e6', frillSh: '#d9d2bc', fin: '#2f6f9a', finSh: '#245a80', ear: '#f6d46a', earIn: '#e5b94a', finEdge: '#2f6f9a', tail: '#3f8cc0', tailIn: '#62b8e8', foot: '#78c4ee', footFar: '#66b4e0' } },
-  { id: 'jolteon', name: 'Jolteon', breed: 'eevee', gift: 'pokemon', hint: 'Static in every hair', expr: 'surprised', scale: 1.32, mirror: false,
+  { id: 'jolteon', name: 'Jolteon', breed: 'eevee', gift: 'pokemon', hint: 'Static in every hair', expr: 'surprised', scale: 1.32, mirror: false, iris: 'brown', eyes: 'sparkle', blushMode: 'on',
     marks: [
       { on: 'behind', svg: SPIKES('{spikeSh}', '{spike}', 1) + COLLAR('{collarSh}', '{collarW}') }
     ],
     pal: { tag: '#f6cf3e', tagSh: '#dcb32a', coat: '#f6cf3e', sh: '#dcb32a', tan: '#f8da62', tanSh: '#eac74a', muzzle: '#f8da62', brow: '#f8da62', ink: '#2b2410', nose: '#3a3018', noseHi: '#6a5a38', feature: '#6a5410',
       collar: '#f6cf3e', disc: '#fffbe0', floor: '#fbeba6', spike: '#f6cf3e', spikeSh: '#d4ac22', collarW: '#ffffff', collarSh: '#dfe3ea', earIn: '#4a3a20', tail: '#ffffff', tailIn: '#f6cf3e', foot: '#f8da62', footFar: '#eac74a' } },
-  { id: 'flareon', name: 'Flareon', breed: 'eevee', gift: 'pokemon', hint: 'Always running warm', expr: 'happy', scale: 1.36, mirror: true,
+  { id: 'flareon', name: 'Flareon', breed: 'eevee', gift: 'pokemon', hint: 'Always running warm', expr: 'happy', scale: 1.36, mirror: true, iris: 'blue', eyes: 'sparkle', blushMode: 'on',
     marks: [
       { on: 'behind', svg: RUFF('{ruffSh}', '{ruff}', 1.15) },
       { on: 'crest', svg: '<path d="M-20 -50 C-26 -74 -6 -94 16 -88 C30 -84 34 -70 26 -60 C24 -72 14 -78 4 -74 C12 -68 12 -58 4 -50 C0 -60 -8 -62 -12 -50 Z" fill="{ruffSh}"/><path d="M-16 -52 C-22 -72 -4 -90 15 -85 C27 -82 30 -72 25 -64 C21 -73 12 -77 2 -72 C9 -66 9 -58 3 -52 C-1 -59 -8 -60 -10 -52 Z" fill="{ruff}"/>' },
@@ -717,30 +717,30 @@ export const DOGS = [
     ],
     pal: { tag: '#ee7a3a', tagSh: '#d4642c', coat: '#ee7a3a', sh: '#d4642c', tan: '#f28f52', tanSh: '#e47c3e', muzzle: '#f28f52', brow: '#f28f52', ink: '#2a1608', nose: '#3a1e10', noseHi: '#6a4430', feature: '#7a3412',
       collar: '#ee7a3a', disc: '#fff0dc', floor: '#ffd2ae', ruff: '#fde39c', ruffSh: '#f2c866', earIn: '#c9541c', earTip: '#d4642c', tail: '#fde39c', tailIn: '#fff1c6', foot: '#f28f52', footFar: '#e47c3e' } },
-  { id: 'espeon', name: 'Espeon', breed: 'eevee', gift: 'pokemon', hint: 'Knows what you will answer', expr: 'proud', scale: 1.32, mirror: false, iris: 'violet',
+  { id: 'espeon', name: 'Espeon', breed: 'eevee', gift: 'pokemon', hint: 'Knows what you will answer', expr: 'proud', scale: 1.32, mirror: false, iris: 'violet', eyes: 'sparkle', blushMode: 'on',
     marks: [
       { on: 'behind', svg: '<path d="M-48 2 C-62 0 -68 10 -66 18 C-60 14 -54 14 -48 16 Z M50 2 C64 0 70 10 68 18 C62 14 56 14 50 16 Z" fill="{coat}"/>' },
-      { on: 'head', svg: '<circle cx="1" cy="-50" r="4.6" fill="{gem}"/><circle cx="-0.4" cy="-51.4" r="1.5" fill="#ffd1da"/>' }
+      { on: 'head', svg: '<circle cx="1" cy="-51.5" r="4.2" fill="{gem}"/><circle cx="-0.3" cy="-52.8" r="1.4" fill="#ffd1da"/>' }
     ],
     pal: { tag: '#eaa9d8', tagSh: '#d48fc2', coat: '#eaa9d8', sh: '#d48fc2', tan: '#f0bce2', tanSh: '#e2a6d2', muzzle: '#f0bce2', brow: '#f0bce2', ink: '#3a1e44', nose: '#5a2a4a', noseHi: '#8a5a7a', feature: '#8a4a7a',
       collar: '#eaa9d8', disc: '#fbeaf6', floor: '#f4d0ea', gem: '#d8203a', earIn: '#9a5ec4', tail: '#d48fc2', tailIn: '#eaa9d8', foot: '#f0bce2', footFar: '#e2a6d2' } },
-  { id: 'umbreon', name: 'Umbreon', breed: 'eevee', gift: 'pokemon', hint: 'Glows after dark', expr: 'mog', scale: 1.34, mirror: true, iris: 'red',
+  { id: 'umbreon', name: 'Umbreon', breed: 'eevee', gift: 'pokemon', hint: 'Glows after dark', expr: 'mog', scale: 1.34, mirror: true, iris: 'red', eyes: 'sparkle', blushMode: 'on',
     tail: { len: [15, 14, 13], w: 22, curl: 50, inner: 0, over: true, dots: 13, at: [20, -6] },
     marks: [
-      { on: 'head', svg: '<circle cx="1" cy="-51" r="5" fill="none" stroke="{ring}" stroke-width="3"/>' },
+      { on: 'head', svg: '<circle cx="1" cy="-52" r="4.4" fill="none" stroke="{ring}" stroke-width="2.8"/>' },
       { on: 'earL', svg: BAND('{ring}') }, { on: 'earR', svg: BAND('{ring}') },
       { on: 'body', svg: g => `<circle cx="${g.bL + 26}" cy="8" r="11" fill="none" stroke="{ring}" stroke-width="4.4"/><path d="M${g.bR - 30} 46 h18" stroke="{ring}" stroke-width="5" stroke-linecap="round"/>` }
     ],
     pal: { tag: '#424559', tagSh: '#373a4c', coat: '#424559', sh: '#373a4c', tan: '#4a4d62', tanSh: '#424559', muzzle: '#4a4d62', brow: '#4a4d62', ink: '#120f16', nose: '#100d14', noseHi: '#4a4658', feature: '#8c8aa0',
       collar: '#424559', disc: '#eceaf6', floor: '#cfcde0', ring: '#f5c93a', earIn: '#373a4c', tail: '#424559', tailDots: '#f5c93a', foot: '#4a4d62', footFar: '#424559' } },
-  { id: 'leafeon', name: 'Leafeon', breed: 'eevee', gift: 'pokemon', hint: 'Photosynthesises during lectures', expr: 'happy', scale: 1.32, mirror: false,
+  { id: 'leafeon', name: 'Leafeon', breed: 'eevee', gift: 'pokemon', hint: 'Photosynthesises during lectures', expr: 'happy', scale: 1.32, mirror: false, iris: 'brown', eyes: 'sparkle', blushMode: 'on',
     marks: [
       { on: 'crest', svg: '<path d="M-2 -50 C-16 -60 -14 -80 2 -92 C14 -80 14 -62 4 -50 Z" fill="{leaf}"/><path d="M1 -52 C0 -64 1 -76 2 -88" fill="none" stroke="{vein}" stroke-width="2" stroke-linecap="round"/>' },
       { on: 'earL', svg: LEAFEAR('{leaf}', '{vein}') }, { on: 'earR', svg: LEAFEAR('{leaf}', '{vein}') }
     ],
     pal: { tag: '#f4e4b4', tagSh: '#dccb92', coat: '#f4e4b4', sh: '#dccb92', tan: '#f8ecc8', tanSh: '#ecdcac', muzzle: '#f8ecc8', brow: '#f8ecc8', ink: '#3a2a12', nose: '#5a3a1c', noseHi: '#8a6a4a', feature: '#8a6a3a',
       collar: '#f4e4b4', disc: '#f0fbe0', floor: '#d6efb4', ear: '#f4e4b4', earIn: '#e8d49a', leaf: '#8cc63e', vein: '#5f9a24', tail: '#8cc63e', tailIn: '#b0dc6a', foot: '#a07a4a', footFar: '#8c6a3e' } },
-  { id: 'glaceon', name: 'Glaceon', breed: 'eevee', gift: 'pokemon', hint: 'Cool under exam pressure', expr: 'curious', scale: 1.32, mirror: true, iris: 'ice',
+  { id: 'glaceon', name: 'Glaceon', breed: 'eevee', gift: 'pokemon', hint: 'Cool under exam pressure', expr: 'curious', scale: 1.32, mirror: true, iris: 'blue', eyes: 'sparkle', blushMode: 'on',
     marks: [
       { on: 'behind', svg: '<path d="M-44 -30 L-56 -8 L-50 26 L-40 4 Z M46 -30 L58 -8 L52 26 L42 4 Z" fill="{deep}"/><path d="M-50 26 L-44 -2 L-40 4 Z M52 26 L46 -2 L42 4 Z" fill="{deepSh}"/>' },
       { on: 'crest', svg: '<path d="M-30 -52 L-18 -70 L1 -76 L20 -70 L32 -52 L18 -56 L1 -50 L-16 -56 Z" fill="{deep}"/><path d="M1 -76 L20 -70 L32 -52 L18 -56 L1 -50 Z" fill="{deepSh}"/><path d="M-6 -66 L1 -72 L8 -66 L1 -58 Z" fill="{light}"/>' },
@@ -749,7 +749,7 @@ export const DOGS = [
     ],
     pal: { tag: '#8ed2f0', tagSh: '#6fbadc', coat: '#8ed2f0', sh: '#6fbadc', tan: '#a4dcf4', tanSh: '#8ecbe8', muzzle: '#a4dcf4', brow: '#a4dcf4', ink: '#123048', nose: '#1a3a58', noseHi: '#3c5c78', feature: '#2a5a7a',
       collar: '#8ed2f0', disc: '#e8f8ff', floor: '#c4e9f8', deep: '#3a7cba', deepSh: '#2c6498', light: '#bfe8fb', ear: '#8ed2f0', earIn: '#3a7cba', tail: '#3a7cba', tailIn: '#5a9ad0', foot: '#3a7cba', footFar: '#2c6498' } },
-  { id: 'sylveon', name: 'Sylveon', breed: 'eevee', gift: 'pokemon', hint: 'Wins every room with ribbons', expr: 'love', scale: 1.32, mirror: false, iris: 'blue',
+  { id: 'sylveon', name: 'Sylveon', breed: 'eevee', gift: 'pokemon', hint: 'Wins every room with ribbons', expr: 'love', scale: 1.32, mirror: false, iris: 'blue', eyes: 'sparkle', blushMode: 'on',
     marks: [
       { on: 'crest', svg: '<path d="M30 -48 C26 -20 34 6 44 28" fill="none" stroke="{ribbon}" stroke-width="5" stroke-linecap="round"/><path d="M36 -46 C40 -18 50 2 58 18" fill="none" stroke="{bead}" stroke-width="5" stroke-linecap="round"/>' +
         '<path d="M34 -50 L18 -62 L20 -44 Z M34 -50 L50 -62 L48 -44 Z" fill="{ribbon}"/><circle cx="34" cy="-50" r="5.4" fill="{bead}"/><circle cx="1" cy="34" r="0" fill="{ribbon}"/>' },
@@ -765,6 +765,7 @@ export function resolve(d) {
   const B = BREEDS[d.breed];
   if (!B) throw new Error(`breeds.mjs: ${d.id} names an unknown breed ${d.breed}`);
   const c = { ...B.build, ...d, breedName: B.name };
+  if (d.head && !d.head.jaw && B.build.head && B.build.head.jaw) c.head = { ...d.head, jaw: B.build.head.jaw };   // a dog's own head keeps its breed's jaw
   const p = { ...PAL0, ...d.pal };
   const up = side => c.ears[side === 'L' ? 0 : 1] === 'up';
   /* the legs are drawn over the body from the hip down (parts.mjs), in its colour: a leg of another colour would show

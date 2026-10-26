@@ -26,6 +26,32 @@ function uPath(cx, top, w, h, r) {
     ' V' + (top + r) + ' A' + r + ' ' + r + ' 0 0 1 ' + (L + r) + ' ' + top + ' Z';
 }
 
+// A head's outline (founder 2026-10-26: "refine so all the faces dont look the same, and overly circular"): the top edge
+// is every dog's (100 wide, y -55, so every hat sits the same), the jaw is the breed's. round: the old U, a semicircle;
+// square: a broad flat jaw with rounded corners (bulldogs, boxers, mastiffs); wedge: straight cheeks tapering to a
+// narrow soft chin (huskies, shibas, foxy dogs); cheeky: full cheeks a touch past the sides, then a round chin (fluffy
+// toys). Inside -50..52 at every height, so what fits the old head still fits.
+function headOutline(c) {
+  var h = c.head.h, r = c.head.r, top = -55, bot = top + h, L = -50, R = 50, jaw = c.head.jaw || 'round';
+  var start = 'M' + (L + r) + ' ' + top + ' H' + (R - r) + ' A' + r + ' ' + r + ' 0 0 1 ' + R + ' ' + (top + r);
+  var back = ' A' + r + ' ' + r + ' 0 0 1 ' + (L + r) + ' ' + top + ' Z';
+  if (jaw === 'square') {
+    var rb = 26;
+    return start + ' V' + (bot - rb) + ' A' + rb + ' ' + rb + ' 0 0 1 ' + (R - rb) + ' ' + bot + ' H' + (L + rb) + ' A' + rb + ' ' + rb + ' 0 0 1 ' + L + ' ' + (bot - rb) + ' V' + (top + r) + back;
+  }
+  if (jaw === 'wedge') {
+    var y1 = top + h * 0.5, cw = 12;
+    return start + ' V' + r3(y1) + ' C' + R + ' ' + r3(y1 + (bot - y1) * 0.55) + ' ' + (cw + 14) + ' ' + bot + ' ' + cw + ' ' + bot +
+      ' H' + (-cw) + ' C' + (-cw - 14) + ' ' + bot + ' ' + L + ' ' + r3(y1 + (bot - y1) * 0.55) + ' ' + L + ' ' + r3(y1) + ' V' + (top + r) + back;
+  }
+  if (jaw === 'cheeky') {
+    var y2 = top + h * 0.56;
+    return start + ' V' + r3(y2 - 12) + ' C' + (R + 2) + ' ' + r3(y2) + ' ' + (R + 1) + ' ' + r3(bot - 14) + ' ' + (R - 22) + ' ' + r3(bot - 2) +
+      ' Q0 ' + (bot + 3) + ' ' + (L + 22) + ' ' + r3(bot - 2) + ' C' + (L - 1) + ' ' + r3(bot - 14) + ' ' + (L - 2) + ' ' + r3(y2) + ' ' + L + ' ' + r3(y2 - 12) + ' V' + (top + r) + back;
+  }
+  return uPath(0, top, 100, h, r);
+}
+
 // An upright ear in two parts: a base that turns at its root, and a tip hinged 24 units up
 // that folds over like a page (its height flips through zero), so an ear goes up and down
 // without ever swapping drawings. The tip overlaps the base by 2 units, so the hinge has no seam.
@@ -218,7 +244,7 @@ function dogMarkup(c, P) {
       under += '<path data-p="armEar' + side + '" d="' + F.d + '" fill="#000"/>';
     }
   });
-  var headPath = uPath(0, -55, 100, c.head.h, c.head.r), muzzlePath = uPath(1, -17, c.muzzle.w, c.muzzle.h, c.muzzle.r || 10);
+  var headPath = headOutline(c), muzzlePath = uPath(1, -17, c.muzzle.w, c.muzzle.h, c.muzzle.r || 10);
   // a snout mark above the muzzle's top (y -17: the bridge of the nose, a pug's or a frenchie's brow wrinkle) lies over
   // the eyes but under the glasses worn on them, unscaled by the eyes' group; the rest of it lies on the snout, over
   // everything there. rig.mjs moves the bridge with the snout's turn

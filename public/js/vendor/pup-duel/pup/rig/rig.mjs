@@ -548,7 +548,7 @@ function makeDog(c, slot, P) {
     // between them is a band, and the pupils follow it up into that band (the cheek covered them where the glance put
     // them, leaving two white crescents). The white darkens toward the iris as the band closes (below), so a deep smile
     // reads as two dark happy arcs with a sparkle.
-    var lidNow = clamp(Math.max(clamp(track(t, E.lid), 0, 1), ch('lidRest')), 0, 1);
+    var lidNow = clamp(Math.max(clamp(track(t, E.lid), 0, 1), ch('lidRest'), c.lidBase || 0), 0, 1);
     var bandTop = -46.5 + lidNow * 30.5, bandBot = -1.2 - 21 * cheekK - 4 * lidNow - 15;
     var squint = clamp((cheekK - 0.15) / 0.55, 0, 1);
     if (squint > 0) {
@@ -567,7 +567,7 @@ function makeDog(c, slot, P) {
     // Lids from above, with a slant for worry or temper; cheeks rise into a happy squint.
     var blink = clamp(track(t, E.lid), 0, 1);
     if (sw < 1) blink = clamp(track(t, Pv.lid), 0, 1) * (1 - sw) + blink * sw;
-    var lid = clamp(Math.max(blink, ch('lidRest')), 0, 1);
+    var lid = clamp(Math.max(blink, ch('lidRest'), c.lidBase || 0), 0, 1);   // a hound's heavy lids (breeds.mjs lidBase) rest a little down
     var slant = ch('slant'), edge = -46.5 + lid * 30.5;
     set(e.lidL, 'height', 29.5 + lid * 30.5);
     set(e.lidR, 'height', 29.5 + lid * 30.5);
@@ -587,7 +587,8 @@ function makeDog(c, slot, P) {
     var red = clamp(ch('redEye'), 0, 1), wR = 255, wG = 255 - 56 * red, wB = 255 - 56 * red;
     // a closing squint tints the white toward the eye's own colour (above): never a blank white crescent
     var sq = (rig.squint || 0) * 0.7, inkC = rig.inkRGB;
-    set(e.white, 'fill', 'rgb(' + Math.round(wR + (inkC[0] - wR) * sq) + ',' + Math.round(wG + (inkC[1] - wG) * sq) + ',' + Math.round(wB + (inkC[2] - wB) * sq) + ')');
+    if (c.sclera === false) set(e.white, 'fill', c.pal.lidL);   // bead eyes: no white, only the pupils (eyes.mjs)
+    else set(e.white, 'fill', 'rgb(' + Math.round(wR + (inkC[0] - wR) * sq) + ',' + Math.round(wG + (inkC[1] - wG) * sq) + ',' + Math.round(wB + (inkC[2] - wB) * sq) + ')');
     // Shades drop in from above the head and settle with a small bounce.
     // A dog already wearing glasses keeps its own (faceOn, above): no second pair stacked over them.
     var shv = faceOn ? 0 : ch('shades');
