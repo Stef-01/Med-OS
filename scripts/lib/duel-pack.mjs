@@ -22,6 +22,9 @@ const topicsOf = st => (Array.isArray(st.specialty) && st.specialty.length ? [..
 const SETTING = { gp: 'in general practice', ed: 'in the emergency department', ward: 'on the ward', clinic: 'in clinic', 'birth suite': 'in the birth suite', recovery: 'in recovery' };
 const strip = s => String(s ?? '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
 const sentence = s => { const t = strip(s); return !t ? '' : /[.?!]$/.test(t) ? t : `${t}.`; };
+/* the pool is plain text already (mcq/schema.mjs itemProblems), so its questions only lose runs of spaces: stripping
+   tags there would delete a lab value between a < and a later > ("K <3.5 ... Na >145") */
+const plain = s => String(s ?? '').replace(/\s+/g, ' ').trim();
 
 /* the name of a diagnosis without its qualifiers, so the right option is not the one that reads like a textbook:
    "Acute ischaemic stroke in the right ACA territory, cardioembolic from AF" is "Acute ischaemic stroke in the right
@@ -114,17 +117,17 @@ export function stationQuestion(st, pool = []) {
              specialties
    `dropped` says why any are not in the pack. */
 export const DUEL = Object.freeze({ stem: 1200, option: 160, why: 1200, note: 600 });
-const cut = (s, n) => { const t = strip(s); if (t.length <= n) return t; const c = t.slice(0, n), i = Math.max(c.lastIndexOf('. '), c.lastIndexOf('? ')); return i > n / 3 ? c.slice(0, i + 1) : `${c.slice(0, n - 1).replace(/\s+\S*$/, '')}…`; };
+const cut = (s, n, clean = strip) => { const t = clean(s); if (t.length <= n) return t; const c = t.slice(0, n), i = Math.max(c.lastIndexOf('. '), c.lastIndexOf('? ')); return i > n / 3 ? c.slice(0, i + 1) : `${c.slice(0, n - 1).replace(/\s+\S*$/, '')}…`; };
 /* a station's specialties as the duel's topics (the first is its topic), up to the package's six */
 const topicsOfStation = (st, first) => [...new Set([first, ...(Array.isArray(st?.specialty) ? st.specialty : [])].filter(Boolean))].slice(0, 6);
 export function poolQuestion(q, byStation = new Map()) {
-  const stem = q.ask ? `${strip(q.stem)} ${strip(q.ask)}` : strip(q.stem);
+  const stem = q.ask ? `${plain(q.stem)} ${plain(q.ask)}` : plain(q.stem);
   if (stem.length > DUEL.stem) return { q: null, why: `${q.id}: the stem is ${stem.length} characters (the duel shows ${DUEL.stem})` };
   if (q.options.some(o => o.length > DUEL.option)) return { q: null, why: `${q.id}: an option is longer than ${DUEL.option} characters` };
   const kind = q.provenance?.kind || '';
-  const notes = (q.why || []).map((w, i) => (i === q.answer || !w ? null : cut(w, DUEL.note)));
+  const notes = (q.why || []).map((w, i) => (i === q.answer || !w ? null : cut(w, DUEL.note, plain)));
   const out = { id: q.id, stem, options: [...q.options], answer: q.answer };
-  const why = q.explanation ? cut(q.explanation, DUEL.why) : ''; if (why) out.why = why;
+  const why = q.explanation ? cut(q.explanation, DUEL.why, plain) : ''; if (why) out.why = why;
   if (notes.some(Boolean)) out.notes = notes;
   if (q.topic) out.topic = q.topic;
   const st = byStation.get(q.provenance?.generator?.basis?.[0]), topics = st ? topicsOfStation(st, q.topic) : [];

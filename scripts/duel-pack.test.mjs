@@ -95,6 +95,13 @@ test('poolQuestion: the whole stem, provenance kept as origin (ai for ai and ams
   const { pack } = buildPack({ questions: [pooled('ai'), pooled('user', { id: 'q-user2' })] });
   assert.equal(pack.origin, 'mixed'); assert.equal(pack.questions.length, 2);
 });
+test('poolQuestion: a lab value between a < and a > stays (the pool is plain text, not HTML)', () => {
+  const stem = 'Serum: K <3.5 mmol/L, Na >145 mmol/L, cortisol <50 nmol/L with ACTH >20 pmol/L.';
+  const q = poolQuestion(pooled('user', { stem, explanation: 'K <3.5 and Na >145 point to it.', why: ['a <b> c', 'x', null, 'y'] })).q;
+  assert.ok(q.stem.startsWith(stem), q.stem);
+  assert.equal(q.why, 'K <3.5 and Na >145 point to it.');
+  assert.equal(q.notes[0], 'a <b> c', 'what looks like a tag in plain text is the text');
+});
 
 test('the pack from the pool: every pooled question that fits, each playable by the duel', () => {
   const pool = poolOnDisk(path.join(ROOT, 'public')), { pack, dropped } = buildPack(pool);
