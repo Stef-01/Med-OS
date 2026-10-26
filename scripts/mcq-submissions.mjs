@@ -19,7 +19,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2), oi = argv.indexOf('--out');
 const FILE = oi >= 0 ? path.resolve(argv[oi + 1]) : path.join(ROOT, 'data', 'mcq', 'submissions.json');   /* --out: another file (the e2e) */
 const files = argv.filter((a, i) => !a.startsWith('--') && argv[i - 1] !== '--out');
-const store = readJson(FILE, { note: 'Students\' questions as submitted (scripts/mcq-submissions.mjs). Never edited: an AI suggestion goes in suggestions.json.', items: [] });
+const store = readJson(FILE, { note: 'Students\' questions as submitted (scripts/mcq-submissions.mjs). Never edited: the review\'s suggestion stays in its verdict (verdicts.json).', items: [] });
 
 if (argv.includes('--list')) {
   const sel = readJson(path.join(ROOT, 'data', 'mcq', 'selection.json'), { decisions: [] }), by = new Map(sel.decisions.map(d => [d.id, d]));

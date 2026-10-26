@@ -55,7 +55,8 @@ export function validateMcq(root = here, { benchDir = process.env.MCQ_BENCH_DIR 
   if (!fs.existsSync(official)) notes.push(`NBME text check skipped: the official samples are not at ${official}`);
   else {
     const N = 12, grams = new Set();
-    for (const r of readJsonl(official).filter(x => String(x.origin || '').startsWith('human'))) { const w = words(`${r.stem} ${(r.options || []).join(' ')}`); for (let i = 0; i + N <= w.length; i++) grams.add(w.slice(i, i + N).join(' ')); }
+    /* runs that take in the lead-in ("which of the following ...") are the exam's stock phrasing: the vignette is what is NBME's */
+    for (const r of readJsonl(official).filter(x => String(x.origin || '').startsWith('human'))) { const w = words(`${r.stem} ${(r.options || []).join(' ')}`); for (let i = 0; i + N <= w.length; i++) { const g = w.slice(i, i + N).join(' '); if (!/\bwhich of the following\b|\bof the following is\b/.test(g)) grams.add(g); } }
     /* a run the open banks also use is the exam's stock phrasing ("which of the following is the most appropriate next step in management"), not NBME's text */
     for (const f of fs.existsSync(bdir) ? fs.readdirSync(bdir).filter(x => x.endsWith('.jsonl')) : []) for (const r of readJsonl(path.join(bdir, f))) { const w = words(r.stem); for (let i = 0; i + N <= w.length; i++) grams.delete(w.slice(i, i + N).join(' ')); }
     const skip = /(^|\/)(node_modules|\.git|vendor|media|fonts|drafts|requests)(\/|$)/, exts = /\.(json|jsonl|md|mjs|js|html|css|sql|txt|csv)$/;

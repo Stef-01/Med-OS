@@ -6,48 +6,81 @@
    "usmle-resource": 866
   },
   "pool": {
-   "usmle-resource": 1,
-   "ai": 14,
-   "amsa": 42
+   "ai": 61,
+   "usmle-resource": 54,
+   "amsa": 51
   },
   "status": {
-   "pending": 957,
-   "pool": 57,
-   "rejected": 41,
+   "pool": 166,
+   "rejected": 91,
+   "pending": 798,
    "reserve": 6
   },
   "topics": {
-   "Nephrology": 1,
-   "Emergency Medicine": 2,
-   "Gastroenterology": 10,
-   "Paediatrics": 6,
-   "Infectious Diseases": 1,
-   "General Practice": 4,
-   "Obstetrics": 1,
-   "Cardiology": 10,
-   "Respiratory Medicine": 8,
-   "Neurology": 9,
-   "Endocrinology": 1,
-   "Rheumatology": 3,
+   "Obstetrics": 5,
+   "Gastroenterology": 26,
+   "Infectious Diseases": 11,
+   "Neurology": 19,
+   "Cardiology": 16,
+   "Respiratory Medicine": 13,
+   "Haematology": 4,
+   "Paediatrics": 11,
+   "Neurosurgery": 2,
+   "Emergency Medicine": 5,
+   "Vascular Surgery": 1,
+   "General Surgery": 6,
+   "Gastrointestinal Surgery": 2,
+   "Cardiothoracic Surgery": 1,
+   "Gynaecology": 7,
+   "General Practice": 5,
+   "Otorhinolaryngology": 1,
+   "Trauma Surgery": 3,
+   "Ophthalmology": 1,
+   "Sexual Health": 2,
+   "Endocrinology": 3,
+   "Nephrology": 2,
+   "Psychiatry": 2,
+   "Neonatology": 3,
+   "Breast/Endocrine Surgery": 1,
+   "Immunology": 1,
+   "Rheumatology": 5,
+   "Critical Care Medicine": 1,
+   "Plastic Surgery": 1,
+   "Orthopaedics": 1,
+   "Medicolegal": 1,
+   "Urology": 1,
+   "Toxicology": 1,
+   "Oncology": 1,
    "Dermatology": 1
   },
   "positions": {
    "4": {
     "counts": [
-     14,
-     18,
-     12,
-     13
+     29,
+     25,
+     24,
+     27
     ],
-    "n": 57,
-    "chi2": 1.46
+    "n": 105,
+    "chi2": 0.56
+   },
+   "5": {
+    "counts": [
+     7,
+     16,
+     12,
+     10,
+     16
+    ],
+    "n": 61,
+    "chi2": 4.98
    }
   },
-  "topicCap": 10,
+  "topicCap": 26,
   "bars": {
-   "base": 70,
-   "ai": 80,
-   "from": "defaults (no official samples here)"
+   "base": 81,
+   "ai": 89,
+   "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
   },
   "droppedBeforeSelection": [
    "amsa-245: the findings name the answer",
@@ -58,18 +91,16 @@
   {
    "id": "ai-mcq-031e86eb",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-0a3ab6c1",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -77,42 +108,37 @@
   {
    "id": "ai-mcq-0e730b6c",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-1260b0c5",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-1ca98ea1",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-1ee809ad",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 90
   },
   {
    "id": "ai-mcq-1fdb9dd4",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "units:minor"
    ]
@@ -120,50 +146,44 @@
   {
    "id": "ai-mcq-242c7475",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 92
   },
   {
    "id": "ai-mcq-27c244ad",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-27f75da9",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 90
   },
   {
    "id": "ai-mcq-2bc53a0c",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-2c98c94f",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-2e439d1e",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "vignette:minor"
    ]
@@ -171,10 +191,9 @@
   {
    "id": "ai-mcq-33f3cc88",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "clang:minor"
    ]
@@ -182,58 +201,55 @@
   {
    "id": "ai-mcq-40470f73",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 76)"
+   ],
+   "quality": 86
   },
   {
    "id": "ai-mcq-40ae7c79",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-419a2e4f",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-481e068c",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-5515c72d",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-57e44683",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-5c1577b8",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 85 is below the AI-written bar of 89 (flaws 94, review 79): vignette"
    ],
+   "quality": 85,
    "flaws": [
     "vignette:minor"
    ]
@@ -241,26 +257,23 @@
   {
    "id": "ai-mcq-6dbd8be2",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-6fbba7f4",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 90
   },
   {
    "id": "ai-mcq-71636d27",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
    "flaws": [
     "vignette:minor"
    ]
@@ -268,26 +281,23 @@
   {
    "id": "ai-mcq-735ee53b",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-73ea6682",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-75604e12",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -295,26 +305,23 @@
   {
    "id": "ai-mcq-7bce8cdf",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 100
   },
   {
    "id": "ai-mcq-7ccbb208",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-7f2d20c9",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "vignette:minor"
    ]
@@ -322,34 +329,30 @@
   {
    "id": "ai-mcq-8557a042",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 97
   },
   {
    "id": "ai-mcq-88a5965f",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 94
   },
   {
    "id": "ai-mcq-92b33ba3",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-95c7720a",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "vignette:minor"
    ]
@@ -357,18 +360,16 @@
   {
    "id": "ai-mcq-99c26c18",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-9b44bc6a",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "longest-key:minor"
    ]
@@ -376,50 +377,44 @@
   {
    "id": "ai-mcq-a5f2390b",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-a9cf01d0",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 90
   },
   {
    "id": "ai-mcq-b1bb7e43",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-b1fb1c81",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 92
   },
   {
    "id": "ai-mcq-b3242caf",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-b9e317b3",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "units:minor"
    ]
@@ -427,18 +422,16 @@
   {
    "id": "ai-mcq-ba2775ee",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-bd62e001",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "vignette:minor"
    ]
@@ -446,66 +439,58 @@
   {
    "id": "ai-mcq-c20114a7",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-c4a1be47",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-c4a7f501",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-c77ff892",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-cac4a8ab",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-cb6f7f3a",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-ced5e26c",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-d268f468",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor"
@@ -514,34 +499,30 @@
   {
    "id": "ai-mcq-d95ed2a4",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-defb8d10",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-e3b1c7c7",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-e4564094",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "vignette:minor"
    ]
@@ -549,10 +530,11 @@
   {
    "id": "ai-mcq-e49bdd4a",
    "kind": "ai",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 82 is below the AI-written bar of 89 (flaws 94, review 74): longest-key"
    ],
+   "quality": 82,
    "flaws": [
     "longest-key:minor"
    ]
@@ -560,18 +542,16 @@
   {
    "id": "ai-mcq-e5f0f904",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-edf0a236",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "vignette:minor"
    ]
@@ -579,10 +559,9 @@
   {
    "id": "ai-mcq-ee02de68",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": [
     "convergence:minor"
    ]
@@ -590,10 +569,9 @@
   {
    "id": "ai-mcq-eebd5d1a",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": [
     "absolute-terms:minor"
    ]
@@ -601,10 +579,9 @@
   {
    "id": "ai-mcq-f8ee9f83",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "vignette:minor"
    ]
@@ -612,18 +589,16 @@
   {
    "id": "ai-mcq-fccc85c9",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
   },
   {
    "id": "ai-mcq-fddeed86",
    "kind": "ai",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "medqa-us4-test-0002",
@@ -1751,10 +1726,11 @@
   {
    "id": "medqa-us4-test-0249",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 60, review 89): duplicate-options, vignette"
    ],
+   "quality": 77,
    "flaws": [
     "duplicate-options:major",
     "vignette:major"
@@ -1968,37 +1944,35 @@
   {
    "id": "medqa-us4-test-0302",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0303",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times"
    ],
+   "quality": 63,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0305",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0316",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": [
     "vignette:minor"
    ]
@@ -2246,37 +2220,33 @@
   {
    "id": "medqa-us4-test-0360",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0361",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0363",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0367",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
@@ -2367,19 +2337,19 @@
   {
    "id": "medqa-us4-test-0380",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 100, review 56): "
    ],
+   "quality": 74,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0383",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
@@ -2414,10 +2384,9 @@
   {
    "id": "medqa-us4-test-0388",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
@@ -4184,10 +4153,9 @@
   {
    "id": "medqa-us4-test-0802",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": [
     "vignette:minor"
    ]
@@ -4204,46 +4172,43 @@
   {
    "id": "medqa-us4-test-0804",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0806",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but Gastroenterology already holds 26 questions (topic balance)"
    ],
+   "quality": 82,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0807",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0808",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0809",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
@@ -4435,19 +4400,19 @@
   {
    "id": "medqa-us4-test-0851",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 100, review 66): "
    ],
+   "quality": 80,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0852",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 81,
    "flaws": [
     "units:minor"
    ]
@@ -4455,19 +4420,21 @@
   {
    "id": "medqa-us4-test-0853",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times"
    ],
+   "quality": 66,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0862",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 88, review 70): longest-key, clang"
    ],
+   "quality": 77,
    "flaws": [
     "longest-key:minor",
     "clang:minor"
@@ -4476,19 +4443,17 @@
   {
    "id": "medqa-us4-test-0864",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0865",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": [
     "cover-options:minor"
    ]
@@ -4496,64 +4461,57 @@
   {
    "id": "medqa-us4-test-0867",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0868",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0870",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0873",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0874",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 81,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0878",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0879",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "cover-options:minor"
    ]
@@ -4902,10 +4860,9 @@
   {
    "id": "medqa-us4-test-0944",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
    "flaws": [
     "cover-options:minor"
    ]
@@ -4913,10 +4870,9 @@
   {
    "id": "medqa-us4-test-0946",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
@@ -5125,37 +5081,38 @@
   {
    "id": "medqa-us4-test-0980",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0983",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0984",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches pralidoxime as the best initial step in organophosphate poisoning; atropine titrated to drying of bronchial secretions is the life-saving first-line therapy and pralidoxime is only an adjunct",
+    "not a single best answer (D also defensible)",
+    "the reviewer rejected it: Best initial step for organophosphate toxicity is atropine, which is not offered; keyed pralidoxime is an adjunct"
    ],
+   "quality": 73,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0985",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": []
   },
   {
@@ -5179,19 +5136,17 @@
   {
    "id": "medqa-us4-test-0990",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-0991",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
@@ -5680,10 +5635,9 @@
   {
    "id": "medqa-us4-test-1125",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
@@ -5698,10 +5652,11 @@
   {
    "id": "medqa-us4-test-1129",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 68, review 80): lead-in, vignette, stem-length"
    ],
+   "quality": 75,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -5711,19 +5666,19 @@
   {
    "id": "medqa-us4-test-1130",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1133",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)"
    ],
+   "quality": 76,
    "flaws": [
     "longest-key:minor"
    ]
@@ -5740,46 +5695,43 @@
   {
    "id": "medqa-us4-test-1141",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1142",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 70 is below the base bar of 81 (flaws 100, review 50): "
    ],
+   "quality": 70,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1149",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1150",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": []
   },
   {
    "id": "medqa-us4-test-1151",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": [
     "vignette:minor"
    ]
@@ -5796,10 +5748,9 @@
   {
    "id": "medqa-us4-test-1158",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
@@ -5881,10 +5832,9 @@
   {
    "id": "medqa-us4-test-1179",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 81,
    "flaws": []
   },
   {
@@ -6527,19 +6477,17 @@
   {
    "id": "mmlu-professional_medicine-018",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "mmlu-professional_medicine-019",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": []
   },
   {
@@ -6796,19 +6744,19 @@
   {
    "id": "mmlu-professional_medicine-046",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
    "id": "mmlu-professional_medicine-047",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 71): vignette"
    ],
+   "quality": 80,
    "flaws": [
     "vignette:minor"
    ]
@@ -6838,10 +6786,11 @@
   {
    "id": "mmlu-professional_medicine-050",
    "kind": "usmle-resource",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 94, review 60): clang"
    ],
+   "quality": 74,
    "flaws": [
     "clang:minor"
    ]
@@ -6849,10 +6798,9 @@
   {
    "id": "mmlu-professional_medicine-051",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
@@ -6898,19 +6846,17 @@
   {
    "id": "mmlu-professional_medicine-056",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
    "id": "mmlu-professional_medicine-057",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
@@ -7132,10 +7078,9 @@
   {
    "id": "mmlu-professional_medicine-080",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": []
   },
   {
@@ -7184,10 +7129,9 @@
   {
    "id": "mmlu-professional_medicine-085",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
    "flaws": [
     "vignette:minor"
    ]
@@ -7195,19 +7139,17 @@
   {
    "id": "mmlu-professional_medicine-086",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
    "flaws": []
   },
   {
    "id": "mmlu-professional_medicine-087",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
@@ -7289,19 +7231,17 @@
   {
    "id": "mmlu-professional_medicine-096",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
    "id": "mmlu-professional_medicine-097",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": [
     "vignette:minor"
    ]
@@ -7309,19 +7249,17 @@
   {
    "id": "mmlu-professional_medicine-098",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": []
   },
   {
    "id": "mmlu-professional_medicine-099",
    "kind": "usmle-resource",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 96,
    "flaws": []
   },
   {
@@ -9015,8 +8953,10 @@
   {
    "id": "osce-ai-12e898ea",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the AI-written bar of 89 (flaws 82, review 79): longest-key, clang, vignette"
+   ],
    "quality": 80,
    "flaws": [
     "longest-key:minor",
@@ -9029,7 +8969,7 @@
    "kind": "ai",
    "status": "rejected",
    "reasons": [
-    "quality 79 is below the AI-written bar of 80 (flaws 100, review 65)"
+    "quality 79 is below the AI-written bar of 89 (flaws 100, review 65)"
    ],
    "quality": 79
   },
@@ -9060,7 +9000,7 @@
    "kind": "ai",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 100, review 63)"
+    "quality 78 is below the AI-written bar of 89 (flaws 100, review 63)"
    ],
    "quality": 78
   },
@@ -9080,22 +9020,28 @@
   {
    "id": "osce-ai-44e14180",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 74)"
+   ],
    "quality": 84
   },
   {
    "id": "osce-ai-4f540d03",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 100, review 71)"
+   ],
    "quality": 83
   },
   {
    "id": "osce-ai-7789e6bf",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 94, review 76): vignette"
+   ],
    "quality": 83,
    "flaws": [
     "vignette:minor"
@@ -9106,15 +9052,17 @@
    "kind": "ai",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the AI-written bar of 80 (flaws 100, review 61)"
+    "quality 77 is below the AI-written bar of 89 (flaws 100, review 61)"
    ],
    "quality": 77
   },
   {
    "id": "osce-ai-8b37c286",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 82 is below the AI-written bar of 89 (flaws 94, review 74): longest-key"
+   ],
    "quality": 82,
    "flaws": [
     "longest-key:minor"
@@ -9123,15 +9071,19 @@
   {
    "id": "osce-ai-8bb4689d",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 82 is below the AI-written bar of 89 (flaws 100, review 70)"
+   ],
    "quality": 82
   },
   {
    "id": "osce-ai-95865471",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the AI-written bar of 89 (flaws 94, review 71): longest-key"
+   ],
    "quality": 80,
    "flaws": [
     "longest-key:minor"
@@ -9142,7 +9094,7 @@
    "kind": "ai",
    "status": "rejected",
    "reasons": [
-    "quality 72 is below the AI-written bar of 80 (flaws 80, review 66): vignette"
+    "quality 72 is below the AI-written bar of 89 (flaws 80, review 66): vignette"
    ],
    "quality": 72,
    "flaws": [
@@ -9164,8 +9116,10 @@
   {
    "id": "osce-ai-b08d5faf",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 87 is below the AI-written bar of 89 (flaws 100, review 78)"
+   ],
    "quality": 87
   },
   {
@@ -9184,8 +9138,10 @@
   {
    "id": "osce-ai-c1be5d8e",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the AI-written bar of 89 (flaws 94, review 70): vignette"
+   ],
    "quality": 80,
    "flaws": [
     "vignette:minor"
@@ -9196,7 +9152,7 @@
    "kind": "ai",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 94, review 68): vignette"
+    "quality 78 is below the AI-written bar of 89 (flaws 94, review 68): vignette"
    ],
    "quality": 78,
    "flaws": [
@@ -9206,8 +9162,10 @@
   {
    "id": "osce-ai-e4a377e8",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the AI-written bar of 89 (flaws 94, review 70): units"
+   ],
    "quality": 80,
    "flaws": [
     "units:minor"
@@ -9216,8 +9174,10 @@
   {
    "id": "osce-ai-e8892591",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the AI-written bar of 89 (flaws 80, review 80): vignette"
+   ],
    "quality": 80,
    "flaws": [
     "vignette:major"
@@ -9226,8 +9186,10 @@
   {
    "id": "osce-ai-ea8dbb57",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the AI-written bar of 89 (flaws 94, review 71): units"
+   ],
    "quality": 80,
    "flaws": [
     "units:minor"
@@ -9236,8 +9198,10 @@
   {
    "id": "osce-ai-edd05314",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 82 is below the AI-written bar of 89 (flaws 94, review 74): vignette"
+   ],
    "quality": 82,
    "flaws": [
     "vignette:minor"
@@ -9256,8 +9220,10 @@
   {
    "id": "osce-ai-fb288e39",
    "kind": "ai",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the AI-written bar of 89 (flaws 94, review 70): vignette"
+   ],
    "quality": 80,
    "flaws": [
     "vignette:minor"
@@ -9268,7 +9234,7 @@
    "kind": "ai",
    "status": "rejected",
    "reasons": [
-    "quality 72 is below the AI-written bar of 80 (flaws 74, review 70): vignette, units"
+    "quality 72 is below the AI-written bar of 89 (flaws 74, review 70): vignette, units"
    ],
    "quality": 72,
    "flaws": [
@@ -9279,8 +9245,10 @@
   {
    "id": "osce-amsa-187",
    "kind": "amsa",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 88, review 75): clang, vignette"
+   ],
    "quality": 80,
    "flaws": [
     "clang:minor",
@@ -9292,7 +9260,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 74 is below the AI-written bar of 80 (flaws 82, review 68): longest-key, clang, vignette"
+    "quality 74 is below the base bar of 81 (flaws 82, review 68): longest-key, clang, vignette"
    ],
    "quality": 74,
    "flaws": [
@@ -9323,7 +9291,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 100, review 63)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 63)"
    ],
    "quality": 78
   },
@@ -9346,7 +9314,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 73 is below the AI-written bar of 80 (flaws 80, review 68): clang"
+    "quality 73 is below the base bar of 81 (flaws 80, review 68): clang"
    ],
    "quality": 73,
    "flaws": [
@@ -9366,8 +9334,10 @@
   {
    "id": "osce-amsa-200",
    "kind": "amsa",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+   ],
    "quality": 80
   },
   {
@@ -9375,7 +9345,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 72 is below the AI-written bar of 80 (flaws 94, review 58): longest-key"
+    "quality 72 is below the base bar of 81 (flaws 94, review 58): longest-key"
    ],
    "quality": 72,
    "flaws": [
@@ -9387,7 +9357,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 69 is below the AI-written bar of 80 (flaws 80, review 61): clang"
+    "quality 69 is below the base bar of 81 (flaws 80, review 61): clang"
    ],
    "quality": 69,
    "flaws": [
@@ -9399,7 +9369,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 94, review 68): units"
+    "quality 78 is below the base bar of 81 (flaws 94, review 68): units"
    ],
    "quality": 78,
    "flaws": [
@@ -9454,18 +9424,16 @@
   {
    "id": "osce-amsa-217",
    "kind": "amsa",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 83), but Gastroenterology already holds 10 questions (topic balance)"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 83
   },
   {
    "id": "osce-amsa-218",
    "kind": "amsa",
-   "status": "reserve",
+   "status": "rejected",
    "reasons": [
-    "passed (quality 80), but Gastroenterology already holds 10 questions (topic balance)"
+    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
    ],
    "quality": 80
   },
@@ -9488,8 +9456,10 @@
   {
    "id": "osce-amsa-221",
    "kind": "amsa",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+   ],
    "quality": 80
   },
   {
@@ -9521,7 +9491,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 79 is below the AI-written bar of 80 (flaws 100, review 65)"
+    "quality 79 is below the base bar of 81 (flaws 100, review 65)"
    ],
    "quality": 79
   },
@@ -9537,15 +9507,17 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 100, review 63)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 63)"
    ],
    "quality": 78
   },
   {
    "id": "osce-amsa-250",
    "kind": "amsa",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+   ],
    "quality": 80
   },
   {
@@ -9567,8 +9539,10 @@
   {
    "id": "osce-amsa-257",
    "kind": "amsa",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+   ],
    "quality": 80
   },
   {
@@ -9598,10 +9572,8 @@
   {
    "id": "osce-amsa-265",
    "kind": "amsa",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 83), but Gastroenterology already holds 10 questions (topic balance)"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 83,
    "flaws": [
     "vignette:minor"
@@ -9612,7 +9584,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 94, review 68): units"
+    "quality 78 is below the base bar of 81 (flaws 94, review 68): units"
    ],
    "quality": 78,
    "flaws": [
@@ -9631,7 +9603,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the AI-written bar of 80 (flaws 88, review 70): clang, vignette"
+    "quality 77 is below the base bar of 81 (flaws 88, review 70): clang, vignette"
    ],
    "quality": 77,
    "flaws": [
@@ -9644,7 +9616,7 @@
    "kind": "amsa",
    "status": "reserve",
    "reasons": [
-    "passed (quality 81), but Gastroenterology already holds 10 questions (topic balance)"
+    "passed (quality 81), but Gastroenterology already holds 26 questions (topic balance)"
    ],
    "quality": 81,
    "flaws": [
@@ -9711,7 +9683,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 94, review 68): units"
+    "quality 78 is below the base bar of 81 (flaws 94, review 68): units"
    ],
    "quality": 78,
    "flaws": [
@@ -9730,7 +9702,7 @@
    "kind": "amsa",
    "status": "reserve",
    "reasons": [
-    "passed (quality 82), but Gastroenterology already holds 10 questions (topic balance)"
+    "passed (quality 82), but Gastroenterology already holds 26 questions (topic balance)"
    ],
    "quality": 82
   },
@@ -9739,7 +9711,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the AI-written bar of 80 (flaws 100, review 61)"
+    "quality 77 is below the base bar of 81 (flaws 100, review 61)"
    ],
    "quality": 77
   },
@@ -9755,7 +9727,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 100, review 63)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 63)"
    ],
    "quality": 78
   },
@@ -9782,7 +9754,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 100, review 63)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 63)"
    ],
    "quality": 78
   },
@@ -9791,7 +9763,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the AI-written bar of 80 (flaws 94, review 65): units"
+    "quality 77 is below the base bar of 81 (flaws 94, review 65): units"
    ],
    "quality": 77,
    "flaws": [
@@ -9815,7 +9787,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 100, review 63)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 63)"
    ],
    "quality": 78
   },
@@ -9824,7 +9796,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the AI-written bar of 80 (flaws 94, review 66): units"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): units"
    ],
    "quality": 77,
    "flaws": [
@@ -9846,7 +9818,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 82, review 76): longest-key, clang, vignette"
+    "quality 78 is below the base bar of 81 (flaws 82, review 76): longest-key, clang, vignette"
    ],
    "quality": 78,
    "flaws": [
@@ -9867,7 +9839,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the AI-written bar of 80 (flaws 94, review 66): units"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): units"
    ],
    "quality": 77,
    "flaws": [
@@ -9879,22 +9851,26 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the AI-written bar of 80 (flaws 100, review 63)"
+    "quality 78 is below the base bar of 81 (flaws 100, review 63)"
    ],
    "quality": 78
   },
   {
    "id": "osce-amsa-414",
    "kind": "amsa",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+   ],
    "quality": 80
   },
   {
    "id": "osce-amsa-415",
    "kind": "amsa",
-   "status": "pool",
-   "reasons": [],
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+   ],
    "quality": 80
   },
   {
@@ -9907,10 +9883,8 @@
   {
    "id": "osce-amsa-417",
    "kind": "amsa",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 83), but Gastroenterology already holds 10 questions (topic balance)"
-   ],
+   "status": "pool",
+   "reasons": [],
    "quality": 83
   },
   {
@@ -9918,7 +9892,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 79 is below the AI-written bar of 80 (flaws 94, review 69): units"
+    "quality 79 is below the base bar of 81 (flaws 94, review 69): units"
    ],
    "quality": 79,
    "flaws": [
@@ -9930,7 +9904,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the AI-written bar of 80 (flaws 94, review 66): vignette"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): vignette"
    ],
    "quality": 77,
    "flaws": [
@@ -9959,7 +9933,7 @@
    "kind": "amsa",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the AI-written bar of 80 (flaws 94, review 66): clang"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): clang"
    ],
    "quality": 77,
    "flaws": [
@@ -9983,26 +9957,27 @@
   {
    "id": "osce-amsa-438",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+   ],
+   "quality": 80
   },
   {
    "id": "osce-amsa-475",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 82
   },
   {
    "id": "osce-amsa-476",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 88, review 66): longest-key, units"
    ],
+   "quality": 75,
    "flaws": [
     "longest-key:minor",
     "units:minor"
@@ -10011,18 +9986,18 @@
   {
    "id": "osce-amsa-477",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 87
   },
   {
    "id": "osce-amsa-576",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 94, review 68): vignette"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:minor"
    ]
@@ -10030,34 +10005,36 @@
   {
    "id": "osce-amsa-578",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+   ],
+   "quality": 80
   },
   {
    "id": "osce-amsa-582",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 81
   },
   {
    "id": "osce-amsa-583",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "quality 78 is below the base bar of 81 (flaws 100, review 63)"
+   ],
+   "quality": 78
   },
   {
    "id": "osce-amsa-584",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 88, review 68): clang, units"
    ],
+   "quality": 76,
    "flaws": [
     "clang:minor",
     "units:minor"
@@ -10066,10 +10043,13 @@
   {
    "id": "osce-amsa-592",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer",
+    "the reviewer rejected it: The best diagnosis is acute anterolateral STEMI (likely LAD occlusion) complicated by VF, and no option gives it; the key only repeats the rhythm stated in the stem."
    ],
+   "quality": 68,
    "flaws": [
     "vignette:minor"
    ]
@@ -10077,10 +10057,11 @@
   {
    "id": "osce-amsa-598",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 88, review 71): clang, units"
    ],
+   "quality": 78,
    "flaws": [
     "clang:minor",
     "units:minor"
@@ -10089,10 +10070,11 @@
   {
    "id": "osce-amsa-599",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): clang"
    ],
+   "quality": 77,
    "flaws": [
     "clang:minor"
    ]
@@ -10100,10 +10082,9 @@
   {
    "id": "osce-amsa-625",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "vignette:minor"
    ]
@@ -10111,42 +10092,39 @@
   {
    "id": "osce-amsa-626",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 81
   },
   {
    "id": "osce-amsa-630",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 85
   },
   {
    "id": "osce-amsa-631",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 81
   },
   {
    "id": "osce-amsa-632",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 85
   },
   {
    "id": "osce-amsa-633",
    "kind": "amsa",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but Gastroenterology already holds 26 questions (topic balance)"
    ],
+   "quality": 83,
    "flaws": [
     "units:minor"
    ]
@@ -10154,18 +10132,20 @@
   {
    "id": "osce-amsa-634",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "not a single best answer (B, C also defensible)"
+   ],
+   "quality": 78
   },
   {
    "id": "osce-amsa-635",
    "kind": "amsa",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 83), but Gastroenterology already holds 26 questions (topic balance)"
    ],
+   "quality": 83,
    "flaws": [
     "units:minor"
    ]
@@ -10173,10 +10153,11 @@
   {
    "id": "osce-amsa-636",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 76, review 71): longest-key, clang, vignette, units"
    ],
+   "quality": 73,
    "flaws": [
     "longest-key:minor",
     "clang:minor",
@@ -10187,18 +10168,18 @@
   {
    "id": "osce-amsa-637",
    "kind": "amsa",
-   "status": "pending",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "passed (quality 81), but Gastroenterology already holds 26 questions (topic balance)"
+   ],
+   "quality": 81
   },
   {
    "id": "osce-amsa-638",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": [
     "units:minor"
    ]
@@ -10206,10 +10187,11 @@
   {
    "id": "osce-amsa-639",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): units"
    ],
+   "quality": 77,
    "flaws": [
     "units:minor"
    ]
@@ -10217,10 +10199,11 @@
   {
    "id": "osce-amsa-644",
    "kind": "amsa",
-   "status": "pending",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Stem names the rhythm, so the item tests nothing"
    ],
+   "quality": 69,
    "flaws": [
     "vignette:minor"
    ]
@@ -10228,34 +10211,30 @@
   {
    "id": "osce-amsa-645",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 88
   },
   {
    "id": "osce-amsa-646",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 81
   },
   {
    "id": "osce-amsa-647",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 86
   },
   {
    "id": "osce-amsa-663",
    "kind": "amsa",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "status": "pool",
+   "reasons": [],
+   "quality": 85
   }
  ]
 }

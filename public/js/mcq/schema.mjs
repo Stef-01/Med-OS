@@ -10,8 +10,8 @@
      ai              written by a model (generate-mcq.mjs), or made in code from an AI-written station
      amsa            made from an AMSA MedEd OSCE station (the station's case is AMSA's; its text is AI-written)
      usmle-resource  an open, licensed online USMLE-style bank (MedQA, MMLU professional medicine)
-   An AI suggestion for a user's question is a separate record (data/mcq/suggestions.json); the question stays the
-   user's. Plain text throughout: every surface renders with textContent or esc(), so a question can carry no markup.
+   The reviewer's suggestion for a question is kept beside it, in its verdict (data/mcq/verdicts.json, rubric.suggestion),
+   and never applied to it: a user's question stays exactly the user's. Plain text throughout: every surface renders with textContent or esc(), so a question can carry no markup.
    Pure: the app's submit form, the scripts and the tests share it. */
 
 export const KINDS = Object.freeze({ user: 'User', ai: 'AI', amsa: 'AMSA', 'usmle-resource': 'USMLE resource' });

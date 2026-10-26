@@ -1,9 +1,9 @@
 {
  "note": "Written by scripts/mcq-evals.mjs. Aggregate numbers only: no official item text.",
  "bars": {
-  "base": 70,
-  "ai": 80,
-  "from": "defaults (no official samples here)"
+  "base": 81,
+  "ai": 89,
+  "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
  },
  "sets": {
   "MedQA Step 2&3": {
@@ -31,19 +31,20 @@
     "stem-length": 0.3,
     "units": 2.7
    },
-   "judged": 1,
+   "judged": 51,
    "quality": {
-    "mean": 90,
-    "p5": 90,
-    "p10": 90,
-    "p25": 90,
-    "p50": 90
+    "mean": 85.2,
+    "p5": 70,
+    "p10": 75,
+    "p25": 81,
+    "p50": 87
    },
-   "gatesPass": 100,
-   "solved2": 100,
-   "keyCorrect": 100,
-   "passBase": 100,
-   "passAi": 100
+   "gatesPass": 92.2,
+   "solved2": 94.1,
+   "keyCorrect": 98,
+   "passBase": 80.4,
+   "passAi": 37.3,
+   "passAsSelected": 80.4
   },
   "MMLU professional medicine": {
    "n": 272,
@@ -70,34 +71,60 @@
     "stem-length": 0,
     "units": 0
    },
-   "judged": 0
+   "judged": 16,
+   "quality": {
+    "mean": 88.1,
+    "p5": 74,
+    "p10": 80,
+    "p25": 85,
+    "p50": 88
+   },
+   "gatesPass": 100,
+   "solved2": 93.8,
+   "keyCorrect": 100,
+   "passBase": 87.5,
+   "passAi": 50,
+   "passAsSelected": 87.5
   },
   "Official USMLE Step 2 CK samples": {
-   "n": 0,
+   "n": 41,
    "flaw": {
-    "mean": null,
-    "p5": null,
-    "p10": null,
-    "p50": null,
-    "anyMajor": null
+    "mean": 98.5,
+    "p5": 94,
+    "p10": 94,
+    "p50": 100,
+    "anyMajor": 2.4
    },
    "checks": {
-    "schema": null,
-    "lead-in": null,
-    "cover-options": null,
-    "all-none": null,
-    "negative-stem": null,
-    "longest-key": null,
-    "grammar-cue": null,
-    "convergence": null,
-    "absolute-terms": null,
-    "clang": null,
-    "duplicate-options": null,
-    "vignette": null,
-    "stem-length": null,
-    "units": null
+    "schema": 0,
+    "lead-in": 0,
+    "cover-options": 0,
+    "all-none": 0,
+    "negative-stem": 0,
+    "longest-key": 0,
+    "grammar-cue": 0,
+    "convergence": 0,
+    "absolute-terms": 7.3,
+    "clang": 4.9,
+    "duplicate-options": 0,
+    "vignette": 7.3,
+    "stem-length": 0,
+    "units": 0
    },
-   "judged": 0
+   "judged": 41,
+   "quality": {
+    "mean": 91.4,
+    "p5": 81,
+    "p10": 84,
+    "p25": 89,
+    "p50": 92
+   },
+   "gatesPass": 97.6,
+   "solved2": 97.6,
+   "keyCorrect": 100,
+   "passBase": 95.1,
+   "passAi": 75.6,
+   "passAsSelected": 95.1
   },
   "QUEST-AI GPT-4 look-alikes": {
    "n": 43,
@@ -124,35 +151,36 @@
     "stem-length": 0,
     "units": 0
    },
-   "judged": 32,
+   "judged": 43,
    "quality": {
-    "mean": 82.6,
-    "p5": 54,
-    "p10": 69,
-    "p25": 78,
-    "p50": 86
+    "mean": 80.6,
+    "p5": 52,
+    "p10": 60,
+    "p25": 77,
+    "p50": 85
    },
-   "gatesPass": 78.1,
-   "solved2": 87.5,
-   "keyCorrect": 87.5,
-   "passBase": 78.1,
-   "passAi": 75
+   "gatesPass": 72.1,
+   "solved2": 81.4,
+   "keyCorrect": 83.7,
+   "passBase": 69.8,
+   "passAi": 30.2,
+   "passAsSelected": 69.8
   },
   "MedQA Step 1": {
    "n": 679,
    "flaw": {
-    "mean": 96.2,
+    "mean": 96.1,
     "p5": 80,
     "p10": 88,
     "p50": 100,
-    "anyMajor": 8.8
+    "anyMajor": 9.3
    },
    "checks": {
     "schema": 0,
     "lead-in": 0.1,
     "cover-options": 5.4,
     "all-none": 0,
-    "negative-stem": 0.3,
+    "negative-stem": 0.7,
     "longest-key": 3.1,
     "grammar-cue": 0,
     "convergence": 0,
@@ -168,18 +196,18 @@
   "MMLU clinical knowledge + college medicine": {
    "n": 428,
    "flaw": {
-    "mean": 74.5,
+    "mean": 73.8,
     "p5": 56,
     "p10": 62,
     "p50": 68,
-    "anyMajor": 61.9
+    "anyMajor": 65.4
    },
    "checks": {
     "schema": 0,
     "lead-in": 41.8,
     "cover-options": 15.2,
     "all-none": 1.2,
-    "negative-stem": 4.2,
+    "negative-stem": 7.7,
     "longest-key": 6.5,
     "grammar-cue": 0,
     "convergence": 0,
@@ -195,22 +223,22 @@
   "MedMCQA dev (Indian PG entrance)": {
    "n": 4091,
    "flaw": {
-    "mean": 69.8,
-    "p5": 42,
+    "mean": 69.5,
+    "p5": 48,
     "p10": 48,
     "p50": 68,
-    "anyMajor": 67.7
+    "anyMajor": 70.2
    },
    "checks": {
     "schema": 0,
     "lead-in": 51.8,
     "cover-options": 20,
     "all-none": 5.9,
-    "negative-stem": 12.9,
+    "negative-stem": 15.5,
     "longest-key": 4.8,
     "grammar-cue": 0,
     "convergence": 0.1,
-    "absolute-terms": 7.4,
+    "absolute-terms": 3.4,
     "clang": 0.3,
     "duplicate-options": 1.7,
     "vignette": 98.6,
@@ -244,7 +272,20 @@
     "stem-length": 0,
     "units": 18.1
    },
-   "judged": 0
+   "judged": 105,
+   "quality": {
+    "mean": 80.4,
+    "p5": 71,
+    "p10": 74,
+    "p25": 78,
+    "p50": 81
+   },
+   "gatesPass": 92.4,
+   "solved2": 99,
+   "keyCorrect": 98.1,
+   "passBase": 53.3,
+   "passAi": 1.9,
+   "passAsSelected": 53.3
   },
   "Station-derived (AI stations)": {
    "n": 26,
@@ -271,24 +312,25 @@
     "stem-length": 0,
     "units": 11.5
    },
-   "judged": 1,
+   "judged": 26,
    "quality": {
-    "mean": 80,
-    "p5": 80,
-    "p10": 80,
-    "p25": 80,
+    "mean": 77.6,
+    "p5": 64,
+    "p10": 71,
+    "p25": 74,
     "p50": 80
    },
-   "gatesPass": 100,
+   "gatesPass": 76.9,
    "solved2": 100,
-   "keyCorrect": 100,
-   "passBase": 100,
-   "passAi": 100
+   "keyCorrect": 92.3,
+   "passBase": 26.9,
+   "passAi": 0,
+   "passAsSelected": 0
   },
   "Generated (generate-mcq.mjs)": {
-   "n": 10,
+   "n": 64,
    "flaw": {
-    "mean": 98.2,
+    "mean": 98.1,
     "p5": 94,
     "p10": 94,
     "p50": 100,
@@ -300,17 +342,30 @@
     "cover-options": 0,
     "all-none": 0,
     "negative-stem": 0,
-    "longest-key": 0,
+    "longest-key": 3.1,
     "grammar-cue": 0,
-    "convergence": 0,
-    "absolute-terms": 0,
-    "clang": 0,
+    "convergence": 1.6,
+    "absolute-terms": 6.3,
+    "clang": 1.6,
     "duplicate-options": 0,
-    "vignette": 20,
+    "vignette": 15.6,
     "stem-length": 0,
-    "units": 10
+    "units": 3.1
    },
-   "judged": 0
+   "judged": 64,
+   "quality": {
+    "mean": 94.7,
+    "p5": 89,
+    "p10": 90,
+    "p25": 93,
+    "p50": 95
+   },
+   "gatesPass": 100,
+   "solved2": 100,
+   "keyCorrect": 100,
+   "passBase": 100,
+   "passAi": 95.3,
+   "passAsSelected": 95.3
   }
  }
 }

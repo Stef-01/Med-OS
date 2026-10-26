@@ -7,7 +7,8 @@
      4 judge gates  the key judged wrong, unsafe, not a single best answer, solved to another answer both times, or
                     rejected by the reviewer; AI-written (ai, amsa) must be solved to the key both times
      5 the bar      quality = 0.4 x flaw score + 0.6 x judge score, against the bar calibrated on the benchmarks
-                    (data/mcq/calibration.json): the base bar for user and usmle-resource items, a higher one for AI
+                    (data/mcq/calibration.json): the base bar for user, usmle-resource and amsa items, a higher one for
+                    ai (a model writing freely)
    Then, over everything that passed, best first within each kind:
      6 duplicates   a near-duplicate (word 3-gram Jaccard or containment, flaws.mjs DUP) of a question already admitted
                     is refused; user questions are admitted first, so a user's question is never displaced
@@ -24,7 +25,11 @@ export const QUOTA = Object.freeze({ 'usmle-resource': 160, amsa: 110, ai: 110 }
 export const TOPIC_SHARE = 0.15;
 export const DEFAULT_BARS = Object.freeze({ base: 70, ai: 80 });
 export const quality = (flaw, judge) => Math.round(0.4 * flaw + 0.6 * judge);
+/* AI-written text (ai, and amsa: an AMSA case in an AI-written station) must be solved to its key both times; the higher
+   quality bar is for kind ai, a model writing freely. An amsa question is made in code from the station's own
+   differential, so it is held to the base bar (docs/mcq.md) */
 const aiWritten = q => q.provenance?.kind === 'ai' || q.provenance?.kind === 'amsa';
+const aiBar = q => q.provenance?.kind === 'ai';
 
 /* one candidate on its own (steps 1-5) -> { id, kind, status: 'pass'|'rejected'|'pending', reasons, ... } */
 export function assess(raw, { verdicts = {}, bars = DEFAULT_BARS } = {}) {
@@ -36,11 +41,11 @@ export function assess(raw, { verdicts = {}, bars = DEFAULT_BARS } = {}) {
   if (rep.blocked) return { ...base, status: 'rejected', reasons: rep.failed.filter(f => f.severity === 'block').map(f => f.reason) };
   const v = verdictFor(verdicts, q);
   if (!v) return { ...base, status: 'pending', reasons: ['waiting for the model review (node scripts/mcq-judge.mjs)'] };
-  const js = judgeScore(v, q), score = quality(rep.score, js), bar = aiWritten(q) ? bars.ai : bars.base;
+  const js = judgeScore(v, q), score = quality(rep.score, js), bar = aiBar(q) ? bars.ai : bars.base;
   const out = { ...base, verdict: v, judgeScore: js, quality: score, bar };
   const gates = judgeGates(v, q, { strict: aiWritten(q) });
   if (gates.length) return { ...out, status: 'rejected', reasons: gates };
-  if (score < bar) return { ...out, status: 'rejected', reasons: [`quality ${score} is below the ${aiWritten(q) ? 'AI-written' : 'base'} bar of ${bar} (flaws ${rep.score}, review ${js})${rep.failed.length ? `: ${rep.failed.filter(f => f.severity !== 'info').map(f => f.check).join(', ')}` : ''}`] };
+  if (score < bar) return { ...out, status: 'rejected', reasons: [`quality ${score} is below the ${aiBar(q) ? 'AI-written' : 'base'} bar of ${bar} (flaws ${rep.score}, review ${js})${rep.failed.length ? `: ${rep.failed.filter(f => f.severity !== 'info').map(f => f.check).join(', ')}` : ''}`] };
   return { ...out, status: 'pass', reasons: [] };
 }
 
