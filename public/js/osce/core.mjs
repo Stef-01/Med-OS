@@ -349,10 +349,23 @@ export function osceBody(row, body) {
   return out;
 }
 /* the exam's vitals line ("HR 112 regular, BP 86/52 mmHg, SpO2 89% on room air ...") as [name, value] rows for the
-   candidate's screen: a comma before a capital starts a new sign; a sign's name is the words before its first number */
+   candidate's screen: a comma before a capital, or a semicolon before a short name and a number, starts a new sign; a
+   sign's name is the words before its first number; words that are not a sign, ending in a colon before one ("10:20,
+   seated at rest: HR 68"), are a row of their own */
+const SIGN = /^([A-Za-z][A-Za-z0-9₂ ]*?)\s+(?=[-<>~≈]?\d)(.+)$/, SHORT_SIGN = /^\s*[A-Za-z][A-Za-z0-9₂]*(?: [A-Za-z0-9₂]+){0,2}\s+[-<>~≈]?\d/;
+/* the line cut at each semicolon outside brackets that a short sign follows ("…; weight 58 kg"), not one inside a note */
+function semiParts(line) {
+  const out = []; let depth = 0, from = 0;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '(') depth++; else if (c === ')') depth = Math.max(0, depth - 1);
+    else if (c === ';' && !depth && SHORT_SIGN.test(line.slice(i + 1))) { out.push(line.slice(from, i)); from = i + 1; }
+  }
+  return [...out, line.slice(from)];
+}
 export function osceVitals(line) {
-  return String(line || '').split(/,\s+(?=[A-Z]|[a-z][A-Za-z ]*\s[-<>~≈]?\d)/).map(x => x.trim()).filter(Boolean).map(x => {
-    const m = x.match(/^([A-Za-z][A-Za-z0-9₂ ]*?)\s+(?=[-<>~≈]?\d)(.+)$/);
-    return m ? [m[1][0].toUpperCase() + m[1].slice(1), m[2]] : ['', x];
+  return semiParts(String(line || '')).flatMap(p => p.split(/,\s+(?=[A-Z]|[a-z][A-Za-z ]*\s[-<>~≈]?\d)/)).map(x => x.trim()).filter(Boolean).flatMap(x => {
+    const lead = x.match(/^(.+?):\s+(.+)$/), rest = lead && !SIGN.test(lead[1]) && SIGN.test(lead[2]) ? lead[2] : null;
+    return (rest ? [lead[1], rest] : [x]).map(y => { const m = y.match(SIGN); return m ? [m[1][0].toUpperCase() + m[1].slice(1), m[2]] : ['', y]; });
   });
 }

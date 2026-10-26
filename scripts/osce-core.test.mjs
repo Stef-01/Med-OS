@@ -172,6 +172,15 @@ test('vitals on the candidate\'s screen: one row per sign, named by the words be
   assert.deepEqual(osceVitals('BGL 5.4 mmol/L, weight 78 kg'), [['BGL', '5.4 mmol/L'], ['Weight', '78 kg']], 'a lower-case sign with a number starts a row too');
   assert.deepEqual(osceVitals('SpO2 98% on room air, settling'), [['SpO2', '98% on room air, settling']]);
   assert.deepEqual(osceVitals('Alert and talking'), [['', 'Alert and talking']]);
+  assert.deepEqual(osceVitals('HR 82 beats/min regular; BP 148/92 mmHg; RR 16/min; SpO2 96% on room air; temperature 36.6 °C'),
+    [['HR', '82 beats/min regular'], ['BP', '148/92 mmHg'], ['RR', '16/min'], ['SpO2', '96% on room air'], ['Temperature', '36.6 °C']], 'semicolons part the signs too');
+  assert.deepEqual(osceVitals('10:20, seated at rest on room air: HR 68 beats/min, regular; BP 122/74 mmHg'),
+    [['', '10:20, seated at rest on room air'], ['HR', '68 beats/min, regular'], ['BP', '122/74 mmHg']], 'when and how they were taken is a row of its own');
+  assert.deepEqual(osceVitals('GCS 15: alert'), [['GCS', '15: alert']], 'a colon after the number stays in the value');
+  assert.deepEqual(osceVitals('Temperature 37.1 C. The monitor shows a slow fetal heart rate; the CTG is handed over in Part 2.'),
+    [['Temperature', '37.1 C. The monitor shows a slow fetal heart rate; the CTG is handed over in Part 2.']], 'a semicolon in a sentence does not part it');
+  assert.deepEqual(osceVitals('Pain 7/10 (triage 20 minutes ago: RR 24/min, SpO2 93% RA)'), [['Pain', '7/10 (triage 20 minutes ago: RR 24/min'], ['SpO2', '93% RA)']], 'a colon after a sign leaves it whole');
+  assert.deepEqual(osceVitals('Temperature 37.8 °C, alert (14:40 set; the 08:00 set was all normal)'), [['Temperature', '37.8 °C, alert (14:40 set; the 08:00 set was all normal)']], 'a semicolon inside brackets is part of the note');
   assert.deepEqual(osceVitals(''), []);
   const sl = examSlides({ vitals: 'HR 108, BP 114/72', bedside: [{ test: 'BGL', find: '5.6 mmol/L' }], steps: [{ area: 'Abdomen', find: 'Guarding' }] });
   assert.deepEqual(sl.map(x => x.label), ['Vital signs', 'Bedside tests']);
