@@ -570,10 +570,10 @@ async function duel() {
   /* ranked: the card, then both in the queue meet in a live duel; Escape leaves it as any duel */
   await a.waitForSelector('.os-duel [data-sec="ranked"]:not([hidden]) .pd-rank');
   ok(/Placing/.test(await a.textContent('.os-duel .pd-rank')), 'duel: the ranked card shows a new player placing');
-  await a.click('.os-duel [data-pd="ladder"]'); await a.waitForSelector('.os-duel .pd-lboard .pd-lrow[data-me]');
+  await a.click('.os-duel [data-pd="ladder"]'); await a.waitForSelector('.os-duel .pd-sheet .pd-lboard .pd-lrow[data-me]');
   ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'duel: the leaderboard fits a 320 px phone');
   await a.screenshot({ path: path.join(SHOTS, 'duel-ladder.png') });
-  await a.keyboard.press('Escape'); await a.waitForSelector('.os-duel .pd-lboard', { state: 'detached' });
+  await a.keyboard.press('Escape'); await a.waitForSelector('.os-duel .pd-sheet .pd-lboard', { state: 'detached' });
   await a.click('.os-duel [data-pd="ranked"]'); await a.waitForSelector('.os-duel .pd-search');
   await c.click('.os-duel [data-pd="ranked"]');
   await timed('a ranked match is made', () => Promise.all([a, c].map(pg => pg.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 6000 }))));
