@@ -13,7 +13,7 @@ What's in it:
 
 ## Duel a Mate
 
-**Duel a Mate** (Beta: the slim tile at the top of the start screen, a work in progress) is a live quiz between the two of you, with a cartoon dog each: the same questions on both phones against the same clock, right and fast wins, round by round. The questions come from the bank: one per station, "what is the most likely diagnosis?", with the station's findings as the stem and its own differential as the other options (the dangerous alternatives first). They are AI-written like the stations and say so. The game itself stays quiet (a reveal shows who picked what, and the points); after it, **Review** lists every question with its answer and why each wrong pick is wrong. Your dog is yours to dress: 22 dogs of 18 breeds, each breed's real coats, eight collar colours and 52 pieces in four slots, more of them opening with every win.
+**Duel a Mate** (Beta, a work in progress: off until you switch it on in **Settings → Games**, then a card on the start screen like Request a case) is a live quiz between the two of you, with a cartoon dog each: the same questions on both phones against the same clock, right and fast wins, round by round. The questions come from the bank: one per station, "what is the most likely diagnosis?", with the station's findings as the stem and its own differential as the other options (the dangerous alternatives first). They are AI-written like the stations and say so. The game itself stays quiet (a reveal shows who picked what, and the points); after it, **Review** lists every question with its answer and why each wrong pick is wrong. Your dog is yours to dress: 22 dogs of 18 breeds, each breed's real coats, eight collar colours and 52 pieces in four slots, more of them opening with every win.
 
 - Sign in with a name and a 4-digit PIN (no email, no password). Challenge the other, pick 5, 7 or 10 questions, 15, 20 or 30 seconds each, and a specialty if you like. Every win opens two more pieces for your dog to wear.
 - Moves reach the other phone within 5 seconds, even when the realtime connection drops, because both phones read a shared log of the duel (and the e2e times every move).
@@ -38,6 +38,10 @@ To put it online, import the repo into Vercel (it reads `vercel.json`, output di
 6. **Next Station** shows who sits next (Swap to change it). **End Session** lists every station with whose attempt it was.
 7. **Marked** (top right of the start screen) collects every AI-marked attempt.
 8. **Request a case** (on the start screen, or **Request this case** when a search finds nothing) asks for a station the bank does not have: the case in a line, and if you like the setting, specialty, patient, the results you want to interpret in Part 2, the focus and a note. Your requests list shows where each stands: Requested, Being written (with the writer's note), Ready (open it from there) or Not made (with the reason). With sync set up the request goes by itself; without it, **Copy** or **Share** it to whoever writes your cases.
+
+### Your account
+
+**Settings → Account**: sign in with a name and a 4-digit PIN (the same as Duel a Mate's; **New account** makes one). Signed in, your OSCE progress (attempts, saved stations, case requests, names, which games are on) is kept on your account, and Settings shows it next to your Duel a Mate progress (rating, record, bones). Sign in on another device and it picks up where you left off. Signed out, progress is shared through the site's one record, as before. `supabase/migrations/0006_osce_accounts.sql` keeps account rows apart: the public key cannot read them; only `osce_pull` and `osce_push`, with your sign-in, can.
 
 ### AI marking
 

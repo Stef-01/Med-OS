@@ -46,6 +46,7 @@ function supabase(req, res, url) {
 }
 /* and for the duel's functions (supabase/migrations/0002_pup_duel.sql), the vendored package's own copy of their rules */
 const DUEL = duelServer();
+const byToken = t => { const p = Object.values(DUEL.db.players).find(x => x.token === t); if (!p) throw new Error('Sign in again'); return p; };
 function duelRpc(req, res, fn) {
   let body = '';
   req.on('data', c => { body += c; });
@@ -57,7 +58,10 @@ function duelRpc(req, res, fn) {
       /* the shop (supabase/migrations/0003_pup_shop.sql) */
       pup_wallet: () => DUEL.wallet(a.p_token), pup_buy: () => DUEL.buy(a.p_token, a.p_ids, a.p_total), pup_practice: () => DUEL.practice(a.p_token, a.p_right), pup_outfits: () => DUEL.outfits(a.p_token, a.p_outfits),
       /* ranked (supabase/migrations/0004_pup_ranked.sql) */
-      pup_queue: () => DUEL.queue(a.p_token, a.p_setup), pup_unqueue: () => DUEL.unqueue(a.p_token), pup_leaderboard: () => DUEL.leaderboard(a.p_token)
+      pup_queue: () => DUEL.queue(a.p_token, a.p_setup), pup_unqueue: () => DUEL.unqueue(a.p_token), pup_leaderboard: () => DUEL.leaderboard(a.p_token),
+      /* OSCE progress on an account (supabase/migrations/0006_osce_accounts.sql): the token checked, the rows kept apart */
+      osce_pull: () => { const me = byToken(a.p_token); return [...SB.values()].filter(r => r.ns === `u:${me.id}:${a.p_ns}`).map(({ id, value, updated_at }) => ({ id, value, updated_at })); },
+      osce_push: () => { const me = byToken(a.p_token); for (const r of a.p_rows || []) { const k = `u:${me.id}:${a.p_ns}\n${r.id}`, had = SB.get(k); if (!had || Date.parse(r.updated_at) > Date.parse(had.updated_at)) SB.set(k, { ns: `u:${me.id}:${a.p_ns}`, ...r }); } return (a.p_rows || []).length; }
     }[fn];
     try { const out = await call(); res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(out)); }
     catch (e) { res.writeHead(400, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ code: 'P0001', message: e.message })); }
@@ -71,7 +75,7 @@ const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://x');
   for (const [k, v] of Object.entries(prodHeaders(url.pathname))) res.setHeader(k, v);
   if (url.pathname === '/sb/rest/v1/osce_state') return supabase(req, res, url);
-  const rpc = /^\/sb\/rest\/v1\/rpc\/(pup_[a-z]+)$/.exec(url.pathname);
+  const rpc = /^\/sb\/rest\/v1\/rpc\/((?:pup|osce)_[a-z]+)$/.exec(url.pathname);
   if (rpc) return duelRpc(req, res, rpc[1]);
   const u = decodeURIComponent(url.pathname);
   let f = path.join(ROOT, u.endsWith('/') ? `${u}index.html` : u);
@@ -530,13 +534,20 @@ async function duel() {
   const timed = async (label, fn) => { const t = Date.now(); await fn(); const ms = Date.now() - t; lags.push(ms); ok(ms <= 5000, `duel: ${label} in ${ms} ms (at most 5 s)`); };
   const shared = { supabaseUrl: `${BASE}sb`, supabaseAnonKey: 'anon', duelRealtime: false };
   const a = await phone(320, 640, shared), c = await phone(393, 852, shared);
-  /* the way in: a slim bar at the bottom of the screen on Start, marked Beta (a work in progress), in view without scrolling */
-  ok(await a.locator('.os-start > [data-os="duel"] .os-beta').isVisible(), 'duel: the Start bar is marked Beta');
-  const atFoot = pg => pg.evaluate(() => { const r = document.querySelector('.os-start > [data-os="duel"]').getBoundingClientRect(); return r.bottom <= innerHeight + 1 && r.bottom > innerHeight - 140 && r.top >= 0; });
-  ok(await atFoot(a), 'duel: the bar sits at the bottom of the screen');
-  await a.evaluate(() => { const s = document.querySelector('.os-start'); s.scrollTop = s.scrollHeight; });
-  ok(await atFoot(a), 'duel: the bar stays at the bottom when the start view scrolls');
-  await a.evaluate(() => { document.querySelector('.os-start').scrollTop = 0; });
+  /* the way in: off until switched on in Settings (founder 2026-10-25), then a card like Request a case, in the page */
+  ok(await a.locator('.os-start [data-os="duel"]').count() === 0, 'duel: off by default, not on Start');
+  for (const pg of [a, c]) {
+    await pg.click('[data-os="settings"]');
+    await pg.waitForSelector('.os-switch[data-game="duel"][aria-checked="false"]');
+    if (pg === a) await pg.screenshot({ path: path.join(SHOTS, 'settings-games.png') });
+    await pg.click('.os-switch[data-game="duel"]');
+    await pg.waitForSelector('.os-switch[data-game="duel"][aria-checked="true"]');
+    await pg.keyboard.press('Escape'); await pg.waitForSelector('.os-start [data-os="duel"]');
+  }
+  ok(await a.locator('.os-start > [data-os="duel"] .os-beta').isVisible(), 'duel: switched on in Settings, its card is on Start, marked Beta');
+  const card = await a.evaluate(() => { const d = document.querySelector('.os-start > [data-os="duel"]'), r = document.querySelector('.os-start > [data-os="requests"]'); return { pos: getComputedStyle(d).position, big: d.classList.contains('os-bigcard'), after: r && r.nextElementSibling === d }; });
+  ok(card.pos !== 'sticky' && card.pos !== 'fixed' && card.big && card.after, `duel: a card like Request a case, right after it, not a bar held on screen (${JSON.stringify(card)})`);
+  await a.screenshot({ path: path.join(SHOTS, 'start-duel-card.png') });
   for (const [pg, name, pin, dog] of [[a, 'Sam', '1234', 'mochi'], [c, 'Alex', '4321', 'rosie']]) {
     await pg.click('[data-os="duel"]');
     await pg.waitForSelector('.os-duel[data-ready] form[data-pd="signin"]');
@@ -606,7 +617,23 @@ async function duel() {
   await a.keyboard.press('Escape');
   await a.waitForSelector('.os-duel', { state: 'hidden' });
   ok(await a.locator('.os-start [data-os="duel"]').isVisible(), 'duel: Escape from the lobby closes it, back on the start view');
+  /* one account: signed in for the duel is signed in in Settings, with both progress lines; the OSCE record goes to the account */
+  await a.click('[data-os="settings"]'); await a.waitForSelector('.os-acctwho');
+  ok(/Signed in as Sam/.test(await a.textContent('.os-acctwho')), "account: Settings shows the duel's sign-in");
+  await a.waitForFunction(() => !/Loading/.test(document.querySelector('[data-set="aduel"]')?.textContent || 'Loading'), null, { timeout: 6000 });
+  const duelLine = await a.textContent('[data-set="aduel"]');
+  ok(/rating/.test(duelLine) && /lost/.test(duelLine) && /bones/.test(duelLine), `account: the duel progress shows (${duelLine})`);
+  ok(/attempted/.test(await a.textContent('.os-acctstats')), 'account: the OSCE progress shows');
+  ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'account: Settings fits a 320 px phone');
+  await a.screenshot({ path: path.join(SHOTS, 'settings-account.png') });
+  await a.keyboard.press('Escape');
+  await a.evaluate(() => { const ev = new Event('visibilitychange'); Object.defineProperty(document, 'visibilityState', { value: 'visible', configurable: true }); document.dispatchEvent(ev); });
+  await a.waitForTimeout(1500);
+  const sam = Object.values(DUEL.db.players).find(p => p.name === 'Sam');
+  ok([...SB.keys()].some(k => k.startsWith(`u:${sam.id}:osce
+`)), 'account: the OSCE record is kept on the account (osce_push)');
   const solo = await phone(320, 640, {});
+  await solo.click('[data-os="settings"]'); await solo.click('.os-switch[data-game="duel"]'); await solo.keyboard.press('Escape');   /* off until switched on */
   await solo.click('[data-os="duel"]'); await solo.waitForSelector('.os-duel [data-pd="practice"]');
   await solo.click('.os-duel [data-pd="practice"]');
   await solo.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 15000 });
