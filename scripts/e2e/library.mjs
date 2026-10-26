@@ -49,7 +49,8 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   };
   const open = async (pg, tab) => {
     if (!await pg.locator('.os-lib').count()) { await pg.click('.os-start [data-os="lib"]'); await pg.waitForSelector('.os-lib'); }
-    if (tab) { await pg.click(`.os-libtabs [data-tab="${tab}"]`); await pg.waitForSelector(`.os-libtabs [data-tab="${tab}"][aria-selected="true"]`); }
+    if (tab === 'upload') { await pg.click('.os-libtabs [data-tab="library"]'); await pg.waitForSelector('.os-libtabs [data-tab="library"][aria-selected="true"]'); await pg.locator('.os-libp [data-lib="tab"][data-tab="upload"]').first().click(); await pg.waitForSelector('.os-libsteps'); }   /* Upload lives inside Library */
+    else if (tab) { await pg.click(`.os-libtabs [data-tab="${tab}"]`); await pg.waitForSelector(`.os-libtabs [data-tab="${tab}"][aria-selected="true"]`); }
     await pg.waitForTimeout(250);
   };
   const close = async pg => { await pg.keyboard.press('Escape'); await pg.waitForSelector('.os-lib', { state: 'detached' }); };
@@ -59,6 +60,9 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(await sam.locator('.os-start > [data-os="lib"]').isVisible(), 'library: Your questions is a card on Start');
   await signUp(sam, 'Lee', '1234');
   await open(sam);
+  ok(await sam.getAttribute('.os-libtabs [data-tab="study"]', 'aria-selected') === 'true' && /Start · /.test(await sam.textContent('.os-libgo')), 'library: opens on Study, Start ready on the bank for a first-timer');
+  await shot(sam, '320-first-open');
+  await open(sam, 'library');
   ok(/No questions yet/.test(await sam.textContent('.os-libp')), 'library: empty, it says how to start');
   await shot(sam, '320-empty'); await flat(sam, 'empty');
   await sam.click('.os-libempty [data-lib="tab"]'); await sam.waitForSelector('.os-libsteps');
@@ -77,14 +81,17 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await sam.waitForSelector('.os-libtabs [data-tab="library"][aria-selected="true"]'); await sam.waitForSelector('.os-libdeck');
   ok(/Wk 1 mixed/.test(await sam.textContent('.os-libdeck')) && /3 questions/.test(await sam.textContent('.os-libdeck')), 'library: saved, the deck is in Library at once with its 3 questions');
   await shot(sam, '320-library'); await flat(sam, 'library');
-  await sam.fill('.os-libp [name="find"]', 'barking'); await sam.waitForTimeout(400);
-  ok(/1 question found/.test(await sam.textContent('.os-libp')) && /dexamethasone/i.test(await sam.textContent('.os-libfound')), 'library: find a question across your decks (with its answer)');
-  await sam.fill('.os-libp [name="find"]', '');  await sam.waitForTimeout(300);
+  ok(await sam.locator('.os-libp [name="find"]').count() === 0, 'library: no find box for a small library');
   await sam.click('.os-libqs summary'); await sam.waitForTimeout(200);
   ok(await sam.locator('.os-libqs li').count() === 3 && /Paediatrics › Anatomy/.test(await sam.textContent('.os-libqs')), 'library: each question shows its specialty and kind');
 
-  /* Study, Custom: a deck's Study opens the builder on it; the drill-down narrows, a chip with nothing is not shown */
-  await sam.click('.os-libdeck [data-lib="studydeck"]'); await sam.waitForSelector('.os-libgo');
+  /* a deck's Study studies it at once */
+  await sam.click('.os-libdeck [data-lib="studydeck"]'); await sam.waitForSelector('.os-libopt');
+  ok(/\/3$/.test((await sam.textContent('.os-libcount2')).trim()) && !(await sam.locator('.os-dlg-head').isVisible()), "deck: Study starts on the deck's 3, one bar on top (the sheet's header steps aside)");
+  await sam.click('[data-lib="endstudy"]'); await sam.waitForSelector('.os-libtoday');
+  /* Custom: the deck, the drill-down narrows, a chip with nothing is not shown */
+  await sam.click('[data-lib="mode"][data-m="custom"]'); await sam.waitForSelector('.os-libgo');
+  await sam.selectOption('.os-libp [name="sdeck"]', { label: 'Wk 1 mixed' }); await sam.waitForTimeout(150);
   await sam.click('.os-libchips [data-k="topic"][data-v="Paediatrics"]'); await sam.waitForTimeout(150);
   ok(/Start · 2 cards/.test(await sam.textContent('.os-libgo')), 'custom: Paediatrics narrows to its 2');
   await sam.click('.os-libchips [data-k="cat"][data-v="anatomy"]'); await sam.waitForTimeout(150);
@@ -119,7 +126,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(/1-day streak/.test(home) && /of 20/.test(home) && /Start · /.test(await sam.textContent('.os-libgo')), `home: today's ring (of 20), a 1-day streak, and Start`);
   ok(await sam.locator('[data-lib="mode"][data-m="flagged"] .os-libmode-n').textContent() === '1', 'home: Flagged has the one flagged');
   await sam.evaluate(() => document.querySelector('.os-dlg-body')?.scrollTo(0, 0)); await shot(sam, '320-study-home'); await flat(sam, 'home');
-  await sam.click('[data-lib="pref"][data-k="goal"][data-v="10"]'); await sam.waitForTimeout(150);
+  await sam.click('.os-libsettings > summary'); await sam.click('[data-lib="pref"][data-k="goal"][data-v="10"]'); await sam.waitForTimeout(150);
   ok(/of 10/.test(await sam.textContent('.os-libring')), 'home: the daily goal can be changed');
   /* Smart 10, the Notebook, Resume */
   await sam.click('[data-lib="mode"][data-m="smart"]'); await sam.waitForSelector('.os-libopt');
@@ -136,12 +143,13 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await sam.click('[data-lib="sumback"]');
   /* 0 to 1 from the home: Year 1 first, only ever up */
   await sam.click('[data-lib="mode"][data-m="ladder"]'); await sam.waitForSelector('.os-libopt');
-  const climb = await sam.evaluate(() => document.querySelector('.os-libcard > .os-liblayer').textContent);
-  ok(/^Year 1 · /.test(climb) && await sam.locator('.os-libyear').isVisible(), `0 to 1: starts at Year 1, and says so (${climb})`);
+  const yearNow = () => sam.evaluate(() => { const b = document.querySelector('.os-libyear b'), m = document.querySelector('.os-libcard > .os-liblayer'); return +((b ? b.textContent : m.textContent).match(/Year (\d)/) || [0, 0])[1]; });
+  const climb = await sam.textContent('.os-libyear');
+  ok(/Year 1/.test(climb) && await yearNow() === 1, `0 to 1: starts at Year 1, and the banner says so (${climb.trim()})`);
   await shot(sam, '320-ladder-card'); await flat(sam, 'ladder card');
   let last = 1, upward = true;
   for (let i = 0; i < 12; i++) {
-    const y = +((await sam.textContent('.os-libcard > .os-liblayer')).match(/^Year (\d)/) || [0, 0])[1]; if (y < last) upward = false; last = y;
+    const y = await yearNow(); if (y < last) upward = false; last = y;
     await sam.locator('.os-libopt').first().click(); await sam.click('[data-lib="grade"][data-g="good"]'); await sam.waitForTimeout(60);
     if (await sam.locator('.os-libdone').count()) break;
   }
@@ -213,14 +221,14 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await close(sam); await open(sam, 'library');
   await sam.click('.os-libdeck [data-lib="share"]'); await sam.waitForSelector('[data-lib="sharewith"]');
   await sam.click('[data-lib="sharewith"]'); await sam.waitForSelector('[data-lib="sharewith"][aria-pressed="true"]');
-  ok(/Shared with Kai/.test(await sam.textContent('.os-libdeck .os-libmeta')), 'share: the deck says who it is shared with');
+  ok(/shared with Kai/i.test(await sam.textContent('.os-libdeck .os-libmeta')), 'share: the deck says who it is shared with');
   await shot(sam, '320-shared'); await flat(sam, 'shared');
   await open(alex, 'library');
   await alex.waitForSelector('.os-libdeck');
-  ok(/From friends/.test(await alex.textContent('.os-libp')) && /From Lee/.test(await alex.textContent('.os-libdeck')), "share: Kai has Lee's deck under From friends");
+  ok(/From friends/.test(await alex.textContent('.os-libp')) && /from Lee/i.test(await alex.textContent('.os-libdeck')), "share: Kai has Lee's deck under From friends");
   ok(await alex.locator('[data-lib="deldeck"]').count() === 0, "share: a friend's deck cannot be deleted by Kai");
   await shot(alex, '393-from-friends');
-  await alex.click('[data-lib="studydeck"]'); await alex.waitForSelector('.os-libgo'); await alex.click('.os-libgo'); await alex.waitForSelector('.os-libopt');
+  await alex.click('[data-lib="studydeck"]'); await alex.waitForSelector('.os-libopt');
   ok(/from Lee/.test(await alex.textContent('.os-libcard > .os-liblayer')), "study: a friend's card says whose it is");
   await shot(alex, '393-friend-card');
 
@@ -277,6 +285,10 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await solo.click('.os-libsave'); await solo.waitForSelector('.os-libdeck');
   ok(/Signed out/.test(await solo.textContent('.os-libp')) && /3 questions/.test(await solo.textContent('.os-libdeck')), 'signed out: the questions are kept on this phone, with a note to sign in');
   await open(solo, 'friends'); ok(/need an account/.test(await solo.textContent('.os-libp')), 'signed out: Friends asks you to sign in');
+  const many = JSON.stringify(Array.from({ length: 21 }, (_, i) => Q({ stem: `A ${30 + i}-year-old man has crushing central chest pain for ${i + 2} hours. His ECG shows ST elevation in leads II, III and aVF.`, specialty: 'Cardiology', kind: 'anatomy', year: 2 })));
+  await open(solo, 'upload'); await solo.fill('.os-libp [name="paste"]', many); await solo.waitForSelector('.os-libsum'); await solo.fill('.os-libp [name="deck"]', 'Cardio 21'); await solo.click('.os-libsave'); await solo.waitForSelector('.os-libfind');
+  await solo.fill('.os-libp [name="find"]', '45-year-old'); await solo.waitForTimeout(400);
+  ok(/1 question found/.test(await solo.textContent('.os-libp')) && /Right coronary/i.test(await solo.textContent('.os-libfound')), 'library: from 20 questions, find one across your decks (with its answer)');
   await open(solo, 'upload'); await solo.click('.os-libpool [data-os="mcqnew"]'); await solo.waitForSelector('.os-mcqf', { timeout: 5000 }).then(() => ok(true, 'upload: a link to submit a question to the shared bank'), () => ok(false, 'upload: a link to submit a question to the shared bank'));
   await solo.keyboard.press('Escape'); await solo.waitForTimeout(300);
 

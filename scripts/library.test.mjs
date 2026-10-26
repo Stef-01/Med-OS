@@ -44,7 +44,7 @@ test('an upload: fenced JSON, a letter key, specialty and kind; repeats and brok
   assert.equal(r.ready.length, 1, JSON.stringify(r.rows[0].problems));
   const it = r.ready[0];
   assert.equal(it.topic, 'Cardiology'); assert.equal(it.cat, 'anatomy'); assert.equal(it.provenance.kind, 'user'); assert.equal(it.provenance.source.licence, 'own'); assert.equal(it.provenance.submittedBy, 'Sam');
-  assert.match(r.rows[1].problems[0].reason, /Astrology/); assert.match(r.rows[2].problems[0].reason, /kind/);
+  assert.match(r.rows[1].problems[0].reason, /Astrology/); assert.match(r.rows[2].problems[0].reason, /type/i);
   assert.ok(r.rows[3].problems.some(p => /options/.test(p.reason))); assert.match(r.rows[4].problems[0].reason, /already/);
   assert.equal(checkUpload(JSON.stringify([Q()]), { by: 'Sam', now: NOW, have: [it] }).ready.length, 0, 'already in the library');
   assert.ok(r.rows.every(x => x.problems.every(p => ['block', 'major', 'minor'].includes(p.severity))));

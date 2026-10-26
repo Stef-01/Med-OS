@@ -52,7 +52,7 @@ export function summary(entries, cards) {
     gaps: (sk.some(x => x.n >= MIN_SEEN && x.acc < 70) ? sk : spec).filter(x => x.n >= MIN_SEEN && x.acc < 70).sort((a, b) => a.acc - b.acc || b.n - a.n).slice(0, 5),
     strong: sk.filter(x => x.n >= MIN_SEEN && x.acc >= 80).sort((a, b) => b.acc - a.acc || b.n - a.n).slice(0, 3),
     /* specialties with questions you have not touched, the biggest first */
-    untouched: spec.filter(x => !x.seen).sort((a, b) => b.items - a.items).slice(0, 5),
+    untouched: spec.filter(x => !x.seen).sort((a, b) => b.items - a.items),
     spec: spec.sort((a, b) => b.items - a.items),
     years: fin(g.year).sort((a, b) => a.id - b.id),
     diffs: fin(g.diff).sort((a, b) => a.id - b.id)

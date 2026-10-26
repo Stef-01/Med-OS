@@ -71,8 +71,8 @@ export function check(draft, { by, now, id } = {}) {
   const topic = specialtyOf(draft.topic), cat = kindOf(draft.kind), out = [];
   const base = userItem({ ...draft, topic, source: '', url: '', licence: '' }, { by: by || 'You', now, id: id || newUserId(now) });
   for (const reason of itemProblems(base)) out.push({ check: 'schema', severity: 'block', reason });
-  if (!topic) out.push({ check: 'specialty', severity: 'block', reason: draft.topic ? `specialty: "${String(draft.topic).slice(0, 40)}" is not one Med-OS knows` : 'specialty: give one (e.g. Paediatrics)' });
-  if (!cat) out.push({ check: 'kind', severity: 'block', reason: draft.kind ? `kind: "${String(draft.kind).slice(0, 40)}" is not one of OSCE skills, Clinical, Physiology, Anatomy` : 'kind: give one (skills, clinical, physio or anatomy)' });
+  if (!topic) out.push({ check: 'specialty', severity: 'block', reason: draft.topic ? `Specialty "${String(draft.topic).slice(0, 40)}" isn't one Med-OS knows. Ask ChatGPT to use one from the prompt's list.` : 'No specialty. Ask ChatGPT to give one (e.g. Paediatrics).' });
+  if (!cat) out.push({ check: 'kind', severity: 'block', reason: draft.kind ? `Type "${String(draft.kind).slice(0, 40)}" isn't one we use. Ask ChatGPT for Clinical, Physiology, Anatomy or OSCE skills.` : 'No type. Ask ChatGPT for Clinical, Physiology, Anatomy or OSCE skills.' });
   if (!out.length) for (const f of flawReport(base).failed) if (f.severity !== 'info' && f.check !== 'schema') out.push({ check: f.check, severity: f.severity, reason: f.reason });
   /* the year (mcq/year.mjs): as given, else a guess from the kind and the lead-in, said as a tip */
   let year = yearOf(draft.year);

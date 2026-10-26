@@ -1676,3 +1676,64 @@ button.os-libcheck { align-self:flex-start; }
 .os-libcard.swiping, .os-libcard.swiping * { user-select:none; }
 .os-libcard.swiping { cursor:grabbing; }
 .os-libpool { text-align:center; } .os-libpool .os-link { padding:0; font-size:inherit; }
+
+/* ---------- the critique pass (2026-10-26) ---------- */
+@media (max-width:639px) { .os-dlg--lib { height:calc(100% - env(safe-area-inset-top) - 10px); } }
+.os-libtabs { grid-template-columns:repeat(3, 1fr); }
+.os-libtabs-ind { width:calc((100% - 6px) / 3); }
+.os-libtabs button { min-height:44px; }
+/* in a session: one bar, sticky, the sheet's header steps aside */
+.os-dlg:has(.os-lib--focus) .os-dlg-head { display:none; }
+.os-lib--focus { padding-top:0; }
+.os-libtop { position:sticky; top:0; z-index:3; background:var(--bg); margin:0 -22px; padding:10px 22px; }
+@media (max-width:420px) { .os-libtop { margin:0 -16px; padding:10px 16px; } }
+.os-libtop .os-libx { width:44px; height:44px; }
+.os-libcard > .os-liblayer { color:var(--mute); font-weight:600; }
+.os-libcard > .os-liblayer b { color:var(--ink); font-weight:700; }
+.os-libopt:not([aria-disabled]):hover { border-color:var(--stroke); }
+@media (hover:hover) { .os-libopt:not([aria-disabled]):hover { border-color:var(--pri); } }
+.os-libexp strong.no { color:var(--ink); }
+.os-libexptx.clamp { display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden; }
+.os-libexptx b { font-weight:700; }
+.os-libreadall { align-self:flex-start; min-height:44px; padding:0; }
+.os-libback { margin:-2px 0 0 !important; text-align:center; font-size:12.5px; color:var(--mute); }
+.os-libgrades--right + .os-libback { margin-top:-6px !important; }
+/* toasts wrap instead of cutting off */
+.os-alert { white-space:normal; border-radius:16px; text-wrap:balance; }
+/* the home: quieter badges, short modes, settings folded */
+.os-libmode-n { background:var(--fill); color:var(--ink); }
+.os-libmode--short { flex-direction:row; align-items:center; padding:12px; }
+.os-libmode--short .os-libmode-tx small { display:block; }
+.os-libsettings { border-radius:14px; background:var(--card2); }
+.os-libsettings > summary { min-height:48px; display:flex; align-items:center; padding:0 14px; font-size:14px; font-weight:600; color:var(--mute); cursor:pointer; list-style:none; }
+.os-libsettings > summary::-webkit-details-marker { display:none; }
+.os-libsettings > summary::after { content:'›'; margin-left:auto; transition:transform var(--sp-snappy-ms) var(--sp-snappy); }
+.os-libsettings[open] > summary::after { transform:rotate(90deg); }
+.os-libsettings > *:not(summary) { margin:0 14px 14px; }
+.os-libsettings .os-libexam { background:var(--solid); }
+/* the end of a session */
+.os-libdone { padding:16px 0 12px; }
+.os-libacts--col { flex-direction:column; align-items:stretch; width:100%; }
+.os-libacts--col .os-link { align-self:center; min-height:44px; }
+/* the deck card */
+.os-libdel { color:var(--danger); min-height:44px; padding:0; }
+.os-libdeck .os-libacts .os-btn, .os-libgap .os-btn { min-height:44px; height:auto; }
+/* summary heatmap: the full width */
+.os-libheat { display:grid; grid-template-columns:repeat(15, 1fr); gap:3px; }
+.os-libheat > div { display:grid; grid-template-rows:repeat(7, auto); gap:3px; }
+.os-libheat i { width:auto; height:auto; aspect-ratio:1; }
+.os-libheat figcaption { grid-column:1 / -1; }
+/* upload: steps not indented, the two first buttons share the row */
+.os-libsteps > li { padding-left:0; }
+.os-libsteps > li > h3 { padding-left:34px; min-height:24px; display:flex; align-items:center; }
+.os-libsteps > li::before { top:0; }
+.os-libacts--even .os-btn { flex:1 1 0; min-width:0; }
+/* 44 px targets */
+.os-lib .os-chip { min-height:44px; height:auto; }
+.os-lib .os-seg button { min-height:44px; }
+.os-libqs summary, .os-libprobs summary, .os-libprompt summary { min-height:44px; }
+.os-libwrapbtn, .os-libfile, .os-libexamd input { min-height:44px; }
+.os-lib .os-link { min-height:44px; padding-top:10px; padding-bottom:10px; }
+/* Custom: Start stays in reach */
+.os-libstick { position:sticky; bottom:calc(8px + var(--sb, 0px)); z-index:2; padding-top:16px; background:linear-gradient(transparent, var(--bg) 16px); }
+.os-libstick .os-libgo { width:100%; }
