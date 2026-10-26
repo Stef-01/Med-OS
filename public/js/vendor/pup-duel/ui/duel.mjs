@@ -15,7 +15,7 @@
    keys       'document' (default) listens for keys itself; 'host' leaves them to the host, which calls ui.key(e) from its
               own key owner (Med-OS's overlay stack captures every key) and gets true back when the duel used it */
 
-import { RULES, EMOTES, makeSetup, outcome, secsOf } from '../duel/core.mjs';
+import { RULES, EMOTES, makeSetup, outcome, secsOf, fits, formatOf } from '../duel/core.mjs';
 import { createSession } from '../duel/session.mjs';
 import { createLobby, settleCrossed, offerFrom, rematchTarget } from '../duel/lobby.mjs';
 import { practiceWorld, BOT } from '../duel/bot.mjs';
@@ -445,8 +445,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         ${layered ? `<button class="pd-pickrow" type="button" data-pd="choose"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><span class="pd-pick-tx"><small>Questions from</small><b></b></span><span class="pd-pick-n"></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
         ${yearsOf(pack).length > 1 ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('star')}</span><div><span class="pd-seglabel" id="pd-sl-order">Order</span><div class="pd-seg" role="radiogroup" aria-labelledby="pd-sl-order">${[['mix', 'Shuffled'], ['ladder', '0 to 1']].map(([v, l]) => `<button type="button" role="radio" data-order="${v}" aria-checked="${(v === 'ladder') === !!opt.ladder}" tabindex="${(v === 'ladder') === !!opt.ladder ? 0 : -1}"${v === 'ladder' ? ' aria-describedby="pd-laddernote"' : ''}>${l}</button>`).join('')}</div><p class="pd-note pd-readnote" id="pd-laddernote">0 to 1: Year 1 first principles up to final year, harder each question.</p></div></div>` : ''}
         ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
-        ${seg('secs', 'timer', 'Seconds to answer', RULES.secsChoices, opt.secs, v => `${v}s`)}
-        <p class="pd-note pd-readnote">Each question adds time to read it: a long case gets longer.</p>
+        ${seg('secs', 'timer', 'Time for each question', RULES.secsChoices, opt.secs, v => (v < 60 ? `${v}s` : `${v / 60} min`))}
+        <p class="pd-note pd-readnote" data-pd="fit" aria-live="polite"></p>
         <p class="pd-note" data-pd="fewer" hidden></p>
         <p class="pd-err" role="alert"></p>
         <button class="pd-btn pd-pri" type="button" data-pd="send">${icon(isPractice ? 'bot' : 'zap')}${isPractice ? 'Practice' : 'Duel'}</button>
@@ -469,6 +469,9 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         }
         const few = el.querySelector('[data-pd="fewer"]'), r = pickedRounds();
         few.hidden = n >= r; few.textContent = n < r ? `Only ${n} question${n === 1 ? '' : 's'} here, so it plays ${n}.` : '';
+        /* the format and how many questions here are short enough for it; the rest top a short pick up, given time to read */
+        const secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs, f = formatOf(secs), k = poolOf(cur(), opt).filter(q => fits(q, secs)).length;
+        el.querySelector('[data-pd="fit"]').textContent = `${f ? `${f.name}: ` : ''}${k === n ? `all ${n}` : `${k} of ${n}`} fit${k < Math.min(r, n) ? '; longer ones get time to read' : ''}.`;
       };
       /* the two layers: dt null shows the topics; '' (Every topic) or a topic shows its categories */
       let dt = null;

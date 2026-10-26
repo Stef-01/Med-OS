@@ -9,9 +9,9 @@ import { rng, shuffle } from './rng.mjs';
 import { ProcessGameConfig, CreateGameReducer, InitializeGame, INVALID_MOVE, ActivePlayers, makeMove, setLogger } from '../engine/index.mjs';
 
 export const RULES = {
-  rounds: 7, secs: 20, readyMs: 3000, revealMs: 3500, graceMs: 8000, forfeitAfter: 3,
+  rounds: 7, secs: 30, readyMs: 3000, revealMs: 3500, graceMs: 8000, forfeitAfter: 3,
   maxQuestions: 15, minSecs: 5, maxSecs: 120, maxSetupBytes: 65536,
-  roundChoices: [5, 7, 10], secsChoices: [15, 20, 30]
+  roundChoices: [5, 7, 10], secsChoices: [15, 30, 90]
 };
 export const KINDS = ['accept', 'decline', 'answer', 'timeout', 'emote', 'leave', 'final', 'rematch'];
 export const EMOTES = { gg: 'GG', woof: 'Woof!', wow: 'Nice one', close: 'So close', again: 'Rematch?' };
@@ -19,13 +19,22 @@ export const PHASES = ['invited', 'live', 'done', 'declined', 'cancelled'];
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
-/* reading time (founder 2026-10-25: "the questions are way too much text for the time"): the seconds a player picks are
-   for thinking; each question adds the time to read it, at 4 words a second (240 a minute, a quick clinical reader),
-   past the first 12 words. A one-line question keeps the pick; a 120-word vignette with five options gets about 30
-   seconds more. The question carries its own secs in the setup, so both phones and Postgres time it the same */
+/* reading time (founder 2026-10-25: "the questions are way too much text for the time"): reading a question takes
+   4 words a second (240 a minute, a quick clinical reader) past the first 12 words, its options included */
 export const READ = { wps: 4, free: 12 };
 export const words = s => (String(s || '').match(/\S+/g) || []).length;
 export const readSecs = q => Math.max(0, Math.ceil((words(q?.stem) + (q?.options || []).reduce((n, o) => n + words(o), 0) - READ.free) / READ.wps));
+/* answer-time formats (founder 2026-10-26: "ensuring that the question length fits 15 second, 30s, 1.5 min answer
+   time formats"): the seconds picked are the whole time a question shows. A question fits a format when reading it
+   takes at most two thirds of that time, leaving a third to think, so Rapid deals short questions and Long case the
+   vignettes. A duel deals the questions that fit; when the pick has too few, the shortest of the rest top it up, each
+   given the time that keeps a third to think. The question carries its own secs in the setup, so both phones and
+   Postgres time it the same */
+export const FORMATS = [{ secs: 15, name: 'Rapid' }, { secs: 30, name: 'Standard' }, { secs: 90, name: 'Long case' }];
+export const THINK = 1 / 3;
+export const fits = (q, secs) => readSecs(q) * 3 <= secs * 2;   /* whole numbers: reading <= (1 - THINK) of the time */
+export const secsFor = (q, secs) => clamp(Math.max(secs, Math.ceil(readSecs(q) * 3 / 2)), RULES.minSecs, RULES.maxSecs);
+export const formatOf = secs => FORMATS.find(f => f.secs === secs) || null;
 /* a round's seconds: its question's own, else the setup's (a duel from before reading time) */
 export function secsOf(setup, r) {
   const q = setup?.questions?.[r], s = q?.secs;
@@ -50,24 +59,26 @@ export function jsonbBytes(v) {
    the questions travel inside the duel, so both phones play the same ones whatever pack each has cached */
 /* 0 to 1 (Med-OS, founder 2026-10-26: "first year ... to final year, so it progressively gets difficult"): from the
    shuffled pool, one question of each year in turn (Year 1, 2, 3, 4, then round again) until there are enough, then
-   played in year order, so a duel starts at first principles and ends at final year; a question with no year counts
-   as Year 3 */
+   played in year order and, within a year, Easy to Hard, so a duel starts at first principles and ends at final
+   year; a question with no year counts as Year 3, one with no difficulty as Medium */
 function climb(qs, n) {
   const y = q => (Number.isInteger(q.year) ? q.year : 3), by = new Map();
   for (const q of qs) (by.get(y(q)) || by.set(y(q), []).get(y(q))).push(q);
   const keys = [...by.keys()].sort((a, b) => a - b), out = [];
   while (out.length < n && keys.some(k => by.get(k).length)) for (const k of keys) if (out.length < n && by.get(k).length) out.push(by.get(k).shift());
-  return out.sort((a, b) => y(a) - y(b));
+  const d = q => (Number.isInteger(q.difficulty) ? q.difficulty : 2);
+  return out.sort((a, b) => y(a) - y(b) || d(a) - d(b));
 }
 export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topic = '', cat = '', seed = 1, title = '', read = true, ladder = false } = {}) {
   const base = clamp(Math.round(secs) || RULES.secs, RULES.minSecs, RULES.maxSecs);
   const r = rng(seed), pool = (pack?.questions || []).filter(q => (!topic || q.topic === topic || (q.topics || []).includes(topic)) && (!cat || q.cat === cat));
-  const want = clamp(Math.floor(rounds) || RULES.rounds, 1, RULES.maxQuestions), dealt = shuffle(r, pool);
+  const want = clamp(Math.floor(rounds) || RULES.rounds, 1, RULES.maxQuestions), shuffled = shuffle(r, pool);
+  const dealt = read ? [...shuffled.filter(q => fits(q, base)), ...shuffled.filter(q => !fits(q, base)).sort((a, b) => readSecs(a) - readSecs(b))] : shuffled;
   const picked = ladder ? climb(dealt, want) : dealt.slice(0, want);
   const questions = picked.map(q => {
     const order = shuffle(r, q.options.map((_, i) => i));
     const out = { id: q.id, stem: q.stem, options: order.map(i => q.options[i]), answer: order.indexOf(q.answer) };
-    if (read) out.secs = clamp(base + readSecs(q), RULES.minSecs, RULES.maxSecs);   /* read: false keeps one time for every question */
+    if (read) out.secs = secsFor(q, base);   /* read: false keeps one time for every question */
     if (q.why) out.why = q.why;
     if (q.notes) out.notes = order.map(i => q.notes[i] ?? null);
     if (q.topic) out.topic = q.topic;
@@ -75,6 +86,7 @@ export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topi
     if (q.origin) out.origin = q.origin;
     if (q.source) out.source = q.source;
     if (q.year) out.year = q.year;
+    if (q.difficulty) out.difficulty = q.difficulty;
     return out;
   });
   return { v: 1, rounds: questions.length, secs: base, title: String(title || pack?.title || '').slice(0, 80), topic: topic || '', ...(cat ? { cat: String(cat).slice(0, 30), catLabel: String((pack?.cats || []).find(c => c.id === cat)?.label || cat).slice(0, 60) } : {}), seed: seed >>> 0, ...(ladder ? { ladder: true } : {}), questions };

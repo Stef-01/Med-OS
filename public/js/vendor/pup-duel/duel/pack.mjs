@@ -1,6 +1,6 @@
 /* pack.mjs: a question pack, the one shape every host writes (Med-OS builds it from its stations).
    pack     { version, title, source, origin: 'ai' | 'human' | 'mixed', cats?[{ id, label }], questions[] }
-   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, topics?[], cat?, origin?, source?, deck?, year? }
+   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, topics?[], cat?, origin?, source?, deck?, year?, difficulty? }
    year     1 to 4, the year of medical school a question is pitched at (Med-OS: first principles to final year); a pack
             with two or more years offers 0 to 1, the duel that climbs them in order
    decks    [{ id, label, short? }]: where questions come from, a layer in front of the topic (Med-OS: the bank, your own questions,
@@ -42,6 +42,7 @@ export function normQuestion(q) {
   const source = text(q.source, LIMITS.source).toLowerCase(); if (/^[a-z0-9-]+$/.test(source)) out.source = source;
   const deck = text(q.deck, LIMITS.deck).toLowerCase(); if (/^[a-z0-9-]+$/.test(deck)) out.deck = deck;
   if (Number.isInteger(q.year) && q.year >= 1 && q.year <= 4) out.year = q.year;
+  if (Number.isInteger(q.difficulty) && q.difficulty >= 1 && q.difficulty <= 3) out.difficulty = q.difficulty;   /* 1 Easy, 2 Medium, 3 Hard, for a student of its year */
   return { q: out, why: '' };
 }
 

@@ -1,5 +1,5 @@
 // eyes.mjs — a dog's eyes: their shape and their colour, chosen in a look (founder 2026-10-26: "make the dogs have
-// changeable eyes both shapes and colors"), and its blush, always on, never, or as the face feels ("have blush options
+// changeable eyes both shapes and colors"), and its blush, always on, never, or Auto (as the face feels) ("have blush options
 // so can have on or off in the loadout").
 //
 // A look carries { eyes, iris, blush } beside its dog, coat and collar (coats.mjs dress copies them onto the dog);
@@ -30,7 +30,7 @@ export const IRISES = [
   { id: 'red', name: 'Red', hex: '#e04848', deep: '#5e1414' }
 ];
 export const BLUSH = [
-  { id: '', name: 'As it feels' },
+  { id: '', name: 'Auto' },
   { id: 'on', name: 'Always' },
   { id: 'off', name: 'Never' }
 ];
