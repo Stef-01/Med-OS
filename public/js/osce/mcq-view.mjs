@@ -77,6 +77,7 @@ export function mcqForm() {
       <label class="os-setf"><span>One question or many: JSON ({ stem, options, answer, … }) or CSV with a header row (stem, a, b, c, d, e, answer, explanation)</span>
         <textarea name="paste" rows="4" spellcheck="false"></textarea></label>
       <button type="button" class="os-btn" data-os="mcqimport">Read it</button><p class="os-reqmeta os-mcqfound" role="status"></p></details>
+    <div class="os-mcqone">
     <label class="os-setf"><span>The case (the vignette)</span>
       <textarea name="stem" rows="6" maxlength="${MAX.stem}" placeholder="A 34-year-old woman comes to the emergency department because of… Temperature is 38.4°C, pulse 112/min…"></textarea></label>
     <label class="os-setf"><span>The question (lead-in)</span>
@@ -88,6 +89,7 @@ export function mcqForm() {
     <label class="os-setf"><span>Explanation: why the answer is right and each other option wrong</span>
       <textarea name="explanation" rows="4" maxlength="${MAX.explanation}"></textarea></label>
     <label class="os-setf"><span>Topic</span><select name="topic"><option value="">Choose</option>${DISCIPLINES.map(([, n, , specs]) => `<optgroup label="${esc(n)}">${specs.map(s => `<option>${esc(s)}</option>`).join('')}</optgroup>`).join('')}</select></label>
+    </div>
     <fieldset class="os-reqset"><legend>Where it came from</legend><div class="os-reqchips">${chip('from', 'own', 'I wrote it', true)}${chip('from', 'open', 'An open resource')}</div>
       <div class="os-mcqsrc" hidden>
         <label class="os-setf"><span>Source (name)</span><input name="source" maxlength="${MAX.name}" placeholder="e.g. a CC BY question set"></label>
@@ -111,6 +113,7 @@ export function mcqForm() {
     live();
   });
   f.addEventListener('submit', e => { e.preventDefault(); submit(f); });
+  f.addEventListener('click', e => { if (e.target.closest('.os-mcqback')) { f._drafts = null; f.querySelector('.os-mcqfound').textContent = ''; paintChecks(f); f.querySelector('[name="stem"]').focus({ preventScroll: true }); } });
   paintChecks(f);
 }
 
@@ -135,6 +138,7 @@ function checksHtml(list, n = 1) {
 }
 function paintChecks(f) {
   const box = f.querySelector('.os-mcqchecks'), btn = f.querySelector('.os-reqsend');
+  f.querySelector('.os-mcqone').hidden = !!f._drafts;   /* several pasted questions: the one-question fields step aside */
   if (f._drafts) {
     const all = f._drafts.map((dr, i) => findings(itemOf(dr, f, `u-preview${i}`)).map(x => ({ ...x, reason: `Question ${i + 1}: ${x.reason}` }))).flat();
     box.innerHTML = checksHtml(all, f._drafts.length);
@@ -162,7 +166,7 @@ export function importPaste(b) {
     if (d.author) f.querySelector('[name="author"]').value = d.author;
     f.dispatchEvent(new Event('change'));
     f._drafts = null; msg.textContent = 'One question read into the form.';
-  } else { f._drafts = drafts; msg.textContent = `${drafts.length} questions read. They are checked below and sent together.`; }
+  } else { f._drafts = drafts; msg.innerHTML = `${drafts.length} questions read. They are checked below and sent together, with the source and author below. <button type="button" class="os-link os-mcqback">Write one instead</button>`; }
   paintChecks(f);
 }
 

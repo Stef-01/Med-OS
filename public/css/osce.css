@@ -925,6 +925,9 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-mcqwhy li { font-size:13px; line-height:1.45; color:var(--mute); padding-left:12px; border-left:2px solid var(--danger-soft); overflow-wrap:anywhere; }
 .os-mcqrow .os-reqtop strong { font-weight:500; font-size:14px; }
 .os-reqsend:disabled { opacity:.5; cursor:not-allowed; }
+.os-mcqone { display:flex; flex-direction:column; gap:18px; min-width:0; }
+.os-mcqone[hidden] { display:none; }
+.os-mcqfound .os-link { min-height:44px; }
 
 /* ---------- Candidate screen: the link dialog, and the read-only page on the candidate's phone ---------- */
 .os-cand { display:flex; flex-direction:column; gap:12px; padding:20px 22px calc(22px + var(--sb)); font-size:14.5px; line-height:1.5; }

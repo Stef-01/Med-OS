@@ -450,6 +450,9 @@ async function runIn(width, height, label) {
   await click('.os-mcqf [data-os="mcqimport"]');
   ok(/2 questions read/.test(await pg.textContent('.os-mcqfound')) && /Question 2: Option E is "All of the above"/.test(await pg.textContent('.os-mcqchecks')), `${label}: a pasted CSV of two questions is read and each is checked (all of the above is named)`);
   await shot('mcq-paste');
+  ok(await pg.locator('.os-mcqf .os-mcqone').isHidden(), `${label}: with several pasted questions the one-question fields step aside`);
+  await click('.os-mcqf .os-mcqback');
+  ok(await pg.locator('.os-mcqf .os-mcqone').isVisible(), `${label}: Write one instead brings the form back`);
   await pg.keyboard.press('Escape');
   await pg.keyboard.press('Escape');
   await pg.waitForSelector('.os-start [data-os="mcq"]');
