@@ -10,6 +10,7 @@ import { shortDx, patientLine, stationQuestion, buildPack, poolQuestion, DUEL } 
 import { stationsOnDisk, poolOnDisk, packText, mcqOnDisk } from './build-duel-pack.mjs';
 import { stationItems } from './lib/mcq-sources.mjs';
 import { normQuestion } from '../public/js/vendor/pup-duel/duel/pack.mjs';
+import { taxonomyProblems } from '../public/js/mcq/taxonomy.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -155,4 +156,10 @@ test('the package\'s four migrations, in order, are Med-OS\'s 0002 to 0005, and 
   const cfg = {}; new Function('window', fs.readFileSync(path.join(ROOT, 'public/config.js'), 'utf8'))(cfg);
   assert.match(cfg.OSCE_CONFIG.supabaseUrl, /^https:\/\/pquajwxvlpvaygrkzfkl\.supabase\.co$/, 'Med-OS\'s own project, never Optimus\'s');
   assert.ok(!('duelSupabaseUrl' in cfg.OSCE_CONFIG) && !('duelSupabaseAnonKey' in cfg.OSCE_CONFIG), 'no second project for the duel');
+});
+
+test('every question in the duel pack is fully categorised: source, origin, credit, specialty, kind, year, difficulty', () => {
+  const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'duel', 'pack.json'), 'utf8'));
+  const bad = pack.questions.map(q => [q.id, taxonomyProblems(q)]).filter(([, p]) => p.length);
+  assert.deepEqual(bad.slice(0, 5), [], `${bad.length} of ${pack.questions.length} questions are not fully categorised`);
 });

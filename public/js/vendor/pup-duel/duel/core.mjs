@@ -6,6 +6,7 @@
                                                  second copy of a row is the same row */
 
 import { rng, shuffle } from './rng.mjs';
+import { dealtSource } from './pack.mjs';
 import { ProcessGameConfig, CreateGameReducer, InitializeGame, INVALID_MOVE, ActivePlayers, makeMove, setLogger } from '../engine/index.mjs';
 
 export const RULES = {
@@ -84,7 +85,7 @@ export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topi
     if (q.topic) out.topic = q.topic;
     if (q.cat) { out.cat = q.cat; const l = (pack?.cats || []).find(c => c.id === q.cat)?.label; if (l) out.catLabel = String(l).slice(0, 60); }
     if (q.origin) out.origin = q.origin;
-    if (q.source) out.source = q.source;
+    if (q.source) out.source = dealtSource(q.source);
     if (q.year) out.year = q.year;
     if (q.difficulty) out.difficulty = q.difficulty;
     return out;

@@ -15,16 +15,17 @@
 
 import { CATS, gate } from './mcq.mjs';
 import { guessYear, isYear, guessDiff, isDiff } from '../../public/js/mcq/year.mjs';
+import { plain } from '../../public/js/study-kit/safe.mjs';
 
 export const LIMITS = { option: 70, minDistractors: 3 }, LONG = 1.8;
 /* every specialty a station lists, so a player finds it under each (the duel's topics) */
 const topicsOf = st => (Array.isArray(st.specialty) && st.specialty.length ? [...new Set(st.specialty)].slice(0, 6) : undefined);
 const SETTING = { gp: 'in general practice', ed: 'in the emergency department', ward: 'on the ward', clinic: 'in clinic', 'birth suite': 'in the birth suite', recovery: 'in recovery' };
-const strip = s => String(s ?? '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
+const strip = plain;   /* station HTML as text: the study kit's one helper (study-kit/safe.mjs) */
 const sentence = s => { const t = strip(s); return !t ? '' : /[.?!]$/.test(t) ? t : `${t}.`; };
 /* the pool is plain text already (mcq/schema.mjs itemProblems), so its questions only lose runs of spaces: stripping
    tags there would delete a lab value between a < and a later > ("K <3.5 ... Na >145") */
-const plain = s => String(s ?? '').replace(/\s+/g, ' ').trim();
+const spaces = s => String(s ?? '').replace(/\s+/g, ' ').trim();
 
 /* the name of a diagnosis without its qualifiers, so the right option is not the one that reads like a textbook:
    "Acute ischaemic stroke in the right ACA territory, cardioembolic from AF" is "Acute ischaemic stroke in the right
@@ -121,13 +122,13 @@ const cut = (s, n, clean = strip) => { const t = clean(s); if (t.length <= n) re
 /* a station's specialties as the duel's topics (the first is its topic), up to the package's six */
 const topicsOfStation = (st, first) => [...new Set([first, ...(Array.isArray(st?.specialty) ? st.specialty : [])].filter(Boolean))].slice(0, 6);
 export function poolQuestion(q, byStation = new Map()) {
-  const stem = q.ask ? `${plain(q.stem)} ${plain(q.ask)}` : plain(q.stem);
+  const stem = q.ask ? `${spaces(q.stem)} ${spaces(q.ask)}` : spaces(q.stem);
   if (stem.length > DUEL.stem) return { q: null, why: `${q.id}: the stem is ${stem.length} characters (the duel shows ${DUEL.stem})` };
   if (q.options.some(o => o.length > DUEL.option)) return { q: null, why: `${q.id}: an option is longer than ${DUEL.option} characters` };
   const kind = q.provenance?.kind || '';
-  const notes = (q.why || []).map((w, i) => (i === q.answer || !w ? null : cut(w, DUEL.note, plain)));
+  const notes = (q.why || []).map((w, i) => (i === q.answer || !w ? null : cut(w, DUEL.note, spaces)));
   const out = { id: q.id, stem, options: [...q.options], answer: q.answer };
-  const why = q.explanation ? cut(q.explanation, DUEL.why, plain) : ''; if (why) out.why = why;
+  const why = q.explanation ? cut(q.explanation, DUEL.why, spaces) : ''; if (why) out.why = why;
   if (notes.some(Boolean)) out.notes = notes;
   if (q.topic) out.topic = q.topic;
   const st = byStation.get(q.provenance?.generator?.basis?.[0]), topics = st ? topicsOfStation(st, q.topic) : [];
@@ -167,7 +168,7 @@ export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficult
   for (const h of [...mxq].sort((a, b) => (a.id < b.id ? -1 : 1))) {
     const issues = gate(h);
     if (issues.length) { dropped.push(`${h.id}: ${issues.join('; ')}`); continue; }
-    questions.push({ id: h.id, stem: h.stem, options: h.options, answer: h.answer, notes: h.notes, why: h.why, topic: h.specialty, cat: h.cat, origin: 'human', hy: 1, year: h.year, difficulty: h.difficulty, credit: mxqCredit });
+    questions.push({ id: h.id, stem: h.stem, options: h.options, answer: h.answer, notes: h.notes, why: h.why, topic: h.specialty, cat: h.cat, origin: 'human', source: 'open-exam', hy: 1, year: h.year, difficulty: h.difficulty, credit: mxqCredit });
     mxqN++;
   }
   for (const q of questions) { if (q.hy) { delete q.hy; continue; } q.year = isYear(years[q.id]) ? years[q.id] : guessYear(q); q.difficulty = isDiff(difficulty[q.id]) ? difficulty[q.id] : guessDiff(q); }

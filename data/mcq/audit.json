@@ -366,65 +366,101 @@
   }
  },
  "pack": {
-  "n": 842,
+  "n": 1859,
   "bySource": {
-   "ai": 642,
+   "ai": 1165,
    "usmle-resource": 144,
-   "amsa": 56
+   "amsa": 56,
+   "open-exam": 494
+  },
+  "byRoute": {
+   "ai pool": 110,
+   "usmle-resource": 144,
+   "amsa": 56,
+   "ai station": 532,
+   "ai high-yield": 523,
+   "open-exam": 494
   },
   "formats": {
    "15": {
     "name": "Rapid",
-    "fit": 14,
-    "of": 842,
-    "share": 1.7,
+    "fit": 579,
+    "of": 1859,
+    "share": 31.1,
     "byKind": {
      "amsa": 9,
-     "ai": 5
+     "ai": 370,
+     "open-exam": 200
     },
     "byTopic": {
-     "Endocrinology": 1,
-     "Gastroenterology": 7,
-     "Respiratory Medicine": 2,
-     "Neurology": 2,
-     "General Surgery": 1,
-     "Cardiology": 1
+     "Endocrinology": 47,
+     "Gastroenterology": 31,
+     "Respiratory Medicine": 28,
+     "Neurology": 40,
+     "General Surgery": 9,
+     "Cardiology": 48,
+     "Breast/Endocrine Surgery": 3,
+     "Immunology": 5,
+     "Emergency Medicine": 18,
+     "Geriatrics": 5,
+     "Urology": 5,
+     "Plastic Surgery": 4,
+     "Gynaecology": 13,
+     "Palliative Care": 2,
+     "Infectious Diseases": 52,
+     "Haematology": 35,
+     "Nephrology": 27,
+     "General Practice": 11,
+     "Toxicology": 13,
+     "Obstetrics": 21,
+     "Psychiatry": 15,
+     "Public Health": 10,
+     "Vascular Surgery": 6,
+     "Paediatrics": 32,
+     "Addiction Medicine": 8,
+     "Gastrointestinal Surgery": 5,
+     "Orthopaedics": 19,
+     "Indigenous Health": 4,
+     "Trauma Surgery": 1,
+     "Neurosurgery": 5,
+     "Pathology": 5,
+     "Dermatology": 10,
+     "Ophthalmology": 10,
+     "Bioethics": 2,
+     "Critical Care Medicine": 5,
+     "Oncology": 7,
+     "Sexual Health": 1,
+     "Neonatology": 2,
+     "Medicolegal": 1,
+     "Rheumatology": 8,
+     "Otorhinolaryngology": 3,
+     "OMS/Dental": 2,
+     "Cardiothoracic Surgery": 1
     },
-    "topics": 36,
+    "topics": 44,
     "thin": [
      "Addiction Medicine",
      "Bioethics",
      "Breast/Endocrine Surgery",
-     "Cardiology",
      "Cardiothoracic Surgery",
      "Critical Care Medicine",
-     "Dermatology",
-     "Emergency Medicine",
-     "Endocrinology",
-     "Gastroenterology",
      "Gastrointestinal Surgery",
-     "General Practice",
      "General Surgery",
      "Geriatrics",
-     "Gynaecology",
-     "Haematology",
      "Immunology",
-     "Infectious Diseases",
+     "Indigenous Health",
+     "Medicolegal",
      "Neonatology",
-     "Nephrology",
-     "Neurology",
      "Neurosurgery",
-     "Obstetrics",
-     "Ophthalmology",
-     "Orthopaedics",
+     "OMS/Dental",
+     "Oncology",
      "Otorhinolaryngology",
-     "Paediatrics",
+     "Palliative Care",
+     "Pathology",
+     "Plastic Surgery",
      "Professionalism",
-     "Psychiatry",
-     "Respiratory Medicine",
      "Rheumatology",
      "Sexual Health",
-     "Toxicology",
      "Trauma Surgery",
      "Urology",
      "Vascular Surgery"
@@ -432,144 +468,620 @@
    },
    "30": {
     "name": "Standard",
-    "fit": 351,
-    "of": 842,
-    "share": 41.7,
+    "fit": 1367,
+    "of": 1859,
+    "share": 73.5,
     "byKind": {
      "usmle-resource": 7,
      "amsa": 56,
-     "ai": 288
+     "ai": 811,
+     "open-exam": 493
     },
     "byTopic": {
-     "Urology": 1,
-     "Nephrology": 1,
-     "Paediatrics": 21,
-     "Otorhinolaryngology": 1,
-     "Immunology": 1,
-     "Obstetrics": 10,
-     "Cardiology": 48,
-     "Respiratory Medicine": 64,
-     "Neurology": 53,
-     "Endocrinology": 9,
-     "Gastroenterology": 100,
-     "Rheumatology": 14,
-     "Dermatology": 4,
-     "General Practice": 15,
-     "Emergency Medicine": 5,
-     "Gynaecology": 1,
-     "General Surgery": 3
+     "Urology": 11,
+     "Nephrology": 50,
+     "Paediatrics": 86,
+     "Otorhinolaryngology": 6,
+     "Immunology": 11,
+     "Obstetrics": 45,
+     "Cardiology": 118,
+     "Respiratory Medicine": 104,
+     "Neurology": 120,
+     "Endocrinology": 77,
+     "Gastroenterology": 154,
+     "Rheumatology": 38,
+     "Dermatology": 15,
+     "General Practice": 46,
+     "Emergency Medicine": 44,
+     "Gynaecology": 33,
+     "General Surgery": 18,
+     "Breast/Endocrine Surgery": 6,
+     "Indigenous Health": 6,
+     "Haematology": 61,
+     "Toxicology": 16,
+     "Geriatrics": 10,
+     "Infectious Diseases": 82,
+     "Plastic Surgery": 6,
+     "Palliative Care": 6,
+     "Orthopaedics": 39,
+     "Psychiatry": 30,
+     "Public Health": 14,
+     "Sexual Health": 7,
+     "Neonatology": 7,
+     "Vascular Surgery": 11,
+     "Addiction Medicine": 10,
+     "Gastrointestinal Surgery": 13,
+     "Trauma Surgery": 7,
+     "Neurosurgery": 8,
+     "Pathology": 6,
+     "Ophthalmology": 13,
+     "Bioethics": 2,
+     "Critical Care Medicine": 8,
+     "Oncology": 16,
+     "Medicolegal": 1,
+     "OMS/Dental": 4,
+     "Professionalism": 1,
+     "Cardiothoracic Surgery": 1
     },
-    "topics": 36,
+    "topics": 44,
     "thin": [
-     "Addiction Medicine",
      "Bioethics",
      "Breast/Endocrine Surgery",
      "Cardiothoracic Surgery",
      "Critical Care Medicine",
-     "Dermatology",
-     "Emergency Medicine",
-     "Endocrinology",
-     "Gastrointestinal Surgery",
-     "General Surgery",
-     "Geriatrics",
-     "Gynaecology",
-     "Haematology",
-     "Immunology",
-     "Infectious Diseases",
+     "Indigenous Health",
+     "Medicolegal",
      "Neonatology",
-     "Nephrology",
      "Neurosurgery",
-     "Ophthalmology",
-     "Orthopaedics",
+     "OMS/Dental",
      "Otorhinolaryngology",
+     "Palliative Care",
+     "Pathology",
+     "Plastic Surgery",
      "Professionalism",
-     "Psychiatry",
      "Sexual Health",
-     "Toxicology",
-     "Trauma Surgery",
-     "Urology",
-     "Vascular Surgery"
+     "Trauma Surgery"
     ]
    },
    "90": {
     "name": "Long case",
-    "fit": 841,
-    "of": 842,
+    "fit": 1858,
+    "of": 1859,
     "share": 99.9,
     "byKind": {
-     "ai": 642,
+     "ai": 1165,
      "usmle-resource": 143,
-     "amsa": 56
+     "amsa": 56,
+     "open-exam": 494
     },
     "byTopic": {
-     "Paediatrics": 62,
-     "Obstetrics": 28,
-     "Gastroenterology": 177,
-     "Infectious Diseases": 29,
-     "Rheumatology": 29,
-     "Cardiology": 99,
-     "Neurology": 105,
-     "Respiratory Medicine": 107,
-     "General Surgery": 14,
-     "Vascular Surgery": 3,
-     "Neurosurgery": 2,
-     "Emergency Medicine": 27,
-     "Otorhinolaryngology": 7,
-     "General Practice": 38,
-     "Gastrointestinal Surgery": 3,
-     "Cardiothoracic Surgery": 1,
-     "Gynaecology": 15,
-     "Neonatology": 8,
-     "Endocrinology": 25,
-     "Trauma Surgery": 5,
-     "Ophthalmology": 2,
-     "Sexual Health": 4,
-     "Haematology": 3,
-     "Dermatology": 6,
-     "Orthopaedics": 7,
-     "Geriatrics": 3,
-     "Psychiatry": 11,
-     "Bioethics": 2,
-     "Immunology": 4,
-     "Urology": 2,
-     "Toxicology": 3,
-     "Addiction Medicine": 1,
-     "Nephrology": 6,
-     "Critical Care Medicine": 1,
-     "Breast/Endocrine Surgery": 1,
-     "Professionalism": 1
+     "Paediatrics": 127,
+     "Obstetrics": 63,
+     "Gastroenterology": 231,
+     "Infectious Diseases": 111,
+     "Rheumatology": 53,
+     "Cardiology": 169,
+     "Neurology": 172,
+     "Respiratory Medicine": 147,
+     "General Surgery": 29,
+     "Vascular Surgery": 14,
+     "Neurosurgery": 10,
+     "Emergency Medicine": 66,
+     "Otorhinolaryngology": 12,
+     "General Practice": 69,
+     "Gastrointestinal Surgery": 16,
+     "Cardiothoracic Surgery": 2,
+     "Gynaecology": 47,
+     "Neonatology": 15,
+     "Endocrinology": 93,
+     "Trauma Surgery": 12,
+     "Ophthalmology": 15,
+     "Sexual Health": 11,
+     "Haematology": 64,
+     "Dermatology": 17,
+     "Orthopaedics": 46,
+     "Geriatrics": 13,
+     "Psychiatry": 41,
+     "Bioethics": 4,
+     "Immunology": 14,
+     "Urology": 12,
+     "Toxicology": 19,
+     "Addiction Medicine": 11,
+     "Nephrology": 55,
+     "Critical Care Medicine": 9,
+     "Breast/Endocrine Surgery": 7,
+     "Professionalism": 2,
+     "Indigenous Health": 6,
+     "Plastic Surgery": 6,
+     "Palliative Care": 7,
+     "Public Health": 14,
+     "Pathology": 6,
+     "Oncology": 16,
+     "Medicolegal": 1,
+     "OMS/Dental": 4
     },
-    "topics": 36,
+    "topics": 44,
     "thin": [
-     "Addiction Medicine",
      "Bioethics",
      "Breast/Endocrine Surgery",
      "Cardiothoracic Surgery",
      "Critical Care Medicine",
-     "Dermatology",
-     "Gastrointestinal Surgery",
-     "Geriatrics",
-     "Haematology",
-     "Immunology",
-     "Neonatology",
-     "Nephrology",
-     "Neurosurgery",
-     "Ophthalmology",
-     "Orthopaedics",
-     "Otorhinolaryngology",
-     "Professionalism",
-     "Sexual Health",
-     "Toxicology",
-     "Trauma Surgery",
-     "Urology",
-     "Vascular Surgery"
+     "Indigenous Health",
+     "Medicolegal",
+     "OMS/Dental",
+     "Palliative Care",
+     "Pathology",
+     "Plastic Surgery",
+     "Professionalism"
     ]
    }
   },
   "readSecs": {
-   "median": 22,
-   "p90": 45,
+   "median": 14,
+   "p90": 34,
    "max": 63
+  },
+  "taxonomy": {
+   "source": {
+    "ai": 1165,
+    "usmle-resource": 144,
+    "amsa": 56,
+    "open-exam": 494
+   },
+   "cat": {
+    "clinical": 1215,
+    "skills": 150,
+    "physio": 337,
+    "anatomy": 157
+   },
+   "year": {
+    "1": 179,
+    "2": 377,
+    "3": 722,
+    "4": 581
+   },
+   "difficulty": {
+    "1": 413,
+    "2": 1142,
+    "3": 304
+   },
+   "topic": {
+    "Paediatrics": 127,
+    "Obstetrics": 63,
+    "Gastroenterology": 231,
+    "Infectious Diseases": 111,
+    "Rheumatology": 53,
+    "Cardiology": 169,
+    "Neurology": 172,
+    "Respiratory Medicine": 147,
+    "General Surgery": 29,
+    "Vascular Surgery": 14,
+    "Neurosurgery": 10,
+    "Emergency Medicine": 66,
+    "Otorhinolaryngology": 12,
+    "General Practice": 69,
+    "Gastrointestinal Surgery": 16,
+    "Cardiothoracic Surgery": 2,
+    "Gynaecology": 47,
+    "Neonatology": 15,
+    "Endocrinology": 93,
+    "Trauma Surgery": 12,
+    "Ophthalmology": 15,
+    "Sexual Health": 11,
+    "Haematology": 64,
+    "Dermatology": 17,
+    "Orthopaedics": 46,
+    "Geriatrics": 13,
+    "Psychiatry": 41,
+    "Bioethics": 5,
+    "Immunology": 14,
+    "Urology": 12,
+    "Toxicology": 19,
+    "Addiction Medicine": 11,
+    "Nephrology": 55,
+    "Critical Care Medicine": 9,
+    "Breast/Endocrine Surgery": 7,
+    "Professionalism": 2,
+    "Indigenous Health": 6,
+    "Plastic Surgery": 6,
+    "Palliative Care": 7,
+    "Public Health": 14,
+    "Pathology": 6,
+    "Oncology": 16,
+    "Medicolegal": 1,
+    "OMS/Dental": 4
+   },
+   "problems": 0
+  },
+  "uncategorised": [],
+  "cues": {
+   "ai high-yield": {
+    "n": 523,
+    "keyLongest": 60.2,
+    "chance": 25,
+    "keyAt": {
+     "A": 357,
+     "C": 53,
+     "B": 89,
+     "D": 24
+    },
+    "options": {
+     "4": 523
+    },
+    "checks": {
+     "schema": {
+      "n": 523,
+      "share": 100
+     },
+     "vignette": {
+      "n": 499,
+      "share": 95.4
+     },
+     "stem-length": {
+      "n": 294,
+      "share": 56.2
+     },
+     "longest-key": {
+      "n": 123,
+      "share": 23.5
+     },
+     "absolute-terms": {
+      "n": 109,
+      "share": 20.8
+     },
+     "clang": {
+      "n": 23,
+      "share": 4.4
+     },
+     "units": {
+      "n": 9,
+      "share": 1.7
+     },
+     "duplicate-options": {
+      "n": 6,
+      "share": 1.1
+     },
+     "convergence": {
+      "n": 2,
+      "share": 0.4
+     },
+     "negative-stem": {
+      "n": 1,
+      "share": 0.2
+     }
+    }
+   },
+   "ai pool": {
+    "n": 110,
+    "keyLongest": 38.2,
+    "chance": 20,
+    "keyAt": {
+     "E": 25,
+     "A": 16,
+     "C": 24,
+     "D": 20,
+     "B": 25
+    },
+    "options": {
+     "5": 110
+    },
+    "checks": {
+     "schema": {
+      "n": 110,
+      "share": 100
+     },
+     "vignette": {
+      "n": 9,
+      "share": 8.2
+     },
+     "absolute-terms": {
+      "n": 5,
+      "share": 4.5
+     },
+     "units": {
+      "n": 3,
+      "share": 2.7
+     },
+     "clang": {
+      "n": 1,
+      "share": 0.9
+     },
+     "longest-key": {
+      "n": 1,
+      "share": 0.9
+     },
+     "convergence": {
+      "n": 1,
+      "share": 0.9
+     }
+    }
+   },
+   "ai station": {
+    "n": 532,
+    "keyLongest": 50.9,
+    "chance": 25,
+    "keyAt": {
+     "B": 127,
+     "D": 147,
+     "A": 130,
+     "C": 128
+    },
+    "options": {
+     "4": 532
+    },
+    "checks": {
+     "schema": {
+      "n": 532,
+      "share": 100
+     },
+     "vignette": {
+      "n": 526,
+      "share": 98.9
+     },
+     "absolute-terms": {
+      "n": 59,
+      "share": 11.1
+     },
+     "clang": {
+      "n": 42,
+      "share": 7.9
+     },
+     "units": {
+      "n": 34,
+      "share": 6.4
+     },
+     "convergence": {
+      "n": 6,
+      "share": 1.1
+     },
+     "longest-key": {
+      "n": 5,
+      "share": 0.9
+     },
+     "duplicate-options": {
+      "n": 1,
+      "share": 0.2
+     }
+    }
+   },
+   "amsa": {
+    "n": 56,
+    "keyLongest": 28.6,
+    "chance": 25,
+    "keyAt": {
+     "B": 17,
+     "D": 13,
+     "A": 15,
+     "C": 11
+    },
+    "options": {
+     "4": 56
+    },
+    "checks": {
+     "schema": {
+      "n": 56,
+      "share": 100
+     },
+     "units": {
+      "n": 7,
+      "share": 12.5
+     },
+     "longest-key": {
+      "n": 5,
+      "share": 8.9
+     },
+     "vignette": {
+      "n": 4,
+      "share": 7.1
+     },
+     "clang": {
+      "n": 1,
+      "share": 1.8
+     }
+    }
+   },
+   "open-exam": {
+    "n": 494,
+    "keyLongest": 33,
+    "chance": 25,
+    "keyAt": {
+     "D": 143,
+     "C": 144,
+     "A": 99,
+     "B": 108
+    },
+    "options": {
+     "4": 494
+    },
+    "checks": {
+     "schema": {
+      "n": 494,
+      "share": 100
+     },
+     "vignette": {
+      "n": 423,
+      "share": 85.6
+     },
+     "stem-length": {
+      "n": 48,
+      "share": 9.7
+     },
+     "cover-options": {
+      "n": 44,
+      "share": 8.9
+     },
+     "longest-key": {
+      "n": 39,
+      "share": 7.9
+     },
+     "clang": {
+      "n": 30,
+      "share": 6.1
+     },
+     "absolute-terms": {
+      "n": 22,
+      "share": 4.5
+     },
+     "negative-stem": {
+      "n": 8,
+      "share": 1.6
+     },
+     "units": {
+      "n": 5,
+      "share": 1
+     },
+     "all-none": {
+      "n": 1,
+      "share": 0.2
+     }
+    }
+   },
+   "usmle-resource": {
+    "n": 144,
+    "keyLongest": 20.1,
+    "chance": 25,
+    "keyAt": {
+     "B": 36,
+     "C": 24,
+     "A": 38,
+     "D": 46
+    },
+    "options": {
+     "4": 144
+    },
+    "checks": {
+     "schema": {
+      "n": 144,
+      "share": 100
+     },
+     "explanation": {
+      "n": 144,
+      "share": 100
+     },
+     "vignette": {
+      "n": 8,
+      "share": 5.6
+     },
+     "cover-options": {
+      "n": 7,
+      "share": 4.9
+     },
+     "clang": {
+      "n": 3,
+      "share": 2.1
+     },
+     "longest-key": {
+      "n": 1,
+      "share": 0.7
+     }
+    }
+   }
+  },
+  "duplicates": {
+   "n": 71,
+   "across": 1,
+   "top": [
+    {
+     "a": "mxq-619",
+     "b": "mxq-620",
+     "overlap": 100
+    },
+    {
+     "a": "mxq-558",
+     "b": "mxq-559",
+     "overlap": 93.2
+    },
+    {
+     "a": "mxq-308",
+     "b": "mxq-309",
+     "overlap": 86.7
+    },
+    {
+     "a": "mxq-604",
+     "b": "mxq-605",
+     "overlap": 85.4
+    },
+    {
+     "a": "mxq-95",
+     "b": "mxq-96",
+     "overlap": 85.4
+    },
+    {
+     "a": "mxq-613",
+     "b": "mxq-615",
+     "overlap": 85.3
+    },
+    {
+     "a": "mxq-596",
+     "b": "mxq-619",
+     "overlap": 85
+    },
+    {
+     "a": "mxq-596",
+     "b": "mxq-620",
+     "overlap": 85
+    },
+    {
+     "a": "mxq-304",
+     "b": "mxq-305",
+     "overlap": 83.3
+    },
+    {
+     "a": "mxq-346",
+     "b": "mxq-347",
+     "overlap": 83.3
+    },
+    {
+     "a": "mxq-13",
+     "b": "mxq-42",
+     "overlap": 80.8
+    },
+    {
+     "a": "mxq-605",
+     "b": "mxq-606",
+     "overlap": 79.2
+    },
+    {
+     "a": "mxq-340",
+     "b": "mxq-406",
+     "overlap": 78.6
+    },
+    {
+     "a": "mxq-341",
+     "b": "mxq-406",
+     "overlap": 78.6
+    },
+    {
+     "a": "mxq-381",
+     "b": "mxq-404",
+     "overlap": 77.8
+    },
+    {
+     "a": "mxq-2",
+     "b": "mxq-9",
+     "overlap": 75
+    },
+    {
+     "a": "mxq-340",
+     "b": "mxq-341",
+     "overlap": 74.2
+    },
+    {
+     "a": "mxq-345",
+     "b": "mxq-346",
+     "overlap": 73.8
+    },
+    {
+     "a": "mxq-418",
+     "b": "mxq-419",
+     "overlap": 73.3
+    },
+    {
+     "a": "mxq-475",
+     "b": "mxq-507",
+     "overlap": 71.9
+    }
+   ]
   }
  }
 }

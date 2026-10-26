@@ -98,7 +98,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await shot(sam, '320-card'); await flat(sam, 'card');
   await sam.click('[data-lib="flag"]'); await sam.waitForSelector('.os-libflag.on');
   ok(true, 'card: a question can be flagged');
-  await sam.locator('.os-libopt').nth(1).click(); await sam.waitForSelector('.os-libexp');
+  await sam.locator('.os-libopt[data-i="1"]').click(); await sam.waitForSelector('.os-libexp');   /* a wrong one by its stored index: the shown order spreads the key */
   const after = await sam.evaluate(() => ({ ok: document.querySelectorAll('.os-libopt.ok').length, no: document.querySelectorAll('.os-libopt.no').length, again: document.querySelector('[data-lib="grade"].os-primary')?.dataset.g }));
   ok(after.ok === 1 && after.no <= 1 && ['again', 'good'].includes(after.again), `card: the answer shows right and wrong, the explanation, and suggests a grade (${JSON.stringify(after)})`);
   ok(await sam.locator('.os-libnext').count() === 1 && (await sam.locator('[data-lib="grade"]').count()) <= 3, 'card: one big Next; the grade follows the answer (Hard and Easy beside a right one)');
@@ -229,7 +229,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(mixed.some(d => d.id === 'bank') && mixed.some(d => d.id === 'mine' && d.count === 3), `duel: Your questions is a deck in the duel's pack (${JSON.stringify(mixed)})`);
   const alexDecks = await alex.evaluate(async () => (await import('./js/osce/duel.mjs')).packDecks());
   ok(alexDecks.some(d => d.id === 'friends' && d.count === 3), `duel: for Kai, Lee's shared deck is Friends' (${JSON.stringify(alexDecks)})`);
-  /* practice on Lee's own questions: From, Yours, and a question tagged Yours */
+  /* practice on Lee's own questions: From, Yours, and a question tagged A player's (a deal is read by both phones) */
   await close(alex); await close(sam);
   await sam.click('[data-os="settings"]'); await sam.waitForSelector('.os-switch[data-game="duel"]');
   if (await sam.getAttribute('.os-switch[data-game="duel"]', 'aria-checked') !== 'true') await sam.click('.os-switch[data-game="duel"]');   /* another device may have switched it on in the shared record */
@@ -241,7 +241,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await shot(sam, '320-duel-from');
   await sam.click('.os-duel .pd-sheet [data-pd="send"]');
   await sam.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 15000 });
-  ok(/Yours/.test(await sam.textContent('.os-duel .pd-mtop .pd-qtag')), 'duel: the question is tagged Yours');
+  ok(/A player's/.test(await sam.textContent('.os-duel .pd-mtop .pd-qtag')), 'duel: a library question is tagged A player\'s, true on either phone');
   await shot(sam, '320-duel-yours');
   await sam.keyboard.press('Escape');
   /* the duel's 0 to 1: Order on the setup, the first question Year 1 */

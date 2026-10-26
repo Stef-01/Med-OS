@@ -13,7 +13,10 @@
    Plain text throughout: the duel renders with textContent, so a pack can never inject markup. */
 
 export const LIMITS = { stem: 1200, option: 160, why: 1200, note: 600, topic: 60, cat: 30, cats: 12, id: 80, source: 30, deck: 20, decks: 6, minOptions: 2, maxOptions: 6 };
-export const SOURCES = { user: 'Student', ai: 'AI-written', amsa: 'AMSA', 'usmle-resource': 'USMLE', mine: 'Yours', friend: "A friend's" };   /* short: the tag shares the match's top bar with the round dots */
+export const SOURCES = { user: 'Student', ai: 'AI-written', amsa: 'AMSA', 'usmle-resource': 'USMLE', 'open-exam': 'Exam', mine: 'Yours', friend: "A friend's", player: "A player's" };
+/* a source that names whose question it is from one phone's side (mine, friend) cannot travel in a duel's setup, which
+   both phones read: the mate would see "Yours" on a question they never wrote. A deal says only that a player wrote it */
+export const dealtSource = s => (s === 'mine' || s === 'friend' ? 'player' : s);   /* short: the tag shares the match's top bar with the round dots */
 /* the tag a question shows: its source's name, else AI-written for an ai question, else none */
 export const sourceLabel = q => (typeof q?.source === 'string' && Object.hasOwn(SOURCES, q.source) ? SOURCES[q.source] : q?.origin === 'ai' ? SOURCES.ai : '');   /* own keys only: a setup comes from the other phone */
 
