@@ -97,7 +97,8 @@ function wireAccount(el) {
     if (!dd.isConnected) return;
     if (!st) { dd.textContent = 'Not played yet'; return; }
     const t = st.rating != null ? tierOf(st.rating, st.ranked) : null;
-    dd.textContent = [t ? (t.placing ? `${st.rating} rating, placing` : `${t.name}, ${st.rating} rating`) : '', `${st.wins} won, ${st.losses} lost${st.draws ? `, ${st.draws} drawn` : ''}`, st.bones != null ? `${st.bones} bones` : ''].filter(Boolean).join(' · ');
+    const lines = [t ? (t.placing ? `${st.rating} rating, placing` : `${t.name}, ${st.rating} rating`) : '', `${st.wins} won, ${st.losses} lost${st.draws ? `, ${st.draws} drawn` : ''}`, st.bones != null ? `${st.bones} bones` : ''].filter(Boolean);
+    dd.replaceChildren(...lines.map(l => Object.assign(document.createElement('span'), { textContent: l })));   /* one fact a line */
   }, () => { if (dd.isConnected) dd.textContent = "Can't reach the duel right now."; });
 }
 

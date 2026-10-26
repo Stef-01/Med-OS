@@ -539,7 +539,7 @@ async function duel() {
   for (const pg of [a, c]) {
     await pg.click('[data-os="settings"]');
     await pg.waitForSelector('.os-switch[data-game="duel"][aria-checked="false"]');
-    if (pg === a) await pg.screenshot({ path: path.join(SHOTS, 'settings-games.png') });
+    if (pg === a) { await pg.waitForTimeout(700); await pg.screenshot({ path: path.join(SHOTS, 'settings-games.png') }); await pg.evaluate(() => document.querySelector('.os-switch[data-game="duel"]').scrollIntoView({ block: 'center' })); await pg.screenshot({ path: path.join(SHOTS, 'settings-games-switch.png') }); }
     await pg.click('.os-switch[data-game="duel"]');
     await pg.waitForSelector('.os-switch[data-game="duel"][aria-checked="true"]');
     await pg.keyboard.press('Escape'); await pg.waitForSelector('.os-start [data-os="duel"]');
@@ -547,7 +547,7 @@ async function duel() {
   ok(await a.locator('.os-start > [data-os="duel"] .os-beta').isVisible(), 'duel: switched on in Settings, its card is on Start, marked Beta');
   const card = await a.evaluate(() => { const d = document.querySelector('.os-start > [data-os="duel"]'), r = document.querySelector('.os-start > [data-os="requests"]'); return { pos: getComputedStyle(d).position, big: d.classList.contains('os-bigcard'), after: r && r.nextElementSibling === d }; });
   ok(card.pos !== 'sticky' && card.pos !== 'fixed' && card.big && card.after, `duel: a card like Request a case, right after it, not a bar held on screen (${JSON.stringify(card)})`);
-  await a.screenshot({ path: path.join(SHOTS, 'start-duel-card.png') });
+  await a.waitForTimeout(700); await a.evaluate(() => document.querySelector('.os-start [data-os="duel"]').scrollIntoView({ block: 'center' })); await a.screenshot({ path: path.join(SHOTS, 'start-duel-card.png') });
   for (const [pg, name, pin, dog] of [[a, 'Sam', '1234', 'mochi'], [c, 'Alex', '4321', 'rosie']]) {
     await pg.click('[data-os="duel"]');
     await pg.waitForSelector('.os-duel[data-ready] form[data-pd="signin"]');
@@ -625,7 +625,7 @@ async function duel() {
   ok(/rating/.test(duelLine) && /lost/.test(duelLine) && /bones/.test(duelLine), `account: the duel progress shows (${duelLine})`);
   ok(/attempted/.test(await a.textContent('.os-acctstats')), 'account: the OSCE progress shows');
   ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'account: Settings fits a 320 px phone');
-  await a.screenshot({ path: path.join(SHOTS, 'settings-account.png') });
+  await a.waitForTimeout(700); await a.evaluate(() => document.querySelector('.os-acct').scrollIntoView({ block: 'start' })); await a.screenshot({ path: path.join(SHOTS, 'settings-account.png') });
   await a.keyboard.press('Escape');
   await a.evaluate(() => { const ev = new Event('visibilitychange'); Object.defineProperty(document, 'visibilityState', { value: 'visible', configurable: true }); document.dispatchEvent(ev); });
   await a.waitForTimeout(1500);
@@ -639,7 +639,7 @@ async function duel() {
   /* the questions in two layers: a topic, then a kind, the pick and its count on the setup, a practice on just those */
   await solo.click('.os-duel [data-pd="choose"]'); await solo.click('.os-duel .pd-drill [data-dt="Paediatrics"]');
   ok(await solo.locator('.os-duel .pd-drill [data-dc]').count() === 5, 'practice: Paediatrics lists all of it and the four kinds of question');
-  await solo.screenshot({ path: path.join(SHOTS, 'practice-kinds.png') });
+  await solo.waitForTimeout(500); await solo.screenshot({ path: path.join(SHOTS, 'practice-kinds.png') });
   await solo.click('.os-duel .pd-drill [data-dc="clinical"]');
   ok(/Paediatrics › Clinical/.test(await solo.textContent('.os-duel [data-pd="choose"]')), 'practice: the setup shows Paediatrics › Clinical');
   await solo.click('.os-duel .pd-sheet [data-pd="send"]');
