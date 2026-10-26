@@ -259,6 +259,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const self = lv.self || S.me, look = myLook();
     shell.querySelector('.pd-name').textContent = self?.name || '';
     const rk = shell.querySelector('[data-sec="ranked"]'), myRow = S.board?.find(p => p.id === S.me?.id);
+    /* a mate who joined since the board was read: read it again (at most every 5 s) */
+    if (S.board && lv.loaded && lv.mates.length + 1 !== S.board.length && Date.now() - (S.boardAt || 0) > 5000) { S.boardAt = Date.now(); loadBoard(); }
     if (S.board && S.lboard && S.lboardKey !== JSON.stringify(S.board)) { S.lboardKey = JSON.stringify(S.board); S.lboard.paint(); }
     if (rk && myRow) { const key = `${myRow.rating}|${myRow.ranked}`; if (rk.dataset.key !== key) { rk.dataset.key = key; rk.innerHTML = rankCard(myRow); } rk.hidden = false; }
     const wb = shell.querySelector('.pd-wallet');

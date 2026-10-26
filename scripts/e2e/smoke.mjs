@@ -559,6 +559,7 @@ async function duel() {
   ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.os-duel *')].every(e => e.getBoundingClientRect().right <= innerWidth + 1)), 'duel: the lobby fits a 320 px phone');
   await a.screenshot({ path: path.join(SHOTS, 'duel-lobby.png') });
   await timed('a new mate reaches the lobby', () => a.waitForSelector('.os-duel .pd-mate b >> text=Alex', { timeout: 6000 }));
+  await a.waitForFunction(() => document.querySelectorAll('.os-duel [data-sec="board"] .pd-lrow:not(.pd-skel)').length === 2, null, { timeout: 12000 }).then(() => ok(true, 'duel: the lobby leaderboard shows a mate who just joined'), () => ok(false, 'duel: the lobby leaderboard shows a mate who just joined'));
   /* the wardrobe over the overlay: the dog redrawn live; Escape with a look not saved asks first, Discard closes it */
   await a.waitForSelector('.os-duel .pd-wallet:not([hidden])');
   ok(/25/.test(await a.textContent('.os-duel .pd-wallet')), 'duel: a new player has 25 bones in the lobby');
