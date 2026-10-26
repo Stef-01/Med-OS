@@ -113,11 +113,11 @@ export function span(ms) {
 
 /* a study session over `items` (already narrowed to the pick): the due ones, the most overdue first, then new ones up
    to the day's allowance (NEW_A_DAY less the new ones started today). cards: { id: card } */
-export function queue(items, cards, now, startedToday = 0) {
+export function queue(items, cards, now, startedToday = 0, newADay = NEW_A_DAY) {
   const due = [], fresh = [];
   for (const it of items || []) { const c = ok(cards?.[it.id]); if (isNew(c)) fresh.push(it); else if (c.due <= now) due.push([c.due, it]); }
   due.sort((a, b) => a[0] - b[0]);
-  return [...due.map(x => x[1]), ...fresh.slice(0, Math.max(0, NEW_A_DAY - startedToday))];
+  return [...due.map(x => x[1]), ...fresh.slice(0, Math.max(0, newADay - startedToday))];
 }
 /* the counts a deck or pick shows: { due, new, learnt } */
 export function counts(items, cards, now) {

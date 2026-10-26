@@ -67,3 +67,13 @@ test('resume: a session left within 12 hours comes back where it was', () => {
   assert.equal(resumable(snap, E, t + 13 * 36e5), null, 'stale after 12 hours');
   assert.equal(resumable({ ...snap, i: 4 }, E, t), null, 'finished');
 });
+
+import { examPlan } from '../public/js/library/plan.mjs';
+test('the exam plan: the day\'s new questions so all are seen once by the exam (10 to 80)', () => {
+  const t = T('2026-10-26');
+  assert.deepEqual(examPlan('2026-11-25', 1200, t), { days: 30, unseen: 1200, perDay: 40 });
+  assert.equal(examPlan('2026-11-25', 60, t).perDay, 10, 'at least 10');
+  assert.equal(examPlan('2026-10-28', 5000, t).perDay, 80, 'at most 80');
+  assert.equal(examPlan('2026-10-20', 100, t), null, 'passed'); assert.equal(examPlan('', 100, t), null);
+  assert.equal(pref({ exam: '2026-11-25' }).exam, '2026-11-25'); assert.equal(pref({ exam: 'soon' }).exam, '');
+});

@@ -16,14 +16,24 @@ export const SIZES = Object.freeze([10, 20, 40, 0]);   /* 0: all of them */
 export const WHICH = Object.freeze({ all: 'All', unused: 'Unused', incorrect: 'Incorrect', flagged: 'Flagged' });
 export const ORDERS = Object.freeze({ due: 'Due first', shuffle: 'Shuffled', ladder: '0 to 1' });
 export const MODES = Object.freeze({ tutor: 'Tutor', timed: 'Timed' });
-export const DEFAULT_PREF = Object.freeze({ goal: 20, size: 20, which: 'all', order: 'due', mode: 'tutor' });
+export const DEFAULT_PREF = Object.freeze({ goal: 20, size: 20, which: 'all', order: 'due', mode: 'tutor', exam: '' });
 export const pref = p => ({
   goal: GOALS.includes(p?.goal) ? p.goal : DEFAULT_PREF.goal,
   size: SIZES.includes(p?.size) ? p.size : DEFAULT_PREF.size,
   which: Object.hasOwn(WHICH, p?.which) ? p.which : DEFAULT_PREF.which,
   order: Object.hasOwn(ORDERS, p?.order) ? p.order : DEFAULT_PREF.order,
-  mode: Object.hasOwn(MODES, p?.mode) ? p.mode : DEFAULT_PREF.mode
+  mode: Object.hasOwn(MODES, p?.mode) ? p.mode : DEFAULT_PREF.mode,
+  exam: /^\d{4}-\d{2}-\d{2}$/.test(p?.exam || '') ? p.exam : ''
 });
+
+/* the exam plan (AMBOSS's study plan, Anki's simulator; research #10): your exam date sets how many new questions a day
+   you need to see everything once before it, at least 10 and at most 80; null with no date or a date passed */
+export function examPlan(exam, unseen, t) {
+  if (!exam) return null;
+  const days = Math.ceil((Date.parse(`${exam}T09:00:00`) - t) / 864e5);
+  if (!(days > 0)) return null;
+  return { days, unseen, perDay: Math.min(80, Math.max(10, Math.ceil(unseen / days))) };
+}
 
 /* ---------- the day ---------- */
 const DAY = 864e5;
@@ -72,7 +82,7 @@ export function which(entries, cards, w = 'all') {
 }
 /* the session: the questions (filtered by which), in the order asked, at most size (0: all; due first keeps the
    day's allowance of new cards). rnd for a fair shuffle */
-export function session(entries, cards, { which: w = 'all', order = 'due', size = 20 } = {}, t = Date.now(), startedToday = 0, rnd = Math.random) {
+export function session(entries, cards, { which: w = 'all', order = 'due', size = 20, newADay } = {}, t = Date.now(), startedToday = 0, rnd = Math.random) {
   const pool = which(entries, cards, w), cap = l => (size ? l.slice(0, size) : l);
   if (order === 'ladder') {
     const open = pool.filter(e => { const c = cards?.[e.key]; return isNew(c) || c.due <= t; });
@@ -84,7 +94,7 @@ export function session(entries, cards, { which: w = 'all', order = 'due', size 
     return cap(order === 'due' ? l.sort((a, b) => (cards?.[a.key]?.due || 0) - (cards?.[b.key]?.due || 0)) : l);
   }
   const by = new Map(pool.map(e => [e.key, e]));
-  return cap(queue(pool.map(e => ({ id: e.key })), cards, t, startedToday).map(x => by.get(x.id)));
+  return cap(queue(pool.map(e => ({ id: e.key })), cards, t, startedToday, newADay).map(x => by.get(x.id)));
 }
 /* timed mode: the seconds a question gets, like the exam (90 s a question) plus its reading (1 s per 4 words past 60) */
 export function timedSecs(item) {

@@ -77,6 +77,9 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await sam.waitForSelector('.os-libtabs [data-tab="library"][aria-selected="true"]'); await sam.waitForSelector('.os-libdeck');
   ok(/Wk 1 mixed/.test(await sam.textContent('.os-libdeck')) && /3 questions/.test(await sam.textContent('.os-libdeck')), 'library: saved, the deck is in Library at once with its 3 questions');
   await shot(sam, '320-library'); await flat(sam, 'library');
+  await sam.fill('.os-libp [name="find"]', 'barking'); await sam.waitForTimeout(400);
+  ok(/1 question found/.test(await sam.textContent('.os-libp')) && /dexamethasone/i.test(await sam.textContent('.os-libfound')), 'library: find a question across your decks (with its answer)');
+  await sam.fill('.os-libp [name="find"]', '');  await sam.waitForTimeout(300);
   await sam.click('.os-libqs summary'); await sam.waitForTimeout(200);
   ok(await sam.locator('.os-libqs li').count() === 3 && /Paediatrics › Anatomy/.test(await sam.textContent('.os-libqs')), 'library: each question shows its specialty and kind');
 
@@ -186,6 +189,10 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await shot(alex, '393-friends-incoming');
   await alex.click('[data-lib="accept"]'); await alex.waitForTimeout(300);
   ok(/Friends \(1\)/.test(await alex.textContent('.os-libp')), 'friends: accepted, they are friends');
+  await close(alex); await open(alex, 'friends'); await alex.waitForSelector('.os-libweek li', { timeout: 5000 }).catch(() => {});
+  const week = await alex.locator('.os-libweek li').allTextContents();
+  ok(week.length === 2 && /Lee/.test(week[0]) && /\(you\)/.test(week[1]), `friends: this week's board, the most answers first (${week.map(w => w.replace(/\s+/g, ' ').trim()).join(' | ')})`);
+  await shot(alex, '393-friends-week');
   await close(alex);
 
   /* Lee shares the deck; Kai finds it under From friends and studies it */

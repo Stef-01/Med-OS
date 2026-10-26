@@ -68,7 +68,7 @@ function mcqTable(req, res) {
 const DUEL = duelServer();
 const byToken = t => { const p = Object.values(DUEL.db.players).find(x => x.token === t); if (!p) throw new Error('Sign in again'); return p; };
 /* and the library's (supabase/migrations/0008_library.sql): decks, friends, shares, over the same players */
-const LIB = libraryFake({ byToken, players: () => DUEL.db.players });
+const LIB = libraryFake({ byToken, players: () => DUEL.db.players, state: () => SB });
 function duelRpc(req, res, fn) {
   let body = '';
   req.on('data', c => { body += c; });

@@ -1605,3 +1605,34 @@ strong > .os-who, .os-arow > .os-who, .os-rrow > .os-who { margin-right:8px; }
 .os-switch[aria-checked="true"]:active .os-switch-ui::after { transform:translateX(14px); }
 .os-prs-slide.os-prs-in { animation:os-vin var(--sp-smooth-ms) var(--sp-smooth) backwards; }
 .os-prs-slide.os-prs-back { animation-name:os-vin-back; }
+
+/* the exam plan */
+.os-libexam { display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:14px; background:var(--card2); }
+.os-libexam p { margin:0; flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; font-size:13px; line-height:1.4; color:var(--mute); }
+.os-libexam b { font-size:14.5px; color:var(--ink); }
+.os-libexamd input { height:40px; padding:0 10px; border:1px solid var(--stroke); border-radius:10px; background:var(--solid); color:var(--ink); font:inherit; font-size:15px; color-scheme:dark; max-width:150px; }
+/* confetti when the day's goal is done: each piece flies out on a spring, then falls and fades */
+.os-libcard { position:relative; }
+.os-confetti { position:absolute; left:50%; top:0; width:0; height:0; z-index:5; pointer-events:none; }
+.os-confetti i { position:absolute; width:8px; height:12px; border-radius:2px; background:var(--c); opacity:0; animation:os-confetti 1.3s cubic-bezier(.2,.8,.3,1) forwards; animation-delay:var(--d); }
+@keyframes os-confetti {
+  0% { opacity:1; transform:translate(0, 0) rotate(0); }
+  55% { opacity:1; transform:translate(var(--x), var(--y)) rotate(calc(var(--r) * .6)); }
+  100% { opacity:0; transform:translate(calc(var(--x) * 1.15), calc(var(--y) + 260px)) rotate(var(--r)); }
+}
+
+/* the week among friends */
+.os-libweek { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+.os-libweek li { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background:var(--card2); }
+.os-libweek li.me { background:var(--pri-soft); }
+.os-libweek-n { flex:none; width:18px; text-align:center; font-weight:800; color:var(--mute); font-variant-numeric:tabular-nums; }
+.os-libweek li:first-child .os-libweek-n { color:#ffb020; }
+.os-libweek-tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:3px; }
+.os-libweek-tx b { font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.os-libweek-tx small { font-size:11.5px; color:var(--mute); }
+.os-libweek-bar { height:5px; border-radius:3px; background:var(--fill); overflow:hidden; }
+.os-libweek-bar i { display:block; height:100%; background:var(--pri); transform-origin:left; animation:os-libgrow var(--sp-gentle-ms) var(--sp-gentle) both; }
+.os-libweek-v { flex:none; font-size:18px; font-weight:800; font-variant-numeric:tabular-nums; }
+/* finding a question */
+.os-libfind { display:flex; }
+.os-libfound .os-libgap > div b { font-weight:600; font-size:13.5px; line-height:1.4; }

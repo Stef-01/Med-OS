@@ -18,9 +18,9 @@ import { account } from '../study-kit/sync.mjs';
 import { chatPrompt } from '../library/prompt.mjs';
 import { checkUpload, deckName, layers, layerLabel, yearLabel, diffLabel, inPick, KINDS, KIND_IDS, LIMITS } from '../library/item.mjs';
 import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
-import { record, summary, wrapped, monthOf, monthName } from '../library/stats.mjs';
+import { record, summary, wrapped, monthOf, monthName, dayOf } from '../library/stats.mjs';
 import { grade, queue, counts, preview, soon, isNew, GRADES } from '../library/sched.mjs';
-import { today, streak, heat, session, timedSecs, tally, smart, snapshot, resumable, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
+import { today, streak, heat, session, timedSecs, tally, smart, snapshot, resumable, examPlan, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
 import { lsGet, lsSet } from '../study-kit/store.mjs';
 import * as api from '../library/api.mjs';
 import { rpc, accountsOn } from './account.mjs';
@@ -66,9 +66,10 @@ const panel = () => dlg()?.querySelector('.os-libp');
 function wire(el) {
   el.addEventListener('submit', e => e.preventDefault());   /* Enter in Add a friend clicks its button, which does the work */
   el.addEventListener('click', e => { const b = e.target.closest('[data-lib]'); if (b && !b.disabled && el.contains(b)) act(b.dataset.lib, b, e); });
-  el.addEventListener('input', e => { if (e.target.name === 'notes') { V.up.notes = e.target.value; const b = panel()?.querySelector('[data-lib="copyprompt"] span'); if (b) b.textContent = V.up.notes.trim() ? 'Copy the prompt with my notes' : 'Copy the prompt'; return; } if (e.target.matches?.('[data-lib-note]')) { clearTimeout(saveNote.t); const v = e.target.value; saveNote.t = setTimeout(() => saveNote(v), 400); return; } if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
+  el.addEventListener('input', e => { if (e.target.name === 'find') { V.find = e.target.value; clearTimeout(V.findT); V.findT = setTimeout(() => { const pos = e.target.selectionStart; paint(); const f = panel()?.querySelector('[name="find"]'); if (f) { f.focus(); f.setSelectionRange(pos, pos); } }, 160); return; } if (e.target.name === 'notes') { V.up.notes = e.target.value; const b = panel()?.querySelector('[data-lib="copyprompt"] span'); if (b) b.textContent = V.up.notes.trim() ? 'Copy the prompt with my notes' : 'Copy the prompt'; return; } if (e.target.matches?.('[data-lib-note]')) { clearTimeout(saveNote.t); const v = e.target.value; saveNote.t = setTimeout(() => saveNote(v), 400); return; } if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
   el.addEventListener('change', e => {
     if (e.target.name === 'file') readFile(e.target);
+    if (e.target.name === 'exam') { setPref('exam', e.target.value || ''); paint(); return; }
     if (e.target.name === 'sdeck') { V.st.deck = e.target.value; V.st.topic = ''; V.st.cat = ''; V.st.year = 0; paint(); }
   });
 }
@@ -122,7 +123,10 @@ function libraryHtml() {
   };
   if (!decks.length && !shared.length) return `${signedIn ? '' : signInHtml('Signed out: questions you upload stay on this phone. Sign in to keep them on your account, on every device, and to share them with friends.')}
     <div class="os-libempty">${icon('cards')}<p><strong>No questions yet</strong><br>ChatGPT can write them from your notes, in the format Med-OS reads.</p><button class="os-btn os-btn--lg os-primary" data-lib="tab" data-tab="upload">${icon('plus')}<span>Upload questions</span></button></div>`;
+  const qn = (V.find || '').trim().toLowerCase(), found = qn.length > 1 ? api.allItems(V.lib).filter(e => `${e.item.stem} ${e.item.ask || ''} ${e.item.options.join(' ')} ${e.item.topic}`.toLowerCase().includes(qn)).slice(0, 30) : null;
   return `${signedIn ? '' : signInHtml('Signed out: these stay on this phone. Sign in to keep them on your account and share them.')}
+    <label class="os-search os-libfind">${I.search}<input type="search" name="find" placeholder="Find a question" value="${esc(V.find || '')}" aria-label="Find a question in your library" enterkeyhint="search"></label>
+    ${found ? `<p class="os-libmeta">${plural(found.length, 'question')} found</p><ul class="os-libgapl os-libfound" role="list">${found.map(e => `<li class="os-libgap"><div><span class="os-liblayer">${esc(layerLabel(e.item))} · ${esc(e.deckName)}</span><b>${esc(e.item.stem.length > 140 ? `${e.item.stem.slice(0, 140)}…` : e.item.stem)}</b><small>${esc(e.item.options[e.item.answer])}</small></div></li>`).join('')}</ul>` : ''}
     ${decks.length ? `<h3 class="os-libh">Your decks</h3><ul class="os-libdecks" role="list">${decks.map(d => deckRow(d, '')).join('')}</ul>` : ''}
     ${shared.length ? `<h3 class="os-libh">From friends</h3><ul class="os-libdecks" role="list">${shared.map(d => deckRow(d, d.owner)).join('')}</ul>` : ''}
     <button class="os-btn os-libadd" data-lib="tab" data-tab="upload">${icon('plus')}<span>Upload more</span></button>`;
@@ -189,8 +193,11 @@ function friendsHtml() {
   const f = V.lib.friends, by = s => f.filter(x => x.status === s);
   const row = (x, acts) => `<li class="os-libfriend"><span class="os-libav" aria-hidden="true">${esc((x.name || '?')[0].toUpperCase())}</span><strong>${esc(x.name)}</strong><span class="os-libacts">${acts}</span></li>`;
   const inc = by('incoming'), fr = by('friends'), out = by('outgoing');
+  if (fr.length && !V.week) { V.week = 'loading'; api.friendWeek().then(w => { V.week = Array.isArray(w) ? w : []; if (V.tab === 'friends') paint(); }).catch(() => { V.week = []; }); }
+  const wk = Array.isArray(V.week) && V.week.length > 1 ? V.week : null, top = wk ? Math.max(1, ...wk.map(x => x.week)) : 1;
   return `<form class="os-libaddf" data-lib-form="add" novalidate><label class="os-setf"><span>Add a friend by their name</span><span class="os-librow"><input name="fname" maxlength="20" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Their Duel a Mate name"><button class="os-btn os-primary" data-lib="addfriend" type="submit">Add</button></span></label>
       <p class="os-libmeta">You are <b>${esc(V.lib.me?.name || '')}</b>: friends add you by that.</p></form>
+    ${wk ? `<h3 class="os-libh">This week</h3><ol class="os-libweek">${wk.map((x, i) => `<li class="${x.me ? 'me' : ''}"><span class="os-libweek-n">${i + 1}</span><span class="os-libav" aria-hidden="true">${esc((x.name || '?')[0].toUpperCase())}</span><span class="os-libweek-tx"><b>${esc(x.me ? `${x.name} (you)` : x.name)}</b><small>${plural(x.days, 'day')} studied</small><span class="os-libweek-bar" aria-hidden="true"><i style="transform:scaleX(${(x.week / top).toFixed(3)})"></i></span></span><span class="os-libweek-v">${x.week}</span></li>`).join('')}</ol><p class="os-libmeta">Answers in Study in the last 7 days. Effort, not scores.</p>` : ''}
     ${inc.length ? `<h3 class="os-libh">Asking to be friends</h3><ul class="os-libfriends" role="list">${inc.map(x => row(x, `<button class="os-btn os-primary" data-lib="accept" data-id="${esc(x.id)}">Accept</button><button class="os-btn" data-lib="decline" data-id="${esc(x.id)}">Decline</button>`)).join('')}</ul>` : ''}
     <h3 class="os-libh">Friends${fr.length ? ` (${fr.length})` : ''}</h3>
     ${fr.length ? `<ul class="os-libfriends" role="list">${fr.map(x => row(x, `<button class="os-btn os-libicon" data-lib="unfriend" data-id="${esc(x.id)}" data-name="${esc(x.name)}" aria-label="Remove ${esc(x.name)}" title="Remove">${icon('trash')}</button>`)).join('')}</ul>` : '<p class="os-libmeta">None yet. Once a friend accepts, share a deck with them from Library, and their shared decks show up there for you.</p>'}
@@ -238,14 +245,14 @@ function studyHtml() {
 const ring = (frac, n, goal) => `<div class="os-libring" role="img" aria-label="${n} of ${goal} today" style="--p:${frac.toFixed(3)}"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/><circle class="arc" cx="22" cy="22" r="19" pathLength="100"/></svg><b>${n}</b><small>of ${goal}</small></div>`;
 function homeHtml() {
   const mem = api.studyMem(), p = myPref(), t = now(), all = everything(), td = today(mem.days, t, p.goal), sk = streak(mem.days, t);
-  const tl = tally(all, mem.card, t), q = session(all, mem.card, { order: 'due', size: p.size }, t, startedToday());
+  const tl = tally(all, mem.card, t), plan = examPlan(p.exam, tl.fresh, t), q = session(all, mem.card, { order: 'due', size: p.size, newADay: plan?.perDay }, t, startedToday());
   const s = summary(all, mem.card), gap = s.gaps[0], res = resumable(lsGet(LIVE, null), all, t), notes = all.filter(e => mem.card[e.key]?.note).length;
   const mode = (m, label, sub, ic, n = '') => `<button class="os-libmode" data-lib="mode" data-m="${m}"><span class="os-libmode-ic" aria-hidden="true">${icon(ic)}</span><span class="os-libmode-tx"><b>${esc(label)}</b><small>${esc(sub)}</small></span>${n !== '' ? `<span class="os-libmode-n">${n}</span>` : ''}</button>`;
   return `<section class="os-libtoday">
       ${ring(td.frac, td.n, td.goal)}
       <div class="os-libtoday-tx"><h3>${td.done ? 'Goal done today' : 'Today'}</h3>
         <p class="os-libstreak${sk.live ? ' live' : ''}">${icon('flame')}<span>${sk.days ? `${sk.days}-day streak${sk.live ? '' : ': study today to keep it'}` : 'Start a streak today'}</span></p>
-        <p class="os-libmeta">${tl.due} due · ${Math.max(0, Math.min(tl.fresh, 20 - startedToday()))} new</p></div>
+        <p class="os-libmeta">${tl.due} due · ${Math.max(0, Math.min(tl.fresh, (plan?.perDay || 20) - startedToday()))} new</p></div>
     </section>
     ${res ? `<button class="os-libresume" data-lib="resume"><span><b>Resume your session</b><small>${esc(res.label || 'Study')} · ${plural(res.left, 'card')} left</small></span><span class="os-chev" aria-hidden="true">${I.chevR}</span></button>` : ''}
     <button class="os-btn os-btn--lg os-primary os-libgo" data-lib="today"${q.length ? '' : ' disabled'}>${q.length ? `Start · ${plural(q.length, 'card')}` : 'All caught up: try a mode below'}</button>
@@ -259,6 +266,8 @@ function homeHtml() {
       ${mode('custom', 'Custom session', 'Deck, specialty, year, timed…', 'filter')}
     </div>
     ${gapsCardHtml()}
+    <div class="os-libexam">${plan ? `<p><b>Exam in ${plural(plan.days, 'day')}</b><span>${plan.unseen} questions not seen yet: ${plan.perDay} new a day sees them all once by then.</span></p>` : '<p><b>Exam plan</b><span>Set your exam date and the day’s new questions follow from it.</span></p>'}
+      <label class="os-libexamd"><span class="os-vh">Exam date</span><input type="date" name="exam" value="${esc(p.exam)}" min="${esc(dayOf(t))}"></label></div>
     <div class="os-libgoal"><span class="os-libh2">Daily goal</span><div class="os-seg" role="radiogroup" aria-label="Daily goal">${GOALS.map(g => `<button role="radio" data-lib="pref" data-k="goal" data-v="${g}" aria-checked="${p.goal === g}">${g}</button>`).join('')}</div></div>`;
 }
 
@@ -348,6 +357,21 @@ function cardHtml() {
       <div class="os-libgrades" role="group" aria-label="How well did you know it?">${GRADES.map((g, k) => `<button class="os-btn${(picked === it.answer ? g === 'good' : g === 'again') ? ' os-primary' : ''}" data-lib="grade" data-g="${g}" aria-keyshortcuts="${k + 1}"><span>${GLABEL[g]}</span><small>${esc(preview(card, g, t))}</small></button>`).join('')}</div>` : '<p class="os-libmeta os-libkeys">Tap an answer (or press 1 to 5).</p>'}
   </div>`;
 }
+/* the day's goal, done: a burst of confetti from the top of the card (springs out, gravity down, fades), a buzz on a
+   phone that has one, and a toast. Reduced motion: the toast alone */
+function celebrate() {
+  notify(`Daily goal done: ${myPref().goal} today. Keep the streak going tomorrow.`, 'success');
+  try { navigator.vibrate?.([12, 40, 18]); } catch {}
+  const host = panel()?.querySelector('.os-libcard'); if (!host || reducedMotion()) return;
+  const box = document.createElement('div'); box.className = 'os-confetti'; box.setAttribute('aria-hidden', 'true');
+  const colours = ['#1db954', '#00b4d8', '#ffb020', '#ff3d77', '#7b2ff7', '#c6ff00'];
+  for (let k = 0; k < 28; k++) {
+    const i = document.createElement('i'), a = (-90 + (Math.random() - 0.5) * 140) * Math.PI / 180, v = 160 + Math.random() * 160;
+    i.style.cssText = `--x:${Math.cos(a) * v}px;--y:${Math.sin(a) * v}px;--r:${(Math.random() - 0.5) * 720}deg;--c:${colours[k % colours.length]};--d:${Math.random() * 80}ms`;
+    box.append(i);
+  }
+  host.prepend(box); setTimeout(() => box.remove(), 1600);
+}
 /* the session's answers at its end: which you got, which you missed, and one tap to redo the missed */
 function reviewHtml() {
   const seen = [], keys = new Set();
@@ -369,8 +393,11 @@ function answer(i) {
   V.st.pick = i;
   const x = V.st.q[V.st.i], m = api.studyMem(), ok = !!x && i === x.item.answer;   /* every answer counts towards your gaps and the month's Wrapped (stats.mjs) */
   V.st.lastOk = ok;
+  const goal = myPref().goal, before = today(m.days, now(), goal).n;
   if (x) { record(m, x, ok, now()); api.saveStudy(m); if (ok) V.st.right++; }
+  if (before < goal && before + 1 >= goal) V.st.celebrate = true;   /* the answer that completes the day's goal */
   paint();
+  if (V.st.celebrate) { V.st.celebrate = false; celebrate(); }
   if (x) othersPicked(x, i);
   panel()?.querySelector(`[data-lib="grade"].os-primary`)?.focus({ preventScroll: true });
   /* a long stem puts the answer below the fold: bring the explanation up */
@@ -499,6 +526,7 @@ async function act(a, b, e) {
       return;
     }
     case 'accept': case 'decline': {
+      V.week = null;
       b.disabled = true;
       try { await api.answerFriend(b.dataset.id, a === 'accept'); V.lib = api.current(); } catch (err) { notify(err.message, 'danger'); }
       return paint();
@@ -518,7 +546,7 @@ async function act(a, b, e) {
     }
     case 'wrapped': return (await import('./wrapped-view.mjs')).openWrapped(b.dataset.m, { preview: b.dataset.preview === '1' });
     case 'start': { const p = myPref(), mem = api.studyMem(); return startWith(session(studyPool().filter(inStudyPick), mem.card, { which: p.which, order: p.order, size: p.size }, now(), startedToday()), { mode: p.mode, order: p.order }); }
-    case 'today': { const p = myPref(), mem = api.studyMem(); V.st.q = null; return startWith(session(everything(), mem.card, { order: 'due', size: p.size }, now(), startedToday()), { label: 'Today' }); }
+    case 'today': { const p = myPref(), mem = api.studyMem(), all = everything(), plan = examPlan(p.exam, tally(all, mem.card, now()).fresh, now()); V.st.q = null; return startWith(session(all, mem.card, { order: 'due', size: p.size, newADay: plan?.perDay }, now(), startedToday()), { label: 'Today' }); }
     case 'mode': {
       const m = b.dataset.m, mem = api.studyMem(), p = myPref(), all = everything();
       if (m === 'custom') { V.st.view = 'custom'; paint(); arrive(); return panel()?.focus({ preventScroll: true }); }

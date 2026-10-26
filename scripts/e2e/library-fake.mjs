@@ -1,6 +1,6 @@
 /* the library's functions (supabase/migrations/0008_library.sql) in memory, for the e2e: the same rules and the same
    error words, over the duel's fake players (the account is the duel's). Never the live project. */
-export function libraryFake({ byToken, players }) {
+export function libraryFake({ byToken, players, state = () => new Map() }) {
   const decks = new Map(), items = new Map(), friends = new Map(), shares = new Set(), picks = new Map();
   const fail = m => { throw new Error(m); };
   const pair = (p, q) => (p < q ? `${p}|${q}` : `${q}|${p}`);
@@ -13,6 +13,12 @@ export function libraryFake({ byToken, players }) {
     /* 0009_mcq_picks.sql */
     mcq_pick({ p_qid, p_choice }) { if (!/^[A-Za-z0-9._-]{3,80}$/.test(p_qid || '') || /^u-/.test(p_qid) || !(p_choice >= 0 && p_choice <= 5)) return null; const k = `${p_qid}|${p_choice}`; picks.set(k, (picks.get(k) || 0) + 1); return null; },
     mcq_picks({ p_qid }) { const ks = [...picks.keys()].filter(k => k.startsWith(`${p_qid}|`)).map(k => +k.split('|')[1]); if (!ks.length) return []; return Array.from({ length: Math.max(...ks) + 1 }, (_, c) => picks.get(`${p_qid}|${c}`) || 0); },
+    friend_week({ p_token }) {
+      const me = byToken(p_token), since = new Date(Date.now() - 6 * 864e5).toISOString().slice(0, 10);
+      const people = [me, ...[...friends.entries()].filter(([k, f]) => f.status === 'friends' && k.split('|').includes(me.id)).map(([k]) => players()[k.split('|').find(x => x !== me.id)]).filter(Boolean)];
+      return people.map(p => { const v = state().get(`u:${p.id}:lib\nk/days`)?.value || {}, e = Object.entries(v).filter(([d]) => d >= since); return { id: p.id, name: p.name, me: p.id === me.id, week: e.reduce((n, [, x]) => n + (x?.n | 0), 0), days: e.filter(([, x]) => (x?.n | 0) > 0).length }; })
+        .sort((a, b) => b.week - a.week || (a.name < b.name ? -1 : 1));
+    },
     lib_upload({ p_token, p_deck, p_items }) {
       const me = byToken(p_token), nm = norm(p_deck);
       if (nm.length < 1 || nm.length > 40) fail('Name the deck (1 to 40 characters)');
