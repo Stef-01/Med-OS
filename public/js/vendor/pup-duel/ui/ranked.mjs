@@ -17,10 +17,10 @@ export const POLL_MS = 2000;
 
 export function rankCard(p) {
   const t = tierOf(p?.rating, p?.ranked);
-  const sub = t.placing ? `Placing: ${PLACING - (p?.ranked || 0)} ${PLACING - (p?.ranked || 0) === 1 ? 'game' : 'games'} to go` : t.next ? `${t.toNext} to ${t.nextName}` : 'Top tier';
-  return `<div class="pd-rank" data-tier="${t.id}">
+  const sub = t.placing ? `${PLACING - (p?.ranked || 0)} ranked ${PLACING - (p?.ranked || 0) === 1 ? 'game' : 'games'} to your first tier` : t.next ? `${t.toNext} to ${t.nextName}` : 'Top tier';
+  return `<h2 class="pd-vh">Ranked</h2><div class="pd-rank" data-tier="${t.placing ? 'placing' : t.id}">
     <span class="pd-tier" aria-hidden="true">${icon('shield')}</span>
-    <div class="pd-rank-txt"><b>${t.name}</b><span><span class="pd-rating">${p?.rating ?? 1000}</span> rating</span><small>${sub}</small></div>
+    <div class="pd-rank-txt"><b>${t.placing ? 'Placing' : t.name}</b><span><span class="pd-rating">${p?.rating ?? 1000}</span> rating</span><small>${sub}</small></div>
   </div>
   <button class="pd-btn pd-pri" type="button" data-pd="ranked">${icon('zap')}Find a ranked match</button>`;
 }
@@ -30,10 +30,10 @@ export function openSearch(ctx) {
   let timer = 0, t0 = Date.now(), done = false, el;
   const stop = async () => { done = true; clearTimeout(timer); clearInterval(clock); try { await ctx.transport.unqueue(ctx.me); } catch { /* a stale ticket drops itself in 15 s */ } };
   ctx.sheet(`
-    <div class="pd-search" role="status" aria-live="polite">
+    <div class="pd-search">
       <span class="pd-radar" aria-hidden="true"><i></i><i></i><b>${icon('zap')}</b></span>
       <h2 class="pd-sheet-title">Finding a match</h2>
-      <p class="pd-search-line"><span class="pd-search-time">0:00</span><span class="pd-search-win"></span></p>
+      <p class="pd-search-line"><span class="pd-search-time" aria-hidden="true">0:00</span><span class="pd-search-win" role="status" aria-live="polite"></span></p>
       <p class="pd-err" role="alert"></p>
     </div>
     <button class="pd-btn" type="button" data-pd="stop">Cancel</button>`, root => {
@@ -84,22 +84,22 @@ export function boardRows(list, period, meId, limit = Infinity) {
 }
 
 function periodTabs(cur, idp) {
-  return `<div class="pd-periods" role="tablist" aria-label="Leaderboard period">${PERIODS.map(p => `<button type="button" role="tab" id="${idp}-${p.id}" data-period="${p.id}" aria-selected="${p.id === cur}" tabindex="${p.id === cur ? 0 : -1}">${p.label}</button>`).join('')}</div>`;
+  return `<div class="pd-periods" role="tablist" aria-label="Leaderboard period">${PERIODS.map(p => `<button type="button" role="tab" id="${idp}-${p.id}" aria-controls="${idp}-panel" data-period="${p.id}" aria-selected="${p.id === cur}" tabindex="${p.id === cur ? 0 : -1}">${p.label}</button>`).join('')}</div>`;
 }
 function rowEl(p, period, meId, face) {
   if (p.gap) return Object.assign(document.createElement('li'), { className: 'pd-lgap', ariaHidden: 'true' });
   const li = document.createElement('li'), t = tierOf(p.rating, p.ranked), me = p.id === meId, v = valueOf(p, period), P = PERIODS.find(x => x.id === period);
   li.className = 'pd-lrow'; if (me) li.dataset.me = ''; li.dataset.tier = t.id; li.dataset.place = p.place;
-  li.innerHTML = `<span class="pd-lplace">${p.place}</span><span class="pd-lface"></span><span class="pd-lname"><b></b><small>${t.placing ? 'Placing' : t.name}${period !== 'all' ? ` <span class="pd-lsub">${p.rating}</span>` : ''}${me ? ' <em>You</em>' : ''}</small></span><span class="pd-lval"><b>${v}</b><small>${P.unit(v)}</small></span>`;
+  li.innerHTML = `<span class="pd-vh"></span><span class="pd-lplace" aria-hidden="true">${p.place}</span><span class="pd-lface" aria-hidden="true"></span><span class="pd-lname" aria-hidden="true"><span class="pd-lnm"><b></b>${me ? '<em>You</em>' : ''}</span><small>${t.placing ? 'Placing' : t.name}</small></span><span class="pd-lval" aria-hidden="true"><b>${v}</b><small>${P.unit(v)}</small></span>`;
   li.querySelector('.pd-lname b').textContent = p.name;
   li.querySelector('.pd-lface').append(face(p.look));
-  li.setAttribute('aria-label', `${p.place}. ${p.name}${me ? ' (you)' : ''}, ${v} ${P.unit(v)}${period === 'all' ? `, ${t.placing ? 'placing' : t.name}` : ''}`);
+  li.querySelector('.pd-vh').textContent = `${p.place}. ${p.name}${me ? ' (you)' : ''}, ${v} ${P.unit(v)}, ${t.placing ? 'placing' : t.name}`;
   return li;
 }
 /* a board in `root`: the toggle, the list, the line under it. ctx: { face, meId, limit, list() (null while loading), onPeriod } */
 function board(root, ctx, idp) {
   let period = savedPeriod();
-  root.innerHTML = `${periodTabs(period, idp)}<ol class="pd-lboard${ctx.limit < Infinity ? ' pd-lmini' : ''}" role="tabpanel"></ol><p class="pd-lnote"></p>`;
+  root.innerHTML = `${periodTabs(period, idp)}<ol class="pd-lboard${ctx.limit < Infinity ? ' pd-lmini' : ''}" role="tabpanel" id="${idp}-panel" tabindex="0"></ol><p class="pd-lnote"></p>`;
   const tabs = root.querySelector('.pd-periods'), ol = root.querySelector('.pd-lboard'), note = root.querySelector('.pd-lnote');
   const pick = id => { period = id; savePeriod(id); paint(); ctx.onPeriod?.(id); };
   tabs.addEventListener('click', e => { const b = e.target.closest('[data-period]'); if (b) pick(b.dataset.period); });
@@ -113,7 +113,11 @@ function board(root, ctx, idp) {
     tabs.querySelectorAll('[data-period]').forEach(b => { const on = b.dataset.period === period; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
     ol.setAttribute('aria-labelledby', `${idp}-${period}`);
     const list = ctx.list(), P = PERIODS.find(p => p.id === period);
-    if (!list) { ol.innerHTML = Array.from({ length: Math.min(ctx.limit, 5) }, () => '<li class="pd-lrow pd-skel" aria-hidden="true"><i></i><i></i><i></i></li>').join(''); note.textContent = ctx.error?.() || ''; return; }
+    if (!list) {
+      const err = ctx.error?.() || '';
+      ol.innerHTML = err ? '' : Array.from({ length: Math.min(ctx.limit, 5) }, () => '<li class="pd-lrow pd-skel" aria-hidden="true"><i></i><i></i><i></i></li>').join('');
+      note.textContent = err; return;
+    }
     ol.replaceChildren(...boardRows(list, period, ctx.meId, ctx.limit).map(p => rowEl(p, period, ctx.meId, ctx.face)));
     const quiet = period !== 'all' && !list.some(p => (p[period] || 0) > 0);
     note.textContent = list.length < 2 ? 'Just you so far. Invite a mate to start the ladder.' : quiet ? `No duel wins in the last ${period === 'week' ? '7' : '30'} days yet. Win one to top the board.` : P.note;

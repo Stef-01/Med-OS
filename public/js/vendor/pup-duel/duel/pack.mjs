@@ -1,9 +1,11 @@
 /* pack.mjs: a question pack, the one shape every host writes (Med-OS builds it from its stations).
-   pack     { version, title, source, origin: 'ai' | 'human' | 'mixed', questions[] }
-   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, origin? }
+   pack     { version, title, source, origin: 'ai' | 'human' | 'mixed', cats?[{ id, label }], questions[] }
+   question { id, stem, options[2..6], answer (index), why?, notes?[one per option, or null], topic?, cat?, origin? }
+   topic is the first layer a player narrows by (Med-OS: the specialty), cat the second (Med-OS: OSCE skills, Clinical,
+   Physiology and pathophysiology, Anatomy), its label and order from the pack's cats.
    Plain text throughout: the duel renders with textContent, so a pack can never inject markup. */
 
-export const LIMITS = { stem: 1200, option: 160, why: 1200, note: 600, topic: 60, id: 80, minOptions: 2, maxOptions: 6 };
+export const LIMITS = { stem: 1200, option: 160, why: 1200, note: 600, topic: 60, cat: 30, cats: 12, id: 80, minOptions: 2, maxOptions: 6 };
 
 const text = (v, max) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim().slice(0, max) : '');
 
@@ -23,6 +25,7 @@ export function normQuestion(q) {
   const why = text(q.why, LIMITS.why); if (why) out.why = why;
   if (Array.isArray(q.notes) && q.notes.length === options.length) out.notes = q.notes.map(n => text(n, LIMITS.note) || null);
   const topic = text(q.topic, LIMITS.topic); if (topic) out.topic = topic;
+  const cat = text(q.cat, LIMITS.cat); if (cat) out.cat = cat;
   if (q.origin === 'ai' || q.origin === 'human') out.origin = q.origin;
   return { q: out, why: '' };
 }
@@ -37,7 +40,28 @@ export function normPack(p) {
     seen.add(q.id); questions.push(q);
   }
   const origin = ['ai', 'human', 'mixed'].includes(src.origin) ? src.origin : 'mixed';
-  return { pack: { version: text(String(src.version ?? ''), 40), title: text(src.title, 80) || 'Questions', source: text(src.source, 200), origin, questions }, dropped };
+  const cats = (Array.isArray(src.cats) ? src.cats : []).map(c => ({ id: text(c?.id, LIMITS.cat), label: text(c?.label, LIMITS.topic) })).filter(c => c.id && c.label).slice(0, LIMITS.cats);
+  return { pack: { version: text(String(src.version ?? ''), 40), title: text(src.title, 80) || 'Questions', source: text(src.source, 200), origin, cats, questions }, dropped };
+}
+
+/* the two layers a player drills through: every topic with its count and, under it, every category the pack names with
+   its count there (0 when none yet, so the layers read the same in every topic); `all` is the categories over the whole
+   pack. Categories in the pack's order; a category no cats entry names comes after, labelled by its id */
+export function topicTree(pack) {
+  const named = [...(pack.cats || [])], qs = pack.questions || [];
+  for (const q of qs) if (q.cat && !named.some(c => c.id === q.cat)) named.push({ id: q.cat, label: q.cat });
+  const catsIn = list => named.map(c => ({ ...c, count: list.filter(q => q.cat === c.id).length }));
+  return {
+    all: { count: qs.length, cats: catsIn(qs) },
+    topics: topicsOf(pack).map(t => ({ ...t, cats: catsIn(qs.filter(q => q.topic === t.topic)) }))
+  };
+}
+/* how many questions a pick has */
+export const poolOf = (pack, { topic = '', cat = '' } = {}) => (pack?.questions || []).filter(q => (!topic || q.topic === topic) && (!cat || q.cat === cat));
+/* "Paediatrics › Anatomy", "Every topic › Clinical", "Every topic" */
+export function pickLabel(pack, { topic = '', cat = '' } = {}) {
+  const c = cat && ((pack?.cats || []).find(x => x.id === cat)?.label || cat);
+  return `${topic || 'Every topic'}${c ? ` › ${c}` : ''}`;
 }
 
 /* the topics a duel can be narrowed to, with their counts, biggest first */

@@ -35,8 +35,8 @@ export function jsonbBytes(v) {
 
 /* the challenger's phone deals the questions (seeded, so a test can pin a deal) and shuffles each one's options;
    the questions travel inside the duel, so both phones play the same ones whatever pack each has cached */
-export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topic = '', seed = 1, title = '' } = {}) {
-  const r = rng(seed), pool = (pack?.questions || []).filter(q => !topic || q.topic === topic);
+export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topic = '', cat = '', seed = 1, title = '' } = {}) {
+  const r = rng(seed), pool = (pack?.questions || []).filter(q => (!topic || q.topic === topic) && (!cat || q.cat === cat));
   const picked = shuffle(r, pool).slice(0, clamp(Math.floor(rounds) || RULES.rounds, 1, RULES.maxQuestions));
   const questions = picked.map(q => {
     const order = shuffle(r, q.options.map((_, i) => i));
@@ -44,10 +44,11 @@ export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topi
     if (q.why) out.why = q.why;
     if (q.notes) out.notes = order.map(i => q.notes[i] ?? null);
     if (q.topic) out.topic = q.topic;
+    if (q.cat) out.cat = q.cat;
     if (q.origin) out.origin = q.origin;
     return out;
   });
-  return { v: 1, rounds: questions.length, secs: clamp(Math.round(secs) || RULES.secs, RULES.minSecs, RULES.maxSecs), title: String(title || pack?.title || '').slice(0, 80), topic: topic || '', seed: seed >>> 0, questions };
+  return { v: 1, rounds: questions.length, secs: clamp(Math.round(secs) || RULES.secs, RULES.minSecs, RULES.maxSecs), title: String(title || pack?.title || '').slice(0, 80), topic: topic || '', ...(cat ? { cat: String(cat).slice(0, 30), catLabel: String((pack?.cats || []).find(c => c.id === cat)?.label || cat).slice(0, 60) } : {}), seed: seed >>> 0, questions };
 }
 
 /* the same checks pup_challenge makes in Postgres; '' when the setup can be played */

@@ -18,9 +18,15 @@ export function stationsOnDisk(pub = PUB) {
   return fs.readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
 }
 export const packText = pack => JSON.stringify(pack, null, 1) + '\n';
+/* the category questions scripts/generate-mcq.mjs wrote: { station: file } */
+export function mcqOnDisk(pub = PUB) {
+  const dir = path.join(pub, 'duel', 'mcq');
+  if (!fs.existsSync(dir)) return {};
+  return Object.fromEntries(fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => { const j = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); return [j.station, j]; }));
+}
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const { pack, dropped } = buildPack(stationsOnDisk());
+  const { pack, dropped } = buildPack(stationsOnDisk(), mcqOnDisk());
   const text = packText(pack);
   if (process.argv.includes('--check')) {
     const now = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';

@@ -18,7 +18,7 @@ import { createSession } from '../duel/session.mjs';
 import { createLobby } from '../duel/lobby.mjs';
 import { practiceWorld, BOT } from '../duel/bot.mjs';
 import { nameError, pinError, normName, normLook, DOGS, DEFAULT_DOG, dogName } from '../duel/accounts.mjs';
-import { topicsOf } from '../duel/pack.mjs';
+import { topicTree, poolOf, pickLabel } from '../duel/pack.mjs';
 import { freshSeed } from '../duel/rng.mjs';
 import { lockerFor, fitLook } from '../duel/locker.mjs';
 import { normWallet, fitWear } from '../duel/shop.mjs';
@@ -43,7 +43,7 @@ const BETA = '<span class="pd-beta">Beta</span>';
 /* a look as this build can draw it: its dog, coat and collar known, its pieces in the wardrobe */
 const lookOf = l => normLook(l, id => !!itemOf(id));
 const ib = (pd, name, label, cls = '') => `<button class="pd-ib${cls ? ' ' + cls : ''}" type="button" data-pd="${pd}" aria-label="${esc(label)}" title="${esc(label)}">${icon(name)}</button>`;
-const setupLine = s => `${s?.rounds || '?'} questions, ${s?.secs || '?'} seconds each${s?.topic ? `, ${s.topic}` : ''}`;
+const setupLine = s => `${s?.rounds || '?'} questions, ${s?.secs || '?'} seconds each${s?.topic ? `, ${s.topic}` : ''}${s?.catLabel ? `, ${s.catLabel}` : ''}`;
 const breedOf = id => DOGS.find(d => d.id === id) || DOGS.find(d => d.id === DEFAULT_DOG);
 
 function loadCss() {
@@ -128,7 +128,6 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   root.innerHTML = '<div class="pd-shell"></div><div class="pd-live" aria-live="polite"></div>';
   const shell = root.querySelector('.pd-shell'), liveEl = root.querySelector('.pd-live');
   const say = text => { liveEl.textContent = ''; setTimeout(() => { liveEl.textContent = text; }, 30); };
-  const topics = topicsOf(pack);
   const top = (left, right = '<span></span>') => `<header class="pd-top">${left}<h1 class="pd-h1"><span>${esc(title)}</span>${BETA}</h1>${right}</header>`;
 
   /* ---- sign in: a name and a PIN, or a new player picking a dog ---- */
@@ -230,7 +229,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           <div class="pd-me-txt"><h2 class="pd-name"></h2><p class="pd-rec"></p>
           ${hostLook ? '' : `<button class="pd-wallet" type="button" data-pd="shop" hidden aria-label="Bones: open the shop">${icon('bone')}<b></b><span class="pd-wallet-go">Shop</span></button>`}</div>
         </section>
-        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" aria-label="Ranked" hidden></section><section class="pd-sec pd-boardsec" data-sec="board" aria-labelledby="pd-h-board"></section>' : ''}
+        ${transport?.queue ? '<section class="pd-sec pd-ranked" data-sec="ranked" hidden></section><section class="pd-sec pd-boardsec" data-sec="board" aria-labelledby="pd-h-board"></section>' : ''}
         <section class="pd-sec" data-sec="invites" hidden><h2 class="pd-h2">Invites</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mine" hidden><h2 class="pd-h2">Duels</h2><div class="pd-list"></div></section>
         <section class="pd-sec" data-sec="mates"><h2 class="pd-h2">Mates</h2><div class="pd-grid"></div></section>
@@ -244,7 +243,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('[data-sec="ranked"]')?.addEventListener('click', e => { if (e.target.closest('[data-pd="ranked"]')) startRanked(); });
     const bs = shell.querySelector('[data-sec="board"]');
     if (bs) {
-      S.lboard = lobbyBoard(bs, { face, meId: S.me.id, list: () => S.board || null });
+      S.lboard = lobbyBoard(bs, { face, meId: S.me.id, list: () => S.board || null, error: () => (S.board ? '' : S.boardErr || '') });
       bs.addEventListener('click', e => { if (e.target.closest('[data-pd="ladder"]')) openLadder({ sheet, face, ib, transport, me: S.me, say, onPeriod: () => S.lboard?.paint() }); });
     }
     if (!S.t) return;
@@ -323,7 +322,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       b.insertAdjacentHTML('beforeend', `<b></b><span class="pd-tbadge">${icon('bot')}</span>`);
       b.querySelector('b').textContent = BOT.name;
       b.setAttribute('aria-label', `Practice with ${BOT.name}, a bot on this device`);
-      b.addEventListener('click', startPractice);
+      b.addEventListener('click', openPractice);
       return b;
     }
     const p = t.p;
@@ -386,37 +385,105 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelector('[data-pd="signout"]').addEventListener('click', () => { remember(null); S.me = null; S.hero = null; showAuth(); });
     }, { label: 'Menu' });
   }
-  function openSetup(mate, last = null) {
-    const opt = last || { rounds: RULES.rounds, secs: RULES.secs, topic: '' };
-    const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div class="pd-seg" role="radiogroup" aria-label="${label}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}">${f(v)}</button>`).join('')}</div></div>`;
+  /* the setup of a duel with a mate or a practice with Rex, one sheet with two steps (founder 2026-10-25: "make the drill
+     down for question options have more layers, and consistent"):
+       setup   who, the questions it is played on ("Paediatrics › Anatomy, 11 questions"), how many, how long, Start
+       choose  the questions in two layers, the same for a duel and a practice: Every topic or a topic (Paediatrics),
+               then all of it or one category (OSCE skills, Clinical, Physiology and pathophysiology, Anatomy), each with
+               its count; a category with none yet is shown, greyed, so the layers read the same everywhere
+     The last pick and lengths are remembered on this device */
+  const PICK_KEY = `${storeKey}:pick`;
+  const lastPick = () => { try { const p = JSON.parse(storage.getItem(PICK_KEY)) || {}; return { rounds: RULES.roundChoices.includes(p.rounds) ? p.rounds : RULES.rounds, secs: RULES.secsChoices.includes(p.secs) ? p.secs : RULES.secs, topic: typeof p.topic === 'string' ? p.topic : '', cat: typeof p.cat === 'string' ? p.cat : '' }; } catch { return { rounds: RULES.rounds, secs: RULES.secs, topic: '', cat: '' }; } };
+  const keepPick = p => { try { storage.setItem(PICK_KEY, JSON.stringify(p)); } catch { /* private mode */ } };
+  function openSetup(mate, last = null, { practice: isPractice = false } = {}) {
+    const tree = topicTree(pack), layered = tree.topics.length > 1 || tree.all.cats.length > 1;
+    const opt = { ...lastPick(), ...(last || {}) };
+    if (!poolOf(pack, opt).length) { opt.topic = ''; opt.cat = ''; }   /* a pick the pack no longer has */
+    const seg = (name, ic, label, vals, cur, f) => `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon(ic)}</span><div class="pd-seg" role="radiogroup" aria-label="${label}">${vals.map(v => `<button type="button" role="radio" data-${name}="${v}" aria-checked="${v === cur}" tabindex="${v === cur ? 0 : -1}">${f(v)}</button>`).join('')}</div></div>`;
     sheet(`
-      <div class="pd-vsmini" aria-hidden="true"></div>
-      <h2 class="pd-sheet-title"></h2>
-      ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
-      ${seg('secs', 'timer', 'Seconds each', RULES.secsChoices, opt.secs, v => `${v}s`)}
-      ${topics.length > 1 ? `<label class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><select name="topic" aria-label="Topic"><option value="">Every topic</option>${topics.map(t => `<option value="${esc(t.topic)}"${t.topic === opt.topic ? ' selected' : ''}>${esc(t.topic)}</option>`).join('')}</select><span class="pd-chevsel" aria-hidden="true">${icon('chev')}</span></label>` : ''}
-      <p class="pd-err" role="alert"></p>
-      <button class="pd-btn pd-pri" type="button" data-pd="send">${icon('zap')}Duel</button>`, el => {
+      <div class="pd-step" data-step="setup">
+        <div class="pd-vsmini" aria-hidden="true"></div>
+        <h2 class="pd-sheet-title"></h2>
+        ${layered ? `<button class="pd-pickrow" type="button" data-pd="choose"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><span class="pd-pick-tx"><small>Questions from</small><b></b></span><span class="pd-pick-n"></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
+        ${seg('rounds', 'q', 'Questions', RULES.roundChoices, opt.rounds, v => v)}
+        ${seg('secs', 'timer', 'Seconds each', RULES.secsChoices, opt.secs, v => `${v}s`)}
+        <p class="pd-note" data-pd="fewer" hidden></p>
+        <p class="pd-err" role="alert"></p>
+        <button class="pd-btn pd-pri" type="button" data-pd="send">${icon(isPractice ? 'bot' : 'zap')}${isPractice ? 'Practice' : 'Duel'}</button>
+      </div>
+      <div class="pd-step" data-step="choose" hidden>
+        <div class="pd-sheet-head"><button class="pd-ib" type="button" data-pd="up" aria-label="Back">${icon('back')}</button><h2 class="pd-sheet-title" tabindex="-1">Choose questions</h2><span></span><span></span></div>
+        <p class="pd-crumbs"></p>
+        <ul class="pd-drill" role="list"></ul>
+      </div>`, el => {
+      const step = id => { el.querySelectorAll('.pd-step').forEach(s => { s.hidden = s.dataset.step !== id; }); };
+      const pickedRounds = () => +el.querySelector('[data-rounds][aria-checked="true"]').dataset.rounds;
       el.querySelector('.pd-vsmini').append(face(myLook()), face(mate.look, 'pd-mirror'));
-      el.querySelector('.pd-sheet-title').textContent = mate.name;
-      el.querySelectorAll('.pd-seg').forEach(g => g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; g.querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', String(x === b))); }));
+      el.querySelector('[data-step="setup"] .pd-sheet-title').textContent = isPractice ? `Practice with ${mate.name}` : mate.name;
+      const paintPick = () => {
+        const n = poolOf(pack, opt).length, row = el.querySelector('[data-pd="choose"]');
+        if (row) {
+          row.querySelector('b').textContent = pickLabel(pack, opt);
+          row.querySelector('.pd-pick-n').textContent = n;
+          row.setAttribute('aria-label', `Questions from ${pickLabel(pack, opt).replace(' › ', ', ')}: ${n} questions. Change`);
+        }
+        const few = el.querySelector('[data-pd="fewer"]'), r = pickedRounds();
+        few.hidden = n >= r; few.textContent = n < r ? `Only ${n} question${n === 1 ? '' : 's'} here, so it plays ${n}.` : '';
+      };
+      /* the two layers: dt null shows the topics; '' (Every topic) or a topic shows its categories */
+      let dt = null;
+      const drill = (focusFirst = true) => {
+        const ul = el.querySelector('.pd-drill'), crumbs = el.querySelector('.pd-crumbs');
+        const item = (label, n, attrs, { go = false, on = false, sub = '' } = {}) => `<li><button type="button" class="pd-drow${on ? ' pd-on' : ''}" ${attrs}${n ? '' : ' disabled'} aria-label="${esc(label)}, ${n ? `${n} question${n === 1 ? '' : 's'}` : 'none yet'}${on ? ', chosen' : ''}${go ? ', open' : ''}">
+          <span class="pd-drow-tx"><b>${esc(label)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</span><span class="pd-drow-n">${n || 'None yet'}</span>${go ? `<span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span>` : on ? `<span class="pd-drow-on" aria-hidden="true">${icon('check')}</span>` : '<span class="pd-drow-sp"></span>'}</button></li>`;
+        if (dt === null) {
+          crumbs.textContent = 'Pick a topic, then a kind of question.';
+          ul.innerHTML = item('Every topic', tree.all.count, 'data-dt=""', { go: true, sub: 'The whole bank' })
+            + tree.topics.map(t => item(t.topic, t.count, `data-dt="${esc(t.topic)}"`, { go: true, sub: t.topic === opt.topic ? `Chosen: ${pickLabel(pack, opt).split(' › ')[1] || 'all of it'}` : '' })).join('');
+        } else {
+          const node = dt ? tree.topics.find(t => t.topic === dt) : tree.all;
+          crumbs.innerHTML = `<button type="button" class="pd-crumb" data-pd="up">Topics</button><span aria-hidden="true">›</span><b></b>`;
+          crumbs.querySelector('b').textContent = dt || 'Every topic';
+          ul.innerHTML = item(dt ? `All of ${dt}` : 'Every question', node.count, 'data-dc=""', { on: opt.topic === dt && !opt.cat })
+            + node.cats.map(c => item(c.label, c.count, `data-dc="${esc(c.id)}"`, { on: opt.topic === dt && opt.cat === c.id })).join('');
+        }
+        if (focusFirst) (ul.querySelector('.pd-on:not(:disabled)') || ul.querySelector('button:not(:disabled)'))?.focus({ preventScroll: true });
+      };
+      el.querySelector('[data-pd="choose"]')?.addEventListener('click', () => { dt = null; step('choose'); drill(); });
+      el.querySelector('[data-step="choose"]').addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b || b.disabled) return;
+        if (b.dataset.pd === 'up') { if (dt === null) { step('setup'); el.querySelector('[data-pd="choose"]').focus({ preventScroll: true }); } else { dt = null; drill(); } return; }
+        if (b.dataset.dt !== undefined) { dt = b.dataset.dt; drill(); return; }
+        if (b.dataset.dc !== undefined) { opt.topic = dt || ''; opt.cat = b.dataset.dc; keepPick({ ...opt }); paintPick(); step('setup'); el.querySelector('[data-pd="choose"]').focus({ preventScroll: true }); say(`Questions from ${pickLabel(pack, opt)}`); }
+      });
+      el.querySelectorAll('.pd-seg').forEach(g => {
+        const set = b => { g.querySelectorAll('button').forEach(x => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; }); paintPick(); };
+        g.addEventListener('click', e => { const b = e.target.closest('button'); if (b) set(b); });
+        g.addEventListener('keydown', e => {   /* a radio group: the arrows move and choose */
+          const all = [...g.querySelectorAll('button')], i = all.indexOf(document.activeElement), n = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+          if (i < 0 || !n) return;
+          e.preventDefault(); const b = all[(i + n + all.length) % all.length]; set(b); b.focus();
+        });
+      });
+      paintPick();
       el.querySelector('[data-pd="send"]').addEventListener('click', async () => {
-        const rounds = +el.querySelector('[data-rounds][aria-checked="true"]').dataset.rounds, secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs;
-        const topic = el.querySelector('select')?.value || '';
-        const setup = makeSetup(pack, { rounds, secs, topic, seed: freshSeed(), title: pack.title });
+        const rounds = pickedRounds(), secs = +el.querySelector('[data-secs][aria-checked="true"]').dataset.secs;
+        keepPick({ ...opt, rounds, secs });
+        if (isPractice) { closeSheet(); startPractice({ rounds, secs, topic: opt.topic, cat: opt.cat }); return; }
+        const setup = makeSetup(pack, { rounds, secs, topic: opt.topic, cat: opt.cat, seed: freshSeed(), title: pack.title });
         if (!setup.questions.length) { el.querySelector('.pd-err').textContent = 'No questions to play.'; return; }
         await busy(async () => {
           const d = await challengeMate(mate.id, setup);
           closeSheet(); openDuel({ ...d, them: mate });
         }, () => { el.querySelector('.pd-err').textContent = S.err; });
       });
-    }, { label: `Challenge ${mate.name}` });
+    }, { label: isPractice ? `Practice with ${mate.name}` : `Challenge ${mate.name}` });
   }
 
   /* the ladder (ranked.mjs): read when the lobby opens and after a ranked duel; null on a backend without it */
   async function loadBoard() {
     if (!transport?.leaderboard || !S.me) return null;
-    try { S.board = await transport.leaderboard(S.me); } catch { /* the next lobby */ }
+    try { S.board = await transport.leaderboard(S.me); S.boardErr = ''; } catch (e) { S.boardErr = `Can't load the leaderboard. ${e.server ? e.message : 'Retrying when the lobby opens.'}`; S.lboard?.paint(); }
     if (S.screen === 'lobby') paintLobby();
     return S.board;
   }
@@ -482,13 +549,16 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   }
 
   /* ---- practice ---- */
-  async function startPractice() {
+  /* practice: the same setup as a duel (the drill-down), then Rex on this device */
+  function openPractice() { openSetup({ name: BOT.name, look: BOT.look }, null, { practice: true }); }
+  async function startPractice(opts = S.lastPractice || lastPick()) {
+    S.lastPractice = opts;
     stopAll();
     await busy(async () => {
       const look = myLook();
       const w = await practiceWorld({ name: S.me?.name || 'You', look });
       S.world = w; S.t = w.transport; S.worldMe = w.me;
-      const setup = makeSetup(pack, { rounds: RULES.rounds, secs: RULES.secs, seed: freshSeed(), title: pack.title });
+      const setup = makeSetup(pack, { rounds: opts.rounds || RULES.rounds, secs: opts.secs || RULES.secs, topic: opts.topic || '', cat: opts.cat || '', seed: freshSeed(), title: pack.title });
       if (!setup.questions.length) throw new Error('No questions to play.');
       const d = await w.transport.challenge(w.me, w.bot.id, setup);
       openDuel({ ...d, them: { ...w.bot, look: BOT.look } }, { practice: true });
@@ -870,7 +940,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   /* ---- plumbing ---- */
   function wireCommon() {
     shell.querySelector('[data-pd="close"]')?.addEventListener('click', () => { destroy(); onClose(); });
-    shell.querySelectorAll('.pd-auth [data-pd="practice"]').forEach(b => b.addEventListener('click', startPractice));
+    shell.querySelectorAll('.pd-auth [data-pd="practice"]').forEach(b => b.addEventListener('click', openPractice));
   }
   function stopAll(keepWorld = false) {
     cancelAnimationFrame(S.raf); clearInterval(S.crossT);

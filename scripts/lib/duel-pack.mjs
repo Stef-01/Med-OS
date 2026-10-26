@@ -12,6 +12,8 @@
    Known limit: the likely diagnosis is often the most specific name, so it is the longest option in about 4 of 10
    questions (1 in 4 by chance); the duel shuffles the options, and an AI-written pack can replace this one. */
 
+import { CATS, gate } from './mcq.mjs';
+
 export const LIMITS = { option: 70, minDistractors: 3 }, LONG = 1.8;
 const SETTING = { gp: 'in general practice', ed: 'in the emergency department', ward: 'on the ward', clinic: 'in clinic', 'birth suite': 'in the birth suite', recovery: 'in recovery' };
 const strip = s => String(s ?? '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
@@ -86,18 +88,28 @@ export function stationQuestion(st, pool = []) {
     q: {
       id: `osce-${st.id}`, stem, options: [answer, ...picked.map(p => p.o)], answer: 0,
       notes: [null, ...picked.map(p => p.note)], why: sentence(st.points?.[0]) || undefined,
-      topic: st.specialty?.[0] || undefined, origin: 'ai', station: st.id
+      topic: st.specialty?.[0] || undefined, cat: 'clinical', origin: 'ai', station: st.id
     },
     why: ''
   };
 }
 
-/* the pack: every station that makes a fair question, in id order; `dropped` says why the others did not */
-export function buildPack(stations) {
+/* the pack: every station that makes a fair question, in id order, then the station's category questions
+   (scripts/generate-mcq.mjs, public/duel/mcq/<station>.json; each passes lib/mcq.mjs gate again here, so a hand edit
+   that breaks one leaves it out), all under the station's first specialty; `dropped` says why any are not in */
+export function buildPack(stations, mcq = {}) {
   const list = [...stations].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
-  for (const st of list) { const { q, why } = stationQuestion(st, list); if (q) questions.push(q); else dropped.push(why); }
+  for (const st of list) {
+    const { q, why } = stationQuestion(st, list); if (q) questions.push(q); else dropped.push(why);
+    for (const m of mcq[st.id]?.questions || []) {
+      const issues = gate(m);
+      if (issues.length) { dropped.push(`${m.id}: ${issues.join('; ')}`); continue; }
+      questions.push({ id: m.id, stem: m.stem, options: m.options, answer: m.answer, notes: m.notes, why: m.why, topic: st.specialty?.[0] || undefined, cat: m.cat, origin: 'ai', station: st.id });
+    }
+  }
   return {
-    pack: { schemaVersion: 1, version: `stations-${list.length}`, title: 'OSCE differentials', source: 'Built by scripts/build-duel-pack.mjs from public/osce/: one question per station, its likely diagnosis against its own differential.', origin: 'ai', questions },
+    pack: { schemaVersion: 1, version: `stations-${list.length}-mcq-${Object.keys(mcq).length}`, title: 'OSCE questions', source: 'Built by scripts/build-duel-pack.mjs from public/osce/ and public/duel/mcq/: per station, its likely diagnosis against its own differential, and one question in each of OSCE skills, Clinical, Physiology and pathophysiology, and Anatomy.', origin: 'ai',
+      cats: CATS.map(c => ({ id: c.id, label: c.label })), questions },
     dropped
   };
 }

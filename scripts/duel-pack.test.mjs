@@ -7,7 +7,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { shortDx, patientLine, stationQuestion, buildPack } from './lib/duel-pack.mjs';
-import { stationsOnDisk, packText } from './build-duel-pack.mjs';
+import { stationsOnDisk, packText, mcqOnDisk } from './build-duel-pack.mjs';
 import { normQuestion } from '../public/js/vendor/pup-duel/duel/pack.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -87,7 +87,7 @@ test('the pack from the bank: a question for nearly every station, every one pla
 });
 
 test('public/duel/pack.json is current (npm run duel-pack after a station changes)', () => {
-  const { pack } = buildPack(stationsOnDisk(path.join(ROOT, 'public')));
+  const { pack } = buildPack(stationsOnDisk(path.join(ROOT, 'public')), mcqOnDisk(path.join(ROOT, 'public')));
   assert.equal(fs.readFileSync(path.join(ROOT, 'public/duel/pack.json'), 'utf8'), packText(pack));
 });
 

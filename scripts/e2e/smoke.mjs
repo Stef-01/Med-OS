@@ -636,6 +636,13 @@ async function duel() {
   await solo.click('[data-os="settings"]'); await solo.click('.os-switch[data-game="duel"]'); await solo.keyboard.press('Escape');   /* off until switched on */
   await solo.click('[data-os="duel"]'); await solo.waitForSelector('.os-duel [data-pd="practice"]');
   await solo.click('.os-duel [data-pd="practice"]');
+  /* the questions in two layers: a topic, then a kind, the pick and its count on the setup, a practice on just those */
+  await solo.click('.os-duel [data-pd="choose"]'); await solo.click('.os-duel .pd-drill [data-dt="Paediatrics"]');
+  ok(await solo.locator('.os-duel .pd-drill [data-dc]').count() === 5, 'practice: Paediatrics lists all of it and the four kinds of question');
+  await solo.screenshot({ path: path.join(SHOTS, 'practice-kinds.png') });
+  await solo.click('.os-duel .pd-drill [data-dc="clinical"]');
+  ok(/Paediatrics › Clinical/.test(await solo.textContent('.os-duel [data-pd="choose"]')), 'practice: the setup shows Paediatrics › Clinical');
+  await solo.click('.os-duel .pd-sheet [data-pd="send"]');
   await solo.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 15000 });
   await solo.locator('.os-duel .pd-opt').first().click();
   await solo.waitForSelector('.os-duel .pd-why:not([hidden])', { timeout: 25000 });
