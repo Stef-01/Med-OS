@@ -59,6 +59,8 @@ A 58-year-old woman enters the Short Stay Medical Unit due to a clinical picture
 - D. Hypovolemic shock.
 - E. Acute pulmonary edema secondary to atrial flutter.
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* She had sudden syncope, then dyspnoea, tachycardia, tachypnoea, hypotension and marked hypoxaemia (saturation 85%), yet her lungs are clear and there are no murmurs or gallop. Hypoxic shock with clear lungs points to massive (high-risk) pulmonary embolism.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
 ## 4. medqa-us4-test-0615 (usmle-resource, Psychiatry)
@@ -69,6 +71,8 @@ A 31-year-old man, who was hospitalized for substance-induced psychosis two days
 - B. Physical therapy
 - C. Dantrolene
 - D. Baclofen
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Painful twisting of the neck (torticollis), with a sensory trick that relieves it, within days of starting haloperidol is acute dystonia. Treat it with an anticholinergic such as benztropine; diphenhydramine is an alternative.
 
 *Source:* MedQA (Jin et al. 2020), US, 4-option, test split
 
@@ -109,6 +113,8 @@ A 69-year-old woman consulted for hemoptotic expectoration. In the two previous 
 - D. Classical polyarteritis nodosa.
 - E. Microscopic polyarteritis.  **(key)**
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* She has a pulmonary-renal syndrome: alveolar haemorrhage with haemosiderophages, plus rapidly progressive glomerulonephritis with red cell casts. Positive p-ANCA (MPO) with negative anti-GBM and ANA points to microscopic polyangiitis, a small-vessel vasculitis with pauci-immune necrotising glomerulonephritis.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
 ## 8. mmlu-professional_medicine-156 (usmle-resource, Neonatology)
@@ -119,6 +125,8 @@ A male neonate, who was born at 36 weeks' gestation 2 hours ago in the labor and
 - B. Meconium aspiration syndrome
 - C. Respiratory distress syndrome
 - D. Transient tachypnea of newborn  **(key)**
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* The baby is late preterm, was born by caesarean, and has mild tachypnoea and retractions with good saturations. The X-ray shows prominent vascular markings and fluid in the fissures. This is the classic picture of transient tachypnoea of the newborn, caused by delayed clearance of lung fluid.
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
 
@@ -158,6 +166,8 @@ A 50-year-old patient with a history of gout and chronic use of corticosteroids.
 - C. Patellar tendon rupture.
 - D. Quadriceps tendon rupture.  **(key)**
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Loss of active knee extension with a low-lying patella (patella baja) means quadriceps tendon rupture, because the patella is no longer pulled up. Gout and chronic steroids are classic risk factors in older patients.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
 ## 12. mmlu-professional_medicine-016 (usmle-resource, Immunology)
@@ -168,6 +178,8 @@ A 5-year-old boy is admitted to the hospital because of a 1-week history of feve
 - B. Failure of leukocytes to roll along the endothelial surface
 - C. Inability of leukocytes to ingest microorganisms
 - D. Inability of leukocytes to kill intracellular microorganisms  **(key)**
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Neutrophils that fail to mount an oxidative burst point to chronic granulomatous disease, a defect in NADPH oxidase. Phagocytes can still ingest catalase-positive organisms such as S. aureus and Aspergillus, but they cannot kill them once inside. Remember: CGD is a killing defect, not a defect of migration or ingestion.
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
 
@@ -208,6 +220,8 @@ A 76-year-old woman came to the emergency room referring to pain in the right gr
 - D. Femoral hernia (crural).  **(key)**
 - E. Obturator hernia
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* A hard, tender groin mass below the inguinal ligament with vomiting in an elderly woman suggests an incarcerated femoral hernia. Femoral hernias lie below and lateral to the pubic tubercle, are most common in older women, and often strangulate because the femoral ring is narrow.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
 ## 16. mmlu-professional_medicine-153 (usmle-resource, Rheumatology)
@@ -218,6 +232,8 @@ A 57-year-old woman comes to the office for a preoperative evaluation 2 weeks be
 - B. Progressive supranuclear palsy
 - C. Sarcopenia
 - D. Systemic sclerosis (scleroderma)  **(key)**
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Thickened, hardened skin on the hands and forearms, an expressionless face, and limited mouth opening (microstomia) suggest systemic sclerosis. Before surgery it needs evaluation because of the risk of difficult intubation and possible pulmonary, cardiac, renal, and oesophageal involvement.
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
 
@@ -257,6 +273,8 @@ A 30-year-old woman in general practice. Returned from Thailand a month ago afte
 - C. Myopathy associated with alcoholism.
 - D. Eaton-Lambert syndrome.  **(key)**
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Proximal weakness that improves with sustained exercise, increments on repetitive nerve stimulation, and a smoker's lung mass (likely small cell carcinoma) mean Lambert-Eaton myasthenic syndrome, caused by antibodies to presynaptic voltage-gated calcium channels.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
 ## 20. mmlu-professional_medicine-150 (usmle-resource, Paediatrics)
@@ -267,6 +285,8 @@ A 14-year-old boy is brought to the physician for a physical examination prior t
 - B. Peutz-Jeghers syndrome
 - C. Seminiferous tubule dysgenesis (Klinefelter syndrome)
 - D. Normal development  **(key)**
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Mid-puberty (Tanner 3) with small bilateral subareolar fibroglandular tissue, normal genitalia, and normal hormone levels is typical of physiological pubertal gynaecomastia. It reflects a transient oestrogen–androgen imbalance and usually resolves within 1–2 years. Management is reassurance.
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
 
@@ -306,6 +326,8 @@ A 38-year-old man consulted for the appearance of red and painful nodules in bot
 - C. Behçet syndrome.  **(key)**
 - D. Systemic lupus erythematosus.
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Recurrent oral ulcers plus genital ulcers with erythema nodosum-like lesions point to Behçet syndrome. Recurrent oral aphthae are the essential criterion, and genital ulcers, skin lesions, eye and pathergy findings support it.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
 ## 24. medqa-us4-test-0532 (usmle-resource, Toxicology)
@@ -317,6 +339,8 @@ A 38-year-old man is brought to the emergency room by his father because of alte
 - C. Levothyroxine
 - D. Atorvastatin
 "
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* A new drug started 10 days ago plus hypothermia after cold exposure, bradycardia, slowed breathing and paradoxical undressing points to an antipsychotic. Fluphenazine, a typical antipsychotic used here for schizoaffective disorder, disrupts hypothalamic temperature control through dopamine blockade. Antipsychotics can cause hypothermia as well as hyperthermia.
 
 *Source:* MedQA (Jin et al. 2020), US, 4-option, test split
 
@@ -356,6 +380,8 @@ Serves a 32-year-old man, computer specialist, who consults for lumbar pain and 
 - C. The type of pain in the spine guides the diagnosis to a herniated disc. I refer the patient to Neurosurgery.
 - D. I would start treatment with methotrexate that is effective for spinal pain and inflammation of toes.
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* A young man with inflammatory nocturnal low back and buttock pain, dactylitis ('sausage toes'), seronegativity and raised CRP has spondyloarthritis. Ask about psoriasis (psoriatic arthritis) and check HLA-B27.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
 ## 28. mmlu-professional_medicine-151 (usmle-resource, General Practice)
@@ -366,6 +392,8 @@ A 37-year-old man comes to the physician because of nonradiating low back pain f
 - B. Regular activity  **(key)**
 - C. X-rays of the spine
 - D. MRI of the spine
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* This is acute nonspecific mechanical low back pain with no red flags: no bowel or bladder changes, normal vital signs, and a negative straight-leg raise. Staying active speeds recovery, and imaging is not indicated. Australian guidelines also recommend reassurance and staying active.
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
 
@@ -432,6 +460,8 @@ Abdominal ultrasound shows nonpropulsive peristalsis of the small bowel. Which o
 - C. History of abdominal surgery  **(key)**
 - D. Alcohol
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Colicky pain, bilious vomiting, obstipation, distension and high-pitched bowel sounds point to mechanical small bowel obstruction. In a patient with previous appendectomy and laparoscopic scars, the likely cause is adhesions. Remember that adhesions are the most common cause of small bowel obstruction in adults.
+
 *Source:* MedQA (Jin et al. 2020), US, 4-option, test split
 
 ## 33. ai-mcq-ce657f94 (ai, Neurosurgery)
@@ -470,6 +500,8 @@ A 59-year-old woman presented with chronic watery diarrhea of ​​4 months evo
 - C. Collagenous colitis  **(key)**
 - D. Fibrosing Crohn's disease.
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Chronic watery diarrhoea with normal-looking mucosa points to microscopic colitis. A thickened subepithelial band that stains with Masson trichrome (collagen, over 10 µm), with surface epithelial damage and more intraepithelial lymphocytes, defines collagenous colitis.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
 ## 36. medqa-us4-test-0519 (usmle-resource, Trauma Surgery)
@@ -480,6 +512,8 @@ A 36-year-old man is brought to the emergency department 40 minutes after being 
 - B. Local wound exploration
 - C. Exploratory laparotomy  **(key)**
 - D. Video-assisted thoracoscopic surgery
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* A gunshot wound below the nipple line (6th intercostal space) is thoracoabdominal and likely to have crossed the diaphragm into the abdomen, probably injuring the liver. With persistent hypotension and abdominal tenderness, a haemodynamically unstable penetrating injury needs immediate laparotomy, not more imaging.
 
 *Source:* MedQA (Jin et al. 2020), US, 4-option, test split
 
@@ -519,6 +553,8 @@ An 80-year-old man came to his office to evaluate a cholecystectomy program by l
 - C. Perform a scintigraphy with thallium and dipyridamole.
 - D. Perform electrocardiogram.  **(key)**
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Laparoscopic cholecystectomy is low-to-intermediate risk, and he has excellent functional capacity (more than 4 METs) with no cardiac symptoms. No stress testing or imaging is needed, but a baseline ECG is reasonable given his age and hypertension.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
 ## 40. mmlu-professional_medicine-010 (usmle-resource, Geriatrics)
@@ -529,5 +565,7 @@ While you are on rounds at a local nursing facility, the nurse mentions that you
 - B. Complete blood count
 - C. Determination of serum albumin concentration
 - D. Determination of serum digoxin level  **(key)**
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* An elderly woman on digoxin with furosemide, which can cause hypokalaemia, who has loss of appetite, nausea and a changed sense of taste most likely has digoxin toxicity. A serum digoxin level is the targeted first test. Remember to check potassium and renal function as well.
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test

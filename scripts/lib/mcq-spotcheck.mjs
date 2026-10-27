@@ -22,14 +22,18 @@ export function spotSample(questions, n = 40, salt = 'spot') {
 }
 
 /* the sheet a person marks */
-export function spotSheet(questions, { date = '' } = {}) {
+/* explained: data/mcq/explanations.json items, so a question published without an explanation shows the AI-written
+   one the bank gives it, and the person marking checks that too */
+export function spotSheet(questions, { date = '', explained = {} } = {}) {
   const L = ['# MCQ spot-check', '', `Written by \`node scripts/mcq-spotcheck.mjs\`${date ? ` on ${date}` : ''}: ${questions.length} questions from the standard pool, spread over its kinds. Every one passed the model review and the bar; this is the check a person makes.`, '',
     'For each question, record a call: `node scripts/mcq-spotcheck.mjs --mark <number> <call> [--note "..."] [--by "your name"]` (or by hand in `data/mcq/spotcheck.json` under `marks`, keyed by its id). The calls:', '',
     ...Object.entries(CALLS).map(([k, v]) => `- \`${k}\`: ${v}`), '', 'Then `node scripts/mcq-evals.mjs` reports what the marks say (docs/mcq-evals.md, section 6).', ''];
   questions.forEach((q, i) => {
     L.push(`## ${i + 1}. ${q.id} (${kindOf(q)}${q.topic ? `, ${q.topic}` : ''})`, '', q.ask ? `${q.stem} **${q.ask}**` : q.stem, '');
     q.options.forEach((o, j) => L.push(`- ${LETTERS[j]}. ${o}${j === q.answer ? '  **(key)**' : ''}`));
+    const ai = !q.explanation && explained[q.id];
     if (q.explanation) L.push('', `*Explanation:* ${q.explanation}`);
+    else if (ai) L.push('', `*Explanation (AI-written for the bank; mark \`other\` with a note if it is wrong):* ${ai.why}`);
     L.push('', `*Source:* ${q.provenance?.source?.name || kindOf(q)}`, '');
   });
   return L.join('\n');

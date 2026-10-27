@@ -10,6 +10,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spotSample, spotSheet, spotResults, CALLS } from './lib/mcq-spotcheck.mjs';
 import { cli, readJson } from './lib/disk.mjs';
+import { readExplanations } from './explain-mcq.mjs';
+import { storedFor } from './lib/mcq-explain.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const SPOT_FILE = path.join(ROOT, 'data', 'mcq', 'spotcheck.json');
@@ -32,7 +34,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   }
   spot.marks = Object.fromEntries(Object.entries(spot.marks || {}).filter(([id]) => spot.sample.includes(id)));
   fs.writeFileSync(SPOT_FILE, `${JSON.stringify(spot, null, 1)}\n`);
-  fs.writeFileSync(path.join(ROOT, 'docs', 'mcq-spotcheck.md'), spotSheet(qs, { date: new Date().toISOString().slice(0, 10) }));
+  fs.writeFileSync(path.join(ROOT, 'docs', 'mcq-spotcheck.md'), spotSheet(qs, { date: new Date().toISOString().slice(0, 10), explained: Object.fromEntries(qs.map(q => [q.id, storedFor(readExplanations(), q)]).filter(([, e]) => e)) }));
   const r = spotResults(qs, spot.marks);
   console.log(`spot-check: ${qs.length} questions -> docs/mcq-spotcheck.md · marked ${r.marked}${r.marked ? `, ${r.okShare}% fine` : ''}`);
 }

@@ -36,6 +36,8 @@ import { claudeAsk } from './lib/ask.mjs';
 import { retestStats, retestFor, retestKey } from './lib/mcq-retest.mjs';
 import { spotResults, CALLS } from './lib/mcq-spotcheck.mjs';
 import { SPOT_FILE } from './mcq-spotcheck.mjs';
+import { explainStats } from './lib/mcq-explain.mjs';
+import { EXPLAIN_FILE } from './explain-mcq.mjs';
 import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -158,7 +160,9 @@ const strip = o => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, Obje
 /* ---- 6 the human spot-check (scripts/mcq-spotcheck.mjs): what people say of a sample of the pool */
 const spotFile = readJson(SPOT_FILE, { sample: [], marks: {} }), poolNow = readJson(path.join(ROOT, 'public/mcq/pool.json'), { questions: [] }).questions;
 const spot = spotFile.sample.length ? spotResults(spotFile.sample.map(id => poolNow.find(q => q.id === id)).filter(Boolean), spotFile.marks) : null;
-const record = { bars, calibration: strip(calib), mutations: mut, quest: questOut, wrongKey: wk, retest: rt, spot, pool: stats };
+/* ---- 7 explanations written for questions published without one (scripts/explain-mcq.mjs) */
+const exFile = readJson(EXPLAIN_FILE, { items: {}, refused: {} }), explained = explainStats(poolNow, exFile.items, exFile.refused);
+const record = { bars, calibration: strip(calib), mutations: mut, quest: questOut, wrongKey: wk, retest: rt, spot, explained, pool: stats };
 fs.mkdirSync(path.join(ROOT, 'data/mcq'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'data/mcq/calibration.json'), `${JSON.stringify({ note: 'Written by scripts/mcq-evals.mjs. Aggregate numbers only: no official item text.', bars, sets: strip(calib) }, null, 1)}\n`);
 fs.writeFileSync(path.join(ROOT, 'data/mcq/evals.json'), `${JSON.stringify(record, null, 1)}\n`);
@@ -199,6 +203,10 @@ if (spot?.marked) {
     row('Kind', 'Marked', 'Fine (%)'), row('---', '---:', '---:'), ...Object.entries(spot.byKind).map(([k, v]) => row(k, v.marked, v.okShare)), '',
     `Problems found: ${Object.entries(spot.problems).map(([c, n]) => `${n} ${CALLS[c] || c}`).join('; ') || 'none'}.${spot.unmarked ? ` ${spot.unmarked} still to mark.` : ''}`, '');
 } else md.push(`Not marked yet: ${spot ? `the ${spot.sample} questions in \`docs/mcq-spotcheck.md\` wait for a person's calls in \`data/mcq/spotcheck.json\`` : 'run `node scripts/mcq-spotcheck.mjs` to draw the sample'}. Until then every number above is a model judging.`, '');
+md.push('## 7. Explanations written for published questions', '');
+if (explained.need) md.push(`${explained.need} pooled questions were published with the key only (${Object.entries(explained.byKind).map(([k, v]) => `${k} ${v.need}`).join(', ')}). \`scripts/explain-mcq.mjs\` wrote one with the key given and kept it only when a second review, with the key, found it accurate and consistent: **${explained.kept} have one (${explained.share}%)**; ${explained.missing} do not (${explained.refusedByReview} refused by the review, ${explained.refusedByFormat} by the format checks, the rest not yet written). Study and the duel mark them AI-written. The review is the same model family checking itself; a person's spot-check of the explanations is the next step.`, '',
+  ...(explained.reviewReasons.length ? ['What the review still refuses:', '', ...explained.reviewReasons.slice(0, 8).map(r => `- ${r}`), ''] : []));
+else md.push('Every pooled question has its own explanation.', '');
 md.push('## Limits', '', '- The judge is one model family; MedQA and MMLU items may be in its training data, so its solve rate on them is an upper bound.', '- The generated questions are written and reviewed by the same model family, which may favour its own writing: their scores above the official samples\' are not proof they are better. The blind solves, the code checks and the higher bar are the guard; a person\'s spot-check of the pool (section 6, scripts/mcq-spotcheck.mjs) is the ground truth.', '- The official sample is small (41 text items), so the bars move by a few points with each item.', '- The physicians\' labels cover only the GPT-4 half of QUEST-AI.', '');
 fs.writeFileSync(path.join(ROOT, 'docs/mcq-evals.md'), md.join('\n'));
 console.log(`bars ${JSON.stringify(bars)}`); console.log(JSON.stringify(questOut)); console.log(JSON.stringify(Object.fromEntries(Object.entries(mut).map(([k, s]) => [k, s.detection]))));

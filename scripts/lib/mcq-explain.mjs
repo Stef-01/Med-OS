@@ -60,3 +60,19 @@ export const passesCheck = c => !!c && c.accurate === true && c.consistent === t
 /* a stored record for this question, if it still matches it */
 export const storedFor = (store, q) => { const r = store?.[q.id]; return r && r.hash === contentHash(q) ? r : null; };
 export const record = (q, e, { model = '', at = '' } = {}) => ({ hash: contentHash(q), why: e.why, notes: e.notes, by: 'ai', model, at });
+
+/* what the evals report (section 7): of the pooled questions that need one, how many have a reviewed explanation, by
+   kind, and why the rest were refused (the format checks, or the review) */
+export function explainStats(questions, store = {}, refused = {}) {
+  const need = questions.filter(needsExplanation), byKind = {};
+  let kept = 0, review = 0, format = 0;
+  for (const q of need) {
+    const k = (byKind[q.provenance?.kind || 'unknown'] ||= { need: 0, kept: 0 });
+    k.need++;
+    if (storedFor(store, q)) { k.kept++; kept++; continue; }
+    const why = refused[q.id]?.why || '';
+    if (why.startsWith('review')) review++; else if (why) format++;
+  }
+  const reasons = Object.values(refused).map(r => r.why).filter(w => w.startsWith('review')).map(w => w.replace(/^review:\s*/, ''));
+  return { need: need.length, kept, share: need.length ? Math.round((1000 * kept) / need.length) / 10 : null, refusedByReview: review, refusedByFormat: format, missing: need.length - kept, byKind, reviewReasons: reasons };
+}
