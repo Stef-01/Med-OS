@@ -945,6 +945,94 @@
    "suggestion": "Replace the left-sided distractors with right-sided local-invasion alternatives (e.g., right phrenic palsy, right recurrent laryngeal palsy, SVC obstruction, ulnar hand weakness) and ask for the most likely examination finding, adding smoking history or exam details to the stem."
   }
  },
+ "ai-mcq-070bd896": {
+  "hash": "fa919c75",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:39:38.030Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Confusion, thrombocytopenia and microangiopathic haemolytic anaemia with schistocytes and normal coagulation point to TTP, so the treatment is urgent plasma exchange, and platelet transfusion should be avoided."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Schistocytes, low platelets, anaemia and confusion with normal coagulation studies indicate TTP, which needs urgent plasma exchange."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem too brief: no vital signs, renal function, LDH, Coombs test or history",
+    "Lead-in is not a complete question",
+    "Ruling out eculizumab relies on renal data missing from the stem",
+    "Classic findings make the diagnosis easy to spot"
+   ],
+   "topic": "Haematology",
+   "verdict": "revise",
+   "reasons": [
+    "Key (plasma exchange for TTP) is correct and safe",
+    "Stem is too thin for an NBME-style vignette",
+    "Explanation is good but leaves out caplacizumab and rituximab"
+   ],
+   "suggestion": "Expand the stem with vital signs, a normal or mildly raised creatinine, a high LDH, a negative Coombs test and a short history, and rewrite the lead-in as a full question (\"Which of the following is the most appropriate next step in management?\"). In the explanation, mention that caplacizumab and rituximab are often added to plasma exchange and steroids."
+  },
+  "second": {
+   "hash": "fa919c75",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T13:41:18.511Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "Schistocytes, severe thrombocytopenia, confusion and normal coagulation point to TTP, which needs urgent plasma exchange."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.95,
+     "reason": "Confusion, severe thrombocytopenia and microangiopathic haemolytic anaemia (schistocytes) with normal clotting tests point to TTP, so urgent plasma exchange is the first-line treatment."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Very terse vignette lacking vitals, renal function, LDH, DAT",
+     "Lead-in is a fragment rather than a complete question"
+    ],
+    "topic": "Haematology",
+    "verdict": "accept",
+    "reasons": [
+     "Classic TTP presentation with clearly correct key (urgent plasma exchange)",
+     "Homogeneous, plausible distractors each reflecting a real misconception",
+     "Explanation addresses every option accurately"
+    ],
+    "suggestion": "Add creatinine and LDH, and write the lead-in as a full question (e.g., 'Which of the following is the most appropriate next step in management?'). The explanation could mention caplacizumab and rituximab as standard add-on treatments."
+   }
+  }
+ },
  "ai-mcq-072e162d": {
   "hash": "09b87341",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -3746,6 +3834,46 @@
    }
   }
  },
+ "ai-mcq-23d061cd": {
+  "hash": "37abdfba",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:39:35.279Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.96,
+    "reason": "Moderate alcohol withdrawal (CIWA-Ar ≥ 15 with autonomic signs) is treated first-line with benzodiazepines, and because his liver function is normal, a long-acting drug like diazepam is appropriate; haloperidol and clonidine are only add-ons, and acamprosate and baclofen are for maintaining abstinen"
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "Moderate-severe alcohol withdrawal (CIWA-Ar ≥15) is treated first-line with benzodiazepines, and long-acting diazepam is appropriate when liver function is normal."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Addiction Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct and the only best answer: a symptom-guided long-acting benzodiazepine for moderate withdrawal with normal liver function",
+    "Wrong options are plausible, similar in kind (all alcohol-related drugs) and free of cues",
+    "Explanation clearly explains why each wrong option fails"
+   ],
+   "suggestion": "Optionally add a note on giving thiamine, and write the lead-in as a full question (\"Which of the following is the most appropriate treatment?\")."
+  }
+ },
  "ai-mcq-242c7475": {
   "hash": "26360f28",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -4740,6 +4868,48 @@
     ],
     "suggestion": "In the explanation, change the cut-off from \"about 3\" to \"below 4 (SDCEP), checked within 72 hours\". Optionally add a little stem detail, such as CHA2DS2-VASc or no other bleeding risk factors."
    }
+  }
+ },
+ "ai-mcq-2c84bc06": {
+  "hash": "b6258348",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T16:24:06.009Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "In severe, symptomatic hypercalcaemia of malignancy with dehydration, the first step is aggressive IV isotonic saline to restore volume and increase calcium excretion through the kidneys; a bisphosphonate such as zoledronic acid comes after rehydration has started."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "In severe symptomatic hypercalcaemia of malignancy with dehydration, the first step is aggressive IV isotonic saline to restore volume and increase calcium excretion, followed by a bisphosphonate such as zoledronic acid."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem is terse and gives no vital signs or kidney function, which makes it read as recall more than a full vignette"
+   ],
+   "topic": "Oncology",
+   "verdict": "accept",
+   "reasons": [
+    "The key matches the standard of care: rehydrate with IV saline first, then give a bisphosphonate",
+    "The distractors are all calcium-lowering treatments of the same kind as the key, and each is plausible",
+    "The explanation is accurate and covers every option, including PTHrP versus calcitriol mechanisms"
+   ],
+   "suggestion": "Optionally add vital signs and serum creatinine to make the vignette fuller and to support the point that zoledronic acid should wait until the patient is rehydrated."
   }
  },
  "ai-mcq-2c98c94f": {
@@ -5787,6 +5957,48 @@
     ],
     "suggestion": "Add a normal WCC and a stated absence of haemoptysis or GI bleeding to the stem. Also add ferritin (normal or raised) with low transferrin saturation, which makes anaemia of inflammation clearly the best answer."
    }
+  }
+ },
+ "ai-mcq-36979385": {
+  "hash": "6826c275",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:39:32.734Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "For delirium in Parkinson's disease when non-drug measures haven't worked, low-dose quetiapine is the preferred drug because it blocks dopamine D2 receptors only weakly, while haloperidol, droperidol and risperidone can worsen parkinsonism and benzodiazepines can make delirium worse."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "In Parkinson's disease, delirium with distressing hallucinations that hasn't responded to non-drug measures is best treated with low-dose quetiapine, because it blocks dopamine D2 receptors only weakly; haloperidol, risperidone and droperidol can make parkinsonism worse, and benzodiazepines can make"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option C differs in route (IM) as well as drug, making it slightly heterogeneous"
+   ],
+   "topic": "Geriatrics",
+   "verdict": "accept",
+   "reasons": [
+    "Quetiapine is the accepted antipsychotic of choice for delirium in Parkinson's disease",
+    "Distractors test the key idea of avoiding strong D2 blockade and benzodiazepines",
+    "Clear vignette with a single best answer, and a good explanation"
+   ],
+   "suggestion": ""
   }
  },
  "ai-mcq-375504cb": {
@@ -7025,6 +7237,50 @@
    "suggestion": "Optional: to test more at Step 2 CK level, change the lead-in to the most appropriate next step (urgent external ventricular drain), keeping the same vignette. Also fix the explanation's \"3 hours\" to \"under 3 hours\"."
   }
  },
+ "ai-mcq-420d1e2f": {
+  "hash": "cdf5d2cc",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:40:03.111Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "In a COPD patient at risk of CO2 retention, uncontrolled high-flow oxygen worsens hypercapnia through V/Q mismatch and the Haldane effect, so oxygen should be titrated to SpO2 88-92%."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "Uncontrolled high-flow oxygen in a COPD patient at risk of CO2 retention can worsen hypercapnia through V/Q mismatch and the Haldane effect, so the target should be SpO2 88–92% with controlled oxygen."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Telegraphic stem with no vital signs, examination findings or arterial blood gas",
+    "Lead-in is a fragment rather than a complete question",
+    "Pleural effusion detail mainly sets up distractors A and E without adding clinical reasoning"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct and matches TSANZ, BTS and GOLD oxygen targets of 88 to 92% in COPD",
+    "The vignette is too sparse for Step 2 CK style, and the lead-in is not a full question",
+    "The distractors are homogeneous and plausible, with absorption atelectasis a reasonable near-miss"
+   ],
+   "suggestion": "Write a full vignette with respiratory rate, mental status and a baseline ABG showing compensated chronic hypercapnia, and phrase the lead-in as a full question, for example \"Which of the following is the greatest risk of this intervention?\""
+  }
+ },
  "ai-mcq-427a94f5": {
   "hash": "ec0caa29",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -8236,6 +8492,49 @@
    }
   }
  },
+ "ai-mcq-4b41204f": {
+  "hash": "5913046e",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:39:55.497Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "A reactive HCV antibody can mean either a current infection or one that has cleared, so the next step is an HCV RNA PCR to see whether there is active viremia; genotyping and fibrosis staging come after that is confirmed."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "A reactive HCV antibody only shows past exposure, so HCV RNA PCR is needed to confirm current (viremic) infection before staging or treatment."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Lead-in is a fragment rather than a full question",
+    "Relatively easy item"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "accept",
+   "reasons": [
+    "Key (HCV RNA to confirm viraemia) is correct and standard internationally",
+    "Distractors are the same kind of option and plausible for students who get the work-up order wrong",
+    "Explanation is accurate and covers each option"
+   ],
+   "suggestion": "Optionally reword the lead-in to 'Which of the following is the most appropriate next step in diagnosis?'"
+  }
+ },
  "ai-mcq-4b6457a0": {
   "hash": "07da8c56",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -8405,6 +8704,49 @@
     "Explanation clearly covers each option"
    ],
    "suggestion": "Change the lead-in to 'What is the most appropriate action regarding reporting?' and state the setting (e.g. 'in Australia') so it matches the explanation."
+  }
+ },
+ "ai-mcq-4ec3e907": {
+  "hash": "b2746885",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:40:05.590Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "After a penetrating chest wound, a dull hemithorax with absent breath sounds and a midline trachea points to hemothorax, so the next step is tube thoracostomy, with thoracotomy reserved for large initial or ongoing blood loss."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "Absent breath sounds and dullness on the stabbed side with a midline trachea mean a traumatic hemothorax, so the next step is a large-bore tube thoracostomy (intercostal catheter)."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "'Intercostal catheter' is a regional term and does not say large-bore; it could be read as a small pigtail catheter",
+    "Explanation gives the ongoing-output thoracotomy threshold as >200 mL/h without the usual duration of 2-4 hours"
+   ],
+   "topic": "Trauma Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Classic haemothorax signs (dullness, midline trachea) lead clearly to chest tube placement",
+    "Distractors cover the main differential: tension pneumothorax, tamponade, delaying for imaging, and going straight to surgery",
+    "Explanation is accurate and deals with every option"
+   ],
+   "suggestion": "Consider rewording option E as 'Large-bore tube thoracostomy (chest drain)', and give the thoracotomy criterion as >200 mL/h for 2-4 hours."
   }
  },
  "ai-mcq-4f0b0534": {
@@ -17496,6 +17838,48 @@
    "suggestion": "Add 'Serum potassium is normal and ECG shows no left ventricular hypertrophy' to the stem, or remove those references from the explanation."
   }
  },
+ "ai-mcq-a4544e35": {
+  "hash": "cad6343c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:40:17.782Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Naltrexone would cause opioid withdrawal in a patient on methadone, so acamprosate is the right choice because it has no opioid interaction and his kidney function is normal."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "Naltrexone is contraindicated with methadone because it would set off opioid withdrawal, so acamprosate is the first-line choice here: it is cleared by the kidneys, his renal function is normal, and it does not interact with opioids."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Inclusion of eGFR mildly cues acamprosate (renally cleared)"
+   ],
+   "topic": "Addiction Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: naltrexone is contraindicated with methadone, leaving acamprosate as first-line",
+    "Tests applied pharmacology in a realistic clinical scenario",
+    "Distractors are homogeneous and plausible, and the explanation addresses each one"
+   ],
+   "suggestion": ""
+  }
+ },
  "ai-mcq-a4dc39d7": {
   "hash": "0366b2f5",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -19049,6 +19433,89 @@
     "The explanation teaches why each distractor is wrong in terms of route, rate and resuscitation versus hydration"
    ],
    "suggestion": "Consider naming the guideline framework in the stem (for example, 'according to Australasian bronchiolitis guidelines') so the two-thirds maintenance rate is not challenged by readers who follow other countries' guidance."
+  }
+ },
+ "ai-mcq-ac002a0a": {
+  "hash": "4378a23f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:40:28.133Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Under AJCC 8th edition, clinical T stage is set by the digital rectal exam, not by imaging, so a tumor that cannot be felt and is found on biopsy for a raised PSA is cT1c even if MRI shows a lesion."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "Under AJCC 8th edition, clinical T stage comes from the DRE rather than MRI, so a non-palpable tumor found on needle biopsy for a raised PSA is cT1c."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 3,
+   "accuracy": 5,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation for option B only restates why the key is right; it never says what cT1a means (incidental finding in 5% or ",
+    "TNM staging detail is closer to recall than applied management, so it is of marginal Step 2 CK relevance"
+   ],
+   "topic": "Urology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: under AJCC 8th edition, clinical T stage is set by DRE, so a non-palpable tumour found by needle biopsy for a raised PSA is cT1c even when MRI shows a lesion",
+    "The distractors are homogeneous and plausible, and the MRI lesion is a fair trap",
+    "The explanation for distractor B is inadequate and should be fixed"
+   ],
+   "suggestion": "Rewrite the explanation for B to say that cT1a is an incidental tumour found at TURP in 5% or less of the resected tissue, which does not fit a tumour found by needle biopsy for a raised PSA. To make the item more clinical, you could link the staging to a management decision, such as risk group or treatment options."
+  },
+  "second": {
+   "hash": "4378a23f",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T13:41:20.344Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.9,
+     "reason": "Under AJCC 8th edition, clinical T stage depends on the rectal exam rather than MRI, so a tumor that cannot be felt and is found by biopsy after a raised PSA is cT1c."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.88,
+     "reason": "Under AJCC 8th edition, clinical T stage comes from the rectal exam, not MRI, so a tumor that cannot be felt and was found by biopsy after a raised PSA is cT1c."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 3,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [],
+    "topic": "Urology",
+    "verdict": "accept",
+    "reasons": [
+     "Key matches AJCC 8th edition: clinical T stage comes from the rectal exam, so a tumour that cannot be felt and was found by biopsy for a raised PSA is cT1c",
+     "Distractors are homogeneous T stages, and the cT2a option targets the common error of upstaging from MRI",
+     "Applied staging set in a patient, though it is mostly recall"
+    ],
+    "suggestion": "In the option B explanation, say that cT1a is an incidental tumour found in 5% or less of tissue removed by transurethral resection, rather than only restating cT1c."
+   }
   }
  },
  "ai-mcq-ac3c6ff4": {
@@ -22369,6 +22836,92 @@
    }
   }
  },
+ "ai-mcq-c8bdae09": {
+  "hash": "b4c8970b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:40:28.026Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "He was exposed 30 hours ago, which is within the 72-hour window, and the source's HIV status is unknown, so HIV PEP should start right away without waiting for the baseline test result."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.96,
+    "reason": "Condomless receptive anal sex with a partner of unknown HIV status is a high-risk exposure, and he is within the 72-hour window, so PEP should be started as soon as possible without waiting for the baseline HIV result."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Distractors D and E are weak; B and D overlap conceptually",
+    "Sparse stem (no symptoms, renal function, or other context)"
+   ],
+   "topic": "Sexual Health",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct per ASHM and CDC: PEP within 72 h for receptive anal sex with an MSM partner of unknown HIV status",
+    "Explanation clearly addresses each option, including the transition from PEP to PrEP",
+    "Tests a common, important next-step decision"
+   ],
+   "suggestion": "Optionally replace weak distractors D and E with more plausible ones, for example 'Start two-drug PEP only if the partner is confirmed HIV-positive' or 'Defer PEP until STI screening results return', to make the question harder."
+  },
+  "second": {
+   "hash": "b4c8970b",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T13:41:13.317Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.95,
+     "reason": "He is within the 72-hour window after a high-risk exposure (receptive anal sex), so PEP should start as soon as possible without waiting for the baseline HIV result."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.97,
+     "reason": "This was a high-risk exposure (receptive anal sex with a partner of unknown HIV status) and he came in within the 72-hour window, so PEP should start right away without waiting for the baseline HIV result."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Stem does not say whether he is already taking PrEP, which slightly weakens option C",
+     "Options D and E are weak and easy to rule out"
+    ],
+    "topic": "Sexual Health",
+    "verdict": "accept",
+    "reasons": [
+     "The key is correct: ASHM (and CDC) guidelines recommend PEP within 72 hours after receptive anal sex with a male partner of unknown status, and you should not wait for the baseline result",
+     "Only one option is clearly best, and the explanation covers every distractor accurately",
+     "This is a practical next-step management decision with real clinical value"
+    ],
+    "suggestion": "Add 'not currently taking PrEP' to the stem. Consider replacing option D with a stronger distractor, such as 'Start PEP only if the source is located and tests positive'."
+   }
+  }
+ },
  "ai-mcq-c8c8e71f": {
   "hash": "ec8a881b",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -23239,6 +23792,49 @@
    }
   }
  },
+ "ai-mcq-cd1f4c0a": {
+  "hash": "99e14253",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:40:41.310Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Dermatitis herpetiformis in coeliac disease: a gluten-free diet takes months to clear the rash, so dapsone gives quick symptom control, and his normal G6PD makes it safe to start."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.96,
+    "reason": "This is dermatitis herpetiformis in a coeliac patient: a gluten-free diet takes months to work, while dapsone gives rapid relief and is safe here because his G6PD is normal."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away: 'G6PD activity is normal' is relevant only to dapsone and points to the key",
+    "lead-in is a terse fragment rather than a full question"
+   ],
+   "topic": "Dermatology",
+   "verdict": "revise",
+   "reasons": [
+    "The key (dapsone for dermatitis herpetiformis while the gluten-free diet takes effect) is correct and current.",
+    "Stating that G6PD is normal is a strong cue to the key and removes the need to reason.",
+    "The distractors are plausible and of the same kind, and the explanation covers each one well."
+   ],
+   "suggestion": "Remove the G6PD sentence from the stem, or replace it with neutral baseline labs, and keep the G6PD teaching point in the explanation. Rewrite the lead-in as a full question, such as 'Which of the following is the most appropriate pharmacotherapy for this patient's rash?'"
+  }
+ },
  "ai-mcq-cd307563": {
   "hash": "faedb97c",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -23984,6 +24580,49 @@
     "Otherwise a clinically relevant, safe item"
    ],
    "suggestion": "Rewrite E's explanation as: 'CT shows bone destruction but displays the cord and epidural soft tissue poorly; use CT (or CT myelography) only if MRI is contraindicated.' Consider replacing PSA with another imaging option, such as PET-CT, to keep the options consistent."
+  }
+ },
+ "ai-mcq-d153636c": {
+  "hash": "3af0a6c6",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:40:50.455Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "Severe hyperkalemia with ECG changes (broad QRS, absent P waves) needs IV calcium first to stabilize the heart muscle, then treatments that shift potassium into cells or remove it."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "When hyperkalaemia causes ECG changes (broad QRS, absent P waves), the first step is IV calcium to stabilise the heart muscle; after that come treatments that shift potassium into cells (insulin and dextrose, salbutamol) and dialysis to remove it."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 5,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Telegraphic stem with minimal vignette detail (no vitals or haemodynamic status)",
+    "Explanation says salbutamol 'helps insulin', but it acts independently via beta-2 receptors"
+   ],
+   "topic": "Critical Care Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: IV calcium to protect the heart comes first when hyperkalaemia shows ECG changes",
+    "Distractors are the same kind of option (all real hyperkalaemia treatments) and all plausible",
+    "Explanation teaches the order of treatment well, with only a minor wording issue"
+   ],
+   "suggestion": "Reword the salbutamol line to say it is an add-on that also moves potassium into cells, independently of insulin. Optionally add vital signs to the stem to make the vignette fuller."
   }
  },
  "ai-mcq-d1ea6a49": {
@@ -26637,6 +27276,93 @@
      "Explanation is accurate and covers every option"
     ],
     "suggestion": "Optionally state the setting (e.g. \"His mother calls the clinic\" or \"He is brought to the emergency department\") and write the lead-in as a full question. Swapping in stronger distractors such as \"store in water\" or \"store dry in a tissue\" would also help."
+   }
+  }
+ },
+ "ai-mcq-eb23f3e5": {
+  "hash": "d0684c9b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T13:40:53.371Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "This is a low-risk history: a benign, delayed rash with no itching from childhood, and no blistering or mucosal involvement. Current guidelines (PEN-FAST score under 3, and the PALACE trial) support a direct oral amoxicillin challenge without skin testing first."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "A mild, delayed childhood rash with no blisters or mucosal involvement is a low-risk history (PEN-FAST 0-1), so current guidelines and the PALACE trial support a direct oral amoxicillin challenge without skin testing first."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation says skin testing has a 'poor negative predictive value'. That is inaccurate for immediate reactions. The re",
+    "Distractors D and E are weak and easy to rule out for an informed student.",
+    "Stem is brief and gives no surgical or antibiotic context."
+   ],
+   "topic": "Immunology",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: PEN-FAST is 0–1 (more than 5 years ago, no SCAR or angioedema), and the PALACE trial and ASCIA/AAAAI guidance support a direct oral challenge.",
+    "It is one clearly best answer and a high-value clinical topic (penicillin delabelling).",
+    "Only a minor inaccuracy in the explanation about skin-test NPV."
+   ],
+   "suggestion": "Change the explanation for B: in a low-risk history the pretest probability is so low that skin testing adds little and risks false positives, and it does not assess delayed reactions. Do not cite poor NPV. You could also add the surgical context (planned procedure needing cefazolin prophylaxis) to the stem."
+  },
+  "second": {
+   "hash": "d0684c9b",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T16:24:35.434Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.9,
+     "reason": "This is a low-risk history: a benign, delayed, non-itchy rash in childhood more than 10 years ago, with no blistering or mucosal involvement (PEN-FAST 0–1). Current guidelines support a direct oral amoxicillin challenge without skin testing first."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.9,
+     "reason": "A remote, benign, delayed maculopapular rash without severe features is low risk (PEN-FAST under 3), so guidelines recommend a direct oral amoxicillin challenge without skin testing first."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Explanation for B wrongly says penicillin skin testing has poor negative predictive value; its negative predictive value",
+     "Stem does not say whether the rash needed treatment (the PEN-FAST treatment point), though the answer is the same either"
+    ],
+    "topic": "Immunology",
+    "verdict": "revise",
+    "reasons": [
+     "Key is correct: PEN-FAST is 0-1 (low risk), and Australian and US guidance support a direct oral amoxicillin challenge",
+     "Good options: all the same type and plausible, testing an important delabelling decision",
+     "Explanation has a factual error about the skin test's negative predictive value"
+    ],
+    "suggestion": "Change the explanation for B: skin testing has a high negative predictive value, but in a low-risk history it adds cost and delay, and false positives keep a wrong label. Direct oral challenge is safe and is the reference standard. Optionally state in the stem that the rash settled without treatment."
    }
   }
  },

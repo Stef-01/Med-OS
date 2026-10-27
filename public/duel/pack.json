@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "version": "pool-708-mcq-532-hy-523-mxq-494",
+ "version": "pool-721-mcq-532-hy-523-mxq-494",
  "title": "Standard MCQ pool",
- "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1446 ai, 609 open-exam, 144 usmle-resource, 58 amsa.",
+ "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1459 ai, 609 open-exam, 144 usmle-resource, 58 amsa.",
  "origin": "mixed",
  "cats": [
   {
@@ -331,6 +331,32 @@
    "origin": "ai",
    "source": "ai",
    "year": 2,
+   "difficulty": 1
+  },
+  {
+   "id": "ai-mcq-070bd896",
+   "stem": "A 34-year-old woman presents with confusion and petechiae. Platelets are 18 x 10^9/L and haemoglobin is 82 g/L; the blood film shows schistocytes. Coagulation studies are normal. Most appropriate treatment?",
+   "options": [
+    "Platelet transfusion",
+    "Intravenous immunoglobulin",
+    "Oral prednisolone",
+    "Plasma exchange",
+    "Eculizumab"
+   ],
+   "answer": 3,
+   "why": "Low platelets, haemolytic anaemia with schistocytes on the film, neurological signs and normal coagulation point to thrombotic thrombocytopenic purpura (TTP), which is a medical emergency. Urgent plasma exchange, usually given with corticosteroids, should start without waiting for the ADAMTS13 result, because untreated TTP is often fatal.",
+   "notes": [
+    "Platelet transfusion can make the clotting in small vessels worse in TTP, so it is avoided unless there is life-threatening bleeding.",
+    "Intravenous immunoglobulin is used for immune thrombocytopenia, which does not cause schistocytes or haemolytic anaemia.",
+    "Corticosteroids are given alongside plasma exchange, but on their own they are not enough for acute TTP.",
+    null,
+    "Eculizumab treats complement-mediated atypical haemolytic uraemic syndrome, which usually causes severe kidney injury rather than mainly neurological signs."
+   ],
+   "topic": "Pathology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 1
   },
   {
@@ -1409,6 +1435,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-23d061cd",
+   "stem": "A 48-year-old man admitted for cellulitis develops tremor, sweating and agitation 36 hours after his last drink. Heart rate is 118/min; CIWA-Ar score is 17. Liver function is normal. Most appropriate treatment?",
+   "options": [
+    "Oral diazepam",
+    "Oral haloperidol",
+    "Oral clonidine",
+    "Oral acamprosate",
+    "Oral baclofen"
+   ],
+   "answer": 0,
+   "why": "This is moderate to severe alcohol withdrawal (CIWA-Ar above 10), so he needs a benzodiazepine. eTG recommends oral diazepam, given in doses guided by symptoms, when liver function is normal. A long-acting benzodiazepine also helps prevent withdrawal seizures and delirium tremens.",
+   "notes": [
+    null,
+    "Haloperidol lowers the seizure threshold and does not treat the withdrawal itself; it is only added to a benzodiazepine for hallucinations or agitation that persist.",
+    "Clonidine can blunt the fast heart rate and sweating but does not prevent seizures or delirium tremens, so it may hide a worsening withdrawal.",
+    "Acamprosate is used after withdrawal to help keep people abstinent and has no role in treating acute withdrawal.",
+    "Baclofen is a second-line drug for relapse prevention and is not recommended for treating acute alcohol withdrawal."
+   ],
+   "topic": "Addiction Medicine",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 1
+  },
+  {
    "id": "ai-mcq-242c7475",
    "stem": "A 31-year-old woman comes to her general practitioner because of headaches for 7 weeks. They began when she started working 12-hour shifts at a desk to meet the end-of-financial-year deadline at her accounting firm. Before this she had only occasional mild headaches. The headache is a bilateral, band-like tightness that builds through the afternoon. She rates it 4/10. It now comes on every afternoon. She has no nausea or photophobia, and climbing stairs does not make it worse. She takes paracetamol 1 g about five times a week and ibuprofen 400 mg once or twice a week, which takes the edge off it. She drinks four standard drinks a week and does not smoke. Her temperature is 36.7 °C, pulse is 74/min and blood pressure is 118/74 mm Hg. Her trapezius and temporalis muscles are tender. Passive neck flexion is full and painless. Fundoscopy shows sharp discs with venous pulsations, and the neurological examination is normal. Which of the following is the most appropriate advice to prevent progression of her headache disorder?",
    "options": [
@@ -1729,6 +1781,32 @@
    "source": "ai",
    "year": 4,
    "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-2c84bc06",
+   "stem": "A 68-year-old man with metastatic squamous cell lung cancer presents with confusion and polyuria. His corrected calcium is 3.6 mmol/L and he is clinically dehydrated. Most appropriate initial treatment?",
+   "options": [
+    "IV zoledronic acid",
+    "IV 0.9% saline",
+    "Subcutaneous denosumab",
+    "IV furosemide",
+    "Oral prednisolone"
+   ],
+   "answer": 1,
+   "why": "Severe symptomatic hypercalcaemia of malignancy causes volume depletion. Per eTG, the first step is IV rehydration with sodium chloride 0.9%, which restores kidney perfusion and calcium excretion. An IV bisphosphonate is given once the patient is rehydrated.",
+   "notes": [
+    "Zoledronic acid is needed but takes 2 to 4 days to work, and it is nephrotoxic if given before the patient is rehydrated.",
+    null,
+    "Denosumab is kept for hypercalcaemia that does not respond to bisphosphonates or for severe kidney impairment, not for first-line acute treatment.",
+    "Furosemide worsens dehydration and is only used for fluid overload after rehydration, not as a routine calcium-lowering drug.",
+    "Corticosteroids help mainly in calcitriol-driven hypercalcaemia, such as lymphoma or granulomatous disease, not PTHrP-mediated squamous cancer."
+   ],
+   "topic": "Oncology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 1
   },
   {
    "id": "ai-mcq-2c98c94f",
@@ -2062,6 +2140,32 @@
    "source": "ai",
    "year": 2,
    "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-36979385",
+   "stem": "A 78-year-old man with Parkinson's disease is admitted with pneumonia. On day two he becomes agitated and frightened by visual hallucinations despite reorientation, family presence and a quiet room. Which drug is most appropriate?",
+   "options": [
+    "Low-dose quetiapine",
+    "Low-dose haloperidol",
+    "Intramuscular droperidol",
+    "Oral diazepam",
+    "Oral risperidone"
+   ],
+   "answer": 0,
+   "why": "This man has hyperactive delirium with distressing symptoms, and non-drug measures have failed, so a short course of an antipsychotic is reasonable. In Parkinson's disease or Lewy body dementia, strong dopamine D2 blockers can badly worsen parkinsonism or cause neuroleptic sensitivity reactions. Australian guidance (eTG) recommends low-dose quetiapine because it blocks D2 receptors only weakly.",
+   "notes": [
+    null,
+    "Haloperidol is the usual delirium antipsychotic, but its strong D2 blockade worsens rigidity and immobility in Parkinson's disease.",
+    "Droperidol is a strong D2 antagonist (a butyrophenone) with the same risk of worsening parkinsonism, and IM sedation is not needed in a patient who will accept oral medicine.",
+    "Benzodiazepines worsen and prolong delirium and increase falls and respiratory depression, so they are kept for alcohol or benzodiazepine withdrawal.",
+    "Risperidone blocks D2 receptors strongly enough to cause dose-related extrapyramidal effects, so it is avoided in Parkinson's disease."
+   ],
+   "topic": "Geriatrics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 3
   },
   {
    "id": "ai-mcq-375504cb",
@@ -2647,6 +2751,37 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-420d1e2f",
+   "stem": "A 72-year-old man with COPD and 50 pack-years presents with a large right pleural effusion. SpO2 is 89% on room air. A non-rebreather mask at 15 L/min is applied. Greatest risk of this treatment?",
+   "options": [
+    "Re-expansion pulmonary oedema",
+    "Worsening hypercapnia",
+    "Absorption atelectasis",
+    "Pulmonary oxygen toxicity",
+    "Tension pneumothorax"
+   ],
+   "answer": 1,
+   "why": "In COPD, high-concentration oxygen can cause hypercapnic respiratory failure and acidosis. This happens because of worsening V/Q mismatch, the Haldane effect and reduced respiratory drive. TSANZ guidelines advise titrating oxygen with nasal prongs or a Venturi mask to a target SpO2 of 88 to 92%.",
+   "notes": [
+    "Re-expansion pulmonary oedema follows rapid drainage of a large effusion, not giving oxygen, and no fluid has been removed.",
+    null,
+    "Absorption atelectasis from a high FiO2 does occur, but it matters much less clinically than CO2 retention in COPD.",
+    "Pulmonary oxygen toxicity needs prolonged exposure to a very high FiO2, usually over 24 to 48 hours, so it is not the immediate risk.",
+    "Supplemental oxygen does not cause pneumothorax; pleural aspiration is the procedure that carries that risk."
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Emergency Medicine",
+    "Oncology"
+   ],
+   "cat": "physio",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 3
+  },
+  {
    "id": "ai-mcq-427a94f5",
    "stem": "A 66-year-old man is on the cardiology ward of a regional hospital, waiting for transfer for coronary angiography. He was admitted 18 hours ago with a non-ST-elevation myocardial infarction and has no pain now. Overnight telemetry has shown frequent multifocal ventricular ectopic beats and two runs of non-sustained ventricular tachycardia, each 5 to 7 beats long. He has hypertension treated with indapamide. Since admission he has been given aspirin, ticagrelor, therapeutic enoxaparin, metoprolol and atorvastatin. His blood pressure is 128/76 mmHg, pulse 78/min and regular, respiratory rate 16/min and oxygen saturation 97% on room air. Heart sounds are normal and the chest is clear. A 12-lead ECG shows sinus rhythm, 1 mm ST depression in V4 to V6 and a QTc of 470 ms. Results: hs-troponin I 1960 ng/L (less than 26), K+ 3.2 mmol/L (3.5 to 5.2), Mg2+ 0.58 mmol/L (0.70 to 1.10), creatinine 90 µmol/L (60 to 110). Which of the following is the most appropriate measure to reduce his risk of ventricular fibrillation before angiography?",
    "options": [
@@ -3010,6 +3145,32 @@
    "difficulty": 1
   },
   {
+   "id": "ai-mcq-4b41204f",
+   "stem": "A 34-year-old man on methadone treatment, who previously injected heroin, has a reactive hepatitis C antibody test at a routine review. He feels well and examination is normal. Most appropriate next investigation?",
+   "options": [
+    "HCV genotype",
+    "Repeat HCV antibody",
+    "Liver biopsy",
+    "HCV RNA PCR",
+    "Liver elastography"
+   ],
+   "answer": 3,
+   "why": "A reactive HCV antibody test only shows past exposure. About a quarter of people clear the virus on their own, so Australian consensus guidelines recommend HCV RNA testing to confirm current infection before direct-acting antiviral treatment. Fibrosis is assessed only after viraemia is confirmed.",
+   "notes": [
+    "Genotyping is not needed to start pangenotypic direct-acting antivirals and does not confirm current infection.",
+    "Antibodies stay positive for life after exposure, so repeating the test cannot tell current infection from cleared infection.",
+    "Liver biopsy is invasive and is not used to diagnose HCV, and fibrosis is assessed non-invasively once viraemia is confirmed.",
+    null,
+    "Fibrosis staging with elastography or APRI comes after HCV RNA confirms current infection, not before."
+   ],
+   "topic": "Addiction Medicine",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 1
+  },
+  {
    "id": "ai-mcq-4b6457a0",
    "stem": "A 69-year-old man with hypertension has two months of sudden-onset palpitations. An ECG during an episode showed atrial fibrillation, and he is now in sinus rhythm. Echocardiogram and eGFR are normal. Most appropriate treatment to reduce stroke risk?",
    "options": [
@@ -3126,6 +3287,32 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-4ec3e907",
+   "stem": "A 34-year-old man is stabbed in the right chest. Pulse 118/min, BP 100/65 mmHg, SpO2 92%. Right breath sounds are absent with dull percussion; trachea midline. Most appropriate next step?",
+   "options": [
+    "Needle decompression",
+    "Emergency thoracotomy",
+    "CT chest",
+    "Pericardiocentesis",
+    "Intercostal catheter"
+   ],
+   "answer": 4,
+   "why": "Absent breath sounds with a dull percussion note after penetrating chest trauma point to a haemothorax. The next step is a large-bore intercostal catheter, which drains the blood, lets the lung re-expand and shows how much blood is being lost. Thoracotomy is needed if the drain returns more than 1500 mL straight away, keeps draining more than 200 mL/h, or the patient stays unstable.",
+   "notes": [
+    "Needle decompression is for tension pneumothorax, which gives a hyper-resonant note and a deviated trachea, not dullness with a midline trachea.",
+    "Thoracotomy is kept for a large first drain output, continuing blood loss, or ongoing instability, none of which is known before a drain goes in.",
+    "CT would delay treatment in a tachycardic, hypoxic patient whose clinical signs already need a drain.",
+    "Pericardiocentesis treats tamponade (raised JVP, muffled heart sounds), not one-sided dullness with absent breath sounds.",
+    null
+   ],
+   "topic": "Trauma Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-4f0b0534",
@@ -6792,6 +6979,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-a4544e35",
+   "stem": "A 46-year-old man has finished inpatient alcohol withdrawal and wants help staying abstinent. He takes methadone 60 mg daily for opioid use disorder. His eGFR is 85 mL/min/1.73 m2. Which drug is most appropriate?",
+   "options": [
+    "Acamprosate",
+    "Naltrexone",
+    "Disulfiram",
+    "Baclofen",
+    "Long-term diazepam"
+   ],
+   "answer": 0,
+   "why": "Acamprosate and naltrexone are the first-line drugs for preventing alcohol relapse. Naltrexone is an opioid antagonist, so it is contraindicated in a patient on methadone because it would cause severe precipitated withdrawal. That leaves acamprosate, which is safe with his normal kidney function.",
+   "notes": [
+    null,
+    "Naltrexone blocks opioid receptors, so it would cause precipitated withdrawal and stop his methadone working.",
+    "Disulfiram is a second-line drug that depends on supervised dosing and close adherence, and a drink taken with it can cause a dangerous reaction.",
+    "Baclofen is a second-line, off-label option that is kept for when first-line drugs fail or cannot be used, and it adds to sedation alongside methadone.",
+    "Benzodiazepines are only for short-term withdrawal management, and using them long term with methadone raises the risk of dependence and fatal breathing depression."
+   ],
+   "topic": "Addiction Medicine",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 3
+  },
+  {
    "id": "ai-mcq-a4dc39d7",
    "stem": "A 34-year-old woman has fever, rigors, right upper quadrant pain and jaundice. Bilirubin is 72 µmol/L (mostly conjugated), ALP 310 U/L, GGT 402 U/L and ALT 150 U/L. Which jaundice pattern is shown?",
    "options": [
@@ -7430,6 +7643,36 @@
    "source": "ai",
    "year": 3,
    "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-ac002a0a",
+   "stem": "A 68-year-old man has a PSA of 8.8 ng/mL on two occasions. Digital rectal examination is normal. MRI shows an 11 mm left peripheral-zone lesion; targeted biopsy confirms Gleason 4+3=7 adenocarcinoma. What is his clinical T stage?",
+   "options": [
+    "cT1c",
+    "cT1a",
+    "cT2a",
+    "cT2b",
+    "cT3a"
+   ],
+   "answer": 0,
+   "why": "Clinical T stage depends on the digital rectal examination. A tumour that cannot be felt and was found by needle biopsy because of a raised PSA is cT1c. A one-sided MRI lesion does not raise the clinical T stage.",
+   "notes": [
+    null,
+    "The tumour cannot be felt and was found by needle biopsy after a raised PSA, which defines cT1c.",
+    "cT2a needs a tumour that can be felt in half of one lobe or less; his DRE is normal, and MRI findings do not change the clinical T stage.",
+    "cT2b needs a tumour that can be felt in more than half of one lobe, but nothing is felt here.",
+    "cT3a means extension outside the prostate, which neither the DRE nor the MRI shows."
+   ],
+   "topic": "Urology",
+   "topics": [
+    "Urology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 3
   },
   {
    "id": "ai-mcq-ac3c6ff4",
@@ -8795,6 +9038,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-c8bdae09",
+   "stem": "A 24-year-old man presents 30 hours after condomless receptive anal sex with a casual male partner of unknown HIV status. Blood for baseline HIV testing has been taken. Most appropriate next step?",
+   "options": [
+    "Start HIV PEP today",
+    "Await baseline HIV result",
+    "Start event-driven PrEP",
+    "Repeat HIV serology later",
+    "Offer reassurance only"
+   ],
+   "answer": 0,
+   "why": "Under ASHM national PEP guidelines, PEP is recommended after condomless receptive anal sex with a male partner of unknown HIV status. It should be started as soon as possible and within 72 hours of the exposure. Take baseline bloods first, but do not wait for the results before giving the first dose.",
+   "notes": [
+    null,
+    "Waiting for the baseline result delays PEP, which works better the sooner it starts. The baseline test only shows whether he already had HIV before this exposure.",
+    "Event-driven PrEP is taken 2 to 24 hours before sex to prevent infection. It is not the regimen for an exposure that has already happened, although he should be offered PrEP after he finishes PEP.",
+    "Repeat serology at follow-up is part of care, but on its own it misses the chance to prevent infection while he is still inside the PEP window.",
+    "Reassurance alone is wrong because this is the highest-risk sexual exposure, and the guidelines recommend PEP for it."
+   ],
+   "topic": "Sexual Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-c8c8e71f",
    "stem": "A 41-year-old woman sees her general practitioner because she has not opened her bowels for 6 days. Nine days ago she had an uncomplicated laparoscopic appendicectomy. She went home on oxycodone 5 mg up to four times daily, which she still takes three times a day. She was given no bowel medicine. Her last stools were small and hard. She had to strain, passing them caused sharp anal pain, and there was bright red blood on the toilet paper. She is passing flatus and has no vomiting or abdominal pain. She takes ferrous sulfate for iron deficiency. Temperature is 36.8 °C, pulse 78/min and blood pressure 120/78 mm Hg. Her abdomen is soft and non-tender, and bowel sounds are normal. Anal inspection shows a posterior midline fissure. Digital rectal examination finds hard stool and no mass. Haemoglobin is 124 g/L (115–165), ferritin 20 µg/L (30–300), corrected calcium 2.38 mmol/L (2.10–2.60) and TSH 1.4 mIU/L (0.5–4.0). The opioid will be weaned and simple analgesia started. Which of the following is the most appropriate laxative treatment?",
    "options": [
@@ -9121,6 +9390,37 @@
    "difficulty": 1
   },
   {
+   "id": "ai-mcq-cd1f4c0a",
+   "stem": "A 34-year-old man has biopsy-confirmed coeliac disease and started a gluten-free diet three weeks ago. Intensely itchy, grouped, excoriated vesicles on both elbows are disturbing his sleep. G6PD activity is normal. Most appropriate treatment for the rash?",
+   "options": [
+    "Oral prednisolone",
+    "Oral cetirizine",
+    "Oral dapsone",
+    "Oral aciclovir",
+    "Topical pimecrolimus"
+   ],
+   "answer": 2,
+   "why": "This is dermatitis herpetiformis. A gluten-free diet takes months to clear it, so dapsone, usually started by a dermatologist, is the drug of choice to control the itch quickly. G6PD must be checked before starting it and the blood count monitored during treatment.",
+   "notes": [
+    "Systemic corticosteroids work poorly in dermatitis herpetiformis and carry significant adverse effects, so they are not recommended.",
+    "Antihistamines do little for the itch of dermatitis herpetiformis because the itch is not driven by histamine but by IgA immune complexes in the skin.",
+    null,
+    "The rash is called herpetiform because of how the blisters cluster, not because of any viral cause, so an antiviral has no role.",
+    "Topical calcineurin inhibitors are used for atopic dermatitis and do not control the IgA-mediated blistering of dermatitis herpetiformis."
+   ],
+   "topic": "Dermatology",
+   "topics": [
+    "Dermatology",
+    "Gastroenterology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-cd307563",
    "stem": "A 7-year-old boy has a splenic laceration after a bike crash. Pulse is 160/min, blood pressure 70/40 mm Hg despite fluid boluses. His Jehovah's Witness parents refuse transfusion. Most appropriate next step?",
    "options": [
@@ -9374,6 +9674,32 @@
    "source": "ai",
    "year": 4,
    "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-d153636c",
+   "stem": "A 66-year-old man in ICU with septic acute kidney injury has serum potassium 7.6 mmol/L. ECG shows broad QRS complexes and absent P waves. Most appropriate immediate treatment?",
+   "options": [
+    "IV insulin and dextrose",
+    "Nebulised salbutamol",
+    "IV sodium bicarbonate",
+    "IV calcium gluconate",
+    "Urgent haemodialysis"
+   ],
+   "answer": 3,
+   "why": "Severe hyperkalaemia with ECG changes, such as broad QRS and loss of P waves, can progress to a sine-wave rhythm or cardiac arrest. Give IV calcium first: it stabilises the heart muscle within minutes, although it does not lower the potassium. Then move potassium into cells and start definitive removal.",
+   "notes": [
+    "Insulin with dextrose moves potassium into cells but takes 15 to 30 minutes to work and does not protect the heart straight away, so it comes after calcium.",
+    "Salbutamol helps insulin move potassium into cells, but it is slower and less reliable, and it does not protect the heart.",
+    "Bicarbonate lowers potassium only a little and is mainly used when there is severe metabolic acidosis; it is not the first step for ECG changes.",
+    null,
+    "Dialysis removes potassium for good, but it takes time to set up, so calcium must be given first to protect the heart."
+   ],
+   "topic": "Critical Care Medicine",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 1
   },
   {
    "id": "ai-mcq-d1ea6a49",
@@ -10544,6 +10870,32 @@
    "source": "ai",
    "year": 4,
    "difficulty": 1
+  },
+  {
+   "id": "ai-mcq-eb23f3e5",
+   "stem": "A 34-year-old woman attends pre-admission clinic with a penicillin allergy label. At age 8 she developed a non-itchy maculopapular rash on day 5 of amoxicillin, without blistering or mucosal involvement. Most appropriate next step?",
+   "options": [
+    "Oral amoxicillin challenge",
+    "Penicillin skin testing",
+    "Penicillin-specific serum IgE",
+    "Lifelong penicillin avoidance",
+    "Penicillin desensitisation protocol"
+   ],
+   "answer": 0,
+   "why": "This is a low-risk history (PEN-FAST under 3): a benign, delayed maculopapular rash in childhood more than 5 years ago, with no severe cutaneous or mucosal features. Australian antibiotic allergy guidance (ASCIA, AusPAAS) supports delabelling with a direct oral amoxicillin challenge under observation, without skin testing first.",
+   "notes": [
+    null,
+    "Skin testing is kept for higher-risk immediate reactions, and its poor negative predictive value adds little in a low-risk history.",
+    "Serum specific IgE has low sensitivity and is not recommended to rule out penicillin allergy.",
+    "Keeping the label leads to broader-spectrum antibiotics, more resistance and worse surgical prophylaxis, with no benefit in a low-risk history.",
+    "Desensitisation is for confirmed IgE-mediated allergy when penicillin is essential, not for delabelling a probable non-allergy."
+   ],
+   "topic": "Immunology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 3
   },
   {
    "id": "ai-mcq-eb4e07f1",
