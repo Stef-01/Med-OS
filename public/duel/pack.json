@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "version": "pool-680-mcq-532-hy-523-mxq-494",
+ "version": "pool-706-mcq-532-hy-523-mxq-494",
  "title": "Standard MCQ pool",
- "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1418 ai, 609 open-exam, 144 usmle-resource, 58 amsa.",
+ "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1444 ai, 609 open-exam, 144 usmle-resource, 58 amsa.",
  "origin": "mixed",
  "cats": [
   {
@@ -305,6 +305,58 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-05f2b37e",
+   "stem": "A 22-year-old woman presents in labour at 39 weeks' gestation. An endocervical NAAT taken two days ago is positive for Neisseria gonorrhoeae, and she has not been treated. Which neonatal complication is most likely?",
+   "options": [
+    "Afebrile pneumonitis",
+    "Chorioretinitis",
+    "Sensorineural hearing loss",
+    "Ophthalmia neonatorum",
+    "Syphilitic rhinitis"
+   ],
+   "answer": 3,
+   "why": "The baby can catch gonorrhoea during a vaginal birth. The main risk is gonococcal ophthalmia neonatorum, a heavy pus-filled conjunctivitis that usually starts 2 to 5 days after birth and can quickly damage the cornea. To prevent it, treat the mother and give the exposed newborn a single dose of ceftriaxone, as eTG and RCH advise.",
+   "notes": [
+    "Afebrile pneumonitis at 4 to 12 weeks is typical of chlamydia caught at birth, not gonorrhoea.",
+    "Chorioretinitis is a feature of congenital toxoplasmosis or CMV, not gonococcal infection.",
+    "Sensorineural hearing loss is the classic long-term result of congenital CMV.",
+    null,
+    "Snuffles (syphilitic rhinitis) is caused by congenital Treponema pallidum infection, not gonorrhoea."
+   ],
+   "topic": "Sexual Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-072e162d",
+   "stem": "A 68-year-old man is hypotensive (BP 78/50 mmHg) with a rising central venous pressure six hours after coronary bypass grafting. His mediastinal drain output has suddenly stopped after heavy bleeding. Most appropriate next step?",
+   "options": [
+    "Needle pericardiocentesis",
+    "Noradrenaline infusion",
+    "Platelet transfusion",
+    "Intra-aortic balloon pump",
+    "Emergency resternotomy"
+   ],
+   "answer": 4,
+   "why": "Low blood pressure and a rising CVP after heavy bleeding that suddenly stops draining point to cardiac tamponade from clotted blood after cardiac surgery. The definitive treatment is emergency resternotomy, done at the bedside if the patient is crashing, to remove the clot and control the bleeding.",
+   "notes": [
+    "After cardiac surgery the tamponade is usually clotted and loculated, so a needle often cannot drain it and the bleeding is left uncontrolled.",
+    "A vasopressor does not relieve the mechanical blockage to cardiac filling and only delays definitive treatment.",
+    "Correcting clotting may reduce ongoing bleeding but does nothing for blood that is already compressing the heart.",
+    "A balloon pump supports a failing left ventricle but cannot overcome external compression of the heart in tamponade.",
+    null
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {
@@ -648,6 +700,37 @@
    "topics": [
     "Obstetrics",
     "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-0ed02629",
+   "stem": "A 71-year-old man, a retired boilermaker, has 3 months of worsening right shoulder pain. Chest X-ray shows a 5 cm right apical mass eroding the first rib. Which deficit is most likely to develop?",
+   "options": [
+    "Shoulder abduction weakness",
+    "Wrist drop",
+    "Elbow flexion weakness",
+    "Lateral forearm numbness",
+    "Intrinsic hand weakness"
+   ],
+   "answer": 4,
+   "why": "A superior sulcus (Pancoast) tumour spreads upward into the lower trunk of the brachial plexus (C8 and T1), which runs over the first rib. This causes pain along the inner arm, wasting and weakness of the small hand muscles, and numbness on the ulnar side. Examine the hands and eyes of anyone with an apical mass, and refer urgently.",
+   "notes": [
+    "Shoulder abduction is supplied by C5 through the upper trunk and axillary nerve, which lie higher up and away from the superior sulcus.",
+    "Wrist drop comes from a radial nerve or C7 lesion, usually compression in the spiral groove, and is not a typical sign of an apical tumour.",
+    "Elbow flexion is supplied by C5 and C6 through the musculocutaneous nerve, so it is spared until much later than the lower roots.",
+    "The lateral forearm is C6 skin (lateral antebrachial cutaneous nerve); Pancoast tumours cause numbness of the medial forearm and ulnar hand (C8 and T1).",
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice",
+    "Oncology"
    ],
    "cat": "clinical",
    "origin": "ai",
@@ -1741,6 +1824,32 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-2e736a86",
+   "stem": "A 64-year-old man is four days after an oesophagectomy. Since jejunal feeds began, his right chest drain has put out 1200 mL/day of cloudy fluid. The drain fluid triglyceride is 4.8 mmol/L. Most likely diagnosis?",
+   "options": [
+    "Anastomotic leak",
+    "Chylothorax",
+    "Pseudochylothorax",
+    "Empyema",
+    "Haemothorax"
+   ],
+   "answer": 1,
+   "why": "A pleural fluid triglyceride above 1.24 mmol/L (110 mg/dL) confirms chyle. This is thoracic duct injury, a known complication of oesophagectomy, and output rises once enteral feeds start. Management begins with stopping enteral fat (nil by mouth or a medium-chain triglyceride diet, or TPN) and draining the chest. High-output leaks usually need thoracic duct ligation or embolisation.",
+   "notes": [
+    "An anastomotic leak shows saliva, high amylase or enteral feed in the drain with sepsis, not a raised triglyceride.",
+    null,
+    "Pseudochylothorax is a chronic effusion with high cholesterol and cholesterol crystals, not an acute high-triglyceride leak after surgery.",
+    "Empyema is pus with low pH, low glucose and organisms, and does not raise the fluid triglyceride.",
+    "Haemothorax is blood-stained drainage with a fluid haematocrit over half the blood value, not cloudy fluid high in triglyceride."
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-2f9aec47",
    "stem": "A 61-year-old woman presents to the emergency department of a regional hospital with 2 days of lower abdominal pain and swelling. The pain began as intermittent cramps in the left lower quadrant and is now constant. She has passed no stool or flatus for 36 hours and began vomiting bile this morning. Eight years ago, two tubular adenomas were removed at colonoscopy, and she did not attend the surveillance colonoscopy she was booked for. She takes metformin for type 2 diabetes. Her temperature is 37.4 °C, pulse 112/min, blood pressure 118/72 mm Hg and respiratory rate 20/min. Her abdomen is grossly distended and tympanic, with mild generalised tenderness, no guarding and tinkling bowel sounds. The hernial orifices are normal. Digital rectal examination shows an empty rectum. Haemoglobin is 112 g/L (115–165), white cell count 12.1 x 10^9/L (4.0–11.0), creatinine 84 µmol/L (45–90), eGFR 72 mL/min/1.73 m2 and venous lactate 1.8 mmol/L (less than 2.0). Fluid resuscitation, analgesia and a nasogastric tube have been started. Which of the following is the most appropriate next investigation?",
    "options": [
@@ -2068,6 +2177,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-385ecb18",
+   "stem": "A 64-year-old man has sudden tearing chest pain radiating to his back. His BP is 168/94 mmHg. CT aortogram shows a dissection flap in the ascending aorta. Most appropriate definitive treatment?",
+   "options": [
+    "Thoracic endovascular repair",
+    "Intravenous beta-blocker alone",
+    "Emergency open repair",
+    "Intravenous thrombolysis",
+    "Primary coronary angioplasty"
+   ],
+   "answer": 2,
+   "why": "A dissection involving the ascending aorta is Stanford type A. Untreated, mortality rises about 1-2% every hour from rupture, tamponade, coronary occlusion or acute aortic regurgitation, so it needs emergency open surgical repair by cardiothoracic surgery. Heart-rate and blood pressure control with an IV beta-blocker is only a holding measure until theatre.",
+   "notes": [
+    "Endovascular stent grafting is used for complicated type B (descending) dissection, not for the ascending aorta.",
+    "Medical anti-impulse therapy alone is definitive treatment for uncomplicated type B dissection, but for type A it only bridges to surgery.",
+    null,
+    "Thrombolysis can cause fatal bleeding or rupture in aortic dissection, so it is contraindicated.",
+    "This is not a primary coronary occlusion, and the heparin and antiplatelet drugs given with angioplasty would delay surgery and could be catastrophic."
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-3a145bf8",
    "stem": "A 7-year-old boy is brought in after a car crash with a ruptured spleen and blood pressure 70/40 mmHg. His parents, devout Jehovah's Witnesses, refuse blood transfusion. Most appropriate next step?",
    "options": [
@@ -2123,6 +2258,32 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-3c30868f",
+   "stem": "A 23-year-old man has had dysuria and purulent urethral discharge for 3 days after condomless sex with a new female partner. A urethral Gram stain shows intracellular Gram-negative diplococci. Most appropriate treatment?",
+   "options": [
+    "Ciprofloxacin plus doxycycline",
+    "Doxycycline alone",
+    "Azithromycin alone",
+    "Benzathine penicillin IM",
+    "Ceftriaxone plus azithromycin"
+   ],
+   "answer": 4,
+   "why": "Intracellular Gram-negative diplococci in a man with urethral discharge mean gonorrhoea. The Australian STI guidelines and eTG recommend ceftriaxone 500 mg IM plus azithromycin 1 g orally as a single dose. Collect a sample for culture and sensitivities, start partner notification and test for other STIs.",
+   "notes": [
+    "Neisseria gonorrhoeae in Australia is often resistant to ciprofloxacin, and doxycycline does not reliably cure gonorrhoea.",
+    "Doxycycline treats chlamydia but does not reliably cure gonorrhoea, so used alone it would leave the infection untreated.",
+    "Azithromycin alone is not recommended because gonococcal resistance to azithromycin is increasing and it fails more often.",
+    "Benzathine penicillin IM treats syphilis, not gonorrhoea, which is widely resistant to penicillin.",
+    null
+   ],
+   "topic": "Sexual Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-3cdb17b7",
@@ -3635,6 +3796,32 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-5ac61645",
+   "stem": "A 72-year-old man is recovering on the ward on day 2 after elective coronary artery bypass grafting. He has COPD and a dilated left atrium on echocardiography. Observations are stable. Which complication is he most at risk of?",
+   "options": [
+    "Cardiac tamponade",
+    "Deep sternal infection",
+    "Perioperative stroke",
+    "Atrial fibrillation",
+    "Ventricular tachycardia"
+   ],
+   "answer": 3,
+   "why": "Atrial fibrillation is the most common complication after cardiac surgery. It affects about 20-40% of CABG patients and peaks on days 2 to 4. Older age, COPD and a dilated left atrium raise the risk further. So keep him on telemetry, keep potassium and magnesium in range, and continue or restart his beta blocker.",
+   "notes": [
+    "Tamponade happens in only a few per cent of patients and usually occurs early with bleeding, so it is much less likely in a stable man on the ward.",
+    "Deep sternal wound infection (mediastinitis) affects only about 1-2% of patients and usually appears after the first week.",
+    "Stroke after CABG affects only about 1-3% of patients and is most often present when the patient wakes from surgery, so it is far less common than AF.",
+    null,
+    "Sustained ventricular arrhythmias after CABG are rare and are usually linked to ischaemia or electrolyte problems, neither of which he has."
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-5b8cd5eb",
    "stem": "A 2-year-old girl with croup in the emergency department had stridor at rest and recession. Thirty minutes after dexamethasone and nebulised adrenaline, she has no stridor at rest; SpO2 98%. Most appropriate next step?",
    "options": [
@@ -3662,6 +3849,32 @@
    "origin": "ai",
    "source": "ai",
    "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-5b9c28e4",
+   "stem": "A 22-year-old woman has two days of painful vulval blisters and dysuria. Examination shows multiple shallow, tender ulcers on the labia with tender inguinal lymphadenopathy. Which test most likely confirms the diagnosis?",
+   "options": [
+    "Type-specific HSV serology",
+    "HSV PCR lesion swab",
+    "Tzanck smear",
+    "Syphilis dark-field microscopy",
+    "First-void urine NAAT"
+   ],
+   "answer": 1,
+   "why": "Multiple painful, shallow vulval ulcers after blisters, with dysuria and tender lymph nodes, point to a first episode of genital herpes. Australian STI guidelines (ASHM) and eTG recommend a PCR (NAAT) swab taken from the base of the lesion to confirm HSV and identify the type. Syphilis testing is still added alongside it.",
+   "notes": [
+    "Serology can be negative early in a first episode, and a positive result cannot show that HSV caused this particular ulcer.",
+    null,
+    "A Tzanck smear is insensitive, cannot tell HSV from varicella zoster virus, and has been replaced by PCR.",
+    "Syphilis usually causes a single painless chancre, and dark-field microscopy is rarely available, so PCR and serology are used instead.",
+    "First-void urine NAAT tests for chlamydia and gonorrhoea, which do not cause genital ulcers."
+   ],
+   "topic": "Sexual Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
    "difficulty": 2
   },
   {
@@ -3828,6 +4041,32 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-61c5cc38",
+   "stem": "An 84-year-old woman has had fluctuating confusion and inattention for 3 days, starting after her GP began oxybutynin for urge incontinence. Examination, urinalysis and electrolytes are normal. Most appropriate next step?",
+   "options": [
+    "Switch to solifenacin",
+    "Start haloperidol",
+    "Start donepezil",
+    "Arrange MRI brain",
+    "Cease oxybutynin"
+   ],
+   "answer": 4,
+   "why": "This is delirium that began soon after she started a strongly anticholinergic drug, and no other cause has been found. Australian delirium guidance says to treat the cause first, so oxybutynin should be stopped. If her bladder still needs treatment, non-anticholinergic options such as mirabegron or bladder training can be used.",
+   "notes": [
+    "Solifenacin is still an antimuscarinic and adds to her anticholinergic load, so it keeps the cause going instead of removing it.",
+    "Antipsychotics are kept for severe distress or danger that does not settle with other measures, and they do not treat the cause.",
+    "Donepezil does not prevent or treat delirium, and dementia should not be diagnosed during an acute confusional state.",
+    "Imaging is not needed when there are no focal neurological signs and the drug explains the delirium.",
+    null
+   ],
+   "topic": "Geriatrics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-62b29322",
@@ -4590,6 +4829,32 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-7425e1c6",
+   "stem": "A 64-year-old man presents 2 weeks after coronary artery bypass grafting with fever and pleuritic chest pain eased by leaning forward. ECG shows widespread concave ST elevation with PR depression. Most likely diagnosis?",
+   "options": [
+    "Acute bypass graft occlusion",
+    "Pulmonary embolism",
+    "Deep sternal wound infection",
+    "Type A dissection",
+    "Postpericardiotomy syndrome"
+   ],
+   "answer": 4,
+   "why": "Concave ST elevation across many leads with PR depression is the ECG pattern of pericarditis. With fever and positional pleuritic pain weeks after the pericardium was opened, this is postpericardiotomy syndrome. It is treated with NSAIDs or colchicine, and an echo is needed to look for an effusion or tamponade.",
+   "notes": [
+    "Graft occlusion causes convex ST elevation in one coronary territory, often with reciprocal depression, and not widespread PR depression.",
+    "Pulmonary embolism usually shows sinus tachycardia or right heart strain on ECG, not diffuse ST elevation with PR depression.",
+    "Mediastinitis causes fever and sternal pain with wound discharge or an unstable sternum, but it does not give a pericarditic ECG.",
+    "Type A dissection causes sudden tearing pain and, if it reaches the coronary arteries, ST elevation in one territory, not diffuse PR depression.",
+    null
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-747f25fe",
    "stem": "A 7-year-old boy with a splenic laceration from a bicycle fall remains hypotensive at 70/40 mmHg despite fluid boluses. His Jehovah's Witness parents refuse blood transfusion. Most appropriate next step?",
    "options": [
@@ -4824,6 +5089,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-7b88e568",
+   "stem": "A 34-year-old man attends a sexual health clinic for screening. He recalls no hepatitis B vaccination. Hepatitis B serology: HBsAg negative, anti-HBc positive, anti-HBs 85 IU/L. Most likely interpretation?",
+   "options": [
+    "Immunity from vaccination",
+    "Chronic hepatitis B",
+    "Acute hepatitis B",
+    "Susceptible to infection",
+    "Resolved past infection"
+   ],
+   "answer": 4,
+   "why": "A positive anti-HBc means he has been infected with hepatitis B at some point. With HBsAg negative and protective anti-HBs (10 IU/L or more), the infection has cleared and he is immune. He does not need vaccination, but the result should be recorded because the virus can reactivate if he is later immunosuppressed.",
+   "notes": [
+    "Vaccination produces anti-HBs only, so anti-HBc would be negative.",
+    "Chronic hepatitis B needs HBsAg to stay positive for more than 6 months, and here HBsAg is negative.",
+    "Acute infection shows positive HBsAg or IgM anti-HBc without protective anti-HBs, not high anti-HBs with negative HBsAg.",
+    "A susceptible person has negative anti-HBc and anti-HBs, but here both are positive.",
+    null
+   ],
+   "topic": "Sexual Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-7bce8cdf",
    "stem": "A 68-year-old woman is brought to the emergency department after vomiting dark, coffee-ground material three times this morning. She has had black, sticky stools for 3 days. She has knee osteoarthritis and has taken naproxen 500 mg twice daily for 2 months. She also takes aspirin 100 mg daily because of a previous transient ischaemic attack. She does not drink alcohol. On arrival, her pulse is 106/min, blood pressure 112/70 mm Hg (usually 145/85 mm Hg), respirations 18/min, SpO2 97% on room air and temperature 36.8 °C. There are no stigmata of chronic liver disease. The abdomen is soft with mild epigastric tenderness and no guarding. Rectal examination shows melaena. Two large-bore cannulas are inserted and 500 mL of crystalloid is given. Her pulse falls to 92/min and her blood pressure rises to 124/74 mm Hg. Haemoglobin is 97 g/L (baseline 131 g/L), platelets 302 x10^9/L, INR 1.0, urea 13.9 mmol/L, creatinine 81 µmol/L, albumin 39 g/L and bilirubin 9 µmol/L. Gastroscopy is booked for the next morning. Which of the following is the most appropriate drug to give now?",
    "options": [
@@ -5028,6 +5319,32 @@
     "Myeloma lesions are purely lytic with little osteoblastic activity, so an isotope bone scan often misses them and does not identify a paraprotein."
    ],
    "topic": "Pathology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-8096ab86",
+   "stem": "A 64-year-old woman, five days after hip arthroplasty, suddenly becomes breathless and confused. BP 76/48 mmHg despite a fluid bolus, SpO2 85% on oxygen, JVP raised, lungs clear. Most appropriate next investigation?",
+   "options": [
+    "CT pulmonary angiography",
+    "Ventilation-perfusion scan",
+    "Plasma D-dimer",
+    "Bedside echocardiography",
+    "Lower limb venous duplex"
+   ],
+   "answer": 3,
+   "why": "After surgery, sudden shock with hypoxia, a raised JVP and clear lungs suggests high-risk (massive) pulmonary embolism. When the patient is too unstable for CT, bedside echocardiography showing right ventricular dysfunction is enough to justify immediate reperfusion therapy such as thrombolysis.",
+   "notes": [
+    "CTPA is the test of choice once the patient is stable, but moving a hypotensive, hypoxic patient to the scanner risks arrest and delays treatment.",
+    "A V/Q scan takes too long, needs transfer, and is less useful in an unstable patient.",
+    "D-dimer is raised after surgery and can only rule out PE in low-risk patients, so it adds nothing in suspected high-risk PE.",
+    null,
+    "Leg duplex may find a DVT, but it does not show whether PE is causing the shock, so it should not delay decisions about reperfusion."
+   ],
+   "topic": "Critical Care Medicine",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -5795,6 +6112,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-97c5a320",
+   "stem": "A 26-year-old woman attends for preconception advice. She was treated for chlamydial pelvic inflammatory disease twice, at ages 19 and 22. Pelvic examination today is normal. Which pregnancy complication is she at most increased risk of?",
+   "options": [
+    "Placenta praevia",
+    "Ectopic pregnancy",
+    "Pre-eclampsia",
+    "Gestational diabetes",
+    "Placental abruption"
+   ],
+   "answer": 1,
+   "why": "Pelvic inflammatory disease scars the fallopian tubes and damages the cilia, and the risk goes up with each episode. This makes ectopic pregnancy (and tubal infertility) the main reproductive risk. She should be told to have an early pregnancy test and an early ultrasound to confirm where the pregnancy is, and to get help urgently if she has pain or bleeding.",
+   "notes": [
+    "Placenta praevia is linked to previous caesarean section, multiparity and assisted reproduction, not to tubal scarring after PID.",
+    null,
+    "Pre-eclampsia is linked to first pregnancy, chronic hypertension, renal disease and antiphospholipid syndrome, not to past PID.",
+    "Gestational diabetes is linked to obesity, ethnicity, family history and previous GDM, not to past pelvic infection.",
+    "Placental abruption is linked to hypertension, smoking, cocaine use and trauma, not to past tubal infection."
+   ],
+   "topic": "Sexual Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-981188a9",
    "stem": "A 27-year-old intern confides that she has written herself temazepam prescriptions for insomnia after night shifts for three months. She has no general practitioner. Most appropriate advice?",
    "options": [
@@ -6511,6 +6854,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-a59f80e2",
+   "stem": "A 68-year-old woman with urosepsis is still hypotensive (MAP 55 mmHg) after 30 mL/kg of crystalloid and intravenous antibiotics. Her lactate is 5 mmol/L, and she has bibasal crackles. Most appropriate next step?",
+   "options": [
+    "Further crystalloid bolus",
+    "Intravenous hydrocortisone",
+    "Dobutamine infusion",
+    "Noradrenaline infusion",
+    "Albumin 20% bolus"
+   ],
+   "answer": 3,
+   "why": "This is septic shock: she stays hypotensive despite adequate fluid resuscitation, and her lactate is raised. The crackles suggest she is becoming fluid overloaded. Surviving Sepsis and Australian guidance recommend noradrenaline as the first-line vasopressor, targeting a MAP of at least 65 mmHg. It can be started through a peripheral line until central access is available.",
+   "notes": [
+    "She has already had 30 mL/kg and now has bibasal crackles, so more crystalloid risks pulmonary oedema without fixing her vasodilatory shock.",
+    "Hydrocortisone is only added when shock persists despite moderate- to high-dose vasopressors, not before a vasopressor has been started.",
+    "Dobutamine is an inotrope for heart dysfunction with low cardiac output, and its vasodilating effect could make her hypotension worse.",
+    null,
+    "Albumin is still a volume load, so it shares the fluid overload risk and does not treat vasoplegia, and 20% albumin is not a resuscitation fluid."
+   ],
+   "topic": "Critical Care Medicine",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-a5aa4adc",
    "stem": "A 69-year-old man has a transperineal biopsy showing Gleason 4+3=7 prostate adenocarcinoma. His PSA is 11 ng/mL, and MRI shows a 10 mm right peripheral zone lesion without extraprostatic extension. He has no symptoms. Most appropriate staging investigation?",
    "options": [
@@ -7037,6 +7406,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-ac562e1e",
+   "stem": "A 64-year-old woman is intubated in the ICU for pneumonia with respiratory failure. Immediately afterwards, breath sounds are faint bilaterally and her oxygen saturation falls to 84%. Which test best confirms tracheal tube position?",
+   "options": [
+    "Waveform capnography",
+    "Chest X-ray",
+    "Arterial blood gas",
+    "Bilateral chest auscultation",
+    "Bedside lung ultrasound"
+   ],
+   "answer": 0,
+   "why": "Possible oesophageal intubation is an emergency. Under ANZCA and ANZICS guidance, a sustained waveform of exhaled carbon dioxide on capnography is the standard test to confirm the tube is in the trachea. If there is no sustained waveform, the tube is assumed to be in the oesophagus (\"no trace, wrong place\") and is removed.",
+   "notes": [
+    null,
+    "A chest X-ray shows how deep the tube sits, but it cannot tell tracheal from oesophageal placement and takes too long in a desaturating patient.",
+    "Arterial blood gas results are delayed and only indirectly reflect ventilation, so they cannot confirm where the tube is.",
+    "Auscultation is unreliable: sounds from the oesophagus can be mistaken for breath sounds, especially in a noisy unit or with lung disease.",
+    "Lung sliding on ultrasound supports tracheal placement, but it depends on the operator and is a supplement to capnography, not a replacement."
+   ],
+   "topic": "Critical Care Medicine",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-acb3ef9a",
    "stem": "A 47-year-old woman has had 6 hours of constant epigastric pain radiating to her back, with vomiting. She rarely drinks alcohol. Her lipase is 2400 U/L (normal <60). Her observations are stable. Most appropriate next investigation?",
    "options": [
@@ -7294,6 +7689,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-b1a0f436",
+   "stem": "An 81-year-old woman becomes confused and falls, three weeks after starting sertraline for depression. She is clinically euvolaemic. Serum sodium is 121 mmol/L; urine osmolality is 480 mOsm/kg. Most likely cause of hyponatraemia?",
+   "options": [
+    "Primary polydipsia",
+    "Hypovolaemic sodium loss",
+    "SSRI-induced SIADH",
+    "Primary adrenal insufficiency",
+    "Severe hypothyroidism"
+   ],
+   "answer": 2,
+   "why": "Euvolaemic hyponatraemia with urine that is not maximally dilute (osmolality above 100 mOsm/kg) points to SIADH. Starting an SSRI is a common cause in older people, especially in the first few weeks. Management is to cease the sertraline and restrict fluids, with careful sodium monitoring.",
+   "notes": [
+    "In primary polydipsia the urine is maximally dilute (osmolality below 100 mOsm/kg), not 480 mOsm/kg.",
+    "She is clinically euvolaemic, and nothing in the history suggests losses from the gut, kidneys or skin.",
+    null,
+    "Primary adrenal insufficiency usually causes hypovolaemia, hypotension and hyperkalaemia, and nothing here suggests it.",
+    "Hypothyroidism only rarely causes hyponatraemia, and only when it is severe and has clinical features, which are absent here."
+   ],
+   "topic": "Geriatrics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-b1baa286",
    "stem": "A 24-year-old man is brought in after a motorcycle crash. He is distressed, BP 78/40 mmHg, SpO2 84%, with absent left breath sounds, hyperresonance and distended neck veins. Most appropriate next step?",
    "options": [
@@ -7411,6 +7832,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-b398d084",
+   "stem": "A 26-year-old man who has sex with men has fever, sore throat, a maculopapular truncal rash and cervical lymphadenopathy, three weeks after condomless receptive anal sex. Most appropriate initial investigation?",
+   "options": [
+    "Rapid HIV antibody test",
+    "CD4 lymphocyte count",
+    "HIV Ag/Ab immunoassay",
+    "EBV heterophile antibody",
+    "HIV Western blot"
+   ],
+   "answer": 2,
+   "why": "A mononucleosis-like illness with rash 2 to 4 weeks after a high-risk exposure suggests primary HIV infection (seroconversion). The first test, per ASHM guidance, is a fourth-generation HIV antigen/antibody immunoassay: it picks up p24 antigen before antibodies appear, so it shortens the window period. If it is reactive or unclear, supplementary testing and HIV RNA confirm the diagnosis.",
+   "notes": [
+    "Point-of-care antibody tests are less sensitive in early infection because antibodies may not have formed yet, so a negative result could falsely reassure.",
+    "A CD4 count stages and monitors known HIV but cannot diagnose infection, and it may be normal or only briefly low in acute HIV.",
+    null,
+    "A monospot tests for EBV infectious mononucleosis, but this exposure history calls for HIV testing first, and EBV does not explain the risk.",
+    "Western blot is a later supplementary test that is often negative or indeterminate during seroconversion, so it is not the first investigation."
+   ],
+   "topic": "Sexual Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-b3d155cd",
    "stem": "A 46-year-old woman with polycystic kidney disease has a sudden severe headache that peaked within a minute while lifting weights. She is drowsy, GCS 14, with neck stiffness. Most appropriate first investigation?",
    "options": [
@@ -7435,6 +7882,32 @@
     "Neurology",
     "Neurosurgery"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-b6d07f71",
+   "stem": "A 58-year-old man ventilated in ICU for pneumococcal pneumonia has bilateral infiltrates. Despite tidal volume 6 mL/kg and PEEP 14 cmH2O, his PaO2/FiO2 ratio is 90 mmHg. Most appropriate next step?",
+   "options": [
+    "Inhaled nitric oxide",
+    "Venovenous ECMO",
+    "High-frequency oscillation",
+    "Intravenous furosemide",
+    "Prone positioning"
+   ],
+   "answer": 4,
+   "why": "This is severe ARDS (PaO2/FiO2 below 100 mmHg) despite lung-protective ventilation. Early prone positioning for at least 12 to 16 hours a day lowers mortality when PaO2/FiO2 is below 150 mmHg (PROSEVA), and ANZICS practice uses it before rescue therapies.",
+   "notes": [
+    "Inhaled nitric oxide improves oxygenation only for a short time, does not lower mortality and is not routine therapy.",
+    "Venovenous ECMO is a rescue therapy for hypoxaemia that persists after proning and other optimisation have been tried.",
+    "High-frequency oscillation gave no benefit and possible harm in trials (OSCAR, OSCILLATE), so it is not recommended.",
+    "Intravenous furosemide can support conservative fluid management, but it does not treat severe hypoxaemia, and nothing here suggests fluid overload.",
+    null
+   ],
+   "topic": "Critical Care Medicine",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -7547,6 +8020,32 @@
     "Urgent ophthalmology review is needed, but irrigation must start first and keep going while the referral is arranged."
    ],
    "topic": "Occupational/Environmental Medicine",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-b8aaa6db",
+   "stem": "A 56-year-old man has sudden severe retrosternal pain after forceful vomiting following heavy drinking. Heart rate is 118/min, ECG is normal and there is crepitus over the neck. Most appropriate next investigation?",
+   "options": [
+    "Barium swallow",
+    "CT with oral contrast",
+    "Flexible oesophagoscopy",
+    "CT pulmonary angiogram",
+    "Transthoracic echocardiogram"
+   ],
+   "answer": 1,
+   "why": "Chest pain after forceful vomiting, with subcutaneous emphysema in the neck, points to Boerhaave syndrome, which is spontaneous oesophageal rupture. CT of the chest with water-soluble oral contrast is the preferred test. It confirms a contrast leak and also shows pneumomediastinum, effusion and collections, which helps plan urgent surgery.",
+   "notes": [
+    "Barium leaking into the mediastinum causes severe inflammatory mediastinitis, so water-soluble contrast is used instead when perforation is suspected.",
+    null,
+    "Endoscopy with air insufflation can make the tear bigger and worsen pneumomediastinum, so it is not the first test for suspected perforation.",
+    "A CT pulmonary angiogram looks for pulmonary embolism and does not use oral contrast to show an oesophageal leak.",
+    "Echocardiography looks at the heart and pericardium and cannot show an oesophageal tear or mediastinal contamination."
+   ],
+   "topic": "Cardiothoracic Surgery",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -7672,6 +8171,32 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-b9f03ab0",
+   "stem": "An 81-year-old man has had three falls in a month, each on getting out of bed, preceded by light-headedness. He started tamsulosin two weeks ago. Neurological examination is normal. Most appropriate next investigation?",
+   "options": [
+    "Lying and standing BP",
+    "24-hour Holter monitor",
+    "Non-contrast CT brain",
+    "Transthoracic echocardiogram",
+    "Tilt-table test"
+   ],
+   "answer": 0,
+   "why": "Falls with light-headedness on standing, soon after starting an alpha-blocker, point to orthostatic hypotension. Lying and standing blood pressure is a simple bedside test that confirms it: a drop of at least 20 mmHg systolic or 10 mmHg diastolic within 3 minutes of standing. It should be done first in any multifactorial falls assessment.",
+   "notes": [
+    null,
+    "A Holter monitor looks for arrhythmia, which is less likely when symptoms only come on standing and the start fits a new alpha-blocker.",
+    "With no head injury, no focal signs and a normal neurological examination, CT brain does not explain the falls and should not be the first test.",
+    "An echocardiogram looks for structural heart disease such as aortic stenosis, but there is no murmur or exertional syncope to suggest this.",
+    "Tilt-table testing is a specialist test for when the diagnosis is still unclear, after simple orthostatic measurements have been done."
+   ],
+   "topic": "Geriatrics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {
@@ -8689,6 +9214,32 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-cf405298",
+   "stem": "A 68-year-old man with severe pneumonia is drowsy and tiring. Arterial blood gas: pH 7.12, PaCO2 52 mmHg, HCO3 16 mmol/L, lactate 6 mmol/L. Which acid-base disorder is present?",
+   "options": [
+    "Compensated metabolic acidosis",
+    "Mixed metabolic-respiratory acidosis",
+    "Acute respiratory acidosis",
+    "Chronic respiratory acidosis",
+    "Metabolic acidosis, respiratory alkalosis"
+   ],
+   "answer": 1,
+   "why": "The low bicarbonate and high lactate show a metabolic (lactic) acidosis. Winter's formula predicts a PaCO2 of 1.5 x 16 + 8 = 32 ± 2 mmHg, so a PaCO2 of 52 mmHg means there is also a respiratory acidosis. This means he is tiring and heading towards respiratory failure, so he needs urgent ventilatory support.",
+   "notes": [
+    "Compensation would bring the PaCO2 down to about 32 mmHg, not up to 52 mmHg, and the pH is far from normal.",
+    null,
+    "In a pure acute respiratory acidosis the HCO3 would rise slightly to about 26 mmol/L, not fall to 16 mmol/L, and the lactate would not be high.",
+    "Chronic respiratory acidosis gives a clearly raised HCO3 from renal compensation, but here the HCO3 is low.",
+    "A respiratory alkalosis would need a PaCO2 below the predicted 30-34 mmHg, but here the PaCO2 is raised."
+   ],
+   "topic": "Critical Care Medicine",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-cf9059d8",
    "stem": "A 79-year-old man on apixaban hit his head in a fall four days ago. Now drowsy, GCS 13; CT shows a left subdural haematoma with 9 mm midline shift. Which complication is he most at risk of?",
    "options": [
@@ -9358,6 +9909,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-e0d77fa8",
+   "stem": "A 29-year-old man who has sex with men has a 10-day painless, indurated penile ulcer. Syphilis EIA and TPPA are positive; RPR is 1:32. No drug allergies. Most appropriate treatment?",
+   "options": [
+    "Ceftriaxone IM single dose",
+    "Azithromycin oral single dose",
+    "Benzathine penicillin IM",
+    "Doxycycline 7 days",
+    "Valaciclovir 10 days"
+   ],
+   "answer": 2,
+   "why": "A painless indurated chancre with positive treponemal tests and a reactive RPR means primary syphilis. Under the Australian STI Management Guidelines and eTG, the treatment is a single dose of benzathine benzylpenicillin 2.4 million units IM. Syphilis must also be notified, sexual contacts traced, and HIV and other STIs tested for.",
+   "notes": [
+    "A single dose of ceftriaxone treats gonorrhoea but is not enough to treat syphilis.",
+    "Azithromycin is not recommended for syphilis because macrolide resistance in Treponema pallidum is widespread.",
+    null,
+    "Doxycycline is only the alternative for penicillin allergy, and it needs 14 days for early syphilis, not 7.",
+    "Valaciclovir treats genital herpes, which causes painful multiple ulcers and negative treponemal serology."
+   ],
+   "topic": "Sexual Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-e2e442b1",
    "stem": "A 29-year-old woman comes to a general practice because of recurrent headaches over the past 3 months. She has had four attacks. Each begins with shimmering zigzag lights in one half of her vision that spread slowly over 20 minutes and then clear completely. Within 30 minutes, a throbbing one-sided headache follows, with nausea and sensitivity to light and noise, and lasts about 18 hours. The side varies between attacks, and she is well in between. Her mother has a similar history. She uses a copper intrauterine device, takes ibuprofen during attacks and takes no regular medicines. She is worried that she has a brain tumour. Her temperature is 36.7 °C, pulse 76/min and blood pressure 118/74 mm Hg. There is no neck stiffness. A full neurological examination is normal, including fundoscopy, which shows sharp discs and spontaneous venous pulsations. Which of the following is the most appropriate next investigation?",
    "options": [
@@ -9917,6 +10494,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-eb4e07f1",
+   "stem": "A 26-year-old man has dysuria and urethral discharge. First-pass urine NAAT is positive for Mycoplasma genitalium, with a macrolide resistance mutation detected. Gonorrhoea and chlamydia NAATs are negative. After doxycycline, which antibiotic is most appropriate?",
+   "options": [
+    "Azithromycin",
+    "Moxifloxacin",
+    "Ceftriaxone",
+    "Metronidazole",
+    "Pristinamycin"
+   ],
+   "answer": 1,
+   "why": "The resistance result shows macrolide-resistant M. genitalium. Australian STI guidelines recommend resistance-guided therapy: doxycycline 100 mg twice daily for 7 days, then moxifloxacin 400 mg daily for 7 days. A test of cure is done 14 to 21 days after treatment ends.",
+   "notes": [
+    "Azithromycin is the follow-on drug only for macrolide-sensitive infection, so it will likely fail here and select further resistance.",
+    null,
+    "Ceftriaxone treats gonorrhoea, which is negative, and has no activity against M. genitalium.",
+    "Metronidazole treats trichomonas and bacterial vaginosis and does not work against M. genitalium.",
+    "Pristinamycin is kept for infection that fails or resists both macrolides and fluoroquinolones, so it is not used first."
+   ],
+   "topic": "Sexual Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-ec8cbe6a",
    "stem": "A 26-year-old man cut his palm on a broken beer glass 2 hours ago. The 1.5 cm wound has stopped bleeding, but gripping causes sharp localised pain. Tendon and nerve function are intact. Most appropriate next investigation?",
    "options": [
@@ -10298,6 +10901,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-f3ef2b00",
+   "stem": "A 62-year-old man with hypertension has sudden tearing chest pain radiating to his back. Blood pressure is 170/95 mmHg in the right arm and 135/80 mmHg in the left. ECG is normal. Most appropriate next investigation?",
+   "options": [
+    "CT pulmonary angiography",
+    "Invasive coronary angiography",
+    "CT aortic angiography",
+    "Transthoracic echocardiography",
+    "Serial troponin"
+   ],
+   "answer": 2,
+   "why": "Sudden tearing pain radiating to the back, with a blood pressure difference of more than 20 mmHg between the arms, strongly suggests acute aortic dissection. In a stable patient, ECG-gated CT angiography of the whole aorta is the test of choice to confirm it and to tell type A from type B, which decides whether he needs emergency surgery. This matches eTG and Australian emergency guidelines.",
+   "notes": [
+    "CT pulmonary angiography looks for pulmonary embolism, and its contrast timing is not set up to image the aorta, so a dissection can be missed.",
+    "Invasive coronary angiography is for acute coronary syndrome, but the ECG is normal, and passing a catheter through a dissected aorta is risky and delays diagnosis.",
+    null,
+    "Transthoracic echocardiography can show an ascending aortic flap or a pericardial effusion, but it cannot reliably exclude dissection or image the descending aorta.",
+    "Serial troponin measurement looks for myocardial infarction, is often normal in dissection, and waiting for repeat results delays an urgent diagnosis."
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-f5055925",
    "stem": "A 59-year-old woman has 8 months of mechanical hand pain, 15 minutes' morning stiffness and hard DIP swellings. CRP 3 mg/L, ESR 12 mm/h, RF and anti-CCP negative. Best interpretation of these results?",
    "options": [
@@ -10352,6 +10981,32 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-f7c8182f",
+   "stem": "An 84-year-old woman fell onto her left side at home and cannot bear weight. Hip rotation is painful; the leg is not shortened. Hip and pelvic X-rays show no fracture. Most appropriate next investigation?",
+   "options": [
+    "Delayed repeat X-ray",
+    "Nuclear bone scan",
+    "MRI of hip",
+    "Hip ultrasound",
+    "DEXA scan"
+   ],
+   "answer": 2,
+   "why": "An older person who cannot bear weight after a fall may have an occult hip fracture even when the X-rays are normal. Under the ANZ Hip Fracture Guideline, MRI is the test to get now, with CT if MRI is not available within 24 hours, so that surgery is not delayed.",
+   "notes": [
+    "Waiting to repeat the X-ray delays diagnosis and surgery, which raises the risk of fracture displacement, immobility complications and death.",
+    "A bone scan is less specific and may not turn positive for 48 to 72 hours in older patients, so it is only a back-up when MRI cannot be done.",
+    null,
+    "Ultrasound can show a joint effusion but cannot reliably show or rule out a fracture of the femoral neck.",
+    "A DEXA scan measures bone density to guide long-term osteoporosis treatment but cannot diagnose an acute fracture."
+   ],
+   "topic": "Geriatrics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {
@@ -10623,6 +11278,32 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-febdc050",
+   "stem": "An 86-year-old woman trips at home and strikes her forehead. She takes apixaban for atrial fibrillation. She is alert, GCS 15, with a small forehead haematoma and no neurological deficit. Most appropriate next step?",
+   "options": [
+    "Skull X-ray",
+    "Andexanet alfa reversal",
+    "Non-contrast CT brain",
+    "Discharge with written advice",
+    "Observation without imaging"
+   ],
+   "answer": 2,
+   "why": "Older adults taking anticoagulants who have a head injury are at high risk of intracranial haemorrhage, even when GCS is 15 and the neurological exam is normal. Australian adult head injury guidelines, such as NSW Health's, call for a non-contrast CT brain in this situation. Reversal is used only if a bleed is confirmed.",
+   "notes": [
+    "Skull X-ray cannot rule out intracranial haemorrhage and has no role in current head injury assessment.",
+    "Anticoagulant reversal is for a confirmed significant bleed, not a head injury that has not yet been imaged.",
+    null,
+    "Sending her home without imaging misses a delayed or hidden intracranial haemorrhage, which is more likely with anticoagulation.",
+    "Watching her without imaging is not enough, because anticoagulated older patients can bleed without early clinical signs."
+   ],
+   "topic": "Geriatrics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {

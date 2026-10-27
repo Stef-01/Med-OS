@@ -1,8 +1,8 @@
 {
  "pool": {
-  "n": 701,
+  "n": 727,
   "byKind": {
-   "ai": 363,
+   "ai": 389,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
@@ -10,11 +10,11 @@
   "formats": {
    "15": {
     "name": "Rapid",
-    "fit": 285,
-    "of": 701,
-    "share": 40.7,
+    "fit": 311,
+    "of": 727,
+    "share": 42.8,
     "byKind": {
-     "ai": 253,
+     "ai": 279,
      "open-exam": 7,
      "amsa": 25
     },
@@ -26,6 +26,8 @@
      "Pathology": 5,
      "Trauma Surgery": 9,
      "Gastroenterology": 25,
+     "Sexual Health": 9,
+     "Cardiothoracic Surgery": 9,
      "Occupational/Environmental Medicine": 11,
      "Cardiology": 19,
      "Palliative Care": 8,
@@ -34,10 +36,10 @@
      "Otorhinolaryngology": 7,
      "Vascular Surgery": 5,
      "Obstetrics": 4,
+     "Respiratory Medicine": 20,
      "Emergency Medicine": 17,
      "Urology": 5,
      "Professionalism": 10,
-     "Respiratory Medicine": 19,
      "Gastrointestinal Surgery": 5,
      "Neonatology": 8,
      "Paediatrics": 9,
@@ -49,12 +51,12 @@
      "Indigenous Health": 7,
      "General Practice": 4,
      "Addiction Medicine": 2,
+     "Geriatrics": 5,
      "Oncology": 1,
      "Immunology": 5,
+     "Critical Care Medicine": 5,
      "Plastic Surgery": 7,
      "Rheumatology": 4,
-     "Cardiothoracic Surgery": 2,
-     "Sexual Health": 1,
      "Public Health": 2,
      "Dermatology": 1
     },
@@ -101,11 +103,11 @@
    },
    "30": {
     "name": "Standard",
-    "fit": 371,
-    "of": 701,
-    "share": 52.9,
+    "fit": 397,
+    "of": 727,
+    "share": 54.6,
     "byKind": {
-     "ai": 253,
+     "ai": 279,
      "open-exam": 53,
      "usmle-resource": 7,
      "amsa": 58
@@ -118,6 +120,8 @@
      "Pathology": 5,
      "Trauma Surgery": 9,
      "Gastroenterology": 38,
+     "Sexual Health": 9,
+     "Cardiothoracic Surgery": 9,
      "Occupational/Environmental Medicine": 12,
      "Cardiology": 30,
      "Palliative Care": 8,
@@ -126,10 +130,10 @@
      "Otorhinolaryngology": 8,
      "Vascular Surgery": 5,
      "Obstetrics": 7,
+     "Respiratory Medicine": 27,
      "Emergency Medicine": 17,
      "Urology": 7,
      "Professionalism": 10,
-     "Respiratory Medicine": 26,
      "Gastrointestinal Surgery": 5,
      "Neonatology": 8,
      "Paediatrics": 13,
@@ -141,17 +145,16 @@
      "Indigenous Health": 7,
      "General Practice": 5,
      "Addiction Medicine": 2,
+     "Geriatrics": 6,
      "Oncology": 1,
      "Immunology": 6,
+     "Critical Care Medicine": 5,
      "Plastic Surgery": 7,
      "Rheumatology": 11,
-     "Cardiothoracic Surgery": 2,
-     "Sexual Health": 1,
      "Orthopaedics": 2,
      "Psychiatry": 1,
      "Nephrology": 4,
      "Public Health": 6,
-     "Geriatrics": 1,
      "Ophthalmology": 1,
      "Dermatology": 1
     },
@@ -196,11 +199,11 @@
    },
    "90": {
     "name": "Long case",
-    "fit": 696,
-    "of": 701,
+    "fit": 722,
+    "of": 727,
     "share": 99.3,
     "byKind": {
-     "ai": 363,
+     "ai": 389,
      "open-exam": 119,
      "usmle-resource": 156,
      "amsa": 58
@@ -215,6 +218,8 @@
      "Pathology": 6,
      "Trauma Surgery": 15,
      "Gastroenterology": 65,
+     "Sexual Health": 14,
+     "Cardiothoracic Surgery": 10,
      "Occupational/Environmental Medicine": 12,
      "Cardiology": 58,
      "Palliative Care": 8,
@@ -223,11 +228,11 @@
      "Otorhinolaryngology": 13,
      "Vascular Surgery": 9,
      "Infectious Diseases": 45,
+     "Respiratory Medicine": 36,
      "Rheumatology": 24,
      "Emergency Medicine": 31,
      "Urology": 10,
      "Professionalism": 11,
-     "Respiratory Medicine": 35,
      "Gastrointestinal Surgery": 10,
      "Neurology": 40,
      "Neonatology": 16,
@@ -237,26 +242,23 @@
      "Indigenous Health": 7,
      "General Practice": 14,
      "Addiction Medicine": 3,
+     "Geriatrics": 9,
      "Oncology": 2,
      "Immunology": 9,
-     "Cardiothoracic Surgery": 3,
+     "Critical Care Medicine": 6,
      "Plastic Surgery": 7,
      "Ophthalmology": 3,
-     "Sexual Health": 6,
      "Nephrology": 11,
      "Orthopaedics": 10,
      "Psychiatry": 13,
      "Dermatology": 3,
      "Public Health": 11,
-     "Geriatrics": 4,
-     "Toxicology": 4,
-     "Critical Care Medicine": 1
+     "Toxicology": 4
     },
     "topics": 45,
     "thin": [
      "Addiction Medicine",
      "Breast/Endocrine Surgery",
-     "Cardiothoracic Surgery",
      "Critical Care Medicine",
      "Dermatology",
      "Geriatrics",
@@ -269,53 +271,52 @@
      "Palliative Care",
      "Pathology",
      "Plastic Surgery",
-     "Sexual Health",
      "Toxicology",
      "Vascular Surgery"
     ]
    }
   },
   "readSecs": {
-   "median": 17,
+   "median": 15,
    "p90": 45,
    "max": 72
   }
  },
  "cues": {
   "ai": {
-   "n": 363,
-   "keyLongest": 11,
+   "n": 389,
+   "keyLongest": 10.3,
    "chance": 20,
    "keyAt": {
-    "D": 70,
-    "A": 78,
-    "E": 74,
-    "B": 74,
-    "C": 67
+    "D": 74,
+    "A": 80,
+    "E": 81,
+    "B": 80,
+    "C": 74
    },
    "options": {
-    "5": 363
+    "5": 389
    },
    "checks": {
     "vignette": {
-     "n": 66,
-     "share": 18.2
+     "n": 72,
+     "share": 18.5
+    },
+    "clang": {
+     "n": 7,
+     "share": 1.8
     },
     "absolute-terms": {
      "n": 7,
-     "share": 1.9
-    },
-    "clang": {
-     "n": 6,
-     "share": 1.7
+     "share": 1.8
     },
     "units": {
      "n": 4,
-     "share": 1.1
+     "share": 1
     },
     "convergence": {
      "n": 2,
-     "share": 0.6
+     "share": 0.5
     },
     "longest-key": {
      "n": 1,
@@ -447,10 +448,10 @@
  ],
  "review": {
   "ai": {
-   "judged": 363,
+   "judged": 389,
    "verdict": {
-    "accept": 312,
-    "revise": 51
+    "accept": 336,
+    "revise": 53
    },
    "solvesAgree": 100,
    "median": {
@@ -527,15 +528,14 @@
    "admitted": 17.2
   },
   "ai rapid": {
-   "n": 308,
-   "pool": 253,
+   "n": 331,
+   "pool": 279,
    "review": 3,
    "duplicate": 7,
-   "bar": 41,
-   "pending": 4,
-   "reviewed": 304,
-   "passed": 85.5,
-   "admitted": 82.1
+   "bar": 42,
+   "reviewed": 331,
+   "passed": 86.4,
+   "admitted": 84.3
   },
   "usmle-resource mmlu": {
    "n": 272,
@@ -569,15 +569,15 @@
   }
  },
  "pack": {
-  "n": 2229,
+  "n": 2255,
   "bySource": {
-   "ai": 1418,
+   "ai": 1444,
    "open-exam": 609,
    "usmle-resource": 144,
    "amsa": 58
   },
   "byRoute": {
-   "ai pool": 363,
+   "ai pool": 389,
    "open-exam": 609,
    "usmle-resource": 144,
    "amsa": 58,
@@ -587,11 +587,11 @@
   "formats": {
    "15": {
     "name": "Rapid",
-    "fit": 839,
-    "of": 2229,
-    "share": 37.6,
+    "fit": 865,
+    "of": 2255,
+    "share": 38.4,
     "byKind": {
-     "ai": 623,
+     "ai": 649,
      "open-exam": 207,
      "amsa": 9
     },
@@ -603,6 +603,8 @@
      "Pathology": 10,
      "Trauma Surgery": 10,
      "Gastroenterology": 46,
+     "Sexual Health": 10,
+     "Cardiothoracic Surgery": 10,
      "Occupational/Environmental Medicine": 11,
      "Cardiology": 64,
      "Palliative Care": 10,
@@ -611,10 +613,10 @@
      "Otorhinolaryngology": 10,
      "Vascular Surgery": 11,
      "Obstetrics": 25,
+     "Respiratory Medicine": 44,
      "Emergency Medicine": 35,
      "Urology": 10,
      "Professionalism": 10,
-     "Respiratory Medicine": 43,
      "Gastrointestinal Surgery": 10,
      "Neonatology": 10,
      "Paediatrics": 41,
@@ -626,38 +628,32 @@
      "Indigenous Health": 11,
      "General Practice": 15,
      "Addiction Medicine": 10,
+     "Geriatrics": 10,
      "Oncology": 8,
      "Immunology": 10,
+     "Critical Care Medicine": 10,
      "Plastic Surgery": 11,
      "Rheumatology": 12,
-     "Cardiothoracic Surgery": 3,
-     "Sexual Health": 2,
      "Public Health": 12,
-     "Geriatrics": 5,
      "Nephrology": 27,
      "Toxicology": 13,
      "Psychiatry": 15,
      "Orthopaedics": 19,
      "Dermatology": 10,
-     "Ophthalmology": 10,
-     "Critical Care Medicine": 5
+     "Ophthalmology": 10
     },
     "topics": 45,
     "thin": [
-     "Cardiothoracic Surgery",
-     "Critical Care Medicine",
-     "Geriatrics",
-     "Oncology",
-     "Sexual Health"
+     "Oncology"
     ]
    },
    "30": {
     "name": "Standard",
-    "fit": 1675,
-    "of": 2229,
-    "share": 75.1,
+    "fit": 1701,
+    "of": 2255,
+    "share": 75.4,
     "byKind": {
-     "ai": 1064,
+     "ai": 1090,
      "open-exam": 546,
      "usmle-resource": 7,
      "amsa": 58
@@ -670,6 +666,8 @@
      "Pathology": 11,
      "Trauma Surgery": 16,
      "Gastroenterology": 173,
+     "Sexual Health": 16,
+     "Cardiothoracic Surgery": 10,
      "Occupational/Environmental Medicine": 12,
      "Cardiology": 137,
      "Palliative Care": 14,
@@ -678,10 +676,10 @@
      "Otorhinolaryngology": 13,
      "Vascular Surgery": 16,
      "Obstetrics": 51,
+     "Respiratory Medicine": 122,
      "Emergency Medicine": 61,
      "Urology": 17,
      "Professionalism": 11,
-     "Respiratory Medicine": 121,
      "Gastrointestinal Surgery": 18,
      "Neonatology": 15,
      "Paediatrics": 98,
@@ -693,36 +691,30 @@
      "Indigenous Health": 13,
      "General Practice": 50,
      "Addiction Medicine": 12,
+     "Geriatrics": 16,
      "Oncology": 17,
      "Immunology": 16,
+     "Critical Care Medicine": 13,
      "Plastic Surgery": 13,
      "Rheumatology": 47,
-     "Cardiothoracic Surgery": 3,
-     "Sexual Health": 8,
      "Orthopaedics": 41,
      "Psychiatry": 31,
      "Nephrology": 53,
      "Public Health": 20,
-     "Geriatrics": 11,
      "Ophthalmology": 14,
      "Dermatology": 15,
-     "Toxicology": 16,
-     "Critical Care Medicine": 8
+     "Toxicology": 16
     },
     "topics": 45,
-    "thin": [
-     "Cardiothoracic Surgery",
-     "Critical Care Medicine",
-     "Sexual Health"
-    ]
+    "thin": []
    },
    "90": {
     "name": "Long case",
-    "fit": 2228,
-    "of": 2229,
+    "fit": 2254,
+    "of": 2255,
     "share": 100,
     "byKind": {
-     "ai": 1418,
+     "ai": 1444,
      "open-exam": 609,
      "usmle-resource": 143,
      "amsa": 58
@@ -737,6 +729,8 @@
      "Pathology": 12,
      "Trauma Surgery": 21,
      "Gastroenterology": 254,
+     "Sexual Health": 21,
+     "Cardiothoracic Surgery": 11,
      "Occupational/Environmental Medicine": 12,
      "Cardiology": 195,
      "Palliative Care": 15,
@@ -745,11 +739,11 @@
      "Otorhinolaryngology": 18,
      "Vascular Surgery": 19,
      "Infectious Diseases": 129,
+     "Respiratory Medicine": 168,
      "Rheumatology": 67,
      "Emergency Medicine": 86,
      "Urology": 20,
      "Professionalism": 12,
-     "Respiratory Medicine": 167,
      "Gastrointestinal Surgery": 23,
      "Neurology": 183,
      "Neonatology": 23,
@@ -759,42 +753,37 @@
      "Indigenous Health": 13,
      "General Practice": 73,
      "Addiction Medicine": 13,
+     "Geriatrics": 19,
      "Oncology": 18,
      "Immunology": 19,
-     "Cardiothoracic Surgery": 4,
+     "Critical Care Medicine": 14,
      "Plastic Surgery": 13,
      "Ophthalmology": 16,
-     "Sexual Health": 13,
      "Nephrology": 60,
      "Orthopaedics": 49,
      "Psychiatry": 42,
      "Public Health": 24,
-     "Geriatrics": 14,
      "Dermatology": 17,
-     "Toxicology": 19,
-     "Critical Care Medicine": 9
+     "Toxicology": 19
     },
     "topics": 45,
-    "thin": [
-     "Cardiothoracic Surgery",
-     "Critical Care Medicine"
-    ]
+    "thin": []
    }
   },
   "readSecs": {
    "median": 13,
-   "p90": 30,
+   "p90": 29,
    "max": 63
   },
   "taxonomy": {
    "source": {
-    "ai": 1418,
+    "ai": 1444,
     "open-exam": 609,
     "usmle-resource": 144,
     "amsa": 58
    },
    "cat": {
-    "clinical": 1585,
+    "clinical": 1611,
     "skills": 150,
     "physio": 337,
     "anatomy": 157
@@ -802,12 +791,12 @@
    "year": {
     "1": 179,
     "2": 377,
-    "3": 916,
-    "4": 757
+    "3": 927,
+    "4": 772
    },
    "difficulty": {
     "1": 422,
-    "2": 1489,
+    "2": 1515,
     "3": 318
    },
    "topic": {
@@ -820,6 +809,8 @@
     "Pathology": 12,
     "Trauma Surgery": 21,
     "Gastroenterology": 254,
+    "Sexual Health": 21,
+    "Cardiothoracic Surgery": 11,
     "Occupational/Environmental Medicine": 12,
     "Cardiology": 195,
     "Palliative Care": 15,
@@ -828,11 +819,11 @@
     "Otorhinolaryngology": 18,
     "Vascular Surgery": 19,
     "Infectious Diseases": 129,
+    "Respiratory Medicine": 168,
     "Rheumatology": 67,
     "Emergency Medicine": 86,
     "Urology": 20,
     "Professionalism": 12,
-    "Respiratory Medicine": 167,
     "Gastrointestinal Surgery": 23,
     "Neurology": 183,
     "Neonatology": 23,
@@ -842,20 +833,18 @@
     "Indigenous Health": 13,
     "General Practice": 73,
     "Addiction Medicine": 13,
+    "Geriatrics": 19,
     "Oncology": 18,
     "Immunology": 19,
-    "Cardiothoracic Surgery": 4,
+    "Critical Care Medicine": 14,
     "Plastic Surgery": 13,
     "Ophthalmology": 16,
-    "Sexual Health": 13,
     "Nephrology": 60,
     "Orthopaedics": 49,
     "Psychiatry": 42,
     "Public Health": 24,
-    "Geriatrics": 14,
     "Dermatology": 17,
-    "Toxicology": 19,
-    "Critical Care Medicine": 9
+    "Toxicology": 19
    },
    "problems": 0
   },
@@ -918,47 +907,47 @@
     }
    },
    "ai pool": {
-    "n": 363,
-    "keyLongest": 11,
+    "n": 389,
+    "keyLongest": 10.3,
     "chance": 20,
     "keyAt": {
-     "D": 70,
-     "A": 78,
-     "E": 74,
-     "B": 74,
-     "C": 67
+     "D": 74,
+     "A": 80,
+     "E": 81,
+     "B": 80,
+     "C": 74
     },
     "options": {
-     "5": 363
+     "5": 389
     },
     "checks": {
      "schema": {
-      "n": 363,
+      "n": 389,
       "share": 100
      },
      "vignette": {
-      "n": 234,
-      "share": 64.5
+      "n": 255,
+      "share": 65.6
+     },
+     "clang": {
+      "n": 7,
+      "share": 1.8
      },
      "absolute-terms": {
       "n": 7,
-      "share": 1.9
-     },
-     "clang": {
-      "n": 6,
-      "share": 1.7
+      "share": 1.8
      },
      "stem-length": {
       "n": 5,
-      "share": 1.4
+      "share": 1.3
      },
      "units": {
       "n": 4,
-      "share": 1.1
+      "share": 1
      },
      "convergence": {
       "n": 2,
-      "share": 0.6
+      "share": 0.5
      },
      "longest-key": {
       "n": 1,

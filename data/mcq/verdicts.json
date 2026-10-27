@@ -559,6 +559,51 @@
    }
   }
  },
+ "ai-mcq-0368df56": {
+  "hash": "757493a6",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:57:39.280Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "An NT-proBNP of 160 ng/L is below the cut-off for ruling out heart failure, so a cardiac cause of the effusion is unlikely, while the other options are exudative causes that NT-proBNP does not separate."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "An NT-proBNP of 160 ng/L is below the non-acute cut-off of about 400 ng/L, which effectively rules out heart failure, while the other options are non-cardiac causes that this result doesn't affect."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 3,
+   "accuracy": 3,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem (\"argues most against\")",
+    "only one option relates to NT-proBNP, so the answer is obvious from basic knowledge that BNP is a cardiac marker",
+    "explanation uses the acute rule-out threshold (300 ng/L) for a 5-month non-acute presentation; ESC non-acute threshold i",
+    "explanation overreaches by saying a normal NT-proBNP points towards malignancy"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "Key is defensible, but the threshold in the explanation is wrong for a chronic presentation",
+    "Distractors are not affected by NT-proBNP at all, so the item barely discriminates",
+    "Tests recall of a single lab fact rather than clinical reasoning"
+   ],
+   "suggestion": "Make the NT-proBNP clearly below 125 ng/L, or explain the acute (<300) and non-acute (<125 ESC / <400 NICE) thresholds. Better still, turn it into a next-step question: unilateral effusion, low NT-proBNP, so the answer is ultrasound-guided diagnostic pleural aspiration, with other investigations as plausible distractors."
+  }
+ },
  "ai-mcq-0391a8b4": {
   "hash": "13e04857",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -770,6 +815,91 @@
    }
   }
  },
+ "ai-mcq-05f2b37e": {
+  "hash": "d9507291",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:57:32.552Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Untreated maternal gonorrhoea passes to the baby during vaginal delivery, and the classic result is gonococcal ophthalmia neonatorum (purulent conjunctivitis at 2–5 days); afebrile pneumonitis is chlamydial, chorioretinitis and hearing loss are TORCH infections, and rhinitis is congenital syphilis."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Untreated maternal gonorrhoea passes to the baby during vaginal delivery and most often causes ophthalmia neonatorum, a purulent conjunctivitis that starts 2–5 days after birth; afebrile pneumonitis is linked to chlamydia, and the other options are linked to syphilis, CMV, rubella or toxoplasmosis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 3,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option E names the causative organism ('syphilitic'), making it trivially eliminable",
+    "Largely a recall item (organism-complication association) rather than higher-order application"
+   ],
+   "topic": "Neonatology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is clearly correct and the only best answer",
+    "Distractors are the same kind of thing as the key (vertically transmitted neonatal complications) and plausible",
+    "Explanation is accurate and addresses every distractor"
+   ],
+   "suggestion": "Reword option E as 'Persistent rhinorrhoea (snuffles)' to remove the cue. For a higher-order item, ask instead for the most appropriate management of the newborn (single-dose ceftriaxone, or cefotaxime if the baby has high bilirubin)."
+  },
+  "second": {
+   "hash": "d9507291",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:01:14.237Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "Untreated maternal gonorrhea at delivery most often passes to the baby as gonococcal ophthalmia neonatorum, a purulent conjunctivitis that usually starts 2–5 days after birth; the other options are complications of chlamydia, toxoplasmosis, CMV and syphilis."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "Untreated maternal gonorrhea at delivery spreads to the baby during vaginal birth and most often causes gonococcal ophthalmia neonatorum, a purulent conjunctivitis at 2–5 days of life; afebrile pneumonitis points to chlamydia, and the other options are congenital syphilis, CMV, or toxoplasmosis."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Tests lower-order recall (organism to complication) rather than a management decision"
+    ],
+    "topic": "Neonatology",
+    "verdict": "accept",
+    "reasons": [
+     "Key is clearly correct: gonococcal ophthalmia neonatorum is the main risk after vertical exposure to N. gonorrhoeae",
+     "The distractors are homogeneous, plausible complications of other perinatal infections (chlamydia, CMV, toxoplasma, syphilis), and none cues the answer",
+     "The explanation is accurate and current, including onset timing and single-dose ceftriaxone prophylaxis for the exposed neonate"
+    ],
+    "suggestion": "To test at a higher level, you could ask for the most appropriate management of the newborn (single-dose IM/IV ceftriaxone, versus topical prophylaxis alone). In the explanation, mention cefotaxime as the alternative for neonates with hyperbilirubinaemia or those receiving IV calcium."
+   }
+  }
+ },
  "ai-mcq-06f52558": {
   "hash": "f4b74035",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -813,6 +943,49 @@
     "Explanation slightly overstates that the phrenic nerve is never involved"
    ],
    "suggestion": "Replace the left-sided distractors with right-sided local-invasion alternatives (e.g., right phrenic palsy, right recurrent laryngeal palsy, SVC obstruction, ulnar hand weakness) and ask for the most likely examination finding, adding smoking history or exam details to the stem."
+  }
+ },
+ "ai-mcq-072e162d": {
+  "hash": "09b87341",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:57:31.486Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "Heavy bleeding followed by drains suddenly stopping, low blood pressure and a rising CVP after cardiac surgery points to cardiac tamponade from clotted blood, which needs emergency resternotomy because a needle cannot drain clotted, localized blood."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "Heavy bleeding, then drains that suddenly stop, with low blood pressure and a rising CVP after bypass surgery means clotted tamponade, and emergency resternotomy is the definitive treatment because needle drainage doesn't work well on clotted, localised blood after surgery."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Sparse vignette (no heart rate, exam findings or echo)",
+    "Lead-in is a sentence fragment rather than a complete question"
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: emergency resternotomy is the right step for post-cardiac surgery tamponade in an unstable patient",
+    "Distractors are plausible, of the same kind and clearly inferior",
+    "The explanation clearly covers why the key is right and why each distractor is wrong"
+   ],
+   "suggestion": "Add tachycardia, muffled heart sounds or bedside echo findings to fill out the vignette, and rewrite the lead-in as a full question, e.g. \"Which of the following is the most appropriate next step in management?\""
   }
  },
  "ai-mcq-073e74ad": {
@@ -1531,6 +1704,48 @@
     "Explanation covers the mechanism, safe practice, and why each distractor is wrong"
    ],
    "suggestion": "Optionally, give the reason for induction and state that amniotic fluid volume is normal, so abruption is firmly ruled out."
+  }
+ },
+ "ai-mcq-0ed02629": {
+  "hash": "1f07ec37",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:57:58.007Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "A Pancoast tumor at the lung apex invades the lower trunk of the brachial plexus (C8-T1), causing weakness of the hand's intrinsic muscles."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "An apical (Pancoast) tumor eroding the first rib invades the lower trunk of the brachial plexus (C8-T1), which causes weakness of the intrinsic hand muscles."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option D is sensory while the others are motor (mildly heterogeneous)"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key correct: a Pancoast tumour involves the lower trunk (C8 and T1), causing intrinsic hand weakness",
+    "Distractors are plausible and each maps to a root or nerve away from the superior sulcus",
+    "Accurate explanation covering each option"
+   ],
+   "suggestion": "Optionally add a brief examination finding (e.g., ptosis or miosis) to the stem and name Horner syndrome explicitly in the explanation."
   }
  },
  "ai-mcq-0f17e735": {
@@ -4609,6 +4824,93 @@
    }
   }
  },
+ "ai-mcq-2e736a86": {
+  "hash": "300b9f4b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:58:00.300Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.96,
+    "reason": "After oesophagectomy, high-volume cloudy drain fluid that appears once enteral feeds start and has a triglyceride of 4.8 mmol/L (above the 1.24 mmol/L cutoff) is chyle from a thoracic duct injury."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.96,
+    "reason": "The drain output is high-volume and cloudy, it started once enteral (jejunal) feeding began after oesophagectomy, and the triglyceride is 4.8 mmol/L (well above the 1.24 mmol/L cutoff); together these point to a chylothorax from thoracic duct injury."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (triglyceride above the diagnostic cut-off plus output rising with feeds)",
+    "pseudochylothorax is a weak distractor in an acute postoperative setting",
+    "explanation says a leak shows enteral feed in the drain, but jejunal feeds enter below the oesophageal anastomosis"
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct and clearly the single best answer",
+    "Classic, clinically relevant complication of oesophagectomy",
+    "Explanation is accurate and covers management and each distractor"
+   ],
+   "suggestion": "To test reasoning rather than a lab cut-off, ask for the next best step in management. Also correct the anastomotic-leak line to say saliva or high amylase rather than jejunal feed."
+  },
+  "second": {
+   "hash": "300b9f4b",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:01:18.753Z",
+   "solves": [
+    {
+     "answer": 1,
+     "confidence": 0.97,
+     "reason": "After oesophagectomy, high-output cloudy drain fluid that starts with enteral feeds, with a triglyceride above 1.24 mmol/L (110 mg/dL), means chylothorax from thoracic duct injury."
+    },
+    {
+     "answer": 1,
+     "confidence": 0.97,
+     "reason": "After oesophagectomy, high-output cloudy drain fluid that starts once enteral feeds begin, with a triglyceride above 1.24 mmol/L, points to thoracic duct injury causing a chylothorax."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "vignette gives the answer away (feeds-related rise plus a quoted triglyceride make it a one-step recall)",
+     "terse stem with no vital signs or examination findings"
+    ],
+    "topic": "Cardiothoracic Surgery",
+    "verdict": "accept",
+    "reasons": [
+     "The key is clearly correct: a pleural triglyceride of 4.8 mmol/L after oesophagectomy, rising with enteral feeds, is chylothorax",
+     "The distractors are homogeneous, plausible pleural or postoperative diagnoses, and the explanation deals with each one",
+     "Minor imprecision: 'confirms' overstates the triglyceride cut-off (chylomicrons are definitive), and feed given by jejunostomy would not leak through the oesophageal anastomosis"
+    ],
+    "suggestion": "You could make the item harder by asking for the next step in management (for example, nil by mouth with TPN, or early thoracic duct ligation for output over 1 L/day). In the explanation, change 'confirms' to 'strongly supports (chylomicrons confirm)' and replace 'enteral feed' with 'oral contrast or dye' for the anastomotic leak."
+   }
+  }
+ },
  "ai-mcq-2f9aec47": {
   "hash": "6fc7628e",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -5704,6 +6006,49 @@
    }
   }
  },
+ "ai-mcq-385ecb18": {
+  "hash": "1e9e106a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:58:03.268Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.98,
+    "reason": "A dissection of the ascending aorta (Stanford type A) needs emergency open surgical repair; beta-blockers only control heart rate and blood pressure until surgery."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "This is a Stanford type A dissection because it involves the ascending aorta, so the definitive treatment is emergency open surgical repair, with IV beta-blockers used to control heart rate and blood pressure beforehand."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "lead-in is an incomplete sentence fragment",
+    "very sparse vignette (no examination findings)"
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct and clearly the single best answer for a Stanford type A dissection",
+    "Options are homogeneous, plausible management choices, including dangerous traps (thrombolysis, PCI)",
+    "Explanation addresses every option accurately"
+   ],
+   "suggestion": "Optionally rewrite the lead-in as a full question ('Which of the following is the most appropriate definitive management?') and add one or two exam findings (e.g., an inter-arm BP difference or a diastolic murmur) to make the vignette fuller."
+  }
+ },
  "ai-mcq-3a145bf8": {
   "hash": "be827473",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -5787,6 +6132,49 @@
     "Clear explanation that covers every option"
    ],
    "suggestion": "Optionally make the options equal in length, for example by adding a second detail to some distractors or shortening D, so the compound key does not stand out."
+  }
+ },
+ "ai-mcq-3c30868f": {
+  "hash": "2056f132",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:58:31.418Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "Gram-negative intracellular diplococci mean gonococcal urethritis, which needs IM ceftriaxone with chlamydia coverage; E is the only option that includes ceftriaxone (current CDC guidance prefers adding doxycycline, with azithromycin as an alternative)."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "Gonococcal urethritis needs ceftriaxone plus chlamydia coverage; ceftriaxone with azithromycin is the only listed option that does both, although current CDC guidance prefers doxycycline as the partner drug."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Lead-in is a sentence fragment ('Most appropriate treatment?')",
+    "Explanation cites only Australian guidance; does not note the 2020 CDC shift to ceftriaxone monotherapy plus doxycycline"
+   ],
+   "topic": "Sexual Health",
+   "verdict": "accept",
+   "reasons": [
+    "Key is the best option under both the Australian and the US guidelines",
+    "Plausible, homogeneous distractors that test common resistance pitfalls",
+    "Clinically relevant diagnosis-to-management item"
+   ],
+   "suggestion": "Rewrite the lead-in as a full question ('Which of the following is the most appropriate pharmacotherapy?'). Add a line to the explanation saying the CDC (2020) recommends ceftriaxone 500 mg IM alone, plus doxycycline if chlamydia has not been excluded."
   }
  },
  "ai-mcq-3cdb17b7": {
@@ -9475,6 +9863,91 @@
    }
   }
  },
+ "ai-mcq-5ac61645": {
+  "hash": "727d55d8",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:58:20.392Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Atrial fibrillation is the most common complication after CABG, usually starting on days 2–3, and his age, COPD and dilated left atrium are classic risk factors."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Atrial fibrillation is the most common complication after CABG and usually starts on days 2–3; older age, COPD and a dilated left atrium are classic risk factors."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (a dilated left atrium points straight to AF)",
+    "tests recall of complication frequency more than applied reasoning"
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: post-operative AF is the most common complication after CABG and peaks on days 2–4",
+    "The distractors are all real post-CABG complications of the same kind, and each is clearly less common",
+    "The explanation is accurate and covers practical prevention"
+   ],
+   "suggestion": "To make it harder, you could drop the dilated left atrium clue or rewrite it as a next-step question, for example a prophylaxis or monitoring decision. This is optional."
+  },
+  "second": {
+   "hash": "727d55d8",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:01:18.363Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.95,
+     "reason": "Atrial fibrillation after cardiac surgery is the most common complication of CABG, peaks on days 2–3, and is made more likely by older age, COPD and a dilated left atrium."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.95,
+     "reason": "Atrial fibrillation after surgery is the most common complication after CABG, affecting about 20–40% of patients and peaking on days 2–3; older age, COPD and a dilated left atrium are all known risk factors."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Stem risk factors (COPD, dilated left atrium) strongly cue the answer"
+    ],
+    "topic": "Cardiothoracic Surgery",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct: post-operative AF is the most common complication after CABG and peaks on days 2-4",
+     "Distractors are the same kind of option and are plausible complications after cardiac surgery",
+     "Explanation is accurate, covers every option and includes practical prevention steps"
+    ],
+    "suggestion": "Optionally, raise the level of reasoning by asking for the next step in management once he develops palpitations with an irregular rhythm on day 3."
+   }
+  }
+ },
  "ai-mcq-5b2dbc65": {
   "hash": "21723466",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -9604,6 +10077,50 @@
     "Clinically important decision about discharge timing"
    ],
    "suggestion": "Write a full lead-in (\"Which of the following is the most appropriate next step in management?\"), add basic vital signs, and word option D as \"Observe in the department until at least 3 hours after adrenaline\"."
+  }
+ },
+ "ai-mcq-5b9c28e4": {
+  "hash": "dd78db2c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:58:28.386Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "Painful vesicles that become multiple shallow, tender ulcers with tender inguinal lymph nodes point to genital herpes, and a PCR swab of the lesion is the most sensitive and specific test to confirm it, better than serology or a Tzanck smear."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "Painful blisters that have turned into several shallow, tender ulcers, with tender inguinal lymph nodes, point to genital herpes, and a PCR swab of the lesion is the most sensitive and specific test to confirm it (it beats a Tzanck smear, which can't tell HSV from VZV, and serology, which doesn't co"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation wrongly says chlamydia does not cause genital ulcers (LGV serovars L1-L3 do)",
+    "Awkward lead-in 'most likely confirms'",
+    "Option E is weak and easy to rule out"
+   ],
+   "topic": "Sexual Health",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and matches current guidelines",
+    "Explanation contains a factual error about chlamydia and LGV",
+    "Lead-in wording is awkward"
+   ],
+   "suggestion": "Change the lead-in to 'Which of the following is the most appropriate test to confirm the diagnosis?'. In the explanation for E, say that urine NAAT does not test the ulcer and that LGV is a rare exception."
   }
  },
  "ai-mcq-5c1577b8": {
@@ -10218,6 +10735,49 @@
     "Explanation is clear and addresses every distractor"
    ],
    "suggestion": "To make it harder, consider removing the echo or the V4R finding so the student has to infer RV involvement from the raised JVP, clear lungs and response to GTN."
+  }
+ },
+ "ai-mcq-61c5cc38": {
+  "hash": "11509505",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:58:43.014Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "This is anticholinergic delirium from oxybutynin with no other cause found on workup, so the right management is to stop the drug rather than switch to another antimuscarinic or add an antipsychotic."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "This looks like anticholinergic-induced delirium: the confusion and inattention fluctuate, they started right after oxybutynin was begun, and the workup is normal, so the first step is to stop the drug that caused it."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (the stem states the timing link to oxybutynin outright)",
+    "lead-in is a sentence fragment rather than a complete question"
+   ],
+   "topic": "Geriatrics",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: when a drug causes delirium, the first step is to stop the drug",
+    "The distractors are the same kind of thing as the key and plausible, especially switching to solifenacin",
+    "Tests a common, high-yield principle of prescribing for older patients"
+   ],
+   "suggestion": "You could make it a little harder by listing her medicines (with oxybutynin among them) and giving the start date, so the student has to spot the culprit, rather than saying outright that the confusion began after oxybutynin. Also make the lead-in a full question, such as \"Which of the following is the most appropriate next step in management?\""
   }
  },
  "ai-mcq-62b29322": {
@@ -12118,6 +12678,49 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-7425e1c6": {
+  "hash": "36b87250",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:58:50.895Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "Fever and pleuritic chest pain that eases when leaning forward, starting weeks after the pericardium was opened, plus widespread concave ST elevation with PR depression, point to pericarditis from postpericardiotomy syndrome."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "Fever and pleuritic chest pain that eases on leaning forward, plus widespread concave ST elevation with PR depression, starting weeks after the pericardium was opened, is classic postpericardiotomy syndrome."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Very terse stem without vitals, exam findings or a full lead-in sentence",
+    "Textbook pericarditis features make the item easy (recall-level)"
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct and clearly best",
+    "Distractors are homogeneous, plausible post-CABG complications",
+    "Explanation addresses each option accurately"
+   ],
+   "suggestion": "Add vitals, a pericardial friction rub and a full lead-in (\"Which of the following is the most likely diagnosis?\"). State treatment as NSAID plus colchicine."
+  }
+ },
  "ai-mcq-747f25fe": {
   "hash": "408e87dd",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -12856,6 +13459,49 @@
    }
   }
  },
+ "ai-mcq-7b88e568": {
+  "hash": "0453e1bf",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:58:56.030Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "HBsAg negative with positive anti-HBc and protective anti-HBs means immunity from a past natural infection that has cleared; vaccination gives anti-HBs alone."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "A negative HBsAg with positive anti-HBc and anti-HBs means he had a natural infection that has resolved and left him immune; a vaccine alone would not produce anti-HBc."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Minimal vignette; tests serology pattern recognition more than clinical application",
+    "'Recalls no vaccination' mildly cues away from option A"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "accept",
+   "reasons": [
+    "Key is unambiguously correct: anti-HBc+, HBsAg−, anti-HBs ≥10 = resolved infection",
+    "Distractors are the standard, homogeneous serology categories",
+    "Explanation is accurate, addresses each option, and adds the reactivation point"
+   ],
+   "suggestion": "Optionally recast as a next-step question (e.g., whether he needs vaccination) or add brief clinical context to raise it to an application-level item."
+  }
+ },
  "ai-mcq-7bce8cdf": {
   "hash": "4d94be52",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -13275,6 +13921,49 @@
     "The explanation is accurate and covers every distractor"
    ],
    "suggestion": "Optionally, write the lead-in as a full question (\"Which of the following is the most appropriate next investigation?\") and add brief examination findings."
+  }
+ },
+ "ai-mcq-8096ab86": {
+  "hash": "066a7211",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:59:10.822Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "A patient with suspected high-risk PE who is in shock and too unstable for CT should have bedside echocardiography to look for RV dysfunction, which supports immediate thrombolysis."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "Suspected high-risk PE with shock and a raised JVP: guidelines say to get a bedside echo for RV dysfunction, which justifies thrombolysis, rather than moving an unstable patient to CTPA."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Minor cue: 'Bedside' in option D signals suitability for an unstable patient",
+    "Telegraphic stem lacking heart rate and a complete-sentence lead-in"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches ESC 2019 algorithm for suspected high-risk PE in an unstable patient",
+    "Homogeneous, plausible distractors with CTPA as a strong lure",
+    "Clear explanation addressing each option"
+   ],
+   "suggestion": "Optionally add heart rate and phrase the lead-in as a full question; consider 'Transthoracic echocardiography' instead of 'Bedside echocardiography' to remove the slight cue."
   }
  },
  "ai-mcq-81590e31": {
@@ -15040,6 +15729,92 @@
      "The explanation teaches the right next steps (child protection report, eye exam, skeletal survey). Its one weakness is a small overstatement about dating the bleeds."
     ],
     "suggestion": "Change \"That means repeated injury\" to \"suggests injuries possibly of different ages; mixed density alone cannot reliably date bleeds\". Optionally add head circumference or a bruise finding to the stem so it reads more like a full vignette."
+   }
+  }
+ },
+ "ai-mcq-97c5a320": {
+  "hash": "3e0d9353",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:59:10.106Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "Having had PID more than once scars and damages the fallopian tubes, which slows the fertilised egg's passage and greatly raises the risk of ectopic (usually tubal) pregnancy, even when the pelvic examination is normal."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "Having had pelvic inflammatory disease more than once damages the fallopian tubes (scarring and loss of the cilia that move the egg), so ectopic pregnancy is her most increased risk, even though her pelvic examination today is normal."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key is the only early-pregnancy/tubal option; the other four are all placental or late-pregnancy conditions, so a test-w",
+    "Low difficulty: the PID-to-ectopic link is a classic one-step association"
+   ],
+   "topic": "Obstetrics",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: prior PID, especially repeated episodes, is a major risk factor for tubal ectopic pregnancy",
+    "The stem is clear, the options are homogeneous and none is a second defensible answer",
+    "The explanation is accurate, rules out each distractor, and gives practical counselling advice"
+   ],
+   "suggestion": "If you want it harder, add a distractor with a plausible link to PID or early pregnancy, such as miscarriage or tubal-factor infertility needing IVF (which in turn raises the risk of placenta praevia), so students have to weigh the options rather than just recognise the association."
+  },
+  "second": {
+   "hash": "3e0d9353",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:01:36.272Z",
+   "solves": [
+    {
+     "answer": 1,
+     "confidence": 0.97,
+     "reason": "Repeated chlamydial PID damages the fallopian tubes (scarring, impaired ciliary transport), so her risk of ectopic pregnancy goes up a lot, and each extra episode raises it further."
+    },
+    {
+     "answer": 1,
+     "confidence": 0.97,
+     "reason": "Having had pelvic inflammatory disease more than once leaves scarring and damage to the lining of the fallopian tubes, which greatly raises the risk of ectopic pregnancy, even when the pelvic exam is normal."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Distractors are all placental or later-pregnancy conditions, while the key is an early-pregnancy complication, so the op",
+     "Low difficulty: a classic recall link (PID leads to ectopic pregnancy)"
+    ],
+    "topic": "Obstetrics",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct and clearly the best answer",
+     "Accurate explanation that addresses every distractor and gives safe counselling",
+     "Clinically relevant preconception counselling scenario"
+    ],
+    "suggestion": "Optionally, to make it harder: give a positive pregnancy test with mild pain and ask for the next step (for example, transvaginal ultrasound or serial beta-hCG). This would test applied management instead of recall of an association."
    }
   }
  },
@@ -16810,6 +17585,49 @@
    "suggestion": "You could add a few more vital signs (tachycardia, distress) to make the vignette fuller, but this is optional."
   }
  },
+ "ai-mcq-a59f80e2": {
+  "hash": "873be22c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:59:17.953Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "She has septic shock: her MAP is still below 65 mmHg after 30 mL/kg of fluid, and the crackles suggest fluid overload, so noradrenaline is the first-line vasopressor to bring her MAP up to 65 or above."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "She is in septic shock: MAP is still below 65 mmHg after 30 mL/kg of fluid, and the crackles suggest she can't take more fluid, so the next step is noradrenaline, the first-line vasopressor."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem is sparse (few vital signs, terse lead-in)",
+    "Bibasal crackles cue the student away from fluid options"
+   ],
+   "topic": "Critical Care Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches Surviving Sepsis 2021: noradrenaline is the first-line vasopressor for fluid-refractory septic shock",
+    "Distractors are plausible, homogeneous and clearly inferior",
+    "The explanation addresses each option accurately"
+   ],
+   "suggestion": "Optionally add heart rate, SpO2 and urine output to the stem, and soften the claim that 20% albumin is never a resuscitation fluid (ALBIOS used 20%)."
+  }
+ },
  "ai-mcq-a5aa4adc": {
   "hash": "832b4b01",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -18145,6 +18963,46 @@
    }
   }
  },
+ "ai-mcq-ac562e1e": {
+  "hash": "414130da",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:59:34.599Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Continuous waveform capnography is the most reliable bedside test for confirming the tube is in the trachea, and faint bilateral breath sounds with desaturation suggest esophageal intubation."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "Continuous waveform capnography is the most reliable way to confirm the tube is in the trachea rather than the esophagus; a chest X-ray only shows how deep the tube sits."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Critical Care Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Waveform capnography is the guideline-endorsed standard for confirming tracheal tube placement internationally",
+    "Options are homogeneous bedside tests; lung ultrasound is a plausible but clearly inferior adjunct",
+    "Explanation accurately addresses every option and teaches safe practice"
+   ],
+   "suggestion": "Optional: to test application rather than recall, ask for the next step when there is no capnography trace (remove the tube and reoxygenate)."
+  }
+ },
  "ai-mcq-ac800c76": {
   "hash": "5872cdfd",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -18714,6 +19572,97 @@
    "suggestion": "To make the item harder, drop one of the cues (for example, call the exposure an 'industrial chemical spill'). The explanation should also mention G6PD deficiency as a reason to avoid methylene blue."
   }
  },
+ "ai-mcq-b1a0f436": {
+  "hash": "758af834",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:59:37.261Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "An elderly woman who recently started an SSRI and now has euvolaemic hyponatraemia with inappropriately concentrated urine (480 mOsm/kg) most likely has SSRI-induced SIADH, although thyroid and adrenal function should still be checked to rule out those causes."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "An older patient who is euvolaemic, has low serum sodium and inappropriately concentrated urine (480 mOsm/kg) weeks after starting an SSRI most likely has SSRI-induced SIADH."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: stem says 'starting sertraline' and the key says 'SSRI-induced'",
+    "vignette gives the answer away",
+    "distractors A and B are directly excluded by stated data (euvolaemic, urine osm 480)",
+    "incomplete data: no serum osmolality or urine sodium to confirm hypotonic SIADH",
+    "explanation omits hypertonic saline for moderately severe symptoms (confusion) and limits on how fast sodium is correcte"
+   ],
+   "topic": "Nephrology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and is the clear single best answer",
+    "The drug cue and the option wording make the item trivially easy, and two distractors are excluded outright by the stem",
+    "Stem lacks serum osmolality and urine sodium, and the management advice is incomplete for a symptomatic patient"
+   ],
+   "suggestion": "Add serum osmolality (e.g. 255 mOsm/kg), urine sodium (e.g. 45 mmol/L) and normal TSH and cortisol. Change option C to 'Syndrome of inappropriate antidiuretic hormone secretion' and use euvolaemic competitors such as secondary adrenal insufficiency, beer potomania or reset osmostat. In the explanation, note that cautious hypertonic saline may be needed for confusion, along with limits on correction rate."
+  },
+  "second": {
+   "hash": "758af834",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:01:41.759Z",
+   "solves": [
+    {
+     "answer": 2,
+     "confidence": 0.95,
+     "reason": "An elderly woman who has low sodium and normal fluid status, with inappropriately concentrated urine (480 mOsm/kg) a few weeks after starting an SSRI, fits SSRI-induced SIADH; adrenal and thyroid causes should still be ruled out."
+    },
+    {
+     "answer": 2,
+     "confidence": 0.95,
+     "reason": "An elderly woman who starts an SSRI and then develops euvolaemic hyponatraemia with urine that is too concentrated for her low sodium (480 mOsm/kg) fits SSRI-induced SIADH; primary polydipsia would give dilute urine, and the other causes don't fit as well."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 5,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Key is the only option tied to the drug history, which makes it easy to spot",
+     "Stem leaves out serum osmolality, urine sodium and thyroid/cortisol results, which are needed to diagnose SIADH",
+     "Lead-in is a sentence fragment",
+     "Explanation's management (stop the drug, restrict fluids) leaves out urgent hypertonic saline, even though confusion is "
+    ],
+    "topic": "Endocrinology",
+    "verdict": "revise",
+    "reasons": [
+     "The key is correct: an SSRI in an older patient with euvolaemic hyponatraemia and concentrated urine points to SIADH",
+     "The diagnostic data are incomplete: serum osmolality, urine sodium, TSH and cortisol are missing",
+     "The drug clue gives the answer away, and the explanation's management is incomplete for a symptomatic patient"
+    ],
+    "suggestion": "Add serum osmolality (e.g. 255 mOsm/kg), urine sodium above 30 mmol/L and normal TSH and cortisol. Write the lead-in as a full question, and consider options that don't simply restate the history, such as 'syndrome of inappropriate antidiuretic hormone secretion' alongside 'reset osmostat'. In the explanation, say that moderate symptoms like confusion may need a cautious bolus of hypertonic saline, and that the sodium should rise by no more than 8–10 mmol/L in 24 hours."
+   }
+  }
+ },
  "ai-mcq-b1baa286": {
   "hash": "ae207510",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -19055,6 +20004,49 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-b398d084": {
+  "hash": "a2806f14",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:59:47.019Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Suspected acute HIV is best screened first with a fourth-generation HIV-1/2 Ag/Ab combination immunoassay, which detects p24 antigen before antibodies form, with HIV RNA testing added if results are negative or unclear."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Suspected acute HIV seroconversion is best screened with a fourth-generation Ag/Ab immunoassay, which detects p24 antigen before antibodies appear, with HIV RNA testing if it is negative and suspicion remains."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Lead-in is a sentence fragment rather than a complete question",
+    "Brief stem with minimal vignette detail (no vitals/exam beyond key findings)"
+   ],
+   "topic": "Sexual Health",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches current ASHM/CDC algorithm (4th-generation Ag/Ab test first)",
+    "Distractors are plausible, homogeneous tests with clear reasons they are inferior",
+    "Explanation teaches window-period concept and addresses each option"
+   ],
+   "suggestion": "Optionally rephrase the lead-in as a full question (\"Which of the following is the most appropriate initial investigation?\") and note that some rapid point-of-care tests also detect antigen."
+  }
+ },
  "ai-mcq-b3b38469": {
   "hash": "01a85156",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -19139,6 +20131,48 @@
     "Explanation is accurate, including the reason the Ottawa SAH rule does not apply"
    ],
    "suggestion": "Optionally add vital signs or a focal neurological finding to make the stem richer, and say in the explanation that a negative CT is followed by CT angiography or a delayed LP."
+  }
+ },
+ "ai-mcq-b6d07f71": {
+  "hash": "63e1377a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:00:01.749Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "In severe ARDS (P/F <150) despite lung-protective ventilation, prone positioning (PROSEVA) reduces mortality and should come before rescue therapies like ECMO."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "In severe ARDS (P/F <150) despite lung-protective ventilation and high PEEP, prone positioning for at least 16 h/day lowers mortality (PROSEVA), so it comes before ECMO; HFOV and inhaled NO give no survival benefit."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem omits plateau pressure and duration of current ventilator settings (PROSEVA proned after 12-24 h stabilisation)"
+   ],
+   "topic": "Critical Care Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is evidence-based (PROSEVA) and guideline-concordant",
+    "Distractors are homogeneous, plausible rescue therapies with clear reasons to reject",
+    "Explanation addresses each option accurately"
+   ],
+   "suggestion": "Optionally add plateau pressure and state that the hypoxaemia persists after 12-24 hours of optimised ventilation to mirror the PROSEVA entry criteria."
   }
  },
  "ai-mcq-b748662d": {
@@ -19443,6 +20477,93 @@
    "suggestion": "Optionally rephrase the lead-in as a full question ('Which of the following is the most appropriate next step in management?') and mention lid eversion to remove particulate cement in the explanation."
   }
  },
+ "ai-mcq-b8aaa6db": {
+  "hash": "591bb058",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:00:03.664Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "Severe chest pain after forceful vomiting, with air under the skin of the neck, suggests Boerhaave syndrome, and CT with water-soluble oral contrast is the preferred first test to confirm the tear and plan management."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "Retrosternal pain after forceful vomiting with neck crepitus suggests Boerhaave syndrome, and CT with water-soluble oral contrast is the preferred first test to confirm the tear and show air in the mediastinum."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Classic triad (vomiting, chest pain, cervical emphysema) gives the diagnosis away",
+    "Key does not say the contrast is water-soluble or that it is a CT of the chest, though the explanation does",
+    "Stem is terse: no blood pressure, no chest X-ray finding, no oxygen saturation"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "CT chest with water-soluble oral contrast is the accepted first test for suspected Boerhaave syndrome",
+    "Distractors are the same kind of thing as the key, and the explanation clearly says why each is wrong",
+    "Only small wording problems, none of which make the item wrong or unsafe"
+   ],
+   "suggestion": "Change option B to \"CT chest with water-soluble oral contrast\" and add blood pressure and oxygen saturation to the stem. A chest X-ray showing pneumomediastinum could also be added to make the vignette fuller."
+  },
+  "second": {
+   "hash": "591bb058",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:01:49.113Z",
+   "solves": [
+    {
+     "answer": 1,
+     "confidence": 0.88,
+     "reason": "Suspected Boerhaave syndrome (vomiting, retrosternal pain, subcutaneous emphysema) is best confirmed by CT chest with water-soluble oral contrast, which shows pneumomediastinum and contrast extravasation."
+    },
+    {
+     "answer": 1,
+     "confidence": 0.85,
+     "reason": "Suspected Boerhaave syndrome (retrosternal pain after vomiting, fast heart rate, neck crepitus) is best confirmed with CT using water-soluble oral contrast; barium and endoscopy carry risks."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "classic triad makes diagnosis easy (vomiting plus neck crepitus)",
+     "option B does not say which oral contrast (water-soluble)"
+    ],
+    "topic": "Gastrointestinal Surgery",
+    "verdict": "accept",
+    "reasons": [
+     "Key matches current practice for suspected Boerhaave syndrome",
+     "Plausible, homogeneous investigation options with clear rationales",
+     "Explanation teaches why barium and endoscopy are avoided"
+    ],
+    "suggestion": "Write option B as 'CT chest with water-soluble oral contrast'. Optionally add a water-soluble contrast swallow as a harder distractor to test the CT-first preference."
+   }
+  }
+ },
  "ai-mcq-b95916fc": {
   "hash": "c06cc43b",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -19697,6 +20818,49 @@
     "The explanation is accurate and current, and it covers every option."
    ],
    "suggestion": "Optionally add 'no blood in stool' to the stem so it matches the explanation for option C."
+  }
+ },
+ "ai-mcq-b9f03ab0": {
+  "hash": "d4d839a0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:00:05.234Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Falls when getting up, with light-headedness beforehand, starting soon after tamsulosin (an alpha-blocker) point to orthostatic hypotension, and lying and standing BP is the simple first test to confirm it."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Falls with light-headedness on getting out of bed soon after starting tamsulosin, with a normal neurological exam, suggest drug-induced orthostatic hypotension, and lying and standing BP is the first bedside test to confirm it."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette strongly cues the answer (new alpha-blocker plus postural symptoms)",
+    "stem is sparse, with no vital signs or cardiovascular examination"
+   ],
+   "topic": "Geriatrics",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: lying and standing BP is the right first test for suspected orthostatic hypotension caused by a drug",
+    "The distractors are the same kind of thing as the key (all investigations) and are plausible next steps for falls or syncope",
+    "The explanation is accurate, gives the standard diagnostic thresholds and deals with each distractor"
+   ],
+   "suggestion": "You could make it harder by adding vital signs, a normal cardiac examination and a second possible cause, such as a history of palpitations, so the clue isn't so obvious."
   }
  },
  "ai-mcq-ba226872": {
@@ -22212,6 +23376,93 @@
    "suggestion": "Relabel the 'A: Correct' line as B. Add a line for A saying that CSF culture should still be sent for susceptibilities but is unlikely to grow after benzylpenicillin given 4 hours earlier. Put a line break before the lead-in question."
   }
  },
+ "ai-mcq-cf405298": {
+  "hash": "79e18006",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:00:31.118Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "This is a mixed metabolic and respiratory acidosis: low HCO3 with high lactate shows lactic acidosis, and a PaCO2 of 52 instead of the expected 30–34 (Winter's formula) shows a respiratory acidosis from the patient tiring."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "Winter's formula predicts a PaCO2 of about 32 ± 2 mmHg for a bicarbonate of 16, so the measured 52 mmHg shows a respiratory acidosis on top of the lactic metabolic acidosis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option A is weak: 'compensated' contradicts a pH of 7.12",
+    "Minor cue in stem ('tiring') hints at the respiratory component"
+   ],
+   "topic": "Critical Care Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: by Winter's formula the expected PaCO2 is 32 ± 2, but it is 52, so a respiratory acidosis is also present",
+    "Applied ABG interpretation in a deteriorating patient, a core Step 2 CK skill",
+    "Clear explanation that covers every option and links to management"
+   ],
+   "suggestion": "In option C's explanation, the expected acute HCO3 is about 25 mmol/L (1 per 10 mmHg rise from 40), not 26. Option A could be replaced with a more plausible distractor such as 'Metabolic acidosis with appropriate respiratory compensation'."
+  },
+  "second": {
+   "hash": "79e18006",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:02:10.682Z",
+   "solves": [
+    {
+     "answer": 1,
+     "confidence": 0.97,
+     "reason": "This is a lactic metabolic acidosis (HCO3 16, lactate 6), and the PaCO2 of 52 is far above the Winter's expected 32±2, so there is also a respiratory acidosis from the patient tiring."
+    },
+    {
+     "answer": 1,
+     "confidence": 0.97,
+     "reason": "Winter's formula predicts a PaCO2 of about 32 ± 2 for an HCO3 of 16, so the actual PaCO2 of 52 shows a respiratory acidosis from the tiring patient on top of the lactic metabolic acidosis."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Option A ('compensated') is implausible with pH 7.12",
+     "Option E is eliminated at once because PaCO2 is high",
+     "'Drowsy and tiring' in the stem cues the respiratory component"
+    ],
+    "topic": "Critical Care Medicine",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct: Winter's formula predicts a PaCO2 of about 32 mmHg, so 52 mmHg means there is also a respiratory acidosis",
+     "Explanation is accurate and goes through every distractor",
+     "Applied acid-base interpretation in a sick patient; could be pushed further towards management"
+    ],
+    "suggestion": "To strengthen it, ask for the most appropriate next step (urgent ventilatory support) using the same gas, or replace option A with 'metabolic acidosis with appropriate respiratory compensation'."
+   }
+  }
+ },
  "ai-mcq-cf9059d8": {
   "hash": "fb70d1b2",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -23886,6 +25137,49 @@
    "suggestion": "In the explanation for B, replace 'could make his dehydration worse' with a point that fits a well-hydrated patient, such as 'is unnecessary and burdensome when glucosuria already explains the polyuria'."
   }
  },
+ "ai-mcq-e0d77fa8": {
+  "hash": "39144b2d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:00:27.717Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "A painless, indurated chancre with positive treponemal tests and a reactive RPR points to primary syphilis, and a single IM dose of benzathine penicillin G (2.4 million units) is the first-line treatment."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "A painless, hard (indurated) chancre with positive treponemal tests (EIA, TPPA) and a reactive RPR points to primary syphilis, and the first-line treatment is a single IM dose of benzathine penicillin G 2.4 million units."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key option lacks dose/regimen detail while other options specify duration (inconsistent option format)",
+    "Doxycycline distractor is wrong only because of its duration (7 vs 14 days)"
+   ],
+   "topic": "Sexual Health",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct and agrees with international guidelines for primary syphilis",
+    "Homogeneous, plausible distractors with a clear single best answer",
+    "Explanation accurately teaches why the key is right and each distractor is wrong"
+   ],
+   "suggestion": "State option C as 'Benzathine benzylpenicillin 2.4 million units IM, single dose' so it matches the other options; optionally add an exam finding (e.g. painless inguinal lymphadenopathy) to fill out the vignette."
+  }
+ },
  "ai-mcq-e2e442b1": {
   "hash": "4152c8ae",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -25085,6 +26379,93 @@
      "Explanation is accurate and covers every option"
     ],
     "suggestion": "Optionally state the setting (e.g. \"His mother calls the clinic\" or \"He is brought to the emergency department\") and write the lead-in as a full question. Swapping in stronger distractors such as \"store in water\" or \"store dry in a tissue\" would also help."
+   }
+  }
+ },
+ "ai-mcq-eb4e07f1": {
+  "hash": "78f981c8",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:00:29.083Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "CDC guidelines recommend doxycycline for 7 days followed by moxifloxacin 400 mg daily for 7 days for macrolide-resistant Mycoplasma genitalium."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "For macrolide-resistant Mycoplasma genitalium, CDC guidelines recommend 7 days of doxycycline to lower the organism load, then 7 days of moxifloxacin 400 mg daily."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Ceftriaxone and metronidazole are weak distractors because the stem already rules them out (negative gonorrhoea test; ma",
+    "Stem is brief and leans toward recall of a regimen rather than integrated clinical reasoning"
+   ],
+   "topic": "Sexual Health",
+   "verdict": "accept",
+   "reasons": [
+    "The key matches both the Australian and the CDC resistance-guided regimen: doxycycline, then moxifloxacin for macrolide-resistant infection",
+    "Only one option is clearly best, and the explanation covers every distractor accurately",
+    "Tests a management decision that matters in practice: using the resistance result to choose treatment"
+   ],
+   "suggestion": "Optionally, swap ceftriaxone or metronidazole for a more tempting choice, such as minocycline or a longer doxycycline course, to make the distractors stronger."
+  },
+  "second": {
+   "hash": "78f981c8",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:02:04.541Z",
+   "solves": [
+    {
+     "answer": 1,
+     "confidence": 0.95,
+     "reason": "For macrolide-resistant M. genitalium, CDC recommends 7 days of doxycycline followed by 7 days of moxifloxacin 400 mg daily."
+    },
+    {
+     "answer": 1,
+     "confidence": 0.95,
+     "reason": "For macrolide-resistant Mycoplasma genitalium, CDC recommends 7 days of doxycycline to lower the bacterial load, then 7 days of moxifloxacin 400 mg daily."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Ceftriaxone and metronidazole are weak distractors because the stem rules out gonorrhoea and they have no known activity",
+     "Pristinamycin is region-specific: it is used in Australia and Europe but is unavailable in the US",
+     "Minimal vignette with no examination findings"
+    ],
+    "topic": "Sexual Health",
+    "verdict": "accept",
+    "reasons": [
+     "The key matches Australian guidance and CDC 2021 guidance: doxycycline followed by moxifloxacin for macrolide-resistant M. genitalium",
+     "The lead-in asks the student to apply a resistance result to a patient's treatment, which is clinically relevant",
+     "The explanation is accurate and addresses each distractor"
+    ],
+    "suggestion": "You could replace metronidazole with a more tempting choice, such as extended-course doxycycline or minocycline, so that all distractors are plausible."
    }
   }
  },
@@ -26471,6 +27852,49 @@
    }
   }
  },
+ "ai-mcq-f3ef2b00": {
+  "hash": "55dd4ae1",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:00:53.546Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "Tearing chest pain radiating to the back with an inter-arm BP difference over 20 mmHg in a stable hypertensive patient suggests acute aortic dissection, and CT aortic angiography is the first-line diagnostic test."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Tearing chest pain that spreads to the back, a blood pressure gap of more than 20 mmHg between the arms and a normal ECG in a man with hypertension point to acute aortic dissection, and CT aortic angiography is the quickest, most widely available definitive test for a patient who is stable."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette is a classic textbook picture and gives the diagnosis away",
+    "stem does not state haemodynamic stability explicitly, though the explanation relies on it"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: CT aortic angiography is the first-line test for suspected dissection in a stable patient",
+    "Distractors are a plausible, uniform set of chest pain tests",
+    "Explanation is accurate and covers each option"
+   ],
+   "suggestion": "Optionally add a pulse rate and a note that he is alert and well perfused, so stability is stated rather than inferred."
+  }
+ },
  "ai-mcq-f5055925": {
   "hash": "63267d4c",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -26687,6 +28111,46 @@
     ],
     "suggestion": "Give the age in hours, gestation, risk factors and supporting results (e.g. blood groups/DAT), and let the student apply the nomogram instead of saying the level is above the phototherapy line. Consider making the case borderline near the escalation threshold so that intensive phototherapy, IVIG and exchange become real choices."
    }
+  }
+ },
+ "ai-mcq-f7c8182f": {
+  "hash": "2f05e8d8",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:00:53.096Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "A suspected occult hip fracture with normal X-rays in an elderly patient who can't bear weight should be imaged with MRI, the most sensitive and specific test, so management isn't delayed."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "When an elderly patient can't bear weight after a fall and X-rays are negative, MRI is the best test for finding an occult hip fracture."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Orthopaedics",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches the ANZ and NICE guidance: MRI first for a suspected occult hip fracture",
+    "Options are all tests and each is a plausible mistake",
+    "Explanation is accurate and covers every distractor"
+   ],
+   "suggestion": ""
   }
  },
  "ai-mcq-f7cd1d48": {
@@ -27738,6 +29202,48 @@
     ],
     "suggestion": "To raise its Step 2 CK value, ask for the best next step in management (LNG-IUS vs oral progestogen vs hysterectomy vs observation) rather than the mechanism, and name the LNG-IUS as first-line in the explanation."
    }
+  }
+ },
+ "ai-mcq-febdc050": {
+  "hash": "32e57602",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:00:53.655Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "An anticoagulated elderly patient with head trauma needs a non-contrast CT brain to rule out intracranial haemorrhage, whatever her GCS or neurological exam shows."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Head injury guidelines (NICE, Canadian CT Head Rule) say an anticoagulated patient aged 65 or older with any head trauma should have a non-contrast CT brain, even if the exam is normal; reversal is only given once a bleed is confirmed."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Very brief stem lacking time since injury, vitals, LOC/vomiting/headache details"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches NICE, NSW and Canadian CT Head Rule guidance: anticoagulation after head injury means CT",
+    "Distractors are plausible and of the same kind, including the reversal-before-imaging trap",
+    "Explanation addresses every option accurately"
+   ],
+   "suggestion": "Optionally add time since injury, vital signs and the absence of LOC/vomiting so the vignette is more realistic, and note in the explanation that anticoagulation alone is enough reason to scan."
   }
  },
  "headqa-2013-100": {

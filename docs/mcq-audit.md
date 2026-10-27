@@ -8,23 +8,23 @@ A question fits a format when reading it (4 words a second past the first 12, op
 
 | | Rapid 15 s | Standard 30 s | Long case 90 s | reading, median / 90th |
 |---|---|---|---|---|
-| pool | 285 of 701 (40.7%) | 371 of 701 (52.9%) | 696 of 701 (99.3%) | 17 / 45 s |
-| duel pack | 839 of 2229 (37.6%) | 1675 of 2229 (75.1%) | 2228 of 2229 (100%) | 13 / 30 s |
+| pool | 311 of 727 (42.8%) | 397 of 727 (54.6%) | 722 of 727 (99.3%) | 15 / 45 s |
+| duel pack | 865 of 2255 (38.4%) | 1701 of 2255 (75.4%) | 2254 of 2255 (100%) | 13 / 29 s |
 
-- **Rapid (15 s)**: ai 623, open-exam 207, amsa 9. Thin (under 10 fitting) in 5 of 45 topics: Cardiothoracic Surgery, Critical Care Medicine, Geriatrics, Oncology, Sexual Health.
-- **Standard (30 s)**: ai 1064, open-exam 546, usmle-resource 7, amsa 58. Thin (under 10 fitting) in 3 of 45 topics: Cardiothoracic Surgery, Critical Care Medicine, Sexual Health.
-- **Long case (90 s)**: ai 1418, open-exam 609, usmle-resource 143, amsa 58. Thin (under 10 fitting) in 2 of 45 topics: Cardiothoracic Surgery, Critical Care Medicine.
+- **Rapid (15 s)**: ai 649, open-exam 207, amsa 9. Thin (under 10 fitting) in 1 of 45 topics: Oncology.
+- **Standard (30 s)**: ai 1090, open-exam 546, usmle-resource 7, amsa 58. Every topic can deal 10.
+- **Long case (90 s)**: ai 1444, open-exam 609, usmle-resource 143, amsa 58. Every topic can deal 10.
 
 ## Every question in the duel, by its categories (mcq/taxonomy.mjs)
 
-2229 questions; every one fully categorised (source, origin, credit, specialty, kind, year, difficulty; `npm test` fails on any gap).
+2255 questions; every one fully categorised (source, origin, credit, specialty, kind, year, difficulty; `npm test` fails on any gap).
 
-- **Source**: ai 1418, open-exam 609, usmle-resource 144, amsa 58
-- **Route**: open-exam 609, ai station 532, ai high-yield 523, ai pool 363, usmle-resource 144, amsa 58
-- **Kind**: clinical 1585, physio 337, anatomy 157, skills 150
-- **Year**: 1 179, 2 377, 3 916, 4 757
-- **Difficulty**: 1 422, 2 1489, 3 318
-- **Specialties**: 45; the five largest Gastroenterology 254, Cardiology 195, Neurology 183, Respiratory Medicine 167, Paediatrics 140; the five smallest Cardiothoracic Surgery 4, Critical Care Medicine 9, Medicolegal 10, OMS/Dental 12, Pathology 12
+- **Source**: ai 1444, open-exam 609, usmle-resource 144, amsa 58
+- **Route**: open-exam 609, ai station 532, ai high-yield 523, ai pool 389, usmle-resource 144, amsa 58
+- **Kind**: clinical 1611, physio 337, anatomy 157, skills 150
+- **Year**: 1 179, 2 377, 3 927, 4 772
+- **Difficulty**: 1 422, 2 1515, 3 318
+- **Specialties**: 45; the five largest Gastroenterology 254, Cardiology 195, Neurology 183, Respiratory Medicine 168, Paediatrics 140; the five smallest Medicolegal 10, Cardiothoracic Surgery 11, OMS/Dental 12, Pathology 12, Occupational/Environmental Medicine 12
 
 ## Cues and residual flaws in the duel, by route
 
@@ -33,7 +33,7 @@ The same checks the pool uses, run over every question the duel can deal, whiche
 | route | n | key is the longest option | chance | key position | checks firing (share of the route) |
 |---|---|---|---|---|---|
 | ai high-yield | 523 | 60.2% | 25% | A 357, B 89, C 53, D 24 | schema 100%, vignette 95.4%, stem-length 56.2%, longest-key 23.5% |
-| ai pool | 363 | 11% | 20% | A 78, B 74, C 67, D 70, E 74 | schema 100%, vignette 64.5%, absolute-terms 1.9%, clang 1.7% |
+| ai pool | 389 | 10.3% | 20% | A 80, B 80, C 74, D 74, E 81 | schema 100%, vignette 65.6%, clang 1.8%, absolute-terms 1.8% |
 | ai station | 532 | 50.9% | 25% | A 130, B 127, C 128, D 147 | schema 100%, vignette 98.9%, absolute-terms 11.1%, clang 7.9% |
 | amsa | 58 | 27.6% | 25% | A 16, B 17, C 12, D 13 | schema 100%, units 13.8%, longest-key 8.6%, vignette 6.9% |
 | open-exam | 609 | 30.5% | 24.5% | A 119, B 134, C 176, D 166, E 14 | schema 100%, vignette 79.3%, explanation 18.9%, cover-options 9.4% |
@@ -59,7 +59,7 @@ Where each route's candidates stopped (lib/mcq-select.mjs, the stages in order).
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | open-exam headqa | 786 | 0 | 0 | 0 | 133 | 434 | 0 | 99 | 120 | 27.9% | 15.3% |
 | usmle-resource medqa | 594 | 0 | 0 | 0 | 58 | 89 | 0 | 345 | 102 | 75.3% | 17.2% |
-| ai rapid | 308 | 0 | 0 | 4 | 3 | 41 | 7 | 0 | 253 | 85.5% | 82.1% |
+| ai rapid | 331 | 0 | 0 | 0 | 3 | 42 | 7 | 0 | 279 | 86.4% | 84.3% |
 | usmle-resource mmlu | 272 | 0 | 1 | 0 | 19 | 27 | 0 | 167 | 58 | 83% | 21.3% |
 | ai vignette | 159 | 0 | 0 | 0 | 9 | 24 | 0 | 16 | 110 | 79.2% | 69.2% |
 | amsa | 105 | 0 | 0 | 0 | 10 | 37 | 0 | 0 | 58 | 55.2% | 55.2% |
@@ -68,7 +68,7 @@ Where each route's candidates stopped (lib/mcq-select.mjs, the stages in order).
 
 | kind | n | key is the longest option | chance | key position | checks still firing (share of the kind) |
 |---|---|---|---|---|---|
-| ai | 363 | 11% | 20% | A 78, B 74, C 67, D 70, E 74 | vignette 18.2%, absolute-terms 1.9%, clang 1.7%, units 1.1% |
+| ai | 389 | 10.3% | 20% | A 80, B 80, C 74, D 74, E 81 | vignette 18.5%, clang 1.8%, absolute-terms 1.8%, units 1% |
 | amsa | 58 | 27.6% | 25% | A 16, B 17, C 12, D 13 | units 13.8%, longest-key 8.6%, vignette 6.9%, clang 1.7% |
 | open-exam | 120 | 20% | 22.4% | A 22, B 28, C 32, D 23, E 15 | explanation 100%, vignette 53.3%, cover-options 12.5%, units 4.2% |
 | usmle-resource | 160 | 22.5% | 25% | A 41, B 39, C 29, D 51 | explanation 100%, cover-options 5.6%, vignette 5%, clang 1.9% |
@@ -82,7 +82,7 @@ Where each route's candidates stopped (lib/mcq-select.mjs, the stages in order).
 
 | kind | judged | verdicts | both solves agree | single best | distractors | relevance | accuracy | explanation |
 |---|---|---|---|---|---|---|---|---|
-| ai | 363 | accept 312, revise 51 | 100% | 5 | 4 | 5 | 5 | 5 |
+| ai | 389 | accept 336, revise 53 | 100% | 5 | 4 | 5 | 5 | 5 |
 | amsa | 58 | revise 58 | 100% | 5 | 2 | 3 | 4 | 2 |
 | open-exam | 120 | revise 120 | 100% | 4 | 3 | 4 | 4 | 0 |
 | usmle-resource | 160 | revise 155, accept 5 | 100% | 5 | 4 | 5 | 5 | 0 |

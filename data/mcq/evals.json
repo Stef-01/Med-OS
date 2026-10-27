@@ -327,7 +327,7 @@
    "passAsSelected": 0
   },
   "Generated (generate-mcq.mjs)": {
-   "n": 441,
+   "n": 464,
    "flaw": {
     "mean": 98.2,
     "p5": 94,
@@ -341,30 +341,30 @@
     "cover-options": 0,
     "all-none": 0,
     "negative-stem": 0,
-    "longest-key": 0.5,
+    "longest-key": 0.4,
     "grammar-cue": 0,
-    "convergence": 0.7,
-    "absolute-terms": 2.9,
+    "convergence": 0.6,
+    "absolute-terms": 2.8,
     "clang": 3.9,
     "duplicate-options": 0,
     "vignette": 21.3,
     "stem-length": 0,
     "units": 0.9
    },
-   "judged": 437,
+   "judged": 464,
    "quality": {
     "mean": 93.4,
     "p5": 85,
     "p10": 88,
     "p25": 91,
-    "p50": 94
+    "p50": 95
    },
-   "gatesPass": 98.6,
+   "gatesPass": 98.7,
    "solved2": 99.1,
-   "keyCorrect": 99.5,
-   "passBase": 98.4,
-   "passAi": 87,
-   "passAsSelected": 87
+   "keyCorrect": 99.6,
+   "passBase": 98.3,
+   "passAi": 87.1,
+   "passAsSelected": 87.1
   },
   "Open exam (HEAD-QA, Spanish MIR)": {
    "n": 786,
@@ -672,21 +672,20 @@
  },
  "pool": {
   "candidates": {
-   "ai": 467,
+   "ai": 490,
    "amsa": 105,
    "open-exam": 786,
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 363,
+   "ai": 389,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
   },
   "status": {
-   "pool": 701,
-   "rejected": 892,
-   "pending": 4,
+   "pool": 727,
+   "rejected": 893,
    "reserve": 627
   },
   "topics": {
@@ -699,6 +698,8 @@
    "Pathology": 6,
    "Trauma Surgery": 15,
    "Gastroenterology": 65,
+   "Sexual Health": 14,
+   "Cardiothoracic Surgery": 10,
    "Occupational/Environmental Medicine": 12,
    "Cardiology": 58,
    "Palliative Care": 8,
@@ -707,11 +708,11 @@
    "Otorhinolaryngology": 13,
    "Vascular Surgery": 9,
    "Infectious Diseases": 46,
+   "Respiratory Medicine": 36,
    "Rheumatology": 24,
    "Emergency Medicine": 31,
    "Urology": 10,
    "Professionalism": 11,
-   "Respiratory Medicine": 35,
    "Gastrointestinal Surgery": 10,
    "Neurology": 40,
    "Neonatology": 16,
@@ -721,20 +722,18 @@
    "Indigenous Health": 7,
    "General Practice": 14,
    "Addiction Medicine": 3,
+   "Geriatrics": 10,
    "Oncology": 2,
    "Immunology": 9,
-   "Cardiothoracic Surgery": 3,
+   "Critical Care Medicine": 6,
    "Plastic Surgery": 7,
    "Ophthalmology": 3,
-   "Sexual Health": 6,
    "Nephrology": 11,
    "Orthopaedics": 10,
    "Psychiatry": 13,
    "Dermatology": 3,
    "Public Health": 11,
-   "Geriatrics": 5,
-   "Toxicology": 4,
-   "Critical Care Medicine": 1
+   "Toxicology": 4
   },
   "positions": {
    "4": {
@@ -749,17 +748,17 @@
    },
    "5": {
     "counts": [
+     88,
+     95,
      86,
-     89,
-     79,
-     83,
-     89
+     87,
+     96
     ],
-    "n": 426,
-    "chi2": 0.85
+    "n": 452,
+    "chi2": 0.99
    }
   },
-  "topicCap": 106,
+  "topicCap": 110,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -781,12 +780,11 @@
     "bar": 89
    },
    "ai rapid": {
-    "n": 308,
-    "pool": 253,
+    "n": 331,
+    "pool": 279,
     "review": 3,
     "duplicate": 7,
-    "bar": 41,
-    "pending": 4
+    "bar": 42
    },
    "usmle-resource mmlu": {
     "n": 272,
