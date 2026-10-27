@@ -29,9 +29,9 @@
    "stem": "Harold, 72, has a 15 mm right subdural haematoma with 8 mm midline shift, and his GCS has fallen to 14. His last apixaban dose was at 08:00 today. CrCl is about 70 mL/min and INR is 1.2. Neurosurgical retrieval is being arranged. What is the most appropriate way to reverse his anticoagulation in this rural ED?",
    "options": [
     "Prothrombinex-VF 50 units/kg IV, with haematology advice",
-    "Vitamin K (phytomenadione) 10 mg IV",
-    "Idarucizumab 5 g IV",
-    "Fresh frozen plasma 15 mL/kg IV"
+    "Vitamin K (phytomenadione) 10 mg IV, repeated after 6 hours if the INR rises again",
+    "Idarucizumab 5 g IV, given as two 2.5 g infusions within 15 minutes of each other",
+    "Fresh frozen plasma 15 mL/kg IV, followed by cryoprecipitate if fibrinogen is low"
    ],
    "answer": 0,
    "why": "For a life-threatening bleed on a factor Xa inhibitor, give prothrombin complex concentrate (Prothrombinex-VF about 50 units/kg IV, or as per local protocol) now, with haematology advice. Use andexanet alfa where it is available and local protocol allows.",
@@ -40,16 +40,17 @@
     "Vitamin K reverses warfarin by restoring synthesis of vitamin K-dependent factors. It has no effect on apixaban, which inhibits factor Xa directly.",
     "Idarucizumab is a specific antidote for dabigatran, a direct thrombin inhibitor. It does not bind apixaban.",
     "FFP does not reliably reverse apixaban, takes time to thaw and needs a large volume. Concentrated factor replacement with Prothrombinex-VF is preferred."
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-amsa-429-physio",
    "cat": "physio",
    "stem": "Harold, 72, takes apixaban 5 mg twice daily. His last dose was at 08:00 and his CrCl is about 70 mL/min. Bloods at 13:25 show an INR of 1.2 and an APTT of 33 s. A colleague says the anticoagulant has probably worn off. Why do these results not exclude an apixaban effect?",
    "options": [
-    "Apixaban inhibits thrombin directly, which the INR and APTT do not measure",
-    "Apixaban blocks platelet aggregation, which clotting times do not reflect",
-    "Apixaban lowers vitamin K-dependent factors only after several days of use",
+    "Apixaban inhibits thrombin directly, an effect that the INR and APTT do not measure well",
+    "Apixaban blocks platelet aggregation, which standard clotting times do not reflect",
+    "Apixaban lowers vitamin K-dependent factors only after several days of regular use",
     "INR and APTT are insensitive to direct factor Xa inhibition at therapeutic levels"
    ],
    "answer": 3,
@@ -59,7 +60,8 @@
     "Apixaban is an anticoagulant, not an antiplatelet agent. It acts on factor Xa in the coagulation cascade, not on platelet aggregation.",
     "This describes warfarin. Apixaban works within hours of a dose and does not affect synthesis of clotting factors.",
     null
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-amsa-429-anatomy",

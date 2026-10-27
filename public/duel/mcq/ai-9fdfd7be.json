@@ -9,7 +9,7 @@
    "cat": "skills",
    "stem": "You are resuscitating Jenny, 51, in day-surgery recovery 3 hours after a hysteroscopy and D&C for heavy irregular bleeding. She is pale and in pain, and you suspect bleeding inside her abdomen. She asks quietly, \"Did they find cancer? Is something wrong with me?\" Histology has not been reported. What is the best response?",
    "options": [
-    "\"No, the operation was recorded as uneventful, so cancer is very unlikely.\"",
+    "\"No, the operation was recorded as uneventful, so cancer is very unlikely at this stage.\"",
     "\"The tissue results aren't back yet; right now I'm treating bleeding inside your tummy.\"",
     "\"Your scan showed a thick womb lining, so cancer is likely, but we will know soon.\"",
     "\"That's for your surgeon to discuss with you at your follow-up clinic appointment.\""
@@ -21,7 +21,8 @@
     null,
     "This guesses at a diagnosis before histology, causes needless distress, and doesn't address the emergency happening right now.",
     "This brushes off a frightened patient and says nothing about the urgent problem that is being treated."
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-ai-9fdfd7be-clinical",
@@ -47,8 +48,8 @@
    "cat": "physio",
    "stem": "Part 2 asks about Jenny's risk of uterine cancer. She is 51, nulliparous, weighs 108 kg, has type 2 diabetes and has had irregular, heavy cycles for 2 years. Her pre-operative ultrasound showed a 14 mm endometrium. What is the main mechanism by which her obesity raises her risk of endometrial hyperplasia and cancer?",
    "options": [
-    "Adipose aromatase converts androgens to oestrone, unopposed by progesterone in anovulation",
-    "Hyperinsulinaemia raises SHBG, increasing the free oestradiol reaching the endometrium",
+    "Adipose aromatase makes oestrone from androgens, unopposed by progesterone in anovulation",
+    "Hyperinsulinaemia raises SHBG, increasing the free oestradiol reaching the uterine lining",
     "Persistent corpus luteum secretes excess progesterone, driving endometrial proliferation",
     "Raised FSH in the perimenopause directly stimulates endometrial gland proliferation"
    ],
@@ -59,14 +60,15 @@
     "Hyperinsulinaemia lowers SHBG, not raises it; that is how it increases free oestrogen.",
     "Progesterone protects the endometrium; she is likely anovulatory, so she has too little progesterone, not too much.",
     "FSH acts on ovarian follicles, not directly on the endometrium."
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-ai-9fdfd7be-anatomy",
    "cat": "anatomy",
    "stem": "Jenny, 51, is 3 hours after a D&C in which the curette probably perforated the uterus. She has lower abdominal guarding, intra-abdominal bleeding and new pain at the tip of her right shoulder, which hurts more when she breathes deeply. Which nerve pathway best explains her shoulder-tip pain?",
    "options": [
-    "Uterine visceral afferents entering the cord at T10–L1, referred to the shoulder",
+    "Uterine visceral afferents entering the cord at T10–L1, referred to the shoulder tip",
     "Lower intercostal nerves supplying the peripheral diaphragmatic peritoneum",
     "Vagal afferents from the liver capsule, referred via the cervical plexus",
     "Phrenic nerve (C3–C5) from diaphragmatic peritoneum, referred to the C4 dermatome"
@@ -78,7 +80,8 @@
     "The lower intercostal nerves supply the peripheral diaphragm and refer pain to the lower chest and abdominal wall, not the shoulder.",
     "Liver capsule stretch causes right upper quadrant pain; vagal afferents don't produce somatic referred pain to the shoulder.",
     null
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   }
  ]
 }

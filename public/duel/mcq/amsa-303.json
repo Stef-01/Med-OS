@@ -9,7 +9,7 @@
    "cat": "skills",
    "stem": "Rachel, a 28-year-old lawyer seen in general practice, has had 2 months of fatigue, pale foul-smelling diarrhoea, 3 kg of unintended weight loss and an itchy rash on both knees. Near the end of the history she asks, 'Could this all just be stress?' You have not yet examined her or ordered any tests. What is the best response?",
    "options": [
-    "\"It's probably burnout. Take a week off and we'll see if things settle.\"",
+    "\"It's probably burnout. Take two weeks off work and we'll see if things settle by then.\"",
     "\"Stress may play a part, but weight loss, pale stools and a rash need checking first.\"",
     "\"This isn't stress. I'm fairly sure you have coeliac disease.\"",
     "\"A psychologist referral would help us deal with the stress side first.\""
@@ -21,15 +21,16 @@
     null,
     "Naming a diagnosis before any examination or results is premature, and it may be wrong or frighten her.",
     "Sending her for psychological care before investigating red-flag physical symptoms delays the diagnosis."
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-amsa-303-clinical",
    "cat": "clinical",
    "stem": "Rachel, 28, has steatorrhoea, weight loss and a vesicular rash on her extensor knees. tTG-IgA is 128 U/mL (upper limit 7), total IgA is normal and DGP-IgG is positive. She is still eating gluten. In Australian adult practice, what is the next step to confirm the diagnosis?",
    "options": [
-    "Gastroscopy with multiple duodenal biopsies (including bulb) while still eating gluten",
-    "HLA-DQ2/DQ8 genotyping, then a gluten-free diet if either allele is present",
+    "Gastroscopy with duodenal biopsies (including bulb) while still eating gluten",
+    "HLA-DQ2/DQ8 genotyping, then start a gluten-free diet if either allele is present",
     "Start a gluten-free diet now and confirm with a falling tTG-IgA at 6 months",
     "Ileocolonoscopy with terminal ileal biopsies, followed by MR enterography"
    ],
@@ -40,17 +41,18 @@
     "HLA typing is useful when results are equivocal or the patient is already gluten-free. A negative result excludes coeliac disease, but a positive one cannot diagnose it, because about a third of the population carry these alleles.",
     "Australian guidance does not accept a no-biopsy diagnosis in adults, and starting the diet first would make a later biopsy unreliable.",
     "This is the workup for small-bowel Crohn's disease. It is kept for when duodenal histology is not typical, not used as the first step when coeliac serology is strongly positive."
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-amsa-303-physio",
    "cat": "physio",
    "stem": "Rachel's duodenal biopsy is expected to show villous atrophy, crypt hyperplasia and increased intraepithelial lymphocytes. Her tTG-IgA is 128 U/mL. Which mechanism best explains how dietary gluten damages her small bowel mucosa?",
    "options": [
-    "IgE on mucosal mast cells binds wheat protein, causing degranulation and oedema",
+    "IgE on mucosal mast cells binds wheat protein, causing degranulation and mucosal oedema",
     "Lack of a brush-border peptidase lets undigested gluten injure enterocytes directly",
     "Anti-gliadin IgA activates complement, causing vasculitis of the villous capillaries",
-    "tTG deamidates gliadin; HLA-DQ2/DQ8 presents it to CD4 T cells, driving mucosal injury"
+    "tTG deamidates gliadin; HLA-DQ2/DQ8 presents it to CD4 T cells, injuring mucosa"
    ],
    "answer": 3,
    "why": "Coeliac disease is a T-cell-mediated enteropathy. Tissue transglutaminase deamidates gliadin peptides, which then bind HLA-DQ2/DQ8 strongly and activate gluten-specific CD4 T cells, causing villous atrophy. tTG is also the autoantigen behind the tTG-IgA test.",
@@ -59,7 +61,8 @@
     "Coeliac disease is not an enzyme deficiency. Gluten resists digestion in everyone, and the damage depends on an immune response restricted by HLA-DQ2/DQ8.",
     "The antibodies are markers of the disease. The mucosal damage is driven by T cells, not by complement-mediated vasculitis.",
     null
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-amsa-303-anatomy",

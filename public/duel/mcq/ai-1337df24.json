@@ -9,10 +9,10 @@
    "cat": "skills",
    "stem": "You are seeing Noah, 18 days old, in general practice. He has been jaundiced since day 3, and now has pale putty-coloured stools and dark urine that stains the nappy. His parent Alex asks, \"Do we just need more sunshine?\" Which response is best?",
    "options": [
-    "\"A little sun is fine, but it won't fix the pale stools, so we'll test him as well.\"",
+    "\"A little sun is fine, but it won't fix the pale stools, so we'll test him as well soon.\"",
     "\"No: sun won't treat this jaundice and can burn him; his pale stools need checking today.\"",
     "\"Yes, a few minutes behind a window each morning safely lowers his bilirubin.\"",
-    "\"Sun helps breastmilk jaundice, so try it for a week and come back if he's still yellow.\""
+    "\"Sun helps breastmilk jaundice, so try it for a week and come back if he is still yellow.\""
    ],
    "answer": 1,
    "why": "Sunlight is not a treatment for newborn jaundice and is unsafe because of sunburn and overheating. Pale stools with dark urine point to conjugated (cholestatic) jaundice, which even phototherapy does not treat, so the answer is a clear no plus same-day assessment.",
@@ -21,7 +21,8 @@
     null,
     "Window sunlight is not a safe or reliable treatment, and phototherapy only lowers unconjugated bilirubin, which is not Noah's problem.",
     "Pale stools and dark urine rule out breastmilk jaundice, and waiting a week delays the diagnosis of biliary atresia, where early Kasai surgery gives better outcomes."
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-ai-1337df24-clinical",
@@ -29,7 +30,7 @@
    "stem": "Noah, 18 days old, arrives in the paediatric ED from his GP. He has acholic stools, dark urine and a firm liver. He had no vitamin K at birth, and on day 9 his cord stump bled for 10 to 15 minutes. Nothing is bleeding now, and coagulation studies have been sent. What is the most appropriate vitamin K treatment?",
    "options": [
     "Phytomenadione 1 mg by slow IV injection now, before the INR result returns",
-    "Phytomenadione 2 mg orally now, repeated at 4 weeks of age",
+    "Phytomenadione 2 mg orally now, repeated at 4 weeks and again at 12 weeks of age",
     "Phytomenadione 1 mg IM, given only once the INR comes back prolonged",
     "Fresh frozen plasma 10–15 mL/kg now, then vitamin K if bleeding starts"
    ],
@@ -40,14 +41,15 @@
     "The oral regimen is prophylaxis for a well baby. Absorption is unreliable in cholestasis, and it does not treat a deficiency that may already be there.",
     "Waiting for the INR delays treatment in a baby at risk of intracranial haemorrhage, and IM injection risks a haematoma if he is coagulopathic.",
     "FFP is kept for active, life-threatening bleeding alongside vitamin K. It is not first-line here, and vitamin K should not be held back until bleeding starts."
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-ai-1337df24-physio",
    "cat": "physio",
    "stem": "Noah, 18 days old, has conjugated jaundice with pale putty stools and probably has biliary atresia. He is exclusively breastfed and had no vitamin K prophylaxis. His liver is firm, 2 cm below the costal margin, and he is thriving. Which mechanism best explains why his cholestasis raises his risk of bleeding?",
    "options": [
-    "Hepatocyte failure reduces the liver's synthesis of fibrinogen and factor V",
+    "Hepatocyte failure reduces the liver's synthesis of fibrinogen and factor V over weeks",
     "Conjugated bilirubin in plasma directly inhibits platelet aggregation",
     "Portal hypertension causes hypersplenism, which consumes circulating platelets",
     "Absent bile salts impair vitamin K uptake, so II, VII, IX and X are not carboxylated"
@@ -59,7 +61,8 @@
     "Bilirubin does not meaningfully impair platelet function. The bleeding risk in cholestasis comes from deficiency of the vitamin K-dependent factors.",
     "Portal hypertension and hypersplenism develop months into untreated biliary atresia, not at 18 days of age.",
     null
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-ai-1337df24-anatomy",

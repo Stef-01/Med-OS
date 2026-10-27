@@ -9,10 +9,10 @@
    "cat": "skills",
    "stem": "Jaden, 45, is in a rural ED with 3 days of colicky central abdominal pain and bilious vomiting. She tells you she has not opened her bowels for 3 days. Which question best shows whether she has absolute constipation, which points to mechanical bowel obstruction?",
    "options": [
-    "Have you tried any laxatives or enemas for this?",
-    "Was your last bowel motion hard or painful to pass?",
+    "Have you tried any laxatives or enemas for this, and did they help at all?",
+    "Was your last bowel motion hard or painful to pass, and was there any blood?",
     "Have you been able to pass any wind from your back passage?",
-    "How often do you normally open your bowels each day?"
+    "How often do you normally open your bowels each day, and has that changed lately?"
    ],
    "answer": 2,
    "why": "Absolute constipation means no stool and no flatus. Not passing wind is what separates complete obstruction from simple constipation, and patients rarely mention it unless you ask directly.",
@@ -21,7 +21,8 @@
     "A hard last stool fits simple constipation and says nothing about whether the bowel is completely blocked.",
     null,
     "Her usual bowel habit gives you a baseline, but it cannot tell you whether gas is getting through now."
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-amsa-634-clinical",
@@ -29,9 +30,9 @@
    "stem": "Jaden, 45, has adhesive small bowel obstruction in a rural ED. She is nil by mouth, her creatinine is 102 umol/L (baseline 64) and she takes venlafaxine 75 mg daily. Her colicky pain is 8/10. Which analgesic is the most appropriate first choice?",
    "options": [
     "IV morphine in small increments (e.g. 2.5 mg), titrated to effect",
-    "IV tramadol 100 mg, repeated after 30 minutes if needed",
-    "IM pethidine 50 mg, repeated every 3 hours as needed",
-    "Oral ibuprofen 400 mg with oral paracetamol 1 g"
+    "IV tramadol 100 mg slowly over 5 minutes, repeated after 30 minutes if needed",
+    "IM pethidine 50 mg into the thigh, repeated every 3 hours as needed",
+    "Oral ibuprofen 400 mg with oral paracetamol 1 g, repeated every 6 hours as needed"
    ],
    "answer": 0,
    "why": "Small IV doses of morphine, titrated against her pain and sedation, give fast and controllable relief. It is safe with venlafaxine, and giving it does not mask the signs of peritonism.",
@@ -40,16 +41,17 @@
     "Tramadol is serotonergic, so combining it with venlafaxine risks serotonin toxicity. It also lowers the seizure threshold.",
     "Pethidine is serotonergic, which is a risk with venlafaxine. Its metabolite norpethidine builds up in AKI and causes neurotoxicity, and IM absorption is unreliable.",
     "She is nil by mouth and vomiting, so she cannot take oral drugs. NSAIDs would also worsen her prerenal AKI."
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-amsa-634-physio",
    "cat": "physio",
    "stem": "Jaden, 45, has vomited bile for 3 days from a small bowel obstruction. Venous gas: pH 7.46, HCO3 31 mmol/L. K 3.3 mmol/L, Cl 94 mmol/L, creatinine 102 umol/L (baseline 64), Hb up from 128 to 146 g/L. What is the main mechanism of her hypokalaemia?",
    "options": [
-    "Direct loss of potassium-rich fluid in the vomitus",
-    "Shift of potassium into cells driven by the alkalosis",
-    "Reduced dietary potassium intake while unable to eat",
+    "Direct loss of potassium-rich fluid in the vomitus over three days of vomiting",
+    "Shift of potassium into cells driven by the alkalosis and raised bicarbonate",
+    "Reduced dietary potassium intake while unable to eat or drink for three days",
     "Aldosterone-driven renal potassium excretion from volume depletion"
    ],
    "answer": 3,
@@ -59,7 +61,8 @@
     "Alkalosis does push some potassium into cells, but only a small amount, and it does not explain a true loss of body potassium.",
     "Three days without food lowers intake a little, but the kidneys normally conserve potassium, so this alone would not cause much hypokalaemia.",
     null
-   ]
+   ],
+   "rebalanced": "2026-10-27"
   },
   {
    "id": "osce-amsa-634-anatomy",

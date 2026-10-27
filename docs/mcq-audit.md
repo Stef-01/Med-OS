@@ -9,10 +9,10 @@ A question fits a format when reading it (4 words a second past the first 12, op
 | | Rapid 15 s | Standard 30 s | Long case 90 s | reading, median / 90th |
 |---|---|---|---|---|
 | pool | 313 of 729 (42.9%) | 399 of 729 (54.7%) | 724 of 729 (99.3%) | 15 / 45 s |
-| duel pack | 867 of 2257 (38.4%) | 1703 of 2257 (75.5%) | 2256 of 2257 (100%) | 13 / 29 s |
+| duel pack | 785 of 2257 (34.8%) | 1679 of 2257 (74.4%) | 2256 of 2257 (100%) | 13 / 29 s |
 
-- **Rapid (15 s)**: ai 651, open-exam 207, amsa 9. Every topic can deal 10.
-- **Standard (30 s)**: ai 1092, open-exam 546, usmle-resource 7, amsa 58. Every topic can deal 10.
+- **Rapid (15 s)**: ai 569, open-exam 207, amsa 9. Thin (under 10 fitting) in 10 of 45 topics: Addiction Medicine, Critical Care Medicine, Dermatology, Geriatrics, Immunology, Oncology, Pathology, Sexual Health, Trauma Surgery, Urology.
+- **Standard (30 s)**: ai 1068, open-exam 546, usmle-resource 7, amsa 58. Every topic can deal 10.
 - **Long case (90 s)**: ai 1446, open-exam 609, usmle-resource 143, amsa 58. Every topic can deal 10.
 
 ## Every question in the duel, by its categories (mcq/taxonomy.mjs)
@@ -34,9 +34,9 @@ The same checks the pool uses, run over every question the duel can deal, whiche
 
 | route | n | key is the longest option | chance | key position | checks firing (share of the route) |
 |---|---|---|---|---|---|
-| ai high-yield | 523 | 60.2% | 25% | A 357, B 89, C 53, D 24 | schema 100%, vignette 95.4%, stem-length 56.2%, longest-key 23.5% |
+| ai high-yield | 523 | 0.6% | 25% | A 357, B 89, C 53, D 24 | schema 100%, vignette 95.4%, stem-length 56.2%, absolute-terms 21.4% |
 | ai pool | 391 | 10.2% | 20% | A 82, B 79, C 75, D 74, E 81 | schema 100%, vignette 65.5%, clang 1.8%, absolute-terms 1.8% |
-| ai station | 532 | 50.9% | 25% | A 130, B 127, C 128, D 147 | schema 100%, vignette 98.9%, absolute-terms 11.1%, clang 7.9% |
+| ai station | 532 | 0.9% | 25% | A 130, B 127, C 128, D 147 | schema 100%, vignette 98.9%, absolute-terms 12.2%, clang 7.9% |
 | amsa | 58 | 27.6% | 25% | A 16, B 17, C 12, D 13 | schema 100%, units 13.8%, longest-key 8.6%, vignette 6.9% |
 | open-exam | 609 | 30.5% | 24.5% | A 119, B 134, C 176, D 166, E 14 | schema 100%, vignette 79.3%, explanation 18.9%, cover-options 9.4% |
 | usmle-resource | 144 | 20.1% | 25% | A 38, B 36, C 24, D 46 | schema 100%, explanation 100%, vignette 5.6%, cover-options 4.9% |
