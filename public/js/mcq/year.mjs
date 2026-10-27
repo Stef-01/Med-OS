@@ -38,13 +38,13 @@ export function diffOf(v) {
   if (/^[1-3]$/.test(s)) return +s;
   return { easy: 1, simple: 1, basic: 1, medium: 2, moderate: 2, intermediate: 2, hard: 3, difficult: 3, challenging: 3 }[s] || 0;
 }
-/* a guess when nobody said: the length of the reasoning (a long vignette, a negative lead-in, five options) */
+/* a guess when nobody said, from the length alone: a one-line question is 1, a long vignette 3, the rest 2. Set on the
+   2,257 duel questions the model tagged (2026-10-27): the old rule (length, five options, a negative lead-in) matched
+   45%, worse than always 2 (54%); no rule over the length, options, lead-in or year beat 55%, so difficulty is the
+   model's to set (scripts/tag-years.mjs) and this only keeps a fallback no worse than the constant */
 export function guessDiff(q) {
-  const words = String(q?.stem || '').split(/\s+/).length + String(q?.ask || '').split(/\s+/).length;
-  let s = words > 90 ? 2 : words > 45 ? 1 : 0;
-  if ((q?.options || []).length >= 5) s++;
-  if (/\b(except|not|least likely|false)\b/i.test(q?.ask || '')) s++;
-  return s >= 3 ? 3 : s >= 1 ? 2 : 1;
+  const words = String(q?.stem || '').split(/\s+/).filter(Boolean).length + String(q?.ask || '').split(/\s+/).filter(Boolean).length;
+  return words > 160 ? 3 : words > 20 ? 2 : 1;
 }
 
 /* "Year 2", "y2", "2", "second year", "final year", "MS3", 3 -> the year; 0 when it is none of them */

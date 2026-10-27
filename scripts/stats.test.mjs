@@ -15,7 +15,8 @@ const mem0 = () => ({ card: {}, day: { d: '', n: 0 } });
 test('difficulty: read as written, guessed from the reasoning, in the prompt and uploads, and 0 to 1 goes Easy to Hard in each year', () => {
   for (const [v, d] of [[1, 1], ['Hard', 3], ['medium', 2], ['2', 2], ['difficult', 3], ['x', 0], [4, 0]]) assert.equal(diffOf(v), d, String(v));
   assert.equal(guessDiff({ stem: 'Which nerve supplies deltoid?', options: ['a', 'b', 'c', 'd'] }), 1);
-  assert.equal(guessDiff({ stem: 'w '.repeat(100), ask: 'Which is NOT a cause?', options: ['a', 'b', 'c', 'd', 'e'] }), 3);
+  assert.equal(guessDiff({ stem: 'w '.repeat(100), ask: 'Which is NOT a cause?', options: ['a', 'b', 'c', 'd', 'e'] }), 2);
+  assert.equal(guessDiff({ stem: 'w '.repeat(170), options: ['a', 'b', 'c', 'd'] }), 3, 'a long vignette');
   assert.ok(chatPrompt().includes('"difficulty"') && Object.values(DIFFICULTY).every(d => chatPrompt().includes(d.label)));
   const q = { stem: 'A 67-year-old man has 2 hours of central crushing chest pain radiating to the left arm. ECG: ST elevation in II, III, aVF.', ask: 'Which artery is most likely occluded?', options: ['RCA', 'LAD', 'Circumflex', 'Left main'], answer: 'A', explanation: 'Inferior.', specialty: 'Cardiology', kind: 'anatomy', year: 2 };
   const r = checkUpload(JSON.stringify([{ ...q, difficulty: 'Hard' }, { ...q, stem: `${q.stem} Again.` }]), { by: 'S', now: T('2026-10-01') });

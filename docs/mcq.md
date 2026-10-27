@@ -155,7 +155,7 @@ npm run duel-pack                                        # the duel's questions 
 node scripts/mcq-audit.mjs                               # the set as a whole -> data/mcq/audit.json, docs/mcq-audit.md
 ```
 
-**Year and difficulty** (2026-10-27): every duel question carries both (`mcq/taxonomy.mjs`); `scripts/tag-years.mjs` asks the model for them, and the pack falls back to `guessYear`/`guessDiff` (`public/js/mcq/year.mjs`) for a question tagged since. The audit measures the fallback against the model: on 2,257 questions the guessed year matched in 68% and was within a year in 99.5%, but the guessed difficulty matched only 45% (chance is 33%), so run the tagger after every generation pass. Before 2026-10-27, 1,472 of the 2,257 had only the guess.
+**Year and difficulty** (2026-10-27): every duel question carries both (`mcq/taxonomy.mjs`); `scripts/tag-years.mjs` asks the model for them, and the pack falls back to `guessYear`/`guessDiff` (`public/js/mcq/year.mjs`) for a question tagged since. The audit measures the fallback against the model: on 2,257 questions the guessed year matched in 68% and was within a year in 99.5%, but the guessed difficulty matched only 45%, worse than always guessing 2 (54%). No simple rule over length, options, lead-in or year beat 55%, so `guessDiff` is now that rule (length alone, 55%), and the tagger runs after every generation pass. Before 2026-10-27, 1,472 of the 2,257 had only the guess.
 
 ## In the duel (Pup Duel, `packages/pup-duel/` in Optimus, vendored)
 
