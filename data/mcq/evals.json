@@ -327,7 +327,7 @@
    "passAsSelected": 0
   },
   "Generated (generate-mcq.mjs)": {
-   "n": 331,
+   "n": 333,
    "flaw": {
     "mean": 98.5,
     "p5": 94,
@@ -347,24 +347,24 @@
     "absolute-terms": 3.6,
     "clang": 2.1,
     "duplicate-options": 0,
-    "vignette": 16.9,
+    "vignette": 16.8,
     "stem-length": 0,
     "units": 1.2
    },
-   "judged": 273,
+   "judged": 333,
    "quality": {
-    "mean": 94.1,
-    "p5": 86,
-    "p10": 90,
+    "mean": 93.9,
+    "p5": 85,
+    "p10": 89,
     "p25": 92,
     "p50": 95
    },
    "gatesPass": 98.5,
-   "solved2": 98.9,
-   "keyCorrect": 99.3,
-   "passBase": 98.5,
-   "passAi": 92.3,
-   "passAsSelected": 92.3
+   "solved2": 98.8,
+   "keyCorrect": 99.4,
+   "passBase": 98.2,
+   "passAi": 90.7,
+   "passAsSelected": 90.7
   },
   "Open exam (HEAD-QA, Spanish MIR)": {
    "n": 786,
@@ -391,20 +391,20 @@
     "stem-length": 44.4,
     "units": 2.2
    },
-   "judged": 164,
+   "judged": 359,
    "quality": {
-    "mean": 74.3,
-    "p5": 52,
+    "mean": 74,
+    "p5": 54,
     "p10": 60,
-    "p25": 68,
-    "p50": 76
+    "p25": 67,
+    "p50": 75
    },
-   "gatesPass": 81.7,
-   "solved2": 97,
-   "keyCorrect": 95.1,
-   "passBase": 30.5,
-   "passAi": 5.5,
-   "passAsSelected": 30.5
+   "gatesPass": 83.3,
+   "solved2": 97.2,
+   "keyCorrect": 96.7,
+   "passBase": 29.8,
+   "passAi": 6.1,
+   "passAsSelected": 29.8
   }
  },
  "mutations": {
@@ -672,88 +672,93 @@
  },
  "pool": {
   "candidates": {
-   "ai": 357,
+   "ai": 359,
    "amsa": 105,
    "open-exam": 786,
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 239,
-   "open-exam": 50,
+   "ai": 282,
+   "open-exam": 107,
    "usmle-resource": 160,
-   "amsa": 56
+   "amsa": 58
   },
   "status": {
-   "pool": 505,
-   "pending": 680,
-   "rejected": 404,
-   "reserve": 525
+   "pool": 607,
+   "rejected": 557,
+   "reserve": 525,
+   "pending": 427
   },
   "topics": {
-   "Endocrinology": 19,
-   "Breast/Endocrine Surgery": 2,
-   "Paediatrics": 31,
-   "Obstetrics": 13,
-   "Trauma Surgery": 9,
-   "Gastroenterology": 64,
-   "Cardiology": 50,
-   "Haematology": 13,
-   "Otorhinolaryngology": 13,
+   "Endocrinology": 24,
+   "Breast/Endocrine Surgery": 6,
+   "Paediatrics": 34,
+   "Obstetrics": 15,
+   "Trauma Surgery": 14,
+   "Gastroenterology": 66,
+   "OMS/Dental": 4,
+   "Cardiology": 56,
+   "Haematology": 17,
+   "Otorhinolaryngology": 16,
    "Vascular Surgery": 9,
-   "Infectious Diseases": 40,
-   "Rheumatology": 14,
-   "Emergency Medicine": 24,
-   "Respiratory Medicine": 26,
-   "Neurology": 39,
-   "Neonatology": 11,
-   "Neurosurgery": 5,
-   "General Surgery": 16,
-   "Gynaecology": 16,
+   "Infectious Diseases": 42,
+   "Rheumatology": 17,
+   "Emergency Medicine": 25,
+   "Professionalism": 4,
+   "Respiratory Medicine": 30,
+   "Gastrointestinal Surgery": 8,
+   "Palliative Care": 5,
+   "Medicolegal": 3,
+   "Neurology": 43,
+   "Neonatology": 15,
+   "Neurosurgery": 6,
+   "General Surgery": 17,
+   "Gynaecology": 18,
+   "Pathology": 4,
    "General Practice": 14,
-   "Gastrointestinal Surgery": 5,
+   "Addiction Medicine": 2,
+   "Bioethics": 7,
+   "Immunology": 7,
    "Cardiothoracic Surgery": 3,
-   "Urology": 7,
-   "Ophthalmology": 3,
+   "Urology": 8,
+   "Indigenous Health": 1,
+   "Plastic Surgery": 4,
+   "Ophthalmology": 4,
    "Sexual Health": 6,
-   "Nephrology": 7,
-   "Orthopaedics": 9,
-   "Palliative Care": 1,
+   "Nephrology": 11,
+   "Orthopaedics": 10,
    "Geriatrics": 4,
-   "Pathology": 2,
-   "Public Health": 1,
-   "Dermatology": 2,
-   "Psychiatry": 12,
-   "Bioethics": 4,
-   "Immunology": 4,
+   "Public Health": 3,
+   "Psychiatry": 15,
+   "Dermatology": 4,
+   "Occupational/Environmental Medicine": 1,
    "Toxicology": 4,
-   "Addiction Medicine": 1,
-   "Critical Care Medicine": 1,
-   "Professionalism": 1
+   "Critical Care Medicine": 1
   },
   "positions": {
    "4": {
     "counts": [
-     59,
+     60,
      57,
-     42,
+     43,
      65
     ],
-    "n": 223,
-    "chi2": 5.14
+    "n": 225,
+    "chi2": 4.74
    },
    "5": {
     "counts": [
-     53,
-     59,
-     52,
-     55,
-     63
+     73,
+     80,
+     78,
+     68,
+     83
     ],
-    "n": 282,
-    "chi2": 1.48
+    "n": 382,
+    "chi2": 1.85
    }
   },
-  "topicCap": 76,
+  "topicCap": 92,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -762,10 +767,10 @@
   "funnel": {
    "open-exam headqa": {
     "n": 786,
-    "bar": 84,
-    "pool": 50,
-    "review": 30,
-    "pending": 622
+    "bar": 192,
+    "pool": 107,
+    "review": 60,
+    "pending": 427
    },
    "usmle-resource medqa": {
     "n": 594,
@@ -783,11 +788,11 @@
     "flaws": 1
    },
    "ai rapid": {
-    "n": 198,
-    "pool": 129,
-    "pending": 58,
-    "bar": 10,
-    "review": 1
+    "n": 200,
+    "pool": 172,
+    "duplicate": 7,
+    "bar": 19,
+    "review": 2
    },
    "ai vignette": {
     "n": 159,
@@ -798,9 +803,9 @@
    },
    "amsa": {
     "n": 105,
-    "bar": 41,
-    "pool": 56,
-    "review": 8
+    "bar": 37,
+    "pool": 58,
+    "review": 10
    }
   }
  }

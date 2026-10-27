@@ -7,10 +7,14 @@
      4 judge gates  the key judged wrong, unsafe, not a single best answer, solved to another answer both times, or
                     rejected by the reviewer; AI-written (ai, amsa) must be solved to the key both times
      5 the bar      quality = 0.4 x flaw score + 0.6 x judge score, against the bar calibrated on the benchmarks
+                    (a close call, within CLOSE points of its bar, gets a second review: the judge score is then the
+                    mean of the two, and either review's gates refuse it; mcq-evals --retest found the review drifts
+                    2 points on average, 5 at the 90th percentile, and 10% of questions crossing the bar on a rerun)
                     (data/mcq/calibration.json): the base bar for user, usmle-resource and amsa items, a higher one for
                     ai (a model writing freely)
    Then, over everything that passed, best first within each kind:
-     6 duplicates   a near-duplicate (word 3-gram Jaccard or containment, flaws.mjs DUP) of a question already admitted
+     6 duplicates   a near-duplicate (word 3-gram Jaccard or containment of the question, or the same case with an
+                    equivalent key: flaws.mjs DUP) of a question already admitted
                     is refused; user questions are admitted first, so a user's question is never displaced
      7 quotas       user questions that pass are always kept; each other kind has a cap (QUOTA), and no topic may hold
                     more than TOPIC_SHARE of the non-user questions. A question over a cap is "reserve": it passed, and
@@ -45,6 +49,14 @@ export const quality = (flaw, judge) => Math.round(0.4 * flaw + 0.6 * judge);
 const aiWritten = q => q.provenance?.kind === 'ai' || q.provenance?.kind === 'amsa';
 const aiBar = q => q.provenance?.kind === 'ai';
 
+/* a close call's second review, kept inside its first verdict (verdict.second) for the same text */
+export const CLOSE = 5;
+export const secondFor = v => (v?.second && v.second.hash === v.hash ? v.second : null);
+/* the candidates whose fate a second review could change: reviewed once, past the gates, within `pts` of the bar */
+export function closeCalls(candidates, { verdicts = {}, bars = DEFAULT_BARS, pts = CLOSE } = {}) {
+  return candidates.map(c => assess(c, { verdicts, bars })).filter(a => a.reviews === 1 && (a.stage === 'pass' || a.stage === 'bar') && Math.abs(a.quality - a.bar) <= pts).map(a => a.q);
+}
+
 /* one candidate on its own (steps 1-5) -> { id, kind, status: 'pass'|'rejected'|'pending', reasons, ... } */
 export function assess(raw, { verdicts = {}, bars = DEFAULT_BARS } = {}) {
   const id = String(raw?.id || '?'), kind = Object.hasOwn(KINDS, raw?.provenance?.kind) ? raw.provenance.kind : 'unknown';
@@ -55,9 +67,10 @@ export function assess(raw, { verdicts = {}, bars = DEFAULT_BARS } = {}) {
   if (rep.blocked) return { ...base, stage: 'flaws', status: 'rejected', reasons: rep.failed.filter(f => f.severity === 'block').map(f => f.reason) };
   const v = verdictFor(verdicts, q);
   if (!v) return { ...base, stage: 'pending', status: 'pending', reasons: ['waiting for the model review (node scripts/mcq-judge.mjs)'] };
-  const js = judgeScore(v, q), score = quality(rep.score, js), bar = aiBar(q) ? bars.ai : bars.base;
-  const out = { ...base, verdict: v, judgeScore: js, quality: score, bar };
-  const gates = judgeGates(v, q, { strict: aiWritten(q) });
+  const second = secondFor(v), bar = aiBar(q) ? bars.ai : bars.base;
+  const js = second ? Math.round((judgeScore(v, q) + judgeScore(second, q)) / 2) : judgeScore(v, q), score = quality(rep.score, js);
+  const out = { ...base, verdict: v, judgeScore: js, quality: score, bar, reviews: second ? 2 : 1 };
+  const gates = [...new Set([v, ...(second ? [second] : [])].flatMap(x => judgeGates(x, q, { strict: aiWritten(q) })))];
   if (gates.length) return { ...out, stage: 'review', status: 'rejected', reasons: gates };
   if (score < bar) return { ...out, stage: 'bar', status: 'rejected', reasons: [`quality ${score} is below the ${aiBar(q) ? 'AI-written' : 'base'} bar of ${bar} (flaws ${rep.score}, review ${js})${rep.failed.length ? `: ${rep.failed.filter(f => f.severity !== 'info').map(f => f.check).join(', ')}` : ''}`] };
   return { ...out, stage: 'pass', status: 'pass', reasons: [] };
@@ -70,7 +83,7 @@ export function poolItem(a) {
     ...q, topic,
     eval: {
       flaws: a.flaws.filter(f => f.severity !== 'info').map(f => `${f.check}:${f.severity}`), flawScore: a.flawScore, judgeScore: a.judgeScore, quality: a.quality, bar: a.bar,
-      solved: solved(a.verdict, q), keyCorrect: r.key_correct, singleBest: r.single_best, review: r.verdict, judge: a.verdict.judge,
+      solved: solved(a.verdict, q), keyCorrect: r.key_correct, singleBest: r.single_best, review: r.verdict, judge: a.verdict.judge, reviews: a.reviews,
       ...(q.topic ? {} : { topicFrom: 'review' }), verdict: 'pool', reasons: [], evaluatedAt: a.verdict.at, evalVersion: `${EVAL_VERSION}+${JUDGE_VERSION}`
     }
   };

@@ -15,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeMcq, FOCUS, FORMS, gapJobs, topicStation } from './lib/mcq-generate.mjs';
+import { writeMcq, FOCUS, FORMS, gapJobs, topicStation, writtenFrom } from './lib/mcq-generate.mjs';
 import { THIN } from './lib/mcq-audit.mjs';
 import { readJsonl, benchmarkItem, readJson } from './lib/mcq-sources.mjs';
 import { stationsOnDisk } from './build-duel-pack.mjs';
@@ -42,11 +42,14 @@ else if (opt('--gaps')) {   /* where the duel is thin: the audit's topics with f
   const secs = String(opt('--gaps')), f = readJson(path.join(ROOT, 'data', 'mcq', 'audit.json'), {}).pack?.formats?.[secs];
   if (!f) { console.error(`no audit for ${secs} s: node scripts/mcq-audit.mjs first (formats are ${Object.keys(readJson(path.join(ROOT, 'data', 'mcq', 'audit.json'), {}).pack?.formats || {}).join(', ')})`); process.exit(2); }
   const need = t => THIN - (f.byTopic[t] || 0), thin = new Set(f.thin);
-  /* a thin topic no station covers gets two stand-ins (topicStation), each told what is already written for it */
-  const covered = new Set(stations.flatMap(st => st.specialty || [])), leads = spec => store.items.filter(q => q.tags.includes(tagOf(`topic:${spec}`))).map(q => q.ask || q.stem.slice(-120));
-  const standIns = f.thin.filter(t => !covered.has(t)).flatMap(t => [0, 1].map(v => topicStation(t, v, leads(t))));
+  const covered = new Set(stations.flatMap(st => st.specialty || []));
+  /* a thin topic no station covers gets stand-ins (topicStation), a question each per focus: enough for its gap on top
+     of the slots its questions already fill */
+  const written = t => store.items.filter(q => q.tags.includes(tagOf(`topic:${t}`)) && formOf(q) === FORM).length;
+  const variants = t => Math.max(2, Math.ceil((need(t) + written(t)) / focuses.length));
+  const standIns = f.thin.filter(t => !covered.has(t)).flatMap(t => Array.from({ length: variants(t) }, (_, v) => topicStation(t, v)));
   jobs = gapJobs([...stations, ...standIns], thin, need, Number(opt('--sample')) || 40, focuses, opt('--focus'), (st, fc) => have.has(`${st.id}|${fc}|${FORM}`));
-  if (standIns.length) console.log(`${standIns.length / 2} thin topics have no station: written from the specialty alone`);
+  if (standIns.length) console.log(`${new Set(standIns.map(x => x.title)).size} thin topics have no station: ${standIns.length} stand-ins written from the specialty alone`);
   console.log(`gaps at ${secs} s: ${f.thin.length} thin topics; ${jobs.length} stations in them`);
 }
 else if (opt('--sample')) jobs = [...stations].sort((a, b) => fnv(`g:${a.id}`).localeCompare(fnv(`g:${b.id}`))).slice(0, Number(opt('--sample'))).map((st, i) => ({ st, focus: opt('--focus') || focuses[i % focuses.length] }));
@@ -60,7 +63,9 @@ const save = () => { if (argv.includes('--dry-run')) return; fs.mkdirSync(path.d
 const worker = async () => {
   for (let j; (j = jobs.shift());) {
     try {
-      const r = await writeMcq(j.st, j.focus, { bench, ask, how, log: m => console.log(m), form: FORM });
+      /* told what is written from it so far, this run's questions included */
+      const st = { ...j.st, avoid: writtenFrom(store.items, j.st, tagOf) };
+      const r = await writeMcq(st, j.focus, { bench, ask, how, log: m => console.log(m), form: FORM });
       if (r.ok) { store.items.push(r.item); save(); kept++; console.log(`kept ${r.item.id} · ${j.st.id} · ${j.focus}${r.rounds > 1 ? ' (revised)' : ''}`); }
       else {
         failed++; console.log(`not kept · ${j.st.id} · ${j.focus}: ${r.problems.join('; ')}`);

@@ -91,7 +91,7 @@ In "why", give one entry per option in order: for the key, why it is right; for 
 <station>
 ${stationBrief(st)}
 </station>
-
+${st.avoid?.length ? `\nAlready written from this station, so ask for a different answer:\n${st.avoid.map(a => `- ${a}`).join('\n')}\n` : ''}
 Example Step 2 CK questions, for style only${form === 'rapid' ? ' (yours is far shorter)' : ''}:
 ${ex.map((q, i) => `<example_${i + 1}>\n${exText(q)}\n</example_${i + 1}>`).join('\n')}
 
@@ -103,6 +103,13 @@ ${reasons.map(r => `- ${r}`).join('\n')}
 
 The question (JSON):
 ${JSON.stringify(draft)}`;
+
+/* what is already written from a station (or for a stand-in's topic), as the writer is shown it: the lead-in and the
+   key, so a new question asks for another answer (the same case asked for the same key twice is a near-duplicate the
+   selector refuses, 2026-10-26) */
+export const writtenFrom = (items, st, tagOf = t => t) => items
+  .filter(q => q.provenance?.generator?.basis?.[0] === st.id || (st.topicOnly && (q.tags || []).includes(tagOf(`topic:${st.title}`))))
+  .map(q => `${(q.ask || q.stem.slice(-120)).trim()} (answer: ${q.options[q.answer]})`);
 
 /* the model's draft as a question: the key letter to an index, the key spread by the id's hash, the provenance */
 export function toItem(draft, { st, focus, ex, how, model, now, form = 'vignette' }) {

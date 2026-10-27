@@ -11,16 +11,17 @@ import { good, GOOD } from './mcq.test.mjs';
 import { judgeItem, judgeScore, judgeGates, verdictFor, solveText, rubricText, cleanRubric, SPECIALTIES } from './lib/mcq-judge.mjs';
 import { assess, select, statusOf, quality, poolItem } from './lib/mcq-select.mjs';
 import { mergeSubmissions, submissionsFrom, remoteSubmissions } from './lib/mcq-intake.mjs';
-import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs, topicStation, writerPrompt } from './lib/mcq-generate.mjs';
-import { quotaOf, routeOf, funnelOf, STAGES } from './lib/mcq-select.mjs';
+import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs, topicStation, writerPrompt, writtenFrom } from './lib/mcq-generate.mjs';
+import { quotaOf, routeOf, funnelOf, STAGES, closeCalls, secondFor, CLOSE } from './lib/mcq-select.mjs';
 import { funnelRates, auditMarkdown } from './lib/mcq-audit.mjs';
 import { retestStats, retestFor, retestKey } from './lib/mcq-retest.mjs';
 import { checkLength } from '../public/js/mcq/flaws.mjs';
 import { fits } from '../public/js/vendor/pup-duel/duel/core.mjs';
 import { spreadKey, stationItem, benchmarkItem, stationItems, allCandidates } from './lib/mcq-sources.mjs';
-import { cleanItem, contentHash, LETTERS } from '../public/js/mcq/schema.mjs';
+import { cleanItem, contentHash, LETTERS, tagOf } from '../public/js/mcq/schema.mjs';
 import { flawReport } from '../public/js/mcq/flaws.mjs';
 import { build } from './mcq-pool.mjs';
+import { addVerdict, readVerdicts } from './mcq-judge.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BARS = { base: 70, ai: 80 };
@@ -172,6 +173,40 @@ test('retest: two reviews of the same question compared on verdict, key, solves,
   assert.ok(retestFor(store, same)); assert.equal(retestFor(store, { ...same, stem: `${same.stem} Changed.` }), null, 'a retest of other text does not count');
 });
 
+test('close calls: within CLOSE of the bar a second review is asked for, its score averaged and its gates counted', () => {
+  const near = distinct('bank-cc1', 'usmle-resource', 90), far = distinct('bank-cc2', 'usmle-resource', 91), gated = distinct('bank-cc3', 'usmle-resource', 92);
+  const verdicts = { [near.id]: verdict(near), [far.id]: verdict(far), [gated.id]: verdict(gated, { key_correct: 'no' }) };
+  const q0 = assess(near, { verdicts, bars: BARS }).quality;
+  const bars = { base: q0 + 2, ai: 99 };   /* near sits 2 under the bar; far, scored the same, is put out of reach below */
+  const ids = closeCalls([near, gated], { verdicts, bars }).map(q => q.id);
+  assert.deepEqual(ids, ['bank-cc1'], 'a question its gates refuse is no close call');
+  assert.deepEqual(closeCalls([far], { verdicts, bars: { base: q0 + CLOSE + 1, ai: 99 } }), [], 'more than CLOSE away is not close');
+  /* the second review scores it higher: the mean lifts it over the bar */
+  const v = { ...verdicts[near.id], second: verdict(near, { distractors: 5, explanation: 5, relevance: 5, single_best: 5, accuracy: 5 }) };
+  assert.ok(secondFor(v));
+  const a = assess(near, { verdicts: { [near.id]: v }, bars });
+  assert.equal(a.reviews, 2);
+  assert.ok(a.quality > q0, `${a.quality} > ${q0}`);
+  assert.deepEqual(closeCalls([near], { verdicts: { [near.id]: v }, bars }), [], 'reviewed twice: no third');
+  /* either review's gates refuse it */
+  const bad = { ...verdicts[near.id], second: verdict(near, { key_correct: 'no' }) };
+  assert.equal(assess(near, { verdicts: { [near.id]: bad }, bars: BARS }).stage, 'review');
+  /* a second review of other text is ignored */
+  const stale = { ...verdicts[near.id], second: { ...v.second, hash: 'other' } };
+  assert.equal(secondFor(stale), null); assert.equal(assess(near, { verdicts: { [near.id]: stale }, bars }).reviews, 1);
+});
+
+test('addVerdict adds a second review to the verdict on disk, and only to one for the same text', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'verdicts-')), f = path.join(dir, 'v.json'), q = distinct('bank-av', 'usmle-resource', 95);
+  const first = verdict(q), second = verdict(q, { distractors: 5 });
+  addVerdict(f, q.id, first);
+  addVerdict(f, q.id, old => (old && old.hash === second.hash ? { ...old, second } : old));
+  assert.deepEqual(readVerdicts(f)[q.id], { ...first, second });
+  addVerdict(f, 'other', old => (old ? { ...old, second } : old));
+  assert.equal(readVerdicts(f).other, undefined, 'no first review, nothing written');
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
 test('a near-duplicate whose twin goes to reserve has its own chance; one whose twin is kept does not', () => {
   const best = distinct('bank-best', 'usmle-resource', 50), twin = distinct('bank-twin', 'usmle-resource', 51);
   const copy = { ...distinct('ai-copy', 'ai', 51), stem: twin.stem };   /* the same case as bank-twin, written by a model */
@@ -298,6 +333,17 @@ test('a thin topic with no station: a stand-in per variant, a prompt from the sp
   assert.ok(q.tags.includes('topic:medicolegal') && !q.tags.some(t => t.startsWith('station:')), 'tags are stored lower case (tagOf)');
   const thin = new Set(['Medicolegal']), jobs = gapJobs([topicStation('Medicolegal', 0), st], thin, () => 4, 10, ['management', 'investigation'], '');
   assert.deepEqual(jobs.map(j => `${j.st.id}:${j.focus}`), ['topic-medicolegal-0:management', 'topic-medicolegal-1:management', 'topic-medicolegal-0:investigation', 'topic-medicolegal-1:investigation']);
+});
+test('every writer is told what its station (or its stand-in topic) already has, with the answers', () => {
+  const st = { id: 'amsa-187', title: 'Chest pain', specialty: ['Cardiology'] };
+  const mk = (basis, tags, ask, key) => ({ ask, stem: 's', options: ['x', key], answer: 1, tags, provenance: { generator: { basis } } });
+  const items = [mk(['amsa-187', 'osce-amsa-187'], [], 'Most appropriate next step?', 'Aspirin 300 mg'), mk(['amsa-9'], [], 'Next investigation?', 'ECG'),
+    mk(['topic-medicolegal-0'], ['topic:medicolegal'], 'Next step regarding consent?', 'Assess her maturity'), mk(['topic-medicolegal-1'], ['topic:medicolegal'], 'Who decides?', 'The patient')];
+  assert.deepEqual(writtenFrom(items, st), ['Most appropriate next step? (answer: Aspirin 300 mg)']);
+  assert.equal(writtenFrom(items, topicStation('Medicolegal', 1), tagOf).length, 2, 'a stand-in sees both variants of its topic');
+  const p = writerPrompt({ ...st, avoid: writtenFrom(items, st) }, 'management', []);
+  assert.match(p, /<\/station>\n\nAlready written from this station, so ask for a different answer:\n- Most appropriate next step\? \(answer: Aspirin 300 mg\)/);
+  assert.doesNotMatch(writerPrompt(st, 'management', []), /Already written/, 'nothing written: nothing said');
 });
 test('the key as the single longest option is sent back for revision; a tie is not a cue', () => {
   const q = cleanItem(good({ id: 'medqa-kl' }));

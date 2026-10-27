@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "version": "pool-489-mcq-532-hy-523-mxq-494",
+ "version": "pool-587-mcq-532-hy-523-mxq-494",
  "title": "Standard MCQ pool",
- "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1294 ai, 544 open-exam, 144 usmle-resource, 56 amsa.",
+ "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1337 ai, 597 open-exam, 144 usmle-resource, 58 amsa.",
  "origin": "mixed",
  "cats": [
   {
@@ -197,6 +197,32 @@
     "Gastroenterology",
     "General Practice"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-05d78829",
+   "stem": "A 64-year-old man who smokes has had a painless, indurated ulcer on the lateral tongue for 5 weeks, persisting after an adjacent sharp tooth was smoothed. Which test confirms the diagnosis?",
+   "options": [
+    "Brush cytology",
+    "Toluidine blue staining",
+    "Incisional biopsy",
+    "Contrast CT neck",
+    "Herpes simplex PCR"
+   ],
+   "answer": 2,
+   "why": "An indurated oral ulcer that has not healed after 3 weeks, even once the possible cause of trauma is removed, is treated as squamous cell carcinoma until proven otherwise. The diagnosis is made on tissue. An incisional biopsy taken from the edge of the lesion gives the histology and is the definitive test, ideally performed after urgent referral to oral and maxillofacial surgery or head and neck surgery.",
+   "notes": [
+    "Brush cytology is only an adjunct: a negative result does not exclude cancer, so tissue histology is still needed.",
+    "Toluidine blue staining helps choose where to biopsy but is not specific and cannot confirm a diagnosis.",
+    null,
+    "CT of the neck is used for staging once cancer is confirmed and does not give a tissue diagnosis.",
+    "Herpes simplex ulcers are painful, multiple and short-lived, not a single painless indurated ulcer lasting 5 weeks."
+   ],
+   "topic": "OMS/Dental",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -688,6 +714,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-18eb6f4d",
+   "stem": "A 25-year-old medical student gets a hollow-bore needlestick injury during venepuncture. He has washed the site and reported it. He is hepatitis B immune. The patient's blood-borne virus status is unknown. Most appropriate next investigation?",
+   "options": [
+    "Needle tip culture",
+    "Student HIV PCR",
+    "Student liver function tests",
+    "Source patient serology",
+    "Source CD4 count"
+   ],
+   "answer": 3,
+   "why": "After first aid and reporting, the next step is to test the source patient for HIV, hepatitis B and hepatitis C, with their consent. This is done urgently because the result decides whether the student needs HIV post-exposure prophylaxis, which works best within hours and must start within 72 hours. The student also has baseline serology taken, but the source result is what guides immediate management.",
+   "notes": [
+    "Culturing the needle tip is unreliable, potentially hazardous and not recommended in any Australian exposure guideline.",
+    "An HIV PCR on the student at baseline cannot show infection from an exposure minutes ago, and it does not guide the decision on prophylaxis.",
+    "Baseline liver function tests are only relevant later if hepatitis C or prophylaxis toxicity is a concern, and they do not assess the exposure risk.",
+    null,
+    "A CD4 count measures immune status in known HIV infection, so it cannot tell you whether the source patient is infected."
+   ],
+   "topic": "Professionalism",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-19d461ac",
    "stem": "A 63-year-old woman, day 4 after total knee replacement, has sudden breathlessness. BP 130/80 mm Hg. CTPA: segmental emboli, normal right ventricle. She is on prophylactic enoxaparin. Most appropriate next step?",
    "options": [
@@ -712,6 +764,32 @@
     "Cardiology",
     "Orthopaedics"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-19e9767a",
+   "stem": "An 84-year-old man from a nursing home has three days of absolute constipation and abdominal distension. He is haemodynamically stable without peritonism. Abdominal X-ray shows a coffee-bean loop arising from the pelvis. Most appropriate next step?",
+   "options": [
+    "Sigmoidoscopic decompression",
+    "Emergency Hartmann's procedure",
+    "Gastrografin enema",
+    "Intravenous neostigmine",
+    "Colonic stent insertion"
+   ],
+   "answer": 0,
+   "why": "This is sigmoid volvulus without signs of ischaemia or perforation. First-line management is flexible sigmoidoscopic decompression with a flatus tube left in place. Because the volvulus often recurs, elective sigmoid colectomy is considered during the same admission if the patient is fit for surgery.",
+   "notes": [
+    null,
+    "Emergency resection is for gangrene, perforation, peritonitis or failed endoscopic decompression, and none of these is present.",
+    "A contrast enema is only needed when the diagnosis is unclear, and here the X-ray already shows it.",
+    "Neostigmine treats acute colonic pseudo-obstruction and should not be given in mechanical obstruction such as a volvulus.",
+    "Colonic stenting is for malignant large bowel obstruction and does not untwist a volvulus."
+   ],
+   "topic": "Gastrointestinal Surgery",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -780,6 +858,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-1b75eeb2",
+   "stem": "A 68-year-old man with metastatic prostate cancer has two weeks of worsening thoracic back pain, now with bilateral leg weakness and urinary hesitancy. Most appropriate next investigation?",
+   "options": [
+    "CT thoracic spine",
+    "Thoracic spine X-ray",
+    "Whole-body bone scan",
+    "Serum PSA level",
+    "MRI whole spine"
+   ],
+   "answer": 4,
+   "why": "New back pain with leg weakness and bladder symptoms in a man with known bone-metastatic cancer is malignant spinal cord compression until proven otherwise. Australian guidance (eviQ) is urgent MRI of the whole spine, ideally within 24 hours, alongside high-dose dexamethasone. The whole spine is imaged because compression is often present at more than one level.",
+   "notes": [
+    "CT shows bone destruction but does not show the cord or epidural soft tissue well, so it is used only when MRI is contraindicated or unavailable.",
+    "Plain X-rays may look normal despite compression and cannot show the cord, so they would delay the diagnosis.",
+    "A bone scan shows where the metastases are but cannot show whether the cord is compressed or at which level.",
+    "PSA tracks how much disease there is, but it does not diagnose or locate cord compression.",
+    null
+   ],
+   "topic": "Palliative Care",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-1ca98ea1",
    "stem": "A 76-year-old man is reviewed on the surgical ward on the morning he is due to go home. Two days ago he came to the emergency department after suddenly passing a large volume of painless maroon blood with clots. He had one more small bleed in the department and none since. He has type 2 diabetes and knee osteoarthritis. He takes metformin. For the past 3 months he has also taken an over-the-counter anti-inflammatory tablet most days for knee pain. He takes no other medicines. Today his temperature is 36.8 °C, pulse is 72/min and blood pressure is 132/78 mm Hg. His abdomen is soft and not tender. Haemoglobin is 118 g/L (his baseline is 138 g/L; reference range 130 to 180 g/L). Colonoscopy after bowel preparation showed many diverticula in the sigmoid and descending colon, with no inflammation, active bleeding, polyp or tumour. He asks how he can lower the chance of this happening again. Which of the following is the most appropriate advice to reduce his risk of recurrent bleeding?",
    "options": [
@@ -804,6 +908,32 @@
     "Emergency Medicine",
     "General Surgery"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-1f21d0af",
+   "stem": "A 20-month-old boy has a femoral shaft fracture after a reported fall from a couch. He is alert with normal neurology, and has bruises of differing ages on his back. Most appropriate next investigation?",
+   "options": [
+    "CT brain",
+    "Nuclear bone scan",
+    "Bone densitometry",
+    "Collagen gene testing",
+    "Skeletal survey"
+   ],
+   "answer": 4,
+   "why": "A big fracture from a minor fall, together with bruises of different ages, in a child under 2 years should raise suspicion of physical abuse. RCH and state child protection guidelines say a full skeletal survey should be done to look for hidden or healing fractures, which provides evidence for the mandatory report and the forensic record. Neuroimaging is mainly for infants under 12 months or children with neurological signs.",
+   "notes": [
+    "CT brain is advised for suspected abuse in infants under 12 months or children with neurological signs, and this alert 20-month-old has a normal neurological examination.",
+    "A nuclear bone scan is only an add-on to the skeletal survey, it is poor at dating fractures and needs sedation and radiation, so it is not the first test.",
+    "Bone densitometry is not validated in toddlers and does not look for the other fractures that abuse would cause.",
+    "Genetic testing for osteogenesis imperfecta is only considered if clinical or radiological features suggest it, and it does not explain bruises of different ages.",
+    null
+   ],
+   "topic": "Medicolegal",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -839,6 +969,32 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-1fa7b42d",
+   "stem": "A 45-year-old man has recurrent painful left submandibular swelling that comes on at mealtimes and settles within an hour. Between episodes, examination is normal and he is afebrile. Most appropriate initial investigation?",
+   "options": [
+    "Contrast CT neck",
+    "MRI sialography",
+    "Conventional sialography",
+    "Fine-needle aspiration",
+    "Neck ultrasound"
+   ],
+   "answer": 4,
+   "why": "Swelling of the submandibular gland at mealtimes that settles on its own suggests a stone blocking the salivary duct (sialolithiasis). Ultrasound is the first-line test: it is cheap, quick, uses no radiation and finds most stones. It also shows whether the duct is widened and whether the gland itself is normal.",
+   "notes": [
+    "A CT scan with contrast gives a radiation dose, and the contrast can hide a stone; it is kept for suspected abscess or deep neck infection.",
+    "MRI sialography is expensive and hard to access, and is a second-line test when ultrasound does not give an answer.",
+    "Conventional sialography means putting a tube into the duct, gives radiation and can push a stone further in, so it is not a first-line test.",
+    "Fine-needle aspiration is used for a solid gland lump that may be a tumour, not for swelling that comes and goes with meals.",
+    null
+   ],
+   "topic": "OMS/Dental",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-1fdb9dd4",
@@ -1139,6 +1295,32 @@
     "Paediatrics",
     "Emergency Medicine"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-2c19ce4a",
+   "stem": "A 42-year-old woman has a 2.5 cm painless nodule in the right thyroid lobe, with palpitations and weight loss. TSH is 0.02 mIU/L (normal 0.4 to 4.0). Most appropriate next investigation?",
+   "options": [
+    "Fine-needle aspiration",
+    "Serum calcitonin",
+    "Neck CT",
+    "Thyroid scintigraphy",
+    "Serum thyroglobulin"
+   ],
+   "answer": 3,
+   "why": "If a thyroid nodule comes with a suppressed TSH, the next step is a radionuclide scan (technetium or iodine-123) to find out whether the nodule is hyperfunctioning (\"hot\"). Hot nodules are very rarely cancerous and usually don't need FNA. Only cold nodules, or nodules with a normal or high TSH, go on to ultrasound-guided FNA based on ultrasound risk features.",
+   "notes": [
+    "FNA comes after scintigraphy when TSH is suppressed, because cytology of a hot nodule can look suspicious and lead to needless surgery.",
+    "Calcitonin screens for medullary carcinoma and is not a routine first test, especially when the clinical picture is thyrotoxicosis.",
+    "CT is used to stage retrosternal extension or airway compression and does not show nodule function or risk of cancer.",
+    null,
+    "Thyroglobulin is used to monitor for recurrence after thyroidectomy for differentiated cancer and cannot tell benign nodules from malignant ones."
+   ],
+   "topic": "Breast/Endocrine Surgery",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -1453,6 +1635,32 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-375504cb",
+   "stem": "A final-year medical student notices a 34-year-old male surgical registrar slurring his speech and smelling of alcohol as he scrubs in for an emergency appendicectomy. Most appropriate next step?",
+   "options": [
+    "Notify AHPRA online",
+    "Discuss with registrar afterwards",
+    "Email medical school",
+    "Alert the consultant",
+    "Observe and document"
+   ],
+   "answer": 3,
+   "why": "The patient is at immediate risk, so the first step is to raise the concern straight away with the senior clinician responsible, so the registrar is stopped from operating. Under the Medical Board of Australia Good Medical Practice code and the Ahpra notification guidelines, a notification about impairment may follow, but it does not replace acting now to stop the harm.",
+   "notes": [
+    "Notifying Ahpra may be appropriate later, but it does nothing to stop the operation that is about to start.",
+    "Talking to the registrar after surgery lets an impaired doctor operate on the patient first.",
+    "Emailing the medical school is slow and goes to the wrong people, so it cannot prevent harm in the operating theatre.",
+    null,
+    "Watching and taking notes leaves the patient exposed to a known, immediate risk."
+   ],
+   "topic": "Professionalism",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-3774818c",
    "stem": "A 26-year-old woman taking the combined oral contraceptive pill has a proximal left leg DVT on compression ultrasound. Rivaroxaban is started for 3 months. She wants ongoing contraception. Most appropriate contraceptive advice?",
    "options": [
@@ -1507,6 +1715,32 @@
     "Emergency Medicine",
     "Otorhinolaryngology"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-3a145bf8",
+   "stem": "A 7-year-old boy is brought in after a car crash with a ruptured spleen and blood pressure 70/40 mmHg. His parents, devout Jehovah's Witnesses, refuse blood transfusion. Most appropriate next step?",
+   "options": [
+    "Apply for court order",
+    "Continue crystalloid resuscitation",
+    "Respect parents' refusal",
+    "Transfuse blood immediately",
+    "Notify child protection"
+   ],
+   "answer": 3,
+   "why": "Australian state laws let doctors transfuse a child without parental consent if it is needed to prevent death or serious harm. Examples are the NSW Human Tissue Act 1983 s20B and the Victorian Human Tissue Act 1982 s24. The child's best interests come before the parents' religious refusal, and treatment must not be delayed in a life-threatening emergency.",
+   "notes": [
+    "A Supreme Court order is used for non-urgent or planned treatment, and getting one here would delay life-saving treatment.",
+    "Crystalloid alone will not replace oxygen-carrying capacity in severe haemorrhage, and giving more of it makes dilutional coagulopathy worse.",
+    "Parents cannot lawfully refuse life-saving treatment for a child when the refusal is against the child's best interests.",
+    null,
+    "A child protection report may follow, but it is not the immediate step when the child is in life-threatening shock."
+   ],
+   "topic": "Medicolegal",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -1883,6 +2117,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-44707318",
+   "stem": "A 4-week-old breastfed girl has had jaundice since day 3. She is feeding and gaining weight well. Her stools are pale cream and her urine stains the nappy yellow. Most appropriate next investigation?",
+   "options": [
+    "Conjugated bilirubin",
+    "Abdominal ultrasound",
+    "Hepatobiliary scintigraphy",
+    "Thyroid function tests",
+    "Liver biopsy"
+   ],
+   "answer": 0,
+   "why": "Jaundice lasting past 2 weeks (3 weeks if preterm) with pale stools and dark urine suggests cholestasis, such as biliary atresia. Australian guidelines (RCH, state guidelines) say the first test is a total and conjugated (split) bilirubin, done urgently. A conjugated level above 20 micromol/L, or above 20% of the total, confirms cholestasis and needs same-day referral to a paediatric gastroenterology or hepatology service.",
+   "notes": [
+    null,
+    "Ultrasound is part of the cholestasis work-up once conjugated hyperbilirubinaemia is confirmed, but it does not come before the split bilirubin.",
+    "Hepatobiliary scintigraphy is a second-line specialist test for biliary atresia, used only after cholestasis is confirmed.",
+    "Hypothyroidism causes unconjugated prolonged jaundice and is part of the wider screen, but pale stools and dark urine point first to cholestasis.",
+    "Liver biopsy is an invasive specialist test used late to diagnose biliary atresia, not a first-line investigation."
+   ],
+   "topic": "Neonatology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-44d3b56b",
    "stem": "A 52-year-old man, an electrician, sees his general practitioner because of 5 months of daytime sleepiness. He dozes off while watching television and in the afternoons, and he wakes unrefreshed despite 8 hours in bed. His wife reports loud snoring every night, with pauses in his breathing followed by gasping. He has had no sudden muscle weakness with laughter or anger, and he denies sleepiness while driving. He drinks 3 standard drinks most evenings and does not smoke. He has hypertension treated with perindopril. Blood pressure is 146/92 mm Hg, heart rate 76/min and oxygen saturation 97% on room air. BMI is 34 kg/m2, neck circumference is 44 cm and the oropharynx is crowded. His Epworth Sleepiness Scale score is 13 (normal 10 or less), STOP-Bang score 6/8 and OSA50 score 7/10. Full blood count, TSH and electrolytes are normal. Which of the following is the most appropriate next step in management?",
    "options": [
@@ -1940,6 +2200,32 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-476d535a",
+   "stem": "A 72-year-old man taking ramipril has routine bloods at his GP. Potassium is 6.8 mmol/L, and the laboratory reports marked haemolysis. He feels well, and his ECG is normal. Most appropriate next step?",
+   "options": [
+    "IV calcium gluconate",
+    "Repeat venous sample",
+    "Insulin and dextrose",
+    "Oral sodium polystyrene",
+    "Cease ramipril today"
+   ],
+   "answer": 1,
+   "why": "Haemolysis releases potassium from red cells, so a haemolysed sample can show falsely high potassium. In a well patient with a normal ECG, the right step is to repeat the sample urgently, taken with good technique, before starting treatment. If the repeat result is still high, it is managed as true hyperkalaemia.",
+   "notes": [
+    "IV calcium gluconate protects the heart in true hyperkalaemia with ECG changes, but this ECG is normal and the result is probably false.",
+    null,
+    "Insulin and dextrose moves potassium into cells in confirmed hyperkalaemia, and giving it on a false result risks hypoglycaemia.",
+    "A potassium-binding resin is slow-acting and should only be used once hyperkalaemia is confirmed on a reliable sample.",
+    "Stopping ramipril because of a probably false result could harm the patient without need; first confirm the potassium level."
+   ],
+   "topic": "Pathology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {
@@ -2082,6 +2368,37 @@
     "Gastroenterology",
     "Emergency Medicine",
     "General Surgery"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-4dd635bf",
+   "stem": "A 68-year-old man with a 45 pack-year smoking history has 4 months of increasing breathlessness and 12 kg weight loss. Chest X-ray shows a large left pleural effusion. Most appropriate next investigation?",
+   "options": [
+    "Bronchoscopy with endobronchial biopsy",
+    "Serial sputum cytology",
+    "CT-guided pleural biopsy",
+    "Ultrasound-guided pleural aspiration",
+    "Whole-body PET-CT scan"
+   ],
+   "answer": 3,
+   "why": "A new unilateral effusion in a smoker with weight loss suggests malignancy. The first investigation is ultrasound-guided pleural aspiration, which both diagnoses and treats. Send the fluid for protein and LDH (with serum levels for Light's criteria), pH, glucose, cell count, cytology, and microscopy and culture including AFB. Ideally, a contrast CT chest is done before the effusion is fully drained.",
+   "notes": [
+    "Bronchoscopy has a low yield when there is no visible endobronchial lesion, and it comes after pleural fluid analysis and CT.",
+    "Sputum cytology has low sensitivity and does not explain the effusion, so it does not replace sampling the pleural fluid.",
+    "Pleural biopsy is kept for exudates where cytology is negative or nondiagnostic, after aspiration and contrast CT.",
+    null,
+    "PET-CT is a staging test, used once a malignancy is confirmed, and does not give a tissue or fluid diagnosis."
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Emergency Medicine",
+    "Oncology"
    ],
    "cat": "clinical",
    "origin": "ai",
@@ -2274,6 +2591,32 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-52afd1e3",
+   "stem": "A 24-year-old female medical student sustains a hollow-bore needlestick from a consenting 40-year-old man of unknown blood-borne virus status. The wound is washed and the incident reported. Most appropriate next investigation?",
+   "options": [
+    "Student HIV RNA PCR",
+    "Source HIV viral load",
+    "Source patient BBV serology",
+    "Needle tip culture",
+    "Student liver function tests"
+   ],
+   "answer": 2,
+   "why": "After first aid and reporting, Australian occupational exposure guidelines call for urgent testing of the source patient for HIV, hepatitis B and hepatitis C, with consent. The result decides whether the student needs HIV post-exposure prophylaxis, which works best if started within 2 hours and no later than 72 hours. The student also has baseline serology, and must not be the one to ask the source patient for consent.",
+   "notes": [
+    "A baseline HIV RNA PCR in the student would only show infection she already had, so it does not guide prophylaxis now; baseline antibody serology is enough.",
+    "A viral load only helps once the source is known to be HIV positive, and here his status is unknown.",
+    null,
+    "Culturing the needle has no role, as it cannot reliably detect blood-borne viruses and does not guide management.",
+    "Baseline liver function tests are not the deciding test, as they do not show transmission risk or the need for prophylaxis."
+   ],
+   "topic": "Professionalism",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-52c0dd42",
    "stem": "A 49-year-old man presents to his general practitioner with three attacks of spontaneous spinning vertigo over the past 4 months. Each attack lasted 3 to 5 hours, with nausea and vomiting. Before each attack, his left ear felt blocked and he heard a roaring tinnitus. Afterwards, his hearing in that ear was muffled for several days and then improved. He feels well between attacks. He has hypertension treated with perindopril and drinks four cups of coffee a day. Today he is between attacks. Temperature is 36.7 °C, blood pressure 132/84 mm Hg and pulse 72/min, regular. Otoscopy is normal on both sides. The Weber test lateralises to the right, and the Rinne test is positive on both sides. There is no spontaneous or gaze-evoked nystagmus. The head impulse test is normal, and the Dix-Hallpike test is negative on both sides. The corneal reflexes, facial movements, gait and coordination are normal. Audiometry shows a left sensorineural loss of 40 dB at 250 and 500 Hz with normal thresholds from 2000 Hz. The right ear is normal, and tympanometry is type A on both sides. Which of the following is the most appropriate next step in management?",
    "options": [
@@ -2329,6 +2672,32 @@
     "Neurology",
     "Emergency Medicine"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-53a4f097",
+   "stem": "A 52-year-old man who drinks heavily daily is brought in confused and unsteady, with no head injury. He has horizontal nystagmus and a broad-based ataxic gait. Capillary glucose is 5.8 mmol/L. Most appropriate next step?",
+   "options": [
+    "Oral diazepam loading",
+    "Intravenous glucose",
+    "Intravenous thiamine",
+    "Non-contrast CT brain",
+    "Oral thiamine"
+   ],
+   "answer": 2,
+   "why": "Confusion, nystagmus and ataxia in a heavy drinker point to Wernicke encephalopathy. This is a medical emergency, and eTG advises giving high-dose parenteral thiamine straight away (for example 500 mg IV three times daily) to prevent permanent Korsakoff syndrome. Do not wait for imaging or other tests before giving it.",
+   "notes": [
+    "Diazepam treats alcohol withdrawal, but it does nothing for thiamine deficiency and he shows no clear signs of withdrawal.",
+    "His blood glucose is normal, and giving glucose before thiamine in a thiamine-deficient patient can bring on or worsen Wernicke encephalopathy.",
+    null,
+    "With no head injury and a classic presentation, a CT scan should not delay thiamine and would not show Wernicke encephalopathy reliably.",
+    "Oral thiamine is poorly absorbed by heavy drinkers and is not enough for acute Wernicke encephalopathy, which needs parenteral dosing."
+   ],
+   "topic": "Addiction Medicine",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -2393,6 +2762,32 @@
    "origin": "ai",
    "source": "ai",
    "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-56f3cd84",
+   "stem": "An 18-month-old girl has a spiral humeral fracture after reportedly falling from a low chair. She has bruises of differing ages on her back and ears. Neurological examination is normal. Most appropriate next investigation?",
+   "options": [
+    "CT brain",
+    "DEXA scan",
+    "Abdominal ultrasound",
+    "Serum vitamin D",
+    "Skeletal survey"
+   ],
+   "answer": 4,
+   "why": "A spiral long-bone fracture from a minor fall, along with bruising of different ages on protected sites such as the ears and back, points to non-accidental injury. In children under 2 years with suspected physical abuse, guidelines (RCH, state child protection guidelines) call for a full skeletal survey to find hidden fractures. A child protection notification is also mandatory.",
+   "notes": [
+    "Routine CT brain is recommended for infants under 12 months with suspected abuse, or when there are neurological signs, and this child is older and neurologically normal.",
+    "Bone density scanning does not diagnose abuse, and the history and bruising pattern do not suggest fragile bones.",
+    "Abdominal ultrasound is not first-line here because she has no abdominal bruising, distension or tenderness suggesting internal injury.",
+    "Rickets does not explain bruising of different ages on protected sites, so vitamin D testing would not confirm the main diagnosis.",
+    null
+   ],
+   "topic": "Medicolegal",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
    "difficulty": 2
   },
   {
@@ -2542,6 +2937,58 @@
     "Paediatrics",
     "Emergency Medicine"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-5d282287",
+   "stem": "A 27-year-old man is brought in after a motorcycle crash. His airway and chest are clear. Heart rate 132/min, blood pressure 82/50 mm Hg; pelvis is tender with perineal bruising. Most appropriate next step?",
+   "options": [
+    "Apply pelvic binder",
+    "CT abdomen and pelvis",
+    "Urinary catheter insertion",
+    "Emergency laparotomy",
+    "Pelvic angioembolisation"
+   ],
+   "answer": 0,
+   "why": "Suspect a pelvic fracture with haemorrhagic shock. During the circulation step of the primary survey, apply a pelvic binder over the greater trochanters straight away to close the pelvic volume and tamponade venous bleeding, alongside massive transfusion. Angiography or packing comes after the binder.",
+   "notes": [
+    null,
+    "A patient who is unstable and not responding should not go to the CT scanner before bleeding control has been started.",
+    "Perineal bruising suggests a urethral injury, so a urethral catheter is contraindicated until imaging rules it out.",
+    "Laparotomy does not control retroperitoneal pelvic bleeding, and nothing here shows bleeding inside the abdomen.",
+    "Angioembolisation is a later step for arterial bleeding after the binder and resuscitation, not the first action."
+   ],
+   "topic": "Trauma Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-5e4021e1",
+   "stem": "A 3-week-old breastfed girl, born at term, has persistent jaundice. She is feeding well, but her mother reports pale stools and dark urine. Most appropriate next investigation?",
+   "options": [
+    "Thyroid function tests",
+    "Direct antiglobulin test",
+    "Hepatobiliary scintigraphy",
+    "Percutaneous liver biopsy",
+    "Conjugated bilirubin"
+   ],
+   "answer": 4,
+   "why": "Jaundice lasting beyond 2 weeks in a term baby, with pale stools and dark urine, suggests cholestasis, for example biliary atresia. RCH guidelines say the first test is a split bilirubin to confirm a conjugated fraction above 20% or above 25 micromol/L. If cholestasis is confirmed, the baby needs urgent hepatology referral, because the outcome of a Kasai procedure depends on how early it is done.",
+   "notes": [
+    "Hypothyroidism causes prolonged unconjugated jaundice, which does not explain pale stools and dark urine.",
+    "A direct antiglobulin test looks for immune haemolysis, which causes unconjugated jaundice in the first days of life, not cholestasis at 3 weeks.",
+    "Hepatobiliary scintigraphy is a specialist test that comes after cholestasis is confirmed and an ultrasound is done, so it is not the first test.",
+    "A liver biopsy is invasive and is only used later, in specialist care, to tell biliary atresia apart from other causes of cholestasis.",
+    null
+   ],
+   "topic": "Neonatology",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -2976,6 +3423,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-6f672845",
+   "stem": "A 34-year-old man with severe traumatic brain injury has fixed dilated pupils and no brainstem reflexes. He received a thiopentone infusion until yesterday; serum levels remain high. Which test best confirms brain death?",
+   "options": [
+    "Electroencephalography",
+    "Radionuclide perfusion scan",
+    "Transcranial Doppler ultrasound",
+    "MRI brain",
+    "Somatosensory evoked potentials"
+   ],
+   "answer": 1,
+   "why": "High levels of a sedative like thiopentone mean the clinical brain death tests cannot be relied on. The ANZICS Statement on Death and Organ Donation then requires imaging that shows no blood flow to the brain, such as radionuclide perfusion scintigraphy or four-vessel catheter angiography. Sedatives do not change cerebral blood flow, so these tests still work.",
+   "notes": [
+    "EEG measures cortical activity, which thiopentone suppresses, so it cannot separate drug effect from death, and ANZICS does not accept it.",
+    null,
+    "Transcranial Doppler depends on the operator, can miss flow when the skull blocks the ultrasound, and is not accepted by ANZICS for brain death.",
+    "MRI shows structural damage, not whether blood is flowing through the brain, so it cannot confirm that all brain function has stopped.",
+    "Evoked potentials test only some sensory pathways, not the whole brain, and are not accepted for diagnosing brain death in Australia."
+   ],
+   "topic": "Bioethics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-721d224a",
    "stem": "A 68-year-old woman with diabetes who smokes has a painful punched-out ulcer on her left fifth toe and night foot pain eased by dangling. Toe pressure 22 mmHg. Most appropriate next step?",
    "options": [
@@ -3026,6 +3499,32 @@
     "Wrong: laparotomy with a B-Lynch or similar suture is for haemorrhage that continues despite uterotonics and tamponade, so it is premature here."
    ],
    "topic": "Obstetrics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-73a0f86f",
+   "stem": "A 24-year-old woman has recurrent episodes of non-itchy facial and hand swelling with colicky abdominal pain, without urticaria. Her father had similar episodes. Antihistamines have not helped. Most appropriate initial investigation?",
+   "options": [
+    "Serum tryptase",
+    "Total serum IgE",
+    "Skin prick testing",
+    "Thyroid autoantibodies",
+    "Serum C4 level"
+   ],
+   "answer": 4,
+   "why": "Recurrent angioedema without urticaria, with abdominal attacks, a family history and no response to antihistamines suggests hereditary angioedema, which is bradykinin-mediated. Serum C4 is the recommended screening test because it is low in most patients, including between attacks. If C4 is low, C1 esterase inhibitor level and function are measured to confirm the diagnosis.",
+   "notes": [
+    "Tryptase rises in mast cell-mediated reactions such as anaphylaxis, but hereditary angioedema is bradykinin-mediated, so tryptase stays normal.",
+    "Total IgE reflects atopy and does not identify complement-mediated hereditary angioedema.",
+    "Skin prick testing detects IgE-mediated allergy, which would not explain inherited attacks without urticaria that do not respond to antihistamines.",
+    "Thyroid autoimmunity is linked with chronic spontaneous urticaria, but this patient has no hives and an inherited pattern.",
+    null
+   ],
+   "topic": "Immunology",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -3096,6 +3595,62 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-747f25fe",
+   "stem": "A 7-year-old boy with a splenic laceration from a bicycle fall remains hypotensive at 70/40 mmHg despite fluid boluses. His Jehovah's Witness parents refuse blood transfusion. Most appropriate next step?",
+   "options": [
+    "Seek Supreme Court order",
+    "Transfuse packed red cells",
+    "Respect parents' refusal",
+    "Convene ethics committee",
+    "Start erythropoietin therapy"
+   ],
+   "answer": 1,
+   "why": "Parents cannot refuse life-saving treatment for a child. In an emergency, Australian state and territory laws let doctors transfuse a child without parental consent (usually with a second doctor agreeing), and this is recorded in the notes. A child in haemorrhagic shock needs blood straight away.",
+   "notes": [
+    "A court order is the right route when treatment is not urgent, but getting one now would delay transfusion while he is in shock.",
+    null,
+    "Parents' authority is limited to decisions in the child's best interests, so they cannot refuse treatment that would save his life.",
+    "An ethics committee is too slow for an emergency and has no legal power to authorise treatment.",
+    "Erythropoietin takes days to raise haemoglobin and does nothing for acute haemorrhagic shock."
+   ],
+   "topic": "Bioethics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-750d1cd1",
+   "stem": "A 49-year-old man had sudden left sensorineural hearing loss two weeks ago, confirmed on audiogram. After oral prednisolone, his hearing has returned to normal. Neurological examination is normal. Most appropriate next step?",
+   "options": [
+    "Discharge from ENT follow-up",
+    "CT of temporal bones",
+    "MRI internal auditory canals",
+    "Carotid duplex ultrasound",
+    "Annual repeat audiogram"
+   ],
+   "answer": 2,
+   "why": "Any unilateral sudden sensorineural hearing loss needs gadolinium-enhanced MRI of the internal auditory canals to exclude a retrocochlear lesion such as a vestibular schwannoma. Hearing recovery after steroids does not rule out a schwannoma, so the MRI is still needed.",
+   "notes": [
+    "Discharging him now could miss a retrocochlear tumour, because recovery after steroids does not exclude one.",
+    "CT of the temporal bones shows bone and middle ear disease but misses small schwannomas in the internal auditory canal.",
+    null,
+    "A cochlear vascular cause would involve the posterior circulation, so carotid imaging does not help, and he has no stroke features.",
+    "Repeating the audiogram tracks hearing but cannot detect or exclude a retrocochlear lesion."
+   ],
+   "topic": "Otorhinolaryngology",
+   "topics": [
+    "Otorhinolaryngology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-75604e12",
    "stem": "A 21-year-old man comes to a suburban general practice with 16 hours of abdominal pain. It started overnight as a vague ache around his umbilicus and has since moved to the right lower abdomen. He has vomited twice, has not eaten since yesterday, and says the walk from the car park jolted the pain. He has no diarrhoea and no urinary symptoms. He has no past medical history and takes no regular medicines. His temperature is 38.1 °C, heart rate 106/min, blood pressure 122/74 mmHg, respiratory rate 18/min, and oxygen saturation 98% on room air. He lies still on the couch. He is tender at McBurney's point with guarding, and pressing on the left iliac fossa causes pain on the right. Bowel sounds are present. A urine dipstick shows ketones 1+ and is negative for blood, leucocytes and nitrites. He asks if he can go home and see how he feels tomorrow. Which of the following is the most appropriate next step in management?",
    "options": [
@@ -3125,6 +3680,32 @@
    "source": "ai",
    "year": 4,
    "difficulty": 1
+  },
+  {
+   "id": "ai-mcq-761a155d",
+   "stem": "A 68-year-old man with metastatic prostate cancer has had worsening thoracic back pain for three days and new weakness in both legs. Most appropriate next step?",
+   "options": [
+    "Dexamethasone 16 mg",
+    "Plain thoracic X-ray",
+    "Increase morphine dose",
+    "Urgent spinal radiotherapy",
+    "Zoledronic acid infusion"
+   ],
+   "answer": 0,
+   "why": "New back pain and leg weakness in a patient with cancer that spreads to bone means suspected malignant spinal cord compression, which is an emergency. eTG advises giving high-dose dexamethasone (16 mg orally or IV) straight away, while urgent whole-spine MRI and oncology review are arranged. How well he walks after treatment depends on how well he walks when treatment starts.",
+   "notes": [
+    null,
+    "A plain X-ray can miss cord compression, and getting one delays the steroids and MRI that are needed.",
+    "More opioid treats the pain but does nothing for the cord compression causing the new weakness.",
+    "Radiotherapy is a definitive treatment, but it needs MRI first to find the level, so it is not the first step.",
+    "Bisphosphonates help with bone pain and high calcium but do not relieve acute cord compression."
+   ],
+   "topic": "Palliative Care",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-78200f76",
@@ -3976,6 +4557,58 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-967c26aa",
+   "stem": "A 10-year-old boy was hit in the mouth by a cricket ball 10 minutes ago. His permanent upper central incisor is on the grass, intact. He is alert and cooperative. Most appropriate next step?",
+   "options": [
+    "Transport in milk",
+    "Scrub root, replant",
+    "Store in water",
+    "Rinse and replant",
+    "Dental review tomorrow"
+   ],
+   "answer": 3,
+   "why": "For an avulsed permanent tooth in a cooperative child, replant it immediately at the scene. Hold it by the crown, rinse it for a few seconds in milk, saline or cold water, put it back in the socket, and have him bite on gauze. Then arrange urgent dental splinting and check his tetanus status. Survival of the periodontal ligament cells drops quickly once the tooth has been out of the mouth for more than about 60 minutes, so every minute counts.",
+   "notes": [
+    "Milk is the right storage medium only when the tooth cannot be replanted, and transport wastes time when replanting at the scene is possible.",
+    "Scrubbing the root destroys the periodontal ligament cells and leads to the root being resorbed or fusing with the bone.",
+    "Water is hypotonic, so it makes the ligament cells swell and burst, which makes it a poor storage medium.",
+    null,
+    "Waiting until tomorrow means a long dry time out of the mouth, which kills the ligament cells, so the replanted tooth is unlikely to survive."
+   ],
+   "topic": "OMS/Dental",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-995e2a46",
+   "stem": "A 68-year-old man has had left iliac fossa pain for 3 days and a temperature of 38.4 °C. He has left iliac fossa tenderness with guarding, and his CRP is 140 mg/L. Most appropriate next investigation?",
+   "options": [
+    "Contrast CT abdomen",
+    "Urgent colonoscopy",
+    "Abdominal ultrasound",
+    "Erect chest X-ray",
+    "Water-soluble contrast enema"
+   ],
+   "answer": 0,
+   "why": "Suspected acute diverticulitis with localised peritonism needs CT of the abdomen and pelvis with IV contrast. CT confirms the diagnosis and shows complications such as abscess or perforation, which guide whether he needs antibiotics, drainage or surgery. Colonoscopy waits about 6 weeks, once the inflammation has settled, to exclude cancer.",
+   "notes": [
+    null,
+    "Colonoscopy during acute inflammation risks perforation, so it is deferred for about 6 weeks after recovery.",
+    "Ultrasound depends on the operator, is limited by bowel gas, and stages complications such as abscess or free air less reliably than CT.",
+    "An erect chest X-ray can show free air under the diaphragm but cannot confirm diverticulitis or find an abscess, and CT detects free air better.",
+    "A contrast enema during acute inflammation adds risk and shows less than CT, because it cannot show what is happening outside the bowel wall."
+   ],
+   "topic": "Gastrointestinal Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-99c26c18",
    "stem": "A 45-year-old woman is admitted from the emergency department of a regional hospital. She has had 2 days of colicky periumbilical pain and bilious vomiting, and she has passed no flatus. She has had two caesarean sections and an open appendicectomy. Adhesive small bowel obstruction is diagnosed. She is treated with nil by mouth, nasogastric decompression and intravenous fluids with added potassium. Eight hours later her pain is constant and severe despite intravenous morphine. Temperature is 38.1°C, pulse 126/min, blood pressure 104/66 mm Hg and respirations 22/min. The abdomen is distended, with localised tenderness and guarding in the right lower quadrant, and bowel sounds are reduced. Nasogastric output so far is 1.4 L. Leukocyte count is 16.2 x10^9/L (4.0 to 11.0). Venous lactate is 1.5 mmol/L (less than 2.0). CT of the abdomen with intravenous contrast shows a closed loop of small bowel with reduced wall enhancement and fluid in the mesentery. Which of the following is the most appropriate next step in management?",
    "options": [
@@ -4192,6 +4825,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-9f85e816",
+   "stem": "A 52-year-old Aboriginal man from Arnhem Land with type 2 diabetes presents in February with fever, productive cough and confusion. Temperature is 39.2 °C; chest X-ray shows right upper lobe consolidation. Which test best confirms the diagnosis?",
+   "options": [
+    "Melioidosis serology",
+    "Sputum Gram stain",
+    "Blood cultures",
+    "Legionella urinary antigen",
+    "CT chest"
+   ],
+   "answer": 2,
+   "why": "This is wet-season pneumonia with sepsis in a man with diabetes from the Top End, so melioidosis (Burkholderia pseudomallei) is the leading diagnosis. Culture of the organism confirms it. Take blood cultures, plus sputum, urine and throat swabs, before starting meropenem, as eTG and NT guidelines advise.",
+   "notes": [
+    "Serology has poor sensitivity, and many people in endemic areas already have antibodies, so it cannot confirm acute melioidosis.",
+    "A Gram stain may show gram-negative bacilli with a safety-pin look, but it cannot identify the species or confirm the diagnosis.",
+    null,
+    "The Legionella urinary antigen test detects only L. pneumophila serogroup 1, so it cannot confirm the most likely pathogen here.",
+    "CT shows how far the lung disease has spread, but imaging cannot identify the organism causing it."
+   ],
+   "topic": "Indigenous Health",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-9fadfaae",
    "stem": "A 73-year-old man is brought to the emergency department with sudden severe breathlessness that began overnight. For 3 weeks he has needed three pillows to sleep, and his ankles have become swollen. He had an anterior myocardial infarction treated with a stent 9 years ago, and he has hypertension and type 2 diabetes. He has had no cardiac imaging since the infarct. On arrival, pulse is 112/min, blood pressure 178/96 mmHg, respiratory rate 30/min and SpO2 86% on room air. His jugular venous pressure is raised, there is a third heart sound, crackles reach the mid-zones and there is pitting oedema to the shins. ECG shows sinus tachycardia with Q waves in V1 to V4, unchanged from 2 years ago. Chest X-ray shows cardiomegaly, upper lobe diversion, Kerley B lines and small bilateral pleural effusions. NT-proBNP is 5800 ng/L. hs-troponin I is 42 ng/L, and 45 ng/L 3 hours later (99th percentile below 34 ng/L). He improves with non-invasive ventilation, glyceryl trinitrate and IV furosemide. Which of the following is the most appropriate next investigation to establish the underlying diagnosis?",
    "options": [
@@ -4223,6 +4882,32 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-9fca141e",
+   "stem": "A term newborn boy is delivered by emergency caesarean for fetal distress. After drying and stimulation at 30 seconds, he is apnoeic and floppy, with a heart rate of 80/min. Most appropriate next step?",
+   "options": [
+    "Bag-mask ventilation",
+    "Free-flow oxygen",
+    "Chest compressions",
+    "Intravenous adrenaline",
+    "Tracheal suctioning"
+   ],
+   "answer": 0,
+   "why": "Under the ANZCOR neonatal resuscitation guideline, a newborn who is still apnoeic or has a heart rate below 100/min after drying and stimulation needs positive pressure ventilation, started in air for a term baby. Most newborn bradycardia comes from poor breathing, so good ventilation is the key step that brings the heart rate back up.",
+   "notes": [
+    null,
+    "Bag-mask ventilation is right because an apnoeic newborn with a heart rate under 100/min after initial steps needs positive pressure ventilation within the first minute.",
+    "Free-flow oxygen does not help a baby who is not breathing, because it gives no ventilation, and term resuscitation starts in air.",
+    "Adrenaline is only for a heart rate below 60/min despite effective ventilation and compressions.",
+    "Routine tracheal suctioning is not advised and delays ventilation; it is only for a blocked airway."
+   ],
+   "topic": "Neonatology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-a111fffd",
    "stem": "A 46-year-old man woke yesterday with hearing loss and tinnitus in his right ear. Otoscopy is normal, Weber lateralises left, and audiometry shows a 40 dB right sensorineural loss. Most appropriate next step?",
    "options": [
@@ -4246,6 +4931,32 @@
     "Otorhinolaryngology",
     "General Practice"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-a205023d",
+   "stem": "A 46-year-old man has fatigue and arthralgia of the second and third metacarpophalangeal joints. Fasting transferrin saturation is 68% and ferritin 950 µg/L. Most appropriate next investigation?",
+   "options": [
+    "Liver biopsy",
+    "MRI liver iron quantification",
+    "HFE gene testing",
+    "Serum caeruloplasmin",
+    "Bone marrow aspirate"
+   ],
+   "answer": 2,
+   "why": "A raised fasting transferrin saturation (above 45%) together with a high ferritin points to hereditary haemochromatosis. Arthropathy of the second and third MCP joints is a classic sign. HFE genotyping for C282Y homozygosity is the next test to confirm the diagnosis, and it is Medicare-rebated when iron studies are abnormal.",
+   "notes": [
+    "Liver biopsy is now used mainly to stage fibrosis when ferritin is above 1000 µg/L or liver enzymes are raised, not as the first confirmatory test.",
+    "MRI iron quantification is useful when genotyping is negative or to measure iron load, but it is not the first test to establish the diagnosis.",
+    null,
+    "Caeruloplasmin is used to investigate Wilson disease, which causes copper overload, not a high transferrin saturation with high ferritin.",
+    "Bone marrow iron staining assesses iron stores in anaemia and does not diagnose hereditary iron overload."
+   ],
+   "topic": "Pathology",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -4376,6 +5087,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-a549485f",
+   "stem": "A 52-year-old woman, four hours after total thyroidectomy, develops stridor and a tense, enlarging neck swelling. SpO2 is 91% on 6 L/min oxygen. Most appropriate next step?",
+   "options": [
+    "Urgent CT neck",
+    "Bedside wound opening",
+    "Orotracheal intubation",
+    "IV calcium gluconate",
+    "Nebulised adrenaline"
+   ],
+   "answer": 1,
+   "why": "She has a neck haematoma after thyroidectomy that is blocking her airway. This is an emergency, and the first step is to open the wound at the bedside: cut the skin sutures or clips and open the strap muscles to let the clot out (the SCOOP approach). Once the pressure is relieved, she goes back to theatre for haemostasis, and her airway is secured if she still needs it.",
+   "notes": [
+    "Imaging delays treatment in a patient whose airway is closing, and the diagnosis is already clear on examination.",
+    null,
+    "Intubating through a swollen larynx that is being compressed by a haematoma is likely to fail, and the haematoma should be released first.",
+    "Low calcium after thyroidectomy usually appears after 24 to 48 hours with tingling or tetany, not with a tense, growing neck swelling.",
+    "Nebulised adrenaline treats swelling of the upper airway lining, as in croup, and does nothing about a haematoma pressing on the trachea from outside."
+   ],
+   "topic": "Breast/Endocrine Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-a5aa4adc",
    "stem": "A 69-year-old man has a transperineal biopsy showing Gleason 4+3=7 prostate adenocarcinoma. His PSA is 11 ng/mL, and MRI shows a 10 mm right peripheral zone lesion without extraprostatic extension. He has no symptoms. Most appropriate staging investigation?",
    "options": [
@@ -4466,6 +5203,32 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-a5f3874f",
+   "stem": "A 34-year-old woman develops generalised urticaria, wheeze and lip swelling five minutes after intravenous cefazolin. Blood pressure is 82/50 mmHg. The infusion has been stopped. Most appropriate next step?",
+   "options": [
+    "IV hydrocortisone 200 mg",
+    "IM adrenaline 0.5 mg",
+    "IV promethazine 25 mg",
+    "Nebulised salbutamol 5 mg",
+    "Oral cetirizine 10 mg"
+   ],
+   "answer": 1,
+   "why": "Skin and mucosal signs with wheeze and hypotension straight after a drug is given means anaphylaxis. ASCIA and eTG guidance is to lay her flat and give IM adrenaline 0.01 mg/kg (maximum 0.5 mg) into the anterolateral thigh without delay, repeating every 5 minutes if needed. Adrenaline is the only first-line drug. Antihistamines, steroids and bronchodilators are only add-ons.",
+   "notes": [
+    "Corticosteroids take hours to work and do not treat the immediate shock or airway compromise, so they are not first line.",
+    null,
+    "ASCIA advises against sedating antihistamines such as promethazine in anaphylaxis because they can worsen hypotension, and they do not treat shock.",
+    "Salbutamol may help wheeze that persists after adrenaline, but it does not treat hypotension or airway swelling.",
+    "Oral non-sedating antihistamines only relieve skin symptoms and have no role in treating shock or airway compromise."
+   ],
+   "topic": "Immunology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-a6cd006e",
@@ -4712,6 +5475,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-ac3c6ff4",
+   "stem": "A 24-year-old woman develops lip swelling, a hoarse voice and wheeze 15 minutes after eating a cashew stir-fry. Her blood pressure is 82/50 mmHg. Most appropriate next step?",
+   "options": [
+    "IV hydrocortisone 200 mg",
+    "Oral cetirizine 10 mg",
+    "IM adrenaline 0.5 mg",
+    "Nebulised salbutamol 5 mg",
+    "IV adrenaline 1 mg"
+   ],
+   "answer": 2,
+   "why": "This is anaphylaxis: sudden swelling of the lips and airway, wheeze and low blood pressure after eating a nut. ASCIA and eTG say the first step is IM adrenaline 0.01 mg/kg, up to 0.5 mg for an adult, injected into the outer thigh and repeated every 5 minutes if needed. She should be laid flat, given oxygen and IV fluids alongside this.",
+   "notes": [
+    "Wrong: corticosteroids act too slowly to treat anaphylaxis and do not reliably prevent a second-wave reaction, so they must never delay adrenaline.",
+    "Wrong: antihistamines only help the skin symptoms and do not reverse airway swelling or shock.",
+    null,
+    "Wrong: salbutamol can be added for wheeze that persists after adrenaline, but it does not treat the airway swelling or the shock.",
+    "Wrong: a 1 mg IV bolus is the cardiac arrest dose and can cause arrhythmias or myocardial ischaemia. IV adrenaline infusions are reserved for shock that does not respond to IM doses."
+   ],
+   "topic": "Immunology",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-acb3ef9a",
    "stem": "A 47-year-old woman has had 6 hours of constant epigastric pain radiating to her back, with vomiting. She rarely drinks alcohol. Her lipase is 2400 U/L (normal <60). Her observations are stable. Most appropriate next investigation?",
    "options": [
@@ -4827,6 +5616,58 @@
     "Paediatrics",
     "Emergency Medicine"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-afa1db53",
+   "stem": "A 26-year-old man is brought in after a motorcycle crash. He is haemodynamically stable, has blood at the urethral meatus and cannot pass urine. Pelvic X-ray shows bilateral pubic rami fractures. Most appropriate next investigation?",
+   "options": [
+    "Retrograde urethrogram",
+    "Delayed-phase CT cystogram",
+    "Renal tract ultrasound",
+    "Intravenous pyelogram",
+    "Flexible urethrocystoscopy"
+   ],
+   "answer": 0,
+   "why": "Blood at the meatus, urinary retention and an anterior pelvic ring fracture point strongly to a posterior urethral injury. A retrograde urethrogram should be done before anyone tries to pass a urethral catheter, because a blind attempt can turn a partial tear into a complete one. If the urethra is disrupted, the bladder is drained with a suprapubic catheter.",
+   "notes": [
+    null,
+    "A CT cystogram looks for bladder rupture and needs a catheter in the bladder, which should not be passed until the urethra is shown to be intact.",
+    "An ultrasound of the renal tract can show a full bladder but cannot show the urethra, so it cannot confirm or rule out a urethral tear.",
+    "An intravenous pyelogram is an outdated test of the kidneys and ureters and does not show the urethra.",
+    "Flexible cystoscopy is not the first test in a male trauma patient, as it is invasive and can make a partial urethral tear worse; in males, a retrograde urethrogram comes first."
+   ],
+   "topic": "Trauma Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-b1baa286",
+   "stem": "A 24-year-old man is brought in after a motorcycle crash. He is distressed, BP 78/40 mmHg, SpO2 84%, with absent left breath sounds, hyperresonance and distended neck veins. Most appropriate next step?",
+   "options": [
+    "Erect chest X-ray",
+    "Bedside FAST scan",
+    "Pericardiocentesis",
+    "Needle decompression",
+    "Rapid sequence intubation"
+   ],
+   "answer": 3,
+   "why": "Hypotension, hypoxia, absent breath sounds and hyperresonance on one side, and raised JVP after trauma mean a tension pneumothorax. This is a clinical diagnosis and needs immediate decompression (needle at the 4th/5th intercostal space just in front of the midaxillary line, or finger thoracostomy), then an intercostal catheter. Per EMST/ATLS, you do not wait for imaging.",
+   "notes": [
+    "Waiting for a chest X-ray to confirm a clinical diagnosis delays treatment and risks cardiac arrest.",
+    "A FAST scan looks for blood in the abdomen and pericardium, but hyperresonance with absent breath sounds points to a tension pneumothorax, which needs decompression first.",
+    "Tamponade also causes distended neck veins and hypotension, but it would not cause one-sided absent breath sounds or hyperresonance.",
+    null,
+    "Positive-pressure ventilation before decompression makes the tension pneumothorax worse and can bring on arrest."
+   ],
+   "topic": "Trauma Surgery",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -5283,6 +6124,38 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-be000f7c",
+   "stem": "A 78-year-old woman taking rivaroxaban for atrial fibrillation has had four days of worsening headache after tripping and hitting her forehead a week ago. GCS is 14. Most appropriate next investigation?",
+   "options": [
+    "MRI brain with contrast",
+    "Lumbar puncture",
+    "Non-contrast CT brain",
+    "Skull X-ray series",
+    "Serum ESR and CRP"
+   ],
+   "answer": 2,
+   "why": "An older anticoagulated patient with a progressive headache after minor head trauma and a reduced GCS needs an urgent non-contrast CT brain to look for a subdural haematoma. NSW head injury guidance says every anticoagulated patient with a head injury needs CT. It is fast, widely available and sensitive for acute blood, and the result guides reversal and neurosurgical referral.",
+   "notes": [
+    "MRI is slower and less available, it is unsafe to send a patient with a falling GCS for it, and contrast adds nothing in looking for acute blood.",
+    "Lumbar puncture does not image a subdural collection, and it is dangerous with possible mass effect and an anticoagulant on board.",
+    null,
+    "A skull X-ray may show a fracture but cannot show intracranial blood, so a normal film would give false reassurance.",
+    "ESR and CRP help screen for giant cell arteritis, but the head trauma, anticoagulant and falling GCS point to a bleed, which must be imaged first."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Neurology",
+    "Neurosurgery",
+    "Geriatrics"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-beeea923",
    "stem": "A 24-year-old woman presents to the emergency department with 30 minutes of sudden, fast, regular palpitations that began while she was sitting at rest. Her first ECG showed a regular narrow complex tachycardia at 150/min. A modified Valsalva manoeuvre reverted it to sinus rhythm. On further questioning, she reports 4 months of 5 kg weight loss, heat intolerance, loose stools and feeling on edge. She has no past medical history and takes no medicines. After reversion, her pulse is 98/min and regular, blood pressure is 116/72 mm Hg, respiratory rate is 16/min, oxygen saturation is 98% on room air and temperature is 37.3 °C. She has a fine tremor of the outstretched hands and a diffuse, smooth, non-tender goitre with no palpable nodules. There is no proptosis. A repeat 12-lead ECG shows sinus rhythm with a normal PR interval and no delta waves. Blood results: TSH <0.01 mIU/L (0.4–4.0), free T4 32 pmol/L (10–25), free T3 11.5 pmol/L (3.5–6.5), beta-hCG negative. Which of the following is the most appropriate investigation to confirm the cause of her hyperthyroidism?",
    "options": [
@@ -5710,6 +6583,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-c95e5475",
+   "stem": "A 34-year-old man has a pelvic ring fracture on trauma CT after a motorcycle crash. He is haemodynamically stable, with blood at the urethral meatus and inability to void. Most appropriate next investigation?",
+   "options": [
+    "Retrograde CT cystogram",
+    "Intravenous urogram",
+    "Retrograde urethrogram",
+    "Renal tract ultrasound",
+    "Urine dipstick"
+   ],
+   "answer": 2,
+   "why": "A pelvic fracture with blood at the meatus and inability to void suggests a posterior urethral injury. A retrograde urethrogram should be done to confirm it before any attempt at urethral catheterisation, because a blind catheter can turn a partial tear into a complete one. If the urethra is disrupted, the bladder is drained with a suprapubic catheter.",
+   "notes": [
+    "A retrograde CT cystogram needs a urethral catheter to fill the bladder, so the urethra must be cleared first.",
+    "An intravenous urogram looks at the kidneys and ureters and does not show the urethra well.",
+    null,
+    "Renal tract ultrasound cannot reliably show a urethral tear and would not change management here.",
+    "A urine dipstick only detects haematuria, which does not tell you where the bleeding is, and he cannot void anyway."
+   ],
+   "topic": "Trauma Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-ca714e89",
    "stem": "A 49-year-old woman has guarding and shoulder-tip pain 3 hours after hysteroscopy and curettage. After 1 L crystalloid, BP rises from 86/50 to 94/56 mmHg; haemoglobin 95 g/L (pre-operatively 131). Most appropriate next step?",
    "options": [
@@ -5764,6 +6663,32 @@
     "Respiratory Medicine",
     "Emergency Medicine"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-cb04a3ea",
+   "stem": "A 48-year-old woman has a painless 2.5 cm nodule in the right thyroid lobe. TSH is 0.05 mIU/L (reference 0.4 to 4.0) and free T4 is high-normal. Most appropriate next investigation?",
+   "options": [
+    "Fine-needle aspiration cytology",
+    "Contrast CT neck",
+    "Technetium thyroid scan",
+    "Serum calcitonin level",
+    "Core needle biopsy"
+   ],
+   "answer": 2,
+   "why": "A thyroid nodule with a suppressed TSH suggests an autonomously functioning (toxic) nodule. The next step is thyroid scintigraphy to check whether the nodule is hot. Hot nodules are rarely malignant, so they usually do not need FNA. Cold or indeterminate nodules then need ultrasound-guided FNA.",
+   "notes": [
+    "A suppressed TSH means you first need to know the nodule's function, and a technetium scan shows whether it is hot (autonomous) or cold.",
+    "Contrast CT does not show the nodule's function, and the iodine load can worsen hyperthyroidism and delay radioiodine treatment.",
+    null,
+    "Calcitonin screens for medullary carcinoma and does not explain a suppressed TSH, so it is not the decisive next test.",
+    "Core biopsy is more invasive than FNA and is not a first-line test for a thyroid nodule, especially one that may be hot."
+   ],
+   "topic": "Breast/Endocrine Surgery",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -5862,6 +6787,58 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-cd307563",
+   "stem": "A 7-year-old boy has a splenic laceration after a bike crash. Pulse is 160/min, blood pressure 70/40 mm Hg despite fluid boluses. His Jehovah's Witness parents refuse transfusion. Most appropriate next step?",
+   "options": [
+    "Transfuse packed red cells",
+    "Seek Supreme Court order",
+    "Convene ethics committee review",
+    "Continue crystalloid resuscitation",
+    "Notify child protection services"
+   ],
+   "answer": 0,
+   "why": "In every Australian state, legislation lets doctors give a blood transfusion to a child without parental consent when it is needed urgently to prevent death or serious harm. This child is in haemorrhagic shock that has not responded to fluids, so the child's best interests come before the parents' religious refusal. Transfuse now and document the reasons clearly, ideally with a second senior doctor agreeing where local policy asks for this.",
+   "notes": [
+    null,
+    "A court order is the right route for non-urgent treatment the parents refuse, but waiting for one here would put the child's life at risk.",
+    "An ethics committee can advise on hard cases, but it cannot authorise treatment and would delay care in an emergency.",
+    "Giving more crystalloid alone goes along with the parents' refusal, but it will not replace lost red cells and makes coagulopathy worse in ongoing bleeding.",
+    "A child protection report may follow, but it does not authorise or deliver the emergency treatment this child needs right now."
+   ],
+   "topic": "Bioethics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-cdc16c9b",
+   "stem": "A 58-year-old woman develops rapidly enlarging anterior neck swelling and stridor four hours after total thyroidectomy. Her oxygen saturation is 89% on 15 L/min via non-rebreather mask. Most appropriate next step?",
+   "options": [
+    "Urgent CT neck",
+    "Nebulised adrenaline",
+    "Bedside wound opening",
+    "Awake fibreoptic intubation",
+    "Immediate return to theatre"
+   ],
+   "answer": 2,
+   "why": "Rapid neck swelling with stridor and low oxygen saturation after thyroidectomy is a compressive haematoma that threatens the airway. The first step is to open the wound at the bedside straight away, cutting the skin sutures and the strap muscle sutures and evacuating the clot (the SCOOP approach), without waiting to move her. Formal haemostasis in theatre follows once the airway is decompressed.",
+   "notes": [
+    "CT imaging wastes critical time and takes an unstable airway out of a safe area when the diagnosis is already clinically obvious.",
+    "Nebulised adrenaline reduces swelling of the airway lining but does nothing about an expanding haematoma pressing on the airway from outside.",
+    null,
+    "Intubating while the haematoma is still in place is likely to fail because laryngeal oedema distorts the anatomy, so decompression comes first.",
+    "Transfer to theatre delays decompression while she is deteriorating; theatre is for definitive haemostasis after the wound has been opened at the bedside."
+   ],
+   "topic": "Breast/Endocrine Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-ced5e26c",
    "stem": "A 2-year-old boy is brought to the emergency department at 11 pm by his mother with noisy breathing. He has had a runny nose and fever for 2 days, and this evening developed a barking cough and a hoarse cry. He is fully immunised and has no medical history. He weighs 12 kg. On arrival he was agitated, with stridor at rest, marked sternal and subcostal recession, and SpO2 91% in room air. He was given nebulised adrenaline 1:1000 (5 mL undiluted) and oral dexamethasone 7.2 mg (0.6 mg/kg), with oxygen held near his face. Sixty minutes later he is sitting on his mother's lap and playing. Temperature is 37.6 °C, pulse 132/min, respiratory rate 28/min, and SpO2 97% in room air. He has an occasional barking cough, no stridor at rest and no chest wall recession. His mother would like to take him home now because his older sister is home alone with a neighbour. Which of the following is the most appropriate next step in management?",
    "options": [
@@ -5921,6 +6898,58 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-d028a1ff",
+   "stem": "A 34-year-old man has a fusiform, flexed index finger two days after a thorn prick, with flexor sheath tenderness and pain on passive extension. Most appropriate next step?",
+   "options": [
+    "Oral flucloxacillin, GP review",
+    "Bedside incision and drainage",
+    "IV antibiotics and washout",
+    "Ultrasound of the finger",
+    "Splint and elevation alone"
+   ],
+   "answer": 2,
+   "why": "This finger shows Kanavel's signs: fusiform swelling, a flexed resting posture, pain on passive extension and tenderness along the flexor sheath. These mean infective flexor tenosynovitis. It needs urgent referral to the hand surgeons for washout of the sheath in theatre, plus IV antibiotics that cover Staphylococcus aureus and streptococci (for example flucloxacillin or cefazolin, per eTG), to prevent tendon necrosis, adhesions and spread into the deep spaces of the hand.",
+   "notes": [
+    "Oral antibiotics with delayed review undertreat a closed-space infection, and the tendon can be lost within hours to days.",
+    "A bedside incision cannot properly irrigate the whole sheath and risks damaging the tendon and the nerves and vessels of the finger.",
+    null,
+    "The diagnosis is clinical, and imaging must not delay referral and treatment.",
+    "Splinting and elevation help but are not enough without antibiotics and surgical drainage."
+   ],
+   "topic": "Plastic Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-d0671b61",
+   "stem": "A 68-year-old man with metastatic prostate cancer has four days of worsening mid-thoracic back pain, worse lying flat, and new bilateral leg heaviness. Reflexes are brisk in both legs. Most appropriate next investigation?",
+   "options": [
+    "Thoracic spine X-ray",
+    "Whole spine MRI",
+    "Nuclear bone scan",
+    "Serum PSA level",
+    "CT thoracic spine"
+   ],
+   "answer": 1,
+   "why": "Back pain that is worse lying flat, with new upper motor neuron leg signs, in a patient with known bone metastases suggests metastatic spinal cord compression. Urgent whole spine MRI, ideally within 24 hours, is the test of choice. Image the whole spine because about a third of patients have disease at more than one level. Start dexamethasone straight away and do not wait for the scan.",
+   "notes": [
+    "Plain films miss epidural disease and cannot show the cord, so a normal film does not rule out compression.",
+    null,
+    "A bone scan shows where metastases are but not whether the cord is compressed, and it delays treatment.",
+    "PSA reflects overall disease burden but cannot confirm or locate spinal cord compression.",
+    "CT shows bone destruction poorly displays the cord and epidural soft tissue, and it images only one level; use it only if MRI is contraindicated."
+   ],
+   "topic": "Palliative Care",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-d268f468",
@@ -6230,6 +7259,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-daa6372e",
+   "stem": "A 52-year-old man has a 9 mm pigmented lesion on his back that has grown over three months. Dermoscopy shows irregular borders and variegated colour. Most appropriate next investigation?",
+   "options": [
+    "Superficial shave biopsy",
+    "Partial punch biopsy",
+    "Complete excisional biopsy",
+    "Wide local excision",
+    "Sequential digital dermoscopy"
+   ],
+   "answer": 2,
+   "why": "A changing pigmented lesion with irregular borders and variegated colour is suspicious for melanoma. Australian melanoma guidelines recommend complete excisional biopsy with 2 mm margins, which confirms the diagnosis and gives an accurate Breslow thickness. The definitive margins and the need for sentinel node biopsy are then decided from that thickness.",
+   "notes": [
+    "A shave biopsy can cut through the base of the lesion, so the Breslow thickness cannot be measured and staging is wrong.",
+    "A punch biopsy samples only part of a lesion this size, so it can miss the deepest or most atypical area and under-stage or miss the melanoma.",
+    null,
+    "Wide local excision before a tissue diagnosis has no Breslow thickness to set the margins and can disrupt lymphatic drainage needed for sentinel node mapping.",
+    "Short-term digital monitoring is for flat lesions with low suspicion, not a lesion already growing with features of melanoma."
+   ],
+   "topic": "Plastic Surgery",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-db31fb48",
    "stem": "A 62-year-old female smoker with type 2 diabetes presents to vascular clinic with 3 weeks of forefoot rest pain eased by dependency. No pedal pulses, dry gangrene of three toes, ABI 0.28. Most likely cause of death within 5 years?",
    "options": [
@@ -6261,34 +7316,34 @@
    "difficulty": 2
   },
   {
-   "id": "ai-mcq-de6e33b3",
-   "stem": "A 68-year-old woman, a former smoker, has 3 months of breathlessness and 9 kg weight loss. Chest X-ray shows a large left pleural effusion. SpO2 94% on room air. Most appropriate next step?",
+   "id": "ai-mcq-de00a4de",
+   "stem": "A 48-year-old man reports three spontaneous hours-long attacks of spinning vertigo with left tinnitus. Left audiometry: air and bone thresholds 45 dB at 250–500 Hz, normal from 2000 Hz. Right ear normal. What does audiometry show?",
    "options": [
-    "Oral frusemide trial",
-    "Intercostal chest drain insertion",
-    "Talc slurry pleurodesis",
-    "Ultrasound-guided aspiration",
-    "Flexible bronchoscopy and biopsy"
+    "Low-frequency conductive loss",
+    "High-frequency sensorineural loss",
+    "Mixed hearing loss",
+    "Noise-induced notch",
+    "Low-frequency sensorineural loss"
    ],
-   "answer": 3,
-   "why": "A new, large, one-sided effusion with weight loss in a former smoker needs a diagnosis. Ultrasound-guided pleural aspiration both diagnoses and relieves it. Send fluid for protein, LDH, pH, glucose, cell count, cytology and culture, remove no more than about 1.5 L at once, and get a contrast CT chest ideally before full drainage.",
+   "answer": 4,
+   "why": "Air and bone thresholds are equal, so there is no air-bone gap and the loss is sensorineural. It affects only 250–500 Hz and recovers by 2000 Hz, so it is a low-frequency loss. A documented one-sided low-frequency sensorineural loss with spontaneous attacks of vertigo lasting hours meets the Bárány criteria for Ménière's disease, and because the loss is asymmetric he also needs ENT referral.",
    "notes": [
-    "Frusemide treats heart failure, but a large effusion on one side with weight loss and no features of heart failure needs fluid analysis, not a trial of diuretics.",
-    "A chest drain is not the first step for an undiagnosed effusion in a stable patient: it is more invasive and is kept for empyema, pneumothorax or planned pleurodesis.",
-    "Pleurodesis is only done once a recurrent malignant effusion is confirmed and the lung has been shown to re-expand.",
-    null,
-    "Bronchoscopy comes later, guided by CT, and has a low yield before then, while sampling the pleural fluid is less invasive and may make the diagnosis."
+    "A conductive loss needs bone conduction better than air conduction (an air-bone gap), and here the two thresholds are equal.",
+    "The thresholds are normal from 2000 Hz upward, so the high frequencies are spared; a high-frequency loss suggests presbycusis or a vestibular schwannoma.",
+    "A mixed loss needs both raised bone thresholds and an air-bone gap, and there is no gap here.",
+    "Noise-induced loss causes a dip around 4000 Hz, but here the loss is at 250–500 Hz and the high frequencies are normal.",
+    null
    ],
-   "topic": "Respiratory Medicine",
+   "topic": "Otorhinolaryngology",
    "topics": [
-    "Respiratory Medicine",
-    "Emergency Medicine",
-    "Oncology"
+    "Otorhinolaryngology",
+    "Neurology",
+    "General Practice"
    ],
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
-   "year": 4,
+   "year": 3,
    "difficulty": 2
   },
   {
@@ -6531,6 +7586,32 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-e5c30d76",
+   "stem": "A 68-year-old woman with metastatic breast cancer has had confusion, polyuria and constipation for three days. Her mucous membranes are dry. Her corrected calcium is 3.6 mmol/L. Most appropriate initial treatment?",
+   "options": [
+    "IV zoledronic acid",
+    "IV normal saline",
+    "IV furosemide",
+    "Subcutaneous denosumab",
+    "Oral prednisolone"
+   ],
+   "answer": 1,
+   "why": "This is severe symptomatic hypercalcaemia of malignancy, and the patient is dehydrated from polyuria. The first step is IV rehydration with 0.9% sodium chloride, which restores volume and increases calcium excretion by the kidneys. An IV bisphosphonate such as zoledronic acid is given once she is rehydrated (eTG).",
+   "notes": [
+    "Zoledronic acid is the right second step, but it takes 2 to 4 days to work and can harm the kidneys if given before rehydration.",
+    null,
+    "Furosemide worsens dehydration and is now used only for fluid overload once the patient has been rehydrated.",
+    "Denosumab is kept for hypercalcaemia that does not respond to bisphosphonates or for severe renal impairment, not for first treatment.",
+    "Steroids help mainly in hypercalcaemia driven by calcitriol (lymphoma, granulomatous disease), not in bone metastases from breast cancer."
+   ],
+   "topic": "Palliative Care",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-e5f0f904",
    "stem": "A 28-year-old man presents to the emergency department with 8 days of fever, malaise and anorexia, followed by a right upper quadrant ache and dark urine. He returned 16 days ago from 6 weeks volunteering in a rural village in Papua New Guinea, where he drank untreated water and was often bitten by mosquitoes. He had no pre-travel vaccines, took no chemoprophylaxis and takes no regular medicines. His temperature is 38.3 °C, pulse 102/min, blood pressure 118/74 mm Hg and SpO2 98% on room air. He is alert and his sclerae are mildly icteric. The liver edge is tender 2 cm below the costal margin and the spleen is not palpable. Results: ALT 2460 U/L (<35), ALP 155 U/L (30–110), bilirubin 46 µmol/L (<20), INR 1.1 and platelets 198 x10^9/L. Hepatitis A IgM is detected. A rapid Plasmodium antigen test is negative and one blood film shows no parasites. Ultrasound shows a thick-walled gallbladder with no stones and a common bile duct of normal calibre. Which of the following is the most appropriate next investigation?",
    "options": [
@@ -6616,6 +7697,32 @@
     "Gastroenterology",
     "General Practice"
    ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-e76c306c",
+   "stem": "A 45-year-old man has full-thickness circumferential burns of the left forearm after a house fire. Six hours into resuscitation, his hand is cool and pale with no radial Doppler signal. Most appropriate next step?",
+   "options": [
+    "Fasciotomy",
+    "Limb elevation",
+    "Escharotomy",
+    "Reduce fluid rate",
+    "CT angiography"
+   ],
+   "answer": 2,
+   "why": "Full-thickness burn eschar is stiff and does not stretch. As the tissue swells during fluid resuscitation, a circumferential eschar acts like a tourniquet and cuts off blood flow to the hand. Loss of distal perfusion is a clinical diagnosis, and Australian burns guidelines (ANZBA EMSB) call for urgent escharotomy to release the eschar and restore circulation.",
+   "notes": [
+    "Fasciotomy is kept for compartment syndrome that persists after escharotomy, or for electrical or crush injury, so it is not the first step here.",
+    "Elevation helps reduce swelling but cannot release a constricting eschar once the pulse is lost.",
+    null,
+    "Cutting back fluids risks under-resuscitation and shock; the fluid rate should be guided by urine output, not by limb swelling.",
+    "Imaging delays a decision that should be made at the bedside on clinical grounds, and the limb is at risk of irreversible ischaemia."
+   ],
+   "topic": "Plastic Surgery",
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -6744,6 +7851,32 @@
    "source": "ai",
    "year": 3,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-e9b74594",
+   "stem": "A 10-year-old boy fell off his scooter 15 minutes ago. His upper permanent central incisor was knocked out whole; he holds it by the crown. He is otherwise uninjured. Most appropriate next step?",
+   "options": [
+    "Replant tooth now",
+    "Store in milk",
+    "Scrub the root",
+    "Discard the tooth",
+    "Dental review tomorrow"
+   ],
+   "answer": 0,
+   "why": "An avulsed permanent tooth should be replanted as soon as possible, ideally within minutes, because periodontal ligament cells die quickly once the tooth is out of the mouth, especially if it is kept dry. Hold it by the crown, rinse it briefly in milk or saline if it is dirty, push it back into the socket, have the child bite on gauze, then arrange urgent dental splinting.",
+   "notes": [
+    null,
+    "Milk is only a holding medium for when immediate replantation is not possible, and the delay worsens the outcome.",
+    "Scrubbing the root destroys the periodontal ligament cells needed for reattachment; a dirty tooth only needs a brief rinse.",
+    "Discarding is right for an avulsed primary tooth, but this is a permanent incisor that can be saved.",
+    "Waiting until tomorrow means a long dry time and ligament death, so replantation will almost certainly fail."
+   ],
+   "topic": "OMS/Dental",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-ecb71b7c",
@@ -7751,6 +8884,44 @@
    "difficulty": 3
   },
   {
+   "id": "headqa-2013-175",
+   "stem": "0 months previously healthy with acute gastroenteritis of one day of evolution and signs of mild dehydration, without blood or mucus in the stool and without oral intolerance. What is the initial choice treatment in our environment?",
+   "options": [
+    "Intravenous rehydration, absolute diet 8 hours and start feeding with astringent diet.",
+    "Rehydration with low osmolality oral rehydration solution (sodium 60-75 mEq / L) and continue with your usual diet.",
+    "Rehydration with low osmolality oral rehydration solution (sodium 60-75 mEq / L), maintain regular feeding and oral amoxicillin for 10 days.",
+    "Rehydration with low osmolality oral rehydration solution (sodium 60-75 mEq / L) and start feeding with lactose-free formula.",
+    "Rehydration with low osmolality oral rehydration solution (sodium 60-75 mEq / L), maintain regular feeding and loperamide 7 days."
+   ],
+   "answer": 1,
+   "topic": "Paediatrics",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-178",
+   "stem": "Infant of 1 month of life who goes to the hospital emergency department referred by his pediatrician for jaundice. He has been referring for 10 days and has been increasing. In the blood test, a total bilirubin of 7 mg / dl stands out, with indirect bilirubin being 1.5 mg / dl. The most likely cause, among the following, of this jaundice is:",
+   "options": [
+    "Biliary tract atresia",
+    "Jaundice due to breastfeeding.",
+    "Isoimmunization 0-A late onset.",
+    "Gilbert's disease.",
+    "Hereditary spherocytosis."
+   ],
+   "answer": 0,
+   "topic": "Paediatrics",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "headqa-2013-180",
    "stem": "A 4-year-old boy comes to the Health Center who, 5 minutes earlier, begins with angioedema on his face, conjunctivitis, nasal congestion and hoarseness, coinciding with the intake of a spoonful of yogurt that was mistakenly given him at school. Among the background is diagnosed with cow's milk protein allergy. The examination revealed mild hypotension, heart rate 110 beats / min, Sat O2 93%, pale and somewhat sweaty, with disseminated wheezing. What is the first treatment of choice?",
    "options": [
@@ -7787,6 +8958,120 @@
    "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
    "year": 3,
    "difficulty": 3
+  },
+  {
+   "id": "headqa-2013-188",
+   "stem": "A 16-year-old woman consulted for primary amenorrhea. It presents a normal female development of secondary sexual characteristics. The levels of estradiol and testosterone are normal. In the gynecological examination, agenesis of the vagina is appreciated. Ultrasound is performed and there is absence of uterus. The ovaries are normal ultrasound. No left kidney is seen. The most likely diagnosis is:",
+   "options": [
+    "Rokitansky syndrome.",
+    "Morris syndrome.",
+    "Congenital adrenal hyperplasia.",
+    "Polycystic ovarian syndrome.",
+    "Kallman syndrome."
+   ],
+   "answer": 0,
+   "topic": "Gynaecology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-205",
+   "stem": "A clinical trial is conducted in hypertensive patients to assess the effectiveness of a new drug in reducing the occurrence of heart failure. The Relative Risk (RR) of heart failure in relation to the usual drug is 0.69 with a 95% CI of 0.31 to 1.17. What do these results mean?",
+   "options": [
+    "The new drug decreases the risk of heart failure significantly.",
+    "The new drug is very effective and should be marketed.",
+    "The reduction of the risk of heart failure with the new drug is clinically irrelevant.",
+    "There are no statistically significant differences between the effect of the drugs studied.",
+    "The new drug increases the risk of heart failure but not significantly."
+   ],
+   "answer": 3,
+   "topic": "Public Health",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-220",
+   "stem": "50-year-old woman who for 1 month has a depressed mood, anhedonia, memory loss, easy crying, loss of energy, sense of worthlessness and guilt, marked weight loss and early awakening, as well as inability to perform their tasks usual at home. In separation proceedings for 3 months. Point out the most appropriate diagnosis:",
+   "options": [
+    "Dysthymia",
+    "Pseudodementia",
+    "Depressive adaptive disorder.",
+    "Episode of major depression.",
+    "Minor depression"
+   ],
+   "answer": 3,
+   "topic": "Psychiatry",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-221",
+   "stem": "A 43-year-old man smokes 20 cigarettes a day, who comes to his clinic taken by a family member, because he has been sleeping for a few days, less than 3 hours a day, without mentioning fatigue. He adds that he has begun to spend large amounts of money, compromising family finances. It is verbose, with acceleration of thought and megalomaniacal appearance. As a personal history, there are no diseases of interest except for a depressive episode 5 years ago. He does not believe that anything happens to him, but he has agreed to go to the consultation with the intention of seeking help to quit smoking. There is no consumption of other toxins and the analytical and neurological examination do not provide abnormal data. In this patient, taking into account his most probable diagnosis, which treatment would be the LESS indicated:",
+   "options": [
+    "Bupropion.",
+    "Valproic acid.",
+    "Lithium carbonate.",
+    "Risperidone.",
+    "Olanzapine."
+   ],
+   "answer": 0,
+   "topic": "Psychiatry",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2013-228",
+   "stem": "A 19-year-old man consulted for a 24-hour history of pain, swelling and functional impotence of the right knee accompanied by a fever of 38ºC. Physical examination reveals inflammatory signs and joint effusion in the right knee. The analytical data show a leukocytosis with neutrophilia and an elevation of the C-reactive protein. The syndromic diagnosis of acute monoarthritis is made. What is the most likely etiologic diagnosis?",
+   "options": [
+    "Arthritis by microcrystals.",
+    "Reactive arthritis",
+    "Bacterial infectious arthritis.",
+    "Infectious arthritis due to mycobacteria.",
+    "Rheumatoid arthritis."
+   ],
+   "answer": 2,
+   "topic": "Rheumatology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2013-233",
+   "stem": "Adolescent of 16 years who consults for primary amenorrhea. He does not have medical-surgical history of interest. On physical examination, we found female secondary sex characteristics, female external genitalia, with stage III-IV breast development, scanty pubic and axillary hair. He presents a stature in the 90th percentile for his age. The plain radiograph reveals a bone age of 15.8 years. The analytical study reveals an estradiol of 50 pg / ml, and high gonadotropins. Which of the following clinical entities would be compatible with the diagnosis?",
+   "options": [
+    "Klinefelter syndrome.",
+    "Kallman syndrome.",
+    "Constitutional growth retardation.",
+    "Congenital adrenal hyperplasia.",
+    "Complete androgenic insensitivity syndrome."
+   ],
+   "answer": 4,
+   "topic": "Endocrinology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "headqa-2013-41",
@@ -8110,6 +9395,861 @@
    "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
    "year": 3,
    "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-100",
+   "stem": "A 68-year-old woman diagnosed with pulmonary tuberculosis. Treatment with Isoniacid, Rifampicin and Ethambutol was started. At 12 days after the start of treatment, he consulted for fever of 38ºC, skin rash, lymphadenopathy, arthralgia, lumbar pain, oliguria and eosinophilia with acute deterioration of renal function. The urine test revealed hematuria, leukocyturia with eosinophiluria in Wright's stain and non-nephrotic proteinuria (1.2 grams daily). With these clinical data the most likely diagnosis is:",
+   "options": [
+    "Acute tubular necrosis due to drug nephrotoxicity.",
+    "Acute tubular necrosis of ischemic etiology.",
+    "Ateroembolic disease.",
+    "Thrombotic occlusion of the main renal artery.",
+    "Acute tubulointerstitial nephritis."
+   ],
+   "answer": 4,
+   "topic": "Nephrology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-105",
+   "stem": "Which of the following combinations of drugs is commonly used in the maintenance treatment of patients with a kidney transplant?",
+   "options": [
+    "Tacrolimus, cyclosporine and mycophenolate mofetil.",
+    "Tacrolimus, mycophenolate mofetil and glucocorticoids.",
+    "Tacrolimus, sirolimus and mycophenolate mofetil.",
+    "Tacrolimus, azathioprine and mycophenolate mofetil.",
+    "Cyclosporine, azathioprine and mycophenolate mofetil."
+   ],
+   "answer": 1,
+   "topic": "Nephrology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-106",
+   "stem": "A 78-year-old man who underwent cardiac catheterization with revascularization of the right coronary artery 3 weeks ago and consulted for nausea and vomiting of 3 days of evolution. It presents arterial pressure of 185/85 mm Hg and purple lesions on the toes of both feet. In the analytical, urea 230 mg / dL and creatinine 5.8 mg / dL were observed. What is the most likely diagnosis?",
+   "options": [
+    "Malignant arterial hypertension.",
+    "Acute tubular necrosis by contrast.",
+    "Rapidly progressive renal failure.",
+    "Renal atheroembolic disease.",
+    "Bilateral renal artery stenosis."
+   ],
+   "answer": 3,
+   "topic": "Nephrology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-107",
+   "stem": "A 65-year-old man with no medical history of interest who consulted for fine micturition, incomplete emptying, diurnal urinary frequency every 3 hours and nocturia 1-2 times. Rectal examination reveals a medium-large prostate without nodules. Prostate-specific antigen (PSA) 0.5 ng / mL. It provides reno-vesico-prostatic ultrasound that indicates a prostatic volume of 35 g, with absence of postvoid residual and without other evaluable alterations. What will be our attitude towards this patient?",
+   "options": [
+    "Offer radical prostatectomy as a treatment for your prostate cancer.",
+    "Request scintigraphic study to rule out the presence of bone and visceral metastases secondary to prostate cancer.",
+    "Start treatment with androgen blockade with LHRH analogs given the demonstrated efficacy of this drug in the treatment of patients with BPH.",
+    "Indicate surgical desobstructive treatment (transurethral resection of the prostate) as the treatment of choice for prostate hyperplasia.",
+    "Consider treatment with alpha-blockers as an initial treatment for benign prostatic hyperplasia (BPH)."
+   ],
+   "answer": 4,
+   "topic": "Urology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-110",
+   "stem": "78-year-old man with poorly controlled rheumatoid arthritis (RA). A history of 2 admissions for heart failure and atrial fibrillation in the last 6 months. In current treatment with infliximab, prednisone, furosemide, enalapril, carvedilol and acenocoumarol. Enter again for biventricular heart failure clinic. The ECG showed atrial fibrillation at 102 bpm and advanced left bundle branch block. An echocardiogram shows biatrial dilation, thickening of the left ventricular wall with ejection fraction of 45% and restrictive pattern. The analytical highlights: Hb 10 gr / dL, creatinine 2.1 mg / dL (FG 20 mL / min), CRP 124 mg / L, rheumatoid factor 240 U / L, BNP 980 ng / L, proteinuria 4.8 g / 24h. What is the most likely diagnosis?",
+   "options": [
+    "Cardio-renal syndrome type 2.",
+    "Amyloidosis AA.",
+    "Myocarditis of giant cells.",
+    "Toxicity due to infliximab.",
+    "Membranous glomerulonephritis associated with RA."
+   ],
+   "answer": 1,
+   "topic": "Rheumatology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-111",
+   "stem": "A 40-year-old man goes to the emergency department for inflammation of the right knee of about 24 hours of evolution. The patient does not report previous trauma and is the first episode of arthritis that presents. A the anamnesis directed that 4 weeks ago he returned from a trip to Morocco and that being there he presented chills and diarrhea that subsided after a week. The examination also revealed inflammation of the right Achilles tendon. What is the attitude to follow?",
+   "options": [
+    "It is a spondyloarthropathy, start treatment with methotrexate.",
+    "Immobilize the knee with a bandage for 15 days and give non-steroidal anti-inflammatories.",
+    "Practice an arthrocentesis to perform culture, analysis of microcrystals and cellular counting of the synovial fluid.",
+    "Perform an arthroscopy.",
+    "It is a gouty arthritis, I would start treatment with allopurinol."
+   ],
+   "answer": 2,
+   "topic": "Rheumatology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-115",
+   "stem": "A 35-year-old woman consulted for the appearance of maculo-papular lesions in the upper limbs without other symptoms. The biopsy of one of them demonstrates the presence of noncaseating granulomas. Blood tests are normal except for an elevation of angiotensin-converting enzyme (ACE) levels. On chest radiography, bilateral hilar adenopathies are detected. Which of the following considers the most appropriate attitude?",
+   "options": [
+    "Start treatment with corticosteroids orally.",
+    "Start treatment with oral hydroxychloroquine.",
+    "Start treatment with azathioprine orally.",
+    "Start treatment with leflunomide orally.",
+    "Continue study without starting treatment."
+   ],
+   "answer": 4,
+   "topic": "Respiratory Medicine",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-118",
+   "stem": "In a 14-year-old patient with Down syndrome who presents with nucalgia (normal neurological examination) and is going to be subjected to general anesthesia (orotracheal intubation) for elective abdominal surgery, the following should be ruled out:",
+   "options": [
+    "Atloaxoid instability.",
+    "Tracheoesophageal fistulas.",
+    "Brain tumor.",
+    "Vocal cord hyperplasia.",
+    "Hydrocephalus"
+   ],
+   "answer": 0,
+   "topic": "Paediatrics",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-119",
+   "stem": "A 23-year-old boy, who makes a jump while playing basketball, falls on his right lower limb with his knee in hyperextension, applying a sharp turn to his knee while keeping his foot fixed on the ground. The patient, perceives a snap and sharp pain in his knee, unable to continue playing. Note feeling of instability when performing the support of said extremity. On clinical examination, intense articular effusion is seen, so arthrocentesis is performed, which shows an important acute hemarthrosis without the presence of droplets of fat supernatanting in the extracted fluid. The mobility of the knee is free and the Lachman maneuver is positive. What is the diagnostic suspicion?",
+   "options": [
+    "Break in cube handle of the inner meniscus.",
+    "Isolated rupture of the lateral collateral ligament.",
+    "Fracture by tearing of the anterior tibial spine.",
+    "Unicondylar fracture of the medial condyle.",
+    "Rupture of the anterior cruciate ligament"
+   ],
+   "answer": 4,
+   "topic": "Orthopaedics",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-124",
+   "stem": "A 60-year-old patient who came to the hospital's emergency department due to a left chest pain, cough and yellowish sputum, a temperature of 38.7ºC, a sensation of shortness of breath. Artificial saturation of 02 80%. Hemogram leukocytes 12000 / uL with 86% polymorphonuclear cells. Chest x-ray: alveolar infiltrate on the left base with air bronchogram. On suspicion of pneumonia, pneumococcal Ag is made in urine, which is positive and sputum culture is sent to the Microbiology service. Which empirical antibiotic treatment of the indicated ones is more correct in expectation of microbiological results?",
+   "options": [
+    "Ceftazidime",
+    "Clarithromycin",
+    "Azithromycin",
+    "Ceftriaxone",
+    "Doxycycline"
+   ],
+   "answer": 3,
+   "topic": "Infectious Diseases",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-127",
+   "stem": "Which of the following analytical determinations is less useful for decision making in the follow-up and control of an HIV-infected person?",
+   "options": [
+    "CD4 lymphocyte count in peripheral blood.",
+    "Quantification of immunoglobulin.",
+    "Measurement of viral load.",
+    "Studies of HIV resistance to antiretroviral drugs.",
+    "Analysis of the co-receptor tropism."
+   ],
+   "answer": 1,
+   "topic": "Infectious Diseases",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-134",
+   "stem": "A 24-year-old girl suffers a bicycle fall with trauma to the abdominal area with the handlebar. A few hours after the trauma begins with intense pain in the left hypochondrium, so he goes to consult an emergency service. Upon arrival the patient is pale and sweaty, the blood pressure figures are 82/54 mmHg and the heart rate is 120 beats per minute. What kind of shock is the most likely to suffer from this patient?",
+   "options": [
+    "Hypovolemic",
+    "Septic.",
+    "Cardiogenic",
+    "Anaphylactic.",
+    "Neurogenic"
+   ],
+   "answer": 0,
+   "topic": "Trauma Surgery",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-135",
+   "stem": "Young person who goes to the emergency room for second degree flame burn of 10% of the body surface, affecting the right arm in an extensive and circular way. There is no arterial pulse in the hand measured by Doppler. What is the treatment of choice?",
+   "options": [
+    "Cures with occlusive silver sulfadiacin and evaluation of depth per week.",
+    "Lymphatic drainage and assess a vascular by-pass.",
+    "Escarotomy or emergency decompression incisions.",
+    "Expectant behavior",
+    "Amputation of the extremity."
+   ],
+   "answer": 2,
+   "topic": "Plastic Surgery",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-142",
+   "stem": "Within head and neck carcinomas, what type of tumor is most obviously related to the human papillomavirus?",
+   "options": [
+    "Squamous cell carcinoma of the larynx.",
+    "Squamous cell carcinoma of the oropharynx.",
+    "Squamous cell carcinoma of the hypopharynx.",
+    "Adenocarcinoma sinonasal.",
+    "Undifferentiated carcinoma of cavum."
+   ],
+   "answer": 1,
+   "topic": "Otorhinolaryngology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-145",
+   "stem": "Which of the following skin diseases is associated with celiac disease?",
+   "options": [
+    "Atopic dermatitis.",
+    "Dermatitis herpetiformis",
+    "Molluscum contagiosum.",
+    "Annular granuloma.",
+    "Rosacea"
+   ],
+   "answer": 1,
+   "topic": "Dermatology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-149",
+   "stem": "A 75-year-old man who reported decreased visual acuity in his right eye of two weeks of evolution. In the fundus examination, soft drusen and serous detachment at the level of the macula are seen. What treatment is currently the most indicated for this disease?",
+   "options": [
+    "Focal photocoagulation with laser.",
+    "Photodynamic therapy.",
+    "Intravitreal injections of anti-angiogenic drugs.",
+    "Posterior vitrectomy.",
+    "Observation."
+   ],
+   "answer": 2,
+   "topic": "Ophthalmology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-157",
+   "stem": "A 28-year-old violinist who is consulting for having presented panic attacks during his public performances in the last 3 months. The crises are accompanied by intense fear of being blocked and not being able to continue with the performance, something that would be humiliating for him. This fear has made him cancel his next performances. In the rest of his daily activities he does not experience this fear, nor does he experience it when he rehearses with his orchestra colleagues. What diagnosis would you consider most likely for this case?",
+   "options": [
+    "Simple phobia",
+    "Panic disorder",
+    "Social phobia of execution.",
+    "Generalized anxiety disorder.",
+    "Agoraphobia."
+   ],
+   "answer": 2,
+   "topic": "Psychiatry",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-158",
+   "stem": "A 28-year-old Caucasian woman, Nulípara, attends an annual gynecological examination and requests the possibility of reducing the risk of ovarian cancer given that her mother died of this neoplasm at 64 years of age. In the detailed questioning, no other family history of ovarian or breast cancer is identified. Which of the following strategies is the most appropriate to reduce the risk of ovarian cancer in this patient?",
+   "options": [
+    "Bilateral tubal occlusion.",
+    "Bilateral laparoscopic salpingo-oophorectomy.",
+    "Continuous daily administration of aspirin at low dose.",
+    "Advise her to use artificial lactation if she is pregnant.",
+    "Treatment with combined oral contraceptives."
+   ],
+   "answer": 4,
+   "topic": "Gynaecology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-162",
+   "stem": "A pregnant woman of 31 weeks goes to the emergency department referring loss of fluid through the vagina. Objective speculum exploration of clear fluid through the external cervical os. It is apyletic. The cardiotocographic record does not reveal contractions and the fetal heart rate is normal. The ultrasound scan reveals no malformations and the cervix is ​​not shortened. What therapeutic combination would it indicate?",
+   "options": [
+    "Tocolytics, corticosteroids and antibiotics.",
+    "Tocolytics and antibiotics.",
+    "Tocolytics and corticosteroids.",
+    "Oxytocin, corticosteroids and antibiotics.",
+    "Corticosteroids and antibiotics"
+   ],
+   "answer": 4,
+   "topic": "Obstetrics",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-163",
+   "stem": "A 26-year-old woman comes to the emergency room due to abdominal pain and scarce vaginal blood loss. It refers to an amenorrhea of ​​7 weeks. You perform a pregnancy test, with a positive result. What is the next step?",
+   "options": [
+    "Perform a vaginal ultrasound examination.",
+    "Recommend home rest and repeat the pregnancy test in a week.",
+    "Evacuate the uterus by curettage by aspiration.",
+    "Standard progesterone micronized vaginally until week 14 of gestation.",
+    "Evacuate the uterus by intravaginal administration of prostaglandins."
+   ],
+   "answer": 0,
+   "topic": "Obstetrics",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-175",
+   "stem": "A premature newborn presents at 2 days of life a picture of poor general condition, subcutaneous petechiae and ecchymoses and persistent bleeding from the puncture sites. The chest radiograph is compatible with pulmonary hemorrhage. In the coagulation study, prothrombin and partial thromboplastin times are elongated. The platelet count is 105,000 / uL. What is the most likely diagnosis?",
+   "options": [
+    "Disseminated intravascular coagulation secondary to neonatal sepsis.",
+    "Neonatal autoimmune thrombocytopenia.",
+    "Neonatal alloimmune thrombocytopenia.",
+    "Hemorrhagic disease of the newborn due to vitamin K deficiency.",
+    "Neonatal hemorrhage due to platelet dysfunction."
+   ],
+   "answer": 0,
+   "topic": "Neonatology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-181",
+   "stem": "He is presented with a cohort study involving 1000 female smokers and 2000 non-smoking women of the same age. If, after 5 years, 30 smokers and 20 nonsmoking women have experienced a stroke, what would be the relative risk and the attributable risk?",
+   "options": [
+    "Relative risk = 3, attributable risk = 10 out of every 1000.",
+    "Relative risk = 3, attributable risk = 20 out of every 1000.",
+    "Relative risk = 1.5, attributable risk = 10 out of every 1000.",
+    "Relative risk = 1.5, attributable risk = 30 out of 1000.",
+    "Relative risk = 10 out of 1000, attributable risk = 3."
+   ],
+   "answer": 1,
+   "topic": "Public Health",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-36",
+   "stem": "A 76-year-old woman came to the emergency room referring to pain in the right groin and vomiting for about 6 hours. On examination, a hard consistency tumor is palpable just below the line joining the anterosuperior iliac spine and the pubis (which corresponds to the location of the inguinal ligament). Most likely, it is one:",
+   "options": [
+    "Direct inguinal hernia.",
+    "Spiegel hernia.",
+    "Indirect inguinal hernia.",
+    "Femoral hernia (crural).",
+    "Obturator hernia"
+   ],
+   "answer": 3,
+   "topic": "General Surgery",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-40",
+   "stem": "In which of these patients would the appropriate surgical treatment be the performance of an atypical wedge gastrectomy by laparoscopy without extended lymphadenectomy?",
+   "options": [
+    "Infiltrating and ulcerated gastric adenocarcinoma at the antro-pylorus level.",
+    "Subcardial infiltrating gastric adenocarcinoma.",
+    "Gastrointestinal stromal tumor at the level of the gastric body-greater curvature.",
+    "Lymphoma MALT.",
+    "Barrett's esophagus with intestinal metaplasia and dysplasia."
+   ],
+   "answer": 2,
+   "topic": "Gastrointestinal Surgery",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-43",
+   "stem": "A 66-year-old man, previously diagnosed with liver cirrhosis of alcoholic etiology, is brought to the Emergency Department due to an increase in the abdominal perimeter and temporo-spatial disorientation. On physical examination, there is evidence of ascites and \"flapping tremor\" or asterixis. Which of the following explorations should be done as a matter of urgency?",
+   "options": [
+    "A cranial computed tomography to rule out a cerebrovascular accident.",
+    "An abdominal ultrasound to confirm the presence of ascites.",
+    "An exploratory paracentesis to rule out a spontaneous bacterial peritonitis.",
+    "An electroencephalogram to confirm the existence of hepatic encephalopathy.",
+    "An abdominal computed tomography to rule out a hepatocellular carcinoma."
+   ],
+   "answer": 2,
+   "topic": "Gastroenterology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-47",
+   "stem": "A 49-year-old woman came to the emergency room due to shivering, fever of 39ºC, pain in the right hypochondrium, jaundice and vomiting. The scan reveals TA 100/50 mmHg. FC 110 lpm. Prostration and pain on palpation in the right quadrant, with positive Murphy. The analytical sample shows leukocytosis with left deviation and abdominal ultrasound, cholelithiasis, choledocholithiasis and dilation of the extrahepatic bile duct. Empirical treatment is started with antibiotic and fluid therapy. What is the most effective procedure to perform next?",
+   "options": [
+    "Maintain antibiotic treatment and support measures with posterior regulated cholecystectomy.",
+    "Laparoscopic cholecystectomy.",
+    "Placement of an external biliary drainage.",
+    "Urgent cholecystectomy with cannulation of the common bile duct.",
+    "Endoscopic retrograde cholangiopancreatography with sphincterotomy."
+   ],
+   "answer": 4,
+   "topic": "Gastroenterology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-48",
+   "stem": "A 60-year-old woman, diagnosed with diabetes mellitus type 2 and hypertension, consults for palpitations of weeks of evolution. Provides an electrocardiogram performed a week ago in which he is in atrial fibrillation with an average ventricular rate of 70 beats / min. In the physical examination and in a new electrocardiogram performed in consultation is in sinus rhythm. Is it necessary to anticoagulate it chronically?",
+   "options": [
+    "It is not necessary to anticoagulate because it has a paroxysmal atrial fibrillation and is not currently in atrial fibrillation.",
+    "It is not necessary to anticoagulate because it is less than 75 years old and has not had a previous stroke.",
+    "You must be chronically anticoagulated because you have a CHADS of 2 and a CHADS-VASc of 3.",
+    "Anticoagulation is not necessary, but antiaggregation with acetylsalicylic acid may be prescribed.",
+    "Must be anticoagulated only with subcutaneous low molecular weight heparin when in atrial fibrillation."
+   ],
+   "answer": 2,
+   "topic": "Cardiology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-49",
+   "stem": "A 32-year-old man with no history of interest or cardiovascular risk factors. Clinic of dyspnea when climbing a floor of stairs of 1 month of evolution. Consultation due to sudden syncope preceded by exertion. Family history of death not explained abruptly in his brother. On physical examination, a more audible rumen systolic murmur with aortic focus is highlighted. The electrocardiogram performed in the consultation shows a sinus rhythm with a compatible pattern of left ventricular hypertrophy. An echocardiogram was performed to document an important asymmetric hypertrophy of the interventricular septum with a subvalvular dynamic gradient of 70 mmHg with moderate secondary mitral regurgitation and preserved left ventricular ejection fraction. Which therapeutic option is the LESS indicated?",
+   "options": [
+    "Beta-blockers.",
+    "Digoxin",
+    "Calcium-non-dihydropyridine antagonists.",
+    "Implantable automatic defibrillator.",
+    "Surgical septal myomectomy of Morrow."
+   ],
+   "answer": 1,
+   "topic": "Cardiology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-50",
+   "stem": "A 65-year-old man, smoker and diabetic, is brought to the Emergency Department for presenting an oppressive, deep-throating sweat for about an hour. In the ECG performed, sinus rhythm was observed at 80 bpm and a complete block of the left branch. What should our attitude be?",
+   "options": [
+    "Perform an analytical determination of troponin and wait for its result to confirm the presence of an acute myocardial infarction.",
+    "Treat the patient as if it were an infarction with ST-segment elevation, proposing a reperfusion therapy as early as possible.",
+    "To implant a transcutaneous pacemaker before the possibility of developing a more advanced block.",
+    "Perform an urgent CT to rule out the presence of an acute pulmonary embolism.",
+    "As it could be an acute pericarditis, we will administer NSAIDs."
+   ],
+   "answer": 1,
+   "topic": "Cardiology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-53",
+   "stem": "Man of 55 years, obese, dyslipidemic and active smoker. In study for refractory hypertension without evidence of cardiac or renal damage so far. He refers to morning headache with daytime hypersomnia. ABPM was performed (ambulatory blood pressure monitoring 24 hours) and arterial hypertension was confirmed despite 3 drugs, one of them diuretic, with higher nighttime blood pressures than daytime blood pressure. What diagnostic test would you request next with your clinical suspicion?",
+   "options": [
+    "Determination of catecholamines in urine 24h.",
+    "Hormonal determination of renin-aldosterone.",
+    "Night polysomnography.",
+    "Doppler ultrasound",
+    "CT aorta."
+   ],
+   "answer": 2,
+   "topic": "Cardiology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-63",
+   "stem": "A 70-year-old man presented with progressive dyspnea and a non-productive cough several years old. In chest X-ray, pleural plaques are seen in the mediastinal and diaphragmatic pleura. On CT, these plaques are confirmed, also appreciating the presence of reticulonodulillar involvement predominantly in lower fields. Among the following, what attitude would you recommend in the first place?",
+   "options": [
+    "Complete your smoking history.",
+    "Inquire about occupational exposure.",
+    "Request blood tests to rule out eosinophilia.",
+    "Do complete respiratory functional tests.",
+    "Propose a transbronchial biopsy."
+   ],
+   "answer": 1,
+   "topic": "Occupational/Environmental Medicine",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-65",
+   "stem": "A 38-year-old man went to the emergency room for progressive dyspnea and dry cough of a week of evolution. He does not have a history of interest. The vital signs are: temperature 37.8ºC, blood pressure 110/70 mmHg, heart rate 105 bpm and respiratory rate 30 rpm. In the respiratory exploration, percussion dullness, diminution of tactile (vocal) thrill, and diminution of respiratory noises at the base of the right hemithorax stand out. The rest of the physical examination is normal. What is the most likely diagnosis?",
+   "options": [
+    "Pleural effusion",
+    "Lobar pneumonia",
+    "Acute bronchitis.",
+    "Pulmonary tuberculosis",
+    "Pneumothorax."
+   ],
+   "answer": 0,
+   "topic": "Respiratory Medicine",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-69",
+   "stem": "A 30-year-old woman, previously healthy, presents a picture of right facial weakness in the course of about 20 hours, so she can not close her right eye and her mouth has been twisted. Refers to see double with the right lateral gaze. Which of the following diagnostic possibilities seems most likely?",
+   "options": [
+    "Bell's palsy",
+    "Ramsay-Hunt syndrome (herpetic facial paralysis).",
+    "Sarcoidosis",
+    "Left sylvian infarction with involvement of the rolandic operculum.",
+    "Protuberant involvement due to an outbreak of multiple sclerosis."
+   ],
+   "answer": 4,
+   "topic": "Neurology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-70",
+   "stem": "50-year-old man, mechanic, consulted for a two-year evolution of difficulty in handling the right hand and a feeling of stiffness in the arm. His wife notices his expressionless face and reports that he has very vivid nightmares that wake him up agitated. During the examination, rigidity was observed in the right limbs and slow walking without right arm. What is the most likely diagnosis?",
+   "options": [
+    "Left thalamic lacunar infarct.",
+    "Amyotrophic Lateral Sclerosis.",
+    "Parkinson's disease",
+    "Cervical plexopathy",
+    "Corticobasal degeneration."
+   ],
+   "answer": 2,
+   "topic": "Neurology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-71",
+   "stem": "A 7-year-old boy presents a subacute picture of cerebellar ataxia and intracranial hypertension. Magnetic resonance imaging demonstrates an expansive lesion in the cerebellar vérmix that captures contrast and obstructs the fourth ventricle. The most likely diagnosis is:",
+   "options": [
+    "Meningioma",
+    "Cerebellar metastasis.",
+    "Glioblastoma multiforme.",
+    "Medulloblastoma",
+    "Lymphoma"
+   ],
+   "answer": 3,
+   "topic": "Neurosurgery",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-75",
+   "stem": "A 68-year-old man with a history of diabetes of 20 years of evolution, hypertension and prostatism in treatment, consulted for repeated episodes of syncope. The episodes have occurred while standing, after meals and have been preceded by an oppressive pain in the nape, neck and shoulder girdle. Which of these complementary tests is essential?",
+   "options": [
+    "Brain and cervical MRI.",
+    "Angio-MR of the supra-aortic trunks.",
+    "Nuclear medicine study of cerebral dopamine transporter (SPECT with ioflupane).",
+    "Measurement of blood pressure in decubitus and standing.",
+    "24-hour Holter record of the electrocardiogram."
+   ],
+   "answer": 3,
+   "topic": "Neurology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-78",
+   "stem": "A 45-year-old patient who went to the emergency room for general malaise, headache and progressive tiredness in recent weeks. On physical examination, a slight icteric dye of the skin and mucous membranes was detected and a 2-cm splenomegaly was felt under the costal margin. The analytical presents hemoglobin 8.6 g / dL, VCM 100 fL. The number of reticulocytes is high and anisopoikilocytosis is observed in the blood smear. In the biochemistry highlights LDH 1300 IU / L, bilirubin 2.2 mg / dL and undetectable haptoglobin. Which test is the most appropriate to guide the diagnosis of the patient?",
+   "options": [
+    "Fecal occult blood test.",
+    "Test of Coombs.",
+    "Determination of iron, cobalamin and folic acid.",
+    "Abdominal ultrasound.",
+    "Bone marrow aspirate."
+   ],
+   "answer": 1,
+   "topic": "Haematology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-79",
+   "stem": "35-year-old woman on hormonal treatment for infertility. He went to the emergency department due to constitutional syndrome and paresthesias in the left side of the body. In blood tests, Hb 7.5 g / dL, reticulocytes 10% (0.52%), platelets 5,000 / uL, normal leukocytes, LDH 1,200 IU / L, direct negative Coombs test, undetectable haptoglobin are detected. Morphology of peripheral blood with abundant schistocytes. Normal coagulation tests. What is the diagnostic suspicion and the most appropriate treatment?",
+   "options": [
+    "Autoimmune hemolytic anemia. Start steroids.",
+    "Von Willebrand disease. Administration of desmopressin.",
+    "Thrombocytopenic purpura. Start steroids and platelet transfusion.",
+    "Evans syndrome. Start steroids.",
+    "Thrombotic thrombocytopenic purpura. Treatment with plasmapheresis."
+   ],
+   "answer": 4,
+   "topic": "Haematology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-80",
+   "stem": "A 70-year-old man should undergo cataract extraction surgery. He has a mitral mechanical prosthesis for 10 years and is being treated with acenocoumarol. The electrocardiogram shows a sinus rhythm. Which of the following recommendations do you find most appropriate?",
+   "options": [
+    "Perform eye surgery without stopping acenocoumarol.",
+    "Suspend acenocoumarol 5 days before surgery and restart it the day after it.",
+    "Suspend acenocoumarol 5 days before surgery, start low molecular weight heparin 3 days before surgery and suspend it 24 hours before surgery.",
+    "Suspend acenocoumarol 1 day before the intervention and use fresh frozen plasma during it.",
+    "Suspend acenocoumarol 1 day before the intervention and give vitamin K just before it."
+   ],
+   "answer": 0,
+   "topic": "Cardiology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-81",
+   "stem": "A 29-year-old woman with a history of abundant rules and long-standing iron-deficiency anemia who have required treatment with ferrotherapy since she was 17 years old. Consult because after a tooth extraction you have hemorrhage that has required local hemostatic treatment. He relates that a maternal aunt presents frequent epistaxis. In analytical presents: 8000 leukocytes / uL, Hb 10.7 g / dL, VCM 76 fL, 380,000 platelets / uL; the biochemistry is normal. Prothrombin activity 90%; INR 0.9; Activated Partial Thromboplastin Time (APTT) 48 sec (39 sec) with an APTT ratio of 1.3 and fibrinogen derivative 340 mg / dL. What is the most likely diagnostic suspicion and how would it confirm it?",
+   "options": [
+    "Hemophilia A and mixtures test.",
+    "Lupus anticoagulant and ANAS study.",
+    "Sideroblastic anemia and spinal aspiration.",
+    "Congenital thrombocytopathy and study of platelet aggregation.",
+    "Von Willebrand disease and determination of factor vW."
+   ],
+   "answer": 4,
+   "topic": "Haematology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-85",
+   "stem": "A 34-year-old woman is admitted to the hospital for pulmonary embolism confirmed by angio-CT. He has no history of recent surgery, trauma or travel. He refers to Raynaud's phenomenon for 2 years, and the previous year he had an abortion at 12 weeks of gestation. He has no family history of venous thromboembolic disease. The activated partial thromboplastin time is 56 sg (normal 25-35 sg) and the platelet count is 120000 / uL. Which of the following diagnostic tests would help you most in the diagnosis?",
+   "options": [
+    "Antithrombin III.",
+    "Lupus anticoagulant.",
+    "Factor V of Leiden.",
+    "Protein C.",
+    "Protein S."
+   ],
+   "answer": 1,
+   "topic": "Haematology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-87",
+   "stem": "A 78-year-old woman has recently been diagnosed with diabetes mellitus type 2. She has a history of deep vein thrombosis 5 years ago, high blood pressure, depression and generalized anxiety. Take hydrochlorothiazide, lisinopril, citalopram and aspirin. Live alone in sheltered apartments. Eat little, typically coffee and toast for breakfast, fruit and half a sandwich to eat and salad for dinner. Walk 1.5 km daily. It measures 152 cm and weighs 39 Kg. The blood pressure is 130/80 mmHg and the heart rate is 82 bpm. Laboratory tests included basal glycemia of 147 mg / dL (1 month ago it was 152 mg / dL), creatinine 1.0 mg / dL (estimated glomerular filtration rate 28 ml / min), urea 32 mg / dL and glycosylated hemoglobin 9 ,5%. Which of the following is the best initial treatment for diabetes?",
+   "options": [
+    "Insulin glargine subcutaneous 8 U per day.",
+    "Oral metformin at a dose of 850 mg every 12 hours.",
+    "Oral Glibenclamide 10 mg daily.",
+    "It does not need pharmacological treatment, only diet.",
+    "Pioglitazone 15 mg daily."
+   ],
+   "answer": 0,
+   "topic": "Endocrinology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 4,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-91",
+   "stem": "A 25-year-old man with no personal or family history of interest, who enters Neurosurgery due to a cranial fracture due to a motorcycle accident. Three days later it begins abruptly with polyuria, polydipsia and intense thirst both during the day and at night. In the study conducted, a urinary volume of 7 liters with urinary osmolarity of 190 mOsm / L (90-1200) and plasma osmolarity of 292 mOsm / L (275-295) was observed. The plasma Na is 143 mmol / L. A water restriction test is performed and after checking that there is no increase in urinary osmolarity, a dose of 2 micrograms of desmopressin subcutaneously is administered. The posterior urinary osmolality is 410 mOsm / kg. What is the most likely diagnosis?",
+   "options": [
+    "Primary polydipsia.",
+    "Central diabetes insipidus.",
+    "Acute adrenal insufficiency.",
+    "SIADH.",
+    "Nephrogenic insipid diabetes."
+   ],
+   "answer": 1,
+   "topic": "Endocrinology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 3
+  },
+  {
+   "id": "headqa-2014-95",
+   "stem": "A 33-year-old woman with a loss of 6 kg in the last 4 months, asthenia and anorexia. Amenorrhea for 2 months. The hormonal results indicate a basal cortisol serum concentration of 108 nmol / l (baseline normal value 115-550) and 123 nmol / l after stimulation with ACTH. The baseline plasma concentration of ACTH is 48 pmol / l (normal value: 2-12). What is the most likely diagnosis?",
+   "options": [
+    "Primary adrenal insufficiency.",
+    "Secondary adrenal insufficiency.",
+    "Tertiary adrenal insufficiency due to hypothalamic lesion.",
+    "ACTH-producing pituitary tumor (corticotropinoma).",
+    "More tests should be done since the diagnosis is inconclusive."
+   ],
+   "answer": 0,
+   "topic": "Endocrinology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "headqa-2014-99",
+   "stem": "A 47-year-old man consulted for edema in lower limbs of 3 weeks of evolution. In blood analysis, creatinine 1.3 mg / dL, total cholesterol 270 mg / dL and albumin 2.4 g / dL. In the urine sediment, it presents 15-20 red cells per field and in urine of 24 hours proteinuria is detected 3.7 g / day. What is the most likely diagnosis?",
+   "options": [
+    "Minimal change disease.",
+    "Focal and segmental glomerulosclerosis.",
+    "Membranous nephropathy",
+    "Membranoproliferative glomerulonephritis type I.",
+    "Mesangial proliferative glomerulonephritis."
+   ],
+   "answer": 2,
+   "topic": "Nephrology",
+   "cat": "clinical",
+   "origin": "human",
+   "source": "open-exam",
+   "credit": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "headqa-2015-81",
@@ -10829,6 +12969,35 @@
    "difficulty": 1
   },
   {
+   "id": "osce-amsa-203",
+   "stem": "A 60-year-old woman in general practice. Rusty productive cough, fever, left pleuritic pain and breathlessness after a cold with sick contacts, left basal dullness with bronchial breathing, neutrophilia with CRP 148, and left lower lobe consolidation with a small effusion on X-ray. What is the most likely diagnosis?",
+   "options": [
+    "Pulmonary embolism",
+    "Lung cancer",
+    "Community-acquired pneumonia of the left lower lobe",
+    "Acute bronchitis or viral lower respiratory tract infection"
+   ],
+   "answer": 2,
+   "why": "A productive cough with rusty sputum, fever, pleuritic pain and focal chest signs after a viral illness is community-acquired pneumonia until proven otherwise; Streptococcus pneumoniae is the most common cause.",
+   "notes": [
+    "No travel, immobility, surgery or calf symptoms; purulent rusty sputum after a viral illness, a neutrophilia and lobar consolidation.",
+    "Lifelong non-smoker, no weight or appetite loss, no haemoptysis, no lymphadenopathy, and no mass or hilar abnormality on the X-ray.",
+    null,
+    "Focal bronchial breathing and dullness at the left base, CRP 148, and consolidation on the X-ray."
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice",
+    "Infectious Diseases"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "amsa",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "osce-amsa-204",
    "stem": "A 26-year-old woman in general practice. Six-week progressive productive cough with 5 days of haemoptysis, low-grade fever, fatigue, breathlessness and 5 kg weight loss; born in and travels annually to Cambodia; right upper zone crackles and right upper lobe opacification. What is the most likely diagnosis?",
    "options": [
@@ -11538,6 +13707,34 @@
     "Neurology",
     "Emergency Medicine",
     "Infectious Diseases"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "amsa",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "osce-amsa-357",
+   "stem": "A 78-year-old man on the ward. He woke with a congruous, macula-sparing left homonymous hemianopia and no other deficit; MRI shows an acute right calcarine infarct with a P2 occlusion; the ECG shows AF; and he had a transient left-sided visual episode 2 months ago. What is the most likely diagnosis?",
+   "options": [
+    "Right posterior cerebral artery territory ischaemic stroke",
+    "Intracerebral haemorrhage in the right occipital lobe",
+    "Right occipital tumour or metastasis",
+    "Right middle cerebral artery territory infarct involving the optic"
+   ],
+   "answer": 0,
+   "why": "Localise a field defect: one eye only is in front of the chiasm, bitemporal is the chiasm, and homonymous is behind the chiasm on the opposite side.",
+   "notes": [
+    null,
+    "No haemorrhage on the ED CT or on MRI susceptibility imaging.",
+    "The onset was sudden, on waking, and the MRI shows diffusion restriction in an arterial territory with an occluded P2 and no mass effect.",
+    "No face or arm weakness, sensory loss or neglect; the macula is spared; and the MRI shows the MCA territory and optic radiations are normal."
+   ],
+   "topic": "Neurology",
+   "topics": [
+    "Neurology",
+    "Ophthalmology"
    ],
    "cat": "clinical",
    "origin": "ai",

@@ -17,7 +17,8 @@ const pctl = (xs, p) => { const s = [...xs].sort((a, b) => a - b); return s.leng
 
 /* [{ q, a, b }] (a: the verdict the pool uses, b: the retest) -> agreement, the quality drift, and the flips */
 export function retestStats(pairs, { bars = DEFAULT_BARS } = {}) {
-  const rows = pairs.map(({ q, a, b }) => {
+  const rows = pairs.map(({ q, a: withSecond, b }) => {
+    const { second, ...a } = withSecond;   /* one review against one review: a close call's second does not count here */
     const x = assess(q, { verdicts: { [q.id]: a }, bars }), y = assess(q, { verdicts: { [q.id]: b }, bars });
     const solvedA = a.solves.filter(s => s.answer === q.answer).length, solvedB = b.solves.filter(s => s.answer === q.answer).length;
     return { id: q.id, kind: x.kind, verdict: a.rubric.verdict === b.rubric.verdict, key: a.rubric.key_correct === b.rubric.key_correct, solves: solvedA === solvedB,

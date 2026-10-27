@@ -2,9 +2,11 @@
 /* mcq-judge.mjs - the model-judged evaluation (lib/mcq-judge.mjs) of the pool's candidates, or of a benchmark file.
 
      node scripts/mcq-judge.mjs                         every candidate without a current verdict -> data/mcq/verdicts.json
-     node scripts/mcq-judge.mjs --kind user,ai          only these kinds (user, ai, amsa, usmle-resource)
+     node scripts/mcq-judge.mjs --kind user,ai          only these kinds (user, ai, amsa, usmle-resource, open-exam)
      node scripts/mcq-judge.mjs --sample 200 --tag src:medqa   a seeded sample of the candidates with this tag
      node scripts/mcq-judge.mjs --ids osce-amsa-187,u-abc
+     node scripts/mcq-judge.mjs --close [5]             a second review for every close call: a judged candidate past the
+                                                        gates and within 5 points of its bar (lib/mcq-select.mjs CLOSE)
      node scripts/mcq-judge.mjs --bench <normalised.jsonl> --out <file> [--meta step2&3] [--origin human|ai] [--sample n]
                                                         a benchmark set; --out must be outside the repo unless every row is MIT
    options: --jobs 4 (calls in parallel) · --limit n · --dry-run (say what would be judged)
@@ -18,6 +20,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { allCandidates, readJsonl, benchOnlyItem, benchmarkItem } from './lib/mcq-sources.mjs';
 import { judgeItem, verdictFor } from './lib/mcq-judge.mjs';
+import { closeCalls, CLOSE, DEFAULT_BARS } from './lib/mcq-select.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
 import { claudeAsk } from './lib/ask.mjs';
 
@@ -25,14 +28,15 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const VERDICTS = path.join(ROOT, 'data', 'mcq', 'verdicts.json');
 export const readVerdicts = f => (fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : {});
 export const writeVerdicts = (f, v) => { fs.mkdirSync(path.dirname(f), { recursive: true }); const t = `${f}.${process.pid}.tmp`; fs.writeFileSync(t, `${JSON.stringify(Object.fromEntries(Object.entries(v).sort(([a], [b]) => a.localeCompare(b))), null, 1)}\n`); fs.renameSync(t, f); };
-/* one verdict into the file, merged with what is on disk under a lock, so two runs at once never drop each other's */
+/* one verdict into the file, merged with what is on disk under a lock, so two runs at once never drop each other's; v may
+   be a function of the verdict on disk (a close call's second review is added to the first) */
 export function addVerdict(f, id, v) {
   const lock = `${f}.lock`;
   for (let i = 0; ; i++) {
     try { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.closeSync(fs.openSync(lock, 'wx')); break; }
     catch (e) { if (e.code !== 'EEXIST' || i > 400) throw e; if (i > 200 && Date.now() - fs.statSync(lock).mtimeMs > 30000) fs.rmSync(lock, { force: true }); Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25); }
   }
-  try { const all = readVerdicts(f); all[id] = v; writeVerdicts(f, all); } finally { fs.rmSync(lock, { force: true }); }
+  try { const all = readVerdicts(f); all[id] = typeof v === 'function' ? v(all[id]) : v; writeVerdicts(f, all); } finally { fs.rmSync(lock, { force: true }); }
 }
 /* a seeded sample: the n items whose id hashes lowest (stable across runs and machines) */
 export const sample = (items, n) => [...items].sort((a, b) => fnv(`s:${a.id}`).localeCompare(fnv(`s:${b.id}`))).slice(0, n);
@@ -59,10 +63,11 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     if (opt('--ids')) items = items.filter(q => list(opt('--ids')).includes(q.id));
   }
   if (opt('--sample')) items = sample(items, Number(opt('--sample')));
-  const verdicts = readVerdicts(out);
-  let todo = items.filter(q => q && Array.isArray(q.options) && !verdictFor(verdicts, q));
+  const verdicts = readVerdicts(out), close = flag('--close');
+  const bars = (fs.existsSync(path.join(ROOT, 'data', 'mcq', 'calibration.json')) && JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'mcq', 'calibration.json'), 'utf8')).bars) || DEFAULT_BARS;
+  let todo = close ? closeCalls(items, { verdicts, bars, pts: Number(opt('--close')) || CLOSE }) : items.filter(q => q && Array.isArray(q.options) && !verdictFor(verdicts, q));
   if (opt('--limit')) todo = todo.slice(0, Number(opt('--limit')));
-  console.log(`${items.length} questions · ${items.length - todo.length} already judged · ${todo.length} to judge -> ${path.relative(ROOT, out) || out}`);
+  console.log(close ? `${todo.length} close calls of ${items.length} questions to review a second time -> ${path.relative(ROOT, out)}` : `${items.length} questions · ${items.length - todo.length} already judged · ${todo.length} to judge -> ${path.relative(ROOT, out) || out}`);
   if (flag('--dry-run') || !todo.length) process.exit(0);
   const { ask, via } = await claudeAsk();
   const jobs = Math.max(1, Number(opt('--jobs')) || 4);
@@ -73,7 +78,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
         let model = '';
         const v = await judgeItem(q, { ask: async a => { const r = await ask(a); model = r.model || model; return r; } });
         v.judge = via(model);
-        verdicts[q.id] = v; addVerdict(out, q.id, v);
+        if (close) addVerdict(out, q.id, first => (first && first.hash === v.hash ? { ...first, second: v } : first));
+        else { verdicts[q.id] = v; addVerdict(out, q.id, v); }
         done++;
         console.log(`${done} ${q.id} · solved ${v.solves.filter(s => s.answer === q.answer).length}/2 · ${v.rubric.verdict} · ${Math.round((Date.now() - t0) / 1000)} s`);
       } catch (e) { failed++; console.error(`fail ${q.id}: ${String(e.message).slice(0, 200)}`); }

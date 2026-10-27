@@ -14,7 +14,7 @@
    auditPool(pool, { pack, verdicts, fits, readSecs, formats }) -> report; fits/readSecs/formats come from the vendored
    duel package (duel/core.mjs), so the audit and the duel time questions the same way. */
 
-import { flawReport, words, keyIsLongest } from '../../public/js/mcq/flaws.mjs';
+import { flawReport, keyIsLongest, shingles, containment } from '../../public/js/mcq/flaws.mjs';
 import { taxonomyCounts, taxonomyProblems } from '../../public/js/mcq/taxonomy.mjs';
 
 export const THIN = 10;                 /* a topic with fewer fitting questions than the duel's longest pick is thin */
@@ -26,17 +26,6 @@ const p90 = xs => { const s = [...xs].sort((a, b) => a - b); return s.length ? s
 const kindOf = q => q?.provenance?.kind || q?.source || 'unknown';
 const count = (xs, f) => xs.reduce((m, x) => { const k = f(x); m[k] = (m[k] || 0) + 1; return m; }, {});
 
-/* the word triples of a stem, for near-duplicate stems */
-export function shingles(s) {
-  const w = words(s), out = new Set();
-  for (let i = 0; i + 2 < w.length; i++) out.add(`${w[i]} ${w[i + 1]} ${w[i + 2]}`);
-  return out;
-}
-export function overlap(a, b) {
-  if (!a.size || !b.size) return 0;
-  let n = 0; for (const x of a) if (b.has(x)) n++;
-  return n / Math.min(a.size, b.size);
-}
 
 /* the key is the longest option by characters, with no tie */
 export const keyLongest = keyIsLongest;
@@ -70,7 +59,7 @@ export function cuesOf(list, groupOf, asItem = q => q) {
 export function duplicatesOf(list, groupOf = () => '') {
   const sh = list.map(q => shingles(q.stem)), out = [];
   for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) {
-    const o = overlap(sh[i], sh[j]);
+    const o = sh[i].size && sh[j].size ? containment(sh[i], sh[j]) : 0;
     if (o >= DUP_AT) out.push({ a: list[i].id, b: list[j].id, overlap: round1(o * 100), ...(groupOf(list[i]) !== groupOf(list[j]) ? { across: [groupOf(list[i]), groupOf(list[j])] } : {}) });
   }
   return out.sort((x, y) => y.overlap - x.overlap || (x.a < y.a ? -1 : 1));

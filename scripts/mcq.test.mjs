@@ -171,7 +171,20 @@ test('flawReport: the cost of each failure, a block makes it ineligible', () => 
 test('near-duplicates across a pool: shingle Jaccard and containment', () => {
   const a = F.signature(good()), b = F.signature(good({ stem: `${GOOD.stem} He is anxious.` })), c = F.signature(good({ stem: 'A 5-year-old girl is brought to clinic with a limp for 3 days and a temperature of 38.5°C.', ask: 'What is the most likely diagnosis?', options: ['Septic arthritis', 'Transient synovitis', 'Perthes disease', 'Fracture', 'Leukaemia'] }));
   assert.equal(F.nearDuplicate(a, b).dup, true); assert.equal(F.nearDuplicate(a, c).dup, false);
-  assert.ok(F.similarity(a, a) === 1 && F.containment(a, b) > 0.9);
+  assert.ok(F.similarity(a.all, a.all) === 1 && F.containment(a.all, b.all) > 0.9);
+  /* the same case asked for the same answer with other distractors: the whole questions differ, the case and key do not */
+  const rapid = (opts, answer = 0) => F.signature(good({ stem: 'A 52-year-old man with type 2 diabetes has had fever, a productive cough and new confusion for two days. Chest X-ray shows right upper lobe consolidation.', ask: 'Which test best confirms the diagnosis?', options: opts, answer }));
+  const r1 = rapid(['Blood cultures', 'Sputum Gram stain', 'Urinary antigen', 'CT chest', 'Procalcitonin']);
+  const d = rapid(['Two sets of blood cultures', 'Serum lactate measured at the bedside', 'Arterial blood gas on room air', 'Bronchoscopy with lavage for culture', 'Repeat chest film in six weeks']);
+  const nd = F.nearDuplicate(r1, d);
+  assert.ok(nd.jaccard < F.DUP.jaccard && nd.containment < F.DUP.containment, 'the whole questions are not alike');
+  assert.equal(nd.dup, true, 'the same case and answer'); assert.equal(nd.sameCase, 1); assert.equal(nd.sameAnswer, true);
+  /* the same vignette asked for another answer is another question (unless the whole questions are alike, as here) */
+  const other = rapid(['Start oral amoxicillin at home', 'Admit for intravenous ceftriaxone and azithromycin', 'Oseltamivir alone', 'Discharge with review in a week', 'Intensive care for intubation']);
+  assert.equal(F.nearDuplicate(r1, other).sameAnswer, false, 'another answer: the case alone does not make a twin');
+  /* a question sentence in the stem is not the case: two recall items sharing "which statement is NOT correct" */
+  const recall = (topic, opts) => F.signature(good({ stem: `In relation to ${topic}, which of the following statements is NOT correct?`, ask: '', options: opts, answer: 0 }));
+  assert.equal(F.nearDuplicate(recall('pericardial tamponade', ['Pulsus paradoxus', 'b', 'c', 'd', 'e']), recall('cardiovascular risk', ['Pulsus paradoxus', 'f', 'g', 'h', 'i'])).sameCase, 0, 'a case of a few words says nothing');
 });
 test('answer-position balance', () => {
   const items = [0, 1, 2, 3, 0, 1, 2, 3].map(answer => ({ options: ['a', 'b', 'c', 'd'], answer }));

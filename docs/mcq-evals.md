@@ -17,8 +17,8 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 | MedMCQA dev (Indian PG entrance) | 4091 | 69.5 | 48 | 70.2 | 0 | – | – | – | – | – | – | – |
 | Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 71 | 78 | 81 | 99 | 53.3 | 1.9 | 53.3 |
 | Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 64 | 74 | 80 | 100 | 26.9 | 0 | 0 |
-| Generated (generate-mcq.mjs) | 331 | 98.5 | 94 | 0 | 273 | 86 | 92 | 95 | 98.9 | 98.5 | 92.3 | 92.3 |
-| Open exam (HEAD-QA, Spanish MIR) | 786 | 78.2 | 54 | 56.4 | 164 | 52 | 68 | 76 | 97 | 30.5 | 5.5 | 30.5 |
+| Generated (generate-mcq.mjs) | 333 | 98.5 | 94 | 0 | 333 | 85 | 92 | 95 | 98.8 | 98.2 | 90.7 | 90.7 |
+| Open exam (HEAD-QA, Spanish MIR) | 786 | 78.2 | 54 | 56.4 | 359 | 54 | 67 | 75 | 97.2 | 29.8 | 6.1 | 29.8 |
 
 **Bars:** base 81, AI-written 89 (the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality). "As selected": the bar and gates each kind meets in the selector (ai: the AI bar and two solves; amsa: the base bar and two solves; the rest: the base bar).
 
@@ -35,7 +35,7 @@ Failure rate of each check (% of items):
 | MedMCQA dev (Indian PG entrance) | 0 | 51.8 | 20 | 5.9 | 15.5 | 4.8 | 0 | 0.1 | 3.4 | 0.3 | 1.7 | 98.6 | 89.9 | 0.3 |
 | Station-derived (AMSA) | 0 | 0 | 0 | 0 | 0 | 9.5 | 0 | 0 | 0 | 12.4 | 0 | 15.2 | 0 | 18.1 |
 | Station-derived (AI stations) | 0 | 0 | 0 | 0 | 0 | 11.5 | 0 | 0 | 0 | 11.5 | 0 | 42.3 | 0 | 11.5 |
-| Generated (generate-mcq.mjs) | 0 | 0 | 0 | 0 | 0 | 0.6 | 0 | 0.3 | 3.6 | 2.1 | 0 | 16.9 | 0 | 1.2 |
+| Generated (generate-mcq.mjs) | 0 | 0 | 0 | 0 | 0 | 0.6 | 0 | 0.3 | 3.6 | 2.1 | 0 | 16.8 | 0 | 1.2 |
 | Open exam (HEAD-QA, Spanish MIR) | 0 | 25.8 | 21 | 0.1 | 12.7 | 5.7 | 0 | 0.3 | 8.1 | 4.7 | 0.5 | 84 | 44.4 | 2.2 |
 
 ## 2. Mutation test: does each check catch the flaw it is for?
@@ -81,7 +81,7 @@ Flipped: osce-amsa-375 (78 then 81, passed on the second); osce-amsa-379 (78 the
 
 ## 5. The pool as selected
 
-Candidates by kind: {"ai":357,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":505,"pending":680,"rejected":404,"reserve":525}. In the pool: {"ai":239,"open-exam":50,"usmle-resource":160,"amsa":56}. Topic cap 76. Key positions: 4 options 59/57/42/65 (χ² 5.14); 5 options 53/59/52/55/63 (χ² 1.48).
+Candidates by kind: {"ai":359,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":607,"rejected":557,"reserve":525,"pending":427}. In the pool: {"ai":282,"open-exam":107,"usmle-resource":160,"amsa":58}. Topic cap 92. Key positions: 4 options 60/57/43/65 (χ² 4.74); 5 options 73/80/78/68/83 (χ² 1.85).
 
 ## Limits
 

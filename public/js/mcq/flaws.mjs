@@ -245,9 +245,20 @@ export function shingles(s, n = 3) { const w = words(s), out = new Set(); for (l
 export function similarity(a, b) { let n = 0; const [x, y] = a.size < b.size ? [a, b] : [b, a]; for (const s of x) if (y.has(s)) n++; return n / ((a.size + b.size - n) || 1); }
 /* containment: how much of the smaller question sits inside the bigger one (a stem copied with a sentence added) */
 export function containment(a, b) { let n = 0; const [x, y] = a.size < b.size ? [a, b] : [b, a]; for (const s of x) if (y.has(s)) n++; return n / (x.size || 1); }
-export const DUP = Object.freeze({ jaccard: 0.5, containment: 0.8 });
-export const signature = q => shingles(`${fullStem(q)} ${(q.options || []).join(' ')}`);
-export function nearDuplicate(sa, sb) { const j = similarity(sa, sb), c = containment(sa, sb); return { dup: j >= DUP.jaccard || c >= DUP.containment, jaccard: j, containment: c }; }
+/* the same case asked for the same answer: two short questions on one patient with other distractors share the case
+   (the stem without its question sentences) and an equivalent key ("IV thiamine", "Intravenous thiamine") but not the
+   whole question. Measured over every candidate pair on 2026-10-26: at sameCase 0.4 with keys alike it finds the nine
+   pairs of AI-written twins and nothing else; the case alone does not do (two MedQA vignettes on different conditions
+   share a template at 0.5, and one vignette asked two ways is two questions). minCase: fewer triples say nothing */
+export const DUP = Object.freeze({ jaccard: 0.5, containment: 0.8, sameCase: 0.4, minCase: 12, key: 0.5 });
+const caseOf = s => (String(s || '').match(/[^.?!]+[.?!]*/g) || []).filter(x => !/\?\s*$/.test(x)).join(' ');
+const keyAlike = (a, b) => { const [x, y] = a.size < b.size ? [a, b] : [b, a]; let n = 0; for (const w of x) if (y.has(w)) n++; return x.size > 0 && n / x.size >= DUP.key; };
+export const signature = q => ({ all: shingles(`${fullStem(q)} ${(q.options || []).join(' ')}`), case: shingles(caseOf(q.stem)), key: new Set(content(q.options?.[q.answer])) });
+export function nearDuplicate(sa, sb) {
+  const j = similarity(sa.all, sb.all), c = containment(sa.all, sb.all);
+  const s = Math.min(sa.case.size, sb.case.size) >= DUP.minCase ? containment(sa.case, sb.case) : 0, sameAnswer = keyAlike(sa.key, sb.key);
+  return { dup: j >= DUP.jaccard || c >= DUP.containment || (s >= DUP.sameCase && sameAnswer), jaccard: j, containment: c, sameCase: s, sameAnswer };
+}
 
 /* the key's position across a pool: counts, and the chi-square of a uniform spread (df = k - 1; above ~7.8 for 4
    positions the spread is uneven at p < 0.05) */

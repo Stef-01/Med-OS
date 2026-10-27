@@ -4141,6 +4141,56 @@
    }
   },
   {
+   "id": "ai-mcq-44707318",
+   "stem": "A 4-week-old breastfed girl has had jaundice since day 3. She is feeding and gaining weight well. Her stools are pale cream and her urine stains the nappy yellow.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Conjugated bilirubin",
+    "Abdominal ultrasound",
+    "Hepatobiliary scintigraphy",
+    "Thyroid function tests",
+    "Liver biopsy"
+   ],
+   "answer": 0,
+   "explanation": "Jaundice lasting past 2 weeks (3 weeks if preterm) with pale stools and dark urine suggests cholestasis, such as biliary atresia. Australian guidelines (RCH, state guidelines) say the first test is a total and conjugated (split) bilirubin, done urgently. A conjugated level above 20 micromol/L, or above 20% of the total, confirms cholestasis and needs same-day referral to a paediatric gastroenterology or hepatology service.",
+   "why": [
+    null,
+    "Ultrasound is part of the cholestasis work-up once conjugated hyperbilirubinaemia is confirmed, but it does not come before the split bilirubin.",
+    "Hepatobiliary scintigraphy is a second-line specialist test for biliary atresia, used only after cholestasis is confirmed.",
+    "Hypothyroidism causes unconjugated prolonged jaundice and is part of the wider screen, but pale stools and dark urine point first to cholestasis.",
+    "Liver biopsy is an invasive specialist test used late to diagnose biliary atresia, not a first-line investigation."
+   ],
+   "topic": "Neonatology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:neonatology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Neonatology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T20:32:41.142Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-neonatology-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0693",
+      "medqa-us4-test-0587",
+      "medqa-us4-test-0560"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-44d3b56b",
    "stem": "A 52-year-old man, an electrician, sees his general practitioner because of 5 months of daytime sleepiness. He dozes off while watching television and in the afternoons, and he wakes unrefreshed despite 8 hours in bed. His wife reports loud snoring every night, with pauses in his breathing followed by gasping. He has had no sudden muscle weakness with laughter or anger, and he denies sleepiness while driving. He drinks 3 standard drinks most evenings and does not smoke. He has hypertension treated with perindopril. Blood pressure is 146/92 mm Hg, heart rate 76/min and oxygen saturation 97% on room air. BMI is 34 kg/m2, neck circumference is 44 cm and the oropharynx is crowded. His Epworth Sleepiness Scale score is 13 (normal 10 or less), STOP-Bang score 6/8 and OSA50 score 7/10. Full blood count, TSH and electrolytes are normal.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -9534,6 +9584,56 @@
       "medqa-us4-test-1125",
       "medqa-us4-test-1102",
       "medqa-us4-test-0471"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-9f85e816",
+   "stem": "A 52-year-old Aboriginal man from Arnhem Land with type 2 diabetes presents in February with fever, productive cough and confusion. Temperature is 39.2 °C; chest X-ray shows right upper lobe consolidation.",
+   "ask": "Which test best confirms the diagnosis?",
+   "options": [
+    "Melioidosis serology",
+    "Sputum Gram stain",
+    "Blood cultures",
+    "Legionella urinary antigen",
+    "CT chest"
+   ],
+   "answer": 2,
+   "explanation": "This is wet-season pneumonia with sepsis in a man with diabetes from the Top End, so melioidosis (Burkholderia pseudomallei) is the leading diagnosis. Culture of the organism confirms it. Take blood cultures, plus sputum, urine and throat swabs, before starting meropenem, as eTG and NT guidelines advise.",
+   "why": [
+    "Serology has poor sensitivity, and many people in endemic areas already have antibodies, so it cannot confirm acute melioidosis.",
+    "A Gram stain may show gram-negative bacilli with a safety-pin look, but it cannot identify the species or confirm the diagnosis.",
+    null,
+    "The Legionella urinary antigen test detects only L. pneumophila serogroup 1, so it cannot confirm the most likely pathogen here.",
+    "CT shows how far the lung disease has spread, but imaging cannot identify the organism causing it."
+   ],
+   "topic": "Indigenous Health",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:indigenous-health",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Indigenous Health (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T20:32:37.977Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-indigenous-health-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0660",
+      "medqa-us4-test-0880",
+      "medqa-us4-test-1218"
      ],
      "model": "claude-opus-5-5"
     }
