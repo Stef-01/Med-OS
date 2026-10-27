@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { shortDx, patientLine, stationQuestion, buildPack, poolQuestion, DUEL } from './lib/duel-pack.mjs';
+import { shortDx, patientLine, stationQuestion, buildPack, poolQuestion, repeatOf, DUEL } from './lib/duel-pack.mjs';
 import { stationsOnDisk, poolOnDisk, packText, mcqOnDisk, packInputs } from './build-duel-pack.mjs';
 import { stationItems } from './lib/mcq-sources.mjs';
 import { normQuestion } from '../public/js/vendor/pup-duel/duel/pack.mjs';
@@ -167,4 +167,16 @@ test('a pooled question\'s kind comes from the tagger (tag-years.mjs --kinds), c
   assert.equal(poolQuestion(q, new Map(), { 'q-k1': 'physio' }).q.cat, 'physio');
   assert.equal(poolQuestion(q, new Map(), { 'q-k1': 'skills' }).q.cat, 'clinical', 'a bank question is never an OSCE skill');
   assert.equal(buildPack({ questions: [q] }, { kinds: { 'q-k1': 'anatomy' } }).pack.questions[0].cat, 'anatomy');
+});
+
+test('MedExpQA repeats: the same case with the same answer is dealt once; the same case asking something else stays', () => {
+  const stem = 'A 35-year-old woman on the oral contraceptive pill presents with fever, confusion and left hemibody paraesthesias. Haemoglobin is 75 g/L, platelets 7 x10^9/L, LDH 1200 U/L and there are schistocytes on the film.';
+  const mx = (id, options, answer, ask = 'What is the most likely diagnosis?') => ({ id, stem: `${stem} ${ask}`, options, answer, specialty: 'Haematology', cat: 'clinical', year: 4, difficulty: 2, notes: options.map(o => `Not ${o}.`), why: 'Pentad of TTP: fever, neurology, MAHA, thrombocytopenia, renal impairment.' });
+  const a = mx('mxq-1', ['Autoimmune haemolytic anaemia', 'Thrombotic thrombocytopenic purpura', 'Evans syndrome', 'Immune thrombocytopenia'], 1);
+  const again = mx('mxq-2', ['Evans syndrome', 'Immune thrombocytopenia', 'Thrombotic thrombocytopenic purpura.', 'Autoimmune haemolytic anaemia'], 2);
+  const next = mx('mxq-3', ['Platelet transfusion', 'Plasma exchange', 'Splenectomy', 'Intravenous immunoglobulin'], 1, 'What is the first treatment?');
+  assert.equal(repeatOf(again, []), null, 'nothing kept, nothing repeated');
+  const { pack, dropped } = buildPack({ questions: [] }, { mxq: [a, again, next], mxqCredit: 'MedExpQA' });
+  assert.deepEqual(pack.questions.map(q => q.id), ['mxq-1', 'mxq-3']);
+  assert.ok(dropped.some(d => d === 'mxq-2: the same question as mxq-1'));
 });

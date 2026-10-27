@@ -16,6 +16,7 @@
 import { CATS, gate } from './mcq.mjs';
 import { guessYear, isYear, guessDiff, isDiff } from '../../public/js/mcq/year.mjs';
 import { plain } from '../../public/js/study-kit/safe.mjs';
+import { signature, nearDuplicate } from '../../public/js/mcq/flaws.mjs';
 
 export const LIMITS = { option: 70, minDistractors: 3 }, LONG = 1.8;
 /* every specialty a station lists, so a player finds it under each (the duel's topics) */
@@ -150,7 +151,18 @@ export function poolQuestion(q, byStation = new Map(), kinds = {}) {
 }
 /* years: { id: 1..4 } from scripts/tag-years.mjs (data/mcq/years.json); a question it has not tagged gets guessYear() */
 /* hy: the high-yield questions (scripts/generate-hy.mjs, data/mcq/high-yield.json), each already with its year and difficulty */
-/* mxq: MedExpQA adapted (scripts/import-medexpqa.mjs, data/mcq/medexpqa.json), each with the credit CC BY asks for */
+/* mxq: MedExpQA adapted (scripts/import-medexpqa.mjs, data/mcq/medexpqa.json), each with the credit CC BY asks for. The
+   set repeats itself: 29 of its near-duplicate pairs (2026-10-27 audit) are the same MIR case with the same answer, once
+   per row the source carries it; repeatOf names the earlier one, and only the first is dealt. A pair on one case with
+   different answers (MIR's case series) is two questions and stays. Same answer means REPEAT_KEY of the shorter key's
+   content words are in the other: nearDuplicate's own 0.5 calls "Immature teratoma" and "Mature cystic teratoma" one. */
+export const REPEAT_KEY = 0.6;
+const keyOverlap = (a, b) => { const [x, y] = a.size < b.size ? [a, b] : [b, a]; let n = 0; for (const w of x) if (y.has(w)) n++; return x.size ? n / x.size : 0; };
+export function repeatOf(q, kept) {
+  const s = signature(q);
+  for (const k of kept) if (nearDuplicate(s, k.sig).dup && keyOverlap(s.key, k.sig.key) >= REPEAT_KEY) return k.id;
+  return null;
+}
 export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {}, kinds = {}, hy = [], mxq = [], mxqCredit = '' } = {}) {
   const list = [...(pool?.questions || [])].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
   const byStation = new Map(stations.map(st => [st.id, st]));
@@ -175,9 +187,13 @@ export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficult
     hyN++;
   }
   let mxqN = 0;
+  const keptMxq = [];
   for (const h of [...mxq].sort((a, b) => (a.id < b.id ? -1 : 1))) {
     const issues = gate(h);
     if (issues.length) { dropped.push(`${h.id}: ${issues.join('; ')}`); continue; }
+    const rep = repeatOf(h, keptMxq);
+    if (rep) { dropped.push(`${h.id}: the same question as ${rep}`); continue; }
+    keptMxq.push({ id: h.id, sig: signature(h) });
     questions.push({ id: h.id, stem: h.stem, options: h.options, answer: h.answer, notes: h.notes, why: h.why, topic: h.specialty, cat: h.cat, origin: 'human', source: 'open-exam', hy: 1, year: h.year, difficulty: h.difficulty, credit: mxqCredit });
     mxqN++;
   }
