@@ -556,82 +556,91 @@
   "solvedToWrongKey": 0
  },
  "retest": {
-  "n": 40,
-  "verdictAgree": 85,
-  "keyAgree": 100,
+  "n": 80,
+  "verdictAgree": 88.8,
+  "keyAgree": 98.8,
   "solvesAgree": 100,
   "drift": {
-   "mean": 2,
+   "mean": 1.8,
    "p90": 5,
    "max": 8
   },
-  "passFirst": 26,
-  "passSecond": 26,
-  "flips": 4,
-  "flipRate": 10,
+  "passFirst": 49,
+  "passSecond": 49,
+  "flips": 6,
+  "flipRate": 7.5,
   "byKind": {
    "ai": {
-    "n": 10,
-    "verdictAgree": 80,
+    "n": 20,
+    "verdictAgree": 90,
     "keyAgree": 100,
     "solvesAgree": 100,
     "drift": {
-     "mean": 1.8,
+     "mean": 1.7,
      "p90": 3,
      "max": 8
     },
-    "passFirst": 9,
-    "passSecond": 9,
+    "passFirst": 18,
+    "passSecond": 18,
     "flips": 0,
     "flipRate": 0
    },
    "amsa": {
-    "n": 10,
-    "verdictAgree": 80,
+    "n": 20,
+    "verdictAgree": 90,
     "keyAgree": 100,
     "solvesAgree": 100,
     "drift": {
-     "mean": 2,
+     "mean": 2.2,
      "p90": 3,
-     "max": 3
+     "max": 6
     },
-    "passFirst": 5,
-    "passSecond": 7,
-    "flips": 2,
-    "flipRate": 20
+    "passFirst": 9,
+    "passSecond": 10,
+    "flips": 3,
+    "flipRate": 15
    },
    "open-exam": {
-    "n": 10,
+    "n": 20,
     "verdictAgree": 80,
-    "keyAgree": 100,
+    "keyAgree": 95,
     "solvesAgree": 100,
     "drift": {
-     "mean": 2.3,
-     "p90": 5,
+     "mean": 1.7,
+     "p90": 3,
      "max": 8
     },
-    "passFirst": 3,
-    "passSecond": 2,
-    "flips": 1,
+    "passFirst": 5,
+    "passSecond": 5,
+    "flips": 2,
     "flipRate": 10
    },
    "usmle-resource": {
-    "n": 10,
-    "verdictAgree": 100,
+    "n": 20,
+    "verdictAgree": 95,
     "keyAgree": 100,
     "solvesAgree": 100,
     "drift": {
-     "mean": 1.9,
+     "mean": 1.7,
      "p90": 5,
      "max": 5
     },
-    "passFirst": 9,
-    "passSecond": 8,
+    "passFirst": 17,
+    "passSecond": 16,
     "flips": 1,
-    "flipRate": 10
+    "flipRate": 5
    }
   },
   "flipped": [
+   {
+    "id": "osce-amsa-307",
+    "kind": "amsa",
+    "quality": [
+     81,
+     78
+    ],
+    "passed": "first"
+   },
    {
     "id": "osce-amsa-375",
     "kind": "amsa",
@@ -647,6 +656,15 @@
     "quality": [
      78,
      81
+    ],
+    "passed": "second"
+   },
+   {
+    "id": "headqa-2015-82",
+    "kind": "open-exam",
+    "quality": [
+     80,
+     82
     ],
     "passed": "second"
    },

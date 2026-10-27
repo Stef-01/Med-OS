@@ -2602,5 +2602,1808 @@
    ],
    "suggestion": "Recast as a clinical vignette (e.g., the effect of angiotensin II or of starting an ACE inhibitor on GFR in a patient with renal artery stenosis), name the compartment in each option (\"glomerular capillary hydrostatic pressure\"), and add an explanation covering filtration fraction and the rise in oncotic pressure along the capillary."
   }
+ },
+ "retest:ai-mcq-a768de34": {
+  "hash": "f2fffa64",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:52:21.560Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "Serum mast cell tryptase taken within 1–2 hours of onset (with a baseline sample at least 24 hours later) confirms anaphylaxis; skin or specific IgE testing should wait 4–6 weeks, and histamine clears too fast to be practical."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "Serum tryptase peaks about 1–2 hours after a reaction and stays raised for several hours, so testing it now (with a baseline level at 24 hours or later) supports a diagnosis of mast-cell-mediated anaphylaxis; plasma histamine clears within minutes, and skin or specific IgE testing should wait 4–6 we"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Immunology",
+   "verdict": "accept",
+   "reasons": [
+    "Serum tryptase drawn soon after the reaction, with a repeat baseline sample at 24 hours or more, is the standard step to confirm perioperative anaphylaxis",
+    "The distractors are all real allergy tests and are wrong for clear, teachable reasons (timing, validity, specificity)",
+    "The explanation is accurate, matches ASCIA/ANZAAG guidance and covers every option"
+   ],
+   "suggestion": "Optional: write the lead-in as a full sentence (\"Which of the following is the most appropriate investigation within the next hour?\"). You could also add a detail such as the patient being stable after treatment, which would make it a stronger next-step item."
+  }
+ },
+ "retest:ai-mcq-4dd635bf": {
+  "hash": "5076be74",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:52:25.945Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "For a new unilateral pleural effusion, the first investigation is an ultrasound-guided diagnostic pleural tap with fluid analysis and cytology, as recommended by British Thoracic Society guidance."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "For a unilateral pleural effusion, the first step is ultrasound-guided diagnostic pleural aspiration, sending fluid for biochemistry, cytology and microbiology; it confirms an exudate, may find malignant cells, and also relieves breathlessness before any further staging or biopsy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Sparse stem without examination findings or vital signs",
+    "Lead-in is a sentence fragment rather than a complete question"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches BTS and standard guidance: ultrasound-guided aspiration first for a new unilateral effusion",
+    "Options are homogeneous investigations, each wrong for a clear reason",
+    "Explanation teaches the fluid tests and the order of workup well"
+   ],
+   "suggestion": "Optionally add examination findings (e.g., stony dull percussion, reduced breath sounds) and phrase the lead-in as a full question, e.g., \"Which of the following is the most appropriate next step in diagnosis?\""
+  }
+ },
+ "retest:ai-mcq-81f94566": {
+  "hash": "8adda439",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:52:29.882Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Active RA with normocytic anaemia, low serum iron, low transferrin/TIBC and high ferritin is the classic picture of hepcidin-driven anaemia of inflammation, not iron deficiency (which shows high transferrin and low ferritin)."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Active RA with normocytic anaemia, low iron, low transferrin, low saturation and high ferritin is the classic pattern of iron being trapped by hepcidin in anaemia of inflammation."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Haematology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is clearly correct: low transferrin and high ferritin in active RA indicate anaemia of inflammation",
+    "Distractors are plausible and homogeneous, with iron deficiency as a realistic trap",
+    "Explanation is accurate and addresses each option, including masked coexisting iron deficiency"
+   ],
+   "suggestion": "Optionally make the lead-in a full question (\"Which of the following is the most likely cause of her anaemia?\"). You could also add a CRP/ESR value to make the vignette richer."
+  }
+ },
+ "retest:ai-mcq-f7cd1d48": {
+  "hash": "f119143f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:52:30.285Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "The mother is GBS-positive and received no intrapartum antibiotics, and the baby was born preterm after prolonged membrane rupture (18 hours or more) with maternal fever in labour, so early-onset GBS sepsis is the main risk."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "The mother carried GBS and got no intrapartum antibiotic prophylaxis, her membranes were ruptured for 18 hours or more, she had a fever in labour, and the baby was born before 37 weeks; each of these is a major risk factor for early-onset GBS sepsis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: 'GBS-positive' in stem repeated in option B",
+    "vignette gives the answer away by listing every textbook GBS risk factor",
+    "no infant clinical findings; tests risk-factor recall rather than a management decision",
+    "explanation wrongly states none of the baby's risk factors increase RDS risk (male sex and late-preterm birth do)"
+   ],
+   "topic": "Neonatology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and management advice is consistent with Australian and AAP guidance",
+    "Stem cues the answer through repeated 'GBS' and stacked risk factors, so the item is too easy",
+    "Explanation for distractor A is slightly inaccurate"
+   ],
+   "suggestion": "Describe the infant (e.g. well-appearing at 1 hour) and ask for the next step in management, with options such as observation, blood culture plus IV benzylpenicillin and gentamicin, a sepsis calculator, or a full septic screen with LP. Correct the RDS explanation to acknowledge that late-preterm birth and male sex are RDS risk factors."
+  }
+ },
+ "retest:ai-mcq-a6cd006e": {
+  "hash": "7fc2ee79",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:52:47.094Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.85,
+    "reason": "A minimally verbal child with new behaviour change, hitting his lower abdomen and new daytime wetting most likely has a UTI, so a urine dipstick is the simple, non-invasive first test."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.88,
+    "reason": "In a boy with minimal speech, new aggression, hitting at his lower abdomen and new daytime wetting suggest urinary discomfort from a UTI, so a quick, non-invasive urine dipstick is the right first test."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Paediatrics",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: a sudden behaviour change in a non-verbal child with new wetting calls for a urine test first, to look for a UTI",
+    "All options are investigations, and each wrong one is plausible but clearly worse",
+    "Explanation teaches the principle and says why each distractor is wrong"
+   ],
+   "suggestion": ""
+  }
+ },
+ "retest:ai-mcq-4a68402d": {
+  "hash": "d47dc62e",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:52:49.372Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.8,
+    "reason": "For PPH from uterine atony (boggy fundus, complete placenta), the first step is fundal or bimanual massage, then further uterotonics, then tamponade or surgery."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "A soft, boggy uterus with a complete placenta points to uterine atony, and the immediate first step is fundal (bimanual) massage, with further uterotonics, tamponade and surgery reserved for when it fails."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Blood pressure missing from the stem, so the ergometrine contraindication cited in the explanation can't be judged from ",
+    "In real practice massage and a second uterotonic are given at the same time, so ergometrine is arguable as the 'immediat"
+   ],
+   "topic": "Obstetrics",
+   "verdict": "accept",
+   "reasons": [
+    "The key, fundal massage, is the correct first step for postpartum haemorrhage from uterine atony",
+    "The distractors follow the real order of escalation and are plausible",
+    "The explanation teaches well, using the 4 Ts and the escalation pathway"
+   ],
+   "suggestion": "Add blood pressure (for example 110/70 mmHg) to the stem. You could also reword the lead-in as 'most appropriate first action' to make ergometrine less arguable as a same-time step."
+  }
+ },
+ "retest:ai-mcq-d658ba0b": {
+  "hash": "bd9c77c5",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:52:54.899Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.96,
+    "reason": "A soft, fluctuant swelling on both sides of the septum that doesn't shrink with decongestant spray is a septal hematoma, and it needs same-day incision and drainage with packing to prevent cartilage necrosis and saddle nose; reducing the nasal fracture can wait."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "A soft, fluctuant swelling on both sides of the septum that does not shrink with decongestant is a septal haematoma, which needs same-day incision and drainage with packing to prevent cartilage death, abscess and saddle-nose deformity."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Vignette description (smooth, red-purple, fluctuant bilateral septal swelling not shrinking with decongestant) makes the"
+   ],
+   "topic": "Otorhinolaryngology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: a septal haematoma needs drainage the same day, then packing, to prevent cartilage necrosis and abscess",
+    "The distractors are plausible, belong to the same kind of option, and each is clearly worse",
+    "The explanation is thorough, accurate and covers every distractor"
+   ],
+   "suggestion": "If you want a harder item, you could describe the swelling less fully, for example by leaving out the colour or the fluctuance. This is optional; the question can be used as it is."
+  }
+ },
+ "retest:ai-mcq-9c5c4bc6": {
+  "hash": "7c75c617",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:53:06.950Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.88,
+    "reason": "She has a normotensive PE with normal RV size and troponin but a pulse of 114 (sPESI 1), so she is intermediate-low risk and should be admitted and anticoagulated rather than discharged or thrombolysed."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.88,
+    "reason": "She has a normotensive PE with a normal right ventricle and normal troponin, but her sPESI is 1 (pulse 114) and her oxygen saturation is borderline, so she is intermediate-low risk and should be admitted and anticoagulated rather than thrombolysed, given a filter, or discharged."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: her sPESI is 1 (pulse 114/min), she has no RV dysfunction and her troponin is normal, so under ESC risk stratification this is intermediate-low risk PE, managed with admission and a DOAC.",
+    "The distractors are plausible and of the same kind, each testing a real decision point (outpatient care, systemic lysis, catheter-directed lysis, IVC filter), and there are no cueing flaws.",
+    "The explanation is accurate and correctly explains why each wrong option is wrong. The apixaban dosing is correct and so is the advice to stop the oestrogen."
+   ],
+   "suggestion": "This is a minor point. Under the Hestia criteria, which ESC accepts as an alternative to sPESI, she could arguably qualify for outpatient care. Adding a sentence that says sPESI is the tool being applied, or lowering her SpO2 to below 90%, would close that gap."
+  }
+ },
+ "retest:ai-mcq-90d867a0": {
+  "hash": "ae3c522a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:53:09.241Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "This is a suspected variceal bleed in a patient with cirrhosis, so a vasoactive drug like terlipressin (or octreotide) should start right away, before endoscopy; tranexamic acid doesn't help (HALT-IT trial), and propranolol is for preventing bleeds, not for an acute, unstable one."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "This patient has cirrhosis and is vomiting blood while in shock, so a bleeding varix is the likely cause; a vasoactive drug such as terlipressin (or octreotide) should be started right away, before endoscopy, together with antibiotic prophylaxis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "IV furosemide is a weak distractor that few students would pick"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches Baveno VII: start a vasoactive drug at once in a suspected variceal bleed",
+    "Options are all drugs, and tranexamic acid, propranolol and vitamin K are plausible traps",
+    "Explanation is accurate and covers every distractor, including the HALT-IT evidence"
+   ],
+   "suggestion": "Optionally replace IV furosemide with a more tempting distractor, such as IV pantoprazole alone or IV fresh frozen plasma."
+  }
+ },
+ "retest:ai-mcq-88a5965f": {
+  "hash": "396113b9",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:53:22.327Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.85,
+    "reason": "She has iron-deficiency anaemia from heavy menstrual bleeding with a normal examination and wants to conceive, so oral iron plus non-hormonal, fertility-compatible tranexamic acid is the best choice."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.85,
+    "reason": "This is heavy menstrual bleeding with stable iron-deficiency anaemia in a woman trying to conceive, so the best treatment is oral iron plus non-hormonal, fertility-sparing tranexamic acid; hormonal contraceptives would stop conception, and IV iron and hysteroscopy are not needed."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 5,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation mislabels option letters in the main paragraph (IUD called B, COCP called C, IV iron called D — the key lett"
+   ],
+   "topic": "Gynaecology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: oral iron first line for stable IDA, with tranexamic acid as the fertility-compatible treatment for heavy menstrual bleeding",
+    "Homogeneous paired options; each distractor has a clear, patient-specific reason to be wrong",
+    "Explanation letters are shifted, so IV iron is labelled 'D' (the key) and contradicts the later section"
+   ],
+   "suggestion": "Fix the letters in the main explanation paragraph (A: LNG-IUD, B: COCP, C: IV iron, E: hysteroscopy) or delete that duplicated passage. Optionally add a sentence on when pelvic ultrasound would be indicated."
+  }
+ },
+ "retest:osce-amsa-376": {
+  "hash": "5f6aef57",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:53:22.498Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "She has known COPD with worse breathlessness, more cough and purulent sputum (all three Anthonisen criteria), plus wheeze, hyperinflation and no focal consolidation signs, so this is most likely an infective acute exacerbation of COPD rather than pneumonia."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "She has known COPD with all three Anthonisen symptoms (worse breathlessness, more frequent and severe cough, purulent sputum), plus wheeze and hyperinflation, and a CRP of 62 with no focal consolidation signs, which fits an infective acute exacerbation better than pneumonia."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 3,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "explanation relies on findings absent from the stem (ECG, chest X-ray, focal chest signs, pleuritic pain, calf signs)",
+    "stem is telegraphic notes rather than a full vignette; no vitals, SpO2 or examination detail",
+    "fever, foul purulent sputum, hospital contact and raised CRP without a chest X-ray make pneumonia defensible",
+    "'foul' sputum and 'hospital sick contact' are misleading cues pointing to aspiration or hospital-acquired infection"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "Key is likely correct, but nothing in the stem excludes pneumonia",
+    "Explanation cites exam and imaging findings the student is never given",
+    "Stem lacks vitals, examination and investigations"
+   ],
+   "suggestion": "Write a full vignette with vital signs, SpO2, a chest exam showing wheeze without focal signs, and a chest X-ray showing hyperinflation with no consolidation or pneumothorax. Drop 'foul' and 'hospital sick contact'."
+  }
+ },
+ "retest:osce-amsa-307": {
+  "hash": "620cc57c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:53:26.540Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.99,
+    "reason": "Sudden tearing pain that goes through to the back, a pulse deficit with a big difference in arm blood pressure, a new aortic regurgitation murmur and a CT flap in the ascending aorta together define a Stanford type A aortic dissection."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.99,
+    "reason": "Sudden tearing chest pain radiating to the back, a pulse deficit, a large difference in arm blood pressure, a new aortic regurgitation murmur and a CT intimal flap starting in the ascending aorta all point to Stanford type A aortic dissection."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (CT intimal flap from the ascending aorta is the diagnosis itself)",
+    "telegraphic list-style stem rather than a clinical vignette",
+    "explanation cites findings not in the stem (ECG unchanged from 2024, small troponin rise, resonant chest, CT showing no ",
+    "only four options; pneumothorax is an implausible distractor",
+    "option B is the only one with extra detail (Stanford type A) and is longest"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct, but the CT flap in the stem gives the diagnosis away, so this tests nothing",
+    "The explanation refers to ECG, troponin and examination findings that are not in the stem",
+    "The stem is a list of findings, and a diagnosis question pitches it below Step 2 CK level"
+   ],
+   "suggestion": "Write a full vignette that stops before the CT, or give the CT result and ask for the next step in management (urgent surgical repair, plus IV beta-blocker to bring heart rate and BP down). Use five homogeneous options such as thrombolysis, anticoagulation, PCI, endovascular stenting and emergency open surgery, and make sure every finding the explanation mentions is in the stem."
+  }
+ },
+ "retest:osce-amsa-222": {
+  "hash": "e48bfa48",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:53:43.160Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Burning retrosternal pain after meals that gets worse lying down, with acid regurgitation, night cough, a normal ECG and no alarm features, is classic GERD."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Burning retrosternal pain after meals that gets worse lying down, with an acid taste (regurgitation), a night cough, and a normal ECG and bloods, is classic GERD; there are no warning signs to suggest Barrett's or cancer."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 3,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation relies on findings not in the stem (pain lasting 30 minutes, not relieved by rest, not brought on by tennis,",
+    "Option A combines two diagnoses in one option, so the options are not homogeneous",
+    "Vignette gives the answer away: it lists the textbook GORD features",
+    "Telegraphic stem with no examination findings or relevant negatives",
+    "Only four options"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "revise",
+   "reasons": [
+    "The key (GORD) is clearly correct",
+    "The explanation cites stem details that do not exist, so it does not match the item",
+    "Easy recall-level item with a compound distractor and weak options"
+   ],
+   "suggestion": "Add the missing details to the stem: pain duration and its relation to exertion, the tennis history, no NSAID use, no alarm features and normal Hb/ferritin. Split option A into a single diagnosis (e.g. eosinophilic oesophagitis) and add a fifth plausible option (e.g. functional heartburn or oesophageal spasm). Better still, change the question to a next-step one, such as a PPI trial versus endoscopy."
+  }
+ },
+ "retest:osce-amsa-377": {
+  "hash": "ade12ca0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:53:43.992Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.62,
+    "reason": "Colicky pain turning constant, gross tympanic distension, early obstipation, late vomiting and an empty rectum make this a large bowel obstruction, likely from colorectal cancer or a diverticular stricture given the adenomas, missed surveillance, family history and past diverticulitis; volvulus is l"
+   },
+   {
+    "answer": 2,
+    "confidence": 0.6,
+    "reason": "Early obstipation, late vomiting, tympanic distension and an empty rectum fit large bowel obstruction, and his risk factors (past diverticulitis, missed adenoma surveillance, father with colon cancer) point to a cancer or diverticular stricture rather than a volvulus."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 3,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "heterogeneous options: C is a syndrome and D (sigmoid volvulus) is one of its causes, so D being true would also make C ",
+    "the sudden onset and gross tympanic distension point towards volvulus, which undermines the key",
+    "the risk factors given (adenomas, missed surveillance, family history) point to colorectal carcinoma as the cause, but c",
+    "the explanation uses facts not in the stem (regular pulse, no AF, no previous episodes)",
+    "the stem is a list of telegraphic fragments with no vital signs and no proper vignette",
+    "the explanation for D admits it cannot be excluded without imaging"
+   ],
+   "topic": "General Surgery",
+   "verdict": "revise",
+   "reasons": [
+    "The options mix levels: sigmoid volvulus is a cause of large bowel obstruction, so two options can both be correct",
+    "The details given are set up to point to carcinoma as the cause, but the question asks only for the syndrome",
+    "The stem is fragmented, and the explanation relies on findings that are not in it"
+   ],
+   "suggestion": "Write the stem as a full vignette with vital signs and the CT or X-ray findings, and keep the options all at one level. For example, ask for the most likely cause of the large bowel obstruction, with options such as colorectal carcinoma (key), diverticular stricture, sigmoid volvulus and acute colonic pseudo-obstruction."
+  }
+ },
+ "retest:osce-amsa-392": {
+  "hash": "db111922",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:53:47.505Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Typical ischemic chest pain, ST elevation in V2–V5, I and aVL with reciprocal changes in III, and a raised troponin point to an anterolateral STEMI (LAD territory)."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Typical ischemic chest pain, ST elevation in V2–V5, I and aVL with reciprocal depression in III, and a raised troponin point to an anterolateral STEMI from LAD occlusion; reciprocal changes and the regional pattern argue against pericarditis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (ECG territory, reciprocal change and troponin all stated)",
+    "explanation relies on findings absent from the stem (equal arm BPs, normal mediastinum, SpO2 96%, Q waves, no rub, no tr",
+    "stem is a list of fragments with no vital signs or examination findings",
+    "key is the only specific, territorial option",
+    "awkward wording: 'left-sided pressure to the left arm and jaw'"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct but the item is trivially easy because the stem names the ECG territory and reciprocal change",
+    "Explanation cites findings that are not in the stem",
+    "Recall-level diagnosis question; a next-step question would test more"
+   ],
+   "suggestion": "Write a full vignette with vital signs, examination findings (equal arm BPs, clear chest, no rub) and the ECG findings the explanation uses, and ask for the most appropriate next step. Offer options such as immediate primary PCI, waiting for a repeat troponin, CT aortography and CT pulmonary angiography."
+  }
+ },
+ "retest:osce-amsa-223": {
+  "hash": "6ff280f0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:53:53.344Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.99,
+    "reason": "She has signs of a DVT, several VTE risk factors (a long flight, oestrogen HRT, limited mobility and smoking), sudden pleuritic chest pain, tachycardia, and filling defects on CTPA, which together confirm acute pulmonary embolism."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.99,
+    "reason": "A calf DVT with several thrombotic risk factors, followed by sudden pleuritic chest pain, breathlessness and tachycardia, with filling defects in both pulmonary arteries on CTPA, confirms acute pulmonary embolism."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (CTPA filling defects stated in stem)",
+    "telegraphic stem without vitals, exam or full sentences",
+    "explanation cites findings absent from the stem (ECG, hs-troponin, arm BPs, percussion)",
+    "explanation does not explain why the key is correct"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "Stating CTPA filling defects makes the item a test of reading the result, not of clinical reasoning",
+    "Explanation rules out distractors using data the stem never gives",
+    "The core idea (DVT leading to PE, with several clot risk factors) is sound and fixable"
+   ],
+   "suggestion": "Write a full vignette with vitals, SpO2, the ECG, a normal chest X-ray and the calf findings, but no CTPA. Ask for the most appropriate next step, e.g. CTPA vs D-dimer vs V/Q vs troponin, or the first treatment. Rewrite the explanation so it applies Wells/PE likelihood and uses only data given in the stem."
+  }
+ },
+ "retest:osce-amsa-221": {
+  "hash": "e568c8e3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:54:12.684Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "An irregularly irregular pulse with a pulse deficit, plus an ECG with absent P waves, fibrillatory waves and irregular RR intervals, means atrial fibrillation; there are no features of flutter, ischemia or thyrotoxicosis."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "An irregularly irregular pulse with a pulse deficit, plus an ECG showing no P waves, fibrillatory waves and irregular RR intervals at about 132, is new-onset atrial fibrillation; nothing points to thyrotoxicosis or ACS, and flutter would show sawtooth waves with a regular rhythm."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (ECG description defines AF)",
+    "explanation references data absent from stem (patient name 'Philip', onset under 2 hours vs 40 minutes in stem, normal t",
+    "explanation addresses cardioversion timing rather than the diagnosis asked",
+    "option D overlaps the key (also AF) and cannot be excluded from stem data",
+    "heterogeneous options (ACS is not a rhythm diagnosis)",
+    "stem is a telegraphic fragment rather than a full vignette"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "Diagnosis is given away by the textbook ECG description, so it is pure recall",
+    "Explanation is inconsistent with the stem and relies on findings not provided",
+    "Clinical teaching point (cardioversion timing and anticoagulation) is sound but not what is tested"
+   ],
+   "suggestion": "Convert to a next-step management item: give a full vignette with documented onset under 24 hours, haemodynamic stability, CHA2DS2-VA score, and normal troponin and TSH. Ask about the appropriate cardioversion/anticoagulation strategy, with homogeneous options (e.g., immediate DC cardioversion, start anticoagulation then early cardioversion, TOE-guided cardioversion, 3 weeks of anticoagulation first, rate control only)."
+  }
+ },
+ "retest:osce-amsa-248": {
+  "hash": "5f3fa7ac",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:54:15.218Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "A suddenly hot, swollen knee with a true effusion, pain on any movement, fever with rigors, and risk factors (a dirty puncture wound, diabetes, pre-existing OA) points to septic arthritis until proven otherwise; bursitis would not cause a joint effusion or pain on all movement, gout does not explain"
+   },
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "The most likely diagnosis is septic arthritis: he has a hot, swollen knee with an effusion, pain on any movement, fever with rigors and tachycardia, and risk factors of a recent dirty puncture wound, diabetes, older age and existing osteoarthritis. Bursitis is less likely because it does not cause a"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Telegraphic stem in note form rather than a full clinical vignette; no vital signs, examination detail or investigations",
+    "Explanation relies on facts missing from the stem (monogamous marriage, no tophi, no diuretics, normal first MTPs, no pr",
+    "Option D says 'left knee' but the stem never gives a side",
+    "Vignette gives the answer away: fever, rigors, a puncture wound and diabetes make the question too easy",
+    "Option C is weak: nothing in the stem points to gonococcal infection"
+   ],
+   "topic": "Rheumatology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: a hot monoarthritis with fever and rigors after a puncture wound in a diabetic is septic arthritis until proven otherwise",
+    "The stem leaves out details the explanation depends on, and option D names a side ('left') the stem never gives",
+    "The cues are so strong that the question tests little reasoning; a 'next step' format (aspirate before antibiotics) would be more useful at Step 2 level"
+   ],
+   "suggestion": "Rewrite as a full vignette with vital signs, examination findings and the exclusions the explanation uses (sexual history, no tophi, no prepatellar swelling), and state which knee. Consider asking for the most appropriate next step (joint aspiration for Gram stain, culture and crystals before IV antibiotics), with aspiration-related distractors."
+  }
+ },
+ "retest:osce-amsa-578": {
+  "hash": "1ce98aa8",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:54:18.659Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "Sudden vomiting and watery diarrhoea about 48 hours after contact with a child's diarrhoea, with low-grade fever and a soft abdomen, point to acute infectious (likely norovirus) gastroenteritis rather than ischaemia, a specifically bacterial cause, or C. difficile."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "Sudden vomiting and watery diarrhoea two days after contact with a child's diarrhoeal nappies, with low-grade fever and a soft abdomen, fits acute infectious (likely viral, e.g. norovirus) gastroenteritis rather than C. difficile, a bacterial cause, or ischaemia."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "C"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 3,
+   "accuracy": 3,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "overlapping options: C (bacterial gastroenteritis) is a subset of B (acute infectious gastroenteritis)",
+    "umbrella key is cued as the only all-inclusive option",
+    "explanation cites findings (sinus rhythm, lactate 1.6) not given in the stem",
+    "stem written as fragments rather than a complete vignette",
+    "heterogeneous levels of diagnostic specificity across options"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "revise",
+   "reasons": [
+    "Key B includes option C, so the options overlap and C cannot be strictly wrong",
+    "Explanation relies on ECG and lactate data that are missing from the stem",
+    "Clinical reasoning (viral pattern, sick contact) is sound and the item can be fixed"
+   ],
+   "suggestion": "Change the key to 'Viral gastroenteritis (e.g. norovirus)' with options at the same level of specificity (e.g. Shigella enterocolitis, C. difficile infection, acute mesenteric ischaemia, ischaemic colitis). Then add the vital signs, ECG rhythm and lactate to a complete-sentence stem."
+  }
+ },
+ "retest:osce-amsa-220": {
+  "hash": "fe85240e",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:54:24.635Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "A sudden-onset regular narrow-complex tachycardia with pseudo-r′ in V1 and pseudo-S inferiorly (very short RP) is typical AVNRT, a form of SVT; the hyperthyroidism is a distractor pointing toward sinus tachycardia."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "Sudden-onset regular narrow-complex tachycardia at 150 with pseudo r' in V1 and pseudo S inferiorly (very short RP) is typical AVNRT, a supraventricular tachycardia; the thyrotoxicosis is a distractor that would more typically cause sinus tachycardia or AF."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key is an umbrella category that includes distractors A and C (and arguably D is supraventricular)",
+    "Heterogeneous options: one broad category versus specific rhythms",
+    "Question is ambiguous: 'most likely diagnosis' could be Graves disease given the thyrotoxic findings",
+    "Telegraphic, fragmented stem rather than a coherent vignette",
+    "Explanation does not address the thyrotoxicosis red herring (2:1 flutter, sinus tachycardia)"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "The key 'SVT' is a category that includes options A and C, so it is not a specific single best answer",
+    "The ECG features (pseudo r' in V1, pseudo S inferiorly, very short RP) point to AVNRT, which should be the key",
+    "The lead-in is ambiguous given the clear thyrotoxicosis in the stem"
+   ],
+   "suggestion": "Change the key to 'AV nodal re-entrant tachycardia' and the lead-in to 'Which of the following best explains her tachycardia?'. Keep AVRT, 2:1 atrial flutter and sinus tachycardia as distractors, rewrite the stem as full prose, and explain why the thyrotoxicosis makes flutter or sinus tachycardia tempting but the ECG rules them out."
+  }
+ },
+ "retest:headqa-2013-128": {
+  "hash": "eb64bd72",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:54:32.949Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "BPH is not a precancerous lesion: it starts in the transition zone and is not a precursor of prostate cancer, which mostly starts in the peripheral zone; the other statements are true."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "BPH is a benign transition-zone hyperplasia, not a precancerous lesion, while all the other statements are true."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem (NOT true)",
+    "no clinical vignette; pure recall",
+    "heterogeneous options (imaging, lab, exam, treatment, pathology)",
+    "outdated terminology: 'hypertrophy' instead of 'hyperplasia'",
+    "true/false format rather than single best answer",
+    "no explanation provided"
+   ],
+   "topic": "Urology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: BPH is not a premalignant lesion; arises mainly in the transition zone, while most cancers arise in the peripheral zone",
+    "Negative-stem true/false recall item with no patient, against NBME guidance",
+    "Heterogeneous options and no explanation"
+   ],
+   "suggestion": "Rewrite it as a vignette, for example an older man with LUTS, an enlarged smooth prostate and a mildly raised PSA who asks whether BPH raises his cancer risk. Ask a positive single-best-answer question with homogeneous options, use 'hyperplasia', and add an explanation."
+  }
+ },
+ "retest:headqa-2015-84": {
+  "hash": "36a19839",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:54:44.286Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "This patient is very high risk because he has both diabetes and established ischemic heart disease, so the usual targets are LDL <70 mg/dL and HbA1c <7%; this is the only option that matches those classic targets, although newer ESC guidelines go even lower, to LDL <55 mg/dL."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "A diabetic with established ischemic heart disease is at very high cardiovascular risk, so the LDL goal is below 70 mg/dL, and the usual HbA1c goal is below 7% rather than a tighter target for an older cardiac patient."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 2,
+   "accuracy": 2,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Outdated LDL target: current ESC/EAS 2019 and ADA 2023+ guidelines recommend LDL <55 mg/dL for diabetes with ASCVD",
+    "HbA1c target in older adults should be individualized; the stem gives no health or functional status",
+    "Recall question without a clinical vignette",
+    "Compound options with paired values allow elimination by recognizing one number",
+    "Repeated LDL value in options A and D cues the answer",
+    "No explanation"
+   ],
+   "topic": "Endocrinology",
+   "verdict": "revise",
+   "reasons": [
+    "The keyed LDL target of <70 mg/dL is outdated; current guidelines set <55 mg/dL for very-high-risk patients",
+    "Bare recall stem with paired compound options and no explanation",
+    "The HbA1c target for a 70-year-old depends on comorbidity and frailty, which the stem does not give"
+   ],
+   "suggestion": "Write a short vignette (health status, current statin, LDL value) and ask a single question, such as the LDL target or the next lipid-lowering step. Use current values (<55 mg/dL) and add an explanation that cites ADA/ESC guidance."
+  }
+ },
+ "retest:headqa-2015-85": {
+  "hash": "8563d0c4",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:54:46.749Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Kallmann syndrome is a hypothalamic GnRH deficiency with an intact pituitary, so pulsatile GnRH via an infusion pump restores physiological FSH and LH and induces sperm production."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Hyposmia with low gonadotropins (Kallmann syndrome) means GnRH is missing from the hypothalamus, so pulsatile GnRH from a pump makes the pituitary release LH and FSH again and can start sperm production; option B gives the wrong gonadotropin schedule, and depot triptorelin would shut the pituitary d"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "C"
+   ],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 3,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option C is only wrong because of its dosing frequency; gonadotropin therapy (hCG plus FSH) is an accepted, and often pr",
+    "Only four options",
+    "Poor translation and grammar ('22-year-old boy', 'presents a lack', 'Analytically', 'vn', 'that you will be proposed')",
+    "Option C says 'LH', but in practice hCG is used as the LH analogue",
+    "No explanation provided"
+   ],
+   "topic": "Endocrinology",
+   "verdict": "revise",
+   "reasons": [
+    "Kallmann syndrome (hypogonadotropic hypogonadism with hyposmia) is classically treated with pulsatile GnRH to achieve fertility, so the key is defensible",
+    "Gonadotropin therapy is equally accepted, so option C competes with the key and is only wrong because of its 'once a week' frequency",
+    "The wording is poorly translated and there is no explanation"
+   ],
+   "suggestion": "Replace option C with a clearly wrong choice, such as testosterone replacement alone, which suppresses spermatogenesis, or clomiphene. Alternatively, ask about the defect's location rather than treatment. Then fix the English, add a fifth option, and write an explanation that covers both pulsatile GnRH and hCG/FSH as fertility treatments."
+  }
+ },
+ "retest:headqa-2016-96": {
+  "hash": "9f9a4804",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:54:52.275Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.99,
+    "reason": "Imatinib is a tyrosine kinase inhibitor that targets the BCR-ABL fusion protein produced by the Philadelphia chromosome t(9;22), and it is the mainstay of long-term disease control in chronic myeloid leukemia."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.99,
+    "reason": "Imatinib blocks the BCR-ABL tyrosine kinase made by the Philadelphia chromosome t(9;22), which is the defining abnormality of chronic myeloid leukemia, and it is the main treatment for long-term control of CML."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 2,
+   "accuracy": 5,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; pure recall of a drug–disease pair",
+    "inconsistent punctuation across options (B lacks a full stop)",
+    "no explanation provided",
+    "outdated/nonstandard term 'acute myeloblastic leukemia'",
+    "'chronic' appears in three options, which nudges guessers toward the chronic leukemias"
+   ],
+   "topic": "Haematology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: imatinib, a BCR-ABL tyrosine kinase inhibitor, is the backbone of long-term CML control",
+    "This is recall without a patient, so it falls short of Step 2 CK application",
+    "There is no explanation and the options have minor formatting flaws"
+   ],
+   "suggestion": "Rewrite as a vignette, for example a patient with splenomegaly, leukocytosis with basophilia and a t(9;22) BCR-ABL1 result, and ask for the most appropriate long-term therapy. Use homogeneous drug options (imatinib, hydroxyurea alone, ibrutinib, ATRA, 7+3 induction) and add an explanation for each option."
+  }
+ },
+ "retest:headqa-2015-99": {
+  "hash": "62a102ad",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:54:54.951Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Removing donor T cells lowers the risk of GVHD but raises the risk of graft failure or rejection, so it does not improve engraftment."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "Removing T cells from the donor graft lowers GVHD but makes graft failure more likely, so the claim that it improves engraftment is false."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem (\"which is false\")",
+    "no clinical vignette; pure recall",
+    "garbled machine translation (\"implant of the parents\", \"recidivising\", \"hemopoietic progenitors\") makes the key hard to ",
+    "option D is arguable: only about half of patients with chronic GVHD eventually stop immunosuppression, so \"majority\" cou",
+    "option B is partly outdated because post-transplant cyclophosphamide is now a standard prophylaxis",
+    "heterogeneous options with different lengths and structures"
+   ],
+   "topic": "Haematology",
+   "verdict": "reject",
+   "reasons": [
+    "The key is correct: removing donor T cells raises the risk of graft failure (and relapse), so it does not improve engraftment. But the translation is too garbled to read.",
+    "It is a negative-stem recall item with no patient, so it is not Step 2 CK style.",
+    "Option D is open to dispute, because long-term data show only about 50% of patients stop immunosuppression, which weakens the single best answer."
+   ],
+   "suggestion": "Rewrite as a positive-stem vignette, for example a patient planned for T-cell-depleted allogeneic transplant, asking which complication is more likely (graft failure or relapse), with homogeneous distractors. Add an explanation of T-cell depletion and of current GVHD prophylaxis and treatment, including post-transplant cyclophosphamide."
+  }
+ },
+ "retest:headqa-2015-82": {
+  "hash": "53235dfb",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:55:05.092Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Painful distal symmetric diabetic polyneuropathy is best treated first with duloxetine (an SNRI), along with pregabalin, gabapentin or TCAs; NSAIDs, paracetamol and opioids are not recommended as first-line treatment."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Burning pain in a stocking pattern that is worse at night fits painful diabetic peripheral neuropathy, and duloxetine (an SNRI) is a first-line treatment along with pregabalin/gabapentin and tricyclic antidepressants; paracetamol, NSAIDs and opioids are not first-line for this kind of nerve pain."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Gender inconsistency in stem (woman / he / his)",
+    "Poor grammar and translation ('your pathology', 'sensation of warm feet')",
+    "Only four options; no other first-line class shown as a distractor (e.g., a TCA or gabapentinoid that could be correct),",
+    "No explanation provided",
+    "Stem lacks age, examination findings and comorbidities that would shape drug choice"
+   ],
+   "topic": "Endocrinology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: duloxetine is a first-line drug for painful diabetic peripheral neuropathy (ADA, AAN, NICE)",
+    "The stem has language and gender errors and is missing key clinical details",
+    "Distractors are weak: NSAIDs, paracetamol and opioids are clearly not first line"
+   ],
+   "suggestion": "Fix the grammar and use one gender throughout. Add age, examination findings (loss of monofilament or vibration sense, reduced ankle reflexes) and comorbidities. Use five homogeneous options, such as tramadol, topical capsaicin, carbamazepine, oxycodone and duloxetine, and add an explanation that covers each option."
+  }
+ },
+ "retest:headqa-2013-130": {
+  "hash": "420aead1",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:55:07.969Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.92,
+    "reason": "A young man with a testicular mass, cannonball lung metastases and a very high β-hCG most likely has testicular choriocarcinoma, which spreads early through the blood and makes a lot of hCG."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "A young man with a hard testicular nodule, a very high β-hCG and cannonball (\"balloon release\") lung metastases most likely has testicular choriocarcinoma, which spreads early through the blood."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No explanation provided",
+    "Implausible distractors (Wilms tumor in a 26-year-old, benign renal angiomyolipoma with a testicular mass)",
+    "Poor translation and grammar ('balloon release' for cannonball, 'evolution', 'analytical highlights')",
+    "Inconsistent option punctuation",
+    "Vignette narrows the answer to testicular germ cell tumors, so only A and D are real contenders"
+   ],
+   "topic": "Oncology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: a testicular mass, cannonball lung metastases from blood-borne spread and a markedly raised β-hCG point to choriocarcinoma",
+    "Three distractors are implausible, so the item only tests seminoma vs choriocarcinoma",
+    "The wording is poorly translated and there is no explanation"
+   ],
+   "suggestion": "Use idiomatic English ('cannonball' metastases, 'laboratory studies show') and state that the patient is a man. Replace the renal and Wilms distractors with homogeneous germ cell options such as embryonal carcinoma, yolk sac tumor and teratoma. Add normal AFP to the stem and an explanation of why seminoma rarely raises β-hCG this high."
+  }
+ },
+ "retest:headqa-2015-98": {
+  "hash": "ea18decb",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:55:21.822Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "An A+ recipient can safely receive group O red cells, which carry no A or B antigens, and AB plasma, which contains no anti-A or anti-B antibodies."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "A group A recipient can safely receive O red cells, which have no A or B antigens, and AB plasma, which has no anti-A or anti-B antibodies."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No explanation provided",
+    "Minimal vignette: tests ABO compatibility recall with little clinical context",
+    "Awkward or translated wording ('polytraumatized', '0+' instead of 'O+', 'Concentrate of red blood cells')",
+    "Distractors are easy to rule out: all three give B-antigen red cells, and D is wrong twice over",
+    "Stem does not say what is unavailable (group-specific red cells, plasma, or both)"
+   ],
+   "topic": "Haematology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: an A+ recipient can take O red cells and AB plasma",
+    "No explanation, and the stem is a thin, poorly worded vignette",
+    "Distractors can all be ruled out by one red-cell compatibility rule, so the item does not discriminate well"
+   ],
+   "suggestion": "Write a short trauma vignette (for example, a hypotensive patient with a known A+ type who needs massive transfusion when group A products have run out), and add stronger distractors such as A+ red cells with group O plasma or O+ red cells with group A plasma. Add an explanation covering which red cells and which plasma are compatible, and fix the wording ('O+', 'packed red blood cells')."
+  }
+ },
+ "retest:headqa-2016-97": {
+  "hash": "8952561a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:55:22.754Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "The IPSS is based on marrow blast percentage, karyotype and number of cytopenias (which includes platelets below 100,000/µL); red cell transfusion dependence belongs to the WPSS, not the IPSS."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "The original IPSS uses marrow blast percentage, karyotype and the number of cytopenias (platelets below 100k count as one); transfusion dependence belongs to the WPSS, not the IPSS."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem",
+    "recall without a patient vignette",
+    "no explanation provided",
+    "option D imprecise: IPSS scores number of cytopenias, not platelet count per se"
+   ],
+   "topic": "Haematology",
+   "verdict": "reject",
+   "reasons": [
+    "Pure recall of the parts of a scoring system, with no clinical application",
+    "Negative-stem format, discouraged by NBME",
+    "No explanation; option D wording is imprecise"
+   ],
+   "suggestion": "Rewrite as a vignette: give an MDS patient's marrow blast percentage, karyotype and cell counts, and ask for the risk category or the best next step in management (e.g., IPSS-R lower risk → ESA vs. higher risk → hypomethylating agent/transplant). Add an explanation that sets IPSS against WPSS (transfusion dependence)."
+  }
+ },
+ "retest:headqa-2013-59": {
+  "hash": "26454710",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:55:28.040Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "Hepatitis C is treated with direct-acting antivirals that include NS3/4A protease inhibitors such as glecaprevir, grazoprevir and voxilaprevir, while hepatitis B is treated with nucleos(t)ide analogues and the other viruses have no protease-inhibitor therapy."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "HCV is treated with direct-acting antivirals that include NS3/4A protease inhibitors such as glecaprevir, grazoprevir and voxilaprevir, while HBV is treated with polymerase inhibitors."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Recall question with no clinical vignette",
+    "Unclear wording: 'is a subsidiary of treatment' should read 'is treated with' or 'is amenable to'",
+    "Heterogeneous distractor: TTV (torque teno virus) is not a recognised hepatitis virus and has no treatment",
+    "Inconsistent option format (redundant 'The ... virus', trailing period on E)",
+    "No explanation"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: NS3/4A protease inhibitors such as glecaprevir, grazoprevir and voxilaprevir are part of HCV direct-acting antiviral therapy",
+    "It is pure recall with no patient, so it does not meet the Step 2 CK application standard",
+    "The wording is poor, one distractor is non-standard, and there is no explanation"
+   ],
+   "suggestion": "Rewrite it as a case: for example, a patient with chronic HCV infection (positive RNA, a given genotype and fibrosis stage) and a question on the best regimen, with glecaprevir/pibrentasvir as the key and wrong options such as tenofovir, entecavir, peginterferon alone or ribavirin alone. Add an explanation that says why each option is right or wrong."
+  }
+ },
+ "retest:medqa-us4-test-0804": {
+  "hash": "add91a76",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:55:37.274Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Home-canned food, cranial nerve problems that came first, then descending weakness and respiratory failure, all point to foodborne botulism, which is treated with botulinum antitoxin."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "Paralysis that starts in the cranial nerves and moves down, with breathing failure, in a man who cans his own food points to foodborne botulism, which is treated with antitoxin."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no explanation provided",
+    "home canning history strongly cues the diagnosis",
+    "riluzole is an implausible distractor in an acute setting",
+    "pupillary findings omitted, which would better distinguish botulism from GBS/myasthenia"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "revise",
+   "reasons": [
+    "Key (botulinum antitoxin) is correct for foodborne botulism with descending paralysis",
+    "No explanation to teach why antitoxin is right and plasmapheresis/neostigmine/riluzole are wrong",
+    "One weak distractor (riluzole) and strong cueing from home canning"
+   ],
+   "suggestion": "Add an explanation contrasting botulism (descending paralysis, cranial nerves first, dilated pupils, antitoxin) with Guillain-Barré (ascending, plasmapheresis/IVIG) and myasthenia gravis (acetylcholinesterase inhibitors), and add pupillary findings to the stem. Replace riluzole with a more plausible option such as IVIG, or with an antibiotic such as penicillin G."
+  }
+ },
+ "retest:mmlu-professional_medicine-086": {
+  "hash": "071032b2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:55:43.934Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "A fixed, widely split S2 with a systolic ejection murmur at the upper left sternal border points to an atrial septal defect: the extra blood flow across the pulmonic valve causes the systolic murmur, and extra flow across the tricuspid valve causes the mid-diastolic rumble at the lower left sternal "
+   },
+   {
+    "answer": 1,
+    "confidence": 0.98,
+    "reason": "A fixed, widely split S2, a systolic ejection murmur at the upper left sternal border (extra flow across the pulmonic valve) and a mid-diastolic rumble at the lower left sternal border (extra flow across the tricuspid valve) are the classic signs of an atrial septal defect."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "only four options",
+    "no explanation provided",
+    "fixed split S2 is a pathognomonic cue that allows recall-based answering",
+    "distractors are weak for an upper-left sternal border flow murmur (stronger choices such as pulmonary stenosis or VSD ar"
+   ],
+   "topic": "Paediatrics",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and the findings are classic and accurate for ASD",
+    "No explanation to teach the reasoning",
+    "Distractor set is small and could be more discriminating"
+   ],
+   "suggestion": "Add pulmonary valve stenosis (wide split S2 that varies with breathing, upper-left sternal border ejection murmur) and ventricular septal defect as options. Write an explanation linking the fixed split S2 and the pulmonary and tricuspid flow murmurs to an atrial left-to-right shunt."
+  }
+ },
+ "retest:mmlu-professional_medicine-098": {
+  "hash": "7c8e069d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:55:51.336Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.98,
+    "reason": "Vincristine, part of the CHOP regimen for non-Hodgkin lymphoma, blocks microtubules and causes a dose-dependent sensorimotor peripheral neuropathy with areflexia."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.98,
+    "reason": "Vincristine, part of the CHOP regimen for non-Hodgkin lymphoma, inhibits microtubules and causes a dose-dependent peripheral sensorimotor neuropathy with areflexia in a stocking-glove pattern."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 5,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no explanation provided",
+    "only four options",
+    "fluorouracil is not a typical lymphoma agent, a weak distractor",
+    "close to pure recall of a classic drug and its side effect"
+   ],
+   "topic": "Oncology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: vincristine causes a sensory and motor neuropathy that depends on the cumulative dose",
+    "No explanation is given",
+    "Distractor set is thin and partly implausible for lymphoma"
+   ],
+   "suggestion": "Add an explanation of why vincristine causes neuropathy (it blocks microtubule formation) and of each distractor's main toxicity. Swap fluorouracil for cyclophosphamide and add rituximab or bleomycin so there are five lymphoma-relevant options."
+  }
+ },
+ "retest:mmlu-professional_medicine-018": {
+  "hash": "a138d188",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:55:59.777Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "For moderate-to-severe croup with stridor at rest, the standard treatment is dexamethasone given together with nebulized racemic epinephrine, and there is no current sign that he needs intubation or antibiotics."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.92,
+    "reason": "This is moderate-to-severe croup (barking cough and stridor at rest), so the right treatment is nebulized racemic epinephrine plus dexamethasone, and he does not need intubation since he is oxygenating and not in respiratory failure."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No explanation provided",
+    "Extraneous stem detail (babysitter age, absent mother, unknown history) that suggests a recycled consent item and adds l",
+    "Only four options; one extra plausible distractor (e.g., heliox, nebulized budesonide alone, or lateral neck radiograph)",
+    "Initial hypoxemia (89%) and a tired-appearing child make intubation somewhat arguable"
+   ],
+   "topic": "Paediatrics",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: corticosteroid (dexamethasone) plus nebulized epinephrine is standard for moderate-severe croup",
+    "No explanation is given",
+    "Stem has irrelevant social details, and the 'tired' appearance blurs the severity for the intubation distractor"
+   ],
+   "suggestion": "Cut the babysitter and consent details, make it clear the child is alert and not in impending respiratory failure, and add a fifth distractor such as heliox or a lateral neck radiograph. Write an explanation covering why steroids reduce airway edema and why aminophylline, antibiotics and intubation are inappropriate here."
+  }
+ },
+ "retest:mmlu-professional_medicine-050": {
+  "hash": "f2b98143",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:56:09.025Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.6,
+    "reason": "He is stable and his rate fell on IV metoprolol, so the rebound to 160/min most likely means the short-acting dose wore off, and repeating metoprolol is the best way to control his rate."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.65,
+    "reason": "He has already had the usual maximum IV bolus dose of metoprolol (15 mg) and his rate has come back up, so adding IV digoxin as a second rate-control drug is appropriate while his blood pressure is stable; lidocaine and enalapril do not slow the rate in atrial fibrillation."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no explanation provided",
+    "only four options",
+    "weak distractors: enalapril and lidocaine have no role in rate control for AF and are easy to rule out",
+    "irrelevant detail (height, weight, BMI) adds length without helping with the decision",
+    "digoxin is a partly arguable add-on agent, although it is slower and less effective in high adrenergic states",
+    "stem says '15 mg total' without saying whether the standard bolus maximum has been reached, so 'more IV metoprolol' sits"
+   ],
+   "topic": "Cardiology",
+   "verdict": "revise",
+   "reasons": [
+    "The key (repeat IV beta-blocker in a stable patient with recurrent rapid AF who already responded to it) is correct and is the best option offered",
+    "Two of the three distractors are not plausible, and there is no explanation",
+    "Some stem details are irrelevant, and the dosing context is unclear"
+   ],
+   "suggestion": "Replace enalapril and lidocaine with plausible options of the same kind, such as amiodarone, adenosine or synchronized cardioversion, and add a fifth option. Remove the BMI details, and add an explanation of why a repeat beta-blocker beats digoxin (slow onset, poor control when adrenergic tone is high) and why each other option is wrong."
+  }
+ },
+ "retest:mmlu-professional_medicine-046": {
+  "hash": "7e10dd7f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:56:11.083Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.92,
+    "reason": "Research shows malpractice suits are driven mostly by poor communication and the patient feeling the physician doesn't care, not by how competent the physician actually is or seems."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "Studies show that whether a patient files a malpractice suit depends most on how they see the doctor-patient relationship, especially feeling that the physician is uncaring or communicates poorly, rather than on the physician's competence or experience."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no explanation provided",
+    "only four options (NBME standard is five)",
+    "clinical vignette is window dressing; the item tests a recalled epidemiological fact rather than applied reasoning",
+    "distractors C and D are weak and easily eliminated"
+   ],
+   "topic": "Medicolegal",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: the strongest predictor of a malpractice claim is poor communication, or a patient feeling the physician does not care, more than actual competence or the outcome",
+    "There is no explanation, and there are only four options, two of them weak",
+    "The vignette adds little; the item is close to a bare fact recall"
+   ],
+   "suggestion": "Add a fifth option of the same kind (e.g. 'The severity of the adverse outcome' or 'A documented deviation from the standard of care'). Add an explanation saying that patients who feel rushed, ignored or uncared for are most likely to sue, so good rapport and disclosure reduce litigation risk. It should also say why competence, socioeconomic status and the physician's experience are weaker predictors."
+  }
+ },
+ "retest:medqa-us4-test-0361": {
+  "hash": "33db881c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:56:11.382Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "A goiter, fast heart rate, sweating, diarrhea and weight loss in an infant of a mother with Graves' disease, appearing once the transferred propylthiouracil wears off, point to neonatal thyrotoxicosis, which is treated with methimazole plus propranolol."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "Neonatal Graves' disease, caused by maternal TSH-receptor antibodies and revealed once the transplacental propylthiouracil wore off, explains the fast heart rate, sweating, diarrhea, weight loss and goiter, so the treatment is methimazole plus propranolol."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no explanation provided",
+    "only four options",
+    "naloxone distractor is weak: it is contraindicated in opioid-exposed neonates and would not treat NAS, whereas morphine ",
+    "potassium iodide is used as an adjunct in severe neonatal thyrotoxicosis, so it is somewhat arguable"
+   ],
+   "topic": "Neonatology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: this is neonatal thyrotoxicosis from maternal TSH-receptor antibodies, presenting at about day 5–7 as PTU clears, with a goitre, tachycardia, diarrhoea and weight loss despite frequent feeds",
+    "The maternal heroin use is a good distractor because it suggests withdrawal (NAS), but the naloxone option is a poor way to test this",
+    "There is no explanation, and the item has fewer than five options"
+   ],
+   "suggestion": "Replace naloxone with oral morphine (the real NAS treatment) and add a fifth option such as phenobarbital or levothyroxine. Add an explanation covering the timing of transplacental TSI after PTU clears, why a thionamide plus a beta-blocker is first-line, and why iodide is only an adjunct."
+  }
+ },
+ "retest:medqa-us4-test-0867": {
+  "hash": "9ea37993",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:56:33.371Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "This young man has a DVT and a family history of clotting, and his aPTT barely rose (26 to 30 seconds) after a heparin bolus plus infusion; heparin works by boosting antithrombin III, so this heparin resistance points to an inherited antithrombin III deficiency."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Heparin needs antithrombin III to work, so an aPTT that barely rises after a heparin bolus and infusion, in a young man with a DVT and a family history of clots, points to inherited antithrombin III deficiency."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No explanation provided",
+    "Acute thrombus described as a 'hyperechoic mass'; acute DVT is usually hypoechoic or anechoic",
+    "Long, padded vignette with a lot of irrelevant data (BMI, smoking, fibrin split products)",
+    "Mechanism-focused (Step 1 style) rather than a management decision"
+   ],
+   "topic": "Haematology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: the aPTT barely rises despite a heparin bolus and infusion, which is heparin resistance and points to antithrombin III deficiency",
+    "The distractors are fair: factor V Leiden is the most common inherited cause, a normal baseline aPTT argues against antiphospholipid syndrome, and protein C deficiency does not cause heparin resistance",
+    "There is no explanation, and the ultrasound description has a minor inaccuracy"
+   ],
+   "suggestion": "Add an explanation. It should say that heparin works by boosting antithrombin, so deficiency causes heparin resistance, and give the reason each distractor is wrong. Change 'hyperechoic mass' to 'hypoechoic intraluminal thrombus' and trim irrelevant data. You could also ask for the best next step in management (for example, giving argatroban or antithrombin concentrate) to make it more Step 2 CK in style."
+  }
+ },
+ "retest:medqa-us4-test-0807": {
+  "hash": "249e8d1b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:56:33.639Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Refractory hypotension despite massive transfusion, no active bleeding, very low ScvO2 and cold extremities point to obstructive low-output shock, which in a patient with multiple stab wounds is most likely cardiac tamponade."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Very low ScvO2 and cold extremities with hypotension that does not respond to transfusion and phenylephrine, and no active bleeding, indicate low-output obstructive shock, most likely cardiac tamponade after penetrating trauma, rather than neurogenic shock, which would cause warm vasodilated extremi"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 3,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no explanation provided",
+    "the stem doesn't fit tamponade well: a pulse of 80/min with BP 50/40 is unexplained (phenylephrine reflex bradycardia is",
+    "it is unrealistic that no eFAST is mentioned in a patient with multiple stab wounds and refractory shock",
+    "cold extremities are confounded by the phenylephrine infusion and hypothermia",
+    "'undiagnosed pneumonia' is an implausible distractor",
+    "long stem with extraneous detail (ventilator mode, room temperature) and grammar errors ('results as')"
+   ],
+   "topic": "Trauma Surgery",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: low ScvO2 and cold extremities with no ongoing bleeding point to obstructive shock, and tamponade fits penetrating trauma",
+    "The vignette is clinically incomplete or inconsistent (no tachycardia, no eFAST, no tamponade signs)",
+    "There is no explanation, and one distractor is weak"
+   ],
+   "suggestion": "Add a narrow pulse pressure with distended neck veins (or an eFAST showing pericardial fluid), explain the pulse rate or make him tachycardic, and replace pneumonia with tension pneumothorax or neurogenic shock framed against a high ScvO2. Change the lead-in to 'most likely cause of his persistent hypotension' and add an explanation that contrasts the ScvO2 and perfusion pattern of each shock type."
+  }
+ },
+ "retest:medqa-us4-test-0249": {
+  "hash": "a097480a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:56:37.544Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.98,
+    "reason": "Sensitivity and specificity stay fixed, so when prevalence falls, PPV drops and NPV rises."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.98,
+    "reason": "When prevalence falls and sensitivity and specificity stay fixed, PPV goes down and NPV goes up."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 3,
+   "accuracy": 5,
+   "explanation": 0,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No explanation provided",
+    "Extraneous numerical data (2x2 table values) not needed to answer the question",
+    "Minor grammar ('patients that were found')",
+    "Largely conceptual recall with thin clinical context"
+   ],
+   "topic": "Public Health",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: lower prevalence lowers PPV and raises NPV",
+    "Stem data are internally consistent but not needed to answer the question",
+    "No explanation given"
+   ],
+   "suggestion": "Either ask for a calculated PPV/NPV (or the new PPV at a stated lower prevalence) so the 2x2 data is used, or trim the numbers and keep the question conceptual. Add an explanation of why prevalence changes predictive values but not sensitivity or specificity."
+  }
  }
 }

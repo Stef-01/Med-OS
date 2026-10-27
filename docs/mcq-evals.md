@@ -67,17 +67,17 @@ Failure rate of each check (% of items):
 
 ## 4. The review, reviewed twice
 
-40 judged candidates, spread over the kinds, reviewed a second time from scratch (`--retest`, `scripts/lib/mcq-retest.mjs`). A flip is a question that passes the selector's checks and bar on one review and not the other: the share of the pool's membership that is the reviewer's noise.
+80 judged candidates, spread over the kinds, reviewed a second time from scratch (`--retest`, `scripts/lib/mcq-retest.mjs`). A flip is a question that passes the selector's checks and bar on one review and not the other: the share of the pool's membership that is the reviewer's noise.
 
 | Kind | Retested | Same verdict (%) | Same key verdict (%) | Same solves (%) | Quality drift mean | Drift p90 | Drift max | Pass first / second | Flips (%) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| ai | 10 | 80 | 100 | 100 | 1.8 | 3 | 8 | 9 / 9 | 0 (0) |
-| amsa | 10 | 80 | 100 | 100 | 2 | 3 | 3 | 5 / 7 | 2 (20) |
-| open-exam | 10 | 80 | 100 | 100 | 2.3 | 5 | 8 | 3 / 2 | 1 (10) |
-| usmle-resource | 10 | 100 | 100 | 100 | 1.9 | 5 | 5 | 9 / 8 | 1 (10) |
-| **all** | 40 | 85 | 100 | 100 | 2 | 5 | 8 | 26 / 26 | 4 (10) |
+| ai | 20 | 90 | 100 | 100 | 1.7 | 3 | 8 | 18 / 18 | 0 (0) |
+| amsa | 20 | 90 | 100 | 100 | 2.2 | 3 | 6 | 9 / 10 | 3 (15) |
+| open-exam | 20 | 80 | 95 | 100 | 1.7 | 3 | 8 | 5 / 5 | 2 (10) |
+| usmle-resource | 20 | 95 | 100 | 100 | 1.7 | 5 | 5 | 17 / 16 | 1 (5) |
+| **all** | 80 | 88.8 | 98.8 | 100 | 1.8 | 5 | 8 | 49 / 49 | 6 (7.5) |
 
-Flipped: osce-amsa-375 (78 then 81, passed on the second); osce-amsa-379 (78 then 81, passed on the second); headqa-2016-92 (84 then 79, passed on the first); mmlu-professional_medicine-097 (82 then 79, passed on the first).
+Flipped: osce-amsa-307 (81 then 78, passed on the first); osce-amsa-375 (78 then 81, passed on the second); osce-amsa-379 (78 then 81, passed on the second); headqa-2015-82 (80 then 82, passed on the second); headqa-2016-92 (84 then 79, passed on the first); mmlu-professional_medicine-097 (82 then 79, passed on the first).
 
 ## 5. The pool as selected
 
