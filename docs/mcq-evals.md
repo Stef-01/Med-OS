@@ -18,7 +18,7 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 | Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 71 | 78 | 81 | 99 | 53.3 | 1.9 | 53.3 |
 | Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 64 | 74 | 80 | 100 | 26.9 | 0 | 0 |
 | Generated (generate-mcq.mjs) | 391 | 98.3 | 94 | 0 | 391 | 85 | 91 | 95 | 99 | 98.2 | 88 | 88 |
-| Open exam (HEAD-QA, Spanish MIR) | 786 | 78.2 | 54 | 56.4 | 507 | 55 | 68 | 75 | 97.2 | 28.6 | 5.3 | 28.6 |
+| Open exam (HEAD-QA, Spanish MIR) | 786 | 78.2 | 54 | 56.4 | 786 | 57 | 68 | 75 | 97.8 | 27.5 | 4.6 | 27.5 |
 
 **Bars:** base 81, AI-written 89 (the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality). "As selected": the bar and gates each kind meets in the selector (ai: the AI bar and two solves; amsa: the base bar and two solves; the rest: the base bar).
 
@@ -81,7 +81,7 @@ Flipped: osce-amsa-375 (78 then 81, passed on the second); osce-amsa-379 (78 the
 
 ## 5. The pool as selected
 
-Candidates by kind: {"ai":417,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":648,"rejected":674,"reserve":573,"pending":279}. In the pool: {"ai":310,"open-exam":120,"usmle-resource":160,"amsa":58}. Topic cap 98. Key positions: 4 options 64/58/50/67 (χ² 2.82); 5 options 77/87/76/76/93 (χ² 2.97).
+Candidates by kind: {"ai":417,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":648,"rejected":880,"reserve":646}. In the pool: {"ai":310,"open-exam":120,"usmle-resource":160,"amsa":58}. Topic cap 98. Key positions: 4 options 71/69/61/74 (χ² 1.35); 5 options 68/81/69/71/84 (χ² 2.91).
 
 ## Limits
 
