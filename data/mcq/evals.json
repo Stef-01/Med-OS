@@ -327,9 +327,9 @@
    "passAsSelected": 0
   },
   "Generated (generate-mcq.mjs)": {
-   "n": 333,
+   "n": 391,
    "flaw": {
-    "mean": 98.5,
+    "mean": 98.3,
     "p5": 94,
     "p10": 94,
     "p50": 100,
@@ -341,30 +341,30 @@
     "cover-options": 0,
     "all-none": 0,
     "negative-stem": 0,
-    "longest-key": 0.6,
+    "longest-key": 0.5,
     "grammar-cue": 0,
     "convergence": 0.3,
-    "absolute-terms": 3.6,
-    "clang": 2.1,
+    "absolute-terms": 3.3,
+    "clang": 2.3,
     "duplicate-options": 0,
-    "vignette": 16.8,
+    "vignette": 21,
     "stem-length": 0,
-    "units": 1.2
+    "units": 1
    },
-   "judged": 333,
+   "judged": 391,
    "quality": {
-    "mean": 93.9,
+    "mean": 93.6,
     "p5": 85,
-    "p10": 89,
-    "p25": 92,
+    "p10": 88,
+    "p25": 91,
     "p50": 95
    },
    "gatesPass": 98.5,
-   "solved2": 98.8,
-   "keyCorrect": 99.4,
+   "solved2": 99,
+   "keyCorrect": 99.5,
    "passBase": 98.2,
-   "passAi": 90.7,
-   "passAsSelected": 90.7
+   "passAi": 88,
+   "passAsSelected": 88
   },
   "Open exam (HEAD-QA, Spanish MIR)": {
    "n": 786,
@@ -672,57 +672,58 @@
  },
  "pool": {
   "candidates": {
-   "ai": 359,
+   "ai": 417,
    "amsa": 105,
    "open-exam": 786,
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 282,
-   "open-exam": 107,
+   "ai": 310,
+   "open-exam": 106,
    "usmle-resource": 160,
    "amsa": 58
   },
   "status": {
-   "pool": 607,
-   "rejected": 557,
-   "reserve": 525,
+   "pool": 634,
+   "rejected": 569,
+   "reserve": 544,
    "pending": 427
   },
   "topics": {
    "Endocrinology": 24,
-   "Breast/Endocrine Surgery": 6,
-   "Paediatrics": 34,
-   "Obstetrics": 15,
-   "Trauma Surgery": 14,
-   "Gastroenterology": 66,
-   "OMS/Dental": 4,
-   "Cardiology": 56,
-   "Haematology": 17,
-   "Otorhinolaryngology": 16,
+   "Bioethics": 8,
+   "OMS/Dental": 8,
+   "Breast/Endocrine Surgery": 8,
+   "Paediatrics": 33,
+   "Obstetrics": 16,
+   "Pathology": 5,
+   "Trauma Surgery": 15,
+   "Gastroenterology": 65,
+   "Cardiology": 55,
+   "Palliative Care": 7,
+   "Medicolegal": 7,
+   "Haematology": 18,
+   "Otorhinolaryngology": 14,
    "Vascular Surgery": 9,
-   "Infectious Diseases": 42,
+   "Infectious Diseases": 40,
    "Rheumatology": 17,
    "Emergency Medicine": 25,
-   "Professionalism": 4,
-   "Respiratory Medicine": 30,
-   "Gastrointestinal Surgery": 8,
-   "Palliative Care": 5,
-   "Medicolegal": 3,
-   "Neurology": 43,
+   "Professionalism": 6,
+   "Respiratory Medicine": 29,
+   "Gastrointestinal Surgery": 10,
+   "Neurology": 42,
    "Neonatology": 15,
-   "Neurosurgery": 6,
+   "Occupational/Environmental Medicine": 8,
+   "Neurosurgery": 8,
    "General Surgery": 17,
-   "Gynaecology": 18,
-   "Pathology": 4,
-   "General Practice": 14,
-   "Addiction Medicine": 2,
-   "Bioethics": 7,
-   "Immunology": 7,
+   "Gynaecology": 17,
+   "Indigenous Health": 5,
+   "General Practice": 13,
+   "Addiction Medicine": 3,
+   "Immunology": 9,
    "Cardiothoracic Surgery": 3,
-   "Urology": 8,
-   "Indigenous Health": 1,
-   "Plastic Surgery": 4,
+   "Plastic Surgery": 6,
+   "Urology": 7,
    "Ophthalmology": 4,
    "Sexual Health": 6,
    "Nephrology": 11,
@@ -731,7 +732,6 @@
    "Public Health": 3,
    "Psychiatry": 15,
    "Dermatology": 4,
-   "Occupational/Environmental Medicine": 1,
    "Toxicology": 4,
    "Critical Care Medicine": 1
   },
@@ -748,17 +748,17 @@
    },
    "5": {
     "counts": [
-     73,
-     80,
-     78,
-     68,
-     83
+     77,
+     88,
+     77,
+     76,
+     91
     ],
-    "n": 382,
-    "chi2": 1.85
+    "n": 409,
+    "chi2": 2.48
    }
   },
-  "topicCap": 92,
+  "topicCap": 96,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -767,9 +767,9 @@
   "funnel": {
    "open-exam headqa": {
     "n": 786,
-    "bar": 192,
-    "pool": 107,
-    "review": 60,
+    "bar": 191,
+    "pool": 106,
+    "review": 62,
     "pending": 427
    },
    "usmle-resource medqa": {
@@ -788,18 +788,19 @@
     "flaws": 1
    },
    "ai rapid": {
-    "n": 200,
-    "pool": 172,
+    "n": 258,
+    "pool": 200,
+    "review": 3,
     "duplicate": 7,
-    "bar": 19,
-    "review": 2
+    "bar": 32,
+    "reserve": 16
    },
    "ai vignette": {
     "n": 159,
     "pool": 110,
     "review": 9,
-    "reserve": 13,
-    "bar": 27
+    "reserve": 16,
+    "bar": 24
    },
    "amsa": {
     "n": 105,
