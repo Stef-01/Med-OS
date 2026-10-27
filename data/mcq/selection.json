@@ -1,20 +1,20 @@
 {
  "stats": {
   "candidates": {
-   "ai": 490,
+   "ai": 494,
    "amsa": 105,
    "open-exam": 786,
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 389,
+   "ai": 391,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
   },
   "status": {
-   "pool": 727,
-   "rejected": 893,
+   "pool": 729,
+   "rejected": 895,
    "reserve": 627
   },
   "topics": {
@@ -43,6 +43,7 @@
    "Urology": 10,
    "Professionalism": 11,
    "Gastrointestinal Surgery": 10,
+   "Oncology": 4,
    "Neurology": 40,
    "Neonatology": 16,
    "Neurosurgery": 10,
@@ -52,7 +53,6 @@
    "General Practice": 14,
    "Addiction Medicine": 3,
    "Geriatrics": 10,
-   "Oncology": 2,
    "Immunology": 9,
    "Critical Care Medicine": 6,
    "Plastic Surgery": 7,
@@ -77,14 +77,14 @@
    },
    "5": {
     "counts": [
-     88,
-     95,
-     86,
+     90,
+     94,
+     87,
      87,
      96
     ],
-    "n": 452,
-    "chi2": 0.99
+    "n": 454,
+    "chi2": 0.74
    }
   },
   "topicCap": 110,
@@ -109,10 +109,10 @@
     "bar": 89
    },
    "ai rapid": {
-    "n": 331,
-    "pool": 279,
+    "n": 335,
+    "pool": 281,
     "review": 3,
-    "duplicate": 7,
+    "duplicate": 9,
     "bar": 42
    },
    "usmle-resource mmlu": {
@@ -657,9 +657,11 @@
    "id": "ai-mcq-1b75eeb2",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "duplicate",
+   "status": "rejected",
+   "reasons": [
+    "a near-duplicate of ai-mcq-e80bdd48, which is kept (it scores higher)"
+   ],
    "quality": 95,
    "flaws": [
     "vignette:minor"
@@ -673,6 +675,15 @@
    "status": "pool",
    "reasons": [],
    "quality": 98
+  },
+  {
+   "id": "ai-mcq-1d613156",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-1ee809ad",
@@ -2944,6 +2955,18 @@
    "quality": 98
   },
   {
+   "id": "ai-mcq-a07a4ca7",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
+   "flaws": [
+    "vignette:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-a111fffd",
    "kind": "ai",
    "route": "ai rapid",
@@ -3106,6 +3129,18 @@
    "status": "pool",
    "reasons": [],
    "quality": 98
+  },
+  {
+   "id": "ai-mcq-a79e4f41",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
+   "flaws": [
+    "vignette:minor"
+   ]
   },
   {
    "id": "ai-mcq-a7dfc69a",
@@ -3997,9 +4032,11 @@
    "id": "ai-mcq-d0671b61",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "duplicate",
+   "status": "rejected",
+   "reasons": [
+    "a near-duplicate of ai-mcq-e80bdd48, which is kept (it scores higher)"
+   ],
    "quality": 95
   },
   {
@@ -4355,6 +4392,15 @@
   },
   {
    "id": "ai-mcq-e76c306c",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
+  },
+  {
+   "id": "ai-mcq-e80bdd48",
    "kind": "ai",
    "route": "ai rapid",
    "stage": "pool",

@@ -11,7 +11,7 @@ import { good, GOOD } from './mcq.test.mjs';
 import { judgeItem, judgeScore, judgeGates, verdictFor, solveText, rubricText, cleanRubric, SPECIALTIES } from './lib/mcq-judge.mjs';
 import { assess, select, statusOf, quality, poolItem } from './lib/mcq-select.mjs';
 import { mergeSubmissions, submissionsFrom, remoteSubmissions } from './lib/mcq-intake.mjs';
-import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs, topicStation, writerPrompt, writtenFrom } from './lib/mcq-generate.mjs';
+import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs, topicStation, writerPrompt, writtenFrom, twinOf, knownOf } from './lib/mcq-generate.mjs';
 import { quotaOf, routeOf, funnelOf, STAGES, closeCalls, secondFor, CLOSE } from './lib/mcq-select.mjs';
 import { funnelRates, auditMarkdown } from './lib/mcq-audit.mjs';
 import { retestStats, retestFor, retestKey } from './lib/mcq-retest.mjs';
@@ -344,6 +344,17 @@ test('every writer is told what its station (or its stand-in topic) already has,
   const p = writerPrompt({ ...st, avoid: writtenFrom(items, st) }, 'management', []);
   assert.match(p, /<\/station>\n\nAlready written from this station, so ask for a different answer:\n- Most appropriate next step\? \(answer: Aspirin 300 mg\)/);
   assert.doesNotMatch(writerPrompt(st, 'management', []), /Already written/, 'nothing written: nothing said');
+});
+test('twinOf: a question that retells a case already written, under any topic, is caught as it is written', () => {
+  const q = (id, topic, stem, ask, opts) => cleanItem(good({ id, topic, stem, ask, options: opts, answer: 0, tags: [] }));
+  const palliative = q('ai-mcq-p1', 'Palliative Care', 'A 68-year-old man with metastatic prostate cancer has two weeks of worsening thoracic back pain, now with bilateral leg weakness and urinary hesitancy.', 'Most appropriate next investigation?', ['MRI whole spine', 'Plain spine X-ray', 'CT abdomen', 'Bone scan', 'PSA level']);
+  const other = q('ai-mcq-o1', 'Oncology', 'A 58-year-old woman having chemotherapy for breast cancer presents 9 days after her last cycle with a temperature of 38.6 °C and neutrophils of 0.3 × 10^9/L.', 'Most appropriate next step?', ['IV piperacillin-tazobactam', 'Oral amoxicillin', 'Await cultures', 'G-CSF alone', 'Discharge']);
+  const known = knownOf([palliative, other]);
+  const retold = q('ai-mcq-n1', 'Oncology', 'A 68-year-old man with metastatic prostate cancer has two weeks of worsening thoracic back pain and new bilateral leg weakness. Reflexes are brisk in both legs.', 'Most appropriate next investigation?', ['Whole spine MRI', 'Lumbar puncture', 'Nerve conduction studies', 'CT head', 'Serum calcium']);
+  assert.equal(twinOf(retold, known), 'ai-mcq-p1', 'the same case asked for the same answer, filed under another topic');
+  const fresh = q('ai-mcq-n2', 'Oncology', 'A 61-year-old woman with small cell lung cancer has two weeks of confusion and nausea. Her serum sodium is 118 mmol/L and she is euvolaemic.', 'Most likely cause?', ['SIADH', 'Hypercalcaemia', 'Brain metastases', 'Adrenal failure', 'Opioid toxicity']);
+  assert.equal(twinOf(fresh, known), null);
+  assert.equal(twinOf(palliative, known), null, 'a question is not its own twin');
 });
 test('the key as the single longest option is sent back for revision; a tie is not a cue', () => {
   const q = cleanItem(good({ id: 'medqa-kl' }));

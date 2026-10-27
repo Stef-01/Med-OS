@@ -3145,6 +3145,94 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-1d613156": {
+  "hash": "5398a958",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:12:26.737Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "This patient is hemodynamically stable and has febrile neutropenia, so she needs IV antipseudomonal beta-lactam monotherapy such as piperacillin-tazobactam within an hour, after blood cultures are drawn but without waiting for the results; vancomycin is added only for specific indications such as in"
+   },
+   {
+    "answer": 0,
+    "confidence": 0.88,
+    "reason": "This patient is stable with febrile neutropenia and no MRSA risk factors (no hypotension, catheter infection, skin or soft-tissue infection, or pneumonia), so guidelines call for prompt IV antipseudomonal beta-lactam monotherapy such as piperacillin-tazobactam, started within an hour after taking cu"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem too sparse: no heart rate, respiratory rate, SpO2, exam findings, central line status or allergy history, so E cann",
+    "Option B ('Await blood cultures') is a weak, non-drug distractor that makes the options heterogeneous",
+    "Explanation does not spell out the 'take cultures, then give antibiotics' sequence or name the risk-stratification tool "
+   ],
+   "topic": "Oncology",
+   "verdict": "revise",
+   "reasons": [
+    "The key matches eTG, IDSA and ASCO: give empirical antipseudomonal beta-lactam monotherapy promptly in febrile neutropenia without shock",
+    "The vignette leaves out the vitals and line or MRSA risk factors you need to rule out E",
+    "Option B is weak and of a different kind from the drug options"
+   ],
+   "suggestion": "Add a full set of vital signs (for example HR 104/min, RR 18/min, SpO2 97% on room air), state that she has no central line, no skin or soft-tissue infection and no penicillin allergy, and say that blood cultures have been taken. Replace B with another plausible drug option, such as IV ceftriaxone, which is not antipseudomonal, or IV vancomycin alone."
+  },
+  "second": {
+   "hash": "5398a958",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:12:56.790Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.93,
+     "reason": "This is febrile neutropenia (ANC 0.3, temperature 38.6 °C) in a stable patient, so she needs immediate empirical IV antipseudomonal beta-lactam monotherapy, such as piperacillin-tazobactam, without waiting for culture results; vancomycin is not routinely needed because she is not unstable and there "
+    },
+    {
+     "answer": 0,
+     "confidence": 0.9,
+     "reason": "A stable patient with febrile neutropenia should start empiric IV anti-pseudomonal beta-lactam monotherapy such as piperacillin-tazobactam within an hour, without delaying for culture results, and vancomycin isn't needed without specific signs like instability, a catheter infection or MRSA."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 3,
+    "relevance": 5,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Stem too sparse: no heart rate, exam findings or central line/port status, so option E is excluded only because informat",
+     "Option B is a weak, heterogeneous distractor (a passive action among drug choices)",
+     "Lead-in is an incomplete sentence fragment"
+    ],
+    "topic": "Oncology",
+    "verdict": "revise",
+    "reasons": [
+     "Key is correct and consistent with eTG/IDSA febrile neutropenia guidance",
+     "Vignette leaves out details (line status, haemodynamics beyond BP) needed to firmly exclude escalated cover",
+     "One distractor is implausible and heterogeneous"
+    ],
+    "suggestion": "Add heart rate, a normal examination and 'no central venous catheter', and state that blood cultures have been drawn; replace option B with another IV regimen such as IV ceftriaxone (no antipseudomonal cover)."
+   }
+  }
+ },
  "ai-mcq-1ee809ad": {
   "hash": "d49fd721",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -17105,6 +17193,46 @@
    "suggestion": "You could replace docetaxel with a more tempting option such as focal therapy (HIFU) or brachytherapy alone, and state the total number of cores taken (e.g. 5 of 12)."
   }
  },
+ "ai-mcq-a07a4ca7": {
+  "hash": "eb23a7d1",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:16:15.529Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "Early satiety, bloating and big vomits of undigested food, with no colic and no sign of complete obstruction, point to delayed stomach emptying (squashed stomach from liver metastases), and metoclopramide, a prokinetic, is the first-line antiemetic for this."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.92,
+    "reason": "Early satiety and large undigested vomits point to gastric stasis from a liver-compressed stomach, and with no signs of bowel obstruction a prokinetic such as metoclopramide is first-line."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 5,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [],
+   "topic": "Palliative Care",
+   "verdict": "accept",
+   "reasons": [
+    "Classic squashed-stomach gastric stasis; a prokinetic is correct first line",
+    "Homogeneous antiemetic options, each matched to a different cause of vomiting",
+    "Stem rules out complete obstruction, so the metoclopramide safety point is taught"
+   ],
+   "suggestion": "Optionally add to the explanation that cyclizine blocks metoclopramide's prokinetic effect, so the two should not be given together, and that domperidone is the other prokinetic option."
+  }
+ },
  "ai-mcq-a111fffd": {
   "hash": "274c2f71",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -18143,6 +18271,94 @@
     "Explanation is accurate and covers each distractor"
    ],
    "suggestion": "Rewrite the lead-in as 'Which of the following is the most appropriate next investigation?' and consider adding vital signs or examination findings to give the stem more depth."
+  }
+ },
+ "ai-mcq-a79e4f41": {
+  "hash": "27abe931",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:16:14.447Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "Her total daily morphine is 120 mg, and a breakthrough dose of immediate-release morphine at 10–15% of that is about 12–18 mg, so 15 mg fits; giving it before showering will cover the incident pain."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Breakthrough dose is 10-15% of the 120 mg total daily oral morphine (12-18 mg), given as immediate-release morphine, so 15 mg is correct."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "numerical options not listed in logical order",
+    "options mix dose, formulation and route (mildly heterogeneous)",
+    "terse lead-in"
+   ],
+   "topic": "Palliative Care",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches standard 1/6-1/10 total daily dose breakthrough rule",
+    "Each distractor tests a distinct common error",
+    "Explanation is accurate and addresses every option"
+   ],
+   "suggestion": "Optionally order the oral IR doses numerically and write the lead-in as a full question (\"Which of the following is the most appropriate breakthrough dose?\")."
+  },
+  "second": {
+   "hash": "27abe931",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T12:16:44.049Z",
+   "solves": [
+    {
+     "answer": 2,
+     "confidence": 0.95,
+     "reason": "A breakthrough dose is 10–20% of the 120 mg total daily oral morphine dose (12–24 mg), so immediate-release morphine 15 mg is appropriate."
+    },
+    {
+     "answer": 2,
+     "confidence": 0.93,
+     "reason": "A breakthrough dose is 10–20% of the 120 mg total daily oral morphine dose (about 12–24 mg), so immediate-release morphine 15 mg is appropriate, taken before showering."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "lead-in is a fragment rather than a full question",
+     "numeric options not in logical order",
+     "options mix dose, formulation and route (mildly heterogeneous)"
+    ],
+    "topic": "Palliative Care",
+    "verdict": "accept",
+    "reasons": [
+     "Key matches standard 1/10 to 1/6 total-daily-dose breakthrough rule",
+     "Each distractor is clearly wrong for a teachable reason",
+     "Clinically relevant palliative prescribing with a strong explanation"
+    ],
+    "suggestion": "Rewrite the lead-in as 'Which of the following is the most appropriate breakthrough analgesic order?', list the doses in ascending order, and consider stating normal renal function."
+   }
   }
  },
  "ai-mcq-a7dfc69a": {
@@ -25947,6 +26163,48 @@
     "The explanation is accurate and rebuts every option"
    ],
    "suggestion": ""
+  }
+ },
+ "ai-mcq-e80bdd48": {
+  "hash": "e534bfec",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T12:12:23.944Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "Suspected metastatic spinal cord compression (back pain, leg weakness, brisk reflexes, known metastatic prostate cancer) needs urgent whole spine MRI, because metastases often involve several levels."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "This picture points to metastatic spinal cord compression, and the test of choice is an urgent MRI of the whole spine, because it shows the cord and can find lesions at more than one level."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Vignette is brief; it leaves out sensory level, bladder/bowel symptoms and vital signs that a full Step 2 vignette would"
+   ],
+   "topic": "Oncology",
+   "verdict": "accept",
+   "reasons": [
+    "Whole spine MRI is clearly the correct urgent investigation for suspected malignant spinal cord compression",
+    "Distractors are plausible imaging or laboratory tests of the same kind, with no cues",
+    "Explanation is accurate, matches current guidelines (MRI within 24 hours, dexamethasone, multilevel disease) and covers every option"
+   ],
+   "suggestion": "Optionally make the vignette richer, for example with a sensory level, urinary retention and vital signs, so it reads more like a Step 2 CK item."
   }
  },
  "ai-mcq-e811a65b": {

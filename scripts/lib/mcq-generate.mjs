@@ -10,7 +10,7 @@
    and it still has to pass the model judge and the selector's bar before it reaches the pool. Every Claude call goes
    through `ask`, so the flow is tested with a stub. Pure apart from `ask`. */
 import { cleanItem, fnv, LETTERS } from '../../public/js/mcq/schema.mjs';
-import { flawReport, content, keyIsLongest } from '../../public/js/mcq/flaws.mjs';
+import { flawReport, content, keyIsLongest, signature, nearDuplicate } from '../../public/js/mcq/flaws.mjs';
 import { SPECIALTIES } from './mcq-judge.mjs';
 import { spreadKey } from './mcq-sources.mjs';
 import { fits, readSecs } from '../../public/js/vendor/pup-duel/duel/core.mjs';
@@ -110,6 +110,17 @@ ${JSON.stringify(draft)}`;
 export const writtenFrom = (items, st, tagOf = t => t) => items
   .filter(q => q.provenance?.generator?.basis?.[0] === st.id || (st.topicOnly && (q.tags || []).includes(tagOf(`topic:${st.title}`))))
   .map(q => `${(q.ask || q.stem.slice(-120)).trim()} (answer: ${q.options[q.answer]})`);
+
+/* the question a new one would twin, by the selector's own near-duplicate rule, or null. The writer is only shown what
+   its station or topic has (writtenFrom), so a stand-in can retell a case written under another topic: on 2026-10-27
+   an Oncology stand-in retold two Palliative Care questions' spinal cord compression, and the pool kept it in their
+   place. Checked as each question is written, a twin is not kept and its slot goes to the next job */
+export function twinOf(item, known) {
+  const sig = signature(item);
+  for (const k of known) if (k.id !== item.id && nearDuplicate(sig, k.sig).dup) return k.id;
+  return null;
+}
+export const knownOf = items => items.map(q => ({ id: q.id, sig: signature(q) }));
 
 /* the model's draft as a question: the key letter to an index, the key spread by the id's hash, the provenance */
 export function toItem(draft, { st, focus, ex, how, model, now, form = 'vignette' }) {

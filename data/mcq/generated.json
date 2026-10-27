@@ -2574,6 +2574,56 @@
    }
   },
   {
+   "id": "ai-mcq-1d613156",
+   "stem": "A 58-year-old woman having chemotherapy for breast cancer presents 9 days after her last cycle with a temperature of 38.6 °C. Neutrophils are 0.3 × 10^9/L. Blood pressure is 118/74 mm Hg.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "IV piperacillin-tazobactam",
+    "Await blood cultures",
+    "Oral amoxicillin-clavulanate",
+    "Subcutaneous filgrastim",
+    "IV meropenem plus vancomycin"
+   ],
+   "answer": 0,
+   "explanation": "This is febrile neutropenia: a temperature of at least 38 °C with neutrophils below 0.5 × 10^9/L. It is a medical emergency. eTG advises starting empirical IV antipseudomonal beta-lactam therapy, usually piperacillin-tazobactam, within 60 minutes of triage, after taking cultures but without waiting for the results. Her blood pressure is normal, so she does not need broader cover.",
+   "why": [
+    null,
+    "Waiting for culture results delays antibiotics, and each hour of delay in febrile neutropenia increases deaths.",
+    "Oral amoxicillin-clavulanate does not cover Pseudomonas, and oral treatment is only for selected low-risk patients after assessment, not as the first step.",
+    "Filgrastim is not routine treatment for established febrile neutropenia and does not replace urgent antibiotics.",
+    "Adding vancomycin and escalating to meropenem is for sepsis with shock, suspected line infection or MRSA, none of which she has."
+   ],
+   "topic": "Oncology",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:oncology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Oncology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T12:11:47.713Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-oncology-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0756",
+      "medqa-us4-test-0151",
+      "medqa-us4-test-0119"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-1ee809ad",
    "stem": "A 37-year-old woman, gravida 3, para 2, comes to the fetal medicine clinic at 17 weeks pregnant to discuss her amniocentesis result. She conceived naturally. At 10 weeks, whole-genome cell-free DNA screening (fetal fraction 11%) showed a low chance of trisomies 21, 18 and 13 and of sex chromosome conditions, and a high chance of trisomy 16. A 7-week scan had shown one gestational sac. The 12-week scan was normal, with a nuchal translucency of 1.4 mm. Amniocentesis at 16 weeks, with QF-PCR and chromosomal microarray, showed a normal female result with no trisomy 16. Both of her previous pregnancies were uncomplicated. She has no medical history, does not smoke, and takes folic acid and iodine. Her BMI is 23 kg/m2. Her blood pressure is 114/70 mm Hg and pulse is 76/min. Ultrasound today shows a single live fetus with biometry consistent with dates, no anomaly seen, normal amniotic fluid and a high posterior placenta. She is blood group O RhD positive, and her antibody screen is negative.",
    "ask": "This patient is at greatest risk of which of the following complications later in this pregnancy?",
@@ -13703,6 +13753,56 @@
    }
   },
   {
+   "id": "ai-mcq-a07a4ca7",
+   "stem": "A 64-year-old woman with breast cancer and extensive liver metastases has early satiety, bloating and large vomits of undigested food after meals. Abdomen soft; bowels open daily, no colic.",
+   "ask": "Which antiemetic is most appropriate?",
+   "options": [
+    "Haloperidol",
+    "Cyclizine",
+    "Ondansetron",
+    "Hyoscine butylbromide",
+    "Metoclopramide"
+   ],
+   "answer": 4,
+   "explanation": "Early satiety, fullness and large vomits of undigested food point to gastric stasis, here from a stomach squashed by hepatomegaly. A prokinetic is first line. Metoclopramide is safe because nothing suggests complete bowel obstruction: the bowels are open and there is no colic.",
+   "why": [
+    "Haloperidol is the choice for chemical or metabolic causes of nausea, such as opioids or hypercalcaemia, and does not improve gastric emptying.",
+    "Cyclizine is an anticholinergic antihistamine best for vestibular or raised intracranial pressure nausea, and its anticholinergic effect can make gastric stasis worse.",
+    "Ondansetron is mainly used for chemotherapy- and radiotherapy-related nausea, does not help gastric emptying, and causes constipation.",
+    "Hyoscine butylbromide reduces gut movement and secretions, which suits colicky malignant bowel obstruction but would make gastric stasis worse.",
+    null
+   ],
+   "topic": "Palliative Care",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:palliative-care",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Palliative Care (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T12:15:20.408Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-palliative-care-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0934",
+      "medqa-us4-test-0252"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-a111fffd",
    "stem": "A 46-year-old man woke yesterday with hearing loss and tinnitus in his right ear. Otoscopy is normal, Weber lateralises left, and audiometry shows a 40 dB right sensorineural loss.",
    "ask": "Most appropriate next step?",
@@ -14606,6 +14706,56 @@
       "medqa-us4-test-0558",
       "medqa-us4-test-0438",
       "medqa-us4-test-0146"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-a79e4f41",
+   "stem": "A 68-year-old woman with metastatic breast cancer takes controlled-release oral morphine 60 mg twice daily. Pain is controlled at rest, but she has incident pain when showering.",
+   "ask": "Most appropriate breakthrough dose?",
+   "options": [
+    "Immediate-release morphine 5 mg",
+    "Immediate-release morphine 60 mg",
+    "Immediate-release morphine 15 mg",
+    "Controlled-release morphine 30 mg",
+    "Subcutaneous morphine 20 mg"
+   ],
+   "answer": 2,
+   "explanation": "The breakthrough dose is an immediate-release form of the same opioid at one-sixth to one-tenth of the total daily dose. Her daily dose is 120 mg oral morphine, so 12 to 20 mg is right, and 15 mg is a sensible dose. She can take it about 30 minutes before showering for incident pain.",
+   "why": [
+    "5 mg is about 4% of her daily dose, so it is too small to relieve breakthrough pain.",
+    "60 mg is half her daily dose, which is far above the recommended range and risks opioid toxicity.",
+    null,
+    "Controlled-release morphine takes hours to reach peak effect, so it is not suitable for episodic breakthrough pain.",
+    "Subcutaneous morphine is two to three times as potent as oral, so 20 mg equals about 40 to 60 mg oral and is too high."
+   ],
+   "topic": "Palliative Care",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:palliative-care",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Palliative Care (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T12:15:20.643Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-palliative-care-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0934",
+      "medqa-us4-test-0252"
      ],
      "model": "claude-opus-5-5"
     }
@@ -20904,6 +21054,56 @@
       "medqa-us4-test-0063",
       "medqa-us4-test-0865",
       "medqa-us4-test-1034"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-e80bdd48",
+   "stem": "A 68-year-old man with metastatic prostate cancer has two weeks of worsening thoracic back pain and new bilateral leg weakness. Reflexes are brisk in both legs.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Whole spine MRI",
+    "Thoracic spine X-ray",
+    "Nuclear bone scan",
+    "Serum PSA level",
+    "Thoracic spine CT"
+   ],
+   "answer": 0,
+   "explanation": "New back pain, leg weakness and upper motor neuron signs in a patient with known cancer suggest malignant spinal cord compression. This needs an urgent whole spine MRI, ideally within 24 hours, along with high-dose dexamethasone. The whole spine is imaged because about a third of patients have compression at more than one level.",
+   "why": [
+    null,
+    "Plain X-rays cannot show the spinal cord or epidural disease and miss many metastases, so a normal film would not rule out compression.",
+    "A bone scan can show bone metastases but not compression of the cord or the epidural space, so it does not guide urgent treatment.",
+    "PSA reflects overall disease burden but cannot confirm or locate cord compression, and checking it would only delay definitive imaging.",
+    "CT shows less soft tissue and cord detail than MRI and is kept for patients who cannot have MRI; imaging only the thoracic spine would also miss lesions at other levels."
+   ],
+   "topic": "Oncology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:oncology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Oncology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T12:11:47.965Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-oncology-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0756",
+      "medqa-us4-test-0151",
+      "medqa-us4-test-0119"
      ],
      "model": "claude-opus-5-5"
     }

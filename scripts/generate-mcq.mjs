@@ -15,9 +15,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeMcq, FOCUS, FORMS, gapJobs, topicStation, writtenFrom } from './lib/mcq-generate.mjs';
+import { writeMcq, FOCUS, FORMS, gapJobs, topicStation, writtenFrom, twinOf, knownOf } from './lib/mcq-generate.mjs';
 import { THIN } from './lib/mcq-audit.mjs';
-import { readJsonl, benchmarkItem, readJson } from './lib/mcq-sources.mjs';
+import { readJsonl, benchmarkItem, readJson, allCandidates } from './lib/mcq-sources.mjs';
 import { stationsOnDisk } from './build-duel-pack.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
 import { claudeAsk } from './lib/ask.mjs';
@@ -68,6 +68,7 @@ jobs = jobs.filter(j => !full(j.st, j.focus));
 const { ask, how, name } = await claudeAsk();
 console.log(`${jobs.length} ${FORM} questions to write · Claude via ${name}`);
 let kept = 0, failed = 0;
+const known = knownOf(allCandidates(ROOT, { stations }).items);   /* every question there is, for twinOf */
 const save = () => { if (argv.includes('--dry-run')) return; fs.mkdirSync(path.dirname(GENERATED), { recursive: true }); store.items.sort((a, b) => a.id.localeCompare(b.id)); fs.writeFileSync(GENERATED, `${JSON.stringify(store, null, 1)}\n`); };
 const worker = async () => {
   for (let j; (j = jobs.shift());) {
@@ -75,7 +76,9 @@ const worker = async () => {
       /* told what is written from it so far, this run's questions included */
       const st = { ...j.st, avoid: writtenFrom(store.items, j.st, tagOf) };
       const r = await writeMcq(st, j.focus, { bench, ask, how, log: m => console.log(m), form: FORM });
-      if (r.ok) { store.items.push(r.item); save(); kept++; console.log(`kept ${r.item.id} · ${j.st.id} · ${j.focus}${r.rounds > 1 ? ' (revised)' : ''}`); }
+      const twin = r.ok && twinOf(r.item, known);
+      if (twin) { r.ok = false; r.problems = [`a near-duplicate of ${twin}`]; r.draft = r.item; }
+      if (r.ok) { store.items.push(r.item); known.push(...knownOf([r.item])); save(); kept++; console.log(`kept ${r.item.id} · ${j.st.id} · ${j.focus}${r.rounds > 1 ? ' (revised)' : ''}`); }
       else {
         failed++; console.log(`not kept · ${j.st.id} · ${j.focus}: ${r.problems.join('; ')}`);
         if (!argv.includes('--dry-run')) { const d = path.join(ROOT, 'drafts', 'mcq'); fs.mkdirSync(d, { recursive: true }); fs.writeFileSync(path.join(d, `${j.st.id}-${j.focus}${FORM === 'vignette' ? '' : `-${FORM}`}.json`), `${JSON.stringify({ problems: r.problems, draft: r.draft }, null, 1)}\n`); }

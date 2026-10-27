@@ -1,8 +1,8 @@
 {
  "pool": {
-  "n": 727,
+  "n": 729,
   "byKind": {
-   "ai": 389,
+   "ai": 391,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
@@ -10,11 +10,11 @@
   "formats": {
    "15": {
     "name": "Rapid",
-    "fit": 311,
-    "of": 727,
-    "share": 42.8,
+    "fit": 313,
+    "of": 729,
+    "share": 42.9,
     "byKind": {
-     "ai": 279,
+     "ai": 281,
      "open-exam": 7,
      "amsa": 25
     },
@@ -41,6 +41,7 @@
      "Urology": 5,
      "Professionalism": 10,
      "Gastrointestinal Surgery": 5,
+     "Oncology": 3,
      "Neonatology": 8,
      "Paediatrics": 9,
      "Neurosurgery": 7,
@@ -52,7 +53,6 @@
      "General Practice": 4,
      "Addiction Medicine": 2,
      "Geriatrics": 5,
-     "Oncology": 1,
      "Immunology": 5,
      "Critical Care Medicine": 5,
      "Plastic Surgery": 7,
@@ -103,11 +103,11 @@
    },
    "30": {
     "name": "Standard",
-    "fit": 397,
-    "of": 727,
-    "share": 54.6,
+    "fit": 399,
+    "of": 729,
+    "share": 54.7,
     "byKind": {
-     "ai": 279,
+     "ai": 281,
      "open-exam": 53,
      "usmle-resource": 7,
      "amsa": 58
@@ -135,6 +135,7 @@
      "Urology": 7,
      "Professionalism": 10,
      "Gastrointestinal Surgery": 5,
+     "Oncology": 3,
      "Neonatology": 8,
      "Paediatrics": 13,
      "Neurosurgery": 8,
@@ -146,7 +147,6 @@
      "General Practice": 5,
      "Addiction Medicine": 2,
      "Geriatrics": 6,
-     "Oncology": 1,
      "Immunology": 6,
      "Critical Care Medicine": 5,
      "Plastic Surgery": 7,
@@ -199,11 +199,11 @@
    },
    "90": {
     "name": "Long case",
-    "fit": 722,
-    "of": 727,
+    "fit": 724,
+    "of": 729,
     "share": 99.3,
     "byKind": {
-     "ai": 389,
+     "ai": 391,
      "open-exam": 119,
      "usmle-resource": 156,
      "amsa": 58
@@ -234,6 +234,7 @@
      "Urology": 10,
      "Professionalism": 11,
      "Gastrointestinal Surgery": 10,
+     "Oncology": 4,
      "Neurology": 40,
      "Neonatology": 16,
      "Neurosurgery": 10,
@@ -243,7 +244,6 @@
      "General Practice": 14,
      "Addiction Medicine": 3,
      "Geriatrics": 9,
-     "Oncology": 2,
      "Immunology": 9,
      "Critical Care Medicine": 6,
      "Plastic Surgery": 7,
@@ -284,23 +284,23 @@
  },
  "cues": {
   "ai": {
-   "n": 389,
-   "keyLongest": 10.3,
+   "n": 391,
+   "keyLongest": 10.2,
    "chance": 20,
    "keyAt": {
     "D": 74,
-    "A": 80,
+    "A": 82,
     "E": 81,
-    "B": 80,
-    "C": 74
+    "B": 79,
+    "C": 75
    },
    "options": {
-    "5": 389
+    "5": 391
    },
    "checks": {
     "vignette": {
-     "n": 72,
-     "share": 18.5
+     "n": 73,
+     "share": 18.7
     },
     "clang": {
      "n": 7,
@@ -444,13 +444,18 @@
    "a": "ai-mcq-8d498cab",
    "b": "ai-mcq-a2209e4e",
    "overlap": 57.1
+  },
+  {
+   "a": "ai-mcq-761a155d",
+   "b": "ai-mcq-e80bdd48",
+   "overlap": 50
   }
  ],
  "review": {
   "ai": {
-   "judged": 389,
+   "judged": 391,
    "verdict": {
-    "accept": 336,
+    "accept": 338,
     "revise": 53
    },
    "solvesAgree": 100,
@@ -528,14 +533,14 @@
    "admitted": 17.2
   },
   "ai rapid": {
-   "n": 331,
-   "pool": 279,
+   "n": 335,
+   "pool": 281,
    "review": 3,
-   "duplicate": 7,
+   "duplicate": 9,
    "bar": 42,
-   "reviewed": 331,
-   "passed": 86.4,
-   "admitted": 84.3
+   "reviewed": 335,
+   "passed": 86.6,
+   "admitted": 83.9
   },
   "usmle-resource mmlu": {
    "n": 272,
@@ -569,15 +574,15 @@
   }
  },
  "pack": {
-  "n": 2255,
+  "n": 2257,
   "bySource": {
-   "ai": 1444,
+   "ai": 1446,
    "open-exam": 609,
    "usmle-resource": 144,
    "amsa": 58
   },
   "byRoute": {
-   "ai pool": 389,
+   "ai pool": 391,
    "open-exam": 609,
    "usmle-resource": 144,
    "amsa": 58,
@@ -587,11 +592,11 @@
   "formats": {
    "15": {
     "name": "Rapid",
-    "fit": 865,
-    "of": 2255,
+    "fit": 867,
+    "of": 2257,
     "share": 38.4,
     "byKind": {
-     "ai": 649,
+     "ai": 651,
      "open-exam": 207,
      "amsa": 9
     },
@@ -618,6 +623,7 @@
      "Urology": 10,
      "Professionalism": 10,
      "Gastrointestinal Surgery": 10,
+     "Oncology": 10,
      "Neonatology": 10,
      "Paediatrics": 41,
      "Neurosurgery": 12,
@@ -629,7 +635,6 @@
      "General Practice": 15,
      "Addiction Medicine": 10,
      "Geriatrics": 10,
-     "Oncology": 8,
      "Immunology": 10,
      "Critical Care Medicine": 10,
      "Plastic Surgery": 11,
@@ -643,17 +648,15 @@
      "Ophthalmology": 10
     },
     "topics": 45,
-    "thin": [
-     "Oncology"
-    ]
+    "thin": []
    },
    "30": {
     "name": "Standard",
-    "fit": 1701,
-    "of": 2255,
-    "share": 75.4,
+    "fit": 1703,
+    "of": 2257,
+    "share": 75.5,
     "byKind": {
-     "ai": 1090,
+     "ai": 1092,
      "open-exam": 546,
      "usmle-resource": 7,
      "amsa": 58
@@ -681,6 +684,7 @@
      "Urology": 17,
      "Professionalism": 11,
      "Gastrointestinal Surgery": 18,
+     "Oncology": 19,
      "Neonatology": 15,
      "Paediatrics": 98,
      "Neurosurgery": 16,
@@ -692,7 +696,6 @@
      "General Practice": 50,
      "Addiction Medicine": 12,
      "Geriatrics": 16,
-     "Oncology": 17,
      "Immunology": 16,
      "Critical Care Medicine": 13,
      "Plastic Surgery": 13,
@@ -710,11 +713,11 @@
    },
    "90": {
     "name": "Long case",
-    "fit": 2254,
-    "of": 2255,
+    "fit": 2256,
+    "of": 2257,
     "share": 100,
     "byKind": {
-     "ai": 1444,
+     "ai": 1446,
      "open-exam": 609,
      "usmle-resource": 143,
      "amsa": 58
@@ -745,6 +748,7 @@
      "Urology": 20,
      "Professionalism": 12,
      "Gastrointestinal Surgery": 23,
+     "Oncology": 20,
      "Neurology": 183,
      "Neonatology": 23,
      "Neurosurgery": 18,
@@ -754,7 +758,6 @@
      "General Practice": 73,
      "Addiction Medicine": 13,
      "Geriatrics": 19,
-     "Oncology": 18,
      "Immunology": 19,
      "Critical Care Medicine": 14,
      "Plastic Surgery": 13,
@@ -777,13 +780,13 @@
   },
   "taxonomy": {
    "source": {
-    "ai": 1444,
+    "ai": 1446,
     "open-exam": 609,
     "usmle-resource": 144,
     "amsa": 58
    },
    "cat": {
-    "clinical": 1611,
+    "clinical": 1613,
     "skills": 150,
     "physio": 337,
     "anatomy": 157
@@ -792,11 +795,11 @@
     "1": 179,
     "2": 377,
     "3": 927,
-    "4": 772
+    "4": 774
    },
    "difficulty": {
     "1": 422,
-    "2": 1515,
+    "2": 1517,
     "3": 318
    },
    "topic": {
@@ -825,6 +828,7 @@
     "Urology": 20,
     "Professionalism": 12,
     "Gastrointestinal Surgery": 23,
+    "Oncology": 20,
     "Neurology": 183,
     "Neonatology": 23,
     "Neurosurgery": 18,
@@ -834,7 +838,6 @@
     "General Practice": 73,
     "Addiction Medicine": 13,
     "Geriatrics": 19,
-    "Oncology": 18,
     "Immunology": 19,
     "Critical Care Medicine": 14,
     "Plastic Surgery": 13,
@@ -907,27 +910,27 @@
     }
    },
    "ai pool": {
-    "n": 389,
-    "keyLongest": 10.3,
+    "n": 391,
+    "keyLongest": 10.2,
     "chance": 20,
     "keyAt": {
      "D": 74,
-     "A": 80,
+     "A": 82,
      "E": 81,
-     "B": 80,
-     "C": 74
+     "B": 79,
+     "C": 75
     },
     "options": {
-     "5": 389
+     "5": 391
     },
     "checks": {
      "schema": {
-      "n": 389,
+      "n": 391,
       "share": 100
      },
      "vignette": {
-      "n": 255,
-      "share": 65.6
+      "n": 256,
+      "share": 65.5
      },
      "clang": {
       "n": 7,
@@ -937,11 +940,11 @@
       "n": 7,
       "share": 1.8
      },
-     "stem-length": {
-      "n": 5,
-      "share": 1.3
-     },
      "units": {
+      "n": 4,
+      "share": 1
+     },
+     "stem-length": {
       "n": 4,
       "share": 1
      },
