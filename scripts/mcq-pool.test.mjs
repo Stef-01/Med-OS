@@ -11,7 +11,7 @@ import { good, GOOD } from './mcq.test.mjs';
 import { judgeItem, judgeScore, judgeGates, verdictFor, solveText, rubricText, cleanRubric, SPECIALTIES } from './lib/mcq-judge.mjs';
 import { assess, select, statusOf, quality, poolItem } from './lib/mcq-select.mjs';
 import { mergeSubmissions, submissionsFrom, remoteSubmissions } from './lib/mcq-intake.mjs';
-import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs, topicStation, writerPrompt, writtenFrom, twinOf, knownOf } from './lib/mcq-generate.mjs';
+import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs, topicStation, standIns, writerPrompt, writtenFrom, twinOf, knownOf } from './lib/mcq-generate.mjs';
 import { quotaOf, routeOf, funnelOf, STAGES, closeCalls, secondFor, CLOSE } from './lib/mcq-select.mjs';
 import { funnelRates, auditMarkdown, formatsOf, THIN } from './lib/mcq-audit.mjs';
 import { retestStats, retestFor, retestKey } from './lib/mcq-retest.mjs';
@@ -407,4 +407,12 @@ test('audit formats: a question counts in every topic the duel deals it in, its 
   assert.equal(f.byTopic.Neurology, 1);
   assert.ok(!f.thin.includes('Ophthalmology'));
   assert.equal(f.fit, THIN, 'the question itself is counted once');
+});
+
+test('stand-ins in a gap run: an uncovered topic always gets some, a covered one only when its stations run out', () => {
+  const f = 4;
+  assert.equal(standIns({ topic: 'Medicolegal', covered: false, need: 3, openSlots: 0, written: 0, focuses: f }), 2, 'at least two for a topic no station covers');
+  assert.equal(standIns({ topic: 'Medicolegal', covered: false, need: 6, openSlots: 0, written: 8, focuses: f }), 4, 'past what stand-ins already wrote');
+  assert.equal(standIns({ topic: 'Ophthalmology', covered: true, need: 2, openSlots: 5, written: 0, focuses: f }), 0, 'its stations have room');
+  assert.equal(standIns({ topic: 'Ophthalmology', covered: true, need: 6, openSlots: 1, written: 4, focuses: f }), 3, '5 short: 2 variants, and 1 to step past the 4 written');
 });

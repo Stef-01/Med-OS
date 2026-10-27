@@ -175,3 +175,14 @@ export function gapJobs(stations, thin, need, n, focuses, focus, skip = () => fa
     for (const t of topics) { const j = queue.get(t)[round]; if (j && out.length < n) out.push(j); }
   return out;
 }
+
+/* how many stand-ins (topicStation variants, a question each per focus) a thin topic gets in a gap run: a topic no
+   station covers gets enough for its gap and what it already has written (at least two); a covered topic only when its
+   stations' open slots fall short of its gap (2026-10-27: the last five thin topics all had stations, every slot full),
+   plus enough to step past what stand-ins have already written for it. Pure; generate-mcq.mjs --gaps calls it */
+export function standIns({ topic, covered, need, openSlots, written, focuses }) {
+  const per = Math.max(1, focuses);
+  if (!covered) return Math.max(2, Math.ceil((need + written) / per));
+  const short = Math.max(0, need - openSlots);
+  return short ? Math.ceil(short / per) + Math.ceil(written / per) : 0;
+}

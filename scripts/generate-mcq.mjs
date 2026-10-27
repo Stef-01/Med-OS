@@ -15,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeMcq, FOCUS, FORMS, gapJobs, topicStation, writtenFrom, twinOf, knownOf } from './lib/mcq-generate.mjs';
+import { writeMcq, FOCUS, FORMS, gapJobs, topicStation, standIns, writtenFrom, twinOf, knownOf } from './lib/mcq-generate.mjs';
 import { THIN } from './lib/mcq-audit.mjs';
 import { readJsonl, benchmarkItem, readJson, allCandidates } from './lib/mcq-sources.mjs';
 import { stationsOnDisk } from './build-duel-pack.mjs';
@@ -54,8 +54,7 @@ else if (opt('--gaps')) {   /* where the duel is thin: the audit's topics with f
      every slot full) */
   const writtenFor = t => store.items.filter(q => q.tags.includes(tagOf(`topic:${t}`)) && formOf(q) === FORM).length;
   const openSlots = t => stations.filter(st => (st.specialty || []).includes(t)).reduce((n, st) => n + focuses.filter(fc => !full(st, fc)).length, 0);
-  const variants = t => (covered.has(t) ? Math.ceil(Math.max(0, need(t) - openSlots(t)) / focuses.length) + (need(t) > openSlots(t) ? Math.ceil(writtenFor(t) / focuses.length) : 0)
-    : Math.max(2, Math.ceil((need(t) + writtenFor(t)) / focuses.length)));
+  const variants = t => standIns({ topic: t, covered: covered.has(t), need: need(t), openSlots: openSlots(t), written: writtenFor(t), focuses: focuses.length });
   const standIns = f.thin.flatMap(t => Array.from({ length: variants(t) }, (_, v) => topicStation(t, v)));
   jobs = gapJobs([...stations, ...standIns], thin, need, Number(opt('--sample')) || 40, focuses, opt('--focus'), full);
   if (standIns.length) console.log(`${new Set(standIns.map(x => x.title)).size} thin topics need more than their stations give: ${standIns.length} stand-ins written from the specialty alone`);
