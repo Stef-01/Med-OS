@@ -12,7 +12,7 @@
    event handlers that route a click to its view. osce/core.mjs holds the pure laws (tested without a browser in
    scripts/osce-core.test.js; re-exported below for learn.mjs and scripts/osce.test.js); osce/state.mjs the shared ctx,
    storage, the bank loader and the kit wrappers; osce/run.mjs the Start view + Fast Run; osce/browse.mjs the Study
-   Session (queue, browser, preview, timing); osce/session.mjs a station on the clock, marking and the attempt review.
+   Session (queue, browser, preview, timing); osce/session.mjs a station on the clock, marking and the attempt review (osce/marking-ai.mjs the AI marking, handover and memory aids on the sheet).
    Stations: ./osce/index.json (one light row per station, scripts/build-index.mjs); a station's body ./osce/<id>.json
    is fetched on first use and kept. HTML fields are pre-cut to the allowlist with no attributes, rendered through
    safeHtml(); plain text goes through esc(). Everything persists in localStorage 'osce.practice.v1', every access
@@ -32,7 +32,8 @@ import { maybeWrapped, wrappedKey } from './osce/wrapped-view.mjs';   /* the mon
 import { renderStart, toggleRot, runAll, runPop, runClear, runGo, onPerson, pickCand, toggleAlt } from './osce/run.mjs';
 import { renderGroup, browseReset, browseDlg, browseSheetOpen, paintQueue, clearQueue, removeQueued, queueFromButton, addRandom, toggleDetails, afterBookmark, discPick, filterPop, toggleSaved, resetFilters, timingDlg, saveTiming, previewDlg, previewTab, onSearch, onPointerDown } from './osce/browse.mjs';
 import { renderMarked, markedReset } from './osce/marked.mjs';
-import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, candSend, swapCand, onHand, present, presentStep, presenting, p2Go, p2Flat, jumpTo, syncJump, markPart2 } from './osce/session.mjs';
+import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, candSend, swapCand, present, presentStep, presenting, p2Go, p2Flat, jumpTo, syncJump, markPart2 } from './osce/session.mjs';
+import { onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, onHand } from './osce/marking-ai.mjs';
 import { settingsDlg, saveSettings, clearKey, exportFile } from './osce/settings.mjs';
 import { opened as remindersOpened } from './osce/reminders.mjs';
 

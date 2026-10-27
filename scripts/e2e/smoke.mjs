@@ -270,6 +270,13 @@ async function runIn(width, height, label) {
   await click('[data-os="aipaste"]');
   await pg.waitForSelector('.os-ai--done');
   ok(/At standard/.test(await pg.textContent('.os-ai--done')), `${label}: the pasted reply shows as AI marking`);
+  await pg.locator('[data-os="aievid"]').first().click();
+  ok(await pg.locator('.os-marking.os-ai-evid').count() > 0, `${label}: the Evidence chip shows what was said`);
+  await pg.locator('[data-os="aievid"]').first().click();
+  const hand = pg.locator('.os-hand').first();
+  await hand.locator('summary').click();
+  await hand.locator('textarea[data-hand="situation"]').fill('Chest pain since this morning');
+  ok(/1 of \d+ done/.test(await hand.locator('.os-handt small').textContent()), `${label}: a handover note counts as done`);
   await shot('marked');
 
   /* next station: the other partner sits it */
