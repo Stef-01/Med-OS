@@ -50,15 +50,17 @@ export function stationItems(stations) {
 }
 
 /* a normalised benchmark row (research/mcq-src/<set>/normalised.jsonl, or data/benchmarks/) as a usmle-resource item */
-export const BENCH_TAG = { medqa: 'src:medqa', mmlu: 'src:mmlu', medmcqa: 'src:medmcqa', headqa: 'src:headqa' };
+export const BENCH_TAG = { medqa: 'src:medqa', mmlu: 'src:mmlu', medmcqa: 'src:medmcqa', headqa: 'src:headqa', principlismqa: 'src:principlismqa' };
 /* an open exam set (data/sources/registry.json kind open-exam) is a real exam's question, not a USMLE-style bank's */
-const SET_KIND = { headqa: 'open-exam' };
+const SET_KIND = { headqa: 'open-exam', principlismqa: 'ai' };
+/* a set written by a model (data/sources/registry.json kind ai) says so: it is AI-written, imported, by its authors' model */
+const SET_GENERATOR = { principlismqa: { how: 'imported', version: 'PrinciplismQA 3538461', basis: [], model: 'GPT-4o (the authors), expert-checked' } };
 export function benchmarkItem(r) {
-  const set = /^medqa/.test(r.id) ? 'medqa' : /^mmlu/.test(r.id) ? 'mmlu' : /^medmcqa/.test(r.id) ? 'medmcqa' : /^headqa/.test(r.id) ? 'headqa' : 'bench';
+  const set = /^medqa/.test(r.id) ? 'medqa' : /^mmlu/.test(r.id) ? 'mmlu' : /^medmcqa/.test(r.id) ? 'medmcqa' : /^headqa/.test(r.id) ? 'headqa' : /^principlismqa/.test(r.id) ? 'principlismqa' : 'bench';
   return cleanItem({
-    id: r.id, stem: r.stem, options: r.options, answer: r.answer, explanation: r.explanation || '', why: [], topic: '',
+    id: r.id, stem: r.stem, options: r.options, answer: r.answer, explanation: r.explanation || '', why: [], topic: SET_KIND[set] === 'ai' ? r.topic || '' : '',
     tags: [BENCH_TAG[set] || 'src:bench', r.meta_info ? `exam:${r.meta_info}` : `exam:${set}`],
-    provenance: { kind: SET_KIND[set] || 'usmle-resource', source: { name: r.source?.name || set, url: r.source?.url || '', licence: r.source?.licence || '', retrieved: r.source?.retrieved || '' }, createdAt: r.source?.retrieved || '2026-10-25' }
+    provenance: { kind: SET_KIND[set] || 'usmle-resource', source: { name: r.source?.name || set, url: r.source?.url || '', licence: r.source?.licence || '', retrieved: r.source?.retrieved || '' }, createdAt: r.source?.retrieved || '2026-10-25', ...(SET_GENERATOR[set] ? { generator: SET_GENERATOR[set] } : {}) }
   });
 }
 /* the same row as a benchmark-only item (the official NBME samples, the GPT-4 look-alikes): kept in memory, never written

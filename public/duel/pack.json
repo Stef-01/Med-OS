@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "version": "pool-662-mcq-532-hy-523-mxq-494",
+ "version": "pool-672-mcq-532-hy-523-mxq-494",
  "title": "Standard MCQ pool",
- "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1400 ai, 609 open-exam, 144 usmle-resource, 58 amsa.",
+ "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1410 ai, 609 open-exam, 144 usmle-resource, 58 amsa.",
  "origin": "mixed",
  "cats": [
   {
@@ -858,6 +858,36 @@
     null
    ],
    "topic": "Bioethics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-18903f10",
+   "stem": "A 63-year-old man has a PSA of 8.6 ng/mL at a check-up and 8.9 ng/mL on repeat six weeks later. Urine culture is sterile and digital rectal examination is normal. Most appropriate next investigation?",
+   "options": [
+    "Transperineal prostate biopsy",
+    "PSMA PET/CT",
+    "Whole-body bone scan",
+    "Multiparametric prostate MRI",
+    "Transrectal prostate ultrasound"
+   ],
+   "answer": 3,
+   "why": "His PSA has stayed raised on repeat testing, infection has been excluded, and a normal DRE does not rule out cancer. Australian practice is therefore to do a multiparametric prostate MRI before any biopsy. The MRI gives the lesion a PI-RADS score, which decides whether to biopsy and which area to target.",
+   "notes": [
+    "Biopsy comes after the MRI, which decides whether a biopsy is needed and where to target it, so going straight to biopsy is premature.",
+    "PSMA PET/CT stages cancer once intermediate- or high-risk disease is confirmed on biopsy; it is not a test used to make the diagnosis.",
+    "A bone scan is a staging test for advanced disease and has no role before cancer has been diagnosed.",
+    null,
+    "Transrectal ultrasound alone cannot reliably tell cancer from benign tissue and has been replaced by MRI for this purpose."
+   ],
+   "topic": "Urology",
+   "topics": [
+    "Urology",
+    "General Practice"
+   ],
    "cat": "clinical",
    "origin": "ai",
    "source": "ai",
@@ -2012,6 +2042,32 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-38414a4a",
+   "stem": "A 68-year-old man is given intravenous cefazolin 2 g prescribed for another patient. He has no allergies, normal observations, and is unaware of the error. Most appropriate next step?",
+   "options": [
+    "Apologise and explain error",
+    "Await incident review outcome",
+    "Seek legal advice first",
+    "Notify Ahpra directly",
+    "Inform his next of kin"
+   ],
+   "answer": 0,
+   "why": "Under the Australian Open Disclosure Framework, a patient harmed or exposed to harm by an incident should be told promptly, ideally within 24 hours, with a sincere apology and a factual explanation. The incident is reported internally at the same time. Australian civil liability laws protect an apology from being treated as an admission of liability.",
+   "notes": [
+    null,
+    "The incident review runs alongside open disclosure, so delaying disclosure until it finishes breaks the requirement to tell the patient promptly.",
+    "Getting legal advice before disclosing delays the patient's right to know, and an apology is legally protected and not an admission of liability.",
+    "One medication error without concerns about impairment, misconduct or a pattern of practice does not meet the threshold for notification to Ahpra.",
+    "He is competent and has a right to confidentiality, so the error must be disclosed to him directly rather than to relatives."
+   ],
+   "topic": "Bioethics",
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-3a145bf8",
    "stem": "A 7-year-old boy is brought in after a car crash with a ruptured spleen and blood pressure 70/40 mmHg. His parents, devout Jehovah's Witnesses, refuse blood transfusion. Most appropriate next step?",
    "options": [
@@ -2067,6 +2123,37 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-3cdb17b7",
+   "stem": "A 70-year-old man with lung adenocarcinoma is breathless again two weeks after aspiration of a cytology-positive right pleural effusion. Post-aspiration X-ray showed the right lung had not re-expanded. Most appropriate management?",
+   "options": [
+    "Talc slurry pleurodesis",
+    "Repeat therapeutic aspiration",
+    "Indwelling pleural catheter",
+    "Surgical decortication",
+    "Regular oral furosemide"
+   ],
+   "answer": 2,
+   "why": "This is a symptomatic malignant effusion that has come back, and the lung did not re-expand (trapped lung). Pleurodesis needs the two pleural layers to touch, so the treatment of choice is an indwelling pleural catheter, which allows repeated drainage at home (BTS 2023, eTG).",
+   "notes": [
+    "Wrong: talc pleurodesis needs the visceral and parietal pleura to touch, and a trapped lung that will not re-expand makes this likely to fail.",
+    "Wrong: the fluid came back within two weeks, so repeated aspirations mean repeated procedures and only short relief, where a definitive approach is better.",
+    null,
+    "Wrong: decortication is major surgery that is not suitable as palliation for a malignant trapped lung in a frail man with advanced cancer.",
+    "Wrong: a malignant effusion is an exudate, so diuretics do not reduce it and would only risk dehydration and electrolyte problems."
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "Emergency Medicine",
+    "Oncology"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-3d9b0dd2",
@@ -2273,6 +2360,37 @@
    "source": "ai",
    "year": 4,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-402b9e27",
+   "stem": "A 72-year-old man, a retired plumber with asbestos exposure, has right shoulder pain and weight loss. CT shows a 5 cm peripheral right apical mass without mediastinal lymphadenopathy. Best test to confirm the diagnosis?",
+   "options": [
+    "Flexible bronchoscopy biopsy",
+    "CT-guided core biopsy",
+    "Sputum cytology",
+    "EBUS nodal aspiration",
+    "FDG PET-CT scan"
+   ],
+   "answer": 1,
+   "why": "A peripheral apical (superior sulcus) mass suspicious for lung cancer needs tissue for diagnosis. With no enlarged nodes, a percutaneous CT-guided core biopsy gives the highest yield and enough tissue for histology and molecular testing. This follows the Australian optimal care pathway for lung cancer.",
+   "notes": [
+    "Bronchoscopic biopsy has a low yield for peripheral apical lesions, which lie beyond the reach of the bronchoscope.",
+    null,
+    "Sputum cytology is insensitive for peripheral tumours, and a negative result would not exclude cancer.",
+    "EBUS sampling is used for enlarged mediastinal or hilar nodes, and none are present here.",
+    "PET-CT is used for staging and cannot give a tissue diagnosis."
+   ],
+   "topic": "Respiratory Medicine",
+   "topics": [
+    "Respiratory Medicine",
+    "General Practice",
+    "Oncology"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-40ae7c79",
@@ -3742,6 +3860,37 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-64296113",
+   "stem": "A 71-year-old woman has sudden tearing chest pain radiating between her shoulder blades. BP is 168/94 mmHg in the right arm and 138/86 mmHg in the left. ECG shows lateral ST depression. Which drug is most likely to cause harm?",
+   "options": [
+    "Morphine",
+    "Esmolol",
+    "Metoclopramide",
+    "Enoxaparin",
+    "Paracetamol"
+   ],
+   "answer": 3,
+   "why": "Tearing pain through to the back with a BP difference of more than 20 mmHg between the arms means aortic dissection until proven otherwise. Treating the ST depression as an acute coronary syndrome with anticoagulants, antiplatelets or thrombolysis can cause rupture, tamponade or catastrophic bleeding. These drugs must be held until dissection has been excluded.",
+   "notes": [
+    "IV opioid analgesia is recommended in suspected dissection because it relieves pain and reduces the sympathetic drive that raises heart rate and blood pressure.",
+    "In a hypertensive patient, an IV beta blocker is the first-line anti-impulse treatment, aiming for a heart rate of about 60 and a systolic BP of 100 to 120 mmHg.",
+    "An antiemetic is safe here and helps prevent vomiting, which would otherwise raise blood pressure and the stress on the aortic wall.",
+    null,
+    "Paracetamol is a safe extra pain reliever with no effect on bleeding or blood pressure in a dissection."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology",
+    "Cardiothoracic Surgery"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-653bf96f",
    "stem": "A 68-year-old woman admitted to the ward with HSV-1 encephalitis confirmed on CSF PCR starts IV aciclovir 10 mg/kg 8-hourly. She is drowsy with poor oral intake. Creatinine is 72 µmol/L. Most important adverse effect to monitor?",
    "options": [
@@ -4262,6 +4411,37 @@
    "source": "ai",
    "year": 3,
    "difficulty": 3
+  },
+  {
+   "id": "ai-mcq-71244a0c",
+   "stem": "A 74-year-old retired plumber with a 6 cm right apical lung mass on chest X-ray develops thoracic back pain and bilateral leg weakness with a T6 sensory level. Most appropriate next step?",
+   "options": [
+    "Dexamethasone and urgent MRI",
+    "Urgent outpatient CT chest",
+    "Whole-body bone scan",
+    "Analgesia and review tomorrow",
+    "Urgent respiratory referral"
+   ],
+   "answer": 0,
+   "why": "New back pain, leg weakness and a sensory level in a man with a probable apical lung cancer suggest malignant spinal cord compression, which is an oncological emergency. He needs high-dose dexamethasone straight away and same-day transfer for an urgent MRI of the whole spine, so that radiotherapy or surgery can preserve neurological function.",
+   "notes": [
+    null,
+    "CT chest stages the primary tumour but does not show the cord, and an outpatient timeframe delays emergency care.",
+    "A bone scan shows skeletal metastases but cannot show cord compression, and it delays the MRI needed.",
+    "Waiting a day risks irreversible paraplegia, because outcome depends on neurological function at the start of treatment.",
+    "Specialist referral is right for the lung mass, but the new neurological deficit needs same-day emergency management."
+   ],
+   "topic": "Oncology",
+   "topics": [
+    "Oncology",
+    "Respiratory Medicine",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
   },
   {
    "id": "ai-mcq-721d224a",
@@ -5150,6 +5330,36 @@
    "difficulty": 3
   },
   {
+   "id": "ai-mcq-8c0b8b95",
+   "stem": "A 27-year-old man diagnosed with HIV 8 months ago has had an undetectable viral load for 6 months on dolutegravir plus tenofovir-emtricitabine. He feels well and asks to stop treatment. Most likely result of stopping?",
+   "options": [
+    "Sustained viral suppression",
+    "Negative HIV antibodies",
+    "Dolutegravir resistance",
+    "Viral load rebound",
+    "Rapid AIDS onset"
+   ],
+   "answer": 3,
+   "why": "ART suppresses HIV but does not cure it. Latent virus persists in reservoirs such as resting memory CD4 cells, so viral load usually rebounds within weeks of stopping. He then loses U=U protection and his CD4 count starts to fall again, so ASHM-endorsed guidance is to continue ART for life.",
+   "notes": [
+    "An undetectable viral load does not clear the latent reservoir, so suppression lasting after ART stops is very rare and is not an expected outcome.",
+    "Once HIV infection is established, antibodies last for life and do not disappear when viral load is suppressed or ART is stopped.",
+    "Dolutegravir has a high genetic barrier, and stopping all three drugs together rarely selects resistance, so rebound of wild-type virus is the expected result.",
+    null,
+    "CD4 counts fall over months to years after stopping, so rebound viraemia comes well before any AIDS-defining illness."
+   ],
+   "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Sexual Health"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-8d498cab",
    "stem": "A 52-year-old man has an excisional biopsy of a changing pigmented lesion on his back. Histopathology shows superficial spreading melanoma, Breslow thickness 1.6 mm, without ulceration. His regional nodes are impalpable. Most appropriate addition to wide excision?",
    "options": [
@@ -5290,6 +5500,37 @@
    "topics": [
     "Otorhinolaryngology",
     "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-91f1df94",
+   "stem": "A 66-year-old man has sudden tearing chest pain through to his back and collapsed briefly. BP is 78/50 mmHg and HR 124/min, with distended neck veins and an early diastolic murmur. Most appropriate next investigation?",
+   "options": [
+    "Chest X-ray",
+    "CT pulmonary angiogram",
+    "Bedside echocardiogram",
+    "Serial troponin",
+    "D-dimer"
+   ],
+   "answer": 2,
+   "why": "Tearing pain through to the back, syncope and aortic regurgitation suggest a type A aortic dissection. Hypotension with distended neck veins points to tamponade. In a patient this unstable, current guidelines (ESC 2024) recommend bedside echocardiography to look for pericardial fluid, an intimal flap and aortic regurgitation while cardiothoracic surgery is called, rather than sending him to the CT scanner.",
+   "notes": [
+    "A widened mediastinum is neither sensitive nor specific, and a normal film does not rule out dissection, so it would only delay decisive care.",
+    "Pulmonary embolism fits poorly with tearing pain to the back and a diastolic murmur, and moving an unstable patient to CT for the wrong scan is unsafe.",
+    null,
+    "Troponin can be raised in dissection and cannot diagnose or exclude it, and waiting for serial results wastes time in a surgical emergency.",
+    "D-dimer is not used to rule out dissection when clinical probability is high, and a raised result would not show tamponade or the type of dissection."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology",
+    "Cardiothoracic Surgery"
    ],
    "cat": "clinical",
    "origin": "ai",
@@ -6009,6 +6250,36 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-a0667eec",
+   "stem": "A fit 68-year-old man has an impalpable prostate cancer. His PSA is 8.6 ng/mL and biopsy shows Gleason 4+3=7 in five left cores. PSMA PET/CT shows no nodal or distant disease. Most appropriate treatment?",
+   "options": [
+    "Active surveillance",
+    "Watchful waiting",
+    "Androgen deprivation alone",
+    "Radical prostatectomy",
+    "Docetaxel chemotherapy"
+   ],
+   "answer": 3,
+   "why": "Gleason 4+3=7 (ISUP Grade Group 3) is unfavourable intermediate-risk disease, and PSMA PET/CT has shown it is localised. A fit man with a long life expectancy should be offered curative treatment, either radical prostatectomy or external beam radiotherapy with short-course androgen deprivation.",
+   "notes": [
+    "Active surveillance is for low-risk disease (Grade Group 1, or selected low-volume Grade Group 2), not for predominant pattern 4 disease.",
+    "Watchful waiting suits men with limited life expectancy or serious comorbidity, and he is fit.",
+    "Androgen deprivation alone does not cure the cancer and is used for metastatic disease or men unfit for local treatment.",
+    null,
+    "Docetaxel is used for metastatic disease, and PSMA PET/CT has shown no spread."
+   ],
+   "topic": "Urology",
+   "topics": [
+    "Urology",
+    "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-a111fffd",
    "stem": "A 46-year-old man woke yesterday with hearing loss and tinnitus in his right ear. Otoscopy is normal, Weber lateralises left, and audiometry shows a 40 dB right sensorineural loss. Most appropriate next step?",
    "options": [
@@ -6385,6 +6656,36 @@
    "origin": "ai",
    "source": "ai",
    "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-a7624e4f",
+   "stem": "A 50-year-old nulliparous woman with obesity and type 2 diabetes has eight months of heavy, irregular menstrual bleeding. Transvaginal ultrasound shows a homogeneous 15 mm endometrium without polyp or fibroid. Which test will most likely confirm the diagnosis?",
+   "options": [
+    "Saline sonohysterography",
+    "Endometrial biopsy",
+    "Pelvic MRI",
+    "Serum CA-125",
+    "Cervical screening test"
+   ],
+   "answer": 1,
+   "why": "This woman is at least 45 and has persistent abnormal bleeding, obesity, diabetes, nulliparity and a thickened endometrium, so endometrial hyperplasia or cancer must be excluded. Only a tissue sample can confirm it, so under RANZCOG guidance she needs an endometrial biopsy (pipelle, or hysteroscopy with directed biopsy or curettage).",
+   "notes": [
+    "Histology of an endometrial sample is the only test that confirms or excludes hyperplasia or cancer in a high-risk woman with a thickened endometrium.",
+    null,
+    "Saline sonohysterography shows the shape of the cavity and finds polyps, but it gives no tissue, so it cannot confirm hyperplasia or cancer.",
+    "CA-125 is not sensitive or specific for endometrial disease, and it is used mainly when assessing ovarian masses.",
+    "Cervical screening looks for HPV and cervical disease, and it is not a reliable way to sample the endometrium."
+   ],
+   "topic": "Gynaecology",
+   "topics": [
+    "Gynaecology",
+    "Critical Care Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
    "difficulty": 2
   },
   {

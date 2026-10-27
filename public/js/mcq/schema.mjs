@@ -23,7 +23,7 @@ export const KIND_NOTE = Object.freeze({
   'usmle-resource': 'From an open online USMLE-style question bank',
   'open-exam': 'A real exam question from an open set (data/sources/registry.json), shown as published with its credit'
 });
-export const HOWS = Object.freeze(['session', 'cli', 'api', 'duel-pack', 'stub']);
+export const HOWS = Object.freeze(['session', 'cli', 'api', 'duel-pack', 'stub', 'imported']);   /* imported: an open set another team wrote with a model (data/sources/registry.json kind ai) */
 export const MAX = Object.freeze({ id: 80, stem: 4000, ask: 300, option: 300, explanation: 4000, why: 800, topic: 60, tag: 40, tags: 16, name: 200, url: 500, licence: 200, author: 80 });
 export const OPTIONS = Object.freeze({ min: 4, max: 5 });
 export const LETTERS = 'ABCDE';

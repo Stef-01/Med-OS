@@ -327,44 +327,44 @@
    "passAsSelected": 0
   },
   "Generated (generate-mcq.mjs)": {
-   "n": 412,
+   "n": 1302,
    "flaw": {
-    "mean": 98.2,
-    "p5": 94,
-    "p10": 94,
-    "p50": 100,
-    "anyMajor": 0
+    "mean": 88.3,
+    "p5": 74,
+    "p10": 74,
+    "p50": 88,
+    "anyMajor": 14.7
    },
    "checks": {
     "schema": 0,
-    "lead-in": 0,
+    "lead-in": 0.2,
     "cover-options": 0,
-    "all-none": 0,
-    "negative-stem": 0,
-    "longest-key": 0.5,
+    "all-none": 0.2,
+    "negative-stem": 0.6,
+    "longest-key": 1.1,
     "grammar-cue": 0,
-    "convergence": 0.2,
-    "absolute-terms": 3.2,
-    "clang": 3.4,
+    "convergence": 0.4,
+    "absolute-terms": 17.1,
+    "clang": 1.5,
     "duplicate-options": 0,
-    "vignette": 22.1,
-    "stem-length": 0,
-    "units": 1
+    "vignette": 74,
+    "stem-length": 64.5,
+    "units": 0.3
    },
-   "judged": 412,
+   "judged": 430,
    "quality": {
-    "mean": 93.4,
+    "mean": 93,
     "p5": 85,
-    "p10": 88,
+    "p10": 87,
     "p25": 91,
-    "p50": 95
+    "p50": 94
    },
-   "gatesPass": 98.5,
-   "solved2": 99,
-   "keyCorrect": 99.5,
-   "passBase": 98.3,
-   "passAi": 87.4,
-   "passAsSelected": 87.4
+   "gatesPass": 97.4,
+   "solved2": 98.8,
+   "keyCorrect": 99.3,
+   "passBase": 97,
+   "passAi": 86,
+   "passAsSelected": 86
   },
   "Open exam (HEAD-QA, Spanish MIR)": {
    "n": 786,
@@ -672,25 +672,26 @@
  },
  "pool": {
   "candidates": {
-   "ai": 438,
+   "ai": 1328,
    "amsa": 105,
    "open-exam": 786,
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 345,
+   "ai": 355,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
   },
   "status": {
-   "pool": 683,
-   "rejected": 885,
-   "reserve": 627
+   "pool": 693,
+   "rejected": 893,
+   "reserve": 627,
+   "pending": 872
   },
   "topics": {
    "Endocrinology": 23,
-   "Bioethics": 11,
+   "Bioethics": 12,
    "OMS/Dental": 8,
    "Breast/Endocrine Surgery": 9,
    "Paediatrics": 34,
@@ -705,24 +706,25 @@
    "Haematology": 18,
    "Otorhinolaryngology": 13,
    "Vascular Surgery": 9,
-   "Infectious Diseases": 43,
+   "Infectious Diseases": 44,
    "Rheumatology": 24,
-   "Emergency Medicine": 27,
+   "Emergency Medicine": 29,
+   "Urology": 10,
    "Professionalism": 11,
-   "Respiratory Medicine": 33,
+   "Respiratory Medicine": 35,
    "Gastrointestinal Surgery": 10,
    "Neurology": 40,
    "Neonatology": 16,
    "Neurosurgery": 7,
    "General Surgery": 17,
-   "Gynaecology": 21,
+   "Gynaecology": 22,
    "Indigenous Health": 7,
    "General Practice": 14,
    "Addiction Medicine": 3,
+   "Oncology": 2,
    "Immunology": 9,
    "Cardiothoracic Surgery": 3,
    "Plastic Surgery": 7,
-   "Urology": 8,
    "Ophthalmology": 3,
    "Sexual Health": 6,
    "Nephrology": 11,
@@ -731,7 +733,6 @@
    "Dermatology": 3,
    "Public Health": 11,
    "Geriatrics": 5,
-   "Oncology": 1,
    "Toxicology": 4,
    "Critical Care Medicine": 1
   },
@@ -748,23 +749,29 @@
    },
    "5": {
     "counts": [
+     80,
+     89,
      78,
-     87,
-     76,
-     78,
+     82,
      89
     ],
-    "n": 408,
-    "chi2": 1.73
+    "n": 418,
+    "chi2": 1.26
    }
   },
-  "topicCap": 103,
+  "topicCap": 104,
   "bars": {
    "base": 81,
    "ai": 89,
    "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
   },
   "funnel": {
+   "ai principlismqa": {
+    "n": 871,
+    "pending": 865,
+    "review": 5,
+    "bar": 1
+   },
    "open-exam headqa": {
     "n": 786,
     "bar": 434,
@@ -780,11 +787,12 @@
     "bar": 89
    },
    "ai rapid": {
-    "n": 279,
-    "pool": 235,
+    "n": 298,
+    "pool": 245,
     "review": 3,
     "duplicate": 7,
-    "bar": 34
+    "bar": 36,
+    "pending": 7
    },
    "usmle-resource mmlu": {
     "n": 272,

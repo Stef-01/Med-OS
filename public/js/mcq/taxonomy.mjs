@@ -20,7 +20,7 @@ export { SPECIALTIES };
 export const CAT_IDS = Object.freeze(['skills', 'clinical', 'physio', 'anatomy']);
 export const SOURCE_KINDS = Object.freeze({
   user: { label: 'Student', origin: 'human', brief: 'written by a student and sent to the reviewed bank' },
-  ai: { label: 'AI-written', origin: 'ai', brief: 'written by a model from a Med-OS station or a topic list' },
+  ai: { label: 'AI-written', origin: 'ai', brief: 'written by a model from a Med-OS station or a topic list, or an open set another team wrote with a model (PrinciplismQA), with its credit' },
   amsa: { label: 'AMSA', origin: 'ai', brief: 'made from an AMSA MedEd OSCE case in an AI-written station' },
   'usmle-resource': { label: 'USMLE', origin: 'human', brief: 'an open USMLE-style bank (MedQA, MMLU), shown with its licence' },
   'open-exam': { label: 'Exam', origin: 'human', credit: true, brief: 'a real exam question from an open set, adapted for Australian practice by a model, with its credit' }

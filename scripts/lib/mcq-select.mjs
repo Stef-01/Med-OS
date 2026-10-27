@@ -25,11 +25,13 @@ import { flawReport, signature, nearDuplicate, positionBalance, EVAL_VERSION } f
 import { verdictFor, judgeScore, judgeGates, solved, JUDGE_VERSION } from './mcq-judge.mjs';
 
 export const PRIORITY = Object.freeze(['user', 'usmle-resource', 'open-exam', 'amsa', 'ai']);
-export const QUOTA = Object.freeze({ 'usmle-resource': 160, 'open-exam': 120, amsa: 110, ai: 110, 'ai-rapid': 260 });   /* ai-rapid 80 -> 200 (2026-10-26): the first 80 filled it with 25 more passing, and 10 a topic in each of 44 topics needs more short questions than the bank's 662. 200 -> 260 (2026-10-27): full again with 35 passing on reserve, 15 of them in topics too thin to deal a Rapid duel; at 260 the thin topics at 15 s go from 14 to 8. A topic floor inside the quota was tried and changed nothing (it only reshuffles a full quota) */
+export const QUOTA = Object.freeze({ 'usmle-resource': 160, 'open-exam': 120, amsa: 110, ai: 110, 'ai-rapid': 260, 'ai-open': 40 });   /* ai-rapid 80 -> 200 (2026-10-26): the first 80 filled it with 25 more passing, and 10 a topic in each of 44 topics needs more short questions than the bank's 662. 200 -> 260 (2026-10-27): full again with 35 passing on reserve, 15 of them in topics too thin to deal a Rapid duel; at 260 the thin topics at 15 s go from 14 to 8. A topic floor inside the quota was tried and changed nothing (it only reshuffles a full quota) */
 /* the quota a question counts against: AI-written questions in the Rapid form (tag form:rapid, for the duel's 15 s
    format) have their own, so short questions and vignettes do not crowd each other out */
-export const quotaOf = a => (a.kind === 'ai' && Array.isArray(a.q?.tags) && a.q.tags.includes('form:rapid') ? 'ai-rapid' : a.kind);
-const QUOTA_NAME = { 'ai-rapid': 'AI-written Rapid' };
+export const quotaOf = a => (a.kind !== 'ai' ? a.kind : a.q?.provenance?.generator?.how === 'imported' ? 'ai-open' : Array.isArray(a.q?.tags) && a.q.tags.includes('form:rapid') ? 'ai-rapid' : 'ai');
+/* ai-open (2026-10-27): an open set written by someone else's model (PrinciplismQA), with its own small cap so it never
+   crowds out the questions written from Med-OS's stations */
+const QUOTA_NAME = { 'ai-rapid': 'AI-written Rapid', 'ai-open': 'AI-written open set' };
 /* the route a candidate came by, finer than its kind: the open set it was taken from (its src: tag), or, for AI-written
    questions, the form it was written in. The audit's funnel (lib/mcq-audit.mjs) reads it to say which route earns its keep */
 export const routeOf = q => {

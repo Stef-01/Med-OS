@@ -48,5 +48,21 @@ function headqa(json, { keep = {}, source, retrieved }) {
   }
   return { rows, dropped };
 }
-export const ADAPTERS = Object.freeze({ headqa });
+/* PrinciplismQA's knowledge-mcqa.json: [{ id, question, options: { A..D }, correct_answer, explanation }], all bioethics,
+   written by GPT-4o from ethics textbooks and checked by experts (so kind ai). keep: { topic, notPrinciples }: with
+   notPrinciples, a question whose options are mostly the principles themselves ("which principle is most
+   challenged…", over half the set) is left out, a recall item far from a clinical single best answer */
+const PRINCIPLES = /^(the )?(principle of )?(respect for (persons|autonomy)|autonomy|beneficence|justice|non-?maleficence|veracity|fidelity|utility|confidentiality|dignity|solidarity)\.?$/i;
+function principlismqa(json, { keep = {}, source, retrieved }) {
+  const rows = [], dropped = [];
+  for (const q of Array.isArray(json) ? json : []) {
+    const id = `principlismqa-${q.id}`, letters = Object.keys(q.options || {}).sort(), options = letters.map(l => text(q.options[l])), answer = letters.indexOf(String(q.correct_answer || '').trim());
+    if (answer < 0 || options.length < 4) { dropped.push(`${id}: no key or too few options`); continue; }
+    if (keep.notPrinciples && options.filter(o => PRINCIPLES.test(o)).length >= options.length - 1) { dropped.push(`${id}: its options are the principles`); continue; }
+    rows.push({ id, stem: text(q.question), options, answer, explanation: text(q.explanation), topic: keep.topic || '', exam: 'PrinciplismQA',
+      source: { name: source.credit, url: source.url, licence: source.licence, retrieved } });
+  }
+  return { rows, dropped };
+}
+export const ADAPTERS = Object.freeze({ headqa, principlismqa });
 export const adapt = (source, raw, retrieved) => ADAPTERS[source.adapter](raw, { keep: source.keep || {}, source, retrieved });

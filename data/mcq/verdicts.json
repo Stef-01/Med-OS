@@ -2277,6 +2277,50 @@
    }
   }
  },
+ "ai-mcq-18903f10": {
+  "hash": "ce825454",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:43:23.472Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "For a persistently raised PSA with infection excluded, current guidelines recommend multiparametric MRI before biopsy to decide whether a biopsy is needed and where to target it."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.9,
+    "reason": "The PSA stayed high on a repeat test, the urine culture rules out infection and the rectal exam is normal, so current guidelines (EAU, NICE, AUA) recommend a multiparametric MRI before biopsy to decide whether a biopsy is needed and to target it."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Lead-in is a sentence fragment rather than a full question",
+    "Explanation bases the key on 'Australian practice' even though the evidence supports it internationally",
+    "Bone scan distractor is weak for a pre-diagnosis patient"
+   ],
+   "topic": "Urology",
+   "verdict": "accept",
+   "reasons": [
+    "MRI before biopsy is the guideline-endorsed next step when PSA stays raised and infection is excluded",
+    "Options are all the same kind of thing (imaging or tissue tests), and each is clearly worse than the key",
+    "The explanation teaches why the key is right and why each distractor is wrong, accurately"
+   ],
+   "suggestion": "Rewrite the lead-in as a full question (\"Which of the following is the most appropriate next step in diagnosis?\"). Base the explanation on international guidelines (EAU/NICE/AUA) rather than only Australian practice."
+  }
+ },
  "ai-mcq-18db6652": {
   "hash": "ebae35c3",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -3660,6 +3704,50 @@
     ],
     "suggestion": "State that he drives a heavy rigid truck (over 4.5 t) so the commercial standard clearly applies, or remove the commercial stand-down claim from the explanation. Change E to 'Start levetiracetam today' and make the lead-in a full question, for example 'Which is the most important advice to give him?'"
    }
+  }
+ },
+ "ai-mcq-27b70a02": {
+  "hash": "26092aa8",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:43:31.911Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.88,
+    "reason": "Fat in the curettings means the uterus was perforated with possible bowel injury, so she needs broad IV cover for gram-negatives, enterococci and anaerobes (amoxicillin, gentamicin, metronidazole) before laparotomy."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "Fat in the curettings means the uterus was perforated with likely bowel injury, so this shocked patient with peritonitis needs broad IV cover against enteric gram-negatives, anaerobes and enterococci, which amoxicillin, gentamicin and metronidazole provide."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option D (oral drug in a shocked patient going to theatre) is implausible",
+    "Option E contains ceftriaxone plus metronidazole, a recognised regimen for intra-abdominal infection in some guidelines,",
+    "Key relies on an Australian (eTG) regimen; US guidance for severe cases would favour piperacillin-tazobactam or a carbap"
+   ],
+   "topic": "Gynaecology",
+   "verdict": "accept",
+   "reasons": [
+    "The vignette points clearly to uterine perforation with possible bowel injury and peritonitis",
+    "B is the only option that is an IV triple regimen covering enteric Gram-negatives, enterococci and anaerobes",
+    "The explanation deals with every distractor clearly"
+   ],
+   "suggestion": "Replace option D with a more plausible IV choice, such as IV ceftriaxone alone. Make it clear that severity (septic shock) is the reason for the broader enterococcal and anaerobic cover."
   }
  },
  "ai-mcq-27c244ad": {
@@ -5486,6 +5574,50 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-38414a4a": {
+  "hash": "ecb6ee45",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:43:26.880Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Under the duty of candour (open disclosure), the patient should get a prompt, honest explanation of the medication error and an apology, even though no harm occurred; this should not wait for an incident review, legal advice or a regulator notification."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.96,
+    "reason": "The duty of open disclosure means the patient should get a prompt, honest explanation and an apology, even though the error did him no harm and he doesn't know about it; you don't hold off for legal advice or for the incident review."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Very terse stem; examinee's role (prescriber, nurse, ward doctor) not stated",
+    "Lead-in is not a complete question",
+    "Explanation overgeneralises apology protection, which varies by Australian state/territory"
+   ],
+   "topic": "Professionalism",
+   "verdict": "accept",
+   "reasons": [
+    "Key reflects the Open Disclosure Framework and good practice internationally",
+    "Distractors cover the common errors: delaying, being defensive, over-escalating, breaching confidentiality",
+    "Only minor wording and explanation-precision issues"
+   ],
+   "suggestion": "Name the examinee's role and use a full lead-in, e.g. 'Which of the following is the most appropriate next step?'. Change the apology-law sentence to say that apology protections vary by state or territory."
+  }
+ },
  "ai-mcq-3a145bf8": {
   "hash": "be827473",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -5569,6 +5701,49 @@
     "Clear explanation that covers every option"
    ],
    "suggestion": "Optionally make the options equal in length, for example by adding a second detail to some distractors or shortening D, so the compound key does not stand out."
+  }
+ },
+ "ai-mcq-3cdb17b7": {
+  "hash": "79326023",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:43:46.069Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "This is a malignant pleural effusion that came back quickly, and the lung stayed collapsed after drainage (non-expandable, or \"trapped\", lung); pleurodesis won't work because the pleural layers can't meet, so an indwelling pleural catheter is the guideline-recommended choice."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "This is a fast-recurring malignant pleural effusion with a lung that did not re-expand, so talc pleurodesis is likely to fail and an indwelling pleural catheter is the guideline-preferred treatment."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation calls the patient 'frail', which the stem never says",
+    "Stem is thin: no performance status or prognosis is given"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "BTS 2023 recommends an indwelling pleural catheter for a recurrent malignant effusion with non-expandable lung, so the key is correct",
+    "The distractors are plausible, of the same kind, and each is clearly worse",
+    "It is a realistic next-step management item that tests the idea that pleurodesis needs the pleura to touch"
+   ],
+   "suggestion": "Optionally add performance status (e.g., ECOG 2) to the stem so that the explanation's point about frailty is backed by the vignette."
   }
  },
  "ai-mcq-3d9b0dd2": {
@@ -6030,6 +6205,49 @@
     "Explanation is accurate and addresses each option"
    ],
    "suggestion": ""
+  }
+ },
+ "ai-mcq-402b9e27": {
+  "hash": "3901fe86",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:43:53.862Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.88,
+    "reason": "A peripheral apical (Pancoast) mass with no mediastinal adenopathy is best diagnosed by CT-guided transthoracic core needle biopsy, which has higher yield than bronchoscopy or sputum cytology."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.88,
+    "reason": "This is a peripheral apical (Pancoast) mass with no mediastinal nodes, so CT-guided transthoracic core biopsy gives the highest diagnostic yield and enough tissue for histology and molecular testing."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem is terse and gives no exam findings (e.g., Horner syndrome, hand weakness), which would make the vignette richer",
+    "The words 'peripheral' and 'without mediastinal lymphadenopathy' rule out A and D directly"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "CT-guided core biopsy is the correct, highest-yield way to get tissue from a peripheral superior sulcus mass with no enlarged nodes",
+    "The distractors are all plausible diagnostic tests of the same kind, and each is wrong for a clear reason",
+    "Tests applied clinical reasoning at Step 2 CK level with no safety concerns"
+   ],
+   "suggestion": "You could add Horner syndrome or C8–T1 signs to the stem to round out the Pancoast picture. The explanation could also say that PET-CT is often done before biopsy for staging, and that navigational bronchoscopy exists but still has a lower yield for apical lesions."
   }
  },
  "ai-mcq-40470f73": {
@@ -9912,6 +10130,49 @@
    }
   }
  },
+ "ai-mcq-64296113": {
+  "hash": "3d443cf4",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:00.064Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Tearing pain going through to the back with a difference in arm blood pressures suggests aortic dissection, where an anticoagulant like enoxaparin (given as if this were ACS) can cause catastrophic bleeding, while esmolol is the recommended first-line treatment."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Tearing pain to the back and a difference in arm blood pressures suggest aortic dissection, so anticoagulating with enoxaparin for a suspected coronary syndrome could cause rupture or tamponade."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "negative stem (\"most likely to cause harm\")",
+    "classic vignette gives the diagnosis away"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: anticoagulation in suspected aortic dissection is dangerous",
+    "ST depression is a good test of the ACS trap",
+    "Explanation clearly covers each option"
+   ],
+   "suggestion": "Optionally reword to a positive stem, such as \"Which drug should be withheld until dissection is excluded?\", or a next-step question with CT angiography as the key."
+  }
+ },
  "ai-mcq-653bf96f": {
   "hash": "4ec0f09d",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -11248,6 +11509,51 @@
    }
   }
  },
+ "ai-mcq-71244a0c": {
+  "hash": "be413637",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:11.343Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "Back pain with bilateral leg weakness and a T6 sensory level in a patient with a probable lung cancer is metastatic spinal cord compression, an emergency that needs high-dose dexamethasone right away and an urgent whole-spine MRI."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "New back pain, weakness in both legs and a T6 sensory level in a patient with a likely lung cancer point to metastatic spinal cord compression, which needs immediate dexamethasone and an urgent whole-spine MRI."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key is the only compound option (treatment plus investigation), which cues it",
+    "Distractors are weak: D is plainly unsafe, and B and E are obviously non-emergency for a student who spots cord compress",
+    "Only the key pairs immediate treatment with emergency imaging, so the item tests recognition of an emergency rather than",
+    "Stem gives no clinical setting (ED, GP, ward), which shapes what 'next step' means"
+   ],
+   "topic": "Oncology",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct and current: suspected MSCC with a neurological deficit needs immediate dexamethasone and emergency whole-spine MRI",
+    "The distractors are not homogeneous, and several are easy to rule out, so the item discriminates poorly",
+    "The concept is high-yield and safe, so the item is worth fixing"
+   ],
+   "suggestion": "Swap in plausible emergency-level distractors, such as emergency CT of the thoracic spine, immediate radiotherapy before imaging, emergency surgical decompression, or lumbar puncture. Keep each option a single action, for example \"Immediate dexamethasone\" as the key, with emergency MRI implied as the next step. Add the clinical setting and examination findings, such as brisk reflexes and a palpable bladder."
+  }
+ },
  "ai-mcq-71636d27": {
   "hash": "7644a504",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -11763,6 +12069,50 @@
     "Explanation is accurate and addresses every option"
    ],
    "suggestion": "Optionally make the distractors multi-part as well (e.g. 'Give analgesia, encourage oral fluids and review in 24 hours') so the key is not cued by its length and compound structure."
+  }
+ },
+ "ai-mcq-75824490": {
+  "hash": "83547d3c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:19.419Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.9,
+    "reason": "After the procedure she is hypotensive, her haemoglobin has dropped by 28 g/L and her lactate is raised with a normal pCO2, which fits a type A lactic acidosis from tissue hypoperfusion due to bleeding rather than from metformin, ketoacidosis or hypoventilation."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "After the D&C she is hypotensive with an acute haemoglobin drop and raised lactate at normal pCO2, which fits type A lactic acidosis from poor perfusion due to bleeding."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 3,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation cites data missing from the stem (glucose 9.8 mmol/L; the gas being taken before large-volume saline)",
+    "Stem leaves out details needed to rule out distractors: no glucose, ketones, chloride or bicarbonate, no medication list",
+    "Stem is telegraphic, not a full clinical vignette"
+   ],
+   "topic": "Gynaecology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: hypotension, a falling haemoglobin and a raised lactate after D&C mean haemorrhagic hypoperfusion",
+    "Explanation relies on a glucose value and a fluid history that the stem never gives, so the stem and explanation do not match",
+    "Without glucose, ketones, chloride and medication details, students cannot fully rule out A, C and E from the stem"
+   ],
+   "suggestion": "Add to the stem: glucose 9.8 mmol/L, negative or trace ketones, bicarbonate and chloride values, regular metformin use, and that only minimal IV fluid was given before the gas. That way the explanation's reasoning rests on data the student can see."
   }
  },
  "ai-mcq-761a155d": {
@@ -13488,6 +13838,50 @@
    "suggestion": "Optionally add a normal serum albumin so the normal anion gap can be trusted when ruling out option E."
   }
  },
+ "ai-mcq-8c0b8b95": {
+  "hash": "18356642",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:28.017Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Stopping ART almost always leads to viral rebound within weeks, because latent HIV reservoirs persist even when the viral load is undetectable."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Antiretroviral therapy suppresses HIV but doesn't clear the latent reservoir in resting CD4 T cells, so stopping it nearly always makes the viral load bounce back within weeks; dolutegravir's high resistance barrier makes resistance unlikely."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option B (loss of antibodies) is implausible and few students would choose it",
+    "Lead-in is a terse sentence fragment",
+    "\"Rapid\" in option E slightly cues it as wrong"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct and clearly the single best answer",
+    "Clinically relevant counselling scenario about the HIV reservoir and lifelong ART",
+    "Explanation is accurate and addresses every option"
+   ],
+   "suggestion": "Optionally replace option B with a more plausible distractor (e.g., acute retroviral syndrome) and rewrite the lead-in as a full question: \"Which of the following is the most likely outcome if he stops therapy?\""
+  }
+ },
  "ai-mcq-8d498cab": {
   "hash": "02b2b6e6",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -13695,6 +14089,48 @@
     "Explanation covers the key and every distractor accurately"
    ],
    "suggestion": "Optionally rephrase the lead-in as a full question, e.g. 'Which of the following is the most appropriate further investigation?'"
+  }
+ },
+ "ai-mcq-91f1df94": {
+  "hash": "020d78a0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:41.421Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "Tearing pain through to the back, a new early diastolic murmur (aortic regurgitation) and low blood pressure with distended neck veins (tamponade) point to a type A aortic dissection, and in an unstable patient a bedside echo (TTE/TEE) is the right first test to confirm it before emergency surgery."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "Suspected type A aortic dissection with tamponade and aortic regurgitation in a hemodynamically unstable patient calls for a bedside echo (TTE/TEE) to confirm the diagnosis quickly and send him to emergency surgery without a trip to CT."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "lead-in is a sentence fragment rather than a full question"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches ESC 2024 guidance: bedside echo for an unstable suspected type A dissection with tamponade",
+    "CT aortography is not offered as an option, which avoids a second defensible answer",
+    "Explanation is accurate and rules out each distractor in turn"
+   ],
+   "suggestion": "Optionally rewrite the lead-in as a full question (\"Which of the following is the most appropriate next investigation?\") and add a blood-pressure difference between the arms for realism."
   }
  },
  "ai-mcq-91f368bd": {
@@ -15545,6 +15981,49 @@
    }
   }
  },
+ "ai-mcq-a0667eec": {
+  "hash": "36b65d37",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:52.496Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "A fit 68-year-old with localised unfavourable intermediate-risk prostate cancer (Gleason 4+3, PSA under 10, cT1c, PSMA PET negative) and a life expectancy over 10 years should have curative treatment such as radical prostatectomy."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.92,
+    "reason": "Grade group 3 prostate cancer with no spread on PSMA PET is unfavourable intermediate-risk localised disease, so a fit 68-year-old should have curative treatment, and of the options given that is radical prostatectomy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Docetaxel distractor is implausible for localised disease",
+    "Total number of biopsy cores not stated (five positive out of how many)"
+   ],
+   "topic": "Urology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: ISUP GG3, localised on PSMA PET, fit man with life expectancy over 10 years, so curative treatment is indicated",
+    "Only one curative option is listed (EBRT+ADT left out), so there is a single best answer",
+    "Clear explanation that addresses each distractor"
+   ],
+   "suggestion": "You could replace docetaxel with a more tempting option such as focal therapy (HIFU) or brachytherapy alone, and state the total number of cores taken (e.g. 5 of 12)."
+  }
+ },
  "ai-mcq-a111fffd": {
   "hash": "274c2f71",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -16411,6 +16890,49 @@
     ],
     "suggestion": ""
    }
+  }
+ },
+ "ai-mcq-a7624e4f": {
+  "hash": "b8104ad5",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:50.525Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "This patient has several risk factors for endometrial hyperplasia or carcinoma: unopposed estrogen from obesity, never having given birth, diabetes, and age 50 or older with abnormal bleeding. Her endometrium is also thickened at 15 mm, so tissue sampling with an endometrial biopsy is the test that "
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "She has abnormal uterine bleeding with risk factors for endometrial hyperplasia or carcinoma (age 50 or older, obesity, diabetes, nulliparity, anovulation) and a thickened endometrium, so a tissue sample from endometrial biopsy is what confirms the diagnosis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation distractor rationales are mislabeled: 'A' explains the key, 'C' describes sonohysterography (option A), and ",
+    "Stem says 'confirm the diagnosis' without naming a diagnosis; slightly vague lead-in"
+   ],
+   "topic": "Gynaecology",
+   "verdict": "revise",
+   "reasons": [
+    "Key (endometrial biopsy) is clearly correct for a high-risk woman with AUB and thickened endometrium",
+    "Explanation rationales are attached to the wrong letters and omit MRI",
+    "Otherwise a well-built, clinically relevant item"
+   ],
+   "suggestion": "Fix the explanation so A explains sonohysterography (no tissue), C explains why pelvic MRI is for staging rather than diagnosis, and remove the key rationale from A. Consider rewording the lead-in to 'most appropriate next step to establish the diagnosis'."
   }
  },
  "ai-mcq-a768de34": {
@@ -125969,6 +126491,298 @@
     ],
     "suggestion": "Write a full vignette that includes the facts the explanation relies on (normal terminal ileum, no granulomas or perianal disease, negative stool cultures/PCR/C. difficile), or ask for the next management step instead. Rewrite the explanation to match the stem's options and remove the IBS reference."
    }
+  }
+ },
+ "principlismqa-24241": {
+  "hash": "c2173648",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:44.265Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "The question describes Molière's physicians as paternalistic, so the matching ethical issue today is avoiding paternalism and respecting patient autonomy."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "Molière mocked physicians for being paternalistic, so the lesson that carries over most directly to modern practice is to avoid paternalism and respect patient autonomy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: stem says 'paternalistic' and the key is 'avoiding paternalism'",
+    "vignette gives the answer away",
+    "no clinical vignette; humanities trivia",
+    "premise is debatable: Molière mainly mocked physicians' pretension, incompetence, jargon and greed, not paternalism as s",
+    "C overlaps with B (informed consent is a way of respecting autonomy and avoiding paternalism)"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem names the answer: 'paternalistic' leads straight to 'avoiding paternalism'",
+    "Literary trivia with no patient, so it is not Step 2 CK material",
+    "The historical premise is doubtful, and D (greed/business interests) can be defended, since Molière did mock physicians' greed"
+   ],
+   "suggestion": "Replace it with a clinical vignette in which a physician overrides a capable patient's informed refusal, and ask for the best response. The options should cover respecting autonomy, getting a surrogate involved, a capacity assessment and ethics consultation."
+  }
+ },
+ "principlismqa-29961": {
+  "hash": "0c6056b7",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:48.509Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "The question describes the concern directly: consent forms may give inadequate information and mislead people about what taking part in research means for them, which is exactly option B."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "The question asks about consent forms that give inadequate and misleading information about what taking part in research means, and option C is the only one that states exactly that concern."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away: the key repeats the stem almost word for word",
+    "clang between stem and key",
+    "relies on an unseen source passage ('the passage states')",
+    "no clinical vignette; tests recall of a text, not applied ethics",
+    "Option A (lengthy, hard-to-understand consent forms) is a real, well-documented ethical concern and can be defended",
+    "explanation rules out distractors only because the passage doesn't mention them, not on ethical merit"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem gives the answer away, so the item tests nothing",
+    "It depends on a missing reading passage, and the explanation refers to it",
+    "There is no patient or applied scenario, so it isn't Step 2 CK material"
+   ],
+   "suggestion": "Rewrite it as a vignette: for example, a researcher enrolling a patient with a consent form that overstates the benefit of a trial. Then ask for the most appropriate action or the principle being violated, with options of the same kind, such as respect for autonomy/informed consent, beneficence, justice and IRB review."
+  }
+ },
+ "principlismqa-40486": {
+  "hash": "877e27a7",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:52.508Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.9,
+    "reason": "Black-market organ trade exploits the poor and gives organs to whoever can pay rather than whoever needs them most, which mainly violates justice (fair distribution of scarce resources)."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.9,
+    "reason": "Exploiting the poor so the wealthy can get organs is an unfair distribution of benefits and burdens, which violates the principle of justice."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; pure recall of a definition",
+    "stem phrase 'benefits the rich' / 'unfair' cues justice",
+    "options contain built-in justifications, so A and C argue against themselves",
+    "B is arguably defensible because the stem itself says 'exploits the poor'",
+    "word repetition: stem 'exploits the poor' is echoed in option B"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "Recall of abstract principles with no patient scenario; not Step 2 CK style",
+    "Stem wording gives the answer away, and B is a defensible alternative",
+    "Distractors carry self-defeating rationales and are implausible"
+   ],
+   "suggestion": "Rewrite as a clinical vignette (e.g., a patient on dialysis asks for help travelling abroad to buy a kidney, or a transplant committee weighing allocation by ability to pay). Then ask for the most appropriate physician response, or the principle at stake, with bare one-word options and no built-in justifications."
+  }
+ },
+ "principlismqa-49883": {
+  "hash": "eac65033",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:30.503Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.8,
+    "reason": "If Mrs. Bristol has decision-making capacity, respecting her informed choice to stay at home comes before what others think is best for her."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.75,
+    "reason": "Assuming she has decision-making capacity, her autonomous choice to stay at home comes first, while beneficence and non-maleficence shape the supports offered to her."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "C"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "It teaches that beneficence overrides a patient's stated wish to stay at home, even though her decision-making capacity is never assessed. That could lead to coercive or paternalistic placement of a c",
+     "It leaves out the required steps of assessing capacity, using the least restrictive option and involving a surrogate or best-interests process."
+    ]
+   },
+   "flaws": [
+    "There is no vignette: Mrs. Bristol's age, diagnosis, capacity, home supports and risks are never given.",
+    "The question cannot be answered without information about capacity.",
+    "Two keys: autonomy (C) is the standard answer for a patient with capacity.",
+    "The options mix a principle with a pre-judged action (B assumes staying home avoids harm, C assumes she has decided), so",
+    "Asking for the 'most important' principle is vague; the four principles are weighed against each other, not ranked.",
+    "The explanation is circular and never mentions capacity."
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "There is no clinical stem, so the question cannot be answered and refers to a patient who is never described.",
+    "The key is wrong or debatable: when a patient has capacity, autonomy generally takes priority over beneficence for decisions about where she lives.",
+    "It encourages paternalistic practice and leaves out assessment of capacity."
+   ],
+   "suggestion": "Rewrite it with a full vignette: an older woman with specific risks who has documented decision-making capacity and refuses placement. Ask for the most appropriate next step, with the key 'respect her decision and arrange home supports'. Alternatively, write a version where capacity is clearly absent so that a best-interests or surrogate decision is the key."
+  }
+ },
+ "principlismqa-75860": {
+  "hash": "d46781b0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:25.296Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "Individual autonomy is the Western principle centred on individual decision-making, and African research and medical ethics have widely adopted it, despite traditions that emphasise community."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Individual autonomy is the Western principle centred on personal decision-making, and African bioethics has widely adopted it in research and medical ethics, especially through informed consent requirements, even though it sits uneasily with communal values."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (\"emphasizing individual decision-making\" matches \"Individual autonomy\")",
+    "clang between stem and key (\"individual\")",
+    "recall question with no patient",
+    "depends on an unseen source passage",
+    "heterogeneous options: B and A are not Western principles, which cues the answer",
+    "explanation keeps referring to 'the passage' and does not teach the concept"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem's wording points straight to the key, so it tests nothing",
+    "It is recall of a reading passage with no patient, so it is not Step 2 CK material",
+    "The explanation depends on a passage the student never sees"
+   ],
+   "suggestion": "Start again with a clinical case: for example, a patient from a community where family decision-making is the norm is asked to consent to a trial or procedure. Then ask for the most appropriate next step in getting consent, using homogeneous options such as involving family with the patient's permission or getting the patient's own informed consent."
+  }
+ },
+ "principlismqa-84973": {
+  "hash": "c4ed56d5",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:44:27.885Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "Justice is the principle about distributing opportunities and resources fairly, so time limits that make it harder to share opportunities fairly across career and other life roles challenge justice most directly."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.88,
+    "reason": "Justice is about distributing opportunities fairly, and time limits that shape how chances are shared across life roles (like career and family) are mainly a fairness-in-distribution problem."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: stem phrase 'fair opportunity distribution' is repeated in the key and defines justice",
+    "vignette gives the answer away",
+    "no patient vignette; abstract recall",
+    "explanation refers to an unseen 'passage'; the item doesn't stand alone",
+    "options carry their own justifications, adding length and cues"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Stem wording gives the answer away (clang with the key)",
+    "No clinical scenario; not Step 2 CK material",
+    "Depends on an outside passage; autonomy is also defensible"
+   ],
+   "suggestion": "Write a clinical vignette, such as allocating a scarce resource among patients, where justice is the issue without being named, and use the four principles as plain one-word options."
   }
  }
 }
