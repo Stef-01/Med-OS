@@ -465,7 +465,7 @@ function aiHtml(st, a) {
   /* the summary: the marker's phone lists when it wrote them (v4), else the Critical misses; the prose folds below */
   const plain = h => String(h || '').replace(/<[^>]+>/g, '');
   const missList = sm.missed?.length ? sm.missed : critM.slice(0, 5).map(m => (m.of ? `${plain(m.of).replace(/:$/, '')}: ` : '') + plain(m.x));
-  const sentences = String(r.feedback || '').split(/(?<=[.!?])\s+(?=[A-Z])/).filter(Boolean);
+  const sentences = String(r.feedback || '').replace(/([.!?])\s+(?=[A-Z])/g, '$1\u0000').split('\u0000').filter(Boolean);   /* no lookbehind: Safari before 16.4 cannot parse one */
   const li = xs => xs.map(x => `<li>${esc(x)}</li>`).join('');
   return `<section class="os-ai os-ai--done" aria-label="AI marking">
     <header class="os-aihead">

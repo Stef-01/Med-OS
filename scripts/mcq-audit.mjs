@@ -10,10 +10,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { auditPool, auditMarkdown } from './lib/mcq-audit.mjs';
 import { fits, readSecs, FORMATS } from '../public/js/vendor/pup-duel/duel/core.mjs';
+import { guessYear, guessDiff } from '../public/js/mcq/year.mjs';
+import { readYears, readDifficulty } from './tag-years.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = f => JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'));
-const audit = auditPool(read('public/mcq/pool.json'), { pack: read('public/duel/pack.json'), verdicts: read('data/mcq/verdicts.json'), funnel: read('data/mcq/selection.json').stats.funnel, fits, readSecs, formats: FORMATS });
+const audit = auditPool(read('public/mcq/pool.json'), { pack: read('public/duel/pack.json'), verdicts: read('data/mcq/verdicts.json'), funnel: read('data/mcq/selection.json').stats.funnel, tags: { years: readYears(), difficulty: readDifficulty(), guessYear, guessDiff }, fits, readSecs, formats: FORMATS });
 fs.writeFileSync(path.join(ROOT, 'data/mcq/audit.json'), `${JSON.stringify(audit, null, 1)}\n`);
 fs.writeFileSync(path.join(ROOT, 'docs/mcq-audit.md'), auditMarkdown(audit, { date: new Date().toISOString().slice(0, 10) }));
 const f = audit.pack.formats;

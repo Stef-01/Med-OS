@@ -67,7 +67,7 @@ export function duplicatesOf(list, groupOf = () => '') {
 const packItem = q => ({ id: q.id, stem: q.stem, options: q.options, answer: q.answer, explanation: q.why || '', tags: q.tags || [] });
 const routeOf = q => (q.source === 'ai' ? (q.id.startsWith('hy-') ? 'ai high-yield' : q.station ? 'ai station' : 'ai pool') : q.source || 'unknown');
 
-export function auditPool(pool, { pack = null, verdicts = {}, funnel = null, fits, readSecs, formats }) {
+export function auditPool(pool, { pack = null, verdicts = {}, funnel = null, tags = null, fits, readSecs, formats }) {
   const qs = pool?.questions || [], kinds = [...new Set(qs.map(kindOf))].sort();
   const per = k => qs.filter(q => kindOf(q) === k);
   const cues = cuesOf(qs, kindOf);
@@ -82,6 +82,7 @@ export function auditPool(pool, { pack = null, verdicts = {}, funnel = null, fit
   }
   const out = { pool: { n: qs.length, byKind: count(qs, kindOf), ...formatsOf(qs, { fits, readSecs, formats }) }, cues, duplicates, review };
   if (funnel) out.funnel = funnelRates(funnel);
+  if (pack && tags) out.pack_categorised = categorised(pack.questions || [], tags);
   if (pack) {
     const pq = pack.questions || [], dups = duplicatesOf(pq, routeOf);
     out.pack = { n: pq.length, bySource: count(pq, q => q.source || q.origin || 'unknown'), byRoute: count(pq, routeOf), ...formatsOf(pq, { fits, readSecs, formats }),
@@ -103,6 +104,15 @@ export function funnelRates(funnel) {
   return out;
 }
 
+/* how the duel's years and difficulties were set: by the model (scripts/tag-years.mjs, tags.years / tags.difficulty) or
+   by the fallback guess, and how often the guess agrees with the model where both exist, which says how far a guessed
+   one (a question written since the last tagging run) can be trusted */
+export function categorised(questions, { years = {}, difficulty = {}, guessYear, guessDiff }) {
+  const n = questions.length, yt = questions.filter(q => years[q.id]), dt = questions.filter(q => difficulty[q.id]);
+  const agree = (list, map, guess, within = 0) => pct(list.filter(q => Math.abs(guess(q) - map[q.id]) <= within).length, list.length);
+  return { n, yearTagged: yt.length, diffTagged: dt.length, yearGuessAgrees: agree(yt, years, guessYear), yearGuessWithinOne: agree(yt, years, guessYear, 1), diffGuessAgrees: agree(dt, difficulty, guessDiff) };
+}
+
 /* the report as Markdown: short; the numbers live in audit.json */
 export function auditMarkdown(a, { date = '' } = {}) {
   const L = [];
@@ -122,6 +132,8 @@ export function auditMarkdown(a, { date = '' } = {}) {
     L.push('', '## Every question in the duel, by its categories (mcq/taxonomy.mjs)', '', `${a.pack.n} questions; ${t.problems ? `**${t.problems} not fully categorised**` : 'every one fully categorised'} (source, origin, credit, specialty, kind, year, difficulty; \`npm test\` fails on any gap).`, '',
       `- **Source**: ${row(t.source)}`, `- **Route**: ${row(a.pack.byRoute)}`, `- **Kind**: ${row(t.cat)}`, `- **Year**: ${Object.entries(t.year).sort().map(([k, n]) => `${k} ${n}`).join(', ')}`, `- **Difficulty**: ${Object.entries(t.difficulty).sort().map(([k, n]) => `${k} ${n}`).join(', ')}`,
       `- **Specialties**: ${Object.keys(t.topic).length}; the five largest ${Object.entries(t.topic).sort((x, y) => y[1] - x[1]).slice(0, 5).map(([k, n]) => `${k} ${n}`).join(', ')}; the five smallest ${Object.entries(t.topic).sort((x, y) => x[1] - y[1]).slice(0, 5).map(([k, n]) => `${k} ${n}`).join(', ')}`);
+    const c = a.pack_categorised;
+    if (c) L.push('', `**Years and difficulties** (\`scripts/tag-years.mjs\`): the model set the year of ${c.yearTagged} of ${c.n} and the difficulty of ${c.diffTagged}; the rest use the fallback guess. Where both exist, the guessed year matches the model's in ${c.yearGuessAgrees}% (within a year in ${c.yearGuessWithinOne}%) and the guessed difficulty in ${c.diffGuessAgrees}%: run the tagger after new questions are written.`);
     L.push('', '## Cues and residual flaws in the duel, by route', '', 'The same checks the pool uses, run over every question the duel can deal, whichever writer made it.', '', '| route | n | key is the longest option | chance | key position | checks firing (share of the route) |', '|---|---|---|---|---|---|');
     for (const [k, c] of Object.entries(a.pack.cues)) L.push(`| ${k} | ${c.n} | ${c.keyLongest}% | ${c.chance}% | ${Object.entries(c.keyAt).sort().map(([p, n]) => `${p} ${n}`).join(', ')} | ${Object.entries(c.checks).slice(0, 4).map(([id, x]) => `${id} ${x.share}%`).join(', ') || 'none'} |`);
     const d = a.pack.duplicates;

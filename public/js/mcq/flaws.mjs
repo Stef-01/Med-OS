@@ -31,7 +31,7 @@ const stemOf = s => String(s ?? '').replace(/ /g, ' ');
 /* the stem's sentences; a number's decimal point, "mm Hg." and "Dr." do not end one */
 export function sentences(s) {
   const t = stemOf(s).replace(/\s+/g, ' ').trim();
-  return t.split(/(?<=[.?!:])\s+(?=[A-Z(“"'])/).map(x => x.trim()).filter(Boolean);
+  return t.replace(/([.?!:])\s+(?=[A-Z(“"'])/g, '$1\u0000').split('\u0000').map(x => x.trim()).filter(Boolean);   /* no lookbehind: Safari before 16.4 cannot parse one */
 }
 /* the lead-in: the item's ask, or the stem's last sentence
    (a question followed by a lab table or "(Round to ...)" still counts: the last sentence that asks one) */

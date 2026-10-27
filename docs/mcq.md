@@ -150,9 +150,12 @@ node scripts/mcq-judge.mjs --close --kind ai,amsa,open-exam   # a second review 
 node scripts/mcq-judge.mjs --bench <quest-ai.jsonl> --out <outside the repo> # the official samples
 node scripts/mcq-evals.mjs [--wrong-key 16] [--retest 40]   # calibration.json, evals.json, docs/mcq-evals.md
 node scripts/mcq-pool.mjs [--why <id>]                   # the pool, status.json, selection.json
+node scripts/tag-years.mjs                               # year (1-4) and difficulty (1-3) of every untagged pack question -> data/mcq/years.json
 npm run duel-pack                                        # the duel's questions from the pool
 node scripts/mcq-audit.mjs                               # the set as a whole -> data/mcq/audit.json, docs/mcq-audit.md
 ```
+
+**Year and difficulty** (2026-10-27): every duel question carries both (`mcq/taxonomy.mjs`); `scripts/tag-years.mjs` asks the model for them, and the pack falls back to `guessYear`/`guessDiff` (`public/js/mcq/year.mjs`) for a question tagged since. The audit measures the fallback against the model: on 2,257 questions the guessed year matched in 68% and was within a year in 99.5%, but the guessed difficulty matched only 45% (chance is 33%), so run the tagger after every generation pass. Before 2026-10-27, 1,472 of the 2,257 had only the guess.
 
 ## In the duel (Pup Duel, `packages/pup-duel/` in Optimus, vendored)
 

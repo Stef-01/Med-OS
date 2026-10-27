@@ -64,7 +64,7 @@ const MANAGE = /\b(manage|management|next step|most appropriate|treat|treatment|
 const DIAG = /\b(diagnos|investigat|test|imaging|interpret|finding|sign|examination|most likely|cause)/i;
 const MECH = /\b(mechanism|pathophysiolog|why does|explains|responsible for|mediat|receptor|enzyme|pathway)/i;
 export function guessYear(q) {
-  const ask = `${q?.ask || ''} ${String(q?.stem || '').split(/(?<=[.?!])\s+/).slice(-1)[0] || ''}`, vignette = /\b\d{1,3}[- ](?:year|month|week|day)[- ]old\b/i.test(q?.stem || '');
+  const ask = `${q?.ask || ''} ${String(q?.stem || '').replace(/([.?!])\s+/g, '$1\u0000').split('\u0000').slice(-1)[0] || ''}`, vignette = /\b\d{1,3}[- ](?:year|month|week|day)[- ]old\b/i.test(q?.stem || '');
   switch (q?.cat) {
     case 'anatomy': return vignette ? 2 : 1;
     case 'physio': return vignette || !MECH.test(ask) ? 2 : 1;
