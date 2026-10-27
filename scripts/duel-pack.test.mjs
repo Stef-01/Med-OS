@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { shortDx, patientLine, stationQuestion, buildPack, poolQuestion, repeatOf, DUEL } from './lib/duel-pack.mjs';
+import { shortDx, patientLine, stationQuestion, buildPack, poolQuestion, repeatOf, groupCases, DUEL } from './lib/duel-pack.mjs';
 import { stationsOnDisk, poolOnDisk, packText, mcqOnDisk, packInputs } from './build-duel-pack.mjs';
 import { stationItems } from './lib/mcq-sources.mjs';
 import { normQuestion } from '../public/js/vendor/pup-duel/duel/pack.mjs';
@@ -179,4 +179,18 @@ test('MedExpQA repeats: the same case with the same answer is dealt once; the sa
   const { pack, dropped } = buildPack({ questions: [] }, { mxq: [a, again, next], mxqCredit: 'MedExpQA' });
   assert.deepEqual(pack.questions.map(q => q.id), ['mxq-1', 'mxq-3']);
   assert.ok(dropped.some(d => d === 'mxq-2: the same question as mxq-1'));
+});
+
+test('questions on one case share a group (its first id), chained; the rest have none', () => {
+  const case1 = 'A 62-year-old man has crushing central chest pain for an hour, sweating and nausea; ECG shows ST elevation in II, III and aVF.';
+  const qs = [{ id: 'b', stem: `${case1} What is the diagnosis?` }, { id: 'a', stem: `${case1} Which artery is most likely occluded?` }, { id: 'c', stem: `${case1} What is the first treatment?` },
+    { id: 'z', stem: 'A 4-year-old girl has a barking cough and stridor at night after two days of coryza. What is the most likely diagnosis?' }];
+  groupCases(qs);
+  assert.deepEqual(qs.map(q => q.group), ['a', 'a', 'a', undefined]);
+});
+
+test('the pack on disk: every group has at least two questions and is named by its first id', () => {
+  const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'duel', 'pack.json'), 'utf8'));
+  const by = {}; for (const q of pack.questions) if (q.group) (by[q.group] ||= []).push(q.id);
+  assert.ok(Object.keys(by).length > 0 && Object.values(by).every(m => m.length >= 2 && m.includes(m.slice().sort()[0])));
 });

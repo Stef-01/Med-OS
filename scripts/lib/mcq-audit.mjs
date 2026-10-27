@@ -90,7 +90,7 @@ export function auditPool(pool, { pack = null, verdicts = {}, funnel = null, tag
   if (pack && tags) out.pack_categorised = categorised(pack.questions || [], tags);
   if (pack) {
     const pq = pack.questions || [], dups = duplicatesOf(pq, routeOf);
-    out.pack = { n: pq.length, bySource: count(pq, q => q.source || q.origin || 'unknown'), byRoute: count(pq, routeOf), ...formatsOf(pq, { fits, readSecs, formats }),
+    out.pack = { n: pq.length, groups: new Set(pq.filter(q => q.group).map(q => q.group)).size, bySource: count(pq, q => q.source || q.origin || 'unknown'), byRoute: count(pq, routeOf), ...formatsOf(pq, { fits, readSecs, formats }),
       taxonomy: taxonomyCounts(pq), uncategorised: pq.filter(q => taxonomyProblems(q).length).map(q => q.id).slice(0, 20),
       cues: cuesOf(pq, routeOf, packItem), duplicates: { n: dups.length, across: dups.filter(d => d.across).length, top: dups.slice(0, 20) } };
   }
@@ -144,7 +144,7 @@ export function auditMarkdown(a, { date = '' } = {}) {
     for (const [k, c] of Object.entries(a.pack.cues)) L.push(`| ${k} | ${c.n} | ${c.keyLongest}% | ${c.chance}% | ${Object.entries(c.keyAt).sort().map(([p, n]) => `${p} ${n}`).join(', ')} | ${Object.entries(c.checks).slice(0, 4).map(([id, x]) => `${id} ${x.share}%`).join(', ') || 'none'} |`);
     L.push('', 'Key position is where the writer put the key; no student sees it there: the duel shuffles every question\'s options and Study moves the key to a place set by the question (`mcq/schema.mjs` `displayOrder`). Length cannot be shuffled away, so the longest-key column is the cue that counts.');
     const d = a.pack.duplicates;
-    L.push('', `Near-duplicate stems in the duel: ${d.n} pair${d.n === 1 ? '' : 's'}, ${d.across} of them across routes (two writers making the same case).`);
+    L.push('', `Near-duplicate stems in the duel: ${d.n} pair${d.n === 1 ? '' : 's'}, ${d.across} of them across routes (two writers making the same case).${a.pack.groups ? ` They share ${a.pack.groups} groups (lib/duel-pack.mjs groupCases), and a duel deals one question of a group unless nothing else is left.` : ''}`);
     for (const x of d.top.slice(0, 10)) L.push(`- ${x.a} and ${x.b}: ${x.overlap}%${x.across ? ` (${x.across.join(' / ')})` : ''}`);
   }
   if (a.funnel) {

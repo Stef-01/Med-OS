@@ -48,6 +48,7 @@ export function normQuestion(q) {
   if (q.origin === 'ai' || q.origin === 'human') out.origin = q.origin;
   const source = text(q.source, LIMITS.source).toLowerCase(); if (/^[a-z0-9-]+$/.test(source)) out.source = source;
   const deck = text(q.deck, LIMITS.deck).toLowerCase(); if (/^[a-z0-9-]+$/.test(deck)) out.deck = deck;
+  const group = text(q.group, LIMITS.id); if (group) out.group = group;   /* questions on one case: a duel deals one of them (core.mjs oneOfEach) */
   if (Number.isInteger(q.year) && q.year >= 1 && q.year <= 4) out.year = q.year;
   if (Number.isInteger(q.difficulty) && q.difficulty >= 1 && q.difficulty <= 3) out.difficulty = q.difficulty;   /* 1 Easy, 2 Medium, 3 Hard, for a student of its year */
   return { q: out, why: '' };

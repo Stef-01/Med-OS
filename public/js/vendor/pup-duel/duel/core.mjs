@@ -70,17 +70,24 @@ function climb(qs, n) {
   const d = q => (Number.isInteger(q.difficulty) ? q.difficulty : 2);
   return out.sort((a, b) => y(a) - y(b) || d(a) - d(b));
 }
+/* one question of a case: questions that share a group (Med-OS: one exam case asked two ways) go to the back after the
+   first, so a duel holds two only when the pool has nothing else to deal */
+export function oneOfEach(list) {
+  const seen = new Set(), first = [], later = [];
+  for (const q of list) { if (q.group && seen.has(q.group)) later.push(q); else { if (q.group) seen.add(q.group); first.push(q); } }
+  return [...first, ...later];
+}
 export function makeSetup(pack, { rounds = RULES.rounds, secs = RULES.secs, topic = '', cat = '', seed = 1, title = '', read = true, ladder = false, deck = '' } = {}) {
   const base = clamp(Math.round(secs) || RULES.secs, RULES.minSecs, RULES.maxSecs);
   const r = rng(seed), pool = (pack?.questions || []).filter(q => (!topic || q.topic === topic || (q.topics || []).includes(topic)) && (!cat || q.cat === cat));
   const want = clamp(Math.floor(rounds) || RULES.rounds, 1, RULES.maxQuestions), shuffled = shuffle(r, pool);
-  const dealt = read ? [...shuffled.filter(q => fits(q, base)), ...shuffled.filter(q => !fits(q, base)).sort((a, b) => readSecs(a) - readSecs(b))] : shuffled;
+  const dealt = oneOfEach(read ? [...shuffled.filter(q => fits(q, base)), ...shuffled.filter(q => !fits(q, base)).sort((a, b) => readSecs(a) - readSecs(b))] : shuffled);
   const picked = ladder ? climb(dealt, want) : dealt.slice(0, want);
   const questions = picked.map(q => {
     const order = shuffle(r, q.options.map((_, i) => i));
     const out = { id: q.id, stem: q.stem, options: order.map(i => q.options[i]), answer: order.indexOf(q.answer) };
     if (read) out.secs = secsFor(q, base);   /* read: false keeps one time for every question */
-    if (q.why) out.why = q.why;
+    if (q.why) { out.why = q.why; if (q.whyBy === 'ai') out.whyBy = 'ai'; }   /* the review says an AI wrote it */
     if (q.notes) out.notes = order.map(i => q.notes[i] ?? null);
     if (q.topic) out.topic = q.topic;
     if (q.cat) { out.cat = q.cat; const l = (pack?.cats || []).find(c => c.id === q.cat)?.label; if (l) out.catLabel = String(l).slice(0, 60); }

@@ -16,7 +16,8 @@
 import { CATS, gate } from './mcq.mjs';
 import { guessYear, isYear, guessDiff, isDiff } from '../../public/js/mcq/year.mjs';
 import { plain } from '../../public/js/study-kit/safe.mjs';
-import { signature, nearDuplicate } from '../../public/js/mcq/flaws.mjs';
+import { signature, nearDuplicate, shingles, containment } from '../../public/js/mcq/flaws.mjs';
+import { DUP_AT } from './mcq-audit.mjs';
 import { storedFor } from './mcq-explain.mjs';
 
 export const LIMITS = { option: 70, minDistractors: 3 }, LONG = 1.8;
@@ -163,6 +164,19 @@ export function poolQuestion(q, byStation = new Map(), kinds = {}, explained = {
    content words are in the other: nearDuplicate's own 0.5 calls "Immature teratoma" and "Mature cystic teratoma" one. */
 export const REPEAT_KEY = 0.6;
 const keyOverlap = (a, b) => { const [x, y] = a.size < b.size ? [a, b] : [b, a]; let n = 0; for (const w of x) if (y.has(w)) n++; return x.size ? n / x.size : 0; };
+/* questions on one case: stems the audit calls near-duplicates (DUP_AT of one's word triples in the other: one exam
+   case asked two ways, or two high-yield questions written on one patient) share a group, its first id, and a duel
+   deals one of them (pup-duel oneOfEach). Linked pairs chain into one group */
+export function groupCases(questions) {
+  const sh = questions.map(q => shingles(q.stem)), up = questions.map((_, i) => i);
+  const root = i => { while (up[i] !== i) i = up[i] = up[up[i]]; return i; };
+  for (let i = 0; i < questions.length; i++) for (let j = i + 1; j < questions.length; j++)
+    if (sh[i].size && sh[j].size && containment(sh[i], sh[j]) >= DUP_AT) { const a = root(i), b = root(j); if (a !== b) up[Math.max(a, b)] = Math.min(a, b); }
+  const members = new Map();
+  questions.forEach((q, i) => (members.get(root(i)) || members.set(root(i), []).get(root(i))).push(q));
+  for (const m of members.values()) if (m.length > 1) { const g = m.map(q => q.id).sort()[0]; for (const q of m) q.group = g; }
+  return questions;
+}
 export function repeatOf(q, kept) {
   const s = signature(q);
   for (const k of kept) if (nearDuplicate(s, k.sig).dup && keyOverlap(s.key, k.sig.key) >= REPEAT_KEY) return k.id;
@@ -202,6 +216,7 @@ export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficult
     questions.push({ id: h.id, stem: h.stem, options: h.options, answer: h.answer, notes: h.notes, why: h.why, topic: h.specialty, cat: h.cat, origin: 'human', source: 'open-exam', hy: 1, year: h.year, difficulty: h.difficulty, credit: mxqCredit });
     mxqN++;
   }
+  groupCases(questions);
   for (const q of questions) { if (q.hy) { delete q.hy; continue; } q.year = isYear(years[q.id]) ? years[q.id] : guessYear(q); q.difficulty = isDiff(difficulty[q.id]) ? difficulty[q.id] : guessDiff(q); }
   const bySource = questions.reduce((m, q) => ((m[q.source] = (m[q.source] || 0) + 1), m), {});
   const origins = new Set(questions.map(q => q.origin));

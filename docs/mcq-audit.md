@@ -43,7 +43,7 @@ The same checks the pool uses, run over every question the duel can deal, whiche
 
 Key position is where the writer put the key; no student sees it there: the duel shuffles every question's options and Study moves the key to a place set by the question (`mcq/schema.mjs` `displayOrder`). Length cannot be shuffled away, so the longest-key column is the cue that counts.
 
-Near-duplicate stems in the duel: 17 pairs, 1 of them across routes (two writers making the same case).
+Near-duplicate stems in the duel: 17 pairs, 1 of them across routes (two writers making the same case). They share 14 groups (lib/duel-pack.mjs groupCases), and a duel deals one question of a group unless nothing else is left.
 - mxq-613 and mxq-615: 85.3%
 - mxq-596 and mxq-619: 85%
 - mxq-339 and mxq-340: 67.9%
