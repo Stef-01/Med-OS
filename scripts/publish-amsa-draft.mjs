@@ -18,10 +18,11 @@ import { shapeProblems, qualityProblems, reviewNotes, bankStats } from './lib/st
 import { ddxFor } from './add-ddx.mjs';
 import { writeIndex } from './build-index.mjs';
 import { claudeAsk } from './lib/ask.mjs';
+import { cli, stationsIn } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public'), DIR = path.join(PUB, 'osce');
 const LEDGER = path.join(ROOT, 'scripts', 'import', 'amsa-ledger.json');
-const argv = process.argv.slice(2), flag = k => argv.includes(k), id = argv.find(a => /^\d+$/.test(a));
+const { argv, flag } = cli(), id = argv.find(a => /^\d+$/.test(a));
 if (!id) { console.error('usage: node scripts/publish-amsa-draft.mjs <amsa resource id> [--accept] [--dry-run]'); process.exit(2); }
 const { ask } = await claudeAsk();
 const F = path.join(ROOT, 'drafts', `amsa-${id}.json`), j = JSON.parse(fs.readFileSync(F, 'utf8'));
@@ -35,7 +36,7 @@ if (!(st.ddx || []).length) {
   if (!flag('--dry-run')) fs.writeFileSync(F, `${JSON.stringify({ ...j, station: st }, null, 1)}\n`);
   console.log(`differentials: ${st.ddx.map(d => `${d.dx} (${d.tier})`).join('; ')}`);
 }
-const bank = fs.readdirSync(DIR).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8')));
+const bank = stationsIn(DIR);
 const { origin, schemaVersion, generatedAt, generator, source, licence, media, ...body } = st;
 const core = { ...body, origin: 'ai' };
 const gates = [...shapeProblems(core), ...qualityProblems(core, bankStats(bank))];

@@ -13,14 +13,14 @@ import { buildPack } from './lib/duel-pack.mjs';
 import { readYears, readDifficulty } from './tag-years.mjs';
 import { readHy } from './generate-hy.mjs';
 import { readMxq, CREDIT } from './import-medexpqa.mjs';
+import { stationsIn } from './lib/disk.mjs';
 
 const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 const OUT = path.join(PUB, 'duel', 'pack.json');
 export const poolOnDisk = (pub = PUB) => JSON.parse(fs.readFileSync(path.join(pub, 'mcq', 'pool.json'), 'utf8'));
 
 export function stationsOnDisk(pub = PUB) {
-  const dir = path.join(pub, 'osce');
-  return fs.readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
+  return stationsIn(path.join(pub, 'osce'));
 }
 export const packText = pack => JSON.stringify(pack, null, 1) + '\n';
 /* the category questions scripts/generate-duel-mcq.mjs wrote: { station: file } */

@@ -18,6 +18,7 @@ import { fileURLToPath } from 'node:url';
 import { CATS, LIMITS, writerChecks } from './lib/mcq.mjs';
 import { YEARS, DIFFICULTY, isYear, isDiff } from '../public/js/mcq/year.mjs';
 import { SPECIALTIES, EXAM_SYSTEM, EXAM_SCHEMA } from './generate-hy.mjs';
+import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const MXQ_FILE = path.join(ROOT, 'data', 'mcq', 'medexpqa.json');
@@ -50,7 +51,7 @@ export function mxqQuestion(q, src) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const argv = process.argv.slice(2), opt = (k, d) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : d; };
+  const { argv, opt } = cli();
   const src = fs.readFileSync(SRC, 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l));
   const store = readMxq(), seen = new Set([...store.map(x => x.id), ...readSkipped()]);
   let todo = src.filter(x => !seen.has(x.id)); if (opt('--limit')) todo = todo.slice(0, +opt('--limit'));

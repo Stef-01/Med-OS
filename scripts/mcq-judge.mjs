@@ -23,6 +23,7 @@ import { judgeItem, verdictFor } from './lib/mcq-judge.mjs';
 import { closeCalls, CLOSE, DEFAULT_BARS } from './lib/mcq-select.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
 import { claudeAsk } from './lib/ask.mjs';
+import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const VERDICTS = path.join(ROOT, 'data', 'mcq', 'verdicts.json');
@@ -43,8 +44,7 @@ export const sample = (items, n) => [...items].sort((a, b) => fnv(`s:${a.id}`).l
 
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const argv = process.argv.slice(2), opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; }, flag = k => argv.includes(k);
-  const list = v => (v ? v.split(',').map(s => s.trim()).filter(Boolean) : []);
+  const { argv, opt, flag, list } = cli();
   let items, out;
   if (opt('--bench')) {
     let rows = readJsonl(path.resolve(opt('--bench')));

@@ -14,6 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { stationQuestion } from './duel-pack.mjs';
 import { cleanItem, fnv, KINDS } from '../../public/js/mcq/schema.mjs';
+import { readJson, readJsonl, stationsIn } from './disk.mjs';
 
 /* the key moved to position (hash of id mod n), the per-option notes moved with it */
 export function spreadKey(q) {
@@ -64,13 +65,12 @@ export function benchmarkItem(r) {
    into the repo. Its real source (copyright FSMB/NBME) is one the pool refuses, so in memory it carries a stand-in */
 export const benchOnlyItem = r => benchmarkItem({ ...r, source: { name: 'benchmark-only item (not shipped)', url: '', licence: 'MIT', retrieved: r.source?.retrieved || '' } });
 
-export const readJsonl = f => (fs.existsSync(f) ? fs.readFileSync(f, 'utf8').split('\n').filter(l => l.trim()).map(l => JSON.parse(l)) : []);
-export const readJson = (f, d) => (fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : d);
+export { readJson, readJsonl };   /* from lib/disk.mjs, where every script reads JSON */
 
 /* every candidate on disk: { items, dropped }. root is the repo root */
 export function allCandidates(root, { stations } = {}) {
   const pub = path.join(root, 'public'), dropped = [], items = [];
-  const st = stations || fs.readdirSync(path.join(pub, 'osce')).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(pub, 'osce', f), 'utf8')));
+  const st = stations || stationsIn(path.join(pub, 'osce'));
   const s = stationItems(st); items.push(...s.items); dropped.push(...s.dropped);
   for (const q of readJson(path.join(root, 'data', 'mcq', 'generated.json'), { items: [] }).items || []) { const c = cleanItem(q); if (c && c.provenance.kind === 'ai') items.push(c); else dropped.push(`${q?.id}: generated item not valid`); }
   const bdir = path.join(root, 'data', 'benchmarks');

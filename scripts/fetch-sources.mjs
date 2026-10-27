@@ -8,9 +8,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { registryProblems, adapt } from './lib/sources.mjs';
+import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const argv = process.argv.slice(2), opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
+const { argv, opt } = cli();
 const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'sources', 'registry.json'), 'utf8'));
 const bad = registryProblems(reg);
 if (bad.length) { console.error(`the registry needs fixing:\n- ${bad.join('\n- ')}`); process.exit(1); }

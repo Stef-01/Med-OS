@@ -20,6 +20,7 @@ import { CATS, LIMITS, writerChecks } from './lib/mcq.mjs';
 import { YEARS, DIFFICULTY, isYear, isDiff } from '../public/js/mcq/year.mjs';
 import { SPECIALTIES } from '../public/js/study-kit/vocab.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
+import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const HY_FILE = path.join(ROOT, 'data', 'mcq', 'high-yield.json');
@@ -66,7 +67,7 @@ export function hyQuestion(q, spec, topic) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const argv = process.argv.slice(2), opt = (k, d) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : d; };
+  const { argv, opt } = cli();
   const topics = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8')), only = opt('--only', '').split(',').filter(Boolean);
   const store = readHy(), done = new Set(store.map(x => `${x.spec}|${x.topic}`));
   let todo = Object.entries(topics).filter(([k]) => !only.length || only.includes(k)).flatMap(([spec, list]) => list.map(topic => ({ spec, topic }))).filter(x => !done.has(`${x.spec}|${x.topic}`));

@@ -34,9 +34,10 @@ import { benchDir } from './import-benchmarks.mjs';
 import { sample } from './mcq-judge.mjs';
 import { claudeAsk } from './lib/ask.mjs';
 import { retestStats, retestFor, retestKey } from './lib/mcq-retest.mjs';
+import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const argv = process.argv.slice(2), opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
+const { argv, opt } = cli();
 const DIR = benchDir(argv);
 const pct = (xs, p) => { const s = [...xs].sort((a, b) => a - b); return s.length ? s[Math.min(s.length - 1, Math.max(0, Math.floor(p * (s.length - 1))))] : null; };
 const mean = xs => (xs.length ? Math.round((xs.reduce((a, b) => a + b, 0) / xs.length) * 10) / 10 : null);

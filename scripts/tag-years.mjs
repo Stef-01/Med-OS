@@ -15,6 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { YEARS, isYear, DIFFICULTY, isDiff } from '../public/js/mcq/year.mjs';
 import { claudeAsk } from './lib/ask.mjs';
+import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const YEARS_FILE = path.join(ROOT, 'data', 'mcq', 'years.json');
@@ -35,7 +36,7 @@ export const SCHEMA = { type: 'object', additionalProperties: false, required: [
 export const brief = q => ({ id: q.id, kind: q.cat || '', stem: String(q.stem).slice(0, 700), options: q.options });
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const argv = process.argv.slice(2), opt = (k, d) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : d; };
+  const { argv, opt } = cli();
   const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'duel', 'pack.json'), 'utf8'));
   const redo = argv.includes('--redo'), years = redo ? {} : readYears(), diff = redo ? {} : readDifficulty();
   const todo = pack.questions.filter(q => !isYear(years[q.id]) || !isDiff(diff[q.id]));

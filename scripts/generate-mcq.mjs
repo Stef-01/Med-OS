@@ -22,11 +22,11 @@ import { stationsOnDisk } from './build-duel-pack.mjs';
 import { fnv } from '../public/js/mcq/schema.mjs';
 import { claudeAsk } from './lib/ask.mjs';
 import { tagOf } from '../public/js/mcq/schema.mjs';
+import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const GENERATED = path.join(ROOT, 'data', 'mcq', 'generated.json');
-const argv = process.argv.slice(2), opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
-const list = v => (v ? v.split(',').map(s => s.trim()).filter(Boolean) : []);
+const { argv, opt, list } = cli();
 
 const stations = stationsOnDisk(path.join(ROOT, 'public')).sort((a, b) => a.id.localeCompare(b.id));
 const bench = readJsonl(path.join(ROOT, 'data', 'benchmarks', 'medqa-us-step2-3.jsonl')).map(benchmarkItem).filter(Boolean);

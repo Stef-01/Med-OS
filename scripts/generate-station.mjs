@@ -21,19 +21,17 @@ import { writeStation, reviseStation } from './lib/generate.mjs';
 import { claudeAsk } from './lib/ask.mjs';
 import { resolveStation } from './imaging/resolve.mjs';
 import { writeIndex } from './build-index.mjs';
+import { cli, stationsIn } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public');
-const argv = process.argv.slice(2);
-const opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
-const flag = k => argv.includes(k);
-const list = v => (v ? v.split(',').map(s => s.trim()).filter(Boolean) : []);
+const { argv, opt, flag, list } = cli();
 const VALUED = ['--specialty', '--type', '--notes', '--revise', '--request', '--rounds'];
 const topic = argv.filter((a, i) => !a.startsWith('--') && !VALUED.includes(argv[i - 1])).join(' ').trim();
 if (opt('--request') != null && !/^r[a-z0-9]{6,24}$/.test(opt('--request'))) { console.error(`--request: "${opt('--request')}" is not a request id`); process.exit(2); }
 if (!topic && !opt('--revise')) { console.error('usage: node scripts/generate-station.mjs "<topic>" [--acute] [--specialty "…"] [--type "…"] [--notes "…"] [--no-imaging] [--dry-run]\n       node scripts/generate-station.mjs --revise <station id>'); process.exit(2); }
 
 const dir = path.join(PUB, 'osce');
-const bank = fs.readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
+const bank = stationsIn(dir);
 const log = m => console.log(m);
 const now = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
 const { ask, api: API } = await claudeAsk();

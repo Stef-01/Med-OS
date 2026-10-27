@@ -20,11 +20,10 @@ import { DDX_RULES, DDX_SCHEMA } from './lib/generate.mjs';
 import { ddxProblems } from './lib/station-gates.mjs';
 import { writeIndex } from './build-index.mjs';
 import { claudeAsk } from './lib/ask.mjs';
+import { cli, list, stationFiles } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public'), DIR = path.join(PUB, 'osce');
-const argv = process.argv.slice(2);
-const opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
-const flag = k => argv.includes(k);
+const { argv, opt, flag } = cli();
 
 export const SCHEMA = { type: 'object', additionalProperties: false, required: ['ddx'], properties: { ddx: DDX_SCHEMA } };
 export const SYSTEM = `You are a senior Australian OSCE examiner and practising clinician. For an existing station, list the reasonable differentials the examiner should credit. Change nothing else: the diagnosis, the results and the expected answers stay as they are, and your list must agree with them (the leading diagnosis is the station's diagnosis; every differential in the expected answer to the differentials question appears).
@@ -50,10 +49,10 @@ export async function ddxFor(st, ask, log = () => {}) {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { ask } = await claudeAsk();
-  const file = opt('--file'), only = (opt('--only') || '').split(',').map(s => s.trim()).filter(Boolean);
+  const file = opt('--file'), only = list(opt('--only'));
   const targets = file
     ? [{ path: path.resolve(file), wrap: true }]
-    : fs.readdirSync(DIR).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => ({ path: path.join(DIR, f) }));
+    : stationFiles(DIR).map(f => ({ path: path.join(DIR, f) }));
   const todo = targets.map(t => { const j = JSON.parse(fs.readFileSync(t.path, 'utf8')); return { ...t, j, st: j.station || j }; })
     .filter(t => file || (only.length ? only.includes(t.st.id) : !(t.st.ddx || []).length));
   const WORKERS = Math.max(1, Number(opt('--workers') || 1));

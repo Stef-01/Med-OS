@@ -28,13 +28,14 @@ import { fileURLToPath } from 'node:url';
 import { REQ_SETTINGS, REQ_PATIENTS, REQ_STATUS, requestBrief, requestArgs, requestsFrom, requestState } from '../public/js/osce/requests.mjs';
 import { KINDS } from '../public/js/osce/core.mjs';
 import { projectFrom, remoteRequests, putRemote, inboxRequests, putInbox, mergeQueues, answer } from './lib/requests-store.mjs';
+import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public');
 const INBOX = process.env.OSCE_REQUESTS_DIR || path.join(ROOT, 'requests');
 const project = projectFrom(process.env, fs.existsSync(path.join(PUB, 'config.js')) ? fs.readFileSync(path.join(PUB, 'config.js'), 'utf8') : '');
 const argv = process.argv.slice(2), VALUED = ['--rounds'], flags = argv.filter(a => a.startsWith('--'));
 const [cmd = 'list', ...args] = argv.filter((a, i) => !a.startsWith('--') && !VALUED.includes(argv[i - 1]));
-const opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
+const { opt } = cli(argv);
 const fail = m => { console.error(m); process.exit(2); };
 
 const bankRows = () => { try { return JSON.parse(fs.readFileSync(path.join(PUB, 'osce', 'index.json'), 'utf8')).stations || []; } catch { return []; } };

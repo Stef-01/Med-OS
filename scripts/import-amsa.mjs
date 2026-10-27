@@ -27,13 +27,12 @@ import { fileURLToPath } from 'node:url';
 import { writeStation } from './lib/generate.mjs';
 import { writeIndex } from './build-index.mjs';
 import { claudeAsk } from './lib/ask.mjs';
+import { cli, list, stationsIn } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public');
 const IMPORT = path.join(ROOT, 'scripts', 'import'), RAW = path.join(IMPORT, 'amsa-raw'), LEDGER = path.join(IMPORT, 'amsa-ledger.json');
-const argv = process.argv.slice(2);
-const opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
-const flag = k => argv.includes(k);
-const LIMIT = Number(opt('--limit') || Infinity), PAUSE = Number(opt('--pause') ?? 30) * 1000, ONLY = (opt('--only') || '').split(',').map(s => s.trim()).filter(Boolean).map(Number);
+const { argv, opt, flag } = cli();
+const LIMIT = Number(opt('--limit') || Infinity), PAUSE = Number(opt('--pause') ?? 30) * 1000, ONLY = list(opt('--only')).map(Number);
 const log = m => console.log(m);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const stamp = () => new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
@@ -85,7 +84,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { ask, name } = await claudeAsk();
   log(`Claude via ${name}`);
   const dir = path.join(PUB, 'osce');
-  const bank = () => fs.readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
+  const bank = () => stationsIn(dir);
   const ledger = readLedger();
   /* what is left: raw cases with no station yet, not failed (unless --retry), not taken by another worker */
   const claimed = new Set();

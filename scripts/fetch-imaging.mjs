@@ -19,13 +19,14 @@ import { fileURLToPath } from 'node:url';
 import { resolveStation, planImaging, pending } from './imaging/resolve.mjs';
 import { stagedCandidates, sessionVerify, readVerdicts } from './imaging/staged.mjs';
 import { writeIndex } from './build-index.mjs';
+import { cli, stationFiles } from './lib/disk.mjs';
 
 const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
-const args = process.argv.slice(2), flag = f => args.includes(f), opt = f => (args.includes(f) ? args[args.indexOf(f) + 1] : '');
+const { argv: args, flag, opt: optOr } = cli(), opt = f => optOr(f, '');
 const stage = opt('--staged'), verdictFile = opt('--verdicts') || (stage && path.join(stage, 'verdicts.json'));
 const valued = new Set([stage, opt('--verdicts')].filter(Boolean));
 const staged = stage ? { staged: (sid, rid) => stagedCandidates(stage, sid, rid), verify: sessionVerify(readVerdicts(verdictFile)) } : {};
-const ids = flag('--all') ? fs.readdirSync(path.join(PUB, 'osce')).filter(f => f.endsWith('.json') && f !== 'index.json').map(f => f.slice(0, -5)) : args.filter(a => !a.startsWith('--') && !valued.has(a));
+const ids = flag('--all') ? stationFiles(path.join(PUB, 'osce')).map(f => f.slice(0, -5)) : args.filter(a => !a.startsWith('--') && !valued.has(a));
 if (!ids.length) { console.error('usage: node scripts/fetch-imaging.mjs <station id …> | --all  [--plan] [--refresh] [--dry-run]'); process.exit(2); }
 
 let resolved = 0, missed = 0;

@@ -19,11 +19,10 @@ import { WRITER_SYSTEM } from './lib/generate.mjs';
 import { askProblems, shapeProblems } from './lib/station-gates.mjs';
 import { writeIndex } from './build-index.mjs';
 import { claudeAsk } from './lib/ask.mjs';
+import { cli, list } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..'), PUB = path.join(ROOT, 'public'), DIR = path.join(PUB, 'osce');
-const argv = process.argv.slice(2);
-const opt = k => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : undefined; };
-const flag = k => argv.includes(k);
+const { argv, opt, flag } = cli();
 
 /* the house rules for the questions, taken from the writer's own prompt so the two never drift apart */
 export const ASK_RULES = (() => { const s = WRITER_SYSTEM, a = s.indexOf('ask is 3 or 4'), b = s.indexOf('\n- check:'); return a >= 0 && b > a ? s.slice(a, b).trim() : ''; })();
@@ -43,7 +42,7 @@ export const needsRewrite = st => askProblems(st.part2 || {}).length > 0;
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { ask } = await claudeAsk();
   if (!ASK_RULES) { console.error('could not find the ask rules in WRITER_SYSTEM'); process.exit(2); }
-  const only = (opt('--only') || '').split(',').map(s => s.trim()).filter(Boolean);
+  const only = list(opt('--only'));
   const files = fs.readdirSync(DIR).filter(f => f.endsWith('.json') && f !== 'index.json');
   const todo = files.map(f => JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8')))
     .filter(st => (only.length ? only.includes(st.id) : needsRewrite(st)) && st.part2 && (st.part2.handover || []).length);
