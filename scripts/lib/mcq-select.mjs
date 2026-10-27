@@ -25,7 +25,7 @@ import { flawReport, signature, nearDuplicate, positionBalance, EVAL_VERSION } f
 import { verdictFor, judgeScore, judgeGates, solved, JUDGE_VERSION } from './mcq-judge.mjs';
 
 export const PRIORITY = Object.freeze(['user', 'usmle-resource', 'open-exam', 'amsa', 'ai']);
-export const QUOTA = Object.freeze({ 'usmle-resource': 160, 'open-exam': 120, amsa: 110, ai: 110, 'ai-rapid': 200 });   /* ai-rapid 80 -> 200 (2026-10-26): the first 80 filled it with 25 more passing, and 10 a topic in each of 44 topics needs more short questions than the bank's 662 */
+export const QUOTA = Object.freeze({ 'usmle-resource': 160, 'open-exam': 120, amsa: 110, ai: 110, 'ai-rapid': 260 });   /* ai-rapid 80 -> 200 (2026-10-26): the first 80 filled it with 25 more passing, and 10 a topic in each of 44 topics needs more short questions than the bank's 662. 200 -> 260 (2026-10-27): full again with 35 passing on reserve, 15 of them in topics too thin to deal a Rapid duel; at 260 the thin topics at 15 s go from 14 to 8. A topic floor inside the quota was tried and changed nothing (it only reshuffles a full quota) */
 /* the quota a question counts against: AI-written questions in the Rapid form (tag form:rapid, for the duel's 15 s
    format) have their own, so short questions and vignettes do not crowd each other out */
 export const quotaOf = a => (a.kind === 'ai' && Array.isArray(a.q?.tags) && a.q.tags.includes('form:rapid') ? 'ai-rapid' : a.kind);

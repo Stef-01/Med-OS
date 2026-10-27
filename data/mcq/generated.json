@@ -657,6 +657,56 @@
    }
   },
   {
+   "id": "ai-mcq-073e74ad",
+   "stem": "A 34-year-old man ran a petrol generator inside a closed shed and was found unconscious. After oxygen therapy he is now alert with normal neurological examination and carboxyhaemoglobin 4%.",
+   "ask": "Which complication is he most at risk of?",
+   "options": [
+    "Delayed neurological sequelae",
+    "Pulmonary fibrosis",
+    "Peripheral neuropathy",
+    "Posterior subcapsular cataracts",
+    "Chronic kidney disease"
+   ],
+   "answer": 0,
+   "explanation": "After significant carbon monoxide poisoning, especially with loss of consciousness, delayed neurological sequelae can appear days to weeks after apparent recovery. They include memory loss, cognitive and personality change, and parkinsonism. He should be counselled about these symptoms and arranged neurocognitive follow-up, even though he is well at discharge.",
+   "why": [
+    null,
+    "Pulmonary fibrosis follows paraquat or chronic dust exposure, not carbon monoxide poisoning.",
+    "Peripheral neuropathy is a feature of chronic lead, arsenic or solvent exposure, not a typical result of acute carbon monoxide poisoning.",
+    "Posterior subcapsular cataracts are linked to radiation, corticosteroids or electrical injury, not to carbon monoxide.",
+    "Acute kidney injury can occur from rhabdomyolysis during the event, but chronic kidney disease is not the expected long-term risk in a patient who has recovered."
+   ],
+   "topic": "Occupational/Environmental Medicine",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:occupational-environmental-medicin",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Occupational/Environmental Medicine (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:28.119Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-occupational-environmental-medicine-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0438",
+      "medqa-us4-test-0558",
+      "medqa-us4-test-0179"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-07b1ffe1",
    "stem": "A 29-year-old man has two days of sharp chest pain eased by sitting forward, following a cold. ECG shows diffuse concave ST elevation with PR depression; troponin is normal. Ibuprofen is started.",
    "ask": "Which added drug most reduces recurrence?",
@@ -1717,6 +1767,56 @@
    }
   },
   {
+   "id": "ai-mcq-151af53c",
+   "stem": "A 79-year-old woman admitted with cellulitis refuses intravenous antibiotics. She is drowsy, with fluctuating attention and no focal neurological signs. She recently started hydrochlorothiazide alongside her usual sertraline.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "CT brain",
+    "Mini-Mental State Examination",
+    "Electroencephalogram",
+    "Urine microscopy",
+    "Serum sodium"
+   ],
+   "answer": 4,
+   "explanation": "Fluctuating attention and drowsiness suggest delirium, which may be impairing her capacity to refuse treatment. A thiazide combined with an SSRI is a classic cause of hyponatraemia. Checking serum sodium looks for a reversible cause, because capacity should be optimised and reassessed rather than her refusal simply being accepted or overridden.",
+   "why": [
+    "With no focal signs and an obvious metabolic cause from her medications, brain imaging is not the first investigation.",
+    "A cognitive screening score cannot identify the cause of delirium and does not decide capacity for a particular decision.",
+    "An EEG is for suspected non-convulsive seizures and is not a first-line test for delirium with a clear metabolic cause.",
+    "Her infection is already known to be cellulitis, and the drug history points to hyponatraemia rather than a urinary infection.",
+    null
+   ],
+   "topic": "Bioethics",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:bioethics",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Bioethics (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:14.745Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-bioethics-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0948",
+      "medqa-us4-test-0486",
+      "medqa-us4-test-0457"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-1700aeb5",
    "stem": "A 31-year-old man attends a sexual health clinic for a routine screen after condomless sex with casual partners. He is well. His fourth-generation HIV antigen/antibody immunoassay is reactive.",
    "ask": "Most appropriate next investigation?",
@@ -2717,6 +2817,56 @@
       "medqa-us4-test-0843",
       "medqa-us4-test-0374",
       "medqa-us4-test-1237"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-2514decc",
+   "stem": "A 34-year-old man who drives a delivery van has had a first unprovoked generalised tonic-clonic seizure. CT brain and electrolytes are normal. He asks that his employer not be told.",
+   "ask": "Most important counselling point?",
+   "options": [
+    "Avoid sleep deprivation",
+    "Avoid swimming unsupervised",
+    "Cease driving immediately",
+    "Inform his employer",
+    "Start lifelong antiepileptics"
+   ],
+   "answer": 2,
+   "explanation": "The biggest risk after a seizure is a crash that harms him and the public. Under the Austroads Assessing Fitness to Drive standards, he must stop driving and tell the licensing authority himself, and a commercial driver faces a longer stand-down. You keep his confidence with his employer. If he keeps driving anyway, you may notify the authority, and in some states you must.",
+   "why": [
+    "Sleep deprivation is a sensible trigger to avoid, but it matters much less than the risk of a crash.",
+    "Not swimming alone is reasonable safety advice, but it mainly protects him, and the danger to the public from driving comes first.",
+    null,
+    "His employer has no right to his health information without his consent, and keeping him safe on the road is handled through the licensing authority.",
+    "Medicine is not usually started after one unprovoked seizure with normal tests, and it would never be lifelong from the start."
+   ],
+   "topic": "Bioethics",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:bioethics",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Bioethics (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:19:12.264Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-bioethics-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1004",
+      "medqa-us4-test-0540",
+      "medqa-us4-test-0200"
      ],
      "model": "claude-opus-5-5"
     }
@@ -3782,6 +3932,56 @@
    }
   },
   {
+   "id": "ai-mcq-357431c1",
+   "stem": "A 23-year-old woman, a final-year medical student on neonatal placement, learns that a patient she examined yesterday has chickenpox. She is well, cannot recall past infection and has no vaccination record.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Varicella IgG serology",
+    "Varicella IgM serology",
+    "Nasopharyngeal swab PCR",
+    "Full blood count",
+    "Chest X-ray"
+   ],
+   "answer": 0,
+   "explanation": "A healthcare worker exposed to varicella who has no reliable history of infection or vaccination needs urgent varicella-zoster IgG serology to check immunity. If she is non-immune, she should be offered post-exposure vaccination and kept away from patient contact during the incubation period (about days 10 to 21), so she does not infect vulnerable neonates. Under the Australian Immunisation Handbook, this is her professional duty to protect patients.",
+   "why": [
+    null,
+    "IgM marks recent or current infection and says nothing reliable about long-term immunity in a well person exposed one day ago.",
+    "A PCR swab detects active infection in someone with symptoms or lesions, and she is well with no rash.",
+    "A full blood count gives no information about varicella immunity or infection risk.",
+    "A chest X-ray looks for varicella pneumonia in an unwell patient and has no role in a well, exposed contact."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:03.766Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0733",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0158"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-35f5c887",
    "stem": "A 67-year-old man comes to the emergency department with 3 days of worsening breathlessness. He now sleeps on three pillows instead of one, wakes at night gasping, and has swollen ankles. He has gained 4 kg. He has heart failure with reduced ejection fraction, atrial fibrillation and gout. His medicines are furosemide 40 mg daily, candesartan 16 mg daily (dose unchanged for 2 years), bisoprolol 5 mg daily and rivaroxaban 20 mg daily. Five days ago he started over-the-counter ibuprofen 400 mg three times daily for a painful left big toe. Temperature is 36.8 °C, pulse 108/min and irregular, blood pressure 144/86 mm Hg, respiratory rate 26/min and SpO2 91% on room air. His peripheries are warm. He has a raised JVP, bibasal crackles and pitting oedema to the shins, and no rash. Investigations show: sodium 134 mmol/L (135–145), potassium 4.9 mmol/L (3.5–5.2), urea 12.4 mmol/L (2.5–8.0), creatinine 132 µmol/L (60–110; 86 µmol/L eight months ago), eosinophils 0.2 x10^9/L (less than 0.5). Urinalysis shows no blood, protein or leucocytes.",
    "ask": "Which of the following is the most likely mechanism of the change in his renal function?",
@@ -4739,6 +4939,56 @@
    }
   },
   {
+   "id": "ai-mcq-42875c3e",
+   "stem": "A 10-year-old Aboriginal boy from a remote Kimberley community has acute rheumatic fever with migratory polyarthritis and an ASO titre of 800 IU/mL. Echocardiography shows no carditis.",
+   "ask": "Secondary prophylaxis mainly prevents which complication?",
+   "options": [
+    "Infective endocarditis",
+    "Post-streptococcal glomerulonephritis",
+    "Jaccoud arthropathy",
+    "Rheumatic heart disease",
+    "Dilated cardiomyopathy"
+   ],
+   "answer": 3,
+   "explanation": "Each new group A streptococcal infection can trigger acute rheumatic fever again, and each episode adds valve damage. Under the Australian ARF/RHD guideline, monthly IM benzathine benzylpenicillin for at least 10 years is given to prevent recurrences and the chronic rheumatic heart disease they cause. This matters even when there is no carditis at first presentation.",
+   "why": [
+    "Endocarditis is a risk once there is established valve disease, and it is managed with dental care and antibiotic prophylaxis before procedures, not monthly penicillin.",
+    "Glomerulonephritis is a separate post-streptococcal illness (often after skin infection) that is not prevented by ARF secondary prophylaxis.",
+    "Arthritis in acute rheumatic fever goes away without lasting joint damage, and Jaccoud arthropathy is rare, so it is not what prophylaxis targets.",
+    null,
+    "Rheumatic carditis mainly damages the valves rather than causing dilated cardiomyopathy, so this is not the main outcome prevented."
+   ],
+   "topic": "Indigenous Health",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:indigenous-health",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Indigenous Health (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:38.842Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-indigenous-health-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0660",
+      "medqa-us4-test-0890",
+      "medqa-us4-test-1193"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-42dc15b2",
    "stem": "A 77-year-old man sees his general practitioner to review results. For 6 months he has had increasing breathlessness on exertion and central chest tightness when climbing stairs, which settles with rest. Last week he nearly fainted while walking uphill. He has hypertension and hypercholesterolaemia and takes irbesartan 150 mg daily. His blood pressure is 132/76 mm Hg, pulse is 76/min and regular, respirations are 18/min, and oxygen saturation is 96% on room air. The carotid pulse is slow rising. There is a harsh ejection systolic murmur at the right second intercostal space that radiates to both carotids, with a soft second heart sound. Fine crackles are heard at both lung bases, and there is no peripheral oedema. A transthoracic echocardiogram shows a heavily calcified trileaflet aortic valve, peak velocity 4.5 m/s, mean gradient 50 mm Hg, valve area 0.7 cm², concentric left ventricular hypertrophy and an ejection fraction of 62%. He has been referred urgently to cardiology for heart team assessment. He asks for something to relieve his chest tightness while he waits.",
    "ask": "Which of the following medicines is most likely to cause a serious adverse event in this patient before his valve is replaced?",
@@ -5292,6 +5542,56 @@
    }
   },
   {
+   "id": "ai-mcq-486ae70d",
+   "stem": "A 64-year-old man with small cell lung cancer has two weeks of facial swelling, morning headache worse on bending forward, and dilated veins over his upper chest wall.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Contrast CT chest",
+    "Chest X-ray",
+    "Transthoracic echocardiogram",
+    "Neck venous duplex",
+    "MRI brain"
+   ],
+   "answer": 0,
+   "explanation": "Facial swelling, headache that gets worse on bending and dilated chest wall veins in a patient with lung cancer point to superior vena cava obstruction (SVCO). Contrast-enhanced CT of the chest confirms it by showing where the obstruction is and what is causing it: tumour compression or clot. The CT also guides the next steps: stenting, radiotherapy or chemotherapy, and anticoagulation if there is thrombus.",
+   "why": [
+    null,
+    "A chest X-ray may show a widened mediastinum or a mass, but it cannot show or exclude obstruction of the vein, so it does not confirm SVCO.",
+    "An echocardiogram looks for pericardial effusion or tamponade, which raises the JVP but does not cause facial swelling and chest wall collateral veins.",
+    "Duplex ultrasound of the neck shows the jugular and subclavian veins but cannot properly see the vena cava inside the chest, where the blockage is.",
+    "Brain metastases can cause morning headache but do not explain the facial swelling and dilated chest wall veins that show the venous outflow is blocked."
+   ],
+   "topic": "Palliative Care",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:palliative-care",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Palliative Care (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:37.109Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-palliative-care-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0934",
+      "medqa-us4-test-0464"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-491500a6",
    "stem": "A 46-year-old Aboriginal woman from a remote Kimberley community is about to start high-dose prednisolone for lupus nephritis. Her eosinophil count is 1.4 × 10^9/L (normal <0.5).",
    "ask": "Most appropriate next investigation?",
@@ -5640,6 +5940,56 @@
       "medqa-us4-test-1245",
       "medqa-us4-test-0682",
       "medqa-us4-test-0392"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-4deb595c",
+   "stem": "A 28-year-old man with a painless penile ulcer has reactive treponemal serology, RPR titre 1:64. He asks that nobody, including his partner, be told.",
+   "ask": "What does this result require?",
+   "options": [
+    "Tell his partner directly",
+    "Notify public health",
+    "Keep result fully confidential",
+    "Repeat serology first",
+    "Obtain written consent first"
+   ],
+   "answer": 1,
+   "explanation": "A reactive treponemal test with a high RPR titre and a chancre confirms active infectious syphilis. Syphilis is a notifiable condition in every Australian state and territory, so the doctor must notify public health by law, whatever the patient wants. He should still be encouraged and supported to notify his partner himself.",
+   "why": [
+    "Partner notification should first be led by the patient, with support from the doctor or a public health contact tracer; telling the partner directly without his consent is not the first step.",
+    null,
+    "Confidentiality is not absolute, and the law requiring notification overrides his request.",
+    "A reactive treponemal test plus an RPR of 1:64 with a typical ulcer already confirms active infection, so waiting for a repeat test only delays notification and treatment.",
+    "Notification is required by law whether or not the patient agrees, so asking for his written consent does not apply."
+   ],
+   "topic": "Bioethics",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:bioethics",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Bioethics (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:51.838Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-bioethics-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0948",
+      "medqa-us4-test-0486",
+      "medqa-us4-test-0457"
      ],
      "model": "claude-opus-5-5"
     }
@@ -6146,6 +6496,56 @@
       "medqa-us4-test-0964",
       "medqa-us4-test-0459",
       "medqa-us4-test-0657"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-52eba043",
+   "stem": "A 24-year-old man has an emergency splenectomy for a shattered spleen after a motorcycle crash. He recovers well and is planned for discharge on day five.",
+   "ask": "Which lifelong risk is most important to counsel about?",
+   "options": [
+    "Pancreatic fistula",
+    "Portal vein thrombosis",
+    "Overwhelming sepsis",
+    "Subphrenic abscess",
+    "Incisional hernia"
+   ],
+   "answer": 2,
+   "explanation": "After splenectomy, patients carry a lifelong risk of overwhelming post-splenectomy infection, usually from encapsulated bacteria (pneumococcus, meningococcus, Haemophilus influenzae type b), and it can kill within hours. Australian guidance (eTG, Spleen Australia) covers vaccination, ideally about 14 days after an emergency splenectomy, prophylactic or standby antibiotics, and telling the patient to seek urgent care for any fever.",
+   "why": [
+    "A pancreatic tail injury can cause a fistula, but this happens early after surgery and is not a lifelong risk.",
+    "Portal or splenic vein thrombosis is an early complication, mainly after elective splenectomy for blood disorders with a high platelet count.",
+    null,
+    "A subphrenic abscess is an early complication that appears within weeks of surgery, not a risk that lasts for life.",
+    "An incisional hernia is a common long-term problem after laparotomy, but it is far less dangerous than post-splenectomy sepsis."
+   ],
+   "topic": "Trauma Surgery",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:trauma-surgery",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Trauma Surgery (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:01.725Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-trauma-surgery-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0063",
+      "medqa-us4-test-0865",
+      "medqa-us4-test-0352"
      ],
      "model": "claude-opus-5-5"
     }
@@ -7510,6 +7910,106 @@
    }
   },
   {
+   "id": "ai-mcq-65b928b3",
+   "stem": "A 3-week-old boy has had four days of projectile non-bilious vomiting after feeds and has lost weight. Venous gas: pH 7.52, bicarbonate 34 mmol/L, chloride 88 mmol/L, potassium 3.1 mmol/L.",
+   "ask": "Most likely diagnosis?",
+   "options": [
+    "Congenital adrenal hyperplasia",
+    "Pyloric stenosis",
+    "Malrotation with volvulus",
+    "Gastro-oesophageal reflux",
+    "Cow's milk protein allergy"
+   ],
+   "answer": 1,
+   "explanation": "The gas shows a hypochloraemic, hypokalaemic metabolic alkalosis, caused by repeated loss of gastric acid from projectile non-bilious vomiting. In a 3-week-old boy this points to pyloric stenosis. Confirm it with pyloric ultrasound, and correct fluids and electrolytes before pyloromyotomy.",
+   "why": [
+    "A salt-wasting crisis in congenital adrenal hyperplasia causes hyponatraemia, hyperkalaemia and metabolic acidosis, not a hypokalaemic alkalosis.",
+    null,
+    "Malrotation with volvulus causes bilious vomiting and, if bowel becomes ischaemic, metabolic acidosis, so neither the history nor the gas fits.",
+    "Reflux causes effortless small vomits in a baby who is thriving and does not upset the acid-base balance.",
+    "Cow's milk protein allergy usually causes blood-streaked stools, eczema or irritability, not projectile vomiting with a marked metabolic alkalosis."
+   ],
+   "topic": "Neonatology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:neonatology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Neonatology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:54.047Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-neonatology-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1039",
+      "medqa-us4-test-0271",
+      "medqa-us4-test-0361"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-65df9dcf",
+   "stem": "A 19-year-old man is about to start work at a cattle and sheep abattoir in rural Queensland. He is well and has had only the routine childhood vaccines.",
+   "ask": "Which vaccine is most important before he starts?",
+   "options": [
+    "Rabies vaccine",
+    "BCG vaccine",
+    "Q fever vaccine",
+    "Hepatitis A vaccine",
+    "Typhoid vaccine"
+   ],
+   "answer": 2,
+   "explanation": "Abattoir workers are at high risk of Q fever (Coxiella burnetii), which they catch by breathing in material from cattle, sheep and goats. It can cause acute febrile illness, endocarditis and chronic fatigue. The Australian Immunisation Handbook recommends Q fever vaccination for these workers, after a skin test and serology to exclude past exposure, ideally before they start work.",
+   "why": [
+    "Rabies vaccine (for Australian bat lyssavirus) is for people who handle bats, not for livestock abattoir workers.",
+    "Bovine tuberculosis has been eradicated in Australia, and BCG is not recommended for abattoir work.",
+    null,
+    "Hepatitis A vaccine is recommended for jobs such as sewage work and childcare, not for livestock slaughter.",
+    "Typhoid vaccine is for travellers to endemic areas and laboratory staff, not for abattoir workers."
+   ],
+   "topic": "Occupational/Environmental Medicine",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:occupational-environmental-medicin",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Occupational/Environmental Medicine (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:21.398Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-occupational-environmental-medicine-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0438",
+      "medqa-us4-test-0558",
+      "medqa-us4-test-0764"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-666bb226",
    "stem": "A 71-year-old man, a retired plumber exposed to asbestos, has four months of cough, shoulder pain, hoarseness and 7 kg weight loss. Chest X-ray shows a 5 cm right apical mass.",
    "ask": "Most appropriate next investigation?",
@@ -7657,6 +8157,56 @@
       "medqa-us4-test-0754",
       "medqa-us4-test-0936",
       "medqa-us4-test-1054"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-68119778",
+   "stem": "A 26-year-old woman presents after her partner manually strangled her last night until she briefly lost consciousness. She has neck bruising and facial petechiae; neurological examination is normal.",
+   "ask": "Which delayed complication is most important to exclude?",
+   "options": [
+    "Hyoid bone fracture",
+    "Cervical spine fracture",
+    "Laryngeal cartilage fracture",
+    "Vocal cord palsy",
+    "Carotid artery dissection"
+   ],
+   "answer": 4,
+   "explanation": "Non-fatal strangulation with loss of consciousness is high risk. Carotid or vertebral artery dissection can be silent at first and cause a stroke hours to days later, so she needs CT angiography of the neck vessels. She also needs careful forensic documentation and a family violence risk assessment, because strangulation strongly predicts later homicide.",
+   "why": [
+    "Hyoid fracture is uncommon in survivors, is mainly a forensic finding, and rarely causes a delayed life-threatening problem.",
+    "Manual compression of the neck does not usually break the spine, and she has no mechanism of axial loading or acceleration.",
+    "Laryngeal fracture shows up straight away with hoarseness, stridor or crepitus, not as a silent delayed problem.",
+    "Vocal cord palsy would cause hoarseness and is not the dangerous or delayed threat to her life.",
+    null
+   ],
+   "topic": "Medicolegal",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:medicolegal",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Medicolegal (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:39.301Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-medicolegal-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0084",
+      "medqa-us4-test-1252",
+      "medqa-us4-test-1232"
      ],
      "model": "claude-opus-5-5"
     }
@@ -9625,6 +10175,56 @@
    }
   },
   {
+   "id": "ai-mcq-81f94566",
+   "stem": "A 62-year-old woman with active rheumatoid arthritis has haemoglobin 98 g/L and MCV 84 fL. Iron studies: low iron, low transferrin, transferrin saturation 12%, ferritin 420 µg/L.",
+   "ask": "Most likely cause of anaemia?",
+   "options": [
+    "Iron deficiency anaemia",
+    "Beta thalassaemia trait",
+    "Sideroblastic anaemia",
+    "Anaemia of inflammation",
+    "Folate deficiency anaemia"
+   ],
+   "answer": 3,
+   "explanation": "Her anaemia is normocytic, with low serum iron and low transferrin saturation, but transferrin is low and ferritin is high. In active inflammatory disease, this pattern points to anaemia of inflammation (anaemia of chronic disease). Hepcidin traps iron in macrophages, and ferritin rises because it is an acute-phase reactant.",
+   "why": [
+    "In iron deficiency, transferrin is high and ferritin is low (under about 30 µg/L), so these results argue against it, although inflammation can raise ferritin and hide a coexisting deficiency.",
+    "Beta thalassaemia trait causes marked microcytosis with normal iron studies, not a normal MCV with low iron and low transferrin.",
+    "Sideroblastic anaemia causes iron overload with high serum iron and high transferrin saturation, not low saturation.",
+    null,
+    "Folate deficiency (for example from methotrexate) causes a macrocytic anaemia and does not explain the abnormal iron studies."
+   ],
+   "topic": "Pathology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:pathology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Pathology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:41.211Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-pathology-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0471",
+      "medqa-us4-test-0822",
+      "medqa-us4-test-1212"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-8251d682",
    "stem": "A 42-year-old man who strips old paint from heritage homes has 3 weeks of colicky abdominal pain, constipation and fatigue. Haemoglobin is 104 g/L with basophilic stippling on the film.",
    "ask": "Which test best confirms the diagnosis?",
@@ -9821,6 +10421,56 @@
       "medqa-us4-test-0905",
       "medqa-us4-test-0714",
       "medqa-us4-test-0164"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-8625be8a",
+   "stem": "An 82-year-old man with severe COPD is unconscious with hypercapnic respiratory failure. His recent, valid advance care directive refuses intubation for this scenario. His daughter, his substitute decision-maker, demands intubation.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Honour the directive",
+    "Intubate as requested",
+    "Apply to tribunal",
+    "Intubate pending review",
+    "Request ethics consultation"
+   ],
+   "answer": 0,
+   "explanation": "Under Australian common law and state legislation, a valid advance care directive refusal made by a competent adult that applies to the situation is legally binding. A substitute decision-maker cannot override it. Withhold intubation and give comfort-focused care, while explaining the decision to the daughter with compassion.",
+   "why": [
+    null,
+    "A substitute decision-maker cannot override the patient's own valid, applicable refusal, and intubating him would be battery.",
+    "A tribunal is needed when a directive's validity or applicability is in real doubt, which is not the case here.",
+    "Intubating against a valid, applicable refusal is unlawful even as a holding measure.",
+    "An ethics consultation is not needed to follow a clear, binding directive, and the delay would not change what the law requires."
+   ],
+   "topic": "Bioethics",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:bioethics",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Bioethics (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:03.585Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-bioethics-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0948",
+      "medqa-us4-test-0486",
+      "medqa-us4-test-0457"
      ],
      "model": "claude-opus-5-5"
     }
@@ -10684,6 +11334,56 @@
    }
   },
   {
+   "id": "ai-mcq-97741b84",
+   "stem": "A 52-year-old woman is anaesthetised for laparoscopy. Her consent form does not mention students. The registrar asks the medical student to perform a pelvic examination.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Examine under registrar supervision",
+    "Decline the examination",
+    "Examine, then inform her",
+    "Seek husband's verbal consent",
+    "Report registrar to Ahpra"
+   ],
+   "answer": 1,
+   "explanation": "An intimate examination of an anaesthetised patient for teaching needs her prior, specific and informed consent, so without it the student should politely decline. If needed, the student can raise the concern later with a supervisor or placement coordinator. Supervision, telling her afterwards or asking a relative cannot replace her own consent.",
+   "why": [
+    "Supervision makes sure the examination is done competently, but it does not make up for the missing consent.",
+    null,
+    "Telling her afterwards is disclosure, not consent, and the examination would still have been done without her permission.",
+    "A spouse cannot consent for a competent adult who will soon be able to decide for herself, and this examination is not urgent or needed for her treatment.",
+    "Going straight to Ahpra is out of proportion as a first step; the immediate priority is to decline, then raise the concern through local supervisors."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:03.374Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0733",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0158"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-97802bf3",
    "stem": "A 4-month-old girl presents with vomiting and irritability. Her father says she rolled off a couch yesterday. Coagulation studies are normal. CT brain shows bilateral subdural haematomas of differing densities.",
    "ask": "Most likely cause?",
@@ -10728,6 +11428,56 @@
       "medqa-us4-test-0360",
       "medqa-us4-test-0587",
       "medqa-us4-test-0577"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-981188a9",
+   "stem": "A 27-year-old intern confides that she has written herself temazepam prescriptions for insomnia after night shifts for three months. She has no general practitioner.",
+   "ask": "Most appropriate advice?",
+   "options": [
+    "Switch to melatonin",
+    "Ask colleague to prescribe",
+    "Register with a GP",
+    "Taper the temazepam",
+    "Avoid night shifts"
+   ],
+   "answer": 2,
+   "explanation": "The Medical Board of Australia's Code of Conduct says doctors should have their own GP and should not prescribe for themselves, especially drugs of dependence. Self-prescribing a benzodiazepine risks dependence, impairment and undiagnosed mental illness. An independent GP can assess the cause of her insomnia and manage it safely.",
+   "why": [
+    "Changing to another self-prescribed drug still leaves her treating herself, and the cause of her insomnia goes unassessed.",
+    "An informal script from a colleague skips a proper assessment and continuity of care, which the Code of Conduct also discourages.",
+    null,
+    "Tapering is reasonable but should be supervised by her treating doctor, not run by herself.",
+    "Changing her roster deals with a work factor but leaves the unsafe self-prescribing and any underlying problem unaddressed."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:19:11.772Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0980",
+      "medqa-us4-test-1239",
+      "medqa-us4-test-0371"
      ],
      "model": "claude-opus-5-5"
     }
@@ -12694,6 +13444,56 @@
       "medqa-us4-test-0867",
       "medqa-us4-test-0459",
       "medqa-us4-test-0047"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-a9dc481d",
+   "stem": "A 4-day-old term boy, feeding well until today, has three episodes of green vomiting. He is alert with soft, non-distended abdomen. Abdominal X-ray shows a normal gas pattern.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Abdominal ultrasound",
+    "Contrast enema",
+    "CT abdomen",
+    "Venous blood gas",
+    "Upper GI contrast"
+   ],
+   "answer": 4,
+   "explanation": "Bilious vomiting in a neonate is malrotation with volvulus until proven otherwise, even when the baby looks well and the abdominal X-ray is normal. An urgent upper GI contrast study is the investigation of choice. It shows where the duodenojejunal flexure sits and whether there is a volvulus, so surgery is not delayed.",
+   "why": [
+    "Ultrasound can suggest malrotation (whirlpool sign, reversed SMA/SMV) but depends on the operator, and a normal scan does not exclude it.",
+    "A contrast enema looks for distal obstruction such as Hirschsprung disease or meconium ileus, which is unlikely with a non-distended abdomen.",
+    "CT gives a high radiation dose and is not the standard way to diagnose malrotation in neonates.",
+    "A blood gas helps judge how unwell the baby is but cannot diagnose or exclude a surgical cause of bilious vomiting.",
+    null
+   ],
+   "topic": "Neonatology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:neonatology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Neonatology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:18.401Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-neonatology-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0154",
+      "medqa-us4-test-0146",
+      "medqa-us4-test-0086"
      ],
      "model": "claude-opus-5-5"
     }
@@ -16227,6 +17027,56 @@
    }
   },
   {
+   "id": "ai-mcq-d1ea6a49",
+   "stem": "A 23-year-old female medical student finished a three-dose hepatitis B vaccine course six weeks ago, before surgical placement. Anti-HBs is 4 mIU/mL; HBsAg and anti-HBc are negative.",
+   "ask": "What does this result indicate?",
+   "options": [
+    "Vaccine non-response",
+    "Chronic hepatitis B",
+    "Protective immunity",
+    "Resolved past infection",
+    "Occult hepatitis B"
+   ],
+   "answer": 0,
+   "explanation": "An anti-HBs level below 10 mIU/mL measured 4 to 8 weeks after a full course means she did not respond to the vaccine. Negative HBsAg and anti-HBc rule out current or past infection. Under the Australian Immunisation Handbook she needs more vaccine doses and a repeat anti-HBs test, and until then any blood exposure must be managed as if she is not immune.",
+   "why": [
+    null,
+    "Chronic hepatitis B needs a positive HBsAg, and hers is negative.",
+    "Protection needs anti-HBs of at least 10 mIU/mL, and hers is 4 mIU/mL.",
+    "Resolved past infection shows a positive anti-HBc, and hers is negative.",
+    "Occult infection is HBsAg-negative but usually anti-HBc-positive with detectable HBV DNA, and nothing here suggests it."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:38.753Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0733",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0158"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-d268f468",
    "stem": "A 29-year-old woman comes back to her general practitioner 6 weeks after she was diagnosed with ulcerative colitis. Before the diagnosis she had 10 weeks of bloody, mucousy diarrhoea and left-sided abdominal cramps. Stool pathogen tests were negative. Ileocolonoscopy found continuous mucosal inflammation from the rectum to 30 cm and a normal proximal colon and terminal ileum. Biopsies showed crypt distortion with no granulomas and no dysplasia. She now takes oral mesalazine and mesalazine enemas. She has 1 to 2 formed stools a day with no blood. She has never smoked. Her mother was diagnosed with bowel cancer at age 62. No other relatives have had bowel cancer. Temperature is 36.7°C, blood pressure 116/72 mmHg and pulse 72/min. Her abdomen is soft and not tender. Haemoglobin is 129 g/L (115–165), CRP 3 mg/L (<5), ALP 74 U/L (30–110) and GGT 18 U/L (<40). She asks how her bowel cancer risk will be checked.",
    "ask": "Which of the following is the most appropriate surveillance plan for this patient?",
@@ -16529,6 +17379,56 @@
    }
   },
   {
+   "id": "ai-mcq-d59db04b",
+   "stem": "A 68-year-old man has a 3-month non-healing ulcer with raised, everted edges. It arose within a scar from a childhood flame burn to his thigh. The scar had been stable for 50 years.",
+   "ask": "Most likely malignancy?",
+   "options": [
+    "Basal cell carcinoma",
+    "Nodular melanoma",
+    "Merkel cell carcinoma",
+    "Squamous cell carcinoma",
+    "Dermatofibrosarcoma protuberans"
+   ],
+   "answer": 3,
+   "explanation": "A Marjolin ulcer is a cancer that grows in a chronic wound or an old burn scar, usually decades after the injury, and it is most often squamous cell carcinoma. Any non-healing ulcer in an old scar needs a biopsy to rule out SCC. These tumours spread to lymph nodes more aggressively than ordinary cutaneous SCC.",
+   "why": [
+    "BCC can occasionally arise in a burn scar, but it is much less common than SCC there and usually looks pearly with a rolled edge rather than everted.",
+    "Melanoma rarely arises in burn scars, and this lesion shows no pigment or change in a pre-existing mole.",
+    "Merkel cell carcinoma is a fast-growing red nodule on sun-damaged skin, not a slowly developing ulcer in a chronic scar.",
+    null,
+    "DFSP is a slow-growing firm plaque on the trunk of young adults and is not linked to chronic burn scars."
+   ],
+   "topic": "Plastic Surgery",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:plastic-surgery",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Plastic Surgery (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:57.387Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-plastic-surgery-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0063",
+      "medqa-us4-test-0865",
+      "medqa-us4-test-1034"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-d602157c",
    "stem": "A 42-year-old Aboriginal man with type 2 diabetes attends his annual health check. eGFR is 82 mL/min/1.73 m². His urine albumin:creatinine ratio is 14 mg/mmol on two separate samples taken over three months.",
    "ask": "What do these results show?",
@@ -16673,6 +17573,56 @@
       "medqa-us4-test-1071",
       "medqa-us4-test-0026",
       "medqa-us4-test-0111"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-d7f18e2d",
+   "stem": "A 79-year-old man with metastatic lung cancer is in the terminal phase, unresponsive, with noisy gurgling breathing. He appears comfortable; repositioning has not helped and his family is distressed.",
+   "ask": "Most appropriate treatment?",
+   "options": [
+    "Hyoscine butylbromide",
+    "Intravenous furosemide",
+    "Subcutaneous midazolam",
+    "Subcutaneous morphine",
+    "Deep oropharyngeal suction"
+   ],
+   "answer": 0,
+   "explanation": "This is noisy breathing from respiratory secretions in a dying patient. Repositioning has not helped, so eTG Palliative Care recommends a subcutaneous anticholinergic such as hyoscine butylbromide 20 mg. Explaining to the family that the noise is not distressing him is also part of care. Anticholinergics reduce new secretions but do not clear secretions that are already there, so start early.",
+   "why": [
+    null,
+    "The secretions sit in the pharynx and airway, not as pulmonary oedema, so a diuretic will not help and IV access burdens a dying patient.",
+    "Midazolam treats terminal agitation or distress, and he looks comfortable, so it does nothing for the secretions.",
+    "Morphine relieves breathlessness or pain, neither of which he has, and it does not reduce secretions.",
+    "Deep suction is distressing, can stimulate more secretions and is not recommended; only gentle oral suction is sometimes used."
+   ],
+   "topic": "Palliative Care",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:palliative-care",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Palliative Care (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:23.159Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-palliative-care-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0934",
+      "medqa-us4-test-0464"
      ],
      "model": "claude-opus-5-5"
     }
@@ -18696,6 +19646,56 @@
    }
   },
   {
+   "id": "ai-mcq-f0817efd",
+   "stem": "A 28-year-old female registrar who has no regular doctor asks you, a fellow junior doctor, to prescribe temazepam so she can sleep between night shifts.",
+   "ask": "Most appropriate response?",
+   "options": [
+    "Prescribe three nights' supply",
+    "Prescribe melatonin instead",
+    "Make mandatory notification",
+    "Encourage seeing a GP",
+    "Supply hospital ward stock"
+   ],
+   "answer": 3,
+   "explanation": "The Medical Board of Australia's Code of Conduct says doctors should have their own GP and should not prescribe informally for colleagues, especially drugs of dependence. Informal prescribing skips a proper assessment and puts both doctors at risk. The safest response is to point her to independent care, such as a GP or a doctors' health service.",
+   "why": [
+    "Prescribing a drug of dependence for a colleague without a proper consultation or records is unprofessional, even if the supply is small.",
+    "Swapping to a lower-risk drug is still informal prescribing for a colleague without an independent assessment.",
+    "Nothing suggests impairment that puts the public at substantial risk, so the threshold for a mandatory notification is not met.",
+    null,
+    "Taking ward stock for a staff member is drug diversion and is both illegal and a professional misconduct issue."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:19:17.795Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0733",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0158"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-f1cafb17",
    "stem": "A 34-year-old man is brought in after a high-speed head-on car crash. BP 118/76 mm Hg. Chest X-ray shows a widened mediastinum, obscured aortic knob and left apical cap.",
    "ask": "Most likely diagnosis?",
@@ -19043,6 +20043,56 @@
       "medqa-us4-test-0151",
       "medqa-us4-test-0150",
       "medqa-us4-test-0048"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-f5f7ca8f",
+   "stem": "A 3-day-old boy born at 39 weeks is jaundiced but well and feeding well. Total serum bilirubin is 330 µmol/L. This is above his phototherapy line and well below his exchange transfusion line.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Exchange transfusion",
+    "Intravenous immunoglobulin",
+    "Stop breastfeeding",
+    "Repeat bilirubin tomorrow",
+    "Start phototherapy"
+   ],
+   "answer": 4,
+   "explanation": "In a well term baby, a bilirubin above the phototherapy line on the gestation-specific nomogram means phototherapy should start now. Australian neonatal jaundice guidelines (RCH, Queensland) reserve exchange transfusion for levels near or above the exchange line, or for signs of bilirubin encephalopathy.",
+   "why": [
+    "Exchange transfusion is for bilirubin at or near the exchange line, or for signs of acute bilirubin encephalopathy, and he has neither.",
+    "IVIG is only for isoimmune haemolysis with rising bilirubin despite intensive phototherapy, and nothing here suggests that.",
+    "Breastfeeding should continue, and more frequent feeds help; stopping it does not treat a bilirubin above the threshold.",
+    "Waiting 24 hours to recheck delays treatment that is already needed and lets bilirubin keep rising towards neurotoxic levels.",
+    null
+   ],
+   "topic": "Neonatology",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:neonatology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Neonatology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:03.779Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-neonatology-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0154",
+      "medqa-us4-test-0146",
+      "medqa-us4-test-0086"
      ],
      "model": "claude-opus-5-5"
     }

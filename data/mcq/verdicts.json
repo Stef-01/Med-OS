@@ -815,6 +815,91 @@
    "suggestion": "Replace the left-sided distractors with right-sided local-invasion alternatives (e.g., right phrenic palsy, right recurrent laryngeal palsy, SVC obstruction, ulnar hand weakness) and ask for the most likely examination finding, adding smoking history or exam details to the stem."
   }
  },
+ "ai-mcq-073e74ad": {
+  "hash": "18f92af6",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:20:08.095Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.96,
+    "reason": "After carbon monoxide poisoning with loss of consciousness, delayed neurological sequelae (memory and thinking problems, parkinsonism, personality change) can develop 2 to 40 days later, even if the patient recovers fully at first and carboxyhaemoglobin returns to normal."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "CO poisoning with loss of consciousness puts him at high risk of delayed neurological sequelae (memory loss, personality change, parkinsonism) days to weeks later, even after full initial recovery and a normalised COHb."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "distractors easily excluded by toxin-to-harm association"
+   ],
+   "topic": "Toxicology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is clearly correct and clinically important prognostic counselling point",
+    "Options are homogeneous long-term complications without cues",
+    "Explanation addresses key and each distractor accurately"
+   ],
+   "suggestion": "Optionally replace one weak distractor with a more tempting CO-related complication (e.g., myocardial injury/arrhythmia) and mention hyperbaric oxygen consideration in the explanation."
+  },
+  "second": {
+   "hash": "18f92af6",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:23:07.876Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.95,
+     "reason": "Delayed neurological sequelae can develop days to weeks after carbon monoxide poisoning, even when the patient recovers fully at first, and losing consciousness is a major risk factor."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.97,
+     "reason": "Carbon monoxide poisoning with loss of consciousness puts him at risk of delayed neurological sequelae (cognitive, psychiatric and parkinsonian problems) days to weeks later, even after full recovery and a normal carboxyhaemoglobin level."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Distractors are weak: a student who knows nothing about CO poisoning can rule out pulmonary fibrosis, cataracts and CKD",
+     "Short stem; it tests recall of one well-known association more than clinical reasoning"
+    ],
+    "topic": "Toxicology",
+    "verdict": "accept",
+    "reasons": [
+     "The key is correct: delayed neurological sequelae are the classic risk after CO poisoning with loss of consciousness, even once the patient seems to have recovered",
+     "Only one option is clearly best, and the stem has no cues that give the answer away",
+     "The explanation is accurate, says why each distractor is wrong and includes useful counselling advice"
+    ],
+    "suggestion": "To make it harder, swap in distractors closer to the key, such as myocardial injury or recurrent hypoxia from CO rebound. Another option is to turn it into a management question about hyperbaric oxygen. Also fix the awkward wording \"arranged neurocognitive follow-up\" in the explanation."
+   }
+  }
+ },
  "ai-mcq-07b1ffe1": {
   "hash": "d0469770",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -2011,6 +2096,95 @@
      "Thin vignette with only one real competing option"
     ],
     "suggestion": "Make all the options treatments, e.g. oral iron, IV ferric carboxymaltose, erythropoietin alone, tranexamic acid alone, or urgent hysterectomy. Also expand the vignette with history and examination findings and add a clear lead-in question."
+   }
+  }
+ },
+ "ai-mcq-151af53c": {
+  "hash": "c2e53267",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:20:14.723Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "Her fluctuating attention and drowsiness suggest delirium, and taking a thiazide with an SSRI strongly suggests hyponatraemia, so serum sodium is the key reversible cause to check before judging her capacity."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.88,
+    "reason": "She has delirium with no focal signs after starting a thiazide on top of an SSRI, so drug-induced hyponatraemia is the most likely reversible cause and serum sodium is the right first test (it also bears on her capacity to refuse treatment)."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Drug history strongly cues the answer",
+    "No vital signs given, so sepsis-related delirium is not addressed",
+    "Slightly heterogeneous options (bedside cognitive screen among lab/imaging tests)"
+   ],
+   "topic": "Geriatrics",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: thiazide plus SSRI hyponatraemia is a reversible cause of delirium",
+    "Combines delirium workup with capacity, which is high-yield clinical application",
+    "Explanation teaches the key and each distractor well"
+   ],
+   "suggestion": "Add vital signs showing she is not septic (e.g. afebrile, normotensive). Consider swapping a distractor for capillary glucose or blood cultures to make the item harder."
+  },
+  "second": {
+   "hash": "c2e53267",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:23:14.651Z",
+   "solves": [
+    {
+     "answer": 4,
+     "confidence": 0.88,
+     "reason": "Her delirium with no focal signs, after starting a thiazide alongside an SSRI, points to drug-induced hyponatraemia, so serum sodium is the most targeted test for a reversible cause."
+    },
+    {
+     "answer": 4,
+     "confidence": 0.88,
+     "reason": "She has delirium after recently starting a thiazide alongside an SSRI, so hyponatraemia is the most likely reversible cause and serum sodium is the right first test, which also bears on whether she has capacity to refuse treatment."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 3,
+    "relevance": 5,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "vignette strongly cues the answer via drug history",
+     "lead-in is a sentence fragment rather than a full question",
+     "heterogeneous options (MMSE is a bedside assessment, not an investigation)",
+     "no vital signs given to judge whether sepsis is driving the delirium"
+    ],
+    "topic": "Geriatrics",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct: thiazide plus SSRI causing hyponatraemia is a reversible cause of delirium affecting capacity",
+     "Combines clinical reasoning with capacity ethics at Step 2 CK level",
+     "Explanation correctly says to improve and reassess capacity rather than accept or override the refusal"
+    ],
+    "suggestion": "Write the lead-in as a full question and add vital signs so that sepsis-driven delirium is addressed. Consider replacing the MMSE with a true investigation, such as a full blood count, to make the options uniform."
    }
   }
  },
@@ -3398,6 +3572,96 @@
    }
   }
  },
+ "ai-mcq-2514decc": {
+  "hash": "10c0e026",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:20:12.846Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "A commercial driver who has had a first unprovoked seizure must stop driving immediately and is responsible for telling the licensing authority; telling his employer without consent would breach confidentiality."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "After a first unprovoked seizure, the most important counselling point is to stop driving right away, because it protects him and the public, especially since he drives commercially; the doctor would not tell his employer directly, and he is responsible for reporting to the licensing authority as lo"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 3,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (driving occupation stated up front)",
+    "explanation misapplies the Austroads commercial standard to a light delivery van, which is usually covered by the privat",
+    "stem is terse and not a complete question ('Most important counselling point?')",
+    "options are partly heterogeneous (lifestyle advice, a legal or ethical action, a drug decision)"
+   ],
+   "topic": "Neurology",
+   "verdict": "revise",
+   "reasons": [
+    "Key (cease driving) is correct and handles confidentiality well",
+    "Explanation wrongly says a delivery van driver faces the longer commercial stand-down",
+    "Stem cues the answer and lacks a proper lead-in"
+   ],
+   "suggestion": "Either make him a heavy-vehicle or bus driver, or change the explanation to say the private standard (6 months seizure-free) applies to a light van. Rewrite the lead-in as a full question, e.g. 'Which of the following is the most important advice to give him now?'"
+  },
+  "second": {
+   "hash": "10c0e026",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:23:08.701Z",
+   "solves": [
+    {
+     "answer": 2,
+     "confidence": 0.9,
+     "reason": "After a first unprovoked seizure, the most important safety point is that he must stop driving right away, especially since he drives commercially; the patient is the one who should inform the licensing authority, not the doctor telling his employer, and lifelong antiepileptics aren't indicated afte"
+    },
+    {
+     "answer": 2,
+     "confidence": 0.88,
+     "reason": "After a first unprovoked seizure, the most important safety advice is that he must stop driving right away (he must also tell the licensing authority, and commercial drivers face longer restrictions); the employer doesn't need to be told directly, and lifelong antiepileptics aren't indicated after a"
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Option E has an absolute qualifier ('lifelong'), so it is easy to rule out",
+     "Lead-in is a sentence fragment rather than a full question",
+     "Calling a 'delivery van' commercial is unclear: Austroads commercial standards cover heavy vehicles (>4.5 t), public pas",
+     "Stem gives few clinical details (no examination, EEG or MRI plan)"
+    ],
+    "topic": "Neurology",
+    "verdict": "revise",
+    "reasons": [
+     "The key is correct and clearly the best answer: stopping driving and self-reporting to the licensing authority come first",
+     "The explanation says a commercial driver faces a longer stand-down, but a light delivery van may not count as commercial under Austroads",
+     "Option E is weakened by the absolute 'lifelong', and the lead-in is a fragment"
+    ],
+    "suggestion": "State that he drives a heavy rigid truck (over 4.5 t) so the commercial standard clearly applies, or remove the commercial stand-down claim from the explanation. Change E to 'Start levetiracetam today' and make the lead-in a full question, for example 'Which is the most important advice to give him?'"
+   }
+  }
+ },
  "ai-mcq-27c244ad": {
   "hash": "8a62e360",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -4736,6 +5000,94 @@
    }
   }
  },
+ "ai-mcq-357431c1": {
+  "hash": "0f47c872",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:20:29.095Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "This healthcare worker was exposed to varicella and has no reliable proof of immunity, so the next step is VZV IgG serology to check whether she is already immune; that result decides whether she needs post-exposure vaccination or varicella zoster immunoglobulin (VZIG) and time off from days 8–21 af"
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "After exposure, a healthcare worker with no reliable history of chickenpox or vaccination should have a varicella IgG test to check immunity: if she is seronegative, she needs to be kept away from patients from day 8 to day 21 after exposure and given post-exposure measures."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Full blood count and chest X-ray are weak distractors that few students would pick",
+    "Explanation gives the exclusion window as about days 10–21, but most guidance says days 8–21 after exposure",
+    "Explanation does not say that post-exposure vaccination should be given within 3–5 days, so serology has to be done urge"
+   ],
+   "topic": "Occupational/Environmental Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "The key is clearly correct: IgG serology is the standard way to check immunity in a healthcare worker exposed to varicella with no reliable history",
+    "The scenario is clinically relevant and tests occupational exposure management",
+    "Only minor inaccuracies in the explanation, and none of them is unsafe"
+   ],
+   "suggestion": "Change the exclusion period to days 8–21 after exposure and add that vaccination works best within 3–5 days of exposure. Consider replacing the chest X-ray with a more plausible option, such as 'no investigation; reassure'."
+  },
+  "second": {
+   "hash": "0f47c872",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:23:30.173Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.95,
+     "reason": "For a healthcare worker exposed to varicella who has no evidence of immunity, the first step is urgent varicella IgG serology to check for immunity, and the result decides on post-exposure vaccination and work restriction (days 8–21) if she turns out to be non-immune."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.95,
+     "reason": "She is a well healthcare worker with no clear history of immunity who has been exposed, so the first step is varicella IgG serology to check her immune status; this tells us whether she needs post-exposure measures such as vaccination and exclusion from work during the incubation period."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Weak distractors: a full blood count and a chest X-ray are implausible for a well, exposed contact",
+     "Stem lead-in is a fragment ('Most appropriate next investigation?') rather than a full question",
+     "Explanation gives the exclusion window as about days 10–21, but most guidance (CDC, NHMRC) uses days 8–21 after exposure"
+    ],
+    "topic": "Occupational/Environmental Medicine",
+    "verdict": "revise",
+    "reasons": [
+     "The key (VZV IgG to establish immunity) is clearly correct and fits a realistic occupational-health scenario",
+     "Two distractors (D, E) are too easily ruled out, which lowers how well the item discriminates",
+     "The exclusion period in the explanation should be days 8–21, not 10–21"
+    ],
+    "suggestion": "Replace D and E with plausible alternatives, such as 'no testing, give VZIG' or 'no testing, give post-exposure varicella vaccine' (in that case change the lead-in to 'next step'). Also correct the exclusion window to days 8–21 after exposure."
+   }
+  }
+ },
  "ai-mcq-35f5c887": {
   "hash": "60f202d8",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -5935,6 +6287,97 @@
    "suggestion": "You could drop 'alone' from option D, or reword it, to remove the small cue. You could also note that the magnesium target of at least 1.0 mmol/L follows Australian guidance, since other guidelines use lower thresholds (about 0.8 mmol/L)."
   }
  },
+ "ai-mcq-42875c3e": {
+  "hash": "7d1bc1c2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:20:38.203Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Secondary prophylaxis is usually monthly benzathine penicillin G. It stops new group A streptococcal infections from causing repeat attacks of acute rheumatic fever, and repeat attacks are what lead to rheumatic heart disease (or make it worse)."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Secondary prophylaxis (usually benzathine penicillin G every 3-4 weeks) stops repeat group A strep infections, which would otherwise cause recurrent acute rheumatic fever and lead to chronic rheumatic heart disease, even when the first episode has no carditis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 3,
+   "accuracy": 3,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": [
+     "Explanation states a minimum of 10 years of prophylaxis; for ARF without carditis the 2020 Australian guideline minimum is 5 years after the last episode or until age 21, whichever is longer. This is "
+    ]
+   },
+   "flaws": [
+    "Explanation gives the wrong prophylaxis duration for ARF without carditis",
+    "Largely a recall question despite the vignette; the ASO titre adds nothing",
+    "Low difficulty: the answer is the well-known purpose of secondary prophylaxis"
+   ],
+   "topic": "Indigenous Health",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and clearly the best answer",
+    "Explanation misstates the guideline duration for ARF without carditis (5 years or until age 21, not 10 years)",
+    "Low cognitive level; it tests recall rather than application"
+   ],
+   "suggestion": "Change the explanation to say 28-day (or 21-day for higher-risk patients) IM benzathine for at least 5 years after the last episode or until age 21, whichever is longer, for ARF without carditis. To test application, consider asking for the most appropriate prophylaxis regimen and duration instead."
+  },
+  "second": {
+   "hash": "7d1bc1c2",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:23:34.929Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "Secondary prophylaxis, such as benzathine penicillin G injections given every 3–4 weeks, stops new group A strep infections and repeat attacks of acute rheumatic fever, and those repeat attacks are what cause and worsen rheumatic heart disease."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "Secondary prophylaxis (benzathine benzylpenicillin G every 3–4 weeks) prevents repeat GAS infections, which cause recurrent ARF and lead to chronic rheumatic heart disease, even when the first episode had no carditis."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 3,
+    "accuracy": 3,
+    "explanation": 3,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Explanation misstates the duration: for ARF without carditis, the 2020 Australian guideline gives a minimum of 5 years a",
+     "Detail that plays no part (ASO titre) and a stem that leads students to RHD",
+     "Weak distractors (Jaccoud arthropathy, dilated cardiomyopathy)",
+     "Mostly a recall item: the vignette adds little decision-making"
+    ],
+    "topic": "Indigenous Health",
+    "verdict": "revise",
+    "reasons": [
+     "Key is correct: secondary prophylaxis prevents recurrent ARF and so RHD",
+     "Explanation gives the wrong prophylaxis duration for ARF without carditis",
+     "Easy to answer, with two weak distractors"
+    ],
+    "suggestion": "Change the explanation to say the minimum is 5 years after the last episode or until age 21, whichever is longer, with benzathine benzylpenicillin G every 28 days (21 days for some patients). Consider asking about the regimen or duration as a management question, with distractors such as oral amoxicillin, or penicillin only until symptoms resolve."
+   }
+  }
+ },
  "ai-mcq-42dc15b2": {
   "hash": "866ce40f",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -6628,6 +7071,92 @@
    "suggestion": "Change the A line to say it is wrong: running maintenance or hypotonic fluid at 18 mL/h does not treat shock, and the current guideline for maintenance is isotonic 0.9% NaCl with 5% glucose, not 0.45%. Then add a separate line explaining why B is the key."
   }
  },
+ "ai-mcq-486ae70d": {
+  "hash": "626fe6e2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:20:40.754Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "This is SVC syndrome from small cell lung cancer, and contrast-enhanced CT of the chest is the investigation of choice because it confirms the blockage, shows its cause and extent, and guides stenting and further treatment."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "This is SVC syndrome from small cell lung cancer, and contrast CT chest is the investigation of choice to confirm the obstruction, measure its extent and cause, and guide treatment."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem is sparse: no vital signs or airway status (e.g., stridor), which matter when deciding how urgent imaging and treat",
+    "Chest X-ray is often done first in practice, so 'next investigation' can be read as pointing to B"
+   ],
+   "topic": "Oncology",
+   "verdict": "accept",
+   "reasons": [
+    "The presentation is classic superior vena cava obstruction (SVCO), and contrast CT of the chest is the standard test to confirm it and plan treatment",
+    "The distractors are all imaging tests a weak student might pick, and the explanation addresses each one",
+    "Only a small ambiguity with chest X-ray as a common first test"
+   ],
+   "suggestion": "Consider changing the lead-in to 'Which investigation is most appropriate to confirm the diagnosis and plan treatment?' and adding vital signs with no stridor, so chest X-ray is clearly wrong."
+  },
+  "second": {
+   "hash": "626fe6e2",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:23:43.754Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.9,
+     "reason": "Facial swelling, a headache worse on bending forward and dilated chest wall veins in small cell lung cancer point to SVC syndrome, and contrast CT chest is the investigation of choice to confirm and define the obstruction."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.9,
+     "reason": "This is SVC syndrome from small cell lung cancer, and a contrast CT of the chest is the test of choice because it confirms and defines the blockage and helps plan treatment."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Very brief vignette without vital signs or examination findings (e.g. no airway status)",
+     "Lead-in is a sentence fragment rather than a complete question"
+    ],
+    "topic": "Oncology",
+    "verdict": "accept",
+    "reasons": [
+     "Classic SVCO presentation; contrast CT chest is the correct confirmatory investigation",
+     "Homogeneous, plausible imaging distractors, each tied to a specific misconception",
+     "Explanation is accurate and addresses every option"
+    ],
+    "suggestion": "Optionally add vital signs and say there is no stridor or airway compromise, and write the lead-in as a full question (e.g. 'Which of the following is the most appropriate next step in diagnosis?')."
+   }
+  }
+ },
  "ai-mcq-491500a6": {
   "hash": "842aa340",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -6964,6 +7493,50 @@
     "The explanation covers what to send the fluid for, where contrast CT fits in, and why each distractor is wrong"
    ],
    "suggestion": "You could add vital signs and examination findings (such as reduced breath sounds and a stony dull percussion note on the left) so the vignette reads more fully, but the question works as it is."
+  }
+ },
+ "ai-mcq-4deb595c": {
+  "hash": "37ca98e2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:20:53.221Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.92,
+    "reason": "Syphilis is a reportable disease, so the physician must notify public health without the patient's consent, and public health then confidentially notifies partners."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "Syphilis is a nationally notifiable disease, so the doctor must report it to public health without the patient's consent, and the health department then notifies partners confidentially, so the doctor does not tell the partner directly."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vague lead-in ('What does this result require?')",
+    "stem does not specify jurisdiction although explanation relies on Australian law",
+    "option E is a weak distractor"
+   ],
+   "topic": "Medicolegal",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: syphilis is notifiable in practically every jurisdiction regardless of patient consent",
+    "Distractors are homogeneous, plausible confidentiality and ethics errors",
+    "Explanation clearly covers each option"
+   ],
+   "suggestion": "Change the lead-in to 'What is the most appropriate action regarding reporting?' and state the setting (e.g. 'in Australia') so it matches the explanation."
   }
  },
  "ai-mcq-4f0b0534": {
@@ -7519,6 +8092,91 @@
     "Explanation teaches the diagnostic criteria and why each wrong option is wrong"
    ],
    "suggestion": "Optionally shorten option C to \"Gadolinium-enhanced MRI of the internal acoustic meati\" so the key is not the only compound option."
+  }
+ },
+ "ai-mcq-52eba043": {
+  "hash": "3e647bb2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:20:59.522Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.98,
+    "reason": "Asplenia carries a lifelong risk of overwhelming post-splenectomy infection from encapsulated organisms, which calls for vaccination, a low threshold to treat fever and patient education."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.98,
+    "reason": "After splenectomy, the patient carries a lifelong risk of overwhelming post-splenectomy infection from encapsulated organisms such as pneumococcus, meningococcus and Hib, so he should be counselled about vaccination, standby antibiotics and getting care urgently for any fever."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "The word 'lifelong' in the stem rules out three distractors that are early complications (fistula, portal vein thrombosi"
+   ],
+   "topic": "General Surgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key (overwhelming post-splenectomy infection) is clearly correct and clinically important",
+    "Explanation is accurate and current, including vaccine timing after emergency splenectomy",
+    "Distractors are homogeneous, but the stem's time qualifier makes them easy to rule out"
+   ],
+   "suggestion": "To raise the difficulty, take out 'lifelong' and ask for the most important intervention before discharge. The options would be vaccination timing, antibiotic prophylaxis, and similar choices."
+  },
+  "second": {
+   "hash": "3e647bb2",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:23:50.871Z",
+   "solves": [
+    {
+     "answer": 2,
+     "confidence": 0.97,
+     "reason": "After splenectomy, the most important lifelong risk is overwhelming post-splenectomy infection from encapsulated bacteria (pneumococcus, meningococcus, H. influenzae), so he needs counselling on vaccines, possible antibiotic prophylaxis or a standby antibiotic supply, and getting urgent care for any"
+    },
+    {
+     "answer": 2,
+     "confidence": 0.98,
+     "reason": "After splenectomy, the patient has a lifelong risk of overwhelming post-splenectomy infection from encapsulated organisms (pneumococcus, meningococcus, Haemophilus influenzae), so counseling should cover vaccination, getting medical care early when febrile, and possibly emergency/prophylactic antibi"
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "\"Lifelong\" in the stem rules out the three early-complication distractors (A, B, D), leaving only C and E",
+     "The key is the only life-threatening outcome on the list, so the item is easy"
+    ],
+    "topic": "Trauma Surgery",
+    "verdict": "accept",
+    "reasons": [
+     "The key is clearly correct and matches current post-splenectomy guidance",
+     "Counselling at discharge is relevant Step 2 CK material",
+     "The explanation is accurate and covers every distractor"
+    ],
+    "suggestion": "Optionally, ask about \"the most important complication to counsel about before discharge\" instead of saying \"lifelong\", so the early complications compete more. The key would then need defending against them."
+   }
   }
  },
  "ai-mcq-537f99f4": {
@@ -9340,6 +9998,132 @@
    }
   }
  },
+ "ai-mcq-65b928b3": {
+  "hash": "58fc1124",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:21:01.308Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.98,
+    "reason": "A 3-week-old boy with projectile non-bilious vomiting and hypochloraemic, hypokalaemic metabolic alkalosis is the classic picture of hypertrophic pyloric stenosis; CAH would cause hyperkalaemia with acidosis, and volvulus causes bilious vomiting."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.98,
+    "reason": "A 3-week-old boy with projectile non-bilious vomiting after feeds, weight loss, and hypochloraemic, hypokalaemic metabolic alkalosis most likely has pyloric stenosis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette is the textbook presentation, so recognising the pattern is almost enough to answer it"
+   ],
+   "topic": "Paediatrics",
+   "verdict": "accept",
+   "reasons": [
+    "The key is clearly correct and supported by the hypochloraemic, hypokalaemic metabolic alkalosis",
+    "Strong age-matched distractor (CAH) with opposite electrolyte pattern",
+    "Explanation addresses every option and gives safe management (resuscitate before pyloromyotomy)"
+   ],
+   "suggestion": "Optionally, make the stem less classic (e.g. leave out the word 'projectile') or ask for the next step in management, so it tests application rather than pattern recognition."
+  }
+ },
+ "ai-mcq-65df9dcf": {
+  "hash": "94f745f9",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:21:16.507Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "Abattoir workers in Australia are at high occupational risk of Coxiella burnetii from cattle and sheep, and Q fever vaccination (Q-Vax) is recommended after pre-vaccination serology and skin testing."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "Abattoir workers in Australia have a high occupational risk of Coxiella burnetii, so the Q fever vaccine (Q-Vax) is recommended before starting, after pre-vaccination skin and antibody screening."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "'Abattoir' is a classic cue that makes the item fairly easy"
+   ],
+   "topic": "Occupational/Environmental Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches Australian Immunisation Handbook recommendation for abattoir workers",
+    "Homogeneous vaccine options, each with a distinct and accurate non-matching indication",
+    "Explanation covers pre-vaccination screening and addresses every distractor"
+   ],
+   "suggestion": "To make it harder, ask about the required pre-vaccination step (skin test and serology), or about a worker who already shows signs of past exposure."
+  },
+  "second": {
+   "hash": "94f745f9",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:23:53.316Z",
+   "solves": [
+    {
+     "answer": 2,
+     "confidence": 0.97,
+     "reason": "Abattoir workers in Australia face a high occupational risk of Q fever (Coxiella burnetii) from cattle and sheep, so after pre-vaccination skin and antibody testing they should get the Q-VAX vaccine before starting work."
+    },
+    {
+     "answer": 2,
+     "confidence": 0.97,
+     "reason": "Abattoir workers in Australia have a high occupational risk of Coxiella burnetii from cattle and sheep, so Q fever vaccine (Q-Vax) is recommended, given after pre-vaccination serology and skin testing."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Mostly a recall item: the clinical vignette is thin"
+    ],
+    "topic": "Occupational/Environmental Medicine",
+    "verdict": "accept",
+    "reasons": [
+     "Q fever vaccination for abattoir workers, after a skin test and serology, matches the Australian Immunisation Handbook",
+     "The distractors are all vaccines that are plausibly linked to occupation or travel, and each is clearly wrong here",
+     "The explanation is accurate and deals with every option"
+    ],
+    "suggestion": "If you want, test applied knowledge more directly: ask about the needed pre-vaccination screening (skin test and serology) or about what to do with a worker whose screening is positive."
+   }
+  }
+ },
  "ai-mcq-666bb226": {
   "hash": "f4480888",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -9474,6 +10258,90 @@
     "It only tests recognising a gas pattern, not the clinical decisions that Step 2 CK expects"
    ],
    "suggestion": "Make the item test application: ask for the most appropriate initial management (IV 0.9% saline with KCl plus NG decompression, against options such as 0.45% saline, acetazolamide, IV bicarbonate or KCl alone), or ask for the urine chloride finding. If it stays a classification item, use homogeneous options that include mixed disorders, and note that a venous pCO2 normally runs about 4–6 mmHg above arterial."
+  }
+ },
+ "ai-mcq-68119778": {
+  "hash": "a3e255f5",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:21:23.400Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "After strangulation with loss of consciousness and petechiae, a carotid or vertebral artery tear can cause a stroke hours to days later even when the neurological exam is normal, so CT angiography is needed to rule it out."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "Strangulation with loss of consciousness puts the patient at risk of blunt carotid or vertebral artery dissection, which can cause a stroke hours to days later despite a normal initial neurological exam, so CT angiography is needed to exclude it."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation for C overstates the case: laryngeal injury can cause airway oedema and obstruction that develops over hours"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Cervical artery dissection is the classic silent delayed complication after strangulation with loss of consciousness, and current guidelines call for CT angiography of the neck",
+    "The options are all neck injuries, are plausible to a weak student and give no cues",
+    "It tests clinical risk assessment in a family-violence setting, which fits Step 2 CK well"
+   ],
+   "suggestion": "In the explanation for C, say that laryngeal oedema can cause delayed airway compromise, but that it usually comes with symptoms and is watched for by observation. Arterial dissection, by contrast, can stay silent until a stroke happens."
+  },
+  "second": {
+   "hash": "a3e255f5",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:24:05.659Z",
+   "solves": [
+    {
+     "answer": 4,
+     "confidence": 0.9,
+     "reason": "After strangulation with loss of consciousness and petechiae, the key delayed complication to exclude is carotid artery dissection, which can cause a stroke later despite a normal initial exam, so CT angiography of the neck is warranted."
+    },
+    {
+     "answer": 4,
+     "confidence": 0.9,
+     "reason": "Strangulation with loss of consciousness and petechiae is high risk for blunt cervical vascular injury, and carotid dissection can cause a delayed stroke despite a normal initial neurological exam, so CT angiography of the neck is warranted."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Explanation for C overstates things: laryngeal injury can cause delayed airway oedema and obstruction up to 24-36 hours "
+    ],
+    "topic": "Emergency Medicine",
+    "verdict": "accept",
+    "reasons": [
+     "The key matches current guidance: after strangulation with loss of consciousness, CTA of the neck is needed to exclude cervical arterial dissection",
+     "The options are homogeneous neck-injury complications with no cues",
+     "High-yield, safety-relevant topic that also covers family violence risk assessment"
+    ],
+    "suggestion": "Change the explanation for C: laryngeal fracture usually causes symptoms early, but delayed airway oedema can happen, so the airway still needs watching. Dissection stays the key because it can be silent at first and lead to a stroke."
+   }
   }
  },
  "ai-mcq-68cbeec6": {
@@ -11836,6 +12704,93 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-81f94566": {
+  "hash": "8adda439",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:21:31.733Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "Active inflammatory disease with low serum iron, low transferrin, low saturation, high ferritin and normocytic indices is classic hepcidin-driven anaemia of inflammation."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "A normocytic anaemia with low iron, low transferrin, low saturation and high ferritin in active rheumatoid arthritis is the typical picture of anaemia of inflammation, where hepcidin traps iron in storage."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Minimal vignette (lab list without clinical context)",
+    "Lead-in is a sentence fragment rather than a closed question",
+    "Distractors B and E are eliminated immediately by the normal MCV"
+   ],
+   "topic": "Haematology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is clearly correct: low TSAT with low transferrin and high ferritin in active RA",
+    "Options are homogeneous with one clear best answer",
+    "Explanation is accurate and addresses each distractor, including the masked iron deficiency caveat"
+   ],
+   "suggestion": "Add a brief clinical context (symptoms, methotrexate, raised CRP) and phrase the lead-in as a full question; consider a next-step or management angle to raise difficulty."
+  },
+  "second": {
+   "hash": "8adda439",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:24:19.158Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "In active rheumatoid arthritis, a normocytic anaemia with low iron, low transferrin, low saturation and high ferritin fits hepcidin-driven anaemia of inflammation."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "Active RA with normocytic anaemia, low iron, low transferrin, low saturation and high ferritin fits anaemia of inflammation, where hepcidin traps iron in macrophages."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "lead-in is a fragment rather than a complete question",
+     "minimal vignette; largely lab-pattern recognition"
+    ],
+    "topic": "Haematology",
+    "verdict": "accept",
+    "reasons": [
+     "Key is clearly correct: normocytic anaemia, low iron/transferrin, high ferritin in active RA",
+     "Distractors are homogeneous, plausible and clearly worse",
+     "Explanation is accurate and addresses each option, including masked coexisting iron deficiency"
+    ],
+    "suggestion": "Optionally rephrase the lead-in as 'Which of the following is the most likely cause of this patient's anaemia?' and add brief clinical context (symptoms, medications, CRP)."
+   }
+  }
+ },
  "ai-mcq-8251d682": {
   "hash": "b4a12a11",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -12093,6 +13048,94 @@
     "Distractors are the same kind of option, plausible, and each one tests a real pitfall"
    ],
    "suggestion": "Cite only guidelines that can be checked (ESC 2024, ACC/AHA 2022), and reword the explanation for E to say that antithrombotics given for a suspected ACS are harmful in dissection."
+  }
+ },
+ "ai-mcq-8625be8a": {
+  "hash": "44c4b37b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:21:37.730Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "A recent, valid advance directive that covers this exact situation is the patient's own autonomous decision, and it overrides the substitute decision-maker, whose job is only to speak for the patient's known wishes."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "A recent, valid advance directive that covers this exact situation is the patient's own autonomous decision, so it outranks a substitute decision-maker's wishes; you should honour it and not intubate, while still giving full comfort care and supporting the daughter."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Options are very terse; 'Honour the directive' is the only one that respects patient autonomy, which test-wise students ",
+    "Stem is sparse (no setting or vitals) and the explanation assumes an Australian jurisdiction the stem never names",
+    "Explanation does not say whether non-invasive ventilation, if not refused, would still be an option"
+   ],
+   "topic": "Medicolegal",
+   "verdict": "accept",
+   "reasons": [
+    "The key is right: a valid advance directive that applies to the situation is binding, and the substitute decision-maker cannot override it",
+    "The distractors are realistic wrong moves when a family is in conflict with the patient's directive",
+    "The explanation covers every option clearly"
+   ],
+   "suggestion": "Add a short clinical setting (for example, the emergency department, with ABG findings), and mention in the explanation that NIV or other treatments the directive does not refuse may still be offered along with comfort care."
+  },
+  "second": {
+   "hash": "44c4b37b",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:24:18.752Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.93,
+     "reason": "A recent, valid advance directive that applies to this situation is the patient's own autonomous refusal and outranks the substitute decision-maker's demand, so it should be honoured."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.93,
+     "reason": "The patient's recent, valid advance directive directly covers this situation, so it reflects his own autonomous choice and outranks his substitute decision-maker; the team should honour it by not intubating while still giving full comfort and other care."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "vignette gives the answer away (\"valid\" and \"applies to this scenario\" stated outright)",
+     "sparse stem with minimal clinical detail",
+     "jurisdiction (Australian) assumed in explanation but not stated in stem"
+    ],
+    "topic": "Medicolegal",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct: a valid, applicable advance directive refusal is binding and cannot be overridden by a substitute decision-maker",
+     "Distractors are homogeneous, plausible actions that test a real misconception",
+     "Minor cueing from the stem calling the directive 'valid' and 'applicable', but the item works"
+    ],
+    "suggestion": "Show validity with details (signed while competent, specifically refuses intubation for respiratory failure) instead of using the words 'valid' and 'applies', and name the jurisdiction. Make option A 'Withhold intubation and provide comfort-focused care'."
+   }
   }
  },
  "ai-mcq-8726bf40": {
@@ -13084,6 +14127,93 @@
    }
   }
  },
+ "ai-mcq-97741b84": {
+  "hash": "29bd9f21",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:21:49.922Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "An intimate examination under anaesthesia needs the patient's explicit prior consent, which she hasn't given, so the student should politely decline."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.97,
+    "reason": "An intimate examination of an anaesthetised patient for teaching needs her explicit prior consent, and she did not give it, so the student should decline; supervision, telling her afterwards or asking her husband cannot replace her own consent."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem cue: 'consent form does not mention students' signals the answer",
+    "Distractors D and E are weak and easily eliminated",
+    "Terse stem with minimal vignette"
+   ],
+   "topic": "Bioethics",
+   "verdict": "accept",
+   "reasons": [
+    "Key reflects current consent standards for intimate examinations under anaesthesia",
+    "Clear single best answer with a thorough explanation",
+    "Weak distractors are a minor flaw that does not undermine the item"
+   ],
+   "suggestion": "Replace D or E with a more plausible distractor, such as 'Examine, as she signed general consent for the procedure', so the item tests the idea that general procedural consent does not cover student examinations."
+  },
+  "second": {
+   "hash": "29bd9f21",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:24:31.761Z",
+   "solves": [
+    {
+     "answer": 1,
+     "confidence": 0.96,
+     "reason": "An intimate examination under anaesthesia needs the patient's own explicit prior consent, which she has not given, so the student must decline; supervision, telling her afterwards or the husband's consent cannot replace it, and an Ahpra report is not the first step."
+    },
+    {
+     "answer": 1,
+     "confidence": 0.97,
+     "reason": "An intimate examination of an anaesthetised patient by a student needs her explicit prior consent, so without it the student must decline."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Stem does not state that the examination is for teaching purposes, so the reader must infer it",
+     "Jurisdiction-specific terms (Ahpra, registrar) limit use outside Australia"
+    ],
+    "topic": "Bioethics",
+    "verdict": "accept",
+    "reasons": [
+     "Key matches current consent standards for intimate examinations under anaesthesia",
+     "Options are homogeneous, plausible actions with one clearly best answer",
+     "Explanation covers each distractor clearly"
+    ],
+    "suggestion": "Optionally add \"for teaching purposes\" to the stem, and say that she was never asked about student involvement, to remove any doubt that the examination is clinically needed."
+   }
+  }
+ },
  "ai-mcq-97802bf3": {
   "hash": "9fc37c46",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -13168,6 +14298,94 @@
      "The explanation teaches the right next steps (child protection report, eye exam, skeletal survey). Its one weakness is a small overstatement about dating the bleeds."
     ],
     "suggestion": "Change \"That means repeated injury\" to \"suggests injuries possibly of different ages; mixed density alone cannot reliably date bleeds\". Optionally add head circumference or a bruise finding to the stem so it reads more like a full vignette."
+   }
+  }
+ },
+ "ai-mcq-981188a9": {
+  "hash": "f5a447c4",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:22:02.559Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "Doctors shouldn't prescribe controlled drugs for themselves, so the key step is registering with a GP for independent care, including any supervised taper."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Doctors should not self-prescribe and should be registered with their own GP, who can independently manage her insomnia and oversee a safe benzodiazepine taper."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (\"She has no general practitioner\" points straight to C)",
+    "lead-in is a fragment rather than a full question",
+    "thin stem: unclear who she is confiding in; no detail on mood, amount used or impairment",
+    "weak distractors (B and E are easy to eliminate)"
+   ],
+   "topic": "Professionalism",
+   "verdict": "revise",
+   "reasons": [
+    "Key matches the MBA Code of Conduct on doctors' health and self-prescribing",
+    "The stem cue makes the answer obvious",
+    "Thin vignette and fragment lead-in"
+   ],
+   "suggestion": "Remove \"She has no general practitioner\" (or give the same kind of detail for other options), state who she confides in, and use a full lead-in such as \"Which of the following is the most appropriate advice?\". Add a line to the explanation on why mandatory notification is not required here (no substantial risk to the public)."
+  },
+  "second": {
+   "hash": "f5a447c4",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:24:44.972Z",
+   "solves": [
+    {
+     "answer": 2,
+     "confidence": 0.88,
+     "reason": "Doctors should not self-prescribe, especially controlled drugs, and should register with an independent GP who can objectively assess and manage her insomnia and possible benzodiazepine dependence."
+    },
+    {
+     "answer": 2,
+     "confidence": 0.85,
+     "reason": "Doctors should not self-prescribe controlled drugs and should be registered with their own GP, who can independently assess her insomnia and any dependence and supervise a safe taper."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Lead-in is a fragment rather than a complete question",
+     "Option E is somewhat heterogeneous (work change rather than treatment or access to care)"
+    ],
+    "topic": "Professionalism",
+    "verdict": "accept",
+    "reasons": [
+     "Key matches the Medical Board of Australia Code of Conduct on self-prescribing and doctors having their own GP",
+     "Distractors are plausible, and the explanation handles the tapering option (D) correctly",
+     "Applies professional ethics to a realistic clinical scenario"
+    ],
+    "suggestion": "Rewrite the lead-in as a complete question, e.g. \"Which of the following is the most appropriate advice?\""
    }
   }
  },
@@ -15577,6 +16795,49 @@
     ],
     "suggestion": "Replace options B and C with oestrogen-free alternatives that are acceptable but less suited to her, such as the etonogestrel implant, DMPA or the copper IUD (which worsens bleeding). Soften the explanation's claims about preventing recurrence and about fetal harm from rivaroxaban."
    }
+  }
+ },
+ "ai-mcq-a9dc481d": {
+  "hash": "17e4c28d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:22:04.688Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.85,
+    "reason": "Bilious vomiting in a neonate is malrotation with volvulus until proven otherwise, and an urgent upper GI contrast study is the gold-standard test even when the X-ray is normal."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "Bilious vomiting in a neonate with a normal X-ray needs an urgent upper GI contrast study to rule out malrotation with midgut volvulus."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Venous blood gas is a non-imaging option among imaging options (slightly heterogeneous)",
+    "Ultrasound is increasingly used first-line in some centres, making A mildly arguable"
+   ],
+   "topic": "Neonatology",
+   "verdict": "accept",
+   "reasons": [
+    "Key reflects the standard teaching that bilious vomiting means malrotation until proven otherwise, with upper GI contrast as the gold standard",
+    "Tests an important emergency not to miss, with a realistic well-baby trap",
+    "Explanation is clear and addresses each distractor accurately"
+   ],
+   "suggestion": "Optionally add vital signs, and note in the explanation that urgent surgical referral and nasogastric decompression go alongside the contrast study."
   }
  },
  "ai-mcq-aa50ea7f": {
@@ -19948,6 +21209,89 @@
    "suggestion": "Rewrite E's explanation as: 'CT shows bone destruction but displays the cord and epidural soft tissue poorly; use CT (or CT myelography) only if MRI is contraindicated.' Consider replacing PSA with another imaging option, such as PET-CT, to keep the options consistent."
   }
  },
+ "ai-mcq-d1ea6a49": {
+  "hash": "92689052",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:22:18.109Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "An anti-HBs level below 10 mIU/mL 1–2 months after a full three-dose course, with negative HBsAg and anti-HBc, means vaccine non-response; she needs a repeat series and retesting."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "An anti-HBs level below 10 mIU/mL measured 1–2 months after a complete vaccine series, with negative HBsAg and anti-HBc, means she did not respond to the vaccine, so she needs a repeat series and retesting."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Low cognitive level: a single step of reading serology rather than choosing a next step",
+    "Occult hepatitis B is a weak distractor"
+   ],
+   "topic": "Infectious Diseases",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct and the only defensible answer",
+    "Clear vignette with properly timed post-vaccination serology",
+    "Explanation covers the key and every distractor accurately and sets out the management that follows"
+   ],
+   "suggestion": "To test a higher level, ask for the most appropriate next step, with options such as a repeat course followed by retesting, a single booster, no action, or HBIG. Strictly, 'non-responder' is the label used after two courses, so the key could read 'No response to the primary vaccine course'."
+  },
+  "second": {
+   "hash": "92689052",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:24:49.158Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.96,
+     "reason": "An anti-HBs level below 10 mIU/mL 1–2 months after a full vaccine series, with negative HBsAg and anti-HBc, means she did not respond to the vaccine and needs a second series."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.95,
+     "reason": "Anti-HBs below 10 mIU/mL 1–2 months after a full vaccine series, with negative HBsAg and anti-HBc, means she did not respond to the vaccine; she needs a second series and a retest."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 3,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [],
+    "topic": "Infectious Diseases",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct: anti-HBs <10 mIU/mL 4-8 weeks after a full course with negative HBsAg and anti-HBc means vaccine non-response",
+     "Options are all the same kind of thing and free of cues; the explanation covers each one accurately",
+     "Somewhat easy: chronic and resolved infection are quickly ruled out by the negative serology"
+    ],
+    "suggestion": "Optionally turn it into a next-step question (key: give more vaccine doses and recheck anti-HBs; distractors such as HBIG now, no action, or HBV DNA testing) so it tests management rather than just reading the result."
+   }
+  }
+ },
  "ai-mcq-d268f468": {
   "hash": "3c822f73",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -20333,6 +21677,92 @@
    }
   }
  },
+ "ai-mcq-d59db04b": {
+  "hash": "985f8ffb",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:22:22.870Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "A non-healing ulcer with raised, everted edges arising in a long-standing burn scar is a Marjolin ulcer, which is most commonly squamous cell carcinoma."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "This is a Marjolin ulcer: a non-healing ulcer with raised, everted edges that develops decades later in an old burn scar, and it is most often a squamous cell carcinoma."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Classic buzzword vignette (ulcer in an old burn scar) makes this close to pattern-recognition recall",
+    "Lead-in is a sentence fragment rather than a complete question"
+   ],
+   "topic": "Dermatology",
+   "verdict": "accept",
+   "reasons": [
+    "The key is correct: a Marjolin ulcer is most often squamous cell carcinoma",
+    "The distractors are all skin malignancies of the same kind as the key, and none is equally correct",
+    "The explanation is accurate and deals with each distractor"
+   ],
+   "suggestion": "To test at a higher level, rewrite the lead-in as a full question, such as \"Which of the following is the most likely diagnosis?\" Or ask for the next step in management, with biopsy of the ulcer edge as the key."
+  },
+  "second": {
+   "hash": "985f8ffb",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:24:50.913Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "A Marjolin ulcer is a cancer arising in a chronic burn scar after a long quiet period, and it is most often squamous cell carcinoma, which typically appears as an ulcer with raised, everted edges."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "An ulcer with raised, everted edges that won't heal and grows in an old burn scar is a Marjolin ulcer, which is most often a squamous cell carcinoma."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Terse, telegraphic lead-in ('Most likely malignancy?') rather than a complete question",
+     "Classic buzzword vignette (burn scar + everted edges) makes it a pattern-recognition recall item"
+    ],
+    "topic": "Dermatology",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct: a Marjolin ulcer is most often squamous cell carcinoma",
+     "The distractors are all skin cancers and all plausible",
+     "The explanation teaches the concept and the need for biopsy, though it overstates one point: DFSP has occasionally been reported in scars"
+    ],
+    "suggestion": "Write the lead-in as a full question (\"Which of the following is the most likely diagnosis?\"). To test at a higher level, you could ask for the most appropriate next step (incisional or edge biopsy) instead. Soften the DFSP line to \"rarely associated with scars.\""
+   }
+  }
+ },
  "ai-mcq-d602157c": {
   "hash": "3d87d36e",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -20546,6 +21976,48 @@
     ],
     "suggestion": "Optionally shorten option C (e.g. 'Symptomatic care and home isolation') so its length does not cue the key."
    }
+  }
+ },
+ "ai-mcq-d7f18e2d": {
+  "hash": "92faaa1c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:22:34.272Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.88,
+    "reason": "For terminal respiratory secretions (death rattle) that persist after repositioning, the standard treatment is an antimuscarinic such as hyoscine butylbromide, together with reassuring the family."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.88,
+    "reason": "Terminal respiratory secretions (death rattle) that persist after repositioning are treated with an antimuscarinic such as hyoscine butylbromide, along with reassuring the family."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option A omits the route while all other options specify one (minor inconsistency)"
+   ],
+   "topic": "Palliative Care",
+   "verdict": "accept",
+   "reasons": [
+    "Key is guideline-concordant management of terminal respiratory secretions after failed repositioning",
+    "Distractors are plausible, homogeneous, and each clearly inferior for a specific reason",
+    "Explanation teaches the mechanism, timing, and family reassurance well"
+   ],
+   "suggestion": "Write option A as 'Subcutaneous hyoscine butylbromide' to match the format of the other options. You could also mention in the explanation that the evidence for anticholinergics is limited and that glycopyrronium is an alternative."
   }
  },
  "ai-mcq-d95ed2a4": {
@@ -23033,6 +24505,92 @@
    "suggestion": "Optionally reword the lead-in to 'When is there effectively no risk of sexual transmission?' and say that the viral load is below 200 copies/mL in option A."
   }
  },
+ "ai-mcq-f0817efd": {
+  "hash": "14b0b800",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:22:38.730Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "Doctors should not prescribe controlled drugs for colleagues they have no proper treating relationship with, and nothing here points to impairment that would need a mandatory notification, so the right move is to encourage her to register with and see her own GP."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "Doctors shouldn't informally prescribe drugs of dependence like benzodiazepines to colleagues, and there's nothing here suggesting impairment that would require notification, so the right move is to encourage her to register with her own GP for proper care."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Lead-in is a fragment rather than a complete question"
+   ],
+   "topic": "Professionalism",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches the Medical Board of Australia Code of Conduct and the principle applies widely",
+    "Each distractor is plausible and wrong for a clear, different reason",
+    "The explanation covers why the key is right and why each distractor is wrong"
+   ],
+   "suggestion": "Rewrite the lead-in as a complete question, e.g. 'Which of the following is the most appropriate response?'"
+  },
+  "second": {
+   "hash": "14b0b800",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:25:08.488Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.93,
+     "reason": "Doctors shouldn't prescribe for colleagues outside a proper therapeutic relationship, especially controlled drugs like temazepam, and nothing suggests impairment that would require notification, so the right step is to encourage her to see her own GP."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.93,
+     "reason": "Doctors should not prescribe for colleagues outside a proper doctor–patient relationship, especially controlled drugs like benzodiazepines, so the right step is to encourage her to see her own GP."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Lead-in is a fragment rather than a full question",
+     "Option E (taking ward stock) is implausible to most examinees",
+     "Australia-specific framing (mandatory notification, Medical Board code), though the principle applies everywhere"
+    ],
+    "topic": "Professionalism",
+    "verdict": "accept",
+    "reasons": [
+     "Key matches professional codes on not prescribing informally for colleagues",
+     "One clearly best answer with similar, action-based distractors",
+     "Explanation addresses every option accurately"
+    ],
+    "suggestion": "Make the lead-in a full question, e.g. \"Which of the following is the most appropriate response?\". Replace E with a more tempting option, such as offering a formal consultation with full notes."
+   }
+  }
+ },
  "ai-mcq-f1cafb17": {
   "hash": "c1de2edf",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -23560,6 +25118,93 @@
     "The explanation is clear and current, and it deals with each distractor"
    ],
    "suggestion": "You could ask for the next step in management instead (keep peanut in the diet, avoid it, or do an oral food challenge) so the item tests application more directly. You could also swap option C for a more plausible distractor, such as a false positive caused by dermatographism."
+  }
+ },
+ "ai-mcq-f5f7ca8f": {
+  "hash": "3eb7dd33",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T07:22:46.604Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "The baby is well, but his bilirubin is above the phototherapy threshold and well below the exchange transfusion line, so NICE guidance says to start phototherapy and recheck bilirubin 4–6 hours later."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.97,
+    "reason": "The bilirubin is above the phototherapy threshold for his age, so phototherapy should start now; it is well below the exchange line, so exchange transfusion and IVIG are not needed, and he should keep breastfeeding."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (states bilirubin is above the phototherapy line)",
+    "weak distractor (stop breastfeeding)"
+   ],
+   "topic": "Neonatology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and clearly the best option",
+    "Stem states the threshold result, so the item tests recall of a rule rather than clinical interpretation",
+    "Too little clinical detail (no hour of life, risk factors, blood group or DAT)"
+   ],
+   "suggestion": "Give the hour of life, gestation, bilirubin and the relevant nomogram thresholds (or a nomogram image) and let the student decide where the level falls, rather than saying it is above the phototherapy line. Add blood group and DAT results so the IVIG distractor is more plausible."
+  },
+  "second": {
+   "hash": "3eb7dd33",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T07:25:11.952Z",
+   "solves": [
+    {
+     "answer": 4,
+     "confidence": 0.95,
+     "reason": "Bilirubin is above the phototherapy threshold but well below the exchange line in a well, feeding term baby, so phototherapy is indicated while breastfeeding continues."
+    },
+    {
+     "answer": 4,
+     "confidence": 0.95,
+     "reason": "The bilirubin is above the phototherapy threshold but well below the exchange transfusion threshold, so phototherapy is indicated, and breastfeeding should continue."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 2,
+    "relevance": 3,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "vignette gives the answer away (states bilirubin is above phototherapy line and well below exchange line)",
+     "distractor A explicitly excluded by the stem",
+     "distractors B and C implausible with no supporting clinical data"
+    ],
+    "topic": "Neonatology",
+    "verdict": "revise",
+    "reasons": [
+     "Key is correct and consistent with current neonatal jaundice guidelines",
+     "Stem states the threshold interpretation outright, so no clinical reasoning is tested",
+     "Most distractors are ruled out by the stem or lack any supporting findings"
+    ],
+    "suggestion": "Give the age in hours, gestation, risk factors and supporting results (e.g. blood groups/DAT), and let the student apply the nomogram instead of saying the level is above the phototherapy line. Consider making the case borderline near the escalation threshold so that intensive phototherapy, IVIG and exchange become real choices."
+   }
   }
  },
  "ai-mcq-f7cd1d48": {

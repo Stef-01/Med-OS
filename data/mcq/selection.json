@@ -1,57 +1,57 @@
 {
  "stats": {
   "candidates": {
-   "ai": 417,
+   "ai": 438,
    "amsa": 105,
    "open-exam": 786,
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 310,
+   "ai": 345,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
   },
   "status": {
-   "pool": 648,
-   "rejected": 880,
-   "reserve": 646
+   "pool": 683,
+   "rejected": 885,
+   "reserve": 627
   },
   "topics": {
    "Endocrinology": 23,
-   "Bioethics": 8,
+   "Bioethics": 11,
    "OMS/Dental": 8,
    "Breast/Endocrine Surgery": 9,
-   "Paediatrics": 33,
+   "Paediatrics": 34,
    "Obstetrics": 17,
-   "Pathology": 5,
-   "Trauma Surgery": 14,
+   "Pathology": 6,
+   "Trauma Surgery": 15,
    "Gastroenterology": 65,
+   "Occupational/Environmental Medicine": 12,
    "Cardiology": 58,
-   "Palliative Care": 6,
-   "Medicolegal": 8,
-   "Haematology": 17,
+   "Palliative Care": 8,
+   "Medicolegal": 9,
+   "Haematology": 18,
    "Otorhinolaryngology": 13,
    "Vascular Surgery": 9,
-   "Infectious Diseases": 42,
+   "Infectious Diseases": 43,
    "Rheumatology": 24,
-   "Emergency Medicine": 26,
-   "Professionalism": 6,
-   "Respiratory Medicine": 31,
+   "Emergency Medicine": 27,
+   "Professionalism": 11,
+   "Respiratory Medicine": 33,
    "Gastrointestinal Surgery": 10,
-   "Neurology": 39,
-   "Neonatology": 13,
-   "Occupational/Environmental Medicine": 9,
-   "Neurosurgery": 6,
+   "Neurology": 40,
+   "Neonatology": 16,
+   "Neurosurgery": 7,
    "General Surgery": 17,
-   "Indigenous Health": 5,
-   "General Practice": 13,
+   "Gynaecology": 21,
+   "Indigenous Health": 7,
+   "General Practice": 14,
    "Addiction Medicine": 3,
    "Immunology": 9,
    "Cardiothoracic Surgery": 3,
-   "Gynaecology": 19,
-   "Plastic Surgery": 5,
-   "Urology": 7,
+   "Plastic Surgery": 7,
+   "Urology": 8,
    "Ophthalmology": 3,
    "Sexual Health": 6,
    "Nephrology": 11,
@@ -77,17 +77,17 @@
    },
    "5": {
     "counts": [
-     68,
-     81,
-     69,
-     71,
-     84
+     78,
+     87,
+     76,
+     78,
+     89
     ],
-    "n": 373,
-    "chi2": 2.91
+    "n": 408,
+    "chi2": 1.73
    }
   },
-  "topicCap": 98,
+  "topicCap": 103,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -108,6 +108,13 @@
     "review": 58,
     "bar": 89
    },
+   "ai rapid": {
+    "n": 279,
+    "pool": 235,
+    "review": 3,
+    "duplicate": 7,
+    "bar": 34
+   },
    "usmle-resource mmlu": {
     "n": 272,
     "reserve": 167,
@@ -115,14 +122,6 @@
     "pool": 58,
     "review": 19,
     "flaws": 1
-   },
-   "ai rapid": {
-    "n": 258,
-    "pool": 200,
-    "review": 3,
-    "duplicate": 7,
-    "bar": 29,
-    "reserve": 19
    },
    "ai vignette": {
     "n": 159,
@@ -279,6 +278,18 @@
    "quality": 80,
    "flaws": [
     "vignette:minor"
+   ]
+  },
+  {
+   "id": "ai-mcq-073e74ad",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
+   "flaws": [
+    "clang:minor"
    ]
   },
   {
@@ -501,6 +512,18 @@
    ]
   },
   {
+   "id": "ai-mcq-151af53c",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
+   "flaws": [
+    "vignette:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-1700aeb5",
    "kind": "ai",
    "route": "ai rapid",
@@ -578,11 +601,9 @@
    "id": "ai-mcq-1acdeccc",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 89), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 89
   },
   {
@@ -711,6 +732,17 @@
    "flaws": [
     "absolute-terms:minor"
    ]
+  },
+  {
+   "id": "ai-mcq-2514decc",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 87 is below the AI-written bar of 89 (flaws 100, review 79)"
+   ],
+   "quality": 87
   },
   {
    "id": "ai-mcq-27c244ad",
@@ -924,6 +956,20 @@
    "quality": 95
   },
   {
+   "id": "ai-mcq-357431c1",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 88 is below the AI-written bar of 89 (flaws 94, review 84): vignette"
+   ],
+   "quality": 88,
+   "flaws": [
+    "vignette:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-35f5c887",
    "kind": "ai",
    "route": "ai vignette",
@@ -1111,6 +1157,20 @@
    "quality": 95
   },
   {
+   "id": "ai-mcq-42875c3e",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 94, review 77): clang"
+   ],
+   "quality": 84,
+   "flaws": [
+    "clang:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-42dc15b2",
    "kind": "ai",
    "route": "ai vignette",
@@ -1181,11 +1241,9 @@
    "id": "ai-mcq-4550ca09",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -1230,6 +1288,18 @@
    "status": "pool",
    "reasons": [],
    "quality": 95
+  },
+  {
+   "id": "ai-mcq-486ae70d",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
+   "flaws": [
+    "vignette:minor"
+   ]
   },
   {
    "id": "ai-mcq-491500a6",
@@ -1298,6 +1368,15 @@
    "quality": 98
   },
   {
+   "id": "ai-mcq-4deb595c",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
+  },
+  {
    "id": "ai-mcq-4f0b0534",
    "kind": "ai",
    "route": "ai rapid",
@@ -1328,11 +1407,9 @@
    "id": "ai-mcq-4f949177",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -1378,11 +1455,9 @@
    "id": "ai-mcq-52afd1e3",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90,
    "flaws": [
     "vignette:minor"
@@ -1396,6 +1471,18 @@
    "status": "pool",
    "reasons": [],
    "quality": 98
+  },
+  {
+   "id": "ai-mcq-52eba043",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
+   "flaws": [
+    "vignette:minor"
+   ]
   },
   {
    "id": "ai-mcq-537f99f4",
@@ -1571,11 +1658,9 @@
    "id": "ai-mcq-5c4e46c7",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -1677,6 +1762,27 @@
    ]
   },
   {
+   "id": "ai-mcq-65b928b3",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
+  },
+  {
+   "id": "ai-mcq-65df9dcf",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
+   "flaws": [
+    "vignette:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-666bb226",
    "kind": "ai",
    "route": "ai rapid",
@@ -1712,6 +1818,15 @@
    "flaws": [
     "vignette:minor"
    ]
+  },
+  {
+   "id": "ai-mcq-68119778",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 92
   },
   {
    "id": "ai-mcq-68cbeec6",
@@ -1839,11 +1954,9 @@
    "id": "ai-mcq-6f672845",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -2119,6 +2232,15 @@
    "quality": 98
   },
   {
+   "id": "ai-mcq-81f94566",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
+  },
+  {
    "id": "ai-mcq-8251d682",
    "kind": "ai",
    "route": "ai rapid",
@@ -2143,11 +2265,9 @@
    "id": "ai-mcq-85579bea",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 89), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 89,
    "flaws": [
     "vignette:minor"
@@ -2161,6 +2281,21 @@
    "status": "pool",
    "reasons": [],
    "quality": 97
+  },
+  {
+   "id": "ai-mcq-8625be8a",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 88 is below the AI-written bar of 89 (flaws 88, review 88): clang, vignette"
+   ],
+   "quality": 88,
+   "flaws": [
+    "clang:minor",
+    "vignette:minor"
+   ]
   },
   {
    "id": "ai-mcq-8726bf40",
@@ -2279,11 +2414,9 @@
    "id": "ai-mcq-93472628",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -2329,6 +2462,15 @@
    ]
   },
   {
+   "id": "ai-mcq-97741b84",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
+  },
+  {
    "id": "ai-mcq-97802bf3",
    "kind": "ai",
    "route": "ai rapid",
@@ -2336,6 +2478,18 @@
    "status": "pool",
    "reasons": [],
    "quality": 92
+  },
+  {
+   "id": "ai-mcq-981188a9",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
+   "flaws": [
+    "vignette:minor"
+   ]
   },
   {
    "id": "ai-mcq-995e2a46",
@@ -2545,11 +2699,9 @@
    "id": "ai-mcq-a2209e4e",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -2719,6 +2871,15 @@
    "quality": 90
   },
   {
+   "id": "ai-mcq-a9dc481d",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 95
+  },
+  {
    "id": "ai-mcq-aa50ea7f",
    "kind": "ai",
    "route": "ai rapid",
@@ -2825,11 +2986,9 @@
    "id": "ai-mcq-aeef6992",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -2967,11 +3126,9 @@
    "id": "ai-mcq-b83a1d3a",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 89), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 89
   },
   {
@@ -3029,11 +3186,9 @@
    "id": "ai-mcq-ba226872",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -3081,11 +3236,9 @@
    "id": "ai-mcq-be000f7c",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90,
    "flaws": [
     "vignette:minor"
@@ -3116,11 +3269,9 @@
    "id": "ai-mcq-bf08d9cd",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -3205,11 +3356,9 @@
    "id": "ai-mcq-c79825ea",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 89), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 89
   },
   {
@@ -3333,11 +3482,9 @@
    "id": "ai-mcq-cbe34a57",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90,
    "flaws": [
     "vignette:minor"
@@ -3438,6 +3585,18 @@
    "quality": 95
   },
   {
+   "id": "ai-mcq-d1ea6a49",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
+   "flaws": [
+    "clang:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-d268f468",
    "kind": "ai",
    "route": "ai vignette",
@@ -3498,14 +3657,24 @@
    "quality": 95
   },
   {
+   "id": "ai-mcq-d59db04b",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
+   "flaws": [
+    "vignette:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-d602157c",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90
   },
   {
@@ -3525,6 +3694,15 @@
    "status": "pool",
    "reasons": [],
    "quality": 94
+  },
+  {
+   "id": "ai-mcq-d7f18e2d",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-d95ed2a4",
@@ -3923,11 +4101,9 @@
    "id": "ai-mcq-ef498b41",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 90,
    "flaws": [
     "absolute-terms:minor",
@@ -3942,6 +4118,18 @@
    "status": "pool",
    "reasons": [],
    "quality": 95
+  },
+  {
+   "id": "ai-mcq-f0817efd",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
+   "flaws": [
+    "vignette:minor"
+   ]
   },
   {
    "id": "ai-mcq-f1cafb17",
@@ -4011,6 +4199,20 @@
    "quality": 96
   },
   {
+   "id": "ai-mcq-f5f7ca8f",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 87 is below the AI-written bar of 89 (flaws 94, review 83): clang"
+   ],
+   "quality": 87,
+   "flaws": [
+    "clang:minor"
+   ]
+  },
+  {
    "id": "ai-mcq-f7cd1d48",
    "kind": "ai",
    "route": "ai rapid",
@@ -4062,11 +4264,9 @@
    "id": "ai-mcq-f9bdca71",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 89), but the AI-written Rapid quota of 200 is full"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
    "quality": 89
   },
   {

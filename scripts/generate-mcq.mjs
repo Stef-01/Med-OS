@@ -7,7 +7,7 @@
      node scripts/generate-mcq.mjs --sample 40            40 stations (seeded), the focus rotating over the four
      node scripts/generate-mcq.mjs --sample 80 --form rapid    short questions for the duel's Rapid 15 s format
      node scripts/generate-mcq.mjs --gaps 15 --form rapid --sample 60   aimed at the topics the audit finds thin at 15 s
-   options: --jobs 3 · --dry-run (print, write nothing)
+   options: --jobs 3 · --per n (questions per station, focus and form; 2 for --gaps, else 1) · --dry-run (print, write nothing)
 
    Claude: lib/claude.mjs (the SDK) when ANTHROPIC_API_KEY is set, else the Claude Code CLI (lib/claude-cli.mjs); the
    item records which (generator.how "api" or "cli"). A question that still has a major flaw after its one revision goes
@@ -34,7 +34,13 @@ const store = readJson(GENERATED, { note: 'Written by scripts/generate-mcq.mjs. 
 const FORM = opt('--form') || 'vignette';
 if (!FORMS[FORM]) { console.error(`--form is one of ${Object.keys(FORMS).join(', ')}`); process.exit(2); }
 const formOf = q => (q.tags.find(t => t.startsWith('form:')) || 'form:vignette').slice(5);
-const have = new Set(store.items.map(q => `${q.provenance.generator.basis[0]}|${(q.tags.find(t => t.startsWith('focus:')) || '').slice(6)}|${formOf(q)}`));
+/* how many questions each station has per focus and form; a slot is full at PER (--per; 2 for a gap run, where the
+   thin topics' stations have used every focus once, else 1). The writer is shown what the station already has, so a
+   second question asks for another answer */
+const slotOf = q => `${q.provenance.generator.basis[0]}|${(q.tags.find(t => t.startsWith('focus:')) || '').slice(6)}|${formOf(q)}`;
+const written = new Map();
+for (const q of store.items) written.set(slotOf(q), (written.get(slotOf(q)) || 0) + 1);
+const PER = Number(opt('--per')) || (opt('--gaps') ? 2 : 1), full = (st, fc) => (written.get(`${st.id}|${fc}|${FORM}`) || 0) >= PER;
 const focuses = Object.keys(FOCUS);
 let jobs = [];
 if (opt('--stations')) jobs = list(opt('--stations')).map((id, i) => ({ st: stations.find(s => s.id === id), focus: opt('--focus') || focuses[i % focuses.length] }));
@@ -45,17 +51,17 @@ else if (opt('--gaps')) {   /* where the duel is thin: the audit's topics with f
   const covered = new Set(stations.flatMap(st => st.specialty || []));
   /* a thin topic no station covers gets stand-ins (topicStation), a question each per focus: enough for its gap on top
      of the slots its questions already fill */
-  const written = t => store.items.filter(q => q.tags.includes(tagOf(`topic:${t}`)) && formOf(q) === FORM).length;
-  const variants = t => Math.max(2, Math.ceil((need(t) + written(t)) / focuses.length));
+  const writtenFor = t => store.items.filter(q => q.tags.includes(tagOf(`topic:${t}`)) && formOf(q) === FORM).length;
+  const variants = t => Math.max(2, Math.ceil((need(t) + writtenFor(t)) / focuses.length));
   const standIns = f.thin.filter(t => !covered.has(t)).flatMap(t => Array.from({ length: variants(t) }, (_, v) => topicStation(t, v)));
-  jobs = gapJobs([...stations, ...standIns], thin, need, Number(opt('--sample')) || 40, focuses, opt('--focus'), (st, fc) => have.has(`${st.id}|${fc}|${FORM}`));
+  jobs = gapJobs([...stations, ...standIns], thin, need, Number(opt('--sample')) || 40, focuses, opt('--focus'), full);
   if (standIns.length) console.log(`${new Set(standIns.map(x => x.title)).size} thin topics have no station: ${standIns.length} stand-ins written from the specialty alone`);
   console.log(`gaps at ${secs} s: ${f.thin.length} thin topics; ${jobs.length} stations in them`);
 }
 else if (opt('--sample')) jobs = [...stations].sort((a, b) => fnv(`g:${a.id}`).localeCompare(fnv(`g:${b.id}`))).slice(0, Number(opt('--sample'))).map((st, i) => ({ st, focus: opt('--focus') || focuses[i % focuses.length] }));
 else { console.error('usage: node scripts/generate-mcq.mjs --stations <id,id> | --sample <n> [--focus management|investigation|interpretation|complication] [--form vignette|rapid] [--gaps 15|30|90] [--jobs 3] [--dry-run]'); process.exit(2); }
 if (jobs.some(j => !j.st)) { console.error('no such station'); process.exit(2); }
-jobs = jobs.filter(j => !have.has(`${j.st.id}|${j.focus}|${FORM}`));
+jobs = jobs.filter(j => !full(j.st, j.focus));
 const { ask, how, name } = await claudeAsk();
 console.log(`${jobs.length} ${FORM} questions to write · Claude via ${name}`);
 let kept = 0, failed = 0;

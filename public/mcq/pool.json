@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "version": "pool-648",
+ "version": "pool-683",
  "title": "Standard MCQ pool",
  "note": "Built by scripts/mcq-pool.mjs: candidates from the stations, generate-mcq.mjs, the open USMLE-style banks and open exam sets in data/benchmarks and student submissions, admitted on the flaw checks, the model review and the bars calibrated on the benchmarks (docs/mcq.md). provenance.kind says where each came from: user, ai, amsa, usmle-resource, open-exam.",
  "bars": {
@@ -9,7 +9,7 @@
   "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
  },
  "counts": {
-  "ai": 310,
+  "ai": 345,
   "open-exam": 120,
   "usmle-resource": 160,
   "amsa": 58
@@ -690,6 +690,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T20:33:54.065Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-073e74ad",
+   "stem": "A 34-year-old man ran a petrol generator inside a closed shed and was found unconscious. After oxygen therapy he is now alert with normal neurological examination and carboxyhaemoglobin 4%.",
+   "ask": "Which complication is he most at risk of?",
+   "options": [
+    "Delayed neurological sequelae",
+    "Pulmonary fibrosis",
+    "Peripheral neuropathy",
+    "Posterior subcapsular cataracts",
+    "Chronic kidney disease"
+   ],
+   "answer": 0,
+   "explanation": "After significant carbon monoxide poisoning, especially with loss of consciousness, delayed neurological sequelae can appear days to weeks after apparent recovery. They include memory loss, cognitive and personality change, and parkinsonism. He should be counselled about these symptoms and arranged neurocognitive follow-up, even though he is well at discharge.",
+   "why": [
+    null,
+    "Pulmonary fibrosis follows paraquat or chronic dust exposure, not carbon monoxide poisoning.",
+    "Peripheral neuropathy is a feature of chronic lead, arsenic or solvent exposure, not a typical result of acute carbon monoxide poisoning.",
+    "Posterior subcapsular cataracts are linked to radiation, corticosteroids or electrical injury, not to carbon monoxide.",
+    "Acute kidney injury can occur from rhabdomyolysis during the event, but chronic kidney disease is not the expected long-term risk in a patient who has recovered."
+   ],
+   "topic": "Occupational/Environmental Medicine",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:occupational-environmental-medicin",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Occupational/Environmental Medicine (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:28.119Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-occupational-environmental-medicine-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0438",
+      "medqa-us4-test-0558",
+      "medqa-us4-test-0179"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "clang:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 89,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:20:08.095Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -1853,6 +1922,75 @@
    }
   },
   {
+   "id": "ai-mcq-151af53c",
+   "stem": "A 79-year-old woman admitted with cellulitis refuses intravenous antibiotics. She is drowsy, with fluctuating attention and no focal neurological signs. She recently started hydrochlorothiazide alongside her usual sertraline.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "CT brain",
+    "Mini-Mental State Examination",
+    "Electroencephalogram",
+    "Urine microscopy",
+    "Serum sodium"
+   ],
+   "answer": 4,
+   "explanation": "Fluctuating attention and drowsiness suggest delirium, which may be impairing her capacity to refuse treatment. A thiazide combined with an SSRI is a classic cause of hyponatraemia. Checking serum sodium looks for a reversible cause, because capacity should be optimised and reassessed rather than her refusal simply being accepted or overridden.",
+   "why": [
+    "With no focal signs and an obvious metabolic cause from her medications, brain imaging is not the first investigation.",
+    "A cognitive screening score cannot identify the cause of delirium and does not decide capacity for a particular decision.",
+    "An EEG is for suspected non-convulsive seizures and is not a first-line test for delirium with a clear metabolic cause.",
+    "Her infection is already known to be cellulitis, and the drug history points to hyponatraemia rather than a urinary infection.",
+    null
+   ],
+   "topic": "Bioethics",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:bioethics",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Bioethics (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:14.745Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-bioethics-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0948",
+      "medqa-us4-test-0486",
+      "medqa-us4-test-0457"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 90,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:20:14.723Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-18db6652",
    "stem": "A 20-year-old man has 6 hours of fever 39.5 °C, headache, photophobia and neck stiffness. GCS 15, no focal signs or papilloedema. Blood cultures taken, ceftriaxone and dexamethasone given; coagulation normal.",
    "ask": "Most appropriate next investigation?",
@@ -2258,6 +2396,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:29:42.390Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-1acdeccc",
+   "stem": "A 68-year-old man, a retired boilermaker without symptoms, has a preoperative chest X-ray. It shows bilateral calcified plaques along the diaphragmatic pleura, with clear lung fields.",
+   "ask": "What does this finding most likely indicate?",
+   "options": [
+    "Asbestos exposure",
+    "Malignant mesothelioma",
+    "Asbestosis",
+    "Healed tuberculosis",
+    "Silicosis"
+   ],
+   "answer": 0,
+   "explanation": "Calcified pleural plaques on both sides, especially on the diaphragm, are the classic sign of past asbestos exposure, usually 20 or more years earlier. They are benign and do not reduce lung function. They do not turn into cancer, but they show the exposure that raises his risk of mesothelioma and lung cancer, so he needs advice on quitting smoking and on compensation.",
+   "why": [
+    null,
+    "Mesothelioma usually causes a one-sided pleural effusion or lumpy pleural thickening with chest pain, not neat calcified plaques in a man without symptoms.",
+    "Asbestosis is fibrosis of the lung tissue, usually in the lower zones, so it would not leave the lung fields clear.",
+    "Pleural calcification after tuberculosis is usually on one side and follows an old effusion, not plaques on both sides of the diaphragm.",
+    "Silicosis affects the lung tissue, with nodules in the upper lobes and eggshell calcification of the hilar nodes, not pleural plaques."
+   ],
+   "topic": "Occupational/Environmental Medicine",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:occupational-environmental-medicin",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Occupational/Environmental Medicine (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T01:40:03.935Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-occupational-environmental-medicine-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0438",
+      "medqa-us4-test-0558",
+      "medqa-us4-test-0764"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 82,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:42:53.514Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -5587,6 +5792,74 @@
    }
   },
   {
+   "id": "ai-mcq-4550ca09",
+   "stem": "A 49-year-old woman, 2 hours after hysteroscopy and curettage, has severe lower abdominal pain and guarding. Curettings contained yellow fatty tissue. BP 90/55 mmHg despite 1 L crystalloid.",
+   "ask": "Which investigation will most likely confirm the diagnosis?",
+   "options": [
+    "Diagnostic laparoscopy",
+    "CT abdomen and pelvis",
+    "Transvaginal ultrasound",
+    "FAST ultrasound scan",
+    "Repeat hysteroscopy"
+   ],
+   "answer": 0,
+   "explanation": "Fat in the curettings means the curette went through the uterine wall into omentum or bowel fat, so this is uterine perforation until proven otherwise. She is still shocked after fluids and has peritonism, so the senior gynaecologist should do urgent laparoscopy (or laparotomy). It confirms the perforation, looks for bowel, bladder or vessel injury and allows the bleeding to be controlled at the same time. CT is only for stable patients, when the senior asks for it.",
+   "why": [
+    null,
+    "CT can be used in stable patients, but sending a shocked woman who is not responding to fluids out of the clinical area for a scan delays surgical control of the bleeding.",
+    "Transvaginal ultrasound may show free fluid but cannot reliably show the perforation or rule out bowel injury, and it delays definitive management.",
+    "FAST may show free fluid, but the source is already clear from the procedure, and FAST cannot confirm perforation or rule out bowel or bladder injury.",
+    "Putting fluid back into the cavity at repeat hysteroscopy risks making the perforation worse and pushing fluid into the abdomen, and it cannot assess injury outside the uterus."
+   ],
+   "topic": "Gynaecology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-9fdfd7be",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-9fdfd7be",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:40:01.226Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-9fdfd7be",
+      "osce-ai-9fdfd7be"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0241",
+      "medqa-us4-test-0245"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 83,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:07:10.634Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-476d535a",
    "stem": "A 72-year-old man taking ramipril has routine bloods at his GP. Potassium is 6.8 mmol/L, and the laboratory reports marked haemolysis. He feels well, and his ECG is normal.",
    "ask": "Most appropriate next step?",
@@ -5717,6 +5990,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:30:00.355Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-486ae70d",
+   "stem": "A 64-year-old man with small cell lung cancer has two weeks of facial swelling, morning headache worse on bending forward, and dilated veins over his upper chest wall.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Contrast CT chest",
+    "Chest X-ray",
+    "Transthoracic echocardiogram",
+    "Neck venous duplex",
+    "MRI brain"
+   ],
+   "answer": 0,
+   "explanation": "Facial swelling, headache that gets worse on bending and dilated chest wall veins in a patient with lung cancer point to superior vena cava obstruction (SVCO). Contrast-enhanced CT of the chest confirms it by showing where the obstruction is and what is causing it: tumour compression or clot. The CT also guides the next steps: stenting, radiotherapy or chemotherapy, and anticoagulation if there is thrombus.",
+   "why": [
+    null,
+    "A chest X-ray may show a widened mediastinum or a mass, but it cannot show or exclude obstruction of the vein, so it does not confirm SVCO.",
+    "An echocardiogram looks for pericardial effusion or tamponade, which raises the JVP but does not cause facial swelling and chest wall collateral veins.",
+    "Duplex ultrasound of the neck shows the jugular and subclavian veins but cannot properly see the vena cava inside the chest, where the blockage is.",
+    "Brain metastases can cause morning headache but do not explain the facial swelling and dilated chest wall veins that show the venous outflow is blocked."
+   ],
+   "topic": "Palliative Care",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:palliative-care",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Palliative Care (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:37.109Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-palliative-care-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0934",
+      "medqa-us4-test-0464"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 90,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:20:40.754Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -6196,6 +6538,73 @@
    }
   },
   {
+   "id": "ai-mcq-4deb595c",
+   "stem": "A 28-year-old man with a painless penile ulcer has reactive treponemal serology, RPR titre 1:64. He asks that nobody, including his partner, be told.",
+   "ask": "What does this result require?",
+   "options": [
+    "Tell his partner directly",
+    "Notify public health",
+    "Keep result fully confidential",
+    "Repeat serology first",
+    "Obtain written consent first"
+   ],
+   "answer": 1,
+   "explanation": "A reactive treponemal test with a high RPR titre and a chancre confirms active infectious syphilis. Syphilis is a notifiable condition in every Australian state and territory, so the doctor must notify public health by law, whatever the patient wants. He should still be encouraged and supported to notify his partner himself.",
+   "why": [
+    "Partner notification should first be led by the patient, with support from the doctor or a public health contact tracer; telling the partner directly without his consent is not the first step.",
+    null,
+    "Confidentiality is not absolute, and the law requiring notification overrides his request.",
+    "A reactive treponemal test plus an RPR of 1:64 with a typical ulcer already confirms active infection, so waiting for a repeat test only delays notification and treatment.",
+    "Notification is required by law whether or not the patient agrees, so asking for his written consent does not apply."
+   ],
+   "topic": "Bioethics",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:bioethics",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Bioethics (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:51.838Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-bioethics-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0948",
+      "medqa-us4-test-0486",
+      "medqa-us4-test-0457"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 93,
+    "quality": 96,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:20:53.221Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-4f0b0534",
    "stem": "A 14-year-old boy is 5 hours into treatment for severe diabetic ketoacidosis at first diagnosis. He develops headache and confusion, with heart rate 58/min (was 125) and BP 142/90 mmHg.",
    "ask": "Most appropriate immediate step?",
@@ -6396,6 +6805,74 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:07:36.527Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-4f949177",
+   "stem": "A 42-year-old woman, day 7 after coiling a ruptured anterior communicating aneurysm, becomes drowsy with new left arm weakness. Sodium 138 mmol/L; CT shows no new blood or hydrocephalus.",
+   "ask": "Most likely cause?",
+   "options": [
+    "Aneurysm rebleeding",
+    "Acute hydrocephalus",
+    "Cerebral vasospasm",
+    "Cerebral salt wasting",
+    "Procedural thromboembolism"
+   ],
+   "answer": 2,
+   "explanation": "A new focal deficit or drop in consciousness between days 3 and 14 after aneurysmal SAH, with no new blood, no hydrocephalus and a normal sodium on testing, is delayed cerebral ischaemia from vasospasm. Oral nimodipine 60 mg 4-hourly for 21 days and keeping the patient euvolaemic lower this risk (eTG). Confirm it with CT angiography or perfusion imaging and involve neurosurgery or neurointervention urgently.",
+   "why": [
+    "The aneurysm has been coiled, and CT shows no new blood.",
+    "CT shows no ventricular enlargement, so hydrocephalus does not explain the decline.",
+    null,
+    "A sodium of 138 mmol/L rules out hyponatraemia from cerebral salt wasting.",
+    "Thromboembolism from coiling happens during or within hours of the procedure, not on day 7."
+   ],
+   "topic": "Neurosurgery",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:amsa-361",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-361",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T20:31:28.912Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-361",
+      "osce-amsa-361"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0615",
+      "medqa-us4-test-1187",
+      "medqa-us4-test-0749"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:36:07.060Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -6672,6 +7149,75 @@
    }
   },
   {
+   "id": "ai-mcq-52afd1e3",
+   "stem": "A 24-year-old female medical student sustains a hollow-bore needlestick from a consenting 40-year-old man of unknown blood-borne virus status. The wound is washed and the incident reported.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Student HIV RNA PCR",
+    "Source HIV viral load",
+    "Source patient BBV serology",
+    "Needle tip culture",
+    "Student liver function tests"
+   ],
+   "answer": 2,
+   "explanation": "After first aid and reporting, Australian occupational exposure guidelines call for urgent testing of the source patient for HIV, hepatitis B and hepatitis C, with consent. The result decides whether the student needs HIV post-exposure prophylaxis, which works best if started within 2 hours and no later than 72 hours. The student also has baseline serology, and must not be the one to ask the source patient for consent.",
+   "why": [
+    "A baseline HIV RNA PCR in the student would only show infection she already had, so it does not guide prophylaxis now; baseline antibody serology is enough.",
+    "A viral load only helps once the source is known to be HIV positive, and here his status is unknown.",
+    null,
+    "Culturing the needle has no role, as it cannot reliably detect blood-borne viruses and does not guide management.",
+    "Baseline liver function tests are not the deciding test, as they do not show transmission risk or the need for prophylaxis."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T20:30:07.240Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0432",
+      "medqa-us4-test-0448",
+      "medqa-us4-test-0483"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 88,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:36:08.608Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-52c0dd42",
    "stem": "A 49-year-old man presents to his general practitioner with three attacks of spontaneous spinning vertigo over the past 4 months. Each attack lasted 3 to 5 hours, with nausea and vomiting. Before each attack, his left ear felt blocked and he heard a roaring tinnitus. Afterwards, his hearing in that ear was muffled for several days and then improved. He feels well between attacks. He has hypertension treated with perindopril and drinks four cups of coffee a day. Today he is between attacks. Temperature is 36.7 °C, blood pressure 132/84 mm Hg and pulse 72/min, regular. Otoscopy is normal on both sides. The Weber test lateralises to the right, and the Rinne test is positive on both sides. There is no spontaneous or gaze-evoked nystagmus. The head impulse test is normal, and the Dix-Hallpike test is negative on both sides. The corneal reflexes, facial movements, gait and coordination are normal. Audiometry shows a left sensorineural loss of 40 dB at 250 and 500 Hz with normal thresholds from 2000 Hz. The right ear is normal, and tympanometry is type A on both sides.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -6735,6 +7281,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:42:31.318Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-52eba043",
+   "stem": "A 24-year-old man has an emergency splenectomy for a shattered spleen after a motorcycle crash. He recovers well and is planned for discharge on day five.",
+   "ask": "Which lifelong risk is most important to counsel about?",
+   "options": [
+    "Pancreatic fistula",
+    "Portal vein thrombosis",
+    "Overwhelming sepsis",
+    "Subphrenic abscess",
+    "Incisional hernia"
+   ],
+   "answer": 2,
+   "explanation": "After splenectomy, patients carry a lifelong risk of overwhelming post-splenectomy infection, usually from encapsulated bacteria (pneumococcus, meningococcus, Haemophilus influenzae type b), and it can kill within hours. Australian guidance (eTG, Spleen Australia) covers vaccination, ideally about 14 days after an emergency splenectomy, prophylactic or standby antibiotics, and telling the patient to seek urgent care for any fever.",
+   "why": [
+    "A pancreatic tail injury can cause a fistula, but this happens early after surgery and is not a lifelong risk.",
+    "Portal or splenic vein thrombosis is an early complication, mainly after elective splenectomy for blood disorders with a high platelet count.",
+    null,
+    "A subphrenic abscess is an early complication that appears within weeks of surgery, not a risk that lasts for life.",
+    "An incisional hernia is a common long-term problem after laparotomy, but it is far less dangerous than post-splenectomy sepsis."
+   ],
+   "topic": "Trauma Surgery",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:trauma-surgery",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Trauma Surgery (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:01.725Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-trauma-surgery-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0063",
+      "medqa-us4-test-0865",
+      "medqa-us4-test-0352"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 89,
+    "quality": 91,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:20:59.522Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -7618,6 +8233,73 @@
    }
   },
   {
+   "id": "ai-mcq-5c4e46c7",
+   "stem": "A 26-hour-old term boy is feeding well and has no respiratory distress. Routine pulse oximetry on room air shows right hand saturation 98% and foot saturation 90%.",
+   "ask": "Most likely explanation for this result?",
+   "options": [
+    "Coarctation of the aorta",
+    "Transposition of great arteries",
+    "Tetralogy of Fallot",
+    "Transient tachypnoea of newborn",
+    "Normal postnatal transition"
+   ],
+   "answer": 0,
+   "explanation": "Normal oxygen saturation in the right hand (pre-ductal) with lower saturation in the foot (post-ductal) is a failed newborn pulse oximetry screen. It points to a duct-dependent left heart obstruction such as coarctation, where deoxygenated blood flows right to left through the duct into the descending aorta. A foot reading below 95%, or a hand-foot gap above 3%, needs urgent review and an echocardiogram.",
+   "why": [
+    null,
+    "Transposition typically gives the reverse pattern, with the foot saturation higher than the right hand, or both low, rather than a normal right hand.",
+    "Tetralogy of Fallot causes cyanosis from mixing inside the heart, so the hand and foot readings are both lower and similar.",
+    "Transient tachypnoea causes respiratory distress and lowers the hand and foot readings equally, and this baby has no distress.",
+    "By 24 hours a normal baby reads 95% or more in both limbs with a gap of 3% or less, so a foot reading of 90% with an 8% gap is not normal."
+   ],
+   "topic": "Neonatology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:neonatology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Neonatology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T01:34:36.934Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-neonatology-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0693",
+      "medqa-us4-test-0587",
+      "medqa-us4-test-0560"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 83,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:46:05.761Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-5d282287",
    "stem": "A 27-year-old man is brought in after a motorcycle crash. His airway and chest are clear. Heart rate 132/min, blood pressure 82/50 mm Hg; pelvis is tender with perineal bruising.",
    "ask": "Most appropriate next step?",
@@ -8093,6 +8775,142 @@
    }
   },
   {
+   "id": "ai-mcq-65b928b3",
+   "stem": "A 3-week-old boy has had four days of projectile non-bilious vomiting after feeds and has lost weight. Venous gas: pH 7.52, bicarbonate 34 mmol/L, chloride 88 mmol/L, potassium 3.1 mmol/L.",
+   "ask": "Most likely diagnosis?",
+   "options": [
+    "Congenital adrenal hyperplasia",
+    "Pyloric stenosis",
+    "Malrotation with volvulus",
+    "Gastro-oesophageal reflux",
+    "Cow's milk protein allergy"
+   ],
+   "answer": 1,
+   "explanation": "The gas shows a hypochloraemic, hypokalaemic metabolic alkalosis, caused by repeated loss of gastric acid from projectile non-bilious vomiting. In a 3-week-old boy this points to pyloric stenosis. Confirm it with pyloric ultrasound, and correct fluids and electrolytes before pyloromyotomy.",
+   "why": [
+    "A salt-wasting crisis in congenital adrenal hyperplasia causes hyponatraemia, hyperkalaemia and metabolic acidosis, not a hypokalaemic alkalosis.",
+    null,
+    "Malrotation with volvulus causes bilious vomiting and, if bowel becomes ischaemic, metabolic acidosis, so neither the history nor the gas fits.",
+    "Reflux causes effortless small vomits in a baby who is thriving and does not upset the acid-base balance.",
+    "Cow's milk protein allergy usually causes blood-streaked stools, eczema or irritability, not projectile vomiting with a marked metabolic alkalosis."
+   ],
+   "topic": "Neonatology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:neonatology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Neonatology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:54.047Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-neonatology-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1039",
+      "medqa-us4-test-0271",
+      "medqa-us4-test-0361"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 93,
+    "quality": 96,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:21:01.308Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-65df9dcf",
+   "stem": "A 19-year-old man is about to start work at a cattle and sheep abattoir in rural Queensland. He is well and has had only the routine childhood vaccines.",
+   "ask": "Which vaccine is most important before he starts?",
+   "options": [
+    "Rabies vaccine",
+    "BCG vaccine",
+    "Q fever vaccine",
+    "Hepatitis A vaccine",
+    "Typhoid vaccine"
+   ],
+   "answer": 2,
+   "explanation": "Abattoir workers are at high risk of Q fever (Coxiella burnetii), which they catch by breathing in material from cattle, sheep and goats. It can cause acute febrile illness, endocarditis and chronic fatigue. The Australian Immunisation Handbook recommends Q fever vaccination for these workers, after a skin test and serology to exclude past exposure, ideally before they start work.",
+   "why": [
+    "Rabies vaccine (for Australian bat lyssavirus) is for people who handle bats, not for livestock abattoir workers.",
+    "Bovine tuberculosis has been eradicated in Australia, and BCG is not recommended for abattoir work.",
+    null,
+    "Hepatitis A vaccine is recommended for jobs such as sewage work and childcare, not for livestock slaughter.",
+    "Typhoid vaccine is for travellers to endemic areas and laboratory staff, not for abattoir workers."
+   ],
+   "topic": "Occupational/Environmental Medicine",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:occupational-environmental-medicin",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Occupational/Environmental Medicine (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:21.398Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-occupational-environmental-medicine-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0438",
+      "medqa-us4-test-0558",
+      "medqa-us4-test-0764"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 93,
+    "quality": 93,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:21:16.507Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-666bb226",
    "stem": "A 71-year-old man, a retired plumber exposed to asbestos, has four months of cough, shoulder pain, hoarseness and 7 kg weight loss. Chest X-ray shows a 5 cm right apical mass.",
    "ask": "Most appropriate next investigation?",
@@ -8157,6 +8975,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:30:35.835Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-68119778",
+   "stem": "A 26-year-old woman presents after her partner manually strangled her last night until she briefly lost consciousness. She has neck bruising and facial petechiae; neurological examination is normal.",
+   "ask": "Which delayed complication is most important to exclude?",
+   "options": [
+    "Hyoid bone fracture",
+    "Cervical spine fracture",
+    "Laryngeal cartilage fracture",
+    "Vocal cord palsy",
+    "Carotid artery dissection"
+   ],
+   "answer": 4,
+   "explanation": "Non-fatal strangulation with loss of consciousness is high risk. Carotid or vertebral artery dissection can be silent at first and cause a stroke hours to days later, so she needs CT angiography of the neck vessels. She also needs careful forensic documentation and a family violence risk assessment, because strangulation strongly predicts later homicide.",
+   "why": [
+    "Hyoid fracture is uncommon in survivors, is mainly a forensic finding, and rarely causes a delayed life-threatening problem.",
+    "Manual compression of the neck does not usually break the spine, and she has no mechanism of axial loading or acceleration.",
+    "Laryngeal fracture shows up straight away with hoarseness, stridor or crepitus, not as a silent delayed problem.",
+    "Vocal cord palsy would cause hoarseness and is not the dangerous or delayed threat to her life.",
+    null
+   ],
+   "topic": "Medicolegal",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:medicolegal",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Medicolegal (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:39.301Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-medicolegal-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0084",
+      "medqa-us4-test-1252",
+      "medqa-us4-test-1232"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 86,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:21:23.400Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -8905,6 +9790,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:09:21.048Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-6f672845",
+   "stem": "A 34-year-old man with severe traumatic brain injury has fixed dilated pupils and no brainstem reflexes. He received a thiopentone infusion until yesterday; serum levels remain high.",
+   "ask": "Which test best confirms brain death?",
+   "options": [
+    "Electroencephalography",
+    "Radionuclide perfusion scan",
+    "Transcranial Doppler ultrasound",
+    "MRI brain",
+    "Somatosensory evoked potentials"
+   ],
+   "answer": 1,
+   "explanation": "High levels of a sedative like thiopentone mean the clinical brain death tests cannot be relied on. The ANZICS Statement on Death and Organ Donation then requires imaging that shows no blood flow to the brain, such as radionuclide perfusion scintigraphy or four-vessel catheter angiography. Sedatives do not change cerebral blood flow, so these tests still work.",
+   "why": [
+    "EEG measures cortical activity, which thiopentone suppresses, so it cannot separate drug effect from death, and ANZICS does not accept it.",
+    null,
+    "Transcranial Doppler depends on the operator, can miss flow when the skull blocks the ultrasound, and is not accepted by ANZICS for brain death.",
+    "MRI shows structural damage, not whether blood is flowing through the brain, so it cannot confirm that all brain function has stopped.",
+    "Evoked potentials test only some sensory pathways, not the whole brain, and are not accepted for diagnosing brain death in Australia."
+   ],
+   "topic": "Bioethics",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:bioethics",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Bioethics (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T20:30:16.806Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-bioethics-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1004",
+      "medqa-us4-test-0540",
+      "medqa-us4-test-0200"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 83,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:37:43.193Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -10404,6 +11356,73 @@
    }
   },
   {
+   "id": "ai-mcq-81f94566",
+   "stem": "A 62-year-old woman with active rheumatoid arthritis has haemoglobin 98 g/L and MCV 84 fL. Iron studies: low iron, low transferrin, transferrin saturation 12%, ferritin 420 µg/L.",
+   "ask": "Most likely cause of anaemia?",
+   "options": [
+    "Iron deficiency anaemia",
+    "Beta thalassaemia trait",
+    "Sideroblastic anaemia",
+    "Anaemia of inflammation",
+    "Folate deficiency anaemia"
+   ],
+   "answer": 3,
+   "explanation": "Her anaemia is normocytic, with low serum iron and low transferrin saturation, but transferrin is low and ferritin is high. In active inflammatory disease, this pattern points to anaemia of inflammation (anaemia of chronic disease). Hepcidin traps iron in macrophages, and ferritin rises because it is an acute-phase reactant.",
+   "why": [
+    "In iron deficiency, transferrin is high and ferritin is low (under about 30 µg/L), so these results argue against it, although inflammation can raise ferritin and hide a coexisting deficiency.",
+    "Beta thalassaemia trait causes marked microcytosis with normal iron studies, not a normal MCV with low iron and low transferrin.",
+    "Sideroblastic anaemia causes iron overload with high serum iron and high transferrin saturation, not low saturation.",
+    null,
+    "Folate deficiency (for example from methotrexate) causes a macrocytic anaemia and does not explain the abnormal iron studies."
+   ],
+   "topic": "Pathology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:pathology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Pathology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:41.211Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-pathology-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0471",
+      "medqa-us4-test-0822",
+      "medqa-us4-test-1212"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 91,
+    "quality": 95,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:21:31.733Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-8251d682",
    "stem": "A 42-year-old man who strips old paint from heritage homes has 3 weeks of colicky abdominal pain, constipation and fatigue. Haemoglobin is 104 g/L with basophilic stippling on the film.",
    "ask": "Which test best confirms the diagnosis?",
@@ -10537,6 +11556,76 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:09:42.724Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-85579bea",
+   "stem": "A 46-year-old woman has a dilatation and curettage for heavy menstrual bleeding. The scrub nurse notes yellow fatty tissue in the curettings. Afterwards she is stable with mild lower abdominal pain.",
+   "ask": "Which complication must be excluded?",
+   "options": [
+    "Bowel injury",
+    "Intrauterine adhesions",
+    "Cervical laceration",
+    "Acute endometritis",
+    "Cervical stenosis"
+   ],
+   "answer": 0,
+   "explanation": "There is no fat inside the uterus, so fat in the curettings means the curette has gone through the uterine wall and into omentum, mesentery or bowel fat. Bowel injury must then be excluded urgently with senior gynaecology review and usually laparoscopy, even if she looks stable. A missed bowel injury can show up days later as peritonitis.",
+   "why": [
+    null,
+    "Intrauterine adhesions (Asherman syndrome) are a late complication of vigorous curettage and do not explain fat in the specimen.",
+    "A cervical tear causes vaginal bleeding during dilatation; it does not put fat in the curettings or cause intra-abdominal injury.",
+    "Endometritis is an infection that develops days later; it would not explain fat seen in the operating theatre.",
+    "Cervical stenosis is a long-term consequence of cervical surgery and has nothing to do with acute perforation."
+   ],
+   "topic": "Gynaecology",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:ai-9fdfd7be",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-9fdfd7be",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T16:26:59.920Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-9fdfd7be",
+      "osce-ai-9fdfd7be"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0241",
+      "medqa-us4-test-0245"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 85,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:31:04.226Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -11351,6 +12440,74 @@
    }
   },
   {
+   "id": "ai-mcq-93472628",
+   "stem": "A 24-year-old woman has her fifth stereotyped left-sided throbbing headache, preceded by 20 minutes of zigzag lines. Examination is normal. Urine beta-hCG is negative with a valid control line.",
+   "ask": "Most appropriate acute treatment?",
+   "options": [
+    "Paracetamol plus codeine",
+    "Aspirin plus metoclopramide",
+    "Ergotamine plus caffeine",
+    "Oxycodone plus metoclopramide",
+    "Tramadol plus ondansetron"
+   ],
+   "answer": 1,
+   "explanation": "The valid negative pregnancy test shows she is not pregnant, so the treatment choice for her migraine attack is not restricted. eTG first-line acute treatment is aspirin or an NSAID taken early with metoclopramide, which helps absorption and treats nausea. A triptan is used if this fails.",
+   "why": [
+    "Codeine and other opioids are not recommended for migraine because they work poorly and carry a high risk of medication-overuse headache and dependence.",
+    null,
+    "Ergotamine is no longer recommended because it is less effective than other options and its vasoconstriction is a concern in migraine with aura.",
+    "Metoclopramide is a sensible add-on, but oxycodone is an opioid, which is not recommended for migraine and promotes medication-overuse headache.",
+    "Tramadol is an opioid with no place in migraine treatment, and ondansetron does not have the prokinetic benefit of metoclopramide."
+   ],
+   "topic": "Neurology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-647",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-647",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:47:18.282Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-647",
+      "osce-amsa-647"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0086",
+      "medqa-us4-test-1102",
+      "medqa-us4-test-0710"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:10:24.995Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-93a4814c",
    "stem": "A 20-hour-old girl is reviewed on the postnatal ward because the midwife reports that she has stopped feeding and started grunting. She was born vaginally at 39+2 weeks, weighing 3.4 kg, with Apgar scores of 8 and 9. She fed well for the first 12 hours. Her mother carried group B streptococcus and received intravenous benzylpenicillin 90 minutes before the birth. The membranes had ruptured 22 hours before delivery, and the mother's temperature in labour was 38.4 °C. On examination, the baby is lethargic and mottled. Temperature is 38.3 °C, pulse 184/min, respirations 72/min, systolic pressure 55 mmHg and oxygen saturation 92% on room air. Capillary refill time is 4 seconds. She has subcostal recession and grunting. Heart sounds are normal and the femoral pulses are palpable. Capillary glucose is 3.9 mmol/L. Intravenous access has been obtained, and antibiotics are about to be given.",
    "ask": "Which of the following investigations is most likely to confirm the diagnosis?",
@@ -11624,6 +12781,73 @@
    }
   },
   {
+   "id": "ai-mcq-97741b84",
+   "stem": "A 52-year-old woman is anaesthetised for laparoscopy. Her consent form does not mention students. The registrar asks the medical student to perform a pelvic examination.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Examine under registrar supervision",
+    "Decline the examination",
+    "Examine, then inform her",
+    "Seek husband's verbal consent",
+    "Report registrar to Ahpra"
+   ],
+   "answer": 1,
+   "explanation": "An intimate examination of an anaesthetised patient for teaching needs her prior, specific and informed consent, so without it the student should politely decline. If needed, the student can raise the concern later with a supervisor or placement coordinator. Supervision, telling her afterwards or asking a relative cannot replace her own consent.",
+   "why": [
+    "Supervision makes sure the examination is done competently, but it does not make up for the missing consent.",
+    null,
+    "Telling her afterwards is disclosure, not consent, and the examination would still have been done without her permission.",
+    "A spouse cannot consent for a competent adult who will soon be able to decide for herself, and this examination is not urgent or needed for her treatment.",
+    "Going straight to Ahpra is out of proportion as a first step; the immediate priority is to decline, then raise the concern through local supervisors."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:03.374Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0733",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0158"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 91,
+    "quality": 95,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:21:49.922Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-97802bf3",
    "stem": "A 4-month-old girl presents with vomiting and irritability. Her father says she rolled off a couch yesterday. Coagulation studies are normal. CT brain shows bilateral subdural haematomas of differing densities.",
    "ask": "Most likely cause?",
@@ -11687,6 +12911,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:48:00.513Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-981188a9",
+   "stem": "A 27-year-old intern confides that she has written herself temazepam prescriptions for insomnia after night shifts for three months. She has no general practitioner.",
+   "ask": "Most appropriate advice?",
+   "options": [
+    "Switch to melatonin",
+    "Ask colleague to prescribe",
+    "Register with a GP",
+    "Taper the temazepam",
+    "Avoid night shifts"
+   ],
+   "answer": 2,
+   "explanation": "The Medical Board of Australia's Code of Conduct says doctors should have their own GP and should not prescribe for themselves, especially drugs of dependence. Self-prescribing a benzodiazepine risks dependence, impairment and undiagnosed mental illness. An independent GP can assess the cause of her insomnia and manage it safely.",
+   "why": [
+    "Changing to another self-prescribed drug still leaves her treating herself, and the cause of her insomnia goes unassessed.",
+    "An informal script from a colleague skips a proper assessment and continuity of care, which the Code of Conduct also discourages.",
+    null,
+    "Tapering is reasonable but should be supervised by her treating doctor, not run by herself.",
+    "Changing her roster deals with a work factor but leaves the unsafe self-prescribing and any underlying problem unaddressed."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:19:11.772Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0980",
+      "medqa-us4-test-1239",
+      "medqa-us4-test-0371"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 86,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:22:02.559Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -12843,6 +14136,73 @@
    }
   },
   {
+   "id": "ai-mcq-a2209e4e",
+   "stem": "A 58-year-old man has an excisional biopsy of a changing pigmented lesion on his back. Histopathology shows invasive melanoma, Breslow thickness 3.2 mm, with clear deep margin.",
+   "ask": "Recommended wide excision margin?",
+   "options": [
+    "2 mm",
+    "5 mm",
+    "1 cm",
+    "2 cm",
+    "4 cm"
+   ],
+   "answer": 3,
+   "explanation": "Breslow thickness sets the wide excision margin for primary melanoma. In the Australian Cancer Council guidelines, melanoma thicker than 2 mm needs a 2 cm clinical margin. A tumour this thick also calls for a discussion about sentinel lymph node biopsy.",
+   "why": [
+    "A 2 mm margin is the margin used for the first diagnostic excisional biopsy, not for definitive treatment of invasive melanoma.",
+    "A 5 mm margin is recommended for melanoma in situ, not for a tumour 3.2 mm thick.",
+    "A 1 cm margin is for melanoma up to 1 mm thick, so it is too narrow here.",
+    null,
+    "Margins wider than 2 cm do not improve survival and only add morbidity, so 4 cm is not recommended."
+   ],
+   "topic": "Plastic Surgery",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:plastic-surgery",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Plastic Surgery (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T01:34:39.035Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-plastic-surgery-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0063",
+      "medqa-us4-test-0865",
+      "medqa-us4-test-1034"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:49:03.525Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-a2ea039e",
    "stem": "A 66-year-old woman with type 2 diabetes for 12 years, taking metformin, has five months of symmetrical burning and numbness in both feet. Ankle reflexes are absent; plantars are flexor.",
    "ask": "Most appropriate next investigation?",
@@ -13924,6 +15284,73 @@
    }
   },
   {
+   "id": "ai-mcq-a9dc481d",
+   "stem": "A 4-day-old term boy, feeding well until today, has three episodes of green vomiting. He is alert with soft, non-distended abdomen. Abdominal X-ray shows a normal gas pattern.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Abdominal ultrasound",
+    "Contrast enema",
+    "CT abdomen",
+    "Venous blood gas",
+    "Upper GI contrast"
+   ],
+   "answer": 4,
+   "explanation": "Bilious vomiting in a neonate is malrotation with volvulus until proven otherwise, even when the baby looks well and the abdominal X-ray is normal. An urgent upper GI contrast study is the investigation of choice. It shows where the duodenojejunal flexure sits and whether there is a volvulus, so surgery is not delayed.",
+   "why": [
+    "Ultrasound can suggest malrotation (whirlpool sign, reversed SMA/SMV) but depends on the operator, and a normal scan does not exclude it.",
+    "A contrast enema looks for distal obstruction such as Hirschsprung disease or meconium ileus, which is unlikely with a non-distended abdomen.",
+    "CT gives a high radiation dose and is not the standard way to diagnose malrotation in neonates.",
+    "A blood gas helps judge how unwell the baby is but cannot diagnose or exclude a surgical cause of bilious vomiting.",
+    null
+   ],
+   "topic": "Neonatology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:neonatology",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Neonatology (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:18.401Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-neonatology-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0154",
+      "medqa-us4-test-0146",
+      "medqa-us4-test-0086"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 91,
+    "quality": 95,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:22:04.688Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-aa50ea7f",
    "stem": "A 71-year-old woman presents to the emergency department with two days of new left temporal headache, pain on chewing, and transient visual loss today. Her temporal artery is tender; ESR 92 mm/h.",
    "ask": "Most appropriate next step?",
@@ -14395,6 +15822,74 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:12:49.340Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-aeef6992",
+   "stem": "A 3-month-old boy with bronchiolitis is on 1 L/min nasal oxygen, SpO2 94%. In a feeding trial he takes 35 mL of his usual 150 mL; no wet nappy for 8 hours.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Nasogastric tube feeds",
+    "Smaller frequent feeds",
+    "Intravenous isotonic fluids",
+    "High flow nasal oxygen",
+    "Nebulised hypertonic saline"
+   ],
+   "answer": 0,
+   "explanation": "The feeding trial shows he takes about a quarter of his usual feed and has had no urine output, so oral hydration is not enough. Under the RCH bronchiolitis guideline, nasogastric feeds are the first choice when oral intake is inadequate. Start at 2/3 maintenance because of the risk of increased ADH secretion.",
+   "why": [
+    null,
+    "Smaller, more frequent bottle feeds still add to his work of breathing, and they will not make up an intake this low in an infant who is already passing no urine.",
+    "Isotonic IV fluid with glucose is kept for when nasogastric feeds fail or are unsafe; it is not the first choice.",
+    "His SpO2 is 94% on low-flow oxygen, so hypoxaemia and work of breathing are not getting worse and high flow is not needed.",
+    "Nebulised hypertonic saline does not improve outcomes in bronchiolitis and does nothing for his poor intake."
+   ],
+   "topic": "Paediatrics",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:ai-edd05314",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-edd05314",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:48:03.462Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-edd05314",
+      "osce-ai-edd05314"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0635",
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0111"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 3,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:12:50.780Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -15142,6 +16637,74 @@
    }
   },
   {
+   "id": "ai-mcq-b83a1d3a",
+   "stem": "A 70-year-old man has a PSA of 8.1 ng/mL and a PI-RADS 4 lesion. Transperineal biopsy shows adenocarcinoma: about 80% Gleason pattern 4 and 20% pattern 3.",
+   "ask": "Which ISUP Grade Group is this?",
+   "options": [
+    "Grade Group 1",
+    "Grade Group 2",
+    "Grade Group 3",
+    "Grade Group 4",
+    "Grade Group 5"
+   ],
+   "answer": 2,
+   "explanation": "The biopsy Gleason score is the most common pattern plus the next most common one. Here that gives 4+3=7, which is ISUP Grade Group 3. Because pattern 4 is the main pattern, this is unfavourable intermediate-risk disease, worse than 3+4.",
+   "why": [
+    "Grade Group 1 means Gleason 3+3=6, with no pattern 4 at all, but this tumour is mostly pattern 4.",
+    "Grade Group 2 means Gleason 3+4=7, where pattern 3 is the main pattern, but here pattern 4 is the main pattern.",
+    null,
+    "Grade Group 4 means Gleason score 8 (4+4, 3+5 or 5+3), and this biopsy has no pattern 5 and is not entirely pattern 4.",
+    "Grade Group 5 means Gleason score 9 to 10, which needs pattern 5, and none is reported here."
+   ],
+   "topic": "Urology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:ai-e4a377e8",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-e4a377e8",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:41:39.925Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-e4a377e8",
+      "osce-ai-e4a377e8"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0659",
+      "medqa-us4-test-0862",
+      "medqa-us4-test-0934"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 82,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:13:06.422Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-b8a6a8ac",
    "stem": "A 34-year-old concreter presents to the emergency department 10 minutes after wet cement splashed into his right eye. The eye is painful, red and watering.",
    "ask": "Most appropriate next step?",
@@ -15483,6 +17046,74 @@
    }
   },
   {
+   "id": "ai-mcq-ba226872",
+   "stem": "A 79-year-old woman on apixaban for atrial fibrillation has a right subdural haematoma on CT. Her last dose was five hours ago. INR is 1.1 and APTT 31 seconds.",
+   "ask": "Best interpretation of the coagulation results?",
+   "options": [
+    "Apixaban fully cleared",
+    "Apixaban effect not excluded",
+    "No reversal needed",
+    "Supratherapeutic apixaban level",
+    "Early consumptive coagulopathy"
+   ],
+   "answer": 1,
+   "explanation": "The INR and APTT pick up apixaban poorly, so normal values do not rule out a clinically important anticoagulant effect. Her last dose was 5 hours ago, which is close to peak level. With an intracranial haemorrhage this means she still needs reversal, such as Prothrombinex-VF or andexanet alfa according to local protocol, plus haematology advice. An apixaban-calibrated anti-Xa level would be needed to measure the drug, and it is not available here.",
+   "why": [
+    "Apixaban has a half-life of about 12 hours, so it cannot have cleared 5 hours after a dose, and normal clotting tests cannot show that it has.",
+    null,
+    "Reversal for intracranial haemorrhage depends on the timing of the last dose, not on the INR or APTT, so she still needs it.",
+    "The INR and APTT cannot measure apixaban levels, and normal values give no sign of an excess.",
+    "A consumptive coagulopathy would prolong the INR and APTT, and both are normal."
+   ],
+   "topic": "Haematology",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T20:29:42.508Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:40:06.191Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-ba2775ee",
    "stem": "A 51-year-old man comes to his general practitioner for a cardiovascular risk assessment. He feels well and says his blood pressure \"always jumps\" at the doctor's. He takes no regular medicines, vapes nicotine daily and drinks four coffees a day. He is seated and has rested for 5 minutes, and a correctly sized cuff is used. His blood pressure is 152/94 mmHg and then 148/92 mmHg in the right arm, and 150/92 mmHg in the left arm. His pulse is 74/min. His BMI is 29 kg/m2. His fundi, heart sounds and peripheral pulses are normal. He brings a list of 9 home readings from the past 12 days. He took them on a wrist monitor he bought online, one reading each evening after dinner and coffee. They average 126/79 mmHg. A 12-lead ECG is normal. Serum potassium is 4.2 mmol/L (3.5 to 5.2), eGFR is above 90 mL/min/1.73 m2 and the urine albumin to creatinine ratio is 1.0 mg/mmol (below 2.5).",
    "ask": "Which of the following best describes the significance of his home readings?",
@@ -15685,6 +17316,76 @@
    }
   },
   {
+   "id": "ai-mcq-be000f7c",
+   "stem": "A 78-year-old woman taking rivaroxaban for atrial fibrillation has had four days of worsening headache after tripping and hitting her forehead a week ago. GCS is 14.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "MRI brain with contrast",
+    "Lumbar puncture",
+    "Non-contrast CT brain",
+    "Skull X-ray series",
+    "Serum ESR and CRP"
+   ],
+   "answer": 2,
+   "explanation": "An older anticoagulated patient with a progressive headache after minor head trauma and a reduced GCS needs an urgent non-contrast CT brain to look for a subdural haematoma. NSW head injury guidance says every anticoagulated patient with a head injury needs CT. It is fast, widely available and sensitive for acute blood, and the result guides reversal and neurosurgical referral.",
+   "why": [
+    "MRI is slower and less available, it is unsafe to send a patient with a falling GCS for it, and contrast adds nothing in looking for acute blood.",
+    "Lumbar puncture does not image a subdural collection, and it is dangerous with possible mass effect and an anticoagulant on board.",
+    null,
+    "A skull X-ray may show a fracture but cannot show intracranial blood, so a normal film would give false reassurance.",
+    "ESR and CRP help screen for giant cell arteritis, but the head trauma, anticoagulant and falling GCS point to a bleed, which must be imaged first."
+   ],
+   "topic": "Emergency Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T20:27:47.653Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 88,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:40:10.968Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-beeea923",
    "stem": "A 24-year-old woman presents to the emergency department with 30 minutes of sudden, fast, regular palpitations that began while she was sitting at rest. Her first ECG showed a regular narrow complex tachycardia at 150/min. A modified Valsalva manoeuvre reverted it to sinus rhythm. On further questioning, she reports 4 months of 5 kg weight loss, heat intolerance, loose stools and feeling on edge. She has no past medical history and takes no medicines. After reversion, her pulse is 98/min and regular, blood pressure is 116/72 mm Hg, respiratory rate is 16/min, oxygen saturation is 98% on room air and temperature is 37.3 °C. She has a fine tremor of the outstretched hands and a diffuse, smooth, non-tender goitre with no palpable nodules. There is no proptosis. A repeat 12-lead ECG shows sinus rhythm with a normal PR interval and no delta waves. Blood results: TSH <0.01 mIU/L (0.4–4.0), free T4 32 pmol/L (10–25), free T3 11.5 pmol/L (3.5–6.5), beta-hCG negative.",
    "ask": "Which of the following is the most appropriate investigation to confirm the cause of her hyperthyroidism?",
@@ -15748,6 +17449,74 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:46:36.942Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-bf08d9cd",
+   "stem": "A 27-year-old unvaccinated man sees his GP with jaundice after week-long malaise, four weeks after Vietnam travel with a hepatitis A-infected companion. Tender hepatomegaly; ALT 1240 IU/L, ALP 150 U/L.",
+   "ask": "Which test best confirms the diagnosis?",
+   "options": [
+    "Total anti-HAV antibody",
+    "Hepatitis A PCR",
+    "Hepatitis E IgM",
+    "Hepatitis A IgM",
+    "Malaria thick film"
+   ],
+   "answer": 3,
+   "explanation": "He is an unvaccinated traveller with a known hepatitis A contact, an incubation period that fits, a prodrome, jaundice, tender hepatomegaly and a hepatocellular pattern of liver tests, so acute hepatitis A is most likely. The CDNA national guideline (SoNG) confirms acute infection with a positive HAV IgM, which is present at symptom onset and lasts for about 3 to 6 months.",
+   "why": [
+    "Total anti-HAV is mostly IgG, so it is also positive after past infection or vaccination and cannot show that the infection is acute.",
+    "HAV RNA testing is not routine, and the viraemia may be waning by the time jaundice appears, so it is less reliable than IgM.",
+    "Hepatitis E is also spread by the enteric route in Asia, but his contact with a confirmed hepatitis A case makes hepatitis A far more likely.",
+    null,
+    "Malaria causes mainly unconjugated, haemolytic jaundice with fever, not an ALT rise to over 30 times normal after a contact with hepatitis A."
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-637",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-637",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:40:24.640Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-637",
+      "osce-amsa-637"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1054",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0164"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:13:18.810Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -16290,6 +18059,74 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:38:53.108Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-c79825ea",
+   "stem": "A 53-year-old woman with COPD on home oxygen and paroxysmal AF has worsening breathlessness, purulent sputum and fever 38.1 °C. ECG: regular rhythm, 110/min, P wave before each QRS.",
+   "ask": "Most likely rhythm?",
+   "options": [
+    "Rapid atrial fibrillation",
+    "Atrial flutter",
+    "Multifocal atrial tachycardia",
+    "AV nodal reentry",
+    "Sinus tachycardia"
+   ],
+   "answer": 4,
+   "explanation": "A regular rhythm at 110/min with a normal P wave before every QRS is sinus tachycardia. In this patient it fits fever, hypoxaemia and an infective COPD exacerbation, so her known AF is not what is driving the breathlessness.",
+   "why": [
+    "A P wave before every QRS, a regular rhythm and a rate just over 100/min define sinus tachycardia, which fits fever and an exacerbation.",
+    "Atrial flutter shows sawtooth flutter waves, and with 2:1 block the rate is usually about 150/min, not 110/min.",
+    "Multifocal atrial tachycardia is linked to COPD, but it is irregular and has at least three different P-wave shapes.",
+    "AV nodal reentry usually runs at 140 to 250/min, and the P waves are hidden or retrograde rather than upright before each QRS.",
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-376",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-376",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:45:02.921Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-376",
+      "osce-amsa-376"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1004",
+      "medqa-us4-test-0548",
+      "medqa-us4-test-1032"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 82,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:13:40.308Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -17038,6 +18875,76 @@
    }
   },
   {
+   "id": "ai-mcq-cbe34a57",
+   "stem": "A 28-year-old woman at a travel clinic needs a second MMR dose and live Japanese encephalitis vaccine for rural Laos. Her period is 10 days late, with nausea; condom use is inconsistent.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Urine hCG test",
+    "Measles IgG serology",
+    "Pelvic ultrasound",
+    "Full blood count",
+    "Hepatitis A serology"
+   ],
+   "answer": 0,
+   "explanation": "Live vaccines such as MMR and live attenuated Japanese encephalitis vaccine are contraindicated in pregnancy. Her period is late, she has nausea and her contraception is unreliable, so a urine pregnancy test must be done before vaccinating. If it is negative, she can be vaccinated and should avoid pregnancy for 28 days afterwards.",
+   "why": [
+    null,
+    "Measles serology is not needed before a catch-up MMR dose, because adults born in 1966 or later need 2 documented doses whatever their serology shows.",
+    "A pelvic ultrasound is not the first-line test for possible early pregnancy and would be negative before about 5 weeks' gestation, so hCG comes first.",
+    "A full blood count does not affect whether she can have live vaccines and is not part of routine pre-travel screening.",
+    "Hepatitis A serology before vaccination is only considered for people likely to have past infection, such as older adults or people raised in endemic areas, and it does not address the pregnancy risk."
+   ],
+   "topic": "General Practice",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:ai-f3a22080",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station ai-f3a22080",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:38:06.386Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "ai-f3a22080",
+      "osce-ai-f3a22080"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0951",
+      "medqa-us4-test-0560",
+      "medqa-us4-test-0660"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 87,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:14:01.257Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-cd307563",
    "stem": "A 7-year-old boy has a splenic laceration after a bike crash. Pulse is 160/min, blood pressure 70/40 mm Hg despite fluid boluses. His Jehovah's Witness parents refuse transfusion.",
    "ask": "Most appropriate next step?",
@@ -17509,6 +19416,75 @@
    }
   },
   {
+   "id": "ai-mcq-d1ea6a49",
+   "stem": "A 23-year-old female medical student finished a three-dose hepatitis B vaccine course six weeks ago, before surgical placement. Anti-HBs is 4 mIU/mL; HBsAg and anti-HBc are negative.",
+   "ask": "What does this result indicate?",
+   "options": [
+    "Vaccine non-response",
+    "Chronic hepatitis B",
+    "Protective immunity",
+    "Resolved past infection",
+    "Occult hepatitis B"
+   ],
+   "answer": 0,
+   "explanation": "An anti-HBs level below 10 mIU/mL measured 4 to 8 weeks after a full course means she did not respond to the vaccine. Negative HBsAg and anti-HBc rule out current or past infection. Under the Australian Immunisation Handbook she needs more vaccine doses and a repeat anti-HBs test, and until then any blood exposure must be managed as if she is not immune.",
+   "why": [
+    null,
+    "Chronic hepatitis B needs a positive HBsAg, and hers is negative.",
+    "Protection needs anti-HBs of at least 10 mIU/mL, and hers is 4 mIU/mL.",
+    "Resolved past infection shows a positive anti-HBc, and hers is negative.",
+    "Occult infection is HBsAg-negative but usually anti-HBc-positive with detectable HBV DNA, and nothing here suggests it."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:18:38.753Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0733",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0158"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "clang:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 87,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:22:18.109Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-d268f468",
    "stem": "A 29-year-old woman comes back to her general practitioner 6 weeks after she was diagnosed with ulcerative colitis. Before the diagnosis she had 10 weeks of bloody, mucousy diarrhoea and left-sided abdominal cramps. Stool pathogen tests were negative. Ileocolonoscopy found continuous mucosal inflammation from the rectum to 30 cm and a normal proximal colon and terminal ileum. Biopsies showed crypt distortion with no granulomas and no dysplasia. She now takes oral mesalazine and mesalazine enemas. She has 1 to 2 formed stools a day with no blood. She has never smoked. Her mother was diagnosed with bowel cancer at age 62. No other relatives have had bowel cancer. Temperature is 36.7°C, blood pressure 116/72 mmHg and pulse 72/min. Her abdomen is soft and not tender. Haemoglobin is 129 g/L (115–165), CRP 3 mg/L (<5), ALP 74 U/L (30–110) and GGT 18 U/L (<40). She asks how her bowel cancer risk will be checked.",
    "ask": "Which of the following is the most appropriate surveillance plan for this patient?",
@@ -17849,6 +19825,142 @@
    }
   },
   {
+   "id": "ai-mcq-d59db04b",
+   "stem": "A 68-year-old man has a 3-month non-healing ulcer with raised, everted edges. It arose within a scar from a childhood flame burn to his thigh. The scar had been stable for 50 years.",
+   "ask": "Most likely malignancy?",
+   "options": [
+    "Basal cell carcinoma",
+    "Nodular melanoma",
+    "Merkel cell carcinoma",
+    "Squamous cell carcinoma",
+    "Dermatofibrosarcoma protuberans"
+   ],
+   "answer": 3,
+   "explanation": "A Marjolin ulcer is a cancer that grows in a chronic wound or an old burn scar, usually decades after the injury, and it is most often squamous cell carcinoma. Any non-healing ulcer in an old scar needs a biopsy to rule out SCC. These tumours spread to lymph nodes more aggressively than ordinary cutaneous SCC.",
+   "why": [
+    "BCC can occasionally arise in a burn scar, but it is much less common than SCC there and usually looks pearly with a rolled edge rather than everted.",
+    "Melanoma rarely arises in burn scars, and this lesion shows no pigment or change in a pre-existing mole.",
+    "Merkel cell carcinoma is a fast-growing red nodule on sun-damaged skin, not a slowly developing ulcer in a chronic scar.",
+    null,
+    "DFSP is a slow-growing firm plaque on the trunk of young adults and is not linked to chronic burn scars."
+   ],
+   "topic": "Plastic Surgery",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:plastic-surgery",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Plastic Surgery (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:57.387Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-plastic-surgery-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0063",
+      "medqa-us4-test-0865",
+      "medqa-us4-test-1034"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 91,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:22:22.870Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-d602157c",
+   "stem": "A 42-year-old Aboriginal man with type 2 diabetes attends his annual health check. eGFR is 82 mL/min/1.73 m². His urine albumin:creatinine ratio is 14 mg/mmol on two separate samples taken over three months.",
+   "ask": "What do these results show?",
+   "options": [
+    "Severely increased albuminuria",
+    "Normal albumin excretion",
+    "Nephrotic-range albuminuria",
+    "Moderately increased albuminuria",
+    "Exercise-related transient albuminuria"
+   ],
+   "answer": 3,
+   "explanation": "A urine ACR that stays between 2.5 and 25 mg/mmol in a man (Kidney Health Australia; KDIGO A2 is 3 to 30) is moderately increased albuminuria, also called microalbuminuria. With an eGFR of 82, this means stage 2 chronic kidney disease, most likely early diabetic kidney disease. This group is at high risk, so he needs an ACE inhibitor or ARB and tight control of blood pressure, glucose and cardiovascular risk.",
+   "why": [
+    "Wrong: severely increased albuminuria in a man is an ACR above 25 mg/mmol (KDIGO above 30), and 14 is below that.",
+    "Wrong: normal albumin excretion in a man is an ACR below 2.5 mg/mmol, so 14 mg/mmol is clearly abnormal.",
+    "Wrong: nephrotic-range loss means an ACR of roughly 220 mg/mmol or more, far above 14 mg/mmol.",
+    null,
+    "Wrong: a transient rise after exercise would not stay high on two separate samples taken months apart."
+   ],
+   "topic": "Indigenous Health",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:indigenous-health",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Indigenous Health (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T01:37:40.745Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-indigenous-health-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0660",
+      "medqa-us4-test-0880",
+      "medqa-us4-test-1218"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 83,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:51:03.391Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-d658ba0b",
    "stem": "A 27-year-old man comes to the emergency department 2 hours after he was punched in the face outside a hotel. He says both sides of his nose are blocked and his nose is painful. He had a nosebleed that stopped on its own after 10 minutes. He has no clear fluid running from his nose, no double vision and no headache. He takes no regular medicines and has no allergies. His temperature is 36.8 °C, pulse 88/min, blood pressure 128/78 mm Hg, respiratory rate 16/min and oxygen saturation 99% on room air. The nasal bridge is swollen and bent to the left. After phenylephrine–lidocaine spray, anterior rhinoscopy shows a smooth, red-purple swelling on both sides of the septum that blocks both nostrils. The swelling has not shrunk and feels soft and fluctuant when pressed with a cotton bud. Eye movements are full, cheek sensation is normal and his bite is normal.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -17979,6 +20091,73 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:47:50.688Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-d7f18e2d",
+   "stem": "A 79-year-old man with metastatic lung cancer is in the terminal phase, unresponsive, with noisy gurgling breathing. He appears comfortable; repositioning has not helped and his family is distressed.",
+   "ask": "Most appropriate treatment?",
+   "options": [
+    "Hyoscine butylbromide",
+    "Intravenous furosemide",
+    "Subcutaneous midazolam",
+    "Subcutaneous morphine",
+    "Deep oropharyngeal suction"
+   ],
+   "answer": 0,
+   "explanation": "This is noisy breathing from respiratory secretions in a dying patient. Repositioning has not helped, so eTG Palliative Care recommends a subcutaneous anticholinergic such as hyoscine butylbromide 20 mg. Explaining to the family that the noise is not distressing him is also part of care. Anticholinergics reduce new secretions but do not clear secretions that are already there, so start early.",
+   "why": [
+    null,
+    "The secretions sit in the pharynx and airway, not as pulmonary oedema, so a diuretic will not help and IV access burdens a dying patient.",
+    "Midazolam treats terminal agitation or distress, and he looks comfortable, so it does nothing for the secretions.",
+    "Morphine relieves breathlessness or pain, neither of which he has, and it does not reduce secretions.",
+    "Deep suction is distressing, can stimulate more secretions and is not recommended; only gentle oral suction is sometimes used."
+   ],
+   "topic": "Palliative Care",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:palliative-care",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Palliative Care (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:17:23.159Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-palliative-care-2"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0934",
+      "medqa-us4-test-0464"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 93,
+    "quality": 96,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:22:34.272Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -20159,6 +22338,76 @@
    }
   },
   {
+   "id": "ai-mcq-ef498b41",
+   "stem": "A 9-year-old Aboriginal boy from a remote Northern Territory community has a 2-day sore throat, fever of 38.4 °C and red, swollen tonsils. He has no allergies.",
+   "ask": "Most appropriate treatment?",
+   "options": [
+    "Symptomatic analgesia only",
+    "Swab and await result",
+    "Oral azithromycin 5 days",
+    "Oral phenoxymethylpenicillin 5 days",
+    "IM benzathine benzylpenicillin"
+   ],
+   "answer": 4,
+   "explanation": "An Aboriginal child in a remote Northern Territory community is at high risk of acute rheumatic fever. Under the RHD Australia guideline and eTG, a sore throat in this group should be treated straight away as group A streptococcal pharyngitis. A single dose of IM benzathine benzylpenicillin is preferred because it treats the infection in one dose and does not depend on finishing a course.",
+   "why": [
+    "Wrong: in a high-risk population, a sore throat without antibiotics can lead to acute rheumatic fever and rheumatic heart disease.",
+    "Wrong: a swab can be taken, but in high-risk groups antibiotics should not wait for the result.",
+    "Wrong: azithromycin is kept for severe (immediate) penicillin allergy, and this child has no allergies.",
+    "Wrong: oral penicillin must be given for 10 days to eradicate the streptococcus, so a 5-day course is too short.",
+    null
+   ],
+   "topic": "Indigenous Health",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:indigenous-health",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Indigenous Health (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T20:28:54.696Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-indigenous-health-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0660",
+      "medqa-us4-test-0880",
+      "medqa-us4-test-1218"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "absolute-terms:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 91,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T20:42:42.344Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-f027011d",
    "stem": "A 29-year-old man with new HIV, viral load 120,000 copies/mL, starts ART. His HIV-negative partner asks when condomless sex will not transmit HIV.",
    "ask": "When is transmission prevented?",
@@ -20223,6 +22472,75 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:15:42.951Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-f0817efd",
+   "stem": "A 28-year-old female registrar who has no regular doctor asks you, a fellow junior doctor, to prescribe temazepam so she can sleep between night shifts.",
+   "ask": "Most appropriate response?",
+   "options": [
+    "Prescribe three nights' supply",
+    "Prescribe melatonin instead",
+    "Make mandatory notification",
+    "Encourage seeing a GP",
+    "Supply hospital ward stock"
+   ],
+   "answer": 3,
+   "explanation": "The Medical Board of Australia's Code of Conduct says doctors should have their own GP and should not prescribe informally for colleagues, especially drugs of dependence. Informal prescribing skips a proper assessment and puts both doctors at risk. The safest response is to point her to independent care, such as a GP or a doctors' health service.",
+   "why": [
+    "Prescribing a drug of dependence for a colleague without a proper consultation or records is unprofessional, even if the supply is small.",
+    "Swapping to a lower-risk drug is still informal prescribing for a colleague without an independent assessment.",
+    "Nothing suggests impairment that puts the public at substantial risk, so the threshold for a mandatory notification is not met.",
+    null,
+    "Taking ward stock for a staff member is drug diversion and is both illegal and a professional misconduct issue."
+   ],
+   "topic": "Professionalism",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "topic:professionalism",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Professionalism (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T07:19:17.795Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-professionalism-3"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0733",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0158"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 91,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T07:22:38.730Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -20629,6 +22947,74 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-25T19:43:41.887Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-f9bdca71",
+   "stem": "A 72-year-old woman with a COPD exacerbation is given 15 L/min oxygen by non-rebreather mask. An hour later she is drowsy, with SpO2 99%, pH 7.21 and PaCO2 84 mmHg.",
+   "ask": "Most likely cause?",
+   "options": [
+    "Massive pulmonary embolism",
+    "Tension pneumothorax",
+    "Acute ischaemic stroke",
+    "Oxygen-induced hypercapnia",
+    "Hypoglycaemic encephalopathy"
+   ],
+   "answer": 3,
+   "explanation": "In a CO2 retainer, uncontrolled high-flow oxygen worsens V/Q mismatch, increases dead space and reduces the Haldane effect, so it causes acute hypercapnic acidosis and drowsiness. The TSANZ guideline sets the SpO2 target at 88 to 92% and recommends air-driven nebulisers or a spacer. If acidosis persists despite this, NIV is indicated.",
+   "why": [
+    "A massive PE would cause hypoxaemia, usually with hypocapnia from hyperventilation, not SpO2 99% with a PaCO2 of 84 mmHg.",
+    "A tension pneumothorax would cause falling saturations and haemodynamic collapse, not saturations of 99%.",
+    "A stroke does not explain an acute respiratory acidosis that started straight after high-flow oxygen.",
+    null,
+    "Hypoglycaemia causes drowsiness, but it does not raise PaCO2 or cause respiratory acidosis."
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:amsa-414",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-414",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-26T15:49:29.654Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-414",
+      "osce-amsa-414"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1004",
+      "medqa-us4-test-0874",
+      "medqa-us4-test-0662"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 82,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-26T16:16:10.924Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
