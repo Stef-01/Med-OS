@@ -21,12 +21,12 @@ A question fits a format when reading it (4 words a second past the first 12, op
 
 - **Source**: ai 1446, open-exam 609, usmle-resource 144, amsa 58
 - **Route**: open-exam 609, ai station 532, ai high-yield 523, ai pool 391, usmle-resource 144, amsa 58
-- **Kind**: clinical 1613, physio 337, anatomy 157, skills 150
+- **Kind**: clinical 1571, physio 375, anatomy 161, skills 150
 - **Year**: 1 180, 2 405, 3 913, 4 759
 - **Difficulty**: 1 522, 2 1391, 3 344
 - **Specialties**: 45; the five largest Gastroenterology 254, Cardiology 195, Neurology 183, Respiratory Medicine 168, Paediatrics 140; the five smallest Medicolegal 10, Cardiothoracic Surgery 11, OMS/Dental 12, Pathology 12, Occupational/Environmental Medicine 12
 
-**Years and difficulties** (`scripts/tag-years.mjs`): the model set the year of 2257 of 2257 and the difficulty of 2257; the rest use the fallback guess. Where both exist, the guessed year matches the model's in 67.6% (within a year in 99.5%) and the guessed difficulty in 54.9%: run the tagger after new questions are written.
+**Years and difficulties** (`scripts/tag-years.mjs`): the model set the year of 2257 of 2257 and the difficulty of 2257; the rest use the fallback guess. Where both exist, the guessed year matches the model's in 68.4% (within a year in 99.6%) and the guessed difficulty in 54.9%: run the tagger after new questions are written.
 
 ## Cues and residual flaws in the duel, by route
 

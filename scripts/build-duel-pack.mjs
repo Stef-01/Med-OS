@@ -10,7 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildPack } from './lib/duel-pack.mjs';
-import { readYears, readDifficulty } from './tag-years.mjs';
+import { readYears, readDifficulty, readKinds } from './tag-years.mjs';
 import { readHy } from './generate-hy.mjs';
 import { readMxq, CREDIT } from './import-medexpqa.mjs';
 import { stationsIn } from './lib/disk.mjs';
@@ -30,8 +30,11 @@ export function mcqOnDisk(pub = PUB) {
   return Object.fromEntries(fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => { const j = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); return [j.station, j]; }));
 }
 
+/* everything buildPack reads besides the pool, from disk: one list, for this script and the test that the pack is current */
+export const packInputs = (pub = PUB) => ({ mcq: mcqOnDisk(pub), stations: stationsOnDisk(pub), years: readYears(), difficulty: readDifficulty(), kinds: readKinds(), hy: readHy(), mxq: readMxq(), mxqCredit: CREDIT });
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const { pack, dropped } = buildPack(poolOnDisk(), { mcq: mcqOnDisk(), stations: stationsOnDisk(), years: readYears(), difficulty: readDifficulty(), hy: readHy(), mxq: readMxq(), mxqCredit: CREDIT });
+  const { pack, dropped } = buildPack(poolOnDisk(), packInputs());
   const text = packText(pack);
   if (process.argv.includes('--check')) {
     const now = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';

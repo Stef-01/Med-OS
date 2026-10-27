@@ -118,10 +118,12 @@ export function stationQuestion(st, pool = []) {
              specialties
    `dropped` says why any are not in the pack. */
 export const DUEL = Object.freeze({ stem: 1200, option: 160, why: 1200, note: 600 });
+/* the kinds a pooled question can be: the bank's questions are clinical, physiology or anatomy, never an OSCE skill */
+export const POOL_KINDS = Object.freeze(['clinical', 'physio', 'anatomy']);
 const cut = (s, n, clean = strip) => { const t = clean(s); if (t.length <= n) return t; const c = t.slice(0, n), i = Math.max(c.lastIndexOf('. '), c.lastIndexOf('? ')); return i > n / 3 ? c.slice(0, i + 1) : `${c.slice(0, n - 1).replace(/\s+\S*$/, '')}…`; };
 /* a station's specialties as the duel's topics (the first is its topic), up to the package's six */
 const topicsOfStation = (st, first) => [...new Set([first, ...(Array.isArray(st?.specialty) ? st.specialty : [])].filter(Boolean))].slice(0, 6);
-export function poolQuestion(q, byStation = new Map()) {
+export function poolQuestion(q, byStation = new Map(), kinds = {}) {
   const stem = q.ask ? `${spaces(q.stem)} ${spaces(q.ask)}` : spaces(q.stem);
   if (stem.length > DUEL.stem) return { q: null, why: `${q.id}: the stem is ${stem.length} characters (the duel shows ${DUEL.stem})` };
   if (q.options.some(o => o.length > DUEL.option)) return { q: null, why: `${q.id}: an option is longer than ${DUEL.option} characters` };
@@ -133,7 +135,7 @@ export function poolQuestion(q, byStation = new Map()) {
   if (q.topic) out.topic = q.topic;
   const st = byStation.get(q.provenance?.generator?.basis?.[0]), topics = st ? topicsOfStation(st, q.topic) : [];
   if (topics.length > 1) out.topics = topics;
-  out.cat = 'clinical';
+  out.cat = POOL_KINDS.includes(kinds[q.id]) ? kinds[q.id] : 'clinical';   /* scripts/tag-years.mjs --kinds; clinical until it has looked */
   out.origin = kind === 'ai' || kind === 'amsa' ? 'ai' : 'human';
   out.source = kind;
   if (kind === 'open-exam' || q.provenance?.generator?.how === 'imported') out.credit = String(q.provenance?.source?.name || '').slice(0, 300);   /* the citation (or the copyright notice) its terms ask for */
@@ -142,10 +144,10 @@ export function poolQuestion(q, byStation = new Map()) {
 /* years: { id: 1..4 } from scripts/tag-years.mjs (data/mcq/years.json); a question it has not tagged gets guessYear() */
 /* hy: the high-yield questions (scripts/generate-hy.mjs, data/mcq/high-yield.json), each already with its year and difficulty */
 /* mxq: MedExpQA adapted (scripts/import-medexpqa.mjs, data/mcq/medexpqa.json), each with the credit CC BY asks for */
-export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {}, hy = [], mxq = [], mxqCredit = '' } = {}) {
+export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {}, kinds = {}, hy = [], mxq = [], mxqCredit = '' } = {}) {
   const list = [...(pool?.questions || [])].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
   const byStation = new Map(stations.map(st => [st.id, st]));
-  for (const p of list) { const { q, why } = poolQuestion(p, byStation); if (q) questions.push(q); else dropped.push(why); }
+  for (const p of list) { const { q, why } = poolQuestion(p, byStation, kinds); if (q) questions.push(q); else dropped.push(why); }
   let catN = 0;
   for (const sid of Object.keys(mcq).sort()) {
     const st = byStation.get(sid);
@@ -173,11 +175,11 @@ export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficult
     mxqN++;
   }
   for (const q of questions) { if (q.hy) { delete q.hy; continue; } q.year = isYear(years[q.id]) ? years[q.id] : guessYear(q); q.difficulty = isDiff(difficulty[q.id]) ? difficulty[q.id] : guessDiff(q); }
-  const kinds = questions.reduce((m, q) => ((m[q.source] = (m[q.source] || 0) + 1), m), {});
+  const bySource = questions.reduce((m, q) => ((m[q.source] = (m[q.source] || 0) + 1), m), {});
   const origins = new Set(questions.map(q => q.origin));
   return {
     pack: { schemaVersion: 1, version: `pool-${questions.length - catN - hyN - mxqN}-mcq-${catN}${hyN ? `-hy-${hyN}` : ''}${mxqN ? `-mxq-${mxqN}` : ''}`, title: 'Standard MCQ pool',
-      source: `Built by scripts/build-duel-pack.mjs from public/mcq/pool.json${catN ? ' and public/duel/mcq/' : ''}${hyN ? ' and data/mcq/high-yield.json' : ''}${mxqN ? ' and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted)' : ''}: ${Object.entries(kinds).map(([k, n]) => `${n} ${k}`).join(', ')}.`,
+      source: `Built by scripts/build-duel-pack.mjs from public/mcq/pool.json${catN ? ' and public/duel/mcq/' : ''}${hyN ? ' and data/mcq/high-yield.json' : ''}${mxqN ? ' and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted)' : ''}: ${Object.entries(bySource).map(([k, n]) => `${n} ${k}`).join(', ')}.`,
       origin: origins.size === 1 ? [...origins][0] : 'mixed', cats: CATS.map(c => ({ id: c.id, label: c.label })), questions },
     dropped
   };

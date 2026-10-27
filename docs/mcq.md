@@ -151,11 +151,12 @@ node scripts/mcq-judge.mjs --bench <quest-ai.jsonl> --out <outside the repo> # t
 node scripts/mcq-evals.mjs [--wrong-key 16] [--retest 40]   # calibration.json, evals.json, docs/mcq-evals.md
 node scripts/mcq-pool.mjs [--why <id>]                   # the pool, status.json, selection.json
 node scripts/tag-years.mjs                               # year (1-4) and difficulty (1-3) of every untagged pack question -> data/mcq/years.json
+node scripts/tag-years.mjs --kinds                       # each pooled question's kind (clinical, physio, anatomy), which the pack otherwise files as clinical
 npm run duel-pack                                        # the duel's questions from the pool
 node scripts/mcq-audit.mjs                               # the set as a whole -> data/mcq/audit.json, docs/mcq-audit.md
 ```
 
-**Year and difficulty** (2026-10-27): every duel question carries both (`mcq/taxonomy.mjs`); `scripts/tag-years.mjs` asks the model for them, and the pack falls back to `guessYear`/`guessDiff` (`public/js/mcq/year.mjs`) for a question tagged since. The audit measures the fallback against the model: on 2,257 questions the guessed year matched in 68% and was within a year in 99.5%, but the guessed difficulty matched only 45%, worse than always guessing 2 (54%). No simple rule over length, options, lead-in or year beat 55%, so `guessDiff` is now that rule (length alone, 55%), and the tagger runs after every generation pass. Before 2026-10-27, 1,472 of the 2,257 had only the guess.
+**Year and difficulty** (2026-10-27): every duel question carries both (`mcq/taxonomy.mjs`); `scripts/tag-years.mjs` asks the model for them, and the pack falls back to `guessYear`/`guessDiff` (`public/js/mcq/year.mjs`) for a question tagged since. The audit measures the fallback against the model: on 2,257 questions the guessed year matched in 68% and was within a year in 99.5%, but the guessed difficulty matched only 45%, worse than always guessing 2 (54%). No simple rule over length, options, lead-in or year beat 55%, so `guessDiff` is now that rule (length alone, 55%), and the tagger runs after every generation pass. Before 2026-10-27, 1,472 of the 2,257 had only the guess. The duel's second layer, the kind, is the tagger's too for a pooled question (`--kinds`): until 2026-10-27 the pack filed every one as clinical, though 42 of the 708 test physiology or anatomy.
 
 ## In the duel (Pup Duel, `packages/pup-duel/` in Optimus, vendored)
 

@@ -7,7 +7,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { shortDx, patientLine, stationQuestion, buildPack, poolQuestion, DUEL } from './lib/duel-pack.mjs';
-import { stationsOnDisk, poolOnDisk, packText, mcqOnDisk } from './build-duel-pack.mjs';
+import { stationsOnDisk, poolOnDisk, packText, mcqOnDisk, packInputs } from './build-duel-pack.mjs';
 import { stationItems } from './lib/mcq-sources.mjs';
 import { normQuestion } from '../public/js/vendor/pup-duel/duel/pack.mjs';
 import { taxonomyProblems } from '../public/js/mcq/taxonomy.mjs';
@@ -117,11 +117,8 @@ test('the pack from the pool: every pooled question that fits, each playable by 
   }
 });
 
-import { readYears, readDifficulty } from './tag-years.mjs';
-import { readHy } from './generate-hy.mjs';
-import { readMxq, CREDIT } from './import-medexpqa.mjs';
 test('public/duel/pack.json is current (node scripts/mcq-pool.mjs, then npm run duel-pack)', () => {
-  const pub = path.join(ROOT, 'public'), { pack } = buildPack(poolOnDisk(pub), { mcq: mcqOnDisk(pub), stations: stationsOnDisk(pub), years: readYears(), difficulty: readDifficulty(), hy: readHy(), mxq: readMxq(), mxqCredit: CREDIT });
+  const pub = path.join(ROOT, 'public'), { pack } = buildPack(poolOnDisk(pub), packInputs(pub));
   assert.equal(fs.readFileSync(path.join(ROOT, 'public/duel/pack.json'), 'utf8'), packText(pack));
 });
 
@@ -162,4 +159,12 @@ test('every question in the duel pack is fully categorised: source, origin, cred
   const pack = JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'duel', 'pack.json'), 'utf8'));
   const bad = pack.questions.map(q => [q.id, taxonomyProblems(q)]).filter(([, p]) => p.length);
   assert.deepEqual(bad.slice(0, 5), [], `${bad.length} of ${pack.questions.length} questions are not fully categorised`);
+});
+
+test('a pooled question\'s kind comes from the tagger (tag-years.mjs --kinds), clinical until it has looked', () => {
+  const q = pooled('usmle-resource', { id: 'q-k1' });
+  assert.equal(poolQuestion(q).q.cat, 'clinical');
+  assert.equal(poolQuestion(q, new Map(), { 'q-k1': 'physio' }).q.cat, 'physio');
+  assert.equal(poolQuestion(q, new Map(), { 'q-k1': 'skills' }).q.cat, 'clinical', 'a bank question is never an OSCE skill');
+  assert.equal(buildPack({ questions: [q] }, { kinds: { 'q-k1': 'anatomy' } }).pack.questions[0].cat, 'anatomy');
 });
