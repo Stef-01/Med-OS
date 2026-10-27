@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "version": "pool-634",
+ "version": "pool-648",
  "title": "Standard MCQ pool",
  "note": "Built by scripts/mcq-pool.mjs: candidates from the stations, generate-mcq.mjs, the open USMLE-style banks and open exam sets in data/benchmarks and student submissions, admitted on the flaw checks, the model review and the bars calibrated on the benchmarks (docs/mcq.md). provenance.kind says where each came from: user, ai, amsa, usmle-resource, open-exam.",
  "bars": {
@@ -10,7 +10,7 @@
  },
  "counts": {
   "ai": 310,
-  "open-exam": 106,
+  "open-exam": 120,
   "usmle-resource": 160,
   "amsa": 58
  },
@@ -204,15 +204,15 @@
    "eval": {
     "flaws": [],
     "flawScore": 100,
-    "judgeScore": 89,
-    "quality": 93,
+    "judgeScore": 87,
+    "quality": 92,
     "bar": 89,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:41:36.823Z",
@@ -481,7 +481,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:41:45.970Z",
@@ -823,7 +823,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:42:03.298Z",
@@ -3542,7 +3542,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:43:39.992Z",
@@ -4753,15 +4753,15 @@
    "eval": {
     "flaws": [],
     "flawScore": 100,
-    "judgeScore": 89,
-    "quality": 93,
+    "judgeScore": 91,
+    "quality": 95,
     "bar": 89,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:43:52.879Z",
@@ -4892,15 +4892,15 @@
      "vignette:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 93,
-    "quality": 93,
+    "judgeScore": 95,
+    "quality": 95,
     "bar": 89,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:44:01.917Z",
@@ -5443,7 +5443,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:44:13.133Z",
@@ -5583,74 +5583,6 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:42:02.380Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
-   "id": "ai-mcq-4550ca09",
-   "stem": "A 49-year-old woman, 2 hours after hysteroscopy and curettage, has severe lower abdominal pain and guarding. Curettings contained yellow fatty tissue. BP 90/55 mmHg despite 1 L crystalloid.",
-   "ask": "Which investigation will most likely confirm the diagnosis?",
-   "options": [
-    "Diagnostic laparoscopy",
-    "CT abdomen and pelvis",
-    "Transvaginal ultrasound",
-    "FAST ultrasound scan",
-    "Repeat hysteroscopy"
-   ],
-   "answer": 0,
-   "explanation": "Fat in the curettings means the curette went through the uterine wall into omentum or bowel fat, so this is uterine perforation until proven otherwise. She is still shocked after fluids and has peritonism, so the senior gynaecologist should do urgent laparoscopy (or laparotomy). It confirms the perforation, looks for bowel, bladder or vessel injury and allows the bleeding to be controlled at the same time. CT is only for stable patients, when the senior asks for it.",
-   "why": [
-    null,
-    "CT can be used in stable patients, but sending a shocked woman who is not responding to fluids out of the clinical area for a scan delays surgical control of the bleeding.",
-    "Transvaginal ultrasound may show free fluid but cannot reliably show the perforation or rule out bowel injury, and it delays definitive management.",
-    "FAST may show free fluid, but the source is already clear from the procedure, and FAST cannot confirm perforation or rule out bowel or bladder injury.",
-    "Putting fluid back into the cavity at repeat hysteroscopy risks making the perforation worse and pushing fluid into the abdomen, and it cannot assess injury outside the uterus."
-   ],
-   "topic": "Gynaecology",
-   "tags": [
-    "generated",
-    "focus:investigation",
-    "station:ai-9fdfd7be",
-    "form:rapid"
-   ],
-   "provenance": {
-    "kind": "ai",
-    "source": {
-     "name": "Written by AI from Med-OS station ai-9fdfd7be",
-     "url": "",
-     "licence": "own"
-    },
-    "createdAt": "2026-10-26T15:40:01.226Z",
-    "generator": {
-     "how": "cli",
-     "version": "generate-mcq-2",
-     "basis": [
-      "ai-9fdfd7be",
-      "osce-ai-9fdfd7be"
-     ],
-     "exemplars": [
-      "medqa-us4-test-0905",
-      "medqa-us4-test-0241",
-      "medqa-us4-test-0245"
-     ],
-     "model": "claude-opus-5-5"
-    }
-   },
-   "eval": {
-    "flaws": [],
-    "flawScore": 100,
-    "judgeScore": 83,
-    "quality": 90,
-    "bar": 89,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 4,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 2,
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T16:07:10.634Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -6052,7 +5984,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:44:58.780Z",
@@ -6464,74 +6396,6 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:07:36.527Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
-   "id": "ai-mcq-4f949177",
-   "stem": "A 42-year-old woman, day 7 after coiling a ruptured anterior communicating aneurysm, becomes drowsy with new left arm weakness. Sodium 138 mmol/L; CT shows no new blood or hydrocephalus.",
-   "ask": "Most likely cause?",
-   "options": [
-    "Aneurysm rebleeding",
-    "Acute hydrocephalus",
-    "Cerebral vasospasm",
-    "Cerebral salt wasting",
-    "Procedural thromboembolism"
-   ],
-   "answer": 2,
-   "explanation": "A new focal deficit or drop in consciousness between days 3 and 14 after aneurysmal SAH, with no new blood, no hydrocephalus and a normal sodium on testing, is delayed cerebral ischaemia from vasospasm. Oral nimodipine 60 mg 4-hourly for 21 days and keeping the patient euvolaemic lower this risk (eTG). Confirm it with CT angiography or perfusion imaging and involve neurosurgery or neurointervention urgently.",
-   "why": [
-    "The aneurysm has been coiled, and CT shows no new blood.",
-    "CT shows no ventricular enlargement, so hydrocephalus does not explain the decline.",
-    null,
-    "A sodium of 138 mmol/L rules out hyponatraemia from cerebral salt wasting.",
-    "Thromboembolism from coiling happens during or within hours of the procedure, not on day 7."
-   ],
-   "topic": "Neurosurgery",
-   "tags": [
-    "generated",
-    "focus:complication",
-    "station:amsa-361",
-    "form:rapid"
-   ],
-   "provenance": {
-    "kind": "ai",
-    "source": {
-     "name": "Written by AI from Med-OS station amsa-361",
-     "url": "",
-     "licence": "own"
-    },
-    "createdAt": "2026-10-26T20:31:28.912Z",
-    "generator": {
-     "how": "cli",
-     "version": "generate-mcq-2",
-     "basis": [
-      "amsa-361",
-      "osce-amsa-361"
-     ],
-     "exemplars": [
-      "medqa-us4-test-0615",
-      "medqa-us4-test-1187",
-      "medqa-us4-test-0749"
-     ],
-     "model": "claude-opus-5-5"
-    }
-   },
-   "eval": {
-    "flaws": [],
-    "flawScore": 100,
-    "judgeScore": 84,
-    "quality": 90,
-    "bar": 89,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 4,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 2,
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:36:07.060Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -7065,15 +6929,15 @@
      "vignette:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 93,
-    "quality": 93,
+    "judgeScore": 91,
+    "quality": 92,
     "bar": 89,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:45:17.548Z",
@@ -8358,7 +8222,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:46:21.761Z",
@@ -10601,7 +10465,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:47:25.616Z",
@@ -11760,6 +11624,73 @@
    }
   },
   {
+   "id": "ai-mcq-97802bf3",
+   "stem": "A 4-month-old girl presents with vomiting and irritability. Her father says she rolled off a couch yesterday. Coagulation studies are normal. CT brain shows bilateral subdural haematomas of differing densities.",
+   "ask": "Most likely cause?",
+   "options": [
+    "Accidental short fall",
+    "Abusive head trauma",
+    "Birth-related haemorrhage",
+    "Glutaric aciduria type 1",
+    "Vitamin K deficiency"
+   ],
+   "answer": 1,
+   "explanation": "Bilateral subdural haematomas of different densities point to bleeds of different ages. That means repeated injury, which a single short fall cannot explain, so this is abusive head trauma. The doctor must make a mandatory report to child protection and arrange an ophthalmology review for retinal haemorrhages and a skeletal survey.",
+   "why": [
+    "A short fall from a couch rarely causes bilateral subdural haematomas, and it cannot explain bleeds of different ages.",
+    null,
+    "Subdural bleeds from birth usually clear within the first one to three months and would not look new at 4 months.",
+    "Glutaric aciduria usually comes with a large head and widened Sylvian fissures, and it is a rare diagnosis made only once abuse has been ruled out.",
+    "Normal coagulation studies make a bleeding disorder such as vitamin K deficiency unlikely."
+   ],
+   "topic": "Medicolegal",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "topic:medicolegal",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Medicolegal (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T01:35:45.386Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-medicolegal-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0360",
+      "medqa-us4-test-0587",
+      "medqa-us4-test-0577"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 87,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:48:00.513Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-995e2a46",
    "stem": "A 68-year-old man has had left iliac fossa pain for 3 days and a temperature of 38.4 °C. He has left iliac fossa tenderness with guarding, and his CRP is 140 mg/L.",
    "ask": "Most appropriate next investigation?",
@@ -12301,6 +12232,75 @@
    }
   },
   {
+   "id": "ai-mcq-9de2d078",
+   "stem": "A 34-year-old baker has had six months of wheeze and chest tightness. It gets worse during work shifts and settles on holidays. Spirometry shows reversible airflow obstruction.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Flour-specific IgE",
+    "Methacholine challenge",
+    "Serial peak flows",
+    "Exhaled nitric oxide",
+    "Chest X-ray"
+   ],
+   "answer": 2,
+   "explanation": "Spirometry has already confirmed asthma, and the symptoms improve away from work, which suggests occupational asthma such as baker's asthma. The next step is to show the link to work objectively. This is done with serial peak flow readings, taken several times a day for about 3 to 4 weeks, both at work and away from it. Confirming the diagnosis matters because it drives decisions about removing the worker from exposure and about workers' compensation.",
+   "why": [
+    "A raised flour-specific IgE shows sensitisation only, which is common in exposed workers, and it does not prove that the asthma is caused by work.",
+    "Methacholine challenge shows airway hyperresponsiveness, but reversible obstruction has already confirmed asthma, and a single test cannot show a link to work.",
+    null,
+    "Exhaled nitric oxide shows eosinophilic airway inflammation but cannot tell occupational asthma from asthma that is not related to work.",
+    "A chest X-ray is usually normal in asthma and does not help confirm an occupational cause."
+   ],
+   "topic": "Occupational/Environmental Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "topic:occupational-environmental-medicin",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Occupational/Environmental Medicine (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T01:38:13.313Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-occupational-environmental-medicine-1"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0438",
+      "medqa-us4-test-0558",
+      "medqa-us4-test-0764"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 90,
+    "quality": 92,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:48:30.428Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-9e01ef6b",
    "stem": "A 52-year-old truck driver dozes at traffic lights. Polysomnography shows an apnoea–hypopnoea index of 48/hour; Epworth score is 17. He is untreated.",
    "ask": "What does this result mean for his driving?",
@@ -12352,15 +12352,15 @@
    "eval": {
     "flaws": [],
     "flawScore": 100,
-    "judgeScore": 85,
-    "quality": 91,
+    "judgeScore": 87,
+    "quality": 92,
     "bar": 89,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:48:35.864Z",
@@ -12497,7 +12497,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:48:48.058Z",
@@ -14594,7 +14594,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:49:44.347Z",
@@ -16211,15 +16211,15 @@
      "vignette:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 93,
-    "quality": 93,
+    "judgeScore": 91,
+    "quality": 92,
     "bar": 89,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:50:12.033Z",
@@ -16413,15 +16413,15 @@
    "eval": {
     "flaws": [],
     "flawScore": 100,
-    "judgeScore": 89,
-    "quality": 93,
+    "judgeScore": 91,
+    "quality": 95,
     "bar": 89,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:50:32.525Z",
@@ -17426,15 +17426,15 @@
      "vignette:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 89,
-    "quality": 91,
+    "judgeScore": 91,
+    "quality": 92,
     "bar": 89,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:50:51.863Z",
@@ -19671,7 +19671,7 @@
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:51:26.116Z",
@@ -19801,7 +19801,7 @@
      "vignette:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 91,
+    "judgeScore": 90,
     "quality": 92,
     "bar": 89,
     "solved": 2,
@@ -19809,7 +19809,7 @@
     "singleBest": 4,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:51:39.526Z",
@@ -20413,15 +20413,15 @@
    "eval": {
     "flaws": [],
     "flawScore": 100,
-    "judgeScore": 88,
-    "quality": 93,
+    "judgeScore": 91,
+    "quality": 95,
     "bar": 89,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "accept",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-27T01:52:09.874Z",
@@ -21318,61 +21318,6 @@
    }
   },
   {
-   "id": "headqa-2013-111",
-   "stem": "A patient under chemotherapeutic treatment for leukemia is admitted for pneumonia for which treatment with cefepime has been prescribed. A thorax Rx / CT scan shows an infiltrate with the sign of the halo and meniscus lunate. The lesion is peripheral and a transthoracic puncture is indicated for sampling. Until you have definitive histological and microbiological results, what antimicrobial would you add to the treatment?",
-   "options": [
-    "Ganciclovir",
-    "Caspofungin",
-    "Fluconazole",
-    "Piperacillin-tazobactam",
-    "Voriconazole"
-   ],
-   "answer": 4,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Infectious Diseases",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "vignette:major"
-    ],
-    "flawScore": 80,
-    "judgeScore": 81,
-    "quality": 81,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 4,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 2,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:29:03.100Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
    "id": "headqa-2013-112",
    "stem": "A 54-year-old man diagnosed with diabetes mellitus type 2 came to our clinic. He reported fever of 40ºC with chills and shivering, arthromyalgia and headache, which is why he started treatment with paracetamol. The painting began 24 hours before his return to Spain. After 3 days, he presented with a generalized maculo-papular rash that progressed to the formation of more intense petechiae in the lower limbs. It provides analytics where leukopenia stands out with 3,200 / mm3 and platelets 91,000 / mm3 and mild elevation of aminotransferases. Thickness, peripheral blood smear, polymerase chain reaction (PCR) and malaria antigen are negative. What is the most likely suspected diagnosis?",
    "options": [
@@ -21861,61 +21806,6 @@
    }
   },
   {
-   "id": "headqa-2013-146",
-   "stem": "Motor symptoms in Parkinson's disease predominate and define this entity. However, symptoms in other spheres are sometimes very relevant and are referred to by the general name of \"Non-motor manifestations of Parkinson's disease\". Which of the following is considered a non-motor symptom of Parkinson's disease?",
-   "options": [
-    "Hypoglycemia",
-    "Orthostatic hypotension.",
-    "Absence crisis.",
-    "Headache",
-    "Motor polyneuropathy."
-   ],
-   "answer": 1,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Neurology",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "vignette:minor"
-    ],
-    "flawScore": 94,
-    "judgeScore": 73,
-    "quality": 81,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 5,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 2,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:30:23.439Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
    "id": "headqa-2013-147",
    "stem": "After a traffic accident, a 38-year-old patient enters the ICU in a coma. After several days the patient does not improve neurologically and CT shows hemorrhagic punctate lesions in the corpus callosum and cortico-subcortical union. What is your diagnosis?",
    "options": [
@@ -22125,7 +22015,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22189,61 +22079,6 @@
    }
   },
   {
-   "id": "headqa-2013-163",
-   "stem": "84-year-old man with severe respiratory failure secondary to carcinomatous lymphangitis associated with gastric cancer. A companion of his service has begun, that same day, treatment with oral morphine 10 mg / 4 hours. The patient is restless, at 34 breaths per minute, O2 saturation is 80% with an FiO2 of 28%. What should his attitude be?",
-   "options": [
-    "Withdraw treatment because it may worsen respiratory failure.",
-    "Increase the doses up to 20 mg / 4 hours according to evolution.",
-    "Increase oxygen flow to 35%.",
-    "Change the treatment of morphine by scopolamine.",
-    "To add to a treatment of a risperidon."
-   ],
-   "answer": 1,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Palliative Care",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "vignette:minor"
-    ],
-    "flawScore": 94,
-    "judgeScore": 74,
-    "quality": 82,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 3,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:31:59.184Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
    "id": "headqa-2013-165",
    "stem": "A woman of 90 years of dementia, incontinent and immobilized by hemiparesis presents a sacral ulcer of grade III. In the examination we see that he is in bed on a wet pad and with a feeding tube that is well placed. He is afebrile and has a normal pulse and blood pressure. It has a 4 x 4 cm sacral ulcer that extends into the fascia with green exudate and normal skin surrounding the ulcer. What is the first priority in the care of this patient?",
    "options": [
@@ -22282,15 +22117,15 @@
      "vignette:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 79,
-    "quality": 85,
+    "judgeScore": 77,
+    "quality": 84,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22337,15 +22172,15 @@
      "vignette:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 75,
-    "quality": 83,
+    "judgeScore": 79,
+    "quality": 85,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22400,7 +22235,7 @@
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22447,15 +22282,15 @@
      "cover-options:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 79,
-    "quality": 85,
+    "judgeScore": 77,
+    "quality": 84,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22555,15 +22390,15 @@
      "clang:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 79,
-    "quality": 85,
+    "judgeScore": 82,
+    "quality": 87,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22610,15 +22445,15 @@
      "cover-options:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 76,
-    "quality": 83,
+    "judgeScore": 80,
+    "quality": 86,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22665,15 +22500,15 @@
      "vignette:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 76,
-    "quality": 83,
+    "judgeScore": 78,
+    "quality": 84,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22728,7 +22563,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22775,15 +22610,15 @@
      "cover-options:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 76,
-    "quality": 83,
+    "judgeScore": 78,
+    "quality": 84,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -22838,7 +22673,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -23392,117 +23227,6 @@
    }
   },
   {
-   "id": "headqa-2013-83",
-   "stem": "A 37-year-old woman with an extensive ulcerative colitis has a severe outbreak where treatment with prednisone is started at a dose of 1 mg / kg. After a week of treatment, the patient does not show improvement. What is the next therapeutic measure to perform?",
-   "options": [
-    "Subtotal colectomy of urgency and in a second time proctectomy and ileoanal reservoir.",
-    "Associate an immunosuppressant such as azathioprine.",
-    "Associate mesalazine in doses of 4 grams per day oral and rectal triamcinolone 1 application every 12 hours",
-    "Endovenous cyclosporine 2 mg / Kg.",
-    "Treatment with etanercept (an anti-TNFa antibody) should be assessed."
-   ],
-   "answer": 3,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Gastroenterology",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "absolute-terms:minor",
-     "vignette:minor"
-    ],
-    "flawScore": 88,
-    "judgeScore": 76,
-    "quality": 81,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 4,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 2,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:25:55.094Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
-   "id": "headqa-2013-87",
-   "stem": "A 65-year-old woman with a history of joint pains treated with anti-inflammatories, who is referred for a study due to anemia. In the complementary studies it presents 3.164.000 red blood cells, Hto. 32%, Hb 11 g / dl, VCM 69 fl, Leukocytes 7800, Platelets 370,000, PCR 0.29 mg / dl, Fe 20 ng / ml, Ferritin 18 ng / ml, Glucose 105 mg / dl, GOT, GPT, GGT , F. Alkaline, total Bilirubin, Cholesterol, Creatinine, Calcium and Phosphorus normal. Ac. Anti-transglutaminase and negative antigliadin Ac. Gastroscopy: hiatus hernia of 3 cm, rest without alterations. Colonoscopy: up to blind, isolated diverticula in sigma. Intestinal transit without alterations. Ultrasound of the abdomen without alterations. Which of the explorations listed below do you find most appropriate to complete the study?",
-   "options": [
-    "Jejunal biopsy",
-    "Arteriography",
-    "Endoscopic capsule",
-    "Radioisotopes.",
-    "Pelvic MRI."
-   ],
-   "answer": 2,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Gastroenterology",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "units:minor"
-    ],
-    "flawScore": 94,
-    "judgeScore": 72,
-    "quality": 81,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 4,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 2,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:26:23.069Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
    "id": "headqa-2013-90",
    "stem": "A 50-year-old woman attended the emergency department for asthenia, anorexia, weight loss, jaundice, fever and abdominal pain. It does not refer to recent history of blood transfusion, risky sexual contacts or addiction to parenteral drugs. Usual consumption of 60 grams of alcohol per day during the last five years, consumption that has increased during the previous month due to family problems. Temperature 38.5ºC, blood pressure 100/60 mmHg. Physical examination shows temporo-spatial disorientation, malnutrition, asterixis, jaundice and painful hepatomegaly. No ascites or peritoneal irritation data. Laboratory tests include leukocytes 15,000 / microliter with 90% polymorphonuclear cells, red blood cells 3 million / mm3, hemoglobin 10 g / dl, mean corpuscular volume 115 fl, bilirubin 15 mg / dl direct predominance, AST (GOT) 300 IU / L, ALT (GPT) 120 IU / L, GGT 635 IU / L, prolongation of prothrombin time greater than 50%. What is the most likely diagnosis of the condition presented by the patient?",
    "options": [
@@ -23812,75 +23536,19 @@
      "vignette:minor"
     ],
     "flawScore": 88,
-    "judgeScore": 84,
-    "quality": 86,
+    "judgeScore": 79,
+    "quality": 83,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T20:45:41.256Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
-   "id": "headqa-2014-105",
-   "stem": "Which of the following combinations of drugs is commonly used in the maintenance treatment of patients with a kidney transplant?",
-   "options": [
-    "Tacrolimus, cyclosporine and mycophenolate mofetil.",
-    "Tacrolimus, mycophenolate mofetil and glucocorticoids.",
-    "Tacrolimus, sirolimus and mycophenolate mofetil.",
-    "Tacrolimus, azathioprine and mycophenolate mofetil.",
-    "Cyclosporine, azathioprine and mycophenolate mofetil."
-   ],
-   "answer": 1,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Nephrology",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "vignette:minor",
-     "stem-length:minor"
-    ],
-    "flawScore": 88,
-    "judgeScore": 81,
-    "quality": 84,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 5,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:46:04.506Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -23976,15 +23644,15 @@
      "vignette:minor"
     ],
     "flawScore": 94,
-    "judgeScore": 80,
-    "quality": 86,
+    "judgeScore": 78,
+    "quality": 84,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -24082,15 +23750,15 @@
    "eval": {
     "flaws": [],
     "flawScore": 100,
-    "judgeScore": 75,
-    "quality": 85,
+    "judgeScore": 82,
+    "quality": 89,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -24145,7 +23813,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -24193,15 +23861,15 @@
      "vignette:minor"
     ],
     "flawScore": 88,
-    "judgeScore": 76,
-    "quality": 81,
+    "judgeScore": 78,
+    "quality": 82,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -24320,62 +23988,6 @@
    }
   },
   {
-   "id": "headqa-2014-127",
-   "stem": "Which of the following analytical determinations is less useful for decision making in the follow-up and control of an HIV-infected person?",
-   "options": [
-    "CD4 lymphocyte count in peripheral blood.",
-    "Quantification of immunoglobulin.",
-    "Measurement of viral load.",
-    "Studies of HIV resistance to antiretroviral drugs.",
-    "Analysis of the co-receptor tropism."
-   ],
-   "answer": 1,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Infectious Diseases",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "vignette:minor",
-     "stem-length:minor"
-    ],
-    "flawScore": 88,
-    "judgeScore": 76,
-    "quality": 81,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 4,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:48:16.070Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
    "id": "headqa-2014-134",
    "stem": "A 24-year-old girl suffers a bicycle fall with trauma to the abdominal area with the handlebar. A few hours after the trauma begins with intense pain in the left hypochondrium, so he goes to consult an emergency service. Upon arrival the patient is pale and sweaty, the blood pressure figures are 82/54 mmHg and the heart rate is 120 beats per minute. What kind of shock is the most likely to suffer from this patient?",
    "options": [
@@ -24420,66 +24032,11 @@
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T20:48:59.254Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
-   "id": "headqa-2014-135",
-   "stem": "Young person who goes to the emergency room for second degree flame burn of 10% of the body surface, affecting the right arm in an extensive and circular way. There is no arterial pulse in the hand measured by Doppler. What is the treatment of choice?",
-   "options": [
-    "Cures with occlusive silver sulfadiacin and evaluation of depth per week.",
-    "Lymphatic drainage and assess a vascular by-pass.",
-    "Escarotomy or emergency decompression incisions.",
-    "Expectant behavior",
-    "Amputation of the extremity."
-   ],
-   "answer": 2,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Plastic Surgery",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "vignette:minor"
-    ],
-    "flawScore": 94,
-    "judgeScore": 75,
-    "quality": 83,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 5,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:49:05.721Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -24523,15 +24080,15 @@
      "stem-length:minor"
     ],
     "flawScore": 88,
-    "judgeScore": 80,
-    "quality": 83,
+    "judgeScore": 78,
+    "quality": 82,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -24579,15 +24136,15 @@
      "stem-length:minor"
     ],
     "flawScore": 88,
-    "judgeScore": 76,
-    "quality": 81,
+    "judgeScore": 79,
+    "quality": 83,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -24691,74 +24248,19 @@
      "vignette:minor"
     ],
     "flawScore": 88,
-    "judgeScore": 83,
-    "quality": 85,
+    "judgeScore": 81,
+    "quality": 84,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T20:50:24.859Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
-   "id": "headqa-2014-157",
-   "stem": "A 28-year-old violinist who is consulting for having presented panic attacks during his public performances in the last 3 months. The crises are accompanied by intense fear of being blocked and not being able to continue with the performance, something that would be humiliating for him. This fear has made him cancel his next performances. In the rest of his daily activities he does not experience this fear, nor does he experience it when he rehearses with his orchestra colleagues. What diagnosis would you consider most likely for this case?",
-   "options": [
-    "Simple phobia",
-    "Panic disorder",
-    "Social phobia of execution.",
-    "Generalized anxiety disorder.",
-    "Agoraphobia."
-   ],
-   "answer": 2,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Psychiatry",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "vignette:minor"
-    ],
-    "flawScore": 94,
-    "judgeScore": 74,
-    "quality": 82,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 4,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:51:12.695Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -24809,7 +24311,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -24909,15 +24411,15 @@
    "eval": {
     "flaws": [],
     "flawScore": 100,
-    "judgeScore": 75,
-    "quality": 85,
+    "judgeScore": 77,
+    "quality": 86,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -25037,6 +24539,562 @@
    }
   },
   {
+   "id": "headqa-2014-183",
+   "stem": "A study has been carried out to determine the risk of upper gastrointestinal bleeding (UGIB) associated with the use of different non-steroidal anti-inflammatory drugs (NSAIDs). For this purpose, 2,777 patients with UGIB and 5,532 patients matched with the previous ones were included by age and month of admission or consultation, in the same hospitals, but for reasons that had nothing to do with the use of NSAIDs. The comparative risk of suffering a UGIB associated with previous exposure to different NSAIDs was calculated. What kind of study is it?",
+   "options": [
+    "Cohort study.",
+    "Cases and controls study.",
+    "Transversal study.",
+    "Experimental study",
+    "Ecological study"
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Public Health",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 85,
+    "quality": 89,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:53:29.753Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2014-189",
+   "stem": "A study is carried out to investigate the association between factor X and disease Z. To do this, 120 subjects with the disease and 420 controls (without the disease) are matched by age and sex. In both groups it is found that 20 subjects were exposed to factor X. What is the odds ratio (OR) between factor X and disease Z?",
+   "options": [
+    "OR = 1 (no association).",
+    "OR = 2.",
+    "OR = 4",
+    "OR = 6",
+    "OR = 8"
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Public Health",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 84,
+    "quality": 88,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:53:58.060Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2014-190",
+   "stem": "In a clinical trial, the non-inferiority of the HDP-MDI inhaler (experimental) was evaluated against the FDC-ELIPTUS inhaler (control). The lower clinically relevant limit was set at -50 ml in the forced expiratory volume in the first second (FEV1). The results showed an absolute difference in FEV1 between treatments of +8 mL in favor of the HDP-MDI inhaler (95% confidence interval: -59 ml to +67 ml). Point out the CORRECT answer:",
+   "options": [
+    "The new HDP-MDI inhaler is superior to the control inhaler.",
+    "The FDC-ELIPTUS inhaler is non-inferior to the experimental inhaler.",
+    "The study is not conclusive.",
+    "Both inhalers are equivalent.",
+    "The HDP-MDI inhaler is non-inferior to the control inhaler."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Public Health",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "lead-in:major",
+     "vignette:minor"
+    ],
+    "flawScore": 74,
+    "judgeScore": 89,
+    "quality": 83,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:54:15.487Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2014-197",
+   "stem": "We have the registry of subjects who are vaccinated against the flu in a specific region and campaign, which includes information at the time of vaccination on pathological history, age, sex and type of vaccine. For the same subjects we also have the registry with hospital discharge diagnoses, which occurred after the date of vaccination, and there is a personal identifier common to both registers. Indicate which of these studies would be possible to carry out using only the aforementioned sources of information:",
+   "options": [
+    "An analytical cohort study to determine if vaccination increases the risk of developing Guillain-Barré syndrome in the first 16 weeks after influenza vaccination.",
+    "A descriptive analysis to estimate the incidence of acute myocardial infarction in the first 16 weeks after anti-flu vaccination.",
+    "A descriptive analysis to estimate the incidence of fever in the first week after the influenza vaccination.",
+    "A clinical trial that compares the risk of serious post-vaccine reactions (involving hospital admission) with two of the types of influenza vaccines used in that campaign.",
+    "A case-control study to determine if vaccination increases the risk of developing an acute myocardial infarction."
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Public Health",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "cover-options:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 79,
+    "quality": 83,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:54:52.863Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2014-198",
+   "stem": "In a cohort study, the population treated with an anticoagulant drug had an incidence of severe hemorrhage of 3%, while in the untreated population the incidence of severe bleeding was 1%, with the NNH (\"Number Needed to Harm\") of 50. What is the correct interpretation of this data?",
+   "options": [
+    "In the group treated with the anticoagulant 50 people presented a severe hemorrhage.",
+    "In the group treated with anticoagulant there were 50 cases of severe hemorrhage more than in the untreated group.",
+    "The risk of severe hemorrhage in those treated with the anticoagulant was 50 times higher than in those not treated.",
+    "It was necessary to treat 50 people with the anticoagulant to produce 1 case of severe hemorrhage attributable to the drug.",
+    "Of every 100 patients treated with the anticoagulant, 50 had a severe hemorrhage."
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Public Health",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "absolute-terms:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 85,
+    "quality": 86,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:54:56.404Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2014-213",
+   "stem": "Which of the mentioned vasoactive substances preferentially contracts the glomerular efferent arterioles in most physiological states?",
+   "options": [
+    "Adrenalin.",
+    "Noradrenaline",
+    "Endothelin",
+    "Angiotensin II.",
+    "Bradykinin"
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Nephrology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor",
+     "stem-length:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 81,
+    "quality": 84,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:56:03.568Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2014-225",
+   "stem": "Before a 7-month-old girl who comes to the emergency room with a picture suggestive of bronchiolitis, what would be the most probable etiologic agent?",
+   "options": [
+    "Adenovirus.",
+    "Parainfluenza virus 1",
+    "Influenza B virus",
+    "Bocavirus",
+    "Respiratory syncytial virus."
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Paediatrics",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor",
+     "stem-length:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 81,
+    "quality": 84,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:57:03.375Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2014-228",
+   "stem": "A 58-year-old woman enters the Short Stay Medical Unit due to a clinical picture that began with an episode of syncope and then presented feeling of dizziness and dyspnea. On physical examination, she is sweaty, afebrile at 126 beats per minute and at 30 breaths per minute, with a blood pressure of 88/46 and an oxygen saturation of 85% while breathing room air. Cardiac auscultation shows tachycardia without murmurs or gallop and pulmonary auscultation is clean. Which, among the following, seems the most likely diagnosis?",
+   "options": [
+    "Pulmonary embolism.",
+    "Acute cerebrovascular accident of posterior territory.",
+    "Acute coronary syndrome",
+    "Hypovolemic shock.",
+    "Acute pulmonary edema secondary to atrial flutter."
+   ],
+   "answer": 0,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "units:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 79,
+    "quality": 85,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:57:26.918Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2014-229",
+   "stem": "A 69-year-old woman consulted for hemoptotic expectoration. In the two previous months she had low-grade fever, asthenia, anorexia and unquantified weight loss. In the cytological analysis of sputum, hemosiderophages were observed and in the chest radiograph bilateral alveolar infiltrates were observed. Analytically it stood out: Hb 8.2gr / dL, PO2: 58mmHg, creatinine: 5mg / dL, urine: proteinuria +++ microhematuria, cylinders, hematics. ANCAp (antibodies against the cytoplasm of perinuclear neutrophils): positive: anti-glomerular basement membrane antibodies: negative. Antinuclear antibodies: negative. The most likely diagnosis would be:",
+   "options": [
+    "Idiopathic pulmonary hemosiderosis.",
+    "Goodpasture syndrome.",
+    "Systemic lupus erythematosus with severe renal involvement.",
+    "Classical polyarteritis nodosa.",
+    "Microscopic polyarteritis."
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Rheumatology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "cover-options:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 83,
+    "quality": 85,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:57:26.391Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2014-231",
+   "stem": "A 24-year-old woman, asymptomatic, with a history of father and sister with medullary thyroid carcinoma. Incidentally, an adrenal mass measuring 5 cm in diameter was discovered on computed tomography (CT). Which of the following options should be the next clinical decision?",
+   "options": [
+    "Given that it is asymptomatic, semestral control is recommended with serial CT scans of said lesion.",
+    "The search for a possible medullary carcinoma of the thyroid is a priority.",
+    "A pre-clinical Cushing syndrome should be suspected in the context of multiple endocrine neoplasia.",
+    "Puncture-aspiration of said lesion should be performed to elucidate the nature of said lesion.",
+    "Catecholamines should be determined in urine to rule out a pheochromocytoma."
+   ],
+   "answer": 4,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Endocrinology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 74,
+    "quality": 82,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:57:55.833Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "headqa-2014-36",
    "stem": "A 76-year-old woman came to the emergency room referring to pain in the right groin and vomiting for about 6 hours. On examination, a hard consistency tumor is palpable just below the line joining the anterosuperior iliac spine and the pubis (which corresponds to the location of the inguinal ligament). Most likely, it is one:",
    "options": [
@@ -25131,15 +25189,15 @@
      "stem-length:minor"
     ],
     "flawScore": 88,
-    "judgeScore": 76,
-    "quality": 81,
+    "judgeScore": 79,
+    "quality": 83,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -25517,7 +25575,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -25572,7 +25630,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -25617,15 +25675,15 @@
    "eval": {
     "flaws": [],
     "flawScore": 100,
-    "judgeScore": 75,
-    "quality": 85,
+    "judgeScore": 77,
+    "quality": 86,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -25680,7 +25738,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -25735,7 +25793,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -25790,67 +25848,11 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T20:42:15.304Z",
-    "evalVersion": "flaws-1+judge-1"
-   }
-  },
-  {
-   "id": "headqa-2014-71",
-   "stem": "A 7-year-old boy presents a subacute picture of cerebellar ataxia and intracranial hypertension. Magnetic resonance imaging demonstrates an expansive lesion in the cerebellar vérmix that captures contrast and obstructs the fourth ventricle. The most likely diagnosis is:",
-   "options": [
-    "Meningioma",
-    "Cerebellar metastasis.",
-    "Glioblastoma multiforme.",
-    "Medulloblastoma",
-    "Lymphoma"
-   ],
-   "answer": 3,
-   "explanation": "",
-   "why": [
-    null,
-    null,
-    null,
-    null,
-    null
-   ],
-   "topic": "Neurosurgery",
-   "tags": [
-    "src:headqa",
-    "exam:headqa"
-   ],
-   "provenance": {
-    "kind": "open-exam",
-    "source": {
-     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
-     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
-     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
-     "retrieved": "2026-10-26"
-    },
-    "createdAt": "2026-10-26"
-   },
-   "eval": {
-    "flaws": [
-     "cover-options:minor",
-     "vignette:minor"
-    ],
-    "flawScore": 88,
-    "judgeScore": 76,
-    "quality": 81,
-    "bar": 81,
-    "solved": 2,
-    "keyCorrect": "yes",
-    "singleBest": 5,
-    "review": "revise",
-    "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
-    "topicFrom": "review",
-    "verdict": "pool",
-    "reasons": [],
-    "evaluatedAt": "2026-10-26T20:42:09.014Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -25894,15 +25896,15 @@
      "vignette:major"
     ],
     "flawScore": 74,
-    "judgeScore": 86,
-    "quality": 81,
+    "judgeScore": 91,
+    "quality": 84,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -26116,7 +26118,7 @@
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -26218,15 +26220,15 @@
      "units:minor"
     ],
     "flawScore": 82,
-    "judgeScore": 86,
-    "quality": 84,
+    "judgeScore": 84,
+    "quality": 83,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -26281,7 +26283,7 @@
     "singleBest": 5,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -26384,15 +26386,15 @@
      "stem-length:minor"
     ],
     "flawScore": 88,
-    "judgeScore": 84,
-    "quality": 86,
+    "judgeScore": 80,
+    "quality": 83,
     "bar": 81,
     "solved": 2,
     "keyCorrect": "yes",
     "singleBest": 4,
     "review": "revise",
     "judge": "claude-opus-5-5 via the Claude Code CLI",
-    "reviews": 1,
+    "reviews": 2,
     "topicFrom": "review",
     "verdict": "pool",
     "reasons": [],
@@ -26450,6 +26452,683 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T20:45:27.085Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-104",
+   "stem": "A 46-year-old male injecting drug user who presented to the emergency room with fever with chills, mental confusion, diffuse myalgias and intense pain in the left hand of 24 hours of evolution without clear local phlogotic signs. It does not refer any traumatic antecedent. The examination highlights: temperature 38.9ºC, 120 beats per minute, respiratory rate 30 / min, blood pressure 90/54 mm Hg. In the laboratory, a leukocytosis with left deviation stands out (25,000 leukocytes / mm3, 80% neutrophils); increase in creatinine (1.6 mg / dL) and CK (138 U / L). Among the following, what is the most likely diagnosis ?:",
+   "options": [
+    "Streptococcal necrotizing fasciitis.",
+    "Gangrene by Clostridium spp.",
+    "Cellulitis due to mycobacteria.",
+    "Erysipelas."
+   ],
+   "answer": 0,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "cover-options:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 83,
+    "quality": 87,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:04:06.786Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-106",
+   "stem": "A 32-year-old male from Cameroon consulted for fever cough and pain in the left hemithorax of 1 month of evolution. He took amoxicillin-clavulanate for 1 week without improvement of symptoms. An analysis is carried out with a leukocyte count of 8000 / microL and a hemoglobin of 12.8 g / dL. The chest radiograph shows a loculated left pleural effusion occupying a third of the hemithorax. A thoracentesis shows a yellowish fluid with the following characteristics: red blood cells 2000 / μL, leukocytes 2500 / μL with 90% lymphocytes, proteins 4.9 g / dL, lactate dehydrogenase 550 U / L, glucose 67 mg / dL and absence of cells malignancies in the cytological study. Which of the following tests would be most useful in diagnosing the cause of the pleural effusion?",
+   "options": [
+    "A thoracic computed tomography (CT).",
+    "Measurement of the pH of the pleural fluid.",
+    "Measurement of adenosine deaminase from pleural fluid.",
+    "Tuberculin test."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 83,
+    "quality": 87,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:04:25.353Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-119",
+   "stem": "A 38-year-old woman, non-smoker, previously diagnosed with atopic rhinitis, presented for a two-month period consisting of cough and intermittent sibilants predominantly nocturnal. Normal chest x-ray. Spirometry within normality with negative bronchodilator test. Which of the following tests would you request next?",
+   "options": [
+    "Sinus Rx",
+    "Thoracic CT.",
+    "Methacholine test.",
+    "Prick-test"
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 79,
+    "quality": 87,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:05:40.192Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-127",
+   "stem": "55-year-old man who consulted for dysphonia. In the anamnesis, he reported carrying a month with asthenia and unquantified weight loss. The chest radiograph shows an increase in density in the left upper lobe and occupation of the aorto-pulmonary window. The bronchoscopy shows a paralysis of the left vocal cord, without an endoscopic image suggestive of neoplasia. What is the most likely diagnosis ?:",
+   "options": [
+    "Pulmonary neoplasm",
+    "Sarcoidosis",
+    "Silicosis.",
+    "Tuberculosis."
+   ],
+   "answer": 0,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "cover-options:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 79,
+    "quality": 83,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:06:30.184Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-138",
+   "stem": "A 37-year-old man presents a picture of arthritis of the metacarpophalangeal of both hands and a right pleuritis. On examination, bilateral malar erythema was observed. Positive antinuclear antibodies are detected (titre 1/640), with native anti-DNA antibodies also positive; Anti-Sm negative. What would be the initial treatment of choice for this patient?",
+   "options": [
+    "Glucocorticoids at high doses.",
+    "Glucocorticoids and mycophenolate.",
+    "Non-steroidal and antimalarial anti-inflammatories.",
+    "The picture will probably be self-limiting and does not require treatment."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Rheumatology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 79,
+    "quality": 87,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:07:32.354Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-139",
+   "stem": "70-year-old woman with a history of anorexia, weight loss, discomfort in the musculature and proximal joints plus pain in the temporo-mandibular region who goes to the emergency department for loss of unilateral vision (hand movement), sudden and painless onset (afferent pupillary defect). What test would you request in the first place for diagnostic purposes?",
+   "options": [
+    "Lumbar puncture.",
+    "C Reactive Protein.",
+    "Angio Magnetic Resonance.",
+    "Carotid ultrasound."
+   ],
+   "answer": 1,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Rheumatology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 79,
+    "quality": 87,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:07:44.736Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-32",
+   "stem": "A 59-year-old woman presented with chronic watery diarrhea of ​​4 months evolution. In the endoscopy, the mucosa did not show relevant aspects. In particular, no ulcers or friable areas were observed. A transverse colon biopsy was performed. In the histopathological study, a thickened area was recognized below the surface coating epithelium, which was more evident by Masson's trichrome technique and involved epithelial atrophy and denudation. There was also a clear increase in the density of intraepithelial lymphocytes. Is the diagnosis of the intestinal lesion?",
+   "options": [
+    "Chronic ulcerative colitis.",
+    "Pseudomembranous colitis.",
+    "Collagenous colitis",
+    "Fibrosing Crohn's disease."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Pathology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 76,
+    "quality": 86,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:58:16.778Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-44",
+   "stem": "Amalia is a 3 year old girl who has been operated on tetralogy of Fallot. He also presented a thymic dysfunction in the neonatal period and a hypocalcemia as well as a nasal voice together with psychomotor retardation. What genetic test do you consider most appropriate to reach your etiological diagnosis?",
+   "options": [
+    "22q11 deletion study (DiGeorge syndrome or Velo-cardio-facial).",
+    "Study of the expansion of the FMR1 gene, responsible for the X fragil syndrome.",
+    "Sequencing of genes related to HRAS (Noonan syndrome)",
+    "Genetic study of Williams Beuren syndrome."
+   ],
+   "answer": 0,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Paediatrics",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 75,
+    "quality": 83,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:59:09.514Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-50",
+   "stem": "A 58-year-old man reported a history of 3 weeks of evolution with progressive, moderately painful skin lesions on his left arm. It had started as an erythematous lesion on his left thumb. It had reddish streaks visible as connecting lines between the lesions. The patient did not present fever or other general symptoms. He had been working in his garden but could not remember having any injuries. The etiological diagnosis was made by culture of a skin biopsy. What is the most likely causative agent of this process?",
+   "options": [
+    "Dermatophytosis by Microsporum gypseum.",
+    "Cutaneous infection by Staphylococcus aureus.",
+    "Sporotrichosis",
+    "Cutaneous infection by Mycobacterum marinum."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Infectious Diseases",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 79,
+    "quality": 87,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T01:59:46.057Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-56",
+   "stem": "A 54-year-old patient was admitted due to a thermometrical fever of 38ºC in the previous five days and rest dyspnea (NYHA IV), which appeared 6 hours before going to the hospital. In the emergency room, the scan is compatible with heart failure and the ECG shows complete atrioventricular block with an exhaust ventricular rate of 45 bpm. The signs of heart failure are refractory to medical treatment and transesophageal echocardiography performed shows an aortic valve with an effective regurgitant orifice of 0.5 cm2. Serial cultures are positive for Streptococcus gallolyticus. Indicate the most accurate attitude:",
+   "options": [
+    "Cardiac surgery of aortic valvular replacement by mechanical prosthesis with antibiotic therapy according to antibiogram.",
+    "Antibiotic therapy according to antibiogram and implantation of intra-aortic balloon counterpulsation and transient pacemaker up to 3 weeks, after which definitive pacemaker will be implanted.",
+    "Implantation of transient pacemaker, antibiotic therapy according to antibiogram and percutaneous implantation of aortic valve prosthesis.",
+    "Urgent implantation of definitive pacemaker with antibiotic therapy according to antibiogram for 6 weeks."
+   ],
+   "answer": 0,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "cover-options:minor",
+     "vignette:minor"
+    ],
+    "flawScore": 88,
+    "judgeScore": 91,
+    "quality": 90,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:00:24.182Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-57",
+   "stem": "A 72-year-old woman came to the hospital for 2 hours of oppressive chest pain. The blood pressure is 68/32 mm Hg, the heart rate is 124 beats / min, the respiratory rate is 32 breaths / min, the oxygen saturation is 91% with 50% oxygen. Pulmonary auscultation showed bilateral crepitations. An ECG is performed showing a subepicardial lesion on the anterior side, with a mirror image on the inferior face. The chest radiograph shows a bilateral alveolar pattern. What is your therapeutic decision?",
+   "options": [
+    "Start infusion of nitrates i.v.",
+    "Perform fibrinolysis with tenecteplase (TNK).",
+    "Perform urgent coronary angioplasty.",
+    "Administer furosemide 40 mg i.v."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Cardiology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 91,
+    "quality": 95,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:00:22.461Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-71",
+   "stem": "A young 18-year-old with a history of asthma, allergy to pollens, mites and cat hair, goes to urgency referring to sensation of food detention at retrosternal level with a practically inability to swallow his own saliva. Refer to similar episodes on other occasions that have spontaneously subsided in a few minutes. Which of the following is the most likely diagnosis?",
+   "options": [
+    "Barrett's esophagus.",
+    "Distal esophageal ring (Schaztki).",
+    "Infectious esophagitis",
+    "Eosinophilic esophagitis."
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 79,
+    "quality": 85,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 4,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:01:37.822Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-74",
+   "stem": "A 67-year-old man, diagnosed with liver cirrhosis and an active drinker, was admitted due to progressive abdominal distension with diffuse discomfort, of two weeks evolution. It does not refer fever or other symptoms. The exploration highlights changing dullness to abdominal percussion, with absence of edema. A diagnostic paracentesis is performed, finding a slightly cloudy liquid, with 2,300 cells / mL, of which 30% are lymphocytes, 60% polymorphonuclear and 10% red blood cells. What is the first therapeutic measure that would prompt this patient immediately?",
+   "options": [
+    "Restriction of salt and liquids.",
+    "Diuretic treatment with oral spironolactone.",
+    "Treatment with a third generation cephalosporin.",
+    "Evacuating paracentesis."
+   ],
+   "answer": 2,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Gastroenterology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 86,
+    "quality": 92,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:02:00.258Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
@@ -26663,6 +27342,59 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T16:07:51.674Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "headqa-2015-93",
+   "stem": "A 46-year-old woman with a history of rheumatic valve disease, who requires mitral valve replacement by a mechanical prosthesis. The initial postoperative evolution is favorable. However, after starting treatment with acenocoumarol develops a pattern of skin necrosis affecting the abdominal region and extremities. Which of the following alterations would justify this table?",
+   "options": [
+    "Antithrombin deficiency.",
+    "Factor V Leiden.",
+    "Hyperhomocysteinemia.",
+    "Protein C deficiency"
+   ],
+   "answer": 3,
+   "explanation": "",
+   "why": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "topic": "Haematology",
+   "tags": [
+    "src:headqa",
+    "exam:headqa"
+   ],
+   "provenance": {
+    "kind": "open-exam",
+    "source": {
+     "name": "HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019",
+     "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json",
+     "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)",
+     "retrieved": "2026-10-26"
+    },
+    "createdAt": "2026-10-26"
+   },
+   "eval": {
+    "flaws": [
+     "vignette:minor"
+    ],
+    "flawScore": 94,
+    "judgeScore": 88,
+    "quality": 90,
+    "bar": 81,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 1,
+    "topicFrom": "review",
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T02:03:04.981Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },

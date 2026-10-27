@@ -8,58 +8,58 @@
   },
   "pool": {
    "ai": 310,
-   "open-exam": 106,
+   "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
   },
   "status": {
-   "pool": 634,
-   "rejected": 569,
-   "reserve": 544,
-   "pending": 427
+   "pool": 648,
+   "rejected": 674,
+   "reserve": 573,
+   "pending": 279
   },
   "topics": {
-   "Endocrinology": 24,
+   "Endocrinology": 25,
    "Bioethics": 8,
    "OMS/Dental": 8,
    "Breast/Endocrine Surgery": 8,
-   "Paediatrics": 33,
+   "Paediatrics": 35,
    "Obstetrics": 16,
-   "Pathology": 5,
+   "Pathology": 6,
    "Trauma Surgery": 15,
    "Gastroenterology": 65,
-   "Cardiology": 55,
-   "Palliative Care": 7,
-   "Medicolegal": 7,
-   "Haematology": 18,
+   "Cardiology": 57,
+   "Palliative Care": 6,
+   "Medicolegal": 8,
+   "Haematology": 19,
    "Otorhinolaryngology": 14,
    "Vascular Surgery": 9,
    "Infectious Diseases": 40,
-   "Rheumatology": 17,
+   "Rheumatology": 20,
    "Emergency Medicine": 25,
    "Professionalism": 6,
-   "Respiratory Medicine": 29,
+   "Respiratory Medicine": 33,
    "Gastrointestinal Surgery": 10,
-   "Neurology": 42,
+   "Neurology": 41,
    "Neonatology": 15,
-   "Occupational/Environmental Medicine": 8,
-   "Neurosurgery": 8,
+   "Occupational/Environmental Medicine": 9,
+   "Neurosurgery": 6,
    "General Surgery": 17,
-   "Gynaecology": 17,
    "Indigenous Health": 5,
    "General Practice": 13,
    "Addiction Medicine": 3,
    "Immunology": 9,
    "Cardiothoracic Surgery": 3,
-   "Plastic Surgery": 6,
+   "Gynaecology": 16,
+   "Plastic Surgery": 5,
    "Urology": 7,
    "Ophthalmology": 4,
    "Sexual Health": 6,
    "Nephrology": 11,
    "Orthopaedics": 10,
    "Geriatrics": 4,
-   "Public Health": 3,
-   "Psychiatry": 15,
+   "Public Health": 8,
+   "Psychiatry": 14,
    "Dermatology": 4,
    "Toxicology": 4,
    "Critical Care Medicine": 1
@@ -67,27 +67,27 @@
   "positions": {
    "4": {
     "counts": [
-     60,
-     57,
-     43,
-     65
+     64,
+     58,
+     50,
+     67
     ],
-    "n": 225,
-    "chi2": 4.74
+    "n": 239,
+    "chi2": 2.82
    },
    "5": {
     "counts": [
      77,
-     88,
-     77,
+     87,
      76,
-     91
+     76,
+     93
     ],
     "n": 409,
-    "chi2": 2.48
+    "chi2": 2.97
    }
   },
-  "topicCap": 96,
+  "topicCap": 98,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -96,10 +96,11 @@
   "funnel": {
    "open-exam headqa": {
     "n": 786,
-    "bar": 191,
-    "pool": 106,
-    "review": 62,
-    "pending": 427
+    "bar": 276,
+    "pool": 120,
+    "reserve": 26,
+    "review": 85,
+    "pending": 279
    },
    "usmle-resource medqa": {
     "n": 594,
@@ -121,8 +122,8 @@
     "pool": 200,
     "review": 3,
     "duplicate": 7,
-    "bar": 32,
-    "reserve": 16
+    "bar": 29,
+    "reserve": 19
    },
    "ai vignette": {
     "n": 159,
@@ -185,7 +186,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 93
+   "quality": 92
   },
   {
    "id": "ai-mcq-015bddb5",
@@ -578,12 +579,12 @@
    "id": "ai-mcq-1acdeccc",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "bar",
-   "status": "rejected",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "quality 88 is below the AI-written bar of 89 (flaws 100, review 80)"
+    "passed (quality 89), but the AI-written Rapid quota of 200 is full"
    ],
-   "quality": 88
+   "quality": 89
   },
   {
    "id": "ai-mcq-1b75eeb2",
@@ -1016,7 +1017,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 93
+   "quality": 95
   },
   {
    "id": "ai-mcq-3eded9df",
@@ -1037,7 +1038,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 93,
+   "quality": 95,
    "flaws": [
     "vignette:minor"
    ]
@@ -1181,9 +1182,11 @@
    "id": "ai-mcq-4550ca09",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
+   ],
    "quality": 90
   },
   {
@@ -1326,9 +1329,11 @@
    "id": "ai-mcq-4f949177",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
+   ],
    "quality": 90
   },
   {
@@ -1421,7 +1426,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 93,
+   "quality": 92,
    "flaws": [
     "vignette:minor"
    ]
@@ -1567,12 +1572,12 @@
    "id": "ai-mcq-5c4e46c7",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "bar",
-   "status": "rejected",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "quality 87 is below the AI-written bar of 89 (flaws 100, review 78)"
+    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
    ],
-   "quality": 87
+   "quality": 90
   },
   {
    "id": "ai-mcq-5d282287",
@@ -1986,9 +1991,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 87 is below the AI-written bar of 89 (flaws 100, review 79)"
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 77)"
    ],
-   "quality": 87
+   "quality": 86
   },
   {
    "id": "ai-mcq-7ae3a025",
@@ -2006,9 +2011,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 88 is below the AI-written bar of 89 (flaws 94, review 84): clang"
+    "quality 87 is below the AI-written bar of 89 (flaws 94, review 82): clang"
    ],
-   "quality": 88,
+   "quality": 87,
    "flaws": [
     "clang:minor"
    ]
@@ -2328,12 +2333,10 @@
    "id": "ai-mcq-97802bf3",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
-   "quality": 90
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 92
   },
   {
    "id": "ai-mcq-995e2a46",
@@ -2453,12 +2456,10 @@
    "id": "ai-mcq-9de2d078",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
-   "reasons": [
-    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
-   ],
-   "quality": 90,
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": [
     "vignette:minor"
    ]
@@ -2470,7 +2471,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 91
+   "quality": 92
   },
   {
    "id": "ai-mcq-9e38d659",
@@ -2545,12 +2546,12 @@
    "id": "ai-mcq-a2209e4e",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "bar",
-   "status": "rejected",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "quality 87 is below the AI-written bar of 89 (flaws 100, review 79)"
+    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
    ],
-   "quality": 87
+   "quality": 90
   },
   {
    "id": "ai-mcq-a2ea039e",
@@ -3187,7 +3188,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 93,
+   "quality": 92,
    "flaws": [
     "vignette:minor"
    ]
@@ -3243,7 +3244,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 93
+   "quality": 95
   },
   {
    "id": "ai-mcq-c8c8e71f",
@@ -3423,7 +3424,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 91,
+   "quality": 92,
    "flaws": [
     "vignette:minor"
    ]
@@ -3501,12 +3502,12 @@
    "id": "ai-mcq-d602157c",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "bar",
-   "status": "rejected",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "quality 88 is below the AI-written bar of 89 (flaws 100, review 80)"
+    "passed (quality 90), but the AI-written Rapid quota of 200 is full"
    ],
-   "quality": 88
+   "quality": 90
   },
   {
    "id": "ai-mcq-d658ba0b",
@@ -3990,7 +3991,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 93
+   "quality": 95
   },
   {
    "id": "ai-mcq-f5055925",
@@ -4025,12 +4026,12 @@
    "id": "ai-mcq-f80c58db",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "reserve",
-   "status": "reserve",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "passed (quality 89), but the AI-written Rapid quota of 200 is full"
+    "quality 86 is below the AI-written bar of 89 (flaws 94, review 81): vignette"
    ],
-   "quality": 89,
+   "quality": 86,
    "flaws": [
     "vignette:minor"
    ]
@@ -4309,9 +4310,11 @@
    "id": "headqa-2013-111",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the Open exam quota of 120 is full"
+   ],
    "quality": 81,
    "flaws": [
     "vignette:major"
@@ -4783,9 +4786,11 @@
    "id": "headqa-2013-146",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the Open exam quota of 120 is full"
+   ],
    "quality": 81,
    "flaws": [
     "vignette:minor"
@@ -4998,9 +5003,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 88, review 70): absolute-terms, clang"
+    "quality 78 is below the base bar of 81 (flaws 88, review 72): absolute-terms, clang"
    ],
-   "quality": 77,
+   "quality": 78,
    "flaws": [
     "absolute-terms:minor",
     "clang:minor"
@@ -5010,10 +5015,12 @@
    "id": "headqa-2013-163",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
-   "quality": 82,
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the Open exam quota of 120 is full"
+   ],
+   "quality": 81,
    "flaws": [
     "vignette:minor"
    ]
@@ -5041,7 +5048,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 85,
+   "quality": 84,
    "flaws": [
     "vignette:minor"
    ]
@@ -5102,7 +5109,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 83,
+   "quality": 85,
    "flaws": [
     "vignette:minor"
    ]
@@ -5160,9 +5167,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
+    "quality 80 is below the base bar of 81 (flaws 88, review 74): vignette, stem-length"
    ],
-   "quality": 78,
+   "quality": 80,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -5236,7 +5243,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 85,
+   "quality": 84,
    "flaws": [
     "cover-options:minor"
    ]
@@ -5290,7 +5297,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 85,
+   "quality": 87,
    "flaws": [
     "clang:minor"
    ]
@@ -5334,9 +5341,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 88, review 70): vignette, stem-length"
+    "quality 76 is below the base bar of 81 (flaws 88, review 68): vignette, stem-length"
    ],
-   "quality": 77,
+   "quality": 76,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -5349,7 +5356,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 83,
+   "quality": 86,
    "flaws": [
     "cover-options:minor"
    ]
@@ -5488,9 +5495,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 76 is below the base bar of 81 (flaws 68, review 81): lead-in, vignette, stem-length"
+    "quality 75 is below the base bar of 81 (flaws 68, review 79): lead-in, vignette, stem-length"
    ],
-   "quality": 76,
+   "quality": 75,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -5596,9 +5603,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 74, review 80): clang, vignette"
+    "quality 76 is below the base bar of 81 (flaws 74, review 78): clang, vignette"
    ],
-   "quality": 78,
+   "quality": 76,
    "flaws": [
     "clang:minor",
     "vignette:major"
@@ -5611,7 +5618,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 83,
+   "quality": 84,
    "flaws": [
     "vignette:minor"
    ]
@@ -5653,9 +5660,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
+    "quality 77 is below the base bar of 81 (flaws 88, review 69): vignette, stem-length"
    ],
-   "quality": 78,
+   "quality": 77,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -5695,12 +5702,12 @@
    "id": "headqa-2013-211",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "bar",
-   "status": "rejected",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 94, review 70): vignette"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
-   "quality": 80,
+   "quality": 81,
    "flaws": [
     "vignette:minor"
    ]
@@ -5820,9 +5827,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 74, review 79): lead-in, vignette"
+    "quality 73 is below the base bar of 81 (flaws 74, review 73): lead-in, vignette"
    ],
-   "quality": 77,
+   "quality": 73,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -5847,7 +5854,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 83,
+   "quality": 84,
    "flaws": [
     "cover-options:minor"
    ]
@@ -6738,9 +6745,11 @@
    "id": "headqa-2013-83",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the Open exam quota of 120 is full"
+   ],
    "quality": 81,
    "flaws": [
     "absolute-terms:minor",
@@ -6795,9 +6804,11 @@
    "id": "headqa-2013-87",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the Open exam quota of 120 is full"
+   ],
    "quality": 81,
    "flaws": [
     "units:minor"
@@ -6955,7 +6966,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 86,
+   "quality": 83,
    "flaws": [
     "cover-options:minor",
     "vignette:minor"
@@ -7028,10 +7039,12 @@
    "id": "headqa-2014-105",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
-   "quality": 84,
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the Open exam quota of 120 is full"
+   ],
+   "quality": 81,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -7054,7 +7067,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 86,
+   "quality": 84,
    "flaws": [
     "vignette:minor"
    ]
@@ -7107,7 +7120,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 85,
+   "quality": 89,
    "flaws": []
   },
   {
@@ -7117,9 +7130,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 80, review 80): cover-options"
+    "quality 79 is below the base bar of 81 (flaws 80, review 78): cover-options"
    ],
-   "quality": 80,
+   "quality": 79,
    "flaws": [
     "cover-options:major"
    ]
@@ -7207,7 +7220,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 81,
+   "quality": 82,
    "flaws": [
     "cover-options:minor",
     "vignette:minor"
@@ -7229,12 +7242,12 @@
    "id": "headqa-2014-120",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "bar",
-   "status": "rejected",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 94, review 70): vignette"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
-   "quality": 80,
+   "quality": 81,
    "flaws": [
     "vignette:minor"
    ]
@@ -7246,9 +7259,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
+    "quality 77 is below the base bar of 81 (flaws 88, review 69): vignette, stem-length"
    ],
-   "quality": 78,
+   "quality": 77,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -7317,10 +7330,12 @@
    "id": "headqa-2014-127",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
-   "quality": 81,
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 88, review 74): vignette, stem-length"
+   ],
+   "quality": 80,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -7422,10 +7437,12 @@
    "id": "headqa-2014-135",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
-   "quality": 83,
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the Open exam quota of 120 is full"
+   ],
+   "quality": 81,
    "flaws": [
     "vignette:minor"
    ]
@@ -7513,7 +7530,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 83,
+   "quality": 82,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -7523,12 +7540,12 @@
    "id": "headqa-2014-143",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "bar",
-   "status": "rejected",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "quality 79 is below the base bar of 81 (flaws 80, review 79): vignette"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
-   "quality": 79,
+   "quality": 81,
    "flaws": [
     "vignette:major"
    ]
@@ -7554,7 +7571,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 81,
+   "quality": 83,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -7613,7 +7630,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 85,
+   "quality": 84,
    "flaws": [
     "longest-key:minor",
     "vignette:minor"
@@ -7626,9 +7643,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 76 is below the base bar of 81 (flaws 88, review 68): vignette, stem-length"
+    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
    ],
-   "quality": 76,
+   "quality": 78,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -7688,9 +7705,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 74, review 81): negative-stem, vignette"
+    "quality 79 is below the base bar of 81 (flaws 74, review 83): negative-stem, vignette"
    ],
-   "quality": 78,
+   "quality": 79,
    "flaws": [
     "negative-stem:major",
     "vignette:minor"
@@ -7730,10 +7747,12 @@
    "id": "headqa-2014-157",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
-   "quality": 82,
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the Open exam quota of 120 is full"
+   ],
+   "quality": 81,
    "flaws": [
     "vignette:minor"
    ]
@@ -7757,9 +7776,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 76 is below the base bar of 81 (flaws 88, review 68): vignette, stem-length"
+    "quality 79 is below the base bar of 81 (flaws 88, review 73): vignette, stem-length"
    ],
-   "quality": 76,
+   "quality": 79,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -7817,7 +7836,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 85,
+   "quality": 86,
    "flaws": []
   },
   {
@@ -8106,11 +8125,12 @@
    "id": "headqa-2014-182",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 60, review 85): lead-in, vignette"
    ],
+   "quality": 75,
    "flaws": [
     "lead-in:major",
     "vignette:major"
@@ -8120,11 +8140,10 @@
    "id": "headqa-2014-183",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
    "flaws": [
     "vignette:minor"
    ]
@@ -8133,11 +8152,12 @@
    "id": "headqa-2014-184",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
+   "quality": 81,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -8147,11 +8167,12 @@
    "id": "headqa-2014-185",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 74, review 75): lead-in, vignette"
    ],
+   "quality": 75,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -8161,11 +8182,12 @@
    "id": "headqa-2014-186",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 80, review 80): vignette"
    ],
+   "quality": 80,
    "flaws": [
     "vignette:major"
    ]
@@ -8174,11 +8196,12 @@
    "id": "headqa-2014-187",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -8188,11 +8211,12 @@
    "id": "headqa-2014-188",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 67 is below the base bar of 81 (flaws 54, review 76): absolute-terms, duplicate-options, vignette"
    ],
+   "quality": 67,
    "flaws": [
     "absolute-terms:minor",
     "duplicate-options:major",
@@ -8203,11 +8227,10 @@
    "id": "headqa-2014-189",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
    "flaws": [
     "vignette:minor"
    ]
@@ -8216,11 +8239,10 @@
    "id": "headqa-2014-190",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -8230,11 +8252,15 @@
    "id": "headqa-2014-191",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: Key A is questionable. IPV produces serum antibodies but little gut mucosal immunity, so it does little to stop faecal-oral spread. The standard teaching is that OPV, not IPV, gives herd immunity, though IPV gives some where oropharyngeal s"
    ],
+   "quality": 36,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor",
@@ -8245,11 +8271,12 @@
    "id": "headqa-2014-192",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 69 is below the base bar of 81 (flaws 62, review 73): lead-in, absolute-terms, vignette, stem-length"
    ],
+   "quality": 69,
    "flaws": [
     "lead-in:major",
     "absolute-terms:minor",
@@ -8261,11 +8288,12 @@
    "id": "headqa-2014-193",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 68, review 76): lead-in, absolute-terms, vignette"
    ],
+   "quality": 73,
    "flaws": [
     "lead-in:major",
     "absolute-terms:minor",
@@ -8276,11 +8304,12 @@
    "id": "headqa-2014-194",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Pure recall of a classification scheme used in one regional tradition, not Step 2 CK clinical application"
    ],
+   "quality": 68,
    "flaws": [
     "cover-options:minor",
     "vignette:minor",
@@ -8291,11 +8320,12 @@
    "id": "headqa-2014-195",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 74, review 75): lead-in, vignette"
    ],
+   "quality": 75,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -8305,11 +8335,12 @@
    "id": "headqa-2014-196",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
+   "quality": 81,
    "flaws": [
     "vignette:minor"
    ]
@@ -8318,11 +8349,10 @@
    "id": "headqa-2014-197",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "cover-options:minor",
     "vignette:minor"
@@ -8332,11 +8362,10 @@
    "id": "headqa-2014-198",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 86,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor"
@@ -8346,11 +8375,12 @@
    "id": "headqa-2014-199",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 74, review 84): lead-in, vignette"
    ],
+   "quality": 80,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -8360,11 +8390,12 @@
    "id": "headqa-2014-201",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 94, review 63): vignette"
    ],
+   "quality": 75,
    "flaws": [
     "vignette:minor"
    ]
@@ -8373,11 +8404,12 @@
    "id": "headqa-2014-202",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Trivia-level anatomy recall without a patient; not Step 2 CK material"
    ],
+   "quality": 68,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -8387,11 +8419,12 @@
    "id": "headqa-2014-203",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 74, review 81): lead-in, vignette"
    ],
+   "quality": 78,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -8401,11 +8434,12 @@
    "id": "headqa-2014-204",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 88, review 68): vignette, stem-length"
    ],
+   "quality": 76,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -8415,11 +8449,12 @@
    "id": "headqa-2014-205",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Pure recall of virus–cancer associations with no patient; not Step 2 CK application"
    ],
+   "quality": 66,
    "flaws": [
     "negative-stem:major",
     "vignette:minor",
@@ -8430,11 +8465,12 @@
    "id": "headqa-2014-206",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 68, review 85): negative-stem, vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "negative-stem:major",
     "vignette:minor",
@@ -8445,11 +8481,12 @@
    "id": "headqa-2014-208",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 68, review 76): lead-in, vignette, stem-length"
    ],
+   "quality": 73,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -8460,11 +8497,12 @@
    "id": "headqa-2014-209",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 74, review 71): cover-options, vignette"
    ],
+   "quality": 72,
    "flaws": [
     "cover-options:minor",
     "vignette:major"
@@ -8474,11 +8512,12 @@
    "id": "headqa-2014-210",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
+   "quality": 81,
    "flaws": [
     "cover-options:minor",
     "vignette:minor",
@@ -8489,11 +8528,12 @@
    "id": "headqa-2014-211",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 68, review 80): negative-stem, vignette, stem-length"
    ],
+   "quality": 75,
    "flaws": [
     "negative-stem:major",
     "vignette:minor",
@@ -8504,11 +8544,10 @@
    "id": "headqa-2014-213",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -8518,11 +8557,12 @@
    "id": "headqa-2014-214",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 74, review 80): vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -8532,11 +8572,12 @@
    "id": "headqa-2014-215",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 94, review 69): vignette"
    ],
+   "quality": 79,
    "flaws": [
     "vignette:minor"
    ]
@@ -8545,11 +8586,12 @@
    "id": "headqa-2014-216",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 88, review 64): vignette, stem-length"
    ],
+   "quality": 74,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -8559,11 +8601,12 @@
    "id": "headqa-2014-217",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 68, review 78): lead-in, vignette, stem-length"
    ],
+   "quality": 74,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -8574,11 +8617,12 @@
    "id": "headqa-2014-218",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Basic-science recall with no patient; not Step 2 CK style"
    ],
+   "quality": 63,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -8589,11 +8633,12 @@
    "id": "headqa-2014-219",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 64 is below the base bar of 81 (flaws 54, review 70): lead-in, absolute-terms, vignette"
    ],
+   "quality": 64,
    "flaws": [
     "lead-in:major",
     "absolute-terms:minor",
@@ -8604,11 +8649,12 @@
    "id": "headqa-2014-220",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 68, review 75): cover-options, vignette, stem-length"
    ],
+   "quality": 72,
    "flaws": [
     "cover-options:minor",
     "vignette:major",
@@ -8619,11 +8665,12 @@
    "id": "headqa-2014-221",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -8633,11 +8680,12 @@
    "id": "headqa-2014-222",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 71): vignette"
    ],
+   "quality": 80,
    "flaws": [
     "vignette:minor"
    ]
@@ -8646,11 +8694,12 @@
    "id": "headqa-2014-223",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Pure microbiology recall with no patient, so not Step 2 CK material"
    ],
+   "quality": 62,
    "flaws": [
     "negative-stem:major",
     "vignette:minor",
@@ -8661,11 +8710,12 @@
    "id": "headqa-2014-224",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 80, review 66): cover-options"
    ],
+   "quality": 72,
    "flaws": [
     "cover-options:major"
    ]
@@ -8674,11 +8724,10 @@
    "id": "headqa-2014-225",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -8688,11 +8737,12 @@
    "id": "headqa-2014-226",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 71 is below the base bar of 81 (flaws 68, review 73): negative-stem, vignette, stem-length"
    ],
+   "quality": 71,
    "flaws": [
     "negative-stem:major",
     "vignette:minor",
@@ -8703,11 +8753,12 @@
    "id": "headqa-2014-227",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 69 is below the base bar of 81 (flaws 62, review 73): lead-in, longest-key, clang, vignette"
    ],
+   "quality": 69,
    "flaws": [
     "lead-in:major",
     "longest-key:minor",
@@ -8719,11 +8770,10 @@
    "id": "headqa-2014-228",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": [
     "units:minor"
    ]
@@ -8732,11 +8782,10 @@
    "id": "headqa-2014-229",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": [
     "cover-options:minor",
     "vignette:minor"
@@ -8746,11 +8795,12 @@
    "id": "headqa-2014-230",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 70 is below the base bar of 81 (flaws 68, review 71): cover-options, vignette, stem-length"
    ],
+   "quality": 70,
    "flaws": [
     "cover-options:major",
     "vignette:minor",
@@ -8761,11 +8811,10 @@
    "id": "headqa-2014-231",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
    "flaws": [
     "vignette:minor"
    ]
@@ -8774,11 +8823,14 @@
    "id": "headqa-2014-232",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 53,
    "flaws": [
     "vignette:minor"
    ]
@@ -8787,11 +8839,12 @@
    "id": "headqa-2014-234",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 74, review 75): cover-options, vignette"
    ],
+   "quality": 75,
    "flaws": [
     "cover-options:minor",
     "vignette:major"
@@ -8801,11 +8854,12 @@
    "id": "headqa-2014-235",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 74, review 71): lead-in, vignette"
    ],
+   "quality": 72,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -8846,9 +8900,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 94, review 65): vignette"
+    "quality 78 is below the base bar of 81 (flaws 94, review 67): vignette"
    ],
-   "quality": 77,
+   "quality": 78,
    "flaws": [
     "vignette:minor"
    ]
@@ -8893,7 +8947,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 81,
+   "quality": 83,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -8921,9 +8975,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 88, review 69): clang, vignette"
+    "quality 78 is below the base bar of 81 (flaws 88, review 72): clang, vignette"
    ],
-   "quality": 77,
+   "quality": 78,
    "flaws": [
     "clang:minor",
     "vignette:minor"
@@ -9127,9 +9181,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
+    "quality 76 is below the base bar of 81 (flaws 88, review 68): vignette, stem-length"
    ],
-   "quality": 78,
+   "quality": 76,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -9219,7 +9273,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 85,
+   "quality": 86,
    "flaws": []
   },
   {
@@ -9326,9 +9380,11 @@
    "id": "headqa-2014-71",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "reserve",
+   "status": "reserve",
+   "reasons": [
+    "passed (quality 81), but the Open exam quota of 120 is full"
+   ],
    "quality": 81,
    "flaws": [
     "cover-options:minor",
@@ -9373,9 +9429,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 88, review 70): cover-options, longest-key"
+    "quality 78 is below the base bar of 81 (flaws 88, review 72): cover-options, longest-key"
    ],
-   "quality": 77,
+   "quality": 78,
    "flaws": [
     "cover-options:minor",
     "longest-key:minor"
@@ -9388,7 +9444,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 81,
+   "quality": 84,
    "flaws": [
     "clang:minor",
     "vignette:major"
@@ -9551,7 +9607,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 84,
+   "quality": 83,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor",
@@ -9655,9 +9711,9 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
+    "quality 77 is below the base bar of 81 (flaws 88, review 70): vignette, stem-length"
    ],
-   "quality": 78,
+   "quality": 77,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -9682,7 +9738,7 @@
    "stage": "pool",
    "status": "pool",
    "reasons": [],
-   "quality": 86,
+   "quality": 83,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -9735,11 +9791,12 @@
    "id": "headqa-2015-100",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 80, review 78): lead-in"
    ],
+   "quality": 79,
    "flaws": [
     "lead-in:major"
    ]
@@ -9748,11 +9805,12 @@
    "id": "headqa-2015-101",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 80, review 74): cover-options"
    ],
+   "quality": 76,
    "flaws": [
     "cover-options:major"
    ]
@@ -9761,11 +9819,12 @@
    "id": "headqa-2015-102",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 69 is below the base bar of 81 (flaws 74, review 66): lead-in, vignette"
    ],
+   "quality": 69,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -9775,11 +9834,12 @@
    "id": "headqa-2015-103",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 94, review 66): cover-options"
    ],
+   "quality": 77,
    "flaws": [
     "cover-options:minor"
    ]
@@ -9788,11 +9848,10 @@
    "id": "headqa-2015-104",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": [
     "cover-options:minor"
    ]
@@ -9801,11 +9860,12 @@
    "id": "headqa-2015-105",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the Open exam quota of 120 is full"
    ],
+   "quality": 82,
    "flaws": [
     "vignette:minor"
    ]
@@ -9814,11 +9874,10 @@
    "id": "headqa-2015-106",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": [
     "vignette:minor"
    ]
@@ -9827,11 +9886,12 @@
    "id": "headqa-2015-107",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 53,
    "flaws": [
     "negative-stem:major",
     "longest-key:minor",
@@ -9843,11 +9903,12 @@
    "id": "headqa-2015-108",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 65 is below the base bar of 81 (flaws 48, review 76): lead-in, negative-stem, vignette, stem-length"
    ],
+   "quality": 65,
    "flaws": [
     "lead-in:major",
     "negative-stem:major",
@@ -9859,11 +9920,12 @@
    "id": "headqa-2015-109",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 62 is below the base bar of 81 (flaws 54, review 68): lead-in, vignette, stem-length"
    ],
+   "quality": 62,
    "flaws": [
     "lead-in:major",
     "vignette:major",
@@ -9874,11 +9936,12 @@
    "id": "headqa-2015-110",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 63 is below the base bar of 81 (flaws 48, review 73): lead-in, negative-stem, vignette, stem-length"
    ],
+   "quality": 63,
    "flaws": [
     "lead-in:major",
     "negative-stem:major",
@@ -9890,11 +9953,12 @@
    "id": "headqa-2015-111",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 74, review 75): cover-options, vignette"
    ],
+   "quality": 75,
    "flaws": [
     "cover-options:minor",
     "vignette:major"
@@ -9904,11 +9968,12 @@
    "id": "headqa-2015-112",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: The key is right: the 4-variable MDRD equation uses serum creatinine, age, sex and race, and no body-size term"
    ],
+   "quality": 58,
    "flaws": [
     "lead-in:major",
     "negative-stem:major",
@@ -9920,11 +9985,12 @@
    "id": "headqa-2015-113",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 76, review 71): cover-options, longest-key, vignette, stem-length"
    ],
+   "quality": 73,
    "flaws": [
     "cover-options:minor",
     "longest-key:minor",
@@ -9936,11 +10002,12 @@
    "id": "headqa-2015-114",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 70 is below the base bar of 81 (flaws 68, review 71): lead-in, vignette, stem-length"
    ],
+   "quality": 70,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -9951,11 +10018,12 @@
    "id": "headqa-2015-115",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 62 is below the base bar of 81 (flaws 48, review 71): lead-in, negative-stem, vignette, stem-length"
    ],
+   "quality": 62,
    "flaws": [
     "lead-in:major",
     "negative-stem:major",
@@ -9967,11 +10035,12 @@
    "id": "headqa-2015-116",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -9981,11 +10050,12 @@
    "id": "headqa-2015-117",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
+   "quality": 81,
    "flaws": [
     "vignette:minor"
    ]
@@ -9994,11 +10064,15 @@
    "id": "headqa-2015-118",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches that HPV vaccination of boys is not recommended. That is outdated and could discourage a vaccine that ACIP (US, since 2011), the UK, Australia, Spain (since 2023) and many other programmes now",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: The keyed 'false' statement (D) is true under current guidelines, so the item has no valid key"
    ],
+   "quality": 50,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -10008,22 +10082,22 @@
    "id": "headqa-2015-119",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "headqa-2015-120",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 80, review 71): cover-options"
    ],
+   "quality": 75,
    "flaws": [
     "cover-options:major"
    ]
@@ -10032,11 +10106,12 @@
    "id": "headqa-2015-121",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 80 is below the base bar of 81 (flaws 94, review 71): cover-options"
    ],
+   "quality": 80,
    "flaws": [
     "cover-options:minor"
    ]
@@ -10045,11 +10120,12 @@
    "id": "headqa-2015-122",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 74, review 79): cover-options, negative-stem"
    ],
+   "quality": 77,
    "flaws": [
     "cover-options:minor",
     "negative-stem:major"
@@ -10059,11 +10135,12 @@
    "id": "headqa-2015-123",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 74,
    "flaws": [
     "vignette:minor"
    ]
@@ -10072,11 +10149,12 @@
    "id": "headqa-2015-124",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 65 is below the base bar of 81 (flaws 68, review 63): lead-in, vignette, stem-length"
    ],
+   "quality": 65,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -10087,11 +10165,12 @@
    "id": "headqa-2015-125",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 80, review 75): vignette"
    ],
+   "quality": 77,
    "flaws": [
     "vignette:major"
    ]
@@ -10100,11 +10179,12 @@
    "id": "headqa-2015-126",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 66 is below the base bar of 81 (flaws 68, review 65): cover-options, negative-stem, clang"
    ],
+   "quality": 66,
    "flaws": [
     "cover-options:minor",
     "negative-stem:major",
@@ -10115,11 +10195,10 @@
    "id": "headqa-2015-127",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "cover-options:minor",
     "vignette:minor"
@@ -10129,11 +10208,12 @@
    "id": "headqa-2015-128",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 82, review 66): absolute-terms, clang, vignette"
    ],
+   "quality": 72,
    "flaws": [
     "absolute-terms:minor",
     "clang:minor",
@@ -10144,11 +10224,12 @@
    "id": "headqa-2015-129",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Recall-only symptom list with no patient details, which does not meet Step 2 CK standard"
    ],
+   "quality": 58,
    "flaws": [
     "negative-stem:major",
     "vignette:major",
@@ -10159,11 +10240,13 @@
    "id": "headqa-2015-130",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times",
+    "not a single best answer (B also defensible)"
    ],
+   "quality": 40,
    "flaws": [
     "longest-key:minor",
     "vignette:major"
@@ -10173,11 +10256,12 @@
    "id": "headqa-2015-131",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 80, review 76): vignette"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:major"
    ]
@@ -10186,11 +10270,12 @@
    "id": "headqa-2015-132",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 80, review 79): vignette"
    ],
+   "quality": 79,
    "flaws": [
     "vignette:major"
    ]
@@ -10199,11 +10284,12 @@
    "id": "headqa-2015-133",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the Open exam quota of 120 is full"
    ],
+   "quality": 82,
    "flaws": [
     "cover-options:major",
     "vignette:minor"
@@ -10213,11 +10299,12 @@
    "id": "headqa-2015-134",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 82, review 76): cover-options, vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "cover-options:minor",
     "vignette:minor",
@@ -10228,11 +10315,12 @@
    "id": "headqa-2015-135",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 80, review 69): vignette"
    ],
+   "quality": 73,
    "flaws": [
     "vignette:major"
    ]
@@ -10241,11 +10329,12 @@
    "id": "headqa-2015-136",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 79 is below the base bar of 81 (flaws 80, review 79): cover-options"
    ],
+   "quality": 79,
    "flaws": [
     "cover-options:major"
    ]
@@ -10254,11 +10343,12 @@
    "id": "headqa-2015-137",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 68, review 75): lead-in, vignette, stem-length"
    ],
+   "quality": 72,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -10269,33 +10359,32 @@
    "id": "headqa-2015-138",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "headqa-2015-139",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "headqa-2015-140",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 80, review 70): vignette"
    ],
+   "quality": 74,
    "flaws": [
     "vignette:major"
    ]
@@ -10304,11 +10393,12 @@
    "id": "headqa-2015-141",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
+   "quality": 81,
    "flaws": [
     "clang:minor",
     "vignette:minor"
@@ -10318,11 +10408,12 @@
    "id": "headqa-2015-142",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 77 is below the base bar of 81 (flaws 80, review 75): lead-in"
    ],
+   "quality": 77,
    "flaws": [
     "lead-in:major"
    ]
@@ -10331,11 +10422,12 @@
    "id": "headqa-2015-143",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 67 is below the base bar of 81 (flaws 68, review 66): lead-in, vignette, stem-length"
    ],
+   "quality": 67,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -11615,11 +11707,12 @@
    "id": "headqa-2015-31",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 66 is below the base bar of 81 (flaws 74, review 61): lead-in, vignette"
    ],
+   "quality": 66,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -11629,22 +11722,22 @@
    "id": "headqa-2015-32",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 86,
    "flaws": []
   },
   {
    "id": "headqa-2015-33",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 80, review 71): vignette"
    ],
+   "quality": 75,
    "flaws": [
     "vignette:major"
    ]
@@ -11653,11 +11746,12 @@
    "id": "headqa-2015-34",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
+   "quality": 81,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -11667,11 +11761,12 @@
    "id": "headqa-2015-35",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 88, review 71): vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -11681,11 +11776,12 @@
    "id": "headqa-2015-37",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 74, review 76): vignette, stem-length"
    ],
+   "quality": 75,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -11730,11 +11826,12 @@
    "id": "headqa-2015-40",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 88, review 64): vignette, stem-length"
    ],
+   "quality": 74,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -11744,11 +11841,12 @@
    "id": "headqa-2015-41",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Basic-science recall without a patient, so it is not Step 2 CK style"
    ],
+   "quality": 71,
    "flaws": [
     "cover-options:minor",
     "vignette:minor",
@@ -11759,11 +11857,12 @@
    "id": "headqa-2015-42",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Basic biochemistry recall with no patient context; not Step 2 CK material"
    ],
+   "quality": 69,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -11774,11 +11873,12 @@
    "id": "headqa-2015-43",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 74, review 76): vignette, stem-length"
    ],
+   "quality": 75,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -11788,11 +11888,10 @@
    "id": "headqa-2015-44",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
    "flaws": [
     "vignette:minor"
    ]
@@ -11801,11 +11900,12 @@
    "id": "headqa-2015-45",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 80, review 68): vignette"
    ],
+   "quality": 73,
    "flaws": [
     "vignette:major"
    ]
@@ -11814,11 +11914,12 @@
    "id": "headqa-2015-46",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 74, review 74): vignette, stem-length"
    ],
+   "quality": 74,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -11828,11 +11929,12 @@
    "id": "headqa-2015-47",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 68, review 76): lead-in, vignette, stem-length"
    ],
+   "quality": 73,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -11843,11 +11945,12 @@
    "id": "headqa-2015-48",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Pure recall with a negative stem and no patient, so it is not Step 2 CK style"
    ],
+   "quality": 60,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -11858,11 +11961,12 @@
    "id": "headqa-2015-49",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
+   "quality": 81,
    "flaws": [
     "vignette:minor"
    ]
@@ -11871,22 +11975,22 @@
    "id": "headqa-2015-50",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
    "flaws": []
   },
   {
    "id": "headqa-2015-51",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 68, review 81): lead-in, vignette, stem-length"
    ],
+   "quality": 76,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -11897,11 +12001,12 @@
    "id": "headqa-2015-52",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 88, review 66): vignette, stem-length"
    ],
+   "quality": 75,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -11911,11 +12016,12 @@
    "id": "headqa-2015-53",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 94, review 68): vignette"
    ],
+   "quality": 78,
    "flaws": [
     "vignette:minor"
    ]
@@ -11924,11 +12030,12 @@
    "id": "headqa-2015-54",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Basic-science recall with no patient, not Step 2 CK level"
    ],
+   "quality": 66,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -11939,11 +12046,12 @@
    "id": "headqa-2015-55",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 80, review 66): lead-in"
    ],
+   "quality": 72,
    "flaws": [
     "lead-in:major"
    ]
@@ -11952,11 +12060,10 @@
    "id": "headqa-2015-56",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": [
     "cover-options:minor",
     "vignette:minor"
@@ -11966,22 +12073,22 @@
    "id": "headqa-2015-57",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 95,
    "flaws": []
   },
   {
    "id": "headqa-2015-58",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 82, review 68): longest-key, vignette, stem-length"
    ],
+   "quality": 74,
    "flaws": [
     "longest-key:minor",
     "vignette:minor",
@@ -11992,11 +12099,12 @@
    "id": "headqa-2015-59",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the Open exam quota of 120 is full"
    ],
+   "quality": 82,
    "flaws": [
     "longest-key:minor",
     "clang:minor"
@@ -12006,11 +12114,12 @@
    "id": "headqa-2015-60",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 69 is below the base bar of 81 (flaws 74, review 65): lead-in, vignette"
    ],
+   "quality": 69,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -12020,11 +12129,12 @@
    "id": "headqa-2015-62",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 74, review 75): vignette, stem-length"
    ],
+   "quality": 75,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -12034,11 +12144,12 @@
    "id": "headqa-2015-63",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the Open exam quota of 120 is full"
    ],
+   "quality": 82,
    "flaws": [
     "vignette:major"
    ]
@@ -12047,11 +12158,12 @@
    "id": "headqa-2015-64",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 70 is below the base bar of 81 (flaws 74, review 68): lead-in, vignette"
    ],
+   "quality": 70,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -12061,11 +12173,12 @@
    "id": "headqa-2015-65",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 74 is below the base bar of 81 (flaws 60, review 83): lead-in, vignette"
    ],
+   "quality": 74,
    "flaws": [
     "lead-in:major",
     "vignette:major"
@@ -12075,11 +12188,13 @@
    "id": "headqa-2015-66",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: B is arguably also false under NCCN criteria (arterial abutment ≤180° = borderline resectable), giving two keys"
    ],
+   "quality": 59,
    "flaws": [
     "cover-options:major",
     "vignette:minor",
@@ -12090,11 +12205,12 @@
    "id": "headqa-2015-67",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: No patient: tests a platitude rather than applied clinical decision-making"
    ],
+   "quality": 71,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -12104,11 +12220,12 @@
    "id": "headqa-2015-68",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 78 is below the base bar of 81 (flaws 68, review 85): lead-in, vignette, stem-length"
    ],
+   "quality": 78,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -12119,11 +12236,12 @@
    "id": "headqa-2015-69",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 68, review 79): lead-in, absolute-terms, vignette"
    ],
+   "quality": 75,
    "flaws": [
     "lead-in:major",
     "absolute-terms:minor",
@@ -12134,11 +12252,12 @@
    "id": "headqa-2015-70",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 88, review 61): vignette, stem-length"
    ],
+   "quality": 72,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -12148,11 +12267,10 @@
    "id": "headqa-2015-71",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
    "flaws": [
     "vignette:minor"
    ]
@@ -12161,11 +12279,12 @@
    "id": "headqa-2015-72",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Asks for recall of a definition with no patient, so it is not Step 2 CK material"
    ],
+   "quality": 63,
    "flaws": [
     "lead-in:major",
     "absolute-terms:minor",
@@ -12177,11 +12296,12 @@
    "id": "headqa-2015-73",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the Open exam quota of 120 is full"
    ],
+   "quality": 82,
    "flaws": [
     "cover-options:major"
    ]
@@ -12190,22 +12310,22 @@
    "id": "headqa-2015-74",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 92,
    "flaws": []
   },
   {
    "id": "headqa-2015-75",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 66,
    "flaws": [
     "lead-in:major",
     "vignette:minor"
@@ -12215,11 +12335,12 @@
    "id": "headqa-2015-76",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 64 is below the base bar of 81 (flaws 68, review 61): lead-in, vignette, stem-length"
    ],
+   "quality": 64,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -12230,11 +12351,12 @@
    "id": "headqa-2015-77",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 72 is below the base bar of 81 (flaws 74, review 71): vignette, stem-length"
    ],
+   "quality": 72,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -12244,11 +12366,14 @@
    "id": "headqa-2015-78",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer",
+    "the reviewer rejected it: The key is wrong: celiac disease is associated with small intestinal bacterial overgrowth, so all four options are associations"
    ],
+   "quality": 48,
    "flaws": [
     "negative-stem:major",
     "vignette:minor",
@@ -12259,11 +12384,12 @@
    "id": "headqa-2015-79",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 64 is below the base bar of 81 (flaws 68, review 61): cover-options, vignette, stem-length"
    ],
+   "quality": 64,
    "flaws": [
     "cover-options:major",
     "vignette:minor",
@@ -12383,11 +12509,12 @@
    "id": "headqa-2015-88",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 61 is below the base bar of 81 (flaws 40, review 75): lead-in, negative-stem, vignette"
    ],
+   "quality": 61,
    "flaws": [
     "lead-in:major",
     "negative-stem:major",
@@ -12398,11 +12525,12 @@
    "id": "headqa-2015-89",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 68, review 80): lead-in, vignette, stem-length"
    ],
+   "quality": 75,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -12413,11 +12541,12 @@
    "id": "headqa-2015-90",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 76 is below the base bar of 81 (flaws 80, review 74): vignette"
    ],
+   "quality": 76,
    "flaws": [
     "vignette:major"
    ]
@@ -12441,11 +12570,12 @@
    "id": "headqa-2015-92",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 81), but the Open exam quota of 120 is full"
    ],
+   "quality": 81,
    "flaws": [
     "cover-options:minor",
     "vignette:minor",
@@ -12456,11 +12586,10 @@
    "id": "headqa-2015-93",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
    "flaws": [
     "vignette:minor"
    ]
@@ -12469,11 +12598,12 @@
    "id": "headqa-2015-94",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "reserve",
+   "status": "reserve",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "passed (quality 82), but the Open exam quota of 120 is full"
    ],
+   "quality": 82,
    "flaws": [
     "absolute-terms:minor",
     "clang:minor"
@@ -12483,11 +12613,12 @@
    "id": "headqa-2015-95",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 73 is below the base bar of 81 (flaws 68, review 76): lead-in, vignette, stem-length"
    ],
+   "quality": 73,
    "flaws": [
     "lead-in:major",
     "vignette:minor",
@@ -12498,11 +12629,12 @@
    "id": "headqa-2015-96",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)"
    ],
+   "quality": 70,
    "flaws": [
     "negative-stem:major"
    ]
@@ -12511,11 +12643,12 @@
    "id": "headqa-2015-97",
    "kind": "open-exam",
    "route": "open-exam headqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 75 is below the base bar of 81 (flaws 80, review 71): vignette"
    ],
+   "quality": 75,
    "flaws": [
     "vignette:major"
    ]
