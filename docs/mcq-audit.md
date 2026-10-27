@@ -26,7 +26,7 @@ A question fits a format when reading it (4 words a second past the first 12, op
 - **Difficulty**: 1 522, 2 1391, 3 344
 - **Specialties**: 45; the five largest Gastroenterology 254, Cardiology 195, Neurology 183, Respiratory Medicine 168, Paediatrics 140; the five smallest Medicolegal 10, Cardiothoracic Surgery 11, OMS/Dental 12, Pathology 12, Occupational/Environmental Medicine 12
 
-**Years and difficulties** (`scripts/tag-years.mjs`): the model set the year of 2257 of 2257 and the difficulty of 2257; the rest use the fallback guess. Where both exist, the guessed year matches the model's in 68.4% (within a year in 99.6%) and the guessed difficulty in 54.9%: run the tagger after new questions are written.
+**Years and difficulties** (`scripts/tag-years.mjs`): the model set the year of 2257 of 2257 and the difficulty of 2257; the rest use the fallback guess. Where both exist, the guessed year matches the model's in 68.4% (within a year in 99.6%) and the guessed difficulty in 54.9%: run the tagger after new questions are written. Of the 708 pooled questions, every one has its kind from the tagger (`tag-years.mjs --kinds`).
 
 ## Cues and residual flaws in the duel, by route
 

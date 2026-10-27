@@ -107,10 +107,11 @@ export function funnelRates(funnel) {
 /* how the duel's years and difficulties were set: by the model (scripts/tag-years.mjs, tags.years / tags.difficulty) or
    by the fallback guess, and how often the guess agrees with the model where both exist, which says how far a guessed
    one (a question written since the last tagging run) can be trusted */
-export function categorised(questions, { years = {}, difficulty = {}, guessYear, guessDiff }) {
+export function categorised(questions, { years = {}, difficulty = {}, kinds = {}, pooled = null, guessYear, guessDiff }) {
   const n = questions.length, yt = questions.filter(q => years[q.id]), dt = questions.filter(q => difficulty[q.id]);
+  const fromPool = pooled ? questions.filter(q => pooled.has(q.id)) : [], kindUntagged = fromPool.filter(q => !kinds[q.id]).length;
   const agree = (list, map, guess, within = 0) => pct(list.filter(q => Math.abs(guess(q) - map[q.id]) <= within).length, list.length);
-  return { n, yearTagged: yt.length, diffTagged: dt.length, yearGuessAgrees: agree(yt, years, guessYear), yearGuessWithinOne: agree(yt, years, guessYear, 1), diffGuessAgrees: agree(dt, difficulty, guessDiff) };
+  return { n, yearTagged: yt.length, diffTagged: dt.length, pooled: fromPool.length, kindUntagged, yearGuessAgrees: agree(yt, years, guessYear), yearGuessWithinOne: agree(yt, years, guessYear, 1), diffGuessAgrees: agree(dt, difficulty, guessDiff) };
 }
 
 /* the report as Markdown: short; the numbers live in audit.json */
@@ -133,7 +134,7 @@ export function auditMarkdown(a, { date = '' } = {}) {
       `- **Source**: ${row(t.source)}`, `- **Route**: ${row(a.pack.byRoute)}`, `- **Kind**: ${row(t.cat)}`, `- **Year**: ${Object.entries(t.year).sort().map(([k, n]) => `${k} ${n}`).join(', ')}`, `- **Difficulty**: ${Object.entries(t.difficulty).sort().map(([k, n]) => `${k} ${n}`).join(', ')}`,
       `- **Specialties**: ${Object.keys(t.topic).length}; the five largest ${Object.entries(t.topic).sort((x, y) => y[1] - x[1]).slice(0, 5).map(([k, n]) => `${k} ${n}`).join(', ')}; the five smallest ${Object.entries(t.topic).sort((x, y) => x[1] - y[1]).slice(0, 5).map(([k, n]) => `${k} ${n}`).join(', ')}`);
     const c = a.pack_categorised;
-    if (c) L.push('', `**Years and difficulties** (\`scripts/tag-years.mjs\`): the model set the year of ${c.yearTagged} of ${c.n} and the difficulty of ${c.diffTagged}; the rest use the fallback guess. Where both exist, the guessed year matches the model's in ${c.yearGuessAgrees}% (within a year in ${c.yearGuessWithinOne}%) and the guessed difficulty in ${c.diffGuessAgrees}%: run the tagger after new questions are written.`);
+    if (c) L.push('', `**Years and difficulties** (\`scripts/tag-years.mjs\`): the model set the year of ${c.yearTagged} of ${c.n} and the difficulty of ${c.diffTagged}; the rest use the fallback guess. Where both exist, the guessed year matches the model's in ${c.yearGuessAgrees}% (within a year in ${c.yearGuessWithinOne}%) and the guessed difficulty in ${c.diffGuessAgrees}%: run the tagger after new questions are written. Of the ${c.pooled} pooled questions, ${c.kindUntagged ? `**${c.kindUntagged} are filed clinical by default**` : 'every one has its kind from the tagger'} (\`tag-years.mjs --kinds\`).`);
     L.push('', '## Cues and residual flaws in the duel, by route', '', 'The same checks the pool uses, run over every question the duel can deal, whichever writer made it.', '', '| route | n | key is the longest option | chance | key position | checks firing (share of the route) |', '|---|---|---|---|---|---|');
     for (const [k, c] of Object.entries(a.pack.cues)) L.push(`| ${k} | ${c.n} | ${c.keyLongest}% | ${c.chance}% | ${Object.entries(c.keyAt).sort().map(([p, n]) => `${p} ${n}`).join(', ')} | ${Object.entries(c.checks).slice(0, 4).map(([id, x]) => `${id} ${x.share}%`).join(', ') || 'none'} |`);
     const d = a.pack.duplicates;
