@@ -338,7 +338,8 @@ div.pd-me-dog { cursor: default; }
 .pd-swatch:active { transform: scale(.94); }
 .pd-chips { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
 .pd-swatches .pd-chipsw { aspect-ratio: auto; min-height: 44px; padding: 8px 10px; border-radius: 999px; color: var(--pd-ink); font-family: inherit; font-size: 14px; font-weight: 700; line-height: 1.15; white-space: nowrap; }
-.pd-swatches[data-kind="iris"] { grid-template-columns: repeat(5, minmax(0, 64px)); }   /* ten colours: two even rows, never one stranded */
+.pd-swatches[data-kind="iris"] { grid-template-columns: repeat(6, minmax(0, 64px)); }   /* twelve colours: two even rows of six, never one stranded */
+@media (max-width: 400px) { .pd-swatches[data-kind="iris"] { grid-template-columns: repeat(4, minmax(0, 1fr)); } }   /* three rows of four on a phone */
 .pd-swatches .pd-chipsw[aria-checked="true"] { background: color-mix(in srgb, var(--pd-pri) 18%, transparent); }
 .pd-wreset { position: absolute; inset: 0; border: 0; background: transparent; cursor: pointer; border-radius: 18px; }
 .pd-wreset:focus-visible { outline: 3px solid var(--pd-pri); outline-offset: -3px; }

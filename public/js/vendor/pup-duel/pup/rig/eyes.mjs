@@ -35,7 +35,8 @@ export const IRISES = [
   { id: 'ice', name: 'Ice', hex: '#8fd3f4', deep: '#245a78', light: '#c4ecfb' },
   { id: 'violet', name: 'Violet', hex: '#9b6bdf', deep: '#3b1f66', light: '#bf9cef' },
   { id: 'pink', name: 'Pink', hex: '#ef6fa8', deep: '#6e1e44', light: '#f7a0c8' },
-  { id: 'red', name: 'Red', hex: '#e04848', deep: '#5e1414', light: '#f07a7a' }
+  { id: 'red', name: 'Red', hex: '#e04848', deep: '#5e1414', light: '#f07a7a' },
+  { id: 'silver', name: 'Silver', hex: '#b8c4d2', deep: '#4a5668', light: '#e6edf5' }
 ];
 /* the style of every face (founder 2026-10-26: "like how littlest pet shop style is ... save old style seperately"):
    lps, big glossy eyes that are mostly iris, a dark liner on the lid and flicked lashes, each dog its own eye colour;
