@@ -657,6 +657,56 @@
    }
   },
   {
+   "id": "ai-mcq-072e162d",
+   "stem": "A 68-year-old man is hypotensive (BP 78/50 mmHg) with a rising central venous pressure six hours after coronary bypass grafting. His mediastinal drain output has suddenly stopped after heavy bleeding.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Needle pericardiocentesis",
+    "Noradrenaline infusion",
+    "Platelet transfusion",
+    "Intra-aortic balloon pump",
+    "Emergency resternotomy"
+   ],
+   "answer": 4,
+   "explanation": "Low blood pressure and a rising CVP after heavy bleeding that suddenly stops draining point to cardiac tamponade from clotted blood after cardiac surgery. The definitive treatment is emergency resternotomy, done at the bedside if the patient is crashing, to remove the clot and control the bleeding.",
+   "why": [
+    "After cardiac surgery the tamponade is usually clotted and loculated, so a needle often cannot drain it and the bleeding is left uncontrolled.",
+    "A vasopressor does not relieve the mechanical blockage to cardiac filling and only delays definitive treatment.",
+    "Correcting clotting may reduce ongoing bleeding but does nothing for blood that is already compressing the heart.",
+    "A balloon pump supports a failing left ventricle but cannot overcome external compression of the heart in tamponade.",
+    null
+   ],
+   "topic": "Cardiothoracic Surgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:cardiothoracic-surgery",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Cardiothoracic Surgery (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:54:16.971Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-cardiothoracic-surgery-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0063",
+      "medqa-us4-test-0865",
+      "medqa-us4-test-0352"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-073e74ad",
    "stem": "A 34-year-old man ran a petrol generator inside a closed shed and was found unconscious. After oxygen therapy he is now alert with normal neurological examination and carboxyhaemoglobin 4%.",
    "ask": "Which complication is he most at risk of?",
@@ -5890,6 +5940,57 @@
       "medqa-us4-test-0660",
       "medqa-us4-test-1218",
       "medqa-us4-test-0560"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-49665972",
+   "stem": "A 70-year-old man who has smoked 50 pack-years has a large right pleural effusion. Cytology of the pleural fluid is negative. CT shows a right hilar mass and a 2-cm right supraclavicular node.",
+   "ask": "Most appropriate next investigation?",
+   "options": [
+    "Repeat pleural aspiration",
+    "Thoracoscopic pleural biopsy",
+    "Bronchoscopic transbronchial biopsy",
+    "FDG PET-CT scan",
+    "Supraclavicular node biopsy"
+   ],
+   "answer": 4,
+   "explanation": "If lung cancer is suspected, biopsy the site that is easiest to reach and would give the highest stage. Here that is an ultrasound-guided biopsy of the supraclavicular node, which confirms the tissue diagnosis and stages the disease as N3 in one low-risk procedure.",
+   "why": [
+    "A second pleural cytology sample adds little diagnostic yield, and the node can be sampled more easily for both diagnosis and stage.",
+    "Thoracoscopy is more invasive and is kept for cases with no easier target, such as suspected mesothelioma without nodes.",
+    "Bronchoscopic biopsy of the hilar mass is riskier and would miss the N3 disease that sets the stage.",
+    "PET-CT helps with staging, but it cannot give the tissue diagnosis this patient still needs.",
+    null
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-582",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-582",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:50:14.926Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-582",
+      "osce-amsa-582"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1245",
+      "medqa-us4-test-0682",
+      "medqa-us4-test-0392"
      ],
      "model": "claude-opus-5-5"
     }
@@ -13355,6 +13456,56 @@
    }
   },
   {
+   "id": "ai-mcq-a59f80e2",
+   "stem": "A 68-year-old woman with urosepsis is still hypotensive (MAP 55 mmHg) after 30 mL/kg of crystalloid and intravenous antibiotics. Her lactate is 5 mmol/L, and she has bibasal crackles.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Further crystalloid bolus",
+    "Intravenous hydrocortisone",
+    "Dobutamine infusion",
+    "Noradrenaline infusion",
+    "Albumin 20% bolus"
+   ],
+   "answer": 3,
+   "explanation": "This is septic shock: she stays hypotensive despite adequate fluid resuscitation, and her lactate is raised. The crackles suggest she is becoming fluid overloaded. Surviving Sepsis and Australian guidance recommend noradrenaline as the first-line vasopressor, targeting a MAP of at least 65 mmHg. It can be started through a peripheral line until central access is available.",
+   "why": [
+    "She has already had 30 mL/kg and now has bibasal crackles, so more crystalloid risks pulmonary oedema without fixing her vasodilatory shock.",
+    "Hydrocortisone is only added when shock persists despite moderate- to high-dose vasopressors, not before a vasopressor has been started.",
+    "Dobutamine is an inotrope for heart dysfunction with low cardiac output, and its vasodilating effect could make her hypotension worse.",
+    null,
+    "Albumin is still a volume load, so it shares the fluid overload risk and does not treat vasoplegia, and 20% albumin is not a resuscitation fluid."
+   ],
+   "topic": "Critical Care Medicine",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:critical-care-medicine",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Critical Care Medicine (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:54:17.208Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-critical-care-medicine-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0905",
+      "medqa-us4-test-0628",
+      "medqa-us4-test-0934"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-a5aa4adc",
    "stem": "A 69-year-old man has a transperineal biopsy showing Gleason 4+3=7 prostate adenocarcinoma. His PSA is 11 ng/mL, and MRI shows a 10 mm right peripheral zone lesion without extraprostatic extension. He has no symptoms.",
    "ask": "Most appropriate staging investigation?",
@@ -15417,6 +15568,57 @@
       "medqa-us4-test-1001",
       "medqa-us4-test-1195",
       "medqa-us4-test-0967"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-b7e15caf",
+   "stem": "An 80-year-old woman taking apixaban for atrial fibrillation has a left subdural haematoma on CT after a fall. Her INR is 1.1 and APTT 31 seconds.",
+   "ask": "Which test best quantifies her apixaban effect?",
+   "options": [
+    "Apixaban anti-Xa level",
+    "Prothrombin time (INR)",
+    "Activated partial thromboplastin time",
+    "Thrombin time",
+    "Dilute thrombin time"
+   ],
+   "answer": 0,
+   "explanation": "The INR and APTT are not sensitive to apixaban, so normal results do not rule out a clinically important drug level. An anti-Xa assay calibrated for apixaban is the only test that measures it. In intracranial haemorrhage, give reversal without waiting for the result, using the time of the last dose and renal function as a guide.",
+   "why": [
+    null,
+    "The INR is not sensitive to apixaban and can be normal even when the drug level is therapeutic.",
+    "The APTT barely changes with factor Xa inhibitors, so it cannot measure the apixaban effect.",
+    "Thrombin time detects direct thrombin inhibitors and heparin, and apixaban does not affect it.",
+    "Dilute thrombin time measures dabigatran, a direct thrombin inhibitor, not a factor Xa inhibitor."
+   ],
+   "topic": "Haematology",
+   "tags": [
+    "generated",
+    "focus:investigation",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:50:15.122Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
      ],
      "model": "claude-opus-5-5"
     }
@@ -17541,6 +17743,57 @@
    }
   },
   {
+   "id": "ai-mcq-ce657f94",
+   "stem": "A 79-year-old woman on apixaban fell and hit her head four days ago. Apixaban has been reversed. CT: 12 mm acute right subdural haematoma, 7 mm midline shift. GCS 14.",
+   "ask": "Most appropriate definitive management?",
+   "options": [
+    "Surgical evacuation",
+    "Repeat CT next morning",
+    "IV dexamethasone",
+    "Tranexamic acid",
+    "Mannitol infusion"
+   ],
+   "answer": 0,
+   "explanation": "An acute subdural haematoma more than 10 mm thick or with more than 5 mm of midline shift needs surgical evacuation, whatever the GCS. After reversal of the anticoagulant, a rural ED should arrange urgent neurosurgical referral and retrieval for craniotomy.",
+   "why": [
+    null,
+    "Waiting for a repeat scan is only for small subdurals without significant shift, and here it would delay surgery while the mass effect gets worse.",
+    "Corticosteroids have no role in acute subdural haematoma or traumatic brain injury and do not relieve the mass effect.",
+    "Tranexamic acid may limit further bleeding, but it does nothing to remove a collection that is already causing midline shift.",
+    "Mannitol only buys time if herniation is imminent and does not treat the haematoma itself."
+   ],
+   "topic": "Neurosurgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:50:14.644Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-ced5e26c",
    "stem": "A 2-year-old boy is brought to the emergency department at 11 pm by his mother with noisy breathing. He has had a runny nose and fever for 2 days, and this evening developed a barking cough and a hoarse cry. He is fully immunised and has no medical history. He weighs 12 kg. On arrival he was agitated, with stridor at rest, marked sternal and subcostal recession, and SpO2 91% in room air. He was given nebulised adrenaline 1:1000 (5 mL undiluted) and oral dexamethasone 7.2 mg (0.6 mg/kg), with oxygen held near his face. Sixty minutes later he is sitting on his mother's lap and playing. Temperature is 37.6 °C, pulse 132/min, respiratory rate 28/min, and SpO2 97% in room air. He has an occasional barking cough, no stridor at rest and no chest wall recession. His mother would like to take him home now because his older sister is home alone with a neighbour.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -17635,6 +17888,57 @@
       "medqa-us4-test-0615",
       "medqa-us4-test-0246",
       "medqa-us4-test-0363"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-cf9059d8",
+   "stem": "A 79-year-old man on apixaban hit his head in a fall four days ago. Now drowsy, GCS 13; CT shows a left subdural haematoma with 9 mm midline shift.",
+   "ask": "Which complication is he most at risk of?",
+   "options": [
+    "Uncal herniation",
+    "Status epilepticus",
+    "Obstructive hydrocephalus",
+    "Hyponatraemia from SIADH",
+    "Ischaemic stroke"
+   ],
+   "answer": 0,
+   "explanation": "An expanding anticoagulant-associated subdural haematoma with more than 5 mm of midline shift and a falling GCS puts him at immediate risk of transtentorial (uncal) herniation. Look for a dilated pupil on the same side as the bleed and a Cushing response (bradycardia with rising BP), which are late signs. This is why urgent reversal, neurosurgical referral and early retrieval matter.",
+   "why": [
+    null,
+    "Seizures can occur with a subdural haematoma, but they are less common and less immediately fatal than herniation from a mass that is already shifting the midline.",
+    "A supratentorial convexity subdural rarely blocks CSF flow, so obstructive hydrocephalus is not the main danger here.",
+    "SIADH can follow intracranial haemorrhage, but it develops over days and does not explain the early fall in conscious level.",
+    "Thrombosis after reversal or after stopping anticoagulation in AF is a real but later and lower risk than herniation."
+   ],
+   "topic": "Neurosurgery",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:50:48.312Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
      ],
      "model": "claude-opus-5-5"
     }
@@ -18843,6 +19147,56 @@
       "medqa-us4-test-1270",
       "medqa-us4-test-0044",
       "medqa-us4-test-0918"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-e0d77fa8",
+   "stem": "A 29-year-old man who has sex with men has a 10-day painless, indurated penile ulcer. Syphilis EIA and TPPA are positive; RPR is 1:32. No drug allergies.",
+   "ask": "Most appropriate treatment?",
+   "options": [
+    "Ceftriaxone IM single dose",
+    "Azithromycin oral single dose",
+    "Benzathine penicillin IM",
+    "Doxycycline 7 days",
+    "Valaciclovir 10 days"
+   ],
+   "answer": 2,
+   "explanation": "A painless indurated chancre with positive treponemal tests and a reactive RPR means primary syphilis. Under the Australian STI Management Guidelines and eTG, the treatment is a single dose of benzathine benzylpenicillin 2.4 million units IM. Syphilis must also be notified, sexual contacts traced, and HIV and other STIs tested for.",
+   "why": [
+    "A single dose of ceftriaxone treats gonorrhoea but is not enough to treat syphilis.",
+    "Azithromycin is not recommended for syphilis because macrolide resistance in Treponema pallidum is widespread.",
+    null,
+    "Doxycycline is only the alternative for penicillin allergy, and it needs 14 days for early syphilis, not 7.",
+    "Valaciclovir treats genital herpes, which causes painful multiple ulcers and negative treponemal serology."
+   ],
+   "topic": "Sexual Health",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:sexual-health",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Sexual Health (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:54:16.699Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-sexual-health-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0133",
+      "medqa-us4-test-0660",
+      "medqa-us4-test-0461"
      ],
      "model": "claude-opus-5-5"
     }
@@ -21470,6 +21824,57 @@
    }
   },
   {
+   "id": "ai-mcq-fcb3393a",
+   "stem": "A 72-year-old man on apixaban has worsening headache three days after a fall onto his head. His GCS then falls from 15 to 14 (eyes to voice); HR 82/min, glucose 6.4 mmol/L.",
+   "ask": "Best interpretation of this change?",
+   "options": [
+    "Cushing response",
+    "Hypoglycaemia",
+    "Normal drowsiness",
+    "Postictal drowsiness",
+    "Haematoma expansion"
+   ],
+   "answer": 4,
+   "explanation": "In an anticoagulated older man with a head injury, any fall in GCS, even by one point while every other observation is normal, is early neurological deterioration. It means the intracranial bleed is likely expanding. It needs urgent senior review, reversal of the anticoagulant, and early neurosurgical referral and retrieval.",
+   "why": [
+    "The Cushing response is a late sign of bradycardia with rising blood pressure, and his heart rate of 82/min is normal.",
+    "A glucose of 6.4 mmol/L is normal, so low blood sugar does not explain the drop in consciousness.",
+    "New drowsiness in an anticoagulated patient with a head injury should never be put down to tiredness, because doing so delays life-saving treatment.",
+    "Nothing suggests he has had a seizure, and a steady decline in this setting must be treated as bleeding until proven otherwise.",
+    null
+   ],
+   "topic": "Emergency Medicine",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:50:34.320Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-fccc85c9",
    "stem": "A 38-year-old woman comes to the emergency department with 18 hours of constant right upper quadrant pain that began after a takeaway dinner. The pain radiates to her right shoulder, and she has vomited four times. She has had three shorter, similar episodes over the past 6 months. She takes a combined oral contraceptive pill and drinks alcohol occasionally. Her temperature is 38.4 °C, pulse 104/min, blood pressure 124/78 mm Hg and respiratory rate 18/min. She is not jaundiced and is alert. Her right upper quadrant is tender, and Murphy's sign is positive. Blood tests show: white cell count 14.9 x10^9/L (4.0–11.0), CRP 128 mg/L (<5), total bilirubin 15 µmol/L (<20), ALP 131 U/L (30–110), GGT 52 U/L (<38), ALT 44 U/L (<35), lipase 40 U/L (<60) and serum beta-hCG <2 IU/L. Ultrasound shows multiple gallstones, a gallbladder wall of 7 mm with pericholecystic fluid, and a common bile duct of 4 mm with no duct stone seen.",
    "ask": "Which of the following is the most accurate interpretation of her liver function results?",
@@ -21620,6 +22025,57 @@
    }
   },
   {
+   "id": "ai-mcq-fdd5709f",
+   "stem": "A 72-year-old man, a retired plumber exposed to asbestos, has months of dry cough and breathlessness. Room-air SpO2 is 95% at rest, 90% after a 50 m walk, recovering within minutes.",
+   "ask": "Best interpretation of these oximetry readings?",
+   "options": [
+    "Exertional desaturation",
+    "Resting hypoxaemia",
+    "Type 2 respiratory failure",
+    "Oximeter probe artefact",
+    "Normal age-related response"
+   ],
+   "answer": 0,
+   "explanation": "His SpO2 is normal at rest, then falls by 5 points (to 90%) after only 50 m and recovers when he rests. That is exertional desaturation, an objective sign of significant lung disease that matches his breathlessness. In an asbestos-exposed man it adds weight to urgent imaging and specialist referral.",
+   "why": [
+    null,
+    "An SpO2 of 95% at rest on room air is normal, so he is not hypoxaemic at rest.",
+    "Type 2 respiratory failure means hypercapnia, which can only be shown on a blood gas, and a brief fall in SpO2 on exertion does not show it.",
+    "A reading that falls in a repeatable way with exertion and recovers at rest suggests a physiological change rather than a faulty probe.",
+    "Healthy older adults keep their saturation steady on a short, gentle walk, so a drop to 90% after 50 m is abnormal."
+   ],
+   "topic": "Respiratory Medicine",
+   "tags": [
+    "generated",
+    "focus:interpretation",
+    "station:amsa-189",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-189",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:50:31.703Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-189",
+      "osce-amsa-189"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0422",
+      "medqa-us4-test-0374",
+      "medqa-us4-test-0287"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
    "id": "ai-mcq-fddeed86",
    "stem": "A 70-year-old woman presents to a metropolitan emergency department with 10 days of worsening breathlessness. It has been severe since overnight, and she has orthopnoea and paroxysmal nocturnal dyspnoea. Six weeks ago she had an anterior myocardial infarction treated with a stent. Since then she has been taking over-the-counter naproxen for knee pain. Her pulse is 110/min and regular, blood pressure 194/102 mm Hg, respiratory rate 30/min and SpO2 87% on room air. She has a raised jugular venous pressure, a third heart sound and bilateral basal crackles. Her ECG shows sinus tachycardia with anterior Q waves, unchanged from her discharge ECG. Her chest X-ray shows bilateral perihilar opacification and small effusions. NT-proBNP is 7900 ng/L (age-adjusted rule-in level above 900 ng/L). High-sensitivity troponin I is 38 ng/L, then 37 ng/L at 3 hours (female 99th percentile 16 ng/L). Creatinine is 142 µmol/L. After CPAP, glyceryl trinitrate and intravenous furosemide, she is comfortable on 2 L/min of oxygen by nasal prongs.",
    "ask": "Which of the following is the most appropriate next investigation?",
@@ -21715,6 +22171,56 @@
       "medqa-us4-test-0905",
       "medqa-us4-test-0241",
       "medqa-us4-test-0245"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   }
+  },
+  {
+   "id": "ai-mcq-febdc050",
+   "stem": "An 86-year-old woman trips at home and strikes her forehead. She takes apixaban for atrial fibrillation. She is alert, GCS 15, with a small forehead haematoma and no neurological deficit.",
+   "ask": "Most appropriate next step?",
+   "options": [
+    "Skull X-ray",
+    "Andexanet alfa reversal",
+    "Non-contrast CT brain",
+    "Discharge with written advice",
+    "Observation without imaging"
+   ],
+   "answer": 2,
+   "explanation": "Older adults taking anticoagulants who have a head injury are at high risk of intracranial haemorrhage, even when GCS is 15 and the neurological exam is normal. Australian adult head injury guidelines, such as NSW Health's, call for a non-contrast CT brain in this situation. Reversal is used only if a bleed is confirmed.",
+   "why": [
+    "Skull X-ray cannot rule out intracranial haemorrhage and has no role in current head injury assessment.",
+    "Anticoagulant reversal is for a confirmed significant bleed, not a head injury that has not yet been imaged.",
+    null,
+    "Sending her home without imaging misses a delayed or hidden intracranial haemorrhage, which is more likely with anticoagulation.",
+    "Watching her without imaging is not enough, because anticoagulated older patients can bleed without early clinical signs."
+   ],
+   "topic": "Geriatrics",
+   "tags": [
+    "generated",
+    "focus:management",
+    "topic:geriatrics",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI for Geriatrics (no Med-OS station)",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:54:31.847Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "topic-geriatrics-0"
+     ],
+     "exemplars": [
+      "medqa-us4-test-1149",
+      "medqa-us4-test-0657",
+      "medqa-us4-test-0627"
      ],
      "model": "claude-opus-5-5"
     }

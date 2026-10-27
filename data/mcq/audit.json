@@ -1,8 +1,8 @@
 {
  "pool": {
-  "n": 699,
+  "n": 701,
   "byKind": {
-   "ai": 361,
+   "ai": 363,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
@@ -10,11 +10,11 @@
   "formats": {
    "15": {
     "name": "Rapid",
-    "fit": 283,
-    "of": 699,
-    "share": 40.5,
+    "fit": 285,
+    "of": 701,
+    "share": 40.7,
     "byKind": {
-     "ai": 251,
+     "ai": 253,
      "open-exam": 7,
      "amsa": 25
     },
@@ -41,7 +41,7 @@
      "Gastrointestinal Surgery": 5,
      "Neonatology": 8,
      "Paediatrics": 9,
-     "Neurosurgery": 5,
+     "Neurosurgery": 7,
      "Infectious Diseases": 11,
      "Neurology": 11,
      "General Surgery": 4,
@@ -101,11 +101,11 @@
    },
    "30": {
     "name": "Standard",
-    "fit": 369,
-    "of": 699,
-    "share": 52.8,
+    "fit": 371,
+    "of": 701,
+    "share": 52.9,
     "byKind": {
-     "ai": 251,
+     "ai": 253,
      "open-exam": 53,
      "usmle-resource": 7,
      "amsa": 58
@@ -133,7 +133,7 @@
      "Gastrointestinal Surgery": 5,
      "Neonatology": 8,
      "Paediatrics": 13,
-     "Neurosurgery": 6,
+     "Neurosurgery": 8,
      "Infectious Diseases": 14,
      "Neurology": 22,
      "General Surgery": 5,
@@ -196,11 +196,11 @@
    },
    "90": {
     "name": "Long case",
-    "fit": 694,
-    "of": 699,
+    "fit": 696,
+    "of": 701,
     "share": 99.3,
     "byKind": {
-     "ai": 361,
+     "ai": 363,
      "open-exam": 119,
      "usmle-resource": 156,
      "amsa": 58
@@ -231,7 +231,7 @@
      "Gastrointestinal Surgery": 10,
      "Neurology": 40,
      "Neonatology": 16,
-     "Neurosurgery": 8,
+     "Neurosurgery": 10,
      "General Surgery": 17,
      "Gynaecology": 23,
      "Indigenous Health": 7,
@@ -263,7 +263,6 @@
      "Immunology",
      "Indigenous Health",
      "Medicolegal",
-     "Neurosurgery",
      "OMS/Dental",
      "Oncology",
      "Ophthalmology",
@@ -284,23 +283,23 @@
  },
  "cues": {
   "ai": {
-   "n": 361,
-   "keyLongest": 11.1,
+   "n": 363,
+   "keyLongest": 11,
    "chance": 20,
    "keyAt": {
     "D": 70,
-    "A": 76,
+    "A": 78,
     "E": 74,
     "B": 74,
     "C": 67
    },
    "options": {
-    "5": 361
+    "5": 363
    },
    "checks": {
     "vignette": {
      "n": 66,
-     "share": 18.3
+     "share": 18.2
     },
     "absolute-terms": {
      "n": 7,
@@ -448,10 +447,10 @@
  ],
  "review": {
   "ai": {
-   "judged": 361,
+   "judged": 363,
    "verdict": {
-    "accept": 311,
-    "revise": 50
+    "accept": 312,
+    "revise": 51
    },
    "solvesAgree": 100,
    "median": {
@@ -528,14 +527,15 @@
    "admitted": 17.2
   },
   "ai rapid": {
-   "n": 298,
-   "pool": 251,
+   "n": 308,
+   "pool": 253,
    "review": 3,
    "duplicate": 7,
-   "bar": 37,
-   "reviewed": 298,
-   "passed": 86.6,
-   "admitted": 84.2
+   "bar": 41,
+   "pending": 4,
+   "reviewed": 304,
+   "passed": 85.5,
+   "admitted": 82.1
   },
   "usmle-resource mmlu": {
    "n": 272,
@@ -569,15 +569,15 @@
   }
  },
  "pack": {
-  "n": 2227,
+  "n": 2229,
   "bySource": {
-   "ai": 1416,
+   "ai": 1418,
    "open-exam": 609,
    "usmle-resource": 144,
    "amsa": 58
   },
   "byRoute": {
-   "ai pool": 361,
+   "ai pool": 363,
    "open-exam": 609,
    "usmle-resource": 144,
    "amsa": 58,
@@ -587,11 +587,11 @@
   "formats": {
    "15": {
     "name": "Rapid",
-    "fit": 837,
-    "of": 2227,
+    "fit": 839,
+    "of": 2229,
     "share": 37.6,
     "byKind": {
-     "ai": 621,
+     "ai": 623,
      "open-exam": 207,
      "amsa": 9
     },
@@ -618,7 +618,7 @@
      "Gastrointestinal Surgery": 10,
      "Neonatology": 10,
      "Paediatrics": 41,
-     "Neurosurgery": 10,
+     "Neurosurgery": 12,
      "Infectious Diseases": 63,
      "Neurology": 45,
      "General Surgery": 13,
@@ -653,11 +653,11 @@
    },
    "30": {
     "name": "Standard",
-    "fit": 1673,
-    "of": 2227,
+    "fit": 1675,
+    "of": 2229,
     "share": 75.1,
     "byKind": {
-     "ai": 1062,
+     "ai": 1064,
      "open-exam": 546,
      "usmle-resource": 7,
      "amsa": 58
@@ -685,7 +685,7 @@
      "Gastrointestinal Surgery": 18,
      "Neonatology": 15,
      "Paediatrics": 98,
-     "Neurosurgery": 14,
+     "Neurosurgery": 16,
      "Infectious Diseases": 96,
      "Neurology": 129,
      "General Surgery": 23,
@@ -718,11 +718,11 @@
    },
    "90": {
     "name": "Long case",
-    "fit": 2226,
-    "of": 2227,
+    "fit": 2228,
+    "of": 2229,
     "share": 100,
     "byKind": {
-     "ai": 1416,
+     "ai": 1418,
      "open-exam": 609,
      "usmle-resource": 143,
      "amsa": 58
@@ -753,7 +753,7 @@
      "Gastrointestinal Surgery": 23,
      "Neurology": 183,
      "Neonatology": 23,
-     "Neurosurgery": 16,
+     "Neurosurgery": 18,
      "General Surgery": 34,
      "Gynaecology": 58,
      "Indigenous Health": 13,
@@ -788,13 +788,13 @@
   },
   "taxonomy": {
    "source": {
-    "ai": 1416,
+    "ai": 1418,
     "open-exam": 609,
     "usmle-resource": 144,
     "amsa": 58
    },
    "cat": {
-    "clinical": 1583,
+    "clinical": 1585,
     "skills": 150,
     "physio": 337,
     "anatomy": 157
@@ -802,12 +802,12 @@
    "year": {
     "1": 179,
     "2": 377,
-    "3": 915,
-    "4": 756
+    "3": 916,
+    "4": 757
    },
    "difficulty": {
     "1": 422,
-    "2": 1487,
+    "2": 1489,
     "3": 318
    },
    "topic": {
@@ -836,7 +836,7 @@
     "Gastrointestinal Surgery": 23,
     "Neurology": 183,
     "Neonatology": 23,
-    "Neurosurgery": 16,
+    "Neurosurgery": 18,
     "General Surgery": 34,
     "Gynaecology": 58,
     "Indigenous Health": 13,
@@ -918,27 +918,27 @@
     }
    },
    "ai pool": {
-    "n": 361,
-    "keyLongest": 11.1,
+    "n": 363,
+    "keyLongest": 11,
     "chance": 20,
     "keyAt": {
      "D": 70,
-     "A": 76,
+     "A": 78,
      "E": 74,
      "B": 74,
      "C": 67
     },
     "options": {
-     "5": 361
+     "5": 363
     },
     "checks": {
      "schema": {
-      "n": 361,
+      "n": 363,
       "share": 100
      },
      "vignette": {
-      "n": 232,
-      "share": 64.3
+      "n": 234,
+      "share": 64.5
      },
      "absolute-terms": {
       "n": 7,

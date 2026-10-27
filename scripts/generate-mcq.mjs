@@ -49,13 +49,16 @@ else if (opt('--gaps')) {   /* where the duel is thin: the audit's topics with f
   if (!f) { console.error(`no audit for ${secs} s: node scripts/mcq-audit.mjs first (formats are ${Object.keys(readJson(path.join(ROOT, 'data', 'mcq', 'audit.json'), {}).pack?.formats || {}).join(', ')})`); process.exit(2); }
   const need = t => THIN - (f.byTopic[t] || 0), thin = new Set(f.thin);
   const covered = new Set(stations.flatMap(st => st.specialty || []));
-  /* a thin topic no station covers gets stand-ins (topicStation), a question each per focus: enough for its gap on top
-     of the slots its questions already fill */
+  /* stand-ins (topicStation), a question each per focus, for a thin topic no station covers (at least two), and for one
+     whose stations have too few open slots left for its gap (2026-10-27: the last five thin topics all had stations,
+     every slot full) */
   const writtenFor = t => store.items.filter(q => q.tags.includes(tagOf(`topic:${t}`)) && formOf(q) === FORM).length;
-  const variants = t => Math.max(2, Math.ceil((need(t) + writtenFor(t)) / focuses.length));
-  const standIns = f.thin.filter(t => !covered.has(t)).flatMap(t => Array.from({ length: variants(t) }, (_, v) => topicStation(t, v)));
+  const openSlots = t => stations.filter(st => (st.specialty || []).includes(t)).reduce((n, st) => n + focuses.filter(fc => !full(st, fc)).length, 0);
+  const variants = t => (covered.has(t) ? Math.ceil(Math.max(0, need(t) - openSlots(t)) / focuses.length) + (need(t) > openSlots(t) ? Math.ceil(writtenFor(t) / focuses.length) : 0)
+    : Math.max(2, Math.ceil((need(t) + writtenFor(t)) / focuses.length)));
+  const standIns = f.thin.flatMap(t => Array.from({ length: variants(t) }, (_, v) => topicStation(t, v)));
   jobs = gapJobs([...stations, ...standIns], thin, need, Number(opt('--sample')) || 40, focuses, opt('--focus'), full);
-  if (standIns.length) console.log(`${new Set(standIns.map(x => x.title)).size} thin topics have no station: ${standIns.length} stand-ins written from the specialty alone`);
+  if (standIns.length) console.log(`${new Set(standIns.map(x => x.title)).size} thin topics need more than their stations give: ${standIns.length} stand-ins written from the specialty alone`);
   console.log(`gaps at ${secs} s: ${f.thin.length} thin topics; ${jobs.length} stations in them`);
 }
 else if (opt('--sample')) jobs = [...stations].sort((a, b) => fnv(`g:${a.id}`).localeCompare(fnv(`g:${b.id}`))).slice(0, Number(opt('--sample'))).map((st, i) => ({ st, focus: opt('--focus') || focuses[i % focuses.length] }));

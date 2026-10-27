@@ -7501,6 +7501,94 @@
    "suggestion": "Optionally, say in the explanation that faecal microscopy or culture can be added alongside serology, and that eosinophilia may be absent once hyperinfection has started."
   }
  },
+ "ai-mcq-49665972": {
+  "hash": "8ca20659",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:51:53.656Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.7,
+    "reason": "Biopsy of the accessible supraclavicular node is the least invasive way to get both a tissue diagnosis and staging (N3, inoperable), so it comes before pleural biopsy, bronchoscopy or PET-CT."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.6,
+    "reason": "A biopsy of the easily reached supraclavicular node is the least invasive way to get both the diagnosis and the stage (N3); thoracoscopic pleural biopsy is a reasonable alternative because a malignant effusion would mean stage IV."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation mis-states staging: a malignant pleural effusion would be M1a, which outranks N3, so N3 does not 'set the st",
+    "Stem is terse: it does not say whether the node is palpable, and 'ultrasound-guided' appears only in the explanation"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "The key matches the guideline rule: biopsy the least invasive site that gives tissue and the highest stage",
+    "The explanation wrongly treats N3 as the final stage even though the effusion could be M1a",
+    "The distractors are plausible and of the same kind as the key"
+   ],
+   "suggestion": "Change the explanation to say the node biopsy gives tissue and proves at least N3 (stage III), and that the effusion still needs work-up because a malignant effusion would be M1a. Say whether the node is palpable and put 'ultrasound-guided' in option E."
+  },
+  "second": {
+   "hash": "8ca20659",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:52:57.487Z",
+   "solves": [
+    {
+     "answer": 4,
+     "confidence": 0.9,
+     "reason": "Biopsy of the accessible supraclavicular node gives a tissue diagnosis and the highest stage (N3) in one minimally invasive step, which is better than the other options."
+    },
+    {
+     "answer": 4,
+     "confidence": 0.85,
+     "reason": "An easy-to-reach supraclavicular node (N3) gives diagnosis and highest-stage confirmation in one minimally invasive procedure, so it should be biopsied first."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 3,
+    "explanation": 3,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Explanation says the node biopsy gives the 'highest stage', but a malignant pleural effusion would be M1a (stage IVA), w",
+     "Option C is labelled 'transbronchial biopsy', which is the wrong technique for a hilar mass. The comparable procedure is",
+     "Telegraphic stem: it gives no symptoms, does not say whether the node is palpable, and asks a bare question instead of a",
+     "The explanation's claim that repeat cytology 'adds little' undersells it: a second sample does raise yield somewhat."
+    ],
+    "topic": "Respiratory Medicine",
+    "verdict": "revise",
+    "reasons": [
+     "The key fits NICE guidance: ultrasound-guided biopsy of the supraclavicular node is the least invasive way to get both a tissue diagnosis and N3 staging.",
+     "The explanation's reasoning about the 'highest stage' is wrong when a possibly malignant effusion is present. Confirmed pleural disease (M1a) would outrank N3.",
+     "Minor problems with the wording of option C and how little detail the stem gives."
+    ],
+    "suggestion": "Change the explanation: say the node biopsy gives the tissue diagnosis (with molecular testing) and at least N3 staging with the least risk, and that confirming pleural malignancy (M1a) may still be needed if it would change management. Change option C to 'Bronchoscopy with endobronchial biopsy/EBUS-TBNA' and add brief clinical detail, such as stating that the node is palpable."
+   }
+  }
+ },
  "ai-mcq-4a68402d": {
   "hash": "d47dc62e",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -19138,6 +19226,94 @@
    "suggestion": "Make the lead-in a full question, for example \"Which of the following is the most important counselling point?\" Consider swapping B or C for a harder distractor, such as \"Avoid all vaccines during treatment\" or \"Stop methotrexate 1 week before conception.\""
   }
  },
+ "ai-mcq-b7e15caf": {
+  "hash": "94ac8a8d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:51:37.319Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "Apixaban directly inhibits factor Xa, so its effect is best measured with an anti-Xa assay calibrated to apixaban; PT/INR and APTT are unreliable and can be normal even at therapeutic levels, while thrombin time and dilute thrombin time measure direct thrombin inhibitors like dabigatran."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.97,
+    "reason": "A drug-specific calibrated anti-Xa assay is the best way to measure apixaban levels, because PT/INR and APTT are insensitive to it and can look normal even when drug is present, and thrombin time tests are for dabigatran, a direct thrombin inhibitor."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: 'apixaban' appears in both the stem and the key",
+    "stem already reports normal INR and APTT, cueing elimination of B and C",
+    "largely lab-test recall; the vignette details add little to the decision"
+   ],
+   "topic": "Haematology",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct: an anti-Xa assay calibrated for the drug is the standard way to measure apixaban",
+    "The key echoes the drug name from the stem, and the stem's normal INR/APTT give away B and C",
+    "Tests lab knowledge rather than the more important management step (reversal)"
+   ],
+   "suggestion": "Write the key as 'Drug-calibrated anti-factor Xa assay' and either leave the INR/APTT values out of the stem or turn the item into a next-step reversal question (andexanet alfa vs 4-factor PCC). Name the reversal agents in the explanation."
+  },
+  "second": {
+   "hash": "94ac8a8d",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:52:48.817Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.97,
+     "reason": "Apixaban is a direct factor Xa inhibitor, so only an anti-Xa assay calibrated for apixaban measures its level; a normal PT/INR or APTT doesn't rule out a clinically important drug effect, and thrombin time and dilute thrombin time measure thrombin inhibitors like dabigatran."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.95,
+     "reason": "Standard PT/INR and APTT do not pick up apixaban levels reliably, and the thrombin-time tests only measure direct thrombin inhibitors like dabigatran, so a calibrated apixaban anti-Xa level is the right test to quantify her drug effect."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 3,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "clang: only the key names the drug, echoing 'apixaban effect' in the stem",
+     "stem gives normal INR/APTT, which cues the student away from B and C",
+     "explanation overstates by calling the anti-Xa assay the 'only' test (LC-MS/MS also measures apixaban)"
+    ],
+    "topic": "Haematology",
+    "verdict": "revise",
+    "reasons": [
+     "Key is correct: a drug-calibrated anti-Xa assay quantifies apixaban",
+     "Option A's wording cues the answer (clang), so the item is too easy",
+     "Tests choice of lab test rather than management of the bleed, so relevance is moderate"
+    ],
+    "suggestion": "Change A to 'Anti-factor Xa assay calibrated to the drug' and make the distractors similarly specific (e.g. ecarin clotting time), or turn the item into a management question on reversal (andexanet alfa vs 4-factor PCC)."
+   }
+  }
+ },
  "ai-mcq-b83a1d3a": {
   "hash": "308ffff9",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -21858,6 +22034,96 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-ce657f94": {
+  "hash": "5c827d23",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:51:41.595Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "Under Brain Trauma Foundation criteria, an acute subdural haematoma thicker than 10 mm or causing more than 5 mm midline shift needs surgical evacuation whatever the GCS, and anticoagulation has already been reversed."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "An acute subdural haematoma thicker than 10 mm or with more than 5 mm midline shift needs surgical evacuation regardless of GCS, and this patient's anticoagulation is already reversed."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "\"Definitive management\" cues the key: every distractor is a temporising or supportive measure",
+    "A fall four days ago does not fit the 'acute' subdural label (usually up to about 3 days old)",
+    "The explanation mentions a rural ED and retrieval, which are not in the stem",
+    "The stem is terse, with no vital signs or neurological examination findings"
+   ],
+   "topic": "Neurosurgery",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct by Brain Trauma Foundation criteria (>10 mm thick or >5 mm midline shift means evacuate regardless of GCS)",
+    "The word 'definitive' gives the answer away because the distractors are all non-definitive",
+    "The timing does not match the 'acute' label, and the explanation refers to a setting the stem never describes"
+   ],
+   "suggestion": "Make the fall within the last 24 hours (or call the scan acute-on-subacute), ask for the 'most appropriate next step in management' instead of 'definitive management', and either add the rural setting to the stem or remove it from the explanation."
+  },
+  "second": {
+   "hash": "5c827d23",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:52:51.156Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.9,
+     "reason": "An acute subdural haematoma thicker than 10 mm or with more than 5 mm midline shift should be surgically evacuated regardless of GCS, and the anticoagulation has already been reversed."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.93,
+     "reason": "An acute subdural haematoma thicker than 10 mm or with midline shift greater than 5 mm needs surgical evacuation regardless of GCS, and the anticoagulation has already been reversed."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Timing inconsistency: injury 4 days ago would usually make the haematoma subacute, yet it is called acute",
+     "Explanation refers to a rural ED setting not stated in the stem",
+     "Terse stem without symptoms or examination findings",
+     "Distractors C and D are weak (steroids have no role; TXA is irrelevant at 4 days)"
+    ],
+    "topic": "Neurosurgery",
+    "verdict": "revise",
+    "reasons": [
+     "Key matches the BTF thresholds (>10 mm thickness or >5 mm shift means evacuation whatever the GCS)",
+     "Injury timing (4 days) conflicts with the 'acute' label",
+     "Explanation adds a rural setting that is absent from the stem"
+    ],
+    "suggestion": "Change the timing to a fall a few hours ago (or describe the haematoma as subacute), and put the rural ED setting into the stem or take it out of the explanation. Add brief symptoms or examination findings, and consider a more plausible distractor such as burr-hole drainage or admission for neurological observation."
+   }
+  }
+ },
  "ai-mcq-ced5e26c": {
   "hash": "4683efb8",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -21944,6 +22210,94 @@
     "The per-option explanation mislabels A as correct and leaves out A's rationale, which could confuse learners"
    ],
    "suggestion": "Relabel the 'A: Correct' line as B. Add a line for A saying that CSF culture should still be sent for susceptibilities but is unlikely to grow after benzylpenicillin given 4 hours earlier. Put a line break before the lead-in question."
+  }
+ },
+ "ai-mcq-cf9059d8": {
+  "hash": "fb70d1b2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:52:02.654Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "A subdural haematoma that is getting bigger in an anticoagulated patient, with 9 mm midline shift and a falling level of consciousness, shows a mass effect that puts him at highest risk of transtentorial (uncal) herniation, a life-threatening emergency."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "A subdural haematoma that is getting bigger in an anticoagulated patient, with 9 mm of midline shift and a falling level of consciousness, shows a serious mass effect, so the most immediate threat to his life is transtentorial (uncal) herniation."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation refers to a 'falling GCS' that the stem does not document",
+    "Stem omits vital signs and pupil examination",
+    "Some distractors (ischaemic stroke, SIADH) are weak"
+   ],
+   "topic": "Neurosurgery",
+   "verdict": "accept",
+   "reasons": [
+    "Key is clearly correct: significant midline shift from an expanding SDH carries imminent herniation risk",
+    "Options are homogeneous complications with one clear best answer",
+    "Explanation is concise, addresses each distractor and links to management"
+   ],
+   "suggestion": "Add vitals, a pupil exam and a documented GCS decline (e.g. from 15 to 13) so the stem matches the explanation. Optionally change the lead-in to the next step in management (reversal with andexanet alfa or 4F-PCC plus urgent neurosurgical evacuation)."
+  },
+  "second": {
+   "hash": "fb70d1b2",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:53:16.722Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.9,
+     "reason": "A subdural haematoma that is still expanding in an anticoagulated patient, with 9 mm midline shift and a falling level of consciousness, puts him at highest risk of transtentorial (uncal) herniation, which needs urgent reversal of the apixaban (andexanet or PCC) and neurosurgical evacuation."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.88,
+     "reason": "A large anticoagulated subdural haematoma with 9 mm midline shift and a falling GCS points to rising intracranial pressure and impending transtentorial (uncal) herniation."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 3,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Explanation cites a 'falling GCS' and an 'expanding' haematoma that the stem does not state",
+     "Vignette gives the answer away: 9 mm midline shift points straight to herniation",
+     "Tests recognising a complication rather than the more useful next step in management"
+    ],
+    "topic": "Neurosurgery",
+    "verdict": "revise",
+    "reasons": [
+     "Key is correct and clearly best",
+     "Explanation relies on facts (falling GCS, expansion) missing from the stem",
+     "Low ceiling; a next-step format would test more relevant Step 2 CK knowledge"
+    ],
+    "suggestion": "Add a documented GCS decline (e.g. 15 to 13 over hours) and vital signs to the stem, or reframe it as 'most appropriate next step' with apixaban reversal (andexanet alfa or 4F-PCC) plus urgent neurosurgical referral as the key."
+   }
   }
  },
  "ai-mcq-d028a1ff": {
@@ -26948,6 +27302,97 @@
    "suggestion": ""
   }
  },
+ "ai-mcq-fcb3393a": {
+  "hash": "d69b0eba",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:52:10.527Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "This is most likely a subdural haematoma getting bigger: he is an older man on an anticoagulant whose headache is worsening days after a head injury, and his consciousness is now dropping. A normal heart rate rules out a Cushing response, a normal glucose rules out hypoglycaemia, and nothing suggest"
+   },
+   {
+    "answer": 4,
+    "confidence": 0.95,
+    "reason": "An anticoagulated older man with worsening headache days after head trauma and a new drop in GCS has an expanding (likely subdural) haematoma until proven otherwise; his glucose is normal and there is no seizure or Cushing triad."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key 'haematoma expansion' presupposes a haematoma not established in the stem (no CT result given)",
+    "Blood pressure omitted, so Cushing response cannot be fully excluded; explanation claims 'every other observation is nor",
+    "'Normal drowsiness' is an implausible distractor",
+    "Hypoglycaemia distractor is directly excluded by data in the stem",
+    "Telegraphic stem/lead-in"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and the point taught is high-yield and safe",
+    "Stem lacks a CT finding and blood pressure, which the key and distractor A depend on",
+    "Several distractors are weak or excluded outright by the stem"
+   ],
+   "suggestion": "State that the initial CT showed a small subdural haematoma, give the BP (e.g. 138/84), and change the key to 'Expansion of the subdural haematoma'. Replace 'Normal drowsiness' with plausible alternatives such as delirium from a UTI, hyponatraemia or post-concussion syndrome."
+  },
+  "second": {
+   "hash": "d69b0eba",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:53:16.046Z",
+   "solves": [
+    {
+     "answer": 4,
+     "confidence": 0.93,
+     "reason": "An anticoagulated older man with a worsening headache days after hitting his head, whose GCS then drops, most likely has a subdural haematoma that is growing; his heart rate is normal (so no Cushing response) and his glucose is normal (so not hypoglycaemia)."
+    },
+    {
+     "answer": 4,
+     "confidence": 0.93,
+     "reason": "In an anticoagulated patient with a worsening headache after head trauma, even a one-point drop in GCS with normal glucose and no bradycardia means the intracranial (likely subdural) haematoma is expanding until proven otherwise."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 3,
+    "relevance": 5,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Stem never establishes a known haematoma (no imaging mentioned), so 'expansion' presupposes an unstated finding",
+     "Blood pressure omitted, yet explanation claims all other observations are normal and uses it to exclude Cushing response",
+     "'Normal drowsiness' is implausible and functions as a throwaway distractor",
+     "Hypoglycaemia is excluded directly by the stem's glucose value, weakening it as a distractor"
+    ],
+    "topic": "Emergency Medicine",
+    "verdict": "revise",
+    "reasons": [
+     "Key is correct and the teaching point (any GCS drop in anticoagulated head injury = deterioration) is high-yield and safe",
+     "Stem omits imaging and BP, creating inconsistency with the option wording and explanation",
+     "Two distractors are too weak to discriminate"
+    ],
+    "suggestion": "State that an earlier CT showed a small acute subdural haematoma and include a normal BP. Replace 'Normal drowsiness' with a plausible alternative such as opioid analgesia effect or hyponatraemia."
+   }
+  }
+ },
  "ai-mcq-fccc85c9": {
   "hash": "e1e2d0fd",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -27073,6 +27518,96 @@
     "Thorough explanation including CHA2DS2-VA reasoning and agranulocytosis safety-netting"
    ],
    "suggestion": ""
+  }
+ },
+ "ai-mcq-fdd5709f": {
+  "hash": "f9c5b587",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:52:21.898Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "SpO2 is normal at rest but drops 5 points (to 90%) on a short walk and then recovers, which is significant exertional desaturation and typical of early interstitial lung disease such as asbestosis."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.95,
+    "reason": "His SpO2 is normal at rest and falls 5 points to 90% after a short walk, then recovers, which is significant exertional desaturation and fits interstitial lung disease such as asbestosis."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away: the key just restates the numbers in the stem",
+    "weak distractors: B and E plainly conflict with the data, and C cannot be judged from oximetry at all",
+    "the explanation for D relies on the fall being repeatable, but the stem describes only one walk",
+    "tests reading a number rather than a clinical decision"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct, but the item is close to trivial: a fall from 95% to 90% on walking is plainly exertional desaturation",
+    "It tests reading the data, not a Step 2 CK decision such as diagnosis or next step",
+    "The distractors are easy to rule out, and one explanation assumes repeatability that the stem never states"
+   ],
+   "suggestion": "Rewrite it as a next-step or diagnosis question: add bibasal fine crackles and clubbing, and ask for the most appropriate next investigation (key: high-resolution CT chest; distractors: CXR only, bronchoscopy, ABG, V/Q scan). Or ask for the most likely diagnosis (asbestosis vs IPF, mesothelioma, COPD, heart failure). Also remove 'repeatable' from the explanation, or state in the stem that the test was repeated."
+  },
+  "second": {
+   "hash": "f9c5b587",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:53:21.457Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.93,
+     "reason": "Resting SpO2 is normal, but it drops 5% to 90% on mild exertion and recovers quickly, which is significant exertional desaturation typical of interstitial lung disease such as asbestosis."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.93,
+     "reason": "A resting SpO2 of 95% is normal, but a drop of 4% or more to 90% on mild exertion that recovers quickly is significant exertional desaturation, which fits interstitial lung disease such as asbestosis."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 3,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "vignette gives the answer away (the numbers spell out an exertional fall)",
+     "low cognitive level: labels a reading rather than applying it to diagnosis or management",
+     "asbestos exposure is not needed to answer the question",
+     "explanation says the fall is 'repeatable', but the stem does not say so"
+    ],
+    "topic": "Respiratory Medicine",
+    "verdict": "revise",
+    "reasons": [
+     "The key is correct and clearly the single best answer",
+     "The item tests naming a finding, not a clinical decision, so it is too easy for Step 2 CK",
+     "The clinical setting (asbestos exposure, chronic cough) is wasted"
+    ],
+    "suggestion": "Keep the oximetry data but ask for the most appropriate next investigation (e.g., high-resolution CT chest vs. spirometry alone, CXR, ABG, echo), so the student has to use the exertional desaturation and the asbestos history. Also remove 'repeatable' from the explanation of D, or add a repeat test to the stem."
+   }
   }
  },
  "ai-mcq-fddeed86": {

@@ -1,20 +1,21 @@
 {
  "stats": {
   "candidates": {
-   "ai": 457,
+   "ai": 467,
    "amsa": 105,
    "open-exam": 786,
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 361,
+   "ai": 363,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
   },
   "status": {
-   "pool": 699,
-   "rejected": 888,
+   "pool": 701,
+   "rejected": 892,
+   "pending": 4,
    "reserve": 627
   },
   "topics": {
@@ -43,7 +44,7 @@
    "Gastrointestinal Surgery": 10,
    "Neurology": 40,
    "Neonatology": 16,
-   "Neurosurgery": 8,
+   "Neurosurgery": 10,
    "General Surgery": 17,
    "Gynaecology": 23,
    "Indigenous Health": 7,
@@ -77,17 +78,17 @@
    },
    "5": {
     "counts": [
-     84,
+     86,
      89,
      79,
      83,
      89
     ],
-    "n": 424,
-    "chi2": 0.86
+    "n": 426,
+    "chi2": 0.85
    }
   },
-  "topicCap": 105,
+  "topicCap": 106,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -109,11 +110,12 @@
     "bar": 89
    },
    "ai rapid": {
-    "n": 298,
-    "pool": 251,
+    "n": 308,
+    "pool": 253,
     "review": 3,
     "duplicate": 7,
-    "bar": 37
+    "bar": 41,
+    "pending": 4
    },
    "usmle-resource mmlu": {
     "n": 272,
@@ -278,6 +280,16 @@
    "quality": 80,
    "flaws": [
     "vignette:minor"
+   ]
+  },
+  {
+   "id": "ai-mcq-072e162d",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
    ]
   },
   {
@@ -1362,6 +1374,20 @@
    "status": "pool",
    "reasons": [],
    "quality": 98
+  },
+  {
+   "id": "ai-mcq-49665972",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 88 is below the AI-written bar of 89 (flaws 94, review 84): clang"
+   ],
+   "quality": 88,
+   "flaws": [
+    "clang:minor"
+   ]
   },
   {
    "id": "ai-mcq-4a68402d",
@@ -2865,6 +2891,16 @@
    "quality": 98
   },
   {
+   "id": "ai-mcq-a59f80e2",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
+  },
+  {
    "id": "ai-mcq-a5aa4adc",
    "kind": "ai",
    "route": "ai rapid",
@@ -3266,6 +3302,20 @@
    "status": "pool",
    "reasons": [],
    "quality": 96
+  },
+  {
+   "id": "ai-mcq-b7e15caf",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 87 is below the AI-written bar of 89 (flaws 94, review 83): clang"
+   ],
+   "quality": 87,
+   "flaws": [
+    "clang:minor"
+   ]
   },
   {
    "id": "ai-mcq-b83a1d3a",
@@ -3691,6 +3741,15 @@
    "quality": 98
   },
   {
+   "id": "ai-mcq-ce657f94",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 90
+  },
+  {
    "id": "ai-mcq-ced5e26c",
    "kind": "ai",
    "route": "ai vignette",
@@ -3707,6 +3766,15 @@
    "status": "pool",
    "reasons": [],
    "quality": 95
+  },
+  {
+   "id": "ai-mcq-cf9059d8",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 89
   },
   {
    "id": "ai-mcq-d028a1ff",
@@ -3946,6 +4014,16 @@
    "status": "pool",
    "reasons": [],
    "quality": 95
+  },
+  {
+   "id": "ai-mcq-e0d77fa8",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ]
   },
   {
    "id": "ai-mcq-e2e442b1",
@@ -4499,6 +4577,17 @@
    "quality": 96
   },
   {
+   "id": "ai-mcq-fcb3393a",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 87 is below the AI-written bar of 89 (flaws 100, review 79)"
+   ],
+   "quality": 87
+  },
+  {
    "id": "ai-mcq-fccc85c9",
    "kind": "ai",
    "route": "ai vignette",
@@ -4529,6 +4618,17 @@
    ]
   },
   {
+   "id": "ai-mcq-fdd5709f",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 77)"
+   ],
+   "quality": 86
+  },
+  {
    "id": "ai-mcq-fddeed86",
    "kind": "ai",
    "route": "ai vignette",
@@ -4545,6 +4645,19 @@
    "status": "pool",
    "reasons": [],
    "quality": 91
+  },
+  {
+   "id": "ai-mcq-febdc050",
+   "kind": "ai",
+   "route": "ai rapid",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "vignette:minor"
+   ]
   },
   {
    "id": "headqa-2013-100",

@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "version": "pool-699",
+ "version": "pool-701",
  "title": "Standard MCQ pool",
  "note": "Built by scripts/mcq-pool.mjs: candidates from the stations, generate-mcq.mjs, the open USMLE-style banks and open exam sets in data/benchmarks and student submissions, admitted on the flaw checks, the model review and the bars calibrated on the benchmarks (docs/mcq.md). provenance.kind says where each came from: user, ai, amsa, usmle-resource, open-exam.",
  "bars": {
@@ -9,7 +9,7 @@
   "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
  },
  "counts": {
-  "ai": 361,
+  "ai": 363,
   "open-exam": 120,
   "usmle-resource": 160,
   "amsa": 58
@@ -19970,6 +19970,74 @@
    }
   },
   {
+   "id": "ai-mcq-ce657f94",
+   "stem": "A 79-year-old woman on apixaban fell and hit her head four days ago. Apixaban has been reversed. CT: 12 mm acute right subdural haematoma, 7 mm midline shift. GCS 14.",
+   "ask": "Most appropriate definitive management?",
+   "options": [
+    "Surgical evacuation",
+    "Repeat CT next morning",
+    "IV dexamethasone",
+    "Tranexamic acid",
+    "Mannitol infusion"
+   ],
+   "answer": 0,
+   "explanation": "An acute subdural haematoma more than 10 mm thick or with more than 5 mm of midline shift needs surgical evacuation, whatever the GCS. After reversal of the anticoagulant, a rural ED should arrange urgent neurosurgical referral and retrieval for craniotomy.",
+   "why": [
+    null,
+    "Waiting for a repeat scan is only for small subdurals without significant shift, and here it would delay surgery while the mass effect gets worse.",
+    "Corticosteroids have no role in acute subdural haematoma or traumatic brain injury and do not relieve the mass effect.",
+    "Tranexamic acid may limit further bleeding, but it does nothing to remove a collection that is already causing midline shift.",
+    "Mannitol only buys time if herniation is imminent and does not treat the haematoma itself."
+   ],
+   "topic": "Neurosurgery",
+   "tags": [
+    "generated",
+    "focus:management",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:50:14.644Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 84,
+    "quality": 90,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "revise",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T11:51:41.595Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
    "id": "ai-mcq-ced5e26c",
    "stem": "A 2-year-old boy is brought to the emergency department at 11 pm by his mother with noisy breathing. He has had a runny nose and fever for 2 days, and this evening developed a barking cough and a hoarse cry. He is fully immunised and has no medical history. He weighs 12 kg. On arrival he was agitated, with stridor at rest, marked sternal and subcostal recession, and SpO2 91% in room air. He was given nebulised adrenaline 1:1000 (5 mL undiluted) and oral dexamethasone 7.2 mg (0.6 mg/kg), with oxygen held near his face. Sixty minutes later he is sitting on his mother's lap and playing. Temperature is 37.6 °C, pulse 132/min, respiratory rate 28/min, and SpO2 97% in room air. He has an occasional barking cough, no stridor at rest and no chest wall recession. His mother would like to take him home now because his older sister is home alone with a neighbour.",
    "ask": "Which of the following is the most appropriate next step in management?",
@@ -20100,6 +20168,74 @@
     "verdict": "pool",
     "reasons": [],
     "evaluatedAt": "2026-10-26T11:47:20.036Z",
+    "evalVersion": "flaws-1+judge-1"
+   }
+  },
+  {
+   "id": "ai-mcq-cf9059d8",
+   "stem": "A 79-year-old man on apixaban hit his head in a fall four days ago. Now drowsy, GCS 13; CT shows a left subdural haematoma with 9 mm midline shift.",
+   "ask": "Which complication is he most at risk of?",
+   "options": [
+    "Uncal herniation",
+    "Status epilepticus",
+    "Obstructive hydrocephalus",
+    "Hyponatraemia from SIADH",
+    "Ischaemic stroke"
+   ],
+   "answer": 0,
+   "explanation": "An expanding anticoagulant-associated subdural haematoma with more than 5 mm of midline shift and a falling GCS puts him at immediate risk of transtentorial (uncal) herniation. Look for a dilated pupil on the same side as the bleed and a Cushing response (bradycardia with rising BP), which are late signs. This is why urgent reversal, neurosurgical referral and early retrieval matter.",
+   "why": [
+    null,
+    "Seizures can occur with a subdural haematoma, but they are less common and less immediately fatal than herniation from a mass that is already shifting the midline.",
+    "A supratentorial convexity subdural rarely blocks CSF flow, so obstructive hydrocephalus is not the main danger here.",
+    "SIADH can follow intracranial haemorrhage, but it develops over days and does not explain the early fall in conscious level.",
+    "Thrombosis after reversal or after stopping anticoagulation in AF is a real but later and lower risk than herniation."
+   ],
+   "topic": "Neurosurgery",
+   "tags": [
+    "generated",
+    "focus:complication",
+    "station:amsa-429",
+    "form:rapid"
+   ],
+   "provenance": {
+    "kind": "ai",
+    "source": {
+     "name": "Written by AI from Med-OS station amsa-429",
+     "url": "",
+     "licence": "own"
+    },
+    "createdAt": "2026-10-27T11:50:48.312Z",
+    "generator": {
+     "how": "cli",
+     "version": "generate-mcq-2",
+     "basis": [
+      "amsa-429",
+      "osce-amsa-429"
+     ],
+     "exemplars": [
+      "medqa-us4-test-0333",
+      "medqa-us4-test-0459",
+      "medqa-us4-test-0297"
+     ],
+     "model": "claude-opus-5-5"
+    }
+   },
+   "eval": {
+    "flaws": [],
+    "flawScore": 100,
+    "judgeScore": 82,
+    "quality": 89,
+    "bar": 89,
+    "solved": 2,
+    "keyCorrect": "yes",
+    "singleBest": 5,
+    "review": "accept",
+    "judge": "claude-opus-5-5 via the Claude Code CLI",
+    "reviews": 2,
+    "verdict": "pool",
+    "reasons": [],
+    "evaluatedAt": "2026-10-27T11:52:02.654Z",
     "evalVersion": "flaws-1+judge-1"
    }
   },
