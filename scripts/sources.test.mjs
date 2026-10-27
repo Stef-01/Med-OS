@@ -52,9 +52,9 @@ test('data/benchmarks/headqa.jsonl is what the adapter makes (nothing in it was 
   assert.ok(rows.every(r => /^headqa-201[3-6]-\d+$/.test(r.id) && r.options.length >= 4 && Number.isInteger(r.answer) && r.source.licence === 'Reuse with attribution (Ministerio de Sanidad, Spain)'));
 });
 
-test('PrinciplismQA: model-written, so kind ai, imported, with its MIT notice as credit; the principle-list items left out', () => {
+test('PrinciplismQA (piloted, now benchmark-only): model-written, so kind ai, imported, with its MIT notice as credit; the principle-list items left out', () => {
   const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'sources', 'registry.json'), 'utf8')), src = reg.sources.find(s => s.id === 'principlismqa');
-  assert.equal(src.verdict, 'import'); assert.equal(src.kind, 'ai'); assert.ok(licenceOk(src.licence)); assert.match(src.credit, /Copyright \(c\) 2025 Freedom AI, MIT/);
+  assert.equal(src.verdict, 'benchmark-only', 'piloted and failed (2026-10-27)'); assert.equal(src.kind, 'ai'); assert.ok(licenceOk(src.licence)); assert.match(src.credit, /Copyright \(c\) 2025 Freedom AI, MIT/);
   const raw = [
     { id: 1, question: 'A patient who lacks capacity refuses a blood test. What should the doctor do?', options: { A: 'Act in the patient\'s best interests after consulting family', B: 'Take the blood anyway', C: 'Discharge the patient', D: 'Call the police' }, correct_answer: 'A', explanation: 'Best interests.' },
     { id: 2, question: 'Which principle is most challenged?', options: { A: 'Autonomy', B: 'Beneficence', C: 'Justice', D: 'Non-maleficence' }, correct_answer: 'A', explanation: 'x' },

@@ -3748,6 +3748,49 @@
     "The explanation deals with every distractor clearly"
    ],
    "suggestion": "Replace option D with a more plausible IV choice, such as IV ceftriaxone alone. Make it clear that severity (septic shock) is the reason for the broader enterococcal and anaerobic cover."
+  },
+  "second": {
+   "hash": "26092aa8",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:40:15.936Z",
+   "solves": [
+    {
+     "answer": 1,
+     "confidence": 0.85,
+     "reason": "Fat in the curettings with peritonism and hypotension that persists after fluids suggests uterine perforation with bowel injury and sepsis, so she needs IV broad-spectrum cover for gram-positive, gram-negative and anaerobic organisms (amoxicillin, gentamicin, metronidazole) before laparotomy."
+    },
+    {
+     "answer": 1,
+     "confidence": 0.85,
+     "reason": "Fat in the curettings means the uterus was perforated, probably with bowel injury, so she needs IV antibiotics covering gut bacteria (Gram-negatives, enterococci and anaerobes), which amoxicillin, gentamicin and metronidazole provide."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Option D (oral drug in a shocked, nil-by-mouth patient) is implausible and easy to eliminate",
+     "Key relies on an Australian (eTG) regimen; US-based Step 2 CK would more typically use ceftriaxone + metronidazole or pi"
+    ],
+    "topic": "Gynaecology",
+    "verdict": "accept",
+    "reasons": [
+     "Key matches guideline therapy for suspected bowel injury with peritonitis",
+     "Vignette applies a clinical clue (fat in curettings means perforation) to a management decision",
+     "Distractors are homogeneous regimens, though D is weak"
+    ],
+    "suggestion": "Replace option D with a more plausible IV regimen that leaves a gap, such as ceftriaxone alone or metronidazole alone. The explanation could also say that bleeding should be considered as a cause of the hypotension."
+   }
   }
  },
  "ai-mcq-27c244ad": {
@@ -5616,6 +5659,49 @@
     "Only minor wording and explanation-precision issues"
    ],
    "suggestion": "Name the examinee's role and use a full lead-in, e.g. 'Which of the following is the most appropriate next step?'. Change the apology-law sentence to say that apology protections vary by state or territory."
+  },
+  "second": {
+   "hash": "ecb6ee45",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:40:08.814Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.95,
+     "reason": "The duty of candour (open disclosure) means the patient should be told about the medication error and given an apology promptly, even though no harm has occurred; reporting the incident happens alongside this, not instead of it."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.97,
+     "reason": "Under the duty of open disclosure (candour), the patient should be told promptly about the medication error, including what happened and what it means for him, and given an apology, even though no harm resulted and he doesn't know about it."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Key is the only patient-centred option, making the item easy",
+     "Explanation overgeneralises apology protection across Australian jurisdictions"
+    ],
+    "topic": "Professionalism",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct and consistent with the Australian Open Disclosure Framework and international norms",
+     "Distractors are homogeneous and target common misconceptions",
+     "Explanation addresses every option clearly"
+    ],
+    "suggestion": "Say that apology protection depends on the state's civil liability legislation. Optionally add a harder distractor, such as 'Monitor for 24 hours and disclose only if a reaction occurs.'"
+   }
   }
  },
  "ai-mcq-3a145bf8": {
@@ -11552,6 +11638,52 @@
     "The concept is high-yield and safe, so the item is worth fixing"
    ],
    "suggestion": "Swap in plausible emergency-level distractors, such as emergency CT of the thoracic spine, immediate radiotherapy before imaging, emergency surgical decompression, or lumbar puncture. Keep each option a single action, for example \"Immediate dexamethasone\" as the key, with emergency MRI implied as the next step. Add the clinical setting and examination findings, such as brisk reflexes and a palpable bladder."
+  },
+  "second": {
+   "hash": "be413637",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:40:12.252Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.97,
+     "reason": "Back pain with leg weakness and a sensory level in a patient with a probable lung cancer suggests metastatic spinal cord compression, which is an emergency needing high-dose dexamethasone right away and urgent whole-spine MRI."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.97,
+     "reason": "Back pain, bilateral leg weakness and a T6 sensory level in a patient with a probable lung cancer means metastatic spinal cord compression, which needs immediate dexamethasone and an urgent whole-spine MRI."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 2,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "implausible distractor (D: analgesia and review tomorrow)",
+     "'outpatient' wording cues against B",
+     "key is the only compound treatment-plus-investigation option",
+     "heterogeneous options",
+     "minimal vignette; irrelevant occupation detail"
+    ],
+    "topic": "Oncology",
+    "verdict": "revise",
+    "reasons": [
+     "Key correct: suspected MSCC needs immediate dexamethasone and urgent whole-spine MRI",
+     "Distractors are weak or clearly non-urgent, so the item tests little",
+     "The key is the only option that both treats and images"
+    ],
+    "suggestion": "Replace the distractors with close alternatives such as urgent whole-spine MRI without steroids, urgent CT of the thoracic spine, emergency radiotherapy before imaging, or emergency decompressive surgery. Add brief exam findings (reflexes, bladder) to fill out the vignette."
+   }
   }
  },
  "ai-mcq-71636d27": {
@@ -12113,6 +12245,49 @@
     "Without glucose, ketones, chloride and medication details, students cannot fully rule out A, C and E from the stem"
    ],
    "suggestion": "Add to the stem: glucose 9.8 mmol/L, negative or trace ketones, bicarbonate and chloride values, regular metformin use, and that only minimal IV fluid was given before the gas. That way the explanation's reasoning rests on data the student can see."
+  },
+  "second": {
+   "hash": "83547d3c",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:40:35.706Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.9,
+     "reason": "After the D&C she is hypotensive, her haemoglobin has dropped by 28 g/L and her lactate is 3.8 mmol/L with a normal pCO2, so this is a type A lactic acidosis from poor tissue perfusion due to bleeding, not a respiratory acidosis or one caused by metformin, ketones or saline."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.93,
+     "reason": "Hypotension after the procedure, a 28 g/L haemoglobin drop and a raised lactate with a normal pCO2 point to type A lactic acidosis from haemorrhagic hypoperfusion, likely after uterine perforation."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 3,
+    "explanation": 3,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Explanation cites data absent from stem (glucose 9.8 mmol/L; gas taken before large-volume saline)",
+     "Stem omits glucose/ketones, so DKA cannot be excluded from given data"
+    ],
+    "topic": "Gynaecology",
+    "verdict": "revise",
+    "reasons": [
+     "Key (haemorrhagic hypoperfusion causing lactic acidosis) is clearly correct",
+     "Explanation's reasoning against A and E depends on facts the stem never gives",
+     "Otherwise homogeneous, plausible distractors with a fair metformin trap"
+    ],
+    "suggestion": "Add capillary glucose 9.8 mmol/L, negative ketones and 'before IV fluids were started' to the stem, or remove those references from the explanation."
+   }
   }
  },
  "ai-mcq-761a155d": {
@@ -13880,6 +14055,49 @@
     "Explanation is accurate and addresses every option"
    ],
    "suggestion": "Optionally replace option B with a more plausible distractor (e.g., acute retroviral syndrome) and rewrite the lead-in as a full question: \"Which of the following is the most likely outcome if he stops therapy?\""
+  },
+  "second": {
+   "hash": "18356642",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:40:34.709Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "Antiretroviral therapy suppresses HIV but doesn't get rid of the latent reservoir, so stopping it almost always makes the viral load come back within weeks (SMART trial)."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.97,
+     "reason": "Antiretroviral therapy suppresses HIV but cannot clear the latent reservoir in resting CD4 T cells, so stopping treatment almost always makes the viral load rebound within weeks (shown in the SMART trial); AIDS does not develop quickly, and dolutegravir's high barrier to resistance plus the long hal"
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Lead-in is a terse fragment rather than a complete question",
+     "Option E is weak and easy to rule out"
+    ],
+    "topic": "Infectious Diseases",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct: ART does not clear the latent reservoir, so viral load rebounds after stopping",
+     "Distractors are plausible, all of the same kind and free of cues",
+     "Explanation clearly covers each option"
+    ],
+    "suggestion": "Rewrite the lead-in as a full question (e.g., 'Which of the following is the most likely outcome if he stops treatment?') and consider adding a CD4 count to the stem."
+   }
   }
  },
  "ai-mcq-8d498cab": {
@@ -17493,6 +17711,49 @@
     "Distractors are somewhat easy to rule out but still teach useful points"
    ],
    "suggestion": "Use a full lead-in question. Replace one weak distractor with a plausible but non-preferred triple regimen, such as efavirenz/TDF/FTC, so students must know which regimen is preferred rather than just counting drugs. Avoid dolutegravir-lamivudine, which would be a second key."
+  },
+  "second": {
+   "hash": "027d3dd8",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:40:44.849Z",
+   "solves": [
+    {
+     "answer": 2,
+     "confidence": 0.98,
+     "reason": "For treatment-naive HIV with no resistance and normal kidney function, current DHHS guidelines recommend an integrase inhibitor (dolutegravir) plus two NRTIs (tenofovir-emtricitabine), whatever the CD4 count; the other choices are incomplete regimens, outdated or toxic, or not recommended."
+    },
+    {
+     "answer": 2,
+     "confidence": 0.98,
+     "reason": "Current guidelines recommend starting treatment for everyone with HIV, and an integrase inhibitor (dolutegravir) plus two NRTIs (tenofovir-emtricitabine) is the preferred first regimen when kidney function is normal and there is no resistance."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Distractors D and E are obscure/implausible regimens easily dismissed",
+     "Stem is terse with minimal clinical context"
+    ],
+    "topic": "Infectious Diseases",
+    "verdict": "accept",
+    "reasons": [
+     "Key matches current international first-line ART guidance (INSTI + 2 NRTIs)",
+     "Only one option is defensible; explanation addresses each distractor accurately",
+     "No safety concerns; standard Step 2 CK management item"
+    ],
+    "suggestion": "Consider replacing D/E with contemporary but less-suited options (e.g., dolutegravir-lamivudine before HBV status is known, or abacavir-based regimen without HLA-B*5701 testing) to strengthen discrimination."
+   }
   }
  },
  "ai-mcq-ab44f24e": {
@@ -20897,6 +21158,50 @@
     "Explanation is accurate and addresses each option"
    ],
    "suggestion": "Replace E with a branch-vessel option (e.g., a left common carotid flap) and replace the coarctation option with something plausible in an adult. Optionally add to the explanation that BP should be measured and treated using the higher-reading arm."
+  },
+  "second": {
+   "hash": "0b82281b",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:41:08.381Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.9,
+     "reason": "This is an acute aortic dissection, and the lower right-arm BP fits a dissection flap reaching into or blocking the innominate artery, which supplies the right subclavian."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.9,
+     "reason": "Lower right-arm pressure in acute aortic dissection most likely means the dissection flap has extended into the innominate (brachiocephalic) artery, which supplies the right subclavian artery."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 4,
+    "relevance": 3,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Explanation for B assumes the arm difference is new, but the stem gives no prior BP readings",
+     "Very short stem with no other vital signs or exam findings",
+     "Tests the mechanism of a sign rather than a management decision"
+    ],
+    "topic": "Cardiothoracic Surgery",
+    "verdict": "accept",
+    "reasons": [
+     "The key is correct: a flap in the innominate artery explains the lower right-arm pressure in a type A dissection",
+     "The distractors are mostly the same kind of option; A is a well-chosen mirror image of the key",
+     "The flaws are minor and do not make the item misleading"
+    ],
+    "suggestion": "Reword the explanation for B to say that chronic atheroma is possible but less likely given the acute presentation. Optionally, add a second question on the next step (CT angiography and lowering heart rate and BP) to raise its Step 2 CK relevance."
+   }
   }
  },
  "ai-mcq-ca714e89": {
@@ -23653,6 +23958,51 @@
     "Two distractors are implausible, leaving C as the only real competitor"
    ],
    "suggestion": "Turn it into a management question ('Which of the following is the most appropriate next step?') with options such as start ART now, start TMP-SMX prophylaxis, repeat CD4 count in 3 months before treating, wait until CD4 falls below 350, and give MAC prophylaxis."
+  },
+  "second": {
+   "hash": "7edbf079",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:41:01.316Z",
+   "solves": [
+    {
+     "answer": 1,
+     "confidence": 0.9,
+     "reason": "A CD4 count of 450 cells/µL (24%) is well above the AIDS cutoffs of 200 cells/µL and 14%, and only slightly below normal, so his immunity is mostly intact and this is not AIDS."
+    },
+    {
+     "answer": 1,
+     "confidence": 0.85,
+     "reason": "A CD4 count of 450 (24%) is well above the AIDS cutoff of 200 (14%), so immunity is mostly intact, but the inverted CD4:CD8 ratio and high viral load show ongoing HIV-related immune damage, so it is not normal."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 4,
+    "distractors": 3,
+    "relevance": 3,
+    "accuracy": 5,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Key 'Mostly intact immunity' is vague, and the A-to-C options read like a severity scale that test-wise students can sol",
+     "Options D and E are weak and easy to rule out (no ART given; confirmed HIV)",
+     "Stem ends in a fragment rather than a full question",
+     "Asks for a lab interpretation instead of a clinical decision"
+    ],
+    "topic": "Infectious Diseases",
+    "verdict": "revise",
+    "reasons": [
+     "The key is correct: CD4 450 (24%) is CDC stage 2, above the AIDS thresholds and below normal",
+     "The interpretation task is low-yield; Step 2 CK would ask for the next management step",
+     "Two distractors are implausible, and the key's wording is imprecise"
+    ],
+    "suggestion": "Change the question to ask for the most appropriate next step (start ART now, whatever the CD4 count), with distractors such as starting PCP prophylaxis, waiting until CD4 falls below 350, or repeating the CD4 count before treating. If you keep it as an interpretation question, use CDC staging categories as the options."
+   }
   }
  },
  "ai-mcq-e59f8c20": {
@@ -26810,6 +27160,49 @@
     "Distractors all follow the same 'reversed direction' pattern, which makes them easy to rule out"
    ],
    "suggestion": "Change the lead-in to a management question, e.g. \"Which of the following is the most appropriate first-line treatment?\" with the levonorgestrel IUS as the key and options such as hysterectomy, oral progestogen, combined pill and observation. If you keep it as a mechanism question, write it as a full question and use distractors that are true but less central (e.g. hyperinsulinaemia raising IGF-1, low SHBG) instead of reversed facts."
+  },
+  "second": {
+   "hash": "35804f93",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T11:41:08.019Z",
+   "solves": [
+    {
+     "answer": 0,
+     "confidence": 0.97,
+     "reason": "Aromatase in adipose tissue turns androstenedione into oestrone, so the endometrium is exposed to oestrogen with no progesterone to oppose it, which causes hyperplasia; high insulin and low SHBG add to this."
+    },
+    {
+     "answer": 0,
+     "confidence": 0.97,
+     "reason": "In obesity, aromatase in fat tissue turns androstenedione into oestrone, which keeps stimulating the endometrium without progesterone to balance it, and this leads to hyperplasia."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 3,
+    "relevance": 3,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Distractors are all simple directional inversions of true facts, a pattern that lets the only 'oestrogen-raising' option",
+     "Terse, fragment-style lead-in"
+    ],
+    "topic": "Gynaecology",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct and clearly the best option",
+     "Explanation is accurate and covers each distractor",
+     "Mechanism question with only moderate Step 2 CK applied relevance"
+    ],
+    "suggestion": "To raise its Step 2 CK value, ask for the best next step in management (LNG-IUS vs oral progestogen vs hysterectomy vs observation) rather than the mechanism, and name the LNG-IUS as first-line in the explanation."
+   }
   }
  },
  "headqa-2013-100": {
@@ -126793,6 +127186,154 @@
    }
   }
  },
+ "principlismqa-12382": {
+  "hash": "94967377",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:40:53.103Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "Justice is the principle about fair distribution of resources and equal access, so it is the one challenged when unapproved experimental drugs may reach only some terminally ill patients."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "The question's focus on equitable access for all patients points to justice, which is about fairly distributing potentially lifesaving treatments."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (\"considering equitable access\")",
+    "clang: key repeats stem wording \"equitable access... for all patients\"",
+    "no clinical vignette; abstract recall",
+    "options contain embedded justifications, making them non-parallel",
+    "explanation refers to a nonexistent \"passage\""
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem's wording points straight to the key, so the item tests word-matching rather than knowledge",
+    "Recall of a principle with no patient, which is not Step 2 CK application",
+    "The explanation quotes a missing passage and does not teach expanded access or Right to Try"
+   ],
+   "suggestion": "Rewrite as a vignette, for example a hospital ethics committee choosing which of several eligible patients gets a scarce investigational drug, with no stem wording that names the principle. Use plain one-word options (autonomy, beneficence, non-maleficence, justice, fidelity)."
+  }
+ },
+ "principlismqa-12462": {
+  "hash": "a5d29eea",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:36:35.291Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "Equitable access to individualized treatments is mainly limited by the high cost of developing and distributing precision therapies, which creates gaps in who can get them; discrimination is a privacy concern rather than an access issue."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.72,
+    "reason": "Equitable access to individualized therapies is chiefly limited by the high cost of developing and distributing them, which puts them out of reach for disadvantaged groups."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A",
+    "B"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall/opinion question",
+    "vague 'most critical' judgment with no objective standard",
+    "two or more keys: cost (A) and access (B) bear more directly on equitable access than discrimination does",
+    "explanation wrongly says cost and availability are not ethical issues, when distributive justice is a core ethical princ",
+    "options are heterogeneous in kind (economic, logistic, privacy, research priority)"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Equitable access is mainly a question of distributive justice, so cost (A) and availability (B) can be defended at least as well as the key",
+    "There is no patient scenario, so this is not Step 2 CK-style application",
+    "The explanation is wrong to say cost and access are not ethical concerns"
+   ],
+   "suggestion": "Rewrite as a vignette with a patient: for example, someone worried about having genetic testing because of how insurers or employers might use the results. Ask for the best response, such as counselling the patient on GINA protections and their limits, with one clearly correct option."
+  }
+ },
+ "principlismqa-12773": {
+  "hash": "645ad190",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:40:05.111Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.55,
+    "reason": "Because Clare cannot care for herself and likely lacks decision-making capacity, autonomy can't guide the choice, so the decision rests on a best-interests (beneficence) standard applied by a surrogate."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.55,
+    "reason": "Abortion decisions rest on the pregnant patient's autonomy; if she has capacity, her informed choice controls, and if she lacks it, a surrogate should first try to reflect her own wishes."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A",
+    "C"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches that a pregnant woman who cannot care for herself loses her decision-making autonomy over abortion without any capacity assessment, which encourages paternalistic overriding of reproductive ch",
+     "Treats beneficence toward the fetus ('potential child') as an established duty, when this is contested"
+    ]
+   },
+   "flaws": [
+    "Stem refers to an outside case ('Clare Macwurter's case') that is not provided, so the item cannot stand alone",
+    "No clinical vignette: no age, diagnosis, capacity assessment, gestation or stated wishes",
+    "Explanation brings in a fact (impaired mental capacity) that the stem does not state",
+    "Every option carries its own justification, which cues the answer",
+    "Asks for recall of principle names rather than a clinical decision",
+    "Two or more options are defensible"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Depends on an outside case that is not provided; the stem has too little information to answer",
+    "Inability to care for oneself is not incapacity, so autonomy (A) is at least as defensible as the key",
+    "Explanation adds facts that are not in the stem and treats contested fetal beneficence as settled"
+   ],
+   "suggestion": "Rewrite as a self-contained vignette, for example a pregnant woman with a specified intellectual disability who has a guardian and requests termination. Ask for the most appropriate next step (assess her capacity for this specific decision), with options such as asking the guardian, a court order, or proceeding on the physician's judgement."
+  }
+ },
  "principlismqa-1283": {
   "hash": "6fa30daf",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -126889,6 +127430,102 @@
    "suggestion": "Rewrite as a NICU vignette, for example parents of a neonate with trisomy 18 asking about withholding surgery. Ask for the right decision-making standard (best interests of the infant), and use autonomy, substituted judgment and resource-based arguments as distractors."
   }
  },
+ "principlismqa-12995": {
+  "hash": "eed105c4",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:41:15.897Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.75,
+    "reason": "Radcliffe-Richards et al. take on the autonomy argument that poor vendors' consent is not genuine because of economic coercion, arguing that a ban does not relieve poverty and instead restricts autonomy further."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.75,
+    "reason": "Radcliffe-Richards and colleagues address the autonomy argument that vendors' consent can't be genuine because poverty coerces them, and they reject it, saying a ban removes an option from the poor rather than protecting their autonomy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [],
+   "single_best": 1,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Clang: the stem says 'autonomy' and only option A begins with 'Autonomy'",
+    "Option A gives the view the authors argued against, so the key misstates their position",
+    "Recall of a named paper, with no clinical vignette",
+    "Options mix the principle's name with a description and do not answer the question as asked",
+    "The stem says the authors 'challenge the principle of autonomy', but they actually rely on autonomy to challenge the pro",
+    "The explanation contradicts the key's wording"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The key gives the opposing argument: Radcliffe-Richards et al. (Lancet 1998) rejected the claim that poverty makes consent invalid and argued that a ban takes options away from the poor",
+    "This is recall of one paper, with no patient and no Step 2 CK clinical use",
+    "The clang between stem and key plus mixed options give the answer away"
+   ],
+   "suggestion": "Rewrite this as a clinical ethics case, for example a poor patient who asks about selling a kidney. Ask for the best response grounded in the principles, and make sure the key gives the authors' actual argument: poverty limiting someone's choices does not cancel their consent, and a ban takes away one more option."
+  }
+ },
+ "principlismqa-13181": {
+  "hash": "fed73065",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:38:20.338Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.62,
+    "reason": "Societal and legal challenges related to gender and sex identity mainly involve fair, non-discriminatory treatment and equal access to opportunities, which is the principle of justice."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.6,
+    "reason": "Societal and legal challenges around gender and sex identity mainly involve justice: fair treatment, equal access and non-discrimination across society. Autonomy fits better when the focus is an individual's right to self-identify."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No clinical vignette; abstract recall question",
+    "Explanation refers to a 'passage' the student is never shown",
+    "Vague stem ('most at stake'), so the answer is opinion-based",
+    "Autonomy is equally defensible",
+    "Option C's 'gender identity assignment' is outdated or unclear wording",
+    "Options are long and padded with justifications that hint at the answer"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The key can only be justified by an unseen source passage, and autonomy is just as defensible",
+    "No patient or clinical decision, so it is not Step 2 CK style",
+    "The stem is too vague to have a single best answer"
+   ],
+   "suggestion": "Rewrite it as a clinical vignette, such as a transgender patient denied a service or facing unequal access to care. Ask for the most appropriate action or the principle that is clearly violated, so that only one principle fits."
+  }
+ },
  "principlismqa-14299": {
   "hash": "b3ad310a",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -126934,6 +127571,146 @@
     "The premise misdescribes PNT, because the sperm donor's pronucleus is discarded"
    ],
    "suggestion": "Throw this out. Replace it with a clinical ethics vignette, for example a couple carrying a mitochondrial DNA disease who are counselled about mitochondrial donation. Ask about the donor's contribution or what information offspring can access under current HFEA rules."
+  }
+ },
+ "principlismqa-17088": {
+  "hash": "8a375a5d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:38:21.788Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.75,
+    "reason": "The Belmont Report places extra protection for vulnerable groups, such as the very sick and the economically disadvantaged, under justice, so that no group is unfairly burdened or exploited."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.7,
+    "reason": "Justice requires fairness, so people who are vulnerable because of illness or socio-economic status should get extra protection and should not carry an unfair share of research burdens."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "B",
+    "A"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; pure recall of a definition",
+    "key disputed: Belmont Report and CIOMS tie protection of vulnerable groups to justice (fair subject selection) and to re",
+    "options carry explanatory clauses that give the definitions away",
+    "explanation wrongly says justice does not deal with protection due to vulnerability"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The keyed answer, beneficence, goes against standard sources: the Belmont Report puts protection of the very sick and the economically disadvantaged under justice, and CIOMS puts it under justice and respect for persons",
+    "More than one option can be defended, so there is no single best answer",
+    "Recall of a definition with no patient, so it does not fit Step 2 CK"
+   ],
+   "suggestion": "Rewrite it as a research-ethics vignette, for example an investigator who recruits mainly from a homeless shelter because it is convenient. Ask which principle is breached, key it as justice, and drop the defining clauses from the options."
+  }
+ },
+ "principlismqa-17108": {
+  "hash": "dca8b440",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:36:27.241Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "The professional practice standard sets disclosure by what other physicians usually do, so if many physicians routinely disclose too little, that negligent habit can end up treated as the acceptable standard."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "The professional practice standard judges disclosure by what other physicians usually do, so if poor disclosure is common, that negligent habit can become the accepted standard."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; pure definitional recall",
+    "options A and D both describe the subjective standard (redundant)",
+    "heterogeneous options: distractors describe other standards rather than criticisms of the professional standard",
+    "stem wording 'customary practices' cues key's 'acceptable practice'"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "Key is correct and the explanation is accurate",
+    "Recall of an abstract concept with no patient, below Step 2 CK application level",
+    "Distractors overlap and are easy to rule out"
+   ],
+   "suggestion": "Add a vignette: a patient is harmed by an undisclosed risk that local surgeons routinely leave out, and ask which criticism of the disclosure standard this case shows. Replace the options with homogeneous criticisms (e.g., hard to predict what a 'reasonable patient' wants; relies on hindsight; perpetuates substandard custom; requires expert testimony), with only one A/D-type subjective-standard option."
+  }
+ },
+ "principlismqa-18878": {
+  "hash": "9006c5b0",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:35:32.362Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "In US medical ethics, a competent patient's informed choice usually comes before the physician's view of their best interest, so a patient with decision-making capacity may refuse even beneficial treatment."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.93,
+    "reason": "When a patient with decision-making capacity makes an informed choice, respect for autonomy takes priority over the physician's duty of beneficence."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No clinical vignette: abstract recall of a principle",
+    "Stem leaves out the conditions the key depends on (decision-making capacity, informed consent); these appear only in the",
+    "Absolute wording in the key ('paramount') overstates the principle; autonomy has limits, such as harm to others or lack ",
+    "Options carry built-in justifications that cue the answer",
+    "Justice is plainly irrelevant to the stem, so it is a weak distractor",
+    "Options are named ethical principles rather than clinical actions, which tests vocabulary, not application"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "The key is broadly right, but only for a competent, informed patient, and the stem never says so",
+    "It is pure recall with no patient, far below Step 2 CK style",
+    "The distractors are weak and the options cue the answer with built-in rationales"
+   ],
+   "suggestion": "Rewrite it as a vignette: for example, an adult who clearly has decision-making capacity refuses a recommended treatment after being fully informed. Ask for the most appropriate next step, with action options such as respecting the refusal and recording it, seeking a court order, asking the family to override, or giving the treatment anyway."
   }
  },
  "principlismqa-19298": {
@@ -126987,6 +127764,105 @@
    "suggestion": "Rewrite as a vignette in which a competent patient with unresectable pancreatic cancer and gastric outlet obstruction is told about stenting and gastrojejunostomy and states a preference. Then ask for the most appropriate next step, keyed to respecting the informed choice."
   }
  },
+ "principlismqa-19423": {
+  "hash": "f1fe261f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:31:40.298Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.55,
+    "reason": "Patients on chemotherapy or radiotherapy are immunosuppressed, poorly nourished and heal poorly, so extra procedures carry higher risk and avoiding harm should guide how complications are managed."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.55,
+    "reason": "Patients on chemotherapy or radiotherapy are more likely to be harmed by further surgery because of weak immunity, poor healing and malnutrition, so avoiding harm (non-maleficence) is the main concern when managing their surgical complications."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A",
+    "D"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": [
+     "Teaches that patient autonomy is 'secondary' to beneficence when a complication is urgent. That is wrong for a competent patient, who can still refuse surgery."
+    ]
+   },
+   "flaws": [
+    "No clinical vignette; abstract recall question",
+    "Asks which ethical principle is 'most critical' with no ethical dilemma in the stem, so no answer is objectively correct",
+    "Two or more keys: non-maleficence (weighing surgical risk in immunosuppressed or irradiated patients) and autonomy are e",
+    "Options include their own justifications, which cues the answer and gives the options uneven length",
+    "Explanation contains a false claim (that autonomy is secondary when intervention is urgent)"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem gives no ethical conflict, so ranking the principles is arbitrary and several options are defensible",
+    "No patient vignette and no clinical decision to make, so it is not Step 2 CK material",
+    "The explanation wrongly says autonomy gives way to urgency"
+   ],
+   "suggestion": "Rewrite it as a vignette with a real dilemma. For example, a competent patient on chemotherapy with an anastomotic leak refuses reoperation, and the student must choose the next step, such as checking decision-making capacity and respecting an informed refusal."
+  }
+ },
+ "principlismqa-19452": {
+  "hash": "921b9bdc",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:39:00.634Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Staging laparoscopy finds occult unresectable disease so patients avoid a laparotomy that would not help them, which reflects non-maleficence."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.88,
+    "reason": "Staging laparoscopy finds unresectable gallbladder cancer before an open laparotomy, so patients avoid major surgery that would not help them (non-maleficence)."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall question",
+    "contrived mapping of a surgical guideline onto an ethical principle",
+    "beneficence (D) is equally defensible, since staging directs patients to the best treatment",
+    "options B and C are obviously weak and easy to rule out",
+    "the 'beyond T1b' threshold is stated without nuance (yield is highest in T3 and above or with incidental/advanced diseas"
+   ],
+   "topic": "General Surgery",
+   "verdict": "reject",
+   "reasons": [
+    "Testing ethics labels with no patient is not Step 2 CK material",
+    "Two principles (non-maleficence and beneficence) both justify the practice, so there is no single best answer",
+    "Distractors B and C are easy to rule out and the explanation offers little teaching value"
+   ],
+   "suggestion": "Rewrite as a clinical vignette: a patient with suspected T3 gallbladder cancer on imaging is being planned for radical resection, and the question asks for the next best step (staging laparoscopy), with other workup or management steps as distractors."
+  }
+ },
  "principlismqa-19490": {
   "hash": "34814fbc",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -127036,6 +127912,105 @@
    "suggestion": "Rewrite as a vignette with a specific ethical problem (e.g., a patient with decision-making capacity refusing splenectomy, or a patient whose capacity is uncertain) and ask for the most appropriate next action, with action-based options."
   }
  },
+ "principlismqa-19538": {
+  "hash": "95c6a7ac",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:35:23.563Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "Both palliative TURP and a long-term catheter are reasonable options, and the choice rests on quality-of-life trade-offs, so the patient's informed choice (autonomy) is the key principle."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.55,
+    "reason": "The key concern is that palliative TURP may speed up tumor progression, while a long-term catheter carries its own risks, so the choice is mainly about avoiding harm (non-maleficence)."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "B",
+    "D"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette",
+    "stem lacks information on patient preferences or values needed to favor a principle",
+    "options include explanatory justifications that cue reasoning",
+    "option D contains a dubious claim that TURP accelerates tumor progression",
+    "clinical context is irrelevant to the ethics question being asked",
+    "explanation does not refute distractors"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "No patient vignette, so no basis for choosing one ethical principle over another",
+    "Beneficence and non-maleficence are equally defensible for a decision weighing benefit and harm",
+    "Option D contains a doubtful medical claim, and the urology context adds nothing to the ethics question"
+   ],
+   "suggestion": "Write a vignette in which an informed patient with capacity clearly states a preference (for example, he declines a long-term catheter despite the surgeon's advice), then ask for the most appropriate next step, with short, parallel options for how to act."
+  }
+ },
+ "principlismqa-19579": {
+  "hash": "5544a3c3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:34:23.570Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.68,
+    "reason": "When conservative treatment fails, the decision to operate in an emergency is driven by beneficence, the duty to act in the patient's best interest."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.65,
+    "reason": "Once conservative treatment fails, operating is an active step to help the patient by controlling the source of infection, which is beneficence."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no patient vignette; abstract recall of ethical principles",
+    "longest option is the key",
+    "options contain their own justifications, which act as cues",
+    "beneficence and non-maleficence both defensible (two keys)",
+    "option A brings in a patient refusal that the stem never mentions",
+    "clinically implausible premise (desmoid tumor causing abscess) and the term 'curative' is misleading"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "No clinical vignette or real ethical dilemma, so it does not test applied Step 2 CK ethics",
+    "Beneficence and non-maleficence are equally defensible; the choice between them is arbitrary",
+    "The clinical premise is muddled: surgery for a desmoid-related abscess is drainage or source control, not 'curative'"
+   ],
+   "suggestion": "Rewrite as a vignette with a real ethical conflict, for example a patient with decision-making capacity who refuses emergency laparotomy for a perforation or abscess. Ask for the next best step, with action-based options such as respecting the refusal after informed discussion or seeking a surrogate."
+  }
+ },
  "principlismqa-22018": {
   "hash": "8f1f7743",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -127080,6 +128055,53 @@
     "Case citation is decorative and does not illuminate the principle"
    ],
    "suggestion": "Write a clinical vignette where ethical principles conflict, such as a risky intervention weighed against the potential for harm. Use only the principle names as options and keep the key's wording out of the stem."
+  }
+ },
+ "principlismqa-22150": {
+  "hash": "93631c81",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:39:09.059Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.8,
+    "reason": "Combining genotypic and phenotypic data across countries raises ethical problems with consent, privacy, re-identification and differing laws, and option C is the only choice about that."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "Combining genotypic and phenotypic data across countries raises ethical problems with consent, privacy, re-identification and differing national data-sharing rules, which is what option B describes."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 2,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "key restates the stem verbatim (circular, clang)",
+    "depends on an unseen 'passage'",
+    "no clinical vignette; abstract recall",
+    "heterogeneous options, none of the distractors is an ethical challenge",
+    "key does not actually name an ethical challenge",
+    "answerable by word-matching (testwise cue)"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Key copies the stem, so the item is circular and tests nothing",
+    "Reading-comprehension item tied to a passage that isn't included, with no patient or clinical decision",
+    "Distractors are implausible and not of the same kind as the key"
+   ],
+   "suggestion": "Rewrite from scratch as a vignette where a patient is asked to give samples to a biobank. Ask about a specific ethical issue (broad vs specific consent, withdrawal, re-identification risk, return of incidental findings) and make all the options ethical principles or actions of the same kind."
   }
  },
  "principlismqa-22282": {
@@ -127226,6 +128248,57 @@
    "suggestion": "Rewrite it as a vignette: a resident is offered something by an industry representative (e.g., a paid dinner, a speaker fee, or a grant). Ask for the most appropriate response, and base the key on AMA/ACCME principles, such as sending educational grants to the institution or accredited sponsor instead of to the individual physician."
   }
  },
+ "principlismqa-24205": {
+  "hash": "fec4b8e3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:36:06.042Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.65,
+    "reason": "Capacity is decision-specific, so dementia alone doesn't stop Martin consenting to a relationship, and his current wishes outweigh his family's request unless he is found to lack capacity."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.55,
+    "reason": "Capacity depends on the decision, so Martin may still be able to consent to a relationship despite dementia, and his family can't override his autonomy without legal authority."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "A",
+    "C"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Explanation teaches that a dementia diagnosis by itself makes autonomy inapplicable, which ignores that capacity is judged per decision and could justify paternalistic restriction of nursing-home resi"
+    ]
+   },
+   "flaws": [
+    "two keys (autonomy at least as defensible as beneficence)",
+    "no clinical vignette; abstract principle-naming recall",
+    "options contain self-justifying rationales that cue the answer",
+    "explanation mischaracterizes non-maleficence and capacity in dementia",
+    "missing key details (capacity, consent, nature of family concern)"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Autonomy and capacity assessment are at least as correct as beneficence; there is no single best answer",
+    "Explanation wrongly implies dementia removes decision-making capacity",
+    "Abstract principle-naming item with no vignette and cueing options"
+   ],
+   "suggestion": "Rewrite it as a vignette that describes Martin's cognition, his evident wishes and the consensual nature of the relationship. Then ask for the most appropriate next step, with a capacity assessment and his care preferences as the key, and options such as separating the couple at the family's request as distractors."
+  }
+ },
  "principlismqa-24241": {
   "hash": "c2173648",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -127272,6 +128345,54 @@
     "The historical premise is doubtful, and D (greed/business interests) can be defended, since Molière did mock physicians' greed"
    ],
    "suggestion": "Replace it with a clinical vignette in which a physician overrides a capable patient's informed refusal, and ask for the best response. The options should cover respecting autonomy, getting a surrogate involved, a capacity assessment and ethics consultation."
+  }
+ },
+ "principlismqa-24792": {
+  "hash": "385f40d9",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:31:43.009Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.6,
+    "reason": "Non-medical sex selection is mainly opposed on justice grounds, because it can reinforce sex-based discrimination and uses scarce IVF/PGD resources for a non-medical purpose."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.55,
+    "reason": "Choosing a child's sex for non-medical reasons raises justice concerns: it risks sex discrimination and puts limited reproductive resources toward a non-medical use."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem refers to 'the Mastertons' with no vignette, so it depends on an outside case text",
+    "Two keys: option D explicitly mentions preventing negative societal impacts, which is the same argument the explanation ",
+    "Options carry their own definitions, which cue the answer and turn the item into a definition-matching exercise",
+    "Recall of an abstract principle rather than a decision in clinical practice",
+    "Explanation uses harm reasoning (societal imbalance) to support justice, which weakens the line between B and D"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The question can't be answered on its own: it depends on an outside case that isn't given",
+    "Non-maleficence (D) can be defended as well as justice (B), since the main objection to sex selection is societal harm",
+    "It tests matching a principle to its definition, not clinical ethical decision-making"
+   ],
+   "suggestion": "Rewrite it as a self-contained clinical vignette with a single practical question, such as how the physician should respond to a request for non-medical sex selection, with options that are actions rather than principles. If the item must test a principle, take the definitions out of the options and make the stem point to one principle, for example discrimination against one sex, so that justice is the only correct answer."
   }
  },
  "principlismqa-24836": {
@@ -127371,6 +128492,198 @@
    "suggestion": "Rewrite as a clinical vignette, e.g. a surgeon about to do a procedure with an undisclosed serious risk, asking for the appropriate next step. That tests what must be disclosed for valid informed consent, not case-law history."
   }
  },
+ "principlismqa-26418": {
+  "hash": "8dba07f3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:34:30.278Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "Justice is the ethical principle of fairness and equal treatment, which is what policy and procedure manuals are meant to ensure."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "Justice is the principle of fairness and equal treatment, so it is the one that governs consistent, equitable policies and procedures."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: stem says 'fair treatment' and the key repeats 'fair treatment'",
+    "vignette gives the answer away: the definition of justice is in the stem",
+    "no patient vignette; pure recall of a definition",
+    "each option carries its own justification, which cues the answer",
+    "Option A wrongly describes autonomy as being about employees' independent decisions",
+    "Narrow framing around a non-clinical, administrative setting (employee policy manuals)"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem gives the answer away: 'fair treatment' points straight to justice",
+    "This is recall of a definition with no clinical scenario, so it is not Step 2 CK material",
+    "The distractors are weak because each option includes its own rationale, and some of these rationales are distorted"
+   ],
+   "suggestion": "Rewrite it as a clinical vignette, such as allocating a scarce resource like an ICU bed or a transplant organ. Ask for the best action or the principle being applied, use short homogeneous options with no built-in justifications, and leave out 'fair' and 'equal' from the stem."
+  }
+ },
+ "principlismqa-27322": {
+  "hash": "56dabe55",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:33:37.446Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.7,
+    "reason": "A large early dose increase mainly raises the risk of harm, so non-maleficence (making sure the new dose is safe) is the most relevant principle."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.55,
+    "reason": "A large early dose increase mainly raises the risk of toxicity, so the key principle is non-maleficence: making sure the higher dose is safe and avoiding harm."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "A",
+    "B"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall item",
+    "stem is vague: no drug, condition, or ethical conflict given",
+    "multiple defensible keys (beneficence is the reason for increasing a dose; autonomy/consent equally relevant)",
+    "options carry embedded justifications that cue the answer (C restates 'safe' from dosage)",
+    "explanation asserts autonomy is 'secondary' to safety, which is contestable",
+    "'50% in early treatment' is an unexplained, meaningless detail"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "No patient scenario or real ethical dilemma, so it does not test applied clinical ethics",
+    "Beneficence and autonomy are as defensible as non-maleficence; no single best answer",
+    "Basic premise is too ambiguous to fix by editing alone"
+   ],
+   "suggestion": "Start again with a vignette that sets up a real conflict between principles. For example, a patient asks for a dose increase above the safe maximum despite toxicity risk, and the question asks for the most appropriate response. Use short options that are all the same kind of thing and carry no built-in justifications."
+  }
+ },
+ "principlismqa-27622": {
+  "hash": "ce934e54",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:39:07.340Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Rhubarb is a potent purgative that can cause cramping, electrolyte loss and dependence, so the key principle is non-maleficence: making sure the treatment does not harm the patient."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Rhubarb's strong purgative effects can cause harm such as electrolyte loss and cramping, so the physician's main duty is non-maleficence: making sure the treatment does not hurt the patient."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall question",
+    "vignette gives the answer away ('potent purgative effects' cues harm/non-maleficence)",
+    "two defensible keys (beneficence and non-maleficence both apply to risk-benefit judgement)",
+    "options pair each principle with its textbook definition rather than applying it to a patient",
+    "explanation asserts a fixed ranking of principles (non-maleficence over autonomy/beneficence) that bioethics does not su",
+    "odd premise mixing herbal pharmacology with ethics"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "No patient scenario, so it tests whether a student can match a principle to its definition, not Step 2 CK reasoning",
+    "Beneficence is equally defensible, and the stem's wording points to the answer",
+    "The explanation wrongly says one ethical principle always outranks the others"
+   ],
+   "suggestion": "Rewrite it as a vignette with a real ethical conflict, for example a competent patient who insists on a herbal purgative despite documented harm, and ask for the most appropriate next step in management instead of a principle name."
+  }
+ },
+ "principlismqa-27766": {
+  "hash": "bc168ff6",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:36:47.337Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "Non-maleficence (\"first, do no harm\") is the principle that applies directly to making sure TCM doesn't cause harm, such as herb–drug interactions, when it is combined with conventional treatment."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "Non-maleficence (\"first, do no harm\") is the principle that most directly covers keeping TCM from harming patients when it is used alongside conventional treatment, for example through herb-drug interactions."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: stem 'does not harm' repeated in key 'does not cause harm'",
+    "vignette gives the answer away (stem defines the principle)",
+    "no patient vignette; pure definition recall",
+    "options contain self-defining rationales that cue the answer",
+    "absolute phrase 'by all available means' in distractor D"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Stem wording gives away the key via a direct clang with option C",
+    "Recall of an ethics definition with no clinical application; not Step 2 CK level",
+    "Distractors are not plausible once the stem defines 'harm'"
+   ],
+   "suggestion": "Rewrite as a vignette (for example, a patient on warfarin who wants to keep taking an interacting herbal remedy) asking for the most appropriate next step. Use action-based options that test balancing autonomy against non-maleficence, and remove principle names and definitions from the stem."
+  }
+ },
  "principlismqa-28206": {
   "hash": "7323dc61",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -127420,6 +128733,51 @@
    "suggestion": "Rewrite as a vignette: a competent patient taking a herbal supplement who has been counselled on its risks (e.g., interaction with warfarin) declines to stop it, and ask for the most appropriate next step (e.g., respect the decision, document it and monitor INR). Make the options actions, not principle names with their definitions attached."
   }
  },
+ "principlismqa-28265": {
+  "hash": "6b7fcad2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:35:11.534Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.9,
+    "reason": "Informed consent rests on respect for autonomy: the patient must understand the evidence, risks, possible herb-drug interactions and alternatives to traditional Chinese medicine combinations, then decide freely."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Informed consent comes from the principle of autonomy: the patient must fully understand the uncertain evidence, risks and possible interactions of traditional Chinese medicine combinations before freely agreeing to them."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette (recall of definition)",
+    "clang: stem 'informed consent' matches key 'understands and consents'",
+    "options are restated textbook definitions; distractors ignore consent",
+    "TCM/fibroid context irrelevant to what is tested"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Pure recall of the link between informed consent and autonomy, with no patient",
+    "Wording in the key mirrors the stem, so the answer is obvious",
+    "Misses the clinically important consent issues for herbal therapy (evidence, hepatotoxicity, interactions, delaying proven treatment)"
+   ],
+   "suggestion": "Rewrite as a vignette of a patient with symptomatic fibroids who asks for herbal therapy. Ask for the most appropriate next step, with options all of the same kind (e.g., discuss limited evidence, risks and alternatives and document her choice, vs. refuse, vs. prescribe without discussion, vs. refer)."
+  }
+ },
  "principlismqa-2889": {
   "hash": "14c8721c",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -127464,6 +128822,56 @@
     "Leaves out Montgomery, the modern leading authority, so the framing is dated"
    ],
    "suggestion": "Replace it with a vignette in which a surgeon does not disclose a rare but serious risk, and ask about the doctor's duty under the material-risk (reasonable patient) standard, as in Montgomery, rather than asking for case names."
+  }
+ },
+ "principlismqa-28929": {
+  "hash": "6294a252",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:40:11.329Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.72,
+    "reason": "When combining TCM qi- and blood-supplementing, menstruation-regulating herbs with Western treatment, the main ethical concern is avoiding harm from herb-drug interactions, side effects and delayed effective treatment, so non-maleficence is the most relevant principle."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.72,
+    "reason": "Combining qi-blood tonifying and menstruation-regulating herbs (e.g., dong quai) with Western drugs can cause interactions such as anticoagulant potentiation and hormonal effects, so non-maleficence is the main ethical concern."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "A",
+    "D"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall question",
+    "vague stem ('most relevant') with no patient context to decide between principles",
+    "multiple defensible answers (autonomy and beneficence equally arguable)",
+    "options include justifications that partly cue the answer",
+    "TCM framing ('supplement qi and blood') irrelevant to the ethical question being tested",
+    "key (C) uses the evocative word 'crucial' and is slightly longer than the others"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "No patient or clinical scenario, so it is not applied Step 2 CK material",
+    "Autonomy and beneficence are as defensible as non-maleficence, so there is no single best answer",
+    "The 'most relevant principle' framing is opinion, not testable knowledge"
+   ],
+   "suggestion": "Rewrite it as a vignette, e.g. a patient on warfarin who wants to start a herbal menstrual tonic such as dong quai. Ask for the most appropriate next step, for example asking about herb–drug interactions and checking the INR while respecting her choice, rather than asking which principle applies."
   }
  },
  "principlismqa-2902": {
@@ -127512,6 +128920,102 @@
     "No patient scenario; distractors A and D are obviously wrong"
    ],
    "suggestion": "Rewrite as a vignette with a stated jurisdiction, e.g. an incapacitated patient with known prior wishes and a surrogate present. Key substituted judgement, and use the other decision standards (best interests, family preference, physician judgement) as distractors."
+  }
+ },
+ "principlismqa-29060": {
+  "hash": "26e5072b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:36:13.989Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "When recommending complementary treatments with limited evidence, such as TCM herbal therapy, the main ethical priority is respecting autonomy through informed consent about the evidence, risks and conventional alternatives."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Recommending complementary treatments with limited evidence, such as TCM regimens that supplement qi and blood, depends most on informed consent: the patient must understand the benefits, risks and alternatives and choose for herself."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall question",
+    "TCM jargon (qi, Damp Heat, Toxic Heat) is irrelevant to the ethics being tested and outside Step 2 CK scope",
+    "asking which principle to 'prioritize' with no clinical conflict makes the answer a matter of opinion",
+    "option B is defensible, since herbal products can be hepatotoxic or interact with other drugs",
+    "option D is obviously wrong because of the 'over conventional medicine' wording",
+    "C is implausible in this setting"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "No patient or ethical dilemma, so the principle to 'prioritize' cannot be decided objectively",
+    "The TCM framing is not Step 2 CK material, and none of its jargon is needed to answer",
+    "Weak distractors: D and C can be ruled out at once, and B is about as defensible as A"
+   ],
+   "suggestion": "Rewrite this as a vignette with a real conflict. For example, a patient with abnormal uterine bleeding asks to use herbal remedies instead of the recommended workup. Then ask for the most appropriate next step, such as discussing risks and benefits to get informed consent, and offer action-based options of the same kind."
+  }
+ },
+ "principlismqa-29922": {
+  "hash": "2b92fa35",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:34:48.027Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Brody's essay \"Transparency: Informed Consent in Primary Care\" argues that current legal standards send physicians the wrong message about their responsibilities, which hinders good communication, and he proposes a transparency standard instead."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Brody argues that current legal standards for informed consent send physicians the wrong message about their responsibilities, which hinders real communication, and he proposes a transparency standard instead."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: key repeats stem phrase 'hinder effective communication'",
+    "recall of a single author's opinion without a clinical vignette",
+    "option D overlaps substantially with Brody's argument (defensive, liability-driven disclosure)",
+    "explanation is circular and restates the key"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Tests recall of one author's view, not applied clinical knowledge",
+    "Key is cued by verbatim repetition of the stem",
+    "Distractor D is arguably also consistent with Brody's critique"
+   ],
+   "suggestion": "Replace with a primary-care vignette asking what disclosure meets the transparency standard (sharing the physician's reasoning and inviting questions), with homogeneous distractors such as the professional standard, the reasonable-person standard and a full risk-list disclosure."
   }
  },
  "principlismqa-29961": {
@@ -127563,6 +129067,99 @@
    "suggestion": "Rewrite it as a vignette: for example, a researcher enrolling a patient with a consent form that overstates the benefit of a trial. Then ask for the most appropriate action or the principle being violated, with options of the same kind, such as respect for autonomy/informed consent, beneficence, justice and IRB review."
   }
  },
+ "principlismqa-30281": {
+  "hash": "d1030518",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:36:39.409Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "Emanuel and colleagues' framework puts healthcare workers first because of their instrumental value: they keep the pandemic response running, and putting them first rewards the risks they take on."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "In the Emanuel et al. NEJM 2020 framework, front-line health care workers get priority mainly because of their instrumental value: keeping them working lets them save many others, and the priority also rewards the risks they take."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 3,
+   "distractors": 4,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; pure recall of a named framework (Emanuel et al., NEJM 2020)",
+    "option A is also a defensible justification, which the explanation itself admits",
+    "answer depends on knowing one paper's framing rather than applying a principle"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "The key matches the Emanuel et al. framework, but that paper also ties health worker priority to maximizing benefits, so A can be defended",
+    "The question is recall with no patient or practice scenario, so it is weak for Step 2 CK",
+    "The explanation admits A could apply, which undermines the claim of a single best answer"
+   ],
+   "suggestion": "Rewrite it as a vignette, such as a hospital triage committee deciding to give ventilators to ICU nurses first. Make clear the reason is that they can return to work and care for others, not their prognosis, and change option A so it clearly means maximizing life-years or lives saved by prognosis."
+  }
+ },
+ "principlismqa-30366": {
+  "hash": "87883805",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:32:12.262Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Weak paternalism allows interference only when a decision is not truly autonomous, so it respects a competent, informed person's choices even when they are risky."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Weak paternalism allows intervening only when a person's autonomy is impaired, so it respects a competent person's informed choice even when that choice is risky."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "recall without a clinical vignette",
+    "longest option is the key",
+    "stem wording ('prioritize autonomy') cues the autonomy option",
+    "absolute term in distractor D ('regardless of the circumstances')",
+    "A and B both describe strong paternalism (overlapping distractors)",
+    "explanation misstates why B is wrong and omits the defining feature of weak paternalism (intervention only when autonomy"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "Pure definition recall with no patient, so it is poor Step 2 CK material",
+    "Key is defensible but incomplete; it does not state that weak paternalism allows intervention when autonomy is impaired",
+    "Distractors are cued and overlapping, and the explanation for B is inaccurate"
+   ],
+   "suggestion": "Rewrite as a vignette in which a patient's refusal comes from impaired capacity or misinformation (e.g., delirium), and ask which action weak paternalism justifies. Use other actions, such as overriding a competent refusal (strong paternalism), as distractors, and fix the explanation to say that weak paternalism allows intervention only when a choice is not substantially autonomous."
+  }
+ },
  "principlismqa-30391": {
   "hash": "1a94c703",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -127608,6 +129205,147 @@
     "Distractors don't work and the explanation depends on a missing passage"
    ],
    "suggestion": "Rewrite it around a patient: for example, a competent Jehovah's Witness refuses a transfusion, and a doctor calls her incompetent only because the choice looks unwise. Then ask which standard of capacity assessment is being misapplied, with options such as outcome, status, ability (understand/appreciate/reason/communicate) and best interests."
+  }
+ },
+ "principlismqa-30393": {
+  "hash": "25d25d48",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:39:39.726Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "Under the sliding-scale standard, refusing a life-saving treatment carries high risk, so it requires a higher level of decision-making capacity."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Under the risk-related sliding-scale model of competence, refusing a high-benefit, life-saving procedure risks grave harm, so it requires a higher standard of decision-making capacity."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall",
+    "explanation refers to an unseen 'passage'",
+    "option A is confusingly worded",
+    "option D is implausible to most students",
+    "heterogeneous options (levels vs principles)",
+    "contested ethical view presented as settled"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "Key matches the mainstream sliding-scale (risk-relative) competence standard",
+    "No patient vignette and refers to a missing source passage",
+    "Uniform-standard view (B) is defended in ethics and law, so the item needs careful framing"
+   ],
+   "suggestion": "Rewrite as a clinical vignette (e.g., an adult refusing a life-saving treatment) and ask how capacity should be assessed, keying 'more rigorous scrutiny of understanding and reasoning given the gravity of consequences'. Remove the 'passage' reference, reword option A, and note in the explanation that the sliding scale is debated."
+  }
+ },
+ "principlismqa-30410": {
+  "hash": "a6e5b3ca",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:33:04.877Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "Informed consent applies in both clinical care and research, but shared decision-making is a clinical model of care that often does not fit research, so the two are not the same."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "Informed consent covers both clinical care and research, but shared decision-making is a clinical way of choosing treatment together that may not suit research, so the two can't be treated as the same."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (stem clause repeated in key)",
+    "clang between stem and key",
+    "depends on unseen passage",
+    "no clinical vignette; abstract recall",
+    "absolute terms in distractors (always, only)"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Stem states the keyed answer verbatim",
+    "Passage-dependent reading comprehension, not a clinical application",
+    "Distractors can be ruled out by absolute terms and test-taking cues"
+   ],
+   "suggestion": "Rewrite as a patient vignette, for example choosing between treatments that are about equally good but trade off differently, testing how shared decision-making differs from the consent signature. Remove the giveaway clause and any reference to an outside passage."
+  }
+ },
+ "principlismqa-30569": {
+  "hash": "00769e7e",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:32:25.982Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "Respecting a competent patient's explicit wish not to be told certain details honors their autonomy, while withholding information only because it might upset them (therapeutic privilege) is generally not justified."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "A patient's explicit, informed choice not to receive certain information respects autonomy and is ethically justifiable, whereas withholding information to avoid distress (therapeutic privilege) is very narrow and not justified by distress alone."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall of an ethics principle",
+    "the stem asks 'under what circumstances' but the options answer yes/no",
+    "absolute terms ('absolute right', 'ethically equivalent') in B and D let a test-wise student rule them out",
+    "options come in yes/no pairs, so a student can eliminate them as pairs",
+    "the explanation does not cover therapeutic privilege, the narrow exception that A hints at"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: a competent patient can waive the right to information, and respecting that is ethical",
+    "The item has no patient and tests recall, which is below the Step 2 CK standard",
+    "The stem does not match the options, and the absolute wording in B and D cues the answer"
+   ],
+   "suggestion": "Rewrite it as a vignette. For example: a competent patient with a new cancer diagnosis asks the doctor to talk only with her daughter. Ask for the most appropriate next step, and use options of the same kind, such as tell the patient anyway, tell the family against her wishes, confirm her wishes and record who she wants informed, or ask for an ethics consult. Use the explanation to say that therapeutic privilege applies only in very rare cases."
   }
  },
  "principlismqa-31161": {
@@ -127657,6 +129395,54 @@
     "The explanation does not separate the two guidelines and does not show why B is wrong"
    ],
    "suggestion": "Rewrite it as a vignette: a 13-year-old with relapsed leukaemia refuses a promising trial drug that offers the only remaining therapeutic option. Ask for the most appropriate action, and give only one option that meets the combined criteria of potential direct benefit, no alternative, and serious illness."
+  }
+ },
+ "principlismqa-31195": {
+  "hash": "1645b4d8",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:35:49.249Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.85,
+    "reason": "The main ethical failure was that staff refused to affirm Alexis's chosen name and identity, so the clinic did not offer compassionate, respectful care or a safe space for her; this is about relationships and dignity, not regulations, confidentiality or medical knowledge."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.88,
+    "reason": "Refusing Alexis's chosen name and exposing her to harm is mainly a failure of respect, dignity and compassionate, affirming care, not a problem of medical knowledge, confidentiality or regulations."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no vignette; refers to an external scenario ('Alexis's clinic experience') not provided",
+    "longest option is the key",
+    "source-specific jargon ('space of care') cues the key",
+    "two defensible answers: explanation itself concedes a privacy breach (B)",
+    "option C is implausible/heterogeneous"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Not answerable on its own: it depends on a missing source passage",
+    "B (privacy breach and being outed in public) is as defensible as D, and the explanation admits this",
+    "It tests memory of a text's wording, not clinical application"
+   ],
+   "suggestion": "Write a full vignette: a transgender patient called by her legal name in a waiting room. Ask for the most appropriate action, with one clearly best option such as using her chosen name and pronouns and recording them in the chart, and drop the overlapping privacy option."
   }
  },
  "principlismqa-32181": {
@@ -127853,6 +129639,54 @@
    "suggestion": "Rewrite it as a clinical case: for example, parents ask about PGD with HLA typing for a child with Fanconi anaemia. Then ask for the most appropriate response or the key ethical principle, with options that each name a different principle and don't hint at the answer in the stem."
   }
  },
+ "principlismqa-36386": {
+  "hash": "702e9cf9",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:33:17.354Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.85,
+    "reason": "The medical necessity requirement applies only to Medicaid-funded abortions, so it burdens indigent women alone and creates unequal access, which is a problem of distributive justice."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "Because the requirement applies only to Medicaid-funded abortions, it burdens indigent women unequally, which makes it mainly a distributive justice issue (as in Maher v. Roe)."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; recall of a specific legal case (Maher v. Roe)",
+    "options C and D describe the regulation positively (ensures/aims), so they cannot be 'challenged' principles and are eli",
+    "options include justifying clauses that cue the answer",
+    "autonomy is arguably equally correct",
+    "US jurisdiction-specific historical regulation"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Recall of a specific 1970s US state regulation with no patient scenario; not Step 2 CK material",
+    "Autonomy is defensible alongside justice, so the item has no single best answer",
+    "Explanation presents discrimination as settled fact, but the Supreme Court upheld the regulation"
+   ],
+   "suggestion": "Rewrite as a clinical vignette, e.g. a clinician deciding how to allocate a scarce resource among patients who differ in ability to pay. Use bare principle names as options, with no justifying clauses."
+  }
+ },
  "principlismqa-36407": {
   "hash": "1048ce83",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -127899,6 +129733,147 @@
     "The answer is a matter of opinion: autonomy can be defended as equally correct"
    ],
    "suggestion": "Rewrite it as a vignette, for example a defendant with psychosis being assessed for an insanity defence or for involuntary commitment. Ask for the specific legal or ethical standard that applies, so that only one answer is correct."
+  }
+ },
+ "principlismqa-36783": {
+  "hash": "94545a72",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:40:46.562Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "Mitochondrial donation moves the parents' nuclear DNA into a donor egg that has had its nucleus removed but keeps healthy mitochondria (by spindle or pronuclear transfer), and its unknown long-term and germline risks to the child most directly challenge non-maleficence."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.9,
+    "reason": "Mitochondrial donation (maternal spindle or pronuclear transfer) moves the parents' nuclear DNA into a donor egg or embryo with healthy mitochondria, and because its long-term and germline effects are unknown, the duty not to cause harm (non-maleficence) is the principle most challenged."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Double-barreled stem (asks two questions; options answer only one)",
+    "Clang: 'long-term health effects' in stem mirrors 'unforeseen long-term effects' in key",
+    "No clinical vignette; abstract recall",
+    "Explanation self-contradicts on autonomy (states the future child cannot consent, which supports A)"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "No patient vignette; recall-level ethics trivia not suited to Step 2 CK",
+    "Double-barreled stem with clang cue giving away the key",
+    "Explanation's reasoning against autonomy is incoherent, making A arguable"
+   ],
+   "suggestion": "Rewrite as a counselling vignette (couple with known mtDNA disease asking about mitochondrial donation) with a single question, remove stem–key word overlap, and correct the explanation's handling of autonomy."
+  }
+ },
+ "principlismqa-36946": {
+  "hash": "103d3870",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:41:10.951Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "The question names openness, necessity and autonomy as the three main arguments for legalizing assisted dying, so justice is the one that isn't on the list."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "The question itself names Openness, Necessity and Autonomy as the three main arguments for legalizing assisted dying, so Justice is the one not on that list."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 2,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (stem lists the three correct principles)",
+    "negative stem (NOT)",
+    "depends on an unseen passage",
+    "no clinical vignette; pure recall",
+    "the 'three main arguments' framing comes from one source and is not a recognised standard; justice/equality-of-access ar",
+    "explanation only restates the passage"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem names the three correct options, so the answer is given away",
+    "Recall tied to one source's framing, with no patient and no clinical decision",
+    "Depends on an unseen passage, and 'justice' is a defensible argument for legalisation too"
+   ],
+   "suggestion": "Replace it with a vignette, for example a patient asking for assisted dying in a jurisdiction where it is legal or illegal. Then ask for the right next step, such as exploring the reasons for the request, screening for depression, referring to palliative care, or following the legal safeguards."
+  }
+ },
+ "principlismqa-37803": {
+  "hash": "f8c46708",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:37:30.043Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "The justice principle covers fair distribution and equal access, which is the core issue when organ markets exploit poor sellers and favor wealthy buyers."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "Exploitation and inequality in organ commerce are about fair distribution and equal access, which is what the principle of justice covers."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: the stem asks about 'justice issues' and the key is 'the principle of justice'",
+    "vignette gives the answer away",
+    "relies on a passage the examinee never sees ('given the exploitation and inequality discussed')",
+    "no clinical vignette; abstract recall",
+    "distractors carry built-in value judgments (e.g., 'ensuring no harm comes'), so they read as weak straw men",
+    "explanation leans on the unseen passage instead of teaching the principles"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem says 'justice issues', so it hands over the key, 'principle of justice', by repeating the word",
+    "It depends on a missing source passage and has no patient scenario, so it is not Step 2 CK style",
+    "The answer is circular, so the item measures almost nothing"
+   ],
+   "suggestion": "Rewrite it as a clinical vignette, for example a patient with end-stage renal disease who asks to buy a kidney abroad from a poor donor, or a transplant committee choosing between candidates. Ask for the most appropriate physician response, or for the ethical concern that best explains why such sales are prohibited, and keep the word 'justice' out of the stem."
   }
  },
  "principlismqa-38040": {
@@ -127949,6 +129924,104 @@
    "suggestion": "Rewrite it as a vignette: for example, a culturally Deaf patient with an interpreter comes in for an unrelated problem, and the clinician starts promoting cochlear implants. Ask for the most appropriate response or the best explanation for the patient's distress, and give homogeneous options that are all plausible communication behaviours."
   }
  },
+ "principlismqa-39221": {
+  "hash": "47b0192c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:34:55.183Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.5,
+    "reason": "Active euthanasia goes against the physician's professional duty not to deliberately end a life, while autonomy is usually an argument for it and dignity is claimed by both sides."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.55,
+    "reason": "Active euthanasia means the physician deliberately ends a life, which goes against the duties to preserve life and do no harm; autonomy and dignity are more often cited in its favour."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "C",
+    "B"
+   ],
+   "single_best": 1,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 1,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Keyed answer is conceptually wrong: autonomy is the main principle used to justify voluntary active euthanasia, not the ",
+    "Options are heterogeneous and are not the standard bioethical principles (non-maleficence, beneficence, justice are miss",
+    "Vague, opinion-based wording ('most challenged') with no clear correct answer",
+    "No clinical vignette; tests abstract recall",
+    "Explanation contradicts itself: it says autonomy means respecting the patient's choice, which supports the request rathe"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The key is wrong or at best indefensible: voluntary euthanasia respects autonomy and mainly conflicts with non-maleficence and professional ethics",
+    "Options are heterogeneous and ill-defined, so more than one can be argued for",
+    "There is no patient scenario, so it is not Step 2 CK applied ethics"
+   ],
+   "suggestion": "Rewrite it as a vignette, e.g. a competent terminally ill patient asks the physician to give a lethal injection. Ask for the most appropriate response, or for which principle (non-maleficence) conflicts with the patient's autonomy. Use the standard principles as options."
+  }
+ },
+ "principlismqa-4002": {
+  "hash": "5620ea7a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:34:33.054Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.55,
+    "reason": "Evaluating online health information for reliability mainly serves non-maleficence: filtering out inaccurate claims prevents patient harm, while B and C misstate their principles."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.6,
+    "reason": "Judging online health information mainly protects against the harm misinformation can cause, which is non-maleficence; autonomy (D) is close behind but depends on the information being reliable first."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Depends on an outside source (a CNBC interview) that the stem never describes",
+    "No clinical vignette; abstract recall of ethics principles",
+    "Option B misdefines beneficence (benefit to the provider) and is easy to rule out",
+    "Option C misdefines justice (access for professionals) and is easy to rule out",
+    "Non-maleficence (D) is just as defensible as the key",
+    "Explanation wrongly claims beneficence and non-maleficence don't apply to evaluating information"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The question can't be answered without an outside media item it never describes",
+    "Two options (A and D) can both be defended, and B and C use wrong definitions so they don't work as distractors",
+    "This isn't Step 2 CK material: there is no patient and no clinical decision"
+   ],
+   "suggestion": "I'd replace this with a patient vignette, for example a patient who brings in misleading online advice and asks about stopping a medication. The question should test a concrete action, such as discussing the evidence and respecting the patient's informed choice. All options should be realistic actions a clinician might take, and only one should be clearly best."
+  }
+ },
  "principlismqa-40486": {
   "hash": "877e27a7",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -127995,6 +130068,55 @@
     "Distractors carry self-defeating rationales and are implausible"
    ],
    "suggestion": "Rewrite as a clinical vignette (e.g., a patient on dialysis asks for help travelling abroad to buy a kidney, or a transplant committee weighing allocation by ability to pay). Then ask for the most appropriate physician response, or the principle at stake, with bare one-word options and no built-in justifications."
+  }
+ },
+ "principlismqa-41615": {
+  "hash": "f4b0cd5f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:32:20.727Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.5,
+    "reason": "A patient's autonomous right to refuse treatment applies equally to starting and continuing it, so withholding and withdrawing are ethically equivalent."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.72,
+    "reason": "Withholding and withdrawing are ethically equivalent mainly because of autonomy: a patient (or surrogate) may refuse any treatment, whether it has not been started or is already under way."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A",
+    "B"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No clinical vignette; pure recall of an abstract principle",
+    "Two or more defensible keys (autonomy is the standard justification: the right to refuse applies equally to starting or ",
+    "Option D is a 'none of the above'-type option",
+    "Stem fails the cover-the-options test",
+    "Key's rationale ('preventing unnecessary prolongation of life') is a questionable characterisation of harm"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Equivalence is usually justified by the absence of a moral difference between doing and allowing, or by autonomy, so A is at least as defensible as C",
+    "Recall question with no patient, not Step 2 CK application",
+    "The explanation asserts rather than shows why autonomy and beneficence are wrong"
+   ],
+   "suggestion": "Rewrite as an ICU vignette in which a surrogate believes stopping a ventilator is morally worse than never starting it, and ask for the best response, keyed to 'there is no ethical or legal difference between withholding and withdrawing'. Use homogeneous options that are counselling or management actions."
   }
  },
  "principlismqa-43884": {
@@ -128047,6 +130169,101 @@
    "suggestion": "Replace it with a vignette in which a clinician faces a real decision about tissue donation or consent (e.g., a family asked to consent to tissue retrieval when commercial processing isn't disclosed). Ask for the most appropriate action, such as fully disclosing possible commercial use during informed consent."
   }
  },
+ "principlismqa-44082": {
+  "hash": "c56c1fd7",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:39:27.721Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "When wealthy commissioning parents exploit women from poorer countries, the core problem is unequal power and an unfair distribution of benefits and burdens between nations, and that is what global justice is about."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "Exploiting surrogates from poorer countries because of economic differences between nations is mainly a problem of global justice, meaning the fair sharing of benefits and burdens across countries."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "stem gives the answer away: 'inequities' points straight to justice",
+    "pure recall with no patient vignette",
+    "options are not alike: two are qualified principles, 'global justice' is not, and 'professional integrity' is not one of",
+    "autonomy is arguably challenged by exploitation too (coercion undermines voluntary consent), and this is not addressed",
+    "the explanation's phrase 'unjust healthcare system' is vague, and the explanation does not properly rule out autonomy"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "The key (justice) is correct, but the word 'inequities' in the stem gives it away",
+    "It is abstract recall with no patient and no clinical decision, so it is not Step 2 CK style",
+    "The distractors are weak and not alike"
+   ],
+   "suggestion": "Rewrite it as a clinical vignette, for example a fertility clinic doctor asked to arrange a cross-border surrogacy with low-paid surrogates. Ask what the doctor should do or which concern most applies, and remove the cue words 'inequities and exploitation'. Make the options comparable principles (autonomy, beneficence, nonmaleficence, justice), and explain why autonomy, though affected, is not the main issue."
+  }
+ },
+ "principlismqa-44759": {
+  "hash": "2c4036a6",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:40:09.204Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.8,
+    "reason": "Using thiopentone as a \"truth serum\" in interrogation forces prisoners to disclose information without valid consent, which violates their autonomy."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.8,
+    "reason": "Using thiopentone as a \"truth serum\" gets around the prisoner's capacity to consent to or refuse disclosure, so the main violation is of autonomy, through coercion and loss of free will."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "C",
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 3,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "two keys: non-maleficence (C) is as defensible as autonomy (D)",
+    "no clinical vignette; abstract principle-labelling recall",
+    "options share a repetitive 'principle of X' template inviting guesswork over overlapping principles",
+    "explanation dismisses non-maleficence without justification",
+    "implies thiopentone reliably works as a truth serum"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Several principles (autonomy, non-maleficence, beneficence) are equally defensible as the 'primary' concern",
+    "No patient scenario; tests labelling rather than clinical ethical decision-making",
+    "Explanation is arbitrary and does not reflect professional codes (e.g., WMA Declaration of Tokyo)"
+   ],
+   "suggestion": "Rewrite as a vignette in which a physician is asked by authorities to give thiopentone during a detainee interrogation, and ask for the most appropriate response (decline participation, per WMA Declaration of Tokyo/AMA guidance), with distractors of other actions rather than competing principle labels."
+  }
+ },
  "principlismqa-45795": {
   "hash": "3a504baa",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -128096,6 +130313,206 @@
     "Several options are arguable or wrong depending on context, so there is no single best answer."
    ],
    "suggestion": "Rewrite as a vignette, for example a sexual assault survivor in the ED. Ask a specific next step that rests on a clear principle, such as trauma-informed consent for each part of the exam or emergency implied consent in an unconscious patient, and use homogeneous options."
+  }
+ },
+ "principlismqa-46373": {
+  "hash": "0b257115",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:31:16.210Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "Physicians should keep a patient's disclosure of a past minor crime confidential, out of respect for autonomy and privacy, because no reporting duty applies unless the law requires a report or someone else faces a serious threat."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "Confidentiality comes from respect for patient autonomy and privacy, and past minor crimes generally need not be reported unless there is a serious threat to others or a legal reporting duty."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "D",
+    "C"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall of ethical principle",
+    "options mix principle with a proposed action (compound options)",
+    "option D states the correct confidentiality exception and is defensible",
+    "option A is a straw man ('all crimes')",
+    "vague stem ('minor crime') with no context on jurisdiction or mandatory reporting",
+    "explanation concedes D aligns with maintaining confidentiality"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Confidentiality rests on several principles; D (and arguably C) is as defensible as B",
+    "No patient vignette; it tests labeling a principle rather than applying ethics in practice",
+    "Compound options make students judge the action rather than the principle"
+   ],
+   "suggestion": "Rewrite it as a case where the doctor chooses a next step, e.g. a patient admits to a past minor theft. Use concrete action options (keep the confidence, notify police, tell family, report) and include a mandatory-reporting situation as a clearly worse distractor."
+  }
+ },
+ "principlismqa-46523": {
+  "hash": "ef61325c",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:32:50.966Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.55,
+    "reason": "Without clear group-level evidence that a medication works, the clinician can't be sure it will help this patient, which most directly challenges beneficence (acting for the patient's benefit)."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.6,
+    "reason": "Without evidence of a group-level benefit, the prescriber can't be sure the drug helps the patient, which mainly challenges beneficence (acting in the patient's best interest)."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "D",
+    "C"
+   ],
+   "single_best": 2,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall question",
+    "vague, ambiguous stem ('without clear group advantages' is unclear)",
+    "explanation refers to an absent 'passage', so the item depends on outside source text",
+    "options include their own definitions, which turns it into a definition-matching exercise",
+    "key is debatable: when the evidence is uncertain, beneficence or non-maleficence is arguably the principle most challeng"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The item depends on a passage that isn't given, so it can't stand alone",
+    "There is no patient scenario, so it isn't applied Step 2 CK material",
+    "The key is arguable because beneficence or non-maleficence could equally be defended"
+   ],
+   "suggestion": "Rewrite it as a vignette. For example, a patient with depression where two antidepressants have equal evidence, and the patient asks the physician to choose. Then ask for the most appropriate action (for example, discuss side-effect profiles and the patient's preferences through shared decision-making), with other actions as the distractors."
+  }
+ },
+ "principlismqa-46571": {
+  "hash": "ab8d39f5",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:39:49.582Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.72,
+    "reason": "Complex treatment for co-occurring personality and developmental disorders raises the risk of harm from inappropriate or poorly matched treatment, which challenges non-maleficence most directly."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.7,
+    "reason": "Co-occurring personality and developmental disorders make treatment more complex and raise the risk of harm from wrong or poorly suited treatment, which most directly challenges non-maleficence."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall question",
+    "explanation relies on an unseen 'passage'",
+    "option D is absurd (co-occurrence 'enhancing' treatment) and misstates beneficence",
+    "options carry justifications, making them long and cueing",
+    "two defensible answers (autonomy vs non-maleficence)",
+    "vague, opinion-based stem with no single correct answer from accepted ethics"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The answer depends on an unseen source passage, not on accepted ethics, and autonomy (A) can be defended just as well",
+    "There is no patient scenario, so it is not applied Step 2 CK material",
+    "Option D is absurd and gets beneficence wrong; the explanation leans on the passage"
+   ],
+   "suggestion": "Rewrite it as a clinical vignette, for example a patient with autism and borderline personality disorder who refuses treatment, so that one ethical action or principle is clearly best. Use short, parallel options with no built-in justifications."
+  }
+ },
+ "principlismqa-46829": {
+  "hash": "81b2f65b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:31:47.026Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.7,
+    "reason": "The question centres on aripiprazole's faster symptom reduction, a benefit to the patient, which is beneficence; its tolerability (non-maleficence) is secondary here."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.6,
+    "reason": "The stem stresses the benefit of faster symptom reduction, which is beneficence, though its claim that aripiprazole works faster is doubtful and its good tolerability also makes non-maleficence (A) a reasonable choice."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 1,
+   "explanation": 1,
+   "safety": {
+    "ok": false,
+    "issues": [
+     "Teaches the false claim that aripiprazole reduces symptoms faster than other antipsychotics. Evidence shows no faster onset, and its efficacy is similar to or lower than some agents, e.g. clozapine, o",
+     "Presents aripiprazole as generally 'safer', ignoring akathisia, impulse-control disorders and the need to choose the drug for each patient."
+    ]
+   },
+   "flaws": [
+    "No clinical vignette: an abstract question about principles",
+    "Factually wrong premise in the stem",
+    "Two keys: the stem cites both effectiveness (beneficence) and safety (non-maleficence)",
+    "The stem gives the answer away by stating the drug's benefits",
+    "Options carry their own justifications, which cue the answer",
+    "Explanation repeats the false premise and contradicts itself on safety"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The premise that aripiprazole works faster and is broadly safer than other antipsychotics is not supported by evidence",
+    "B and D are equally defensible because the stem mentions both benefit and safety",
+    "Recall of ethical principles without a patient; not Step 2 CK style"
+   ],
+   "suggestion": "Rebuild it as a patient vignette with a real ethical dilemma, such as a patient with capacity refusing an antipsychotic or a choice between long-acting injectables. Leave out any false claims about how one drug compares with another."
   }
  },
  "principlismqa-47469": {
@@ -128249,6 +130666,102 @@
    "suggestion": "Write a new item with a clinical vignette, e.g. a physician offered industry incentives to prescribe a costlier drug, and ask for the most appropriate action (decline or disclose a conflict of interest, prescribe based on evidence). Use action-based options and do not name the principle in the stem."
   }
  },
+ "principlismqa-48947": {
+  "hash": "257eca88",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:37:28.882Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.55,
+    "reason": "Evans argues that traditional legal pathways (individual consent, waivers, de-identification) are poorly suited to accessing highly inclusive Big Data resources with detailed health information, so the core ethical challenge is about how consent-based access can work."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.7,
+    "reason": "Evans argues that highly inclusive, detailed health data resources cannot practically rely on individual consent or deidentification because reidentification risk is high, so the challenge is getting past these barriers to data access."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "recall of a specific author's argument with no patient vignette",
+    "depends on knowing one source text rather than applying a principle",
+    "option B overlaps with the key, since the explanation says Evans stresses the strain on traditional consent pathways",
+    "distractors A and D are obviously off-topic",
+    "the explanation uses the term 'inverse privacy problem' without saying what it means"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "This is trivia about one author's view, not Step 2 CK clinical application",
+    "Option B can be defended alongside the key, so there is no single best answer",
+    "Every option is a stem-like phrase starting 'The challenge of...', and two are clearly irrelevant"
+   ],
+   "suggestion": "Rewrite it as a vignette, for example a researcher asking to use a de-identified EHR dataset that could be re-identified. Then test the right step, such as IRB review, a data use agreement or a waiver of consent, without naming any author."
+  }
+ },
+ "principlismqa-49728": {
+  "hash": "7652152f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:33:49.730Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.72,
+    "reason": "Informed consent is the foundation of making informed decisions at the end of life: it means the patient understands their prognosis, options, risks and alternatives, and that understanding is what makes the right to accept or refuse treatment meaningful."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.6,
+    "reason": "Informed consent is the basic right behind informed end-of-life decisions, and the right to refuse treatment comes from it."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall of an opinion",
+    "vague 'most critical' wording makes the answer a matter of opinion",
+    "two defensible keys (C and D)",
+    "privacy and confidentiality overlap, so two distractors can be ruled out together",
+    "explanation admits D is a subset of C, which weakens how distinct the options are"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "There is no patient vignette, so it tests opinion rather than how to apply ethics in practice",
+    "The right to refuse treatment is just as defensible at the end of life; the answer depends on how the question is read",
+    "Its overlapping, nested options mean there is no clear single best answer"
+   ],
+   "suggestion": "Rewrite this as a vignette. For example: a competent terminally ill patient refuses a feeding tube or ventilation after a full discussion. Ask for the most appropriate next step, with options such as respecting the refusal, getting a psychiatric consult, deferring to family, or seeking a court order."
+  }
+ },
  "principlismqa-49883": {
   "hash": "eac65033",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -128299,6 +130812,150 @@
     "It encourages paternalistic practice and leaves out assessment of capacity."
    ],
    "suggestion": "Rewrite it with a full vignette: an older woman with specific risks who has documented decision-making capacity and refuses placement. Ask for the most appropriate next step, with the key 'respect her decision and arrange home supports'. Alternatively, write a version where capacity is clearly absent so that a best-interests or surrogate decision is the key."
+  }
+ },
+ "principlismqa-49891": {
+  "hash": "ad5fab57",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:39:26.376Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.75,
+    "reason": "Deliberately destroying healthy brain tissue to control behaviour caused permanent, irreversible harm with no clear disease being treated, so it most directly breaks non-maleficence."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.72,
+    "reason": "Psychosurgery deliberately destroyed healthy brain tissue and caused permanent harm to control behaviour, which most directly breaks the duty of non-maleficence."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; historical recall",
+    "clang: key repeats 'healthy brain tissue' from stem",
+    "options contain embedded justifications that cue the answer",
+    "option C does not describe a principle being challenged, implausible distractor",
+    "autonomy (lack of consent) equally defensible as a key"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Autonomy is equally defensible because historical psychosurgery was often done without valid consent",
+    "Recall of history without a patient, so not Step 2 CK style",
+    "Key is cued by stem wording and options are padded with justifications"
+   ],
+   "suggestion": "Replace it with a present-day patient vignette, such as a proposed irreversible procedure with uncertain benefit in a patient with capacity, where one principle is clearly at stake. Use short option labels with no justifications attached."
+  }
+ },
+ "principlismqa-50422": {
+  "hash": "6501e1d5",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:31:17.193Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "In DCD, organs are retrieved after a short wait following circulatory arrest, when heart and lung function may not yet have stopped irreversibly, so retrieval could breach the Dead Donor Rule."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "In DCD, organs are retrieved only a few minutes after circulation stops, when it could still be restarted, so the ending of heart and lung function may not yet be irreversible and the donor may not truly be dead as the Dead Donor Rule requires."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (stem phrase repeated verbatim in key)",
+    "no clinical vignette; pure recall",
+    "paired distractors B and D are near-duplicates and easily eliminated",
+    "option A arguably defensible (DCD donors may not meet whole-brain criteria)",
+    "explanation uses 'permanent' vs 'irreversible' without defining them, so it reads as contradictory"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Stem states the answer, so the item tests no knowledge",
+    "Abstract recall with no patient or clinical decision",
+    "Weak, paired distractors and a confusing explanation"
+   ],
+   "suggestion": "Rewrite as a vignette: a ventilated patient whose life support is being withdrawn, an organ procurement team, and a 2–5 minute no-touch period. Then ask which ethical objection is most often raised, using similar options such as permanence vs. irreversibility, conflict of interest, or premortem heparin, and explain the permanence vs. irreversibility distinction."
+  }
+ },
+ "principlismqa-50624": {
+  "hash": "780b6b23",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:41:27.130Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.68,
+    "reason": "Critics such as Sandel argue that selecting embryos for nonmedical traits like sex reflects a hubristic drive to master and design children, similar to early eugenicists."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.72,
+    "reason": "Critics such as Sandel argue that selecting embryos for nonmedical traits shows a hubristic drive to mastery, like the attitude of early eugenicists."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; pure recall of a specific text",
+    "heterogeneous options (D is a pro-permissibility argument, not a concern)",
+    "option C vague and meaningless without source context",
+    "open-future argument (A) is also raised against sex selection, making two defensible answers",
+    "unexpanded abbreviation PGD"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Textbook-specific recall of philosophical arguments, not applied clinical ethics",
+    "Option A (open future) is a recognised critique of sex selection, so the key is not uniquely correct",
+    "Options are heterogeneous and D is easily eliminated"
+   ],
+   "suggestion": "Rewrite as a clinical scenario (e.g., IVF couple requesting non-medical sex selection) asking for the most appropriate physician response, with homogeneous action-based options."
   }
  },
  "principlismqa-5157": {
@@ -128493,6 +131150,55 @@
    "suggestion": "Write a short vignette, e.g. a rural patient on Medicaid who misses dialysis for lack of transport, and ask which principle a free transportation program mainly serves. Use the options justice, beneficence, autonomy, non-maleficence and fidelity."
   }
  },
+ "principlismqa-59758": {
+  "hash": "26774243",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:34:55.909Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.8,
+    "reason": "Keeping patient records accurate and confidential is what legal and ethical rules like HIPAA directly require, so it matters most for ethical compliance; the other skills mainly help with communication, efficiency or finances."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.85,
+    "reason": "Ethical and legal compliance in healthcare, such as HIPAA confidentiality, consent documentation and accurate charting, depends most directly on keeping patient records accurate and confidential."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall/opinion question",
+    "vague 'most crucial' with no evidence-based criterion",
+    "heterogeneous options (interpersonal skills is not an organizational skill)",
+    "key contains ethics word 'confidential' that echoes 'ethical' in the stem",
+    "longest option is the key",
+    "explanation restates key without addressing distractors"
+   ],
+   "topic": "Professionalism",
+   "verdict": "reject",
+   "reasons": [
+    "Not Step 2 CK material: no patient or clinical decision",
+    "Key is opinion-based; communication skills (A) equally defensible",
+    "Answer cued by the word 'confidential' and by option length"
+   ],
+   "suggestion": "Replace with a patient vignette on a concrete ethical dilemma, such as a request to share or change a patient's record, and ask for the most appropriate next step against confidentiality, HIPAA or documentation standards."
+  }
+ },
  "principlismqa-59987": {
   "hash": "07a58dd1",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -128590,6 +131296,198 @@
    "suggestion": "Rewrite it around a full patient scenario with normal test results and psychosocial distress. Ask for the most appropriate next step, for example exploring her stressors and referring her to social work or community resources, instead of asking her to name an ethical principle."
   }
  },
+ "principlismqa-62202": {
+  "hash": "bae76e49",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:38:38.844Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "Life-prolonging technology most directly tests patient autonomy, meaning the right to refuse or withdraw life-sustaining treatment and to choose how one's own life ends."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "Technology that can keep a patient alive indefinitely most directly tests autonomy, meaning the patient's right to refuse or withdraw life-sustaining treatment and to decide how they die."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract philosophy recall",
+    "vague stem ('most challenged') with no objective standard",
+    "two defensible keys (autonomy is classically the principle at stake in life-prolonging technology)",
+    "heterogeneous options mixing ethical theories (utilitarianism, virtue ethics) with principles",
+    "explanation conflates brain death (legal death) with PVS"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Abstract philosophy recall with no patient, so not Step 2 CK material",
+    "Key is opinion-based; autonomy is just as defensible, or more so",
+    "Options are heterogeneous, and the explanation wrongly treats brain death as a personhood question when it is legal death"
+   ],
+   "suggestion": "Rewrite it as a clinical vignette, for example a patient in a persistent vegetative state with an advance directive refusing life support, and ask for the most appropriate next step. Use homogeneous management options with one key that is clearly correct."
+  }
+ },
+ "principlismqa-64316": {
+  "hash": "3644f1b9",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:35:42.597Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.6,
+    "reason": "The ethical approach respects patient autonomy while making sure the decision is informed and safe, by encouraging medical consultation before the patient goes ahead with wellness tourism."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.6,
+    "reason": "Ethically, the physician should respect the patient's interest in proactive wellness while making sure the decision is informed and safe, by encouraging medical consultation before wellness tourism, which often lacks specialized medical personnel."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall of a principle",
+    "vague, undefined stem ('proactive health and wellness tourism')",
+    "key is illogical: the physician is already a medical professional, so advising a consult with one makes no sense",
+    "A is arguably more correct: respecting the informed choice of a competent patient",
+    "B and C are obviously wrong (paternalistic or dismissive) and easy to rule out",
+    "explanation says A 'ignores informed decision-making', but A says nothing about information"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The key makes no sense when the person answering is the physician, and A can be defended as well or better",
+    "There is no patient, and the stem is too vague to support a single best answer",
+    "Two of the distractors are obviously wrong, so the item tests little"
+   ],
+   "suggestion": "Rewrite it as a vignette: a competent patient with a specific condition chooses an overseas wellness program instead of the recommended treatment. Key the answer that explores the patient's values, discusses risks and benefits so the choice is informed, and respects the decision while keeping care available."
+  }
+ },
+ "principlismqa-6497": {
+  "hash": "9da40174",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:32:40.855Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Falsifying the medical record is deliberate dishonesty that undermines patient safety and professional integrity, which makes it more serious than the procedural errors in the other options."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.82,
+    "reason": "Intentionally falsifying medical records is a deliberate breach of honesty and of the record's integrity, which makes it more serious than the procedural and clinical lapses in the other options."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (stem states 'after falsifying medical records')",
+    "stem refers to an absent case (Benny, Stephanie, staff nurse) and cannot stand alone",
+    "no patient vignette or clinical decision",
+    "heterogeneous options (procedural, clinical, documentation failures)",
+    "explanation does not explain why dishonesty outweighs patient-harm risk of omitting pulse check before digoxin"
+   ],
+   "topic": "Professionalism",
+   "verdict": "reject",
+   "reasons": [
+    "Stem names the keyed answer, so it tests nothing",
+    "Depends on an external scenario that is not provided",
+    "Not in Step 2 CK vignette format with a clinical decision"
+   ],
+   "suggestion": "Write a self-contained vignette (a student gives digoxin unsupervised on a nurse's instruction, skips the pulse check, then charts false vital-sign times) and ask neutrally for the most serious professional breach or the most appropriate next step, without naming the falsification in the stem."
+  }
+ },
+ "principlismqa-65059": {
+  "hash": "df94718b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:40:28.279Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.75,
+    "reason": "Requiring the gestational mother not to bond with the baby restricts her personal choice about her own feelings and relationships, which challenges her autonomy."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.85,
+    "reason": "Asking a gestational mother not to bond restricts her personal emotional choices, which challenges her autonomy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "C"
+   ],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall of ethical principle",
+    "options contain embedded rationales that cue or confuse",
+    "option D's rationale is internally incoherent (prioritising the child's interest is not a beneficence violation)",
+    "non-maleficence (psychological harm to surrogate or child) is arguably defensible",
+    "premise assumes bonding is a voluntary choice",
+    "explanation does not address distractors"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "Recall of an ethical principle with no patient scenario, so it does not fit Step 2 CK",
+    "Option C (non-maleficence) can also be defended, and the rationales built into the options weaken them",
+    "The explanation does not say why each distractor is wrong"
+   ],
+   "suggestion": "Rewrite as a clinical vignette, for example a surrogate who asks her obstetrician for help after a contract clause restricts her contact with the fetus or her own healthcare decisions. Ask for the most appropriate response, use short options without built-in rationales, and explain why each distractor is wrong."
+  }
+ },
  "principlismqa-65307": {
   "hash": "cae5bf2c",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -128637,6 +131535,101 @@
     "Distractors A and B are obviously wrong; key cued by length and wording"
    ],
    "suggestion": "Rewrite as a vignette, for example a 9-year-old who plans to 'hold my breath until I die', and ask for the most appropriate next step. Make the key 'take the plan seriously regardless of lethality: assess intent, involve the caregivers, make a safety plan', and use homogeneous, plausible distractors such as reassurance and discharge, an urgent psychiatric admission, or starting an SSRI."
+  }
+ },
+ "principlismqa-66362": {
+  "hash": "938da636",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:35:13.979Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "AI models trained on data that underrepresents some groups can carry that bias into their outputs, which can make health data poverty and inequities worse for those populations."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.97,
+    "reason": "AI trained on data that underrepresents some populations can extend health data poverty and make inequities worse, which is the challenge the question names directly."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "clang: the key repeats the stem's wording ('health data poverty and inequities')",
+    "the vignette gives the answer away",
+    "no clinical vignette; tests recall of a source passage",
+    "the explanation cites 'the passage' and a specific paper the student never saw",
+    "option D is absurd and not an ethical challenge",
+    "heterogeneous options"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem's wording points straight to option C, so the question tests nothing",
+    "It has no patient and no applied clinical decision, so it is not Step 2 CK material",
+    "It depends on a source passage that is not given, and the distractors are weak"
+   ],
+   "suggestion": "Rewrite it as a vignette, for example a hospital rolling out an AI dermatology tool trained mostly on images of light skin. Then ask for the main ethical concern or the right next step, with options that are all ethical principles or actions and none that repeat the stem's wording."
+  }
+ },
+ "principlismqa-68738": {
+  "hash": "9faa2cbd",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:40:31.609Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "Making women solely responsible for their drinking assumes an individualistic view of autonomy and ignores relational autonomy, the idea that class and gender shape their choices."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.75,
+    "reason": "Making women solely responsible for their drinking relies on an individualistic view of autonomy and ignores relational autonomy, meaning the class and gender factors that shape their choices."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "No clinical vignette; abstract recall of one specific paper's argument",
+    "Two defensible keys: the stem's mention of class and gender influences points strongly to justice (A)",
+    "Key depends on the 'relational autonomy' framing, which the stem never introduces",
+    "Each option carries its own justification, so this tests how the wording is read, not ethical reasoning",
+    "Explanation dismisses justice without giving a convincing reason"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Not Step 2 CK material: no patient and no clinical decision",
+    "Justice (A) can be defended as well as autonomy, given the class and gender disparities named in the stem",
+    "The answer depends on knowing the framing of one particular source"
+   ],
+   "suggestion": "Replace it with a patient-based ethics item, such as a clinician counselling a woman about her alcohol use with social stressors present, where one principle or action is clearly best. Write short, parallel options without built-in justifications."
   }
  },
  "principlismqa-69492": {
@@ -128734,6 +131727,102 @@
     "Options A and C could also be defended, because the 'analyst's desire' concept is open to interpretation"
    ],
    "suggestion": "Rewrite it as a clinical vignette: a psychotherapist whose own wishes for the patient's progress override what the patient wants about treatment. Ask for the most appropriate next step, with concrete, similar options (for example, respect the patient's informed choice, seek supervision, or end treatment)."
+  }
+ },
+ "principlismqa-70291": {
+  "hash": "77be661b",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:34:06.588Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "When Médecins du Monde (MdM) does advocacy work, it often uses patients' stories and data, so the main ethical challenge is that this could compromise patient confidentiality and trust; the other options are practical or logistical problems, not ethical ones."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "When Médecins du Monde (MdM) uses patient testimonies and data for advocacy, it risks exposing patient confidentiality and damaging trust, which is the ethical tension the question asks about."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem gives the answer away: option B repeats the stem wording 'patient confidentiality and trust'",
+    "Clang/word repetition between stem and key",
+    "Depends on an unseen source passage ('the passage emphasizes')",
+    "Unexplained abbreviation (MdM)",
+    "No clinical vignette; recall of an organisation's policy",
+    "Distractors are not ethical challenges and do not concern confidentiality, so they are clearly wrong"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The key repeats the stem's own words, so the question tests nothing",
+    "It relies on a passage the student never sees and is about one NGO's policy, not patient care",
+    "It is not Step 2 CK material and has no patient scenario"
+   ],
+   "suggestion": "Rewrite it as a clinical vignette. For example, an undocumented patient at a free clinic fears that data collected for an advocacy report will be passed to the authorities. Ask what the most appropriate action is, with options such as anonymizing the data, getting informed consent and offering an opt-out, reporting to the authorities, or refusing care. Use homogeneous distractors and spell out what MdM stands for."
+  }
+ },
+ "principlismqa-71932": {
+  "hash": "c9a5f01f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:34:13.521Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "The first appropriate step is to respectfully raise concerns directly with those involved, and to escalate to higher authorities only if that fails; ignoring the problem or acting outside her scope is inappropriate."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.72,
+    "reason": "Professional ethics favors raising concerns directly with the people involved first, and escalating to higher authorities only if that fails; giving medication without an order is outside her scope, and ignoring the problem abandons the patient."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 1,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; stem refers to an external case not provided",
+    "two defensible keys (A and B)",
+    "implausible distractors (C and D)",
+    "heterogeneous options",
+    "best stepwise option (inform clinical instructor/supervisor) missing",
+    "nursing-student scenario not aligned with USMLE Step 2 CK"
+   ],
+   "topic": "Professionalism",
+   "verdict": "reject",
+   "reasons": [
+    "Stem lacks the vignette needed to answer; depends on an unseen case",
+    "Direct respectful communication (A) is as defensible as escalating (B) under stepwise professionalism norms",
+    "Distractors C and D are absurd and give no discrimination"
+   ],
+   "suggestion": "Write a full vignette with a medical student observing a specific dignity lapse, and offer homogeneous graded options (do nothing, speak to the resident, inform the attending/supervisor, file a formal report, confront in front of the patient) so that one stepwise action is clearly best."
   }
  },
  "principlismqa-72098": {
@@ -128834,6 +131923,55 @@
    "suggestion": "Rewrite as a self-contained vignette: a patient in cardiac arrest with no advance directive or DNR on file and conflicting claims to surrogacy, where the physician must decide immediately. Key it to starting resuscitation while clarifying who is the surrogate, with homogeneous distractors."
   }
  },
+ "principlismqa-72468": {
+  "hash": "ed7d68fa",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:36:11.994Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "Using tissue from deceased people for research, beyond what a medicolegal autopsy requires, calls for informed consent from the next of kin to respect the dead person's dignity and the family's autonomy; regulatory compliance (D) is broader and less specific."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.7,
+    "reason": "Research on autopsy tissue from asphyxia deaths mainly requires respect for the dead and their families, so getting the family's informed consent before using the tissue is the key ethical priority."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall",
+    "two defensible keys (D encompasses A)",
+    "absolute term 'all' in key",
+    "implausible distractors (B, C)",
+    "heterogeneous options",
+    "jurisdiction-dependent answer"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Not a patient-based Step 2 CK item; abstract research ethics",
+    "D (regulatory compliance) equally defensible and subsumes consent requirements; consent rules for decedent/forensic tissue vary by jurisdiction",
+    "B and C are throwaway distractors"
+   ],
+   "suggestion": "If you keep it, rewrite it as a clinical case, such as a medical examiner's case where a researcher asks to keep tissue for a study, and ask for the most appropriate next step. Use same-kind procedural options and state which country's rules apply."
+  }
+ },
  "principlismqa-735": {
   "hash": "9af325ca",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -128884,6 +132022,152 @@
     "Recall item with no patient and no Step 2 CK application"
    ],
    "suggestion": "Rewrite as a vignette: a patient with decision-making capacity, informed of the risks and benefits, chooses a high-risk operation that could save their life; ask for the most appropriate next step. Key: respect the patient's informed decision (autonomy), with distractors such as refusing to operate, getting a court order, or deferring to family."
+  }
+ },
+ "principlismqa-73955": {
+  "hash": "cdeba074",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:32:47.126Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "Amputating a healthy limb in BIID sets beneficence (preventing more dangerous self-harm and relieving distress) against nonmaleficence (deliberately causing permanent harm to a healthy body part), which makes it the clearest conflict between the two principles."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "Amputating a healthy limb in BIID sets beneficence (preventing dangerous self-harm) directly against nonmaleficence (deliberately harming healthy tissue), and the question names this scenario as its example."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (stem restates option C verbatim)",
+    "two keys: option A is a classic beneficence vs nonmaleficence trade-off",
+    "recall without a patient vignette",
+    "heterogeneous distractors (D illustrates justice)",
+    "explanation incorrectly dismisses A and ignores the autonomy dimension of BIID"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Stem contains the keyed answer verbatim",
+    "Option A is equally defensible as a beneficence-nonmaleficence conflict",
+    "Abstract recall of a definition, not applied Step 2 CK ethics"
+   ],
+   "suggestion": "Rewrite as a clinical vignette in which a patient's best interests clearly clash with the risk of harm (for example, aggressive but toxic treatment in a frail patient). Remove the answer from the stem and make the distractors clear examples of other principles (autonomy, justice, confidentiality)."
+  }
+ },
+ "principlismqa-74304": {
+  "hash": "08cbed06",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:38:46.273Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "The question links the ethical failure to the treatment being therapeutically useless (and harmful), which most directly violates beneficence, even though consent was also lacking."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "The question focuses on deep sleep therapy's lack of therapeutic efficacy, so using a useless and harmful treatment most directly violates beneficence."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away ('given its lack of therapeutic efficacy' leads straight to beneficence)",
+    "explanation refers to a 'passage' that is not provided",
+    "two defensible keys: the Royal Commission documented widespread treatment without valid consent (autonomy)",
+    "no patient vignette; historical recall",
+    "non-maleficence (26+ deaths) is arguably the most compromised principle, but it is not offered as an option",
+    "confidentiality distractor is implausible"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The Chelmsford Royal Commission found many patients were treated without informed consent, so A is just as defensible as the key, and the explanation is wrong to dismiss it.",
+    "The question depends on a missing source passage, and the stem's wording hands over the answer.",
+    "It is recall of local Australian history, not a clinical application at Step 2 CK level."
+   ],
+   "suggestion": "Rewrite this as a clinical vignette where one principle is clearly the one at stake, for example a physician who keeps giving a harmful treatment with no proven benefit even though the patient consented. Make sure the options cover beneficence, non-maleficence, autonomy and justice without overlapping."
+  }
+ },
+ "principlismqa-75012": {
+  "hash": "a69aa3d2",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:31:22.793Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.7,
+    "reason": "The question says the procedure is done \"to prevent harm\" from chemotherapy or radiation damaging the ovaries, which best matches non-maleficence."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.65,
+    "reason": "The question presents ovarian tissue cryopreservation as a way to prevent harm (gonadotoxic damage) from cancer treatment, which matches non-maleficence most directly."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no patient vignette; pure recall of ethics labels",
+    "stem wording 'to prevent harm' cues the key (clang with 'avoiding harm' in C)",
+    "each option includes its own justification, so the options give away the answer",
+    "two keys: in Beauchamp & Childress, preventing and removing harm fall under beneficence, while non-maleficence means not",
+    "option C misdescribes the procedure: cryopreservation does not prevent damage to the ovaries; it saves tissue before tre",
+    "explanation is circular and does not deal with the overlap between beneficence and non-maleficence"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The key is questionable: harm prevention by the clinician is standardly classed as beneficence, so D can be defended",
+    "Recall question with no patient, below Step 2 CK application level",
+    "The stem cues the key, and C is factually wrong about what ovarian tissue cryopreservation does"
+   ],
+   "suggestion": "Rewrite it as a vignette about a real ethical decision, for example an adolescent with cancer who refuses fertility preservation while her parents insist on it. Ask for the best next step, not for a principle label, and use short, uniform options with no built-in justifications."
   }
  },
  "principlismqa-75860": {
@@ -129133,6 +132417,245 @@
    "suggestion": "Rewrite it as a vignette. For example: an incapacitated patient has a documented advance directive and a disagreeing family, and the key is to follow the directive. Or the patient has no directive, and the key is to turn to the designated healthcare proxy. Make the distractors plausible steps in the surrogate hierarchy."
   }
  },
+ "principlismqa-79865": {
+  "hash": "2aa00742",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:33:57.878Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "The question defines beneficence here as sharing and promoting research and good practice advice, which is exactly what option C says."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "The question itself describes beneficence in global healthcare as \"sharing and promoting research and good practice advice,\" and only option B matches that wording."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A",
+    "B",
+    "D"
+   ],
+   "single_best": 1,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (stem repeats option C verbatim)",
+    "clang",
+    "no clinical vignette",
+    "distractors also exemplify beneficence",
+    "vague/ambiguous stem"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Stem contains the keyed answer word for word, so it tests nothing",
+    "Options A, B and D are equally defensible as beneficence",
+    "No patient scenario; abstract recall not suited to Step 2 CK"
+   ],
+   "suggestion": "Rewrite as a clinical vignette where a clinician must choose an action, with ethical principles or distinct actions as options, and remove any wording that echoes an option."
+  }
+ },
+ "principlismqa-80413": {
+  "hash": "7740925d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:37:10.932Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "The stated goal is to improve the adolescent's mental health and wellbeing, which means acting in the patient's best interest: the principle of beneficence."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.88,
+    "reason": "Giving a treatment specifically to improve the patient's mental health and wellbeing is acting in the patient's best interest, which is beneficence."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "C"
+   ],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 2,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Stem gives the answer away: 'to improve mental health' is repeated in option B (clang)",
+    "No clinical vignette; this is abstract recall",
+    "Each option includes its own justification, so the student judges a rationale rather than applying a principle",
+    "Option C (non-maleficence, preventing irreversible pubertal changes) is a common, defensible framing",
+    "Explanation mentions 'the passage', so the item was written from a source text not shown",
+    "Explanation says minors are not autonomous, which is an oversimplification and ignores assent and Gillick/mature-minor c"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "The key follows only from wording copied from the stem, so the item tests no real reasoning",
+    "Non-maleficence is arguably just as correct",
+    "The stem presents mental-health benefit as settled, but systematic reviews (NICE 2020, Cass 2024) rate that evidence as low certainty"
+   ],
+   "suggestion": "Write a patient vignette with one clear ethical tension (for example, a competent adolescent who refuses while the parents insist, or a clinician weighing uncertain benefit against harm), and ask which principle most directly supports a stated action. Make the options bare principle names without justifications, and remove 'improve mental health' from the stem."
+  }
+ },
+ "principlismqa-80414": {
+  "hash": "d172c409",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:37:35.695Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "Adolescents have a right to a confidential conversation about sexual history, so the APN should ask the grandmother to leave, then explain the reason for the pregnancy test to the patient and get her consent."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "Adolescents have a right to confidential reproductive care, so the APN should talk with the patient alone about her sexual history and the need for a pregnancy test, rather than testing without telling her or discussing it in front of her grandmother."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 3,
+   "relevance": 3,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; stem refers to external context ('the APN', 'her grandmother') not introduced",
+    "confusing stem phrasing ('without initially informing her or her grandmother')",
+    "key is among the longest options",
+    "option D is weak and easily eliminated"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "Key (confidential interview with adolescent) is correct and reflects standard adolescent care",
+    "Stem is a context-dependent fragment with no proper vignette and muddled wording",
+    "Explanation is thin and does not cite adolescent confidentiality/consent principles"
+   ],
+   "suggestion": "Write a self-contained vignette (e.g., 16-year-old seen in clinic with her grandmother, nausea, last period 7 weeks ago) and ask 'Which of the following is the most appropriate next step?'; make the distractors more evenly matched and expand the explanation on adolescent confidentiality and consent."
+  }
+ },
+ "principlismqa-80441": {
+  "hash": "61ec5d04",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:33:27.637Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.6,
+    "reason": "When risks and benefits have to be weighed, the provider should give balanced, evidence-based counseling and respect the pregnant woman's informed choice, which is autonomy."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.6,
+    "reason": "When risks and benefits must be weighed, the provider should give balanced information so the pregnant patient can make her own informed choice, which is the principle of autonomy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "D"
+   ],
+   "single_best": 2,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall of ethical principles",
+    "vague stem (\"should guide\") makes beneficence equally defensible when the task is advising on risks and benefits",
+    "options contain defining glosses that cue the answer (\"informed decision\" echoes \"advising\" and \"balance of risks and be",
+    "Option A is misleading: non-maleficence does not mean guaranteeing no harm",
+    "Explanation claims autonomy simply 'takes precedence' with no real justification"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Asks for a principle to be recalled without a patient, so it is not Step 2 CK style",
+    "The stem is too vague to give one best answer; beneficence is also defensible for advising on risks and benefits",
+    "Fixing it would mean rewriting the whole item"
+   ],
+   "suggestion": "Rewrite as a vignette: a 28-week pregnant woman who has had full counseling still declines Tdap or influenza vaccine. Ask for the most appropriate next step, with options such as respecting and documenting her refusal, giving the vaccine anyway, asking her partner to consent, or referring her to an ethics committee."
+  }
+ },
+ "principlismqa-80641": {
+  "hash": "3d267fa1",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:40:55.522Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "VitalTalk's REMAP framework (Reframe, Expect emotion, Map values, Align, Propose a plan) is built for goals of care talks and explicitly aligns treatment with patient values and then proposes a plan."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "REMAP (Reframe, Expect emotion, Map values, Align, Propose a plan) is the goals-of-care framework that matches medical care to patient values and ends by proposing a plan."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "A"
+   ],
+   "single_best": 3,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "recall of an acronym without a patient",
+    "stem wording ('aligns', 'proposes a plan') matches the acronym letters and cues the key",
+    "explanation wrongly says the Serious Illness Conversation Guide is unstructured",
+    "Patient-Centered Family Meeting Model is a vague, poorly defined distractor"
+   ],
+   "topic": "Palliative Care",
+   "verdict": "reject",
+   "reasons": [
+    "Pure recall of a framework name, not applied clinical knowledge at Step 2 CK level",
+    "Serious Illness Conversation Guide also explores values and makes a recommendation, so A is partly defensible",
+    "Explanation is inaccurate about the Serious Illness Conversation Guide, and the stem wording cues the key"
+   ],
+   "suggestion": "Rewrite as a vignette: a clinician leads a goals-of-care discussion with a seriously ill patient, and the question asks for the most appropriate next communication step (for example, exploring values before recommending a plan). The options should be clinician actions, not framework names."
+  }
+ },
  "principlismqa-81065": {
   "hash": "3e4768bc",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -129181,6 +132704,149 @@
     "The explanation argues against A and D as if they were correct beliefs, but they are misconceptions too"
    ],
    "suggestion": "Rewrite as a vignette, for example an older patient from a family-centred culture who asks for her son to receive her diagnosis and help decide. Ask for the most appropriate next step, with the key being to confirm what she prefers and respect her choice to share decision-making, against distractors such as insisting on telling her directly, telling the family without asking her, or overriding the request."
+  }
+ },
+ "principlismqa-81390": {
+  "hash": "a8084050",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:38:19.906Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.75,
+    "reason": "Autonomy means the patient's right to self-determination, and Debbie's plea to \"get this over with\" is the only expression of her own wishes, which is why the case is debated as a possible autonomous request to end her life."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.8,
+    "reason": "Autonomy is the patient's right to decide about her own care, and Debbie's statement 'Let's get this over with' is the only part of the story that reflects her wishes; the resident acting alone (D) violated autonomy rather than respecting it."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Key is conceptually wrong: publication/public debate is not an exemplar of patient autonomy",
+    "Options A-C do not answer the stem's question about the publication (stem-option mismatch)",
+    "Heterogeneous options",
+    "Recall of a specific literary/journal piece without a clinical decision",
+    "Explanation stretches the definition of autonomy"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Keyed answer misapplies the principle of autonomy; B is more defensible",
+    "Stem and options are mismatched and heterogeneous",
+    "Trivia about a named essay rather than applied clinical ethics"
+   ],
+   "suggestion": "Rewrite as a vignette where a patient with advanced cancer says 'let's get this over with' to a physician who has just met them. Key the answer as assessing capacity and clarifying what the patient wants and means (e.g., better symptom control, goals of care, palliative input), not giving a lethal dose."
+  }
+ },
+ "principlismqa-81733": {
+  "hash": "1c39bc25",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:37:50.283Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.85,
+    "reason": "End-of-life discussions weigh quantitative futility (the intervention is very unlikely to work), qualitative futility (even if it works, the quality of life it gives is unacceptable), and respect for the autonomy of the patient or surrogate."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.85,
+    "reason": "End-of-life discussions require respecting the autonomy of the patient or surrogate, and they also involve both quantitative futility (a very low chance of success) and qualitative futility (a result that would not give a meaningful quality of life), so all three choices apply."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 2,
+   "distractors": 1,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "\"All of the above\" option",
+    "no clinical vignette",
+    "vague, unfocused stem that fails the cover-the-options test",
+    "explanation refers to an absent source passage",
+    "partial knowledge lets a student guess the key"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Recall of ethics concepts with no patient; not Step 2 CK application",
+    "Uses \"all of the above\", which NBME guidance prohibits, so students can guess it",
+    "Explanation depends on an absent passage and teaches nothing about futility"
+   ],
+   "suggestion": "Rewrite as a vignette, e.g. a surrogate asks for full resuscitation for a patient with very little chance of benefit, and ask for the most appropriate next step. Use four homogeneous actions as options and remove \"all of the above\"."
+  }
+ },
+ "principlismqa-82078": {
+  "hash": "b51a0c57",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:37:06.678Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "BCIs in disorders of consciousness are mainly used to detect covert awareness and enable communication, which makes respecting and restoring patient autonomy (informed decision-making) the central ethical concern."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.55,
+    "reason": "Brain-computer interfaces in disorders of consciousness are mainly used to detect hidden awareness and restore communication, so the key ethical principle is autonomy: letting patients express their own wishes about their care."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A",
+    "D"
+   ],
+   "single_best": 1,
+   "distractors": 3,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette",
+    "opinion-based 'most critical' question with no defensible single answer",
+    "multiple defensible keys",
+    "explanation wrongly says autonomy is irrelevant even though BCIs are used to detect covert awareness and restore communi",
+    "options include justifications that partly cue the answer"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Ranking ethical principles is a matter of opinion: autonomy and non-maleficence are equally or more defensible",
+    "Abstract recall with no patient; not Step 2 CK style",
+    "The explanation misreads what BCIs do in disorders of consciousness (detecting covert awareness and enabling communication)"
+   ],
+   "suggestion": "Rebuild it as a vignette: for example, a patient with a disorder of consciousness answers yes/no questions through a BCI. Ask for a concrete next step, such as checking decision-making capacity or involving the surrogate, with one answer that is clearly best."
   }
  },
  "principlismqa-82254": {
@@ -129234,6 +132900,56 @@
    "suggestion": "Replace with a clinical-research vignette (e.g., a physician wants to enroll their own patients or publish identifiable data) with one clearly best ethical action and homogeneous alternatives."
   }
  },
+ "principlismqa-832": {
+  "hash": "b5fe31a3",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:38:42.294Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "Autonomy respects each patient's own choices across cultural contexts, including the choice to involve family or hand decisions to others, while cultural relativism could excuse harm."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.6,
+    "reason": "Respect for autonomy is the core principle in multicultural care, because it honors each patient's own choices, including choosing to defer to family or follow cultural practices, while cultural relativism is not a principle of bioethics."
+   }
+  ],
+  "rubric": {
+   "key_correct": "unsure",
+   "other_defensible": [
+    "B",
+    "D"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette; abstract recall/opinion question",
+    "'most essential' asks for an opinion, with no single defensible answer",
+    "options carry their own justifications, which act as cues",
+    "cultural relativism is not a principle of the same kind as the four principles (heterogeneous)",
+    "keyed option's wording 'regardless of cultural differences' is ethically problematic",
+    "explanation says autonomy is universal, which ignores the critique that it is Western-centric"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Asks for an opinion ranking of principles with no single correct answer",
+    "No patient vignette, so it does not test applied Step 2 CK ethics",
+    "Key and explanation oversimplify: in cross-cultural care, respecting autonomy includes respecting a patient's choice to defer decisions to family, not applying autonomy 'regardless of culture'"
+   ],
+   "suggestion": "Rewrite as a vignette, for example an older immigrant patient whose family asks that a cancer diagnosis be withheld. Ask for the best next step (ask the patient how much they want to know and who should make decisions), with concrete action options as distractors."
+  }
+ },
  "principlismqa-84973": {
   "hash": "c4ed56d5",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -129280,6 +132996,285 @@
     "Depends on an outside passage; autonomy is also defensible"
    ],
    "suggestion": "Write a clinical vignette, such as allocating a scarce resource among patients, where justice is the issue without being named, and use the four principles as plain one-word options."
+  }
+ },
+ "principlismqa-86928": {
+  "hash": "9a490f8d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:33:45.813Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "In his 1966 NEJM paper, Beecher held that a study is ethical or unethical from the start and that the expected gain must be equal to or greater than the risk to participants."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Beecher held that a study must be ethical from the start, which requires its anticipated gains to equal or exceed the risks to participants; that is option B."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (stem wording repeated verbatim in option C)",
+    "recall trivia without a clinical vignette",
+    "heterogeneous options",
+    "option B is also a genuine Beecher principle",
+    "option A is implausible"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem repeats the key's wording, so the item tests nothing",
+    "Recall of history-of-ethics trivia with no patient; not Step 2 CK style",
+    "Weak, heterogeneous distractors, and B is also Beecher's own principle"
+   ],
+   "suggestion": "Rewrite it as a clinical research scenario, such as an IRB reviewing a trial whose risks outweigh its expected benefits, and ask for the most appropriate action. Use options that are all the same kind of thing, such as different research-ethics requirements, and none that copy the stem's wording."
+  }
+ },
+ "principlismqa-88052": {
+  "hash": "578fcab7",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:33:14.599Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.8,
+    "reason": "Informed consent respects autonomy by making sure a capable, informed patient makes a voluntary choice that reflects their own values; legal protection (A) is secondary, disclosure of \"all possible\" options (B) overstates what is required, and D contradicts consent."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.85,
+    "reason": "Informed consent respects autonomy by making sure the patient's own values guide the decision after they understand the relevant information; the other options misstate what consent is for or how much must be disclosed."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [
+    "B"
+   ],
+   "single_best": 3,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "no clinical vignette",
+    "stem is a topic phrase, not a question",
+    "absolute terms ('guarantees', 'all possible')",
+    "D is implausible",
+    "recall of a definition rather than application"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Abstract recall with no patient scenario or lead-in question; not Step 2 CK style",
+    "Key overstates its point ('guarantees'); B is partly defensible and only ruled out by absolute wording",
+    "Distractors are weak; D is plainly absurd"
+   ],
+   "suggestion": "Write a scenario (e.g., a competent patient refusing recommended surgery after full disclosure) and ask for the most appropriate next step, with homogeneous action-based options that test capacity, disclosure, understanding and voluntariness."
+  }
+ },
+ "principlismqa-88508": {
+  "hash": "bc3ec791",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:36:55.056Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.93,
+    "reason": "Beneficence is the principle of acting to promote the patient's well-being, which is exactly what the question asks about."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "Beneficence is the ethical principle that means acting to promote the patient's well-being, which is exactly what the question asks about."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 3,
+   "explanation": 2,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away",
+    "clang: 'well-being' in stem repeated in key",
+    "recall of a definition without a patient vignette",
+    "options include their own definitions, so distractors are not tempting",
+    "explanation overstates beneficence as the 'primary' principle in home care for older people"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "Stem defines the answer; the key repeats the stem's wording",
+    "Pure recall of a definition with no clinical application",
+    "Explanation's claim that beneficence outranks autonomy in home care is debatable"
+   ],
+   "suggestion": "Write a short case about an older patient at home where principles conflict (e.g. a capable patient refuses a beneficial care package). Ask for the most appropriate action, with options that are actions, not principle names."
+  }
+ },
+ "principlismqa-88588": {
+  "hash": "08a6137f",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:32:01.546Z",
+  "solves": [
+   {
+    "answer": 0,
+    "confidence": 0.8,
+    "reason": "Legal limits on minors' capacity to consent, plus laws restricting gender-affirming care, most directly challenge the minor's autonomy, meaning their ability to make informed decisions about their own treatment."
+   },
+   {
+    "answer": 0,
+    "confidence": 0.8,
+    "reason": "Laws on consent and capacity most directly limit a minor's autonomy, because the minor's choice depends on parental consent and state law."
+   }
+  ],
+  "rubric": {
+   "key_correct": "no",
+   "other_defensible": [
+    "A",
+    "D"
+   ],
+   "single_best": 1,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 2,
+   "explanation": 1,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Depends on an unseen source passage ('the passage highlights...')",
+    "No clinical vignette; abstract opinion-based recall",
+    "Key is arguable: legal restrictions on consent most directly challenge autonomy (minors' capacity and consent), and non-",
+    "Options contain their own definitions, so they read as a definitions list",
+    "Vague stem ('legal concerns' not specified)"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The question only works if you have read a source passage the student never sees",
+    "There is no single defensible answer: autonomy is arguably the principle most challenged by laws on minors' consent",
+    "It has no patient vignette and does not test applied clinical ethics at Step 2 CK level"
+   ],
+   "suggestion": "Rewrite as a vignette: an adolescent with gender dysphoria, the parents disagree, and the state has a specific consent law. Then ask for the most appropriate next step in management (e.g., checking decision-making capacity, getting parental consent or the minor's assent, referring to a multidisciplinary team), with one clearly correct answer that does not depend on any source text."
+  }
+ },
+ "principlismqa-89095": {
+  "hash": "6b871f27",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:37:49.947Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.9,
+    "reason": "The subjective standard fits disclosure to what this particular patient needs to know based on their own values and circumstances, so it best matches the ethical ideal of respecting patient autonomy."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.88,
+    "reason": "The subjective standard requires disclosing what this particular patient needs to know based on their own values and circumstances, which makes it the ethical ideal of patient-centered informed consent."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 2,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away ('patient-specific needs' cues the subjective standard)",
+    "recall question with no patient",
+    "heterogeneous options ('The legal standard' is vague and is not a recognised disclosure standard on its own)",
+    "A and B are near-identical in wording ('reasonable and prudent' vs 'reasonable or prudent'), which tests reading closely"
+   ],
+   "topic": "Bioethics",
+   "verdict": "revise",
+   "reasons": [
+    "The key is correct: the subjective standard is widely described as the ethical ideal for disclosure",
+    "The phrase 'patient-specific needs' in the stem hands over the answer, and the item is pure recall with no patient",
+    "Option D is a vague, heterogeneous filler, and the explanation oversimplifies the law: US states are split between the physician and reasonable-patient standards"
+   ],
+   "suggestion": "Rewrite it as a case: for example, a professional violinist whose job makes a rare risk of hand numbness especially important to her. Ask which disclosure standard would require the physician to mention that risk, and take 'patient-specific' out of the stem. Replace 'legal standard' with a real alternative such as 'therapeutic privilege' or 'the professional community standard', and correct the explanation's claim about the law."
+  }
+ },
+ "principlismqa-89139": {
+  "hash": "6b2100aa",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T11:37:59.262Z",
+  "solves": [
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "The brittle diabetic accepts a lower quality of life now, through a strict regimen, to prevent future complications, which is the classic quality-of-life trade-off."
+   },
+   {
+    "answer": 2,
+    "confidence": 0.95,
+    "reason": "A trade-off means accepting a worse quality of life now, through a strict and burdensome regimen, to prevent complications and protect quality of life later, as in brittle diabetes."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 4,
+   "distractors": 2,
+   "relevance": 1,
+   "accuracy": 4,
+   "explanation": 3,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "vignette gives the answer away (the stem's definition is repeated almost word for word in option C)",
+    "clang/word repetition between stem and key",
+    "no clinical vignette; abstract recall of a definition",
+    "distractors clearly not trade-offs, easily eliminated"
+   ],
+   "topic": "Bioethics",
+   "verdict": "reject",
+   "reasons": [
+    "The stem defines the concept with the same words as the key, so it can be answered without any knowledge",
+    "Recall of a definition with no patient, which is not Step 2 CK application",
+    "Weak distractors; the item would need a full rewrite"
+   ],
+   "suggestion": "Rewrite as a vignette, e.g. a patient weighing an intensive insulin regimen or a burdensome therapy against long-term benefit, and ask for the best counselling or shared-decision step without defining 'trade-off' in the stem."
   }
  },
  "principlismqa-89411": {
