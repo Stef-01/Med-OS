@@ -30,11 +30,16 @@ const count = (xs, f) => xs.reduce((m, x) => { const k = f(x); m[k] = (m[k] || 0
 /* the key is the longest option by characters, with no tie */
 export const keyLongest = keyIsLongest;
 
-export function formatsOf(list, { fits, readSecs, formats, topicOf = q => q.topic || 'No topic' }) {
+/* every topic a question is dealt in: its first and the rest of its topics, as the duel deals them (pup-duel inTopic; a
+   station's question is in each specialty the station names). Counting only the first called Ophthalmology thin while
+   the duel could deal it from Neurology's and Rheumatology's stations too (2026-10-27) */
+const topicsOf = q => [...new Set([q.topic, ...(Array.isArray(q.topics) ? q.topics : [])].filter(Boolean))];
+const countAll = (xs, f) => xs.reduce((m, x) => { for (const k of f(x)) m[k] = (m[k] || 0) + 1; return m; }, {});
+export function formatsOf(list, { fits, readSecs, formats, topicOf = q => (topicsOf(q).length ? topicsOf(q) : ['No topic']) }) {
   const out = {};
   for (const f of formats) {
     const fit = list.filter(q => fits(q, f.secs));
-    const byTopic = count(fit, topicOf), all = count(list, topicOf);
+    const byTopic = countAll(fit, topicOf), all = countAll(list, topicOf);
     const thin = Object.keys(all).filter(t => (byTopic[t] || 0) < THIN).sort();
     out[f.secs] = { name: f.name, fit: fit.length, of: list.length, share: pct(fit.length, list.length), byKind: count(fit, kindOf), byTopic, topics: Object.keys(all).length, thin };
   }
@@ -137,6 +142,7 @@ export function auditMarkdown(a, { date = '' } = {}) {
     if (c) L.push('', `**Years and difficulties** (\`scripts/tag-years.mjs\`): the model set the year of ${c.yearTagged} of ${c.n} and the difficulty of ${c.diffTagged}; the rest use the fallback guess. Where both exist, the guessed year matches the model's in ${c.yearGuessAgrees}% (within a year in ${c.yearGuessWithinOne}%) and the guessed difficulty in ${c.diffGuessAgrees}%: run the tagger after new questions are written. Of the ${c.pooled} pooled questions, ${c.kindUntagged ? `**${c.kindUntagged} are filed clinical by default**` : 'every one has its kind from the tagger'} (\`tag-years.mjs --kinds\`).`);
     L.push('', '## Cues and residual flaws in the duel, by route', '', 'The same checks the pool uses, run over every question the duel can deal, whichever writer made it.', '', '| route | n | key is the longest option | chance | key position | checks firing (share of the route) |', '|---|---|---|---|---|---|');
     for (const [k, c] of Object.entries(a.pack.cues)) L.push(`| ${k} | ${c.n} | ${c.keyLongest}% | ${c.chance}% | ${Object.entries(c.keyAt).sort().map(([p, n]) => `${p} ${n}`).join(', ')} | ${Object.entries(c.checks).slice(0, 4).map(([id, x]) => `${id} ${x.share}%`).join(', ') || 'none'} |`);
+    L.push('', 'Key position is where the writer put the key; no student sees it there: the duel shuffles every question\'s options and Study moves the key to a place set by the question (`mcq/schema.mjs` `displayOrder`). Length cannot be shuffled away, so the longest-key column is the cue that counts.');
     const d = a.pack.duplicates;
     L.push('', `Near-duplicate stems in the duel: ${d.n} pair${d.n === 1 ? '' : 's'}, ${d.across} of them across routes (two writers making the same case).`);
     for (const x of d.top.slice(0, 10)) L.push(`- ${x.a} and ${x.b}: ${x.overlap}%${x.across ? ` (${x.across.join(' / ')})` : ''}`);

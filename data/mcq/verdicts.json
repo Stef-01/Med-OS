@@ -2580,6 +2580,93 @@
    }
   }
  },
+ "ai-mcq-17b80b6d": {
+  "hash": "9d66a7d8",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T17:48:52.131Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "A neck vein wound with the patient upright, then sudden low blood pressure, low oxygen and a mill-wheel murmur, means venous air embolism, which is managed with high-flow oxygen and left-side-down, head-down positioning (Durant's manoeuvre) to trap air in the right ventricle away from the lung outfl"
+   },
+   {
+    "answer": 1,
+    "confidence": 0.95,
+    "reason": "After an open neck vein injury while sitting upright, a mill-wheel murmur with low blood pressure and low oxygen means venous air embolism, so after re-occluding the wound and giving oxygen she should be placed left side down and head down (Durant manoeuvre) to trap air in the right ventricle."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Explanation for E says 'she is talking', but the stem does not state this",
+    "Mill-wheel murmur all but names the diagnosis (acceptable because the item tests management)"
+   ],
+   "topic": "Emergency Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Classic venous air embolism vignette with the correct Durant manoeuvre key",
+    "Distractors are homogeneous next-step options, and right lateral tilt is a fair mirror-image trap",
+    "Only minor inconsistencies between stem and explanation"
+   ],
+   "suggestion": "Add 'she is able to speak in short sentences' to the stem, or remove 'she is talking' from the explanation for E. Optionally note in the explanation that evidence for the Durant manoeuvre is limited, and add CPR lying flat if she arrests and aspiration of air through a central line if one is present."
+  },
+  "second": {
+   "hash": "9d66a7d8",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T17:49:38.643Z",
+   "solves": [
+    {
+     "answer": 1,
+     "confidence": 0.93,
+     "reason": "Venous air embolism from an open neck vein is treated by lying the patient on her left side with her head down (Durant manoeuvre), which traps the air in the right ventricle away from the outflow to the lungs."
+    },
+    {
+     "answer": 1,
+     "confidence": 0.9,
+     "reason": "A neck wound over the jugular vein, breathlessness when upright, low blood pressure, low oxygen and a mill-wheel murmur point to venous air embolism, so once the wound is sealed and she is on 100% oxygen, the next step is left lateral head-down tilt (Durant's manoeuvre)."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 4,
+    "explanation": 4,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Mirror-image option pair (A/B) cues that one of them is the key",
+     "Mill-wheel murmur largely gives the diagnosis away",
+     "Explanation cites facts not in stem ('she is talking') and irrelevant spinal log-roll advice"
+    ],
+    "topic": "Emergency Medicine",
+    "verdict": "accept",
+    "reasons": [
+     "Key (Durant manoeuvre) is correct standard management of venous air embolism",
+     "Clear single best answer with plausible emergency distractors",
+     "Only minor explanation inconsistencies"
+    ],
+    "suggestion": "Remove the log-roll/in-line stabilisation line and the claim that she is talking from the explanation, or add to the stem that she is speaking in full sentences. You could also swap the mirror-image option A for another management step, such as aspirating air via a central venous catheter."
+   }
+  }
+ },
  "ai-mcq-18903f10": {
   "hash": "ce825454",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -5518,6 +5605,92 @@
    "suggestion": "Optionally state in the stem that leads II and aVF show no ST elevation, so the explanation for option A matches the vignette."
   }
  },
+ "ai-mcq-33bd50ae": {
+  "hash": "ab4a8d82",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T17:48:42.021Z",
+  "solves": [
+   {
+    "answer": 4,
+    "confidence": 0.9,
+    "reason": "A complete homonymous hemianopia doesn't meet the visual field standards for driving, even with macular sparing, so he has to stop driving and the licensing authority must be told; waiting a month, driving only in daylight, using wide mirrors or starting anticoagulation won't fix the field loss."
+   },
+   {
+    "answer": 4,
+    "confidence": 0.93,
+    "reason": "A complete homonymous hemianopia fails the legal visual field standard for driving, so he must stop driving and notify the licensing authority; mirrors, daylight-only driving or waiting do not fix the field defect."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Option D is a weak distractor: a single occipital infarct does not usually call for anticoagulation, and it has no real ",
+    "Option E combines two actions"
+   ],
+   "topic": "Neurology",
+   "verdict": "accept",
+   "reasons": [
+    "The key matches the Austroads visual field standard for private licences, and UK DVLA rules agree",
+    "Clearly a single best answer, with a good explanation for each option",
+    "Applied clinical counselling scenario that matters for safety"
+   ],
+   "suggestion": "Consider replacing D with a more plausible option, such as 'Resume after an on-road driving assessment' or 'Drive only on familiar local roads'."
+  },
+  "second": {
+   "hash": "ab4a8d82",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T17:49:34.189Z",
+   "solves": [
+    {
+     "answer": 4,
+     "confidence": 0.93,
+     "reason": "A complete homonymous hemianopia does not meet the legal visual field standard for driving, so he must stop driving and the licensing authority must be notified (he must self-report, or the physician reports where the law requires it); waiting a set time, driving only in daylight, using mirrors or s"
+    },
+    {
+     "answer": 4,
+     "confidence": 0.93,
+     "reason": "A complete homonymous hemianopia fails the legal visual field standard for driving even with macular sparing, so he must stop driving and notify the licensing authority; mirrors, daylight-only driving, anticoagulation or waiting a month do not fix the field defect."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Jurisdiction not stated in stem though explanation relies on Austroads",
+     "Option D is weak (anticoagulation is not usual for a non-cardioembolic stroke and has no bearing on the field defect)"
+    ],
+    "topic": "Neurology",
+    "verdict": "accept",
+    "reasons": [
+     "Key is correct under Austroads and similar standards such as the UK DVLA: a complete homonymous hemianopia fails the private-licence field standard",
+     "Applies fitness-to-drive knowledge to a clinical case with one clearly best answer",
+     "Explanation clearly addresses every distractor"
+    ],
+    "suggestion": "You could name the setting (for example, \"in Australia\") in the stem so the reference to the standard is explicit. You could also swap D for a more plausible option, such as \"Resume after an on-road assessment\"."
+   }
+  }
+ },
  "ai-mcq-33f3cc88": {
   "hash": "be4f1dc1",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -7933,6 +8106,49 @@
     ],
     "suggestion": "Rephrase the lead-in to 'Which of the following best describes her eligibility to perform exposure-prone procedures?' and check the explanation's HBV DNA threshold against the current CDNA text."
    }
+  }
+ },
+ "ai-mcq-47454350": {
+  "hash": "00134f2a",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T17:48:47.533Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "Suspected giant cell arteritis without visual involvement should be treated immediately with oral prednisolone 40–60 mg, and biopsy or ultrasound should follow without delaying treatment."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "Suspected GCA without visual involvement should be treated immediately with high-dose oral glucocorticoids (40–60 mg prednisolone), without waiting for the temporal artery biopsy."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "minor word cues in options ('first' in B, 'alone' in C)",
+    "explanation describes tocilizumab as only for relapsing/refractory disease, but it is also used as an add-on in new-onse"
+   ],
+   "topic": "Rheumatology",
+   "verdict": "accept",
+   "reasons": [
+    "Key correct: GCA without visual involvement needs immediate high-dose oral glucocorticoids",
+    "Clear single best answer; plausible, homogeneous management options",
+    "High-yield Step 2 CK next-step item"
+   ],
+   "suggestion": "Reword the tocilizumab explanation to say it is a steroid-sparing add-on, given with steroids in new-onset or relapsing GCA, but never the only first treatment. Consider removing 'first' and 'alone' from options B and C."
   }
  },
  "ai-mcq-476d535a": {
@@ -19646,6 +19862,92 @@
    }
   }
  },
+ "ai-mcq-ac40e764": {
+  "hash": "97450f9d",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T17:48:43.557Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.97,
+    "reason": "This is dermatitis herpetiformis from biopsy-confirmed celiac disease, and a lifelong gluten-free diet is the definitive long-term treatment for both the skin and gut disease, with dapsone only a short-term bridge for symptoms."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.95,
+    "reason": "Dermatitis herpetiformis is the skin form of celiac disease, which is confirmed here by serology and villous atrophy; a lifelong gluten-free diet is the definitive long-term treatment, and dapsone only gives short-term symptom control."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 3,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 4,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "minimal vignette (no GI symptoms, no skin biopsy/immunofluorescence)",
+    "'long-term' in stem echoes 'lifelong' in key (mild word cue)"
+   ],
+   "topic": "Gastroenterology",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct: a gluten-free diet is the definitive therapy for coeliac disease with dermatitis herpetiformis",
+    "Dapsone is a plausible but clearly worse distractor (it only bridges symptoms)",
+    "Explanation is accurate and covers each option"
+   ],
+   "suggestion": "Optionally add a skin biopsy result (granular IgA in the dermal papillae) and mild GI symptoms to make the vignette richer, and drop 'long-term' from the lead-in to remove the cue toward 'lifelong'."
+  },
+  "second": {
+   "hash": "97450f9d",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T17:49:30.103Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.95,
+     "reason": "This is dermatitis herpetiformis with confirmed celiac disease, and a lifelong gluten-free diet is the definitive long-term treatment for both the skin and the gut disease; dapsone only controls the rash for a short time."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.95,
+     "reason": "This is dermatitis herpetiformis caused by celiac disease. The positive tTG-IgA and villous atrophy confirm it, so the long-term treatment is a lifelong gluten-free diet. Dapsone only helps the skin quickly in the short term."
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 4,
+    "accuracy": 5,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Terse stem with fragment lead-in ('Most appropriate long-term treatment?') rather than a full question",
+     "Low-FODMAP diet is a weak distractor"
+    ],
+    "topic": "Dermatology",
+    "verdict": "accept",
+    "reasons": [
+     "The key is correct: a strict lifelong gluten-free diet is the definitive long-term treatment for dermatitis herpetiformis with coeliac disease",
+     "Dapsone is a strong distractor that tests the difference between a short-term bridge and definitive long-term therapy",
+     "The explanation is accurate and deals with every option"
+    ],
+    "suggestion": "Make the lead-in a full sentence (\"Which of the following is the most appropriate long-term management?\"). You could also add skin biopsy findings (granular IgA in the dermal papillae) and a few vignette details to make the item more realistic."
+   }
+  }
+ },
  "ai-mcq-ac562e1e": {
   "hash": "414130da",
   "judge": "claude-opus-5-5 via the Claude Code CLI",
@@ -23702,6 +24004,94 @@
      "Easy item with some weak distractors, but the content is sound and useful in practice"
     ],
     "suggestion": "To make it harder, take out some of the pregnancy cues (for example, keep only the inconsistent contraception and a vague last period). Also make the MMR birth-year cutoff in the explanation general, or say which country it comes from."
+   }
+  }
+ },
+ "ai-mcq-cc57a3a1": {
+  "hash": "6833a4af",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-27T17:49:10.796Z",
+  "solves": [
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "This is a high-probability case of HIT with thrombosis (platelets down more than 50% on day 8 plus a likely DVT), so all heparin must stop at once and a non-heparin anticoagulant such as fondaparinux should be started before the PF4 result comes back."
+   },
+   {
+    "answer": 3,
+    "confidence": 0.93,
+    "reason": "There is a high pretest probability of HIT (4Ts score about 7: platelets fell more than 50%, onset on day 8, likely new DVT, no other cause), so all heparin should be stopped now without waiting for the assay, and a non-heparin anticoagulant such as fondaparinux started; warfarin alone, platelet tra"
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 5,
+   "accuracy": 4,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Thrombosis not objectively confirmed (no duplex), yet the explanation calls it new thrombosis",
+    "Stem is very terse for a Step 2 CK vignette"
+   ],
+   "topic": "Haematology",
+   "verdict": "accept",
+   "reasons": [
+    "Key matches ASH guidance: stop heparin and start a non-heparin anticoagulant without waiting for the assay",
+    "Distractors are the classic HIT management errors and are homogeneous",
+    "Explanation is accurate and covers every option"
+   ],
+   "suggestion": "Optionally add a duplex ultrasound confirming a left calf DVT and slightly more clinical detail, so the thrombosis criterion is clearly met."
+  },
+  "second": {
+   "hash": "6833a4af",
+   "judge": "claude-opus-5-5 via the Claude Code CLI",
+   "judgeVersion": "judge-1",
+   "at": "2026-10-27T17:49:43.909Z",
+   "solves": [
+    {
+     "answer": 3,
+     "confidence": 0.93,
+     "reason": "A high 4Ts score for HIT with thrombosis means all heparin should be stopped right away and a non-heparin anticoagulant such as fondaparinux started without waiting for the PF4 result."
+    },
+    {
+     "answer": 3,
+     "confidence": 0.93,
+     "reason": "This picture points strongly to heparin-induced thrombocytopenia with thrombosis: it is day 8, platelets have dropped by more than 50%, there is a new clot, and the 4Ts score is high. So all heparin should be stopped right away and a non-heparin anticoagulant like fondaparinux started without waitin"
+    }
+   ],
+   "rubric": {
+    "key_correct": "yes",
+    "other_defensible": [],
+    "single_best": 5,
+    "distractors": 4,
+    "relevance": 5,
+    "accuracy": 4,
+    "explanation": 5,
+    "safety": {
+     "ok": true,
+     "issues": []
+    },
+    "flaws": [
+     "Thrombosis only suspected (swollen calf, no duplex) yet explanation calls it 'new thrombosis' (4Ts gives 1 point, not 2,",
+     "Option D does not specify therapeutic dosing",
+     "Option B is a supportive measure, unlike the other anticoagulant-choice options (mildly heterogeneous)",
+     "Terse lead-in that is not a full sentence"
+    ],
+    "topic": "Haematology",
+    "verdict": "accept",
+    "reasons": [
+     "Key matches ASH 2018 HIT guidance: stop heparin and start a non-heparin anticoagulant before the assay result",
+     "Distractors are classic, plausible errors, and each is correctly refuted",
+     "Applies clinical reasoning (4Ts) to a patient case at Step 2 CK level"
+    ],
+    "suggestion": "Add a duplex ultrasound confirming a left-leg DVT and reword D as 'Stop enoxaparin and start therapeutic-dose fondaparinux' so the option is unambiguous."
    }
   }
  },

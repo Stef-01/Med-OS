@@ -13,7 +13,7 @@ import { assess, select, statusOf, quality, poolItem } from './lib/mcq-select.mj
 import { mergeSubmissions, submissionsFrom, remoteSubmissions } from './lib/mcq-intake.mjs';
 import { writeMcq, toItem, exemplarsFor, stationBrief, blocking, keyLongest, RAPID_SYSTEM, WRITER_SYSTEM, gapJobs, topicStation, writerPrompt, writtenFrom, twinOf, knownOf } from './lib/mcq-generate.mjs';
 import { quotaOf, routeOf, funnelOf, STAGES, closeCalls, secondFor, CLOSE } from './lib/mcq-select.mjs';
-import { funnelRates, auditMarkdown } from './lib/mcq-audit.mjs';
+import { funnelRates, auditMarkdown, formatsOf, THIN } from './lib/mcq-audit.mjs';
 import { retestStats, retestFor, retestKey } from './lib/mcq-retest.mjs';
 import { checkLength } from '../public/js/mcq/flaws.mjs';
 import { fits } from '../public/js/vendor/pup-duel/duel/core.mjs';
@@ -397,4 +397,14 @@ test('the pool on disk is what the candidates make now (node scripts/mcq-pool.mj
     assert.ok(!flawReport(q).blocked, `${q.id} has no blocking flaw`);
     assert.equal(q.eval.verdict, 'pool');
   }
+});
+
+test('audit formats: a question counts in every topic the duel deals it in, its first and the rest of its topics', () => {
+  const q = (id, topic, topics) => ({ id, topic, ...(topics ? { topics } : {}) });
+  const list = [...Array.from({ length: THIN - 1 }, (_, i) => q(`o${i}`, 'Ophthalmology')), q('n1', 'Neurology', ['Neurology', 'Ophthalmology'])];
+  const f = formatsOf(list, { fits: () => true, readSecs: () => 1, formats: [{ secs: 15, name: 'Rapid' }] }).formats[15];
+  assert.equal(f.byTopic.Ophthalmology, THIN, 'the Neurology station question is in Ophthalmology too');
+  assert.equal(f.byTopic.Neurology, 1);
+  assert.ok(!f.thin.includes('Ophthalmology'));
+  assert.equal(f.fit, THIN, 'the question itself is counted once');
 });
