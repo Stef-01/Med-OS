@@ -376,6 +376,15 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await wr.reload({ waitUntil: 'networkidle' }); await wr.waitForSelector('.os[data-ready]'); await wr.waitForTimeout(800);
   ok(await wr.locator('.os-wrap').count() === 0, 'wrapped: once a month, not every open');
 
+  /* a bank question published without an explanation: the one the bank gives it says an AI wrote it (lib/mcq-explain.mjs) */
+  const ex = await phone(320, 640, cfg);
+  await ex.route(/\/duel\/pack\.json/, r => r.fulfill({ contentType: 'application/json', body: JSON.stringify({ schemaVersion: 1, title: 'Bank', questions: [{ id: 'medqa-x', stem: 'A 35-year-old man has itchy, watery eyes and sneezing each spring, with bilateral conjunctival injection. What is the most appropriate treatment?', options: ['Erythromycin ointment', 'Ketotifen eye drops', 'Warm compresses', 'Fluorometholone eye drops'], answer: 1, why: 'Seasonal itch, watery discharge and sneezing are allergic conjunctivitis; a topical antihistamine and mast cell stabiliser such as ketotifen is first line.', whyBy: 'ai', topic: 'Ophthalmology', cat: 'clinical', origin: 'human', source: 'usmle-resource', year: 3, difficulty: 1 }] }) }));
+  await open(ex);
+  await ex.waitForSelector('.os-libgo:not([disabled])'); await ex.click('.os-libgo'); await ex.waitForSelector('.os-libopt');
+  await ex.locator('.os-libopt').first().click(); await ex.waitForSelector('.os-libexp');
+  ok(/Explanation written by AI/.test(await ex.textContent('.os-libexp')), 'study: an explanation AI wrote for a published question says so');
+  await flat(ex, 'AI explanation at 320'); await shot(ex, 'ai-explanation-320');
+
   ok(!errs.length, `library: no page errors${errs.length ? `: ${errs.join(' | ')}` : ''}`);
   await b.close();
 }
