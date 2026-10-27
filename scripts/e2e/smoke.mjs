@@ -784,6 +784,24 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
   await solo.locator('.os-duel .pd-opt').first().click();
   await solo.waitForSelector('.os-duel .pd-why:not([hidden])', { timeout: 25000 });
   ok(true, 'duel: practice against the bot needs no shared record');
+  /* a bank question published without an explanation: after the duel, the review says the one it shows is AI-written */
+  const aiq = n => ({ id: `medqa-e2e-${n}`, stem: `Question ${n}: a 35-year-old man has itchy, watery eyes and sneezing each spring. What is the most appropriate treatment?`, options: ['Erythromycin ointment', 'Ketotifen eye drops', 'Warm compresses', 'Fluorometholone eye drops'], answer: 1, why: 'Seasonal allergic conjunctivitis: a topical antihistamine and mast cell stabiliser is first line.', whyBy: 'ai', topic: 'Ophthalmology', cat: 'clinical', origin: 'human', source: 'usmle-resource', year: 3, difficulty: 1 });
+  const rv = await phone(320, 640, {});
+  await rv.route(/\/duel\/pack\.json/, r => r.fulfill({ contentType: 'application/json', body: JSON.stringify({ schemaVersion: 1, title: 'Bank', cats: [{ id: 'clinical', label: 'Clinical' }], questions: [1, 2, 3].map(aiq) }) }));
+  await rv.click('[data-os="settings"]'); await rv.click('.os-switch[data-game="duel"]'); await rv.keyboard.press('Escape');
+  await rv.click('[data-os="duel"]'); await rv.waitForSelector('.os-duel [data-pd="practice"]');
+  await rv.click('.os-duel [data-pd="practice"]'); await rv.click('.os-duel .pd-sheet [data-pd="send"]');
+  for (let i = 0; i < 6 && !(await rv.locator('.os-duel [data-pd="review"]').count()); i++) {
+    const seen = sel => rv.waitForFunction(s => [...document.querySelectorAll(s)].some(e => e.offsetParent !== null), sel, { timeout: 30000 });
+    await seen('.os-duel .pd-opt:not([disabled]), .os-duel [data-pd="review"]');
+    if (await rv.locator('.os-duel .pd-opt:not([disabled])').count()) await rv.locator('.os-duel .pd-opt:not([disabled])').first().click();
+    await seen('.os-duel .pd-why:not([hidden]), .os-duel [data-pd="review"]');
+    await rv.waitForTimeout(300);
+  }
+  await rv.click('.os-duel [data-pd="review"]'); await rv.waitForSelector('.pd-review .pd-rv');
+  ok(await rv.locator('.pd-review .pd-rv-by').count() === 3 && /Explanation written by AI/.test(await rv.textContent('.pd-review')), 'duel: the review says an explanation was written by AI');
+  ok(await rv.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'duel: the review fits 320 px');
+  await rv.waitForTimeout(400); await rv.screenshot({ path: path.join(SHOTS, 'duel-review-ai-explanation.png') });
   ok(!errs.length, `duel: no page errors${errs.length ? `: ${errs.join(' | ')}` : ''}`);
   console.log(`duel: slowest move ${Math.max(...lags)} ms`);
   await b.close();
