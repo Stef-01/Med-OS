@@ -59,6 +59,7 @@
     "why": "its own metadata says 5,085 come from Quizlet and 235 from Lecturio, 47 from Medbullets: copied from commercial and user sites" },
   { "id": "pubhealthbench", "name": "PubHealthBench (UKHSA)", "what": "8,000+ MCQs from gov.uk public-health guidance, including chemicals, toxicology and radiation",
     "n": 8000, "licence": "Open Government Licence v3.0", "coversContent": true, "url": "https://github.com/UKHSA-collaboration/PubHealthBench",
-    "kind": "open-exam", "verdict": "reject", "why": "the best fit for Occupational/Environmental Medicine, but its data is on Hugging Face only, which this container cannot reach; revisit if a GitHub copy appears" }
+    "kind": "open-exam", "verdict": "reject", "why": "the best fit for Occupational/Environmental Medicine, but its data is on Hugging Face only, which this container cannot reach; revisit if a GitHub copy appears" },
+  { "id": "headqa-other", "name": "HEAD-QA, the other papers (pharmacy, nursing, psychology, biology, chemistry)", "what": "the same file and reuse grant as the medicine paper: about 1,140 questions a paper, 2013 to 2017", "n": 5700, "licence": "Reuse with attribution (Ministerio de Sanidad, Spain)", "coversContent": true, "url": "https://raw.githubusercontent.com/claudiaqw/head-qa-afi/main/data/HEAD_EN/HEAD_EN.json", "kind": "open-exam", "verdict": "reject", "why": "checked 2026-10-27 for physiology and pharmacology questions the pool has few of: the pharmacy paper (FIR) is mostly pharmaceutical chemistry (infrared spectra, eudismic index, xenobiotic metabolism), and the nursing, psychology, biology and chemistry papers are further still from a medical student's exam; the medicine paper stays the import" }
 ]
 }
