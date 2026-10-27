@@ -72,7 +72,9 @@ Container_Boundary(view, "library-view.mjs") {
   Component(tLib, "Library tab", "view", "Your decks and the decks friends share, by specialty then kind, with counts")
   Component(tUp, "Upload tab", "view", "1 Copy the ChatGPT prompt; 2 paste the JSON (or a file); 3 preview with each problem; 4 save to a deck")
   Component(tFr, "Friends tab", "view", "Add by name, incoming and outgoing requests, friends; share a deck with a friend")
-  Component(tSt, "Study tab", "view", "Due cards first, drill-down filter, flip, Again, Hard, Good or Easy")
+}
+Container_Boundary(study, "library-study.mjs") {
+  Component(tSt, "Study tab", "view", "Today, the modes, Custom, the card, Again, Hard, Good or Easy, the exam review, the summary, the keys")
 }
 Container_Boundary(rules, "js/library (pure, tested in node)") {
   Component(prompt, "prompt.mjs", "pure", "The ChatGPT prompt: the JSON shape, the specialties and kinds, the item-writing rules")
