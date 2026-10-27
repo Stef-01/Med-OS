@@ -13,7 +13,7 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 | Official USMLE Step 2 CK samples | 41 | 98.5 | 94 | 2.4 | 41 | 81 | 89 | 92 | 97.6 | 95.1 | 75.6 | 95.1 |
 | QUEST-AI GPT-4 look-alikes | 43 | 99.2 | 94 | 0 | 43 | 52 | 77 | 85 | 81.4 | 69.8 | 30.2 | 69.8 |
 | MedQA Step 1 | 679 | 96.1 | 80 | 9.3 | 0 | – | – | – | – | – | – | – |
-| MMLU clinical knowledge + college medicine | 428 | 73.8 | 56 | 65.4 | 0 | – | – | – | – | – | – | – |
+| MMLU clinical knowledge + college medicine | 428 | 73.8 | 56 | 65.4 | 30 | 48 | 59 | 66 | 90 | 0 | 0 | 0 |
 | MedMCQA dev (Indian PG entrance) | 4091 | 69.5 | 48 | 70.2 | 0 | – | – | – | – | – | – | – |
 | Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 72 | 78 | 81 | 99 | 55.2 | 1.9 | 55.2 |
 | Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 66 | 74 | 77 | 100 | 26.9 | 0 | 0 |
@@ -81,7 +81,7 @@ Flipped: osce-amsa-307 (81 then 78, passed on the first); osce-amsa-375 (75 then
 
 ## 5. The pool as selected
 
-Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":745,"rejected":897,"reserve":627}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":160,"amsa":56}. Topic cap 112. Key positions: 4 options 73/66/60/74 (χ² 1.89); 5 options 96/97/88/93/98 (χ² 0.69).
+Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":745,"rejected":900,"reserve":624}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":160,"amsa":56}. Topic cap 112. Key positions: 4 options 73/66/60/74 (χ² 1.89); 5 options 96/97/88/93/98 (χ² 0.69).
 
 ## 6. The human spot-check
 
