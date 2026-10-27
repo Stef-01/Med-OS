@@ -2,7 +2,7 @@
    revises once on the problems; the validator runs the shape gates over the whole bank. Benchmarks come from the bank
    itself (bankStats): a new station's checklist sits inside the range the existing stations of its kind cover.
    -> [problems] (empty = passes). Tested in scripts/station-gates.test.js. */
-import { allowlistCheck } from '../../public/js/study-kit/safe.mjs';
+import { allowlistCheck, plain } from '../../public/js/study-kit/safe.mjs';
 import { SPECIALTIES, specialtyEmoji } from '../../public/js/study-kit/vocab.mjs';
 import { osceLeaves, CX, KINDS } from '../../public/js/osce/core.mjs';
 import { cleanDemo, cleanObs, chartFor, chartById, zoneOf, escalation } from '../../public/js/osce/obs.mjs';
@@ -43,7 +43,6 @@ export function bankStats(stations) {
   return out;
 }
 
-const plain = h => String(h || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 const HTML_FIELDS = ['stem', 'patient', 'guide', 'explain'];
 
 /* the shape every station in the bank must have */

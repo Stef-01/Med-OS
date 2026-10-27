@@ -13,6 +13,7 @@ import { search, UA } from './sources.mjs';
 import { imageSize, EXT } from './image-size.mjs';
 import { verifyImage, acceptVerdict } from './verify.mjs';
 import { claudeJson } from '../lib/claude.mjs';
+import { plain } from '../../public/js/study-kit/safe.mjs';
 
 export const MAX_BYTES = 4.5 * 1024 * 1024;   /* under the API's 5 MB image limit */
 
@@ -109,7 +110,7 @@ Read the station and decide which images a real examiner would hand the candidat
 Each request must match the station exactly: the same finding, the same side, the same age group. place is "patientScript" when the examiner shows it on request (the usual case), "stem" when the candidate is given it at the start, "explanation" for a teaching image after the station.
 id is short kebab-case (for example "cxr-1"). finding is the radiological finding in plain words (for example "right tension pneumothorax with mediastinal shift"). terms are 1 to 3 short search phrases a radiology library would file it under (for example "tension pneumothorax"). caption tells the examiner when to show it (for example "Chest X-ray: show when the candidate asks for imaging"). alt describes the image without naming the diagnosis.`;
 
-const plainText = h => String(h || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+const plainText = plain;   /* the one HTML-to-text helper (study-kit/safe.mjs) */
 export function planText(st) {
   const check = (st.check || []).flatMap(i => [i.x, ...(i.kids || []).map(k => k.x)]).map(plainText).join('\n');
   return `Station: ${st.title}\nSpecialty: ${(st.specialty || []).join(', ')}\nType: ${(st.type || []).join(', ')}\n\nCandidate instructions:\n${plainText(st.stem)}\n${(st.tasks || []).map(plainText).join('\n')}\n\nExaminer and patient script:\n${plainText(st.patient)}\n\nMarking checklist:\n${check}\n\nExplanation:\n${plainText(st.explain)}`;
