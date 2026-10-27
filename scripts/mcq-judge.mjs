@@ -5,6 +5,8 @@
      node scripts/mcq-judge.mjs --kind user,ai          only these kinds (user, ai, amsa, usmle-resource, open-exam)
      node scripts/mcq-judge.mjs --sample 200 --tag src:medqa   a seeded sample of the candidates with this tag
      node scripts/mcq-judge.mjs --ids osce-amsa-187,u-abc
+     node scripts/mcq-judge.mjs --tag station-derived --redo   review these again though their verdict is current (a change the
+                                                        content hash does not see, such as an explanation written anew)
      node scripts/mcq-judge.mjs --close [5]             a second review for every close call: a judged candidate past the
                                                         gates and within 5 points of its bar (lib/mcq-select.mjs CLOSE)
      node scripts/mcq-judge.mjs --bench <normalised.jsonl> --out <file> [--meta step2&3] [--origin human|ai] [--sample n]
@@ -65,7 +67,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   if (opt('--sample')) items = sample(items, Number(opt('--sample')));
   const verdicts = readVerdicts(out), close = flag('--close');
   const bars = (fs.existsSync(path.join(ROOT, 'data', 'mcq', 'calibration.json')) && JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'mcq', 'calibration.json'), 'utf8')).bars) || DEFAULT_BARS;
-  let todo = close ? closeCalls(items, { verdicts, bars, pts: Number(opt('--close')) || CLOSE }) : items.filter(q => q && Array.isArray(q.options) && !verdictFor(verdicts, q));
+  let todo = close ? closeCalls(items, { verdicts, bars, pts: Number(opt('--close')) || CLOSE }) : items.filter(q => q && Array.isArray(q.options) && (flag('--redo') || !verdictFor(verdicts, q)));
   if (opt('--limit')) todo = todo.slice(0, Number(opt('--limit')));
   console.log(close ? `${todo.length} close calls of ${items.length} questions to review a second time -> ${path.relative(ROOT, out)}` : `${items.length} questions · ${items.length - todo.length} already judged · ${todo.length} to judge -> ${path.relative(ROOT, out) || out}`);
   if (flag('--dry-run') || !todo.length) process.exit(0);

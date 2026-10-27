@@ -59,7 +59,7 @@ test('stationQuestion: the findings as the stem, the differential as the distrac
   assert.deepEqual(q.options, ['The answer', 'Big bad thing', 'Reasonable one', 'Another reasonable']);
   assert.equal(q.answer, 0);
   assert.deepEqual(q.notes, [null, 'No sign of it.', 'Not this.', 'Nope.']);
-  assert.equal(q.why, 'Think of it first.'); assert.equal(q.topic, 'Cardiology'); assert.equal(q.origin, 'ai'); assert.equal(q.station, 's1');
+  assert.equal(q.why, 'The answer fits: crushing pain and a raised troponin. Think of it first.', 'why the key fits, from the stem\'s findings, then the teaching point'); assert.equal(q.topic, 'Cardiology'); assert.equal(q.origin, 'ai'); assert.equal(q.station, 's1');
 });
 
 test('stationQuestion drops an option that repeats the answer, tops up from the specialty, and refuses a stem that names the answer', () => {

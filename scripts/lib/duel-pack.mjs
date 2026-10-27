@@ -61,6 +61,13 @@ const same = (a, b) => { const x = a.toLowerCase(), y = b.toLowerCase(); return 
 
 /* one station's question, or { q: null, why } when it cannot make a fair one. `pool` is every station, for the rare
    differential too short to give three wrong options */
+/* the explanation: why the key fits, from the same findings the stem gives, then the station's first teaching point. It
+   was the teaching point alone (often the management, not the diagnosis), and the review marked station questions down
+   for explanations that did not justify the key (2026-10-27) */
+export const explainKey = (answer, found, point) => {
+  const why = `${answer} fits: ${found.charAt(0).toLowerCase()}${found.slice(1)}`, more = sentence(point);
+  return more ? `${why} ${more}` : why;
+};
 export function stationQuestion(st, pool = []) {
   const ddx = Array.isArray(st?.ddx) ? st.ddx : [];
   const likely = ddx.find(d => d.tier === 'likely');
@@ -95,7 +102,7 @@ export function stationQuestion(st, pool = []) {
   return {
     q: {
       id: `osce-${st.id}`, stem, options: [answer, ...picked.map(p => p.o)], answer: 0,
-      notes: [null, ...picked.map(p => p.note)], why: sentence(st.points?.[0]) || undefined,
+      notes: [null, ...picked.map(p => p.note)], why: explainKey(answer, found, st.points?.[0]),
       topic: st.specialty?.[0] || undefined, topics: topicsOf(st), cat: 'clinical', origin: 'ai', station: st.id
     },
     why: ''
