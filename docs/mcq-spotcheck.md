@@ -2,7 +2,7 @@
 
 Written by `node scripts/mcq-spotcheck.mjs` on 2026-10-27: 40 questions from the standard pool, spread over its kinds. Every one passed the model review and the bar; this is the check a person makes.
 
-For each question, record a call in `data/mcq/spotcheck.json` under `marks`, keyed by its id: `{ "call": "ok", "note": "", "by": "your name" }`. The calls:
+For each question, record a call: `node scripts/mcq-spotcheck.mjs --mark <number> <call> [--note "..."] [--by "your name"]` (or by hand in `data/mcq/spotcheck.json` under `marks`, keyed by its id). The calls:
 
 - `ok`: fine as it is
 - `key`: the key is wrong

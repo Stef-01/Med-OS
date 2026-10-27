@@ -160,6 +160,7 @@ node scripts/tag-years.mjs --kinds                       # each pooled question'
 npm run duel-pack                                        # the duel's questions from the pool
 node scripts/mcq-audit.mjs                               # the set as a whole -> data/mcq/audit.json, docs/mcq-audit.md
 node scripts/mcq-spotcheck.mjs [--n 40]                  # the human check: a fixed sample of the pool to mark -> docs/mcq-spotcheck.md, data/mcq/spotcheck.json
+node scripts/mcq-spotcheck.mjs --mark <n> <call> [--note "..."] [--by name]   # record one call (ok, key, sba, unsafe, unclear, other) on sheet question n
 ```
 
 **Year and difficulty** (2026-10-27): every duel question carries both (`mcq/taxonomy.mjs`); `scripts/tag-years.mjs` asks the model for them, and the pack falls back to `guessYear`/`guessDiff` (`public/js/mcq/year.mjs`) for a question tagged since. The audit measures the fallback against the model: on 2,257 questions the guessed year matched in 68% and was within a year in 99.5%, but the guessed difficulty matched only 45%, worse than always guessing 2 (54%). No simple rule over length, options, lead-in or year beat 55%, so `guessDiff` is now that rule (length alone, 55%), and the tagger runs after every generation pass. Before 2026-10-27, 1,472 of the 2,257 had only the guess. The duel's second layer, the kind, is the tagger's too for a pooled question (`--kinds`): until 2026-10-27 the pack filed every one as clinical, though 42 of the 708 test physiology or anatomy.
