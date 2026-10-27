@@ -17,6 +17,7 @@ import { CATS, gate } from './mcq.mjs';
 import { guessYear, isYear, guessDiff, isDiff } from '../../public/js/mcq/year.mjs';
 import { plain } from '../../public/js/study-kit/safe.mjs';
 import { signature, nearDuplicate } from '../../public/js/mcq/flaws.mjs';
+import { storedFor } from './mcq-explain.mjs';
 
 export const LIMITS = { option: 70, minDistractors: 3 }, LONG = 1.8;
 /* every specialty a station lists, so a player finds it under each (the duel's topics) */
@@ -131,7 +132,9 @@ export const POOL_KINDS = Object.freeze(['clinical', 'physio', 'anatomy']);
 const cut = (s, n, clean = strip) => { const t = clean(s); if (t.length <= n) return t; const c = t.slice(0, n), i = Math.max(c.lastIndexOf('. '), c.lastIndexOf('? ')); return i > n / 3 ? c.slice(0, i + 1) : `${c.slice(0, n - 1).replace(/\s+\S*$/, '')}…`; };
 /* a station's specialties as the duel's topics (the first is its topic), up to the package's six */
 const topicsOfStation = (st, first) => [...new Set([first, ...(Array.isArray(st?.specialty) ? st.specialty : [])].filter(Boolean))].slice(0, 6);
-export function poolQuestion(q, byStation = new Map(), kinds = {}) {
+/* explained: data/mcq/explanations.json (scripts/explain-mcq.mjs): for a question published without an explanation,
+   the AI-written one reviewed for it, marked whyBy "ai" so Study and the duel say who wrote it */
+export function poolQuestion(q, byStation = new Map(), kinds = {}, explained = {}) {
   const stem = q.ask ? `${spaces(q.stem)} ${spaces(q.ask)}` : spaces(q.stem);
   if (stem.length > DUEL.stem) return { q: null, why: `${q.id}: the stem is ${stem.length} characters (the duel shows ${DUEL.stem})` };
   if (q.options.some(o => o.length > DUEL.option)) return { q: null, why: `${q.id}: an option is longer than ${DUEL.option} characters` };
@@ -140,6 +143,8 @@ export function poolQuestion(q, byStation = new Map(), kinds = {}) {
   const out = { id: q.id, stem, options: [...q.options], answer: q.answer };
   const why = q.explanation ? cut(q.explanation, DUEL.why, spaces) : ''; if (why) out.why = why;
   if (notes.some(Boolean)) out.notes = notes;
+  const ex = !why && storedFor(explained, q);
+  if (ex) { out.why = cut(ex.why, DUEL.why, spaces); out.notes = ex.notes.map((n, i) => (i === q.answer || !n ? null : cut(n, DUEL.note, spaces))); out.whyBy = 'ai'; }
   if (q.topic) out.topic = q.topic;
   const st = byStation.get(q.provenance?.generator?.basis?.[0]), topics = st ? topicsOfStation(st, q.topic) : [];
   if (topics.length > 1) out.topics = topics;
@@ -163,10 +168,10 @@ export function repeatOf(q, kept) {
   for (const k of kept) if (nearDuplicate(s, k.sig).dup && keyOverlap(s.key, k.sig.key) >= REPEAT_KEY) return k.id;
   return null;
 }
-export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {}, kinds = {}, hy = [], mxq = [], mxqCredit = '' } = {}) {
+export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {}, kinds = {}, hy = [], mxq = [], mxqCredit = '', explanations = {} } = {}) {
   const list = [...(pool?.questions || [])].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
   const byStation = new Map(stations.map(st => [st.id, st]));
-  for (const p of list) { const { q, why } = poolQuestion(p, byStation, kinds); if (q) questions.push(q); else dropped.push(why); }
+  for (const p of list) { const { q, why } = poolQuestion(p, byStation, kinds, explanations); if (q) questions.push(q); else dropped.push(why); }
   let catN = 0;
   for (const sid of Object.keys(mcq).sort()) {
     const st = byStation.get(sid);

@@ -41,7 +41,7 @@ async function loadBank() {
   if (V.bank) return V.bank;
   try {
     const r = await fetch('./duel/pack.json', { cache: 'no-cache' }); if (!r.ok) throw new Error();
-    V.bank = (await r.json()).questions.map(q => ({ item: { id: q.id, stem: q.stem, options: q.options, answer: q.answer, explanation: q.why || '', why: Array.isArray(q.notes) ? q.notes : [], topic: q.topic || '', cat: q.cat || '', year: q.year || 0, difficulty: q.difficulty || 0, ...(q.credit ? { credit: q.credit } : {}) }, deck: BANK, deckName: 'The bank', owner: '', ownerName: '', key: `b:${q.id}` }));
+    V.bank = (await r.json()).questions.map(q => ({ item: { id: q.id, stem: q.stem, options: q.options, answer: q.answer, explanation: q.why || '', why: Array.isArray(q.notes) ? q.notes : [], topic: q.topic || '', cat: q.cat || '', year: q.year || 0, difficulty: q.difficulty || 0, ...(q.credit ? { credit: q.credit } : {}), ...(q.why && q.whyBy === 'ai' ? { whyBy: 'ai' } : {}) }, deck: BANK, deckName: 'The bank', owner: '', ownerName: '', key: `b:${q.id}` }));
   } catch { V.bank = []; }
   return V.bank;
 }
@@ -219,9 +219,9 @@ function optsHtml(it, ord, picked, shown) {
       return `<button class="os-libopt${st}${xd ? ' os-libopt--x' : ''}${sel ? ' sel' : ''}" data-lib="opt" data-i="${i}"${shown ? ' aria-disabled="true"' : V.st.mode === 'exam' ? ` aria-pressed="${sel}"` : ''}><b>${LET[pos]}</b><span>${esc(o)}</span><span class="os-vh os-libxvh">${xd ? 'crossed out' : ''}</span>${shown && (i === it.answer || i === picked) ? `<span class="os-vh">${i === it.answer ? 'correct answer' : 'your answer'}</span>` : ''}</button>${shown && it.why?.[i] && (i === it.answer || i === picked) ? `<p class="os-libwhy">${esc(it.why[i])}</p>` : ''}`;
     }).join('')}</div>`;
 }
-/* the answer box: right (with the run), or which was right; the explanation; the credit */
+/* the answer box: right (with the run), or which was right; the explanation (and who wrote it, when AI did: lib/mcq-explain.mjs); the credit */
 function expHtml(x, it, ord, picked, run = '') {
-  return `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? `Right${run ? ` ${run}` : ''}` : picked < 0 ? `${V.st.mode === 'exam' ? 'Not answered' : 'Time’s up'}: the answer is ${LET[ord.indexOf(it.answer)]}` : `The answer is ${LET[ord.indexOf(it.answer)]}`}</strong>${it.explanation ? explainHtml(it.explanation) : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>`;
+  return `<div class="os-libexp" role="status"><strong class="${picked === it.answer ? 'ok' : 'no'}">${picked === it.answer ? `Right${run ? ` ${run}` : ''}` : picked < 0 ? `${V.st.mode === 'exam' ? 'Not answered' : 'Time’s up'}: the answer is ${LET[ord.indexOf(it.answer)]}` : `The answer is ${LET[ord.indexOf(it.answer)]}`}</strong>${it.explanation ? explainHtml(it.explanation) : ''}${it.explanation && it.whyBy === 'ai' ? '<p class="os-libcredit">Explanation written by AI; the question and its answer are as published.</p>' : ''}${it.credit ? `<p class="os-libcredit">${esc(it.credit)}</p>` : ''}</div>`;
 }
 /* the day's goal, done: a burst of confetti from the top of the card (springs out, gravity down, fades), a buzz on a
    phone that has one, and a toast. Reduced motion: the toast alone */

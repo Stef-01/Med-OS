@@ -594,6 +594,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           if (q.notes?.[a.choice]) { const n = document.createElement('p'); n.className = 'pd-rv-why'; n.textContent = q.notes[a.choice]; li.append(n); }
         }
         if (q.why) { const w = document.createElement('p'); w.className = 'pd-rv-why'; w.textContent = q.why; li.append(w); }
+        if (q.why && q.whyBy === 'ai') { const t = document.createElement('p'); t.className = 'pd-rv-by'; t.textContent = 'Explanation written by AI'; li.append(t); }
         const who = document.createElement('p'); who.className = 'pd-rv-who';
         for (const [look, ans, name] of [[myLook(), a, 'You'], [S.match?.them?.look, b, S.match?.them?.name || 'Them']]) {
           const w = document.createElement('span');

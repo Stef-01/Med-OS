@@ -39,7 +39,7 @@ export function normQuestion(q) {
   if (new Set(options.map(o => o.toLowerCase())).size !== options.length) return { q: null, why: `${id}: two options alike` };
   if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer >= options.length) return { q: null, why: `${id}: answer out of range` };
   const out = { id, stem, options, answer: q.answer };
-  const why = text(q.why, LIMITS.why); if (why) out.why = why;
+  const why = text(q.why, LIMITS.why); if (why) { out.why = why; if (q.whyBy === 'ai') out.whyBy = 'ai'; }   /* an explanation written by AI for a question that came without one: the review says so */
   if (Array.isArray(q.notes) && q.notes.length === options.length) out.notes = q.notes.map(n => text(n, LIMITS.note) || null);
   const topic = text(q.topic, LIMITS.topic); if (topic) out.topic = topic;
   const topics = [...new Set((Array.isArray(q.topics) ? q.topics : []).map(t => text(t, LIMITS.topic)).filter(Boolean))].slice(0, 6);
