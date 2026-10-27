@@ -7,16 +7,16 @@
    "usmle-resource": 866
   },
   "pool": {
-   "ai": 355,
+   "ai": 361,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
   },
   "status": {
-   "pool": 693,
-   "rejected": 893,
+   "pool": 699,
+   "rejected": 941,
    "reserve": 627,
-   "pending": 872
+   "pending": 818
   },
   "topics": {
    "Endocrinology": 23,
@@ -35,18 +35,18 @@
    "Haematology": 18,
    "Otorhinolaryngology": 13,
    "Vascular Surgery": 9,
-   "Infectious Diseases": 44,
+   "Infectious Diseases": 46,
    "Rheumatology": 24,
-   "Emergency Medicine": 29,
+   "Emergency Medicine": 31,
    "Urology": 10,
    "Professionalism": 11,
    "Respiratory Medicine": 35,
    "Gastrointestinal Surgery": 10,
    "Neurology": 40,
    "Neonatology": 16,
-   "Neurosurgery": 7,
+   "Neurosurgery": 8,
    "General Surgery": 17,
-   "Gynaecology": 22,
+   "Gynaecology": 23,
    "Indigenous Health": 7,
    "General Practice": 14,
    "Addiction Medicine": 3,
@@ -78,17 +78,17 @@
    },
    "5": {
     "counts": [
-     80,
+     84,
      89,
-     78,
-     82,
+     79,
+     83,
      89
     ],
-    "n": 418,
-    "chi2": 1.26
+    "n": 424,
+    "chi2": 0.86
    }
   },
-  "topicCap": 104,
+  "topicCap": 105,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -97,9 +97,9 @@
   "funnel": {
    "ai principlismqa": {
     "n": 871,
-    "pending": 865,
-    "review": 5,
-    "bar": 1
+    "pending": 818,
+    "review": 51,
+    "bar": 2
    },
    "open-exam headqa": {
     "n": 786,
@@ -117,11 +117,10 @@
    },
    "ai rapid": {
     "n": 298,
-    "pool": 245,
+    "pool": 251,
     "review": 3,
     "duplicate": 7,
-    "bar": 36,
-    "pending": 7
+    "bar": 37
    },
    "usmle-resource mmlu": {
     "n": 272,
@@ -3024,11 +3023,10 @@
    "id": "ai-mcq-ab06a95e",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ],
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 91,
    "flaws": [
     "convergence:minor"
    ]
@@ -3113,11 +3111,10 @@
    "id": "ai-mcq-acebe2be",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-adbaa5e3",
@@ -3592,11 +3589,10 @@
    "id": "ai-mcq-c9710d20",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 93
   },
   {
    "id": "ai-mcq-ca714e89",
@@ -3903,11 +3899,10 @@
    "id": "ai-mcq-da8c09e9",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 96
   },
   {
    "id": "ai-mcq-daa6372e",
@@ -4034,11 +4029,12 @@
    "id": "ai-mcq-e58bbfc1",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 76)"
+   ],
+   "quality": 86
   },
   {
    "id": "ai-mcq-e59f8c20",
@@ -4308,11 +4304,10 @@
    "id": "ai-mcq-f06ac9bd",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 98
   },
   {
    "id": "ai-mcq-f0817efd",
@@ -4553,11 +4548,10 @@
    "id": "ai-mcq-fde0027c",
    "kind": "ai",
    "route": "ai rapid",
-   "stage": "pending",
-   "status": "pending",
-   "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
-   ]
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 91
   },
   {
    "id": "headqa-2013-100",
@@ -28930,11 +28924,12 @@
    "id": "principlismqa-1283",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: The stem's wording makes C the only possible match, so it tests reading rather than knowledge"
    ],
+   "quality": 66,
    "flaws": [
     "longest-key:minor",
     "absolute-terms:minor",
@@ -28946,11 +28941,16 @@
    "id": "principlismqa-12839",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (B, C also defensible)",
+    "the reviewer rejected it: Keyed answer (autonomy) is wrong: neonatal decisions use the best-interests standard, and the argument mainly challenges justice/equal worth and beneficence toward the infant"
    ],
+   "quality": 27,
    "flaws": [
     "negative-stem:major",
     "absolute-terms:minor",
@@ -29134,11 +29134,14 @@
    "id": "principlismqa-14299",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer",
+    "the reviewer rejected it: It is a reading-comprehension item tied to a passage the student does not have, not a clinical question"
    ],
+   "quality": 56,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -29718,11 +29721,17 @@
    "id": "principlismqa-19298",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches that the clinician's view of benefit outranks the patient's informed preferences when choosing palliative care. That is paternalistic and goes against shared decision-making in palliative care",
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (A, C also defensible)",
+    "the reviewer rejected it: Two choices can be defended. In palliative care, when both options are reasonable, the patient's informed preference (autonomy) arguably decides."
    ],
+   "quality": 41,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -29892,11 +29901,13 @@
    "id": "principlismqa-19490",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B, D also defensible)",
+    "the reviewer rejected it: No patient scenario creating an ethical conflict; not Step 2 CK style"
    ],
+   "quality": 59,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -30432,11 +30443,12 @@
    "id": "principlismqa-22018",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Stem states the definition of the key, so the item tests nothing"
    ],
+   "quality": 68,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -30489,11 +30501,13 @@
    "id": "principlismqa-22282",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C also defensible)",
+    "the reviewer rejected it: You can only answer it if you have read a passage that is not given, and the key's term 'research worship' is not standard bioethics language"
    ],
+   "quality": 56,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -30719,11 +30733,12 @@
    "id": "principlismqa-24031",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "bar",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "quality 64 is below the AI-written bar of 89 (flaws 74, review 58): vignette, stem-length"
    ],
+   "quality": 64,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -30733,11 +30748,12 @@
    "id": "principlismqa-24070",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: The item is built around one source passage and one local policy, and isn't applied to a patient or a clinical situation"
    ],
+   "quality": 68,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -30877,11 +30893,16 @@
    "id": "principlismqa-24836",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Explanation states autonomy is 'not applicable' to an incapacitated patient. This ignores advance directives and substituted judgment and could lead a student to override a patient's previously expres",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (A, C also defensible)",
+    "the reviewer rejected it: Key is not defensible as single best; autonomy via advance directives/substituted judgment is central in PVS decisions"
    ],
+   "quality": 52,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -30964,11 +30985,12 @@
    "id": "principlismqa-26056",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Pure recall of case names and dates; not applied to a patient, so not Step 2 CK material"
    ],
+   "quality": 67,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -31427,11 +31449,13 @@
    "id": "principlismqa-28206",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C, D also defensible)",
+    "the reviewer rejected it: No patient scenario; not Step 2 CK style"
    ],
+   "quality": 62,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -31659,11 +31683,12 @@
    "id": "principlismqa-2889",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Recall of UK case law with no patient; not Step 2 CK material"
    ],
+   "quality": 67,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -31745,11 +31770,13 @@
    "id": "principlismqa-2902",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C also defensible)",
+    "the reviewer rejected it: Under US standards (Step 2 CK), substituted judgement (C) is the primary surrogate standard, so the key conflicts with the exam's own framework"
    ],
+   "quality": 58,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -32174,11 +32201,13 @@
    "id": "principlismqa-30391",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer",
+    "the reviewer rejected it: The key repeats the stem, so the item tests nothing"
    ],
+   "quality": 60,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -32389,11 +32418,14 @@
    "id": "principlismqa-31161",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: B and C are both defensible: B matches the CIOMS commentary and C matches ICH E11"
    ],
+   "quality": 53,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor",
@@ -32448,11 +32480,15 @@
    "id": "principlismqa-32181",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: The stem asks two questions and the options answer neither of them clearly"
    ],
+   "quality": 41,
    "flaws": [
     "absolute-terms:minor",
     "vignette:major",
@@ -32562,11 +32598,12 @@
    "id": "principlismqa-32943",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Stem wording cues the key directly"
    ],
+   "quality": 65,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -32591,11 +32628,13 @@
    "id": "principlismqa-32989",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)",
+    "the reviewer rejected it: Recall of the wording of a UK statute with no patient; not Step 2 CK material"
    ],
+   "quality": 62,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor",
@@ -32889,11 +32928,13 @@
    "id": "principlismqa-34636",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C also defensible)",
+    "the reviewer rejected it: The stem names the slippery slope, so the answer is given away"
    ],
+   "quality": 62,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -33118,11 +33159,13 @@
    "id": "principlismqa-36407",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)",
+    "the reviewer rejected it: Can't be answered without the source passage it refers to; it reads as a reading-comprehension item"
    ],
+   "quality": 67,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -33473,11 +33516,13 @@
    "id": "principlismqa-38040",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)",
+    "the reviewer rejected it: The answer is stated in the stem itself, so the item tests nothing"
    ],
+   "quality": 59,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -34064,11 +34109,14 @@
    "id": "principlismqa-43884",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (B, D also defensible)",
+    "the reviewer rejected it: Passage-dependent opinion question with no patient or clinical decision"
    ],
+   "quality": 56,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -34261,11 +34309,15 @@
    "id": "principlismqa-45795",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Says physical and psychological care should get 'equal attention and resources', which goes against trauma triage, where life-threatening physical injuries (ABCDE) come first.",
+    "not a single best answer (A also defensible)",
+    "the reviewer rejected it: The keyed answer is not an established ethical obligation and conflicts with trauma prioritization."
    ],
+   "quality": 59,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -34860,11 +34912,14 @@
    "id": "principlismqa-47469",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "unsafe: The key backs breaking loyalty or commitments whenever the physician thinks it gives the 'best outcome'. That supports paternalism and could justify overriding a capable patient's autonomy or confiden",
+    "not a single best answer (D also defensible)",
+    "the reviewer rejected it: There is no patient scenario, so it is not Step 2 CK-style material"
    ],
+   "quality": 59,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor",
@@ -35061,11 +35116,13 @@
    "id": "principlismqa-48066",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (C also defensible)",
+    "the reviewer rejected it: Beneficence and non-maleficence are equally defensible, so there is no single best answer"
    ],
+   "quality": 62,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -35118,11 +35175,13 @@
    "id": "principlismqa-48619",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B, C, D also defensible)",
+    "the reviewer rejected it: The stem already states the answer ('threaten patient autonomy'), so the item tests nothing"
    ],
+   "quality": 51,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -35633,11 +35692,14 @@
    "id": "principlismqa-5157",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer (A also defensible)",
+    "the reviewer rejected it: Key is doubtful: choosing participants by likely adherence is not the main ethical basis for eligibility criteria, and it risks unfair selection."
    ],
+   "quality": 59,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor",
@@ -35887,11 +35949,13 @@
    "id": "principlismqa-54416",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A also defensible)",
+    "the reviewer rejected it: No patient scenario, so it is not Step 2 CK applied ethics"
    ],
+   "quality": 59,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -36070,11 +36134,12 @@
    "id": "principlismqa-55395",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer rejected it: Pure historical/document recall with no patient; not Step 2 CK level"
    ],
+   "quality": 71,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -36308,11 +36373,13 @@
    "id": "principlismqa-58696",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer",
+    "the reviewer rejected it: Stem names the keyed option word for word, so the item tests nothing"
    ],
+   "quality": 59,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -36450,11 +36517,13 @@
    "id": "principlismqa-59987",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D also defensible)",
+    "the reviewer rejected it: C and D can both be defended, and the explanation's line between them is arbitrary"
    ],
+   "quality": 59,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -36592,11 +36661,16 @@
    "id": "principlismqa-61059",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (A, B also defensible)",
+    "the reviewer rejected it: The key rests on a wrong definition of justice. Beneficence, meaning acting in the patient's best interest including her psychosocial needs, fits better"
    ],
+   "quality": 35,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -37047,11 +37121,12 @@
    "id": "principlismqa-65307",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D also defensible)"
    ],
+   "quality": 61,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -37361,11 +37436,13 @@
    "id": "principlismqa-69492",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: Niche recall of a single national (Costa Rican CCSS) regulation; not Step 2 CK material and no patient"
    ],
+   "quality": 65,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -37389,11 +37466,13 @@
    "id": "principlismqa-69602",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (A, C also defensible)",
+    "the reviewer rejected it: It can only be answered from one particular reading of psychoanalytic theory in a passage the student never sees, so it is not Step 2 CK material"
    ],
+   "quality": 59,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -37734,11 +37813,13 @@
    "id": "principlismqa-72098",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: There is no patient scenario, so it does not test applied clinical ethics at Step 2 CK level"
    ],
+   "quality": 65,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -37789,11 +37870,13 @@
    "id": "principlismqa-72288",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D also defensible)",
+    "the reviewer rejected it: Depends on an external case that isn't given, so it can't be answered on its own"
    ],
+   "quality": 67,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -38072,11 +38155,17 @@
    "id": "principlismqa-735",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches that non-maleficence overrides a capable patient's informed choice, which encourages paternalistic refusal of a risky but potentially life-saving procedure",
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (A, B also defensible)",
+    "the reviewer rejected it: Key is wrong: an informed, capable patient's choice of a risky life-saving procedure is governed mainly by respect for autonomy"
    ],
+   "quality": 34,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -38499,11 +38588,15 @@
    "id": "principlismqa-7610",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: Item cannot be answered without the missing passage"
    ],
+   "quality": 45,
    "flaws": [
     "vignette:minor"
    ]
@@ -38526,11 +38619,14 @@
    "id": "principlismqa-7628",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer",
+    "the reviewer rejected it: The key's claim that explicit consent is needed to replace an ethics consultant has no clear support in the AMA Code, which says consent to ethics consultation may be presumed"
    ],
+   "quality": 59,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor",
@@ -38598,11 +38694,17 @@
    "id": "principlismqa-77113",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches that next-of-kin consent is legally required when the deceased has given valid consent. Under the HTA 2004 the deceased's own consent is the appropriate consent, so this misstates the law.",
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (A also defensible)",
+    "the reviewer rejected it: Keyed answer misstates the HTA 2004: next-of-kin consent is not needed when the deceased has consented"
    ],
+   "quality": 44,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor",
@@ -38814,11 +38916,16 @@
    "id": "principlismqa-78001",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "unsafe: Teaches that family or guardian input outranks a valid advance directive, which reverses the accepted surrogate hierarchy and could override the patient's documented wishes.",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (D also defensible)",
+    "the reviewer rejected it: A valid advance directive comes before surrogate decision-makers, so D is at least as correct as B and the key is wrong"
    ],
+   "quality": 46,
    "flaws": [
     "vignette:major",
     "stem-length:minor"
@@ -39238,11 +39345,13 @@
    "id": "principlismqa-81065",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (D, A also defensible)",
+    "the reviewer rejected it: Options A, B and D are all common misunderstandings of autonomy, so the item has no single best answer"
    ],
+   "quality": 59,
    "flaws": [
     "absolute-terms:minor",
     "vignette:minor",
@@ -39499,11 +39608,16 @@
    "id": "principlismqa-82254",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "an AI-written question must be solved to its key both times",
+    "not a single best answer (B, C, D also defensible)",
+    "the reviewer rejected it: Key repeats the stem: responses are already described as anonymized, so 'ensuring anonymization' is circular"
    ],
+   "quality": 41,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -40515,11 +40629,13 @@
    "id": "principlismqa-89411",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: Circular item: the key repeats the stem, so it can be answered by word matching"
    ],
+   "quality": 65,
    "flaws": [
     "vignette:minor",
     "stem-length:minor"
@@ -40529,11 +40645,14 @@
    "id": "principlismqa-89501",
    "kind": "ai",
    "route": "ai principlismqa",
-   "stage": "pending",
-   "status": "pending",
+   "stage": "review",
+   "status": "rejected",
    "reasons": [
-    "waiting for the model review (node scripts/mcq-judge.mjs)"
+    "the reviewer judged the key wrong",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: Keyed principle (truth-telling) is not the principle most challenged; confidentiality vs harm to a third party is"
    ],
+   "quality": 61,
    "flaws": [
     "vignette:major"
    ]

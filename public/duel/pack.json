@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "version": "pool-672-mcq-532-hy-523-mxq-494",
+ "version": "pool-678-mcq-532-hy-523-mxq-494",
  "title": "Standard MCQ pool",
- "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1410 ai, 609 open-exam, 144 usmle-resource, 58 amsa.",
+ "source": "Built by scripts/build-duel-pack.mjs from public/mcq/pool.json and public/duel/mcq/ and data/mcq/high-yield.json and data/mcq/medexpqa.json (MedExpQA, CC BY 4.0, adapted): 1416 ai, 609 open-exam, 144 usmle-resource, 58 amsa.",
  "origin": "mixed",
  "cats": [
   {
@@ -6920,6 +6920,36 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-ab06a95e",
+   "stem": "A 28-year-old man has newly confirmed HIV-1 infection. His CD4 count is 520 cells/µL, viral load 64,000 copies/mL, genotype shows no resistance and eGFR is above 90 mL/min/1.73 m^2. Most appropriate initial regimen?",
+   "options": [
+    "Tenofovir-emtricitabine alone",
+    "Nevirapine plus zidovudine and lamivudine",
+    "Dolutegravir plus tenofovir-emtricitabine",
+    "Ritonavir-boosted lopinavir monotherapy",
+    "Raltegravir plus maraviroc"
+   ],
+   "answer": 2,
+   "why": "ASHM-endorsed guidelines recommend offering ART to everyone with HIV, whatever the CD4 count. The preferred first-line regimen is an integrase inhibitor plus two NRTIs, such as dolutegravir with tenofovir-emtricitabine. His genotype shows no resistance and his kidney function is normal, so tenofovir can be used.",
+   "notes": [
+    "Two NRTIs alone are a PrEP regimen, not treatment, and would not fully suppress the virus, so resistance would likely develop.",
+    "Nevirapine can cause serious liver toxicity in men with CD4 above 400 cells/µL, and zidovudine causes anaemia, so this older regimen is no longer recommended.",
+    null,
+    "Boosted protease inhibitor monotherapy suppresses the virus less reliably than triple therapy and is not a recommended starting regimen.",
+    "This two-drug combination is not a recommended first-line regimen, and maraviroc needs a tropism test because it only works against CCR5-tropic virus."
+   ],
+   "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Sexual Health"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-ab44f24e",
    "stem": "A 23-year-old woman with hay fever has chest tightness and cough beginning minutes after netball training, settling within an hour. Examination and spirometry with bronchodilator testing are normal. Most appropriate next step?",
    "options": [
@@ -7035,6 +7065,37 @@
    "origin": "ai",
    "source": "ai",
    "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-acebe2be",
+   "stem": "A 64-year-old man has sudden tearing chest pain radiating to his back. CT aortogram shows an ascending aortic dissection without pericardial effusion. BP 172/98 mmHg, heart rate 108/min. Which drug should be given first?",
+   "options": [
+    "IV esmolol",
+    "IV glyceryl trinitrate",
+    "IV hydralazine",
+    "Oral aspirin",
+    "IV heparin"
+   ],
+   "answer": 0,
+   "why": "He has a hypertensive, tachycardic type A dissection with no tamponade, so anti-impulse therapy should start while he waits for urgent surgery. An IV beta blocker such as esmolol comes first, aiming for a heart rate of about 60/min and a systolic BP of 100 to 120 mmHg. A vasodilator is added only once beta blockade is in place.",
+   "notes": [
+    null,
+    "Starting a vasodilator before beta blockade causes reflex tachycardia, which increases aortic wall stress and can extend the dissection.",
+    "Hydralazine is a direct vasodilator that causes reflex tachycardia, and it is not used first in acute dissection.",
+    "Antiplatelet therapy is contraindicated in aortic dissection because it raises the risk of bleeding and rupture before surgery.",
+    "Anticoagulation is contraindicated in aortic dissection because it can worsen bleeding into the false lumen and the pericardium."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology",
+    "Cardiothoracic Surgery"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
    "difficulty": 2
   },
   {
@@ -8274,6 +8335,37 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-c9710d20",
+   "stem": "A 66-year-old man has sudden tearing chest pain radiating to his back and a brief blackout. BP is 150/88 mmHg in the left arm, 118/72 mmHg in the right. Most likely cause of the BP difference?",
+   "options": [
+    "Left subclavian flap",
+    "Right subclavian atheroma",
+    "Preductal aortic coarctation",
+    "Innominate artery flap",
+    "Acute aortic regurgitation"
+   ],
+   "answer": 3,
+   "why": "A sudden tearing pain that goes through to the back, with syncope, points to a type A aortic dissection. Here the right arm reads 32 mmHg lower than the left. The flap has most likely spread into the brachiocephalic (innominate) trunk and is cutting off blood flow to the right subclavian artery. An arm-to-arm systolic difference of more than 20 mmHg is a sign that a branch artery is being underperfused (malperfusion).",
+   "notes": [
+    "A flap in the left subclavian artery would lower the pressure in the left arm, but here the left arm reads higher.",
+    "Atheroma narrows an artery slowly over years, so it cannot explain a new arm difference that appeared with this sudden tearing pain.",
+    "Coarctation is present from birth and mainly causes a difference between arm and leg pressures, not a new right-sided drop with tearing pain.",
+    null,
+    "Aortic regurgitation widens the pulse pressure equally in both arms, so it cannot cause a difference between them."
+   ],
+   "topic": "Emergency Medicine",
+   "topics": [
+    "Emergency Medicine",
+    "Cardiology",
+    "Cardiothoracic Surgery"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-ca714e89",
    "stem": "A 49-year-old woman has guarding and shoulder-tip pain 3 hours after hysteroscopy and curettage. After 1 L crystalloid, BP rises from 86/50 to 94/56 mmHg; haemoglobin 95 g/L (pre-operatively 131). Most appropriate next step?",
    "options": [
@@ -9046,6 +9138,36 @@
     "Gastroenterology",
     "Dermatology",
     "General Practice"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 4,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-da8c09e9",
+   "stem": "A 31-year-old man with newly confirmed HIV-1 infection has a CD4 count of 480 cells/µL and osteoporosis on DXA. His doctor plans dolutegravir, abacavir and lamivudine rather than tenofovir. Most appropriate test before starting?",
+   "options": [
+    "HLA-B*5701 typing",
+    "HLA-B*1502 typing",
+    "TPMT enzyme activity",
+    "G6PD enzyme level",
+    "CCR5 tropism assay"
+   ],
+   "answer": 0,
+   "why": "ASHM guidelines say to screen for HLA-B*5701 before starting abacavir. Carriers have a high risk of a hypersensitivity reaction that can be fatal, so a positive result rules the drug out. A negative result makes abacavir a safe choice for a patient who needs to avoid tenofovir because of bone disease.",
+   "notes": [
+    null,
+    "HLA-B*1502 predicts Stevens-Johnson syndrome with carbamazepine in people of Asian ancestry, not abacavir hypersensitivity.",
+    "TPMT activity guides the dose of azathioprine or mercaptopurine and has no role before antiretroviral therapy.",
+    "G6PD deficiency matters for drugs such as dapsone or primaquine, not for this regimen.",
+    "A co-receptor tropism assay is needed only before maraviroc, which is not part of this regimen."
+   ],
+   "topic": "Infectious Diseases",
+   "topics": [
+    "Infectious Diseases",
+    "Sexual Health"
    ],
    "cat": "clinical",
    "origin": "ai",
@@ -9968,6 +10090,37 @@
    "difficulty": 2
   },
   {
+   "id": "ai-mcq-f06ac9bd",
+   "stem": "A 40-year-old woman with polycystic kidney disease has a sudden severe headache. Her GCS is 15 and BP 148/88 mmHg. CT shows subarachnoid blood, and CT angiography shows an anterior communicating artery aneurysm. Which drug should be started now?",
+   "options": [
+    "Oral nimodipine",
+    "IV tranexamic acid",
+    "IV dexamethasone",
+    "IV levetiracetam",
+    "IV labetalol"
+   ],
+   "answer": 0,
+   "why": "This is aneurysmal subarachnoid haemorrhage. eTG recommends starting oral nimodipine 60 mg 4-hourly for 21 days as soon as possible, because it reduces delayed cerebral ischaemia and improves outcome. The patient also needs urgent neurosurgical referral so the aneurysm can be secured.",
+   "notes": [
+    null,
+    "Tranexamic acid lowers the rebleeding rate, but it does not improve functional outcome and it raises the risk of thrombosis, so it is not routine.",
+    "Corticosteroids give no proven benefit in aneurysmal SAH and cause hyperglycaemia.",
+    "Routine seizure prophylaxis is not recommended when she has had no seizure.",
+    "Her BP of 148/88 mmHg is already below the usual target of systolic under 160 mmHg before the aneurysm is secured, so she needs no antihypertensive."
+   ],
+   "topic": "Neurosurgery",
+   "topics": [
+    "Neurosurgery",
+    "Neurology",
+    "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
    "id": "ai-mcq-f0817efd",
    "stem": "A 28-year-old female registrar who has no regular doctor asks you, a fellow junior doctor, to prescribe temazepam so she can sleep between night shifts. Most appropriate response?",
    "options": [
@@ -10371,6 +10524,36 @@
     "Cardiology",
     "Respiratory Medicine",
     "Emergency Medicine"
+   ],
+   "cat": "clinical",
+   "origin": "ai",
+   "source": "ai",
+   "year": 3,
+   "difficulty": 2
+  },
+  {
+   "id": "ai-mcq-fde0027c",
+   "stem": "A 49-year-old woman with BMI 43 kg/m2 and type 2 diabetes has 10 months of irregular, heavy bleeding. Pipelle biopsy shows endometrial hyperplasia without atypia. Main mechanism linking her obesity to this?",
+   "options": [
+    "Adipose aromatisation to oestrone",
+    "Raised sex hormone-binding globulin",
+    "Excess luteal progesterone",
+    "Suppressed ovarian androgens",
+    "Low circulating insulin"
+   ],
+   "answer": 0,
+   "why": "Adipose tissue converts androgens (mainly androstenedione) into oestrone. With anovulation there is no progesterone to oppose it, so the endometrium is driven to hyperplasia and cancer. Hyperinsulinaemia adds to the risk by lowering SHBG and raising IGF-1, so counsel her that losing weight and taking a progestogen reduce her risk.",
+   "notes": [
+    null,
+    "Obesity and hyperinsulinaemia lower SHBG rather than raise it, which leaves more free oestrogen.",
+    "Obesity-related anovulation means there is no luteal progesterone, and that lack is what leaves the oestrogen unopposed.",
+    "Obesity tends to raise androgen levels, which gives more substrate for aromatisation.",
+    "Obesity and type 2 diabetes cause hyperinsulinaemia, and the raised insulin and IGF-1 promote endometrial growth."
+   ],
+   "topic": "Gynaecology",
+   "topics": [
+    "Gynaecology",
+    "Critical Care Medicine"
    ],
    "cat": "clinical",
    "origin": "ai",

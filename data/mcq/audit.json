@@ -1,8 +1,8 @@
 {
  "pool": {
-  "n": 693,
+  "n": 699,
   "byKind": {
-   "ai": 355,
+   "ai": 361,
    "open-exam": 120,
    "usmle-resource": 160,
    "amsa": 58
@@ -10,11 +10,11 @@
   "formats": {
    "15": {
     "name": "Rapid",
-    "fit": 277,
-    "of": 693,
-    "share": 40,
+    "fit": 283,
+    "of": 699,
+    "share": 40.5,
     "byKind": {
-     "ai": 245,
+     "ai": 251,
      "open-exam": 7,
      "amsa": 25
     },
@@ -34,18 +34,18 @@
      "Otorhinolaryngology": 7,
      "Vascular Surgery": 5,
      "Obstetrics": 4,
-     "Emergency Medicine": 15,
+     "Emergency Medicine": 17,
      "Urology": 5,
      "Professionalism": 10,
      "Respiratory Medicine": 19,
      "Gastrointestinal Surgery": 5,
      "Neonatology": 8,
      "Paediatrics": 9,
-     "Neurosurgery": 4,
-     "Infectious Diseases": 9,
+     "Neurosurgery": 5,
+     "Infectious Diseases": 11,
      "Neurology": 11,
      "General Surgery": 4,
-     "Gynaecology": 5,
+     "Gynaecology": 6,
      "Indigenous Health": 7,
      "General Practice": 4,
      "Addiction Medicine": 2,
@@ -75,7 +75,6 @@
      "Haematology",
      "Immunology",
      "Indigenous Health",
-     "Infectious Diseases",
      "Medicolegal",
      "Neonatology",
      "Nephrology",
@@ -102,11 +101,11 @@
    },
    "30": {
     "name": "Standard",
-    "fit": 363,
-    "of": 693,
-    "share": 52.4,
+    "fit": 369,
+    "of": 699,
+    "share": 52.8,
     "byKind": {
-     "ai": 245,
+     "ai": 251,
      "open-exam": 53,
      "usmle-resource": 7,
      "amsa": 58
@@ -127,18 +126,18 @@
      "Otorhinolaryngology": 8,
      "Vascular Surgery": 5,
      "Obstetrics": 7,
-     "Emergency Medicine": 15,
+     "Emergency Medicine": 17,
      "Urology": 7,
      "Professionalism": 10,
      "Respiratory Medicine": 26,
      "Gastrointestinal Surgery": 5,
      "Neonatology": 8,
      "Paediatrics": 13,
-     "Neurosurgery": 5,
-     "Infectious Diseases": 12,
+     "Neurosurgery": 6,
+     "Infectious Diseases": 14,
      "Neurology": 22,
      "General Surgery": 5,
-     "Gynaecology": 8,
+     "Gynaecology": 9,
      "Indigenous Health": 7,
      "General Practice": 5,
      "Addiction Medicine": 2,
@@ -197,11 +196,11 @@
    },
    "90": {
     "name": "Long case",
-    "fit": 688,
-    "of": 693,
+    "fit": 694,
+    "of": 699,
     "share": 99.3,
     "byKind": {
-     "ai": 355,
+     "ai": 361,
      "open-exam": 119,
      "usmle-resource": 156,
      "amsa": 58
@@ -223,18 +222,18 @@
      "Haematology": 18,
      "Otorhinolaryngology": 13,
      "Vascular Surgery": 9,
-     "Infectious Diseases": 43,
+     "Infectious Diseases": 45,
      "Rheumatology": 24,
-     "Emergency Medicine": 29,
+     "Emergency Medicine": 31,
      "Urology": 10,
      "Professionalism": 11,
      "Respiratory Medicine": 35,
      "Gastrointestinal Surgery": 10,
      "Neurology": 40,
      "Neonatology": 16,
-     "Neurosurgery": 7,
+     "Neurosurgery": 8,
      "General Surgery": 17,
-     "Gynaecology": 22,
+     "Gynaecology": 23,
      "Indigenous Health": 7,
      "General Practice": 14,
      "Addiction Medicine": 3,
@@ -278,34 +277,34 @@
    }
   },
   "readSecs": {
-   "median": 18,
+   "median": 17,
    "p90": 45,
    "max": 72
   }
  },
  "cues": {
   "ai": {
-   "n": 355,
-   "keyLongest": 11.3,
+   "n": 361,
+   "keyLongest": 11.1,
    "chance": 20,
    "keyAt": {
-    "D": 69,
-    "A": 72,
+    "D": 70,
+    "A": 76,
     "E": 74,
     "B": 74,
-    "C": 66
+    "C": 67
    },
    "options": {
-    "5": 355
+    "5": 361
    },
    "checks": {
     "vignette": {
      "n": 66,
-     "share": 18.6
+     "share": 18.3
     },
     "absolute-terms": {
      "n": 7,
-     "share": 2
+     "share": 1.9
     },
     "clang": {
      "n": 6,
@@ -315,11 +314,11 @@
      "n": 4,
      "share": 1.1
     },
-    "longest-key": {
-     "n": 1,
-     "share": 0.3
-    },
     "convergence": {
+     "n": 2,
+     "share": 0.6
+    },
+    "longest-key": {
      "n": 1,
      "share": 0.3
     }
@@ -449,10 +448,10 @@
  ],
  "review": {
   "ai": {
-   "judged": 355,
+   "judged": 361,
    "verdict": {
-    "accept": 306,
-    "revise": 49
+    "accept": 311,
+    "revise": 50
    },
    "solvesAgree": 100,
    "median": {
@@ -510,10 +509,10 @@
  "funnel": {
   "ai principlismqa": {
    "n": 871,
-   "pending": 865,
-   "review": 5,
-   "bar": 1,
-   "reviewed": 6,
+   "pending": 818,
+   "review": 51,
+   "bar": 2,
+   "reviewed": 53,
    "passed": 0,
    "admitted": 0
   },
@@ -539,14 +538,13 @@
   },
   "ai rapid": {
    "n": 298,
-   "pool": 245,
+   "pool": 251,
    "review": 3,
    "duplicate": 7,
-   "bar": 36,
-   "pending": 7,
-   "reviewed": 291,
+   "bar": 37,
+   "reviewed": 298,
    "passed": 86.6,
-   "admitted": 82.2
+   "admitted": 84.2
   },
   "usmle-resource mmlu": {
    "n": 272,
@@ -580,15 +578,15 @@
   }
  },
  "pack": {
-  "n": 2221,
+  "n": 2227,
   "bySource": {
-   "ai": 1410,
+   "ai": 1416,
    "open-exam": 609,
    "usmle-resource": 144,
    "amsa": 58
   },
   "byRoute": {
-   "ai pool": 355,
+   "ai pool": 361,
    "open-exam": 609,
    "usmle-resource": 144,
    "amsa": 58,
@@ -598,11 +596,11 @@
   "formats": {
    "15": {
     "name": "Rapid",
-    "fit": 831,
-    "of": 2221,
-    "share": 37.4,
+    "fit": 837,
+    "of": 2227,
+    "share": 37.6,
     "byKind": {
-     "ai": 615,
+     "ai": 621,
      "open-exam": 207,
      "amsa": 9
     },
@@ -622,18 +620,18 @@
      "Otorhinolaryngology": 10,
      "Vascular Surgery": 11,
      "Obstetrics": 25,
-     "Emergency Medicine": 33,
+     "Emergency Medicine": 35,
      "Urology": 10,
      "Professionalism": 10,
      "Respiratory Medicine": 43,
      "Gastrointestinal Surgery": 10,
      "Neonatology": 10,
      "Paediatrics": 41,
-     "Neurosurgery": 9,
-     "Infectious Diseases": 61,
+     "Neurosurgery": 10,
+     "Infectious Diseases": 63,
      "Neurology": 45,
      "General Surgery": 13,
-     "Gynaecology": 18,
+     "Gynaecology": 19,
      "Indigenous Health": 11,
      "General Practice": 15,
      "Addiction Medicine": 10,
@@ -658,18 +656,17 @@
      "Cardiothoracic Surgery",
      "Critical Care Medicine",
      "Geriatrics",
-     "Neurosurgery",
      "Oncology",
      "Sexual Health"
     ]
    },
    "30": {
     "name": "Standard",
-    "fit": 1667,
-    "of": 2221,
+    "fit": 1673,
+    "of": 2227,
     "share": 75.1,
     "byKind": {
-     "ai": 1056,
+     "ai": 1062,
      "open-exam": 546,
      "usmle-resource": 7,
      "amsa": 58
@@ -690,18 +687,18 @@
      "Otorhinolaryngology": 13,
      "Vascular Surgery": 16,
      "Obstetrics": 51,
-     "Emergency Medicine": 59,
+     "Emergency Medicine": 61,
      "Urology": 17,
      "Professionalism": 11,
      "Respiratory Medicine": 121,
      "Gastrointestinal Surgery": 18,
      "Neonatology": 15,
      "Paediatrics": 98,
-     "Neurosurgery": 13,
-     "Infectious Diseases": 94,
+     "Neurosurgery": 14,
+     "Infectious Diseases": 96,
      "Neurology": 129,
      "General Surgery": 23,
-     "Gynaecology": 41,
+     "Gynaecology": 42,
      "Indigenous Health": 13,
      "General Practice": 50,
      "Addiction Medicine": 12,
@@ -730,11 +727,11 @@
    },
    "90": {
     "name": "Long case",
-    "fit": 2220,
-    "of": 2221,
+    "fit": 2226,
+    "of": 2227,
     "share": 100,
     "byKind": {
-     "ai": 1410,
+     "ai": 1416,
      "open-exam": 609,
      "usmle-resource": 143,
      "amsa": 58
@@ -756,18 +753,18 @@
      "Haematology": 78,
      "Otorhinolaryngology": 18,
      "Vascular Surgery": 19,
-     "Infectious Diseases": 127,
+     "Infectious Diseases": 129,
      "Rheumatology": 67,
-     "Emergency Medicine": 84,
+     "Emergency Medicine": 86,
      "Urology": 20,
      "Professionalism": 12,
      "Respiratory Medicine": 167,
      "Gastrointestinal Surgery": 23,
      "Neurology": 183,
      "Neonatology": 23,
-     "Neurosurgery": 15,
+     "Neurosurgery": 16,
      "General Surgery": 34,
-     "Gynaecology": 57,
+     "Gynaecology": 58,
      "Indigenous Health": 13,
      "General Practice": 73,
      "Addiction Medicine": 13,
@@ -800,13 +797,13 @@
   },
   "taxonomy": {
    "source": {
-    "ai": 1410,
+    "ai": 1416,
     "open-exam": 609,
     "usmle-resource": 144,
     "amsa": 58
    },
    "cat": {
-    "clinical": 1577,
+    "clinical": 1583,
     "skills": 150,
     "physio": 337,
     "anatomy": 157
@@ -814,12 +811,12 @@
    "year": {
     "1": 179,
     "2": 377,
-    "3": 911,
-    "4": 754
+    "3": 915,
+    "4": 756
    },
    "difficulty": {
     "1": 422,
-    "2": 1481,
+    "2": 1487,
     "3": 318
    },
    "topic": {
@@ -839,18 +836,18 @@
     "Haematology": 78,
     "Otorhinolaryngology": 18,
     "Vascular Surgery": 19,
-    "Infectious Diseases": 127,
+    "Infectious Diseases": 129,
     "Rheumatology": 67,
-    "Emergency Medicine": 84,
+    "Emergency Medicine": 86,
     "Urology": 20,
     "Professionalism": 12,
     "Respiratory Medicine": 167,
     "Gastrointestinal Surgery": 23,
     "Neurology": 183,
     "Neonatology": 23,
-    "Neurosurgery": 15,
+    "Neurosurgery": 16,
     "General Surgery": 34,
-    "Gynaecology": 57,
+    "Gynaecology": 58,
     "Indigenous Health": 13,
     "General Practice": 73,
     "Addiction Medicine": 13,
@@ -930,31 +927,31 @@
     }
    },
    "ai pool": {
-    "n": 355,
-    "keyLongest": 11.3,
+    "n": 361,
+    "keyLongest": 11.1,
     "chance": 20,
     "keyAt": {
-     "D": 69,
-     "A": 72,
+     "D": 70,
+     "A": 76,
      "E": 74,
      "B": 74,
-     "C": 66
+     "C": 67
     },
     "options": {
-     "5": 355
+     "5": 361
     },
     "checks": {
      "schema": {
-      "n": 355,
+      "n": 361,
       "share": 100
      },
      "vignette": {
-      "n": 227,
-      "share": 63.9
+      "n": 232,
+      "share": 64.3
      },
      "absolute-terms": {
       "n": 7,
-      "share": 2
+      "share": 1.9
      },
      "clang": {
       "n": 6,
@@ -968,11 +965,11 @@
       "n": 4,
       "share": 1.1
      },
-     "longest-key": {
-      "n": 1,
-      "share": 0.3
-     },
      "convergence": {
+      "n": 2,
+      "share": 0.6
+     },
+     "longest-key": {
       "n": 1,
       "share": 0.3
      }

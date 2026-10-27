@@ -17,7 +17,7 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 | MedMCQA dev (Indian PG entrance) | 4091 | 69.5 | 48 | 70.2 | 0 | – | – | – | – | – | – | – |
 | Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 71 | 78 | 81 | 99 | 53.3 | 1.9 | 53.3 |
 | Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 64 | 74 | 80 | 100 | 26.9 | 0 | 0 |
-| Generated (generate-mcq.mjs) | 1302 | 88.3 | 74 | 14.7 | 430 | 85 | 91 | 94 | 98.8 | 97 | 86 | 86 |
+| Generated (generate-mcq.mjs) | 1302 | 88.3 | 74 | 14.7 | 484 | 59 | 90 | 93 | 96.5 | 87.6 | 77.7 | 77.7 |
 | Open exam (HEAD-QA, Spanish MIR) | 786 | 78.2 | 54 | 56.4 | 786 | 57 | 68 | 75 | 97.8 | 27.5 | 4.6 | 27.5 |
 
 **Bars:** base 81, AI-written 89 (the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality). "As selected": the bar and gates each kind meets in the selector (ai: the AI bar and two solves; amsa: the base bar and two solves; the rest: the base bar).
@@ -81,7 +81,7 @@ Flipped: osce-amsa-375 (78 then 81, passed on the second); osce-amsa-379 (78 the
 
 ## 5. The pool as selected
 
-Candidates by kind: {"ai":1328,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":693,"rejected":893,"reserve":627,"pending":872}. In the pool: {"ai":355,"open-exam":120,"usmle-resource":160,"amsa":58}. Topic cap 104. Key positions: 4 options 71/69/61/74 (χ² 1.35); 5 options 80/89/78/82/89 (χ² 1.26).
+Candidates by kind: {"ai":1328,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":699,"rejected":941,"reserve":627,"pending":818}. In the pool: {"ai":361,"open-exam":120,"usmle-resource":160,"amsa":58}. Topic cap 105. Key positions: 4 options 71/69/61/74 (χ² 1.35); 5 options 84/89/79/83/89 (χ² 0.86).
 
 ## Limits
 
