@@ -81,7 +81,7 @@ Flipped: osce-amsa-307 (81 then 78, passed on the first); osce-amsa-375 (75 then
 
 ## 5. The pool as selected
 
-Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":745,"rejected":900,"reserve":624}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":160,"amsa":56}. Topic cap 112. Key positions: 4 options 73/66/60/74 (χ² 1.89); 5 options 96/97/88/93/98 (χ² 0.69).
+Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":745,"rejected":888,"reserve":636}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":160,"amsa":56}. Topic cap 112. Key positions: 4 options 73/66/60/74 (χ² 1.89); 5 options 96/97/88/93/98 (χ² 0.69).
 
 ## 6. The human spot-check
 
