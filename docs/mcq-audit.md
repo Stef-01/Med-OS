@@ -62,7 +62,7 @@ Where each route's candidates stopped (lib/mcq-select.mjs, the stages in order).
 | route | candidates | schema | flaws | pending | review | bar | duplicate | reserve | pool | passed | admitted |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | open-exam headqa | 786 | 0 | 0 | 0 | 133 | 434 | 0 | 99 | 120 | 27.9% | 15.3% |
-| usmle-resource medqa | 594 | 0 | 0 | 0 | 60 | 90 | 0 | 342 | 102 | 74.7% | 17.2% |
+| usmle-resource medqa | 594 | 0 | 0 | 0 | 66 | 84 | 0 | 342 | 102 | 74.7% | 17.2% |
 | ai rapid | 353 | 0 | 0 | 0 | 3 | 42 | 9 | 0 | 299 | 87.3% | 84.7% |
 | usmle-resource mmlu | 272 | 0 | 1 | 0 | 19 | 27 | 0 | 167 | 58 | 83% | 21.3% |
 | ai vignette | 159 | 0 | 0 | 0 | 8 | 25 | 0 | 16 | 110 | 79.2% | 69.2% |
