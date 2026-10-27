@@ -15,9 +15,9 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 | MedQA Step 1 | 679 | 96.1 | 80 | 9.3 | 0 | – | – | – | – | – | – | – |
 | MMLU clinical knowledge + college medicine | 428 | 73.8 | 56 | 65.4 | 0 | – | – | – | – | – | – | – |
 | MedMCQA dev (Indian PG entrance) | 4091 | 69.5 | 48 | 70.2 | 0 | – | – | – | – | – | – | – |
-| Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 71 | 78 | 81 | 99 | 53.3 | 1.9 | 53.3 |
-| Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 64 | 74 | 80 | 100 | 26.9 | 0 | 0 |
-| Generated (generate-mcq.mjs) | 468 | 98.2 | 94 | 0 | 468 | 85 | 91 | 95 | 99.1 | 98.3 | 87.2 | 87.2 |
+| Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 72 | 78 | 81 | 99 | 55.2 | 1.9 | 55.2 |
+| Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 66 | 74 | 77 | 100 | 26.9 | 0 | 0 |
+| Generated (generate-mcq.mjs) | 481 | 98.2 | 94 | 0 | 481 | 85 | 91 | 95 | 99.2 | 98.3 | 87.5 | 87.5 |
 | Open exam (HEAD-QA, Spanish MIR) | 786 | 78.2 | 54 | 56.4 | 786 | 57 | 68 | 75 | 97.8 | 27.5 | 4.6 | 27.5 |
 
 **Bars:** base 81, AI-written 89 (the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality). "As selected": the bar and gates each kind meets in the selector (ai: the AI bar and two solves; amsa: the base bar and two solves; the rest: the base bar).
@@ -35,7 +35,7 @@ Failure rate of each check (% of items):
 | MedMCQA dev (Indian PG entrance) | 0 | 51.8 | 20 | 5.9 | 15.5 | 4.8 | 0 | 0.1 | 3.4 | 0.3 | 1.7 | 98.6 | 89.9 | 0.3 |
 | Station-derived (AMSA) | 0 | 0 | 0 | 0 | 0 | 9.5 | 0 | 0 | 0 | 12.4 | 0 | 15.2 | 0 | 18.1 |
 | Station-derived (AI stations) | 0 | 0 | 0 | 0 | 0 | 11.5 | 0 | 0 | 0 | 11.5 | 0 | 42.3 | 0 | 11.5 |
-| Generated (generate-mcq.mjs) | 0 | 0 | 0 | 0 | 0 | 0.4 | 0 | 0.6 | 2.8 | 3.8 | 0 | 21.6 | 0 | 0.9 |
+| Generated (generate-mcq.mjs) | 0 | 0 | 0 | 0 | 0 | 0.4 | 0 | 0.6 | 2.9 | 4 | 0 | 21.8 | 0 | 0.8 |
 | Open exam (HEAD-QA, Spanish MIR) | 0 | 25.8 | 21 | 0.1 | 12.7 | 5.7 | 0 | 0.3 | 8.1 | 4.7 | 0.5 | 84 | 44.4 | 2.2 |
 
 ## 2. Mutation test: does each check catch the flaw it is for?
@@ -72,20 +72,24 @@ Failure rate of each check (% of items):
 | Kind | Retested | Same verdict (%) | Same key verdict (%) | Same solves (%) | Quality drift mean | Drift p90 | Drift max | Pass first / second | Flips (%) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | ai | 20 | 90 | 100 | 100 | 1.7 | 3 | 8 | 18 / 18 | 0 (0) |
-| amsa | 20 | 90 | 100 | 100 | 2.2 | 3 | 6 | 9 / 10 | 3 (15) |
+| amsa | 20 | 85 | 100 | 100 | 1.6 | 3 | 6 | 10 / 10 | 2 (10) |
 | open-exam | 20 | 80 | 95 | 100 | 1.7 | 3 | 8 | 5 / 5 | 2 (10) |
 | usmle-resource | 20 | 95 | 100 | 100 | 1.7 | 5 | 5 | 17 / 16 | 1 (5) |
-| **all** | 80 | 88.8 | 98.8 | 100 | 1.8 | 5 | 8 | 49 / 49 | 6 (7.5) |
+| **all** | 80 | 87.5 | 98.8 | 100 | 1.7 | 5 | 8 | 50 / 49 | 5 (6.3) |
 
-Flipped: osce-amsa-307 (81 then 78, passed on the first); osce-amsa-375 (78 then 81, passed on the second); osce-amsa-379 (78 then 81, passed on the second); headqa-2015-82 (80 then 82, passed on the second); headqa-2016-92 (84 then 79, passed on the first); mmlu-professional_medicine-097 (82 then 79, passed on the first).
+Flipped: osce-amsa-307 (81 then 78, passed on the first); osce-amsa-375 (75 then 81, passed on the second); headqa-2015-82 (80 then 82, passed on the second); headqa-2016-92 (84 then 79, passed on the first); mmlu-professional_medicine-097 (82 then 79, passed on the first).
 
 ## 5. The pool as selected
 
-Candidates by kind: {"ai":494,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":729,"rejected":895,"reserve":627}. In the pool: {"ai":391,"open-exam":120,"usmle-resource":160,"amsa":58}. Topic cap 110. Key positions: 4 options 71/69/61/74 (χ² 1.35); 5 options 90/94/87/87/96 (χ² 0.74).
+Candidates by kind: {"ai":507,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":740,"rejected":897,"reserve":627}. In the pool: {"ai":404,"open-exam":120,"usmle-resource":160,"amsa":56}. Topic cap 111. Key positions: 4 options 73/66/60/74 (χ² 1.89); 5 options 96/96/88/90/97 (χ² 0.72).
+
+## 6. The human spot-check
+
+Not marked yet: the 40 questions in `docs/mcq-spotcheck.md` wait for a person's calls in `data/mcq/spotcheck.json`. Until then every number above is a model judging.
 
 ## Limits
 
 - The judge is one model family; MedQA and MMLU items may be in its training data, so its solve rate on them is an upper bound.
-- The generated questions are written and reviewed by the same model family, which may favour its own writing: their scores above the official samples' are not proof they are better. The blind solves, the code checks and the higher bar are the guard; a physician spot-check of the generated items in the pool is the next step.
+- The generated questions are written and reviewed by the same model family, which may favour its own writing: their scores above the official samples' are not proof they are better. The blind solves, the code checks and the higher bar are the guard; a person's spot-check of the pool (section 6, scripts/mcq-spotcheck.mjs) is the ground truth.
 - The official sample is small (41 text items), so the bars move by a few points with each item.
 - The physicians' labels cover only the GPT-4 half of QUEST-AI.

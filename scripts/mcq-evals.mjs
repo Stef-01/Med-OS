@@ -34,6 +34,8 @@ import { benchDir } from './import-benchmarks.mjs';
 import { sample } from './mcq-judge.mjs';
 import { claudeAsk } from './lib/ask.mjs';
 import { retestStats, retestFor, retestKey } from './lib/mcq-retest.mjs';
+import { spotResults, CALLS } from './lib/mcq-spotcheck.mjs';
+import { SPOT_FILE } from './mcq-spotcheck.mjs';
 import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -153,7 +155,10 @@ const { stats } = select(cands, { verdicts: poolVerdicts, bars });
 
 /* ---- write */
 const strip = o => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, Object.fromEntries(Object.entries(v).filter(([x]) => !x.startsWith('_')))]));
-const record = { bars, calibration: strip(calib), mutations: mut, quest: questOut, wrongKey: wk, retest: rt, pool: stats };
+/* ---- 6 the human spot-check (scripts/mcq-spotcheck.mjs): what people say of a sample of the pool */
+const spotFile = readJson(SPOT_FILE, { sample: [], marks: {} }), poolNow = readJson(path.join(ROOT, 'public/mcq/pool.json'), { questions: [] }).questions;
+const spot = spotFile.sample.length ? spotResults(spotFile.sample.map(id => poolNow.find(q => q.id === id)).filter(Boolean), spotFile.marks) : null;
+const record = { bars, calibration: strip(calib), mutations: mut, quest: questOut, wrongKey: wk, retest: rt, spot, pool: stats };
 fs.mkdirSync(path.join(ROOT, 'data/mcq'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'data/mcq/calibration.json'), `${JSON.stringify({ note: 'Written by scripts/mcq-evals.mjs. Aggregate numbers only: no official item text.', bars, sets: strip(calib) }, null, 1)}\n`);
 fs.writeFileSync(path.join(ROOT, 'data/mcq/evals.json'), `${JSON.stringify(record, null, 1)}\n`);
@@ -188,6 +193,12 @@ if (rt) {
   if (rt.flipped.length) md.push('', `Flipped: ${rt.flipped.slice(0, 12).map(f => `${f.id} (${f.quality.join(' then ')}, passed on the ${f.passed})`).join('; ')}${rt.flipped.length > 12 ? '; …' : ''}.`);
 } else md.push('Not run yet: `node scripts/mcq-evals.mjs --retest 40` (model calls).');
 md.push('', '## 5. The pool as selected', '', `Candidates by kind: ${JSON.stringify(stats.candidates)}. Decisions: ${JSON.stringify(stats.status)}. In the pool: ${JSON.stringify(stats.pool)}. Topic cap ${stats.topicCap}. Key positions: ${Object.entries(stats.positions).map(([k, v]) => `${k} options ${v.counts.join('/')} (χ² ${v.chi2})`).join('; ')}.`, '');
-md.push('## Limits', '', '- The judge is one model family; MedQA and MMLU items may be in its training data, so its solve rate on them is an upper bound.', '- The generated questions are written and reviewed by the same model family, which may favour its own writing: their scores above the official samples\' are not proof they are better. The blind solves, the code checks and the higher bar are the guard; a physician spot-check of the generated items in the pool is the next step.', '- The official sample is small (41 text items), so the bars move by a few points with each item.', '- The physicians\' labels cover only the GPT-4 half of QUEST-AI.', '');
+md.push('## 6. The human spot-check', '');
+if (spot?.marked) {
+  md.push(`${spot.marked} of the ${spot.sample} sampled pool questions marked by a person (\`docs/mcq-spotcheck.md\`): **${spot.okShare}% fine as they are**, the pool's precision as people judge it.`, '',
+    row('Kind', 'Marked', 'Fine (%)'), row('---', '---:', '---:'), ...Object.entries(spot.byKind).map(([k, v]) => row(k, v.marked, v.okShare)), '',
+    `Problems found: ${Object.entries(spot.problems).map(([c, n]) => `${n} ${CALLS[c] || c}`).join('; ') || 'none'}.${spot.unmarked ? ` ${spot.unmarked} still to mark.` : ''}`, '');
+} else md.push(`Not marked yet: ${spot ? `the ${spot.sample} questions in \`docs/mcq-spotcheck.md\` wait for a person's calls in \`data/mcq/spotcheck.json\`` : 'run `node scripts/mcq-spotcheck.mjs` to draw the sample'}. Until then every number above is a model judging.`, '');
+md.push('## Limits', '', '- The judge is one model family; MedQA and MMLU items may be in its training data, so its solve rate on them is an upper bound.', '- The generated questions are written and reviewed by the same model family, which may favour its own writing: their scores above the official samples\' are not proof they are better. The blind solves, the code checks and the higher bar are the guard; a person\'s spot-check of the pool (section 6, scripts/mcq-spotcheck.mjs) is the ground truth.', '- The official sample is small (41 text items), so the bars move by a few points with each item.', '- The physicians\' labels cover only the GPT-4 half of QUEST-AI.', '');
 fs.writeFileSync(path.join(ROOT, 'docs/mcq-evals.md'), md.join('\n'));
 console.log(`bars ${JSON.stringify(bars)}`); console.log(JSON.stringify(questOut)); console.log(JSON.stringify(Object.fromEntries(Object.entries(mut).map(([k, s]) => [k, s.detection]))));
