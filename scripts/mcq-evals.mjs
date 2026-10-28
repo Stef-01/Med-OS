@@ -38,6 +38,8 @@ import { spotResults, CALLS } from './lib/mcq-spotcheck.mjs';
 import { SPOT_FILE } from './mcq-spotcheck.mjs';
 import { explainStats } from './lib/mcq-explain.mjs';
 import { EXPLAIN_FILE } from './explain-mcq.mjs';
+import { tagRetestStats } from './lib/mcq-tag-retest.mjs';
+import { TAG_RETEST_FILE } from './tag-years.mjs';
 import { cli } from './lib/disk.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -162,7 +164,9 @@ const spotFile = readJson(SPOT_FILE, { sample: [], marks: {} }), poolNow = readJ
 const spot = spotFile.sample.length ? spotResults(spotFile.sample.map(id => poolNow.find(q => q.id === id)).filter(Boolean), spotFile.marks) : null;
 /* ---- 7 explanations written for questions published without one (scripts/explain-mcq.mjs) */
 const exFile = readJson(EXPLAIN_FILE, { items: {}, refused: {} }), explained = explainStats(poolNow, exFile.items, exFile.refused);
-const record = { bars, calibration: strip(calib), mutations: mut, quest: questOut, wrongKey: wk, retest: rt, spot, explained, pool: stats };
+/* ---- 8 the tags, tagged twice (scripts/tag-years.mjs --retest) */
+const tagFile = readJson(TAG_RETEST_FILE, null), tags = tagFile?.rows?.length ? { ...tagRetestStats(tagFile.rows), at: tagFile.at, passes: tagFile.passes || 1 } : null;
+const record = { bars, calibration: strip(calib), mutations: mut, quest: questOut, wrongKey: wk, retest: rt, spot, explained, tags, pool: stats };
 fs.mkdirSync(path.join(ROOT, 'data/mcq'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'data/mcq/calibration.json'), `${JSON.stringify({ note: 'Written by scripts/mcq-evals.mjs. Aggregate numbers only: no official item text.', bars, sets: strip(calib) }, null, 1)}\n`);
 fs.writeFileSync(path.join(ROOT, 'data/mcq/evals.json'), `${JSON.stringify(record, null, 1)}\n`);
@@ -207,6 +211,12 @@ md.push('## 7. Explanations written for published questions', '');
 if (explained.need) md.push(`${explained.need} pooled questions were published with the key only (${Object.entries(explained.byKind).map(([k, v]) => `${k} ${v.need}`).join(', ')}). \`scripts/explain-mcq.mjs\` wrote one with the key given and kept it only when a second review, with the key, found it accurate and consistent: **${explained.kept} have one (${explained.share}%)**; ${explained.missing} do not (${explained.refusedByReview} refused by the review, ${explained.refusedByFormat} by the format checks, the rest not yet written). Study and the duel mark them AI-written. The review is the same model family checking itself; a person's spot-check of the explanations is the next step.`, '',
   ...(explained.reviewReasons.length ? ['What the review still refuses:', '', ...explained.reviewReasons.slice(0, 8).map(r => `- ${r}`), ''] : []));
 else md.push('Every pooled question has its own explanation.', '');
+md.push('## 8. The tags, tagged twice', '');
+if (tags) md.push(`Every question's year, difficulty and (pooled) kind come from the model (\`scripts/tag-years.mjs\`); the duel's 0 to 1 ladder climbs by year and Study filters by all three. \`--retest\` tags a seeded ${tags.n} again from scratch${tags.passes > 1 ? `, as the tagger does (the median of ${tags.passes} passes, each in its own batch order)` : ''}, and compares (${tags.at}):`, '',
+  row('Tag', 'Items', 'Same (%)', 'Within one step (%)', 'Kappa'), row('---', '---:', '---:', '---:', '---:'),
+  row('year (1 to 4)', tags.year.n, tags.year.same, tags.year.withinOne, tags.year.kappa), row('difficulty (1 to 3)', tags.difficulty.n, tags.difficulty.same, tags.difficulty.withinOne, tags.difficulty.kappa), row('kind', tags.kind.n, tags.kind.same, '–', tags.kind.kappa), '',
+  'Difficulty is the soft one: the model judges it partly against the other questions in the batch, so one pass and a differently batched one disagree by a step about a quarter of the time. The tag is the median of several passes for that reason.', '');
+else md.push('Not run yet: `node scripts/tag-years.mjs --retest 80` (model calls).', '');
 md.push('## Limits', '', '- The judge is one model family; MedQA and MMLU items may be in its training data, so its solve rate on them is an upper bound.', '- The generated questions are written and reviewed by the same model family, which may favour its own writing: their scores above the official samples\' are not proof they are better. The blind solves, the code checks and the higher bar are the guard; a person\'s spot-check of the pool (section 6, scripts/mcq-spotcheck.mjs) is the ground truth.', '- The official sample is small (41 text items), so the bars move by a few points with each item.', '- The physicians\' labels cover only the GPT-4 half of QUEST-AI.', '');
 fs.writeFileSync(path.join(ROOT, 'docs/mcq-evals.md'), md.join('\n'));
 console.log(`bars ${JSON.stringify(bars)}`); console.log(JSON.stringify(questOut)); console.log(JSON.stringify(Object.fromEntries(Object.entries(mut).map(([k, s]) => [k, s.detection]))));
