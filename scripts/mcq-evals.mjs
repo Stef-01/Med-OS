@@ -93,7 +93,7 @@ for (const c of Object.values(calib)) if (c._judged.length) {
   const ok = (x, strict) => !judgeGates(x.v, x.q, { strict }).length && !x.r.blocked;
   c.passBase = rate(c._judged.filter(x => ok(x, false) && quality(x.r.score, judgeScore(x.v, x.q)) >= bars.base).length, c._judged.length);
   c.passAi = rate(c._judged.filter(x => ok(x, true) && quality(x.r.score, judgeScore(x.v, x.q)) >= bars.ai).length, c._judged.length);
-  c.passAsSelected = rate(c._judged.filter(x => { const k = x.q.provenance?.kind; return ok(x, k === 'ai' || k === 'amsa') && quality(x.r.score, judgeScore(x.v, x.q)) >= (k === 'ai' ? bars.ai : bars.base); }).length, c._judged.length);
+  c.passAsSelected = rate(c._judged.filter(x => { const k = x.q.provenance?.kind; return ok(x, k === 'ai' || k === 'amsa') && quality(x.r.score, judgeScore(x.v, x.q)) >= (k === 'ai' || k === 'amsa' ? bars.ai : bars.base); }).length, c._judged.length);
 }
 
 /* ---- 2 mutations */
@@ -177,7 +177,7 @@ md.push('# MCQ evals: calibration and the eval of the evals', '', `Written by \`
 md.push('## 1. Calibration on the benchmarks', '', 'Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs` (major 20, minor 6, block 100). Quality: 0.4 × flaw score + 0.6 × the model review\'s score (`scripts/lib/mcq-judge.mjs`), for the items that were reviewed. "Passes" includes the review\'s hard gates (key judged wrong, unsafe, not a single best answer, solved to another answer both times, rejected).', '');
 md.push(row('Set', 'Items', 'Flaw mean', 'Flaw p5', 'Any major (%)', 'Reviewed', 'Quality p5', 'Quality p25', 'Quality median', 'Solved 2/2 (%)', 'Passes base bar (%)', 'Passes AI bar (%)', 'Passes as selected (%)'), row('---', '---:', '---:', '---:', '---:', '---:', '---:', '---:', '---:', '---:', '---:', '---:', '---:'));
 for (const [k, c] of Object.entries(calib)) md.push(row(k, c.n, c.flaw.mean, c.flaw.p5, c.flaw.anyMajor, c.judged, c.quality?.p5, c.quality?.p25, c.quality?.p50, c.solved2, c.passBase, c.passAi, c.passAsSelected));
-md.push('', `**Bars:** base ${bars.base}, AI-written ${bars.ai} (${bars.from}). "As selected": the bar and gates each kind meets in the selector (ai: the AI bar and two solves; amsa: the base bar and two solves; the rest: the base bar).`, '');
+md.push('', `**Bars:** base ${bars.base}, AI-written ${bars.ai} (${bars.from}). "As selected": the bar and gates each kind meets in the selector (ai and amsa: the AI bar and two solves; the rest: the base bar).`, '');
 md.push('Failure rate of each check (% of items):', '', row('Set', ...CHECK_IDS.filter(c => c !== 'explanation')), row('---', ...CHECK_IDS.filter(c => c !== 'explanation').map(() => '---:')));
 for (const [k, c] of Object.entries(calib)) md.push(row(k, ...Object.values(c.checks)));
 md.push('', '## 2. Mutation test: does each check catch the flaw it is for?', '', `${good.length} MedQA Step 2&3 items with no major flaw, each with one flaw injected (\`scripts/lib/mcq-mutate.mjs\`). Detection: the check meant to catch it fires on the mutant. Base rate: the same check fires on the unmutated items (its false-positive rate on good items).`, '');

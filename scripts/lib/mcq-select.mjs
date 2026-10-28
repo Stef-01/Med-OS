@@ -46,10 +46,11 @@ export const TOPIC_SHARE = 0.15;
 export const DEFAULT_BARS = Object.freeze({ base: 70, ai: 80 });
 export const quality = (flaw, judge) => Math.round(0.4 * flaw + 0.6 * judge);
 /* AI-written text (ai, and amsa: an AMSA case in an AI-written station) must be solved to its key both times; the higher
-   quality bar is for kind ai, a model writing freely. An amsa question is made in code from the station's own
-   differential, so it is held to the base bar (docs/mcq.md) */
+   quality bar is for both. An amsa question is made in code from an AI-written station's differential; it was held to
+   the base bar until 2026-10-28, when the founder's default took the AI bar: the code-built route passed 53 to 55%
+   against 77 to 88% for questions the model writes from the same AMSA stations, and flipped most on a re-review */
 const aiWritten = q => q.provenance?.kind === 'ai' || q.provenance?.kind === 'amsa';
-const aiBar = q => q.provenance?.kind === 'ai';
+const aiBar = aiWritten;
 
 /* a close call's second review, kept inside its first verdict (verdict.second) for the same text */
 export const CLOSE = 5;

@@ -10,15 +10,15 @@
    "ai": 409,
    "open-exam": 120,
    "usmle-resource": 160,
-   "amsa": 56
+   "amsa": 2
   },
   "status": {
-   "pool": 745,
-   "rejected": 888,
+   "pool": 691,
+   "rejected": 942,
    "reserve": 636
   },
   "topics": {
-   "Endocrinology": 23,
+   "Endocrinology": 22,
    "Bioethics": 12,
    "OMS/Dental": 8,
    "Breast/Endocrine Surgery": 9,
@@ -26,25 +26,25 @@
    "Obstetrics": 17,
    "Pathology": 8,
    "Trauma Surgery": 16,
-   "Gastroenterology": 66,
+   "Gastroenterology": 47,
    "Sexual Health": 15,
    "Cardiothoracic Surgery": 10,
    "Occupational/Environmental Medicine": 12,
-   "Cardiology": 58,
+   "Cardiology": 48,
    "Palliative Care": 8,
    "Medicolegal": 9,
    "Haematology": 18,
    "Otorhinolaryngology": 13,
    "Vascular Surgery": 9,
    "Infectious Diseases": 46,
-   "Respiratory Medicine": 36,
-   "Rheumatology": 25,
+   "Respiratory Medicine": 28,
+   "Rheumatology": 23,
    "Emergency Medicine": 32,
    "Urology": 11,
    "Professionalism": 11,
    "Gastrointestinal Surgery": 10,
    "Oncology": 5,
-   "Neurology": 41,
+   "Neurology": 28,
    "Neonatology": 16,
    "Addiction Medicine": 6,
    "Neurosurgery": 10,
@@ -56,7 +56,7 @@
    "Immunology": 10,
    "Critical Care Medicine": 7,
    "Plastic Surgery": 7,
-   "Dermatology": 4,
+   "Dermatology": 3,
    "Ophthalmology": 3,
    "Nephrology": 11,
    "Orthopaedics": 10,
@@ -67,13 +67,13 @@
   "positions": {
    "4": {
     "counts": [
-     73,
-     66,
-     60,
-     74
+     55,
+     53,
+     49,
+     62
     ],
-    "n": 273,
-    "chi2": 1.89
+    "n": 219,
+    "chi2": 1.62
    },
    "5": {
     "counts": [
@@ -87,7 +87,7 @@
     "chi2": 0.69
    }
   },
-  "topicCap": 112,
+  "topicCap": 104,
   "bars": {
    "base": 81,
    "ai": 89,
@@ -132,8 +132,8 @@
    },
    "amsa": {
     "n": 105,
-    "bar": 36,
-    "pool": 56,
+    "bar": 90,
+    "pool": 2,
     "review": 13
    }
   },
@@ -27860,7 +27860,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 79 is below the base bar of 81 (flaws 88, review 73): clang, vignette"
+    "quality 79 is below the AI-written bar of 89 (flaws 88, review 73): clang, vignette"
    ],
    "quality": 79,
    "flaws": [
@@ -27875,7 +27875,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 82, review 76): longest-key, clang, vignette"
+    "quality 78 is below the AI-written bar of 89 (flaws 82, review 76): longest-key, clang, vignette"
    ],
    "quality": 78,
    "flaws": [
@@ -27888,9 +27888,11 @@
    "id": "osce-amsa-189",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 94, review 77): longest-key"
+   ],
    "quality": 84,
    "flaws": [
     "longest-key:minor"
@@ -27900,9 +27902,11 @@
    "id": "osce-amsa-190",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 88 is below the AI-written bar of 89 (flaws 100, review 80)"
+   ],
    "quality": 88
   },
   {
@@ -27912,7 +27916,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 100, review 63)"
+    "quality 78 is below the AI-written bar of 89 (flaws 100, review 63)"
    ],
    "quality": 78
   },
@@ -27920,18 +27924,22 @@
    "id": "osce-amsa-195",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 100, review 71)"
+   ],
    "quality": 83
   },
   {
    "id": "osce-amsa-196",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 76)"
+   ],
    "quality": 86
   },
   {
@@ -27941,7 +27949,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 73 is below the base bar of 81 (flaws 80, review 68): clang"
+    "quality 73 is below the AI-written bar of 89 (flaws 80, review 68): clang"
    ],
    "quality": 73,
    "flaws": [
@@ -27952,9 +27960,11 @@
    "id": "osce-amsa-199",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 94, review 76): units"
+   ],
    "quality": 83,
    "flaws": [
     "units:minor"
@@ -27967,7 +27977,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+    "quality 80 is below the AI-written bar of 89 (flaws 100, review 66)"
    ],
    "quality": 80
   },
@@ -27978,7 +27988,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 94, review 65): longest-key"
+    "quality 77 is below the AI-written bar of 89 (flaws 94, review 65): longest-key"
    ],
    "quality": 77,
    "flaws": [
@@ -27992,7 +28002,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 69 is below the base bar of 81 (flaws 80, review 61): clang"
+    "quality 69 is below the AI-written bar of 89 (flaws 80, review 61): clang"
    ],
    "quality": 69,
    "flaws": [
@@ -28003,9 +28013,11 @@
    "id": "osce-amsa-203",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 81 is below the AI-written bar of 89 (flaws 94, review 73): units"
+   ],
    "quality": 81,
    "flaws": [
     "units:minor"
@@ -28024,36 +28036,44 @@
    "id": "osce-amsa-212",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 74)"
+   ],
    "quality": 84
   },
   {
    "id": "osce-amsa-213",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 74)"
+   ],
    "quality": 84
   },
   {
    "id": "osce-amsa-214",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 88 is below the AI-written bar of 89 (flaws 100, review 80)"
+   ],
    "quality": 88
   },
   {
    "id": "osce-amsa-215",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 82 is below the AI-written bar of 89 (flaws 94, review 74): units"
+   ],
    "quality": 82,
    "flaws": [
     "units:minor"
@@ -28063,18 +28083,22 @@
    "id": "osce-amsa-216",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 100, review 71)"
+   ],
    "quality": 83
   },
   {
    "id": "osce-amsa-217",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 76)"
+   ],
    "quality": 86
   },
   {
@@ -28084,7 +28108,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 100, review 64)"
+    "quality 78 is below the AI-written bar of 89 (flaws 100, review 64)"
    ],
    "quality": 78
   },
@@ -28092,9 +28116,11 @@
    "id": "osce-amsa-219",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 88 is below the AI-written bar of 89 (flaws 100, review 80)"
+   ],
    "quality": 88
   },
   {
@@ -28115,7 +28141,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 100, review 62)"
+    "quality 77 is below the AI-written bar of 89 (flaws 100, review 62)"
    ],
    "quality": 77
   },
@@ -28123,27 +28149,33 @@
    "id": "osce-amsa-222",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 85 is below the AI-written bar of 89 (flaws 100, review 75)"
+   ],
    "quality": 85
   },
   {
    "id": "osce-amsa-223",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 73)"
+   ],
    "quality": 84
   },
   {
    "id": "osce-amsa-246",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 94, review 78): units"
+   ],
    "quality": 84,
    "flaws": [
     "units:minor"
@@ -28156,7 +28188,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+    "quality 80 is below the AI-written bar of 89 (flaws 100, review 66)"
    ],
    "quality": 80
   },
@@ -28164,9 +28196,11 @@
    "id": "osce-amsa-248",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 73)"
+   ],
    "quality": 84
   },
   {
@@ -28176,7 +28210,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 100, review 61)"
+    "quality 77 is below the AI-written bar of 89 (flaws 100, review 61)"
    ],
    "quality": 77
   },
@@ -28187,7 +28221,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 79 is below the base bar of 81 (flaws 100, review 65)"
+    "quality 79 is below the AI-written bar of 89 (flaws 100, review 65)"
    ],
    "quality": 79
   },
@@ -28206,9 +28240,11 @@
    "id": "osce-amsa-256",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 74)"
+   ],
    "quality": 84
   },
   {
@@ -28218,7 +28254,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 100, review 67)"
+    "quality 80 is below the AI-written bar of 89 (flaws 100, review 67)"
    ],
    "quality": 80
   },
@@ -28226,9 +28262,11 @@
    "id": "osce-amsa-258",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 94, review 75): longest-key"
+   ],
    "quality": 83,
    "flaws": [
     "longest-key:minor"
@@ -28238,27 +28276,33 @@
    "id": "osce-amsa-263",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 100, review 72)"
+   ],
    "quality": 83
   },
   {
    "id": "osce-amsa-264",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 76)"
+   ],
    "quality": 86
   },
   {
    "id": "osce-amsa-265",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 94, review 76): vignette"
+   ],
    "quality": 83,
    "flaws": [
     "vignette:minor"
@@ -28271,7 +28315,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 94, review 66): units"
+    "quality 77 is below the AI-written bar of 89 (flaws 94, review 66): units"
    ],
    "quality": 77,
    "flaws": [
@@ -28291,9 +28335,11 @@
    "id": "osce-amsa-271",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 81 is below the AI-written bar of 89 (flaws 88, review 76): clang, vignette"
+   ],
    "quality": 81,
    "flaws": [
     "clang:minor",
@@ -28307,7 +28353,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 88, review 71): longest-key, units"
+    "quality 78 is below the AI-written bar of 89 (flaws 88, review 71): longest-key, units"
    ],
    "quality": 78,
    "flaws": [
@@ -28335,18 +28381,22 @@
    "id": "osce-amsa-303",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 100, review 71)"
+   ],
    "quality": 83
   },
   {
    "id": "osce-amsa-307",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 94, review 75): longest-key"
+   ],
    "quality": 83,
    "flaws": [
     "longest-key:minor"
@@ -28378,7 +28428,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+    "quality 80 is below the AI-written bar of 89 (flaws 100, review 66)"
    ],
    "quality": 80
   },
@@ -28389,7 +28439,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 94, review 67): units"
+    "quality 78 is below the AI-written bar of 89 (flaws 94, review 67): units"
    ],
    "quality": 78,
    "flaws": [
@@ -28400,18 +28450,22 @@
    "id": "osce-amsa-327",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 73)"
+   ],
    "quality": 84
   },
   {
    "id": "osce-amsa-328",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 85 is below the AI-written bar of 89 (flaws 100, review 75)"
+   ],
    "quality": 85
   },
   {
@@ -28421,7 +28475,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+    "quality 80 is below the AI-written bar of 89 (flaws 100, review 66)"
    ],
    "quality": 80
   },
@@ -28429,36 +28483,44 @@
    "id": "osce-amsa-355",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 100, review 72)"
+   ],
    "quality": 83
   },
   {
    "id": "osce-amsa-357",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 81 is below the AI-written bar of 89 (flaws 100, review 68)"
+   ],
    "quality": 81
   },
   {
    "id": "osce-amsa-361",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 73)"
+   ],
    "quality": 84
   },
   {
    "id": "osce-amsa-374",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 81 is below the AI-written bar of 89 (flaws 88, review 76): longest-key, vignette"
+   ],
    "quality": 81,
    "flaws": [
     "longest-key:minor",
@@ -28472,7 +28534,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 75 is below the base bar of 81 (flaws 100, review 58)"
+    "quality 75 is below the AI-written bar of 89 (flaws 100, review 58)"
    ],
    "quality": 75
   },
@@ -28508,9 +28570,11 @@
    "id": "osce-amsa-379",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 81 is below the AI-written bar of 89 (flaws 100, review 68)"
+   ],
    "quality": 81
   },
   {
@@ -28520,7 +28584,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 75 is below the base bar of 81 (flaws 94, review 63): units"
+    "quality 75 is below the AI-written bar of 89 (flaws 94, review 63): units"
    ],
    "quality": 75,
    "flaws": [
@@ -28531,9 +28595,11 @@
    "id": "osce-amsa-382",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 88 is below the AI-written bar of 89 (flaws 94, review 84): clang"
+   ],
    "quality": 88,
    "flaws": [
     "clang:minor"
@@ -28546,7 +28612,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 82, review 75): longest-key, clang, vignette"
+    "quality 78 is below the AI-written bar of 89 (flaws 82, review 75): longest-key, clang, vignette"
    ],
    "quality": 78,
    "flaws": [
@@ -28559,9 +28625,11 @@
    "id": "osce-amsa-411",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 100, review 71)"
+   ],
    "quality": 83
   },
   {
@@ -28571,7 +28639,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 74 is below the base bar of 81 (flaws 94, review 61): units"
+    "quality 74 is below the AI-written bar of 89 (flaws 94, review 61): units"
    ],
    "quality": 74,
    "flaws": [
@@ -28585,7 +28653,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 79 is below the base bar of 81 (flaws 100, review 65)"
+    "quality 79 is below the AI-written bar of 89 (flaws 100, review 65)"
    ],
    "quality": 79
   },
@@ -28593,9 +28661,11 @@
    "id": "osce-amsa-414",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 76)"
+   ],
    "quality": 86
   },
   {
@@ -28605,7 +28675,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 100, review 66)"
+    "quality 80 is below the AI-written bar of 89 (flaws 100, review 66)"
    ],
    "quality": 80
   },
@@ -28613,18 +28683,22 @@
    "id": "osce-amsa-416",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 76)"
+   ],
    "quality": 86
   },
   {
    "id": "osce-amsa-417",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 76)"
+   ],
    "quality": 86
   },
   {
@@ -28648,7 +28722,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 79 is below the base bar of 81 (flaws 94, review 69): vignette"
+    "quality 79 is below the AI-written bar of 89 (flaws 94, review 69): vignette"
    ],
    "quality": 79,
    "flaws": [
@@ -28659,18 +28733,22 @@
    "id": "osce-amsa-425",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 74)"
+   ],
    "quality": 84
   },
   {
    "id": "osce-amsa-429",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 94, review 76): vignette"
+   ],
    "quality": 83,
    "flaws": [
     "vignette:minor"
@@ -28683,7 +28761,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 75 is below the base bar of 81 (flaws 94, review 63): clang"
+    "quality 75 is below the AI-written bar of 89 (flaws 94, review 63): clang"
    ],
    "quality": 75,
    "flaws": [
@@ -28705,27 +28783,33 @@
    "id": "osce-amsa-436",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 87 is below the AI-written bar of 89 (flaws 100, review 79)"
+   ],
    "quality": 87
   },
   {
    "id": "osce-amsa-438",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 82 is below the AI-written bar of 89 (flaws 100, review 70)"
+   ],
    "quality": 82
   },
   {
    "id": "osce-amsa-475",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 81 is below the AI-written bar of 89 (flaws 100, review 69)"
+   ],
    "quality": 81
   },
   {
@@ -28735,7 +28819,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 79 is below the base bar of 81 (flaws 88, review 73): longest-key, units"
+    "quality 79 is below the AI-written bar of 89 (flaws 88, review 73): longest-key, units"
    ],
    "quality": 79,
    "flaws": [
@@ -28747,9 +28831,11 @@
    "id": "osce-amsa-477",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 73)"
+   ],
    "quality": 84
   },
   {
@@ -28759,7 +28845,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 75 is below the base bar of 81 (flaws 94, review 63): vignette"
+    "quality 75 is below the AI-written bar of 89 (flaws 94, review 63): vignette"
    ],
    "quality": 75,
    "flaws": [
@@ -28781,9 +28867,11 @@
    "id": "osce-amsa-582",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 81 is below the AI-written bar of 89 (flaws 100, review 69)"
+   ],
    "quality": 81
   },
   {
@@ -28793,7 +28881,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 78 is below the base bar of 81 (flaws 100, review 63)"
+    "quality 78 is below the AI-written bar of 89 (flaws 100, review 63)"
    ],
    "quality": 78
   },
@@ -28804,7 +28892,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 76 is below the base bar of 81 (flaws 88, review 68): clang, units"
+    "quality 76 is below the AI-written bar of 89 (flaws 88, review 68): clang, units"
    ],
    "quality": 76,
    "flaws": [
@@ -28835,7 +28923,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 75 is below the base bar of 81 (flaws 88, review 66): clang, units"
+    "quality 75 is below the AI-written bar of 89 (flaws 88, review 66): clang, units"
    ],
    "quality": 75,
    "flaws": [
@@ -28850,7 +28938,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 94, review 71): clang"
+    "quality 80 is below the AI-written bar of 89 (flaws 94, review 71): clang"
    ],
    "quality": 80,
    "flaws": [
@@ -28861,9 +28949,11 @@
    "id": "osce-amsa-625",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 94, review 75): vignette"
+   ],
    "quality": 83,
    "flaws": [
     "vignette:minor"
@@ -28873,18 +28963,22 @@
    "id": "osce-amsa-626",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 84 is below the AI-written bar of 89 (flaws 100, review 73)"
+   ],
    "quality": 84
   },
   {
    "id": "osce-amsa-630",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 88 is below the AI-written bar of 89 (flaws 100, review 80)"
+   ],
    "quality": 88
   },
   {
@@ -28905,7 +28999,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 100, review 67)"
+    "quality 80 is below the AI-written bar of 89 (flaws 100, review 67)"
    ],
    "quality": 80
   },
@@ -28916,7 +29010,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 80 is below the base bar of 81 (flaws 94, review 71): units"
+    "quality 80 is below the AI-written bar of 89 (flaws 94, review 71): units"
    ],
    "quality": 80,
    "flaws": [
@@ -28938,9 +29032,11 @@
    "id": "osce-amsa-635",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 94, review 75): units"
+   ],
    "quality": 83,
    "flaws": [
     "units:minor"
@@ -28953,7 +29049,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 73 is below the base bar of 81 (flaws 76, review 71): longest-key, clang, vignette, units"
+    "quality 73 is below the AI-written bar of 89 (flaws 76, review 71): longest-key, clang, vignette, units"
    ],
    "quality": 73,
    "flaws": [
@@ -28967,18 +29063,22 @@
    "id": "osce-amsa-637",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 83 is below the AI-written bar of 89 (flaws 100, review 71)"
+   ],
    "quality": 83
   },
   {
    "id": "osce-amsa-638",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 86 is below the AI-written bar of 89 (flaws 94, review 80): units"
+   ],
    "quality": 86,
    "flaws": [
     "units:minor"
@@ -28991,7 +29091,7 @@
    "stage": "bar",
    "status": "rejected",
    "reasons": [
-    "quality 77 is below the base bar of 81 (flaws 94, review 66): units"
+    "quality 77 is below the AI-written bar of 89 (flaws 94, review 66): units"
    ],
    "quality": 77,
    "flaws": [
@@ -29016,36 +29116,44 @@
    "id": "osce-amsa-645",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 85 is below the AI-written bar of 89 (flaws 100, review 75)"
+   ],
    "quality": 85
   },
   {
    "id": "osce-amsa-646",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 81 is below the AI-written bar of 89 (flaws 100, review 68)"
+   ],
    "quality": 81
   },
   {
    "id": "osce-amsa-647",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 86 is below the AI-written bar of 89 (flaws 100, review 76)"
+   ],
    "quality": 86
   },
   {
    "id": "osce-amsa-663",
    "kind": "amsa",
    "route": "amsa",
-   "stage": "pool",
-   "status": "pool",
-   "reasons": [],
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 85 is below the AI-written bar of 89 (flaws 100, review 75)"
+   ],
    "quality": 85
   }
  ]

@@ -1,6 +1,6 @@
 # MCQ spot-check
 
-Written by `node scripts/mcq-spotcheck.mjs` on 2026-10-27: 40 questions from the standard pool, spread over its kinds. Every one passed the model review and the bar; this is the check a person makes.
+Written by `node scripts/mcq-spotcheck.mjs` on 2026-10-28: 40 questions from the standard pool, spread over its kinds. Every one passed the model review and the bar; this is the check a person makes.
 
 For each question, record a call: `node scripts/mcq-spotcheck.mjs --mark <number> <call> [--note "..."] [--by "your name"]` (or by hand in `data/mcq/spotcheck.json` under `marks`, keyed by its id). The calls:
 
@@ -36,18 +36,18 @@ Creatinine 128 µmol/L (her baseline is 78) **Which of the following best descri
 
 *Source:* Written by AI from Med-OS station ai-8b37c286
 
-## 2. osce-amsa-638 (amsa, Gastroenterology)
+## 2. osce-amsa-204 (amsa, Respiratory Medicine)
 
-A 28-year-old woman in the emergency department. RUQ pain, fever with rigors and jaundice (Charcot's triad), pale stools, dark urine and itch, cholestatic LFTs with WCC 17.8 and CRP 186, and an 11 mm common bile duct with a distal stone. **What is the most likely diagnosis?**
+A 26-year-old woman in general practice. Six-week progressive productive cough with 5 days of haemoptysis, low-grade fever, fatigue, breathlessness and 5 kg weight loss; born in and travels annually to Cambodia; right upper zone crackles and right upper lobe opacification. **What is the most likely diagnosis?**
 
-- A. Acute ascending cholangitis  **(key)**
-- B. Acute gallstone pancreatitis
-- C. Acute calculous cholecystitis
-- D. Acute viral hepatitis
+- A. Lung cancer
+- B. Pulmonary embolism
+- C. Melioidosis
+- D. Pulmonary tuberculosis  **(key)**
 
-*Explanation:* Acute ascending cholangitis fits: rUQ pain, fever with rigors and jaundice (Charcot's triad), pale stools, dark urine and itch, cholestatic LFTs with WCC 17.8 and CRP 186, and an 11 mm common bile duct with a distal stone. RUQ pain, fever with rigors and jaundice (Charcot's triad) is acute cholangitis until proven otherwise. Confusion and hypotension (Reynolds' pentad) mean severe disease.
+*Explanation:* Pulmonary tuberculosis fits: six-week progressive productive cough with 5 days of haemoptysis, low-grade fever, fatigue, breathlessness and 5 kg weight loss; born in and travels annually to Cambodia; right upper zone crackles and right upper lobe opacification. A cough lasting more than 3 weeks with haemoptysis, fever and weight loss in someone born in or travelling to a country with high TB rates is pulmonary TB until proven otherwise.
 
-*Source:* AMSA MedEd OSCEs: Jaundice History 4
+*Source:* AMSA MedEd OSCEs: Cough History 3
 
 ## 3. headqa-2014-228 (open-exam, Respiratory Medicine)
 
@@ -90,18 +90,18 @@ A 21-year-old man comes to a suburban general practice with 16 hours of abdomina
 
 *Source:* Written by AI from Med-OS station amsa-212
 
-## 6. osce-amsa-645 (amsa, Neurology)
+## 6. osce-amsa-268 (amsa, Neurology)
 
-A 32-year-old man in the emergency department. Two days of worsening headache with fever, vomiting, neck stiffness, photophobia and positive Kernig's sign in a man on prednisolone, with turbid neutrophilic CSF, high protein and a low glucose ratio. **What is the most likely diagnosis?**
+A 30-year-old man in general practice. Strictly left orbital pain at 10/10, lasting 2 to 3 hours, at the same time almost daily for 2 months and waking him, with same-sided tearing, red eye, rhinorrhoea and partial Horner's, restlessness, an earlier bout a year ago with 8 pain-free months, a father with similar headaches, and a normal examination and MRI. **What is the most likely diagnosis?**
 
-- A. Bacterial meningitis  **(key)**
-- B. Viral encephalitis
-- C. Subarachnoid haemorrhage
-- D. Viral meningitis
+- A. Subarachnoid haemorrhage
+- B. Cluster headache  **(key)**
+- C. Space-occupying lesion or raised intracranial pressure
+- D. Carotid artery dissection
 
-*Explanation:* Bacterial meningitis fits: two days of worsening headache with fever, vomiting, neck stiffness, photophobia and positive Kernig's sign in a man on prednisolone, with turbid neutrophilic CSF, high protein and a low glucose ratio. Fever, headache, neck stiffness and photophobia mean meningitis until proven otherwise. Always ask about and look for a non-blanching rash.
+*Explanation:* Cluster headache fits: strictly left orbital pain at 10/10, lasting 2 to 3 hours, at the same time almost daily for 2 months and waking him, with same-sided tearing, red eye, rhinorrhoea and partial Horner's, restlessness, an earlier bout a year ago with 8 pain-free months, a father with similar headaches, and a normal examination and MRI. Strictly one-sided orbital pain lasting 15 to 180 minutes, at the same time each day, with tearing, a red eye, a runny or blocked nose on the same side and restlessness, is cluster headache. Patients with migraine lie still, while patients with cluster headache pace.
 
-*Source:* AMSA MedEd OSCEs: Headache History 8
+*Source:* AMSA MedEd OSCEs: Headache History 4
 
 ## 7. headqa-2014-229 (open-exam, Rheumatology)
 
@@ -144,20 +144,7 @@ A 64-year-old woman with diabetes walks into a general practice with 40 minutes 
 
 *Source:* Written by AI from Med-OS station amsa-188
 
-## 10. osce-amsa-635 (amsa, Gastroenterology)
-
-A 40-year-old man in the emergency department. He shared needles 2 months ago, had a prodrome of fever, arthralgia, urticaria and malaise, now has jaundice with dark urine and pale stools and a tender smooth liver, with ALT 1635 and HBsAg, IgM anti-HBc and HBeAg positive. **What is the most likely diagnosis?**
-
-- A. Acute ascending cholangitis
-- B. Paracetamol or other drug-induced liver injury
-- C. Acute hepatitis C infection
-- D. Acute hepatitis B infection  **(key)**
-
-*Explanation:* Acute hepatitis B infection fits: he shared needles 2 months ago, had a prodrome of fever, arthralgia, urticaria and malaise, now has jaundice with dark urine and pale stools and a tender smooth liver, with ALT 1635 and HBsAg, IgM anti-HBc and HBeAg positive. Viral hepatitis has a prodrome (anorexia, malaise, fever, RUQ pain; urticaria and arthralgia especially in hepatitis B), then an icteric phase with dark urine, pale stools, itch and jaundice.
-
-*Source:* AMSA MedEd OSCEs: Abdominal Pain History 14
-
-## 11. headqa-2016-203 (open-exam, Orthopaedics)
+## 10. headqa-2016-203 (open-exam, Orthopaedics)
 
 A 50-year-old patient with a history of gout and chronic use of corticosteroids. He is brought to the emergency room due to inability to ambulate due to knee extension deficit. Radiology shows a low patellar height in relation to the contralateral knee. What is the diagnostic suspicion?
 
@@ -170,7 +157,7 @@ A 50-year-old patient with a history of gout and chronic use of corticosteroids.
 
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
-## 12. mmlu-professional_medicine-016 (usmle-resource, Immunology)
+## 11. mmlu-professional_medicine-016 (usmle-resource, Immunology)
 
 A 5-year-old boy is admitted to the hospital because of a 1-week history of fever and increasingly severe abdominal discomfort. At the age of 7 months, he was treated for osteomyelitis caused by Aspergillus fumigatus. He has been admitted to the hospital three times during the past 4 years for severe pneumonia. He appears moderately ill. His temperature is 39°C (102.2°F). Abdominal examination shows an enlarged, tender liver. Ultrasonography of the abdomen shows an intrahepatic abscess. Culture of the abscess fluid grows Staphylococcus aureus. Further analysis shows failure of the neutrophils to undergo an oxidative burst when exposed to S. aureus. This patient has an increased susceptibility to infection as a result of which of the following abnormalities?
 
@@ -183,7 +170,7 @@ A 5-year-old boy is admitted to the hospital because of a 1-week history of feve
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
 
-## 13. ai-mcq-eb4e07f1 (ai, Sexual Health)
+## 12. ai-mcq-eb4e07f1 (ai, Sexual Health)
 
 A 26-year-old man has dysuria and urethral discharge. First-pass urine NAAT is positive for Mycoplasma genitalium, with a macrolide resistance mutation detected. Gonorrhoea and chlamydia NAATs are negative. **After doxycycline, which antibiotic is most appropriate?**
 
@@ -197,20 +184,7 @@ A 26-year-old man has dysuria and urethral discharge. First-pass urine NAAT is p
 
 *Source:* Written by AI for Sexual Health (no Med-OS station)
 
-## 14. osce-amsa-647 (amsa, Neurology)
-
-A 24-year-old woman in general practice. Five stereotyped attacks of severe, one-sided throbbing headache lasting 6 to 7 hours, with light and noise sensitivity and nausea, each preceded by about 20 minutes of fully reversible visual aura, with a normal examination. **What is the most likely diagnosis?**
-
-- A. Subarachnoid haemorrhage
-- B. Bacterial meningitis
-- C. Migraine  **(key)**
-- D. Transient ischaemic attack
-
-*Explanation:* Migraine fits: five stereotyped attacks of severe, one-sided throbbing headache lasting 6 to 7 hours, with light and noise sensitivity and nausea, each preceded by about 20 minutes of fully reversible visual aura, with a normal examination. Ask how fast the headache started and whether it matches previous attacks. A gradual, stereotyped headache with a normal examination and no red flags (SNOOP) needs no imaging.
-
-*Source:* AMSA MedEd OSCEs: Headache History 10
-
-## 15. headqa-2014-36 (open-exam, General Surgery)
+## 13. headqa-2014-36 (open-exam, General Surgery)
 
 A 76-year-old woman came to the emergency room referring to pain in the right groin and vomiting for about 6 hours. On examination, a hard consistency tumor is palpable just below the line joining the anterosuperior iliac spine and the pubis (which corresponds to the location of the inguinal ligament). Most likely, it is one:
 
@@ -224,7 +198,7 @@ A 76-year-old woman came to the emergency room referring to pain in the right gr
 
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
-## 16. mmlu-professional_medicine-153 (usmle-resource, Rheumatology)
+## 14. mmlu-professional_medicine-153 (usmle-resource, Rheumatology)
 
 A 57-year-old woman comes to the office for a preoperative evaluation 2 weeks before undergoing scheduled laparoscopic cholecystectomy. Medical history is otherwise unremarkable and the patient takes no medications. Family history is significant for stable angina in her father and rheumatoid arthritis in her mother. The patient has a 102-year-old grandmother who resides in a nursing care facility and has Parkinson disease. The patient does not smoke cigarettes or drink alcoholic beverages. During the interview, her face is expressionless. She has a flexed posture and is unable to open her mouth wide. She is 173 cm (5 ft 8 in) tall and weighs 81 kg (179 lb); BMI is 27 kg/m2 . Vital signs are normal. Physical examination discloses thickening and hardening of the skin over the dorsum of the hands and forearms, as well as mild kyphosis. Strength testing shows no abnormalities; muscle tension is normal. Passive and active range of motion of the upper extremities is full. Gait is slow and deliberate. The remainder of the physical examination discloses no abnormalities. Prior to surgery, further evaluation is indicated for which of the following conditions in this patient?
 
@@ -237,7 +211,7 @@ A 57-year-old woman comes to the office for a preoperative evaluation 2 weeks be
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
 
-## 17. ai-mcq-5515c72d (ai, Paediatrics)
+## 15. ai-mcq-5515c72d (ai, Paediatrics)
 
 A 22-month-old boy is brought to a general practice in regional Victoria with a 6-week history of cough. The cough is wet and happens by day and by night. It has not improved with 7 days of amoxicillin or with inhaled salbutamol through a spacer. His mother remembers that the cough started on the evening of a family barbecue. While eating popcorn there, he coughed and gagged for a short time and then settled. He has no eczema and no previous wheeze. He is fully immunised and has had no contact with tuberculosis. He is playful. His temperature is 37.3 °C, pulse 120/min, respirations 38/min, and SpO2 96% in room air. On examination there is reduced air entry and a fixed monophonic wheeze over the left lower zone only. A chest X-ray shows a hyperinflated left lung with the mediastinum shifted to the right. No radio-opaque object is seen. **If the underlying cause is not treated, this child is most at risk of which of the following complications?**
 
@@ -251,20 +225,7 @@ A 22-month-old boy is brought to a general practice in regional Victoria with a 
 
 *Source:* Written by AI from Med-OS station ai-7789e6bf
 
-## 18. osce-amsa-637 (amsa, Gastroenterology)
-
-A 30-year-old woman in general practice. Returned from Thailand a month ago after eating street food without pre-travel vaccination, with a 2-week prodrome, then jaundice, a hepatocellular picture and a positive HAV IgM. **What is the most likely diagnosis?**
-
-- A. Ascending cholangitis
-- B. Acute hepatitis A infection  **(key)**
-- C. Malaria
-- D. Choledocholithiasis
-
-*Explanation:* Acute hepatitis A infection fits: returned from Thailand a month ago after eating street food without pre-travel vaccination, with a 2-week prodrome, then jaundice, a hepatocellular picture and a positive HAV IgM. Dark urine and pale stools mean conjugated hyperbilirubinaemia. Always ask the 4 Ps (pee, poo, pruritus, pain) in jaundice.
-
-*Source:* AMSA MedEd OSCEs: Jaundice History 3
-
-## 19. headqa-2016-213 (open-exam, Neurology)
+## 16. headqa-2016-213 (open-exam, Neurology)
 
 59-year-old man, active smoker, with a history of hypertension, dyslipidemia and alcoholism. It refers to progressive picture in the last 2 years of difficulty climbing stairs with weakness in lower and upper limbs that fluctuates during the day and improves slightly with sustained exercise. Occasionally he has presented episodes of diplopia. Lately persistent dry cough has been added. As part of the study an electromyogram is performed that shows incremental increases in muscle action potential in response to repetitive nerve stimulation. A chest CT scan shows subcarinal lymphadenopathy and a 3.1 cm nodule in the left lower lobe. These findings are consistent with primary pulmonary neoplasia. What is the diagnosis of the associated picture?
 
@@ -277,7 +238,7 @@ A 30-year-old woman in general practice. Returned from Thailand a month ago afte
 
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
-## 20. mmlu-professional_medicine-150 (usmle-resource, Paediatrics)
+## 17. mmlu-professional_medicine-150 (usmle-resource, Paediatrics)
 
 A 14-year-old boy is brought to the physician for a physical examination prior to participating in sports. He appears reluctant to remove his shirt for the examination, and says that he is embarrassed because he has grown breasts during the past year. He is at the 50th percentile for height and weight. Physical examination shows bilateral 1.5-cm fibroglandular masses located beneath the nipple-areolar complex and normal penis and testes. Pubic hair development is Tanner stage 3. Serum concentrations of gonadotropic hormones, estrogens, and testosterone are within the reference ranges. Which of the following is the most likely cause of this patient's breast enlargement?
 
@@ -290,7 +251,7 @@ A 14-year-old boy is brought to the physician for a physical examination prior t
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
 
-## 21. ai-mcq-e3b1c7c7 (ai, Ophthalmology)
+## 18. ai-mcq-e3b1c7c7 (ai, Ophthalmology)
 
 A 63-year-old woman comes to her general practitioner for her annual diabetes review. She has had type 2 diabetes for 14 years. Over the past 4 months, small print has become harder to read with her right eye, even with new reading glasses. She also has hypertension and dyslipidaemia. Her medicines are metformin 1 g twice daily, modified-release gliclazide 60 mg daily, perindopril 5 mg daily and atorvastatin 20 mg daily. Her last eye examination was 2 years ago. Blood pressure is 144/86 mmHg and pulse is 76/min. Visual acuity is 6/18 in the right eye and 6/9 in the left, and the right eye does not improve with a pinhole. Both lenses are clear. Good-quality non-mydriatic retinal photographs show microaneurysms and dot and blot haemorrhages in both eyes, and a ring of hard exudates within one disc diameter of the right fovea. There are no new vessels and no venous beading. HbA1c is 8.8% (73 mmol/mol). **Which of the following is the most appropriate investigation to confirm the cause of the reduced vision in her right eye?**
 
@@ -304,20 +265,7 @@ A 63-year-old woman comes to her general practitioner for her annual diabetes re
 
 *Source:* Written by AI from Med-OS station amsa-301
 
-## 22. osce-amsa-646 (amsa, Neurology)
-
-An 18-year-old woman in general practice. Fever of 39 °C, a worsening generalised headache, neck stiffness, photophobia and a positive Kernig's sign in an 18-year-old after a crowded festival with a shared tent and uncertain meningococcal vaccination; the CSF is neutrophilic with a low glucose, Gram-negative diplococci and a positive N. meningitidis PCR. **What is the most likely diagnosis?**
-
-- A. Viral encephalitis
-- B. Bacterial meningitis  **(key)**
-- C. Subarachnoid haemorrhage
-- D. Viral meningitis
-
-*Explanation:* Bacterial meningitis fits: fever of 39 °C, a worsening generalised headache, neck stiffness, photophobia and a positive Kernig's sign in an 18-year-old after a crowded festival with a shared tent and uncertain meningococcal vaccination; the CSF is neutrophilic with a low glucose, Gram-negative diplococci and a positive N. meningitidis PCR. Fever, headache, neck stiffness and photophobia mean bacterial meningitis until proven otherwise. Ask about and look for a rash, but its absence does not exclude meningococcal disease.
-
-*Source:* AMSA MedEd OSCEs: Headache History 9
-
-## 23. headqa-2016-192 (open-exam, Rheumatology)
+## 19. headqa-2016-192 (open-exam, Rheumatology)
 
 A 38-year-old man consulted for the appearance of red and painful nodules in both lower limbs at the pretibial level of 2 weeks of evolution. In addition, the patient reports that for a few months and recurrently has oral ulcers and ulcers at the genital level. What is the most likely diagnosis?
 
@@ -330,7 +278,7 @@ A 38-year-old man consulted for the appearance of red and painful nodules in bot
 
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
-## 24. medqa-us4-test-0532 (usmle-resource, Toxicology)
+## 20. medqa-us4-test-0532 (usmle-resource, Toxicology)
 
 A 38-year-old man is brought to the emergency room by his father because of altered mental status. According to the father, the patient was unable to get out of bed that morning and has become increasingly confused over the past several hours. The father also noticed it was “pretty cold” in his son's apartment because all of the windows were left open overnight. He has a history of hypothyroidism, schizoaffective disorder, type 2 diabetes mellitus, dyslipidemia, and hypertension for which he takes medication. Ten days ago, he was started on a new drug. He appears lethargic. His rectal temperature is 32°C (89.6°F), pulse is 54/min, respirations are 8/min, and blood pressure is 122/80 mm Hg. Examination shows weakness in the lower extremities with absent deep tendon reflexes. Deep tendon reflexes are 1+ in the upper extremities. The pupils are dilated and poorly reactive to light. Throughout the examination, the patient attempts to remove his clothing. Which of the following drugs is the most likely cause of these findings?
 
@@ -344,7 +292,7 @@ A 38-year-old man is brought to the emergency room by his father because of alte
 
 *Source:* MedQA (Jin et al. 2020), US, 4-option, test split
 
-## 25. ai-mcq-e9b74594 (ai, OMS/Dental)
+## 21. ai-mcq-e9b74594 (ai, OMS/Dental)
 
 A 10-year-old boy fell off his scooter 15 minutes ago. His upper permanent central incisor was knocked out whole; he holds it by the crown. He is otherwise uninjured. **Most appropriate next step?**
 
@@ -358,20 +306,7 @@ A 10-year-old boy fell off his scooter 15 minutes ago. His upper permanent centr
 
 *Source:* Written by AI for OMS/Dental (no Med-OS station)
 
-## 26. osce-amsa-630 (amsa, Respiratory Medicine)
-
-A 20-year-old man in the emergency department. Breathlessness and sharp left pleuritic pain straight after a fall onto the left side, with tracheal deviation to the right, distended neck veins, left hyper-resonance and reduced breath sounds, tachycardia, hypotension, hypoxia, and complete left lung collapse with mediastinal shift on X-ray. **What is the most likely diagnosis?**
-
-- A. Left tension pneumothorax  **(key)**
-- B. Cardiac tamponade
-- C. Traumatic haemothorax or haemopneumothorax
-- D. Pulmonary embolism
-
-*Explanation:* Left tension pneumothorax fits: breathlessness and sharp left pleuritic pain straight after a fall onto the left side, with tracheal deviation to the right, distended neck veins, left hyper-resonance and reduced breath sounds, tachycardia, hypotension, hypoxia, and complete left lung collapse with mediastinal shift on X-ray. Tension pneumothorax is a clinical diagnosis: breathlessness, hypoxia, tachycardia, hypotension, distended neck veins, tracheal deviation away from the affected side, and hyper-resonance with reduced or absent breath sounds. Decompress before imaging.
-
-*Source:* AMSA MedEd OSCEs: Dyspnoea History 14
-
-## 27. headqa-2016-193 (open-exam, Rheumatology)
+## 22. headqa-2016-193 (open-exam, Rheumatology)
 
 Serves a 32-year-old man, computer specialist, who consults for lumbar pain and asymmetric gluteus, predominantly nocturnal, inflammation of the toes, negative rheumatoid factor and C-reactive protein higher than 20mg / dL. What is the most correct attitude?
 
@@ -384,7 +319,7 @@ Serves a 32-year-old man, computer specialist, who consults for lumbar pain and 
 
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
-## 28. mmlu-professional_medicine-151 (usmle-resource, General Practice)
+## 23. mmlu-professional_medicine-151 (usmle-resource, General Practice)
 
 A 37-year-old man comes to the physician because of nonradiating low back pain for 3 days. The pain began after he worked in his yard. He has not had any change in bowel movements or urination. He had one similar episode 3 years ago that resolved spontaneously. Vital signs are within normal limits. Examination of the back shows bilateral paravertebral muscle spasm. Range of motion is limited by pain. Straight-leg raising is negative. In addition to analgesia, which of the following is the most appropriate next step in management?
 
@@ -397,7 +332,7 @@ A 37-year-old man comes to the physician because of nonradiating low back pain f
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
 
-## 29. ai-mcq-f06ac9bd (ai, Neurosurgery)
+## 24. ai-mcq-f06ac9bd (ai, Neurosurgery)
 
 A 40-year-old woman with polycystic kidney disease has a sudden severe headache. Her GCS is 15 and BP 148/88 mmHg. CT shows subarachnoid blood, and CT angiography shows an anterior communicating artery aneurysm. **Which drug should be started now?**
 
@@ -411,20 +346,7 @@ A 40-year-old woman with polycystic kidney disease has a sudden severe headache.
 
 *Source:* Written by AI from Med-OS station amsa-361
 
-## 30. osce-amsa-626 (amsa, Cardiology)
-
-A 47-year-old man on the ward. Day 5 after major orthopaedic surgery with little mobilisation, sudden pleuritic chest pain, breathlessness, HR 124, SpO2 92%, a swollen red right calf, Wells 9, and bilateral lower lobe emboli on CTPA. **What is the most likely diagnosis?**
-
-- A. Acute coronary syndrome
-- B. Acute aortic dissection
-- C. Hospital-acquired pneumonia
-- D. Acute pulmonary embolism  **(key)**
-
-*Explanation:* Acute pulmonary embolism fits: day 5 after major orthopaedic surgery with little mobilisation, sudden pleuritic chest pain, breathlessness, HR 124, SpO2 92%, a swollen red right calf, Wells 9, and bilateral lower lobe emboli on CTPA. Sudden pleuritic chest pain and breathlessness after major orthopaedic surgery is PE until proven otherwise: always examine both legs for a DVT.
-
-*Source:* AMSA MedEd OSCEs: Chest Pain History 10
-
-## 31. headqa-2016-191 (open-exam, Rheumatology)
+## 25. headqa-2016-191 (open-exam, Rheumatology)
 
 60-year-old diabetic patient. Hospital admission 2 weeks ago due to hyperosmolar decompensation. Consult the Emergency Department for pain and swelling in the right knee. Physical examination: Tº 37.2ºC, heart rate 100 beats / minute, respiratory rate 18 / minute, signs of arthritis in the referred joints. Analytical: blood count with 18,000 leukocytes / mm3, uric acid 8.11 mg / dL, creatinine 1.4 mg / dL. Synovial fluid: 20,000 leukocytes / mm3 with 85% polynuclear, no microcrystals are observed and the gram stain does not show germs. What would be the most correct attitude?
 
@@ -433,9 +355,11 @@ A 47-year-old man on the ward. Day 5 after major orthopaedic surgery with little
 - C. Indicate admission and immediate parenteral antibiotic treatment until the result of the culture.  **(key)**
 - D. Treatment with corticoids at low doses and allopurinol.
 
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Synovial fluid with 20,000 white cells/mm3, 85% neutrophils and no crystals, in a diabetic patient recently in hospital who now has leucocytosis, should be treated as septic arthritis. A negative Gram stain does not exclude infection. Admit, give IV antibiotics until the culture result is back, and drain the joint. In Australia, eTG suggests IV flucloxacillin, adding vancomycin if MRSA is a risk.
+
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
-## 32. medqa-us4-test-0522 (usmle-resource, General Surgery)
+## 26. medqa-us4-test-0522 (usmle-resource, General Surgery)
 
 A 54-year-old man comes to the emergency department because of a 2-day history of increasingly severe abdominal pain, nausea, and bilious vomiting. His last bowel movement was yesterday and he has not passed flatus since then. He underwent appendectomy at the age of 39. He has psoriasis, hypertension, type 2 diabetes mellitus, and chronic back pain. He drinks two beers daily. He takes a topical corticosteroid, ramipril, metformin, and ibuprofen daily. He is 176 cm (5 ft 9 in) tall and weighs 108 kg (240 lb); BMI is 35.4 kg/m2. His temperature is 36.8°C (98.4°F), respirations are 15/min, pulse is 90/min, and blood pressure is 112/67 mm Hg. Examination shows thick, scaly, plaques over both elbows and knees. Abdominal examination shows three well-healed laparoscopic scars. The abdomen is distended and there are frequent, high-pitched bowel sounds on auscultation. Digital rectal examination shows an empty rectum. Laboratory studies show:
 Hematocrit 44%
@@ -464,7 +388,7 @@ Abdominal ultrasound shows nonpropulsive peristalsis of the small bowel. Which o
 
 *Source:* MedQA (Jin et al. 2020), US, 4-option, test split
 
-## 33. ai-mcq-ce657f94 (ai, Neurosurgery)
+## 27. ai-mcq-ce657f94 (ai, Neurosurgery)
 
 A 79-year-old woman on apixaban fell and hit her head four days ago. Apixaban has been reversed. CT: 12 mm acute right subdural haematoma, 7 mm midline shift. GCS 14. **Most appropriate definitive management?**
 
@@ -478,20 +402,7 @@ A 79-year-old woman on apixaban fell and hit her head four days ago. Apixaban ha
 
 *Source:* Written by AI from Med-OS station amsa-429
 
-## 34. osce-amsa-625 (amsa, Cardiology)
-
-A 62-year-old woman in the emergency department. Three weeks of constant burning forefoot pain that is worse lying flat and eased by hanging the leg, after years of claudication, with gangrene of three toes, absent right popliteal and pedal pulses, right ABI 0.28 and heavy cardiovascular risk. **What is the most likely diagnosis?**
-
-- A. Acute-on-chronic limb ischaemia or atheroembolism
-- B. Deep vein thrombosis
-- C. Chronic limb-threatening ischaemia of the right leg  **(key)**
-- D. Intermittent claudication
-
-*Explanation:* Chronic limb-threatening ischaemia of the right leg fits: three weeks of constant burning forefoot pain that is worse lying flat and eased by hanging the leg, after years of claudication, with gangrene of three toes, absent right popliteal and pedal pulses, right ABI 0.28 and heavy cardiovascular risk. Ischaemic rest pain is constant forefoot and toe pain, worse lying flat or at night and eased by hanging the leg down. Present for more than 2 weeks, or with gangrene or an ulcer, it defines chronic limb-threatening ischaemia.
-
-*Source:* AMSA MedEd OSCEs: Calf Pain History 2
-
-## 35. headqa-2015-32 (open-exam, Pathology)
+## 28. headqa-2015-32 (open-exam, Pathology)
 
 A 59-year-old woman presented with chronic watery diarrhea of ​​4 months evolution. In the endoscopy, the mucosa did not show relevant aspects. In particular, no ulcers or friable areas were observed. A transverse colon biopsy was performed. In the histopathological study, a thickened area was recognized below the surface coating epithelium, which was more evident by Masson's trichrome technique and involved epithelial atrophy and denudation. There was also a clear increase in the density of intraepithelial lymphocytes. Is the diagnosis of the intestinal lesion?
 
@@ -504,7 +415,7 @@ A 59-year-old woman presented with chronic watery diarrhea of ​​4 months evo
 
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
-## 36. medqa-us4-test-0519 (usmle-resource, Trauma Surgery)
+## 29. medqa-us4-test-0519 (usmle-resource, Trauma Surgery)
 
 A 36-year-old man is brought to the emergency department 40 minutes after being involved in a shooting. He sustained a gunshot wound in an altercation outside of a bar. On arrival, he is oriented to person but not to place or time. His temperature is 37.3°C (99.1°F), pulse is 116/min, respirations are 18/min, and blood pressure is 79/42 mm Hg. Pulse oximetry on room air shows an oxygen saturation of 97%. Examination shows multiple abrasions over the arms and thorax. There is a 1-cm (0.4-in) entry wound with minimal bleeding on the right side of the chest in the 6th intercostal space at the midclavicular line. Cardiopulmonary examination shows no abnormalities. Abdominal examination shows diffuse mild tenderness to palpation with no guarding or rebound. A focused assessment with sonography shows no obvious free fluid in the pericardium; assessment of the abdomen is equivocal. An x-ray of the chest shows mild opacification of the right lower lobe. Two large-bore cannulas are inserted and intravenous fluid resuscitation is begun. The patient is intubated and mechanical ventilation is begun. Which of the following is the most appropriate next step in management?
 
@@ -517,7 +428,7 @@ A 36-year-old man is brought to the emergency department 40 minutes after being 
 
 *Source:* MedQA (Jin et al. 2020), US, 4-option, test split
 
-## 37. ai-mcq-53a4f097 (ai, Addiction Medicine)
+## 30. ai-mcq-53a4f097 (ai, Addiction Medicine)
 
 A 52-year-old man who drinks heavily daily is brought in confused and unsteady, with no head injury. He has horizontal nystagmus and a broad-based ataxic gait. Capillary glucose is 5.8 mmol/L. **Most appropriate next step?**
 
@@ -531,20 +442,7 @@ A 52-year-old man who drinks heavily daily is brought in confused and unsteady, 
 
 *Source:* Written by AI for Addiction Medicine (no Med-OS station)
 
-## 38. osce-amsa-203 (amsa, Respiratory Medicine)
-
-A 60-year-old woman in general practice. Rusty productive cough, fever, left pleuritic pain and breathlessness after a cold with sick contacts, left basal dullness with bronchial breathing, neutrophilia with CRP 148, and left lower lobe consolidation with a small effusion on X-ray. **What is the most likely diagnosis?**
-
-- A. Pulmonary embolism
-- B. Lung cancer
-- C. Community-acquired pneumonia of the left lower lobe  **(key)**
-- D. Acute bronchitis or viral lower respiratory tract infection
-
-*Explanation:* Community-acquired pneumonia of the left lower lobe fits: rusty productive cough, fever, left pleuritic pain and breathlessness after a cold with sick contacts, left basal dullness with bronchial breathing, neutrophilia with CRP 148, and left lower lobe consolidation with a small effusion on X-ray. A productive cough with rusty sputum, fever, pleuritic pain and focal chest signs after a viral illness is community-acquired pneumonia until proven otherwise; Streptococcus pneumoniae is the most common cause.
-
-*Source:* AMSA MedEd OSCEs: Cough History 2
-
-## 39. headqa-2015-170 (open-exam, Cardiology)
+## 31. headqa-2015-170 (open-exam, Cardiology)
 
 An 80-year-old man came to his office to evaluate a cholecystectomy program by laparoscopy. He has a history of hypertension in treatment for 10 years. Denies heart or lung disease. No chest pain She has an active life and daily goes to the gym where she alternates swimming and walking the treadmill for at least an hour. Usual treatment: nebivolol 5 mg every 24 hours and hydrochlorothiazide 12.5 mg daily. Physical examination: weight 73 kgs; size 179 cms; blood pressure 138/80 mmHg; heart rate 60 beats / minute. No murmurs are heard. Which of the following is the most appropriate preoperative approach?
 
@@ -557,7 +455,7 @@ An 80-year-old man came to his office to evaluate a cholecystectomy program by l
 
 *Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
 
-## 40. mmlu-professional_medicine-010 (usmle-resource, Geriatrics)
+## 32. mmlu-professional_medicine-010 (usmle-resource, Geriatrics)
 
 While you are on rounds at a local nursing facility, the nurse mentions that your patient, a 79-year-old woman, appears to be a "poor eater." She was admitted to the nursing facility 3 months ago from the hospital where she was treated for congestive heart failure. Her daughter had moved away from the area, and nursing home placement was necessary because the patient could no longer function independently. Her present medications include furosemide and digoxin. Physical examination is normal except for a weight loss of 3.5 kg (7 lb) during the past 3 months. In your conversation with the patient, she says, "No, I'm not depressed, I just don't have an appetite anymore. Nothing tastes good to me. I have a little bit of nausea most of the time." Which of the following is the most appropriate initial diagnostic study?
 
@@ -569,3 +467,133 @@ While you are on rounds at a local nursing facility, the nurse mentions that you
 *Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* An elderly woman on digoxin with furosemide, which can cause hypokalaemia, who has loss of appetite, nausea and a changed sense of taste most likely has digoxin toxicity. A serum digoxin level is the targeted first test. Remember to check potassium and renal function as well.
 
 *Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
+
+## 33. ai-mcq-ecb71b7c (ai, Paediatrics)
+
+A 2-year-old boy has wheeze and breathlessness overnight after 3 days of coryza. He has bilateral expiratory wheeze, equal air entry and SpO2 95% on room air, improving with salbutamol. **Most appropriate next investigation?**
+
+- A. Chest X-ray
+- B. Venous blood gas
+- C. Full blood count
+- D. No investigation  **(key)**
+- E. Spirometry
+
+*Explanation:* This is a moderate episode of viral-induced (preschool) wheeze. The diagnosis is clinical, and RCH and Queensland guidelines advise against routine X-ray, bloods or blood gas. Severity is graded at the bedside and treatment is salbutamol by spacer.
+
+*Source:* Written by AI from Med-OS station amsa-631
+
+## 34. headqa-2015-177 (open-exam, Oncology)
+
+A 57-year-old patient diagnosed with stage T3N1M0 colon adenocarcinoma. He was treated with resection followed by postoperative FOLFOX chemotherapy (fluorouracil, leucovorin and oxaliplatin) for six months. In a routine control, two years later, elevation of carcinoembryonic antigen (CEA) was detected at 30 ng / mL (previous to less than 2 ng / mL). He has no symptoms, the physical examination is bland, the chest radiograph is normal. On CT, a mass of 3 cm is seen in the right hepatic lobe, which is captured in PET. No other alterations were observed in CT or PET. What attitude seems more correct?
+
+- A. Chemotherapy with FOLFIRI (fluorouracil, leucovorin and irinotecan) plus bevacizumab.
+- B. Monochemotherapy with capecitabine.
+- C. Evaluation by resection surgery of the hepatic lesion.  **(key)**
+- D. Liver radiation therapy.
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* He has a single 3 cm liver metastasis with no other disease on CT and PET. Isolated metachronous colorectal liver metastases should be assessed for resection first, because surgery offers a chance of long-term cure.
+
+*Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
+
+## 35. mmlu-professional_medicine-088 (usmle-resource, Neurology)
+
+A 36-year-old man comes to the office because of headaches that began 2 weeks ago. The headaches are moderately severe, are present when he awakens in the morning, and are relieved with over-the-counter analgesics. He has no prior history of headaches. He tells you he was promoted to an upper-level managerial position in his accounting firm about 8 months ago, which necessitated relocating. Physical examination now discloses no abnormalities except for blurring of the optic disc margins bilaterally. Which of the following is the most appropriate next step?
+
+- A. Begin a trial of a β-blocking medication
+- B. Order CT scan of the head  **(key)**
+- C. Order EEG
+- D. Refer him for consultation with a neurologist
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* A new morning headache with bilateral blurred optic disc margins (papilloedema) suggests raised intracranial pressure from a mass lesion until proven otherwise. Urgent neuroimaging is needed before attributing the headache to stress or tension.
+
+*Source:* MMLU (Hendrycks et al. 2021) professional_medicine test
+
+## 36. ai-mcq-aa50ea7f (ai, Rheumatology)
+
+A 71-year-old woman presents to the emergency department with two days of new left temporal headache, pain on chewing, and transient visual loss today. Her temporal artery is tender; ESR 92 mm/h. **Most appropriate next step?**
+
+- A. Oral prednisolone 50 mg
+- B. Temporal artery biopsy
+- C. Urgent CT brain
+- D. Aspirin 300 mg
+- E. IV methylprednisolone  **(key)**
+
+*Explanation:* She has a new headache after age 50, jaw claudication, a tender temporal artery, a very high ESR and transient visual loss. This is giant cell arteritis with visual involvement, which threatens her sight. Give IV methylprednisolone (500 mg to 1 g daily for 3 days) straight away and arrange same-day ophthalmology review, without waiting for a biopsy.
+
+*Source:* Written by AI from Med-OS station amsa-246
+
+## 37. headqa-2016-181 (open-exam, Paediatrics)
+
+A 2-month-old girl who was referred to the pediatric urology clinic due to grade-III bilateral vesicoureteral reflux. Background: prenatal diagnosis of bilateral pyelic ectasia. Acute pyelonephritis, one month after diagnostic cystourethrography. Of the following options, what would be the most advisable indication?
+
+- A. Do nothing; since the reflux can disappear spontaneously.
+- B. Endoscopic treatment of reflux.
+- C. Request renal scintigraphy (DMSA) and perform a monthly urine culture.
+- D. Antibiotic prophylaxis with amoxicillin and request renal scintigraphy (DMSA).  **(key)**
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* A young infant with bilateral grade III reflux who has had pyelonephritis is at risk of repeat infection and kidney scarring. Give continuous antibiotic prophylaxis and do a DMSA scan to look for scarring. Australian practice usually uses trimethoprim or cefalexin for prophylaxis.
+
+*Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019
+
+## 38. medqa-us4-test-1109 (usmle-resource, Infectious Diseases)
+
+A 46-year-old man comes to the emergency department because of a 4-week history of fatigue and headache that have gotten progressively worse. He has allergic asthma treated with inhaled salbutamol. He immigrated to the USA from Thailand 9 years ago. He lives by himself and works as a waiter in a restaurant. He has had 6 lifetime male sexual partners and uses condoms inconsistently. He drinks 1–2 beers daily. His temperature is 38.2°C (100.8°F), pulse is 88/min, and blood pressure is 128/76 mm Hg. Examination of the mouth shows several white patches on the tongue and oral mucosa that can be easily scraped off with a tongue blade. On mental status examination, the patient is somnolent and has short-term memory deficits. The remainder of the examination shows no abnormalities. Laboratory studies show:
+Hemoglobin 13.6 g/dL
+Leukocyte count 9,600/mm3
+Segmented neutrophils 80%
+Eosinophils 1%
+Lymphocytes 17%
+Monocytes 2%
+CD4+ T-lymphocytes 80/mm3 (Normal ≥ 500)
+Platelet count 328,000/mm3
+Serum
+pH 7.36
+Na+ 135 mEq/L
+Cl- 101 mEq/L
+K+ 4.8 mEq/L
+HCO3- 22 mEq/L
+Glucose 95 mg/dL
+Creatinine 0.9 mg/dL
+BUN 16 mg/dL
+Bilirubin, total 0.7 mg/dL
+AST 13 U/L
+ALT 15 U/L
+Erythrocyte sedimentation rate 10 mm/hour
+HIV test positive
+A lumbar puncture is performed and an opening pressure of 150 mm H2O is noted. Cerebrospinal fluid analysis shows a leukocyte count of 25/mm3 (60% lymphocytes), protein concentration of 52 mg/dL, and a glucose concentration of 37 mg/dL. India ink stain shows organisms with prominent capsules. Blood cultures are drawn. Which of the following is the most appropriate pharmacotherapy for this patient's neurological symptoms?"
+
+- A. Pyrimethamine, sulfadiazine, and folinic acid
+- B. Amphotericin B and flucytosine  **(key)**
+- C. Fluconazole
+- D. Vancomycin and meropenem
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* A CD4 count of 80, subacute headache, confusion and India ink showing encapsulated yeasts point to cryptococcal meningitis. Induction treatment is amphotericin B plus flucytosine for at least 2 weeks, followed by fluconazole consolidation. Liposomal amphotericin is usually preferred.
+
+*Source:* MedQA (Jin et al. 2020), US, 4-option, test split
+
+## 39. ai-mcq-6f672845 (ai, Bioethics)
+
+A 34-year-old man with severe traumatic brain injury has fixed dilated pupils and no brainstem reflexes. He received a thiopentone infusion until yesterday; serum levels remain high. **Which test best confirms brain death?**
+
+- A. Electroencephalography
+- B. Radionuclide perfusion scan  **(key)**
+- C. Transcranial Doppler ultrasound
+- D. MRI brain
+- E. Somatosensory evoked potentials
+
+*Explanation:* High levels of a sedative like thiopentone mean the clinical brain death tests cannot be relied on. The ANZICS Statement on Death and Organ Donation then requires imaging that shows no blood flow to the brain, such as radionuclide perfusion scintigraphy or four-vessel catheter angiography. Sedatives do not change cerebral blood flow, so these tests still work.
+
+*Source:* Written by AI for Bioethics (no Med-OS station)
+
+## 40. headqa-2016-131 (open-exam, Public Health)
+
+It is desired to know the degree of association that exists between the metabolic syndrome and the vitamin D deficit in the general population. To do this, a sample of a health center is selected from among patients older than 18 years of age, they are scheduled and at the visit a clinical examination is performed to determine if they meet the metabolic syndrome criteria and blood is drawn to measure the concentrations Serum levels of 25 hidoxivitamin D. What is the design of this study ?:
+
+- A. Prospective cohort study.
+- B. Cross-sectional study.  **(key)**
+- C. Cases and controls study.
+- D. Case-crossover study (or "case-crossover").
+
+*Explanation (AI-written for the bank; mark `other` with a note if it is wrong):* Exposure (vitamin D level) and outcome (metabolic syndrome) are both measured once, at the same visit, in a sample of the population. That is a cross-sectional design. It estimates prevalence and association but cannot show which came first.
+
+*Source:* HEAD-QA (Vilares and Gómez-Rodríguez, ACL 2019): Spanish MIR exam question, Ministerio de Sanidad, as translated by the dataset's authors; documents last updated 14 January 2019

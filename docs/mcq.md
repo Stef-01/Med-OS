@@ -93,7 +93,7 @@ The judge never sees provenance: every kind gets the same prompt. Judge score (0
 
 - quality = 0.4 × flaw score + 0.6 × judge score;
 - **base bar** = the official items' 5th percentile of quality, so about 95% of official items pass it. This bar applies to `user`, `usmle-resource` and `amsa` questions;
-- **AI bar** = their 25th percentile: a model-written question (`ai`) must beat a quarter of the official items. `amsa` questions are held to the base bar (with the two-solve gate) because code builds them from AMSA's own case and differential. No model writes them freely, and freely written plausible-but-wrong items are what the higher bar is for.
+- **AI bar** = their 25th percentile: a model-written question (`ai`) must beat a quarter of the official items. `amsa` questions, built in code from an AI-written AMSA station's differential, are held to the same AI bar since 2026-10-28 (they were on the base bar): that route passed 53 to 55% against 77 to 88% for questions the model writes from the same stations, and flipped most on a re-review. At the AI bar 2 of its 56 pooled questions stay; the model-written questions cover those stations.
 
 ## 5. Selection
 

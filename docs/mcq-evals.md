@@ -15,12 +15,12 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 | MedQA Step 1 | 679 | 96.1 | 80 | 9.3 | 0 | – | – | – | – | – | – | – |
 | MMLU clinical knowledge + college medicine | 428 | 73.8 | 56 | 65.4 | 30 | 48 | 59 | 66 | 90 | 0 | 0 | 0 |
 | MedMCQA dev (Indian PG entrance) | 4091 | 69.5 | 48 | 70.2 | 0 | – | – | – | – | – | – | – |
-| Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 72 | 78 | 81 | 99 | 55.2 | 1.9 | 55.2 |
+| Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 72 | 78 | 81 | 99 | 55.2 | 1.9 | 1.9 |
 | Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 66 | 74 | 77 | 100 | 26.9 | 0 | 0 |
 | Generated (generate-mcq.mjs) | 486 | 98.2 | 94 | 0 | 486 | 85 | 91 | 95 | 99.2 | 98.4 | 87.7 | 87.7 |
 | Open exam (HEAD-QA, Spanish MIR) | 786 | 78.2 | 54 | 56.4 | 786 | 57 | 68 | 75 | 97.8 | 27.5 | 4.6 | 27.5 |
 
-**Bars:** base 81, AI-written 89 (the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality). "As selected": the bar and gates each kind meets in the selector (ai: the AI bar and two solves; amsa: the base bar and two solves; the rest: the base bar).
+**Bars:** base 81, AI-written 89 (the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality). "As selected": the bar and gates each kind meets in the selector (ai and amsa: the AI bar and two solves; the rest: the base bar).
 
 Failure rate of each check (% of items):
 
@@ -72,16 +72,16 @@ Failure rate of each check (% of items):
 | Kind | Retested | Same verdict (%) | Same key verdict (%) | Same solves (%) | Quality drift mean | Drift p90 | Drift max | Pass first / second | Flips (%) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | ai | 21 | 85.7 | 100 | 100 | 1.6 | 3 | 8 | 19 / 19 | 0 (0) |
-| amsa | 20 | 85 | 100 | 100 | 1.6 | 3 | 6 | 10 / 10 | 2 (10) |
+| amsa | 20 | 85 | 100 | 100 | 1.6 | 3 | 6 | 0 / 0 | 0 (0) |
 | open-exam | 20 | 80 | 95 | 100 | 1.7 | 3 | 8 | 5 / 5 | 2 (10) |
 | usmle-resource | 20 | 95 | 100 | 100 | 1.7 | 5 | 5 | 17 / 16 | 1 (5) |
-| **all** | 81 | 86.4 | 98.8 | 100 | 1.6 | 5 | 8 | 51 / 50 | 5 (6.2) |
+| **all** | 81 | 86.4 | 98.8 | 100 | 1.6 | 5 | 8 | 41 / 40 | 3 (3.7) |
 
-Flipped: osce-amsa-307 (81 then 78, passed on the first); osce-amsa-375 (75 then 81, passed on the second); headqa-2015-82 (80 then 82, passed on the second); headqa-2016-92 (84 then 79, passed on the first); mmlu-professional_medicine-097 (82 then 79, passed on the first).
+Flipped: headqa-2015-82 (80 then 82, passed on the second); headqa-2016-92 (84 then 79, passed on the first); mmlu-professional_medicine-097 (82 then 79, passed on the first).
 
 ## 5. The pool as selected
 
-Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":745,"rejected":888,"reserve":636}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":160,"amsa":56}. Topic cap 112. Key positions: 4 options 73/66/60/74 (χ² 1.89); 5 options 96/97/88/93/98 (χ² 0.69).
+Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":691,"rejected":942,"reserve":636}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":160,"amsa":2}. Topic cap 104. Key positions: 4 options 55/53/49/62 (χ² 1.62); 5 options 96/97/88/93/98 (χ² 0.69).
 
 ## 6. The human spot-check
 
