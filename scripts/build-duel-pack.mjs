@@ -14,6 +14,7 @@ import { readYears, readDifficulty, readKinds } from './tag-years.mjs';
 import { readHy } from './generate-hy.mjs';
 import { readMxq, CREDIT } from './import-medexpqa.mjs';
 import { readExplanations } from './explain-mcq.mjs';
+import { readAdapted } from './adapt-headqa.mjs';
 import { stationsIn } from './lib/disk.mjs';
 
 const PUB = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
@@ -32,7 +33,7 @@ export function mcqOnDisk(pub = PUB) {
 }
 
 /* everything buildPack reads besides the pool, from disk: one list, for this script and the test that the pack is current */
-export const packInputs = (pub = PUB) => ({ mcq: mcqOnDisk(pub), stations: stationsOnDisk(pub), years: readYears(), difficulty: readDifficulty(), kinds: readKinds(), hy: readHy(), mxq: readMxq(), mxqCredit: CREDIT, explanations: readExplanations() });
+export const packInputs = (pub = PUB) => ({ mcq: mcqOnDisk(pub), stations: stationsOnDisk(pub), years: readYears(), difficulty: readDifficulty(), kinds: readKinds(), hy: readHy(), mxq: readMxq(), mxqCredit: CREDIT, explanations: readExplanations(), adapted: readAdapted() });
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const { pack, dropped } = buildPack(poolOnDisk(), packInputs());

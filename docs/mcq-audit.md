@@ -9,24 +9,24 @@ A question fits a format when reading it (4 words a second past the first 12, op
 | | Rapid 15 s | Standard 30 s | Long case 90 s | reading, median / 90th |
 |---|---|---|---|---|
 | pool | 422 of 811 (52%) | 481 of 811 (59.3%) | 806 of 811 (99.4%) | 9 / 44 s |
-| duel pack | 886 of 2289 (38.7%) | 1711 of 2289 (74.7%) | 2288 of 2289 (100%) | 13 / 29 s |
+| duel pack | 890 of 2293 (38.8%) | 1731 of 2293 (75.5%) | 2292 of 2293 (100%) | 13 / 28 s |
 
-- **Rapid (15 s)**: ai 587, open-exam 184, usmle-resource 115. Every topic can deal 10.
-- **Standard (30 s)**: ai 1086, open-exam 496, usmle-resource 127, amsa 2. Every topic can deal 10.
-- **Long case (90 s)**: ai 1464, open-exam 559, usmle-resource 263, amsa 2. Every topic can deal 10.
+- **Rapid (15 s)**: ai 587, open-exam 188, usmle-resource 115. Every topic can deal 10.
+- **Standard (30 s)**: ai 1086, open-exam 516, usmle-resource 127, amsa 2. Every topic can deal 10.
+- **Long case (90 s)**: ai 1464, open-exam 563, usmle-resource 263, amsa 2. Every topic can deal 10.
 
 ## Every question in the duel, by its categories (mcq/taxonomy.mjs)
 
-2289 questions; every one fully categorised (source, origin, credit, specialty, kind, year, difficulty; `npm test` fails on any gap).
+2293 questions; every one fully categorised (source, origin, credit, specialty, kind, year, difficulty; `npm test` fails on any gap).
 
-- **Source**: ai 1464, open-exam 559, usmle-resource 264, amsa 2
-- **Route**: open-exam 559, ai station 532, ai high-yield 523, ai pool 409, usmle-resource 264, amsa 2
-- **Kind**: clinical 1492, physio 430, anatomy 217, skills 150
-- **Year**: 1 274, 2 438, 3 798, 4 779
-- **Difficulty**: 1 494, 2 1449, 3 346
-- **Specialties**: 45; the five largest Gastroenterology 240, Neurology 191, Cardiology 189, Respiratory Medicine 162, Paediatrics 144; the five smallest Medicolegal 10, Cardiothoracic Surgery 12, Occupational/Environmental Medicine 12, Professionalism 12, Bioethics 13
+- **Source**: ai 1464, open-exam 563, usmle-resource 264, amsa 2
+- **Route**: open-exam 563, ai station 532, ai high-yield 523, ai pool 409, usmle-resource 264, amsa 2
+- **Kind**: clinical 1496, physio 430, anatomy 217, skills 150
+- **Year**: 1 274, 2 438, 3 799, 4 782
+- **Difficulty**: 1 495, 2 1452, 3 346
+- **Specialties**: 45; the five largest Gastroenterology 240, Neurology 191, Cardiology 190, Respiratory Medicine 162, Paediatrics 144; the five smallest Medicolegal 10, Cardiothoracic Surgery 12, Occupational/Environmental Medicine 12, Professionalism 12, Bioethics 13
 
-**Years and difficulties** (`scripts/tag-years.mjs`): the model set the year of 2289 of 2289 and the difficulty of 2289; the rest use the fallback guess. Where both exist, the guessed year matches the model's in 67.8% (within a year in 99.5%) and the guessed difficulty in 57.8%: run the tagger after new questions are written. Of the 790 pooled questions, every one has its kind from the tagger (`tag-years.mjs --kinds`).
+**Years and difficulties** (`scripts/tag-years.mjs`): the model set the year of 2289 of 2293 and the difficulty of 2289; the rest use the fallback guess. Where both exist, the guessed year matches the model's in 68.4% (within a year in 99.5%) and the guessed difficulty in 57.8%: run the tagger after new questions are written. Of the 794 pooled questions, **4 are filed clinical by default** (`tag-years.mjs --kinds`).
 
 ## Cues and residual flaws in the duel, by route
 
@@ -38,12 +38,12 @@ The same checks the pool uses, run over every question the duel can deal, whiche
 | ai pool | 409 | 9.8% | 20% | A 88, B 82, C 76, D 80, E 83 | schema 100%, vignette 66%, absolute-terms 2.2%, clang 2% |
 | ai station | 532 | 0.9% | 25% | A 130, B 127, C 128, D 147 | schema 100%, vignette 98.9%, absolute-terms 12.2%, clang 7.9% |
 | amsa | 2 | 50% | 25% | B 1, D 1 | schema 100% |
-| open-exam | 559 | 29.7% | 24.5% | A 106, B 121, C 161, D 157, E 14 | schema 100%, vignette 78.7%, cover-options 9.3%, stem-length 7.7% |
+| open-exam | 563 | 28.6% | 24.4% | A 108, B 122, C 161, D 157, E 15 | schema 100%, vignette 78%, stem-length 8%, longest-key 7.1% |
 | usmle-resource | 264 | 20.1% | 25% | A 66, B 63, C 57, D 78 | schema 100%, vignette 48.5%, stem-length 43.2%, lead-in 14.8% |
 
 Key position is where the writer put the key; no student sees it there: the duel shuffles every question's options and Study moves the key to a place set by the question (`mcq/schema.mjs` `displayOrder`). Length cannot be shuffled away, so the longest-key column is the cue that counts.
 
-Near-duplicate stems in the duel: 24 pairs, 3 of them across routes (two writers making the same case). They share 17 groups (lib/duel-pack.mjs groupCases), and a duel deals one question of a group unless nothing else is left.
+Near-duplicate stems in the duel: 29 pairs, 4 of them across routes (two writers making the same case). They share 21 groups (lib/duel-pack.mjs groupCases), and a duel deals one question of a group unless nothing else is left.
 - mxq-613 and mxq-615: 85.3%
 - mxq-596 and mxq-619: 85%
 - mxq-339 and mxq-340: 67.9%
@@ -51,9 +51,9 @@ Near-duplicate stems in the duel: 24 pairs, 3 of them across routes (two writers
 - hy-02e11c8d and hy-133492a2: 66.7%
 - hy-089869d5 and hy-3080b493: 66.7%
 - mxq-601 and mxq-603: 66%
+- headqa-2015-213 and mxq-292: 57.8%
 - ai-mcq-6dea4d62 and mmlu-medical_genetics-081: 57.1% (ai pool / usmle-resource)
-- mmlu-anatomy-003 and mmlu-anatomy-117: 57.1%
-- mmlu-anatomy-003 and mmlu-anatomy-120: 57.1%
+- headqa-2013-233 and mmlu-medical_genetics-081: 57.1% (open-exam / usmle-resource)
 
 ## From candidate to pool, by route
 

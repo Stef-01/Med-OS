@@ -19,6 +19,7 @@ import { plain } from '../../public/js/study-kit/safe.mjs';
 import { signature, nearDuplicate, shingles, containment } from '../../public/js/mcq/flaws.mjs';
 import { DUP_AT } from './mcq-audit.mjs';
 import { storedFor } from './mcq-explain.mjs';
+import { storedAdaptation, ADAPTED_CREDIT } from './mcq-adapt.mjs';
 
 export const LIMITS = { option: 70, minDistractors: 3 }, LONG = 1.8;
 /* every specialty a station lists, so a player finds it under each (the duel's topics) */
@@ -135,13 +136,16 @@ const cut = (s, n, clean = strip) => { const t = clean(s); if (t.length <= n) re
 const topicsOfStation = (st, first) => [...new Set([first, ...(Array.isArray(st?.specialty) ? st.specialty : [])].filter(Boolean))].slice(0, 6);
 /* explained: data/mcq/explanations.json (scripts/explain-mcq.mjs): for a question published without an explanation,
    the AI-written one reviewed for it, marked whyBy "ai" so Study and the duel say who wrote it */
-export function poolQuestion(q, byStation = new Map(), kinds = {}, explained = {}) {
-  const stem = q.ask ? `${spaces(q.stem)} ${spaces(q.ask)}` : spaces(q.stem);
+/* adapted: data/mcq/adapted.json (scripts/adapt-headqa.mjs): a HEAD-QA question's wording in clear English, the same
+   options in the same order and the same key, shown with that said in its credit line */
+export function poolQuestion(q, byStation = new Map(), kinds = {}, explained = {}, adapted = {}) {
+  const ad = storedAdaptation(adapted, q);
+  const stem = ad ? spaces(ad.stem) : q.ask ? `${spaces(q.stem)} ${spaces(q.ask)}` : spaces(q.stem);
   if (stem.length > DUEL.stem) return { q: null, why: `${q.id}: the stem is ${stem.length} characters (the duel shows ${DUEL.stem})` };
-  if (q.options.some(o => o.length > DUEL.option)) return { q: null, why: `${q.id}: an option is longer than ${DUEL.option} characters` };
+  if ((ad ? ad.options : q.options).some(o => o.length > DUEL.option)) return { q: null, why: `${q.id}: an option is longer than ${DUEL.option} characters` };
   const kind = q.provenance?.kind || '';
   const notes = (q.why || []).map((w, i) => (i === q.answer || !w ? null : cut(w, DUEL.note, spaces)));
-  const out = { id: q.id, stem, options: [...q.options], answer: q.answer };
+  const out = { id: q.id, stem, options: ad ? [...ad.options] : [...q.options], answer: q.answer };
   const why = q.explanation ? cut(q.explanation, DUEL.why, spaces) : ''; if (why) out.why = why;
   if (notes.some(Boolean)) out.notes = notes;
   const ex = !why && storedFor(explained, q);
@@ -152,7 +156,7 @@ export function poolQuestion(q, byStation = new Map(), kinds = {}, explained = {
   out.cat = POOL_KINDS.includes(kinds[q.id]) ? kinds[q.id] : 'clinical';   /* scripts/tag-years.mjs --kinds; clinical until it has looked */
   out.origin = kind === 'ai' || kind === 'amsa' ? 'ai' : 'human';
   out.source = kind;
-  if (kind === 'open-exam' || q.provenance?.generator?.how === 'imported') out.credit = String(q.provenance?.source?.name || '').slice(0, 300);   /* the citation (or the copyright notice) its terms ask for */
+  if (kind === 'open-exam' || q.provenance?.generator?.how === 'imported') out.credit = `${String(q.provenance?.source?.name || '').slice(0, 200)}${ad ? `; ${ADAPTED_CREDIT}` : ''}`;   /* the citation (or the copyright notice) its terms ask for */
   return { q: out, why: '' };
 }
 /* years: { id: 1..4 } from scripts/tag-years.mjs (data/mcq/years.json); a question it has not tagged gets guessYear() */
@@ -182,10 +186,10 @@ export function repeatOf(q, kept) {
   for (const k of kept) if (nearDuplicate(s, k.sig).dup && keyOverlap(s.key, k.sig.key) >= REPEAT_KEY) return k.id;
   return null;
 }
-export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {}, kinds = {}, hy = [], mxq = [], mxqCredit = '', explanations = {} } = {}) {
+export function buildPack(pool, { mcq = {}, stations = [], years = {}, difficulty = {}, kinds = {}, hy = [], mxq = [], mxqCredit = '', explanations = {}, adapted = {} } = {}) {
   const list = [...(pool?.questions || [])].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), questions = [], dropped = [];
   const byStation = new Map(stations.map(st => [st.id, st]));
-  for (const p of list) { const { q, why } = poolQuestion(p, byStation, kinds, explanations); if (q) questions.push(q); else dropped.push(why); }
+  for (const p of list) { const { q, why } = poolQuestion(p, byStation, kinds, explanations, adapted); if (q) questions.push(q); else dropped.push(why); }
   let catN = 0;
   for (const sid of Object.keys(mcq).sort()) {
     const st = byStation.get(sid);
