@@ -67,15 +67,15 @@ Failure rate of each check (% of items):
 
 ## 4. The review, reviewed twice
 
-80 judged candidates, spread over the kinds, reviewed a second time from scratch (`--retest`, `scripts/lib/mcq-retest.mjs`). A flip is a question that passes the selector's checks and bar on one review and not the other: the share of the pool's membership that is the reviewer's noise.
+81 judged candidates, spread over the kinds, reviewed a second time from scratch (`--retest`, `scripts/lib/mcq-retest.mjs`). A flip is a question that passes the selector's checks and bar on one review and not the other: the share of the pool's membership that is the reviewer's noise.
 
 | Kind | Retested | Same verdict (%) | Same key verdict (%) | Same solves (%) | Quality drift mean | Drift p90 | Drift max | Pass first / second | Flips (%) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| ai | 20 | 90 | 100 | 100 | 1.7 | 3 | 8 | 18 / 18 | 0 (0) |
+| ai | 21 | 85.7 | 100 | 100 | 1.6 | 3 | 8 | 19 / 19 | 0 (0) |
 | amsa | 20 | 85 | 100 | 100 | 1.6 | 3 | 6 | 10 / 10 | 2 (10) |
 | open-exam | 20 | 80 | 95 | 100 | 1.7 | 3 | 8 | 5 / 5 | 2 (10) |
 | usmle-resource | 20 | 95 | 100 | 100 | 1.7 | 5 | 5 | 17 / 16 | 1 (5) |
-| **all** | 80 | 87.5 | 98.8 | 100 | 1.7 | 5 | 8 | 50 / 49 | 5 (6.3) |
+| **all** | 81 | 86.4 | 98.8 | 100 | 1.6 | 5 | 8 | 51 / 50 | 5 (6.2) |
 
 Flipped: osce-amsa-307 (81 then 78, passed on the first); osce-amsa-375 (75 then 81, passed on the second); headqa-2015-82 (80 then 82, passed on the second); headqa-2016-92 (84 then 79, passed on the first); mmlu-professional_medicine-097 (82 then 79, passed on the first).
 

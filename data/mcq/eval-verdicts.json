@@ -4405,5 +4405,48 @@
    ],
    "suggestion": "Either ask for a calculated PPV/NPV (or the new PPV at a stated lower prevalence) so the 2x2 data is used, or trim the numbers and keep the question conceptual. Add an explanation of why prevalence changes predictive values but not sensitivity or specificity."
   }
+ },
+ "retest:ai-mcq-420d1e2f": {
+  "hash": "cdf5d2cc",
+  "judge": "claude-opus-5-5 via the Claude Code CLI",
+  "judgeVersion": "judge-1",
+  "at": "2026-10-28T02:41:37.618Z",
+  "solves": [
+   {
+    "answer": 1,
+    "confidence": 0.9,
+    "reason": "In a COPD patient at risk of CO2 retention, giving high-flow oxygen without a set target worsens hypercapnia (through V/Q mismatch, the Haldane effect and reduced breathing drive), so controlled oxygen aiming for SpO2 88–92% is advised."
+   },
+   {
+    "answer": 1,
+    "confidence": 0.93,
+    "reason": "In a COPD patient who likely retains CO2, uncontrolled high-flow oxygen worsens ventilation–perfusion mismatch and, through the Haldane effect, raises CO2, so the target should be an SpO2 of 88–92%."
+   }
+  ],
+  "rubric": {
+   "key_correct": "yes",
+   "other_defensible": [],
+   "single_best": 5,
+   "distractors": 4,
+   "relevance": 4,
+   "accuracy": 5,
+   "explanation": 5,
+   "safety": {
+    "ok": true,
+    "issues": []
+   },
+   "flaws": [
+    "Telegraphic stem lacking vital signs/ABG; lead-in is not a complete question",
+    "COPD plus high-flow oxygen makes the answer fairly obvious to test-wise students"
+   ],
+   "topic": "Respiratory Medicine",
+   "verdict": "accept",
+   "reasons": [
+    "Key is correct and consistent with TSANZ/BTS oxygen guidance",
+    "Distractors are homogeneous complications; the effusion is a plausible red herring for A and E",
+    "Explanation addresses each option accurately"
+   ],
+   "suggestion": "Optionally expand the vignette with vitals and a baseline ABG showing chronic CO2 retention, and phrase the lead-in as a full question (\"Which of the following is the greatest risk of this treatment?\")."
+  }
  }
 }
