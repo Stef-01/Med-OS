@@ -89,15 +89,12 @@ Not marked yet: the 40 questions in `docs/mcq-spotcheck.md` wait for a person's 
 
 ## 7. Explanations written for published questions
 
-280 pooled questions were published with the key only (open-exam 120, usmle-resource 160). `scripts/explain-mcq.mjs` wrote one with the key given and kept it only when a second review, with the key, found it accurate and consistent: **273 have one (97.5%)**; 7 do not (5 refused by the review, 2 by the format checks, the rest not yet written). Study and the duel mark them AI-written. The review is the same model family checking itself; a person's spot-check of the explanations is the next step.
+280 pooled questions were published with the key only (open-exam 120, usmle-resource 160). `scripts/explain-mcq.mjs` wrote one with the key given and kept it only when a second review, with the key, found it accurate and consistent: **276 have one (98.6%)**; 4 do not (2 refused by the review, 2 by the format checks, the rest not yet written). Study and the duel mark them AI-written. The review is the same model family checking itself; a person's spot-check of the explanations is the next step.
 
 What the review still refuses:
 
-- The gout note says allopurinol is 'never' started during an acute attack, but current guidance (e.g. ACR 2020) allows starting urate-lowering therapy during a flare with anti-inflammatory cover.
-- The stem describes a 67-year-old man, but the explanation calls the patient 'she' twice, in the 'why' ('even though she has no fever') and in the note on option D.
-- The note on option D says allopurinol is 'never' started during an acute attack, but current guidance (e.g. ACR 2020) allows starting urate-lowering therapy during a flare with anti-inflammatory cover.
-- The delusional disorder note says it involves only non-bizarre delusions, but DSM-5 removed this requirement and now allows bizarre delusions (with a 'bizarre content' specifier).
-- The B12 note implies a normal MCV and haemoglobin exclude B12 deficiency, but B12 deficiency can cause neuropathy without anaemia or macrocytosis.
+- The gout note says allopurinol is 'never' started during an acute attack, but current guidance (ACR 2020) allows urate-lowering therapy to be started during a flare with anti-inflammatory cover.
+- The delusional disorder note says it requires non-bizarre delusions, but DSM-5 removed that requirement and allows bizarre delusions (with the 'with bizarre content' specifier); the real reasons to exclude it here are the disorganised thinking and negative symptoms.
 
 ## 8. The tags, tagged twice
 

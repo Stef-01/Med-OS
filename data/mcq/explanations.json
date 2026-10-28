@@ -421,6 +421,20 @@
    "model": "opus",
    "at": "2026-10-27"
   },
+  "headqa-2014-106": {
+   "hash": "60902489",
+   "why": "Renal failure that develops weeks after arterial catheterisation, together with blue or purple toes and worsening hypertension, points to cholesterol atheroembolism. Look for supporting signs such as eosinophilia, eosinophiluria and low complement. Renal function usually declines slowly over weeks and often does not recover.",
+   "notes": [
+    "Malignant hypertension needs retinopathy (papilloedema, haemorrhages) and usually microangiopathic haemolysis, and it does not explain purple toe lesions after catheterisation.",
+    "Contrast nephropathy starts within 24 to 72 hours of contrast and usually recovers, so it does not fit renal failure appearing 3 weeks later with toe lesions.",
+    "Rapidly progressive glomerulonephritis presents with nephritic sediment and is not linked to a recent vascular procedure or to purple toe lesions.",
+    null,
+    "Bilateral renal artery stenosis can cause hypertension and renal impairment, but it does not cause distal embolic skin lesions in the feet after catheterisation."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
   "headqa-2014-110": {
    "hash": "10a71776",
    "why": "Long-standing uncontrolled RA with a very high CRP, nephrotic-range proteinuria, and a thick-walled restrictive heart with conduction disease point to one systemic infiltrative process: secondary AA amyloidosis.",
@@ -1154,6 +1168,19 @@
    "model": "opus",
    "at": "2026-10-27"
   },
+  "headqa-2015-74": {
+   "hash": "8f6e53d7",
+   "why": "Ascitic neutrophils are 60% of 2,300 cells/mL, about 1,380/mL, which is well above the threshold of 250/mL. That makes this spontaneous bacterial peritonitis, even without fever. Start an IV third-generation cephalosporin (cefotaxime, or ceftriaxone as usually used in Australia) straight away, with albumin when indicated.",
+   "notes": [
+    "Salt restriction is part of long-term ascites management, but it does not treat the infection, which is the urgent problem.",
+    "Spironolactone treats ascites over the long term but does nothing for spontaneous bacterial peritonitis, which needs immediate antibiotics.",
+    null,
+    "Large-volume paracentesis is for tense or refractory ascites and is not the priority when the fluid shows infection."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
   "headqa-2015-81": {
    "hash": "ffe1202c",
    "why": "Thyrotoxicosis with suppressed TSH, no uptake on the scan and no goitre points to exogenous thyroxine. Low thyroglobulin is the decisive finding, because taking thyroxine suppresses the gland's own thyroglobulin output.",
@@ -1374,6 +1401,19 @@
    "by": "ai",
    "model": "opus",
    "at": "2026-10-27"
+  },
+  "headqa-2016-191": {
+   "hash": "128cbc56",
+   "why": "Synovial fluid with 20,000 white cells/mm3, 85% neutrophils and no crystals, in a diabetic patient recently in hospital who now has leucocytosis, should be treated as septic arthritis. A negative Gram stain does not exclude infection. Admit, give IV antibiotics until the culture result is back, and drain the joint. In Australia, eTG suggests IV flucloxacillin, adding vancomycin if MRSA is a risk.",
+   "notes": [
+    "Injecting a steroid into a joint that may be infected is contraindicated and could make a septic arthritis much worse.",
+    "Possible septic arthritis needs admission and IV antibiotics; treating as an outpatient with oral antibiotics and waiting a week risks destroying the joint.",
+    null,
+    "No crystals were seen, so there is no evidence of gout, and steroids with allopurinol would leave a probable infection untreated."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
   },
   "headqa-2016-192": {
    "hash": "86575508",
@@ -3613,33 +3653,21 @@
   }
  },
  "refused": {
-  "headqa-2014-106": {
-   "why": "not one note per option",
-   "at": "2026-10-27"
-  },
   "headqa-2014-111": {
-   "why": "review: The gout note says allopurinol is 'never' started during an acute attack, but current guidance (e.g. ACR 2020) allows starting urate-lowering therapy during a flare with anti-inflammatory cover.",
-   "at": "2026-10-27"
-  },
-  "headqa-2015-74": {
-   "why": "review: The stem describes a 67-year-old man, but the explanation calls the patient 'she' twice, in the 'why' ('even though she has no fever') and in the note on option D.",
-   "at": "2026-10-27"
-  },
-  "headqa-2016-191": {
-   "why": "review: The note on option D says allopurinol is 'never' started during an acute attack, but current guidance (e.g. ACR 2020) allows starting urate-lowering therapy during a flare with anti-inflammatory cover.",
-   "at": "2026-10-27"
+   "why": "review: The gout note says allopurinol is 'never' started during an acute attack, but current guidance (ACR 2020) allows urate-lowering therapy to be started during a flare with anti-inflammatory cover.",
+   "at": "2026-10-28"
   },
   "medqa-us4-test-0896": {
-   "why": "review: The delusional disorder note says it involves only non-bizarre delusions, but DSM-5 removed this requirement and now allows bizarre delusions (with a 'bizarre content' specifier).",
-   "at": "2026-10-27"
+   "why": "review: The delusional disorder note says it requires non-bizarre delusions, but DSM-5 removed that requirement and allows bizarre delusions (with the 'with bizarre content' specifier); the real reasons to exclude it here are the disorganised thinking and negative symptoms.",
+   "at": "2026-10-28"
   },
   "medqa-us4-test-1116": {
-   "why": "review: The B12 note implies a normal MCV and haemoglobin exclude B12 deficiency, but B12 deficiency can cause neuropathy without anaemia or macrocytosis.",
-   "at": "2026-10-27"
+   "why": "no note for option 4",
+   "at": "2026-10-28"
   },
   "mmlu-professional_medicine-100": {
    "why": "it names an option by letter (the options are shuffled when shown)",
-   "at": "2026-10-27"
+   "at": "2026-10-28"
   }
  }
 }
