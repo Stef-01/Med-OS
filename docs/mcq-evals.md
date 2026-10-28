@@ -99,6 +99,18 @@ What the review still refuses:
 - The delusional disorder note says it involves only non-bizarre delusions, but DSM-5 removed this requirement and now allows bizarre delusions (with a 'bizarre content' specifier).
 - The B12 note implies a normal MCV and haemoglobin exclude B12 deficiency, but B12 deficiency can cause neuropathy without anaemia or macrocytosis.
 
+## 8. The tags, tagged twice
+
+Every question's year, difficulty and (pooled) kind come from the model (`scripts/tag-years.mjs`); the duel's 0 to 1 ladder climbs by year and Study filters by all three. `--retest` tags a seeded 80 again from scratch, as the tagger does (the median of 3 passes, each in its own batch order), and compares (2026-10-28):
+
+| Tag | Items | Same (%) | Within one step (%) | Kappa |
+| --- | ---: | ---: | ---: | ---: |
+| year (1 to 4) | 80 | 93.8 | 98.8 | 0.89 |
+| difficulty (1 to 3) | 80 | 85 | 100 | 0.75 |
+| kind | 47 | 100 | – | 1 |
+
+Difficulty is the soft one: the model judges it partly against the other questions in the batch, so one pass and a differently batched one disagree by a step about a quarter of the time. The tag is the median of several passes for that reason.
+
 ## Limits
 
 - The judge is one model family; MedQA and MMLU items may be in its training data, so its solve rate on them is an upper bound.

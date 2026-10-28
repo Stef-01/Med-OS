@@ -1,6 +1,6 @@
 # MCQ audit
 
-Written by `node scripts/mcq-audit.mjs` on 2026-10-27 from the standard pool (`public/mcq/pool.json`) and the duel pack (`public/duel/pack.json`). Every pooled question has passed the flaw checks, the model review and the bar; this looks at the set as a whole. The numbers are in `data/mcq/audit.json`.
+Written by `node scripts/mcq-audit.mjs` on 2026-10-28 from the standard pool (`public/mcq/pool.json`) and the duel pack (`public/duel/pack.json`). Every pooled question has passed the flaw checks, the model review and the bar; this looks at the set as a whole. The numbers are in `data/mcq/audit.json`.
 
 ## Answer-time formats
 
@@ -22,11 +22,11 @@ A question fits a format when reading it (4 words a second past the first 12, op
 - **Source**: ai 1464, open-exam 559, usmle-resource 144, amsa 56
 - **Route**: open-exam 559, ai station 532, ai high-yield 523, ai pool 409, usmle-resource 144, amsa 56
 - **Kind**: clinical 1536, physio 376, anatomy 161, skills 150
-- **Year**: 1 180, 2 404, 3 866, 4 773
-- **Difficulty**: 1 513, 2 1363, 3 347
+- **Year**: 1 192, 2 403, 3 849, 4 779
+- **Difficulty**: 1 485, 2 1408, 3 330
 - **Specialties**: 45; the five largest Gastroenterology 253, Cardiology 194, Neurology 183, Respiratory Medicine 168, Paediatrics 137; the five smallest Medicolegal 10, Cardiothoracic Surgery 11, OMS/Dental 12, Occupational/Environmental Medicine 12, Professionalism 12
 
-**Years and difficulties** (`scripts/tag-years.mjs`): the model set the year of 2223 of 2223 and the difficulty of 2223; the rest use the fallback guess. Where both exist, the guessed year matches the model's in 68.6% (within a year in 99.6%) and the guessed difficulty in 54.7%: run the tagger after new questions are written. Of the 724 pooled questions, every one has its kind from the tagger (`tag-years.mjs --kinds`).
+**Years and difficulties** (`scripts/tag-years.mjs`): the model set the year of 2223 of 2223 and the difficulty of 2223; the rest use the fallback guess. Where both exist, the guessed year matches the model's in 68.4% (within a year in 99.6%) and the guessed difficulty in 57.4%: run the tagger after new questions are written. Of the 724 pooled questions, every one has its kind from the tagger (`tag-years.mjs --kinds`).
 
 ## Cues and residual flaws in the duel, by route
 
