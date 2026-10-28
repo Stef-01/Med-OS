@@ -228,3 +228,19 @@ test('pastedDraft: the form\'s source fills a paste that names none; a paste wit
   assert.deepEqual([own.source, own.url, own.licence, own.author, own.topic], ['OpenStax', '', 'CC BY 4.0', 'Sam', ''], 'never another source\'s link; an unknown topic is left for the review');
   assert.equal(pastedDraft({ stem: 's' }).source, '', 'no form: written by the submitter');
 });
+
+test('preclinical (level:preclinical): recall needs no patient and may be one line; its own quota; its own review', async () => {
+  const { benchmarkItem } = await import('./lib/mcq-sources.mjs');
+  const { quotaOf } = await import('./lib/mcq-select.mjs');
+  const { RUBRIC_PRECLINICAL, RUBRIC_SYSTEM } = await import('./lib/mcq-judge.mjs');
+  const row = topic => ({ id: `mmlu-${topic}-001`, stem: 'Which nerve supplies the deltoid muscle?', options: ['Axillary', 'Radial', 'Ulnar', 'Median'], answer: 0, topic, source: { licence: 'MIT' } });
+  const pre = benchmarkItem(row('anatomy')), clin = benchmarkItem(row('professional_medicine'));
+  assert.ok(pre.tags.includes('level:preclinical') && !clin.tags.includes('level:preclinical'));
+  assert.equal(F.isPreclinical(pre), true);
+  assert.equal(F.checkVignette(pre).pass, true, 'no patient needed');
+  assert.equal(F.checkVignette(clin).pass, false, 'a clinical question still needs one');
+  assert.equal(F.checkLength(pre).pass, true, 'a one-line recall question is long enough');
+  assert.equal(quotaOf({ kind: 'usmle-resource', q: pre }), 'preclinical');
+  assert.equal(quotaOf({ kind: 'usmle-resource', q: clin }), 'usmle-resource');
+  assert.match(RUBRIC_PRECLINICAL, /Year 1 or 2/); assert.doesNotMatch(RUBRIC_PRECLINICAL, /Step 2 CK material/); assert.match(RUBRIC_SYSTEM, /Step 2 CK material/);
+});

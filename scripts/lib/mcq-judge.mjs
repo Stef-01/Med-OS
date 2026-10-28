@@ -20,6 +20,8 @@ const str = { type: 'string' }, int = (min, max) => ({ type: 'integer', minimum:
 const obj = (props, req = Object.keys(props)) => ({ type: 'object', additionalProperties: false, required: req, properties: props });
 
 export const SOLVE_SYSTEM = `You are sitting a USMLE Step 2 Clinical Knowledge examination. Read the question and choose the single best answer, as a well-prepared final-year medical student would, applying current evidence-based practice. Answer with the option's letter. Give your confidence (0 to 1) and one sentence of reasoning.`;
+/* a preclinical question (tag level:preclinical) is sat and reviewed as a Year 1 or 2 exam, so recall is judged as recall */
+export const SOLVE_PRECLINICAL = `You are sitting a first- or second-year medical school examination in the basic sciences (anatomy, physiology, biochemistry, genetics, pharmacology, pathology). Read the question and choose the single best answer, as a well-prepared student would. Answer with the option's letter. Give your confidence (0 to 1) and one sentence of reasoning.`;
 export const solveSchema = n => obj({ answer: { type: 'string', enum: [...LETTERS.slice(0, n)] }, confidence: { type: 'number' }, reason: str });
 
 export const RUBRIC_SYSTEM = `You review single-best-answer questions for a medical-school question pool, to the standard of the NBME item-writing guide (Constructing Written Test Questions for the Basic and Clinical Sciences) and of USMLE Step 2 Clinical Knowledge. You are given one question with its key. Judge only the question in front of you: its source is not given and does not matter.
@@ -38,6 +40,9 @@ Score each part strictly:
 - verdict: accept (use as it is), revise (good idea, fixable flaw), reject (wrong, unsafe, or not worth fixing).
 - reasons: at most three short reasons for the verdict.
 - suggestion: one or two sentences on how to fix it, or "" when nothing needs fixing.`;
+export const RUBRIC_PRECLINICAL = RUBRIC_SYSTEM
+  .replace('and of USMLE Step 2 Clinical Knowledge', 'for the first two (preclinical) years of a medical degree')
+  .replace(/- relevance \(1-5\):[^\n]*/, '- relevance (1-5): is it core Year 1 or 2 knowledge a doctor builds on (anatomy, physiology, biochemistry, genetics, pharmacology mechanism, pathology, or the science behind a clinical sign)? A recall question without a patient is fine here. 1 = trivia no doctor needs, or a fact out of date.');
 export const RUBRIC_SCHEMA = obj({
   key_correct: { type: 'string', enum: ['yes', 'no', 'unsure'] }, other_defensible: { type: 'array', items: str },
   single_best: int(1, 5), distractors: int(1, 5), relevance: int(1, 5), accuracy: int(1, 5), explanation: int(0, 5),
@@ -67,11 +72,12 @@ export async function judgeItem(q, { ask, judge, now = () => new Date().toISOStr
   const n = q.options.length, fwd = q.options.map((_, i) => i), rev = [...fwd].reverse();
   const solves = [];
   for (const [run, order] of [[1, fwd], [2, rev]]) {
-    const { value } = await ask({ system: SOLVE_SYSTEM, content: solveText(q, order), schema: solveSchema(n), effort: 'medium', label: `${q.id} solve ${run}` });
+    const pre = Array.isArray(q.tags) && q.tags.includes('level:preclinical');
+    const { value } = await ask({ system: pre ? SOLVE_PRECLINICAL : SOLVE_SYSTEM, content: solveText(q, order), schema: solveSchema(n), effort: 'medium', label: `${q.id} solve ${run}` });
     const pos = LETTERS.indexOf(String(value.answer || '').toUpperCase());
     solves.push({ answer: pos >= 0 && pos < n ? order[pos] : -1, confidence: Math.max(0, Math.min(1, Number(value.confidence) || 0)), reason: String(value.reason || '').slice(0, 300) });
   }
-  const { value: rubric, model } = await ask({ system: RUBRIC_SYSTEM, content: rubricText(q), schema: RUBRIC_SCHEMA, effort: 'high', label: `${q.id} rubric` });
+  const { value: rubric, model } = await ask({ system: Array.isArray(q.tags) && q.tags.includes('level:preclinical') ? RUBRIC_PRECLINICAL : RUBRIC_SYSTEM, content: rubricText(q), schema: RUBRIC_SCHEMA, effort: 'high', label: `${q.id} rubric` });
   return { hash: contentHash(q), judge: judge || model || 'unknown', judgeVersion: JUDGE_VERSION, at: now(), solves, rubric: cleanRubric(rubric) };
 }
 const clip = (a, k, n) => (Array.isArray(a) ? a : []).map(x => String(x).slice(0, n)).filter(Boolean).slice(0, k);

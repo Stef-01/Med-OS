@@ -18,7 +18,8 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const benchDir = argv => { const i = argv.indexOf('--from'); return path.resolve(i >= 0 ? argv[i + 1] : process.env.MCQ_BENCH_DIR || path.join(ROOT, '..', 'research', 'mcq-src')); };
 export const SETS = [
   { out: 'medqa-us-step2-3.jsonl', from: 'medqa-us-test/normalised.jsonl', keep: r => r.meta_info === 'step2&3' },
-  { out: 'mmlu-professional-medicine.jsonl', from: 'mmlu-med/normalised.jsonl', keep: r => r.topic === 'professional_medicine' }
+  { out: 'mmlu-professional-medicine.jsonl', from: 'mmlu-med/normalised.jsonl', keep: r => r.topic === 'professional_medicine' },
+  { out: 'mmlu-basic-sciences.jsonl', from: 'mmlu-med/normalised.jsonl', keep: r => ['anatomy', 'medical_genetics', 'clinical_knowledge', 'college_medicine'].includes(r.topic) }   /* level:preclinical (lib/mcq-sources.mjs), with its own review and quota */
 ];
 const FIELDS = ['id', 'stem', 'options', 'answer', 'explanation', 'topic', 'meta_info', 'exam', 'source'];
 

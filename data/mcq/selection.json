@@ -4,51 +4,52 @@
    "ai": 512,
    "amsa": 105,
    "open-exam": 786,
-   "usmle-resource": 866
+   "usmle-resource": 1526
   },
   "pool": {
    "ai": 409,
    "open-exam": 120,
-   "usmle-resource": 160,
+   "usmle-resource": 184,
    "amsa": 2
   },
   "status": {
-   "pool": 691,
-   "rejected": 942,
-   "reserve": 636
+   "pool": 715,
+   "rejected": 986,
+   "reserve": 636,
+   "pending": 592
   },
   "topics": {
-   "Endocrinology": 22,
+   "Endocrinology": 24,
    "Bioethics": 12,
    "OMS/Dental": 8,
    "Breast/Endocrine Surgery": 9,
-   "Paediatrics": 34,
-   "Obstetrics": 17,
-   "Pathology": 8,
+   "Paediatrics": 36,
+   "Obstetrics": 18,
+   "Pathology": 14,
    "Trauma Surgery": 16,
    "Gastroenterology": 47,
    "Sexual Health": 15,
    "Cardiothoracic Surgery": 10,
    "Occupational/Environmental Medicine": 12,
-   "Cardiology": 48,
+   "Cardiology": 49,
    "Palliative Care": 8,
    "Medicolegal": 9,
-   "Haematology": 18,
+   "Haematology": 21,
    "Otorhinolaryngology": 13,
    "Vascular Surgery": 9,
    "Infectious Diseases": 46,
-   "Respiratory Medicine": 28,
+   "Respiratory Medicine": 29,
    "Rheumatology": 23,
-   "Emergency Medicine": 32,
+   "Emergency Medicine": 33,
    "Urology": 11,
    "Professionalism": 11,
    "Gastrointestinal Surgery": 10,
    "Oncology": 5,
-   "Neurology": 28,
+   "Neurology": 32,
    "Neonatology": 16,
    "Addiction Medicine": 6,
    "Neurosurgery": 10,
-   "General Surgery": 17,
+   "General Surgery": 18,
    "Geriatrics": 11,
    "Gynaecology": 23,
    "Indigenous Health": 7,
@@ -58,7 +59,7 @@
    "Plastic Surgery": 7,
    "Dermatology": 3,
    "Ophthalmology": 3,
-   "Nephrology": 11,
+   "Nephrology": 13,
    "Orthopaedics": 10,
    "Psychiatry": 13,
    "Public Health": 11,
@@ -67,13 +68,13 @@
   "positions": {
    "4": {
     "counts": [
-     55,
-     53,
-     49,
-     62
+     62,
+     61,
+     52,
+     68
     ],
-    "n": 219,
-    "chi2": 1.62
+    "n": 243,
+    "chi2": 2.15
    },
    "5": {
     "counts": [
@@ -87,13 +88,22 @@
     "chi2": 0.69
    }
   },
-  "topicCap": 104,
+  "topicCap": 108,
   "bars": {
    "base": 81,
    "ai": 89,
    "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
   },
   "funnel": {
+   "usmle-resource mmlu": {
+    "n": 932,
+    "pool": 82,
+    "bar": 53,
+    "review": 33,
+    "pending": 592,
+    "reserve": 171,
+    "flaws": 1
+   },
    "open-exam headqa": {
     "n": 786,
     "bar": 434,
@@ -115,14 +125,6 @@
     "duplicate": 9,
     "bar": 42
    },
-   "usmle-resource mmlu": {
-    "n": 272,
-    "reserve": 171,
-    "bar": 21,
-    "pool": 58,
-    "review": 21,
-    "flaws": 1
-   },
    "ai vignette": {
     "n": 159,
     "pool": 110,
@@ -141,7 +143,20 @@
    "amsa-245: the findings name the answer",
    "amsa-381: the findings name the answer",
    "headqa-2013-44: benchmark row not valid",
-   "headqa-2016-111: benchmark row not valid"
+   "headqa-2016-111: benchmark row not valid",
+   "mmlu-clinical_knowledge-034: benchmark row not valid",
+   "mmlu-clinical_knowledge-036: benchmark row not valid",
+   "mmlu-clinical_knowledge-103: benchmark row not valid",
+   "mmlu-clinical_knowledge-149: benchmark row not valid",
+   "mmlu-clinical_knowledge-175: benchmark row not valid",
+   "mmlu-clinical_knowledge-229: benchmark row not valid",
+   "mmlu-clinical_knowledge-253: benchmark row not valid",
+   "mmlu-college_medicine-019: benchmark row not valid",
+   "mmlu-college_medicine-102: benchmark row not valid",
+   "mmlu-college_medicine-144: benchmark row not valid",
+   "mmlu-anatomy-035: benchmark row not valid",
+   "mmlu-anatomy-100: benchmark row not valid",
+   "mmlu-medical_genetics-023: benchmark row not valid"
   ]
  },
  "decisions": [
@@ -24114,6 +24129,8335 @@
    "reasons": [],
    "quality": 93,
    "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-000",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-001",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 74 is below the base bar of 81 (flaws 80, review 70): lead-in"
+   ],
+   "quality": 74,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-002",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "the reviewer rejected it: Tests general-public knowledge, not Year 1–2 medical science"
+   ],
+   "quality": 75,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-003",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 87,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-004",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 89,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-005",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 71 is below the base bar of 81 (flaws 80, review 65): lead-in"
+   ],
+   "quality": 71,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-006",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-007",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "not a single best answer (A, D also defensible)",
+    "the reviewer rejected it: Nasal hair, mucous membranes and saliva are all real first-line innate defenses, so the item has no single correct answer."
+   ],
+   "quality": 63,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-008",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "not a single best answer (B also defensible)",
+    "the reviewer rejected it: Standard texts disagree: Moore says fusion starts in week 9, and others give week 8 for shelf elevation and fusion, so 'ten weeks' is not clearly right"
+   ],
+   "quality": 45,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-009",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-010",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 67 is below the base bar of 81 (flaws 74, review 63): lead-in, longest-key"
+   ],
+   "quality": 67,
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-011",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-012",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 78 is below the base bar of 81 (flaws 80, review 76): cover-options"
+   ],
+   "quality": 78,
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-013",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 76 is below the base bar of 81 (flaws 80, review 74): lead-in"
+   ],
+   "quality": 76,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-014",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 75 is below the base bar of 81 (flaws 80, review 71): cover-options"
+   ],
+   "quality": 75,
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-015",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 79 is below the base bar of 81 (flaws 80, review 79): cover-options"
+   ],
+   "quality": 79,
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-016",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-017",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 84,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-018",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-019",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "the reviewer rejected it: The content is far below preclinical medical-school level, so it does not tell students apart"
+   ],
+   "quality": 82,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-020",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-021",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-022",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-023",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-024",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-025",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-026",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-027",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-028",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-029",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-030",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-031",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-032",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-033",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-034",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-036",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-037",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-038",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-039",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-040",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-041",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-042",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-043",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-044",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-045",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-046",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-047",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-048",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-049",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-050",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "all-none:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-051",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-052",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-053",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-054",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-055",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-056",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-057",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-058",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-059",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-060",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-061",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-062",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-063",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-064",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 80, review 80): lead-in"
+   ],
+   "quality": 80,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-065",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 79 is below the base bar of 81 (flaws 100, review 65): "
+   ],
+   "quality": 79,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-066",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-067",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-068",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-069",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-070",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-071",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-072",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-073",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-074",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-075",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-076",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-077",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-078",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-079",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-080",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "grammar-cue:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-081",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-082",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-083",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-084",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-085",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-086",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-087",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-088",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-089",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-090",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-091",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-092",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-093",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-094",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-095",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-096",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-097",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-098",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-099",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-101",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-102",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-103",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-104",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-105",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-106",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-107",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-108",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-109",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-110",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-111",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-112",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-113",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-114",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-115",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-116",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-117",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-118",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-119",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-120",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-121",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-122",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "grammar-cue:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-123",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-124",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-125",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-126",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-127",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-128",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-129",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-130",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-131",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-132",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-anatomy-133",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-anatomy-134",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-000",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-001",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-002",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-003",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-004",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-005",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-006",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-007",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-008",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-009",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-010",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-011",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-012",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-013",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-014",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-015",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-016",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-017",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-018",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-019",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-020",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-021",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-022",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-023",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-024",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-025",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-026",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-027",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-028",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-029",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-030",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-031",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-032",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-033",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-035",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-037",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-038",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-039",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-040",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-041",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-042",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-043",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-044",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-045",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-046",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-047",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-048",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "all-none:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-049",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-050",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-051",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-052",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-053",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-054",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-055",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-056",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-057",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-058",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-059",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-060",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-061",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-062",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-063",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-064",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-065",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-066",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-067",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-068",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-069",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-070",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-071",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-072",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-073",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-074",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-075",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-076",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-077",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-078",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-079",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-080",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-081",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "longest-key:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-082",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-083",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-084",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-085",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-086",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "longest-key:minor",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-087",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-088",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-089",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-090",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "all-none:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-091",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-092",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-093",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-094",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-095",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "longest-key:minor",
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-096",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-097",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-098",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-099",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-100",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-101",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-102",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-104",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-105",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-106",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-107",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-108",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-109",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-110",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-111",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-112",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-113",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-114",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-115",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-116",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-117",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-118",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-119",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-120",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-121",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-122",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-123",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-124",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-125",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-126",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-127",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-128",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-129",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-130",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-131",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-132",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-133",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-134",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-135",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-136",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-137",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-138",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-139",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-140",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-141",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-142",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-143",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-144",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-145",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-146",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-147",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-148",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-150",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-151",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-152",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-153",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-154",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-155",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-156",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-157",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-158",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-159",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-160",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-161",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-162",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-163",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-164",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-165",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-166",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-167",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-168",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-169",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-170",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-171",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-172",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-173",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-174",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-176",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-177",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-178",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "all-none:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-179",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-180",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-181",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-182",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-183",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-184",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-185",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-186",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-187",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-188",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-189",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-190",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-191",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-192",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-193",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-194",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-195",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-196",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-197",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-198",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-199",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-200",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-201",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-202",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-203",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-204",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-205",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-206",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-207",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-208",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-209",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-210",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 72 is below the base bar of 81 (flaws 80, review 66): lead-in"
+   ],
+   "quality": 72,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-211",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "not a single best answer",
+    "the reviewer rejected it: Nursing or procedural fact with little preclinical science value"
+   ],
+   "quality": 72,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-212",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 75 is below the base bar of 81 (flaws 80, review 71): cover-options"
+   ],
+   "quality": 75,
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-213",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-214",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 78 is below the base bar of 81 (flaws 100, review 64): "
+   ],
+   "quality": 78,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-215",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 70 is below the base bar of 81 (flaws 80, review 63): cover-options"
+   ],
+   "quality": 70,
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-216",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 100, review 66): "
+   ],
+   "quality": 80,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-217",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 79 is below the base bar of 81 (flaws 80, review 79): lead-in"
+   ],
+   "quality": 79,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-218",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-219",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "the reviewer rejected it: Stem has no clinical context or focused question and fails the cover-the-options test"
+   ],
+   "quality": 70,
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-220",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-221",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-222",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "longest-key:minor",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-223",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-224",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-225",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-226",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-227",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-228",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-230",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-231",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-232",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-233",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-234",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-235",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-236",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-237",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-238",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-239",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-240",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-241",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-242",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-243",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-244",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-245",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-246",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-247",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-248",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-249",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-250",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-251",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-252",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-254",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-255",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-256",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-257",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-258",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-259",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-260",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 80 is below the base bar of 81 (flaws 100, review 66): "
+   ],
+   "quality": 80,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-261",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 75 is below the base bar of 81 (flaws 80, review 71): lead-in"
+   ],
+   "quality": 75,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-262",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "the reviewer judged the key wrong",
+    "an independent solver reached another answer both times",
+    "not a single best answer (A, B also defensible)",
+    "the reviewer rejected it: The rankings disagree between surveys: CDC 2015 puts pneumonia first and GI/C. difficile infection next. ECDC puts respiratory infection first, then UTI, then surgical site infection. Older UK teaching puts UTI first, then LRTI, then wound "
+   ],
+   "quality": 48,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-clinical_knowledge-263",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 63 is below the base bar of 81 (flaws 74, review 55): lead-in, absolute-terms"
+   ],
+   "quality": 63,
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-clinical_knowledge-264",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "an independent solver reached another answer both times",
+    "not a single best answer (B also defensible)"
+   ],
+   "quality": 51,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-000",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-001",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-002",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-003",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-004",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-005",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-006",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-007",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-008",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-009",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-010",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-011",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-012",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-013",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-014",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-015",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-016",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-017",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-018",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-020",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-021",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-022",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "all-none:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-023",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-024",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-025",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-026",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-027",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-028",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-029",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-030",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-031",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "clang:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-032",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "negative-stem:major",
+    "clang:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-033",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-034",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-035",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-036",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-037",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-038",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-039",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-040",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-041",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-042",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-043",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-044",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-045",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-046",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-047",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-048",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-049",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "units:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-050",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-051",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-052",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-053",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-054",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-055",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-056",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-057",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-058",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-059",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-060",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-061",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-062",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-063",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-064",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-065",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-066",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-067",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-068",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-069",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-070",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-071",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-072",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-073",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-074",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-075",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-076",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-077",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-078",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-079",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-080",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-081",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-082",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-083",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-084",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-085",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-086",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "longest-key:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-087",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-088",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-089",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-090",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-091",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-092",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-093",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor",
+    "clang:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-094",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-095",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-096",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-097",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-098",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-099",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-100",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-101",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-103",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-104",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-105",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-106",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-107",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-108",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-109",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 75 is below the base bar of 81 (flaws 80, review 71): lead-in"
+   ],
+   "quality": 75,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-110",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-111",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-112",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "absolute-terms:minor",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-113",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-114",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-115",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-116",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-117",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-118",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 78 is below the base bar of 81 (flaws 68, review 85): lead-in, absolute-terms, stem-length"
+   ],
+   "quality": 78,
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-119",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 75 is below the base bar of 81 (flaws 74, review 76): lead-in, stem-length"
+   ],
+   "quality": 75,
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-120",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "the reviewer rejected it: Sport-science trivia (lactate during soccer matches) not core preclinical medical knowledge"
+   ],
+   "quality": 67,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-121",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 63 is below the base bar of 81 (flaws 40, review 79): lead-in, cover-options, negative-stem"
+   ],
+   "quality": 63,
+   "flaws": [
+    "lead-in:major",
+    "cover-options:major",
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-122",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 75 is below the base bar of 81 (flaws 80, review 71): cover-options"
+   ],
+   "quality": 75,
+   "flaws": [
+    "cover-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-123",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 69 is below the base bar of 81 (flaws 60, review 75): cover-options, negative-stem"
+   ],
+   "quality": 69,
+   "flaws": [
+    "cover-options:major",
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-124",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-125",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-126",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-127",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-128",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-129",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-130",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-131",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-132",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "the reviewer rejected it: Sports-nutrition trivia that is not core preclinical knowledge"
+   ],
+   "quality": 64,
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-133",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 74 is below the base bar of 81 (flaws 80, review 70): lead-in"
+   ],
+   "quality": 74,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-134",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "clang:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-135",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-136",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-137",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-138",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-139",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 74 is below the base bar of 81 (flaws 80, review 70): lead-in"
+   ],
+   "quality": 74,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-140",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-141",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-142",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-143",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-145",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-146",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-147",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "all-none:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-148",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-149",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-150",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "clang:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-151",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-152",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-153",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-154",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-155",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-156",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-157",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-158",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-159",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-160",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-161",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-162",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-163",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-164",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-college_medicine-165",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-166",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-167",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-168",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-169",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-170",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 71 is below the base bar of 81 (flaws 60, review 79): cover-options, negative-stem"
+   ],
+   "quality": 71,
+   "flaws": [
+    "cover-options:major",
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-171",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "the reviewer rejected it: Sociology content (Ritzer's McDonaldization) that is not core preclinical medical knowledge"
+   ],
+   "quality": 65,
+   "flaws": [
+    "lead-in:major",
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-college_medicine-172",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 90,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-000",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-001",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-002",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-003",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-004",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-005",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-006",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "all-none:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-007",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-008",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 77 is below the base bar of 81 (flaws 80, review 75): lead-in"
+   ],
+   "quality": 77,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-009",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-010",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-011",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-012",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-013",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-014",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-015",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-016",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-017",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-018",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-019",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-020",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-021",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-022",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-024",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-025",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "duplicate-options:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-026",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-027",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-028",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-029",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-030",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-031",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-032",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-033",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-034",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-035",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-036",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-037",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-038",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-039",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-040",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-041",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-042",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-043",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-044",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-045",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-046",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-047",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-048",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-049",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-050",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-051",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-052",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-053",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-054",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-055",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-056",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "stem-length:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-057",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-058",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-059",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-060",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 83,
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-061",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-062",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-063",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-064",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-065",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-066",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-067",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-068",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 82,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-069",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 79 is below the base bar of 81 (flaws 80, review 79): negative-stem"
+   ],
+   "quality": 79,
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-070",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-071",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-072",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-073",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-074",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-075",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:major",
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-076",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-077",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-078",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-079",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 71 is below the base bar of 81 (flaws 80, review 65): negative-stem"
+   ],
+   "quality": 71,
+   "flaws": [
+    "negative-stem:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-080",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-081",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-082",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-083",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-084",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-085",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "all-none:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-086",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-087",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "cover-options:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-088",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-089",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-090",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 93,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-091",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 98,
+   "flaws": []
+  },
+  {
+   "id": "mmlu-medical_genetics-092",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 75 is below the base bar of 81 (flaws 80, review 71): lead-in"
+   ],
+   "quality": 75,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-093",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "bar",
+   "status": "rejected",
+   "reasons": [
+    "quality 73 is below the base bar of 81 (flaws 74, review 73): lead-in, longest-key"
+   ],
+   "quality": 73,
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-094",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-095",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 88,
+   "flaws": [
+    "lead-in:major"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-096",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pool",
+   "status": "pool",
+   "reasons": [],
+   "quality": 85,
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-097",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "review",
+   "status": "rejected",
+   "reasons": [
+    "the reviewer judged the key wrong",
+    "not a single best answer (A also defensible)",
+    "the reviewer rejected it: Keyed figure is outdated; current GWAS loci explain about 6% of BMI variance, closer to option A"
+   ],
+   "quality": 55,
+   "flaws": [
+    "lead-in:major",
+    "absolute-terms:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-098",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "lead-in:major",
+    "longest-key:minor"
+   ]
+  },
+  {
+   "id": "mmlu-medical_genetics-099",
+   "kind": "usmle-resource",
+   "route": "usmle-resource mmlu",
+   "stage": "pending",
+   "status": "pending",
+   "reasons": [
+    "waiting for the model review (node scripts/mcq-judge.mjs)"
+   ],
+   "flaws": [
+    "negative-stem:major"
+   ]
   },
   {
    "id": "mmlu-professional_medicine-000",

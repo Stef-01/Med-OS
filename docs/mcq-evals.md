@@ -13,7 +13,7 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 | Official USMLE Step 2 CK samples | 41 | 98.5 | 94 | 2.4 | 41 | 81 | 89 | 92 | 97.6 | 95.1 | 75.6 | 95.1 |
 | QUEST-AI GPT-4 look-alikes | 43 | 99.2 | 94 | 0 | 43 | 52 | 77 | 85 | 81.4 | 69.8 | 30.2 | 69.8 |
 | MedQA Step 1 | 679 | 96.1 | 80 | 9.3 | 0 | – | – | – | – | – | – | – |
-| MMLU clinical knowledge + college medicine | 428 | 73.8 | 56 | 65.4 | 30 | 48 | 59 | 66 | 90 | 0 | 0 | 0 |
+| MMLU clinical knowledge + college medicine | 660 | 85.9 | 68 | 58 | 68 | 55 | 71 | 78 | 94.1 | 35.3 | 11.8 | 35.3 |
 | MedMCQA dev (Indian PG entrance) | 4091 | 69.5 | 48 | 70.2 | 0 | – | – | – | – | – | – | – |
 | Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 72 | 78 | 81 | 99 | 55.2 | 1.9 | 1.9 |
 | Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 66 | 74 | 77 | 100 | 26.9 | 0 | 0 |
@@ -31,7 +31,7 @@ Failure rate of each check (% of items):
 | Official USMLE Step 2 CK samples | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 7.3 | 4.9 | 0 | 7.3 | 0 | 0 |
 | QUEST-AI GPT-4 look-alikes | 0 | 0 | 2.3 | 0 | 0 | 7 | 0 | 0 | 2.3 | 0 | 0 | 2.3 | 0 | 0 |
 | MedQA Step 1 | 0 | 0.1 | 5.4 | 0 | 0.7 | 3.1 | 0 | 0 | 1.6 | 2.5 | 1.3 | 24.2 | 0.7 | 0.7 |
-| MMLU clinical knowledge + college medicine | 0 | 41.8 | 15.2 | 1.2 | 7.7 | 6.5 | 0 | 0 | 9.6 | 1.2 | 2.1 | 100 | 84.8 | 0.2 |
+| MMLU clinical knowledge + college medicine | 0 | 43.5 | 13.2 | 1.2 | 6.7 | 5.9 | 0.3 | 0 | 7.1 | 0.8 | 2.4 | 0 | 9.5 | 0.2 |
 | MedMCQA dev (Indian PG entrance) | 0 | 51.8 | 20 | 5.9 | 15.5 | 4.8 | 0 | 0.1 | 3.4 | 0.3 | 1.7 | 98.6 | 89.9 | 0.3 |
 | Station-derived (AMSA) | 0 | 0 | 0 | 0 | 0 | 9.5 | 0 | 0 | 0 | 12.4 | 0 | 15.2 | 0 | 18.1 |
 | Station-derived (AI stations) | 0 | 0 | 0 | 0 | 0 | 11.5 | 0 | 0 | 0 | 11.5 | 0 | 42.3 | 0 | 11.5 |
@@ -81,7 +81,7 @@ Flipped: headqa-2015-82 (80 then 82, passed on the second); headqa-2016-92 (84 t
 
 ## 5. The pool as selected
 
-Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":866}. Decisions: {"pool":691,"rejected":942,"reserve":636}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":160,"amsa":2}. Topic cap 104. Key positions: 4 options 55/53/49/62 (χ² 1.62); 5 options 96/97/88/93/98 (χ² 0.69).
+Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":1526}. Decisions: {"pool":715,"rejected":986,"reserve":636,"pending":592}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":184,"amsa":2}. Topic cap 108. Key positions: 4 options 62/61/52/68 (χ² 2.15); 5 options 96/97/88/93/98 (χ² 0.69).
 
 ## 6. The human spot-check
 
@@ -89,7 +89,7 @@ Not marked yet: the 40 questions in `docs/mcq-spotcheck.md` wait for a person's 
 
 ## 7. Explanations written for published questions
 
-280 pooled questions were published with the key only (open-exam 120, usmle-resource 160). `scripts/explain-mcq.mjs` wrote one with the key given and kept it only when a second review, with the key, found it accurate and consistent: **276 have one (98.6%)**; 4 do not (2 refused by the review, 2 by the format checks, the rest not yet written). Study and the duel mark them AI-written. The review is the same model family checking itself; a person's spot-check of the explanations is the next step.
+304 pooled questions were published with the key only (open-exam 120, usmle-resource 184). `scripts/explain-mcq.mjs` wrote one with the key given and kept it only when a second review, with the key, found it accurate and consistent: **276 have one (90.8%)**; 28 do not (2 refused by the review, 2 by the format checks, the rest not yet written). Study and the duel mark them AI-written. The review is the same model family checking itself; a person's spot-check of the explanations is the next step.
 
 What the review still refuses:
 

@@ -193,44 +193,44 @@
    "judged": 0
   },
   "MMLU clinical knowledge + college medicine": {
-   "n": 428,
+   "n": 660,
    "flaw": {
-    "mean": 73.8,
-    "p5": 56,
-    "p10": 62,
-    "p50": 68,
-    "anyMajor": 65.4
+    "mean": 85.9,
+    "p5": 68,
+    "p10": 74,
+    "p50": 80,
+    "anyMajor": 58
    },
    "checks": {
     "schema": 0,
-    "lead-in": 41.8,
-    "cover-options": 15.2,
+    "lead-in": 43.5,
+    "cover-options": 13.2,
     "all-none": 1.2,
-    "negative-stem": 7.7,
-    "longest-key": 6.5,
-    "grammar-cue": 0,
+    "negative-stem": 6.7,
+    "longest-key": 5.9,
+    "grammar-cue": 0.3,
     "convergence": 0,
-    "absolute-terms": 9.6,
-    "clang": 1.2,
-    "duplicate-options": 2.1,
-    "vignette": 100,
-    "stem-length": 84.8,
+    "absolute-terms": 7.1,
+    "clang": 0.8,
+    "duplicate-options": 2.4,
+    "vignette": 0,
+    "stem-length": 9.5,
     "units": 0.2
    },
-   "judged": 30,
+   "judged": 68,
    "quality": {
-    "mean": 63.7,
-    "p5": 48,
-    "p10": 50,
-    "p25": 59,
-    "p50": 66
+    "mean": 77.1,
+    "p5": 55,
+    "p10": 63,
+    "p25": 71,
+    "p50": 78
    },
-   "gatesPass": 16.7,
-   "solved2": 90,
-   "keyCorrect": 96.7,
-   "passBase": 0,
-   "passAi": 0,
-   "passAsSelected": 0
+   "gatesPass": 82.4,
+   "solved2": 94.1,
+   "keyCorrect": 94.1,
+   "passBase": 35.3,
+   "passAi": 11.8,
+   "passAsSelected": 35.3
   },
   "MedMCQA dev (Indian PG entrance)": {
    "n": 4091,
@@ -684,19 +684,19 @@
   "unmarked": 40
  },
  "explained": {
-  "need": 280,
+  "need": 304,
   "kept": 276,
-  "share": 98.6,
+  "share": 90.8,
   "refusedByReview": 2,
   "refusedByFormat": 2,
-  "missing": 4,
+  "missing": 28,
   "byKind": {
    "open-exam": {
     "need": 120,
     "kept": 119
    },
    "usmle-resource": {
-    "need": 160,
+    "need": 184,
     "kept": 157
    }
   },
@@ -750,51 +750,52 @@
    "ai": 512,
    "amsa": 105,
    "open-exam": 786,
-   "usmle-resource": 866
+   "usmle-resource": 1526
   },
   "pool": {
    "ai": 409,
    "open-exam": 120,
-   "usmle-resource": 160,
+   "usmle-resource": 184,
    "amsa": 2
   },
   "status": {
-   "pool": 691,
-   "rejected": 942,
-   "reserve": 636
+   "pool": 715,
+   "rejected": 986,
+   "reserve": 636,
+   "pending": 592
   },
   "topics": {
-   "Endocrinology": 22,
+   "Endocrinology": 24,
    "Bioethics": 12,
    "OMS/Dental": 8,
    "Breast/Endocrine Surgery": 9,
-   "Paediatrics": 34,
-   "Obstetrics": 17,
-   "Pathology": 8,
+   "Paediatrics": 36,
+   "Obstetrics": 18,
+   "Pathology": 14,
    "Trauma Surgery": 16,
    "Gastroenterology": 47,
    "Sexual Health": 15,
    "Cardiothoracic Surgery": 10,
    "Occupational/Environmental Medicine": 12,
-   "Cardiology": 48,
+   "Cardiology": 49,
    "Palliative Care": 8,
    "Medicolegal": 9,
-   "Haematology": 18,
+   "Haematology": 21,
    "Otorhinolaryngology": 13,
    "Vascular Surgery": 9,
    "Infectious Diseases": 46,
-   "Respiratory Medicine": 28,
+   "Respiratory Medicine": 29,
    "Rheumatology": 23,
-   "Emergency Medicine": 32,
+   "Emergency Medicine": 33,
    "Urology": 11,
    "Professionalism": 11,
    "Gastrointestinal Surgery": 10,
    "Oncology": 5,
-   "Neurology": 28,
+   "Neurology": 32,
    "Neonatology": 16,
    "Addiction Medicine": 6,
    "Neurosurgery": 10,
-   "General Surgery": 17,
+   "General Surgery": 18,
    "Geriatrics": 11,
    "Gynaecology": 23,
    "Indigenous Health": 7,
@@ -804,7 +805,7 @@
    "Plastic Surgery": 7,
    "Dermatology": 3,
    "Ophthalmology": 3,
-   "Nephrology": 11,
+   "Nephrology": 13,
    "Orthopaedics": 10,
    "Psychiatry": 13,
    "Public Health": 11,
@@ -813,13 +814,13 @@
   "positions": {
    "4": {
     "counts": [
-     55,
-     53,
-     49,
-     62
+     62,
+     61,
+     52,
+     68
     ],
-    "n": 219,
-    "chi2": 1.62
+    "n": 243,
+    "chi2": 2.15
    },
    "5": {
     "counts": [
@@ -833,13 +834,22 @@
     "chi2": 0.69
    }
   },
-  "topicCap": 104,
+  "topicCap": 108,
   "bars": {
    "base": 81,
    "ai": 89,
    "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
   },
   "funnel": {
+   "usmle-resource mmlu": {
+    "n": 932,
+    "pool": 82,
+    "bar": 53,
+    "review": 33,
+    "pending": 592,
+    "reserve": 171,
+    "flaws": 1
+   },
    "open-exam headqa": {
     "n": 786,
     "bar": 434,
@@ -860,14 +870,6 @@
     "review": 3,
     "duplicate": 9,
     "bar": 42
-   },
-   "usmle-resource mmlu": {
-    "n": 272,
-    "reserve": 171,
-    "bar": 21,
-    "pool": 58,
-    "review": 21,
-    "flaws": 1
    },
    "ai vignette": {
     "n": 159,

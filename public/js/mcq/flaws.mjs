@@ -183,8 +183,12 @@ const PARTS = {
   findings: /\b(?:diaphoretic|distress|appears?|titers?|titres?|serolog\w*|positive|negative|reflexes|karyotype|smear|culture|examinations?|exam|temperature|pulse|blood pressure|respirations?|laborator\w*|serum|shows?|showed|reveals?|revealed|auscultation|palpation|palpable|ecg|electrocardiogram|x-ray|radiograph|ct|mri|ultrasound|ultrasonography|biopsy|count|level|saturation|tender|tenderness|bp|heart rate|spo2|°c|°f|mm hg|\/min|murmur|crackles|wheez\w*|oedema|edema|bruising|pale|jaundice|afebrile|febrile|normal|unremarkable|noted|observed|inspection|bmi|weight|height|percentile|results?)\b/i
 };
 export const isClinical = q => CLINICAL.test(fullStem(q));
+/* a preclinical question (tag level:preclinical, 2026-10-28): Year 1 and 2 recall of anatomy, physiology, genetics or a
+   mechanism, judged as such; it needs no patient and can be one line */
+export const isPreclinical = q => Array.isArray(q?.tags) && q.tags.includes('level:preclinical');
 export function checkVignette(q) {
   const s = fullStem(q);
+  if (isPreclinical(q)) return ok('vignette', 'major');
   if (!isClinical(q)) return fail('vignette', 'minor', 'Not a clinical vignette: Step 2 CK items put a patient in front of the student (age, sex, setting, presentation, findings).');
   const rapid = Array.isArray(q.tags) && q.tags.includes('form:rapid');   /* a 15 s case leaves the setting out by design */
   const missing = Object.entries(PARTS).filter(([k, re]) => !(rapid && k === 'setting') && !re.test(vignette(q) || s)).map(([k]) => k);
@@ -195,9 +199,9 @@ export function checkVignette(q) {
 
 /* the stem's length: long enough to be a case, short enough to read in an exam's 90 seconds; a question written for the
    duel's Rapid 15 s format (tag form:rapid) is a compact case, so its floor is lower */
-export const STEM_WORDS = Object.freeze({ min: 30, max: 450, rapid: 15 });
+export const STEM_WORDS = Object.freeze({ min: 30, max: 450, rapid: 15, preclinical: 6 });
 export function checkLength(q) {
-  const n = words(fullStem(q)).length, rapid = Array.isArray(q.tags) && q.tags.includes('form:rapid'), min = rapid ? STEM_WORDS.rapid : STEM_WORDS.min;
+  const n = words(fullStem(q)).length, rapid = Array.isArray(q.tags) && q.tags.includes('form:rapid'), min = isPreclinical(q) ? STEM_WORDS.preclinical : rapid ? STEM_WORDS.rapid : STEM_WORDS.min;
   if (n < min) return fail('stem-length', 'minor', rapid ? `The stem is ${n} words: even a 15-second case needs ${min}.` : `The stem is ${n} words: a Step 2 CK vignette is usually ${STEM_WORDS.min} to ${STEM_WORDS.max}.`);
   if (n > STEM_WORDS.max) return fail('stem-length', 'minor', `The stem is ${n} words: cut what the question does not need (at most ${STEM_WORDS.max}).`);
   return ok('stem-length', 'minor');

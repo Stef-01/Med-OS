@@ -55,11 +55,13 @@ export const BENCH_TAG = { medqa: 'src:medqa', mmlu: 'src:mmlu', medmcqa: 'src:m
 const SET_KIND = { headqa: 'open-exam', principlismqa: 'ai' };
 /* a set written by a model (data/sources/registry.json kind ai) says so: it is AI-written, imported, by its authors' model */
 const SET_GENERATOR = { principlismqa: { how: 'imported', version: 'PrinciplismQA 3538461', basis: [], model: 'GPT-4o (the authors), expert-checked' } };
+/* MMLU's basic-science subsets are preclinical recall (Year 1 and 2), judged against that standard, not Step 2 CK */
+export const PRECLINICAL_TOPICS = new Set(['anatomy', 'medical_genetics', 'clinical_knowledge', 'college_medicine']);
 export function benchmarkItem(r) {
   const set = /^medqa/.test(r.id) ? 'medqa' : /^mmlu/.test(r.id) ? 'mmlu' : /^medmcqa/.test(r.id) ? 'medmcqa' : /^headqa/.test(r.id) ? 'headqa' : /^principlismqa/.test(r.id) ? 'principlismqa' : 'bench';
   return cleanItem({
     id: r.id, stem: r.stem, options: r.options, answer: r.answer, explanation: r.explanation || '', why: [], topic: SET_KIND[set] === 'ai' ? r.topic || '' : '',
-    tags: [BENCH_TAG[set] || 'src:bench', r.meta_info ? `exam:${r.meta_info}` : `exam:${set}`],
+    tags: [BENCH_TAG[set] || 'src:bench', r.meta_info ? `exam:${r.meta_info}` : `exam:${set}`, ...(PRECLINICAL_TOPICS.has(r.topic) ? ['level:preclinical'] : [])],
     provenance: { kind: SET_KIND[set] || 'usmle-resource', source: { name: r.source?.name || set, url: r.source?.url || '', licence: r.source?.licence || '', retrieved: r.source?.retrieved || '' }, createdAt: r.source?.retrieved || '2026-10-25', ...(SET_GENERATOR[set] ? { generator: SET_GENERATOR[set] } : {}) }
   });
 }
