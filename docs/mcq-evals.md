@@ -13,7 +13,7 @@ Flaw score: 100 minus the cost of each failed check in `public/js/mcq/flaws.mjs`
 | Official USMLE Step 2 CK samples | 41 | 98.5 | 94 | 2.4 | 41 | 81 | 89 | 92 | 97.6 | 95.1 | 75.6 | 95.1 |
 | QUEST-AI GPT-4 look-alikes | 43 | 99.2 | 94 | 0 | 43 | 52 | 77 | 85 | 81.4 | 69.8 | 30.2 | 69.8 |
 | MedQA Step 1 | 679 | 96.1 | 80 | 9.3 | 0 | – | – | – | – | – | – | – |
-| MMLU clinical knowledge + college medicine | 660 | 85.9 | 68 | 58 | 68 | 55 | 71 | 78 | 94.1 | 35.3 | 11.8 | 35.3 |
+| MMLU clinical knowledge + college medicine | 660 | 85.9 | 68 | 58 | 262 | 55 | 75 | 82 | 95 | 52.3 | 19.1 | 52.3 |
 | MedMCQA dev (Indian PG entrance) | 4091 | 69.5 | 48 | 70.2 | 0 | – | – | – | – | – | – | – |
 | Station-derived (AMSA) | 105 | 96.4 | 88 | 1.9 | 105 | 72 | 78 | 81 | 99 | 55.2 | 1.9 | 1.9 |
 | Station-derived (AI stations) | 26 | 93.8 | 80 | 11.5 | 26 | 66 | 74 | 77 | 100 | 26.9 | 0 | 0 |
@@ -81,7 +81,7 @@ Flipped: headqa-2015-82 (80 then 82, passed on the second); headqa-2016-92 (84 t
 
 ## 5. The pool as selected
 
-Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":1526}. Decisions: {"pool":715,"rejected":986,"reserve":636,"pending":592}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":184,"amsa":2}. Topic cap 108. Key positions: 4 options 62/61/52/68 (χ² 2.15); 5 options 96/97/88/93/98 (χ² 0.69).
+Candidates by kind: {"ai":512,"amsa":105,"open-exam":786,"usmle-resource":1098}. Decisions: {"pool":811,"rejected":1042,"reserve":648}. In the pool: {"ai":409,"open-exam":120,"usmle-resource":280,"amsa":2}. Topic cap 122. Key positions: 4 options 83/80/82/94 (χ² 1.4); 5 options 96/97/88/93/98 (χ² 0.69).
 
 ## 6. The human spot-check
 
@@ -89,12 +89,16 @@ Not marked yet: the 40 questions in `docs/mcq-spotcheck.md` wait for a person's 
 
 ## 7. Explanations written for published questions
 
-304 pooled questions were published with the key only (open-exam 120, usmle-resource 184). `scripts/explain-mcq.mjs` wrote one with the key given and kept it only when a second review, with the key, found it accurate and consistent: **276 have one (90.8%)**; 28 do not (2 refused by the review, 2 by the format checks, the rest not yet written). Study and the duel mark them AI-written. The review is the same model family checking itself; a person's spot-check of the explanations is the next step.
+400 pooled questions were published with the key only (open-exam 120, usmle-resource 280). `scripts/explain-mcq.mjs` wrote one with the key given and kept it only when a second review, with the key, found it accurate and consistent: **379 have one (94.8%)**; 21 do not (6 refused by the review, 15 by the format checks, the rest not yet written). Study and the duel mark them AI-written. The review is the same model family checking itself; a person's spot-check of the explanations is the next step.
 
 What the review still refuses:
 
-- The gout note says allopurinol is 'never' started during an acute attack, but current guidance (ACR 2020) allows urate-lowering therapy to be started during a flare with anti-inflammatory cover.
-- The delusional disorder note says it requires non-bizarre delusions, but DSM-5 removed that requirement and allows bizarre delusions (with the 'with bizarre content' specifier); the real reasons to exclude it here are the disorganised thinking and negative symptoms.
+- The gout note says allopurinol is 'never' started during an acute attack, which is outdated: current guidance allows starting urate-lowering therapy during a flare with anti-inflammatory or colchicine cover.
+- The note for option A says the glossopharyngeal nerve supplies only stylopharyngeus 'among these muscles', which suggests stylopharyngeus is a soft palate muscle; it is a pharyngeal muscle, and the glossopharyngeal nerve supplies no palatal muscle.
+- The thoracic note says 'Thoracic nerves (T1 to L2)', but the thoracic spinal nerves are T1 to T12; T1 to L2 is the range of the sympathetic outflow, not of the thoracic nerves.
+- The note for 0.02 says it is 2q and roughly the carrier frequency, but 2q is 0.2 and 0.02 is 2q²; the note also contradicts its own carrier figure of about 0.18.
+- The note for option B says 1 in 4000 comes from confusing the answer with the carrier frequency (2pq), but that is about 1 in 50, so it cannot explain the 1 in 4000 figure.
+- The explanation says the murmur is at the right sternal border, but the stem says it is heard over the left sternal border and spreads to the right; the mitral valve prolapse note also mentions a 'sudden collapse' that is not in the stem.
 
 ## 8. The tags, tagged twice
 

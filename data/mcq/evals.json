@@ -217,20 +217,20 @@
     "stem-length": 9.5,
     "units": 0.2
    },
-   "judged": 68,
+   "judged": 262,
    "quality": {
-    "mean": 77.1,
+    "mean": 79.9,
     "p5": 55,
-    "p10": 63,
-    "p25": 71,
-    "p50": 78
+    "p10": 67,
+    "p25": 75,
+    "p50": 82
    },
-   "gatesPass": 82.4,
-   "solved2": 94.1,
-   "keyCorrect": 94.1,
-   "passBase": 35.3,
-   "passAi": 11.8,
-   "passAsSelected": 35.3
+   "gatesPass": 85.1,
+   "solved2": 95,
+   "keyCorrect": 94.7,
+   "passBase": 52.3,
+   "passAi": 19.1,
+   "passAsSelected": 52.3
   },
   "MedMCQA dev (Indian PG entrance)": {
    "n": 4091,
@@ -684,25 +684,29 @@
   "unmarked": 40
  },
  "explained": {
-  "need": 304,
-  "kept": 276,
-  "share": 90.8,
-  "refusedByReview": 2,
-  "refusedByFormat": 2,
-  "missing": 28,
+  "need": 400,
+  "kept": 379,
+  "share": 94.8,
+  "refusedByReview": 6,
+  "refusedByFormat": 15,
+  "missing": 21,
   "byKind": {
    "open-exam": {
     "need": 120,
     "kept": 119
    },
    "usmle-resource": {
-    "need": 184,
-    "kept": 157
+    "need": 280,
+    "kept": 260
    }
   },
   "reviewReasons": [
-   "The gout note says allopurinol is 'never' started during an acute attack, but current guidance (ACR 2020) allows urate-lowering therapy to be started during a flare with anti-inflammatory cover.",
-   "The delusional disorder note says it requires non-bizarre delusions, but DSM-5 removed that requirement and allows bizarre delusions (with the 'with bizarre content' specifier); the real reasons to exclude it here are the disorganised thinking and negative symptoms."
+   "The gout note says allopurinol is 'never' started during an acute attack, which is outdated: current guidance allows starting urate-lowering therapy during a flare with anti-inflammatory or colchicine cover.",
+   "The note for option A says the glossopharyngeal nerve supplies only stylopharyngeus 'among these muscles', which suggests stylopharyngeus is a soft palate muscle; it is a pharyngeal muscle, and the glossopharyngeal nerve supplies no palatal muscle.",
+   "The thoracic note says 'Thoracic nerves (T1 to L2)', but the thoracic spinal nerves are T1 to T12; T1 to L2 is the range of the sympathetic outflow, not of the thoracic nerves.",
+   "The note for 0.02 says it is 2q and roughly the carrier frequency, but 2q is 0.2 and 0.02 is 2q²; the note also contradicts its own carrier figure of about 0.18.",
+   "The note for option B says 1 in 4000 comes from confusing the answer with the carrier frequency (2pq), but that is about 1 in 50, so it cannot explain the 1 in 4000 figure.",
+   "The explanation says the murmur is at the right sternal border, but the stem says it is heard over the left sternal border and spreads to the right; the mitral valve prolapse note also mentions a 'sudden collapse' that is not in the stem."
   ]
  },
  "tags": {
@@ -750,77 +754,76 @@
    "ai": 512,
    "amsa": 105,
    "open-exam": 786,
-   "usmle-resource": 1526
+   "usmle-resource": 1098
   },
   "pool": {
    "ai": 409,
    "open-exam": 120,
-   "usmle-resource": 184,
+   "usmle-resource": 280,
    "amsa": 2
   },
   "status": {
-   "pool": 715,
-   "rejected": 986,
-   "reserve": 636,
-   "pending": 592
+   "pool": 811,
+   "rejected": 1042,
+   "reserve": 648
   },
   "topics": {
-   "Endocrinology": 24,
+   "Endocrinology": 27,
    "Bioethics": 12,
-   "OMS/Dental": 8,
+   "OMS/Dental": 15,
    "Breast/Endocrine Surgery": 9,
-   "Paediatrics": 36,
-   "Obstetrics": 18,
-   "Pathology": 14,
-   "Trauma Surgery": 16,
-   "Gastroenterology": 47,
-   "Sexual Health": 15,
-   "Cardiothoracic Surgery": 10,
+   "Paediatrics": 41,
+   "Obstetrics": 21,
+   "Pathology": 36,
+   "Trauma Surgery": 17,
+   "Gastroenterology": 53,
+   "Sexual Health": 16,
+   "Cardiothoracic Surgery": 11,
    "Occupational/Environmental Medicine": 12,
-   "Cardiology": 49,
+   "Cardiology": 53,
    "Palliative Care": 8,
    "Medicolegal": 9,
-   "Haematology": 21,
-   "Otorhinolaryngology": 13,
+   "Haematology": 26,
+   "Otorhinolaryngology": 19,
    "Vascular Surgery": 9,
    "Infectious Diseases": 46,
-   "Respiratory Medicine": 29,
+   "Respiratory Medicine": 30,
    "Rheumatology": 23,
    "Emergency Medicine": 33,
-   "Urology": 11,
+   "Urology": 12,
    "Professionalism": 11,
    "Gastrointestinal Surgery": 10,
    "Oncology": 5,
-   "Neurology": 32,
+   "Neurology": 49,
    "Neonatology": 16,
    "Addiction Medicine": 6,
-   "Neurosurgery": 10,
-   "General Surgery": 18,
+   "Neurosurgery": 13,
+   "General Surgery": 20,
    "Geriatrics": 11,
-   "Gynaecology": 23,
+   "Gynaecology": 24,
    "Indigenous Health": 7,
    "General Practice": 13,
    "Immunology": 10,
-   "Critical Care Medicine": 7,
+   "Critical Care Medicine": 8,
    "Plastic Surgery": 7,
-   "Dermatology": 3,
-   "Ophthalmology": 3,
-   "Nephrology": 13,
-   "Orthopaedics": 10,
-   "Psychiatry": 13,
+   "Dermatology": 4,
+   "Ophthalmology": 6,
+   "Nephrology": 12,
+   "Orthopaedics": 12,
+   "Psychiatry": 14,
    "Public Health": 11,
    "Toxicology": 4
   },
   "positions": {
    "4": {
     "counts": [
-     62,
-     61,
-     52,
-     68
+     83,
+     80,
+     82,
+     94
     ],
-    "n": 243,
-    "chi2": 2.15
+    "n": 339,
+    "chi2": 1.4
    },
    "5": {
     "counts": [
@@ -834,22 +837,13 @@
     "chi2": 0.69
    }
   },
-  "topicCap": 108,
+  "topicCap": 122,
   "bars": {
    "base": 81,
    "ai": 89,
    "from": "the official USMLE Step 2 CK samples (n=41): 5th and 25th percentile of quality"
   },
   "funnel": {
-   "usmle-resource mmlu": {
-    "n": 932,
-    "pool": 82,
-    "bar": 53,
-    "review": 33,
-    "pending": 592,
-    "reserve": 171,
-    "flaws": 1
-   },
    "open-exam headqa": {
     "n": 786,
     "bar": 434,
@@ -863,6 +857,15 @@
     "pool": 102,
     "review": 70,
     "bar": 72
+   },
+   "usmle-resource mmlu": {
+    "n": 504,
+    "pool": 178,
+    "bar": 86,
+    "review": 54,
+    "reserve": 183,
+    "duplicate": 2,
+    "flaws": 1
    },
    "ai rapid": {
     "n": 353,

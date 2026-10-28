@@ -2520,6 +2520,19 @@
    "model": "opus",
    "at": "2026-10-27"
   },
+  "medqa-us4-test-0896": {
+   "hash": "862f6471",
+   "why": "He has had more than 6 months of bizarre delusions (aliens stealing his thoughts), disorganised thinking, flat affect and social withdrawal, with no substance or medical cause. That meets the criteria for schizophrenia: two or more core symptoms with at least 6 months of disturbance.",
+   "notes": [
+    "Delusional disorder involves non-bizarre delusions with otherwise preserved thinking and function, not disorganised speech and negative symptoms.",
+    "There is no depressive or manic episode, and his psychosis is not confined to mood episodes.",
+    "Schizoid personality is lifelong detachment without psychosis, whereas he has delusions and thought disorder.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
   "medqa-us4-test-0924": {
    "hash": "e6ec9d5f",
    "why": "She is an obese middle-aged woman whose knee pain gets worse with use. She has brief morning stiffness (under 30 min), crepitus, medial joint-line tenderness and a normal ESR, which points to osteoarthritis. The x-ray finding is osteophytes with asymmetric joint-space narrowing. Her mildly raised uric acid is a distractor.",
@@ -2649,6 +2662,19 @@
    "by": "ai",
    "model": "opus",
    "at": "2026-10-27"
+  },
+  "medqa-us4-test-1116": {
+   "hash": "3417c840",
+   "why": "Five months of widespread pain with symmetric tender points, fatigue, poor sleep, paraesthesias and bloating, a normal examination and a normal ESR and TSH all point to fibromyalgia. Besides exercise and education, low-dose amitriptyline at night is first-line drug therapy because it helps both pain and sleep.",
+   "notes": [
+    "Benzodiazepines such as temazepam are not effective for fibromyalgia and carry dependence risk.",
+    "A normal MCV and normal reflexes and strength give no reason to suspect B12 deficiency; her tingling is a common fibromyalgia symptom.",
+    null,
+    "A normal ESR and the absence of synovitis argue against inflammatory arthritis, so methotrexate has no role."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
   },
   "medqa-us4-test-1119": {
    "hash": "f4f0be17",
@@ -2909,6 +2935,1319 @@
    "by": "ai",
    "model": "opus",
    "at": "2026-10-27"
+  },
+  "mmlu-anatomy-000": {
+   "hash": "983d3bb1",
+   "why": "The chorda tympani (taste and salivation) and the greater petrosal nerve (lacrimation) leave the facial nerve before it exits the stylomastoid foramen. A lesion at the foramen therefore causes only ipsilateral facial muscle paralysis.",
+   "notes": [
+    null,
+    "Taste to the anterior two-thirds of the tongue is carried by the chorda tympani, which branches off inside the facial canal above the foramen.",
+    "Lacrimation depends on the greater petrosal nerve, which leaves at the geniculate ganglion, well proximal to the foramen.",
+    "Loss of salivation, taste and lacrimation together would mean a lesion at or proximal to the geniculate ganglion, not at the foramen."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-003": {
+   "hash": "03258ab5",
+   "why": "Melanocytes come from neural crest cells. Of the options listed, they are the only neural crest (ectomesenchymal) derivative.",
+   "notes": [
+    "Motor neurons develop from the basal plate of the neural tube (neuroectoderm), not from the neural crest.",
+    "Skeletal muscle of the trunk and limbs comes from paraxial mesoderm (somites).",
+    null,
+    "Sweat glands are downgrowths of surface ectoderm of the epidermis."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-004": {
+   "hash": "ff2e8687",
+   "why": "The glomerulus is the tuft of capillaries inside Bowman's capsule where blood is filtered. Each nephron has one.",
+   "notes": [
+    "The afferent arteriole is the single vessel that brings blood to the glomerulus; it is not a capillary cluster.",
+    null,
+    "The loop of Henle is a tubular segment that concentrates urine; it is not a capillary network.",
+    "The renal pelvis is the funnel that collects urine from the calyces; it is not part of the nephron."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-006": {
+   "hash": "d497cb73",
+   "why": "The epigastric region is the upper middle of the nine abdominal regions, lying directly below the xiphoid and the lower sternum.",
+   "notes": [
+    null,
+    "The hypochondriac regions are the upper lateral regions under the costal margins, not the midline below the sternum.",
+    "The hypogastric (suprapubic) region is the lower midline, just above the pubis.",
+    "The lumbar regions are the middle lateral regions, either side of the umbilical region."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-009": {
+   "hash": "2ddb5932",
+   "why": "About 85–90% of corticospinal fibres cross at the medullary pyramids. Primary motor cortex activity therefore mainly drives contralateral limb muscles, especially distal ones.",
+   "notes": [
+    "Bilateral control of antigravity and axial muscles comes mainly from brainstem pathways (vestibulospinal, reticulospinal), not the primary motor cortex.",
+    "Limb muscles get mainly crossed cortical input, not bilateral input; bilateral control applies mostly to axial and some facial muscles.",
+    "Only a small uncrossed anterior corticospinal tract exists, and it goes mainly to axial muscles, so ipsilateral limb control is minor.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-011": {
+   "hash": "1f310811",
+   "why": "The oculomotor nerve carries the parasympathetic fibres that constrict the pupil and supplies most of the extraocular muscles. When it is damaged, the unopposed dilator pupillae dilates the pupil, and the unopposed lateral rectus (CN VI) and superior oblique (CN IV) turn the eye down and out.",
+   "notes": [
+    "Both signs are wrong: losing parasympathetic supply dilates the pupil, and losing the medial rectus makes the eye drift outward.",
+    "The dilated pupil is right, but a medial (inward) squint points to abducens (CN VI) palsy, not a third nerve lesion.",
+    "A constricted pupil goes with sympathetic loss (Horner syndrome); a third nerve lesion removes parasympathetic tone, so the pupil dilates.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-016": {
+   "hash": "0dea12f7",
+   "why": "Quiet inspiration is active. The diaphragm does most of the work, and the external intercostals help by raising the ribs. Quiet expiration is passive elastic recoil. The internal intercostals mainly pull the ribs down during forced expiration.",
+   "notes": [
+    "This leaves out the diaphragm, the main muscle of quiet breathing, and wrongly adds the internal intercostals, which work in forced expiration.",
+    null,
+    "The internal intercostals mainly depress the ribs in forced expiration; they are not the diaphragm's partner in quiet inspiration.",
+    "The internal intercostals are not normally active in quiet inspiration, so adding them makes this option wrong."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-017": {
+   "hash": "4f363256",
+   "why": "The Leydig (interstitial) cells of the testes make testosterone in response to LH. The testes are the main source of male hormones; the adrenal cortex adds a small amount of weak androgen.",
+   "notes": [
+    "The glans penis is erectile and sensory tissue, not an endocrine gland.",
+    "The prepuce is a fold of skin over the glans and makes no hormones.",
+    "The prostate makes seminal fluid and PSA. It turns testosterone into DHT (via 5-alpha-reductase) but does not produce androgens itself.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-018": {
+   "hash": "e2836a47",
+   "why": "The pulmonary veins bring oxygenated blood from the lungs back to the left atrium. They are the main exception to the rule that veins carry deoxygenated blood. Remember: arteries and veins are named by direction of flow, not by oxygen content.",
+   "notes": [
+    "The aorta carries oxygenated blood away from the heart to the body, not to the heart.",
+    "The carotid arteries carry oxygenated blood away from the heart to the head and neck.",
+    "The inferior vena cava returns deoxygenated blood from the lower body to the right atrium.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-021": {
+   "hash": "d202a1d2",
+   "why": "The intercostal nerve runs in the costal groove along the lower border of the rib, deep to it, below the vein and artery (VAN, top to bottom). This is why chest drains and pleural taps are placed just above the upper border of the rib below.",
+   "notes": [
+    "The neurovascular bundle runs along the inferior border of the rib, not the superior border.",
+    "The nerve lies deep to the rib and along its lower border, not superficial to its upper border.",
+    null,
+    "The nerve runs deep to the rib inside the costal groove, not on its superficial surface."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-022": {
+   "hash": "03681163",
+   "why": "The tip of the tongue drains to the submental nodes, and its lymphatics cross the midline, so each side drains to both the left and right nodes. Spread to both sides is the key point for tongue-tip cancer.",
+   "notes": [
+    "This misses the crossing of lymphatics at the tip, which sends drainage to both sides.",
+    null,
+    "The submandibular nodes drain the side margins and front two-thirds of the tongue, not the tip, which goes first to the submental nodes.",
+    "The submandibular nodes are not the first nodes for the tip; it drains to the submental nodes on both sides."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-027": {
+   "hash": "3f083cc7",
+   "why": "The facial artery can be felt as it crosses the lower border of the mandible, just in front of the masseter. Here it lies on bone and can be pressed against it.",
+   "notes": [
+    null,
+    "The facial artery runs up over the maxilla deep to facial muscles and has no firm bony spot there for feeling a pulse.",
+    "The superficial temporal artery does not cross the maxilla; it is felt in front of the ear over the zygomatic arch's root.",
+    "The superficial temporal artery runs in front of the ear and over the temple, not across the orbital rim."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-028": {
+   "hash": "4af30588",
+   "why": "The spleen sits in the left upper quadrant under ribs 9 to 11. It is the solid organ most often injured in blunt abdominal trauma, and when it ruptures it bleeds heavily, so surgery is often needed. Remember: left upper quadrant blunt trauma means suspect the spleen.",
+   "notes": [
+    "The appendix is in the right lower quadrant and is rarely hurt by blunt trauma; it presents with appendicitis, not trauma.",
+    "The gallbladder lies in the right upper quadrant under the liver, on the opposite side from this injury.",
+    null,
+    "The urinary bladder is in the pelvis; it is injured by lower abdominal or pelvic trauma, especially when full or with pelvic fractures."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-030": {
+   "hash": "a81d10dc",
+   "why": "Flexion is bending at a joint that reduces the angle between two parts. Bending the forearm at the elbow toward the arm and body is elbow flexion.",
+   "notes": [
+    "Abduction moves a limb away from the body's midline in the coronal plane, as when raising the arm out to the side.",
+    "Eversion turns the sole of the foot outward at the subtalar joint and does not apply to the forearm.",
+    null,
+    "Pronation rotates the forearm so the palm faces down or backward; it is a rotation, not bending toward the body."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-031": {
+   "hash": "085b0a60",
+   "why": "In the pharyngeal phase the aryepiglottic folds and the vocal folds close the laryngeal inlet and glottis. This sphincter-like closure of the laryngeal entrance is the main protection of the airway.",
+   "notes": [
+    null,
+    "The epiglottis tips downward and backward over the inlet; it does not move upward.",
+    "The larynx is pulled upward and forward under the tongue base during swallowing, not downward.",
+    "Breathing stops briefly during swallowing (deglutition apnoea); a faster respiratory rate would raise aspiration risk."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-032": {
+   "hash": "11778eb0",
+   "why": "Bile passes down the common bile duct, which joins the pancreatic duct at the hepatopancreatic ampulla. It enters the second (descending) part of the duodenum at the major duodenal papilla, controlled by the sphincter of Oddi.",
+   "notes": [
+    "The gastroesophageal sphincter lies between the oesophagus and stomach; no bile duct opens there.",
+    null,
+    "The ileocaecal junction is where much of the bile salt has already been reabsorbed in the terminal ileum; bile does not enter there.",
+    "The jejunum comes after the duodenum; bile has already entered the gut upstream of it."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-036": {
+   "hash": "3c458d8e",
+   "why": "The spleen is the largest lymphoid organ. Its red pulp filters old red cells and blood-borne organisms and holds a reserve of red cells and platelets. It is the only lymphoid organ in this list that filters blood rather than lymph.",
+   "notes": [
+    "The appendix holds gut-associated lymphoid tissue but does not filter blood or store red cells.",
+    "The gallbladder stores and concentrates bile; it is not a lymphoid organ.",
+    "The pancreas is an exocrine and endocrine gland, not a lymphoid organ or blood filter.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-037": {
+   "hash": "7ab410fa",
+   "why": "The diaphragm is the musculotendinous sheet that forms the floor of the thoracic cavity and the roof of the abdominal cavity, so it separates those two cavities.",
+   "notes": [
+    "The abdominal and pelvic cavities run into each other with no physical partition; the line between them is an imaginary plane at the pelvic brim.",
+    "The cranial and spinal cavities connect through the foramen magnum and together make up the dorsal body cavity.",
+    null,
+    "The pericardial and pleural cavities both lie inside the thorax, above the diaphragm, and are separated by pericardium and mediastinal pleura."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-039": {
+   "hash": "33d1568e",
+   "why": "Hepatocytes conjugate and excrete bilirubin and make most plasma proteins, including albumin, fibrinogen and prothrombin (and the other vitamin K-dependent clotting factors). That combination points only to the liver.",
+   "notes": [
+    "The gallbladder only stores and concentrates bile; it does not make proteins or take bilirubin from the blood.",
+    "The kidney filters plasma and excretes some conjugated bilirubin but does not make plasma proteins or clotting factors.",
+    null,
+    "The spleen breaks down red cells to make bilirubin, but the liver clears it and makes the plasma proteins."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-040": {
+   "hash": "ea8bd352",
+   "why": "GORD happens when the lower oesophageal sphincter is weak or relaxes at the wrong times, letting stomach acid flow back into the oesophagus. Sphincter incompetence is the key mechanism behind it.",
+   "notes": [
+    "Crohn's disease is a transmural inflammatory bowel disease that can affect any part of the gut; it is not defined by sphincter incompetence.",
+    "Oesophageal varices are dilated submucosal veins caused by portal hypertension, not a sphincter problem.",
+    null,
+    "Pyloric stenosis is hypertrophy and narrowing of the pyloric sphincter, which blocks gastric outflow; that is the opposite of incompetence."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-042": {
+   "hash": "8c3b24b1",
+   "why": "The femur is the thigh bone. It runs from the hip, just below the ischium, to the knee, where the patella sits on its anterior distal surface. It is the longest and largest bone in the body.",
+   "notes": [
+    "The calcaneus is the heel bone in the foot, well below the patella, not above it.",
+    null,
+    "The symphysis pubis is a cartilaginous joint between the two pubic bones, not a large bone, and it lies at the pelvis, not between the ischium and the knee.",
+    "The tibia lies below the patella, in the leg, not above it."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-044": {
+   "hash": "4a7ba784",
+   "why": "The internal laryngeal nerve is a branch of the superior laryngeal nerve, which comes from the vagus. It carries sensation from the laryngeal mucosa above the vocal folds and forms the afferent limb of the cough reflex. The gag reflex afferent is the glossopharyngeal nerve.",
+   "notes": [
+    null,
+    "The external laryngeal nerve is motor to cricothyroid and carries no mucosal sensation, and the gag reflex afferent is the glossopharyngeal nerve.",
+    "The nerve is correct, but the gag reflex afferent is the glossopharyngeal nerve from the oropharynx, not the internal laryngeal nerve.",
+    "The external laryngeal nerve is motor to cricothyroid and does not supply the laryngeal mucosa, so it cannot be the cough reflex afferent."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-047": {
+   "hash": "af45633c",
+   "why": "Mature erythrocytes push out their nucleus during development in the bone marrow. This leaves biconcave cells packed with haemoglobin that cannot divide or make new protein. Platelets also lack nuclei, but they are cell fragments.",
+   "notes": [
+    "Lymphocytes have a large, round nucleus that fills most of the cell.",
+    "Monocytes have a large, kidney-shaped or indented nucleus.",
+    null,
+    "Basophils have a bilobed nucleus, often hidden by their dark granules."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-048": {
+   "hash": "914003ff",
+   "why": "The coronal suture runs across the top of the skull between the frontal bone and the two parietal bones. The sagittal suture joins the two parietals, and the lambdoid suture joins the parietals to the occipital bone.",
+   "notes": [
+    null,
+    "This describes the sagittal suture, which runs in the midline between the two parietal bones.",
+    "This describes the lambdoid suture at the back of the skull.",
+    "These bones meet at the pterion, through the sphenoparietal and squamous sutures, not at the coronal suture."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-051": {
+   "hash": "c6a7cfe3",
+   "why": "The anterior and posterior vagal trunks pass through the oesophageal hiatus with the oesophagus, at about T10. Branches of the left gastric vessels also pass through it.",
+   "notes": [
+    "The right phrenic nerve passes through the caval opening and the left pierces the diaphragm muscle on its own; neither goes through the oesophageal hiatus.",
+    "The splanchnic nerves pierce the crura of the diaphragm and do not go through the oesophageal hiatus.",
+    "The sympathetic trunks pass behind the medial arcuate ligaments, not through the oesophageal hiatus.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-054": {
+   "hash": "6d9333ec",
+   "why": "The parotid duct crosses the outer surface of masseter. At the muscle's front edge it turns inward and pierces buccinator, then opens on the cheek opposite the upper second molar.",
+   "notes": [
+    "The duct runs over the surface of masseter, where you can roll it under a finger, not deep to it.",
+    null,
+    "The duct lies superficial to masseter, and it opens opposite the upper second molar, not the premolar.",
+    "The course over masseter is right, but the duct opens opposite the upper second molar, not the premolar."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-056": {
+   "hash": "b5f57298",
+   "why": "The infraorbital nerve is the terminal continuation of the maxillary division of the trigeminal nerve (V2). It runs through the infraorbital groove and canal to supply the skin of the lower eyelid, cheek, side of the nose and upper lip. It is purely sensory.",
+   "notes": [
+    null,
+    "The facial nerve has no maxillary branch; the infraorbital nerve comes from the maxillary division of the trigeminal nerve.",
+    "Secretomotor fibres to the lacrimal gland come from the facial nerve via the greater petrosal nerve and pterygopalatine ganglion, and travel through the zygomatic and lacrimal nerves.",
+    "Orbicularis oculi gets its motor supply from the facial nerve; the infraorbital nerve only supplies the skin over it."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-057": {
+   "hash": "648b7afb",
+   "why": "Peristalsis is the coordinated wave of smooth muscle contraction and relaxation that moves contents along the gut. It runs from the oesophagus through the stomach and intestines, so it is the propulsive process the stem describes.",
+   "notes": [
+    "Absorption is nutrients passing across the mucosa into blood or lymph, not muscular propulsion of food.",
+    "Emulsification is bile salts breaking fat into small droplets, which is chemical and physical digestion, not movement along the tract.",
+    null,
+    "Regurgitation is backward flow of contents towards the mouth, the opposite of forward propulsion."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-058": {
+   "hash": "bc70b535",
+   "why": "The synapse is the junction where a neuron passes an impulse to another neuron, usually by releasing neurotransmitter across the synaptic cleft. It is the site of transmission, not a part of a single cell.",
+   "notes": [
+    "Dendrites are the receiving processes of a neuron; they form part of the synapse but are not the junction itself.",
+    "Glial cells support, insulate and nourish neurons but do not carry impulses from one neuron to the next.",
+    "A nerve centre is a collection of neuron cell bodies in the CNS, not the specific point where an impulse passes between two cells.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-060": {
+   "hash": "079224df",
+   "why": "The pancreas is an accessory digestive organ that releases digestive enzymes into the duodenum (exocrine). Its islets of Langerhans also secrete hormones (endocrine), and the beta cells make insulin.",
+   "notes": [
+    "The adrenal gland is an endocrine gland that makes cortisol, aldosterone and catecholamines; it is not a GI accessory organ and does not make insulin.",
+    "The gallbladder stores and concentrates bile and secretes no hormones.",
+    "The liver is an accessory organ that produces bile and is a major target of insulin, but it does not secrete insulin.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-061": {
+   "hash": "b6b00576",
+   "why": "The glossopharyngeal nerve (CN IX) carries both taste and general sensation from the posterior third of the tongue. Remember the split: anterior two-thirds taste is chorda tympani (VII), general sensation is lingual (V3), and tongue movement is hypoglossal (XII).",
+   "notes": [
+    "Taste from the anterior two-thirds travels in the chorda tympani branch of the facial nerve, not CN IX.",
+    "General sensation from the anterior two-thirds is carried by the lingual nerve, a branch of the mandibular division of the trigeminal nerve.",
+    null,
+    "The tongue muscles are supplied by the hypoglossal nerve, except palatoglossus (vagus), so CN IX damage does not paralyse the tongue."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-063": {
+   "hash": "511cf8ae",
+   "why": "The right ventricle pumps deoxygenated blood through the pulmonary valve into the pulmonary trunk, which divides into the right and left pulmonary arteries going to the lungs.",
+   "notes": [
+    "The inferior vena cava returns blood to the right atrium; it does not receive blood from the right ventricle.",
+    "The ventricles are separated by the septum and do not normally exchange blood; the left ventricle fills from the left atrium.",
+    null,
+    "The pulmonary veins carry oxygenated blood from the lungs to the left atrium, not out of the right ventricle."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-066": {
+   "hash": "aa83307f",
+   "why": "The carotid pulse is felt on the front of the neck, beside the larynx and trachea and along the anterior border of sternocleidomastoid, where the common carotid artery lies.",
+   "notes": [
+    "In front of the ear is where you feel the superficial temporal pulse, not the carotid.",
+    "The antecubital fossa is where you feel the brachial pulse.",
+    "The mid-inguinal point in the groin is where you feel the femoral pulse.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-068": {
+   "hash": "0de0dd97",
+   "why": "The isthmus of the thyroid lies across the front of the trachea, usually over the 2nd to 4th tracheal rings, below the cricoid. This matters in tracheostomy, where the isthmus may need to be retracted or divided.",
+   "notes": [
+    "The thyroid cartilage lies above the gland; the lobes extend up beside it, but the isthmus does not cross it.",
+    "The cricothyroid membrane lies above the isthmus, which is why it is a relatively bloodless site for emergency cricothyroidotomy.",
+    "The cricoid cartilage sits just above the isthmus, which usually crosses the trachea below it.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-069": {
+   "hash": "22cde75b",
+   "why": "The labial (facial) gingiva and alveolar mucosa of the lower anterior teeth, as far back as the premolars, are supplied by the mental nerve. A mental nerve block, or local infiltration in the labial sulcus, numbs the soft tissue for a biopsy.",
+   "notes": [
+    "The incisive nerve supplies the pulps and periodontium of the lower anterior teeth, not the labial mucosa, so blocking it would not make a soft-tissue biopsy painless.",
+    null,
+    "The long buccal nerve supplies the buccal gingiva and mucosa of the lower molar region, well behind the lateral incisor.",
+    "The lingual nerve supplies the lingual gingiva, the floor of the mouth and the anterior two-thirds of the tongue, not the labial side of the incisors."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-071": {
+   "hash": "9c894479",
+   "why": "Acetylcholine is released by motor neurons at the neuromuscular junction. It binds nicotinic receptors on the motor end plate, which depolarises the muscle fibre and triggers contraction.",
+   "notes": [
+    null,
+    "Cholecystokinin is a gut and brain peptide hormone that stimulates gallbladder contraction and pancreatic enzyme release. It does not transmit impulses at the neuromuscular junction.",
+    "Deoxyribose is the pentose sugar in DNA and has no role as a neurotransmitter.",
+    "Oxytocin is a posterior pituitary hormone that acts on the uterus and on breast myoepithelium. It is not a transmitter from nerve to skeletal muscle."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-072": {
+   "hash": "cb73c10c",
+   "why": "In Rexed's scheme, lamina IX in the ventral horn holds the alpha and gamma lower motor neuron cell bodies, arranged in columns. The dorsal horn laminae handle sensory processing.",
+   "notes": [
+    "Lamina I is the marginal zone of the dorsal horn. It receives pain and temperature afferents and is not a motor area.",
+    "Lamina II is the substantia gelatinosa, which processes nociceptive input. It contains interneurons, not motor neurons.",
+    "Lamina V sits at the neck of the dorsal horn. It holds wide dynamic range and spinothalamic projection neurons, not motor neurons.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-074": {
+   "hash": "f0347ca2",
+   "why": "A medial (convergent) squint, or esotropia, means abduction has failed. The abducens nerve (CN VI) supplies lateral rectus, so when it is damaged medial rectus pulls the eye inward unopposed.",
+   "notes": [
+    "Oculomotor (CN III) palsy weakens medial rectus, so the eye turns down and out (lateral squint), usually with ptosis and a dilated pupil.",
+    "Trochlear (CN IV) palsy affects superior oblique and gives vertical diplopia with the eye drifting up (hypertropia), not a mainly medial deviation.",
+    "The ophthalmic division of the trigeminal nerve is sensory to the cornea and forehead and supplies no extraocular muscle.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-079": {
+   "hash": "546eed72",
+   "why": "Most sympathetic postganglionic fibres release noradrenaline onto their target organs, which carry adrenergic receptors. All preganglionic neurons, and parasympathetic postganglionic neurons, use acetylcholine. Sweat glands are the cholinergic exception.",
+   "notes": [
+    "Parasympathetic preganglionic neurons release acetylcholine onto nicotinic receptors in the ganglion, not noradrenaline.",
+    "Sympathetic preganglionic neurons also release acetylcholine at the ganglion, acting on nicotinic receptors.",
+    "Parasympathetic postganglionic neurons release acetylcholine onto muscarinic receptors in target organs.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-080": {
+   "hash": "d7793df5",
+   "why": "Bartholin's (greater vestibular) glands lie posterolateral to the vaginal opening, at about 4 and 8 o'clock, and secrete lubricating mucus. They are the female homologue of the bulbourethral glands.",
+   "notes": [
+    "The adrenal glands sit on top of the kidneys and secrete corticosteroids and catecholamines, not vaginal mucus.",
+    null,
+    "Bulbourethral (Cowper's) glands are the male homologue, found in the deep perineal pouch beside the membranous urethra.",
+    "The corpus luteum is an ovarian endocrine structure that secretes progesterone after ovulation and is not a mucous gland."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-081": {
+   "hash": "7e381967",
+   "why": "The cricothyroid membrane runs between the lower border of the thyroid cartilage and the cricoid cartilage, so the puncture site sits just inferior to the thyroid cartilage (laryngeal prominence). This site is superficial, has few vessels and lies below the vocal cords.",
+   "notes": [
+    "Above the thyroid cartilage is the thyrohyoid membrane, which is above the glottis and is not the site for an emergency airway.",
+    null,
+    "Below the cricoid cartilage lie the tracheal rings and the thyroid isthmus. This is the tracheostomy region, not the cricothyroid membrane.",
+    "The thyroid isthmus overlies tracheal rings 2 to 4, so it is not the landmark that defines the cricothyroid membrane, which lies above the cricoid."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-084": {
+   "hash": "95278eb5",
+   "why": "A sudden rise in pressure inside the orbit is released through its weakest supported wall. That is usually the thin orbital floor over the maxillary sinus, around the infraorbital groove. Orbital fat and the inferior rectus can herniate into the sinus, giving diplopia on upward gaze and infraorbital numbness.",
+   "notes": [
+    "The roof is thicker and is backed by the anterior cranial fossa, so it rarely gives way in a pure blow-out; roof fractures usually come with frontal or skull-base injury.",
+    null,
+    "The lateral wall, formed by the zygoma and greater wing of the sphenoid, is the strongest orbital wall and breaks only with direct high-energy force, such as a zygomatic complex fracture.",
+    "The lamina papyracea is very thin and is the second most common blow-out site, but it is braced by the ethmoid air cells, so the floor gives way more often."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-087": {
+   "hash": "f97f8bbd",
+   "why": "The facial nerve (CN VII) supplies the muscles of facial expression from the second pharyngeal arch. These include orbicularis oris and depressor labii inferioris, which move the lower lip. Its marginal mandibular branch supplies the lower lip, so injury to that branch gives an asymmetric smile.",
+   "notes": [
+    "Taste on the posterior third of the tongue is carried by the glossopharyngeal nerve (CN IX); CN VII, through the chorda tympani, carries taste from the anterior two-thirds.",
+    "Most soft palate muscles are supplied by the vagus through the pharyngeal plexus, and tensor veli palatini by the mandibular nerve (V3), not by CN VII.",
+    null,
+    "The parotid's secretomotor supply comes from CN IX through the lesser petrosal nerve and otic ganglion, then the auriculotemporal nerve; CN VII runs through the gland but does not supply it."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-088": {
+   "hash": "618e1f14",
+   "why": "The frontal, anterior ethmoidal and maxillary sinuses all drain into the middle meatus, mainly through the hiatus semilunaris and ethmoidal infundibulum. This shared drainage area is the ostiomeatal complex. The sphenoid sinus drains into the sphenoethmoidal recess, and the posterior ethmoidal cells drain into the superior meatus.",
+   "notes": [
+    "This list is incomplete: the frontal and maxillary sinuses also drain into the middle meatus.",
+    "This leaves out the maxillary sinus, which opens into the hiatus semilunaris in the middle meatus.",
+    null,
+    "The sphenoid sinus opens into the sphenoethmoidal recess above the superior concha, not into the middle meatus."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-089": {
+   "hash": "635c9a12",
+   "why": "Collagen, mostly types I and III, is the main fibrous structural protein of the dermis and gives skin its tensile strength. Fibroblasts make it, along with elastin and ground substance.",
+   "notes": [
+    null,
+    "Heparin is an anticoagulant glycosaminoglycan stored in mast cell granules; it is not a fibrous structural protein.",
+    "A lipocyte (adipocyte) is a fat-storing cell, mostly found in the hypodermis; it is a cell, not a protein.",
+    "Melanin is a pigment made by melanocytes in the basal epidermis; it is not a fibrous protein and is not a dermal structural element."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-094": {
+   "hash": "77e77b11",
+   "why": "To move the jaw to the right, the left lateral pterygoid pulls the left condyle forward and inward. The mandible then pivots around the right condyle. Each lateral pterygoid moves the jaw to the opposite side.",
+   "notes": [
+    null,
+    "The right lateral pterygoid pulls the right condyle forward, which swings the mandible to the left; in a right excursion the right condyle stays as the pivot.",
+    "The left medial pterygoid helps move the jaw to the right, but mainly it elevates the jaw; the lateral pterygoid is the main muscle for side-to-side movement.",
+    "The right medial pterygoid would help a left excursion, not a right one, and it mainly elevates the mandible."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-096": {
+   "hash": "7ff96404",
+   "why": "Parasympathetic preganglionic fibres leave the brainstem only in cranial nerves III, VII, IX and X, plus the sacral outflow from S2 to S4. CN III carries Edinger-Westphal fibres to the ciliary ganglion, which control pupil constriction and accommodation.",
+   "notes": [
+    null,
+    "The trochlear nerve (CN IV) is purely somatic motor to the superior oblique and carries no parasympathetic fibres.",
+    "The trigeminal nerve (CN V) carries no preganglionic parasympathetic fibres; its branches only carry postganglionic fibres from the ganglia of CN III, VII and IX.",
+    "The abducens nerve (CN VI) is purely somatic motor to the lateral rectus and has no parasympathetic part."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-098": {
+   "hash": "47f1e095",
+   "why": "The maxillary and mandibular processes of the first pharyngeal arch fuse at the sides to form the cheeks and set the width of the mouth. If they fail to fuse, a lateral (transverse) facial cleft forms and the mouth is too wide (macrostomia).",
+   "notes": [
+    null,
+    "Failure of the two mandibular processes to fuse causes a rare median cleft of the lower lip and mandible, not a wide mouth.",
+    "Failure of the maxillary process to fuse with the medial nasal part of the frontonasal process causes cleft lip, not macrostomia.",
+    "The mandibular (first) and hyoid (second) arches do not fuse at the corner of the mouth; problems in this area cause preauricular and ear anomalies."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-101": {
+   "hash": "915eb634",
+   "why": "The lateral pterygoid inserts into the pterygoid fovea on the neck of the condylar process and the TMJ disc. It pulls the condyle forward onto the articular eminence, so it protrudes the mandible and helps open the mouth. It is the only muscle of mastication that does not elevate the mandible.",
+   "notes": [
+    "The coronoid process receives temporalis, which elevates the mandible; the lateral pterygoid attaches to the condyle and does not elevate.",
+    "The attachment to the condyle is correct, but the lateral pterygoid protrudes the mandible and helps depress it; elevation is done by masseter, temporalis and medial pterygoid.",
+    "Both parts are wrong: the lateral pterygoid does not attach to the coronoid process, although it does protrude the mandible.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-109": {
+   "hash": "6f7273fd",
+   "why": "An extradural (epidural) haematoma collects between the inner table of the skull and the periosteal dura. It is usually arterial bleeding from the middle meningeal artery after a temporal fracture. It looks biconvex (lens-shaped) because sutures, where the dura is firmly attached, limit its spread.",
+   "notes": [
+    null,
+    "Blood between dura and arachnoid is a subdural haematoma, usually from torn bridging veins. It is crescent-shaped and crosses suture lines.",
+    "Blood between arachnoid and pia lies in the subarachnoid space, as in subarachnoid haemorrhage from a ruptured berry aneurysm, not an extradural bleed.",
+    "The pia mater is closely attached to the brain surface, so there is no real space here; bleeding at this level is intracerebral or subpial, not extradural."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-111": {
+   "hash": "397ddb33",
+   "why": "The foramina rotundum (V2), ovale (V3) and spinosum (middle meningeal artery) all pass through the greater wing of the sphenoid. The foramen lacerum is a gap between the sphenoid, the petrous temporal bone and the occiput, not a hole through the sphenoid itself.",
+   "notes": [
+    "The foramen ovale does pierce the sphenoid, but this answer leaves out the rotundum and spinosum, which also pass through the greater wing.",
+    "This answer leaves out the foramen spinosum, which lies posterolateral to the ovale in the greater wing of the sphenoid and carries the middle meningeal artery.",
+    null,
+    "The foramen lacerum lies at the junction of the sphenoid, temporal and occipital bones and is closed by cartilage in life, so it does not pierce the sphenoid."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-112": {
+   "hash": "28e649b5",
+   "why": "Narcolepsy is a chronic sleep disorder with excessive daytime sleepiness and sudden sleep attacks you cannot resist. It is often accompanied by cataplexy, sleep paralysis and hypnagogic hallucinations, and type 1 is linked to loss of hypocretin (orexin) neurons.",
+   "notes": [
+    "Dyslexia is a specific learning disorder that affects reading and decoding. It has nothing to do with sleep attacks.",
+    "Epilepsy causes recurrent seizures, which can impair consciousness, but these are not episodes of falling asleep.",
+    "Hydrocephalus is too much CSF with enlarged ventricles. It can cause drowsiness from raised intracranial pressure, but not episodic, uncontrollable daytime sleep attacks.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-119": {
+   "hash": "2bc23fa8",
+   "why": "The vertebral arteries arise from the subclavian arteries and form the basilar artery. Together they supply the posterior circulation: the brainstem, the cerebellum (via the PICA, AICA and superior cerebellar arteries) and the occipital lobes via the posterior cerebral arteries.",
+   "notes": [
+    "The frontal lobe is supplied by the anterior and middle cerebral arteries, which are branches of the internal carotid, not the subclavian.",
+    "Most of the parietal lobe is supplied by the middle cerebral artery, a branch of the internal carotid, with some anterior cerebral artery supply medially.",
+    "The hypothalamus is supplied mainly by small perforating branches from the circle of Willis, largely carotid-derived, so it is not the best example of subclavian supply.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-120": {
+   "hash": "d0207b2e",
+   "why": "The small intestine has three parts: duodenum, jejunum and ileum. The ileum is the last part and joins the caecum at the ileocaecal valve. Everything past that valve is large intestine.",
+   "notes": [
+    "The ascending colon is large intestine; it runs up the right side from the caecum to the hepatic flexure.",
+    "The caecum is the first part of the large intestine; the ileum empties into it through the ileocaecal valve.",
+    null,
+    "The sigmoid colon is the S-shaped end of the colon, just before the rectum, so it is large intestine."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-123": {
+   "hash": "ef9001f2",
+   "why": "The zygomatic process of the temporal bone meets the temporal process of the zygomatic bone at the temporozygomatic suture to form the zygomatic arch. The temporal bone gives the arch its back part.",
+   "notes": [
+    "The maxilla joins the zygomatic bone at the front, forming part of the cheek and the orbital floor, but it is not part of the arch.",
+    null,
+    "The greater wing of the sphenoid meets the zygomatic bone in the lateral wall of the orbit, not in the zygomatic arch.",
+    "The zygomatic process of the frontal bone joins the zygomatic bone at the lateral orbital rim (frontozygomatic suture), not at the arch."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-126": {
+   "hash": "271d565f",
+   "why": "Cranial nerve I, the olfactory nerve, carries smell. It runs from the olfactory epithelium through the cribriform plate to the olfactory bulb. It is purely sensory.",
+   "notes": [
+    "The abducens (CN VI) supplies lateral rectus and abducts the eye; it has no role in smell.",
+    "The hypoglossal (CN XII) is motor to the tongue muscles; it has no role in smell.",
+    null,
+    "The trochlear (CN IV) supplies superior oblique and moves the eye; it has no role in smell."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-127": {
+   "hash": "698b2200",
+   "why": "The medulla oblongata contains the cardiovascular and respiratory centres that control heart rate, blood pressure and breathing. This is why brainstem herniation that compresses the medulla (coning) is fatal.",
+   "notes": [
+    "The midbrain holds eye movement nuclei (CN III, IV) and visual and auditory reflex centres, not the main cardiorespiratory centres.",
+    "The pons has respiratory centres (pneumotaxic and apneustic) that fine-tune breathing, but the main vital centres are in the medulla.",
+    null,
+    "The cerebellum is not part of the brainstem; it coordinates movement and balance."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-131": {
+   "hash": "a7ee3c5e",
+   "why": "The pituitary is called the master gland because its anterior lobe releases trophic hormones (TSH, ACTH, FSH, LH, GH, prolactin) that drive other endocrine glands. The hypothalamus in turn controls the pituitary.",
+   "notes": [
+    "The adrenal glands are controlled by others: ACTH from the pituitary drives cortisol release, so they are not the master gland.",
+    "The pancreas controls blood glucose through insulin and glucagon, but it does not regulate other endocrine glands.",
+    "The pineal gland secretes melatonin for circadian rhythm; it does not control the rest of the endocrine system.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-132": {
+   "hash": "70111393",
+   "why": "General sensation (touch, pain, temperature) from the anterior two-thirds of the tongue travels in the lingual nerve, a branch of the mandibular division of the trigeminal nerve (V3). Taste from this same area travels separately, in the chorda tympani.",
+   "notes": [
+    null,
+    "The chorda tympani (from CN VII) carries taste, not general sensation, from the anterior two-thirds; it travels with the lingual nerve.",
+    "Lingual branches of the glossopharyngeal nerve carry both general sensation and taste from the posterior one-third of the tongue, not the anterior two-thirds.",
+    "The hypoglossal nerve is purely motor to the tongue muscles; damage causes weakness and deviation, not loss of sensation."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-133": {
+   "hash": "e9f6e776",
+   "why": "In men, gonorrhoea most often causes urethritis, so the usual specimen is a urethral swab for culture. First-void urine NAAT is now used more often for diagnosis, but culture still needs a swab, mainly to test antibiotic sensitivity.",
+   "notes": [
+    "Anal (rectal) swabs are taken when there is receptive anal sex or rectal symptoms, but this is not the most common site sampled in men.",
+    "The bladder is not a usual site of gonococcal infection, and bladder specimens are not used for gonococcal culture.",
+    null,
+    "Testicular tissue is not sampled; gonococcal epididymo-orchitis is diagnosed from urethral or urine specimens."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-000": {
+   "hash": "9b163279",
+   "why": "A Robertsonian translocation joins two acrocentric chromosomes (13, 14, 15, 21, 22) at or near their centromeres. The short arms, which carry only rRNA genes, are lost. The result is 45 chromosomes in a balanced carrier, and a risk of translocation Down syndrome in the children.",
+   "notes": [
+    "Telomeres cap the chromosome ends and stop end-to-end fusion; Robertsonian fusion happens at the centromeres of acrocentric chromosomes, not at the telomeres.",
+    null,
+    "Histones are proteins that package DNA into nucleosomes; they are not a place on a chromosome where two chromosomes fuse.",
+    "The long arms are kept and joined through the centromere; it is the short arms that are lost, so fusion is not at the ends of the long arms."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-011": {
+   "hash": "afdc7775",
+   "why": "HbA (alpha2 beta2) makes up about 97% of adult haemoglobin. Remember the three normal haemoglobins: HbA is alpha2 beta2, HbA2 is alpha2 delta2 (about 2-3%) and HbF is alpha2 gamma2.",
+   "notes": [
+    null,
+    "Two alpha and two gamma chains make fetal haemoglobin (HbF), which is the main haemoglobin before birth but is under 1% in normal adults.",
+    "Two alpha and two delta chains make HbA2, a minor adult haemoglobin (about 2-3%) that is raised in beta-thalassaemia trait.",
+    "Four gamma chains make Hb Bart's, an abnormal tetramer seen in alpha-thalassaemia, most severely in hydrops fetalis."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-012": {
+   "hash": "77909edd",
+   "why": "In multifactorial conditions, recurrence risk drops sharply as relatives get more distant. A brother is a first-degree relative and shares 50% of genes, so he has the highest risk, about 10% for schizophrenia, compared with about 3% or less for second-degree relatives.",
+   "notes": [
+    null,
+    "A nephew is a second-degree relative who shares 25% of genes, so his risk is lower than a sibling's.",
+    "A grandchild is a second-degree relative who shares 25% of genes, so the risk is lower than for a first-degree relative such as a brother.",
+    "An aunt is a second-degree relative who shares 25% of genes, so her recurrence risk is lower than a brother's."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-013": {
+   "hash": "52962aae",
+   "why": "Sickle-cell disease comes from a single-base substitution in codon 6 of the HBB gene (GAG to GTG). This swaps glutamic acid for valine (Glu6Val), giving HbS. It is the classic example of a missense point mutation.",
+   "notes": [
+    "Deletions cause alpha-thalassaemia (loss of alpha-globin genes), not sickle-cell disease, which is a single-base substitution.",
+    "Duplications such as alpha-globin triplication are not the cause of sickle-cell disease; HbS comes from a single-nucleotide change.",
+    "An insertion would usually shift the reading frame; sickle-cell disease is a substitution with no change in the length of the sequence.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-014": {
+   "hash": "adb6ed81",
+   "why": "Monosomy means one chromosome of a pair is missing, giving 2n-1 = 45 chromosomes. 45,X (Turner syndrome) is the only monosomy compatible with survival to birth.",
+   "notes": [
+    "46,XX is the normal female karyotype with a full diploid set, so it is not an aneuploidy.",
+    "47,XXX is trisomy X, an extra chromosome, which is the opposite of monosomy.",
+    "69,XYY is triploidy, a whole extra haploid set (3n), not the loss of a single chromosome.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-016": {
+   "hash": "a28162a7",
+   "why": "Each gene sorts independently. A cross of Aa x Aa gives AA in 1/4 of offspring, and the same holds for BB and CC. Multiplying gives (1/4) cubed = 1/64. This product rule applies to any set of independent loci.",
+   "notes": [
+    null,
+    "1/32 does not come from any correct combination of the per-locus probabilities; homozygosity at each locus is 1/4, so the answer is (1/4) cubed.",
+    "1/128 would mean one locus had a probability of 1/8; each homozygous genotype from an Aa x Aa cross is 1/4.",
+    "1/256 is (1/4) to the fourth power, which would need four independent loci; this cross involves only three."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-019": {
+   "hash": "98f2b43c",
+   "why": "APOE is a susceptibility gene for common late-onset Alzheimer disease. The e4 allele raises risk in a dose-dependent way but is neither necessary nor sufficient. APP, PSEN1 and PSEN2 instead cause rare, fully penetrant, autosomal dominant early-onset familial disease.",
+   "notes": [
+    "APP mutations, and duplication as in Down syndrome, cause early-onset autosomal dominant Alzheimer disease rather than conferring polygenic susceptibility.",
+    "PSEN1 (PS1) mutations are the most common cause of early-onset autosomal dominant familial Alzheimer disease, a Mendelian rather than polygenic form.",
+    "PSEN2 (PS2) mutations cause rare autosomal dominant early-onset familial Alzheimer disease, not polygenic late-onset susceptibility.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-020": {
+   "hash": "db0a7dcb",
+   "why": "DiGeorge, velocardiofacial or Shprintzen syndrome is caused by a microdeletion at 22q11.2, which includes TBX1. Remember CATCH-22: cardiac defects, abnormal facies, thymic hypoplasia, cleft palate and hypocalcaemia.",
+   "notes": [
+    "A 4p deletion causes Wolf-Hirschhorn syndrome, not DiGeorge.",
+    "A 7q11.23 deletion causes Williams syndrome, which has supravalvular aortic stenosis and hypercalcaemia, not thymic aplasia.",
+    "15q11-13 deletions cause Prader-Willi or Angelman syndrome, depending on which parent the deleted chromosome came from.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-022": {
+   "hash": "44abb4e3",
+   "why": "The G6PD gene is on Xq28. Deficiency mainly affects hemizygous males, and heterozygous females are usually carriers, so it is classed as X-linked recessive. Some females have symptoms because of skewed X-inactivation.",
+   "notes": [
+    "Affected people are mostly male and carrier mothers are usually unaffected, which does not fit an autosomal dominant pattern.",
+    "The gene is on the X chromosome, not an autosome, so the sex-skewed pattern rules out autosomal recessive.",
+    "In X-linked dominant disease every daughter of an affected father is affected, but heterozygous G6PD females are usually unaffected.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-024": {
+   "hash": "4502a79c",
+   "why": "This karyotype shows two normal 21s plus a 14;21 Robertsonian chromosome carrying a third copy of 21q, inherited from the father. That gives trisomy 21 even though the count is 46. Translocation Down syndrome means the parents need karyotyping.",
+   "notes": [
+    null,
+    "Trisomy 13 is Patau syndrome, not Down syndrome.",
+    "A 45-chromosome karyotype with a Robertsonian 14;21 is a balanced carrier who has no extra 21q and is phenotypically normal, though at risk of having children with Down syndrome.",
+    "A balanced reciprocal translocation between chromosomes 2 and 3 involves no chromosome 21 material and usually gives a normal phenotype."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-027": {
+   "hash": "038f4eaa",
+   "why": "Hurler syndrome (MPS I) is a deficiency of alpha-L-iduronidase, which causes dermatan and heparan sulfate to build up. Enzyme replacement uses recombinant laronidase, and severe disease is often also treated with haematopoietic stem cell transplant.",
+   "notes": [
+    "Fabry disease is alpha-galactosidase A deficiency and is treated with agalsidase.",
+    "Gaucher disease is glucocerebrosidase deficiency and is treated with imiglucerase or similar enzymes.",
+    null,
+    "Pompe disease is acid alpha-glucosidase deficiency and is treated with alglucosidase alfa."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-032": {
+   "hash": "ce3bbce7",
+   "why": "Classic familial hypercholesterolaemia is autosomal dominant and is most often caused by LDLR mutations, which reduce hepatic clearance of LDL. APOB and PCSK9 variants are less common causes.",
+   "notes": [
+    "HDL is not the defect, and abnormalities of HDL do not cause familial hypercholesterolaemia.",
+    "HMG-CoA reductase is the target of statins, not the gene mutated in familial hypercholesterolaemia.",
+    "LDL itself is a lipoprotein particle, not a single gene product. The relevant ligand gene is APOB, a minor cause, whereas the main defect is in the receptor.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-033": {
+   "hash": "c93c7264",
+   "why": "The heterozygote's light blue colour lies between the two parental colours, and the F2 shows the 1:2:1 single-gene ratio with each genotype visible. That is incomplete dominance.",
+   "notes": [
+    "Epistasis involves two genes and changes the 9:3:3:1 dihybrid ratio, for example to 9:3:4, rather than giving a single-gene 1:2:1 with a blended heterozygote.",
+    null,
+    "In codominance the heterozygote shows both parental traits at once, for example blue and white patches, not a single intermediate colour.",
+    "Inbreeding depression is reduced fitness from homozygosity and does not explain a Mendelian 1:2:1 colour ratio."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-036": {
+   "hash": "e3295884",
+   "why": "In Huntington disease the CAG repeat in HTT is unstable during spermatogenesis and expands when passed through the father. This explains juvenile-onset cases inherited from the father.",
+   "notes": [
+    null,
+    "Marfan syndrome is caused by FBN1 point mutations, not repeat expansions, so it does not show anticipation.",
+    "Cystic fibrosis is autosomal recessive and caused by CFTR mutations, not repeat expansions, so there is no anticipation.",
+    "Fragile X does show anticipation, but the CGG premutation expands to a full mutation when passed through the mother, not the father."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-037": {
+   "hash": "17044645",
+   "why": "A homeotic mutation changes the identity of a body segment, so one structure develops where another belongs. The classic example is Antennapedia in Drosophila, where legs grow in place of antennae. Remember that Hox/homeobox genes specify segment identity along the body axis.",
+   "notes": [
+    "This describes hemizygosity or a single allele, not a mutation that changes which body part develops.",
+    null,
+    "Tumour formation comes from oncogene or tumour suppressor mutations, not from mutations that swap body segment identity.",
+    "This defines a temperature-sensitive conditional mutation, not a homeotic one."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-040": {
+   "hash": "11fc7ae9",
+   "why": "Alpha-globin is needed for fetal haemoglobin (HbF, α2γ2), so severe alpha-thalassaemia shows up before birth. Losing all four genes (Hb Bart's) causes hydrops fetalis with severe anaemia. Beta-chain disorders only appear after the switch from gamma to beta chains at around 3 to 6 months.",
+   "notes": [
+    null,
+    "HbF carries gamma chains, not beta chains, so beta-thalassaemia major usually presents at about 3 to 6 months of age rather than at birth.",
+    "High HbF levels are benign and usually cause no symptoms, so they do not cause anaemia at birth.",
+    "High fetal HbF protects the newborn, so symptoms of sickle cell disease generally begin after about 6 months of age."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-042": {
+   "hash": "97cb3b9f",
+   "why": "Tay-Sachs is an autosomal recessive GM2 gangliosidosis caused by HEXA mutations that leave the cell without hexosaminidase A. GM2 ganglioside builds up in neurons, giving neurodegeneration and a cherry-red macula. It is more common in Ashkenazi Jewish people.",
+   "notes": [
+    "Alpha-L-iduronidase deficiency causes Hurler syndrome (MPS I), a mucopolysaccharidosis.",
+    "Glucose-6-phosphatase deficiency causes von Gierke disease (glycogen storage disease type Ia).",
+    null,
+    "Homogentisate oxidase deficiency causes alkaptonuria (ochronosis and dark urine), not a gangliosidosis."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-043": {
+   "hash": "ebc23cd9",
+   "why": "A nonsense mutation is a point substitution that turns a sense codon into a stop codon (UAA, UAG or UGA). This truncates the protein early and often triggers nonsense-mediated mRNA decay.",
+   "notes": [
+    "A change in a promoter or enhancer is a regulatory mutation. It alters expression, not the codon sequence.",
+    "Changes at AG acceptor sites are splice-site mutations, which cause exon skipping or intron retention.",
+    "A substitution that codes for a different amino acid is a missense mutation, not a nonsense mutation.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-045": {
+   "hash": "2fab2440",
+   "why": "Maternal serum AFP is low in Down syndrome and is one of the low markers on second-trimester screening, along with low uE3 and high hCG and inhibin A. Conditions with open fetal defects or more fetal tissue raise AFP. In Australia, first-trimester combined screening or NIPT is now usually used.",
+   "notes": [
+    null,
+    "An abdominal wall defect such as exomphalos lets AFP leak out, so the maternal serum level is high.",
+    "Open neural tube defects raise maternal serum AFP. This is the classic reason for a high AFP.",
+    "Two fetuses make more AFP, so the maternal serum level is higher than in a singleton pregnancy."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-046": {
+   "hash": "c38cc1f3",
+   "why": "West-Eberhard used the term developmental plasticity for a single genotype producing different phenotypes depending on the environment during development. It is the general term for phenotypic plasticity during development.",
+   "notes": [
+    "Fetal plasticity is not the standard term West-Eberhard used, and plasticity during development is not limited to fetal life.",
+    "The fetal origins (Barker) hypothesis links the intrauterine environment to adult disease risk. It does not define genotype-to-phenotype plasticity.",
+    null,
+    "Environmental plasticity is not the established term. The defined concept is developmental plasticity."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-048": {
+   "hash": "08f5a35f",
+   "why": "First cousins are third-degree relatives. They are linked through two paths, each with four meioses (2 × (1/2)^4), so they share on average 1/8 of their genes. Remember the sequence: first degree 1/2, second degree 1/4, third degree 1/8.",
+   "notes": [
+    "Half of genes are shared by first-degree relatives, such as parent and child or full siblings.",
+    "A quarter of genes are shared by second-degree relatives, such as uncle and nephew, grandparent, or half-siblings.",
+    null,
+    "One-sixteenth is the inbreeding coefficient of a child born to first cousins, not the proportion of genes the cousins share."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-049": {
+   "hash": "c4d774cf",
+   "why": "RET is a proto-oncogene. Activating, gain-of-function mutations in this receptor tyrosine kinase cause MEN2A, MEN2B and familial medullary thyroid cancer. Tumour suppressor genes cause disease through loss of function, usually after a second hit, whereas oncogenes need only one activated allele.",
+   "notes": [
+    "APC is a classic tumour suppressor that negatively regulates Wnt/beta-catenin signalling, and losing both copies drives familial adenomatous polyposis and colorectal cancer.",
+    "NF1 encodes neurofibromin, a Ras-GTPase-activating protein that switches Ras off, so loss of function causes neurofibromatosis type 1, which makes it a tumour suppressor.",
+    "RB1 is the prototype tumour suppressor from Knudson's two-hit hypothesis, and losing both alleles causes retinoblastoma.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-050": {
+   "hash": "418d2936",
+   "why": "An affected father passes his only X chromosome to all of his daughters and to none of his sons. In X-linked dominant inheritance, all daughters of an affected male are affected and no sons are. Absence of male-to-male transmission is the hallmark of any X-linked trait.",
+   "notes": [
+    "Parental consanguinity points to autosomal recessive inheritance, because related parents are more likely to share the same rare recessive allele.",
+    "Male-to-male transmission rules out X-linked inheritance, since a father gives his son a Y chromosome, not an X, and it suggests an autosomal pattern.",
+    "Affected males also transmit X-linked dominant traits (to all their daughters), and affected females pass them to half their sons and half their daughters, so transmission is not limited to females.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-051": {
+   "hash": "199c1519",
+   "why": "A specific 4-base site is expected by chance once every 4^4 = 256 bp. A 5,000 bp genome therefore has about 5,000/256, roughly 19.5 sites, which gives about 20 fragments. Use 4^n for the expected spacing of an n-base recognition site.",
+   "notes": [
+    "About 2 fragments would mean roughly one cut site, which fits a very rare-cutting enzyme with a long recognition sequence, not a 4-base cutter.",
+    "About 4 fragments would mean a site every 1,000 to 1,500 bp, far less often than a 4-base sequence turns up by chance (every 256 bp).",
+    null,
+    "About 50 fragments would need a site every 100 bp, which overestimates the frequency, since 4^4 = 256 bp, not about 100 bp."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-057": {
+   "hash": "22434693",
+   "why": "Leber hereditary optic neuropathy comes from point mutations in mitochondrial DNA genes for complex I (e.g. MT-ND4 m.11778G>A). It is therefore inherited only through the mother: an affected man never passes it on. It shows heteroplasmy and incomplete penetrance, with a male excess.",
+   "notes": [
+    "Chromosome 12 carries genes such as PAH (phenylketonuria), not the cause of Leber hereditary optic neuropathy, which is a mitochondrial disorder.",
+    "Chromosome 18 trisomy causes Edwards syndrome; Leber optic neuropathy is not linked to any nuclear autosome.",
+    "Chromosome 21 is linked to Down syndrome; the strictly maternal inheritance of Leber optic neuropathy points to mitochondrial DNA instead.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-060": {
+   "hash": "ecdc0a5c",
+   "why": "The inbreeding coefficient F is the probability that the two alleles at a locus are identical by descent. As F rises, homozygosity increases and heterozygosity falls in proportion: observed heterozygosity = 2pq(1-F). This is why consanguinity increases autosomal recessive disease.",
+   "notes": [
+    null,
+    "Linkage depends on how physically close loci sit on a chromosome and on recombination frequency, which mating patterns such as inbreeding do not change.",
+    "Whether a gene has introns is a fixed structural feature of the gene, and inbreeding does not alter it.",
+    "Differences in RNA between daughter cells reflect gene expression and regulation within an individual, not population-level genotype frequencies affected by inbreeding."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-062": {
+   "hash": "b730339e",
+   "why": "Carrying two specific different alleles means being heterozygous. Under Hardy-Weinberg equilibrium the heterozygote frequency is 2pq = 2 x 0.2 x 0.2 = 0.08. The factor of 2 is there because either allele can come from either parent.",
+   "notes": [
+    "0.4 is the sum p + q, not the probability of a genotype, and it wrongly adds the allele frequencies instead of multiplying them.",
+    "0.32 would be 2pq if one of the allele frequencies were 0.8, which confuses one allele's frequency with the combined frequency of all the other alleles.",
+    null,
+    "0.02 comes from neither p squared (0.04) nor 2pq (0.08) and is not a valid Hardy-Weinberg result for these frequencies."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-064": {
+   "hash": "8adaf19c",
+   "why": "Fathers pass a Y chromosome, not an X, to their sons. Male-to-male transmission therefore rules out X-linked inheritance and supports an autosomal pattern. A trait passed vertically through successive generations, including father to son, fits autosomal dominant inheritance.",
+   "notes": [
+    null,
+    "Autosomal recessive traits usually appear in siblings of unaffected carrier parents, not vertically from an affected father to an affected son.",
+    "X-linked dominant inheritance never shows male-to-male transmission, because affected fathers pass the trait to all their daughters and none of their sons.",
+    "X-linked recessive traits cannot pass from father to son, and affected males pass the allele through their carrier daughters to their grandsons."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-067": {
+   "hash": "8604a6e1",
+   "why": "Tay-Sachs disease is autosomal recessive. It is caused by HEXA mutations on chromosome 15 that lead to hexosaminidase A deficiency and GM2 ganglioside storage, and it is more common in Ashkenazi Jewish populations. The other options are classic X-linked recessive disorders.",
+   "notes": [
+    "Duchenne muscular dystrophy is X-linked recessive, caused by mutations in the dystrophin gene at Xp21, and it mainly affects boys.",
+    null,
+    "Haemophilia A is X-linked recessive, caused by factor VIII (F8) deficiency, with the gene on Xq28.",
+    "Haemophilia B (Christmas disease) is X-linked recessive, caused by factor IX (F9) deficiency, with the gene on Xq27."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-071": {
+   "hash": "b06eddcb",
+   "why": "Pseudocholinesterase (butyrylcholinesterase) breaks down succinylcholine in plasma. If it is deficient, the drug's neuromuscular block lasts much longer, causing prolonged apnoea after anaesthesia. In Australia the drug is called suxamethonium.",
+   "notes": [
+    "Fava beans trigger haemolysis in G6PD deficiency, not in pseudocholinesterase deficiency.",
+    "Halothane is a classic trigger of malignant hyperthermia (RYR1 variants), which is a different pharmacogenetic condition.",
+    "Primaquine causes oxidative haemolysis in G6PD deficiency and is not affected by pseudocholinesterase activity.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-072": {
+   "hash": "6fb4da1a",
+   "why": "The most common CFTR variant is F508del (ΔF508). It is a 3-base-pair in-frame deletion that removes phenylalanine 508, so the protein misfolds and is broken down before it reaches the cell surface.",
+   "notes": [
+    null,
+    "CF is not caused by duplication. The commonest variant removes bases rather than copying them.",
+    "Substitutions such as G551D and nonsense variants occur in CF but are much rarer than F508del.",
+    "Insertions are not the main CFTR variant. F508del loses three bases rather than gaining any."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-073": {
+   "hash": "9bf3f4f5",
+   "why": "Normal human somatic cells are diploid, with 46 chromosomes: 22 pairs of autosomes plus two sex chromosomes (XX or XY).",
+   "notes": [
+    "23 is the haploid number found in gametes, not the diploid number.",
+    "24 is the number of distinct chromosome types (22 autosomes plus X and Y), not the diploid count.",
+    null,
+    "48 was the human count wrongly accepted before 1956, and it is the diploid number of great apes."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-076": {
+   "hash": "dacc6eb9",
+   "why": "Huntington disease is caused by an expanded CAG repeat in HTT. Above about 36 repeats, the expanded polyglutamine tract makes the protein toxic. Expansion is most marked through the father, which explains anticipation.",
+   "notes": [
+    "Cystic fibrosis is caused by CFTR variants such as F508del, a deletion, not by a repeat expansion.",
+    "Duchenne muscular dystrophy is usually caused by large frameshift deletions in the dystrophin gene, not by triplet repeats.",
+    null,
+    "Osteogenesis imperfecta usually comes from missense variants (often glycine substitutions) in COL1A1 or COL1A2, not from repeat expansion."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-077": {
+   "hash": "ca0f1fa7",
+   "why": "Female pseudohermaphroditism means a 46,XX person with ovaries whose external genitalia are virilised. 21-hydroxylase CAH is the commonest cause, because shunting of precursors produces excess fetal adrenal androgens. The current term is 46,XX DSD.",
+   "notes": [
+    "Androgen insensitivity causes male pseudohermaphroditism: a 46,XY person with testes and female-appearing genitalia.",
+    "Campomelic dysplasia (SOX9) causes sex reversal in 46,XY individuals, not virilisation of a 46,XX individual.",
+    null,
+    "Klinefelter syndrome (47,XXY) is a sex chromosome aneuploidy in a phenotypic male with small testes, not 46,XX virilisation."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-078": {
+   "hash": "9d09fd18",
+   "why": "Introns are part of the primary transcript (pre-mRNA) but are cut out by the spliceosome before the mRNA leaves the nucleus. Only the exons are kept and translated.",
+   "notes": [
+    null,
+    "The poly-A tail is added during processing and stays on the mature mRNA, where it helps stability and export.",
+    "A ribosome binding site (Shine–Dalgarno sequence) is a prokaryotic feature. It is not something eukaryotic processing removes.",
+    "The 5' cap is added during processing and stays on the mature mRNA, where it is needed to start translation."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-081": {
+   "hash": "258d8e6b",
+   "why": "Zellweger syndrome is caused by PEX gene variants that stop peroxisomes from forming. Very-long-chain fatty acids build up, causing hypotonia, a high forehead, liver dysfunction and seizures in infancy.",
+   "notes": [
+    "Acute intermittent porphyria is a defect of haem synthesis (porphobilinogen deaminase) in the cytosol and mitochondria, not the peroxisome.",
+    "Maple syrup urine disease is a defect of the mitochondrial branched-chain α-ketoacid dehydrogenase, not a peroxisomal disorder.",
+    "MCAD deficiency affects mitochondrial β-oxidation of medium-chain fatty acids. It is not peroxisomal β-oxidation of very-long-chain fatty acids.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-083": {
+   "hash": "4a8adf1f",
+   "why": "Most alpha-thalassaemia comes from deletions of one or more of the duplicated HBA1/HBA2 genes, for example the common -alpha3.7 single-gene deletion and the --SEA double deletion. Unequal crossing over between the homologous alpha-globin genes causes these deletions. Beta-thalassaemia, by contrast, is mostly caused by point mutations.",
+   "notes": [
+    null,
+    "Unequal crossover can also produce triplicated alpha genes (alpha-alpha-alpha), but these do not cause alpha-thalassaemia and are not the common disease-causing lesion.",
+    "Insertions are not a typical cause of alpha-thalassaemia; small insertions are seen more in some beta-thalassaemia frameshift alleles.",
+    "Non-deletional point mutations (e.g. Hb Constant Spring) do occur but are much less common than deletions; point mutations are typical of beta-thalassaemia."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-088": {
+   "hash": "398225a9",
+   "why": "A chimaera carries cell lines from two or more different zygotes, for example after fusion of dizygotic embryos or blood chimaerism in twins. Mosaicism, by contrast, is two or more cell lines arising from a single zygote.",
+   "notes": [
+    "Mosaicism means genetically different cell lines that all come from one zygote, usually through a post-zygotic mitotic error, not from different zygotes.",
+    "Diploidy just means having two sets of chromosomes (2n), the normal state of somatic cells.",
+    "Aneuploidy means a chromosome number that is not an exact multiple of the haploid set (e.g. trisomy). It says nothing about how many zygotes contributed cells.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-094": {
+   "hash": "fa67f560",
+   "why": "The Philadelphia chromosome is a shortened chromosome 22 that comes from a reciprocal translocation, t(9;22)(q34;q11). It joins BCR to ABL1 and makes a constitutively active tyrosine kinase. This is the hallmark of CML and is also found in some ALL.",
+   "notes": [
+    "Gene amplification means extra copies of a gene (for example MYCN in neuroblastoma or HER2 in breast cancer), whereas the Philadelphia chromosome is an exchange of material between chromosomes 9 and 22.",
+    null,
+    "Burkitt lymphoma is caused by t(8;14), which puts MYC next to the immunoglobulin heavy chain locus, not by the t(9;22) Philadelphia translocation.",
+    "Retinoblastoma is caused by loss of both copies of the RB1 tumour suppressor on 13q14, not by a translocation that activates an oncogene."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-095": {
+   "hash": "1748b956",
+   "why": "Tay-Sachs carriers have about half the normal hexosaminidase A activity, so measuring the enzyme in serum or leukocytes can identify them. Classic carrier screening worked this way. Measure leukocyte enzyme in pregnancy and in women on the oral contraceptive pill, because serum results are unreliable then.",
+   "notes": [
+    "Cystic fibrosis is caused by a defective CFTR chloride channel, not an enzyme deficiency, so carriers are found by CFTR mutation analysis.",
+    "Fragile X carriers are found by DNA testing for CGG repeat expansion (premutation) in FMR1, not by an enzyme assay.",
+    "Most oculocutaneous albinism carriers cannot be reliably detected by enzyme assay because tyrosinase activity overlaps with normal, so carrier detection depends on molecular testing.",
+    null
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-096": {
+   "hash": "8b2919a0",
+   "why": "OTC is a urea cycle enzyme, so its deficiency stops ammonia being converted to urea and causes hyperammonaemia. Raised urinary orotic acid helps tell it apart from CPS1 deficiency. It is X-linked and is the most common urea cycle disorder.",
+   "notes": [
+    "Galactosaemia causes jaundice, liver failure, cataracts and E. coli sepsis from galactose-1-phosphate build-up, not primary hyperammonaemia.",
+    "Hurler syndrome is a lysosomal mucopolysaccharide storage disorder (alpha-L-iduronidase deficiency) with coarse facies and corneal clouding, and blood ammonia is normal.",
+    null,
+    "Phenylketonuria raises phenylalanine because phenylalanine hydroxylase is deficient, and blood ammonia stays normal."
+   ],
+   "by": "ai",
+   "model": "opus",
+   "at": "2026-10-28"
   },
   "mmlu-professional_medicine-009": {
    "hash": "93435f27",
@@ -3654,19 +4993,87 @@
  },
  "refused": {
   "headqa-2014-111": {
-   "why": "review: The gout note says allopurinol is 'never' started during an acute attack, but current guidance (ACR 2020) allows urate-lowering therapy to be started during a flare with anti-inflammatory cover.",
+   "why": "review: The gout note says allopurinol is 'never' started during an acute attack, which is outdated: current guidance allows starting urate-lowering therapy during a flare with anti-inflammatory or colchicine cover.",
    "at": "2026-10-28"
   },
-  "medqa-us4-test-0896": {
-   "why": "review: The delusional disorder note says it requires non-bizarre delusions, but DSM-5 removed that requirement and allows bizarre delusions (with the 'with bizarre content' specifier); the real reasons to exclude it here are the disorganised thinking and negative symptoms.",
-   "at": "2026-10-28"
-  },
-  "medqa-us4-test-1116": {
+  "mmlu-anatomy-020": {
    "why": "no note for option 4",
    "at": "2026-10-28"
   },
+  "mmlu-anatomy-041": {
+   "why": "review: The note for option A says the glossopharyngeal nerve supplies only stylopharyngeus 'among these muscles', which suggests stylopharyngeus is a soft palate muscle; it is a pharyngeal muscle, and the glossopharyngeal nerve supplies no palatal muscle.",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-062": {
+   "why": "not one note per option",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-082": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-091": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-115": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-117": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-118": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-anatomy-124": {
+   "why": "review: The thoracic note says 'Thoracic nerves (T1 to L2)', but the thoracic spinal nerves are T1 to T12; T1 to L2 is the range of the sympathetic outflow, not of the thoracic nerves.",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-002": {
+   "why": "review: The note for 0.02 says it is 2q and roughly the carrier frequency, but 2q is 0.2 and 0.02 is 2q²; the note also contradicts its own carrier figure of about 0.18.",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-026": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-041": {
+   "why": "review: The note for option B says 1 in 4000 comes from confusing the answer with the carrier frequency (2pq), but that is about 1 in 50, so it cannot explain the 1 in 4000 figure.",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-080": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-082": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-084": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-086": {
+   "why": "no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-087": {
+   "why": "no note for option 1; no note for option 4",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-090": {
+   "why": "no note for option 1",
+   "at": "2026-10-28"
+  },
+  "mmlu-medical_genetics-091": {
+   "why": "no note for option 1",
+   "at": "2026-10-28"
+  },
   "mmlu-professional_medicine-100": {
-   "why": "it names an option by letter (the options are shuffled when shown)",
+   "why": "review: The explanation says the murmur is at the right sternal border, but the stem says it is heard over the left sternal border and spreads to the right; the mitral valve prolapse note also mentions a 'sudden collapse' that is not in the stem.",
    "at": "2026-10-28"
   }
  }

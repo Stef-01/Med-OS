@@ -19,7 +19,7 @@ export const benchDir = argv => { const i = argv.indexOf('--from'); return path.
 export const SETS = [
   { out: 'medqa-us-step2-3.jsonl', from: 'medqa-us-test/normalised.jsonl', keep: r => r.meta_info === 'step2&3' },
   { out: 'mmlu-professional-medicine.jsonl', from: 'mmlu-med/normalised.jsonl', keep: r => r.topic === 'professional_medicine' },
-  { out: 'mmlu-basic-sciences.jsonl', from: 'mmlu-med/normalised.jsonl', keep: r => ['anatomy', 'medical_genetics', 'clinical_knowledge', 'college_medicine'].includes(r.topic) }   /* level:preclinical (lib/mcq-sources.mjs), with its own review and quota */
+  { out: 'mmlu-basic-sciences.jsonl', from: 'mmlu-med/normalised.jsonl', keep: r => ['anatomy', 'medical_genetics'].includes(r.topic) }   /* level:preclinical (lib/mcq-sources.mjs), with its own review and quota; clinical knowledge and college medicine passed 1 in 5 in the pilot and are left out */
 ];
 const FIELDS = ['id', 'stem', 'options', 'answer', 'explanation', 'topic', 'meta_info', 'exam', 'source'];
 
