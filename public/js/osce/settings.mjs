@@ -71,15 +71,15 @@ const REM = { on: 'On: 9 AM a line from Confucius; 6 PM a note from your dog if 
   install: 'On iPhone: Share, then Add to Home Screen, and open MDosce from there to turn reminders on.',
   denied: 'Notifications are blocked for this site in your browser settings.', none: 'This browser cannot show notifications.' };
 function remindersHtml() {
-  return `<section aria-labelledby="os-h-rem"><h3 id="os-h-rem">Daily reminders</h3>
+  return `<details class="os-fold"><summary><h3 id="os-h-rem">Daily reminders</h3><span class="os-foldv" data-fold="rem">Off</span></summary><section aria-labelledby="os-h-rem">
     <button type="button" class="os-switch" role="switch" aria-checked="false" data-set="rem" aria-labelledby="os-rem-t" aria-describedby="os-rem-d" disabled>
       <span class="os-switch-tx"><strong id="os-rem-t">Reminders</strong><span id="os-rem-d">${esc(REM.off)}</span></span>
       <span class="os-switch-ui" aria-hidden="true"></span></button>
-  </section>`;
+  </section></details>`;
 }
 async function wireReminders(el) {
   const b = el.querySelector('[data-set="rem"]'), d = el.querySelector('#os-rem-d');
-  const paint = st => { b.setAttribute('aria-checked', String(st === 'on')); b.disabled = st !== 'on' && st !== 'off'; d.textContent = REM[st] || REM.none; };
+  const paint = st => { const v = el.querySelector('[data-fold="rem"]'); if (v) v.textContent = st === 'on' ? 'On' : 'Off'; b.setAttribute('aria-checked', String(st === 'on')); b.disabled = st !== 'on' && st !== 'off'; d.textContent = REM[st] || REM.none; };
   paint(await remStatus());
   b.addEventListener('click', async () => {
     const want = b.getAttribute('aria-checked') !== 'true';
@@ -92,12 +92,12 @@ async function wireReminders(el) {
    settings"): a code unlocks dogs in Duel a Mate on this device (gifts.mjs keeps it) */
 function giftHtml() {
   const have = [...unlocked()].map(g => GIFTS[g].name);
-  return `<section aria-labelledby="os-h-gift"><h3 id="os-h-gift">Special gift</h3>
+  return `<details class="os-fold"><summary><h3 id="os-h-gift">Special gift</h3><span class="os-foldv">${have.length ? `${have.length} unlocked` : 'Have a code?'}</span></summary><section aria-labelledby="os-h-gift">
     <p class="os-handhint">Have a gift code? Type it here to unlock something extra in Duel a Mate.</p>
     <div class="os-crow os-giftrow"><label class="os-setf os-giftf"><span>Gift code</span><input data-set="gift" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go"></label>
       <button type="button" class="os-btn" data-os="sgift">Redeem</button></div>
     <p class="os-handhint os-giftmsg" role="status">${have.length ? esc(`Unlocked: ${have.join(', ')}.`) : ''}</p>
-  </section>`;
+  </section></details>`;
 }
 function wireGift(el) {
   const input = el.querySelector('[data-set="gift"]'), msg = el.querySelector('.os-giftmsg');
@@ -109,24 +109,24 @@ function wireGift(el) {
 export function settingsDlg() {
   const c = markerCfg(), a = account();
   const sync = a ? 'Kept on your account (above).' : syncOn() ? `Shared between your devices${syncState.unsynced ? ' · some changes are still waiting to upload' : ''}. Sign in above to keep it on your own account.` : 'On this device only. Set a Supabase project in config.js to share between devices, or use a progress file below.';
-  const d = openDialog({ kind: 'settings', title: 'Settings', cls: 'os-dlg--small', action: '<button class="os-btn os-primary" data-os="ssave">Save</button>',
+  const d = openDialog({ kind: 'settings', title: 'Settings', cls: 'os-dlg--small', action: '<button class="os-btn os-primary" data-os="ssave">Done</button>',
     body: `<form class="os-set">
       ${accountHtml()}
       ${placementHtml()}
       ${gamesHtml()}
       ${remindersHtml()}
       ${giftHtml()}
-      <section><h3>AI marking</h3>
+      <details class="os-fold"><summary><h3>AI marking</h3><span class="os-foldv">${c.key ? 'Key saved' : 'No key'}</span></summary><section>
         <p class="os-handhint">With your own Anthropic API key, Claude marks a pasted transcript here against the station's checklist. The key stays in this browser. Without one, the marking sheet copies a prompt for a Claude chat instead.</p>
         <label class="os-setf"><span>API key</span><input type="password" data-set="key" value="${esc(c.key)}" placeholder="sk-ant-..." autocomplete="off" spellcheck="false"></label>
         <label class="os-setf"><span>Model</span><select data-set="model">${MODELS.map(([v, l]) => `<option value="${v}"${v === c.model ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
         ${c.key ? '<button type="button" class="os-link os-dangerlink" data-os="skeyclear">Remove the key from this device</button>' : ''}
-      </section>
-      <section><h3>Progress</h3>
+      </section></details>
+      <details class="os-fold"><summary><h3>Progress</h3><span class="os-foldv">Export, import</span></summary><section>
         <p class="os-handhint">${esc(sync)}</p>
         <div class="os-crow"><button type="button" class="os-btn" data-os="sexport">Export progress</button>
           <label class="os-btn os-filebtn">Import progress<input type="file" accept="application/json,.json" data-set="import" hidden></label></div>
-      </section></form>` });
+      </section></details></form>` });
   d.el.querySelector('form').addEventListener('submit', e => { e.preventDefault(); saveSettings(); });
   d.el.querySelector('[data-set="import"]').addEventListener('change', e => importFile(e.target.files?.[0]));
   wireAccount(d.el); wirePlacement(d.el); wireGames(d.el); wireGift(d.el); wireReminders(d.el);
@@ -182,9 +182,10 @@ export function saveSettings() {
   const d = topDialog(); if (!d || d.kind !== 'settings') return;
   const key = d.el.querySelector('[data-set="key"]').value, model = d.el.querySelector('[data-set="model"]').value || DEFAULT_MODEL;
   if (key && !/^sk-ant-[\w-]{10,}$/.test(key.trim())) return notify('That does not look like an Anthropic API key (sk-ant-…).', 'danger');
+  const was = markerCfg(), changed = was.key !== key || was.model !== model;
   setMarkerCfg({ key, model });
   closeDialog();
-  notify(key ? 'Saved. Claude can mark transcripts on this device.' : 'Saved.', 'success');
+  if (changed) notify(key ? 'Saved. Claude can mark transcripts on this device.' : 'Saved.', 'success');   /* Done closes quietly when nothing changed */
   ctx.render();
 }
 export function clearKey() { setMarkerCfg({ key: '', model: markerCfg().model }); closeDialog(true); notify('API key removed from this device.'); ctx.render(); }

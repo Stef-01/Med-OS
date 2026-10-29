@@ -2234,3 +2234,13 @@ details.os-pair:not([open]) { padding-bottom:14px; }
 /* inside a sheet on a phone, a toast rises from the bottom, clear of the sheet's search and title (and above a pinned
    grade bar) */
 @media (max-width:639px) { body:has(.os-dlg) .os-alerts { top:auto; bottom:calc(92px + env(safe-area-inset-bottom)); } }
+
+/* Settings: the rarely used sections fold to one row with their value (backlog 12) */
+.os-fold { border-top:1px solid var(--stroke); }
+.os-fold > summary { list-style:none; display:flex; align-items:center; gap:10px; min-height:52px; cursor:pointer; }
+.os-fold > summary::-webkit-details-marker { display:none; }
+.os-fold > summary h3 { margin:0; flex:1; }
+.os-fold > summary .os-foldv { color:var(--mute); font-size:14px; }
+.os-fold > summary::after { content:''; width:8px; height:8px; border:solid var(--mute); border-width:0 2px 2px 0; rotate:-45deg; transition:rotate .2s; flex:none; }
+.os-fold[open] > summary::after { rotate:45deg; }
+.os-fold[open] > section { animation:os-rise .25s var(--ease) both; padding-bottom:12px; }

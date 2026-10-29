@@ -490,6 +490,7 @@ async function runIn(width, height, label) {
   await pg.waitForSelector('[data-os="settings"]');
   await click('[data-os="settings"]');
   await pg.waitForSelector('.os-set');
+  await pg.evaluate(() => document.querySelectorAll('.os-fold').forEach(d => { d.open = true; }));
   await pg.fill('[data-set="key"]', 'not-a-key');
   await click('[data-os="ssave"]');
   ok(await pg.locator('.os-modal:not(.out) .os-set').count() === 1, `${label}: a malformed key is refused`);   /* :not(.out): the dialog Escape closed may still be fading, and it has a form too */
@@ -519,6 +520,7 @@ async function runIn(width, height, label) {
           content: [{ type: 'text', text: REPLY(leafId) }], usage: { input_tokens: 10, output_tokens: 10 } }) });
     });
     await click('[data-os="settings"]');
+    await pg.evaluate(() => document.querySelectorAll('.os-fold').forEach(d => { d.open = true; }));
     await pg.fill('[data-set="key"]', 'sk-ant-api03-test-key-not-real');
     await click('[data-os="ssave"]');
     await pg.waitForSelector('.os-set', { state: 'detached' });
