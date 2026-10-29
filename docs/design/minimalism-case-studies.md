@@ -149,3 +149,64 @@ Effort: S < 1 h, M half a day. Files are best guesses from the tree: Start scree
 Suggested order: 1, 5, 11, 13, 3, 4 (all small, visible wins), then 2, 6, 7, 8, 10, then the rest. Item 2 depends on 3 and 19 to be clean; item 10 and 14 depend on 6.
 
 Verification for each item: re-run the 393x852 Playwright pass and compare the before screenshot; the success test is written in "Expected effect" (for example, item 7: first station card top < 300 px).
+
+---
+
+## 5. Round 2 (REA audit)
+
+Run 2026-10-29: `npx serve public -l 5195`, a dedicated headless Chrome 156 on CDP port 9481, viewport 393x852 (mobile, touch), signed out, nothing submitted. REA (`list_browser_targets`, `capture_web_screenshot`, evidence `ev_2ef2a682…`) bound the target. Flows were driven and measured over the same CDP endpoint, with a DOM probe scoped to the topmost sheet. Counts cover what is inside the viewport (above the fold), not the whole scroll.
+
+Columns: **Ctrls** = visible interactive elements; **Words** = visible copy; **Boxes** = containers with a border, fill or shadow (≥60x30 px, buttons excluded); **Prim** = saturated filled buttons ≥120 px wide; **First y** = top of the first meaningful content (px).
+
+### Scorecard
+
+| Screen | Ctrls | Words | Boxes | Prim | First y | Note |
+|---|---|---|---|---|---|---|
+| Start | 20 | 82 | 6 | 1 | 80 | Fast Run CTA is live once a rotation is held; the Study partners form is still open on home (2 inputs, swap, candidate toggle) from y≈665 |
+| Start, no rotation held | 19 | 77 | 6 | 1 | 80 | The filled CTA reads "Pick a rotation to start" and does nothing |
+| New Study Session (empty) | 4 | 28 | 2 | 0 | 120 | Fixed: one empty state with Browse / Add random |
+| Browse Stations | 21 | 328 | 5 | 0 | 270 | Filters are now one line each; cards still carry eye, bookmark, summary, status and Add |
+| Live station / Instructions | 11 | 178 | 10 | 0 | 192 | Header: close, save, more. Timer row: reset, pause, skip. Timing appears 3 times (strip, coloured bar, Reading/Part list) |
+| Live station / Patient Script | 15 | 170 | 8 | 0 | 282 | Adds a 4-chip jump row above the script |
+| Live station / Marking | 12 (+40 checkboxes below) | 151 | 6 | 0 | 298 | 3-sentence disclaimer before the first item |
+| Settings | 14 | 107 | 1 | 0 | 132 | The Account sign-in form comes first; every section has a helper paragraph |
+| Your questions / Study | 15 | 71 | 7 | 1 | 80 | One filled CTA; "Goal and exam date" is still a loose row; 3 mode cards |
+| Your questions / Library (signed out) | 7 | 59 | 4 | 1 | 170 | 26-word sign-in paragraph above "No questions yet" |
+| Your questions / Friends (signed out) | 5 | 33 | 4 | 0 | 170 | Dead tab: a paragraph and Sign in, nothing else |
+| MCQ card, before answer | 8 | 67 | 1 | 0 | 96 | Fixed: the touch hint is one line ("Tap an answer. Hold one to cross it out.") |
+| MCQ card, after answer | 11 | 167 | 2 | 1 | 96 | Fixed: Next is sticky at y=714. The explanation box is clipped behind it; "Back in 10 min." and "I knew it, I misread" sit below Next |
+| Playlists | 4 | 36 | 5 | 0 | 96 | Each pick shows an "UNLOCK X" badge and a ★; the signed-out community shelf is a paragraph and a button |
+| Playlist pick detail | 2 | 120 | 3 | 1 | 302 | Hero art pushes the question list past y=600; the reward box sits between the CTA and the content |
+| Duel a Mate entry | 6 | 11 | 1 | 1 | n/a | The filled primary is still **Play** (needs Name and PIN); Vs AI is secondary |
+
+Round 1 items confirmed shipped in the DOM: 1 (sticky Next), 5 (touch hint), 7 (browse filters on one line), 11 (empty session), 13 (header "MDosce", Marked as an icon). Still open from round 1: 2, 3, 10, 12, 14, 15, 16, 17.
+
+### Backlog, round 2 (prioritised)
+
+| # | Screen | Change | Principle | Measured effect | Files | Effort |
+|---|---|---|---|---|---|---|
+| R1 | Duel entry | Make **Vs AI** the filled primary; Name/PIN fold behind "Play a mate". | P1, P13 | The primary needs no account; Ctrls 6 to 3; playable in 1 tap | `packages/pup-duel/src/ui/duel.mjs`, `duel.css`; `public/js/osce/duel.mjs` | S |
+| R2 | Start | Default Study partners to closed, as one row "A · Partner A / B · Partner B ›", placed under New Study Session. | P3, P4 | Ctrls −5; ~200 px of form off home | `public/js/osce/candidate.mjs`, `public/js/osce.mjs` | S |
+| R3 | Start | Default Fast Run to the placement or All so the CTA is never the inert "Pick a rotation"; deselecting the last chip snaps back to All. | P11 | No dead filled button | `public/js/osce/run.mjs` | S |
+| R4 | Live station | Delete the coloured READING/PART bar and the Reading/Part list from Instructions; the timer strip already shows them. | P10, P14 | Words −20, Boxes −3, Tasks start ~150 px higher | `public/js/osce/session.mjs`, `public/css/osce.css` | S |
+| R5 | Live station | Timer row keeps pause; reset and skip move to a long-press on the timer and the "..." menu. | P7, P10 | Ctrls −2 in the always-on band | `public/js/osce/session.mjs` | S |
+| R6 | Live station header | Fold Save into "...". | P6 | Header Ctrls 3 to 2 | `public/js/osce/session.mjs` | S |
+| R7 | MCQ after answer | Put "Back in 10 min." in Next's subline and move "I knew it, I misread" to a long-press on Next or the card's "...". | P9 | 2 lines below Next to 0; Next becomes the bottom edge | `public/js/osce/mcq-view.mjs`, `public/css/study-kit.css` | S |
+| R8 | MCQ after answer | Fold the "How N students answered" caption into the % column (tooltip on tap). | P8 | One line fewer | `public/js/osce/mcq-view.mjs` | S |
+| R9 | Marking tab | Replace the 3-sentence disclaimer with one line, "A prompt, not a pass mark ⓘ". | P4, P12 | Words −45; first checklist item ~90 px higher | `public/js/osce/session.mjs` or `marker.mjs` | S |
+| R10 | Patient Script | Show the History/Exam/Differentials/Part 2 jump chips only on scroll-up (sticky). | P10 | First script line y 282 to ~230 | `public/js/osce/session.mjs`, `public/css/osce.css` | S |
+| R11 | Your questions / Friends | Hide the Friends tab while signed out (3 tabs to 2). | P12, P13 | One dead tab gone; Ctrls −1 | `public/js/osce/library-view.mjs` | S |
+| R12 | Library, signed out | Shorten the sign-in paragraph to one inline row, "On this phone only · Sign in to sync". | P13, P4 | Words −20; content y 170 to ~120 | `public/js/osce/library-view.mjs` | S |
+| R13 | Study tab | Fold "Goal and exam date" into the ring card (tap the ring to edit the goal). | P8, P15 | Boxes −1, Ctrls −1 | `public/js/osce/library-study.mjs` | S |
+| R14 | Study tab | Merge "Smart 10" and "0 to 1" into one row of two chips; "Custom" becomes a text link. | P14 | Boxes 7 to 4; ~120 px saved | `public/js/osce/library-study.mjs`, `public/css/osce.css` | S |
+| R15 | Settings | Placement first; Account becomes one "Sign in to sync ›" row; helper paragraphs cut to 8 words or fewer. | P2, P4 | Words 107 to ~45 above the fold | `public/js/osce/settings.mjs`, `account.mjs` | M |
+| R16 | Browse card | Drop the eye (preview) icon, since tapping the card opens it; bookmark moves to long-press or swipe. | P6, P7 | Per-card Ctrls 3 to 1 (≈ −4 in the viewport) | `public/js/osce/browse.mjs` | S |
+| R17 | Browse card | Summary from 2 lines to 1; the status dot joins the specialty line. | P14 | Card ~210 to ~150 px; 3 cards per screen instead of 2 | `public/js/osce/browse.mjs`, `public/css/osce.css` | S |
+| R18 | Browse header | Remove the details toggle (compact is the only mode now) and the shuffle icon (duplicates "Add random" on the session sheet). | P1, P5 | Ctrls −2; search field full width | `public/js/osce/browse.mjs` | S |
+| R19 | Start | Fold "Request a case" and "Submit a question" into one "Contribute ›" row. | P4, P6 | Ctrls −1, one row fewer | `public/js/osce.mjs`, `requests-view.mjs` | S |
+| R20 | Start | Drop the "133 stations · 2 attempted · Partner A 0 · Partner B 2" line; show attempts as a badge on Marked. | P8 | Words −12; content y 80 to ~56 | `public/js/osce.mjs` | S |
+| R21 | Playlists | Remove the "UNLOCK X" badge from shelf cards (keep it on detail); show ★ only when favourited. | P14, P8 | Words −6; 3 badges gone | `public/js/osce/playlists-view.mjs` | S |
+| R22 | Playlist detail | Shrink the hero art to a 96 px tile beside the title; move the reward box under the question list. | P1, P9 | First question y 600+ to ~300 | `public/js/osce/playlists-view.mjs`, `public/css/osce.css` | S |
+| R23 | Live station | Hide the Notepad bar while Instructions scrolls down; show it on scroll-up. | P10 | 56 px more reading area | `public/js/osce/session.mjs` | S |
+
+Suggested order: R1, R3, R4, R7, R2, R11, R9, R6, R5, then the rest. Verify each with the same 393x852 probe; the Measured effect column is the pass condition.

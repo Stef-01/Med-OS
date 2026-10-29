@@ -2259,3 +2259,8 @@ details.os-pair:not([open]) { padding-bottom:14px; }
 .os-libringbtn:active { transform:scale(.95); }
 .os-libtoday + .os-libsettings { margin-top:-4px; }
 .os-libtoday + .os-libsettings > summary { font-size:13px; }
+/* R7 (round 2): after a wrong answer, the small print sits above Next, so Next is the bottom edge of the pinned bar */
+.os-libgrades--wrong { display:grid; grid-template-columns:auto auto; justify-content:space-between; align-items:center; row-gap:8px; }
+.os-libgrades--wrong .os-libnext { grid-column:1 / -1; order:2; }
+.os-libgrades--wrong .os-libback { order:0; margin:0 !important; text-align:left; }
+.os-libgrades--wrong .os-libmisread { order:1; font-size:13px; justify-self:end; }

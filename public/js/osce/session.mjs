@@ -182,7 +182,7 @@ export function tabBody(st, a, t, o = {}) {
   if (a && a.hl?.[t] && t === 'Instructions') return `<div class="os-sheet" data-hl="${t}">${a.hl[t]}</div>${o.editable ? toolbar() : ''}`;
   if (t === 'Instructions') {
     return `<div class="os-sheet" data-hl="Instructions"><h2>Instructions to Candidate</h2><div class="os-html">${safeHtml(st.stem)}</div>${imgs(st.media?.stem)}
-      ${formatHtml()}
+      ${o.editable ? '' : formatHtml()}
       ${st.tasks.length ? `<h3>Tasks</h3><ol class="os-tasks" role="list">${st.tasks.map((x, i) => `<li><span class="os-tn">${i + 1}</span><div class="os-html">${safeHtml(x)}</div></li>`).join('')}</ol>` : ''}
       </div>${provHtml(st)}${a && o.editable ? toolbar() : ''}`;
   }
@@ -380,6 +380,7 @@ const notepad = (k, v, ph) => `<label class="os-notepad${v ? ' filled' : ''}">${
 /* the tab strip on the clock or in a review: swap the pane in place */
 export function switchTab(t) {
   const pl = ctx.ov.querySelector('.os-pl'), sc = pl.querySelector('.os-pscroll');
+  if (t === ctx.tab && pl.querySelector('.os-pbody')?.children.length) return;   /* the tab that is open: nothing to rebuild (a rebuild would undo a jump made meanwhile) */
   lastScroll[`${ctx.view}:${ctx.tab}`] = sc.scrollTop;
   ctx.tab = t;
   const s = ctx.view === 'session' ? sess() : null, st = s ? ctx.byId.get(s.queue[s.idx]) : ctx.byId.get(findAttempt(ctx.reviewId)?.sid);

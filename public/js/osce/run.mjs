@@ -162,8 +162,9 @@ export function runPaint() {
   box.querySelector('.os-run-clear').hidden = !(r.specs.length || r.origin.length || r.type.length);
   const more = box.querySelector('.os-run-more'); if (r.origin.length || r.type.length) more.open = true;   /* a filter on is never hidden */
   const go = box.querySelector('.os-rungo');
-  go.disabled = !n;
-  go.querySelector('span').textContent = !r.specs.length ? 'Pick a rotation to start' : n ? `Start Fast Run · ${n} station${n === 1 ? '' : 's'}` : 'No stations match';
+  const nAll = r.specs.length ? n : osceRunPool(stations, runOrAll()).length;
+  go.disabled = !nAll;
+  go.querySelector('span').textContent = !r.specs.length ? `Start Fast Run · all ${nAll}` : n ? `Start Fast Run · ${n} station${n === 1 ? '' : 's'}` : 'No stations match';
 }
 export function toggleRot(rot) {
   const r = run(), all = specsIn(rot), on = rotState(rot) === 'on';
@@ -202,8 +203,11 @@ export function runPop(b) {
     const el = o.closest('.os-pop'), sc = el.scrollTop; el.firstElementChild.innerHTML = draw(); el.scrollTop = sc;
   });
 }
+/* R3 (round 2): no rotation picked runs them all, so the filled button always does something */
+const allSpecs = () => ROTATIONS.map(d => d[0]).filter(id => specsIn(id).length).flatMap(specsIn);
+const runOrAll = () => (run().specs.length ? run() : { ...run(), specs: allSpecs() });
 export async function runGo() {
-  const ids = osceShuffle(osceRunPool(ctx.stations, run()).map(s => s.id));
+  const ids = osceShuffle(osceRunPool(ctx.stations, runOrAll()).map(s => s.id));
   if (!ids.length) return;
   const s = sess(), { mem } = ctx;
   if (s.idx != null && !await confirmDlg({ title: 'End the current session?', message: 'The station in progress will be lost.', confirm: 'Start Fast Run' })) return;

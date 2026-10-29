@@ -153,16 +153,16 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.innerHTML = `${top(step === 'name' ? ib('close', 'x', 'Close the duel') : ib('back', 'back', 'Back'))}
       <main class="pd-main pd-auth">
         <div class="pd-stage"></div>
-        ${step === 'name' ? `${transport ? `
-        <form class="pd-form" data-pd="signin" novalidate>
+        ${step === 'name' ? `${practice ? `<button class="pd-btn pd-pri" type="button" data-pd="practice">${icon('bot')}Play the AI now</button>` : ''}${transport ? `
+        <form class="pd-form" data-pd="signin" novalidate>${practice ? '<h2 class="pd-h3 pd-mateh">Play a mate</h2>' : ''}
           <label class="pd-field"><span>Name</span><input name="name" autocomplete="username" autocapitalize="words" maxlength="20" required value="${esc(draft.name || '')}"></label>
           <p class="pd-err" role="alert" data-for="name">${draft.bad === 'name' ? esc(S.err) : ''}</p>
           <label class="pd-field"><span>PIN</span><input name="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" maxlength="4" required value="${esc(draft.pin || '')}"></label>
           <p class="pd-err" role="alert" data-for="pin">${draft.bad === 'name' ? '' : esc(S.err)}</p>
-          <button class="pd-btn pd-pri" type="submit" data-act="login">Play</button>
+          <button class="pd-btn${practice ? '' : ' pd-pri'}" type="submit" data-act="login">${practice ? 'Sign in and play' : 'Play'}</button>
           <button class="pd-link" type="button" data-pd="new">New player</button>
         </form>` : '<p class="pd-note">Duels with mates are off on this site</p>'}
-        ${practice ? `<button class="pd-btn${transport ? ' pd-ghost' : ' pd-pri'}" type="button" data-pd="practice">${icon('bot')}Vs AI</button>` : ''}` : `
+` : `
         <form class="pd-form" data-pd="create">
           <p class="pd-pickname" aria-live="polite"></p>
           <div class="pd-dogs" role="radiogroup" aria-label="Your dog"></div>

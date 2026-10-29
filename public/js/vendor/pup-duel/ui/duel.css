@@ -672,3 +672,7 @@ div.pd-me-dog { cursor: default; }
 .pd-rank--line .pd-rank-txt small { font-size: 13px; }
 .pd-playrow { display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px; }
 .pd-playrow .pd-btn { min-width: 0; padding-inline: 10px; white-space: nowrap; }
+
+/* the way in: the AI first, one tap; a mate under it (round 2 R1) */
+.pd-auth > .pd-btn.pd-pri[data-pd="practice"] { margin-bottom: 6px; }
+.pd-mateh { margin: 10px 0 2px; text-align: left; color: var(--pd-mute); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
