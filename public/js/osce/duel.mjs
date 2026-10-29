@@ -11,7 +11,9 @@
 
 import { createOverlay } from '../study-kit/overlay.mjs';
 import { current as libNow, allItems } from '../library/api.mjs';
-import { mixPack } from '../library/mix.mjs';
+import { mixPack, placePack } from '../library/mix.mjs';
+import { ctx } from './state.mjs';
+import { placementSpecs, placementName } from './core.mjs';
 
 let shell = null, ui = null, bank = null;
 
@@ -24,7 +26,7 @@ async function loadPack(normPack) {
     bank = await r.json();
   }
   const all = allItems(libNow());
-  return normPack(mixPack(bank, all.filter(x => !x.owner).map(x => x.item), all.filter(x => x.owner).map(x => x.item))).pack;
+  return normPack(placePack(mixPack(bank, all.filter(x => !x.owner).map(x => x.item), all.filter(x => x.owner).map(x => x.item)), placementSpecs(ctx.mem), placementName(ctx.mem))).pack;
 }
 /* the decks the duel offers now, with their counts (the e2e reads it) */
 export async function packDecks() {

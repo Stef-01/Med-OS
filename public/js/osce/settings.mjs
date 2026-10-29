@@ -3,7 +3,8 @@
    model), and a progress file to export and import, so two of you can share attempts with no server at all. */
 import { esc } from '../core.mjs';
 import { enabled as syncOn, state as syncState } from '../study-kit/sync.mjs';
-import { osceMergeImport, GAMES, osceGames } from './core.mjs';
+import { osceMergeImport, GAMES, osceGames, oscePlacement, placementSpecs } from './core.mjs';
+import { DISCIPLINES } from '../study-kit/vocab.mjs';
 import { redeem, unlocked, GIFTS } from '../vendor/pup-duel/pup/rig/gifts.mjs';
 import { status as remStatus, turnOn as remOn, turnOff as remOff } from './reminders.mjs';
 import { account, accountsOn, signIn, signOut, duelStats, nameError, pinError } from './account.mjs';
@@ -34,6 +35,26 @@ function accountHtml() {
     <p class="os-handhint">${syncState.unsynced ? 'Some changes are still waiting to upload.' : 'Saved to your account: sign in on another device to pick up where you left off.'}</p>
     <button type="button" class="os-link" data-set="aout">Sign out on this device</button>
   </section>`;
+}
+/* your placement: the disciplines your questions and stations start on */
+function placementHtml() {
+  const on = new Set(oscePlacement(ctx.mem));
+  return `<section aria-labelledby="os-h-place"><h3 id="os-h-place">Your placement</h3>
+    <p class="os-handhint">Pick what you are on (O&amp;G and Paeds, say). Fast Run starts on those rotations, and the duel starts on My placement. You can still choose anything else.</p>
+    <div class="os-placechips" role="group" aria-labelledby="os-h-place">${DISCIPLINES.map(([id, name, emoji, , short]) => `<button type="button" class="os-placechip" data-set="place" data-place="${id}" aria-pressed="${on.has(id)}" title="${esc(name)}"><span aria-hidden="true">${emoji}</span>${esc(short)}</button>`).join('')}</div>
+  </section>`;
+}
+function wirePlacement(el) {
+  el.querySelectorAll('[data-set="place"]').forEach(b => b.addEventListener('click', () => {
+    const id = b.dataset.place, on = b.getAttribute('aria-pressed') !== 'true';
+    ctx.mem.placement = [...oscePlacement(ctx.mem).filter(x => x !== id), ...(on ? [id] : [])];
+    b.setAttribute('aria-pressed', String(on));
+    const specs = placementSpecs(ctx.mem);
+    ctx.mem.run = { ...(ctx.mem.run || { origin: [], type: [], open: [] }), specs: [...specs] };   /* Fast Run starts on them */
+    /* the duel's picker starts on My placement (or back on everything when none is picked); its other choices stay */
+    try { const k = 'osce.duel:pick', p = JSON.parse(localStorage.getItem(k)) || {}; localStorage.setItem(k, JSON.stringify({ ...p, deck: specs.length ? 'place' : '', topic: '', cat: '' })); } catch { /* private mode */ }
+    save(); ctx.render();
+  }));
 }
 /* the games on Start: a switch each, off until turned on */
 function gamesHtml() {
@@ -93,6 +114,7 @@ export function settingsDlg() {
   const d = openDialog({ kind: 'settings', title: 'Settings', cls: 'os-dlg--small', action: '<button class="os-btn os-primary" data-os="ssave">Save</button>',
     body: `<form class="os-set">
       ${accountHtml()}
+      ${placementHtml()}
       ${gamesHtml()}
       ${remindersHtml()}
       ${giftHtml()}
@@ -109,7 +131,7 @@ export function settingsDlg() {
       </section></form>` });
   d.el.querySelector('form').addEventListener('submit', e => { e.preventDefault(); saveSettings(); });
   d.el.querySelector('[data-set="import"]').addEventListener('change', e => importFile(e.target.files?.[0]));
-  wireAccount(d.el); wireGames(d.el); wireGift(d.el); wireReminders(d.el);
+  wireAccount(d.el); wirePlacement(d.el); wireGames(d.el); wireGift(d.el); wireReminders(d.el);
 }
 
 function wireGames(el) {

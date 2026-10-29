@@ -1950,3 +1950,8 @@ button.os-libcheck { align-self:flex-start; }
 @keyframes os-buddy-in { from { transform:scale(.6); opacity:0; } }
 @keyframes os-buddy-hop { 50% { transform:translateY(-6px); } }
 @keyframes os-buddy-say { from { transform:translateX(-6px); opacity:0; } }
+
+/* Your placement (settings.mjs): the disciplines as toggle chips */
+.os-placechips { display:flex; flex-wrap:wrap; gap:8px; }
+.os-placechip { display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:0 14px; border-radius:999px; border:1.5px solid var(--stroke); background:none; color:inherit; font:inherit; font-size:15px; font-weight:600; cursor:pointer; }
+.os-placechip[aria-pressed="true"] { border-color:var(--pri); background:var(--pri-soft); }

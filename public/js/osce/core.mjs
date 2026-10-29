@@ -89,6 +89,12 @@ export function osceTick(t, timing, now) {
    set; untouched, a game is its `on` */
 export const GAMES = [{ id: 'duel', name: 'Duel a Mate', beta: true, on: true, line: 'A live quiz against a mate or the AI on the bank’s questions, with a cartoon dog each.' },
   { id: 'mascot', name: 'Study buddy', on: false, line: 'Your dog sits beside the questions you practise: it cheers a right answer and gives a memory aid when you miss one.' }];
+/* your placement (founder 2026-10-28: "set filters to automatically select certain disciplines as someone might be doing
+   obstetrics and paeds placement"): the disciplines (vocab.mjs) chosen in Settings, and their specialties. Fast Run
+   starts on them, and the duel offers them as a deck of their own (My placement) and starts there */
+export const oscePlacement = mem => DISCIPLINES.map(d => d[0]).filter(id => (mem?.placement || []).includes(id));
+export const placementSpecs = mem => DISCIPLINES.filter(d => oscePlacement(mem).includes(d[0])).flatMap(d => d[3]);
+export const placementName = mem => DISCIPLINES.filter(d => oscePlacement(mem).includes(d[0])).map(d => d[4]).join(' + ');
 export const osceGames = mem => Object.fromEntries(GAMES.map(g => [g.id, typeof mem?.games?.[g.id] === 'boolean' ? mem.games[g.id] : g.on]));
 
 export function osceMigrate(old, now) {

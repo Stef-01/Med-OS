@@ -792,6 +792,19 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
   await solo.locator('.os-duel .pd-opt').first().click();
   await solo.waitForSelector('.os-duel .pd-why:not([hidden])', { timeout: 25000 });
   ok(true, 'duel: practice against the bot needs no shared record');
+  /* Your placement (founder 2026-10-28): O&G and Paeds picked in Settings; Fast Run starts on them, the duel on My placement */
+  const plc = await phone(320, 640, {});
+  await plc.click('[data-os="settings"]'); await plc.click('[data-place="og"]'); await plc.click('[data-place="paeds"]');
+  ok(await plc.locator('.os-placechip[aria-pressed="true"]').count() === 2, 'placement: two disciplines picked in Settings');
+  await plc.evaluate(() => document.querySelector('.os-placechips').scrollIntoView({ block: 'center' })); await plc.waitForTimeout(400); await plc.screenshot({ path: path.join(SHOTS, 'settings-placement.png') });
+  ok(await plc.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'placement: the chips fit a 320 px phone');
+  await plc.keyboard.press('Escape'); await plc.waitForTimeout(300);
+  const rots = await plc.evaluate(() => [...document.querySelectorAll('.os-rots [data-disc][aria-pressed="true"]')].map(b => b.dataset.disc).sort().join(','));
+  ok(rots === 'og,paeds' && /Start Fast Run · \d+/.test(await plc.textContent('.os-rungo') || ''), `placement: Fast Run starts on O&G and Paeds (${rots})`);
+  await plc.click('[data-os="duel"]'); await plc.waitForSelector('.os-duel [data-pd="practice"]'); await plc.click('.os-duel [data-pd="practice"]');
+  await plc.waitForSelector('.os-duel .pd-sheet [data-pd="choose"]');
+  ok(/Rotation/.test(await plc.textContent('.os-duel .pd-sheet [aria-pressed="true"], .os-duel .pd-sheet .on, .os-duel .pd-sheet [aria-checked="true"]')), 'placement: the duel starts on My placement (Rotation)');
+  await plc.waitForTimeout(400); await plc.screenshot({ path: path.join(SHOTS, 'duel-placement.png') });
   /* a bank question published without an explanation: after the duel, the review says the one it shows is AI-written */
   const aiq = n => ({ id: `medqa-e2e-${n}`, stem: `Question ${n}: a 35-year-old man has itchy, watery eyes and sneezing each spring. What is the most appropriate treatment?`, options: ['Erythromycin ointment', 'Ketotifen eye drops', 'Warm compresses', 'Fluorometholone eye drops'], answer: 1, why: 'Seasonal allergic conjunctivitis: a topical antihistamine and mast cell stabiliser is first line.', whyBy: 'ai', topic: 'Ophthalmology', cat: 'clinical', origin: 'human', source: 'usmle-resource', year: 3, difficulty: 1 });
   const rv = await phone(320, 640, {});
