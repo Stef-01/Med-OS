@@ -343,6 +343,42 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   ok(/Custom session/.test(await solo.textContent('.os-libsumhead')), 'exam: Done goes back to Custom, where it started');
   await solo.click('[data-lib="pref"][data-k="mode"][data-v="tutor"]'); await solo.click('[data-lib="sumback"]'); await solo.waitForTimeout(300);
 
+  /* Playlists (2026-10-26): Lee publishes a deck to the community; Kim, a new player, finds it under New, favourites it
+     and plays it, and the duel opens on the playlist in place of the bank */
+  const plFlat = async (pg, where) => ok(await pg.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1 && [...document.querySelectorAll('.os-pl:not([hidden]) .os-plbody > *')].every(e => e.getBoundingClientRect().right <= innerWidth + 1)), `playlists ${where}: no sideways scroll`);
+  const lee = await phone(320, 640);   /* Lee on a fresh tab: the earlier phone is mid-duel */
+  await lee.click('[data-os="settings"]'); await lee.fill('[data-set="aname"]', 'Lee'); await lee.fill('[data-set="apin"]', '1234'); await lee.click('[data-set="ain"]');
+  await lee.waitForSelector('[data-set="aout"]'); await lee.keyboard.press('Escape'); await lee.waitForTimeout(400);
+  await open(lee, 'library'); await lee.click('.os-libp [data-lib="playlists"]');
+  await lee.waitForSelector('.os-pl:not([hidden]) .os-plpub');
+  ok(/Playlists/.test(await lee.textContent('.os-pl .os-plhead h2')), 'playlists: Your questions opens the community library');
+  await shot(lee, '320-playlists'); await plFlat(lee, 'browse');
+  await lee.click('[data-pl="publishview"]'); await lee.waitForSelector('[data-pl-form="publish"]');
+  await lee.fill('[data-pl-form="publish"] [name="title"]', 'Cardiology quickfire'); await lee.fill('[data-pl-form="publish"] [name="blurb"]', 'Quick ones before the ward round');
+  await shot(lee, '320-playlists-publish'); await plFlat(lee, 'publish');
+  await lee.click('[data-pl-form="publish"] button[type="submit"]');
+  await lee.waitForFunction(() => document.querySelector('.os-pltitle') || (document.querySelector('.os-pl .os-plerr')?.textContent || '').trim(), null, { timeout: 8000 });
+  const pubErr = await lee.evaluate(() => (document.querySelector('.os-pl .os-plerr')?.textContent || '').trim());
+  ok(!pubErr, `playlists: publishing raises no error${pubErr ? `: ${pubErr}` : ''}`);
+  await lee.waitForSelector('.os-pltitle');
+  ok(/Cardiology quickfire/.test(await lee.textContent('.os-pltitle')) && /Unpublish/.test(await lee.textContent('.os-pldetail')), "playlists: the deck is live, its page open, Lee's to unpublish");
+  await shot(lee, '320-playlist-mine'); await plFlat(lee, 'detail');
+  await lee.keyboard.press('Escape'); await lee.keyboard.press('Escape'); await lee.waitForTimeout(400);
+  const kim = await phone(375, 812);
+  await signUp(kim, 'Kim', '4321');
+  await open(kim, 'library'); await kim.click('.os-libp [data-lib="playlists"]'); await kim.waitForSelector('.os-pl:not([hidden]) .os-plchips');
+  await kim.click('[data-pl="sort"][data-v="new"]'); await kim.waitForSelector('.os-plrow');
+  ok(/Cardiology quickfire/.test(await kim.textContent('.os-pllist')) && /Lee/.test(await kim.textContent('.os-pllist')), "playlists: under New, Kim sees Lee's playlist and who made it");
+  await shot(kim, '375-playlists-new'); await plFlat(kim, 'new');
+  await kim.click('.os-plrow'); await kim.waitForSelector('.os-pltitle');
+  await kim.click('[data-pl="fav"]'); await kim.waitForSelector('[data-pl="fav"][aria-pressed="true"]');
+  await kim.waitForFunction(() => /1 favourite /.test(document.querySelector('.os-pldetail .os-plmeta')?.textContent || ''));
+  ok(/Report/.test(await kim.textContent('.os-pldetail')), "playlists: Kim favourites it (1 favourite), and can report someone else's");
+  await shot(kim, '375-playlist-detail'); await plFlat(kim, 'detail');
+  await kim.click('[data-pl="play"]'); await kim.waitForSelector('.os-duel[data-ready] .pd-plrow', { timeout: 15000 });
+  ok(/Cardiology quickfire/.test(await kim.textContent('.pd-plrow')), 'playlists: Play opens the duel on the playlist, in place of the bank');
+  await shot(kim, '375-playlist-duel');
+
   /* a laptop */
   const wide = await phone(1280, 800);
   await wide.click('[data-os="settings"]'); await wide.fill('[data-set="aname"]', 'Lee'); await wide.fill('[data-set="apin"]', '1234'); await wide.click('[data-set="ain"]');   /* Lee's other device: sign in */

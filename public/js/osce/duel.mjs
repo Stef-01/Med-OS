@@ -45,9 +45,22 @@ export async function openDuel(opener) {
   const cfg = window.OSCE_CONFIG || {};
   const transport = cfg.supabaseUrl && cfg.supabaseAnonKey ? supabaseTransport({ url: cfg.supabaseUrl, key: cfg.supabaseAnonKey, realtime: cfg.duelRealtime !== false }) : null;
   shell.open(opener);
-  ui = mountDuel(shell.el.firstElementChild, { transport, pack: questions, title: 'Duel a Mate', keys: 'host', storeKey: 'osce.duel', onClose: closeDuel,
+  /* Playlists (osce/playlists-view.mjs): the community library, opened from the duel's question picker; a playlist played
+     there takes the bank's place for that game (the package's ui.playlist) */
+  const onPlaylists = ({ mate }) => import('./playlists-view.mjs').then(m => m.openPlaylists({ onPlay: (qs, name) => ui?.playlist(qs, name, { mate }) }));
+  ui = mountDuel(shell.el.firstElementChild, { transport, pack: questions, title: 'Duel a Mate', keys: 'host', storeKey: 'osce.duel', onClose: closeDuel, onPlaylists,
     signOutNote: 'This also signs you out of Settings on this device: your OSCE progress stops saving to your account here.' });
   shell.el.dataset.ready = '1';
+}
+
+/* a playlist from outside the duel (Your questions' Playlists): open the duel and play it against the AI */
+export async function openDuelWith(questions, name, opener) {
+  await openDuel(opener);
+  /* after the duel's first screen is up (its lobby or sign-in): playing before it would have the lobby's first paint
+     close the playlist's sheet */
+  for (let i = 0; i < 100 && !shell?.el.querySelector('.pd-lobby, .pd-auth, form[data-pd="signin"]'); i++) await new Promise(r => setTimeout(r, 50));
+  await new Promise(r => setTimeout(r, 120));
+  return ui?.playlist(questions, name) ?? false;
 }
 
 export function closeDuel() {

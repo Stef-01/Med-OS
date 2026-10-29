@@ -34,6 +34,9 @@ const V = { tab: 'study', lib: null, up: { text: '', res: null, deck: '' }, st: 
 const day = () => new Date(now()).toISOString().slice(0, 10);
 
 /* the start view's card */
+/* the way into Playlists (osce/playlists-view.mjs), on the Library tab whether or not you have decks yet */
+const PLAYLISTS_ROW = () => `<button class="os-libplaylists" data-lib="playlists"><span class="os-libplaylists-art" aria-hidden="true">${icon('users')}</span><span><b>Playlists</b><small>The community's questions: trending, favourites, and yours published</small></span><span class="os-chev" aria-hidden="true">${I.chevR}</span></button>`;
+
 export function libraryCardHtml() {
   const lib = api.current(), all = api.allItems(lib), c = counts(all.map(x => ({ id: x.key })), api.studyMem().card, now());
   const mem = api.studyMem(), t = now(), sk = streak(mem.days, t), td = today(mem.days, t, myPref().goal);
@@ -140,14 +143,16 @@ function libraryHtml() {
     </li>`;
   };
   if (!decks.length && !shared.length) return `${signedIn ? '' : signInHtml('Signed out: questions you upload stay on this phone. Sign in to keep them on your account, on every device, and to share them with friends.')}
-    <div class="os-libempty">${icon('cards')}<p><strong>No questions yet</strong><br>ChatGPT can write them from your notes, in the format Med-OS reads.</p><button class="os-btn os-btn--lg os-primary" data-lib="tab" data-tab="upload">${icon('plus')}<span>Upload questions</span></button></div>`;
+    <div class="os-libempty">${icon('cards')}<p><strong>No questions yet</strong><br>ChatGPT can write them from your notes, in the format Med-OS reads.</p><button class="os-btn os-btn--lg os-primary" data-lib="tab" data-tab="upload">${icon('plus')}<span>Upload questions</span></button></div>
+    ${PLAYLISTS_ROW()}`;
   const qn = (V.find || '').trim().toLowerCase(), found = qn.length > 1 ? api.allItems(V.lib).filter(e => `${e.item.stem} ${e.item.ask || ''} ${e.item.options.join(' ')} ${e.item.topic}`.toLowerCase().includes(qn)).slice(0, 30) : null;
   return `${signedIn ? '' : signInHtml('Signed out: these stay on this phone. Sign in to keep them on your account and share them.')}
     ${api.allItems(V.lib).length >= 20 || V.find ? `<label class="os-libfind">${I.search}<input type="search" name="find" placeholder="Find a question" value="${esc(V.find || '')}" aria-label="Find a question in your library" enterkeyhint="search"></label>` : ''}
     ${found ? `<p class="os-libmeta">${plural(found.length, 'question')} found</p><ul class="os-libgapl os-libfound" role="list">${found.map(e => `<li class="os-libgap"><div><span class="os-liblayer">${esc(layerLabel(e.item))} · ${esc(e.deckName)}</span><b>${esc(e.item.stem.length > 140 ? `${e.item.stem.slice(0, 140)}…` : e.item.stem)}</b><small>${esc(e.item.options[e.item.answer])}</small></div></li>`).join('')}</ul>` : ''}
     ${decks.length ? `<h3 class="os-libh">Your decks</h3><ul class="os-libdecks" role="list">${decks.map(d => deckRow(d, '')).join('')}</ul>` : ''}
     ${shared.length ? `<h3 class="os-libh">From friends</h3><ul class="os-libdecks" role="list">${shared.map(d => deckRow(d, d.owner)).join('')}</ul>` : ''}
-    <button class="os-btn os-libadd" data-lib="tab" data-tab="upload">${icon('plus')}<span>${decks.length ? 'Upload more' : 'Upload questions'}</span></button>`;
+    <button class="os-btn os-libadd" data-lib="tab" data-tab="upload">${icon('plus')}<span>${decks.length ? 'Upload more' : 'Upload questions'}</span></button>
+    ${PLAYLISTS_ROW()}`;
 }
 
 function uploadHtml() {
@@ -262,6 +267,7 @@ function friendsHtml() {
 async function act(a, b, e) {
   switch (a) {
     case 'tab': return go(b.dataset.tab);
+    case 'playlists': return import('./playlists-view.mjs').then(m => m.openPlaylists({ opener: b }));   /* the community library (0011_playlists.sql) */
     case 'copyprompt': {
       const withNotes = (V.up.notes || '').trim();
       try { await navigator.clipboard.writeText(chatPrompt(withNotes)); notify('Copied. Paste it into ChatGPT.', 'success'); }

@@ -98,7 +98,7 @@ const server = http.createServer((req, res) => {
   for (const [k, v] of Object.entries(prodHeaders(url.pathname))) res.setHeader(k, v);
   if (url.pathname === '/sb/rest/v1/osce_state') return supabase(req, res, url);
   if (url.pathname === '/sb/rest/v1/mcq_submissions') return mcqTable(req, res);
-  const rpc = /^\/sb\/rest\/v1\/rpc\/((?:pup|osce|lib|friend|mcq)_[a-z_]+)$/.exec(url.pathname);
+  const rpc = /^\/sb\/rest\/v1\/rpc\/((?:pup|osce|lib|friend|mcq|pl)_[a-z_]+)$/.exec(url.pathname);
   if (rpc) return duelRpc(req, res, rpc[1]);
   const u = decodeURIComponent(url.pathname);
   let f = path.join(ROOT, u.endsWith('/') ? `${u}index.html` : u);

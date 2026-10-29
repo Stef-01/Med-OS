@@ -9,6 +9,8 @@ export function libraryFake({ byToken, players, state = () => new Map() }) {
   const itemsOf = d => [...items.values()].filter(x => x.deck === d).sort((a, b) => a.at - b.at || (a.id < b.id ? -1 : 1)).map(x => x.item);
   const sharedWith = d => [...shares].filter(k => k.startsWith(`${d}|`)).map(k => k.split('|')[1]);
   let seq = 0;
+  const playlists = new Map();
+  const card = (p, me) => ({ id: p.id, title: p.title, blurb: p.blurb, cover: p.cover, n: p.n, favs: p.favs.size, plays: p.plays.size, owner: p.owner, owner_name: players()[p.owner]?.name || '', mine: p.owner === me, fav: p.favs.has(me), week: p.plays.size + 3 * p.favs.size, created_at: p.created_at, updated_at: p.updated_at });
   return {
     /* 0009_mcq_picks.sql */
     mcq_pick({ p_qid, p_choice }) { if (!/^[A-Za-z0-9._-]{3,80}$/.test(p_qid || '') || /^u-/.test(p_qid) || !(p_choice >= 0 && p_choice <= 5)) return null; const k = `${p_qid}|${p_choice}`; picks.set(k, (picks.get(k) || 0) + 1); return null; },
@@ -101,6 +103,33 @@ export function libraryFake({ byToken, players, state = () => new Map() }) {
       if (p_on) { if (!areFriends(me.id, p_friend)) fail('Only with a friend'); shares.add(`${p_deck}|${p_friend}`); }
       else shares.delete(`${p_deck}|${p_friend}`);
       return sharedWith(p_deck);
-    }
+    },
+    /* 0011_playlists.sql: community playlists, the same rules and words */
+    pl_publish({ p_token, p_deck, p_title, p_blurb = '' }) {
+      const me = byToken(p_token), d = decks.get(p_deck), t = norm(p_title), b = norm(p_blurb);
+      if (!d || d.owner !== me.id) fail('That is not one of your decks');
+      if (t.length < 1 || t.length > 60) fail('Name the playlist (1 to 60 characters)');
+      if (b.length > 200) fail('The description is at most 200 characters');
+      const qs = itemsOf(d.id).slice(0, 100); if (!qs.length) fail('The deck has no questions yet');
+      if (/(ndis|grants?)/i.test(`${t} ${b} ${JSON.stringify(qs)}`)) fail('That topic cannot be published here');
+      let p = [...playlists.values()].find(x => x.owner === me.id && x.deck === d.id);
+      if (!p) { p = { id: `10000000-0000-4000-8000-${String(++seq).padStart(12, '0')}`, owner: me.id, deck: d.id, cover: seq * 7, favs: new Set(), plays: new Set(), reports: new Set(), hidden: false, created_at: new Date().toISOString() }; playlists.set(p.id, p); }
+      Object.assign(p, { title: t, blurb: b, questions: qs, n: qs.length, updated_at: new Date().toISOString() });
+      return card(p, me.id);
+    },
+    pl_unpublish({ p_token, p_id }) { const me = byToken(p_token), p = playlists.get(p_id); if (p?.owner !== me.id) return false; playlists.delete(p_id); return true; },
+    pl_list({ p_token, p_sort = 'trending', p_q = '', p_limit = 30 }) {
+      const me = byToken(p_token), q = norm(p_q).toLowerCase();
+      if (!['trending', 'new', 'top', 'faves', 'mine'].includes(p_sort)) fail('Unknown order');
+      const rows = [...playlists.values()].filter(p => (!p.hidden || p.owner === me.id) && (p_sort !== 'mine' || p.owner === me.id) && (p_sort !== 'faves' || p.favs.has(me.id))
+        && (!q || `${p.title} ${p.blurb} ${players()[p.owner]?.name || ''}`.toLowerCase().includes(q))).map(p => card(p, me.id));
+      const byNew = (a, b) => (a.created_at < b.created_at ? 1 : -1);
+      rows.sort(p_sort === 'trending' ? (a, b) => b.week - a.week || b.favs - a.favs || b.plays - a.plays || byNew(a, b) : p_sort === 'top' ? (a, b) => b.favs - a.favs || b.plays - a.plays || byNew(a, b) : byNew);
+      return rows.slice(0, Math.min(Math.max(p_limit | 0, 1), 60));
+    },
+    pl_get({ p_token, p_id }) { const me = byToken(p_token), p = playlists.get(p_id); if (!p || (p.hidden && p.owner !== me.id)) fail('That playlist is gone'); return { ...card(p, me.id), questions: p.questions }; },
+    pl_fav({ p_token, p_id, p_on }) { const me = byToken(p_token), p = playlists.get(p_id); if (!p || p.hidden) fail('That playlist is gone'); if (p_on) p.favs.add(me.id); else p.favs.delete(me.id); return p.favs.size; },
+    pl_play({ p_token, p_id }) { const me = byToken(p_token), p = playlists.get(p_id); if (!p || p.hidden) fail('That playlist is gone'); p.plays.add(`${me.id}|${new Date().toISOString().slice(0, 10)}`); return p.plays.size; },
+    pl_report({ p_token, p_id }) { const me = byToken(p_token), p = playlists.get(p_id); if (p?.owner === me.id) fail('That is your own playlist'); if (p) { p.reports.add(me.id); if (p.reports.size >= 3) p.hidden = true; } return true; }
   };
 }

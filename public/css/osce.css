@@ -1869,3 +1869,65 @@ button.os-libcheck { align-self:flex-start; }
 .os-switch:disabled { cursor:default; }
 .os-switch:disabled .os-switch-ui { opacity:.4; }
 .os-switch:disabled strong { color:var(--mute); }
+
+/* Playlists (js/osce/playlists-view.mjs, 2026-10-26): the community library, Spotify-like: square gradient covers with
+   the title on them, a sideways Trending row, then a list; its own overlay over the duel when the duel opens it */
+.os-plhead { display:grid; grid-template-columns:44px 1fr 44px; align-items:center; gap:8px; padding:calc(8px + env(safe-area-inset-top)) 12px 8px; border-bottom:1px solid var(--stroke); background:var(--hdr); }
+.os-plhead h2 { text-align:center; font-size:17px; font-weight:700; }
+.os-plx { width:44px; height:44px; display:grid; place-items:center; border-radius:12px; }
+.os-plx svg { width:22px; height:22px; }
+.os-plbody { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; display:flex; flex-direction:column; gap:16px; padding:16px 16px calc(28px + env(safe-area-inset-bottom)); max-width:720px; width:100%; margin:0 auto; box-sizing:border-box; }
+.os-plsearch { display:flex; align-items:center; gap:8px; height:46px; padding:0 14px; border-radius:12px; background:var(--card); border:1px solid var(--stroke); color:var(--mute); }
+.os-plsearch svg { width:18px; height:18px; }
+.os-plsearch input { flex:1; min-width:0; border:0; background:transparent; color:var(--ink); font-size:16px; outline:0; }
+.os-plchips { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin:0 -16px; padding:0 16px; }
+.os-plchips::-webkit-scrollbar { display:none; }
+.os-plchips .os-chip { height:36px; font-size:14px; }
+.os-plchips .os-chip.on { background:var(--pri); border-color:var(--pri); color:var(--em-pri-contrast); }
+.os-plh { font-size:17px; font-weight:700; }
+.os-plmeta { color:var(--mute); font-size:14px; }
+.os-plerr { color:var(--danger-text); font-size:14px; }
+.os-plerr:empty { display:none; }
+.os-plcover { position:relative; display:flex; flex-direction:column; justify-content:flex-end; aspect-ratio:1; border-radius:12px; padding:10px; overflow:hidden; color:#fff; box-shadow:0 6px 18px rgb(0 0 0 / .25); }
+.os-plcover b { position:relative; z-index:1; font-size:15px; font-weight:800; line-height:1.15; text-wrap:balance; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; text-shadow:0 1px 2px rgb(0 0 0 / .3); }
+.os-plcover svg { position:absolute; right:-10px; top:-10px; width:64px; height:64px; opacity:.22; }
+.os-plcover--s { width:56px; height:56px; padding:0; border-radius:8px; flex:none; box-shadow:none; }
+.os-plcover--s b { display:none; }
+.os-plcover--s svg { right:-6px; top:-6px; width:40px; height:40px; }
+.os-plcover--l { width:min(240px, 64vw); margin:0 auto; border-radius:16px; padding:16px; }
+.os-plcover--l b { font-size:22px; }
+.os-plcar { display:grid; grid-auto-flow:column; grid-auto-columns:148px; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; margin:8px -16px 0; padding:0 16px 6px; list-style:none; }
+.os-plcar::-webkit-scrollbar { display:none; }
+.os-plcard { display:flex; flex-direction:column; gap:6px; width:148px; text-align:left; scroll-snap-align:start; }
+.os-plcard small { color:var(--mute); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.os-pllist { display:flex; flex-direction:column; gap:2px; list-style:none; margin:0; padding:0; }
+.os-plrow { display:flex; align-items:center; gap:12px; width:100%; min-height:64px; padding:4px; border-radius:12px; text-align:left; }
+.os-plrow:active { background:var(--fill); }
+.os-plrow-tx { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.os-plrow-tx b { font-size:15px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.os-plrow-tx small { color:var(--mute); font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.os-plfav { display:inline-flex; align-items:center; gap:4px; color:var(--mute); font-size:13px; font-variant-numeric:tabular-nums; }
+.os-plfav svg { width:16px; height:16px; }
+.os-plfav.on { color:var(--warn, #ffc800); }
+.os-plempty { display:flex; flex-direction:column; align-items:center; gap:10px; padding:28px 12px; text-align:center; color:var(--mute); }
+.os-plempty svg { width:40px; height:40px; }
+.os-plempty strong { color:var(--ink); }
+.os-plpub { align-self:stretch; }
+.os-pldetail { display:flex; flex-direction:column; gap:12px; }
+.os-pltitle { font-size:24px; font-weight:800; text-align:center; margin-top:6px; }
+.os-pldetail > .os-plmeta { text-align:center; }
+.os-plblurb { text-align:center; color:var(--ink); }
+.os-placts { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.os-plfavbtn.on { border-color:var(--warn, #ffc800); color:var(--warn, #ffc800); }
+.os-plqs { display:flex; flex-direction:column; gap:8px; margin:0; padding-left:20px; color:var(--ink); font-size:14px; }
+.os-pldanger { color:var(--danger-text); align-self:center; }
+.os-pldetail > .os-link { align-self:center; }
+.os-plform { display:flex; flex-direction:column; gap:14px; }
+.os-plform fieldset { border:0; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.os-plform .os-plchips { flex-wrap:wrap; margin:0; padding:0; overflow:visible; }
+.os-plform textarea { border:1px solid var(--stroke); border-radius:10px; background:var(--solid); color:var(--ink); font-size:16px; padding:10px 12px; resize:vertical; }
+.os-libplaylists { display:flex; align-items:center; gap:12px; width:100%; min-height:64px; padding:10px 12px; border-radius:14px; background:var(--card); border:1px solid var(--stroke); text-align:left; }
+.os-libplaylists-art { width:44px; height:44px; flex:none; display:grid; place-items:center; border-radius:10px; color:#fff; background:linear-gradient(135deg, #8a5cf6, #1cb0f6); }
+.os-libplaylists-art svg { width:22px; height:22px; }
+.os-libplaylists > span:nth-child(2) { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.os-libplaylists small { color:var(--mute); font-size:13px; }
