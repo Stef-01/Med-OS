@@ -34,6 +34,7 @@ export function renderSession(main) {
     </div></div>`;
   placePill(main); syncIndeterminate();
   swipeTabs(main.querySelector('.os-pl'));
+  hideOnRead(main.querySelector('.os-pscroll'));
   if (!fin) startTick();
 }
 /* the tabs a station's content fills: the candidate's instructions, then the examiner's script, which runs in the order of
@@ -392,6 +393,18 @@ export function switchTab(t) {
   requestAnimationFrame(() => { if (go === tabGo && pl.isConnected) paneFor(pl, sc, st, t); });
 }
 let tabGo = 0;
+/* R23 (round 2, Arc, Fitness+: chrome recedes while you work): reading down a long pane slides the notepad bar away;
+   the first scroll back up, or typing in it, brings it back */
+function hideOnRead(sc) {
+  if (!sc || sc.dataset.read) return;
+  sc.dataset.read = '1';
+  let last = sc.scrollTop;
+  sc.addEventListener('scroll', () => {
+    const y = sc.scrollTop, down = y > last + 4, up = y < last - 4; if (down || up) last = y;
+    const bar = sc.querySelector('.os-btool'); if (!bar || bar.contains(document.activeElement)) return;
+    if (down && y > 80) bar.classList.add('os-btool--away'); else if (up || y < 40) bar.classList.remove('os-btool--away');
+  }, { passive: true });
+}
 /* backlog 18 (Instagram, Apple: a swipe for the expert, the tab strip for everyone): a horizontal swipe on the pane moves
    to the next or the previous tab; a mostly vertical drag, a text selection or a field stays a scroll */
 function swipeTabs(pl) {

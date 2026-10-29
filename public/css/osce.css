@@ -2276,3 +2276,13 @@ details.os-pair:not([open]) { padding-bottom:14px; }
 .os-libsign .os-btn { flex:none; }
 /* R17: on a phone a station's summary is one line */
 @media (max-width:639px) { .os-scard .os-cbody p { -webkit-line-clamp:1; } }
+.os-btool { transition:transform .28s var(--ease), opacity .2s; }
+.os-btool--away { transform:translateY(calc(100% + 16px)); opacity:0; pointer-events:none; }
+/* R14 (round 2): a returning learner's modes are names only (the weak spot keeps its subject), and Custom is a text link */
+.os-libmode--short:not([data-m="weak"]):not([data-m="place"]) .os-libmode-tx small { display:none; }
+.os-libmodes .os-libmode[data-m="custom"] { grid-column:1 / -1; justify-content:center; min-height:40px; padding:6px; background:none; border:0; box-shadow:none; color:var(--pri); }
+.os-libmodes .os-libmode[data-m="custom"] .os-libmode-ic, .os-libmodes .os-libmode[data-m="custom"] small { display:none; }
+.os-libmodes .os-libmode[data-m="custom"] b { font-weight:600; font-size:14.5px; }
+/* R13: closed, the goal is a quiet line under the ring (the ring itself opens it) */
+.os-libtoday + .os-libsettings:not([open]) { background:none; border:0; box-shadow:none; padding:0 4px; margin-top:-6px; }
+.os-libtoday + .os-libsettings:not([open]) > summary { min-height:28px; padding:0; }
