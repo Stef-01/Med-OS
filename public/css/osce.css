@@ -2244,3 +2244,14 @@ details.os-pair:not([open]) { padding-bottom:14px; }
 .os-fold > summary::after { content:''; width:8px; height:8px; border:solid var(--mute); border-width:0 2px 2px 0; rotate:-45deg; transition:rotate .2s; flex:none; }
 .os-fold[open] > summary::after { rotate:45deg; }
 .os-fold[open] > section { animation:os-rise .25s var(--ease) both; padding-bottom:12px; }
+/* backlog 4: Fast Run's rotations on one sideways line on a phone (the placement already picks them) */
+@media (max-width:639px) {
+  .os-run .os-rots .kit-disc { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin-inline:0; padding-inline:0; -webkit-mask:linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask:linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
+  .os-run .os-rots .kit-disc::-webkit-scrollbar { display:none; }
+  .os-run .os-rots .kit-disc > * { flex:none; }
+}
+.os-scard[data-swipe] { will-change:transform; }
+.os-scard[data-swipe="queue"][data-armed] { box-shadow:inset 6px 0 0 var(--pri); }
+.os-scard[data-swipe="save"][data-armed] { box-shadow:inset -6px 0 0 var(--warn, #f5b301); }
+.os-hero { display:block; width:100%; }
+.os-hero > .os-bigcard { width:100%; box-sizing:border-box; }

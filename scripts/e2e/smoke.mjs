@@ -156,7 +156,9 @@ async function runIn(width, height, label) {
   ok(await pg.locator('[data-os="back"]').isHidden(), `${label}: the first screen has no back button`);
   const nBank = fs.readdirSync('public/osce').filter(f => f.endsWith('.json') && f !== 'index.json').length;
   ok((await pg.textContent('.os-kicker')).split(/\D+/).includes(String(nBank)), `${label}: every station in the bank is listed (${nBank})`);
-  const wideScroll = await pg.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1 || [...document.querySelectorAll('.os-main *')].some(e => e.getBoundingClientRect().right > innerWidth + 1 && getComputedStyle(e).position !== 'fixed'));
+  const wideScroll = await pg.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1 || [...document.querySelectorAll('.os-main *')].some(e => { if (e.getBoundingClientRect().right <= innerWidth + 1 || getComputedStyle(e).position === 'fixed') return false;
+    for (let p = e.parentElement; p && p !== document.body; p = p.parentElement) if (/auto|scroll|hidden/.test(getComputedStyle(p).overflowX) && p.getBoundingClientRect().right <= innerWidth + 1) return false;   /* a sideways scroller's own chips */
+    return true; }));
   ok(!wideScroll, `${label}: nothing runs off the right edge`);
 
   /* partners */

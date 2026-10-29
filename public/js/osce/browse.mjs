@@ -122,6 +122,7 @@ export function paintBrowse(el, scrollRoot) {
   el.dataset.types = JSON.stringify(types);
   shown = PAGE;
   paintGrid();
+  swipeCards(el.querySelector('.os-grid'));
 }
 export const FOPT = {
   status: () => [['0', 'Not Attempted'], ['1', 'Attempted'], ['p0', `Not done by ${nameOf(0)}`], ['p1', `Not done by ${nameOf(1)}`]],
@@ -183,6 +184,28 @@ function card(s, i) {
     <div class="os-cfoot">${att ? `<button class="os-att" data-os="preview" data-id="${esc(s.id)}" data-tab="Attempts">${I.check}Attempted${doneBy(s.id)}</button>` : '<span class="os-natt"><i aria-hidden="true"></i>New</span>'}
       <button class="os-btn os-qbtn${inQ ? ' soft' : ''}" data-os="queue" data-id="${esc(s.id)}">${inQ ? I.check : I.plus}<span>${inQ ? 'Queued' : 'Add'}</span></button></div>
   </article>`;
+}
+/* backlog 9 (Things, Linear: a fling for the expert, the button for everyone): on a phone a station card follows a
+   sideways drag; past a third of its width, right adds it to the queue (or takes it out), left saves it. The card's own
+   buttons do the work, so the toast, the badge and the pulse are theirs */
+function swipeCards(grid) {
+  if (!grid || !matchMedia('(pointer: coarse)').matches) return;
+  let card = null, x0 = 0, y0 = 0, dx = 0, sideways = null;
+  grid.addEventListener('touchstart', e => { card = e.target.closest('.os-scard'); if (!card || e.target.closest('button')) { card = null; return; } x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; dx = 0; sideways = null; }, { passive: true });
+  grid.addEventListener('touchmove', e => {
+    if (!card) return;
+    const t = e.touches[0]; dx = t.clientX - x0;
+    if (sideways === null && (Math.abs(dx) > 10 || Math.abs(t.clientY - y0) > 10)) sideways = Math.abs(dx) > Math.abs(t.clientY - y0) * 1.5;
+    if (!sideways) return;
+    card.style.transition = 'none'; card.style.transform = `translateX(${dx}px) rotate(${dx / 60}deg)`;
+    card.dataset.swipe = dx > 0 ? 'queue' : 'save'; card.toggleAttribute('data-armed', Math.abs(dx) > card.offsetWidth / 3);
+  }, { passive: true });
+  grid.addEventListener('touchend', () => {
+    if (!card) return;
+    const c = card, go = sideways && Math.abs(dx) > c.offsetWidth / 3; card = null;
+    c.style.transition = 'transform .35s cubic-bezier(.22,1,.36,1)'; c.style.transform = ''; delete c.dataset.swipe; c.removeAttribute('data-armed');
+    if (go) c.querySelector(dx > 0 ? '[data-os="queue"]' : '[data-os="bm"]')?.click();
+  });
 }
 /* the initials of whoever has done this station */
 const doneBy = id => [0, 1].filter(i => osceAttBy({ [id]: ctx.mem.hist[id] }, i)[id]).map(i => `<span class="os-who os-who--${i}" title="${esc(nameOf(i))}">${esc(initialOf(i))}</span>`).join('');
