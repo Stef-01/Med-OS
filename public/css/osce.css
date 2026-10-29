@@ -2168,3 +2168,19 @@ body:has(.os-dlg) .os-alerts { top:calc(96px + env(safe-area-inset-top)); }
 .os-run-more[open] > summary::after { rotate:225deg; translate:0 2px; }
 .os-run-more[open] .os-run-f { animation:os-rise .25s var(--ease) both; margin-top:6px; }
 .os-place:has(> :only-child) { justify-content:flex-start; }
+/* backlog 1 (docs/design/minimalism-case-studies.md, Duolingo result band / Anki grade row): after an answer the next
+   step stays on screen; the explanation scrolls behind it */
+.os-libcard .os-libgrades { position:sticky; bottom:0; z-index:3; margin-inline:-16px; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:linear-gradient(transparent, var(--bg) 26%); }
+.os-libcard .os-libgrades .os-btn { box-shadow:0 6px 16px -8px rgb(0 0 0 / .6); }
+/* backlog 5: the touch hint teaches once, then gets out of the way (study-kit: os-libkeys--known after three sessions) */
+.os-libkeys--known .os-libkeys-touch { display:none; }
+.os-qempty { list-style:none; display:flex; flex-direction:column; align-items:center; gap:4px; padding:28px 12px; text-align:center; color:var(--mute); font-size:14px; }
+.os-qempty strong { color:var(--ink); font-size:16px; }
+.os-qempty-acts { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; justify-content:center; }
+/* Study partners folds to one line (backlog 3) */
+details.os-pair > summary { list-style:none; cursor:pointer; }
+details.os-pair > summary::-webkit-details-marker { display:none; }
+details.os-pair > summary::after { content:''; margin-left:auto; align-self:center; width:8px; height:8px; border:solid var(--mute); border-width:0 2px 2px 0; rotate:45deg; transition:rotate .2s; flex:none; }
+details.os-pair[open] > summary::after { rotate:225deg; }
+details.os-pair[open] > :not(summary) { animation:os-rise .25s var(--ease) both; }
+details.os-pair:not([open]) { padding-bottom:14px; }

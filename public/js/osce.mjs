@@ -138,7 +138,7 @@ function renderHead() {
   sub.textContent = ''; act.innerHTML = '';
   backB.innerHTML = I.back; backB.setAttribute('aria-label', 'Back');
   backB.hidden = ctx.root && view === 'start';
-  if (view === 'start') { title.textContent = 'OSCE Practice'; act.innerHTML = `<button class="os-hbtn" data-os="marked">${I.check}<span>Marked</span></button><button class="os-ic" data-os="settings" aria-label="Settings">${I.gear}</button>`; }
+  if (view === 'start') { title.textContent = 'MDosce'; act.innerHTML = `<button class="os-ic" data-os="marked" aria-label="Marked attempts" title="Marked attempts">${I.check}</button><button class="os-ic" data-os="settings" aria-label="Settings">${I.gear}</button>`; }
   else if (view === 'marked') title.textContent = 'Marked Stations';
   else if (view === 'group') title.textContent = 'Study Session';
   else if (view === 'session') {
@@ -202,7 +202,7 @@ async function onClick(e) {
     case 'preview': return previewDlg(id, b.dataset.tab);
     case 'pvtab': return previewTab(b.dataset.tab);
     case 'bm': { mem.bm[id] ? delete mem.bm[id] : (mem.bm[id] = 1); save(); syncBm(id); return afterBookmark(); }
-    case 'random': return addRandom();
+    case 'random': case 'qrandom': return addRandom();
     case 'details': return toggleDetails();
     case 'filter': return filterPop(b);
     case 'saved': return toggleSaved();

@@ -55,10 +55,12 @@ export function paintQueue() {
         ${queueItemLabel(st)}
         <span class="os-qa"><button class="os-ic os-ic--sm" data-os="preview" data-id="${esc(id)}" aria-label="Preview">${I.eye}</button>
         <button class="os-ic os-ic--sm os-danger" data-os="qrm" data-id="${esc(id)}" aria-label="Remove">${I.minus}</button></span></li>`;
-    }).join('') || `<li class="os-placeholder">Add stations to the queue by clicking<br><span class="os-wi">${I.plus} Add to Queue</span> or <span class="os-wi">${I.shuffle} Add Random</span></li>`}</ol>`;
+    }).join('') || `<li class="os-qempty"><strong>No stations yet</strong><span>Pick some, or let chance decide.</span>
+      <span class="os-qempty-acts">${wide() ? '' : `<button class="os-btn" data-os="browse">${I.plusC}Browse</button>`}<button class="os-btn" data-os="qrandom">${I.shuffle}Add random</button></span></li>`}</ol>`;   /* backlog 11: one empty state, two buttons in a row */
   if (had.size) wrap.querySelectorAll('.os-qi').forEach(li => { if (had.has(li.dataset.id)) li.classList.add('still'); });   /* only a new row enters (auto-animate) */
   const sp = ov.querySelector('[data-os="startp"]');
-  if (sp) sp.disabled = !qu.length;
+  if (sp) { sp.disabled = !qu.length; sp.hidden = !qu.length; }   /* Start appears with the first station, never as a dead button */
+  const add = ov.querySelector('.os-addst'); if (add) add.hidden = !qu.length;   /* the empty state has its own Browse */
   /* the Browse sheet's Done badge (OscesBrowseDialog.vue: pulse 1.7 over 400 ms when the queue grows) */
   const badge = ov.querySelector('.os-done-badge');
   if (badge) { const was = badge.hidden ? 0 : +badge.textContent || 0; badge.textContent = qu.length; badge.hidden = !qu.length; if (qu.length > was) pulse(badge, 1.7, 400); }

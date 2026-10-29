@@ -140,6 +140,7 @@ function customHtml() {
 /* a session from a list (already in order): into focus */
 function startWith(list, { mode = 'tutor', order = 'due', label = '' } = {}) {
   if (!list.length) { notify('Nothing to study there right now.', ''); return false; }
+  hintSeen();
   Object.assign(V.st, { q: list, i: 0, pick: null, n: 0, right: 0, mode, order, label, note: false, seen: [], x: null, combo: 0, best: 0, sel: null, picks: null, rv: null });
   saveLive();
   dlg()?.querySelector('.os-lib')?.classList.add('os-lib--focus');
@@ -215,7 +216,7 @@ function cardHtml() {
       ${picked !== it.answer && (card.w | 0) >= 4 && !card.note ? `<p class="os-libleech">${icon('alert')}<span>This one has caught you ${card.w} times. Write the rule in your own words: it is the fastest fix.</span></p>` : ''}
       ${V.st.note || card.note || (picked !== it.answer && (card.w | 0) >= 4) ? `<label class="os-libnote2"><span>Your note</span><textarea data-lib-note rows="2" maxlength="500" placeholder="A memory hook, the trap, the rule…">${esc(card.note || '')}</textarea></label>` : '<button class="os-link os-libaddnote" data-lib="note">Add a note</button>'}
       ${gradesHtml(picked === it.answer, card, t)}
-      ${x.key.startsWith('b:') && accountsOn() ? (V.st.report === x.key ? `<div class="os-libreport" role="group" aria-label="What is wrong with it?"><span>What is wrong?</span>${Object.entries(REPORTS).map(([k, l]) => `<button class="os-chip" data-lib="report" data-v="${k}">${esc(l)}</button>`).join('')}</div>` : V.st.reported === x.key ? '<p class="os-libmeta os-libreported">Reported. Thank you.</p>' : '<button class="os-link os-libreportbtn" data-lib="reportopen">Report a problem</button>') : ''}` : (exam ? `<button class="os-btn os-btn--lg os-primary os-libnext os-libexamnext" data-lib="examnext">${V.st.sel == null ? 'Skip' : V.st.i + 1 >= V.st.q.length ? 'Finish' : 'Next'}</button><p class="os-libmeta os-libkeys">Exam: no answers until the end.</p>` : '<p class="os-libmeta os-libkeys"><span class="os-libkeys-touch">Tap an answer. Hold one to cross it out.</span><span class="os-libkeys-mouse">Press 1 to 5 to answer. Right-click, or Shift and the number, crosses one out.</span></p>')}
+      ${x.key.startsWith('b:') && accountsOn() ? (V.st.report === x.key ? `<div class="os-libreport" role="group" aria-label="What is wrong with it?"><span>What is wrong?</span>${Object.entries(REPORTS).map(([k, l]) => `<button class="os-chip" data-lib="report" data-v="${k}">${esc(l)}</button>`).join('')}</div>` : V.st.reported === x.key ? '<p class="os-libmeta os-libreported">Reported. Thank you.</p>' : '<button class="os-link os-libreportbtn" data-lib="reportopen">Report a problem</button>') : ''}` : (exam ? `<button class="os-btn os-btn--lg os-primary os-libnext os-libexamnext" data-lib="examnext">${V.st.sel == null ? 'Skip' : V.st.i + 1 >= V.st.q.length ? 'Finish' : 'Next'}</button><p class="os-libmeta os-libkeys">Exam: no answers until the end.</p>` : `<p class="os-libmeta os-libkeys${hintKnown() ? ' os-libkeys--known' : ''}"><span class="os-libkeys-touch">Tap an answer. Hold one to cross it out.</span><span class="os-libkeys-mouse">Press 1 to 5 to answer. Right-click, or Shift and the number, crosses one out.</span></p>`)}
   </div>`;
 }
 /* the options: before the answer, tap to answer (in an exam, to choose: it can change until Next); after it, right, yours
@@ -349,6 +350,10 @@ async function othersPicked(x, i) {
     panel()?.querySelector('.os-libopts')?.insertAdjacentHTML('afterend', `<p class="os-libmeta os-libothers">How ${total} students answered</p>`);
   } catch { /* offline: no spread, nothing lost */ }
 }
+/* the touch hint shows for a learner's first three sessions (backlog 5) */
+const HINT = 'osce.libhint';
+const hintKnown = () => { try { return (+localStorage.getItem(HINT) || 0) >= 3; } catch { return false; } };
+export const hintSeen = () => { try { localStorage.setItem(HINT, String((+localStorage.getItem(HINT) || 0) + 1)); } catch { /* private */ } };
 let leaving = false;
 import { answered as answeredQ } from './study-log.mjs';
 export function rate(g) {

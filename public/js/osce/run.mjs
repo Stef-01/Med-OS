@@ -89,14 +89,16 @@ function pairHtml() {
   const s = sess(), p = ctx.mem.people;
   const name = i => `<label class="os-pairname"><span class="os-who os-who--${i}" aria-hidden="true">${esc(initialOf(i))}</span>
     <input data-person="${i}" value="${esc(p[i])}" placeholder="Partner ${i ? 'B' : 'A'}" maxlength="${NAME_MAX}" autocomplete="off" enterkeyhint="done" aria-label="Partner ${i ? 'B' : 'A'} name"></label>`;
-  return `<section class="os-card os-pair os-in" aria-labelledby="os-pair-h">
-    <div class="os-run-head"><span class="os-bigic">${I.users}</span>
-      <span class="os-bigtx"><strong id="os-pair-h">Study partners</strong><span>Attempts save under the candidate</span></span></div>
+  /* backlog 3 (Things: ask only for what is needed now): folded to one line once both names are in */
+  const named = p[0]?.trim() && p[1]?.trim();
+  return `<details class="os-card os-pair os-in"${named ? '' : ' open'}>
+    <summary class="os-run-head"><span class="os-bigic">${I.users}</span>
+      <span class="os-bigtx"><strong id="os-pair-h">Study partners</strong><span class="os-pairsum">${named ? `${esc(nameOf(0))} & ${esc(nameOf(1))} · ${esc(nameOf(s.cand))} first` : 'Attempts save under the candidate'}</span></span></summary>
     <div class="os-pairrow">${name(0)}${name(1)}</div>
     <div class="os-pairfoot"><span class="os-pairlab">First candidate</span>
       <div class="os-seg" role="radiogroup" aria-label="First candidate">${[0, 1].map(i => `<button role="radio" data-os="cand" data-i="${i}" aria-checked="${s.cand === i}">${esc(nameOf(i))}</button>`).join('')}</div>
       <button class="os-chip${ctx.mem.alt ? ' on' : ''}" data-os="alt" aria-pressed="${ctx.mem.alt}">${I.shuffle}Swap each station</button></div>
-  </section>`;
+  </details>`;
 }
 /* typing a name: saved as it is typed, the initials and the first-candidate buttons follow (the inputs keep focus) */
 export function onPerson(t) {
