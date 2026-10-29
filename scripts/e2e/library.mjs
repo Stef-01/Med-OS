@@ -61,6 +61,8 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   const sam = await phone(320, 640);
   ok(await sam.locator('.os-start > [data-os="lib"]').isVisible(), 'library: Your questions is a card on Start');
   await signUp(sam, 'Lee', '1234');
+  /* the Study buddy: off by default, on from Settings > Games (founder 2026-10-28) */
+  await sam.click('[data-os="settings"]'); await sam.click('.os-switch[data-game="mascot"]'); await sam.waitForSelector('.os-switch[data-game="mascot"][aria-checked="true"]'); await sam.keyboard.press('Escape'); await sam.waitForTimeout(300);
   await open(sam);
   ok(await sam.getAttribute('.os-libtabs [data-tab="study"]', 'aria-selected') === 'true' && /Start · /.test(await sam.textContent('.os-libgo')), 'library: opens on Study, Start ready on the bank for a first-timer');
   await shot(sam, '320-first-open');
@@ -118,6 +120,9 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   { const bb = await sam.locator('.os-libopt[data-i="3"]').boundingBox(); await sam.mouse.move(bb.x + 30, bb.y + bb.height / 2); await sam.mouse.down(); await sam.waitForTimeout(520); await sam.mouse.up(); await sam.waitForTimeout(80); }
   ok(await sam.locator('.os-libopt[data-i="3"].os-libopt--x').count() === 1 && await sam.locator('.os-libexp').count() === 0, 'cross out: holding an option crosses it out, and the hold does not answer');
   await sam.locator('.os-libopt[data-i="1"]').click(); await sam.waitForSelector('.os-libexp');   /* a wrong one by its stored index: the shown order spreads the key */
+  await sam.waitForSelector('.os-libexp .os-buddy .os-buddy-dog svg', { timeout: 8000 });
+  ok(await sam.locator('.os-buddy--wrong').count() === 1 && await sam.evaluate(() => { const b = document.querySelector('.os-buddy').getBoundingClientRect(); return b.right <= innerWidth + 0.5; }), 'study buddy: a miss gets your dog, sad, in the explanation, inside the screen');
+  await sam.evaluate(() => document.querySelector('.os-buddy').scrollIntoView({ block: 'center' })); await shot(sam, '320-buddy');
   const after = await sam.evaluate(() => ({ ok: document.querySelectorAll('.os-libopt.ok').length, no: document.querySelectorAll('.os-libopt.no').length, again: document.querySelector('[data-lib="grade"].os-primary')?.dataset.g }));
   ok(after.ok === 1 && after.no <= 1 && ['again', 'good'].includes(after.again), `card: the answer shows right and wrong, the explanation, and suggests a grade (${JSON.stringify(after)})`);
   ok(await sam.locator('.os-libopt--x').count() === 0, 'cross out: once answered, the lines go (every option is seen as it is)');

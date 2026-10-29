@@ -4,7 +4,8 @@
    actions they fire (studyAct, which library-view.mjs act hands on). The laws are js/library/*.mjs. */
 import { esc } from '../core.mjs';
 import { icon } from '../study-kit/icons.mjs';
-import { I, notify, now } from './state.mjs';
+import { I, notify, now, ctx } from './state.mjs';
+import { osceGames } from './core.mjs';
 import { deckName, layers, layerLabel, yearLabel, diffLabel, inPick, KINDS, KIND_IDS } from '../library/item.mjs';
 import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
 import { displayOrder } from '../mcq/schema.mjs';
@@ -317,6 +318,7 @@ function answer(i) {
   try { if (x && i >= 0) navigator.vibrate?.(ok ? 10 : [8, 50, 8]); } catch {}   /* the same frame as the green or the shake (Apple: harmony); phones that buzz */
   if (V.st.celebrate) { V.st.celebrate = false; celebrate(); }
   if (x) othersPicked(x, i);
+  if (x && osceGames(ctx.mem).mascot) import('./buddy.mjs').then(b => b.cheerIn(panel()?.querySelector('.os-libexp'), x.item, ok)).catch(() => {});   /* the Study buddy, when on */
   panel()?.querySelector(`[data-lib="grade"].os-primary`)?.focus({ preventScroll: true });
   /* a long stem puts the answer below the fold: bring the explanation up */
   panel()?.querySelector('.os-libexp')?.scrollIntoView({ block: 'nearest', behavior: reducedMotion() ? 'auto' : 'smooth' });

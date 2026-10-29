@@ -1933,3 +1933,20 @@ button.os-libcheck { align-self:flex-start; }
 .os-libplaylists-art svg { width:22px; height:22px; }
 .os-libplaylists > span:nth-child(2) { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
 .os-libplaylists small { color:var(--mute); font-size:13px; }
+
+/* the Study buddy (osce/buddy.mjs): your dog in the answer's explanation, a face and at most one line */
+.os-buddy { display:flex; align-items:center; gap:12px; margin:2px 0 4px; }
+.os-buddy-dog { flex:none; width:64px; height:64px; border-radius:50%; background:var(--card); display:grid; place-items:center; overflow:hidden; }
+.os-buddy-dog svg { width:100%; height:100%; }
+.os-buddy-say { position:relative; margin:0; padding:8px 12px; border-radius:14px; background:var(--card); font-size:13.5px; line-height:1.45; min-width:0; overflow-wrap:anywhere; }
+.os-buddy-say::before { content:''; position:absolute; left:-6px; top:50%; width:12px; height:12px; background:inherit; transform:translateY(-50%) rotate(45deg); border-radius:2px; }
+.os-buddy-say b { margin-right:4px; }
+.os-buddy--run .os-buddy-dog, .os-buddy--party .os-buddy-dog, .os-buddy--comeback .os-buddy-dog { box-shadow:0 0 0 3px var(--ok-ink, #2bb673); }
+@media (prefers-reduced-motion: no-preference) {
+  .os-buddy-dog { animation:os-buddy-in .42s cubic-bezier(.2,1.4,.4,1) both; }
+  .os-buddy--party .os-buddy-dog { animation:os-buddy-in .42s cubic-bezier(.2,1.4,.4,1) both, os-buddy-hop .5s .42s ease-in-out 2; }
+  .os-buddy-say { animation:os-buddy-say .3s .12s ease-out both; }
+}
+@keyframes os-buddy-in { from { transform:scale(.6); opacity:0; } }
+@keyframes os-buddy-hop { 50% { transform:translateY(-6px); } }
+@keyframes os-buddy-say { from { transform:translateX(-6px); opacity:0; } }
