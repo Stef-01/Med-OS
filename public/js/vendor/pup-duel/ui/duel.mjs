@@ -257,7 +257,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('[data-pd="menu"]').addEventListener('click', openMenu);
     shell.querySelector('[data-pd="dress"]')?.addEventListener('click', () => openDress('locker'));
     shell.querySelector('[data-pd="shop"]')?.addEventListener('click', () => openDress('shop'));
-    shell.querySelector('[data-sec="ranked"]')?.addEventListener('click', e => { if (e.target.closest('[data-pd="ranked"]')) startRanked(); });
+    shell.querySelector('[data-sec="ranked"]')?.addEventListener('click', e => { if (e.target.closest('[data-pd="ranked"]')) startRanked(); else if (e.target.closest('[data-pd="vsai"]')) openPractice(); });
     const bs = shell.querySelector('[data-sec="board"]');
     if (bs) {
       S.lboard = lobbyBoard(bs, { face, meId: S.me.id, list: () => S.board || null, error: () => (S.board ? '' : S.boardErr || '') });

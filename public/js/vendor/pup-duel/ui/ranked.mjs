@@ -18,11 +18,13 @@ export const POLL_MS = 2000;
 export function rankCard(p) {
   const t = tierOf(p?.rating, p?.ranked);
   const sub = t.placing ? `${PLACING - (p?.ranked || 0)} ranked ${PLACING - (p?.ranked || 0) === 1 ? 'game' : 'games'} to your first tier` : t.next ? `${t.toNext} to ${t.nextName}` : 'Top tier';
-  return `<h2 class="pd-vh">Ranked</h2><div class="pd-rank" data-tier="${t.placing ? 'placing' : t.id}">
+  /* one line for the rank, then the two ways to play side by side (minimalism case studies, backlog 10: one obvious
+     action, the AI never more than a tap away) */
+  return `<h2 class="pd-vh">Ranked</h2><div class="pd-rank pd-rank--line" data-tier="${t.placing ? 'placing' : t.id}">
     <span class="pd-tier" aria-hidden="true">${icon('shield')}</span>
-    <div class="pd-rank-txt"><b>${t.placing ? 'Placing' : t.name}</b><span><span class="pd-rating">${p?.rating ?? 1000}</span> rating</span><small>${sub}</small></div>
+    <div class="pd-rank-txt"><b>${t.placing ? 'Placing' : t.name} · <span class="pd-rating">${p?.rating ?? 1000}</span></b><small>${sub}</small></div>
   </div>
-  <button class="pd-btn pd-pri" type="button" data-pd="ranked">${icon('zap')}Find a ranked match</button>`;
+  <div class="pd-playrow"><button class="pd-btn pd-pri" type="button" data-pd="ranked">${icon('zap')}Ranked match</button><button class="pd-btn" type="button" data-pd="vsai">${icon('bot')}Vs AI</button></div>`;
 }
 
 /* ctx: { sheet, closeSheet, guard, transport, me, makeSetup, onMatch(duel), say } */

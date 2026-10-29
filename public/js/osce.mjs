@@ -146,8 +146,8 @@ function renderHead() {
     title.textContent = `Station ${s.idx + 1} of ${s.queue.length}`;
     backB.innerHTML = I.x; backB.setAttribute('aria-label', 'End session');
     const a = curAttempt();
-    sub.innerHTML = `${srcTag(st)}${roleShort(a && a.who === 1 ? 1 : 0)}`;
-    act.innerHTML = bmButton(st.id, true) + `<button class="os-ic" data-os="more" aria-label="More Options" aria-haspopup="menu">${I.dots}</button>`;
+    sub.innerHTML = `${roleShort(a && a.who === 1 ? 1 : 0)}`;   /* backlog 17: the candidate whole; the source badges live in Instructions */
+    act.innerHTML = bmButton(st.id) + `<button class="os-ic" data-os="more" aria-label="More Options" aria-haspopup="menu">${I.dots}</button>`;
   } else {
     const a = findAttempt(ctx.reviewId), st = a && ctx.byId.get(a.sid);
     title.textContent = st ? st.title : 'Attempt';
