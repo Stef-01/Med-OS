@@ -19,7 +19,7 @@ import * as api from '../library/api.mjs';
 import { SORTS, sortOf, cover, toDuel, count, publishError, clean, LIMITS } from '../library/playlists.mjs';
 
 let shell = null, onPlay = null;
-const V = { sort: 'trending', q: '', list: [], trend: [], view: 'browse', cur: null, busy: false, err: '', pub: null };
+const V = { sort: 'trending', q: '', list: [], trend: [], picks: [], view: 'browse', cur: null, busy: false, err: '', pub: null };
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 const body = () => shell.el.querySelector('.os-plbody');
 
@@ -35,7 +35,7 @@ export function openPlaylists({ onPlay: play = null, opener = null } = {}) {
   }
   V.view = 'browse'; V.cur = null; V.err = '';
   shell.open(opener || document.activeElement);
-  paint(); load();
+  paint(); load(); loadPicks();
 }
 export const closePlaylists = () => shell?.close();
 
@@ -48,6 +48,14 @@ async function call(fn, args) {
   const a = account(); if (!a) throw new Error('Sign in first');
   return rpc(fn, { p_token: a.token, ...args });
 }
+/* MDosce picks (public/playlists/picks.json, founder 2026-10-28): featured packs written from open guidelines, there for
+   everyone, signed in or not; they live in the file, not the server, so they have no favourites or plays */
+async function loadPicks() {
+  if (V.picks.length) return;
+  try { const r = await fetch('./playlists/picks.json', { cache: 'no-cache' }); if (r.ok) V.picks = ((await r.json()).packs || []).map(p => ({ ...p, id: `pick:${p.id}`, pick: true, n: (p.questions || []).length, owner_name: 'MDosce picks' })); } catch { /* the community still loads */ }
+  if (V.view === 'browse') paint();
+}
+const picksHtml = () => (V.picks.length ? `<section aria-labelledby="os-plpk"><h3 class="os-plh" id="os-plpk">MDosce picks</h3><ul class="os-plcar" role="list">${V.picks.map(p => `<li><button class="os-plcard" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p)}<small>${plural(p.n, 'question')}</small></button></li>`).join('')}</ul></section>` : '');
 async function load() {
   if (!account()) { paint(); return; }
   V.busy = true; V.err = ''; paint();
@@ -72,12 +80,13 @@ function paint() {
 }
 const coverHtml = (p, cls = '') => `<span class="os-plcover${cls}" style="background:${cover(p.cover).css}" aria-hidden="true"><b>${esc(p.title)}</b>${icon('cards')}</span>`;
 function signedOutHtml() {
-  return `<div class="os-plempty">${icon('users')}<p><strong>Playlists are the community's questions</strong><br>Sign in (Settings, Account) to browse them, favourite them and publish your own.</p></div>`;
+  return `${picksHtml()}<div class="os-plempty">${icon('users')}<p><strong>The community's playlists</strong><br>Sign in (Settings, Account) to browse them, favourite them and publish your own.</p></div>`;
 }
 function browseHtml() {
   const row = p => `<li><button class="os-plrow" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p, ' os-plcover--s')}<span class="os-plrow-tx"><b>${esc(p.title)}</b><small>${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')}</small></span><span class="os-plfav${p.fav ? ' on' : ''}" aria-label="${p.favs} favourites">${icon('star')}${count(p.favs)}</span></button></li>`;
   return `<label class="os-plsearch">${icon('search')}<input name="plq" type="search" placeholder="Search playlists or people" value="${esc(V.q)}" autocomplete="off" enterkeyhint="search" aria-label="Search playlists"></label>
     <div class="os-plchips" role="tablist" aria-label="Order">${SORTS.map(s => `<button class="os-chip${V.sort === s.id ? ' on' : ''}" role="tab" aria-selected="${V.sort === s.id}" data-pl="sort" data-v="${s.id}">${esc(s.label)}</button>`).join('')}</div>
+    ${V.q ? '' : picksHtml()}
     ${V.trend.length ? `<section aria-labelledby="os-pltr"><h3 class="os-plh" id="os-pltr">Trending this week</h3><ul class="os-plcar" role="list">${V.trend.map(p => `<li><button class="os-plcard" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p)}<small>${esc(p.owner_name || '')} · ${plural(p.n, 'question')}</small></button></li>`).join('')}</ul></section>` : ''}
     ${V.err ? `<p class="os-plerr" role="alert">${esc(V.err)} <button class="os-link" data-pl="retry">Try again</button></p>` : ''}
     ${V.busy && !V.list.length ? '<p class="os-plmeta" role="status">Loading playlists…</p>' : V.list.length ? `<h3 class="os-plh">${esc(SORTS.find(s => s.id === V.sort).label)}${V.q ? ` · "${esc(V.q)}"` : ''}</h3><ul class="os-pllist" role="list">${V.list.map(row).join('')}</ul>`
@@ -89,13 +98,13 @@ function detailHtml() {
   const qs = Array.isArray(p.questions) ? p.questions : [];
   return `<div class="os-pldetail">${coverHtml(p, ' os-plcover--l')}
     <h2 class="os-pltitle">${esc(p.title)}</h2>
-    <p class="os-plmeta">${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')} · ${plural(p.favs, 'favourite')} · ${plural(p.plays, 'play')}</p>
+    <p class="os-plmeta">${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')}${p.pick ? '' : ` · ${plural(p.favs, 'favourite')} · ${plural(p.plays, 'play')}`}</p>
     ${p.blurb ? `<p class="os-plblurb">${esc(p.blurb)}</p>` : ''}
     <div class="os-placts"><button class="os-btn os-btn--lg os-primary" data-pl="play">${icon('playFilled')}<span>${onPlay ? 'Play these' : 'Play vs the AI'}</span></button>
-      <button class="os-btn os-btn--lg os-plfavbtn${p.fav ? ' on' : ''}" data-pl="fav" aria-pressed="${!!p.fav}">${icon('star')}<span>${p.fav ? 'Favourited' : 'Favourite'}</span></button></div>
+      ${p.pick ? '' : `<button class="os-btn os-btn--lg os-plfavbtn${p.fav ? ' on' : ''}" data-pl="fav" aria-pressed="${!!p.fav}">${icon('star')}<span>${p.fav ? 'Favourited' : 'Favourite'}</span></button>`}</div>
     <h3 class="os-plh">In this playlist</h3>
     <ol class="os-plqs">${qs.slice(0, 8).map(q => `<li>${esc(q.stem.length > 140 ? `${q.stem.slice(0, 140)}…` : q.stem)}</li>`).join('')}</ol>${qs.length > 8 ? `<p class="os-plmeta">and ${plural(qs.length - 8, 'more question')}</p>` : ''}
-    ${p.mine ? `<button class="os-link os-pldanger" data-pl="unpublish">Unpublish this playlist</button>` : `<button class="os-link" data-pl="report">Report this playlist</button>`}</div>`;
+    ${p.pick ? `<p class="os-plsrc">Written for MDosce from ${esc(p.source)}. Check the current guideline before acting on a dose.</p>` : p.mine ? `<button class="os-link os-pldanger" data-pl="unpublish">Unpublish this playlist</button>` : `<button class="os-link" data-pl="report">Report this playlist</button>`}</div>`;
 }
 function publishHtml() {
   const decks = api.current().decks.filter(d => d.items.length);
@@ -130,6 +139,7 @@ async function onClick(e) {
   if (k === 'unpublish') return unpublish();
 }
 async function openOne(id) {
+  if (id.startsWith('pick:')) { V.view = 'detail'; V.cur = V.picks.find(p => p.id === id) || null; if (!V.cur) V.view = 'browse'; paint(); shell.el.querySelector('.os-pltitle')?.focus?.(); return; }
   V.view = 'detail'; V.cur = null; paint();
   try { V.cur = await call('pl_get', { p_id: id }); } catch (e) { notify(e.message || 'That playlist did not open.', 'danger'); V.view = 'browse'; }
   paint(); shell.el.querySelector('.os-pltitle')?.focus?.();
@@ -144,7 +154,7 @@ async function fav() {
 async function play() {
   const p = V.cur, qs = toDuel(p.questions);
   if (!qs.length) { notify('No playable questions in this playlist.', 'danger'); return; }
-  call('pl_play', { p_id: p.id }).catch(() => {});
+  if (!p.pick) call('pl_play', { p_id: p.id }).catch(() => {});
   shell.close();
   if (onPlay) onPlay(qs, p.title);
   else { const { openDuelWith } = await import('./duel.mjs'); openDuelWith(qs, p.title); }

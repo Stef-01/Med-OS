@@ -1880,7 +1880,8 @@ button.os-libcheck { align-self:flex-start; }
 .os-plsearch { display:flex; align-items:center; gap:8px; height:46px; padding:0 14px; border-radius:12px; background:var(--card); border:1px solid var(--stroke); color:var(--mute); }
 .os-plsearch svg { width:18px; height:18px; }
 .os-plsearch input { flex:1; min-width:0; border:0; background:transparent; color:var(--ink); font-size:16px; outline:0; }
-.os-plchips { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin:0 -16px; padding:0 16px; }
+.os-plchips { flex:none; display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin:0 -16px; padding:2px 16px; }
+.os-plbody > * { flex-shrink:0; }
 .os-plchips::-webkit-scrollbar { display:none; }
 .os-plchips .os-chip { height:36px; font-size:14px; }
 .os-plchips .os-chip.on { background:var(--pri); border-color:var(--pri); color:var(--em-pri-contrast); }
@@ -1897,7 +1898,7 @@ button.os-libcheck { align-self:flex-start; }
 .os-plcover--l { width:min(240px, 64vw); margin:0 auto; border-radius:16px; padding:16px; }
 .os-plcover--l b { font-size:22px; }
 .os-plcover--l svg { right:16px; top:16px; width:28px; height:28px; }
-.os-plcar { display:grid; grid-auto-flow:column; grid-auto-columns:148px; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; margin:8px -16px 0; padding:0 16px 6px; list-style:none; }
+.os-plcar { display:grid; grid-auto-flow:column; grid-auto-columns:148px; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding-inline:16px; scrollbar-width:none; margin:8px -16px 0; padding:0 16px 6px; list-style:none; }
 .os-plcar::-webkit-scrollbar { display:none; }
 .os-plcard { display:flex; flex-direction:column; gap:6px; width:148px; text-align:left; scroll-snap-align:start; }
 .os-plcard small { color:var(--mute); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -1955,3 +1956,5 @@ button.os-libcheck { align-self:flex-start; }
 .os-placechips { display:flex; flex-wrap:wrap; gap:8px; }
 .os-placechip { display:inline-flex; align-items:center; gap:6px; min-height:44px; padding:0 14px; border-radius:999px; border:1.5px solid var(--stroke); background:none; color:inherit; font:inherit; font-size:15px; font-weight:600; cursor:pointer; }
 .os-placechip[aria-pressed="true"] { border-color:var(--pri); background:var(--pri-soft); }
+.os-placts:has(> :only-child) { grid-template-columns:minmax(0,1fr); }
+.os-plsrc { margin:14px 0 0; font-size:13px; line-height:1.45; color:var(--mute); text-align:center; }

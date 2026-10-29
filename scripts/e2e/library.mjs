@@ -358,6 +358,13 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await lee.waitForSelector('.os-pl:not([hidden]) .os-plpub');
   ok(/Playlists/.test(await lee.textContent('.os-pl .os-plhead h2')), 'playlists: Your questions opens the community library');
   await shot(lee, '320-playlists'); await plFlat(lee, 'browse');
+  /* MDosce picks (founder 2026-10-28): featured packs from open guidelines, a row of their own; one opens with its source */
+  await lee.waitForSelector('.os-plcard[data-id="pick:paeds-acute"]');
+  ok(await lee.locator('.os-plcard[data-id^="pick:"]').count() >= 3, 'playlists: MDosce picks are a row of featured packs');
+  await lee.click('.os-plcard[data-id="pick:og-hypertension"]'); await lee.waitForSelector('.os-plsrc');
+  ok(/Safer Care Victoria/.test(await lee.textContent('.os-plsrc')) && await lee.locator('[data-pl="fav"], [data-pl="report"]').count() === 0, 'playlists: a pick names its source, with no favourite or report');
+  await shot(lee, '320-pick-detail'); await plFlat(lee, 'pick');
+  await lee.click('[data-pl="back"]'); await lee.waitForSelector('.os-plpub');
   await lee.click('[data-pl="publishview"]'); await lee.waitForSelector('[data-pl-form="publish"]');
   await lee.fill('[data-pl-form="publish"] [name="title"]', 'Cardiology quickfire'); await lee.fill('[data-pl-form="publish"] [name="blurb"]', 'Quick ones before the ward round');
   await shot(lee, '320-playlists-publish'); await plFlat(lee, 'publish');

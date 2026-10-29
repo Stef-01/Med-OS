@@ -49,3 +49,22 @@ test('playlists: the migration keeps every table closed and every way in token-c
   assert.match(sql, /\\m\(ndis\|grants\?\)\\M/, 'NDIS and grants are refused on publish');
   assert.match(sql, /\) >= 3;/, 'three reports hide a playlist');
 });
+
+test('playlists: MDosce picks are well-formed, playable, credited and inside the ban', async () => {
+  const { packs } = JSON.parse(fs.readFileSync(new URL('../public/playlists/picks.json', import.meta.url), 'utf8'));
+  const cats = new Set(JSON.parse(fs.readFileSync(new URL('../public/duel/pack.json', import.meta.url), 'utf8')).cats.map(c => c.id));
+  const ids = new Set();
+  assert.ok(packs.length >= 3);
+  for (const p of packs) {
+    assert.ok(p.id && p.title.length <= LIMITS.title && p.blurb.length <= LIMITS.blurb && p.source, p.id);
+    assert.ok(p.questions.length >= 8 && p.questions.length <= LIMITS.questions, p.id);
+    for (const q of p.questions) {
+      assert.ok(!ids.has(q.id), q.id); ids.add(q.id);
+      assert.ok(q.options.length >= 4 && q.answer >= 0 && q.answer < q.options.length && q.why.length === q.options.length, q.id);
+      assert.ok(cats.has(q.cat) && q.topic && q.explanation, q.id);
+      assert.ok(q.stem.length <= 160, `${q.id}: a stem short enough for a duel's clock`);
+    }
+    assert.equal(toDuel(p.questions).length, p.questions.length, `${p.id} plays whole`);
+  }
+  assert.doesNotMatch(JSON.stringify(packs), /\b(ndis|grants?)\b/i);
+});
