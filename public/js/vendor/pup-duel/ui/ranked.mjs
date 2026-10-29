@@ -18,13 +18,11 @@ export const POLL_MS = 2000;
 export function rankCard(p) {
   const t = tierOf(p?.rating, p?.ranked);
   const sub = t.placing ? `${PLACING - (p?.ranked || 0)} ranked ${PLACING - (p?.ranked || 0) === 1 ? 'game' : 'games'} to your first tier` : t.next ? `${t.toNext} to ${t.nextName}` : 'Top tier';
-  /* one line for the rank, then the two ways to play side by side (minimalism case studies, backlog 10: one obvious
-     action, the AI never more than a tap away) */
-  return `<h2 class="pd-vh">Ranked</h2><div class="pd-rank pd-rank--line" data-tier="${t.placing ? 'placing' : t.id}">
-    <span class="pd-tier" aria-hidden="true">${icon('shield')}</span>
-    <div class="pd-rank-txt"><b>${t.placing ? 'Placing' : t.name} · <span class="pd-rating">${p?.rating ?? 1000}</span></b><small>${sub}</small></div>
-  </div>
-  <div class="pd-playrow"><button class="pd-btn pd-pri" type="button" data-pd="ranked">${icon('zap')}Ranked match</button><button class="pd-btn" type="button" data-pd="vsai">${icon('bot')}Vs AI</button></div>`;
+  /* D4 (round 3): the rank rides in the Ranked button as its subline, no card of its own; Vs AI beside it */
+  const short = t.placing ? `Placing · ${PLACING - (p?.ranked || 0)} to go` : `${t.name} · ${p?.rating ?? 1000}`;
+  return `<h2 class="pd-vh">Ranked</h2><div class="pd-playrow" data-tier="${t.placing ? 'placing' : t.id}">
+    <button class="pd-btn pd-pri pd-rankbtn" type="button" data-pd="ranked" aria-describedby="pd-ranksub">${icon('zap')}<span><b>Ranked match</b><small id="pd-ranksub" title="${sub}"><span class="pd-rating" hidden>${p?.rating ?? 1000}</span>${short}</small></span></button>
+    <button class="pd-btn" type="button" data-pd="vsai">${icon('bot')}Vs AI</button></div>`;
 }
 
 /* ctx: { sheet, closeSheet, guard, transport, me, makeSetup, onMatch(duel), say } */

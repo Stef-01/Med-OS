@@ -682,3 +682,8 @@ div.pd-me-dog { cursor: default; }
 /* D15: during a live question the dogs shrink to faces, the question rises; they return full size for the reveal */
 .pd-match[data-live][data-stage="question"] .pd-dogslot { transform: scale(.6); margin-block: -28px; transition: transform .35s var(--pd-ease), margin .35s var(--pd-ease); }
 .pd-match .pd-dogslot { transition: transform .35s var(--pd-ease), margin .35s var(--pd-ease); }
+
+.pd-rankbtn { min-height: 60px; }
+.pd-rankbtn > span { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; min-width: 0; }
+.pd-rankbtn small { font-size: 12.5px; font-weight: 600; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.pd-playrow .pd-btn { min-height: 60px; }

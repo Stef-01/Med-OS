@@ -695,8 +695,8 @@ async function duel() {
   await a.screenshot({ path: path.join(SHOTS, 'duel-shop.png') });
   await a.keyboard.press('Escape'); await a.waitForSelector('.os-duel .pd-full', { state: 'detached' });
   /* ranked: the card, then both in the queue meet in a live duel; Escape leaves it as any duel */
-  await a.waitForSelector('.os-duel [data-sec="ranked"]:not([hidden]) .pd-rank');
-  ok(/Placing/.test(await a.textContent('.os-duel .pd-rank')), 'duel: the ranked card shows a new player placing');
+  await a.waitForSelector('.os-duel [data-sec="ranked"]:not([hidden]) .pd-rankbtn');
+  ok(/Placing/.test(await a.textContent('.os-duel .pd-rankbtn')), 'duel: the Ranked button shows a new player placing');
   await a.click('.os-duel [data-pd="ladder"]'); await a.waitForSelector('.os-duel .pd-sheet .pd-lboard .pd-lrow[data-me]');
   ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'duel: the leaderboard fits a 320 px phone');
   await a.screenshot({ path: path.join(SHOTS, 'duel-ladder.png') });
