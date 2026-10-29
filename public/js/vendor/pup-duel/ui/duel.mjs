@@ -672,7 +672,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     S.match.faces.me.dataset.who = 'me'; S.match.faces.them.dataset.who = 'them';
     shell.querySelector('[data-pd="leave"]').addEventListener('click', confirmLeave);
     shell.querySelectorAll('.pd-emote').forEach(b => b.addEventListener('click', () => { if (S.session?.emote(b.dataset.e)) { b.classList.add('pd-sent'); setTimeout(() => b.classList.remove('pd-sent'), 600); S.dogs.me.expr(EXPR.emote); showOff('me'); } }));
-    S.session = createSession({ transport: t, me, duel: d, onChange: v => { S.view = v; paintMatch(); } });
+    S.session = createSession({ transport: t, me, duel: d, ...(isPractice ? { pollMs: 150 } : {}), onChange: v => { S.view = v; paintMatch(); } });   /* the AI is on this device: no reason to wait 1.5 s to see him accept */
     S.session.start();
     if (accept) S.session.accept();
     if (!isPractice && d.a === me.id && (d.status || 'invited') === 'invited') watchCrossed(d, me, them);
@@ -818,6 +818,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     hold.dataset.k = '';
     if (st.phase === 'invited') {
       if (me === st.b) { big.textContent = `${M.them.name || 'A mate'} challenges you`; setBits(st.setup); setActs([['Play', 'pri', 'check', () => S.session.accept()], ['Decline', '', 'x', () => { S.session.decline(); setTimeout(showLobbyOrAuth, 800); }]]); }
+      else if (M.practice) { big.textContent = '…'; sub.textContent = 'Starting'; setActs([]); }   /* the AI takes it at once: the same hold as the start, nothing to cancel */
       else { big.textContent = `Waiting for ${them}`; setBits(st.setup); setActs([['Cancel', '', 'x', () => { S.session.leave(); setTimeout(showLobbyOrAuth, 800); }]]); }
     } else if (s.name === 'ready') { hold.dataset.k = 'count'; sub.textContent = 'Get ready'; setActs([]); }
     else if (s.name === 'wait') { big.textContent = '…'; sub.textContent = 'Starting'; setActs([]); }

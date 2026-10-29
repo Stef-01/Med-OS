@@ -638,5 +638,6 @@ div.pd-me-dog { cursor: default; }
 @keyframes pd-fade-out { to { opacity: 0; } }
 @keyframes pd-down { to { transform: translateY(40px); opacity: 0; } }
 @media (min-width: 600px) { .pd-out > .pd-sheet { animation: pd-fade-out .18s ease both; } }
-/* the emote bar holds its place under a question of any length */
-.pd-match[data-live] .pd-emotes { position: sticky; bottom: max(12px, env(safe-area-inset-bottom, 0px)); z-index: 2; }
+/* rounds hold their shape (audit 2026-10-29): the stem keeps room for three lines, the hold one height whatever it says */
+.pd-stem { min-height: 4.2em; }
+.pd-hold-in { min-height: 180px; justify-content: center; }
