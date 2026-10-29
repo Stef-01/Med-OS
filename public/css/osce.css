@@ -1918,7 +1918,8 @@ button.os-libcheck { align-self:flex-start; }
 .os-pltitle { font-size:24px; font-weight:800; text-align:center; margin-top:6px; }
 .os-pldetail > .os-plmeta { text-align:center; }
 .os-plblurb { text-align:center; color:var(--ink); }
-.os-placts { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.os-placts { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; }
+.os-placts .os-btn { min-width:0; padding-inline:12px; white-space:nowrap; }
 .os-plfavbtn.on { border-color:var(--warn, #ffc800); color:var(--warn, #ffc800); }
 .os-plqs { display:flex; flex-direction:column; gap:8px; margin:0; padding-left:20px; color:var(--ink); font-size:14px; }
 .os-pldanger { color:var(--danger-text); align-self:center; }
