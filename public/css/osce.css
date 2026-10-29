@@ -1890,12 +1890,13 @@ button.os-libcheck { align-self:flex-start; }
 .os-plerr:empty { display:none; }
 .os-plcover { position:relative; display:flex; flex-direction:column; justify-content:flex-end; aspect-ratio:1; border-radius:12px; padding:10px; overflow:hidden; color:#fff; box-shadow:0 6px 18px rgb(0 0 0 / .25); }
 .os-plcover b { position:relative; z-index:1; font-size:15px; font-weight:800; line-height:1.15; text-wrap:balance; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; text-shadow:0 1px 2px rgb(0 0 0 / .3); }
-.os-plcover svg { position:absolute; right:-10px; top:-10px; width:64px; height:64px; opacity:.22; }
+.os-plcover svg { position:absolute; right:10px; top:10px; width:22px; height:22px; opacity:.55; }
 .os-plcover--s { width:56px; height:56px; padding:0; border-radius:8px; flex:none; box-shadow:none; }
 .os-plcover--s b { display:none; }
-.os-plcover--s svg { right:-6px; top:-6px; width:40px; height:40px; }
+.os-plcover--s svg { right:auto; top:50%; left:50%; width:24px; height:24px; transform:translate(-50%,-50%); }
 .os-plcover--l { width:min(240px, 64vw); margin:0 auto; border-radius:16px; padding:16px; }
 .os-plcover--l b { font-size:22px; }
+.os-plcover--l svg { right:16px; top:16px; width:28px; height:28px; }
 .os-plcar { display:grid; grid-auto-flow:column; grid-auto-columns:148px; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; margin:8px -16px 0; padding:0 16px 6px; list-style:none; }
 .os-plcar::-webkit-scrollbar { display:none; }
 .os-plcard { display:flex; flex-direction:column; gap:6px; width:148px; text-align:left; scroll-snap-align:start; }
