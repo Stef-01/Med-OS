@@ -180,8 +180,8 @@ function card(s, i) {
     <div class="os-ctop"><div class="os-tags">${tagHtml(s)}${s.complexity ? `<span class="os-tag">${esc(s.complexity)}</span>` : ''}</div>
       <div class="os-cacts">${details ? `<button class="os-ic os-ic--sm" data-os="preview" data-id="${esc(s.id)}" aria-label="Preview">${I.eye}</button>` : ''}${bmButton(s.id)}</div></div>
     <div class="os-cbody${details ? '' : ' spoiler'}"><h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p></div>
-    <div class="os-cfoot">${att ? `<button class="os-att" data-os="preview" data-id="${esc(s.id)}" data-tab="Attempts">${I.check}Attempted${doneBy(s.id)}</button>` : '<span class="os-natt">Not Attempted</span>'}
-      <button class="os-btn os-qbtn${inQ ? ' soft' : ''}" data-os="queue" data-id="${esc(s.id)}">${inQ ? I.check : I.plus}<span>${inQ ? 'In Queue' : 'Add to Queue'}</span></button></div>
+    <div class="os-cfoot">${att ? `<button class="os-att" data-os="preview" data-id="${esc(s.id)}" data-tab="Attempts">${I.check}Attempted${doneBy(s.id)}</button>` : '<span class="os-natt"><i aria-hidden="true"></i>New</span>'}
+      <button class="os-btn os-qbtn${inQ ? ' soft' : ''}" data-os="queue" data-id="${esc(s.id)}">${inQ ? I.check : I.plus}<span>${inQ ? 'Queued' : 'Add'}</span></button></div>
   </article>`;
 }
 /* the initials of whoever has done this station */
@@ -192,7 +192,7 @@ export function syncCards() {
     if (c.classList.contains('inq') === inQ) return;
     c.classList.toggle('inq', inQ);
     b.classList.toggle('soft', inQ);
-    b.innerHTML = `${inQ ? I.check : I.plus}<span>${inQ ? 'In Queue' : 'Add to Queue'}</span>`;
+    b.innerHTML = `${inQ ? I.check : I.plus}<span>${inQ ? 'Queued' : 'Add'}</span>`;
   });
 }
 /* the search box (the input event, debounced) */
@@ -241,7 +241,7 @@ export async function previewDlg(id, initial) {   /* OscesPreviewDialog.vue; the
   pvTab = tabs.includes(initial) ? initial : 'Instructions';
   const inQ = sess().queue.includes(id), live = sess().idx != null;
   const d = openDialog({ kind: 'preview', title: st.title, cls: 'os-dlg--large',
-    action: srcTag(st) + (live ? '' : `<button class="os-btn ${inQ ? 'soft' : 'os-primary'} os-pvq" data-os="pvqueue" data-id="${esc(id)}">${inQ ? I.check : I.plus}<span>${inQ ? 'In Queue' : 'Add to Queue'}</span></button>`),
+    action: srcTag(st) + (live ? '' : `<button class="os-btn ${inQ ? 'soft' : 'os-primary'} os-pvq" data-os="pvqueue" data-id="${esc(id)}">${inQ ? I.check : I.plus}<span>${inQ ? 'Queued' : 'Add'}</span></button>`),
     body: `<div class="os-pv">${tabsNav(tabs, 'os-tabs--pv').replace(/aria-selected="(true|false)"/g, '')}<div class="os-pv-scroll"><div class="os-pbody"></div></div></div>` });
   d.el.querySelectorAll('[data-os="tab"]').forEach(b => { b.dataset.os = 'pvtab'; });
   d.onClose = () => { pvId = null; };
@@ -262,7 +262,7 @@ function syncPreviewQueue(id) {
   if (!b) return;
   const inQ = sess().queue.includes(id);
   b.className = `os-btn ${inQ ? 'soft' : 'os-primary'} os-pvq`;
-  b.innerHTML = `${inQ ? I.check : I.plus}<span>${inQ ? 'In Queue' : 'Add to Queue'}</span>`;
+  b.innerHTML = `${inQ ? I.check : I.plus}<span>${inQ ? 'Queued' : 'Add'}</span>`;
 }
 
 export function browseDlg() {   /* OscesBrowseDialog.vue (phones) */

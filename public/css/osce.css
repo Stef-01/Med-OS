@@ -2214,3 +2214,23 @@ details.os-pair:not([open]) { padding-bottom:14px; }
   .os-browse .os-discrow .kit-disc::-webkit-scrollbar { display:none; }
   .os-browse .os-discrow .kit-disc > * { flex:none; }
 }
+/* backlog 8 (Spotify/Linear rows: title first, meta quiet): on a phone a station card is its specialty, its title, two
+   lines of summary and one small action; the source, type, image and complexity badges wait for the preview */
+@media (max-width:639px) {
+  .os-scard { gap:6px; padding:14px; min-height:0; contain-intrinsic-size:auto 150px; }
+  .os-scard .os-tags .os-tag:nth-child(n+2) { display:none; }
+  .os-scard .os-cbody h3 { font-size:16.5px; line-height:1.3; }
+  .os-scard .os-cbody p { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-size:14px; }
+  .os-scard .os-qbtn { height:36px; padding:0 14px; }
+}
+.os-natt { display:inline-flex; align-items:center; gap:6px; color:var(--mute); font-size:13.5px; }
+.os-natt i { width:7px; height:7px; border-radius:50%; background:var(--pri); }
+@media (max-width:639px) {
+  .os-browse .os-frow { flex-wrap:nowrap; }
+  .os-browse .os-filters { flex:1 1 auto; min-width:0; margin-inline:-2px 0; padding-inline:2px 20px; }
+  .os-browse .os-count { flex:none; flex-basis:auto; font-size:13px; }
+  .os-scard .os-tags .os-tag--amsa, .os-scard .os-tags .kit-src { display:none; }
+}
+/* inside a sheet on a phone, a toast rises from the bottom, clear of the sheet's search and title (and above a pinned
+   grade bar) */
+@media (max-width:639px) { body:has(.os-dlg) .os-alerts { top:auto; bottom:calc(92px + env(safe-area-inset-bottom)); } }
