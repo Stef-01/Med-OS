@@ -10,7 +10,7 @@ import { dealtSource } from './pack.mjs';
 import { ProcessGameConfig, CreateGameReducer, InitializeGame, INVALID_MOVE, ActivePlayers, makeMove, setLogger } from '../engine/index.mjs';
 
 export const RULES = {
-  rounds: 7, secs: 30, readyMs: 3000, revealMs: 3500, graceMs: 8000, forfeitAfter: 3,
+  rounds: 7, secs: 30, readyMs: 3000, revealMs: 7000,   /* time to read the explanation between rounds (2026-10-29) */ graceMs: 8000, forfeitAfter: 3,
   maxQuestions: 15, minSecs: 5, maxSecs: 120, maxSetupBytes: 65536,
   roundChoices: [5, 7, 10], secsChoices: [15, 30, 90]
 };

@@ -143,3 +143,12 @@ export function resumable(snap, entries, t) {
   const i = Math.min(snap.i | 0, q.length); if (i >= q.length) return null;
   return { q, i, n: snap.n | 0, right: snap.right | 0, mode: snap.mode === 'timed' ? 'timed' : 'tutor', order: snap.order || 'due', label: snap.label || '', left: q.length - i };
 }
+/* your placement first (osce/core.mjs placementSpecs): the entries whose specialty is in it, then the rest, each in its
+   own order; a queue's new cards come from the front, so Today's new questions are your rotation's while it has any */
+export function placeFirst(entries, specs = []) {
+  if (!specs.length) return entries;
+  const on = new Set(specs), inn = [], out = [];
+  for (const e of entries) (on.has(e.item?.topic) ? inn : out).push(e);
+  return [...inn, ...out];
+}
+export const inPlace = (entries, specs = []) => { const on = new Set(specs); return entries.filter(e => on.has(e.item?.topic)); };

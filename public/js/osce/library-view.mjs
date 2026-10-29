@@ -42,7 +42,7 @@ export function libraryCardHtml() {
   const mem = api.studyMem(), t = now(), sk = streak(mem.days, t), td = today(mem.days, t, myPref().goal);
   const sub = sk.days || td.n ? `${td.n} of ${td.goal} today${c.due ? ` · ${c.due} due` : ''}`
     : all.length ? `${all.length} question${all.length === 1 ? '' : 's'}${c.due ? ` · ${c.due} due` : ''}${lib.shared.length ? ` · ${lib.shared.length} from friends` : ''}`
-    : 'Study the bank or your own questions from ChatGPT, track your gaps, share with friends.';
+    : 'The bank and your own decks';
   /* the streak is on Start, so the habit is seen before the tap (Duolingo) */
   return `<button class="os-card os-bigcard os-in" data-os="lib" style="--d:3">
     <span class="os-bigic">${icon('cards')}</span>

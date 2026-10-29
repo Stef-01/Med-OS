@@ -17,7 +17,7 @@ import { account } from '../study-kit/sync.mjs';
 import { rpc } from './account.mjs';
 import * as api from '../library/api.mjs';
 import { starName } from './unlock.mjs';
-import { albumHtml, drawDogs, starOf, starOwned, refreshOwned, setPending, FINISH } from './albums.mjs';
+import { albumHtml, coverFor, drawDogs, starOf, starOwned, refreshOwned, setPending, FINISH } from './albums.mjs';
 import { SORTS, sortOf, toDuel, count, publishError, clean, LIMITS } from '../library/playlists.mjs';
 
 let shell = null, onPlay = null;
@@ -33,6 +33,8 @@ export function openPlaylists({ onPlay: play = null, opener = null } = {}) {
     shell.el.innerHTML = `<header class="os-plhead"><button class="os-btn os-plx" data-pl="back" aria-label="Close">${I.x}</button><h2>Playlists</h2><span></span></header><div class="os-plbody"></div>`;
     shell.el.addEventListener('click', onClick);
     shell.el.addEventListener('input', onInput);
+    /* a page's header is clear over its cover's colours, and frosted once they scroll away under it */
+    body().addEventListener('scroll', () => shell.el.classList.toggle('os-pl--scrolled', body().scrollTop > 180), { passive: true });
     shell.el.addEventListener('submit', e => { e.preventDefault(); if (e.target.matches('[data-pl-form="publish"]')) publish(e.target); });
   }
   V.view = 'browse'; V.cur = null; V.err = ''; V.painted = null;
@@ -57,7 +59,14 @@ async function loadPicks() {
   try { const r = await fetch('./playlists/picks.json', { cache: 'no-cache' }); if (r.ok) V.picks = ((await r.json()).packs || []).map(p => ({ ...p, id: `pick:${p.id}`, pick: true, n: (p.questions || []).length, owner_name: 'MDosce picks' })); } catch { /* the community still loads */ }
   if (V.view === 'browse') paint();
 }
-const picksHtml = () => (V.picks.length ? `<section aria-labelledby="os-plpk"><h3 class="os-plh" id="os-plpk">MDosce picks</h3><ul class="os-plcar" role="list">${V.picks.map(p => `<li><button class="os-plcard" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p)}<small>${plural(p.n, 'question')}</small></button></li>`).join('')}</ul></section>` : '');
+/* the cover's colours, blurred, behind a pick's hero card and the top of a playlist's page */
+const washHtml = p => `<span class="os-plwash os-alb--${coverFor(p).style}" aria-hidden="true"></span>`;
+const heroCard = p => {
+  const st = starOf(p), tag = st ? (starOwned(st) ? `${starName(st)} unlocked` : `Unlock ${starName(st)}`) : 'MDosce pick';
+  return `<li><button class="os-plcard os-plcard--hero" data-pl="open" data-id="${esc(p.id)}">${washHtml(p)}${coverHtml(p)}<span class="os-plcard-tx"><i>${esc(tag)}</i><b>${esc(p.title)}</b><small>${plural(p.n, 'question')}</small></span></button></li>`;
+};
+const picksHtml = () => (V.picks.length ? `<section class="os-plsec" aria-labelledby="os-plpk"><h3 class="os-plh" id="os-plpk">MDosce picks</h3><ul class="os-plcar os-plcar--hero" role="list">${V.picks.map(heroCard).join('')}</ul></section>` : '');
+const card = p => `<li><button class="os-plcard" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p)}<span class="os-plcard-tx"><b>${esc(p.title)}</b><small>${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')}</small></span></button></li>`;
 async function load() {
   if (!account()) { paint(); return; }
   V.busy = true; V.err = ''; paint();
@@ -75,6 +84,7 @@ async function load() {
 /* ---------- painting ---------- */
 function paint() {
   if (!shell) return;
+  shell.el.classList.toggle('os-pl--detail', V.view === 'detail');
   shell.el.querySelector('.os-plhead h2').textContent = V.view === 'detail' ? '' : V.view === 'publish' ? 'Publish a playlist' : 'Playlists';
   shell.el.querySelector('[data-pl="back"]').innerHTML = V.view === 'browse' ? I.x : I.back;
   shell.el.querySelector('[data-pl="back"]').setAttribute('aria-label', V.view === 'browse' ? 'Close' : 'Back');
@@ -101,7 +111,7 @@ function starHtml(p) {
   const st = starOf(p); if (!st) return '';
   const name = starName(st), mine = starOwned(st);
   return `<div class="os-plstar${mine ? ' on' : ''}"><span class="os-plstar-dog"><span class="os-alb-dog" data-dog="${esc(`${st.dog}|${mine ? 'overjoyed' : st.expr}|{}`)}"></span></span>
-    <p><b>${mine ? `${esc(name)} is yours` : `Unlock ${esc(name)}`}</b>${mine ? `Pick ${esc(name)} and the ${esc(st.piece)} from your duel dogs.` : `Play ${FINISH.rounds} or more rounds and get ${Math.round(FINISH.share * 100)}% right: ${esc(name)} and the ${esc(st.piece)} join your duel dogs.`}</p></div>`;
+    <p><i>${mine ? 'Unlocked' : 'Reward'}</i><b>${mine ? `${esc(name)} is yours` : `Unlock ${esc(name)}`}</b>${mine ? `Pick ${esc(name)} and the ${esc(st.piece)} from your duel dogs.` : `Play ${FINISH.rounds}+ rounds at ${Math.round(FINISH.share * 100)}% or better to win ${esc(name)} and the ${esc(st.piece)}.`}</p></div>`;
 }
 function signedOutHtml() {
   return `${picksHtml()}<div class="os-plempty">${icon('users')}<p><strong>The community's playlists</strong><br>Sign in (Settings, Account) to browse them, favourite them and publish your own.</p></div>`;
@@ -112,26 +122,26 @@ function browseHtml() {
     <div class="os-plres">${browseRes()}</div>`;
 }
 function browseRes() {
-  const row = p => `<li><button class="os-plrow" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p, ' os-plcover--s')}<span class="os-plrow-tx"><b>${esc(p.title)}</b><small>${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')}</small></span><span class="os-plfav${p.fav ? ' on' : ''}" aria-label="${p.favs} favourites">${icon('star')}${count(p.favs)}</span></button></li>`;
+  const row = p => `<li><button class="os-plrow" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p, ' os-plcover--s')}<span class="os-plrow-tx"><b>${esc(p.title)}</b><small>${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')}</small></span><span class="os-plfav${p.fav ? ' on' : ''}" aria-label="${p.favs} favourites">${icon('star')}${count(p.favs)}</span>${icon('chevronRight')}</button></li>`;
   return `${V.q ? '' : picksHtml()}
-    ${V.trend.length ? `<section aria-labelledby="os-pltr"><h3 class="os-plh" id="os-pltr">Trending this week</h3><ul class="os-plcar" role="list">${V.trend.map(p => `<li><button class="os-plcard" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p)}<small>${esc(p.owner_name || '')} · ${plural(p.n, 'question')}</small></button></li>`).join('')}</ul></section>` : ''}
+    ${V.trend.length ? `<section class="os-plsec" aria-labelledby="os-pltr"><h3 class="os-plh" id="os-pltr">Trending this week</h3><ul class="os-plcar" role="list">${V.trend.map(card).join('')}</ul></section>` : ''}
     ${V.err ? `<p class="os-plerr" role="alert">${esc(V.err)} <button class="os-link" data-pl="retry">Try again</button></p>` : ''}
-    ${V.busy && !V.list.length ? '<p class="os-plmeta" role="status">Loading playlists…</p>' : V.list.length ? `<h3 class="os-plh">${esc(SORTS.find(s => s.id === V.sort).label)}${V.q ? ` · "${esc(V.q)}"` : ''}</h3><ul class="os-pllist" role="list">${V.list.map(row).join('')}</ul>`
+    ${V.busy && !V.list.length ? '<p class="os-plmeta" role="status">Loading playlists…</p>' : V.list.length ? `<section class="os-plsec"><h3 class="os-plh">${V.q ? `Results for “${esc(V.q)}”` : esc(SORTS.find(s => s.id === V.sort).label)}</h3><ul class="os-pllist" role="list">${V.list.map(row).join('')}</ul></section>`
       : `<div class="os-plempty">${icon('cards')}<p><strong>${V.sort === 'faves' ? 'No favourites yet' : V.sort === 'mine' ? 'You have not published a playlist' : V.q ? 'Nothing matches' : 'No playlists yet'}</strong><br>${V.sort === 'mine' || !V.q ? 'Publish one of your decks and it is live for everyone.' : 'Try another word.'}</p></div>`}
-    <button class="os-btn os-btn--lg os-primary os-plpub" data-pl="publishview">${icon('plus')}<span>Publish one of your decks</span></button>`;
+    <button class="os-plpub" data-pl="publishview"><span class="os-plpub-ic">${icon('plus')}</span><span class="os-plrow-tx"><b>Publish a playlist</b><small>Put one of your decks live for everyone</small></span></button>`;
 }
 function detailHtml() {
   const p = V.cur; if (!p) return '<p class="os-plmeta" role="status">Loading…</p>';
   const qs = Array.isArray(p.questions) ? p.questions : [];
-  return `<div class="os-pldetail">${coverHtml(p, ' os-plcover--l')}
+  return `<div class="os-pldetail">${washHtml(p)}${coverHtml(p, ' os-plcover--l')}
     <h2 class="os-pltitle" tabindex="-1">${esc(p.title)}</h2>
     <p class="os-plmeta">${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')}${p.pick ? '' : ` · ${plural(p.favs, 'favourite')} · ${plural(p.plays, 'play')}`}</p>
     ${p.blurb ? `<p class="os-plblurb">${esc(p.blurb)}</p>` : ''}
-    <div class="os-placts"><button class="os-btn os-btn--lg os-primary" data-pl="play">${icon('playFilled')}<span>${onPlay ? 'Play these' : 'Play vs the AI'}</span></button>
-      ${p.pick ? '' : `<button class="os-btn os-btn--lg os-plfavbtn${p.fav ? ' on' : ''}" data-pl="fav" aria-pressed="${!!p.fav}">${icon('star')}<span>${p.fav ? 'Favourited' : 'Favourite'}</span></button>`}</div>
+    <div class="os-placts">${p.pick ? '' : `<button class="os-plfavbtn${p.fav ? ' on' : ''}" data-pl="fav" aria-pressed="${!!p.fav}">${icon('star')}<span class="os-vh">${p.fav ? 'Favourited' : 'Favourite'}</span></button>`}
+      <button class="os-plplay" data-pl="play"><span>${onPlay ? 'Play these' : 'Play vs the AI'}</span><span class="os-plplay-ic">${icon('playFilled')}</span></button></div>
     ${starHtml(p)}
     <h3 class="os-plh">In this playlist</h3>
-    <ol class="os-plqs">${qs.slice(0, 8).map(q => `<li>${esc(q.stem.length > 140 ? `${q.stem.slice(0, 140)}…` : q.stem)}</li>`).join('')}</ol>${qs.length > 8 ? `<p class="os-plmeta">and ${plural(qs.length - 8, 'more question')}</p>` : ''}
+    <ol class="os-plqs">${qs.slice(0, 8).map(q => `<li><span>${esc(q.stem.length > 140 ? `${q.stem.slice(0, 140)}…` : q.stem)}</span></li>`).join('')}</ol>${qs.length > 8 ? `<p class="os-plmeta">and ${plural(qs.length - 8, 'more question')}</p>` : ''}
     ${p.pick ? `<p class="os-plsrc">Written for MDosce from ${esc(p.source)}. Check the current guideline before acting on a dose.</p>` : p.mine ? `<button class="os-link os-pldanger" data-pl="unpublish">Unpublish this playlist</button>` : `<button class="os-link" data-pl="report">Report this playlist</button>`}</div>`;
 }
 function publishHtml() {

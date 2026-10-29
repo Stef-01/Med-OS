@@ -67,7 +67,8 @@ export function supabaseTransport({ url, key, fetch = globalThis.fetch?.bind(glo
     /* ranked (0003_pup_ranked.sql) */
     queue: (me, setup) => rpc('pup_queue', { p_token: me.token, p_setup: setup }),
     unqueue: me => rpc('pup_unqueue', { p_token: me.token }),
-    leaderboard: me => rpc('pup_leaderboard', { p_token: me.token }),
+    leaderboard: (me, day) => rpc('pup_leaderboard', { p_token: me.token, p_day: day ?? null }),
+    studyLog: (me, answered, secs, day) => rpc('pup_study_log', { p_token: me.token, p_answered: answered, p_secs: secs, p_day: day ?? null }),
     live,
     get socket() { return rt?.state || 'idle'; },
     close() { rt?.close(); rt = null; }

@@ -337,9 +337,12 @@ div.pd-me-dog { cursor: default; }
 .pd-swatch[aria-checked="true"] { border-color: var(--pd-pri); box-shadow: 0 0 0 2px var(--pd-pri); }
 .pd-swatch:active { transform: scale(.94); }
 .pd-chips { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
-.pd-swatches .pd-chipsw { aspect-ratio: auto; min-height: 44px; padding: 8px 10px; border-radius: 999px; color: var(--pd-ink); font-family: inherit; font-size: 14px; font-weight: 700; line-height: 1.15; white-space: nowrap; }
-.pd-swatches[data-kind="iris"] { grid-template-columns: repeat(6, minmax(0, 64px)); }   /* twelve colours: two even rows of six, never one stranded */
-@media (max-width: 400px) { .pd-swatches[data-kind="iris"] { grid-template-columns: repeat(4, minmax(0, 1fr)); } }   /* three rows of four on a phone */
+/* a word chip wraps onto a second line rather than run past its pill (founder 2026-10-29: "text is trailing off"):
+   the grid owns the layout, so the scrolling row's bleed and overflow from .pd-chips are put back */
+.pd-swatches.pd-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; margin: 0; padding: 0; overflow: visible; }
+.pd-swatches .pd-chipsw { aspect-ratio: auto; min-width: 0; min-height: 44px; padding: 6px 10px; border-radius: 22px; color: var(--pd-ink); font-family: inherit; font-size: 14px; font-weight: 700; line-height: 1.15; white-space: normal; overflow-wrap: break-word; text-align: center; }
+.pd-swatches[data-kind="iris"] { grid-template-columns: repeat(8, minmax(0, 64px)); }   /* sixteen colours: two even rows of eight, never one stranded */
+@media (max-width: 600px) { .pd-swatches[data-kind="iris"] { grid-template-columns: repeat(4, minmax(0, 1fr)); } }   /* four rows of four on a phone */
 .pd-swatches .pd-chipsw[aria-checked="true"] { background: color-mix(in srgb, var(--pd-pri) 18%, transparent); }
 .pd-wreset { position: absolute; inset: 0; border: 0; background: transparent; cursor: pointer; border-radius: 18px; }
 .pd-wreset:focus-visible { outline: 3px solid var(--pd-pri); outline-offset: -3px; }
@@ -641,3 +644,22 @@ div.pd-me-dog { cursor: default; }
 /* rounds hold their shape (audit 2026-10-29): the stem keeps room for three lines, the hold one height whatever it says */
 .pd-stem { min-height: 4.2em; }
 .pd-hold-in { min-height: 180px; justify-content: center; }
+
+/* the explanation between rounds: the verdict, why not your pick, why the answer is right; scrolls inside a card if long */
+.pd-why { place-items: stretch; gap: 8px; padding: 12px 14px; border-radius: 14px; background: var(--pd-card); border: 2px solid var(--pd-line); text-align: left; max-height: 34vh; overflow-y: auto; overscroll-behavior: contain; }
+.pd-why .pd-pts { text-align: center; font-size: 18px; }
+.pd-whynot { font-size: 14px; line-height: 1.45; color: var(--pd-warn); }
+.pd-whytext { font-size: 14.5px; line-height: 1.5; color: var(--pd-ink); }
+
+/* a crossed-out option (held press): still pickable, but faded and struck */
+.pd-opt.pd-struck:not(.pd-right) span { text-decoration: line-through; text-decoration-thickness: 2px; opacity: .45; }
+.pd-opt.pd-struck kbd { opacity: .45; }
+.pd-opt { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+@media (max-width: 599px) { .pd-sheet { touch-action: pan-y; } .pd-sheet::before { content: ''; display: block; width: 40px; height: 5px; margin: -14px auto 0; border-radius: 3px; background: var(--pd-line2); flex: none; } }
+
+/* Today's metric toggle: Questions or Time */
+.pd-metric { display: flex; gap: 6px; justify-content: center; margin: 8px 0 2px; }
+.pd-metric[hidden] { display: none; }
+.pd-metric button { height: 32px; padding: 0 14px; border-radius: 999px; border: 2px solid var(--pd-line); background: none; color: var(--pd-mute); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s, transform .15s; }
+.pd-metric button[aria-checked="true"] { background: var(--pd-ink); border-color: var(--pd-ink); color: var(--pd-bg, #111); }
+.pd-metric button:active { transform: scale(.96); }

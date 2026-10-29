@@ -31,7 +31,8 @@ export function localTransport({ key = 'pup-duel.local', storage = globalThis.lo
     outfits: (me, list) => run(s => s.outfits(me.token, list)),
     queue: (me, setup) => run(s => s.queue(me.token, setup)),
     unqueue: me => run(s => s.unqueue(me.token)),
-    leaderboard: me => run(s => s.leaderboard(me.token)),
+    leaderboard: (me, day) => run(s => s.leaderboard(me.token, day)),
+    studyLog: (me, answered, secs, day) => run(s => s.studyLog(me.token, answered, secs, day)),
     live: BC ? (topic, onMsg) => {
       const bc = new BC(`${key}:${topic}`);   // a BroadcastChannel never hears itself: self: false
       bc.onmessage = e => onMsg(e.data);

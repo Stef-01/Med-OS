@@ -22,7 +22,12 @@ export const EYE_SHAPES = [
   { id: 'heart', name: 'Heart' },
   { id: 'anime', name: 'Anime' },
   { id: 'diamond', name: 'Diamond' },
-  { id: 'swirl', name: 'Swirl' }
+  { id: 'swirl', name: 'Swirl' },
+  { id: 'flower', name: 'Flower' },
+  { id: 'moon', name: 'Moon' },
+  { id: 'twinkle', name: 'Twinkle' },
+  { id: 'pixel', name: 'Pixel' },
+  { id: 'ring', name: 'Ring' }
 ];
 export const IRISES = [
   { id: '', name: 'Its own', hex: '' },
@@ -36,7 +41,11 @@ export const IRISES = [
   { id: 'violet', name: 'Violet', hex: '#9b6bdf', deep: '#3b1f66', light: '#bf9cef' },
   { id: 'pink', name: 'Pink', hex: '#ef6fa8', deep: '#6e1e44', light: '#f7a0c8' },
   { id: 'red', name: 'Red', hex: '#e04848', deep: '#5e1414', light: '#f07a7a' },
-  { id: 'silver', name: 'Silver', hex: '#b8c4d2', deep: '#4a5668', light: '#e6edf5' }
+  { id: 'silver', name: 'Silver', hex: '#b8c4d2', deep: '#4a5668', light: '#e6edf5' },
+  { id: 'hazel', name: 'Hazel', hex: '#9a7b3c', deep: '#4a3510', light: '#c4a564' },
+  { id: 'mint', name: 'Mint', hex: '#5fd3a0', deep: '#1d6048', light: '#a6efcf' },
+  { id: 'coral', name: 'Coral', hex: '#ff7a5c', deep: '#6e2414', light: '#ffb19e' },
+  { id: 'navy', name: 'Navy', hex: '#3a5bb8', deep: '#0f1d47', light: '#7c96e0' }
 ];
 /* the style of every face (founder 2026-10-26: "like how littlest pet shop style is ... save old style seperately"):
    lps, big glossy eyes that are mostly iris, a dark liner on the lid and flicked lashes, each dog its own eye colour;
@@ -113,6 +122,23 @@ export function pupilMarkup(shape, iris, ink, cx, side) {
     case 'star':
       return (col ? irisEye(cx, cy, 5.7, 5.7, iris, ink, 0) : '') +
         `<path d="${star(cx, cy + 0.4, col ? 4.2 : 6.2, 0.45)}" fill="${ink}"/>` + hi(hx + 0.6, cy - 2.4, 1.1);
+    case 'flower':   // five round petals for a pupil (the eye's deep colour, or ink) round a light heart
+      return (col ? irisEye(cx, cy, 5.7, 7.6, iris, ink, 0) : '') +
+        [0, 72, 144, 216, 288].map(a => `<circle cx="${r(cx + 2.9 * Math.sin(a * Math.PI / 180))}" cy="${r(cy - 2.9 * Math.cos(a * Math.PI / 180))}" r="2.5" fill="${col ? iris.deep : ink}"/>`).join('') +
+        `<circle cx="${r(cx)}" cy="${cy}" r="1.9" fill="${col ? iris.light : '#fff'}"/>`;
+    case 'moon':   // a crescent for a pupil
+      return (col ? irisEye(cx, cy, 5.7, 7.6, iris, ink, 0) : '') +
+        `<path d="M${r(cx + 1.6)} ${r(cy - 5.6)} A5.6 5.6 0 1 0 ${r(cx + 1.6)} ${r(cy + 5.6)} A2.2 5.6 0 0 1 ${r(cx + 1.6)} ${r(cy - 5.6)} Z" fill="${ink}"/>` + hi(cx - 2.6, cy - 2.4, 1.2);
+    case 'twinkle':   // a four-point glint for a pupil
+      return (col ? irisEye(cx, cy, 5.7, 7.6, iris, ink, 0) : '') +
+        `<path d="M${r(cx)} ${r(cy - 7)} Q${r(cx + 1)} ${r(cy - 1)} ${r(cx + 5.2)} ${r(cy)} Q${r(cx + 1)} ${r(cy + 1)} ${r(cx)} ${r(cy + 7)} Q${r(cx - 1)} ${r(cy + 1)} ${r(cx - 5.2)} ${r(cy)} Q${r(cx - 1)} ${r(cy - 1)} ${r(cx)} ${r(cy - 7)} Z" fill="${ink}"/>` + hi(cx + 2.6, cy - 3.6, 1.1);
+    case 'pixel': {   // a square pupil and a square catch-light: an eight-bit dog
+      const k = col ? 2.4 : 4.6;
+      return (col ? `<rect x="${r(cx - 5.4)}" y="${r(cy - 5.4)}" width="10.8" height="10.8" rx="1" fill="${iris.deep}"/><rect x="${r(cx - 4.2)}" y="${r(cy - 4.2)}" width="8.4" height="8.4" rx="0.6" fill="${iris.hex}"/>` : '') +
+        `<rect x="${r(cx - k)}" y="${r(cy - k)}" width="${2 * k}" height="${2 * k}" rx="0.6" fill="${ink}"/><rect x="${r(cx - 3.6)}" y="${r(cy - 3.6)}" width="2.4" height="2.4" fill="#fff"/>`;
+    }
+    case 'ring':   // a hollow ring: the colour (or the white) shows through the pupil
+      return `<circle cx="${r(cx)}" cy="${cy}" r="4.4" fill="${col ? iris.hex : '#fff'}" stroke="${col ? iris.deep : ink}" stroke-width="2.6"/>` + hi(cx - 1.6, cy - 1.6, 1.2);
     default:   // classic and Its own: the tall pill; coloured, a tall iris
       return (col ? irisEye(cx, cy, 5.7, 8, iris, ink, 0.52) : `<rect x="${r(cx - 5.7)}" y="-40" width="11.4" height="16" rx="5.7" fill="${ink}"/>`) +
         hi(hx, -35.8, 2.2);

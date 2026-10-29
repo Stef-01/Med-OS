@@ -44,7 +44,8 @@ export function memoryNet({ server = createServer(), latency = 0, drop = 0, seed
       outfits: (me, list) => call('outfits')(me.token, list),
       queue: (me, setup) => call('queue')(me.token, setup),
       unqueue: me => call('unqueue')(me.token),
-      leaderboard: me => call('leaderboard')(me.token),
+      leaderboard: (me, day) => call('leaderboard')(me.token, day),
+      studyLog: (me, answered, secs, day) => call('studyLog')(me.token, answered, secs, day),
       live(topic, onMsg) {
         if (!topics.has(topic)) topics.set(topic, new Set());
         const subs = topics.get(topic), sub = { cid, onMsg };

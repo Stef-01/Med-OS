@@ -805,6 +805,53 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
   await plc.waitForSelector('.os-duel .pd-sheet [data-pd="choose"]');
   ok(/Rotation/.test(await plc.textContent('.os-duel .pd-sheet [aria-pressed="true"], .os-duel .pd-sheet .on, .os-duel .pd-sheet [aria-checked="true"]')), 'placement: the duel starts on My placement (Rotation)');
   await plc.waitForTimeout(400); await plc.screenshot({ path: path.join(SHOTS, 'duel-placement.png') });
+  /* the Rotation deck serves only the placement's disciplines, and it is every bank question in them */
+  const plDeck = await plc.evaluate(async () => {
+    const { normPack } = await import('./js/vendor/pup-duel/duel/pack.mjs'), { disciplineOf } = await import('./js/study-kit/vocab.mjs');
+    const bank = await (await fetch('./duel/pack.json')).json(), inPl = q => (q.topics || [q.topic]).some(t => ['og', 'paeds'].includes(disciplineOf(t)) && t);
+    const decks = await (await import('./js/osce/duel.mjs')).packDecks(), place = decks.find(d => d.id === 'place');
+    return { n: place?.count || 0, want: bank.questions.filter(inPl).length };
+  });
+  ok(plDeck.n > 0 && plDeck.n === plDeck.want, `placement: the Rotation deck is every O&G and Paeds bank question (${plDeck.n} of ${plDeck.want})`);
+  /* after a reload (it persists): Start says the placement, with Change one tap away */
+  await plc.reload({ waitUntil: 'networkidle' }); await plc.waitForSelector('.os[data-ready]');
+  ok(/On placement: Paeds \+ O&G/.test(await plc.textContent('.os-run .os-place')), 'placement: Start names it after a reload');
+  /* Study: Rotation is a mode with exactly its questions, and Today's new cards are the rotation's */
+  await plc.click('.os-start [data-os="lib"]'); await plc.waitForSelector('.os-lib [data-lib="mode"][data-m="place"]');
+  ok(/Rotation: Paeds \+ O&G/.test(await plc.textContent('[data-lib="mode"][data-m="place"]')), 'placement: Study offers a Rotation mode');
+  const topicsOf = () => plc.evaluate(async () => { const { V } = await import('./js/osce/library-view.mjs'); return V.st.q.map(x => x.item.topic); });
+  const PL = ['Paediatrics', 'Neonatology', 'Obstetrics', 'Gynaecology', 'Sexual Health'];
+  await plc.click('[data-lib="mode"][data-m="place"]'); await plc.waitForSelector('.os-libopt, .os-lib [data-lib="opt"]');
+  const rq = await topicsOf();
+  ok(rq.length > 0 && rq.every(t => PL.includes(t)), `placement: a Rotation session is only O&G and Paeds (${rq.length} cards)`);
+  await plc.keyboard.press('Escape'); await plc.waitForTimeout(300);
+  if (await plc.locator('.os-lib').count()) { await plc.keyboard.press('Escape'); await plc.waitForTimeout(300); }
+  await plc.reload({ waitUntil: 'networkidle' }); await plc.waitForSelector('.os[data-ready]');
+  await plc.click('.os-start [data-os="lib"]'); await plc.waitForSelector('.os-lib [data-lib="today"]');
+  if (await plc.locator('[data-lib="resume"]').count()) ok(true, 'placement: (a session to resume)');
+  await plc.click('[data-lib="today"]'); await plc.waitForTimeout(400);
+  const tq = await topicsOf();
+  ok(tq.length > 0 && tq.every(t => PL.includes(t)), `placement: Today's new cards are the rotation's first (${tq.length} cards)`);
+  await plc.reload({ waitUntil: 'networkidle' }); await plc.waitForSelector('.os[data-ready]');
+  /* Change: one tap opens Settings on the placement; dropping Paeds updates Fast Run, Start and the duel at once */
+  await plc.click('.os-run [data-os="place"]'); await plc.waitForSelector('.os-placechip');
+  ok(await plc.evaluate(() => document.activeElement?.classList.contains('os-placechip')), 'placement: Change lands on the placement chips');
+  await plc.click('[data-place="paeds"]'); await plc.keyboard.press('Escape'); await plc.waitForTimeout(300);
+  const rots2 = await plc.evaluate(() => [...document.querySelectorAll('.os-rots [data-disc][aria-pressed="true"]')].map(b => b.dataset.disc).join(','));
+  ok(rots2 === 'og' && /On placement: O&G/.test(await plc.textContent('.os-run .os-place')), `placement: changing it updates Fast Run and Start without a reload (${rots2})`);
+  ok(JSON.parse(await plc.evaluate(() => localStorage.getItem('osce.duel:pick'))).deck === 'place', 'placement: the duel is back on Rotation after a change');
+  /* a pick made in Fast Run afterwards is kept (the placement only starts it) */
+  await plc.click('.os-rots [data-disc="ed"]'); await plc.reload({ waitUntil: 'networkidle' }); await plc.waitForSelector('.os[data-ready]');
+  ok((await plc.evaluate(() => [...document.querySelectorAll('.os-rots [data-disc][aria-pressed="true"]')].map(b => b.dataset.disc).join(','))) === 'og,ed', 'placement: a Fast Run pick made after it is kept');
+  /* a placement synced from another device: the duel starts on it the first time it opens there */
+  ok(await plc.evaluate(async () => { localStorage.removeItem('osce.duel:placed'); localStorage.setItem('osce.duel:pick', '{"deck":"bank"}'); (await import('./js/osce/duel.mjs')).placePick(); return JSON.parse(localStorage.getItem('osce.duel:pick')).deck === 'place'; }), 'placement: a synced placement starts the duel on Rotation');
+  /* cleared: everything goes back, at once */
+  await plc.click('.os-run [data-os="place"]'); await plc.waitForSelector('.os-placechip'); await plc.click('[data-place="og"]'); await plc.keyboard.press('Escape'); await plc.waitForTimeout(300);
+  ok(/Set your placement/.test(await plc.textContent('.os-run .os-place')) && !(await plc.locator('.os-rots [data-disc][aria-pressed="true"]').count())
+    && JSON.parse(await plc.evaluate(() => localStorage.getItem('osce.duel:pick'))).deck === '', 'placement: clearing it clears Fast Run, Start and the duel');
+  await plc.click('.os-start [data-os="lib"]'); await plc.waitForSelector('.os-lib [data-lib="today"]');
+  ok(!(await plc.locator('[data-lib="mode"][data-m="place"]').count()), 'placement: no Rotation mode without one');
+  ok(await plc.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'placement: Start and Study fit 320 px');
   /* a bank question published without an explanation: after the duel, the review says the one it shows is AI-written */
   const aiq = n => ({ id: `medqa-e2e-${n}`, stem: `Question ${n}: a 35-year-old man has itchy, watery eyes and sneezing each spring. What is the most appropriate treatment?`, options: ['Erythromycin ointment', 'Ketotifen eye drops', 'Warm compresses', 'Fluorometholone eye drops'], answer: 1, why: 'Seasonal allergic conjunctivitis: a topical antihistamine and mast cell stabiliser is first line.', whyBy: 'ai', topic: 'Ophthalmology', cat: 'clinical', origin: 'human', source: 'usmle-resource', year: 3, difficulty: 1 });
   const rv = await phone(320, 640, {});

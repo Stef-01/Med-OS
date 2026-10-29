@@ -29,7 +29,7 @@ export const TABLE = 'osce_state';
 const obj = v => (v && typeof v === 'object' && !Array.isArray(v) ? v : null);
 const STAMPS = 'osce.sync.v1';          /* { ns: { shardId: updated_at } } — what this device last agreed with the server on */
 export const SPEC = {
-  osce: { ls: 'osce.practice.v1', perId: ['hist', 'bm', 'req'], whole: ['timing', 'people', 'games'], mine: ['games'], derive: osceAtt },   /* mine: a shard that travels only on your own account (signed out, the shared record is everyone's, so one person's game switch would turn it off for the rest) */
+  osce: { ls: 'osce.practice.v1', perId: ['hist', 'bm', 'req'], whole: ['timing', 'people', 'games', 'placement'], mine: ['games', 'placement'], derive: osceAtt },   /* mine: a shard that travels only on your own account (signed out, the shared record is everyone's, so one person's game switch would turn it off for the rest) */
   lib: { ls: 'osce.libstudy.v1', perId: ['card'], whole: ['day', 'days', 'wrap', 'pref'], mine: ['days', 'wrap', 'pref'] },   /* days: the answer log your gaps and Wrapped read (library/stats.mjs); wrap: the months already shown; both on your own account only */   /* Study over your questions (library/sched.mjs): a card per question, and today's new-card count */   /* games: which games Start shows (Settings) */   /* req/<id>: a case request, which the case writer's pipeline reads and answers */
 };
 /* the start view's count reads mem.att (one key per attempted station); osce/state.mjs rebuilds it with scores on every

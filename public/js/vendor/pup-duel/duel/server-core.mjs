@@ -33,7 +33,10 @@ const hex = buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, 
 /* bcrypt in Postgres; salted SHA-256 here (local play only: the hash never leaves the device) */
 export const sha256 = async text => hex(await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
 
-export const emptyDb = () => ({ players: {}, duels: {}, events: [], n: 0, fails: [] });
+export const emptyDb = () => ({ players: {}, duels: {}, events: [], n: 0, fails: [], study: {} });
+/* a day of study (0006_pup_study.sql): a call adds at most callQ questions and callSecs seconds, a day holds at most dayQ and daySecs */
+export const STUDY = { callQ: 200, callSecs: 900, dayQ: 3000, daySecs: 86400 };
+const clampInt = (v, lo, hi) => Math.max(lo, Math.min(hi, Math.floor(Number(v) || 0)));
 
 /* the duel as the log says it stands: the same fold the phones run (core.reduce), as pup_outcome() in Postgres.
    The server keeps the status and the record from this, never from what a phone claims */
@@ -53,6 +56,9 @@ const duelRow = d => ({ id: d.id, a: d.a, b: d.b, status: d.status, setup: d.set
 
 /* the server: every method is the SQL function of the same name (pup_<name>) */
 export function createServer({ db = emptyDb(), now = () => new Date().toISOString(), digest = sha256 } = {}) {
+  db.study ||= {};
+  /* the player's own date when it is within a day of the server's (pup_day), else the server's */
+  const dayAt = d => { const t = dayOf(now()); return typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d) && Math.abs(Date.parse(d) - Date.parse(t)) <= 864e5 ? d : t; };
   db.fails ||= [];
   const hashPin = async (pin, salt = hex(globalThis.crypto.getRandomValues(new Uint8Array(8)).buffer)) => `${salt}$${await digest(`${salt}:${pin}`)}`;
   const pinOk = async (pin, stored) => (await hashPin(pin, stored.split('$')[0])) === stored;
@@ -194,12 +200,21 @@ export function createServer({ db = emptyDb(), now = () => new Date().toISOStrin
     },
     async unqueue(token) { const p = me(token); db.queue = (db.queue || []).filter(q => q.player !== p.id); return { queued: false }; },
     /* everyone on the ladder, with their wins this week and this month */
-    async leaderboard(token) {
+    async leaderboard(token, day) {
       seen(me(token));
-      /* wins in the last 7 and 30 days (0004_pup_ladder.sql); all time is the rating and the record */
-      const at = Date.parse(now()), done = Object.values(db.duels).filter(d => d.status === 'done');
+      /* wins in the last 7 and 30 days (0004_pup_ladder.sql); all time is the rating and the record; a day of study and
+         the best day (0006_pup_study.sql) */
+      const at = Date.parse(now()), done = Object.values(db.duels).filter(d => d.status === 'done'), dd = dayAt(day);
       const won = (p, days) => done.filter(d => d.result?.winner === p.id && Date.parse(d.updated_at) > at - days * 864e5).length;
-      return Object.values(db.players).map(p => ({ ...board(p), week: won(p, 7), month: won(p, 30) }));
+      const days = p => Object.values(db.study[p.id] || {}), on = p => db.study[p.id]?.[dd] || { answered: 0, secs: 0 };
+      return Object.values(db.players).map(p => ({ ...board(p), week: won(p, 7), month: won(p, 30), qday: on(p).answered, tday: on(p).secs,
+        qbest: Math.max(0, ...days(p).map(x => x.answered)), tbest: Math.max(0, ...days(p).map(x => x.secs)) }));
+    },
+    async studyLog(token, answered, secs, day) {
+      const p = me(token), dd = dayAt(day), k = (db.study[p.id] ||= {}), r = (k[dd] ||= { answered: 0, secs: 0 });
+      r.answered = Math.min(STUDY.dayQ, r.answered + clampInt(answered, 0, STUDY.callQ));
+      r.secs = Math.min(STUDY.daySecs, r.secs + clampInt(secs, 0, STUDY.callSecs));
+      return { day: dd, ...r };
     },
     async log(token, duel, after = 0) {
       const p = me(token), d = db.duels[duel];

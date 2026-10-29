@@ -1,8 +1,8 @@
 {
   "name": "pup-duel",
   "version": "0.1.0",
-  "commit": "363ec835dd16779d4c79e74d8e7f9521e98fc335",
-  "vendoredAt": "2026-10-29T09:24:04.246Z",
+  "commit": "d7d9bd9750e42e715a87b7f5465f07656b701700",
+  "vendoredAt": "2026-10-29T11:09:42.703Z",
   "migration": {
     "file": "supabase/migrations/0001_pup_duel.sql",
     "sha": "e56d1214cee93f99"
@@ -14,7 +14,7 @@
     },
     {
       "file": "supabase/migrations/0002_pup_shop.sql",
-      "sha": "613d4742f1fb541d"
+      "sha": "829c5fdd8754214f"
     },
     {
       "file": "supabase/migrations/0003_pup_ranked.sql",
@@ -23,24 +23,32 @@
     {
       "file": "supabase/migrations/0004_pup_ladder.sql",
       "sha": "000c951b9ef1f220"
+    },
+    {
+      "file": "supabase/migrations/0005_pup_practice_streak.sql",
+      "sha": "f1e14413a1438891"
+    },
+    {
+      "file": "supabase/migrations/0006_pup_study.sql",
+      "sha": "176e7e707fff8989"
     }
   ],
   "files": {
     "duel/accounts.mjs": "676709fe75c3508a",
     "duel/bot.mjs": "beb869f883620b6d",
-    "duel/core.mjs": "14d38a37c870282a",
+    "duel/core.mjs": "9cb6df39d91801ce",
     "duel/lobby.mjs": "c14da4e110c2e0b4",
     "duel/locker.mjs": "51f7f4b6e71aad77",
-    "duel/pack.mjs": "555bc9a8e01de12d",
+    "duel/pack.mjs": "860d1a41b831280f",
     "duel/ranked.mjs": "32e1714ebb96cca6",
     "duel/realtime.mjs": "c34fcfc8a1ae8843",
     "duel/rng.mjs": "ec881a104ffe0588",
-    "duel/server-core.mjs": "84de0c49109173c2",
+    "duel/server-core.mjs": "b90d38c78e1798f2",
     "duel/session.mjs": "0df3549f8e01b0c7",
-    "duel/shop.mjs": "55e498ab8206a092",
-    "duel/transport-local.mjs": "18a4e5806f850368",
-    "duel/transport-memory.mjs": "d287d28695b7476c",
-    "duel/transport-supabase.mjs": "abd5368e608a10ad",
+    "duel/shop.mjs": "8c7a58dadb17a793",
+    "duel/transport-local.mjs": "d6a577c44c595906",
+    "duel/transport-memory.mjs": "36940887bc1df042",
+    "duel/transport-supabase.mjs": "6ba637a2699d66bc",
     "engine/LICENSE": "516bc5dc1560ba43",
     "engine/core/action-creators.mjs": "dec4770e1b48e2a0",
     "engine/core/action-types.mjs": "8eaa44e52232dde6",
@@ -69,7 +77,7 @@
     "pup/rig/breeds.mjs": "06d2840b82aeba7d",
     "pup/rig/coats.mjs": "234b1435a6fab2f1",
     "pup/rig/expressions.mjs": "c927096c8bb5c8e9",
-    "pup/rig/eyes.mjs": "ea64b32c5429e409",
+    "pup/rig/eyes.mjs": "d0af154bcf26c06f",
     "pup/rig/gifts.mjs": "8d42292b1c0606d6",
     "pup/rig/icons/archie.png": "6266644188588998",
     "pup/rig/icons/bagel.png": "21d25e6fdfeaa235",
@@ -136,11 +144,11 @@
     "pup/rig/rig.mjs": "c7ff7b9117c3d9a4",
     "pup/rig/stage.mjs": "5d97876e38459ab6",
     "pup/rig/still.mjs": "e5089c92c4ee67ba",
-    "pup/wardrobe.mjs": "393266505fac50db",
-    "ui/duel.css": "e7a02b3d1e0cfffb",
-    "ui/duel.mjs": "57c0ecda5071daf1",
+    "pup/wardrobe.mjs": "80e3c35c614138a1",
+    "ui/duel.css": "f51dac260ee90fc2",
+    "ui/duel.mjs": "8af5cb83206b5752",
     "ui/icons.mjs": "eb006c95a8217047",
-    "ui/ranked.mjs": "637c0b176944880d",
-    "ui/shop.mjs": "31031b56f3e0afca"
+    "ui/ranked.mjs": "0b4c43393ded5d21",
+    "ui/shop.mjs": "795eb80101117ce8"
   }
 }

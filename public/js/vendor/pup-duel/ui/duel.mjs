@@ -30,7 +30,7 @@ import { ITEMS, wearMsg, itemOf, movesOf } from '../pup/wardrobe.mjs';
 import { still, lookDog } from '../pup/rig/still.mjs';
 import { icon } from './icons.mjs';
 import { openWardrobe } from './shop.mjs';
-import { rankCard, openSearch, openLadder, lobbyBoard } from './ranked.mjs';
+import { rankCard, openSearch, openLadder, lobbyBoard, localDay } from './ranked.mjs';
 import { rankChange } from '../duel/ranked.mjs';
 
 const BASE = new URL('../', import.meta.url);
@@ -406,9 +406,37 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     /* the scrim ignores taps for a moment: a double tap on what opened the sheet must not close it (and cancel a search) */
     el.querySelectorAll('[data-pd="shut"]').forEach(b => b.addEventListener('click', () => { if (b.classList.contains('pd-scrim') && Date.now() - Number(el.dataset.at) < 350) return; closeSheet(); }));
     wire(el.querySelector('.pd-sheet'));
+    dragToClose(el.querySelector('.pd-sheet'));
     /* the focus goes in: the first control that is not Close, else Close (the review has nothing else; the evals found
        it opening with the focus left behind it) */
     (el.querySelector('.pd-sheet button:not([data-pd="shut"]), .pd-sheet select') || el.querySelector('.pd-sheet button'))?.focus({ preventScroll: true });
+  }
+  /* gestures (founder 2026-10-29: "have more gesture options"): a phone's sheet follows a finger down from its top and
+     closes past a third of its height or on a flick; a press held on an option crosses it out (a second hold brings it
+     back), so a player can rule answers out as on paper */
+  function dragToClose(sh) {
+    if (!sh || typeof matchMedia !== 'function' || !matchMedia('(max-width: 599px)').matches) return;
+    let y0 = null, t0 = 0, dy = 0;
+    sh.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' || sh.scrollTop > 0 || e.target.closest('input, textarea, select, .pd-scroll-x')) return; y0 = e.clientY; t0 = performance.now(); dy = 0; });
+    sh.addEventListener('pointermove', e => {
+      if (y0 == null) return;
+      dy = Math.max(0, e.clientY - y0);
+      if (dy > 6) { sh.style.transition = 'none'; sh.style.animation = 'none'; sh.style.transform = `translateY(${dy}px)`; }
+    });
+    const end = () => {
+      if (y0 == null) return;
+      const v = dy / Math.max(1, performance.now() - t0); y0 = null;
+      if (dy > sh.offsetHeight / 3 || (dy > 40 && v > 0.6)) { closeSheet(); if (!S.sheet || !S.sheet.contains(sh)) { sh.style.transition = 'transform .2s cubic-bezier(.4,0,1,1)'; sh.style.transform = 'translateY(100%)'; return; } }
+      sh.style.transition = 'transform .35s cubic-bezier(.22,1,.36,1)'; sh.style.transform = '';
+    };
+    sh.addEventListener('pointerup', end); sh.addEventListener('pointercancel', end);
+  }
+  function strikeOnHold(b) {
+    let t = 0;
+    const off = () => clearTimeout(t);
+    b.addEventListener('pointerdown', () => { off(); t = setTimeout(() => { if (b.disabled) return; b.dataset.held = '1'; b.classList.toggle('pd-struck'); try { navigator.vibrate?.(8); } catch {} }, 450); });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(k => b.addEventListener(k, off));
+    b.addEventListener('contextmenu', e => e.preventDefault());
   }
   /* a sheet may hold its close (the wardrobe, with a look not saved, asks first); `force` closes it whatever it says */
   function closeSheet(force = false) {
@@ -546,7 +574,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   /* the ladder (ranked.mjs): read when the lobby opens and after a ranked duel; null on a backend without it */
   async function loadBoard() {
     if (!transport?.leaderboard || !S.me) return null;
-    try { S.board = await transport.leaderboard(S.me); S.boardErr = ''; } catch (e) { S.boardErr = `Can't load the leaderboard. ${e.server ? e.message : 'Retrying when the lobby opens.'}`; S.lboard?.paint(); }
+    try { S.board = await transport.leaderboard(S.me, localDay()); S.boardErr = ''; } catch (e) { S.boardErr = `Can't load the leaderboard. ${e.server ? e.message : 'Retrying when the lobby opens.'}`; S.lboard?.paint(); }
     if (S.screen === 'lobby') paintLobby();
     return S.board;
   }
@@ -775,7 +803,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
           const b = document.createElement('button'); b.type = 'button'; b.className = 'pd-opt'; b.dataset.i = i;
           b.innerHTML = '<kbd></kbd><span></span><em class="pd-who"></em>';
           b.querySelector('kbd').textContent = LETTERS[i]; b.querySelector('span').textContent = o;
-          b.addEventListener('click', () => pick(i));
+          b.addEventListener('click', e => { if (b.dataset.held) { delete b.dataset.held; e.preventDefault(); return; } pick(i); });
+          strikeOnHold(b);
           return b;
         }));
         shell.querySelector('.pd-why').hidden = true;
@@ -799,10 +828,16 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         const a = R.answers[me], b = R.answers[opp], opts = shell.querySelectorAll('.pd-opt');
         /* who picked what: each dog's face on its option */
         for (const [k, ans] of [['me', a], ['them', b]]) { const o = opts[ans?.choice]; if (o && ans.choice !== null) o.querySelector('.pd-who').append(M.faces[k]); else M.faces[k].remove(); }
-        why.innerHTML = '<p class="pd-pts"></p>';
+        /* the reading comes back between rounds (founder 2026-10-29: "go back to previous question style in dual system
+           where the explanation is shown after you answer, previous system was much better"): the verdict, why your pick
+           was wrong when the bank says, and why the answer is right */
+        const note = a && !a.ok && a.choice != null ? q.notes?.[a.choice] : '';
+        why.innerHTML = `<p class="pd-pts"></p>${note ? '<p class="pd-whynot"></p>' : ''}${q.why ? '<p class="pd-whytext"></p>' : ''}`;
         const pts = why.querySelector('.pd-pts');
-        pts.textContent = a?.ok ? `+${fmt(a.pts)}` : a && a.choice != null ? 'Wrong' : 'Too slow';
+        pts.textContent = a?.ok ? `Right! +${fmt(a.pts)}` : a && a.choice != null ? `Not this time · ${LETTERS[q.answer]}` : `Out of time · ${LETTERS[q.answer]}`;
         pts.classList.toggle('pd-good', !!a?.ok);
+        if (note) why.querySelector('.pd-whynot').textContent = `Why not ${LETTERS[a.choice]}: ${note}`;
+        if (q.why) why.querySelector('.pd-whytext').textContent = q.why;
         why.hidden = false;
         S.dogs.me.expr(a?.ok ? EXPR.right : EXPR.wrong); S.dogs.them.expr(b?.ok ? EXPR.right : EXPR.wrong);
         if (a?.ok) S.dogs.me.tap();
@@ -916,7 +951,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     if (!M.reported) { M.reported = true; try { onResult({ outcome: out, score: st.score[me], theirs: st.score[opp], right: st.right[me], rounds: st.rounds.length, practice: M.practice, reason: st.reason }); } catch { /* the host's */ } }
   }
   /* what the duel paid, under the score: the server pays a mate's duel when it ends (read back from the wallet);
-     practice is paid here, a bone a right answer up to the day's cap */
+     practice is paid here, a bone a right answer, times the day's streak (no cap) */
   async function earned(M, st, me, res) {
     if (hostLook || !S.me || !transport?.wallet || M.paid) return;
     M.paid = true;

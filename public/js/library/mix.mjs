@@ -28,7 +28,7 @@ export function placePack(pack, specs = [], name = '') {
   const on = new Set(specs), qs = pack.questions.filter(q => q.deck === 'bank' && (q.topics || [q.topic]).some(t => on.has(t)));
   if (!qs.length) return pack;
   return { ...pack, questions: [...qs.map(q => ({ ...q, id: `pl-${q.id}`, deck: 'place' })), ...pack.questions],
-    decks: [{ id: 'place', label: `My placement${name ? `: ${name}` : ''}`.slice(0, 60), short: 'Rotation' }, ...(pack.decks || [])] };
+    decks: [{ id: 'place', label: `My placement${name ? `: ${name}` : ''}`.slice(0, 60), short: 'Rotation', mix: false }, ...(pack.decks || [])] };
 }
 export function mixPack(bank, mine = [], friends = []) {
   const qs = [...(bank?.questions || []).map(q => ({ ...q, deck: 'bank' }))], seen = new Set(qs.map(q => q.id));

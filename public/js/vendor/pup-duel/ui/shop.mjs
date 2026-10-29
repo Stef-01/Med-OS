@@ -22,7 +22,7 @@ import { EYE_SHAPES, IRISES, BLUSH, STYLES } from '../pup/rig/eyes.mjs';
 import { MOVES } from '../pup/rig/moves.mjs';
 import { DOGS } from '../duel/accounts.mjs';
 import { shown } from '../pup/rig/gifts.mjs';
-import { PAY, PER_RIGHT, PRACTICE_CAP, OUTFITS, NAME_MAX, WHY, stateOf, winsAway, collection, fitWear, outfitName } from '../duel/shop.mjs';
+import { PAY, PER_RIGHT, streakOf, OUTFITS, NAME_MAX, WHY, stateOf, winsAway, collection, fitWear, outfitName } from '../duel/shop.mjs';
 import { icon } from './icons.mjs';
 
 /* the duel sells what a player can earn: the monthly laurel is Optimus's to give */
@@ -183,13 +183,14 @@ export function openWardrobe(ctx) {
           <div><dt>${icon('zap')}Draw</dt><dd>${PAY.draw}</dd></div>
           <div><dt>${icon('check')}Finish a duel</dt><dd>${PAY.loss}</dd></div>
           <div><dt>${icon('star')}Each right answer</dt><dd>+${PER_RIGHT}</dd></div>
-          <div><dt>${icon('bot')}Practice with Rex</dt><dd>${practiceLeft()} left today</dd></div>
+          <div><dt>${icon('bot')}Practice with Rex</dt><dd>×${practiceStreak().toFixed(1).replace(/\.0$/, '')} next game</dd></div>
         </dl>
         ${W.ledger.length ? `<h3 class="pd-h3">Recent</h3><ul class="pd-ledger">${W.ledger.slice(0, 6).map(l => `<li><span>${esc(WHY[l.why] || l.why)}</span><b data-sign="${l.d < 0 ? '-' : '+'}">${l.d < 0 ? '−' : '+'}${Math.abs(l.d)}</b></li>`).join('')}</ul>` : ''}
       </section>`;
   }
   /* the server counts practice bones by the UTC day (0002_pup_shop.sql pup_practice), so this does too */
-  function practiceLeft() { return PRACTICE_CAP - (W.practice?.day === new Date().toISOString().slice(0, 10) ? W.practice.got : 0); }
+  /* the next practice game's multiplier: it grows with each game played today (no cap on the day) */
+  function practiceStreak() { return streakOf(W.practice?.day === new Date().toISOString().slice(0, 10) ? W.practice.n : 0); }
   function tile(it) {
     const price = priceToday(it.id, V.day), st = stateOf(it, W, cur.wear, price), deal = sh().deal === it.id && !owns(it.id);
     const tag = st === 'equipped' ? `<span class="pd-tag pd-t-on">On</span>` : deal ? `<span class="pd-tag pd-t-deal">−${Math.round(DEAL_OFF * 100)}%</span>` : isNew(it, V.day) && !owns(it.id) ? '<span class="pd-tag pd-t-new">New</span>' : '';

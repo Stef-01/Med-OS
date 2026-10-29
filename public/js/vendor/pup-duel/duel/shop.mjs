@@ -5,7 +5,7 @@
    pieces a look may wear, and saved outfits. Pure. The same rules run in Postgres (supabase/migrations/0002_pup_shop.sql)
    and in server-core.mjs, pinned by test/shop.test.mjs.
 
-   wallet  { bones, owned: [id], outfits: [look and its name], ledger: [{ d, why, at }], practice: { day, got } } */
+   wallet  { bones, owned: [id], outfits: [look and its name], ledger: [{ d, why, at }], practice: { day, got, n } } */
 
 import { lockerFor } from './locker.mjs';
 
@@ -14,8 +14,11 @@ export const WELCOME = 25;
    gets nothing; a forfeit (three timeouts) pays the loser only their right answers */
 export const PAY = { win: 12, draw: 8, loss: 5 };
 export const PER_RIGHT = 1;
-/* practice against Rex pays a bone a right answer, up to 15 a day: a bot is not a mate */
-export const PRACTICE_CAP = 15;
+/* practice against Rex has no daily cap (founder 2026-10-29: "make the bones reward for AI unlimited per day and you get
+   more the more you play for the day"): a bone a right answer, times a streak that grows with each game played that day,
+   STREAK_STEP more per game up to STREAK_MAX; a game counts at most MAX_RIGHT right answers */
+export const STREAK_STEP = 0.2, STREAK_MAX = 3, MAX_RIGHT = 15;
+export const streakOf = n => Math.min(STREAK_MAX, 1 + STREAK_STEP * Math.max(0, n | 0));
 export const OUTFITS = 3, LEDGER = 12;
 /* the least a purchase may cost: half the full price of what it buys (the deal is 40 % off, a bundle 25 %, each
    rounded to 5); the server holds every purchase to it, whatever a phone says the price is */
@@ -30,7 +33,7 @@ export const starterOwned = items => items.filter(i => i.rarity === 'common' && 
 export function legacyWallet(items, rec = {}) {
   const w = rec.wins | 0, d = rec.draws | 0, l = rec.losses | 0;
   const bones = WELCOME + w * PAY.win + d * PAY.draw + l * PAY.loss;
-  return { bones, owned: [...lockerFor(items, w).open], outfits: [], ledger: [{ d: bones, why: w + d + l ? 'legacy' : 'welcome' }], practice: { day: '', got: 0 } };
+  return { bones, owned: [...lockerFor(items, w).open], outfits: [], ledger: [{ d: bones, why: w + d + l ? 'legacy' : 'welcome' }], practice: { day: '', got: 0, n: 0 } };
 }
 
 /* what a finished duel (its result: { winner, reason, right: { id: n } }) pays one of its players */
@@ -46,9 +49,10 @@ export function duelPay(result, pid) {
 
 /* a practice run: a bone a right answer, up to the day's cap; `right` is clamped to 0..15 (a duel's most questions) */
 export function practicePay(practice, right, day) {
-  const got = practice?.day === day ? practice.got | 0 : 0, r = Math.max(0, Math.min(15, Math.floor(Number(right) || 0)));
-  const d = Math.max(0, Math.min(r * PER_RIGHT, PRACTICE_CAP - got));
-  return { d, practice: { day, got: got + d } };
+  const same = practice?.day === day, got = same ? practice.got | 0 : 0, n = same ? practice.n | 0 : 0;
+  const r = Math.max(0, Math.min(MAX_RIGHT, Math.floor(Number(right) || 0)));
+  const d = Math.floor(r * PER_RIGHT * streakOf(n));
+  return { d, practice: { day, got: got + d, n: n + 1 } };
 }
 
 export function normWallet(w, known = () => true) {
@@ -58,7 +62,7 @@ export function normWallet(w, known = () => true) {
     owned: [...new Set((Array.isArray(o.owned) ? o.owned : []).filter(id => typeof id === 'string' && known(id)))],
     outfits: (Array.isArray(o.outfits) ? o.outfits : []).slice(0, OUTFITS).map(x => (x && typeof x === 'object' ? x : null)),
     ledger: (Array.isArray(o.ledger) ? o.ledger : []).slice(0, LEDGER),
-    practice: { day: String(o.practice?.day || ''), got: Math.max(0, o.practice?.got | 0) }
+    practice: { day: String(o.practice?.day || ''), got: Math.max(0, o.practice?.got | 0), n: Math.max(0, o.practice?.n | 0) }
   };
 }
 /* a saved outfit's name: the player's own (trimmed, at most NAME_MAX), else "Outfit 2". The name rides in the outfit

@@ -20,7 +20,7 @@ export const myRequests = () => Object.values(ctx.mem.req || {}).map(cleanReques
 export function requestCardHtml() {
   const list = myRequests(), n = list.filter(ready).length, open = list.filter(x => x.status === 'new' || x.status === 'accepted').length;
   const sub = list.length ? [n && `${n} ready to practise`, open && `${open} waiting`].filter(Boolean).join(' · ') || 'Ask for another case'
-    : 'Ask for a case the bank does not have. It is written as a full station with a marking sheet.';
+    : 'A station the bank lacks';
   return `<button class="os-card os-bigcard os-in" data-os="requests" style="--d:3">
     <span class="os-bigic">${I.bulb}${n ? `<span class="os-reqbadge" aria-hidden="true">${n}</span>` : ''}</span>
     <span class="os-bigtx"><strong>Request a case</strong><span>${esc(sub)}</span></span>

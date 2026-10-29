@@ -79,6 +79,7 @@ function startTick() {
 function tick() {
   const s = sess(), { timing } = ctx.mem;
   if (!tickT || !s.timer || ctx.view !== 'session') return;
+  studyActive();   /* a running station clock is study time on the leaderboard's Today (study-log.mjs) */
   const nx = osceTick(s.timer, timing, now());
   if (nx !== s.timer) {
     const was = s.timer.c;
@@ -88,6 +89,7 @@ function tick() {
   }
   paintTimer();
 }
+import { active as studyActive } from './study-log.mjs';
 export function stopTick() { clearInterval(tickT); tickT = 0; document.removeEventListener('visibilitychange', tick); }
 function paintBar() { const bar = ctx.ov.querySelector('.os-sbar'); if (bar) { bar.innerHTML = timerBar(); paintTimer(); } }
 /* the pause / play button */

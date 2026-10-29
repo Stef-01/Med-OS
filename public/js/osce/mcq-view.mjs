@@ -37,7 +37,7 @@ const stateOf = x => { const s = status?.[x.item.id]; if (s) return s; return { 
 /* the start view's card */
 export function mcqCardHtml() {
   const list = mine(), inPool = list.filter(x => stateOf(x).status === 'pool').length;
-  const sub = list.length ? `${list.length} submitted${inPool ? ` · ${inPool} in the pool` : ''}` : 'Write a question for the pool. It is checked as you type, then reviewed against Step 2 CK.';
+  const sub = list.length ? `${list.length} submitted${inPool ? ` · ${inPool} in the pool` : ''}` : 'Add one to the pool';
   return `<button class="os-card os-bigcard os-in" data-os="mcq" style="--d:3">
     <span class="os-bigic">${I.note}</span>
     <span class="os-bigtx"><strong>Submit a question</strong><span>${esc(sub)}</span></span>

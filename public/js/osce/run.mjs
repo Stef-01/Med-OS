@@ -4,7 +4,7 @@
    osceRunPool, osceShuffle) are in core.mjs. */
 import { esc } from '../core.mjs';
 import { discRowHtml } from '../study-kit/vocab.mjs';
-import { ROTATIONS, ORIGINS, FROM, osceFrom, osceOrigin, osceRunPool, osceShuffle, oscePeople, osceCounts, NAME_MAX, osceGames } from './core.mjs';
+import { ROTATIONS, ORIGINS, FROM, osceFrom, osceOrigin, osceRunPool, osceShuffle, oscePeople, osceCounts, NAME_MAX, osceGames, applyPlacement, placementName } from './core.mjs';
 import { ctx, I, GI, GI_C, save, sess, attempted, curAttempt, confirmDlg, openPop, ago, nameOf, initialOf, whoBadge } from './state.mjs';
 import { startAttempt } from './session.mjs';
 import { requestCardHtml } from './requests-view.mjs';
@@ -12,6 +12,7 @@ import { mcqCardHtml } from './mcq-view.mjs';
 import { libraryCardHtml } from './library-view.mjs';
 
 export function renderStart(main) {
+  if (applyPlacement(ctx.mem)) save();   /* a placement synced from another device starts Fast Run on it */
   const s = sess(), n = s.queue.length, live = s.idx != null;
   const done = Object.keys(ctx.mem.hist).filter(attempted).length, n3 = osceCounts(ctx.mem.hist);
   main.innerHTML = `<div class="os-start">
@@ -26,7 +27,7 @@ export function renderStart(main) {
     <button class="os-card os-bigcard os-in" data-os="new" style="--d:2">
       <span class="os-bigic">${I.newS}</span>
       <span class="os-bigtx"><strong>New Study Session</strong>
-        <span>Queue stations and run each one on the clock: one of you is the candidate, the other reads the patient and marks.</span></span>
+        <span>Stations on the clock, one candidate, one examiner</span></span>
       <span class="os-chev">${I.chevR}</span></button>
     ${requestCardHtml()}
     ${osceGames(ctx.mem).duel ? duelHtml() : ''}
@@ -45,7 +46,7 @@ function duelHtml() {
   const face = id => `<span><img src="./js/vendor/pup-duel/pup/rig/icons/${id}.png" alt="" width="40" height="40" decoding="async"></span>`;
   return `<button class="os-card os-bigcard os-duelcard os-in" data-os="duel" style="--d:3">
       <span class="os-bigic os-duelfaces" aria-hidden="true">${face('mochi')}${face('duke')}</span>
-      <span class="os-bigtx"><strong>Duel a Mate</strong><span><span class="os-beta">Beta</span> Race a mate on the question pool, live.</span></span>
+      <span class="os-bigtx"><strong>Duel a Mate</strong><span><span class="os-beta">Beta</span> Race a mate or the AI</span></span>
       <span class="os-chev">${I.chevR}</span></button>`;
 }
 
@@ -90,7 +91,7 @@ function pairHtml() {
     <input data-person="${i}" value="${esc(p[i])}" placeholder="Partner ${i ? 'B' : 'A'}" maxlength="${NAME_MAX}" autocomplete="off" enterkeyhint="done" aria-label="Partner ${i ? 'B' : 'A'} name"></label>`;
   return `<section class="os-card os-pair os-in" aria-labelledby="os-pair-h">
     <div class="os-run-head"><span class="os-bigic">${I.users}</span>
-      <span class="os-bigtx"><strong id="os-pair-h">Study partners</strong><span>One of you is the candidate, the other examines. Every attempt is saved under the candidate's name.</span></span></div>
+      <span class="os-bigtx"><strong id="os-pair-h">Study partners</strong><span>Attempts save under the candidate</span></span></div>
     <div class="os-pairrow">${name(0)}${name(1)}</div>
     <div class="os-pairfoot"><span class="os-pairlab">First candidate</span>
       <div class="os-seg" role="radiogroup" aria-label="First candidate">${[0, 1].map(i => `<button role="radio" data-os="cand" data-i="${i}" aria-checked="${s.cand === i}">${esc(nameOf(i))}</button>`).join('')}</div>
@@ -123,14 +124,15 @@ export function runHtml() {
   return `<section class="os-card os-run os-in" style="--d:1" aria-labelledby="os-run-h">
     <div class="os-run-head"><span class="os-bigic">${I.bolt}</span>
       <span class="os-bigtx"><strong id="os-run-h">Fast Run</strong>
-        <span>Pick rotations. Every station in them runs back to back, in random order.</span></span></div>
+        <span>Rotations back to back, shuffled</span></span></div>
+    <p class="os-place"></p>
     <div class="os-rots"></div>
-    <div class="os-run-f">
+    <details class="os-run-more"><summary>Filters</summary><div class="os-run-f">
       <button class="os-chip" data-os="runpop" data-k="specs" aria-haspopup="listbox"></button>
       <button class="os-chip" data-os="runpop" data-k="origin" aria-haspopup="listbox"></button>
       <button class="os-chip" data-os="runpop" data-k="type" aria-haspopup="listbox"></button>
       <button class="os-link os-run-clear" data-os="runclear">Clear</button>
-    </div>
+    </div></details>
     <button class="os-btn os-btn--lg os-primary os-rungo" data-os="rungo">${I.shuffle}<span></span></button>
   </section>`;
 }
@@ -143,7 +145,11 @@ export function runPaint() {
   const ids = ROTATIONS.map(d => d[0]).filter(id => specsIn(id).length), every = ids.every(id => rotState(id) === 'on');
   box.querySelector('.os-rots').innerHTML = discRowHtml('run', ids.map(id => [id, rotCount(id)]), rotState,
     { on: every, n: osceRunPool(stations, { ...r, specs: ids.flatMap(specsIn) }).length });
-  const lab = { specs: r.specs.length ? `${r.specs.length} of ${nSpec} specialties` : 'Specialties',
+  /* your placement, one tap from changing (Settings opens on it) */
+  const pn = placementName(ctx.mem);
+  box.querySelector('.os-place').innerHTML = pn ? `<span>On placement: <b>${esc(pn)}</b></span><button class="os-link" data-os="place">Change</button>` : '<button class="os-link" data-os="place">Set your placement</button>';
+  const nOn = r.specs.filter(x => stations.some(s => (s.specialty || []).includes(x))).length;   /* a placement names specialties no station has yet */
+  const lab = { specs: nOn ? `${nOn} of ${nSpec} specialties` : 'Specialties',
     origin: r.origin.length === 1 ? ([...ORIGINS, ...FROM].find(([v]) => v === r.origin[0])?.[1] || 'All sources') : r.origin.length ? `${r.origin.length} sources` : 'All sources',
     type: r.type.length ? (r.type.length === 1 ? r.type[0] : `${r.type[0]} +${r.type.length - 1}`) : 'All station types' };
   const oneSource = new Set(stations.map(osceOrigin)).size < 2 && !stations.some(osceFrom);   /* a one-option filter is a dead control */
@@ -153,6 +159,7 @@ export function runPaint() {
     if (b.dataset.k === 'origin') b.hidden = oneSource;
   });
   box.querySelector('.os-run-clear').hidden = !(r.specs.length || r.origin.length || r.type.length);
+  const more = box.querySelector('.os-run-more'); if (r.origin.length || r.type.length) more.open = true;   /* a filter on is never hidden */
   const go = box.querySelector('.os-rungo');
   go.disabled = !n;
   go.querySelector('span').textContent = !r.specs.length ? 'Pick a rotation to start' : n ? `Start Fast Run · ${n} station${n === 1 ? '' : 's'}` : 'No stations match';

@@ -69,6 +69,7 @@ export function openSearch(ctx) {
    Week and Month rank by duel wins in the last 7 and 30 days; All time is the ranked ladder, by rating. The period
    toggle is always on show, and the one chosen is remembered on this device */
 export const PERIODS = [
+  { id: 'day', label: 'Today', note: 'Study today: every question you answer and every minute you study counts', unit: n => (n === 1 ? 'question' : 'questions') },
   { id: 'week', label: 'Week', note: 'Duel wins in the last 7 days', unit: n => (n === 1 ? 'win' : 'wins') },
   { id: 'month', label: 'Month', note: 'Duel wins in the last 30 days', unit: n => (n === 1 ? 'win' : 'wins') },
   { id: 'all', label: 'All time', note: 'The ranked ladder: ranked duels move your rating', unit: () => 'rating' }
@@ -76,12 +77,22 @@ export const PERIODS = [
 const PKEY = 'pup-duel:period';
 export const savedPeriod = () => { try { const v = localStorage.getItem(PKEY); return PERIODS.some(p => p.id === v) ? v : 'week'; } catch { return 'week'; } };
 const savePeriod = v => { try { localStorage.setItem(PKEY, v); } catch { /* private mode */ } };
-const valueOf = (p, period) => (period === 'all' ? p.rating : p[period] || 0);
+/* Today ranks by questions or by time (founder 2026-10-29: "a study session length leaderboard ... most qs in one day and
+   time spent too in one day ... with toggle"); the metric is remembered with the period */
+const MKEY = 'pup-duel:metric';
+export const savedMetric = () => { try { return localStorage.getItem(MKEY) === 'time' ? 'time' : 'qs'; } catch { return 'qs'; } };
+const saveMetric = v => { try { localStorage.setItem(MKEY, v); } catch { /* private mode */ } };
+export const localDay = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+/* 0 min, 45 min, 1 h 05 */
+export const hm = secs => { const m = Math.floor((secs || 0) / 60); return m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; };
+const dayKey = metric => (metric === 'time' ? 'tday' : 'qday');
+const valueOf = (p, period, metric = savedMetric()) => (period === 'all' ? p.rating : period === 'day' ? p[dayKey(metric)] || 0 : p[period] || 0);
 
 /* the rows for a period, placed (ties share a place); `limit` keeps the top and adds you after a gap when you are lower */
-export function boardRows(list, period, meId, limit = Infinity) {
-  const cmp = period === 'all' ? byRating : (a, b) => (b[period] || 0) - (a[period] || 0) || b.rating - a.rating || a.name.localeCompare(b.name);
-  const rows = ranked(list.map(p => ({ ...p, week: p.week || 0, month: p.month || 0 })), cmp, p => valueOf(p, period));
+export function boardRows(list, period, meId, limit = Infinity, metric = savedMetric()) {
+  const key = period === 'day' ? dayKey(metric) : period;
+  const cmp = period === 'all' ? byRating : (a, b) => (b[key] || 0) - (a[key] || 0) || b.rating - a.rating || a.name.localeCompare(b.name);
+  const rows = ranked(list.map(p => ({ ...p, week: p.week || 0, month: p.month || 0, qday: p.qday || 0, tday: p.tday || 0 })), cmp, p => valueOf(p, period, metric));
   const mine = rows.findIndex(p => p.id === meId);
   return mine >= limit ? [...rows.slice(0, limit), { gap: true }, rows[mine]] : rows.slice(0, limit);
 }
@@ -92,18 +103,22 @@ function periodTabs(cur, idp) {
 function rowEl(p, period, meId, face) {
   if (p.gap) return Object.assign(document.createElement('li'), { className: 'pd-lgap', ariaHidden: 'true' });
   const li = document.createElement('li'), t = tierOf(p.rating, p.ranked), me = p.id === meId, v = valueOf(p, period), P = PERIODS.find(x => x.id === period);
+  const time = period === 'day' && savedMetric() === 'time', shown = time ? hm(v) : String(v), unit = time ? '' : P.unit(v);
+  const sub = period === 'day' ? `Best day: ${time ? hm(p.tbest) : `${p.qbest || 0} qs`}` : t.placing ? 'Placing' : t.name;
   li.className = 'pd-lrow'; if (me) li.dataset.me = ''; li.dataset.tier = t.id; li.dataset.place = p.place;
-  li.innerHTML = `<span class="pd-vh"></span><span class="pd-lplace" aria-hidden="true">${p.place}</span><span class="pd-lface" aria-hidden="true"></span><span class="pd-lname" aria-hidden="true"><span class="pd-lnm"><b></b>${me ? '<em>You</em>' : ''}</span><small>${t.placing ? 'Placing' : t.name}</small></span><span class="pd-lval" aria-hidden="true"><b>${v}</b><small>${P.unit(v)}</small></span>`;
+  li.innerHTML = `<span class="pd-vh"></span><span class="pd-lplace" aria-hidden="true">${p.place}</span><span class="pd-lface" aria-hidden="true"></span><span class="pd-lname" aria-hidden="true"><span class="pd-lnm"><b></b>${me ? '<em>You</em>' : ''}</span><small></small></span><span class="pd-lval" aria-hidden="true"><b></b><small>${unit}</small></span>`;
+  li.querySelector('.pd-lname small').textContent = sub; li.querySelector('.pd-lval b').textContent = shown;
   li.querySelector('.pd-lname b').textContent = p.name;
   li.querySelector('.pd-lface').append(face(p.look));
-  li.querySelector('.pd-vh').textContent = `${p.place}. ${p.name}${me ? ' (you)' : ''}, ${v} ${P.unit(v)}, ${t.placing ? 'placing' : t.name}`;
+  li.querySelector('.pd-vh').textContent = `${p.place}. ${p.name}${me ? ' (you)' : ''}, ${shown} ${unit}, ${sub}`;
   return li;
 }
 /* a board in `root`: the toggle, the list, the line under it. ctx: { face, meId, limit, list() (null while loading), onPeriod } */
 function board(root, ctx, idp) {
   let period = savedPeriod();
-  root.innerHTML = `${periodTabs(period, idp)}<ol class="pd-lboard${ctx.limit < Infinity ? ' pd-lmini' : ''}" role="tabpanel" id="${idp}-panel" tabindex="0"></ol><p class="pd-lnote"></p>`;
-  const tabs = root.querySelector('.pd-periods'), ol = root.querySelector('.pd-lboard'), note = root.querySelector('.pd-lnote');
+  root.innerHTML = `${periodTabs(period, idp)}<div class="pd-metric" role="radiogroup" aria-label="Rank today by"><button type="button" role="radio" data-metric="qs">Questions</button><button type="button" role="radio" data-metric="time">Time</button></div><ol class="pd-lboard${ctx.limit < Infinity ? ' pd-lmini' : ''}" role="tabpanel" id="${idp}-panel" tabindex="0"></ol><p class="pd-lnote"></p>`;
+  const tabs = root.querySelector('.pd-periods'), ol = root.querySelector('.pd-lboard'), note = root.querySelector('.pd-lnote'), met = root.querySelector('.pd-metric');
+  met.addEventListener('click', e => { const b = e.target.closest('[data-metric]'); if (b) { saveMetric(b.dataset.metric); paint(); ctx.onPeriod?.(period); } });
   const pick = id => { period = id; savePeriod(id); paint(); ctx.onPeriod?.(id); };
   tabs.addEventListener('click', e => { const b = e.target.closest('[data-period]'); if (b) pick(b.dataset.period); });
   tabs.addEventListener('keydown', e => {
@@ -115,6 +130,8 @@ function board(root, ctx, idp) {
     if (ctx.follow) period = savedPeriod();   // the lobby's board follows a period chosen in the sheet
     tabs.querySelectorAll('[data-period]').forEach(b => { const on = b.dataset.period === period; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
     ol.setAttribute('aria-labelledby', `${idp}-${period}`);
+    met.hidden = period !== 'day';
+    met.querySelectorAll('[data-metric]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.metric === savedMetric())));
     const list = ctx.list(), P = PERIODS.find(p => p.id === period);
     if (!list) {
       const err = ctx.error?.() || '';
@@ -122,8 +139,9 @@ function board(root, ctx, idp) {
       note.textContent = err; return;
     }
     ol.replaceChildren(...boardRows(list, period, ctx.meId, ctx.limit).map(p => rowEl(p, period, ctx.meId, ctx.face)));
-    const quiet = period !== 'all' && !list.some(p => (p[period] || 0) > 0);
-    note.textContent = list.length < 2 ? 'Just you so far. Invite a mate to start the ladder.' : quiet ? `No duel wins in the last ${period === 'week' ? '7' : '30'} days yet. Win one to top the board.` : P.note;
+    const key = period === 'day' ? dayKey(savedMetric()) : period, quiet = period !== 'all' && !list.some(p => (p[key] || 0) > 0);
+    note.textContent = list.length < 2 ? 'Just you so far. Invite a mate to start the ladder.'
+      : quiet ? (period === 'day' ? 'Nobody has studied yet today. Answer a question to top the board.' : `No duel wins in the last ${period === 'week' ? '7' : '30'} days yet. Win one to top the board.`) : P.note;
   }
   paint();
   return { paint, get period() { return period; } };
@@ -143,6 +161,6 @@ export async function openLadder(ctx) {
     <div class="pd-board pd-board-full"></div>`, root => {
     b = board(root.querySelector('.pd-board'), { face: ctx.face, meId: ctx.me.id, limit: 50, list: () => list, error: () => err, onPeriod: ctx.onPeriod }, 'pd-ls');
   }, { label: 'Leaderboard', cls: 'pd-ladder' });
-  try { list = await ctx.transport.leaderboard(ctx.me); } catch (e) { err = e.message || 'Could not load the leaderboard'; }
+  try { list = await ctx.transport.leaderboard(ctx.me, localDay()); } catch (e) { err = e.message || 'Could not load the leaderboard'; }
   b?.paint();
 }

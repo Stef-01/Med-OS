@@ -95,6 +95,14 @@ export const GAMES = [{ id: 'duel', name: 'Duel a Mate', beta: true, on: true, l
 export const oscePlacement = mem => DISCIPLINES.map(d => d[0]).filter(id => (mem?.placement || []).includes(id));
 export const placementSpecs = mem => DISCIPLINES.filter(d => oscePlacement(mem).includes(d[0])).flatMap(d => d[3]);
 export const placementName = mem => DISCIPLINES.filter(d => oscePlacement(mem).includes(d[0])).map(d => d[4]).join(' + ');
+/* the placement as Fast Run last took it (mem.run.placeFor): a placement set here, or one synced from another device,
+   starts Fast Run on it once; a pick made in Fast Run after that stays until the placement changes again. true = changed */
+export function applyPlacement(mem) {
+  const key = oscePlacement(mem).join(','), r = mem.run || {};
+  if ((r.placeFor || '') === key) return false;
+  mem.run = { origin: [], type: [], open: [], ...r, specs: placementSpecs(mem), placeFor: key };
+  return true;
+}
 export const osceGames = mem => Object.fromEntries(GAMES.map(g => [g.id, typeof mem?.games?.[g.id] === 'boolean' ? mem.games[g.id] : g.on]));
 
 export function osceMigrate(old, now) {

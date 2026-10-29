@@ -5,7 +5,7 @@
 import { esc } from '../core.mjs';
 import { icon } from '../study-kit/icons.mjs';
 import { I, notify, now, ctx } from './state.mjs';
-import { osceGames } from './core.mjs';
+import { osceGames, placementSpecs, placementName } from './core.mjs';
 import { deckName, layers, layerLabel, yearLabel, diffLabel, inPick, KINDS, KIND_IDS } from '../library/item.mjs';
 import { YEARS, YEAR_IDS, DIFFICULTY, DIFF_IDS, ladder } from '../mcq/year.mjs';
 import { displayOrder } from '../mcq/schema.mjs';
@@ -13,7 +13,7 @@ import { inText } from '../library/ranges.mjs';
 import { openRanges } from './ranges-view.mjs';
 import { record, summary, wrapped, monthOf, monthName, dayOf } from '../library/stats.mjs';
 import { grade, counts, preview, soon, isNew, GRADES } from '../library/sched.mjs';
-import { today, streak, heat, session, timedSecs, tally, smart, snapshot, resumable, examPlan, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
+import { today, streak, heat, session, timedSecs, tally, smart, snapshot, resumable, examPlan, placeFirst, inPlace, pref as prefOf, GOALS, SIZES, WHICH, ORDERS, MODES } from '../library/plan.mjs';
 import { lsGet, lsSet } from '../study-kit/store.mjs';
 import * as api from '../library/api.mjs';
 import { rpc, accountsOn } from './account.mjs';
@@ -46,7 +46,8 @@ async function loadBank() {
   } catch { V.bank = []; }
   return V.bank;
 }
-const everything = () => [...api.allItems(V.lib), ...(V.bank || [])];
+/* everything you can study, your placement's specialties first (Today's new cards come from the front) */
+const everything = () => placeFirst([...api.allItems(V.lib), ...(V.bank || [])], placementSpecs(ctx.mem));
 function studyPool() {
   const d = V.st.deck;
   if (d === BANK) return V.bank || [];
@@ -78,6 +79,7 @@ function homeHtml() {
   const mem = api.studyMem(), p = myPref(), t = now(), all = everything(), td = today(mem.days, t, p.goal), sk = streak(mem.days, t);
   const tl = tally(all, mem.card, t), plan = examPlan(p.exam, tl.fresh, t), q = session(all, mem.card, { order: 'due', size: p.size, newADay: plan?.perDay }, t, startedToday());
   const s = summary(all, mem.card), gap = s.gaps[0], res = resumable(lsGet(LIVE, null), all, t), notes = all.filter(e => mem.card[e.key]?.note).length;
+  const pl = inPlace(all, placementSpecs(ctx.mem)), pn = placementName(ctx.mem);   /* your placement's questions (Settings) */
   const firstTime = !s.total.n;   /* the modes explain themselves until the first answer, then stay out of the way */
   const mode = (m, label, sub, ic, n = '') => `<button class="os-libmode${firstTime ? '' : ' os-libmode--short'}" data-lib="mode" data-m="${m}"><span class="os-libmode-ic">${icon(ic)}${n !== '' ? `<span class="os-libmode-n">${n}</span>` : ''}</span><span class="os-libmode-tx"><b>${esc(label)}</b>${firstTime || m === 'weak' ? `<small>${esc(sub)}</small>` : ''}</span></button>`;
   return `<section class="os-libtoday">
@@ -89,6 +91,7 @@ function homeHtml() {
     ${res ? `<button class="os-libresume" data-lib="resume"><span><b>Resume your session</b><small>${esc(res.label || 'Study')} · ${plural(res.left, 'card')} left</small></span><span class="os-chev" aria-hidden="true">${I.chevR}</span></button>` : ''}
     <button class="os-btn os-btn--lg os-primary os-libgo" data-lib="today"${q.length ? '' : ' disabled'}>${q.length ? `Start · ${plural(q.length, 'card')}` : 'All caught up: try a mode below'}</button>
     <div class="os-libmodes">
+      ${pl.length ? mode('place', `Rotation: ${pn}`, 'Your placement’s questions, due first', 'stethoscope', pl.length) : ''}
       ${mode('smart', 'Smart 10', 'Your weak areas, mixed so you win some', 'bolt')}
       ${mode('ladder', '0 to 1', 'Year 1 first principles up to final year', 'stairs')}
       ${gap ? mode('weak', 'Weak spot', `${gap.label} · ${gap.acc}%`, 'target') : ''}
@@ -312,6 +315,7 @@ function answer(i) {
   if (V.st.pick != null) return;
   clearInterval(V.st.timer);
   V.st.pick = i;
+  answeredQ(1);   /* the leaderboard's Today (study-log.mjs) */
   const x = V.st.q[V.st.i], m = api.studyMem(), ok = !!x && i === x.item.answer;   /* every answer counts towards your gaps and the month's Wrapped (stats.mjs) */
   V.st.lastOk = ok;
   if (x) { V.st.combo = ok ? (V.st.combo | 0) + 1 : 0; V.st.best = Math.max(V.st.best | 0, V.st.combo); }
@@ -346,6 +350,7 @@ async function othersPicked(x, i) {
   } catch { /* offline: no spread, nothing lost */ }
 }
 let leaving = false;
+import { answered as answeredQ } from './study-log.mjs';
 export function rate(g) {
   const x = V.st.q?.[V.st.i]; if (!x || V.st.pick == null || leaving) return;
   /* the card goes out to the left before the next comes in from the right (audit 2026-10-29: it vanished) */
@@ -457,6 +462,7 @@ export async function studyAct(a, b, e) {
     case 'mode': {
       const m = b.dataset.m, mem = api.studyMem(), p = myPref(), all = everything();
       if (m === 'custom') { V.st.view = 'custom'; paint(); arrive(1); return panel()?.focus({ preventScroll: true }); }
+      if (m === 'place') { const l = inPlace(all, placementSpecs(ctx.mem)); let q = session(l, mem.card, { order: 'due', size: p.size, newADay: p.size || l.length }, now()); if (!q.length) q = session(l, mem.card, { order: 'shuffle', size: p.size }, now()); return startWith(q, { label: `Rotation: ${placementName(ctx.mem)}` }); }
       if (m === 'smart') return startWith(smart(all, mem.card, now(), 10), { label: 'Smart 10' });
       if (m === 'notebook') { V.st.view = 'notebook'; paint(); arrive(1); return; }
       if (m === 'ladder') return startWith(session(all, mem.card, { order: 'ladder', size: p.size }, now()), { order: 'ladder', label: '0 to 1' });

@@ -65,7 +65,7 @@ export function normPack(p) {
   }
   const origin = ['ai', 'human', 'mixed'].includes(src.origin) ? src.origin : 'mixed';
   const cats = (Array.isArray(src.cats) ? src.cats : []).map(c => ({ id: text(c?.id, LIMITS.cat), label: text(c?.label, LIMITS.topic) })).filter(c => c.id && c.label).slice(0, LIMITS.cats);
-  const decks = (Array.isArray(src.decks) ? src.decks : []).map(d => ({ id: text(d?.id, LIMITS.deck).toLowerCase(), label: text(d?.label, LIMITS.topic), ...(text(d?.short, 12) ? { short: text(d.short, 12) } : {}) })).filter(d => /^[a-z0-9-]+$/.test(d.id) && d.label).slice(0, LIMITS.decks);
+  const decks = (Array.isArray(src.decks) ? src.decks : []).map(d => ({ id: text(d?.id, LIMITS.deck).toLowerCase(), label: text(d?.label, LIMITS.topic), ...(text(d?.short, 12) ? { short: text(d.short, 12) } : {}), ...(d?.mix === false ? { mix: false } : {}) })).filter(d => /^[a-z0-9-]+$/.test(d.id) && d.label).slice(0, LIMITS.decks);
   return { pack: { version: text(String(src.version ?? ''), 40), title: text(src.title, 80) || 'Questions', source: text(src.source, 200), origin, cats, ...(decks.length ? { decks } : {}), questions }, dropped };
 }
 
@@ -100,7 +100,13 @@ export const yearsOf = pack => [...new Set((pack?.questions || []).map(q => q.ye
 export const YEAR_LABEL = y => `Year ${y}`;
 
 /* the pack narrowed to one deck ('' is every deck: the mix) */
-export const deckPack = (pack, deck = '') => (deck ? { ...pack, questions: (pack?.questions || []).filter(q => q.deck === deck) } : pack);
+/* one deck's questions, or Mix: every deck but one marked mix: false (a host's view over questions already in the bank,
+   like Med-OS's placement copies, would deal the same question twice) */
+export const deckPack = (pack, deck = '') => {
+  if (deck) return { ...pack, questions: (pack?.questions || []).filter(q => q.deck === deck) };
+  const out = new Set((pack?.decks || []).filter(d => d && d.mix === false).map(d => d.id));
+  return out.size ? { ...pack, questions: (pack?.questions || []).filter(q => !out.has(q.deck)) } : pack;
+};
 
 /* is a question in a topic (its first, or any of its topics) */
 export const inTopic = (q, topic) => q.topic === topic || (Array.isArray(q.topics) && q.topics.includes(topic));

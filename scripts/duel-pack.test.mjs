@@ -139,6 +139,10 @@ test('the vendored Pup Duel is exactly what its VERSION.json says, and the migra
   assert.ok(ranked, 'the package pins its ranked migration');
   assert.equal(sha(path.join(ROOT, 'supabase/migrations/0004_pup_ranked.sql')), ranked.sha, '0004_pup_ranked.sql is the package\'s ranked migration');
   /* the leaderboard's periods (the package's 0004_pup_ladder.sql) are 0005 here */
+  /* the uncapped practice pay (the package's 0005_pup_practice_streak.sql) is 0012 here */
+  const streak = (v.migrations || []).find(m => m.file.endsWith('_pup_practice_streak.sql'));
+  assert.ok(streak, 'the package pins its practice migration');
+  assert.equal(sha(path.join(ROOT, 'supabase/migrations/0012_pup_practice_streak.sql')), streak.sha, '0012_pup_practice_streak.sql is the package practice migration');
   const ladder = (v.migrations || []).find(m => m.file.endsWith('_pup_ladder.sql'));
   assert.ok(ladder, 'the package pins its ladder migration');
   assert.equal(sha(path.join(ROOT, 'supabase/migrations/0005_pup_ladder.sql')), ladder.sha, '0005_pup_ladder.sql is the package\'s ladder migration');
@@ -147,8 +151,8 @@ test('the vendored Pup Duel is exactly what its VERSION.json says, and the migra
 test('the package\'s four migrations, in order, are Med-OS\'s 0002 to 0005, and the duel plays on Med-OS\'s own project', () => {
   const v = JSON.parse(fs.readFileSync(path.join(ROOT, 'public/js/vendor/pup-duel/VERSION.json'), 'utf8'));
   const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex').slice(0, 16);
-  const here = ['0002_pup_duel.sql', '0003_pup_shop.sql', '0004_pup_ranked.sql', '0005_pup_ladder.sql'];
-  assert.deepEqual(v.migrations.map(m => m.file), ['0001_pup_duel.sql', '0002_pup_shop.sql', '0003_pup_ranked.sql', '0004_pup_ladder.sql'].map(f => `supabase/migrations/${f}`));
+  const here = ['0002_pup_duel.sql', '0003_pup_shop.sql', '0004_pup_ranked.sql', '0005_pup_ladder.sql', '0012_pup_practice_streak.sql', '0013_pup_study.sql'];
+  assert.deepEqual(v.migrations.map(m => m.file), ['0001_pup_duel.sql', '0002_pup_shop.sql', '0003_pup_ranked.sql', '0004_pup_ladder.sql', '0005_pup_practice_streak.sql', '0006_pup_study.sql'].map(f => `supabase/migrations/${f}`));
   here.forEach((f, i) => assert.equal(sha(path.join(ROOT, 'supabase/migrations', f)), v.migrations[i].sha, `${f} is the package's ${v.migrations[i].file}: vendor again and copy it`));
   const cfg = {}; new Function('window', fs.readFileSync(path.join(ROOT, 'public/config.js'), 'utf8'))(cfg);
   assert.match(cfg.OSCE_CONFIG.supabaseUrl, /^https:\/\/pquajwxvlpvaygrkzfkl\.supabase\.co$/, 'Med-OS\'s own project, never Optimus\'s');

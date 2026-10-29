@@ -235,6 +235,7 @@ async function onClick(e) {
     case 'candcopy': return candSend('copy');
     case 'candshare': return candSend('share');
     case 'settings': return settingsDlg();
+    case 'place': { settingsDlg(); const h = document.getElementById('os-h-place'); h?.scrollIntoView({ block: 'start' }); return h?.closest('section')?.querySelector('.os-placechip')?.focus({ preventScroll: true }); }
     case 'requests': return requestsDlg();
     case 'reqnew': return requestForm(b.dataset.topic || '');
     case 'reqcopy': return copyRequest(b.dataset.id);

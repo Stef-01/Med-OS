@@ -17,6 +17,19 @@ import { placementSpecs, placementName } from './core.mjs';
 
 let shell = null, ui = null, bank = null;
 
+/* the duel's picker starts on My placement (deck 'place'), or back on the mix when the placement is cleared, whenever the
+   placement differs from the one it last started on (osce.duel:placed): set here, in Settings, or synced from another
+   device. A deck chosen in the duel after that stays. The package keeps its pick under osce.duel:pick */
+export function placePick(mem = ctx.mem) {
+  try {
+    const key = placementSpecs(mem).length ? placementName(mem) : '';
+    if ((localStorage.getItem('osce.duel:placed') || '') === key) return;
+    const k = 'osce.duel:pick', p = JSON.parse(localStorage.getItem(k)) || {};
+    localStorage.setItem(k, JSON.stringify({ ...p, deck: key ? 'place' : '', topic: '', cat: '' }));
+    localStorage.setItem('osce.duel:placed', key);
+  } catch { /* private mode */ }
+}
+
 /* the bank (fetched once), with Your questions and your friends' shared decks added as decks to choose from
    (docs/library.md: "duel with a mix of each other's questions"); the library is read fresh each time the duel opens */
 async function loadPack(normPack) {
@@ -40,6 +53,7 @@ export async function openDuel(opener) {
     import('../vendor/pup-duel/ui/duel.mjs'), import('../vendor/pup-duel/duel/transport-supabase.mjs'), import('../vendor/pup-duel/duel/pack.mjs')
   ]);
   const questions = await loadPack(normPack);
+  placePick();
   if (!shell) {
     shell = createOverlay({ cls: 'os os-duel', label: 'Duel a Mate', onKey: e => { if (ui?.key(e)) e.preventDefault(); } });
     shell.el.innerHTML = '<div class="os-duel-body"></div>';
@@ -57,6 +71,7 @@ export async function openDuel(opener) {
 
 /* a match's result: a finished MDosce pick redeems its star (albums.mjs), and the star comes on stage */
 async function onResult(r) {
+  if (r?.rounds) import('./study-log.mjs').then(l => l.answered(r.rounds)).catch(() => {});   /* the leaderboard's Today */
   const { pendingFor, finished, unlockStar } = await import('./albums.mjs');
   const p = pendingFor(ui?.state?.playlist);
   if (!p || !finished(r, p.n)) return;

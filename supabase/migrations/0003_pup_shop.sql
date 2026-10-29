@@ -184,7 +184,31 @@ insert into public.pup_items (id, slot, rarity, price, exclusive) values
   ('boba', 'back', 'common', 15, false),
   ('popcorn', 'back', 'uncommon', 20, false),
   ('controller', 'back', 'uncommon', 25, false),
-  ('pizza', 'back', 'common', 10, false)
+  ('pizza', 'back', 'common', 10, false),
+  ('glamcowboy', 'head', 'rare', 35, false),
+  ('checkbucket', 'head', 'uncommon', 20, false),
+  ('fuzzbucket', 'head', 'uncommon', 25, false),
+  ('starband', 'head', 'common', 15, false),
+  ('studiophones', 'head', 'epic', 55, false),
+  ('discobeanie', 'head', 'common', 15, false),
+  ('redhearts', 'face', 'common', 15, false),
+  ('heartframes', 'face', 'uncommon', 25, false),
+  ('facegems', 'face', 'rare', 30, false),
+  ('shieldshades', 'face', 'rare', 35, false),
+  ('tintspecs', 'face', 'uncommon', 20, false),
+  ('flutter', 'face', 'epic', 50, false),
+  ('choker', 'neck', 'common', 10, false),
+  ('backstage', 'neck', 'uncommon', 20, false),
+  ('silkscarf', 'neck', 'rare', 30, false),
+  ('starbandana', 'neck', 'common', 15, false),
+  ('boa', 'neck', 'epic', 55, false),
+  ('heartchain', 'neck', 'rare', 35, false),
+  ('sequincape', 'back', 'epic', 60, false),
+  ('featherwings', 'back', 'legendary', 110, false),
+  ('fairywings', 'back', 'rare', 40, false),
+  ('heartpack', 'back', 'uncommon', 25, false),
+  ('merchpack', 'back', 'common', 15, false),
+  ('discoballoon', 'back', 'uncommon', 20, false)
 on conflict (id) do update set slot = excluded.slot, rarity = excluded.rarity, price = excluded.price, exclusive = excluded.exclusive;
 
 alter table public.pup_players add column if not exists wallet jsonb;
