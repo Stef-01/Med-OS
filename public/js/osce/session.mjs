@@ -427,7 +427,7 @@ export function markingHtml(st, a, editable) {
   const p2 = osceP2Start(st.check);
   return `<div class="os-marking${q && aiEvid() ? ' os-ai-evid' : ''}">
     ${a && !editable ? '' : '<h2>Marking Sheet</h2>'}
-    <div class="os-notice">${I.info}<div><h5>Marking Sheet Provided for Information Only</h5><p>Please note that the marking checklist provided below is intended as a prompt for you to consider key areas in this station. It is not exhaustive. It does not equate to an assessment of competency and therefore no 'pass mark' is provided.</p></div></div>
+    <details class="os-notice os-notice--line"><summary>${I.info}<span>A prompt, not a pass mark</span></summary><p>The checklist below is a prompt for the key areas of this station. It is not exhaustive, it is not an assessment of competency, and it has no pass mark.</p></details>
     ${a && a.fin ? aiHtml(st, a) : ''}
     ${a && a.fin ? handHtml(a) : ''}
     ${a ? `<div class="os-tally"><b>${sc.got}</b> of ${sc.of} items ticked</div>` : ''}

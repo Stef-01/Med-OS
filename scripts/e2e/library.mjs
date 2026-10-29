@@ -307,7 +307,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   const solo = await phone(320, 640, {});
   await open(solo, 'upload'); await solo.fill('.os-libp [name="paste"]', UPLOAD); await solo.waitForSelector('.os-libsum');
   await solo.click('.os-libsave'); await solo.waitForSelector('.os-libdeck');
-  ok(/Signed out/.test(await solo.textContent('.os-libp')) && /3 questions/.test(await solo.textContent('.os-libdeck')), 'signed out: the questions are kept on this phone, with a note to sign in');
+  ok(/On this phone only/.test(await solo.textContent('.os-libp')) && /3 questions/.test(await solo.textContent('.os-libdeck')), 'signed out: the questions are kept on this phone, with a note to sign in');
   await open(solo, 'friends'); ok(/need an account/.test(await solo.textContent('.os-libp')), 'signed out: Friends asks you to sign in');
   const many = JSON.stringify(Array.from({ length: 21 }, (_, i) => Q({ stem: `A ${30 + i}-year-old man has crushing central chest pain for ${i + 2} hours. His ECG shows ST elevation in leads II, III and aVF.`, specialty: 'Cardiology', kind: 'anatomy', year: 2 })));
   await open(solo, 'upload'); await solo.fill('.os-libp [name="paste"]', many); await solo.waitForSelector('.os-libsum'); await solo.fill('.os-libp [name="deck"]', 'Cardio 21'); await solo.click('.os-libsave'); await solo.waitForSelector('.os-libfind');

@@ -144,11 +144,11 @@ function libraryHtml() {
       <details class="os-libqs"><summary>See ${plural(d.items.length, 'question')}</summary><ol>${d.items.map(it => `<li><span><span class="os-liblayer">${it.year ? `${esc(yearLabel(it))} · ` : ''}${esc(layerLabel(it))}</span>${esc(it.stem.length > 150 ? `${it.stem.slice(0, 150)}…` : it.stem)}</span>${mine ? `<button class="os-libx" data-lib="delq" data-deck="${esc(d.id)}" data-id="${esc(it.id)}" aria-label="Delete this question">${I.x}</button>` : ''}</li>`).join('')}</ol>${mine ? `<button class="os-link os-libdel" data-lib="deldeck" data-deck="${esc(d.id)}">Delete deck</button>` : ''}</details>
     </li>`;
   };
-  if (!decks.length && !shared.length) return `${signedIn ? '' : signInHtml('Signed out: questions you upload stay on this phone. Sign in to keep them on your account, on every device, and to share them with friends.')}
+  if (!decks.length && !shared.length) return `${signedIn ? '' : signInHtml('On this phone only. Sign in to sync and share.')}
     <div class="os-libempty">${icon('cards')}<p><strong>No questions yet</strong><br>ChatGPT can write them from your notes, in the format Med-OS reads.</p><button class="os-btn os-btn--lg os-primary" data-lib="tab" data-tab="upload">${icon('plus')}<span>Upload questions</span></button></div>
     ${PLAYLISTS_ROW()}`;
   const qn = (V.find || '').trim().toLowerCase(), found = qn.length > 1 ? api.allItems(V.lib).filter(e => `${e.item.stem} ${e.item.ask || ''} ${e.item.options.join(' ')} ${e.item.topic}`.toLowerCase().includes(qn)).slice(0, 30) : null;
-  return `${signedIn ? '' : signInHtml('Signed out: these stay on this phone. Sign in to keep them on your account and share them.')}
+  return `${signedIn ? '' : signInHtml('On this phone only. Sign in to sync and share.')}
     ${api.allItems(V.lib).length >= 20 || V.find ? `<label class="os-libfind">${I.search}<input type="search" name="find" placeholder="Find a question" value="${esc(V.find || '')}" aria-label="Find a question in your library" enterkeyhint="search"></label>` : ''}
     ${found ? `<p class="os-libmeta">${plural(found.length, 'question')} found</p><ul class="os-libgapl os-libfound" role="list">${found.map(e => `<li class="os-libgap"><div><span class="os-liblayer">${esc(layerLabel(e.item))} · ${esc(e.deckName)}</span><b>${esc(e.item.stem.length > 140 ? `${e.item.stem.slice(0, 140)}…` : e.item.stem)}</b><small>${esc(e.item.options[e.item.answer])}</small></div></li>`).join('')}</ul>` : ''}
     ${decks.length ? `<h3 class="os-libh">Your decks</h3><ul class="os-libdecks" role="list">${decks.map(d => deckRow(d, '')).join('')}</ul>` : ''}
@@ -247,7 +247,7 @@ async function save() {
 }
 
 function friendsHtml() {
-  if (!V.lib.signedIn) return signInHtml('Friends need an account: sign in with the name and PIN you use for Duel a Mate (or make one), then add friends by their name.');
+  if (!V.lib.signedIn) return signInHtml('Friends need an account: the one you use for Duel a Mate.');
   const f = V.lib.friends, by = s => f.filter(x => x.status === s);
   const row = (x, acts) => `<li class="os-libfriend"><span class="os-libav" aria-hidden="true">${esc((x.name || '?')[0].toUpperCase())}</span><strong>${esc(x.name)}</strong><span class="os-libacts">${acts}</span></li>`;
   const inc = by('incoming'), fr = by('friends'), out = by('outgoing');

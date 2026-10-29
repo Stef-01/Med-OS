@@ -2264,3 +2264,15 @@ details.os-pair:not([open]) { padding-bottom:14px; }
 .os-libgrades--wrong .os-libnext { grid-column:1 / -1; order:2; }
 .os-libgrades--wrong .os-libback { order:0; margin:0 !important; text-align:left; }
 .os-libgrades--wrong .os-libmisread { order:1; font-size:13px; justify-self:end; }
+/* R9: the marking notice is one line; its detail opens on a tap */
+.os-notice--line { display:block; }
+.os-notice--line > summary { list-style:none; display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--mute); font-size:14px; font-weight:600; }
+.os-notice--line > summary::-webkit-details-marker { display:none; }
+.os-notice--line > summary svg { width:18px; height:18px; flex:none; }
+.os-notice--line > p { margin:8px 0 0; font-size:13.5px; color:var(--mute); }
+/* R12: the library's sign-in prompt is one row */
+.os-libsign { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.os-libsign p { margin:0; font-size:14px; color:var(--mute); }
+.os-libsign .os-btn { flex:none; }
+/* R17: on a phone a station's summary is one line */
+@media (max-width:639px) { .os-scard .os-cbody p { -webkit-line-clamp:1; } }
