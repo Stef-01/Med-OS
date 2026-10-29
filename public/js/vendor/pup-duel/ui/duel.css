@@ -676,3 +676,9 @@ div.pd-me-dog { cursor: default; }
 /* the way in: the AI first, one tap; a mate under it (round 2 R1) */
 .pd-auth > .pd-btn.pd-pri[data-pd="practice"] { margin-bottom: 6px; }
 .pd-mateh { margin: 10px 0 2px; text-align: left; color: var(--pd-mute); font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+
+/* D1: the setup sheet's play button stays in reach at the foot of the sheet */
+.pd-sheet .pd-sendbtn { position: sticky; bottom: 0; z-index: 2; box-shadow: 0 -14px 18px 4px var(--pd-card); }
+/* D15: during a live question the dogs shrink to faces, the question rises; they return full size for the reveal */
+.pd-match[data-live][data-stage="question"] .pd-dogslot { transform: scale(.6); margin-block: -28px; transition: transform .35s var(--pd-ease), margin .35s var(--pd-ease); }
+.pd-match .pd-dogslot { transition: transform .35s var(--pd-ease), margin .35s var(--pd-ease); }

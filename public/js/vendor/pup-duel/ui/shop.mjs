@@ -226,8 +226,10 @@ export function openWardrobe(ctx) {
     /* the outfits: a face for each kept look and its name (yours to change: type, then Enter or tap away), an empty
        one keeps the look on the dog */
     const fits = p.querySelector('.pd-fits');
+    const firstEmpty = Array.from({ length: OUTFITS }, (_, i) => W.outfits[i]).findIndex(x => !x);
     for (let i = 0; i < OUTFITS; i++) {
       const o = W.outfits[i], card = document.createElement('div');
+      if (!o && i !== firstEmpty) continue;   /* D13: one empty slot to keep a look in, not three */
       card.className = 'pd-fit';
       if (o) {
         const look = ctx.lookOf(fitWear(o, W.owned)), on = same(look, ctx.lookOf(cur)), name = outfitName(o, i);

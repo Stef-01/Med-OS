@@ -490,7 +490,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         <p class="pd-note pd-readnote" data-pd="fit" aria-live="polite"></p>
         <p class="pd-note" data-pd="fewer" hidden></p>
         <p class="pd-err" role="alert"></p>
-        <button class="pd-btn pd-pri" type="button" data-pd="send">${icon(isPractice ? 'bot' : 'zap')}${isPractice ? 'Play the AI' : 'Duel'}</button>
+        <button class="pd-btn pd-pri pd-sendbtn" type="button" data-pd="send">${icon(isPractice ? 'bot' : 'zap')}${isPractice ? 'Play the AI' : 'Duel'}</button>
       </div>
       <div class="pd-step" data-step="choose" hidden>
         <div class="pd-sheet-head"><button class="pd-ib" type="button" data-pd="up" aria-label="Back">${icon('back')}</button><h2 class="pd-sheet-title" tabindex="-1">Choose questions</h2><span></span><span></span></div>
@@ -772,7 +772,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     for (const [sel, p] of [['.pd-mine .pd-score', me], ['.pd-theirs .pd-score', opp]]) {
       const el = shell.querySelector(sel), txt = fmt(shown(p));
       if (el.textContent !== txt) { el.textContent = txt; el.classList.remove('pd-bump'); void el.offsetWidth; if (txt !== '0') el.classList.add('pd-bump'); }
-      const gain = el.nextElementSibling, R = s.name === 'reveal' && st.rounds[s.round], g = R?.closed && R.answers[p]?.ok ? `+${fmt(R.answers[p].pts)}` : '';
+      const gain = el.nextElementSibling, R = s.name === 'reveal' && st.rounds[s.round], g = R?.closed && R.answers[p]?.ok && R.answers[p].pts !== shown(p) ? `+${fmt(R.answers[p].pts)}` : '';   /* D17: no "872 +872" */
       if (gain.textContent !== g) gain.textContent = g;
     }
     /* their status: never what they picked until the round closes */
@@ -848,6 +848,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       } else if (!reveal) { why.hidden = true; M.faces.me.remove(); M.faces.them.remove(); }
     }
     shell.querySelector('.pd-match').toggleAttribute('data-live', st.phase === 'live' || st.phase === 'done');
+    shell.querySelector('.pd-match').dataset.stage = s.name;   /* D15: the dogs make room while a question is live */
     /* the holds: waiting for an accept, the countdown, the end. An ending shows only once the log agrees (v.firm):
        this phone's own reply can run ahead of a move it has not polled yet */
     const big = shell.querySelector('.pd-big'), sub = shell.querySelector('.pd-hold-sub'), acts = shell.querySelector('.pd-hold-acts');

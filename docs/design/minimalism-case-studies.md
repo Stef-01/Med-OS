@@ -210,3 +210,58 @@ Round 1 items confirmed shipped in the DOM: 1 (sticky Next), 5 (touch hint), 7 (
 | R23 | Live station | Hide the Notepad bar while Instructions scrolls down; show it on scroll-up. | P10 | 56 px more reading area | `public/js/osce/session.mjs` | S |
 
 Suggested order: R1, R3, R4, R7, R2, R11, R9, R6, R5, then the rest. Verify each with the same 393x852 probe; the Measured effect column is the pass condition.
+
+---
+
+## 6. Round 3 (duel, REA audit)
+
+Run 2026-10-29: a private Playwright Chromium (Med-OS `node_modules`), `public/` served locally with the duel RPCs routed to the vendored `server-core.mjs` (as `scripts/e2e/smoke.mjs` does): no live Supabase, no shared CDP port. A fake player signed up, then: lobby, shop, item detail, wardrobe (every slot tab), leaderboard sheet, menu, Vs AI setup, source picker, a full 7-question match vs AI, result, review. 393x852 and 320x640, touch on. The probe is scoped to the topmost sheet or full-screen layer; columns as in round 2. Screenshots and `metrics.json`: `C:\Users\stefa\AppData\Local\Temp\claude\C--Users-stefa-optimus-command-center\30556e56-b6de-4bfd-8bf5-48add01ea09f\scratchpad\shots`.
+
+### Scorecard (393 px)
+
+| Screen | Ctrls | Words | Boxes | Prim | First y | Note |
+|---|---|---|---|---|---|---|
+| Entry (signed out) | 6 | 19 | 2 | 1 | 64 | R1 shipped: Play the AI now is the only filled button |
+| New player (dog pick) | 42 | 10 | 2 | 1 | 64 | 42 controls; the dog row overflows at 393 |
+| Lobby | 13 | 61 | 7 | 1 | 64 | Rank card, two play buttons, mate tiles, a 4-segment period control and a 1-row board, all on home |
+| Shop | 10 | 44 | 13 | 0 | 73 | Dog hero plus "Nothing on yet. Tap a piece to try it on." use ~440 px before the first item; every tile has a "New" badge |
+| Item detail | 52 | 211 | 42 | 0 | 59 | Rarity, slot, New, flavour line, a bordered "60 more bones" button and a 2-line hint; the slot chip row overflows |
+| Wardrobe / Locker | 21 | 43 | 10 | 0 | 73 | Three empty dashed "Keep look" slots above the 8-icon slot bar; every tile says "Owned" |
+| Wardrobe / Dog | 45 | 26 | 4 | 0 | 73 | 45 controls; overflow at 393 |
+| Leaderboard sheet | 5 | 29 | 2 | 0 | 631 | Content starts at y=631 |
+| Menu (...) | 1 | 21 | 0 | 0 | 723 | A whole sheet for one button and a 20-word warning |
+| Vs AI setup | 14 | 47 | 2 | 0 | 227 | Start is below the fold; 5 labelled groups, each with a left icon; the 0-to-1 explainer is always shown |
+| Source picker | 11 | 38 | 0 | 0 | 161 | Two levels (topic, then kind) |
+| Question | 9 | 61 | 2 | 0 | 56 | Both full dogs use ~280 px above the stem |
+| Reveal | 9 | 92 | 3 | 0 | 56 | Explanation in a bordered box; 4 emote buttons pushed under the fold; AI score reads "872 +872" |
+| Result | 8 | 22 | 2 | 1 | 56 | One primary (good); bones pill, Review, home, 4 emotes |
+| Review | 1 | 171 | 2 | 0 | 131 | Fine |
+
+At 320 px only item detail overflowed (slot chips). The 393 overflow on dog pick and the Dog tab comes from scroll rows; confirm they clip and snap.
+
+### Backlog, round 3 (prioritised)
+
+| # | Screen | Change | Principle | Measured effect | Source (`packages/pup-duel/src/ui`) | Effort |
+|---|---|---|---|---|---|---|
+| D1 | Vs AI setup | Pin Start to the sheet foot so the one primary is always visible; collapse AI level, Questions and Time into one summary row "Medium · 7 · 30s ›" that expands on tap (last pick remembered). | P1, P3, P11 | Prim 0 to 1 above the fold; Ctrls 14 to ~6 | `duel.mjs` `openSetup` (`paintPick`, `pickedRounds`); `duel.css` `.pd-sheet` | M |
+| D2 | Vs AI setup | Drop the left icon column; show the "0 to 1: Year 1 first principles…" line only once 0 to 1 is picked. | P4, P14 | Words −15; ~70 px | `duel.mjs` `openSetup` | S |
+| D3 | Vs AI setup | Fold the "Community Playlists" row into the source picker as its first entry. | P5 | Boxes −1, one row fewer | `duel.mjs` `openSetup`, `drill` | S |
+| D4 | Lobby | Merge the rank card into the Ranked match button (subline "Placing · 3 to go"). | P8, P14 | Boxes −1; play row rises ~120 px | `ranked.mjs` `rankCard`; `duel.mjs` `paintLobby` | S |
+| D5 | Lobby | Home board shows the top 3 rows, no period tabs (tabs stay in See all). | P2, P5 | Ctrls −4, Boxes −1 | `ranked.mjs` `lobbyBoard`, `periodTabs`, `board` | S |
+| D6 | Lobby | When alone, "Just you so far…" replaces the 1-row board, with Invite as its one action. | P12 | Words −10, one row fewer | `ranked.mjs` `lobbyBoard`; `duel.mjs` `mateTile` | S |
+| D7 | Lobby | Hide "0 won · 0 lost" until the first game; the wallet pill drops its "Shop" label (bone + number opens it). | P8, P4 | Words −5; one chip fewer | `duel.mjs` `paintLobby`, `showLobby` | S |
+| D8 | Menu | "..." opens a 1-item popover (Sign out); the 20-word warning becomes a confirm shown only on tap. | P6, P4 | A sheet gone; Words −20 | `duel.mjs` `openMenu` | S |
+| D9 | Shop | Dog hero shrinks to a 96 px tile beside the name; drop "Nothing on yet. Tap a piece to try it on." after the first visit. | P10, P4 | First item y ~500 to ~260 | `shop.mjs` `shopHtml`, `paintInfo`; `duel.css` `.pd-wpv` | S |
+| D10 | Shop | "New" only on items new since the last visit, not every rotation tile. | P14, P8 | ~8 badges gone above the fold | `shop.mjs` `tile`, `setTile` | S |
+| D11 | Item detail | One meta line ("Legendary glasses"), no New pill or flavour line; replace the bordered "60 more bones" button and 2-line hint with one muted line "60 bones short · ~4 wins". | P1, P4, P14 | Words −20, Boxes −1, a dead button gone | `shop.mjs` `paintInfo`, `paintBar`, `sayOf` | S |
+| D12 | Item detail | Slot chips (All, Hats, Glasses…) reuse the wardrobe's icon bar instead of a text row that runs off a 320 px screen. | P5 | Overflow gone; Ctrls −3 | `shop.mjs` `shopHtml` (`data-slot`); `duel.css` | S |
+| D13 | Locker | Hide the three empty "Keep look" slots; a single "+ Keep this look" link appears after the first change. | P12, P4 | Boxes −3; slot grid rises ~260 px | `shop.mjs` `lockerHtml`, `keepOutfit` | S |
+| D14 | Locker | No "✓ Owned" on Locker tiles (all are owned); mark only the worn piece. | P14 | Words −12 above the fold | `shop.mjs` `tile`, `fillLocker` | S |
+| D15 | Question | While a question is live, the dogs shrink to 64 px faces in a score strip; full dogs return on reveal. | P10, P16 | Stem y ~300 to ~150; all options above the fold at 320 | `duel.mjs` `paintMatch`; `duel.css` | M |
+| D16 | Reveal | Explanation without its bordered box; the 4 emote buttons become one emote button that fans out on tap or long-press. | P14, P7 | Boxes −1, Ctrls −3 | `duel.mjs` `paintMatch` (`.pd-why`), `showOff` | S |
+| D17 | Reveal | Fix the AI readout "872 +872" (the delta repeats the total); show the delta only after round 1. | P8 | One number fewer, no false signal | `duel.mjs` `paintMatch` | S |
+| D18 | Result | Bones pill becomes an icon+number on the score line (hidden at 0 or when capped); emotes as D16. | P8, P9 | Boxes −1, Ctrls −3 | `duel.mjs` `showResults`, `earned` | S |
+| D19 | Leaderboard sheet | Open at the content (top near y 120, not 631): a full sheet, since the board is the content. | P3 | First y 631 to ~120 | `ranked.mjs` `openLadder`; `duel.mjs` `sheet` | S |
+| D20 | New player | Dog pick as one scroll-snapped row (5 visible), the rest behind "More dogs". | P4, P11 | Ctrls 42 to ~10; no overflow | `duel.mjs` `showAuth` (create step) | S |
+
+Suggested order: D1, D17, D4, D5, D9, D11, D13, D15, D8, D16, then the rest. Verify each by re-running the same probe; the Measured effect column is the pass condition.
