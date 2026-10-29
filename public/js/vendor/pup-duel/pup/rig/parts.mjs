@@ -284,7 +284,7 @@ function dogMarkup(c, P) {
         legs +
       '</g>' +
       '<g data-p="collar">' +
-        '<circle cx="-2" cy="' + (hb - 45) + '" r="51" fill="' + p.collar + '"/>' +
+        '<circle cx="-2" cy="' + (hb - 45 + collarCut(hb)) + '" r="' + (51 - collarCut(hb)) + '" fill="' + p.collar + '"/>' +   // its crescent under the chin; its top stays inside a short head
         '<g data-p="tag">' +
           '<rect x="-5.5" y="' + (hb + 3) + '" width="3" height="6" rx="1.5" fill="' + p.tagSh + '"/>' +
           '<circle cx="-4" cy="' + (hb + 14) + '" r="7" fill="' + p.tag + '"/>' +
@@ -401,5 +401,8 @@ function drape(c) {
   var g = c.geo, at = 'translate(' + r3(g.bL - DRAPE.bL) + ' -20) scale(1 ';
   return { on: at + r3(c.body.h / DRAPE.h) + ') translate(0 20)', rump: at + r3((g.fy + 20) / (DRAPE.fy + 20)) + ') translate(0 20)' };
 }
+
+/* how much smaller the collar's disc runs so its top (hb - 96) stays under the head's top (-55) on a short head */
+function collarCut(hb) { return Math.max(0, (46 - hb) / 2); }
 
 export { NS, r3, set, rot, tr, pt, ellPath, uPath, scl, EAR_UP, EAR_FLOP, UP_EARS, FLOP_EARS, HEART, SHADES, MANE, BIB, dogMarkup, reach, drape };

@@ -6,6 +6,7 @@ import { EASE_IN_OUT, EASE_OUT, track, flow, wave, bell, clamp, seeded, PERIOD, 
 import { EXPR, DEF, PET, CALLED, TREAT_KEYS, TREAT_HOPS, MOVE_HOPS } from './expressions.mjs';
 import { NS, r3, set, rot, tr, pt, ellPath, uPath, scl, EAR_UP, EAR_FLOP, HEART, dogMarkup, reach } from './parts.mjs';
 import { MOVES, AURA, PARTS } from './moves.mjs';
+import { POKEMOVES, sample, transformOf } from './pokemoves.mjs';
 
 // the Learn mascot's frame (index.html marks <html class="embed"> before its first paint): the rig trims a zoom-in
 // there so a tall hat or wide back piece keeps its room
@@ -299,12 +300,44 @@ function makeDog(c, slot, P) {
   };
   /* a signature move (moves.mjs): played as a burst is, over whatever the dog feels; false when there is no such move */
   rig.perform = function (id, clock) {
-    var mv = Object.prototype.hasOwnProperty.call(MOVES, id) ? MOVES[id] : null;
+    var own = Object.prototype.hasOwnProperty, mv = own.call(MOVES, id) ? MOVES[id] : own.call(POKEMOVES, id) ? POKEMOVES[id] : null;
     if (!mv) return false;
     rig.burstStart = clock; rig.BE = { burst: mv };
     mv.accents.forEach(function (a) { shot(a[0], clock + a[1]); });
+    fxStart(mv, clock);
     return true;
   };
+  /* a move's effect (pokemoves.mjs): its particles on two layers in the dog's own units, one behind the dog and one in
+     front, made when the move starts and dropped when it ends; each frame sets one transform and one opacity a copy */
+  var fxL = null;
+  function fxClear() { if (rig.fx) rig.fx.els.forEach(function (x) { x.el.parentNode && x.el.parentNode.removeChild(x.el); }); rig.fx = null; }
+  function fxStart(mv, clock) {
+    fxClear();
+    if (!mv.fx || !e.dog) return;
+    if (!fxL) {
+      var host = e.dog.parentNode, at = tr(m * 18 * c.scale, 0) + ' scale(' + m * c.scale + ' ' + c.scale + ') ' + tr(0, -g.fy);
+      fxL = ['back', 'front'].map(function (k) { var l = document.createElementNS(NS, 'g'); l.setAttribute('data-p', 'fx-' + k); l.setAttribute('transform', at); l.setAttribute('pointer-events', 'none'); return l; });
+      host.insertBefore(fxL[0], e.dog); host.appendChild(fxL[1]);
+    }
+    var els = [];
+    mv.fx.forEach(function (p) {
+      for (var i = 0; i < (p.n || 1); i++) {
+        var el = document.createElementNS(NS, 'g');
+        el.setAttribute('opacity', '0'); el.innerHTML = p.svg;
+        fxL[p.back ? 0 : 1].appendChild(el); els.push({ el: el, p: p, i: i });
+      }
+    });
+    rig.fx = { start: clock, dur: mv.dur, els: els };
+  }
+  function fxFrame(clock) {
+    var f = rig.fx, t = clock - f.start;
+    if (t > f.dur + 100 || t < -50) { if (t > f.dur + 100) fxClear(); return; }
+    for (var i = 0; i < f.els.length; i++) {
+      var x = f.els[i], q = sample(x.p, x.i, t);
+      if (!q || q.o <= 0.01) { set(x.el, 'opacity', 0); continue; }
+      set(x.el, 'transform', transformOf(x.p, q)); set(x.el, 'opacity', Math.round(q.o * 1000) / 1000);
+    }
+  }
   /* the worn piece's aura (moves.mjs AURA): one element, made once, shown once a period */
   rig.setAura = function (type) {
     if (rig.aura && rig.aura.type === type) return;
@@ -635,6 +668,7 @@ function makeDog(c, slot, P) {
       var sh = shots[j];
       placeAccent(sh.el, sh.type, (clock - sh.start) / ACCENT[sh.type].dur, sh.i, 1);
     }
+    if (rig.fx) fxFrame(clock);
     if (rig.aura) placeAccent(rig.aura.el, rig.aura.type, (t % AURA[rig.aura.type]) / ACCENT[rig.aura.type].dur, 13, 1);
     if (rig.parts) for (var pi = 0; pi < rig.parts.length; pi++) {
       var pp = rig.parts[pi];

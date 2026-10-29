@@ -109,8 +109,8 @@ export function paintBrowse(el, scrollRoot) {
   const types = [...new Set(ctx.stations.flatMap(s => s.type || []))].sort();
   el.innerHTML = `<div class="os-toolbar">
       <label class="os-search">${I.search}<input class="os-q" type="search" placeholder="Search by Topic..." value="${esc(q)}" aria-label="Search stations" enterkeyhint="search"></label>
-      <div class="os-tacts"><button class="os-btn" data-os="random">${I.shuffle}Add Random</button>
-        <button class="os-btn" data-os="details">${ctx.mem.details ? I.eyeOff : I.eye}${ctx.mem.details ? 'Hide' : 'Show'} Details</button></div>
+      <div class="os-tacts"><button class="os-btn" data-os="random" aria-label="Add a random station" title="Add a random station">${I.shuffle}<span class="os-tlab">Add Random</span></button>
+        <button class="os-btn" data-os="details" aria-label="${ctx.mem.details ? 'Hide' : 'Show'} details" title="${ctx.mem.details ? 'Hide' : 'Show'} details">${ctx.mem.details ? I.eyeOff : I.eye}<span class="os-tlab">${ctx.mem.details ? 'Hide' : 'Show'} Details</span></button></div>
     </div>
     <div class="os-discrow"></div>
     <div class="os-frow"><div class="os-filters">

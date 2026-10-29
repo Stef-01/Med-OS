@@ -28,6 +28,9 @@ import { lockerFor, fitLook } from '../duel/locker.mjs';
 import { normWallet, fitWear } from '../duel/shop.mjs';
 import { ITEMS, wearMsg, itemOf, movesOf } from '../pup/wardrobe.mjs';
 import { still, lookDog } from '../pup/rig/still.mjs';
+import { showMove } from '../pup/rig/pokemoves.mjs';
+/* a look's move to show off: a gift dog with moves of its own (the Eevee family) plays one of its five, else its pieces' first */
+const sigMove = L => showMove(L?.dog, movesOf(L?.wear));
 import { icon } from './icons.mjs';
 import { openWardrobe } from './shop.mjs';
 import { rankCard, openSearch, openLadder, lobbyBoard, localDay } from './ranked.mjs';
@@ -694,7 +697,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     shell.querySelector('.pd-theirs .pd-dogslot').append(theirDog.el);
     S.dogs = { me: myDog, them: theirDog };
     /* the walk-on: each dog plays its own signature move as the duel opens, never during a question */
-    myDog.perform(movesOf(myL.wear)[0]); setTimeout(() => theirDog.perform(movesOf(theirL.wear)[0]), 500);
+    myDog.perform(sigMove(myL)); setTimeout(() => theirDog.perform(sigMove(theirL)), 500);
     /* the two faces that mark who picked what on a reveal: drawn once, moved to the option each picked */
     S.match = { d, me, them, t, myLook: myL, theirLook: theirL, practice: isPractice, last: {}, round: -1, revealed: -1, emoteN: 0, reported: false, faces: { me: face(myL, 'pd-pick'), them: face(theirL, 'pd-pick') } };
     S.match.faces.me.dataset.who = 'me'; S.match.faces.them.dataset.who = 'them';
@@ -934,7 +937,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     S.dogs.me.expr(out === 'win' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);
     S.dogs.them.expr(out === 'loss' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);
     /* the winner's celebration: their signature move if their look has one, else the cheer */
-    const winner = out === 'win' ? 'me' : out === 'loss' ? 'them' : null, wm = winner && movesOf((winner === 'me' ? lookOf(S.match.myLook) : lookOf(S.match.theirLook)).wear)[0];
+    const winner = out === 'win' ? 'me' : out === 'loss' ? 'them' : null, wm = winner && sigMove(winner === 'me' ? lookOf(S.match.myLook) : lookOf(S.match.theirLook));
     if (winner && wm) setTimeout(() => S.dogs[winner]?.perform(wm), 700); else if (out === 'win') S.dogs.me.tap();
     say(`${head}. ${fmt(st.score[me])} to ${fmt(st.score[opp])}.`);
     res.querySelector('[data-pd="lobby"]').addEventListener('click', showLobbyOrAuth);
@@ -1001,13 +1004,13 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     m.querySelector('span').textContent = ch.kind === 'placed' ? `Placed in ${ch.tier}` : ch.kind === 'up' ? `Up to ${ch.tier}` : `Down to ${ch.tier}`;
     el.after(m);
     say(m.textContent);
-    if (ch.kind !== 'down') { const mv = movesOf(lookOf(S.match?.myLook).wear)[0]; if (mv) setTimeout(() => S.dogs.me?.perform(mv), 2600); else S.dogs.me?.tap(); }
+    if (ch.kind !== 'down') { const mv = sigMove(lookOf(S.match?.myLook)); if (mv) setTimeout(() => S.dogs.me?.perform(mv), 2600); else S.dogs.me?.tap(); }
   }
   /* an emote is a dog's chance to show off: its signature move (moves.mjs) when it has one and no question is up
      (a dance beside the options would pull the eye off them), else the cheer it always had. Both phones play it: each
      knows both looks, so nothing about the move travels with the emote */
   function showOff(who) {
-    const M = S.match, mv = M && movesOf(lookOf(who === 'me' ? M.myLook : M.theirLook).wear)[0];
+    const M = S.match, mv = M && sigMove(lookOf(who === 'me' ? M.myLook : M.theirLook));
     if (mv && S.view?.stage?.name !== 'question') S.dogs[who]?.perform(mv); else S.dogs[who]?.tap();
   }
   /* their rematch, while this phone shows the result: a new challenge from them in the inbox (the finished duel's

@@ -11,6 +11,22 @@ import { still } from './still.mjs';
 import { NS, r3, set, tr, scl, reach, drape } from './parts.mjs';
 import { hatFit, boxIn, makeDog } from './rig.mjs';
 import { MOVES, peakOf } from './moves.mjs';
+import { POKEMOVES, movesFor } from './pokemoves.mjs';
+function moveOf(id) { return Object.prototype.hasOwnProperty.call(MOVES, id) ? MOVES[id] : Object.prototype.hasOwnProperty.call(POKEMOVES, id) ? POKEMOVES[id] : null; }
+/* a dog with moves of its own (the Eevee family) plays the next one on a tap; the others react as ever */
+function tapDog(r) {
+  var own = movesFor(r.c.id);
+  if (!own.length) { r.rig.excite(clock); return; }
+  if (r.rig.fx && clock - r.rig.fx.start < r.rig.fx.dur) { r.rig.excite(clock); return; }   // mid-move: a heart, no restart
+  r.moveN = ((r.moveN == null ? -1 : r.moveN) + 1) % own.length;
+  playMove(r, own[r.moveN]);
+}
+function playMove(r, id) {
+  if (!r.rig.perform(id, clock)) return;
+  lively = performance.now() + moveOf(id).dur + 600;
+  if (!running()) { clock += peakOf(moveOf(id)); draw(16); }   // reduced motion: the move's peak, held
+  syncDock();
+}
 
 // ---- the scene: a roster, a camera, and dogs that walk to their spots ----
 var svg = document.getElementById('scene');
@@ -322,13 +338,13 @@ function bindSlot(r) {
     if (press.moved) r.rig.petting = true;
   });
   function end(tap) {
-    if (press && !press.moved && tap) { select(r); r.rig.excite(clock); kick(); }
+    if (press && !press.moved && tap) { select(r); tapDog(r); kick(); }
     press = null; r.rig.petting = false;
   }
   r.slot.addEventListener('pointerup', function () { end(true); });
   r.slot.addEventListener('pointercancel', function () { end(false); });
   r.slot.addEventListener('keydown', function (ev) {
-    if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(r); r.rig.excite(clock); kick(); }
+    if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(r); tapDog(r); kick(); }
   });
 }
 
@@ -368,6 +384,21 @@ EXPR_ORDER.forEach(function (id) {
   });
   chipsEl.appendChild(chip);
 });
+var movesEl = document.getElementById('moves'), movesRow = document.getElementById('movesRow'), movesFor_ = null;
+function syncMoves() {
+  if (!movesEl) return;
+  var own = selected && selected.state === 'in' ? movesFor(selected.c.id) : [];
+  movesRow.hidden = !own.length;
+  if (movesFor_ === selected) return;
+  movesFor_ = selected; movesEl.textContent = '';
+  own.forEach(function (id) {
+    var chip = document.createElement('button');
+    chip.type = 'button'; chip.className = 'chip move-' + POKEMOVES[id].type; chip.textContent = POKEMOVES[id].name;
+    chip.addEventListener('click', function () { if (selected && selected.state === 'in') { playMove(selected, id); kick(); } });
+    movesEl.appendChild(chip);
+  });
+  var lab = document.getElementById('movesLabel'); if (lab) { lab.innerHTML = 'Moves · <b></b>'; lab.lastChild.textContent = selected ? selected.c.name : ''; }
+}
 function select(r) { selected = r; syncDock(); }
 function syncDock() {
   var n = inScene().length, have = unlocked();
@@ -384,6 +415,7 @@ function syncDock() {
   });
   exprLabel.innerHTML = 'Expression · <b></b>';
   exprLabel.lastChild.textContent = selected ? selected.c.name : '';
+  syncMoves();
   [].forEach.call(chipsEl.children, function (chip) {
     chip.setAttribute('aria-pressed', String(!!selected && selected.rig && selected.rig.exprId === chip.dataset.expr));
   });
@@ -644,7 +676,7 @@ syncDock();
 window.__dob = {
   roster: roster, add: function (i) { addDog(roster[i]); }, remove: function (i) { removeDog(roster[i]); },
   expr: function (i, id) { roster[i].rig.setExpr(id, clock); }, stop: function () { wanted = false; sync(); },
-  at: function (c) { clock = c; draw(1000 / 60); }, tap: function (i) { roster[i].rig.excite(clock); },
+  at: function (c) { clock = c; draw(1000 / 60); }, tap: function (i) { roster[i].rig.excite(clock); }, moves: function (i) { return movesFor(roster[i].c.id); },
   treat: function (i) { roster[i].rig.treat(clock); }, perform: function (i, id) { return roster[i].rig.perform(id, clock); }, call: function () { inScene().forEach(function (r, i) { r.rig.call(clock + i * 110); }); },
   makeGif: makeGif, clock: function () { return clock; }, look: function (x, y) { lookAt(x, y); },
   wear: function (i, m) { wear(roster[i], m, true); },   // scripts/doberman/fit-audit.mjs dresses a dog without postMessage
@@ -681,9 +713,9 @@ if (EMBED) window.addEventListener('message', function (e) {
   if (m.dob === 'expr' && EXPR[m.id] && m.id !== r.exprId) r.setExpr(m.id, clock - 420);   // a verdict lands at once: 230 ms of the blend left
   else if (m.dob === 'tap') r.excite(clock);
   else if (m.dob === 'treat') r.treat(clock);
-  else if (m.dob === 'perform') { if (!r.perform(m.id, clock)) return; lively = performance.now() + MOVES[m.id].dur + 600; }
+  else if (m.dob === 'perform') { if (!r.perform(m.id, clock)) return; lively = performance.now() + moveOf(m.id).dur + 600; }
   // reduced motion: show the new pose as a still (a signature move's at its peak, half way through)
-  if (!running()) { clock += m.dob === 'perform' ? peakOf(MOVES[m.id]) : SWITCH + B; draw(16); }
+  if (!running()) { clock += m.dob === 'perform' ? peakOf(moveOf(m.id)) : SWITCH + B; draw(16); }
 });
 draw(16);   // frame 0 must be a good drawing
 sync();

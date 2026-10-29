@@ -14,11 +14,11 @@ let made = 0;   // each still's own id prefix: its clip paths must not meet anot
 export const lookDog = look => resolve(dress(DOGS.find(d => d.id === dogById(look && look.dog).id), look || {}));
 
 /* an <svg> of one resolved dog, framed on its head and ears: 45 head units of room over the head's top, which takes
-   in the tallest ears (a corgi's, a chihuahua's), down to the chin; `expr` its face */
+   in the tallest ears (a corgi's, a chihuahua's), down to the chin (the LPS head's, LPS_FACE in breeds.mjs); `expr` its face */
 export function still(c, { expr = 'happy' } = {}) {
   const svg = document.createElementNS(NS, 'svg'), g = document.createElementNS(NS, 'g');
   const s = c.scale, m = c.mirror ? -1 : 1, hx = m * 18 * s, hy = -c.floorY * s;
-  svg.setAttribute('viewBox', [hx - 68 * s, hy - 100 * s, 136 * s, 136 * s].map(r3).join(' '));
+  svg.setAttribute('viewBox', [hx - 64 * s, hy - 100 * s, 128 * s, 128 * s].map(r3).join(' '));
   svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('focusable', 'false');
   svg.appendChild(g);

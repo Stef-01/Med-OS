@@ -31,7 +31,7 @@ export function renderStart(main) {
       <span class="os-chev">${I.chevR}</span></button>
     ${pairHtml()}
     ${osceGames(ctx.mem).duel ? duelHtml() : ''}
-    <div class="os-more" aria-label="Contribute">${requestCardHtml()}${mcqCardHtml()}</div>
+    <div class="os-contrib" aria-label="Contribute">${requestCardHtml()}${mcqCardHtml()}</div>
     ${doneHtml()}
   </div>`;
   runPaint();

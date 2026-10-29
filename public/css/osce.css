@@ -2188,8 +2188,29 @@ details.os-pair:not([open]) { padding-bottom:14px; }
    one hero card; Request a case and Submit a question shrink to two quiet tiles at the foot */
 .os-hero .os-bigcard { background:linear-gradient(135deg, var(--pri-soft), var(--card)); border:1.5px solid color-mix(in srgb, var(--pri) 40%, transparent); }
 .os-hero .os-bigcard .os-bigtx strong { font-size:18px; }
-.os-more { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.os-more .os-bigcard { flex-direction:column; align-items:flex-start; gap:8px; padding:14px; min-height:0; }
-.os-more .os-bigcard .os-bigtx > span, .os-more .os-chev { display:none; }
-.os-more .os-bigcard .os-bigtx strong { font-size:14.5px; }
-.os-more .os-bigic { width:34px; height:34px; }
+.os-contrib { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.os-contrib .os-bigcard { flex-direction:column; align-items:flex-start; gap:8px; padding:14px; min-height:0; }
+.os-contrib .os-bigcard .os-bigtx > span, .os-contrib .os-chev { display:none; }
+.os-contrib .os-bigcard .os-bigtx strong { font-size:14.5px; }
+.os-contrib .os-bigic { width:34px; height:34px; }
+/* backlog 7 (Spotify Library: one row of controls, filters as one scrolling line): on a phone the toolbar is the search
+   and two icon buttons, the filter chips scroll sideways on a single line, so the first station shows above the fold */
+@media (max-width:639px) {
+  .os-toolbar { display:flex; align-items:center; gap:8px; }
+  .os-toolbar .os-search { flex:1; min-width:0; }
+  .os-tacts { display:flex; gap:6px; flex:none; }
+  .os-tacts .os-btn { width:44px; height:44px; padding:0; justify-content:center; }
+  .os-tacts .os-tlab { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .os-frow { flex-wrap:nowrap; }
+  .os-filters { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin-inline:-16px; padding-inline:16px; -webkit-mask:linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask:linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
+  .os-filters::-webkit-scrollbar { display:none; }
+  .os-filters > * { flex:none; }
+}
+@media (max-width:639px) {
+  .os-toolbar .os-tacts { width:auto; margin-left:0; }
+  .os-toolbar .os-tacts .os-btn { flex:none; width:44px; }
+  /* the disciplines as one sideways line, like the filters under them */
+  .os-browse .os-discrow .kit-disc { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin-inline:-16px; padding-inline:16px; -webkit-mask:linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask:linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
+  .os-browse .os-discrow .kit-disc::-webkit-scrollbar { display:none; }
+  .os-browse .os-discrow .kit-disc > * { flex:none; }
+}

@@ -62,6 +62,7 @@ PARTS.sway.at = 'br';       // a balloon swings from where its string is held
 export var LIMITS = { accents: 3, parts: 2, minDur: 800, maxDur: 3000 };
 // the moment a held still shows (reduced motion): after a spin has come round, else half way, inside the full blend
 export function peakOf(mv) {
+  if (mv.peak) return mv.peak;   // a move that names its own (pokemoves.mjs: where its effect reads best)
   var at = mv.spin ? mv.spin[mv.spin.length - 2][0] : mv.dur / 2;
   return Math.max(150, Math.min(at, mv.dur - 600));
 }

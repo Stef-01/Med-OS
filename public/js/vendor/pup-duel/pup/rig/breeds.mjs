@@ -788,6 +788,9 @@ DOGS.push(
 
 /* one dog, everything the rig reads: the breed's build under the dog's own keys, and a palette with every role filled
    (a part asks for `muzzle`, `lidL`, `earR`, … and gets the dog's colour, or the role it follows by default) */
+/* LPS face proportions: the eyes' scale, how much shorter the head runs below the snout, and the snout patch's height */
+export const LPS_FACE = { trim: 10, muzzleH: 0.72, eye: 1.36 };
+
 export function resolve(d) {
   const B = BREEDS[d.breed];
   if (!B) throw new Error(`breeds.mjs: ${d.id} names an unknown breed ${d.breed}`);
@@ -812,8 +815,11 @@ export function resolve(d) {
   if (c.style === 'lps') {
     if (!c.eyesChosen) { c.eyes = 'lps'; c.sclera = true; }
     if (!c.iris) c.iris = lpsIris(c.id);
-    c.eye = (c.eye || 1) * 1.32;
-    c.muzzle = { ...c.muzzle, w: Math.round(c.muzzle.w * 0.74), h: Math.round(c.muzzle.h * 0.8) };   // a smaller snout patch: the face is mostly eyes
+    c.eye = (c.eye || 1) * LPS_FACE.eye;
+    c.muzzle = { ...c.muzzle, w: Math.round(c.muzzle.w * 0.74), h: Math.round(c.muzzle.h * LPS_FACE.muzzleH) };   // a smaller snout patch: the face is mostly eyes
+    /* a tighter face (founder 2026-10-29: "their faces look too big", "by big i mean empty space"): the head ends
+       closer under the snout, its top (hats at -55) and eye line (glasses at -31) where they were */
+    c.head = { ...c.head, h: c.head.h - LPS_FACE.trim };
   }
   return c;
 }
