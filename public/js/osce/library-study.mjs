@@ -82,12 +82,18 @@ function homeHtml() {
   const pl = inPlace(all, placementSpecs(ctx.mem)), pn = placementName(ctx.mem);   /* your placement's questions (Settings) */
   const firstTime = !s.total.n;   /* the modes explain themselves until the first answer, then stay out of the way */
   const mode = (m, label, sub, ic, n = '') => `<button class="os-libmode${firstTime ? '' : ' os-libmode--short'}" data-lib="mode" data-m="${m}"><span class="os-libmode-ic">${icon(ic)}${n !== '' ? `<span class="os-libmode-n">${n}</span>` : ''}</span><span class="os-libmode-tx"><b>${esc(label)}</b>${firstTime || m === 'weak' ? `<small>${esc(sub)}</small>` : ''}</span></button>`;
+  /* backlog 15 (Duolingo's goal, Monzo: the setting lives where the progress is): a tap on the ring opens the goal and
+     the exam date, right under it */
   return `<section class="os-libtoday">
-      ${ring(td.frac, td.n, td.goal)}
+      <button class="os-libringbtn" data-lib="goalopen" aria-label="Change the daily goal and exam date" aria-expanded="${V.goalOpen ? 'true' : 'false'}">${ring(td.frac, td.n, td.goal)}</button>
       <div class="os-libtoday-tx"><h3>${td.done ? 'Goal done today' : 'Today'}</h3>
         <p class="os-libstreak${sk.live ? ' live' : ''}">${icon('flame')}<span>${sk.days ? `${sk.days}-day streak${sk.live ? '' : ': study today to keep it'}` : 'Start a streak today'}</span></p>
         <p class="os-libmeta">${[tl.due ? `${tl.due} due` : '', `${Math.max(0, Math.min(tl.fresh, (plan?.perDay || 20) - startedToday()))} new`].filter(Boolean).join(' · ')}${plan ? ` · exam in ${plural(plan.days, 'day')}` : ''}</p></div>
     </section>
+    <details class="os-libsettings"${V.goalOpen ? ' open' : ''}><summary>Goal and exam date</summary>
+    <div class="os-libexam">${plan ? `<p><b>Exam in ${plural(plan.days, 'day')}</b><span>${plan.unseen} questions not seen yet: ${plan.perDay} new a day sees them all once by then.</span></p>` : '<p><b>Exam plan</b><span>Set your exam date and the day’s new questions follow from it.</span></p>'}
+      <label class="os-libexamd"><span class="os-vh">Exam date</span><input type="date" name="exam" value="${esc(p.exam)}" min="${esc(dayOf(t))}"></label></div>
+    <div class="os-libgoal"><span class="os-libh2">Daily goal</span><div class="os-seg" role="radiogroup" aria-label="Daily goal">${GOALS.map(g => `<button role="radio" data-lib="pref" data-k="goal" data-v="${g}" aria-checked="${p.goal === g}">${g}</button>`).join('')}</div></div></details>
     ${res ? `<button class="os-libresume" data-lib="resume"><span><b>Resume your session</b><small>${esc(res.label || 'Study')} · ${plural(res.left, 'card')} left</small></span><span class="os-chev" aria-hidden="true">${I.chevR}</span></button>` : ''}
     <button class="os-btn os-btn--lg os-primary os-libgo" data-lib="today"${q.length ? '' : ' disabled'}>${q.length ? `Start · ${plural(q.length, 'card')}` : 'All caught up: try a mode below'}</button>
     <div class="os-libmodes">
@@ -100,11 +106,7 @@ function homeHtml() {
       ${notes ? mode('notebook', 'Notes', 'Every note you wrote', 'pencil', notes) : ''}
       ${mode('custom', 'Custom', 'Deck, specialty, year, timed…', 'filter')}
     </div>
-    ${gapsCardHtml()}
-    <details class="os-libsettings"><summary>Goal and exam date</summary>
-    <div class="os-libexam">${plan ? `<p><b>Exam in ${plural(plan.days, 'day')}</b><span>${plan.unseen} questions not seen yet: ${plan.perDay} new a day sees them all once by then.</span></p>` : '<p><b>Exam plan</b><span>Set your exam date and the day’s new questions follow from it.</span></p>'}
-      <label class="os-libexamd"><span class="os-vh">Exam date</span><input type="date" name="exam" value="${esc(p.exam)}" min="${esc(dayOf(t))}"></label></div>
-    <div class="os-libgoal"><span class="os-libh2">Daily goal</span><div class="os-seg" role="radiogroup" aria-label="Daily goal">${GOALS.map(g => `<button role="radio" data-lib="pref" data-k="goal" data-v="${g}" aria-checked="${p.goal === g}">${g}</button>`).join('')}</div></div></details>`;
+    ${gapsCardHtml()}`;
 }
 
 function customHtml() {
@@ -475,7 +477,8 @@ export async function studyAct(a, b, e) {
       if (m === 'weak') { const g = summary(all, mem.card).gaps[0]; if (!g) return; const [topic, cat] = g.id.split('|'); return startWith(session(all.filter(x => x.item.topic === topic && (!cat || x.item.cat === cat)), mem.card, { order: 'shuffle', size: p.size }, now()), { label: g.label }); }
       return;
     }
-    case 'pref': { V.tap = `${b.dataset.k}:${b.dataset.v}`; const k = b.dataset.k, v = ['goal', 'size'].includes(k) ? +b.dataset.v : b.dataset.v; setPref(k, v); return paint(); }
+    case 'goalopen': { V.goalOpen = !V.goalOpen; const d = panel()?.querySelector('.os-libsettings'); if (d) d.open = V.goalOpen; b.setAttribute('aria-expanded', String(V.goalOpen)); return; }
+    case 'pref': { if (b.closest('.os-libsettings')) V.goalOpen = true; V.tap = `${b.dataset.k}:${b.dataset.v}`; const k = b.dataset.k, v = ['goal', 'size'].includes(k) ? +b.dataset.v : b.dataset.v; setPref(k, v); return paint(); }
     case 'flag': return toggleFlag();
     case 'resume': { const r = resumable(lsGet(LIVE, null), everything(), now()); if (!r) { lsSet(LIVE, null); return paint(); } startWith(r.q, { mode: r.mode, order: r.order, label: r.label }); Object.assign(V.st, { i: r.i, n: r.n, right: r.right }); paint(); tick(); return; }
     case 'redo': { const by = new Map(V.st.q.map(x => [x.key, x])), l = [...new Set(V.st.seen.filter(s => !s.ok).map(s => s.key))].map(k => by.get(k)).filter(Boolean); return startWith(l, { label: 'Redo' }); }

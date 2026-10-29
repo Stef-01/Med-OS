@@ -2255,3 +2255,7 @@ details.os-pair:not([open]) { padding-bottom:14px; }
 .os-scard[data-swipe="save"][data-armed] { box-shadow:inset -6px 0 0 var(--warn, #f5b301); }
 .os-hero { display:block; width:100%; }
 .os-hero > .os-bigcard { width:100%; box-sizing:border-box; }
+.os-libringbtn { padding:0; border:0; background:none; color:inherit; cursor:pointer; border-radius:50%; transition:transform .15s; }
+.os-libringbtn:active { transform:scale(.95); }
+.os-libtoday + .os-libsettings { margin-top:-4px; }
+.os-libtoday + .os-libsettings > summary { font-size:13px; }

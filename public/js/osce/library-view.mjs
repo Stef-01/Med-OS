@@ -87,7 +87,7 @@ function wire(el) {
   el.addEventListener('input', e => { if (e.target.name === 'find') { V.find = e.target.value; clearTimeout(V.findT); V.findT = setTimeout(() => { const pos = e.target.selectionStart; paint(); const f = panel()?.querySelector('[name="find"]'); if (f) { f.focus(); f.setSelectionRange(pos, pos); } }, 160); return; } if (e.target.name === 'notes') { V.up.notes = e.target.value; const b = panel()?.querySelector('[data-lib="copyprompt"] span'); if (b) b.textContent = V.up.notes.trim() ? 'Copy the prompt with my notes' : 'Copy the prompt'; return; } if (e.target.matches?.('[data-lib-note]')) { clearTimeout(saveNote.t); const v = e.target.value; saveNote.t = setTimeout(() => saveNote(v), 400); return; } if (e.target.name === 'paste') { V.up.text = e.target.value; V.up.res = null; V.up.check = null; paintUploadResult(); } if (e.target.name === 'deck') V.up.deck = e.target.value; });
   el.addEventListener('change', e => {
     if (e.target.name === 'file') readFile(e.target);
-    if (e.target.name === 'exam') { setPref('exam', e.target.value || ''); paint(); return; }
+    if (e.target.name === 'exam') { V.goalOpen = true; setPref('exam', e.target.value || ''); paint(); return; }
     if (e.target.name === 'sdeck') { V.st.deck = e.target.value; V.st.topic = ''; V.st.cat = ''; V.st.year = 0; paint(); }
   });
 }
