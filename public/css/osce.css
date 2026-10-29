@@ -2286,3 +2286,7 @@ details.os-pair:not([open]) { padding-bottom:14px; }
 /* R13: closed, the goal is a quiet line under the ring (the ring itself opens it) */
 .os-libtoday + .os-libsettings:not([open]) { background:none; border:0; box-shadow:none; padding:0 4px; margin-top:-6px; }
 .os-libtoday + .os-libsettings:not([open]) > summary { min-height:28px; padding:0; }
+/* QA 2026-10-29: the hero tag wraps rather than cutting the dog's name */
+.os-plcard--hero .os-plcard-tx i { white-space:normal; line-height:1.2; }
+/* the Browse count keeps clear of the scrolling chips */
+@media (max-width:639px) { .os-browse .os-count { padding-left:10px; background:linear-gradient(90deg, transparent, var(--solid, var(--bg)) 10px); position:relative; z-index:1; } }

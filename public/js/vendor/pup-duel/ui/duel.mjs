@@ -213,7 +213,8 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     const bad = S.err && draft.bad && shell.querySelector(`input[name="${draft.bad}"]`);
     if (bad) { bad.setAttribute('aria-invalid', 'true'); bad.setAttribute('aria-describedby', 'pd-autherr'); shell.querySelector(`.pd-err[data-for="${draft.bad}"]`)?.setAttribute('id', 'pd-autherr'); }
     S.err = '';
-    (bad || [...shell.querySelectorAll('input')].find(i => !i.value) || shell.querySelector('.pd-dogpick[aria-checked="true"], input'))?.focus({ preventScroll: true });
+    /* a slip goes to its field; the first screen with Play the AI now on it leaves the keyboard down (QA 2026-10-29) */
+    (bad || (step === 'name' && practice ? shell.querySelector('[data-pd="practice"]') : [...shell.querySelectorAll('input')].find(i => !i.value) || shell.querySelector('.pd-dogpick[aria-checked="true"], input')))?.focus({ preventScroll: true });
   }
   async function busy(fn, onErr) {
     S.busy = true; root.dataset.busy = '';
@@ -481,7 +482,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
         <h2 class="pd-sheet-title"></h2>
         ${decks.length ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('pack')}</span><div><span class="pd-seglabel" id="pd-sl-deck">From</span><div class="pd-seg pd-seg--deck" role="radiogroup" aria-labelledby="pd-sl-deck">${[...decks, { id: '', label: 'Mix', count: decks.reduce((n, d) => n + d.count, 0) }].map(d => `<button type="button" role="radio" data-deck="${esc(d.id)}" aria-checked="${d.id === opt.deck}" tabindex="${d.id === opt.deck ? 0 : -1}" aria-label="${esc(d.label)}, ${d.count} questions">${esc(d.short || d.label)}</button>`).join('')}</div></div></div>` : ''}
         ${layered ? `<button class="pd-pickrow" type="button" data-pd="choose"><span class="pd-segic" aria-hidden="true">${icon('tag')}</span><span class="pd-pick-tx"><small>Questions from</small><b></b></span><span class="pd-pick-n"></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
-        ${yearsOf(pack).length > 1 ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('star')}</span><div><span class="pd-seglabel" id="pd-sl-order">Order</span><div class="pd-seg" role="radiogroup" aria-labelledby="pd-sl-order">${[['mix', 'Shuffled'], ['ladder', '0 to 1']].map(([v, l]) => `<button type="button" role="radio" data-order="${v}" aria-checked="${(v === 'ladder') === !!opt.ladder}" tabindex="${(v === 'ladder') === !!opt.ladder ? 0 : -1}"${v === 'ladder' ? ' aria-describedby="pd-laddernote"' : ''}>${l}</button>`).join('')}</div><p class="pd-note pd-readnote" id="pd-laddernote">0 to 1: Year 1 first principles up to final year, harder each question.</p></div></div>` : ''}
+        ${yearsOf(pack).length > 1 ? `<div class="pd-segrow"><span class="pd-segic" aria-hidden="true">${icon('star')}</span><div><span class="pd-seglabel" id="pd-sl-order">Order</span><div class="pd-seg" role="radiogroup" aria-labelledby="pd-sl-order">${[['mix', 'Shuffled'], ['ladder', '0 to 1']].map(([v, l]) => `<button type="button" role="radio" data-order="${v}" aria-checked="${(v === 'ladder') === !!opt.ladder}" tabindex="${(v === 'ladder') === !!opt.ladder ? 0 : -1}"${v === 'ladder' ? ' aria-describedby="pd-laddernote"' : ''}>${l}</button>`).join('')}</div><p class="pd-note pd-readnote" id="pd-laddernote"${opt.ladder ? '' : ' hidden'}>0 to 1: Year 1 first principles up to final year, harder each question.</p></div></div>` : ''}
         ${S.playlist ? `<div class="pd-plrow"><span class="pd-segic" aria-hidden="true">${icon('list')}</span><span class="pd-pick-tx"><small>Playlist</small><b>${esc(S.playlist)}</b></span><button class="pd-link" type="button" data-pd="bank">Standard questions</button></div>` :
           onPlaylists ? `<button class="pd-pickrow pd-plbtn" type="button" data-pd="playlists"><span class="pd-segic" aria-hidden="true">${icon('list')}</span><span class="pd-pick-tx"><small>Community</small><b>Playlists</b></span><span class="pd-pick-go" aria-hidden="true">${icon('chev')}</span></button>` : ''}
         ${isPractice ? seg('level', 'bot', 'AI level', Object.keys(AI_LEVELS), levelOf(opt.level), v => AI_LEVELS[v].label) : ''}
@@ -547,7 +548,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       el.querySelectorAll('.pd-seg').forEach(g => {
         const set = b => {
           g.querySelectorAll('button').forEach(x => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; });
-          if (b.dataset.order !== undefined) { opt.ladder = b.dataset.order === 'ladder'; keepPick({ ...opt }); }
+          if (b.dataset.order !== undefined) { opt.ladder = b.dataset.order === 'ladder'; keepPick({ ...opt }); const n = el.querySelector('#pd-laddernote'); if (n) n.hidden = !opt.ladder; }
           if (b.dataset.level !== undefined) { opt.level = b.dataset.level; keepPick({ ...opt }); }
           if (b.dataset.deck !== undefined) { opt.deck = b.dataset.deck; tree = topicTree(cur()); if (!poolOf(cur(), opt).length) { opt.topic = ''; opt.cat = ''; } keepPick({ ...opt }); }
           paintPick();
@@ -661,7 +662,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
       const setup = makeSetup(deckPack(pack, opts.deck || ''), { rounds: opts.rounds || RULES.rounds, secs: opts.secs || RULES.secs, topic: opts.topic || '', cat: opts.cat || '', ladder: !!opts.ladder && yearsOf(pack).length > 1, seed: freshSeed(), title: pack.title });
       if (!setup.questions.length) throw new Error('No questions to play.');
       const d = await w.transport.challenge(w.me, w.bot.id, setup);
-      openDuel({ ...d, them: { ...w.bot, name: `${BOT.name} (${lv.label})`, look: BOT.look } }, { practice: true });
+      openDuel({ ...d, them: { ...w.bot, name: BOT.name, level: lv.label, look: BOT.look } }, { practice: true });
     }, () => { S.screen === 'lobby' ? paintLobby() : showAuth(); });
   }
 

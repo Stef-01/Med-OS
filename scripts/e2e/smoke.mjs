@@ -851,7 +851,7 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
   ok(await plc.evaluate(async () => { localStorage.removeItem('osce.duel:placed'); localStorage.setItem('osce.duel:pick', '{"deck":"bank"}'); (await import('./js/osce/duel.mjs')).placePick(); return JSON.parse(localStorage.getItem('osce.duel:pick')).deck === 'place'; }), 'placement: a synced placement starts the duel on Rotation');
   /* cleared: everything goes back, at once */
   await plc.click('.os-run [data-os="place"]'); await plc.waitForSelector('.os-placechip'); await plc.click('[data-place="og"]'); await plc.keyboard.press('Escape'); await plc.waitForTimeout(300);
-  ok(/Set your placement/.test(await plc.textContent('.os-run .os-place')) && !(await plc.locator('.os-rots [data-disc][aria-pressed="true"]').count())
+  ok(/Set your placement/.test(await plc.textContent('.os-run .os-place')) && !(await plc.locator('.os-rots [data-disc]:not([data-disc=""])[aria-pressed="true"]').count())
     && JSON.parse(await plc.evaluate(() => localStorage.getItem('osce.duel:pick'))).deck === '', 'placement: clearing it clears Fast Run, Start and the duel');
   await plc.click('.os-start [data-os="lib"]'); await plc.waitForSelector('.os-lib [data-lib="today"]');
   ok(!(await plc.locator('[data-lib="mode"][data-m="place"]').count()), 'placement: no Rotation mode without one');

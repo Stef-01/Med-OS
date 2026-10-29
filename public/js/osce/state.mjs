@@ -119,7 +119,9 @@ export const whoOf = a => osceWho(a);
 /* "Sam is the candidate · Alex examines" for the station on the clock */
 export const roleLine = cand => `${esc(nameOf(cand))} is the candidate · ${esc(nameOf(cand === 1 ? 0 : 1))} examines`;
 /* the same, short enough for the header on a phone */
-export const roleShort = cand => `<span class="os-roleshort">Candidate <b>${esc(nameOf(cand))}</b> · examiner ${esc(nameOf(cand === 1 ? 0 : 1))}</span>`;
+/* the header's who: "Alex examined by Sam" in short ("Alex → Sam") so a narrow phone shows both names; the whole sentence
+   for a screen reader (QA 2026-10-29) */
+export const roleShort = cand => `<span class="os-roleshort"><span class="os-vh">Candidate ${esc(nameOf(cand))} · examiner ${esc(nameOf(cand === 1 ? 0 : 1))}</span><span aria-hidden="true"><b>${esc(nameOf(cand))}</b> → ${esc(nameOf(cand === 1 ? 0 : 1))}</span></span>`;
 /* a small initial badge: whose attempt this was */
 export const whoBadge = a => { const w = osceWho(a); return w == null ? '' : `<span class="os-who os-who--${w}" title="${esc(nameOf(w))}">${esc(initialOf(w))}</span>`; };
 

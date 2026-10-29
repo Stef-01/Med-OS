@@ -145,7 +145,7 @@ export function runPaint() {
   /* the kit's discipline row, as on every Learn list page; here All picks every rotation (none picked runs nothing) */
   const ids = ROTATIONS.map(d => d[0]).filter(id => specsIn(id).length), every = ids.every(id => rotState(id) === 'on');
   box.querySelector('.os-rots').innerHTML = discRowHtml('run', ids.map(id => [id, rotCount(id)]), rotState,
-    { on: every, n: osceRunPool(stations, { ...r, specs: ids.flatMap(specsIn) }).length });
+    { on: every || !r.specs.length, n: osceRunPool(stations, { ...r, specs: ids.flatMap(specsIn) }).length });   /* none picked is All (QA 2026-10-29) */
   /* your placement, one tap from changing (Settings opens on it) */
   const pn = placementName(ctx.mem);
   box.querySelector('.os-place').innerHTML = pn ? `<span>On placement: <b>${esc(pn)}</b></span><button class="os-link" data-os="place">Change</button>` : '<button class="os-link" data-os="place">Set your placement</button>';
@@ -173,8 +173,7 @@ export function toggleRot(rot) {
 }
 /* All: every rotation on, or off again when they all are */
 export function runAll() {
-  const r = run(), ids = ROTATIONS.map(d => d[0]).filter(id => specsIn(id).length);
-  r.specs = ids.every(id => rotState(id) === 'on') ? [] : [...new Set(ids.flatMap(specsIn))];
+  run().specs = [];   /* All is no pick: every rotation, one label ("all N"), nothing to clear (QA 2026-10-29) */
   save(); runPaint();
 }
 export function runClear() { Object.assign(run(), { specs: [], origin: [], type: [] }); save(); runPaint(); }
