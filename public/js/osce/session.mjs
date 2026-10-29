@@ -33,6 +33,7 @@ export function renderSession(main) {
       ${pane ? `<div class="os-pr"><div class="os-pbody">${markingHtml(st, a, true)}</div></div>` : ''}
     </div></div>`;
   placePill(main); syncIndeterminate();
+  swipeTabs(main.querySelector('.os-pl'));
   if (!fin) startTick();
 }
 /* the tabs a station's content fills: the candidate's instructions, then the examiner's script, which runs in the order of
@@ -390,6 +391,22 @@ export function switchTab(t) {
   requestAnimationFrame(() => { if (go === tabGo && pl.isConnected) paneFor(pl, sc, st, t); });
 }
 let tabGo = 0;
+/* backlog 18 (Instagram, Apple: a swipe for the expert, the tab strip for everyone): a horizontal swipe on the pane moves
+   to the next or the previous tab; a mostly vertical drag, a text selection or a field stays a scroll */
+function swipeTabs(pl) {
+  const sc = pl?.querySelector('.os-pscroll');
+  if (!sc || sc.dataset.swipe) return;
+  sc.dataset.swipe = '1';
+  let x0 = null, y0 = 0, t0 = 0;
+  sc.addEventListener('touchstart', e => { if (e.touches.length !== 1 || e.target.closest('input, textarea, [contenteditable], .os-jump, .os-imgs, img')) { x0 = null; return; } x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = performance.now(); }, { passive: true });
+  sc.addEventListener('touchend', e => {
+    if (x0 == null) return;
+    const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0, fast = performance.now() - t0 < 600; x0 = null;
+    if (!fast || Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 1.8 || String(getSelection?.() || '')) return;
+    const tabs = [...pl.querySelectorAll('[data-os="tab"]')].map(b => b.dataset.tab), i = tabs.indexOf(ctx.tab), to = tabs[i + (dx < 0 ? 1 : -1)];
+    if (to) switchTab(to);
+  }, { passive: true });
+}
 function paneFor(pl, sc, st, t) {
   const pane = pl.querySelector('.os-pbody');
   pane.innerHTML = tabBody(st, ctx.view === 'session' ? curAttempt() : findAttempt(ctx.reviewId), t, { editable: ctx.view === 'session' });
