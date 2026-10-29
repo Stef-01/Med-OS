@@ -396,12 +396,15 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
 
   /* ---- sheets: the menu, the challenge, the dressing room, the review, leaving ---- */
   function sheet(html, wire, { full = false, label = '', cls = '' } = {}) {
+    const swap = !!S.sheet?.isConnected, keepFrom = swap ? S.sheetFrom : null;   /* one sheet for another: the dim stays (audit 2026-10-29: it blinked) */
     closeSheet(true);
     const el = document.createElement('div');
-    el.className = 'pd-sheet-wrap';
+    el.className = 'pd-sheet-wrap' + (swap ? ' pd-swap' : '');
+    el.dataset.at = String(Date.now());
     el.innerHTML = `<div class="pd-scrim" data-pd="shut"></div><div class="pd-sheet${full ? ' pd-full' : ''}${cls ? ' ' + cls : ''}" role="dialog" aria-modal="true"${label ? ` aria-label="${esc(label)}"` : ''}>${html}</div>`;
-    S.sheetFrom = document.activeElement; root.append(el); S.sheet = el;
-    el.querySelectorAll('[data-pd="shut"]').forEach(b => b.addEventListener('click', () => closeSheet()));
+    S.sheetFrom = keepFrom || document.activeElement; root.append(el); S.sheet = el;
+    /* the scrim ignores taps for a moment: a double tap on what opened the sheet must not close it (and cancel a search) */
+    el.querySelectorAll('[data-pd="shut"]').forEach(b => b.addEventListener('click', () => { if (b.classList.contains('pd-scrim') && Date.now() - Number(el.dataset.at) < 350) return; closeSheet(); }));
     wire(el.querySelector('.pd-sheet'));
     /* the focus goes in: the first control that is not Close, else Close (the review has nothing else; the evals found
        it opening with the focus left behind it) */
@@ -410,7 +413,10 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
   /* a sheet may hold its close (the wardrobe, with a look not saved, asks first); `force` closes it whatever it says */
   function closeSheet(force = false) {
     if (!force && S.sheet && S.sheetGuard?.() === false) return;
-    const from = S.sheetFrom; S.sheet?.remove(); S.sheet = null; S.sheetFrom = null; S.sheetGuard = null;
+    const from = S.sheetFrom, gone = S.sheet; S.sheet = null; S.sheetFrom = null; S.sheetGuard = null;
+    /* closed by the player: it slides and fades out; replaced or torn down (force): gone at once */
+    if (gone && !force && !matchMedia?.('(prefers-reduced-motion: reduce)').matches) { gone.classList.add('pd-out'); gone.style.pointerEvents = 'none'; setTimeout(() => gone.remove(), 200); }
+    else gone?.remove();
     if (from?.isConnected) from.focus({ preventScroll: true });   // back on what opened it
   }
   function openMenu() {
@@ -882,8 +888,12 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     theirs.querySelector('b').textContent = fmt(st.score[opp]); dots(theirs.querySelector('.pd-rounds'), opp);
     /* the winner's crown, by their score (over the dog, a tall hat or an ear would meet it) */
     if (st.winner) (st.winner === me ? mine : theirs).querySelector('b').insertAdjacentHTML('afterbegin', `<span class="pd-crown" aria-hidden="true">${icon('crown')}</span>`);
-    main.insertBefore(verdict, shell.querySelector('.pd-versus'));
+    /* the dogs glide to their place under the verdict, never snap (FLIP; audit 2026-10-29: a 48 px jump) */
+    const vs = shell.querySelector('.pd-versus'), y0 = vs?.getBoundingClientRect().top;
+    main.insertBefore(verdict, vs);
     main.insertBefore(res, shell.querySelector('.pd-emotes'));
+    const dy = vs && y0 != null ? y0 - vs.getBoundingClientRect().top : 0;
+    if (dy && vs.animate && !matchMedia?.('(prefers-reduced-motion: reduce)').matches) vs.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
     shell.querySelector('.pd-dots').replaceChildren();
     S.dogs.me.expr(out === 'win' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);
     S.dogs.them.expr(out === 'loss' ? EXPR.win : out === 'draw' ? EXPR.draw : EXPR.loss);

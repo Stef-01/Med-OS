@@ -761,6 +761,31 @@ export const DOGS = [
       collar: '#fbf5f7', disc: '#fff0f7', floor: '#fbd3e6', ear: '#f59ac0', earIn: '#5aa6e0', ribbon: '#f47ab0', bead: '#5ab8ec', tail: '#f59ac0', tailIn: '#fbd0e2', foot: '#f59ac0', footFar: '#e286ae' } }
 ];
 
+/* the pack stars (founder 2026-10-29: "album covers like spotify would have but its with the mascot characters with
+   references to famous singers popular right now but reimagined creatively as dogs and then when you complete the Q
+   packs you unlock the featured dogs and accessories associated"): a host's question pack has one, a dog dressed as a
+   nod to a pop star (a pun and a look, never a name, a face or a logo), with its signature piece drawn on it (marks
+   'crest', over the head) so the dog and its accessory unlock together. Each is a gift (gifts.mjs) its host redeems
+   when the pack is finished: until then the pickers never list it. Built on a dog of the kit, so its build is that dog's. */
+const STAR = (base, o) => { const b = DOGS.find(d => d.id === base); return { ...b, ...o, marks: [...(b.marks || []), ...(o.marks || [])], pal: { ...b.pal, ...o.pal } }; };
+DOGS.push(
+  STAR('sunny', { id: 'tailor', name: 'Tailor', gift: 'mdpaedsacute', hint: 'Every era, one croup score', expr: 'proud', mirror: false,
+    marks: [{ on: 'crest', svg: '<path d="M-44 -46 C-46 -62 -28 -70 1 -70 C30 -70 48 -62 46 -46 C38 -54 30 -50 24 -56 C18 -48 8 -52 1 -57 C-6 -50 -16 -52 -22 -57 C-28 -50 -38 -54 -44 -46 Z" fill="{fringe}"/>' +
+      '<path d="M-30 -66 C-14 -72 16 -72 30 -66" fill="none" stroke="{fringeHi}" stroke-width="2.6" stroke-linecap="round"/>' +
+      '<path d="M38 -66 l3 -8 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 Z" fill="{sequin}"/><circle cx="-36" cy="-62" r="2.4" fill="{sequin}"/><circle cx="30" cy="-52" r="1.6" fill="#fff"/>' }],
+    pal: { fringe: '#f7d27a', fringeHi: '#fff0b8', sequin: '#ff3d6e', collar: '#d7263d', disc: '#ffe7ef', floor: '#ffd1de' } }),
+  STAR('biscuit', { id: 'sabrina', name: 'Barkpenter', gift: 'mdpaedsfebrile', hint: 'Short, sweet, a little feverish', expr: 'bashful',
+    marks: [{ on: 'crest', svg: '<path d="M-42 -40 C-50 -64 -26 -74 1 -72 C28 -74 52 -64 44 -40 C38 -52 26 -52 16 -58 C10 -50 6 -52 1 -56 C-4 -52 -8 -50 -14 -58 C-24 -52 -36 -52 -42 -40 Z" fill="{fringe}"/>' +
+      '<path d="M-24 -66 C-10 -70 12 -70 26 -66" fill="none" stroke="{fringeHi}" stroke-width="2.4" stroke-linecap="round"/>' +
+      '<path d="M28 -70 L12 -80 L14 -62 Z M28 -70 L44 -80 L42 -62 Z" fill="{bow}"/><circle cx="28" cy="-70" r="4.6" fill="{bowSh}"/>' }],
+    pal: { fringe: '#ffe07a', fringeHi: '#fff6c8', bow: '#9fd3ff', bowSh: '#6fb6f2', collar: '#9fd3ff', disc: '#eef7ff', floor: '#d6ecff' } }),
+  STAR('pepper', { id: 'charli', name: 'Charli', gift: 'mdogbp', hint: 'Lime green, high pressure', expr: 'mog',
+    marks: [{ on: 'crest', svg: '<path d="M-48 -50 C-40 -70 42 -70 50 -50 L46 -44 C30 -56 -28 -56 -44 -44 Z" fill="{band}"/>' +
+      '<path d="M-36 -58 C-16 -64 18 -64 38 -58" fill="none" stroke="{bandHi}" stroke-width="2.2" stroke-linecap="round"/>' +
+      '<text x="1" y="-54" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="400" letter-spacing="-0.3" fill="#111">bp</text>' }],
+    pal: { band: '#8ace00', bandHi: '#c5f24a', collar: '#8ace00', disc: '#f0ffd6', floor: '#dff7a8' } })
+);
+
 /* one dog, everything the rig reads: the breed's build under the dog's own keys, and a palette with every role filled
    (a part asks for `muzzle`, `lidL`, `earR`, … and gets the dog's colour, or the role it follows by default) */
 export function resolve(d) {

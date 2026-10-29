@@ -59,7 +59,11 @@ const LIVE = 'osce.lib.session';   /* the session you are in, on this device: Re
 const saveLive = () => { try { if (V.st.q && V.st.i < V.st.q.length) lsSet(LIVE, snapshot(V.st, now())); else lsSet(LIVE, null); } catch {} };
 const startedToday = () => { const m = api.studyMem(); return m.day?.d === day() ? m.day.n | 0 : 0; };
 
+/* the Study buddy's modules, fetched as a session opens so its row is drawn with the answer, not after it */
+let buddyP = null;
+const buddyKit = () => (buddyP ||= import('./buddy.mjs').then(b => { b.warm(); return b; }));
 export function studyHtml() {
+  if (osceGames(ctx.mem).mascot) buddyKit().catch(() => { buddyP = null; });
   if (!V.bank) { loadBank().then(() => { if (V.tab === 'study' && !V.st.q) paint(); }); return '<p class="os-libmeta">Loading…</p>'; }
   if (V.st.q) return cardHtml();
   if (V.st.view === 'summary') return summaryHtml();
@@ -318,10 +322,12 @@ function answer(i) {
   try { if (x && i >= 0) navigator.vibrate?.(ok ? 10 : [8, 50, 8]); } catch {}   /* the same frame as the green or the shake (Apple: harmony); phones that buzz */
   if (V.st.celebrate) { V.st.celebrate = false; celebrate(); }
   if (x) othersPicked(x, i);
-  if (x && osceGames(ctx.mem).mascot) import('./buddy.mjs').then(b => b.cheerIn(panel()?.querySelector('.os-libexp'), x.item, ok)).catch(() => {});   /* the Study buddy, when on */
   panel()?.querySelector(`[data-lib="grade"].os-primary`)?.focus({ preventScroll: true });
-  /* a long stem puts the answer below the fold: bring the explanation up */
-  panel()?.querySelector('.os-libexp')?.scrollIntoView({ block: 'nearest', behavior: reducedMotion() ? 'auto' : 'smooth' });
+  /* a long stem puts the answer below the fold: bring the explanation up, once the Study buddy (when on) has its row,
+     so nothing moves after the scroll lands (audit 2026-10-29) */
+  const up = () => panel()?.querySelector('.os-libexp')?.scrollIntoView({ block: 'nearest', behavior: reducedMotion() ? 'auto' : 'smooth' });
+  if (x && osceGames(ctx.mem).mascot) buddyKit().then(b => b.cheerIn(panel()?.querySelector('.os-libexp'), x.item, ok)).catch(() => {}).then(up);
+  else up();
 }
 /* how everyone answered a bank question (0009_mcq_picks.sql): yours is added, then each option shows its share */
 async function othersPicked(x, i) {
@@ -339,8 +345,20 @@ async function othersPicked(x, i) {
     panel()?.querySelector('.os-libopts')?.insertAdjacentHTML('afterend', `<p class="os-libmeta os-libothers">How ${total} students answered</p>`);
   } catch { /* offline: no spread, nothing lost */ }
 }
+let leaving = false;
 export function rate(g) {
-  const x = V.st.q?.[V.st.i]; if (!x || V.st.pick == null) return;
+  const x = V.st.q?.[V.st.i]; if (!x || V.st.pick == null || leaving) return;
+  /* the card goes out to the left before the next comes in from the right (audit 2026-10-29: it vanished) */
+  const card = panel()?.querySelector('.os-libcard');
+  if (card && !reducedMotion() && card.animate) {
+    leaving = true;
+    card.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(-28px)' }], { duration: 120, easing: 'cubic-bezier(.4,0,1,1)', fill: 'forwards' })
+      .finished.catch(() => {}).then(() => { leaving = false; rateNow(g, x); });
+    return;
+  }
+  rateNow(g, x);
+}
+function rateNow(g, x) {
   const m = api.studyMem(), had = m.card[x.key], fresh = isNew(had);
   m.card[x.key] = grade(had, g, now(), Math.random);
   if (fresh) { if (m.day.d !== day()) m.day = { d: day(), n: 0 }; m.day.n++; }

@@ -123,7 +123,10 @@ function closeDialog(d, instant) {
     setTimeout(() => d.el.remove(), reduced() ? 0 : d.closeMs);
   }
   /* focus goes back to what opened the dialog, inside the overlay (e2e dom [shell/*]) */
-  const from = d.prevFocus && d.prevFocus.isConnected && d.root.contains(d.prevFocus) && d.prevFocus.getClientRects().length ? d.prevFocus : d.root.querySelector('button:not([disabled])');
+  /* a repaint while it was open may have replaced the opener: its twin (the same data-os / data-ui / id) stands in */
+  const twinOf = el => { if (!el) return null; for (const k of ['os', 'ui', 'pl']) if (el.dataset?.[k]) return d.root.querySelector(`[data-${k}="${CSS.escape(el.dataset[k])}"]`); return el.id ? d.root.querySelector(`#${CSS.escape(el.id)}`) : null; };
+  const live = d.prevFocus?.isConnected ? d.prevFocus : twinOf(d.prevFocus);
+  const from = live && d.root.contains(live) && live.getClientRects().length ? live : d.root.querySelector('button:not([disabled])');
   from?.focus({ preventScroll: true });
 }
 export function closeTop(root, instant) { const d = topDialog(root); if (d) d.close(instant); return !!d; }

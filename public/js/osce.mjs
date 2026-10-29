@@ -128,6 +128,8 @@ function render() {
   else if (view === 'marked') renderMarked(main);
   else renderAttempt(main);
   renderHead();
+  /* a repaint behind a sheet (a Settings switch) is the same screen, so its cards do not rise in again (audit 2026-10-29) */
+  if (topDialog() && lastView === view) main.querySelectorAll('.os-in').forEach(e => e.classList.remove('os-in'));
 }
 ctx.render = render;   /* the views repaint through ctx (no import cycle) */
 

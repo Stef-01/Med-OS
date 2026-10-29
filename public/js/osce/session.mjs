@@ -381,6 +381,14 @@ export function switchTab(t) {
   ctx.tab = t;
   const s = ctx.view === 'session' ? sess() : null, st = s ? ctx.byId.get(s.queue[s.idx]) : ctx.byId.get(findAttempt(ctx.reviewId)?.sid);
   pl.querySelectorAll('[data-os="tab"]').forEach(x => x.setAttribute('aria-selected', String(x.dataset.tab === t)));
+  /* the pill moves on the tap's own frame; the pane (up to ~140 ms of work on a slow phone) is built on the next, so the
+     tap answers at once (audit 2026-10-29) */
+  placePill(pl, true);
+  const go = ++tabGo;
+  requestAnimationFrame(() => { if (go === tabGo && pl.isConnected) paneFor(pl, sc, st, t); });
+}
+let tabGo = 0;
+function paneFor(pl, sc, st, t) {
   const pane = pl.querySelector('.os-pbody');
   pane.innerHTML = tabBody(st, ctx.view === 'session' ? curAttempt() : findAttempt(ctx.reviewId), t, { editable: ctx.view === 'session' });
   pane.classList.remove('os-fade'); void pane.offsetWidth; pane.classList.add('os-fade');
@@ -388,7 +396,6 @@ export function switchTab(t) {
   const h = t === 'Marking' && p2Mark && pane.querySelector('.os-h-p2');
   if (h) { p2Mark = false; sc.scrollTop += h.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12; }
   syncJump(sc);
-  placePill(pl, true);
 }
 
 /* StationMarking.vue + StationMarkingSheet.vue: info notice, checklist, global impression, feedback, guide, explanation */

@@ -12,10 +12,19 @@
 <link rel="apple-touch-icon" href="./icon.svg">
 <link rel="preload" href="./fonts/Figtree-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./fonts/Figtree-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fonts/Figtree-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fonts/Figtree-600.woff2" as="font" type="font/woff2" crossorigin>
+<!-- the stylesheets and the app start downloading with the page, not after the module graph has run (audit 2026-10-29) -->
+<link rel="preload" href="./css/osce.css" as="style">
+<link rel="preload" href="./css/study-tokens.css" as="style">
+<link rel="preload" href="./css/study-kit.css" as="style">
+<link rel="modulepreload" href="./js/osce.mjs">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }   /* the reset osce.css is drawn against */
   html, body { min-height:100%; background:#1c1f31; color:#ededed; }
-  .boot { position:fixed; inset:0; display:grid; place-items:center; padding:24px; font:500 14px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif; color:#9499b8; text-align:center; }
+  .boot { position:fixed; inset:0; display:grid; place-items:center; padding:24px; font:500 14px/1.5 Figtree, system-ui, -apple-system, 'Segoe UI', sans-serif; color:#9499b8; text-align:center; transition:opacity .2s ease; }
+  .boot.gone { opacity:0; pointer-events:none; }
+  @font-face { font-family:'Figtree'; src:url('./fonts/Figtree-500.woff2') format('woff2'); font-weight:500; font-display:swap; }
 </style>
 <script src="./config.js"></script>
 </head>
@@ -29,10 +38,11 @@
 
   const cfg = window.OSCE_CONFIG || {};
   const boot = document.getElementById('boot');
+  const done = () => { boot.classList.add('gone'); setTimeout(() => boot.remove(), 220); };   /* a fade, not a cut */
   const fail = () => { boot.textContent = 'The stations did not load. Check the connection and reload the page.'; };
   const cand = parseCandidate(location.search);
-  if (cand) renderCandidate(document.getElementById('cand'), cand).then(() => boot.remove(), fail);
-  else openOsce({ root: true, sbUrl: cfg.supabaseUrl || '', sbKey: cfg.supabaseAnonKey || '' }).then(() => boot.remove(), fail);
+  if (cand) renderCandidate(document.getElementById('cand'), cand).then(done, fail);
+  else openOsce({ root: true, sbUrl: cfg.supabaseUrl || '', sbKey: cfg.supabaseAnonKey || '' }).then(done, fail);
 </script>
 </body>
 </html>

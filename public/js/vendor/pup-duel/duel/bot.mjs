@@ -64,6 +64,6 @@ export async function practiceWorld({ name = 'You', look = { dog: DEFAULT_DOG, w
   const meT = net.client('me'), botT = net.client('bot');
   const me = await meT.register(name.slice(0, 20).padEnd(2, '.'), '0000', look);
   const botMe = await botT.register(bot.name, '0000', bot.look);
-  const b = createBot({ transport: botT, me: botMe, timers, seed, skill: bot.skill, early: bot.early ?? BOT.early, late: bot.late ?? BOT.late }).start();
+  const b = createBot({ transport: botT, me: botMe, timers, seed, skill: bot.skill, early: bot.early ?? BOT.early, late: bot.late ?? BOT.late, pollMs: 150 }).start();   /* on this device: he takes the invite at once (audit 2026-10-29: ~6 s of "Waiting for Rex") */
   return { transport: meT, me, bot: botMe, net, stop: () => b.stop() };
 }

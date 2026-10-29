@@ -50,9 +50,18 @@ export async function openDuel(opener) {
   /* Playlists (osce/playlists-view.mjs): the community library, opened from the duel's question picker; a playlist played
      there takes the bank's place for that game (the package's ui.playlist) */
   const onPlaylists = ({ mate }) => import('./playlists-view.mjs').then(m => m.openPlaylists({ onPlay: (qs, name) => ui?.playlist(qs, name, { mate }) }));
-  ui = mountDuel(shell.el.firstElementChild, { transport, pack: questions, title: 'Duel a Mate', keys: 'host', storeKey: 'osce.duel', onClose: closeDuel, onPlaylists,
+  ui = mountDuel(shell.el.firstElementChild, { transport, pack: questions, title: 'Duel a Mate', keys: 'host', storeKey: 'osce.duel', onClose: closeDuel, onPlaylists, onResult,
     signOutNote: 'This also signs you out of Settings on this device: your OSCE progress stops saving to your account here.' });
   shell.el.dataset.ready = '1';
+}
+
+/* a match's result: a finished MDosce pick redeems its star (albums.mjs), and the star comes on stage */
+async function onResult(r) {
+  const { pendingFor, finished, unlockStar } = await import('./albums.mjs');
+  const p = pendingFor(ui?.state?.playlist);
+  if (!p || !finished(r, p.n)) return;
+  const { fresh, star } = await unlockStar(p.star);
+  if (fresh) (await import('./unlock.mjs')).showUnlock(star);
 }
 
 /* a playlist from outside the duel (Your questions' Playlists): open the duel and play it against the AI */

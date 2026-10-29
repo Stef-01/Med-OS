@@ -10,7 +10,11 @@
 
 export const KEY = 'pup.gifts';
 export const GIFTS = {
-  pokemon: { name: 'Eevee and its evolutions', note: 'Eevee, Vaporeon, Jolteon, Flareon, Espeon, Umbreon, Leafeon, Glaceon and Sylveon join the dogs.' }
+  pokemon: { name: 'Eevee and its evolutions', note: 'Eevee, Vaporeon, Jolteon, Flareon, Espeon, Umbreon, Leafeon, Glaceon and Sylveon join the dogs.' },
+  /* the pack stars (breeds.mjs): a host redeems one when its question pack is finished */
+  mdpaedsacute: { name: 'Tailor', note: 'Tailor joins the dogs, sequin fringe and all.', star: true },
+  mdpaedsfebrile: { name: 'Barkpenter', note: 'Barkpenter joins the dogs, curtain fringe and baby-blue bow.', star: true },
+  mdogbp: { name: 'Charli', note: 'Charli joins the dogs, in the lime-green bp band.', star: true }
 };
 
 /* a typed code, as compared: letters and digits only, any case ("Pokémon!", " POKEMON " are pokemon) */

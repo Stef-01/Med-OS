@@ -16,7 +16,9 @@ import { notify, I } from './state.mjs';
 import { account } from '../study-kit/sync.mjs';
 import { rpc } from './account.mjs';
 import * as api from '../library/api.mjs';
-import { SORTS, sortOf, cover, toDuel, count, publishError, clean, LIMITS } from '../library/playlists.mjs';
+import { starName } from './unlock.mjs';
+import { albumHtml, drawDogs, starOf, starOwned, refreshOwned, setPending, FINISH } from './albums.mjs';
+import { SORTS, sortOf, toDuel, count, publishError, clean, LIMITS } from '../library/playlists.mjs';
 
 let shell = null, onPlay = null;
 const V = { sort: 'trending', q: '', list: [], trend: [], picks: [], view: 'browse', cur: null, busy: false, err: '', pub: null };
@@ -33,9 +35,9 @@ export function openPlaylists({ onPlay: play = null, opener = null } = {}) {
     shell.el.addEventListener('input', onInput);
     shell.el.addEventListener('submit', e => { e.preventDefault(); if (e.target.matches('[data-pl-form="publish"]')) publish(e.target); });
   }
-  V.view = 'browse'; V.cur = null; V.err = '';
+  V.view = 'browse'; V.cur = null; V.err = ''; V.painted = null;
   shell.open(opener || document.activeElement);
-  paint(); load(); loadPicks();
+  paint(); load(); loadPicks(); refreshOwned().then(paint, () => {});
 }
 export const closePlaylists = () => shell?.close();
 
@@ -76,17 +78,42 @@ function paint() {
   shell.el.querySelector('.os-plhead h2').textContent = V.view === 'detail' ? '' : V.view === 'publish' ? 'Publish a playlist' : 'Playlists';
   shell.el.querySelector('[data-pl="back"]').innerHTML = V.view === 'browse' ? I.x : I.back;
   shell.el.querySelector('[data-pl="back"]').setAttribute('aria-label', V.view === 'browse' ? 'Close' : 'Back');
-  body().innerHTML = !account() ? signedOutHtml() : V.view === 'detail' ? detailHtml() : V.view === 'publish' ? publishHtml() : browseHtml();
+  const out = !account() && V.view !== 'detail', mode = out ? 'out' : V.view, res = body().querySelector('.os-plres');
+  /* browse again: only its results change, so the search keeps the keyboard and the chips their place */
+  if (mode === 'browse' && V.painted === 'browse' && res) {
+    res.innerHTML = browseRes();
+    body().querySelectorAll('[data-pl="sort"]').forEach(c => { const on = c.dataset.v === V.sort; c.classList.toggle('on', on); c.setAttribute('aria-selected', on); });
+    drawDogs(res); return;
+  }
+  const backTo = V.painted === 'detail' && mode !== 'detail';
+  body().innerHTML = `<div class="os-plview${V.painted && V.painted !== mode ? (backTo ? ' os-plview--back' : '') : ' os-plview--still'}">${out ? signedOutHtml() : mode === 'detail' ? detailHtml() : mode === 'publish' ? publishHtml() : browseHtml()}</div>`;
+  V.painted = mode;
+  if (mode === 'detail') body().scrollTop = 0;   /* a page opens at its top, whatever the list was scrolled to */
+  if (backTo && V.scroll) {
+    body().scrollTop = V.scroll.top; body().querySelectorAll('.os-plcar').forEach((c, i) => { c.scrollLeft = V.scroll.car[i] || 0; });
+    body().querySelector(`[data-pl="open"][data-id="${CSS.escape(V.scroll.id || '')}"]`)?.focus({ preventScroll: true });   /* back on the card you opened */
+  }
+  drawDogs(body());
 }
-const coverHtml = (p, cls = '') => `<span class="os-plcover${cls}" style="background:${cover(p.cover).css}" aria-hidden="true"><b>${esc(p.title)}</b>${icon('cards')}</span>`;
+const coverHtml = (p, cls = '') => albumHtml(p, cls.includes('--s') ? 's' : cls.includes('--l') ? 'l' : '');
+/* a pick's star: what finishing it unlocks, or that it is yours */
+function starHtml(p) {
+  const st = starOf(p); if (!st) return '';
+  const name = starName(st), mine = starOwned(st);
+  return `<div class="os-plstar${mine ? ' on' : ''}"><span class="os-plstar-dog"><span class="os-alb-dog" data-dog="${esc(`${st.dog}|${mine ? 'overjoyed' : st.expr}|{}`)}"></span></span>
+    <p><b>${mine ? `${esc(name)} is yours` : `Unlock ${esc(name)}`}</b>${mine ? `Pick ${esc(name)} and the ${esc(st.piece)} from your duel dogs.` : `Play ${FINISH.rounds} or more rounds and get ${Math.round(FINISH.share * 100)}% right: ${esc(name)} and the ${esc(st.piece)} join your duel dogs.`}</p></div>`;
+}
 function signedOutHtml() {
   return `${picksHtml()}<div class="os-plempty">${icon('users')}<p><strong>The community's playlists</strong><br>Sign in (Settings, Account) to browse them, favourite them and publish your own.</p></div>`;
 }
 function browseHtml() {
-  const row = p => `<li><button class="os-plrow" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p, ' os-plcover--s')}<span class="os-plrow-tx"><b>${esc(p.title)}</b><small>${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')}</small></span><span class="os-plfav${p.fav ? ' on' : ''}" aria-label="${p.favs} favourites">${icon('star')}${count(p.favs)}</span></button></li>`;
   return `<label class="os-plsearch">${icon('search')}<input name="plq" type="search" placeholder="Search playlists or people" value="${esc(V.q)}" autocomplete="off" enterkeyhint="search" aria-label="Search playlists"></label>
     <div class="os-plchips" role="tablist" aria-label="Order">${SORTS.map(s => `<button class="os-chip${V.sort === s.id ? ' on' : ''}" role="tab" aria-selected="${V.sort === s.id}" data-pl="sort" data-v="${s.id}">${esc(s.label)}</button>`).join('')}</div>
-    ${V.q ? '' : picksHtml()}
+    <div class="os-plres">${browseRes()}</div>`;
+}
+function browseRes() {
+  const row = p => `<li><button class="os-plrow" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p, ' os-plcover--s')}<span class="os-plrow-tx"><b>${esc(p.title)}</b><small>${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')}</small></span><span class="os-plfav${p.fav ? ' on' : ''}" aria-label="${p.favs} favourites">${icon('star')}${count(p.favs)}</span></button></li>`;
+  return `${V.q ? '' : picksHtml()}
     ${V.trend.length ? `<section aria-labelledby="os-pltr"><h3 class="os-plh" id="os-pltr">Trending this week</h3><ul class="os-plcar" role="list">${V.trend.map(p => `<li><button class="os-plcard" data-pl="open" data-id="${esc(p.id)}">${coverHtml(p)}<small>${esc(p.owner_name || '')} · ${plural(p.n, 'question')}</small></button></li>`).join('')}</ul></section>` : ''}
     ${V.err ? `<p class="os-plerr" role="alert">${esc(V.err)} <button class="os-link" data-pl="retry">Try again</button></p>` : ''}
     ${V.busy && !V.list.length ? '<p class="os-plmeta" role="status">Loading playlists…</p>' : V.list.length ? `<h3 class="os-plh">${esc(SORTS.find(s => s.id === V.sort).label)}${V.q ? ` · "${esc(V.q)}"` : ''}</h3><ul class="os-pllist" role="list">${V.list.map(row).join('')}</ul>`
@@ -97,11 +124,12 @@ function detailHtml() {
   const p = V.cur; if (!p) return '<p class="os-plmeta" role="status">Loading…</p>';
   const qs = Array.isArray(p.questions) ? p.questions : [];
   return `<div class="os-pldetail">${coverHtml(p, ' os-plcover--l')}
-    <h2 class="os-pltitle">${esc(p.title)}</h2>
+    <h2 class="os-pltitle" tabindex="-1">${esc(p.title)}</h2>
     <p class="os-plmeta">${esc(p.owner_name || 'Someone')} · ${plural(p.n, 'question')}${p.pick ? '' : ` · ${plural(p.favs, 'favourite')} · ${plural(p.plays, 'play')}`}</p>
     ${p.blurb ? `<p class="os-plblurb">${esc(p.blurb)}</p>` : ''}
     <div class="os-placts"><button class="os-btn os-btn--lg os-primary" data-pl="play">${icon('playFilled')}<span>${onPlay ? 'Play these' : 'Play vs the AI'}</span></button>
       ${p.pick ? '' : `<button class="os-btn os-btn--lg os-plfavbtn${p.fav ? ' on' : ''}" data-pl="fav" aria-pressed="${!!p.fav}">${icon('star')}<span>${p.fav ? 'Favourited' : 'Favourite'}</span></button>`}</div>
+    ${starHtml(p)}
     <h3 class="os-plh">In this playlist</h3>
     <ol class="os-plqs">${qs.slice(0, 8).map(q => `<li>${esc(q.stem.length > 140 ? `${q.stem.slice(0, 140)}…` : q.stem)}</li>`).join('')}</ol>${qs.length > 8 ? `<p class="os-plmeta">and ${plural(qs.length - 8, 'more question')}</p>` : ''}
     ${p.pick ? `<p class="os-plsrc">Written for MDosce from ${esc(p.source)}. Check the current guideline before acting on a dose.</p>` : p.mine ? `<button class="os-link os-pldanger" data-pl="unpublish">Unpublish this playlist</button>` : `<button class="os-link" data-pl="report">Report this playlist</button>`}</div>`;
@@ -121,7 +149,7 @@ function publishHtml() {
 
 /* ---------- events ---------- */
 function onInput(e) {
-  if (e.target.name === 'plq') { clearTimeout(V.qt); V.qt = setTimeout(() => { V.q = clean(e.target.value).slice(0, 60); load().then(() => { const f = shell.el.querySelector('[name="plq"]'); if (f) { f.focus(); f.setSelectionRange(f.value.length, f.value.length); } }); }, 260); }
+  if (e.target.name === 'plq') { clearTimeout(V.qt); V.qt = setTimeout(() => { V.q = clean(e.target.value).slice(0, 60); load(); }, 260); }
   if (V.pub && (e.target.name === 'title' || e.target.name === 'blurb')) V.pub[e.target.name] = e.target.value;
 }
 async function onClick(e) {
@@ -129,7 +157,7 @@ async function onClick(e) {
   const k = b.dataset.pl;
   if (k === 'back') return back();
   if (k === 'retry') return load();
-  if (k === 'sort') { V.sort = sortOf(b.dataset.v); return load(); }
+  if (k === 'sort') { V.sort = sortOf(b.dataset.v); b.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' }); return load(); }
   if (k === 'open') return openOne(b.dataset.id);
   if (k === 'publishview') { V.view = 'publish'; V.pub = null; return paint(); }
   if (k === 'pubdeck') { const d = api.current().decks.find(x => x.id === b.dataset.id); V.pub = { ...V.pub, deck: b.dataset.id, title: V.pub.title && V.pub.title !== api.current().decks.find(x => x.id === V.pub.deck)?.name ? V.pub.title : d?.name || '' }; return paint(); }
@@ -139,6 +167,7 @@ async function onClick(e) {
   if (k === 'unpublish') return unpublish();
 }
 async function openOne(id) {
+  V.scroll = { id, top: body().scrollTop, car: [...body().querySelectorAll('.os-plcar')].map(c => c.scrollLeft) };
   if (id.startsWith('pick:')) { V.view = 'detail'; V.cur = V.picks.find(p => p.id === id) || null; if (!V.cur) V.view = 'browse'; paint(); shell.el.querySelector('.os-pltitle')?.focus?.(); return; }
   V.view = 'detail'; V.cur = null; paint();
   try { V.cur = await call('pl_get', { p_id: id }); } catch (e) { notify(e.message || 'That playlist did not open.', 'danger'); V.view = 'browse'; }
@@ -146,15 +175,23 @@ async function openOne(id) {
 }
 async function fav() {
   const p = V.cur, on = !p.fav;
-  p.fav = on; p.favs += on ? 1 : -1; paint();
+  p.fav = on; p.favs += on ? 1 : -1; favPaint();
   try { p.favs = await call('pl_fav', { p_id: p.id, p_on: on }); const r = V.list.find(x => x.id === p.id); if (r) { r.fav = on; r.favs = p.favs; } }
   catch (e) { p.fav = !on; p.favs += on ? -1 : 1; notify(e.message || 'That did not save.', 'danger'); }
-  paint();
+  favPaint();
+}
+/* the favourite button and the count, in place: focus stays on the button */
+function favPaint() {
+  const p = V.cur, b = body().querySelector('[data-pl="fav"]'), m = body().querySelector('.os-pldetail > .os-plmeta');
+  if (!b) return;
+  b.classList.toggle('on', !!p.fav); b.setAttribute('aria-pressed', !!p.fav); b.querySelector('span').textContent = p.fav ? 'Favourited' : 'Favourite';
+  if (m) m.textContent = `${p.owner_name || 'Someone'} · ${plural(p.n, 'question')} · ${plural(p.favs, 'favourite')} · ${plural(p.plays, 'play')}`;
 }
 async function play() {
   const p = V.cur, qs = toDuel(p.questions);
   if (!qs.length) { notify('No playable questions in this playlist.', 'danger'); return; }
   if (!p.pick) call('pl_play', { p_id: p.id }).catch(() => {});
+  setPending(starOf(p) ? { star: starOf(p), title: p.title, n: qs.length } : null);
   shell.close();
   if (onPlay) onPlay(qs, p.title);
   else { const { openDuelWith } = await import('./duel.mjs'); openDuelWith(qs, p.title); }

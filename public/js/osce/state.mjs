@@ -73,11 +73,11 @@ import { pulse } from '../study-kit/util.mjs'; export { pulse };   /* eMedici's 
 const getJson = (url, must) => fetch(url, { cache: 'default' }).then(r => (r.ok ? r.json() : must ? Promise.reject(new Error(`${url} ${r.status}`)) : null));
 /* the bank: osce/index.json (one light row per station, scripts/build-index.mjs) and the AI-written exam findings
    (exam.json; optional: a missing file leaves every patient script without exam findings) */
-export const loadStations = () => ctx.dataP || (ctx.dataP = Promise.all([
-  getJson('./osce/index.json', true).then(osceIndexRows),
-  getJson('./exam.json').catch(() => null)])
-  .then(([j, ex]) => {
-    ctx.exam = (ex && typeof ex.stations === 'object' && ex.stations) || {};
+/* the first screen waits for the index only: exam.json (536 KB) comes in behind it, and a station's body waits for it
+   (audit 2026-10-29: it held the first paint by ~0.8 s on a slow phone) */
+const loadExam = () => (ctx.examP ||= getJson('./exam.json').catch(() => null).then(ex => { ctx.exam = (ex && typeof ex.stations === 'object' && ex.stations) || {}; }));
+export const loadStations = () => ctx.dataP || (loadExam(), ctx.dataP = getJson('./osce/index.json', true).then(osceIndexRows)
+  .then(j => {
     ctx.stations = osceStations(j, null);
     ctx.byId = new Map(ctx.stations.map(s => [s.id, s]));
     ctx.bodies = new Map(ctx.stations.filter(s => !osceLazy(s)).map(s => [s.id, s]));
@@ -86,7 +86,8 @@ export const loadStations = () => ctx.dataP || (ctx.dataP = Promise.all([
   })
   .catch(e => { ctx.dataP = null; throw e; }));
 /* the station whole, fetched once: previews, the clock, attempt reviews and the att mirror read it; browse does not */
-export const body = id => {
+export const body = id => (ctx.examP || Promise.resolve()).then(() => bodyNow(id));
+const bodyNow = id => {
   const { byId, bodies, bodyP, stations } = ctx, s = byId.get(id);
   if (!s) return Promise.reject(new Error(`station ${id} is not in the bank`));
   if (bodies.has(id)) return Promise.resolve(bodies.get(id));
@@ -194,4 +195,5 @@ const POP = { pop: 'os-pop', in: 'in', out: 'out' };
 export const openPop = (anchor, html, onPick) => popover(anchor, html, { role: null, onPick, cls: POP, root: ctx.ov, align: 'auto', origin: true });
 export const closePop = closePopover;
 
-export const notify = (text, type = '') => kitToast($('.os-alerts'), text, { tone: type, cls: { item: 'os-alert', in: 'in', out: 'out' } });
+/* a confirmation goes in 3 s, a problem stays 5 s (audit 2026-10-29: 5 s confirmations sat over the study header) */
+export const notify = (text, type = '') => kitToast($('.os-alerts'), text, { tone: type, ms: type === 'danger' || type === 'warn' ? 5000 : 3000, cls: { item: 'os-alert', in: 'in', out: 'out' } });

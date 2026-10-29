@@ -60,7 +60,7 @@ function myLook() {
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 /* the buddy under one answered question: `host` the explanation it docks in, `item` the question */
-export async function cheerIn(host, item, ok) {
+export function cheerIn(host, item, ok) {
   if (!host) return;
   const r = reactionFor(run, ok);
   const aid = ok ? null : aidFor(`${item?.topic || ''} ${item?.stem || ''} ${(item?.options || [])[item?.answer] || ''}`);
@@ -70,8 +70,11 @@ export async function cheerIn(host, item, ok) {
   box.className = `os-buddy os-buddy--${r.mood}`;
   box.innerHTML = `<span class="os-buddy-dog" aria-hidden="true"></span>${say ? `<p class="os-buddy-say">${say}</p>` : ''}`;
   const verdict = host.querySelector(':scope > strong'); if (verdict) verdict.after(box); else host.prepend(box);   /* under the verdict, above the why */
-  try {
-    const { lookDog, still } = await import('../vendor/pup-duel/pup/rig/still.mjs');
-    if (box.isConnected) box.querySelector('.os-buddy-dog').append(still(lookDog(myLook()), { expr: r.expr }));
-  } catch { box.querySelector('.os-buddy-dog').remove(); }
+  /* the row is in now (its circle holds the dog's room); the dog fades into it when drawn */
+  rig().then(({ lookDog, still }) => { const slot = box.querySelector('.os-buddy-dog'); if (box.isConnected && slot) { slot.append(still(lookDog(myLook()), { expr: r.expr })); requestAnimationFrame(() => slot.classList.add('in')); } })
+    .catch(() => box.querySelector('.os-buddy-dog')?.remove());
 }
+let rigP = null;
+const rig = () => (rigP ||= import('../vendor/pup-duel/pup/rig/still.mjs'));
+/* fetch the drawing ahead of the first answer */
+export const warm = () => { rig().catch(() => { rigP = null; }); };

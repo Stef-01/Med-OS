@@ -630,3 +630,13 @@ div.pd-me-dog { cursor: default; }
 .pd-plrow .pd-pick-tx b { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
 /* the way back to the bank stays small, so the playlist's name keeps the row */
 .pd-plrow .pd-link { flex: none; max-width: 38%; font-size: 14px; line-height: 1.2; text-align: right; }
+
+/* sheets leave as they came; a sheet replacing one keeps the dim (audit 2026-10-29) */
+.pd-swap > .pd-scrim { animation: none; }
+.pd-out > .pd-scrim { animation: pd-fade-out .18s ease both; }
+.pd-out > .pd-sheet { animation: pd-down .2s cubic-bezier(.4, 0, 1, 1) both; }
+@keyframes pd-fade-out { to { opacity: 0; } }
+@keyframes pd-down { to { transform: translateY(40px); opacity: 0; } }
+@media (min-width: 600px) { .pd-out > .pd-sheet { animation: pd-fade-out .18s ease both; } }
+/* the emote bar holds its place under a question of any length */
+.pd-match[data-live] .pd-emotes { position: sticky; bottom: max(12px, env(safe-area-inset-bottom, 0px)); z-index: 2; }
