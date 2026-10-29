@@ -295,7 +295,7 @@ export function openWardrobe(ctx) {
     if (!V.sel) {
       const d = DOGS.find(x => x.id === cur.dog) || DOGS[0], worn = SLOTS.map(s => itemOf(cur.wear[s])).filter(Boolean);
       html = `<h2 class="pd-wname"></h2><p class="pd-wkick">${esc(d.breedName)}</p>
-        <p class="pd-wnod">${worn.length ? esc(worn.map(i => i.name).join(', ')) : 'Nothing on yet. Tap a piece to try it on.'}</p>`;
+        ${worn.length ? `<p class="pd-wnod">${esc(worn.map(i => i.name).join(', '))}</p>` : ''}`;
       box.innerHTML = html; box.querySelector('.pd-wname').textContent = d.name;
     } else if (V.sel.kind === 'set') {
       const set = SETS.find(s => s.id === V.sel.id), { full, price, left } = setPrice(set.id, W.owned), short = Math.max(0, price - W.bones), top = set.items.map(itemOf).reduce((a, b) => (RANK[b.rarity] > RANK[a.rarity] ? b : a));

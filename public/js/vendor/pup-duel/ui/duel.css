@@ -687,3 +687,8 @@ div.pd-me-dog { cursor: default; }
 .pd-rankbtn > span { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; min-width: 0; }
 .pd-rankbtn small { font-size: 12.5px; font-weight: 600; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 .pd-playrow .pd-btn { min-height: 60px; }
+/* D12: the slot chips scroll inside the screen, a fade at the edge that has more */
+.pd-chips { margin: 0; padding: 0 0 2px; -webkit-mask: linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask: linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
+/* D16: the explanation sits on the page, no box round it */
+.pd-why { background: none; border: 0; padding: 4px 2px; }
+@media (max-width: 599px) { .pd-wpv { height: 132px; } }
