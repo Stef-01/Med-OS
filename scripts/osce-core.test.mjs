@@ -294,11 +294,11 @@ import { GAMES, osceGames } from '../public/js/osce/core.mjs';
 import * as acct from '../public/js/osce/account.mjs';
 import * as duelAcct from '../public/js/vendor/pup-duel/duel/accounts.mjs';
 
-test('games: Duel a Mate is off until switched on, and only true turns it on', () => {
-  assert.deepEqual(osceGames({}), { duel: false });
-  assert.deepEqual(osceGames(null), { duel: false });
-  assert.deepEqual(osceGames({ games: { duel: 'yes' } }), { duel: false });
-  assert.deepEqual(osceGames({ games: { duel: true } }), { duel: true });
+test('games: Duel a Mate is on and the Study buddy off until switched, and only a boolean switches', () => {
+  assert.deepEqual(osceGames({}), { duel: true, mascot: false });
+  assert.deepEqual(osceGames(null), { duel: true, mascot: false });
+  assert.deepEqual(osceGames({ games: { duel: 'no', mascot: 'yes' } }), { duel: true, mascot: false });
+  assert.deepEqual(osceGames({ games: { duel: false, mascot: true } }), { duel: false, mascot: true });
   assert.ok(GAMES.every(g => g.id && g.name && g.line));
 });
 

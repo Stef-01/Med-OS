@@ -548,6 +548,7 @@ export function mountDuel(root, { transport = null, pack = { questions: [] }, lo
     openSearch({
       sheet, closeSheet, transport, me: S.me, say,
       guard: fn => { S.sheetGuard = fn; },
+      onSkip: practice ? () => { S.sheetGuard = null; openPractice(); } : null,
       makeSetup: () => makeSetup(publicPack(pack), { rounds: RULES.rounds, secs: RULES.secs, seed: freshSeed(), title: pack.title }),   /* ranked: never a player's own deck */
       onMatch: async d => {
         const other = d.a === S.me.id ? d.b : d.a;

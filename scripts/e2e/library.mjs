@@ -268,7 +268,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   await sam.keyboard.press('Escape');
   /* the duel's 0 to 1: Order on the setup, the first question Year 1 */
   const lad = await phone(320, 640, {});
-  await lad.click('[data-os="settings"]'); await lad.click('.os-switch[data-game="duel"]'); await lad.keyboard.press('Escape');
+  /* on by default (founder 2026-10-28) */
   await lad.click('.os-start [data-os="duel"]'); await lad.waitForSelector('.os-duel [data-pd="practice"]');
   await lad.click('.os-duel [data-pd="practice"]'); await lad.waitForSelector('.os-duel [data-order="ladder"]');
   await lad.click('.os-duel [data-order="ladder"]');

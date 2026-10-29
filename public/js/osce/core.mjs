@@ -85,8 +85,11 @@ export function osceTick(t, timing, now) {
    carried no time (the caller passes the clock: this law never reads one) */
 /* the games on the start screen (founder 2026-10-25: "dual a mate should be a toggleable game in settings to turn on,
    not on by default"): each off until switched on in Settings; mem.games syncs with the rest of your progress */
-export const GAMES = [{ id: 'duel', name: 'Duel a Mate', beta: true, line: 'A live quiz against a mate on the bank\'s questions, with a cartoon dog each.' }];
-export const osceGames = mem => Object.fromEntries(GAMES.map(g => [g.id, mem?.games?.[g.id] === true]));
+/* founder 2026-10-28: "enable dual a mate by default ... make mascot a toggle and default off": a switch keeps what you
+   set; untouched, a game is its `on` */
+export const GAMES = [{ id: 'duel', name: 'Duel a Mate', beta: true, on: true, line: 'A live quiz against a mate or the AI on the bank’s questions, with a cartoon dog each.' },
+  { id: 'mascot', name: 'Study buddy', on: false, line: 'Your dog sits beside the questions you practise: it cheers a right answer and gives a memory aid when you miss one.' }];
+export const osceGames = mem => Object.fromEntries(GAMES.map(g => [g.id, typeof mem?.games?.[g.id] === 'boolean' ? mem.games[g.id] : g.on]));
 
 export function osceMigrate(old, now) {
   const m = old && typeof old === 'object' ? { ...old } : {};

@@ -641,17 +641,19 @@ async function duel() {
   const timed = async (label, fn) => { const t = Date.now(); await fn(); const ms = Date.now() - t; lags.push(ms); ok(ms <= 5000, `duel: ${label} in ${ms} ms (at most 5 s)`); };
   const shared = { supabaseUrl: `${BASE}sb`, supabaseAnonKey: 'anon', duelRealtime: false };
   const a = await phone(320, 640, shared), c = await phone(393, 852, shared);
-  /* the way in: off until switched on in Settings (founder 2026-10-25), then a card like Request a case, in the page */
-  ok(await a.locator('.os-start [data-os="duel"]').count() === 0, 'duel: off by default, not on Start');
-  for (const pg of [a, c]) {
-    await pg.click('[data-os="settings"]');
-    await pg.waitForSelector('.os-switch[data-game="duel"][aria-checked="false"]');
-    if (pg === a) { await pg.waitForTimeout(700); await pg.screenshot({ path: path.join(SHOTS, 'settings-games.png') }); await pg.evaluate(() => document.querySelector('.os-switch[data-game="duel"]').scrollIntoView({ block: 'center' })); await pg.screenshot({ path: path.join(SHOTS, 'settings-games-switch.png') }); }
-    await pg.click('.os-switch[data-game="duel"]');
-    await pg.waitForSelector('.os-switch[data-game="duel"][aria-checked="true"]');
-    await pg.keyboard.press('Escape'); await pg.waitForSelector('.os-start [data-os="duel"]');
-  }
-  ok(await a.locator('.os-start > [data-os="duel"] .os-beta').isVisible(), 'duel: switched on in Settings, its card is on Start, marked Beta');
+  /* the way in: on by default (founder 2026-10-28), a card like Request a case, in the page; Settings switches it off
+     and on again */
+  ok(await a.locator('.os-start [data-os="duel"]').count() === 1, 'duel: on by default, on Start');
+  await a.click('[data-os="settings"]');
+  await a.waitForSelector('.os-switch[data-game="duel"][aria-checked="true"]');
+  ok(await a.locator('.os-switch[data-game="mascot"][aria-checked="false"]').count() === 1, 'study buddy: off by default');
+  await a.waitForTimeout(700); await a.screenshot({ path: path.join(SHOTS, 'settings-games.png') }); await a.evaluate(() => document.querySelector('.os-switch[data-game="duel"]').scrollIntoView({ block: 'center' })); await a.screenshot({ path: path.join(SHOTS, 'settings-games-switch.png') });
+  await a.click('.os-switch[data-game="duel"]'); await a.waitForSelector('.os-switch[data-game="duel"][aria-checked="false"]');
+  await a.keyboard.press('Escape'); await a.waitForTimeout(300);
+  ok(await a.locator('.os-start [data-os="duel"]').count() === 0, 'duel: switched off in Settings, gone from Start');
+  await a.click('[data-os="settings"]'); await a.click('.os-switch[data-game="duel"]'); await a.waitForSelector('.os-switch[data-game="duel"][aria-checked="true"]');
+  await a.keyboard.press('Escape'); await a.waitForSelector('.os-start [data-os="duel"]');
+  ok(await a.locator('.os-start > [data-os="duel"] .os-beta').isVisible(), 'duel: switched back on, its card is on Start, marked Beta');
   const card = await a.evaluate(() => { const d = document.querySelector('.os-start > [data-os="duel"]'), r = document.querySelector('.os-start > [data-os="requests"]'); return { pos: getComputedStyle(d).position, big: d.classList.contains('os-bigcard'), after: r && r.nextElementSibling === d }; });
   ok(card.pos !== 'sticky' && card.pos !== 'fixed' && card.big && card.after, `duel: a card like Request a case, right after it, not a bar held on screen (${JSON.stringify(card)})`);
   await a.waitForTimeout(700); await a.evaluate(() => document.querySelector('.os-start [data-os="duel"]').scrollIntoView({ block: 'center' })); await a.screenshot({ path: path.join(SHOTS, 'start-duel-card.png') });
@@ -695,6 +697,12 @@ async function duel() {
   ok(await a.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'duel: the leaderboard fits a 320 px phone');
   await a.screenshot({ path: path.join(SHOTS, 'duel-ladder.png') });
   await a.keyboard.press('Escape'); await a.waitForSelector('.os-duel .pd-sheet .pd-lboard', { state: 'detached' });
+  /* founder 2026-10-28: while it looks for someone, the AI is one tap away */
+  await a.click('.os-duel [data-pd="ranked"]'); await a.waitForSelector('.os-duel .pd-search [data-pd="skipai"], .os-duel .pd-sheet [data-pd="skipai"]');
+  await a.waitForTimeout(500); await a.screenshot({ path: path.join(SHOTS, 'duel-search-skip.png') });
+  await a.click('.os-duel [data-pd="skipai"]'); await a.waitForSelector('.os-duel .pd-sheet [data-seg="level"], .os-duel .pd-sheet [data-pd="send"]');
+  ok(/Play the AI/.test(await a.textContent('.os-duel .pd-sheet [data-pd="send"]')), 'duel: Skip while finding a match opens the AI setup');
+  await a.keyboard.press('Escape'); await a.waitForTimeout(400);
   await a.click('.os-duel [data-pd="ranked"]'); await a.waitForSelector('.os-duel .pd-search');
   await c.click('.os-duel [data-pd="ranked"]');
   await timed('a ranked match is made', () => Promise.all([a, c].map(pg => pg.waitForSelector('.os-duel .pd-opt:not([disabled])', { timeout: 6000 }))));
@@ -770,7 +778,7 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
   await wide.evaluate(() => document.querySelector('.os-start [data-os="duel"]').scrollIntoView({ block: 'center' }));
   await wide.screenshot({ path: path.join(SHOTS, 'duel-wide-start.png') });
   const solo = await phone(320, 640, {});
-  await solo.click('[data-os="settings"]'); await solo.click('.os-switch[data-game="duel"]'); await solo.keyboard.press('Escape');   /* off until switched on */
+  /* on by default (founder 2026-10-28) */
   await solo.click('[data-os="duel"]'); await solo.waitForSelector('.os-duel [data-pd="practice"]');
   await solo.click('.os-duel [data-pd="practice"]');
   /* the questions in two layers: a topic, then a kind, the pick and its count on the setup, a practice on just those */
@@ -788,7 +796,7 @@ k/people`, { ns: `u:${sam.id}:osce`, id: 'k/people', value: ['Priya', 'Tom'], up
   const aiq = n => ({ id: `medqa-e2e-${n}`, stem: `Question ${n}: a 35-year-old man has itchy, watery eyes and sneezing each spring. What is the most appropriate treatment?`, options: ['Erythromycin ointment', 'Ketotifen eye drops', 'Warm compresses', 'Fluorometholone eye drops'], answer: 1, why: 'Seasonal allergic conjunctivitis: a topical antihistamine and mast cell stabiliser is first line.', whyBy: 'ai', topic: 'Ophthalmology', cat: 'clinical', origin: 'human', source: 'usmle-resource', year: 3, difficulty: 1 });
   const rv = await phone(320, 640, {});
   await rv.route(/\/duel\/pack\.json/, r => r.fulfill({ contentType: 'application/json', body: JSON.stringify({ schemaVersion: 1, title: 'Bank', cats: [{ id: 'clinical', label: 'Clinical' }], questions: [1, 2, 3].map(aiq) }) }));
-  await rv.click('[data-os="settings"]'); await rv.click('.os-switch[data-game="duel"]'); await rv.keyboard.press('Escape');
+  /* the duel is on by default */
   await rv.click('[data-os="duel"]'); await rv.waitForSelector('.os-duel [data-pd="practice"]');
   await rv.click('.os-duel [data-pd="practice"]'); await rv.click('.os-duel .pd-sheet [data-pd="send"]');
   for (let i = 0; i < 6 && !(await rv.locator('.os-duel [data-pd="review"]').count()); i++) {

@@ -36,9 +36,12 @@ export function openSearch(ctx) {
       <p class="pd-search-line"><span class="pd-search-time" aria-hidden="true">0:00</span><span class="pd-search-win" role="status" aria-live="polite"></span></p>
       <p class="pd-err" role="alert"></p>
     </div>
+    ${ctx.onSkip ? `<button class="pd-btn pd-pri" type="button" data-pd="skipai">${icon('bot')}Skip: play the AI</button>` : ''}
     <button class="pd-btn" type="button" data-pd="stop">Cancel</button>`, root => {
     el = root;
     el.querySelector('[data-pd="stop"]').addEventListener('click', () => { stop(); ctx.closeSheet(true); });
+    /* founder 2026-10-28: "when you click play match ... it then opens up as a skip when finding someone to play with" */
+    el.querySelector('[data-pd="skipai"]')?.addEventListener('click', () => { stop(); ctx.onSkip(); });
     ctx.guard(() => { if (!done) stop(); return true; });
     ask();
   }, { label: 'Finding a ranked match' });
