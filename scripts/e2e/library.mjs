@@ -59,7 +59,7 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
 
   /* Lee, on a small phone: the card, the empty library, Upload */
   const sam = await phone(320, 640);
-  ok(await sam.locator('.os-start > [data-os="lib"]').isVisible(), 'library: Your questions is a card on Start');
+  ok(await sam.locator('.os-start > .os-hero > [data-os="lib"]').isVisible(), 'library: Your questions is the hero card on Start');
   await signUp(sam, 'Lee', '1234');
   /* the Study buddy: off by default, on from Settings > Games (founder 2026-10-28) */
   await sam.click('[data-os="settings"]'); await sam.click('.os-switch[data-game="mascot"]'); await sam.waitForSelector('.os-switch[data-game="mascot"][aria-checked="true"]'); await sam.keyboard.press('Escape'); await sam.waitForTimeout(300);

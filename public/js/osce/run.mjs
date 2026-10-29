@@ -17,22 +17,21 @@ export function renderStart(main) {
   const done = Object.keys(ctx.mem.hist).filter(attempted).length, n3 = osceCounts(ctx.mem.hist);
   main.innerHTML = `<div class="os-start">
     <p class="os-kicker">${ctx.stations.length} stations · ${done} attempted${n3[0] || n3[1] ? ` · ${esc(nameOf(0))} ${n3[0]} · ${esc(nameOf(1))} ${n3[1]}` : ''}</p>
-    ${pairHtml()}
     ${live || n ? `<button class="os-card os-bigcard os-in" data-os="resume">
         <span class="os-bigic">${I.resume}</span>
         <span class="os-bigtx"><strong>Resume Study Session</strong>
           <span>${live ? `Station ${s.idx + 1} of ${n} in progress` : `${n} station${n === 1 ? '' : 's'} in the queue`}</span></span>
         <span class="os-chev">${I.chevR}</span></button>` : ''}
+    <div class="os-hero">${libraryCardHtml()}</div>
     ${runHtml()}
     <button class="os-card os-bigcard os-in" data-os="new" style="--d:2">
       <span class="os-bigic">${I.newS}</span>
       <span class="os-bigtx"><strong>New Study Session</strong>
         <span>Stations on the clock, one candidate, one examiner</span></span>
       <span class="os-chev">${I.chevR}</span></button>
-    ${requestCardHtml()}
+    ${pairHtml()}
     ${osceGames(ctx.mem).duel ? duelHtml() : ''}
-    ${libraryCardHtml()}
-    ${mcqCardHtml()}
+    <div class="os-more" aria-label="Contribute">${requestCardHtml()}${mcqCardHtml()}</div>
     ${doneHtml()}
   </div>`;
   runPaint();

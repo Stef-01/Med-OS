@@ -654,8 +654,8 @@ async function duel() {
   await a.click('[data-os="settings"]'); await a.click('.os-switch[data-game="duel"]'); await a.waitForSelector('.os-switch[data-game="duel"][aria-checked="true"]');
   await a.keyboard.press('Escape'); await a.waitForSelector('.os-start [data-os="duel"]');
   ok(await a.locator('.os-start > [data-os="duel"] .os-beta').isVisible(), 'duel: switched back on, its card is on Start, marked Beta');
-  const card = await a.evaluate(() => { const d = document.querySelector('.os-start > [data-os="duel"]'), r = document.querySelector('.os-start > [data-os="requests"]'); return { pos: getComputedStyle(d).position, big: d.classList.contains('os-bigcard'), after: r && r.nextElementSibling === d }; });
-  ok(card.pos !== 'sticky' && card.pos !== 'fixed' && card.big && card.after, `duel: a card like Request a case, right after it, not a bar held on screen (${JSON.stringify(card)})`);
+  const card = await a.evaluate(() => { const d = document.querySelector('.os-start > [data-os="duel"]'), m = document.querySelector('.os-start > .os-more'); return { pos: getComputedStyle(d).position, big: d.classList.contains('os-bigcard'), after: !!m && d.nextElementSibling === m }; });
+  ok(card.pos !== 'sticky' && card.pos !== 'fixed' && card.big && card.after, `duel: a card on Start above the contribute tiles, not a bar held on screen (${JSON.stringify(card)})`);
   await a.waitForTimeout(700); await a.evaluate(() => document.querySelector('.os-start [data-os="duel"]').scrollIntoView({ block: 'center' })); await a.screenshot({ path: path.join(SHOTS, 'start-duel-card.png') });
   for (const [pg, name, pin, dog] of [[a, 'Sam', '1234', 'mochi'], [c, 'Alex', '4321', 'rosie']]) {
     await pg.click('[data-os="duel"]');

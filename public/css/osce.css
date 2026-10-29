@@ -2184,3 +2184,12 @@ details.os-pair > summary::after { content:''; margin-left:auto; align-self:cent
 details.os-pair[open] > summary::after { rotate:225deg; }
 details.os-pair[open] > :not(summary) { animation:os-rise .25s var(--ease) both; }
 details.os-pair:not([open]) { padding-bottom:14px; }
+/* backlog 2 and 19 (Duolingo/Headspace: home is today; Things: contribution in context): Your questions leads as the
+   one hero card; Request a case and Submit a question shrink to two quiet tiles at the foot */
+.os-hero .os-bigcard { background:linear-gradient(135deg, var(--pri-soft), var(--card)); border:1.5px solid color-mix(in srgb, var(--pri) 40%, transparent); }
+.os-hero .os-bigcard .os-bigtx strong { font-size:18px; }
+.os-more { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.os-more .os-bigcard { flex-direction:column; align-items:flex-start; gap:8px; padding:14px; min-height:0; }
+.os-more .os-bigcard .os-bigtx > span, .os-more .os-chev { display:none; }
+.os-more .os-bigcard .os-bigtx strong { font-size:14.5px; }
+.os-more .os-bigic { width:34px; height:34px; }
