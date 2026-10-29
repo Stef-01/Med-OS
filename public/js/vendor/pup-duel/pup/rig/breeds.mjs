@@ -285,7 +285,7 @@ export const BREEDS = {
     build: { head: { h: 92, r: 42, jaw: 'round' }, muzzle: { w: 38, h: 28 }, eye: 1.24, pupil: 1.08, brow: { w: 7, h: 3.6, y: -52 },
       ears: ['up', 'up'], earShape: 'chi', earScale: 1.4, earAt: { up: { L: { x: -34, y: -42 }, R: { x: 36, y: -42 } } },
       foldable: false, body: { w: 96, h: 70 }, leg: 12, floorY: 68, tail: { len: [16, 15, 14], w: 26, curl: 50, inner: 12, over: true },
-      wag: { slow: 18, fast: 34, amp: 36 }, hopH: 13, flopGain: 1.2, yaw0: -0.3, tongueSide: 0, eyes: 'sparkle' }
+      wag: { slow: 18, fast: 34, amp: 36 }, hopH: 13, flopGain: 1.2, yaw0: -0.3, tongueSide: 0, eyes: 'sparkle', glasses: 0.91 }
   },
   // Chow Chow: a lion's mane, small round ears half in it, a short flat muzzle, deep-set eyes, the blue-black tongue
   chow: {

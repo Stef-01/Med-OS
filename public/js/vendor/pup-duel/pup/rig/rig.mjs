@@ -493,7 +493,7 @@ function makeDog(c, slot, P) {
     // the head's outline seen from inside the glasses (the inverse of the face's yaw, this dog's eye scale, a mirror
     // and the push above), so the arms clip to where the head is now, not where it was drawn
     if (faceOn && e.armClip) set(e.armClip, 'transform', (kF !== 1 ? scl(r3(1 / kF), 1, -30) + ' ' : '') + tr(0, -(rig.hatY * 0.25 + push)) + (c.mirror ? ' matrix(-1 0 0 1 2 0)' : '') +
-      ' translate(1 -17.4) scale(' + r3(1 / c.eye) + ') translate(-1 17.4) ' + tr(-yaw * 10, 0));
+      ' translate(1 -17.4) scale(' + r3(1 / (c.eye * (c.glasses || 1))) + ') translate(-1 17.4) ' + tr(-yaw * 10, 0));
     set(e.snout, 'transform', tr(yaw * 13, 0));
     // a snout mark on the bridge of the nose (parts.mjs) sits in the eyes' group, which turns by 10: it takes the other 3
     if (e.bridge) { if (rig.bridgeT == null) rig.bridgeT = e.bridge.getAttribute('transform') || ''; set(e.bridge, 'transform', rig.bridgeT + ' ' + tr(yaw * 3, 0)); }

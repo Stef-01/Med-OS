@@ -231,6 +231,8 @@ function wear(r, m, fresh) {
   r.rig.hatShapes = shapes; r.rig.wearGen = (r.rig.wearGen || 0) + 1;   // a pop already up re-clears for it
   if (ht !== (r.rig.hatTop || 0)) { r.rig.hatTop = ht; if (EMBED && r.state === 'in') relayout(null); }
   var bk = q('wearBack'), bb = null, on = q('wearOnFit');
+  // a coat on an Eevee: its ruff (parts.mjs `behind`) is tucked into it, only the fur above the collar line still showing
+  var bh = q('behind'); if (bh) { if (on && on.firstChild) bh.setAttribute('clip-path', 'url(#' + bh.previousSibling.id + ')'); else bh.removeAttribute('clip-path'); }
   if (bk && bk.firstChild) { try { bb = bk.getBBox(); } catch (err) { bb = null; } }
   if (on && on.firstChild) { try { bb = union(bb, q('wearOnPop').getBBox()); } catch (err) { /* measured behind only */ } }
   r.rig.backWide = !!(bb && bb.x + bb.width - r.c.geo.fx > 100);

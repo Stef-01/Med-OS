@@ -227,7 +227,8 @@ function dogMarkup(c, P) {
   var fx = (bL + bR) / 2, fy = c.floorY;          // floor point under the body
   var LEGS = c.body.legs || [23, 56, 89], TAIL = c.tail.at || [12, 12];   // from the body's back end
   c.geo = { hb: hb, bL: bL, bR: bR, fx: fx, fy: fy, legs: LEGS.map(function (x) { return bL + x; }), tail: [bL + TAIL[0], TAIL[1]] };
-  c.neckOn = c.neckOn || (c.mane || c.bib ? 'head' : 'collar');   // neckwear on the collar, or over a mane or a ruff
+  var behind = marksOn(c, 'behind');
+  c.neckOn = c.neckOn || (c.mane || c.bib || behind ? 'head' : 'collar');   // neckwear on the collar, or over a mane, a bib or what is drawn behind the head (an Eevee's ruff covers the collar band)
   var legs = c.geo.legs.map(function (x, i) {
     var foot = i === 0 ? p.footFar : p.foot;     // the far leg is one step darker
     return '<g data-p="leg' + i + '">' +
@@ -294,7 +295,7 @@ function dogMarkup(c, P) {
       '</g>' +
       '<g data-p="head">' +
         (c.mane ? MANE(p, c) : '') +
-        marksOn(c, 'behind') +   // unclipped, behind the head: a ruff, a frill, a spiky collar (the Eevee family)
+        (behind ? '<clipPath id="' + P + '-behindTrim"><rect x="-400" y="-400" width="800" height="' + (398 + hb) + '"/></clipPath><g data-p="behind">' + behind + '</g>' : '') +   // unclipped, behind the head: a ruff, a frill, a spiky collar (the Eevee family)
         '<g data-p="earsBack" id="' + P + '-eb">' + back + '</g>' +
         '<path d="' + headPath + '" fill="' + p.coat + '"/>' +
         clipped(P + '-head', '<path d="' + headPath + '"/>', marksOn(c, 'head')) +
@@ -342,8 +343,9 @@ function dogMarkup(c, P) {
             bridge +
             SHADES +
             // glasses ride the eyes: this group's per-dog scale and the features' yaw; a mirrored dog wears them unmirrored
+            (c.glasses ? '<g transform="translate(1 -17.4) scale(' + c.glasses + ') translate(-1 17.4)">' : '<g>') +   // a big-eyed breed's glasses drawn back toward its head's width (build.glasses; rig.mjs armClip undoes it)
             (lps ? '<g transform="translate(1 0) scale(' + LPS_GLASSES + ' 1) translate(-1 0)">' : '<g>') +   // LPS: glasses spread to the set-apart eyes
-            (c.mirror ? '<g transform="matrix(-1 0 0 1 2 0)"><g data-p="wearFace"></g></g>' : '<g data-p="wearFace"></g>') + '</g>' +
+            (c.mirror ? '<g transform="matrix(-1 0 0 1 2 0)"><g data-p="wearFace"></g></g>' : '<g data-p="wearFace"></g>') + '</g></g>' +
           '</g></g>' +
         '</g>' +
         '<g data-p="snout">' +
