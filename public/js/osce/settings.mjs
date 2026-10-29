@@ -19,7 +19,7 @@ function accountHtml() {
   if (!accountsOn()) return '';
   const a = account();
   if (!a) return `<section class="os-acct" aria-labelledby="os-h-acct"><h3 id="os-h-acct">Account</h3>
-    <p class="os-handhint">Sign in to keep your OSCE progress and your Duel a Mate progress on every device. A name and a 4-digit PIN, the same as the duel's.</p>
+    <p class="os-handhint">One name and PIN keeps everything on every device.</p>
     <label class="os-setf"><span>Name</span><input data-set="aname" autocomplete="username" autocapitalize="words" maxlength="20" spellcheck="false" aria-describedby="os-aerr"></label>
     <label class="os-setf"><span>PIN <small>4 digits</small></span><input data-set="apin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="current-password" aria-describedby="os-aerr"></label>
     <p class="os-err" role="alert" id="os-aerr" data-set="aerr"></p>
@@ -41,7 +41,7 @@ function accountHtml() {
 function placementHtml() {
   const on = new Set(oscePlacement(ctx.mem));
   return `<section aria-labelledby="os-h-place"><h3 id="os-h-place">Your placement</h3>
-    <p class="os-handhint">Pick what you are on (O&amp;G and Paeds, say). Study offers their questions first (Rotation), Fast Run starts on those stations, and the duel starts on My placement. You can still choose anything else.</p>
+    <p class="os-handhint">Your rotations come first everywhere.</p>
     <div class="os-placechips" role="group" aria-labelledby="os-h-place">${DISCIPLINES.map(([id, name, emoji, , short]) => `<button type="button" class="os-placechip" data-set="place" data-place="${id}" aria-pressed="${on.has(id)}" title="${esc(name)}"><span aria-hidden="true">${emoji}</span>${esc(short)}</button>`).join('')}</div>
   </section>`;
 }
@@ -58,7 +58,7 @@ function wirePlacement(el) {
 function gamesHtml() {
   const on = osceGames(ctx.mem);
   return `<section aria-labelledby="os-h-games"><h3 id="os-h-games">Games</h3>
-    <p class="os-handhint">A game you switch on appears on the start screen. Switches apply straight away.</p>
+    <p class="os-handhint">On ones appear on Start.</p>
     ${GAMES.map(g => `<button type="button" class="os-switch" role="switch" aria-checked="${on[g.id]}" data-set="game" data-game="${g.id}" aria-labelledby="os-g-${g.id}" aria-describedby="os-gd-${g.id}">
       <span class="os-switch-tx"><strong id="os-g-${g.id}">${esc(g.name)}${g.beta ? ' <span class="os-beta">Beta</span>' : ''}</strong><span id="os-gd-${g.id}">${esc(g.line)}</span></span>
       <span class="os-switch-ui" aria-hidden="true"></span></button>`).join('')}
@@ -93,7 +93,7 @@ async function wireReminders(el) {
 function giftHtml() {
   const have = [...unlocked()].map(g => GIFTS[g].name);
   return `<details class="os-fold"><summary><h3 id="os-h-gift">Special gift</h3><span class="os-foldv">${have.length ? `${have.length} unlocked` : 'Have a code?'}</span></summary><section aria-labelledby="os-h-gift">
-    <p class="os-handhint">Have a gift code? Type it here to unlock something extra in Duel a Mate.</p>
+    <p class="os-handhint">Unlocks something extra in Duel a Mate.</p>
     <div class="os-crow os-giftrow"><label class="os-setf os-giftf"><span>Gift code</span><input data-set="gift" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go"></label>
       <button type="button" class="os-btn" data-os="sgift">Redeem</button></div>
     <p class="os-handhint os-giftmsg" role="status">${have.length ? esc(`Unlocked: ${have.join(', ')}.`) : ''}</p>
@@ -120,8 +120,8 @@ export function settingsDlg() {
   const sync = a ? 'Kept on your account (above).' : syncOn() ? `Shared between your devices${syncState.unsynced ? ' · some changes are still waiting to upload' : ''}. Sign in above to keep it on your own account.` : 'On this device only. Set a Supabase project in config.js to share between devices, or use a progress file below.';
   const d = openDialog({ kind: 'settings', title: 'Settings', cls: 'os-dlg--small', action: '<button class="os-btn os-primary" data-os="ssave">Done</button>',
     body: `<form class="os-set">
-      ${accountHtml()}
       ${placementHtml()}
+      ${accountHtml()}
       ${gamesHtml()}
       ${remindersHtml()}
       ${giftHtml()}
