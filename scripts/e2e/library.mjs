@@ -60,6 +60,11 @@ export async function library({ chromium, BASE, SHOTS, ok }) {
   /* Lee, on a small phone: the card, the empty library, Upload */
   const sam = await phone(320, 640);
   ok(await sam.locator('.os-start > .os-hero > [data-os="lib"]').isVisible(), 'library: Your questions is the hero card on Start');
+  /* signed out, Friends asks for an account in place: the one sign-in sheet over the library, not a trip to Settings */
+  await open(sam, 'friends');
+  await sam.click('.os-libsign [data-os="signin"]');
+  ok(await sam.locator('.os-dlg [data-set="aname"]').isVisible() && await sam.locator('.os-lib').count() === 1, 'library: Sign in opens the sign-in sheet over Your questions');
+  await sam.keyboard.press('Escape'); await sam.waitForTimeout(250); await sam.click('.os-libtabs [data-tab="study"]'); await close(sam);
   await signUp(sam, 'Lee', '1234');
   /* the Study buddy: off by default, on from Settings > Games (founder 2026-10-28) */
   await sam.click('[data-os="settings"]'); await sam.click('.os-switch[data-game="mascot"]'); await sam.waitForSelector('.os-switch[data-game="mascot"][aria-checked="true"]'); await sam.keyboard.press('Escape'); await sam.waitForTimeout(300);

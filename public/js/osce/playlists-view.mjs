@@ -114,7 +114,7 @@ function starHtml(p) {
     <p><i>${mine ? 'Unlocked' : 'Reward'}</i><b>${mine ? `${esc(name)} is yours` : `Unlock ${esc(name)}`}</b>${mine ? `Pick ${esc(name)} and the ${esc(st.piece)} from your duel dogs.` : `Play ${FINISH.rounds}+ rounds at ${Math.round(FINISH.share * 100)}% or better to win ${esc(name)} and the ${esc(st.piece)}.`}</p></div>`;
 }
 function signedOutHtml() {
-  return `${picksHtml()}<div class="os-plempty">${icon('users')}<p><strong>The community's playlists</strong><br>Sign in (Settings, Account) to browse them, favourite them and publish your own.</p></div>`;
+  return `${picksHtml()}<div class="os-plempty">${icon('users')}<p><strong>The community's playlists</strong><br>Sign in to browse them, favourite them and publish your own.</p><button class="os-btn os-primary" data-pl="signin">Sign in</button></div>`;
 }
 function browseHtml() {
   return `<label class="os-plsearch">${icon('search')}<input name="plq" type="search" placeholder="Search playlists or people" value="${esc(V.q)}" autocomplete="off" enterkeyhint="search" aria-label="Search playlists"></label>
@@ -166,6 +166,12 @@ async function onClick(e) {
   const b = e.target.closest('[data-pl]'); if (!b) return;
   const k = b.dataset.pl;
   if (k === 'back') return back();
+  if (k === 'signin') {   /* the one sign-in sheet (settings.mjs), then back here signed in */
+    const play = onPlay; shell.close();
+    const { signInSheet } = await import('./settings.mjs');
+    document.addEventListener('os-account', () => openPlaylists({ onPlay: play }), { once: true });
+    return signInSheet();
+  }
   if (k === 'retry') return load();
   if (k === 'sort') { V.sort = sortOf(b.dataset.v); b.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' }); return load(); }
   if (k === 'open') return openOne(b.dataset.id);

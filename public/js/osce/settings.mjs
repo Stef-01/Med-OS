@@ -106,6 +106,15 @@ function wireGift(el) {
   input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
 }
 
+/* backlog 6 (Duolingo, Spotify: signed out is not a wall; ask inline, once): one sign-in sheet any screen can open,
+   over it, that closes when signed in and tells the screen (the os-account event) so it carries on where it was */
+export function signInSheet() {
+  if (!accountsOn()) return settingsDlg();
+  if (account()) return;
+  const d = openDialog({ kind: 'signin', title: 'Sign in', cls: 'os-dlg--small', body: `<form class="os-set" onsubmit="return false">${accountHtml().replace('<h3 id="os-h-acct">Account</h3>', '')}</form>` });
+  wireAccount(d.el, () => { closeDialog(); ctx.render(); document.dispatchEvent(new CustomEvent('os-account')); });
+  d.el.querySelector('[data-set="aname"]')?.focus({ preventScroll: true });
+}
 export function settingsDlg() {
   const c = markerCfg(), a = account();
   const sync = a ? 'Kept on your account (above).' : syncOn() ? `Shared between your devices${syncState.unsynced ? ' · some changes are still waiting to upload' : ''}. Sign in above to keep it on your own account.` : 'On this device only. Set a Supabase project in config.js to share between devices, or use a progress file below.';
@@ -142,9 +151,9 @@ function wireGames(el) {
     ctx.render();
   }));
 }
-function wireAccount(el) {
+function wireAccount(el, after = null) {
   const sec = el.querySelector('.os-acct'); if (!sec) return;
-  const repaint = () => { sec.outerHTML = accountHtml(); wireAccount(el); el.querySelector('.os-acct button, .os-acct input')?.focus({ preventScroll: true }); ctx.render(); };
+  const repaint = () => { if (after) { after(); return; } sec.outerHTML = accountHtml(); wireAccount(el); el.querySelector('.os-acct button, .os-acct input')?.focus({ preventScroll: true }); ctx.render(); };
   const go = async create => {
     const name = sec.querySelector('[data-set="aname"]').value, pin = sec.querySelector('[data-set="apin"]').value, err = sec.querySelector('[data-set="aerr"]');
     const nIn = sec.querySelector('[data-set="aname"]'), pIn = sec.querySelector('[data-set="apin"]'), nBad = nameError(name), pBad = nBad ? '' : pinError(pin);

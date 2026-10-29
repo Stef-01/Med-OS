@@ -122,7 +122,9 @@ function paint() {
   if (card && V.st.q && V.st.pick != null) swipe(card, { canStart: () => V.st.pick != null, onCommit: () => { const x = V.st.q?.[V.st.i]; if (x) rate(V.st.pick === x.item.answer ? 'good' : 'again'); } });
   V.tap = '';
 }
-const signInHtml = why => `<div class="os-libsign"><p>${esc(why)}</p><button class="os-btn" data-os="settings">${icon('settings')}<span>Sign in, in Settings</span></button></div>`;
+const signInHtml = why => `<div class="os-libsign"><p>${esc(why)}</p><button class="os-btn os-primary" data-os="signin">${icon('users')}<span>Sign in</span></button></div>`;
+/* signed in from the sheet over this one: the library comes back with your decks, on the same tab */
+if (typeof document !== 'undefined') document.addEventListener('os-account', () => { if (dlg()) reload(); });
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 
 function libraryHtml() {

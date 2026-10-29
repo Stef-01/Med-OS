@@ -34,7 +34,7 @@ import { renderGroup, browseReset, browseDlg, browseSheetOpen, paintQueue, clear
 import { renderMarked, markedReset } from './osce/marked.mjs';
 import { renderSession, renderAttempt, stopTick, startAttempt, endSession, togglePause, skip, switchTab, onMark, onNote, review, nextDlg, startNext, endNow, morePop, restartStation, toggleHighlight, clearHighlight, onSelectionChange, candSend, swapCand, present, presentStep, presenting, p2Go, p2Flat, jumpTo, syncJump, markPart2 } from './osce/session.mjs';
 import { onAiInput, aiSend, aiCopy, aiPaste, aiApply, aiEvidence, aiReset, onHand } from './osce/marking-ai.mjs';
-import { settingsDlg, saveSettings, clearKey, exportFile } from './osce/settings.mjs';
+import { settingsDlg, signInSheet, saveSettings, clearKey, exportFile } from './osce/settings.mjs';
 import { opened as remindersOpened } from './osce/reminders.mjs';
 
 export * from './osce/core.mjs';   /* the pure laws, under the names learn.mjs and scripts/osce.test.js import */
@@ -235,6 +235,7 @@ async function onClick(e) {
     case 'candcopy': return candSend('copy');
     case 'candshare': return candSend('share');
     case 'settings': return settingsDlg();
+    case 'signin': return signInSheet();
     case 'place': { settingsDlg(); const h = document.getElementById('os-h-place'); h?.scrollIntoView({ block: 'start' }); return h?.closest('section')?.querySelector('.os-placechip')?.focus({ preventScroll: true }); }
     case 'requests': return requestsDlg();
     case 'reqnew': return requestForm(b.dataset.topic || '');
