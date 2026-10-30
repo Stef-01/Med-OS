@@ -320,11 +320,11 @@ function dogMarkup(c, P) {
             '<path data-p="white" d="M1 -17.4 H-14.4 A8 8 0 0 1 -22.4 -25.4 V-33.3 A11.7 11.7 0 0 1 1 -33.3 A11.7 11.7 0 0 1 24.4 -33.3 V-25.4 A8 8 0 0 1 16.4 -17.4 Z" fill="#ffffff"/>') +
             '<g transform="translate(' + (-gap) + ' 0)">' +   // LPS: the left eye, all of it, set out from the middle
             '<g clip-path="url(#' + P + '-eyeL)"><g data-p="pupilL">' +
-              pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, -7.3, -1) + '</g>' +
+              pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, -7.3, -1, p.lidL) + '</g>' +
               '<g data-p="heyeL">' + heye + '</g></g>' +
             '</g><g transform="translate(' + gap + ' 0)">' +
             '<g clip-path="url(#' + P + '-eyeR)"><g data-p="pupilR">' +
-              pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, 12.1, 1) + '</g>' +
+              pupilMarkup(eyeShape(c.eyes), irisOf(c.iris), p.ink, 12.1, 1, p.lidR) + '</g>' +
               '<g data-p="heyeR">' + heye + '</g></g>' + '</g>' +
             // the lids, and the cheeks that rise into a squint, wear the face round each eye (a patch over one: its colour)
             '<g transform="translate(' + (-gap) + ' 0)"><g clip-path="url(#' + P + '-lidL)">' +

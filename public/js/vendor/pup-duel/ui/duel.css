@@ -343,6 +343,13 @@ div.pd-me-dog { cursor: default; }
 .pd-swatches .pd-chipsw { aspect-ratio: auto; min-width: 0; min-height: 44px; padding: 6px 10px; border-radius: 22px; color: var(--pd-ink); font-family: inherit; font-size: 14px; font-weight: 700; line-height: 1.15; white-space: normal; overflow-wrap: break-word; text-align: center; }
 .pd-swatches[data-kind="iris"] { grid-template-columns: repeat(8, minmax(0, 64px)); }   /* sixteen colours: two even rows of eight, never one stranded */
 @media (max-width: 600px) { .pd-swatches[data-kind="iris"] { grid-template-columns: repeat(4, minmax(0, 1fr)); } }   /* four rows of four on a phone */
+.pd-swatches.pd-chips, .pd-eyetiles { padding: 4px; margin: -4px; }   /* room for the picked ring: the panel clipped it at both edges */
+.pd-eyetiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+.pd-swatches .pd-eyetile { aspect-ratio: auto; display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; padding: 4px 4px 6px; border-radius: 16px; color: var(--pd-ink); font: inherit; }
+.pd-eyetile .pd-face { width: 100%; max-width: 76px; border-radius: 12px; overflow: hidden; background: var(--pd-card2); }
+.pd-eyetile .pd-face svg { transform: scale(1.4) translateY(7%); }   /* close on the eyes */
+.pd-eyename { font-size: 13px; font-weight: 700; line-height: 1.15; text-align: center; overflow-wrap: anywhere; }
+.pd-swatches .pd-eyetile[aria-checked="true"] { background: color-mix(in srgb, var(--pd-pri) 18%, transparent); }
 .pd-swatches .pd-chipsw[aria-checked="true"] { background: color-mix(in srgb, var(--pd-pri) 18%, transparent); }
 .pd-wreset { position: absolute; inset: 0; border: 0; background: transparent; cursor: pointer; border-radius: 18px; }
 .pd-wreset:focus-visible { outline: 3px solid var(--pd-pri); outline-offset: -3px; }

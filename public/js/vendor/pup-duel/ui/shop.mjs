@@ -263,8 +263,11 @@ export function openWardrobe(ctx) {
       /* the eyes (founder 2026-10-26: "changeable eyes both shapes and colors" and "blush options so can have on or off in
          the loadout"): free, like a coat; a dog's own is the first of each */
       const own = lookDog({ dog: cur.dog }).pal.ink;
-      lp.append(h3('Face style'), chips('style', 'Face style', STYLES, cur.style || ''), h3('Shape'), chips('eyes', 'Eye shape', EYE_SHAPES, cur.eyes || ''),
+      /* the eyes first, each as the dog wears it (founder 2026-10-29: "add more eye styles apart from normal and other one":
+         the 28 shapes were words under the two face styles, the first row below the fold, so the styles read as the choice) */
+      lp.append(h3('Eyes'), eyeTiles(cur.eyes || ''),
         h3('Colour'), swatches('iris', 'Eye colour', IRISES.map(k => ({ id: k.id, name: k.name, colors: [k.hex || own, k.deep || own] })), cur.iris || ''),
+        h3('Face style'), chips('style', 'Face style', STYLES, cur.style || ''),
         h3('Blush'), chips('blush', 'Blush', BLUSH, cur.blush || ''));
     } else {
       const mine = ITEMS.filter(i => i.slot === V.ltab && owns(i.id)).sort(byRarity), rest = ITEMS.filter(i => i.slot === V.ltab && !owns(i.id)).sort(byRarity);
@@ -277,6 +280,20 @@ export function openWardrobe(ctx) {
   function chips(kind, label, opts, now) {
     const g = document.createElement('div'); g.className = 'pd-swatches pd-chips'; g.dataset.kind = kind; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', label);
     g.innerHTML = opts.map(o => `<button type="button" class="pd-swatch pd-chipsw" role="radio" data-v="${esc(o.id)}" aria-checked="${o.id === now}" tabindex="${o.id === now ? 0 : -1}">${esc(o.name)}</button>`).join('');
+    return g;
+  }
+  /* every eye shape as a tile: the dog's face wearing it (its coat, colour and face style, no pieces over the eyes), and its name */
+  function eyeTiles(now) {
+    const g = document.createElement('div'); g.className = 'pd-swatches pd-eyetiles'; g.dataset.kind = 'eyes'; g.setAttribute('role', 'radiogroup'); g.setAttribute('aria-label', 'Eye shape');
+    const base = { dog: cur.dog, coat: cur.coat, collar: cur.collar, iris: cur.iris, style: cur.style, blush: cur.blush };
+    g.append(...EYE_SHAPES.map(o => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'pd-swatch pd-eyetile'; b.dataset.v = o.id; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', String(o.id === now)); b.tabIndex = o.id === now ? 0 : -1;
+      const f = ctx.face({ ...base, eyes: o.id }), n = document.createElement('span');
+      n.className = 'pd-eyename'; n.textContent = o.name;
+      b.append(f, n);
+      return b;
+    }));
     return g;
   }
   function swatches(kind, label, opts, now) {
@@ -418,6 +435,9 @@ export function openWardrobe(ctx) {
     if (v) cur[kind] = v; else delete cur[kind];
     prev.dress(cur);
     el.querySelectorAll(`[data-kind="${kind}"] .pd-swatch`).forEach(b => { const on = b.dataset.v === (cur[kind] || ''); b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
+    /* a new colour or face style redraws the eye tiles, so each still shows the eyes as they would be worn */
+    const tiles = el.querySelector('.pd-eyetiles');
+    if (tiles && kind !== 'eyes' && kind !== 'blush') tiles.replaceWith(eyeTiles(cur.eyes || ''));
     paintBar();
   }
   /* a tap on the dog (founder 2026-10-26: "if you click the dog on preview it will go to default with no accessories with

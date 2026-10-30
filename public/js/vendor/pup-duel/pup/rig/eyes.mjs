@@ -27,7 +27,19 @@ export const EYE_SHAPES = [
   { id: 'moon', name: 'Moon' },
   { id: 'twinkle', name: 'Twinkle' },
   { id: 'pixel', name: 'Pixel' },
-  { id: 'ring', name: 'Ring' }
+  { id: 'ring', name: 'Ring' },
+  /* 2026-10-29 (founder: "add 10 different eye styles"): ten that change the whole eye, not only the pupil, so each
+     reads at a glance on a phone: a lid, a closed arc, a tear, a glint */
+  { id: 'sleepy', name: 'Sleepy' },
+  { id: 'wink', name: 'Wink' },
+  { id: 'joy', name: 'Joyful' },
+  { id: 'sly', name: 'Sly' },
+  { id: 'fierce', name: 'Fierce' },
+  { id: 'teary', name: 'Teary' },
+  { id: 'starry', name: 'Starry' },
+  { id: 'dot', name: 'Dot' },
+  { id: 'ko', name: 'Knocked out' },
+  { id: 'shine', name: 'Shiny' }
 ];
 export const IRISES = [
   { id: '', name: 'Its own', hex: '' },
@@ -86,10 +98,44 @@ function irisEye(cx, cy, rx, ry, iris, ink, pk = 0.55) {
 }
 
 // the inside of one pupil group, its centre at (cx, -32): `side` -1 for the left eye, 1 for the right
-export function pupilMarkup(shape, iris, ink, cx, side) {
+/* `lid`: the face's colour round this eye (parts.mjs passes the lid's), for the shapes that close or hood the eye: they
+   cover the white with it inside the eye's clip, then draw a lid line on it */
+export function pupilMarkup(shape, iris, ink, cx, side, lid = '#000') {
   const cy = -32, col = iris.hex, hi = (x, y, rr) => `<circle cx="${r(x)}" cy="${r(y)}" r="${rr}" fill="#fff"/>`;
   const hx = cx - 2.3;   // the classic catch-light: 2.3 left of centre, both eyes
+  const base = () => (col ? irisEye(cx, cy + 1, 6.6, 8, iris, ink, 0.5) : `<ellipse cx="${r(cx)}" cy="${cy + 1}" rx="6" ry="7.6" fill="${ink}"/>`) + hi(cx - 2.4, cy - 2.4, 2);
+  const shut = d => `<rect x="${r(cx - 16)}" y="${cy - 20}" width="32" height="40" fill="${lid}"/><path d="${d}" fill="none" stroke="${ink}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>`;
+  /* a lid over the top of the eye down to y, its edge a line in ink (tilt: the edge's rise toward the outer corner) */
+  const hood = (y, tilt = 0) => { const o = side * tilt, a = cy + y - o, b = cy + y + o; return `<path d="M${r(cx - 16)} ${cy - 20} H${r(cx + 16)} V${r(b)} L${r(cx - 16)} ${r(a)} Z" fill="${lid}"/><path d="M${r(cx - 16)} ${r(a)} L${r(cx + 16)} ${r(b)}" stroke="${ink}" stroke-width="2.6" stroke-linecap="round"/>`; };
   switch (shape.id) {
+    case 'sleepy':   // half shut: a heavy lid to the middle of the eye
+      return base() + hood(-0.5);
+    case 'wink':     // one eye open, the other (the right) shut in a smile
+      return side > 0 ? shut(`M${r(cx - 6.5)} ${cy + 1} Q${r(cx)} ${cy - 6} ${r(cx + 6.5)} ${cy + 1}`) : base();
+    case 'joy':      // both shut in a smile, ^ ^
+      return shut(`M${r(cx - 6.5)} ${cy + 2} Q${r(cx)} ${cy - 7} ${r(cx + 6.5)} ${cy + 2}`);
+    case 'sly':      // a level lid low over a pupil looking to one side
+      return (col ? irisEye(cx + 3, cy + 2, 5.6, 6.8, iris, ink, 0.5) : `<ellipse cx="${r(cx + 3)}" cy="${cy + 2}" rx="5" ry="6.4" fill="${ink}"/>`) + hi(cx + 1, cy + 0.5, 1.5) + hood(-1.5);
+    case 'fierce':   // a lid cut down toward the nose: a glare
+      return base() + hood(-4, -4.5);
+    case 'teary':    // big wet eyes: a tall bright pupil, three catch-lights and a pool along the bottom
+      return (col ? irisEye(cx, cy, 7, 9, iris, ink, 0.55) : `<ellipse cx="${r(cx)}" cy="${cy}" rx="7" ry="9" fill="${ink}"/>`) +
+        hi(cx - 2.8, cy - 3.6, 2.8) + hi(cx + 2.6, cy - 4.4, 1.4) + hi(cx + 1.5, cy + 3.6, 1.2) +
+        `<path d="M${r(cx - 14)} ${cy + 6} Q${r(cx)} ${cy + 3} ${r(cx + 14)} ${cy + 6} V${cy + 18} H${r(cx - 14)} Z" fill="#8fd3f4" opacity="0.8"/>` +
+        `<path d="M${r(cx - 14)} ${cy + 6} Q${r(cx)} ${cy + 3} ${r(cx + 14)} ${cy + 6}" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.9"/>`;
+    case 'starry':   // a dark eye full of stars
+      return `<ellipse cx="${r(cx)}" cy="${cy + 1}" rx="7.4" ry="9" fill="${col ? iris.deep : '#1d2a52'}"/>` +
+        `<path d="${star(cx - 1.2, cy - 1.4, 3.8, 0.42)}" fill="#ffe27a"/><path d="${star(cx + 3, cy + 4.4, 2, 0.42)}" fill="#fff"/><path d="${star(cx + 3.2, cy - 4.6, 1.3, 0.42)}" fill="#fff"/><circle cx="${r(cx - 3.6)}" cy="${cy + 5}" r="0.8" fill="#fff"/>`;
+    case 'dot':      // a small black dot and nothing else: deadpan
+      return `<circle cx="${r(cx)}" cy="${cy + 1}" r="2.6" fill="${ink}"/>`;
+    case 'ko':       // knocked out: an X
+      return `<path d="M${r(cx - 5)} ${cy - 5} L${r(cx + 5)} ${cy + 5} M${r(cx + 5)} ${cy - 5} L${r(cx - 5)} ${cy + 5}" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`;
+    case 'shine': {  // a huge iris in bands, a white crescent across its top and a glint: the shojo eye
+      const k = col ? iris : IRISES.find(x => x.id === 'violet');
+      return irisEye(cx, cy + 1, 8.6, 10.6, k, ink, 0.42) +
+        `<path d="M${r(cx - 7)} ${cy - 3} Q${r(cx)} ${cy - 10} ${r(cx + 7)} ${cy - 3} Q${r(cx)} ${cy - 6.5} ${r(cx - 7)} ${cy - 3} Z" fill="#fff" opacity="0.9"/>` +
+        hi(cx - 3.4, cy + 0.5, 2.4) + hi(cx + 3.8, cy + 5.6, 1.5) + `<path d="${star(cx + 3.4, cy - 1.2, 2.2, 0.35)}" fill="#fff"/>`;
+    }
     case 'lps':   // the LPS eye: an iris that fills most of the white, a big dark pupil, a lighter lower half, two catch-lights
       return irisEye(cx, cy + 1, 9.8, 11.6, col ? iris : IRISES.find(k => k.id === 'teal'), ink, 0.5) +
         `<ellipse cx="${r(cx)}" cy="${r(cy - 3.6)}" rx="3" ry="2.2" fill="${(col ? iris : IRISES.find(k => k.id === 'teal')).deep}"/>` +
